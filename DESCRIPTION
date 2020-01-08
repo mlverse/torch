@@ -1,0 +1,30 @@
+Package: torch
+Type: Package
+Title: Torch from R
+Version: 0.0.1.9000
+Authors@R: c(
+    person("Daniel", "Falbel", , "dfalbel@gmail.com", c("aut", "cre")),
+    person("Dmitriy", "Selivanov", role = c("ctb", "cph")),
+    person("Athos", "Damiani", role = c("ctb", "cph"))
+    )
+Description: Wraps the libtorch C++ to be used from R.
+License: MIT + file LICENSE
+URL: http://dfalbel.github.io/torch, https://github.com/dfalbel/torch
+BugReports: https://github.com/dfalbel/torch/issues
+Encoding: UTF-8
+LazyData: true
+SystemRequirements: C++11
+LinkingTo:
+    Rcpp
+Imports:
+    Rcpp,
+    R6,
+    withr
+RoxygenNote: 7.0.1
+Roxygen: list(markdown = TRUE)
+Suggests:
+    testthat,
+    covr,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
