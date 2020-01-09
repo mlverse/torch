@@ -1,74 +1,64 @@
 torch_dtype <- R6::R6Class(
   classname = "torch_dtype", 
   public = list(
-    initialize = function(ptr = NULL, f_ptr = NULL) {
-      if (!is.null(f_ptr))
-        private$f_ptr <- f_ptr
-      else if (!is.null(ptr))
-        private$ptr_ <- ptr
-      else
-        stop("Specify one of f_ptr or ptr")
+    ptr = NULL,
+    initialize = function(ptr = NULL) {
+      self$ptr <- ptr
     },
     print = function() {
-      cat(cpp_torch_dtype_to_string(self$ptr()))
-    },
-    ptr = function() {
-      if (is.null(private$ptr_))
-        private$ptr_ <- private$f_ptr()
-      
-      private$ptr_
-    },
-    is_floating_point = function(x) {
-      
-      if (cpp_torch_dtype_to_string(self$ptr()) %in% c("float32", "float64", "float16"))
+      cat(cpp_dtype_to_string(self$ptr))
+    }
+  ),
+  active = list(
+    is_floating_point = function() {
+      if (cpp_dtype_to_string(self$ptr) %in% c("float32", "float64", "float16"))
         TRUE
       else
         FALSE
     }
-  ),
-  private = list(
-    f_ptr = NULL,
-    ptr_ = NULL
   )
 )
 
 #' @export
-torch_float32 <- torch_dtype$new(f_ptr = cpp_torch_float32)
+torch_float32 <- function() torch_dtype$new(cpp_torch_float32())
 #' @export
-torch_float <- torch_dtype$new(f_ptr = cpp_torch_float32)
+torch_float <- function() torch_dtype$new(cpp_torch_float32())
 
 #' @export
-torch_float64 <- torch_dtype$new(f_ptr = cpp_torch_float64)
+torch_float64 <- function() torch_dtype$new(cpp_torch_float64())
 #' @export
-torch_double <- torch_dtype$new(f_ptr = cpp_torch_float64)
+torch_double <- function() torch_dtype$new(cpp_torch_float64())
 
 #' @export
-torch_float16 <- torch_dtype$new(f_ptr = cpp_torch_float16)
+torch_float16 <- function() torch_dtype$new(cpp_torch_float16())
 #' @export
-torch_half <- torch_dtype$new(f_ptr = cpp_torch_float16)
+torch_half <- function() torch_dtype$new(cpp_torch_float16())
 
 #' @export
-torch_uint8 <- torch_dtype$new(f_ptr = cpp_torch_uint8)
+torch_uint8 <- function() torch_dtype$new(cpp_torch_uint8())
 
 #' @export
-torch_int8 <- torch_dtype$new(f_ptr = cpp_torch_int8)
+torch_int8 <- function() torch_dtype$new(cpp_torch_int8())
 
 #' @export
-torch_int16 <- torch_dtype$new(f_ptr = cpp_torch_int16)
+torch_int16 <- function() torch_dtype$new(cpp_torch_int16())
 #' @export
-torch_short <- torch_dtype$new(f_ptr = cpp_torch_int16)
+torch_short <- function() torch_dtype$new(cpp_torch_int16())
 
 #' @export
-torch_int32 <- torch_dtype$new(f_ptr = cpp_torch_int32)
+torch_int32 <- function() torch_dtype$new(cpp_torch_int32())
 #' @export
-torch_int <- torch_dtype$new(f_ptr = cpp_torch_int32)
+torch_int <- function() torch_dtype$new(cpp_torch_int32())
 
 #' @export
-torch_int64 <- torch_dtype$new(f_ptr = cpp_torch_int64)
+torch_int64 <- function() torch_dtype$new(cpp_torch_int64())
 #' @export
-torch_long <- torch_dtype$new(f_ptr = cpp_torch_int64)
+torch_long <- function() torch_dtype$new(cpp_torch_int64())
 
 #' @export
-torch_bool <- torch_dtype$new(f_ptr = cpp_torch_bool)
+torch_bool <- function() torch_dtype$new(cpp_torch_bool())
 
-
+#' @export
+`==.torch_dtype` <- function(e1, e2) {
+  cpp_dtype_to_string(e1$ptr) == cpp_dtype_to_string(e2$ptr)
+}
