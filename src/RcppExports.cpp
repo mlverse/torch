@@ -313,15 +313,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_tensor
-Rcpp::XPtr<torch::Tensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<torch::TensorOptions> options);
-RcppExport SEXP _torch_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<torch::TensorOptions> options, bool requires_grad);
+RcppExport SEXP _torch_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP, SEXP requires_gradSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
     Rcpp::traits::input_parameter< std::vector<std::int64_t> >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::TensorOptions> >::type options(optionsSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor(x, dim, options));
+    Rcpp::traits::input_parameter< bool >::type requires_grad(requires_gradSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor(x, dim, options, requires_grad));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -381,7 +382,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_layout_to_string", (DL_FUNC) &_torch_cpp_layout_to_string, 1},
     {"_torch_cpp_torch_strided", (DL_FUNC) &_torch_cpp_torch_strided, 0},
     {"_torch_cpp_torch_sparse_coo", (DL_FUNC) &_torch_cpp_torch_sparse_coo, 0},
-    {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 3},
+    {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {NULL, NULL, 0}

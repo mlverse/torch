@@ -16,7 +16,7 @@ Tensor <- R6::R6Class(
         if (is.integer(data)) {
           dtype <- torch_int()
         } else if (is.double(data)) {
-          dtype <- torch_double()
+          dtype <- torch_float() # default to float
         } else if (is.logical(data)) {
           dtype <- torch_bool()
         }
@@ -24,7 +24,6 @@ Tensor <- R6::R6Class(
       }
       
       options <- torch_tensor_options(dtype = dtype, device = device, 
-                                      requires_grad = requires_grad, 
                                       pinned_memory = pin_memory)
       
       
@@ -35,7 +34,8 @@ Tensor <- R6::R6Class(
       }
       
       
-      self$ptr <- cpp_torch_tensor(data, rev(dimension), options$ptr)
+      self$ptr <- cpp_torch_tensor(data, rev(dimension), options$ptr, 
+                                   requires_grad)
     },
     print = function() {
       cat(sprintf("torch_tensor \n"))
@@ -51,10 +51,12 @@ torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALS
   Tensor$new(data, dtype, device, requires_grad, pin_memory)
 }
 
+#' @export
 as_array <- function(x) {
   UseMethod("as_array", x)
 }
 
+#' @export
 as_array.torch_tensor <- function(x) {
   a <- cpp_as_array(x$ptr)
   

@@ -113,8 +113,8 @@ cpp_torch_sparse_coo <- function() {
     .Call('_torch_cpp_torch_sparse_coo', PACKAGE = 'torch')
 }
 
-cpp_torch_tensor <- function(x, dim, options) {
-    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torch', x, dim, options)
+cpp_torch_tensor <- function(x, dim, options, requires_grad) {
+    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torch', x, dim, options, requires_grad)
 }
 
 cpp_as_array <- function(x) {

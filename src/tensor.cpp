@@ -9,12 +9,15 @@ std::vector<int64_t> revert_int_seq (int n) {
   return l;
 };
 
-template <int RTYPE, torch::ScalarType DTYPE>
-torch::Tensor tensor_from_r_array (const SEXP x, const std::vector<int64_t> dim, 
-                                   torch::TensorOptions options) {
+template <int RTYPE, torch::Dtype DTYPE>
+torch::Tensor tensor_from_r_array (const SEXP x, const std::vector<int64_t> dim) {
 
   Rcpp::Vector<RTYPE> vec(x);
 
+  auto options = torch::TensorOptions()
+      .dtype(DTYPE)
+      .device("cpu");
+  
   auto tensor = torch::from_blob(vec.begin(), dim, options);
 
   if (dim.size() == 1) {
@@ -31,19 +34,25 @@ torch::Tensor tensor_from_r_array (const SEXP x, const std::vector<int64_t> dim,
 };
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<torch::TensorOptions> options) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim, 
+                                            Rcpp::XPtr<torch::TensorOptions> options, 
+                                            bool requires_grad) {
 
   torch::Tensor tensor;
   
   if (TYPEOF(x) == INTSXP) {
-    tensor = tensor_from_r_array<INTSXP, torch::kInt>(x, dim, *options);
+    tensor = tensor_from_r_array<INTSXP, torch::kInt>(x, dim);
   } else if (TYPEOF(x) == REALSXP) {
-    tensor = tensor_from_r_array<REALSXP, torch::kDouble>(x, dim, *options);
+    tensor = tensor_from_r_array<REALSXP, torch::kDouble>(x, dim);
   } else if (TYPEOF(x) == LGLSXP) {
-    tensor = tensor_from_r_array<LGLSXP, torch::kInt32>(x, dim, *options);
+    tensor = tensor_from_r_array<LGLSXP, torch::kInt32>(x, dim);
   } else {
     Rcpp::stop("R type not handled");
   };
+  
+  tensor = tensor
+    .to(*options)
+    .set_requires_grad(requires_grad);
   
   return make_xptr<torch::Tensor>(tensor);
 }
