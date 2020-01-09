@@ -101,3 +101,27 @@ cpp_torch_bool <- function() {
     .Call('_torch_cpp_torch_bool', PACKAGE = 'torch')
 }
 
+cpp_layout_to_string <- function(layout_ptr) {
+    .Call('_torch_cpp_layout_to_string', PACKAGE = 'torch', layout_ptr)
+}
+
+cpp_torch_strided <- function() {
+    .Call('_torch_cpp_torch_strided', PACKAGE = 'torch')
+}
+
+cpp_torch_sparse_coo <- function() {
+    .Call('_torch_cpp_torch_sparse_coo', PACKAGE = 'torch')
+}
+
+cpp_torch_tensor <- function(x, dim, options) {
+    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torch', x, dim, options)
+}
+
+cpp_as_array <- function(x) {
+    .Call('_torch_cpp_as_array', PACKAGE = 'torch', x)
+}
+
+cpp_torch_tensor_options <- function(dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory) {
+    .Call('_torch_cpp_torch_tensor_options', PACKAGE = 'torch', dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory)
+}
+

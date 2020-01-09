@@ -281,6 +281,76 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_layout_to_string
+std::string cpp_layout_to_string(Rcpp::XPtr<torch::Layout> layout_ptr);
+RcppExport SEXP _torch_cpp_layout_to_string(SEXP layout_ptrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Layout> >::type layout_ptr(layout_ptrSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_layout_to_string(layout_ptr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_strided
+Rcpp::XPtr<torch::Layout> cpp_torch_strided();
+RcppExport SEXP _torch_cpp_torch_strided() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_strided());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_sparse_coo
+Rcpp::XPtr<torch::Layout> cpp_torch_sparse_coo();
+RcppExport SEXP _torch_cpp_torch_sparse_coo() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_sparse_coo());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_tensor
+Rcpp::XPtr<torch::Tensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<torch::TensorOptions> options);
+RcppExport SEXP _torch_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::int64_t> >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::TensorOptions> >::type options(optionsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor(x, dim, options));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_as_array
+Rcpp::List cpp_as_array(Rcpp::XPtr<torch::Tensor> x);
+RcppExport SEXP _torch_cpp_as_array(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_as_array(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_tensor_options
+Rcpp::XPtr<torch::TensorOptions> cpp_torch_tensor_options(Rcpp::Nullable<Rcpp::XPtr<torch::Dtype>> dtype_ptr, Rcpp::Nullable<Rcpp::XPtr<torch::Layout>> layout_ptr, Rcpp::Nullable<Rcpp::XPtr<torch::Device>> device_ptr, Rcpp::Nullable<bool> requires_grad, Rcpp::Nullable<bool> pinned_memory);
+RcppExport SEXP _torch_cpp_torch_tensor_options(SEXP dtype_ptrSEXP, SEXP layout_ptrSEXP, SEXP device_ptrSEXP, SEXP requires_gradSEXP, SEXP pinned_memorySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::XPtr<torch::Dtype>> >::type dtype_ptr(dtype_ptrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::XPtr<torch::Layout>> >::type layout_ptr(layout_ptrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::XPtr<torch::Device>> >::type device_ptr(device_ptrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<bool> >::type requires_grad(requires_gradSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<bool> >::type pinned_memory(pinned_memorySEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor_options(dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_torch_tensor_from_r_", (DL_FUNC) &_torch_tensor_from_r_, 5},
@@ -308,6 +378,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_int32", (DL_FUNC) &_torch_cpp_torch_int32, 0},
     {"_torch_cpp_torch_int64", (DL_FUNC) &_torch_cpp_torch_int64, 0},
     {"_torch_cpp_torch_bool", (DL_FUNC) &_torch_cpp_torch_bool, 0},
+    {"_torch_cpp_layout_to_string", (DL_FUNC) &_torch_cpp_layout_to_string, 1},
+    {"_torch_cpp_torch_strided", (DL_FUNC) &_torch_cpp_torch_strided, 0},
+    {"_torch_cpp_torch_sparse_coo", (DL_FUNC) &_torch_cpp_torch_sparse_coo, 0},
+    {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 3},
+    {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
+    {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {NULL, NULL, 0}
 };
 

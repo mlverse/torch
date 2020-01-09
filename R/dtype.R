@@ -6,7 +6,7 @@ torch_dtype <- R6::R6Class(
       self$ptr <- ptr
     },
     print = function() {
-      cat("torch_", cpp_dtype_to_string(self$ptr))
+      cat("torch_", cpp_dtype_to_string(self$ptr), sep = "")
     }
   ),
   active = list(
