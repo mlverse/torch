@@ -1,10 +1,5 @@
 #include "torch_types.h"
-
-template <class type>
-Rcpp::XPtr<type> make_xptr  (type x) {
-  auto * out = new type(x);
-  return Rcpp::XPtr<type>(out);
-}
+#include "utils.hpp"
 
 // [[Rcpp::export]]
 std::string cpp_dtype_to_string(Rcpp::XPtr<torch::Dtype> dtype_ptr) {

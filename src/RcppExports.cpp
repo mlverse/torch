@@ -56,6 +56,40 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_device_type_to_string
+std::string cpp_device_type_to_string(Rcpp::XPtr<torch::Device> device);
+RcppExport SEXP _torch_cpp_device_type_to_string(SEXP deviceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Device> >::type device(deviceSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_device_type_to_string(device));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_device_index_to_int
+std::int64_t cpp_device_index_to_int(Rcpp::XPtr<torch::Device> device);
+RcppExport SEXP _torch_cpp_device_index_to_int(SEXP deviceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Device> >::type device(deviceSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_device_index_to_int(device));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_device
+Rcpp::XPtr<torch::Device> cpp_torch_device(std::string type, Rcpp::Nullable<std::int64_t> index);
+RcppExport SEXP _torch_cpp_torch_device(SEXP typeSEXP, SEXP indexSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<std::int64_t> >::type index(indexSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_device(type, index));
+    return rcpp_result_gen;
+END_RCPP
+}
 // get_device_index
 std::int64_t get_device_index(Rcpp::XPtr<torch::Device> device);
 RcppExport SEXP _torch_get_device_index(SEXP deviceSEXP) {
@@ -253,6 +287,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_tensor_", (DL_FUNC) &_torch_tensor_, 4},
     {"_torch_as_array_tensor_", (DL_FUNC) &_torch_as_array_tensor_, 1},
     {"_torch_tensor_print_", (DL_FUNC) &_torch_tensor_print_, 1},
+    {"_torch_cpp_device_type_to_string", (DL_FUNC) &_torch_cpp_device_type_to_string, 1},
+    {"_torch_cpp_device_index_to_int", (DL_FUNC) &_torch_cpp_device_index_to_int, 1},
+    {"_torch_cpp_torch_device", (DL_FUNC) &_torch_cpp_torch_device, 2},
     {"_torch_get_device_index", (DL_FUNC) &_torch_get_device_index, 1},
     {"_torch_get_device_type", (DL_FUNC) &_torch_get_device_type, 1},
     {"_torch_device_has_index", (DL_FUNC) &_torch_device_has_index, 1},

@@ -1,5 +1,11 @@
 #include "torch_types.h"
 
+template <class type>
+Rcpp::XPtr<type> make_xptr  (type x) {
+  auto * out = new type(x);
+  return Rcpp::XPtr<type>(out);
+}
+
 Rcpp::XPtr<torch::Tensor> make_tensor_ptr (torch::Tensor x);
 
 Rcpp::XPtr<torch::ScalarType> make_scalar_type_ptr (torch::ScalarType x);
@@ -27,7 +33,5 @@ std::array<bool, N> vector_to_array_bool (std::vector<bool> x) {
   std::copy_n(x.begin(), N, arr.begin());
   return arr;
 }
-
-
 
 

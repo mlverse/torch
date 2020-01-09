@@ -1,4 +1,48 @@
 #include "torch_types.h"
+#include "utils.hpp"
+
+// [[Rcpp::export]]
+std::string cpp_device_type_to_string (Rcpp::XPtr<torch::Device> device) {
+  
+  torch::DeviceType device_type = device->type();
+  
+  if (device_type == torch::DeviceType::CPU) {
+    return "cpu";
+  } else if (device_type == torch::DeviceType::CUDA) {
+    return "cuda";
+  }
+  Rcpp::stop("DeviceType not handled");
+}
+
+// [[Rcpp::export]]
+std::int64_t cpp_device_index_to_int (Rcpp::XPtr<torch::Device> device) {
+  torch::DeviceIndex device_index = device->index();
+  return device_index;
+}
+
+torch::DeviceType device_type_from_string (std::string x) {
+  if (x == "cpu") {
+    return torch::DeviceType::CPU;
+  } else if (x == "cuda") {
+    return torch::DeviceType::CUDA;
+  }
+  Rcpp::stop("DeviceType not handled");
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<torch::Device> cpp_torch_device (std::string type, Rcpp::Nullable<std::int64_t> index) {
+  
+  auto device_type = device_type_from_string(type);
+  torch::Device device = torch::Device(device_type);
+  
+  if (index.isNotNull()) {
+    torch::DeviceIndex device_index = Rcpp::as<std::int64_t>(index);
+    device = torch::Device(device_type, device_index);
+  }
+  
+  return make_xptr<torch::Device>(device);
+}
+
 
 Rcpp::XPtr<torch::Device> make_device_ptr (torch::Device x) {
   auto * out = new torch::Device(x);
@@ -26,14 +70,14 @@ std::string device_type_to_string (torch::DeviceType x) {
   Rcpp::stop("DeviceType not handled");
 }
 
-torch::DeviceType device_type_from_string (std::string x) {
-  if (x == "cpu") {
-    return torch::DeviceType::CPU;
-  } else if (x == "cuda") {
-    return torch::DeviceType::CUDA;
-  }
-  Rcpp::stop("DeviceType not handled");
-}
+// torch::DeviceType device_type_from_string (std::string x) {
+//   if (x == "cpu") {
+//     return torch::DeviceType::CPU;
+//   } else if (x == "cuda") {
+//     return torch::DeviceType::CUDA;
+//   }
+//   Rcpp::stop("DeviceType not handled");
+// }
 
 
 // Device

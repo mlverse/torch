@@ -17,6 +17,18 @@ tensor_print_ <- function(x) {
     invisible(.Call('_torch_tensor_print_', PACKAGE = 'torch', x))
 }
 
+cpp_device_type_to_string <- function(device) {
+    .Call('_torch_cpp_device_type_to_string', PACKAGE = 'torch', device)
+}
+
+cpp_device_index_to_int <- function(device) {
+    .Call('_torch_cpp_device_index_to_int', PACKAGE = 'torch', device)
+}
+
+cpp_torch_device <- function(type, index) {
+    .Call('_torch_cpp_torch_device', PACKAGE = 'torch', type, index)
+}
+
 get_device_index <- function(device) {
     .Call('_torch_get_device_index', PACKAGE = 'torch', device)
 }
