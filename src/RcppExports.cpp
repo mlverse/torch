@@ -6,56 +6,6 @@
 
 using namespace Rcpp;
 
-// tensor_from_r_
-Rcpp::XPtr<torch::Tensor> tensor_from_r_(SEXP x, std::vector<int64_t> dim, Rcpp::Nullable<std::string> dtype, Rcpp::Nullable<std::string> device, bool requires_grad);
-RcppExport SEXP _torch_tensor_from_r_(SEXP xSEXP, SEXP dimSEXP, SEXP dtypeSEXP, SEXP deviceSEXP, SEXP requires_gradSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::vector<int64_t> >::type dim(dimSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type dtype(dtypeSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type device(deviceSEXP);
-    Rcpp::traits::input_parameter< bool >::type requires_grad(requires_gradSEXP);
-    rcpp_result_gen = Rcpp::wrap(tensor_from_r_(x, dim, dtype, device, requires_grad));
-    return rcpp_result_gen;
-END_RCPP
-}
-// tensor_
-Rcpp::XPtr<torch::Tensor> tensor_(Rcpp::XPtr<torch::Tensor> x, Rcpp::Nullable<std::string> dtype, Rcpp::Nullable<std::string> device, bool requires_grad);
-RcppExport SEXP _torch_tensor_(SEXP xSEXP, SEXP dtypeSEXP, SEXP deviceSEXP, SEXP requires_gradSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type x(xSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type dtype(dtypeSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type device(deviceSEXP);
-    Rcpp::traits::input_parameter< bool >::type requires_grad(requires_gradSEXP);
-    rcpp_result_gen = Rcpp::wrap(tensor_(x, dtype, device, requires_grad));
-    return rcpp_result_gen;
-END_RCPP
-}
-// as_array_tensor_
-Rcpp::List as_array_tensor_(Rcpp::XPtr<torch::Tensor> x);
-RcppExport SEXP _torch_as_array_tensor_(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(as_array_tensor_(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// tensor_print_
-void tensor_print_(Rcpp::XPtr<torch::Tensor> x);
-RcppExport SEXP _torch_tensor_print_(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type x(xSEXP);
-    tensor_print_(x);
-    return R_NilValue;
-END_RCPP
-}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<torch::Device> device);
 RcppExport SEXP _torch_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -364,10 +314,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_torch_tensor_from_r_", (DL_FUNC) &_torch_tensor_from_r_, 5},
-    {"_torch_tensor_", (DL_FUNC) &_torch_tensor_, 4},
-    {"_torch_as_array_tensor_", (DL_FUNC) &_torch_as_array_tensor_, 1},
-    {"_torch_tensor_print_", (DL_FUNC) &_torch_tensor_print_, 1},
     {"_torch_cpp_device_type_to_string", (DL_FUNC) &_torch_cpp_device_type_to_string, 1},
     {"_torch_cpp_device_index_to_int", (DL_FUNC) &_torch_cpp_device_index_to_int, 1},
     {"_torch_cpp_torch_device", (DL_FUNC) &_torch_cpp_torch_device, 2},
