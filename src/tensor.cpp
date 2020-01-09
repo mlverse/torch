@@ -93,3 +93,9 @@ Rcpp::List cpp_as_array (Rcpp::XPtr<torch::Tensor> x) {
   
   Rcpp::stop("dtype not handled");
 };
+
+// [[Rcpp::export]]
+void cpp_torch_tensor_print (Rcpp::XPtr<torch::Tensor> x) {
+  torch::Tensor ten = *x;
+  Rcpp::Rcout << ten << std::endl;
+};

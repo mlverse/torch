@@ -39,7 +39,7 @@ Tensor <- R6::R6Class(
     },
     print = function() {
       cat(sprintf("torch_tensor \n"))
-      tensor_print_(self$ptr)
+      cpp_torch_tensor_print(self$ptr)
       invisible(self)
     }
   )
