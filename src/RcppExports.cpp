@@ -130,6 +130,50 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_dimname
+Rcpp::XPtr<torch::Dimname> cpp_torch_dimname(const std::string& str);
+RcppExport SEXP _torch_cpp_torch_dimname(SEXP strSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type str(strSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_dimname(str));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_dimname_list
+Rcpp::XPtr<std::vector<torch::Dimname>> cpp_torch_dimname_list(const Rcpp::List& x);
+RcppExport SEXP _torch_cpp_torch_dimname_list(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_dimname_list(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_dimname_to_string
+std::string cpp_dimname_to_string(Rcpp::XPtr<torch::Dimname> x);
+RcppExport SEXP _torch_cpp_dimname_to_string(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Dimname> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_dimname_to_string(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_dimname_list_to_string
+std::vector<std::string> cpp_dimname_list_to_string(Rcpp::XPtr<std::vector<torch::Dimname>> x);
+RcppExport SEXP _torch_cpp_dimname_list_to_string(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<std::vector<torch::Dimname>> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_dimname_list_to_string(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_dtype_to_string
 std::string cpp_dtype_to_string(Rcpp::XPtr<torch::Dtype> dtype_ptr);
 RcppExport SEXP _torch_cpp_dtype_to_string(SEXP dtype_ptrSEXP) {
@@ -262,6 +306,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_scalar
+Rcpp::XPtr<torch::Scalar> cpp_torch_scalar(SEXP x);
+RcppExport SEXP _torch_cpp_torch_scalar(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor
 Rcpp::XPtr<torch::Tensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<torch::TensorOptions> options, bool requires_grad);
 RcppExport SEXP _torch_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP, SEXP requires_gradSEXP) {
@@ -325,6 +380,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_device_equals", (DL_FUNC) &_torch_device_equals, 2},
     {"_torch_device_set_index", (DL_FUNC) &_torch_device_set_index, 2},
     {"_torch_device_from_r", (DL_FUNC) &_torch_device_from_r, 2},
+    {"_torch_cpp_torch_dimname", (DL_FUNC) &_torch_cpp_torch_dimname, 1},
+    {"_torch_cpp_torch_dimname_list", (DL_FUNC) &_torch_cpp_torch_dimname_list, 1},
+    {"_torch_cpp_dimname_to_string", (DL_FUNC) &_torch_cpp_dimname_to_string, 1},
+    {"_torch_cpp_dimname_list_to_string", (DL_FUNC) &_torch_cpp_dimname_list_to_string, 1},
     {"_torch_cpp_dtype_to_string", (DL_FUNC) &_torch_cpp_dtype_to_string, 1},
     {"_torch_cpp_torch_float32", (DL_FUNC) &_torch_cpp_torch_float32, 0},
     {"_torch_cpp_torch_float64", (DL_FUNC) &_torch_cpp_torch_float64, 0},
@@ -338,6 +397,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_layout_to_string", (DL_FUNC) &_torch_cpp_layout_to_string, 1},
     {"_torch_cpp_torch_strided", (DL_FUNC) &_torch_cpp_torch_strided, 0},
     {"_torch_cpp_torch_sparse_coo", (DL_FUNC) &_torch_cpp_torch_sparse_coo, 0},
+    {"_torch_cpp_torch_scalar", (DL_FUNC) &_torch_cpp_torch_scalar, 1},
     {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
     {"_torch_cpp_torch_tensor_print", (DL_FUNC) &_torch_cpp_torch_tensor_print, 1},
