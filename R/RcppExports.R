@@ -45,6 +45,22 @@ device_from_r <- function(device, index) {
     .Call('_torch_device_from_r', PACKAGE = 'torch', device, index)
 }
 
+cpp_torch_dimname <- function(str) {
+    .Call('_torch_cpp_torch_dimname', PACKAGE = 'torch', str)
+}
+
+cpp_torch_dimname_list <- function(x) {
+    .Call('_torch_cpp_torch_dimname_list', PACKAGE = 'torch', x)
+}
+
+cpp_dimname_to_string <- function(x) {
+    .Call('_torch_cpp_dimname_to_string', PACKAGE = 'torch', x)
+}
+
+cpp_dimname_list_to_string <- function(x) {
+    .Call('_torch_cpp_dimname_list_to_string', PACKAGE = 'torch', x)
+}
+
 cpp_dtype_to_string <- function(dtype_ptr) {
     .Call('_torch_cpp_dtype_to_string', PACKAGE = 'torch', dtype_ptr)
 }
@@ -95,6 +111,10 @@ cpp_torch_strided <- function() {
 
 cpp_torch_sparse_coo <- function() {
     .Call('_torch_cpp_torch_sparse_coo', PACKAGE = 'torch')
+}
+
+cpp_torch_scalar <- function(x) {
+    .Call('_torch_cpp_torch_scalar', PACKAGE = 'torch', x)
 }
 
 cpp_torch_tensor <- function(x, dim, options, requires_grad) {
