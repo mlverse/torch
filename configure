@@ -28,21 +28,6 @@ else
   echo "usin user-supplied URL for TORCH_BINARIES"
 fi # TORCH_BINARIES
 
-# check the compiler version on Linux.
-if [[ $OSTYPE == "linux-gnu" ]]
-then
-  CPP=`"${R_HOME}/bin/R" CMD config CXX11`
-  echo "CXX11 compiler:  $CPP"
-  CPP_v=$(eval "$CPP -dumpversion")
-  echo "CXX11 compiler version:  $CPP_v"
-  if [[ $CPP == *"g++"* &&  $CPP_v == *"4.9"* ]]
-  then
-    echo "CXX11 compiler OK."
-  else
-    echo -e "**WARNING** You should use the g++-4.9 compiler if on Linux."
-  fi
-fi
-
 #---------------------------------------------------------
 if test -z $TORCH_HOME
 then
