@@ -347,6 +347,57 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_qscheme_to_string
+std::string cpp_qscheme_to_string(Rcpp::XPtr<torch::QScheme> x);
+RcppExport SEXP _torch_cpp_qscheme_to_string(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::QScheme> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_qscheme_to_string(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_per_channel_affine
+Rcpp::XPtr<torch::QScheme> cpp_torch_per_channel_affine();
+RcppExport SEXP _torch_cpp_torch_per_channel_affine() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_per_channel_affine());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_per_tensor_affine
+Rcpp::XPtr<torch::QScheme> cpp_torch_per_tensor_affine();
+RcppExport SEXP _torch_cpp_torch_per_tensor_affine() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_per_tensor_affine());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_per_channel_symmetric
+Rcpp::XPtr<torch::QScheme> cpp_torch_per_channel_symmetric();
+RcppExport SEXP _torch_cpp_torch_per_channel_symmetric() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_per_channel_symmetric());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_per_tensor_symmetric
+Rcpp::XPtr<torch::QScheme> cpp_torch_per_tensor_symmetric();
+RcppExport SEXP _torch_cpp_torch_per_tensor_symmetric() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_per_tensor_symmetric());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_scalar
 Rcpp::XPtr<torch::Scalar> cpp_torch_scalar(SEXP x);
 RcppExport SEXP _torch_cpp_torch_scalar(SEXP xSEXP) {
@@ -464,6 +515,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_contiguous_format", (DL_FUNC) &_torch_cpp_torch_contiguous_format, 0},
     {"_torch_cpp_torch_preserve_format", (DL_FUNC) &_torch_cpp_torch_preserve_format, 0},
     {"_torch_cpp_torch_channels_last_format", (DL_FUNC) &_torch_cpp_torch_channels_last_format, 0},
+    {"_torch_cpp_qscheme_to_string", (DL_FUNC) &_torch_cpp_qscheme_to_string, 1},
+    {"_torch_cpp_torch_per_channel_affine", (DL_FUNC) &_torch_cpp_torch_per_channel_affine, 0},
+    {"_torch_cpp_torch_per_tensor_affine", (DL_FUNC) &_torch_cpp_torch_per_tensor_affine, 0},
+    {"_torch_cpp_torch_per_channel_symmetric", (DL_FUNC) &_torch_cpp_torch_per_channel_symmetric, 0},
+    {"_torch_cpp_torch_per_tensor_symmetric", (DL_FUNC) &_torch_cpp_torch_per_tensor_symmetric, 0},
     {"_torch_cpp_torch_scalar", (DL_FUNC) &_torch_cpp_torch_scalar, 1},
     {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},

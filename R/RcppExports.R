@@ -129,6 +129,26 @@ cpp_torch_channels_last_format <- function() {
     .Call('_torch_cpp_torch_channels_last_format', PACKAGE = 'torch')
 }
 
+cpp_qscheme_to_string <- function(x) {
+    .Call('_torch_cpp_qscheme_to_string', PACKAGE = 'torch', x)
+}
+
+cpp_torch_per_channel_affine <- function() {
+    .Call('_torch_cpp_torch_per_channel_affine', PACKAGE = 'torch')
+}
+
+cpp_torch_per_tensor_affine <- function() {
+    .Call('_torch_cpp_torch_per_tensor_affine', PACKAGE = 'torch')
+}
+
+cpp_torch_per_channel_symmetric <- function() {
+    .Call('_torch_cpp_torch_per_channel_symmetric', PACKAGE = 'torch')
+}
+
+cpp_torch_per_tensor_symmetric <- function() {
+    .Call('_torch_cpp_torch_per_tensor_symmetric', PACKAGE = 'torch')
+}
+
 cpp_torch_scalar <- function(x) {
     .Call('_torch_cpp_torch_scalar', PACKAGE = 'torch', x)
 }
