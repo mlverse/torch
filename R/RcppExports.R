@@ -113,6 +113,22 @@ cpp_torch_sparse_coo <- function() {
     .Call('_torch_cpp_torch_sparse_coo', PACKAGE = 'torch')
 }
 
+cpp_memory_format_to_string <- function(x) {
+    .Call('_torch_cpp_memory_format_to_string', PACKAGE = 'torch', x)
+}
+
+cpp_torch_contiguous_format <- function() {
+    .Call('_torch_cpp_torch_contiguous_format', PACKAGE = 'torch')
+}
+
+cpp_torch_preserve_format <- function() {
+    .Call('_torch_cpp_torch_preserve_format', PACKAGE = 'torch')
+}
+
+cpp_torch_channels_last_format <- function() {
+    .Call('_torch_cpp_torch_channels_last_format', PACKAGE = 'torch')
+}
+
 cpp_torch_scalar <- function(x) {
     .Call('_torch_cpp_torch_scalar', PACKAGE = 'torch', x)
 }
