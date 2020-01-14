@@ -1,4 +1,5 @@
 # https://discuss.pytorch.org/t/undefined-symbol-when-import-lltm-cpp-extension/32627
-PKG_CPPFLAGS=@pkg_cflags@ -D_GLIBCXX_USE_CXX11_ABI=0
+PKG_CPPFLAGS=@pkg_cflags@ -D_GLIBCXX_USE_CXX11_ABI=1
 PKG_LIBS=@libs@
-CXX_STD=CXX11
+CXX_STD=CXX14
+
