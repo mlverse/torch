@@ -352,6 +352,28 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_torch_tensor_list
+Rcpp::XPtr<std::vector<torch::Tensor>> cpp_torch_tensor_list(const Rcpp::List& x);
+RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor_list(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_tensor_list_to_r_list
+Rcpp::List cpp_tensor_list_to_r_list(Rcpp::XPtr<std::vector<torch::Tensor>> x);
+RcppExport SEXP _torch_cpp_tensor_list_to_r_list(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<std::vector<torch::Tensor>> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_list_to_r_list(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor_options
 Rcpp::XPtr<torch::TensorOptions> cpp_torch_tensor_options(Rcpp::Nullable<Rcpp::XPtr<torch::Dtype>> dtype_ptr, Rcpp::Nullable<Rcpp::XPtr<torch::Layout>> layout_ptr, Rcpp::Nullable<Rcpp::XPtr<torch::Device>> device_ptr, Rcpp::Nullable<bool> requires_grad, Rcpp::Nullable<bool> pinned_memory);
 RcppExport SEXP _torch_cpp_torch_tensor_options(SEXP dtype_ptrSEXP, SEXP layout_ptrSEXP, SEXP device_ptrSEXP, SEXP requires_gradSEXP, SEXP pinned_memorySEXP) {
@@ -401,6 +423,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
     {"_torch_cpp_torch_tensor_print", (DL_FUNC) &_torch_cpp_torch_tensor_print, 1},
+    {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
+    {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {NULL, NULL, 0}
 };

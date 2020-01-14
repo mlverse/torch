@@ -129,6 +129,14 @@ cpp_torch_tensor_print <- function(x) {
     invisible(.Call('_torch_cpp_torch_tensor_print', PACKAGE = 'torch', x))
 }
 
+cpp_torch_tensor_list <- function(x) {
+    .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torch', x)
+}
+
+cpp_tensor_list_to_r_list <- function(x) {
+    .Call('_torch_cpp_tensor_list_to_r_list', PACKAGE = 'torch', x)
+}
+
 cpp_torch_tensor_options <- function(dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory) {
     .Call('_torch_cpp_torch_tensor_options', PACKAGE = 'torch', dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory)
 }
