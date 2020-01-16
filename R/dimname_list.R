@@ -25,6 +25,10 @@ torch_dimname <- function(name) {
   Dimname$new(name)
 }
 
+is_torch_dimname <- funnction(x) {
+  inherits(x, "torch_dimname")
+}
+
 DimnameList <- R6::R6Class(
   classname = "torch_dimname_list",
   public = list(
