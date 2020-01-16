@@ -22,3 +22,7 @@ TensorList <- R6:::R6Class(
 torch_tensor_list <- function(x) {
   TensorList$new(x)
 }
+
+is_torch_tensor_list <- function(x) {
+  inherits(x, "torch_tensor_list")
+}

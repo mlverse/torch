@@ -30,3 +30,7 @@ torch_per_channel_symmetric <- function() {
 torch_per_tensor_symmetric <- function() {
   QScheme$new(cpp_torch_per_tensor_symmetric())
 }
+
+is_torch_qscheme <- function(x) {
+  inherits(x, "torch_qscheme")
+}

@@ -62,3 +62,7 @@ torch_bool <- function() torch_dtype$new(cpp_torch_bool())
 `==.torch_dtype` <- function(e1, e2) {
   cpp_dtype_to_string(e1$ptr) == cpp_dtype_to_string(e2$ptr)
 }
+
+is_torch_dtype <- function(x) {
+  inherits(x, "torch_dtype")
+}

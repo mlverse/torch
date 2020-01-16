@@ -23,3 +23,7 @@ torch_tensor_options <- function(dtype = NULL, layout = NULL, device = NULL,
                                  requires_grad = NULL, pinned_memory = NULL) {
   TensorOptions$new(dtype, layout, device, requires_grad, pinned_memory)
 }
+
+is_torch_tensor_options <- function(x) {
+  inherits(x, "torch_tensor_options")
+}

@@ -30,3 +30,7 @@ torch_channels_last_format <- function() {
 `==.torch_memory_format` <- function(e1, e2) {
   cpp_memory_format_to_string(e1$ptr) == cpp_memory_format_to_string(e2$ptr)
 }
+
+is_torch_memory_format <- function(x) {
+  inherits(x, "torch_memory_format")
+}

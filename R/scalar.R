@@ -24,3 +24,7 @@ torch_scalar <- function(x) {
   Scalar$new(x)
 }
 
+is_torch_scalar <- function(x) {
+  inherits(x, "torch_scalar")
+}
+

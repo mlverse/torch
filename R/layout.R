@@ -16,3 +16,7 @@ torch_strided <- function() torch_layout$new(cpp_torch_strided())
 
 #' @export
 torch_sparse_coo <- function() torch_layout$new(cpp_torch_sparse_coo())
+
+is_torch_layout <- function(x) {
+  inherits(x, "torch_layout")
+}

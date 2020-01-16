@@ -62,3 +62,7 @@ as.character.torch_dimname_list <- function(x) {
 as.character.torch_dimname <- function(x) {
   cpp_dimname_to_string(x$ptr)
 }
+
+is_torch_dimname_list <- function(x) {
+  inherits(x, "torch_dimname_list")
+}

@@ -70,3 +70,7 @@ as_array.torch_tensor <- function(x) {
   
   out
 }
+
+is_torch_tensor <- function(x) {
+  inherits(x, "torch_tensor")
+}

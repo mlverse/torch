@@ -78,3 +78,7 @@ torch_device <- function(type, index = NULL) {
   Device$new(type, index)
 }
 
+is_torch_device <- function(x) {
+  inherits(x, "torch_device")
+}
+
