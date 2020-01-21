@@ -227,6 +227,23 @@ argument_to_torch_type(obj, expected_types) {
 }
 
 
+torch_type_from_r_obj <- function(obj) {
+  
+  if (is_torch_tensor(obj)) return("Tensor")
+  if (is_torch_device(obj)) return("Device")
+  if (is_torch_dimname(obj)) return("Dimname")
+  if (is_torch_scalar(obj)) return("Scalar")
+  if (is_torch_dimname_list(obj)) return("DimnameList")
+  if (is_torch_dtype(obj)) return("ScalarType")
+  if (is_torch_layout(obj)) return("Layout")
+  if (is_torch_tensor_options(obj)) return("TensorOptions")
+  if (is.logical(obj) && length(obj) == 1) return("bool")
+  if (is.logical(obj)) return(paste0("std:array<bool,", length(obj), ">"))
+  
+  
+}
+
+
 
 
 arg_to <- function(obj, expected_type, nullable) {
