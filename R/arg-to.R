@@ -5,6 +5,7 @@ is_scalar_atomic <- function(x) {
     FALSE
 }
 
+
 arg_to_torch_tensor <- function(obj, nullable = FALSE) {
   
   if (is.atomic(obj))
@@ -84,7 +85,7 @@ arg_to_torch_dimname_list <- function(obj, nullable) {
   stop("Could not convert the argument to a torch_dimname_list.")
 }
 
-arg_to_torch_dimname_list <- function(obj, nullable) {
+arg_to_torch_dimname <- function(obj, nullable) {
   
   if (is.character(obj) && length(obj) == 1)
     return(torch_dimname(obj))
@@ -168,6 +169,64 @@ arg_to_tensor_options <- function(obj, nullable) {
 arg_to_torch_generator <- function(obj, nullable) {
   NULL
 }
+
+
+argument_to_torch_type(obj, expected_types) {
+  
+  if ("Tensor" %in% expected_types && is_torch_tensor(obj))
+    return(obj)
+  
+  if ("Scalar" %in% expected_types && is_torch_scalar(obj))
+    return(obj)
+  
+  if ("DimnameList" %in% expected_types && is_torch_dimname_list(obj))
+    return(obj)
+  
+  if ("TensorList" %in% expected_types && is_torch_tensor_list(obj))
+    return(obj)
+  
+  if ("TensorOptions" %in% expected_types && is_torch_tensor_options(obj))
+    return(obj)
+  
+  if ("MemoryFormat" %in% expected_types && is_torch_memory_format(obj))
+    return(obj)
+  
+  if ("ScalarType" %in% expected_types && is_torch_dtype(obj))
+    return(obj)
+  
+  
+  if ("Scalar" %in% expected_types && is_scalar_atomic(obj)) 
+    return(torch_scalar(obj))
+  
+  if ("Tensor" %in% expected_types && is.atomic(obj))
+    return(torch_tensor(obj))
+  
+  if ("DimnameList" %in% expected_types && is.character(obj))
+    return(torch_dimname_list(obj))
+  
+  if ("IntArrayRef" %in% expected_types && is.numeric(obj))
+    return(as.integer(obj))
+  
+  if ("int64_t" %in% expected_types && is.numeric(obj) && length(obj) == 1)
+    return(as.integer(obj))
+  
+  if ("bool" %in% expected_types && is.logical(obj) && length(obj) == 1)
+    return(obj)
+  
+  if ("double" %in% expected_types && is.numeric(obj) && length(obj) == 1)
+    return(as.double(obj))
+  
+  if ("std::string" %in% expected_types && is.character(obj))
+    return(obj)
+  
+  if (any(c("std::array<bool,4>", "std::array<bool,3>", "std::array<bool,2>") %in% expected_types) && is.logical(obj))
+    return(obj)
+  
+  
+  stop("Can't convert argument", call.=FALSE)
+}
+
+
 
 
 arg_to <- function(obj, expected_type, nullable) {
