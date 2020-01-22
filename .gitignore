@@ -4,3 +4,5 @@
 .Ruserdata
 torch-rstudio.Rproj
 .DS_Store
+torchgen.Rcheck
+torchgen_
