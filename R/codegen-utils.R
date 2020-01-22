@@ -80,7 +80,7 @@ clean_names <- function(x) {
   x
 }
 
-make_cpp_function_name <- function(method_name, argument_types) {
+make_cpp_function_name <- function(method_name, arg_types) {
   
   suffix <- paste(names(arg_types), arg_types, sep = "_")
   suffix <- paste(suffix, collapse = "_")
@@ -88,6 +88,6 @@ make_cpp_function_name <- function(method_name, argument_types) {
   if (length(suffix) == 0)
     suffix <- ""
   
-  clean_names(glue::glue("cpp_torch_{method$name}_{suffix}"))
+  clean_names(glue::glue("cpp_torch_{method_name}_{suffix}"))
 }
 
