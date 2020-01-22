@@ -69,3 +69,25 @@ all_arguments_to_torch_type <- function(all_arguments, expected_types) {
   types <- sapply(all_arguments, function(x) x[[2]])
   list(arguments, types)
 }
+
+clean_names <- function(x) {
+  # adapted from janitor::make_clean_names
+  x <- gsub("'", "", x)
+  x <- gsub("\"", "", x)
+  x <- gsub("%", ".percent_", x)
+  x <- gsub("#", ".number_", x)
+  x <- gsub("^[[:space:][:punct:]]+", "", x)
+  x
+}
+
+make_cpp_function_name <- function(method_name, argument_types) {
+  
+  suffix <- paste(names(arg_types), arg_types, sep = "_")
+  suffix <- paste(suffix, collapse = "_")
+  
+  if (length(suffix) == 0)
+    suffix <- ""
+  
+  clean_names(glue::glue("cpp_torch_{method$name}_{suffix}"))
+}
+
