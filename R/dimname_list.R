@@ -25,7 +25,7 @@ torch_dimname <- function(name) {
   Dimname$new(name)
 }
 
-is_torch_dimname <- funnction(x) {
+is_torch_dimname <- function(x) {
   inherits(x, "torch_dimname")
 }
 
