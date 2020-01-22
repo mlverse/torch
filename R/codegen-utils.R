@@ -1,0 +1,71 @@
+is_scalar_atomic <- function(x) {
+  if (is.atomic(x) && length(x) == 1)
+    TRUE
+  else
+    FALSE
+}
+
+argument_to_torch_type <- function(obj, expected_types) {
+  
+  if ("Tensor" %in% expected_types && is_torch_tensor(obj))
+    return(list(obj, "Tensor"))
+  
+  if ("Scalar" %in% expected_types && is_torch_scalar(obj))
+    return(list(obj, "Scalar"))
+  
+  if ("DimnameList" %in% expected_types && is_torch_dimname_list(obj))
+    return(list(obj, "DimnameList"))
+  
+  if ("TensorList" %in% expected_types && is_torch_tensor_list(obj))
+    return(list(obj, "TensorList"))
+  
+  if ("TensorOptions" %in% expected_types && is_torch_tensor_options(obj))
+    return(list(obj, "TensorOptions"))
+  
+  if ("MemoryFormat" %in% expected_types && is_torch_memory_format(obj))
+    return(list(obj, "MemortFormat"))
+  
+  if ("ScalarType" %in% expected_types && is_torch_dtype(obj))
+    return(list(obj, "ScalarType"))
+  
+  if ("Scalar" %in% expected_types && is_scalar_atomic(obj)) 
+    return(list(torch_scalar(obj), "Scalar"))
+  
+  if ("Tensor" %in% expected_types && is.atomic(obj))
+    return(list(torch_tensor(obj), "Tensor"))
+  
+  if ("DimnameList" %in% expected_types && is.character(obj))
+    return(list(torch_dimname_list(obj), "DimnameList"))
+  
+  if ("IntArrayRef" %in% expected_types && is.numeric(obj))
+    return(list(as.integer(obj), "IntArrayRef"))
+  
+  if ("int64_t" %in% expected_types && is.numeric(obj) && length(obj) == 1)
+    return(list(as.integer(obj), "int64_t"))
+  
+  if ("bool" %in% expected_types && is.logical(obj) && length(obj) == 1)
+    return(list(obj, "bool"))
+  
+  if ("double" %in% expected_types && is.numeric(obj) && length(obj) == 1)
+    return(list(as.double(obj), "double"))
+  
+  if ("std::string" %in% expected_types && is.character(obj))
+    return(list(obj, "std::string"))
+  
+  if (any(c("std::array<bool,4>", "std::array<bool,3>", "std::array<bool,2>") %in% expected_types) && is.logical(obj))
+    return(list(obj, paste0("std::array<bool,", length(obj), ">")))
+  
+  stop("Can't convert argument", call.=FALSE)
+}
+
+
+all_arguments_to_torch_type <- function(all_arguments, expected_types) {
+  
+  for (nm in names(all_arguments)) {
+    all_arguments[[nm]] <- argument_to_torch_type(all_arguments[[nm]], expected_types[[nm]])
+  }
+  
+  arguments <- lapply(all_arguments, function(x) x[[1]])
+  types <- sapply(all_arguments, function(x) x[[2]])
+  list(arguments, types)
+}
