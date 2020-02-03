@@ -25,4 +25,4 @@ jobs:
       run: devenv /build Release CMake.sln
     - name: test
       working-directory: ${{runner.workspace}}/build
-      run: ./build/lanterntest
+      run: ./lanterntest
