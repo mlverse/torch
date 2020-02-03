@@ -23,7 +23,7 @@ jobs:
       if: runner.os == 'Windows'
       working-directory: ${{runner.workspace}}/build
       run: |
-        ${{VS140COMNTOOLS}}VsDevCmd.bat
+        "%VS140COMNTOOLS%VsDevCmd.bat"
         devenv /build Release CMake.sln
     - name: test
       working-directory: ${{runner.workspace}}/build
