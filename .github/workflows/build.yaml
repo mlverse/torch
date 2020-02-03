@@ -10,11 +10,11 @@ jobs:
         os: [windows-latest, ubuntu-latest, macOS-latest]
     steps:
     - uses: actions/checkout@v2
+    - name: environment
+      run: cmake -E make_directory ${{runner.workspace}}/build
     - name: cmake
-      run: |
-        mkdir build
-        cd build
-        cmake ..
+      working-directory: ${{runner.workspace}}/build
+      run: cmake ${{runner.workspace}}/build
     - name: make
       if: runner.os != 'Windows'
       working-directory: ${{runner.workspace}}/build
@@ -24,4 +24,5 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       run: devenv /build Release CMake.sln
     - name: test
+      working-directory: ${{runner.workspace}}/build
       run: ./build/lanterntest
