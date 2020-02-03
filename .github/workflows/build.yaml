@@ -4,7 +4,10 @@ on: [push, deployment]
 
 jobs:
   build:
-    runs-on: [ubuntu-latest, macOS-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macOS-latest]
     steps:
     - uses: actions/checkout@v2
     - name: cmake
