@@ -11,13 +11,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: cmake
-      run: |
-        mkdir build
-        cd build
-        cmake ..
+      working-directory: ${{runner.workspace}}/build
+      run: cmake ..
     - name: make
-      run: |
-        cd build
-        make
+      if: runner.os != 'Windows'
+      working-directory: ${{runner.workspace}}/build
+      run: make
+    - name: devenv
+      if: runner.os == 'Windows'
+      working-directory: ${{runner.workspace}}/build
+      run: devenv /build Release CMake.sln
     - name: test
       run: ./build/lanterntest
