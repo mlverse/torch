@@ -29,8 +29,21 @@ jobs:
     - name: test
       working-directory: ${{runner.workspace}}/build
       run: ./lanterntest
-    - name: upload
+    - name: upload ubuntu
+      if: runner.os == 'Linux'
       uses: actions/upload-artifact@v1
       with:
         name: lantern
-        path: liblantern.*
+        path: liblantern.so
+    - name: upload osx
+      if: runner.os == 'macOS'
+      uses: actions/upload-artifact@v1
+      with:
+        name: lantern
+        path: liblantern.dylib
+    - name: upload windows
+      if: runner.os == 'Windows'
+      uses: actions/upload-artifact@v1
+      with:
+        name: lantern
+        path: lantern.dll
