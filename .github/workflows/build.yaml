@@ -30,23 +30,20 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       run: ./lanterntest
     - name: upload linux
-      working-directory: ${{runner.workspace}}/build
       if: runner.os == 'Linux'
       uses: actions/upload-artifact@v1
       with:
         name: lantern-linux
-        path: liblantern.so
+        path: ${{runner.workspace}}/build/liblantern.so
     - name: upload osx
-      working-directory: ${{runner.workspace}}/build
       if: runner.os == 'macOS'
       uses: actions/upload-artifact@v1
       with:
         name: lantern-osx
-        path: liblantern.dylib
+        path: ${{runner.workspace}}/build/liblantern.dylib
     - name: upload windows
-      working-directory: ${{runner.workspace}}/build
       if: runner.os == 'Windows'
       uses: actions/upload-artifact@v1
       with:
         name: lantern-win
-        path: lantern.dll
+        path: ${{runner.workspace}}/build/lantern.dll
