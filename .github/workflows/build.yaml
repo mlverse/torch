@@ -22,7 +22,9 @@ jobs:
     - name: devenv
       if: runner.os == 'Windows'
       working-directory: ${{runner.workspace}}/build
-      run: devenv /build Release CMake.sln
+      run: |
+        ${{VS140COMNTOOLS}}VsDevCmd.bat
+        devenv /build Release CMake.sln
     - name: test
       working-directory: ${{runner.workspace}}/build
       run: ./lanterntest
