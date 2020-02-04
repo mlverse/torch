@@ -12,7 +12,6 @@ add_library(lantern SHARED
 add_library(lantern::library ALIAS lantern)
 
 target_include_directories(lantern
-
     PUBLIC 
         ${PROJECT_SOURCE_DIR}/include
 )
@@ -25,7 +24,9 @@ add_executable(lanterntest
     tests/main.cpp
 )
 
-target_link_libraries(lanterntest
-    PRIVATE 
-        lantern::library
-)
+if (NOT WIN32)
+    target_link_libraries(lanterntest
+        PRIVATE 
+            lantern::library
+    )
+endif ()

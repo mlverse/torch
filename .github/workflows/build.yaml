@@ -33,6 +33,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.make}}
     - name: Test library
+      if: runner.os != 'Windows'
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.test}}
     - name: Upload artifacts
