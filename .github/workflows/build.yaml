@@ -12,39 +12,29 @@ jobs:
           - os: windows-latest
             library: lantern.dll
             test: lanterntest.exe
+            make: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild" lantern.sln /t:Build /p:Configuration=Release
           - os: ubuntu-latest
             library: liblantern.so
             test: ./lanterntest
+            make: make
           - os: macOS-latest
             library: liblantern.dylib
             test: ./lanterntest
+            make: make
     steps:
     - uses: actions/checkout@v2
-    - name: environment
+    - name: Create environment
       run: cmake -E make_directory ${{runner.workspace}}/build
-    - name: cmake
+    - name: Run cmake
       working-directory: ${{runner.workspace}}/build
       run: cmake ${{github.workspace}}
-    - name: make
-      if: runner.os != 'Windows'
+    - name: Run make
       working-directory: ${{runner.workspace}}/build
-      run: make
-    - name: devenv
-      if: runner.os == 'Windows'
-      working-directory: ${{runner.workspace}}/build
-      shell: cmd
-      run: |
-        echo %cd%
-        dir "D:/a/lantern/build"
-        "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/Tools/VsMSBuildCmd.bat"
-        echo %cd%
-        dir "D:/a/lantern/build"
-        devenv CMake.sln /build release
-        dir "D:/a/lantern/build"
-    - name: test
+      run: ${{matrix.make}}
+    - name: Test library
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.test}}
-    - name: upload
+    - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
         name: ${{runner.os}}
