@@ -12,7 +12,8 @@ jobs:
           - os: windows-latest
             library: lantern.dll
             test: lanterntest.exe
-            make: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild" lantern.sln /t:Build /p:Configuration=Release
+            make: |
+              "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild" lantern.sln /t:Build /p:Configuration=Release
           - os: ubuntu-latest
             library: liblantern.so
             test: ./lanterntest
