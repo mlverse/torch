@@ -20,8 +20,9 @@ jobs:
     - name: environment
       run: cmake -E make_directory ${{runner.workspace}}/build
     - name: cmake
-      working-directory: ${{runner.workspace}}/build
-      run: cmake $GITHUB_WORKSPACE
+      run: |
+        cd build
+        cmake ..
     - name: make
       if: runner.os != 'Windows'
       working-directory: ${{runner.workspace}}/build
