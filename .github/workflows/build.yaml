@@ -35,6 +35,7 @@ jobs:
       shell: cmd
       run: |
         echo %cd%
+        dir "D:/a/lantern/build"
         "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/Tools/VsMSBuildCmd.bat"
         echo %cd%
         dir "D:/a/lantern/build"
