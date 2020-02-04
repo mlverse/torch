@@ -21,7 +21,7 @@ jobs:
       run: cmake -E make_directory ${{runner.workspace}}/build
     - name: cmake
       run: |
-        cd build
+        cd ${{runner.workspace}}/build
         cmake ..
     - name: make
       if: runner.os != 'Windows'
