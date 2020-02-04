@@ -10,11 +10,11 @@ jobs:
         os: [windows-latest, ubuntu-latest, macOS-latest]
         include:
           - os: windows-latest
-            extension: dll
+            library: lantern.dll
           - os: ubuntu-latest
-            extension: so
+            library: liblantern.so
           - os: macOS-latest
-            extension: dylib
+            library: liblantern.dylib
     steps:
     - uses: actions/checkout@v2
     - name: environment
@@ -31,9 +31,8 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       shell: cmd
       run: |
-        dir "C:\Program Files (x86)\Microsoft Visual Studio\"
-        dir "C:\Program Files (x86)\Microsoft Visual Studio\2017"
-        "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsDevCmd.bat"
+        dir "C:\Program Files (x86)\Microsoft Visual Studio\2019"
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"
         devenv /build Release CMake.sln
     - name: test
       working-directory: ${{runner.workspace}}/build
@@ -42,4 +41,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: ${{runner.os}}
-        path: ${{runner.workspace}}/build/lantern.${{ matrix.extension }}
+        path: ${{runner.workspace}}/build/${{ matrix.library }}
