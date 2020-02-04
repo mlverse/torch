@@ -20,11 +20,11 @@ target_include_directories(lantern
 # Tests
 ############################################################
 
-add_executable(lanterntest
-    tests/main.cpp
-)
-
 if (NOT WIN32)
+    add_executable(lanterntest
+        tests/main.cpp
+    )
+
     target_link_libraries(lanterntest
         PRIVATE 
             lantern::library
