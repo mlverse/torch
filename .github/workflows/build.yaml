@@ -34,7 +34,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       shell: cmd
       run: |
-        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
         devenv CMake.sln /build release
     - name: test
       working-directory: ${{runner.workspace}}/build
