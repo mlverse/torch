@@ -33,9 +33,13 @@ jobs:
       if: runner.os == 'Windows'
       working-directory: ${{runner.workspace}}/build
       shell: cmd
-      run: |
-        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
-        devenv CMake.sln /build release
+      run:
+        - echo %cd%
+        - "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
+        - echo %cd%
+        - dir "D:/a/lantern/build"
+        - devenv CMake.sln /build release
+        - dir "D:/a/lantern/build"
     - name: test
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.test}}
