@@ -11,10 +11,13 @@ jobs:
         include:
           - os: windows-latest
             library: lantern.dll
+            test: lanterntest.exe
           - os: ubuntu-latest
             library: liblantern.so
+            test: ./lanterntest
           - os: macOS-latest
             library: liblantern.dylib
+            test: ./lanterntest
     steps:
     - uses: actions/checkout@v2
     - name: environment
@@ -35,9 +38,9 @@ jobs:
         devenv CMake.sln /build release
     - name: test
       working-directory: ${{runner.workspace}}/build
-      run: ./lanterntest
+      run: ${{matrix.test}}
     - name: upload
       uses: actions/upload-artifact@v1
       with:
         name: ${{runner.os}}
-        path: ${{runner.workspace}}/build/${{ matrix.library }}
+        path: ${{runner.workspace}}/build/${{matrix.library}}
