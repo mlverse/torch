@@ -9,7 +9,7 @@
 
 namespace lantern {
 
-void print();
+void (LANTERN_PTR print)();
 
 }
 
