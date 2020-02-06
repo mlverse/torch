@@ -8,7 +8,7 @@ project(lantern)
 
 function(download_file url filename)
     if(NOT EXISTS ${filename})
-        message("-- Downloading {filename}")
+        message("-- Downloading ${filename}")
         file(DOWNLOAD ${url} ${filename}
              TIMEOUT 300
              TLS_VERIFY ON
