@@ -8,6 +8,7 @@ project(lantern)
 
 function (download_file url filename)
     if(NOT EXISTS ${filename})
+        message("-- Downloading {filename}")
         file(DOWNLOAD ${url} ${filename}
              TIMEOUT 300
              TLS_VERIFY ON
@@ -23,7 +24,7 @@ function (retrieve_lib filename)
 endfunction()
 
 ############################################################
-# Library
+# Torch
 ############################################################
 
 if (APPLE)
@@ -36,15 +37,26 @@ if(WIN32)
     retrieve_lib("libtorch-win-shared-with-deps-1.3.0.zip")
 endif()
 
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_CURRENT_BINARY_DIR}/libtorch/share/cmake/Torch")
+
+find_package(Torch REQUIRED)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
+
+############################################################
+# Library
+############################################################
+
 add_library(lantern SHARED 
     src/latern.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
-target_include_directories(lantern
-    PUBLIC 
-        ${PROJECT_SOURCE_DIR}/include
+target_include_directories(lantern PUBLIC
+    ${PROJECT_SOURCE_DIR}/include
 )
+
+target_link_libraries(lantern "${TORCH_LIBRARIES}")
+set_property(TARGET lantern PROPERTY CXX_STANDARD 14)
 
 ############################################################
 # Tests
