@@ -29,10 +29,10 @@ endfunction()
 
 if(APPLE)
     retrieve_lib("libtorch-macos-1.3.0.zip")
-else
+else()
     if(WIN32)
         retrieve_lib("libtorch-win-shared-with-deps-1.3.0.zip")
-    else
+    else()
         retrieve_lib("libtorch-cxx11-abi-shared-with-deps-1.3.0%2Bcpu.zip")
     endif()
 endif()
