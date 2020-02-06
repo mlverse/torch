@@ -6,7 +6,7 @@ project(lantern)
 # Helpers
 ############################################################
 
-function (download_file url filename)
+function(download_file url filename)
     if(NOT EXISTS ${filename})
         message("-- Downloading {filename}")
         file(DOWNLOAD ${url} ${filename}
@@ -16,7 +16,7 @@ function (download_file url filename)
     endif()
 endfunction()
 
-function (retrieve_lib filename)
+function(retrieve_lib filename)
     download_file("https://download.pytorch.org/libtorch/cpu/${filename}" "./${filename}")
 
     execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf ${filename}
@@ -27,14 +27,14 @@ endfunction()
 # Torch
 ############################################################
 
-if (APPLE)
+if(APPLE)
     retrieve_lib("libtorch-macos-1.3.0.zip")
-endif()
-if(LINUX)
-    retrieve_lib("libtorch-cxx11-abi-shared-with-deps-1.3.0%2Bcpu.zip")
-endif()
-if(WIN32)
-    retrieve_lib("libtorch-win-shared-with-deps-1.3.0.zip")
+else
+    if(WIN32)
+        retrieve_lib("libtorch-win-shared-with-deps-1.3.0.zip")
+    else
+        retrieve_lib("libtorch-cxx11-abi-shared-with-deps-1.3.0%2Bcpu.zip")
+    endif()
 endif()
 
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_CURRENT_BINARY_DIR}/libtorch/share/cmake/Torch")
