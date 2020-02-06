@@ -1,21 +1,38 @@
-simple_methods <- function() {
-  m_names <- declarations() %>%
-    purrr:::map_dfr(~tibble::tibble(name = .x$name)) %>%
-    dplyr::count(name) %>%
-    dplyr::filter(n == 1)
-  declarations() %>%
-    purrr::keep(~.x$name %in% m_names$name) %>%
-    purrr::keep(~any(.x$method_of == "Tensor"))
+
+cpp_method <- function(decl) {
+  decl %>%
+    glue::glue_data(
+"
+// [[Rcpp::export]]
+{cpp_type(.)} {cpp_method_name(.)} ({cpp_signature(.)}) {{
+  {cpp_method_body(.)}
+}}
+
+"
+    )
 }
 
-cpp_return_type <- function(method) {
+cpp_namespace <- function(decl) {
+  decl %>%
+    glue::glue_data(
+      "
+// [[Rcpp::export]]
+{cpp_type(.)} {cpp_namespace_name(.)} ({cpp_signature(.)}) {{
+  {cpp_namespace_body(.)}
+}}
 
-  if (length(method$returns) == 1) {
+"
+    )
+}
 
-    returns <- method$returns[[1]]
+cpp_type <- function(decl) {
+
+  if (length(decl$returns) == 1) {
+
+    returns <- decl$returns[[1]]
 
     if (returns$dynamic_type == "Tensor")
-      return("Rcpp:XPtr<torch::Tensor>")
+      return("Rcpp::XPtr<torch::Tensor>")
 
     if (returns$dynamic_type == "void")
       return("void")
@@ -47,28 +64,15 @@ cpp_return_type <- function(method) {
 
 }
 
-clean_names <- function(x) {
-  # adapted from janitor::make_clean_names
-  x <- gsub("'", "", x)
-  x <- gsub("\"", "", x)
-  x <- gsub("%", ".percent_", x)
-  x <- gsub("#", ".number_", x)
-  x <- gsub("^[[:space:][:punct:]]+", "", x)
-  x
+cpp_method_name <- function(decl) {
+  cpp_function_name(decl, "method")
 }
 
-make_cpp_function_name <- function(method_name, argument_types) {
-
-  suffix <- paste(names(arg_types), arg_types, sep = "_")
-  suffix <- paste(suffix, collapse = "_")
-
-  if (length(suffix) == 0)
-    suffix <- ""
-
-  clean_names(glue::glue("cpp_torch_{method$name}_{suffix}"))
+cpp_namespace_name <- function(decl) {
+  cpp_function_name(decl, "namespace")
 }
 
-cpp_function_name <- function(method) {
+cpp_function_name <- function(method, type) {
   arguments <- get_arguments_with_no_default(list(method))
   arg_types <- list()
   for (nm in arguments) {
@@ -78,14 +82,10 @@ cpp_function_name <- function(method) {
       with(dynamic_type)
   }
 
-  make_cpp_function_name(method$name, arg_types)
+  make_cpp_function_name(method$name, arg_types, type)
 }
 
-cpp_argument <- function(argument) {
-
-  # declaration
-
-  declaration <- NULL
+cpp_parameter_type <- function(argument) {
 
   if (argument$dynamic_type == "Tensor") {
     declaration <- "Rcpp::XPtr<torch::Tensor>"
@@ -116,7 +116,7 @@ cpp_argument <- function(argument) {
   }
 
   if (argument$dynamic_type == "std::array<bool,4>") {
-    declaration <- "std::array<bool,4>"
+    declaration <- "std::vector<bool>"
   }
 
   if (argument$dynamic_type == "TensorOptions") {
@@ -124,7 +124,7 @@ cpp_argument <- function(argument) {
   }
 
   if (argument$dynamic_type == "Generator *") {
-    declaration <- "Rcpp::XPtr<Generator *>"
+    declaration <- "Rcpp::XPtr<torch::Generator *>"
   }
 
   if (argument$dynamic_type == "ScalarType") {
@@ -136,11 +136,11 @@ cpp_argument <- function(argument) {
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
-    declaration <- "std::array<bool,3>"
+    declaration <- "std::vector<bool>"
   }
 
   if (argument$dynamic_type == "std::array<bool,2>") {
-    declaration <- "std::array<bool,2>"
+    declaration <- "std::vector<bool>"
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
@@ -148,7 +148,7 @@ cpp_argument <- function(argument) {
   }
 
   if (argument$dynamic_type == "std::string") {
-    declaration <- "std::String"
+    declaration <- "std::string"
   }
 
   if (argument$dynamic_type == "Dimname") {
@@ -163,15 +163,29 @@ cpp_argument <- function(argument) {
     declaration <- "Rcpp::XPtr<torch::Storage>"
   }
 
-  if (is.null(declaration))
-    browser()
-
-  glue::glue("{declaration} {argument$name}")
+  declaration
 }
 
-cpp_signature <- function(method) {
+cpp_parameter_identifier <- function(argument) {
 
-  res <- purrr::map_chr(method$arguments, cpp_argument) %>%
+  if (substr(argument$name,1,1) == "_") {
+    substr(argument$name, 2, nchar(argument$name))
+  } else if (argument$name == "FALSE") {
+    'False'
+  } else {
+    argument$name
+  }
+
+}
+
+cpp_parameter <- function(argument) {
+  argument %>%
+    glue::glue_data("{cpp_parameter_type(.)} {cpp_parameter_identifier(.)}")
+}
+
+cpp_signature <- function(decl) {
+
+  res <- purrr::map_chr(decl$arguments, cpp_parameter) %>%
     glue::glue_collapse(sep = ", ")
 
   if(length(res) == 0)
@@ -181,6 +195,8 @@ cpp_signature <- function(method) {
 }
 
 cpp_argument_transform <- function(argument) {
+
+  argument$name <- cpp_parameter_identifier(argument)
 
   if (argument$dynamic_type == "Tensor") {
     result <- glue::glue("* {argument$name}")
@@ -211,7 +227,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "std::array<bool,4>") {
-    result <- glue::glue("{argument$name}")
+    result <- glue::glue("std_vector_to_std_array<bool,4>({argument$name})")
   }
 
   if (argument$dynamic_type == "TensorOptions") {
@@ -231,11 +247,11 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
-    result <- glue::glue("{argument$name}")
+    result <- glue::glue("std_vector_to_std_array<bool,3>({argument$name})")
   }
 
   if (argument$dynamic_type == "std::array<bool,2>") {
-    result <- glue::glue("{argument$name}")
+    result <- glue::glue("std_vector_to_std_array<bool,2>({argument$name})")
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
@@ -261,17 +277,13 @@ cpp_argument_transform <- function(argument) {
   result
 }
 
-SKIP_R_BINDIND <- c(
-  "set_quantizer_" #https://github.com/pytorch/pytorch/blob/5dfcfeebb89304c1e7978cad7ada1227f19303f6/tools/autograd/gen_python_functions.py#L36
-)
-
 xptr_return_call <- function(type) {
   function(call) {
     glue::glue("make_xptr<{type}>({call})")
   }
 }
 
-cpp_code_return <- function(returns) {
+cpp_return_statement <- function(returns) {
 
   if (length(returns) == 1) {
 
@@ -306,7 +318,7 @@ cpp_code_return <- function(returns) {
 
     calls <- map_chr(
       seq_along(returns),
-      ~cpp_code_return(returns[.x])(glue::glue("std::get<{.x-1}>(out)"))
+      ~cpp_return_statement(returns[.x])(glue::glue("std::get<{.x-1}>(r_out)"))
     )
 
     f <- function(x) {
@@ -317,11 +329,9 @@ cpp_code_return <- function(returns) {
 
   }
 
-  browser()
-
 }
 
-cpp_code <- function(method) {
+cpp_method_body <- function(method) {
 
   arguments <- method$arguments %>%
     discard(~.x$name == "self") %>%
@@ -335,13 +345,13 @@ cpp_code <- function(method) {
 
   method_call <- glue::glue("self->{method$name}({arguments});")
 
-  if (method$returns[[1]]$dynamic_type != "void") {
-    method_call <- glue::glue("auto out = {method_call}")
+  if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
+    method_call <- glue::glue("auto r_out = {method_call}")
   }
 
-  if (method$returns[[1]]$dynamic_type != "void") {
+  if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
 
-    return_call <- cpp_code_return(method$returns)("out")
+    return_call <- cpp_return_statement(method$returns)("r_out")
     method_call <- glue::glue_collapse(
       x = c(
         method_call,
@@ -353,30 +363,70 @@ cpp_code <- function(method) {
   }
 
   method_call
+
+
 }
 
-# cpp_return_type(method)
-# cpp_function_name(method)
-# cpp_argument(method$arguments[[1]])
-# cpp_signature(method)
-# cpp_code(method)
-#
-# code <- declarations() %>%
-#   purrr::discard(~.x$name %in% SKIP_R_BINDIND) %>%
-#   map_chr(function(m) {
-#     glue::glue("{cpp_return_type(m)} {cpp_function_name(m)} ({cpp_signature(m)}) {{ {cpp_code(m)} }}")
-#   })
+cpp_namespace_body <- function(method) {
 
+  arguments <- method$arguments %>%
+    map_chr(cpp_argument_transform)
 
-# simple_methods() %>%
-#
-#   purrr::map(~.x$arguments %>% purrr::map_chr(~.x$dynamic_type)) %>%
-#   unlist() %>%
-#   unique()
-#
-# simple_methods() %>%
-#   purrr::map(~.x$method_of) %>%
-#   unlist() %>%
-#   unique()
-#
-#
+  if (length(arguments) == 0) {
+    arguments <- ""
+  } else {
+    arguments <- glue::glue_collapse(arguments, sep = ", ")
+  }
+
+  method_call <- glue::glue("at::{method$name}({arguments});")
+
+  if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
+    method_call <- glue::glue("auto r_out = {method_call}")
+  }
+
+  if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
+
+    return_call <- cpp_return_statement(method$returns)("r_out")
+    method_call <- glue::glue_collapse(
+      x = c(
+        method_call,
+        glue::glue("return {return_call};")
+      ),
+      sep = "\n"
+    )
+
+  }
+
+  method_call
+
+}
+
+SKIP_R_BINDIND <- c(
+  "set_quantizer_" #https://github.com/pytorch/pytorch/blob/5dfcfeebb89304c1e7978cad7ada1227f19303f6/tools/autograd/gen_python_functions.py#L36
+)
+
+cpp <- function() {
+
+  decls <-declarations() %>%
+    purrr::discard(~.x$name %in% SKIP_R_BINDIND) %>%
+    purrr::discard(~.x$name == "range" && length(.x$arguments) == 3)
+
+  methods_code <- decls %>%
+    purrr::keep(~"Tensor" %in% .x$method_of) %>%
+    purrr::map_chr(cpp_method)
+
+  namespace_code <- decls %>%
+    keep(~"namespace" %in% .x$method_of) %>%
+    map_chr(cpp_namespace)
+
+  writeLines(
+    c(
+      '#include "torch_types.h"',
+      '#include "utils.hpp"',
+      methods_code,
+      namespace_code
+    ),
+    "../../src/gen-namespace.cpp"
+  )
+
+}
