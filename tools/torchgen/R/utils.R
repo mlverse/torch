@@ -7,7 +7,7 @@
 #' @export
 declarations <- function() {
 
-  version <- getOption("torchgen.version", default = "1.3.0")
+  version <- getOption("torchgen.version", default = "1.4.0")
   path <- getOption("torchgen.path")
 
   if (is.null(path)) {
@@ -73,4 +73,30 @@ hash_arguments <- function(arguments) {
   types <- paste0(purrr::map_chr(arguments, ~.x$type), collapse = "")
   names <- paste0(purrr::map_chr(arguments, ~.x$name), collapse = "")
   substr(openssl::md5(glue::glue("{types}{names}")), 1,5)
+}
+
+clean_names <- function(x) {
+  # adapted from janitor::make_clean_names
+  x <- gsub("'", "", x)
+  x <- gsub("\"", "", x)
+  x <- gsub("%", ".percent_", x)
+  x <- gsub("#", ".number_", x)
+  x <- gsub(":", "", x)
+  x <- gsub("<", "", x)
+  x <- gsub(">", "", x)
+  x <- gsub(",", "", x)
+  x <- gsub(" *", "", x, fixed = TRUE)
+  x <- gsub("^[[:space:][:punct:]]+", "", x)
+  x
+}
+
+make_cpp_function_name <- function(method_name, arg_types, type) {
+
+  suffix <- paste(names(arg_types), arg_types, sep = "_")
+  suffix <- paste(suffix, collapse = "_")
+
+  if (length(suffix) == 0)
+    suffix <- ""
+
+  clean_names(glue::glue("cpp_torch_{type}_{method_name}_{suffix}"))
 }
