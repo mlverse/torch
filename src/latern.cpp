@@ -1,12 +1,10 @@
 #include <iostream>
 
+#define LANTERN_BUILD
+
 #include "lantern/lantern.h"
 
-namespace lantern {
-
-void print()
+void lanternPrint()
 {
     std::cout << "Hello from Lantern!" << std::endl;
-}
-
 }
