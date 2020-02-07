@@ -16,7 +16,7 @@ jobs:
               & 'lanterntest.exe'
             make: |
               & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release
-            build: build/release
+            build: build/Release
           - os: ubuntu-latest
             library: liblantern.so
             test: ./lanterntest
@@ -39,7 +39,7 @@ jobs:
       run: ${{matrix.make}}
     - name: Troubleshoot
       if: runner.os == 'Windows'
-      working-directory: ${{runner.workspace}}/${{matrix.build}}
+      working-directory: ${{runner.workspace}}/build
       run: |
         cd
         dir
