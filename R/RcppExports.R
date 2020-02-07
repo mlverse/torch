@@ -102,11 +102,11 @@ cpp_torch_bool <- function() {
 }
 
 cpp_torch_method_backward_self_Tensor <- function(self, gradient, keep_graph, create_graph) {
-    .Call('_torch_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torch', self, gradient, keep_graph, create_graph)
+    invisible(.Call('_torch_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torch', self, gradient, keep_graph, create_graph))
 }
 
 cpp_torch_method_set_data_self_Tensor_new_data_Tensor <- function(self, new_data) {
-    .Call('_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor', PACKAGE = 'torch', self, new_data)
+    invisible(.Call('_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor', PACKAGE = 'torch', self, new_data))
 }
 
 cpp_torch_method_data_self_Tensor <- function(self) {
@@ -3090,11 +3090,11 @@ cpp_torch_namespace__cufft_get_plan_cache_max_size_device_index_int64_t <- funct
 }
 
 cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t <- function(device_index, max_size) {
-    .Call('_torch_cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t', PACKAGE = 'torch', device_index, max_size)
+    invisible(.Call('_torch_cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t', PACKAGE = 'torch', device_index, max_size))
 }
 
 cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t <- function(device_index) {
-    .Call('_torch_cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t', PACKAGE = 'torch', device_index)
+    invisible(.Call('_torch_cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t', PACKAGE = 'torch', device_index))
 }
 
 cpp_torch_namespace_index_self_Tensor_indices_TensorList <- function(self, indices) {

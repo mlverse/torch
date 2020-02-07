@@ -276,29 +276,27 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_backward_self_Tensor
-Rcpp::List cpp_torch_method_backward_self_Tensor(Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> gradient, bool keep_graph, bool create_graph);
+void cpp_torch_method_backward_self_Tensor(Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> gradient, bool keep_graph, bool create_graph);
 RcppExport SEXP _torch_cpp_torch_method_backward_self_Tensor(SEXP selfSEXP, SEXP gradientSEXP, SEXP keep_graphSEXP, SEXP create_graphSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type self(selfSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type gradient(gradientSEXP);
     Rcpp::traits::input_parameter< bool >::type keep_graph(keep_graphSEXP);
     Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_backward_self_Tensor(self, gradient, keep_graph, create_graph));
-    return rcpp_result_gen;
+    cpp_torch_method_backward_self_Tensor(self, gradient, keep_graph, create_graph);
+    return R_NilValue;
 END_RCPP
 }
 // cpp_torch_method_set_data_self_Tensor_new_data_Tensor
-Rcpp::List cpp_torch_method_set_data_self_Tensor_new_data_Tensor(Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> new_data);
+void cpp_torch_method_set_data_self_Tensor_new_data_Tensor(Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> new_data);
 RcppExport SEXP _torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor(SEXP selfSEXP, SEXP new_dataSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type self(selfSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type new_data(new_dataSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_set_data_self_Tensor_new_data_Tensor(self, new_data));
-    return rcpp_result_gen;
+    cpp_torch_method_set_data_self_Tensor_new_data_Tensor(self, new_data);
+    return R_NilValue;
 END_RCPP
 }
 // cpp_torch_method_data_self_Tensor
@@ -9905,26 +9903,24 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t
-Rcpp::List cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t(int64_t device_index, int64_t max_size);
+void cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t(int64_t device_index, int64_t max_size);
 RcppExport SEXP _torch_cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t(SEXP device_indexSEXP, SEXP max_sizeSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int64_t >::type device_index(device_indexSEXP);
     Rcpp::traits::input_parameter< int64_t >::type max_size(max_sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t(device_index, max_size));
-    return rcpp_result_gen;
+    cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t(device_index, max_size);
+    return R_NilValue;
 END_RCPP
 }
 // cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t
-Rcpp::List cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t(int64_t device_index);
+void cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t(int64_t device_index);
 RcppExport SEXP _torch_cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t(SEXP device_indexSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int64_t >::type device_index(device_indexSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t(device_index));
-    return rcpp_result_gen;
+    cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t(device_index);
+    return R_NilValue;
 END_RCPP
 }
 // cpp_torch_namespace_index_self_Tensor_indices_TensorList

@@ -27,7 +27,11 @@ cpp_namespace <- function(decl) {
 
 cpp_type <- function(decl) {
 
-  if (length(decl$returns) == 1) {
+  if (length(decl$returns) == 0) {
+
+    return("void")
+
+  } else if (length(decl$returns) == 1) {
 
     returns <- decl$returns[[1]]
 
@@ -378,7 +382,7 @@ cpp_namespace_body <- function(method) {
     arguments <- glue::glue_collapse(arguments, sep = ", ")
   }
 
-  method_call <- glue::glue("at::{method$name}({arguments});")
+  method_call <- glue::glue("torch::{method$name}({arguments});")
 
   if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
     method_call <- glue::glue("auto r_out = {method_call}")
@@ -423,6 +427,24 @@ cpp <- function() {
     c(
       '#include "torch_types.h"',
       '#include "utils.hpp"',
+      '
+      // Workaround for https://discuss.pytorch.org/t/using-torch-normal-with-the-c-frontend/68971?u=dfalbel
+      namespace torch {
+
+      torch::Tensor normal (const torch::Tensor &mean, double std = 1, torch::Generator *generator = nullptr) {
+        return at::normal(mean, std, generator);
+      }
+
+      torch::Tensor normal (double mean, const torch::Tensor &std, torch::Generator *generator = nullptr) {
+        return at::normal(mean, std, generator);
+      }
+
+      torch::Tensor normal (const torch::Tensor &mean, const torch::Tensor &std, torch::Generator *generator = nullptr) {
+        return at::normal(mean, std, generator);
+      }
+
+      } // namespace torch
+      ',
       methods_code,
       namespace_code
     ),
