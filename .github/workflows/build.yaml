@@ -36,14 +36,19 @@ jobs:
       run: cmake ${{github.workspace}}
     - name: Run make
       working-directory: ${{runner.workspace}}/build
-      run: ${{matrix.make}}
+      run: |
+        pwd
+        ls
+        ${{matrix.make}}
+        pwd
+        ls
     - name: Troubleshoot
       if: runner.os == 'Windows'
       working-directory: ${{runner.workspace}}/build
       run: |
-        cd
-        dir
-        dir ..
+        pwd
+        ls
+        ls ..
     - name: Test library
       working-directory: ${{runner.workspace}}/${{matrix.build}}
       run: ${{matrix.test}} ${{matrix.library}}
