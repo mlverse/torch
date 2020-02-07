@@ -19,7 +19,9 @@ jobs:
             build: build/Release
           - os: ubuntu-latest
             library: liblantern.so
-            test: ./lanterntest liblantern.so
+            test: |
+              cp ../../libtorch/lib/*.dll .
+              ./lanterntest liblantern.so
             make: make
             build: build
           - os: macOS-latest
