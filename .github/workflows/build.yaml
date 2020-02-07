@@ -10,7 +10,7 @@ jobs:
         os: [windows-latest, ubuntu-latest, macOS-latest]
         include:
           - os: windows-latest
-            library: release/lantern.dll
+            library: lantern.dll
             test: lanterntest.exe
             make: |
               & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release
@@ -33,7 +33,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.make}}
     - name: Test library
-      working-directory: ${{runner.workspace}}/build
+      working-directory: ${{runner.workspace}}/build/release
       run: ${{matrix.test}} ${{matrix.library}}
     - name: Upload artifacts
       uses: actions/upload-artifact@v1

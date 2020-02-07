@@ -25,7 +25,7 @@
 extern "C" {
 #endif
   
-LANTERN_API void (LANTERN_PTR lanternPrint)();
+LANTERN_API void (LANTERN_PTR lanternTest)();
   
 #ifdef __cplusplus
 }
@@ -136,7 +136,7 @@ bool lanternInit(const std::string& libPath, std::string* pError)
   if (!lanternLoadLibrary(libPath, pError))
     return false;
   
-  LOAD_SYMBOL(lanternPrint);
+  LOAD_SYMBOL(lanternTest);
   
   return true;
 }
