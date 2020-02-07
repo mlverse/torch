@@ -62,13 +62,11 @@ set_property(TARGET lantern PROPERTY CXX_STANDARD 14)
 # Tests
 ############################################################
 
-if (NOT WIN32)
-    add_executable(lanterntest
-        tests/main.cpp
-    )
+add_executable(lanterntest
+    tests/main.cpp
+)
 
-    target_link_libraries(lanterntest
-        PRIVATE 
-            lantern::library
-    )
-endif ()
+target_link_libraries(lanterntest
+    PRIVATE 
+        lantern::library
+)
