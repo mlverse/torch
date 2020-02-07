@@ -39,14 +39,16 @@ jobs:
       run: ${{matrix.make}}
     - name: Troubleshoot
       if: runner.os == 'Windows'
-      working-directory: ${{runner.workspace}}/build
+      working-directory: ${{runner.workspace}}/${{matrix.build}}
       run: |
         pwd
-        ls Release
-        ls x64
+        ls
     - name: Test library
       working-directory: ${{runner.workspace}}/${{matrix.build}}
-      run: ${{matrix.test}} ${{matrix.library}}
+      run: |
+        pwd
+        ls
+        ${{matrix.test}} ${{matrix.library}}
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
