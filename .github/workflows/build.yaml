@@ -5,6 +5,7 @@ on: [push, deployment]
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 3
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macOS-latest]
@@ -12,7 +13,7 @@ jobs:
           - os: windows-latest
             library: lantern.dll
             test: |
-              & lanterntest.exe
+              & 'lanterntest.exe'
             make: |
               & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release
             build: build/release
@@ -36,9 +37,15 @@ jobs:
     - name: Run make
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.make}}
+    - name: Troubleshoot
+      if: runner.os == 'Windows'
+      working-directory: ${{runner.workspace}}/${{matrix.build}}
+      run: |
+        cd
+        dir
+        dir ..
     - name: Test library
       working-directory: ${{runner.workspace}}/${{matrix.build}}
-      timeout-minutes: 1
       run: ${{matrix.test}} ${{matrix.library}}
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
