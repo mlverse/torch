@@ -38,6 +38,7 @@ jobs:
       run: ${{matrix.make}}
     - name: Test library
       working-directory: ${{runner.workspace}}/${{matrix.build}}
+      timeout-minutes: 1
       run: ${{matrix.test}} ${{matrix.library}}
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
