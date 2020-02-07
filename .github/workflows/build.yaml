@@ -14,14 +14,17 @@ jobs:
             test: lanterntest.exe
             make: |
               & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release
+            build: ${{runner.workspace}}/build/release
           - os: ubuntu-latest
             library: liblantern.so
             test: ./lanterntest
             make: make
+            build: ${{runner.workspace}}/build
           - os: macOS-latest
             library: liblantern.dylib
             test: ./lanterntest
             make: make
+            build: ${{runner.workspace}}/build
     steps:
     - uses: actions/checkout@v2
     - name: Create environment
@@ -33,10 +36,10 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.make}}
     - name: Test library
-      working-directory: ${{runner.workspace}}/build/release
+      working-directory: ${{matrix.build}}
       run: ${{matrix.test}} ${{matrix.library}}
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
         name: ${{runner.os}}
-        path: ${{runner.workspace}}/build/${{matrix.library}}
+        path: ${{matrix.build}}${{matrix.library}}
