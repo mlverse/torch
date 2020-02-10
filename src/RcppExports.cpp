@@ -22026,6 +22026,38 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_generator
+Rcpp::XPtr<torch::Generator *> cpp_torch_generator();
+RcppExport SEXP _torch_cpp_torch_generator() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_generator());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_generator_current_seed
+Rcpp::NumericVector cpp_generator_current_seed(Rcpp::XPtr<torch::Generator *> generator);
+RcppExport SEXP _torch_cpp_generator_current_seed(SEXP generatorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Generator *> >::type generator(generatorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_generator_current_seed(generator));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_generator_set_current_seed
+void cpp_generator_set_current_seed(Rcpp::XPtr<torch::Generator *> generator, std::uint64_t seed);
+RcppExport SEXP _torch_cpp_generator_set_current_seed(SEXP generatorSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Generator *> >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< std::uint64_t >::type seed(seedSEXP);
+    cpp_generator_set_current_seed(generator, seed);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_layout_to_string
 std::string cpp_layout_to_string(Rcpp::XPtr<torch::Layout> layout_ptr);
 RcppExport SEXP _torch_cpp_layout_to_string(SEXP layout_ptrSEXP) {
@@ -23880,6 +23912,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_im2col_backward_out_grad_input_Tensor_grad_output_Tensor_input_size_IntArrayRef_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_im2col_backward_out_grad_input_Tensor_grad_output_Tensor_input_size_IntArrayRef_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef, 7},
     {"_torch_cpp_torch_namespace_im2col_backward_grad_output_Tensor_input_size_IntArrayRef_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_im2col_backward_grad_output_Tensor_input_size_IntArrayRef_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef, 6},
     {"_torch_cpp_torch_namespace_isfinite_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_isfinite_self_Tensor, 1},
+    {"_torch_cpp_torch_generator", (DL_FUNC) &_torch_cpp_torch_generator, 0},
+    {"_torch_cpp_generator_current_seed", (DL_FUNC) &_torch_cpp_generator_current_seed, 1},
+    {"_torch_cpp_generator_set_current_seed", (DL_FUNC) &_torch_cpp_generator_set_current_seed, 2},
     {"_torch_cpp_layout_to_string", (DL_FUNC) &_torch_cpp_layout_to_string, 1},
     {"_torch_cpp_torch_strided", (DL_FUNC) &_torch_cpp_torch_strided, 0},
     {"_torch_cpp_torch_sparse_coo", (DL_FUNC) &_torch_cpp_torch_sparse_coo, 0},

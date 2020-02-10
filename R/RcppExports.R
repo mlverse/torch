@@ -6585,6 +6585,18 @@ cpp_torch_namespace_isfinite_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_namespace_isfinite_self_Tensor', PACKAGE = 'torch', self)
 }
 
+cpp_torch_generator <- function() {
+    .Call('_torch_cpp_torch_generator', PACKAGE = 'torch')
+}
+
+cpp_generator_current_seed <- function(generator) {
+    .Call('_torch_cpp_generator_current_seed', PACKAGE = 'torch', generator)
+}
+
+cpp_generator_set_current_seed <- function(generator, seed) {
+    invisible(.Call('_torch_cpp_generator_set_current_seed', PACKAGE = 'torch', generator, seed))
+}
+
 cpp_layout_to_string <- function(layout_ptr) {
     .Call('_torch_cpp_layout_to_string', PACKAGE = 'torch', layout_ptr)
 }
