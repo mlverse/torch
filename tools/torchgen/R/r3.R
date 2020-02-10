@@ -132,6 +132,50 @@ r_namespace_argument_with_no_default <- function(name) {
   name
 }
 
+r_list_of_arguments <- function(decls) {
+  args <- get_arguments_order(decls)
+  args <- glue::glue('"{args}"') %>% glue::glue_collapse(sep = ", ")
+  glue::glue("args <- env_get_list(nms = c({args}))")
+}
+
+r_argument_expected_types <- function(arg, decls) {
+  decls %>%
+    purrr::map(~.x$arguments) %>%
+    purrr::flatten() %>%
+    purrr::keep(~.x$name == arg) %>%
+    purrr::map_chr(~.x$dynamic_type) %>%
+    unique()
+}
+
+r_arguments_expected_types <- function(decls) {
+  args <- purrr::set_names(get_arguments_order(decls))
+  l <- capture.output(
+    purrr::map(args, r_argument_expected_types, decls = decls) %>%
+      dput()
+  )
+  glue::glue("expected_types <- {glue::glue_collapse(l, sep = '\n')}")
+}
+
+r_arguments_with_no_default <- function(decls) {
+  args <- get_arguments_with_no_default(decls)
+  args <- glue::glue_collapse(capture.output(dput(args)), sep = "\n")
+  glue::glue("nd_args <- {args}")
+}
+
+r_namespace_body <- function(decls) {
+
+  glue::glue("
+
+{r_list_of_arguments(decls)}
+{r_arguments_expected_types(decls)}
+{r_arguments_with_no_default(decls)}
+args_t <- all_arguments_to_torch_type(args, expected_types)
+nd_args_types <- args_t[[2]][names(args_t[[2]]) %in% nd_args]
+
+")
+
+}
+
 do_call <- function(fun, args) {
 
   args <- lapply(args, function(x) {
@@ -144,27 +188,31 @@ do_call <- function(fun, args) {
   do.call(fun, args)
 }
 
-torch_mean <- function(self, dim, keepdim, dtype) {
+torch_mean <- function(self, dim, keepdim = TRUE, dtype) {
 
-  args <- c(self = missing(self), dim = missing(dim))
-  args <- names(args[!args])
+  args <- rlang::env_get_list(nms = c("self", "dim", "keepdim", "dtype"))
 
-  all_args <- list(dtype = dtype, keepdim = keepdim)
-  for(nm in args) all_args[[nm]] <- environment()[[nm]]
 
-  expected_types <- list(dim = c('IntArrayRef','DimnameList'),
-                         dtype = c('ScalarType'),
-                         keepdim = c('bool'),
-                         self = c('Tensor'))
 
-  all_args <- all_arguments_to_torch_type(all_args, expected_types)
-
-  argument_types <- all_args[[2]][args]
-  all_args <- all_args[[1]]
-  fun <- getNamespace("torch")[[make_cpp_function_name("mean", argument_types)]]
-  res <- do_call(fun, all_args)
-
-  Tensor$new(ptr = res)
+  # args <- c(self = missing(self), dim = missing(dim))
+  # args <- names(args[!args])
+  #
+  # all_args <- list(dtype = dtype, keepdim = keepdim)
+  # for(nm in args) all_args[[nm]] <- environment()[[nm]]
+  #
+  # expected_types <- list(dim = c('IntArrayRef','DimnameList'),
+  #                        dtype = c('ScalarType'),
+  #                        keepdim = c('bool'),
+  #                        self = c('Tensor'))
+  #
+  # all_args <- all_arguments_to_torch_type(all_args, expected_types)
+  #
+  # argument_types <- all_args[[2]][args]
+  # all_args <- all_args[[1]]
+  # fun <- getNamespace("torch")[[make_cpp_function_name("mean", argument_types)]]
+  # res <- do_call(fun, all_args)
+  #
+  # Tensor$new(ptr = res)
 }
 
 
