@@ -22274,6 +22274,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_nullopt
+Rcpp::XPtr<c10::nullopt_t> cpp_nullopt();
+RcppExport SEXP _torch_cpp_nullopt() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_nullopt());
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_device_type_to_string", (DL_FUNC) &_torch_cpp_device_type_to_string, 1},
@@ -23945,6 +23955,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {"_torch_cpp_nullptr", (DL_FUNC) &_torch_cpp_nullptr, 0},
+    {"_torch_cpp_nullopt", (DL_FUNC) &_torch_cpp_nullopt, 0},
     {NULL, NULL, 0}
 };
 

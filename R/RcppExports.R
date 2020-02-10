@@ -6677,3 +6677,7 @@ cpp_nullptr <- function() {
     .Call('_torch_cpp_nullptr', PACKAGE = 'torch')
 }
 
+cpp_nullopt <- function() {
+    .Call('_torch_cpp_nullopt', PACKAGE = 'torch')
+}
+
