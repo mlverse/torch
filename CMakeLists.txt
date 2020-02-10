@@ -47,7 +47,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 ############################################################
 
 add_library(lantern SHARED 
-    src/latern.cpp
+    src/lantern.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
