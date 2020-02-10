@@ -8,34 +8,37 @@ is_scalar_atomic <- function(x) {
 argument_to_torch_type <- function(obj, expected_types) {
   
   if ("Tensor" %in% expected_types && is_torch_tensor(obj))
-    return(list(obj, "Tensor"))
+    return(list(obj$ptr, "Tensor"))
   
   if ("Scalar" %in% expected_types && is_torch_scalar(obj))
-    return(list(obj, "Scalar"))
+    return(list(obj$ptr, "Scalar"))
   
   if ("DimnameList" %in% expected_types && is_torch_dimname_list(obj))
-    return(list(obj, "DimnameList"))
+    return(list(obj$ptr, "DimnameList"))
   
   if ("TensorList" %in% expected_types && is_torch_tensor_list(obj))
-    return(list(obj, "TensorList"))
+    return(list(obj$ptr, "TensorList"))
   
   if ("TensorOptions" %in% expected_types && is_torch_tensor_options(obj))
-    return(list(obj, "TensorOptions"))
+    return(list(obj$ptr, "TensorOptions"))
   
   if ("MemoryFormat" %in% expected_types && is_torch_memory_format(obj))
-    return(list(obj, "MemortFormat"))
+    return(list(obj$ptr, "MemortFormat"))
   
   if ("ScalarType" %in% expected_types && is_torch_dtype(obj))
-    return(list(obj, "ScalarType"))
+    return(list(obj$ptr, "ScalarType"))
+  
+  if ("ScalarType" %in% expected_types && is.null(obj)) 
+    return(list(cpp_nullopt(), "ScalarType"))
   
   if ("Scalar" %in% expected_types && is_scalar_atomic(obj)) 
-    return(list(torch_scalar(obj), "Scalar"))
+    return(list(torch_scalar(obj)$ptr, "Scalar"))
   
   if ("Tensor" %in% expected_types && is.atomic(obj))
-    return(list(torch_tensor(obj), "Tensor"))
+    return(list(torch_tensor(obj)$ptr, "Tensor"))
   
   if ("DimnameList" %in% expected_types && is.character(obj))
-    return(list(torch_dimname_list(obj), "DimnameList"))
+    return(list(torch_dimname_list(obj)$ptr, "DimnameList"))
   
   if ("IntArrayRef" %in% expected_types && is.numeric(obj))
     return(list(as.integer(obj), "IntArrayRef"))
@@ -55,6 +58,7 @@ argument_to_torch_type <- function(obj, expected_types) {
   if (any(c("std::array<bool,4>", "std::array<bool,3>", "std::array<bool,2>") %in% expected_types) && is.logical(obj))
     return(list(obj, paste0("std::array<bool,", length(obj), ">")))
   
+  browser()
   stop("Can't convert argument", call.=FALSE)
 }
 
