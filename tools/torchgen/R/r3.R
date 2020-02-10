@@ -1,19 +1,16 @@
 
 get_arguments_with_no_default <- function(methods) {
-  methods %>%
-    map(~.x$arguments) %>%
-    map(~keep(.x, ~is.null(.x$default))) %>%
-    map(~map_chr(.x, ~.x$name)) %>%
-    flatten_chr() %>%
-    unique()
+  args <- get_arguments_order(methods)
+  w_default <- get_arguments_with_default(methods)
+  args[!args %in% w_default]
 }
 
 get_arguments_with_default <- function(methods) {
   methods %>%
-    map(~.x$arguments) %>%
-    map(~discard(.x, ~is.null(.x$default))) %>%
-    map(~map_chr(.x, ~.x$name)) %>%
-    flatten_chr() %>%
+    purrr::map(~.x$arguments) %>%
+    purrr::map(~purrr::discard(.x, ~is.null(.x$default))) %>%
+    purrr::map(~purrr::map_chr(.x, ~.x$name)) %>%
+    purrr::flatten_chr() %>%
     unique()
 }
 
@@ -71,6 +68,105 @@ make_expected_types_list <- function(methods) {
              ")"
              )
 }
+
+r_namespace <- function(decls) {
+
+  decls %>% glue::glue_data("
+
+{r_namespace_name(.)} <- function({r_namespace_signature(.)}) {{
+  {r_namespace_body(.)}
+}}
+
+")
+}
+
+r_namespace_name <- function(decls) {
+  decls[[1]]$name
+}
+
+r_namespace_signature <- function(decls) {
+  args <- get_arguments_order(decls)
+  args %>%
+    purrr::map_chr(~r_namespace_argument(.x, decls)) %>%
+    glue::glue_collapse(sep = ", ")
+}
+
+r_argument_default <- function(default) {
+  if (default == "c10::nullopt")
+    return("NULL")
+
+  if (default == "FALSE")
+    return("FALSE")
+
+
+  browser()
+}
+
+r_namespace_argument <- function(name, decls) {
+  no_default <- get_arguments_with_no_default(decls)
+  if (name %in% no_default)
+    r_namespace_argument_with_no_default(name)
+  else
+    r_namespace_argument_with_default(name, decls)
+}
+
+r_namespace_argument_with_default <- function(name, decls) {
+
+  default <- purrr::map(decls, ~.x$arguments) %>%
+    purrr::flatten() %>%
+    purrr::keep(~.x$name == name) %>%
+    purrr::map(~.x$default) %>%
+    purrr::discard(is.null) %>%
+    purrr::flatten_chr() %>%
+    unique()
+
+  if (length(default) > 1) {
+    browser()
+  }
+
+  default <- r_argument_default(default)
+  glue::glue("{name} = {default}")
+}
+
+r_namespace_argument_with_no_default <- function(name) {
+  name
+}
+
+do_call <- function(fun, args) {
+
+  args <- lapply(args, function(x) {
+    if (inherits(x, "R6"))
+      x$ptr
+    else
+      x
+  })
+
+  do.call(fun, args)
+}
+
+torch_mean <- function(self, dim, keepdim, dtype) {
+
+  args <- c(self = missing(self), dim = missing(dim))
+  args <- names(args[!args])
+
+  all_args <- list(dtype = dtype, keepdim = keepdim)
+  for(nm in args) all_args[[nm]] <- environment()[[nm]]
+
+  expected_types <- list(dim = c('IntArrayRef','DimnameList'),
+                         dtype = c('ScalarType'),
+                         keepdim = c('bool'),
+                         self = c('Tensor'))
+
+  all_args <- all_arguments_to_torch_type(all_args, expected_types)
+
+  argument_types <- all_args[[2]][args]
+  all_args <- all_args[[1]]
+  fun <- getNamespace("torch")[[make_cpp_function_name("mean", argument_types)]]
+  res <- do_call(fun, all_args)
+
+  Tensor$new(ptr = res)
+}
+
 
 #
 # declarations() %>%
