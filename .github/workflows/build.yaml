@@ -56,7 +56,7 @@ jobs:
       run: |
         mkdir test
         cp ${{matrix.build}}/lanterntest${{matrix.exeext}} test/
-        mkdir make_directory install
+        mkdir install
         cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
         cp build/libtorch/lib/*${{matrix.libext}} install
         rm -rf build
