@@ -22,9 +22,7 @@ jobs:
             fixlib:
           - os: ubuntu-latest
             library: liblantern.so
-            test: |
-              sudo apt-get install -y libgomp1
-              ./test/lanterntest $PWD/install/liblantern.so
+            test: ./test/lanterntest $PWD/install/liblantern.so
             make: make
             build: build
             libext: .so
