@@ -51,7 +51,7 @@ jobs:
       working-directory: ${{runner.workspace}}
       run: |
         mkdir install
-        cp ${{matrix.build}}/lanterntest${{matrix.exeext}} test/
+        cp ${{matrix.build}}/lanterntest${{matrix.exeext}} install/
         cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
         cp build/libtorch/lib/*${{matrix.libext}} install
         rm -r build
