@@ -18,18 +18,21 @@ jobs:
               & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release
             build: build/Release
             libext: dll
+            exeext: exe
           - os: ubuntu-latest
             library: liblantern.so
             test: ./lanterntest ../install/liblantern.so
             make: make
             build: build
             libext: so
+            exeext:
           - os: macOS-latest
             library: liblantern.dylib
             test: ./lanterntest ../install/liblantern.dylib
             make: make
             build: build
             libext: dylib
+            exeext:
     steps:
     - uses: actions/checkout@v2
     - name: Create environment
@@ -41,13 +44,14 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.make}}
     - name: Install libs
+      working-directory: ${{runner.workspace}}
       run: |
-        cmake -E make_directory ${{runner.workspace}}/test
-        cmake -E copy ${{runner.workspace}}/${{matrix.build}}/lanterntest* test/
+        cmake -E make_directory test
+        cmake -E copy ${{matrix.build}}/lanterntest${{matrix.exeext}} test/
         cmake -E make_directory ${{runner.workspace}}/install
-        cmake -E copy ${{runner.workspace}}/${{matrix.build}}/${{matrix.library}} ${{runner.workspace}}/install/${{matrix.library}}
-        cmake -E copy libtorch/lib/*.${{matrix.libext}} ${{runner.workspace}}/install
-        cmake -E remove_directory ${{runner.workspace}}/${{matrix.build}}
+        cmake -E copy ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
+        cmake -E copy libtorch/lib/*.${{matrix.libext}} install
+        cmake -E remove_directory ${{matrix.build}}
         cmake -E remove_directory libtorch
     - name: Test library
       working-directory: ${{runner.workspace}}/test
