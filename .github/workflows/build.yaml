@@ -17,15 +17,15 @@ jobs:
             make: |
               & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release
             build: build/Release
-            libext: dll
-            exeext: exe
+            libext: .dll
+            exeext: .exe
             fixlib:
           - os: ubuntu-latest
             library: liblantern.so
             test: echo "./test/lanterntest"
             make: make
             build: build
-            libext: so
+            libext: .so
             exeext:
             fixlib: |
               sudo apt-get install -y patchelf
@@ -35,7 +35,7 @@ jobs:
             test: ./test/lanterntest
             make: make
             build: build
-            libext: dylib
+            libext: .dylib
             exeext:
             fixlib: install_name_tool -add_rpath @loader_path/. liblantern.dylib
     steps:
@@ -58,7 +58,7 @@ jobs:
         cp ${{matrix.build}}/lanterntest${{matrix.exeext}} test/
         mkdir make_directory install
         cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
-        cp build/libtorch/lib/*.${{matrix.libext}} install
+        cp build/libtorch/lib/*${{matrix.libext}} install
         rm -rf build
         ls -l ${{runner.workspace}}/test
         ls -l ${{runner.workspace}}/install
