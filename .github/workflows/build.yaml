@@ -13,7 +13,7 @@ jobs:
           - os: windows-latest
             library: lantern.dll
             test: |
-              & './lanterntest.exe' '../install/lantern.dll'
+              & './test/lanterntest.exe' 'install/lantern.dll'
             make: |
               & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release
             build: build/Release
@@ -21,14 +21,14 @@ jobs:
             exeext: exe
           - os: ubuntu-latest
             library: liblantern.so
-            test: ./lanterntest ../install/liblantern.so
+            test: ./test/lanterntest install/liblantern.so
             make: make
             build: build
             libext: so
             exeext:
           - os: macOS-latest
             library: liblantern.dylib
-            test: ./lanterntest ../install/liblantern.dylib
+            test: ./test/lanterntest install/liblantern.dylib
             make: make
             build: build
             libext: dylib
@@ -53,7 +53,7 @@ jobs:
         cp build/libtorch/lib/*.${{matrix.libext}} install
         rm -rf build
     - name: Test library
-      working-directory: ${{runner.workspace}}/test
+      working-directory: ${{runner.workspace}}
       run: ${{matrix.test}}
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
