@@ -19,6 +19,7 @@ jobs:
             build: build/Release
             libext: dll
             exeext: exe
+            fixlib:
           - os: ubuntu-latest
             library: liblantern.so
             test: ./test/lanterntest install/liblantern.so
@@ -26,6 +27,7 @@ jobs:
             build: build
             libext: so
             exeext:
+            fixlib: chrpath -r '$ORIGIN/.' liblantern.so 
           - os: macOS-latest
             library: liblantern.dylib
             test: ./test/lanterntest install/liblantern.dylib
@@ -33,6 +35,7 @@ jobs:
             build: build
             libext: dylib
             exeext:
+            fixlib: install_name_tool -add_rpath @loader_path/. liblantern.dylib
     steps:
     - uses: actions/checkout@v2
     - name: Create environment
@@ -43,6 +46,9 @@ jobs:
     - name: Run make
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.make}}
+    - name: Fix library
+      working-directory: ${{runner.workspace}}/build
+      run: ${{matrix.fixlib}}
     - name: Install libs
       working-directory: ${{runner.workspace}}
       run: |
@@ -52,8 +58,8 @@ jobs:
         cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
         cp build/libtorch/lib/*.${{matrix.libext}} install
         rm -rf build
-        ls ${{runner.workspace}}/test
-        ls ${{runner.workspace}}/install
+        ls -l ${{runner.workspace}}/test
+        ls -l ${{runner.workspace}}/install
     - name: Test library
       working-directory: ${{runner.workspace}}
       run: ${{matrix.test}}
