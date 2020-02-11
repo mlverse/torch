@@ -46,13 +46,13 @@ jobs:
     - name: Install libs
       working-directory: ${{runner.workspace}}
       run: |
-        cmake -E make_directory test
-        cmake -E copy ${{matrix.build}}/lanterntest${{matrix.exeext}} test/
-        cmake -E make_directory ${{runner.workspace}}/install
-        cmake -E copy ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
-        cmake -E copy libtorch/lib/*.${{matrix.libext}} install
-        cmake -E remove_directory ${{matrix.build}}
-        cmake -E remove_directory libtorch
+        mkdir test
+        cp ${{matrix.build}}/lanterntest${{matrix.exeext}} test/
+        mkdir make_directory install
+        cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
+        cp libtorch/lib/*.${{matrix.libext}} install
+        rm -rf ${{matrix.build}}
+        rm -rf libtorch
     - name: Test library
       working-directory: ${{runner.workspace}}/test
       run: ${{matrix.test}}
