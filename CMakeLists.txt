@@ -59,7 +59,7 @@ target_include_directories(lantern PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
 
-target_link_libraries(lantern ${TORCH_LIBRARIES} ${CMAKE_DL_LIBS})
+target_link_libraries(lantern ${TORCH_LIBRARIES})
 set_property(TARGET lantern PROPERTY CXX_STANDARD 14)
 
 ############################################################
@@ -73,3 +73,5 @@ add_executable(lanterntest
 target_include_directories(lanterntest PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
+
+target_link_libraries(lantern ${CMAKE_DL_LIBS})
