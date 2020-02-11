@@ -64,7 +64,7 @@ jobs:
         ls -l ${{runner.workspace}}/install
     - name: Test library
       working-directory: ${{runner.workspace}}
-      run: ${{matrix.test}} ${{runner.workspace}}/install/liblantern.${{matrix.libext}}
+      run: ${{matrix.test}} ${{runner.workspace}}/install/${{matrix.library}}
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:

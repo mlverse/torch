@@ -70,7 +70,6 @@ add_executable(lanterntest
     tests/main.cpp
 )
 
-target_link_libraries(lanterntest
-    PRIVATE 
-        lantern::library
+target_include_directories(lanterntest PUBLIC
+    ${PROJECT_SOURCE_DIR}/include
 )
