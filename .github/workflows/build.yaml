@@ -52,6 +52,8 @@ jobs:
         cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
         cp build/libtorch/lib/*.${{matrix.libext}} install
         rm -rf build
+        ls ${{runner.workspace}}/test
+        ls ${{runner.workspace}}/install
     - name: Test library
       working-directory: ${{runner.workspace}}
       run: ${{matrix.test}}
