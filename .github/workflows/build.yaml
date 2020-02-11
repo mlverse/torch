@@ -13,7 +13,8 @@ jobs:
           - os: windows-latest
             library: lantern.dll
             test: |
-              & './test/lanterntest.exe' install/lantern.dll
+              $currentpath = (Get-Location).Path
+              & './test/lanterntest.exe' $currentpath/install/lantern.dll
             make: |
               & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release
             build: build/Release
