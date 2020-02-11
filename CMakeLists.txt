@@ -39,7 +39,6 @@ else()
     endif()
 endif()
 
-set(ENV{TORCH_INSTALL_PREFIX} "")
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "libtorch/share/cmake/Torch")
 
 find_package(Torch REQUIRED)
