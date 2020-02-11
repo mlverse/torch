@@ -20,6 +20,7 @@ function(retrieve_lib filename)
     download_file("https://download.pytorch.org/libtorch/cpu/${filename}" "./${filename}")
 
     if(NOT EXISTS "libtorch")
+        message("-- Extracting ${filename}")
         execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf ${filename}
                         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
     endif()
