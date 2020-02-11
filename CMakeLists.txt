@@ -74,4 +74,4 @@ target_include_directories(lanterntest PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
 
-target_link_libraries(lantern ${CMAKE_DL_LIBS})
+target_link_libraries(lanterntest ${CMAKE_DL_LIBS})

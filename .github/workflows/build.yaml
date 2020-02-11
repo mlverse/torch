@@ -22,7 +22,7 @@ jobs:
             fixlib:
           - os: ubuntu-latest
             library: liblantern.so
-            test: echo "./test/lanterntest"
+            test: ./test/lanterntest
             make: make
             build: build
             libext: so
