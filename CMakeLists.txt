@@ -36,14 +36,12 @@ else()
     if(WIN32)
         retrieve_lib("libtorch-win-shared-with-deps-1.3.0.zip")
     else()
-        retrieve_lib("libtorch-cxx11-abi-shared-with-deps-1.3.0%2Bcpu.zip")
+        retrieve_lib("libtorch-shared-with-deps-1.3.0%2Bcpu.zip")
     endif()
 endif()
 
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_CURRENT_BINARY_DIR}/libtorch/share/cmake/Torch")
 
-
-set(USE_OPENMP OFF)
 
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")

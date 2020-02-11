@@ -80,7 +80,7 @@ bool lanternLoadLibrary(const std::string& libPath, std::string* pError)
 #ifdef _WIN32
   pLibrary = (void*)::LoadLibraryEx(libPath.c_str(), NULL, LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
 #else
-  pLibrary = ::dlopen(libPath.c_str(), RTLD_LAZY|RTLD_GLOBAL);
+  pLibrary = ::dlopen(libPath.c_str(), RTLD_NOW|RTLD_GLOBAL);
 #endif
   if (pLibrary == NULL)
   {
