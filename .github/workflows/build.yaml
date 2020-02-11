@@ -27,7 +27,9 @@ jobs:
             build: build
             libext: so
             exeext:
-            fixlib: patchelf --set-rpath '$ORIGIN/.' liblantern.so
+            fixlib: |
+              sudo apt-get install -y patchelf
+              patchelf --set-rpath '$ORIGIN/.' liblantern.so
           - os: macOS-latest
             library: liblantern.dylib
             test: ./test/lanterntest
