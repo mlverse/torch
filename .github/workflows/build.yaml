@@ -50,9 +50,8 @@ jobs:
         cp ${{matrix.build}}/lanterntest${{matrix.exeext}} test/
         mkdir make_directory install
         cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
-        cp libtorch/lib/*.${{matrix.libext}} install
-        rm -rf ${{matrix.build}}
-        rm -rf libtorch
+        cp build/libtorch/lib/*.${{matrix.libext}} install
+        rm -rf build
     - name: Test library
       working-directory: ${{runner.workspace}}/test
       run: ${{matrix.test}}
