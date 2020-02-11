@@ -13,7 +13,7 @@ jobs:
           - os: windows-latest
             library: lantern.dll
             test: |
-              & './test/lanterntest.exe'
+              & './test/lanterntest.exe' install/lantern.dll
             make: |
               & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release
             build: build/Release
@@ -24,7 +24,7 @@ jobs:
             library: liblantern.so
             test: |
               sudo apt-get install -y libgomp1
-              ./test/lanterntest
+              ./test/lanterntest $PWD/install/liblantern.so
             make: make
             build: build
             libext: .so
@@ -32,7 +32,7 @@ jobs:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so 
           - os: macOS-latest
             library: liblantern.dylib
-            test: ./test/lanterntest
+            test: ./test/lanterntest $PWD/install/liblantern.dylib
             make: make
             build: build
             libext: .dylib
@@ -62,7 +62,7 @@ jobs:
         rm -r build
     - name: Test library
       working-directory: ${{runner.workspace}}
-      run: ${{matrix.test}} ${{runner.workspace}}/install/${{matrix.library}}
+      run: ${{matrix.test}}
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
