@@ -6645,6 +6645,14 @@ cpp_torch_per_tensor_symmetric <- function() {
     .Call('_torch_cpp_torch_per_tensor_symmetric', PACKAGE = 'torch')
 }
 
+cpp_torch_reduction_mean <- function() {
+    .Call('_torch_cpp_torch_reduction_mean', PACKAGE = 'torch')
+}
+
+cpp_torch_reduction_none <- function() {
+    .Call('_torch_cpp_torch_reduction_none', PACKAGE = 'torch')
+}
+
 cpp_torch_reduction_sum <- function() {
     .Call('_torch_cpp_torch_reduction_sum', PACKAGE = 'torch')
 }

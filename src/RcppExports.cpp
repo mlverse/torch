@@ -10989,13 +10989,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_mean_self_Tensor
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_mean_self_Tensor(Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<c10::optional<torch::Dtype>> dtype);
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_mean_self_Tensor(Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Dtype> dtype);
 RcppExport SEXP _torch_cpp_torch_namespace_mean_self_Tensor(SEXP selfSEXP, SEXP dtypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<c10::optional<torch::Dtype>> >::type dtype(dtypeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Dtype> >::type dtype(dtypeSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_mean_self_Tensor(self, dtype));
     return rcpp_result_gen;
 END_RCPP
@@ -22181,6 +22181,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_reduction_mean
+std::int64_t cpp_torch_reduction_mean();
+RcppExport SEXP _torch_cpp_torch_reduction_mean() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_reduction_mean());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_reduction_none
+std::int64_t cpp_torch_reduction_none();
+RcppExport SEXP _torch_cpp_torch_reduction_none() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_reduction_none());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_reduction_sum
 std::int64_t cpp_torch_reduction_sum();
 RcppExport SEXP _torch_cpp_torch_reduction_sum() {
@@ -23957,6 +23977,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_per_tensor_affine", (DL_FUNC) &_torch_cpp_torch_per_tensor_affine, 0},
     {"_torch_cpp_torch_per_channel_symmetric", (DL_FUNC) &_torch_cpp_torch_per_channel_symmetric, 0},
     {"_torch_cpp_torch_per_tensor_symmetric", (DL_FUNC) &_torch_cpp_torch_per_tensor_symmetric, 0},
+    {"_torch_cpp_torch_reduction_mean", (DL_FUNC) &_torch_cpp_torch_reduction_mean, 0},
+    {"_torch_cpp_torch_reduction_none", (DL_FUNC) &_torch_cpp_torch_reduction_none, 0},
     {"_torch_cpp_torch_reduction_sum", (DL_FUNC) &_torch_cpp_torch_reduction_sum, 0},
     {"_torch_cpp_torch_scalar", (DL_FUNC) &_torch_cpp_torch_scalar, 1},
     {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},
