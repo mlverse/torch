@@ -54,12 +54,19 @@ jobs:
         cp ${{matrix.build}}/lanterntest${{matrix.exeext}} install/
         cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
         cp build/libtorch/lib/*${{matrix.libext}} install
+        mkdir artifacts
+        cp install/* artifacts
+        cp ${{matrix.build}}/*.pdb install/* artifacts
         rm -r build
     - name: Test library
       working-directory: ${{runner.workspace}}/install
       run: ${{matrix.test}} ${{runner.workspace}}/install/${{matrix.library}}
+    - name: Zip artifacts
+      uses: montudor/action-zip@v0.1.0
+      with:
+        args: zip -qq -r ${{runner.workspace}}/artifacts.zip .${{runner.workspace}}/artifacts
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
         name: ${{runner.os}}
-        path: ${{runner.workspace}}/install/${{matrix.library}}
+        path: ${{runner.workspace}}/artifacts.zip
