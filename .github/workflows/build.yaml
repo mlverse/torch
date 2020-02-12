@@ -18,6 +18,8 @@ jobs:
             libext: .dll
             exeext: .exe
             fixlib:
+            flavor: Debug
+            artifacts: "*"
           - os: ubuntu-latest
             library: liblantern.so
             test: echo "./lanterntest "
@@ -26,6 +28,8 @@ jobs:
             libext: .so
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so 
+            flavor: Debug
+            artifacts: "*"
           - os: macOS-latest
             library: liblantern.dylib
             test: ./lanterntest
@@ -34,13 +38,15 @@ jobs:
             libext: .dylib
             exeext:
             fixlib: install_name_tool -add_rpath @loader_path/. liblantern.dylib
+            flavor: Debug
+            artifacts: "*"
     steps:
     - uses: actions/checkout@v2
     - name: Create environment
       run: cmake -E make_directory ${{runner.workspace}}/build
     - name: Run cmake
       working-directory: ${{runner.workspace}}/build
-      run: cmake -DCMAKE_BUILD_TYPE=Debug ${{github.workspace}}
+      run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{github.workspace}}
     - name: Run make
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.make}}
@@ -55,7 +61,7 @@ jobs:
         cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
         cp build/libtorch/lib/*${{matrix.libext}} install
         mkdir artifacts
-        cp -R ${{matrix.build}}/* artifacts
+        cp -R ${{matrix.build}}/${{matrix.artifacts}} artifacts
         rm -r artifacts/libtorch*
         rm -r build
     - name: Test library
