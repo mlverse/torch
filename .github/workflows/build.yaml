@@ -13,12 +13,12 @@ jobs:
           - os: windows-latest
             library: lantern.dll
             test: "& './lanterntest.exe' "
-            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Debug"
-            build: build/Debug
+            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
+            build: build/Release
             libext: .dll
             exeext: .exe
             fixlib:
-            flavor: Debug
+            flavor: Release
             artifacts: "*"
           - os: ubuntu-latest
             library: liblantern.so
@@ -28,7 +28,7 @@ jobs:
             libext: .so
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so 
-            flavor: Debug
+            flavor: Release
             artifacts: "*"
           - os: macOS-latest
             library: liblantern.dylib
@@ -38,7 +38,7 @@ jobs:
             libext: .dylib
             exeext:
             fixlib: install_name_tool -add_rpath @loader_path/. liblantern.dylib
-            flavor: Debug
+            flavor: Release
             artifacts: "*"
     steps:
     - uses: actions/checkout@v2
