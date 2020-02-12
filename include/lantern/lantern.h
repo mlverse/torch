@@ -99,6 +99,10 @@ void lanternLoadError(std::string* pError)
 bool lanternLoadLibrary(const std::string& libPath, std::string* pError)
 {
   pLibrary = NULL;
+
+  std::string separator = (libPath.back() != '/' && libPath.back() != '\\') ? "" : pathSeparator();
+  std::string libFile = libPath + separator + libraryName();
+
 #ifdef _WIN32
   
   typedef DLL_DIRECTORY_COOKIE(WINAPI * PAddDllDirectory)(PCWSTR);
@@ -122,21 +126,15 @@ bool lanternLoadLibrary(const std::string& libPath, std::string* pError)
       return false;
     }
   }
-  
-  std::string separator = "";
-  if (libPath.back() != '/' && libPath.back() != '\\') {
-    separator = pathSeparator();
-  }
-  
-  std::string libFile = libPath + separator + libraryName();
+
   pLibrary = (void*)::LoadLibraryEx(libFile.c_str(), NULL, LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
 #else
-  pLibrary = ::dlopen(libPath.c_str(), RTLD_NOW|RTLD_GLOBAL);
+  pLibrary = ::dlopen(libFile.c_str(), RTLD_NOW|RTLD_GLOBAL);
 #endif
   if (pLibrary == NULL)
   {
     lanternLoadError(pError);
-    *pError = libPath + " - " + *pError;
+    *pError = libFile + " - " + *pError;
     return false;
   }
   else

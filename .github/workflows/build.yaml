@@ -66,7 +66,7 @@ jobs:
         rm -r build
     - name: Test library
       working-directory: ${{runner.workspace}}/install
-      run: ${{matrix.test}} ${{runner.workspace}}/install/${{matrix.library}}
+      run: ${{matrix.test}} ${{runner.workspace}}/install
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
