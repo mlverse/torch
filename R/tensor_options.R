@@ -27,3 +27,7 @@ torch_tensor_options <- function(dtype = NULL, layout = NULL, device = NULL,
 is_torch_tensor_options <- function(x) {
   inherits(x, "torch_tensor_options")
 }
+
+as_torch_tensor_options <- function(l) {
+ do.call(torch_tensor_options, l) 
+}
