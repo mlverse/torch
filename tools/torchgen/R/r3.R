@@ -235,7 +235,7 @@ args <- Filter(Negate(is.name), args)
 {r_arguments_with_no_default(decls)}
 {r_return_types(decls)}
 args_t <- all_arguments_to_torch_type(args, expected_types)
-nd_args_types <- args_t[[2]][names(args_t[[2]]) %in% nd_args]
+nd_args_types <- args_t[[2]][base::names(args_t[[2]]) %in% nd_args]
 fun_name <- make_cpp_function_name('{decls[[1]]$name}', nd_args_types, 'namespace')
 out <- do_call(getNamespace('torch')[[fun_name]], args_t[[1]])
 to_return_type(out, return_types)
