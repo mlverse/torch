@@ -61,12 +61,8 @@ jobs:
     - name: Test library
       working-directory: ${{runner.workspace}}/install
       run: ${{matrix.test}} ${{runner.workspace}}/install/${{matrix.library}}
-    - name: Zip artifacts
-      uses: montudor/action-zip@v0.1.0
-      with:
-        args: zip -qq -r ${{runner.workspace}}/artifacts.zip .${{runner.workspace}}/artifacts
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
         name: ${{runner.os}}
-        path: ${{runner.workspace}}/artifacts.zip
+        path: ${{runner.workspace}}/artifacts
