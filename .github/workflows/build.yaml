@@ -19,7 +19,7 @@ jobs:
             exeext: .exe
             fixlib:
             flavor: Release
-            artifacts: "*"
+            artifacts: lantern.dll
           - os: ubuntu-latest
             library: liblantern.so
             test: echo "./lanterntest "
@@ -29,7 +29,7 @@ jobs:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so 
             flavor: Release
-            artifacts: "*"
+            artifacts: liblantern.so
           - os: macOS-latest
             library: liblantern.dylib
             test: ./lanterntest
@@ -39,7 +39,7 @@ jobs:
             exeext:
             fixlib: install_name_tool -add_rpath @loader_path/. liblantern.dylib
             flavor: Release
-            artifacts: "*"
+            artifacts: liblantern.dylib
     steps:
     - uses: actions/checkout@v2
     - name: Create environment
