@@ -25,12 +25,12 @@
 extern "C" {
 #endif
   
-inline char pathSeparator()
+inline const char* pathSeparator()
 {
 #ifdef _WIN32
-    return '\\';
+    return "\\";
 #else
-    return '/';
+    return "/";
 #endif
 }
   
