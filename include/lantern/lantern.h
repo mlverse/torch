@@ -42,7 +42,7 @@ inline const char* libraryName()
 #ifdef _WIN32
   return "liblantern.dylib";
 #else
-  return 'liblantern.so';
+  return "liblantern.so";
 #endif
 #endif
 }
