@@ -98,5 +98,5 @@ make_cpp_function_name <- function(method_name, arg_types, type) {
   if (length(suffix) == 0)
     suffix <- ""
 
-  clean_names(glue::glue("cpp_torch_{type}_{method_name}_{suffix}"))
+  clean_names(sprintf("cpp_torch_%s_%s_%s", type, method_name, suffix))
 }

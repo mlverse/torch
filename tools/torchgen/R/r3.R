@@ -71,21 +71,25 @@ make_expected_types_list <- function(methods) {
 
 r_namespace <- function(decls) {
 
-  decls %>% glue::glue_data("
+  glue::glue("
 
-{r_namespace_name(.)} <- function({r_namespace_signature(.)}) {{
-  {r_namespace_body(.)}
+{r_namespace_name(decls)} <- function({r_namespace_signature(decls)}) {{
+  {r_namespace_body(decls)}
 }}
 
 ")
 }
 
 r_namespace_name <- function(decls) {
-  decls[[1]]$name
+  glue::glue("torch_{decls[[1]]$name}")
 }
 
 r_namespace_signature <- function(decls) {
   args <- get_arguments_order(decls)
+
+  if (length(args) == 0)
+    return("")
+
   args %>%
     purrr::map_chr(~r_namespace_argument(.x, decls)) %>%
     glue::glue_collapse(sep = ", ")
@@ -98,8 +102,41 @@ r_argument_default <- function(default) {
   if (default == "FALSE")
     return("FALSE")
 
+  if (default == "TRUE")
+    return("TRUE")
+
+  if (default %in% c("1", "0", "-1", "2", "0.000010", "0.000000",
+                     "1.000000", "-2", "0.500000", "100", "0.010000",
+                     "10.000000", "-100", "0.000001", "0.125000",
+                     "0.333333", "9223372036854775807", "20"))
+    return(default)
+
+  if (default == "{}")
+    return("list()")
+
+  if (default == "MemoryFormat::Contiguous")
+    return("torch_contiguous_format()")
+
+  if (default == "nullptr")
+    return("NULL")
+
+  if (default == "at::Reduction::Mean")
+    return("torch_reduction_mean()")
+
+  if (default == "{0,1}")
+    return("c(0,1)")
+
+  if (default == "at::kLong")
+    return("torch_long()")
 
   browser()
+}
+
+r_argument_name <- function(name) {
+  if (name == "FALSE")
+    name <- "False"
+
+  name
 }
 
 r_namespace_argument <- function(name, decls) {
@@ -124,18 +161,25 @@ r_namespace_argument_with_default <- function(name, decls) {
     browser()
   }
 
+  name <- r_argument_name(name)
   default <- r_argument_default(default)
   glue::glue("{name} = {default}")
 }
 
 r_namespace_argument_with_no_default <- function(name) {
-  name
+  r_argument_name(name)
 }
 
 r_list_of_arguments <- function(decls) {
   args <- get_arguments_order(decls)
+
+  if (length(args) == 0)
+    return("args <- list()")
+
+  args <- purrr::map_chr(args, r_argument_name)
+
   args <- glue::glue('"{args}"') %>% glue::glue_collapse(sep = ", ")
-  glue::glue("args <- env_get_list(nms = c({args}))")
+  glue::glue("args <- rlang::env_get_list(nms = c({args}))")
 }
 
 r_argument_expected_types <- function(arg, decls) {
@@ -148,7 +192,8 @@ r_argument_expected_types <- function(arg, decls) {
 }
 
 r_arguments_expected_types <- function(decls) {
-  args <- purrr::set_names(get_arguments_order(decls))
+  args <- get_arguments_order(decls)
+  names(args) <- purrr::map_chr(args, r_argument_name)
   l <- capture.output(
     purrr::map(args, r_argument_expected_types, decls = decls) %>%
       dput()
@@ -158,8 +203,26 @@ r_arguments_expected_types <- function(decls) {
 
 r_arguments_with_no_default <- function(decls) {
   args <- get_arguments_with_no_default(decls)
+  args <- purrr::map_chr(args, r_argument_name)
   args <- glue::glue_collapse(capture.output(dput(args)), sep = "\n")
   glue::glue("nd_args <- {args}")
+}
+
+r_return_types <- function(decls) {
+  types <- decls %>%
+    purrr::map_chr(function(decl) {
+
+      if (length(decl$returns) == 0)
+        "void"
+      else if (length(decl$returns) == 1)
+        decl$returns[[1]]$dynamic_type
+      else
+        "TensorList"
+
+    }) %>%
+    unique()
+  types <- glue::glue("'{types}'")
+  glue::glue("return_types <- c({glue::glue_collapse(types, ', ')})")
 }
 
 r_namespace_body <- function(decls) {
@@ -167,86 +230,29 @@ r_namespace_body <- function(decls) {
   glue::glue("
 
 {r_list_of_arguments(decls)}
+args <- Filter(Negate(is.name), args)
 {r_arguments_expected_types(decls)}
 {r_arguments_with_no_default(decls)}
+{r_return_types(decls)}
 args_t <- all_arguments_to_torch_type(args, expected_types)
 nd_args_types <- args_t[[2]][names(args_t[[2]]) %in% nd_args]
-
+fun_name <- make_cpp_function_name('{decls[[1]]$name}', nd_args_types, 'namespace')
+out <- do_call(getNamespace('torch')[[fun_name]], args_t[[1]])
+to_return_type(out, return_types)
 ")
 
 }
 
-do_call <- function(fun, args) {
+r <- function() {
 
-  args <- lapply(args, function(x) {
-    if (inherits(x, "R6"))
-      x$ptr
-    else
-      x
-  })
+  namespace <- declarations() %>%
+    purrr::keep(~"namespace" %in% .x$method_of)
 
-  do.call(fun, args)
+  namespace_nms <- purrr::map_chr(namespace, ~.x$name)
+
+  split(namespace, namespace_nms) %>%
+    purrr::map_chr(function(x) {print(x[[1]]$name); r_namespace(x)}) %>%
+    writeLines("../../R/gen-namespace.R")
+
+
 }
-
-torch_mean <- function(self, dim, keepdim = TRUE, dtype) {
-
-  args <- rlang::env_get_list(nms = c("self", "dim", "keepdim", "dtype"))
-
-
-
-  # args <- c(self = missing(self), dim = missing(dim))
-  # args <- names(args[!args])
-  #
-  # all_args <- list(dtype = dtype, keepdim = keepdim)
-  # for(nm in args) all_args[[nm]] <- environment()[[nm]]
-  #
-  # expected_types <- list(dim = c('IntArrayRef','DimnameList'),
-  #                        dtype = c('ScalarType'),
-  #                        keepdim = c('bool'),
-  #                        self = c('Tensor'))
-  #
-  # all_args <- all_arguments_to_torch_type(all_args, expected_types)
-  #
-  # argument_types <- all_args[[2]][args]
-  # all_args <- all_args[[1]]
-  # fun <- getNamespace("torch")[[make_cpp_function_name("mean", argument_types)]]
-  # res <- do_call(fun, all_args)
-  #
-  # Tensor$new(ptr = res)
-}
-
-
-#
-# declarations() %>%
-#    keep(~.x$name == "mean") %>%
-#    get_arguments_with_no_default()
-#
-# declarations() %>%
-#    keep(~.x$name == "mean") %>%
-#    get_arguments_order()
-#
-# declarations() %>%
-#   keep(~.x$name == "mean") %>%
-#   make_all_arguments_list()
-#
-# declarations() %>%
-#   keep(~.x$name == "mean") %>%
-#   make_expected_types_list()
-#
-# declarations() %>%
-#   keep(~.x$name == "mean") %>%
-#   make_argument_list()
-
-
-
-
-
-
-
-
-
-
-
-
-
-

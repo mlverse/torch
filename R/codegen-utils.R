@@ -23,7 +23,7 @@ argument_to_torch_type <- function(obj, expected_types) {
     return(list(obj$ptr, "TensorOptions"))
   
   if ("MemoryFormat" %in% expected_types && is_torch_memory_format(obj))
-    return(list(obj$ptr, "MemortFormat"))
+    return(list(obj$ptr, "MemoryFormat"))
   
   if ("ScalarType" %in% expected_types && is_torch_dtype(obj))
     return(list(obj$ptr, "ScalarType"))
@@ -58,10 +58,12 @@ argument_to_torch_type <- function(obj, expected_types) {
   if (any(c("std::array<bool,4>", "std::array<bool,3>", "std::array<bool,2>") %in% expected_types) && is.logical(obj))
     return(list(obj, paste0("std::array<bool,", length(obj), ">")))
   
+  if ("TensorOptions" %in% expected_types && is.list(obj))
+    return(list(as_torch_tensor_options(obj)$ptr, "TensorOptions"))
+  
   browser()
   stop("Can't convert argument", call.=FALSE)
 }
-
 
 all_arguments_to_torch_type <- function(all_arguments, expected_types) {
   
@@ -80,11 +82,16 @@ clean_names <- function(x) {
   x <- gsub("\"", "", x)
   x <- gsub("%", ".percent_", x)
   x <- gsub("#", ".number_", x)
+  x <- gsub(":", "", x)
+  x <- gsub("<", "", x)
+  x <- gsub(">", "", x)
+  x <- gsub(",", "", x)
+  x <- gsub(" *", "", x, fixed = TRUE)
   x <- gsub("^[[:space:][:punct:]]+", "", x)
   x
 }
 
-make_cpp_function_name <- function(method_name, arg_types) {
+make_cpp_function_name <- function(method_name, arg_types, type) {
   
   suffix <- paste(names(arg_types), arg_types, sep = "_")
   suffix <- paste(suffix, collapse = "_")
@@ -92,6 +99,23 @@ make_cpp_function_name <- function(method_name, arg_types) {
   if (length(suffix) == 0)
     suffix <- ""
   
-  clean_names(glue::glue("cpp_torch_{method_name}_{suffix}"))
+  clean_names(sprintf("cpp_torch_%s_%s_%s", type, method_name, suffix))
 }
 
+do_call <- function(fun, args) {
+  args_needed <- names(formals(fun))
+  args <- args[args_needed]
+  do.call(fun, args)
+}
+
+to_return_type <- function(res, types) {
+  
+  if (length(types) == 1) {
+    
+    if (types == "Tensor")
+      res <- Tensor$new(ptr = res)
+    
+  }
+  
+  return(res)
+}
