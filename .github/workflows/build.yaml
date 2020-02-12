@@ -25,7 +25,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
-            libext: .so
+            libext: "*"
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so 
             flavor: Release
