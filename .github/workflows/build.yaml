@@ -40,7 +40,7 @@ jobs:
       run: cmake -E make_directory ${{runner.workspace}}/build
     - name: Run cmake
       working-directory: ${{runner.workspace}}/build
-      run: cmake ${{github.workspace}}
+      run: cmake -DCMAKE_BUILD_TYPE=Debug ${{github.workspace}}
     - name: Run make
       working-directory: ${{runner.workspace}}/build
       run: ${{matrix.make}}
