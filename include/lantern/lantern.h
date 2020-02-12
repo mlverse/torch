@@ -100,7 +100,8 @@ bool lanternLoadLibrary(const std::string& libPath, std::string* pError)
 {
   pLibrary = NULL;
 
-  std::string separator = (libPath.back() == '/' || libPath.back() == '\\') ? "" : pathSeparator();
+  char lastLibChar = libPath.at(libPath.size() - 1);
+  std::string separator = (lastLibChar == '/' || lastLibChar == '\\') ? "" : pathSeparator();
   std::string libFile = libPath + separator + libraryName();
 
 #ifdef _WIN32
