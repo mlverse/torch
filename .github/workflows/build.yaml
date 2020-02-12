@@ -55,8 +55,7 @@ jobs:
         cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
         cp build/libtorch/lib/*${{matrix.libext}} install
         mkdir artifacts
-        cp install/* artifacts
-        cp ${{matrix.build}}/* artifacts
+        cp ${{matrix.build}}/* artifacts 2>/dev/null
         rm -r build
     - name: Test library
       working-directory: ${{runner.workspace}}/install
