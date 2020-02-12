@@ -8,9 +8,9 @@ jobs:
     timeout-minutes: 3
     strategy:
       matrix:
-        os: [windows-2019, ubuntu-18.04, macos-10.15]
+        os: [windows-2019, ubuntu-16.04, macos-10.15]
         include:
-          - os: windows-latest
+          - os: windows-2019
             library: lantern.dll
             test: "& './lanterntest.exe' "
             make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
@@ -20,17 +20,17 @@ jobs:
             fixlib:
             flavor: Release
             artifacts: lantern.dll
-          - os: ubuntu-latest
+          - os: ubuntu-16.04
             library: liblantern.so
             test: ./lanterntest
             make: make
             build: build
-            libext: "*"
+            libext:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so 
             flavor: Release
             artifacts: liblantern.so
-          - os: macOS-latest
+          - os: macos-10.15
             library: liblantern.dylib
             test: ./lanterntest
             make: make
