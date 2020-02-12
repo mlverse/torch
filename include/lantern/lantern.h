@@ -37,10 +37,10 @@ inline const char* pathSeparator()
 inline const char* libraryName()
 {
 #ifdef __APPLE__
-  return "lantern.dylib";
+  return "liblantern.dylib";
 #else
 #ifdef _WIN32
-  return "liblantern.dll";
+  return "lantern.dll";
 #else
   return "liblantern.so";
 #endif
