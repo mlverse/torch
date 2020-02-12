@@ -22,7 +22,7 @@ jobs:
             artifacts: lantern.dll
           - os: ubuntu-latest
             library: liblantern.so
-            test: echo "./lanterntest "
+            test: ./lanterntest
             make: make
             build: build
             libext: .so
