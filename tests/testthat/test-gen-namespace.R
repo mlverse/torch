@@ -157,6 +157,24 @@ test_that("_cholesky_solve_helper", {
   expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
 })
 
+test_that("zero_", {
+  x <- torch_ones(2)
+  y <- torch_zero_(x)
+  expect_tensor(y)
+  expect_equal_to_tensor(x, torch_tensor(c(0,0)))
+})
+
+test_that("where", {
+  skip("TODO: rework the returned result wraper")
+  torch_where(torch_tensor(TRUE), torch_tensor(1), torch_tensor(0))
+})
+
+test_that("zeros", {
+  expect_tensor(torch_zeros(c(2)))
+  expect_equal_to_tensor(torch_zeros(2), torch_tensor(c(0,0)))
+  torch_zeros(2, names = "hello")
+})
+
 test_that("zeros_like", {
   x <- torch_ones(c(2))
   expect_tensor(y <- torch_zeros_like(x))

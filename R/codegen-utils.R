@@ -141,4 +141,5 @@ to_return_type <- function(res, types) {
     
   } 
   
+  browser()
 }
