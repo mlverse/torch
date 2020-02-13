@@ -557,7 +557,7 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_method_resize__self_Tensor_size_IntArrayRef (Rcpp::XPtr<torch::Tensor> self, std::vector<int64_t> size, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_method_resize__self_Tensor_size_IntArrayRef (Rcpp::XPtr<torch::Tensor> self, std::vector<int64_t> size, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = self->resize_(size, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -1613,13 +1613,13 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_method_clone_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_method_clone_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = self->clone(* memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_method_resize_as__self_Tensor_the_template_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> the_template, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_method_resize_as__self_Tensor_the_template_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> the_template, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = self->resize_as_(* the_template, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -1847,25 +1847,25 @@ return make_xptr<torch::QScheme>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_method_to_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, bool non_blocking, bool copy, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_method_to_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, bool non_blocking, bool copy, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = self->to(* options, non_blocking, copy, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Device> device, Rcpp::XPtr<torch::Dtype> dtype, bool non_blocking, bool copy, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Device> device, Rcpp::XPtr<torch::Dtype> dtype, bool non_blocking, bool copy, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = self->to(* device, * dtype, non_blocking, copy, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_method_to_self_Tensor_dtype_ScalarType (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Dtype> dtype, bool non_blocking, bool copy, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_method_to_self_Tensor_dtype_ScalarType (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Dtype> dtype, bool non_blocking, bool copy, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = self->to(* dtype, non_blocking, copy, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_method_to_self_Tensor_other_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> other, bool non_blocking, bool copy, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_method_to_self_Tensor_other_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> other, bool non_blocking, bool copy, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = self->to(* other, non_blocking, copy, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -4115,43 +4115,43 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList (std::vector<int64_t> size, Rcpp::XPtr<std::vector<torch::Dimname>> names, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList (std::vector<int64_t> size, Rcpp::XPtr<std::vector<torch::Dimname>> names, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::empty(size, * names, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_size_IntArrayRef (std::vector<int64_t> size, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_size_IntArrayRef (std::vector<int64_t> size, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::empty(size, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace__empty_affine_quantized_size_IntArrayRef (std::vector<int64_t> size, Rcpp::XPtr<torch::TensorOptions> options, double scale, int64_t zero_point, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace__empty_affine_quantized_size_IntArrayRef (std::vector<int64_t> size, Rcpp::XPtr<torch::TensorOptions> options, double scale, int64_t zero_point, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::_empty_affine_quantized(size, * options, scale, zero_point, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace__empty_per_channel_affine_quantized_size_IntArrayRef_scales_Tensor_zero_points_Tensor_axis_int64_t (std::vector<int64_t> size, Rcpp::XPtr<torch::Tensor> scales, Rcpp::XPtr<torch::Tensor> zero_points, int64_t axis, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace__empty_per_channel_affine_quantized_size_IntArrayRef_scales_Tensor_zero_points_Tensor_axis_int64_t (std::vector<int64_t> size, Rcpp::XPtr<torch::Tensor> scales, Rcpp::XPtr<torch::Tensor> zero_points, int64_t axis, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::_empty_per_channel_affine_quantized(size, * scales, * zero_points, axis, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_out_out_Tensor_size_IntArrayRef (Rcpp::XPtr<torch::Tensor> out, std::vector<int64_t> size, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_out_out_Tensor_size_IntArrayRef (Rcpp::XPtr<torch::Tensor> out, std::vector<int64_t> size, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::empty_out(* out, size, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::empty_like(* self, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_empty_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::empty_like(* self, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -4349,13 +4349,13 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_full_like_self_Tensor_fill_value_Scalar (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Scalar> fill_value, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_full_like_self_Tensor_fill_value_Scalar (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Scalar> fill_value, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::full_like(* self, * fill_value, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_full_like_self_Tensor_fill_value_Scalar_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Scalar> fill_value, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_full_like_self_Tensor_fill_value_Scalar_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Scalar> fill_value, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::full_like(* self, * fill_value, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -5397,13 +5397,13 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_ones_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_ones_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::ones_like(* self, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_ones_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_ones_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::ones_like(* self, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -5511,13 +5511,13 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_rand_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_rand_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::rand_like(* self, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_rand_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_rand_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::rand_like(* self, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -5571,25 +5571,25 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randint_like_self_Tensor_high_int64_t (Rcpp::XPtr<torch::Tensor> self, int64_t high, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randint_like_self_Tensor_high_int64_t (Rcpp::XPtr<torch::Tensor> self, int64_t high, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::randint_like(* self, high, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randint_like_self_Tensor_low_int64_t_high_int64_t (Rcpp::XPtr<torch::Tensor> self, int64_t low, int64_t high, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randint_like_self_Tensor_low_int64_t_high_int64_t (Rcpp::XPtr<torch::Tensor> self, int64_t low, int64_t high, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::randint_like(* self, low, high, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randint_like_self_Tensor_high_int64_t_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, int64_t high, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randint_like_self_Tensor_high_int64_t_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, int64_t high, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::randint_like(* self, high, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randint_like_self_Tensor_low_int64_t_high_int64_t_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, int64_t low, int64_t high, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randint_like_self_Tensor_low_int64_t_high_int64_t_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, int64_t low, int64_t high, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::randint_like(* self, low, high, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -5631,13 +5631,13 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randn_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randn_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::randn_like(* self, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randn_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_randn_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::randn_like(* self, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -6519,13 +6519,13 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_zeros_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_zeros_like_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::zeros_like(* self, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_zeros_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_zeros_like_self_Tensor_options_TensorOptions (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::TensorOptions> options, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::zeros_like(* self, * options, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
@@ -6699,13 +6699,13 @@ return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_clone_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_clone_self_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::clone(* self, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_resize_as__self_Tensor_the_template_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> the_template, Rcpp::XPtr<torch::MemoryFormat> memory_format) {
+Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_resize_as__self_Tensor_the_template_Tensor (Rcpp::XPtr<torch::Tensor> self, Rcpp::XPtr<torch::Tensor> the_template, Rcpp::XPtr<c10::optional<torch::MemoryFormat>> memory_format) {
   auto r_out = torch::resize_as_(* self, * the_template, * memory_format);
 return make_xptr<torch::Tensor>(r_out);
 }

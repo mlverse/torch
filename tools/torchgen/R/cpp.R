@@ -148,7 +148,11 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
-    declaration <- "Rcpp::XPtr<torch::MemoryFormat>"
+
+    if (argument$type == "c10::optional<MemoryFormat>")
+      declaration <- "Rcpp::XPtr<c10::optional<torch::MemoryFormat>>"
+    else
+      declaration <- "Rcpp::XPtr<torch::MemoryFormat>"
   }
 
   if (argument$dynamic_type == "std::string") {
