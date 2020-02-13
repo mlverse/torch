@@ -157,11 +157,72 @@ test_that("_cholesky_solve_helper", {
   expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
 })
 
-test_that("zero_", {
-  x <- torch_ones(2)
-  y <- torch_zero_(x)
+test_that("upsample_nearest3d", {
+  x <- torch_rand(c(2,2,2,2,2))
+  expect_tensor(torch_upsample_nearest3d(x, output_size = c(2,2,2)))
+})
+
+test_that("upsample_nearest3d_backward", {
+  x <- torch_rand(c(2,2,2,2,2))
+  expect_tensor(torch_upsample_nearest3d_backward_out(x, x, c(2,2,2), c(2,2,2,2,2)))
+})
+
+test_that("upsample_nearest3d_backward_out", {
+  x <- torch_rand(c(2,2,2,2,2))
+  y <- torch_zeros(1)
+  expect_tensor(torch_upsample_nearest3d_backward_out(y, x, c(2,2,2), c(2,2,2,2,2)))
+})
+
+test_that("upsample_nearest3d_out", {
+  x <- torch_rand(c(2,2,2,2,2))
+  y <- torch_rand(c(2,2))
+  expect_tensor(torch_upsample_nearest3d_out(y, x, c(2,2,2)))
   expect_tensor(y)
-  expect_equal_to_tensor(x, torch_tensor(c(0,0)))
+})
+
+test_that("upsample_trilinear3d", {
+  x <- torch_rand(c(2,2,2,2,2))
+  expect_tensor(torch_upsample_trilinear3d(x, output_size = c(2,2,2), align_corners = TRUE))
+})
+
+test_that("upsample_trilinear3d_backward", {
+  x <- torch_rand(c(2,2,2,2,2))
+  expect_tensor(torch_upsample_trilinear3d_backward(x, c(2,2,2), c(2,2,2,2,2), align_corners = TRUE))
+})
+
+test_that("upsample_trilinear3d_backward_out", {
+  x <- torch_rand(c(2,2,2,2,2))
+  y <- torch_zeros(1)
+  expect_tensor(torch_upsample_trilinear3d_backward_out(y, x, c(2,2,2), c(2,2,2,2,2), align_corners = TRUE))
+})
+
+test_that("torch_upsample_trilinear3d_out", {
+  x <- torch_rand(c(2,2,2,2,2))
+  y <- torch_rand(c(2,2))
+  expect_tensor(torch_upsample_trilinear3d_out(y, x, c(2,2,2), align_corners = TRUE))
+  expect_tensor(y)
+})
+
+test_that("var", {
+  x <- torch_rand(100, names = "a")
+  expect_tensor(torch_var(x))
+  expect_tensor(torch_var(x, dim = 0))
+  expect_tensor(torch_var(x, dim = "a"))
+})
+
+test_that("var_mean", {
+  x <- torch_rand(100, names = "a")
+  lapply(torch_var_mean(x), expect_tensor)
+  lapply(torch_var_mean(x, dim = 0), expect_tensor)
+  lapply(torch_var_mean(x, dim = "a"), expect_tensor)
+})
+
+test_that("var_out", {
+  skip("TODO: see https://github.com/pytorch/pytorch/issues/33303")
+  x <- torch_rand(100, names = "a")
+  y <- torch_zeros(1)
+  expect_tensor(torch_var_out(y, x, dim = 0))
+  expect_tensor(torch_var_out(y, x, dim = "a"))
 })
 
 test_that("where", {
@@ -176,6 +237,13 @@ test_that("where", {
   expect_tensor(
     torch_where(torch_tensor(c(TRUE, FALSE)), torch_ones(2), torch_zeros(2))
   )
+})
+
+test_that("zero_", {
+  x <- torch_ones(2)
+  y <- torch_zero_(x)
+  expect_tensor(y)
+  expect_equal_to_tensor(x, torch_tensor(c(0,0)))
 })
 
 test_that("zeros", {
