@@ -165,8 +165,17 @@ test_that("zero_", {
 })
 
 test_that("where", {
-  skip("TODO: rework the returned result wraper")
-  torch_where(torch_tensor(TRUE), torch_tensor(1), torch_tensor(0))
+  expect_equal_to_tensor(
+    torch_where(torch_tensor(TRUE), torch_tensor(1), torch_tensor(0)),
+    torch_tensor(1)
+  )
+  expect_equal_to_tensor(
+    torch_where(torch_tensor(FALSE), torch_tensor(1), torch_tensor(0)),
+    torch_tensor(0)
+  )
+  expect_tensor(
+    torch_where(torch_tensor(c(TRUE, FALSE)), torch_ones(2), torch_zeros(2))
+  )
 })
 
 test_that("zeros", {
