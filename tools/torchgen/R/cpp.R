@@ -285,9 +285,9 @@ cpp_argument_transform <- function(argument) {
   result
 }
 
-xptr_return_call <- function(type) {
+xptr_return_call <- function(type, dyn_type) {
   function(call) {
-    glue::glue("make_xptr<{type}>({call})")
+    glue::glue("make_xptr<{type}>({call}, \"{dyn_type}\")")
   }
 }
 
@@ -298,7 +298,7 @@ cpp_return_statement <- function(returns) {
     returns <- returns[[1]]
 
     if (returns$dynamic_type == "Tensor")
-      return(xptr_return_call("torch::Tensor"))
+      return(xptr_return_call("torch::Tensor", "Tensor"))
 
     if (returns$dynamic_type == "bool")
       return(identity)
@@ -307,19 +307,19 @@ cpp_return_statement <- function(returns) {
       return(identity)
 
     if (returns$dynamic_type == "TensorList")
-      return(xptr_return_call("torch::TensorList"))
+      return(xptr_return_call("torch::TensorList", "TensorList"))
 
     if (returns$dynamic_type == "double")
       return(identity)
 
     if (returns$dynamic_type == "QScheme")
-      return(xptr_return_call("torch::QScheme"))
+      return(xptr_return_call("torch::QScheme", "QScheme"))
 
     if (returns$dynamic_type == "Scalar")
-      return(xptr_return_call("torch::Scalar"))
+      return(xptr_return_call("torch::Scalar", "Scalar"))
 
     if (returns$dynamic_type == "ScalarType")
-      return(xptr_return_call("torch::Dtype"))
+      return(xptr_return_call("torch::Dtype", "ScalarType"))
 
   } else {
 

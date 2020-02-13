@@ -116,25 +116,32 @@ do_call <- function(fun, args) {
 
 to_return_type <- function(res, types) {
   
+  if (inherits(res, "externalptr") && !is.null(attr(res, "dynamic_type"))) {
+    
+    dtype <- attr(res, "dynamic_type")
+    
+    if (dtype == "Tensor")
+      return(Tensor$new(ptr = res))
+    
+    if (dtype == "TensorList")
+      return(TensorList$new(ptr = res))
+    
+    browser()
+  }
+  
   if (length(types) == 1) {
     
     type <- types[[1]]
     
     if (length(type) == 1) {
       
-      if (type == "Tensor")
-        return(Tensor$new(ptr = res))
-      
-      if (type == "TensorList")
-        return(lapply(res, function(x) Tensor$new(ptr=x)))
-      
-      if (!inherits(res, "externalptr"))
-        return(res)
+      return(res)
       
     } else {
       
       out <- seq_along(res) %>% 
         lapply(function(x) to_return_type(res[[x]], type[x]))
+      
       return(out)
       
     }
