@@ -1,3 +1,5 @@
+torch_zeros(1, names="hello") # trigger warning about named tensors
+
 expect_equal_to_tensor <- function(object, expected) {
   expect_equal(as_array(object), as_array(expected))
 }
