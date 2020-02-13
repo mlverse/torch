@@ -213,16 +213,15 @@ r_return_types <- function(decls) {
     purrr::map_chr(function(decl) {
 
       if (length(decl$returns) == 0)
-        "void"
+        'list("void")'
       else if (length(decl$returns) == 1)
-        decl$returns[[1]]$dynamic_type
+        glue::glue("list('{decl$returns[[1]]$dynamic_type}')")
       else
-        "TensorList"
+        glue::glue_collapse(capture.output(purrr::map(decl$returns, ~.x$dynamic_type) %>% dput()))
 
     }) %>%
     unique()
-  types <- glue::glue("'{types}'")
-  glue::glue("return_types <- c({glue::glue_collapse(types, ', ')})")
+  glue::glue("return_types <- list({glue::glue_collapse(types, ', ')})")
 }
 
 r_namespace_body <- function(decls) {

@@ -61,6 +61,12 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("TensorOptions" %in% expected_types && is.list(obj))
     return(list(as_torch_tensor_options(obj)$ptr, "TensorOptions"))
   
+  if ("TensorList" %in% expected_types && is.list(obj)) 
+    return(list(torch_tensor_list(obj)$ptr, "TensorList"))
+  
+  if ("MemoryFormat" %in% expected_types && is.null(obj))
+    return(list(cpp_nullopt(), "MemoryFormat"))
+  
   browser()
   stop("Can't convert argument", call.=FALSE)
 }
@@ -112,10 +118,27 @@ to_return_type <- function(res, types) {
   
   if (length(types) == 1) {
     
-    if (types == "Tensor")
-      res <- Tensor$new(ptr = res)
+    type <- types[[1]]
     
-  }
+    if (length(type) == 1) {
+      
+      if (type == "Tensor")
+        return(Tensor$new(ptr = res))
+      
+      if (type == "TensorList")
+        return(lapply(res, function(x) Tensor$new(ptr=x)))
+      
+      if (!inherits(res, "externalptr"))
+        return(res)
+      
+    } else {
+      
+      out <- seq_along(res) %>% 
+        lapply(function(x) to_return_type(res[[x]], type[x]))
+      return(out)
+      
+    }
+    
+  } 
   
-  return(res)
 }
