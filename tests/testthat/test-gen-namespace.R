@@ -71,15 +71,101 @@ test_that("_baddbmm_mkl_", {
 })
 
 test_that("_batch_norm_impl_index", {
-  v <- torch_rand(c(2,2))
-  w <- torch_rand(c(2))
-  x <- torch_rand(c(2))
-  y <- torch_rand(c(2))
-  z <- torch_rand(c(2))
-  out <- torch__batch_norm_impl_index(v,w,x,y,z,TRUE,1,1,TRUE)
-  #TODO List returns are not correctly converted
+  a <- torch_rand(c(2,2))
+  b <- torch_rand(c(2))
+  out <- torch__batch_norm_impl_index(a,b,b,b,b,TRUE,1,1,TRUE)
+  expect_tensor(out[[1]])
+  expect_tensor(out[[2]])
+  expect_tensor(out[[3]])
+  expect_tensor(out[[4]])
+  expect_equal(out[[5]], 0L)
 })
 
+test_that("_batch_norm_impl_index_backward", {
+  skip("TODO: seems to be GPU only")
+  a <- torch_rand(c(2,2))
+  b <- torch_rand(c(2))
+  torch__batch_norm_impl_index_backward(1L,a,b,b,b,b,b,b,TRUE,0.1,c(TRUE,TRUE,TRUE), b)
+})
 
+test_that("_cast_Byte", {
+  x <- torch_rand(1)
+  expect_tensor(torch__cast_Byte(x))
+})
 
+test_that("_cast_Char", {
+  skip("TODO: Cast to characters doesn't seem to work correctly.")
+  x <- torch_tensor(1234567)
+  expect_tensor(torch__cast_Char(x))
+})
 
+test_that("_cast_Double", {
+  x <- torch_tensor(1L, dtype = torch_int())
+  expect_tensor(torch__cast_Double(x))
+})
+
+test_that("_cast_Float", {
+  x <- torch_tensor(1L, dtype = torch_int())
+  expect_tensor(torch__cast_Float(x))
+})
+
+test_that("_cast_Half", {
+  skip("TODO: implement convertions for Half types.")
+  x <- torch_tensor(1L, dtype = torch_int())
+  expect_tensor(torch__cast_Half(x))
+})
+
+test_that("_cast_Int", {
+  x <- torch_tensor(1)
+  expect_tensor(torch__cast_Int(x))
+})
+
+test_that("_cast_Long", {
+  x <- torch_tensor(1)
+  expect_tensor(torch__cast_Long(x))
+})
+
+test_that("_cast_Short", {
+  x <- torch_tensor(1)
+  expect_tensor(torch__cast_Short(x))
+})
+
+test_that("_cat", {
+  x <- torch_tensor(1)
+  expect_tensor(torch__cat(list(x, x)))
+})
+
+test_that("_cat_out", {
+  x <- torch_tensor(1)
+  y <- torch_zeros(2)
+  expect_tensor(torch__cat_out(y, list(x, x)))
+  expect_equal_to_tensor(y, torch_tensor(c(1,1)))
+})
+
+test_that("_cdist_backward", {
+  x <- torch_rand(c(2,2))
+  expect_tensor(torch__cdist_backward(x, x, x, 1, x))
+})
+
+test_that("_cholesky_helper", {
+  x <- torch_tensor(matrix(c(1,0,0,1), ncol = 2))
+  expect_tensor(torch__cholesky_helper(x, TRUE))
+})
+
+test_that("_cholesky_solve_helper", {
+  x <- torch_tensor(matrix(c(1,0,0,1), ncol = 2))
+  expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
+})
+
+test_that("zeros_like", {
+  skip("TODO: c10::optional to MemoryFormat calls")
+  x <- torch_ones(c(2))
+  expect_tensor(y <- torch_zeros_like(x))
+  expect_equal_to_tensor(y, torch_tensor(c(0,0)))
+})
+
+test_that("zeros_out", {
+  x <- torch_ones(c(2))
+  expect_tensor(torch_zeros_out(x, c(2)))
+  expect_equal_to_tensor(x, torch_tensor(c(0,0)))
+})
