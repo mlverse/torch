@@ -48,6 +48,10 @@ inline const char* libraryName()
 }
   
 LANTERN_API void (LANTERN_PTR lanternTest)();
+
+/* Autogen Headers -- Start */
+
+/* Autogen Headers -- End */
   
 #ifdef __cplusplus
 }
@@ -187,6 +191,10 @@ bool lanternInit(const std::string& libPath, std::string* pError)
     return false;
   
   LOAD_SYMBOL(lanternTest);
+
+  /* Autogen Symbols -- Start */
+
+  /* Autogen Symbols -- End */
   
   return true;
 }

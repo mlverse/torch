@@ -16,3 +16,7 @@ void lanternTest()
 
     std::cout << "-- Success!" << std::endl;
 }
+
+/* Autogen Body -- Start */
+
+/* Autogen Body -- End */
