@@ -20,4 +20,10 @@ add_executable(lanterngen
     src/main.cpp
 )
 
-target_link_libraries(lanterngen ${CMAKE_DL_LIBS})
+set_property(TARGET lanterngen PROPERTY CXX_STANDARD 14)
+
+target_include_directories(lanterngen PUBLIC
+    ${PROJECT_BINARY_DIR}/yamlcpp-prefix/src/yamlcpp/include
+)
+
+target_link_libraries(lanterngen ${PROJECT_BINARY_DIR}/yamlcpp-prefix/src/yamlcpp-build/libyaml-cpp.a)
