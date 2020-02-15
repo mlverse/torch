@@ -10,7 +10,7 @@ include(ExternalProject)
 ExternalProject_Add(yamlcpp
     URL https://codeload.github.com/jbeder/yaml-cpp/zip/yaml-cpp-0.6.3
     BUILD_COMMAND make
-    STEP_TARGETS build
+    INSTALL_COMMAND cmake -E echo "Skipping install."
 )
 ExternalProject_Get_Property(yamlcpp install_dir)
 set(yaml_install_dir ${install_dir})
