@@ -86,11 +86,13 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       run: make
     - name: Prepare autogen
+      working-directory: ${{runner.workspace}}
       run: |
         mkdir output
         cp ${{github.workspace}}/src/lantern.cpp output/lantern.cpp
         cp ${{github.workspace}}/include/lantern/lantern.h output/lantern.h
         pwd
+        ls -l output
     - name: Run autogen
       working-directory: ${{runner.workspace}}/build
       run: ./lanterngen ${{github.workspace}}/headers/declarations/declarations.yaml ${{runner.workspace}}/output/lantern.cpp ${{runner.workspace}}/output/lantern.h
