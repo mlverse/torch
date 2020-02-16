@@ -88,8 +88,8 @@ jobs:
     - name: Prepare autogen
       run: |
         mkdir output
-        cp ${{github.workspace}}/src/lantern.cpp autogen/lantern.cpp
-        cp ${{github.workspace}}/include/lantern/lantern.h autogen/lantern.h
+        cp ${{github.workspace}}/src/lantern.cpp output/lantern.cpp
+        cp ${{github.workspace}}/include/lantern/lantern.h output/lantern.h
     - name: Run autogen
       working-directory: ${{runner.workspace}}/install
       run: ./lanterngen ${{github.workspace}}/headers/declarations/declarations.yaml ${{runner.workspace}}/output/lantern.cpp ${{runner.workspace}}/output/lantern.h
@@ -97,4 +97,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: Autogen
-        path: ${{runner.workspace}}/autogen
+        path: ${{runner.workspace}}/output
