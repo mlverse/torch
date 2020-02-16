@@ -88,7 +88,7 @@ jobs:
     - name: Prepare autogen
       run: |
         mkdir output
-        cp ${{github.workspace}}/src/lanteren.cpp autogen/lantern.cpp
+        cp ${{github.workspace}}/src/lantern.cpp autogen/lantern.cpp
         cp ${{github.workspace}}/include/lantern/lantern.h autogen/lantern.h
     - name: Run autogen
       working-directory: ${{runner.workspace}}/install
