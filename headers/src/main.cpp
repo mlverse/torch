@@ -5,11 +5,14 @@
 
 #include "yaml-cpp/yaml.h"
 
-void replaceFile(std::string path, std::string start, std::string end, std::string replacement)
+void replaceFile(std::string path,
+                 std::string start,
+                 std::string end,
+                 std::vector<std::string> replacement)
 {
+    // read input file
     std::string line;
     std::ifstream input(path);
-
     std::vector<std::string> content;
     while (std::getline(input, line))
     {
@@ -17,8 +20,22 @@ void replaceFile(std::string path, std::string start, std::string end, std::stri
     }
     input.close();
 
-    std::ofstream output(path);
+    // make replacements
+    auto iterStart = std::find(content.begin(), content.end(), start);
+    if (iterStart != content.end())
+    {
+        auto iterEnd = std::find(iterStart, content.end(), end);
+        if (iterStart != content.end())
+        {
+            std::cout << "Replacing " << path << std::endl;
 
+            content.erase(iterStart + 1, iterEnd);
+            content.insert(iterStart + 1, replacement.begin(), replacement.end());
+        }
+    }
+
+    // write output file
+    std::ofstream output(path);
     for (auto iter = content.begin(); iter != content.end(); iter++)
     {
         output << *iter << std::endl;
@@ -39,8 +56,11 @@ int main(int argc, char *argv[])
 
     YAML::Node config = YAML::LoadFile(pathDeclarations);
 
-    replaceFile(pathSource, "/* Autogen Body -- Start */", "/* Autogen Body -- End */", "\n/* content */\n");
-    replaceFile(pathHeader, "/* Autogen Headers -- Start */", "/* Autogen Headers -- End */", "\n/* content */\n");
+    std::vector<std::string> replacement;
+    replacement.push_back("/* autogen content */ ");
+
+    replaceFile(pathSource, "/* Autogen Body -- Start */", "/* Autogen Body -- End */", replacement);
+    replaceFile(pathHeader, "/* Autogen Headers -- Start */", "/* Autogen Headers -- End */", replacement);
 
     return 0;
 }
