@@ -21,6 +21,24 @@ std::string toFunction(std::string str)
     return "lantern_" + toLower(str);
 }
 
+std::string buildArguments(std::string name, YAML::Node node)
+{
+    std::string arguments = "";
+
+    for (size_t idx = 0; idx < node.size(); idx++)
+    {
+        if (idx > 0)
+        {
+            arguments += ", ";
+        }
+
+        arguments += "void* " + node[idx]["name"].as<std::string>();
+        arguments += ", const char* " + node[idx]["name"].as<std::string>() + "Type";
+    }
+
+    return arguments;
+}
+
 void replaceFile(std::string path,
                  std::string start,
                  std::string end,
@@ -77,20 +95,24 @@ int main(int argc, char *argv[])
     // generate function headers
     std::vector<std::string> headers;
     headers.push_back("/*");
-    for (size_t idx = 0; idx < config.size(); idx ++)
+    for (size_t idx = 0; idx < config.size(); idx++)
     {
         std::string name = config[idx]["name"].as<std::string>();
-        headers.push_back("LANTERN_API void (LANTERN_PTR " + toFunction(name) + ")();");
+        std::string arguments = buildArguments(name, config[idx]["arguments"]);
+
+        headers.push_back("LANTERN_API void (LANTERN_PTR " + toFunction(name) + ")(" + arguments + ");");
     }
     headers.push_back("*/");
 
     // generate function bodies
     std::vector<std::string> bodies;
     bodies.push_back("/*");
-    for (size_t idx = 0; idx < config.size(); idx ++)
+    for (size_t idx = 0; idx < config.size(); idx++)
     {
         std::string name = config[idx]["name"].as<std::string>();
-        bodies.push_back("void " + toFunction(name) + "() {}");
+        std::string arguments = buildArguments(name, config[idx]["arguments"]);
+
+        bodies.push_back("void " + toFunction(name) + "(" + arguments + ") {}");
     }
     bodies.push_back("*/");
 
