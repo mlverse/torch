@@ -6,6 +6,21 @@
 
 #include "yaml-cpp/yaml.h"
 
+std::string toLower(std::string str)
+{
+    std::transform(str.begin(),
+                   str.end(),
+                   str.begin(),
+                   [](unsigned char c){ return std::tolower(c); });
+
+    return str;
+}
+
+std::string toFunction(std::string str)
+{
+    return "lantern_" + toLower(str);
+}
+
 void replaceFile(std::string path,
                  std::string start,
                  std::string end,
@@ -65,7 +80,7 @@ int main(int argc, char *argv[])
     for (size_t idx = 0; idx < config.size(); idx ++)
     {
         std::string name = config[idx]["name"].as<std::string>();
-        headers.push_back(std::string("LANTERN_API void (LANTERN_PTR ") + name + ")();");
+        headers.push_back("LANTERN_API void (LANTERN_PTR " + toFunction(name) + ")();");
     }
     headers.push_back("*/");
 
@@ -75,7 +90,7 @@ int main(int argc, char *argv[])
     for (size_t idx = 0; idx < config.size(); idx ++)
     {
         std::string name = config[idx]["name"].as<std::string>();
-        bodies.push_back(std::string("void ") + name + "() {}");
+        bodies.push_back("void " + toFunction(name) + "() {}");
     }
     bodies.push_back("*/");
 
@@ -85,7 +100,7 @@ int main(int argc, char *argv[])
     for (size_t idx = 0; idx < config.size(); idx ++)
     {
         std::string name = config[idx]["name"].as<std::string>();
-        symbols.push_back(std::string("  LOAD_SYMBOL(") + name + ")");
+        symbols.push_back("  LOAD_SYMBOL(" + toFunction(name) + ")");
     }
     symbols.push_back("  */");
 
