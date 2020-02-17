@@ -5,6 +5,11 @@
 
 int main(int argc, char *argv[])
 {
+    if (argc <= 1) {
+        std::cout << "Usage: lanterntest <path-to-lib>";
+        return 1;
+    }
+
     std::string error;
     if (!lanternInit(argv[1], &error)) {
         std::cout << "Error: " << error;
