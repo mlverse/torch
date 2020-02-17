@@ -16,9 +16,26 @@ std::string toLower(std::string str)
     return str;
 }
 
-std::string toFunction(std::string str)
+std::string toCharOnly(std::string str)
 {
-    return "lantern_" + toLower(str);
+    auto iterEnd = std::remove_if(str.begin(),
+                                  str.end(),
+                                  [](unsigned char c){ return !std::isalpha(c); });
+
+    return std::string(str.begin(), iterEnd);
+}
+
+std::string toFunction(std::string str, YAML::Node node)
+{
+    std::string name = "lantern_" + toLower(str);
+
+    for (size_t idx = 0; idx < node.size(); idx++)
+    {
+        name += "_" + toLower(toCharOnly(node[idx]["dynamic_type"].as<std::string>()))
+        ;
+    }
+
+    return name;
 }
 
 std::string buildArguments(std::string name, YAML::Node node)
@@ -33,7 +50,6 @@ std::string buildArguments(std::string name, YAML::Node node)
         }
 
         arguments += "void* " + node[idx]["name"].as<std::string>();
-        arguments += ", const char* " + node[idx]["name"].as<std::string>() + "Type";
     }
 
     return arguments;
@@ -92,39 +108,27 @@ int main(int argc, char *argv[])
 
     std::cout << "Loaded " << pathDeclarations << " with " << config.size() << " nodes" << std::endl;
 
-    // generate function headers
+    // generate function headers and bodies
     std::vector<std::string> headers;
-    headers.push_back("/*");
-    for (size_t idx = 0; idx < config.size(); idx++)
-    {
-        std::string name = config[idx]["name"].as<std::string>();
-        std::string arguments = buildArguments(name, config[idx]["arguments"]);
-
-        headers.push_back("LANTERN_API void (LANTERN_PTR " + toFunction(name) + ")(" + arguments + ");");
-    }
-    headers.push_back("*/");
-
-    // generate function bodies
     std::vector<std::string> bodies;
-    bodies.push_back("/*");
     for (size_t idx = 0; idx < config.size(); idx++)
     {
         std::string name = config[idx]["name"].as<std::string>();
         std::string arguments = buildArguments(name, config[idx]["arguments"]);
+        std::string function = toFunction(name, config[idx]["arguments"]);
 
-        bodies.push_back("void " + toFunction(name) + "(" + arguments + ") {}");
+        headers.push_back("LANTERN_API void (LANTERN_PTR " + function + ")(" + arguments + ");");
+    
+        bodies.push_back("void " + function + "(" + arguments + ") {}");
     }
-    bodies.push_back("*/");
 
     // generate symbol loaders
     std::vector<std::string> symbols;
-    symbols.push_back("  /*");
     for (size_t idx = 0; idx < config.size(); idx ++)
     {
         std::string name = config[idx]["name"].as<std::string>();
-        symbols.push_back("  LOAD_SYMBOL(" + toFunction(name) + ")");
+        symbols.push_back("  LOAD_SYMBOL(" + toFunction(name, config[idx]["arguments"]) + ")");
     }
-    symbols.push_back("  */");
 
     replaceFile(pathSource, "/* Autogen Body -- Start */", "/* Autogen Body -- End */", bodies);
     replaceFile(pathHeader, "/* Autogen Headers -- Start */", "/* Autogen Headers -- End */", headers);
