@@ -56,11 +56,41 @@ int main(int argc, char *argv[])
 
     YAML::Node config = YAML::LoadFile(pathDeclarations);
 
-    std::vector<std::string> replacement;
-    replacement.push_back("/* autogen content */ ");
+    std::cout << "Loaded " << pathDeclarations << " with " << config.size() << " nodes" << std::endl;
 
-    replaceFile(pathSource, "/* Autogen Body -- Start */", "/* Autogen Body -- End */", replacement);
-    replaceFile(pathHeader, "/* Autogen Headers -- Start */", "/* Autogen Headers -- End */", replacement);
+    // generate function headers
+    std::vector<std::string> headers;
+    headers.push_back("/*");
+    for (size_t idx = 0; idx < config.size(); idx ++)
+    {
+        std::string name = config[idx]["name"].as<std::string>();
+        headers.push_back(std::string("LANTERN_API void (LANTERN_PTR ") + name + ")();");
+    }
+    headers.push_back("*/");
+
+    // generate function bodies
+    std::vector<std::string> bodies;
+    bodies.push_back("/*");
+    for (size_t idx = 0; idx < config.size(); idx ++)
+    {
+        std::string name = config[idx]["name"].as<std::string>();
+        bodies.push_back(std::string("void ") + name + "() {}");
+    }
+    bodies.push_back("*/");
+
+    // generate symbol loaders
+    std::vector<std::string> symbols;
+    symbols.push_back("  /*");
+    for (size_t idx = 0; idx < config.size(); idx ++)
+    {
+        std::string name = config[idx]["name"].as<std::string>();
+        symbols.push_back(std::string("  LOAD_SYMBOL(") + name + ")");
+    }
+    symbols.push_back("  */");
+
+    replaceFile(pathSource, "/* Autogen Body -- Start */", "/* Autogen Body -- End */", bodies);
+    replaceFile(pathHeader, "/* Autogen Headers -- Start */", "/* Autogen Headers -- End */", headers);
+    replaceFile(pathHeader, "  /* Autogen Symbols -- Start */", "  /* Autogen Symbols -- End */", symbols);
 
     return 0;
 }
