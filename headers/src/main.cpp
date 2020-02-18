@@ -55,6 +55,24 @@ std::string buildArguments(std::string name, YAML::Node node)
     return arguments;
 }
 
+std::string buildCalls(std::string name, YAML::Node node)
+{
+    std::string arguments = "";
+
+    for (size_t idx = 0; idx < node.size(); idx++)
+    {
+        if (idx > 0)
+        {
+            arguments += ", ";
+        }
+
+        arguments += "((LanternObject<" + node[idx]["type"].as<std::string>() + ">*)" +
+            node[idx]["name"].as<std::string>() + ")->get()";
+    }
+
+    return arguments;
+}
+
 void replaceFile(std::string path,
                  std::string start,
                  std::string end,
@@ -93,6 +111,17 @@ void replaceFile(std::string path,
     output.close();
 }
 
+bool isSupported(YAML::Node node)
+{
+    if (node["method_of"])
+    {
+        std::cout << "Skipping " << node["name"].as<std::string>() << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
 int main(int argc, char *argv[])
 {
     if (argc < 4) {
@@ -113,19 +142,40 @@ int main(int argc, char *argv[])
     std::vector<std::string> bodies;
     for (size_t idx = 0; idx < config.size(); idx++)
     {
+        if (!isSupported(config[idx])) continue;
+
         std::string name = config[idx]["name"].as<std::string>();
         std::string arguments = buildArguments(name, config[idx]["arguments"]);
         std::string function = toFunction(name, config[idx]["arguments"]);
+        std::string calls = buildCalls(name, config[idx]["arguments"]);
+        std::string returns = config[idx]["returns"][0]["dynamic_type"].as<std::string>();
 
-        headers.push_back("LANTERN_API void (LANTERN_PTR " + function + ")(" + arguments + ");");
+        headers.push_back("LANTERN_API void* (LANTERN_PTR " + function + ")(" + arguments + ");");
     
-        bodies.push_back("void " + function + "(" + arguments + ") {}");
+        bodies.push_back("void* " + function + "(" + arguments + ")");
+        bodies.push_back("{");
+        bodies.push_back("    using namespace torch;");
+        bodies.push_back("    using namespace at::native;");
+        if (returns == "void")
+        {
+            bodies.push_back("    " + name + "(" + calls + ");");
+            bodies.push_back("    return NULL;");
+        }
+        else
+        {
+            bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + name + "(");
+            bodies.push_back("        " + calls + "));");
+        }
+        bodies.push_back("}");
+        bodies.push_back("");
     }
 
     // generate symbol loaders
     std::vector<std::string> symbols;
     for (size_t idx = 0; idx < config.size(); idx ++)
     {
+        if (!isSupported(config[idx])) continue;
+
         std::string name = config[idx]["name"].as<std::string>();
         symbols.push_back("  LOAD_SYMBOL(" + toFunction(name, config[idx]["arguments"]) + ")");
     }

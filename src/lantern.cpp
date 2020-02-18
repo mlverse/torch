@@ -17,6 +17,23 @@ void lanternTest()
     std::cout << "-- Success!" << std::endl;
 }
 
+template<class T>
+class LanternObject
+{
+private:
+    T _object;
+public:
+    LanternObject(T object)
+    {
+        _object = object;
+    }
+
+    T& get()
+    {
+        return _object;
+    }
+};
+
 /* Autogen Body -- Start */
 void lantern__cast_byte_tensor_bool(void* self, void* non_blocking) {}
 void lantern__cast_char_tensor_bool(void* self, void* non_blocking) {}
