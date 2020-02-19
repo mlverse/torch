@@ -55,6 +55,26 @@ std::string buildArguments(std::string name, YAML::Node node)
     return arguments;
 }
 
+std::string addNamespace(std::string name)
+{
+    std::vector<std::string> objects;
+    objects.push_back("Tensor");
+    objects.push_back("Scalar");
+    objects.push_back("Generator");
+    objects.push_back("Dimname");
+    objects.push_back("IntArrayRef");
+    objects.push_back("MemoryFormat");
+
+    for (auto iter = objects.begin(); iter != objects.end(); iter++)
+    {
+        std::size_t found = name.find(*iter);
+        if (found != std::string::npos && (found == 0 || name.at(found - 1) == ' ' || name.at(found - 1) == '<'))
+            name = name.insert(found, "torch::");
+    }
+
+    return name;
+}
+
 std::string buildCalls(std::string name, YAML::Node node)
 {
     std::string arguments = "";
@@ -66,7 +86,7 @@ std::string buildCalls(std::string name, YAML::Node node)
             arguments += ", ";
         }
 
-        arguments += "((LanternObject<" + node[idx]["type"].as<std::string>() + ">*)" +
+        arguments += "((LanternObject<" + addNamespace(node[idx]["type"].as<std::string>()) + ">*)" +
             node[idx]["name"].as<std::string>() + ")->get()";
     }
 
@@ -115,7 +135,25 @@ bool isSupported(YAML::Node node)
 {
     if (node["method_of"])
     {
-        std::cout << "Skipping " << node["name"].as<std::string>() << std::endl;
+        bool hasTensor = false;
+        for (size_t i = 0; i < node["method_of"].size(); i++)
+            if (node["method_of"][i].as<std::string>() == "Tensor") hasTensor = true;
+
+        if (hasTensor) {
+            std::cout << "Skipping (tensor) " << node["name"].as<std::string>() << std::endl;
+            return false;
+        }
+    }
+
+    if (node["returns"].size() > 1)
+    {
+        std::cout << "Skipping (return) " << node["name"].as<std::string>() << std::endl;
+        return false;
+    }
+
+    if (node["abstract"].as<std::string>() == "true")
+    {
+        std::cout << "Skipping (abstract) " << node["name"].as<std::string>() << std::endl;
         return false;
     }
 
@@ -154,16 +192,14 @@ int main(int argc, char *argv[])
     
         bodies.push_back("void* " + function + "(" + arguments + ")");
         bodies.push_back("{");
-        bodies.push_back("    using namespace torch;");
-        bodies.push_back("    using namespace at::native;");
         if (returns == "void")
         {
-            bodies.push_back("    " + name + "(" + calls + ");");
+            bodies.push_back("    torch::" + name + "(" + calls + ");");
             bodies.push_back("    return NULL;");
         }
         else
         {
-            bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + name + "(");
+            bodies.push_back("    return (void *) new LanternObject<" + addNamespace(returns) + ">(torch::" + name + "(");
             bodies.push_back("        " + calls + "));");
         }
         bodies.push_back("}");
