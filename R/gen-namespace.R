@@ -1386,7 +1386,7 @@ torch__multinomial_alias_setup <- function(probs) {
 
 torch__nnpack_available <- function() {
   args <- list()
-  expected_types <- structure(list(), .Names = character(0))
+  expected_types <- list()
   nd_args <- character(0)
   return_types <- list(list("bool"))
   call_c_function(

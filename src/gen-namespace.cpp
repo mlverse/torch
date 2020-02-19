@@ -1,3 +1,4 @@
+// This file is auto generated. Dont modify it by hand.
 #include "torch_types.h"
 #include "utils.hpp"
 
