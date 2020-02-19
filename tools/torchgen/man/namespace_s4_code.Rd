@@ -6,9 +6,6 @@
 \usage{
 namespace_s4_code(method)
 }
-\arguments{
-\item{method}{a single element of the [declarations()] list.}
-}
 \description{
 Generates the definition of an S4 method
 }

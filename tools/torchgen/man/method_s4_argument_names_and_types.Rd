@@ -8,9 +8,6 @@ converted.}
 \usage{
 method_s4_argument_names_and_types(method)
 }
-\arguments{
-\item{method}{a single element of the [declarations()] list.}
-}
 \description{
 Returns a tibble of argument names and types of methods.
 Already discarding argument names with `NA` that wound't be

@@ -7,9 +7,6 @@ See [methods::setMethod()]'s `signature` argument.}
 \usage{
 method_s4_signature(method, methods = tensor_methods())
 }
-\arguments{
-\item{method}{a single element of the [declarations()] list.}
-}
 \description{
 Creates the signature as required by S4 methods in R
 See [methods::setMethod()]'s `signature` argument.
