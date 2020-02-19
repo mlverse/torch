@@ -313,7 +313,7 @@ r_method_body <- function(decls) {
 
 }
 
-r <- function() {
+r <- function(path) {
 
   namespace <- declarations() %>%
     purrr::keep(~"namespace" %in% .x$method_of)
@@ -329,7 +329,7 @@ r <- function() {
     namespace_code
   )
 
-  writeLines(namespace_code, "../../R/gen-namespace.R")
+  writeLines(namespace_code, file.path(path, "/R/gen-namespace.R"))
 
   methods <- declarations() %>%
     purrr::keep(~"Tensor" %in% .x$method_of)
@@ -346,6 +346,6 @@ r <- function() {
     methods_code
   )
 
-  writeLines(methods_code, "../../R/gen-method.R")
+  writeLines(methods_code, file.path(path, "/R/gen-method.R"))
 
 }
