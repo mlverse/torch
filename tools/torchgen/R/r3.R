@@ -226,19 +226,20 @@ r_return_types <- function(decls) {
 
 r_namespace_body <- function(decls) {
 
-  glue::glue("
-
-{r_list_of_arguments(decls)}
-args <- Filter(Negate(is.name), args)
-{r_arguments_expected_types(decls)}
-{r_arguments_with_no_default(decls)}
-{r_return_types(decls)}
-args_t <- all_arguments_to_torch_type(args, expected_types)
-nd_args_types <- args_t[[2]][base::names(args_t[[2]]) %in% nd_args]
-fun_name <- make_cpp_function_name('{decls[[1]]$name}', nd_args_types, 'namespace')
-out <- do_call(getNamespace('torch')[[fun_name]], args_t[[1]])
-to_return_type(out, return_types)
-")
+  glue::glue(.sep = "\n",
+  "{r_list_of_arguments(decls)}",
+  "{r_arguments_expected_types(decls)}",
+  "{r_arguments_with_no_default(decls)}",
+  "{r_return_types(decls)}",
+  "call_c_function(",
+    "fun_name = '{decls[[1]]$name}',",
+    "args = args,",
+    "expected_types = expected_types,",
+    "nd_args = nd_args,",
+    "return_types = return_types,",
+    "fun_type = 'namespace'",
+  ")"
+  )
 
 }
 
@@ -250,8 +251,8 @@ r <- function() {
   namespace_nms <- purrr::map_chr(namespace, ~.x$name)
 
   split(namespace, namespace_nms) %>%
-    purrr::map_chr(function(x) {print(x[[1]]$name); r_namespace(x)}) %>%
+    purrr::map(~ .x %>% r_namespace() %>% styler::style_text()) %>%
+    purrr::flatten_chr() %>%
     writeLines("../../R/gen-namespace.R")
-
 
 }
