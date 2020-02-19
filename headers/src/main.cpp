@@ -145,12 +145,6 @@ bool isSupported(YAML::Node node)
         }
     }
 
-    if (node["returns"].size() > 1)
-    {
-        std::cout << "Skipping (return) " << node["name"].as<std::string>() << std::endl;
-        return false;
-    }
-
     if (node["abstract"].as<std::string>() == "true")
     {
         std::cout << "Skipping (abstract) " << node["name"].as<std::string>() << std::endl;
@@ -158,6 +152,24 @@ bool isSupported(YAML::Node node)
     }
 
     return true;
+}
+
+std::string buildReturn(YAML::Node node)
+{
+    std::string type = "";
+    for (size_t idx = 0; idx < node.size(); idx++)
+    {
+        if (idx > 0) type += ", ";
+
+        type += addNamespace(node[idx]["dynamic_type"].as<std::string>());
+    }
+
+    if (node.size() > 1)
+    {
+        type = "std::tuple<" + type + ">";
+    }
+    
+    return type;
 }
 
 int main(int argc, char *argv[])
@@ -186,7 +198,7 @@ int main(int argc, char *argv[])
         std::string arguments = buildArguments(name, config[idx]["arguments"]);
         std::string function = toFunction(name, config[idx]["arguments"]);
         std::string calls = buildCalls(name, config[idx]["arguments"]);
-        std::string returns = config[idx]["returns"][0]["dynamic_type"].as<std::string>();
+        std::string returns = buildReturn(config[idx]["returns"]);
 
         headers.push_back("LANTERN_API void* (LANTERN_PTR " + function + ")(" + arguments + ");");
     
@@ -199,7 +211,7 @@ int main(int argc, char *argv[])
         }
         else
         {
-            bodies.push_back("    return (void *) new LanternObject<" + addNamespace(returns) + ">(torch::" + name + "(");
+            bodies.push_back("    return (void *) new LanternObject<" + returns + ">(torch::" + name + "(");
             bodies.push_back("        " + calls + "));");
         }
         bodies.push_back("}");
