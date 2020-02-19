@@ -83,10 +83,88 @@ void* lantern__cast_half_tensor_bool(void* self, void* non_blocking)
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)non_blocking)->get()));
 }
 
+void* lantern_backward_tensor_tensor_bool_bool(void* self, void* gradient, void* keep_graph, void* create_graph)
+{
+    ((LanternObject<const torch::Tensor &>*)self)->get().backward(((LanternObject<const torch::Tensor &>*)gradient)->get(), ((LanternObject<bool>*)keep_graph)->get(), ((LanternObject<bool>*)create_graph)->get());
+    return NULL;
+}
+
+void* lantern_set_data_tensor_tensor(void* self, void* new_data)
+{
+    ((LanternObject<const torch::Tensor &>*)self)->get().set_data(((LanternObject<const torch::Tensor &>*)new_data)->get());
+    return NULL;
+}
+
+void* lantern_data_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().data(
+        ));
+}
+
+void* lantern_is_leaf_tensor(void* self)
+{
+    return (void *) new LanternObject<bool>(((LanternObject<const torch::Tensor &>*)self)->get().is_leaf(
+        ));
+}
+
+void* lantern_output_nr_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(((LanternObject<const torch::Tensor &>*)self)->get().output_nr(
+        ));
+}
+
+void* lantern__version_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(((LanternObject<const torch::Tensor &>*)self)->get()._version(
+        ));
+}
+
+void* lantern_rename__tensor_dimnamelist(void* self, void* names)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().rename_(
+        ((LanternObject<c10::optional<torch::DimnameList>>*)names)->get()));
+}
+
+void* lantern_rename_tensor_dimnamelist(void* self, void* names)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().rename(
+        ((LanternObject<c10::optional<torch::DimnameList>>*)names)->get()));
+}
+
+void* lantern_align_to_tensor_dimnamelist(void* self, void* names)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().align_to(
+        ((LanternObject<torch::DimnameList>*)names)->get()));
+}
+
+void* lantern_align_as_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().align_as(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_align_tensors_tensorlist(void* tensors)
 {
     return (void *) new LanternObject<torch::TensorList>(torch::align_tensors(
         ((LanternObject<torch::TensorList>*)tensors)->get()));
+}
+
+void* lantern_refine_names_tensor_dimnamelist(void* self, void* names)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().refine_names(
+        ((LanternObject<torch::DimnameList>*)names)->get()));
+}
+
+void* lantern_unflatten_tensor_dimname_intarrayref_dimnamelist(void* self, void* dim, void* sizes, void* names)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().unflatten(
+        ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<torch::IntArrayRef>*)sizes)->get(), ((LanternObject<torch::DimnameList>*)names)->get()));
+}
+
+void* lantern_unflatten_tensor_intt_intarrayref_dimnamelist(void* self, void* dim, void* sizes, void* names)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().unflatten(
+        ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<torch::IntArrayRef>*)sizes)->get(), ((LanternObject<torch::DimnameList>*)names)->get()));
 }
 
 void* lantern__cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool_bool(void* log_probs, void* targets, void* input_lengths, void* target_lengths, void* blank, void* deterministic, void* zero_infinity)
@@ -221,10 +299,34 @@ void* lantern_feature_alpha_dropout__tensor_double_bool(void* self, void* p, voi
         ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<double>*)p)->get(), ((LanternObject<bool>*)train)->get()));
 }
 
+void* lantern_abs_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::abs(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_abs__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::abs_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_abs_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::abs_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_acos_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::acos(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_acos__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::acos_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_acos_out_tensor_tensor(void* out, void* self)
@@ -251,16 +353,64 @@ void* lantern_adaptive_max_pool1d_tensor_intarrayref(void* self, void* output_si
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)output_size)->get()));
 }
 
+void* lantern_add_tensor_tensor_scalar(void* self, void* other, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::add(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_add__tensor_tensor_scalar(void* self, void* other, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().add_(
+        ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
 void* lantern_add_out_tensor_tensor_tensor_scalar(void* out, void* self, void* other, void* alpha)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::add_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
 }
 
+void* lantern_add_tensor_scalar_scalar(void* self, void* other, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::add(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_add__tensor_scalar_scalar(void* self, void* other, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().add_(
+        ((LanternObject<torch::Scalar>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_addmv_tensor_tensor_tensor_scalar_scalar(void* self, void* mat, void* vec, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::addmv(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mat)->get(), ((LanternObject<const torch::Tensor &>*)vec)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_addmv__tensor_tensor_tensor_scalar_scalar(void* self, void* mat, void* vec, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::addmv_(
+        ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mat)->get(), ((LanternObject<const torch::Tensor &>*)vec)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
 void* lantern_addmv_out_tensor_tensor_tensor_tensor_scalar_scalar(void* out, void* self, void* mat, void* vec, void* beta, void* alpha)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::addmv_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mat)->get(), ((LanternObject<const torch::Tensor &>*)vec)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_addr_tensor_tensor_tensor_scalar_scalar(void* self, void* vec1, void* vec2, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::addr(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)vec1)->get(), ((LanternObject<const torch::Tensor &>*)vec2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_addr__tensor_tensor_tensor_scalar_scalar(void* self, void* vec1, void* vec2, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().addr_(
+        ((LanternObject<const torch::Tensor &>*)vec1)->get(), ((LanternObject<const torch::Tensor &>*)vec2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
 }
 
 void* lantern_addr_out_tensor_tensor_tensor_tensor_scalar_scalar(void* out, void* self, void* vec1, void* vec2, void* beta, void* alpha)
@@ -281,10 +431,22 @@ void* lantern_affine_grid_generator_backward_tensor_intarrayref_bool(void* grad,
         ((LanternObject<const torch::Tensor &>*)grad)->get(), ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<bool>*)align_corners)->get()));
 }
 
+void* lantern_all_tensor_intt_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::all(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_all_out_tensor_tensor_intt_bool(void* out, void* self, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::all_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_all_tensor_dimname_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::all(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_all_out_tensor_tensor_dimname_bool(void* out, void* self, void* dim, void* keepdim)
@@ -293,10 +455,28 @@ void* lantern_all_out_tensor_tensor_dimname_bool(void* out, void* self, void* di
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
+void* lantern_allclose_tensor_tensor_double_double_bool(void* self, void* other, void* rtol, void* atol, void* equal_nan)
+{
+    return (void *) new LanternObject<bool>(torch::allclose(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<double>*)rtol)->get(), ((LanternObject<double>*)atol)->get(), ((LanternObject<bool>*)equal_nan)->get()));
+}
+
+void* lantern_any_tensor_intt_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::any(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_any_out_tensor_tensor_intt_bool(void* out, void* self, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::any_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_any_tensor_dimname_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::any(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_any_out_tensor_tensor_dimname_bool(void* out, void* self, void* dim, void* keepdim)
@@ -341,16 +521,76 @@ void* lantern__dim_arange_tensor_intt(void* like, void* dim)
         ((LanternObject<const torch::Tensor &>*)like)->get(), ((LanternObject<int64_t>*)dim)->get()));
 }
 
+void* lantern_argmax_tensor_intt_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::argmax(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<int64_t>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_argmin_tensor_intt_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::argmin(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<int64_t>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_as_strided_tensor_intarrayref_intarrayref_intt(void* self, void* size, void* stride, void* storage_offset)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::as_strided(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<torch::IntArrayRef>*)stride)->get(), ((LanternObject<c10::optional<int64_t>>*)storage_offset)->get()));
+}
+
+void* lantern_as_strided__tensor_intarrayref_intarrayref_intt(void* self, void* size, void* stride, void* storage_offset)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::as_strided_(
+        ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<torch::IntArrayRef>*)stride)->get(), ((LanternObject<c10::optional<int64_t>>*)storage_offset)->get()));
+}
+
+void* lantern_asin_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::asin(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_asin__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::asin_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_asin_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::asin_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_atan_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::atan(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_atan__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::atan_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_atan_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::atan_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_baddbmm_tensor_tensor_tensor_scalar_scalar(void* self, void* batch1, void* batch2, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::baddbmm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)batch1)->get(), ((LanternObject<const torch::Tensor &>*)batch2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_baddbmm__tensor_tensor_tensor_scalar_scalar(void* self, void* batch1, void* batch2, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().baddbmm_(
+        ((LanternObject<const torch::Tensor &>*)batch1)->get(), ((LanternObject<const torch::Tensor &>*)batch2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
 }
 
 void* lantern__baddbmm_mkl__tensor_tensor_tensor_scalar_scalar(void* self, void* batch1, void* batch2, void* beta, void* alpha)
@@ -395,10 +635,34 @@ void* lantern__batch_norm_impl_index_backward_intt_tensor_tensor_tensor_tensor_t
         ((LanternObject<int64_t>*)impl_index)->get(), ((LanternObject<const torch::Tensor &>*)input)->get(), ((LanternObject<const torch::Tensor &>*)grad_output)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get(), ((LanternObject<const torch::Tensor &>*)running_mean)->get(), ((LanternObject<const torch::Tensor &>*)running_var)->get(), ((LanternObject<const torch::Tensor &>*)save_mean)->get(), ((LanternObject<const torch::Tensor &>*)save_var_transform)->get(), ((LanternObject<bool>*)train)->get(), ((LanternObject<double>*)eps)->get(), ((LanternObject<std::array<bool,3>>*)output_mask)->get()));
 }
 
+void* lantern_bernoulli_tensor_generator(void* self, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::bernoulli(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
 void* lantern_bernoulli_out_tensor_tensor_generator(void* out, void* self, void* generator)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::bernoulli_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_bernoulli__tensor_tensor_generator(void* self, void* p, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().bernoulli_(
+        ((LanternObject<const torch::Tensor &>*)p)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_bernoulli__tensor_double_generator(void* self, void* p, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().bernoulli_(
+        ((LanternObject<double>*)p)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_bernoulli_tensor_double_generator(void* self, void* p, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::bernoulli(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<double>*)p)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
 }
 
 void* lantern_bilinear_tensor_tensor_tensor_tensor(void* input1, void* input2, void* weight, void* bias)
@@ -419,16 +683,58 @@ void* lantern_binary_cross_entropy_with_logits_backward_tensor_tensor_tensor_ten
         ((LanternObject<const torch::Tensor &>*)grad_output)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)target)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get(), ((LanternObject<const torch::Tensor &>*)pos_weight)->get(), ((LanternObject<int64_t>*)reduction)->get()));
 }
 
+void* lantern_bincount_tensor_tensor_intt(void* self, void* weights, void* minlength)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::bincount(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)weights)->get(), ((LanternObject<int64_t>*)minlength)->get()));
+}
+
+void* lantern_bitwise_not_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::bitwise_not(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_bitwise_not__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().bitwise_not_(
+        ));
+}
+
 void* lantern_bitwise_not_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::bitwise_not_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_logical_not_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::logical_not(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_logical_not__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().logical_not_(
+        ));
+}
+
 void* lantern_logical_not_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::logical_not_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_logical_xor_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::logical_xor(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_logical_xor__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().logical_xor_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
 void* lantern_logical_xor_out_tensor_tensor_tensor(void* out, void* self, void* other)
@@ -447,6 +753,12 @@ void* lantern_blackman_window_intt_bool_tensoroptions(void* window_length, void*
 {
     return (void *) new LanternObject<torch::Tensor>(torch::blackman_window(
         ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<const torch::TensorOptions &>*)options)->get()));
+}
+
+void* lantern_bmm_tensor_tensor(void* self, void* mat2)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::bmm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mat2)->get()));
 }
 
 void* lantern_bmm_out_tensor_tensor_tensor(void* out, void* self, void* mat2)
@@ -485,6 +797,18 @@ void* lantern_cat_out_tensor_tensorlist_dimname(void* out, void* tensors, void* 
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<torch::TensorList>*)tensors)->get(), ((LanternObject<torch::Dimname>*)dim)->get()));
 }
 
+void* lantern_ceil_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::ceil(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_ceil__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::ceil_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_ceil_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::ceil_out(
@@ -497,16 +821,58 @@ void* lantern_chain_matmul_tensorlist(void* matrices)
         ((LanternObject<torch::TensorList>*)matrices)->get()));
 }
 
+void* lantern_chunk_tensor_intt_intt(void* self, void* chunks, void* dim)
+{
+    return (void *) new LanternObject<torch::TensorList>(torch::chunk(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)chunks)->get(), ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_clamp_tensor_scalar_scalar(void* self, void* min, void* max)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::clamp(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)min)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)max)->get()));
+}
+
+void* lantern_clamp__tensor_scalar_scalar(void* self, void* min, void* max)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::clamp_(
+        ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)min)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)max)->get()));
+}
+
 void* lantern_clamp_out_tensor_tensor_scalar_scalar(void* out, void* self, void* min, void* max)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::clamp_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)min)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)max)->get()));
 }
 
+void* lantern_clamp_max_tensor_scalar(void* self, void* max)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::clamp_max(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)max)->get()));
+}
+
+void* lantern_clamp_max__tensor_scalar(void* self, void* max)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::clamp_max_(
+        ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)max)->get()));
+}
+
 void* lantern_clamp_max_out_tensor_tensor_scalar(void* out, void* self, void* max)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::clamp_max_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)max)->get()));
+}
+
+void* lantern_clamp_min_tensor_scalar(void* self, void* min)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::clamp_min(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)min)->get()));
+}
+
+void* lantern_clamp_min__tensor_scalar(void* self, void* min)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::clamp_min_(
+        ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)min)->get()));
 }
 
 void* lantern_clamp_min_out_tensor_tensor_scalar(void* out, void* self, void* min)
@@ -525,6 +891,12 @@ void* lantern_constant_pad_nd_tensor_intarrayref_scalar(void* self, void* pad, v
 {
     return (void *) new LanternObject<torch::Tensor>(torch::constant_pad_nd(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)pad)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_contiguous_tensor_memoryformat(void* self, void* memory_format)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().contiguous(
+        ((LanternObject<torch::MemoryFormat>*)memory_format)->get()));
 }
 
 void* lantern_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt(void* input, void* weight, void* bias, void* stride, void* padding, void* dilation, void* transposed, void* output_padding, void* groups)
@@ -611,16 +983,46 @@ void* lantern_conv_transpose3d_tensor_tensor_tensor_intarrayref_intarrayref_inta
         ((LanternObject<const torch::Tensor &>*)input)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get(), ((LanternObject<const torch::Tensor &>*)bias)->get(), ((LanternObject<torch::IntArrayRef>*)stride)->get(), ((LanternObject<torch::IntArrayRef>*)padding)->get(), ((LanternObject<torch::IntArrayRef>*)output_padding)->get(), ((LanternObject<int64_t>*)groups)->get(), ((LanternObject<torch::IntArrayRef>*)dilation)->get()));
 }
 
+void* lantern_copy__tensor_tensor_bool(void* self, void* src, void* non_blocking)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().copy_(
+        ((LanternObject<const torch::Tensor &>*)src)->get(), ((LanternObject<bool>*)non_blocking)->get()));
+}
+
 void* lantern__copy_from_tensor_tensor_bool(void* self, void* dst, void* non_blocking)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_copy_from(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)dst)->get(), ((LanternObject<bool>*)non_blocking)->get()));
 }
 
+void* lantern_cos_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cos(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_cos__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cos_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_cos_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::cos_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_cosh_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cosh(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_cosh__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cosh_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_cosh_out_tensor_tensor(void* out, void* self)
@@ -731,10 +1133,22 @@ void* lantern_cudnn_grid_sampler_backward_tensor_tensor_tensor(void* self, void*
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)grid)->get(), ((LanternObject<const torch::Tensor &>*)grad_output)->get()));
 }
 
+void* lantern_cumsum_tensor_intt_scalartype(void* self, void* dim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cumsum(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
 void* lantern_cumsum_out_tensor_tensor_intt_scalartype(void* out, void* self, void* dim, void* dtype)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::cumsum_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
+void* lantern_cumsum_tensor_dimname_scalartype(void* self, void* dim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cumsum(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
 void* lantern_cumsum_out_tensor_tensor_dimname_scalartype(void* out, void* self, void* dim, void* dtype)
@@ -743,10 +1157,22 @@ void* lantern_cumsum_out_tensor_tensor_dimname_scalartype(void* out, void* self,
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
+void* lantern_cumprod_tensor_intt_scalartype(void* self, void* dim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cumprod(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
 void* lantern_cumprod_out_tensor_tensor_intt_scalartype(void* out, void* self, void* dim, void* dtype)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::cumprod_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
+void* lantern_cumprod_tensor_dimname_scalartype(void* self, void* dim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cumprod(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
 void* lantern_cumprod_out_tensor_tensor_dimname_scalartype(void* out, void* self, void* dim, void* dtype)
@@ -779,10 +1205,70 @@ void* lantern__ctc_loss_backward_tensor_tensor_tensor_intarrayref_intarrayref_te
         ((LanternObject<const torch::Tensor &>*)grad)->get(), ((LanternObject<const torch::Tensor &>*)log_probs)->get(), ((LanternObject<const torch::Tensor &>*)targets)->get(), ((LanternObject<torch::IntArrayRef>*)input_lengths)->get(), ((LanternObject<torch::IntArrayRef>*)target_lengths)->get(), ((LanternObject<const torch::Tensor &>*)neg_log_likelihood)->get(), ((LanternObject<const torch::Tensor &>*)log_alpha)->get(), ((LanternObject<int64_t>*)blank)->get(), ((LanternObject<bool>*)zero_infinity)->get()));
 }
 
+void* lantern_det_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::det(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_diag_embed_tensor_intt_intt_intt(void* self, void* offset, void* dim1, void* dim2)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::diag_embed(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)offset)->get(), ((LanternObject<int64_t>*)dim1)->get(), ((LanternObject<int64_t>*)dim2)->get()));
+}
+
+void* lantern_diagflat_tensor_intt(void* self, void* offset)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::diagflat(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)offset)->get()));
+}
+
+void* lantern_diagonal_tensor_intt_intt_intt(void* self, void* offset, void* dim1, void* dim2)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::diagonal(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)offset)->get(), ((LanternObject<int64_t>*)dim1)->get(), ((LanternObject<int64_t>*)dim2)->get()));
+}
+
+void* lantern_fill_diagonal__tensor_scalar_bool(void* self, void* fill_value, void* wrap)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().fill_diagonal_(
+        ((LanternObject<torch::Scalar>*)fill_value)->get(), ((LanternObject<bool>*)wrap)->get()));
+}
+
+void* lantern_div_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::div(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_div__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().div_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_div_out_tensor_tensor_tensor(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::div_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_div_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::div(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_div__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().div_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_dot_tensor_tensor(void* self, void* tensor)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::dot(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)tensor)->get()));
 }
 
 void* lantern_dot_out_tensor_tensor_tensor(void* out, void* self, void* tensor)
@@ -875,6 +1361,18 @@ void* lantern_empty_intarrayref_tensoroptions_memoryformat(void* size, void* opt
         ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<const torch::TensorOptions &>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)memory_format)->get()));
 }
 
+void* lantern_new_empty_tensor_intarrayref_tensoroptions(void* self, void* size, void* options)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().new_empty(
+        ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<const torch::TensorOptions &>*)options)->get()));
+}
+
+void* lantern_new_full_tensor_intarrayref_scalar_tensoroptions(void* self, void* size, void* fill_value, void* options)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().new_full(
+        ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<torch::Scalar>*)fill_value)->get(), ((LanternObject<const torch::TensorOptions &>*)options)->get()));
+}
+
 void* lantern__empty_affine_quantized_intarrayref_tensoroptions_double_intt_memoryformat(void* size, void* options, void* scale, void* zero_point, void* memory_format)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_empty_affine_quantized(
@@ -885,6 +1383,12 @@ void* lantern__empty_per_channel_affine_quantized_intarrayref_tensor_tensor_intt
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_empty_per_channel_affine_quantized(
         ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<const torch::Tensor &>*)scales)->get(), ((LanternObject<const torch::Tensor &>*)zero_points)->get(), ((LanternObject<int64_t>*)axis)->get(), ((LanternObject<const torch::TensorOptions &>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)memory_format)->get()));
+}
+
+void* lantern_resize__tensor_intarrayref(void* self, void* size)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().resize_(
+        ((LanternObject<torch::IntArrayRef>*)size)->get()));
 }
 
 void* lantern_empty_out_tensor_intarrayref_memoryformat(void* out, void* size, void* memory_format)
@@ -911,10 +1415,34 @@ void* lantern_empty_strided_intarrayref_intarrayref_tensoroptions(void* size, vo
         ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<torch::IntArrayRef>*)stride)->get(), ((LanternObject<const torch::TensorOptions &>*)options)->get()));
 }
 
+void* lantern_erf_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::erf(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_erf__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::erf_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_erf_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::erf_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_erfc_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::erfc(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_erfc__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::erfc_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_erfc_out_tensor_tensor(void* out, void* self)
@@ -923,16 +1451,52 @@ void* lantern_erfc_out_tensor_tensor(void* out, void* self)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_exp_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::exp(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_exp__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::exp_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_exp_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::exp_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_expm1_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::expm1(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_expm1__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::expm1_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_expm1_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::expm1_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_expand_tensor_intarrayref_bool(void* self, void* size, void* implicit)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().expand(
+        ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<bool>*)implicit)->get()));
+}
+
+void* lantern_expand_as_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().expand_as(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
 void* lantern_eye_intt_tensoroptions(void* n, void* options)
@@ -959,10 +1523,70 @@ void* lantern_eye_out_tensor_intt_intt(void* out, void* n, void* m)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<int64_t>*)n)->get(), ((LanternObject<int64_t>*)m)->get()));
 }
 
+void* lantern_flatten_tensor_intt_intt(void* self, void* start_dim, void* end_dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::flatten(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)start_dim)->get(), ((LanternObject<int64_t>*)end_dim)->get()));
+}
+
+void* lantern_flatten_tensor_intt_intt_dimname(void* self, void* start_dim, void* end_dim, void* out_dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::flatten(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)start_dim)->get(), ((LanternObject<int64_t>*)end_dim)->get(), ((LanternObject<torch::Dimname>*)out_dim)->get()));
+}
+
+void* lantern_flatten_tensor_dimname_dimname_dimname(void* self, void* start_dim, void* end_dim, void* out_dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::flatten(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)start_dim)->get(), ((LanternObject<torch::Dimname>*)end_dim)->get(), ((LanternObject<torch::Dimname>*)out_dim)->get()));
+}
+
+void* lantern_flatten_tensor_dimnamelist_dimname(void* self, void* dims, void* out_dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::flatten(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dims)->get(), ((LanternObject<torch::Dimname>*)out_dim)->get()));
+}
+
+void* lantern_fill__tensor_scalar(void* self, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::fill_(
+        ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_fill__tensor_tensor(void* self, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::fill_(
+        ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)value)->get()));
+}
+
+void* lantern_floor_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::floor(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_floor__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::floor_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_floor_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::floor_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_frac_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::frac(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_frac__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::frac_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_frac_out_tensor_tensor(void* out, void* self)
@@ -1079,6 +1703,12 @@ void* lantern_hinge_embedding_loss_tensor_tensor_double_intt(void* self, void* t
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)target)->get(), ((LanternObject<double>*)margin)->get(), ((LanternObject<int64_t>*)reduction)->get()));
 }
 
+void* lantern_ger_tensor_tensor(void* self, void* vec2)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::ger(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)vec2)->get()));
+}
+
 void* lantern_ger_out_tensor_tensor_tensor(void* out, void* self, void* vec2)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::ger_out(
@@ -1089,6 +1719,30 @@ void* lantern_group_norm_tensor_intt_tensor_tensor_double_bool(void* input, void
 {
     return (void *) new LanternObject<torch::Tensor>(torch::group_norm(
         ((LanternObject<const torch::Tensor &>*)input)->get(), ((LanternObject<int64_t>*)num_groups)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get(), ((LanternObject<const torch::Tensor &>*)bias)->get(), ((LanternObject<double>*)eps)->get(), ((LanternObject<bool>*)cudnn_enabled)->get()));
+}
+
+void* lantern_fft_tensor_intt_bool(void* self, void* signal_ndim, void* normalized)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::fft(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)signal_ndim)->get(), ((LanternObject<bool>*)normalized)->get()));
+}
+
+void* lantern_ifft_tensor_intt_bool(void* self, void* signal_ndim, void* normalized)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::ifft(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)signal_ndim)->get(), ((LanternObject<bool>*)normalized)->get()));
+}
+
+void* lantern_rfft_tensor_intt_bool_bool(void* self, void* signal_ndim, void* normalized, void* onesided)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::rfft(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)signal_ndim)->get(), ((LanternObject<bool>*)normalized)->get(), ((LanternObject<bool>*)onesided)->get()));
+}
+
+void* lantern_irfft_tensor_intt_bool_bool_intarrayref(void* self, void* signal_ndim, void* normalized, void* onesided, void* signal_sizes)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::irfft(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)signal_ndim)->get(), ((LanternObject<bool>*)normalized)->get(), ((LanternObject<bool>*)onesided)->get(), ((LanternObject<torch::IntArrayRef>*)signal_sizes)->get()));
 }
 
 void* lantern__fft_with_size_tensor_intt_bool_bool_bool_intarrayref_bool_bool_intarrayref(void* self, void* signal_ndim, void* complex_input, void* complex_output, void* inverse, void* checked_signal_sizes, void* normalized, void* onesided, void* output_sizes)
@@ -1121,6 +1775,48 @@ void* lantern__cufft_clear_plan_cache_intt(void* device_index)
     return NULL;
 }
 
+void* lantern_index_tensor_tensorlist(void* self, void* indices)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::TensorList>*)indices)->get()));
+}
+
+void* lantern_index_copy__tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().index_copy_(
+        ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_index_copy_tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_copy(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_index_copy__tensor_dimname_tensor_tensor(void* self, void* dim, void* index, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().index_copy_(
+        ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_index_copy_tensor_dimname_tensor_tensor(void* self, void* dim, void* index, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_copy(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_index_put__tensor_tensorlist_tensor_bool(void* self, void* indices, void* values, void* accumulate)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_put_(
+        ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<torch::TensorList>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
+}
+
+void* lantern_index_put_tensor_tensorlist_tensor_bool(void* self, void* indices, void* values, void* accumulate)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_put(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::TensorList>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
+}
+
 void* lantern__index_put_impl__tensor_tensorlist_tensor_bool_bool(void* self, void* indices, void* values, void* accumulate, void* unsafe)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_index_put_impl_(
@@ -1131,6 +1827,12 @@ void* lantern_instance_norm_tensor_tensor_tensor_tensor_tensor_bool_double_doubl
 {
     return (void *) new LanternObject<torch::Tensor>(torch::instance_norm(
         ((LanternObject<const torch::Tensor &>*)input)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get(), ((LanternObject<const torch::Tensor &>*)bias)->get(), ((LanternObject<const torch::Tensor &>*)running_mean)->get(), ((LanternObject<const torch::Tensor &>*)running_var)->get(), ((LanternObject<bool>*)use_input_stats)->get(), ((LanternObject<double>*)momentum)->get(), ((LanternObject<double>*)eps)->get(), ((LanternObject<bool>*)cudnn_enabled)->get()));
+}
+
+void* lantern_inverse_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::inverse(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_inverse_out_tensor_tensor(void* out, void* self)
@@ -1145,9 +1847,51 @@ void* lantern__inverse_helper_tensor(void* self)
         ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_isclose_tensor_tensor_double_double_bool(void* self, void* other, void* rtol, void* atol, void* equal_nan)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::isclose(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<double>*)rtol)->get(), ((LanternObject<double>*)atol)->get(), ((LanternObject<bool>*)equal_nan)->get()));
+}
+
 void* lantern_isnan_tensor(void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::isnan(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_is_distributed_tensor(void* self)
+{
+    return (void *) new LanternObject<bool>(torch::is_distributed(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_is_floating_point_tensor(void* self)
+{
+    return (void *) new LanternObject<bool>(torch::is_floating_point(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_is_complex_tensor(void* self)
+{
+    return (void *) new LanternObject<bool>(torch::is_complex(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_is_nonzero_tensor(void* self)
+{
+    return (void *) new LanternObject<bool>(torch::is_nonzero(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_is_same_size_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<bool>(torch::is_same_size(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_is_signed_tensor(void* self)
+{
+    return (void *) new LanternObject<bool>(torch::is_signed(
         ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
@@ -1163,10 +1907,22 @@ void* lantern_kl_div_backward_tensor_tensor_tensor_intt(void* grad_output, void*
         ((LanternObject<const torch::Tensor &>*)grad_output)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)target)->get(), ((LanternObject<int64_t>*)reduction)->get()));
 }
 
+void* lantern_kthvalue_tensor_intt_intt_bool(void* self, void* k, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::kthvalue(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)k)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_kthvalue_out_tensor_tensor_tensor_intt_intt_bool(void* values, void* indices, void* self, void* k, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::kthvalue_out(
         ((LanternObject<torch::Tensor &>*)values)->get(), ((LanternObject<torch::Tensor &>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)k)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_kthvalue_tensor_intt_dimname_bool(void* self, void* k, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::kthvalue(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)k)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_kthvalue_out_tensor_tensor_tensor_intt_dimname_bool(void* values, void* indices, void* self, void* k, void* dim, void* keepdim)
@@ -1271,10 +2027,34 @@ void* lantern_linspace_out_tensor_scalar_scalar_intt(void* out, void* start, voi
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<torch::Scalar>*)start)->get(), ((LanternObject<torch::Scalar>*)end)->get(), ((LanternObject<int64_t>*)steps)->get()));
 }
 
+void* lantern_log_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_log__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_log_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::log_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_log10_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log10(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_log10__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log10_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_log10_out_tensor_tensor(void* out, void* self)
@@ -1283,16 +2063,46 @@ void* lantern_log10_out_tensor_tensor(void* out, void* self)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_log1p_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log1p(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_log1p__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log1p_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_log1p_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::log1p_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_log2_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log2(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_log2__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log2_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_log2_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::log2_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_logdet_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::logdet(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_logspace_scalar_scalar_intt_double_tensoroptions(void* start, void* end, void* steps, void* base, void* options)
@@ -1307,6 +2117,18 @@ void* lantern_logspace_out_tensor_scalar_scalar_intt_double(void* out, void* sta
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<torch::Scalar>*)start)->get(), ((LanternObject<torch::Scalar>*)end)->get(), ((LanternObject<int64_t>*)steps)->get(), ((LanternObject<double>*)base)->get()));
 }
 
+void* lantern_log_softmax_tensor_intt_scalartype(void* self, void* dim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log_softmax(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
+void* lantern_log_softmax_tensor_dimname_scalartype(void* self, void* dim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::log_softmax(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
 void* lantern__log_softmax_tensor_intt_bool(void* self, void* dim, void* half_to_float)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_log_softmax(
@@ -1319,10 +2141,22 @@ void* lantern__log_softmax_backward_data_tensor_tensor_intt_tensor(void* grad_ou
         ((LanternObject<const torch::Tensor &>*)grad_output)->get(), ((LanternObject<const torch::Tensor &>*)output)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_logsumexp_tensor_intarrayref_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::logsumexp(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_logsumexp_out_tensor_tensor_intarrayref_bool(void* out, void* self, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::logsumexp_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_logsumexp_tensor_dimnamelist_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::logsumexp(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_logsumexp_out_tensor_tensor_dimnamelist_bool(void* out, void* self, void* dim, void* keepdim)
@@ -1335,6 +2169,12 @@ void* lantern_margin_ranking_loss_tensor_tensor_tensor_double_intt(void* input1,
 {
     return (void *) new LanternObject<torch::Tensor>(torch::margin_ranking_loss(
         ((LanternObject<const torch::Tensor &>*)input1)->get(), ((LanternObject<const torch::Tensor &>*)input2)->get(), ((LanternObject<const torch::Tensor &>*)target)->get(), ((LanternObject<double>*)margin)->get(), ((LanternObject<int64_t>*)reduction)->get()));
+}
+
+void* lantern_matmul_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::matmul(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
 void* lantern_matmul_out_tensor_tensor_tensor(void* out, void* self, void* other)
@@ -1355,16 +2195,46 @@ void* lantern_matrix_rank_tensor_bool(void* self, void* symmetric)
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)symmetric)->get()));
 }
 
+void* lantern_matrix_power_tensor_intt(void* self, void* n)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::matrix_power(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)n)->get()));
+}
+
+void* lantern_max_tensor_intt_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::max(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_max_out_tensor_tensor_tensor_intt_bool(void* max, void* max_values, void* self, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::max_out(
         ((LanternObject<torch::Tensor &>*)max)->get(), ((LanternObject<torch::Tensor &>*)max_values)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
+void* lantern_max_values_tensor_intarrayref_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::max_values(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_max_tensor_dimname_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::max(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_max_out_tensor_tensor_tensor_dimname_bool(void* max, void* max_values, void* self, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::max_out(
         ((LanternObject<torch::Tensor &>*)max)->get(), ((LanternObject<torch::Tensor &>*)max_values)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_max_values_tensor_dimnamelist_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::max_values(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_max_pool1d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode)
@@ -1403,10 +2273,28 @@ void* lantern_max_pool3d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)kernel_size)->get(), ((LanternObject<torch::IntArrayRef>*)stride)->get(), ((LanternObject<torch::IntArrayRef>*)padding)->get(), ((LanternObject<torch::IntArrayRef>*)dilation)->get(), ((LanternObject<bool>*)ceil_mode)->get()));
 }
 
+void* lantern_mean_tensor_scalartype(void* self, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::mean(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
+void* lantern_mean_tensor_intarrayref_bool_scalartype(void* self, void* dim, void* keepdim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::mean(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
 void* lantern_mean_out_tensor_tensor_intarrayref_bool_scalartype(void* out, void* self, void* dim, void* keepdim, void* dtype)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::mean_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
+void* lantern_mean_tensor_dimnamelist_bool_scalartype(void* self, void* dim, void* keepdim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::mean(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
 void* lantern_mean_out_tensor_tensor_dimnamelist_bool_scalartype(void* out, void* self, void* dim, void* keepdim, void* dtype)
@@ -1415,10 +2303,22 @@ void* lantern_mean_out_tensor_tensor_dimnamelist_bool_scalartype(void* out, void
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
+void* lantern_median_tensor_intt_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::median(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_median_out_tensor_tensor_tensor_intt_bool(void* values, void* indices, void* self, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::median_out(
         ((LanternObject<torch::Tensor &>*)values)->get(), ((LanternObject<torch::Tensor &>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_median_tensor_dimname_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::median(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_median_out_tensor_tensor_tensor_dimname_bool(void* values, void* indices, void* self, void* dim, void* keepdim)
@@ -1427,16 +2327,40 @@ void* lantern_median_out_tensor_tensor_tensor_dimname_bool(void* values, void* i
         ((LanternObject<torch::Tensor &>*)values)->get(), ((LanternObject<torch::Tensor &>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
+void* lantern_min_tensor_intt_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::min(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_min_out_tensor_tensor_tensor_intt_bool(void* min, void* min_indices, void* self, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::min_out(
         ((LanternObject<torch::Tensor &>*)min)->get(), ((LanternObject<torch::Tensor &>*)min_indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
+void* lantern_min_values_tensor_intarrayref_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::min_values(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_min_tensor_dimname_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::min(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_min_out_tensor_tensor_tensor_dimname_bool(void* min, void* min_indices, void* self, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::min_out(
         ((LanternObject<torch::Tensor &>*)min)->get(), ((LanternObject<torch::Tensor &>*)min_indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_min_values_tensor_dimnamelist_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::min_values(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_mkldnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt(void* self, void* weight, void* bias, void* padding, void* stride, void* dilation, void* groups)
@@ -1565,6 +2489,12 @@ void* lantern_miopen_rnn_backward_tensor_tensorlist_intt_tensor_tensor_tensor_te
         ((LanternObject<const torch::Tensor &>*)input)->get(), ((LanternObject<torch::TensorList>*)weight)->get(), ((LanternObject<int64_t>*)weight_stride0)->get(), ((LanternObject<const torch::Tensor &>*)weight_buf)->get(), ((LanternObject<const torch::Tensor &>*)hx)->get(), ((LanternObject<const torch::Tensor &>*)cx)->get(), ((LanternObject<const torch::Tensor &>*)output)->get(), ((LanternObject<const torch::Tensor &>*)grad_output)->get(), ((LanternObject<const torch::Tensor &>*)grad_hy)->get(), ((LanternObject<const torch::Tensor &>*)grad_cy)->get(), ((LanternObject<int64_t>*)mode)->get(), ((LanternObject<int64_t>*)hidden_size)->get(), ((LanternObject<int64_t>*)num_layers)->get(), ((LanternObject<bool>*)batch_first)->get(), ((LanternObject<double>*)dropout)->get(), ((LanternObject<bool>*)train)->get(), ((LanternObject<bool>*)bidirectional)->get(), ((LanternObject<torch::IntArrayRef>*)batch_sizes)->get(), ((LanternObject<const torch::Tensor &>*)dropout_state)->get(), ((LanternObject<const torch::Tensor &>*)reserve)->get(), ((LanternObject<std::array<bool,4>>*)output_mask)->get()));
 }
 
+void* lantern_mm_tensor_tensor(void* self, void* mat2)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::mm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mat2)->get()));
+}
+
 void* lantern_mm_out_tensor_tensor_tensor(void* out, void* self, void* mat2)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::mm_out(
@@ -1577,10 +2507,22 @@ void* lantern__sparse_mm_tensor_tensor(void* sparse, void* dense)
         ((LanternObject<const torch::Tensor &>*)sparse)->get(), ((LanternObject<const torch::Tensor &>*)dense)->get()));
 }
 
+void* lantern_mode_tensor_intt_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::mode(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_mode_out_tensor_tensor_tensor_intt_bool(void* values, void* indices, void* self, void* dim, void* keepdim)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::mode_out(
         ((LanternObject<torch::Tensor &>*)values)->get(), ((LanternObject<torch::Tensor &>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_mode_tensor_dimname_bool(void* self, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::mode(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_mode_out_tensor_tensor_tensor_dimname_bool(void* values, void* indices, void* self, void* dim, void* keepdim)
@@ -1589,16 +2531,70 @@ void* lantern_mode_out_tensor_tensor_tensor_dimname_bool(void* values, void* ind
         ((LanternObject<torch::Tensor &>*)values)->get(), ((LanternObject<torch::Tensor &>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
+void* lantern_mul_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::mul(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_mul__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().mul_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_mul_out_tensor_tensor_tensor(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::mul_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
+void* lantern_mul_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::mul(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_mul__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().mul_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_mv_tensor_tensor(void* self, void* vec)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::mv(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)vec)->get()));
+}
+
 void* lantern_mv_out_tensor_tensor_tensor(void* out, void* self, void* vec)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::mv_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)vec)->get()));
+}
+
+void* lantern_mvlgamma_tensor_intt(void* self, void* p)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::mvlgamma(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)p)->get()));
+}
+
+void* lantern_mvlgamma__tensor_intt(void* self, void* p)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().mvlgamma_(
+        ((LanternObject<int64_t>*)p)->get()));
+}
+
+void* lantern_narrow_copy_tensor_intt_intt_intt(void* self, void* dim, void* start, void* length)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().narrow_copy(
+        ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<int64_t>*)start)->get(), ((LanternObject<int64_t>*)length)->get()));
+}
+
+void* lantern_narrow_tensor_intt_intt_intt(void* self, void* dim, void* start, void* length)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::narrow(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<int64_t>*)start)->get(), ((LanternObject<int64_t>*)length)->get()));
 }
 
 void* lantern_native_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double(void* input, void* weight, void* bias, void* running_mean, void* running_var, void* training, void* momentum, void* eps)
@@ -1757,10 +2753,40 @@ void* lantern_cosine_similarity_tensor_tensor_intt_double(void* x1, void* x2, vo
         ((LanternObject<const torch::Tensor &>*)x1)->get(), ((LanternObject<const torch::Tensor &>*)x2)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<double>*)eps)->get()));
 }
 
+void* lantern_permute_tensor_intarrayref(void* self, void* dims)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().permute(
+        ((LanternObject<torch::IntArrayRef>*)dims)->get()));
+}
+
+void* lantern_numpy_t_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().numpy_T(
+        ));
+}
+
 void* lantern_pixel_shuffle_tensor_intt(void* self, void* upscale_factor)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::pixel_shuffle(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)upscale_factor)->get()));
+}
+
+void* lantern_is_pinned_tensor(void* self)
+{
+    return (void *) new LanternObject<bool>(((LanternObject<const torch::Tensor &>*)self)->get().is_pinned(
+        ));
+}
+
+void* lantern_pin_memory_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().pin_memory(
+        ));
+}
+
+void* lantern_pinverse_tensor_double(void* self, void* rcond)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::pinverse(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<double>*)rcond)->get()));
 }
 
 void* lantern_poisson_nll_loss_tensor_tensor_bool_bool_double_intt(void* input, void* target, void* log_input, void* full, void* eps, void* reduction)
@@ -1985,10 +3011,34 @@ void* lantern_range_out_tensor_scalar_scalar_scalar(void* out, void* start, void
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<torch::Scalar>*)start)->get(), ((LanternObject<torch::Scalar>*)end)->get(), ((LanternObject<torch::Scalar>*)step)->get()));
 }
 
+void* lantern_reciprocal_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::reciprocal(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_reciprocal__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::reciprocal_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_reciprocal_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::reciprocal_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_neg_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::neg(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_neg__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::neg_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_neg_out_tensor_tensor(void* out, void* self)
@@ -1997,16 +3047,58 @@ void* lantern_neg_out_tensor_tensor(void* out, void* self)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_repeat_tensor_intarrayref(void* self, void* repeats)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().repeat(
+        ((LanternObject<torch::IntArrayRef>*)repeats)->get()));
+}
+
 void* lantern_repeat_interleave_tensor(void* repeats)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::repeat_interleave(
         ((LanternObject<const torch::Tensor &>*)repeats)->get()));
 }
 
+void* lantern_repeat_interleave_tensor_tensor_intt(void* self, void* repeats, void* dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::repeat_interleave(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)repeats)->get(), ((LanternObject<c10::optional<int64_t>>*)dim)->get()));
+}
+
+void* lantern_repeat_interleave_tensor_intt_intt(void* self, void* repeats, void* dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::repeat_interleave(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)repeats)->get(), ((LanternObject<c10::optional<int64_t>>*)dim)->get()));
+}
+
+void* lantern_reshape_tensor_intarrayref(void* self, void* shape)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::reshape(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)shape)->get()));
+}
+
 void* lantern__mkldnn_reshape_tensor_intarrayref(void* self, void* shape)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_mkldnn_reshape(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)shape)->get()));
+}
+
+void* lantern_reshape_as_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().reshape_as(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_round_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::round(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_round__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::round_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_round_out_tensor_tensor(void* out, void* self)
@@ -2027,6 +3119,30 @@ void* lantern_rrelu__tensor_scalar_scalar_bool_generator(void* self, void* lower
         ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)lower)->get(), ((LanternObject<torch::Scalar>*)upper)->get(), ((LanternObject<bool>*)training)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
 }
 
+void* lantern_relu_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::relu(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_relu__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::relu_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_prelu_tensor_tensor(void* self, void* weight)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::prelu(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get()));
+}
+
+void* lantern_prelu_backward_tensor_tensor_tensor(void* grad_output, void* self, void* weight)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::prelu_backward(
+        ((LanternObject<const torch::Tensor &>*)grad_output)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get()));
+}
+
 void* lantern_gelu_tensor(void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::gelu(
@@ -2039,10 +3155,46 @@ void* lantern_gelu_backward_tensor_tensor(void* grad, void* self)
         ((LanternObject<const torch::Tensor &>*)grad)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_hardshrink_tensor_scalar(void* self, void* lambd)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::hardshrink(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)lambd)->get()));
+}
+
+void* lantern_hardshrink_backward_tensor_tensor_scalar(void* grad_out, void* self, void* lambd)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::hardshrink_backward(
+        ((LanternObject<const torch::Tensor &>*)grad_out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)lambd)->get()));
+}
+
+void* lantern_rsqrt_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::rsqrt(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_rsqrt__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::rsqrt_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_rsqrt_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::rsqrt_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_select_tensor_dimname_intt(void* self, void* dim, void* index)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::select(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<int64_t>*)index)->get()));
+}
+
+void* lantern_select_tensor_intt_intt(void* self, void* dim, void* index)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::select(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<int64_t>*)index)->get()));
 }
 
 void* lantern_selu_tensor(void* self)
@@ -2069,10 +3221,34 @@ void* lantern_celu__tensor_scalar(void* self, void* alpha)
         ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
 }
 
+void* lantern_sigmoid_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sigmoid(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_sigmoid__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sigmoid_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_sigmoid_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::sigmoid_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_sin_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sin(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_sin__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sin_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_sin_out_tensor_tensor(void* out, void* self)
@@ -2081,10 +3257,76 @@ void* lantern_sin_out_tensor_tensor(void* out, void* self)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_sinh_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sinh(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_sinh__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sinh_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_sinh_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::sinh_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_detach_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::detach(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_detach__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::detach_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_size_tensor_intt(void* self, void* dim)
+{
+    return (void *) new LanternObject<int64_t>(torch::size(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_size_tensor_dimname(void* self, void* dim)
+{
+    return (void *) new LanternObject<int64_t>(torch::size(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get()));
+}
+
+void* lantern_slice_tensor_intt_intt_intt_intt(void* self, void* dim, void* start, void* end, void* step)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::slice(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<int64_t>*)start)->get(), ((LanternObject<int64_t>*)end)->get(), ((LanternObject<int64_t>*)step)->get()));
+}
+
+void* lantern_slogdet_tensor(void* self)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::slogdet(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_smm_tensor_tensor(void* self, void* mat2)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::smm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mat2)->get()));
+}
+
+void* lantern_softmax_tensor_intt_scalartype(void* self, void* dim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::softmax(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
+void* lantern_softmax_tensor_dimname_scalartype(void* self, void* dim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::softmax(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
 void* lantern__softmax_tensor_intt_bool(void* self, void* dim, void* half_to_float)
@@ -2097,6 +3339,60 @@ void* lantern__softmax_backward_data_tensor_tensor_intt_tensor(void* grad_output
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_softmax_backward_data(
         ((LanternObject<const torch::Tensor &>*)grad_output)->get(), ((LanternObject<const torch::Tensor &>*)output)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_split_tensor_intt_intt(void* self, void* split_size, void* dim)
+{
+    return (void *) new LanternObject<torch::TensorList>(torch::split(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)split_size)->get(), ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_split_with_sizes_tensor_intarrayref_intt(void* self, void* split_sizes, void* dim)
+{
+    return (void *) new LanternObject<torch::TensorList>(torch::split_with_sizes(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)split_sizes)->get(), ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_squeeze_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::squeeze(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_squeeze_tensor_intt(void* self, void* dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::squeeze(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_squeeze_tensor_dimname(void* self, void* dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::squeeze(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get()));
+}
+
+void* lantern_squeeze__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().squeeze_(
+        ));
+}
+
+void* lantern_squeeze__tensor_intt(void* self, void* dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().squeeze_(
+        ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_squeeze__tensor_dimname(void* self, void* dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().squeeze_(
+        ((LanternObject<torch::Dimname>*)dim)->get()));
+}
+
+void* lantern_sspaddmm_tensor_tensor_tensor_scalar_scalar(void* self, void* mat1, void* mat2, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sspaddmm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mat1)->get(), ((LanternObject<const torch::Tensor &>*)mat2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
 }
 
 void* lantern_sspaddmm_out_tensor_tensor_tensor_tensor_scalar_scalar(void* out, void* self, void* mat1, void* mat2, void* beta, void* alpha)
@@ -2117,6 +3413,42 @@ void* lantern_stack_out_tensor_tensorlist_intt(void* out, void* tensors, void* d
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<torch::TensorList>*)tensors)->get(), ((LanternObject<int64_t>*)dim)->get()));
 }
 
+void* lantern_stft_tensor_intt_intt_intt_tensor_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* normalized, void* onesided)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::stft(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)n_fft)->get(), ((LanternObject<c10::optional<int64_t>>*)hop_length)->get(), ((LanternObject<c10::optional<int64_t>>*)win_length)->get(), ((LanternObject<const torch::Tensor &>*)window)->get(), ((LanternObject<bool>*)normalized)->get(), ((LanternObject<bool>*)onesided)->get()));
+}
+
+void* lantern_stride_tensor_intt(void* self, void* dim)
+{
+    return (void *) new LanternObject<int64_t>(torch::stride(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_stride_tensor_dimname(void* self, void* dim)
+{
+    return (void *) new LanternObject<int64_t>(torch::stride(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get()));
+}
+
+void* lantern_sum_tensor_scalartype(void* self, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sum(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
+void* lantern_sum_tensor_intarrayref_bool_scalartype(void* self, void* dim, void* keepdim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sum(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
+void* lantern_sum_tensor_dimnamelist_bool_scalartype(void* self, void* dim, void* keepdim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sum(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
 void* lantern_sum_out_tensor_tensor_intarrayref_bool_scalartype(void* out, void* self, void* dim, void* keepdim, void* dtype)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::sum_out(
@@ -2129,10 +3461,40 @@ void* lantern_sum_out_tensor_tensor_dimnamelist_bool_scalartype(void* out, void*
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
+void* lantern_sum_to_size_tensor_intarrayref(void* self, void* size)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().sum_to_size(
+        ((LanternObject<torch::IntArrayRef>*)size)->get()));
+}
+
+void* lantern_sqrt_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sqrt(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_sqrt__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sqrt_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_sqrt_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::sqrt_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_std_tensor_bool(void* self, void* unbiased)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::std(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)unbiased)->get()));
+}
+
+void* lantern_std_tensor_intarrayref_bool_bool(void* self, void* dim, void* unbiased, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::std(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)unbiased)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_std_mean_tensor_bool(void* self, void* unbiased)
@@ -2159,10 +3521,28 @@ void* lantern_std_out_tensor_tensor_intarrayref_bool_bool(void* out, void* self,
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)unbiased)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
+void* lantern_std_tensor_dimnamelist_bool_bool(void* self, void* dim, void* unbiased, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::std(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)unbiased)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_std_out_tensor_tensor_dimnamelist_bool_bool(void* out, void* self, void* dim, void* unbiased, void* keepdim)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::std_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)unbiased)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_prod_tensor_scalartype(void* self, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::prod(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
+void* lantern_prod_tensor_intt_bool_scalartype(void* self, void* dim, void* keepdim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::prod(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
 void* lantern_prod_out_tensor_tensor_intt_bool_scalartype(void* out, void* self, void* dim, void* keepdim, void* dtype)
@@ -2171,16 +3551,58 @@ void* lantern_prod_out_tensor_tensor_intt_bool_scalartype(void* out, void* self,
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
+void* lantern_prod_tensor_dimname_bool_scalartype(void* self, void* dim, void* keepdim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::prod(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
+}
+
 void* lantern_prod_out_tensor_tensor_dimname_bool_scalartype(void* out, void* self, void* dim, void* keepdim, void* dtype)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::prod_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<c10::optional<torch::ScalarType>>*)dtype)->get()));
 }
 
+void* lantern_t_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::t(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_t__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().t_(
+        ));
+}
+
+void* lantern_tan_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::tan(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_tan__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::tan_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_tan_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::tan_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_tanh_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::tanh(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_tanh__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::tanh_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_tanh_out_tensor_tensor(void* out, void* self)
@@ -2219,10 +3641,28 @@ void* lantern_threshold_backward_tensor_tensor_scalar(void* grad_output, void* s
         ((LanternObject<const torch::Tensor &>*)grad_output)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)threshold)->get()));
 }
 
+void* lantern_transpose_tensor_intt_intt(void* self, void* dim0, void* dim1)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::transpose(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim0)->get(), ((LanternObject<int64_t>*)dim1)->get()));
+}
+
+void* lantern_transpose_tensor_dimname_dimname(void* self, void* dim0, void* dim1)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::transpose(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim0)->get(), ((LanternObject<torch::Dimname>*)dim1)->get()));
+}
+
 void* lantern__mkldnn_transpose_tensor_intt_intt(void* self, void* dim0, void* dim1)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_mkldnn_transpose(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim0)->get(), ((LanternObject<int64_t>*)dim1)->get()));
+}
+
+void* lantern_transpose__tensor_intt_intt(void* self, void* dim0, void* dim1)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().transpose_(
+        ((LanternObject<int64_t>*)dim0)->get(), ((LanternObject<int64_t>*)dim1)->get()));
 }
 
 void* lantern__mkldnn_transpose__tensor_intt_intt(void* self, void* dim0, void* dim1)
@@ -2235,6 +3675,24 @@ void* lantern_one_hot_tensor_intt(void* self, void* num_classes)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::one_hot(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)num_classes)->get()));
+}
+
+void* lantern_flip_tensor_intarrayref(void* self, void* dims)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::flip(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dims)->get()));
+}
+
+void* lantern_roll_tensor_intarrayref_intarrayref(void* self, void* shifts, void* dims)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::roll(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)shifts)->get(), ((LanternObject<torch::IntArrayRef>*)dims)->get()));
+}
+
+void* lantern_rot90_tensor_intt_intarrayref(void* self, void* k, void* dims)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::rot90(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)k)->get(), ((LanternObject<torch::IntArrayRef>*)dims)->get()));
 }
 
 void* lantern_trapz_tensor_tensor_intt(void* y, void* x, void* dim)
@@ -2261,10 +3719,28 @@ void* lantern_triplet_margin_loss_tensor_tensor_tensor_double_double_double_bool
         ((LanternObject<const torch::Tensor &>*)anchor)->get(), ((LanternObject<const torch::Tensor &>*)positive)->get(), ((LanternObject<const torch::Tensor &>*)negative)->get(), ((LanternObject<double>*)margin)->get(), ((LanternObject<double>*)p)->get(), ((LanternObject<double>*)eps)->get(), ((LanternObject<bool>*)swap)->get(), ((LanternObject<int64_t>*)reduction)->get()));
 }
 
+void* lantern_trunc_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::trunc(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_trunc__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::trunc_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_trunc_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::trunc_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_type_as_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().type_as(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
 void* lantern__has_compatible_shallow_copy_type_tensor_tensor(void* self, void* from)
@@ -2309,10 +3785,40 @@ void* lantern__unsafe_view_tensor_intarrayref(void* self, void* size)
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)size)->get()));
 }
 
+void* lantern_unsqueeze_tensor_intt(void* self, void* dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::unsqueeze(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_unsqueeze__tensor_intt(void* self, void* dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().unsqueeze_(
+        ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_var_tensor_bool(void* self, void* unbiased)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::var(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)unbiased)->get()));
+}
+
+void* lantern_var_tensor_intarrayref_bool_bool(void* self, void* dim, void* unbiased, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::var(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)unbiased)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_var_out_tensor_tensor_intarrayref_bool_bool(void* out, void* self, void* dim, void* unbiased, void* keepdim)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::var_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)unbiased)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_var_tensor_dimnamelist_bool_bool(void* self, void* dim, void* unbiased, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::var(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)unbiased)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_var_out_tensor_tensor_dimnamelist_bool_bool(void* out, void* self, void* dim, void* unbiased, void* keepdim)
@@ -2337,6 +3843,18 @@ void* lantern_var_mean_tensor_dimnamelist_bool_bool(void* self, void* dim, void*
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::var_mean(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)unbiased)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_view_as_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().view_as(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_where_tensor_tensor_tensor(void* condition, void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::where(
+        ((LanternObject<const torch::Tensor &>*)condition)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
 void* lantern_where_tensor(void* condition)
@@ -2477,6 +3995,30 @@ void* lantern__sparse_sum_backward_tensor_tensor_intarrayref(void* grad, void* s
         ((LanternObject<const torch::Tensor &>*)grad)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get()));
 }
 
+void* lantern_norm_tensor_scalar_scalartype(void* self, void* p, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::norm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)p)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+}
+
+void* lantern_norm_tensor_scalar(void* self, void* p)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::norm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)p)->get()));
+}
+
+void* lantern_norm_tensor_scalar_intarrayref_bool_scalartype(void* self, void* p, void* dim, void* keepdim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::norm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)p)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+}
+
+void* lantern_norm_tensor_scalar_intarrayref_bool(void* self, void* p, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::norm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)p)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
 void* lantern_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype(void* out, void* self, void* p, void* dim, void* keepdim, void* dtype)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::norm_out(
@@ -2487,6 +4029,18 @@ void* lantern_norm_out_tensor_tensor_scalar_intarrayref_bool(void* out, void* se
 {
     return (void *) new LanternObject<torch::Tensor>(torch::norm_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)p)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
+}
+
+void* lantern_norm_tensor_scalar_dimnamelist_bool_scalartype(void* self, void* p, void* dim, void* keepdim, void* dtype)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::norm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)p)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+}
+
+void* lantern_norm_tensor_scalar_dimnamelist_bool(void* self, void* p, void* dim, void* keepdim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::norm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<c10::optional<torch::Scalar>>*)p)->get(), ((LanternObject<torch::DimnameList>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
 void* lantern_norm_out_tensor_tensor_scalar_dimnamelist_bool_scalartype(void* out, void* self, void* p, void* dim, void* keepdim, void* dtype)
@@ -2543,16 +4097,64 @@ void* lantern_nuclear_norm_out_tensor_tensor_intarrayref_bool(void* out, void* s
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::IntArrayRef>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get()));
 }
 
+void* lantern_clone_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::clone(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_resize_as__tensor_tensor(void* self, void* the_template)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::resize_as_(
+        ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)the_template)->get()));
+}
+
 void* lantern_pow_out_tensor_tensor_scalar(void* out, void* self, void* exponent)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::pow_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)exponent)->get()));
 }
 
+void* lantern_pow_tensor_scalar(void* self, void* exponent)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::pow(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)exponent)->get()));
+}
+
+void* lantern_zero__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::zero_(
+        ((LanternObject<torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_sub_out_tensor_tensor_tensor_scalar(void* out, void* self, void* other, void* alpha)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::sub_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_sub_tensor_tensor_scalar(void* self, void* other, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sub(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_sub__tensor_tensor_scalar(void* self, void* other, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().sub_(
+        ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_sub_tensor_scalar_scalar(void* self, void* other, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sub(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_sub__tensor_scalar_scalar(void* self, void* other, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().sub_(
+        ((LanternObject<torch::Scalar>*)other)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
 }
 
 void* lantern_rsub_tensor_tensor_scalar(void* self, void* other, void* alpha)
@@ -2577,6 +4179,18 @@ void* lantern_addmm_out_tensor_tensor_tensor_tensor_scalar_scalar(void* out, voi
 {
     return (void *) new LanternObject<torch::Tensor>(torch::addmm_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mat1)->get(), ((LanternObject<const torch::Tensor &>*)mat2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_addmm_tensor_tensor_tensor_scalar_scalar(void* self, void* mat1, void* mat2, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::addmm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mat1)->get(), ((LanternObject<const torch::Tensor &>*)mat2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_addmm__tensor_tensor_tensor_scalar_scalar(void* self, void* mat1, void* mat2, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().addmm_(
+        ((LanternObject<const torch::Tensor &>*)mat1)->get(), ((LanternObject<const torch::Tensor &>*)mat2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
 }
 
 void* lantern_sparse_coo_tensor_intarrayref_tensoroptions(void* size, void* options)
@@ -2615,10 +4229,106 @@ void* lantern__sparse_coo_tensor_with_dims_and_tensors_intt_intt_intarrayref_ten
         ((LanternObject<int64_t>*)sparse_dim)->get(), ((LanternObject<int64_t>*)dense_dim)->get(), ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<const torch::Tensor &>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)values)->get(), ((LanternObject<const torch::TensorOptions &>*)options)->get()));
 }
 
+void* lantern_sparse_resize__tensor_intarrayref_intt_intt(void* self, void* size, void* sparse_dim, void* dense_dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().sparse_resize_(
+        ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<int64_t>*)sparse_dim)->get(), ((LanternObject<int64_t>*)dense_dim)->get()));
+}
+
+void* lantern_sparse_resize_and_clear__tensor_intarrayref_intt_intt(void* self, void* size, void* sparse_dim, void* dense_dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().sparse_resize_and_clear_(
+        ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<int64_t>*)sparse_dim)->get(), ((LanternObject<int64_t>*)dense_dim)->get()));
+}
+
+void* lantern_sparse_mask_tensor_tensor(void* self, void* mask)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().sparse_mask(
+        ((LanternObject<const torch::Tensor &>*)mask)->get()));
+}
+
+void* lantern_to_dense_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().to_dense(
+        ));
+}
+
 void* lantern_to_dense_backward_tensor_tensor(void* grad, void* input)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::to_dense_backward(
         ((LanternObject<const torch::Tensor &>*)grad)->get(), ((LanternObject<const torch::Tensor &>*)input)->get()));
+}
+
+void* lantern_sparse_dim_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(((LanternObject<const torch::Tensor &>*)self)->get().sparse_dim(
+        ));
+}
+
+void* lantern__dimi_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(((LanternObject<const torch::Tensor &>*)self)->get()._dimI(
+        ));
+}
+
+void* lantern_dense_dim_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(((LanternObject<const torch::Tensor &>*)self)->get().dense_dim(
+        ));
+}
+
+void* lantern__dimv_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(((LanternObject<const torch::Tensor &>*)self)->get()._dimV(
+        ));
+}
+
+void* lantern__nnz_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(((LanternObject<const torch::Tensor &>*)self)->get()._nnz(
+        ));
+}
+
+void* lantern_coalesce_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().coalesce(
+        ));
+}
+
+void* lantern_is_coalesced_tensor(void* self)
+{
+    return (void *) new LanternObject<bool>(((LanternObject<const torch::Tensor &>*)self)->get().is_coalesced(
+        ));
+}
+
+void* lantern__indices_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get()._indices(
+        ));
+}
+
+void* lantern__values_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get()._values(
+        ));
+}
+
+void* lantern__coalesced__tensor_bool(void* self, void* coalesced)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get()._coalesced_(
+        ((LanternObject<bool>*)coalesced)->get()));
+}
+
+void* lantern_indices_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().indices(
+        ));
+}
+
+void* lantern_values_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().values(
+        ));
 }
 
 void* lantern_hspmm_out_tensor_tensor_tensor(void* out, void* mat1, void* mat2)
@@ -2637,6 +4347,42 @@ void* lantern_copy_sparse_to_sparse__tensor_tensor_bool(void* self, void* src, v
 {
     return (void *) new LanternObject<torch::Tensor>(torch::copy_sparse_to_sparse_(
         ((LanternObject<torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)src)->get(), ((LanternObject<bool>*)non_blocking)->get()));
+}
+
+void* lantern_numel_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(torch::numel(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_unbind_tensor_intt(void* self, void* dim)
+{
+    return (void *) new LanternObject<torch::TensorList>(torch::unbind(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get()));
+}
+
+void* lantern_unbind_tensor_dimname(void* self, void* dim)
+{
+    return (void *) new LanternObject<torch::TensorList>(torch::unbind(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get()));
+}
+
+void* lantern_to_sparse_tensor_intt(void* self, void* sparse_dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().to_sparse(
+        ((LanternObject<int64_t>*)sparse_dim)->get()));
+}
+
+void* lantern_to_sparse_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().to_sparse(
+        ));
+}
+
+void* lantern_to_mkldnn_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().to_mkldnn(
+        ));
 }
 
 void* lantern_mkldnn_reorder_conv2d_weight_tensor_intarrayref_intarrayref_intarrayref_intt(void* self, void* padding, void* stride, void* dilation, void* groups)
@@ -2663,6 +4409,48 @@ void* lantern_quantize_per_channel_tensor_tensor_tensor_intt_scalartype(void* se
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)scales)->get(), ((LanternObject<const torch::Tensor &>*)zero_points)->get(), ((LanternObject<int64_t>*)axis)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
 }
 
+void* lantern_dequantize_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::dequantize(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_q_scale_tensor(void* self)
+{
+    return (void *) new LanternObject<double>(torch::q_scale(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_q_zero_point_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(torch::q_zero_point(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_q_per_channel_scales_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::q_per_channel_scales(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_q_per_channel_zero_points_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::q_per_channel_zero_points(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_q_per_channel_axis_tensor(void* self)
+{
+    return (void *) new LanternObject<int64_t>(torch::q_per_channel_axis(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_int_repr_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::int_repr(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
 void* lantern__make_per_tensor_quantized_tensor_tensor_double_intt(void* self, void* scale, void* zero_point)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_make_per_tensor_quantized_tensor(
@@ -2673,6 +4461,12 @@ void* lantern__make_per_channel_quantized_tensor_tensor_tensor_tensor_intt(void*
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_make_per_channel_quantized_tensor(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)scale)->get(), ((LanternObject<const torch::Tensor &>*)zero_point)->get(), ((LanternObject<int64_t>*)axis)->get()));
+}
+
+void* lantern_qscheme_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::QScheme>(((LanternObject<const torch::Tensor &>*)self)->get().qscheme(
+        ));
 }
 
 void* lantern_fake_quantize_per_tensor_affine_tensor_double_intt_intt_intt(void* self, void* scale, void* zero_point, void* quant_min, void* quant_max)
@@ -2699,6 +4493,30 @@ void* lantern_fake_quantize_per_channel_affine_backward_tensor_tensor_tensor_ten
         ((LanternObject<const torch::Tensor &>*)grad)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)scale)->get(), ((LanternObject<const torch::Tensor &>*)zero_point)->get(), ((LanternObject<int64_t>*)axis)->get(), ((LanternObject<int64_t>*)quant_min)->get(), ((LanternObject<int64_t>*)quant_max)->get()));
 }
 
+void* lantern_to_tensor_tensoroptions_bool_bool(void* self, void* options, void* non_blocking, void* copy)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().to(
+        ((LanternObject<const torch::TensorOptions &>*)options)->get(), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get()));
+}
+
+void* lantern_to_tensor_device_scalartype_bool_bool(void* self, void* device, void* dtype, void* non_blocking, void* copy)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().to(
+        ((LanternObject<torch::Device>*)device)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get(), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get()));
+}
+
+void* lantern_to_tensor_scalartype_bool_bool(void* self, void* dtype, void* non_blocking, void* copy)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().to(
+        ((LanternObject<torch::ScalarType>*)dtype)->get(), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get()));
+}
+
+void* lantern_to_tensor_tensor_bool_bool(void* self, void* other, void* non_blocking, void* copy)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().to(
+        ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get()));
+}
+
 void* lantern_meshgrid_tensorlist(void* tensors)
 {
     return (void *) new LanternObject<torch::TensorList>(torch::meshgrid(
@@ -2715,6 +4533,12 @@ void* lantern_combinations_tensor_intt_bool(void* self, void* r, void* with_repl
 {
     return (void *) new LanternObject<torch::Tensor>(torch::combinations(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)r)->get(), ((LanternObject<bool>*)with_replacement)->get()));
+}
+
+void* lantern_item_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Scalar>(((LanternObject<const torch::Tensor &>*)self)->get().item(
+        ));
 }
 
 void* lantern_result_type_tensor_tensor(void* tensor, void* other)
@@ -2927,10 +4751,568 @@ void* lantern__pad_packed_sequence_tensor_tensor_bool_scalar_intt(void* data, vo
         ((LanternObject<const torch::Tensor &>*)data)->get(), ((LanternObject<const torch::Tensor &>*)batch_sizes)->get(), ((LanternObject<bool>*)batch_first)->get(), ((LanternObject<torch::Scalar>*)padding_value)->get(), ((LanternObject<int64_t>*)total_length)->get()));
 }
 
+void* lantern_set__tensor_storage(void* self, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().set_(
+        ((LanternObject<torch::Storage>*)source)->get()));
+}
+
+void* lantern_set__tensor_storage_intt_intarrayref_intarrayref(void* self, void* source, void* storage_offset, void* size, void* stride)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().set_(
+        ((LanternObject<torch::Storage>*)source)->get(), ((LanternObject<int64_t>*)storage_offset)->get(), ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<torch::IntArrayRef>*)stride)->get()));
+}
+
+void* lantern_set__tensor_tensor(void* self, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().set_(
+        ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_set__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().set_(
+        ));
+}
+
+void* lantern_set_quantizer__tensor_constquantizerptr(void* self, void* quantizer)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().set_quantizer_(
+        ((LanternObject<torch::ConstQuantizerPtr>*)quantizer)->get()));
+}
+
+void* lantern_is_set_to_tensor_tensor(void* self, void* tensor)
+{
+    return (void *) new LanternObject<bool>(((LanternObject<const torch::Tensor &>*)self)->get().is_set_to(
+        ((LanternObject<const torch::Tensor &>*)tensor)->get()));
+}
+
+void* lantern_masked_fill__tensor_tensor_scalar(void* self, void* mask, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().masked_fill_(
+        ((LanternObject<const torch::Tensor &>*)mask)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_masked_fill_tensor_tensor_scalar(void* self, void* mask, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::masked_fill(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mask)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_masked_fill__tensor_tensor_tensor(void* self, void* mask, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().masked_fill_(
+        ((LanternObject<const torch::Tensor &>*)mask)->get(), ((LanternObject<const torch::Tensor &>*)value)->get()));
+}
+
+void* lantern_masked_fill_tensor_tensor_tensor(void* self, void* mask, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::masked_fill(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mask)->get(), ((LanternObject<const torch::Tensor &>*)value)->get()));
+}
+
+void* lantern_masked_scatter__tensor_tensor_tensor(void* self, void* mask, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().masked_scatter_(
+        ((LanternObject<const torch::Tensor &>*)mask)->get(), ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_masked_scatter_tensor_tensor_tensor(void* self, void* mask, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::masked_scatter(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mask)->get(), ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_view_tensor_intarrayref(void* self, void* size)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().view(
+        ((LanternObject<torch::IntArrayRef>*)size)->get()));
+}
+
+void* lantern_put__tensor_tensor_tensor_bool(void* self, void* index, void* source, void* accumulate)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().put_(
+        ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)source)->get(), ((LanternObject<bool>*)accumulate)->get()));
+}
+
+void* lantern_index_add__tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().index_add_(
+        ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_index_add_tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_add(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_index_add_tensor_dimname_tensor_tensor(void* self, void* dim, void* index, void* source)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_add(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)source)->get()));
+}
+
+void* lantern_index_fill__tensor_intt_tensor_scalar(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().index_fill_(
+        ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_index_fill_tensor_intt_tensor_scalar(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_fill(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_index_fill__tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().index_fill_(
+        ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)value)->get()));
+}
+
+void* lantern_index_fill_tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_fill(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)value)->get()));
+}
+
+void* lantern_index_fill__tensor_dimname_tensor_scalar(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().index_fill_(
+        ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_index_fill__tensor_dimname_tensor_tensor(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().index_fill_(
+        ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)value)->get()));
+}
+
+void* lantern_index_fill_tensor_dimname_tensor_scalar(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_fill(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_index_fill_tensor_dimname_tensor_tensor(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_fill(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)value)->get()));
+}
+
+void* lantern_scatter__tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* src)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().scatter_(
+        ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)src)->get()));
+}
+
+void* lantern_scatter_tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* src)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::scatter(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)src)->get()));
+}
+
+void* lantern_scatter__tensor_intt_tensor_scalar(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().scatter_(
+        ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_scatter_tensor_intt_tensor_scalar(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::scatter(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_scatter_tensor_dimname_tensor_tensor(void* self, void* dim, void* index, void* src)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::scatter(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)src)->get()));
+}
+
+void* lantern_scatter_tensor_dimname_tensor_scalar(void* self, void* dim, void* index, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::scatter(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_scatter_add__tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* src)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().scatter_add_(
+        ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)src)->get()));
+}
+
+void* lantern_scatter_add_tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* src)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::scatter_add(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)src)->get()));
+}
+
+void* lantern_scatter_add_tensor_dimname_tensor_tensor(void* self, void* dim, void* index, void* src)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::scatter_add(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<const torch::Tensor &>*)src)->get()));
+}
+
+void* lantern_lt__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().lt_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_lt__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().lt_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_gt__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().gt_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_gt__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().gt_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_le__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().le_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_le__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().le_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_ge__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().ge_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_ge__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().ge_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_eq__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().eq_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_eq__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().eq_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_ne__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().ne_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_ne__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().ne_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___and___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__and__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___and___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__and__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___iand___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__iand__(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___iand___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__iand__(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___or___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__or__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___or___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__or__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___ior___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__ior__(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___ior___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__ior__(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___xor___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__xor__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___xor___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__xor__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___ixor___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__ixor__(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___ixor___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__ixor__(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___lshift___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__lshift__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___lshift___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__lshift__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___ilshift___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__ilshift__(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___ilshift___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__ilshift__(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___rshift___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__rshift__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___rshift___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::__rshift__(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern___irshift___tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__irshift__(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern___irshift___tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().__irshift__(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_lgamma__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().lgamma_(
+        ));
+}
+
+void* lantern_atan2__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().atan2_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_tril__tensor_intt(void* self, void* diagonal)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().tril_(
+        ((LanternObject<int64_t>*)diagonal)->get()));
+}
+
+void* lantern_triu__tensor_intt(void* self, void* diagonal)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().triu_(
+        ((LanternObject<int64_t>*)diagonal)->get()));
+}
+
+void* lantern_digamma__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().digamma_(
+        ));
+}
+
+void* lantern_polygamma__tensor_intt(void* self, void* n)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().polygamma_(
+        ((LanternObject<int64_t>*)n)->get()));
+}
+
+void* lantern_renorm__tensor_scalar_intt_scalar(void* self, void* p, void* dim, void* maxnorm)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().renorm_(
+        ((LanternObject<torch::Scalar>*)p)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<torch::Scalar>*)maxnorm)->get()));
+}
+
+void* lantern_pow__tensor_scalar(void* self, void* exponent)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().pow_(
+        ((LanternObject<torch::Scalar>*)exponent)->get()));
+}
+
+void* lantern_pow__tensor_tensor(void* self, void* exponent)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().pow_(
+        ((LanternObject<const torch::Tensor &>*)exponent)->get()));
+}
+
+void* lantern_lerp__tensor_tensor_scalar(void* self, void* end, void* weight)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().lerp_(
+        ((LanternObject<const torch::Tensor &>*)end)->get(), ((LanternObject<torch::Scalar>*)weight)->get()));
+}
+
+void* lantern_lerp__tensor_tensor_tensor(void* self, void* end, void* weight)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().lerp_(
+        ((LanternObject<const torch::Tensor &>*)end)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get()));
+}
+
+void* lantern_fmod__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().fmod_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_fmod__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().fmod_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_remainder__tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().remainder_(
+        ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_remainder__tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().remainder_(
+        ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_addbmm__tensor_tensor_tensor_scalar_scalar(void* self, void* batch1, void* batch2, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().addbmm_(
+        ((LanternObject<const torch::Tensor &>*)batch1)->get(), ((LanternObject<const torch::Tensor &>*)batch2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
 void* lantern_addbmm_out_tensor_tensor_tensor_tensor_scalar_scalar(void* out, void* self, void* batch1, void* batch2, void* beta, void* alpha)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::addbmm_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)batch1)->get(), ((LanternObject<const torch::Tensor &>*)batch2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_addbmm_tensor_tensor_tensor_scalar_scalar(void* self, void* batch1, void* batch2, void* beta, void* alpha)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::addbmm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)batch1)->get(), ((LanternObject<const torch::Tensor &>*)batch2)->get(), ((LanternObject<torch::Scalar>*)beta)->get(), ((LanternObject<torch::Scalar>*)alpha)->get()));
+}
+
+void* lantern_addcdiv__tensor_tensor_tensor_scalar(void* self, void* tensor1, void* tensor2, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().addcdiv_(
+        ((LanternObject<const torch::Tensor &>*)tensor1)->get(), ((LanternObject<const torch::Tensor &>*)tensor2)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_random__tensor_intt_intt_generator(void* self, void* from, void* to, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().random_(
+        ((LanternObject<int64_t>*)from)->get(), ((LanternObject<int64_t>*)to)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_random__tensor_intt_generator(void* self, void* to, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().random_(
+        ((LanternObject<int64_t>*)to)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_random__tensor_generator(void* self, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().random_(
+        ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_uniform__tensor_double_double_generator(void* self, void* from, void* to, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().uniform_(
+        ((LanternObject<double>*)from)->get(), ((LanternObject<double>*)to)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_normal__tensor_double_double_generator(void* self, void* mean, void* std, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().normal_(
+        ((LanternObject<double>*)mean)->get(), ((LanternObject<double>*)std)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_cauchy__tensor_double_double_generator(void* self, void* median, void* sigma, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().cauchy_(
+        ((LanternObject<double>*)median)->get(), ((LanternObject<double>*)sigma)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_log_normal__tensor_double_double_generator(void* self, void* mean, void* std, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().log_normal_(
+        ((LanternObject<double>*)mean)->get(), ((LanternObject<double>*)std)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_exponential__tensor_double_generator(void* self, void* lambd, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().exponential_(
+        ((LanternObject<double>*)lambd)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_geometric__tensor_double_generator(void* self, void* p, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().geometric_(
+        ((LanternObject<double>*)p)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
 }
 
 void* lantern_diag_out_tensor_tensor_intt(void* out, void* self, void* diagonal)
@@ -2939,10 +5321,22 @@ void* lantern_diag_out_tensor_tensor_intt(void* out, void* self, void* diagonal)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)diagonal)->get()));
 }
 
+void* lantern_diag_tensor_intt(void* self, void* diagonal)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::diag(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)diagonal)->get()));
+}
+
 void* lantern_cross_out_tensor_tensor_tensor_intt(void* out, void* self, void* other, void* dim)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::cross_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<c10::optional<int64_t>>*)dim)->get()));
+}
+
+void* lantern_cross_tensor_tensor_intt(void* self, void* other, void* dim)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cross(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<c10::optional<int64_t>>*)dim)->get()));
 }
 
 void* lantern_triu_out_tensor_tensor_intt(void* out, void* self, void* diagonal)
@@ -2951,10 +5345,22 @@ void* lantern_triu_out_tensor_tensor_intt(void* out, void* self, void* diagonal)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)diagonal)->get()));
 }
 
+void* lantern_triu_tensor_intt(void* self, void* diagonal)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::triu(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)diagonal)->get()));
+}
+
 void* lantern_tril_out_tensor_tensor_intt(void* out, void* self, void* diagonal)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::tril_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)diagonal)->get()));
+}
+
+void* lantern_tril_tensor_intt(void* self, void* diagonal)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::tril(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)diagonal)->get()));
 }
 
 void* lantern_tril_indices_intt_intt_intt_tensoroptions(void* row, void* col, void* offset, void* options)
@@ -2969,10 +5375,22 @@ void* lantern_triu_indices_intt_intt_intt_tensoroptions(void* row, void* col, vo
         ((LanternObject<int64_t>*)row)->get(), ((LanternObject<int64_t>*)col)->get(), ((LanternObject<int64_t>*)offset)->get(), ((LanternObject<const torch::TensorOptions &>*)options)->get()));
 }
 
+void* lantern_trace_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::trace(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_ne_out_tensor_tensor_scalar(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::ne_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_ne_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::ne(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
 }
 
 void* lantern_ne_out_tensor_tensor_tensor(void* out, void* self, void* other)
@@ -2981,10 +5399,22 @@ void* lantern_ne_out_tensor_tensor_tensor(void* out, void* self, void* other)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
+void* lantern_ne_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::ne(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_eq_out_tensor_tensor_scalar(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::eq_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_eq_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::eq(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
 }
 
 void* lantern_eq_out_tensor_tensor_tensor(void* out, void* self, void* other)
@@ -2993,10 +5423,22 @@ void* lantern_eq_out_tensor_tensor_tensor(void* out, void* self, void* other)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
+void* lantern_eq_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::eq(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_ge_out_tensor_tensor_scalar(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::ge_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_ge_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::ge(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
 }
 
 void* lantern_ge_out_tensor_tensor_tensor(void* out, void* self, void* other)
@@ -3005,10 +5447,22 @@ void* lantern_ge_out_tensor_tensor_tensor(void* out, void* self, void* other)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
+void* lantern_ge_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::ge(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_le_out_tensor_tensor_scalar(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::le_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_le_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::le(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
 }
 
 void* lantern_le_out_tensor_tensor_tensor(void* out, void* self, void* other)
@@ -3017,10 +5471,22 @@ void* lantern_le_out_tensor_tensor_tensor(void* out, void* self, void* other)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
+void* lantern_le_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::le(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_gt_out_tensor_tensor_scalar(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::gt_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_gt_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::gt(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
 }
 
 void* lantern_gt_out_tensor_tensor_tensor(void* out, void* self, void* other)
@@ -3029,10 +5495,22 @@ void* lantern_gt_out_tensor_tensor_tensor(void* out, void* self, void* other)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
+void* lantern_gt_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::gt(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_lt_out_tensor_tensor_scalar(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::lt_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
+void* lantern_lt_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::lt(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
 }
 
 void* lantern_lt_out_tensor_tensor_tensor(void* out, void* self, void* other)
@@ -3041,10 +5519,22 @@ void* lantern_lt_out_tensor_tensor_tensor(void* out, void* self, void* other)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
+void* lantern_lt_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::lt(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_take_out_tensor_tensor_tensor(void* out, void* self, void* index)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::take_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)index)->get()));
+}
+
+void* lantern_take_tensor_tensor(void* self, void* index)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::take(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)index)->get()));
 }
 
 void* lantern_index_select_out_tensor_tensor_intt_tensor(void* out, void* self, void* dim, void* index)
@@ -3053,10 +5543,22 @@ void* lantern_index_select_out_tensor_tensor_intt_tensor(void* out, void* self, 
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get()));
 }
 
+void* lantern_index_select_tensor_intt_tensor(void* self, void* dim, void* index)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_select(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get()));
+}
+
 void* lantern_index_select_out_tensor_tensor_dimname_tensor(void* out, void* self, void* dim, void* index)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::index_select_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get()));
+}
+
+void* lantern_index_select_tensor_dimname_tensor(void* self, void* dim, void* index)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::index_select(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get()));
 }
 
 void* lantern_masked_select_out_tensor_tensor_tensor(void* out, void* self, void* mask)
@@ -3065,10 +5567,28 @@ void* lantern_masked_select_out_tensor_tensor_tensor(void* out, void* self, void
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mask)->get()));
 }
 
+void* lantern_masked_select_tensor_tensor(void* self, void* mask)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::masked_select(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)mask)->get()));
+}
+
 void* lantern_nonzero_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::nonzero_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_nonzero_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::nonzero(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_nonzero_numpy_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::TensorList>(torch::nonzero_numpy(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_gather_out_tensor_tensor_intt_tensor_bool(void* out, void* self, void* dim, void* index, void* sparse_grad)
@@ -3077,10 +5597,22 @@ void* lantern_gather_out_tensor_tensor_intt_tensor_bool(void* out, void* self, v
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<bool>*)sparse_grad)->get()));
 }
 
+void* lantern_gather_tensor_intt_tensor_bool(void* self, void* dim, void* index, void* sparse_grad)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::gather(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<bool>*)sparse_grad)->get()));
+}
+
 void* lantern_gather_out_tensor_tensor_dimname_tensor_bool(void* out, void* self, void* dim, void* index, void* sparse_grad)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::gather_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<bool>*)sparse_grad)->get()));
+}
+
+void* lantern_gather_tensor_dimname_tensor_bool(void* self, void* dim, void* index, void* sparse_grad)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::gather(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<const torch::Tensor &>*)index)->get(), ((LanternObject<bool>*)sparse_grad)->get()));
 }
 
 void* lantern__gather_sparse_backward_tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* grad)
@@ -3095,10 +5627,28 @@ void* lantern_addcmul_out_tensor_tensor_tensor_tensor_scalar(void* out, void* se
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)tensor1)->get(), ((LanternObject<const torch::Tensor &>*)tensor2)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
 }
 
+void* lantern_addcmul_tensor_tensor_tensor_scalar(void* self, void* tensor1, void* tensor2, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::addcmul(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)tensor1)->get(), ((LanternObject<const torch::Tensor &>*)tensor2)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_addcmul__tensor_tensor_tensor_scalar(void* self, void* tensor1, void* tensor2, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().addcmul_(
+        ((LanternObject<const torch::Tensor &>*)tensor1)->get(), ((LanternObject<const torch::Tensor &>*)tensor2)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
 void* lantern_addcdiv_out_tensor_tensor_tensor_tensor_scalar(void* out, void* self, void* tensor1, void* tensor2, void* value)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::addcdiv_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)tensor1)->get(), ((LanternObject<const torch::Tensor &>*)tensor2)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
+}
+
+void* lantern_addcdiv_tensor_tensor_tensor_scalar(void* self, void* tensor1, void* tensor2, void* value)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::addcdiv(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)tensor1)->get(), ((LanternObject<const torch::Tensor &>*)tensor2)->get(), ((LanternObject<torch::Scalar>*)value)->get()));
 }
 
 void* lantern_lstsq_out_tensor_tensor_tensor_tensor(void* X, void* qr, void* self, void* A)
@@ -3107,10 +5657,22 @@ void* lantern_lstsq_out_tensor_tensor_tensor_tensor(void* X, void* qr, void* sel
         ((LanternObject<torch::Tensor &>*)X)->get(), ((LanternObject<torch::Tensor &>*)qr)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)A)->get()));
 }
 
+void* lantern_lstsq_tensor_tensor(void* self, void* A)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::lstsq(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)A)->get()));
+}
+
 void* lantern_triangular_solve_out_tensor_tensor_tensor_tensor_bool_bool_bool(void* X, void* M, void* self, void* A, void* upper, void* transpose, void* unitriangular)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::triangular_solve_out(
         ((LanternObject<torch::Tensor &>*)X)->get(), ((LanternObject<torch::Tensor &>*)M)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)A)->get(), ((LanternObject<bool>*)upper)->get(), ((LanternObject<bool>*)transpose)->get(), ((LanternObject<bool>*)unitriangular)->get()));
+}
+
+void* lantern_triangular_solve_tensor_tensor_bool_bool_bool(void* self, void* A, void* upper, void* transpose, void* unitriangular)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::triangular_solve(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)A)->get(), ((LanternObject<bool>*)upper)->get(), ((LanternObject<bool>*)transpose)->get(), ((LanternObject<bool>*)unitriangular)->get()));
 }
 
 void* lantern__triangular_solve_helper_tensor_tensor_bool_bool_bool(void* self, void* A, void* upper, void* transpose, void* unitriangular)
@@ -3125,6 +5687,12 @@ void* lantern_symeig_out_tensor_tensor_tensor_bool_bool(void* e, void* V, void* 
         ((LanternObject<torch::Tensor &>*)e)->get(), ((LanternObject<torch::Tensor &>*)V)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)eigenvectors)->get(), ((LanternObject<bool>*)upper)->get()));
 }
 
+void* lantern_symeig_tensor_bool_bool(void* self, void* eigenvectors, void* upper)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::symeig(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)eigenvectors)->get(), ((LanternObject<bool>*)upper)->get()));
+}
+
 void* lantern__symeig_helper_tensor_bool_bool(void* self, void* eigenvectors, void* upper)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::_symeig_helper(
@@ -3137,10 +5705,22 @@ void* lantern_eig_out_tensor_tensor_tensor_bool(void* e, void* v, void* self, vo
         ((LanternObject<torch::Tensor &>*)e)->get(), ((LanternObject<torch::Tensor &>*)v)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)eigenvectors)->get()));
 }
 
+void* lantern_eig_tensor_bool(void* self, void* eigenvectors)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::eig(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)eigenvectors)->get()));
+}
+
 void* lantern_svd_out_tensor_tensor_tensor_tensor_bool_bool(void* U, void* S, void* V, void* self, void* some, void* compute_uv)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor, torch::Tensor>>(torch::svd_out(
         ((LanternObject<torch::Tensor &>*)U)->get(), ((LanternObject<torch::Tensor &>*)S)->get(), ((LanternObject<torch::Tensor &>*)V)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)some)->get(), ((LanternObject<bool>*)compute_uv)->get()));
+}
+
+void* lantern_svd_tensor_bool_bool(void* self, void* some, void* compute_uv)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor, torch::Tensor>>(torch::svd(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)some)->get(), ((LanternObject<bool>*)compute_uv)->get()));
 }
 
 void* lantern__svd_helper_tensor_bool_bool(void* self, void* some, void* compute_uv)
@@ -3155,6 +5735,12 @@ void* lantern_cholesky_out_tensor_tensor_bool(void* out, void* self, void* upper
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)upper)->get()));
 }
 
+void* lantern_cholesky_tensor_bool(void* self, void* upper)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cholesky(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)upper)->get()));
+}
+
 void* lantern__cholesky_helper_tensor_bool(void* self, void* upper)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_cholesky_helper(
@@ -3167,10 +5753,22 @@ void* lantern_cholesky_solve_out_tensor_tensor_tensor_bool(void* out, void* self
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)input2)->get(), ((LanternObject<bool>*)upper)->get()));
 }
 
+void* lantern_cholesky_solve_tensor_tensor_bool(void* self, void* input2, void* upper)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cholesky_solve(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)input2)->get(), ((LanternObject<bool>*)upper)->get()));
+}
+
 void* lantern__cholesky_solve_helper_tensor_tensor_bool(void* self, void* A, void* upper)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_cholesky_solve_helper(
         ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)A)->get(), ((LanternObject<bool>*)upper)->get()));
+}
+
+void* lantern_solve_tensor_tensor(void* self, void* A)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::solve(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)A)->get()));
 }
 
 void* lantern_solve_out_tensor_tensor_tensor_tensor(void* solution, void* lu, void* self, void* A)
@@ -3191,10 +5789,22 @@ void* lantern_cholesky_inverse_out_tensor_tensor_bool(void* out, void* self, voi
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)upper)->get()));
 }
 
+void* lantern_cholesky_inverse_tensor_bool(void* self, void* upper)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::cholesky_inverse(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)upper)->get()));
+}
+
 void* lantern_qr_out_tensor_tensor_tensor_bool(void* Q, void* R, void* self, void* some)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::qr_out(
         ((LanternObject<torch::Tensor &>*)Q)->get(), ((LanternObject<torch::Tensor &>*)R)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)some)->get()));
+}
+
+void* lantern_qr_tensor_bool(void* self, void* some)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::qr(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<bool>*)some)->get()));
 }
 
 void* lantern__qr_helper_tensor_bool(void* self, void* some)
@@ -3209,16 +5819,34 @@ void* lantern_geqrf_out_tensor_tensor_tensor(void* a, void* tau, void* self)
         ((LanternObject<torch::Tensor &>*)a)->get(), ((LanternObject<torch::Tensor &>*)tau)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_geqrf_tensor(void* self)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::geqrf(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_orgqr_out_tensor_tensor_tensor(void* out, void* self, void* input2)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::orgqr_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)input2)->get()));
 }
 
+void* lantern_orgqr_tensor_tensor(void* self, void* input2)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::orgqr(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)input2)->get()));
+}
+
 void* lantern_ormqr_out_tensor_tensor_tensor_tensor_bool_bool(void* out, void* self, void* input2, void* input3, void* left, void* transpose)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::ormqr_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)input2)->get(), ((LanternObject<const torch::Tensor &>*)input3)->get(), ((LanternObject<bool>*)left)->get(), ((LanternObject<bool>*)transpose)->get()));
+}
+
+void* lantern_ormqr_tensor_tensor_tensor_bool_bool(void* self, void* input2, void* input3, void* left, void* transpose)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::ormqr(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)input2)->get(), ((LanternObject<const torch::Tensor &>*)input3)->get(), ((LanternObject<bool>*)left)->get(), ((LanternObject<bool>*)transpose)->get()));
 }
 
 void* lantern__lu_with_info_tensor_bool_bool(void* self, void* pivot, void* check_errors)
@@ -3233,6 +5861,12 @@ void* lantern_lu_solve_out_tensor_tensor_tensor_tensor(void* out, void* self, vo
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)LU_data)->get(), ((LanternObject<const torch::Tensor &>*)LU_pivots)->get()));
 }
 
+void* lantern_lu_solve_tensor_tensor_tensor(void* self, void* LU_data, void* LU_pivots)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::lu_solve(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)LU_data)->get(), ((LanternObject<const torch::Tensor &>*)LU_pivots)->get()));
+}
+
 void* lantern__lu_solve_helper_tensor_tensor_tensor(void* self, void* LU_data, void* LU_pivots)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::_lu_solve_helper(
@@ -3243,6 +5877,12 @@ void* lantern_multinomial_out_tensor_tensor_intt_bool_generator(void* out, void*
 {
     return (void *) new LanternObject<torch::Tensor>(torch::multinomial_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)num_samples)->get(), ((LanternObject<bool>*)replacement)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_multinomial_tensor_intt_bool_generator(void* self, void* num_samples, void* replacement, void* generator)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::multinomial(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)num_samples)->get(), ((LanternObject<bool>*)replacement)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
 }
 
 void* lantern__multinomial_alias_setup_tensor(void* probs)
@@ -3263,10 +5903,22 @@ void* lantern_lgamma_out_tensor_tensor(void* out, void* self)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_lgamma_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::lgamma(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_digamma_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::digamma_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_digamma_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::digamma(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_polygamma_out_tensor_intt_tensor(void* out, void* n, void* self)
@@ -3275,10 +5927,40 @@ void* lantern_polygamma_out_tensor_intt_tensor(void* out, void* n, void* self)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<int64_t>*)n)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_polygamma_intt_tensor(void* n, void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::polygamma(
+        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_erfinv_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::erfinv(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_erfinv__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().erfinv_(
+        ));
+}
+
 void* lantern_erfinv_out_tensor_tensor(void* out, void* self)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::erfinv_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_sign_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::sign(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_sign__tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor &>*)self)->get().sign_(
+        ));
 }
 
 void* lantern_sign_out_tensor_tensor(void* out, void* self)
@@ -3287,10 +5969,22 @@ void* lantern_sign_out_tensor_tensor(void* out, void* self)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
+void* lantern_dist_tensor_tensor_scalar(void* self, void* other, void* p)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::dist(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get(), ((LanternObject<torch::Scalar>*)p)->get()));
+}
+
 void* lantern_atan2_out_tensor_tensor_tensor(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::atan2_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_atan2_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::atan2(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
 void* lantern_lerp_out_tensor_tensor_tensor_scalar(void* out, void* self, void* end, void* weight)
@@ -3305,10 +5999,28 @@ void* lantern_lerp_out_tensor_tensor_tensor_tensor(void* out, void* self, void* 
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)end)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get()));
 }
 
+void* lantern_lerp_tensor_tensor_scalar(void* self, void* end, void* weight)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::lerp(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)end)->get(), ((LanternObject<torch::Scalar>*)weight)->get()));
+}
+
+void* lantern_lerp_tensor_tensor_tensor(void* self, void* end, void* weight)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::lerp(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)end)->get(), ((LanternObject<const torch::Tensor &>*)weight)->get()));
+}
+
 void* lantern_histc_out_tensor_tensor_intt_scalar_scalar(void* out, void* self, void* bins, void* min, void* max)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::histc_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)bins)->get(), ((LanternObject<torch::Scalar>*)min)->get(), ((LanternObject<torch::Scalar>*)max)->get()));
+}
+
+void* lantern_histc_tensor_intt_scalar_scalar(void* self, void* bins, void* min, void* max)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::histc(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)bins)->get(), ((LanternObject<torch::Scalar>*)min)->get(), ((LanternObject<torch::Scalar>*)max)->get()));
 }
 
 void* lantern_fmod_out_tensor_tensor_scalar(void* out, void* self, void* other)
@@ -3317,10 +6029,22 @@ void* lantern_fmod_out_tensor_tensor_scalar(void* out, void* self, void* other)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
 }
 
+void* lantern_fmod_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::fmod(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
 void* lantern_fmod_out_tensor_tensor_tensor(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::fmod_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_fmod_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::fmod(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
 void* lantern_remainder_out_tensor_tensor_scalar(void* out, void* self, void* other)
@@ -3329,10 +6053,22 @@ void* lantern_remainder_out_tensor_tensor_scalar(void* out, void* self, void* ot
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
 }
 
+void* lantern_remainder_tensor_scalar(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::remainder(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)other)->get()));
+}
+
 void* lantern_remainder_out_tensor_tensor_tensor(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::remainder_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_remainder_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::remainder(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
 void* lantern_min_out_tensor_tensor_tensor(void* out, void* self, void* other)
@@ -3341,10 +6077,40 @@ void* lantern_min_out_tensor_tensor_tensor(void* out, void* self, void* other)
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
 }
 
+void* lantern_min_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::min(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_min_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::min(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_max_out_tensor_tensor_tensor(void* out, void* self, void* other)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::max_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_max_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::max(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
+void* lantern_max_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::max(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_median_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::median(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
 void* lantern_sort_out_tensor_tensor_tensor_intt_bool(void* values, void* indices, void* self, void* dim, void* descending)
@@ -3353,10 +6119,34 @@ void* lantern_sort_out_tensor_tensor_tensor_intt_bool(void* values, void* indice
         ((LanternObject<torch::Tensor &>*)values)->get(), ((LanternObject<torch::Tensor &>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)descending)->get()));
 }
 
+void* lantern_sort_tensor_intt_bool(void* self, void* dim, void* descending)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::sort(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)descending)->get()));
+}
+
 void* lantern_sort_out_tensor_tensor_tensor_dimname_bool(void* values, void* indices, void* self, void* dim, void* descending)
 {
     return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::sort_out(
         ((LanternObject<torch::Tensor &>*)values)->get(), ((LanternObject<torch::Tensor &>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)descending)->get()));
+}
+
+void* lantern_sort_tensor_dimname_bool(void* self, void* dim, void* descending)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::sort(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)descending)->get()));
+}
+
+void* lantern_argsort_tensor_intt_bool(void* self, void* dim, void* descending)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::argsort(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)descending)->get()));
+}
+
+void* lantern_argsort_tensor_dimname_bool(void* self, void* dim, void* descending)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::argsort(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Dimname>*)dim)->get(), ((LanternObject<bool>*)descending)->get()));
 }
 
 void* lantern_topk_out_tensor_tensor_tensor_intt_intt_bool_bool(void* values, void* indices, void* self, void* k, void* dim, void* largest, void* sorted)
@@ -3365,16 +6155,58 @@ void* lantern_topk_out_tensor_tensor_tensor_intt_intt_bool_bool(void* values, vo
         ((LanternObject<torch::Tensor &>*)values)->get(), ((LanternObject<torch::Tensor &>*)indices)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)k)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)largest)->get(), ((LanternObject<bool>*)sorted)->get()));
 }
 
+void* lantern_topk_tensor_intt_intt_bool_bool(void* self, void* k, void* dim, void* largest, void* sorted)
+{
+    return (void *) new LanternObject<std::tuple<torch::Tensor, torch::Tensor>>(torch::topk(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<int64_t>*)k)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<bool>*)largest)->get(), ((LanternObject<bool>*)sorted)->get()));
+}
+
+void* lantern_all_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::all(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
+void* lantern_any_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::any(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
+}
+
 void* lantern_renorm_out_tensor_tensor_scalar_intt_scalar(void* out, void* self, void* p, void* dim, void* maxnorm)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::renorm_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)p)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<torch::Scalar>*)maxnorm)->get()));
 }
 
+void* lantern_renorm_tensor_scalar_intt_scalar(void* self, void* p, void* dim, void* maxnorm)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::renorm(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<torch::Scalar>*)p)->get(), ((LanternObject<int64_t>*)dim)->get(), ((LanternObject<torch::Scalar>*)maxnorm)->get()));
+}
+
+void* lantern_unfold_tensor_intt_intt_intt(void* self, void* dimension, void* size, void* step)
+{
+    return (void *) new LanternObject<torch::Tensor>(((LanternObject<const torch::Tensor &>*)self)->get().unfold(
+        ((LanternObject<int64_t>*)dimension)->get(), ((LanternObject<int64_t>*)size)->get(), ((LanternObject<int64_t>*)step)->get()));
+}
+
+void* lantern_equal_tensor_tensor(void* self, void* other)
+{
+    return (void *) new LanternObject<bool>(torch::equal(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)other)->get()));
+}
+
 void* lantern_pow_out_tensor_tensor_tensor(void* out, void* self, void* exponent)
 {
     return (void *) new LanternObject<torch::Tensor>(torch::pow_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)exponent)->get()));
+}
+
+void* lantern_pow_tensor_tensor(void* self, void* exponent)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::pow(
+        ((LanternObject<const torch::Tensor &>*)self)->get(), ((LanternObject<const torch::Tensor &>*)exponent)->get()));
 }
 
 void* lantern_pow_out_tensor_scalar_tensor(void* out, void* self, void* exponent)
@@ -3411,6 +6243,12 @@ void* lantern_normal_out_tensor_double_double_intarrayref_generator(void* out, v
 {
     return (void *) new LanternObject<torch::Tensor>(torch::normal_out(
         ((LanternObject<torch::Tensor &>*)out)->get(), ((LanternObject<double>*)mean)->get(), ((LanternObject<double>*)std)->get(), ((LanternObject<torch::IntArrayRef>*)size)->get(), ((LanternObject<torch::Generator *>*)generator)->get()));
+}
+
+void* lantern_alias_tensor(void* self)
+{
+    return (void *) new LanternObject<torch::Tensor>(torch::alias(
+        ((LanternObject<const torch::Tensor &>*)self)->get()));
 }
 
 void* lantern__addr_tensor_tensor_tensor_scalar_scalar(void* self, void* vec1, void* vec2, void* beta, void* alpha)
