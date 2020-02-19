@@ -64,6 +64,10 @@ std::string addNamespace(std::string name)
     objects.push_back("Dimname");
     objects.push_back("IntArrayRef");
     objects.push_back("MemoryFormat");
+    objects.push_back("ConstQuantizerPtr");
+    objects.push_back("Storage");
+    objects.push_back("Device");
+    objects.push_back("QScheme");
 
     for (auto iter = objects.begin(); iter != objects.end(); iter++)
     {
