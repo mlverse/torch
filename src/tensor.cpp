@@ -89,6 +89,8 @@ Rcpp::List cpp_as_array (Rcpp::XPtr<torch::Tensor> x) {
     return tensor_to_r_array<REALSXP, double>(ten.to(torch::kDouble));
   } else if (ten.dtype() == torch::kInt16) {
     return tensor_to_r_array<INTSXP, int16_t>(ten.to(torch::kInt16));
+  } else if (ten.dtype() == torch::kBool) {
+    return tensor_to_r_array<LGLSXP, bool>(ten.to(torch::kBool));
   }
   
   Rcpp::stop("dtype not handled");

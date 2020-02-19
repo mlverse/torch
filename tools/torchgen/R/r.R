@@ -1,0 +1,351 @@
+
+get_arguments_with_no_default <- function(methods) {
+  args <- get_arguments_order(methods)
+  w_default <- get_arguments_with_default(methods)
+  args[!args %in% w_default]
+}
+
+get_arguments_with_default <- function(methods) {
+  methods %>%
+    purrr::map(~.x$arguments) %>%
+    purrr::map(~purrr::discard(.x, ~is.null(.x$default))) %>%
+    purrr::map(~purrr::map_chr(.x, ~.x$name)) %>%
+    purrr::flatten_chr() %>%
+    unique()
+}
+
+#' @importFrom rlang .data
+get_arguments_order <- function(methods) {
+  methods %>%
+    purrr::map(~.x$arguments) %>%
+    purrr::map(~purrr::map_chr(.x, ~.x$name)) %>%
+    purrr::map_dfr(~tibble::tibble(name = .x, id = seq_along(.x))) %>%
+    dplyr::group_by(.data$name) %>%
+    dplyr::summarise(id_max = max(.data$id)) %>%
+    dplyr::arrange(.data$id_max) %>%
+    purrr::pluck("name")
+}
+
+make_argument_list <- function(methods) {
+
+  arguments <- get_arguments_with_no_default(methods)
+  helper <- glue::glue("{arguments} = missing({arguments})") %>%
+    glue::glue_collapse(sep = ", ")
+
+  glue::glue("args <- c({helper})\nargs <- names(args[!args])")
+}
+
+make_all_arguments_list <- function(methods) {
+
+  arguments <- get_arguments_with_default(methods)
+
+  helper <- glue::glue("{arguments} = {arguments}") %>%
+    glue::glue_collapse(sep = ", ")
+
+  all_args <- glue::glue("all_args <- list({helper})")
+  glue::glue("{all_args}\nfor(nm in args) all_args[[nm]] <- environment()[[nm]]")
+
+}
+
+make_expected_types_list <- function(methods) {
+
+  dtypes <- methods %>%
+    purrr::map(~.x$arguments) %>%
+    purrr::map_dfr(~purrr::map_dfr(.x, ~tibble(name = .x$name, dtype = .x$dynamic_type))) %>%
+    dplyr::group_by(.data$name) %>%
+    dplyr::summarise(dtypes = list(unique(.data$dtype))) %>%
+    dplyr::mutate(
+      c = .data$dtypes %>% purrr::map_chr(~glue::glue("'{.x}'") %>%
+                               glue::glue_collapse(sep=",") %>%
+                               glue::glue("c(", ., ")")
+      )
+    ) %>%
+    dplyr::mutate(
+      c = glue::glue("{name} = {c}")
+    )
+
+  glue::glue("expected_types <- list(",
+             glue::glue_collapse(dtypes$c, sep = ",\n") ,
+             ")"
+             )
+}
+
+r_namespace <- function(decls) {
+
+  glue::glue("
+
+{r_namespace_name(decls)} <- function({r_namespace_signature(decls)}) {{
+  {r_namespace_body(decls)}
+}}
+
+")
+}
+
+r_namespace_name <- function(decls) {
+  glue::glue("torch_{decls[[1]]$name}")
+}
+
+r_namespace_signature <- function(decls) {
+  args <- get_arguments_order(decls)
+
+  if (length(args) == 0)
+    return("")
+
+  args %>%
+    purrr::map_chr(~r_argument(.x, decls)) %>%
+    glue::glue_collapse(sep = ", ")
+}
+
+r_argument_default <- function(default) {
+  if (default == "c10::nullopt")
+    return("NULL")
+
+  if (default == "FALSE")
+    return("FALSE")
+
+  if (default == "TRUE")
+    return("TRUE")
+
+  if (default %in% c("1", "0", "-1", "2", "0.000010", "0.000000",
+                     "1.000000", "-2", "0.500000", "100", "0.010000",
+                     "10.000000", "-100", "0.000001", "0.125000",
+                     "0.333333", "9223372036854775807", "20"))
+    return(default)
+
+  if (default == "{}")
+    return("list()")
+
+  if (default == "MemoryFormat::Contiguous")
+    return("torch_contiguous_format()")
+
+  if (default == "nullptr")
+    return("NULL")
+
+  if (default == "at::Reduction::Mean")
+    return("torch_reduction_mean()")
+
+  if (default == "{0,1}")
+    return("c(0,1)")
+
+  if (default == "at::kLong")
+    return("torch_long()")
+
+  browser()
+}
+
+r_argument_name <- function(name) {
+  if (name == "FALSE")
+    name <- "False"
+
+  if (substr(name, 1, 1) == "_")
+    name <- substr(name, 2, nchar(name))
+
+  name
+}
+
+r_argument <- function(name, decls) {
+  no_default <- get_arguments_with_no_default(decls)
+  if (name %in% no_default)
+    r_argument_with_no_default(name)
+  else
+    r_argument_with_default(name, decls)
+}
+
+r_argument_with_default <- function(name, decls) {
+
+  default <- purrr::map(decls, ~.x$arguments) %>%
+    purrr::flatten() %>%
+    purrr::keep(~.x$name == name) %>%
+    purrr::map(~.x$default) %>%
+    purrr::discard(is.null) %>%
+    purrr::flatten_chr() %>%
+    unique()
+
+  if (length(default) > 1) {
+    browser()
+  }
+
+  name <- r_argument_name(name)
+  default <- r_argument_default(default)
+  glue::glue("{name} = {default}")
+}
+
+r_argument_with_no_default <- function(name) {
+  r_argument_name(name)
+}
+
+r_list_of_arguments_helper <- function(args) {
+  if (length(args) == 0)
+    return("args <- list()")
+
+  args <- purrr::map_chr(args, r_argument_name)
+
+  args <- glue::glue('"{args}"') %>% glue::glue_collapse(sep = ", ")
+  glue::glue("args <- rlang::env_get_list(nms = c({args}))")
+}
+
+r_namespace_list_of_arguments <- function(decls) {
+  args <- get_arguments_order(decls)
+  r_list_of_arguments_helper(args)
+}
+
+r_method_list_of_arguments <- function(decls) {
+  args <- get_arguments_order(decls)
+  args <- args[args != "self"]
+  r_list_of_arguments_helper(args)
+}
+
+r_argument_expected_types <- function(arg, decls) {
+  decls %>%
+    purrr::map(~.x$arguments) %>%
+    purrr::flatten() %>%
+    purrr::keep(~.x$name == arg) %>%
+    purrr::map_chr(~.x$dynamic_type) %>%
+    unique()
+}
+
+#' @importFrom utils capture.output
+r_arguments_expected_types <- function(decls) {
+  args <- get_arguments_order(decls)
+
+  if (length(args) == 0) {
+    return("expected_types <- list()")
+  }
+
+  names(args) <- purrr::map_chr(args, r_argument_name)
+  l <- capture.output(
+    purrr::map(args, r_argument_expected_types, decls = decls) %>%
+      dput()
+  )
+  glue::glue("expected_types <- {glue::glue_collapse(l, sep = '\n')}")
+}
+
+r_arguments_with_no_default <- function(decls) {
+  args <- get_arguments_with_no_default(decls)
+  args <- purrr::map_chr(args, r_argument_name)
+  args <- glue::glue_collapse(capture.output(dput(args)), sep = "\n")
+  glue::glue("nd_args <- {args}")
+}
+
+r_return_types <- function(decls) {
+  types <- decls %>%
+    purrr::map_chr(function(decl) {
+
+      if (length(decl$returns) == 0)
+        'list("void")'
+      else if (length(decl$returns) == 1)
+        glue::glue("list('{decl$returns[[1]]$dynamic_type}')")
+      else
+        glue::glue_collapse(capture.output(purrr::map(decl$returns, ~.x$dynamic_type) %>% dput()))
+
+    }) %>%
+    unique()
+  glue::glue("return_types <- list({glue::glue_collapse(types, ', ')})")
+}
+
+r_namespace_body <- function(decls) {
+
+  glue::glue(.sep = "\n",
+  "{r_namespace_list_of_arguments(decls)}",
+  "{r_arguments_expected_types(decls)}",
+  "{r_arguments_with_no_default(decls)}",
+  "{r_return_types(decls)}",
+  "call_c_function(",
+    "fun_name = '{decls[[1]]$name}',",
+    "args = args,",
+    "expected_types = expected_types,",
+    "nd_args = nd_args,",
+    "return_types = return_types,",
+    "fun_type = 'namespace'",
+  ")"
+  )
+
+}
+
+r_method <- function(decls) {
+
+  glue::glue(
+  'Tensor$set("public", "{r_method_name(decls)}", function({r_method_signature(decls)}) {{',
+  '  {r_method_body(decls)}',
+  '}})'
+  )
+
+}
+
+r_method_name <- function(decls) {
+  if (decls[[1]]$name == "clone")
+    return("copy")
+
+  decls[[1]]$name
+}
+
+r_method_signature <- function(decls) {
+  args <- get_arguments_order(decls)
+  # the self argument always comes from the Tensor
+  args <- args[args != "self"]
+
+  if (length(args) == 0)
+    return("")
+
+  args %>%
+    purrr::map_chr(~r_argument(.x, decls)) %>%
+    glue::glue_collapse(sep = ", ")
+}
+
+r_method_body <- function(decls) {
+
+  glue::glue(
+    "{r_method_list_of_arguments(decls)}",
+    "args <- append(list(self = self), args)",
+    "{r_arguments_expected_types(decls)}",
+    "{r_arguments_with_no_default(decls)}",
+    "{r_return_types(decls)}",
+    "call_c_function(",
+    "  fun_name = '{decls[[1]]$name}',",
+    "  args = args,",
+    "  expected_types = expected_types,",
+    "  nd_args = nd_args,",
+    "  return_types = return_types,",
+    "  fun_type = 'namespace'",
+    ")",
+    .sep = "\n",
+  )
+
+}
+
+r <- function(path) {
+
+  namespace <- declarations() %>%
+    purrr::keep(~"namespace" %in% .x$method_of)
+
+  namespace_nms <- purrr::map_chr(namespace, ~.x$name)
+
+  namespace_code <- split(namespace, namespace_nms) %>%
+    purrr::map(~ .x %>% r_namespace() %>% styler::style_text()) %>%
+    purrr::flatten_chr()
+
+  namespace_code <- c(
+    "# This file is autogenerated. Do not modify it by hand.",
+    namespace_code
+  )
+
+  writeLines(namespace_code, file.path(path, "/R/gen-namespace.R"))
+
+  methods <- declarations() %>%
+    purrr::keep(~"Tensor" %in% .x$method_of)
+
+  methods_nms <- purrr::map_chr(methods, ~.x$name)
+
+  methods_code <- split(methods, methods_nms) %>%
+    purrr::map(~ .x %>% r_method() %>% styler::style_text()) %>%
+    purrr::flatten_chr()
+
+  methods_code <- c(
+    "# This file is autogenerated. Do not modify by hand.",
+    "#' @include tensor.R",
+    methods_code
+  )
+
+  writeLines(methods_code, file.path(path, "/R/gen-method.R"))
+
+}

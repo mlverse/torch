@@ -20,11 +20,31 @@ Imports:
     Rcpp,
     R6,
     withr
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 Suggests:
     testthat (>= 2.1.0),
     covr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    bit64
 VignetteBuilder: knitr
+Collate: 
+    'RcppExports.R'
+    'codegen-utils.R'
+    'device.R'
+    'dimname_list.R'
+    'dtype.R'
+    'tensor.R'
+    'gen-method.R'
+    'gen-namespace.R'
+    'generator.R'
+    'layout.R'
+    'memory_format.R'
+    'package.R'
+    'qscheme.R'
+    'reduction.R'
+    'scalar.R'
+    'tensor_list.R'
+    'tensor_options.R'
+    'utils.R'
