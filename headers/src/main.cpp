@@ -75,13 +75,13 @@ std::string addNamespace(std::string name)
     return name;
 }
 
-std::string buildCalls(std::string name, YAML::Node node)
+std::string buildCalls(std::string name, YAML::Node node, size_t start)
 {
     std::string arguments = "";
 
-    for (size_t idx = 0; idx < node.size(); idx++)
+    for (size_t idx = start; idx < node.size(); idx++)
     {
-        if (idx > 0)
+        if (idx > start)
         {
             arguments += ", ";
         }
@@ -131,23 +131,32 @@ void replaceFile(std::string path,
     output.close();
 }
 
-bool isSupported(YAML::Node node)
+bool hasMethodOf(YAML::Node node, std::string method)
 {
+    std::string name = node["name"].as<std::string>();
+
     if (node["method_of"])
     {
-        bool hasTensor = false;
         for (size_t i = 0; i < node["method_of"].size(); i++)
-            if (node["method_of"][i].as<std::string>() == "Tensor") hasTensor = true;
+            if (node["method_of"][i].as<std::string>() == method) return true;
+    }
 
-        if (hasTensor) {
-            std::cout << "Skipping (tensor) " << node["name"].as<std::string>() << std::endl;
-            return false;
-        }
+    return false;
+}
+
+bool isSupported(YAML::Node node)
+{
+    std::string name = node["name"].as<std::string>();
+
+    if (!hasMethodOf(node, "namespace") && !hasMethodOf(node, "Tensor"))
+    {
+        std::cout << "Skipping (methodof) " << name << std::endl;
+        return false;
     }
 
     if (node["name"].as<std::string>() == "normal")
     {
-        std::cout << "Skipping (conversion) " << node["name"].as<std::string>() << std::endl;
+        std::cout << "Skipping (conversion) " << name << std::endl;
         return false;
     }
 
@@ -197,21 +206,36 @@ int main(int argc, char *argv[])
         std::string name = config[idx]["name"].as<std::string>();
         std::string arguments = buildArguments(name, config[idx]["arguments"]);
         std::string function = toFunction(name, config[idx]["arguments"]);
-        std::string calls = buildCalls(name, config[idx]["arguments"]);
         std::string returns = buildReturn(config[idx]["returns"]);
 
         headers.push_back("LANTERN_API void* (LANTERN_PTR " + function + ")(" + arguments + ");");
+
+        std::string calls = "";
+        std::string functionCall = "";
+        if (hasMethodOf(config[idx], "namespace"))
+        {
+            calls = buildCalls(name, config[idx]["arguments"], 0);
+            functionCall = "torch::";
+        }
+        else
+        {
+            calls = buildCalls(name, config[idx]["arguments"], 1);
+
+            std::string firstType = config[idx]["arguments"][0]["type"].as<std::string>();
+            std::string firstName = config[idx]["arguments"][0]["name"].as<std::string>();
+            functionCall = "((LanternObject<" + addNamespace(firstType) + ">*)" + firstName + ")->get().";
+        }
     
         bodies.push_back("void* " + function + "(" + arguments + ")");
         bodies.push_back("{");
         if (returns == "void")
         {
-            bodies.push_back("    torch::" + name + "(" + calls + ");");
+            bodies.push_back("    " + functionCall + name + "(" + calls + ");");
             bodies.push_back("    return NULL;");
         }
         else
         {
-            bodies.push_back("    return (void *) new LanternObject<" + returns + ">(torch::" + name + "(");
+            bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
             bodies.push_back("        " + calls + "));");
         }
         bodies.push_back("}");
