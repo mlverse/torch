@@ -42,39 +42,6 @@ namespace_methods <- memoise::memoise(function() {
     purrr::keep(~"namespace" %in% .x$method_of)
 })
 
-#' Takes an object like `declarations()` and
-#' returns the list of unique names in it.
-#'
-#' @param declarations list of methods/function contained
-#'  in the declaration.
-#'
-function_names <- function(declarations) {
-  declarations %>%
-    purrr::map_chr(~.x$name) %>%
-    unique()
-}
-
-#' Filters the declarations getting only those with
-#' the same name.
-#'
-#' @inheritParams  function_names
-#' @param name name to filter.
-#'
-declarations_with_name <- function(declarations, name) {
-  declarations %>%
-    purrr::keep(~.x$name == name)
-}
-
-#' Creates a single id for a function.
-#'
-#' Based on all the arguments.
-#
-hash_arguments <- function(arguments) {
-  types <- paste0(purrr::map_chr(arguments, ~.x$type), collapse = "")
-  names <- paste0(purrr::map_chr(arguments, ~.x$name), collapse = "")
-  substr(openssl::md5(glue::glue("{types}{names}")), 1,5)
-}
-
 clean_names <- function(x) {
   # adapted from janitor::make_clean_names
   x <- gsub("'", "", x)
