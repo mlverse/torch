@@ -413,7 +413,7 @@ SKIP_R_BINDIND <- c(
   "set_quantizer_" #https://github.com/pytorch/pytorch/blob/5dfcfeebb89304c1e7978cad7ada1227f19303f6/tools/autograd/gen_python_functions.py#L36
 )
 
-cpp <- function() {
+cpp <- function(path) {
 
   decls <-declarations() %>%
     purrr::discard(~.x$name %in% SKIP_R_BINDIND) %>%
@@ -453,7 +453,7 @@ cpp <- function() {
       methods_code,
       namespace_code
     ),
-    "../../src/gen-namespace.cpp"
+    file.path(path, "/src/gen-namespace.cpp")
   )
 
 }
