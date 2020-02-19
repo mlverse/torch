@@ -145,9 +145,9 @@ bool isSupported(YAML::Node node)
         }
     }
 
-    if (node["abstract"].as<std::string>() == "true")
+    if (node["name"].as<std::string>() == "normal")
     {
-        std::cout << "Skipping (abstract) " << node["name"].as<std::string>() << std::endl;
+        std::cout << "Skipping (conversion) " << node["name"].as<std::string>() << std::endl;
         return false;
     }
 
