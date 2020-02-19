@@ -1,2 +1,4 @@
 ^torch\.Rproj$
 ^\.Rproj\.user$
+^LICENSE\.md$
+^torchgen\.Rproj$

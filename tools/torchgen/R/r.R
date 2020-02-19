@@ -14,15 +14,16 @@ get_arguments_with_default <- function(methods) {
     unique()
 }
 
+#' @importFrom rlang .data
 get_arguments_order <- function(methods) {
   methods %>%
-    map(~.x$arguments) %>%
-    map(~map_chr(.x, ~.x$name)) %>%
-    map_dfr(~tibble(name = .x, id = seq_along(.x))) %>%
-    group_by(name) %>%
-    summarise(id_max = max(id)) %>%
-    arrange(id_max) %>%
-    with(name)
+    purrr::map(~.x$arguments) %>%
+    purrr::map(~purrr::map_chr(.x, ~.x$name)) %>%
+    purrr::map_dfr(~tibble::tibble(name = .x, id = seq_along(.x))) %>%
+    dplyr::group_by(.data$name) %>%
+    dplyr::summarise(id_max = max(.data$id)) %>%
+    dplyr::arrange(.data$id_max) %>%
+    purrr::pluck("name")
 }
 
 make_argument_list <- function(methods) {
@@ -49,17 +50,17 @@ make_all_arguments_list <- function(methods) {
 make_expected_types_list <- function(methods) {
 
   dtypes <- methods %>%
-    map(~.x$arguments) %>%
-    map_dfr(~map_dfr(.x, ~tibble(name = .x$name, dtype = .x$dynamic_type))) %>%
-    group_by(name) %>%
-    summarise(dtypes = list(unique(dtype))) %>%
-    mutate(
-      c = dtypes %>% map_chr(~glue::glue("'{.x}'") %>%
+    purrr::map(~.x$arguments) %>%
+    purrr::map_dfr(~purrr::map_dfr(.x, ~tibble(name = .x$name, dtype = .x$dynamic_type))) %>%
+    dplyr::group_by(.data$name) %>%
+    dplyr::summarise(dtypes = list(unique(.data$dtype))) %>%
+    dplyr::mutate(
+      c = .data$dtypes %>% purrr::map_chr(~glue::glue("'{.x}'") %>%
                                glue::glue_collapse(sep=",") %>%
                                glue::glue("c(", ., ")")
       )
     ) %>%
-    mutate(
+    dplyr::mutate(
       c = glue::glue("{name} = {c}")
     )
 
@@ -203,8 +204,14 @@ r_argument_expected_types <- function(arg, decls) {
     unique()
 }
 
+#' @importFrom utils capture.output
 r_arguments_expected_types <- function(decls) {
   args <- get_arguments_order(decls)
+
+  if (length(args) == 0) {
+    return("expected_types <- list()")
+  }
+
   names(args) <- purrr::map_chr(args, r_argument_name)
   l <- capture.output(
     purrr::map(args, r_argument_expected_types, decls = decls) %>%

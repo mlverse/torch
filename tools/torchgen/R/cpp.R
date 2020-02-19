@@ -81,9 +81,9 @@ cpp_function_name <- function(method, type) {
   arg_types <- list()
   for (nm in arguments) {
     arg_types[[nm]] <- method$arguments %>%
-      keep(~.x$name == nm)  %>%
-      pluck(1) %>%
-      with(dynamic_type)
+      purrr::keep(~.x$name == nm)  %>%
+      purrr::pluck(1) %>%
+      purrr::pluck("dynamic_type")
   }
 
   make_cpp_function_name(method$name, arg_types, type)
@@ -324,7 +324,7 @@ cpp_return_statement <- function(returns) {
   } else {
 
 
-    calls <- map_chr(
+    calls <- purrr::map_chr(
       seq_along(returns),
       ~cpp_return_statement(returns[.x])(glue::glue("std::get<{.x-1}>(r_out)"))
     )
@@ -342,8 +342,8 @@ cpp_return_statement <- function(returns) {
 cpp_method_body <- function(method) {
 
   arguments <- method$arguments %>%
-    discard(~.x$name == "self") %>%
-    map_chr(cpp_argument_transform)
+    purrr::discard(~.x$name == "self") %>%
+    purrr::map_chr(cpp_argument_transform)
 
   if (length(arguments) == 0) {
     arguments <- ""
@@ -378,7 +378,7 @@ cpp_method_body <- function(method) {
 cpp_namespace_body <- function(method) {
 
   arguments <- method$arguments %>%
-    map_chr(cpp_argument_transform)
+    purrr::map_chr(cpp_argument_transform)
 
   if (length(arguments) == 0) {
     arguments <- ""
@@ -424,11 +424,12 @@ cpp <- function() {
     purrr::map_chr(cpp_method)
 
   namespace_code <- decls %>%
-    keep(~"namespace" %in% .x$method_of) %>%
-    map_chr(cpp_namespace)
+    purrr::keep(~"namespace" %in% .x$method_of) %>%
+    purrr::map_chr(cpp_namespace)
 
   writeLines(
     c(
+      '// This file is auto generated. Dont modify it by hand.',
       '#include "torch_types.h"',
       '#include "utils.hpp"',
       '

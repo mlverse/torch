@@ -2,5 +2,8 @@
 
 export("%>%")
 export(declarations)
+export(generate)
 export(tensor_methods)
 importFrom(magrittr,"%>%")
+importFrom(rlang,.data)
+importFrom(utils,capture.output)
