@@ -79,6 +79,18 @@ std::string addNamespace(std::string name)
     return name;
 }
 
+std::string lanternObject(std::string type)
+{
+    if (type == "Device")
+    {
+        return "LanternPtr";
+    }
+    else
+    {
+        return "LanternObject";
+    }
+}
+
 std::string buildCalls(std::string name, YAML::Node node, size_t start)
 {
     std::string arguments = "";
@@ -90,7 +102,8 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             arguments += ", ";
         }
 
-        arguments += "((LanternObject<" + addNamespace(node[idx]["type"].as<std::string>()) + ">*)" +
+        std::string type = node[idx]["type"].as<std::string>();
+        arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
             node[idx]["name"].as<std::string>() + ")->get()";
     }
 

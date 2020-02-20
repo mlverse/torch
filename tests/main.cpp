@@ -14,7 +14,11 @@ int main(int argc, char *argv[])
     }
 
     myInit(argv[1]);
+
     lanternTest();
+
+    void* device = lanternDevice("cpu", 0, false);
+    std::cout << "Device: " << lanternDeviceType(device) << ":" << lanternDeviceIndex(device) << std::endl;
 
     return 0;
 }

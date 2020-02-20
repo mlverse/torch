@@ -31,6 +31,9 @@ extern "C" {
 #endif
   
 LANTERN_API void (LANTERN_PTR lanternTest)();
+LANTERN_API void* (LANTERN_PTR lanternDevice)(const char* type, int64_t index, bool useIndex);
+LANTERN_API const char* (LANTERN_PTR lanternDeviceType)(void* device);
+LANTERN_API int64_t (LANTERN_PTR lanternDeviceIndex)(void* device);
 
 /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1470,6 +1473,9 @@ bool lanternInit(const std::string& libPath, std::string* pError)
     return false;
   
   LOAD_SYMBOL(lanternTest);
+  LOAD_SYMBOL(lanternDevice);
+  LOAD_SYMBOL(lanternDeviceType);
+  LOAD_SYMBOL(lanternDeviceIndex);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
