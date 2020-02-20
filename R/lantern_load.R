@@ -12,7 +12,7 @@ lantern_start <- function(version = lantern_default()) {
   
   if (.globals$lantern_started) return()
   
-  rcpp_lantern_init(lantern_install_path())
+  cpp_lantern_init(lantern_install_path())
   
   .globals$lantern_started <- TRUE
 }
@@ -20,5 +20,5 @@ lantern_start <- function(version = lantern_default()) {
 lantern_test <- function() {
   lantern_start()
   
-  rcpp_lantern_test()
+  cpp_lantern_test()
 }
