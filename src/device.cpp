@@ -4,12 +4,12 @@
 
 // [[Rcpp::export]]
 std::string cpp_device_type_to_string (Rcpp::XPtr<void*> device) {
-  return std::string(lanternDeviceType(device));
+  return std::string(lanternDeviceType(device.get()));
 }
 
 // [[Rcpp::export]]
 std::int64_t cpp_device_index_to_int (Rcpp::XPtr<void*> device) {
-  return lanternDeviceIndex(device);
+  return lanternDeviceIndex(device.get());
 }
 
 // [[Rcpp::export]]
