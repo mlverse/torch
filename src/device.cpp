@@ -3,13 +3,13 @@
 #include "utils.hpp"
 
 // [[Rcpp::export]]
-std::string cpp_device_type_to_string (Rcpp::XPtr<void*> device) {
-  return std::string(lanternDeviceType(device.get()));
+std::string cpp_device_type_to_string (Rcpp::XPtr<XPtrTorch> device) {
+  return std::string(lanternDeviceType(device.get()->get()));
 }
 
 // [[Rcpp::export]]
-std::int64_t cpp_device_index_to_int (Rcpp::XPtr<void*> device) {
-  return lanternDeviceIndex(device.get());
+std::int64_t cpp_device_index_to_int (Rcpp::XPtr<XPtrTorch> device) {
+  return lanternDeviceIndex(device.get()->get());
 }
 
 // [[Rcpp::export]]
