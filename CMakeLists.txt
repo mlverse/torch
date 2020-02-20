@@ -67,11 +67,13 @@ set_property(TARGET lantern PROPERTY CXX_STANDARD 14)
 ############################################################
 
 add_executable(lanterntest
+    tests/init.cpp
     tests/main.cpp
 )
 
 target_include_directories(lanterntest PUBLIC
     ${PROJECT_SOURCE_DIR}/include
+    tests/
 )
 
 target_link_libraries(lanterntest ${CMAKE_DL_LIBS})

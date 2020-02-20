@@ -1,0 +1,1 @@
+void myInit(char* path);

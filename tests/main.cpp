@@ -1,7 +1,10 @@
 #include <iostream>
 #include <fstream>
 
+#define LANTERN_HEADERS_ONLY
 #include "lantern/lantern.h"
+
+#include "init.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,12 +13,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    std::string error;
-    if (!lanternInit(argv[1], &error)) {
-        std::cout << "Error: " << error;
-        return 1;
-    }
-
+    myInit(argv[1]);
     lanternTest();
 
     return 0;
