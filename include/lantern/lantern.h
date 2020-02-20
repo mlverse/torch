@@ -10,6 +10,7 @@
 
 #ifdef LANTERN_BUILD
 #define LANTERN_PTR
+#define LANTERN_HEADERS_ONLY
 #ifdef _WIN32
 #define LANTERN_API extern "C" __declspec(dllexport)
 #endif
@@ -18,34 +19,16 @@
 #endif
 
 #ifndef LANTERN_API
+#ifdef LANTERN_HEADERS_ONLY
+#define LANTERN_API extern
+#else
 #define LANTERN_API
+#endif
 #endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-  
-inline const char* pathSeparator()
-{
-#ifdef _WIN32
-    return "\\";
-#else
-    return "/";
-#endif
-}
-  
-inline const char* libraryName()
-{
-#ifdef __APPLE__
-  return "liblantern.dylib";
-#else
-#ifdef _WIN32
-  return "lantern.dll";
-#else
-  return "liblantern.so";
-#endif
-#endif
-}
   
 LANTERN_API void (LANTERN_PTR lanternTest)();
 
@@ -1329,7 +1312,31 @@ LANTERN_API void* (LANTERN_PTR lantern_im2col_backward_tensor_intarrayref_intarr
 }
 #endif
 
-#ifndef LANTERN_BUILD
+#ifndef LANTERN_HEADERS_ONLY
+
+#include <string>
+
+inline const char* pathSeparator()
+{
+#ifdef _WIN32
+    return "\\";
+#else
+    return "/";
+#endif
+}
+  
+inline const char* libraryName()
+{
+#ifdef __APPLE__
+  return "liblantern.dylib";
+#else
+#ifdef _WIN32
+  return "lantern.dll";
+#else
+  return "liblantern.so";
+#endif
+#endif
+}
 
 void* pLibrary = NULL;
 
