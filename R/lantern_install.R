@@ -29,7 +29,7 @@ install_config <- list(
 )
 
 lantern_install_path <- function() {
-  normalizePath(file.path(system.file("", package = "lantern"), "deps"), mustWork = FALSE)
+  normalizePath(file.path(system.file("", package = "torch"), "deps"), mustWork = FALSE)
 }
 
 lantern_installed <- function() {
