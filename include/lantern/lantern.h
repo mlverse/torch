@@ -2758,5 +2758,10 @@ bool lanternInit(const std::string& libPath, std::string* pError)
   return true;
 }
 
+#else
+
+extern bool lanternInit(const std::string& libPath, std::string* pError);
+extern bool laternCloseLibrary(void* pLib, std::string* pError);
+
 #endif
 #endif
