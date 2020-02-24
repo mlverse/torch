@@ -6,6 +6,9 @@
 
 #include <torch/torch.h>
 
+#include "utils.hpp"
+#include "tensor.cpp"
+
 void lanternTest()
 {
     std::cout << "-- Lantern: 0.1.0" << std::endl;
@@ -17,22 +20,7 @@ void lanternTest()
     std::cout << "-- Success!" << std::endl;
 }
 
-template<class T>
-class LanternObject
-{
-private:
-    T _object;
-public:
-    LanternObject(T object)
-    {
-        _object = object;
-    }
 
-    T& get()
-    {
-        return _object;
-    }
-};
 
 template<class T>
 class LanternPtr

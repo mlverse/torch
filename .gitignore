@@ -1,1 +1,4 @@
 build/
+.Rproj.user
+.Rhistory
+lantern.Rproj

@@ -27,6 +27,7 @@
 #endif
 
 #include <stdint.h>
+#include <stdio.h> 
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,6 +37,8 @@ LANTERN_API void (LANTERN_PTR lanternTest)();
 LANTERN_API void* (LANTERN_PTR lanternDevice)(const char* type, int64_t index, bool useIndex);
 LANTERN_API const char* (LANTERN_PTR lanternDeviceType)(void* device);
 LANTERN_API int64_t (LANTERN_PTR lanternDeviceIndex)(void* device);
+LANTERN_API void* (LANTERN_PTR lanternFromBlob)(void* data, void* sizes, size_t sizes_size);
+LANTERN_API char* (LANTERN_PTR lanternTensorToString)(void* x);
 
 /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1478,6 +1481,7 @@ bool lanternInit(const std::string& libPath, std::string* pError)
   LOAD_SYMBOL(lanternDevice);
   LOAD_SYMBOL(lanternDeviceType);
   LOAD_SYMBOL(lanternDeviceIndex);
+  LOAD_SYMBOL(lanternFromBlob);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
