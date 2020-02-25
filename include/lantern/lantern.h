@@ -37,8 +37,24 @@ LANTERN_API void (LANTERN_PTR lanternTest)();
 LANTERN_API void* (LANTERN_PTR lanternDevice)(const char* type, int64_t index, bool useIndex);
 LANTERN_API const char* (LANTERN_PTR lanternDeviceType)(void* device);
 LANTERN_API int64_t (LANTERN_PTR lanternDeviceIndex)(void* device);
-LANTERN_API void* (LANTERN_PTR lanternFromBlob)(void* data, void* sizes, size_t sizes_size);
-LANTERN_API char* (LANTERN_PTR lanternTensorStreamInsertion)(void* x);
+LANTERN_API void* (LANTERN_PTR lantern_from_blob)(void* data, void* sizes, size_t sizes_size, void* options);
+LANTERN_API char* (LANTERN_PTR lantern_Tensor_StreamInsertion)(void* x);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions) ();
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_dtype) (void* self, void* dtype);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_layout) (void* self, void* layout);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_device) (void* self, void* device);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_requires_grad) (void* self, bool requires_grad);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_pinned_memory) (void* self, bool pinned_memory);
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_float32) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_float64) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_float16) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_uint8) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_int8) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_int16) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_int32) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_int64) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_bool) ();
+LANTERN_API const char * (LANTERN_PTR lantern_Dtype_type) (void * dtype);
 
 /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1481,9 +1497,25 @@ bool lanternInit(const std::string& libPath, std::string* pError)
   LOAD_SYMBOL(lanternDevice);
   LOAD_SYMBOL(lanternDeviceType);
   LOAD_SYMBOL(lanternDeviceIndex);
-  LOAD_SYMBOL(lanternFromBlob);
-  LOAD_SYMBOL(lanternTensorStreamInsertion);
-
+  LOAD_SYMBOL(lantern_from_blob);
+  LOAD_SYMBOL(lantern_Tensor_StreamInsertion);
+  LOAD_SYMBOL(lantern_TensorOptions);
+  LOAD_SYMBOL(lantern_TensorOptions_dtype);
+  LOAD_SYMBOL(lantern_TensorOptions_device);
+  LOAD_SYMBOL(lantern_TensorOptions_layout);
+  LOAD_SYMBOL(lantern_TensorOptions_requires_grad);
+  LOAD_SYMBOL(lantern_TensorOptions_pinned_memory);
+  LOAD_SYMBOL(lantern_Dtype_float32);
+  LOAD_SYMBOL(lantern_Dtype_float64);
+  LOAD_SYMBOL(lantern_Dtype_float16);
+  LOAD_SYMBOL(lantern_Dtype_uint8);
+  LOAD_SYMBOL(lantern_Dtype_int8);
+  LOAD_SYMBOL(lantern_Dtype_int16);
+  LOAD_SYMBOL(lantern_Dtype_int32);
+  LOAD_SYMBOL(lantern_Dtype_int64);
+  LOAD_SYMBOL(lantern_Dtype_bool);
+  LOAD_SYMBOL(lantern_Dtype_type);
+  
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)

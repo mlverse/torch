@@ -7,7 +7,6 @@
 #include <torch/torch.h>
 
 #include "utils.hpp"
-#include "tensor.cpp"
 
 void lanternTest()
 {
@@ -117,6 +116,7 @@ int64_t lanternDeviceIndex(void* device)
 {
     return ((LanternPtr<torch::Device>*)device)->get().index();
 }
+
 
 /* Autogen Body -- Start */
 void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking)
