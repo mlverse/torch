@@ -27,15 +27,40 @@
 #endif
 
 #include <stdint.h>
+#include <stdio.h> 
 
 #ifdef __cplusplus
 extern "C" {
 #endif
   
 LANTERN_API void (LANTERN_PTR lanternTest)();
-LANTERN_API void* (LANTERN_PTR lanternDevice)(const char* type, int64_t index, bool useIndex);
-LANTERN_API const char* (LANTERN_PTR lanternDeviceType)(void* device);
-LANTERN_API int64_t (LANTERN_PTR lanternDeviceIndex)(void* device);
+LANTERN_API void* (LANTERN_PTR lantern_Device)(const char* type, int64_t index, bool useIndex);
+LANTERN_API const char* (LANTERN_PTR lantern_Device_type)(void* device);
+LANTERN_API int64_t (LANTERN_PTR lantern_Device_index)(void* device);
+LANTERN_API void* (LANTERN_PTR lantern_from_blob)(void* data, int64_t* sizes, size_t sizes_size, void* options);
+LANTERN_API const char* (LANTERN_PTR lantern_Tensor_StreamInsertion)(void* x);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions) ();
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_dtype) (void* self, void* dtype);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_layout) (void* self, void* layout);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_device) (void* self, void* device);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_requires_grad) (void* self, bool requires_grad);
+LANTERN_API void* (LANTERN_PTR lantern_TensorOptions_pinned_memory) (void* self, bool pinned_memory);
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_float32) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_float64) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_float16) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_uint8) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_int8) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_int16) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_int32) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_int64) ();
+LANTERN_API void* (LANTERN_PTR lantern_Dtype_bool) ();
+LANTERN_API const char * (LANTERN_PTR lantern_Dtype_type) (void * dtype);
+LANTERN_API void* (LANTERN_PTR lantern_vector_int64_t) (int64_t* x, size_t x_size);
+LANTERN_API void* (LANTERN_PTR lantern_IntArrayRef) (int64_t* x, size_t x_size);
+LANTERN_API void* (LANTERN_PTR lantern_MemoryFormat_Contiguous) ();
+LANTERN_API void* (LANTERN_PTR lantern_MemoryFormat_Preserve) ();
+LANTERN_API void* (LANTERN_PTR lantern_MemoryFormat_ChannelsLast) ();
+LANTERN_API const char * (LANTERN_PTR lantern_MemoryFormat_type) (void * format);
 
 /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1475,10 +1500,34 @@ bool lanternInit(const std::string& libPath, std::string* pError)
     return false;
   
   LOAD_SYMBOL(lanternTest);
-  LOAD_SYMBOL(lanternDevice);
-  LOAD_SYMBOL(lanternDeviceType);
-  LOAD_SYMBOL(lanternDeviceIndex);
-
+  LOAD_SYMBOL(lantern_Device);
+  LOAD_SYMBOL(lantern_Device_type);
+  LOAD_SYMBOL(lantern_Device_index);
+  LOAD_SYMBOL(lantern_from_blob);
+  LOAD_SYMBOL(lantern_Tensor_StreamInsertion);
+  LOAD_SYMBOL(lantern_TensorOptions);
+  LOAD_SYMBOL(lantern_TensorOptions_dtype);
+  LOAD_SYMBOL(lantern_TensorOptions_device);
+  LOAD_SYMBOL(lantern_TensorOptions_layout);
+  LOAD_SYMBOL(lantern_TensorOptions_requires_grad);
+  LOAD_SYMBOL(lantern_TensorOptions_pinned_memory);
+  LOAD_SYMBOL(lantern_Dtype_float32);
+  LOAD_SYMBOL(lantern_Dtype_float64);
+  LOAD_SYMBOL(lantern_Dtype_float16);
+  LOAD_SYMBOL(lantern_Dtype_uint8);
+  LOAD_SYMBOL(lantern_Dtype_int8);
+  LOAD_SYMBOL(lantern_Dtype_int16);
+  LOAD_SYMBOL(lantern_Dtype_int32);
+  LOAD_SYMBOL(lantern_Dtype_int64);
+  LOAD_SYMBOL(lantern_Dtype_bool);
+  LOAD_SYMBOL(lantern_Dtype_type);
+  LOAD_SYMBOL(lantern_vector_int64_t);
+  LOAD_SYMBOL(lantern_IntArrayRef);
+  LOAD_SYMBOL(lantern_MemoryFormat_Contiguous);
+  LOAD_SYMBOL(lantern_MemoryFormat_Preserve);
+  LOAD_SYMBOL(lantern_MemoryFormat_ChannelsLast);
+  LOAD_SYMBOL(lantern_MemoryFormat_type);
+  
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
