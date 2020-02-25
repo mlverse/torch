@@ -45,5 +45,5 @@ void* lantern_Dtype_bool () {
 }
 
 const char * lantern_Dtype_type (void * dtype) {
-  return toString(*reinterpret_cast<torch::Dtype*>(dtype));
+  return toString(reinterpret_cast<LanternObject<torch::Dtype>*>(dtype)->get());
 }

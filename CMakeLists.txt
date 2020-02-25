@@ -55,6 +55,9 @@ add_library(lantern SHARED
     src/TensorOptions.cpp
     src/Dtype.cpp
     src/Tensor.cpp
+    src/Device.cpp
+    src/utils.cpp
+    src/MemoryFormat.cpp
 )
 add_library(lantern::library ALIAS lantern)
 

@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
 
     lanternTest();
 
-    void* device = lanternDevice("cpu", 0, false);
-    std::cout << "Device: " << lanternDeviceType(device) << ":" << lanternDeviceIndex(device) << std::endl;
+    void* device = lantern_Device("cpu", 0, false);
+    std::cout << "Device: " << lantern_Device_type(device) << ":" << lantern_Device_index(device) << std::endl;
 
     return 0;
 }

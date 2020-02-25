@@ -16,3 +16,26 @@ public:
     return _object;
   }
 };
+
+template<class T>
+class LanternPtr
+{
+private:
+  T* _object;
+public:
+  LanternPtr(T& object)
+  {
+    _object = new T(object);
+  }
+  
+  ~LanternPtr()
+  {
+    delete _object;
+    _object = NULL;
+  }
+  
+  T& get()
+  {
+    return *_object;
+  }
+};
