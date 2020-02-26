@@ -61,6 +61,20 @@ LANTERN_API void* (LANTERN_PTR lantern_MemoryFormat_Contiguous) ();
 LANTERN_API void* (LANTERN_PTR lantern_MemoryFormat_Preserve) ();
 LANTERN_API void* (LANTERN_PTR lantern_MemoryFormat_ChannelsLast) ();
 LANTERN_API const char * (LANTERN_PTR lantern_MemoryFormat_type) (void * format);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_clone) (void * self);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_permute) (void * self, void* dims);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_contiguous) (void * self);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_to) (void * self, void* options);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_set_requires_grad) (void* self, bool requires_grad);
+LANTERN_API double* (LANTERN_PTR lantern_Tensor_data_ptr_double) (void* self);
+LANTERN_API uint8_t* (LANTERN_PTR lantern_Tensor_data_ptr_uint8_t) (void* self);
+LANTERN_API int32_t* (LANTERN_PTR lantern_Tensor_data_ptr_int32_t) (void* self);
+LANTERN_API int16_t* (LANTERN_PTR lantern_Tensor_data_ptr_int16_t) (void* self);
+LANTERN_API bool* (LANTERN_PTR lantern_Tensor_data_ptr_bool) (void* self);
+LANTERN_API int64_t (LANTERN_PTR lantern_Tensor_numel) (void* self);
+LANTERN_API int64_t (LANTERN_PTR lantern_Tensor_size) (void* self, int64_t i);
+LANTERN_API int64_t (LANTERN_PTR lantern_Tensor_ndimension) (void* self);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_dtype) (void* self);
 
 /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1527,6 +1541,20 @@ bool lanternInit(const std::string& libPath, std::string* pError)
   LOAD_SYMBOL(lantern_MemoryFormat_Preserve);
   LOAD_SYMBOL(lantern_MemoryFormat_ChannelsLast);
   LOAD_SYMBOL(lantern_MemoryFormat_type);
+  LOAD_SYMBOL(lantern_Tensor_clone);
+  LOAD_SYMBOL(lantern_Tensor_permute);
+  LOAD_SYMBOL(lantern_Tensor_contiguous);
+  LOAD_SYMBOL(lantern_Tensor_to);
+  LOAD_SYMBOL(lantern_Tensor_set_requires_grad);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_double);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_uint8_t);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_int32_t);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_int16_t);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_bool);
+  LOAD_SYMBOL(lantern_Tensor_numel);
+  LOAD_SYMBOL(lantern_Tensor_ndimension);
+  LOAD_SYMBOL(lantern_Tensor_size);
+  LOAD_SYMBOL(lantern_Tensor_dtype);
   
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)

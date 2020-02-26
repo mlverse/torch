@@ -23,7 +23,7 @@ void* lantern_TensorOptions_layout (void* self, void* layout) {
 }
 
 void* lantern_TensorOptions_device (void* self, void* device) {
-  auto out = reinterpret_cast<LanternObject<torch::TensorOptions>*>(self)->get().device(reinterpret_cast<LanternObject<torch::Device>*>(device)->get());
+  auto out = reinterpret_cast<LanternObject<torch::TensorOptions>*>(self)->get().device(((LanternPtr<torch::Device>*)device)->get());
   return (void *) new LanternObject<torch::TensorOptions>(out);
 }
 
