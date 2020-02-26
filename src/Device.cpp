@@ -47,9 +47,33 @@ void* lantern_Device(const char* type, int64_t index, bool useIndex)
 
 const char* lantern_Device_type(void* device)
 {
-  torch::Device dev = ((LanternPtr<torch::Device>*)device)->get();
-  torch::DeviceType type = dev.type();
-  return torch::DeviceTypeName(type, true).c_str();
+  torch::Device type = ((LanternPtr<torch::Device>*)device)->get().type();
+  
+  if (type == torch::DeviceType::CPU) {
+    return "cpu";
+  } else if (type == torch::DeviceType::CUDA) {
+    return "cuda";
+  } else if (type == torch::DeviceType::MKLDNN) {
+    return "mkldnn";
+  } else if (type == torch::DeviceType::OPENGL) {
+    return "opengl";
+  } else if (type == torch::DeviceType::OPENCL) {
+    return "opencl";
+  } else if (type == torch::DeviceType::IDEEP) {
+    return "ideep";
+  } else if (type == torch::DeviceType::HIP) {
+    return "hip";
+  } else if (type == torch::DeviceType::FPGA) {
+    return "fpga";
+  } else if (type == torch::DeviceType::MSNPU) {
+    return "msnpu";
+  } else if (type == torch::DeviceType::XLA) {
+    return "xla";
+  } else if (type == torch::DeviceType::ONLY_FOR_TEST) {
+    return "test";
+  } else {
+    return "unknown";
+  }
 }
 
 int64_t lantern_Device_index(void* device)
