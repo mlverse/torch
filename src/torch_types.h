@@ -11,6 +11,10 @@ public:
   {
     ptr = value;
   }
+  void* get()
+  {
+    return ptr;
+  }
 };
 
 #define LANTERN_HEADERS_ONLY
