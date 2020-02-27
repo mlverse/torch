@@ -1,3 +1,4 @@
+/*
 #include "torch_types.h"
 #include "utils.hpp"
 
@@ -15,3 +16,4 @@ std::int64_t cpp_torch_reduction_none () {
 std::int64_t cpp_torch_reduction_sum () {
   return torch::Reduction::Sum;
 }
+ */

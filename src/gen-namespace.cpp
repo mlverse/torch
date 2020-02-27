@@ -1,4 +1,7 @@
 // This file is auto generated. Dont modify it by hand.
+
+/*
+
 #include "torch_types.h"
 #include "utils.hpp"
 
@@ -9741,3 +9744,4 @@ Rcpp::XPtr<torch::Tensor> cpp_torch_namespace_isfinite_self_Tensor (Rcpp::XPtr<t
 return make_xptr<torch::Tensor>(r_out, "Tensor");
 }
 
+*/
