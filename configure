@@ -7,18 +7,20 @@ then
   # figure out binaries url based on OS
   if [[ "$OSTYPE" == "linux-gnu" ]]
   then
+    LANTERN_BINARIES='https://github.com/mlverse/lantern/releases/download/v0.0.8/Linux.zip'
     if [[ "$TORCH_BACKEND" == "CUDA" ]]
     then
       # GPU
       TORCH_BINARIES='https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.3.1.zip'
     else
       # CPU
-      TORCH_BINARIES='https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip'
+      TORCH_BINARIES='https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.3.0%2Bcpu.zip'
     fi
   elif [[ "$OSTYPE" == "darwin"* ]]
   then
     # for OS X only CPU backend
-    TORCH_BINARIES='https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.4.0.zip'
+    LANTERN_BINARIES='https://github.com/mlverse/lantern/releases/download/v0.0.8/MacOS.zip'
+    TORCH_BINARIES='https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.3.0.zip'
     TORCH_MKL_BINARIES='https://github.com/intel/mkl-dnn/releases/download/v0.20/mklml_mac_2019.0.5.20190502.tgz'
   else
     echo "OS is not supported"
@@ -31,7 +33,7 @@ fi # TORCH_BINARIES
 #---------------------------------------------------------
 if test -z $TORCH_HOME
 then
-  TORCH_HOME="$HOME/libtorch"
+  TORCH_HOME="$PWD/deps"
   echo "TORCH_HOME env var is not set - setting it to: $TORCH_HOME"
 else
   echo "TORCH_HOME env var is set - using it: $TORCH_HOME"
@@ -46,14 +48,18 @@ else
   mkdir -p $TORCH_HOME
   wget -nv $TORCH_BINARIES -P ~ -O $TORCH_HOME/libtorch.zip
   echo "unzipping libtorch to $TORCH_HOME"
-  unzip $TORCH_HOME/libtorch.zip -d `dirname $TORCH_HOME`
+  unzip -j $TORCH_HOME/libtorch.zip  libtorch/lib/* -d $TORCH_HOME
+
+  echo "downloading and unziping lantern"
+  wget -nv $LANTERN_BINARIES -P ~ -O $TORCH_HOME/lantern.zip
+  unzip -j $TORCH_HOME/lantern.zip -d $TORCH_HOME
 
   if [[ "$OSTYPE" == "darwin"* ]]
   then
     echo "downloading mkl lib"
     wget -nv $TORCH_MKL_BINARIES -P ~ -O $TORCH_HOME/mkl.tgz
     echo "unzipping mkl library"
-    gunzip -c $TORCH_HOME/mkl.tgz | tar xopf - --directory $TORCH_HOME/lib --strip-components=2 *.dylib
+    gunzip -c $TORCH_HOME/mkl.tgz | tar xopf - --directory $TORCH_HOME --strip-components=2 *.dylib
   fi
 
 fi
