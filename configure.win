@@ -29,5 +29,5 @@ else
   unzip -j $TORCH_HOME/lantern.zip -d $TORCH_HOME
 
 fi
-
+ 
 exit 0
