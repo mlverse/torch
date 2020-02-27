@@ -75,6 +75,9 @@ LANTERN_API int64_t (LANTERN_PTR lantern_Tensor_numel) (void* self);
 LANTERN_API int64_t (LANTERN_PTR lantern_Tensor_size) (void* self, int64_t i);
 LANTERN_API int64_t (LANTERN_PTR lantern_Tensor_ndimension) (void* self);
 LANTERN_API void* (LANTERN_PTR lantern_Tensor_dtype) (void* self);
+LANTERN_API void* (LANTERN_PTR lantern_Generator) ();
+LANTERN_API uint64_t (LANTERN_PTR lantern_Generator_current_seed) (void* generator);
+LANTERN_API void (LANTERN_PTR lantern_Generator_set_current_seed) (void* generator, uint64_t seed);
 
 /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1555,6 +1558,9 @@ bool lanternInit(const std::string& libPath, std::string* pError)
   LOAD_SYMBOL(lantern_Tensor_ndimension);
   LOAD_SYMBOL(lantern_Tensor_size);
   LOAD_SYMBOL(lantern_Tensor_dtype);
+  LOAD_SYMBOL(lantern_Generator);
+  LOAD_SYMBOL(lantern_Generator_current_seed);
+  LOAD_SYMBOL(lantern_Generator_set_current_seed);
   
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)

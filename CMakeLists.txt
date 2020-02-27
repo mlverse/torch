@@ -58,6 +58,7 @@ add_library(lantern SHARED
     src/Device.cpp
     src/utils.cpp
     src/MemoryFormat.cpp
+    src/Generator.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
