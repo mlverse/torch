@@ -13,7 +13,7 @@ URL: http://dfalbel.github.io/torch, https://github.com/dfalbel/torch
 BugReports: https://github.com/dfalbel/torch/issues
 Encoding: UTF-8
 LazyData: true
-SystemRequirements: C++11
+SystemRequirements: C++14
 LinkingTo:
     Rcpp
 Imports:
