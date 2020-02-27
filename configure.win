@@ -3,9 +3,6 @@
 
 LANTERN_BINARIES='https://github.com/mlverse/lantern/releases/download/v0.0.8/Windows.zip'
 TORCH_BINARIES='https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.3.0.zip'
-R_SCRIPT="${R_HOME}/bin${R_ARCH_BIN}/Rscript"
-SET_INTERNET2=`"${R_SCRIPT}" -e "cat(ifelse(compareVersion(sprintf('%s.%s', R.version['major'], R.version['minor']), '3.2.2') > 0, '', 'setInternet2();'))"`
-USE_LIBCURL=`"${R_SCRIPT}" -e "cat(ifelse(capabilities('libcurl'), 'method=\'libcurl\',', ''))"`
 
 #---------------------------------------------------------
 if test -z $TORCH_HOME
