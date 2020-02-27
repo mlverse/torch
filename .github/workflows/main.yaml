@@ -36,4 +36,6 @@ jobs:
       - name: Install dependencies
         run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)" -e "remotes::install_cran('rcmdcheck')" -e "remotes::install_cran('devtools')"
       - name: Test
-        run: Rscript -e "devtools::test()"
+        run: | 
+          Rscript -e "devtools::install()"
+          Rscript -e "testthat::test_package("torch")"
