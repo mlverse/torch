@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 LANTERN_BINARIES='https://github.com/mlverse/lantern/releases/download/v0.0.8/Windows.zip'
 TORCH_BINARIES='https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.4.0.zip'
 R_SCRIPT="${R_HOME}/bin${R_ARCH_BIN}/Rscript"
@@ -23,12 +24,12 @@ else
   echo "$TORCH_HOME does not exist - downloading libtorch"
   mkdir -p $TORCH_HOME
   
-  "${R_SCRIPT}" -e "${SET_INTERNET2} download.file('${TORCH_BINARIES}', '${TORCH_HOME}/libtorch.zip', ${USE_LIBCURL} quiet = TRUE)"
+  curl $TORCH_BINARIES -o $TORCH_HOME/libtorch.zip
   echo "unzipping libtorch to $TORCH_HOME"
   unzip -j $TORCH_HOME/libtorch.zip  libtorch/lib/* -d $TORCH_HOME
 
   echo "downloading and unziping lantern"
-  "${R_SCRIPT}" -e "${SET_INTERNET2} download.file('${LANTERN_BINARIES}', '${TORCH_HOME}/lantern.zip', ${USE_LIBCURL} quiet = TRUE)"
+  curl -LJ0 $LANTERN_BINARIES -o $TORCH_HOME/lantern.zip
   unzip -j $TORCH_HOME/lantern.zip -d $TORCH_HOME
 
 fi
