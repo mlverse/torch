@@ -3,7 +3,7 @@
 
 // [[Rcpp::export]]
 std::string cpp_dtype_to_string(Rcpp::XPtr<XPtrTorch> dtype) {
-  return lantern_Dtype_type(dtype.get()->get());
+  return lantern_Dtype_type(dtype->get());
 }
 
 // [[Rcpp::export]]
