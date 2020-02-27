@@ -1,7 +1,5 @@
 #pragma once
 
-#include <Rcpp.h>
-
 class XPtrTorch
 {
 private:
@@ -18,4 +16,6 @@ public:
 };
 
 #define LANTERN_HEADERS_ONLY
+#include <string>
 #include "lantern/lantern.h"
+#include <Rcpp.h>
