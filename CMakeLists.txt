@@ -60,6 +60,8 @@ add_library(lantern SHARED
     src/MemoryFormat.cpp
     src/Generator.cpp
     src/QScheme.cpp
+    src/TensorList.cpp
+
 )
 add_library(lantern::library ALIAS lantern)
 
