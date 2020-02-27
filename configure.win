@@ -1,0 +1,40 @@
+#!/bin/bash
+
+LANTERN_BINARIES='https://github.com/mlverse/lantern/releases/download/v0.0.8/Windows.zip'
+TORCH_BINARIES='https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.4.0.zip'
+
+#---------------------------------------------------------
+if test -z $TORCH_HOME
+then
+  TORCH_HOME="$PWD/deps"
+  echo "TORCH_HOME env var is not set - setting it to: $TORCH_HOME"
+else
+  echo "TORCH_HOME env var is set - using it: $TORCH_HOME"
+fi
+
+#---------------------------------------------------------
+if [ -d "$TORCH_HOME" ]
+then
+  echo "TORCH_HOME directory exists - assuming library already installed"
+else
+  echo "$TORCH_HOME does not exist - downloading libtorch"
+  mkdir -p $TORCH_HOME
+  wget -nv $TORCH_BINARIES -P ~ -O $TORCH_HOME/libtorch.zip
+  echo "unzipping libtorch to $TORCH_HOME"
+  unzip -j $TORCH_HOME/libtorch.zip  libtorch/lib/* -d $TORCH_HOME
+
+  echo "downloading and unziping lantern"
+  wget -nv $LANTERN_BINARIES -P ~ -O $TORCH_HOME/lantern.zip
+  unzip -j $TORCH_HOME/lantern.zip -d $TORCH_HOME
+
+  if [[ "$OSTYPE" == "darwin"* ]]
+  then
+    echo "downloading mkl lib"
+    wget -nv $TORCH_MKL_BINARIES -P ~ -O $TORCH_HOME/mkl.tgz
+    echo "unzipping mkl library"
+    gunzip -c $TORCH_HOME/mkl.tgz | tar xopf - --directory $TORCH_HOME --strip-components=2 *.dylib
+  fi
+
+fi
+
+exit 0
