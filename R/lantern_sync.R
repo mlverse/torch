@@ -4,6 +4,7 @@ lantern_sync <- function(sync_lib = FALSE) {
   
   if (sync_lib) {
     lib_dest <- file.path(system.file("", package = "torch"), "deps")
+    lib_dest <- "deps/"
     file.copy(normalizePath("../lantern/build/liblantern.dylib"), lib_dest, overwrite = TRUE)
   }
 }
