@@ -61,6 +61,32 @@ LANTERN_API void* (LANTERN_PTR lantern_MemoryFormat_Contiguous) ();
 LANTERN_API void* (LANTERN_PTR lantern_MemoryFormat_Preserve) ();
 LANTERN_API void* (LANTERN_PTR lantern_MemoryFormat_ChannelsLast) ();
 LANTERN_API const char * (LANTERN_PTR lantern_MemoryFormat_type) (void * format);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_clone) (void * self);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_permute) (void * self, void* dims);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_contiguous) (void * self);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_to) (void * self, void* options);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_set_requires_grad) (void* self, bool requires_grad);
+LANTERN_API double* (LANTERN_PTR lantern_Tensor_data_ptr_double) (void* self);
+LANTERN_API uint8_t* (LANTERN_PTR lantern_Tensor_data_ptr_uint8_t) (void* self);
+LANTERN_API int32_t* (LANTERN_PTR lantern_Tensor_data_ptr_int32_t) (void* self);
+LANTERN_API int16_t* (LANTERN_PTR lantern_Tensor_data_ptr_int16_t) (void* self);
+LANTERN_API bool* (LANTERN_PTR lantern_Tensor_data_ptr_bool) (void* self);
+LANTERN_API int64_t (LANTERN_PTR lantern_Tensor_numel) (void* self);
+LANTERN_API int64_t (LANTERN_PTR lantern_Tensor_size) (void* self, int64_t i);
+LANTERN_API int64_t (LANTERN_PTR lantern_Tensor_ndimension) (void* self);
+LANTERN_API void* (LANTERN_PTR lantern_Tensor_dtype) (void* self);
+LANTERN_API void* (LANTERN_PTR lantern_Generator) ();
+LANTERN_API uint64_t (LANTERN_PTR lantern_Generator_current_seed) (void* generator);
+LANTERN_API void (LANTERN_PTR lantern_Generator_set_current_seed) (void* generator, uint64_t seed);
+LANTERN_API void* (LANTERN_PTR lantern_QScheme_per_channel_affine) ();
+LANTERN_API void* (LANTERN_PTR lantern_QScheme_per_tensor_affine) ();
+LANTERN_API void* (LANTERN_PTR lantern_QScheme_per_channel_symmetric) ();
+LANTERN_API void* (LANTERN_PTR lantern_QScheme_per_tensor_symmetric) ();
+LANTERN_API const char * (LANTERN_PTR lantern_QScheme_type) (void* x);
+LANTERN_API void* (LANTERN_PTR lantern_TensorList) ();
+LANTERN_API void (LANTERN_PTR lantern_TensorList_push_back) (void* self, void* x);
+LANTERN_API void* (LANTERN_PTR lantern_TensorList_at) (void* self, int64_t i);
+LANTERN_API int64_t (LANTERN_PTR lantern_TensorList_size) (void* self);
 
 /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1527,6 +1553,32 @@ bool lanternInit(const std::string& libPath, std::string* pError)
   LOAD_SYMBOL(lantern_MemoryFormat_Preserve);
   LOAD_SYMBOL(lantern_MemoryFormat_ChannelsLast);
   LOAD_SYMBOL(lantern_MemoryFormat_type);
+  LOAD_SYMBOL(lantern_Tensor_clone);
+  LOAD_SYMBOL(lantern_Tensor_permute);
+  LOAD_SYMBOL(lantern_Tensor_contiguous);
+  LOAD_SYMBOL(lantern_Tensor_to);
+  LOAD_SYMBOL(lantern_Tensor_set_requires_grad);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_double);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_uint8_t);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_int32_t);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_int16_t);
+  LOAD_SYMBOL(lantern_Tensor_data_ptr_bool);
+  LOAD_SYMBOL(lantern_Tensor_numel);
+  LOAD_SYMBOL(lantern_Tensor_ndimension);
+  LOAD_SYMBOL(lantern_Tensor_size);
+  LOAD_SYMBOL(lantern_Tensor_dtype);
+  LOAD_SYMBOL(lantern_Generator);
+  LOAD_SYMBOL(lantern_Generator_current_seed);
+  LOAD_SYMBOL(lantern_Generator_set_current_seed);
+  LOAD_SYMBOL(lantern_QScheme_per_channel_affine);
+  LOAD_SYMBOL(lantern_QScheme_per_tensor_affine);
+  LOAD_SYMBOL(lantern_QScheme_per_channel_symmetric);
+  LOAD_SYMBOL(lantern_QScheme_per_tensor_symmetric);
+  LOAD_SYMBOL(lantern_QScheme_type);
+  LOAD_SYMBOL(lantern_TensorList);
+  LOAD_SYMBOL(lantern_TensorList_push_back);
+  LOAD_SYMBOL(lantern_TensorList_at);
+  LOAD_SYMBOL(lantern_TensorList_size);
   
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
