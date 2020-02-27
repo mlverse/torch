@@ -23,6 +23,9 @@ int main(int argc, char *argv[])
     void* generator = lantern_Generator();
     lantern_Generator_set_current_seed(generator, 123456);
     std::cout << "Seed: " << lantern_Generator_current_seed(generator) << std::endl;
+    
+    void* qscheme = lantern_QScheme_per_channel_affine();
+    std::cout << "QScheme: " << lantern_QScheme_type(qscheme) << std::endl;
 
     return 0;
 }

@@ -78,6 +78,11 @@ LANTERN_API void* (LANTERN_PTR lantern_Tensor_dtype) (void* self);
 LANTERN_API void* (LANTERN_PTR lantern_Generator) ();
 LANTERN_API uint64_t (LANTERN_PTR lantern_Generator_current_seed) (void* generator);
 LANTERN_API void (LANTERN_PTR lantern_Generator_set_current_seed) (void* generator, uint64_t seed);
+LANTERN_API void* (LANTERN_PTR lantern_QScheme_per_channel_affine) ();
+LANTERN_API void* (LANTERN_PTR lantern_QScheme_per_tensor_affine) ();
+LANTERN_API void* (LANTERN_PTR lantern_QScheme_per_channel_symmetric) ();
+LANTERN_API void* (LANTERN_PTR lantern_QScheme_per_tensor_symmetric) ();
+LANTERN_API const char * (LANTERN_PTR lantern_QScheme_type) (void* x);
 
 /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1561,6 +1566,11 @@ bool lanternInit(const std::string& libPath, std::string* pError)
   LOAD_SYMBOL(lantern_Generator);
   LOAD_SYMBOL(lantern_Generator_current_seed);
   LOAD_SYMBOL(lantern_Generator_set_current_seed);
+  LOAD_SYMBOL(lantern_QScheme_per_channel_affine);
+  LOAD_SYMBOL(lantern_QScheme_per_tensor_affine);
+  LOAD_SYMBOL(lantern_QScheme_per_channel_symmetric);
+  LOAD_SYMBOL(lantern_QScheme_per_tensor_symmetric);
+  LOAD_SYMBOL(lantern_QScheme_type);
   
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
