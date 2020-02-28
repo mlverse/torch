@@ -2,138 +2,138 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 cpp_device_type_to_string <- function(device) {
-    .Call('_torch_cpp_device_type_to_string', PACKAGE = 'torch', device)
+    .Call('_torchr_cpp_device_type_to_string', PACKAGE = 'torchr', device)
 }
 
 cpp_device_index_to_int <- function(device) {
-    .Call('_torch_cpp_device_index_to_int', PACKAGE = 'torch', device)
+    .Call('_torchr_cpp_device_index_to_int', PACKAGE = 'torchr', device)
 }
 
 cpp_torch_device <- function(type, index) {
-    .Call('_torch_cpp_torch_device', PACKAGE = 'torch', type, index)
+    .Call('_torchr_cpp_torch_device', PACKAGE = 'torchr', type, index)
 }
 
 cpp_dtype_to_string <- function(dtype) {
-    .Call('_torch_cpp_dtype_to_string', PACKAGE = 'torch', dtype)
+    .Call('_torchr_cpp_dtype_to_string', PACKAGE = 'torchr', dtype)
 }
 
 cpp_torch_float32 <- function() {
-    .Call('_torch_cpp_torch_float32', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_float32', PACKAGE = 'torchr')
 }
 
 cpp_torch_float64 <- function() {
-    .Call('_torch_cpp_torch_float64', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_float64', PACKAGE = 'torchr')
 }
 
 cpp_torch_float16 <- function() {
-    .Call('_torch_cpp_torch_float16', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_float16', PACKAGE = 'torchr')
 }
 
 cpp_torch_uint8 <- function() {
-    .Call('_torch_cpp_torch_uint8', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_uint8', PACKAGE = 'torchr')
 }
 
 cpp_torch_int8 <- function() {
-    .Call('_torch_cpp_torch_int8', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_int8', PACKAGE = 'torchr')
 }
 
 cpp_torch_int16 <- function() {
-    .Call('_torch_cpp_torch_int16', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_int16', PACKAGE = 'torchr')
 }
 
 cpp_torch_int32 <- function() {
-    .Call('_torch_cpp_torch_int32', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_int32', PACKAGE = 'torchr')
 }
 
 cpp_torch_int64 <- function() {
-    .Call('_torch_cpp_torch_int64', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_int64', PACKAGE = 'torchr')
 }
 
 cpp_torch_bool <- function() {
-    .Call('_torch_cpp_torch_bool', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_bool', PACKAGE = 'torchr')
 }
 
 cpp_torch_generator <- function() {
-    .Call('_torch_cpp_torch_generator', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_generator', PACKAGE = 'torchr')
 }
 
 cpp_generator_current_seed <- function(generator) {
-    .Call('_torch_cpp_generator_current_seed', PACKAGE = 'torch', generator)
+    .Call('_torchr_cpp_generator_current_seed', PACKAGE = 'torchr', generator)
 }
 
 cpp_generator_set_current_seed <- function(generator, seed) {
-    invisible(.Call('_torch_cpp_generator_set_current_seed', PACKAGE = 'torch', generator, seed))
+    invisible(.Call('_torchr_cpp_generator_set_current_seed', PACKAGE = 'torchr', generator, seed))
 }
 
 cpp_lantern_init <- function(path) {
-    invisible(.Call('_torch_cpp_lantern_init', PACKAGE = 'torch', path))
+    invisible(.Call('_torchr_cpp_lantern_init', PACKAGE = 'torchr', path))
 }
 
 cpp_lantern_test <- function() {
-    invisible(.Call('_torch_cpp_lantern_test', PACKAGE = 'torch'))
+    invisible(.Call('_torchr_cpp_lantern_test', PACKAGE = 'torchr'))
 }
 
 cpp_memory_format_to_string <- function(x) {
-    .Call('_torch_cpp_memory_format_to_string', PACKAGE = 'torch', x)
+    .Call('_torchr_cpp_memory_format_to_string', PACKAGE = 'torchr', x)
 }
 
 cpp_torch_contiguous_format <- function() {
-    .Call('_torch_cpp_torch_contiguous_format', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_contiguous_format', PACKAGE = 'torchr')
 }
 
 cpp_torch_preserve_format <- function() {
-    .Call('_torch_cpp_torch_preserve_format', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_preserve_format', PACKAGE = 'torchr')
 }
 
 cpp_torch_channels_last_format <- function() {
-    .Call('_torch_cpp_torch_channels_last_format', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_channels_last_format', PACKAGE = 'torchr')
 }
 
 cpp_qscheme_to_string <- function(x) {
-    .Call('_torch_cpp_qscheme_to_string', PACKAGE = 'torch', x)
+    .Call('_torchr_cpp_qscheme_to_string', PACKAGE = 'torchr', x)
 }
 
 cpp_torch_per_channel_affine <- function() {
-    .Call('_torch_cpp_torch_per_channel_affine', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_per_channel_affine', PACKAGE = 'torchr')
 }
 
 cpp_torch_per_tensor_affine <- function() {
-    .Call('_torch_cpp_torch_per_tensor_affine', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_per_tensor_affine', PACKAGE = 'torchr')
 }
 
 cpp_torch_per_channel_symmetric <- function() {
-    .Call('_torch_cpp_torch_per_channel_symmetric', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_per_channel_symmetric', PACKAGE = 'torchr')
 }
 
 cpp_torch_per_tensor_symmetric <- function() {
-    .Call('_torch_cpp_torch_per_tensor_symmetric', PACKAGE = 'torch')
+    .Call('_torchr_cpp_torch_per_tensor_symmetric', PACKAGE = 'torchr')
 }
 
 cpp_torch_tensor_print <- function(x) {
-    invisible(.Call('_torch_cpp_torch_tensor_print', PACKAGE = 'torch', x))
+    invisible(.Call('_torchr_cpp_torch_tensor_print', PACKAGE = 'torchr', x))
 }
 
 cpp_torch_tensor <- function(x, dim, options, requires_grad) {
-    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torch', x, dim, options, requires_grad)
+    .Call('_torchr_cpp_torch_tensor', PACKAGE = 'torchr', x, dim, options, requires_grad)
 }
 
 cpp_as_array <- function(x) {
-    .Call('_torch_cpp_as_array', PACKAGE = 'torch', x)
+    .Call('_torchr_cpp_as_array', PACKAGE = 'torchr', x)
 }
 
 cpp_torch_tensor_list <- function(x) {
-    .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torch', x)
+    .Call('_torchr_cpp_torch_tensor_list', PACKAGE = 'torchr', x)
 }
 
 cpp_tensor_list_to_r_list <- function(x) {
-    .Call('_torch_cpp_tensor_list_to_r_list', PACKAGE = 'torch', x)
+    .Call('_torchr_cpp_tensor_list_to_r_list', PACKAGE = 'torchr', x)
 }
 
 cpp_torch_tensor_options <- function(dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory) {
-    .Call('_torch_cpp_torch_tensor_options', PACKAGE = 'torch', dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory)
+    .Call('_torchr_cpp_torch_tensor_options', PACKAGE = 'torchr', dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory)
 }
 
 cpp_nullptr <- function() {
-    .Call('_torch_cpp_nullptr', PACKAGE = 'torch')
+    .Call('_torchr_cpp_nullptr', PACKAGE = 'torchr')
 }
 

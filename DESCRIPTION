@@ -1,4 +1,4 @@
-Package: torch
+Package: torchr
 Type: Package
 Title: Torch from R
 Version: 0.0.1.9000

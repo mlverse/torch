@@ -1,4 +1,4 @@
-#' @useDynLib torch
+#' @useDynLib torchr
 #' @importFrom Rcpp sourceCpp
 NULL
 
