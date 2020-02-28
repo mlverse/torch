@@ -38,7 +38,7 @@ jobs:
       - name: Install
         run: | 
           Rscript -e "devtools::install()"
-          Rscript -e "torch::lantern_install()"
+          Rscript -e "torchr::lantern_install()"
       - name: Test
         run: |
           Rscript -e "testthat::test_package('torchr')"
