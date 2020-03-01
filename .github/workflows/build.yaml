@@ -81,6 +81,9 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: ${{ matrix.name }}
+      - uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r ./${{ matrix.name }}.zip ./${{ matrix.name }}
       - name: Upload to lantern builds
         uses: actions-hub/gcloud@master
         env:
@@ -88,7 +91,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{runner.workspace}}/${{ matrix.name }} gs://lantern-builds/${{ github.ref }}/${{ github.run_number }}/${{ matrix.names }}.zip
+          args: cp ${{runner.workspace}}/${{ matrix.name }}.zip gs://lantern-builds/${{ github.ref }}/${{ github.run_number }}/${{ matrix.name }}.zip
       - name: Upload to latest
         uses: actions-hub/gcloud@master
         env:
@@ -96,7 +99,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{runner.workspace}}/${{ matrix.name }} gs://lantern-builds/${{ github.ref }}/latest/${{ matrix.names }}.zip
+          args: cp ${{runner.workspace}}/${{ matrix.name }} gs://lantern-builds/${{ github.ref }}/latest/${{ matrix.name }}.zip
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)
