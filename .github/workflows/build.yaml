@@ -88,7 +88,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.name }}.zip gs://lantern-builds/${{ github.ref }}/${{ github.run_number }}/${{ matrix.names }}.zip
+          args: cp ${{runner.workspace}}/${{ matrix.name }} gs://lantern-builds/${{ github.ref }}/${{ github.run_number }}/${{ matrix.names }}.zip
       - name: Upload to latest
         uses: actions-hub/gcloud@master
         env:
@@ -96,7 +96,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.name }}.zip gs://lantern-builds/${{ github.ref }}/latest/${{ matrix.names }}.zip
+          args: cp ${{runner.workspace}}/${{ matrix.name }} gs://lantern-builds/${{ github.ref }}/latest/${{ matrix.names }}.zip
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)
