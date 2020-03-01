@@ -84,6 +84,7 @@ jobs:
       - name: Upload to lantern builds
         uses: actions-hub/gcloud@master
         env:
+          PROJECT_ID: {{ secrets.PROJECT_ID }}
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
@@ -91,6 +92,7 @@ jobs:
       - name: Upload to latest
         uses: actions-hub/gcloud@master
         env:
+          PROJECT_ID: {{ secrets.PROJECT_ID }}
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
