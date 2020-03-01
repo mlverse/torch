@@ -71,6 +71,23 @@ jobs:
       with:
         name: ${{runner.os}}
         path: ${{runner.workspace}}/artifacts
+    - uses: montudor/action-zip@v0.1.0
+      with:
+        args: zip -qq -r ./${{ runner.os }}.zip ./artifacts
+    - name: Upload to  lantern builds
+      uses: actions-hub/gcloud@master
+        env:
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          CLI: gsutil
+        with:
+          args: cp ${{ runner.os }}.zip gs://lantern-builds/${{ github.ref }}/${{ github.run_number }}/${{runner.os}}.zip
+    - name: Upload to latest directory
+      uses: actions-hub/gcloud@master
+        env:
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          CLI: gsutil
+        with:
+          args: cp ${{ runner.os }}.zip gs://lantern-builds/${{ github.ref }}/latest/${{ runner.os }}.zip
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)
