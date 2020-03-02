@@ -1,3 +1,4 @@
+/*
 #include "torch_types.h"
 #include "utils.hpp"
 
@@ -22,4 +23,4 @@ Rcpp::XPtr<torch::Scalar> cpp_torch_scalar (SEXP x) {
   }
   
   return make_xptr<torch::Scalar>(out);
-}
+}*/

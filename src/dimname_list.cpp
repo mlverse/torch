@@ -1,5 +1,9 @@
+
+/*
 #include "torch_types.h"
 #include "utils.hpp"
+
+
 
 // [[Rcpp::export]]
 Rcpp::XPtr<torch::Dimname> cpp_torch_dimname(const std::string& str) {
@@ -36,3 +40,5 @@ std::vector<std::string> cpp_dimname_list_to_string (Rcpp::XPtr<std::vector<torc
   
   return result;
 };
+ 
+*/

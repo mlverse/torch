@@ -6,3 +6,7 @@ torch-rstudio.Rproj
 .DS_Store
 torchgen.Rcheck
 torchgen_
+deps/
+*.tar.gz
+c_cpp_properties.json
+*.tmp

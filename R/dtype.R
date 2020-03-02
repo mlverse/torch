@@ -11,7 +11,7 @@ torch_dtype <- R6::R6Class(
   ),
   active = list(
     is_floating_point = function() {
-      if (cpp_dtype_to_string(self$ptr) %in% c("float32", "float64", "float16"))
+      if (cpp_dtype_to_string(self$ptr) %in% c("Float", "Double", "Half"))
         TRUE
       else
         FALSE
