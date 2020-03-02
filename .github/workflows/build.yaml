@@ -5,7 +5,6 @@ on: [push, deployment]
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 3
     strategy:
       matrix:
         os: [windows-2019, ubuntu-16.04, macos-10.15]
@@ -71,6 +70,36 @@ jobs:
       with:
         name: ${{runner.os}}
         path: ${{runner.workspace}}/artifacts
+  upload:
+    needs: build
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        name: [macOS, Linux, Windows]
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: ${{ matrix.name }}
+      - uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r ./${{ matrix.name }}.zip ./${{ matrix.name }}
+      - name: Upload to lantern builds
+        uses: actions-hub/gcloud@master
+        env:
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          CLI: gsutil
+        with:
+          args: cp ${{ matrix.name }}.zip gs://lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.name }}.zip
+      - name: Upload to latest
+        uses: actions-hub/gcloud@master
+        env:
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          CLI: gsutil
+        with:
+          args: cp ${{ matrix.name }}.zip gs://lantern-builds/${{ github.ref }}/latest/${{ matrix.name }}.zip
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)

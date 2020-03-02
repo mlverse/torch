@@ -17,8 +17,15 @@ int main(int argc, char *argv[])
 
     lanternTest();
 
-    void* device = lanternDevice("cpu", 0, false);
-    std::cout << "Device: " << lanternDeviceType(device) << ":" << lanternDeviceIndex(device) << std::endl;
+    void* device = lantern_Device("cpu", 0, false);
+    std::cout << "Device: " << lantern_Device_type(device) << ":" << lantern_Device_index(device) << std::endl;
+    
+    void* generator = lantern_Generator();
+    lantern_Generator_set_current_seed(generator, 123456);
+    std::cout << "Seed: " << lantern_Generator_current_seed(generator) << std::endl;
+    
+    void* qscheme = lantern_QScheme_per_channel_affine();
+    std::cout << "QScheme: " << lantern_QScheme_type(qscheme) << std::endl;
 
     return 0;
 }

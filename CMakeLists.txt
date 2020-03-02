@@ -52,6 +52,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
 add_library(lantern SHARED 
     src/lantern.cpp
+    src/TensorOptions.cpp
+    src/Dtype.cpp
+    src/Tensor.cpp
+    src/Device.cpp
+    src/utils.cpp
+    src/MemoryFormat.cpp
+    src/Generator.cpp
+    src/QScheme.cpp
+    src/TensorList.cpp
+
 )
 add_library(lantern::library ALIAS lantern)
 
