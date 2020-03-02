@@ -11,7 +11,7 @@ std::string toLower(std::string str)
     std::transform(str.begin(),
                    str.end(),
                    str.begin(),
-                   [](unsigned char c){ return std::tolower(c); });
+                   [](unsigned char c) { return std::tolower(c); });
 
     return str;
 }
@@ -20,19 +20,18 @@ std::string toCharOnly(std::string str)
 {
     auto iterEnd = std::remove_if(str.begin(),
                                   str.end(),
-                                  [](unsigned char c){ return !std::isalpha(c); });
+                                  [](unsigned char c) { return !std::isalpha(c); });
 
     return std::string(str.begin(), iterEnd);
 }
 
 std::string toFunction(std::string str, YAML::Node node)
 {
-    std::string name = "lantern_" + toLower(str);
+    std::string name = toLower(str);
 
     for (size_t idx = 0; idx < node.size(); idx++)
     {
-        name += "_" + toLower(toCharOnly(node[idx]["dynamic_type"].as<std::string>()))
-        ;
+        name += "_" + toLower(toCharOnly(node[idx]["dynamic_type"].as<std::string>()));
     }
 
     return name;
@@ -104,7 +103,7 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
 
         std::string type = node[idx]["type"].as<std::string>();
         arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
-            node[idx]["name"].as<std::string>() + ")->get()";
+                     node[idx]["name"].as<std::string>() + ")->get()";
     }
 
     return arguments;
@@ -155,7 +154,8 @@ bool hasMethodOf(YAML::Node node, std::string method)
     if (node["method_of"])
     {
         for (size_t i = 0; i < node["method_of"].size(); i++)
-            if (node["method_of"][i].as<std::string>() == method) return true;
+            if (node["method_of"][i].as<std::string>() == method)
+                return true;
     }
 
     return false;
@@ -177,6 +177,12 @@ bool isSupported(YAML::Node node)
         return false;
     }
 
+    if (node["name"].as<std::string>() == "polygamma")
+    {
+        std::cout << "Skipping (conversion) " << name << std::endl;
+        return false;
+    }
+
     return true;
 }
 
@@ -185,7 +191,8 @@ std::string buildReturn(YAML::Node node)
     std::string type = "";
     for (size_t idx = 0; idx < node.size(); idx++)
     {
-        if (idx > 0) type += ", ";
+        if (idx > 0)
+            type += ", ";
 
         type += addNamespace(node[idx]["dynamic_type"].as<std::string>());
     }
@@ -194,20 +201,21 @@ std::string buildReturn(YAML::Node node)
     {
         type = "std::tuple<" + type + ">";
     }
-    
+
     return type;
 }
 
 int main(int argc, char *argv[])
 {
-    if (argc < 4) {
+    if (argc < 4)
+    {
         std::cout << "Usage: lanterngen declarations.yaml lantern.cpp lantern.h" << std::endl;
         return 1;
     }
 
-    char* pathDeclarations = argv[1];
-    char* pathSource = argv[2];
-    char* pathHeader = argv[3];
+    char *pathDeclarations = argv[1];
+    char *pathSource = argv[2];
+    char *pathHeader = argv[3];
 
     YAML::Node config = YAML::LoadFile(pathDeclarations);
 
@@ -218,55 +226,86 @@ int main(int argc, char *argv[])
     std::vector<std::string> bodies;
     for (size_t idx = 0; idx < config.size(); idx++)
     {
-        if (!isSupported(config[idx])) continue;
+        if (!isSupported(config[idx]))
+            continue;
 
         std::string name = config[idx]["name"].as<std::string>();
         std::string arguments = buildArguments(name, config[idx]["arguments"]);
         std::string function = toFunction(name, config[idx]["arguments"]);
         std::string returns = buildReturn(config[idx]["returns"]);
 
-        headers.push_back("LANTERN_API void* (LANTERN_PTR " + function + ")(" + arguments + ");");
-
         std::string calls = "";
         std::string functionCall = "";
         if (hasMethodOf(config[idx], "namespace"))
         {
+            headers.push_back("LANTERN_API void* (LANTERN_PTR lantern_" + function + ")(" + arguments + ");");
+
             calls = buildCalls(name, config[idx]["arguments"], 0);
             functionCall = "torch::";
+
+            bodies.push_back("void* lantern_" + function + "(" + arguments + ")");
+            bodies.push_back("{");
+            if (returns == "void")
+            {
+                bodies.push_back("    " + functionCall + name + "(" + calls + ");");
+                bodies.push_back("    return NULL;");
+            }
+            else
+            {
+                bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
+                bodies.push_back("        " + calls + "));");
+            }
+            bodies.push_back("}");
+            bodies.push_back("");
         }
-        else
+
+        calls = "";
+        functionCall = "";
+        if (hasMethodOf(config[idx], "Tensor"))
         {
+            headers.push_back("LANTERN_API void* (LANTERN_PTR lantern_Tensor_" + function + ")(" + arguments + ");");
+
             calls = buildCalls(name, config[idx]["arguments"], 1);
 
             std::string firstType = config[idx]["arguments"][0]["type"].as<std::string>();
             std::string firstName = config[idx]["arguments"][0]["name"].as<std::string>();
             functionCall = "((LanternObject<" + addNamespace(firstType) + ">*)" + firstName + ")->get().";
+
+            bodies.push_back("void* lantern_Tensor_" + function + "(" + arguments + ")");
+            bodies.push_back("{");
+            if (returns == "void")
+            {
+                bodies.push_back("    " + functionCall + name + "(" + calls + ");");
+                bodies.push_back("    return NULL;");
+            }
+            else
+            {
+                bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
+                bodies.push_back("        " + calls + "));");
+            }
+            bodies.push_back("}");
+            bodies.push_back("");
         }
-    
-        bodies.push_back("void* " + function + "(" + arguments + ")");
-        bodies.push_back("{");
-        if (returns == "void")
-        {
-            bodies.push_back("    " + functionCall + name + "(" + calls + ");");
-            bodies.push_back("    return NULL;");
-        }
-        else
-        {
-            bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
-            bodies.push_back("        " + calls + "));");
-        }
-        bodies.push_back("}");
-        bodies.push_back("");
     }
 
     // generate symbol loaders
     std::vector<std::string> symbols;
-    for (size_t idx = 0; idx < config.size(); idx ++)
+    for (size_t idx = 0; idx < config.size(); idx++)
     {
-        if (!isSupported(config[idx])) continue;
+        if (!isSupported(config[idx]))
+            continue;
 
         std::string name = config[idx]["name"].as<std::string>();
-        symbols.push_back("  LOAD_SYMBOL(" + toFunction(name, config[idx]["arguments"]) + ")");
+
+        if (hasMethodOf(config[idx], "namespace"))
+        {
+            symbols.push_back("  LOAD_SYMBOL(lantern_" + toFunction(name, config[idx]["arguments"]) + ")");
+        }
+
+        if (hasMethodOf(config[idx], "Tensor"))
+        {
+            symbols.push_back("  LOAD_SYMBOL(lantern_Tensor_" + toFunction(name, config[idx]["arguments"]) + ")");
+        }
     }
 
     replaceFile(pathSource, "/* Autogen Body -- Start */", "/* Autogen Body -- End */", bodies);
