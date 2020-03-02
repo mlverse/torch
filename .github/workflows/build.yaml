@@ -26,7 +26,7 @@ jobs:
             build: build
             libext:
             exeext:
-            fixlib: chrpath -r '$ORIGIN/.' liblantern.so 
+            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
             flavor: Release
             artifacts: liblantern.so
           - os: macos-10.15
@@ -40,36 +40,36 @@ jobs:
             flavor: Release
             artifacts: liblantern.dylib
     steps:
-    - uses: actions/checkout@v2
-    - name: Create environment
-      run: cmake -E make_directory ${{runner.workspace}}/build
-    - name: Run cmake
-      working-directory: ${{runner.workspace}}/build
-      run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{github.workspace}}
-    - name: Run make
-      working-directory: ${{runner.workspace}}/build
-      run: ${{matrix.make}}
-    - name: Fix library
-      working-directory: ${{runner.workspace}}/build
-      run: ${{matrix.fixlib}}
-    - name: Install libs
-      working-directory: ${{runner.workspace}}
-      run: |
-        mkdir install
-        cp ${{matrix.build}}/lanterntest${{matrix.exeext}} install/
-        cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
-        cp build/libtorch/lib/*${{matrix.libext}} install
-        mkdir artifacts
-        cp -R ${{matrix.build}}/${{matrix.artifacts}} artifacts
-        rm -r build
-    - name: Test library
-      working-directory: ${{runner.workspace}}/install
-      run: ${{matrix.test}} ${{runner.workspace}}/install
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v1
-      with:
-        name: ${{runner.os}}
-        path: ${{runner.workspace}}/artifacts
+      - uses: actions/checkout@v2
+      - name: Create environment
+        run: cmake -E make_directory ${{runner.workspace}}/build
+      - name: Run cmake
+        working-directory: ${{runner.workspace}}/build
+        run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{github.workspace}}
+      - name: Run make
+        working-directory: ${{runner.workspace}}/build
+        run: ${{matrix.make}}
+      - name: Fix library
+        working-directory: ${{runner.workspace}}/build
+        run: ${{matrix.fixlib}}
+      - name: Install libs
+        working-directory: ${{runner.workspace}}
+        run: |
+          mkdir install
+          cp ${{matrix.build}}/lanterntest${{matrix.exeext}} install/
+          cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
+          cp build/libtorch/lib/*${{matrix.libext}} install
+          mkdir artifacts
+          cp -R ${{matrix.build}}/${{matrix.artifacts}} artifacts
+          rm -r build
+      - name: Test library
+        working-directory: ${{runner.workspace}}/install
+        run: ${{matrix.test}} ${{runner.workspace}}/install
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{runner.os}}
+          path: ${{runner.workspace}}/artifacts
   upload:
     needs: build
     runs-on: ubuntu-16.04
@@ -83,7 +83,7 @@ jobs:
           name: ${{ matrix.name }}
       - uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./${{ matrix.name }}.zip ./${{ matrix.name }}
+          args: zip -j -qq -r ./${{ matrix.name }}.zip ./${{ matrix.name }}
       - name: Upload to lantern builds
         uses: actions-hub/gcloud@master
         env:
@@ -105,26 +105,26 @@ jobs:
     name: autogen (ubuntu-16.04)
     timeout-minutes: 5
     steps:
-    - uses: actions/checkout@v2
-    - name: Create environment
-      run: mkdir ${{runner.workspace}}/build
-    - name: Run cmake
-      working-directory: ${{runner.workspace}}/build
-      run: cmake ${{github.workspace}}/headers
-    - name: Run make
-      working-directory: ${{runner.workspace}}/build
-      run: make
-    - name: Prepare autogen
-      working-directory: ${{runner.workspace}}
-      run: |
-        mkdir output
-        cp ${{github.workspace}}/src/lantern.cpp output/lantern.cpp
-        cp ${{github.workspace}}/include/lantern/lantern.h output/lantern.h
-    - name: Run autogen
-      working-directory: ${{runner.workspace}}/build
-      run: ./lanterngen ${{github.workspace}}/headers/declarations/declarations.yaml ${{runner.workspace}}/output/lantern.cpp ${{runner.workspace}}/output/lantern.h
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v1
-      with:
-        name: Autogen
-        path: ${{runner.workspace}}/output
+      - uses: actions/checkout@v2
+      - name: Create environment
+        run: mkdir ${{runner.workspace}}/build
+      - name: Run cmake
+        working-directory: ${{runner.workspace}}/build
+        run: cmake ${{github.workspace}}/headers
+      - name: Run make
+        working-directory: ${{runner.workspace}}/build
+        run: make
+      - name: Prepare autogen
+        working-directory: ${{runner.workspace}}
+        run: |
+          mkdir output
+          cp ${{github.workspace}}/src/lantern.cpp output/lantern.cpp
+          cp ${{github.workspace}}/include/lantern/lantern.h output/lantern.h
+      - name: Run autogen
+        working-directory: ${{runner.workspace}}/build
+        run: ./lanterngen ${{github.workspace}}/headers/declarations/declarations.yaml ${{runner.workspace}}/output/lantern.cpp ${{runner.workspace}}/output/lantern.h
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Autogen
+          path: ${{runner.workspace}}/output
