@@ -6465,6 +6465,10 @@ cpp_torch_per_tensor_symmetric <- function() {
     .Call('_torchr_cpp_torch_per_tensor_symmetric', PACKAGE = 'torchr')
 }
 
+cpp_torch_scalar <- function(x) {
+    .Call('_torchr_cpp_torch_scalar', PACKAGE = 'torchr', x)
+}
+
 cpp_torch_tensor_print <- function(x) {
     invisible(.Call('_torchr_cpp_torch_tensor_print', PACKAGE = 'torchr', x))
 }

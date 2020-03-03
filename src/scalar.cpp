@@ -1,26 +1,38 @@
-/*
-#include "torch_types.h"
+#include "torchr_types.h"
 #include "utils.hpp"
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torch::Scalar> cpp_torch_scalar (SEXP x) {
-  torch::Scalar out;
+Rcpp::XPtr<XPtrTorch> cpp_torch_scalar (SEXP x) {
+
+  void* ptr;
+  void* out;
+  std::string type;
+  
+  int i;
+  double d;
+  bool b;
   
   switch (TYPEOF(x)) {
   case INTSXP:
-    out = Rcpp::as<int>(x);
+    i = Rcpp::as<int>(x); 
+    type = "int";
+    out = lantern_Scalar((void*)(&i), type.c_str()); 
     break;
   case REALSXP:
-    out = Rcpp::as<double>(x);
+    d = Rcpp::as<double>(x); 
+    type = "double";
+    out = lantern_Scalar((void*)(&d), type.c_str()); 
     break;
   case LGLSXP:
-    out = Rcpp::as<bool>(x);
+    b = Rcpp::as<bool>(x); 
+    type = "bool";
+    out = lantern_Scalar((void*)(&b), type.c_str()); 
     break;
   case CHARSXP:
     Rcpp::stop("strings are not handled yet");
   default:
     Rcpp::stop("not handled");
   }
-  
-  return make_xptr<torch::Scalar>(out);
-}*/
+
+  return make_xptr<XPtrTorch>(out);
+}
