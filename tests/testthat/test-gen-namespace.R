@@ -28,48 +28,48 @@ test_that("__xor__", {
   expect_equal_to_tensor(torch___xor__(x, TRUE), torch_tensor(FALSE))
 })
 
-# test_that("_adaptive_avg_pool2d", {
-#   x <- torch_rand(c(10,10, 10))
-#   expect_tensor(torch_adaptive_avg_pool2d(x, c(2,2)))
-# })
-# 
-# test_that("_adaptive_avg_pool2d_backward", {
-#   x <- torch_rand(c(10,10, 10))
-#   b <- torch_adaptive_avg_pool2d(x, c(2,2))
-#   expect_tensor(torch__adaptive_avg_pool2d_backward(b, x))
-# })
-# 
-# test_that("_addr", {
-#   x <- torch_rand(c(2))
-#   y <- torch_rand(c(2))
-#   z <- torch_rand(c(2))
-#   expect_tensor(torch__addr(x, y, z))
-# })
-# 
-# test_that("_addr_", {
-#   x <- torch_rand(c(2,2))
-#   y <- torch_rand(c(2))
-#   z <- torch_rand(c(2))
-#   k <- torch__addr_(x, y, z)
-#   expect_equal_to_tensor(x, k)
-# })
-# 
-# test_that("_addr_out", {
-#   out <- torch_zeros(c(2,2))
-#   x <- torch_rand(c(2,2))
-#   y <- torch_rand(c(2))
-#   z <- torch_rand(c(2))
-#   k <- torch_addr_out(out, x, y, z)
-#   expect_equal_to_tensor(out, k)
-# })
-# 
-# test_that("_baddbmm_mkl_", {
-#   x <- torch_rand(c(2,2,2))
-#   y <- torch_rand(c(2,2,2))
-#   z <- torch_rand(c(2,2,2))
-#   expect_tensor(torch__baddbmm_mkl_(x, y, z))
-# })
-# 
+test_that("_adaptive_avg_pool2d", {
+  x <- torch_rand(c(10,10, 10))
+  expect_tensor(torch_adaptive_avg_pool2d(x, c(2,2)))
+})
+
+test_that("_adaptive_avg_pool2d_backward", {
+  x <- torch_rand(c(10,10, 10))
+  b <- torch_adaptive_avg_pool2d(x, c(2,2))
+  expect_tensor(torch__adaptive_avg_pool2d_backward(b, x))
+})
+
+test_that("_addr", {
+  x <- torch_rand(c(2))
+  y <- torch_rand(c(2))
+  z <- torch_rand(c(2))
+  expect_tensor(torch__addr(x, y, z))
+})
+
+test_that("_addr_", {
+  x <- torch_rand(c(2,2))
+  y <- torch_rand(c(2))
+  z <- torch_rand(c(2))
+  k <- torch__addr_(x, y, z)
+  expect_equal_to_tensor(x, k)
+})
+
+test_that("_addr_out", {
+  out <- torch_zeros(c(2,2))
+  x <- torch_rand(c(2,2))
+  y <- torch_rand(c(2))
+  z <- torch_rand(c(2))
+  k <- torch_addr_out(out, x, y, z)
+  expect_equal_to_tensor(out, k)
+})
+
+test_that("_baddbmm_mkl_", {
+  x <- torch_rand(c(2,2,2))
+  y <- torch_rand(c(2,2,2))
+  z <- torch_rand(c(2,2,2))
+  expect_tensor(torch__baddbmm_mkl_(x, y, z))
+})
+
 # test_that("_batch_norm_impl_index", {
 #   a <- torch_rand(c(2,2))
 #   b <- torch_rand(c(2))
@@ -80,7 +80,7 @@ test_that("__xor__", {
 #   expect_tensor(out[[4]])
 #   expect_equal(out[[5]], 0L)
 # })
-# 
+
 # test_that("_batch_norm_impl_index_backward", {
 #   skip("TODO: seems to be GPU only")
 #   a <- torch_rand(c(2,2))

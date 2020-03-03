@@ -220,7 +220,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "IntArrayRef") {
-    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
+    result <- glue::glue("lantern_vector_int64_t(&{argument$name}[0], {argument$name}.size())")
   }
 
   if (argument$dynamic_type == "int64_t") {
@@ -427,7 +427,8 @@ cpp_namespace_body <- function(method) {
 SKIP_R_BINDIND <- c(
   "set_quantizer_", #https://github.com/pytorch/pytorch/blob/5dfcfeebb89304c1e7978cad7ada1227f19303f6/tools/autograd/gen_python_functions.py#L36
   "normal",
-  "polygamma"
+  "polygamma",
+  "_nnpack_available"
 )
 
 cpp <- function(path) {
@@ -447,8 +448,8 @@ cpp <- function(path) {
   writeLines(
     c(
       '// This file is auto generated. Dont modify it by hand.',
-      '#include "lantern/lantern.h"',
       '#include "utils.hpp"',
+      '',
       methods_code,
       namespace_code
     ),
