@@ -61,7 +61,7 @@ add_library(lantern SHARED
     src/Generator.cpp
     src/QScheme.cpp
     src/TensorList.cpp
-
+    src/Scalar.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
