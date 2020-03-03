@@ -1,33 +1,33 @@
-# test_that("__and__", {
-#   x <- torch_tensor(TRUE)
-#   expect_equal_to_tensor(torch___and__(x, x), x)
-#   expect_equal_to_tensor(torch___and__(x, TRUE), x)
-# })
-# 
-# test_that("__lshift__", {
-#   x <- torch_tensor(1)
-#   expect_equal_to_tensor(torch___lshift__(x, x), torch_tensor(2))
-#   expect_equal_to_tensor(torch___lshift__(x, 1), torch_tensor(2))
-# })
-# 
-# test_that("__or__", {
-#   x <- torch_tensor(TRUE)
-#   expect_equal_to_tensor(torch___or__(x, x), x)
-#   expect_equal_to_tensor(torch___or__(x, FALSE), x)
-# })
-# 
-# test_that("__rshift__", {
-#   x <- torch_tensor(1)
-#   expect_equal_to_tensor(torch___rshift__(x, x), torch_tensor(0.5))
-#   expect_equal_to_tensor(torch___rshift__(x, 1), torch_tensor(0.5))
-# })
-# 
-# test_that("__xor__", {
-#   x <- torch_tensor(TRUE)
-#   expect_equal_to_tensor(torch___xor__(x, x), torch_tensor(FALSE))
-#   expect_equal_to_tensor(torch___xor__(x, TRUE), torch_tensor(FALSE))
-# })
-# 
+test_that("__and__", {
+  x <- torch_tensor(TRUE)
+  expect_equal_to_tensor(torch___and__(x, x), x)
+  expect_equal_to_tensor(torch___and__(x, TRUE), x)
+})
+
+test_that("__lshift__", {
+  x <- torch_tensor(1)
+  expect_equal_to_tensor(torch___lshift__(x, x), torch_tensor(2))
+  expect_equal_to_tensor(torch___lshift__(x, 1), torch_tensor(2))
+})
+
+test_that("__or__", {
+  x <- torch_tensor(TRUE)
+  expect_equal_to_tensor(torch___or__(x, x), x)
+  expect_equal_to_tensor(torch___or__(x, FALSE), x)
+})
+
+test_that("__rshift__", {
+  x <- torch_tensor(1)
+  expect_equal_to_tensor(torch___rshift__(x, x), torch_tensor(0.5))
+  expect_equal_to_tensor(torch___rshift__(x, 1), torch_tensor(0.5))
+})
+
+test_that("__xor__", {
+  x <- torch_tensor(TRUE)
+  expect_equal_to_tensor(torch___xor__(x, x), torch_tensor(FALSE))
+  expect_equal_to_tensor(torch___xor__(x, TRUE), torch_tensor(FALSE))
+})
+
 # test_that("_adaptive_avg_pool2d", {
 #   x <- torch_rand(c(10,10, 10))
 #   expect_tensor(torch_adaptive_avg_pool2d(x, c(2,2)))

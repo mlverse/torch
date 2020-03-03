@@ -4,7 +4,6 @@
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorch> cpp_torch_scalar (SEXP x) {
 
-  void* ptr;
   void* out;
   std::string type;
   
