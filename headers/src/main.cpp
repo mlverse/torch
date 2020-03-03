@@ -102,6 +102,12 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         }
 
         std::string type = node[idx]["dynamic_type"].as<std::string>();
+
+        if (type == "IntArrayRef")
+        {
+            type = "std::vector<int64_t>";
+        }
+
         arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
                      node[idx]["name"].as<std::string>() + ")->get()";
     }
