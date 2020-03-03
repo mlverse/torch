@@ -101,7 +101,7 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             arguments += ", ";
         }
 
-        std::string type = node[idx]["type"].as<std::string>();
+        std::string type = node[idx]["dynamic_type"].as<std::string>();
         arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
                      node[idx]["name"].as<std::string>() + ")->get()";
     }
