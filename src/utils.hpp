@@ -42,6 +42,7 @@ public:
   }
 };
 
+// https://pt.stackoverflow.com/a/438284/6036
 template <class... T>
 std::vector<void *> to_vector(std::tuple<T...> x)
 {
