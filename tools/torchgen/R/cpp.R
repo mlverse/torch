@@ -63,8 +63,8 @@ cpp_type <- function(decl) {
       return("Rcpp::XPtr<XPtrTorch>")
 
   } else {
-    #return("Rcpp::List")
-    return("Rcpp::XPtr<XPtrTorch>")
+    return("Rcpp::List")
+    #return("Rcpp::XPtr<XPtrTorch>")
   }
 
 }
@@ -326,18 +326,18 @@ cpp_return_statement <- function(returns) {
 
   } else {
 
-    return(xptr_return_call("XPtrTorch", "tuple"))
+    # return(xptr_return_call("XPtrTorch", "tuple"))
 
-    # calls <- purrr::map_chr(
-    #   seq_along(returns),
-    #   ~cpp_return_statement(returns[.x])(glue::glue("std::get<{.x-1}>(r_out)"))
-    # )
-    #
-    # f <- function(x) {
-    #   glue::glue("Rcpp::List::create({glue::glue_collapse(calls, sep = ',')})")
-    # }
-    #
-    # return(f)
+    calls <- purrr::map_chr(
+      seq_along(returns),
+      ~cpp_return_statement(returns[.x])(glue::glue("lantern_vector_get(r_out, {.x-1})"))
+    )
+
+    f <- function(x) {
+      glue::glue("Rcpp::List::create({glue::glue_collapse(calls, sep = ',')})")
+    }
+
+    return(f)
 
   }
 

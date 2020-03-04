@@ -125,6 +125,10 @@ Rcpp::List cpp_as_array (Rcpp::XPtr<XPtrTorch> x) {
     return tensor_to_r_array_bool(ten);
   }
   
+  if (dtype == "Double") {
+    return tensor_to_r_array_double(ten);
+  }
+  
   auto options = lantern_TensorOptions();
   
   if (dtype == "Float") {

@@ -744,15 +744,15 @@ return *reinterpret_cast<bool *>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_kthvalue_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_method_kthvalue_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool keepdim) {
   auto r_out = lantern_Tensor_kthvalue_tensor_intt_intt_bool(self->get(), reinterpret_cast<void*>(&k), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_kthvalue_self_Tensor_k_int64_t_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, int64_t k, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_method_kthvalue_self_Tensor_k_int64_t_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, int64_t k, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_Tensor_kthvalue_tensor_intt_dimname_bool(self->get(), reinterpret_cast<void*>(&k), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -846,9 +846,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_max_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_method_max_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_Tensor_max_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -858,9 +858,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_max_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_method_max_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_Tensor_max_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -888,21 +888,21 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_median_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_method_median_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_Tensor_median_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_median_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_method_median_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_Tensor_median_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_min_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_method_min_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_Tensor_min_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -912,9 +912,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_min_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_method_min_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_Tensor_min_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -930,15 +930,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_mode_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_method_mode_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_Tensor_mode_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_mode_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_method_mode_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_Tensor_mode_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -1110,9 +1110,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_prelu_backward_grad_output_Tensor_self_Tensor_weight_Tensor (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight) {
+Rcpp::List cpp_torch_method_prelu_backward_grad_output_Tensor_self_Tensor_weight_Tensor (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight) {
   auto r_out = lantern_Tensor_prelu_backward_tensor_tensor_tensor(grad_output->get(), self->get(), weight->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -1218,9 +1218,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_slogdet_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
+Rcpp::List cpp_torch_method_slogdet_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
   auto r_out = lantern_Tensor_slogdet_tensor(self->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -2544,33 +2544,33 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_lstsq_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
+Rcpp::List cpp_torch_method_lstsq_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
   auto r_out = lantern_Tensor_lstsq_tensor_tensor(self->get(), A->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_triangular_solve_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A, bool upper, bool transpose, bool unitriangular) {
+Rcpp::List cpp_torch_method_triangular_solve_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A, bool upper, bool transpose, bool unitriangular) {
   auto r_out = lantern_Tensor_triangular_solve_tensor_tensor_bool_bool_bool(self->get(), A->get(), reinterpret_cast<void*>(&upper), reinterpret_cast<void*>(&transpose), reinterpret_cast<void*>(&unitriangular));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_symeig_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors, bool upper) {
+Rcpp::List cpp_torch_method_symeig_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors, bool upper) {
   auto r_out = lantern_Tensor_symeig_tensor_bool_bool(self->get(), reinterpret_cast<void*>(&eigenvectors), reinterpret_cast<void*>(&upper));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_eig_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors) {
+Rcpp::List cpp_torch_method_eig_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors) {
   auto r_out = lantern_Tensor_eig_tensor_bool(self->get(), reinterpret_cast<void*>(&eigenvectors));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_svd_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool some, bool compute_uv) {
+Rcpp::List cpp_torch_method_svd_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool some, bool compute_uv) {
   auto r_out = lantern_Tensor_svd_tensor_bool_bool(self->get(), reinterpret_cast<void*>(&some), reinterpret_cast<void*>(&compute_uv));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -2586,9 +2586,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_solve_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
+Rcpp::List cpp_torch_method_solve_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
   auto r_out = lantern_Tensor_solve_tensor_tensor(self->get(), A->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -2598,15 +2598,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_qr_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool some) {
+Rcpp::List cpp_torch_method_qr_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool some) {
   auto r_out = lantern_Tensor_qr_tensor_bool(self->get(), reinterpret_cast<void*>(&some));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_geqrf_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
+Rcpp::List cpp_torch_method_geqrf_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
   auto r_out = lantern_Tensor_geqrf_tensor(self->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -2754,15 +2754,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_sort_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool descending) {
+Rcpp::List cpp_torch_method_sort_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool descending) {
   auto r_out = lantern_Tensor_sort_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&descending));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_sort_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool descending) {
+Rcpp::List cpp_torch_method_sort_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool descending) {
   auto r_out = lantern_Tensor_sort_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&descending));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -2778,9 +2778,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_method_topk_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool largest, bool sorted) {
+Rcpp::List cpp_torch_method_topk_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool largest, bool sorted) {
   auto r_out = lantern_Tensor_topk_tensor_intt_intt_bool_bool(self->get(), reinterpret_cast<void*>(&k), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&largest), reinterpret_cast<void*>(&sorted));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -2880,9 +2880,9 @@ return make_xptr<XPtrTorch>(r_out, "TensorList");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t_deterministic_bool_zero_infinity_bool (Rcpp::XPtr<XPtrTorch> log_probs, Rcpp::XPtr<XPtrTorch> targets, std::vector<int64_t> input_lengths, std::vector<int64_t> target_lengths, int64_t blank, bool deterministic, bool zero_infinity) {
+Rcpp::List cpp_torch_namespace__cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t_deterministic_bool_zero_infinity_bool (Rcpp::XPtr<XPtrTorch> log_probs, Rcpp::XPtr<XPtrTorch> targets, std::vector<int64_t> input_lengths, std::vector<int64_t> target_lengths, int64_t blank, bool deterministic, bool zero_infinity) {
   auto r_out = lantern__cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool_bool(log_probs->get(), targets->get(), lantern_vector_int64_t(&input_lengths[0], input_lengths.size()), lantern_vector_int64_t(&target_lengths[0], target_lengths.size()), reinterpret_cast<void*>(&blank), reinterpret_cast<void*>(&deterministic), reinterpret_cast<void*>(&zero_infinity));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -2892,15 +2892,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, int64_t weight_stride0, Rcpp::XPtr<XPtrTorch> weight_buf, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> cx, int64_t mode, int64_t hidden_size, int64_t num_layers, bool batch_first, double dropout, bool train, bool bidirectional, std::vector<int64_t> batch_sizes, Rcpp::XPtr<XPtrTorch> dropout_state) {
+Rcpp::List cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, int64_t weight_stride0, Rcpp::XPtr<XPtrTorch> weight_buf, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> cx, int64_t mode, int64_t hidden_size, int64_t num_layers, bool batch_first, double dropout, bool train, bool bidirectional, std::vector<int64_t> batch_sizes, Rcpp::XPtr<XPtrTorch> dropout_state) {
   auto r_out = lantern__cudnn_rnn_tensor_tensorlist_intt_tensor_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor(input->get(), weight->get(), reinterpret_cast<void*>(&weight_stride0), weight_buf->get(), hx->get(), cx->get(), reinterpret_cast<void*>(&mode), reinterpret_cast<void*>(&hidden_size), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&batch_first), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), lantern_vector_int64_t(&batch_sizes[0], batch_sizes.size()), dropout_state->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 4), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4 (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, int64_t weight_stride0, Rcpp::XPtr<XPtrTorch> weight_buf, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> grad_cy, int64_t mode, int64_t hidden_size, int64_t num_layers, bool batch_first, double dropout, bool train, bool bidirectional, std::vector<int64_t> batch_sizes, Rcpp::XPtr<XPtrTorch> dropout_state, Rcpp::XPtr<XPtrTorch> reserve, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4 (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, int64_t weight_stride0, Rcpp::XPtr<XPtrTorch> weight_buf, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> grad_cy, int64_t mode, int64_t hidden_size, int64_t num_layers, bool batch_first, double dropout, bool train, bool bidirectional, std::vector<int64_t> batch_sizes, Rcpp::XPtr<XPtrTorch> dropout_state, Rcpp::XPtr<XPtrTorch> reserve, std::vector<bool> output_mask) {
   auto r_out = lantern__cudnn_rnn_backward_tensor_tensorlist_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor_tensor_stdarraybool(input->get(), weight->get(), reinterpret_cast<void*>(&weight_stride0), weight_buf->get(), hx->get(), cx->get(), output->get(), grad_output->get(), grad_hy->get(), grad_cy->get(), reinterpret_cast<void*>(&mode), reinterpret_cast<void*>(&hidden_size), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&batch_first), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), lantern_vector_int64_t(&batch_sizes[0], batch_sizes.size()), dropout_state->get(), reserve->get(), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "TensorList"));
 }
 
 // [[Rcpp::export]]
@@ -2916,9 +2916,9 @@ return *reinterpret_cast<int64_t *>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__fused_dropout_self_Tensor_p_double (Rcpp::XPtr<XPtrTorch> self, double p, Rcpp::XPtr<XPtrTorch> generator) {
+Rcpp::List cpp_torch_namespace__fused_dropout_self_Tensor_p_double (Rcpp::XPtr<XPtrTorch> self, double p, Rcpp::XPtr<XPtrTorch> generator) {
   auto r_out = lantern__fused_dropout_tensor_double_generator(self->get(), reinterpret_cast<void*>(&p), generator->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -2928,9 +2928,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__sobol_engine_draw_quasi_Tensor_n_int64_t_sobolstate_Tensor_dimension_int64_t_num_generated_int64_t_dtype_ScalarType (Rcpp::XPtr<XPtrTorch> quasi, int64_t n, Rcpp::XPtr<XPtrTorch> sobolstate, int64_t dimension, int64_t num_generated, Rcpp::XPtr<XPtrTorch> dtype) {
+Rcpp::List cpp_torch_namespace__sobol_engine_draw_quasi_Tensor_n_int64_t_sobolstate_Tensor_dimension_int64_t_num_generated_int64_t_dtype_ScalarType (Rcpp::XPtr<XPtrTorch> quasi, int64_t n, Rcpp::XPtr<XPtrTorch> sobolstate, int64_t dimension, int64_t num_generated, Rcpp::XPtr<XPtrTorch> dtype) {
   auto r_out = lantern__sobol_engine_draw_tensor_intt_tensor_intt_intt_scalartype(quasi->get(), reinterpret_cast<void*>(&n), sobolstate->get(), reinterpret_cast<void*>(&dimension), reinterpret_cast<void*>(&num_generated), dtype->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3060,9 +3060,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_adaptive_max_pool1d_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
+Rcpp::List cpp_torch_namespace_adaptive_max_pool1d_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
   auto r_out = lantern_adaptive_max_pool1d_tensor_intarrayref(self->get(), lantern_vector_int64_t(&output_size[0], output_size.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3312,15 +3312,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__batch_norm_impl_index_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double_cudnn_enabled_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, bool training, double momentum, double eps, bool cudnn_enabled) {
+Rcpp::List cpp_torch_namespace__batch_norm_impl_index_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double_cudnn_enabled_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, bool training, double momentum, double eps, bool cudnn_enabled) {
   auto r_out = lantern__batch_norm_impl_index_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool(input->get(), weight->get(), bias->get(), running_mean->get(), running_var->get(), reinterpret_cast<void*>(&training), reinterpret_cast<void*>(&momentum), reinterpret_cast<void*>(&eps), reinterpret_cast<void*>(&cudnn_enabled));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),*reinterpret_cast<int64_t *>(lantern_vector_get(r_out, 3)));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__batch_norm_impl_index_backward_impl_index_int64_t_input_Tensor_grad_output_Tensor_weight_Tensor_running_mean_Tensor_running_var_Tensor_save_mean_Tensor_save_var_transform_Tensor_train_bool_eps_double_output_mask_stdarraybool3 (int64_t impl_index, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, Rcpp::XPtr<XPtrTorch> save_mean, Rcpp::XPtr<XPtrTorch> save_var_transform, bool train, double eps, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace__batch_norm_impl_index_backward_impl_index_int64_t_input_Tensor_grad_output_Tensor_weight_Tensor_running_mean_Tensor_running_var_Tensor_save_mean_Tensor_save_var_transform_Tensor_train_bool_eps_double_output_mask_stdarraybool3 (int64_t impl_index, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, Rcpp::XPtr<XPtrTorch> save_mean, Rcpp::XPtr<XPtrTorch> save_var_transform, bool train, double eps, std::vector<bool> output_mask) {
   auto r_out = lantern__batch_norm_impl_index_backward_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_stdarraybool(reinterpret_cast<void*>(&impl_index), input->get(), grad_output->get(), weight->get(), running_mean->get(), running_var->get(), save_mean->get(), save_var_transform->get(), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&eps), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3564,9 +3564,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_convolution_backward_overrideable_grad_output_Tensor_input_Tensor_weight_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_transposed_bool_output_padding_IntArrayRef_groups_int64_t_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool transposed, std::vector<int64_t> output_padding, int64_t groups, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_convolution_backward_overrideable_grad_output_Tensor_input_Tensor_weight_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_transposed_bool_output_padding_IntArrayRef_groups_int64_t_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool transposed, std::vector<int64_t> output_padding, int64_t groups, std::vector<bool> output_mask) {
   auto r_out = lantern_convolution_backward_overrideable_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_stdarraybool(grad_output->get(), input->get(), weight->get(), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&transposed), lantern_vector_int64_t(&output_padding[0], output_padding.size()), reinterpret_cast<void*>(&groups), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3582,9 +3582,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__convolution_double_backward_ggI_Tensor_ggW_Tensor_ggb_Tensor_gO_Tensor_weight_Tensor_self_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_transposed_bool_output_padding_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_cudnn_enabled_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> ggI, Rcpp::XPtr<XPtrTorch> ggW, Rcpp::XPtr<XPtrTorch> ggb, Rcpp::XPtr<XPtrTorch> gO, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool transposed, std::vector<int64_t> output_padding, int64_t groups, bool benchmark, bool deterministic, bool cudnn_enabled, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace__convolution_double_backward_ggI_Tensor_ggW_Tensor_ggb_Tensor_gO_Tensor_weight_Tensor_self_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_transposed_bool_output_padding_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_cudnn_enabled_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> ggI, Rcpp::XPtr<XPtrTorch> ggW, Rcpp::XPtr<XPtrTorch> ggb, Rcpp::XPtr<XPtrTorch> gO, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool transposed, std::vector<int64_t> output_padding, int64_t groups, bool benchmark, bool deterministic, bool cudnn_enabled, std::vector<bool> output_mask) {
   auto r_out = lantern__convolution_double_backward_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_bool_bool_bool_stdarraybool(ggI->get(), ggW->get(), ggb->get(), gO->get(), weight->get(), self->get(), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&transposed), lantern_vector_int64_t(&output_padding[0], output_padding.size()), reinterpret_cast<void*>(&groups), reinterpret_cast<void*>(&benchmark), reinterpret_cast<void*>(&deterministic), reinterpret_cast<void*>(&cudnn_enabled), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3612,9 +3612,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_conv_tbc_backward_self_Tensor_input_Tensor_weight_Tensor_bias_Tensor_pad_int64_t (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, int64_t pad) {
+Rcpp::List cpp_torch_namespace_conv_tbc_backward_self_Tensor_input_Tensor_weight_Tensor_bias_Tensor_pad_int64_t (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, int64_t pad) {
   auto r_out = lantern_conv_tbc_backward_tensor_tensor_tensor_tensor_intt(self->get(), input->get(), weight->get(), bias->get(), reinterpret_cast<void*>(&pad));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3696,15 +3696,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_cudnn_batch_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_exponential_average_factor_double_epsilon_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, bool training, double exponential_average_factor, double epsilon) {
+Rcpp::List cpp_torch_namespace_cudnn_batch_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_exponential_average_factor_double_epsilon_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, bool training, double exponential_average_factor, double epsilon) {
   auto r_out = lantern_cudnn_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double(input->get(), weight->get(), bias->get(), running_mean->get(), running_var->get(), reinterpret_cast<void*>(&training), reinterpret_cast<void*>(&exponential_average_factor), reinterpret_cast<void*>(&epsilon));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_cudnn_batch_norm_backward_input_Tensor_grad_output_Tensor_weight_Tensor_running_mean_Tensor_running_var_Tensor_save_mean_Tensor_save_var_Tensor_epsilon_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, Rcpp::XPtr<XPtrTorch> save_mean, Rcpp::XPtr<XPtrTorch> save_var, double epsilon) {
+Rcpp::List cpp_torch_namespace_cudnn_batch_norm_backward_input_Tensor_grad_output_Tensor_weight_Tensor_running_mean_Tensor_running_var_Tensor_save_mean_Tensor_save_var_Tensor_epsilon_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, Rcpp::XPtr<XPtrTorch> save_mean, Rcpp::XPtr<XPtrTorch> save_var, double epsilon) {
   auto r_out = lantern_cudnn_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double(input->get(), grad_output->get(), weight->get(), running_mean->get(), running_var->get(), save_mean->get(), save_var->get(), reinterpret_cast<void*>(&epsilon));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3720,9 +3720,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_cudnn_convolution_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_cudnn_convolution_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
   auto r_out = lantern_cudnn_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool(self->get(), grad_output->get(), weight->get(), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&groups), reinterpret_cast<void*>(&benchmark), reinterpret_cast<void*>(&deterministic), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3744,9 +3744,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_cudnn_convolution_transpose_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_output_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_cudnn_convolution_transpose_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_output_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
   auto r_out = lantern_cudnn_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool(self->get(), grad_output->get(), weight->get(), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&output_padding[0], output_padding.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&groups), reinterpret_cast<void*>(&benchmark), reinterpret_cast<void*>(&deterministic), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3774,9 +3774,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_cudnn_grid_sampler_backward_self_Tensor_grid_Tensor_grad_output_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grid, Rcpp::XPtr<XPtrTorch> grad_output) {
+Rcpp::List cpp_torch_namespace_cudnn_grid_sampler_backward_self_Tensor_grid_Tensor_grad_output_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grid, Rcpp::XPtr<XPtrTorch> grad_output) {
   auto r_out = lantern_cudnn_grid_sampler_backward_tensor_tensor_tensor(self->get(), grid->get(), grad_output->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3840,9 +3840,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef (Rcpp::XPtr<XPtrTorch> log_probs, Rcpp::XPtr<XPtrTorch> targets, std::vector<int64_t> input_lengths, std::vector<int64_t> target_lengths, int64_t blank, bool zero_infinity) {
+Rcpp::List cpp_torch_namespace__ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef (Rcpp::XPtr<XPtrTorch> log_probs, Rcpp::XPtr<XPtrTorch> targets, std::vector<int64_t> input_lengths, std::vector<int64_t> target_lengths, int64_t blank, bool zero_infinity) {
   auto r_out = lantern__ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool(log_probs->get(), targets->get(), lantern_vector_int64_t(&input_lengths[0], input_lengths.size()), lantern_vector_int64_t(&target_lengths[0], target_lengths.size()), reinterpret_cast<void*>(&blank), reinterpret_cast<void*>(&zero_infinity));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -3942,15 +3942,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor (Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> offsets, bool scale_grad_by_freq, int64_t mode, bool sparse, Rcpp::XPtr<XPtrTorch> per_sample_weights) {
+Rcpp::List cpp_torch_namespace_embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor (Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> offsets, bool scale_grad_by_freq, int64_t mode, bool sparse, Rcpp::XPtr<XPtrTorch> per_sample_weights) {
   auto r_out = lantern_embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor(weight->get(), indices->get(), offsets->get(), reinterpret_cast<void*>(&scale_grad_by_freq), reinterpret_cast<void*>(&mode), reinterpret_cast<void*>(&sparse), per_sample_weights->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor (Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> offsets, bool scale_grad_by_freq, int64_t mode, bool sparse, Rcpp::XPtr<XPtrTorch> per_sample_weights) {
+Rcpp::List cpp_torch_namespace__embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor (Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> offsets, bool scale_grad_by_freq, int64_t mode, bool sparse, Rcpp::XPtr<XPtrTorch> per_sample_weights) {
   auto r_out = lantern__embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor(weight->get(), indices->get(), offsets->get(), reinterpret_cast<void*>(&scale_grad_by_freq), reinterpret_cast<void*>(&mode), reinterpret_cast<void*>(&sparse), per_sample_weights->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4242,9 +4242,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_grid_sampler_2d_backward_grad_output_Tensor_input_Tensor_grid_Tensor_interpolation_mode_int64_t_padding_mode_int64_t_align_corners_bool (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grid, int64_t interpolation_mode, int64_t padding_mode, bool align_corners) {
+Rcpp::List cpp_torch_namespace_grid_sampler_2d_backward_grad_output_Tensor_input_Tensor_grid_Tensor_interpolation_mode_int64_t_padding_mode_int64_t_align_corners_bool (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grid, int64_t interpolation_mode, int64_t padding_mode, bool align_corners) {
   auto r_out = lantern_grid_sampler_2d_backward_tensor_tensor_tensor_intt_intt_bool(grad_output->get(), input->get(), grid->get(), reinterpret_cast<void*>(&interpolation_mode), reinterpret_cast<void*>(&padding_mode), reinterpret_cast<void*>(&align_corners));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4254,9 +4254,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_grid_sampler_3d_backward_grad_output_Tensor_input_Tensor_grid_Tensor_interpolation_mode_int64_t_padding_mode_int64_t_align_corners_bool (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grid, int64_t interpolation_mode, int64_t padding_mode, bool align_corners) {
+Rcpp::List cpp_torch_namespace_grid_sampler_3d_backward_grad_output_Tensor_input_Tensor_grid_Tensor_interpolation_mode_int64_t_padding_mode_int64_t_align_corners_bool (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grid, int64_t interpolation_mode, int64_t padding_mode, bool align_corners) {
   auto r_out = lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool(grad_output->get(), input->get(), grid->get(), reinterpret_cast<void*>(&interpolation_mode), reinterpret_cast<void*>(&padding_mode), reinterpret_cast<void*>(&align_corners));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4492,27 +4492,27 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool keepdim) {
   auto r_out = lantern_kthvalue_tensor_intt_intt_bool(self->get(), reinterpret_cast<void*>(&k), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_kthvalue_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_kthvalue_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool keepdim) {
   auto r_out = lantern_kthvalue_out_tensor_tensor_tensor_intt_intt_bool(values->get(), indices->get(), self->get(), reinterpret_cast<void*>(&k), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, int64_t k, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, int64_t k, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_kthvalue_tensor_intt_dimname_bool(self->get(), reinterpret_cast<void*>(&k), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_kthvalue_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t_dim_Dimname (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t k, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_kthvalue_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t_dim_Dimname (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t k, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_kthvalue_out_tensor_tensor_tensor_intt_dimname_bool(values->get(), indices->get(), self->get(), reinterpret_cast<void*>(&k), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4522,21 +4522,21 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, int64_t M, int64_t False, double eps) {
+Rcpp::List cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, int64_t M, int64_t False, double eps) {
   auto r_out = lantern_native_layer_norm_tensor_tensor_tensor_intt_intt_double(input->get(), weight->get(), bias->get(), reinterpret_cast<void*>(&M), reinterpret_cast<void*>(&False), reinterpret_cast<void*>(&eps));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_out, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> rstd, Rcpp::XPtr<XPtrTorch> weight, int64_t M, int64_t False, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_out, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> rstd, Rcpp::XPtr<XPtrTorch> weight, int64_t M, int64_t False, std::vector<bool> output_mask) {
   auto r_out = lantern_native_layer_norm_backward_tensor_tensor_tensor_tensor_tensor_intt_intt_stdarraybool(grad_out->get(), input->get(), mean->get(), rstd->get(), weight->get(), reinterpret_cast<void*>(&M), reinterpret_cast<void*>(&False), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_native_layer_norm_double_backward_ggI_Tensor_ggW_Tensor_ggb_Tensor_gO_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> ggI, Rcpp::XPtr<XPtrTorch> ggW, Rcpp::XPtr<XPtrTorch> ggb, Rcpp::XPtr<XPtrTorch> gO, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> rstd, Rcpp::XPtr<XPtrTorch> weight, int64_t M, int64_t False, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_native_layer_norm_double_backward_ggI_Tensor_ggW_Tensor_ggb_Tensor_gO_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> ggI, Rcpp::XPtr<XPtrTorch> ggW, Rcpp::XPtr<XPtrTorch> ggb, Rcpp::XPtr<XPtrTorch> gO, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> rstd, Rcpp::XPtr<XPtrTorch> weight, int64_t M, int64_t False, std::vector<bool> output_mask) {
   auto r_out = lantern_native_layer_norm_double_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_stdarraybool(ggI->get(), ggW->get(), ggb->get(), gO->get(), input->get(), mean->get(), rstd->get(), weight->get(), reinterpret_cast<void*>(&M), reinterpret_cast<void*>(&False), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4564,9 +4564,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_fbgemm_linear_quantize_weight_input_Tensor (Rcpp::XPtr<XPtrTorch> input) {
+Rcpp::List cpp_torch_namespace_fbgemm_linear_quantize_weight_input_Tensor (Rcpp::XPtr<XPtrTorch> input) {
   auto r_out = lantern_fbgemm_linear_quantize_weight_tensor(input->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),*reinterpret_cast<double *>(lantern_vector_get(r_out, 2)),*reinterpret_cast<int64_t *>(lantern_vector_get(r_out, 3)));
 }
 
 // [[Rcpp::export]]
@@ -4786,15 +4786,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_max_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_max_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_max_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_max_out_max_Tensor_max_values_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> max, Rcpp::XPtr<XPtrTorch> max_values, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_max_out_max_Tensor_max_values_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> max, Rcpp::XPtr<XPtrTorch> max_values, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_max_out_tensor_tensor_tensor_intt_bool(max->get(), max_values->get(), self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4804,15 +4804,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_max_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_max_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_max_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_max_out_max_Tensor_max_values_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> max, Rcpp::XPtr<XPtrTorch> max_values, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_max_out_max_Tensor_max_values_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> max, Rcpp::XPtr<XPtrTorch> max_values, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_max_out_tensor_tensor_tensor_dimname_bool(max->get(), max_values->get(), self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4822,9 +4822,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_max_pool1d_with_indices_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
+Rcpp::List cpp_torch_namespace_max_pool1d_with_indices_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
   auto r_out = lantern_max_pool1d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(self->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&ceil_mode));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4888,39 +4888,39 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_median_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_median_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_median_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_median_out_tensor_tensor_tensor_intt_bool(values->get(), indices->get(), self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_median_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_median_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_median_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_median_out_tensor_tensor_tensor_dimname_bool(values->get(), indices->get(), self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_min_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_min_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_min_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> min, Rcpp::XPtr<XPtrTorch> min_indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> min, Rcpp::XPtr<XPtrTorch> min_indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_min_out_tensor_tensor_tensor_intt_bool(min->get(), min_indices->get(), self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4930,15 +4930,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_min_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_min_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_min_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> min, Rcpp::XPtr<XPtrTorch> min_indices, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> min, Rcpp::XPtr<XPtrTorch> min_indices, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_min_out_tensor_tensor_tensor_dimname_bool(min->get(), min_indices->get(), self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4960,27 +4960,27 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_mkldnn_convolution_backward_weights_weight_size_IntArrayRef_grad_output_Tensor_self_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_bias_defined_bool (std::vector<int64_t> weight_size, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool bias_defined) {
+Rcpp::List cpp_torch_namespace_mkldnn_convolution_backward_weights_weight_size_IntArrayRef_grad_output_Tensor_self_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_bias_defined_bool (std::vector<int64_t> weight_size, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool bias_defined) {
   auto r_out = lantern_mkldnn_convolution_backward_weights_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool(lantern_vector_int64_t(&weight_size[0], weight_size.size()), grad_output->get(), self->get(), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&groups), reinterpret_cast<void*>(&bias_defined));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_mkldnn_convolution_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_mkldnn_convolution_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, std::vector<bool> output_mask) {
   auto r_out = lantern_mkldnn_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_stdarraybool(self->get(), grad_output->get(), weight->get(), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&groups), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_miopen_batch_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_exponential_average_factor_double_epsilon_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, bool training, double exponential_average_factor, double epsilon) {
+Rcpp::List cpp_torch_namespace_miopen_batch_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_exponential_average_factor_double_epsilon_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, bool training, double exponential_average_factor, double epsilon) {
   auto r_out = lantern_miopen_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double(input->get(), weight->get(), bias->get(), running_mean->get(), running_var->get(), reinterpret_cast<void*>(&training), reinterpret_cast<void*>(&exponential_average_factor), reinterpret_cast<void*>(&epsilon));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_miopen_batch_norm_backward_input_Tensor_grad_output_Tensor_weight_Tensor_running_mean_Tensor_running_var_Tensor_save_mean_Tensor_save_var_Tensor_epsilon_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, Rcpp::XPtr<XPtrTorch> save_mean, Rcpp::XPtr<XPtrTorch> save_var, double epsilon) {
+Rcpp::List cpp_torch_namespace_miopen_batch_norm_backward_input_Tensor_grad_output_Tensor_weight_Tensor_running_mean_Tensor_running_var_Tensor_save_mean_Tensor_save_var_Tensor_epsilon_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, Rcpp::XPtr<XPtrTorch> save_mean, Rcpp::XPtr<XPtrTorch> save_var, double epsilon) {
   auto r_out = lantern_miopen_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double(input->get(), grad_output->get(), weight->get(), running_mean->get(), running_var->get(), save_mean->get(), save_var->get(), reinterpret_cast<void*>(&epsilon));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -4996,9 +4996,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_miopen_convolution_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_miopen_convolution_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
   auto r_out = lantern_miopen_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool(self->get(), grad_output->get(), weight->get(), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&groups), reinterpret_cast<void*>(&benchmark), reinterpret_cast<void*>(&deterministic), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5020,9 +5020,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_miopen_convolution_transpose_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_output_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_miopen_convolution_transpose_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_output_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
   auto r_out = lantern_miopen_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool(self->get(), grad_output->get(), weight->get(), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&output_padding[0], output_padding.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&groups), reinterpret_cast<void*>(&benchmark), reinterpret_cast<void*>(&deterministic), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5050,9 +5050,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_miopen_depthwise_convolution_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_miopen_depthwise_convolution_backward_self_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_stride_IntArrayRef_dilation_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<int64_t> stride, std::vector<int64_t> dilation, int64_t groups, bool benchmark, bool deterministic, std::vector<bool> output_mask) {
   auto r_out = lantern_miopen_depthwise_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool(self->get(), grad_output->get(), weight->get(), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&groups), reinterpret_cast<void*>(&benchmark), reinterpret_cast<void*>(&deterministic), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5062,15 +5062,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_miopen_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, int64_t weight_stride0, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> cx, int64_t mode, int64_t hidden_size, int64_t num_layers, bool batch_first, double dropout, bool train, bool bidirectional, std::vector<int64_t> batch_sizes, Rcpp::XPtr<XPtrTorch> dropout_state) {
+Rcpp::List cpp_torch_namespace_miopen_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, int64_t weight_stride0, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> cx, int64_t mode, int64_t hidden_size, int64_t num_layers, bool batch_first, double dropout, bool train, bool bidirectional, std::vector<int64_t> batch_sizes, Rcpp::XPtr<XPtrTorch> dropout_state) {
   auto r_out = lantern_miopen_rnn_tensor_tensorlist_intt_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor(input->get(), weight->get(), reinterpret_cast<void*>(&weight_stride0), hx->get(), cx->get(), reinterpret_cast<void*>(&mode), reinterpret_cast<void*>(&hidden_size), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&batch_first), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), lantern_vector_int64_t(&batch_sizes[0], batch_sizes.size()), dropout_state->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 4), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_miopen_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4 (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, int64_t weight_stride0, Rcpp::XPtr<XPtrTorch> weight_buf, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> grad_cy, int64_t mode, int64_t hidden_size, int64_t num_layers, bool batch_first, double dropout, bool train, bool bidirectional, std::vector<int64_t> batch_sizes, Rcpp::XPtr<XPtrTorch> dropout_state, Rcpp::XPtr<XPtrTorch> reserve, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_miopen_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4 (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, int64_t weight_stride0, Rcpp::XPtr<XPtrTorch> weight_buf, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> grad_cy, int64_t mode, int64_t hidden_size, int64_t num_layers, bool batch_first, double dropout, bool train, bool bidirectional, std::vector<int64_t> batch_sizes, Rcpp::XPtr<XPtrTorch> dropout_state, Rcpp::XPtr<XPtrTorch> reserve, std::vector<bool> output_mask) {
   auto r_out = lantern_miopen_rnn_backward_tensor_tensorlist_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor_tensor_stdarraybool(input->get(), weight->get(), reinterpret_cast<void*>(&weight_stride0), weight_buf->get(), hx->get(), cx->get(), output->get(), grad_output->get(), grad_hy->get(), grad_cy->get(), reinterpret_cast<void*>(&mode), reinterpret_cast<void*>(&hidden_size), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&batch_first), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), lantern_vector_int64_t(&batch_sizes[0], batch_sizes.size()), dropout_state->get(), reserve->get(), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "TensorList"));
 }
 
 // [[Rcpp::export]]
@@ -5092,27 +5092,27 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_mode_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_mode_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_mode_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_mode_out_values_Tensor_indices_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_mode_out_values_Tensor_indices_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern_mode_out_tensor_tensor_tensor_intt_bool(values->get(), indices->get(), self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_mode_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_mode_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_mode_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_mode_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace_mode_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim) {
   auto r_out = lantern_mode_out_tensor_tensor_tensor_dimname_bool(values->get(), indices->get(), self->get(), dim->get(), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5158,15 +5158,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_native_batch_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, bool training, double momentum, double eps) {
+Rcpp::List cpp_torch_namespace_native_batch_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> bias, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, bool training, double momentum, double eps) {
   auto r_out = lantern_native_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double(input->get(), weight->get(), bias->get(), running_mean->get(), running_var->get(), reinterpret_cast<void*>(&training), reinterpret_cast<void*>(&momentum), reinterpret_cast<void*>(&eps));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_batch_norm_stats_input_Tensor_eps_double (Rcpp::XPtr<XPtrTorch> input, double eps) {
+Rcpp::List cpp_torch_namespace_batch_norm_stats_input_Tensor_eps_double (Rcpp::XPtr<XPtrTorch> input, double eps) {
   auto r_out = lantern_batch_norm_stats_tensor_double(input->get(), reinterpret_cast<void*>(&eps));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5176,27 +5176,27 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_batch_norm_gather_stats_input_Tensor_mean_Tensor_invstd_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double_count_int64_t (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> invstd, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, double momentum, double eps, int64_t count) {
+Rcpp::List cpp_torch_namespace_batch_norm_gather_stats_input_Tensor_mean_Tensor_invstd_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double_count_int64_t (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> invstd, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, double momentum, double eps, int64_t count) {
   auto r_out = lantern_batch_norm_gather_stats_tensor_tensor_tensor_tensor_tensor_double_double_intt(input->get(), mean->get(), invstd->get(), running_mean->get(), running_var->get(), reinterpret_cast<void*>(&momentum), reinterpret_cast<void*>(&eps), reinterpret_cast<void*>(&count));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_batch_norm_gather_stats_with_counts_input_Tensor_mean_Tensor_invstd_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double_counts_IntArrayRef (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> invstd, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, double momentum, double eps, std::vector<int64_t> counts) {
+Rcpp::List cpp_torch_namespace_batch_norm_gather_stats_with_counts_input_Tensor_mean_Tensor_invstd_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double_counts_IntArrayRef (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> invstd, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, double momentum, double eps, std::vector<int64_t> counts) {
   auto r_out = lantern_batch_norm_gather_stats_with_counts_tensor_tensor_tensor_tensor_tensor_double_double_intarrayref(input->get(), mean->get(), invstd->get(), running_mean->get(), running_var->get(), reinterpret_cast<void*>(&momentum), reinterpret_cast<void*>(&eps), lantern_vector_int64_t(&counts[0], counts.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_native_batch_norm_backward_grad_out_Tensor_input_Tensor_weight_Tensor_running_mean_Tensor_running_var_Tensor_save_mean_Tensor_save_invstd_Tensor_train_bool_eps_double_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_out, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, Rcpp::XPtr<XPtrTorch> save_mean, Rcpp::XPtr<XPtrTorch> save_invstd, bool train, double eps, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_native_batch_norm_backward_grad_out_Tensor_input_Tensor_weight_Tensor_running_mean_Tensor_running_var_Tensor_save_mean_Tensor_save_invstd_Tensor_train_bool_eps_double_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_out, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> weight, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, Rcpp::XPtr<XPtrTorch> save_mean, Rcpp::XPtr<XPtrTorch> save_invstd, bool train, double eps, std::vector<bool> output_mask) {
   auto r_out = lantern_native_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_stdarraybool(grad_out->get(), input->get(), weight->get(), running_mean->get(), running_var->get(), save_mean->get(), save_invstd->get(), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&eps), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_batch_norm_backward_reduce_grad_out_Tensor_input_Tensor_mean_Tensor_invstd_Tensor_weight_Tensor_input_g_bool_weight_g_bool_bias_g_bool (Rcpp::XPtr<XPtrTorch> grad_out, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> invstd, Rcpp::XPtr<XPtrTorch> weight, bool input_g, bool weight_g, bool bias_g) {
+Rcpp::List cpp_torch_namespace_batch_norm_backward_reduce_grad_out_Tensor_input_Tensor_mean_Tensor_invstd_Tensor_weight_Tensor_input_g_bool_weight_g_bool_bias_g_bool (Rcpp::XPtr<XPtrTorch> grad_out, Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> mean, Rcpp::XPtr<XPtrTorch> invstd, Rcpp::XPtr<XPtrTorch> weight, bool input_g, bool weight_g, bool bias_g) {
   auto r_out = lantern_batch_norm_backward_reduce_tensor_tensor_tensor_tensor_tensor_bool_bool_bool(grad_out->get(), input->get(), mean->get(), invstd->get(), weight->get(), reinterpret_cast<void*>(&input_g), reinterpret_cast<void*>(&weight_g), reinterpret_cast<void*>(&bias_g));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5206,9 +5206,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_batch_norm_update_stats_input_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, double momentum) {
+Rcpp::List cpp_torch_namespace_batch_norm_update_stats_input_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> running_mean, Rcpp::XPtr<XPtrTorch> running_var, double momentum) {
   auto r_out = lantern_batch_norm_update_stats_tensor_tensor_tensor_double(input->get(), running_mean->get(), running_var->get(), reinterpret_cast<void*>(&momentum));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5218,9 +5218,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__nnpack_spatial_convolution_backward_input_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace__nnpack_spatial_convolution_backward_input_Tensor_grad_output_Tensor_weight_Tensor_padding_IntArrayRef_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> padding, std::vector<bool> output_mask) {
   auto r_out = lantern__nnpack_spatial_convolution_backward_tensor_tensor_tensor_intarrayref_stdarraybool(input->get(), grad_output->get(), weight->get(), lantern_vector_int64_t(&padding[0], padding.size()), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5650,9 +5650,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_prelu_backward_grad_output_Tensor_self_Tensor_weight_Tensor (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight) {
+Rcpp::List cpp_torch_namespace_prelu_backward_grad_output_Tensor_self_Tensor_weight_Tensor (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight) {
   auto r_out = lantern_prelu_backward_tensor_tensor_tensor(grad_output->get(), self->get(), weight->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5818,9 +5818,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_slogdet_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
+Rcpp::List cpp_torch_namespace_slogdet_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
   auto r_out = lantern_slogdet_tensor(self->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -5986,21 +5986,21 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_std_mean_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool unbiased) {
+Rcpp::List cpp_torch_namespace_std_mean_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool unbiased) {
   auto r_out = lantern_std_mean_tensor_bool(self->get(), reinterpret_cast<void*>(&unbiased));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_std_mean_self_Tensor_dim_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> dim, bool unbiased, bool keepdim) {
+Rcpp::List cpp_torch_namespace_std_mean_self_Tensor_dim_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> dim, bool unbiased, bool keepdim) {
   auto r_out = lantern_std_mean_tensor_intarrayref_bool_bool(self->get(), lantern_vector_int64_t(&dim[0], dim.size()), reinterpret_cast<void*>(&unbiased), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_std_mean_self_Tensor_dim_DimnameList (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool unbiased, bool keepdim) {
+Rcpp::List cpp_torch_namespace_std_mean_self_Tensor_dim_DimnameList (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool unbiased, bool keepdim) {
   auto r_out = lantern_std_mean_tensor_dimnamelist_bool_bool(self->get(), dim->get(), reinterpret_cast<void*>(&unbiased), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -6220,33 +6220,33 @@ return *reinterpret_cast<bool *>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__unique_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool sorted, bool return_inverse) {
+Rcpp::List cpp_torch_namespace__unique_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool sorted, bool return_inverse) {
   auto r_out = lantern__unique_tensor_bool_bool(self->get(), reinterpret_cast<void*>(&sorted), reinterpret_cast<void*>(&return_inverse));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_unique_dim_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool sorted, bool return_inverse, bool return_counts) {
+Rcpp::List cpp_torch_namespace_unique_dim_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool sorted, bool return_inverse, bool return_counts) {
   auto r_out = lantern_unique_dim_tensor_intt_bool_bool_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&sorted), reinterpret_cast<void*>(&return_inverse), reinterpret_cast<void*>(&return_counts));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_unique_consecutive_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool return_inverse, bool return_counts, int64_t dim) {
+Rcpp::List cpp_torch_namespace_unique_consecutive_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool return_inverse, bool return_counts, int64_t dim) {
   auto r_out = lantern_unique_consecutive_tensor_bool_bool_intt(self->get(), reinterpret_cast<void*>(&return_inverse), reinterpret_cast<void*>(&return_counts), reinterpret_cast<void*>(&dim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_unique_dim_consecutive_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool return_inverse, bool return_counts) {
+Rcpp::List cpp_torch_namespace_unique_dim_consecutive_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool return_inverse, bool return_counts) {
   auto r_out = lantern_unique_dim_consecutive_tensor_intt_bool_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&return_inverse), reinterpret_cast<void*>(&return_counts));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__unique2_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool sorted, bool return_inverse, bool return_counts) {
+Rcpp::List cpp_torch_namespace__unique2_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool sorted, bool return_inverse, bool return_counts) {
   auto r_out = lantern__unique2_tensor_bool_bool_bool(self->get(), reinterpret_cast<void*>(&sorted), reinterpret_cast<void*>(&return_inverse), reinterpret_cast<void*>(&return_counts));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -6292,21 +6292,21 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_var_mean_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool unbiased) {
+Rcpp::List cpp_torch_namespace_var_mean_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool unbiased) {
   auto r_out = lantern_var_mean_tensor_bool(self->get(), reinterpret_cast<void*>(&unbiased));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_var_mean_self_Tensor_dim_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> dim, bool unbiased, bool keepdim) {
+Rcpp::List cpp_torch_namespace_var_mean_self_Tensor_dim_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> dim, bool unbiased, bool keepdim) {
   auto r_out = lantern_var_mean_tensor_intarrayref_bool_bool(self->get(), lantern_vector_int64_t(&dim[0], dim.size()), reinterpret_cast<void*>(&unbiased), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_var_mean_self_Tensor_dim_DimnameList (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool unbiased, bool keepdim) {
+Rcpp::List cpp_torch_namespace_var_mean_self_Tensor_dim_DimnameList (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool unbiased, bool keepdim) {
   auto r_out = lantern_var_mean_tensor_dimnamelist_bool_bool(self->get(), dim->get(), reinterpret_cast<void*>(&unbiased), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -6340,21 +6340,21 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__weight_norm_cuda_interface_v_Tensor_g_Tensor (Rcpp::XPtr<XPtrTorch> v, Rcpp::XPtr<XPtrTorch> g, int64_t dim) {
+Rcpp::List cpp_torch_namespace__weight_norm_cuda_interface_v_Tensor_g_Tensor (Rcpp::XPtr<XPtrTorch> v, Rcpp::XPtr<XPtrTorch> g, int64_t dim) {
   auto r_out = lantern__weight_norm_cuda_interface_tensor_tensor_intt(v->get(), g->get(), reinterpret_cast<void*>(&dim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__weight_norm_cuda_interface_backward_grad_w_Tensor_saved_v_Tensor_saved_g_Tensor_saved_norms_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> grad_w, Rcpp::XPtr<XPtrTorch> saved_v, Rcpp::XPtr<XPtrTorch> saved_g, Rcpp::XPtr<XPtrTorch> saved_norms, int64_t dim) {
+Rcpp::List cpp_torch_namespace__weight_norm_cuda_interface_backward_grad_w_Tensor_saved_v_Tensor_saved_g_Tensor_saved_norms_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> grad_w, Rcpp::XPtr<XPtrTorch> saved_v, Rcpp::XPtr<XPtrTorch> saved_g, Rcpp::XPtr<XPtrTorch> saved_norms, int64_t dim) {
   auto r_out = lantern__weight_norm_cuda_interface_backward_tensor_tensor_tensor_tensor_intt(grad_w->get(), saved_v->get(), saved_g->get(), saved_norms->get(), reinterpret_cast<void*>(&dim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__weight_norm_differentiable_backward_grad_w_Tensor_saved_v_Tensor_saved_g_Tensor_saved_norms_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> grad_w, Rcpp::XPtr<XPtrTorch> saved_v, Rcpp::XPtr<XPtrTorch> saved_g, Rcpp::XPtr<XPtrTorch> saved_norms, int64_t dim) {
+Rcpp::List cpp_torch_namespace__weight_norm_differentiable_backward_grad_w_Tensor_saved_v_Tensor_saved_g_Tensor_saved_norms_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> grad_w, Rcpp::XPtr<XPtrTorch> saved_v, Rcpp::XPtr<XPtrTorch> saved_g, Rcpp::XPtr<XPtrTorch> saved_norms, int64_t dim) {
   auto r_out = lantern__weight_norm_differentiable_backward_tensor_tensor_tensor_tensor_intt(grad_w->get(), saved_v->get(), saved_g->get(), saved_norms->get(), reinterpret_cast<void*>(&dim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -6874,93 +6874,93 @@ return make_xptr<XPtrTorch>(r_out, "Scalar");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__thnn_fused_lstm_cell_input_gates_Tensor_hidden_gates_Tensor_cx_Tensor (Rcpp::XPtr<XPtrTorch> input_gates, Rcpp::XPtr<XPtrTorch> hidden_gates, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> input_bias, Rcpp::XPtr<XPtrTorch> hidden_bias) {
+Rcpp::List cpp_torch_namespace__thnn_fused_lstm_cell_input_gates_Tensor_hidden_gates_Tensor_cx_Tensor (Rcpp::XPtr<XPtrTorch> input_gates, Rcpp::XPtr<XPtrTorch> hidden_gates, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> input_bias, Rcpp::XPtr<XPtrTorch> hidden_bias) {
   auto r_out = lantern__thnn_fused_lstm_cell_tensor_tensor_tensor_tensor_tensor(input_gates->get(), hidden_gates->get(), cx->get(), input_bias->get(), hidden_bias->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__thnn_fused_lstm_cell_backward_grad_hy_Tensor_grad_cy_Tensor_cx_Tensor_cy_Tensor_workspace_Tensor_has_bias_bool (Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> grad_cy, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> cy, Rcpp::XPtr<XPtrTorch> workspace, bool has_bias) {
+Rcpp::List cpp_torch_namespace__thnn_fused_lstm_cell_backward_grad_hy_Tensor_grad_cy_Tensor_cx_Tensor_cy_Tensor_workspace_Tensor_has_bias_bool (Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> grad_cy, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> cy, Rcpp::XPtr<XPtrTorch> workspace, bool has_bias) {
   auto r_out = lantern__thnn_fused_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_bool(grad_hy->get(), grad_cy->get(), cx->get(), cy->get(), workspace->get(), reinterpret_cast<void*>(&has_bias));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 4), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__thnn_differentiable_lstm_cell_backward_grad_hy_Tensor_grad_cy_Tensor_input_gates_Tensor_hidden_gates_Tensor_input_bias_Tensor_hidden_bias_Tensor_cx_Tensor_cy_Tensor (Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> grad_cy, Rcpp::XPtr<XPtrTorch> input_gates, Rcpp::XPtr<XPtrTorch> hidden_gates, Rcpp::XPtr<XPtrTorch> input_bias, Rcpp::XPtr<XPtrTorch> hidden_bias, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> cy) {
+Rcpp::List cpp_torch_namespace__thnn_differentiable_lstm_cell_backward_grad_hy_Tensor_grad_cy_Tensor_input_gates_Tensor_hidden_gates_Tensor_input_bias_Tensor_hidden_bias_Tensor_cx_Tensor_cy_Tensor (Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> grad_cy, Rcpp::XPtr<XPtrTorch> input_gates, Rcpp::XPtr<XPtrTorch> hidden_gates, Rcpp::XPtr<XPtrTorch> input_bias, Rcpp::XPtr<XPtrTorch> hidden_bias, Rcpp::XPtr<XPtrTorch> cx, Rcpp::XPtr<XPtrTorch> cy) {
   auto r_out = lantern__thnn_differentiable_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor(grad_hy->get(), grad_cy->get(), input_gates->get(), hidden_gates->get(), input_bias->get(), hidden_bias->get(), cx->get(), cy->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 4), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__thnn_fused_gru_cell_input_gates_Tensor_hidden_gates_Tensor_hx_Tensor (Rcpp::XPtr<XPtrTorch> input_gates, Rcpp::XPtr<XPtrTorch> hidden_gates, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> input_bias, Rcpp::XPtr<XPtrTorch> hidden_bias) {
+Rcpp::List cpp_torch_namespace__thnn_fused_gru_cell_input_gates_Tensor_hidden_gates_Tensor_hx_Tensor (Rcpp::XPtr<XPtrTorch> input_gates, Rcpp::XPtr<XPtrTorch> hidden_gates, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> input_bias, Rcpp::XPtr<XPtrTorch> hidden_bias) {
   auto r_out = lantern__thnn_fused_gru_cell_tensor_tensor_tensor_tensor_tensor(input_gates->get(), hidden_gates->get(), hx->get(), input_bias->get(), hidden_bias->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__thnn_fused_gru_cell_backward_grad_hy_Tensor_workspace_Tensor_has_bias_bool (Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> workspace, bool has_bias) {
+Rcpp::List cpp_torch_namespace__thnn_fused_gru_cell_backward_grad_hy_Tensor_workspace_Tensor_has_bias_bool (Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> workspace, bool has_bias) {
   auto r_out = lantern__thnn_fused_gru_cell_backward_tensor_tensor_bool(grad_hy->get(), workspace->get(), reinterpret_cast<void*>(&has_bias));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 4), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__thnn_differentiable_gru_cell_backward_grad_hy_Tensor_input_gates_Tensor_hidden_gates_Tensor_hx_Tensor_input_bias_Tensor_hidden_bias_Tensor (Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> input_gates, Rcpp::XPtr<XPtrTorch> hidden_gates, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> input_bias, Rcpp::XPtr<XPtrTorch> hidden_bias) {
+Rcpp::List cpp_torch_namespace__thnn_differentiable_gru_cell_backward_grad_hy_Tensor_input_gates_Tensor_hidden_gates_Tensor_hx_Tensor_input_bias_Tensor_hidden_bias_Tensor (Rcpp::XPtr<XPtrTorch> grad_hy, Rcpp::XPtr<XPtrTorch> input_gates, Rcpp::XPtr<XPtrTorch> hidden_gates, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> input_bias, Rcpp::XPtr<XPtrTorch> hidden_bias) {
   auto r_out = lantern__thnn_differentiable_gru_cell_backward_tensor_tensor_tensor_tensor_tensor_tensor(grad_hy->get(), input_gates->get(), hidden_gates->get(), hx->get(), input_bias->get(), hidden_bias->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 3), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 4), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
+Rcpp::List cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
   auto r_out = lantern_lstm_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool(input->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), reinterpret_cast<void*>(&batch_first));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_lstm_data_Tensor_batch_sizes_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
+Rcpp::List cpp_torch_namespace_lstm_data_Tensor_batch_sizes_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
   auto r_out = lantern_lstm_tensor_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool(data->get(), batch_sizes->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
+Rcpp::List cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
   auto r_out = lantern_gru_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool(input->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), reinterpret_cast<void*>(&batch_first));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_gru_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
+Rcpp::List cpp_torch_namespace_gru_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
   auto r_out = lantern_gru_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool(data->get(), batch_sizes->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_rnn_tanh_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
+Rcpp::List cpp_torch_namespace_rnn_tanh_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
   auto r_out = lantern_rnn_tanh_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool(input->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), reinterpret_cast<void*>(&batch_first));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_rnn_tanh_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
+Rcpp::List cpp_torch_namespace_rnn_tanh_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
   auto r_out = lantern_rnn_tanh_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool(data->get(), batch_sizes->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_rnn_relu_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
+Rcpp::List cpp_torch_namespace_rnn_relu_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
   auto r_out = lantern_rnn_relu_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool(input->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), reinterpret_cast<void*>(&batch_first));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_rnn_relu_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
+Rcpp::List cpp_torch_namespace_rnn_relu_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
   auto r_out = lantern_rnn_relu_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool(data->get(), batch_sizes->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_lstm_cell_input_Tensor_hx_TensorList_w_ih_Tensor_w_hh_Tensor (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> w_ih, Rcpp::XPtr<XPtrTorch> w_hh, Rcpp::XPtr<XPtrTorch> b_ih, Rcpp::XPtr<XPtrTorch> b_hh) {
+Rcpp::List cpp_torch_namespace_lstm_cell_input_Tensor_hx_TensorList_w_ih_Tensor_w_hh_Tensor (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> w_ih, Rcpp::XPtr<XPtrTorch> w_hh, Rcpp::XPtr<XPtrTorch> b_ih, Rcpp::XPtr<XPtrTorch> b_hh) {
   auto r_out = lantern_lstm_cell_tensor_tensorlist_tensor_tensor_tensor_tensor(input->get(), hx->get(), w_ih->get(), w_hh->get(), b_ih->get(), b_hh->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -6982,27 +6982,27 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_quantized_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first, Rcpp::XPtr<XPtrTorch> dtype, bool use_dynamic) {
+Rcpp::List cpp_torch_namespace_quantized_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first, Rcpp::XPtr<XPtrTorch> dtype, bool use_dynamic) {
   auto r_out = lantern_quantized_lstm_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool_scalartype_bool(input->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), reinterpret_cast<void*>(&batch_first), dtype->get(), reinterpret_cast<void*>(&use_dynamic));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_quantized_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
+Rcpp::List cpp_torch_namespace_quantized_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional, bool batch_first) {
   auto r_out = lantern_quantized_gru_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool(input->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional), reinterpret_cast<void*>(&batch_first));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_quantized_gru_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
+Rcpp::List cpp_torch_namespace_quantized_gru_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> params, bool has_biases, int64_t num_layers, double dropout, bool train, bool bidirectional) {
   auto r_out = lantern_quantized_gru_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool(data->get(), batch_sizes->get(), hx->get(), params->get(), reinterpret_cast<void*>(&has_biases), reinterpret_cast<void*>(&num_layers), reinterpret_cast<void*>(&dropout), reinterpret_cast<void*>(&train), reinterpret_cast<void*>(&bidirectional));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_quantized_lstm_cell_input_Tensor_hx_TensorList_w_ih_Tensor_w_hh_Tensor_b_ih_Tensor_b_hh_Tensor_packed_ih_Tensor_packed_hh_Tensor_col_offsets_ih_Tensor_col_offsets_hh_Tensor_scale_ih_Scalar_scale_hh_Scalar_zero_point_ih_Scalar_zero_point_hh_Scalar (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> w_ih, Rcpp::XPtr<XPtrTorch> w_hh, Rcpp::XPtr<XPtrTorch> b_ih, Rcpp::XPtr<XPtrTorch> b_hh, Rcpp::XPtr<XPtrTorch> packed_ih, Rcpp::XPtr<XPtrTorch> packed_hh, Rcpp::XPtr<XPtrTorch> col_offsets_ih, Rcpp::XPtr<XPtrTorch> col_offsets_hh, Rcpp::XPtr<XPtrTorch> scale_ih, Rcpp::XPtr<XPtrTorch> scale_hh, Rcpp::XPtr<XPtrTorch> zero_point_ih, Rcpp::XPtr<XPtrTorch> zero_point_hh) {
+Rcpp::List cpp_torch_namespace_quantized_lstm_cell_input_Tensor_hx_TensorList_w_ih_Tensor_w_hh_Tensor_b_ih_Tensor_b_hh_Tensor_packed_ih_Tensor_packed_hh_Tensor_col_offsets_ih_Tensor_col_offsets_hh_Tensor_scale_ih_Scalar_scale_hh_Scalar_zero_point_ih_Scalar_zero_point_hh_Scalar (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> hx, Rcpp::XPtr<XPtrTorch> w_ih, Rcpp::XPtr<XPtrTorch> w_hh, Rcpp::XPtr<XPtrTorch> b_ih, Rcpp::XPtr<XPtrTorch> b_hh, Rcpp::XPtr<XPtrTorch> packed_ih, Rcpp::XPtr<XPtrTorch> packed_hh, Rcpp::XPtr<XPtrTorch> col_offsets_ih, Rcpp::XPtr<XPtrTorch> col_offsets_hh, Rcpp::XPtr<XPtrTorch> scale_ih, Rcpp::XPtr<XPtrTorch> scale_hh, Rcpp::XPtr<XPtrTorch> zero_point_ih, Rcpp::XPtr<XPtrTorch> zero_point_hh) {
   auto r_out = lantern_quantized_lstm_cell_tensor_tensorlist_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalar_scalar_scalar_scalar(input->get(), hx->get(), w_ih->get(), w_hh->get(), b_ih->get(), b_hh->get(), packed_ih->get(), packed_hh->get(), col_offsets_ih->get(), col_offsets_hh->get(), scale_ih->get(), scale_hh->get(), zero_point_ih->get(), zero_point_hh->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -7024,9 +7024,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__pack_padded_sequence_input_Tensor_lengths_Tensor_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> lengths, bool batch_first) {
+Rcpp::List cpp_torch_namespace__pack_padded_sequence_input_Tensor_lengths_Tensor_batch_first_bool (Rcpp::XPtr<XPtrTorch> input, Rcpp::XPtr<XPtrTorch> lengths, bool batch_first) {
   auto r_out = lantern__pack_padded_sequence_tensor_tensor_bool(input->get(), lengths->get(), reinterpret_cast<void*>(&batch_first));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -7036,9 +7036,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__pad_packed_sequence_data_Tensor_batch_sizes_Tensor_batch_first_bool_padding_value_Scalar_total_length_int64_t (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, bool batch_first, Rcpp::XPtr<XPtrTorch> padding_value, int64_t total_length) {
+Rcpp::List cpp_torch_namespace__pad_packed_sequence_data_Tensor_batch_sizes_Tensor_batch_first_bool_padding_value_Scalar_total_length_int64_t (Rcpp::XPtr<XPtrTorch> data, Rcpp::XPtr<XPtrTorch> batch_sizes, bool batch_first, Rcpp::XPtr<XPtrTorch> padding_value, int64_t total_length) {
   auto r_out = lantern__pad_packed_sequence_tensor_tensor_bool_scalar_intt(data->get(), batch_sizes->get(), reinterpret_cast<void*>(&batch_first), padding_value->get(), reinterpret_cast<void*>(&total_length));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -7534,81 +7534,81 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_lstsq_out_X_Tensor_qr_Tensor_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> X, Rcpp::XPtr<XPtrTorch> qr, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
+Rcpp::List cpp_torch_namespace_lstsq_out_X_Tensor_qr_Tensor_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> X, Rcpp::XPtr<XPtrTorch> qr, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
   auto r_out = lantern_lstsq_out_tensor_tensor_tensor_tensor(X->get(), qr->get(), self->get(), A->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_lstsq_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
+Rcpp::List cpp_torch_namespace_lstsq_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
   auto r_out = lantern_lstsq_tensor_tensor(self->get(), A->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_triangular_solve_out_X_Tensor_M_Tensor_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> X, Rcpp::XPtr<XPtrTorch> M, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A, bool upper, bool transpose, bool unitriangular) {
+Rcpp::List cpp_torch_namespace_triangular_solve_out_X_Tensor_M_Tensor_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> X, Rcpp::XPtr<XPtrTorch> M, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A, bool upper, bool transpose, bool unitriangular) {
   auto r_out = lantern_triangular_solve_out_tensor_tensor_tensor_tensor_bool_bool_bool(X->get(), M->get(), self->get(), A->get(), reinterpret_cast<void*>(&upper), reinterpret_cast<void*>(&transpose), reinterpret_cast<void*>(&unitriangular));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_triangular_solve_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A, bool upper, bool transpose, bool unitriangular) {
+Rcpp::List cpp_torch_namespace_triangular_solve_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A, bool upper, bool transpose, bool unitriangular) {
   auto r_out = lantern_triangular_solve_tensor_tensor_bool_bool_bool(self->get(), A->get(), reinterpret_cast<void*>(&upper), reinterpret_cast<void*>(&transpose), reinterpret_cast<void*>(&unitriangular));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__triangular_solve_helper_self_Tensor_A_Tensor_upper_bool_transpose_bool_unitriangular_bool (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A, bool upper, bool transpose, bool unitriangular) {
+Rcpp::List cpp_torch_namespace__triangular_solve_helper_self_Tensor_A_Tensor_upper_bool_transpose_bool_unitriangular_bool (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A, bool upper, bool transpose, bool unitriangular) {
   auto r_out = lantern__triangular_solve_helper_tensor_tensor_bool_bool_bool(self->get(), A->get(), reinterpret_cast<void*>(&upper), reinterpret_cast<void*>(&transpose), reinterpret_cast<void*>(&unitriangular));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_symeig_out_e_Tensor_V_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> e, Rcpp::XPtr<XPtrTorch> V, Rcpp::XPtr<XPtrTorch> self, bool eigenvectors, bool upper) {
+Rcpp::List cpp_torch_namespace_symeig_out_e_Tensor_V_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> e, Rcpp::XPtr<XPtrTorch> V, Rcpp::XPtr<XPtrTorch> self, bool eigenvectors, bool upper) {
   auto r_out = lantern_symeig_out_tensor_tensor_tensor_bool_bool(e->get(), V->get(), self->get(), reinterpret_cast<void*>(&eigenvectors), reinterpret_cast<void*>(&upper));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_symeig_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors, bool upper) {
+Rcpp::List cpp_torch_namespace_symeig_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors, bool upper) {
   auto r_out = lantern_symeig_tensor_bool_bool(self->get(), reinterpret_cast<void*>(&eigenvectors), reinterpret_cast<void*>(&upper));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__symeig_helper_self_Tensor_eigenvectors_bool_upper_bool (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors, bool upper) {
+Rcpp::List cpp_torch_namespace__symeig_helper_self_Tensor_eigenvectors_bool_upper_bool (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors, bool upper) {
   auto r_out = lantern__symeig_helper_tensor_bool_bool(self->get(), reinterpret_cast<void*>(&eigenvectors), reinterpret_cast<void*>(&upper));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_eig_out_e_Tensor_v_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> e, Rcpp::XPtr<XPtrTorch> v, Rcpp::XPtr<XPtrTorch> self, bool eigenvectors) {
+Rcpp::List cpp_torch_namespace_eig_out_e_Tensor_v_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> e, Rcpp::XPtr<XPtrTorch> v, Rcpp::XPtr<XPtrTorch> self, bool eigenvectors) {
   auto r_out = lantern_eig_out_tensor_tensor_tensor_bool(e->get(), v->get(), self->get(), reinterpret_cast<void*>(&eigenvectors));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_eig_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors) {
+Rcpp::List cpp_torch_namespace_eig_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool eigenvectors) {
   auto r_out = lantern_eig_tensor_bool(self->get(), reinterpret_cast<void*>(&eigenvectors));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> U, Rcpp::XPtr<XPtrTorch> S, Rcpp::XPtr<XPtrTorch> V, Rcpp::XPtr<XPtrTorch> self, bool some, bool compute_uv) {
+Rcpp::List cpp_torch_namespace_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> U, Rcpp::XPtr<XPtrTorch> S, Rcpp::XPtr<XPtrTorch> V, Rcpp::XPtr<XPtrTorch> self, bool some, bool compute_uv) {
   auto r_out = lantern_svd_out_tensor_tensor_tensor_tensor_bool_bool(U->get(), S->get(), V->get(), self->get(), reinterpret_cast<void*>(&some), reinterpret_cast<void*>(&compute_uv));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_svd_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool some, bool compute_uv) {
+Rcpp::List cpp_torch_namespace_svd_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool some, bool compute_uv) {
   auto r_out = lantern_svd_tensor_bool_bool(self->get(), reinterpret_cast<void*>(&some), reinterpret_cast<void*>(&compute_uv));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__svd_helper_self_Tensor_some_bool_compute_uv_bool (Rcpp::XPtr<XPtrTorch> self, bool some, bool compute_uv) {
+Rcpp::List cpp_torch_namespace__svd_helper_self_Tensor_some_bool_compute_uv_bool (Rcpp::XPtr<XPtrTorch> self, bool some, bool compute_uv) {
   auto r_out = lantern__svd_helper_tensor_bool_bool(self->get(), reinterpret_cast<void*>(&some), reinterpret_cast<void*>(&compute_uv));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -7648,21 +7648,21 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_solve_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
+Rcpp::List cpp_torch_namespace_solve_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
   auto r_out = lantern_solve_tensor_tensor(self->get(), A->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_solve_out_solution_Tensor_lu_Tensor_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> solution, Rcpp::XPtr<XPtrTorch> lu, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
+Rcpp::List cpp_torch_namespace_solve_out_solution_Tensor_lu_Tensor_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> solution, Rcpp::XPtr<XPtrTorch> lu, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
   auto r_out = lantern_solve_out_tensor_tensor_tensor_tensor(solution->get(), lu->get(), self->get(), A->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__solve_helper_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
+Rcpp::List cpp_torch_namespace__solve_helper_self_Tensor_A_Tensor (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> A) {
   auto r_out = lantern__solve_helper_tensor_tensor(self->get(), A->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -7678,33 +7678,33 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_qr_out_Q_Tensor_R_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> Q, Rcpp::XPtr<XPtrTorch> R, Rcpp::XPtr<XPtrTorch> self, bool some) {
+Rcpp::List cpp_torch_namespace_qr_out_Q_Tensor_R_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> Q, Rcpp::XPtr<XPtrTorch> R, Rcpp::XPtr<XPtrTorch> self, bool some) {
   auto r_out = lantern_qr_out_tensor_tensor_tensor_bool(Q->get(), R->get(), self->get(), reinterpret_cast<void*>(&some));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_qr_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool some) {
+Rcpp::List cpp_torch_namespace_qr_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool some) {
   auto r_out = lantern_qr_tensor_bool(self->get(), reinterpret_cast<void*>(&some));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__qr_helper_self_Tensor_some_bool (Rcpp::XPtr<XPtrTorch> self, bool some) {
+Rcpp::List cpp_torch_namespace__qr_helper_self_Tensor_some_bool (Rcpp::XPtr<XPtrTorch> self, bool some) {
   auto r_out = lantern__qr_helper_tensor_bool(self->get(), reinterpret_cast<void*>(&some));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_geqrf_out_a_Tensor_tau_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> a, Rcpp::XPtr<XPtrTorch> tau, Rcpp::XPtr<XPtrTorch> self) {
+Rcpp::List cpp_torch_namespace_geqrf_out_a_Tensor_tau_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> a, Rcpp::XPtr<XPtrTorch> tau, Rcpp::XPtr<XPtrTorch> self) {
   auto r_out = lantern_geqrf_out_tensor_tensor_tensor(a->get(), tau->get(), self->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_geqrf_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
+Rcpp::List cpp_torch_namespace_geqrf_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
   auto r_out = lantern_geqrf_tensor(self->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -7732,9 +7732,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__lu_with_info_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool pivot, bool check_errors) {
+Rcpp::List cpp_torch_namespace__lu_with_info_self_Tensor (Rcpp::XPtr<XPtrTorch> self, bool pivot, bool check_errors) {
   auto r_out = lantern__lu_with_info_tensor_bool_bool(self->get(), reinterpret_cast<void*>(&pivot), reinterpret_cast<void*>(&check_errors));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -7768,9 +7768,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__multinomial_alias_setup_probs_Tensor (Rcpp::XPtr<XPtrTorch> probs) {
+Rcpp::List cpp_torch_namespace__multinomial_alias_setup_probs_Tensor (Rcpp::XPtr<XPtrTorch> probs) {
   auto r_out = lantern__multinomial_alias_setup_tensor(probs->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -7978,27 +7978,27 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool descending) {
+Rcpp::List cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool descending) {
   auto r_out = lantern_sort_out_tensor_tensor_tensor_intt_bool(values->get(), indices->get(), self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&descending));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_sort_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool descending) {
+Rcpp::List cpp_torch_namespace_sort_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool descending) {
   auto r_out = lantern_sort_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&descending));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool descending) {
+Rcpp::List cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool descending) {
   auto r_out = lantern_sort_out_tensor_tensor_tensor_dimname_bool(values->get(), indices->get(), self->get(), dim->get(), reinterpret_cast<void*>(&descending));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_sort_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool descending) {
+Rcpp::List cpp_torch_namespace_sort_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> dim, bool descending) {
   auto r_out = lantern_sort_tensor_dimname_bool(self->get(), dim->get(), reinterpret_cast<void*>(&descending));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8014,15 +8014,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_topk_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool largest, bool sorted) {
+Rcpp::List cpp_torch_namespace_topk_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool largest, bool sorted) {
   auto r_out = lantern_topk_out_tensor_tensor_tensor_intt_intt_bool_bool(values->get(), indices->get(), self->get(), reinterpret_cast<void*>(&k), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&largest), reinterpret_cast<void*>(&sorted));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_topk_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool largest, bool sorted) {
+Rcpp::List cpp_torch_namespace_topk_self_Tensor_k_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t k, int64_t dim, bool largest, bool sorted) {
   auto r_out = lantern_topk_tensor_intt_intt_bool_bool(self->get(), reinterpret_cast<void*>(&k), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&largest), reinterpret_cast<void*>(&sorted));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8182,39 +8182,39 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__mode_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace__mode_self_Tensor (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern__mode_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__mode_out_values_Tensor_indices_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace__mode_out_values_Tensor_indices_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> values, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern__mode_out_tensor_tensor_tensor_intt_bool(values->get(), indices->get(), self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__max_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace__max_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern__max_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__max_out_max_Tensor_max_indices_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> max, Rcpp::XPtr<XPtrTorch> max_indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace__max_out_max_Tensor_max_indices_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> max, Rcpp::XPtr<XPtrTorch> max_indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern__max_out_tensor_tensor_tensor_intt_bool(max->get(), max_indices->get(), self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__min_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace__min_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern__min_tensor_intt_bool(self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace__min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> min, Rcpp::XPtr<XPtrTorch> min_indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
+Rcpp::List cpp_torch_namespace__min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorch> min, Rcpp::XPtr<XPtrTorch> min_indices, Rcpp::XPtr<XPtrTorch> self, int64_t dim, bool keepdim) {
   auto r_out = lantern__min_out_tensor_tensor_tensor_intt_bool(min->get(), min_indices->get(), self->get(), reinterpret_cast<void*>(&dim), reinterpret_cast<void*>(&keepdim));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8326,15 +8326,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_multilabel_margin_loss_forward_out_output_Tensor_is_target_Tensor_self_Tensor_target_Tensor_reduction_int64_t (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> is_target, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, int64_t reduction) {
+Rcpp::List cpp_torch_namespace_multilabel_margin_loss_forward_out_output_Tensor_is_target_Tensor_self_Tensor_target_Tensor_reduction_int64_t (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> is_target, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, int64_t reduction) {
   auto r_out = lantern_multilabel_margin_loss_forward_out_tensor_tensor_tensor_tensor_intt(output->get(), is_target->get(), self->get(), target->get(), reinterpret_cast<void*>(&reduction));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_multilabel_margin_loss_forward_self_Tensor_target_Tensor_reduction_int64_t (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, int64_t reduction) {
+Rcpp::List cpp_torch_namespace_multilabel_margin_loss_forward_self_Tensor_target_Tensor_reduction_int64_t (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, int64_t reduction) {
   auto r_out = lantern_multilabel_margin_loss_forward_tensor_tensor_intt(self->get(), target->get(), reinterpret_cast<void*>(&reduction));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8362,15 +8362,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_nll_loss_forward_out_output_Tensor_total_weight_Tensor_self_Tensor_target_Tensor_weight_Tensor_reduction_int64_t_ignore_index_int64_t (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> total_weight, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, Rcpp::XPtr<XPtrTorch> weight, int64_t reduction, int64_t ignore_index) {
+Rcpp::List cpp_torch_namespace_nll_loss_forward_out_output_Tensor_total_weight_Tensor_self_Tensor_target_Tensor_weight_Tensor_reduction_int64_t_ignore_index_int64_t (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> total_weight, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, Rcpp::XPtr<XPtrTorch> weight, int64_t reduction, int64_t ignore_index) {
   auto r_out = lantern_nll_loss_forward_out_tensor_tensor_tensor_tensor_tensor_intt_intt(output->get(), total_weight->get(), self->get(), target->get(), weight->get(), reinterpret_cast<void*>(&reduction), reinterpret_cast<void*>(&ignore_index));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_nll_loss_forward_self_Tensor_target_Tensor_weight_Tensor_reduction_int64_t_ignore_index_int64_t (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, Rcpp::XPtr<XPtrTorch> weight, int64_t reduction, int64_t ignore_index) {
+Rcpp::List cpp_torch_namespace_nll_loss_forward_self_Tensor_target_Tensor_weight_Tensor_reduction_int64_t_ignore_index_int64_t (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, Rcpp::XPtr<XPtrTorch> weight, int64_t reduction, int64_t ignore_index) {
   auto r_out = lantern_nll_loss_forward_tensor_tensor_tensor_intt_intt(self->get(), target->get(), weight->get(), reinterpret_cast<void*>(&reduction), reinterpret_cast<void*>(&ignore_index));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8398,15 +8398,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_nll_loss2d_forward_out_output_Tensor_total_weight_Tensor_self_Tensor_target_Tensor_weight_Tensor_reduction_int64_t_ignore_index_int64_t (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> total_weight, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, Rcpp::XPtr<XPtrTorch> weight, int64_t reduction, int64_t ignore_index) {
+Rcpp::List cpp_torch_namespace_nll_loss2d_forward_out_output_Tensor_total_weight_Tensor_self_Tensor_target_Tensor_weight_Tensor_reduction_int64_t_ignore_index_int64_t (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> total_weight, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, Rcpp::XPtr<XPtrTorch> weight, int64_t reduction, int64_t ignore_index) {
   auto r_out = lantern_nll_loss2d_forward_out_tensor_tensor_tensor_tensor_tensor_intt_intt(output->get(), total_weight->get(), self->get(), target->get(), weight->get(), reinterpret_cast<void*>(&reduction), reinterpret_cast<void*>(&ignore_index));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_nll_loss2d_forward_self_Tensor_target_Tensor_weight_Tensor_reduction_int64_t_ignore_index_int64_t (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, Rcpp::XPtr<XPtrTorch> weight, int64_t reduction, int64_t ignore_index) {
+Rcpp::List cpp_torch_namespace_nll_loss2d_forward_self_Tensor_target_Tensor_weight_Tensor_reduction_int64_t_ignore_index_int64_t (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> target, Rcpp::XPtr<XPtrTorch> weight, int64_t reduction, int64_t ignore_index) {
   auto r_out = lantern_nll_loss2d_forward_tensor_tensor_tensor_intt_intt(self->get(), target->get(), weight->get(), reinterpret_cast<void*>(&reduction), reinterpret_cast<void*>(&ignore_index));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8596,15 +8596,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_log_sigmoid_forward_out_output_Tensor_buffer_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> buffer, Rcpp::XPtr<XPtrTorch> self) {
+Rcpp::List cpp_torch_namespace_log_sigmoid_forward_out_output_Tensor_buffer_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> buffer, Rcpp::XPtr<XPtrTorch> self) {
   auto r_out = lantern_log_sigmoid_forward_out_tensor_tensor_tensor(output->get(), buffer->get(), self->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_log_sigmoid_forward_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
+Rcpp::List cpp_torch_namespace_log_sigmoid_forward_self_Tensor (Rcpp::XPtr<XPtrTorch> self) {
   auto r_out = lantern_log_sigmoid_forward_tensor(self->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8752,15 +8752,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_adaptive_max_pool2d_out_out_Tensor_indices_Tensor_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> out, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
+Rcpp::List cpp_torch_namespace_adaptive_max_pool2d_out_out_Tensor_indices_Tensor_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> out, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
   auto r_out = lantern_adaptive_max_pool2d_out_tensor_tensor_tensor_intarrayref(out->get(), indices->get(), self->get(), lantern_vector_int64_t(&output_size[0], output_size.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_adaptive_max_pool2d_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
+Rcpp::List cpp_torch_namespace_adaptive_max_pool2d_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
   auto r_out = lantern_adaptive_max_pool2d_tensor_intarrayref(self->get(), lantern_vector_int64_t(&output_size[0], output_size.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8776,15 +8776,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_adaptive_max_pool3d_out_out_Tensor_indices_Tensor_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> out, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
+Rcpp::List cpp_torch_namespace_adaptive_max_pool3d_out_out_Tensor_indices_Tensor_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> out, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
   auto r_out = lantern_adaptive_max_pool3d_out_tensor_tensor_tensor_intarrayref(out->get(), indices->get(), self->get(), lantern_vector_int64_t(&output_size[0], output_size.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_adaptive_max_pool3d_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
+Rcpp::List cpp_torch_namespace_adaptive_max_pool3d_self_Tensor_output_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> output_size) {
   auto r_out = lantern_adaptive_max_pool3d_tensor_intarrayref(self->get(), lantern_vector_int64_t(&output_size[0], output_size.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8848,15 +8848,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_fractional_max_pool2d_out_output_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef_output_size_IntArrayRef_random_samples_Tensor (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> output_size, Rcpp::XPtr<XPtrTorch> random_samples) {
+Rcpp::List cpp_torch_namespace_fractional_max_pool2d_out_output_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef_output_size_IntArrayRef_random_samples_Tensor (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> output_size, Rcpp::XPtr<XPtrTorch> random_samples) {
   auto r_out = lantern_fractional_max_pool2d_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor(output->get(), indices->get(), self->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&output_size[0], output_size.size()), random_samples->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_fractional_max_pool2d_self_Tensor_kernel_size_IntArrayRef_output_size_IntArrayRef_random_samples_Tensor (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> output_size, Rcpp::XPtr<XPtrTorch> random_samples) {
+Rcpp::List cpp_torch_namespace_fractional_max_pool2d_self_Tensor_kernel_size_IntArrayRef_output_size_IntArrayRef_random_samples_Tensor (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> output_size, Rcpp::XPtr<XPtrTorch> random_samples) {
   auto r_out = lantern_fractional_max_pool2d_tensor_intarrayref_intarrayref_tensor(self->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&output_size[0], output_size.size()), random_samples->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8872,15 +8872,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_fractional_max_pool3d_out_output_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef_output_size_IntArrayRef_random_samples_Tensor (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> output_size, Rcpp::XPtr<XPtrTorch> random_samples) {
+Rcpp::List cpp_torch_namespace_fractional_max_pool3d_out_output_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef_output_size_IntArrayRef_random_samples_Tensor (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> output_size, Rcpp::XPtr<XPtrTorch> random_samples) {
   auto r_out = lantern_fractional_max_pool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor(output->get(), indices->get(), self->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&output_size[0], output_size.size()), random_samples->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_fractional_max_pool3d_self_Tensor_kernel_size_IntArrayRef_output_size_IntArrayRef_random_samples_Tensor (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> output_size, Rcpp::XPtr<XPtrTorch> random_samples) {
+Rcpp::List cpp_torch_namespace_fractional_max_pool3d_self_Tensor_kernel_size_IntArrayRef_output_size_IntArrayRef_random_samples_Tensor (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> output_size, Rcpp::XPtr<XPtrTorch> random_samples) {
   auto r_out = lantern_fractional_max_pool3d_tensor_intarrayref_intarrayref_tensor(self->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&output_size[0], output_size.size()), random_samples->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8896,15 +8896,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_max_pool2d_with_indices_out_out_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> out, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
+Rcpp::List cpp_torch_namespace_max_pool2d_with_indices_out_out_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> out, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
   auto r_out = lantern_max_pool2d_with_indices_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(out->get(), indices->get(), self->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&ceil_mode));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_max_pool2d_with_indices_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
+Rcpp::List cpp_torch_namespace_max_pool2d_with_indices_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
   auto r_out = lantern_max_pool2d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(self->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&ceil_mode));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -8920,15 +8920,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_max_pool3d_with_indices_out_out_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> out, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
+Rcpp::List cpp_torch_namespace_max_pool3d_with_indices_out_out_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> out, Rcpp::XPtr<XPtrTorch> indices, Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
   auto r_out = lantern_max_pool3d_with_indices_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(out->get(), indices->get(), self->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&ceil_mode));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_max_pool3d_with_indices_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
+Rcpp::List cpp_torch_namespace_max_pool3d_with_indices_self_Tensor_kernel_size_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, bool ceil_mode) {
   auto r_out = lantern_max_pool3d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(self->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&ceil_mode));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -9316,15 +9316,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_slow_conv_transpose2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_output_padding_IntArrayRef_dilation_IntArrayRef_columns_Tensor_ones_Tensor (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_bias, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> dilation, Rcpp::XPtr<XPtrTorch> columns, Rcpp::XPtr<XPtrTorch> ones) {
+Rcpp::List cpp_torch_namespace_slow_conv_transpose2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_output_padding_IntArrayRef_dilation_IntArrayRef_columns_Tensor_ones_Tensor (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_bias, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> dilation, Rcpp::XPtr<XPtrTorch> columns, Rcpp::XPtr<XPtrTorch> ones) {
   auto r_out = lantern_slow_conv_transpose2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor(grad_input->get(), grad_weight->get(), grad_bias->get(), grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&output_padding[0], output_padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), columns->get(), ones->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_slow_conv_transpose2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_output_padding_IntArrayRef_dilation_IntArrayRef_columns_Tensor_ones_Tensor_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> dilation, Rcpp::XPtr<XPtrTorch> columns, Rcpp::XPtr<XPtrTorch> ones, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_slow_conv_transpose2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_output_padding_IntArrayRef_dilation_IntArrayRef_columns_Tensor_ones_Tensor_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> dilation, Rcpp::XPtr<XPtrTorch> columns, Rcpp::XPtr<XPtrTorch> ones, std::vector<bool> output_mask) {
   auto r_out = lantern_slow_conv_transpose2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool(grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&output_padding[0], output_padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), columns->get(), ones->get(), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -9340,15 +9340,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_slow_conv_transpose3d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_output_padding_IntArrayRef_dilation_IntArrayRef_finput_Tensor_fgrad_input_Tensor (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_bias, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> dilation, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input) {
+Rcpp::List cpp_torch_namespace_slow_conv_transpose3d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_output_padding_IntArrayRef_dilation_IntArrayRef_finput_Tensor_fgrad_input_Tensor (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_bias, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> dilation, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input) {
   auto r_out = lantern_slow_conv_transpose3d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor(grad_input->get(), grad_weight->get(), grad_bias->get(), grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&output_padding[0], output_padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), finput->get(), fgrad_input->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_slow_conv_transpose3d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_output_padding_IntArrayRef_dilation_IntArrayRef_finput_Tensor_fgrad_input_Tensor_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> dilation, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_slow_conv_transpose3d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_output_padding_IntArrayRef_dilation_IntArrayRef_finput_Tensor_fgrad_input_Tensor_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> output_padding, std::vector<int64_t> dilation, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, std::vector<bool> output_mask) {
   auto r_out = lantern_slow_conv_transpose3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool(grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&output_padding[0], output_padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), finput->get(), fgrad_input->get(), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -9364,27 +9364,27 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv2d_forward_out_output_Tensor_finput_Tensor_fgrad_input_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, Rcpp::XPtr<XPtrTorch> bias, std::vector<int64_t> stride, std::vector<int64_t> padding) {
+Rcpp::List cpp_torch_namespace_thnn_conv2d_forward_out_output_Tensor_finput_Tensor_fgrad_input_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, Rcpp::XPtr<XPtrTorch> bias, std::vector<int64_t> stride, std::vector<int64_t> padding) {
   auto r_out = lantern_thnn_conv2d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(output->get(), finput->get(), fgrad_input->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), bias->get(), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv2d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, Rcpp::XPtr<XPtrTorch> bias, std::vector<int64_t> stride, std::vector<int64_t> padding) {
+Rcpp::List cpp_torch_namespace_thnn_conv2d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, Rcpp::XPtr<XPtrTorch> bias, std::vector<int64_t> stride, std::vector<int64_t> padding) {
   auto r_out = lantern_thnn_conv2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), bias->get(), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_bias, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input) {
+Rcpp::List cpp_torch_namespace_thnn_conv2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_bias, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input) {
   auto r_out = lantern_thnn_conv2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor(grad_input->get(), grad_weight->get(), grad_bias->get(), grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), finput->get(), fgrad_input->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_thnn_conv2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, std::vector<bool> output_mask) {
   auto r_out = lantern_thnn_conv2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool(grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), finput->get(), fgrad_input->get(), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -9412,15 +9412,15 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv_depthwise2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation) {
+Rcpp::List cpp_torch_namespace_thnn_conv_depthwise2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation) {
   auto r_out = lantern_thnn_conv_depthwise2d_backward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref(grad_input->get(), grad_weight->get(), grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv_depthwise2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_output_mask_stdarraybool2 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_thnn_conv_depthwise2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_output_mask_stdarraybool2 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, std::vector<bool> output_mask) {
   auto r_out = lantern_thnn_conv_depthwise2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool(grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -9436,27 +9436,27 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv3d_forward_out_output_Tensor_finput_Tensor_fgrad_input_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, Rcpp::XPtr<XPtrTorch> bias, std::vector<int64_t> stride, std::vector<int64_t> padding) {
+Rcpp::List cpp_torch_namespace_thnn_conv3d_forward_out_output_Tensor_finput_Tensor_fgrad_input_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (Rcpp::XPtr<XPtrTorch> output, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, Rcpp::XPtr<XPtrTorch> bias, std::vector<int64_t> stride, std::vector<int64_t> padding) {
   auto r_out = lantern_thnn_conv3d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(output->get(), finput->get(), fgrad_input->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), bias->get(), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv3d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, Rcpp::XPtr<XPtrTorch> bias, std::vector<int64_t> stride, std::vector<int64_t> padding) {
+Rcpp::List cpp_torch_namespace_thnn_conv3d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, Rcpp::XPtr<XPtrTorch> bias, std::vector<int64_t> stride, std::vector<int64_t> padding) {
   auto r_out = lantern_thnn_conv3d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), bias->get(), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv3d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_bias, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input) {
+Rcpp::List cpp_torch_namespace_thnn_conv3d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor (Rcpp::XPtr<XPtrTorch> grad_input, Rcpp::XPtr<XPtrTorch> grad_weight, Rcpp::XPtr<XPtrTorch> grad_bias, Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input) {
   auto r_out = lantern_thnn_conv3d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor(grad_input->get(), grad_weight->get(), grad_bias->get(), grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), finput->get(), fgrad_input->get());
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_thnn_conv3d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_thnn_conv3d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, Rcpp::XPtr<XPtrTorch> finput, Rcpp::XPtr<XPtrTorch> fgrad_input, std::vector<bool> output_mask) {
   auto r_out = lantern_thnn_conv3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool(grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), finput->get(), fgrad_input->get(), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -9466,9 +9466,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_slow_conv_dilated2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_slow_conv_dilated2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, std::vector<bool> output_mask) {
   auto r_out = lantern_slow_conv_dilated2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool(grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]
@@ -9478,9 +9478,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_namespace_slow_conv_dilated3d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, std::vector<bool> output_mask) {
+Rcpp::List cpp_torch_namespace_slow_conv_dilated3d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_output_mask_stdarraybool3 (Rcpp::XPtr<XPtrTorch> grad_output, Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorch> weight, std::vector<int64_t> kernel_size, std::vector<int64_t> stride, std::vector<int64_t> padding, std::vector<int64_t> dilation, std::vector<bool> output_mask) {
   auto r_out = lantern_slow_conv_dilated3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool(grad_output->get(), self->get(), weight->get(), lantern_vector_int64_t(&kernel_size[0], kernel_size.size()), lantern_vector_int64_t(&stride[0], stride.size()), lantern_vector_int64_t(&padding[0], padding.size()), lantern_vector_int64_t(&dilation[0], dilation.size()), reinterpret_cast<void*>(&output_mask));
-return make_xptr<XPtrTorch>(r_out, "tuple");
+return Rcpp::List::create(make_xptr<XPtrTorch>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorch>(lantern_vector_get(r_out, 2), "Tensor"));
 }
 
 // [[Rcpp::export]]

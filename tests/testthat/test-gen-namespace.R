@@ -70,66 +70,67 @@ test_that("_baddbmm_mkl_", {
   expect_tensor(torch__baddbmm_mkl_(x, y, z))
 })
 
-# test_that("_batch_norm_impl_index", {
-#   a <- torch_rand(c(2,2))
-#   b <- torch_rand(c(2))
-#   out <- torch__batch_norm_impl_index(a,b,b,b,b,TRUE,1,1,TRUE)
-#   expect_tensor(out[[1]])
-#   expect_tensor(out[[2]])
-#   expect_tensor(out[[3]])
-#   expect_tensor(out[[4]])
-#   expect_equal(out[[5]], 0L)
-# })
+test_that("_batch_norm_impl_index", {
+  a <- torch_rand(c(2,2))
+  b <- torch_rand(c(2))
+  out <- torch__batch_norm_impl_index(a,b,b,b,b,TRUE,1,1,TRUE)
+  expect_tensor(out[[1]])
+  expect_tensor(out[[2]])
+  expect_tensor(out[[3]])
+  expect_equal(out[[4]], 0L)
+})
 
-# test_that("_batch_norm_impl_index_backward", {
-#   skip("TODO: seems to be GPU only")
-#   a <- torch_rand(c(2,2))
-#   b <- torch_rand(c(2))
-#   torch__batch_norm_impl_index_backward(1L,a,b,b,b,b,b,b,TRUE,0.1,c(TRUE,TRUE,TRUE), b)
-# })
-# 
-# test_that("_cast_Byte", {
-#   x <- torch_rand(1)
-#   expect_tensor(torch__cast_Byte(x))
-# })
-# 
-# test_that("_cast_Char", {
-#   skip("TODO: Cast to characters doesn't seem to work correctly.")
-#   x <- torch_tensor(1234567)
-#   expect_tensor(torch__cast_Char(x))
-# })
-# 
-# test_that("_cast_Double", {
-#   x <- torch_tensor(1L, dtype = torch_int())
-#   expect_tensor(torch__cast_Double(x))
-# })
-# 
-# test_that("_cast_Float", {
-#   x <- torch_tensor(1L, dtype = torch_int())
-#   expect_tensor(torch__cast_Float(x))
-# })
-# 
-# test_that("_cast_Half", {
-#   skip("TODO: implement convertions for Half types.")
-#   x <- torch_tensor(1L, dtype = torch_int())
-#   expect_tensor(torch__cast_Half(x))
-# })
-# 
-# test_that("_cast_Int", {
-#   x <- torch_tensor(1)
-#   expect_tensor(torch__cast_Int(x))
-# })
-# 
-# test_that("_cast_Long", {
-#   x <- torch_tensor(1)
-#   expect_tensor(torch__cast_Long(x))
-# })
-# 
-# test_that("_cast_Short", {
-#   x <- torch_tensor(1)
-#   expect_tensor(torch__cast_Short(x))
-# })
-# 
+test_that("_batch_norm_impl_index_backward", {
+  skip("TODO: seems to be GPU only")
+  a <- torch_rand(c(2,2))
+  b <- torch_rand(c(2))
+  torch__batch_norm_impl_index_backward(1L,a,b,b,b,b,b,b,TRUE,0.1,c(TRUE,TRUE,TRUE), b)
+})
+
+test_that("_cast_Byte", {
+  x <- torch_rand(1)
+  expect_tensor(torch__cast_Byte(x))
+})
+
+test_that("_cast_Char", {
+  skip("TODO: Cast to characters doesn't seem to work correctly.")
+  x <- torch_tensor(1234567)
+  expect_tensor(torch__cast_Char(x))
+})
+
+test_that("_cast_Double", {
+  x <- torch_tensor(1L, dtype = torch_int())
+  expect_tensor(torch__cast_Double(x))
+})
+
+test_that("_cast_Float", {
+  x <- torch_tensor(1L, dtype = torch_int())
+  expect_tensor(torch__cast_Float(x))
+})
+
+test_that("_cast_Half", {
+  skip("TODO: implement convertions for Half types.")
+  x <- torch_tensor(1L, dtype = torch_int())
+  expect_tensor(torch__cast_Half(x))
+})
+
+test_that("_cast_Int", {
+  x <- torch_tensor(1)
+  expect_tensor(torch__cast_Int(x))
+})
+
+test_that("_cast_Long", {
+  skip("TODO: implement convertions for Long types.")
+  x <- torch_tensor(1)
+  expect_tensor(torch__cast_Long(x))
+})
+
+test_that("_cast_Short", {
+  skip("TODO: implement convertions for Short types.")
+  x <- torch_tensor(1)
+  expect_tensor(torch__cast_Short(x))
+})
+
 # test_that("_cat", {
 #   x <- torch_tensor(1)
 #   expect_tensor(torch__cat(list(x, x)))

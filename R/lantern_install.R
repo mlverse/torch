@@ -1,3 +1,5 @@
+branch <- "autogen-tuple"
+
 install_config <- list(
   "1.3.0" = list(
     "cpu" = list(
@@ -7,7 +9,7 @@ install_config <- list(
           path = "libtorch/lib",
           filter = ".dylib"
         ),
-        "liblantern" = "https://storage.googleapis.com/lantern-builds/refs/heads/autogen2/latest/macOS.zip"
+        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/macOS.zip", branch)
       ),
       "windows" = list(
         "libtorch" = list(
@@ -15,14 +17,14 @@ install_config <- list(
           path = "libtorch/lib",
           filter = ".dll"
         ),
-        "liblantern" = "https://storage.googleapis.com/lantern-builds/refs/heads/autogen2/latest/Windows.zip"
+        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/Windows.zip", branch)
       ),
       "linux" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.3.0%2Bcpu.zip",
           path = "libtorch/lib"
         ),
-        "liblantern" = "https://storage.googleapis.com/lantern-builds/refs/heads/autogen2/latest/Linux.zip"
+        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/Linux.zip", branch)
       )
     )
   )
