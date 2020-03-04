@@ -19,7 +19,7 @@ jobs:
             fixlib:
             flavor: Release
             artifacts: lantern.dll
-          - os: ubuntu-16.04
+          - os: ubuntu-18.04
             library: liblantern.so
             test: ./lanterntest
             make: make
