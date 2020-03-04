@@ -89,6 +89,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_TensorList_at)(void *self, int64_t i);
   LANTERN_API int64_t(LANTERN_PTR lantern_TensorList_size)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Scalar)(void *value, const char *type);
+  LANTERN_API void *(LANTERN_PTR lantern_vector_get)(void *x, int i);
 
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
@@ -1904,6 +1905,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_TensorList_at);
   LOAD_SYMBOL(lantern_TensorList_size);
   LOAD_SYMBOL(lantern_Scalar);
+  LOAD_SYMBOL(lantern_vector_get);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)

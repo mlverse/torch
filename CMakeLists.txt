@@ -70,7 +70,7 @@ target_include_directories(lantern PUBLIC
 )
 
 target_link_libraries(lantern ${TORCH_LIBRARIES})
-set_property(TARGET lantern PROPERTY CXX_STANDARD 14)
+set_property(TARGET lantern PROPERTY CXX_STANDARD 17)
 
 ############################################################
 # Tests
