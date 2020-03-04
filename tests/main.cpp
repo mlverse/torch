@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     void *t = lantern_rand_intarrayref_tensoroptions(lantern_vector_int64_t(&x[0], 2), lantern_TensorOptions());
     std::cout << std::string(lantern_Tensor_StreamInsertion(t)) << std::endl;
 
-    void* r =  lantern_max_tensor_intt_bool(t, nullptr, nullptr);
+    void* r =  lantern_max_tensor_intt_bool(t, lantern_int64_t(1), lantern_bool(false));
     std::cout << std::string(lantern_Tensor_StreamInsertion(lantern_vector_get(r, 0))) << std::endl;
     std::cout << std::string(lantern_Tensor_StreamInsertion(lantern_vector_get(r, 1))) << std::endl;
 

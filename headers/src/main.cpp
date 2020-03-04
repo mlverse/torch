@@ -205,7 +205,7 @@ std::string buildReturn(YAML::Node node)
 
     if (node.size() > 1)
     {
-        type = "std::tuple<" + type + ">";
+        type = "std::vector<void*>" ;
     }
 
     return type;
@@ -258,8 +258,17 @@ int main(int argc, char *argv[])
             }
             else
             {
-                bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
-                bodies.push_back("        " + calls + "));");
+                if (config[idx]["returns"].size() == 1) 
+                {
+                    bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
+                    bodies.push_back("        " + calls + "));");
+                } else 
+                {
+                    bodies.push_back("    return (void *) new LanternObject<" + returns + ">(to_vector(" + functionCall + name + "(");
+                    bodies.push_back("        " + calls + ")));");    
+                }
+                
+            
             }
             bodies.push_back("}");
             bodies.push_back("");
@@ -286,8 +295,16 @@ int main(int argc, char *argv[])
             }
             else
             {
-                bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
-                bodies.push_back("        " + calls + "));");
+                if (config[idx]["returns"].size() == 1)
+                {
+                    bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
+                    bodies.push_back("        " + calls + "));");
+                } else 
+                {
+                    bodies.push_back("    return (void *) new LanternObject<" + returns + ">(to_vector(" + functionCall + name + "(");
+                    bodies.push_back("        " + calls + ")));");
+                }
+                
             }
             bodies.push_back("}");
             bodies.push_back("");
