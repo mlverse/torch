@@ -107,6 +107,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             type = "std::vector<int64_t>";
         }
+        else if (type == "TensorList")
+        {
+            type = "std::vector<torch::Tensor>";
+        }
 
         arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
                      node[idx]["name"].as<std::string>() + ")->get()";
@@ -205,7 +209,7 @@ std::string buildReturn(YAML::Node node)
 
     if (node.size() > 1)
     {
-        type = "std::vector<void*>" ;
+        type = "std::vector<void*>";
     }
 
     return type;
@@ -258,17 +262,16 @@ int main(int argc, char *argv[])
             }
             else
             {
-                if (config[idx]["returns"].size() == 1) 
+                if (config[idx]["returns"].size() == 1)
                 {
                     bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
                     bodies.push_back("        " + calls + "));");
-                } else 
+                }
+                else
                 {
                     bodies.push_back("    return (void *) new LanternObject<" + returns + ">(to_vector(" + functionCall + name + "(");
-                    bodies.push_back("        " + calls + ")));");    
+                    bodies.push_back("        " + calls + ")));");
                 }
-                
-            
             }
             bodies.push_back("}");
             bodies.push_back("");
@@ -299,12 +302,12 @@ int main(int argc, char *argv[])
                 {
                     bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
                     bodies.push_back("        " + calls + "));");
-                } else 
+                }
+                else
                 {
                     bodies.push_back("    return (void *) new LanternObject<" + returns + ">(to_vector(" + functionCall + name + "(");
                     bodies.push_back("        " + calls + ")));");
                 }
-                
             }
             bodies.push_back("}");
             bodies.push_back("");
