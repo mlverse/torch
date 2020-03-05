@@ -131,79 +131,79 @@ test_that("_cast_Short", {
   expect_tensor(torch__cast_Short(x))
 })
 
-# test_that("_cat", {
-#   x <- torch_tensor(1)
-#   expect_tensor(torch__cat(list(x, x)))
-# })
-# 
-# test_that("_cat_out", {
-#   x <- torch_tensor(1)
-#   y <- torch_zeros(2)
-#   expect_tensor(torch__cat_out(y, list(x, x)))
-#   expect_equal_to_tensor(y, torch_tensor(c(1,1)))
-# })
-# 
-# test_that("_cdist_backward", {
-#   x <- torch_rand(c(2,2))
-#   expect_tensor(torch__cdist_backward(x, x, x, 1, x))
-# })
-# 
-# test_that("_cholesky_helper", {
-#   x <- torch_tensor(matrix(c(1,0,0,1), ncol = 2))
-#   expect_tensor(torch__cholesky_helper(x, TRUE))
-# })
-# 
-# test_that("_cholesky_solve_helper", {
-#   x <- torch_tensor(matrix(c(1,0,0,1), ncol = 2))
-#   expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
-# })
-# 
-# test_that("upsample_nearest3d", {
-#   x <- torch_rand(c(2,2,2,2,2))
-#   expect_tensor(torch_upsample_nearest3d(x, output_size = c(2,2,2)))
-# })
-# 
-# test_that("upsample_nearest3d_backward", {
-#   x <- torch_rand(c(2,2,2,2,2))
-#   expect_tensor(torch_upsample_nearest3d_backward_out(x, x, c(2,2,2), c(2,2,2,2,2)))
-# })
-# 
-# test_that("upsample_nearest3d_backward_out", {
-#   x <- torch_rand(c(2,2,2,2,2))
-#   y <- torch_zeros(1)
-#   expect_tensor(torch_upsample_nearest3d_backward_out(y, x, c(2,2,2), c(2,2,2,2,2)))
-# })
-# 
-# test_that("upsample_nearest3d_out", {
-#   x <- torch_rand(c(2,2,2,2,2))
-#   y <- torch_rand(c(2,2))
-#   expect_tensor(torch_upsample_nearest3d_out(y, x, c(2,2,2)))
-#   expect_tensor(y)
-# })
-# 
-# test_that("upsample_trilinear3d", {
-#   x <- torch_rand(c(2,2,2,2,2))
-#   expect_tensor(torch_upsample_trilinear3d(x, output_size = c(2,2,2), align_corners = TRUE))
-# })
-# 
-# test_that("upsample_trilinear3d_backward", {
-#   x <- torch_rand(c(2,2,2,2,2))
-#   expect_tensor(torch_upsample_trilinear3d_backward(x, c(2,2,2), c(2,2,2,2,2), align_corners = TRUE))
-# })
-# 
-# test_that("upsample_trilinear3d_backward_out", {
-#   x <- torch_rand(c(2,2,2,2,2))
-#   y <- torch_zeros(1)
-#   expect_tensor(torch_upsample_trilinear3d_backward_out(y, x, c(2,2,2), c(2,2,2,2,2), align_corners = TRUE))
-# })
-# 
-# test_that("torch_upsample_trilinear3d_out", {
-#   x <- torch_rand(c(2,2,2,2,2))
-#   y <- torch_rand(c(2,2))
-#   expect_tensor(torch_upsample_trilinear3d_out(y, x, c(2,2,2), align_corners = TRUE))
-#   expect_tensor(y)
-# })
-# 
+test_that("_cat", {
+  x <- torch_tensor(1)
+  expect_tensor(torch__cat(list(x, x)))
+})
+
+test_that("_cat_out", {
+  x <- torch_tensor(1)
+  y <- torch_zeros(2)
+  expect_tensor(torch__cat_out(y, list(x, x)))
+  expect_equal_to_tensor(y, torch_tensor(c(1,1)))
+})
+
+test_that("_cdist_backward", {
+  x <- torch_rand(c(2,2))
+  expect_tensor(torch__cdist_backward(x, x, x, 1, x))
+})
+
+test_that("_cholesky_helper", {
+  x <- torch_tensor(matrix(c(1,0,0,1), ncol = 2))
+  expect_tensor(torch__cholesky_helper(x, TRUE))
+})
+
+test_that("_cholesky_solve_helper", {
+  x <- torch_tensor(matrix(c(1,0,0,1), ncol = 2))
+  expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
+})
+
+test_that("upsample_nearest3d", {
+  x <- torch_rand(c(2,2,2,2,2))
+  expect_tensor(torch_upsample_nearest3d(x, output_size = c(2,2,2)))
+})
+
+test_that("upsample_nearest3d_backward", {
+  x <- torch_rand(c(2,2,2,2,2))
+  expect_tensor(torch_upsample_nearest3d_backward_out(x, x, c(2,2,2), c(2,2,2,2,2)))
+})
+
+test_that("upsample_nearest3d_backward_out", {
+  x <- torch_rand(c(2,2,2,2,2))
+  y <- torch_zeros(1)
+  expect_tensor(torch_upsample_nearest3d_backward_out(y, x, c(2,2,2), c(2,2,2,2,2)))
+})
+
+test_that("upsample_nearest3d_out", {
+  x <- torch_rand(c(2,2,2,2,2))
+  y <- torch_rand(c(2,2))
+  expect_tensor(torch_upsample_nearest3d_out(y, x, c(2,2,2)))
+  expect_tensor(y)
+})
+
+test_that("upsample_trilinear3d", {
+  x <- torch_rand(c(2,2,2,2,2))
+  expect_tensor(torch_upsample_trilinear3d(x, output_size = c(2,2,2), align_corners = TRUE))
+})
+
+test_that("upsample_trilinear3d_backward", {
+  x <- torch_rand(c(2,2,2,2,2))
+  expect_tensor(torch_upsample_trilinear3d_backward(x, c(2,2,2), c(2,2,2,2,2), align_corners = TRUE))
+})
+
+test_that("upsample_trilinear3d_backward_out", {
+  x <- torch_rand(c(2,2,2,2,2))
+  y <- torch_zeros(1)
+  expect_tensor(torch_upsample_trilinear3d_backward_out(y, x, c(2,2,2), c(2,2,2,2,2), align_corners = TRUE))
+})
+
+test_that("torch_upsample_trilinear3d_out", {
+  x <- torch_rand(c(2,2,2,2,2))
+  y <- torch_rand(c(2,2))
+  expect_tensor(torch_upsample_trilinear3d_out(y, x, c(2,2,2), align_corners = TRUE))
+  expect_tensor(y)
+})
+
 # test_that("var", {
 #   x <- torch_rand(100, names = "a")
 #   expect_tensor(torch_var(x))
