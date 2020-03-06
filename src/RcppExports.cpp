@@ -40,6 +40,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_dimname
+Rcpp::XPtr<XPtrTorch> cpp_torch_dimname(const std::string& str);
+RcppExport SEXP _torchr_cpp_torch_dimname(SEXP strSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type str(strSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_dimname(str));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_dimname_list
+Rcpp::XPtr<XPtrTorch> cpp_torch_dimname_list(const Rcpp::List& x);
+RcppExport SEXP _torchr_cpp_torch_dimname_list(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_dimname_list(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_dtype_to_string
 std::string cpp_dtype_to_string(Rcpp::XPtr<XPtrTorch> dtype);
 RcppExport SEXP _torchr_cpp_dtype_to_string(SEXP dtypeSEXP) {
@@ -21707,11 +21729,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_nullopt
+Rcpp::XPtr<std::nullptr_t> cpp_nullopt();
+RcppExport SEXP _torchr_cpp_nullopt() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_nullopt());
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},
+    {"_torchr_cpp_torch_dimname", (DL_FUNC) &_torchr_cpp_torch_dimname, 1},
+    {"_torchr_cpp_torch_dimname_list", (DL_FUNC) &_torchr_cpp_torch_dimname_list, 1},
     {"_torchr_cpp_dtype_to_string", (DL_FUNC) &_torchr_cpp_dtype_to_string, 1},
     {"_torchr_cpp_torch_float32", (DL_FUNC) &_torchr_cpp_torch_float32, 0},
     {"_torchr_cpp_torch_float64", (DL_FUNC) &_torchr_cpp_torch_float64, 0},
@@ -23333,6 +23367,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_tensor_list_to_r_list", (DL_FUNC) &_torchr_cpp_tensor_list_to_r_list, 1},
     {"_torchr_cpp_torch_tensor_options", (DL_FUNC) &_torchr_cpp_torch_tensor_options, 5},
     {"_torchr_cpp_nullptr", (DL_FUNC) &_torchr_cpp_nullptr, 0},
+    {"_torchr_cpp_nullopt", (DL_FUNC) &_torchr_cpp_nullopt, 0},
     {NULL, NULL, 0}
 };
 

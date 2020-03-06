@@ -90,9 +90,16 @@ extern "C"
   LANTERN_API int64_t(LANTERN_PTR lantern_TensorList_size)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Scalar)(void *value, const char *type);
   LANTERN_API void *(LANTERN_PTR lantern_vector_get)(void *x, int i);
-  LANTERN_API void* (LANTERN_PTR lantern_int) (int x);
-  LANTERN_API void* (LANTERN_PTR lantern_int64_t) (int64_t x);
-  LANTERN_API void* (LANTERN_PTR lantern_bool) (bool x);
+  LANTERN_API void *(LANTERN_PTR lantern_int)(int x);
+  LANTERN_API void *(LANTERN_PTR lantern_int64_t)(int64_t x);
+  LANTERN_API void *(LANTERN_PTR lantern_bool)(bool x);
+  LANTERN_API void *(LANTERN_PTR lantern_Dimname)(const char *name);
+  LANTERN_API void *(LANTERN_PTR lantern_DimnameList)();
+  LANTERN_API void(LANTERN_PTR lantern_DimnameList_push_back)(void *list, void *dimname);
+  LANTERN_API const char *(LANTERN_PTR lantern_Dimname_to_string)(void *dimname);
+  LANTERN_API int64_t(LANTERN_PTR lantern_DimnameList_size)(void *list);
+  LANTERN_API void *(LANTERN_PTR lantern_DimnameList_at)(void *list, int i);
+  LANTERN_API void *(LANTERN_PTR lantern_Scalar_nullopt)();
 
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
@@ -1912,6 +1919,13 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_int);
   LOAD_SYMBOL(lantern_int64_t);
   LOAD_SYMBOL(lantern_bool);
+  LOAD_SYMBOL(lantern_Dimname);
+  LOAD_SYMBOL(lantern_DimnameList);
+  LOAD_SYMBOL(lantern_DimnameList_push_back);
+  LOAD_SYMBOL(lantern_Dimname_to_string);
+  LOAD_SYMBOL(lantern_DimnameList_size);
+  LOAD_SYMBOL(lantern_DimnameList_at);
+  LOAD_SYMBOL(lantern_Scalar_nullopt);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)

@@ -13,6 +13,14 @@ cpp_torch_device <- function(type, index) {
     .Call('_torchr_cpp_torch_device', PACKAGE = 'torchr', type, index)
 }
 
+cpp_torch_dimname <- function(str) {
+    .Call('_torchr_cpp_torch_dimname', PACKAGE = 'torchr', str)
+}
+
+cpp_torch_dimname_list <- function(x) {
+    .Call('_torchr_cpp_torch_dimname_list', PACKAGE = 'torchr', x)
+}
+
 cpp_dtype_to_string <- function(dtype) {
     .Call('_torchr_cpp_dtype_to_string', PACKAGE = 'torchr', dtype)
 }
@@ -6495,5 +6503,9 @@ cpp_torch_tensor_options <- function(dtype_ptr, layout_ptr, device_ptr, requires
 
 cpp_nullptr <- function() {
     .Call('_torchr_cpp_nullptr', PACKAGE = 'torchr')
+}
+
+cpp_nullopt <- function() {
+    .Call('_torchr_cpp_nullopt', PACKAGE = 'torchr')
 }
 
