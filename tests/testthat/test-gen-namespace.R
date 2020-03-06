@@ -5,7 +5,7 @@ test_that("__and__", {
 })
 
 test_that("__lshift__", {
-  x <- torch_tensor(1)
+  x <- torch_tensor(1) 
   expect_equal_to_tensor(torch___lshift__(x, x), torch_tensor(2))
   expect_equal_to_tensor(torch___lshift__(x, 1), torch_tensor(2))
 })
