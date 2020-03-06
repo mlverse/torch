@@ -20,17 +20,17 @@ void *lantern_IntArrayRef(int64_t *x, size_t x_size)
   return (void *)new LanternObject<torch::IntArrayRef>(out);
 }
 
-void* lantern_int (int x)
+void *lantern_int(int x)
 {
   return (void *)new LanternObject<int>(x);
 }
 
-void* lantern_int64_t (int64_t x)
+void *lantern_int64_t(int64_t x)
 {
   return (void *)new LanternObject<int64_t>(x);
 }
 
-void* lantern_bool (bool x)
+void *lantern_bool(bool x)
 {
   return (void *)new LanternObject<bool>(x);
 }

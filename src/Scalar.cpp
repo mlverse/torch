@@ -26,5 +26,10 @@ void *lantern_Scalar(void *value, const char *type)
     out = *reinterpret_cast<double *>(value);
   }
 
-  return (void *)new LanternObject<torch::Scalar>(out);
+  return (void *)new LanternObject<torch::optional<torch::Scalar>>(out);
+}
+
+void *lantern_Scalar_nullopt()
+{
+  return (void *)new LanternObject<c10::optional<torch::Scalar>>(c10::nullopt);
 }

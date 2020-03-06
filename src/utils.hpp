@@ -30,6 +30,11 @@ public:
     _object = new T(object);
   }
 
+  LanternPtr()
+  {
+    _object = new T;
+  }
+
   ~LanternPtr()
   {
     delete _object;
