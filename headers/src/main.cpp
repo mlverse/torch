@@ -116,8 +116,17 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             type = "std::vector<torch::Dimname>";
         }
 
+        // add optional call if required
+        std::string dtype = node[idx]["type"].as<std::string>();
+        std::string call = node[idx]["name"].as<std::string>();
+        if ((dtype.find("c10::optional") != std::string::npos) & (type != "std::vector<torch::Dimname>"))
+        {
+            call = "optional<" + addNamespace(type) + ">(" + call + ")";
+            type = "c10::optional<" + type + ">";
+        }
+
         arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
-                     node[idx]["name"].as<std::string>() + ")->get()";
+                     call + ")->get()";
     }
 
     return arguments;
@@ -259,7 +268,7 @@ int main(int argc, char *argv[])
 
             bodies.push_back("void* lantern_" + function + "(" + arguments + ")");
             bodies.push_back("{");
-            if (returns == "void")
+            if (returns == "void" | (config[idx]["returns"].size() == 0))
             {
                 bodies.push_back("    " + functionCall + name + "(" + calls + ");");
                 bodies.push_back("    return NULL;");
@@ -295,7 +304,7 @@ int main(int argc, char *argv[])
 
             bodies.push_back("void* lantern_Tensor_" + function + "(" + arguments + ")");
             bodies.push_back("{");
-            if (returns == "void")
+            if (returns == "void" | (config[idx]["returns"].size() == 0))
             {
                 bodies.push_back("    " + functionCall + name + "(" + calls + ");");
                 bodies.push_back("    return NULL;");
@@ -339,7 +348,7 @@ int main(int argc, char *argv[])
     }
 
     replaceFile(pathSource, "/* Autogen Body -- Start */", "/* Autogen Body -- End */", bodies);
-    replaceFile(pathHeader, "/* Autogen Headers -- Start */", "/* Autogen Headers -- End */", headers);
+    replaceFile(pathHeader, "  /* Autogen Headers -- Start */", "  /* Autogen Headers -- End */", headers);
     replaceFile(pathHeader, "  /* Autogen Symbols -- Start */", "  /* Autogen Symbols -- End */", symbols);
 
     return 0;
