@@ -259,7 +259,7 @@ int main(int argc, char *argv[])
 
             bodies.push_back("void* lantern_" + function + "(" + arguments + ")");
             bodies.push_back("{");
-            if (returns == "void")
+            if (returns == "void" | (config[idx]["returns"].size() == 0))
             {
                 bodies.push_back("    " + functionCall + name + "(" + calls + ");");
                 bodies.push_back("    return NULL;");
@@ -295,7 +295,7 @@ int main(int argc, char *argv[])
 
             bodies.push_back("void* lantern_Tensor_" + function + "(" + arguments + ")");
             bodies.push_back("{");
-            if (returns == "void")
+            if (returns == "void" | (config[idx]["returns"].size() == 0))
             {
                 bodies.push_back("    " + functionCall + name + "(" + calls + ");");
                 bodies.push_back("    return NULL;");
@@ -339,7 +339,7 @@ int main(int argc, char *argv[])
     }
 
     replaceFile(pathSource, "/* Autogen Body -- Start */", "/* Autogen Body -- End */", bodies);
-    replaceFile(pathHeader, "/* Autogen Headers -- Start */", "/* Autogen Headers -- End */", headers);
+    replaceFile(pathHeader, "  /* Autogen Headers -- Start */", "  /* Autogen Headers -- End */", headers);
     replaceFile(pathHeader, "  /* Autogen Symbols -- Start */", "  /* Autogen Symbols -- End */", symbols);
 
     return 0;
