@@ -255,7 +255,6 @@ test_that("zeros", {
 })
 
 test_that("zeros_like", {
-  skip("TODO: figure out nullable memory formats")
   x <- torch_ones(c(2))
   expect_tensor(y <- torch_zeros_like(x))
   expect_equal_to_tensor(y, torch_tensor(c(0,0)))
