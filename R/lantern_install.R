@@ -1,4 +1,4 @@
-branch <- "libtorch1.4"
+branch <- "master"
 
 install_config <- list(
   "1.4.0" = list(
@@ -87,6 +87,7 @@ lantern_install_libs <- function(version, type, install_path) {
 }
 
 #' @export
+
 lantern_install <- function(version = "1.4.0", type = "cpu", reinstall = FALSE) {
   if (reinstall) {
     unlink(lantern_install_path(), recursive = TRUE)
