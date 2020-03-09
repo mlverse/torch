@@ -116,8 +116,17 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             type = "std::vector<torch::Dimname>";
         }
 
+        // add optional call if required
+        std::string dtype = node[idx]["type"].as<std::string>();
+        std::string call = node[idx]["name"].as<std::string>();
+        if ((dtype.find("c10::optional") != std::string::npos) & (type != "std::vector<torch::Dimname>"))
+        {
+            call = "optional<" + addNamespace(type) + ">(" + call + ")";
+            type = "c10::optional<" + type + ">";
+        }
+
         arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
-                     node[idx]["name"].as<std::string>() + ")->get()";
+                     call + ")->get()";
     }
 
     return arguments;

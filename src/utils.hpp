@@ -59,3 +59,15 @@ std::vector<void *> to_vector(std::tuple<T...> x)
              x);
   return out;
 }
+
+template <class T>
+void *optional(void *x)
+{
+  if (x == nullptr)
+  {
+    return (void *)new LanternObject<c10::optional<T>>(c10::nullopt);
+  }
+
+  auto z = ((LanternObject<T> *)x)->get();
+  return (void *)new LanternObject<c10::optional<T>>(z);
+}
