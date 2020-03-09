@@ -77,7 +77,8 @@ test_that("_batch_norm_impl_index", {
   expect_tensor(out[[1]])
   expect_tensor(out[[2]])
   expect_tensor(out[[3]])
-  expect_equal(out[[4]], 0L)
+  expect_tensor(out[[4]])
+  expect_equal(out[[5]], 0L)
 })
 
 test_that("_batch_norm_impl_index_backward", {
