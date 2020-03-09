@@ -1,4 +1,4 @@
-branch <- "autogen-tuple"
+branch <- "master"
 
 install_config <- list(
   "1.3.0" = list(
