@@ -23,8 +23,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - uses: r-lib/actions/setup-r@f44dbada5de6d99802c5467dc335815635d20861
-      - uses: r-lib/actions/setup-pandoc@f44dbada5de6d99802c5467dc335815635d20861
+      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-pandoc@master
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
