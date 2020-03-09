@@ -36,7 +36,7 @@ cpp_type <- function(decl) {
     returns <- decl$returns[[1]]
 
     if (returns$dynamic_type == "Tensor")
-      return("Rcpp::XPtr<torch::Tensor>")
+      return("Rcpp::XPtr<XPtrTorch>")
 
     if (returns$dynamic_type == "void")
       return("void")
@@ -48,22 +48,23 @@ cpp_type <- function(decl) {
       return("int64_t")
 
     if (returns$dynamic_type == "TensorList")
-      return("Rcpp::XPtr<torch::TensorList>")
+      return("Rcpp::XPtr<XPtrTorch>")
 
     if (returns$dynamic_type == "double")
       return("double")
 
     if (returns$dynamic_type == "QScheme")
-      return("Rcpp::XPtr<torch::QScheme>")
+      return("Rcpp::XPtr<XPtrTorch>")
 
     if (returns$dynamic_type == "Scalar")
-      return("Rcpp::XPtr<torch::Scalar>")
+      return("Rcpp::XPtr<XPtrTorch>")
 
     if (returns$dynamic_type == "ScalarType")
-      return("Rcpp::XPtr<torch::Dtype>")
+      return("Rcpp::XPtr<XPtrTorch>")
 
   } else {
     return("Rcpp::List")
+    #return("Rcpp::XPtr<XPtrTorch>")
   }
 
 }
@@ -92,7 +93,7 @@ cpp_function_name <- function(method, type) {
 cpp_parameter_type <- function(argument) {
 
   if (argument$dynamic_type == "Tensor") {
-    declaration <- "Rcpp::XPtr<torch::Tensor>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "bool") {
@@ -100,11 +101,11 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "DimnameList") {
-    declaration <-  "Rcpp::XPtr<std::vector<torch::Dimname>>"
+    declaration <-  "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "TensorList") {
-    declaration <- "Rcpp::XPtr<std::vector<torch::Tensor>>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "IntArrayRef") {
@@ -124,19 +125,19 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "TensorOptions") {
-    declaration <- "Rcpp::XPtr<torch::TensorOptions>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "Generator *") {
-    declaration <- "Rcpp::XPtr<torch::Generator *>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "ScalarType") {
-    declaration <- "Rcpp::XPtr<torch::Dtype>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "Scalar") {
-    declaration <- "Rcpp::XPtr<torch::Scalar>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
@@ -148,11 +149,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
-
-    if (argument$type == "c10::optional<MemoryFormat>")
-      declaration <- "Rcpp::XPtr<c10::optional<torch::MemoryFormat>>"
-    else
-      declaration <- "Rcpp::XPtr<torch::MemoryFormat>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "std::string") {
@@ -160,15 +157,15 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Dimname") {
-    declaration <- "Rcpp::XPtr<torch::Dimname>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "Device") {
-    declaration <- "Rcpp::XPtr<torch::Device>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   if (argument$dynamic_type == "Storage") {
-    declaration <- "Rcpp::XPtr<torch::Storage>"
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
   declaration
@@ -207,79 +204,79 @@ cpp_argument_transform <- function(argument) {
   argument$name <- cpp_parameter_identifier(argument)
 
   if (argument$dynamic_type == "Tensor") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "bool") {
-    result <- glue::glue("{argument$name}")
+    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
   if (argument$dynamic_type == "DimnameList") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "TensorList") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "IntArrayRef") {
-    result <- glue::glue("{argument$name}")
+    result <- glue::glue("lantern_vector_int64_t(&{argument$name}[0], {argument$name}.size())")
   }
 
   if (argument$dynamic_type == "int64_t") {
-    result <- glue::glue("{argument$name}")
+    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
   if (argument$dynamic_type == "double") {
-    result <- glue::glue("{argument$name}")
+    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
   if (argument$dynamic_type == "std::array<bool,4>") {
-    result <- glue::glue("std_vector_to_std_array<bool,4>({argument$name})")
+    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
   if (argument$dynamic_type == "TensorOptions") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "Generator *") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "ScalarType") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "Scalar") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
-    result <- glue::glue("std_vector_to_std_array<bool,3>({argument$name})")
+    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
   if (argument$dynamic_type == "std::array<bool,2>") {
-    result <- glue::glue("std_vector_to_std_array<bool,2>({argument$name})")
+    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "std::string") {
-    result <- glue::glue("{argument$name}")
+    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
   if (argument$dynamic_type == "Dimname") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "Device") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   if (argument$dynamic_type == "Storage") {
-    result <- glue::glue("* {argument$name}")
+    result <- glue::glue("{argument$name}->get()")
   }
 
   result
@@ -291,6 +288,12 @@ xptr_return_call <- function(type, dyn_type) {
   }
 }
 
+reinterpret_cast_call <- function(dyn_type) {
+  function(call) {
+    glue::glue("*reinterpret_cast<{dyn_type} *>({call})")
+  }
+}
+
 cpp_return_statement <- function(returns) {
 
   if (length(returns) == 1) {
@@ -298,35 +301,36 @@ cpp_return_statement <- function(returns) {
     returns <- returns[[1]]
 
     if (returns$dynamic_type == "Tensor")
-      return(xptr_return_call("torch::Tensor", "Tensor"))
+      return(xptr_return_call("XPtrTorch", "Tensor"))
 
     if (returns$dynamic_type == "bool")
-      return(identity)
+      return(reinterpret_cast_call("bool"))
 
     if (returns$dynamic_type == "int64_t")
-      return(identity)
+      return(reinterpret_cast_call("int64_t"))
 
     if (returns$dynamic_type == "TensorList")
-      return(xptr_return_call("torch::TensorList", "TensorList"))
+      return(xptr_return_call("XPtrTorch", "TensorList"))
 
     if (returns$dynamic_type == "double")
-      return(identity)
+      return(reinterpret_cast_call("double"))
 
     if (returns$dynamic_type == "QScheme")
-      return(xptr_return_call("torch::QScheme", "QScheme"))
+      return(xptr_return_call("XPtrTorch", "QScheme"))
 
     if (returns$dynamic_type == "Scalar")
-      return(xptr_return_call("torch::Scalar", "Scalar"))
+      return(xptr_return_call("XPtrTorch", "Scalar"))
 
     if (returns$dynamic_type == "ScalarType")
-      return(xptr_return_call("torch::Dtype", "ScalarType"))
+      return(xptr_return_call("XPtrTorch", "ScalarType"))
 
   } else {
 
+    # return(xptr_return_call("XPtrTorch", "tuple"))
 
     calls <- purrr::map_chr(
       seq_along(returns),
-      ~cpp_return_statement(returns[.x])(glue::glue("std::get<{.x-1}>(r_out)"))
+      ~cpp_return_statement(returns[.x])(glue::glue("lantern_vector_get(r_out, {.x-1})"))
     )
 
     f <- function(x) {
@@ -339,10 +343,21 @@ cpp_return_statement <- function(returns) {
 
 }
 
+lantern_function_name <- function(method) {
+
+  types <- method$arguments %>%
+    purrr::map_chr(~.x$dynamic_type) %>%
+    tolower() %>%
+    stringr::str_replace_all("[^a-z]", "") %>%
+    glue::glue_collapse(sep = "_")
+
+  glue::glue("{tolower(method$name)}_{types}")
+}
+
+
 cpp_method_body <- function(method) {
 
   arguments <- method$arguments %>%
-    purrr::discard(~.x$name == "self") %>%
     purrr::map_chr(cpp_argument_transform)
 
   if (length(arguments) == 0) {
@@ -351,7 +366,7 @@ cpp_method_body <- function(method) {
     arguments <- glue::glue_collapse(arguments, sep = ", ")
   }
 
-  method_call <- glue::glue("self->{method$name}({arguments});")
+  method_call <- glue::glue("lantern_Tensor_{lantern_function_name(method)}({arguments});")
 
   if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
     method_call <- glue::glue("auto r_out = {method_call}")
@@ -386,7 +401,7 @@ cpp_namespace_body <- function(method) {
     arguments <- glue::glue_collapse(arguments, sep = ", ")
   }
 
-  method_call <- glue::glue("torch::{method$name}({arguments});")
+  method_call <- glue::glue("lantern_{lantern_function_name(method)}({arguments});")
 
   if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
     method_call <- glue::glue("auto r_out = {method_call}")
@@ -410,7 +425,10 @@ cpp_namespace_body <- function(method) {
 }
 
 SKIP_R_BINDIND <- c(
-  "set_quantizer_" #https://github.com/pytorch/pytorch/blob/5dfcfeebb89304c1e7978cad7ada1227f19303f6/tools/autograd/gen_python_functions.py#L36
+  "set_quantizer_", #https://github.com/pytorch/pytorch/blob/5dfcfeebb89304c1e7978cad7ada1227f19303f6/tools/autograd/gen_python_functions.py#L36
+  "normal",
+  "polygamma",
+  "_nnpack_available"
 )
 
 cpp <- function(path) {
@@ -430,26 +448,8 @@ cpp <- function(path) {
   writeLines(
     c(
       '// This file is auto generated. Dont modify it by hand.',
-      '#include "torch_types.h"',
       '#include "utils.hpp"',
-      '
-      // Workaround for https://discuss.pytorch.org/t/using-torch-normal-with-the-c-frontend/68971?u=dfalbel
-      namespace torch {
-
-      torch::Tensor normal (const torch::Tensor &mean, double std = 1, torch::Generator *generator = nullptr) {
-        return at::normal(mean, std, generator);
-      }
-
-      torch::Tensor normal (double mean, const torch::Tensor &std, torch::Generator *generator = nullptr) {
-        return at::normal(mean, std, generator);
-      }
-
-      torch::Tensor normal (const torch::Tensor &mean, const torch::Tensor &std, torch::Generator *generator = nullptr) {
-        return at::normal(mean, std, generator);
-      }
-
-      } // namespace torch
-      ',
+      '',
       methods_code,
       namespace_code
     ),
