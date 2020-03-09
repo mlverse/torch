@@ -61,7 +61,8 @@ add_library(lantern SHARED
     src/Generator.cpp
     src/QScheme.cpp
     src/TensorList.cpp
-
+    src/Scalar.cpp
+    src/Dimname.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
@@ -70,7 +71,7 @@ target_include_directories(lantern PUBLIC
 )
 
 target_link_libraries(lantern ${TORCH_LIBRARIES})
-set_property(TARGET lantern PROPERTY CXX_STANDARD 14)
+set_property(TARGET lantern PROPERTY CXX_STANDARD 17)
 
 ############################################################
 # Tests
