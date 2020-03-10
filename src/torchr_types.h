@@ -19,3 +19,12 @@ public:
 #include <string>
 #include "lantern/lantern.h"
 #include <Rcpp.h>
+
+class torchTensor : public XPtrTorch {
+public:
+  using XPtrTorch::XPtrTorch;
+  ~torchTensor () {
+    Rcpp::Rcout << "deleting" << std::endl;
+    lantern_Tensor_delete(get());
+  }
+};
