@@ -12,6 +12,10 @@ public:
     _object = object;
   }
 
+  LanternObject()
+  {
+  }
+
   T &get()
   {
     return _object;
