@@ -1,4 +1,4 @@
-branch <- "master"
+branch <- "deleters"
 
 install_config <- list(
   "1.4.0" = list(
