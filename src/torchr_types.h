@@ -91,3 +91,39 @@ public:
     lantern_bool_delete(get());
   }
 };
+
+class XPtrTorchTensorOptions : public XPtrTorch {
+public:
+  using XPtrTorch::XPtrTorch;
+  ~XPtrTorchTensorOptions () {
+    Rcpp::Rcout << "deleting bool" << std::endl;
+    lantern_TensorOptions_delete(get());
+  }
+};
+
+class XPtrTorchDevice : public XPtrTorch {
+public:
+  using XPtrTorch::XPtrTorch;
+  ~XPtrTorchDevice () {
+    Rcpp::Rcout << "deleting bool" << std::endl;
+    lantern_Device_delete(get());
+  }
+};
+
+class XPtrTorchLayout : public XPtrTorch {
+public:
+  using XPtrTorch::XPtrTorch;
+  ~XPtrTorchLayout () {
+    Rcpp::Rcout << "deleting bool" << std::endl;
+    lantern_Layout_delete(get());
+  }
+};
+
+class XPtrTorchDtype : public XPtrTorch {
+public:
+  using XPtrTorch::XPtrTorch;
+  ~XPtrTorchDtype () {
+    Rcpp::Rcout << "deleting bool" << std::endl;
+    lantern_Dtype_delete(get());
+  }
+};
