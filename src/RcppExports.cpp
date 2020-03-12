@@ -12122,7 +12122,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_rand_size_IntArrayRef
-Rcpp::XPtr<torchTensor> cpp_torch_namespace_rand_size_IntArrayRef(std::vector<int64_t> size, Rcpp::XPtr<XPtrTorch> options);
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_rand_size_IntArrayRef(std::vector<int64_t> size, Rcpp::XPtr<XPtrTorch> options);
 RcppExport SEXP _torchr_cpp_torch_namespace_rand_size_IntArrayRef(SEXP sizeSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

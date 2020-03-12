@@ -5458,9 +5458,9 @@ return make_xptr<XPtrTorch>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<torchTensor> cpp_torch_namespace_rand_size_IntArrayRef (std::vector<int64_t> size, Rcpp::XPtr<XPtrTorch> options) {
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_rand_size_IntArrayRef (std::vector<int64_t> size, Rcpp::XPtr<XPtrTorch> options) {
   auto r_out = lantern_rand_intarrayref_tensoroptions(lantern_vector_int64_t(&size[0], size.size()), options->get());
-return make_xptr<torchTensor>(r_out, "Tensor");
+return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
