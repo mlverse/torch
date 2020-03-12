@@ -24,7 +24,7 @@ class XPtrTorchTensor : public XPtrTorch {
 public:
   using XPtrTorch::XPtrTorch;
   ~XPtrTorchTensor () {
-    Rcpp::Rcout << "deleting" << std::endl;
+    Rcpp::Rcout << "deleting Tensor" << std::endl;
     lantern_Tensor_delete(get());
   }
 };
@@ -33,7 +33,7 @@ class XPtrTorchScalarType: public XPtrTorch {
 public:
   using XPtrTorch::XPtrTorch;
   ~XPtrTorchScalarType () {
-    Rcpp::Rcout << "deleting" << std::endl;
+    Rcpp::Rcout << "deleting ScalarType" << std::endl;
     lantern_ScalarType_delete(get());
   }
 };
@@ -42,7 +42,7 @@ class XPtrTorchScalar: public XPtrTorch {
 public:
   using XPtrTorch::XPtrTorch;
   ~XPtrTorchScalar () {
-    Rcpp::Rcout << "deleting" << std::endl;
+    Rcpp::Rcout << "deleting Scalar" << std::endl;
     lantern_Scalar_delete(get());
   }
 };
@@ -51,7 +51,7 @@ class XPtrTorchQScheme: public XPtrTorch {
 public:
   using XPtrTorch::XPtrTorch;
   ~XPtrTorchQScheme () {
-    Rcpp::Rcout << "deleting" << std::endl;
+    Rcpp::Rcout << "deleting QScheme" << std::endl;
     lantern_QScheme_delete(get());
   }
 };
@@ -60,7 +60,7 @@ class XPtrTorchdouble: public XPtrTorch {
 public:
   using XPtrTorch::XPtrTorch;
   ~XPtrTorchdouble () {
-    Rcpp::Rcout << "deleting" << std::endl;
+    Rcpp::Rcout << "deleting double" << std::endl;
     lantern_double_delete(get());
   }
 };
@@ -69,7 +69,7 @@ class XPtrTorchTensorList: public XPtrTorch {
 public:
   using XPtrTorch::XPtrTorch;
   ~XPtrTorchTensorList () {
-    Rcpp::Rcout << "deleting" << std::endl;
+    Rcpp::Rcout << "deleting TensorList" << std::endl;
     lantern_TensorList_delete(get());
   }
 };
@@ -78,7 +78,7 @@ class XPtrTorchint64_t: public XPtrTorch {
 public:
   using XPtrTorch::XPtrTorch;
   ~XPtrTorchint64_t () {
-    Rcpp::Rcout << "deleting" << std::endl;
+    Rcpp::Rcout << "deleting int64_t" << std::endl;
     lantern_int64_t_delete(get());
   }
 };
@@ -87,7 +87,7 @@ class XPtrTorchbool : public XPtrTorch {
 public:
   using XPtrTorch::XPtrTorch;
   ~XPtrTorchbool () {
-    Rcpp::Rcout << "deleting" << std::endl;
+    Rcpp::Rcout << "deleting bool" << std::endl;
     lantern_bool_delete(get());
   }
 };
