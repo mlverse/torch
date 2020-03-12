@@ -53,3 +53,23 @@ void lantern_ScalarType_delete(void *x)
 {
   lantern_delete<torch::ScalarType>(x);
 }
+
+void lantern_TensorOptions_delete(void *x)
+{
+  lantern_delete<torch::TensorOptions>(x);
+}
+
+void lantern_Dtype_delete(void *x)
+{
+  lantern_delete<torch::Dtype>(x);
+}
+
+void lantern_Device_delete(void *x)
+{
+  lantern_delete<torch::Device>(x);
+}
+
+void lantern_Layout_delete(void* x)
+{
+  lantern_delete<torch::Layout>(x);
+}

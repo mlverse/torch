@@ -108,6 +108,10 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lantern_QScheme_delete)(void *);
   LANTERN_API void(LANTERN_PTR lantern_Scalar_delete)(void *);
   LANTERN_API void(LANTERN_PTR lantern_ScalarType_delete)(void *);
+  LANTERN_API void(LANTERN_PTR lantern_TensorOptions_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_Dtype_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_Device_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_Layout_delete)(void *x);
 
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
@@ -1967,6 +1971,11 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_QScheme_delete);
   LOAD_SYMBOL(lantern_Scalar_delete);
   LOAD_SYMBOL(lantern_ScalarType_delete);
+  LOAD_SYMBOL(lantern_Dtype_delete);
+  LOAD_SYMBOL(lantern_TensorOptions_delete);
+  LOAD_SYMBOL(lantern_Dtype_delete);
+  LOAD_SYMBOL(lantern_Device_delete);
+  LOAD_SYMBOL(lantern_Layout_delete);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
