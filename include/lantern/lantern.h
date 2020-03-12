@@ -1973,7 +1973,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_ScalarType_delete);
   LOAD_SYMBOL(lantern_Dtype_delete);
   LOAD_SYMBOL(lantern_TensorOptions_delete);
-  LOAD_SYMBOL(lantern_Dtype_delete);
   LOAD_SYMBOL(lantern_Device_delete);
   LOAD_SYMBOL(lantern_Layout_delete);
 
