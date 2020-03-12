@@ -22016,7 +22016,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_tensor_list
-Rcpp::XPtr<XPtrTorch> cpp_torch_tensor_list(const Rcpp::List& x);
+Rcpp::XPtr<XPtrTorchTensorList> cpp_torch_tensor_list(const Rcpp::List& x);
 RcppExport SEXP _torchr_cpp_torch_tensor_list(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -22027,12 +22027,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_tensor_list_to_r_list
-Rcpp::List cpp_tensor_list_to_r_list(Rcpp::XPtr<XPtrTorch> x);
+Rcpp::List cpp_tensor_list_to_r_list(Rcpp::XPtr<XPtrTorchTensorList> x);
 RcppExport SEXP _torchr_cpp_tensor_list_to_r_list(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorList> >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_list_to_r_list(x));
     return rcpp_result_gen;
 END_RCPP
