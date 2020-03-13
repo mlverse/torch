@@ -7,29 +7,29 @@
 using namespace Rcpp;
 
 // cpp_device_type_to_string
-std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorch> device);
+std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torchr_cpp_device_type_to_string(SEXP deviceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type device(deviceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDevice> >::type device(deviceSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_device_type_to_string(device));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_device_index_to_int
-std::int64_t cpp_device_index_to_int(Rcpp::XPtr<XPtrTorch> device);
+std::int64_t cpp_device_index_to_int(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torchr_cpp_device_index_to_int(SEXP deviceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type device(deviceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDevice> >::type device(deviceSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_device_index_to_int(device));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_device
-Rcpp::XPtr<XPtrTorch> cpp_torch_device(std::string type, Rcpp::Nullable<std::int64_t> index);
+Rcpp::XPtr<XPtrTorchDevice> cpp_torch_device(std::string type, Rcpp::Nullable<std::int64_t> index);
 RcppExport SEXP _torchr_cpp_torch_device(SEXP typeSEXP, SEXP indexSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
