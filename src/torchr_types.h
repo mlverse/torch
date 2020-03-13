@@ -1,6 +1,7 @@
 #pragma once
 #define LANTERN_HEADERS_ONLY
 #include <string>
+#include <memory>
 #include "lantern/lantern.h"
 #include <Rcpp.h>
 
