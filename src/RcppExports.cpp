@@ -21991,14 +21991,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_tensor
-Rcpp::XPtr<XPtrTorch> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<XPtrTorch> options, bool requires_grad);
+Rcpp::XPtr<XPtrTorch> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<XPtrTorchTensorOptions> options, bool requires_grad);
 RcppExport SEXP _torchr_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP, SEXP requires_gradSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
     Rcpp::traits::input_parameter< std::vector<std::int64_t> >::type dim(dimSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type options(optionsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorOptions> >::type options(optionsSEXP);
     Rcpp::traits::input_parameter< bool >::type requires_grad(requires_gradSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor(x, dim, options, requires_grad));
     return rcpp_result_gen;
@@ -22050,6 +22050,16 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::Nullable<bool> >::type pinned_memory(pinned_memorySEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor_options(dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory));
     return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_tensor_options_print
+void cpp_torch_tensor_options_print(Rcpp::XPtr<XPtrTorchTensorOptions> x);
+RcppExport SEXP _torchr_cpp_torch_tensor_options_print(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorOptions> >::type x(xSEXP);
+    cpp_torch_tensor_options_print(x);
+    return R_NilValue;
 END_RCPP
 }
 // cpp_nullptr
@@ -23724,6 +23734,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_tensor_list", (DL_FUNC) &_torchr_cpp_torch_tensor_list, 1},
     {"_torchr_cpp_tensor_list_to_r_list", (DL_FUNC) &_torchr_cpp_tensor_list_to_r_list, 1},
     {"_torchr_cpp_torch_tensor_options", (DL_FUNC) &_torchr_cpp_torch_tensor_options, 5},
+    {"_torchr_cpp_torch_tensor_options_print", (DL_FUNC) &_torchr_cpp_torch_tensor_options_print, 1},
     {"_torchr_cpp_nullptr", (DL_FUNC) &_torchr_cpp_nullptr, 0},
     {"_torchr_cpp_nullopt", (DL_FUNC) &_torchr_cpp_nullopt, 0},
     {NULL, NULL, 0}

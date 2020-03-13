@@ -6601,6 +6601,10 @@ cpp_torch_tensor_options <- function(dtype_ptr, layout_ptr, device_ptr, requires
     .Call('_torchr_cpp_torch_tensor_options', PACKAGE = 'torchr', dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory)
 }
 
+cpp_torch_tensor_options_print <- function(x) {
+    invisible(.Call('_torchr_cpp_torch_tensor_options_print', PACKAGE = 'torchr', x))
+}
+
 cpp_nullptr <- function() {
     .Call('_torchr_cpp_nullptr', PACKAGE = 'torchr')
 }
