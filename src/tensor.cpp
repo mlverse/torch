@@ -48,7 +48,7 @@ XPtrTorch tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std::stri
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorch> cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
-                                            Rcpp::XPtr<XPtrTorch> options,
+                                            Rcpp::XPtr<XPtrTorchTensorOptions> options,
                                             bool requires_grad) {
 
   XPtrTorch tensor(nullptr);
