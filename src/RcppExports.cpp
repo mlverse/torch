@@ -21919,18 +21919,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_qscheme_to_string
-std::string cpp_qscheme_to_string(Rcpp::XPtr<XPtrTorch> x);
+std::string cpp_qscheme_to_string(Rcpp::XPtr<XPtrTorchQScheme> x);
 RcppExport SEXP _torchr_cpp_qscheme_to_string(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchQScheme> >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_qscheme_to_string(x));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_per_channel_affine
-Rcpp::XPtr<XPtrTorch> cpp_torch_per_channel_affine();
+Rcpp::XPtr<XPtrTorchQScheme> cpp_torch_per_channel_affine();
 RcppExport SEXP _torchr_cpp_torch_per_channel_affine() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -21940,7 +21940,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_per_tensor_affine
-Rcpp::XPtr<XPtrTorch> cpp_torch_per_tensor_affine();
+Rcpp::XPtr<XPtrTorchQScheme> cpp_torch_per_tensor_affine();
 RcppExport SEXP _torchr_cpp_torch_per_tensor_affine() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -21950,7 +21950,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_per_channel_symmetric
-Rcpp::XPtr<XPtrTorch> cpp_torch_per_channel_symmetric();
+Rcpp::XPtr<XPtrTorchQScheme> cpp_torch_per_channel_symmetric();
 RcppExport SEXP _torchr_cpp_torch_per_channel_symmetric() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -21960,7 +21960,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_per_tensor_symmetric
-Rcpp::XPtr<XPtrTorch> cpp_torch_per_tensor_symmetric();
+Rcpp::XPtr<XPtrTorchQScheme> cpp_torch_per_tensor_symmetric();
 RcppExport SEXP _torchr_cpp_torch_per_tensor_symmetric() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -21970,7 +21970,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_scalar
-Rcpp::XPtr<XPtrTorch> cpp_torch_scalar(SEXP x);
+Rcpp::XPtr<XPtrTorchScalar> cpp_torch_scalar(SEXP x);
 RcppExport SEXP _torchr_cpp_torch_scalar(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

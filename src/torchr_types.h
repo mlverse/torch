@@ -41,6 +41,9 @@ public:
 
 class XPtrTorchScalar : public XPtrTorch {
 public:
+  XPtrTorchScalar () : XPtrTorch{NULL} {
+    // do nothing
+  }
   XPtrTorchScalar (void* x) : XPtrTorch{NULL} {
     this->set(std::shared_ptr<void>(x, lantern_Scalar_delete));
   }
