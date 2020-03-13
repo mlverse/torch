@@ -21981,17 +21981,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_tensor_print
-void cpp_torch_tensor_print(Rcpp::XPtr<XPtrTorch> x);
+void cpp_torch_tensor_print(Rcpp::XPtr<XPtrTorchTensor> x);
 RcppExport SEXP _torchr_cpp_torch_tensor_print(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
     cpp_torch_tensor_print(x);
     return R_NilValue;
 END_RCPP
 }
 // cpp_torch_tensor
-Rcpp::XPtr<XPtrTorch> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<XPtrTorchTensorOptions> options, bool requires_grad);
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<XPtrTorchTensorOptions> options, bool requires_grad);
 RcppExport SEXP _torchr_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP, SEXP requires_gradSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -22005,12 +22005,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_as_array
-Rcpp::List cpp_as_array(Rcpp::XPtr<XPtrTorch> x);
+Rcpp::List cpp_as_array(Rcpp::XPtr<XPtrTorchTensor> x);
 RcppExport SEXP _torchr_cpp_as_array(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_as_array(x));
     return rcpp_result_gen;
 END_RCPP
