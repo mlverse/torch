@@ -124,7 +124,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "TensorOptions") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchTensorOptions>"
   }
 
   if (argument$dynamic_type == "Generator *") {
