@@ -63,18 +63,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_dtype_to_string
-std::string cpp_dtype_to_string(Rcpp::XPtr<XPtrTorch> dtype);
+std::string cpp_dtype_to_string(Rcpp::XPtr<XPtrTorchDtype> dtype);
 RcppExport SEXP _torchr_cpp_dtype_to_string(SEXP dtypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type dtype(dtypeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDtype> >::type dtype(dtypeSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_dtype_to_string(dtype));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_float32
-Rcpp::XPtr<XPtrTorch> cpp_torch_float32();
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_float32();
 RcppExport SEXP _torchr_cpp_torch_float32() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -84,7 +84,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_float64
-Rcpp::XPtr<XPtrTorch> cpp_torch_float64();
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_float64();
 RcppExport SEXP _torchr_cpp_torch_float64() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -94,7 +94,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_float16
-Rcpp::XPtr<XPtrTorch> cpp_torch_float16();
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_float16();
 RcppExport SEXP _torchr_cpp_torch_float16() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -104,7 +104,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_uint8
-Rcpp::XPtr<XPtrTorch> cpp_torch_uint8();
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_uint8();
 RcppExport SEXP _torchr_cpp_torch_uint8() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -114,7 +114,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_int8
-Rcpp::XPtr<XPtrTorch> cpp_torch_int8();
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_int8();
 RcppExport SEXP _torchr_cpp_torch_int8() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -124,7 +124,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_int16
-Rcpp::XPtr<XPtrTorch> cpp_torch_int16();
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_int16();
 RcppExport SEXP _torchr_cpp_torch_int16() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -134,7 +134,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_int32
-Rcpp::XPtr<XPtrTorch> cpp_torch_int32();
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_int32();
 RcppExport SEXP _torchr_cpp_torch_int32() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -144,7 +144,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_int64
-Rcpp::XPtr<XPtrTorch> cpp_torch_int64();
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_int64();
 RcppExport SEXP _torchr_cpp_torch_int64() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -154,7 +154,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_bool
-Rcpp::XPtr<XPtrTorch> cpp_torch_bool();
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_bool();
 RcppExport SEXP _torchr_cpp_torch_bool() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -22038,12 +22038,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_tensor_options
-Rcpp::XPtr<XPtrTorchTensorOptions> cpp_torch_tensor_options(Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> dtype_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> layout_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> device_ptr, Rcpp::Nullable<bool> requires_grad, Rcpp::Nullable<bool> pinned_memory);
+Rcpp::XPtr<XPtrTorchTensorOptions> cpp_torch_tensor_options(Rcpp::Nullable<Rcpp::XPtr<XPtrTorchDtype>> dtype_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> layout_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> device_ptr, Rcpp::Nullable<bool> requires_grad, Rcpp::Nullable<bool> pinned_memory);
 RcppExport SEXP _torchr_cpp_torch_tensor_options(SEXP dtype_ptrSEXP, SEXP layout_ptrSEXP, SEXP device_ptrSEXP, SEXP requires_gradSEXP, SEXP pinned_memorySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> >::type dtype_ptr(dtype_ptrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::XPtr<XPtrTorchDtype>> >::type dtype_ptr(dtype_ptrSEXP);
     Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> >::type layout_ptr(layout_ptrSEXP);
     Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> >::type device_ptr(device_ptrSEXP);
     Rcpp::traits::input_parameter< Rcpp::Nullable<bool> >::type requires_grad(requires_gradSEXP);

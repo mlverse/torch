@@ -3,7 +3,7 @@
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchTensorOptions> cpp_torch_tensor_options (
-    Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> dtype_ptr,
+    Rcpp::Nullable<Rcpp::XPtr<XPtrTorchDtype>> dtype_ptr,
     Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> layout_ptr,
     Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> device_ptr,
     Rcpp::Nullable<bool> requires_grad,
