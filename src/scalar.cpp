@@ -2,9 +2,9 @@
 #include "utils.hpp"
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_scalar (SEXP x) {
+Rcpp::XPtr<XPtrTorchScalar> cpp_torch_scalar (SEXP x) {
 
-  void* out;
+  XPtrTorchScalar out;
   std::string type;
   
   int i;
@@ -33,5 +33,5 @@ Rcpp::XPtr<XPtrTorch> cpp_torch_scalar (SEXP x) {
     Rcpp::stop("not handled");
   }
 
-  return make_xptr<XPtrTorch>(out);
+  return make_xptr<XPtrTorchScalar>(out);
 }

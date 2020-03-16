@@ -36,7 +36,7 @@ cpp_type <- function(decl) {
     returns <- decl$returns[[1]]
 
     if (returns$dynamic_type == "Tensor")
-      return("Rcpp::XPtr<XPtrTorch>")
+      return("Rcpp::XPtr<XPtrTorchTensor>")
 
     if (returns$dynamic_type == "void")
       return("void")
@@ -48,23 +48,22 @@ cpp_type <- function(decl) {
       return("int64_t")
 
     if (returns$dynamic_type == "TensorList")
-      return("Rcpp::XPtr<XPtrTorch>")
+      return("Rcpp::XPtr<XPtrTorchTensorList>")
 
     if (returns$dynamic_type == "double")
       return("double")
 
     if (returns$dynamic_type == "QScheme")
-      return("Rcpp::XPtr<XPtrTorch>")
+      return("Rcpp::XPtr<XPtrTorchQScheme>")
 
     if (returns$dynamic_type == "Scalar")
-      return("Rcpp::XPtr<XPtrTorch>")
+      return("Rcpp::XPtr<XPtrTorchScalar>")
 
     if (returns$dynamic_type == "ScalarType")
-      return("Rcpp::XPtr<XPtrTorch>")
+      return("Rcpp::XPtr<XPtrTorchScalarType>")
 
   } else {
     return("Rcpp::List")
-    #return("Rcpp::XPtr<XPtrTorch>")
   }
 
 }
@@ -93,7 +92,7 @@ cpp_function_name <- function(method, type) {
 cpp_parameter_type <- function(argument) {
 
   if (argument$dynamic_type == "Tensor") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchTensor>"
   }
 
   if (argument$dynamic_type == "bool") {
@@ -105,7 +104,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "TensorList") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchTensorList>"
   }
 
   if (argument$dynamic_type == "IntArrayRef") {
@@ -125,7 +124,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "TensorOptions") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchTensorOptions>"
   }
 
   if (argument$dynamic_type == "Generator *") {
@@ -137,7 +136,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Scalar") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchScalar>"
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
@@ -149,7 +148,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchMemoryFormat>"
   }
 
   if (argument$dynamic_type == "std::string") {
@@ -157,11 +156,11 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Dimname") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchDimname>"
   }
 
   if (argument$dynamic_type == "Device") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchDevice>"
   }
 
   if (argument$dynamic_type == "Storage") {
@@ -301,7 +300,7 @@ cpp_return_statement <- function(returns) {
     returns <- returns[[1]]
 
     if (returns$dynamic_type == "Tensor")
-      return(xptr_return_call("XPtrTorch", "Tensor"))
+      return(xptr_return_call("XPtrTorchTensor", "Tensor"))
 
     if (returns$dynamic_type == "bool")
       return(reinterpret_cast_call("bool"))
@@ -310,23 +309,21 @@ cpp_return_statement <- function(returns) {
       return(reinterpret_cast_call("int64_t"))
 
     if (returns$dynamic_type == "TensorList")
-      return(xptr_return_call("XPtrTorch", "TensorList"))
+      return(xptr_return_call("XPtrTorchTensorList", "TensorList"))
 
     if (returns$dynamic_type == "double")
       return(reinterpret_cast_call("double"))
 
     if (returns$dynamic_type == "QScheme")
-      return(xptr_return_call("XPtrTorch", "QScheme"))
+      return(xptr_return_call("XPtrTorchQScheme", "QScheme"))
 
     if (returns$dynamic_type == "Scalar")
-      return(xptr_return_call("XPtrTorch", "Scalar"))
+      return(xptr_return_call("XPtrTorchScalar", "Scalar"))
 
     if (returns$dynamic_type == "ScalarType")
-      return(xptr_return_call("XPtrTorch", "ScalarType"))
+      return(xptr_return_call("XPtrTorchScalarType", "ScalarType"))
 
   } else {
-
-    # return(xptr_return_call("XPtrTorch", "tuple"))
 
     calls <- purrr::map_chr(
       seq_along(returns),

@@ -5,13 +5,13 @@
 // https://github.com/pytorch/pytorch/blob/f531815526c69f432e46fadece44f5d3a9b70e30/torch/csrc/Generator.cpp
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_torch_generator () {
-  XPtrTorch out = lantern_Generator();
-  return make_xptr<XPtrTorch>(out);
+Rcpp::XPtr<XPtrTorchGenerator> cpp_torch_generator () {
+  XPtrTorchGenerator out = lantern_Generator();
+  return make_xptr<XPtrTorchGenerator>(out);
 }
 
 // [[Rcpp::export]]
-Rcpp::NumericVector cpp_generator_current_seed (Rcpp::XPtr<XPtrTorch> generator) {
+Rcpp::NumericVector cpp_generator_current_seed (Rcpp::XPtr<XPtrTorchGenerator> generator) {
   Rcpp::NumericVector out(1);
   uint64_t seed = lantern_Generator_current_seed(generator->get());
   std::memcpy(&(out[0]), &(seed), sizeof(double));
@@ -20,6 +20,6 @@ Rcpp::NumericVector cpp_generator_current_seed (Rcpp::XPtr<XPtrTorch> generator)
 }
 
 // [[Rcpp::export]]
-void cpp_generator_set_current_seed (Rcpp::XPtr<XPtrTorch> generator, std::uint64_t seed) {
+void cpp_generator_set_current_seed (Rcpp::XPtr<XPtrTorchGenerator> generator, std::uint64_t seed) {
   lantern_Generator_set_current_seed(generator->get(), seed);
 }

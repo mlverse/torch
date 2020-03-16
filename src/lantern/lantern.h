@@ -100,6 +100,24 @@ extern "C"
   LANTERN_API int64_t(LANTERN_PTR lantern_DimnameList_size)(void *list);
   LANTERN_API void *(LANTERN_PTR lantern_DimnameList_at)(void *list, int i);
   LANTERN_API void *(LANTERN_PTR lantern_Scalar_nullopt)();
+  LANTERN_API void(LANTERN_PTR lantern_Tensor_delete)(void *);
+  LANTERN_API void(LANTERN_PTR lantern_bool_delete)(void *);
+  LANTERN_API void(LANTERN_PTR lantern_int64_t_delete)(void *);
+  LANTERN_API void(LANTERN_PTR lantern_TensorList_delete)(void *);
+  LANTERN_API void(LANTERN_PTR lantern_double_delete)(void *);
+  LANTERN_API void(LANTERN_PTR lantern_QScheme_delete)(void *);
+  LANTERN_API void(LANTERN_PTR lantern_Scalar_delete)(void *);
+  LANTERN_API void(LANTERN_PTR lantern_ScalarType_delete)(void *);
+  LANTERN_API void(LANTERN_PTR lantern_TensorOptions_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_Dtype_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_Device_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_Layout_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_TensorOptions_print)(void *self);
+  LANTERN_API void(LANTERN_PTR lantern_TensorOptions_address)(void *self);
+  LANTERN_API void(LANTERN_PTR lantern_Generator_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_Dimname_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_DimnameList_delete)(void *x);
+  LANTERN_API void (LANTERN_PTR lantern_MemoryFormat_delete)(void *x);
 
   /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1951,6 +1969,24 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_DimnameList_size);
   LOAD_SYMBOL(lantern_DimnameList_at);
   LOAD_SYMBOL(lantern_Scalar_nullopt);
+  LOAD_SYMBOL(lantern_Tensor_delete);
+  LOAD_SYMBOL(lantern_bool_delete);
+  LOAD_SYMBOL(lantern_int64_t_delete);
+  LOAD_SYMBOL(lantern_TensorList_delete);
+  LOAD_SYMBOL(lantern_double_delete);
+  LOAD_SYMBOL(lantern_QScheme_delete);
+  LOAD_SYMBOL(lantern_Scalar_delete);
+  LOAD_SYMBOL(lantern_ScalarType_delete);
+  LOAD_SYMBOL(lantern_Dtype_delete);
+  LOAD_SYMBOL(lantern_TensorOptions_delete);
+  LOAD_SYMBOL(lantern_Device_delete);
+  LOAD_SYMBOL(lantern_Layout_delete);
+  LOAD_SYMBOL(lantern_TensorOptions_print);
+  LOAD_SYMBOL(lantern_TensorOptions_address);
+  LOAD_SYMBOL(lantern_Generator_delete);
+  LOAD_SYMBOL(lantern_Dimname_delete);
+  LOAD_SYMBOL(lantern_DimnameList_delete);
+  LOAD_SYMBOL(lantern_MemoryFormat_delete);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)

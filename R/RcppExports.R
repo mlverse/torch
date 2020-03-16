@@ -21,6 +21,14 @@ cpp_torch_dimname_list <- function(x) {
     .Call('_torchr_cpp_torch_dimname_list', PACKAGE = 'torchr', x)
 }
 
+cpp_dimname_to_string <- function(x) {
+    .Call('_torchr_cpp_dimname_to_string', PACKAGE = 'torchr', x)
+}
+
+cpp_dimname_list_to_string <- function(x) {
+    .Call('_torchr_cpp_dimname_list_to_string', PACKAGE = 'torchr', x)
+}
+
 cpp_dtype_to_string <- function(dtype) {
     .Call('_torchr_cpp_dtype_to_string', PACKAGE = 'torchr', dtype)
 }
@@ -6599,6 +6607,10 @@ cpp_tensor_list_to_r_list <- function(x) {
 
 cpp_torch_tensor_options <- function(dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory) {
     .Call('_torchr_cpp_torch_tensor_options', PACKAGE = 'torchr', dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory)
+}
+
+cpp_torch_tensor_options_print <- function(x) {
+    invisible(.Call('_torchr_cpp_torch_tensor_options_print', PACKAGE = 'torchr', x))
 }
 
 cpp_nullptr <- function() {
