@@ -69,7 +69,12 @@ void lantern_Device_delete(void *x)
   lantern_delete<torch::Device>(x);
 }
 
-void lantern_Layout_delete(void* x)
+void lantern_Layout_delete(void *x)
 {
   lantern_delete<torch::Layout>(x);
+}
+
+void lantern_Generator_delete(void *x)
+{
+  lantern_delete<std::shared_ptr<torch::Generator>>(x);
 }
