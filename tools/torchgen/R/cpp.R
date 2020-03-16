@@ -148,7 +148,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchMemoryFormat>"
   }
 
   if (argument$dynamic_type == "std::string") {
@@ -156,11 +156,11 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Dimname") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchDimname>"
   }
 
   if (argument$dynamic_type == "Device") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "Rcpp::XPtr<XPtrTorchDevice>"
   }
 
   if (argument$dynamic_type == "Storage") {

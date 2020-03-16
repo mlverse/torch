@@ -132,3 +132,11 @@ public:
     this->set(std::shared_ptr<void>(x, lantern_DimnameList_delete));
   }
 };
+
+class XPtrTorchMemoryFormat : public XPtrTorch {
+public:
+  XPtrTorchMemoryFormat (void* x) : XPtrTorch{NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_MemoryFormat_delete));
+  }
+};
+
