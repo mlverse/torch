@@ -16,11 +16,6 @@ public:
   {
   }
 
-  ~LanternObject()
-  {
-    std::cout << "Deleting Object" << std::endl;
-  }
-
   T &get()
   {
     return _object;
