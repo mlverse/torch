@@ -88,3 +88,8 @@ void lantern_DimnameList_delete(void *x)
 {
   lantern_delete<LanternPtr<std::vector<torch::Dimname>>>(x);
 }
+
+void lantern_MemoryFormat_delete(void *x)
+{
+  lantern_delete<LanternObject<torch::MemoryFormat>>(x);
+}
