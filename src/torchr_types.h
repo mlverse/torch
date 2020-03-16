@@ -111,3 +111,10 @@ public:
     this->set(std::shared_ptr<void>(x, lantern_Dtype_delete));
   }
 };
+
+class XPtrTorchGenerator : public XPtrTorch {
+public:
+  XPtrTorchGenerator (void* x) : XPtrTorch{NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_Generator_delete));
+  }
+};
