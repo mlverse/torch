@@ -115,6 +115,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             type = "std::vector<torch::Dimname>";
         }
+        else if (type == "Generator *")
+        {
+            type = "std::shared_ptr<torch::Generator>";
+        }
 
         // add optional call if required
         std::string dtype = node[idx]["type"].as<std::string>();
@@ -127,6 +131,11 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
 
         arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
                      call + ")->get()";
+
+        if (type == "std::shared_ptr<torch::Generator>")
+        {
+            arguments += ".get()";
+        }
     }
 
     return arguments;

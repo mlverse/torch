@@ -63,6 +63,7 @@ add_library(lantern SHARED
     src/TensorList.cpp
     src/Scalar.cpp
     src/Dimname.cpp
+    src/Delete.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
