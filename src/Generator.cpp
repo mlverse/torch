@@ -10,7 +10,7 @@
 
 void *lantern_Generator()
 {
-  std::shared_ptr<torch::Generator> out = std::shared_ptr<torch::Generator>(new at::CPUGenerator());
+  std::shared_ptr<torch::Generator> out = std::make_shared<at::CPUGenerator>();
   return (void *)new LanternObject<std::shared_ptr<torch::Generator>>(out);
 }
 
