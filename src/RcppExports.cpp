@@ -41,7 +41,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_dimname
-Rcpp::XPtr<XPtrTorch> cpp_torch_dimname(const std::string& str);
+Rcpp::XPtr<XPtrTorchDimname> cpp_torch_dimname(const std::string& str);
 RcppExport SEXP _torchr_cpp_torch_dimname(SEXP strSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -52,13 +52,35 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_dimname_list
-Rcpp::XPtr<XPtrTorch> cpp_torch_dimname_list(const Rcpp::List& x);
+Rcpp::XPtr<XPtrTorchDimnameList> cpp_torch_dimname_list(const Rcpp::List& x);
 RcppExport SEXP _torchr_cpp_torch_dimname_list(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::List& >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_dimname_list(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_dimname_to_string
+std::string cpp_dimname_to_string(Rcpp::XPtr<XPtrTorchDimname> x);
+RcppExport SEXP _torchr_cpp_dimname_to_string(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDimname> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_dimname_to_string(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_dimname_list_to_string
+std::vector<std::string> cpp_dimname_list_to_string(Rcpp::XPtr<XPtrTorchDimnameList> x);
+RcppExport SEXP _torchr_cpp_dimname_list_to_string(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDimnameList> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_dimname_list_to_string(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -22089,6 +22111,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},
     {"_torchr_cpp_torch_dimname", (DL_FUNC) &_torchr_cpp_torch_dimname, 1},
     {"_torchr_cpp_torch_dimname_list", (DL_FUNC) &_torchr_cpp_torch_dimname_list, 1},
+    {"_torchr_cpp_dimname_to_string", (DL_FUNC) &_torchr_cpp_dimname_to_string, 1},
+    {"_torchr_cpp_dimname_list_to_string", (DL_FUNC) &_torchr_cpp_dimname_list_to_string, 1},
     {"_torchr_cpp_dtype_to_string", (DL_FUNC) &_torchr_cpp_dtype_to_string, 1},
     {"_torchr_cpp_torch_float32", (DL_FUNC) &_torchr_cpp_torch_float32, 0},
     {"_torchr_cpp_torch_float64", (DL_FUNC) &_torchr_cpp_torch_float64, 0},

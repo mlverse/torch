@@ -115,6 +115,8 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lantern_TensorOptions_print)(void *self);
   LANTERN_API void(LANTERN_PTR lantern_TensorOptions_address)(void *self);
   LANTERN_API void(LANTERN_PTR lantern_Generator_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_Dimname_delete)(void*x);
+  LANTERN_API void(LANTERN_PTR lantern_DimnameList_delete)(void*x);
 
   /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -1981,6 +1983,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_TensorOptions_print);
   LOAD_SYMBOL(lantern_TensorOptions_address);
   LOAD_SYMBOL(lantern_Generator_delete);
+  LOAD_SYMBOL(lantern_Dimname_delete);
+  LOAD_SYMBOL(lantern_DimnameList_delete);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)

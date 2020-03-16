@@ -21,6 +21,14 @@ cpp_torch_dimname_list <- function(x) {
     .Call('_torchr_cpp_torch_dimname_list', PACKAGE = 'torchr', x)
 }
 
+cpp_dimname_to_string <- function(x) {
+    .Call('_torchr_cpp_dimname_to_string', PACKAGE = 'torchr', x)
+}
+
+cpp_dimname_list_to_string <- function(x) {
+    .Call('_torchr_cpp_dimname_list_to_string', PACKAGE = 'torchr', x)
+}
+
 cpp_dtype_to_string <- function(dtype) {
     .Call('_torchr_cpp_dtype_to_string', PACKAGE = 'torchr', dtype)
 }

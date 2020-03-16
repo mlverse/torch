@@ -118,3 +118,17 @@ public:
     this->set(std::shared_ptr<void>(x, lantern_Generator_delete));
   }
 };
+
+class XPtrTorchDimname : public XPtrTorch {
+public:
+  XPtrTorchDimname (void* x) : XPtrTorch{NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_Dimname_delete));
+  }
+};
+
+class XPtrTorchDimnameList : public XPtrTorch {
+public:
+  XPtrTorchDimnameList (void* x) : XPtrTorch{NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_DimnameList_delete));
+  }
+};
