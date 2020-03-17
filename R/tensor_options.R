@@ -15,6 +15,7 @@ TensorOptions <- R6::R6Class(
     },
     print = function() {
       cat("torch_tensor_options")
+      # cpp_torch_tensor_options_print(self$ptr)
     }
   )
 )
