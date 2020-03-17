@@ -64,6 +64,7 @@ add_library(lantern SHARED
     src/Scalar.cpp
     src/Dimname.cpp
     src/Delete.cpp
+    src/Reduction.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
