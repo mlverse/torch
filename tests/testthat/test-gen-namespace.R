@@ -159,6 +159,62 @@ test_that("_cholesky_solve_helper", {
   expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
 })
 
+test_that("upsample_nearest1d_out", {
+  x <- torch_rand(c(2,2,2))
+  y <- torch_zeros(c(2,2,2))
+  expect_tensor(torch_upsample_nearest1d_out(y, x, output_size = c(2)))
+  expect_not_equal_to_tensor(y, torch_zeros(c(2,2,2)))
+})
+
+test_that("upsample_nearest1d", {
+  x <- torch_rand(c(2,2,2))
+  expect_tensor(torch_upsample_nearest1d(x, output_size = c(2)))
+})
+
+test_that("upsample_nearest1d_backward_out", {
+  x <- torch_rand(c(2,2,2))
+  y <- torch_zeros(c(2,2,2))
+  expect_tensor(torch_upsample_nearest1d_backward_out(y, x, c(2), c(2,2,2)))
+  expect_not_equal_to_tensor(y, torch_zeros(c(2,2,2)))
+})
+
+test_that("upsample_nearest1d_backward", {
+  x <- torch_rand(c(2,2,2))
+  expect_tensor(torch_upsample_nearest1d_backward(x, c(2), c(2,2,2)))
+})
+
+test_that("upsample_nearest2d_out", {
+  x <- torch_rand(c(2,2,2,2))
+  y <- torch_zeros(c(2,2,2,2))
+  expect_tensor(torch_upsample_nearest2d_out(y, x, output_size = c(2,2)))
+  expect_not_equal_to_tensor(y, torch_zeros(c(2,2,2,2)))
+})
+
+test_that("upsample_nearest2d", {
+  x <- torch_rand(c(2,2,2,2))
+  expect_tensor(torch_upsample_nearest2d(x, output_size = c(2,2)))
+})
+
+test_that("upsample_nearest2d_backward_out", {
+  x <- torch_rand(c(2,2,2,2))
+  y <- torch_zeros(c(2,2,2,2))
+  expect_tensor(torch_upsample_nearest2d_backward_out(y, x, c(2,2), c(2,2,2,2)))
+  expect_not_equal_to_tensor(y, torch_zeros(c(2,2,2,2)))
+})
+
+test_that("upsample_nearest2d_backward", {
+  x <- torch_rand(c(2,2,2,2))
+  expect_tensor(torch_upsample_nearest2d_backward(x, c(2,2), c(2,2,2,2)))
+})
+
+test_that("upsample_nearest3d_out", {
+  x <- torch_rand(c(2,2,2,2,2))
+  y <- torch_zeros(c(2,2,2,2,2))
+  torch_upsample_nearest3d_out(y, x, output_size = c(2,2,2))
+  expect_tensor(y)
+  expect_not_equal_to_tensor(y, torch_zeros(c(2,2,2,2,2)))
+})
+
 test_that("upsample_nearest3d", {
   x <- torch_rand(c(2,2,2,2,2))
   expect_tensor(torch_upsample_nearest3d(x, output_size = c(2,2,2)))
@@ -166,7 +222,7 @@ test_that("upsample_nearest3d", {
 
 test_that("upsample_nearest3d_backward", {
   x <- torch_rand(c(2,2,2,2,2))
-  expect_tensor(torch_upsample_nearest3d_backward_out(x, x, c(2,2,2), c(2,2,2,2,2)))
+  expect_tensor(torch_upsample_nearest3d_backward(x, c(2,2,2), c(2,2,2,2,2)))
 })
 
 test_that("upsample_nearest3d_backward_out", {

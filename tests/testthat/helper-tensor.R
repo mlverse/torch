@@ -4,6 +4,10 @@ expect_equal_to_tensor <- function(object, expected) {
   expect_equal(as_array(object), as_array(expected))
 }
 
+expect_not_equal_to_tensor <- function(object, expected) {
+  expect_false(isTRUE(all.equal(as_array(object), as_array(expected))))
+}
+
 expect_no_error <- function(object, ...) {
   expect_error(object, NA, ...)
 }
