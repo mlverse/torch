@@ -21991,6 +21991,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_reduction_mean
+std::int64_t cpp_torch_reduction_mean();
+RcppExport SEXP _torchr_cpp_torch_reduction_mean() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_reduction_mean());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_reduction_none
+std::int64_t cpp_torch_reduction_none();
+RcppExport SEXP _torchr_cpp_torch_reduction_none() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_reduction_none());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_reduction_sum
+std::int64_t cpp_torch_reduction_sum();
+RcppExport SEXP _torchr_cpp_torch_reduction_sum() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_reduction_sum());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_scalar
 Rcpp::XPtr<XPtrTorchScalar> cpp_torch_scalar(SEXP x);
 RcppExport SEXP _torchr_cpp_torch_scalar(SEXP xSEXP) {
@@ -23751,6 +23781,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_per_tensor_affine", (DL_FUNC) &_torchr_cpp_torch_per_tensor_affine, 0},
     {"_torchr_cpp_torch_per_channel_symmetric", (DL_FUNC) &_torchr_cpp_torch_per_channel_symmetric, 0},
     {"_torchr_cpp_torch_per_tensor_symmetric", (DL_FUNC) &_torchr_cpp_torch_per_tensor_symmetric, 0},
+    {"_torchr_cpp_torch_reduction_mean", (DL_FUNC) &_torchr_cpp_torch_reduction_mean, 0},
+    {"_torchr_cpp_torch_reduction_none", (DL_FUNC) &_torchr_cpp_torch_reduction_none, 0},
+    {"_torchr_cpp_torch_reduction_sum", (DL_FUNC) &_torchr_cpp_torch_reduction_sum, 0},
     {"_torchr_cpp_torch_scalar", (DL_FUNC) &_torchr_cpp_torch_scalar, 1},
     {"_torchr_cpp_torch_tensor_print", (DL_FUNC) &_torchr_cpp_torch_tensor_print, 1},
     {"_torchr_cpp_torch_tensor", (DL_FUNC) &_torchr_cpp_torch_tensor, 4},
