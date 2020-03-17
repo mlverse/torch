@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 project(lantern)
 
@@ -7,17 +7,17 @@ project(lantern)
 ############################################################
 
 function(download_file url filename)
-    if(NOT EXISTS ${filename})
+    #if(NOT EXISTS ${filename})
         message("-- Downloading ${filename}")
-        file(DOWNLOAD ${url} ${filename}
+        file(DOWNLOAD  ${url} ${filename}
              TIMEOUT 300
              TLS_VERIFY ON
         )
-    endif()
+    #endif()
 endfunction()
 
 function(retrieve_lib filename)
-    download_file("https://download.pytorch.org/libtorch/cpu/${filename}" "./${filename}")
+    download_file("https://download.pytorch.org/libtorch/cpu/${filename}" "${CMAKE_CURRENT_BINARY_DIR}/${filename}")
 
     if(NOT EXISTS "libtorch")
         message("-- Extracting ${filename}")
