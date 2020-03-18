@@ -1,41 +1,145 @@
-torch_docs <- readr::read_file("inst/docs/_torch_docs.py")
+library(stringr)
+library(purrr)
 
-parse_add_docstr <- function(torch_docs) {
+# torch <- reticulate::import("torch")
+#
+# doc <- torch[["mean"]][["__doc__"]]
 
-  torch_docs %>%
-    stringi:::stri_match_all(
-      dotall= TRUE,
-      regex = "add_docstr\\((.*?)\\.format\\(([^\\)]*)\\)\\)"
-    ) %>%
-    purrr::pluck(1)
-
+get_doc <- function(nm) {
+  er <- try(doc <- torch[[nm]][["__doc__"]], silent = TRUE)
+  if (inherits(er, "try-error"))
+    return(NULL)
+  else
+    doc
 }
 
-parse_function_name <- function(x) {
-  s <- stringi::stri_split(x, regex = "\n")[[1]][1]
-  s <- stringi::stri_replace(s, fixed = ".", replacement = "_")
-  s <- stringi::stri_replace(s, fixed = ",", replacement = "")
-  s
+get_signatures <- function(doc) {
+  stringr::str_trim(doc) %>%
+    str_split(fixed(".. function::")) %>%
+    pluck(1) %>%
+    map_chr(str_trim) %>%
+    discard(~.x == "")
 }
 
-parse_description <- function(x) {
-  s <- stringi::stri_split(x, regex = "\n")[[1]]
-  first_empty <- min(which(s == ""))
-  first_Case <- min(which(stringi::stri_detect(s, regex = "^[A-Z]")))
+get_args <- function(doc) {
 
-  start <- min(c(first_empty, first_Case))
+  lines <- str_split(doc, "\n")[[1]]
+  i <- which(lines == "Args:" | lines == "Arguments:")
 
-  first_.. <- min(which(stringi::stri_detect(s, regex = "(\\.\\. [^f^m])|(^Args:$)|(^Arguments:$)")))
+  if (length(i) == 0)
+    return(list())
 
-  s <- s[start:(first_.. - 1)]
-  s <- stringi::stri_replace_all(s, fixed = ":attr:", replacement = "")
-  s
+  if (length(i) > 1)
+    stop("More than 1 argument sections...")
+
+  idx <- which(lines == "")
+  poss <- idx[idx > i]
+  if (length(poss) == 0)
+    end <- length(lines)
+  else
+    end <- min(poss) - 1
+
+  arg_lines <- lines[(i+1):(end)]
+  l <- str_which(arg_lines, "^    .+")
+  s <- sapply(seq_along(arg_lines), function(x) which.max(l[l<=x]))
+  split(arg_lines, s) %>%
+    map_chr(~do.call(function(...) str_c(..., collapse = "\n"), as.list(.x))) %>%
+    map_chr(str_trim)
 }
 
-x <- torch_docs %>%
-  parse_add_docstr()
+parse_args <- function(args) {
+  x <- str_split_fixed(args, ":", 2)
+  arg_names <- str_extract(x[,1], "^[^( ]*")
+  arg_types <- str_extract(x[,1], "\\([^)]*\\)")
+  arg_desc <- str_trim(x[,2])
+  transpose(
+    list(
+      name = arg_names,
+      type = arg_types,
+      desc = arg_desc
+    )
+  )
+}
 
-fnames <- purrr::map_chr(x[,2], parse_function_name)
-descs <- purrr::map(x[,2], parse_description)
+get_desc <- function(doc) {
+
+  lines <- str_split(doc, "\n")[[1]]
+
+  if (any(lines == "Args:")) {
+    end <- min(which(lines == "Args:" | lines == "Arguments:")) -1
+  } else if (any(lines == "Example::")) {
+    end <- min(which(lines == "Example::"))
+  }
+
+  str_trim(str_c(lines[1:end], collapse = "\n"))
+}
+
+create_roxygen_params <- function(params) {
+
+  if (is.null(params))
+    return("#'")
+
+  s <- sapply(params, function(x) {
+    glue::glue("#' @param {x$name} {x$type} {x$desc}")
+  })
+  str_c(s, collapse = "\n")
+}
+
+create_roxygen_desc <- function(desc) {
+  lines <- str_split(desc, "\n")[[1]]
+  str_c(str_c("#' ", lines), collapse = "\n")
+}
+
+create_roxygen_title <- function(name) {
+  str_c("#' ", str_to_title(name))
+}
+
+create_roxygen_rdname <- function(name) {
+  str_c("#' @name torch_", name)
+}
+
+create_roxygen <- function(name, param, desc) {
+  str_c(
+    create_roxygen_title(name),
+    "#'",
+    create_roxygen_desc(desc),
+    "#'",
+    create_roxygen_params(param),
+    "#'",
+    create_roxygen_rdname(name),
+    "#'",
+    "#' @export",
+    "NULL\n",
+    sep =  "\n"
+  )
+}
+
+docs <- function(path) {
+  funs <- declarations() %>%
+    keep(~"namespace" %in% .x$method_of) %>%
+    map_chr(~.x$name) %>%
+    unique() %>%
+    set_names()
+
+  docs <- map(funs, get_doc) %>% discard(is.null)
+  docs <- map(docs, get_signatures)
+
+  args <- map(docs, ~map(.x, . %>% get_args %>% parse_args))
+  desc <- map(docs, ~map(.x, get_desc))
+
+  d <- transpose(list(args = args, desc = desc))
+  d <- map(d, transpose)
+
+  out <- imap(d, function(x, name) {
+    map(x, ~create_roxygen(name, .x$args, .x$desc))
+  })
+  out <- map(out, ~str_c(.x, collapse = "\n\n"))
+  out <- out[!is.na(out)]
+  out <- reduce(out, function(x, y) str_c(x, y, sep = "\n\n"))
+
+  readr::write_file(out, str_c(path, "/R/gen-namespace-docs.R"))
+}
+
+
 
 
