@@ -49,7 +49,6 @@ Collate:
     'qscheme.R'
     'reduction.R'
     'scalar.R'
-    'scrape.R'
     'tensor_list.R'
     'tensor_options.R'
     'utils.R'
