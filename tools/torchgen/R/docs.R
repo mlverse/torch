@@ -1,9 +1,11 @@
 library(stringr)
 library(purrr)
 
-# torch <- reticulate::import("torch")
+#
 #
 # doc <- torch[["mean"]][["__doc__"]]
+
+torch <- reticulate::import("torch")
 
 get_doc <- function(nm) {
   er <- try(doc <- torch[[nm]][["__doc__"]], silent = TRUE)
@@ -76,6 +78,26 @@ get_desc <- function(doc) {
   str_trim(str_c(lines[1:end], collapse = "\n"))
 }
 
+get_examples <- function(doc) {
+
+  lines <- str_split(doc, "\n")[[1]]
+  i <- which(lines == "Example::")
+
+  if (length(i) == 0)
+    return(NULL)
+
+  if (length(i) > 1)
+    stop("cant have more than 1 exzmaples")
+
+  end <- length(lines)
+
+  example_lines <- lines[(i+1):end]
+  example_code <- example_lines[str_detect(example_lines, "^    >>>")]
+  example_code <- str_replace_all(example_code, "^    >>> ", "")
+  example_code <- str_replace_all(example_code, "torch\\.", "torch_")
+  str_c(example_code, collapse = "\n")
+}
+
 create_roxygen_params <- function(params) {
 
   if (is.null(params))
@@ -100,13 +122,30 @@ create_roxygen_rdname <- function(name) {
   str_c("#' @name torch_", name)
 }
 
-create_roxygen <- function(name, param, desc) {
+create_roxygen_example <- function(exam) {
+  if (is.null(exam))
+    return("#' ")
+
+  examples <- str_split(exam, "\n")[[1]]
+  examples <- str_c("#' ", examples)
+  glue::glue(
+    "#' @examples",
+    "#' \\dontrun{{",
+    str_c(examples, collapse = "\n"),
+    "#' }}",
+    .sep = "\n"
+  )
+}
+
+create_roxygen <- function(name, param, desc, exam) {
   str_c(
     create_roxygen_title(name),
     "#'",
     create_roxygen_desc(desc),
     "#'",
     create_roxygen_params(param),
+    "#'",
+    create_roxygen_example(exam),
     "#'",
     create_roxygen_rdname(name),
     "#'",
@@ -117,6 +156,7 @@ create_roxygen <- function(name, param, desc) {
 }
 
 docum <- function(path) {
+
   funs <- declarations() %>%
     keep(~"namespace" %in% .x$method_of) %>%
     map_chr(~.x$name) %>%
@@ -128,12 +168,13 @@ docum <- function(path) {
 
   args <- map(docs, ~map(.x, . %>% get_args %>% parse_args))
   desc <- map(docs, ~map(.x, get_desc))
+  exam <- map(docs, ~map(.x, get_examples))
 
-  d <- transpose(list(args = args, desc = desc))
+  d <- transpose(list(args = args, desc = desc, exam = exam))
   d <- map(d, transpose)
 
   out <- imap(d, function(x, name) {
-    map(x, ~create_roxygen(name, .x$args, .x$desc))
+    map(x, ~create_roxygen(name, .x$args, .x$desc, .x$exam))
   })
   out <- map(out, ~str_c(.x, collapse = "\n\n"))
   out <- out[!is.na(out)]
