@@ -40,7 +40,7 @@ get_args <- function(doc) {
     end <- min(poss) - 1
 
   arg_lines <- lines[(i+1):(end)]
-  l <- str_which(arg_lines, "^    .+")
+  l <- str_which(arg_lines, "^    [^ ]+")
   s <- sapply(seq_along(arg_lines), function(x) which.max(l[l<=x]))
   split(arg_lines, s) %>%
     map_chr(~do.call(function(...) str_c(..., collapse = "\n"), as.list(.x))) %>%
@@ -48,7 +48,7 @@ get_args <- function(doc) {
 }
 
 parse_args <- function(args) {
-  x <- str_split_fixed(args, ":", 2)
+  x <- str_split_fixed(args, ": ", 2)
   arg_names <- str_extract(x[,1], "^[^( ]*")
   arg_types <- str_extract(x[,1], "\\([^)]*\\)")
   arg_desc <- str_trim(x[,2])
@@ -65,10 +65,12 @@ get_desc <- function(doc) {
 
   lines <- str_split(doc, "\n")[[1]]
 
-  if (any(lines == "Args:")) {
+  if (any(lines == "Args:" | lines == "Arguments:")) {
     end <- min(which(lines == "Args:" | lines == "Arguments:")) -1
   } else if (any(lines == "Example::")) {
     end <- min(which(lines == "Example::"))
+  } else {
+    end <- length(lines)
   }
 
   str_trim(str_c(lines[1:end], collapse = "\n"))
@@ -114,7 +116,7 @@ create_roxygen <- function(name, param, desc) {
   )
 }
 
-docs <- function(path) {
+docum <- function(path) {
   funs <- declarations() %>%
     keep(~"namespace" %in% .x$method_of) %>%
     map_chr(~.x$name) %>%
