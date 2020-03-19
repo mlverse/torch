@@ -109,7 +109,43 @@ create_roxygen_params <- function(params) {
   str_c(s, collapse = "\n")
 }
 
+parse_math <- function(desc) {
+
+  lines <- str_split(desc, "\n")[[1]]
+  i <- which(lines == ".. math::")
+
+  if (length(i) == 0)
+    return(desc)
+
+  poss <- which(lines == "")
+
+  if(length(poss) > 0) {
+    poss <- poss[poss > i[1]]
+  }
+
+  if (length(poss) > 0)
+    end <- min(poss)
+  else
+    end <- length(lines) + 1
+
+  lines[i[1]] <- "\\deqn{"
+  lines[end] <- "}"
+
+  desc <- str_c(lines, collapse = "\n")
+
+  if (length(i) > 1)
+    parse_math(desc)
+  else
+    desc
+}
+
 create_roxygen_desc <- function(desc) {
+
+  desc <- str_replace_all(desc, ":attr:", "")
+  desc <- str_replace_all(desc, ":func:(`.*`)", "[\\1]")
+  desc <- str_replace_all(desc, "`torch\\.(.*)`", "`torch_\\1`")
+  desc <- parse_math(desc)
+
   lines <- str_split(desc, "\n")[[1]]
   str_c(str_c("#' ", lines), collapse = "\n")
 }
