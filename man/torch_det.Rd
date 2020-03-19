@@ -10,10 +10,10 @@
 Calculates determinant of a square matrix or batches of square matrices.
 }
 \note{
-\preformatted{Backward through :meth:`det` internally uses SVD results when `input` is
-not invertible. In this case, double backward through :meth:`det` will be
+\preformatted{Backward through `det` internally uses SVD results when `input` is
+not invertible. In this case, double backward through `det` will be
 unstable in when `input` doesn't have distinct singular values. See
-:meth:`~torch.svd` for details.
+`~torch.svd` for details.
 }
 }
 \section{Signatures}{

@@ -8,7 +8,7 @@
 
 \item{dim}{(int) the dimension to reduce. If \code{None}, the argmax of the flattened input is returned.}
 
-\item{keepdim}{(bool) whether the output tensor has :attr:\code{dim} retained or not. Ignored if \code{dim=None}.}
+\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not. Ignored if \code{dim=None}.}
 }
 \description{
 Returns the indices of the maximum value of all elements in the \code{input} tensor.
@@ -16,10 +16,10 @@ Returns the indices of the maximum value of all elements in the \code{input} ten
 Returns the indices of the maximum values of a tensor across a dimension.
 }
 \details{
-This is the second value returned by :meth:\code{torch_max}. See its
+This is the second value returned by \code{torch_max}. See its
 documentation for the exact semantics of this method.
 
-This is the second value returned by :meth:\code{torch_max}. See its
+This is the second value returned by \code{torch_max}. See its
 documentation for the exact semantics of this method.
 }
 \section{Signatures}{

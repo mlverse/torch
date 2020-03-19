@@ -9,8 +9,8 @@
 \item{tensor2}{(Tensor or Number) an input tensor or number}
 }
 \description{
-Returns the :class:\code{torch_dtype} that would result from performing an arithmetic
-operation on the provided input tensors. See type promotion :ref:\verb{documentation <type-promotion-doc>}
+Returns the \code{torch_dtype} that would result from performing an arithmetic
+operation on the provided input tensors. See type promotion documentation
 for more information on the type promotion logic.
 }
 \section{Signatures}{

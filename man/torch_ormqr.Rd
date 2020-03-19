@@ -4,9 +4,9 @@
 \alias{torch_ormqr}
 \title{Ormqr}
 \arguments{
-\item{input}{(Tensor) the \code{a} from :func:\code{torch.geqrf}.}
+\item{input}{(Tensor) the \code{a} from \code{\link{torch_geqrf}}.}
 
-\item{input2}{(Tensor) the \code{tau} from :func:\code{torch.geqrf}.}
+\item{input2}{(Tensor) the \code{tau} from \code{\link{torch_geqrf}}.}
 
 \item{input3}{(Tensor) the matrix to be multiplied.}
 }

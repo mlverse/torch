@@ -25,7 +25,7 @@ Applies a 2D transposed convolution operator over an input image
 composed of several input planes, sometimes also called "deconvolution".
 }
 \details{
-See :class:\code{~torch.nn.ConvTranspose2d} for details and output shape.
+See \code{~torch.nn.ConvTranspose2d} for details and output shape.
 
 .. include:: cudnn_deterministic.rst
 }

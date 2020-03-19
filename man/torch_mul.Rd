@@ -6,7 +6,7 @@
 \arguments{
 \item{{input}}{NA}
 
-\item{value}{(Number) the number to be multiplied to each element of :attr:\code{input}}
+\item{value}{(Number) the number to be multiplied to each element of \code{input}}
 
 \item{{out}}{NA}
 
@@ -35,7 +35,7 @@ Each element of the tensor \code{input} is multiplied by the corresponding
 element of the Tensor \code{other}. The resulting tensor is returned.
 
 The shapes of \code{input} and \code{other} must be
-:ref:\verb{broadcastable <broadcasting-semantics>}.
+broadcastable .
 
 \deqn{
     \text{out}_i = \text{input}_i \times \text{other}_i

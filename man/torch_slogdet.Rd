@@ -13,10 +13,10 @@ Calculates the sign and log absolute value of the determinant(s) of a square mat
 \preformatted{If ``input`` has zero determinant, this returns ``(0, -inf)``.
 }
 
-\preformatted{Backward through :meth:`slogdet` internally uses SVD results when `input`
-is not invertible. In this case, double backward through :meth:`slogdet`
+\preformatted{Backward through `slogdet` internally uses SVD results when `input`
+is not invertible. In this case, double backward through `slogdet`
 will be unstable in when `input` doesn't have distinct singular values.
-See :meth:`~torch.svd` for details.
+See `~torch.svd` for details.
 }
 }
 \section{Signatures}{

@@ -10,7 +10,7 @@
 
 \item{replacement}{(bool, optional) whether to draw with replacement or not}
 
-\item{generator}{(:class:\code{torch.Generator}, optional) a pseudorandom number generator for sampling}
+\item{generator}{(\code{torch.Generator}, optional) a pseudorandom number generator for sampling}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

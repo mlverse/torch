@@ -12,7 +12,7 @@
 
 \item{out}{(Tensor, optional) the destination tensor}
 
-\item{sparse_grad}{(bool,optional) If \code{True}, gradient w.r.t. :attr:\code{input} will be a sparse tensor.}
+\item{sparse_grad}{(bool,optional) If \code{True}, gradient w.r.t. \code{input} will be a sparse tensor.}
 }
 \description{
 Gathers values along an axis specified by \code{dim}.

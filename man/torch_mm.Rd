@@ -18,7 +18,7 @@ If \code{input} is a \eqn{(n \times m)} tensor, \code{mat2} is a
 \eqn{(m \times p)} tensor, \code{out} will be a \eqn{(n \times p)} tensor.
 }
 \note{
-This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
+This function does not broadcast .
 For broadcasting matrix products, see \code{\link{torch_matmul}}.
 }
 \section{Signatures}{

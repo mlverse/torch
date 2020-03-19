@@ -4,7 +4,7 @@
 \alias{torch_addr}
 \title{Addr}
 \arguments{
-\item{beta}{(Number, optional) multiplier for :attr:\code{input} (\eqn{\beta})}
+\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
 \item{input}{(Tensor) matrix to be added}
 
@@ -30,7 +30,7 @@ outer product between \code{vec1} and \code{vec2} and the added matrix
 }
 If \code{vec1} is a vector of size \code{n} and \code{vec2} is a vector
 of size \code{m}, then \code{input} must be
-:ref:\verb{broadcastable <broadcasting-semantics>} with a matrix of size
+broadcastable  with a matrix of size
 \eqn{(n \times m)} and \code{out} will be a matrix of size
 \eqn{(n \times m)}.
 

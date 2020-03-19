@@ -23,8 +23,8 @@ on a scalar or tensor \code{weight} and returns the resulting \code{out} tensor.
     \text{out}_i = \text{start}_i + \text{weight}_i \times (\text{end}_i - \text{start}_i)
 }
 The shapes of \code{start} and \code{end} must be
-:ref:\verb{broadcastable <broadcasting-semantics>}. If \code{weight} is a tensor, then
-the shapes of \code{weight}, \code{start}, and \code{end} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
+broadcastable . If \code{weight} is a tensor, then
+the shapes of \code{weight}, \code{start}, and \code{end} must be broadcastable .
 }
 \examples{
 \dontrun{

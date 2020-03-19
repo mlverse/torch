@@ -8,7 +8,7 @@
 
 \item{dim}{(int or tuple of ints) the dimension or dimensions to reduce.}
 
-\item{keepdim}{(bool) whether the output tensor has :attr:\code{dim} retained or not.}
+\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

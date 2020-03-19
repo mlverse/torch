@@ -23,7 +23,7 @@ Applies a 1D convolution over an input signal composed of several input
 planes.
 }
 \details{
-See :class:\code{~torch.nn.Conv1d} for details and output shape.
+See \code{~torch.nn.Conv1d} for details and output shape.
 
 .. include:: cudnn_deterministic.rst
 }

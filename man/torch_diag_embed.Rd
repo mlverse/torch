@@ -32,9 +32,9 @@ Note that for \code{offset} other than \eqn{0}, the order of \code{dim1}
 and \code{dim2} matters. Exchanging them is equivalent to changing the
 sign of \code{offset}.
 
-Applying :meth:\code{torch_diagonal} to the output of this function with
+Applying \code{torch_diagonal} to the output of this function with
 the same arguments yields a matrix identical to input. However,
-:meth:\code{torch_diagonal} has different default dimensions, so those
+\code{torch_diagonal} has different default dimensions, so those
 need to be explicitly specified.
 }
 \section{Signatures}{

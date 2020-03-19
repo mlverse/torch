@@ -4,7 +4,7 @@
 \alias{torch_addbmm}
 \title{Addbmm}
 \arguments{
-\item{beta}{(Number, optional) multiplier for :attr:\code{input} (\eqn{\beta})}
+\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
 \item{input}{(Tensor) matrix to be added}
 
@@ -29,7 +29,7 @@ same number of matrices.
 
 If \code{batch1} is a \eqn{(b \times n \times m)} tensor, \code{batch2} is a
 \eqn{(b \times m \times p)} tensor, \code{input} must be
-:ref:\verb{broadcastable <broadcasting-semantics>} with a \eqn{(n \times p)} tensor
+broadcastable  with a \eqn{(n \times p)} tensor
 and \code{out} will be a \eqn{(n \times p)} tensor.
 
 \deqn{

@@ -23,7 +23,7 @@ multiply the result by the scalar \code{value} and add it to \code{input}.
     \text{out}_i = \text{input}_i + \text{value} \times \frac{\text{tensor1}_i}{\text{tensor2}_i}
 }
 The shapes of \code{input}, \code{tensor1}, and \code{tensor2} must be
-:ref:\verb{broadcastable <broadcasting-semantics>}.
+broadcastable .
 
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, \code{value} must be
 a real number, otherwise an integer.

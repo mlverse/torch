@@ -14,10 +14,10 @@ Calculates log determinant of a square matrix or batches of square matrices.
 `input` has negative determinant.
 }
 
-\preformatted{Backward through :meth:`logdet` internally uses SVD results when `input`
-is not invertible. In this case, double backward through :meth:`logdet` will
+\preformatted{Backward through `logdet` internally uses SVD results when `input`
+is not invertible. In this case, double backward through `logdet` will
 be unstable in when `input` doesn't have distinct singular values. See
-:meth:`~torch.svd` for details.
+`~torch.svd` for details.
 }
 }
 \section{Signatures}{

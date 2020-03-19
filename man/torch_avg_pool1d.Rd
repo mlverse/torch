@@ -8,7 +8,7 @@
 
 \item{kernel_size}{NA the size of the window. Can be a single number or a      tuple \verb{(kW,)}}
 
-\item{stride}{NA the stride of the window. Can be a single number or a tuple      \verb{(sW,)}. Default: :attr:\code{kernel_size}}
+\item{stride}{NA the stride of the window. Can be a single number or a tuple      \verb{(sW,)}. Default: \code{kernel_size}}
 
 \item{padding}{NA implicit zero paddings on both sides of the input. Can be a      single number or a tuple \verb{(padW,)}. Default: 0}
 
@@ -21,7 +21,7 @@ Applies a 1D average pooling over an input signal composed of several
 input planes.
 }
 \details{
-See :class:\code{~torch.nn.AvgPool1d} for details and output shape.
+See \code{~torch.nn.AvgPool1d} for details and output shape.
 }
 \section{Signatures}{
 

@@ -10,11 +10,11 @@
 
 \item{dim}{(int, 2-tuple of ints, 2-list of ints, optional) If it is an int,        vector norm will be calculated, if it is 2-tuple of ints, matrix norm        will be calculated. If the value is None, matrix norm will be calculated        when the input tensor only has two dimensions, vector norm will be        calculated when the input tensor only has one dimension. If the input        tensor has more than two dimensions, the vector norm will be applied to        last dimension.}
 
-\item{keepdim}{(bool, optional) whether the output tensors have :attr:\code{dim}        retained or not. Ignored if :attr:\code{dim} = \code{None} and        :attr:\code{out} = \code{None}. Default: \code{False}}
+\item{keepdim}{(bool, optional) whether the output tensors have \code{dim}        retained or not. Ignored if \code{dim} = \code{None} and        \code{out} = \code{None}. Default: \code{False}}
 
-\item{out}{(Tensor, optional) the output tensor. Ignored if        :attr:\code{dim} = \code{None} and :attr:\code{out} = \code{None}.}
+\item{out}{(Tensor, optional) the output tensor. Ignored if        \code{dim} = \code{None} and \code{out} = \code{None}.}
 
-\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        :attr:'dtype' while performing the operation. Default: None.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        'dtype' while performing the operation. Default: None.}
 }
 \description{
 Returns the matrix norm or vector norm of a given tensor.

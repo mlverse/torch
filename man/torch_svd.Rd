@@ -34,7 +34,7 @@ algorithm) instead of \code{?gesvd} for speed. Analogously, the SVD on GPU uses 
 \code{gesdd} as well.
 
 Irrespective of the original strides, the returned matrix \code{U}
-will be transposed, i.e. with strides :code:\verb{U.contiguous().transpose(-2, -1).stride()}
+will be transposed, i.e. with strides \verb{U.contiguous().transpose(-2, -1).stride()}
 
 Extra care needs to be taken when backward through \code{U} and \code{V}
 outputs. Such operation is really only stable when \code{input} is
@@ -43,8 +43,8 @@ appear as the gradients are not properly defined. Also, notice that
 double backward will usually do an additional backward through \code{U} and
 \code{V} even if the original backward is only on \code{S}.
 
-When \code{some} = \code{False}, the gradients on :code:\verb{U[..., :, min(m, n):]}
-and :code:\verb{V[..., :, min(m, n):]} will be ignored in backward as those vectors
+When \code{some} = \code{False}, the gradients on \verb{U[..., :, min(m, n):]}
+and \verb{V[..., :, min(m, n):]} will be ignored in backward as those vectors
 can be arbitrary bases of the subspaces.
 
 When \code{compute_uv} = \code{False}, backward cannot be performed since \code{U} and \code{V}

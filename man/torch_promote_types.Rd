@@ -4,14 +4,14 @@
 \alias{torch_promote_types}
 \title{Promote_types}
 \arguments{
-\item{type1}{(:class:\code{torch.dtype})}
+\item{type1}{(\code{torch.dtype})}
 
-\item{type2}{(:class:\code{torch.dtype})}
+\item{type2}{(\code{torch.dtype})}
 }
 \description{
-Returns the :class:\code{torch_dtype} with the smallest size and scalar kind that is
+Returns the \code{torch_dtype} with the smallest size and scalar kind that is
 not smaller nor of lower kind than either \code{type1} or \code{type2}. See type promotion
-:ref:\verb{documentation <type-promotion-doc>} for more information on the type
+documentation  for more information on the type
 promotion logic.
 }
 \section{Signatures}{

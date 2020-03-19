@@ -16,7 +16,7 @@ If \code{input} is a vector of size \eqn{n} and \code{vec2} is a vector of
 size \eqn{m}, then \code{out} must be a matrix of size \eqn{(n \times m)}.
 }
 \note{
-This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
+This function does not broadcast .
 }
 \section{Signatures}{
 

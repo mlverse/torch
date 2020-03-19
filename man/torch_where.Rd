@@ -6,9 +6,9 @@
 \arguments{
 \item{condition}{(BoolTensor) When True (nonzero), yield x, otherwise yield y}
 
-\item{x}{(Tensor) values selected at indices where :attr:\code{condition} is \code{True}}
+\item{x}{(Tensor) values selected at indices where \code{condition} is \code{True}}
 
-\item{y}{(Tensor) values selected at indices where :attr:\code{condition} is \code{False}}
+\item{y}{(Tensor) values selected at indices where \code{condition} is \code{False}}
 }
 \description{
 Return a tensor of elements selected from either \code{x} or \code{y}, depending on \code{condition}.
@@ -27,7 +27,7 @@ The operation is defined as:
 }
 }
 \note{
-\preformatted{The tensors `condition`, `x`, `y` must be :ref:`broadcastable <broadcasting-semantics>`.
+\preformatted{The tensors `condition`, `x`, `y` must be broadcastable .
 }
 
 \preformatted{See also [`torch_nonzero`].

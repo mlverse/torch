@@ -8,17 +8,17 @@
 
 \item{end}{(float) the ending value for the set of points}
 
-\item{steps}{(int) number of points to sample between :attr:\code{start}        and :attr:\code{end}. Default: \code{100}.}
+\item{steps}{(int) number of points to sample between \code{start}        and \code{end}. Default: \code{100}.}
 
 \item{base}{(float) base of the logarithm function. Default: \code{10.0}.}
 
 \item{out}{(Tensor, optional) the output tensor.}
 
-\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see :func:\code{torch.set_default_tensor_type}).}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see \code{\link{torch_set_default_tensor_type}}).}
 
-\item{layout}{(:class:\code{torch.layout}, optional) the desired layout of returned Tensor.        Default: \code{torch.strided}.}
+\item{layout}{(\code{torch.layout}, optional) the desired layout of returned Tensor.        Default: \code{torch_strided}.}
 
-\item{device}{(:class:\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see :func:\code{torch.set_default_tensor_type}). :attr:\code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{\link{torch_set_default_tensor_type}}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }

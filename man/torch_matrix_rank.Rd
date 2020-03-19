@@ -8,7 +8,7 @@
 
 \item{tol}{(float, optional) the tolerance value. Default: \code{None}}
 
-\item{symmetric}{(bool, optional) indicates whether :attr:\code{input} is symmetric.                               Default: \code{False}}
+\item{symmetric}{(bool, optional) indicates whether \code{input} is symmetric.                               Default: \code{False}}
 }
 \description{
 Returns the numerical rank of a 2-D tensor. The method to compute the

@@ -20,7 +20,7 @@ Please look at \verb{Moore-Penrose inverse}_ for more details
 Therefore, derivatives are not always existent, and exist for a constant rank only `[2]`_.
 However, this method is backprop-able due to the implementation by using SVD results, and
 could be unstable. Double-backward will also be unstable due to the usage of SVD internally.
-See :meth:`~torch.svd` for more details.
+See `~torch.svd` for more details.
 }
 }
 \section{Signatures}{

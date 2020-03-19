@@ -19,7 +19,7 @@ If \code{input} is a \eqn{(n \times m)} tensor, \code{vec} is a 1-D tensor of
 size \eqn{m}, \code{out} will be 1-D of size \eqn{n}.
 }
 \note{
-This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
+This function does not broadcast .
 }
 \section{Signatures}{
 

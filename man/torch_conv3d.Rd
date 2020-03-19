@@ -23,7 +23,7 @@ Applies a 3D convolution over an input image composed of several input
 planes.
 }
 \details{
-See :class:\code{~torch.nn.Conv3d} for details and output shape.
+See \code{~torch.nn.Conv3d} for details and output shape.
 
 .. include:: cudnn_deterministic.rst
 }

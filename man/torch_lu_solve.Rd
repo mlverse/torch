@@ -6,15 +6,15 @@
 \arguments{
 \item{b}{(Tensor) the RHS tensor of size \eqn{(*, m, k)}, where \eqn{*}                is zero or more batch dimensions.}
 
-\item{LU_data}{(Tensor) the pivoted LU factorization of A from :meth:\code{torch.lu} of size \eqn{(*, m, m)},                       where \eqn{*} is zero or more batch dimensions.}
+\item{LU_data}{(Tensor) the pivoted LU factorization of A from \code{torch_lu} of size \eqn{(*, m, m)},                       where \eqn{*} is zero or more batch dimensions.}
 
-\item{LU_pivots}{(IntTensor) the pivots of the LU factorization from :meth:\code{torch.lu} of size \eqn{(*, m)},                           where \eqn{*} is zero or more batch dimensions.                           The batch dimensions of :attr:\code{LU_pivots} must be equal to the batch dimensions of                           :attr:\code{LU_data}.}
+\item{LU_pivots}{(IntTensor) the pivots of the LU factorization from \code{torch_lu} of size \eqn{(*, m)},                           where \eqn{*} is zero or more batch dimensions.                           The batch dimensions of \code{LU_pivots} must be equal to the batch dimensions of                           \code{LU_data}.}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Returns the LU solve of the linear system \eqn{Ax = b} using the partially pivoted
-LU factorization of A from :meth:\code{torch_lu}.
+LU factorization of A from \code{torch_lu}.
 }
 \section{Signatures}{
 

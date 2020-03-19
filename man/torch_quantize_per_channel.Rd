@@ -12,7 +12,7 @@
 
 \item{axis}{(int) dimension on which apply per-channel quantization}
 
-\item{dtype}{(:class:\code{torch.dtype}) the desired data type of returned tensor.        Has to be one of the quantized dtypes: \code{torch.quint8}, \code{torch.qint8}, \code{torch.qint32}}
+\item{dtype}{(\code{torch.dtype}) the desired data type of returned tensor.        Has to be one of the quantized dtypes: \code{torch_quint8}, \code{torch.qint8}, \code{torch.qint32}}
 }
 \description{
 Converts a float tensor to per-channel quantized tensor with given scales and zero points.

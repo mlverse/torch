@@ -18,7 +18,7 @@ The divisor and dividend may contain both for integer and floating point
 numbers. The remainder has the same sign as the divisor.
 
 When \code{other} is a tensor, the shapes of \code{input} and
-\code{other} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
+\code{other} must be broadcastable .
 }
 \section{Signatures}{
 

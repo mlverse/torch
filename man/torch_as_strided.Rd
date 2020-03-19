@@ -23,7 +23,7 @@ location. As a result, in-place operations (especially ones that are
 vectorized) may result in incorrect behavior. If you need to write to
 the tensors, please clone them first.\preformatted{Many PyTorch functions, which return a view of a tensor, are internally
 implemented with this function. Those functions, like
-:meth:`torch_Tensor.expand`, are easier to read and are therefore more
+`torch_Tensor.expand`, are easier to read and are therefore more
 advisable to use.
 }
 }

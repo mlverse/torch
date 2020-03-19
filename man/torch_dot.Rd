@@ -7,7 +7,7 @@
 Computes the dot product (inner product) of two tensors.
 }
 \note{
-This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
+This function does not broadcast .
 }
 \section{Signatures}{
 

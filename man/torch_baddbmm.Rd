@@ -4,7 +4,7 @@
 \alias{torch_baddbmm}
 \title{Baddbmm}
 \arguments{
-\item{beta}{(Number, optional) multiplier for :attr:\code{input} (\eqn{\beta})}
+\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
 \item{input}{(Tensor) the tensor to be added}
 
@@ -27,10 +27,10 @@ number of matrices.
 
 If \code{batch1} is a \eqn{(b \times n \times m)} tensor, \code{batch2} is a
 \eqn{(b \times m \times p)} tensor, then \code{input} must be
-:ref:\verb{broadcastable <broadcasting-semantics>} with a
+broadcastable  with a
 \eqn{(b \times n \times p)} tensor and \code{out} will be a
 \eqn{(b \times n \times p)} tensor. Both \code{alpha} and \code{beta} mean the
-same as the scaling factors used in :meth:\code{torch_addbmm}.
+same as the scaling factors used in \code{torch_addbmm}.
 
 \deqn{
     \text{out}_i = \beta\ \text{input}_i + \alpha\ (\text{batch1}_i \mathbin{@} \text{batch2}_i)

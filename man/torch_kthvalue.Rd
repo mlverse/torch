@@ -10,7 +10,7 @@
 
 \item{dim}{(int, optional) the dimension to find the kth value along}
 
-\item{keepdim}{(bool) whether the output tensor has :attr:\code{dim} retained or not.}
+\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
 
 \item{out}{(tuple, optional) the output tuple of (Tensor, LongTensor)                           can be optionally given to be used as output buffers}
 }

@@ -4,13 +4,13 @@
 \alias{torch_can_cast}
 \title{Can_cast}
 \arguments{
-\item{from}{(dtype) The original :class:\code{torch.dtype}.}
+\item{from}{(dtype) The original \code{torch_dtype}.}
 
-\item{to}{(dtype) The target :class:\code{torch.dtype}.}
+\item{to}{(dtype) The target \code{torch_dtype}.}
 }
 \description{
 Determines if a type conversion is allowed under PyTorch casting rules
-described in the type promotion :ref:\verb{documentation <type-promotion-doc>}.
+described in the type promotion documentation .
 }
 \section{Signatures}{
 

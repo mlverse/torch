@@ -4,9 +4,9 @@
 \alias{torch_rfft}
 \title{Rfft}
 \arguments{
-\item{input}{(Tensor) the input tensor of at least :attr:\code{signal_ndim} dimensions}
+\item{input}{(Tensor) the input tensor of at least \code{signal_ndim} dimensions}
 
-\item{signal_ndim}{(int) the number of dimensions in each signal.        :attr:\code{signal_ndim} can only be 1, 2 or 3}
+\item{signal_ndim}{(int) the number of dimensions in each signal.        \code{signal_ndim} can only be 1, 2 or 3}
 
 \item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
 
@@ -45,7 +45,7 @@ The inverse of this function is \code{\link{~torch.irfft}}.
 \note{
 \preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
 repeatedly running FFT methods on tensors of same geometry with same
-configuration. See :ref:`cufft-plan-cache` for more details on how to
+configuration. See cufft-plan-cache for more details on how to
 monitor and control the cache.
 }
 }

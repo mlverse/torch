@@ -25,7 +25,7 @@ Applies a 1D transposed convolution operator over an input signal
 composed of several input planes, sometimes also called "deconvolution".
 }
 \details{
-See :class:\code{~torch.nn.ConvTranspose1d} for details and output shape.
+See \code{~torch.nn.ConvTranspose1d} for details and output shape.
 
 .. include:: cudnn_deterministic.rst
 }

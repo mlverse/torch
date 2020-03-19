@@ -34,7 +34,7 @@ Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting
 in the output tensors having 1 fewer dimension than \code{input}.
 
 The shapes of \code{input} and \code{other} don't need to match,
-but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
+but they must be broadcastable .
 
 \deqn{
     \text{out}_i = \max(\text{tensor}_i, \text{other}_i)
@@ -42,7 +42,7 @@ but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
 \note{
 When the shapes do not match, the shape of the returned output tensor
-follows the :ref:\verb{broadcasting rules <broadcasting-semantics>}.
+follows the broadcasting rules .
 }
 \section{Signatures}{
 

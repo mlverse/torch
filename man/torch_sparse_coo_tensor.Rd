@@ -4,15 +4,15 @@
 \alias{torch_sparse_coo_tensor}
 \title{Sparse_coo_tensor}
 \arguments{
-\item{indices}{(array_like) Initial data for the tensor. Can be a list, tuple,        NumPy \code{ndarray}, scalar, and other types. Will be cast to a :class:\code{torch.LongTensor}        internally. The indices are the coordinates of the non-zero values in the matrix, and thus        should be two-dimensional where the first dimension is the number of tensor dimensions and        the second dimension is the number of non-zero values.}
+\item{indices}{(array_like) Initial data for the tensor. Can be a list, tuple,        NumPy \code{ndarray}, scalar, and other types. Will be cast to a \code{torch_LongTensor}        internally. The indices are the coordinates of the non-zero values in the matrix, and thus        should be two-dimensional where the first dimension is the number of tensor dimensions and        the second dimension is the number of non-zero values.}
 
 \item{values}{(array_like) Initial values for the tensor. Can be a list, tuple,        NumPy \code{ndarray}, scalar, and other types.}
 
-\item{size}{(list, tuple, or :class:\code{torch.Size}, optional) Size of the sparse tensor. If not        provided the size will be inferred as the minimum size big enough to hold all non-zero        elements.}
+\item{size}{(list, tuple, or \code{torch.Size}, optional) Size of the sparse tensor. If not        provided the size will be inferred as the minimum size big enough to hold all non-zero        elements.}
 
-\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if None, infers data type from :attr:\code{values}.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if None, infers data type from \code{values}.}
 
-\item{device}{(:class:\code{torch.device}, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see :func:\code{torch.set_default_tensor_type}). :attr:\code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see \code{\link{torch_set_default_tensor_type}}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }

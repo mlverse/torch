@@ -8,11 +8,11 @@
 
 \item{periodic}{(bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.}
 
-\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see :func:\code{torch.set_default_tensor_type}). Only floating point types are supported.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see \code{\link{torch_set_default_tensor_type}}). Only floating point types are supported.}
 
-\item{layout}{(:class:\code{torch.layout}, optional) the desired layout of returned window tensor. Only          \code{torch.strided} (dense layout) is supported.}
+\item{layout}{(\code{torch.layout}, optional) the desired layout of returned window tensor. Only          \code{torch_strided} (dense layout) is supported.}
 
-\item{device}{(:class:\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see :func:\code{torch.set_default_tensor_type}). :attr:\code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{\link{torch_set_default_tensor_type}}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
@@ -32,7 +32,7 @@ The input \code{window_length} is a positive integer controlling the
 returned window size. \code{periodic} flag determines whether the returned
 window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
-:meth:\code{torch_stft}. Therefore, if \code{periodic} is true, the \eqn{N} in
+\code{torch_stft}. Therefore, if \code{periodic} is true, the \eqn{N} in
 above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
 \code{torch_bartlett_window(L, periodic=True)} equal to
 \verb{torch_bartlett_window(L + 1, periodic=False)[:-1])}.

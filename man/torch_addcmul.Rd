@@ -24,7 +24,7 @@ and add it to \code{input}.
     \text{out}_i = \text{input}_i + \text{value} \times \text{tensor1}_i \times \text{tensor2}_i
 }
 The shapes of \code{tensor}, \code{tensor1}, and \code{tensor2} must be
-:ref:\verb{broadcastable <broadcasting-semantics>}.
+broadcastable .
 
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, \code{value} must be
 a real number, otherwise an integer.

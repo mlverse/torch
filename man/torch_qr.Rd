@@ -8,7 +8,7 @@
 
 \item{some}{(bool, optional) Set to \code{True} for reduced QR decomposition and \code{False} for                complete QR decomposition.}
 
-\item{out}{(tuple, optional) tuple of \code{Q} and \code{R} tensors                satisfying :code:\code{input = torch.matmul(Q, R)}.                The dimensions of \code{Q} and \code{R} are \eqn{(*, m, k)} and \eqn{(*, k, n)}                respectively, where \eqn{k = \min(m, n)} if :attr:\verb{some:} is \code{True} and                \eqn{k = m} otherwise.}
+\item{out}{(tuple, optional) tuple of \code{Q} and \code{R} tensors                satisfying \code{input = torch.matmul(Q, R)}.                The dimensions of \code{Q} and \code{R} are \eqn{(*, m, k)} and \eqn{(*, k, n)}                respectively, where \eqn{k = \min(m, n)} if \verb{some:} is \code{True} and                \eqn{k = m} otherwise.}
 }
 \description{
 Computes the QR decomposition of a matrix or a batch of matrices \code{input},

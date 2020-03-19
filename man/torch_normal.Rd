@@ -4,7 +4,7 @@
 \alias{torch_normal}
 \title{Normal}
 \arguments{
-\item{generator}{(:class:\code{torch.Generator}, optional) a pseudorandom number generator for sampling}
+\item{generator}{(\code{torch.Generator}, optional) a pseudorandom number generator for sampling}
 
 \item{mean}{(float) the mean for all distributions}
 

@@ -7,7 +7,7 @@
 \item{*tensors}{NA any number of tensors of the same type}
 }
 \description{
-Broadcasts the given tensors according to :ref:\code{broadcasting-semantics}.
+Broadcasts the given tensors according to broadcasting-semantics.
 }
 \section{Signatures}{
 

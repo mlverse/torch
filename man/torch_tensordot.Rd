@@ -8,7 +8,7 @@
 
 \item{b}{(Tensor) Right tensor to contract}
 
-\item{dims}{(int or tuple of two lists of integers) number of dimensions to     contract or explicit lists of dimensions for :attr:\code{a} and     :attr:\code{b} respectively}
+\item{dims}{(int or tuple of two lists of integers) number of dimensions to     contract or explicit lists of dimensions for \code{a} and     \code{b} respectively}
 }
 \description{
 Returns a contraction of a and b over multiple dimensions.

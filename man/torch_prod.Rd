@@ -8,9 +8,9 @@
 
 \item{dim}{(int) the dimension to reduce.}
 
-\item{keepdim}{(bool) whether the output tensor has :attr:\code{dim} retained or not.}
+\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
 
-\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:\code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to \code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
 }
 \description{
 Returns the product of all elements in the \code{input} tensor.

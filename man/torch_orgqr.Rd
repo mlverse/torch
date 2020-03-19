@@ -4,9 +4,9 @@
 \alias{torch_orgqr}
 \title{Orgqr}
 \arguments{
-\item{input}{(Tensor) the \code{a} from :func:\code{torch.geqrf}.}
+\item{input}{(Tensor) the \code{a} from \code{\link{torch_geqrf}}.}
 
-\item{input2}{(Tensor) the \code{tau} from :func:\code{torch.geqrf}.}
+\item{input2}{(Tensor) the \code{tau} from \code{\link{torch_geqrf}}.}
 }
 \description{
 Computes the orthogonal matrix \code{Q} of a QR factorization, from the \verb{(input, input2)}

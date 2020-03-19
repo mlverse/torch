@@ -20,7 +20,7 @@ parameter, is the y-coordinate.)
 }
 \details{
 The shapes of \code{input} and \code{other} must be
-:ref:\verb{broadcastable <broadcasting-semantics>}.
+broadcastable .
 }
 \section{Signatures}{
 

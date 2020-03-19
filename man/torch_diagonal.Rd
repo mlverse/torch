@@ -25,9 +25,9 @@ The argument \code{offset} controls which diagonal to consider:
 \item If \code{offset} < 0, it is below the main diagonal.
 }
 
-Applying :meth:\code{torch_diag_embed} to the output of this function with
+Applying \code{torch_diag_embed} to the output of this function with
 the same arguments yields a diagonal matrix with the diagonal entries
-of the input. However, :meth:\code{torch_diag_embed} has different default
+of the input. However, \code{torch_diag_embed} has different default
 dimensions, so those need to be explicitly specified.
 }
 \section{Signatures}{

@@ -4,11 +4,11 @@
 \alias{torch_add}
 \title{Add}
 \arguments{
-\item{value}{(Number) the number to be added to each element of :attr:\code{input}}
+\item{value}{(Number) the number to be added to each element of \code{input}}
 
 \item{input}{(Tensor) the first input tensor}
 
-\item{alpha}{(Number) the scalar multiplier for :attr:\code{other}}
+\item{alpha}{(Number) the scalar multiplier for \code{other}}
 
 \item{other}{(Tensor) the second input tensor}
 }
@@ -32,7 +32,7 @@ Each element of the tensor \code{other} is multiplied by the scalar
 The resulting tensor is returned.
 
 The shapes of \code{input} and \code{other} must be
-:ref:\verb{broadcastable <broadcasting-semantics>}.
+broadcastable .
 
 \deqn{
     \text{out} = \text{input} + \text{alpha} \times \text{other}

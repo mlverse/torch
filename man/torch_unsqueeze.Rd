@@ -18,7 +18,7 @@ specified position.
 The returned tensor shares the same underlying data with this tensor.
 
 A \code{dim} value within the range \verb{[-input.dim() - 1, input.dim() + 1)}
-can be used. Negative \code{dim} will correspond to :meth:\code{unsqueeze}
+can be used. Negative \code{dim} will correspond to \code{unsqueeze}
 applied at \code{dim} = \code{dim + input.dim() + 1}.
 }
 \section{Signatures}{

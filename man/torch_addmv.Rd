@@ -4,7 +4,7 @@
 \alias{torch_addmv}
 \title{Addmv}
 \arguments{
-\item{beta}{(Number, optional) multiplier for :attr:\code{input} (\eqn{\beta})}
+\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
 \item{input}{(Tensor) vector to be added}
 
@@ -24,7 +24,7 @@ The vector \code{input} is added to the final result.
 \details{
 If \code{mat} is a \eqn{(n \times m)} tensor, \code{vec} is a 1-D tensor of
 size \code{m}, then \code{input} must be
-:ref:\verb{broadcastable <broadcasting-semantics>} with a 1-D tensor of size \code{n} and
+broadcastable  with a 1-D tensor of size \code{n} and
 \code{out} will be 1-D tensor of size \code{n}.
 
 \code{alpha} and \code{beta} are scaling factors on matrix-vector product between

@@ -34,7 +34,7 @@ When \code{exponent} is a tensor, the operation applied is:
     \text{out}_i = x_i ^ {\text{exponent}_i}
 }
 When \code{exponent} is a tensor, the shapes of \code{input}
-and \code{exponent} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
+and \code{exponent} must be broadcastable .
 
 The operation applied is:
 

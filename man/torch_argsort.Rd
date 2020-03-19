@@ -15,7 +15,7 @@ Returns the indices that sort a tensor along a given dimension in ascending
 order by value.
 }
 \details{
-This is the second value returned by :meth:\code{torch_sort}.  See its documentation
+This is the second value returned by \code{torch_sort}.  See its documentation
 for the exact semantics of this method.
 }
 \section{Signatures}{

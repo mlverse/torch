@@ -8,7 +8,7 @@
 
 \item{dim}{(int) the dimension to do the operation over}
 
-\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:\code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to \code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

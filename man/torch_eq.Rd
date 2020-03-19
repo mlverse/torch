@@ -15,7 +15,7 @@ Computes element-wise equality
 }
 \details{
 The second argument can be a number or a tensor whose shape is
-:ref:\verb{broadcastable <broadcasting-semantics>} with the first argument.
+broadcastable  with the first argument.
 }
 \section{Signatures}{
 

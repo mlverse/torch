@@ -4,7 +4,7 @@
 \alias{torch_addmm}
 \title{Addmm}
 \arguments{
-\item{beta}{(Number, optional) multiplier for :attr:\code{input} (\eqn{\beta})}
+\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
 \item{input}{(Tensor) matrix to be added}
 
@@ -23,7 +23,7 @@ The matrix \code{input} is added to the final result.
 \details{
 If \code{mat1} is a \eqn{(n \times m)} tensor, \code{mat2} is a
 \eqn{(m \times p)} tensor, then \code{input} must be
-:ref:\verb{broadcastable <broadcasting-semantics>} with a \eqn{(n \times p)} tensor
+broadcastable  with a \eqn{(n \times p)} tensor
 and \code{out} will be a \eqn{(n \times p)} tensor.
 
 \code{alpha} and \code{beta} are scaling factors on matrix-vector product between

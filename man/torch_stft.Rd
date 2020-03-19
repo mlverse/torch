@@ -10,13 +10,13 @@
 
 \item{hop_length}{(int, optional) the distance between neighboring sliding window        frames. Default: \code{None} (treated as equal to \code{floor(n_fft / 4)})}
 
-\item{win_length}{(int, optional) the size of window frame and STFT filter.        Default: \code{None}  (treated as equal to :attr:\code{n_fft})}
+\item{win_length}{(int, optional) the size of window frame and STFT filter.        Default: \code{None}  (treated as equal to \code{n_fft})}
 
 \item{window}{(Tensor, optional) the optional window function.        Default: \code{None} (treated as window of all \eqn{1} s)}
 
-\item{center}{(bool, optional) whether to pad :attr:\code{input} on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \text{hop\_length}}.        Default: \code{True}}
+\item{center}{(bool, optional) whether to pad \code{input} on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \text{hop\_length}}.        Default: \code{True}}
 
-\item{pad_mode}{(string, optional) controls the padding method used when        :attr:\code{center} is \code{True}. Default: \code{"reflect"}}
+\item{pad_mode}{(string, optional) controls the padding method used when        \code{center} is \code{True}. Default: \code{"reflect"}}
 
 \item{normalized}{(bool, optional) controls whether to return the normalized STFT results         Default: \code{False}}
 
@@ -47,7 +47,7 @@ the frequency that \eqn{0 \leq \omega < \text{n\_fft}}. When
   `n_fft`.
 
 * `window` can be a 1-D tensor of size `win_length`, e.g., from
-  :meth:`torch_hann_window`. If `window` is ``None`` (default), it is
+  `torch_hann_window`. If `window` is ``None`` (default), it is
   treated as if having \eqn{1} everywhere in the window. If
   \eqn{\text{win\_length} < \text{n\_fft}}, `window` will be padded on
   both sides to length `n_fft` before being applied.
@@ -58,7 +58,7 @@ the frequency that \eqn{0 \leq \omega < \text{n\_fft}}. When
   begins at time  \eqn{t \times \text{hop\_length}}.
 
 * `pad_mode` determines the padding method used on `input` when
-  `center` is ``True``. See :meth:`torch_nn.functional.pad` for
+  `center` is ``True``. See `torch_nn.functional.pad` for
   all available options. Default is ``"reflect"``.
 
 * If `onesided` is ``True`` (default), only values for \eqn{\omega}

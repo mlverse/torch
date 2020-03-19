@@ -4,13 +4,13 @@
 \alias{torch_ones_like}
 \title{Ones_like}
 \arguments{
-\item{input}{(Tensor) the size of :attr:\code{input} will determine size of the output tensor.}
+\item{input}{(Tensor) the size of \code{input} will determine size of the output tensor.}
 
-\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned Tensor.        Default: if \code{None}, defaults to the dtype of :attr:\code{input}.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned Tensor.        Default: if \code{None}, defaults to the dtype of \code{input}.}
 
-\item{layout}{(:class:\code{torch.layout}, optional) the desired layout of returned tensor.        Default: if \code{None}, defaults to the layout of :attr:\code{input}.}
+\item{layout}{(\code{torch.layout}, optional) the desired layout of returned tensor.        Default: if \code{None}, defaults to the layout of \code{input}.}
 
-\item{device}{(:class:\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, defaults to the device of :attr:\code{input}.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, defaults to the device of \code{input}.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }

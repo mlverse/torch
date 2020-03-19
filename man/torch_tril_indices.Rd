@@ -10,11 +10,11 @@
 
 \item{offset}{(\code{int}) diagonal offset from the main diagonal.        Default: if not provided, 0.}
 
-\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, \code{torch.long}.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, \code{torch_long}.}
 
-\item{device}{(:class:\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see :func:\code{torch.set_default_tensor_type}). :attr:\code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{\link{torch_set_default_tensor_type}}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
-\item{layout}{(:class:\code{torch.layout}, optional) currently only support \code{torch.strided}.}
+\item{layout}{(\code{torch.layout}, optional) currently only support \code{torch_strided}.}
 }
 \description{
 Returns the indices of the lower triangular part of a \code{row}-by-

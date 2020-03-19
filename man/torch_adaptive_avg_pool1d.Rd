@@ -11,7 +11,7 @@ Applies a 1D adaptive average pooling over an input signal composed of
 several input planes.
 }
 \details{
-See :class:\code{~torch.nn.AdaptiveAvgPool1d} for details and output shape.
+See \code{~torch.nn.AdaptiveAvgPool1d} for details and output shape.
 }
 \section{Signatures}{
 

@@ -13,5 +13,5 @@ Rearranges elements in a tensor of shape \eqn{(*, C \times r^2, H, W)} to a
 tensor of shape \eqn{(*, C, H \times r, W \times r)}.
 }
 \details{
-See :class:\code{~torch.nn.PixelShuffle} for details.
+See \code{~torch.nn.PixelShuffle} for details.
 }
