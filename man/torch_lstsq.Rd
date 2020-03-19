@@ -4,9 +4,9 @@
 \alias{torch_lstsq}
 \title{Lstsq}
 \arguments{
-\item{input}{(Tensor) the matrix :math:\code{B}}
+\item{input}{(Tensor) the matrix \eqn{B}}
 
-\item{A}{(Tensor) the :math:\code{m} by :math:\code{n} matrix :math:\code{A}}
+\item{A}{(Tensor) the \eqn{m} by \eqn{n} matrix \eqn{A}}
 
 \item{out}{(tuple, optional) the optional destination tensor}
 }

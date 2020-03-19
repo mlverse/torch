@@ -4,7 +4,7 @@
 \alias{torch_pinverse}
 \title{Pinverse}
 \arguments{
-\item{input}{(Tensor) The input tensor of size :math:\verb{(*, m, n)} where :math:\code{*} is zero or more batch dimensions}
+\item{input}{(Tensor) The input tensor of size \eqn{(*, m, n)} where \eqn{*} is zero or more batch dimensions}
 
 \item{rcond}{(float) A floating point value to determine the cutoff for small singular values.                   Default: 1e-15}
 }

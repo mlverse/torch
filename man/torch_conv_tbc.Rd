@@ -4,11 +4,11 @@
 \alias{torch_conv_tbc}
 \title{Conv_tbc}
 \arguments{
-\item{input}{NA input tensor of shape :math:\verb{(\\text\{sequence length\} \\times batch \\times \\text\{in\\_channels\})}}
+\item{input}{NA input tensor of shape \eqn{(\text{sequence length} \times batch \times \text{in\_channels})}}
 
-\item{weight}{NA filter of shape (:math:\verb{\\text\{kernel width\} \\times \\text\{in\\_channels\} \\times \\text\{out\\_channels\}})}
+\item{weight}{NA filter of shape (\eqn{\text{kernel width} \times \text{in\_channels} \times \text{out\_channels}})}
 
-\item{bias}{NA bias of shape (:math:\verb{\\text\{out\\_channels\}})}
+\item{bias}{NA bias of shape (\eqn{\text{out\_channels}})}
 
 \item{pad}{NA number of timesteps to pad. Default: 0}
 }

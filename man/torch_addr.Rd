@@ -4,11 +4,11 @@
 \alias{torch_addr}
 \title{Addr}
 \arguments{
-\item{beta}{(Number, optional) multiplier for :attr:\code{input} (:math:\verb{\\beta})}
+\item{beta}{(Number, optional) multiplier for :attr:\code{input} (\eqn{\beta})}
 
 \item{input}{(Tensor) matrix to be added}
 
-\item{alpha}{(Number, optional) multiplier for :math:\verb{\\text\{vec1\} \\otimes \\text\{vec2\}} (:math:\verb{\\alpha})}
+\item{alpha}{(Number, optional) multiplier for \eqn{\text{vec1} \otimes \text{vec2}} (\eqn{\alpha})}
 
 \item{vec1}{(Tensor) the first vector of the outer product}
 

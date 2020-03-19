@@ -4,7 +4,7 @@
 \alias{torch_eig}
 \title{Eig}
 \arguments{
-\item{input}{(Tensor) the square matrix of shape :math:\verb{(n \\times n)} for which the eigenvalues and eigenvectors        will be computed}
+\item{input}{(Tensor) the square matrix of shape \eqn{(n \times n)} for which the eigenvalues and eigenvectors        will be computed}
 
 \item{eigenvectors}{(bool) \code{True} to compute both eigenvalues and eigenvectors;        otherwise, only eigenvalues will be computed}
 

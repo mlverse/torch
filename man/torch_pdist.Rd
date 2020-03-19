@@ -4,9 +4,9 @@
 \alias{torch_pdist}
 \title{Pdist}
 \arguments{
-\item{input}{NA input tensor of shape :math:\verb{N \\times M}.}
+\item{input}{NA input tensor of shape \eqn{N \times M}.}
 
-\item{p}{NA p value for the p-norm distance to calculate between each vector pair        :math:\verb{\\in [0, \\infty]}.}
+\item{p}{NA p value for the p-norm distance to calculate between each vector pair        \eqn{\in [0, \infty]}.}
 }
 \description{
 Computes the p-norm distance between every pair of row vectors in the input.

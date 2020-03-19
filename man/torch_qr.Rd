@@ -4,11 +4,11 @@
 \alias{torch_qr}
 \title{Qr}
 \arguments{
-\item{input}{(Tensor) the input tensor of size :math:\verb{(*, m, n)} where \code{*} is zero or more                batch dimensions consisting of matrices of dimension :math:\verb{m \\times n}.}
+\item{input}{(Tensor) the input tensor of size \eqn{(*, m, n)} where \code{*} is zero or more                batch dimensions consisting of matrices of dimension \eqn{m \times n}.}
 
 \item{some}{(bool, optional) Set to \code{True} for reduced QR decomposition and \code{False} for                complete QR decomposition.}
 
-\item{out}{(tuple, optional) tuple of \code{Q} and \code{R} tensors                satisfying :code:\code{input = torch.matmul(Q, R)}.                The dimensions of \code{Q} and \code{R} are :math:\verb{(*, m, k)} and :math:\verb{(*, k, n)}                respectively, where :math:\verb{k = \\min(m, n)} if :attr:\verb{some:} is \code{True} and                :math:\code{k = m} otherwise.}
+\item{out}{(tuple, optional) tuple of \code{Q} and \code{R} tensors                satisfying :code:\code{input = torch.matmul(Q, R)}.                The dimensions of \code{Q} and \code{R} are \eqn{(*, m, k)} and \eqn{(*, k, n)}                respectively, where \eqn{k = \min(m, n)} if :attr:\verb{some:} is \code{True} and                \eqn{k = m} otherwise.}
 }
 \description{
 Computes the QR decomposition of a matrix or a batch of matrices \code{input},

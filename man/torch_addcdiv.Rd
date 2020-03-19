@@ -6,7 +6,7 @@
 \arguments{
 \item{input}{(Tensor) the tensor to be added}
 
-\item{value}{(Number, optional) multiplier for :math:\verb{\\text\{tensor1\} / \\text\{tensor2\}}}
+\item{value}{(Number, optional) multiplier for \eqn{\text{tensor1} / \text{tensor2}}}
 
 \item{tensor1}{(Tensor) the numerator tensor}
 

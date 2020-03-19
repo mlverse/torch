@@ -4,11 +4,11 @@
 \alias{torch_addmv}
 \title{Addmv}
 \arguments{
-\item{beta}{(Number, optional) multiplier for :attr:\code{input} (:math:\verb{\\beta})}
+\item{beta}{(Number, optional) multiplier for :attr:\code{input} (\eqn{\beta})}
 
 \item{input}{(Tensor) vector to be added}
 
-\item{alpha}{(Number, optional) multiplier for :math:\code{mat @ vec} (:math:\verb{\\alpha})}
+\item{alpha}{(Number, optional) multiplier for \eqn{mat @ vec} (\eqn{\alpha})}
 
 \item{mat}{(Tensor) matrix to be multiplied}
 

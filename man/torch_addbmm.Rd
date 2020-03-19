@@ -4,11 +4,11 @@
 \alias{torch_addbmm}
 \title{Addbmm}
 \arguments{
-\item{beta}{(Number, optional) multiplier for :attr:\code{input} (:math:\verb{\\beta})}
+\item{beta}{(Number, optional) multiplier for :attr:\code{input} (\eqn{\beta})}
 
 \item{input}{(Tensor) matrix to be added}
 
-\item{alpha}{(Number, optional) multiplier for \code{batch1 @ batch2} (:math:\verb{\\alpha})}
+\item{alpha}{(Number, optional) multiplier for \code{batch1 @ batch2} (\eqn{\alpha})}
 
 \item{batch1}{(Tensor) the first batch of matrices to be multiplied}
 

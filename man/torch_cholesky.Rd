@@ -4,7 +4,7 @@
 \alias{torch_cholesky}
 \title{Cholesky}
 \arguments{
-\item{input}{(Tensor) the input tensor :math:\code{A} of size :math:\verb{(*, n, n)} where \code{*} is zero or more                batch dimensions consisting of symmetric positive-definite matrices.}
+\item{input}{(Tensor) the input tensor \eqn{A} of size \eqn{(*, n, n)} where \code{*} is zero or more                batch dimensions consisting of symmetric positive-definite matrices.}
 
 \item{upper}{(bool, optional) flag that indicates whether to return a                            upper or lower triangular matrix. Default: \code{False}}
 

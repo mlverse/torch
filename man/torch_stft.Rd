@@ -12,9 +12,9 @@
 
 \item{win_length}{(int, optional) the size of window frame and STFT filter.        Default: \code{None}  (treated as equal to :attr:\code{n_fft})}
 
-\item{window}{(Tensor, optional) the optional window function.        Default: \code{None} (treated as window of all :math:\code{1} s)}
+\item{window}{(Tensor, optional) the optional window function.        Default: \code{None} (treated as window of all \eqn{1} s)}
 
-\item{center}{(bool, optional) whether to pad :attr:\code{input} on both sides so        that the :math:\code{t}-th frame is centered at time :math:\verb{t \\times \\text\{hop\\_length\}}.        Default: \code{True}}
+\item{center}{(bool, optional) whether to pad :attr:\code{input} on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \text{hop\_length}}.        Default: \code{True}}
 
 \item{pad_mode}{(string, optional) controls the padding method used when        :attr:\code{center} is \code{True}. Default: \code{"reflect"}}
 

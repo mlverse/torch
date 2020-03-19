@@ -4,11 +4,11 @@
 \alias{torch_lu_solve}
 \title{Lu_solve}
 \arguments{
-\item{b}{(Tensor) the RHS tensor of size :math:\verb{(*, m, k)}, where :math:\code{*}                is zero or more batch dimensions.}
+\item{b}{(Tensor) the RHS tensor of size \eqn{(*, m, k)}, where \eqn{*}                is zero or more batch dimensions.}
 
-\item{LU_data}{(Tensor) the pivoted LU factorization of A from :meth:\code{torch.lu} of size :math:\verb{(*, m, m)},                       where :math:\code{*} is zero or more batch dimensions.}
+\item{LU_data}{(Tensor) the pivoted LU factorization of A from :meth:\code{torch.lu} of size \eqn{(*, m, m)},                       where \eqn{*} is zero or more batch dimensions.}
 
-\item{LU_pivots}{(IntTensor) the pivots of the LU factorization from :meth:\code{torch.lu} of size :math:\verb{(*, m)},                           where :math:\code{*} is zero or more batch dimensions.                           The batch dimensions of :attr:\code{LU_pivots} must be equal to the batch dimensions of                           :attr:\code{LU_data}.}
+\item{LU_pivots}{(IntTensor) the pivots of the LU factorization from :meth:\code{torch.lu} of size \eqn{(*, m)},                           where \eqn{*} is zero or more batch dimensions.                           The batch dimensions of :attr:\code{LU_pivots} must be equal to the batch dimensions of                           :attr:\code{LU_data}.}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

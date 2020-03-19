@@ -4,15 +4,15 @@
 \alias{torch_triangular_solve}
 \title{Triangular_solve}
 \arguments{
-\item{input}{(Tensor) multiple right-hand sides of size :math:\verb{(*, m, k)} where                :math:\code{*} is zero of more batch dimensions (:math:\code{b})}
+\item{input}{(Tensor) multiple right-hand sides of size \eqn{(*, m, k)} where                \eqn{*} is zero of more batch dimensions (\eqn{b})}
 
-\item{A}{(Tensor) the input triangular coefficient matrix of size :math:\verb{(*, m, m)}                where :math:\code{*} is zero or more batch dimensions}
+\item{A}{(Tensor) the input triangular coefficient matrix of size \eqn{(*, m, m)}                where \eqn{*} is zero or more batch dimensions}
 
 \item{upper}{(bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: \code{True}.}
 
-\item{transpose}{(bool, optional) whether :math:\code{A} should be transposed before        being sent into the solver. Default: \code{False}.}
+\item{transpose}{(bool, optional) whether \eqn{A} should be transposed before        being sent into the solver. Default: \code{False}.}
 
-\item{unitriangular}{(bool, optional) whether :math:\code{A} is unit triangular.        If True, the diagonal elements of :math:\code{A} are assumed to be        1 and not referenced from :math:\code{A}. Default: \code{False}.}
+\item{unitriangular}{(bool, optional) whether \eqn{A} is unit triangular.        If True, the diagonal elements of \eqn{A} are assumed to be        1 and not referenced from \eqn{A}. Default: \code{False}.}
 }
 \description{
 Solves a system of equations with a triangular coefficient matrix \eqn{A}

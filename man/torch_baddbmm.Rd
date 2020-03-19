@@ -4,11 +4,11 @@
 \alias{torch_baddbmm}
 \title{Baddbmm}
 \arguments{
-\item{beta}{(Number, optional) multiplier for :attr:\code{input} (:math:\verb{\\beta})}
+\item{beta}{(Number, optional) multiplier for :attr:\code{input} (\eqn{\beta})}
 
 \item{input}{(Tensor) the tensor to be added}
 
-\item{alpha}{(Number, optional) multiplier for :math:\verb{\\text\{batch1\} \\mathbin\{@\} \\text\{batch2\}} (:math:\verb{\\alpha})}
+\item{alpha}{(Number, optional) multiplier for \eqn{\text{batch1} \mathbin{@} \text{batch2}} (\eqn{\alpha})}
 
 \item{batch1}{(Tensor) the first batch of matrices to be multiplied}
 

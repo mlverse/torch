@@ -4,7 +4,7 @@
 \alias{torch_cholesky_inverse}
 \title{Cholesky_inverse}
 \arguments{
-\item{input}{(Tensor) the input 2-D tensor :math:\code{u}, a upper or lower triangular           Cholesky factor}
+\item{input}{(Tensor) the input 2-D tensor \eqn{u}, a upper or lower triangular           Cholesky factor}
 
 \item{upper}{(bool, optional) whether to return a lower (default) or upper triangular matrix}
 

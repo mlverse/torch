@@ -8,9 +8,9 @@
 
 \item{periodic}{(bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.}
 
-\item{alpha}{(float, optional) The coefficient :math:\verb{\\alpha} in the equation above}
+\item{alpha}{(float, optional) The coefficient \eqn{\alpha} in the equation above}
 
-\item{beta}{(float, optional) The coefficient :math:\verb{\\beta} in the equation above}
+\item{beta}{(float, optional) The coefficient \eqn{\beta} in the equation above}
 
 \item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see :func:\code{torch.set_default_tensor_type}). Only floating point types are supported.}
 

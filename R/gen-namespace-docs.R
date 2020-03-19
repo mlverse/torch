@@ -174,7 +174,7 @@ NULL
 #' avg_pool1d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True) -> Tensor
 #'
 #'
-#' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iW)`
+#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iW)}
 #' @param kernel_size NA the size of the window. Can be a single number or a      tuple `(kW,)`
 #' @param stride NA the stride of the window. Can be a single number or a tuple      `(sW,)`. Default: :attr:`kernel_size`
 #' @param padding NA implicit zero paddings on both sides of the input. Can be a      single number or a tuple `(padW,)`. Default: 0
@@ -305,9 +305,9 @@ NULL
 #' addmv(beta=1, input, alpha=1, mat, vec, out=None) -> Tensor
 #'
 #'
-#' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
+#' @param beta (Number, optional) multiplier for :attr:`input` (\eqn{\beta})
 #' @param input (Tensor) vector to be added
-#' @param alpha (Number, optional) multiplier for :math:`mat @ vec` (:math:`\alpha`)
+#' @param alpha (Number, optional) multiplier for \eqn{mat @ vec} (\eqn{\alpha})
 #' @param mat (Tensor) matrix to be multiplied
 #' @param vec (Tensor) vector to be multiplied
 #' @param out (Tensor, optional) the output tensor.
@@ -352,9 +352,9 @@ NULL
 #' addr(beta=1, input, alpha=1, vec1, vec2, out=None) -> Tensor
 #'
 #'
-#' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
+#' @param beta (Number, optional) multiplier for :attr:`input` (\eqn{\beta})
 #' @param input (Tensor) matrix to be added
-#' @param alpha (Number, optional) multiplier for :math:`\text{vec1} \otimes \text{vec2}` (:math:`\alpha`)
+#' @param alpha (Number, optional) multiplier for \eqn{\text{vec1} \otimes \text{vec2}} (\eqn{\alpha})
 #' @param vec1 (Tensor) the first vector of the outer product
 #' @param vec2 (Tensor) the second vector of the outer product
 #' @param out (Tensor, optional) the output tensor.
@@ -687,9 +687,9 @@ NULL
 #' baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
 #'
 #'
-#' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
+#' @param beta (Number, optional) multiplier for :attr:`input` (\eqn{\beta})
 #' @param input (Tensor) the tensor to be added
-#' @param alpha (Number, optional) multiplier for :math:`\text{batch1} \mathbin{@} \text{batch2}` (:math:`\alpha`)
+#' @param alpha (Number, optional) multiplier for \eqn{\text{batch1} \mathbin{@} \text{batch2}} (\eqn{\alpha})
 #' @param batch1 (Tensor) the first batch of matrices to be multiplied
 #' @param batch2 (Tensor) the second batch of matrices to be multiplied
 #' @param out (Tensor, optional) the output tensor.
@@ -1279,13 +1279,13 @@ NULL
 #' conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
 #'
 #'
-#' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iW)`
-#' @param weight NA filters of shape :math:`(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kW)`
-#' @param bias NA optional bias of shape :math:`(\text{out\_channels})`. Default: ``None``
+#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iW)}
+#' @param weight NA filters of shape \eqn{(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kW)}
+#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: ``None``
 #' @param stride NA the stride of the convolving kernel. Can be a single number or      a one-element tuple `(sW,)`. Default: 1
 #' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a one-element tuple `(padW,)`. Default: 0
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a one-element tuple `(dW,)`. Default: 1
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by      the number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by      the number of groups. Default: 1
 #'
 #' 
 #'
@@ -1309,13 +1309,13 @@ NULL
 #' conv2d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
 #'
 #'
-#' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iH , iW)`
-#' @param weight NA filters of shape :math:`(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kH , kW)`
-#' @param bias NA optional bias tensor of shape :math:`(\text{out\_channels})`. Default: ``None``
+#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iH , iW)}
+#' @param weight NA filters of shape \eqn{(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kH , kW)}
+#' @param bias NA optional bias tensor of shape \eqn{(\text{out\_channels})}. Default: ``None``
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple `(sH, sW)`. Default: 1
 #' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a tuple `(padH, padW)`. Default: 0
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dH, dW)`. Default: 1
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
 #'
 #' 
 #'
@@ -1339,13 +1339,13 @@ NULL
 #' conv3d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
 #'
 #'
-#' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iT , iH , iW)`
-#' @param weight NA filters of shape :math:`(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kT , kH , kW)`
-#' @param bias NA optional bias tensor of shape :math:`(\text{out\_channels})`. Default: None
+#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iT , iH , iW)}
+#' @param weight NA filters of shape \eqn{(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kT , kH , kW)}
+#' @param bias NA optional bias tensor of shape \eqn{(\text{out\_channels})}. Default: None
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple `(sT, sH, sW)`. Default: 1
 #' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a tuple `(padT, padH, padW)`. Default: 0
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dT, dH, dW)`. Default: 1
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by      the number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by      the number of groups. Default: 1
 #'
 #' 
 #'
@@ -1362,9 +1362,9 @@ NULL
 #'
 #' 
 #'
-#' @param input NA input tensor of shape :math:`(\text{sequence length} \times batch \times \text{in\_channels})`
-#' @param weight NA filter of shape (:math:`\text{kernel width} \times \text{in\_channels} \times \text{out\_channels}`)
-#' @param bias NA bias of shape (:math:`\text{out\_channels}`)
+#' @param input NA input tensor of shape \eqn{(\text{sequence length} \times batch \times \text{in\_channels})}
+#' @param weight NA filter of shape (\eqn{\text{kernel width} \times \text{in\_channels} \times \text{out\_channels}})
+#' @param bias NA bias of shape (\eqn{\text{out\_channels}})
 #' @param pad NA number of timesteps to pad. Default: 0
 #'
 #' 
@@ -1389,13 +1389,13 @@ NULL
 #' conv_transpose1d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
 #'
 #'
-#' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iW)`
-#' @param weight NA filters of shape :math:`(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kW)`
-#' @param bias NA optional bias of shape :math:`(\text{out\_channels})`. Default: None
+#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iW)}
+#' @param weight NA filters of shape \eqn{(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kW)}
+#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: None
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sW,)``. Default: 1
 #' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padW,)``. Default: 0
 #' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple ``(out_padW)``. Default: 0
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dW,)``. Default: 1
 #'
 #' 
@@ -1420,13 +1420,13 @@ NULL
 #' conv_transpose2d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
 #'
 #'
-#' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iH , iW)`
-#' @param weight NA filters of shape :math:`(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kH , kW)`
-#' @param bias NA optional bias of shape :math:`(\text{out\_channels})`. Default: None
+#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iH , iW)}
+#' @param weight NA filters of shape \eqn{(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kH , kW)}
+#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: None
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sH, sW)``. Default: 1
 #' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padH, padW)``. Default: 0
 #' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple ``(out_padH, out_padW)``.      Default: 0
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dH, dW)``. Default: 1
 #'
 #' 
@@ -1451,13 +1451,13 @@ NULL
 #' conv_transpose3d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
 #'
 #'
-#' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iT , iH , iW)`
-#' @param weight NA filters of shape :math:`(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kT , kH , kW)`
-#' @param bias NA optional bias of shape :math:`(\text{out\_channels})`. Default: None
+#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iT , iH , iW)}
+#' @param weight NA filters of shape \eqn{(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kT , kH , kW)}
+#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: None
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sT, sH, sW)``. Default: 1
 #' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padT, padH, padW)``. Default: 0
 #' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple      ``(out_padT, out_padH, out_padW)``. Default: 0
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dT, dH, dW)`. Default: 1
 #'
 #' 
@@ -2307,8 +2307,8 @@ NULL
 #'
 #' @param window_length (int) the size of returned window
 #' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
-#' @param alpha (float, optional) The coefficient :math:`\alpha` in the equation above
-#' @param beta (float, optional) The coefficient :math:`\beta` in the equation above
+#' @param alpha (float, optional) The coefficient \eqn{\alpha} in the equation above
+#' @param beta (float, optional) The coefficient \eqn{\beta} in the equation above
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch.strided`` (dense layout) is supported.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
@@ -2641,7 +2641,7 @@ NULL
 #' inverse(input, out=None) -> Tensor
 #'
 #'
-#' @param input (Tensor) the input tensor of size :math:`(*, n, n)` where `*` is zero or more                    batch dimensions
+#' @param input (Tensor) the input tensor of size \eqn{(*, n, n)} where `*` is zero or more                    batch dimensions
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @examples
@@ -3834,8 +3834,8 @@ NULL
 #' pdist(input, p=2) -> Tensor
 #'
 #'
-#' @param input NA input tensor of shape :math:`N \times M`.
-#' @param p NA p value for the p-norm distance to calculate between each vector pair        :math:`\in [0, \infty]`.
+#' @param input NA input tensor of shape \eqn{N \times M}.
+#' @param p NA p value for the p-norm distance to calculate between each vector pair        \eqn{\in [0, \infty]}.
 #'
 #' 
 #'
@@ -3917,7 +3917,7 @@ NULL
 #' pinverse(input, rcond=1e-15) -> Tensor
 #'
 #'
-#' @param input (Tensor) The input tensor of size :math:`(*, m, n)` where :math:`*` is zero or more batch dimensions
+#' @param input (Tensor) The input tensor of size \eqn{(*, m, n)} where \eqn{*} is zero or more batch dimensions
 #' @param rcond (float) A floating point value to determine the cutoff for small singular values.                   Default: 1e-15
 #'
 #' @examples
@@ -4750,8 +4750,8 @@ NULL
 #' @param n_fft (int) size of Fourier transform
 #' @param hop_length (int, optional) the distance between neighboring sliding window        frames. Default: ``None`` (treated as equal to ``floor(n_fft / 4)``)
 #' @param win_length (int, optional) the size of window frame and STFT filter.        Default: ``None``  (treated as equal to :attr:`n_fft`)
-#' @param window (Tensor, optional) the optional window function.        Default: ``None`` (treated as window of all :math:`1` s)
-#' @param center (bool, optional) whether to pad :attr:`input` on both sides so        that the :math:`t`-th frame is centered at time :math:`t \times \text{hop\_length}`.        Default: ``True``
+#' @param window (Tensor, optional) the optional window function.        Default: ``None`` (treated as window of all \eqn{1} s)
+#' @param center (bool, optional) whether to pad :attr:`input` on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \text{hop\_length}}.        Default: ``True``
 #' @param pad_mode (string, optional) controls the padding method used when        :attr:`center` is ``True``. Default: ``"reflect"``
 #' @param normalized (bool, optional) controls whether to return the normalized STFT results         Default: ``False``
 #' @param onesided (bool, optional) controls whether to return half of results to        avoid redundancy Default: ``True``
@@ -5343,7 +5343,7 @@ NULL
 #'
 #'
 #' @param y (Tensor) The values of the function to integrate
-#' @param x (Tensor) The points at which the function `y` is sampled.        If `x` is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        :math:`\int_a^b f = -\int_b^a f` is followed).
+#' @param x (Tensor) The points at which the function `y` is sampled.        If `x` is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        \eqn{\int_a^b f = -\int_b^a f} is followed).
 #' @param dim (int) The dimension along which to integrate.        By default, use the last dimension.
 #'
 #' @examples
@@ -5898,9 +5898,9 @@ NULL
 #' addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -> Tensor
 #'
 #'
-#' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
+#' @param beta (Number, optional) multiplier for :attr:`input` (\eqn{\beta})
 #' @param input (Tensor) matrix to be added
-#' @param alpha (Number, optional) multiplier for :math:`mat1 @ mat2` (:math:`\alpha`)
+#' @param alpha (Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})
 #' @param mat1 (Tensor) the first matrix to be multiplied
 #' @param mat2 (Tensor) the second matrix to be multiplied
 #' @param out (Tensor, optional) the output tensor.
@@ -6255,9 +6255,9 @@ NULL
 #' addbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
 #'
 #'
-#' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
+#' @param beta (Number, optional) multiplier for :attr:`input` (\eqn{\beta})
 #' @param input (Tensor) matrix to be added
-#' @param alpha (Number, optional) multiplier for `batch1 @ batch2` (:math:`\alpha`)
+#' @param alpha (Number, optional) multiplier for `batch1 @ batch2` (\eqn{\alpha})
 #' @param batch1 (Tensor) the first batch of matrices to be multiplied
 #' @param batch2 (Tensor) the second batch of matrices to be multiplied
 #' @param out (Tensor, optional) the output tensor.
@@ -6934,7 +6934,7 @@ NULL
 #'
 #'
 #' @param input (Tensor) the tensor to be added
-#' @param value (Number, optional) multiplier for :math:`tensor1 .* tensor2`
+#' @param value (Number, optional) multiplier for \eqn{tensor1 .* tensor2}
 #' @param tensor1 (Tensor) the tensor to be multiplied
 #' @param tensor2 (Tensor) the tensor to be multiplied
 #' @param out (Tensor, optional) the output tensor.
@@ -6973,7 +6973,7 @@ NULL
 #'
 #'
 #' @param input (Tensor) the tensor to be added
-#' @param value (Number, optional) multiplier for :math:`\text{tensor1} / \text{tensor2}`
+#' @param value (Number, optional) multiplier for \eqn{\text{tensor1} / \text{tensor2}}
 #' @param tensor1 (Tensor) the numerator tensor
 #' @param tensor2 (Tensor) the denominator tensor
 #' @param out (Tensor, optional) the output tensor.
@@ -7027,8 +7027,8 @@ NULL
 #' lstsq(input, A, out=None) -> Tensor
 #'
 #'
-#' @param input (Tensor) the matrix :math:`B`
-#' @param A (Tensor) the :math:`m` by :math:`n` matrix :math:`A`
+#' @param input (Tensor) the matrix \eqn{B}
+#' @param A (Tensor) the \eqn{m} by \eqn{n} matrix \eqn{A}
 #' @param out (tuple, optional) the optional destination tensor
 #'
 #' @examples
@@ -7062,11 +7062,11 @@ NULL
 #' triangular_solve(input, A, upper=True, transpose=False, unitriangular=False) -> (Tensor, Tensor)
 #'
 #'
-#' @param input (Tensor) multiple right-hand sides of size :math:`(*, m, k)` where                :math:`*` is zero of more batch dimensions (:math:`b`)
-#' @param A (Tensor) the input triangular coefficient matrix of size :math:`(*, m, m)`                where :math:`*` is zero or more batch dimensions
+#' @param input (Tensor) multiple right-hand sides of size \eqn{(*, m, k)} where                \eqn{*} is zero of more batch dimensions (\eqn{b})
+#' @param A (Tensor) the input triangular coefficient matrix of size \eqn{(*, m, m)}                where \eqn{*} is zero or more batch dimensions
 #' @param upper (bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: ``True``.
-#' @param transpose (bool, optional) whether :math:`A` should be transposed before        being sent into the solver. Default: ``False``.
-#' @param unitriangular (bool, optional) whether :math:`A` is unit triangular.        If True, the diagonal elements of :math:`A` are assumed to be        1 and not referenced from :math:`A`. Default: ``False``.
+#' @param transpose (bool, optional) whether \eqn{A} should be transposed before        being sent into the solver. Default: ``False``.
+#' @param unitriangular (bool, optional) whether \eqn{A} is unit triangular.        If True, the diagonal elements of \eqn{A} are assumed to be        1 and not referenced from \eqn{A}. Default: ``False``.
 #'
 #' 
 #'
@@ -7111,7 +7111,7 @@ NULL
 #' symeig(input, eigenvectors=False, upper=True, out=None) -> (Tensor, Tensor)
 #'
 #'
-#' @param input (Tensor) the input tensor of size :math:`(*, n, n)` where `*` is zero or more                    batch dimensions consisting of symmetric matrices.
+#' @param input (Tensor) the input tensor of size \eqn{(*, n, n)} where `*` is zero or more                    batch dimensions consisting of symmetric matrices.
 #' @param eigenvectors (boolean, optional) controls whether eigenvectors have to be computed
 #' @param upper (boolean, optional) controls whether to consider upper-triangular or lower-triangular region
 #' @param out (tuple, optional) the output tuple of (Tensor, Tensor)
@@ -7137,7 +7137,7 @@ NULL
 #' eig(input, eigenvectors=False, out=None) -> (Tensor, Tensor)
 #'
 #'
-#' @param input (Tensor) the square matrix of shape :math:`(n \times n)` for which the eigenvalues and eigenvectors        will be computed
+#' @param input (Tensor) the square matrix of shape \eqn{(n \times n)} for which the eigenvalues and eigenvectors        will be computed
 #' @param eigenvectors (bool) ``True`` to compute both eigenvalues and eigenvectors;        otherwise, only eigenvalues will be computed
 #' @param out (tuple, optional) the output tensors
 #'
@@ -7191,7 +7191,7 @@ NULL
 #' svd(input, some=True, compute_uv=True, out=None) -> (Tensor, Tensor, Tensor)
 #'
 #'
-#' @param input (Tensor) the input tensor of size :math:`(*, m, n)` where `*` is zero or more                    batch dimensions consisting of :math:`m \times n` matrices.
+#' @param input (Tensor) the input tensor of size \eqn{(*, m, n)} where `*` is zero or more                    batch dimensions consisting of \eqn{m \times n} matrices.
 #' @param some (bool, optional) controls the shape of returned `U` and `V`
 #' @param compute_uv (bool, optional) option whether to compute `U` and `V` or not
 #' @param out (tuple, optional) the output tuple of tensors
@@ -7246,7 +7246,7 @@ NULL
 #' cholesky(input, upper=False, out=None) -> Tensor
 #'
 #'
-#' @param input (Tensor) the input tensor :math:`A` of size :math:`(*, n, n)` where `*` is zero or more                batch dimensions consisting of symmetric positive-definite matrices.
+#' @param input (Tensor) the input tensor \eqn{A} of size \eqn{(*, n, n)} where `*` is zero or more                batch dimensions consisting of symmetric positive-definite matrices.
 #' @param upper (bool, optional) flag that indicates whether to return a                            upper or lower triangular matrix. Default: ``False``
 #' @param out (Tensor, optional) the output matrix
 #'
@@ -7297,8 +7297,8 @@ NULL
 #' cholesky_solve(input, input2, upper=False, out=None) -> Tensor
 #'
 #'
-#' @param input (Tensor) input matrix :math:`b` of size :math:`(*, m, k)`,                where :math:`*` is zero or more batch dimensions
-#' @param input2 (Tensor) input matrix :math:`u` of size :math:`(*, m, m)`,                where :math:`*` is zero of more batch dimensions composed of                upper or lower triangular Cholesky factor
+#' @param input (Tensor) input matrix \eqn{b} of size \eqn{(*, m, k)},                where \eqn{*} is zero or more batch dimensions
+#' @param input2 (Tensor) input matrix \eqn{u} of size \eqn{(*, m, m)},                where \eqn{*} is zero of more batch dimensions composed of                upper or lower triangular Cholesky factor
 #' @param upper (bool, optional) whether to consider the Cholesky factor as a                            lower or upper triangular matrix. Default: ``False``.
 #' @param out (Tensor, optional) the output tensor for `c`
 #'
@@ -7344,8 +7344,8 @@ NULL
 #' torch.solve(input, A, out=None) -> (Tensor, Tensor)
 #'
 #'
-#' @param input (Tensor) input matrix :math:`B` of size :math:`(*, m, k)` , where :math:`*`                is zero or more batch dimensions.
-#' @param A (Tensor) input square matrix of size :math:`(*, m, m)`, where                :math:`*` is zero or more batch dimensions.
+#' @param input (Tensor) input matrix \eqn{B} of size \eqn{(*, m, k)} , where \eqn{*}                is zero or more batch dimensions.
+#' @param A (Tensor) input square matrix of size \eqn{(*, m, m)}, where                \eqn{*} is zero or more batch dimensions.
 #' @param out ((Tensor, Tensor) optional output tuple.
 #'
 #' @examples
@@ -7391,7 +7391,7 @@ NULL
 #' cholesky_inverse(input, upper=False, out=None) -> Tensor
 #'
 #'
-#' @param input (Tensor) the input 2-D tensor :math:`u`, a upper or lower triangular           Cholesky factor
+#' @param input (Tensor) the input 2-D tensor \eqn{u}, a upper or lower triangular           Cholesky factor
 #' @param upper (bool, optional) whether to return a lower (default) or upper triangular matrix
 #' @param out (Tensor, optional) the output tensor for `inv`
 #'
@@ -7433,9 +7433,9 @@ NULL
 #' qr(input, some=True, out=None) -> (Tensor, Tensor)
 #'
 #'
-#' @param input (Tensor) the input tensor of size :math:`(*, m, n)` where `*` is zero or more                batch dimensions consisting of matrices of dimension :math:`m \times n`.
+#' @param input (Tensor) the input tensor of size \eqn{(*, m, n)} where `*` is zero or more                batch dimensions consisting of matrices of dimension \eqn{m \times n}.
 #' @param some (bool, optional) Set to ``True`` for reduced QR decomposition and ``False`` for                complete QR decomposition.
-#' @param out (tuple, optional) tuple of `Q` and `R` tensors                satisfying :code:`input = torch.matmul(Q, R)`.                The dimensions of `Q` and `R` are :math:`(*, m, k)` and :math:`(*, k, n)`                respectively, where :math:`k = \min(m, n)` if :attr:`some:` is ``True`` and                :math:`k = m` otherwise.
+#' @param out (tuple, optional) tuple of `Q` and `R` tensors                satisfying :code:`input = torch.matmul(Q, R)`.                The dimensions of `Q` and `R` are \eqn{(*, m, k)} and \eqn{(*, k, n)}                respectively, where \eqn{k = \min(m, n)} if :attr:`some:` is ``True`` and                \eqn{k = m} otherwise.
 #'
 #' @examples
 #' \dontrun{
@@ -7547,9 +7547,9 @@ NULL
 #' lu_solve(input, LU_data, LU_pivots, out=None) -> Tensor
 #'
 #'
-#' @param b (Tensor) the RHS tensor of size :math:`(*, m, k)`, where :math:`*`                is zero or more batch dimensions.
-#' @param LU_data (Tensor) the pivoted LU factorization of A from :meth:`torch.lu` of size :math:`(*, m, m)`,                       where :math:`*` is zero or more batch dimensions.
-#' @param LU_pivots (IntTensor) the pivots of the LU factorization from :meth:`torch.lu` of size :math:`(*, m)`,                           where :math:`*` is zero or more batch dimensions.                           The batch dimensions of :attr:`LU_pivots` must be equal to the batch dimensions of                           :attr:`LU_data`.
+#' @param b (Tensor) the RHS tensor of size \eqn{(*, m, k)}, where \eqn{*}                is zero or more batch dimensions.
+#' @param LU_data (Tensor) the pivoted LU factorization of A from :meth:`torch.lu` of size \eqn{(*, m, m)},                       where \eqn{*} is zero or more batch dimensions.
+#' @param LU_pivots (IntTensor) the pivots of the LU factorization from :meth:`torch.lu` of size \eqn{(*, m)},                           where \eqn{*} is zero or more batch dimensions.                           The batch dimensions of :attr:`LU_pivots` must be equal to the batch dimensions of                           :attr:`LU_data`.
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @examples

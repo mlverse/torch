@@ -4,7 +4,7 @@
 \alias{torch_trapz}
 \title{Trapz}
 \arguments{
-\item{x}{(Tensor) The points at which the function \code{y} is sampled.        If \code{x} is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        :math:\verb{\\int_a^b f = -\\int_b^a f} is followed).}
+\item{x}{(Tensor) The points at which the function \code{y} is sampled.        If \code{x} is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        \eqn{\int_a^b f = -\int_b^a f} is followed).}
 
 \item{y}{(Tensor) The values of the function to integrate}
 

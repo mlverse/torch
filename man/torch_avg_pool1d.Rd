@@ -4,7 +4,7 @@
 \alias{torch_avg_pool1d}
 \title{Avg_pool1d}
 \arguments{
-\item{input}{NA input tensor of shape :math:\verb{(\\text\{minibatch\} , \\text\{in\\_channels\} , iW)}}
+\item{input}{NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iW)}}
 
 \item{kernel_size}{NA the size of the window. Can be a single number or a      tuple \verb{(kW,)}}
 

@@ -4,9 +4,9 @@
 \alias{torch_cholesky_solve}
 \title{Cholesky_solve}
 \arguments{
-\item{input}{(Tensor) input matrix :math:\code{b} of size :math:\verb{(*, m, k)},                where :math:\code{*} is zero or more batch dimensions}
+\item{input}{(Tensor) input matrix \eqn{b} of size \eqn{(*, m, k)},                where \eqn{*} is zero or more batch dimensions}
 
-\item{input2}{(Tensor) input matrix :math:\code{u} of size :math:\verb{(*, m, m)},                where :math:\code{*} is zero of more batch dimensions composed of                upper or lower triangular Cholesky factor}
+\item{input2}{(Tensor) input matrix \eqn{u} of size \eqn{(*, m, m)},                where \eqn{*} is zero of more batch dimensions composed of                upper or lower triangular Cholesky factor}
 
 \item{upper}{(bool, optional) whether to consider the Cholesky factor as a                            lower or upper triangular matrix. Default: \code{False}.}
 
