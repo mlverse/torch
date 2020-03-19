@@ -23,10 +23,12 @@ get_signatures <- function(doc) {
     discard(~.x == "")
 }
 
+arg_mark <- c("Args:", "Arguments:", "    Arguments:")
+
 get_args <- function(doc) {
 
   lines <- str_split(doc, "\n")[[1]]
-  i <- which(lines == "Args:" | lines == "Arguments:")
+  i <- which(lines %in% arg_mark)
 
   if (length(i) == 0)
     return(list())
@@ -42,6 +44,10 @@ get_args <- function(doc) {
     end <- min(poss) - 1
 
   arg_lines <- lines[(i+1):(end)]
+
+  if (lines[i] == "    Arguments:")
+    arg_lines <- str_replace_all(arg_lines, "^    ", "")
+
   l <- str_which(arg_lines, "^    [^ ]+")
   s <- sapply(seq_along(arg_lines), function(x) which.max(l[l<=x]))
   split(arg_lines, s) %>%
@@ -63,12 +69,12 @@ parse_args <- function(args) {
   )
 }
 
-get_desc <- function(doc) {
+get_long_desc <- function(doc) {
 
   lines <- str_split(doc, "\n")[[1]]
 
-  if (any(lines == "Args:" | lines == "Arguments:")) {
-    end <- min(which(lines == "Args:" | lines == "Arguments:")) -1
+  if (any(lines %in% arg_mark)) {
+    end <- min(which(lines %in% arg_mark)) -1
   } else if (any(lines == "Example::")) {
     end <- min(which(lines == "Example::"))
   } else {
@@ -76,6 +82,25 @@ get_desc <- function(doc) {
   }
 
   str_trim(str_c(lines[1:end], collapse = "\n"))
+}
+
+get_signature <- function(doc) {
+  desc <- get_long_desc(doc)
+  lines <- str_split(desc, "\n")[[1]]
+
+  if (str_detect(lines[1], "->"))
+    return(lines[1])
+  else
+    return(NULL)
+}
+
+get_desc <- function(doc) {
+  desc <- get_long_desc(doc)
+  lines <- str_split(desc, "\n")[[1]]
+  if (str_detect(lines[1], "->"))
+    return(str_c(lines[-1], collapse = "\n"))
+  else
+    desc
 }
 
 get_examples <- function(doc) {
@@ -141,10 +166,14 @@ parse_math <- function(desc) {
 
 create_roxygen_desc <- function(desc) {
 
+  if (desc == "" | is.null(desc))
+    return("#' Empty description...")
+
   desc <- str_replace_all(desc, ":attr:", "")
   desc <- str_replace_all(desc, ":func:(`.*`)", "[\\1]")
   desc <- str_replace_all(desc, "`torch\\.(.*)`", "`torch_\\1`")
   desc <- parse_math(desc)
+  desc <- str_trim(desc)
 
   lines <- str_split(desc, "\n")[[1]]
   str_c(str_c("#' ", lines), collapse = "\n")
@@ -173,11 +202,26 @@ create_roxygen_example <- function(exam) {
   )
 }
 
-create_roxygen <- function(name, param, desc, exam) {
+create_roxygen_signature_section <- function(sign) {
+  if (is.null(sign))
+    return("#' ")
+
+  glue::glue(
+    "#' @section Signatures:",
+    "#' ",
+    str_c("#' ", sign),
+    "#'",
+    .sep = "\n"
+  )
+}
+
+create_roxygen <- function(name, param, desc, exam, sign) {
   str_c(
     create_roxygen_title(name),
     "#'",
     create_roxygen_desc(desc),
+    "#'",
+    create_roxygen_signature_section(sign),
     "#'",
     create_roxygen_params(param),
     "#'",
@@ -205,12 +249,13 @@ docum <- function(path) {
   args <- map(docs, ~map(.x, . %>% get_args %>% parse_args))
   desc <- map(docs, ~map(.x, get_desc))
   exam <- map(docs, ~map(.x, get_examples))
+  sign <- map(docs, ~map(.x, get_signature))
 
-  d <- transpose(list(args = args, desc = desc, exam = exam))
+  d <- transpose(list(args = args, desc = desc, exam = exam, sign = sign))
   d <- map(d, transpose)
 
   out <- imap(d, function(x, name) {
-    map(x, ~create_roxygen(name, .x$args, .x$desc, .x$exam))
+    map(x, ~create_roxygen(name, .x$args, .x$desc, .x$exam, .x$sign))
   })
   out <- map(out, ~str_c(.x, collapse = "\n\n"))
   out <- out[!is.na(out)]
