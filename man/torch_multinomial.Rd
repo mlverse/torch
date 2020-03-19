@@ -45,3 +45,12 @@ When drawn without replacement, :attr:\code{num_samples} must be lower than
 number of non-zero elements in :attr:\code{input} (or the min number of non-zero
 elements in each row of :attr:\code{input} if it is a matrix).
 }
+\examples{
+\dontrun{
+weights = torch_tensor([0, 10, 3, 0], dtype=torch_float) # create a tensor of weights
+torch_multinomial(weights, 2)
+torch_multinomial(weights, 4) # ERROR!
+torch_multinomial(weights, 4, replacement=True)
+}
+
+}

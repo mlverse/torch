@@ -20,3 +20,11 @@ size :math:\code{m}, then :attr:\code{out} must be a matrix of size :math:\verb{
 
 .. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 }
+\examples{
+\dontrun{
+v1 = torch_arange(1., 5.)
+v2 = torch_arange(1., 4.)
+torch_ger(v1, v2)
+}
+
+}

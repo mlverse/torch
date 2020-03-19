@@ -28,3 +28,13 @@ tensor.  If :attr:\code{out} has a different shape than expected, we
 silently change it to the correct shape, reallocating the underlying
 storage if necessary.
 }
+\examples{
+\dontrun{
+x = torch_randn(3, 4)
+x
+indices = torch_tensor([0, 2])
+torch_index_select(x, 0, indices)
+torch_index_select(x, 1, indices)
+}
+
+}

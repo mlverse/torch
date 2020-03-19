@@ -51,3 +51,18 @@ can be arbitrary bases of the subspaces.
 .. note:: When :attr:\code{compute_uv} = \code{False}, backward cannot be performed since \code{U} and \code{V}
 from the forward pass is required for the backward operation.
 }
+\examples{
+\dontrun{
+a = torch_randn(5, 3)
+a
+u, s, v = torch_svd(a)
+u
+s
+v
+torch_dist(a, torch_mm(torch_mm(u, torch_diag(s)), v.t()))
+a_big = torch_randn(7, 5, 3)
+u, s, v = torch_svd(a_big)
+torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v.transpose(-2, -1)))
+}
+
+}

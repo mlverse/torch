@@ -23,3 +23,10 @@ ones(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_gr
 Returns a tensor filled with the scalar value \code{1}, with the shape defined
 by the variable argument :attr:\code{size}.
 }
+\examples{
+\dontrun{
+torch_ones(2, 3)
+torch_ones(5)
+}
+
+}

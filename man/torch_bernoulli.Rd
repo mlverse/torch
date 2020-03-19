@@ -34,3 +34,15 @@ shape as :attr:\code{input}.
 :attr:\code{out} can have integral \code{dtype}, but :attr:\code{input} must have floating
 point \code{dtype}.
 }
+\examples{
+\dontrun{
+a = torch_empty(3, 3).uniform_(0, 1)  # generate a uniform random matrix with range [0, 1]
+a
+torch_bernoulli(a)
+a = torch_ones(3, 3) # probability of drawing "1" is 1
+torch_bernoulli(a)
+a = torch_zeros(3, 3) # probability of drawing "1" is 0
+torch_bernoulli(a)
+}
+
+}

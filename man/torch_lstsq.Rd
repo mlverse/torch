@@ -42,3 +42,12 @@ remaining :math:\code{m - n} rows of that column.
 .. note::
 The case when :math:\code{m < n} is not supported on the GPU.
 }
+\examples{
+\dontrun{
+A = torch_tensor([[1., 1, 1],
+B = torch_tensor([[-10., -3],
+X, _ = torch_lstsq(B, A)
+X
+}
+
+}

@@ -27,3 +27,10 @@ As of 0.4, this function does not support an :attr:\code{out} keyword. As an alt
 the old \code{torch.ones_like(input, out=output)} is equivalent to
 \code{torch.ones(input.size(), out=output)}.
 }
+\examples{
+\dontrun{
+input = torch_empty(2, 3)
+torch_ones_like(input)
+}
+
+}

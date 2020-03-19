@@ -16,3 +16,11 @@ Removes a tensor dimension.
 
 Returns a tuple of all slices along a given dimension, already without it.
 }
+\examples{
+\dontrun{
+torch_unbind(torch_tensor([[1, 2, 3],
+                           [4, 5, 6],
+                           [7, 8, 9]]))
+}
+
+}

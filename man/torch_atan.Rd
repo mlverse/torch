@@ -17,3 +17,11 @@ Returns a new tensor with the arctangent  of the elements of :attr:\code{input}.
 .. math::
 \text{out}\emph{{i} = \tan^{-1}(\text{input}}{i})
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_atan(a)
+}
+
+}

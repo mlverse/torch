@@ -15,3 +15,10 @@ can_cast(from, to) -> bool
 Determines if a type conversion is allowed under PyTorch casting rules
 described in the type promotion :ref:\verb{documentation <type-promotion-doc>}.
 }
+\examples{
+\dontrun{
+torch_can_cast(torch_double, torch_float)
+torch_can_cast(torch_float, torch_int)
+}
+
+}

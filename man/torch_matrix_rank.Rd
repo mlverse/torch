@@ -25,3 +25,13 @@ specified, :attr:\code{tol} is set to \code{S.max() * max(S.size()) * eps} where
 singular values (or the eigenvalues when :attr:\code{symmetric} is \code{True}), and \code{eps}
 is the epsilon value for the datatype of :attr:\code{input}.
 }
+\examples{
+\dontrun{
+a = torch_eye(10)
+torch_matrix_rank(a)
+b = torch_eye(10)
+b[0, 0] = 0
+torch_matrix_rank(b)
+}
+
+}

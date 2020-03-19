@@ -26,3 +26,13 @@ tensor of size 0. If :attr:\code{minlength} is specified, the number of bins is 
 
 .. include:: cuda_deterministic.rst
 }
+\examples{
+\dontrun{
+input = torch_randint(0, 8, (5,), dtype=torch_int64)
+weights = torch_linspace(0, 1, steps=5)
+input, weights
+torch_bincount(input)
+input.bincount(weights)
+}
+
+}

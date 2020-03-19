@@ -23,3 +23,12 @@ and :func:\code{torch.chunk}.
 
 :func:\code{torch.cat} can be best understood via examples.
 }
+\examples{
+\dontrun{
+x = torch_randn(2, 3)
+x
+torch_cat((x, x, x), 0)
+torch_cat((x, x, x), 1)
+}
+
+}

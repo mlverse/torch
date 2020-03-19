@@ -23,3 +23,10 @@ Computes the :math:\code{n^{th}} derivative of the digamma function on :attr:\co
 .. note::
 This function is not implemented for :math:\verb{n \\geq 2}.
 }
+\examples{
+\dontrun{
+a = torch_tensor([1, 0.5])
+torch_polygamma(1, a)
+}
+
+}

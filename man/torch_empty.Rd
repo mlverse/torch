@@ -25,3 +25,9 @@ empty(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_g
 Returns a tensor filled with uninitialized data. The shape of the tensor is
 defined by the variable argument :attr:\code{size}.
 }
+\examples{
+\dontrun{
+torch_empty(2, 3)
+}
+
+}

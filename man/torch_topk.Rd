@@ -33,3 +33,11 @@ of the elements in the original \code{input} tensor.
 The boolean option :attr:\code{sorted} if \code{True}, will make sure that the returned
 \code{k} elements are themselves sorted
 }
+\examples{
+\dontrun{
+x = torch_arange(1., 6.)
+x
+torch_topk(x, 3)
+}
+
+}

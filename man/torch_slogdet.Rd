@@ -21,3 +21,13 @@ is not invertible. In this case, double backward through :meth:\code{slogdet}
 will be unstable in when :attr:\code{input} doesn't have distinct singular values.
 See :meth:\code{~torch.svd} for details.
 }
+\examples{
+\dontrun{
+A = torch_randn(3, 3)
+A
+torch_det(A)
+torch_logdet(A)
+torch_slogdet(A)
+}
+
+}

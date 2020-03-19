@@ -25,3 +25,15 @@ with the given :attr:\code{values}. A sparse tensor can be \code{uncoalesced}, i
 coordinates in the indices, and the value at that index is the sum of all duplicate value entries:
 \code{torch.sparse}_.
 }
+\examples{
+\dontrun{
+i = torch_tensor([[0, 1, 1],
+v = torch_tensor([3, 4, 5], dtype=torch_float32)
+torch_sparse_coo_tensor(i, v, [2, 4])
+torch_sparse_coo_tensor(i, v)  # Shape inference
+torch_sparse_coo_tensor(i, v, [2, 4],
+S = torch_sparse_coo_tensor(torch_empty([1, 0]), [], [1])
+S = torch_sparse_coo_tensor(torch_empty([1, 0]), torch_empty([0, 2]), [1, 2])
+}
+
+}

@@ -22,3 +22,9 @@ randperm(n, out=None, dtype=torch.int64, layout=torch.strided, device=None, requ
 \details{
 Returns a random permutation of integers from \code{0} to \code{n - 1}.
 }
+\examples{
+\dontrun{
+torch_randperm(4)
+}
+
+}

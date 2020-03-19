@@ -54,3 +54,11 @@ monitor and control the cache.
 For CPU tensors, this method is currently only available with MKL. Use
 :func:\code{torch.backends.mkl.is_available} to check if MKL is installed.
 }
+\examples{
+\dontrun{
+x = torch_randn(5, 5)
+torch_rfft(x, 2).shape
+torch_rfft(x, 2, onesided=False).shape
+}
+
+}

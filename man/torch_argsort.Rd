@@ -20,3 +20,11 @@ order by value.
 This is the second value returned by :meth:\code{torch.sort}.  See its documentation
 for the exact semantics of this method.
 }
+\examples{
+\dontrun{
+a = torch_randn(4, 4)
+a
+torch_argsort(a, dim=1)
+}
+
+}

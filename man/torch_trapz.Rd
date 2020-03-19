@@ -22,3 +22,12 @@ Estimate :math:\verb{\\int y\\,dx} along \code{dim}, using the trapezoid rule.
 
 As above, but the sample points are spaced uniformly at a distance of \code{dx}.
 }
+\examples{
+\dontrun{
+y = torch_randn((2, 3))
+y
+x = torch_tensor([[1, 3, 4], [1, 2, 3]])
+torch_trapz(y, x)
+}
+
+}

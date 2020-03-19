@@ -18,3 +18,9 @@ The inverse error function is defined in the range :math:\verb{(-1, 1)} as:
 .. math::
 \mathrm{erfinv}(\mathrm{erf}(x)) = x
 }
+\examples{
+\dontrun{
+torch_erfinv(torch_tensor([0, 0.5, -1.]))
+}
+
+}

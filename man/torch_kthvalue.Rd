@@ -30,3 +30,14 @@ they are of size 1. Otherwise, :attr:\code{dim} is squeezed
 (see :func:\code{torch.squeeze}), resulting in both the :attr:\code{values} and
 :attr:\code{indices} tensors having 1 fewer dimension than the :attr:\code{input} tensor.
 }
+\examples{
+\dontrun{
+x = torch_arange(1., 6.)
+x
+torch_kthvalue(x, 4)
+x=torch_arange(1.,7.).resize_(2,3)
+x
+torch_kthvalue(x, 2, 0, True)
+}
+
+}

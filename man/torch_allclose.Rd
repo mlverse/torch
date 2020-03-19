@@ -26,3 +26,12 @@ This function checks if all :attr:\code{input} and :attr:\code{other} satisfy th
 elementwise, for all elements of :attr:\code{input} and :attr:\code{other}. The behaviour of this function is analogous to
 \verb{numpy.allclose <https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html>}_
 }
+\examples{
+\dontrun{
+torch_allclose(torch_tensor([10000., 1e-07]), torch_tensor([10000.1, 1e-08]))
+torch_allclose(torch_tensor([10000., 1e-08]), torch_tensor([10000.1, 1e-09]))
+torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]))
+torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]), equal_nan=True)
+}
+
+}

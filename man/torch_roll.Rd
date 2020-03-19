@@ -19,3 +19,13 @@ last position are re-introduced at the first position. If a dimension is not
 specified, the tensor will be flattened before rolling and then restored
 to the original shape.
 }
+\examples{
+\dontrun{
+x = torch_tensor([1, 2, 3, 4, 5, 6, 7, 8]).view(4, 2)
+x
+torch_roll(x, 1, 0)
+torch_roll(x, -1, 0)
+torch_roll(x, shifts=(2, 1), dims=(0, 1))
+}
+
+}

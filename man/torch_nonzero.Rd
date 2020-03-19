@@ -46,3 +46,13 @@ non-zero elements in the :attr:\code{input} tensor.
 As a special case, when :attr:\code{input} has zero dimensions and a nonzero scalar
 value, it is treated as a one-dimensional tensor with one element.
 }
+\examples{
+\dontrun{
+torch_nonzero(torch_tensor([1, 1, 1, 0, 1]))
+torch_nonzero(torch_tensor([[0.6, 0.0, 0.0, 0.0],
+torch_nonzero(torch_tensor([1, 1, 1, 0, 1]), as_tuple=True)
+torch_nonzero(torch_tensor([[0.6, 0.0, 0.0, 0.0],
+torch_nonzero(torch_tensor(5), as_tuple=True)
+}
+
+}

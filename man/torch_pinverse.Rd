@@ -25,3 +25,15 @@ However, this method is backprop-able due to the implementation by using SVD res
 could be unstable. Double-backward will also be unstable due to the usage of SVD internally.
 See :meth:\code{~torch.svd} for more details.
 }
+\examples{
+\dontrun{
+input = torch_randn(3, 5)
+input
+torch_pinverse(input)
+# Batched pinverse example
+a = torch_randn(2,6,3)
+b = torch_pinverse(a)
+torch_matmul(b, a)
+}
+
+}

@@ -24,3 +24,11 @@ parameter, is the y-coordinate.)
 The shapes of \code{input} and \code{other} must be
 :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_atan2(a, torch_randn(4))
+}
+
+}

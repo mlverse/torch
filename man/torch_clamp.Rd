@@ -45,3 +45,23 @@ Clamps all elements in :attr:\code{input} to be smaller or equal :attr:\code{max
 If :attr:\code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, :attr:\code{value}
 should be a real number, otherwise it should be an integer.
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_clamp(a, min=-0.5, max=0.5)
+}
+
+\dontrun{
+a = torch_randn(4)
+a
+torch_clamp(a, min=0.5)
+}
+
+\dontrun{
+a = torch_randn(4)
+a
+torch_clamp(a, max=0.5)
+}
+
+}

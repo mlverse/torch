@@ -16,3 +16,10 @@ Returns a new tensor with the elements of :attr:\code{input} at the given indice
 The input tensor is treated as if it were viewed as a 1-D tensor. The result
 takes the same shape as the indices.
 }
+\examples{
+\dontrun{
+src = torch_tensor([[4, 3, 5],
+torch_take(src, torch_tensor([0, 2, 5]))
+}
+
+}

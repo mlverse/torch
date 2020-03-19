@@ -35,3 +35,12 @@ The tensors :attr:\code{condition}, :attr:\code{x}, :attr:\code{y} must be :ref:
 .. note::
 See also :func:\code{torch.nonzero}.
 }
+\examples{
+\dontrun{
+x = torch_randn(3, 2)
+y = torch_ones(3, 2)
+x
+torch_where(x > 0, x, y)
+}
+
+}

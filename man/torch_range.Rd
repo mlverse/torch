@@ -34,3 +34,10 @@ the gap between two values in the tensor.
 .. warning::
 This function is deprecated in favor of :func:\code{torch.arange}.
 }
+\examples{
+\dontrun{
+torch_range(1, 4)
+torch_range(1, 4, 0.5)
+}
+
+}

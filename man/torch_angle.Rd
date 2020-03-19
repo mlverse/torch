@@ -17,3 +17,9 @@ Computes the element-wise angle (in radians) of the given :attr:\code{input} ten
 .. math::
 \text{out}\emph{{i} = angle(\text{input}}{i})
 }
+\examples{
+\dontrun{
+torch_angle(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))*180/3.14159
+}
+
+}

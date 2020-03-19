@@ -38,3 +38,12 @@ size \code{m}, then :attr:\code{input} must be
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and
 :attr:\code{alpha} must be real numbers, otherwise they should be integers
 }
+\examples{
+\dontrun{
+M = torch_randn(2)
+mat = torch_randn(2, 3)
+vec = torch_randn(3)
+torch_addmv(M, mat, vec)
+}
+
+}

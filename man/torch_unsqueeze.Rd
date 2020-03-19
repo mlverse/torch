@@ -23,3 +23,11 @@ A :attr:\code{dim} value within the range \verb{[-input.dim() - 1, input.dim() +
 can be used. Negative :attr:\code{dim} will correspond to :meth:\code{unsqueeze}
 applied at :attr:\code{dim} = \code{dim + input.dim() + 1}.
 }
+\examples{
+\dontrun{
+x = torch_tensor([1, 2, 3, 4])
+torch_unsqueeze(x, 0)
+torch_unsqueeze(x, 1)
+}
+
+}

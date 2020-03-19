@@ -32,3 +32,12 @@ logarithmically spaced with base :attr:\code{base} between
 
 The output tensor is 1-D of size :attr:\code{steps}.
 }
+\examples{
+\dontrun{
+torch_logspace(start=-10, end=10, steps=5)
+torch_logspace(start=0.1, end=1.0, steps=5)
+torch_logspace(start=0.1, end=1.0, steps=1)
+torch_logspace(start=2, end=2, steps=1, base=2)
+}
+
+}

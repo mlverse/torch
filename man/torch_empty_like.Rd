@@ -22,3 +22,9 @@ Returns an uninitialized tensor with the same size as :attr:\code{input}.
 \code{torch.empty_like(input)} is equivalent to
 \code{torch.empty(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
 }
+\examples{
+\dontrun{
+torch_empty((2,3), dtype=torch_int64)
+}
+
+}

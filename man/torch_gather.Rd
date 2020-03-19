@@ -31,3 +31,10 @@ and \code{dim = i}, then :attr:\code{index} must be an :math:\code{n}-dimensiona
 size :math:\verb{(x_0, x_1, ..., x_\{i-1\}, y, x_\{i+1\}, ..., x_\{n-1\})} where :math:\verb{y \\geq 1}
 and :attr:\code{out} will have the same size as :attr:\code{index}.
 }
+\examples{
+\dontrun{
+t = torch_tensor([[1,2],[3,4]])
+torch_gather(t, 1, torch_tensor([[0,0],[1,0]]))
+}
+
+}

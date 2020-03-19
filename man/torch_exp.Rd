@@ -18,3 +18,9 @@ of the input tensor :attr:\code{input}.
 .. math::
 y_{i} = e^{x_{i}}
 }
+\examples{
+\dontrun{
+torch_exp(torch_tensor([0, math.log(2.)]))
+}
+
+}

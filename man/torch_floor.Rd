@@ -18,3 +18,11 @@ the largest integer less than or equal to each element.
 .. math::
 \text{out}\emph{{i} = \left\lfloor \text{input}}{i} \right\rfloor
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_floor(a)
+}
+
+}

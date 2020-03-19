@@ -21,3 +21,12 @@ Returns cosine similarity between x1 and x2, computed along dim.
 .. math ::
 \text{similarity} = \dfrac{x_1 \cdot x_2}{\max(\Vert x_1 \Vert _2 \cdot \Vert x_2 \Vert _2, \epsilon)}
 }
+\examples{
+\dontrun{
+input1 = torch_randn(100, 128)
+input2 = torch_randn(100, 128)
+output = F.cosine_similarity(input1, input2)
+print(output)
+}
+
+}

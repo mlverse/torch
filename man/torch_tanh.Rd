@@ -18,3 +18,11 @@ of :attr:\code{input}.
 .. math::
 \text{out}\emph{{i} = \tanh(\text{input}}{i})
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_tanh(a)
+}
+
+}

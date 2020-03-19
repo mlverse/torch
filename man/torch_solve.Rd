@@ -30,3 +30,17 @@ batched outputs \verb{solution, LU}.
 `A.contiguous().transpose(-1, -2).stride()` respectively.
 }
 }
+\examples{
+\dontrun{
+A = torch_tensor([[6.80, -2.11,  5.66,  5.97,  8.23],
+B = torch_tensor([[4.02,  6.19, -8.22, -7.57, -3.03],
+X, LU = torch_solve(B, A)
+torch_dist(B, torch_mm(A, X))
+# Batched solver example
+A = torch_randn(2, 3, 1, 4, 4)
+B = torch_randn(2, 3, 1, 4, 6)
+X, LU = torch_solve(B, A)
+torch_dist(B, A.matmul(X))
+}
+
+}

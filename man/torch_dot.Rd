@@ -13,3 +13,9 @@ Computes the dot product (inner product) of two tensors.
 
 Example::
 }
+\examples{
+\dontrun{
+torch_dot(torch_tensor([2, 3]), torch_tensor([2, 1]))
+}
+
+}

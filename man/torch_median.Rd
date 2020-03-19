@@ -33,3 +33,17 @@ as :attr:\code{input} except in the dimension :attr:\code{dim} where they are of
 Otherwise, :attr:\code{dim} is squeezed (see :func:\code{torch.squeeze}), resulting in
 the outputs tensor having 1 fewer dimension than :attr:\code{input}.
 }
+\examples{
+\dontrun{
+a = torch_randn(1, 3)
+a
+torch_median(a)
+}
+
+\dontrun{
+a = torch_randn(4, 5)
+a
+torch_median(a, 1)
+}
+
+}

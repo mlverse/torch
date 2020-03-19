@@ -40,3 +40,19 @@ The shapes of :attr:\code{input} and :attr:\code{other} must be
 If :attr:\code{other} is of type FloatTensor or DoubleTensor, :attr:\code{alpha} must be
 a real number, otherwise it should be an integer.
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_add(a, 20)
+}
+
+\dontrun{
+a = torch_randn(4)
+a
+b = torch_randn(4, 1)
+b
+torch_add(a, 10, b)
+}
+
+}

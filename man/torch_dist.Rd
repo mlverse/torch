@@ -19,3 +19,16 @@ Returns the p-norm of (:attr:\code{input} - :attr:\code{other})
 The shapes of :attr:\code{input} and :attr:\code{other} must be
 :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
+\examples{
+\dontrun{
+x = torch_randn(4)
+x
+y = torch_randn(4)
+y
+torch_dist(x, y, 3.5)
+torch_dist(x, y, 3)
+torch_dist(x, y, 0)
+torch_dist(x, y, 1)
+}
+
+}

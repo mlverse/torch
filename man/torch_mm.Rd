@@ -22,3 +22,11 @@ If :attr:\code{input} is a :math:\verb{(n \\times m)} tensor, :attr:\code{mat2} 
 .. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 For broadcasting matrix products, see :func:\code{torch.matmul}.
 }
+\examples{
+\dontrun{
+mat1 = torch_randn(2, 3)
+mat2 = torch_randn(3, 3)
+torch_mm(mat1, mat2)
+}
+
+}

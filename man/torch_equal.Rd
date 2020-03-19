@@ -11,3 +11,9 @@ equal(input, other) -> bool
 
 Example::
 }
+\examples{
+\dontrun{
+torch_equal(torch_tensor([1, 2]), torch_tensor([1, 2]))
+}
+
+}

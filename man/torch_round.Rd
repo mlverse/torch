@@ -15,3 +15,11 @@ round(input, out=None) -> Tensor
 Returns a new tensor with each of the elements of :attr:\code{input} rounded
 to the closest integer.
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_round(a)
+}
+
+}

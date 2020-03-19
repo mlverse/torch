@@ -24,3 +24,13 @@ than the value :attr:\code{maxnorm}
 
 .. note:: If the norm of a row is lower than \code{maxnorm}, the row is unchanged
 }
+\examples{
+\dontrun{
+x = torch_ones(3, 3)
+x[1].fill_(2)
+x[2].fill_(3)
+x
+torch_renorm(x, 1, 0, 5)
+}
+
+}

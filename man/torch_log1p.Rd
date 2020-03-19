@@ -20,3 +20,11 @@ y_i = \log_{e} (x_i + 1)
 .. note:: This function is more accurate than :func:\code{torch.log} for small
 values of :attr:\code{input}
 }
+\examples{
+\dontrun{
+a = torch_randn(5)
+a
+torch_log1p(a)
+}
+
+}

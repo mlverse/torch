@@ -23,3 +23,12 @@ See :meth:\code{torch.Tensor.view} on when it is possible to return a view.
 A single dimension may be -1, in which case it's inferred from the remaining
 dimensions and the number of elements in :attr:\code{input}.
 }
+\examples{
+\dontrun{
+a = torch_arange(4.)
+torch_reshape(a, (2, 2))
+b = torch_tensor([[0, 1], [2, 3]])
+torch_reshape(b, (-1,))
+}
+
+}

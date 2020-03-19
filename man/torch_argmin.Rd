@@ -26,3 +26,17 @@ Returns the indices of the minimum values of a tensor across a dimension.
 This is the second value returned by :meth:\code{torch.min}. See its
 documentation for the exact semantics of this method.
 }
+\examples{
+\dontrun{
+a = torch_randn(4, 4)
+a
+torch_argmin(a)
+}
+
+\dontrun{
+a = torch_randn(4, 4)
+a
+torch_argmin(a, dim=1)
+}
+
+}

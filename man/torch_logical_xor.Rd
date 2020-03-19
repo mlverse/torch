@@ -17,3 +17,15 @@ logical_xor(input, other, out=None) -> Tensor
 Computes the element-wise logical XOR of the given input tensors. Zeros are treated as \code{False} and nonzeros are
 treated as \code{True}.
 }
+\examples{
+\dontrun{
+torch_logical_xor(torch_tensor([True, False, True]), torch_tensor([True, False, False]))
+a = torch_tensor([0, 1, 10, 0], dtype=torch_int8)
+b = torch_tensor([4, 0, 1, 0], dtype=torch_int8)
+torch_logical_xor(a, b)
+torch_logical_xor(a.double(), b.double())
+torch_logical_xor(a.double(), b)
+torch_logical_xor(a, b, out=torch_empty(4, dtype=torch_bool))
+}
+
+}

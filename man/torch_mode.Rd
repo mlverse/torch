@@ -32,3 +32,12 @@ in the output tensors having 1 fewer dimension than :attr:\code{input}.
 
 .. note:: This function is not defined for \code{torch.cuda.Tensor} yet.
 }
+\examples{
+\dontrun{
+a = torch_randint(10, (5,))
+a
+b = a + (torch_randn(50, 1) * 5).long()
+torch_mode(b, 0)
+}
+
+}

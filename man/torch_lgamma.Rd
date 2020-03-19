@@ -17,3 +17,10 @@ Computes the logarithm of the gamma function on :attr:\code{input}.
 .. math::
 \text{out}\emph{{i} = \log \Gamma(\text{input}}{i})
 }
+\examples{
+\dontrun{
+a = torch_arange(0.5, 2, 0.5)
+torch_lgamma(a)
+}
+
+}

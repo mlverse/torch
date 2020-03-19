@@ -18,3 +18,16 @@ Compute combinations of length :math:\code{r} of the given tensor. The behavior 
 python's \code{itertools.combinations} when \code{with_replacement} is set to \code{False}, and
 \code{itertools.combinations_with_replacement} when \code{with_replacement} is set to \code{True}.
 }
+\examples{
+\dontrun{
+a = [1, 2, 3]
+list(itertools.combinations(a, r=2))
+list(itertools.combinations(a, r=3))
+list(itertools.combinations_with_replacement(a, r=2))
+tensor_a = torch_tensor(a)
+torch_combinations(tensor_a)
+torch_combinations(tensor_a, r=3)
+torch_combinations(tensor_a, with_replacement=True)
+}
+
+}

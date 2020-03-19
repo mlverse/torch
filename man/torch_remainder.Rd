@@ -22,3 +22,10 @@ numbers. The remainder has the same sign as the divisor.
 When :attr:\code{other} is a tensor, the shapes of :attr:\code{input} and
 :attr:\code{other} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
+\examples{
+\dontrun{
+torch_remainder(torch_tensor([-3., -2, -1, 1, 2, 3]), 2)
+torch_remainder(torch_tensor([1., 2, 3, 4, 5]), 1.5)
+}
+
+}

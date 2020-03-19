@@ -23,3 +23,13 @@ to match, but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 .. note:: The returned tensor does \strong{not} use the same storage
 as the original tensor
 }
+\examples{
+\dontrun{
+x = torch_randn(3, 4)
+x
+mask = x.ge(0.5)
+mask
+torch_masked_select(x, mask)
+}
+
+}

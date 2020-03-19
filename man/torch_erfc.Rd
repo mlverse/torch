@@ -18,3 +18,9 @@ The complementary error function is defined as follows:
 .. math::
 \mathrm{erfc}(x) = 1 - \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt
 }
+\examples{
+\dontrun{
+torch_erfc(torch_tensor([0, -1., 10.]))
+}
+
+}

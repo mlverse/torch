@@ -39,3 +39,12 @@ of size \code{m}, then :attr:\code{input} must be
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and
 :attr:\code{alpha} must be real numbers, otherwise they should be integers
 }
+\examples{
+\dontrun{
+vec1 = torch_arange(1., 4.)
+vec2 = torch_arange(1., 3.)
+M = torch_zeros(3, 2)
+torch_addr(M, vec1, vec2)
+}
+
+}

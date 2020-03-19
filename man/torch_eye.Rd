@@ -24,3 +24,9 @@ eye(n, m=None, out=None, dtype=None, layout=torch.strided, device=None, requires
 \details{
 Returns a 2-D tensor with ones on the diagonal and zeros elsewhere.
 }
+\examples{
+\dontrun{
+torch_eye(3)
+}
+
+}

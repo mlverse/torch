@@ -18,3 +18,11 @@ Returns a new tensor with the hyperbolic cosine  of the elements of
 .. math::
 \text{out}\emph{{i} = \cosh(\text{input}}{i})
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_cosh(a)
+}
+
+}

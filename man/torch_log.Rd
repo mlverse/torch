@@ -18,3 +18,11 @@ of :attr:\code{input}.
 .. math::
 y_{i} = \log_{e} (x_{i})
 }
+\examples{
+\dontrun{
+a = torch_randn(5)
+a
+torch_log(a)
+}
+
+}

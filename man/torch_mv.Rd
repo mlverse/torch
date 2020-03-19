@@ -22,3 +22,11 @@ size :math:\code{m}, :attr:\code{out} will be 1-D of size :math:\code{n}.
 
 .. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 }
+\examples{
+\dontrun{
+mat = torch_randn(2, 3)
+vec = torch_randn(3)
+torch_mv(mat, vec)
+}
+
+}

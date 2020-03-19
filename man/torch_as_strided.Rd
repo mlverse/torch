@@ -29,3 +29,13 @@ implemented with this function. Those functions, like
 advisable to use.
 }
 }
+\examples{
+\dontrun{
+x = torch_randn(3, 3)
+x
+t = torch_as_strided(x, (2, 2), (1, 2))
+t
+t = torch_as_strided(x, (2, 2), (1, 2), 1)
+}
+
+}

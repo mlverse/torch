@@ -35,3 +35,11 @@ The shape of the tensor is defined by the variable argument :attr:\code{size}.
 With the global dtype default (\code{torch.float32}), this function returns
 a tensor with dtype \code{torch.int64}.
 }
+\examples{
+\dontrun{
+torch_randint(3, 5, (3,))
+torch_randint(10, (2, 2))
+torch_randint(3, 10, (2, 2))
+}
+
+}

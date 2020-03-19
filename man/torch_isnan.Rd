@@ -9,3 +9,9 @@
 \description{
 Returns a new tensor with boolean elements representing if each element is \code{NaN} or not.
 }
+\examples{
+\dontrun{
+torch_isnan(torch_tensor([1, float('nan'), 2]))
+}
+
+}

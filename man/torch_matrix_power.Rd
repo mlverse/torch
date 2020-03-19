@@ -20,3 +20,11 @@ raised to the power :attr:\code{n}.  For a batch of matrices, the batched invers
 (if invertible) is raised to the power :attr:\code{n}. If :attr:\code{n} is 0, then an identity matrix
 is returned.
 }
+\examples{
+\dontrun{
+a = torch_randn(2, 2, 2)
+a
+torch_matrix_power(a, 3)
+}
+
+}

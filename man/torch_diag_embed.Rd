@@ -39,3 +39,11 @@ the same arguments yields a matrix identical to input. However,
 :meth:\code{torch.diagonal} has different default dimensions, so those
 need to be explicitly specified.
 }
+\examples{
+\dontrun{
+a = torch_randn(2, 3)
+torch_diag_embed(a)
+torch_diag_embed(a, offset=1, dim1=0, dim2=2)
+}
+
+}

@@ -35,3 +35,16 @@ c = (u^T u)^{{-1}} b
 batches of 2D matrices. If the inputs are batches, then returns
 batched outputs \code{c}
 }
+\examples{
+\dontrun{
+a = torch_randn(3, 3)
+a = torch_mm(a, a.t()) # make symmetric positive definite
+u = torch_cholesky(a)
+a
+b = torch_randn(3, 2)
+b
+torch_cholesky_solve(b, u)
+torch_mm(a.inverse(), b)
+}
+
+}

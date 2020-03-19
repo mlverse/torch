@@ -20,3 +20,11 @@ Returns a new tensor that is a narrowed version of :attr:\code{input} tensor. Th
 dimension :attr:\code{dim} is input from :attr:\code{start} to :attr:\code{start + length}. The
 returned tensor and :attr:\code{input} tensor share the same underlying storage.
 }
+\examples{
+\dontrun{
+x = torch_tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+torch_narrow(x, 0, 0, 2)
+torch_narrow(x, 1, 1, 2)
+}
+
+}

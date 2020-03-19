@@ -17,3 +17,11 @@ Returns a new tensor with the cosine  of the elements of :attr:\code{input}.
 .. math::
 \text{out}\emph{{i} = \cos(\text{input}}{i})
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_cos(a)
+}
+
+}

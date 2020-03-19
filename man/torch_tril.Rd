@@ -28,3 +28,15 @@ the main diagonal. The main diagonal are the set of indices
 :math:\verb{\\lbrace (i, i) \\rbrace} for :math:\verb{i \\in [0, \\min\\\{d_\{1\}, d_\{2\}\\\} - 1]} where
 :math:\verb{d_\{1\}, d_\{2\}} are the dimensions of the matrix.
 }
+\examples{
+\dontrun{
+a = torch_randn(3, 3)
+a
+torch_tril(a)
+b = torch_randn(4, 6)
+b
+torch_tril(b, diagonal=1)
+torch_tril(b, diagonal=-1)
+}
+
+}

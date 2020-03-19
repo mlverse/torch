@@ -17,3 +17,11 @@ Returns a new tensor with the negative of the elements of :attr:\code{input}.
 .. math::
 \text{out} = -1 \times \text{input}
 }
+\examples{
+\dontrun{
+a = torch_randn(5)
+a
+torch_neg(a)
+}
+
+}

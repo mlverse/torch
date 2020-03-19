@@ -17,3 +17,9 @@ Computes the error function of each element. The error function is defined as fo
 .. math::
 \mathrm{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt
 }
+\examples{
+\dontrun{
+torch_erf(torch_tensor([0, -1., 10.]))
+}
+
+}

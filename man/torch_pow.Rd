@@ -45,3 +45,22 @@ The operation applied is:
 .. math::
 \text{out}_i = \text{self} ^ {\text{exponent}_i}
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_pow(a, 2)
+exp = torch_arange(1., 5.)
+a = torch_arange(1., 5.)
+a
+exp
+torch_pow(a, exp)
+}
+
+\dontrun{
+exp = torch_arange(1., 5.)
+base = 2
+torch_pow(base, exp)
+}
+
+}

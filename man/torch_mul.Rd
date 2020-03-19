@@ -40,3 +40,19 @@ The shapes of :attr:\code{input} and :attr:\code{other} must be
 .. math::
 \text{out}_i = \text{input}_i \times \text{other}_i
 }
+\examples{
+\dontrun{
+a = torch_randn(3)
+a
+torch_mul(a, 100)
+}
+
+\dontrun{
+a = torch_randn(4, 1)
+a
+b = torch_randn(1, 4)
+b
+torch_mul(a, b)
+}
+
+}

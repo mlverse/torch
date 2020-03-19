@@ -15,3 +15,12 @@ logical_not(input, out=None) -> Tensor
 Computes the element-wise logical NOT of the given input tensor. If not specified, the output tensor will have the bool
 dtype. If the input tensor is not a bool tensor, zeros are treated as \code{False} and non-zeros are treated as \code{True}.
 }
+\examples{
+\dontrun{
+torch_logical_not(torch_tensor([True, False]))
+torch_logical_not(torch_tensor([0, 1, -10], dtype=torch_int8))
+torch_logical_not(torch_tensor([0., 1.5, -10.], dtype=torch_double))
+torch_logical_not(torch_tensor([0., 1., -10.], dtype=torch_double), out=torch_empty(3, dtype=torch_int16))
+}
+
+}

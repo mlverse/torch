@@ -14,3 +14,9 @@ Computes the fractional portion of each element in :attr:\code{input}.
 
 Example::
 }
+\examples{
+\dontrun{
+torch_frac(torch_tensor([1, 2.5, -3.2]))
+}
+
+}

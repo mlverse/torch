@@ -35,3 +35,17 @@ output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 If :attr:\code{unbiased} is \code{False}, then the standard-deviation will be calculated
 via the biased estimator. Otherwise, Bessel's correction will be used.
 }
+\examples{
+\dontrun{
+a = torch_randn(1, 3)
+a
+torch_std_mean(a)
+}
+
+\dontrun{
+a = torch_randn(4, 4)
+a
+torch_std_mean(a, 1)
+}
+
+}

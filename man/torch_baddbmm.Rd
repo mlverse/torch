@@ -40,3 +40,12 @@ same as the scaling factors used in :meth:\code{torch.addbmm}.
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and
 :attr:\code{alpha} must be real numbers, otherwise they should be integers.
 }
+\examples{
+\dontrun{
+M = torch_randn(10, 3, 5)
+batch1 = torch_randn(10, 3, 4)
+batch2 = torch_randn(10, 4, 5)
+torch_baddbmm(M, batch1, batch2).size()
+}
+
+}

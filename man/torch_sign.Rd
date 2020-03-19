@@ -17,3 +17,11 @@ Returns a new tensor with the signs of the elements of :attr:\code{input}.
 .. math::
 \text{out}\emph{{i} = \operatorname{sgn}(\text{input}}{i})
 }
+\examples{
+\dontrun{
+a = torch_tensor([0.7, -1.2, 0., 2.3])
+a
+torch_sign(a)
+}
+
+}

@@ -11,3 +11,11 @@ Returns the sum of the elements of the diagonal of the input 2-D matrix.
 
 Example::
 }
+\examples{
+\dontrun{
+x = torch_arange(1., 10.).view(3, 3)
+x
+torch_trace(x)
+}
+
+}

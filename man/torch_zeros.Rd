@@ -23,3 +23,10 @@ zeros(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_g
 Returns a tensor filled with the scalar value \code{0}, with the shape defined
 by the variable argument :attr:\code{size}.
 }
+\examples{
+\dontrun{
+torch_zeros(2, 3)
+torch_zeros(5)
+}
+
+}

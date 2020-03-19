@@ -28,3 +28,15 @@ A namedtuple of (values, indices) is returned, where the \code{values} are the
 sorted values and \code{indices} are the indices of the elements in the original
 \code{input} tensor.
 }
+\examples{
+\dontrun{
+x = torch_randn(3, 4)
+sorted, indices = torch_sort(x)
+sorted
+indices
+sorted, indices = torch_sort(x, 0)
+sorted
+indices
+}
+
+}

@@ -39,3 +39,14 @@ where :math:\verb{d_\{1\}, d_\{2\}} are the dimensions of the matrix.
 NOTE: when running on 'cuda', row * col must be less than :math:\code{2^{59}} to
 prevent overflow during calculation.
 }
+\examples{
+\dontrun{
+a = torch_triu_indices(3, 3)
+a
+a = torch_triu_indices(4, 3, -1)
+a
+a = torch_triu_indices(4, 3, 1)
+a
+}
+
+}

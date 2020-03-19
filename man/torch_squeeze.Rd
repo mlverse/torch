@@ -28,3 +28,16 @@ will squeeze the tensor to the shape :math:\verb{(A \\times B)}.
 .. note:: The returned tensor shares the storage with the input tensor,
 so changing the contents of one will change the contents of the other.
 }
+\examples{
+\dontrun{
+x = torch_zeros(2, 1, 2, 1, 2)
+x.size()
+y = torch_squeeze(x)
+y.size()
+y = torch_squeeze(x, 0)
+y.size()
+y = torch_squeeze(x, 1)
+y.size()
+}
+
+}

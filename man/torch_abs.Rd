@@ -17,3 +17,9 @@ Computes the element-wise absolute value of the given :attr:\code{input} tensor.
 .. math::
 \text{out}\emph{{i} = |\text{input}}{i}|
 }
+\examples{
+\dontrun{
+torch_abs(torch_tensor([-1, -2, 3]))
+}
+
+}

@@ -17,3 +17,11 @@ Returns a new tensor with the sigmoid of the elements of :attr:\code{input}.
 .. math::
 \text{out}\emph{{i} = \frac{1}{1 + e^{-\text{input}}{i}}}
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_sigmoid(a)
+}
+
+}

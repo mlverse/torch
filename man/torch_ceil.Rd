@@ -18,3 +18,11 @@ the smallest integer greater than or equal to each element.
 .. math::
 \text{out}\emph{{i} = \left\lceil \text{input}}{i} \right\rceil = \left\lfloor \text{input}_{i} \right\rfloor + 1
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_ceil(a)
+}
+
+}

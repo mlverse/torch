@@ -14,3 +14,11 @@ flip(input, dims) -> Tensor
 \details{
 Reverse the order of a n-D tensor along given axis in dims.
 }
+\examples{
+\dontrun{
+x = torch_arange(8).view(2, 2, 2)
+x
+torch_flip(x, [0, 1])
+}
+
+}

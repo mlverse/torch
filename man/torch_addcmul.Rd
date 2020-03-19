@@ -31,3 +31,12 @@ The shapes of :attr:\code{tensor}, :attr:\code{tensor1}, and :attr:\code{tensor2
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, :attr:\code{value} must be
 a real number, otherwise an integer.
 }
+\examples{
+\dontrun{
+t = torch_randn(1, 3)
+t1 = torch_randn(3, 1)
+t2 = torch_randn(1, 3)
+torch_addcmul(t, 0.1, t1, t2)
+}
+
+}

@@ -25,3 +25,10 @@ on the interval :math:\verb{[0, 1)}
 
 The shape of the tensor is defined by the variable argument :attr:\code{size}.
 }
+\examples{
+\dontrun{
+torch_rand(4)
+torch_rand(2, 3)
+}
+
+}

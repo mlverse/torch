@@ -26,3 +26,14 @@ The shapes of :attr:\code{start} and :attr:\code{end} must be
 :ref:\verb{broadcastable <broadcasting-semantics>}. If :attr:\code{weight} is a tensor, then
 the shapes of :attr:\code{weight}, :attr:\code{start}, and :attr:\code{end} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
+\examples{
+\dontrun{
+start = torch_arange(1., 5.)
+end = torch_empty(4).fill_(10)
+start
+end
+torch_lerp(start, end, 0.5)
+torch_lerp(start, end, torch_full_like(start, 0.5))
+}
+
+}

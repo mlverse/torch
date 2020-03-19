@@ -35,3 +35,11 @@ in such cases.
 .. math::
 \text{out}\emph{{{i+1}} = \text{out}}{i} + \text{step}
 }
+\examples{
+\dontrun{
+torch_arange(5)
+torch_arange(1, 4)
+torch_arange(1, 2.5, 0.5)
+}
+
+}

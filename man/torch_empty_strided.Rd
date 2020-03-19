@@ -33,3 +33,12 @@ location. As a result, in-place operations (especially ones that are
 vectorized) may result in incorrect behavior. If you need to write to
 the tensors, please clone them first.
 }
+\examples{
+\dontrun{
+a = torch_empty_strided((2, 3), (1, 2))
+a
+a.stride()
+a.size()
+}
+
+}

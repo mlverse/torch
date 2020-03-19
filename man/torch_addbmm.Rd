@@ -40,3 +40,12 @@ out = \beta\ \text{input} + \alpha\ (\sum_{i=0}^{b-1} \text{batch1}_i \mathbin{@
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and :attr:\code{alpha}
 must be real numbers, otherwise they should be integers.
 }
+\examples{
+\dontrun{
+M = torch_randn(3, 5)
+batch1 = torch_randn(10, 3, 4)
+batch2 = torch_randn(10, 4, 5)
+torch_addbmm(M, batch1, batch2)
+}
+
+}

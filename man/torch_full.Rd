@@ -24,3 +24,9 @@ full(size, fill_value, out=None, dtype=None, layout=torch.strided, device=None, 
 \details{
 Returns a tensor of size :attr:\code{size} filled with :attr:\code{fill_value}.
 }
+\examples{
+\dontrun{
+torch_full((2, 3), 3.141592)
+}
+
+}

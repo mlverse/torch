@@ -29,3 +29,10 @@ as :attr:\code{input} except in the dimension(s) :attr:\code{dim} where it is of
 Otherwise, :attr:\code{dim} is squeezed (see :func:\code{torch.squeeze}), resulting in the
 output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
+\examples{
+\dontrun{
+a = torch_randn(3, 3)
+torch_logsumexp(a, 1)
+}
+
+}

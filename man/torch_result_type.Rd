@@ -16,3 +16,10 @@ Returns the :class:\code{torch.dtype} that would result from performing an arith
 operation on the provided input tensors. See type promotion :ref:\verb{documentation <type-promotion-doc>}
 for more information on the type promotion logic.
 }
+\examples{
+\dontrun{
+torch_result_type(torch_tensor([1, 2], dtype=torch_int), 1.0)
+torch_result_type(torch_tensor([1, 2], dtype=torch_uint8), torch_tensor(1))
+}
+
+}

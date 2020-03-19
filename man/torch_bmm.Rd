@@ -30,3 +30,12 @@ If :attr:\code{input} is a :math:\verb{(b \\times n \\times m)} tensor, :attr:\c
 .. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 For broadcasting matrix products, see :func:\code{torch.matmul}.
 }
+\examples{
+\dontrun{
+input = torch_randn(10, 3, 4)
+mat2 = torch_randn(10, 4, 5)
+res = torch_bmm(input, mat2)
+res.size()
+}
+
+}

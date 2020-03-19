@@ -29,3 +29,10 @@ distribution).
 
 The shape of the tensor is defined by the variable argument :attr:\code{size}.
 }
+\examples{
+\dontrun{
+torch_randn(4)
+torch_randn(2, 3)
+}
+
+}

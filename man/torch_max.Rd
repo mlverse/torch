@@ -48,3 +48,25 @@ but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 .. note:: When the shapes do not match, the shape of the returned output tensor
 follows the :ref:\verb{broadcasting rules <broadcasting-semantics>}.
 }
+\examples{
+\dontrun{
+a = torch_randn(1, 3)
+a
+torch_max(a)
+}
+
+\dontrun{
+a = torch_randn(4, 4)
+a
+torch_max(a, 1)
+}
+
+\dontrun{
+a = torch_randn(4)
+a
+b = torch_randn(4)
+b
+torch_max(a, b)
+}
+
+}

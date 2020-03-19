@@ -17,3 +17,9 @@ Computes the element-wise real value of the given :attr:\code{input} tensor.
 .. math::
 \text{out}\emph{{i} = real(\text{input}}{i})
 }
+\examples{
+\dontrun{
+torch_real(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))
+}
+
+}

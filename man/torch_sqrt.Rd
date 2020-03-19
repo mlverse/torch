@@ -17,3 +17,11 @@ Returns a new tensor with the square-root of the elements of :attr:\code{input}.
 .. math::
 \text{out}\emph{{i} = \sqrt{\text{input}}{i}}
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_sqrt(a)
+}
+
+}

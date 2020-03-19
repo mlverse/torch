@@ -37,3 +37,12 @@ and :attr:\code{out} will be a :math:\verb{(n \\times p)} tensor.
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and
 :attr:\code{alpha} must be real numbers, otherwise they should be integers.
 }
+\examples{
+\dontrun{
+M = torch_randn(2, 3)
+mat1 = torch_randn(2, 3)
+mat2 = torch_randn(3, 3)
+torch_addmm(M, mat1, mat2)
+}
+
+}

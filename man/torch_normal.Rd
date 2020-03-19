@@ -48,3 +48,21 @@ all drawn elements.
 Similar to the function above, but the means and standard deviations are shared
 among all drawn elements. The resulting tensor has size given by :attr:\code{size}.
 }
+\examples{
+\dontrun{
+torch_normal(mean=torch_arange(1., 11.), std=torch_arange(1, 0, -0.1))
+}
+
+\dontrun{
+torch_normal(mean=0.5, std=torch_arange(1., 6.))
+}
+
+\dontrun{
+torch_normal(mean=torch_arange(1., 6.))
+}
+
+\dontrun{
+torch_normal(2, 3, size=(1, 4))
+}
+
+}

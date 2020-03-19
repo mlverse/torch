@@ -25,3 +25,14 @@ and :attr:\code{other}.
 If :attr:\code{dim} is not given, it defaults to the first dimension found with the
 size 3.
 }
+\examples{
+\dontrun{
+a = torch_randn(4, 3)
+a
+b = torch_randn(4, 3)
+b
+torch_cross(a, b, dim=1)
+torch_cross(a, b)
+}
+
+}

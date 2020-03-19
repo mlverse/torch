@@ -26,3 +26,17 @@ Returns the indices of the maximum values of a tensor across a dimension.
 This is the second value returned by :meth:\code{torch.max}. See its
 documentation for the exact semantics of this method.
 }
+\examples{
+\dontrun{
+a = torch_randn(4, 4)
+a
+torch_argmax(a)
+}
+
+\dontrun{
+a = torch_randn(4, 4)
+a
+torch_argmax(a, dim=1)
+}
+
+}

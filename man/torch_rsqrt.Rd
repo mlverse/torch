@@ -18,3 +18,11 @@ the elements of :attr:\code{input}.
 .. math::
 \text{out}\emph{{i} = \frac{1}{\sqrt{\text{input}}{i}}}
 }
+\examples{
+\dontrun{
+a = torch_randn(4)
+a
+torch_rsqrt(a)
+}
+
+}

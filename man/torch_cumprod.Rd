@@ -25,3 +25,13 @@ a vector of size N, with elements.
 .. math::
 y_i = x_1 \times x_2\times x_3\times \dots \times x_i
 }
+\examples{
+\dontrun{
+a = torch_randn(10)
+a
+torch_cumprod(a, dim=0)
+a[5] = 0.0
+torch_cumprod(a, dim=0)
+}
+
+}

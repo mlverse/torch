@@ -24,3 +24,9 @@ The elements are sorted into equal width bins between :attr:\code{min} and
 :attr:\code{max}. If :attr:\code{min} and :attr:\code{max} are both zero, the minimum and
 maximum values of the data are used.
 }
+\examples{
+\dontrun{
+torch_histc(torch_tensor([1., 2, 1]), bins=4, min=0, max=3)
+}
+
+}

@@ -22,3 +22,11 @@ where :math:\verb{C = \\log(\\pi) \\times \\frac\{p (p - 1)\}\{4\}} and :math:\v
 If any of the elements are less than or equal to :math:\verb{\\frac\{p - 1\}\{2\}}, then an error
 is thrown.
 }
+\examples{
+\dontrun{
+a = torch_empty(2, 3).uniform_(1, 2)
+a
+torch_mvlgamma(a, 2)
+}
+
+}

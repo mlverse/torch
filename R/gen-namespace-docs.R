@@ -10,6 +10,11 @@
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' torch_abs(torch_tensor([-1, -2, 3]))
+#' }
+#'
 #' @name torch_abs
 #'
 #' @export
@@ -27,6 +32,11 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' torch_angle(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))*180/3.14159
+#' }
 #'
 #' @name torch_angle
 #'
@@ -46,6 +56,11 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' torch_real(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))
+#' }
+#'
 #' @name torch_real
 #'
 #' @export
@@ -63,6 +78,11 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' torch_imag(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))
+#' }
 #'
 #' @name torch_imag
 #'
@@ -82,6 +102,11 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' torch_conj(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))
+#' }
+#'
 #' @name torch_conj
 #'
 #' @export
@@ -99,6 +124,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_acos(a)
+#' }
 #'
 #' @name torch_acos
 #'
@@ -122,6 +154,8 @@ NULL
 #' @param ceil_mode NA when True, will use `ceil` instead of `floor` to compute the        output shape. Default: ``False``
 #' @param count_include_pad NA when True, will include the zero-padding in the        averaging calculation. Default: ``True``
 #'
+#' 
+#'
 #' @name torch_avg_pool1d
 #'
 #' @export
@@ -138,6 +172,8 @@ NULL
 #' See :class:`~torch.nn.AdaptiveAvgPool1d` for details and output shape.
 #'
 #' @param output_size NA the target output size (single integer)
+#'
+#' 
 #'
 #' @name torch_adaptive_avg_pool1d
 #'
@@ -160,6 +196,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param value (Number) the number to be added to each element of :attr:`input`
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_add(a, 20)
+#' }
 #'
 #' @name torch_add
 #'
@@ -187,6 +230,15 @@ NULL
 #' @param input (Tensor) the first input tensor
 #' @param alpha (Number) the scalar multiplier for :attr:`other`
 #' @param other (Tensor) the second input tensor
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' b = torch_randn(4, 1)
+#' b
+#' torch_add(a, 10, b)
+#' }
 #'
 #' @name torch_add
 #'
@@ -222,6 +274,14 @@ NULL
 #' @param mat (Tensor) matrix to be multiplied
 #' @param vec (Tensor) vector to be multiplied
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' M = torch_randn(2)
+#' mat = torch_randn(2, 3)
+#' vec = torch_randn(3)
+#' torch_addmv(M, mat, vec)
+#' }
 #'
 #' @name torch_addmv
 #'
@@ -259,6 +319,14 @@ NULL
 #' @param vec2 (Tensor) the second vector of the outer product
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' vec1 = torch_arange(1., 4.)
+#' vec2 = torch_arange(1., 3.)
+#' M = torch_zeros(3, 2)
+#' torch_addr(M, vec1, vec2)
+#' }
+#'
 #' @name torch_addr
 #'
 #' @export
@@ -282,6 +350,14 @@ NULL
 #' @param atol (float, optional) absolute tolerance. Default: 1e-08
 #' @param rtol (float, optional) relative tolerance. Default: 1e-05
 #' @param equal_nan (bool, optional) if ``True``, then two ``NaN`` s will be compared as equal. Default: ``False``
+#'
+#' @examples
+#' \dontrun{
+#' torch_allclose(torch_tensor([10000., 1e-07]), torch_tensor([10000.1, 1e-08]))
+#' torch_allclose(torch_tensor([10000., 1e-08]), torch_tensor([10000.1, 1e-09]))
+#' torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]))
+#' torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]), equal_nan=True)
+#' }
 #'
 #' @name torch_allclose
 #'
@@ -313,6 +389,13 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' torch_arange(5)
+#' torch_arange(1, 4)
+#' torch_arange(1, 2.5, 0.5)
+#' }
+#'
 #' @name torch_arange
 #'
 #' @export
@@ -329,6 +412,13 @@ NULL
 #' documentation for the exact semantics of this method.
 #'
 #' @param input (Tensor) the input tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_argmax(a)
+#' }
 #'
 #' @name torch_argmax
 #'
@@ -349,6 +439,13 @@ NULL
 #' @param dim (int) the dimension to reduce. If ``None``, the argmax of the flattened input is returned.
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not. Ignored if ``dim=None``.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_argmax(a, dim=1)
+#' }
+#'
 #' @name torch_argmax
 #'
 #' @export
@@ -365,6 +462,13 @@ NULL
 #' documentation for the exact semantics of this method.
 #'
 #' @param input (Tensor) the input tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_argmin(a)
+#' }
 #'
 #' @name torch_argmin
 #'
@@ -384,6 +488,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to reduce. If ``None``, the argmin of the flattened input is returned.
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not. Ignored if ``dim=None``.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_argmin(a, dim=1)
+#' }
 #'
 #' @name torch_argmin
 #'
@@ -414,6 +525,15 @@ NULL
 #' @param stride (tuple or ints) the stride of the output tensor
 #' @param storage_offset (int, optional) the offset in the underlying storage of the output tensor
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(3, 3)
+#' x
+#' t = torch_as_strided(x, (2, 2), (1, 2))
+#' t
+#' t = torch_as_strided(x, (2, 2), (1, 2), 1)
+#' }
+#'
 #' @name torch_as_strided
 #'
 #' @export
@@ -432,6 +552,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_asin(a)
+#' }
+#'
 #' @name torch_asin
 #'
 #' @export
@@ -449,6 +576,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_atan(a)
+#' }
 #'
 #' @name torch_atan
 #'
@@ -486,6 +620,14 @@ NULL
 #' @param batch1 (Tensor) the first batch of matrices to be multiplied
 #' @param batch2 (Tensor) the second batch of matrices to be multiplied
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' M = torch_randn(10, 3, 5)
+#' batch1 = torch_randn(10, 3, 4)
+#' batch2 = torch_randn(10, 4, 5)
+#' torch_baddbmm(M, batch1, batch2).size()
+#' }
 #'
 #' @name torch_baddbmm
 #'
@@ -526,6 +668,8 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' 
+#'
 #' @name torch_bartlett_window
 #'
 #' @export
@@ -560,6 +704,17 @@ NULL
 #' @param generator (:class:`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_empty(3, 3).uniform_(0, 1)  # generate a uniform random matrix with range [0, 1]
+#' a
+#' torch_bernoulli(a)
+#' a = torch_ones(3, 3) # probability of drawing "1" is 1
+#' torch_bernoulli(a)
+#' a = torch_zeros(3, 3) # probability of drawing "1" is 0
+#' torch_bernoulli(a)
+#' }
+#'
 #' @name torch_bernoulli
 #'
 #' @export
@@ -586,6 +741,15 @@ NULL
 #' @param weights (Tensor) optional, weight for each value in the input tensor.        Should be of same size as input tensor.
 #' @param minlength (int) optional, minimum number of bins. Should be non-negative.
 #'
+#' @examples
+#' \dontrun{
+#' input = torch_randint(0, 8, (5,), dtype=torch_int64)
+#' weights = torch_linspace(0, 1, steps=5)
+#' input, weights
+#' torch_bincount(input)
+#' input.bincount(weights)
+#' }
+#'
 #' @name torch_bincount
 #'
 #' @export
@@ -601,6 +765,8 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' 
 #'
 #' @name torch_bitwise_not
 #'
@@ -618,6 +784,14 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' torch_logical_not(torch_tensor([True, False]))
+#' torch_logical_not(torch_tensor([0, 1, -10], dtype=torch_int8))
+#' torch_logical_not(torch_tensor([0., 1.5, -10.], dtype=torch_double))
+#' torch_logical_not(torch_tensor([0., 1., -10.], dtype=torch_double), out=torch_empty(3, dtype=torch_int16))
+#' }
+#'
 #' @name torch_logical_not
 #'
 #' @export
@@ -634,6 +808,17 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param other (Tensor) the tensor to compute XOR with
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' torch_logical_xor(torch_tensor([True, False, True]), torch_tensor([True, False, False]))
+#' a = torch_tensor([0, 1, 10, 0], dtype=torch_int8)
+#' b = torch_tensor([4, 0, 1, 0], dtype=torch_int8)
+#' torch_logical_xor(a, b)
+#' torch_logical_xor(a.double(), b.double())
+#' torch_logical_xor(a.double(), b)
+#' torch_logical_xor(a, b, out=torch_empty(4, dtype=torch_bool))
+#' }
 #'
 #' @name torch_logical_xor
 #'
@@ -671,6 +856,8 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' 
+#'
 #' @name torch_blackman_window
 #'
 #' @export
@@ -700,6 +887,14 @@ NULL
 #' @param input (Tensor) the first batch of matrices to be multiplied
 #' @param mat2 (Tensor) the second batch of matrices to be multiplied
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' input = torch_randn(10, 3, 4)
+#' mat2 = torch_randn(10, 4, 5)
+#' res = torch_bmm(input, mat2)
+#' res.size()
+#' }
 #'
 #' @name torch_bmm
 #'
@@ -736,6 +931,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_broadcast_tensors
 #'
 #' @export
@@ -759,6 +956,14 @@ NULL
 #' @param dim (int, optional) the dimension over which the tensors are concatenated
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(2, 3)
+#' x
+#' torch_cat((x, x, x), 0)
+#' torch_cat((x, x, x), 1)
+#' }
+#'
 #' @name torch_cat
 #'
 #' @export
@@ -777,6 +982,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_ceil(a)
+#' }
 #'
 #' @name torch_ceil
 #'
@@ -816,6 +1028,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_chain_matmul
 #'
 #' @export
@@ -834,6 +1048,8 @@ NULL
 #' @param input (Tensor) the tensor to split
 #' @param chunks (int) number of chunks to return
 #' @param dim (int) dimension along which to split the tensor
+#'
+#' 
 #'
 #' @name torch_chunk
 #'
@@ -863,6 +1079,13 @@ NULL
 #' @param max (Number) upper-bound of the range to be clamped to
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_clamp(a, min=-0.5, max=0.5)
+#' }
+#'
 #' @name torch_clamp
 #'
 #' @export
@@ -882,6 +1105,13 @@ NULL
 #' @param value (Number) minimal value of each element in the output
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_clamp(a, min=0.5)
+#' }
+#'
 #' @name torch_clamp
 #'
 #' @export
@@ -900,6 +1130,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param value (Number) maximal value of each element in the output
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_clamp(a, max=0.5)
+#' }
 #'
 #' @name torch_clamp
 #'
@@ -926,6 +1163,8 @@ NULL
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a one-element tuple `(dW,)`. Default: 1
 #' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by      the number of groups. Default: 1
 #'
+#' 
+#'
 #' @name torch_conv1d
 #'
 #' @export
@@ -950,6 +1189,8 @@ NULL
 #' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a tuple `(padH, padW)`. Default: 0
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dH, dW)`. Default: 1
 #' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
+#'
+#' 
 #'
 #' @name torch_conv2d
 #'
@@ -976,6 +1217,8 @@ NULL
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dT, dH, dW)`. Default: 1
 #' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by      the number of groups. Default: 1
 #'
+#' 
+#'
 #' @name torch_conv3d
 #'
 #' @export
@@ -991,6 +1234,8 @@ NULL
 #' @param weight NA filter of shape (:math:`\text{kernel width} \times \text{in\_channels} \times \text{out\_channels}`)
 #' @param bias NA bias of shape (:math:`\text{out\_channels}`)
 #' @param pad NA number of timesteps to pad. Default: 0
+#'
+#' 
 #'
 #' @name torch_conv_tbc
 #'
@@ -1018,6 +1263,8 @@ NULL
 #' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dW,)``. Default: 1
 #'
+#' 
+#'
 #' @name torch_conv_transpose1d
 #'
 #' @export
@@ -1043,6 +1290,8 @@ NULL
 #' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple ``(out_padH, out_padW)``.      Default: 0
 #' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dH, dW)``. Default: 1
+#'
+#' 
 #'
 #' @name torch_conv_transpose2d
 #'
@@ -1070,6 +1319,8 @@ NULL
 #' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dT, dH, dW)`. Default: 1
 #'
+#' 
+#'
 #' @name torch_conv_transpose3d
 #'
 #' @export
@@ -1087,6 +1338,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_cos(a)
+#' }
 #'
 #' @name torch_cos
 #'
@@ -1106,6 +1364,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_cosh(a)
+#' }
 #'
 #' @name torch_cosh
 #'
@@ -1131,6 +1396,13 @@ NULL
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(10)
+#' a
+#' torch_cumsum(a, dim=0)
+#' }
+#'
 #' @name torch_cumsum
 #'
 #' @export
@@ -1155,6 +1427,15 @@ NULL
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(10)
+#' a
+#' torch_cumprod(a, dim=0)
+#' a[5] = 0.0
+#' torch_cumprod(a, dim=0)
+#' }
+#'
 #' @name torch_cumprod
 #'
 #' @export
@@ -1174,6 +1455,15 @@ NULL
 #'     :meth:`~torch.svd` for details.
 #'
 #' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more                batch dimensions.
+#'
+#' @examples
+#' \dontrun{
+#' A = torch_randn(3, 3)
+#' torch_det(A)
+#' A = torch_randn(3, 2, 2)
+#' A
+#' A.det()
+#' }
 #'
 #' @name torch_det
 #'
@@ -1212,6 +1502,13 @@ NULL
 #' @param dim1 (int, optional) first dimension with respect to which to        take diagonal. Default: -2.
 #' @param dim2 (int, optional) second dimension with respect to which to        take diagonal. Default: -1.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(2, 3)
+#' torch_diag_embed(a)
+#' torch_diag_embed(a, offset=1, dim1=0, dim2=2)
+#' }
+#'
 #' @name torch_diag_embed
 #'
 #' @export
@@ -1235,6 +1532,8 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param offset (int, optional) the diagonal to consider. Default: 0 (main        diagonal).
+#'
+#' 
 #'
 #' @name torch_diagflat
 #'
@@ -1266,6 +1565,8 @@ NULL
 #' @param dim1 (int, optional) first dimension with respect to which to        take diagonal. Default: 0.
 #' @param dim2 (int, optional) second dimension with respect to which to        take diagonal. Default: 1.
 #'
+#' 
+#'
 #' @name torch_diagonal
 #'
 #' @export
@@ -1291,6 +1592,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param other (Number) the number to be divided to each element of ``input``
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(5)
+#' a
+#' torch_div(a, 0.5)
+#' }
 #'
 #' @name torch_div
 #'
@@ -1319,6 +1627,15 @@ NULL
 #' @param input (Tensor) the numerator tensor
 #' @param other (Tensor) the denominator tensor
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' b = torch_randn(4)
+#' b
+#' torch_div(a, b)
+#' }
+#'
 #' @name torch_div
 #'
 #' @export
@@ -1337,6 +1654,11 @@ NULL
 #'
 
 #'
+#' @examples
+#' \dontrun{
+#' torch_dot(torch_tensor([2, 3]), torch_tensor([2, 1]))
+#' }
+#'
 #' @name torch_dot
 #'
 #' @export
@@ -1352,6 +1674,8 @@ NULL
 #'
 #' @param equation (string) The equation is given in terms of lower case letters (indices) to be associated           with each dimension of the operands and result. The left hand side lists the operands           dimensions, separated by commas. There should be one index letter per tensor dimension.           The right hand side follows after `->` and gives the indices for the output.           If the `->` and right hand side are omitted, it implicitly defined as the alphabetically           sorted list of all indices appearing exactly once in the left hand side.           The indices not apprearing in the output are summed over after multiplying the operands           entries.           If an index appears several times for the same operand, a diagonal is taken.           Ellipses `...` represent a fixed number of dimensions. If the right hand side is inferred,           the ellipsis dimensions are at the beginning of the output.
 #' @param operands (Tensor) The operands to compute the Einstein sum of.
+#'
+#' 
 #'
 #' @name torch_einsum
 #'
@@ -1374,6 +1698,11 @@ NULL
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #' @param pin_memory (bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' torch_empty(2, 3)
+#' }
+#'
 #' @name torch_empty
 #'
 #' @export
@@ -1393,6 +1722,11 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' @examples
+#' \dontrun{
+#' torch_empty((2,3), dtype=torch_int64)
+#' }
 #'
 #' @name torch_empty_like
 #'
@@ -1423,6 +1757,14 @@ NULL
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #' @param pin_memory (bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_empty_strided((2, 3), (1, 2))
+#' a
+#' a.stride()
+#' a.size()
+#' }
+#'
 #' @name torch_empty_strided
 #'
 #' @export
@@ -1440,6 +1782,11 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' torch_erf(torch_tensor([0, -1., 10.]))
+#' }
 #'
 #' @name torch_erf
 #'
@@ -1460,6 +1807,11 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' torch_erfc(torch_tensor([0, -1., 10.]))
+#' }
+#'
 #' @name torch_erfc
 #'
 #' @export
@@ -1479,6 +1831,11 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' torch_exp(torch_tensor([0, math.log(2.)]))
+#' }
+#'
 #' @name torch_exp
 #'
 #' @export
@@ -1497,6 +1854,11 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' torch_expm1(torch_tensor([0, math.log(2.)]))
+#' }
 #'
 #' @name torch_expm1
 #'
@@ -1518,6 +1880,11 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' torch_eye(3)
+#' }
+#'
 #' @name torch_eye
 #'
 #' @export
@@ -1533,6 +1900,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param start_dim (int) the first dim to flatten
 #' @param end_dim (int) the last dim to flatten
+#'
+#' @examples
+#' \dontrun{
+#' t = torch_tensor([[[1, 2],
+#' torch_flatten(t)
+#' torch_flatten(t, start_dim=1)
+#' }
 #'
 #' @name torch_flatten
 #'
@@ -1553,6 +1927,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_floor(a)
+#' }
+#'
 #' @name torch_floor
 #'
 #' @export
@@ -1571,6 +1952,11 @@ NULL
 #' Example::
 #'
 
+#'
+#' @examples
+#' \dontrun{
+#' torch_frac(torch_tensor([1, 2.5, -3.2]))
+#' }
 #'
 #' @name torch_frac
 #'
@@ -1592,6 +1978,11 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' torch_full((2, 3), 3.141592)
+#' }
+#'
 #' @name torch_full
 #'
 #' @export
@@ -1612,6 +2003,8 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' 
 #'
 #' @name torch_full_like
 #'
@@ -1649,6 +2042,8 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch.strided`` (dense layout) is supported.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' 
 #'
 #' @name torch_hann_window
 #'
@@ -1691,6 +2086,8 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' 
+#'
 #' @name torch_hamming_window
 #'
 #' @export
@@ -1710,6 +2107,13 @@ NULL
 #' @param input (Tensor) 1-D input vector
 #' @param vec2 (Tensor) 1-D input vector
 #' @param out (Tensor, optional) optional output matrix
+#'
+#' @examples
+#' \dontrun{
+#' v1 = torch_arange(1., 5.)
+#' v2 = torch_arange(1., 4.)
+#' torch_ger(v1, v2)
+#' }
 #'
 #' @name torch_ger
 #'
@@ -1761,6 +2165,19 @@ NULL
 #' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
 #'
+#' @examples
+#' \dontrun{
+#' # unbatched 2D FFT
+#' x = torch_randn(4, 3, 2)
+#' torch_fft(x, 2)
+#' # batched 1D FFT
+#' torch_fft(x, 1)
+#' # arbitrary number of batch dimensions, 2D FFT
+#' x = torch_randn(3, 3, 5, 5, 2)
+#' y = torch_fft(x, 2)
+#' y.shape
+#' }
+#'
 #' @name torch_fft
 #'
 #' @export
@@ -1809,6 +2226,14 @@ NULL
 #' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``        dimensions
 #' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
+#'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(3, 3, 2)
+#' x
+#' y = torch_fft(x, 2)
+#' torch_ifft(y, 2)  # recover x
+#' }
 #'
 #' @name torch_ifft
 #'
@@ -1862,6 +2287,13 @@ NULL
 #' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
 #' @param onesided (bool, optional) controls whether to return half of results to        avoid redundancy. Default: ``True``
+#'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(5, 5)
+#' torch_rfft(x, 2).shape
+#' torch_rfft(x, 2, onesided=False).shape
+#' }
 #'
 #' @name torch_rfft
 #'
@@ -1929,6 +2361,21 @@ NULL
 #' @param onesided (bool, optional) controls whether :attr:`input` was halfed to avoid        redundancy, e.g., by :func:`rfft`. Default: ``True``
 #' @param signal_sizes (list or :class:`torch.Size`, optional) the size of the original        signal (without batch dimension). Default: ``None``
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(4, 4)
+#' torch_rfft(x, 2, onesided=True).shape
+#'     >>>
+#' # notice that with onesided=True, output size does not determine the original signal size
+#' x = torch_randn(4, 5)
+#' torch_rfft(x, 2, onesided=True).shape
+#'     >>>
+#' # now we use the original shape to recover x
+#' x
+#' y = torch_rfft(x, 2, onesided=True)
+#' torch_irfft(y, 2, onesided=True, signal_sizes=x.shape)  # recover x
+#' }
+#'
 #' @name torch_irfft
 #'
 #' @export
@@ -1951,6 +2398,20 @@ NULL
 #' @param input (Tensor) the input tensor of size :math:`(*, n, n)` where `*` is zero or more                    batch dimensions
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_rand(4, 4)
+#' y = torch_inverse(x)
+#' z = torch_mm(x, y)
+#' z
+#' torch_max(torch_abs(z - torch_eye(4))) # Max non-zero
+#' # Batched inverse example
+#' x = torch_randn(2, 3, 4, 4)
+#' y = torch_inverse(x)
+#' z = torch_matmul(x, y)
+#' torch_max(torch_abs(z - torch_eye(4).expand_as(x))) # Max non-zero
+#' }
+#'
 #' @name torch_inverse
 #'
 #' @export
@@ -1962,6 +2423,11 @@ NULL
 #' Returns a new tensor with boolean elements representing if each element is `NaN` or not.
 #'
 #' @param input (Tensor) A tensor to check
+#'
+#' @examples
+#' \dontrun{
+#' torch_isnan(torch_tensor([1, float('nan'), 2]))
+#' }
 #'
 #' @name torch_isnan
 #'
@@ -1977,6 +2443,8 @@ NULL
 #' one of ``torch.float64``, ``torch.float32`` and ``torch.float16``.
 #'
 #' @param input (Tensor) the PyTorch tensor to test
+#'
+#' 
 #'
 #' @name torch_is_floating_point
 #'
@@ -2006,6 +2474,16 @@ NULL
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
 #' @param out (tuple, optional) the output tuple of (Tensor, LongTensor)                           can be optionally given to be used as output buffers
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_arange(1., 6.)
+#' x
+#' torch_kthvalue(x, 4)
+#' x=torch_arange(1.,7.).resize_(2,3)
+#' x
+#' torch_kthvalue(x, 2, 0, True)
+#' }
+#'
 #' @name torch_kthvalue
 #'
 #' @export
@@ -2030,6 +2508,14 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' torch_linspace(3, 10, steps=5)
+#' torch_linspace(-10, 10, steps=5)
+#' torch_linspace(start=-10, end=10, steps=5)
+#' torch_linspace(start=-10, end=10, steps=1)
+#' }
+#'
 #' @name torch_linspace
 #'
 #' @export
@@ -2049,6 +2535,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(5)
+#' a
+#' torch_log(a)
+#' }
+#'
 #' @name torch_log
 #'
 #' @export
@@ -2067,6 +2560,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_rand(5)
+#' a
+#' torch_log10(a)
+#' }
 #'
 #' @name torch_log10
 #'
@@ -2089,6 +2589,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(5)
+#' a
+#' torch_log1p(a)
+#' }
+#'
 #' @name torch_log1p
 #'
 #' @export
@@ -2107,6 +2614,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_rand(5)
+#' a
+#' torch_log2(a)
+#' }
 #'
 #' @name torch_log2
 #'
@@ -2131,6 +2645,16 @@ NULL
 #'     :meth:`~torch.svd` for details.
 #'
 #' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more                batch dimensions.
+#'
+#' @examples
+#' \dontrun{
+#' A = torch_randn(3, 3)
+#' torch_det(A)
+#' torch_logdet(A)
+#' A
+#' A.det()
+#' A.det().log()
+#' }
 #'
 #' @name torch_logdet
 #'
@@ -2157,6 +2681,14 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' @examples
+#' \dontrun{
+#' torch_logspace(start=-10, end=10, steps=5)
+#' torch_logspace(start=0.1, end=1.0, steps=5)
+#' torch_logspace(start=0.1, end=1.0, steps=1)
+#' torch_logspace(start=2, end=2, steps=1, base=2)
+#' }
 #'
 #' @name torch_logspace
 #'
@@ -2187,6 +2719,12 @@ NULL
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(3, 3)
+#' torch_logsumexp(a, 1)
+#' }
 #'
 #' @name torch_logsumexp
 #'
@@ -2227,6 +2765,30 @@ NULL
 #' @param other (Tensor) the second tensor to be multiplied
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' # vector x vector
+#' tensor1 = torch_randn(3)
+#' tensor2 = torch_randn(3)
+#' torch_matmul(tensor1, tensor2).size()
+#' # matrix x vector
+#' tensor1 = torch_randn(3, 4)
+#' tensor2 = torch_randn(4)
+#' torch_matmul(tensor1, tensor2).size()
+#' # batched matrix x broadcasted vector
+#' tensor1 = torch_randn(10, 3, 4)
+#' tensor2 = torch_randn(4)
+#' torch_matmul(tensor1, tensor2).size()
+#' # batched matrix x batched matrix
+#' tensor1 = torch_randn(10, 3, 4)
+#' tensor2 = torch_randn(10, 4, 5)
+#' torch_matmul(tensor1, tensor2).size()
+#' # batched matrix x broadcasted matrix
+#' tensor1 = torch_randn(10, 3, 4)
+#' tensor2 = torch_randn(4, 5)
+#' torch_matmul(tensor1, tensor2).size()
+#' }
+#'
 #' @name torch_matmul
 #'
 #' @export
@@ -2252,6 +2814,15 @@ NULL
 #' @param tol (float, optional) the tolerance value. Default: ``None``
 #' @param symmetric (bool, optional) indicates whether :attr:`input` is symmetric.                               Default: ``False``
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_eye(10)
+#' torch_matrix_rank(a)
+#' b = torch_eye(10)
+#' b[0, 0] = 0
+#' torch_matrix_rank(b)
+#' }
+#'
 #' @name torch_matrix_rank
 #'
 #' @export
@@ -2273,6 +2844,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param n (int) the power to raise the matrix to
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(2, 2, 2)
+#' a
+#' torch_matrix_power(a, 3)
+#' }
+#'
 #' @name torch_matrix_power
 #'
 #' @export
@@ -2286,6 +2864,13 @@ NULL
 #' Returns the maximum value of all elements in the :attr:`input` tensor.
 #'
 #' @param {input} NA 
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_max(a)
+#' }
 #'
 #' @name torch_max
 #'
@@ -2311,6 +2896,13 @@ NULL
 #' @param {dim} NA 
 #' @param {keepdim} NA ``False``.
 #' @param out (tuple, optional) the result tuple of two output tensors (max, max_indices)
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_max(a, 1)
+#' }
 #'
 #' @name torch_max
 #'
@@ -2338,6 +2930,15 @@ NULL
 #' @param other (Tensor) the second input tensor
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' b = torch_randn(4)
+#' b
+#' torch_max(a, b)
+#' }
+#'
 #' @name torch_max
 #'
 #' @export
@@ -2351,6 +2952,13 @@ NULL
 #' Returns the mean value of all elements in the :attr:`input` tensor.
 #'
 #' @param input (Tensor) the input tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_mean(a)
+#' }
 #'
 #' @name torch_mean
 #'
@@ -2377,6 +2985,14 @@ NULL
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_mean(a, 1)
+#' torch_mean(a, 1, True)
+#' }
+#'
 #' @name torch_mean
 #'
 #' @export
@@ -2390,6 +3006,13 @@ NULL
 #' Returns the median value of all elements in the :attr:`input` tensor.
 #'
 #' @param input (Tensor) the input tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_median(a)
+#' }
 #'
 #' @name torch_median
 #'
@@ -2418,6 +3041,13 @@ NULL
 #' @param values (Tensor, optional) the output tensor
 #' @param indices (Tensor, optional) the output index tensor
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 5)
+#' a
+#' torch_median(a, 1)
+#' }
+#'
 #' @name torch_median
 #'
 #' @export
@@ -2431,6 +3061,13 @@ NULL
 #' Returns the minimum value of all elements in the :attr:`input` tensor.
 #'
 #' @param {input} NA 
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_min(a)
+#' }
 #'
 #' @name torch_min
 #'
@@ -2456,6 +3093,13 @@ NULL
 #' @param {dim} NA 
 #' @param {keepdim} NA 
 #' @param out (tuple, optional) the tuple of two output tensors (min, min_indices)
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_min(a, 1)
+#' }
 #'
 #' @name torch_min
 #'
@@ -2484,6 +3128,15 @@ NULL
 #' @param other (Tensor) the second input tensor
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' b = torch_randn(4)
+#' b
+#' torch_min(a, b)
+#' }
+#'
 #' @name torch_min
 #'
 #' @export
@@ -2505,6 +3158,13 @@ NULL
 #' @param input (Tensor) the first matrix to be multiplied
 #' @param mat2 (Tensor) the second matrix to be multiplied
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' mat1 = torch_randn(2, 3)
+#' mat2 = torch_randn(3, 3)
+#' torch_mm(mat1, mat2)
+#' }
 #'
 #' @name torch_mm
 #'
@@ -2536,6 +3196,14 @@ NULL
 #' @param values (Tensor, optional) the output tensor
 #' @param indices (Tensor, optional) the output index tensor
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randint(10, (5,))
+#' a
+#' b = a + (torch_randn(50, 1) * 5).long()
+#' torch_mode(b, 0)
+#' }
+#'
 #' @name torch_mode
 #'
 #' @export
@@ -2558,6 +3226,13 @@ NULL
 #' @param {input} NA 
 #' @param value (Number) the number to be multiplied to each element of :attr:`input`
 #' @param {out} NA 
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(3)
+#' a
+#' torch_mul(a, 100)
+#' }
 #'
 #' @name torch_mul
 #'
@@ -2582,6 +3257,15 @@ NULL
 #' @param other (Tensor) the second multiplicand tensor
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 1)
+#' a
+#' b = torch_randn(1, 4)
+#' b
+#' torch_mul(a, b)
+#' }
+#'
 #' @name torch_mul
 #'
 #' @export
@@ -2603,6 +3287,13 @@ NULL
 #' @param input (Tensor) matrix to be multiplied
 #' @param vec (Tensor) vector to be multiplied
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' mat = torch_randn(2, 3)
+#' vec = torch_randn(3)
+#' torch_mv(mat, vec)
+#' }
 #'
 #' @name torch_mv
 #'
@@ -2627,6 +3318,13 @@ NULL
 #' @param input (Tensor) the tensor to compute the multivariate log-gamma function
 #' @param p (int) the number of dimensions
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_empty(2, 3).uniform_(1, 2)
+#' a
+#' torch_mvlgamma(a, 2)
+#' }
+#'
 #' @name torch_mvlgamma
 #'
 #' @export
@@ -2645,6 +3343,13 @@ NULL
 #' @param dim (int) the dimension along which to narrow
 #' @param start (int) the starting dimension
 #' @param length (int) the distance to the ending dimension
+#'
+#' @examples
+#' \dontrun{
+#' x = torch_tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+#' torch_narrow(x, 0, 0, 2)
+#' torch_narrow(x, 1, 1, 2)
+#' }
 #'
 #' @name torch_narrow
 #'
@@ -2665,6 +3370,12 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' @examples
+#' \dontrun{
+#' torch_ones(2, 3)
+#' torch_ones(5)
+#' }
 #'
 #' @name torch_ones
 #'
@@ -2690,6 +3401,12 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' @examples
+#' \dontrun{
+#' input = torch_empty(2, 3)
+#' torch_ones_like(input)
+#' }
 #'
 #' @name torch_ones_like
 #'
@@ -2741,6 +3458,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_cdist
 #'
 #' @export
@@ -2768,6 +3487,8 @@ NULL
 #' @param input NA input tensor of shape :math:`N \times M`.
 #' @param p NA p value for the p-norm distance to calculate between each vector pair        :math:`\in [0, \infty]`.
 #'
+#' 
+#'
 #' @name torch_pdist
 #'
 #' @export
@@ -2788,6 +3509,14 @@ NULL
 #' @param dim (int, optional) Dimension of vectors. Default: 1
 #' @param eps (float, optional) Small value to avoid division by zero.        Default: 1e-8
 #'
+#' @examples
+#' \dontrun{
+#' input1 = torch_randn(100, 128)
+#' input2 = torch_randn(100, 128)
+#' output = F.cosine_similarity(input1, input2)
+#' print(output)
+#' }
+#'
 #' @name torch_cosine_similarity
 #'
 #' @export
@@ -2803,6 +3532,8 @@ NULL
 #'
 #' @param input (Tensor) the input tensor
 #' @param upscale_factor (int) factor to increase spatial resolution by
+#'
+#' 
 #'
 #' @name torch_pixel_shuffle
 #'
@@ -2830,6 +3561,17 @@ NULL
 #' @param input (Tensor) The input tensor of size :math:`(*, m, n)` where :math:`*` is zero or more batch dimensions
 #' @param rcond (float) A floating point value to determine the cutoff for small singular values.                   Default: 1e-15
 #'
+#' @examples
+#' \dontrun{
+#' input = torch_randn(3, 5)
+#' input
+#' torch_pinverse(input)
+#' # Batched pinverse example
+#' a = torch_randn(2,6,3)
+#' b = torch_pinverse(a)
+#' torch_matmul(b, a)
+#' }
+#'
 #' @name torch_pinverse
 #'
 #' @export
@@ -2852,6 +3594,12 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' torch_rand(4)
+#' torch_rand(2, 3)
+#' }
+#'
 #' @name torch_rand
 #'
 #' @export
@@ -2872,6 +3620,8 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' 
 #'
 #' @name torch_rand_like
 #'
@@ -2902,6 +3652,13 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' torch_randint(3, 5, (3,))
+#' torch_randint(10, (2, 2))
+#' torch_randint(3, 10, (2, 2))
+#' }
+#'
 #' @name torch_randint
 #'
 #' @export
@@ -2927,6 +3684,8 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' 
 #'
 #' @name torch_randint_like
 #'
@@ -2954,6 +3713,12 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' torch_randn(4)
+#' torch_randn(2, 3)
+#' }
+#'
 #' @name torch_randn
 #'
 #' @export
@@ -2975,6 +3740,8 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' 
+#'
 #' @name torch_randn_like
 #'
 #' @export
@@ -2993,6 +3760,11 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' @examples
+#' \dontrun{
+#' torch_randperm(4)
+#' }
 #'
 #' @name torch_randperm
 #'
@@ -3023,6 +3795,12 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' torch_range(1, 4)
+#' torch_range(1, 4, 0.5)
+#' }
+#'
 #' @name torch_range
 #'
 #' @export
@@ -3041,6 +3819,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_reciprocal(a)
+#' }
+#'
 #' @name torch_reciprocal
 #'
 #' @export
@@ -3058,6 +3843,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(5)
+#' a
+#' torch_neg(a)
+#' }
 #'
 #' @name torch_neg
 #'
@@ -3079,6 +3871,16 @@ NULL
 #' @param repeats (Tensor or int) The number of repetitions for each element.        repeats is broadcasted to fit the shape of the given axis.
 #' @param dim (int, optional) The dimension along which to repeat values.        By default, use the flattened input array, and return a flat output        array.
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_tensor([1, 2, 3])
+#' x.repeat_interleave(2)
+#' y = torch_tensor([[1, 2], [3, 4]])
+#' torch_repeat_interleave(y, 2)
+#' torch_repeat_interleave(y, 3, dim=1)
+#' torch_repeat_interleave(y, torch_tensor([1, 2]), dim=0)
+#' }
+#'
 #' @name torch_repeat_interleave
 #'
 #' @export
@@ -3094,6 +3896,8 @@ NULL
 #' `1` appears `n2` times, `2` appears `n3` times, etc.
 #'
 
+#'
+#' 
 #'
 #' @name torch_repeat_interleave
 #'
@@ -3119,6 +3923,14 @@ NULL
 #' @param input (Tensor) the tensor to be reshaped
 #' @param shape (tuple of ints) the new shape
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_arange(4.)
+#' torch_reshape(a, (2, 2))
+#' b = torch_tensor([[0, 1], [2, 3]])
+#' torch_reshape(b, (-1,))
+#' }
+#'
 #' @name torch_reshape
 #'
 #' @export
@@ -3135,6 +3947,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_round(a)
+#' }
+#'
 #' @name torch_round
 #'
 #' @export
@@ -3149,6 +3968,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_rrelu_
 #'
 #' @export
@@ -3162,6 +3983,8 @@ NULL
 #' In-place version of :func:`~relu`.
 #'
 
+#'
+#' 
 #'
 #' @name torch_relu_
 #'
@@ -3182,6 +4005,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_rsqrt(a)
+#' }
+#'
 #' @name torch_rsqrt
 #'
 #' @export
@@ -3196,6 +4026,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_selu_
 #'
 #' @export
@@ -3209,6 +4041,8 @@ NULL
 #' In-place version of :func:`~celu`.
 #'
 
+#'
+#' 
 #'
 #' @name torch_celu_
 #'
@@ -3228,6 +4062,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_sigmoid(a)
+#' }
+#'
 #' @name torch_sigmoid
 #'
 #' @export
@@ -3245,6 +4086,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_sin(a)
+#' }
 #'
 #' @name torch_sin
 #'
@@ -3264,6 +4112,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_sinh(a)
+#' }
 #'
 #' @name torch_sinh
 #'
@@ -3287,6 +4142,15 @@ NULL
 #'     See :meth:`~torch.svd` for details.
 #'
 #' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more                batch dimensions.
+#'
+#' @examples
+#' \dontrun{
+#' A = torch_randn(3, 3)
+#' A
+#' torch_det(A)
+#' torch_logdet(A)
+#' torch_slogdet(A)
+#' }
 #'
 #' @name torch_slogdet
 #'
@@ -3314,6 +4178,8 @@ NULL
 #'         dim (int): dimension along which to split the tensor.
 #'
 
+#'
+#' 
 #'
 #' @name torch_split
 #'
@@ -3343,6 +4209,18 @@ NULL
 #' @param dim (int, optional) if given, the input will be squeezed only in           this dimension
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_zeros(2, 1, 2, 1, 2)
+#' x.size()
+#' y = torch_squeeze(x)
+#' y.size()
+#' y = torch_squeeze(x, 0)
+#' y.size()
+#' y = torch_squeeze(x, 1)
+#' y.size()
+#' }
+#'
 #' @name torch_squeeze
 #'
 #' @export
@@ -3360,6 +4238,8 @@ NULL
 #' @param tensors (sequence of Tensors) sequence of tensors to concatenate
 #' @param dim (int) dimension to insert. Has to be between 0 and the number        of dimensions of concatenated tensors (inclusive)
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' 
 #'
 #' @name torch_stack
 #'
@@ -3450,6 +4330,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_stft
 #'
 #' @export
@@ -3464,6 +4346,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_sum(a)
+#' }
 #'
 #' @name torch_sum
 #'
@@ -3490,6 +4379,15 @@ NULL
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_sum(a, 1)
+#' b = torch_arange(4 * 5 * 6).view(4, 5, 6)
+#' torch_sum(b, (2, 1))
+#' }
+#'
 #' @name torch_sum
 #'
 #' @export
@@ -3508,6 +4406,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_sqrt(a)
+#' }
+#'
 #' @name torch_sqrt
 #'
 #' @export
@@ -3525,6 +4430,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_std(a)
+#' }
 #'
 #' @name torch_std
 #'
@@ -3556,6 +4468,13 @@ NULL
 #' @param unbiased (bool) whether to use the unbiased estimation or not
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_std(a, dim=1)
+#' }
+#'
 #' @name torch_std
 #'
 #' @export
@@ -3573,6 +4492,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_std_mean(a)
+#' }
 #'
 #' @name torch_std_mean
 #'
@@ -3603,6 +4529,13 @@ NULL
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_std_mean(a, 1)
+#' }
+#'
 #' @name torch_std_mean
 #'
 #' @export
@@ -3617,6 +4550,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_prod(a)
+#' }
 #'
 #' @name torch_prod
 #'
@@ -3641,6 +4581,13 @@ NULL
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 2)
+#' a
+#' torch_prod(a, 1)
+#' }
+#'
 #' @name torch_prod
 #'
 #' @export
@@ -3658,6 +4605,19 @@ NULL
 #' 2-D tensor can be seen as a short-hand function for ``transpose(input, 0, 1)``.
 #'
 #' @param input (Tensor) the input tensor.
+#'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(())
+#' x
+#' torch_t(x)
+#' x = torch_randn(3)
+#' x
+#' torch_t(x)
+#' x = torch_randn(2, 3)
+#' x
+#' torch_t(x)
+#' }
 #'
 #' @name torch_t
 #'
@@ -3677,6 +4637,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_tan(a)
+#' }
+#'
 #' @name torch_tan
 #'
 #' @export
@@ -3695,6 +4662,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_tanh(a)
+#' }
 #'
 #' @name torch_tanh
 #'
@@ -3748,6 +4722,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_tensordot
 #'
 #' @export
@@ -3761,6 +4737,8 @@ NULL
 #' In-place version of :func:`~threshold`.
 #'
 
+#'
+#' 
 #'
 #' @name torch_threshold_
 #'
@@ -3783,6 +4761,13 @@ NULL
 #' @param dim0 (int) the first dimension to be transposed
 #' @param dim1 (int) the second dimension to be transposed
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(2, 3)
+#' x
+#' torch_transpose(x, 0, 1)
+#' }
+#'
 #' @name torch_transpose
 #'
 #' @export
@@ -3797,6 +4782,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dims (a list or tuple) axis to flip on
+#'
+#' @examples
+#' \dontrun{
+#' x = torch_arange(8).view(2, 2, 2)
+#' x
+#' torch_flip(x, [0, 1])
+#' }
 #'
 #' @name torch_flip
 #'
@@ -3817,6 +4809,15 @@ NULL
 #' @param shifts (int or tuple of ints) The number of places by which the elements        of the tensor are shifted. If shifts is a tuple, dims must be a tuple of        the same size, and each dimension will be rolled by the corresponding        value
 #' @param dims (int or tuple of ints) Axis along which to roll
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_tensor([1, 2, 3, 4, 5, 6, 7, 8]).view(4, 2)
+#' x
+#' torch_roll(x, 1, 0)
+#' torch_roll(x, -1, 0)
+#' torch_roll(x, shifts=(2, 1), dims=(0, 1))
+#' }
+#'
 #' @name torch_roll
 #'
 #' @export
@@ -3834,6 +4835,16 @@ NULL
 #' @param k (int) number of times to rotate
 #' @param dims (a list or tuple) axis to rotate
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_arange(4).view(2, 2)
+#' x
+#' torch_rot90(x, 1, [0, 1])
+#' x = torch_arange(8).view(2, 2, 2)
+#' x
+#' torch_rot90(x, 1, [1, 2])
+#' }
+#'
 #' @name torch_rot90
 #'
 #' @export
@@ -3849,6 +4860,14 @@ NULL
 #' @param y (Tensor) The values of the function to integrate
 #' @param x (Tensor) The points at which the function `y` is sampled.        If `x` is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        :math:`\int_a^b f = -\int_b^a f` is followed).
 #' @param dim (int) The dimension along which to integrate.        By default, use the last dimension.
+#'
+#' @examples
+#' \dontrun{
+#' y = torch_randn((2, 3))
+#' y
+#' x = torch_tensor([[1, 3, 4], [1, 2, 3]])
+#' torch_trapz(y, x)
+#' }
 #'
 #' @name torch_trapz
 #'
@@ -3866,6 +4885,8 @@ NULL
 #' @param dx (float) The distance between points at which `y` is sampled.
 #' @param dim (int) The dimension along which to integrate.        By default, use the last dimension.
 #'
+#' 
+#'
 #' @name torch_trapz
 #'
 #' @export
@@ -3881,6 +4902,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_trunc(a)
+#' }
 #'
 #' @name torch_trunc
 #'
@@ -3941,6 +4969,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_unique_consecutive
 #'
 #' @export
@@ -3964,6 +4994,13 @@ NULL
 #' @param dim (int) the index at which to insert the singleton dimension
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_tensor([1, 2, 3, 4])
+#' torch_unsqueeze(x, 0)
+#' torch_unsqueeze(x, 1)
+#' }
+#'
 #' @name torch_unsqueeze
 #'
 #' @export
@@ -3981,6 +5018,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_var(a)
+#' }
 #'
 #' @name torch_var
 #'
@@ -4011,6 +5055,13 @@ NULL
 #' @param unbiased (bool) whether to use the unbiased estimation or not
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_var(a, 1)
+#' }
+#'
 #' @name torch_var
 #'
 #' @export
@@ -4028,6 +5079,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(1, 3)
+#' a
+#' torch_var_mean(a)
+#' }
 #'
 #' @name torch_var_mean
 #'
@@ -4057,6 +5115,13 @@ NULL
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_var_mean(a, 1)
+#' }
+#'
 #' @name torch_var_mean
 #'
 #' @export
@@ -4084,6 +5149,14 @@ NULL
 #' @param x (Tensor) values selected at indices where :attr:`condition` is ``True``
 #' @param y (Tensor) values selected at indices where :attr:`condition` is ``False``
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(3, 2)
+#' y = torch_ones(3, 2)
+#' x
+#' torch_where(x > 0, x, y)
+#' }
+#'
 #' @name torch_where
 #'
 #' @export
@@ -4101,6 +5174,8 @@ NULL
 #'     See also :func:`torch.nonzero`.
 #'
 
+#'
+#' 
 #'
 #' @name torch_where
 #'
@@ -4121,6 +5196,12 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' @examples
+#' \dontrun{
+#' torch_zeros(2, 3)
+#' torch_zeros(5)
+#' }
 #'
 #' @name torch_zeros
 #'
@@ -4146,6 +5227,12 @@ NULL
 #' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#'
+#' @examples
+#' \dontrun{
+#' input = torch_empty(2, 3)
+#' torch_zeros_like(input)
+#' }
 #'
 #' @name torch_zeros_like
 #'
@@ -4216,6 +5303,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_norm
 #'
 #' @export
@@ -4249,6 +5338,18 @@ NULL
 #' @param exponent (float or tensor) the exponent value
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_pow(a, 2)
+#' exp = torch_arange(1., 5.)
+#' a = torch_arange(1., 5.)
+#' a
+#' exp
+#' torch_pow(a, exp)
+#' }
+#'
 #' @name torch_pow
 #'
 #' @export
@@ -4270,6 +5371,13 @@ NULL
 #' @param self (float) the scalar base value for the power operation
 #' @param exponent (Tensor) the exponent tensor
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' exp = torch_arange(1., 5.)
+#' base = 2
+#' torch_pow(base, exp)
+#' }
 #'
 #' @name torch_pow
 #'
@@ -4305,6 +5413,14 @@ NULL
 #' @param mat2 (Tensor) the second matrix to be multiplied
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' M = torch_randn(2, 3)
+#' mat1 = torch_randn(2, 3)
+#' mat2 = torch_randn(3, 3)
+#' torch_addmm(M, mat1, mat2)
+#' }
+#'
 #' @name torch_addmm
 #'
 #' @export
@@ -4327,6 +5443,17 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
+#' @examples
+#' \dontrun{
+#' i = torch_tensor([[0, 1, 1],
+#' v = torch_tensor([3, 4, 5], dtype=torch_float32)
+#' torch_sparse_coo_tensor(i, v, [2, 4])
+#' torch_sparse_coo_tensor(i, v)  # Shape inference
+#' torch_sparse_coo_tensor(i, v, [2, 4],
+#' S = torch_sparse_coo_tensor(torch_empty([1, 0]), [], [1])
+#' S = torch_sparse_coo_tensor(torch_empty([1, 0]), torch_empty([0, 2]), [1, 2])
+#' }
+#'
 #' @name torch_sparse_coo_tensor
 #'
 #' @export
@@ -4343,6 +5470,13 @@ NULL
 #'
 #' @param input (Tensor) the tensor to unbind
 #' @param dim (int) dimension to remove
+#'
+#' @examples
+#' \dontrun{
+#' torch_unbind(torch_tensor([[1, 2, 3],
+#'                            [4, 5, 6],
+#'                            [7, 8, 9]]))
+#' }
 #'
 #' @name torch_unbind
 #'
@@ -4361,6 +5495,12 @@ NULL
 #' @param zero_point (int) offset in integer value that maps to float zero
 #' @param dtype (:class:`torch.dtype`) the desired data type of returned tensor.        Has to be one of the quantized dtypes: ``torch.quint8``, ``torch.qint8``, ``torch.qint32``
 #'
+#' @examples
+#' \dontrun{
+#' torch_quantize_per_tensor(torch_tensor([-1.0, 0.0, 1.0, 2.0]), 0.1, 10, torch_quint8)
+#' torch_quantize_per_tensor(torch_tensor([-1.0, 0.0, 1.0, 2.0]), 0.1, 10, torch_quint8).int_repr()
+#' }
+#'
 #' @name torch_quantize_per_tensor
 #'
 #' @export
@@ -4378,6 +5518,13 @@ NULL
 #' @param zero_points (int) integer 1D tensor of offset to use, size should match ``input.size(axis)``
 #' @param axis (int) dimension on which apply per-channel quantization
 #' @param dtype (:class:`torch.dtype`) the desired data type of returned tensor.        Has to be one of the quantized dtypes: ``torch.quint8``, ``torch.qint8``, ``torch.qint32``
+#'
+#' @examples
+#' \dontrun{
+#' x = torch_tensor([[-1.0, 0.0], [1.0, 2.0]])
+#' torch_quantize_per_channel(x, torch_tensor([0.1, 0.01]), torch_tensor([10, 0]), 0, torch_quint8)
+#' torch_quantize_per_channel(x, torch_tensor([0.1, 0.01]), torch_tensor([10, 0]), 0, torch_quint8).int_repr()
+#' }
 #'
 #' @name torch_quantize_per_channel
 #'
@@ -4417,6 +5564,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_meshgrid
 #'
 #' @export
@@ -4454,6 +5603,8 @@ NULL
 #'
 
 #'
+#' 
+#'
 #' @name torch_cartesian_prod
 #'
 #' @export
@@ -4472,6 +5623,18 @@ NULL
 #' @param r (int, optional) number of elements to combine
 #' @param with_replacement (boolean, optional) whether to allow duplication in combination
 #'
+#' @examples
+#' \dontrun{
+#' a = [1, 2, 3]
+#' list(itertools.combinations(a, r=2))
+#' list(itertools.combinations(a, r=3))
+#' list(itertools.combinations_with_replacement(a, r=2))
+#' tensor_a = torch_tensor(a)
+#' torch_combinations(tensor_a)
+#' torch_combinations(tensor_a, r=3)
+#' torch_combinations(tensor_a, with_replacement=True)
+#' }
+#'
 #' @name torch_combinations
 #'
 #' @export
@@ -4489,6 +5652,12 @@ NULL
 #' @param tensor1 (Tensor or Number) an input tensor or number
 #' @param tensor2 (Tensor or Number) an input tensor or number
 #'
+#' @examples
+#' \dontrun{
+#' torch_result_type(torch_tensor([1, 2], dtype=torch_int), 1.0)
+#' torch_result_type(torch_tensor([1, 2], dtype=torch_uint8), torch_tensor(1))
+#' }
+#'
 #' @name torch_result_type
 #'
 #' @export
@@ -4504,6 +5673,12 @@ NULL
 #'
 #' @param from (dtype) The original :class:`torch.dtype`.
 #' @param to (dtype) The target :class:`torch.dtype`.
+#'
+#' @examples
+#' \dontrun{
+#' torch_can_cast(torch_double, torch_float)
+#' torch_can_cast(torch_float, torch_int)
+#' }
 #'
 #' @name torch_can_cast
 #'
@@ -4523,6 +5698,12 @@ NULL
 #' @param type1 (:class:`torch.dtype`) 
 #' @param type2 (:class:`torch.dtype`) 
 #'
+#' @examples
+#' \dontrun{
+#' torch_promote_types(torch_int32, torch_float32))
+#' torch_promote_types(torch_uint8, torch_long)
+#' }
+#'
 #' @name torch_promote_types
 #'
 #' @export
@@ -4539,6 +5720,8 @@ NULL
 #' @param input NA the first input tensor
 #' @param other NA the second input tensor
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' 
 #'
 #' @name torch_bitwise_xor
 #'
@@ -4577,6 +5760,14 @@ NULL
 #' @param batch2 (Tensor) the second batch of matrices to be multiplied
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' M = torch_randn(3, 5)
+#' batch1 = torch_randn(10, 3, 4)
+#' batch2 = torch_randn(10, 4, 5)
+#' torch_addbmm(M, batch1, batch2)
+#' }
+#'
 #' @name torch_addbmm
 #'
 #' @export
@@ -4602,6 +5793,8 @@ NULL
 #' @param diagonal (int, optional) the diagonal to consider
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' 
+#'
 #' @name torch_diag
 #'
 #' @export
@@ -4626,6 +5819,16 @@ NULL
 #' @param other (Tensor) the second input tensor
 #' @param dim (int, optional) the dimension to take the cross-product in.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 3)
+#' a
+#' b = torch_randn(4, 3)
+#' b
+#' torch_cross(a, b, dim=1)
+#' torch_cross(a, b)
+#' }
 #'
 #' @name torch_cross
 #'
@@ -4655,6 +5858,19 @@ NULL
 #' @param diagonal (int, optional) the diagonal to consider
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(3, 3)
+#' a
+#' torch_triu(a)
+#' torch_triu(a, diagonal=1)
+#' torch_triu(a, diagonal=-1)
+#' b = torch_randn(4, 6)
+#' b
+#' torch_triu(b, diagonal=1)
+#' torch_triu(b, diagonal=-1)
+#' }
+#'
 #' @name torch_triu
 #'
 #' @export
@@ -4682,6 +5898,17 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param diagonal (int, optional) the diagonal to consider
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(3, 3)
+#' a
+#' torch_tril(a)
+#' b = torch_randn(4, 6)
+#' b
+#' torch_tril(b, diagonal=1)
+#' torch_tril(b, diagonal=-1)
+#' }
 #'
 #' @name torch_tril
 #'
@@ -4719,6 +5946,16 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param layout (:class:`torch.layout`, optional) currently only support ``torch.strided``.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_tril_indices(3, 3)
+#' a
+#' a = torch_tril_indices(4, 3, -1)
+#' a
+#' a = torch_tril_indices(4, 3, 1)
+#' a
+#' }
+#'
 #' @name torch_tril_indices
 #'
 #' @export
@@ -4755,6 +5992,16 @@ NULL
 #' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param layout (:class:`torch.layout`, optional) currently only support ``torch.strided``.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_triu_indices(3, 3)
+#' a
+#' a = torch_triu_indices(4, 3, -1)
+#' a
+#' a = torch_triu_indices(4, 3, 1)
+#' a
+#' }
+#'
 #' @name torch_triu_indices
 #'
 #' @export
@@ -4770,6 +6017,13 @@ NULL
 #' Example::
 #'
 
+#'
+#' @examples
+#' \dontrun{
+#' x = torch_arange(1., 10.).view(3, 3)
+#' x
+#' torch_trace(x)
+#' }
 #'
 #' @name torch_trace
 #'
@@ -4790,6 +6044,11 @@ NULL
 #' @param other (Tensor or float) the tensor or value to compare
 #' @param out (Tensor, optional) the output tensor that must be a `BoolTensor`
 #'
+#' @examples
+#' \dontrun{
+#' torch_ne(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' }
+#'
 #' @name torch_ne
 #'
 #' @export
@@ -4808,6 +6067,11 @@ NULL
 #' @param input (Tensor) the tensor to compare
 #' @param other (Tensor or float) the tensor or value to compare
 #' @param out (Tensor, optional) the output tensor. Must be a `ByteTensor`
+#'
+#' @examples
+#' \dontrun{
+#' torch_eq(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' }
 #'
 #' @name torch_eq
 #'
@@ -4828,6 +6092,11 @@ NULL
 #' @param other (Tensor or float) the tensor or value to compare
 #' @param out (Tensor, optional) the output tensor that must be a `BoolTensor`
 #'
+#' @examples
+#' \dontrun{
+#' torch_ge(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' }
+#'
 #' @name torch_ge
 #'
 #' @export
@@ -4846,6 +6115,11 @@ NULL
 #' @param input (Tensor) the tensor to compare
 #' @param other (Tensor or float) the tensor or value to compare
 #' @param out (Tensor, optional) the output tensor that must be a `BoolTensor`
+#'
+#' @examples
+#' \dontrun{
+#' torch_le(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' }
 #'
 #' @name torch_le
 #'
@@ -4866,6 +6140,11 @@ NULL
 #' @param other (Tensor or float) the tensor or value to compare
 #' @param out (Tensor, optional) the output tensor that must be a `BoolTensor`
 #'
+#' @examples
+#' \dontrun{
+#' torch_gt(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' }
+#'
 #' @name torch_gt
 #'
 #' @export
@@ -4885,6 +6164,11 @@ NULL
 #' @param other (Tensor or float) the tensor or value to compare
 #' @param out (Tensor, optional) the output tensor that must be a `BoolTensor`
 #'
+#' @examples
+#' \dontrun{
+#' torch_lt(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' }
+#'
 #' @name torch_lt
 #'
 #' @export
@@ -4901,6 +6185,12 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param indices (LongTensor) the indices into tensor
+#'
+#' @examples
+#' \dontrun{
+#' src = torch_tensor([[4, 3, 5],
+#' torch_take(src, torch_tensor([0, 2, 5]))
+#' }
 #'
 #' @name torch_take
 #'
@@ -4929,6 +6219,15 @@ NULL
 #' @param index (LongTensor) the 1-D tensor containing the indices to index
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(3, 4)
+#' x
+#' indices = torch_tensor([0, 2])
+#' torch_index_select(x, 0, indices)
+#' torch_index_select(x, 1, indices)
+#' }
+#'
 #' @name torch_index_select
 #'
 #' @export
@@ -4951,6 +6250,15 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param mask (ByteTensor) the tensor containing the binary mask to index with
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(3, 4)
+#' x
+#' mask = x.ge(0.5)
+#' mask
+#' torch_masked_select(x, mask)
+#' }
 #'
 #' @name torch_masked_select
 #'
@@ -5001,6 +6309,15 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (LongTensor, optional) the output tensor containing indices
 #'
+#' @examples
+#' \dontrun{
+#' torch_nonzero(torch_tensor([1, 1, 1, 0, 1]))
+#' torch_nonzero(torch_tensor([[0.6, 0.0, 0.0, 0.0],
+#' torch_nonzero(torch_tensor([1, 1, 1, 0, 1]), as_tuple=True)
+#' torch_nonzero(torch_tensor([[0.6, 0.0, 0.0, 0.0],
+#' torch_nonzero(torch_tensor(5), as_tuple=True)
+#' }
+#'
 #' @name torch_nonzero
 #'
 #' @export
@@ -5031,6 +6348,12 @@ NULL
 #' @param out (Tensor, optional) the destination tensor
 #' @param sparse_grad (bool,optional) If ``True``, gradient w.r.t. :attr:`input` will be a sparse tensor.
 #'
+#' @examples
+#' \dontrun{
+#' t = torch_tensor([[1,2],[3,4]])
+#' torch_gather(t, 1, torch_tensor([[0,0],[1,0]]))
+#' }
+#'
 #' @name torch_gather
 #'
 #' @export
@@ -5060,6 +6383,14 @@ NULL
 #' @param tensor2 (Tensor) the tensor to be multiplied
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' t = torch_randn(1, 3)
+#' t1 = torch_randn(3, 1)
+#' t2 = torch_randn(1, 3)
+#' torch_addcmul(t, 0.1, t1, t2)
+#' }
+#'
 #' @name torch_addcmul
 #'
 #' @export
@@ -5087,6 +6418,14 @@ NULL
 #' @param tensor1 (Tensor) the numerator tensor
 #' @param tensor2 (Tensor) the denominator tensor
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' t = torch_randn(1, 3)
+#' t1 = torch_randn(3, 1)
+#' t2 = torch_randn(1, 3)
+#' torch_addcdiv(t, 0.1, t1, t2)
+#' }
 #'
 #' @name torch_addcdiv
 #'
@@ -5130,6 +6469,14 @@ NULL
 #' @param A (Tensor) the :math:`m` by :math:`n` matrix :math:`A`
 #' @param out (tuple, optional) the optional destination tensor
 #'
+#' @examples
+#' \dontrun{
+#' A = torch_tensor([[1., 1, 1],
+#' B = torch_tensor([[-10., -3],
+#' X, _ = torch_lstsq(B, A)
+#' X
+#' }
+#'
 #' @name torch_lstsq
 #'
 #' @export
@@ -5155,6 +6502,8 @@ NULL
 #' @param upper (bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: ``True``.
 #' @param transpose (bool, optional) whether :math:`A` should be transposed before        being sent into the solver. Default: ``False``.
 #' @param unitriangular (bool, optional) whether :math:`A` is unit triangular.        If True, the diagonal elements of :math:`A` are assumed to be        1 and not referenced from :math:`A`. Default: ``False``.
+#'
+#' 
 #'
 #' @name torch_triangular_solve
 #'
@@ -5199,6 +6548,8 @@ NULL
 #' @param upper (boolean, optional) controls whether to consider upper-triangular or lower-triangular region
 #' @param out (tuple, optional) the output tuple of (Tensor, Tensor)
 #'
+#' 
+#'
 #' @name torch_symeig
 #'
 #' @export
@@ -5218,6 +6569,8 @@ NULL
 #' @param input (Tensor) the square matrix of shape :math:`(n \times n)` for which the eigenvalues and eigenvectors        will be computed
 #' @param eigenvectors (bool) ``True`` to compute both eigenvalues and eigenvectors;        otherwise, only eigenvalues will be computed
 #' @param out (tuple, optional) the output tensors
+#'
+#' 
 #'
 #' @name torch_eig
 #'
@@ -5269,6 +6622,20 @@ NULL
 #' @param compute_uv (bool, optional) option whether to compute `U` and `V` or not
 #' @param out (tuple, optional) the output tuple of tensors
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(5, 3)
+#' a
+#' u, s, v = torch_svd(a)
+#' u
+#' s
+#' v
+#' torch_dist(a, torch_mm(torch_mm(u, torch_diag(s)), v.t()))
+#' a_big = torch_randn(7, 5, 3)
+#' u, s, v = torch_svd(a_big)
+#' torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v.transpose(-2, -1)))
+#' }
+#'
 #' @name torch_svd
 #'
 #' @export
@@ -5306,6 +6673,21 @@ NULL
 #' @param upper (bool, optional) flag that indicates whether to return a                            upper or lower triangular matrix. Default: ``False``
 #' @param out (Tensor, optional) the output matrix
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(3, 3)
+#' a = torch_mm(a, a.t()) # make symmetric positive-definite
+#' l = torch_cholesky(a)
+#' a
+#' l
+#' torch_mm(l, l.t())
+#' a = torch_randn(3, 2, 2)
+#' a = torch_matmul(a, a.transpose(-1, -2)) + 1e-03 # make symmetric positive-definite
+#' l = torch_cholesky(a)
+#' z = torch_matmul(l, l.transpose(-1, -2))
+#' torch_max(torch_abs(z - a)) # Max non-zero
+#' }
+#'
 #' @name torch_cholesky
 #'
 #' @export
@@ -5340,6 +6722,18 @@ NULL
 #' @param upper (bool, optional) whether to consider the Cholesky factor as a                            lower or upper triangular matrix. Default: ``False``.
 #' @param out (Tensor, optional) the output tensor for `c`
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(3, 3)
+#' a = torch_mm(a, a.t()) # make symmetric positive definite
+#' u = torch_cholesky(a)
+#' a
+#' b = torch_randn(3, 2)
+#' b
+#' torch_cholesky_solve(b, u)
+#' torch_mm(a.inverse(), b)
+#' }
+#'
 #' @name torch_cholesky_solve
 #'
 #' @export
@@ -5371,6 +6765,19 @@ NULL
 #' @param A (Tensor) input square matrix of size :math:`(*, m, m)`, where                :math:`*` is zero or more batch dimensions.
 #' @param out ((Tensor, Tensor) optional output tuple.
 #'
+#' @examples
+#' \dontrun{
+#' A = torch_tensor([[6.80, -2.11,  5.66,  5.97,  8.23],
+#' B = torch_tensor([[4.02,  6.19, -8.22, -7.57, -3.03],
+#' X, LU = torch_solve(B, A)
+#' torch_dist(B, torch_mm(A, X))
+#' # Batched solver example
+#' A = torch_randn(2, 3, 1, 4, 4)
+#' B = torch_randn(2, 3, 1, 4, 6)
+#' X, LU = torch_solve(B, A)
+#' torch_dist(B, A.matmul(X))
+#' }
+#'
 #' @name torch_solve
 #'
 #' @export
@@ -5401,6 +6808,16 @@ NULL
 #' @param upper (bool, optional) whether to return a lower (default) or upper triangular matrix
 #' @param out (Tensor, optional) the output tensor for `inv`
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(3, 3)
+#' a = torch_mm(a, a.t()) + 1e-05 * torch_eye(3) # make symmetric positive definite
+#' u = torch_cholesky(a)
+#' a
+#' torch_cholesky_inverse(u)
+#' a.inverse()
+#' }
+#'
 #' @name torch_cholesky_inverse
 #'
 #' @export
@@ -5430,6 +6847,20 @@ NULL
 #' @param some (bool, optional) Set to ``True`` for reduced QR decomposition and ``False`` for                complete QR decomposition.
 #' @param out (tuple, optional) tuple of `Q` and `R` tensors                satisfying :code:`input = torch.matmul(Q, R)`.                The dimensions of `Q` and `R` are :math:`(*, m, k)` and :math:`(*, k, n)`                respectively, where :math:`k = \min(m, n)` if :attr:`some:` is ``True`` and                :math:`k = m` otherwise.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_tensor([[12., -51, 4], [6, 167, -68], [-4, 24, -41]])
+#' q, r = torch_qr(a)
+#' q
+#' r
+#' torch_mm(q, r).round()
+#' torch_mm(q.t(), q).round()
+#' a = torch_randn(3, 4, 5)
+#' q, r = torch_qr(a, some=False)
+#' torch_allclose(torch_matmul(q, r), a)
+#' torch_allclose(torch_matmul(q.transpose(-2, -1), q), torch_eye(5))
+#' }
+#'
 #' @name torch_qr
 #'
 #' @export
@@ -5456,6 +6887,8 @@ NULL
 #' @param input (Tensor) the input matrix
 #' @param out (tuple, optional) the output tuple of (Tensor, Tensor)
 #'
+#' 
+#'
 #' @name torch_geqrf
 #'
 #' @export
@@ -5474,6 +6907,8 @@ NULL
 #'
 #' @param input (Tensor) the `a` from :func:`torch.geqrf`.
 #' @param input2 (Tensor) the `tau` from :func:`torch.geqrf`.
+#'
+#' 
 #'
 #' @name torch_orgqr
 #'
@@ -5495,6 +6930,8 @@ NULL
 #' @param input2 (Tensor) the `tau` from :func:`torch.geqrf`.
 #' @param input3 (Tensor) the matrix to be multiplied.
 #'
+#' 
+#'
 #' @name torch_ormqr
 #'
 #' @export
@@ -5512,6 +6949,15 @@ NULL
 #' @param LU_data (Tensor) the pivoted LU factorization of A from :meth:`torch.lu` of size :math:`(*, m, m)`,                       where :math:`*` is zero or more batch dimensions.
 #' @param LU_pivots (IntTensor) the pivots of the LU factorization from :meth:`torch.lu` of size :math:`(*, m)`,                           where :math:`*` is zero or more batch dimensions.                           The batch dimensions of :attr:`LU_pivots` must be equal to the batch dimensions of                           :attr:`LU_data`.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' A = torch_randn(2, 3, 3)
+#' b = torch_randn(2, 3, 1)
+#' A_LU = torch_lu(A)
+#' x = torch_lu_solve(b, *A_LU)
+#' torch_norm(torch_bmm(A, x) - b)
+#' }
 #'
 #' @name torch_lu_solve
 #'
@@ -5556,6 +7002,14 @@ NULL
 #' @param generator (:class:`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' weights = torch_tensor([0, 10, 3, 0], dtype=torch_float) # create a tensor of weights
+#' torch_multinomial(weights, 2)
+#' torch_multinomial(weights, 4) # ERROR!
+#' torch_multinomial(weights, 4, replacement=True)
+#' }
+#'
 #' @name torch_multinomial
 #'
 #' @export
@@ -5574,6 +7028,12 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_arange(0.5, 2, 0.5)
+#' torch_lgamma(a)
+#' }
+#'
 #' @name torch_lgamma
 #'
 #' @export
@@ -5590,6 +7050,12 @@ NULL
 #'     \psi(x) = \frac{d}{dx} \ln\left(\Gamma\left(x\right)\right) = \frac{\Gamma'(x)}{\Gamma(x)}
 #'
 #' @param input (Tensor) the tensor to compute the digamma function on
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_tensor([1, 0.5])
+#' torch_digamma(a)
+#' }
 #'
 #' @name torch_digamma
 #'
@@ -5614,6 +7080,12 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' a = torch_tensor([1, 0.5])
+#' torch_polygamma(1, a)
+#' }
+#'
 #' @name torch_polygamma
 #'
 #' @export
@@ -5633,6 +7105,11 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' torch_erfinv(torch_tensor([0, 0.5, -1.]))
+#' }
+#'
 #' @name torch_erfinv
 #'
 #' @export
@@ -5650,6 +7127,13 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_tensor([0.7, -1.2, 0., 2.3])
+#' a
+#' torch_sign(a)
+#' }
 #'
 #' @name torch_sign
 #'
@@ -5669,6 +7153,18 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param other (Tensor) the Right-hand-side input tensor
 #' @param p (float, optional) the norm to be computed
+#'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(4)
+#' x
+#' y = torch_randn(4)
+#' y
+#' torch_dist(x, y, 3.5)
+#' torch_dist(x, y, 3)
+#' torch_dist(x, y, 0)
+#' torch_dist(x, y, 1)
+#' }
 #'
 #' @name torch_dist
 #'
@@ -5693,6 +7189,13 @@ NULL
 #' @param input (Tensor) the first input tensor
 #' @param other (Tensor) the second input tensor
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4)
+#' a
+#' torch_atan2(a, torch_randn(4))
+#' }
 #'
 #' @name torch_atan2
 #'
@@ -5719,6 +7222,16 @@ NULL
 #' @param weight (float or tensor) the weight for the interpolation formula
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' start = torch_arange(1., 5.)
+#' end = torch_empty(4).fill_(10)
+#' start
+#' end
+#' torch_lerp(start, end, 0.5)
+#' torch_lerp(start, end, torch_full_like(start, 0.5))
+#' }
+#'
 #' @name torch_lerp
 #'
 #' @export
@@ -5740,6 +7253,11 @@ NULL
 #' @param min (int) lower end of the range (inclusive)
 #' @param max (int) upper end of the range (inclusive)
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' torch_histc(torch_tensor([1., 2, 1]), bins=4, min=0, max=3)
+#' }
 #'
 #' @name torch_histc
 #'
@@ -5763,6 +7281,12 @@ NULL
 #' @param other (Tensor or float) the divisor, which may be either a number or a tensor of the same shape as the dividend
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' torch_fmod(torch_tensor([-3., -2, -1, 1, 2, 3]), 2)
+#' torch_fmod(torch_tensor([1., 2, 3, 4, 5]), 1.5)
+#' }
+#'
 #' @name torch_fmod
 #'
 #' @export
@@ -5784,6 +7308,12 @@ NULL
 #' @param input (Tensor) the dividend
 #' @param other (Tensor or float) the divisor that may be either a number or a                               Tensor of the same shape as the dividend
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' torch_remainder(torch_tensor([-3., -2, -1, 1, 2, 3]), 2)
+#' torch_remainder(torch_tensor([1., 2, 3, 4, 5]), 1.5)
+#' }
 #'
 #' @name torch_remainder
 #'
@@ -5812,6 +7342,17 @@ NULL
 #' @param descending (bool, optional) controls the sorting order (ascending or descending)
 #' @param out (tuple, optional) the output tuple of (`Tensor`, `LongTensor`) that can        be optionally given to be used as output buffers
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_randn(3, 4)
+#' sorted, indices = torch_sort(x)
+#' sorted
+#' indices
+#' sorted, indices = torch_sort(x, 0)
+#' sorted
+#' indices
+#' }
+#'
 #' @name torch_sort
 #'
 #' @export
@@ -5831,6 +7372,13 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param dim (int, optional) the dimension to sort along
 #' @param descending (bool, optional) controls the sorting order (ascending or descending)
+#'
+#' @examples
+#' \dontrun{
+#' a = torch_randn(4, 4)
+#' a
+#' torch_argsort(a, dim=1)
+#' }
 #'
 #' @name torch_argsort
 #'
@@ -5862,6 +7410,13 @@ NULL
 #' @param sorted (bool, optional) controls whether to return the elements           in sorted order
 #' @param out (tuple, optional) the output tuple of (Tensor, LongTensor) that can be        optionally given to be used as output buffers
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_arange(1., 6.)
+#' x
+#' torch_topk(x, 3)
+#' }
+#'
 #' @name torch_topk
 #'
 #' @export
@@ -5884,6 +7439,15 @@ NULL
 #' @param maxnorm (float) the maximum norm to keep each sub-tensor under
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' x = torch_ones(3, 3)
+#' x[1].fill_(2)
+#' x[2].fill_(3)
+#' x
+#' torch_renorm(x, 1, 0, 5)
+#' }
+#'
 #' @name torch_renorm
 #'
 #' @export
@@ -5899,6 +7463,11 @@ NULL
 #' Example::
 #'
 
+#'
+#' @examples
+#' \dontrun{
+#' torch_equal(torch_tensor([1, 2]), torch_tensor([1, 2]))
+#' }
 #'
 #' @name torch_equal
 #'
@@ -5930,6 +7499,11 @@ NULL
 #' @param generator (:class:`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' @param out (Tensor, optional) the output tensor.
 #'
+#' @examples
+#' \dontrun{
+#' torch_normal(mean=torch_arange(1., 11.), std=torch_arange(1, 0, -0.1))
+#' }
+#'
 #' @name torch_normal
 #'
 #' @export
@@ -5946,6 +7520,11 @@ NULL
 #' @param mean (float, optional) the mean for all distributions
 #' @param std (Tensor) the tensor of per-element standard deviations
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' torch_normal(mean=0.5, std=torch_arange(1., 6.))
+#' }
 #'
 #' @name torch_normal
 #'
@@ -5964,6 +7543,11 @@ NULL
 #' @param std (float, optional) the standard deviation for all distributions
 #' @param out (Tensor, optional) the output tensor
 #'
+#' @examples
+#' \dontrun{
+#' torch_normal(mean=torch_arange(1., 6.))
+#' }
+#'
 #' @name torch_normal
 #'
 #' @export
@@ -5981,6 +7565,11 @@ NULL
 #' @param std (float) the standard deviation for all distributions
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.
 #' @param out (Tensor, optional) the output tensor.
+#'
+#' @examples
+#' \dontrun{
+#' torch_normal(2, 3, size=(1, 4))
+#' }
 #'
 #' @name torch_normal
 #'
@@ -6004,6 +7593,8 @@ NULL
 #'         tensor([True,  False,  True,  False,  False])
 #'
 
+#'
+#' 
 #'
 #' @name torch_isfinite
 #'

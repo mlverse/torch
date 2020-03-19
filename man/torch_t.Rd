@@ -16,3 +16,17 @@ and 1.
 0-D and 1-D tensors are returned as it is and
 2-D tensor can be seen as a short-hand function for \code{transpose(input, 0, 1)}.
 }
+\examples{
+\dontrun{
+x = torch_randn(())
+x
+torch_t(x)
+x = torch_randn(3)
+x
+torch_t(x)
+x = torch_randn(2, 3)
+x
+torch_t(x)
+}
+
+}

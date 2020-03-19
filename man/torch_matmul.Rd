@@ -39,3 +39,28 @@ tensor, :attr:\code{out} will be an :math:\verb{(j \\times k \\times n \\times p
 .. note::\preformatted{The 1-dimensional dot product version of this function does not support an :attr:`out` parameter.
 }
 }
+\examples{
+\dontrun{
+# vector x vector
+tensor1 = torch_randn(3)
+tensor2 = torch_randn(3)
+torch_matmul(tensor1, tensor2).size()
+# matrix x vector
+tensor1 = torch_randn(3, 4)
+tensor2 = torch_randn(4)
+torch_matmul(tensor1, tensor2).size()
+# batched matrix x broadcasted vector
+tensor1 = torch_randn(10, 3, 4)
+tensor2 = torch_randn(4)
+torch_matmul(tensor1, tensor2).size()
+# batched matrix x batched matrix
+tensor1 = torch_randn(10, 3, 4)
+tensor2 = torch_randn(10, 4, 5)
+torch_matmul(tensor1, tensor2).size()
+# batched matrix x broadcasted matrix
+tensor1 = torch_randn(10, 3, 4)
+tensor2 = torch_randn(4, 5)
+torch_matmul(tensor1, tensor2).size()
+}
+
+}

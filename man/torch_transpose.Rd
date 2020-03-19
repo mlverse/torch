@@ -21,3 +21,11 @@ The resulting :attr:\code{out} tensor shares it's underlying storage with the
 :attr:\code{input} tensor, so changing the content of one would change the content
 of the other.
 }
+\examples{
+\dontrun{
+x = torch_randn(2, 3)
+x
+torch_transpose(x, 0, 1)
+}
+
+}

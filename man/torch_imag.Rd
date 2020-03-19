@@ -17,3 +17,9 @@ Computes the element-wise imag value of the given :attr:\code{input} tensor.
 .. math::
 \text{out}\emph{{i} = imag(\text{input}}{i})
 }
+\examples{
+\dontrun{
+torch_imag(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))
+}
+
+}

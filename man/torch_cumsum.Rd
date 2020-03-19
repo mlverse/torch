@@ -25,3 +25,11 @@ a vector of size N, with elements.
 .. math::
 y_i = x_1 + x_2 + x_3 + \dots + x_i
 }
+\examples{
+\dontrun{
+a = torch_randn(10)
+a
+torch_cumsum(a, dim=0)
+}
+
+}
