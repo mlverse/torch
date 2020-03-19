@@ -19,17 +19,16 @@ Args:
 When called with an integer argument `dims` = :math:`d`, and the number of
 dimensions of `a` and `b` is :math:`m` and :math:`n`, respectively,
 it computes
+}
 
-.. math::
-    r_\{i_0,...,i_\{m-d\}, i_d,...,i_n\}
-      = \\sum_\{k_0,...,k_\{d-1\}\} a_\{i_0,...,i_\{m-d\},k_0,...,k_\{d-1\}\} \\times b_\{k_0,...,k_\{d-1\}, i_d,...,i_n\}.
-
-When called with `dims` of the list form, the given dimensions will be contracted
-in place of the last :math:`d` of `a` and the first :math:`d` of :math:`b`. The sizes
-in these dimensions must match, but `tensordot` will deal with broadcasted
-dimensions.
-
-Examples::
+\deqn{
+        r_{i_0,...,i_{m-d}, i_d,...,i_n}
+          = \sum_{k_0,...,k_{d-1}} a_{i_0,...,i_{m-d},k_0,...,k_{d-1}} \times b_{k_0,...,k_{d-1}, i_d,...,i_n}.
+}
+When called with \code{dims} of the list form, the given dimensions will be contracted
+in place of the last :math:\code{d} of \code{a} and the first :math:\code{d} of :math:\code{b}. The sizes
+in these dimensions must match, but \code{tensordot} will deal with broadcasted
+dimensions.\preformatted{Examples::
 
     >>> a = torch.arange(60.).reshape(3, 4, 5)
     >>> b = torch.arange(24.).reshape(4, 3, 2)

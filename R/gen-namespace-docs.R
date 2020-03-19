@@ -2987,9 +2987,9 @@ NULL
 #' 
 #' For summation index :math:`j` given by `dim` and other indices :math:`i`, the result is
 #' 
-#'     .. math::
+#' \deqn{
 #'         \text{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
-#' 
+#' }
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
@@ -3852,8 +3852,9 @@ NULL
 #'
 #' Returns cosine similarity between x1 and x2, computed along dim.
 #' 
-#' .. math ::
+#' \deqn{
 #'     \text{similarity} = \dfrac{x_1 \cdot x_2}{\max(\Vert x_1 \Vert _2 \cdot \Vert x_2 \Vert _2, \epsilon)}
+#' }
 #'
 #' @section Signatures:
 #' 
@@ -4694,11 +4695,11 @@ NULL
 #'     Ignoring the optional batch dimension, this method computes the following
 #'     expression:
 #' 
-#'     .. math::
+#' \deqn{
 #'         X[m, \omega] = \sum_{k = 0}^{\text{win\_length-1}}%
 #'                             \text{window}[k]\ \text{input}[m \times \text{hop\_length} + k]\ %
 #'                             \exp\left(- j \frac{2 \pi \cdot \omega k}{\text{win\_length}}\right),
-#' 
+#' }
 #'     where :math:`m` is the index of the sliding window, and :math:`\omega` is
 #'     the frequency that :math:`0 \leq \omega < \text{n\_fft}`. When
 #'     `onesided` is the default value ``True``,
@@ -5160,10 +5161,10 @@ NULL
 #'     dimensions of `a` and `b` is :math:`m` and :math:`n`, respectively,
 #'     it computes
 #' 
-#'     .. math::
+#' \deqn{
 #'         r_{i_0,...,i_{m-d}, i_d,...,i_n}
 #'           = \sum_{k_0,...,k_{d-1}} a_{i_0,...,i_{m-d},k_0,...,k_{d-1}} \times b_{k_0,...,k_{d-1}, i_d,...,i_n}.
-#' 
+#' }
 #'     When called with `dims` of the list form, the given dimensions will be contracted
 #'     in place of the last :math:`d` of `a` and the first :math:`d` of :math:`b`. The sizes
 #'     in these dimensions must match, but `tensordot` will deal with broadcasted

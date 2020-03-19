@@ -28,17 +28,16 @@ Short-time Fourier transform (STFT).
 \details{
 \preformatted{Ignoring the optional batch dimension, this method computes the following
 expression:
+}
 
-.. math::
-    X[m, \\omega] = \\sum_\{k = 0\}^\{\\text\{win\\_length-1\}\}\%
-                        \\text\{window\}[k]\\ \\text\{input\}[m \\times \\text\{hop\\_length\} + k]\\ \%
-                        \\exp\\left(- j \\frac\{2 \\pi \\cdot \\omega k\}\{\\text\{win\\_length\}\}\\right),
-
-where :math:`m` is the index of the sliding window, and :math:`\\omega` is
-the frequency that :math:`0 \\leq \\omega < \\text\{n\\_fft\}`. When
-`onesided` is the default value ``True``,
-
-* `input` must be either a 1-D time sequence or a 2-D batch of time
+\deqn{
+        X[m, \omega] = \sum_{k = 0}^{\text{win\_length-1}}%
+                            \text{window}[k]\ \text{input}[m \times \text{hop\_length} + k]\ %
+                            \exp\left(- j \frac{2 \pi \cdot \omega k}{\text{win\_length}}\right),
+}
+where :math:\code{m} is the index of the sliding window, and :math:\verb{\\omega} is
+the frequency that :math:\verb{0 \\leq \\omega < \\text\{n\\_fft\}}. When
+\code{onesided} is the default value \code{True},\preformatted{* `input` must be either a 1-D time sequence or a 2-D batch of time
   sequences.
 
 * If `hop_length` is ``None`` (default), it is treated as equal to

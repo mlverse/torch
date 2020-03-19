@@ -20,8 +20,10 @@ Returns the log of summed exponentials of each row of the \code{input}
 tensor in the given dimension \code{dim}. The computation is numerically
 stabilized.
 
-For summation index :math:\code{j} given by \code{dim} and other indices :math:\code{i}, the result is\preformatted{.. math::
-    \\text\{logsumexp\}(x)_\{i\} = \\log \\sum_j \\exp(x_\{ij\})
+For summation index :math:\code{j} given by \code{dim} and other indices :math:\code{i}, the result is
+
+\deqn{
+        \text{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
 }
 
 If \code{keepdim} is \code{True}, the output tensor is of the same size
