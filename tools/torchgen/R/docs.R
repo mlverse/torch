@@ -76,7 +76,7 @@ get_long_desc <- function(doc) {
   if (any(lines %in% arg_mark)) {
     end <- min(which(lines %in% arg_mark)) -1
   } else if (any(lines == "Example::")) {
-    end <- min(which(lines == "Example::"))
+    end <- min(which(lines == "Example::")) -1
   } else {
     end <- length(lines)
   }
@@ -125,7 +125,7 @@ get_examples <- function(doc) {
 
 create_roxygen_params <- function(params) {
 
-  if (is.null(params))
+  if (is.null(params) | length(params) == 0)
     return("#'")
 
   s <- sapply(params, function(x) {
