@@ -13,3 +13,13 @@ of arithmetic operations (\verb{[CLRS]}_). Note that since this is a function to
 needs to be greater than or equal to 2; if equal to 2 then a trivial matrix-matrix product is returned.
 If \eqn{N} is 1, then this is a no-op - the original matrix is returned as is.
 }
+\examples{
+\dontrun{
+a = torch_randn(3, 4)
+b = torch_randn(4, 5)
+c = torch_randn(5, 6)
+d = torch_randn(6, 7)
+torch_chain_matmul(a, b, c, d)
+}
+
+}

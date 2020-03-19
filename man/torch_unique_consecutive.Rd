@@ -21,3 +21,17 @@ Eliminates all but the first element from every consecutive group of equivalent 
     in C++.
 }
 }
+\examples{
+\dontrun{
+x = torch_tensor([1, 1, 2, 2, 3, 1, 1, 2])
+output = torch_unique_consecutive(x)
+output
+output, inverse_indices = torch_unique_consecutive(x, return_inverse=True)
+output
+inverse_indices
+output, counts = torch_unique_consecutive(x, return_counts=True)
+output
+counts
+}
+
+}

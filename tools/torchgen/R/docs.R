@@ -114,6 +114,7 @@ get_desc <- function(doc) {
 
 get_examples <- function(doc) {
 
+  doc <- clean_doc(doc)
   lines <- str_split(doc, "\n")[[1]]
   i <- which(lines == "Example::")
 

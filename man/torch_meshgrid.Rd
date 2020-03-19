@@ -13,3 +13,13 @@ Take \eqn{N} tensors, each of which can be either scalar or 1-dimensional
 vector, and create \eqn{N} N-dimensional grids, where the \eqn{i} :sup:\code{th} grid is defined by
 expanding the \eqn{i} :sup:\code{th} input over dimensions defined by other inputs.
 }
+\examples{
+\dontrun{
+x = torch_tensor([1, 2, 3])
+y = torch_tensor([4, 5, 6])
+grid_x, grid_y = torch_meshgrid(x, y)
+grid_x
+grid_y
+}
+
+}

@@ -1010,7 +1010,14 @@ NULL
 #'
 #' @param *tensors NA any number of tensors of the same type
 #'
-#' 
+#' @examples
+#' \dontrun{
+#' x = torch_arange(3).view(1, 3)
+#' y = torch_arange(2).view(2, 1)
+#' a, b = torch_broadcast_tensors(x, y)
+#' a.size()
+#' a
+#' }
 #'
 #' @name torch_broadcast_tensors
 #'
@@ -1094,7 +1101,14 @@ NULL
 #'
 #' @param matrices (Tensors...) a sequence of 2 or more 2-D tensors whose product is to be determined.
 #'
-#' 
+#' @examples
+#' \dontrun{
+#' a = torch_randn(3, 4)
+#' b = torch_randn(4, 5)
+#' c = torch_randn(5, 6)
+#' d = torch_randn(6, 7)
+#' torch_chain_matmul(a, b, c, d)
+#' }
 #'
 #' @name torch_chain_matmul
 #'
@@ -5308,7 +5322,18 @@ NULL
 #' @param return_counts (bool) Whether to also return the counts for each unique        element.
 #' @param dim (int) the dimension to apply unique. If ``None``, the unique of the        flattened input is returned. default: ``None``
 #'
-#' 
+#' @examples
+#' \dontrun{
+#' x = torch_tensor([1, 1, 2, 2, 3, 1, 1, 2])
+#' output = torch_unique_consecutive(x)
+#' output
+#' output, inverse_indices = torch_unique_consecutive(x, return_inverse=True)
+#' output
+#' inverse_indices
+#' output, counts = torch_unique_consecutive(x, return_counts=True)
+#' output
+#' counts
+#' }
 #'
 #' @name torch_unique_consecutive
 #'
@@ -5619,7 +5644,23 @@ NULL
 #' @param out (Tensor, optional) the output tensor. Ignored if        :attr:`dim` = ``None`` and :attr:`out` = ``None``.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        :attr:'dtype' while performing the operation. Default: None.
 #'
-#' 
+#' @examples
+#' \dontrun{
+#' import torch
+#' a = torch_arange(9, dtype= torch_float) - 4
+#' b = a.reshape((3, 3))
+#' torch_norm(a)
+#' torch_norm(b)
+#' torch_norm(a, float('inf'))
+#' torch_norm(b, float('inf'))
+#' c = torch_tensor([[ 1, 2, 3],[-1, 1, 4]] , dtype= torch_float)
+#' torch_norm(c, dim=0)
+#' torch_norm(c, dim=1)
+#' torch_norm(c, p=1, dim=1)
+#' d = torch_arange(8, dtype= torch_float).reshape(2,2,2)
+#' torch_norm(d, dim=(1,2))
+#' torch_norm(d[0, :, :]), torch_norm(d[1, :, :])
+#' }
 #'
 #' @name torch_norm
 #'
@@ -5881,7 +5922,14 @@ NULL
 #' @param tensors (list of Tensor) list of scalars or 1 dimensional tensors. Scalars will be
 #' @param treated (1,) 
 #'
-#' 
+#' @examples
+#' \dontrun{
+#' x = torch_tensor([1, 2, 3])
+#' y = torch_tensor([4, 5, 6])
+#' grid_x, grid_y = torch_meshgrid(x, y)
+#' grid_x
+#' grid_y
+#' }
 #'
 #' @name torch_meshgrid
 #'
@@ -5898,7 +5946,15 @@ NULL
 #'
 #' @param *tensors NA any number of 1 dimensional tensors.
 #'
-#' 
+#' @examples
+#' \dontrun{
+#' a = [1, 2, 3]
+#' b = [4, 5]
+#' list(itertools.product(a, b))
+#' tensor_a = torch_tensor(a)
+#' tensor_b = torch_tensor(b)
+#' torch_cartesian_prod(tensor_a, tensor_b)
+#' }
 #'
 #' @name torch_cartesian_prod
 #'
@@ -8062,7 +8118,10 @@ NULL
 #'
 #' @param tensor (Tensor) A tensor to check
 #'
-#' 
+#' @examples
+#' \dontrun{
+#' torch_isfinite(torch_tensor([1, float('inf'), 2, float('-inf'), float('nan')]))
+#' }
 #'
 #' @name torch_isfinite
 #'

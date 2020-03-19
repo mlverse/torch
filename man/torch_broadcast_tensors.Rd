@@ -15,3 +15,13 @@ Broadcasts the given tensors according to :ref:\code{broadcasting-semantics}.
 broadcast_tensors(*tensors) -> List of Tensors
 }
 
+\examples{
+\dontrun{
+x = torch_arange(3).view(1, 3)
+y = torch_arange(2).view(2, 1)
+a, b = torch_broadcast_tensors(x, y)
+a.size()
+a
+}
+
+}
