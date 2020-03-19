@@ -170,7 +170,8 @@ create_roxygen_desc <- function(desc) {
     return("#' Empty description...")
 
   desc <- str_replace_all(desc, ":attr:", "")
-  desc <- str_replace_all(desc, ":func:(`.*`)", "[\\1]")
+  desc <- str_replace_all(desc, ":func:(`[^`]`)", "[\\1]")
+  desc <- str_replace_all(desc, ":math:`([^`]+)`", "\\\\eqn{\\1}")
   desc <- str_replace_all(desc, "`torch\\.(.*)`", "`torch_\\1`")
   desc <- parse_math(desc)
   desc <- str_trim(desc)
