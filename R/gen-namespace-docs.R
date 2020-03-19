@@ -1029,7 +1029,7 @@ NULL
 #' broadcast_tensors(*tensors) -> List of Tensors
 #'
 #'
-
+#'
 #'
 #' 
 #'
@@ -1135,7 +1135,7 @@ NULL
 #'
 #' 
 #'
-
+#'
 #'
 #' 
 #'
@@ -1822,15 +1822,13 @@ NULL
 #' Computes the dot product (inner product) of two tensors.
 #' 
 #' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
-#' 
-#' Example::
 #'
 #' @section Signatures:
 #' 
 #' dot(input, tensor) -> Tensor
 #'
 #'
-
+#'
 #'
 #' @examples
 #' \dontrun{
@@ -2163,14 +2161,13 @@ NULL
 #' \deqn{
 #'     \text{out}_{i} = \text{input}_{i} - \left\lfloor |\text{input}_{i}| \right\rfloor * \operatorname{sgn}(\text{input}_{i})
 #' }
-#' Example::
 #'
 #' @section Signatures:
 #' 
 #' frac(input, out=None) -> Tensor
 #'
 #'
-
+#'
 #'
 #' @examples
 #' \dontrun{
@@ -3806,7 +3803,7 @@ NULL
 #'
 #' 
 #'
-
+#'
 #'
 #' 
 #'
@@ -4295,7 +4292,7 @@ NULL
 #' repeat_interleave(repeats) -> Tensor
 #'
 #'
-
+#'
 #'
 #' 
 #'
@@ -4375,7 +4372,7 @@ NULL
 #' rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor
 #'
 #'
-
+#'
 #'
 #' 
 #'
@@ -4394,7 +4391,7 @@ NULL
 #' relu_(input) -> Tensor
 #'
 #'
-
+#'
 #'
 #' 
 #'
@@ -4443,7 +4440,7 @@ NULL
 #' selu_(input) -> Tensor
 #'
 #'
-
+#'
 #'
 #' 
 #'
@@ -4462,7 +4459,7 @@ NULL
 #' celu_(input, alpha=1.) -> Tensor
 #'
 #'
-
+#'
 #'
 #' 
 #'
@@ -5190,7 +5187,7 @@ NULL
 #'
 #' 
 #'
-
+#'
 #'
 #' 
 #'
@@ -5209,7 +5206,7 @@ NULL
 #' threshold_(input, threshold, value) -> Tensor
 #'
 #'
-
+#'
 #'
 #' 
 #'
@@ -5650,7 +5647,7 @@ NULL
 #' where(condition) -> tuple of LongTensor
 #'
 #'
-
+#'
 #'
 #' 
 #'
@@ -5786,7 +5783,7 @@ NULL
 #'
 #' 
 #'
-
+#'
 #'
 #' 
 #'
@@ -6071,7 +6068,7 @@ NULL
 #'
 #' 
 #'
-
+#'
 #'
 #' 
 #'
@@ -6533,15 +6530,13 @@ NULL
 #' Trace
 #'
 #' Returns the sum of the elements of the diagonal of the input 2-D matrix.
-#' 
-#' Example::
 #'
 #' @section Signatures:
 #' 
 #' trace(input) -> Tensor
 #'
 #'
-
+#'
 #'
 #' @examples
 #' \dontrun{
@@ -8115,15 +8110,13 @@ NULL
 #' Equal
 #'
 #' ``True`` if two tensors have the same size and elements, ``False`` otherwise.
-#' 
-#' Example::
 #'
 #' @section Signatures:
 #' 
 #' equal(input, other) -> bool
 #'
 #'
-
+#'
 #'
 #' @examples
 #' \dontrun{

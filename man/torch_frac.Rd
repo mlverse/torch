@@ -10,7 +10,6 @@ Computes the fractional portion of each element in \code{input}.
 \deqn{
     \text{out}_{i} = \text{input}_{i} - \left\lfloor |\text{input}_{i}| \right\rfloor * \operatorname{sgn}(\text{input}_{i})
 }
-Example::
 }
 \section{Signatures}{
 

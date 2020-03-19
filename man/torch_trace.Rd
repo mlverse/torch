@@ -6,9 +6,6 @@
 \description{
 Returns the sum of the elements of the diagonal of the input 2-D matrix.
 }
-\details{
-Example::
-}
 \section{Signatures}{
 
 

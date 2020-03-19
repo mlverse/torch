@@ -6,9 +6,6 @@
 \description{
 \code{True} if two tensors have the same size and elements, \code{False} otherwise.
 }
-\details{
-Example::
-}
 \section{Signatures}{
 
 

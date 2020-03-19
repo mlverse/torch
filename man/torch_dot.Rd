@@ -8,8 +8,6 @@ Computes the dot product (inner product) of two tensors.
 }
 \note{
 This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
-
-Example::
 }
 \section{Signatures}{
 
