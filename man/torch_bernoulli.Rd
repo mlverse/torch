@@ -17,10 +17,10 @@ Draws binary random numbers (0 or 1) from a Bernoulli distribution.
 The \code{input} tensor should be a tensor containing probabilities
 to be used for drawing the binary random number.
 Hence, all values in \code{input} have to be in the range:
-:math:\verb{0 \\leq \\text\{input\}_i \\leq 1}.
+\eqn{0 \leq \text{input}_i \leq 1}.
 
-The :math:\verb{\\text\{i\}^\{th\}} element of the output tensor will draw a
-value :math:\code{1} according to the :math:\verb{\\text\{i\}^\{th\}} probability value given
+The \eqn{\text{i}^{th}} element of the output tensor will draw a
+value \eqn{1} according to the \eqn{\text{i}^{th}} probability value given
 in \code{input}.
 
 \deqn{

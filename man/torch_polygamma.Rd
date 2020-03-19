@@ -11,8 +11,8 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Computes the :math:\code{n^{th}} derivative of the digamma function on \code{input}.
-:math:\verb{n \\geq 0} is called the order of the polygamma function.
+Computes the \eqn{n^{th}} derivative of the digamma function on \code{input}.
+\eqn{n \geq 0} is called the order of the polygamma function.
 }
 \details{
 \deqn{
@@ -20,7 +20,7 @@ Computes the :math:\code{n^{th}} derivative of the digamma function on \code{inp
 }
 }
 \note{
-\preformatted{This function is not implemented for :math:`n \\geq 2`.
+\preformatted{This function is not implemented for \eqn{n \geq 2}.
 }
 }
 \section{Signatures}{

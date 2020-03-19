@@ -18,7 +18,7 @@
 }
 \description{
 Returns a tensor filled with random numbers from a uniform distribution
-on the interval :math:\verb{[0, 1)}
+on the interval \eqn{[0, 1)}
 }
 \details{
 The shape of the tensor is defined by the variable argument \code{size}.

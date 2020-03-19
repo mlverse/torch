@@ -30,7 +30,7 @@ The operation is defined as:
 \preformatted{The tensors `condition`, `x`, `y` must be :ref:`broadcastable <broadcasting-semantics>`.
 }
 
-\preformatted{See also [`torch_nonzero`].
+\preformatted{See also :func:`torch_nonzero`.
 }
 }
 \section{Signatures}{

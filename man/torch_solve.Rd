@@ -12,7 +12,7 @@
 }
 \description{
 This function returns the solution to the system of linear
-equations represented by :math:\code{AX = B} and the LU factorization of
+equations represented by \eqn{AX = B} and the LU factorization of
 A, in order as a namedtuple \verb{solution, LU}.
 }
 \details{

@@ -27,10 +27,10 @@ along the first dimension).
 \code{batch1} and \code{batch2} must be 3-D tensors each containing the
 same number of matrices.
 
-If \code{batch1} is a :math:\verb{(b \\times n \\times m)} tensor, \code{batch2} is a
-:math:\verb{(b \\times m \\times p)} tensor, \code{input} must be
-:ref:\verb{broadcastable <broadcasting-semantics>} with a :math:\verb{(n \\times p)} tensor
-and \code{out} will be a :math:\verb{(n \\times p)} tensor.
+If \code{batch1} is a \eqn{(b \times n \times m)} tensor, \code{batch2} is a
+\eqn{(b \times m \times p)} tensor, \code{input} must be
+:ref:\verb{broadcastable <broadcasting-semantics>} with a \eqn{(n \times p)} tensor
+and \code{out} will be a \eqn{(n \times p)} tensor.
 
 \deqn{
     out = \beta\ \text{input} + \alpha\ (\sum_{i=0}^{b-1} \text{batch1}_i \mathbin{@} \text{batch2}_i)

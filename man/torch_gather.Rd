@@ -24,9 +24,9 @@ out[i][j][k] = input[i][j][index[i][j][k]]  # if dim == 2
 }
 
 If \code{input} is an n-dimensional tensor with size
-:math:\verb{(x_0, x_1..., x_\{i-1\}, x_i, x_\{i+1\}, ..., x_\{n-1\})}
-and \code{dim = i}, then \code{index} must be an :math:\code{n}-dimensional tensor with
-size :math:\verb{(x_0, x_1, ..., x_\{i-1\}, y, x_\{i+1\}, ..., x_\{n-1\})} where :math:\verb{y \\geq 1}
+\eqn{(x_0, x_1..., x_{i-1}, x_i, x_{i+1}, ..., x_{n-1})}
+and \code{dim = i}, then \code{index} must be an \eqn{n}-dimensional tensor with
+size \eqn{(x_0, x_1, ..., x_{i-1}, y, x_{i+1}, ..., x_{n-1})} where \eqn{y \geq 1}
 and \code{out} will have the same size as \code{index}.
 }
 \section{Signatures}{

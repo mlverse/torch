@@ -21,7 +21,7 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-Returns a 1-D tensor of size :math:\verb{\\left\\lfloor \\frac\{\\text\{end\} - \\text\{start\}\}\{\\text\{step\}\} \\right\\rfloor + 1}
+Returns a 1-D tensor of size \eqn{\left\lfloor \frac{\text{end} - \text{start}}{\text{step}} \right\rfloor + 1}
 with values from \code{start} to \code{end} with step \code{step}. Step is
 the gap between two values in the tensor.
 }
@@ -32,7 +32,7 @@ the gap between two values in the tensor.
 }
 \section{Warning}{
 
-This function is deprecated in favor of \code{\link{torch_arange}}.
+This function is deprecated in favor of :func:\code{torch_arange}.
 }
 
 \section{Signatures}{

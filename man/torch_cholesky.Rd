@@ -12,7 +12,7 @@
 }
 \description{
 Computes the Cholesky decomposition of a symmetric positive-definite
-matrix :math:\code{A} or for batches of symmetric positive-definite matrices.
+matrix \eqn{A} or for batches of symmetric positive-definite matrices.
 }
 \details{
 If \code{upper} is \code{True}, the returned matrix \code{U} is upper-triangular, and
@@ -29,7 +29,7 @@ the decomposition has the form:
 }
 A = LL^T
 
-If \code{upper} is \code{True}, and :math:\code{A} is a batch of symmetric positive-definite
+If \code{upper} is \code{True}, and \eqn{A} is a batch of symmetric positive-definite
 matrices, then the returned tensor will be composed of upper-triangular Cholesky factors
 of each of the individual matrices. Similarly, when \code{upper} is \code{False}, the returned
 tensor will be composed of lower-triangular Cholesky factors of each of the individual

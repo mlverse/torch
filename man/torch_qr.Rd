@@ -12,9 +12,9 @@
 }
 \description{
 Computes the QR decomposition of a matrix or a batch of matrices \code{input},
-and returns a namedtuple (Q, R) of tensors such that :math:\verb{\\text\{input\} = Q R}
-with :math:\code{Q} being an orthogonal matrix or batch of orthogonal matrices and
-:math:\code{R} being an upper triangular matrix or batch of upper triangular matrices.
+and returns a namedtuple (Q, R) of tensors such that \eqn{\text{input} = Q R}
+with \eqn{Q} being an orthogonal matrix or batch of orthogonal matrices and
+\eqn{R} being an upper triangular matrix or batch of upper triangular matrices.
 }
 \details{
 If \code{some} is \code{True}, then this function returns the thin (reduced) QR factorization.

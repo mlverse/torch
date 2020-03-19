@@ -4,7 +4,7 @@
 \alias{torch_threshold_}
 \title{Threshold_}
 \description{
-In-place version of \code{\link{~threshold}}.
+In-place version of :func:\code{~threshold}.
 }
 \section{Signatures}{
 

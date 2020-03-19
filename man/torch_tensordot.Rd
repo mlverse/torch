@@ -16,8 +16,8 @@ Args:
      contract or explicit lists of dimensions for `a` and
      `b` respectively
 
-When called with an integer argument `dims` = :math:`d`, and the number of
-dimensions of `a` and `b` is :math:`m` and :math:`n`, respectively,
+When called with an integer argument `dims` = \eqn{d}, and the number of
+dimensions of `a` and `b` is \eqn{m} and \eqn{n}, respectively,
 it computes
 }
 
@@ -26,7 +26,7 @@ it computes
           = \sum_{k_0,...,k_{d-1}} a_{i_0,...,i_{m-d},k_0,...,k_{d-1}} \times b_{k_0,...,k_{d-1}, i_d,...,i_n}.
 }
 When called with \code{dims} of the list form, the given dimensions will be contracted
-in place of the last :math:\code{d} of \code{a} and the first :math:\code{d} of :math:\code{b}. The sizes
+in place of the last \eqn{d} of \code{a} and the first \eqn{d} of \eqn{b}. The sizes
 in these dimensions must match, but \code{tensordot} will deal with broadcasted
 dimensions.\preformatted{Examples::
 

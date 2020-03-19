@@ -23,19 +23,19 @@ Blackman window function.
 \deqn{
     w[n] = 0.42 - 0.5 \cos \left( \frac{2 \pi n}{N - 1} \right) + 0.08 \cos \left( \frac{4 \pi n}{N - 1} \right)
 }
-where :math:\code{N} is the full window size.
+where \eqn{N} is the full window size.
 
 The input \code{window_length} is a positive integer controlling the
 returned window size. \code{periodic} flag determines whether the returned
 window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
-:meth:\code{torch_stft}. Therefore, if \code{periodic} is true, the :math:\code{N} in
-above formula is in fact :math:\verb{\\text\{window\\_length\} + 1}. Also, we always have
+:meth:\code{torch_stft}. Therefore, if \code{periodic} is true, the \eqn{N} in
+above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
 \code{torch_blackman_window(L, periodic=True)} equal to
 \verb{torch_blackman_window(L + 1, periodic=False)[:-1])}.
 }
 \note{
-\preformatted{If `window_length` :math:`=1`, the returned window contains a single value 1.
+\preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
 }
 }
 \section{Signatures}{

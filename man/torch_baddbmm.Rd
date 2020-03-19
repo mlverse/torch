@@ -25,11 +25,11 @@ and \code{batch2}.
 \code{batch1} and \code{batch2} must be 3-D tensors each containing the same
 number of matrices.
 
-If \code{batch1} is a :math:\verb{(b \\times n \\times m)} tensor, \code{batch2} is a
-:math:\verb{(b \\times m \\times p)} tensor, then \code{input} must be
+If \code{batch1} is a \eqn{(b \times n \times m)} tensor, \code{batch2} is a
+\eqn{(b \times m \times p)} tensor, then \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a
-:math:\verb{(b \\times n \\times p)} tensor and \code{out} will be a
-:math:\verb{(b \\times n \\times p)} tensor. Both \code{alpha} and \code{beta} mean the
+\eqn{(b \times n \times p)} tensor and \code{out} will be a
+\eqn{(b \times n \times p)} tensor. Both \code{alpha} and \code{beta} mean the
 same as the scaling factors used in :meth:\code{torch_addbmm}.
 
 \deqn{

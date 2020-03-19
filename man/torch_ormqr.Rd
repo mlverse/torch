@@ -12,7 +12,7 @@
 }
 \description{
 Multiplies \code{mat} (given by \code{input3}) by the orthogonal \code{Q} matrix of the QR factorization
-formed by \link[=`torch_geqrf` that is represented by `(a, tau)` (given by (`input`, `input2`]{\code{torch_geqrf} that is represented by \verb{(a, tau)} (given by (\code{input}, \code{input2}})).
+formed by :func:\code{torch_geqrf} that is represented by \verb{(a, tau)} (given by (\code{input}, \code{input2})).
 }
 \details{
 This directly calls the underlying LAPACK function \code{?ormqr}.

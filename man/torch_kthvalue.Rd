@@ -25,10 +25,8 @@ If \code{dim} is not given, the last dimension of the \code{input} is chosen.
 If \code{keepdim} is \code{True}, both the \code{values} and \code{indices} tensors
 are the same size as \code{input}, except in the dimension \code{dim} where
 they are of size 1. Otherwise, \code{dim} is squeezed
-(see [\code{torch_squeeze}), resulting in both the \code{values}] and
+(see :func:\code{torch_squeeze}), resulting in both the \code{values} and
 \code{indices} tensors having 1 fewer dimension than the \code{input} tensor.
-
-[\code{torch_squeeze}), resulting in both the \code{values}]: R:\%60torch_squeeze\%60),\%20resulting\%20in\%20both\%20the\%20\%60values\%60
 }
 \section{Signatures}{
 

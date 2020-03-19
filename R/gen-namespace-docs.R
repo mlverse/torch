@@ -286,7 +286,7 @@ NULL
 #' the vector `vec`.
 #' The vector `input` is added to the final result.
 #' 
-#' If `mat` is a :math:`(n \times m)` tensor, `vec` is a 1-D tensor of
+#' If `mat` is a \eqn{(n \times m)} tensor, `vec` is a 1-D tensor of
 #' size `m`, then `input` must be
 #' :ref:`broadcastable <broadcasting-semantics>` with a 1-D tensor of size `n` and
 #' `out` will be 1-D tensor of size `n`.
@@ -341,8 +341,8 @@ NULL
 #' If `vec1` is a vector of size `n` and `vec2` is a vector
 #' of size `m`, then `input` must be
 #' :ref:`broadcastable <broadcasting-semantics>` with a matrix of size
-#' :math:`(n \times m)` and `out` will be a matrix of size
-#' :math:`(n \times m)`.
+#' \eqn{(n \times m)} and `out` will be a matrix of size
+#' \eqn{(n \times m)}.
 #' 
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and
 #' `alpha` must be real numbers, otherwise they should be integers
@@ -410,7 +410,7 @@ NULL
 
 #' Arange
 #'
-#' Returns a 1-D tensor of size :math:`\left\lceil \frac{\text{end} - \text{start}}{\text{step}} \right\rceil`
+#' Returns a 1-D tensor of size \eqn{\left\lceil \frac{\text{end} - \text{start}}{\text{step}} \right\rceil}
 #' with values from the interval ``[start, end)`` taken with common difference
 #' `step` beginning from `start`.
 #' 
@@ -669,11 +669,11 @@ NULL
 #' `batch1` and `batch2` must be 3-D tensors each containing the same
 #' number of matrices.
 #' 
-#' If `batch1` is a :math:`(b \times n \times m)` tensor, `batch2` is a
-#' :math:`(b \times m \times p)` tensor, then `input` must be
+#' If `batch1` is a \eqn{(b \times n \times m)} tensor, `batch2` is a
+#' \eqn{(b \times m \times p)} tensor, then `input` must be
 #' :ref:`broadcastable <broadcasting-semantics>` with a
-#' :math:`(b \times n \times p)` tensor and `out` will be a
-#' :math:`(b \times n \times p)` tensor. Both `alpha` and `beta` mean the
+#' \eqn{(b \times n \times p)} tensor and `out` will be a
+#' \eqn{(b \times n \times p)} tensor. Both `alpha` and `beta` mean the
 #' same as the scaling factors used in :meth:`torch_addbmm`.
 #' 
 #' \deqn{
@@ -718,19 +718,19 @@ NULL
 #'         2 - \frac{2n}{N - 1} & \text{if } \frac{N - 1}{2} < n < N \\
 #'     \end{cases},
 #' }
-#' where :math:`N` is the full window size.
+#' where \eqn{N} is the full window size.
 #' 
 #' The input `window_length` is a positive integer controlling the
 #' returned window size. `periodic` flag determines whether the returned
 #' window trims off the last duplicate value from the symmetric window and is
 #' ready to be used as a periodic window with functions like
-#' :meth:`torch_stft`. Therefore, if `periodic` is true, the :math:`N` in
-#' above formula is in fact :math:`\text{window\_length} + 1`. Also, we always have
+#' :meth:`torch_stft`. Therefore, if `periodic` is true, the \eqn{N} in
+#' above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
 #' ``torch_bartlett_window(L, periodic=True)`` equal to
 #' ``torch_bartlett_window(L + 1, periodic=False)[:-1])``.
 #' 
 #' @note
-#'     If `window_length` :math:`=1`, the returned window contains a single value 1.
+#'     If `window_length` \eqn{=1}, the returned window contains a single value 1.
 #'
 #' @section Signatures:
 #' 
@@ -759,10 +759,10 @@ NULL
 #' The `input` tensor should be a tensor containing probabilities
 #' to be used for drawing the binary random number.
 #' Hence, all values in `input` have to be in the range:
-#' :math:`0 \leq \text{input}_i \leq 1`.
+#' \eqn{0 \leq \text{input}_i \leq 1}.
 #' 
-#' The :math:`\text{i}^{th}` element of the output tensor will draw a
-#' value :math:`1` according to the :math:`\text{i}^{th}` probability value given
+#' The \eqn{\text{i}^{th}} element of the output tensor will draw a
+#' value \eqn{1} according to the \eqn{\text{i}^{th}} probability value given
 #' in `input`.
 #' 
 #' \deqn{
@@ -924,19 +924,19 @@ NULL
 #' \deqn{
 #'     w[n] = 0.42 - 0.5 \cos \left( \frac{2 \pi n}{N - 1} \right) + 0.08 \cos \left( \frac{4 \pi n}{N - 1} \right)
 #' }
-#' where :math:`N` is the full window size.
+#' where \eqn{N} is the full window size.
 #' 
 #' The input `window_length` is a positive integer controlling the
 #' returned window size. `periodic` flag determines whether the returned
 #' window trims off the last duplicate value from the symmetric window and is
 #' ready to be used as a periodic window with functions like
-#' :meth:`torch_stft`. Therefore, if `periodic` is true, the :math:`N` in
-#' above formula is in fact :math:`\text{window\_length} + 1`. Also, we always have
+#' :meth:`torch_stft`. Therefore, if `periodic` is true, the \eqn{N} in
+#' above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
 #' ``torch_blackman_window(L, periodic=True)`` equal to
 #' ``torch_blackman_window(L + 1, periodic=False)[:-1])``.
 #' 
 #' @note
-#'     If `window_length` :math:`=1`, the returned window contains a single value 1.
+#'     If `window_length` \eqn{=1}, the returned window contains a single value 1.
 #'
 #' @section Signatures:
 #' 
@@ -966,15 +966,15 @@ NULL
 #' `input` and `mat2` must be 3-D tensors each containing
 #' the same number of matrices.
 #' 
-#' If `input` is a :math:`(b \times n \times m)` tensor, `mat2` is a
-#' :math:`(b \times m \times p)` tensor, `out` will be a
-#' :math:`(b \times n \times p)` tensor.
+#' If `input` is a \eqn{(b \times n \times m)} tensor, `mat2` is a
+#' \eqn{(b \times m \times p)} tensor, `out` will be a
+#' \eqn{(b \times n \times p)} tensor.
 #' 
 #' \deqn{
 #'     \text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
 #' }
 #' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
-#'           For broadcasting matrix products, see [`torch_matmul`].
+#'           For broadcasting matrix products, see :func:`torch_matmul`.
 #'
 #' @section Signatures:
 #' 
@@ -1045,10 +1045,10 @@ NULL
 #' All tensors must either have the same shape (except in the concatenating
 #' dimension) or be empty.
 #' 
-#' [`torch_cat` can be seen as an inverse operation for :func:`torch.split`]
-#' and [`torch_chunk`].
+#' :func:`torch_cat` can be seen as an inverse operation for :func:`torch.split`
+#' and :func:`torch_chunk`.
 #' 
-#' [`torch_cat`] can be best understood via examples.
+#' :func:`torch_cat` can be best understood via examples.
 #'
 #' @section Signatures:
 #' 
@@ -1105,11 +1105,11 @@ NULL
 
 #' Chain_matmul
 #'
-#' Returns the matrix product of the :math:`N` 2-D tensors. This product is efficiently computed
+#' Returns the matrix product of the \eqn{N} 2-D tensors. This product is efficiently computed
 #'     using the matrix chain order algorithm which selects the order in which incurs the lowest cost in terms
-#'     of arithmetic operations (`[CLRS]`_). Note that since this is a function to compute the product, :math:`N`
+#'     of arithmetic operations (`[CLRS]`_). Note that since this is a function to compute the product, \eqn{N}
 #'     needs to be greater than or equal to 2; if equal to 2 then a trivial matrix-matrix product is returned.
-#'     If :math:`N` is 1, then this is a no-op - the original matrix is returned as is.
+#'     If \eqn{N} is 1, then this is a no-op - the original matrix is returned as is.
 #' 
 #' 
 #'     Args:
@@ -1117,8 +1117,8 @@ NULL
 #' 
 #' 
 #'     Returns:
-#'         Tensor: if the :math:`i^{th}` tensor was of dimensions :math:`p_{i} \times p_{i + 1}`, then the product
-#'         would be of dimensions :math:`p_{1} \times p_{N + 1}`.
+#'         Tensor: if the \eqn{i^{th}} tensor was of dimensions \eqn{p_{i} \times p_{i + 1}}, then the product
+#'         would be of dimensions \eqn{p_{1} \times p_{N + 1}}.
 #' 
 #'     Example::
 #' 
@@ -1646,7 +1646,7 @@ NULL
 #' 
 #' The size of the new matrix will be calculated to make the specified diagonal
 #' of the size of the last input dimension.
-#' Note that for `offset` other than :math:`0`, the order of `dim1`
+#' Note that for `offset` other than \eqn{0}, the order of `dim1`
 #' and `dim2` matters. Exchanging them is equivalent to changing the
 #' sign of `offset`.
 #' 
@@ -2242,19 +2242,19 @@ NULL
 #'     w[n] = \frac{1}{2}\ \left[1 - \cos \left( \frac{2 \pi n}{N - 1} \right)\right] =
 #'             \sin^2 \left( \frac{\pi n}{N - 1} \right),
 #' }
-#' where :math:`N` is the full window size.
+#' where \eqn{N} is the full window size.
 #' 
 #' The input `window_length` is a positive integer controlling the
 #' returned window size. `periodic` flag determines whether the returned
 #' window trims off the last duplicate value from the symmetric window and is
 #' ready to be used as a periodic window with functions like
-#' :meth:`torch_stft`. Therefore, if `periodic` is true, the :math:`N` in
-#' above formula is in fact :math:`\text{window\_length} + 1`. Also, we always have
+#' :meth:`torch_stft`. Therefore, if `periodic` is true, the \eqn{N} in
+#' above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
 #' ``torch_hann_window(L, periodic=True)`` equal to
 #' ``torch_hann_window(L + 1, periodic=False)[:-1])``.
 #' 
 #' @note
-#'     If `window_length` :math:`=1`, the returned window contains a single value 1.
+#'     If `window_length` \eqn{=1}, the returned window contains a single value 1.
 #'
 #' @section Signatures:
 #' 
@@ -2283,19 +2283,19 @@ NULL
 #' \deqn{
 #'     w[n] = \alpha - \beta\ \cos \left( \frac{2 \pi n}{N - 1} \right),
 #' }
-#' where :math:`N` is the full window size.
+#' where \eqn{N} is the full window size.
 #' 
 #' The input `window_length` is a positive integer controlling the
 #' returned window size. `periodic` flag determines whether the returned
 #' window trims off the last duplicate value from the symmetric window and is
 #' ready to be used as a periodic window with functions like
-#' :meth:`torch_stft`. Therefore, if `periodic` is true, the :math:`N` in
-#' above formula is in fact :math:`\text{window\_length} + 1`. Also, we always have
+#' :meth:`torch_stft`. Therefore, if `periodic` is true, the \eqn{N} in
+#' above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
 #' ``torch_hamming_window(L, periodic=True)`` equal to
 #' ``torch_hamming_window(L + 1, periodic=False)[:-1])``.
 #' 
 #' @note
-#'     If `window_length` :math:`=1`, the returned window contains a single value 1.
+#'     If `window_length` \eqn{=1}, the returned window contains a single value 1.
 #' 
 #' @note
 #'     This is a generalized version of :meth:`torch_hann_window`.
@@ -2325,8 +2325,8 @@ NULL
 #' Ger
 #'
 #' Outer product of `input` and `vec2`.
-#' If `input` is a vector of size :math:`n` and `vec2` is a vector of
-#' size :math:`m`, then `out` must be a matrix of size :math:`(n \times m)`.
+#' If `input` is a vector of size \eqn{n} and `vec2` is a vector of
+#' size \eqn{m}, then `out` must be a matrix of size \eqn{(n \times m)}.
 #' 
 #' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
 #'
@@ -2364,8 +2364,8 @@ NULL
 #'         \sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x[n_1, \dots, n_d]
 #'          e^{-j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
 #' }
-#' where :math:`d` = `signal_ndim` is number of dimensions for the
-#' signal, and :math:`N_i` is the size of signal dimension :math:`i`.
+#' where \eqn{d} = `signal_ndim` is number of dimensions for the
+#' signal, and \eqn{N_i} is the size of signal dimension \eqn{i}.
 #' 
 #' This method supports 1D, 2D and 3D complex-to-complex transforms, indicated
 #' by `signal_ndim`. `input` must be a tensor with last dimension
@@ -2373,12 +2373,12 @@ NULL
 #' numbers, and should have at least ``signal_ndim + 1`` dimensions with optionally
 #' arbitrary number of leading batch dimensions. If `normalized` is set to
 #' ``True``, this normalizes the result by dividing it with
-#' :math:`\sqrt{\prod_{i=1}^K N_i}` so that the operator is unitary.
+#' \eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is unitary.
 #' 
 #' Returns the real and the imaginary parts together as one tensor of the same
 #' shape of `input`.
 #' 
-#' The inverse of this function is [`~torch.ifft`].
+#' The inverse of this function is :func:`~torch.ifft`.
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -2388,7 +2388,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
+#'     :func:`torch_backends.mkl.is_available` to check if MKL is installed.
 #'
 #' @section Signatures:
 #' 
@@ -2431,19 +2431,19 @@ NULL
 #'         \frac{1}{\prod_{i=1}^d N_i} \sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x[n_1, \dots, n_d]
 #'          e^{\ j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
 #' }
-#' where :math:`d` = `signal_ndim` is number of dimensions for the
-#' signal, and :math:`N_i` is the size of signal dimension :math:`i`.
+#' where \eqn{d} = `signal_ndim` is number of dimensions for the
+#' signal, and \eqn{N_i} is the size of signal dimension \eqn{i}.
 #' 
-#' The argument specifications are almost identical with [`~torch.fft`].
+#' The argument specifications are almost identical with :func:`~torch.fft`.
 #' However, if `normalized` is set to ``True``, this instead returns the
-#' results multiplied by :math:`\sqrt{\prod_{i=1}^d N_i}`, to become a unitary
-#' operator. Therefore, to invert a [`~torch.fft`, the `normalized`]
-#' argument should be set identically for [`~torch.fft`].
+#' results multiplied by \eqn{\sqrt{\prod_{i=1}^d N_i}}, to become a unitary
+#' operator. Therefore, to invert a :func:`~torch.fft`, the `normalized`
+#' argument should be set identically for :func:`~torch.fft`.
 #' 
 #' Returns the real and the imaginary parts together as one tensor of the same
 #' shape of `input`.
 #' 
-#' The inverse of this function is [`~torch.fft`].
+#' The inverse of this function is :func:`~torch.fft`.
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -2453,7 +2453,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
+#'     :func:`torch_backends.mkl.is_available` to check if MKL is installed.
 #'
 #' @section Signatures:
 #' 
@@ -2483,15 +2483,15 @@ NULL
 #' Real-to-complex Discrete Fourier Transform
 #' 
 #' This method computes the real-to-complex discrete Fourier transform. It is
-#' mathematically equivalent with [`~torch.fft`] with differences only in
+#' mathematically equivalent with :func:`~torch.fft` with differences only in
 #' formats of the input and output.
 #' 
 #' This method supports 1D, 2D and 3D real-to-complex transforms, indicated
 #' by `signal_ndim`. `input` must be a tensor with at least
 #' ``signal_ndim`` dimensions with optionally arbitrary number of leading batch
 #' dimensions. If `normalized` is set to ``True``, this normalizes the result
-#' by dividing it with :math:`\sqrt{\prod_{i=1}^K N_i}` so that the operator is
-#' unitary, where :math:`N_i` is the size of signal dimension :math:`i`.
+#' by dividing it with \eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is
+#' unitary, where \eqn{N_i} is the size of signal dimension \eqn{i}.
 #' 
 #' The real-to-complex Fourier transform results follow conjugate symmetry:
 #' 
@@ -2499,14 +2499,14 @@ NULL
 #'     X[\omega_1, \dots, \omega_d] = X^*[N_1 - \omega_1, \dots, N_d - \omega_d],
 #' }
 #' where the index arithmetic is computed modulus the size of the corresponding
-#' dimension, :math:`\ ^*` is the conjugate operator, and
-#' :math:`d` = `signal_ndim`. `onesided` flag controls whether to avoid
+#' dimension, \eqn{\ ^*} is the conjugate operator, and
+#' \eqn{d} = `signal_ndim`. `onesided` flag controls whether to avoid
 #' redundancy in the output results. If set to ``True`` (default), the output will
-#' not be full complex result of shape :math:`(*, 2)`, where :math:`*` is the shape
+#' not be full complex result of shape \eqn{(*, 2)}, where \eqn{*} is the shape
 #' of `input`, but instead the last dimension will be halfed as of size
-#' :math:`\lfloor \frac{N_d}{2} \rfloor + 1`.
+#' \eqn{\lfloor \frac{N_d}{2} \rfloor + 1}.
 #' 
-#' The inverse of this function is [`~torch.irfft`].
+#' The inverse of this function is :func:`~torch.irfft`.
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -2516,7 +2516,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
+#'     :func:`torch_backends.mkl.is_available` to check if MKL is installed.
 #'
 #' @section Signatures:
 #' 
@@ -2546,41 +2546,41 @@ NULL
 #' Complex-to-real Inverse Discrete Fourier Transform
 #' 
 #' This method computes the complex-to-real inverse discrete Fourier transform.
-#' It is mathematically equivalent with [`ifft`] with differences only in
+#' It is mathematically equivalent with :func:`ifft` with differences only in
 #' formats of the input and output.
 #' 
-#' The argument specifications are almost identical with [`~torch.ifft`].
-#' Similar to [`~torch.ifft`, if `normalized` is set to ``True``],
+#' The argument specifications are almost identical with :func:`~torch.ifft`.
+#' Similar to :func:`~torch.ifft`, if `normalized` is set to ``True``,
 #' this normalizes the result by multiplying it with
-#' :math:`\sqrt{\prod_{i=1}^K N_i}` so that the operator is unitary, where
-#' :math:`N_i` is the size of signal dimension :math:`i`.
+#' \eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is unitary, where
+#' \eqn{N_i} is the size of signal dimension \eqn{i}.
 #' 
 #' @note
 #'     Due to the conjugate symmetry, `input` do not need to contain the full
 #'     complex frequency values. Roughly half of the values will be sufficient, as
-#'     is the case when `input` is given by [`~torch.rfft`] with
+#'     is the case when `input` is given by :func:`~torch.rfft` with
 #'     ``rfft(signal, onesided=True)``. In such case, set the `onesided`
 #'     argument of this method to ``True``. Moreover, the original signal shape
 #'     information can sometimes be lost, optionally set `signal_sizes` to be
 #'     the size of the original signal (without the batch dimensions if in batched
 #'     mode) to recover it with correct shape.
 #' 
-#'     Therefore, to invert an [`~torch.rfft`, the `normalized`] and
-#'     `onesided` arguments should be set identically for [`~torch.irfft`],
+#'     Therefore, to invert an :func:`~torch.rfft`, the `normalized` and
+#'     `onesided` arguments should be set identically for :func:`~torch.irfft`,
 #'     and preferrably a `signal_sizes` is given to avoid size mismatch. See the
 #'     example below for a case of size mismatch.
 #' 
-#'     See [`~torch.rfft`] for details on conjugate symmetry.
+#'     See :func:`~torch.rfft` for details on conjugate symmetry.
 #' 
-#' The inverse of this function is [`~torch.rfft`].
+#' The inverse of this function is :func:`~torch.rfft`.
 #' 
 #' @section Warning:
 #'     Generally speaking, input to this function should contain values
 #'     following conjugate symmetry. Note that even if `onesided` is
 #'     ``True``, often symmetry on some part is still needed. When this
-#'     requirement is not satisfied, the behavior of [`~torch.irfft`] is
-#'     undefined. Since [`torch_autograd.gradcheck`] estimates numerical
-#'     Jacobian with point perturbations, [`~torch.irfft`] will almost
+#'     requirement is not satisfied, the behavior of :func:`~torch.irfft` is
+#'     undefined. Since :func:`torch_autograd.gradcheck` estimates numerical
+#'     Jacobian with point perturbations, :func:`~torch.irfft` will almost
 #'     certainly fail the check.
 #' 
 #' @note
@@ -2591,7 +2591,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
+#'     :func:`torch_backends.mkl.is_available` to check if MKL is installed.
 #'
 #' @section Signatures:
 #' 
@@ -2714,7 +2714,7 @@ NULL
 #' If `keepdim` is ``True``, both the `values` and `indices` tensors
 #' are the same size as `input`, except in the dimension `dim` where
 #' they are of size 1. Otherwise, `dim` is squeezed
-#' (see [`torch_squeeze`), resulting in both the `values`] and
+#' (see :func:`torch_squeeze`), resulting in both the `values` and
 #' `indices` tensors having 1 fewer dimension than the `input` tensor.
 #'
 #' @section Signatures:
@@ -2846,7 +2846,7 @@ NULL
 #' \deqn{
 #'     y_i = \log_{e} (x_i + 1)
 #' }
-#' @note This function is more accurate than [`torch_log`] for small
+#' @note This function is more accurate than :func:`torch_log` for small
 #'           values of `input`
 #'
 #' @section Signatures:
@@ -2941,7 +2941,7 @@ NULL
 #'
 #' Returns a one-dimensional tensor of `steps` points
 #' logarithmically spaced with base `base` between
-#' :math:`{\text{base}}^{\text{start}}` and :math:`{\text{base}}^{\text{end}}`.
+#' \eqn{{\text{base}}^{\text{start}}} and \eqn{{\text{base}}^{\text{end}}}.
 #' 
 #' The output tensor is 1-D of size `steps`.
 #'
@@ -2982,7 +2982,7 @@ NULL
 #' tensor in the given dimension `dim`. The computation is numerically
 #' stabilized.
 #' 
-#' For summation index :math:`j` given by `dim` and other indices :math:`i`, the result is
+#' For summation index \eqn{j} given by `dim` and other indices \eqn{i}, the result is
 #' 
 #' \deqn{
 #'         \text{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
@@ -2990,7 +2990,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #'
 #' 
@@ -3032,8 +3032,8 @@ NULL
 #'   1 is appended to its dimension for the purpose of the batched matrix multiple and removed after.
 #'   The non-matrix (i.e. batch) dimensions are :ref:`broadcasted <broadcasting-semantics>` (and thus
 #'   must be broadcastable).  For example, if `input` is a
-#'   :math:`(j \times 1 \times n \times m)` tensor and `other` is a :math:`(k \times m \times p)`
-#'   tensor, `out` will be an :math:`(j \times k \times n \times p)` tensor.
+#'   \eqn{(j \times 1 \times n \times m)} tensor and `other` is a \eqn{(k \times m \times p)}
+#'   tensor, `out` will be an \eqn{(j \times k \times n \times p)} tensor.
 #' 
 #' @note
 #' 
@@ -3179,7 +3179,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensors are of the same size
 #' as `input` except in the dimension `dim` where they are of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting
 #' in the output tensors having 1 fewer dimension than `input`.
 #'
 #' @section Signatures:
@@ -3276,7 +3276,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #'
 #' @section Signatures:
@@ -3337,7 +3337,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensors are of the same size
 #' as `input` except in the dimension `dim` where they are of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in
 #' the outputs tensor having 1 fewer dimension than `input`.
 #'
 #' @section Signatures:
@@ -3397,7 +3397,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensors are of the same size as
 #' `input` except in the dimension `dim` where they are of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in
 #' the output tensors having 1 fewer dimension than `input`.
 #'
 #' @section Signatures:
@@ -3466,11 +3466,11 @@ NULL
 #'
 #' Performs a matrix multiplication of the matrices `input` and `mat2`.
 #' 
-#' If `input` is a :math:`(n \times m)` tensor, `mat2` is a
-#' :math:`(m \times p)` tensor, `out` will be a :math:`(n \times p)` tensor.
+#' If `input` is a \eqn{(n \times m)} tensor, `mat2` is a
+#' \eqn{(m \times p)} tensor, `out` will be a \eqn{(n \times p)} tensor.
 #' 
 #' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
-#'           For broadcasting matrix products, see [`torch_matmul`].
+#'           For broadcasting matrix products, see :func:`torch_matmul`.
 #'
 #' @section Signatures:
 #' 
@@ -3505,7 +3505,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensors are of the same size as
 #' `input` except in the dimension `dim` where they are of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting
 #' in the output tensors having 1 fewer dimension than `input`.
 #' 
 #' @note This function is not defined for ``torch_cuda.Tensor`` yet.
@@ -3607,8 +3607,8 @@ NULL
 #' Performs a matrix-vector product of the matrix `input` and the vector
 #' `vec`.
 #' 
-#' If `input` is a :math:`(n \times m)` tensor, `vec` is a 1-D tensor of
-#' size :math:`m`, `out` will be 1-D of size :math:`n`.
+#' If `input` is a \eqn{(n \times m)} tensor, `vec` is a 1-D tensor of
+#' size \eqn{m}, `out` will be 1-D of size \eqn{n}.
 #' 
 #' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
 #'
@@ -3636,14 +3636,14 @@ NULL
 
 #' Mvlgamma
 #'
-#' Computes the multivariate log-gamma function (`[reference]`_) with dimension :math:`p` element-wise, given by
+#' Computes the multivariate log-gamma function (`[reference]`_) with dimension \eqn{p} element-wise, given by
 #' 
 #' \deqn{
 #'     \log(\Gamma_{p}(a)) = C + \displaystyle \sum_{i=1}^{p} \log\left(\Gamma\left(a - \frac{i - 1}{2}\right)\right)
 #' }
-#' where :math:`C = \log(\pi) \times \frac{p (p - 1)}{4}` and :math:`\Gamma(\cdot)` is the Gamma function.
+#' where \eqn{C = \log(\pi) \times \frac{p (p - 1)}{4}} and \eqn{\Gamma(\cdot)} is the Gamma function.
 #' 
-#' If any of the elements are less than or equal to :math:`\frac{p - 1}{2}`, then an error
+#' If any of the elements are less than or equal to \eqn{\frac{p - 1}{2}}, then an error
 #' is thrown.
 #'
 #' @section Signatures:
@@ -3764,10 +3764,10 @@ NULL
 #' Computes batched the p-norm distance between each pair of the two collections of row vectors.
 #' 
 #'     Args:
-#'         x1 (Tensor): input tensor of shape :math:`B \times P \times M`.
-#'         x2 (Tensor): input tensor of shape :math:`B \times R \times M`.
+#'         x1 (Tensor): input tensor of shape \eqn{B \times P \times M}.
+#'         x2 (Tensor): input tensor of shape \eqn{B \times R \times M}.
 #'         p: p value for the p-norm distance to calculate between each vector pair
-#'             :math:`\in [0, \infty]`.
+#'             \eqn{\in [0, \infty]}.
 #'         compute_mode:
 #'             'use_mm_for_euclid_dist_if_necessary' - will use matrix multiplication approach to calculate
 #'             euclidean distance (p = 2) if P > 25 or R > 25
@@ -3777,12 +3777,12 @@ NULL
 #'             euclidean distance (p = 2)
 #'             Default: use_mm_for_euclid_dist_if_necessary.
 #' 
-#'     If x1 has shape :math:`B \times P \times M` and x2 has shape :math:`B \times R \times M` then the
-#'     output will have shape :math:`B \times P \times R`.
+#'     If x1 has shape \eqn{B \times P \times M} and x2 has shape \eqn{B \times R \times M} then the
+#'     output will have shape \eqn{B \times P \times R}.
 #' 
 #'     This function is equivalent to `scipy.spatial.distance.cdist(input,'minkowski', p=p)`
-#'     if :math:`p \in (0, \infty)`. When :math:`p = 0` it is equivalent to
-#'     `scipy.spatial.distance.cdist(input, 'hamming') * M`. When :math:`p = \infty`, the closest
+#'     if \eqn{p \in (0, \infty)}. When \eqn{p = 0} it is equivalent to
+#'     `scipy.spatial.distance.cdist(input, 'hamming') * M`. When \eqn{p = \infty}, the closest
 #'     scipy function is `scipy.spatial.distance.cdist(xn, lambda x, y: np.abs(x - y).max())`.
 #' 
 #'     Example:
@@ -3820,13 +3820,13 @@ NULL
 #' `torch_norm(input[:, None] - input, dim=2, p=p)`. This function will be faster
 #' if the rows are contiguous.
 #' 
-#' If input has shape :math:`N \times M` then the output will have shape
-#' :math:`\frac{1}{2} N (N - 1)`.
+#' If input has shape \eqn{N \times M} then the output will have shape
+#' \eqn{\frac{1}{2} N (N - 1)}.
 #' 
 #' This function is equivalent to `scipy.spatial.distance.pdist(input,
-#' 'minkowski', p=p)` if :math:`p \in (0, \infty)`. When :math:`p = 0` it is
+#' 'minkowski', p=p)` if \eqn{p \in (0, \infty)}. When \eqn{p = 0} it is
 #' equivalent to `scipy.spatial.distance.pdist(input, 'hamming') * M`.
-#' When :math:`p = \infty`, the closest scipy function is
+#' When \eqn{p = \infty}, the closest scipy function is
 #' `scipy.spatial.distance.pdist(xn, lambda x, y: np.abs(x - y).max())`.
 #'
 #' @section Signatures:
@@ -3879,8 +3879,8 @@ NULL
 
 #' Pixel_shuffle
 #'
-#' Rearranges elements in a tensor of shape :math:`(*, C \times r^2, H, W)` to a
-#' tensor of shape :math:`(*, C, H \times r, W \times r)`.
+#' Rearranges elements in a tensor of shape \eqn{(*, C \times r^2, H, W)} to a
+#' tensor of shape \eqn{(*, C, H \times r, W \times r)}.
 #' 
 #' See :class:`~torch.nn.PixelShuffle` for details.
 #'
@@ -3940,7 +3940,7 @@ NULL
 #' Rand
 #'
 #' Returns a tensor filled with random numbers from a uniform distribution
-#' on the interval :math:`[0, 1)`
+#' on the interval \eqn{[0, 1)}
 #' 
 #' The shape of the tensor is defined by the variable argument `size`.
 #'
@@ -3971,7 +3971,7 @@ NULL
 #' Rand_like
 #'
 #' Returns a tensor with the same size as `input` that is filled with
-#' random numbers from a uniform distribution on the interval :math:`[0, 1)`.
+#' random numbers from a uniform distribution on the interval \eqn{[0, 1)}.
 #' ``torch_rand_like(input)`` is equivalent to
 #' ``torch_rand(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
 #'
@@ -4154,7 +4154,7 @@ NULL
 
 #' Range
 #'
-#' Returns a 1-D tensor of size :math:`\left\lfloor \frac{\text{end} - \text{start}}{\text{step}} \right\rfloor + 1`
+#' Returns a 1-D tensor of size \eqn{\left\lfloor \frac{\text{end} - \text{start}}{\text{step}} \right\rfloor + 1}
 #' with values from `start` to `end` with step `step`. Step is
 #' the gap between two values in the tensor.
 #' 
@@ -4162,7 +4162,7 @@ NULL
 #'     \text{out}_{i+1} = \text{out}_i + \text{step}.
 #' }
 #' @section Warning:
-#'     This function is deprecated in favor of [`torch_arange`].
+#'     This function is deprecated in favor of :func:`torch_arange`.
 #'
 #' @section Signatures:
 #' 
@@ -4254,7 +4254,7 @@ NULL
 #' 
 #' @section Warning:
 #' 
-#'     This is different from [`torch_repeat` but similar to `numpy.repeat`].
+#'     This is different from :func:`torch_repeat` but similar to `numpy.repeat`.
 #'
 #' @section Signatures:
 #' 
@@ -4365,7 +4365,7 @@ NULL
 
 #' Rrelu_
 #'
-#' In-place version of [`~rrelu`].
+#' In-place version of :func:`~rrelu`.
 #'
 #' @section Signatures:
 #' 
@@ -4384,7 +4384,7 @@ NULL
 
 #' Relu_
 #'
-#' In-place version of [`~relu`].
+#' In-place version of :func:`~relu`.
 #'
 #' @section Signatures:
 #' 
@@ -4433,7 +4433,7 @@ NULL
 
 #' Selu_
 #'
-#' In-place version of [`~selu`].
+#' In-place version of :func:`~selu`.
 #'
 #' @section Signatures:
 #' 
@@ -4452,7 +4452,7 @@ NULL
 
 #' Celu_
 #'
-#' In-place version of [`~celu`].
+#' In-place version of :func:`~celu`.
 #'
 #' @section Signatures:
 #' 
@@ -4624,13 +4624,13 @@ NULL
 #' Returns a tensor with all the dimensions of `input` of size `1` removed.
 #' 
 #' For example, if `input` is of shape:
-#' :math:`(A \times 1 \times B \times C \times 1 \times D)` then the `out` tensor
-#' will be of shape: :math:`(A \times B \times C \times D)`.
+#' \eqn{(A \times 1 \times B \times C \times 1 \times D)} then the `out` tensor
+#' will be of shape: \eqn{(A \times B \times C \times D)}.
 #' 
 #' When `dim` is given, a squeeze operation is done only in the given
-#' dimension. If `input` is of shape: :math:`(A \times 1 \times B)`,
+#' dimension. If `input` is of shape: \eqn{(A \times 1 \times B)},
 #' ``squeeze(input, 0)`` leaves the tensor unchanged, but ``squeeze(input, 1)``
-#' will squeeze the tensor to the shape :math:`(A \times B)`.
+#' will squeeze the tensor to the shape \eqn{(A \times B)}.
 #' 
 #' @note The returned tensor shares the storage with the input tensor,
 #'           so changing the contents of one will change the contents of the other.
@@ -4697,8 +4697,8 @@ NULL
 #'                             \text{window}[k]\ \text{input}[m \times \text{hop\_length} + k]\ %
 #'                             \exp\left(- j \frac{2 \pi \cdot \omega k}{\text{win\_length}}\right),
 #' }
-#'     where :math:`m` is the index of the sliding window, and :math:`\omega` is
-#'     the frequency that :math:`0 \leq \omega < \text{n\_fft}`. When
+#'     where \eqn{m} is the index of the sliding window, and \eqn{\omega} is
+#'     the frequency that \eqn{0 \leq \omega < \text{n\_fft}}. When
 #'     `onesided` is the default value ``True``,
 #' 
 #'     * `input` must be either a 1-D time sequence or a 2-D batch of time
@@ -4712,31 +4712,31 @@ NULL
 #' 
 #'     * `window` can be a 1-D tensor of size `win_length`, e.g., from
 #'       :meth:`torch_hann_window`. If `window` is ``None`` (default), it is
-#'       treated as if having :math:`1` everywhere in the window. If
-#'       :math:`\text{win\_length} < \text{n\_fft}`, `window` will be padded on
+#'       treated as if having \eqn{1} everywhere in the window. If
+#'       \eqn{\text{win\_length} < \text{n\_fft}}, `window` will be padded on
 #'       both sides to length `n_fft` before being applied.
 #' 
 #'     * If `center` is ``True`` (default), `input` will be padded on
-#'       both sides so that the :math:`t`-th frame is centered at time
-#'       :math:`t \times \text{hop\_length}`. Otherwise, the :math:`t`-th frame
-#'       begins at time  :math:`t \times \text{hop\_length}`.
+#'       both sides so that the \eqn{t}-th frame is centered at time
+#'       \eqn{t \times \text{hop\_length}}. Otherwise, the \eqn{t}-th frame
+#'       begins at time  \eqn{t \times \text{hop\_length}}.
 #' 
 #'     * `pad_mode` determines the padding method used on `input` when
 #'       `center` is ``True``. See :meth:`torch_nn.functional.pad` for
 #'       all available options. Default is ``"reflect"``.
 #' 
-#'     * If `onesided` is ``True`` (default), only values for :math:`\omega`
-#'       in :math:`\left[0, 1, 2, \dots, \left\lfloor \frac{\text{n\_fft}}{2} \right\rfloor + 1\right]`
+#'     * If `onesided` is ``True`` (default), only values for \eqn{\omega}
+#'       in \eqn{\left[0, 1, 2, \dots, \left\lfloor \frac{\text{n\_fft}}{2} \right\rfloor + 1\right]}
 #'       are returned because the real-to-complex Fourier transform satisfies the
-#'       conjugate symmetry, i.e., :math:`X[m, \omega] = X[m, \text{n\_fft} - \omega]^*`.
+#'       conjugate symmetry, i.e., \eqn{X[m, \omega] = X[m, \text{n\_fft} - \omega]^*}.
 #' 
 #'     * If `normalized` is ``True`` (default is ``False``), the function
-#'       returns the normalized STFT results, i.e., multiplied by :math:`(\text{frame\_length})^{-0.5}`.
+#'       returns the normalized STFT results, i.e., multiplied by \eqn{(\text{frame\_length})^{-0.5}}.
 #' 
 #'     Returns the real and the imaginary parts together as one tensor of size
-#'     :math:`(* \times N \times T \times 2)`, where :math:`*` is the optional
-#'     batch size of `input`, :math:`N` is the number of frequencies where
-#'     STFT is applied, :math:`T` is the total number of frames used, and each pair
+#'     \eqn{(* \times N \times T \times 2)}, where \eqn{*} is the optional
+#'     batch size of `input`, \eqn{N} is the number of frequencies where
+#'     STFT is applied, \eqn{T} is the total number of frames used, and each pair
 #'     in the last dimension represents a complex number as the real part and the
 #'     imaginary part.
 #' 
@@ -4798,7 +4798,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #'
 #' @section Signatures:
@@ -4892,7 +4892,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #' 
 #' 
@@ -4960,7 +4960,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #' 
 #' 
@@ -5022,7 +5022,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in
 #' the output tensor having 1 fewer dimension than `input`.
 #'
 #' @section Signatures:
@@ -5154,8 +5154,8 @@ NULL
 #'          contract or explicit lists of dimensions for `a` and
 #'          `b` respectively
 #' 
-#'     When called with an integer argument `dims` = :math:`d`, and the number of
-#'     dimensions of `a` and `b` is :math:`m` and :math:`n`, respectively,
+#'     When called with an integer argument `dims` = \eqn{d}, and the number of
+#'     dimensions of `a` and `b` is \eqn{m} and \eqn{n}, respectively,
 #'     it computes
 #' 
 #' \deqn{
@@ -5163,7 +5163,7 @@ NULL
 #'           = \sum_{k_0,...,k_{d-1}} a_{i_0,...,i_{m-d},k_0,...,k_{d-1}} \times b_{k_0,...,k_{d-1}, i_d,...,i_n}.
 #' }
 #'     When called with `dims` of the list form, the given dimensions will be contracted
-#'     in place of the last :math:`d` of `a` and the first :math:`d` of :math:`b`. The sizes
+#'     in place of the last \eqn{d} of `a` and the first \eqn{d} of \eqn{b}. The sizes
 #'     in these dimensions must match, but `tensordot` will deal with broadcasted
 #'     dimensions.
 #' 
@@ -5199,7 +5199,7 @@ NULL
 
 #' Threshold_
 #'
-#' In-place version of [`~threshold`].
+#' In-place version of :func:`~threshold`.
 #'
 #' @section Signatures:
 #' 
@@ -5335,7 +5335,7 @@ NULL
 
 #' Trapz
 #'
-#' Estimate :math:`\int y\,dx` along `dim`, using the trapezoid rule.
+#' Estimate \eqn{\int y\,dx} along `dim`, using the trapezoid rule.
 #'
 #' @section Signatures:
 #' 
@@ -5411,7 +5411,7 @@ NULL
 #'
 #' Eliminates all but the first element from every consecutive group of equivalent elements.
 #' 
-#'     .. note:: This function is different from [`torch_unique`] in the sense that this function
+#'     .. note:: This function is different from :func:`torch_unique` in the sense that this function
 #'         only eliminates consecutive duplicate values. This semantics is similar to `std::unique`
 #'         in C++.
 #'
@@ -5499,7 +5499,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #' 
 #' 
@@ -5566,7 +5566,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
+#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #' 
 #' 
@@ -5640,7 +5640,7 @@ NULL
 #' ``torch_nonzero(condition, as_tuple=True)``.
 #' 
 #' @note
-#'     See also [`torch_nonzero`].
+#'     See also :func:`torch_nonzero`.
 #'
 #' @section Signatures:
 #' 
@@ -5879,10 +5879,10 @@ NULL
 #' Performs a matrix multiplication of the matrices `mat1` and `mat2`.
 #' The matrix `input` is added to the final result.
 #' 
-#' If `mat1` is a :math:`(n \times m)` tensor, `mat2` is a
-#' :math:`(m \times p)` tensor, then `input` must be
-#' :ref:`broadcastable <broadcasting-semantics>` with a :math:`(n \times p)` tensor
-#' and `out` will be a :math:`(n \times p)` tensor.
+#' If `mat1` is a \eqn{(n \times m)} tensor, `mat2` is a
+#' \eqn{(m \times p)} tensor, then `input` must be
+#' :ref:`broadcastable <broadcasting-semantics>` with a \eqn{(n \times p)} tensor
+#' and `out` will be a \eqn{(n \times p)} tensor.
 #' 
 #' `alpha` and `beta` are scaling factors on matrix-vector product between
 #' `mat1` and `mat2` and the added matrix `input` respectively.
@@ -6038,19 +6038,19 @@ NULL
 
 #' Meshgrid
 #'
-#' Take :math:`N` tensors, each of which can be either scalar or 1-dimensional
-#' vector, and create :math:`N` N-dimensional grids, where the :math:`i` :sup:`th` grid is defined by
-#' expanding the :math:`i` :sup:`th` input over dimensions defined by other inputs.
+#' Take \eqn{N} tensors, each of which can be either scalar or 1-dimensional
+#' vector, and create \eqn{N} N-dimensional grids, where the \eqn{i} :sup:`th` grid is defined by
+#' expanding the \eqn{i} :sup:`th` input over dimensions defined by other inputs.
 #' 
 #' 
 #'     Args:
 #'         tensors (list of Tensor): list of scalars or 1 dimensional tensors. Scalars will be
-#'         treated as tensors of size :math:`(1,)` automatically
+#'         treated as tensors of size \eqn{(1,)} automatically
 #' 
 #'     Returns:
-#'         seq (sequence of Tensors): If the input has :math:`k` tensors of size
-#'         :math:`(N_1,), (N_2,), \ldots , (N_k,)`, then the output would also have :math:`k` tensors,
-#'         where all tensors are of size :math:`(N_1, N_2, \ldots , N_k)`.
+#'         seq (sequence of Tensors): If the input has \eqn{k} tensors of size
+#'         \eqn{(N_1,), (N_2,), \ldots , (N_k,)}, then the output would also have \eqn{k} tensors,
+#'         where all tensors are of size \eqn{(N_1, N_2, \ldots , N_k)}.
 #' 
 #'     Example::
 #' 
@@ -6097,7 +6097,7 @@ NULL
 
 #' Combinations
 #'
-#' Compute combinations of length :math:`r` of the given tensor. The behavior is similar to
+#' Compute combinations of length \eqn{r} of the given tensor. The behavior is similar to
 #' python's `itertools.combinations` when `with_replacement` is set to `False`, and
 #' `itertools.combinations_with_replacement` when `with_replacement` is set to `True`.
 #'
@@ -6239,10 +6239,10 @@ NULL
 #' `batch1` and `batch2` must be 3-D tensors each containing the
 #' same number of matrices.
 #' 
-#' If `batch1` is a :math:`(b \times n \times m)` tensor, `batch2` is a
-#' :math:`(b \times m \times p)` tensor, `input` must be
-#' :ref:`broadcastable <broadcasting-semantics>` with a :math:`(n \times p)` tensor
-#' and `out` will be a :math:`(n \times p)` tensor.
+#' If `batch1` is a \eqn{(b \times n \times m)} tensor, `batch2` is a
+#' \eqn{(b \times m \times p)} tensor, `input` must be
+#' :ref:`broadcastable <broadcasting-semantics>` with a \eqn{(n \times p)} tensor
+#' and `out` will be a \eqn{(n \times p)} tensor.
 #' 
 #' \deqn{
 #'     out = \beta\ \text{input} + \alpha\ (\sum_{i=0}^{b-1} \text{batch1}_i \mathbin{@} \text{batch2}_i)
@@ -6356,8 +6356,8 @@ NULL
 #' retained. A positive value excludes just as many diagonals above the main
 #' diagonal, and similarly a negative value includes just as many diagonals below
 #' the main diagonal. The main diagonal are the set of indices
-#' :math:`\lbrace (i, i) \rbrace` for :math:`i \in [0, \min\{d_{1}, d_{2}\} - 1]` where
-#' :math:`d_{1}, d_{2}` are the dimensions of the matrix.
+#' \eqn{\lbrace (i, i) \rbrace} for \eqn{i \in [0, \min\{d_{1}, d_{2}\} - 1]} where
+#' \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 #'
 #' @section Signatures:
 #' 
@@ -6400,8 +6400,8 @@ NULL
 #' retained. A positive value includes just as many diagonals above the main
 #' diagonal, and similarly a negative value excludes just as many diagonals below
 #' the main diagonal. The main diagonal are the set of indices
-#' :math:`\lbrace (i, i) \rbrace` for :math:`i \in [0, \min\{d_{1}, d_{2}\} - 1]` where
-#' :math:`d_{1}, d_{2}` are the dimensions of the matrix.
+#' \eqn{\lbrace (i, i) \rbrace} for \eqn{i \in [0, \min\{d_{1}, d_{2}\} - 1]} where
+#' \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 #'
 #' @section Signatures:
 #' 
@@ -6444,10 +6444,10 @@ NULL
 #' retained. A positive value includes just as many diagonals above the main
 #' diagonal, and similarly a negative value excludes just as many diagonals below
 #' the main diagonal. The main diagonal are the set of indices
-#' :math:`\lbrace (i, i) \rbrace` for :math:`i \in [0, \min\{d_{1}, d_{2}\} - 1]`
-#' where :math:`d_{1}, d_{2}` are the dimensions of the matrix.
+#' \eqn{\lbrace (i, i) \rbrace} for \eqn{i \in [0, \min\{d_{1}, d_{2}\} - 1]}
+#' where \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 #' 
-#' NOTE: when running on 'cuda', row * col must be less than :math:`2^{59}` to
+#' NOTE: when running on 'cuda', row * col must be less than \eqn{2^{59}} to
 #' prevent overflow during calculation.
 #'
 #' @section Signatures:
@@ -6493,10 +6493,10 @@ NULL
 #' retained. A positive value excludes just as many diagonals above the main
 #' diagonal, and similarly a negative value includes just as many diagonals below
 #' the main diagonal. The main diagonal are the set of indices
-#' :math:`\lbrace (i, i) \rbrace` for :math:`i \in [0, \min\{d_{1}, d_{2}\} - 1]`
-#' where :math:`d_{1}, d_{2}` are the dimensions of the matrix.
+#' \eqn{\lbrace (i, i) \rbrace} for \eqn{i \in [0, \min\{d_{1}, d_{2}\} - 1]}
+#' where \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 #' 
-#' NOTE: when running on 'cuda', row * col must be less than :math:`2^{59}` to
+#' NOTE: when running on 'cuda', row * col must be less than \eqn{2^{59}} to
 #' prevent overflow during calculation.
 #'
 #' @section Signatures:
@@ -6553,7 +6553,7 @@ NULL
 
 #' Ne
 #'
-#' Computes :math:`input \neq other` element-wise.
+#' Computes \eqn{input \neq other} element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
@@ -6607,7 +6607,7 @@ NULL
 
 #' Ge
 #'
-#' Computes :math:`\text{input} \geq \text{other}` element-wise.
+#' Computes \eqn{\text{input} \geq \text{other}} element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
@@ -6634,7 +6634,7 @@ NULL
 
 #' Le
 #'
-#' Computes :math:`\text{input} \leq \text{other}` element-wise.
+#' Computes \eqn{\text{input} \leq \text{other}} element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
@@ -6661,7 +6661,7 @@ NULL
 
 #' Gt
 #'
-#' Computes :math:`\text{input} > \text{other}` element-wise.
+#' Computes \eqn{\text{input} > \text{other}} element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
@@ -6688,7 +6688,7 @@ NULL
 
 #' Lt
 #'
-#' Computes :math:`\text{input} < \text{other}` element-wise.
+#' Computes \eqn{\text{input} < \text{other}} element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
@@ -6816,10 +6816,10 @@ NULL
 #' Nonzero
 #'
 #' @note
-#'     [`torch_nonzero(..., as_tuple=False) <torch.nonzero>`] (default) returns a
+#'     :func:`torch_nonzero(..., as_tuple=False) <torch.nonzero>` (default) returns a
 #'     2-D tensor where each row is the index for a nonzero value.
 #' 
-#'     [`torch_nonzero(..., as_tuple=True) <torch.nonzero>`] returns a tuple of 1-D
+#'     :func:`torch_nonzero(..., as_tuple=True) <torch.nonzero>` returns a tuple of 1-D
 #'     index tensors, allowing for advanced indexing, so ``x[x.nonzero(as_tuple=True)]``
 #'     gives all nonzero values of tensor ``x``. Of the returned tuple, each index tensor
 #'     contains nonzero indices for a certain dimension.
@@ -6834,8 +6834,8 @@ NULL
 #' element in `input`. The result is sorted lexicographically, with
 #' the last index changing the fastest (C-style).
 #' 
-#' If `input` has :math:`n` dimensions, then the resulting indices tensor
-#' `out` is of size :math:`(z \times n)`, where :math:`z` is the total number of
+#' If `input` has \eqn{n} dimensions, then the resulting indices tensor
+#' `out` is of size \eqn{(z \times n)}, where \eqn{z} is the total number of
 #' non-zero elements in the `input` tensor.
 #' 
 #' **When** `as_tuple` **is ``True``**:
@@ -6844,8 +6844,8 @@ NULL
 #' each containing the indices (in that dimension) of all non-zero elements of
 #' `input` .
 #' 
-#' If `input` has :math:`n` dimensions, then the resulting tuple contains :math:`n`
-#' tensors of size :math:`z`, where :math:`z` is the total number of
+#' If `input` has \eqn{n} dimensions, then the resulting tuple contains \eqn{n}
+#' tensors of size \eqn{z}, where \eqn{z} is the total number of
 #' non-zero elements in the `input` tensor.
 #' 
 #' As a special case, when `input` has zero dimensions and a nonzero scalar
@@ -6885,9 +6885,9 @@ NULL
 #'     out[i][j][k] = input[i][j][index[i][j][k]]  # if dim == 2
 #' 
 #' If `input` is an n-dimensional tensor with size
-#' :math:`(x_0, x_1..., x_{i-1}, x_i, x_{i+1}, ..., x_{n-1})`
-#' and ``dim = i``, then `index` must be an :math:`n`-dimensional tensor with
-#' size :math:`(x_0, x_1, ..., x_{i-1}, y, x_{i+1}, ..., x_{n-1})` where :math:`y \geq 1`
+#' \eqn{(x_0, x_1..., x_{i-1}, x_i, x_{i+1}, ..., x_{n-1})}
+#' and ``dim = i``, then `index` must be an \eqn{n}-dimensional tensor with
+#' size \eqn{(x_0, x_1, ..., x_{i-1}, y, x_{i+1}, ..., x_{n-1})} where \eqn{y \geq 1}
 #' and `out` will have the same size as `index`.
 #'
 #' @section Signatures:
@@ -6995,10 +6995,10 @@ NULL
 #' Lstsq
 #'
 #' Computes the solution to the least squares and least norm problems for a full
-#' rank matrix :math:`A` of size :math:`(m \times n)` and a matrix :math:`B` of
-#' size :math:`(m \times k)`.
+#' rank matrix \eqn{A} of size \eqn{(m \times n)} and a matrix \eqn{B} of
+#' size \eqn{(m \times k)}.
 #' 
-#' If :math:`m \geq n`, [`lstsq`] solves the least-squares problem:
+#' If \eqn{m \geq n}, :func:`lstsq` solves the least-squares problem:
 #' 
 #' \deqn{
 #' }
@@ -7006,7 +7006,7 @@ NULL
 #'    \min_X & \|AX-B\|_2.
 #'    \end{array}
 #' 
-#' If :math:`m < n`, [`lstsq`] solves the least-norm problem:
+#' If \eqn{m < n}, :func:`lstsq` solves the least-norm problem:
 #' 
 #' \deqn{
 #' }
@@ -7014,13 +7014,13 @@ NULL
 #'    \min_X & \|X\|_2 & \text{subject to} & AX = B.
 #'    \end{array}
 #' 
-#' Returned tensor :math:`X` has shape :math:`(\max(m, n) \times k)`. The first :math:`n`
-#' rows of :math:`X` contains the solution. If :math:`m \geq n`, the residual sum of squares
+#' Returned tensor \eqn{X} has shape \eqn{(\max(m, n) \times k)}. The first \eqn{n}
+#' rows of \eqn{X} contains the solution. If \eqn{m \geq n}, the residual sum of squares
 #' for the solution in each column is given by the sum of squares of elements in the
-#' remaining :math:`m - n` rows of that column.
+#' remaining \eqn{m - n} rows of that column.
 #' 
 #' @note
-#'     The case when :math:`m < n` is not supported on the GPU.
+#'     The case when \eqn{m < n} is not supported on the GPU.
 #'
 #' @section Signatures:
 #' 
@@ -7047,10 +7047,10 @@ NULL
 
 #' Triangular_solve
 #'
-#' Solves a system of equations with a triangular coefficient matrix :math:`A`
-#' and multiple right-hand sides :math:`b`.
+#' Solves a system of equations with a triangular coefficient matrix \eqn{A}
+#' and multiple right-hand sides \eqn{b}.
 #' 
-#' In particular, solves :math:`AX = b` and assumes :math:`A` is upper-triangular
+#' In particular, solves \eqn{AX = b} and assumes \eqn{A} is upper-triangular
 #' with the default keyword arguments.
 #' 
 #' `torch_triangular_solve(b, A)` can take in 2D inputs `b, A` or inputs that are
@@ -7083,7 +7083,7 @@ NULL
 #' represented by a namedtuple (eigenvalues, eigenvectors).
 #' 
 #' This function calculates all eigenvalues (and vectors) of `input`
-#' such that :math:`\text{input} = V \text{diag}(e) V^T`.
+#' such that \eqn{\text{input} = V \text{diag}(e) V^T}.
 #' 
 #' The boolean argument `eigenvectors` defines computation of
 #' both eigenvectors and eigenvalues or eigenvalues only.
@@ -7130,7 +7130,7 @@ NULL
 #' 
 #' @note
 #'     Since eigenvalues and eigenvectors might be complex, backward pass is supported only
-#'     for [`torch_symeig`]
+#'     for :func:`torch_symeig`
 #'
 #' @section Signatures:
 #' 
@@ -7153,14 +7153,14 @@ NULL
 #'
 #' This function returns a namedtuple ``(U, S, V)`` which is the singular value
 #' decomposition of a input real matrix or batches of real matrices `input` such that
-#' :math:`input = U \times diag(S) \times V^T`.
+#' \eqn{input = U \times diag(S) \times V^T}.
 #' 
 #' If `some` is ``True`` (default), the method returns the reduced singular value decomposition
 #' i.e., if the last two dimensions of `input` are ``m`` and ``n``, then the returned
-#' `U` and `V` matrices will contain only :math:`min(n, m)` orthonormal columns.
+#' `U` and `V` matrices will contain only \eqn{min(n, m)} orthonormal columns.
 #' 
 #' If `compute_uv` is ``False``, the returned `U` and `V` matrices will be zero matrices
-#' of shape :math:`(m \times m)` and :math:`(n \times n)` respectively. `some` will be ignored here.
+#' of shape \eqn{(m \times m)} and \eqn{(n \times n)} respectively. `some` will be ignored here.
 #' 
 #' @note The singular values are returned in descending order. If `input` is a batch of matrices,
 #'           then the singular values of each matrix in the batch is returned in descending order.
@@ -7219,7 +7219,7 @@ NULL
 #' Cholesky
 #'
 #' Computes the Cholesky decomposition of a symmetric positive-definite
-#' matrix :math:`A` or for batches of symmetric positive-definite matrices.
+#' matrix \eqn{A} or for batches of symmetric positive-definite matrices.
 #' 
 #' If `upper` is ``True``, the returned matrix ``U`` is upper-triangular, and
 #' the decomposition has the form:
@@ -7235,7 +7235,7 @@ NULL
 #' }
 #'     A = LL^T
 #' 
-#' If `upper` is ``True``, and :math:`A` is a batch of symmetric positive-definite
+#' If `upper` is ``True``, and \eqn{A} is a batch of symmetric positive-definite
 #' matrices, then the returned tensor will be composed of upper-triangular Cholesky factors
 #' of each of the individual matrices. Similarly, when `upper` is ``False``, the returned
 #' tensor will be composed of lower-triangular Cholesky factors of each of the individual
@@ -7274,15 +7274,15 @@ NULL
 #' Cholesky_solve
 #'
 #' Solves a linear system of equations with a positive semidefinite
-#' matrix to be inverted given its Cholesky factor matrix :math:`u`.
+#' matrix to be inverted given its Cholesky factor matrix \eqn{u}.
 #' 
-#' If `upper` is ``False``, :math:`u` is and lower triangular and `c` is
+#' If `upper` is ``False``, \eqn{u} is and lower triangular and `c` is
 #' returned such that:
 #' 
 #' \deqn{
 #'     c = (u u^T)^{{-1}} b
 #' }
-#' If `upper` is ``True`` or not provided, :math:`u` is upper triangular
+#' If `upper` is ``True`` or not provided, \eqn{u} is upper triangular
 #' and `c` is returned such that:
 #' 
 #' \deqn{
@@ -7323,7 +7323,7 @@ NULL
 #' Solve
 #'
 #' This function returns the solution to the system of linear
-#' equations represented by :math:`AX = B` and the LU factorization of
+#' equations represented by \eqn{AX = B} and the LU factorization of
 #' A, in order as a namedtuple `solution, LU`.
 #' 
 #' `LU` contains `L` and `U` factors for LU factorization of `A`.
@@ -7369,17 +7369,17 @@ NULL
 
 #' Cholesky_inverse
 #'
-#' Computes the inverse of a symmetric positive-definite matrix :math:`A` using its
-#' Cholesky factor :math:`u`: returns matrix ``inv``. The inverse is computed using
+#' Computes the inverse of a symmetric positive-definite matrix \eqn{A} using its
+#' Cholesky factor \eqn{u}: returns matrix ``inv``. The inverse is computed using
 #' LAPACK routines ``dpotri`` and ``spotri`` (and the corresponding MAGMA routines).
 #' 
-#' If `upper` is ``False``, :math:`u` is lower triangular
+#' If `upper` is ``False``, \eqn{u} is lower triangular
 #' such that the returned tensor is
 #' 
 #' \deqn{
 #'     inv = (uu^{{T}})^{{-1}}
 #' }
-#' If `upper` is ``True`` or not provided, :math:`u` is upper
+#' If `upper` is ``True`` or not provided, \eqn{u} is upper
 #' triangular such that the returned tensor is
 #' 
 #' \deqn{
@@ -7414,9 +7414,9 @@ NULL
 #' Qr
 #'
 #' Computes the QR decomposition of a matrix or a batch of matrices `input`,
-#' and returns a namedtuple (Q, R) of tensors such that :math:`\text{input} = Q R`
-#' with :math:`Q` being an orthogonal matrix or batch of orthogonal matrices and
-#' :math:`R` being an upper triangular matrix or batch of upper triangular matrices.
+#' and returns a namedtuple (Q, R) of tensors such that \eqn{\text{input} = Q R}
+#' with \eqn{Q} being an orthogonal matrix or batch of orthogonal matrices and
+#' \eqn{R} being an upper triangular matrix or batch of upper triangular matrices.
 #' 
 #' If `some` is ``True``, then this function returns the thin (reduced) QR factorization.
 #' Otherwise, if `some` is ``False``, this function returns the complete QR factorization.
@@ -7462,10 +7462,10 @@ NULL
 #' This is a low-level function for calling LAPACK directly. This function
 #' returns a namedtuple (a, tau) as defined in `LAPACK documentation for geqrf`_ .
 #' 
-#' You'll generally want to use [`torch_qr`] instead.
+#' You'll generally want to use :func:`torch_qr` instead.
 #' 
 #' Computes a QR decomposition of `input`, but without constructing
-#' :math:`Q` and :math:`R` as explicit separate matrices.
+#' \eqn{Q} and \eqn{R} as explicit separate matrices.
 #' 
 #' Rather, this directly calls the underlying LAPACK function `?geqrf`
 #' which produces a sequence of 'elementary reflectors'.
@@ -7491,7 +7491,7 @@ NULL
 #' Orgqr
 #'
 #' Computes the orthogonal matrix `Q` of a QR factorization, from the `(input, input2)`
-#' tuple returned by [`torch_geqrf`].
+#' tuple returned by :func:`torch_geqrf`.
 #' 
 #' This directly calls the underlying LAPACK function `?orgqr`.
 #' See `LAPACK documentation for orgqr`_ for further details.
@@ -7515,7 +7515,7 @@ NULL
 #' Ormqr
 #'
 #' Multiplies `mat` (given by `input3`) by the orthogonal `Q` matrix of the QR factorization
-#' formed by [`torch_geqrf` that is represented by `(a, tau)` (given by (`input`, `input2`])).
+#' formed by :func:`torch_geqrf` that is represented by `(a, tau)` (given by (`input`, `input2`)).
 #' 
 #' This directly calls the underlying LAPACK function `?ormqr`.
 #' See `LAPACK documentation for ormqr`_ for further details.
@@ -7539,7 +7539,7 @@ NULL
 
 #' Lu_solve
 #'
-#' Returns the LU solve of the linear system :math:`Ax = b` using the partially pivoted
+#' Returns the LU solve of the linear system \eqn{Ax = b} using the partially pivoted
 #' LU factorization of A from :meth:`torch_lu`.
 #'
 #' @section Signatures:
@@ -7584,7 +7584,7 @@ NULL
 #' If `input` is a vector, `out` is a vector of size `num_samples`.
 #' 
 #' If `input` is a matrix with `m` rows, `out` is an matrix of shape
-#' :math:`(m \times \text{num\_samples})`.
+#' \eqn{(m \times \text{num\_samples})}.
 #' 
 #' If replacement is ``True``, samples are drawn with replacement.
 #' 
@@ -7678,14 +7678,14 @@ NULL
 
 #' Polygamma
 #'
-#' Computes the :math:`n^{th}` derivative of the digamma function on `input`.
-#' :math:`n \geq 0` is called the order of the polygamma function.
+#' Computes the \eqn{n^{th}} derivative of the digamma function on `input`.
+#' \eqn{n \geq 0} is called the order of the polygamma function.
 #' 
 #' \deqn{
 #'     \psi^{(n)}(x) = \frac{d^{(n)}}{dx^{(n)}} \psi(x)
 #' }
 #' @note
-#'     This function is not implemented for :math:`n \geq 2`.
+#'     This function is not implemented for \eqn{n \geq 2}.
 #'
 #' @section Signatures:
 #' 
@@ -7711,7 +7711,7 @@ NULL
 #' Erfinv
 #'
 #' Computes the inverse error function of each element of `input`.
-#' The inverse error function is defined in the range :math:`(-1, 1)` as:
+#' The inverse error function is defined in the range \eqn{(-1, 1)} as:
 #' 
 #' \deqn{
 #'     \mathrm{erfinv}(\mathrm{erf}(x)) = x
@@ -7801,11 +7801,11 @@ NULL
 
 #' Atan2
 #'
-#' Element-wise arctangent of :math:`\text{input}_{i} / \text{other}_{i}`
+#' Element-wise arctangent of \eqn{\text{input}_{i} / \text{other}_{i}}
 #' with consideration of the quadrant. Returns a new tensor with the signed angles
-#' in radians between vector :math:`(\text{other}_{i}, \text{input}_{i})`
-#' and vector :math:`(1, 0)`. (Note that :math:`\text{other}_{i}`, the second
-#' parameter, is the x-coordinate, while :math:`\text{input}_{i}`, the first
+#' in radians between vector \eqn{(\text{other}_{i}, \text{input}_{i})}
+#' and vector \eqn{(1, 0)}. (Note that \eqn{\text{other}_{i}}, the second
+#' parameter, is the x-coordinate, while \eqn{\text{input}_{i}}, the first
 #' parameter, is the y-coordinate.)
 #' 
 #' The shapes of ``input`` and ``other`` must be

@@ -14,16 +14,16 @@
 }
 \description{
 Solves a linear system of equations with a positive semidefinite
-matrix to be inverted given its Cholesky factor matrix :math:\code{u}.
+matrix to be inverted given its Cholesky factor matrix \eqn{u}.
 }
 \details{
-If \code{upper} is \code{False}, :math:\code{u} is and lower triangular and \code{c} is
+If \code{upper} is \code{False}, \eqn{u} is and lower triangular and \code{c} is
 returned such that:
 
 \deqn{
     c = (u u^T)^{{-1}} b
 }
-If \code{upper} is \code{True} or not provided, :math:\code{u} is upper triangular
+If \code{upper} is \code{True} or not provided, \eqn{u} is upper triangular
 and \code{c} is returned such that:
 
 \deqn{

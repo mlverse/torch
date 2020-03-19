@@ -25,7 +25,7 @@
 \description{
 Returns a one-dimensional tensor of \code{steps} points
 logarithmically spaced with base \code{base} between
-:math:\verb{\{\\text\{base\}\}^\{\\text\{start\}\}} and :math:\verb{\{\\text\{base\}\}^\{\\text\{end\}\}}.
+\eqn{{\text{base}}^{\text{start}}} and \eqn{{\text{base}}^{\text{end}}}.
 }
 \details{
 The output tensor is 1-D of size \code{steps}.

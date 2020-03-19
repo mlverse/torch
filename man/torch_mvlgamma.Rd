@@ -9,15 +9,15 @@
 \item{p}{(int) the number of dimensions}
 }
 \description{
-Computes the multivariate log-gamma function (\verb{[reference]}_) with dimension :math:\code{p} element-wise, given by
+Computes the multivariate log-gamma function (\verb{[reference]}_) with dimension \eqn{p} element-wise, given by
 }
 \details{
 \deqn{
     \log(\Gamma_{p}(a)) = C + \displaystyle \sum_{i=1}^{p} \log\left(\Gamma\left(a - \frac{i - 1}{2}\right)\right)
 }
-where :math:\verb{C = \\log(\\pi) \\times \\frac\{p (p - 1)\}\{4\}} and :math:\verb{\\Gamma(\\cdot)} is the Gamma function.
+where \eqn{C = \log(\pi) \times \frac{p (p - 1)}{4}} and \eqn{\Gamma(\cdot)} is the Gamma function.
 
-If any of the elements are less than or equal to :math:\verb{\\frac\{p - 1\}\{2\}}, then an error
+If any of the elements are less than or equal to \eqn{\frac{p - 1}{2}}, then an error
 is thrown.
 }
 \section{Signatures}{

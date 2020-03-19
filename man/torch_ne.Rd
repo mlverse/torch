@@ -11,7 +11,7 @@
 \item{out}{(Tensor, optional) the output tensor that must be a \code{BoolTensor}}
 }
 \description{
-Computes :math:\verb{input \\neq other} element-wise.
+Computes \eqn{input \neq other} element-wise.
 }
 \details{
 The second argument can be a number or a tensor whose shape is

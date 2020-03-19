@@ -31,8 +31,8 @@ outer product between \code{vec1} and \code{vec2} and the added matrix
 If \code{vec1} is a vector of size \code{n} and \code{vec2} is a vector
 of size \code{m}, then \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a matrix of size
-:math:\verb{(n \\times m)} and \code{out} will be a matrix of size
-:math:\verb{(n \\times m)}.
+\eqn{(n \times m)} and \code{out} will be a matrix of size
+\eqn{(n \times m)}.
 
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
 \code{alpha} must be real numbers, otherwise they should be integers

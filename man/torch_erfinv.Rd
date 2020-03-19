@@ -10,7 +10,7 @@
 }
 \description{
 Computes the inverse error function of each element of \code{input}.
-The inverse error function is defined in the range :math:\verb{(-1, 1)} as:
+The inverse error function is defined in the range \eqn{(-1, 1)} as:
 }
 \details{
 \deqn{

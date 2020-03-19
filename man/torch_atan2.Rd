@@ -11,11 +11,11 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Element-wise arctangent of :math:\verb{\\text\{input\}_\{i\} / \\text\{other\}_\{i\}}
+Element-wise arctangent of \eqn{\text{input}_{i} / \text{other}_{i}}
 with consideration of the quadrant. Returns a new tensor with the signed angles
-in radians between vector :math:\verb{(\\text\{other\}_\{i\}, \\text\{input\}_\{i\})}
-and vector :math:\verb{(1, 0)}. (Note that :math:\verb{\\text\{other\}_\{i\}}, the second
-parameter, is the x-coordinate, while :math:\verb{\\text\{input\}_\{i\}}, the first
+in radians between vector \eqn{(\text{other}_{i}, \text{input}_{i})}
+and vector \eqn{(1, 0)}. (Note that \eqn{\text{other}_{i}}, the second
+parameter, is the x-coordinate, while \eqn{\text{input}_{i}}, the first
 parameter, is the y-coordinate.)
 }
 \details{

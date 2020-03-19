@@ -15,11 +15,11 @@
 \item{unitriangular}{(bool, optional) whether :math:\code{A} is unit triangular.        If True, the diagonal elements of :math:\code{A} are assumed to be        1 and not referenced from :math:\code{A}. Default: \code{False}.}
 }
 \description{
-Solves a system of equations with a triangular coefficient matrix :math:\code{A}
-and multiple right-hand sides :math:\code{b}.
+Solves a system of equations with a triangular coefficient matrix \eqn{A}
+and multiple right-hand sides \eqn{b}.
 }
 \details{
-In particular, solves :math:\code{AX = b} and assumes :math:\code{A} is upper-triangular
+In particular, solves \eqn{AX = b} and assumes \eqn{A} is upper-triangular
 with the default keyword arguments.
 
 \code{torch_triangular_solve(b, A)} can take in 2D inputs \verb{b, A} or inputs that are

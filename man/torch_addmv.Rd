@@ -22,7 +22,7 @@ the vector \code{vec}.
 The vector \code{input} is added to the final result.
 }
 \details{
-If \code{mat} is a :math:\verb{(n \\times m)} tensor, \code{vec} is a 1-D tensor of
+If \code{mat} is a \eqn{(n \times m)} tensor, \code{vec} is a 1-D tensor of
 size \code{m}, then \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a 1-D tensor of size \code{n} and
 \code{out} will be 1-D tensor of size \code{n}.

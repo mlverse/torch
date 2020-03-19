@@ -14,12 +14,12 @@
 Performs a matrix multiplication of the matrices \code{input} and \code{mat2}.
 }
 \details{
-If \code{input} is a :math:\verb{(n \\times m)} tensor, \code{mat2} is a
-:math:\verb{(m \\times p)} tensor, \code{out} will be a :math:\verb{(n \\times p)} tensor.
+If \code{input} is a \eqn{(n \times m)} tensor, \code{mat2} is a
+\eqn{(m \times p)} tensor, \code{out} will be a \eqn{(n \times p)} tensor.
 }
 \note{
 This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
-For broadcasting matrix products, see \code{\link{torch_matmul}}.
+For broadcasting matrix products, see :func:\code{torch_matmul}.
 }
 \section{Signatures}{
 

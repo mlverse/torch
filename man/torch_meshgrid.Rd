@@ -4,19 +4,19 @@
 \alias{torch_meshgrid}
 \title{Meshgrid}
 \description{
-Take :math:\code{N} tensors, each of which can be either scalar or 1-dimensional
-vector, and create :math:\code{N} N-dimensional grids, where the :math:\code{i} :sup:\code{th} grid is defined by
-expanding the :math:\code{i} :sup:\code{th} input over dimensions defined by other inputs.
+Take \eqn{N} tensors, each of which can be either scalar or 1-dimensional
+vector, and create \eqn{N} N-dimensional grids, where the \eqn{i} :sup:\code{th} grid is defined by
+expanding the \eqn{i} :sup:\code{th} input over dimensions defined by other inputs.
 }
 \details{
 \preformatted{Args:
     tensors (list of Tensor): list of scalars or 1 dimensional tensors. Scalars will be
-    treated as tensors of size :math:`(1,)` automatically
+    treated as tensors of size \eqn{(1,)} automatically
 
 Returns:
-    seq (sequence of Tensors): If the input has :math:`k` tensors of size
-    :math:`(N_1,), (N_2,), \\ldots , (N_k,)`, then the output would also have :math:`k` tensors,
-    where all tensors are of size :math:`(N_1, N_2, \\ldots , N_k)`.
+    seq (sequence of Tensors): If the input has \eqn{k} tensors of size
+    \eqn{(N_1,), (N_2,), \ldots , (N_k,)}, then the output would also have \eqn{k} tensors,
+    where all tensors are of size \eqn{(N_1, N_2, \ldots , N_k)}.
 
 Example::
 

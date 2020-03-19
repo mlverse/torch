@@ -19,7 +19,7 @@ represented by a namedtuple (eigenvalues, eigenvectors).
 }
 \details{
 This function calculates all eigenvalues (and vectors) of \code{input}
-such that :math:\verb{\\text\{input\} = V \\text\{diag\}(e) V^T}.
+such that \eqn{\text{input} = V \text{diag}(e) V^T}.
 
 The boolean argument \code{eigenvectors} defines computation of
 both eigenvectors and eigenvalues or eigenvalues only.

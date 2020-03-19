@@ -18,9 +18,9 @@ and \code{mat2}.
 \code{input} and \code{mat2} must be 3-D tensors each containing
 the same number of matrices.
 
-If \code{input} is a :math:\verb{(b \\times n \\times m)} tensor, \code{mat2} is a
-:math:\verb{(b \\times m \\times p)} tensor, \code{out} will be a
-:math:\verb{(b \\times n \\times p)} tensor.
+If \code{input} is a \eqn{(b \times n \times m)} tensor, \code{mat2} is a
+\eqn{(b \times m \times p)} tensor, \code{out} will be a
+\eqn{(b \times n \times p)} tensor.
 
 \deqn{
     \text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
@@ -28,7 +28,7 @@ If \code{input} is a :math:\verb{(b \\times n \\times m)} tensor, \code{mat2} is
 }
 \note{
 This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
-For broadcasting matrix products, see \code{\link{torch_matmul}}.
+For broadcasting matrix products, see :func:\code{torch_matmul}.
 }
 \section{Signatures}{
 

@@ -28,7 +28,7 @@ The argument \code{offset} controls which diagonal to consider:
 
 The size of the new matrix will be calculated to make the specified diagonal
 of the size of the last input dimension.
-Note that for \code{offset} other than :math:\code{0}, the order of \code{dim1}
+Note that for \code{offset} other than \eqn{0}, the order of \code{dim1}
 and \code{dim2} matters. Exchanging them is equivalent to changing the
 sign of \code{offset}.
 

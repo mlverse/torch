@@ -23,8 +23,8 @@ The argument \code{diagonal} controls which diagonal to consider. If
 retained. A positive value excludes just as many diagonals above the main
 diagonal, and similarly a negative value includes just as many diagonals below
 the main diagonal. The main diagonal are the set of indices
-:math:\verb{\\lbrace (i, i) \\rbrace} for :math:\verb{i \\in [0, \\min\\\{d_\{1\}, d_\{2\}\\\} - 1]} where
-:math:\verb{d_\{1\}, d_\{2\}} are the dimensions of the matrix.
+\eqn{\lbrace (i, i) \rbrace} for \eqn{i \in [0, \min\{d_{1}, d_{2}\} - 1]} where
+\eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 }
 \section{Signatures}{
 

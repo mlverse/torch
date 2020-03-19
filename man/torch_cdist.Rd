@@ -8,10 +8,10 @@ Computes batched the p-norm distance between each pair of the two collections of
 }
 \details{
 \preformatted{Args:
-    x1 (Tensor): input tensor of shape :math:`B \\times P \\times M`.
-    x2 (Tensor): input tensor of shape :math:`B \\times R \\times M`.
+    x1 (Tensor): input tensor of shape \eqn{B \times P \times M}.
+    x2 (Tensor): input tensor of shape \eqn{B \times R \times M}.
     p: p value for the p-norm distance to calculate between each vector pair
-        :math:`\\in [0, \\infty]`.
+        \eqn{\in [0, \infty]}.
     compute_mode:
         'use_mm_for_euclid_dist_if_necessary' - will use matrix multiplication approach to calculate
         euclidean distance (p = 2) if P > 25 or R > 25
@@ -21,12 +21,12 @@ Computes batched the p-norm distance between each pair of the two collections of
         euclidean distance (p = 2)
         Default: use_mm_for_euclid_dist_if_necessary.
 
-If x1 has shape :math:`B \\times P \\times M` and x2 has shape :math:`B \\times R \\times M` then the
-output will have shape :math:`B \\times P \\times R`.
+If x1 has shape \eqn{B \times P \times M} and x2 has shape \eqn{B \times R \times M} then the
+output will have shape \eqn{B \times P \times R}.
 
 This function is equivalent to `scipy.spatial.distance.cdist(input,'minkowski', p=p)`
-if :math:`p \\in (0, \\infty)`. When :math:`p = 0` it is equivalent to
-`scipy.spatial.distance.cdist(input, 'hamming') * M`. When :math:`p = \\infty`, the closest
+if \eqn{p \in (0, \infty)}. When \eqn{p = 0} it is equivalent to
+`scipy.spatial.distance.cdist(input, 'hamming') * M`. When \eqn{p = \infty}, the closest
 scipy function is `scipy.spatial.distance.cdist(xn, lambda x, y: np.abs(x - y).max())`.
 
 Example:

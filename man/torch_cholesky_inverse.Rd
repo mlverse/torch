@@ -11,18 +11,18 @@
 \item{out}{(Tensor, optional) the output tensor for \code{inv}}
 }
 \description{
-Computes the inverse of a symmetric positive-definite matrix :math:\code{A} using its
-Cholesky factor :math:\code{u}: returns matrix \code{inv}. The inverse is computed using
+Computes the inverse of a symmetric positive-definite matrix \eqn{A} using its
+Cholesky factor \eqn{u}: returns matrix \code{inv}. The inverse is computed using
 LAPACK routines \code{dpotri} and \code{spotri} (and the corresponding MAGMA routines).
 }
 \details{
-If \code{upper} is \code{False}, :math:\code{u} is lower triangular
+If \code{upper} is \code{False}, \eqn{u} is lower triangular
 such that the returned tensor is
 
 \deqn{
     inv = (uu^{{T}})^{{-1}}
 }
-If \code{upper} is \code{True} or not provided, :math:\code{u} is upper
+If \code{upper} is \code{True} or not provided, \eqn{u} is upper
 triangular such that the returned tensor is
 
 \deqn{

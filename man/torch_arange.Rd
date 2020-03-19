@@ -21,7 +21,7 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-Returns a 1-D tensor of size :math:\verb{\\left\\lceil \\frac\{\\text\{end\} - \\text\{start\}\}\{\\text\{step\}\} \\right\\rceil}
+Returns a 1-D tensor of size \eqn{\left\lceil \frac{\text{end} - \text{start}}{\text{step}} \right\rceil}
 with values from the interval \verb{[start, end)} taken with common difference
 \code{step} beginning from \code{start}.
 }

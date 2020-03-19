@@ -18,7 +18,7 @@ If the \code{repeats} is \verb{tensor([n1, n2, n3, ...])}, then the output will 
 \code{1} appears \code{n2} times, \code{2} appears \code{n3} times, etc.
 }
 \section{Warning}{
-\preformatted{This is different from [`torch_repeat` but similar to `numpy.repeat`].
+\preformatted{This is different from :func:`torch_repeat` but similar to `numpy.repeat`.
 }
 }
 

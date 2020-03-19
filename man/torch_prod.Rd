@@ -21,7 +21,7 @@ dimension \code{dim}.
 \details{
 If \code{keepdim} is \code{True}, the output tensor is of the same size
 as \code{input} except in the dimension \code{dim} where it is of size 1.
-Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in
+Otherwise, \code{dim} is squeezed (see :func:\code{torch_squeeze}), resulting in
 the output tensor having 1 fewer dimension than \code{input}.
 }
 \section{Signatures}{

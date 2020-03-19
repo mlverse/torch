@@ -15,15 +15,15 @@
 \description{
 This function returns a namedtuple \verb{(U, S, V)} which is the singular value
 decomposition of a input real matrix or batches of real matrices \code{input} such that
-:math:\verb{input = U \\times diag(S) \\times V^T}.
+\eqn{input = U \times diag(S) \times V^T}.
 }
 \details{
 If \code{some} is \code{True} (default), the method returns the reduced singular value decomposition
 i.e., if the last two dimensions of \code{input} are \code{m} and \code{n}, then the returned
-\code{U} and \code{V} matrices will contain only :math:\code{min(n, m)} orthonormal columns.
+\code{U} and \code{V} matrices will contain only \eqn{min(n, m)} orthonormal columns.
 
 If \code{compute_uv} is \code{False}, the returned \code{U} and \code{V} matrices will be zero matrices
-of shape :math:\verb{(m \\times m)} and :math:\verb{(n \\times n)} respectively. \code{some} will be ignored here.
+of shape \eqn{(m \times m)} and \eqn{(n \times n)} respectively. \code{some} will be ignored here.
 }
 \note{
 The singular values are returned in descending order. If \code{input} is a batch of matrices,

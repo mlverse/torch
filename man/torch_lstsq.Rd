@@ -12,11 +12,11 @@
 }
 \description{
 Computes the solution to the least squares and least norm problems for a full
-rank matrix :math:\code{A} of size :math:\verb{(m \\times n)} and a matrix :math:\code{B} of
-size :math:\verb{(m \\times k)}.
+rank matrix \eqn{A} of size \eqn{(m \times n)} and a matrix \eqn{B} of
+size \eqn{(m \times k)}.
 }
 \details{
-If :math:\verb{m \\geq n}, \code{\link{lstsq}} solves the least-squares problem:
+If \eqn{m \geq n}, :func:\code{lstsq} solves the least-squares problem:
 
 \deqn{
 }
@@ -24,7 +24,7 @@ If :math:\verb{m \\geq n}, \code{\link{lstsq}} solves the least-squares problem:
 \min_X & \|AX-B\|_2.
 \end{array}
 
-If :math:\code{m < n}, \code{\link{lstsq}} solves the least-norm problem:
+If \eqn{m < n}, :func:\code{lstsq} solves the least-norm problem:
 
 \deqn{
 }
@@ -32,13 +32,13 @@ If :math:\code{m < n}, \code{\link{lstsq}} solves the least-norm problem:
 \min_X & \|X\|_2 & \text{subject to} & AX = B.
 \end{array}
 
-Returned tensor :math:\code{X} has shape :math:\verb{(\\max(m, n) \\times k)}. The first :math:\code{n}
-rows of :math:\code{X} contains the solution. If :math:\verb{m \\geq n}, the residual sum of squares
+Returned tensor \eqn{X} has shape \eqn{(\max(m, n) \times k)}. The first \eqn{n}
+rows of \eqn{X} contains the solution. If \eqn{m \geq n}, the residual sum of squares
 for the solution in each column is given by the sum of squares of elements in the
-remaining :math:\code{m - n} rows of that column.
+remaining \eqn{m - n} rows of that column.
 }
 \note{
-\preformatted{The case when :math:`m < n` is not supported on the GPU.
+\preformatted{The case when \eqn{m < n} is not supported on the GPU.
 }
 }
 \section{Signatures}{

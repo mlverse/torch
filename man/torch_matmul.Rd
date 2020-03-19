@@ -30,8 +30,8 @@ batched matrix multiply and removed after.  If the second argument is 1-dimensio
 1 is appended to its dimension for the purpose of the batched matrix multiple and removed after.
 The non-matrix (i.e. batch) dimensions are :ref:\verb{broadcasted <broadcasting-semantics>} (and thus
 must be broadcastable).  For example, if \code{input} is a
-:math:\verb{(j \\times 1 \\times n \\times m)} tensor and \code{other} is a :math:\verb{(k \\times m \\times p)}
-tensor, \code{out} will be an :math:\verb{(j \\times k \\times n \\times p)} tensor.
+\eqn{(j \times 1 \times n \times m)} tensor and \code{other} is a \eqn{(k \times m \times p)}
+tensor, \code{out} will be an \eqn{(j \times k \times n \times p)} tensor.
 }
 }
 \note{

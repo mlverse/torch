@@ -9,8 +9,8 @@
 \item{upscale_factor}{(int) factor to increase spatial resolution by}
 }
 \description{
-Rearranges elements in a tensor of shape :math:\verb{(*, C \\times r^2, H, W)} to a
-tensor of shape :math:\verb{(*, C, H \\times r, W \\times r)}.
+Rearranges elements in a tensor of shape \eqn{(*, C \times r^2, H, W)} to a
+tensor of shape \eqn{(*, C, H \times r, W \times r)}.
 }
 \details{
 See :class:\code{~torch.nn.PixelShuffle} for details.

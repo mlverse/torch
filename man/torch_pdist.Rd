@@ -15,12 +15,12 @@ This is identical to the upper triangular portion, excluding the diagonal, of
 if the rows are contiguous.
 }
 \details{
-If input has shape :math:\verb{N \\times M} then the output will have shape
-:math:\verb{\\frac\{1\}\{2\} N (N - 1)}.
+If input has shape \eqn{N \times M} then the output will have shape
+\eqn{\frac{1}{2} N (N - 1)}.
 
-This function is equivalent to \code{scipy.spatial.distance.pdist(input, 'minkowski', p=p)} if :math:\verb{p \\in (0, \\infty)}. When :math:\code{p = 0} it is
+This function is equivalent to \code{scipy.spatial.distance.pdist(input, 'minkowski', p=p)} if \eqn{p \in (0, \infty)}. When \eqn{p = 0} it is
 equivalent to \code{scipy.spatial.distance.pdist(input, 'hamming') * M}.
-When :math:\verb{p = \\infty}, the closest scipy function is
+When \eqn{p = \infty}, the closest scipy function is
 \verb{scipy.spatial.distance.pdist(xn, lambda x, y: np.abs(x - y).max())}.
 }
 \section{Signatures}{

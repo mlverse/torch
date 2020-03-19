@@ -15,7 +15,7 @@ Computes the eigenvalues and eigenvectors of a real square matrix.
 }
 \note{
 \preformatted{Since eigenvalues and eigenvectors might be complex, backward pass is supported only
-for [`torch_symeig`]
+for :func:`torch_symeig`
 }
 }
 \section{Signatures}{

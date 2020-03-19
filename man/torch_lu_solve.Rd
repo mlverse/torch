@@ -13,7 +13,7 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns the LU solve of the linear system :math:\code{Ax = b} using the partially pivoted
+Returns the LU solve of the linear system \eqn{Ax = b} using the partially pivoted
 LU factorization of A from :meth:\code{torch_lu}.
 }
 \section{Signatures}{

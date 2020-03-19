@@ -4,11 +4,11 @@
 \alias{torch_chain_matmul}
 \title{Chain_matmul}
 \description{
-Returns the matrix product of the :math:\code{N} 2-D tensors. This product is efficiently computed
+Returns the matrix product of the \eqn{N} 2-D tensors. This product is efficiently computed
 using the matrix chain order algorithm which selects the order in which incurs the lowest cost in terms
-of arithmetic operations (\verb{[CLRS]}_). Note that since this is a function to compute the product, :math:\code{N}
+of arithmetic operations (\verb{[CLRS]}_). Note that since this is a function to compute the product, \eqn{N}
 needs to be greater than or equal to 2; if equal to 2 then a trivial matrix-matrix product is returned.
-If :math:\code{N} is 1, then this is a no-op - the original matrix is returned as is.
+If \eqn{N} is 1, then this is a no-op - the original matrix is returned as is.
 }
 \details{
 \preformatted{Args:
@@ -16,8 +16,8 @@ If :math:\code{N} is 1, then this is a no-op - the original matrix is returned a
 
 
 Returns:
-    Tensor: if the :math:`i^\{th\}` tensor was of dimensions :math:`p_\{i\} \\times p_\{i + 1\}`, then the product
-    would be of dimensions :math:`p_\{1\} \\times p_\{N + 1\}`.
+    Tensor: if the \eqn{i^{th}} tensor was of dimensions \eqn{p_{i} \times p_{i + 1}}, then the product
+    would be of dimensions \eqn{p_{1} \times p_{N + 1}}.
 
 Example::
 

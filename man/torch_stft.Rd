@@ -35,8 +35,8 @@ expression:
                             \text{window}[k]\ \text{input}[m \times \text{hop\_length} + k]\ %
                             \exp\left(- j \frac{2 \pi \cdot \omega k}{\text{win\_length}}\right),
 }
-where :math:\code{m} is the index of the sliding window, and :math:\verb{\\omega} is
-the frequency that :math:\verb{0 \\leq \\omega < \\text\{n\\_fft\}}. When
+where \eqn{m} is the index of the sliding window, and \eqn{\omega} is
+the frequency that \eqn{0 \leq \omega < \text{n\_fft}}. When
 \code{onesided} is the default value \code{True},\preformatted{* `input` must be either a 1-D time sequence or a 2-D batch of time
   sequences.
 
@@ -48,31 +48,31 @@ the frequency that :math:\verb{0 \\leq \\omega < \\text\{n\\_fft\}}. When
 
 * `window` can be a 1-D tensor of size `win_length`, e.g., from
   :meth:`torch_hann_window`. If `window` is ``None`` (default), it is
-  treated as if having :math:`1` everywhere in the window. If
-  :math:`\\text\{win\\_length\} < \\text\{n\\_fft\}`, `window` will be padded on
+  treated as if having \eqn{1} everywhere in the window. If
+  \eqn{\text{win\_length} < \text{n\_fft}}, `window` will be padded on
   both sides to length `n_fft` before being applied.
 
 * If `center` is ``True`` (default), `input` will be padded on
-  both sides so that the :math:`t`-th frame is centered at time
-  :math:`t \\times \\text\{hop\\_length\}`. Otherwise, the :math:`t`-th frame
-  begins at time  :math:`t \\times \\text\{hop\\_length\}`.
+  both sides so that the \eqn{t}-th frame is centered at time
+  \eqn{t \times \text{hop\_length}}. Otherwise, the \eqn{t}-th frame
+  begins at time  \eqn{t \times \text{hop\_length}}.
 
 * `pad_mode` determines the padding method used on `input` when
   `center` is ``True``. See :meth:`torch_nn.functional.pad` for
   all available options. Default is ``"reflect"``.
 
-* If `onesided` is ``True`` (default), only values for :math:`\\omega`
-  in :math:`\\left[0, 1, 2, \\dots, \\left\\lfloor \\frac\{\\text\{n\\_fft\}\}\{2\} \\right\\rfloor + 1\\right]`
+* If `onesided` is ``True`` (default), only values for \eqn{\omega}
+  in \eqn{\left[0, 1, 2, \dots, \left\lfloor \frac{\text{n\_fft}}{2} \right\rfloor + 1\right]}
   are returned because the real-to-complex Fourier transform satisfies the
-  conjugate symmetry, i.e., :math:`X[m, \\omega] = X[m, \\text\{n\\_fft\} - \\omega]^*`.
+  conjugate symmetry, i.e., \eqn{X[m, \omega] = X[m, \text{n\_fft} - \omega]^*}.
 
 * If `normalized` is ``True`` (default is ``False``), the function
-  returns the normalized STFT results, i.e., multiplied by :math:`(\\text\{frame\\_length\})^\{-0.5\}`.
+  returns the normalized STFT results, i.e., multiplied by \eqn{(\text{frame\_length})^{-0.5}}.
 
 Returns the real and the imaginary parts together as one tensor of size
-:math:`(* \\times N \\times T \\times 2)`, where :math:`*` is the optional
-batch size of `input`, :math:`N` is the number of frequencies where
-STFT is applied, :math:`T` is the total number of frames used, and each pair
+\eqn{(* \times N \times T \times 2)}, where \eqn{*} is the optional
+batch size of `input`, \eqn{N} is the number of frequencies where
+STFT is applied, \eqn{T} is the total number of frames used, and each pair
 in the last dimension represents a complex number as the real part and the
 imaginary part.
 
