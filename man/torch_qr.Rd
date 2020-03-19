@@ -11,14 +11,12 @@
 \item{out}{(tuple, optional) tuple of \code{Q} and \code{R} tensors                satisfying :code:\code{input = torch.matmul(Q, R)}.                The dimensions of \code{Q} and \code{R} are :math:\verb{(*, m, k)} and :math:\verb{(*, k, n)}                respectively, where :math:\verb{k = \\min(m, n)} if :attr:\verb{some:} is \code{True} and                :math:\code{k = m} otherwise.}
 }
 \description{
-qr(input, some=True, out=None) -> (Tensor, Tensor)
-}
-\details{
 Computes the QR decomposition of a matrix or a batch of matrices \code{input},
 and returns a namedtuple (Q, R) of tensors such that :math:\verb{\\text\{input\} = Q R}
 with :math:\code{Q} being an orthogonal matrix or batch of orthogonal matrices and
 :math:\code{R} being an upper triangular matrix or batch of upper triangular matrices.
-
+}
+\details{
 If \code{some} is \code{True}, then this function returns the thin (reduced) QR factorization.
 Otherwise, if \code{some} is \code{False}, this function returns the complete QR factorization.
 
@@ -29,6 +27,12 @@ are large
 give you the same one across platforms - it will depend on your
 LAPACK implementation.
 }
+\section{Signatures}{
+
+
+qr(input, some=True, out=None) -> (Tensor, Tensor)
+}
+
 \examples{
 \dontrun{
 a = torch_tensor([[12., -51, 4], [6, 167, -68], [-4, 24, -41]])

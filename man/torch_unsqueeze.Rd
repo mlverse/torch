@@ -11,18 +11,22 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-unsqueeze(input, dim, out=None) -> Tensor
-}
-\details{
 Returns a new tensor with a dimension of size one inserted at the
 specified position.
-
+}
+\details{
 The returned tensor shares the same underlying data with this tensor.
 
 A \code{dim} value within the range \verb{[-input.dim() - 1, input.dim() + 1)}
 can be used. Negative \code{dim} will correspond to :meth:\code{unsqueeze}
 applied at \code{dim} = \code{dim + input.dim() + 1}.
 }
+\section{Signatures}{
+
+
+unsqueeze(input, dim, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_tensor([1, 2, 3, 4])

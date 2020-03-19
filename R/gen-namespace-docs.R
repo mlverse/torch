@@ -1,12 +1,15 @@
 #' Abs
 #'
-#' abs(input, out=None) -> Tensor
-#' 
 #' Computes the element-wise absolute value of the given `input` tensor.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = |\text{input}_{i}|
 #' }
+#'
+#' @section Signatures:
+#' 
+#' abs(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -24,13 +27,16 @@ NULL
 
 #' Angle
 #'
-#' angle(input, out=None) -> Tensor
-#' 
 #' Computes the element-wise angle (in radians) of the given `input` tensor.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = angle(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' angle(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -48,13 +54,16 @@ NULL
 
 #' Real
 #'
-#' real(input, out=None) -> Tensor
-#' 
 #' Computes the element-wise real value of the given `input` tensor.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = real(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' real(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -72,13 +81,16 @@ NULL
 
 #' Imag
 #'
-#' imag(input, out=None) -> Tensor
-#' 
 #' Computes the element-wise imag value of the given `input` tensor.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = imag(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' imag(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -96,13 +108,16 @@ NULL
 
 #' Conj
 #'
-#' conj(input, out=None) -> Tensor
-#' 
 #' Computes the element-wise conjugate of the given `input` tensor.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = conj(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' conj(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -120,13 +135,16 @@ NULL
 
 #' Acos
 #'
-#' acos(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the arccosine  of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \cos^{-1}(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' acos(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -146,12 +164,15 @@ NULL
 
 #' Avg_pool1d
 #'
-#' avg_pool1d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True) -> Tensor
-#' 
 #' Applies a 1D average pooling over an input signal composed of several
 #' input planes.
 #' 
 #' See :class:`~torch.nn.AvgPool1d` for details and output shape.
+#'
+#' @section Signatures:
+#' 
+#' avg_pool1d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True) -> Tensor
+#'
 #'
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iW)`
 #' @param kernel_size NA the size of the window. Can be a single number or a      tuple `(kW,)`
@@ -170,12 +191,15 @@ NULL
 
 #' Adaptive_avg_pool1d
 #'
-#' adaptive_avg_pool1d(input, output_size) -> Tensor
-#' 
 #' Applies a 1D adaptive average pooling over an input signal composed of
 #' several input planes.
 #' 
 #' See :class:`~torch.nn.AdaptiveAvgPool1d` for details and output shape.
+#'
+#' @section Signatures:
+#' 
+#' adaptive_avg_pool1d(input, output_size) -> Tensor
+#'
 #'
 #' @param output_size NA the target output size (single integer)
 #'
@@ -199,6 +223,8 @@ NULL
 #' }
 #' If `input` is of type FloatTensor or DoubleTensor, `other` must be
 #' a real number, otherwise it should be an integer.
+#'
+#' 
 #'
 #' @param input (Tensor) the input tensor.
 #' @param value (Number) the number to be added to each element of :attr:`input`
@@ -233,6 +259,8 @@ NULL
 #' If `other` is of type FloatTensor or DoubleTensor, `alpha` must be
 #' a real number, otherwise it should be an integer.
 #'
+#' 
+#'
 #' @param input (Tensor) the first input tensor
 #' @param alpha (Number) the scalar multiplier for :attr:`other`
 #' @param other (Tensor) the second input tensor
@@ -254,8 +282,6 @@ NULL
 
 #' Addmv
 #'
-#' addmv(beta=1, input, alpha=1, mat, vec, out=None) -> Tensor
-#' 
 #' Performs a matrix-vector product of the matrix `mat` and
 #' the vector `vec`.
 #' The vector `input` is added to the final result.
@@ -273,6 +299,11 @@ NULL
 #' }
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and
 #' `alpha` must be real numbers, otherwise they should be integers
+#'
+#' @section Signatures:
+#' 
+#' addmv(beta=1, input, alpha=1, mat, vec, out=None) -> Tensor
+#'
 #'
 #' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
 #' @param input (Tensor) vector to be added
@@ -297,8 +328,6 @@ NULL
 
 #' Addr
 #'
-#' addr(beta=1, input, alpha=1, vec1, vec2, out=None) -> Tensor
-#' 
 #' Performs the outer-product of vectors `vec1` and `vec2`
 #' and adds it to the matrix `input`.
 #' 
@@ -317,6 +346,11 @@ NULL
 #' 
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and
 #' `alpha` must be real numbers, otherwise they should be integers
+#'
+#' @section Signatures:
+#' 
+#' addr(beta=1, input, alpha=1, vec1, vec2, out=None) -> Tensor
+#'
 #'
 #' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
 #' @param input (Tensor) matrix to be added
@@ -341,8 +375,6 @@ NULL
 
 #' Allclose
 #'
-#' allclose(input, other, rtol=1e-05, atol=1e-08, equal_nan=False) -> bool
-#' 
 #' This function checks if all `input` and `other` satisfy the condition:
 #' 
 #' \deqn{
@@ -350,6 +382,11 @@ NULL
 #' }
 #' elementwise, for all elements of `input` and `other`. The behaviour of this function is analogous to
 #' `numpy.allclose <https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html>`_
+#'
+#' @section Signatures:
+#' 
+#' allclose(input, other, rtol=1e-05, atol=1e-08, equal_nan=False) -> bool
+#'
 #'
 #' @param input (Tensor) first tensor to compare
 #' @param other (Tensor) second tensor to compare
@@ -373,8 +410,6 @@ NULL
 
 #' Arange
 #'
-#' arange(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a 1-D tensor of size :math:`\left\lceil \frac{\text{end} - \text{start}}{\text{step}} \right\rceil`
 #' with values from the interval ``[start, end)`` taken with common difference
 #' `step` beginning from `start`.
@@ -386,6 +421,11 @@ NULL
 #' \deqn{
 #'     \text{out}_{{i+1}} = \text{out}_{i} + \text{step}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' arange(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param start (Number) the starting value for the set of points. Default: ``0``.
 #' @param end (Number) the ending value for the set of points
@@ -411,12 +451,15 @@ NULL
 
 #' Argmax
 #'
-#' argmax(input) -> LongTensor
-#' 
 #' Returns the indices of the maximum value of all elements in the `input` tensor.
 #' 
 #' This is the second value returned by :meth:`torch_max`. See its
 #' documentation for the exact semantics of this method.
+#'
+#' @section Signatures:
+#' 
+#' argmax(input) -> LongTensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #'
@@ -435,12 +478,15 @@ NULL
 
 #' Argmax
 #'
-#' argmax(input, dim, keepdim=False) -> LongTensor
-#' 
 #' Returns the indices of the maximum values of a tensor across a dimension.
 #' 
 #' This is the second value returned by :meth:`torch_max`. See its
 #' documentation for the exact semantics of this method.
+#'
+#' @section Signatures:
+#' 
+#' argmax(input, dim, keepdim=False) -> LongTensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to reduce. If ``None``, the argmax of the flattened input is returned.
@@ -461,12 +507,15 @@ NULL
 
 #' Argmin
 #'
-#' argmin(input) -> LongTensor
-#' 
 #' Returns the indices of the minimum value of all elements in the `input` tensor.
 #' 
 #' This is the second value returned by :meth:`torch_min`. See its
 #' documentation for the exact semantics of this method.
+#'
+#' @section Signatures:
+#' 
+#' argmin(input) -> LongTensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #'
@@ -485,12 +534,15 @@ NULL
 
 #' Argmin
 #'
-#' argmin(input, dim, keepdim=False, out=None) -> LongTensor
-#' 
 #' Returns the indices of the minimum values of a tensor across a dimension.
 #' 
 #' This is the second value returned by :meth:`torch_min`. See its
 #' documentation for the exact semantics of this method.
+#'
+#' @section Signatures:
+#' 
+#' argmin(input, dim, keepdim=False, out=None) -> LongTensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to reduce. If ``None``, the argmin of the flattened input is returned.
@@ -511,8 +563,6 @@ NULL
 
 #' As_strided
 #'
-#' as_strided(input, size, stride, storage_offset=0) -> Tensor
-#' 
 #' Create a view of an existing `torch_Tensor` `input` with specified
 #' `size`, `stride` and `storage_offset`.
 #' 
@@ -526,6 +576,11 @@ NULL
 #'     implemented with this function. Those functions, like
 #'     :meth:`torch_Tensor.expand`, are easier to read and are therefore more
 #'     advisable to use.
+#'
+#' @section Signatures:
+#' 
+#' as_strided(input, size, stride, storage_offset=0) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param size (tuple or ints) the shape of the output tensor
@@ -549,13 +604,16 @@ NULL
 
 #' Asin
 #'
-#' asin(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the arcsine  of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \sin^{-1}(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' asin(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -575,13 +633,16 @@ NULL
 
 #' Atan
 #'
-#' atan(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the arctangent  of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \tan^{-1}(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' atan(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -601,8 +662,6 @@ NULL
 
 #' Baddbmm
 #'
-#' baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
-#' 
 #' Performs a batch matrix-matrix product of matrices in `batch1`
 #' and `batch2`.
 #' `input` is added to the final result.
@@ -622,6 +681,11 @@ NULL
 #' }
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and
 #' `alpha` must be real numbers, otherwise they should be integers.
+#'
+#' @section Signatures:
+#' 
+#' baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
+#'
 #'
 #' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
 #' @param input (Tensor) the tensor to be added
@@ -646,8 +710,6 @@ NULL
 
 #' Bartlett_window
 #'
-#' bartlett_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Bartlett window function.
 #' 
 #' \deqn{
@@ -670,6 +732,11 @@ NULL
 #' .. note::
 #'     If `window_length` :math:`=1`, the returned window contains a single value 1.
 #'
+#' @section Signatures:
+#' 
+#' bartlett_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
+#'
 #' @param window_length (int) the size of returned window
 #' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
@@ -687,8 +754,6 @@ NULL
 
 #' Bernoulli
 #'
-#' bernoulli(input, *, generator=None, out=None) -> Tensor
-#' 
 #' Draws binary random numbers (0 or 1) from a Bernoulli distribution.
 #' 
 #' The `input` tensor should be a tensor containing probabilities
@@ -708,6 +773,11 @@ NULL
 #' 
 #' `out` can have integral ``dtype``, but `input` must have floating
 #' point ``dtype``.
+#'
+#' @section Signatures:
+#' 
+#' bernoulli(input, *, generator=None, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor of probability values for the Bernoulli distribution
 #' @param generator (:class:`torch.Generator`, optional) a pseudorandom number generator for sampling
@@ -732,8 +802,6 @@ NULL
 
 #' Bincount
 #'
-#' bincount(input, weights=None, minlength=0) -> Tensor
-#' 
 #' Count the frequency of each value in an array of non-negative ints.
 #' 
 #' The number of bins (size 1) is one larger than the largest value in
@@ -745,6 +813,11 @@ NULL
 #' ``out[n] += 1``.
 #' 
 #' .. include:: cuda_deterministic.rst
+#'
+#' @section Signatures:
+#' 
+#' bincount(input, weights=None, minlength=0) -> Tensor
+#'
 #'
 #' @param input (Tensor) 1-d int tensor
 #' @param weights (Tensor) optional, weight for each value in the input tensor.        Should be of same size as input tensor.
@@ -767,10 +840,13 @@ NULL
 
 #' Bitwise_not
 #'
-#' bitwise_not(input, out=None) -> Tensor
-#' 
 #' Computes the bitwise NOT of the given input tensor. The input tensor must be of
 #' integral or Boolean types. For bool tensors, it computes the logical NOT.
+#'
+#' @section Signatures:
+#' 
+#' bitwise_not(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -785,10 +861,13 @@ NULL
 
 #' Logical_not
 #'
-#' logical_not(input, out=None) -> Tensor
-#' 
 #' Computes the element-wise logical NOT of the given input tensor. If not specified, the output tensor will have the bool
 #' dtype. If the input tensor is not a bool tensor, zeros are treated as ``False`` and non-zeros are treated as ``True``.
+#'
+#' @section Signatures:
+#' 
+#' logical_not(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -809,10 +888,13 @@ NULL
 
 #' Logical_xor
 #'
-#' logical_xor(input, other, out=None) -> Tensor
-#' 
 #' Computes the element-wise logical XOR of the given input tensors. Zeros are treated as ``False`` and nonzeros are
 #' treated as ``True``.
+#'
+#' @section Signatures:
+#' 
+#' logical_xor(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param other (Tensor) the tensor to compute XOR with
@@ -837,8 +919,6 @@ NULL
 
 #' Blackman_window
 #'
-#' blackman_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Blackman window function.
 #' 
 #' \deqn{
@@ -858,6 +938,11 @@ NULL
 #' .. note::
 #'     If `window_length` :math:`=1`, the returned window contains a single value 1.
 #'
+#' @section Signatures:
+#' 
+#' blackman_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
+#'
 #' @param window_length (int) the size of returned window
 #' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
@@ -875,8 +960,6 @@ NULL
 
 #' Bmm
 #'
-#' bmm(input, mat2, out=None) -> Tensor
-#' 
 #' Performs a batch matrix-matrix product of matrices stored in `input`
 #' and `mat2`.
 #' 
@@ -892,6 +975,11 @@ NULL
 #' }
 #' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
 #'           For broadcasting matrix products, see [`torch_matmul`].
+#'
+#' @section Signatures:
+#' 
+#' bmm(input, mat2, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the first batch of matrices to be multiplied
 #' @param mat2 (Tensor) the second batch of matrices to be multiplied
@@ -913,9 +1001,7 @@ NULL
 
 #' Broadcast_tensors
 #'
-#' broadcast_tensors(*tensors) -> List of Tensors
-#' 
-#'     Broadcasts the given tensors according to :ref:`broadcasting-semantics`.
+#' Broadcasts the given tensors according to :ref:`broadcasting-semantics`.
 #' 
 #'     Args:
 #'         *tensors: any number of tensors of the same type
@@ -938,6 +1024,11 @@ NULL
 #'         tensor([[0, 1, 2],
 #'                 [0, 1, 2]])
 #'
+#' @section Signatures:
+#' 
+#' broadcast_tensors(*tensors) -> List of Tensors
+#'
+#'
 
 #'
 #' 
@@ -950,8 +1041,6 @@ NULL
 
 #' Cat
 #'
-#' cat(tensors, dim=0, out=None) -> Tensor
-#' 
 #' Concatenates the given sequence of `seq` tensors in the given dimension.
 #' All tensors must either have the same shape (except in the concatenating
 #' dimension) or be empty.
@@ -960,6 +1049,11 @@ NULL
 #' and [`torch_chunk`].
 #' 
 #' [`torch_cat`] can be best understood via examples.
+#'
+#' @section Signatures:
+#' 
+#' cat(tensors, dim=0, out=None) -> Tensor
+#'
 #'
 #' @param tensors (sequence of Tensors) any python sequence of tensors of the same type.        Non-empty tensors provided must have the same shape, except in the        cat dimension.
 #' @param dim (int, optional) the dimension over which the tensors are concatenated
@@ -981,14 +1075,17 @@ NULL
 
 #' Ceil
 #'
-#' ceil(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the ceil of the elements of `input`,
 #' the smallest integer greater than or equal to each element.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \left\lceil \text{input}_{i} \right\rceil = \left\lfloor \text{input}_{i} \right\rfloor + 1
 #' }
+#'
+#' @section Signatures:
+#' 
+#' ceil(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -1036,6 +1133,8 @@ NULL
 #' 
 #'     .. _`[CLRS]`: https://mitpress.mit.edu/books/introduction-algorithms-third-edition
 #'
+#' 
+#'
 
 #'
 #' 
@@ -1048,12 +1147,15 @@ NULL
 
 #' Chunk
 #'
-#' chunk(input, chunks, dim=0) -> List of Tensors
-#' 
 #' Splits a tensor into a specific number of chunks.
 #' 
 #' Last chunk will be smaller if the tensor size along the given dimension
 #' `dim` is not divisible by `chunks`.
+#'
+#' @section Signatures:
+#' 
+#' chunk(input, chunks, dim=0) -> List of Tensors
+#'
 #'
 #' @param input (Tensor) the tensor to split
 #' @param chunks (int) number of chunks to return
@@ -1069,8 +1171,6 @@ NULL
 
 #' Clamp
 #'
-#' clamp(input, min, max, out=None) -> Tensor
-#' 
 #' Clamp all elements in `input` into the range `[` `min`, `max` `]` and return
 #' a resulting tensor:
 #' 
@@ -1083,6 +1183,11 @@ NULL
 #' }
 #' If `input` is of type `FloatTensor` or `DoubleTensor`, args `min`
 #' and `max` must be real numbers, otherwise they should be integers.
+#'
+#' @section Signatures:
+#' 
+#' clamp(input, min, max, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param min (Number) lower-bound of the range to be clamped to
@@ -1104,12 +1209,15 @@ NULL
 
 #' Clamp
 #'
-#' clamp(input, *, min, out=None) -> Tensor
-#' 
 #' Clamps all elements in `input` to be larger or equal `min`.
 #' 
 #' If `input` is of type `FloatTensor` or `DoubleTensor`, `value`
 #' should be a real number, otherwise it should be an integer.
+#'
+#' @section Signatures:
+#' 
+#' clamp(input, *, min, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param value (Number) minimal value of each element in the output
@@ -1130,12 +1238,15 @@ NULL
 
 #' Clamp
 #'
-#' clamp(input, *, max, out=None) -> Tensor
-#' 
 #' Clamps all elements in `input` to be smaller or equal `max`.
 #' 
 #' If `input` is of type `FloatTensor` or `DoubleTensor`, `value`
 #' should be a real number, otherwise it should be an integer.
+#'
+#' @section Signatures:
+#' 
+#' clamp(input, *, max, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param value (Number) maximal value of each element in the output
@@ -1156,14 +1267,17 @@ NULL
 
 #' Conv1d
 #'
-#' conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
-#' 
 #' Applies a 1D convolution over an input signal composed of several input
 #' planes.
 #' 
 #' See :class:`~torch.nn.Conv1d` for details and output shape.
 #' 
 #' .. include:: cudnn_deterministic.rst
+#'
+#' @section Signatures:
+#' 
+#' conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
+#'
 #'
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iW)`
 #' @param weight NA filters of shape :math:`(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kW)`
@@ -1183,14 +1297,17 @@ NULL
 
 #' Conv2d
 #'
-#' conv2d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
-#' 
 #' Applies a 2D convolution over an input image composed of several input
 #' planes.
 #' 
 #' See :class:`~torch.nn.Conv2d` for details and output shape.
 #' 
 #' .. include:: cudnn_deterministic.rst
+#'
+#' @section Signatures:
+#' 
+#' conv2d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
+#'
 #'
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iH , iW)`
 #' @param weight NA filters of shape :math:`(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kH , kW)`
@@ -1210,14 +1327,17 @@ NULL
 
 #' Conv3d
 #'
-#' conv3d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
-#' 
 #' Applies a 3D convolution over an input image composed of several input
 #' planes.
 #' 
 #' See :class:`~torch.nn.Conv3d` for details and output shape.
 #' 
 #' .. include:: cudnn_deterministic.rst
+#'
+#' @section Signatures:
+#' 
+#' conv3d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
+#'
 #'
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iT , iH , iW)`
 #' @param weight NA filters of shape :math:`(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kT , kH , kW)`
@@ -1240,6 +1360,8 @@ NULL
 #' Applies a 1-dimensional sequence convolution over an input sequence.
 #' Input and output dimensions are (Time, Batch, Channels) - hence TBC.
 #'
+#' 
+#'
 #' @param input NA input tensor of shape :math:`(\text{sequence length} \times batch \times \text{in\_channels})`
 #' @param weight NA filter of shape (:math:`\text{kernel width} \times \text{in\_channels} \times \text{out\_channels}`)
 #' @param bias NA bias of shape (:math:`\text{out\_channels}`)
@@ -1255,14 +1377,17 @@ NULL
 
 #' Conv_transpose1d
 #'
-#' conv_transpose1d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
-#' 
 #' Applies a 1D transposed convolution operator over an input signal
 #' composed of several input planes, sometimes also called "deconvolution".
 #' 
 #' See :class:`~torch.nn.ConvTranspose1d` for details and output shape.
 #' 
 #' .. include:: cudnn_deterministic.rst
+#'
+#' @section Signatures:
+#' 
+#' conv_transpose1d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
+#'
 #'
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iW)`
 #' @param weight NA filters of shape :math:`(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kW)`
@@ -1283,14 +1408,17 @@ NULL
 
 #' Conv_transpose2d
 #'
-#' conv_transpose2d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
-#' 
 #' Applies a 2D transposed convolution operator over an input image
 #' composed of several input planes, sometimes also called "deconvolution".
 #' 
 #' See :class:`~torch.nn.ConvTranspose2d` for details and output shape.
 #' 
 #' .. include:: cudnn_deterministic.rst
+#'
+#' @section Signatures:
+#' 
+#' conv_transpose2d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
+#'
 #'
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iH , iW)`
 #' @param weight NA filters of shape :math:`(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kH , kW)`
@@ -1311,14 +1439,17 @@ NULL
 
 #' Conv_transpose3d
 #'
-#' conv_transpose3d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
-#' 
 #' Applies a 3D transposed convolution operator over an input image
 #' composed of several input planes, sometimes also called "deconvolution"
 #' 
 #' See :class:`~torch.nn.ConvTranspose3d` for details and output shape.
 #' 
 #' .. include:: cudnn_deterministic.rst
+#'
+#' @section Signatures:
+#' 
+#' conv_transpose3d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
+#'
 #'
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iT , iH , iW)`
 #' @param weight NA filters of shape :math:`(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kT , kH , kW)`
@@ -1339,13 +1470,16 @@ NULL
 
 #' Cos
 #'
-#' cos(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the cosine  of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \cos(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' cos(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -1365,14 +1499,17 @@ NULL
 
 #' Cosh
 #'
-#' cosh(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the hyperbolic cosine  of the elements of
 #' `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \cosh(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' cosh(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -1392,8 +1529,6 @@ NULL
 
 #' Cumsum
 #'
-#' cumsum(input, dim, out=None, dtype=None) -> Tensor
-#' 
 #' Returns the cumulative sum of elements of `input` in the dimension
 #' `dim`.
 #' 
@@ -1403,6 +1538,11 @@ NULL
 #' \deqn{
 #'     y_i = x_1 + x_2 + x_3 + \dots + x_i
 #' }
+#'
+#' @section Signatures:
+#' 
+#' cumsum(input, dim, out=None, dtype=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to do the operation over
@@ -1424,8 +1564,6 @@ NULL
 
 #' Cumprod
 #'
-#' cumprod(input, dim, out=None, dtype=None) -> Tensor
-#' 
 #' Returns the cumulative product of elements of `input` in the dimension
 #' `dim`.
 #' 
@@ -1435,6 +1573,11 @@ NULL
 #' \deqn{
 #'     y_i = x_1 \times x_2\times x_3\times \dots \times x_i
 #' }
+#'
+#' @section Signatures:
+#' 
+#' cumprod(input, dim, out=None, dtype=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to do the operation over
@@ -1458,8 +1601,6 @@ NULL
 
 #' Det
 #'
-#' det(input) -> Tensor
-#' 
 #' Calculates determinant of a square matrix or batches of square matrices.
 #' 
 #' .. note::
@@ -1467,6 +1608,11 @@ NULL
 #'     not invertible. In this case, double backward through :meth:`det` will be
 #'     unstable in when `input` doesn't have distinct singular values. See
 #'     :meth:`~torch.svd` for details.
+#'
+#' @section Signatures:
+#' 
+#' det(input) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more                batch dimensions.
 #'
@@ -1487,8 +1633,6 @@ NULL
 
 #' Diag_embed
 #'
-#' diag_embed(input, offset=0, dim1=-2, dim2=-1) -> Tensor
-#' 
 #' Creates a tensor whose diagonals of certain 2D planes (specified by
 #' `dim1` and `dim2`) are filled by `input`.
 #' To facilitate creating batched diagonal matrices, the 2D planes formed by
@@ -1511,6 +1655,11 @@ NULL
 #' :meth:`torch_diagonal` has different default dimensions, so those
 #' need to be explicitly specified.
 #'
+#' @section Signatures:
+#' 
+#' diag_embed(input, offset=0, dim1=-2, dim2=-1) -> Tensor
+#'
+#'
 #' @param input (Tensor) the input tensor. Must be at least 1-dimensional.
 #' @param offset (int, optional) which diagonal to consider. Default: 0        (main diagonal).
 #' @param dim1 (int, optional) first dimension with respect to which to        take diagonal. Default: -2.
@@ -1531,8 +1680,6 @@ NULL
 
 #' Diagflat
 #'
-#' diagflat(input, offset=0) -> Tensor
-#' 
 #' - If `input` is a vector (1-D tensor), then returns a 2-D square tensor
 #'   with the elements of `input` as the diagonal.
 #' - If `input` is a tensor with more than one dimension, then returns a
@@ -1543,6 +1690,11 @@ NULL
 #' - If `offset` = 0, it is the main diagonal.
 #' - If `offset` > 0, it is above the main diagonal.
 #' - If `offset` < 0, it is below the main diagonal.
+#'
+#' @section Signatures:
+#' 
+#' diagflat(input, offset=0) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param offset (int, optional) the diagonal to consider. Default: 0 (main        diagonal).
@@ -1557,8 +1709,6 @@ NULL
 
 #' Diagonal
 #'
-#' diagonal(input, offset=0, dim1=0, dim2=1) -> Tensor
-#' 
 #' Returns a partial view of `input` with the its diagonal elements
 #' with respect to `dim1` and `dim2` appended as a dimension
 #' at the end of the shape.
@@ -1573,6 +1723,11 @@ NULL
 #' the same arguments yields a diagonal matrix with the diagonal entries
 #' of the input. However, :meth:`torch_diag_embed` has different default
 #' dimensions, so those need to be explicitly specified.
+#'
+#' @section Signatures:
+#' 
+#' diagonal(input, offset=0, dim1=0, dim2=1) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor. Must be at least 2-dimensional.
 #' @param offset (int, optional) which diagonal to consider. Default: 0        (main diagonal).
@@ -1589,8 +1744,6 @@ NULL
 
 #' Div
 #'
-#' div(input, other, out=None) -> Tensor
-#' 
 #' Divides each element of the input ``input`` with the scalar ``other`` and
 #' returns a new resulting tensor.
 #' 
@@ -1603,6 +1756,11 @@ NULL
 #' ``out`` is specified, the result must be :ref:`castable <type-promotion-doc>`
 #' to the :class:`torch_dtype` of the specified output tensor. Integral division
 #' by zero leads to undefined behavior.
+#'
+#' @section Signatures:
+#' 
+#' div(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param other (Number) the number to be divided to each element of ``input``
@@ -1622,8 +1780,6 @@ NULL
 
 #' Div
 #'
-#' div(input, other, out=None) -> Tensor
-#' 
 #' Each element of the tensor ``input`` is divided by each element of the tensor
 #' ``other``. The resulting tensor is returned.
 #' 
@@ -1637,6 +1793,11 @@ NULL
 #' <type-promotion-doc>`. If ``out`` is specified, the result must be
 #' :ref:`castable <type-promotion-doc>` to the :class:`torch_dtype` of the
 #' specified output tensor. Integral division by zero leads to undefined behavior.
+#'
+#' @section Signatures:
+#' 
+#' div(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the numerator tensor
 #' @param other (Tensor) the denominator tensor
@@ -1658,13 +1819,16 @@ NULL
 
 #' Dot
 #'
-#' dot(input, tensor) -> Tensor
-#' 
 #' Computes the dot product (inner product) of two tensors.
 #' 
 #' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
 #' 
 #' Example::
+#'
+#' @section Signatures:
+#' 
+#' dot(input, tensor) -> Tensor
+#'
 #'
 
 #'
@@ -1681,10 +1845,13 @@ NULL
 
 #' Einsum
 #'
-#' einsum(equation, *operands) -> Tensor
-#' 
 #' This function provides a way of computing multilinear expressions (i.e. sums of products) using the
 #' Einstein summation convention.
+#'
+#' @section Signatures:
+#' 
+#' einsum(equation, *operands) -> Tensor
+#'
 #'
 #' @param equation (string) The equation is given in terms of lower case letters (indices) to be associated           with each dimension of the operands and result. The left hand side lists the operands           dimensions, separated by commas. There should be one index letter per tensor dimension.           The right hand side follows after `->` and gives the indices for the output.           If the `->` and right hand side are omitted, it implicitly defined as the alphabetically           sorted list of all indices appearing exactly once in the left hand side.           The indices not apprearing in the output are summed over after multiplying the operands           entries.           If an index appears several times for the same operand, a diagonal is taken.           Ellipses `...` represent a fixed number of dimensions. If the right hand side is inferred,           the ellipsis dimensions are at the beginning of the output.
 #' @param operands (Tensor) The operands to compute the Einstein sum of.
@@ -1699,10 +1866,13 @@ NULL
 
 #' Empty
 #'
-#' empty(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False, pin_memory=False) -> Tensor
-#' 
 #' Returns a tensor filled with uninitialized data. The shape of the tensor is
 #' defined by the variable argument `size`.
+#'
+#' @section Signatures:
+#' 
+#' empty(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False, pin_memory=False) -> Tensor
+#'
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
@@ -1725,11 +1895,14 @@ NULL
 
 #' Empty_like
 #'
-#' empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns an uninitialized tensor with the same size as `input`.
 #' ``torch_empty_like(input)`` is equivalent to
 #' ``torch_empty(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
+#'
+#' @section Signatures:
+#' 
+#' empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
@@ -1750,8 +1923,6 @@ NULL
 
 #' Empty_strided
 #'
-#' empty_strided(size, stride, dtype=None, layout=None, device=None, requires_grad=False, pin_memory=False) -> Tensor
-#' 
 #' Returns a tensor filled with uninitialized data. The shape and strides of the tensor is
 #' defined by the variable argument `size` and `stride` respectively.
 #' ``torch_empty_strided(size, stride)`` is equivalent to
@@ -1762,6 +1933,11 @@ NULL
 #'     location. As a result, in-place operations (especially ones that are
 #'     vectorized) may result in incorrect behavior. If you need to write to
 #'     the tensors, please clone them first.
+#'
+#' @section Signatures:
+#' 
+#' empty_strided(size, stride, dtype=None, layout=None, device=None, requires_grad=False, pin_memory=False) -> Tensor
+#'
 #'
 #' @param size (tuple of ints) the shape of the output tensor
 #' @param stride (tuple of ints) the strides of the output tensor
@@ -1787,13 +1963,16 @@ NULL
 
 #' Erf
 #'
-#' erf(input, out=None) -> Tensor
-#' 
 #' Computes the error function of each element. The error function is defined as follows:
 #' 
 #' \deqn{
 #'     \mathrm{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt
 #' }
+#'
+#' @section Signatures:
+#' 
+#' erf(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -1811,14 +1990,17 @@ NULL
 
 #' Erfc
 #'
-#' erfc(input, out=None) -> Tensor
-#' 
 #' Computes the complementary error function of each element of `input`.
 #' The complementary error function is defined as follows:
 #' 
 #' \deqn{
 #'     \mathrm{erfc}(x) = 1 - \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt
 #' }
+#'
+#' @section Signatures:
+#' 
+#' erfc(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -1836,14 +2018,17 @@ NULL
 
 #' Exp
 #'
-#' exp(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the exponential of the elements
 #' of the input tensor `input`.
 #' 
 #' \deqn{
 #'     y_{i} = e^{x_{i}}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' exp(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -1861,14 +2046,17 @@ NULL
 
 #' Expm1
 #'
-#' expm1(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the exponential of the elements minus 1
 #' of `input`.
 #' 
 #' \deqn{
 #'     y_{i} = e^{x_{i}} - 1
 #' }
+#'
+#' @section Signatures:
+#' 
+#' expm1(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -1886,9 +2074,12 @@ NULL
 
 #' Eye
 #'
-#' eye(n, m=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a 2-D tensor with ones on the diagonal and zeros elsewhere.
+#'
+#' @section Signatures:
+#' 
+#' eye(n, m=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param n (int) the number of rows
 #' @param m (int, optional) the number of columns with default being :attr:`n`
@@ -1911,9 +2102,12 @@ NULL
 
 #' Flatten
 #'
-#' flatten(input, start_dim=0, end_dim=-1) -> Tensor
-#' 
 #' Flattens a contiguous range of dims in a tensor.
+#'
+#' @section Signatures:
+#' 
+#' flatten(input, start_dim=0, end_dim=-1) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param start_dim (int) the first dim to flatten
@@ -1934,14 +2128,17 @@ NULL
 
 #' Floor
 #'
-#' floor(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the floor of the elements of `input`,
 #' the largest integer less than or equal to each element.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \left\lfloor \text{input}_{i} \right\rfloor
 #' }
+#'
+#' @section Signatures:
+#' 
+#' floor(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -1961,14 +2158,17 @@ NULL
 
 #' Frac
 #'
-#' frac(input, out=None) -> Tensor
-#' 
 #' Computes the fractional portion of each element in `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \text{input}_{i} - \left\lfloor |\text{input}_{i}| \right\rfloor * \operatorname{sgn}(\text{input}_{i})
 #' }
 #' Example::
+#'
+#' @section Signatures:
+#' 
+#' frac(input, out=None) -> Tensor
+#'
 #'
 
 #'
@@ -1985,9 +2185,12 @@ NULL
 
 #' Full
 #'
-#' full(size, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor of size `size` filled with `fill_value`.
+#'
+#' @section Signatures:
+#' 
+#' full(size, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param size (int...) a list, tuple, or :class:`torch.Size` of integers defining the        shape of the output tensor.
 #' @param fill_value NA the number to fill the output tensor with.
@@ -2010,11 +2213,14 @@ NULL
 
 #' Full_like
 #'
-#' full_like(input, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor with the same size as `input` filled with `fill_value`.
 #' ``torch_full_like(input, fill_value)`` is equivalent to
 #' ``torch_full(input.size(), fill_value, dtype=input.dtype, layout=input.layout, device=input.device)``.
+#'
+#' @section Signatures:
+#' 
+#' full_like(input, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
 #' @param fill_value NA the number to fill the output tensor with.
@@ -2033,8 +2239,6 @@ NULL
 
 #' Hann_window
 #'
-#' hann_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Hann window function.
 #' 
 #' \deqn{
@@ -2055,6 +2259,11 @@ NULL
 #' .. note::
 #'     If `window_length` :math:`=1`, the returned window contains a single value 1.
 #'
+#' @section Signatures:
+#' 
+#' hann_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
+#'
 #' @param window_length (int) the size of returned window
 #' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
@@ -2072,8 +2281,6 @@ NULL
 
 #' Hamming_window
 #'
-#' hamming_window(window_length, periodic=True, alpha=0.54, beta=0.46, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Hamming window function.
 #' 
 #' \deqn{
@@ -2096,6 +2303,11 @@ NULL
 #' .. note::
 #'     This is a generalized version of :meth:`torch_hann_window`.
 #'
+#' @section Signatures:
+#' 
+#' hamming_window(window_length, periodic=True, alpha=0.54, beta=0.46, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
+#'
 #' @param window_length (int) the size of returned window
 #' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
 #' @param alpha (float, optional) The coefficient :math:`\alpha` in the equation above
@@ -2115,13 +2327,16 @@ NULL
 
 #' Ger
 #'
-#' ger(input, vec2, out=None) -> Tensor
-#' 
 #' Outer product of `input` and `vec2`.
 #' If `input` is a vector of size :math:`n` and `vec2` is a vector of
 #' size :math:`m`, then `out` must be a matrix of size :math:`(n \times m)`.
 #' 
 #' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' ger(input, vec2, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) 1-D input vector
 #' @param vec2 (Tensor) 1-D input vector
@@ -2142,8 +2357,6 @@ NULL
 
 #' Fft
 #'
-#' fft(input, signal_ndim, normalized=False) -> Tensor
-#' 
 #' Complex-to-complex Discrete Fourier Transform
 #' 
 #' This method computes the complex-to-complex discrete Fourier transform.
@@ -2180,6 +2393,11 @@ NULL
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
+#' @section Signatures:
+#' 
+#' fft(input, signal_ndim, normalized=False) -> Tensor
+#'
+#'
 #' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``        dimensions
 #' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
@@ -2205,8 +2423,6 @@ NULL
 
 #' Ifft
 #'
-#' ifft(input, signal_ndim, normalized=False) -> Tensor
-#' 
 #' Complex-to-complex Inverse Discrete Fourier Transform
 #' 
 #' This method computes the complex-to-complex inverse discrete Fourier
@@ -2242,6 +2458,11 @@ NULL
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
+#' @section Signatures:
+#' 
+#' ifft(input, signal_ndim, normalized=False) -> Tensor
+#'
+#'
 #' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``        dimensions
 #' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
@@ -2262,8 +2483,6 @@ NULL
 
 #' Rfft
 #'
-#' rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor
-#' 
 #' Real-to-complex Discrete Fourier Transform
 #' 
 #' This method computes the real-to-complex discrete Fourier transform. It is
@@ -2302,6 +2521,11 @@ NULL
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
+#' @section Signatures:
+#' 
+#' rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor
+#'
+#'
 #' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` dimensions
 #' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
@@ -2322,8 +2546,6 @@ NULL
 
 #' Irfft
 #'
-#' irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) -> Tensor
-#' 
 #' Complex-to-real Inverse Discrete Fourier Transform
 #' 
 #' This method computes the complex-to-real inverse discrete Fourier transform.
@@ -2374,6 +2596,11 @@ NULL
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
+#' @section Signatures:
+#' 
+#' irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) -> Tensor
+#'
+#'
 #' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``        dimensions
 #' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
@@ -2403,8 +2630,6 @@ NULL
 
 #' Inverse
 #'
-#' inverse(input, out=None) -> Tensor
-#' 
 #' Takes the inverse of the square matrix `input`. `input` can be batches
 #' of 2D square tensors, in which case this function would return a tensor composed of
 #' individual inverses.
@@ -2413,6 +2638,11 @@ NULL
 #' 
 #'     Irrespective of the original strides, the returned tensors will be
 #'     transposed, i.e. with strides like `input.contiguous().transpose(-2, -1).stride()`
+#'
+#' @section Signatures:
+#' 
+#' inverse(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor of size :math:`(*, n, n)` where `*` is zero or more                    batch dimensions
 #' @param out (Tensor, optional) the output tensor.
@@ -2441,6 +2671,8 @@ NULL
 #'
 #' Returns a new tensor with boolean elements representing if each element is `NaN` or not.
 #'
+#' 
+#'
 #' @param input (Tensor) A tensor to check
 #'
 #' @examples
@@ -2456,10 +2688,13 @@ NULL
 
 #' Is_floating_point
 #'
-#' is_floating_point(input) -> (bool)
-#' 
 #' Returns True if the data type of `input` is a floating point data type i.e.,
 #' one of ``torch_float64``, ``torch.float32`` and ``torch.float16``.
+#'
+#' @section Signatures:
+#' 
+#' is_floating_point(input) -> (bool)
+#'
 #'
 #' @param input (Tensor) the PyTorch tensor to test
 #'
@@ -2473,8 +2708,6 @@ NULL
 
 #' Kthvalue
 #'
-#' kthvalue(input, k, dim=None, keepdim=False, out=None) -> (Tensor, LongTensor)
-#' 
 #' Returns a namedtuple ``(values, indices)`` where ``values`` is the `k` th
 #' smallest element of each row of the `input` tensor in the given dimension
 #' `dim`. And ``indices`` is the index location of each element found.
@@ -2486,6 +2719,11 @@ NULL
 #' they are of size 1. Otherwise, `dim` is squeezed
 #' (see [`torch_squeeze`), resulting in both the `values`] and
 #' `indices` tensors having 1 fewer dimension than the `input` tensor.
+#'
+#' @section Signatures:
+#' 
+#' kthvalue(input, k, dim=None, keepdim=False, out=None) -> (Tensor, LongTensor)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param k (int) k for the k-th smallest element
@@ -2511,12 +2749,15 @@ NULL
 
 #' Linspace
 #'
-#' linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a one-dimensional tensor of `steps`
 #' equally spaced points between `start` and `end`.
 #' 
 #' The output tensor is 1-D of size `steps`.
+#'
+#' @section Signatures:
+#' 
+#' linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param start (float) the starting value for the set of points
 #' @param end (float) the ending value for the set of points
@@ -2543,14 +2784,17 @@ NULL
 
 #' Log
 #'
-#' log(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the natural logarithm of the elements
 #' of `input`.
 #' 
 #' \deqn{
 #'     y_{i} = \log_{e} (x_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' log(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -2570,14 +2814,17 @@ NULL
 
 #' Log10
 #'
-#' log10(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the logarithm to the base 10 of the elements
 #' of `input`.
 #' 
 #' \deqn{
 #'     y_{i} = \log_{10} (x_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' log10(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -2597,8 +2844,6 @@ NULL
 
 #' Log1p
 #'
-#' log1p(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the natural logarithm of (1 + `input`).
 #' 
 #' \deqn{
@@ -2606,6 +2851,11 @@ NULL
 #' }
 #' .. note:: This function is more accurate than [`torch_log`] for small
 #'           values of `input`
+#'
+#' @section Signatures:
+#' 
+#' log1p(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -2625,14 +2875,17 @@ NULL
 
 #' Log2
 #'
-#' log2(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the logarithm to the base 2 of the elements
 #' of `input`.
 #' 
 #' \deqn{
 #'     y_{i} = \log_{2} (x_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' log2(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -2652,8 +2905,6 @@ NULL
 
 #' Logdet
 #'
-#' logdet(input) -> Tensor
-#' 
 #' Calculates log determinant of a square matrix or batches of square matrices.
 #' 
 #' .. note::
@@ -2665,6 +2916,11 @@ NULL
 #'     is not invertible. In this case, double backward through :meth:`logdet` will
 #'     be unstable in when `input` doesn't have distinct singular values. See
 #'     :meth:`~torch.svd` for details.
+#'
+#' @section Signatures:
+#' 
+#' logdet(input) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more                batch dimensions.
 #'
@@ -2686,13 +2942,16 @@ NULL
 
 #' Logspace
 #'
-#' logspace(start, end, steps=100, base=10.0, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a one-dimensional tensor of `steps` points
 #' logarithmically spaced with base `base` between
 #' :math:`{\text{base}}^{\text{start}}` and :math:`{\text{base}}^{\text{end}}`.
 #' 
 #' The output tensor is 1-D of size `steps`.
+#'
+#' @section Signatures:
+#' 
+#' logspace(start, end, steps=100, base=10.0, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param start (float) the starting value for the set of points
 #' @param end (float) the ending value for the set of points
@@ -2737,6 +2996,8 @@ NULL
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #'
+#' 
+#'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
@@ -2756,8 +3017,6 @@ NULL
 
 #' Matmul
 #'
-#' matmul(input, other, out=None) -> Tensor
-#' 
 #' Matrix product of two tensors.
 #' 
 #' The behavior depends on the dimensionality of the tensors as follows:
@@ -2782,6 +3041,11 @@ NULL
 #' .. note::
 #' 
 #'     The 1-dimensional dot product version of this function does not support an `out` parameter.
+#'
+#' @section Signatures:
+#' 
+#' matmul(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the first tensor to be multiplied
 #' @param other (Tensor) the second tensor to be multiplied
@@ -2819,8 +3083,6 @@ NULL
 
 #' Matrix_rank
 #'
-#' matrix_rank(input, tol=None, symmetric=False) -> Tensor
-#' 
 #' Returns the numerical rank of a 2-D tensor. The method to compute the
 #' matrix rank is done using SVD by default. If `symmetric` is ``True``,
 #' then `input` is assumed to be symmetric, and the computation of the
@@ -2831,6 +3093,11 @@ NULL
 #' specified, `tol` is set to ``S.max() * max(S.size()) * eps`` where `S` is the
 #' singular values (or the eigenvalues when `symmetric` is ``True``), and ``eps``
 #' is the epsilon value for the datatype of `input`.
+#'
+#' @section Signatures:
+#' 
+#' matrix_rank(input, tol=None, symmetric=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input 2-D tensor
 #' @param tol (float, optional) the tolerance value. Default: ``None``
@@ -2853,8 +3120,6 @@ NULL
 
 #' Matrix_power
 #'
-#' matrix_power(input, n) -> Tensor
-#' 
 #' Returns the matrix raised to the power `n` for square matrices.
 #' For batch of matrices, each individual matrix is raised to the power `n`.
 #' 
@@ -2862,6 +3127,11 @@ NULL
 #' raised to the power `n`.  For a batch of matrices, the batched inverse
 #' (if invertible) is raised to the power `n`. If `n` is 0, then an identity matrix
 #' is returned.
+#'
+#' @section Signatures:
+#' 
+#' matrix_power(input, n) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param n (int) the power to raise the matrix to
@@ -2881,9 +3151,12 @@ NULL
 
 #' Max
 #'
-#' max(input) -> Tensor
-#' 
 #' Returns the maximum value of all elements in the `input` tensor.
+#'
+#' @section Signatures:
+#' 
+#' max(input) -> Tensor
+#'
 #'
 #' @param {input} NA 
 #'
@@ -2902,8 +3175,6 @@ NULL
 
 #' Max
 #'
-#' max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
-#' 
 #' Returns a namedtuple ``(values, indices)`` where ``values`` is the maximum
 #' value of each row of the `input` tensor in the given dimension
 #' `dim`. And ``indices`` is the index location of each maximum value found
@@ -2913,6 +3184,11 @@ NULL
 #' as `input` except in the dimension `dim` where they are of size 1.
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting
 #' in the output tensors having 1 fewer dimension than `input`.
+#'
+#' @section Signatures:
+#' 
+#' max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
+#'
 #'
 #' @param {input} NA 
 #' @param {dim} NA 
@@ -2934,8 +3210,6 @@ NULL
 
 #' Max
 #'
-#' max(input, other, out=None) -> Tensor
-#' 
 #' Each element of the tensor `input` is compared with the corresponding
 #' element of the tensor `other` and an element-wise maximum is taken.
 #' 
@@ -2947,6 +3221,11 @@ NULL
 #' }
 #' .. note:: When the shapes do not match, the shape of the returned output tensor
 #'           follows the :ref:`broadcasting rules <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' max(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param other (Tensor) the second input tensor
@@ -2969,9 +3248,12 @@ NULL
 
 #' Mean
 #'
-#' mean(input) -> Tensor
-#' 
 #' Returns the mean value of all elements in the `input` tensor.
+#'
+#' @section Signatures:
+#' 
+#' mean(input) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #'
@@ -2990,8 +3272,6 @@ NULL
 
 #' Mean
 #'
-#' mean(input, dim, keepdim=False, out=None) -> Tensor
-#' 
 #' Returns the mean value of each row of the `input` tensor in the given
 #' dimension `dim`. If `dim` is a list of dimensions,
 #' reduce over all of them.
@@ -3001,6 +3281,11 @@ NULL
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
+#'
+#' @section Signatures:
+#' 
+#' mean(input, dim, keepdim=False, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
@@ -3023,9 +3308,12 @@ NULL
 
 #' Median
 #'
-#' median(input) -> Tensor
-#' 
 #' Returns the median value of all elements in the `input` tensor.
+#'
+#' @section Signatures:
+#' 
+#' median(input) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #'
@@ -3044,8 +3332,6 @@ NULL
 
 #' Median
 #'
-#' median(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor)
-#' 
 #' Returns a namedtuple ``(values, indices)`` where ``values`` is the median
 #' value of each row of the `input` tensor in the given dimension
 #' `dim`. And ``indices`` is the index location of each median value found.
@@ -3056,6 +3342,11 @@ NULL
 #' as `input` except in the dimension `dim` where they are of size 1.
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in
 #' the outputs tensor having 1 fewer dimension than `input`.
+#'
+#' @section Signatures:
+#' 
+#' median(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to reduce.
@@ -3078,9 +3369,12 @@ NULL
 
 #' Min
 #'
-#' min(input) -> Tensor
-#' 
 #' Returns the minimum value of all elements in the `input` tensor.
+#'
+#' @section Signatures:
+#' 
+#' min(input) -> Tensor
+#'
 #'
 #' @param {input} NA 
 #'
@@ -3099,8 +3393,6 @@ NULL
 
 #' Min
 #'
-#' min(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
-#' 
 #' Returns a namedtuple ``(values, indices)`` where ``values`` is the minimum
 #' value of each row of the `input` tensor in the given dimension
 #' `dim`. And ``indices`` is the index location of each minimum value found
@@ -3110,6 +3402,11 @@ NULL
 #' `input` except in the dimension `dim` where they are of size 1.
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in
 #' the output tensors having 1 fewer dimension than `input`.
+#'
+#' @section Signatures:
+#' 
+#' min(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
+#'
 #'
 #' @param {input} NA 
 #' @param {dim} NA 
@@ -3131,8 +3428,6 @@ NULL
 
 #' Min
 #'
-#' min(input, other, out=None) -> Tensor
-#' 
 #' Each element of the tensor `input` is compared with the corresponding
 #' element of the tensor `other` and an element-wise minimum is taken.
 #' The resulting tensor is returned.
@@ -3145,6 +3440,11 @@ NULL
 #' }
 #' .. note:: When the shapes do not match, the shape of the returned output tensor
 #'           follows the :ref:`broadcasting rules <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' min(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param other (Tensor) the second input tensor
@@ -3167,8 +3467,6 @@ NULL
 
 #' Mm
 #'
-#' mm(input, mat2, out=None) -> Tensor
-#' 
 #' Performs a matrix multiplication of the matrices `input` and `mat2`.
 #' 
 #' If `input` is a :math:`(n \times m)` tensor, `mat2` is a
@@ -3176,6 +3474,11 @@ NULL
 #' 
 #' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
 #'           For broadcasting matrix products, see [`torch_matmul`].
+#'
+#' @section Signatures:
+#' 
+#' mm(input, mat2, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the first matrix to be multiplied
 #' @param mat2 (Tensor) the second matrix to be multiplied
@@ -3196,8 +3499,6 @@ NULL
 
 #' Mode
 #'
-#' mode(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor)
-#' 
 #' Returns a namedtuple ``(values, indices)`` where ``values`` is the mode
 #' value of each row of the `input` tensor in the given dimension
 #' `dim`, i.e. a value which appears most often
@@ -3211,6 +3512,11 @@ NULL
 #' in the output tensors having 1 fewer dimension than `input`.
 #' 
 #' .. note:: This function is not defined for ``torch_cuda.Tensor`` yet.
+#'
+#' @section Signatures:
+#' 
+#' mode(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to reduce.
@@ -3245,6 +3551,8 @@ NULL
 #' If `input` is of type `FloatTensor` or `DoubleTensor`, `other`
 #' should be a real number, otherwise it should be an integer
 #'
+#' 
+#'
 #' @param {input} NA 
 #' @param value (Number) the number to be multiplied to each element of :attr:`input`
 #' @param {out} NA 
@@ -3276,6 +3584,8 @@ NULL
 #'     \text{out}_i = \text{input}_i \times \text{other}_i
 #' }
 #'
+#' 
+#'
 #' @param input (Tensor) the first multiplicand tensor
 #' @param other (Tensor) the second multiplicand tensor
 #' @param out (Tensor, optional) the output tensor.
@@ -3297,8 +3607,6 @@ NULL
 
 #' Mv
 #'
-#' mv(input, vec, out=None) -> Tensor
-#' 
 #' Performs a matrix-vector product of the matrix `input` and the vector
 #' `vec`.
 #' 
@@ -3306,6 +3614,11 @@ NULL
 #' size :math:`m`, `out` will be 1-D of size :math:`n`.
 #' 
 #' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' mv(input, vec, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) matrix to be multiplied
 #' @param vec (Tensor) vector to be multiplied
@@ -3326,8 +3639,6 @@ NULL
 
 #' Mvlgamma
 #'
-#' mvlgamma(input, p) -> Tensor
-#' 
 #' Computes the multivariate log-gamma function (`[reference]`_) with dimension :math:`p` element-wise, given by
 #' 
 #' \deqn{
@@ -3337,6 +3648,11 @@ NULL
 #' 
 #' If any of the elements are less than or equal to :math:`\frac{p - 1}{2}`, then an error
 #' is thrown.
+#'
+#' @section Signatures:
+#' 
+#' mvlgamma(input, p) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to compute the multivariate log-gamma function
 #' @param p (int) the number of dimensions
@@ -3356,11 +3672,14 @@ NULL
 
 #' Narrow
 #'
-#' narrow(input, dim, start, length) -> Tensor
-#' 
 #' Returns a new tensor that is a narrowed version of `input` tensor. The
 #' dimension `dim` is input from `start` to `start + length`. The
 #' returned tensor and `input` tensor share the same underlying storage.
+#'
+#' @section Signatures:
+#' 
+#' narrow(input, dim, start, length) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to narrow
 #' @param dim (int) the dimension along which to narrow
@@ -3382,10 +3701,13 @@ NULL
 
 #' Ones
 #'
-#' ones(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor filled with the scalar value `1`, with the shape defined
 #' by the variable argument `size`.
+#'
+#' @section Signatures:
+#' 
+#' ones(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
@@ -3408,8 +3730,6 @@ NULL
 
 #' Ones_like
 #'
-#' ones_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor filled with the scalar value `1`, with the same size as
 #' `input`. ``torch_ones_like(input)`` is equivalent to
 #' ``torch_ones(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
@@ -3418,6 +3738,11 @@ NULL
 #'     As of 0.4, this function does not support an `out` keyword. As an alternative,
 #'     the old ``torch_ones_like(input, out=output)`` is equivalent to
 #'     ``torch_ones(input.size(), out=output)``.
+#'
+#' @section Signatures:
+#' 
+#' ones_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
@@ -3479,6 +3804,8 @@ NULL
 #'                 [2.7138, 3.8322],
 #'                 [2.2830, 0.3791]])
 #'
+#' 
+#'
 
 #'
 #' 
@@ -3491,8 +3818,6 @@ NULL
 
 #' Pdist
 #'
-#' pdist(input, p=2) -> Tensor
-#' 
 #' Computes the p-norm distance between every pair of row vectors in the input.
 #' This is identical to the upper triangular portion, excluding the diagonal, of
 #' `torch_norm(input[:, None] - input, dim=2, p=p)`. This function will be faster
@@ -3507,6 +3832,11 @@ NULL
 #' When :math:`p = \infty`, the closest scipy function is
 #' `scipy.spatial.distance.pdist(xn, lambda x, y: np.abs(x - y).max())`.
 #'
+#' @section Signatures:
+#' 
+#' pdist(input, p=2) -> Tensor
+#'
+#'
 #' @param input NA input tensor of shape :math:`N \times M`.
 #' @param p NA p value for the p-norm distance to calculate between each vector pair        :math:`\in [0, \infty]`.
 #'
@@ -3520,12 +3850,15 @@ NULL
 
 #' Cosine_similarity
 #'
-#' cosine_similarity(x1, x2, dim=1, eps=1e-8) -> Tensor
-#' 
 #' Returns cosine similarity between x1 and x2, computed along dim.
 #' 
 #' .. math ::
 #'     \text{similarity} = \dfrac{x_1 \cdot x_2}{\max(\Vert x_1 \Vert _2 \cdot \Vert x_2 \Vert _2, \epsilon)}
+#'
+#' @section Signatures:
+#' 
+#' cosine_similarity(x1, x2, dim=1, eps=1e-8) -> Tensor
+#'
 #'
 #' @param x1 (Tensor) First input.
 #' @param x2 (Tensor) Second input (of size matching x1).
@@ -3553,6 +3886,8 @@ NULL
 #' 
 #' See :class:`~torch.nn.PixelShuffle` for details.
 #'
+#' 
+#'
 #' @param input (Tensor) the input tensor
 #' @param upscale_factor (int) factor to increase spatial resolution by
 #'
@@ -3566,8 +3901,6 @@ NULL
 
 #' Pinverse
 #'
-#' pinverse(input, rcond=1e-15) -> Tensor
-#' 
 #' Calculates the pseudo-inverse (also known as the Moore-Penrose inverse) of a 2D tensor.
 #' Please look at `Moore-Penrose inverse`_ for more details
 #' 
@@ -3580,6 +3913,11 @@ NULL
 #'     However, this method is backprop-able due to the implementation by using SVD results, and
 #'     could be unstable. Double-backward will also be unstable due to the usage of SVD internally.
 #'     See :meth:`~torch.svd` for more details.
+#'
+#' @section Signatures:
+#' 
+#' pinverse(input, rcond=1e-15) -> Tensor
+#'
 #'
 #' @param input (Tensor) The input tensor of size :math:`(*, m, n)` where :math:`*` is zero or more batch dimensions
 #' @param rcond (float) A floating point value to determine the cutoff for small singular values.                   Default: 1e-15
@@ -3603,12 +3941,15 @@ NULL
 
 #' Rand
 #'
-#' rand(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor filled with random numbers from a uniform distribution
 #' on the interval :math:`[0, 1)`
 #' 
 #' The shape of the tensor is defined by the variable argument `size`.
+#'
+#' @section Signatures:
+#' 
+#' rand(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
@@ -3631,12 +3972,15 @@ NULL
 
 #' Rand_like
 #'
-#' rand_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor with the same size as `input` that is filled with
 #' random numbers from a uniform distribution on the interval :math:`[0, 1)`.
 #' ``torch_rand_like(input)`` is equivalent to
 #' ``torch_rand(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
+#'
+#' @section Signatures:
+#' 
+#' rand_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
@@ -3654,8 +3998,6 @@ NULL
 
 #' Randint
 #'
-#' randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor filled with random integers generated uniformly
 #' between `low` (inclusive) and `high` (exclusive).
 #' 
@@ -3664,6 +4006,11 @@ NULL
 #' .. note:
 #'     With the global dtype default (``torch_float32``), this function returns
 #'     a tensor with dtype ``torch_int64``.
+#'
+#' @section Signatures:
+#' 
+#' randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param low (int, optional) Lowest integer to be drawn from the distribution. Default: 0.
 #' @param high (int) One above the highest integer to be drawn from the distribution.
@@ -3690,8 +4037,6 @@ NULL
 
 #' Randint_like
 #'
-#' randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor with the same shape as Tensor `input` filled with
 #' random integers generated uniformly between `low` (inclusive) and
 #' `high` (exclusive).
@@ -3699,6 +4044,11 @@ NULL
 #' .. note:
 #'     With the global dtype default (``torch_float32``), this function returns
 #'     a tensor with dtype ``torch_int64``.
+#'
+#' @section Signatures:
+#' 
+#' randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
 #' @param low (int, optional) Lowest integer to be drawn from the distribution. Default: 0.
@@ -3718,8 +4068,6 @@ NULL
 
 #' Randn
 #'
-#' randn(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor filled with random numbers from a normal distribution
 #' with mean `0` and variance `1` (also called the standard normal
 #' distribution).
@@ -3728,6 +4076,11 @@ NULL
 #'     \text{out}_{i} \sim \mathcal{N}(0, 1)
 #' }
 #' The shape of the tensor is defined by the variable argument `size`.
+#'
+#' @section Signatures:
+#' 
+#' randn(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
@@ -3750,12 +4103,15 @@ NULL
 
 #' Randn_like
 #'
-#' randn_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor with the same size as `input` that is filled with
 #' random numbers from a normal distribution with mean 0 and variance 1.
 #' ``torch_randn_like(input)`` is equivalent to
 #' ``torch_randn(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
+#'
+#' @section Signatures:
+#' 
+#' randn_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
@@ -3773,9 +4129,12 @@ NULL
 
 #' Randperm
 #'
-#' randperm(n, out=None, dtype=torch.int64, layout=torch.strided, device=None, requires_grad=False) -> LongTensor
-#' 
 #' Returns a random permutation of integers from ``0`` to ``n - 1``.
+#'
+#' @section Signatures:
+#' 
+#' randperm(n, out=None, dtype=torch.int64, layout=torch.strided, device=None, requires_grad=False) -> LongTensor
+#'
 #'
 #' @param n (int) the upper bound (exclusive)
 #' @param out (Tensor, optional) the output tensor.
@@ -3797,8 +4156,6 @@ NULL
 
 #' Range
 #'
-#' range(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a 1-D tensor of size :math:`\left\lfloor \frac{\text{end} - \text{start}}{\text{step}} \right\rfloor + 1`
 #' with values from `start` to `end` with step `step`. Step is
 #' the gap between two values in the tensor.
@@ -3808,6 +4165,11 @@ NULL
 #' }
 #' .. warning::
 #'     This function is deprecated in favor of [`torch_arange`].
+#'
+#' @section Signatures:
+#' 
+#' range(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param start (float) the starting value for the set of points. Default: ``0``.
 #' @param end (float) the ending value for the set of points
@@ -3832,13 +4194,16 @@ NULL
 
 #' Reciprocal
 #'
-#' reciprocal(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the reciprocal of the elements of `input`
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \frac{1}{\text{input}_{i}}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' reciprocal(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -3858,13 +4223,16 @@ NULL
 
 #' Neg
 #'
-#' neg(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the negative of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out} = -1 \times \text{input}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' neg(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -3884,13 +4252,16 @@ NULL
 
 #' Repeat_interleave
 #'
-#' repeat_interleave(input, repeats, dim=None) -> Tensor
-#' 
 #' Repeat elements of a tensor.
 #' 
 #' .. warning::
 #' 
 #'     This is different from [`torch_repeat` but similar to `numpy.repeat`].
+#'
+#' @section Signatures:
+#' 
+#' repeat_interleave(input, repeats, dim=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param repeats (Tensor or int) The number of repetitions for each element.        repeats is broadcasted to fit the shape of the given axis.
@@ -3914,11 +4285,14 @@ NULL
 
 #' Repeat_interleave
 #'
-#' repeat_interleave(repeats) -> Tensor
-#' 
 #' If the `repeats` is `tensor([n1, n2, n3, ...])`, then the output will be
 #' `tensor([0, 0, ..., 1, 1, ..., 2, 2, ..., ...])` where `0` appears `n1` times,
 #' `1` appears `n2` times, `2` appears `n3` times, etc.
+#'
+#' @section Signatures:
+#' 
+#' repeat_interleave(repeats) -> Tensor
+#'
 #'
 
 #'
@@ -3932,8 +4306,6 @@ NULL
 
 #' Reshape
 #'
-#' reshape(input, shape) -> Tensor
-#' 
 #' Returns a tensor with the same data and number of elements as `input`,
 #' but with the specified shape. When possible, the returned tensor will be a view
 #' of `input`. Otherwise, it will be a copy. Contiguous inputs and inputs
@@ -3944,6 +4316,11 @@ NULL
 #' 
 #' A single dimension may be -1, in which case it's inferred from the remaining
 #' dimensions and the number of elements in `input`.
+#'
+#' @section Signatures:
+#' 
+#' reshape(input, shape) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to be reshaped
 #' @param shape (tuple of ints) the new shape
@@ -3964,10 +4341,13 @@ NULL
 
 #' Round
 #'
-#' round(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with each of the elements of `input` rounded
 #' to the closest integer.
+#'
+#' @section Signatures:
+#' 
+#' round(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -3987,9 +4367,12 @@ NULL
 
 #' Rrelu_
 #'
-#' rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor
-#' 
 #' In-place version of [`~rrelu`].
+#'
+#' @section Signatures:
+#' 
+#' rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor
+#'
 #'
 
 #'
@@ -4003,9 +4386,12 @@ NULL
 
 #' Relu_
 #'
-#' relu_(input) -> Tensor
-#' 
 #' In-place version of [`~relu`].
+#'
+#' @section Signatures:
+#' 
+#' relu_(input) -> Tensor
+#'
 #'
 
 #'
@@ -4019,14 +4405,17 @@ NULL
 
 #' Rsqrt
 #'
-#' rsqrt(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the reciprocal of the square-root of each of
 #' the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \frac{1}{\sqrt{\text{input}_{i}}}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' rsqrt(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -4046,9 +4435,12 @@ NULL
 
 #' Selu_
 #'
-#' selu_(input) -> Tensor
-#' 
 #' In-place version of [`~selu`].
+#'
+#' @section Signatures:
+#' 
+#' selu_(input) -> Tensor
+#'
 #'
 
 #'
@@ -4062,9 +4454,12 @@ NULL
 
 #' Celu_
 #'
-#' celu_(input, alpha=1.) -> Tensor
-#' 
 #' In-place version of [`~celu`].
+#'
+#' @section Signatures:
+#' 
+#' celu_(input, alpha=1.) -> Tensor
+#'
 #'
 
 #'
@@ -4078,13 +4473,16 @@ NULL
 
 #' Sigmoid
 #'
-#' sigmoid(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the sigmoid of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \frac{1}{1 + e^{-\text{input}_{i}}}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' sigmoid(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -4104,13 +4502,16 @@ NULL
 
 #' Sin
 #'
-#' sin(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the sine of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \sin(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' sin(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -4130,14 +4531,17 @@ NULL
 
 #' Sinh
 #'
-#' sinh(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the hyperbolic sine of the elements of
 #' `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \sinh(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' sinh(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -4157,8 +4561,6 @@ NULL
 
 #' Slogdet
 #'
-#' slogdet(input) -> (Tensor, Tensor)
-#' 
 #' Calculates the sign and log absolute value of the determinant(s) of a square matrix or batches of square matrices.
 #' 
 #' .. note::
@@ -4169,6 +4571,11 @@ NULL
 #'     is not invertible. In this case, double backward through :meth:`slogdet`
 #'     will be unstable in when `input` doesn't have distinct singular values.
 #'     See :meth:`~torch.svd` for details.
+#'
+#' @section Signatures:
+#' 
+#' slogdet(input) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more                batch dimensions.
 #'
@@ -4199,14 +4606,12 @@ NULL
 #'     If `split_size_or_sections` is a list, then `tensor` will be split
 #'     into ``len(split_size_or_sections)`` chunks with sizes in `dim` according
 #'     to `split_size_or_sections`.
-#' 
-#'     Arguments:
-#'         tensor (Tensor): tensor to split.
-#'         split_size_or_sections (int) or (list(int)): size of a single chunk or
-#'             list of sizes for each chunk
-#'         dim (int): dimension along which to split the tensor.
 #'
-
+#' 
+#'
+#' @param tensor (Tensor) tensor to split.
+#' @param split_size_or_sections (int) size of a single chunk or        list of sizes for each chunk
+#' @param dim (int) dimension along which to split the tensor.
 #'
 #' 
 #'
@@ -4218,8 +4623,6 @@ NULL
 
 #' Squeeze
 #'
-#' squeeze(input, dim=None, out=None) -> Tensor
-#' 
 #' Returns a tensor with all the dimensions of `input` of size `1` removed.
 #' 
 #' For example, if `input` is of shape:
@@ -4233,6 +4636,11 @@ NULL
 #' 
 #' .. note:: The returned tensor shares the storage with the input tensor,
 #'           so changing the contents of one will change the contents of the other.
+#'
+#' @section Signatures:
+#' 
+#' squeeze(input, dim=None, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int, optional) if given, the input will be squeezed only in           this dimension
@@ -4258,11 +4666,14 @@ NULL
 
 #' Stack
 #'
-#' stack(tensors, dim=0, out=None) -> Tensor
-#' 
 #' Concatenates sequence of tensors along a new dimension.
 #' 
 #' All tensors need to be of the same size.
+#'
+#' @section Signatures:
+#' 
+#' stack(tensors, dim=0, out=None) -> Tensor
+#'
 #'
 #' @param tensors (sequence of Tensors) sequence of tensors to concatenate
 #' @param dim (int) dimension to insert. Has to be between 0 and the number        of dimensions of concatenated tensors (inclusive)
@@ -4334,30 +4745,18 @@ NULL
 #'     .. warning::
 #'       This function changed signature at version 0.4.1. Calling with the
 #'       previous signature may cause error or return incorrect result.
-#' 
-#'     Arguments:
-#'         input (Tensor): the input tensor
-#'         n_fft (int): size of Fourier transform
-#'         hop_length (int, optional): the distance between neighboring sliding window
-#'             frames. Default: ``None`` (treated as equal to ``floor(n_fft / 4)``)
-#'         win_length (int, optional): the size of window frame and STFT filter.
-#'             Default: ``None``  (treated as equal to `n_fft`)
-#'         window (Tensor, optional): the optional window function.
-#'             Default: ``None`` (treated as window of all :math:`1` s)
-#'         center (bool, optional): whether to pad `input` on both sides so
-#'             that the :math:`t`-th frame is centered at time :math:`t \times \text{hop\_length}`.
-#'             Default: ``True``
-#'         pad_mode (string, optional): controls the padding method used when
-#'             `center` is ``True``. Default: ``"reflect"``
-#'         normalized (bool, optional): controls whether to return the normalized STFT results
-#'              Default: ``False``
-#'         onesided (bool, optional): controls whether to return half of results to
-#'             avoid redundancy Default: ``True``
-#' 
-#'     Returns:
-#'         Tensor: A tensor containing the STFT result with shape described above
 #'
-
+#' 
+#'
+#' @param input (Tensor) the input tensor
+#' @param n_fft (int) size of Fourier transform
+#' @param hop_length (int, optional) the distance between neighboring sliding window        frames. Default: ``None`` (treated as equal to ``floor(n_fft / 4)``)
+#' @param win_length (int, optional) the size of window frame and STFT filter.        Default: ``None``  (treated as equal to :attr:`n_fft`)
+#' @param window (Tensor, optional) the optional window function.        Default: ``None`` (treated as window of all :math:`1` s)
+#' @param center (bool, optional) whether to pad :attr:`input` on both sides so        that the :math:`t`-th frame is centered at time :math:`t \times \text{hop\_length}`.        Default: ``True``
+#' @param pad_mode (string, optional) controls the padding method used when        :attr:`center` is ``True``. Default: ``"reflect"``
+#' @param normalized (bool, optional) controls whether to return the normalized STFT results         Default: ``False``
+#' @param onesided (bool, optional) controls whether to return half of results to        avoid redundancy Default: ``True``
 #'
 #' 
 #'
@@ -4369,9 +4768,12 @@ NULL
 
 #' Sum
 #'
-#' sum(input, dtype=None) -> Tensor
-#' 
 #' Returns the sum of all elements in the `input` tensor.
+#'
+#' @section Signatures:
+#' 
+#' sum(input, dtype=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
@@ -4391,8 +4793,6 @@ NULL
 
 #' Sum
 #'
-#' sum(input, dim, keepdim=False, dtype=None) -> Tensor
-#' 
 #' Returns the sum of each row of the `input` tensor in the given
 #' dimension `dim`. If `dim` is a list of dimensions,
 #' reduce over all of them.
@@ -4402,6 +4802,11 @@ NULL
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
+#'
+#' @section Signatures:
+#' 
+#' sum(input, dim, keepdim=False, dtype=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
@@ -4425,13 +4830,16 @@ NULL
 
 #' Sqrt
 #'
-#' sqrt(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the square-root of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \sqrt{\text{input}_{i}}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' sqrt(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -4451,12 +4859,15 @@ NULL
 
 #' Std
 #'
-#' std(input, unbiased=True) -> Tensor
-#' 
 #' Returns the standard-deviation of all elements in the `input` tensor.
 #' 
 #' If `unbiased` is ``False``, then the standard-deviation will be calculated
 #' via the biased estimator. Otherwise, Bessel's correction will be used.
+#'
+#' @section Signatures:
+#' 
+#' std(input, unbiased=True) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
@@ -4476,8 +4887,6 @@ NULL
 
 #' Std
 #'
-#' std(input, dim, keepdim=False, unbiased=True, out=None) -> Tensor
-#' 
 #' Returns the standard-deviation of each row of the `input` tensor in the
 #' dimension `dim`. If `dim` is a list of dimensions,
 #' reduce over all of them.
@@ -4491,6 +4900,11 @@ NULL
 #' 
 #' If `unbiased` is ``False``, then the standard-deviation will be calculated
 #' via the biased estimator. Otherwise, Bessel's correction will be used.
+#'
+#' @section Signatures:
+#' 
+#' std(input, dim, keepdim=False, unbiased=True, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
@@ -4513,12 +4927,15 @@ NULL
 
 #' Std_mean
 #'
-#' std_mean(input, unbiased=True) -> (Tensor, Tensor)
-#' 
 #' Returns the standard-deviation and mean of all elements in the `input` tensor.
 #' 
 #' If `unbiased` is ``False``, then the standard-deviation will be calculated
 #' via the biased estimator. Otherwise, Bessel's correction will be used.
+#'
+#' @section Signatures:
+#' 
+#' std_mean(input, unbiased=True) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
@@ -4538,8 +4955,6 @@ NULL
 
 #' Std_mean
 #'
-#' std(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor)
-#' 
 #' Returns the standard-deviation and mean of each row of the `input` tensor in the
 #' dimension `dim`. If `dim` is a list of dimensions,
 #' reduce over all of them.
@@ -4553,6 +4968,11 @@ NULL
 #' 
 #' If `unbiased` is ``False``, then the standard-deviation will be calculated
 #' via the biased estimator. Otherwise, Bessel's correction will be used.
+#'
+#' @section Signatures:
+#' 
+#' std(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
@@ -4574,9 +4994,12 @@ NULL
 
 #' Prod
 #'
-#' prod(input, dtype=None) -> Tensor
-#' 
 #' Returns the product of all elements in the `input` tensor.
+#'
+#' @section Signatures:
+#' 
+#' prod(input, dtype=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
@@ -4596,8 +5019,6 @@ NULL
 
 #' Prod
 #'
-#' prod(input, dim, keepdim=False, dtype=None) -> Tensor
-#' 
 #' Returns the product of each row of the `input` tensor in the given
 #' dimension `dim`.
 #' 
@@ -4605,6 +5026,11 @@ NULL
 #' as `input` except in the dimension `dim` where it is of size 1.
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in
 #' the output tensor having 1 fewer dimension than `input`.
+#'
+#' @section Signatures:
+#' 
+#' prod(input, dim, keepdim=False, dtype=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to reduce.
@@ -4626,13 +5052,16 @@ NULL
 
 #' T
 #'
-#' t(input) -> Tensor
-#' 
 #' Expects `input` to be <= 2-D tensor and transposes dimensions 0
 #' and 1.
 #' 
 #' 0-D and 1-D tensors are returned as it is and
 #' 2-D tensor can be seen as a short-hand function for ``transpose(input, 0, 1)``.
+#'
+#' @section Signatures:
+#' 
+#' t(input) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #'
@@ -4657,13 +5086,16 @@ NULL
 
 #' Tan
 #'
-#' tan(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the tangent of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \tan(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' tan(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -4683,14 +5115,17 @@ NULL
 
 #' Tanh
 #'
-#' tanh(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the hyperbolic tangent of the elements
 #' of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \tanh(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' tanh(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -4752,6 +5187,8 @@ NULL
 #'                 [ 3.3161,  0.0704,  5.0187, -0.4079, -4.3126,  4.8744],
 #'                 [ 0.8223,  3.9445,  3.2168, -0.2400,  3.4117,  1.7780]])
 #'
+#' 
+#'
 
 #'
 #' 
@@ -4764,9 +5201,12 @@ NULL
 
 #' Threshold_
 #'
-#' threshold_(input, threshold, value) -> Tensor
-#' 
 #' In-place version of [`~threshold`].
+#'
+#' @section Signatures:
+#' 
+#' threshold_(input, threshold, value) -> Tensor
+#'
 #'
 
 #'
@@ -4780,14 +5220,17 @@ NULL
 
 #' Transpose
 #'
-#' transpose(input, dim0, dim1) -> Tensor
-#' 
 #' Returns a tensor that is a transposed version of `input`.
 #' The given dimensions `dim0` and `dim1` are swapped.
 #' 
 #' The resulting `out` tensor shares it's underlying storage with the
 #' `input` tensor, so changing the content of one would change the content
 #' of the other.
+#'
+#' @section Signatures:
+#' 
+#' transpose(input, dim0, dim1) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim0 (int) the first dimension to be transposed
@@ -4808,9 +5251,12 @@ NULL
 
 #' Flip
 #'
-#' flip(input, dims) -> Tensor
-#' 
 #' Reverse the order of a n-D tensor along given axis in dims.
+#'
+#' @section Signatures:
+#' 
+#' flip(input, dims) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dims (a list or tuple) axis to flip on
@@ -4830,12 +5276,15 @@ NULL
 
 #' Roll
 #'
-#' roll(input, shifts, dims=None) -> Tensor
-#' 
 #' Roll the tensor along the given dimension(s). Elements that are shifted beyond the
 #' last position are re-introduced at the first position. If a dimension is not
 #' specified, the tensor will be flattened before rolling and then restored
 #' to the original shape.
+#'
+#' @section Signatures:
+#' 
+#' roll(input, shifts, dims=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param shifts (int or tuple of ints) The number of places by which the elements        of the tensor are shifted. If shifts is a tuple, dims must be a tuple of        the same size, and each dimension will be rolled by the corresponding        value
@@ -4858,10 +5307,13 @@ NULL
 
 #' Rot90
 #'
-#' rot90(input, k, dims) -> Tensor
-#' 
 #' Rotate a n-D tensor by 90 degrees in the plane specified by dims axis.
 #' Rotation direction is from the first towards the second axis if k > 0, and from the second towards the first for k < 0.
+#'
+#' @section Signatures:
+#' 
+#' rot90(input, k, dims) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param k (int) number of times to rotate
@@ -4885,9 +5337,12 @@ NULL
 
 #' Trapz
 #'
-#' trapz(y, x, *, dim=-1) -> Tensor
-#' 
 #' Estimate :math:`\int y\,dx` along `dim`, using the trapezoid rule.
+#'
+#' @section Signatures:
+#' 
+#' trapz(y, x, *, dim=-1) -> Tensor
+#'
 #'
 #' @param y (Tensor) The values of the function to integrate
 #' @param x (Tensor) The points at which the function `y` is sampled.        If `x` is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        :math:`\int_a^b f = -\int_b^a f` is followed).
@@ -4909,9 +5364,12 @@ NULL
 
 #' Trapz
 #'
-#' trapz(y, *, dx=1, dim=-1) -> Tensor
-#' 
 #' As above, but the sample points are spaced uniformly at a distance of `dx`.
+#'
+#' @section Signatures:
+#' 
+#' trapz(y, *, dx=1, dim=-1) -> Tensor
+#'
 #'
 #' @param y (Tensor) The values of the function to integrate
 #' @param dx (float) The distance between points at which `y` is sampled.
@@ -4927,10 +5385,13 @@ NULL
 
 #' Trunc
 #'
-#' trunc(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the truncated integer values of
 #' the elements of `input`.
+#'
+#' @section Signatures:
+#' 
+#' trunc(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -4955,51 +5416,13 @@ NULL
 #'     .. note:: This function is different from [`torch_unique`] in the sense that this function
 #'         only eliminates consecutive duplicate values. This semantics is similar to `std::unique`
 #'         in C++.
-#' 
-#'     Arguments:
-#'         input (Tensor): the input tensor
-#'         return_inverse (bool): Whether to also return the indices for where
-#'             elements in the original input ended up in the returned unique list.
-#'         return_counts (bool): Whether to also return the counts for each unique
-#'             element.
-#'         dim (int): the dimension to apply unique. If ``None``, the unique of the
-#'             flattened input is returned. default: ``None``
-#' 
-#'     Returns:
-#'         (Tensor, Tensor (optional), Tensor (optional)): A tensor or a tuple of tensors containing
-#' 
-#'             - **output** (*Tensor*): the output list of unique scalar elements.
-#'             - **inverse_indices** (*Tensor*): (optional) if
-#'               `return_inverse` is True, there will be an additional
-#'               returned tensor (same shape as input) representing the indices
-#'               for where elements in the original input map to in the output;
-#'               otherwise, this function will only return a single tensor.
-#'             - **counts** (*Tensor*): (optional) if
-#'               `return_counts` is True, there will be an additional
-#'               returned tensor (same shape as output or output.size(dim),
-#'               if dim was specified) representing the number of occurrences
-#'               for each unique value or tensor.
-#' 
-#'     Example::
-#' 
-#'         >>> x = torch.tensor([1, 1, 2, 2, 3, 1, 1, 2])
-#'         >>> output = torch.unique_consecutive(x)
-#'         >>> output
-#'         tensor([1, 2, 3, 1, 2])
-#' 
-#'         >>> output, inverse_indices = torch.unique_consecutive(x, return_inverse=True)
-#'         >>> output
-#'         tensor([1, 2, 3, 1, 2])
-#'         >>> inverse_indices
-#'         tensor([0, 0, 1, 1, 2, 3, 3, 4])
-#' 
-#'         >>> output, counts = torch.unique_consecutive(x, return_counts=True)
-#'         >>> output
-#'         tensor([1, 2, 3, 1, 2])
-#'         >>> counts
-#'         tensor([2, 2, 1, 2, 1])
 #'
-
+#' 
+#'
+#' @param input (Tensor) the input tensor
+#' @param return_inverse (bool) Whether to also return the indices for where        elements in the original input ended up in the returned unique list.
+#' @param return_counts (bool) Whether to also return the counts for each unique        element.
+#' @param dim (int) the dimension to apply unique. If ``None``, the unique of the        flattened input is returned. default: ``None``
 #'
 #' 
 #'
@@ -5011,8 +5434,6 @@ NULL
 
 #' Unsqueeze
 #'
-#' unsqueeze(input, dim, out=None) -> Tensor
-#' 
 #' Returns a new tensor with a dimension of size one inserted at the
 #' specified position.
 #' 
@@ -5021,6 +5442,11 @@ NULL
 #' A `dim` value within the range ``[-input.dim() - 1, input.dim() + 1)``
 #' can be used. Negative `dim` will correspond to :meth:`unsqueeze`
 #' applied at `dim` = ``dim + input.dim() + 1``.
+#'
+#' @section Signatures:
+#' 
+#' unsqueeze(input, dim, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the index at which to insert the singleton dimension
@@ -5041,12 +5467,15 @@ NULL
 
 #' Var
 #'
-#' var(input, unbiased=True) -> Tensor
-#' 
 #' Returns the variance of all elements in the `input` tensor.
 #' 
 #' If `unbiased` is ``False``, then the variance will be calculated via the
 #' biased estimator. Otherwise, Bessel's correction will be used.
+#'
+#' @section Signatures:
+#' 
+#' var(input, unbiased=True) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
@@ -5066,8 +5495,6 @@ NULL
 
 #' Var
 #'
-#' var(input, dim, keepdim=False, unbiased=True, out=None) -> Tensor
-#' 
 #' Returns the variance of each row of the `input` tensor in the given
 #' dimension `dim`.
 #' 
@@ -5080,6 +5507,11 @@ NULL
 #' 
 #' If `unbiased` is ``False``, then the variance will be calculated via the
 #' biased estimator. Otherwise, Bessel's correction will be used.
+#'
+#' @section Signatures:
+#' 
+#' var(input, dim, keepdim=False, unbiased=True, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
@@ -5102,12 +5534,15 @@ NULL
 
 #' Var_mean
 #'
-#' var_mean(input, unbiased=True) -> (Tensor, Tensor)
-#' 
 #' Returns the variance and mean of all elements in the `input` tensor.
 #' 
 #' If `unbiased` is ``False``, then the variance will be calculated via the
 #' biased estimator. Otherwise, Bessel's correction will be used.
+#'
+#' @section Signatures:
+#' 
+#' var_mean(input, unbiased=True) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param unbiased (bool) whether to use the unbiased estimation or not
@@ -5127,8 +5562,6 @@ NULL
 
 #' Var_mean
 #'
-#' var_mean(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor)
-#' 
 #' Returns the variance and mean of each row of the `input` tensor in the given
 #' dimension `dim`.
 #' 
@@ -5141,6 +5574,11 @@ NULL
 #' 
 #' If `unbiased` is ``False``, then the variance will be calculated via the
 #' biased estimator. Otherwise, Bessel's correction will be used.
+#'
+#' @section Signatures:
+#' 
+#' var_mean(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
@@ -5162,8 +5600,6 @@ NULL
 
 #' Where
 #'
-#' where(condition, x, y) -> Tensor
-#' 
 #' Return a tensor of elements selected from either `x` or `y`, depending on `condition`.
 #' 
 #' The operation is defined as:
@@ -5176,6 +5612,11 @@ NULL
 #' }
 #' .. note::
 #'     The tensors `condition`, `x`, `y` must be :ref:`broadcastable <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' where(condition, x, y) -> Tensor
+#'
 #'
 #' @param condition (BoolTensor) When True (nonzero), yield x, otherwise yield y
 #' @param x (Tensor) values selected at indices where :attr:`condition` is ``True``
@@ -5197,13 +5638,16 @@ NULL
 
 #' Where
 #'
-#' where(condition) -> tuple of LongTensor
-#' 
 #' ``torch_where(condition)`` is identical to
 #' ``torch_nonzero(condition, as_tuple=True)``.
 #' 
 #' .. note::
 #'     See also [`torch_nonzero`].
+#'
+#' @section Signatures:
+#' 
+#' where(condition) -> tuple of LongTensor
+#'
 #'
 
 #'
@@ -5217,10 +5661,13 @@ NULL
 
 #' Zeros
 #'
-#' zeros(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor filled with the scalar value `0`, with the shape defined
 #' by the variable argument `size`.
+#'
+#' @section Signatures:
+#' 
+#' zeros(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
@@ -5243,8 +5690,6 @@ NULL
 
 #' Zeros_like
 #'
-#' zeros_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
-#' 
 #' Returns a tensor filled with the scalar value `0`, with the same size as
 #' `input`. ``torch_zeros_like(input)`` is equivalent to
 #' ``torch_zeros(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
@@ -5253,6 +5698,11 @@ NULL
 #'     As of 0.4, this function does not support an `out` keyword. As an alternative,
 #'     the old ``torch_zeros_like(input, out=output)`` is equivalent to
 #'     ``torch_zeros(input.size(), out=output)``.
+#'
+#' @section Signatures:
+#' 
+#' zeros_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
 #' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
@@ -5333,6 +5783,8 @@ NULL
 #'         >>> torch.norm(d[0, :, :]), torch.norm(d[1, :, :])
 #'         (tensor(3.7417), tensor(11.2250))
 #'
+#' 
+#'
 
 #'
 #' 
@@ -5345,8 +5797,6 @@ NULL
 
 #' Pow
 #'
-#' pow(input, exponent, out=None) -> Tensor
-#' 
 #' Takes the power of each element in `input` with `exponent` and
 #' returns a tensor with the result.
 #' 
@@ -5365,6 +5815,11 @@ NULL
 #' }
 #' When `exponent` is a tensor, the shapes of `input`
 #' and `exponent` must be :ref:`broadcastable <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' pow(input, exponent, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param exponent (float or tensor) the exponent value
@@ -5390,8 +5845,6 @@ NULL
 
 #' Pow
 #'
-#' pow(self, exponent, out=None) -> Tensor
-#' 
 #' `self` is a scalar ``float`` value, and `exponent` is a tensor.
 #' The returned tensor `out` is of the same shape as `exponent`
 #' 
@@ -5400,6 +5853,11 @@ NULL
 #' \deqn{
 #'     \text{out}_i = \text{self} ^ {\text{exponent}_i}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' pow(self, exponent, out=None) -> Tensor
+#'
 #'
 #' @param self (float) the scalar base value for the power operation
 #' @param exponent (Tensor) the exponent tensor
@@ -5420,8 +5878,6 @@ NULL
 
 #' Addmm
 #'
-#' addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -> Tensor
-#' 
 #' Performs a matrix multiplication of the matrices `mat1` and `mat2`.
 #' The matrix `input` is added to the final result.
 #' 
@@ -5438,6 +5894,11 @@ NULL
 #' }
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and
 #' `alpha` must be real numbers, otherwise they should be integers.
+#'
+#' @section Signatures:
+#' 
+#' addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -> Tensor
+#'
 #'
 #' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
 #' @param input (Tensor) matrix to be added
@@ -5462,12 +5923,15 @@ NULL
 
 #' Sparse_coo_tensor
 #'
-#' sparse_coo_tensor(indices, values, size=None, dtype=None, device=None, requires_grad=False) -> Tensor
-#' 
 #' Constructs a sparse tensors in COO(rdinate) format with non-zero elements at the given `indices`
 #' with the given `values`. A sparse tensor can be `uncoalesced`, in that case, there are duplicate
 #' coordinates in the indices, and the value at that index is the sum of all duplicate value entries:
 #' `torch_sparse`_.
+#'
+#' @section Signatures:
+#' 
+#' sparse_coo_tensor(indices, values, size=None, dtype=None, device=None, requires_grad=False) -> Tensor
+#'
 #'
 #' @param indices (array_like) Initial data for the tensor. Can be a list, tuple,        NumPy ``ndarray``, scalar, and other types. Will be cast to a :class:`torch.LongTensor`        internally. The indices are the coordinates of the non-zero values in the matrix, and thus        should be two-dimensional where the first dimension is the number of tensor dimensions and        the second dimension is the number of non-zero values.
 #' @param values (array_like) Initial values for the tensor. Can be a list, tuple,        NumPy ``ndarray``, scalar, and other types.
@@ -5495,11 +5959,14 @@ NULL
 
 #' Unbind
 #'
-#' unbind(input, dim=0) -> seq
-#' 
 #' Removes a tensor dimension.
 #' 
 #' Returns a tuple of all slices along a given dimension, already without it.
+#'
+#' @section Signatures:
+#' 
+#' unbind(input, dim=0) -> seq
+#'
 #'
 #' @param input (Tensor) the tensor to unbind
 #' @param dim (int) dimension to remove
@@ -5519,9 +5986,12 @@ NULL
 
 #' Quantize_per_tensor
 #'
-#' quantize_per_tensor(input, scale, zero_point, dtype) -> Tensor
-#' 
 #' Converts a float tensor to quantized tensor with given scale and zero point.
+#'
+#' @section Signatures:
+#' 
+#' quantize_per_tensor(input, scale, zero_point, dtype) -> Tensor
+#'
 #'
 #' @param input (Tensor) float tensor to quantize
 #' @param scale (float) scale to apply in quantization formula
@@ -5542,9 +6012,12 @@ NULL
 
 #' Quantize_per_channel
 #'
-#' quantize_per_channel(input, scales, zero_points, axis, dtype) -> Tensor
-#' 
 #' Converts a float tensor to per-channel quantized tensor with given scales and zero points.
+#'
+#' @section Signatures:
+#' 
+#' quantize_per_channel(input, scales, zero_points, axis, dtype) -> Tensor
+#'
 #'
 #' @param input (Tensor) float tensor to quantize
 #' @param scales (Tensor) float 1D tensor of scales to use, size should match ``input.size(axis)``
@@ -5595,6 +6068,8 @@ NULL
 #'                 [4, 5, 6],
 #'                 [4, 5, 6]])
 #'
+#' 
+#'
 
 #'
 #' 
@@ -5609,32 +6084,10 @@ NULL
 #'
 #' Do cartesian product of the given sequence of tensors. The behavior is similar to
 #'     python's `itertools.product`.
-#' 
-#'     Arguments:
-#'         *tensors: any number of 1 dimensional tensors.
-#' 
-#'     Returns:
-#'         Tensor: A tensor equivalent to converting all the input tensors into lists,
-#'             do `itertools.product` on these lists, and finally convert the resulting list
-#'             into tensor.
-#' 
-#'     Example::
-#' 
-#'         >>> a = [1, 2, 3]
-#'         >>> b = [4, 5]
-#'         >>> list(itertools.product(a, b))
-#'         [(1, 4), (1, 5), (2, 4), (2, 5), (3, 4), (3, 5)]
-#'         >>> tensor_a = torch.tensor(a)
-#'         >>> tensor_b = torch.tensor(b)
-#'         >>> torch.cartesian_prod(tensor_a, tensor_b)
-#'         tensor([[1, 4],
-#'                 [1, 5],
-#'                 [2, 4],
-#'                 [2, 5],
-#'                 [3, 4],
-#'                 [3, 5]])
 #'
-
+#' 
+#'
+#' @param *tensors NA any number of 1 dimensional tensors.
 #'
 #' 
 #'
@@ -5646,11 +6099,14 @@ NULL
 
 #' Combinations
 #'
-#' combinations(input, r=2, with_replacement=False) -> seq
-#' 
 #' Compute combinations of length :math:`r` of the given tensor. The behavior is similar to
 #' python's `itertools.combinations` when `with_replacement` is set to `False`, and
 #' `itertools.combinations_with_replacement` when `with_replacement` is set to `True`.
+#'
+#' @section Signatures:
+#' 
+#' combinations(input, r=2, with_replacement=False) -> seq
+#'
 #'
 #' @param input (Tensor) 1D vector.
 #' @param r (int, optional) number of elements to combine
@@ -5676,11 +6132,14 @@ NULL
 
 #' Result_type
 #'
-#' result_type(tensor1, tensor2) -> dtype
-#' 
 #' Returns the :class:`torch_dtype` that would result from performing an arithmetic
 #' operation on the provided input tensors. See type promotion :ref:`documentation <type-promotion-doc>`
 #' for more information on the type promotion logic.
+#'
+#' @section Signatures:
+#' 
+#' result_type(tensor1, tensor2) -> dtype
+#'
 #'
 #' @param tensor1 (Tensor or Number) an input tensor or number
 #' @param tensor2 (Tensor or Number) an input tensor or number
@@ -5699,10 +6158,13 @@ NULL
 
 #' Can_cast
 #'
-#' can_cast(from, to) -> bool
-#' 
 #' Determines if a type conversion is allowed under PyTorch casting rules
 #' described in the type promotion :ref:`documentation <type-promotion-doc>`.
+#'
+#' @section Signatures:
+#' 
+#' can_cast(from, to) -> bool
+#'
 #'
 #' @param from (dtype) The original :class:`torch.dtype`.
 #' @param to (dtype) The target :class:`torch.dtype`.
@@ -5721,12 +6183,15 @@ NULL
 
 #' Promote_types
 #'
-#' promote_types(type1, type2) -> dtype
-#' 
 #' Returns the :class:`torch_dtype` with the smallest size and scalar kind that is
 #' not smaller nor of lower kind than either `type1` or `type2`. See type promotion
 #' :ref:`documentation <type-promotion-doc>` for more information on the type
 #' promotion logic.
+#'
+#' @section Signatures:
+#' 
+#' promote_types(type1, type2) -> dtype
+#'
 #'
 #' @param type1 (:class:`torch.dtype`) 
 #' @param type2 (:class:`torch.dtype`) 
@@ -5745,10 +6210,13 @@ NULL
 
 #' Bitwise_xor
 #'
-#' bitwise_xor(input, other, out=None) -> Tensor
-#' 
 #' Computes the bitwise XOR of `input` and `other`. The input tensor must be of
 #' integral or Boolean types. For bool tensors, it computes the logical XOR.
+#'
+#' @section Signatures:
+#' 
+#' bitwise_xor(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input NA the first input tensor
 #' @param other NA the second input tensor
@@ -5764,8 +6232,6 @@ NULL
 
 #' Addbmm
 #'
-#' addbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
-#' 
 #' Performs a batch matrix-matrix product of matrices stored
 #' in `batch1` and `batch2`,
 #' with a reduced add step (all matrix multiplications get accumulated
@@ -5785,6 +6251,11 @@ NULL
 #' }
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and `alpha`
 #' must be real numbers, otherwise they should be integers.
+#'
+#' @section Signatures:
+#' 
+#' addbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
+#'
 #'
 #' @param beta (Number, optional) multiplier for :attr:`input` (:math:`\beta`)
 #' @param input (Tensor) matrix to be added
@@ -5809,8 +6280,6 @@ NULL
 
 #' Diag
 #'
-#' diag(input, diagonal=0, out=None) -> Tensor
-#' 
 #' - If `input` is a vector (1-D tensor), then returns a 2-D square tensor
 #'   with the elements of `input` as the diagonal.
 #' - If `input` is a matrix (2-D tensor), then returns a 1-D tensor with
@@ -5821,6 +6290,11 @@ NULL
 #' - If `diagonal` = 0, it is the main diagonal.
 #' - If `diagonal` > 0, it is above the main diagonal.
 #' - If `diagonal` < 0, it is below the main diagonal.
+#'
+#' @section Signatures:
+#' 
+#' diag(input, diagonal=0, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param diagonal (int, optional) the diagonal to consider
@@ -5836,9 +6310,6 @@ NULL
 
 #' Cross
 #'
-#' cross(input, other, dim=-1, out=None) -> Tensor
-#' 
-#' 
 #' Returns the cross product of vectors in dimension `dim` of `input`
 #' and `other`.
 #' 
@@ -5847,6 +6318,11 @@ NULL
 #' 
 #' If `dim` is not given, it defaults to the first dimension found with the
 #' size 3.
+#'
+#' @section Signatures:
+#' 
+#' cross(input, other, dim=-1, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param other (Tensor) the second input tensor
@@ -5871,8 +6347,6 @@ NULL
 
 #' Triu
 #'
-#' triu(input, diagonal=0, out=None) -> Tensor
-#' 
 #' Returns the upper triangular part of a matrix (2-D tensor) or batch of matrices
 #' `input`, the other elements of the result tensor `out` are set to 0.
 #' 
@@ -5886,6 +6360,11 @@ NULL
 #' the main diagonal. The main diagonal are the set of indices
 #' :math:`\lbrace (i, i) \rbrace` for :math:`i \in [0, \min\{d_{1}, d_{2}\} - 1]` where
 #' :math:`d_{1}, d_{2}` are the dimensions of the matrix.
+#'
+#' @section Signatures:
+#' 
+#' triu(input, diagonal=0, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param diagonal (int, optional) the diagonal to consider
@@ -5912,8 +6391,6 @@ NULL
 
 #' Tril
 #'
-#' tril(input, diagonal=0, out=None) -> Tensor
-#' 
 #' Returns the lower triangular part of the matrix (2-D tensor) or batch of matrices
 #' `input`, the other elements of the result tensor `out` are set to 0.
 #' 
@@ -5927,6 +6404,11 @@ NULL
 #' the main diagonal. The main diagonal are the set of indices
 #' :math:`\lbrace (i, i) \rbrace` for :math:`i \in [0, \min\{d_{1}, d_{2}\} - 1]` where
 #' :math:`d_{1}, d_{2}` are the dimensions of the matrix.
+#'
+#' @section Signatures:
+#' 
+#' tril(input, diagonal=0, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param diagonal (int, optional) the diagonal to consider
@@ -5951,8 +6433,6 @@ NULL
 
 #' Tril_indices
 #'
-#' tril_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor
-#' 
 #' Returns the indices of the lower triangular part of a `row`-by-
 #' `col` matrix in a 2-by-N Tensor, where the first row contains row
 #' coordinates of all indices and the second row contains column coordinates.
@@ -5971,6 +6451,11 @@ NULL
 #' 
 #' NOTE: when running on 'cuda', row * col must be less than :math:`2^{59}` to
 #' prevent overflow during calculation.
+#'
+#' @section Signatures:
+#' 
+#' tril_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor
+#'
 #'
 #' @param row (``int``) number of rows in the 2-D matrix.
 #' @param col (``int``) number of columns in the 2-D matrix.
@@ -5997,8 +6482,6 @@ NULL
 
 #' Triu_indices
 #'
-#' triu_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor
-#' 
 #' Returns the indices of the upper triangular part of a `row` by
 #' `col` matrix in a 2-by-N Tensor, where the first row contains row
 #' coordinates of all indices and the second row contains column coordinates.
@@ -6017,6 +6500,11 @@ NULL
 #' 
 #' NOTE: when running on 'cuda', row * col must be less than :math:`2^{59}` to
 #' prevent overflow during calculation.
+#'
+#' @section Signatures:
+#' 
+#' triu_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor
+#'
 #'
 #' @param row (``int``) number of rows in the 2-D matrix.
 #' @param col (``int``) number of columns in the 2-D matrix.
@@ -6043,11 +6531,14 @@ NULL
 
 #' Trace
 #'
-#' trace(input) -> Tensor
-#' 
 #' Returns the sum of the elements of the diagonal of the input 2-D matrix.
 #' 
 #' Example::
+#'
+#' @section Signatures:
+#' 
+#' trace(input) -> Tensor
+#'
 #'
 
 #'
@@ -6066,12 +6557,15 @@ NULL
 
 #' Ne
 #'
-#' ne(input, other, out=None) -> Tensor
-#' 
 #' Computes :math:`input \neq other` element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
+#'
+#' @section Signatures:
+#' 
+#' ne(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to compare
 #' @param other (Tensor or float) the tensor or value to compare
@@ -6090,12 +6584,15 @@ NULL
 
 #' Eq
 #'
-#' eq(input, other, out=None) -> Tensor
-#' 
 #' Computes element-wise equality
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
+#'
+#' @section Signatures:
+#' 
+#' eq(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to compare
 #' @param other (Tensor or float) the tensor or value to compare
@@ -6114,12 +6611,15 @@ NULL
 
 #' Ge
 #'
-#' ge(input, other, out=None) -> Tensor
-#' 
 #' Computes :math:`\text{input} \geq \text{other}` element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
+#'
+#' @section Signatures:
+#' 
+#' ge(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to compare
 #' @param other (Tensor or float) the tensor or value to compare
@@ -6138,12 +6638,15 @@ NULL
 
 #' Le
 #'
-#' le(input, other, out=None) -> Tensor
-#' 
 #' Computes :math:`\text{input} \leq \text{other}` element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
+#'
+#' @section Signatures:
+#' 
+#' le(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to compare
 #' @param other (Tensor or float) the tensor or value to compare
@@ -6162,12 +6665,15 @@ NULL
 
 #' Gt
 #'
-#' gt(input, other, out=None) -> Tensor
-#' 
 #' Computes :math:`\text{input} > \text{other}` element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
+#'
+#' @section Signatures:
+#' 
+#' gt(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to compare
 #' @param other (Tensor or float) the tensor or value to compare
@@ -6186,12 +6692,15 @@ NULL
 
 #' Lt
 #'
-#' lt(input, other, out=None) -> Tensor
-#' 
 #' Computes :math:`\text{input} < \text{other}` element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' :ref:`broadcastable <broadcasting-semantics>` with the first argument.
+#'
+#' @section Signatures:
+#' 
+#' lt(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to compare
 #' @param other (Tensor or float) the tensor or value to compare
@@ -6210,11 +6719,14 @@ NULL
 
 #' Take
 #'
-#' take(input, index) -> Tensor
-#' 
 #' Returns a new tensor with the elements of `input` at the given indices.
 #' The input tensor is treated as if it were viewed as a 1-D tensor. The result
 #' takes the same shape as the indices.
+#'
+#' @section Signatures:
+#' 
+#' take(input, index) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param indices (LongTensor) the indices into tensor
@@ -6233,8 +6745,6 @@ NULL
 
 #' Index_select
 #'
-#' index_select(input, dim, index, out=None) -> Tensor
-#' 
 #' Returns a new tensor which indexes the `input` tensor along dimension
 #' `dim` using the entries in `index` which is a `LongTensor`.
 #' 
@@ -6246,6 +6756,11 @@ NULL
 #'           tensor.  If `out` has a different shape than expected, we
 #'           silently change it to the correct shape, reallocating the underlying
 #'           storage if necessary.
+#'
+#' @section Signatures:
+#' 
+#' index_select(input, dim, index, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension in which we index
@@ -6269,8 +6784,6 @@ NULL
 
 #' Masked_select
 #'
-#' masked_select(input, mask, out=None) -> Tensor
-#' 
 #' Returns a new 1-D tensor which indexes the `input` tensor according to
 #' the boolean mask `mask` which is a `BoolTensor`.
 #' 
@@ -6279,6 +6792,11 @@ NULL
 #' 
 #' .. note:: The returned tensor does **not** use the same storage
 #'           as the original tensor
+#'
+#' @section Signatures:
+#' 
+#' masked_select(input, mask, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param mask (ByteTensor) the tensor containing the binary mask to index with
@@ -6301,8 +6819,6 @@ NULL
 
 #' Nonzero
 #'
-#' nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensors
-#' 
 #' .. note::
 #'     [`torch_nonzero(..., as_tuple=False) <torch.nonzero>`] (default) returns a
 #'     2-D tensor where each row is the index for a nonzero value.
@@ -6339,6 +6855,11 @@ NULL
 #' As a special case, when `input` has zero dimensions and a nonzero scalar
 #' value, it is treated as a one-dimensional tensor with one element.
 #'
+#' @section Signatures:
+#' 
+#' nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensors
+#'
+#'
 #' @param input (Tensor) the input tensor.
 #' @param out (LongTensor, optional) the output tensor containing indices
 #'
@@ -6359,8 +6880,6 @@ NULL
 
 #' Gather
 #'
-#' gather(input, dim, index, out=None, sparse_grad=False) -> Tensor
-#' 
 #' Gathers values along an axis specified by `dim`.
 #' 
 #' For a 3-D tensor the output is specified by::
@@ -6374,6 +6893,11 @@ NULL
 #' and ``dim = i``, then `index` must be an :math:`n`-dimensional tensor with
 #' size :math:`(x_0, x_1, ..., x_{i-1}, y, x_{i+1}, ..., x_{n-1})` where :math:`y \geq 1`
 #' and `out` will have the same size as `index`.
+#'
+#' @section Signatures:
+#' 
+#' gather(input, dim, index, out=None, sparse_grad=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the source tensor
 #' @param dim (int) the axis along which to index
@@ -6395,8 +6919,6 @@ NULL
 
 #' Addcmul
 #'
-#' addcmul(input, value=1, tensor1, tensor2, out=None) -> Tensor
-#' 
 #' Performs the element-wise multiplication of `tensor1`
 #' by `tensor2`, multiply the result by the scalar `value`
 #' and add it to `input`.
@@ -6409,6 +6931,11 @@ NULL
 #' 
 #' For inputs of type `FloatTensor` or `DoubleTensor`, `value` must be
 #' a real number, otherwise an integer.
+#'
+#' @section Signatures:
+#' 
+#' addcmul(input, value=1, tensor1, tensor2, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to be added
 #' @param value (Number, optional) multiplier for :math:`tensor1 .* tensor2`
@@ -6432,8 +6959,6 @@ NULL
 
 #' Addcdiv
 #'
-#' addcdiv(input, value=1, tensor1, tensor2, out=None) -> Tensor
-#' 
 #' Performs the element-wise division of `tensor1` by `tensor2`,
 #' multiply the result by the scalar `value` and add it to `input`.
 #' 
@@ -6445,6 +6970,11 @@ NULL
 #' 
 #' For inputs of type `FloatTensor` or `DoubleTensor`, `value` must be
 #' a real number, otherwise an integer.
+#'
+#' @section Signatures:
+#' 
+#' addcdiv(input, value=1, tensor1, tensor2, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to be added
 #' @param value (Number, optional) multiplier for :math:`\text{tensor1} / \text{tensor2}`
@@ -6468,8 +6998,6 @@ NULL
 
 #' Lstsq
 #'
-#' lstsq(input, A, out=None) -> Tensor
-#' 
 #' Computes the solution to the least squares and least norm problems for a full
 #' rank matrix :math:`A` of size :math:`(m \times n)` and a matrix :math:`B` of
 #' size :math:`(m \times k)`.
@@ -6498,6 +7026,11 @@ NULL
 #' .. note::
 #'     The case when :math:`m < n` is not supported on the GPU.
 #'
+#' @section Signatures:
+#' 
+#' lstsq(input, A, out=None) -> Tensor
+#'
+#'
 #' @param input (Tensor) the matrix :math:`B`
 #' @param A (Tensor) the :math:`m` by :math:`n` matrix :math:`A`
 #' @param out (tuple, optional) the optional destination tensor
@@ -6518,8 +7051,6 @@ NULL
 
 #' Triangular_solve
 #'
-#' triangular_solve(input, A, upper=True, transpose=False, unitriangular=False) -> (Tensor, Tensor)
-#' 
 #' Solves a system of equations with a triangular coefficient matrix :math:`A`
 #' and multiple right-hand sides :math:`b`.
 #' 
@@ -6529,6 +7060,11 @@ NULL
 #' `torch_triangular_solve(b, A)` can take in 2D inputs `b, A` or inputs that are
 #' batches of 2D matrices. If the inputs are batches, then returns
 #' batched outputs `X`
+#'
+#' @section Signatures:
+#' 
+#' triangular_solve(input, A, upper=True, transpose=False, unitriangular=False) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) multiple right-hand sides of size :math:`(*, m, k)` where                :math:`*` is zero of more batch dimensions (:math:`b`)
 #' @param A (Tensor) the input triangular coefficient matrix of size :math:`(*, m, m)`                where :math:`*` is zero or more batch dimensions
@@ -6546,8 +7082,6 @@ NULL
 
 #' Symeig
 #'
-#' symeig(input, eigenvectors=False, upper=True, out=None) -> (Tensor, Tensor)
-#' 
 #' This function returns eigenvalues and eigenvectors
 #' of a real symmetric matrix `input` or a batch of real symmetric matrices,
 #' represented by a namedtuple (eigenvalues, eigenvectors).
@@ -6576,6 +7110,11 @@ NULL
 #'           operation is really only stable when all eigenvalues are distinct.
 #'           Otherwise, ``NaN`` can appear as the gradients are not properly defined.
 #'
+#' @section Signatures:
+#' 
+#' symeig(input, eigenvectors=False, upper=True, out=None) -> (Tensor, Tensor)
+#'
+#'
 #' @param input (Tensor) the input tensor of size :math:`(*, n, n)` where `*` is zero or more                    batch dimensions consisting of symmetric matrices.
 #' @param eigenvectors (boolean, optional) controls whether eigenvectors have to be computed
 #' @param upper (boolean, optional) controls whether to consider upper-triangular or lower-triangular region
@@ -6591,13 +7130,16 @@ NULL
 
 #' Eig
 #'
-#' eig(input, eigenvectors=False, out=None) -> (Tensor, Tensor)
-#' 
 #' Computes the eigenvalues and eigenvectors of a real square matrix.
 #' 
 #' .. note::
 #'     Since eigenvalues and eigenvectors might be complex, backward pass is supported only
 #'     for [`torch_symeig`]
+#'
+#' @section Signatures:
+#' 
+#' eig(input, eigenvectors=False, out=None) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) the square matrix of shape :math:`(n \times n)` for which the eigenvalues and eigenvectors        will be computed
 #' @param eigenvectors (bool) ``True`` to compute both eigenvalues and eigenvectors;        otherwise, only eigenvalues will be computed
@@ -6613,8 +7155,6 @@ NULL
 
 #' Svd
 #'
-#' svd(input, some=True, compute_uv=True, out=None) -> (Tensor, Tensor, Tensor)
-#' 
 #' This function returns a namedtuple ``(U, S, V)`` which is the singular value
 #' decomposition of a input real matrix or batches of real matrices `input` such that
 #' :math:`input = U \times diag(S) \times V^T`.
@@ -6650,6 +7190,11 @@ NULL
 #' .. note:: When `compute_uv` = ``False``, backward cannot be performed since `U` and `V`
 #'           from the forward pass is required for the backward operation.
 #'
+#' @section Signatures:
+#' 
+#' svd(input, some=True, compute_uv=True, out=None) -> (Tensor, Tensor, Tensor)
+#'
+#'
 #' @param input (Tensor) the input tensor of size :math:`(*, m, n)` where `*` is zero or more                    batch dimensions consisting of :math:`m \times n` matrices.
 #' @param some (bool, optional) controls the shape of returned `U` and `V`
 #' @param compute_uv (bool, optional) option whether to compute `U` and `V` or not
@@ -6677,8 +7222,6 @@ NULL
 
 #' Cholesky
 #'
-#' cholesky(input, upper=False, out=None) -> Tensor
-#' 
 #' Computes the Cholesky decomposition of a symmetric positive-definite
 #' matrix :math:`A` or for batches of symmetric positive-definite matrices.
 #' 
@@ -6701,6 +7244,11 @@ NULL
 #' of each of the individual matrices. Similarly, when `upper` is ``False``, the returned
 #' tensor will be composed of lower-triangular Cholesky factors of each of the individual
 #' matrices.
+#'
+#' @section Signatures:
+#' 
+#' cholesky(input, upper=False, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor :math:`A` of size :math:`(*, n, n)` where `*` is zero or more                batch dimensions consisting of symmetric positive-definite matrices.
 #' @param upper (bool, optional) flag that indicates whether to return a                            upper or lower triangular matrix. Default: ``False``
@@ -6729,8 +7277,6 @@ NULL
 
 #' Cholesky_solve
 #'
-#' cholesky_solve(input, input2, upper=False, out=None) -> Tensor
-#' 
 #' Solves a linear system of equations with a positive semidefinite
 #' matrix to be inverted given its Cholesky factor matrix :math:`u`.
 #' 
@@ -6749,6 +7295,11 @@ NULL
 #' `torch_cholesky_solve(b, u)` can take in 2D inputs `b, u` or inputs that are
 #' batches of 2D matrices. If the inputs are batches, then returns
 #' batched outputs `c`
+#'
+#' @section Signatures:
+#' 
+#' cholesky_solve(input, input2, upper=False, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) input matrix :math:`b` of size :math:`(*, m, k)`,                where :math:`*` is zero or more batch dimensions
 #' @param input2 (Tensor) input matrix :math:`u` of size :math:`(*, m, m)`,                where :math:`*` is zero of more batch dimensions composed of                upper or lower triangular Cholesky factor
@@ -6775,8 +7326,6 @@ NULL
 
 #' Solve
 #'
-#' torch.solve(input, A, out=None) -> (Tensor, Tensor)
-#' 
 #' This function returns the solution to the system of linear
 #' equations represented by :math:`AX = B` and the LU factorization of
 #' A, in order as a namedtuple `solution, LU`.
@@ -6793,6 +7342,11 @@ NULL
 #'     `solution` and `LU` will be transposed, i.e. with strides like
 #'     `B.contiguous().transpose(-1, -2).stride()` and
 #'     `A.contiguous().transpose(-1, -2).stride()` respectively.
+#'
+#' @section Signatures:
+#' 
+#' torch.solve(input, A, out=None) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) input matrix :math:`B` of size :math:`(*, m, k)` , where :math:`*`                is zero or more batch dimensions.
 #' @param A (Tensor) input square matrix of size :math:`(*, m, m)`, where                :math:`*` is zero or more batch dimensions.
@@ -6819,8 +7373,6 @@ NULL
 
 #' Cholesky_inverse
 #'
-#' cholesky_inverse(input, upper=False, out=None) -> Tensor
-#' 
 #' Computes the inverse of a symmetric positive-definite matrix :math:`A` using its
 #' Cholesky factor :math:`u`: returns matrix ``inv``. The inverse is computed using
 #' LAPACK routines ``dpotri`` and ``spotri`` (and the corresponding MAGMA routines).
@@ -6837,6 +7389,11 @@ NULL
 #' \deqn{
 #'     inv = (u^T u)^{{-1}}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' cholesky_inverse(input, upper=False, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input 2-D tensor :math:`u`, a upper or lower triangular           Cholesky factor
 #' @param upper (bool, optional) whether to return a lower (default) or upper triangular matrix
@@ -6860,8 +7417,6 @@ NULL
 
 #' Qr
 #'
-#' qr(input, some=True, out=None) -> (Tensor, Tensor)
-#' 
 #' Computes the QR decomposition of a matrix or a batch of matrices `input`,
 #' and returns a namedtuple (Q, R) of tensors such that :math:`\text{input} = Q R`
 #' with :math:`Q` being an orthogonal matrix or batch of orthogonal matrices and
@@ -6876,6 +7431,11 @@ NULL
 #' .. note:: While it should always give you a valid decomposition, it may not
 #'           give you the same one across platforms - it will depend on your
 #'           LAPACK implementation.
+#'
+#' @section Signatures:
+#' 
+#' qr(input, some=True, out=None) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) the input tensor of size :math:`(*, m, n)` where `*` is zero or more                batch dimensions consisting of matrices of dimension :math:`m \times n`.
 #' @param some (bool, optional) Set to ``True`` for reduced QR decomposition and ``False`` for                complete QR decomposition.
@@ -6903,8 +7463,6 @@ NULL
 
 #' Geqrf
 #'
-#' geqrf(input, out=None) -> (Tensor, Tensor)
-#' 
 #' This is a low-level function for calling LAPACK directly. This function
 #' returns a namedtuple (a, tau) as defined in `LAPACK documentation for geqrf`_ .
 #' 
@@ -6917,6 +7475,11 @@ NULL
 #' which produces a sequence of 'elementary reflectors'.
 #' 
 #' See `LAPACK documentation for geqrf`_ for further details.
+#'
+#' @section Signatures:
+#' 
+#' geqrf(input, out=None) -> (Tensor, Tensor)
+#'
 #'
 #' @param input (Tensor) the input matrix
 #' @param out (tuple, optional) the output tuple of (Tensor, Tensor)
@@ -6931,13 +7494,16 @@ NULL
 
 #' Orgqr
 #'
-#' orgqr(input, input2) -> Tensor
-#' 
 #' Computes the orthogonal matrix `Q` of a QR factorization, from the `(input, input2)`
 #' tuple returned by [`torch_geqrf`].
 #' 
 #' This directly calls the underlying LAPACK function `?orgqr`.
 #' See `LAPACK documentation for orgqr`_ for further details.
+#'
+#' @section Signatures:
+#' 
+#' orgqr(input, input2) -> Tensor
+#'
 #'
 #' @param input (Tensor) the `a` from :func:`torch.geqrf`.
 #' @param input2 (Tensor) the `tau` from :func:`torch.geqrf`.
@@ -6952,13 +7518,16 @@ NULL
 
 #' Ormqr
 #'
-#' ormqr(input, input2, input3, left=True, transpose=False) -> Tensor
-#' 
 #' Multiplies `mat` (given by `input3`) by the orthogonal `Q` matrix of the QR factorization
 #' formed by [`torch_geqrf` that is represented by `(a, tau)` (given by (`input`, `input2`])).
 #' 
 #' This directly calls the underlying LAPACK function `?ormqr`.
 #' See `LAPACK documentation for ormqr`_ for further details.
+#'
+#' @section Signatures:
+#' 
+#' ormqr(input, input2, input3, left=True, transpose=False) -> Tensor
+#'
 #'
 #' @param input (Tensor) the `a` from :func:`torch.geqrf`.
 #' @param input2 (Tensor) the `tau` from :func:`torch.geqrf`.
@@ -6974,10 +7543,13 @@ NULL
 
 #' Lu_solve
 #'
-#' lu_solve(input, LU_data, LU_pivots, out=None) -> Tensor
-#' 
 #' Returns the LU solve of the linear system :math:`Ax = b` using the partially pivoted
 #' LU factorization of A from :meth:`torch_lu`.
+#'
+#' @section Signatures:
+#' 
+#' lu_solve(input, LU_data, LU_pivots, out=None) -> Tensor
+#'
 #'
 #' @param b (Tensor) the RHS tensor of size :math:`(*, m, k)`, where :math:`*`                is zero or more batch dimensions.
 #' @param LU_data (Tensor) the pivoted LU factorization of A from :meth:`torch.lu` of size :math:`(*, m, m)`,                       where :math:`*` is zero or more batch dimensions.
@@ -7001,8 +7573,6 @@ NULL
 
 #' Multinomial
 #'
-#' multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -> LongTensor
-#' 
 #' Returns a tensor where each row contains `num_samples` indices sampled
 #' from the multinomial probability distribution located in the corresponding row
 #' of tensor `input`.
@@ -7030,6 +7600,11 @@ NULL
 #'     number of non-zero elements in `input` (or the min number of non-zero
 #'     elements in each row of `input` if it is a matrix).
 #'
+#' @section Signatures:
+#' 
+#' multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -> LongTensor
+#'
+#'
 #' @param input (Tensor) the input tensor containing probabilities
 #' @param num_samples (int) number of samples to draw
 #' @param replacement (bool, optional) whether to draw with replacement or not
@@ -7052,13 +7627,16 @@ NULL
 
 #' Lgamma
 #'
-#' lgamma(input, out=None) -> Tensor
-#' 
 #' Computes the logarithm of the gamma function on `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \log \Gamma(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' lgamma(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -7077,13 +7655,16 @@ NULL
 
 #' Digamma
 #'
-#' digamma(input, out=None) -> Tensor
-#' 
 #' Computes the logarithmic derivative of the gamma function on `input`.
 #' 
 #' \deqn{
 #'     \psi(x) = \frac{d}{dx} \ln\left(\Gamma\left(x\right)\right) = \frac{\Gamma'(x)}{\Gamma(x)}
 #' }
+#'
+#' @section Signatures:
+#' 
+#' digamma(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the tensor to compute the digamma function on
 #'
@@ -7101,8 +7682,6 @@ NULL
 
 #' Polygamma
 #'
-#' polygamma(n, input, out=None) -> Tensor
-#' 
 #' Computes the :math:`n^{th}` derivative of the digamma function on `input`.
 #' :math:`n \geq 0` is called the order of the polygamma function.
 #' 
@@ -7111,6 +7690,11 @@ NULL
 #' }
 #' .. note::
 #'     This function is not implemented for :math:`n \geq 2`.
+#'
+#' @section Signatures:
+#' 
+#' polygamma(n, input, out=None) -> Tensor
+#'
 #'
 #' @param n (int) the order of the polygamma function
 #' @param input (Tensor) the input tensor.
@@ -7130,14 +7714,17 @@ NULL
 
 #' Erfinv
 #'
-#' erfinv(input, out=None) -> Tensor
-#' 
 #' Computes the inverse error function of each element of `input`.
 #' The inverse error function is defined in the range :math:`(-1, 1)` as:
 #' 
 #' \deqn{
 #'     \mathrm{erfinv}(\mathrm{erf}(x)) = x
 #' }
+#'
+#' @section Signatures:
+#' 
+#' erfinv(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -7155,13 +7742,16 @@ NULL
 
 #' Sign
 #'
-#' sign(input, out=None) -> Tensor
-#' 
 #' Returns a new tensor with the signs of the elements of `input`.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = \operatorname{sgn}(\text{input}_{i})
 #' }
+#'
+#' @section Signatures:
+#' 
+#' sign(input, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param out (Tensor, optional) the output tensor.
@@ -7181,12 +7771,15 @@ NULL
 
 #' Dist
 #'
-#' dist(input, other, p=2) -> Tensor
-#' 
 #' Returns the p-norm of (`input` - `other`)
 #' 
 #' The shapes of `input` and `other` must be
 #' :ref:`broadcastable <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' dist(input, other, p=2) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param other (Tensor) the Right-hand-side input tensor
@@ -7212,8 +7805,6 @@ NULL
 
 #' Atan2
 #'
-#' atan2(input, other, out=None) -> Tensor
-#' 
 #' Element-wise arctangent of :math:`\text{input}_{i} / \text{other}_{i}`
 #' with consideration of the quadrant. Returns a new tensor with the signed angles
 #' in radians between vector :math:`(\text{other}_{i}, \text{input}_{i})`
@@ -7223,6 +7814,11 @@ NULL
 #' 
 #' The shapes of ``input`` and ``other`` must be
 #' :ref:`broadcastable <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' atan2(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the first input tensor
 #' @param other (Tensor) the second input tensor
@@ -7255,6 +7851,8 @@ NULL
 #' :ref:`broadcastable <broadcasting-semantics>`. If `weight` is a tensor, then
 #' the shapes of `weight`, `start`, and `end` must be :ref:`broadcastable <broadcasting-semantics>`.
 #'
+#' 
+#'
 #' @param input (Tensor) the tensor with the starting points
 #' @param end (Tensor) the tensor with the ending points
 #' @param weight (float or tensor) the weight for the interpolation formula
@@ -7278,13 +7876,16 @@ NULL
 
 #' Histc
 #'
-#' histc(input, bins=100, min=0, max=0, out=None) -> Tensor
-#' 
 #' Computes the histogram of a tensor.
 #' 
 #' The elements are sorted into equal width bins between `min` and
 #' `max`. If `min` and `max` are both zero, the minimum and
 #' maximum values of the data are used.
+#'
+#' @section Signatures:
+#' 
+#' histc(input, bins=100, min=0, max=0, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param bins (int) number of histogram bins
@@ -7305,8 +7906,6 @@ NULL
 
 #' Fmod
 #'
-#' fmod(input, other, out=None) -> Tensor
-#' 
 #' Computes the element-wise remainder of division.
 #' 
 #' The dividend and divisor may contain both for integer and floating point
@@ -7314,6 +7913,11 @@ NULL
 #' 
 #' When `other` is a tensor, the shapes of `input` and
 #' `other` must be :ref:`broadcastable <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' fmod(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the dividend
 #' @param other (Tensor or float) the divisor, which may be either a number or a tensor of the same shape as the dividend
@@ -7333,8 +7937,6 @@ NULL
 
 #' Remainder
 #'
-#' remainder(input, other, out=None) -> Tensor
-#' 
 #' Computes the element-wise remainder of division.
 #' 
 #' The divisor and dividend may contain both for integer and floating point
@@ -7342,6 +7944,11 @@ NULL
 #' 
 #' When `other` is a tensor, the shapes of `input` and
 #' `other` must be :ref:`broadcastable <broadcasting-semantics>`.
+#'
+#' @section Signatures:
+#' 
+#' remainder(input, other, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the dividend
 #' @param other (Tensor or float) the divisor that may be either a number or a                               Tensor of the same shape as the dividend
@@ -7361,8 +7968,6 @@ NULL
 
 #' Sort
 #'
-#' sort(input, dim=-1, descending=False, out=None) -> (Tensor, LongTensor)
-#' 
 #' Sorts the elements of the `input` tensor along a given dimension
 #' in ascending order by value.
 #' 
@@ -7374,6 +7979,11 @@ NULL
 #' A namedtuple of (values, indices) is returned, where the `values` are the
 #' sorted values and `indices` are the indices of the elements in the original
 #' `input` tensor.
+#'
+#' @section Signatures:
+#' 
+#' sort(input, dim=-1, descending=False, out=None) -> (Tensor, LongTensor)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int, optional) the dimension to sort along
@@ -7399,13 +8009,16 @@ NULL
 
 #' Argsort
 #'
-#' argsort(input, dim=-1, descending=False, out=None) -> LongTensor
-#' 
 #' Returns the indices that sort a tensor along a given dimension in ascending
 #' order by value.
 #' 
 #' This is the second value returned by :meth:`torch_sort`.  See its documentation
 #' for the exact semantics of this method.
+#'
+#' @section Signatures:
+#' 
+#' argsort(input, dim=-1, descending=False, out=None) -> LongTensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int, optional) the dimension to sort along
@@ -7426,8 +8039,6 @@ NULL
 
 #' Topk
 #'
-#' topk(input, k, dim=None, largest=True, sorted=True, out=None) -> (Tensor, LongTensor)
-#' 
 #' Returns the `k` largest elements of the given `input` tensor along
 #' a given dimension.
 #' 
@@ -7440,6 +8051,11 @@ NULL
 #' 
 #' The boolean option `sorted` if ``True``, will make sure that the returned
 #' `k` elements are themselves sorted
+#'
+#' @section Signatures:
+#' 
+#' topk(input, k, dim=None, largest=True, sorted=True, out=None) -> (Tensor, LongTensor)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param k (int) the k in "top-k"
@@ -7463,13 +8079,16 @@ NULL
 
 #' Renorm
 #'
-#' renorm(input, p, dim, maxnorm, out=None) -> Tensor
-#' 
 #' Returns a tensor where each sub-tensor of `input` along dimension
 #' `dim` is normalized such that the `p`-norm of the sub-tensor is lower
 #' than the value `maxnorm`
 #' 
 #' .. note:: If the norm of a row is lower than `maxnorm`, the row is unchanged
+#'
+#' @section Signatures:
+#' 
+#' renorm(input, p, dim, maxnorm, out=None) -> Tensor
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param p (float) the power for the norm computation
@@ -7494,11 +8113,14 @@ NULL
 
 #' Equal
 #'
-#' equal(input, other) -> bool
-#' 
 #' ``True`` if two tensors have the same size and elements, ``False`` otherwise.
 #' 
 #' Example::
+#'
+#' @section Signatures:
+#' 
+#' equal(input, other) -> bool
+#'
 #'
 
 #'
@@ -7515,8 +8137,6 @@ NULL
 
 #' Normal
 #'
-#' normal(mean, std, *, generator=None, out=None) -> Tensor
-#' 
 #' Returns a tensor of random numbers drawn from separate normal distributions
 #' whose mean and standard deviation are given.
 #' 
@@ -7531,6 +8151,11 @@ NULL
 #' 
 #' .. note:: When the shapes do not match, the shape of `mean`
 #'           is used as the shape for the returned output tensor
+#'
+#' @section Signatures:
+#' 
+#' normal(mean, std, *, generator=None, out=None) -> Tensor
+#'
 #'
 #' @param mean (Tensor) the tensor of per-element means
 #' @param std (Tensor) the tensor of per-element standard deviations
@@ -7550,10 +8175,13 @@ NULL
 
 #' Normal
 #'
-#' normal(mean=0.0, std, out=None) -> Tensor
-#' 
 #' Similar to the function above, but the means are shared among all drawn
 #' elements.
+#'
+#' @section Signatures:
+#' 
+#' normal(mean=0.0, std, out=None) -> Tensor
+#'
 #'
 #' @param mean (float, optional) the mean for all distributions
 #' @param std (Tensor) the tensor of per-element standard deviations
@@ -7572,10 +8200,13 @@ NULL
 
 #' Normal
 #'
-#' normal(mean, std=1.0, out=None) -> Tensor
-#' 
 #' Similar to the function above, but the standard-deviations are shared among
 #' all drawn elements.
+#'
+#' @section Signatures:
+#' 
+#' normal(mean, std=1.0, out=None) -> Tensor
+#'
 #'
 #' @param mean (Tensor) the tensor of per-element means
 #' @param std (float, optional) the standard deviation for all distributions
@@ -7594,10 +8225,13 @@ NULL
 
 #' Normal
 #'
-#' normal(mean, std, size, *, out=None) -> Tensor
-#' 
 #' Similar to the function above, but the means and standard deviations are shared
 #' among all drawn elements. The resulting tensor has size given by `size`.
+#'
+#' @section Signatures:
+#' 
+#' normal(mean, std, size, *, out=None) -> Tensor
+#'
 #'
 #' @param mean (float) the mean for all distributions
 #' @param std (float) the standard deviation for all distributions
@@ -7618,19 +8252,10 @@ NULL
 #' Isfinite
 #'
 #' Returns a new tensor with boolean elements representing if each element is `Finite` or not.
-#' 
-#'     Arguments:
-#'         tensor (Tensor): A tensor to check
-#' 
-#'     Returns:
-#'         Tensor: ``A torch.Tensor with dtype torch.bool`` containing a True at each location of finite elements and False otherwise
-#' 
-#'     Example::
-#' 
-#'         >>> torch.isfinite(torch.tensor([1, float('inf'), 2, float('-inf'), float('nan')]))
-#'         tensor([True,  False,  True,  False,  False])
 #'
-
+#' 
+#'
+#' @param tensor (Tensor) A tensor to check
 #'
 #' 
 #'

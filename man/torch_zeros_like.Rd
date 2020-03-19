@@ -15,18 +15,22 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-zeros_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
-}
-\details{
 Returns a tensor filled with the scalar value \code{0}, with the same size as
 \code{input}. \code{torch_zeros_like(input)} is equivalent to
 \code{torch_zeros(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
-
+}
+\details{
 .. warning::
 As of 0.4, this function does not support an \code{out} keyword. As an alternative,
 the old \code{torch_zeros_like(input, out=output)} is equivalent to
 \code{torch_zeros(input.size(), out=output)}.
 }
+\section{Signatures}{
+
+
+zeros_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
+}
+
 \examples{
 \dontrun{
 input = torch_empty(2, 3)

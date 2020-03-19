@@ -17,14 +17,18 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-rand(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-}
-\details{
 Returns a tensor filled with random numbers from a uniform distribution
 on the interval :math:\verb{[0, 1)}
-
+}
+\details{
 The shape of the tensor is defined by the variable argument \code{size}.
 }
+\section{Signatures}{
+
+
+rand(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_rand(4)

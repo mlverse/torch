@@ -7,11 +7,9 @@
 \item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more                batch dimensions.}
 }
 \description{
-logdet(input) -> Tensor
+Calculates log determinant of a square matrix or batches of square matrices.
 }
 \details{
-Calculates log determinant of a square matrix or batches of square matrices.
-
 .. note::
 Result is \code{-inf} if \code{input} has zero log determinant, and is \code{nan} if
 \code{input} has negative determinant.
@@ -22,6 +20,12 @@ is not invertible. In this case, double backward through :meth:\code{logdet} wil
 be unstable in when \code{input} doesn't have distinct singular values. See
 :meth:\code{~torch.svd} for details.
 }
+\section{Signatures}{
+
+
+logdet(input) -> Tensor
+}
+
 \examples{
 \dontrun{
 A = torch_randn(3, 3)

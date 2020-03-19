@@ -23,18 +23,22 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-}
-\details{
 Returns a tensor filled with random integers generated uniformly
 between \code{low} (inclusive) and \code{high} (exclusive).
-
+}
+\details{
 The shape of the tensor is defined by the variable argument \code{size}.
 
 .. note:
 With the global dtype default (\code{torch_float32}), this function returns
 a tensor with dtype \code{torch_int64}.
 }
+\section{Signatures}{
+
+
+randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_randint(3, 5, (3,))

@@ -17,11 +17,14 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-randperm(n, out=None, dtype=torch.int64, layout=torch.strided, device=None, requires_grad=False) -> LongTensor
-}
-\details{
 Returns a random permutation of integers from \code{0} to \code{n - 1}.
 }
+\section{Signatures}{
+
+
+randperm(n, out=None, dtype=torch.int64, layout=torch.strided, device=None, requires_grad=False) -> LongTensor
+}
+
 \examples{
 \dontrun{
 torch_randperm(4)

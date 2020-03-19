@@ -15,16 +15,14 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-clamp(input, min, max, out=None) -> Tensor
-
-clamp(input, *, min, out=None) -> Tensor
-
-clamp(input, *, max, out=None) -> Tensor
-}
-\details{
 Clamp all elements in \code{input} into the range \code{[} \code{min}, \code{max} \verb{]} and return
 a resulting tensor:
 
+Clamps all elements in \code{input} to be larger or equal \code{min}.
+
+Clamps all elements in \code{input} to be smaller or equal \code{max}.
+}
+\details{
 \deqn{
     y_i = \begin{cases}
         \text{min} & \text{if } x_i < \text{min} \\
@@ -35,16 +33,26 @@ a resulting tensor:
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, args \code{min}
 and \code{max} must be real numbers, otherwise they should be integers.
 
-Clamps all elements in \code{input} to be larger or equal \code{min}.
-
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{value}
 should be a real number, otherwise it should be an integer.
-
-Clamps all elements in \code{input} to be smaller or equal \code{max}.
 
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{value}
 should be a real number, otherwise it should be an integer.
 }
+\section{Signatures}{
+
+
+clamp(input, min, max, out=None) -> Tensor
+
+
+
+clamp(input, *, min, out=None) -> Tensor
+
+
+
+clamp(input, *, max, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(4)

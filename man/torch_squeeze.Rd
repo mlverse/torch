@@ -11,11 +11,9 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-squeeze(input, dim=None, out=None) -> Tensor
+Returns a tensor with all the dimensions of \code{input} of size \code{1} removed.
 }
 \details{
-Returns a tensor with all the dimensions of \code{input} of size \code{1} removed.
-
 For example, if \code{input} is of shape:
 :math:\verb{(A \\times 1 \\times B \\times C \\times 1 \\times D)} then the \code{out} tensor
 will be of shape: :math:\verb{(A \\times B \\times C \\times D)}.
@@ -28,6 +26,12 @@ will squeeze the tensor to the shape :math:\verb{(A \\times B)}.
 .. note:: The returned tensor shares the storage with the input tensor,
 so changing the contents of one will change the contents of the other.
 }
+\section{Signatures}{
+
+
+squeeze(input, dim=None, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_zeros(2, 1, 2, 1, 2)

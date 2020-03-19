@@ -17,18 +17,22 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-randn(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-}
-\details{
 Returns a tensor filled with random numbers from a normal distribution
 with mean \code{0} and variance \code{1} (also called the standard normal
 distribution).
-
+}
+\details{
 \deqn{
     \text{out}_{i} \sim \mathcal{N}(0, 1)
 }
 The shape of the tensor is defined by the variable argument \code{size}.
 }
+\section{Signatures}{
+
+
+randn(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_randn(4)

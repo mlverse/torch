@@ -11,14 +11,18 @@
 \item{out}{(Tensor, optional) the output tensor. Must be a \code{ByteTensor}}
 }
 \description{
-eq(input, other, out=None) -> Tensor
+Computes element-wise equality
 }
 \details{
-Computes element-wise equality
-
 The second argument can be a number or a tensor whose shape is
 :ref:\verb{broadcastable <broadcasting-semantics>} with the first argument.
 }
+\section{Signatures}{
+
+
+eq(input, other, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_eq(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))

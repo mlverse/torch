@@ -13,19 +13,15 @@
 \item{unbiased}{(bool) whether to use the unbiased estimation or not}
 }
 \description{
-std_mean(input, unbiased=True) -> (Tensor, Tensor)
-
-std(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor)
-}
-\details{
 Returns the standard-deviation and mean of all elements in the \code{input} tensor.
-
-If \code{unbiased} is \code{False}, then the standard-deviation will be calculated
-via the biased estimator. Otherwise, Bessel's correction will be used.
 
 Returns the standard-deviation and mean of each row of the \code{input} tensor in the
 dimension \code{dim}. If \code{dim} is a list of dimensions,
 reduce over all of them.
+}
+\details{
+If \code{unbiased} is \code{False}, then the standard-deviation will be calculated
+via the biased estimator. Otherwise, Bessel's correction will be used.
 
 If \code{keepdim} is \code{True}, the output tensor is of the same size
 as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
@@ -35,6 +31,16 @@ output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 If \code{unbiased} is \code{False}, then the standard-deviation will be calculated
 via the biased estimator. Otherwise, Bessel's correction will be used.
 }
+\section{Signatures}{
+
+
+std_mean(input, unbiased=True) -> (Tensor, Tensor)
+
+
+
+std(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor)
+}
+
 \examples{
 \dontrun{
 a = torch_randn(1, 3)

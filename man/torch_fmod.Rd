@@ -11,17 +11,21 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-fmod(input, other, out=None) -> Tensor
+Computes the element-wise remainder of division.
 }
 \details{
-Computes the element-wise remainder of division.
-
 The dividend and divisor may contain both for integer and floating point
 numbers. The remainder has the same sign as the dividend \code{input}.
 
 When \code{other} is a tensor, the shapes of \code{input} and
 \code{other} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
+\section{Signatures}{
+
+
+fmod(input, other, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_fmod(torch_tensor([-3., -2, -1, 1, 2, 3]), 2)

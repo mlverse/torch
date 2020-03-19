@@ -11,9 +11,12 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-bitwise_xor(input, other, out=None) -> Tensor
-}
-\details{
 Computes the bitwise XOR of \code{input} and \code{other}. The input tensor must be of
 integral or Boolean types. For bool tensors, it computes the logical XOR.
 }
+\section{Signatures}{
+
+
+bitwise_xor(input, other, out=None) -> Tensor
+}
+

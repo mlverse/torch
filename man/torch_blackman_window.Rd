@@ -17,11 +17,9 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-blackman_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+Blackman window function.
 }
 \details{
-Blackman window function.
-
 \deqn{
     w[n] = 0.42 - 0.5 \cos \left( \frac{2 \pi n}{N - 1} \right) + 0.08 \cos \left( \frac{4 \pi n}{N - 1} \right)
 }
@@ -39,3 +37,9 @@ above formula is in fact :math:\verb{\\text\{window\\_length\} + 1}. Also, we al
 .. note::
 If \code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
 }
+\section{Signatures}{
+
+
+blackman_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+}
+

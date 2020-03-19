@@ -4,8 +4,11 @@
 \alias{torch_threshold_}
 \title{Threshold_}
 \description{
-threshold_(input, threshold, value) -> Tensor
-}
-\details{
 In-place version of \code{\link{~threshold}}.
 }
+\section{Signatures}{
+
+
+threshold_(input, threshold, value) -> Tensor
+}
+

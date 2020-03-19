@@ -15,13 +15,11 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-addcmul(input, value=1, tensor1, tensor2, out=None) -> Tensor
-}
-\details{
 Performs the element-wise multiplication of \code{tensor1}
 by \code{tensor2}, multiply the result by the scalar \code{value}
 and add it to \code{input}.
-
+}
+\details{
 \deqn{
     \text{out}_i = \text{input}_i + \text{value} \times \text{tensor1}_i \times \text{tensor2}_i
 }
@@ -31,6 +29,12 @@ The shapes of \code{tensor}, \code{tensor1}, and \code{tensor2} must be
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, \code{value} must be
 a real number, otherwise an integer.
 }
+\section{Signatures}{
+
+
+addcmul(input, value=1, tensor1, tensor2, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 t = torch_randn(1, 3)

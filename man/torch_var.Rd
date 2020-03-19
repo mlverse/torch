@@ -15,18 +15,14 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-var(input, unbiased=True) -> Tensor
-
-var(input, dim, keepdim=False, unbiased=True, out=None) -> Tensor
-}
-\details{
 Returns the variance of all elements in the \code{input} tensor.
-
-If \code{unbiased} is \code{False}, then the variance will be calculated via the
-biased estimator. Otherwise, Bessel's correction will be used.
 
 Returns the variance of each row of the \code{input} tensor in the given
 dimension \code{dim}.
+}
+\details{
+If \code{unbiased} is \code{False}, then the variance will be calculated via the
+biased estimator. Otherwise, Bessel's correction will be used.
 
 If \code{keepdim} is \code{True}, the output tensor is of the same size
 as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
@@ -36,6 +32,16 @@ output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 If \code{unbiased} is \code{False}, then the variance will be calculated via the
 biased estimator. Otherwise, Bessel's correction will be used.
 }
+\section{Signatures}{
+
+
+var(input, unbiased=True) -> Tensor
+
+
+
+var(input, dim, keepdim=False, unbiased=True, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(1, 3)

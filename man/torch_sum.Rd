@@ -13,22 +13,28 @@
 \item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:\code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
 }
 \description{
-sum(input, dtype=None) -> Tensor
-
-sum(input, dim, keepdim=False, dtype=None) -> Tensor
-}
-\details{
 Returns the sum of all elements in the \code{input} tensor.
 
 Returns the sum of each row of the \code{input} tensor in the given
 dimension \code{dim}. If \code{dim} is a list of dimensions,
 reduce over all of them.
-
+}
+\details{
 If \code{keepdim} is \code{True}, the output tensor is of the same size
 as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in the
 output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
+\section{Signatures}{
+
+
+sum(input, dtype=None) -> Tensor
+
+
+
+sum(input, dim, keepdim=False, dtype=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(1, 3)

@@ -9,12 +9,16 @@
 \item{input2}{(Tensor) the \code{tau} from :func:\code{torch.geqrf}.}
 }
 \description{
-orgqr(input, input2) -> Tensor
-}
-\details{
 Computes the orthogonal matrix \code{Q} of a QR factorization, from the \verb{(input, input2)}
 tuple returned by \code{\link{torch_geqrf}}.
-
+}
+\details{
 This directly calls the underlying LAPACK function \code{?orgqr}.
 See \verb{LAPACK documentation for orgqr}_ for further details.
 }
+\section{Signatures}{
+
+
+orgqr(input, input2) -> Tensor
+}
+

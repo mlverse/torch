@@ -15,15 +15,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-histc(input, bins=100, min=0, max=0, out=None) -> Tensor
+Computes the histogram of a tensor.
 }
 \details{
-Computes the histogram of a tensor.
-
 The elements are sorted into equal width bins between \code{min} and
 \code{max}. If \code{min} and \code{max} are both zero, the minimum and
 maximum values of the data are used.
 }
+\section{Signatures}{
+
+
+histc(input, bins=100, min=0, max=0, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_histc(torch_tensor([1., 2, 1]), bins=4, min=0, max=3)

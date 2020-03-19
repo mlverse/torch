@@ -9,15 +9,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-erf(input, out=None) -> Tensor
+Computes the error function of each element. The error function is defined as follows:
 }
 \details{
-Computes the error function of each element. The error function is defined as follows:
-
 \deqn{
     \mathrm{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt
 }
 }
+\section{Signatures}{
+
+
+erf(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_erf(torch_tensor([0, -1., 10.]))

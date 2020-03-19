@@ -17,13 +17,6 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-max(input) -> Tensor
-
-max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
-
-max(input, other, out=None) -> Tensor
-}
-\details{
 Returns the maximum value of all elements in the \code{input} tensor.
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the maximum
@@ -31,13 +24,14 @@ value of each row of the \code{input} tensor in the given dimension
 \code{dim}. And \code{indices} is the index location of each maximum value found
 (argmax).
 
+Each element of the tensor \code{input} is compared with the corresponding
+element of the tensor \code{other} and an element-wise maximum is taken.
+}
+\details{
 If \code{keepdim} is \code{True}, the output tensors are of the same size
 as \code{input} except in the dimension \code{dim} where they are of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting
 in the output tensors having 1 fewer dimension than \code{input}.
-
-Each element of the tensor \code{input} is compared with the corresponding
-element of the tensor \code{other} and an element-wise maximum is taken.
 
 The shapes of \code{input} and \code{other} don't need to match,
 but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
@@ -48,6 +42,20 @@ but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 .. note:: When the shapes do not match, the shape of the returned output tensor
 follows the :ref:\verb{broadcasting rules <broadcasting-semantics>}.
 }
+\section{Signatures}{
+
+
+max(input) -> Tensor
+
+
+
+max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
+
+
+
+max(input, other, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(1, 3)

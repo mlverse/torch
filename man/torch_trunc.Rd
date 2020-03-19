@@ -9,12 +9,15 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-trunc(input, out=None) -> Tensor
-}
-\details{
 Returns a new tensor with the truncated integer values of
 the elements of \code{input}.
 }
+\section{Signatures}{
+
+
+trunc(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(4)

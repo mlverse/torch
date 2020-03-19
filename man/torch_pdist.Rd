@@ -9,14 +9,12 @@
 \item{p}{NA p value for the p-norm distance to calculate between each vector pair        :math:\verb{\\in [0, \\infty]}.}
 }
 \description{
-pdist(input, p=2) -> Tensor
-}
-\details{
 Computes the p-norm distance between every pair of row vectors in the input.
 This is identical to the upper triangular portion, excluding the diagonal, of
 \verb{torch_norm(input[:, None] - input, dim=2, p=p)}. This function will be faster
 if the rows are contiguous.
-
+}
+\details{
 If input has shape :math:\verb{N \\times M} then the output will have shape
 :math:\verb{\\frac\{1\}\{2\} N (N - 1)}.
 
@@ -25,3 +23,9 @@ equivalent to \code{scipy.spatial.distance.pdist(input, 'hamming') * M}.
 When :math:\verb{p = \\infty}, the closest scipy function is
 \verb{scipy.spatial.distance.pdist(xn, lambda x, y: np.abs(x - y).max())}.
 }
+\section{Signatures}{
+
+
+pdist(input, p=2) -> Tensor
+}
+

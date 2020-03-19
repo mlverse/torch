@@ -15,18 +15,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-normal(mean, std, *, generator=None, out=None) -> Tensor
-
-normal(mean=0.0, std, out=None) -> Tensor
-
-normal(mean, std=1.0, out=None) -> Tensor
-
-normal(mean, std, size, *, out=None) -> Tensor
-}
-\details{
 Returns a tensor of random numbers drawn from separate normal distributions
 whose mean and standard deviation are given.
 
+Similar to the function above, but the means are shared among all drawn
+elements.
+
+Similar to the function above, but the standard-deviations are shared among
+all drawn elements.
+
+Similar to the function above, but the means and standard deviations are shared
+among all drawn elements. The resulting tensor has size given by \code{size}.
+}
+\details{
 The \code{mean} is a tensor with the mean of
 each output element's normal distribution
 
@@ -38,16 +39,25 @@ total number of elements in each tensor need to be the same.
 
 .. note:: When the shapes do not match, the shape of \code{mean}
 is used as the shape for the returned output tensor
-
-Similar to the function above, but the means are shared among all drawn
-elements.
-
-Similar to the function above, but the standard-deviations are shared among
-all drawn elements.
-
-Similar to the function above, but the means and standard deviations are shared
-among all drawn elements. The resulting tensor has size given by \code{size}.
 }
+\section{Signatures}{
+
+
+normal(mean, std, *, generator=None, out=None) -> Tensor
+
+
+
+normal(mean=0.0, std, out=None) -> Tensor
+
+
+
+normal(mean, std=1.0, out=None) -> Tensor
+
+
+
+normal(mean, std, size, *, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_normal(mean=torch_arange(1., 11.), std=torch_arange(1, 0, -0.1))

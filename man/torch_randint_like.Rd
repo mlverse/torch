@@ -19,14 +19,18 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-}
-\details{
 Returns a tensor with the same shape as Tensor \code{input} filled with
 random integers generated uniformly between \code{low} (inclusive) and
 \code{high} (exclusive).
-
+}
+\details{
 .. note:
 With the global dtype default (\code{torch_float32}), this function returns
 a tensor with dtype \code{torch_int64}.
 }
+\section{Signatures}{
+
+
+randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+}
+

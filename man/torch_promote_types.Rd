@@ -9,14 +9,17 @@
 \item{type2}{(:class:\code{torch.dtype})}
 }
 \description{
-promote_types(type1, type2) -> dtype
-}
-\details{
 Returns the :class:\code{torch_dtype} with the smallest size and scalar kind that is
 not smaller nor of lower kind than either \code{type1} or \code{type2}. See type promotion
 :ref:\verb{documentation <type-promotion-doc>} for more information on the type
 promotion logic.
 }
+\section{Signatures}{
+
+
+promote_types(type1, type2) -> dtype
+}
+
 \examples{
 \dontrun{
 torch_promote_types(torch_int32, torch_float32))

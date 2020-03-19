@@ -11,12 +11,15 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-logical_xor(input, other, out=None) -> Tensor
-}
-\details{
 Computes the element-wise logical XOR of the given input tensors. Zeros are treated as \code{False} and nonzeros are
 treated as \code{True}.
 }
+\section{Signatures}{
+
+
+logical_xor(input, other, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_logical_xor(torch_tensor([True, False, True]), torch_tensor([True, False, False]))

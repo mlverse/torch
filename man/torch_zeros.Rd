@@ -17,12 +17,15 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-zeros(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-}
-\details{
 Returns a tensor filled with the scalar value \code{0}, with the shape defined
 by the variable argument \code{size}.
 }
+\section{Signatures}{
+
+
+zeros(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_zeros(2, 3)

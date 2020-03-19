@@ -4,12 +4,10 @@
 \alias{torch_broadcast_tensors}
 \title{Broadcast_tensors}
 \description{
-broadcast_tensors(*tensors) -> List of Tensors
+Broadcasts the given tensors according to :ref:\code{broadcasting-semantics}.
 }
 \details{
-\preformatted{Broadcasts the given tensors according to :ref:`broadcasting-semantics`.
-
-Args:
+\preformatted{Args:
     *tensors: any number of tensors of the same type
 
 .. warning::
@@ -31,3 +29,9 @@ Example::
             [0, 1, 2]])
 }
 }
+\section{Signatures}{
+
+
+broadcast_tensors(*tensors) -> List of Tensors
+}
+

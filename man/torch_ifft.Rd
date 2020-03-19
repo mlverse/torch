@@ -11,11 +11,9 @@
 \item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
 }
 \description{
-ifft(input, signal_ndim, normalized=False) -> Tensor
+Complex-to-complex Inverse Discrete Fourier Transform
 }
 \details{
-Complex-to-complex Inverse Discrete Fourier Transform
-
 This method computes the complex-to-complex inverse discrete Fourier
 transform. Ignoring the batch dimensions, it computes the following
 expression:
@@ -49,6 +47,12 @@ monitor and control the cache.
 For CPU tensors, this method is currently only available with MKL. Use
 \code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
+\section{Signatures}{
+
+
+ifft(input, signal_ndim, normalized=False) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_randn(3, 3, 2)

@@ -11,12 +11,15 @@
 \item{dims}{(a list or tuple) axis to rotate}
 }
 \description{
-rot90(input, k, dims) -> Tensor
-}
-\details{
 Rotate a n-D tensor by 90 degrees in the plane specified by dims axis.
 Rotation direction is from the first towards the second axis if k > 0, and from the second towards the first for k < 0.
 }
+\section{Signatures}{
+
+
+rot90(input, k, dims) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_arange(4).view(2, 2)

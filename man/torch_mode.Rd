@@ -15,14 +15,12 @@
 \item{indices}{(Tensor, optional) the output index tensor}
 }
 \description{
-mode(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor)
-}
-\details{
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the mode
 value of each row of the \code{input} tensor in the given dimension
 \code{dim}, i.e. a value which appears most often
 in that row, and \code{indices} is the index location of each mode value found.
-
+}
+\details{
 By default, \code{dim} is the last dimension of the \code{input} tensor.
 
 If \code{keepdim} is \code{True}, the output tensors are of the same size as
@@ -32,6 +30,12 @@ in the output tensors having 1 fewer dimension than \code{input}.
 
 .. note:: This function is not defined for \code{torch_cuda.Tensor} yet.
 }
+\section{Signatures}{
+
+
+mode(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor)
+}
+
 \examples{
 \dontrun{
 a = torch_randint(10, (5,))

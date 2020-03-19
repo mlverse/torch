@@ -13,12 +13,10 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-index_select(input, dim, index, out=None) -> Tensor
-}
-\details{
 Returns a new tensor which indexes the \code{input} tensor along dimension
 \code{dim} using the entries in \code{index} which is a \code{LongTensor}.
-
+}
+\details{
 The returned tensor has the same number of dimensions as the original tensor
 (\code{input}).  The \code{dim}\ th dimension has the same size as the length
 of \code{index}; other dimensions have the same size as in the original tensor.
@@ -28,6 +26,12 @@ tensor.  If \code{out} has a different shape than expected, we
 silently change it to the correct shape, reallocating the underlying
 storage if necessary.
 }
+\section{Signatures}{
+
+
+index_select(input, dim, index, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_randn(3, 4)

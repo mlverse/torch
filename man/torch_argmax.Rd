@@ -11,21 +11,27 @@
 \item{keepdim}{(bool) whether the output tensor has :attr:\code{dim} retained or not. Ignored if \code{dim=None}.}
 }
 \description{
+Returns the indices of the maximum value of all elements in the \code{input} tensor.
+
+Returns the indices of the maximum values of a tensor across a dimension.
+}
+\details{
+This is the second value returned by :meth:\code{torch_max}. See its
+documentation for the exact semantics of this method.
+
+This is the second value returned by :meth:\code{torch_max}. See its
+documentation for the exact semantics of this method.
+}
+\section{Signatures}{
+
+
 argmax(input) -> LongTensor
+
+
 
 argmax(input, dim, keepdim=False) -> LongTensor
 }
-\details{
-Returns the indices of the maximum value of all elements in the \code{input} tensor.
 
-This is the second value returned by :meth:\code{torch_max}. See its
-documentation for the exact semantics of this method.
-
-Returns the indices of the maximum values of a tensor across a dimension.
-
-This is the second value returned by :meth:\code{torch_max}. See its
-documentation for the exact semantics of this method.
-}
 \examples{
 \dontrun{
 a = torch_randn(4, 4)

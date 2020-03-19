@@ -7,17 +7,21 @@
 \item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more                batch dimensions.}
 }
 \description{
-det(input) -> Tensor
+Calculates determinant of a square matrix or batches of square matrices.
 }
 \details{
-Calculates determinant of a square matrix or batches of square matrices.
-
 .. note::
 Backward through :meth:\code{det} internally uses SVD results when \code{input} is
 not invertible. In this case, double backward through :meth:\code{det} will be
 unstable in when \code{input} doesn't have distinct singular values. See
 :meth:\code{~torch.svd} for details.
 }
+\section{Signatures}{
+
+
+det(input) -> Tensor
+}
+
 \examples{
 \dontrun{
 A = torch_randn(3, 3)

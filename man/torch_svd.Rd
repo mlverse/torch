@@ -13,13 +13,11 @@
 \item{out}{(tuple, optional) the output tuple of tensors}
 }
 \description{
-svd(input, some=True, compute_uv=True, out=None) -> (Tensor, Tensor, Tensor)
-}
-\details{
 This function returns a namedtuple \verb{(U, S, V)} which is the singular value
 decomposition of a input real matrix or batches of real matrices \code{input} such that
 :math:\verb{input = U \\times diag(S) \\times V^T}.
-
+}
+\details{
 If \code{some} is \code{True} (default), the method returns the reduced singular value decomposition
 i.e., if the last two dimensions of \code{input} are \code{m} and \code{n}, then the returned
 \code{U} and \code{V} matrices will contain only :math:\code{min(n, m)} orthonormal columns.
@@ -51,6 +49,12 @@ can be arbitrary bases of the subspaces.
 .. note:: When \code{compute_uv} = \code{False}, backward cannot be performed since \code{U} and \code{V}
 from the forward pass is required for the backward operation.
 }
+\section{Signatures}{
+
+
+svd(input, some=True, compute_uv=True, out=None) -> (Tensor, Tensor, Tensor)
+}
+
 \examples{
 \dontrun{
 a = torch_randn(5, 3)

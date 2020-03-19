@@ -11,11 +11,14 @@
 \item{end_dim}{(int) the last dim to flatten}
 }
 \description{
-flatten(input, start_dim=0, end_dim=-1) -> Tensor
-}
-\details{
 Flattens a contiguous range of dims in a tensor.
 }
+\section{Signatures}{
+
+
+flatten(input, start_dim=0, end_dim=-1) -> Tensor
+}
+
 \examples{
 \dontrun{
 t = torch_tensor([[[1, 2],

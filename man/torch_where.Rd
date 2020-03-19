@@ -11,13 +11,12 @@
 \item{y}{(Tensor) values selected at indices where :attr:\code{condition} is \code{False}}
 }
 \description{
-where(condition, x, y) -> Tensor
-
-where(condition) -> tuple of LongTensor
-}
-\details{
 Return a tensor of elements selected from either \code{x} or \code{y}, depending on \code{condition}.
 
+\code{torch_where(condition)} is identical to
+\code{torch_nonzero(condition, as_tuple=True)}.
+}
+\details{
 The operation is defined as:
 
 \deqn{
@@ -29,12 +28,19 @@ The operation is defined as:
 .. note::
 The tensors \code{condition}, \code{x}, \code{y} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 
-\code{torch_where(condition)} is identical to
-\code{torch_nonzero(condition, as_tuple=True)}.
-
 .. note::
 See also \code{\link{torch_nonzero}}.
 }
+\section{Signatures}{
+
+
+where(condition, x, y) -> Tensor
+
+
+
+where(condition) -> tuple of LongTensor
+}
+
 \examples{
 \dontrun{
 x = torch_randn(3, 2)

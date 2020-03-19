@@ -11,13 +11,11 @@
 \item{out}{((Tensor, Tensor) optional output tuple.}
 }
 \description{
-torch.solve(input, A, out=None) -> (Tensor, Tensor)
-}
-\details{
 This function returns the solution to the system of linear
 equations represented by :math:\code{AX = B} and the LU factorization of
 A, in order as a namedtuple \verb{solution, LU}.
-
+}
+\details{
 \code{LU} contains \code{L} and \code{U} factors for LU factorization of \code{A}.
 
 \code{torch_solve(B, A)} can take in 2D inputs \verb{B, A} or inputs that are
@@ -30,6 +28,12 @@ batched outputs \verb{solution, LU}.
 `A.contiguous().transpose(-1, -2).stride()` respectively.
 }
 }
+\section{Signatures}{
+
+
+torch.solve(input, A, out=None) -> (Tensor, Tensor)
+}
+
 \examples{
 \dontrun{
 A = torch_tensor([[6.80, -2.11,  5.66,  5.97,  8.23],

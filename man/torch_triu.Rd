@@ -11,12 +11,10 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-triu(input, diagonal=0, out=None) -> Tensor
-}
-\details{
 Returns the upper triangular part of a matrix (2-D tensor) or batch of matrices
 \code{input}, the other elements of the result tensor \code{out} are set to 0.
-
+}
+\details{
 The upper triangular part of the matrix is defined as the elements on and
 above the diagonal.
 
@@ -28,6 +26,12 @@ the main diagonal. The main diagonal are the set of indices
 :math:\verb{\\lbrace (i, i) \\rbrace} for :math:\verb{i \\in [0, \\min\\\{d_\{1\}, d_\{2\}\\\} - 1]} where
 :math:\verb{d_\{1\}, d_\{2\}} are the dimensions of the matrix.
 }
+\section{Signatures}{
+
+
+triu(input, diagonal=0, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(3, 3)

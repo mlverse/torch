@@ -15,17 +15,21 @@
 \item{equal_nan}{(bool, optional) if \code{True}, then two \code{NaN} s will be compared as equal. Default: \code{False}}
 }
 \description{
-allclose(input, other, rtol=1e-05, atol=1e-08, equal_nan=False) -> bool
+This function checks if all \code{input} and \code{other} satisfy the condition:
 }
 \details{
-This function checks if all \code{input} and \code{other} satisfy the condition:
-
 \deqn{
     \lvert \text{input} - \text{other} \rvert \leq \texttt{atol} + \texttt{rtol} \times \lvert \text{other} \rvert
 }
 elementwise, for all elements of \code{input} and \code{other}. The behaviour of this function is analogous to
 \verb{numpy.allclose <https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html>}_
 }
+\section{Signatures}{
+
+
+allclose(input, other, rtol=1e-05, atol=1e-08, equal_nan=False) -> bool
+}
+
 \examples{
 \dontrun{
 torch_allclose(torch_tensor([10000., 1e-07]), torch_tensor([10000.1, 1e-08]))

@@ -13,11 +13,9 @@
 \item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy. Default: \code{True}}
 }
 \description{
-rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor
+Real-to-complex Discrete Fourier Transform
 }
 \details{
-Real-to-complex Discrete Fourier Transform
-
 This method computes the real-to-complex discrete Fourier transform. It is
 mathematically equivalent with \code{\link{~torch.fft}} with differences only in
 formats of the input and output.
@@ -54,6 +52,12 @@ monitor and control the cache.
 For CPU tensors, this method is currently only available with MKL. Use
 \code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
+\section{Signatures}{
+
+
+rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_randn(5, 5)

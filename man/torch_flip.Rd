@@ -9,11 +9,14 @@
 \item{dims}{(a list or tuple) axis to flip on}
 }
 \description{
-flip(input, dims) -> Tensor
-}
-\details{
 Reverse the order of a n-D tensor along given axis in dims.
 }
+\section{Signatures}{
+
+
+flip(input, dims) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_arange(8).view(2, 2, 2)

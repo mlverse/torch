@@ -15,11 +15,9 @@
 \item{signal_sizes}{(list or :class:\code{torch.Size}, optional) the size of the original        signal (without batch dimension). Default: \code{None}}
 }
 \description{
-irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) -> Tensor
+Complex-to-real Inverse Discrete Fourier Transform
 }
 \details{
-Complex-to-real Inverse Discrete Fourier Transform
-
 This method computes the complex-to-real inverse discrete Fourier transform.
 It is mathematically equivalent with \code{\link{ifft}} with differences only in
 formats of the input and output.
@@ -67,6 +65,12 @@ monitor and control the cache.
 For CPU tensors, this method is currently only available with MKL. Use
 \code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
+\section{Signatures}{
+
+
+irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_randn(4, 4)

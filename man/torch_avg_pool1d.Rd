@@ -17,11 +17,15 @@
 \item{count_include_pad}{NA when True, will include the zero-padding in the        averaging calculation. Default: \code{True}}
 }
 \description{
-avg_pool1d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True) -> Tensor
-}
-\details{
 Applies a 1D average pooling over an input signal composed of several
 input planes.
-
+}
+\details{
 See :class:\code{~torch.nn.AvgPool1d} for details and output shape.
 }
+\section{Signatures}{
+
+
+avg_pool1d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True) -> Tensor
+}
+

@@ -13,14 +13,12 @@
 \item{dim2}{(int, optional) second dimension with respect to which to        take diagonal. Default: -1.}
 }
 \description{
-diag_embed(input, offset=0, dim1=-2, dim2=-1) -> Tensor
-}
-\details{
 Creates a tensor whose diagonals of certain 2D planes (specified by
 \code{dim1} and \code{dim2}) are filled by \code{input}.
 To facilitate creating batched diagonal matrices, the 2D planes formed by
 the last two dimensions of the returned tensor are chosen by default.
-
+}
+\details{
 The argument \code{offset} controls which diagonal to consider:
 \itemize{
 \item If \code{offset} = 0, it is the main diagonal.
@@ -39,6 +37,12 @@ the same arguments yields a matrix identical to input. However,
 :meth:\code{torch_diagonal} has different default dimensions, so those
 need to be explicitly specified.
 }
+\section{Signatures}{
+
+
+diag_embed(input, offset=0, dim1=-2, dim2=-1) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(2, 3)

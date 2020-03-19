@@ -3,6 +3,25 @@
 \name{torch_stft}
 \alias{torch_stft}
 \title{Stft}
+\arguments{
+\item{input}{(Tensor) the input tensor}
+
+\item{n_fft}{(int) size of Fourier transform}
+
+\item{hop_length}{(int, optional) the distance between neighboring sliding window        frames. Default: \code{None} (treated as equal to \code{floor(n_fft / 4)})}
+
+\item{win_length}{(int, optional) the size of window frame and STFT filter.        Default: \code{None}  (treated as equal to :attr:\code{n_fft})}
+
+\item{window}{(Tensor, optional) the optional window function.        Default: \code{None} (treated as window of all :math:\code{1} s)}
+
+\item{center}{(bool, optional) whether to pad :attr:\code{input} on both sides so        that the :math:\code{t}-th frame is centered at time :math:\verb{t \\times \\text\{hop\\_length\}}.        Default: \code{True}}
+
+\item{pad_mode}{(string, optional) controls the padding method used when        :attr:\code{center} is \code{True}. Default: \code{"reflect"}}
+
+\item{normalized}{(bool, optional) controls whether to return the normalized STFT results         Default: \code{False}}
+
+\item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy Default: \code{True}}
+}
 \description{
 Short-time Fourier transform (STFT).
 }
@@ -61,27 +80,5 @@ imaginary part.
 .. warning::
   This function changed signature at version 0.4.1. Calling with the
   previous signature may cause error or return incorrect result.
-
-Arguments:
-    input (Tensor): the input tensor
-    n_fft (int): size of Fourier transform
-    hop_length (int, optional): the distance between neighboring sliding window
-        frames. Default: ``None`` (treated as equal to ``floor(n_fft / 4)``)
-    win_length (int, optional): the size of window frame and STFT filter.
-        Default: ``None``  (treated as equal to `n_fft`)
-    window (Tensor, optional): the optional window function.
-        Default: ``None`` (treated as window of all :math:`1` s)
-    center (bool, optional): whether to pad `input` on both sides so
-        that the :math:`t`-th frame is centered at time :math:`t \\times \\text\{hop\\_length\}`.
-        Default: ``True``
-    pad_mode (string, optional): controls the padding method used when
-        `center` is ``True``. Default: ``"reflect"``
-    normalized (bool, optional): controls whether to return the normalized STFT results
-         Default: ``False``
-    onesided (bool, optional): controls whether to return half of results to
-        avoid redundancy Default: ``True``
-
-Returns:
-    Tensor: A tensor containing the STFT result with shape described above
 }
 }

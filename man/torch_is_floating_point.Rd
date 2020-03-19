@@ -7,9 +7,12 @@
 \item{input}{(Tensor) the PyTorch tensor to test}
 }
 \description{
-is_floating_point(input) -> (bool)
-}
-\details{
 Returns True if the data type of \code{input} is a floating point data type i.e.,
 one of \code{torch_float64}, \code{torch.float32} and \code{torch.float16}.
 }
+\section{Signatures}{
+
+
+is_floating_point(input) -> (bool)
+}
+

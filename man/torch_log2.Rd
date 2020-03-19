@@ -9,16 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-log2(input, out=None) -> Tensor
-}
-\details{
 Returns a new tensor with the logarithm to the base 2 of the elements
 of \code{input}.
-
+}
+\details{
 \deqn{
     y_{i} = \log_{2} (x_{i})
 }
 }
+\section{Signatures}{
+
+
+log2(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_rand(5)

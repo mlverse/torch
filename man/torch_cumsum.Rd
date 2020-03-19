@@ -13,12 +13,10 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-cumsum(input, dim, out=None, dtype=None) -> Tensor
-}
-\details{
 Returns the cumulative sum of elements of \code{input} in the dimension
 \code{dim}.
-
+}
+\details{
 For example, if \code{input} is a vector of size N, the result will also be
 a vector of size N, with elements.
 
@@ -26,6 +24,12 @@ a vector of size N, with elements.
     y_i = x_1 + x_2 + x_3 + \dots + x_i
 }
 }
+\section{Signatures}{
+
+
+cumsum(input, dim, out=None, dtype=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(10)

@@ -9,15 +9,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-conj(input, out=None) -> Tensor
+Computes the element-wise conjugate of the given \code{input} tensor.
 }
 \details{
-Computes the element-wise conjugate of the given \code{input} tensor.
-
 \deqn{
     \text{out}_{i} = conj(\text{input}_{i})
 }
 }
+\section{Signatures}{
+
+
+conj(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_conj(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))

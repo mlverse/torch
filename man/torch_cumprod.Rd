@@ -13,12 +13,10 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-cumprod(input, dim, out=None, dtype=None) -> Tensor
-}
-\details{
 Returns the cumulative product of elements of \code{input} in the dimension
 \code{dim}.
-
+}
+\details{
 For example, if \code{input} is a vector of size N, the result will also be
 a vector of size N, with elements.
 
@@ -26,6 +24,12 @@ a vector of size N, with elements.
     y_i = x_1 \times x_2\times x_3\times \dots \times x_i
 }
 }
+\section{Signatures}{
+
+
+cumprod(input, dim, out=None, dtype=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(10)

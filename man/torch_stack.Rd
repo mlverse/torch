@@ -11,10 +11,14 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-stack(tensors, dim=0, out=None) -> Tensor
+Concatenates sequence of tensors along a new dimension.
 }
 \details{
-Concatenates sequence of tensors along a new dimension.
-
 All tensors need to be of the same size.
 }
+\section{Signatures}{
+
+
+stack(tensors, dim=0, out=None) -> Tensor
+}
+

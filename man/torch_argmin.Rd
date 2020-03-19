@@ -11,21 +11,27 @@
 \item{keepdim}{(bool) whether the output tensor has :attr:\code{dim} retained or not. Ignored if \code{dim=None}.}
 }
 \description{
+Returns the indices of the minimum value of all elements in the \code{input} tensor.
+
+Returns the indices of the minimum values of a tensor across a dimension.
+}
+\details{
+This is the second value returned by :meth:\code{torch_min}. See its
+documentation for the exact semantics of this method.
+
+This is the second value returned by :meth:\code{torch_min}. See its
+documentation for the exact semantics of this method.
+}
+\section{Signatures}{
+
+
 argmin(input) -> LongTensor
+
+
 
 argmin(input, dim, keepdim=False, out=None) -> LongTensor
 }
-\details{
-Returns the indices of the minimum value of all elements in the \code{input} tensor.
 
-This is the second value returned by :meth:\code{torch_min}. See its
-documentation for the exact semantics of this method.
-
-Returns the indices of the minimum values of a tensor across a dimension.
-
-This is the second value returned by :meth:\code{torch_min}. See its
-documentation for the exact semantics of this method.
-}
 \examples{
 \dontrun{
 a = torch_randn(4, 4)

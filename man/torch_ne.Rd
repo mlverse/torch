@@ -11,14 +11,18 @@
 \item{out}{(Tensor, optional) the output tensor that must be a \code{BoolTensor}}
 }
 \description{
-ne(input, other, out=None) -> Tensor
+Computes :math:\verb{input \\neq other} element-wise.
 }
 \details{
-Computes :math:\verb{input \\neq other} element-wise.
-
 The second argument can be a number or a tensor whose shape is
 :ref:\verb{broadcastable <broadcasting-semantics>} with the first argument.
 }
+\section{Signatures}{
+
+
+ne(input, other, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_ne(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))

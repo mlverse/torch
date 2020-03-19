@@ -9,13 +9,17 @@
 \item{dim}{(int) dimension to remove}
 }
 \description{
-unbind(input, dim=0) -> seq
+Removes a tensor dimension.
 }
 \details{
-Removes a tensor dimension.
-
 Returns a tuple of all slices along a given dimension, already without it.
 }
+\section{Signatures}{
+
+
+unbind(input, dim=0) -> seq
+}
+
 \examples{
 \dontrun{
 torch_unbind(torch_tensor([[1, 2, 3],

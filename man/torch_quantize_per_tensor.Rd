@@ -13,11 +13,14 @@
 \item{dtype}{(:class:\code{torch.dtype}) the desired data type of returned tensor.        Has to be one of the quantized dtypes: \code{torch.quint8}, \code{torch.qint8}, \code{torch.qint32}}
 }
 \description{
-quantize_per_tensor(input, scale, zero_point, dtype) -> Tensor
-}
-\details{
 Converts a float tensor to quantized tensor with given scale and zero point.
 }
+\section{Signatures}{
+
+
+quantize_per_tensor(input, scale, zero_point, dtype) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_quantize_per_tensor(torch_tensor([-1.0, 0.0, 1.0, 2.0]), 0.1, 10, torch_quint8)

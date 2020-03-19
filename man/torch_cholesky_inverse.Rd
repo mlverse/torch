@@ -11,13 +11,11 @@
 \item{out}{(Tensor, optional) the output tensor for \code{inv}}
 }
 \description{
-cholesky_inverse(input, upper=False, out=None) -> Tensor
-}
-\details{
 Computes the inverse of a symmetric positive-definite matrix :math:\code{A} using its
 Cholesky factor :math:\code{u}: returns matrix \code{inv}. The inverse is computed using
 LAPACK routines \code{dpotri} and \code{spotri} (and the corresponding MAGMA routines).
-
+}
+\details{
 If \code{upper} is \code{False}, :math:\code{u} is lower triangular
 such that the returned tensor is
 
@@ -31,6 +29,12 @@ triangular such that the returned tensor is
     inv = (u^T u)^{{-1}}
 }
 }
+\section{Signatures}{
+
+
+cholesky_inverse(input, upper=False, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(3, 3)

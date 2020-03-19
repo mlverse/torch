@@ -9,9 +9,12 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-bitwise_not(input, out=None) -> Tensor
-}
-\details{
 Computes the bitwise NOT of the given input tensor. The input tensor must be of
 integral or Boolean types. For bool tensors, it computes the logical NOT.
 }
+\section{Signatures}{
+
+
+bitwise_not(input, out=None) -> Tensor
+}
+

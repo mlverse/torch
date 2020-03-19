@@ -11,13 +11,11 @@
 \item{out}{(tuple, optional) the optional destination tensor}
 }
 \description{
-lstsq(input, A, out=None) -> Tensor
-}
-\details{
 Computes the solution to the least squares and least norm problems for a full
 rank matrix :math:\code{A} of size :math:\verb{(m \\times n)} and a matrix :math:\code{B} of
 size :math:\verb{(m \\times k)}.
-
+}
+\details{
 If :math:\verb{m \\geq n}, \code{\link{lstsq}} solves the least-squares problem:
 
 \deqn{
@@ -42,6 +40,12 @@ remaining :math:\code{m - n} rows of that column.
 .. note::
 The case when :math:\code{m < n} is not supported on the GPU.
 }
+\section{Signatures}{
+
+
+lstsq(input, A, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 A = torch_tensor([[1., 1, 1],

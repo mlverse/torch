@@ -19,13 +19,17 @@
 \item{groups}{NA split input into groups, :math:\verb{\\text\{in\\_channels\}} should be divisible by      the number of groups. Default: 1}
 }
 \description{
-conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
-}
-\details{
 Applies a 1D convolution over an input signal composed of several input
 planes.
-
+}
+\details{
 See :class:\code{~torch.nn.Conv1d} for details and output shape.
 
 .. include:: cudnn_deterministic.rst
 }
+\section{Signatures}{
+
+
+conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
+}
+

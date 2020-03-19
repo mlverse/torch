@@ -9,15 +9,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-angle(input, out=None) -> Tensor
+Computes the element-wise angle (in radians) of the given \code{input} tensor.
 }
 \details{
-Computes the element-wise angle (in radians) of the given \code{input} tensor.
-
 \deqn{
     \text{out}_{i} = angle(\text{input}_{i})
 }
 }
+\section{Signatures}{
+
+
+angle(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_angle(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))*180/3.14159

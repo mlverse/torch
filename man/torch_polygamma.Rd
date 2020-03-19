@@ -11,18 +11,22 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-polygamma(n, input, out=None) -> Tensor
-}
-\details{
 Computes the :math:\code{n^{th}} derivative of the digamma function on \code{input}.
 :math:\verb{n \\geq 0} is called the order of the polygamma function.
-
+}
+\details{
 \deqn{
     \psi^{(n)}(x) = \frac{d^{(n)}}{dx^{(n)}} \psi(x)
 }
 .. note::
 This function is not implemented for :math:\verb{n \\geq 2}.
 }
+\section{Signatures}{
+
+
+polygamma(n, input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_tensor([1, 0.5])

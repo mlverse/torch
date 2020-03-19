@@ -17,11 +17,9 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-bartlett_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+Bartlett window function.
 }
 \details{
-Bartlett window function.
-
 \deqn{
     w[n] = 1 - \left| \frac{2n}{N-1} - 1 \right| = \begin{cases}
         \frac{2n}{N - 1} & \text{if } 0 \leq n \leq \frac{N - 1}{2} \\
@@ -42,3 +40,9 @@ above formula is in fact :math:\verb{\\text\{window\\_length\} + 1}. Also, we al
 .. note::
 If \code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
 }
+\section{Signatures}{
+
+
+bartlett_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+}
+

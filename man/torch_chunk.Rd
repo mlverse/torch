@@ -11,11 +11,15 @@
 \item{dim}{(int) dimension along which to split the tensor}
 }
 \description{
-chunk(input, chunks, dim=0) -> List of Tensors
+Splits a tensor into a specific number of chunks.
 }
 \details{
-Splits a tensor into a specific number of chunks.
-
 Last chunk will be smaller if the tensor size along the given dimension
 \code{dim} is not divisible by \code{chunks}.
 }
+\section{Signatures}{
+
+
+chunk(input, chunks, dim=0) -> List of Tensors
+}
+

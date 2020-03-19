@@ -11,11 +11,9 @@
 \item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
 }
 \description{
-fft(input, signal_ndim, normalized=False) -> Tensor
+Complex-to-complex Discrete Fourier Transform
 }
 \details{
-Complex-to-complex Discrete Fourier Transform
-
 This method computes the complex-to-complex discrete Fourier transform.
 Ignoring the batch dimensions, it computes the following expression:
 
@@ -50,6 +48,12 @@ monitor and control the cache.
 For CPU tensors, this method is currently only available with MKL. Use
 \code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
+\section{Signatures}{
+
+
+fft(input, signal_ndim, normalized=False) -> Tensor
+}
+
 \examples{
 \dontrun{
 # unbatched 2D FFT

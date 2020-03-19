@@ -9,15 +9,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-reciprocal(input, out=None) -> Tensor
+Returns a new tensor with the reciprocal of the elements of \code{input}
 }
 \details{
-Returns a new tensor with the reciprocal of the elements of \code{input}
-
 \deqn{
     \text{out}_{i} = \frac{1}{\text{input}_{i}}
 }
 }
+\section{Signatures}{
+
+
+reciprocal(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(4)

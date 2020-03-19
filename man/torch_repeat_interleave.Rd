@@ -11,20 +11,26 @@
 \item{dim}{(int, optional) The dimension along which to repeat values.        By default, use the flattened input array, and return a flat output        array.}
 }
 \description{
-repeat_interleave(input, repeats, dim=None) -> Tensor
-
-repeat_interleave(repeats) -> Tensor
-}
-\details{
 Repeat elements of a tensor.
-
-.. warning::\preformatted{This is different from [`torch_repeat` but similar to `numpy.repeat`].
-}
 
 If the \code{repeats} is \verb{tensor([n1, n2, n3, ...])}, then the output will be
 \verb{tensor([0, 0, ..., 1, 1, ..., 2, 2, ..., ...])} where \code{0} appears \code{n1} times,
 \code{1} appears \code{n2} times, \code{2} appears \code{n3} times, etc.
 }
+\details{
+.. warning::\preformatted{This is different from [`torch_repeat` but similar to `numpy.repeat`].
+}
+}
+\section{Signatures}{
+
+
+repeat_interleave(input, repeats, dim=None) -> Tensor
+
+
+
+repeat_interleave(repeats) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_tensor([1, 2, 3])

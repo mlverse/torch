@@ -15,11 +15,14 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-rand_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
-}
-\details{
 Returns a tensor with the same size as \code{input} that is filled with
 random numbers from a uniform distribution on the interval :math:\verb{[0, 1)}.
 \code{torch_rand_like(input)} is equivalent to
 \code{torch_rand(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
 }
+\section{Signatures}{
+
+
+rand_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
+}
+

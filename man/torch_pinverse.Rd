@@ -9,12 +9,10 @@
 \item{rcond}{(float) A floating point value to determine the cutoff for small singular values.                   Default: 1e-15}
 }
 \description{
-pinverse(input, rcond=1e-15) -> Tensor
-}
-\details{
 Calculates the pseudo-inverse (also known as the Moore-Penrose inverse) of a 2D tensor.
 Please look at \verb{Moore-Penrose inverse}_ for more details
-
+}
+\details{
 .. note::
 This method is implemented using the Singular Value Decomposition.
 
@@ -25,6 +23,12 @@ However, this method is backprop-able due to the implementation by using SVD res
 could be unstable. Double-backward will also be unstable due to the usage of SVD internally.
 See :meth:\code{~torch.svd} for more details.
 }
+\section{Signatures}{
+
+
+pinverse(input, rcond=1e-15) -> Tensor
+}
+
 \examples{
 \dontrun{
 input = torch_randn(3, 5)

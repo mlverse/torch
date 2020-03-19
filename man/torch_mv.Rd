@@ -11,17 +11,21 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-mv(input, vec, out=None) -> Tensor
-}
-\details{
 Performs a matrix-vector product of the matrix \code{input} and the vector
 \code{vec}.
-
+}
+\details{
 If \code{input} is a :math:\verb{(n \\times m)} tensor, \code{vec} is a 1-D tensor of
 size :math:\code{m}, \code{out} will be 1-D of size :math:\code{n}.
 
 .. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 }
+\section{Signatures}{
+
+
+mv(input, vec, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 mat = torch_randn(2, 3)

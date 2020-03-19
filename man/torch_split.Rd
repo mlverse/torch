@@ -3,6 +3,13 @@
 \name{torch_split}
 \alias{torch_split}
 \title{Split}
+\arguments{
+\item{tensor}{(Tensor) tensor to split.}
+
+\item{split_size_or_sections}{(int) size of a single chunk or        list of sizes for each chunk}
+
+\item{dim}{(int) dimension along which to split the tensor.}
+}
 \description{
 Splits the tensor into chunks.
 }
@@ -15,11 +22,5 @@ the tensor size along the given dimension `dim` is not divisible by
 If `split_size_or_sections` is a list, then `tensor` will be split
 into ``len(split_size_or_sections)`` chunks with sizes in `dim` according
 to `split_size_or_sections`.
-
-Arguments:
-    tensor (Tensor): tensor to split.
-    split_size_or_sections (int) or (list(int)): size of a single chunk or
-        list of sizes for each chunk
-    dim (int): dimension along which to split the tensor.
 }
 }

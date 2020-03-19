@@ -4,8 +4,11 @@
 \alias{torch_celu_}
 \title{Celu_}
 \description{
-celu_(input, alpha=1.) -> Tensor
-}
-\details{
 In-place version of \code{\link{~celu}}.
 }
+\section{Signatures}{
+
+
+celu_(input, alpha=1.) -> Tensor
+}
+

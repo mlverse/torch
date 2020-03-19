@@ -11,12 +11,10 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-bmm(input, mat2, out=None) -> Tensor
-}
-\details{
 Performs a batch matrix-matrix product of matrices stored in \code{input}
 and \code{mat2}.
-
+}
+\details{
 \code{input} and \code{mat2} must be 3-D tensors each containing
 the same number of matrices.
 
@@ -30,6 +28,12 @@ If \code{input} is a :math:\verb{(b \\times n \\times m)} tensor, \code{mat2} is
 .. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 For broadcasting matrix products, see \code{\link{torch_matmul}}.
 }
+\section{Signatures}{
+
+
+bmm(input, mat2, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 input = torch_randn(10, 3, 4)

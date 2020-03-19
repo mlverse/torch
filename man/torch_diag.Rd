@@ -11,16 +11,14 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-diag(input, diagonal=0, out=None) -> Tensor
-}
-\details{
 \itemize{
 \item If \code{input} is a vector (1-D tensor), then returns a 2-D square tensor
 with the elements of \code{input} as the diagonal.
 \item If \code{input} is a matrix (2-D tensor), then returns a 1-D tensor with
 the diagonal elements of \code{input}.
 }
-
+}
+\details{
 The argument \code{diagonal} controls which diagonal to consider:
 \itemize{
 \item If \code{diagonal} = 0, it is the main diagonal.
@@ -28,3 +26,9 @@ The argument \code{diagonal} controls which diagonal to consider:
 \item If \code{diagonal} < 0, it is below the main diagonal.
 }
 }
+\section{Signatures}{
+
+
+diag(input, diagonal=0, out=None) -> Tensor
+}
+

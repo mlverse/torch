@@ -9,17 +9,21 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-inverse(input, out=None) -> Tensor
-}
-\details{
 Takes the inverse of the square matrix \code{input}. \code{input} can be batches
 of 2D square tensors, in which case this function would return a tensor composed of
 individual inverses.
-
+}
+\details{
 .. note::\preformatted{Irrespective of the original strides, the returned tensors will be
 transposed, i.e. with strides like `input.contiguous().transpose(-2, -1).stride()`
 }
 }
+\section{Signatures}{
+
+
+inverse(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_rand(4, 4)

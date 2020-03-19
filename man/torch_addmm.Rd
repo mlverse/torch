@@ -17,12 +17,10 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -> Tensor
-}
-\details{
 Performs a matrix multiplication of the matrices \code{mat1} and \code{mat2}.
 The matrix \code{input} is added to the final result.
-
+}
+\details{
 If \code{mat1} is a :math:\verb{(n \\times m)} tensor, \code{mat2} is a
 :math:\verb{(m \\times p)} tensor, then \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a :math:\verb{(n \\times p)} tensor
@@ -37,6 +35,12 @@ and \code{out} will be a :math:\verb{(n \\times p)} tensor.
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
 \code{alpha} must be real numbers, otherwise they should be integers.
 }
+\section{Signatures}{
+
+
+addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 M = torch_randn(2, 3)

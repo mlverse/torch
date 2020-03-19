@@ -9,13 +9,16 @@
 \item{indices}{(LongTensor) the indices into tensor}
 }
 \description{
-take(input, index) -> Tensor
-}
-\details{
 Returns a new tensor with the elements of \code{input} at the given indices.
 The input tensor is treated as if it were viewed as a 1-D tensor. The result
 takes the same shape as the indices.
 }
+\section{Signatures}{
+
+
+take(input, index) -> Tensor
+}
+
 \examples{
 \dontrun{
 src = torch_tensor([[4, 3, 5],

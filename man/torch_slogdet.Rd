@@ -7,11 +7,9 @@
 \item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more                batch dimensions.}
 }
 \description{
-slogdet(input) -> (Tensor, Tensor)
+Calculates the sign and log absolute value of the determinant(s) of a square matrix or batches of square matrices.
 }
 \details{
-Calculates the sign and log absolute value of the determinant(s) of a square matrix or batches of square matrices.
-
 .. note::
 If \code{input} has zero determinant, this returns \verb{(0, -inf)}.
 
@@ -21,6 +19,12 @@ is not invertible. In this case, double backward through :meth:\code{slogdet}
 will be unstable in when \code{input} doesn't have distinct singular values.
 See :meth:\code{~torch.svd} for details.
 }
+\section{Signatures}{
+
+
+slogdet(input) -> (Tensor, Tensor)
+}
+
 \examples{
 \dontrun{
 A = torch_randn(3, 3)

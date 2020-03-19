@@ -9,20 +9,24 @@
 \item{shape}{(tuple of ints) the new shape}
 }
 \description{
-reshape(input, shape) -> Tensor
-}
-\details{
 Returns a tensor with the same data and number of elements as \code{input},
 but with the specified shape. When possible, the returned tensor will be a view
 of \code{input}. Otherwise, it will be a copy. Contiguous inputs and inputs
 with compatible strides can be reshaped without copying, but you should not
 depend on the copying vs. viewing behavior.
-
+}
+\details{
 See :meth:\code{torch_Tensor.view} on when it is possible to return a view.
 
 A single dimension may be -1, in which case it's inferred from the remaining
 dimensions and the number of elements in \code{input}.
 }
+\section{Signatures}{
+
+
+reshape(input, shape) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_arange(4.)

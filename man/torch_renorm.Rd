@@ -15,15 +15,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-renorm(input, p, dim, maxnorm, out=None) -> Tensor
-}
-\details{
 Returns a tensor where each sub-tensor of \code{input} along dimension
 \code{dim} is normalized such that the \code{p}-norm of the sub-tensor is lower
 than the value \code{maxnorm}
-
+}
+\details{
 .. note:: If the norm of a row is lower than \code{maxnorm}, the row is unchanged
 }
+\section{Signatures}{
+
+
+renorm(input, p, dim, maxnorm, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_ones(3, 3)

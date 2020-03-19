@@ -11,11 +11,9 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-bernoulli(input, *, generator=None, out=None) -> Tensor
+Draws binary random numbers (0 or 1) from a Bernoulli distribution.
 }
 \details{
-Draws binary random numbers (0 or 1) from a Bernoulli distribution.
-
 The \code{input} tensor should be a tensor containing probabilities
 to be used for drawing the binary random number.
 Hence, all values in \code{input} have to be in the range:
@@ -34,6 +32,12 @@ shape as \code{input}.
 \code{out} can have integral \code{dtype}, but \code{input} must have floating
 point \code{dtype}.
 }
+\section{Signatures}{
+
+
+bernoulli(input, *, generator=None, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_empty(3, 3).uniform_(0, 1)  # generate a uniform random matrix with range [0, 1]

@@ -9,15 +9,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-tan(input, out=None) -> Tensor
+Returns a new tensor with the tangent of the elements of \code{input}.
 }
 \details{
-Returns a new tensor with the tangent of the elements of \code{input}.
-
 \deqn{
     \text{out}_{i} = \tan(\text{input}_{i})
 }
 }
+\section{Signatures}{
+
+
+tan(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(4)

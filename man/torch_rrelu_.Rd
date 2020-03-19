@@ -4,8 +4,11 @@
 \alias{torch_rrelu_}
 \title{Rrelu_}
 \description{
-rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor
-}
-\details{
 In-place version of \code{\link{~rrelu}}.
 }
+\section{Signatures}{
+
+
+rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor
+}
+

@@ -13,13 +13,16 @@
 \item{length}{(int) the distance to the ending dimension}
 }
 \description{
-narrow(input, dim, start, length) -> Tensor
-}
-\details{
 Returns a new tensor that is a narrowed version of \code{input} tensor. The
 dimension \code{dim} is input from \code{start} to \code{start + length}. The
 returned tensor and \code{input} tensor share the same underlying storage.
 }
+\section{Signatures}{
+
+
+narrow(input, dim, start, length) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]])

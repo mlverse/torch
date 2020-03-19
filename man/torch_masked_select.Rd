@@ -11,18 +11,22 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-masked_select(input, mask, out=None) -> Tensor
-}
-\details{
 Returns a new 1-D tensor which indexes the \code{input} tensor according to
 the boolean mask \code{mask} which is a \code{BoolTensor}.
-
+}
+\details{
 The shapes of the \code{mask} tensor and the \code{input} tensor don't need
 to match, but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 
 .. note:: The returned tensor does \strong{not} use the same storage
 as the original tensor
 }
+\section{Signatures}{
+
+
+masked_select(input, mask, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_randn(3, 4)

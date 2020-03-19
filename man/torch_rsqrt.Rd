@@ -9,16 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-rsqrt(input, out=None) -> Tensor
-}
-\details{
 Returns a new tensor with the reciprocal of the square-root of each of
 the elements of \code{input}.
-
+}
+\details{
 \deqn{
     \text{out}_{i} = \frac{1}{\sqrt{\text{input}_{i}}}
 }
 }
+\section{Signatures}{
+
+
+rsqrt(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(4)

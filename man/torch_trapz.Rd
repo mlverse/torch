@@ -13,15 +13,20 @@
 \item{dim}{(int) The dimension along which to integrate.        By default, use the last dimension.}
 }
 \description{
-trapz(y, x, *, dim=-1) -> Tensor
-
-trapz(y, *, dx=1, dim=-1) -> Tensor
-}
-\details{
 Estimate :math:\verb{\\int y\\,dx} along \code{dim}, using the trapezoid rule.
 
 As above, but the sample points are spaced uniformly at a distance of \code{dx}.
 }
+\section{Signatures}{
+
+
+trapz(y, x, *, dim=-1) -> Tensor
+
+
+
+trapz(y, *, dx=1, dim=-1) -> Tensor
+}
+
 \examples{
 \dontrun{
 y = torch_randn((2, 3))

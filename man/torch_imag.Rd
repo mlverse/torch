@@ -9,15 +9,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-imag(input, out=None) -> Tensor
+Computes the element-wise imag value of the given \code{input} tensor.
 }
 \details{
-Computes the element-wise imag value of the given \code{input} tensor.
-
 \deqn{
     \text{out}_{i} = imag(\text{input}_{i})
 }
 }
+\section{Signatures}{
+
+
+imag(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_imag(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))

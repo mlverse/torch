@@ -9,15 +9,19 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-abs(input, out=None) -> Tensor
+Computes the element-wise absolute value of the given \code{input} tensor.
 }
 \details{
-Computes the element-wise absolute value of the given \code{input} tensor.
-
 \deqn{
     \text{out}_{i} = |\text{input}_{i}|
 }
 }
+\section{Signatures}{
+
+
+abs(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_abs(torch_tensor([-1, -2, 3]))

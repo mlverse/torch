@@ -11,14 +11,18 @@
 \item{p}{(float, optional) the norm to be computed}
 }
 \description{
-dist(input, other, p=2) -> Tensor
+Returns the p-norm of (\code{input} - \code{other})
 }
 \details{
-Returns the p-norm of (\code{input} - \code{other})
-
 The shapes of \code{input} and \code{other} must be
 :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
+\section{Signatures}{
+
+
+dist(input, other, p=2) -> Tensor
+}
+
 \examples{
 \dontrun{
 x = torch_randn(4)

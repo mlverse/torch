@@ -19,20 +19,24 @@
 \item{pin_memory}{(bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: \code{False}.}
 }
 \description{
-empty_strided(size, stride, dtype=None, layout=None, device=None, requires_grad=False, pin_memory=False) -> Tensor
-}
-\details{
 Returns a tensor filled with uninitialized data. The shape and strides of the tensor is
 defined by the variable argument \code{size} and \code{stride} respectively.
 \code{torch_empty_strided(size, stride)} is equivalent to
 \verb{torch_empty(size).as_strided(size, stride)}.
-
+}
+\details{
 .. warning::
 More than one element of the created tensor may refer to a single memory
 location. As a result, in-place operations (especially ones that are
 vectorized) may result in incorrect behavior. If you need to write to
 the tensors, please clone them first.
 }
+\section{Signatures}{
+
+
+empty_strided(size, stride, dtype=None, layout=None, device=None, requires_grad=False, pin_memory=False) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_empty_strided((2, 3), (1, 2))

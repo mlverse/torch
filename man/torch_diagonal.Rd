@@ -13,13 +13,11 @@
 \item{dim2}{(int, optional) second dimension with respect to which to        take diagonal. Default: 1.}
 }
 \description{
-diagonal(input, offset=0, dim1=0, dim2=1) -> Tensor
-}
-\details{
 Returns a partial view of \code{input} with the its diagonal elements
 with respect to \code{dim1} and \code{dim2} appended as a dimension
 at the end of the shape.
-
+}
+\details{
 The argument \code{offset} controls which diagonal to consider:
 \itemize{
 \item If \code{offset} = 0, it is the main diagonal.
@@ -32,3 +30,9 @@ the same arguments yields a diagonal matrix with the diagonal entries
 of the input. However, :meth:\code{torch_diag_embed} has different default
 dimensions, so those need to be explicitly specified.
 }
+\section{Signatures}{
+
+
+diagonal(input, offset=0, dim1=0, dim2=1) -> Tensor
+}
+

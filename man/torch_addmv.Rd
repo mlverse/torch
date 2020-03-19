@@ -17,13 +17,11 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-addmv(beta=1, input, alpha=1, mat, vec, out=None) -> Tensor
-}
-\details{
 Performs a matrix-vector product of the matrix \code{mat} and
 the vector \code{vec}.
 The vector \code{input} is added to the final result.
-
+}
+\details{
 If \code{mat} is a :math:\verb{(n \\times m)} tensor, \code{vec} is a 1-D tensor of
 size \code{m}, then \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a 1-D tensor of size \code{n} and
@@ -38,6 +36,12 @@ size \code{m}, then \code{input} must be
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
 \code{alpha} must be real numbers, otherwise they should be integers
 }
+\section{Signatures}{
+
+
+addmv(beta=1, input, alpha=1, mat, vec, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 M = torch_randn(2)

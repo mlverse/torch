@@ -11,11 +11,9 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-matmul(input, other, out=None) -> Tensor
+Matrix product of two tensors.
 }
 \details{
-Matrix product of two tensors.
-
 The behavior depends on the dimensionality of the tensors as follows:
 \itemize{
 \item If both tensors are 1-dimensional, the dot product (scalar) is returned.
@@ -39,6 +37,12 @@ tensor, \code{out} will be an :math:\verb{(j \\times k \\times n \\times p)} ten
 .. note::\preformatted{The 1-dimensional dot product version of this function does not support an `out` parameter.
 }
 }
+\section{Signatures}{
+
+
+matmul(input, other, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 # vector x vector

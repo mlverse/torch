@@ -15,13 +15,11 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -> LongTensor
-}
-\details{
 Returns a tensor where each row contains \code{num_samples} indices sampled
 from the multinomial probability distribution located in the corresponding row
 of tensor \code{input}.
-
+}
+\details{
 .. note::
 The rows of \code{input} do not need to sum to one (in which case we use
 the values as weights), but must be non-negative, finite and have
@@ -45,6 +43,12 @@ When drawn without replacement, \code{num_samples} must be lower than
 number of non-zero elements in \code{input} (or the min number of non-zero
 elements in each row of \code{input} if it is a matrix).
 }
+\section{Signatures}{
+
+
+multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -> LongTensor
+}
+
 \examples{
 \dontrun{
 weights = torch_tensor([0, 10, 3, 0], dtype=torch_float) # create a tensor of weights

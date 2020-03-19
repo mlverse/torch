@@ -11,14 +11,18 @@
 \item{out}{(Tensor, optional) the output tensor that must be a \code{BoolTensor}}
 }
 \description{
-ge(input, other, out=None) -> Tensor
+Computes :math:\verb{\\text\{input\} \\geq \\text\{other\}} element-wise.
 }
 \details{
-Computes :math:\verb{\\text\{input\} \\geq \\text\{other\}} element-wise.
-
 The second argument can be a number or a tensor whose shape is
 :ref:\verb{broadcastable <broadcasting-semantics>} with the first argument.
 }
+\section{Signatures}{
+
+
+ge(input, other, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 torch_ge(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))

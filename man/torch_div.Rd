@@ -9,14 +9,13 @@
 \item{other}{(Tensor) the denominator tensor}
 }
 \description{
-div(input, other, out=None) -> Tensor
-
-div(input, other, out=None) -> Tensor
-}
-\details{
 Divides each element of the input \code{input} with the scalar \code{other} and
 returns a new resulting tensor.
 
+Each element of the tensor \code{input} is divided by each element of the tensor
+\code{other}. The resulting tensor is returned.
+}
+\details{
 \deqn{
     \text{out}_i = \frac{\text{input}_i}{\text{other}}
 }
@@ -27,9 +26,6 @@ described in the type promotion :ref:\verb{documentation <type-promotion-doc>}. 
 to the :class:\code{torch_dtype} of the specified output tensor. Integral division
 by zero leads to undefined behavior.
 
-Each element of the tensor \code{input} is divided by each element of the tensor
-\code{other}. The resulting tensor is returned.
-
 \deqn{
     \text{out}_i = \frac{\text{input}_i}{\text{other}_i}
 }
@@ -39,6 +35,16 @@ following rules described in the type promotion :ref:\verb{documentation <type-p
 :ref:\verb{castable <type-promotion-doc>} to the :class:\code{torch_dtype} of the
 specified output tensor. Integral division by zero leads to undefined behavior.
 }
+\section{Signatures}{
+
+
+div(input, other, out=None) -> Tensor
+
+
+
+div(input, other, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(5)

@@ -9,12 +9,15 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-round(input, out=None) -> Tensor
-}
-\details{
 Returns a new tensor with each of the elements of \code{input} rounded
 to the closest integer.
 }
+\section{Signatures}{
+
+
+round(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(4)

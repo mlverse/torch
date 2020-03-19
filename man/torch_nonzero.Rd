@@ -9,12 +9,12 @@
 \item{out}{(LongTensor, optional) the output tensor containing indices}
 }
 \description{
-nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensors
-}
-\details{
 .. note::
 \code{\link{torch_nonzero(..., as_tuple=False) <torch.nonzero>}} (default) returns a
-2-D tensor where each row is the index for a nonzero value.\preformatted{[`torch_nonzero(..., as_tuple=True) <torch.nonzero>`] returns a tuple of 1-D
+2-D tensor where each row is the index for a nonzero value.
+}
+\details{
+\preformatted{[`torch_nonzero(..., as_tuple=True) <torch.nonzero>`] returns a tuple of 1-D
 index tensors, allowing for advanced indexing, so ``x[x.nonzero(as_tuple=True)]``
 gives all nonzero values of tensor ``x``. Of the returned tuple, each index tensor
 contains nonzero indices for a certain dimension.
@@ -46,6 +46,12 @@ non-zero elements in the \code{input} tensor.
 As a special case, when \code{input} has zero dimensions and a nonzero scalar
 value, it is treated as a one-dimensional tensor with one element.
 }
+\section{Signatures}{
+
+
+nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensors
+}
+
 \examples{
 \dontrun{
 torch_nonzero(torch_tensor([1, 1, 1, 0, 1]))

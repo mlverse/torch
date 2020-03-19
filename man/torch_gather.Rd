@@ -15,11 +15,9 @@
 \item{sparse_grad}{(bool,optional) If \code{True}, gradient w.r.t. :attr:\code{input} will be a sparse tensor.}
 }
 \description{
-gather(input, dim, index, out=None, sparse_grad=False) -> Tensor
+Gathers values along an axis specified by \code{dim}.
 }
 \details{
-Gathers values along an axis specified by \code{dim}.
-
 For a 3-D tensor the output is specified by::\preformatted{out[i][j][k] = input[index[i][j][k]][j][k]  # if dim == 0
 out[i][j][k] = input[i][index[i][j][k]][k]  # if dim == 1
 out[i][j][k] = input[i][j][index[i][j][k]]  # if dim == 2
@@ -31,6 +29,12 @@ and \code{dim = i}, then \code{index} must be an :math:\code{n}-dimensional tens
 size :math:\verb{(x_0, x_1, ..., x_\{i-1\}, y, x_\{i+1\}, ..., x_\{n-1\})} where :math:\verb{y \\geq 1}
 and \code{out} will have the same size as \code{index}.
 }
+\section{Signatures}{
+
+
+gather(input, dim, index, out=None, sparse_grad=False) -> Tensor
+}
+
 \examples{
 \dontrun{
 t = torch_tensor([[1,2],[3,4]])

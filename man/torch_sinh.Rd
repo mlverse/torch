@@ -9,16 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-sinh(input, out=None) -> Tensor
-}
-\details{
 Returns a new tensor with the hyperbolic sine of the elements of
 \code{input}.
-
+}
+\details{
 \deqn{
     \text{out}_{i} = \sinh(\text{input}_{i})
 }
 }
+\section{Signatures}{
+
+
+sinh(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(4)

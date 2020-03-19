@@ -9,16 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-floor(input, out=None) -> Tensor
-}
-\details{
 Returns a new tensor with the floor of the elements of \code{input},
 the largest integer less than or equal to each element.
-
+}
+\details{
 \deqn{
     \text{out}_{i} = \left\lfloor \text{input}_{i} \right\rfloor
 }
 }
+\section{Signatures}{
+
+
+floor(input, out=None) -> Tensor
+}
+
 \examples{
 \dontrun{
 a = torch_randn(4)
