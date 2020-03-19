@@ -4,9 +4,7 @@
 \alias{torch_svd}
 \title{Svd}
 \arguments{
-\item{input}{(Tensor) the input tensor of size :math:\verb{(*, m, n)} where \code{*} is zero or more}
-
-\item{batch}{NA math:\verb{m \\times n} matrices.}
+\item{input}{(Tensor) the input tensor of size :math:\verb{(*, m, n)} where \code{*} is zero or more                    batch dimensions consisting of :math:\verb{m \\times n} matrices.}
 
 \item{some}{(bool, optional) controls the shape of returned \code{U} and \code{V}}
 

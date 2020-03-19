@@ -4,11 +4,7 @@
 \alias{torch_cat}
 \title{Cat}
 \arguments{
-\item{tensors}{(sequence of Tensors) any python sequence of tensors of the same type.}
-
-\item{Non-empty}{NA}
-
-\item{cat}{NA}
+\item{tensors}{(sequence of Tensors) any python sequence of tensors of the same type.        Non-empty tensors provided must have the same shape, except in the        cat dimension.}
 
 \item{dim}{(int, optional) the dimension over which the tensors are concatenated}
 

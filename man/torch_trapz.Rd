@@ -4,21 +4,13 @@
 \alias{torch_trapz}
 \title{Trapz}
 \arguments{
-\item{x}{(Tensor) The points at which the function \code{y} is sampled.}
-
-\item{If}{NA}
-
-\item{contribute}{NA}
-
-\item{NA}{math:\verb{\\int_a^b f = -\\int_b^a f} is followed).}
+\item{x}{(Tensor) The points at which the function \code{y} is sampled.        If \code{x} is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        :math:\verb{\\int_a^b f = -\\int_b^a f} is followed).}
 
 \item{y}{(Tensor) The values of the function to integrate}
 
 \item{dx}{(float) The distance between points at which \code{y} is sampled.}
 
-\item{dim}{(int) The dimension along which to integrate.}
-
-\item{By}{NA}
+\item{dim}{(int) The dimension along which to integrate.        By default, use the last dimension.}
 }
 \description{
 trapz(y, x, *, dim=-1) -> Tensor
@@ -28,24 +20,5 @@ trapz(y, *, dx=1, dim=-1) -> Tensor
 \details{
 Estimate :math:\verb{\\int y\\,dx} along \code{dim}, using the trapezoid rule.
 
-Arguments:
-y (Tensor): The values of the function to integrate
-x (Tensor): The points at which the function \code{y} is sampled.
-If \code{x} is not in ascending order, intervals on which it is decreasing
-contribute negatively to the estimated integral (i.e., the convention
-:math:\verb{\\int_a^b f = -\\int_b^a f} is followed).
-dim (int): The dimension along which to integrate.
-By default, use the last dimension.
-
-Returns:
-A Tensor with the same shape as the input, except with \code{dim} removed.
-Each element of the returned tensor represents the estimated integral
-:math:\verb{\\int y\\,dx} along \code{dim}.
-
-Example::
-
 As above, but the sample points are spaced uniformly at a distance of \code{dx}.
-
-Arguments:
-y (Tensor): The values of the function to integrate
 }

@@ -8,9 +8,7 @@
 
 \item{tol}{(float, optional) the tolerance value. Default: \code{None}}
 
-\item{symmetric}{(bool, optional) indicates whether :attr:\code{input} is symmetric.}
-
-\item{Default}{NA \code{False}}
+\item{symmetric}{(bool, optional) indicates whether :attr:\code{input} is symmetric.                               Default: \code{False}}
 }
 \description{
 matrix_rank(input, tol=None, symmetric=False) -> Tensor

@@ -4,9 +4,7 @@
 \alias{torch_inverse}
 \title{Inverse}
 \arguments{
-\item{input}{(Tensor) the input tensor of size :math:\verb{(*, n, n)} where \code{*} is zero or more}
-
-\item{batch}{NA}
+\item{input}{(Tensor) the input tensor of size :math:\verb{(*, n, n)} where \code{*} is zero or more                    batch dimensions}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

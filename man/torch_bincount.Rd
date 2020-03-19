@@ -6,9 +6,7 @@
 \arguments{
 \item{input}{(Tensor) 1-d int tensor}
 
-\item{weights}{(Tensor) optional, weight for each value in the input tensor.}
-
-\item{Should}{NA}
+\item{weights}{(Tensor) optional, weight for each value in the input tensor.        Should be of same size as input tensor.}
 
 \item{minlength}{(int) optional, minimum number of bins. Should be non-negative.}
 }
@@ -27,16 +25,4 @@ tensor of size 0. If :attr:\code{minlength} is specified, the number of bins is 
 \verb{out[n] += 1}.
 
 .. include:: cuda_deterministic.rst
-
-Arguments:
-input (Tensor): 1-d int tensor
-weights (Tensor): optional, weight for each value in the input tensor.
-Should be of same size as input tensor.
-minlength (int): optional, minimum number of bins. Should be non-negative.
-
-Returns:
-output (Tensor): a tensor of shape \verb{Size([max(input) + 1])} if
-:attr:\code{input} is non-empty, else \code{Size(0)}
-
-Example::
 }

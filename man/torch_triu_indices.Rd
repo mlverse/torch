@@ -8,19 +8,13 @@
 
 \item{col}{(\code{int}) number of columns in the 2-D matrix.}
 
-\item{offset}{(\code{int}) diagonal offset from the main diagonal.}
+\item{offset}{(\code{int}) diagonal offset from the main diagonal.        Default: if not provided, 0.}
 
-\item{dtype}{NA class:\code{torch.dtype}, optional): the desired data type of returned tensor.}
+\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, \code{torch.long}.}
 
-\item{device}{NA class:\code{torch.device}, optional): the desired device of returned tensor.}
+\item{device}{(:class:\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see :func:\code{torch.set_default_tensor_type}). :attr:\code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
-\item{Default}{NA if \code{None}, uses the current device for the default tensor type}
-
-\item{NA}{func:\code{torch.set_default_tensor_type}). :attr:\code{device} will be the CPU}
-
-\item{for}{NA}
-
-\item{layout}{NA class:\code{torch.layout}, optional): currently only support \code{torch.strided}.}
+\item{layout}{(:class:\code{torch.layout}, optional) currently only support \code{torch.strided}.}
 }
 \description{
 triu_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor

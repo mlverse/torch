@@ -10,11 +10,7 @@
 
 \item{keepdim}{(bool) whether the output tensor has :attr:\code{dim} retained or not.}
 
-\item{dtype}{NA class:\code{torch.dtype}, optional): the desired data type of returned tensor.}
-
-\item{If}{NA attr:\code{dtype} before the operation}
-
-\item{is}{NA None.}
+\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:\code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
 }
 \description{
 prod(input, dtype=None) -> Tensor

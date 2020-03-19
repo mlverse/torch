@@ -29,18 +29,9 @@ The operation is defined as:
 .. note::
 The tensors :attr:\code{condition}, :attr:\code{x}, :attr:\code{y} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 
-Arguments:
-condition (BoolTensor): When True (nonzero), yield x, otherwise yield y
-x (Tensor): values selected at indices where :attr:\code{condition} is \code{True}
-y (Tensor): values selected at indices where :attr:\code{condition} is \code{False}
-
-Returns:
-Tensor: A tensor of shape equal to the broadcasted shape of :attr:\code{condition}, :attr:\code{x}, :attr:\code{y}
-
-Example::
-
 \code{torch.where(condition)} is identical to
 \code{torch.nonzero(condition, as_tuple=True)}.
 
 .. note::
+See also :func:\code{torch.nonzero}.
 }

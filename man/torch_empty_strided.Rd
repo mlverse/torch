@@ -8,25 +8,15 @@
 
 \item{stride}{(tuple of ints) the strides of the output tensor}
 
-\item{dtype}{NA class:\code{torch.dtype}, optional): the desired data type of returned tensor.}
+\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see :func:\code{torch.set_default_tensor_type}).}
 
-\item{layout}{NA class:\code{torch.layout}, optional): the desired layout of returned Tensor.}
+\item{layout}{(:class:\code{torch.layout}, optional) the desired layout of returned Tensor.        Default: \code{torch.strided}.}
 
-\item{device}{NA class:\code{torch.device}, optional): the desired device of returned tensor.}
+\item{device}{(:class:\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see :func:\code{torch.set_default_tensor_type}). :attr:\code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
-\item{Default}{NA if \code{None}, uses the current device for the default tensor type}
+\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 
-\item{NA}{func:\code{torch.set_default_tensor_type}). :attr:\code{device} will be the CPU}
-
-\item{for}{NA}
-
-\item{requires_grad}{(bool, optional) If autograd should record operations on the}
-
-\item{returned}{NA \code{False}.}
-
-\item{pin_memory}{(bool, optional) If set, returned tensor would be allocated in}
-
-\item{the}{NA \code{False}.}
+\item{pin_memory}{(bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: \code{False}.}
 }
 \description{
 empty_strided(size, stride, dtype=None, layout=None, device=None, requires_grad=False, pin_memory=False) -> Tensor

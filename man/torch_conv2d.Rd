@@ -10,21 +10,13 @@
 
 \item{bias}{NA optional bias tensor of shape :math:\verb{(\\text\{out\\_channels\})}. Default: \code{None}}
 
-\item{stride}{NA the stride of the convolving kernel. Can be a single number or a}
+\item{stride}{NA the stride of the convolving kernel. Can be a single number or a      tuple \verb{(sH, sW)}. Default: 1}
 
-\item{tuple}{(sH, sW) 1}
+\item{padding}{NA implicit paddings on both sides of the input. Can be a      single number or a tuple \verb{(padH, padW)}. Default: 0}
 
-\item{padding}{NA implicit paddings on both sides of the input. Can be a}
+\item{dilation}{NA the spacing between kernel elements. Can be a single number or      a tuple \verb{(dH, dW)}. Default: 1}
 
-\item{single}{(padH, padW) 0}
-
-\item{dilation}{NA the spacing between kernel elements. Can be a single number or}
-
-\item{a}{(dH, dW) 1}
-
-\item{groups}{NA split input into groups, :math:\verb{\\text\{in\\_channels\}} should be divisible by the}
-
-\item{number}{NA 1}
+\item{groups}{NA split input into groups, :math:\verb{\\text\{in\\_channels\}} should be divisible by the      number of groups. Default: 1}
 }
 \description{
 conv2d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor

@@ -6,9 +6,7 @@
 \arguments{
 \item{input}{(Tensor) the input tensor.}
 
-\item{dim}{(int, optional) if given, the input will be squeezed only in}
-
-\item{this}{NA}
+\item{dim}{(int, optional) if given, the input will be squeezed only in           this dimension}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

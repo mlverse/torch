@@ -10,25 +10,11 @@
 
 \item{zero_point}{(int) offset in integer value that maps to float zero}
 
-\item{dtype}{NA class:\code{torch.dtype}): the desired data type of returned tensor.}
-
-\item{Has}{NA \code{torch.quint8}, \code{torch.qint8}, \code{torch.qint32}}
+\item{dtype}{(:class:\code{torch.dtype}) the desired data type of returned tensor.        Has to be one of the quantized dtypes: \code{torch.quint8}, \code{torch.qint8}, \code{torch.qint32}}
 }
 \description{
 quantize_per_tensor(input, scale, zero_point, dtype) -> Tensor
 }
 \details{
 Converts a float tensor to quantized tensor with given scale and zero point.
-
-Arguments:
-input (Tensor): float tensor to quantize
-scale (float): scale to apply in quantization formula
-zero_point (int): offset in integer value that maps to float zero
-dtype (:class:\code{torch.dtype}): the desired data type of returned tensor.
-Has to be one of the quantized dtypes: \code{torch.quint8}, \code{torch.qint8}, \code{torch.qint32}
-
-Returns:
-Tensor: A newly quantized tensor
-
-Example::
 }

@@ -4,9 +4,7 @@
 \alias{torch_symeig}
 \title{Symeig}
 \arguments{
-\item{input}{(Tensor) the input tensor of size :math:\verb{(*, n, n)} where \code{*} is zero or more}
-
-\item{batch}{NA}
+\item{input}{(Tensor) the input tensor of size :math:\verb{(*, n, n)} where \code{*} is zero or more                    batch dimensions consisting of symmetric matrices.}
 
 \item{eigenvectors}{(boolean, optional) controls whether eigenvectors have to be computed}
 

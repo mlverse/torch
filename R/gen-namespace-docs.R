@@ -116,16 +116,11 @@ NULL
 #' See :class:`~torch.nn.AvgPool1d` for details and output shape.
 #'
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iW)`
-#' @param kernel_size NA the size of the window. Can be a single number or a
-#' @param tuple (kW,) 
-#' @param stride NA the stride of the window. Can be a single number or a tuple
-#' @param ` (sW,) :attr:`kernel_size`
-#' @param padding NA implicit zero paddings on both sides of the input. Can be a
-#' @param single (padW,) 0
-#' @param ceil_mode NA when True, will use `ceil` instead of `floor` to compute the
-#' @param output NA ``False``
-#' @param count_include_pad NA when True, will include the zero-padding in the
-#' @param averaging NA ``True``
+#' @param kernel_size NA the size of the window. Can be a single number or a      tuple `(kW,)`
+#' @param stride NA the stride of the window. Can be a single number or a tuple      `(sW,)`. Default: :attr:`kernel_size`
+#' @param padding NA implicit zero paddings on both sides of the input. Can be a      single number or a tuple `(padW,)`. Default: 0
+#' @param ceil_mode NA when True, will use `ceil` instead of `floor` to compute the        output shape. Default: ``False``
+#' @param count_include_pad NA when True, will include the zero-padding in the        averaging calculation. Default: ``True``
 #'
 #' @name torch_avg_pool1d
 #'
@@ -313,20 +308,10 @@ NULL
 #' @param end (Number) the ending value for the set of points
 #' @param step (Number) the gap between each pair of adjacent points. Default: ``1``.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). If `dtype` is not given, infer the data type from the other input
-#' @param arguments. NA 
-#' @param `dtype` NA 
-#' @param  NA meth:`~torch.get_default_dtype`. Otherwise, the `dtype` is inferred to
-#' @param be NA 
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). If `dtype` is not given, infer the data type from the other input        arguments. If any of `start`, `end`, or `stop` are floating-point, the        `dtype` is inferred to be the default dtype, see        :meth:`~torch.get_default_dtype`. Otherwise, the `dtype` is inferred to        be `torch.int64`.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_arange
 #'
@@ -516,20 +501,30 @@ NULL
 #' 
 #' .. math::
 #'     w[n] = 1 - \left| \frac{2n}{N-1} - 1 \right| = \begin{cases}
+#'         \frac{2n}{N - 1} & \text{if } 0 \leq n \leq \frac{N - 1}{2} \\
+#'         2 - \frac{2n}{N - 1} & \text{if } \frac{N - 1}{2} < n < N \\
+#'     \end{cases},
+#' 
+#' where :math:`N` is the full window size.
+#' 
+#' The input :attr:`window_length` is a positive integer controlling the
+#' returned window size. :attr:`periodic` flag determines whether the returned
+#' window trims off the last duplicate value from the symmetric window and is
+#' ready to be used as a periodic window with functions like
+#' :meth:`torch.stft`. Therefore, if :attr:`periodic` is true, the :math:`N` in
+#' above formula is in fact :math:`\text{window\_length} + 1`. Also, we always have
+#' ``torch.bartlett_window(L, periodic=True)`` equal to
+#' ``torch.bartlett_window(L + 1, periodic=False)[:-1])``.
+#' 
+#' .. note::
+#'     If :attr:`window_length` :math:`=1`, the returned window contains a single value 1.
 #'
 #' @param window_length (int) the size of returned window
-#' @param periodic (bool, optional) If True, returns a window to be used as periodic
-#' @param function. NA 
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned window tensor. Only
-#' @param ``torch.strided`` (dense layout) 
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch.strided`` (dense layout) is supported.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_bartlett_window
 #'
@@ -562,7 +557,7 @@ NULL
 #' point ``dtype``.
 #'
 #' @param input (Tensor) the input tensor of probability values for the Bernoulli distribution
-#' @param generator NA class:`torch.Generator`, optional): a pseudorandom number generator for sampling
+#' @param generator (:class:`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_bernoulli
@@ -586,22 +581,9 @@ NULL
 #' ``out[n] += 1``.
 #' 
 #' .. include:: cuda_deterministic.rst
-#' 
-#' Arguments:
-#'     input (Tensor): 1-d int tensor
-#'     weights (Tensor): optional, weight for each value in the input tensor.
-#'         Should be of same size as input tensor.
-#'     minlength (int): optional, minimum number of bins. Should be non-negative.
-#' 
-#' Returns:
-#'     output (Tensor): a tensor of shape ``Size([max(input) + 1])`` if
-#'     :attr:`input` is non-empty, else ``Size(0)``
-#' 
-#' Example::
 #'
 #' @param input (Tensor) 1-d int tensor
-#' @param weights (Tensor) optional, weight for each value in the input tensor.
-#' @param Should NA 
+#' @param weights (Tensor) optional, weight for each value in the input tensor.        Should be of same size as input tensor.
 #' @param minlength (int) optional, minimum number of bins. Should be non-negative.
 #'
 #' @name torch_bincount
@@ -667,20 +649,27 @@ NULL
 #' 
 #' .. math::
 #'     w[n] = 0.42 - 0.5 \cos \left( \frac{2 \pi n}{N - 1} \right) + 0.08 \cos \left( \frac{4 \pi n}{N - 1} \right)
+#' 
+#' where :math:`N` is the full window size.
+#' 
+#' The input :attr:`window_length` is a positive integer controlling the
+#' returned window size. :attr:`periodic` flag determines whether the returned
+#' window trims off the last duplicate value from the symmetric window and is
+#' ready to be used as a periodic window with functions like
+#' :meth:`torch.stft`. Therefore, if :attr:`periodic` is true, the :math:`N` in
+#' above formula is in fact :math:`\text{window\_length} + 1`. Also, we always have
+#' ``torch.blackman_window(L, periodic=True)`` equal to
+#' ``torch.blackman_window(L + 1, periodic=False)[:-1])``.
+#' 
+#' .. note::
+#'     If :attr:`window_length` :math:`=1`, the returned window contains a single value 1.
 #'
 #' @param window_length (int) the size of returned window
-#' @param periodic (bool, optional) If True, returns a window to be used as periodic
-#' @param function. NA 
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned window tensor. Only
-#' @param ``torch.strided`` (dense layout) 
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch.strided`` (dense layout) is supported.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_blackman_window
 #'
@@ -726,6 +715,24 @@ NULL
 #' 
 #'     Args:
 #'         *tensors: any number of tensors of the same type
+#' 
+#'     .. warning::
+#' 
+#'         More than one element of a broadcasted tensor may refer to a single
+#'         memory location. As a result, in-place operations (especially ones that
+#'         are vectorized) may result in incorrect behavior. If you need to write
+#'         to the tensors, please clone them first.
+#' 
+#'     Example::
+#' 
+#'         >>> x = torch.arange(3).view(1, 3)
+#'         >>> y = torch.arange(2).view(2, 1)
+#'         >>> a, b = torch.broadcast_tensors(x, y)
+#'         >>> a.size()
+#'         torch.Size([2, 3])
+#'         >>> a
+#'         tensor([[0, 1, 2],
+#'                 [0, 1, 2]])
 #'
 
 #'
@@ -748,9 +755,7 @@ NULL
 #' 
 #' :func:`torch.cat` can be best understood via examples.
 #'
-#' @param tensors (sequence of Tensors) any python sequence of tensors of the same type.
-#' @param Non-empty NA 
-#' @param cat NA 
+#' @param tensors (sequence of Tensors) any python sequence of tensors of the same type.        Non-empty tensors provided must have the same shape, except in the        cat dimension.
 #' @param dim (int, optional) the dimension over which the tensors are concatenated
 #' @param out (Tensor, optional) the output tensor.
 #'
@@ -786,6 +791,28 @@ NULL
 #'     of arithmetic operations (`[CLRS]`_). Note that since this is a function to compute the product, :math:`N`
 #'     needs to be greater than or equal to 2; if equal to 2 then a trivial matrix-matrix product is returned.
 #'     If :math:`N` is 1, then this is a no-op - the original matrix is returned as is.
+#' 
+#' 
+#'     Args:
+#'         matrices (Tensors...): a sequence of 2 or more 2-D tensors whose product is to be determined.
+#' 
+#' 
+#'     Returns:
+#'         Tensor: if the :math:`i^{th}` tensor was of dimensions :math:`p_{i} \times p_{i + 1}`, then the product
+#'         would be of dimensions :math:`p_{1} \times p_{N + 1}`.
+#' 
+#'     Example::
+#' 
+#'         >>> a = torch.randn(3, 4)
+#'         >>> b = torch.randn(4, 5)
+#'         >>> c = torch.randn(5, 6)
+#'         >>> d = torch.randn(6, 7)
+#'         >>> torch.chain_matmul(a, b, c, d)
+#'         tensor([[ -2.3375,  -3.9790,  -4.1119,  -6.6577,   9.5609, -11.5095,  -3.2614],
+#'                 [ 21.4038,   3.3378,  -8.4982,  -5.2457, -10.2561,  -2.4684,   2.7163],
+#'                 [ -0.9647,  -5.8917,  -2.3213,  -5.2284,  12.8615, -12.2816,  -2.5095]])
+#' 
+#'     .. _`[CLRS]`: https://mitpress.mit.edu/books/introduction-algorithms-third-edition
 #'
 
 #'
@@ -894,14 +921,10 @@ NULL
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iW)`
 #' @param weight NA filters of shape :math:`(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kW)`
 #' @param bias NA optional bias of shape :math:`(\text{out\_channels})`. Default: ``None``
-#' @param stride NA the stride of the convolving kernel. Can be a single number or
-#' @param a (sW,) 1
-#' @param padding NA implicit paddings on both sides of the input. Can be a
-#' @param single (padW,) 0
-#' @param dilation NA the spacing between kernel elements. Can be a single number or
-#' @param a (dW,) 1
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by
-#' @param the NA 1
+#' @param stride NA the stride of the convolving kernel. Can be a single number or      a one-element tuple `(sW,)`. Default: 1
+#' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a one-element tuple `(padW,)`. Default: 0
+#' @param dilation NA the spacing between kernel elements. Can be a single number or      a one-element tuple `(dW,)`. Default: 1
+#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by      the number of groups. Default: 1
 #'
 #' @name torch_conv1d
 #'
@@ -923,14 +946,10 @@ NULL
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iH , iW)`
 #' @param weight NA filters of shape :math:`(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kH , kW)`
 #' @param bias NA optional bias tensor of shape :math:`(\text{out\_channels})`. Default: ``None``
-#' @param stride NA the stride of the convolving kernel. Can be a single number or a
-#' @param tuple (sH, sW) 1
-#' @param padding NA implicit paddings on both sides of the input. Can be a
-#' @param single (padH, padW) 0
-#' @param dilation NA the spacing between kernel elements. Can be a single number or
-#' @param a (dH, dW) 1
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the
-#' @param number NA 1
+#' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple `(sH, sW)`. Default: 1
+#' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a tuple `(padH, padW)`. Default: 0
+#' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dH, dW)`. Default: 1
+#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
 #'
 #' @name torch_conv2d
 #'
@@ -952,14 +971,10 @@ NULL
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iT , iH , iW)`
 #' @param weight NA filters of shape :math:`(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kT , kH , kW)`
 #' @param bias NA optional bias tensor of shape :math:`(\text{out\_channels})`. Default: None
-#' @param stride NA the stride of the convolving kernel. Can be a single number or a
-#' @param tuple (sT, sH, sW) 1
-#' @param padding NA implicit paddings on both sides of the input. Can be a
-#' @param single (padT, padH, padW) 0
-#' @param dilation NA the spacing between kernel elements. Can be a single number or
-#' @param a (dT, dH, dW) 1
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by
-#' @param the NA 1
+#' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple `(sT, sH, sW)`. Default: 1
+#' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a tuple `(padT, padH, padW)`. Default: 0
+#' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dT, dH, dW)`. Default: 1
+#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by      the number of groups. Default: 1
 #'
 #' @name torch_conv3d
 #'
@@ -997,17 +1012,11 @@ NULL
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iW)`
 #' @param weight NA filters of shape :math:`(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kW)`
 #' @param bias NA optional bias of shape :math:`(\text{out\_channels})`. Default: None
-#' @param stride NA the stride of the convolving kernel. Can be a single number or a
-#' @param tuple (sW,) 1
-#' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both
-#' @param sides NA 
-#' @param `` (padW,) 0
-#' @param output_padding NA additional size added to one side of each dimension in the
-#' @param output (out_padW) 0
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the
-#' @param number NA 1
-#' @param dilation NA the spacing between kernel elements. Can be a single number or
-#' @param a (dW,) 1
+#' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sW,)``. Default: 1
+#' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padW,)``. Default: 0
+#' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple ``(out_padW)``. Default: 0
+#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
+#' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dW,)``. Default: 1
 #'
 #' @name torch_conv_transpose1d
 #'
@@ -1029,18 +1038,11 @@ NULL
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iH , iW)`
 #' @param weight NA filters of shape :math:`(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kH , kW)`
 #' @param bias NA optional bias of shape :math:`(\text{out\_channels})`. Default: None
-#' @param stride NA the stride of the convolving kernel. Can be a single number or a
-#' @param tuple (sH, sW) 1
-#' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both
-#' @param sides NA 
-#' @param `` (padH, padW) 0
-#' @param output_padding NA additional size added to one side of each dimension in the
-#' @param output (out_padH, out_padW) 
-#' @param Default NA 0
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the
-#' @param number NA 1
-#' @param dilation NA the spacing between kernel elements. Can be a single number or
-#' @param a (dH, dW) 1
+#' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sH, sW)``. Default: 1
+#' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padH, padW)``. Default: 0
+#' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple ``(out_padH, out_padW)``.      Default: 0
+#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
+#' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dH, dW)``. Default: 1
 #'
 #' @name torch_conv_transpose2d
 #'
@@ -1062,18 +1064,11 @@ NULL
 #' @param input NA input tensor of shape :math:`(\text{minibatch} , \text{in\_channels} , iT , iH , iW)`
 #' @param weight NA filters of shape :math:`(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kT , kH , kW)`
 #' @param bias NA optional bias of shape :math:`(\text{out\_channels})`. Default: None
-#' @param stride NA the stride of the convolving kernel. Can be a single number or a
-#' @param tuple (sT, sH, sW) 1
-#' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both
-#' @param sides NA 
-#' @param `` (padT, padH, padW) 0
-#' @param output_padding NA additional size added to one side of each dimension in the
-#' @param output NA 
-#' @param `` (out_padT, out_padH, out_padW) 0
-#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the
-#' @param number NA 1
-#' @param dilation NA the spacing between kernel elements. Can be a single number or
-#' @param a (dT, dH, dW) 1
+#' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sT, sH, sW)``. Default: 1
+#' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padT, padH, padW)``. Default: 0
+#' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple      ``(out_padT, out_padH, out_padW)``. Default: 0
+#' @param groups NA split input into groups, :math:`\text{in\_channels}` should be divisible by the      number of groups. Default: 1
+#' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dT, dH, dW)`. Default: 1
 #'
 #' @name torch_conv_transpose3d
 #'
@@ -1133,9 +1128,7 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to do the operation over
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param If NA attr:`dtype` before the operation
-#' @param is NA None.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_cumsum
@@ -1159,9 +1152,7 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to do the operation over
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param If NA attr:`dtype` before the operation
-#' @param is NA None.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_cumprod
@@ -1181,15 +1172,8 @@ NULL
 #'     not invertible. In this case, double backward through :meth:`det` will be
 #'     unstable in when :attr:`input` doesn't have distinct singular values. See
 #'     :meth:`~torch.svd` for details.
-#' 
-#' Arguments:
-#'     input (Tensor): the input tensor of size ``(*, n, n)`` where ``*`` is zero or more
-#'                 batch dimensions.
-#' 
-#' Example::
 #'
-#' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more
-#' @param batch NA 
+#' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more                batch dimensions.
 #'
 #' @name torch_det
 #'
@@ -1224,12 +1208,9 @@ NULL
 #' need to be explicitly specified.
 #'
 #' @param input (Tensor) the input tensor. Must be at least 1-dimensional.
-#' @param offset (int, optional) which diagonal to consider. Default: 0
-#' @param  (main diagonal) 
-#' @param dim1 (int, optional) first dimension with respect to which to
-#' @param take NA -2.
-#' @param dim2 (int, optional) second dimension with respect to which to
-#' @param take NA -1.
+#' @param offset (int, optional) which diagonal to consider. Default: 0        (main diagonal).
+#' @param dim1 (int, optional) first dimension with respect to which to        take diagonal. Default: -2.
+#' @param dim2 (int, optional) second dimension with respect to which to        take diagonal. Default: -1.
 #'
 #' @name torch_diag_embed
 #'
@@ -1253,8 +1234,7 @@ NULL
 #' - If :attr:`offset` < 0, it is below the main diagonal.
 #'
 #' @param input (Tensor) the input tensor.
-#' @param offset (int, optional) the diagonal to consider. Default: 0 (main
-#' @param diagonal). NA 
+#' @param offset (int, optional) the diagonal to consider. Default: 0 (main        diagonal).
 #'
 #' @name torch_diagflat
 #'
@@ -1282,12 +1262,9 @@ NULL
 #' dimensions, so those need to be explicitly specified.
 #'
 #' @param input (Tensor) the input tensor. Must be at least 2-dimensional.
-#' @param offset (int, optional) which diagonal to consider. Default: 0
-#' @param  (main diagonal) 
-#' @param dim1 (int, optional) first dimension with respect to which to
-#' @param take NA 0.
-#' @param dim2 (int, optional) second dimension with respect to which to
-#' @param take NA 1.
+#' @param offset (int, optional) which diagonal to consider. Default: 0        (main diagonal).
+#' @param dim1 (int, optional) first dimension with respect to which to        take diagonal. Default: 0.
+#' @param dim2 (int, optional) second dimension with respect to which to        take diagonal. Default: 1.
 #'
 #' @name torch_diagonal
 #'
@@ -1373,17 +1350,7 @@ NULL
 #' This function provides a way of computing multilinear expressions (i.e. sums of products) using the
 #' Einstein summation convention.
 #'
-#' @param equation (string) The equation is given in terms of lower case letters (indices) to be associated
-#' @param with NA 
-#' @param dimensions, NA 
-#' @param The NA 
-#' @param If NA 
-#' @param sorted NA 
-#' @param The NA 
-#' @param entries. NA 
-#' @param If NA 
-#' @param Ellipses NA 
-#' @param the NA 
+#' @param equation (string) The equation is given in terms of lower case letters (indices) to be associated           with each dimension of the operands and result. The left hand side lists the operands           dimensions, separated by commas. There should be one index letter per tensor dimension.           The right hand side follows after `->` and gives the indices for the output.           If the `->` and right hand side are omitted, it implicitly defined as the alphabetically           sorted list of all indices appearing exactly once in the left hand side.           The indices not apprearing in the output are summed over after multiplying the operands           entries.           If an index appears several times for the same operand, a diagonal is taken.           Ellipses `...` represent a fixed number of dimensions. If the right hand side is inferred,           the ellipsis dimensions are at the beginning of the output.
 #' @param operands (Tensor) The operands to compute the Einstein sum of.
 #'
 #' @name torch_einsum
@@ -1399,21 +1366,13 @@ NULL
 #' Returns a tensor filled with uninitialized data. The shape of the tensor is
 #' defined by the variable argument :attr:`size`.
 #'
-#' @param size (int...) a sequence of integers defining the shape of the output tensor.
-#' @param Can NA 
+#' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
-#' @param pin_memory (bool, optional) If set, returned tensor would be allocated in
-#' @param the NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#' @param pin_memory (bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: ``False``.
 #'
 #' @name torch_empty
 #'
@@ -1430,14 +1389,10 @@ NULL
 #' ``torch.empty(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned Tensor.
-#' @param Default NA if ``None``, defaults to the dtype of :attr:`input`.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned tensor.
-#' @param Default NA if ``None``, defaults to the layout of :attr:`input`.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, defaults to the device of :attr:`input`.
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_empty_like
 #'
@@ -1462,18 +1417,11 @@ NULL
 #'
 #' @param size (tuple of ints) the shape of the output tensor
 #' @param stride (tuple of ints) the strides of the output tensor
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
-#' @param pin_memory (bool, optional) If set, returned tensor would be allocated in
-#' @param the NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#' @param pin_memory (bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: ``False``.
 #'
 #' @name torch_empty_strided
 #'
@@ -1565,16 +1513,10 @@ NULL
 #' @param n (int) the number of rows
 #' @param m (int, optional) the number of columns with default being :attr:`n`
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_eye
 #'
@@ -1642,20 +1584,13 @@ NULL
 #' 
 #' Returns a tensor of size :attr:`size` filled with :attr:`fill_value`.
 #'
-#' @param size (int...) a list, tuple, or :class:`torch.Size` of integers defining the
-#' @param shape NA 
+#' @param size (int...) a list, tuple, or :class:`torch.Size` of integers defining the        shape of the output tensor.
 #' @param fill_value NA the number to fill the output tensor with.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_full
 #'
@@ -1673,14 +1608,10 @@ NULL
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
 #' @param fill_value NA the number to fill the output tensor with.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned Tensor.
-#' @param Default NA if ``None``, defaults to the dtype of :attr:`input`.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned tensor.
-#' @param Default NA if ``None``, defaults to the layout of :attr:`input`.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, defaults to the device of :attr:`input`.
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_full_like
 #'
@@ -1696,20 +1627,28 @@ NULL
 #' 
 #' .. math::
 #'     w[n] = \frac{1}{2}\ \left[1 - \cos \left( \frac{2 \pi n}{N - 1} \right)\right] =
+#'             \sin^2 \left( \frac{\pi n}{N - 1} \right),
+#' 
+#' where :math:`N` is the full window size.
+#' 
+#' The input :attr:`window_length` is a positive integer controlling the
+#' returned window size. :attr:`periodic` flag determines whether the returned
+#' window trims off the last duplicate value from the symmetric window and is
+#' ready to be used as a periodic window with functions like
+#' :meth:`torch.stft`. Therefore, if :attr:`periodic` is true, the :math:`N` in
+#' above formula is in fact :math:`\text{window\_length} + 1`. Also, we always have
+#' ``torch.hann_window(L, periodic=True)`` equal to
+#' ``torch.hann_window(L + 1, periodic=False)[:-1])``.
+#' 
+#' .. note::
+#'     If :attr:`window_length` :math:`=1`, the returned window contains a single value 1.
 #'
 #' @param window_length (int) the size of returned window
-#' @param periodic (bool, optional) If True, returns a window to be used as periodic
-#' @param function. NA 
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned window tensor. Only
-#' @param ``torch.strided`` (dense layout) 
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch.strided`` (dense layout) is supported.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_hann_window
 #'
@@ -1725,22 +1664,32 @@ NULL
 #' 
 #' .. math::
 #'     w[n] = \alpha - \beta\ \cos \left( \frac{2 \pi n}{N - 1} \right),
+#' 
+#' where :math:`N` is the full window size.
+#' 
+#' The input :attr:`window_length` is a positive integer controlling the
+#' returned window size. :attr:`periodic` flag determines whether the returned
+#' window trims off the last duplicate value from the symmetric window and is
+#' ready to be used as a periodic window with functions like
+#' :meth:`torch.stft`. Therefore, if :attr:`periodic` is true, the :math:`N` in
+#' above formula is in fact :math:`\text{window\_length} + 1`. Also, we always have
+#' ``torch.hamming_window(L, periodic=True)`` equal to
+#' ``torch.hamming_window(L + 1, periodic=False)[:-1])``.
+#' 
+#' .. note::
+#'     If :attr:`window_length` :math:`=1`, the returned window contains a single value 1.
+#' 
+#' .. note::
+#'     This is a generalized version of :meth:`torch.hann_window`.
 #'
 #' @param window_length (int) the size of returned window
-#' @param periodic (bool, optional) If True, returns a window to be used as periodic
-#' @param function. NA 
+#' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
 #' @param alpha (float, optional) The coefficient :math:`\alpha` in the equation above
 #' @param beta (float, optional) The coefficient :math:`\beta` in the equation above
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned window tensor. Only
-#' @param ``torch.strided`` (dense layout) 
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). Only floating point types are supported.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch.strided`` (dense layout) is supported.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_hamming_window
 #'
@@ -1807,26 +1756,10 @@ NULL
 #' .. warning::
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     :func:`torch.backends.mkl.is_available` to check if MKL is installed.
-#' 
-#' Arguments:
-#'     input (Tensor): the input tensor of at least :attr:`signal_ndim` ``+ 1``
-#'         dimensions
-#'     signal_ndim (int): the number of dimensions in each signal.
-#'         :attr:`signal_ndim` can only be 1, 2 or 3
-#'     normalized (bool, optional): controls whether to return normalized results.
-#'         Default: ``False``
-#' 
-#' Returns:
-#'     Tensor: A tensor containing the complex-to-complex Fourier transform result
-#' 
-#' Example::
 #'
-#' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``
-#' @param dimensions NA 
-#' @param signal_ndim (int) the number of dimensions in each signal.
-#' @param  NA attr:`signal_ndim` can only be 1, 2 or 3
-#' @param normalized (bool, optional) controls whether to return normalized results.
-#' @param Default NA ``False``
+#' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``        dimensions
+#' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
+#' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
 #'
 #' @name torch_fft
 #'
@@ -1872,26 +1805,10 @@ NULL
 #' .. warning::
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     :func:`torch.backends.mkl.is_available` to check if MKL is installed.
-#' 
-#' Arguments:
-#'     input (Tensor): the input tensor of at least :attr:`signal_ndim` ``+ 1``
-#'         dimensions
-#'     signal_ndim (int): the number of dimensions in each signal.
-#'         :attr:`signal_ndim` can only be 1, 2 or 3
-#'     normalized (bool, optional): controls whether to return normalized results.
-#'         Default: ``False``
-#' 
-#' Returns:
-#'     Tensor: A tensor containing the complex-to-complex inverse Fourier transform result
-#' 
-#' Example::
 #'
-#' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``
-#' @param dimensions NA 
-#' @param signal_ndim (int) the number of dimensions in each signal.
-#' @param  NA attr:`signal_ndim` can only be 1, 2 or 3
-#' @param normalized (bool, optional) controls whether to return normalized results.
-#' @param Default NA ``False``
+#' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``        dimensions
+#' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
+#' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
 #'
 #' @name torch_ifft
 #'
@@ -1940,28 +1857,11 @@ NULL
 #' .. warning::
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     :func:`torch.backends.mkl.is_available` to check if MKL is installed.
-#' 
-#' Arguments:
-#'     input (Tensor): the input tensor of at least :attr:`signal_ndim` dimensions
-#'     signal_ndim (int): the number of dimensions in each signal.
-#'         :attr:`signal_ndim` can only be 1, 2 or 3
-#'     normalized (bool, optional): controls whether to return normalized results.
-#'         Default: ``False``
-#'     onesided (bool, optional): controls whether to return half of results to
-#'         avoid redundancy. Default: ``True``
-#' 
-#' Returns:
-#'     Tensor: A tensor containing the real-to-complex Fourier transform result
-#' 
-#' Example::
 #'
 #' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` dimensions
-#' @param signal_ndim (int) the number of dimensions in each signal.
-#' @param  NA attr:`signal_ndim` can only be 1, 2 or 3
-#' @param normalized (bool, optional) controls whether to return normalized results.
-#' @param Default NA ``False``
-#' @param onesided (bool, optional) controls whether to return half of results to
-#' @param avoid NA ``True``
+#' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
+#' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
+#' @param onesided (bool, optional) controls whether to return half of results to        avoid redundancy. Default: ``True``
 #'
 #' @name torch_rfft
 #'
@@ -2022,34 +1922,12 @@ NULL
 #' .. warning::
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     :func:`torch.backends.mkl.is_available` to check if MKL is installed.
-#' 
-#' Arguments:
-#'     input (Tensor): the input tensor of at least :attr:`signal_ndim` ``+ 1``
-#'         dimensions
-#'     signal_ndim (int): the number of dimensions in each signal.
-#'         :attr:`signal_ndim` can only be 1, 2 or 3
-#'     normalized (bool, optional): controls whether to return normalized results.
-#'         Default: ``False``
-#'     onesided (bool, optional): controls whether :attr:`input` was halfed to avoid
-#'         redundancy, e.g., by :func:`rfft`. Default: ``True``
-#'     signal_sizes (list or :class:`torch.Size`, optional): the size of the original
-#'         signal (without batch dimension). Default: ``None``
-#' 
-#' Returns:
-#'     Tensor: A tensor containing the complex-to-real inverse Fourier transform result
-#' 
-#' Example::
 #'
-#' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``
-#' @param dimensions NA 
-#' @param signal_ndim (int) the number of dimensions in each signal.
-#' @param  NA attr:`signal_ndim` can only be 1, 2 or 3
-#' @param normalized (bool, optional) controls whether to return normalized results.
-#' @param Default NA ``False``
-#' @param onesided (bool, optional) controls whether :attr:`input` was halfed to avoid
-#' @param redundancy, NA func:`rfft`. Default: ``True``
-#' @param signal_sizes NA class:`torch.Size`, optional): the size of the original
-#' @param signal (without batch dimension) ``None``
+#' @param input (Tensor) the input tensor of at least :attr:`signal_ndim` ``+ 1``        dimensions
+#' @param signal_ndim (int) the number of dimensions in each signal.        :attr:`signal_ndim` can only be 1, 2 or 3
+#' @param normalized (bool, optional) controls whether to return normalized results.        Default: ``False``
+#' @param onesided (bool, optional) controls whether :attr:`input` was halfed to avoid        redundancy, e.g., by :func:`rfft`. Default: ``True``
+#' @param signal_sizes (list or :class:`torch.Size`, optional) the size of the original        signal (without batch dimension). Default: ``None``
 #'
 #' @name torch_irfft
 #'
@@ -2070,8 +1948,7 @@ NULL
 #'     Irrespective of the original strides, the returned tensors will be
 #'     transposed, i.e. with strides like `input.contiguous().transpose(-2, -1).stride()`
 #'
-#' @param input (Tensor) the input tensor of size :math:`(*, n, n)` where `*` is zero or more
-#' @param batch NA 
+#' @param input (Tensor) the input tensor of size :math:`(*, n, n)` where `*` is zero or more                    batch dimensions
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_inverse
@@ -2083,14 +1960,6 @@ NULL
 #' Isnan
 #'
 #' Returns a new tensor with boolean elements representing if each element is `NaN` or not.
-#' 
-#' Arguments:
-#'     input (Tensor): A tensor to check
-#' 
-#' Returns:
-#'     Tensor: A ``torch.BoolTensor`` containing a True at each location of `NaN` elements.
-#' 
-#' Example::
 #'
 #' @param input (Tensor) A tensor to check
 #'
@@ -2135,8 +2004,7 @@ NULL
 #' @param k (int) k for the k-th smallest element
 #' @param dim (int, optional) the dimension to find the kth value along
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
-#' @param out (tuple, optional) the output tuple of (Tensor, LongTensor)
-#' @param can NA 
+#' @param out (tuple, optional) the output tuple of (Tensor, LongTensor)                           can be optionally given to be used as output buffers
 #'
 #' @name torch_kthvalue
 #'
@@ -2155,19 +2023,12 @@ NULL
 #'
 #' @param start (float) the starting value for the set of points
 #' @param end (float) the ending value for the set of points
-#' @param steps (int) number of points to sample between :attr:`start`
-#' @param and NA attr:`end`. Default: ``100``.
+#' @param steps (int) number of points to sample between :attr:`start`        and :attr:`end`. Default: ``100``.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_linspace
 #'
@@ -2268,15 +2129,8 @@ NULL
 #'     is not invertible. In this case, double backward through :meth:`logdet` will
 #'     be unstable in when :attr:`input` doesn't have distinct singular values. See
 #'     :meth:`~torch.svd` for details.
-#' 
-#' Arguments:
-#'     input (Tensor): the input tensor of size ``(*, n, n)`` where ``*`` is zero or more
-#'                 batch dimensions.
-#' 
-#' Example::
 #'
-#' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more
-#' @param batch NA 
+#' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more                batch dimensions.
 #'
 #' @name torch_logdet
 #'
@@ -2296,20 +2150,13 @@ NULL
 #'
 #' @param start (float) the starting value for the set of points
 #' @param end (float) the ending value for the set of points
-#' @param steps (int) number of points to sample between :attr:`start`
-#' @param and NA attr:`end`. Default: ``100``.
+#' @param steps (int) number of points to sample between :attr:`start`        and :attr:`end`. Default: ``100``.
 #' @param base (float) base of the logarithm function. Default: ``10.0``.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_logspace
 #'
@@ -2375,13 +2222,6 @@ NULL
 #' .. note::
 #' 
 #'     The 1-dimensional dot product version of this function does not support an :attr:`out` parameter.
-#' 
-#' Arguments:
-#'     input (Tensor): the first tensor to be multiplied
-#'     other (Tensor): the second tensor to be multiplied
-#'     out (Tensor, optional): the output tensor.
-#' 
-#' Example::
 #'
 #' @param input (Tensor) the first tensor to be multiplied
 #' @param other (Tensor) the second tensor to be multiplied
@@ -2410,8 +2250,7 @@ NULL
 #'
 #' @param input (Tensor) the input 2-D tensor
 #' @param tol (float, optional) the tolerance value. Default: ``None``
-#' @param symmetric (bool, optional) indicates whether :attr:`input` is symmetric.
-#' @param Default NA ``False``
+#' @param symmetric (bool, optional) indicates whether :attr:`input` is symmetric.                               Default: ``False``
 #'
 #' @name torch_matrix_rank
 #'
@@ -2820,19 +2659,12 @@ NULL
 #' Returns a tensor filled with the scalar value `1`, with the shape defined
 #' by the variable argument :attr:`size`.
 #'
-#' @param size (int...) a sequence of integers defining the shape of the output tensor.
-#' @param Can NA 
+#' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_ones
 #'
@@ -2854,14 +2686,10 @@ NULL
 #'     ``torch.ones(input.size(), out=output)``.
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned Tensor.
-#' @param Default NA if ``None``, defaults to the dtype of :attr:`input`.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned tensor.
-#' @param Default NA if ``None``, defaults to the layout of :attr:`input`.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, defaults to the device of :attr:`input`.
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_ones_like
 #'
@@ -2877,6 +2705,39 @@ NULL
 #'         x1 (Tensor): input tensor of shape :math:`B \times P \times M`.
 #'         x2 (Tensor): input tensor of shape :math:`B \times R \times M`.
 #'         p: p value for the p-norm distance to calculate between each vector pair
+#'             :math:`\in [0, \infty]`.
+#'         compute_mode:
+#'             'use_mm_for_euclid_dist_if_necessary' - will use matrix multiplication approach to calculate
+#'             euclidean distance (p = 2) if P > 25 or R > 25
+#'             'use_mm_for_euclid_dist' - will always use matrix multiplication approach to calculate
+#'             euclidean distance (p = 2)
+#'             'donot_use_mm_for_euclid_dist' - will never use matrix multiplication approach to calculate
+#'             euclidean distance (p = 2)
+#'             Default: use_mm_for_euclid_dist_if_necessary.
+#' 
+#'     If x1 has shape :math:`B \times P \times M` and x2 has shape :math:`B \times R \times M` then the
+#'     output will have shape :math:`B \times P \times R`.
+#' 
+#'     This function is equivalent to `scipy.spatial.distance.cdist(input,'minkowski', p=p)`
+#'     if :math:`p \in (0, \infty)`. When :math:`p = 0` it is equivalent to
+#'     `scipy.spatial.distance.cdist(input, 'hamming') * M`. When :math:`p = \infty`, the closest
+#'     scipy function is `scipy.spatial.distance.cdist(xn, lambda x, y: np.abs(x - y).max())`.
+#' 
+#'     Example:
+#' 
+#'         >>> a = torch.tensor([[0.9041,  0.0196], [-0.3108, -2.4423], [-0.4821,  1.059]])
+#'         >>> a
+#'         tensor([[ 0.9041,  0.0196],
+#'                 [-0.3108, -2.4423],
+#'                 [-0.4821,  1.0590]])
+#'         >>> b = torch.tensor([[-2.1763, -0.4713], [-0.6986,  1.3702]])
+#'         >>> b
+#'         tensor([[-2.1763, -0.4713],
+#'                 [-0.6986,  1.3702]])
+#'         >>> torch.cdist(a, b, p=2)
+#'         tensor([[3.1193, 2.0959],
+#'                 [2.7138, 3.8322],
+#'                 [2.2830, 0.3791]])
 #'
 
 #'
@@ -2905,8 +2766,7 @@ NULL
 #' `scipy.spatial.distance.pdist(xn, lambda x, y: np.abs(x - y).max())`.
 #'
 #' @param input NA input tensor of shape :math:`N \times M`.
-#' @param p NA p value for the p-norm distance to calculate between each vector pair
-#' @param  NA math:`\in [0, \infty]`.
+#' @param p NA p value for the p-norm distance to calculate between each vector pair        :math:`\in [0, \infty]`.
 #'
 #' @name torch_pdist
 #'
@@ -2926,8 +2786,7 @@ NULL
 #' @param x1 (Tensor) First input.
 #' @param x2 (Tensor) Second input (of size matching x1).
 #' @param dim (int, optional) Dimension of vectors. Default: 1
-#' @param eps (float, optional) Small value to avoid division by zero.
-#' @param Default NA 1e-8
+#' @param eps (float, optional) Small value to avoid division by zero.        Default: 1e-8
 #'
 #' @name torch_cosine_similarity
 #'
@@ -2967,20 +2826,9 @@ NULL
 #'     However, this method is backprop-able due to the implementation by using SVD results, and
 #'     could be unstable. Double-backward will also be unstable due to the usage of SVD internally.
 #'     See :meth:`~torch.svd` for more details.
-#' 
-#' Arguments:
-#'     input (Tensor): The input tensor of size :math:`(*, m, n)` where :math:`*` is zero or more batch dimensions
-#'     rcond (float): A floating point value to determine the cutoff for small singular values.
-#'                    Default: 1e-15
-#' 
-#' Returns:
-#'     The pseudo-inverse of :attr:`input` of dimensions :math:`(*, n, m)`
-#' 
-#' Example::
 #'
 #' @param input (Tensor) The input tensor of size :math:`(*, m, n)` where :math:`*` is zero or more batch dimensions
-#' @param rcond (float) A floating point value to determine the cutoff for small singular values.
-#' @param Default NA 1e-15
+#' @param rcond (float) A floating point value to determine the cutoff for small singular values.                   Default: 1e-15
 #'
 #' @name torch_pinverse
 #'
@@ -2997,19 +2845,12 @@ NULL
 #' 
 #' The shape of the tensor is defined by the variable argument :attr:`size`.
 #'
-#' @param size (int...) a sequence of integers defining the shape of the output tensor.
-#' @param Can NA 
+#' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_rand
 #'
@@ -3027,14 +2868,10 @@ NULL
 #' ``torch.rand(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned Tensor.
-#' @param Default NA if ``None``, defaults to the dtype of :attr:`input`.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned tensor.
-#' @param Default NA if ``None``, defaults to the layout of :attr:`input`.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, defaults to the device of :attr:`input`.
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_rand_like
 #'
@@ -3058,18 +2895,12 @@ NULL
 #' @param low (int, optional) Lowest integer to be drawn from the distribution. Default: 0.
 #' @param high (int) One above the highest integer to be drawn from the distribution.
 #' @param size (tuple) a tuple defining the shape of the output tensor.
-#' @param generator NA class:`torch.Generator`, optional): a pseudorandom number generator for sampling
+#' @param generator (:class:`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_randint
 #'
@@ -3092,14 +2923,10 @@ NULL
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
 #' @param low (int, optional) Lowest integer to be drawn from the distribution. Default: 0.
 #' @param high (int) One above the highest integer to be drawn from the distribution.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned Tensor.
-#' @param Default NA if ``None``, defaults to the dtype of :attr:`input`.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned tensor.
-#' @param Default NA if ``None``, defaults to the layout of :attr:`input`.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, defaults to the device of :attr:`input`.
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_randint_like
 #'
@@ -3120,19 +2947,12 @@ NULL
 #' 
 #' The shape of the tensor is defined by the variable argument :attr:`size`.
 #'
-#' @param size (int...) a sequence of integers defining the shape of the output tensor.
-#' @param Can NA 
+#' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_randn
 #'
@@ -3150,14 +2970,10 @@ NULL
 #' ``torch.randn(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned Tensor.
-#' @param Default NA if ``None``, defaults to the dtype of :attr:`input`.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned tensor.
-#' @param Default NA if ``None``, defaults to the layout of :attr:`input`.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, defaults to the device of :attr:`input`.
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_randn_like
 #'
@@ -3173,16 +2989,10 @@ NULL
 #'
 #' @param n (int) the upper bound (exclusive)
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA ``torch.int64``.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: ``torch.int64``.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_randperm
 #'
@@ -3208,20 +3018,10 @@ NULL
 #' @param end (float) the ending value for the set of points
 #' @param step (float) the gap between each pair of adjacent points. Default: ``1``.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). If `dtype` is not given, infer the data type from the other input
-#' @param arguments. NA 
-#' @param `dtype` NA 
-#' @param  NA meth:`~torch.get_default_dtype`. Otherwise, the `dtype` is inferred to
-#' @param be NA 
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`). If `dtype` is not given, infer the data type from the other input        arguments. If any of `start`, `end`, or `stop` are floating-point, the        `dtype` is inferred to be the default dtype, see        :meth:`~torch.get_default_dtype`. Otherwise, the `dtype` is inferred to        be `torch.int64`.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_range
 #'
@@ -3260,6 +3060,42 @@ NULL
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_neg
+#'
+#' @export
+NULL
+
+
+#' Repeat_interleave
+#'
+#' repeat_interleave(input, repeats, dim=None) -> Tensor
+#' 
+#' Repeat elements of a tensor.
+#' 
+#' .. warning::
+#' 
+#'     This is different from :func:`torch.repeat` but similar to `numpy.repeat`.
+#'
+#' @param input (Tensor) the input tensor.
+#' @param repeats (Tensor or int) The number of repetitions for each element.        repeats is broadcasted to fit the shape of the given axis.
+#' @param dim (int, optional) The dimension along which to repeat values.        By default, use the flattened input array, and return a flat output        array.
+#'
+#' @name torch_repeat_interleave
+#'
+#' @export
+NULL
+
+
+#' Repeat_interleave
+#'
+#' repeat_interleave(repeats) -> Tensor
+#' 
+#' If the `repeats` is `tensor([n1, n2, n3, ...])`, then the output will be
+#' `tensor([0, 0, ..., 1, 1, ..., 2, 2, ..., ...])` where `0` appears `n1` times,
+#' `1` appears `n2` times, `2` appears `n3` times, etc.
+#'
+
+#'
+#' @name torch_repeat_interleave
 #'
 #' @export
 NULL
@@ -3305,6 +3141,34 @@ NULL
 NULL
 
 
+#' Rrelu_
+#'
+#' rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor
+#' 
+#' In-place version of :func:`~rrelu`.
+#'
+
+#'
+#' @name torch_rrelu_
+#'
+#' @export
+NULL
+
+
+#' Relu_
+#'
+#' relu_(input) -> Tensor
+#' 
+#' In-place version of :func:`~relu`.
+#'
+
+#'
+#' @name torch_relu_
+#'
+#' @export
+NULL
+
+
 #' Rsqrt
 #'
 #' rsqrt(input, out=None) -> Tensor
@@ -3319,6 +3183,34 @@ NULL
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_rsqrt
+#'
+#' @export
+NULL
+
+
+#' Selu_
+#'
+#' selu_(input) -> Tensor
+#' 
+#' In-place version of :func:`~selu`.
+#'
+
+#'
+#' @name torch_selu_
+#'
+#' @export
+NULL
+
+
+#' Celu_
+#'
+#' celu_(input, alpha=1.) -> Tensor
+#' 
+#' In-place version of :func:`~celu`.
+#'
+
+#'
+#' @name torch_celu_
 #'
 #' @export
 NULL
@@ -3393,19 +3285,8 @@ NULL
 #'     is not invertible. In this case, double backward through :meth:`slogdet`
 #'     will be unstable in when :attr:`input` doesn't have distinct singular values.
 #'     See :meth:`~torch.svd` for details.
-#' 
-#' Arguments:
-#'     input (Tensor): the input tensor of size ``(*, n, n)`` where ``*`` is zero or more
-#'                 batch dimensions.
-#' 
-#' Returns:
-#'     A namedtuple (sign, logabsdet) containing the sign of the determinant, and the log
-#'     value of the absolute determinant.
-#' 
-#' Example::
 #'
-#' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more
-#' @param batch NA 
+#' @param input (Tensor) the input tensor of size ``(*, n, n)`` where ``*`` is zero or more                batch dimensions.
 #'
 #' @name torch_slogdet
 #'
@@ -3421,6 +3302,16 @@ NULL
 #'     be split into equally sized chunks (if possible). Last chunk will be smaller if
 #'     the tensor size along the given dimension :attr:`dim` is not divisible by
 #'     :attr:`split_size`.
+#' 
+#'     If :attr:`split_size_or_sections` is a list, then :attr:`tensor` will be split
+#'     into ``len(split_size_or_sections)`` chunks with sizes in :attr:`dim` according
+#'     to :attr:`split_size_or_sections`.
+#' 
+#'     Arguments:
+#'         tensor (Tensor): tensor to split.
+#'         split_size_or_sections (int) or (list(int)): size of a single chunk or
+#'             list of sizes for each chunk
+#'         dim (int): dimension along which to split the tensor.
 #'
 
 #'
@@ -3449,8 +3340,7 @@ NULL
 #'           so changing the contents of one will change the contents of the other.
 #'
 #' @param input (Tensor) the input tensor.
-#' @param dim (int, optional) if given, the input will be squeezed only in
-#' @param this NA 
+#' @param dim (int, optional) if given, the input will be squeezed only in           this dimension
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_squeeze
@@ -3468,8 +3358,7 @@ NULL
 #' All tensors need to be of the same size.
 #'
 #' @param tensors (sequence of Tensors) sequence of tensors to concatenate
-#' @param dim (int) dimension to insert. Has to be between 0 and the number
-#' @param of (inclusive) 
+#' @param dim (int) dimension to insert. Has to be between 0 and the number        of dimensions of concatenated tensors (inclusive)
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_stack
@@ -3486,6 +3375,78 @@ NULL
 #'     expression:
 #' 
 #'     .. math::
+#'         X[m, \omega] = \sum_{k = 0}^{\text{win\_length-1}}%
+#'                             \text{window}[k]\ \text{input}[m \times \text{hop\_length} + k]\ %
+#'                             \exp\left(- j \frac{2 \pi \cdot \omega k}{\text{win\_length}}\right),
+#' 
+#'     where :math:`m` is the index of the sliding window, and :math:`\omega` is
+#'     the frequency that :math:`0 \leq \omega < \text{n\_fft}`. When
+#'     :attr:`onesided` is the default value ``True``,
+#' 
+#'     * :attr:`input` must be either a 1-D time sequence or a 2-D batch of time
+#'       sequences.
+#' 
+#'     * If :attr:`hop_length` is ``None`` (default), it is treated as equal to
+#'       ``floor(n_fft / 4)``.
+#' 
+#'     * If :attr:`win_length` is ``None`` (default), it is treated as equal to
+#'       :attr:`n_fft`.
+#' 
+#'     * :attr:`window` can be a 1-D tensor of size :attr:`win_length`, e.g., from
+#'       :meth:`torch.hann_window`. If :attr:`window` is ``None`` (default), it is
+#'       treated as if having :math:`1` everywhere in the window. If
+#'       :math:`\text{win\_length} < \text{n\_fft}`, :attr:`window` will be padded on
+#'       both sides to length :attr:`n_fft` before being applied.
+#' 
+#'     * If :attr:`center` is ``True`` (default), :attr:`input` will be padded on
+#'       both sides so that the :math:`t`-th frame is centered at time
+#'       :math:`t \times \text{hop\_length}`. Otherwise, the :math:`t`-th frame
+#'       begins at time  :math:`t \times \text{hop\_length}`.
+#' 
+#'     * :attr:`pad_mode` determines the padding method used on :attr:`input` when
+#'       :attr:`center` is ``True``. See :meth:`torch.nn.functional.pad` for
+#'       all available options. Default is ``"reflect"``.
+#' 
+#'     * If :attr:`onesided` is ``True`` (default), only values for :math:`\omega`
+#'       in :math:`\left[0, 1, 2, \dots, \left\lfloor \frac{\text{n\_fft}}{2} \right\rfloor + 1\right]`
+#'       are returned because the real-to-complex Fourier transform satisfies the
+#'       conjugate symmetry, i.e., :math:`X[m, \omega] = X[m, \text{n\_fft} - \omega]^*`.
+#' 
+#'     * If :attr:`normalized` is ``True`` (default is ``False``), the function
+#'       returns the normalized STFT results, i.e., multiplied by :math:`(\text{frame\_length})^{-0.5}`.
+#' 
+#'     Returns the real and the imaginary parts together as one tensor of size
+#'     :math:`(* \times N \times T \times 2)`, where :math:`*` is the optional
+#'     batch size of :attr:`input`, :math:`N` is the number of frequencies where
+#'     STFT is applied, :math:`T` is the total number of frames used, and each pair
+#'     in the last dimension represents a complex number as the real part and the
+#'     imaginary part.
+#' 
+#'     .. warning::
+#'       This function changed signature at version 0.4.1. Calling with the
+#'       previous signature may cause error or return incorrect result.
+#' 
+#'     Arguments:
+#'         input (Tensor): the input tensor
+#'         n_fft (int): size of Fourier transform
+#'         hop_length (int, optional): the distance between neighboring sliding window
+#'             frames. Default: ``None`` (treated as equal to ``floor(n_fft / 4)``)
+#'         win_length (int, optional): the size of window frame and STFT filter.
+#'             Default: ``None``  (treated as equal to :attr:`n_fft`)
+#'         window (Tensor, optional): the optional window function.
+#'             Default: ``None`` (treated as window of all :math:`1` s)
+#'         center (bool, optional): whether to pad :attr:`input` on both sides so
+#'             that the :math:`t`-th frame is centered at time :math:`t \times \text{hop\_length}`.
+#'             Default: ``True``
+#'         pad_mode (string, optional): controls the padding method used when
+#'             :attr:`center` is ``True``. Default: ``"reflect"``
+#'         normalized (bool, optional): controls whether to return the normalized STFT results
+#'              Default: ``False``
+#'         onesided (bool, optional): controls whether to return half of results to
+#'             avoid redundancy Default: ``True``
+#' 
+#'     Returns:
+#'         Tensor: A tensor containing the STFT result with shape described above
 #'
 
 #'
@@ -3502,9 +3463,7 @@ NULL
 #' Returns the sum of all elements in the :attr:`input` tensor.
 #'
 #' @param input (Tensor) the input tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param If NA attr:`dtype` before the operation
-#' @param is NA None.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #'
 #' @name torch_sum
 #'
@@ -3529,9 +3488,7 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param If NA attr:`dtype` before the operation
-#' @param is NA None.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #'
 #' @name torch_sum
 #'
@@ -3659,9 +3616,7 @@ NULL
 #' Returns the product of all elements in the :attr:`input` tensor.
 #'
 #' @param input (Tensor) the input tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param If NA attr:`dtype` before the operation
-#' @param is NA None.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #'
 #' @name torch_prod
 #'
@@ -3684,9 +3639,7 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to reduce.
 #' @param keepdim (bool) whether the output tensor has :attr:`dim` retained or not.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param If NA attr:`dtype` before the operation
-#' @param is NA None.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to :attr:`dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
 #'
 #' @name torch_prod
 #'
@@ -3757,10 +3710,59 @@ NULL
 #' 
 #'     Args:
 #'       a (Tensor): Left tensor to contract
+#'       b (Tensor): Right tensor to contract
+#'       dims (int or tuple of two lists of integers): number of dimensions to
+#'          contract or explicit lists of dimensions for :attr:`a` and
+#'          :attr:`b` respectively
+#' 
+#'     When called with an integer argument :attr:`dims` = :math:`d`, and the number of
+#'     dimensions of :attr:`a` and :attr:`b` is :math:`m` and :math:`n`, respectively,
+#'     it computes
+#' 
+#'     .. math::
+#'         r_{i_0,...,i_{m-d}, i_d,...,i_n}
+#'           = \sum_{k_0,...,k_{d-1}} a_{i_0,...,i_{m-d},k_0,...,k_{d-1}} \times b_{k_0,...,k_{d-1}, i_d,...,i_n}.
+#' 
+#'     When called with :attr:`dims` of the list form, the given dimensions will be contracted
+#'     in place of the last :math:`d` of :attr:`a` and the first :math:`d` of :math:`b`. The sizes
+#'     in these dimensions must match, but :attr:`tensordot` will deal with broadcasted
+#'     dimensions.
+#' 
+#'     Examples::
+#' 
+#'         >>> a = torch.arange(60.).reshape(3, 4, 5)
+#'         >>> b = torch.arange(24.).reshape(4, 3, 2)
+#'         >>> torch.tensordot(a, b, dims=([1, 0], [0, 1]))
+#'         tensor([[4400., 4730.],
+#'                 [4532., 4874.],
+#'                 [4664., 5018.],
+#'                 [4796., 5162.],
+#'                 [4928., 5306.]])
+#' 
+#'         >>> a = torch.randn(3, 4, 5, device='cuda')
+#'         >>> b = torch.randn(4, 5, 6, device='cuda')
+#'         >>> c = torch.tensordot(a, b, dims=2).cpu()
+#'         tensor([[ 8.3504, -2.5436,  6.2922,  2.7556, -1.0732,  3.2741],
+#'                 [ 3.3161,  0.0704,  5.0187, -0.4079, -4.3126,  4.8744],
+#'                 [ 0.8223,  3.9445,  3.2168, -0.2400,  3.4117,  1.7780]])
 #'
 
 #'
 #' @name torch_tensordot
+#'
+#' @export
+NULL
+
+
+#' Threshold_
+#'
+#' threshold_(input, threshold, value) -> Tensor
+#' 
+#' In-place version of :func:`~threshold`.
+#'
+
+#'
+#' @name torch_threshold_
 #'
 #' @export
 NULL
@@ -3812,10 +3814,7 @@ NULL
 #' to the original shape.
 #'
 #' @param input (Tensor) the input tensor.
-#' @param shifts (int or tuple of ints) The number of places by which the elements
-#' @param of NA 
-#' @param the NA 
-#' @param value NA 
+#' @param shifts (int or tuple of ints) The number of places by which the elements        of the tensor are shifted. If shifts is a tuple, dims must be a tuple of        the same size, and each dimension will be rolled by the corresponding        value
 #' @param dims (int or tuple of ints) Axis along which to roll
 #'
 #' @name torch_roll
@@ -3846,30 +3845,10 @@ NULL
 #' trapz(y, x, *, dim=-1) -> Tensor
 #' 
 #' Estimate :math:`\int y\,dx` along `dim`, using the trapezoid rule.
-#' 
-#' Arguments:
-#'     y (Tensor): The values of the function to integrate
-#'     x (Tensor): The points at which the function `y` is sampled.
-#'         If `x` is not in ascending order, intervals on which it is decreasing
-#'         contribute negatively to the estimated integral (i.e., the convention
-#'         :math:`\int_a^b f = -\int_b^a f` is followed).
-#'     dim (int): The dimension along which to integrate.
-#'         By default, use the last dimension.
-#' 
-#' Returns:
-#'     A Tensor with the same shape as the input, except with `dim` removed.
-#'     Each element of the returned tensor represents the estimated integral
-#'     :math:`\int y\,dx` along `dim`.
-#' 
-#' Example::
 #'
 #' @param y (Tensor) The values of the function to integrate
-#' @param x (Tensor) The points at which the function `y` is sampled.
-#' @param If NA 
-#' @param contribute NA 
-#' @param  NA math:`\int_a^b f = -\int_b^a f` is followed).
-#' @param dim (int) The dimension along which to integrate.
-#' @param By NA 
+#' @param x (Tensor) The points at which the function `y` is sampled.        If `x` is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        :math:`\int_a^b f = -\int_b^a f` is followed).
+#' @param dim (int) The dimension along which to integrate.        By default, use the last dimension.
 #'
 #' @name torch_trapz
 #'
@@ -3882,14 +3861,10 @@ NULL
 #' trapz(y, *, dx=1, dim=-1) -> Tensor
 #' 
 #' As above, but the sample points are spaced uniformly at a distance of `dx`.
-#' 
-#' Arguments:
-#'     y (Tensor): The values of the function to integrate
 #'
 #' @param y (Tensor) The values of the function to integrate
 #' @param dx (float) The distance between points at which `y` is sampled.
-#' @param dim (int) The dimension along which to integrate.
-#' @param By NA 
+#' @param dim (int) The dimension along which to integrate.        By default, use the last dimension.
 #'
 #' @name torch_trapz
 #'
@@ -3920,6 +3895,49 @@ NULL
 #'     .. note:: This function is different from :func:`torch.unique` in the sense that this function
 #'         only eliminates consecutive duplicate values. This semantics is similar to `std::unique`
 #'         in C++.
+#' 
+#'     Arguments:
+#'         input (Tensor): the input tensor
+#'         return_inverse (bool): Whether to also return the indices for where
+#'             elements in the original input ended up in the returned unique list.
+#'         return_counts (bool): Whether to also return the counts for each unique
+#'             element.
+#'         dim (int): the dimension to apply unique. If ``None``, the unique of the
+#'             flattened input is returned. default: ``None``
+#' 
+#'     Returns:
+#'         (Tensor, Tensor (optional), Tensor (optional)): A tensor or a tuple of tensors containing
+#' 
+#'             - **output** (*Tensor*): the output list of unique scalar elements.
+#'             - **inverse_indices** (*Tensor*): (optional) if
+#'               :attr:`return_inverse` is True, there will be an additional
+#'               returned tensor (same shape as input) representing the indices
+#'               for where elements in the original input map to in the output;
+#'               otherwise, this function will only return a single tensor.
+#'             - **counts** (*Tensor*): (optional) if
+#'               :attr:`return_counts` is True, there will be an additional
+#'               returned tensor (same shape as output or output.size(dim),
+#'               if dim was specified) representing the number of occurrences
+#'               for each unique value or tensor.
+#' 
+#'     Example::
+#' 
+#'         >>> x = torch.tensor([1, 1, 2, 2, 3, 1, 1, 2])
+#'         >>> output = torch.unique_consecutive(x)
+#'         >>> output
+#'         tensor([1, 2, 3, 1, 2])
+#' 
+#'         >>> output, inverse_indices = torch.unique_consecutive(x, return_inverse=True)
+#'         >>> output
+#'         tensor([1, 2, 3, 1, 2])
+#'         >>> inverse_indices
+#'         tensor([0, 0, 1, 1, 2, 3, 3, 4])
+#' 
+#'         >>> output, counts = torch.unique_consecutive(x, return_counts=True)
+#'         >>> output
+#'         tensor([1, 2, 3, 1, 2])
+#'         >>> counts
+#'         tensor([2, 2, 1, 2, 1])
 #'
 
 #'
@@ -4061,16 +4079,6 @@ NULL
 #' 
 #' .. note::
 #'     The tensors :attr:`condition`, :attr:`x`, :attr:`y` must be :ref:`broadcastable <broadcasting-semantics>`.
-#' 
-#' Arguments:
-#'     condition (BoolTensor): When True (nonzero), yield x, otherwise yield y
-#'     x (Tensor): values selected at indices where :attr:`condition` is ``True``
-#'     y (Tensor): values selected at indices where :attr:`condition` is ``False``
-#' 
-#' Returns:
-#'     Tensor: A tensor of shape equal to the broadcasted shape of :attr:`condition`, :attr:`x`, :attr:`y`
-#' 
-#' Example::
 #'
 #' @param condition (BoolTensor) When True (nonzero), yield x, otherwise yield y
 #' @param x (Tensor) values selected at indices where :attr:`condition` is ``True``
@@ -4090,6 +4098,7 @@ NULL
 #' ``torch.nonzero(condition, as_tuple=True)``.
 #' 
 #' .. note::
+#'     See also :func:`torch.nonzero`.
 #'
 
 #'
@@ -4106,19 +4115,12 @@ NULL
 #' Returns a tensor filled with the scalar value `0`, with the shape defined
 #' by the variable argument :attr:`size`.
 #'
-#' @param size (int...) a sequence of integers defining the shape of the output tensor.
-#' @param Can NA 
+#' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned Tensor.
-#' @param Default NA ``torch.strided``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see :func:`torch.set_default_tensor_type`).
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch.strided``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_zeros
 #'
@@ -4140,14 +4142,10 @@ NULL
 #'     ``torch.zeros(input.size(), out=output)``.
 #'
 #' @param input (Tensor) the size of :attr:`input` will determine size of the output tensor.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned Tensor.
-#' @param Default NA if ``None``, defaults to the dtype of :attr:`input`.
-#' @param layout NA class:`torch.layout`, optional): the desired layout of returned tensor.
-#' @param Default NA if ``None``, defaults to the layout of :attr:`input`.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, defaults to the device of :attr:`input`.
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if ``None``, defaults to the dtype of :attr:`input`.
+#' @param layout (:class:`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of :attr:`input`.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of :attr:`input`.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_zeros_like
 #'
@@ -4163,6 +4161,58 @@ NULL
 #'         input (Tensor): the input tensor
 #'         p (int, float, inf, -inf, 'fro', 'nuc', optional): the order of norm. Default: ``'fro'``
 #'             The following norms can be calculated:
+#' 
+#'             =====  ============================  ==========================
+#'             ord    matrix norm                   vector norm
+#'             =====  ============================  ==========================
+#'             None   Frobenius norm                2-norm
+#'             'fro'  Frobenius norm                --
+#'             'nuc'  nuclear norm                  --
+#'             Other  as vec norm when dim is None  sum(abs(x)**ord)**(1./ord)
+#'             =====  ============================  ==========================
+#' 
+#'         dim (int, 2-tuple of ints, 2-list of ints, optional): If it is an int,
+#'             vector norm will be calculated, if it is 2-tuple of ints, matrix norm
+#'             will be calculated. If the value is None, matrix norm will be calculated
+#'             when the input tensor only has two dimensions, vector norm will be
+#'             calculated when the input tensor only has one dimension. If the input
+#'             tensor has more than two dimensions, the vector norm will be applied to
+#'             last dimension.
+#'         keepdim (bool, optional): whether the output tensors have :attr:`dim`
+#'             retained or not. Ignored if :attr:`dim` = ``None`` and
+#'             :attr:`out` = ``None``. Default: ``False``
+#'         out (Tensor, optional): the output tensor. Ignored if
+#'             :attr:`dim` = ``None`` and :attr:`out` = ``None``.
+#'         dtype (:class:`torch.dtype`, optional): the desired data type of
+#'             returned tensor. If specified, the input tensor is casted to
+#'             :attr:'dtype' while performing the operation. Default: None.
+#' 
+#' 
+#'     Example::
+#' 
+#'         >>> import torch
+#'         >>> a = torch.arange(9, dtype= torch.float) - 4
+#'         >>> b = a.reshape((3, 3))
+#'         >>> torch.norm(a)
+#'         tensor(7.7460)
+#'         >>> torch.norm(b)
+#'         tensor(7.7460)
+#'         >>> torch.norm(a, float('inf'))
+#'         tensor(4.)
+#'         >>> torch.norm(b, float('inf'))
+#'         tensor(4.)
+#'         >>> c = torch.tensor([[ 1, 2, 3],[-1, 1, 4]] , dtype= torch.float)
+#'         >>> torch.norm(c, dim=0)
+#'         tensor([1.4142, 2.2361, 5.0000])
+#'         >>> torch.norm(c, dim=1)
+#'         tensor([3.7417, 4.2426])
+#'         >>> torch.norm(c, p=1, dim=1)
+#'         tensor([6., 6.])
+#'         >>> d = torch.arange(8, dtype= torch.float).reshape(2,2,2)
+#'         >>> torch.norm(d, dim=(1,2))
+#'         tensor([ 3.7417, 11.2250])
+#'         >>> torch.norm(d[0, :, :]), torch.norm(d[1, :, :])
+#'         (tensor(3.7417), tensor(11.2250))
 #'
 
 #'
@@ -4270,24 +4320,12 @@ NULL
 #' coordinates in the indices, and the value at that index is the sum of all duplicate value entries:
 #' `torch.sparse`_.
 #'
-#' @param indices (array_like) Initial data for the tensor. Can be a list, tuple,
-#' @param NumPy NA class:`torch.LongTensor`
-#' @param internally. NA 
-#' @param should NA 
-#' @param the NA 
-#' @param values (array_like) Initial values for the tensor. Can be a list, tuple,
-#' @param NumPy NA 
-#' @param size NA class:`torch.Size`, optional): Size of the sparse tensor. If not
-#' @param provided NA 
-#' @param elements. NA 
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if None, infers data type from :attr:`values`.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if None, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param requires_grad (bool, optional) If autograd should record operations on the
-#' @param returned NA ``False``.
+#' @param indices (array_like) Initial data for the tensor. Can be a list, tuple,        NumPy ``ndarray``, scalar, and other types. Will be cast to a :class:`torch.LongTensor`        internally. The indices are the coordinates of the non-zero values in the matrix, and thus        should be two-dimensional where the first dimension is the number of tensor dimensions and        the second dimension is the number of non-zero values.
+#' @param values (array_like) Initial values for the tensor. Can be a list, tuple,        NumPy ``ndarray``, scalar, and other types.
+#' @param size (list, tuple, or :class:`torch.Size`, optional) Size of the sparse tensor. If not        provided the size will be inferred as the minimum size big enough to hold all non-zero        elements.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if None, infers data type from :attr:`values`.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_sparse_coo_tensor
 #'
@@ -4302,12 +4340,6 @@ NULL
 #' Removes a tensor dimension.
 #' 
 #' Returns a tuple of all slices along a given dimension, already without it.
-#' 
-#' Arguments:
-#'     input (Tensor): the tensor to unbind
-#'     dim (int): dimension to remove
-#' 
-#' Example::
 #'
 #' @param input (Tensor) the tensor to unbind
 #' @param dim (int) dimension to remove
@@ -4323,24 +4355,11 @@ NULL
 #' quantize_per_tensor(input, scale, zero_point, dtype) -> Tensor
 #' 
 #' Converts a float tensor to quantized tensor with given scale and zero point.
-#' 
-#' Arguments:
-#'     input (Tensor): float tensor to quantize
-#'     scale (float): scale to apply in quantization formula
-#'     zero_point (int): offset in integer value that maps to float zero
-#'     dtype (:class:`torch.dtype`): the desired data type of returned tensor.
-#'         Has to be one of the quantized dtypes: ``torch.quint8``, ``torch.qint8``, ``torch.qint32``
-#' 
-#' Returns:
-#'     Tensor: A newly quantized tensor
-#' 
-#' Example::
 #'
 #' @param input (Tensor) float tensor to quantize
 #' @param scale (float) scale to apply in quantization formula
 #' @param zero_point (int) offset in integer value that maps to float zero
-#' @param dtype NA class:`torch.dtype`): the desired data type of returned tensor.
-#' @param Has NA ``torch.quint8``, ``torch.qint8``, ``torch.qint32``
+#' @param dtype (:class:`torch.dtype`) the desired data type of returned tensor.        Has to be one of the quantized dtypes: ``torch.quint8``, ``torch.qint8``, ``torch.qint32``
 #'
 #' @name torch_quantize_per_tensor
 #'
@@ -4353,26 +4372,12 @@ NULL
 #' quantize_per_channel(input, scales, zero_points, axis, dtype) -> Tensor
 #' 
 #' Converts a float tensor to per-channel quantized tensor with given scales and zero points.
-#' 
-#' Arguments:
-#'     input (Tensor): float tensor to quantize
-#'     scales (Tensor): float 1D tensor of scales to use, size should match ``input.size(axis)``
-#'     zero_points (int): integer 1D tensor of offset to use, size should match ``input.size(axis)``
-#'     axis (int): dimension on which apply per-channel quantization
-#'     dtype (:class:`torch.dtype`): the desired data type of returned tensor.
-#'         Has to be one of the quantized dtypes: ``torch.quint8``, ``torch.qint8``, ``torch.qint32``
-#' 
-#' Returns:
-#'     Tensor: A newly quantized tensor
-#' 
-#' Example::
 #'
 #' @param input (Tensor) float tensor to quantize
 #' @param scales (Tensor) float 1D tensor of scales to use, size should match ``input.size(axis)``
 #' @param zero_points (int) integer 1D tensor of offset to use, size should match ``input.size(axis)``
 #' @param axis (int) dimension on which apply per-channel quantization
-#' @param dtype NA class:`torch.dtype`): the desired data type of returned tensor.
-#' @param Has NA ``torch.quint8``, ``torch.qint8``, ``torch.qint32``
+#' @param dtype (:class:`torch.dtype`) the desired data type of returned tensor.        Has to be one of the quantized dtypes: ``torch.quint8``, ``torch.qint8``, ``torch.qint32``
 #'
 #' @name torch_quantize_per_channel
 #'
@@ -4388,6 +4393,27 @@ NULL
 #' 
 #' 
 #'     Args:
+#'         tensors (list of Tensor): list of scalars or 1 dimensional tensors. Scalars will be
+#'         treated as tensors of size :math:`(1,)` automatically
+#' 
+#'     Returns:
+#'         seq (sequence of Tensors): If the input has :math:`k` tensors of size
+#'         :math:`(N_1,), (N_2,), \ldots , (N_k,)`, then the output would also have :math:`k` tensors,
+#'         where all tensors are of size :math:`(N_1, N_2, \ldots , N_k)`.
+#' 
+#'     Example::
+#' 
+#'         >>> x = torch.tensor([1, 2, 3])
+#'         >>> y = torch.tensor([4, 5, 6])
+#'         >>> grid_x, grid_y = torch.meshgrid(x, y)
+#'         >>> grid_x
+#'         tensor([[1, 1, 1],
+#'                 [2, 2, 2],
+#'                 [3, 3, 3]])
+#'         >>> grid_y
+#'         tensor([[4, 5, 6],
+#'                 [4, 5, 6],
+#'                 [4, 5, 6]])
 #'
 
 #'
@@ -4404,6 +4430,27 @@ NULL
 #' 
 #'     Arguments:
 #'         *tensors: any number of 1 dimensional tensors.
+#' 
+#'     Returns:
+#'         Tensor: A tensor equivalent to converting all the input tensors into lists,
+#'             do `itertools.product` on these lists, and finally convert the resulting list
+#'             into tensor.
+#' 
+#'     Example::
+#' 
+#'         >>> a = [1, 2, 3]
+#'         >>> b = [4, 5]
+#'         >>> list(itertools.product(a, b))
+#'         [(1, 4), (1, 5), (2, 4), (2, 5), (3, 4), (3, 5)]
+#'         >>> tensor_a = torch.tensor(a)
+#'         >>> tensor_b = torch.tensor(b)
+#'         >>> torch.cartesian_prod(tensor_a, tensor_b)
+#'         tensor([[1, 4],
+#'                 [1, 5],
+#'                 [2, 4],
+#'                 [2, 5],
+#'                 [3, 4],
+#'                 [3, 5]])
 #'
 
 #'
@@ -4420,18 +4467,6 @@ NULL
 #' Compute combinations of length :math:`r` of the given tensor. The behavior is similar to
 #' python's `itertools.combinations` when `with_replacement` is set to `False`, and
 #' `itertools.combinations_with_replacement` when `with_replacement` is set to `True`.
-#' 
-#' Arguments:
-#'     input (Tensor): 1D vector.
-#'     r (int, optional): number of elements to combine
-#'     with_replacement (boolean, optional): whether to allow duplication in combination
-#' 
-#' Returns:
-#'     Tensor: A tensor equivalent to converting all the input tensors into lists, do
-#'     `itertools.combinations` or `itertools.combinations_with_replacement` on these
-#'     lists, and finally convert the resulting list into tensor.
-#' 
-#' Example::
 #'
 #' @param input (Tensor) 1D vector.
 #' @param r (int, optional) number of elements to combine
@@ -4485,8 +4520,8 @@ NULL
 #' :ref:`documentation <type-promotion-doc>` for more information on the type
 #' promotion logic.
 #'
-#' @param type1 NA class:`torch.dtype`)
-#' @param type2 NA class:`torch.dtype`)
+#' @param type1 (:class:`torch.dtype`) 
+#' @param type2 (:class:`torch.dtype`) 
 #'
 #' @name torch_promote_types
 #'
@@ -4679,15 +4714,10 @@ NULL
 #'
 #' @param row (``int``) number of rows in the 2-D matrix.
 #' @param col (``int``) number of columns in the 2-D matrix.
-#' @param offset (``int``) diagonal offset from the main diagonal.
-#' @param Default NA if not provided, 0.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, ``torch.long``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param layout NA class:`torch.layout`, optional): currently only support ``torch.strided``.
+#' @param offset (``int``) diagonal offset from the main diagonal.        Default: if not provided, 0.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, ``torch.long``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param layout (:class:`torch.layout`, optional) currently only support ``torch.strided``.
 #'
 #' @name torch_tril_indices
 #'
@@ -4720,15 +4750,10 @@ NULL
 #'
 #' @param row (``int``) number of rows in the 2-D matrix.
 #' @param col (``int``) number of columns in the 2-D matrix.
-#' @param offset (``int``) diagonal offset from the main diagonal.
-#' @param Default NA if not provided, 0.
-#' @param dtype NA class:`torch.dtype`, optional): the desired data type of returned tensor.
-#' @param Default NA if ``None``, ``torch.long``.
-#' @param device NA class:`torch.device`, optional): the desired device of returned tensor.
-#' @param Default NA if ``None``, uses the current device for the default tensor type
-#' @param  NA func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU
-#' @param for NA 
-#' @param layout NA class:`torch.layout`, optional): currently only support ``torch.strided``.
+#' @param offset (``int``) diagonal offset from the main diagonal.        Default: if not provided, 0.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, ``torch.long``.
+#' @param device (:class:`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see :func:`torch.set_default_tensor_type`). :attr:`device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param layout (:class:`torch.layout`, optional) currently only support ``torch.strided``.
 #'
 #' @name torch_triu_indices
 #'
@@ -5125,17 +5150,11 @@ NULL
 #' batches of 2D matrices. If the inputs are batches, then returns
 #' batched outputs `X`
 #'
-#' @param input (Tensor) multiple right-hand sides of size :math:`(*, m, k)` where
-#' @param  NA math:`*` is zero of more batch dimensions (:math:`b`)
-#' @param A (Tensor) the input triangular coefficient matrix of size :math:`(*, m, m)`
-#' @param where NA math:`*` is zero or more batch dimensions
-#' @param upper (bool, optional) whether to solve the upper-triangular system
-#' @param of (default) ``True``.
-#' @param transpose (bool, optional) whether :math:`A` should be transposed before
-#' @param being NA ``False``.
-#' @param unitriangular (bool, optional) whether :math:`A` is unit triangular.
-#' @param If NA math:`A` are assumed to be
-#' @param 1 NA math:`A`. Default: ``False``.
+#' @param input (Tensor) multiple right-hand sides of size :math:`(*, m, k)` where                :math:`*` is zero of more batch dimensions (:math:`b`)
+#' @param A (Tensor) the input triangular coefficient matrix of size :math:`(*, m, m)`                where :math:`*` is zero or more batch dimensions
+#' @param upper (bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: ``True``.
+#' @param transpose (bool, optional) whether :math:`A` should be transposed before        being sent into the solver. Default: ``False``.
+#' @param unitriangular (bool, optional) whether :math:`A` is unit triangular.        If True, the diagonal elements of :math:`A` are assumed to be        1 and not referenced from :math:`A`. Default: ``False``.
 #'
 #' @name torch_triangular_solve
 #'
@@ -5175,8 +5194,7 @@ NULL
 #'           operation is really only stable when all eigenvalues are distinct.
 #'           Otherwise, ``NaN`` can appear as the gradients are not properly defined.
 #'
-#' @param input (Tensor) the input tensor of size :math:`(*, n, n)` where `*` is zero or more
-#' @param batch NA 
+#' @param input (Tensor) the input tensor of size :math:`(*, n, n)` where `*` is zero or more                    batch dimensions consisting of symmetric matrices.
 #' @param eigenvectors (boolean, optional) controls whether eigenvectors have to be computed
 #' @param upper (boolean, optional) controls whether to consider upper-triangular or lower-triangular region
 #' @param out (tuple, optional) the output tuple of (Tensor, Tensor)
@@ -5197,10 +5215,8 @@ NULL
 #'     Since eigenvalues and eigenvectors might be complex, backward pass is supported only
 #'     for :func:`torch.symeig`
 #'
-#' @param input (Tensor) the square matrix of shape :math:`(n \times n)` for which the eigenvalues and eigenvectors
-#' @param will NA 
-#' @param eigenvectors (bool) ``True`` to compute both eigenvalues and eigenvectors;
-#' @param otherwise, NA 
+#' @param input (Tensor) the square matrix of shape :math:`(n \times n)` for which the eigenvalues and eigenvectors        will be computed
+#' @param eigenvectors (bool) ``True`` to compute both eigenvalues and eigenvectors;        otherwise, only eigenvalues will be computed
 #' @param out (tuple, optional) the output tensors
 #'
 #' @name torch_eig
@@ -5248,8 +5264,7 @@ NULL
 #' .. note:: When :attr:`compute_uv` = ``False``, backward cannot be performed since `U` and `V`
 #'           from the forward pass is required for the backward operation.
 #'
-#' @param input (Tensor) the input tensor of size :math:`(*, m, n)` where `*` is zero or more
-#' @param batch NA math:`m \times n` matrices.
+#' @param input (Tensor) the input tensor of size :math:`(*, m, n)` where `*` is zero or more                    batch dimensions consisting of :math:`m \times n` matrices.
 #' @param some (bool, optional) controls the shape of returned `U` and `V`
 #' @param compute_uv (bool, optional) option whether to compute `U` and `V` or not
 #' @param out (tuple, optional) the output tuple of tensors
@@ -5287,10 +5302,8 @@ NULL
 #' tensor will be composed of lower-triangular Cholesky factors of each of the individual
 #' matrices.
 #'
-#' @param input (Tensor) the input tensor :math:`A` of size :math:`(*, n, n)` where `*` is zero or more
-#' @param batch NA 
-#' @param upper (bool, optional) flag that indicates whether to return a
-#' @param upper NA ``False``
+#' @param input (Tensor) the input tensor :math:`A` of size :math:`(*, n, n)` where `*` is zero or more                batch dimensions consisting of symmetric positive-definite matrices.
+#' @param upper (bool, optional) flag that indicates whether to return a                            upper or lower triangular matrix. Default: ``False``
 #' @param out (Tensor, optional) the output matrix
 #'
 #' @name torch_cholesky
@@ -5322,13 +5335,9 @@ NULL
 #' batches of 2D matrices. If the inputs are batches, then returns
 #' batched outputs `c`
 #'
-#' @param input (Tensor) input matrix :math:`b` of size :math:`(*, m, k)`,
-#' @param where NA math:`*` is zero or more batch dimensions
-#' @param input2 (Tensor) input matrix :math:`u` of size :math:`(*, m, m)`,
-#' @param where NA math:`*` is zero of more batch dimensions composed of
-#' @param upper NA 
-#' @param upper (bool, optional) whether to consider the Cholesky factor as a
-#' @param lower NA ``False``.
+#' @param input (Tensor) input matrix :math:`b` of size :math:`(*, m, k)`,                where :math:`*` is zero or more batch dimensions
+#' @param input2 (Tensor) input matrix :math:`u` of size :math:`(*, m, m)`,                where :math:`*` is zero of more batch dimensions composed of                upper or lower triangular Cholesky factor
+#' @param upper (bool, optional) whether to consider the Cholesky factor as a                            lower or upper triangular matrix. Default: ``False``.
 #' @param out (Tensor, optional) the output tensor for `c`
 #'
 #' @name torch_cholesky_solve
@@ -5358,10 +5367,8 @@ NULL
 #'     `B.contiguous().transpose(-1, -2).stride()` and
 #'     `A.contiguous().transpose(-1, -2).stride()` respectively.
 #'
-#' @param input (Tensor) input matrix :math:`B` of size :math:`(*, m, k)` , where :math:`*`
-#' @param is NA 
-#' @param A (Tensor) input square matrix of size :math:`(*, m, m)`, where
-#' @param  NA math:`*` is zero or more batch dimensions.
+#' @param input (Tensor) input matrix :math:`B` of size :math:`(*, m, k)` , where :math:`*`                is zero or more batch dimensions.
+#' @param A (Tensor) input square matrix of size :math:`(*, m, m)`, where                :math:`*` is zero or more batch dimensions.
 #' @param out ((Tensor, Tensor) optional output tuple.
 #'
 #' @name torch_solve
@@ -5390,8 +5397,7 @@ NULL
 #' .. math::
 #'     inv = (u^T u)^{{-1}}
 #'
-#' @param input (Tensor) the input 2-D tensor :math:`u`, a upper or lower triangular
-#' @param Cholesky NA 
+#' @param input (Tensor) the input 2-D tensor :math:`u`, a upper or lower triangular           Cholesky factor
 #' @param upper (bool, optional) whether to return a lower (default) or upper triangular matrix
 #' @param out (Tensor, optional) the output tensor for `inv`
 #'
@@ -5420,15 +5426,9 @@ NULL
 #'           give you the same one across platforms - it will depend on your
 #'           LAPACK implementation.
 #'
-#' @param input (Tensor) the input tensor of size :math:`(*, m, n)` where `*` is zero or more
-#' @param batch NA math:`m \times n`.
-#' @param some (bool, optional) Set to ``True`` for reduced QR decomposition and ``False`` for
-#' @param complete NA 
-#' @param out (tuple, optional) tuple of `Q` and `R` tensors
-#' @param satisfying NA code:`input = torch.matmul(Q, R)`.
-#' @param The NA math:`(*, m, k)` and :math:`(*, k, n)`
-#' @param respectively, NA math:`k = \min(m, n)` if :attr:`some:` is ``True`` and
-#' @param  NA math:`k = m` otherwise.
+#' @param input (Tensor) the input tensor of size :math:`(*, m, n)` where `*` is zero or more                batch dimensions consisting of matrices of dimension :math:`m \times n`.
+#' @param some (bool, optional) Set to ``True`` for reduced QR decomposition and ``False`` for                complete QR decomposition.
+#' @param out (tuple, optional) tuple of `Q` and `R` tensors                satisfying :code:`input = torch.matmul(Q, R)`.                The dimensions of `Q` and `R` are :math:`(*, m, k)` and :math:`(*, k, n)`                respectively, where :math:`k = \min(m, n)` if :attr:`some:` is ``True`` and                :math:`k = m` otherwise.
 #'
 #' @name torch_qr
 #'
@@ -5507,28 +5507,10 @@ NULL
 #' 
 #' Returns the LU solve of the linear system :math:`Ax = b` using the partially pivoted
 #' LU factorization of A from :meth:`torch.lu`.
-#' 
-#' Arguments:
-#'     b (Tensor): the RHS tensor of size :math:`(*, m, k)`, where :math:`*`
-#'                 is zero or more batch dimensions.
-#'     LU_data (Tensor): the pivoted LU factorization of A from :meth:`torch.lu` of size :math:`(*, m, m)`,
-#'                        where :math:`*` is zero or more batch dimensions.
-#'     LU_pivots (IntTensor): the pivots of the LU factorization from :meth:`torch.lu` of size :math:`(*, m)`,
-#'                            where :math:`*` is zero or more batch dimensions.
-#'                            The batch dimensions of :attr:`LU_pivots` must be equal to the batch dimensions of
-#'                            :attr:`LU_data`.
-#'     out (Tensor, optional): the output tensor.
-#' 
-#' Example::
 #'
-#' @param b (Tensor) the RHS tensor of size :math:`(*, m, k)`, where :math:`*`
-#' @param is NA 
-#' @param LU_data (Tensor) the pivoted LU factorization of A from :meth:`torch.lu` of size :math:`(*, m, m)`,
-#' @param where NA math:`*` is zero or more batch dimensions.
-#' @param LU_pivots (IntTensor) the pivots of the LU factorization from :meth:`torch.lu` of size :math:`(*, m)`,
-#' @param where NA math:`*` is zero or more batch dimensions.
-#' @param The NA attr:`LU_pivots` must be equal to the batch dimensions of
-#' @param  NA attr:`LU_data`.
+#' @param b (Tensor) the RHS tensor of size :math:`(*, m, k)`, where :math:`*`                is zero or more batch dimensions.
+#' @param LU_data (Tensor) the pivoted LU factorization of A from :meth:`torch.lu` of size :math:`(*, m, m)`,                       where :math:`*` is zero or more batch dimensions.
+#' @param LU_pivots (IntTensor) the pivots of the LU factorization from :meth:`torch.lu` of size :math:`(*, m)`,                           where :math:`*` is zero or more batch dimensions.                           The batch dimensions of :attr:`LU_pivots` must be equal to the batch dimensions of                           :attr:`LU_data`.
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_lu_solve
@@ -5571,7 +5553,7 @@ NULL
 #' @param input (Tensor) the input tensor containing probabilities
 #' @param num_samples (int) number of samples to draw
 #' @param replacement (bool, optional) whether to draw with replacement or not
-#' @param generator NA class:`torch.Generator`, optional): a pseudorandom number generator for sampling
+#' @param generator (:class:`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_multinomial
@@ -5800,8 +5782,7 @@ NULL
 #' :attr:`other` must be :ref:`broadcastable <broadcasting-semantics>`.
 #'
 #' @param input (Tensor) the dividend
-#' @param other (Tensor or float) the divisor that may be either a number or a
-#' @param Tensor NA 
+#' @param other (Tensor or float) the divisor that may be either a number or a                               Tensor of the same shape as the dividend
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_remainder
@@ -5829,8 +5810,7 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param dim (int, optional) the dimension to sort along
 #' @param descending (bool, optional) controls the sorting order (ascending or descending)
-#' @param out (tuple, optional) the output tuple of (`Tensor`, `LongTensor`) that can
-#' @param be NA 
+#' @param out (tuple, optional) the output tuple of (`Tensor`, `LongTensor`) that can        be optionally given to be used as output buffers
 #'
 #' @name torch_sort
 #'
@@ -5878,12 +5858,9 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param k (int) the k in "top-k"
 #' @param dim (int, optional) the dimension to sort along
-#' @param largest (bool, optional) controls whether to return largest or
-#' @param smallest NA 
-#' @param sorted (bool, optional) controls whether to return the elements
-#' @param in NA 
-#' @param out (tuple, optional) the output tuple of (Tensor, LongTensor) that can be
-#' @param optionally NA 
+#' @param largest (bool, optional) controls whether to return largest or           smallest elements
+#' @param sorted (bool, optional) controls whether to return the elements           in sorted order
+#' @param out (tuple, optional) the output tuple of (Tensor, LongTensor) that can be        optionally given to be used as output buffers
 #'
 #' @name torch_topk
 #'
@@ -5950,7 +5927,7 @@ NULL
 #'
 #' @param mean (Tensor) the tensor of per-element means
 #' @param std (Tensor) the tensor of per-element standard deviations
-#' @param generator NA class:`torch.Generator`, optional): a pseudorandom number generator for sampling
+#' @param generator (:class:`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_normal
@@ -6019,6 +5996,12 @@ NULL
 #'         tensor (Tensor): A tensor to check
 #' 
 #'     Returns:
+#'         Tensor: ``A torch.Tensor with dtype torch.bool`` containing a True at each location of finite elements and False otherwise
+#' 
+#'     Example::
+#' 
+#'         >>> torch.isfinite(torch.tensor([1, float('inf'), 2, float('-inf'), float('nan')]))
+#'         tensor([True,  False,  True,  False,  False])
 #'
 
 #'

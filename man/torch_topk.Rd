@@ -10,17 +10,11 @@
 
 \item{dim}{(int, optional) the dimension to sort along}
 
-\item{largest}{(bool, optional) controls whether to return largest or}
+\item{largest}{(bool, optional) controls whether to return largest or           smallest elements}
 
-\item{smallest}{NA}
+\item{sorted}{(bool, optional) controls whether to return the elements           in sorted order}
 
-\item{sorted}{(bool, optional) controls whether to return the elements}
-
-\item{in}{NA}
-
-\item{out}{(tuple, optional) the output tuple of (Tensor, LongTensor) that can be}
-
-\item{optionally}{NA}
+\item{out}{(tuple, optional) the output tuple of (Tensor, LongTensor) that can be        optionally given to be used as output buffers}
 }
 \description{
 topk(input, k, dim=None, largest=True, sorted=True, out=None) -> (Tensor, LongTensor)

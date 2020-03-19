@@ -11,5 +11,11 @@ Returns a new tensor with boolean elements representing if each element is \code
     tensor (Tensor): A tensor to check
 
 Returns:
+    Tensor: ``A torch.Tensor with dtype torch.bool`` containing a True at each location of finite elements and False otherwise
+
+Example::
+
+    >>> torch.isfinite(torch.tensor([1, float('inf'), 2, float('-inf'), float('nan')]))
+    tensor([True,  False,  True,  False,  False])
 }
 }

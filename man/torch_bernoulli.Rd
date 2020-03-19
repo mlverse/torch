@@ -6,7 +6,7 @@
 \arguments{
 \item{input}{(Tensor) the input tensor of probability values for the Bernoulli distribution}
 
-\item{generator}{NA class:\code{torch.Generator}, optional): a pseudorandom number generator for sampling}
+\item{generator}{(:class:\code{torch.Generator}, optional) a pseudorandom number generator for sampling}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

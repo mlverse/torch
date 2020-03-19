@@ -10,27 +10,15 @@
 
 \item{bias}{NA optional bias of shape :math:\verb{(\\text\{out\\_channels\})}. Default: None}
 
-\item{stride}{NA the stride of the convolving kernel. Can be a single number or a}
+\item{stride}{NA the stride of the convolving kernel. Can be a single number or a      tuple \verb{(sW,)}. Default: 1}
 
-\item{tuple}{(sW,) 1}
+\item{padding}{NA \code{dilation * (kernel_size - 1) - padding} zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      \verb{(padW,)}. Default: 0}
 
-\item{padding}{NA \code{dilation * (kernel_size - 1) - padding} zero-padding will be added to both}
+\item{output_padding}{NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple \code{(out_padW)}. Default: 0}
 
-\item{sides}{NA}
+\item{groups}{NA split input into groups, :math:\verb{\\text\{in\\_channels\}} should be divisible by the      number of groups. Default: 1}
 
-\item{``}{(padW,) 0}
-
-\item{output_padding}{NA additional size added to one side of each dimension in the}
-
-\item{output}{(out_padW) 0}
-
-\item{groups}{NA split input into groups, :math:\verb{\\text\{in\\_channels\}} should be divisible by the}
-
-\item{number}{NA 1}
-
-\item{dilation}{NA the spacing between kernel elements. Can be a single number or}
-
-\item{a}{(dW,) 1}
+\item{dilation}{NA the spacing between kernel elements. Can be a single number or      a tuple \verb{(dW,)}. Default: 1}
 }
 \description{
 conv_transpose1d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor

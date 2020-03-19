@@ -4,9 +4,9 @@
 \alias{torch_promote_types}
 \title{Promote_types}
 \arguments{
-\item{type1}{NA class:\code{torch.dtype})}
+\item{type1}{(:class:\code{torch.dtype})}
 
-\item{type2}{NA class:\code{torch.dtype})}
+\item{type2}{(:class:\code{torch.dtype})}
 }
 \description{
 promote_types(type1, type2) -> dtype

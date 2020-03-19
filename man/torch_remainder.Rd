@@ -6,9 +6,7 @@
 \arguments{
 \item{input}{(Tensor) the dividend}
 
-\item{other}{(Tensor or float) the divisor that may be either a number or a}
-
-\item{Tensor}{NA}
+\item{other}{(Tensor or float) the divisor that may be either a number or a                               Tensor of the same shape as the dividend}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

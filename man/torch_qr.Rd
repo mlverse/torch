@@ -4,23 +4,11 @@
 \alias{torch_qr}
 \title{Qr}
 \arguments{
-\item{input}{(Tensor) the input tensor of size :math:\verb{(*, m, n)} where \code{*} is zero or more}
+\item{input}{(Tensor) the input tensor of size :math:\verb{(*, m, n)} where \code{*} is zero or more                batch dimensions consisting of matrices of dimension :math:\verb{m \\times n}.}
 
-\item{batch}{NA math:\verb{m \\times n}.}
+\item{some}{(bool, optional) Set to \code{True} for reduced QR decomposition and \code{False} for                complete QR decomposition.}
 
-\item{some}{(bool, optional) Set to \code{True} for reduced QR decomposition and \code{False} for}
-
-\item{complete}{NA}
-
-\item{out}{(tuple, optional) tuple of \code{Q} and \code{R} tensors}
-
-\item{satisfying}{NA code:\code{input = torch.matmul(Q, R)}.}
-
-\item{The}{NA math:\verb{(*, m, k)} and :math:\verb{(*, k, n)}}
-
-\item{respectively, }{NA math:\verb{k = \\min(m, n)} if :attr:\verb{some:} is \code{True} and}
-
-\item{NA}{math:\code{k = m} otherwise.}
+\item{out}{(tuple, optional) tuple of \code{Q} and \code{R} tensors                satisfying :code:\code{input = torch.matmul(Q, R)}.                The dimensions of \code{Q} and \code{R} are :math:\verb{(*, m, k)} and :math:\verb{(*, k, n)}                respectively, where :math:\verb{k = \\min(m, n)} if :attr:\verb{some:} is \code{True} and                :math:\code{k = m} otherwise.}
 }
 \description{
 qr(input, some=True, out=None) -> (Tensor, Tensor)

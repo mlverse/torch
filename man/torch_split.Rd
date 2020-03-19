@@ -11,5 +11,15 @@ Splits the tensor into chunks.
 be split into equally sized chunks (if possible). Last chunk will be smaller if
 the tensor size along the given dimension :attr:`dim` is not divisible by
 :attr:`split_size`.
+
+If :attr:`split_size_or_sections` is a list, then :attr:`tensor` will be split
+into ``len(split_size_or_sections)`` chunks with sizes in :attr:`dim` according
+to :attr:`split_size_or_sections`.
+
+Arguments:
+    tensor (Tensor): tensor to split.
+    split_size_or_sections (int) or (list(int)): size of a single chunk or
+        list of sizes for each chunk
+    dim (int): dimension along which to split the tensor.
 }
 }

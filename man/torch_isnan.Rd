@@ -9,12 +9,3 @@
 \description{
 Returns a new tensor with boolean elements representing if each element is \code{NaN} or not.
 }
-\details{
-Arguments:
-input (Tensor): A tensor to check
-
-Returns:
-Tensor: A \code{torch.BoolTensor} containing a True at each location of \code{NaN} elements.
-
-Example::
-}

@@ -10,9 +10,7 @@
 
 \item{dim}{(int, optional) Dimension of vectors. Default: 1}
 
-\item{eps}{(float, optional) Small value to avoid division by zero.}
-
-\item{Default}{NA 1e-8}
+\item{eps}{(float, optional) Small value to avoid division by zero.        Default: 1e-8}
 }
 \description{
 cosine_similarity(x1, x2, dim=1, eps=1e-8) -> Tensor

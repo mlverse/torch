@@ -6,9 +6,7 @@
 \arguments{
 \item{tensors}{(sequence of Tensors) sequence of tensors to concatenate}
 
-\item{dim}{(int) dimension to insert. Has to be between 0 and the number}
-
-\item{of}{(inclusive)}
+\item{dim}{(int) dimension to insert. Has to be between 0 and the number        of dimensions of concatenated tensors (inclusive)}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

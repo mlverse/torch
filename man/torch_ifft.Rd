@@ -4,17 +4,11 @@
 \alias{torch_ifft}
 \title{Ifft}
 \arguments{
-\item{input}{(Tensor) the input tensor of at least :attr:\code{signal_ndim} \code{+ 1}}
+\item{input}{(Tensor) the input tensor of at least :attr:\code{signal_ndim} \code{+ 1}        dimensions}
 
-\item{dimensions}{NA}
+\item{signal_ndim}{(int) the number of dimensions in each signal.        :attr:\code{signal_ndim} can only be 1, 2 or 3}
 
-\item{signal_ndim}{(int) the number of dimensions in each signal.}
-
-\item{NA}{attr:\code{signal_ndim} can only be 1, 2 or 3}
-
-\item{normalized}{(bool, optional) controls whether to return normalized results.}
-
-\item{Default}{NA \code{False}}
+\item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
 }
 \description{
 ifft(input, signal_ndim, normalized=False) -> Tensor
@@ -54,17 +48,4 @@ monitor and control the cache.
 .. warning::
 For CPU tensors, this method is currently only available with MKL. Use
 :func:\code{torch.backends.mkl.is_available} to check if MKL is installed.
-
-Arguments:
-input (Tensor): the input tensor of at least :attr:\code{signal_ndim} \code{+ 1}
-dimensions
-signal_ndim (int): the number of dimensions in each signal.
-:attr:\code{signal_ndim} can only be 1, 2 or 3
-normalized (bool, optional): controls whether to return normalized results.
-Default: \code{False}
-
-Returns:
-Tensor: A tensor containing the complex-to-complex inverse Fourier transform result
-
-Example::
 }

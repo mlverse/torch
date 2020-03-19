@@ -4,19 +4,11 @@
 \alias{torch_lu_solve}
 \title{Lu_solve}
 \arguments{
-\item{b}{(Tensor) the RHS tensor of size :math:\verb{(*, m, k)}, where :math:\code{*}}
+\item{b}{(Tensor) the RHS tensor of size :math:\verb{(*, m, k)}, where :math:\code{*}                is zero or more batch dimensions.}
 
-\item{is}{NA}
+\item{LU_data}{(Tensor) the pivoted LU factorization of A from :meth:\code{torch.lu} of size :math:\verb{(*, m, m)},                       where :math:\code{*} is zero or more batch dimensions.}
 
-\item{LU_data}{(Tensor) the pivoted LU factorization of A from :meth:\code{torch.lu} of size :math:\verb{(*, m, m)},}
-
-\item{LU_pivots}{(IntTensor) the pivots of the LU factorization from :meth:\code{torch.lu} of size :math:\verb{(*, m)},}
-
-\item{where}{NA math:\code{*} is zero or more batch dimensions.}
-
-\item{The}{NA attr:\code{LU_pivots} must be equal to the batch dimensions of}
-
-\item{NA}{attr:\code{LU_data}.}
+\item{LU_pivots}{(IntTensor) the pivots of the LU factorization from :meth:\code{torch.lu} of size :math:\verb{(*, m)},                           where :math:\code{*} is zero or more batch dimensions.                           The batch dimensions of :attr:\code{LU_pivots} must be equal to the batch dimensions of                           :attr:\code{LU_data}.}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
@@ -26,17 +18,4 @@ lu_solve(input, LU_data, LU_pivots, out=None) -> Tensor
 \details{
 Returns the LU solve of the linear system :math:\code{Ax = b} using the partially pivoted
 LU factorization of A from :meth:\code{torch.lu}.
-
-Arguments:
-b (Tensor): the RHS tensor of size :math:\verb{(*, m, k)}, where :math:\code{*}
-is zero or more batch dimensions.
-LU_data (Tensor): the pivoted LU factorization of A from :meth:\code{torch.lu} of size :math:\verb{(*, m, m)},
-where :math:\code{*} is zero or more batch dimensions.
-LU_pivots (IntTensor): the pivots of the LU factorization from :meth:\code{torch.lu} of size :math:\verb{(*, m)},
-where :math:\code{*} is zero or more batch dimensions.
-The batch dimensions of :attr:\code{LU_pivots} must be equal to the batch dimensions of
-:attr:\code{LU_data}.
-out (Tensor, optional): the output tensor.
-
-Example::
 }

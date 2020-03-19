@@ -6,13 +6,7 @@
 \arguments{
 \item{input}{(Tensor) the input tensor.}
 
-\item{shifts}{(int or tuple of ints) The number of places by which the elements}
-
-\item{of}{NA}
-
-\item{the}{NA}
-
-\item{value}{NA}
+\item{shifts}{(int or tuple of ints) The number of places by which the elements        of the tensor are shifted. If shifts is a tuple, dims must be a tuple of        the same size, and each dimension will be rolled by the corresponding        value}
 
 \item{dims}{(int or tuple of ints) Axis along which to roll}
 }

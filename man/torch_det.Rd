@@ -4,9 +4,7 @@
 \alias{torch_det}
 \title{Det}
 \arguments{
-\item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more}
-
-\item{batch}{NA}
+\item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more                batch dimensions.}
 }
 \description{
 det(input) -> Tensor
@@ -19,10 +17,4 @@ Backward through :meth:\code{det} internally uses SVD results when :attr:\code{i
 not invertible. In this case, double backward through :meth:\code{det} will be
 unstable in when :attr:\code{input} doesn't have distinct singular values. See
 :meth:\code{~torch.svd} for details.
-
-Arguments:
-input (Tensor): the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more
-batch dimensions.
-
-Example::
 }

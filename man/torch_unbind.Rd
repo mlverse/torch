@@ -15,10 +15,4 @@ unbind(input, dim=0) -> seq
 Removes a tensor dimension.
 
 Returns a tuple of all slices along a given dimension, already without it.
-
-Arguments:
-input (Tensor): the tensor to unbind
-dim (int): dimension to remove
-
-Example::
 }

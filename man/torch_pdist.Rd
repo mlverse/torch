@@ -6,9 +6,7 @@
 \arguments{
 \item{input}{NA input tensor of shape :math:\verb{N \\times M}.}
 
-\item{p}{NA p value for the p-norm distance to calculate between each vector pair}
-
-\item{NA}{math:\verb{\\in [0, \\infty]}.}
+\item{p}{NA p value for the p-norm distance to calculate between each vector pair        :math:\verb{\\in [0, \\infty]}.}
 }
 \description{
 pdist(input, p=2) -> Tensor

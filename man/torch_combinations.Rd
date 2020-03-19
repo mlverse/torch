@@ -17,16 +17,4 @@ combinations(input, r=2, with_replacement=False) -> seq
 Compute combinations of length :math:\code{r} of the given tensor. The behavior is similar to
 python's \code{itertools.combinations} when \code{with_replacement} is set to \code{False}, and
 \code{itertools.combinations_with_replacement} when \code{with_replacement} is set to \code{True}.
-
-Arguments:
-input (Tensor): 1D vector.
-r (int, optional): number of elements to combine
-with_replacement (boolean, optional): whether to allow duplication in combination
-
-Returns:
-Tensor: A tensor equivalent to converting all the input tensors into lists, do
-\code{itertools.combinations} or \code{itertools.combinations_with_replacement} on these
-lists, and finally convert the resulting list into tensor.
-
-Example::
 }

@@ -10,5 +10,26 @@ expanding the :math:\code{i} :sup:\code{th} input over dimensions defined by oth
 }
 \details{
 \preformatted{Args:
+    tensors (list of Tensor): list of scalars or 1 dimensional tensors. Scalars will be
+    treated as tensors of size :math:`(1,)` automatically
+
+Returns:
+    seq (sequence of Tensors): If the input has :math:`k` tensors of size
+    :math:`(N_1,), (N_2,), \\ldots , (N_k,)`, then the output would also have :math:`k` tensors,
+    where all tensors are of size :math:`(N_1, N_2, \\ldots , N_k)`.
+
+Example::
+
+    >>> x = torch.tensor([1, 2, 3])
+    >>> y = torch.tensor([4, 5, 6])
+    >>> grid_x, grid_y = torch.meshgrid(x, y)
+    >>> grid_x
+    tensor([[1, 1, 1],
+            [2, 2, 2],
+            [3, 3, 3]])
+    >>> grid_y
+    tensor([[4, 5, 6],
+            [4, 5, 6],
+            [4, 5, 6]])
 }
 }

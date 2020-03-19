@@ -12,9 +12,7 @@
 
 \item{keepdim}{(bool) whether the output tensor has :attr:\code{dim} retained or not.}
 
-\item{out}{(tuple, optional) the output tuple of (Tensor, LongTensor)}
-
-\item{can}{NA}
+\item{out}{(tuple, optional) the output tuple of (Tensor, LongTensor)                           can be optionally given to be used as output buffers}
 }
 \description{
 kthvalue(input, k, dim=None, keepdim=False, out=None) -> (Tensor, LongTensor)

@@ -10,17 +10,13 @@
 
 \item{high}{(int) One above the highest integer to be drawn from the distribution.}
 
-\item{dtype}{NA class:\code{torch.dtype}, optional): the desired data type of returned Tensor.}
+\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of returned Tensor.        Default: if \code{None}, defaults to the dtype of :attr:\code{input}.}
 
-\item{layout}{NA class:\code{torch.layout}, optional): the desired layout of returned tensor.}
+\item{layout}{(:class:\code{torch.layout}, optional) the desired layout of returned tensor.        Default: if \code{None}, defaults to the layout of :attr:\code{input}.}
 
-\item{device}{NA class:\code{torch.device}, optional): the desired device of returned tensor.}
+\item{device}{(:class:\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, defaults to the device of :attr:\code{input}.}
 
-\item{Default}{NA if \code{None}, defaults to the device of :attr:\code{input}.}
-
-\item{requires_grad}{(bool, optional) If autograd should record operations on the}
-
-\item{returned}{NA \code{False}.}
+\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
 randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor

@@ -4,25 +4,15 @@
 \alias{torch_irfft}
 \title{Irfft}
 \arguments{
-\item{input}{(Tensor) the input tensor of at least :attr:\code{signal_ndim} \code{+ 1}}
+\item{input}{(Tensor) the input tensor of at least :attr:\code{signal_ndim} \code{+ 1}        dimensions}
 
-\item{dimensions}{NA}
+\item{signal_ndim}{(int) the number of dimensions in each signal.        :attr:\code{signal_ndim} can only be 1, 2 or 3}
 
-\item{signal_ndim}{(int) the number of dimensions in each signal.}
+\item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
 
-\item{NA}{attr:\code{signal_ndim} can only be 1, 2 or 3}
+\item{onesided}{(bool, optional) controls whether :attr:\code{input} was halfed to avoid        redundancy, e.g., by :func:\code{rfft}. Default: \code{True}}
 
-\item{normalized}{(bool, optional) controls whether to return normalized results.}
-
-\item{Default}{NA \code{False}}
-
-\item{onesided}{(bool, optional) controls whether :attr:\code{input} was halfed to avoid}
-
-\item{redundancy, }{NA func:\code{rfft}. Default: \code{True}}
-
-\item{signal_sizes}{NA class:\code{torch.Size}, optional): the size of the original}
-
-\item{signal}{(without batch dimension) \code{None}}
+\item{signal_sizes}{(list or :class:\code{torch.Size}, optional) the size of the original        signal (without batch dimension). Default: \code{None}}
 }
 \description{
 irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) -> Tensor
@@ -76,21 +66,4 @@ monitor and control the cache.
 .. warning::
 For CPU tensors, this method is currently only available with MKL. Use
 :func:\code{torch.backends.mkl.is_available} to check if MKL is installed.
-
-Arguments:
-input (Tensor): the input tensor of at least :attr:\code{signal_ndim} \code{+ 1}
-dimensions
-signal_ndim (int): the number of dimensions in each signal.
-:attr:\code{signal_ndim} can only be 1, 2 or 3
-normalized (bool, optional): controls whether to return normalized results.
-Default: \code{False}
-onesided (bool, optional): controls whether :attr:\code{input} was halfed to avoid
-redundancy, e.g., by :func:\code{rfft}. Default: \code{True}
-signal_sizes (list or :class:\code{torch.Size}, optional): the size of the original
-signal (without batch dimension). Default: \code{None}
-
-Returns:
-Tensor: A tensor containing the complex-to-real inverse Fourier transform result
-
-Example::
 }

@@ -38,11 +38,4 @@ tensor, :attr:\code{out} will be an :math:\verb{(j \\times k \\times n \\times p
 
 .. note::\preformatted{The 1-dimensional dot product version of this function does not support an :attr:`out` parameter.
 }
-
-Arguments:
-input (Tensor): the first tensor to be multiplied
-other (Tensor): the second tensor to be multiplied
-out (Tensor, optional): the output tensor.
-
-Example::
 }

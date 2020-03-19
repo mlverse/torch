@@ -6,17 +6,11 @@
 \arguments{
 \item{input}{(Tensor) the input tensor of at least :attr:\code{signal_ndim} dimensions}
 
-\item{signal_ndim}{(int) the number of dimensions in each signal.}
+\item{signal_ndim}{(int) the number of dimensions in each signal.        :attr:\code{signal_ndim} can only be 1, 2 or 3}
 
-\item{NA}{attr:\code{signal_ndim} can only be 1, 2 or 3}
+\item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
 
-\item{normalized}{(bool, optional) controls whether to return normalized results.}
-
-\item{Default}{NA \code{False}}
-
-\item{onesided}{(bool, optional) controls whether to return half of results to}
-
-\item{avoid}{NA \code{True}}
+\item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy. Default: \code{True}}
 }
 \description{
 rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor
@@ -59,18 +53,4 @@ monitor and control the cache.
 .. warning::
 For CPU tensors, this method is currently only available with MKL. Use
 :func:\code{torch.backends.mkl.is_available} to check if MKL is installed.
-
-Arguments:
-input (Tensor): the input tensor of at least :attr:\code{signal_ndim} dimensions
-signal_ndim (int): the number of dimensions in each signal.
-:attr:\code{signal_ndim} can only be 1, 2 or 3
-normalized (bool, optional): controls whether to return normalized results.
-Default: \code{False}
-onesided (bool, optional): controls whether to return half of results to
-avoid redundancy. Default: \code{True}
-
-Returns:
-Tensor: A tensor containing the real-to-complex Fourier transform result
-
-Example::
 }

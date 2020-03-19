@@ -10,9 +10,7 @@
 
 \item{descending}{(bool, optional) controls the sorting order (ascending or descending)}
 
-\item{out}{(tuple, optional) the output tuple of (\code{Tensor}, \code{LongTensor}) that can}
-
-\item{be}{NA}
+\item{out}{(tuple, optional) the output tuple of (\code{Tensor}, \code{LongTensor}) that can        be optionally given to be used as output buffers}
 }
 \description{
 sort(input, dim=-1, descending=False, out=None) -> (Tensor, LongTensor)

@@ -6,9 +6,7 @@
 \arguments{
 \item{input}{(Tensor) the input tensor.}
 
-\item{offset}{(int, optional) the diagonal to consider. Default: 0 (main}
-
-\item{diagonal).}{NA}
+\item{offset}{(int, optional) the diagonal to consider. Default: 0 (main        diagonal).}
 }
 \description{
 diagflat(input, offset=0) -> Tensor

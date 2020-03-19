@@ -6,25 +6,15 @@
 \arguments{
 \item{input}{NA input tensor of shape :math:\verb{(\\text\{minibatch\} , \\text\{in\\_channels\} , iW)}}
 
-\item{kernel_size}{NA the size of the window. Can be a single number or a}
+\item{kernel_size}{NA the size of the window. Can be a single number or a      tuple \verb{(kW,)}}
 
-\item{tuple}{(kW,)}
+\item{stride}{NA the stride of the window. Can be a single number or a tuple      \verb{(sW,)}. Default: :attr:\code{kernel_size}}
 
-\item{stride}{NA the stride of the window. Can be a single number or a tuple}
+\item{padding}{NA implicit zero paddings on both sides of the input. Can be a      single number or a tuple \verb{(padW,)}. Default: 0}
 
-\item{`}{(sW,) :attr:\code{kernel_size}}
+\item{ceil_mode}{NA when True, will use \code{ceil} instead of \code{floor} to compute the        output shape. Default: \code{False}}
 
-\item{padding}{NA implicit zero paddings on both sides of the input. Can be a}
-
-\item{single}{(padW,) 0}
-
-\item{ceil_mode}{NA when True, will use \code{ceil} instead of \code{floor} to compute the}
-
-\item{output}{NA \code{False}}
-
-\item{count_include_pad}{NA when True, will include the zero-padding in the}
-
-\item{averaging}{NA \code{True}}
+\item{count_include_pad}{NA when True, will include the zero-padding in the        averaging calculation. Default: \code{True}}
 }
 \description{
 avg_pool1d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True) -> Tensor

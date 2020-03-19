@@ -6,9 +6,7 @@
 \arguments{
 \item{input}{(Tensor) The input tensor of size :math:\verb{(*, m, n)} where :math:\code{*} is zero or more batch dimensions}
 
-\item{rcond}{(float) A floating point value to determine the cutoff for small singular values.}
-
-\item{Default}{NA 1e-15}
+\item{rcond}{(float) A floating point value to determine the cutoff for small singular values.                   Default: 1e-15}
 }
 \description{
 pinverse(input, rcond=1e-15) -> Tensor
@@ -26,14 +24,4 @@ Therefore, derivatives are not always existent, and exist for a constant rank on
 However, this method is backprop-able due to the implementation by using SVD results, and
 could be unstable. Double-backward will also be unstable due to the usage of SVD internally.
 See :meth:\code{~torch.svd} for more details.
-
-Arguments:
-input (Tensor): The input tensor of size :math:\verb{(*, m, n)} where :math:\code{*} is zero or more batch dimensions
-rcond (float): A floating point value to determine the cutoff for small singular values.
-Default: 1e-15
-
-Returns:
-The pseudo-inverse of :attr:\code{input} of dimensions :math:\verb{(*, n, m)}
-
-Example::
 }

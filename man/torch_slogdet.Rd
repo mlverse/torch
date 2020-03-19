@@ -4,9 +4,7 @@
 \alias{torch_slogdet}
 \title{Slogdet}
 \arguments{
-\item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more}
-
-\item{batch}{NA}
+\item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more                batch dimensions.}
 }
 \description{
 slogdet(input) -> (Tensor, Tensor)
@@ -22,14 +20,4 @@ Backward through :meth:\code{slogdet} internally uses SVD results when :attr:\co
 is not invertible. In this case, double backward through :meth:\code{slogdet}
 will be unstable in when :attr:\code{input} doesn't have distinct singular values.
 See :meth:\code{~torch.svd} for details.
-
-Arguments:
-input (Tensor): the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more
-batch dimensions.
-
-Returns:
-A namedtuple (sign, logabsdet) containing the sign of the determinant, and the log
-value of the absolute determinant.
-
-Example::
 }

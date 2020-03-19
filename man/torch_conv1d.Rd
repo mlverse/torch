@@ -10,19 +10,13 @@
 
 \item{bias}{NA optional bias of shape :math:\verb{(\\text\{out\\_channels\})}. Default: \code{None}}
 
-\item{stride}{NA the stride of the convolving kernel. Can be a single number or}
+\item{stride}{NA the stride of the convolving kernel. Can be a single number or      a one-element tuple \verb{(sW,)}. Default: 1}
 
-\item{padding}{NA implicit paddings on both sides of the input. Can be a}
+\item{padding}{NA implicit paddings on both sides of the input. Can be a      single number or a one-element tuple \verb{(padW,)}. Default: 0}
 
-\item{single}{(padW,) 0}
+\item{dilation}{NA the spacing between kernel elements. Can be a single number or      a one-element tuple \verb{(dW,)}. Default: 1}
 
-\item{dilation}{NA the spacing between kernel elements. Can be a single number or}
-
-\item{a}{(dW,) 1}
-
-\item{groups}{NA split input into groups, :math:\verb{\\text\{in\\_channels\}} should be divisible by}
-
-\item{the}{NA 1}
+\item{groups}{NA split input into groups, :math:\verb{\\text\{in\\_channels\}} should be divisible by      the number of groups. Default: 1}
 }
 \description{
 conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor

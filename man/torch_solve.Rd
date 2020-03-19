@@ -4,13 +4,9 @@
 \alias{torch_solve}
 \title{Solve}
 \arguments{
-\item{input}{(Tensor) input matrix :math:\code{B} of size :math:\verb{(*, m, k)} , where :math:\code{*}}
+\item{input}{(Tensor) input matrix :math:\code{B} of size :math:\verb{(*, m, k)} , where :math:\code{*}                is zero or more batch dimensions.}
 
-\item{is}{NA}
-
-\item{A}{(Tensor) input square matrix of size :math:\verb{(*, m, m)}, where}
-
-\item{NA}{math:\code{*} is zero or more batch dimensions.}
+\item{A}{(Tensor) input square matrix of size :math:\verb{(*, m, m)}, where                :math:\code{*} is zero or more batch dimensions.}
 
 \item{out}{((Tensor, Tensor) optional output tuple.}
 }

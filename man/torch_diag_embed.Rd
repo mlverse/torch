@@ -6,15 +6,11 @@
 \arguments{
 \item{input}{(Tensor) the input tensor. Must be at least 1-dimensional.}
 
-\item{offset}{(int, optional) which diagonal to consider. Default: 0}
+\item{offset}{(int, optional) which diagonal to consider. Default: 0        (main diagonal).}
 
-\item{(main}{diagonal)}
+\item{dim1}{(int, optional) first dimension with respect to which to        take diagonal. Default: -2.}
 
-\item{dim1}{(int, optional) first dimension with respect to which to}
-
-\item{dim2}{(int, optional) second dimension with respect to which to}
-
-\item{take}{NA -1.}
+\item{dim2}{(int, optional) second dimension with respect to which to        take diagonal. Default: -1.}
 }
 \description{
 diag_embed(input, offset=0, dim1=-2, dim2=-1) -> Tensor
