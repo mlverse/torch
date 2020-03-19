@@ -18,8 +18,10 @@ Computes the :math:\code{n^{th}} derivative of the digamma function on \code{inp
 \deqn{
     \psi^{(n)}(x) = \frac{d^{(n)}}{dx^{(n)}} \psi(x)
 }
-.. note::
-This function is not implemented for :math:\verb{n \\geq 2}.
+}
+\note{
+\preformatted{This function is not implemented for :math:`n \\geq 2`.
+}
 }
 \section{Signatures}{
 

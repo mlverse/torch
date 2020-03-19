@@ -22,8 +22,9 @@ When \code{dim} is given, a squeeze operation is done only in the given
 dimension. If \code{input} is of shape: :math:\verb{(A \\times 1 \\times B)},
 \code{squeeze(input, 0)} leaves the tensor unchanged, but \code{squeeze(input, 1)}
 will squeeze the tensor to the shape :math:\verb{(A \\times B)}.
-
-.. note:: The returned tensor shares the storage with the input tensor,
+}
+\note{
+The returned tensor shares the storage with the input tensor,
 so changing the contents of one will change the contents of the other.
 }
 \section{Signatures}{

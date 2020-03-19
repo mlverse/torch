@@ -20,8 +20,9 @@ Returns a new tensor which indexes the \code{input} tensor along dimension
 The returned tensor has the same number of dimensions as the original tensor
 (\code{input}).  The \code{dim}\ th dimension has the same size as the length
 of \code{index}; other dimensions have the same size as in the original tensor.
-
-.. note:: The returned tensor does \strong{not} use the same storage as the original
+}
+\note{
+The returned tensor does \strong{not} use the same storage as the original
 tensor.  If \code{out} has a different shape than expected, we
 silently change it to the correct shape, reallocating the underlying
 storage if necessary.

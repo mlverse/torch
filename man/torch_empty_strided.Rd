@@ -24,13 +24,14 @@ defined by the variable argument \code{size} and \code{stride} respectively.
 \code{torch_empty_strided(size, stride)} is equivalent to
 \verb{torch_empty(size).as_strided(size, stride)}.
 }
-\details{
-.. warning::
+\section{Warning}{
+
 More than one element of the created tensor may refer to a single memory
 location. As a result, in-place operations (especially ones that are
 vectorized) may result in incorrect behavior. If you need to write to
 the tensors, please clone them first.
 }
+
 \section{Signatures}{
 
 

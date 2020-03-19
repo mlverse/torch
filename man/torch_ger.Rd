@@ -15,8 +15,8 @@ Outer product of \code{input} and \code{vec2}.
 If \code{input} is a vector of size :math:\code{n} and \code{vec2} is a vector of
 size :math:\code{m}, then \code{out} must be a matrix of size :math:\verb{(n \\times m)}.
 }
-\details{
-.. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
+\note{
+This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 }
 \section{Signatures}{
 

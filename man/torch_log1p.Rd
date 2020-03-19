@@ -15,7 +15,9 @@ Returns a new tensor with the natural logarithm of (1 + \code{input}).
 \deqn{
     y_i = \log_{e} (x_i + 1)
 }
-.. note:: This function is more accurate than \code{\link{torch_log}} for small
+}
+\note{
+This function is more accurate than \code{\link{torch_log}} for small
 values of \code{input}
 }
 \section{Signatures}{

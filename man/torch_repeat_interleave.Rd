@@ -17,10 +17,11 @@ If the \code{repeats} is \verb{tensor([n1, n2, n3, ...])}, then the output will 
 \verb{tensor([0, 0, ..., 1, 1, ..., 2, 2, ..., ...])} where \code{0} appears \code{n1} times,
 \code{1} appears \code{n2} times, \code{2} appears \code{n3} times, etc.
 }
-\details{
-.. warning::\preformatted{This is different from [`torch_repeat` but similar to `numpy.repeat`].
+\section{Warning}{
+\preformatted{This is different from [`torch_repeat` but similar to `numpy.repeat`].
 }
 }
+
 \section{Signatures}{
 
 

@@ -41,17 +41,20 @@ of \code{input}, but instead the last dimension will be halfed as of size
 :math:\verb{\\lfloor \\frac\{N_d\}\{2\} \\rfloor + 1}.
 
 The inverse of this function is \code{\link{~torch.irfft}}.
-
-.. note::
-For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
+}
+\note{
+\preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
 repeatedly running FFT methods on tensors of same geometry with same
-configuration. See :ref:\code{cufft-plan-cache} for more details on how to
+configuration. See :ref:`cufft-plan-cache` for more details on how to
 monitor and control the cache.
+}
+}
+\section{Warning}{
 
-.. warning::
 For CPU tensors, this method is currently only available with MKL. Use
 \code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
+
 \section{Signatures}{
 
 

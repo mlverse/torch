@@ -16,8 +16,8 @@
 Create a view of an existing \code{torch_Tensor} \code{input} with specified
 \code{size}, \code{stride} and \code{storage_offset}.
 }
-\details{
-.. warning::
+\section{Warning}{
+
 More than one element of a created tensor may refer to a single memory
 location. As a result, in-place operations (especially ones that are
 vectorized) may result in incorrect behavior. If you need to write to
@@ -27,6 +27,7 @@ implemented with this function. Those functions, like
 advisable to use.
 }
 }
+
 \section{Signatures}{
 
 

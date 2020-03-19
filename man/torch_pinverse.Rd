@@ -12,16 +12,16 @@
 Calculates the pseudo-inverse (also known as the Moore-Penrose inverse) of a 2D tensor.
 Please look at \verb{Moore-Penrose inverse}_ for more details
 }
-\details{
-.. note::
-This method is implemented using the Singular Value Decomposition.
+\note{
+\preformatted{This method is implemented using the Singular Value Decomposition.
+}
 
-.. note::
-The pseudo-inverse is not necessarily a continuous function in the elements of the matrix \verb{[1]}\emph{.
-Therefore, derivatives are not always existent, and exist for a constant rank only \verb{[2]}}.
+\preformatted{The pseudo-inverse is not necessarily a continuous function in the elements of the matrix `[1]`_.
+Therefore, derivatives are not always existent, and exist for a constant rank only `[2]`_.
 However, this method is backprop-able due to the implementation by using SVD results, and
 could be unstable. Double-backward will also be unstable due to the usage of SVD internally.
-See :meth:\code{~torch.svd} for more details.
+See :meth:`~torch.svd` for more details.
+}
 }
 \section{Signatures}{
 

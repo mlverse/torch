@@ -37,12 +37,13 @@ ready to be used as a periodic window with functions like
 above formula is in fact :math:\verb{\\text\{window\\_length\} + 1}. Also, we always have
 \code{torch_hamming_window(L, periodic=True)} equal to
 \verb{torch_hamming_window(L + 1, periodic=False)[:-1])}.
+}
+\note{
+\preformatted{If `window_length` :math:`=1`, the returned window contains a single value 1.
+}
 
-.. note::
-If \code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
-
-.. note::
-This is a generalized version of :meth:\code{torch_hann_window}.
+\preformatted{This is a generalized version of :meth:`torch_hann_window`.
+}
 }
 \section{Signatures}{
 

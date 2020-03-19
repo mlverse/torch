@@ -27,16 +27,18 @@ Similar to \link[=`~torch.ifft`, if `normalized` is set to ``True``]{\code{~torc
 this normalizes the result by multiplying it with
 :math:\verb{\\sqrt\{\\prod_\{i=1\}^K N_i\}} so that the operator is unitary, where
 :math:\code{N_i} is the size of signal dimension :math:\code{i}.
-
-.. note::
-Due to the conjugate symmetry, \code{input} do not need to contain the full
+}
+\note{
+\preformatted{Due to the conjugate symmetry, `input` do not need to contain the full
 complex frequency values. Roughly half of the values will be sufficient, as
-is the case when \code{input} is given by \code{\link{~torch.rfft}} with
-\code{rfft(signal, onesided=True)}. In such case, set the \code{onesided}
-argument of this method to \code{True}. Moreover, the original signal shape
-information can sometimes be lost, optionally set \code{signal_sizes} to be
+is the case when `input` is given by [`~torch.rfft`] with
+``rfft(signal, onesided=True)``. In such case, set the `onesided`
+argument of this method to ``True``. Moreover, the original signal shape
+information can sometimes be lost, optionally set `signal_sizes` to be
 the size of the original signal (without the batch dimensions if in batched
-mode) to recover it with correct shape.\preformatted{Therefore, to invert an [`~torch.rfft`, the `normalized`] and
+mode) to recover it with correct shape.
+
+Therefore, to invert an [`~torch.rfft`, the `normalized`] and
 `onesided` arguments should be set identically for [`~torch.irfft`],
 and preferrably a `signal_sizes` is given to avoid size mismatch. See the
 example below for a case of size mismatch.
@@ -46,7 +48,14 @@ See [`~torch.rfft`] for details on conjugate symmetry.
 
 The inverse of this function is \code{\link{~torch.rfft}}.
 
-.. warning::
+\preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
+repeatedly running FFT methods on tensors of same geometry with same
+configuration. See :ref:`cufft-plan-cache` for more details on how to
+monitor and control the cache.
+}
+}
+\section{Warning}{
+
 Generally speaking, input to this function should contain values
 following conjugate symmetry. Note that even if \code{onesided} is
 \code{True}, often symmetry on some part is still needed. When this
@@ -55,16 +64,11 @@ undefined. Since \code{\link{torch_autograd.gradcheck}} estimates numerical
 Jacobian with point perturbations, \code{\link{~torch.irfft}} will almost
 certainly fail the check.
 
-.. note::
-For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
-repeatedly running FFT methods on tensors of same geometry with same
-configuration. See :ref:\code{cufft-plan-cache} for more details on how to
-monitor and control the cache.
 
-.. warning::
 For CPU tensors, this method is currently only available with MKL. Use
 \code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
+
 \section{Signatures}{
 
 

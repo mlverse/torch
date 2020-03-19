@@ -19,11 +19,11 @@ Returns a tensor where each row contains \code{num_samples} indices sampled
 from the multinomial probability distribution located in the corresponding row
 of tensor \code{input}.
 }
-\details{
-.. note::
-The rows of \code{input} do not need to sum to one (in which case we use
+\note{
+\preformatted{The rows of `input` do not need to sum to one (in which case we use
 the values as weights), but must be non-negative, finite and have
 a non-zero sum.
+}
 
 Indices are ordered from left to right according to when each was sampled
 (first samples are placed in first column).
@@ -38,10 +38,10 @@ If replacement is \code{True}, samples are drawn with replacement.
 If not, they are drawn without replacement, which means that when a
 sample index is drawn for a row, it cannot be drawn again for that row.
 
-.. note::
-When drawn without replacement, \code{num_samples} must be lower than
-number of non-zero elements in \code{input} (or the min number of non-zero
-elements in each row of \code{input} if it is a matrix).
+\preformatted{When drawn without replacement, `num_samples` must be lower than
+number of non-zero elements in `input` (or the min number of non-zero
+elements in each row of `input` if it is a matrix).
+}
 }
 \section{Signatures}{
 

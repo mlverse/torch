@@ -19,11 +19,12 @@ with :math:\code{Q} being an orthogonal matrix or batch of orthogonal matrices a
 \details{
 If \code{some} is \code{True}, then this function returns the thin (reduced) QR factorization.
 Otherwise, if \code{some} is \code{False}, this function returns the complete QR factorization.
-
-.. note:: precision may be lost if the magnitudes of the elements of \code{input}
+}
+\note{
+precision may be lost if the magnitudes of the elements of \code{input}
 are large
 
-.. note:: While it should always give you a valid decomposition, it may not
+While it should always give you a valid decomposition, it may not
 give you the same one across platforms - it will depend on your
 LAPACK implementation.
 }

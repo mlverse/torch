@@ -29,9 +29,12 @@ the gap between two values in the tensor.
 \deqn{
     \text{out}_{i+1} = \text{out}_i + \text{step}.
 }
-.. warning::
+}
+\section{Warning}{
+
 This function is deprecated in favor of \code{\link{torch_arange}}.
 }
+
 \section{Signatures}{
 
 

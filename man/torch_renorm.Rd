@@ -19,8 +19,8 @@ Returns a tensor where each sub-tensor of \code{input} along dimension
 \code{dim} is normalized such that the \code{p}-norm of the sub-tensor is lower
 than the value \code{maxnorm}
 }
-\details{
-.. note:: If the norm of a row is lower than \code{maxnorm}, the row is unchanged
+\note{
+If the norm of a row is lower than \code{maxnorm}, the row is unchanged
 }
 \section{Signatures}{
 

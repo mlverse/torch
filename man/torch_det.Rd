@@ -9,12 +9,12 @@
 \description{
 Calculates determinant of a square matrix or batches of square matrices.
 }
-\details{
-.. note::
-Backward through :meth:\code{det} internally uses SVD results when \code{input} is
-not invertible. In this case, double backward through :meth:\code{det} will be
-unstable in when \code{input} doesn't have distinct singular values. See
-:meth:\code{~torch.svd} for details.
+\note{
+\preformatted{Backward through :meth:`det` internally uses SVD results when `input` is
+not invertible. In this case, double backward through :meth:`det` will be
+unstable in when `input` doesn't have distinct singular values. See
+:meth:`~torch.svd` for details.
+}
 }
 \section{Signatures}{
 

@@ -25,7 +25,9 @@ If \code{input} is a :math:\verb{(b \\times n \\times m)} tensor, \code{mat2} is
 \deqn{
     \text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
 }
-.. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
+}
+\note{
+This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 For broadcasting matrix products, see \code{\link{torch_matmul}}.
 }
 \section{Signatures}{

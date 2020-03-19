@@ -21,8 +21,9 @@ A, in order as a namedtuple \verb{solution, LU}.
 \code{torch_solve(B, A)} can take in 2D inputs \verb{B, A} or inputs that are
 batches of 2D matrices. If the inputs are batches, then returns
 batched outputs \verb{solution, LU}.
-
-.. note::\preformatted{Irrespective of the original strides, the returned matrices
+}
+\note{
+\preformatted{Irrespective of the original strides, the returned matrices
 `solution` and `LU` will be transposed, i.e. with strides like
 `B.contiguous().transpose(-1, -2).stride()` and
 `A.contiguous().transpose(-1, -2).stride()` respectively.

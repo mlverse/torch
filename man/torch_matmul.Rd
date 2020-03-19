@@ -33,8 +33,9 @@ must be broadcastable).  For example, if \code{input} is a
 :math:\verb{(j \\times 1 \\times n \\times m)} tensor and \code{other} is a :math:\verb{(k \\times m \\times p)}
 tensor, \code{out} will be an :math:\verb{(j \\times k \\times n \\times p)} tensor.
 }
-
-.. note::\preformatted{The 1-dimensional dot product version of this function does not support an `out` parameter.
+}
+\note{
+\preformatted{The 1-dimensional dot product version of this function does not support an `out` parameter.
 }
 }
 \section{Signatures}{

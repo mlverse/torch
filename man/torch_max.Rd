@@ -39,7 +39,9 @@ but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 \deqn{
     \text{out}_i = \max(\text{tensor}_i, \text{other}_i)
 }
-.. note:: When the shapes do not match, the shape of the returned output tensor
+}
+\note{
+When the shapes do not match, the shape of the returned output tensor
 follows the :ref:\verb{broadcasting rules <broadcasting-semantics>}.
 }
 \section{Signatures}{

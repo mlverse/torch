@@ -36,9 +36,10 @@ Returned tensor :math:\code{X} has shape :math:\verb{(\\max(m, n) \\times k)}. T
 rows of :math:\code{X} contains the solution. If :math:\verb{m \\geq n}, the residual sum of squares
 for the solution in each column is given by the sum of squares of elements in the
 remaining :math:\code{m - n} rows of that column.
-
-.. note::
-The case when :math:\code{m < n} is not supported on the GPU.
+}
+\note{
+\preformatted{The case when :math:`m < n` is not supported on the GPU.
+}
 }
 \section{Signatures}{
 

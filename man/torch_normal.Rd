@@ -36,8 +36,9 @@ each output element's normal distribution
 
 The shapes of \code{mean} and \code{std} don't need to match, but the
 total number of elements in each tensor need to be the same.
-
-.. note:: When the shapes do not match, the shape of \code{mean}
+}
+\note{
+When the shapes do not match, the shape of \code{mean}
 is used as the shape for the returned output tensor
 }
 \section{Signatures}{

@@ -17,8 +17,9 @@ Performs a matrix-vector product of the matrix \code{input} and the vector
 \details{
 If \code{input} is a :math:\verb{(n \\times m)} tensor, \code{vec} is a 1-D tensor of
 size :math:\code{m}, \code{out} will be 1-D of size :math:\code{n}.
-
-.. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
+}
+\note{
+This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 }
 \section{Signatures}{
 

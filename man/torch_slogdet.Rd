@@ -9,15 +9,15 @@
 \description{
 Calculates the sign and log absolute value of the determinant(s) of a square matrix or batches of square matrices.
 }
-\details{
-.. note::
-If \code{input} has zero determinant, this returns \verb{(0, -inf)}.
+\note{
+\preformatted{If ``input`` has zero determinant, this returns ``(0, -inf)``.
+}
 
-.. note::
-Backward through :meth:\code{slogdet} internally uses SVD results when \code{input}
-is not invertible. In this case, double backward through :meth:\code{slogdet}
-will be unstable in when \code{input} doesn't have distinct singular values.
-See :meth:\code{~torch.svd} for details.
+\preformatted{Backward through :meth:`slogdet` internally uses SVD results when `input`
+is not invertible. In this case, double backward through :meth:`slogdet`
+will be unstable in when `input` doesn't have distinct singular values.
+See :meth:`~torch.svd` for details.
+}
 }
 \section{Signatures}{
 

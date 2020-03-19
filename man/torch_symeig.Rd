@@ -31,14 +31,15 @@ Since the input matrix \code{input} is supposed to be symmetric,
 only the upper triangular portion is used by default.
 
 If \code{upper} is \code{False}, then lower triangular portion is used.
-
-.. note:: The eigenvalues are returned in ascending order. If \code{input} is a batch of matrices,
+}
+\note{
+The eigenvalues are returned in ascending order. If \code{input} is a batch of matrices,
 then the eigenvalues of each matrix in the batch is returned in ascending order.
 
-.. note:: Irrespective of the original strides, the returned matrix \code{V} will
+Irrespective of the original strides, the returned matrix \code{V} will
 be transposed, i.e. with strides \verb{V.contiguous().transpose(-1, -2).stride()}.
 
-.. note:: Extra care needs to be taken when backward through outputs. Such
+Extra care needs to be taken when backward through outputs. Such
 operation is really only stable when all eigenvalues are distinct.
 Otherwise, \code{NaN} can appear as the gradients are not properly defined.
 }

@@ -25,11 +25,13 @@ The operation is defined as:
         \text{y}_i & \text{otherwise} \\
     \end{cases}
 }
-.. note::
-The tensors \code{condition}, \code{x}, \code{y} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
+}
+\note{
+\preformatted{The tensors `condition`, `x`, `y` must be :ref:`broadcastable <broadcasting-semantics>`.
+}
 
-.. note::
-See also \code{\link{torch_nonzero}}.
+\preformatted{See also [`torch_nonzero`].
+}
 }
 \section{Signatures}{
 

@@ -13,10 +13,10 @@
 \description{
 Computes the eigenvalues and eigenvectors of a real square matrix.
 }
-\details{
-.. note::
-Since eigenvalues and eigenvectors might be complex, backward pass is supported only
-for \code{\link{torch_symeig}}
+\note{
+\preformatted{Since eigenvalues and eigenvectors might be complex, backward pass is supported only
+for [`torch_symeig`]
+}
 }
 \section{Signatures}{
 

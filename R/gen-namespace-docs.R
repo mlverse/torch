@@ -566,7 +566,7 @@ NULL
 #' Create a view of an existing `torch_Tensor` `input` with specified
 #' `size`, `stride` and `storage_offset`.
 #' 
-#' .. warning::
+#' @section Warning:
 #'     More than one element of a created tensor may refer to a single memory
 #'     location. As a result, in-place operations (especially ones that are
 #'     vectorized) may result in incorrect behavior. If you need to write to
@@ -729,7 +729,7 @@ NULL
 #' ``torch_bartlett_window(L, periodic=True)`` equal to
 #' ``torch_bartlett_window(L + 1, periodic=False)[:-1])``.
 #' 
-#' .. note::
+#' @note
 #'     If `window_length` :math:`=1`, the returned window contains a single value 1.
 #'
 #' @section Signatures:
@@ -935,7 +935,7 @@ NULL
 #' ``torch_blackman_window(L, periodic=True)`` equal to
 #' ``torch_blackman_window(L + 1, periodic=False)[:-1])``.
 #' 
-#' .. note::
+#' @note
 #'     If `window_length` :math:`=1`, the returned window contains a single value 1.
 #'
 #' @section Signatures:
@@ -973,7 +973,7 @@ NULL
 #' \deqn{
 #'     \text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
 #' }
-#' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
+#' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
 #'           For broadcasting matrix products, see [`torch_matmul`].
 #'
 #' @section Signatures:
@@ -1603,7 +1603,7 @@ NULL
 #'
 #' Calculates determinant of a square matrix or batches of square matrices.
 #' 
-#' .. note::
+#' @note
 #'     Backward through :meth:`det` internally uses SVD results when `input` is
 #'     not invertible. In this case, double backward through :meth:`det` will be
 #'     unstable in when `input` doesn't have distinct singular values. See
@@ -1821,7 +1821,7 @@ NULL
 #'
 #' Computes the dot product (inner product) of two tensors.
 #' 
-#' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
+#' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
 #' 
 #' Example::
 #'
@@ -1928,7 +1928,7 @@ NULL
 #' ``torch_empty_strided(size, stride)`` is equivalent to
 #' ``torch_empty(size).as_strided(size, stride)``.
 #' 
-#' .. warning::
+#' @section Warning:
 #'     More than one element of the created tensor may refer to a single memory
 #'     location. As a result, in-place operations (especially ones that are
 #'     vectorized) may result in incorrect behavior. If you need to write to
@@ -2256,7 +2256,7 @@ NULL
 #' ``torch_hann_window(L, periodic=True)`` equal to
 #' ``torch_hann_window(L + 1, periodic=False)[:-1])``.
 #' 
-#' .. note::
+#' @note
 #'     If `window_length` :math:`=1`, the returned window contains a single value 1.
 #'
 #' @section Signatures:
@@ -2297,10 +2297,10 @@ NULL
 #' ``torch_hamming_window(L, periodic=True)`` equal to
 #' ``torch_hamming_window(L + 1, periodic=False)[:-1])``.
 #' 
-#' .. note::
+#' @note
 #'     If `window_length` :math:`=1`, the returned window contains a single value 1.
 #' 
-#' .. note::
+#' @note
 #'     This is a generalized version of :meth:`torch_hann_window`.
 #'
 #' @section Signatures:
@@ -2331,7 +2331,7 @@ NULL
 #' If `input` is a vector of size :math:`n` and `vec2` is a vector of
 #' size :math:`m`, then `out` must be a matrix of size :math:`(n \times m)`.
 #' 
-#' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
+#' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
 #'
 #' @section Signatures:
 #' 
@@ -2383,13 +2383,13 @@ NULL
 #' 
 #' The inverse of this function is [`~torch.ifft`].
 #' 
-#' .. note::
+#' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
 #'     repeatedly running FFT methods on tensors of same geometry with same
 #'     configuration. See :ref:`cufft-plan-cache` for more details on how to
 #'     monitor and control the cache.
 #' 
-#' .. warning::
+#' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
@@ -2448,13 +2448,13 @@ NULL
 #' 
 #' The inverse of this function is [`~torch.fft`].
 #' 
-#' .. note::
+#' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
 #'     repeatedly running FFT methods on tensors of same geometry with same
 #'     configuration. See :ref:`cufft-plan-cache` for more details on how to
 #'     monitor and control the cache.
 #' 
-#' .. warning::
+#' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
@@ -2511,13 +2511,13 @@ NULL
 #' 
 #' The inverse of this function is [`~torch.irfft`].
 #' 
-#' .. note::
+#' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
 #'     repeatedly running FFT methods on tensors of same geometry with same
 #'     configuration. See :ref:`cufft-plan-cache` for more details on how to
 #'     monitor and control the cache.
 #' 
-#' .. warning::
+#' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
@@ -2558,7 +2558,7 @@ NULL
 #' :math:`\sqrt{\prod_{i=1}^K N_i}` so that the operator is unitary, where
 #' :math:`N_i` is the size of signal dimension :math:`i`.
 #' 
-#' .. note::
+#' @note
 #'     Due to the conjugate symmetry, `input` do not need to contain the full
 #'     complex frequency values. Roughly half of the values will be sufficient, as
 #'     is the case when `input` is given by [`~torch.rfft`] with
@@ -2577,7 +2577,7 @@ NULL
 #' 
 #' The inverse of this function is [`~torch.rfft`].
 #' 
-#' .. warning::
+#' @section Warning:
 #'     Generally speaking, input to this function should contain values
 #'     following conjugate symmetry. Note that even if `onesided` is
 #'     ``True``, often symmetry on some part is still needed. When this
@@ -2586,13 +2586,13 @@ NULL
 #'     Jacobian with point perturbations, [`~torch.irfft`] will almost
 #'     certainly fail the check.
 #' 
-#' .. note::
+#' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
 #'     repeatedly running FFT methods on tensors of same geometry with same
 #'     configuration. See :ref:`cufft-plan-cache` for more details on how to
 #'     monitor and control the cache.
 #' 
-#' .. warning::
+#' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
 #'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
@@ -2634,7 +2634,7 @@ NULL
 #' of 2D square tensors, in which case this function would return a tensor composed of
 #' individual inverses.
 #' 
-#' .. note::
+#' @note
 #' 
 #'     Irrespective of the original strides, the returned tensors will be
 #'     transposed, i.e. with strides like `input.contiguous().transpose(-2, -1).stride()`
@@ -2849,7 +2849,7 @@ NULL
 #' \deqn{
 #'     y_i = \log_{e} (x_i + 1)
 #' }
-#' .. note:: This function is more accurate than [`torch_log`] for small
+#' @note This function is more accurate than [`torch_log`] for small
 #'           values of `input`
 #'
 #' @section Signatures:
@@ -2907,11 +2907,11 @@ NULL
 #'
 #' Calculates log determinant of a square matrix or batches of square matrices.
 #' 
-#' .. note::
+#' @note
 #'     Result is ``-inf`` if `input` has zero log determinant, and is ``nan`` if
 #'     `input` has negative determinant.
 #' 
-#' .. note::
+#' @note
 #'     Backward through :meth:`logdet` internally uses SVD results when `input`
 #'     is not invertible. In this case, double backward through :meth:`logdet` will
 #'     be unstable in when `input` doesn't have distinct singular values. See
@@ -3038,7 +3038,7 @@ NULL
 #'   :math:`(j \times 1 \times n \times m)` tensor and `other` is a :math:`(k \times m \times p)`
 #'   tensor, `out` will be an :math:`(j \times k \times n \times p)` tensor.
 #' 
-#' .. note::
+#' @note
 #' 
 #'     The 1-dimensional dot product version of this function does not support an `out` parameter.
 #'
@@ -3219,7 +3219,7 @@ NULL
 #' \deqn{
 #'     \text{out}_i = \max(\text{tensor}_i, \text{other}_i)
 #' }
-#' .. note:: When the shapes do not match, the shape of the returned output tensor
+#' @note When the shapes do not match, the shape of the returned output tensor
 #'           follows the :ref:`broadcasting rules <broadcasting-semantics>`.
 #'
 #' @section Signatures:
@@ -3438,7 +3438,7 @@ NULL
 #' \deqn{
 #'     \text{out}_i = \min(\text{tensor}_i, \text{other}_i)
 #' }
-#' .. note:: When the shapes do not match, the shape of the returned output tensor
+#' @note When the shapes do not match, the shape of the returned output tensor
 #'           follows the :ref:`broadcasting rules <broadcasting-semantics>`.
 #'
 #' @section Signatures:
@@ -3472,7 +3472,7 @@ NULL
 #' If `input` is a :math:`(n \times m)` tensor, `mat2` is a
 #' :math:`(m \times p)` tensor, `out` will be a :math:`(n \times p)` tensor.
 #' 
-#' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
+#' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
 #'           For broadcasting matrix products, see [`torch_matmul`].
 #'
 #' @section Signatures:
@@ -3511,7 +3511,7 @@ NULL
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting
 #' in the output tensors having 1 fewer dimension than `input`.
 #' 
-#' .. note:: This function is not defined for ``torch_cuda.Tensor`` yet.
+#' @note This function is not defined for ``torch_cuda.Tensor`` yet.
 #'
 #' @section Signatures:
 #' 
@@ -3613,7 +3613,7 @@ NULL
 #' If `input` is a :math:`(n \times m)` tensor, `vec` is a 1-D tensor of
 #' size :math:`m`, `out` will be 1-D of size :math:`n`.
 #' 
-#' .. note:: This function does not :ref:`broadcast <broadcasting-semantics>`.
+#' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
 #'
 #' @section Signatures:
 #' 
@@ -3734,7 +3734,7 @@ NULL
 #' `input`. ``torch_ones_like(input)`` is equivalent to
 #' ``torch_ones(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
 #' 
-#' .. warning::
+#' @section Warning:
 #'     As of 0.4, this function does not support an `out` keyword. As an alternative,
 #'     the old ``torch_ones_like(input, out=output)`` is equivalent to
 #'     ``torch_ones(input.size(), out=output)``.
@@ -3904,10 +3904,10 @@ NULL
 #' Calculates the pseudo-inverse (also known as the Moore-Penrose inverse) of a 2D tensor.
 #' Please look at `Moore-Penrose inverse`_ for more details
 #' 
-#' .. note::
+#' @note
 #'     This method is implemented using the Singular Value Decomposition.
 #' 
-#' .. note::
+#' @note
 #'     The pseudo-inverse is not necessarily a continuous function in the elements of the matrix `[1]`_.
 #'     Therefore, derivatives are not always existent, and exist for a constant rank only `[2]`_.
 #'     However, this method is backprop-able due to the implementation by using SVD results, and
@@ -4163,7 +4163,7 @@ NULL
 #' \deqn{
 #'     \text{out}_{i+1} = \text{out}_i + \text{step}.
 #' }
-#' .. warning::
+#' @section Warning:
 #'     This function is deprecated in favor of [`torch_arange`].
 #'
 #' @section Signatures:
@@ -4254,7 +4254,7 @@ NULL
 #'
 #' Repeat elements of a tensor.
 #' 
-#' .. warning::
+#' @section Warning:
 #' 
 #'     This is different from [`torch_repeat` but similar to `numpy.repeat`].
 #'
@@ -4563,10 +4563,10 @@ NULL
 #'
 #' Calculates the sign and log absolute value of the determinant(s) of a square matrix or batches of square matrices.
 #' 
-#' .. note::
+#' @note
 #'     If ``input`` has zero determinant, this returns ``(0, -inf)``.
 #' 
-#' .. note::
+#' @note
 #'     Backward through :meth:`slogdet` internally uses SVD results when `input`
 #'     is not invertible. In this case, double backward through :meth:`slogdet`
 #'     will be unstable in when `input` doesn't have distinct singular values.
@@ -4634,7 +4634,7 @@ NULL
 #' ``squeeze(input, 0)`` leaves the tensor unchanged, but ``squeeze(input, 1)``
 #' will squeeze the tensor to the shape :math:`(A \times B)`.
 #' 
-#' .. note:: The returned tensor shares the storage with the input tensor,
+#' @note The returned tensor shares the storage with the input tensor,
 #'           so changing the contents of one will change the contents of the other.
 #'
 #' @section Signatures:
@@ -5610,7 +5610,7 @@ NULL
 #'         \text{y}_i & \text{otherwise} \\
 #'     \end{cases}
 #' }
-#' .. note::
+#' @note
 #'     The tensors `condition`, `x`, `y` must be :ref:`broadcastable <broadcasting-semantics>`.
 #'
 #' @section Signatures:
@@ -5641,7 +5641,7 @@ NULL
 #' ``torch_where(condition)`` is identical to
 #' ``torch_nonzero(condition, as_tuple=True)``.
 #' 
-#' .. note::
+#' @note
 #'     See also [`torch_nonzero`].
 #'
 #' @section Signatures:
@@ -5694,7 +5694,7 @@ NULL
 #' `input`. ``torch_zeros_like(input)`` is equivalent to
 #' ``torch_zeros(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)``.
 #' 
-#' .. warning::
+#' @section Warning:
 #'     As of 0.4, this function does not support an `out` keyword. As an alternative,
 #'     the old ``torch_zeros_like(input, out=output)`` is equivalent to
 #'     ``torch_zeros(input.size(), out=output)``.
@@ -6752,7 +6752,7 @@ NULL
 #' (`input`).  The `dim`\ th dimension has the same size as the length
 #' of `index`; other dimensions have the same size as in the original tensor.
 #' 
-#' .. note:: The returned tensor does **not** use the same storage as the original
+#' @note The returned tensor does **not** use the same storage as the original
 #'           tensor.  If `out` has a different shape than expected, we
 #'           silently change it to the correct shape, reallocating the underlying
 #'           storage if necessary.
@@ -6790,7 +6790,7 @@ NULL
 #' The shapes of the `mask` tensor and the `input` tensor don't need
 #' to match, but they must be :ref:`broadcastable <broadcasting-semantics>`.
 #' 
-#' .. note:: The returned tensor does **not** use the same storage
+#' @note The returned tensor does **not** use the same storage
 #'           as the original tensor
 #'
 #' @section Signatures:
@@ -6819,7 +6819,7 @@ NULL
 
 #' Nonzero
 #'
-#' .. note::
+#' @note
 #'     [`torch_nonzero(..., as_tuple=False) <torch.nonzero>`] (default) returns a
 #'     2-D tensor where each row is the index for a nonzero value.
 #' 
@@ -7023,7 +7023,7 @@ NULL
 #' for the solution in each column is given by the sum of squares of elements in the
 #' remaining :math:`m - n` rows of that column.
 #' 
-#' .. note::
+#' @note
 #'     The case when :math:`m < n` is not supported on the GPU.
 #'
 #' @section Signatures:
@@ -7100,13 +7100,13 @@ NULL
 #' 
 #' If `upper` is ``False``, then lower triangular portion is used.
 #' 
-#' .. note:: The eigenvalues are returned in ascending order. If `input` is a batch of matrices,
+#' @note The eigenvalues are returned in ascending order. If `input` is a batch of matrices,
 #'           then the eigenvalues of each matrix in the batch is returned in ascending order.
 #' 
-#' .. note:: Irrespective of the original strides, the returned matrix `V` will
+#' @note Irrespective of the original strides, the returned matrix `V` will
 #'           be transposed, i.e. with strides `V.contiguous().transpose(-1, -2).stride()`.
 #' 
-#' .. note:: Extra care needs to be taken when backward through outputs. Such
+#' @note Extra care needs to be taken when backward through outputs. Such
 #'           operation is really only stable when all eigenvalues are distinct.
 #'           Otherwise, ``NaN`` can appear as the gradients are not properly defined.
 #'
@@ -7132,7 +7132,7 @@ NULL
 #'
 #' Computes the eigenvalues and eigenvectors of a real square matrix.
 #' 
-#' .. note::
+#' @note
 #'     Since eigenvalues and eigenvectors might be complex, backward pass is supported only
 #'     for [`torch_symeig`]
 #'
@@ -7166,28 +7166,28 @@ NULL
 #' If `compute_uv` is ``False``, the returned `U` and `V` matrices will be zero matrices
 #' of shape :math:`(m \times m)` and :math:`(n \times n)` respectively. `some` will be ignored here.
 #' 
-#' .. note:: The singular values are returned in descending order. If `input` is a batch of matrices,
+#' @note The singular values are returned in descending order. If `input` is a batch of matrices,
 #'           then the singular values of each matrix in the batch is returned in descending order.
 #' 
-#' .. note:: The implementation of SVD on CPU uses the LAPACK routine `?gesdd` (a divide-and-conquer
+#' @note The implementation of SVD on CPU uses the LAPACK routine `?gesdd` (a divide-and-conquer
 #'           algorithm) instead of `?gesvd` for speed. Analogously, the SVD on GPU uses the MAGMA routine
 #'           `gesdd` as well.
 #' 
-#' .. note:: Irrespective of the original strides, the returned matrix `U`
+#' @note Irrespective of the original strides, the returned matrix `U`
 #'           will be transposed, i.e. with strides :code:`U.contiguous().transpose(-2, -1).stride()`
 #' 
-#' .. note:: Extra care needs to be taken when backward through `U` and `V`
+#' @note Extra care needs to be taken when backward through `U` and `V`
 #'           outputs. Such operation is really only stable when `input` is
 #'           full rank with all distinct singular values. Otherwise, ``NaN`` can
 #'           appear as the gradients are not properly defined. Also, notice that
 #'           double backward will usually do an additional backward through `U` and
 #'           `V` even if the original backward is only on `S`.
 #' 
-#' .. note:: When `some` = ``False``, the gradients on :code:`U[..., :, min(m, n):]`
+#' @note When `some` = ``False``, the gradients on :code:`U[..., :, min(m, n):]`
 #'           and :code:`V[..., :, min(m, n):]` will be ignored in backward as those vectors
 #'           can be arbitrary bases of the subspaces.
 #' 
-#' .. note:: When `compute_uv` = ``False``, backward cannot be performed since `U` and `V`
+#' @note When `compute_uv` = ``False``, backward cannot be performed since `U` and `V`
 #'           from the forward pass is required for the backward operation.
 #'
 #' @section Signatures:
@@ -7336,7 +7336,7 @@ NULL
 #' batches of 2D matrices. If the inputs are batches, then returns
 #' batched outputs `solution, LU`.
 #' 
-#' .. note::
+#' @note
 #' 
 #'     Irrespective of the original strides, the returned matrices
 #'     `solution` and `LU` will be transposed, i.e. with strides like
@@ -7425,10 +7425,10 @@ NULL
 #' If `some` is ``True``, then this function returns the thin (reduced) QR factorization.
 #' Otherwise, if `some` is ``False``, this function returns the complete QR factorization.
 #' 
-#' .. note:: precision may be lost if the magnitudes of the elements of `input`
+#' @note precision may be lost if the magnitudes of the elements of `input`
 #'           are large
 #' 
-#' .. note:: While it should always give you a valid decomposition, it may not
+#' @note While it should always give you a valid decomposition, it may not
 #'           give you the same one across platforms - it will depend on your
 #'           LAPACK implementation.
 #'
@@ -7577,7 +7577,7 @@ NULL
 #' from the multinomial probability distribution located in the corresponding row
 #' of tensor `input`.
 #' 
-#' .. note::
+#' @note
 #'     The rows of `input` do not need to sum to one (in which case we use
 #'     the values as weights), but must be non-negative, finite and have
 #'     a non-zero sum.
@@ -7595,7 +7595,7 @@ NULL
 #' If not, they are drawn without replacement, which means that when a
 #' sample index is drawn for a row, it cannot be drawn again for that row.
 #' 
-#' .. note::
+#' @note
 #'     When drawn without replacement, `num_samples` must be lower than
 #'     number of non-zero elements in `input` (or the min number of non-zero
 #'     elements in each row of `input` if it is a matrix).
@@ -7688,7 +7688,7 @@ NULL
 #' \deqn{
 #'     \psi^{(n)}(x) = \frac{d^{(n)}}{dx^{(n)}} \psi(x)
 #' }
-#' .. note::
+#' @note
 #'     This function is not implemented for :math:`n \geq 2`.
 #'
 #' @section Signatures:
@@ -8083,7 +8083,7 @@ NULL
 #' `dim` is normalized such that the `p`-norm of the sub-tensor is lower
 #' than the value `maxnorm`
 #' 
-#' .. note:: If the norm of a row is lower than `maxnorm`, the row is unchanged
+#' @note If the norm of a row is lower than `maxnorm`, the row is unchanged
 #'
 #' @section Signatures:
 #' 
@@ -8149,7 +8149,7 @@ NULL
 #' The shapes of `mean` and `std` don't need to match, but the
 #' total number of elements in each tensor need to be the same.
 #' 
-#' .. note:: When the shapes do not match, the shape of `mean`
+#' @note When the shapes do not match, the shape of `mean`
 #'           is used as the shape for the returned output tensor
 #'
 #' @section Signatures:

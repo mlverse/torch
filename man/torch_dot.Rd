@@ -6,8 +6,8 @@
 \description{
 Computes the dot product (inner product) of two tensors.
 }
-\details{
-.. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
+\note{
+This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 
 Example::
 }

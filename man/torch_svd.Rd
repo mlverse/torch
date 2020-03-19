@@ -24,29 +24,30 @@ i.e., if the last two dimensions of \code{input} are \code{m} and \code{n}, then
 
 If \code{compute_uv} is \code{False}, the returned \code{U} and \code{V} matrices will be zero matrices
 of shape :math:\verb{(m \\times m)} and :math:\verb{(n \\times n)} respectively. \code{some} will be ignored here.
-
-.. note:: The singular values are returned in descending order. If \code{input} is a batch of matrices,
+}
+\note{
+The singular values are returned in descending order. If \code{input} is a batch of matrices,
 then the singular values of each matrix in the batch is returned in descending order.
 
-.. note:: The implementation of SVD on CPU uses the LAPACK routine \code{?gesdd} (a divide-and-conquer
+The implementation of SVD on CPU uses the LAPACK routine \code{?gesdd} (a divide-and-conquer
 algorithm) instead of \code{?gesvd} for speed. Analogously, the SVD on GPU uses the MAGMA routine
 \code{gesdd} as well.
 
-.. note:: Irrespective of the original strides, the returned matrix \code{U}
+Irrespective of the original strides, the returned matrix \code{U}
 will be transposed, i.e. with strides :code:\verb{U.contiguous().transpose(-2, -1).stride()}
 
-.. note:: Extra care needs to be taken when backward through \code{U} and \code{V}
+Extra care needs to be taken when backward through \code{U} and \code{V}
 outputs. Such operation is really only stable when \code{input} is
 full rank with all distinct singular values. Otherwise, \code{NaN} can
 appear as the gradients are not properly defined. Also, notice that
 double backward will usually do an additional backward through \code{U} and
 \code{V} even if the original backward is only on \code{S}.
 
-.. note:: When \code{some} = \code{False}, the gradients on :code:\verb{U[..., :, min(m, n):]}
+When \code{some} = \code{False}, the gradients on :code:\verb{U[..., :, min(m, n):]}
 and :code:\verb{V[..., :, min(m, n):]} will be ignored in backward as those vectors
 can be arbitrary bases of the subspaces.
 
-.. note:: When \code{compute_uv} = \code{False}, backward cannot be performed since \code{U} and \code{V}
+When \code{compute_uv} = \code{False}, backward cannot be performed since \code{U} and \code{V}
 from the forward pass is required for the backward operation.
 }
 \section{Signatures}{

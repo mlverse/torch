@@ -33,9 +33,10 @@ ready to be used as a periodic window with functions like
 above formula is in fact :math:\verb{\\text\{window\\_length\} + 1}. Also, we always have
 \code{torch_blackman_window(L, periodic=True)} equal to
 \verb{torch_blackman_window(L + 1, periodic=False)[:-1])}.
-
-.. note::
-If \code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
+}
+\note{
+\preformatted{If `window_length` :math:`=1`, the returned window contains a single value 1.
+}
 }
 \section{Signatures}{
 

@@ -17,8 +17,9 @@ the boolean mask \code{mask} which is a \code{BoolTensor}.
 \details{
 The shapes of the \code{mask} tensor and the \code{input} tensor don't need
 to match, but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
-
-.. note:: The returned tensor does \strong{not} use the same storage
+}
+\note{
+The returned tensor does \strong{not} use the same storage
 as the original tensor
 }
 \section{Signatures}{
