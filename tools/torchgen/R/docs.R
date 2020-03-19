@@ -140,6 +140,10 @@ create_roxygen_params <- function(params) {
 
   s <- sapply(params, function(x) {
     x$desc <- inline_math(x$desc)
+    x$desc <- function_reference(x$desc)
+    x$desc <- remove_directives(x$desc)
+    x$desc <- remove_reference(x$desc)
+    x$type <- remove_directives(x$type)
     glue::glue("#' @param {x$name} {x$type} {x$desc}")
   })
   str_c(s, collapse = "\n")
@@ -179,17 +183,36 @@ inline_math <- function(x) {
   str_replace_all(x, ":math:`([^`]+)`", "\\\\eqn{\\1}")
 }
 
+function_reference <- function(x) {
+  x <- str_replace_all(x, ":func:`([^`]+)`", "[`\\1`]")
+  str_replace_all(x, "`torch\\.(.*)`", "`torch_\\1`")
+}
+
+remove_directives <- function(x) {
+  x <- str_replace_all(x, ":class:", "")
+  x <- str_replace_all(x, ":sup:", "")
+  x <- str_replace_all(x, ":attr:", "")
+  x <- str_replace_all(x, ":code:", "")
+  x <- str_replace_all(x, ":meth:", "")
+  x
+}
+
+remove_reference <- function(x) {
+  str_replace_all(x, ":ref:`([^<^`]+)[^`]*`", "\\1")
+}
+
 create_roxygen_desc <- function(desc) {
 
   if (desc == "" | is.null(desc))
     return("#' Empty description...")
 
   desc <- str_replace_all(desc, ":attr:", "")
-  desc <- str_replace_all(desc, ":func:`([^`]+)`", "[`\\1`]")
   desc <- inline_math(desc)
-  desc <- str_replace_all(desc, "`torch\\.(.*)`", "`torch_\\1`")
+  desc <- function_reference(desc)
   desc <- parse_math(desc)
   desc <- str_trim(desc)
+  desc <- remove_directives(desc)
+  desc <- remove_reference(desc)
 
   lines <- str_split(desc, "\n")[[1]]
   lines <- str_replace_all(lines, "^.. note::", "@note")
