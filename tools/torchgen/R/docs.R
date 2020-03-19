@@ -23,10 +23,19 @@ get_signatures <- function(doc) {
     discard(~.x == "")
 }
 
-arg_mark <- c("Args:", "Arguments:", "    Arguments:")
+clean_doc <- function(doc) {
+  x <- str_split(doc, "\n")[[1]]
+  if (any(x == "    Args:" | x == "    Arguments:")) {
+   x <- str_replace_all(x, "^    (.*)", "\\1")
+  }
+  str_c(x, collapse= "\n")
+}
+
+arg_mark <- c("Args:", "Arguments:", "    Arguments:", "    Args:")
 
 get_args <- function(doc) {
 
+  doc <- clean_doc(doc)
   lines <- str_split(doc, "\n")[[1]]
   i <- which(lines %in% arg_mark)
 
@@ -36,7 +45,7 @@ get_args <- function(doc) {
   if (length(i) > 1)
     stop("More than 1 argument sections...")
 
-  idx <- which(lines == "")
+  idx <- which(str_detect(lines, "^[^ ]+"))
   poss <- idx[idx > i]
   if (length(poss) == 0)
     end <- length(lines)
@@ -45,10 +54,10 @@ get_args <- function(doc) {
 
   arg_lines <- lines[(i+1):(end)]
 
-  if (lines[i] == "    Arguments:")
+  if (lines[i] == "    Arguments:" | lines[i] == "    Args:")
     arg_lines <- str_replace_all(arg_lines, "^    ", "")
 
-  l <- str_which(arg_lines, "^    [^ ]+")
+  l <- str_which(arg_lines, paste0("^", str_extract(arg_lines[1], "^[ ]+"),    "[^ ]+"))
   s <- sapply(seq_along(arg_lines), function(x) which.max(l[l<=x]))
   split(arg_lines, s) %>%
     map_chr(~do.call(function(...) str_c(..., collapse = "\n"), as.list(.x))) %>%
@@ -255,7 +264,7 @@ docum <- function(path) {
   docs <- map(funs, get_doc) %>% discard(is.null)
   docs <- map(docs, get_signatures)
 
-  args <- map(docs, ~map(.x, . %>% get_args %>% parse_args))
+  args <- map(docs, function(.x) { map(.x, . %>% get_args %>% parse_args)})
   desc <- map(docs, ~map(.x, get_desc))
   exam <- map(docs, ~map(.x, get_examples))
   sign <- map(docs, ~map(.x, get_signature))
