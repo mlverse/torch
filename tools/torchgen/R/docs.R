@@ -112,6 +112,10 @@ get_desc <- function(doc) {
     desc
 }
 
+fix_torch_creation <- function(exam) {
+  str_replace_all(exam, "torch_(randn|zeros|ones){1}\\(([0-9, ]+)\\)", "torch_\\1(c(\\2))")
+}
+
 get_examples <- function(doc) {
 
   doc <- clean_doc(doc)
@@ -130,7 +134,9 @@ get_examples <- function(doc) {
   example_code <- example_lines[str_detect(example_lines, "^    >>>")]
   example_code <- str_replace_all(example_code, "^    >>> ", "")
   example_code <- str_replace_all(example_code, "torch\\.", "torch_")
-  str_c(example_code, collapse = "\n")
+  example_code <- str_c(example_code, collapse = "\n")
+  example_code <- fix_torch_creation(example_code)
+  example_code
 }
 
 create_roxygen_params <- function(params) {
