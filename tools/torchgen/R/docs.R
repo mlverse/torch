@@ -137,7 +137,7 @@ create_roxygen_params <- function(params) {
 parse_math <- function(desc) {
 
   lines <- str_split(desc, "\n")[[1]]
-  i <- which(lines == ".. math::")
+  i <- which(lines == ".. math::" | lines == "    .. math::" | lines == ".. math ::")
 
   if (length(i) == 0)
     return(desc)
