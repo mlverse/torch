@@ -3,31 +3,11 @@
 \name{torch_broadcast_tensors}
 \alias{torch_broadcast_tensors}
 \title{Broadcast_tensors}
+\arguments{
+\item{*tensors}{NA any number of tensors of the same type}
+}
 \description{
 Broadcasts the given tensors according to :ref:\code{broadcasting-semantics}.
-}
-\details{
-\preformatted{Args:
-    *tensors: any number of tensors of the same type
-
-.. warning::
-
-    More than one element of a broadcasted tensor may refer to a single
-    memory location. As a result, in-place operations (especially ones that
-    are vectorized) may result in incorrect behavior. If you need to write
-    to the tensors, please clone them first.
-
-Example::
-
-    >>> x = torch.arange(3).view(1, 3)
-    >>> y = torch.arange(2).view(2, 1)
-    >>> a, b = torch.broadcast_tensors(x, y)
-    >>> a.size()
-    torch.Size([2, 3])
-    >>> a
-    tensor([[0, 1, 2],
-            [0, 1, 2]])
-}
 }
 \section{Signatures}{
 

@@ -4,7 +4,7 @@
 \alias{torch_selu_}
 \title{Selu_}
 \description{
-In-place version of :func:\code{~selu}.
+In-place version of \code{\link{~selu}}.
 }
 \section{Signatures}{
 

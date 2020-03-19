@@ -3,33 +3,13 @@
 \name{torch_meshgrid}
 \alias{torch_meshgrid}
 \title{Meshgrid}
+\arguments{
+\item{tensors}{(list of Tensor) list of scalars or 1 dimensional tensors. Scalars will be}
+
+\item{treated}{(1,)}
+}
 \description{
 Take \eqn{N} tensors, each of which can be either scalar or 1-dimensional
 vector, and create \eqn{N} N-dimensional grids, where the \eqn{i} :sup:\code{th} grid is defined by
 expanding the \eqn{i} :sup:\code{th} input over dimensions defined by other inputs.
-}
-\details{
-\preformatted{Args:
-    tensors (list of Tensor): list of scalars or 1 dimensional tensors. Scalars will be
-    treated as tensors of size \eqn{(1,)} automatically
-
-Returns:
-    seq (sequence of Tensors): If the input has \eqn{k} tensors of size
-    \eqn{(N_1,), (N_2,), \ldots , (N_k,)}, then the output would also have \eqn{k} tensors,
-    where all tensors are of size \eqn{(N_1, N_2, \ldots , N_k)}.
-
-Example::
-
-    >>> x = torch.tensor([1, 2, 3])
-    >>> y = torch.tensor([4, 5, 6])
-    >>> grid_x, grid_y = torch.meshgrid(x, y)
-    >>> grid_x
-    tensor([[1, 1, 1],
-            [2, 2, 2],
-            [3, 3, 3]])
-    >>> grid_y
-    tensor([[4, 5, 6],
-            [4, 5, 6],
-            [4, 5, 6]])
-}
 }

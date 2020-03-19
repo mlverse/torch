@@ -17,7 +17,7 @@ Real-to-complex Discrete Fourier Transform
 }
 \details{
 This method computes the real-to-complex discrete Fourier transform. It is
-mathematically equivalent with :func:\code{~torch.fft} with differences only in
+mathematically equivalent with \code{\link{~torch.fft}} with differences only in
 formats of the input and output.
 
 This method supports 1D, 2D and 3D real-to-complex transforms, indicated
@@ -40,7 +40,7 @@ not be full complex result of shape \eqn{(*, 2)}, where \eqn{*} is the shape
 of \code{input}, but instead the last dimension will be halfed as of size
 \eqn{\lfloor \frac{N_d}{2} \rfloor + 1}.
 
-The inverse of this function is :func:\code{~torch.irfft}.
+The inverse of this function is \code{\link{~torch.irfft}}.
 }
 \note{
 \preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -52,7 +52,7 @@ monitor and control the cache.
 \section{Warning}{
 
 For CPU tensors, this method is currently only available with MKL. Use
-:func:\code{torch_backends.mkl.is_available} to check if MKL is installed.
+\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
 
 \section{Signatures}{

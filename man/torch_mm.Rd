@@ -19,7 +19,7 @@ If \code{input} is a \eqn{(n \times m)} tensor, \code{mat2} is a
 }
 \note{
 This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
-For broadcasting matrix products, see :func:\code{torch_matmul}.
+For broadcasting matrix products, see \code{\link{torch_matmul}}.
 }
 \section{Signatures}{
 

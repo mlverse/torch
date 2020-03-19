@@ -16,7 +16,7 @@
 Eliminates all but the first element from every consecutive group of equivalent elements.
 }
 \details{
-\preformatted{.. note:: This function is different from :func:`torch_unique` in the sense that this function
+\preformatted{.. note:: This function is different from [`torch_unique`] in the sense that this function
     only eliminates consecutive duplicate values. This semantics is similar to `std::unique`
     in C++.
 }

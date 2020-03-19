@@ -16,10 +16,10 @@ All tensors must either have the same shape (except in the concatenating
 dimension) or be empty.
 }
 \details{
-:func:\code{torch_cat} can be seen as an inverse operation for :func:\code{torch.split}
-and :func:\code{torch_chunk}.
+\code{\link{torch_cat}} can be seen as an inverse operation for \code{\link{torch.split}}
+and \code{\link{torch_chunk}}.
 
-:func:\code{torch_cat} can be best understood via examples.
+\code{\link{torch_cat}} can be best understood via examples.
 }
 \section{Signatures}{
 

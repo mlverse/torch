@@ -3,65 +3,19 @@
 \name{torch_norm}
 \alias{torch_norm}
 \title{Norm}
+\arguments{
+\item{input}{(Tensor) the input tensor}
+
+\item{p}{(int, float, inf, -inf, 'fro', 'nuc', optional) the order of norm. Default: \code{'fro'}        The following norms can be calculated:        =====  ============================  ==========================        ord    matrix norm                   vector norm        =====  ============================  ==========================        None   Frobenius norm                2-norm        'fro'  Frobenius norm                --        'nuc'  nuclear norm                  --        Other  as vec norm when dim is None  sum(abs(x)\strong{ord)}(1./ord)        =====  ============================  ==========================}
+
+\item{dim}{(int, 2-tuple of ints, 2-list of ints, optional) If it is an int,        vector norm will be calculated, if it is 2-tuple of ints, matrix norm        will be calculated. If the value is None, matrix norm will be calculated        when the input tensor only has two dimensions, vector norm will be        calculated when the input tensor only has one dimension. If the input        tensor has more than two dimensions, the vector norm will be applied to        last dimension.}
+
+\item{keepdim}{(bool, optional) whether the output tensors have :attr:\code{dim}        retained or not. Ignored if :attr:\code{dim} = \code{None} and        :attr:\code{out} = \code{None}. Default: \code{False}}
+
+\item{out}{(Tensor, optional) the output tensor. Ignored if        :attr:\code{dim} = \code{None} and :attr:\code{out} = \code{None}.}
+
+\item{dtype}{(:class:\code{torch.dtype}, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        :attr:'dtype' while performing the operation. Default: None.}
+}
 \description{
 Returns the matrix norm or vector norm of a given tensor.
-}
-\details{
-\preformatted{Args:
-    input (Tensor): the input tensor
-    p (int, float, inf, -inf, 'fro', 'nuc', optional): the order of norm. Default: ``'fro'``
-        The following norms can be calculated:
-
-        =====  ============================  ==========================
-        ord    matrix norm                   vector norm
-        =====  ============================  ==========================
-        None   Frobenius norm                2-norm
-        'fro'  Frobenius norm                --
-        'nuc'  nuclear norm                  --
-        Other  as vec norm when dim is None  sum(abs(x)**ord)**(1./ord)
-        =====  ============================  ==========================
-
-    dim (int, 2-tuple of ints, 2-list of ints, optional): If it is an int,
-        vector norm will be calculated, if it is 2-tuple of ints, matrix norm
-        will be calculated. If the value is None, matrix norm will be calculated
-        when the input tensor only has two dimensions, vector norm will be
-        calculated when the input tensor only has one dimension. If the input
-        tensor has more than two dimensions, the vector norm will be applied to
-        last dimension.
-    keepdim (bool, optional): whether the output tensors have `dim`
-        retained or not. Ignored if `dim` = ``None`` and
-        `out` = ``None``. Default: ``False``
-    out (Tensor, optional): the output tensor. Ignored if
-        `dim` = ``None`` and `out` = ``None``.
-    dtype (:class:`torch_dtype`, optional): the desired data type of
-        returned tensor. If specified, the input tensor is casted to
-        'dtype' while performing the operation. Default: None.
-
-
-Example::
-
-    >>> import torch
-    >>> a = torch.arange(9, dtype= torch.float) - 4
-    >>> b = a.reshape((3, 3))
-    >>> torch.norm(a)
-    tensor(7.7460)
-    >>> torch.norm(b)
-    tensor(7.7460)
-    >>> torch.norm(a, float('inf'))
-    tensor(4.)
-    >>> torch.norm(b, float('inf'))
-    tensor(4.)
-    >>> c = torch.tensor([[ 1, 2, 3],[-1, 1, 4]] , dtype= torch.float)
-    >>> torch.norm(c, dim=0)
-    tensor([1.4142, 2.2361, 5.0000])
-    >>> torch.norm(c, dim=1)
-    tensor([3.7417, 4.2426])
-    >>> torch.norm(c, p=1, dim=1)
-    tensor([6., 6.])
-    >>> d = torch.arange(8, dtype= torch.float).reshape(2,2,2)
-    >>> torch.norm(d, dim=(1,2))
-    tensor([ 3.7417, 11.2250])
-    >>> torch.norm(d[0, :, :]), torch.norm(d[1, :, :])
-    (tensor(3.7417), tensor(11.2250))
-}
 }

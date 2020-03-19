@@ -32,7 +32,7 @@ the gap between two values in the tensor.
 }
 \section{Warning}{
 
-This function is deprecated in favor of :func:\code{torch_arange}.
+This function is deprecated in favor of \code{\link{torch_arange}}.
 }
 
 \section{Signatures}{

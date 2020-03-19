@@ -13,7 +13,7 @@ This is a low-level function for calling LAPACK directly. This function
 returns a namedtuple (a, tau) as defined in \verb{LAPACK documentation for geqrf}_ .
 }
 \details{
-You'll generally want to use :func:\code{torch_qr} instead.
+You'll generally want to use \code{\link{torch_qr}} instead.
 
 Computes a QR decomposition of \code{input}, but without constructing
 \eqn{Q} and \eqn{R} as explicit separate matrices.

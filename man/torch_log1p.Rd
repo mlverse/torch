@@ -17,7 +17,7 @@ Returns a new tensor with the natural logarithm of (1 + \code{input}).
 }
 }
 \note{
-This function is more accurate than :func:\code{torch_log} for small
+This function is more accurate than \code{\link{torch_log}} for small
 values of \code{input}
 }
 \section{Signatures}{

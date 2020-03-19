@@ -19,16 +19,16 @@ If \code{upper} is \code{True}, the returned matrix \code{U} is upper-triangular
 the decomposition has the form:
 
 \deqn{
-}
-A = U^TU
 
+  A = U^TU
+}
 If \code{upper} is \code{False}, the returned matrix \code{L} is lower-triangular, and
 the decomposition has the form:
 
 \deqn{
-}
-A = LL^T
 
+    A = LL^T
+}
 If \code{upper} is \code{True}, and \eqn{A} is a batch of symmetric positive-definite
 matrices, then the returned tensor will be composed of upper-triangular Cholesky factors
 of each of the individual matrices. Similarly, when \code{upper} is \code{False}, the returned

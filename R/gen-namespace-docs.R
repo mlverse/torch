@@ -974,7 +974,7 @@ NULL
 #'     \text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
 #' }
 #' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
-#'           For broadcasting matrix products, see :func:`torch_matmul`.
+#'           For broadcasting matrix products, see [`torch_matmul`].
 #'
 #' @section Signatures:
 #' 
@@ -1002,34 +1002,13 @@ NULL
 #' Broadcast_tensors
 #'
 #' Broadcasts the given tensors according to :ref:`broadcasting-semantics`.
-#' 
-#'     Args:
-#'         *tensors: any number of tensors of the same type
-#' 
-#'     .. warning::
-#' 
-#'         More than one element of a broadcasted tensor may refer to a single
-#'         memory location. As a result, in-place operations (especially ones that
-#'         are vectorized) may result in incorrect behavior. If you need to write
-#'         to the tensors, please clone them first.
-#' 
-#'     Example::
-#' 
-#'         >>> x = torch.arange(3).view(1, 3)
-#'         >>> y = torch.arange(2).view(2, 1)
-#'         >>> a, b = torch.broadcast_tensors(x, y)
-#'         >>> a.size()
-#'         torch.Size([2, 3])
-#'         >>> a
-#'         tensor([[0, 1, 2],
-#'                 [0, 1, 2]])
 #'
 #' @section Signatures:
 #' 
 #' broadcast_tensors(*tensors) -> List of Tensors
 #'
 #'
-#'
+#' @param *tensors NA any number of tensors of the same type
 #'
 #' 
 #'
@@ -1045,10 +1024,10 @@ NULL
 #' All tensors must either have the same shape (except in the concatenating
 #' dimension) or be empty.
 #' 
-#' :func:`torch_cat` can be seen as an inverse operation for :func:`torch.split`
-#' and :func:`torch_chunk`.
+#' [`torch_cat`] can be seen as an inverse operation for [`torch.split`]
+#' and [`torch_chunk`].
 #' 
-#' :func:`torch_cat` can be best understood via examples.
+#' [`torch_cat`] can be best understood via examples.
 #'
 #' @section Signatures:
 #' 
@@ -1110,32 +1089,10 @@ NULL
 #'     of arithmetic operations (`[CLRS]`_). Note that since this is a function to compute the product, \eqn{N}
 #'     needs to be greater than or equal to 2; if equal to 2 then a trivial matrix-matrix product is returned.
 #'     If \eqn{N} is 1, then this is a no-op - the original matrix is returned as is.
-#' 
-#' 
-#'     Args:
-#'         matrices (Tensors...): a sequence of 2 or more 2-D tensors whose product is to be determined.
-#' 
-#' 
-#'     Returns:
-#'         Tensor: if the \eqn{i^{th}} tensor was of dimensions \eqn{p_{i} \times p_{i + 1}}, then the product
-#'         would be of dimensions \eqn{p_{1} \times p_{N + 1}}.
-#' 
-#'     Example::
-#' 
-#'         >>> a = torch.randn(3, 4)
-#'         >>> b = torch.randn(4, 5)
-#'         >>> c = torch.randn(5, 6)
-#'         >>> d = torch.randn(6, 7)
-#'         >>> torch.chain_matmul(a, b, c, d)
-#'         tensor([[ -2.3375,  -3.9790,  -4.1119,  -6.6577,   9.5609, -11.5095,  -3.2614],
-#'                 [ 21.4038,   3.3378,  -8.4982,  -5.2457, -10.2561,  -2.4684,   2.7163],
-#'                 [ -0.9647,  -5.8917,  -2.3213,  -5.2284,  12.8615, -12.2816,  -2.5095]])
-#' 
-#'     .. _`[CLRS]`: https://mitpress.mit.edu/books/introduction-algorithms-third-edition
 #'
 #' 
 #'
-#'
+#' @param matrices (Tensors...) a sequence of 2 or more 2-D tensors whose product is to be determined.
 #'
 #' 
 #'
@@ -2378,7 +2335,7 @@ NULL
 #' Returns the real and the imaginary parts together as one tensor of the same
 #' shape of `input`.
 #' 
-#' The inverse of this function is :func:`~torch.ifft`.
+#' The inverse of this function is [`~torch.ifft`].
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -2388,7 +2345,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     :func:`torch_backends.mkl.is_available` to check if MKL is installed.
+#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
 #' @section Signatures:
 #' 
@@ -2434,16 +2391,16 @@ NULL
 #' where \eqn{d} = `signal_ndim` is number of dimensions for the
 #' signal, and \eqn{N_i} is the size of signal dimension \eqn{i}.
 #' 
-#' The argument specifications are almost identical with :func:`~torch.fft`.
+#' The argument specifications are almost identical with [`~torch.fft`].
 #' However, if `normalized` is set to ``True``, this instead returns the
 #' results multiplied by \eqn{\sqrt{\prod_{i=1}^d N_i}}, to become a unitary
-#' operator. Therefore, to invert a :func:`~torch.fft`, the `normalized`
-#' argument should be set identically for :func:`~torch.fft`.
+#' operator. Therefore, to invert a [`~torch.fft`], the `normalized`
+#' argument should be set identically for [`~torch.fft`].
 #' 
 #' Returns the real and the imaginary parts together as one tensor of the same
 #' shape of `input`.
 #' 
-#' The inverse of this function is :func:`~torch.fft`.
+#' The inverse of this function is [`~torch.fft`].
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -2453,7 +2410,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     :func:`torch_backends.mkl.is_available` to check if MKL is installed.
+#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
 #' @section Signatures:
 #' 
@@ -2483,7 +2440,7 @@ NULL
 #' Real-to-complex Discrete Fourier Transform
 #' 
 #' This method computes the real-to-complex discrete Fourier transform. It is
-#' mathematically equivalent with :func:`~torch.fft` with differences only in
+#' mathematically equivalent with [`~torch.fft`] with differences only in
 #' formats of the input and output.
 #' 
 #' This method supports 1D, 2D and 3D real-to-complex transforms, indicated
@@ -2506,7 +2463,7 @@ NULL
 #' of `input`, but instead the last dimension will be halfed as of size
 #' \eqn{\lfloor \frac{N_d}{2} \rfloor + 1}.
 #' 
-#' The inverse of this function is :func:`~torch.irfft`.
+#' The inverse of this function is [`~torch.irfft`].
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -2516,7 +2473,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     :func:`torch_backends.mkl.is_available` to check if MKL is installed.
+#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
 #' @section Signatures:
 #' 
@@ -2546,11 +2503,11 @@ NULL
 #' Complex-to-real Inverse Discrete Fourier Transform
 #' 
 #' This method computes the complex-to-real inverse discrete Fourier transform.
-#' It is mathematically equivalent with :func:`ifft` with differences only in
+#' It is mathematically equivalent with [`ifft`] with differences only in
 #' formats of the input and output.
 #' 
-#' The argument specifications are almost identical with :func:`~torch.ifft`.
-#' Similar to :func:`~torch.ifft`, if `normalized` is set to ``True``,
+#' The argument specifications are almost identical with [`~torch.ifft`].
+#' Similar to [`~torch.ifft`], if `normalized` is set to ``True``,
 #' this normalizes the result by multiplying it with
 #' \eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is unitary, where
 #' \eqn{N_i} is the size of signal dimension \eqn{i}.
@@ -2558,29 +2515,29 @@ NULL
 #' @note
 #'     Due to the conjugate symmetry, `input` do not need to contain the full
 #'     complex frequency values. Roughly half of the values will be sufficient, as
-#'     is the case when `input` is given by :func:`~torch.rfft` with
+#'     is the case when `input` is given by [`~torch.rfft`] with
 #'     ``rfft(signal, onesided=True)``. In such case, set the `onesided`
 #'     argument of this method to ``True``. Moreover, the original signal shape
 #'     information can sometimes be lost, optionally set `signal_sizes` to be
 #'     the size of the original signal (without the batch dimensions if in batched
 #'     mode) to recover it with correct shape.
 #' 
-#'     Therefore, to invert an :func:`~torch.rfft`, the `normalized` and
-#'     `onesided` arguments should be set identically for :func:`~torch.irfft`,
+#'     Therefore, to invert an [`~torch.rfft`], the `normalized` and
+#'     `onesided` arguments should be set identically for [`~torch.irfft`],
 #'     and preferrably a `signal_sizes` is given to avoid size mismatch. See the
 #'     example below for a case of size mismatch.
 #' 
-#'     See :func:`~torch.rfft` for details on conjugate symmetry.
+#'     See [`~torch.rfft`] for details on conjugate symmetry.
 #' 
-#' The inverse of this function is :func:`~torch.rfft`.
+#' The inverse of this function is [`~torch.rfft`].
 #' 
 #' @section Warning:
 #'     Generally speaking, input to this function should contain values
 #'     following conjugate symmetry. Note that even if `onesided` is
 #'     ``True``, often symmetry on some part is still needed. When this
-#'     requirement is not satisfied, the behavior of :func:`~torch.irfft` is
-#'     undefined. Since :func:`torch_autograd.gradcheck` estimates numerical
-#'     Jacobian with point perturbations, :func:`~torch.irfft` will almost
+#'     requirement is not satisfied, the behavior of [`~torch.irfft`] is
+#'     undefined. Since [`torch_autograd.gradcheck`] estimates numerical
+#'     Jacobian with point perturbations, [`~torch.irfft`] will almost
 #'     certainly fail the check.
 #' 
 #' @note
@@ -2591,7 +2548,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     :func:`torch_backends.mkl.is_available` to check if MKL is installed.
+#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
 #'
 #' @section Signatures:
 #' 
@@ -2714,7 +2671,7 @@ NULL
 #' If `keepdim` is ``True``, both the `values` and `indices` tensors
 #' are the same size as `input`, except in the dimension `dim` where
 #' they are of size 1. Otherwise, `dim` is squeezed
-#' (see :func:`torch_squeeze`), resulting in both the `values` and
+#' (see [`torch_squeeze`]), resulting in both the `values` and
 #' `indices` tensors having 1 fewer dimension than the `input` tensor.
 #'
 #' @section Signatures:
@@ -2846,7 +2803,7 @@ NULL
 #' \deqn{
 #'     y_i = \log_{e} (x_i + 1)
 #' }
-#' @note This function is more accurate than :func:`torch_log` for small
+#' @note This function is more accurate than [`torch_log`] for small
 #'           values of `input`
 #'
 #' @section Signatures:
@@ -2990,7 +2947,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #'
 #' 
@@ -3179,7 +3136,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensors are of the same size
 #' as `input` except in the dimension `dim` where they are of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting
 #' in the output tensors having 1 fewer dimension than `input`.
 #'
 #' @section Signatures:
@@ -3276,7 +3233,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #'
 #' @section Signatures:
@@ -3337,7 +3294,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensors are of the same size
 #' as `input` except in the dimension `dim` where they are of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in
 #' the outputs tensor having 1 fewer dimension than `input`.
 #'
 #' @section Signatures:
@@ -3397,7 +3354,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensors are of the same size as
 #' `input` except in the dimension `dim` where they are of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in
 #' the output tensors having 1 fewer dimension than `input`.
 #'
 #' @section Signatures:
@@ -3470,7 +3427,7 @@ NULL
 #' \eqn{(m \times p)} tensor, `out` will be a \eqn{(n \times p)} tensor.
 #' 
 #' @note This function does not :ref:`broadcast <broadcasting-semantics>`.
-#'           For broadcasting matrix products, see :func:`torch_matmul`.
+#'           For broadcasting matrix products, see [`torch_matmul`].
 #'
 #' @section Signatures:
 #' 
@@ -3505,7 +3462,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensors are of the same size as
 #' `input` except in the dimension `dim` where they are of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting
 #' in the output tensors having 1 fewer dimension than `input`.
 #' 
 #' @note This function is not defined for ``torch_cuda.Tensor`` yet.
@@ -3762,48 +3719,13 @@ NULL
 #' Cdist
 #'
 #' Computes batched the p-norm distance between each pair of the two collections of row vectors.
-#' 
-#'     Args:
-#'         x1 (Tensor): input tensor of shape \eqn{B \times P \times M}.
-#'         x2 (Tensor): input tensor of shape \eqn{B \times R \times M}.
-#'         p: p value for the p-norm distance to calculate between each vector pair
-#'             \eqn{\in [0, \infty]}.
-#'         compute_mode:
-#'             'use_mm_for_euclid_dist_if_necessary' - will use matrix multiplication approach to calculate
-#'             euclidean distance (p = 2) if P > 25 or R > 25
-#'             'use_mm_for_euclid_dist' - will always use matrix multiplication approach to calculate
-#'             euclidean distance (p = 2)
-#'             'donot_use_mm_for_euclid_dist' - will never use matrix multiplication approach to calculate
-#'             euclidean distance (p = 2)
-#'             Default: use_mm_for_euclid_dist_if_necessary.
-#' 
-#'     If x1 has shape \eqn{B \times P \times M} and x2 has shape \eqn{B \times R \times M} then the
-#'     output will have shape \eqn{B \times P \times R}.
-#' 
-#'     This function is equivalent to `scipy.spatial.distance.cdist(input,'minkowski', p=p)`
-#'     if \eqn{p \in (0, \infty)}. When \eqn{p = 0} it is equivalent to
-#'     `scipy.spatial.distance.cdist(input, 'hamming') * M`. When \eqn{p = \infty}, the closest
-#'     scipy function is `scipy.spatial.distance.cdist(xn, lambda x, y: np.abs(x - y).max())`.
-#' 
-#'     Example:
-#' 
-#'         >>> a = torch.tensor([[0.9041,  0.0196], [-0.3108, -2.4423], [-0.4821,  1.059]])
-#'         >>> a
-#'         tensor([[ 0.9041,  0.0196],
-#'                 [-0.3108, -2.4423],
-#'                 [-0.4821,  1.0590]])
-#'         >>> b = torch.tensor([[-2.1763, -0.4713], [-0.6986,  1.3702]])
-#'         >>> b
-#'         tensor([[-2.1763, -0.4713],
-#'                 [-0.6986,  1.3702]])
-#'         >>> torch.cdist(a, b, p=2)
-#'         tensor([[3.1193, 2.0959],
-#'                 [2.7138, 3.8322],
-#'                 [2.2830, 0.3791]])
 #'
 #' 
 #'
-#'
+#' @param x1 (Tensor) input tensor of shape \eqn{B \times P \times M}.
+#' @param x2 (Tensor) input tensor of shape \eqn{B \times R \times M}.
+#' @param p NA p value for the p-norm distance to calculate between each vector pair        \eqn{\in [0, \infty]}.
+#' @param compute_mode NA 'use_mm_for_euclid_dist_if_necessary' - will use matrix multiplication approach to calculate        euclidean distance (p = 2) if P > 25 or R > 25        'use_mm_for_euclid_dist' - will always use matrix multiplication approach to calculate        euclidean distance (p = 2)        'donot_use_mm_for_euclid_dist' - will never use matrix multiplication approach to calculate        euclidean distance (p = 2)        Default: use_mm_for_euclid_dist_if_necessary.
 #'
 #' 
 #'
@@ -4162,7 +4084,7 @@ NULL
 #'     \text{out}_{i+1} = \text{out}_i + \text{step}.
 #' }
 #' @section Warning:
-#'     This function is deprecated in favor of :func:`torch_arange`.
+#'     This function is deprecated in favor of [`torch_arange`].
 #'
 #' @section Signatures:
 #' 
@@ -4254,7 +4176,7 @@ NULL
 #' 
 #' @section Warning:
 #' 
-#'     This is different from :func:`torch_repeat` but similar to `numpy.repeat`.
+#'     This is different from [`torch_repeat`] but similar to `numpy.repeat`.
 #'
 #' @section Signatures:
 #' 
@@ -4365,7 +4287,7 @@ NULL
 
 #' Rrelu_
 #'
-#' In-place version of :func:`~rrelu`.
+#' In-place version of [`~rrelu`].
 #'
 #' @section Signatures:
 #' 
@@ -4384,7 +4306,7 @@ NULL
 
 #' Relu_
 #'
-#' In-place version of :func:`~relu`.
+#' In-place version of [`~relu`].
 #'
 #' @section Signatures:
 #' 
@@ -4433,7 +4355,7 @@ NULL
 
 #' Selu_
 #'
-#' In-place version of :func:`~selu`.
+#' In-place version of [`~selu`].
 #'
 #' @section Signatures:
 #' 
@@ -4452,7 +4374,7 @@ NULL
 
 #' Celu_
 #'
-#' In-place version of :func:`~celu`.
+#' In-place version of [`~celu`].
 #'
 #' @section Signatures:
 #' 
@@ -4798,7 +4720,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #'
 #' @section Signatures:
@@ -4892,7 +4814,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #' 
 #' 
@@ -4960,7 +4882,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #' 
 #' 
@@ -5022,7 +4944,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in
 #' the output tensor having 1 fewer dimension than `input`.
 #'
 #' @section Signatures:
@@ -5146,48 +5068,12 @@ NULL
 #' Returns a contraction of a and b over multiple dimensions.
 #' 
 #'     `tensordot` implements a generalized matrix product.
-#' 
-#'     Args:
-#'       a (Tensor): Left tensor to contract
-#'       b (Tensor): Right tensor to contract
-#'       dims (int or tuple of two lists of integers): number of dimensions to
-#'          contract or explicit lists of dimensions for `a` and
-#'          `b` respectively
-#' 
-#'     When called with an integer argument `dims` = \eqn{d}, and the number of
-#'     dimensions of `a` and `b` is \eqn{m} and \eqn{n}, respectively,
-#'     it computes
-#' 
-#' \deqn{
-#'         r_{i_0,...,i_{m-d}, i_d,...,i_n}
-#'           = \sum_{k_0,...,k_{d-1}} a_{i_0,...,i_{m-d},k_0,...,k_{d-1}} \times b_{k_0,...,k_{d-1}, i_d,...,i_n}.
-#' }
-#'     When called with `dims` of the list form, the given dimensions will be contracted
-#'     in place of the last \eqn{d} of `a` and the first \eqn{d} of \eqn{b}. The sizes
-#'     in these dimensions must match, but `tensordot` will deal with broadcasted
-#'     dimensions.
-#' 
-#'     Examples::
-#' 
-#'         >>> a = torch.arange(60.).reshape(3, 4, 5)
-#'         >>> b = torch.arange(24.).reshape(4, 3, 2)
-#'         >>> torch.tensordot(a, b, dims=([1, 0], [0, 1]))
-#'         tensor([[4400., 4730.],
-#'                 [4532., 4874.],
-#'                 [4664., 5018.],
-#'                 [4796., 5162.],
-#'                 [4928., 5306.]])
-#' 
-#'         >>> a = torch.randn(3, 4, 5, device='cuda')
-#'         >>> b = torch.randn(4, 5, 6, device='cuda')
-#'         >>> c = torch.tensordot(a, b, dims=2).cpu()
-#'         tensor([[ 8.3504, -2.5436,  6.2922,  2.7556, -1.0732,  3.2741],
-#'                 [ 3.3161,  0.0704,  5.0187, -0.4079, -4.3126,  4.8744],
-#'                 [ 0.8223,  3.9445,  3.2168, -0.2400,  3.4117,  1.7780]])
 #'
 #' 
 #'
-#'
+#' @param a (Tensor) Left tensor to contract
+#' @param b (Tensor) Right tensor to contract
+#' @param dims (int or tuple of two lists of integers) number of dimensions to     contract or explicit lists of dimensions for :attr:`a` and     :attr:`b` respectively
 #'
 #' 
 #'
@@ -5199,7 +5085,7 @@ NULL
 
 #' Threshold_
 #'
-#' In-place version of :func:`~threshold`.
+#' In-place version of [`~threshold`].
 #'
 #' @section Signatures:
 #' 
@@ -5411,7 +5297,7 @@ NULL
 #'
 #' Eliminates all but the first element from every consecutive group of equivalent elements.
 #' 
-#'     .. note:: This function is different from :func:`torch_unique` in the sense that this function
+#'     .. note:: This function is different from [`torch_unique`] in the sense that this function
 #'         only eliminates consecutive duplicate values. This semantics is similar to `std::unique`
 #'         in C++.
 #'
@@ -5499,7 +5385,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #' 
 #' 
@@ -5566,7 +5452,7 @@ NULL
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
-#' Otherwise, `dim` is squeezed (see :func:`torch_squeeze`), resulting in the
+#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #' 
 #' 
@@ -5640,7 +5526,7 @@ NULL
 #' ``torch_nonzero(condition, as_tuple=True)``.
 #' 
 #' @note
-#'     See also :func:`torch_nonzero`.
+#'     See also [`torch_nonzero`].
 #'
 #' @section Signatures:
 #' 
@@ -5723,67 +5609,15 @@ NULL
 #' Norm
 #'
 #' Returns the matrix norm or vector norm of a given tensor.
-#' 
-#'     Args:
-#'         input (Tensor): the input tensor
-#'         p (int, float, inf, -inf, 'fro', 'nuc', optional): the order of norm. Default: ``'fro'``
-#'             The following norms can be calculated:
-#' 
-#'             =====  ============================  ==========================
-#'             ord    matrix norm                   vector norm
-#'             =====  ============================  ==========================
-#'             None   Frobenius norm                2-norm
-#'             'fro'  Frobenius norm                --
-#'             'nuc'  nuclear norm                  --
-#'             Other  as vec norm when dim is None  sum(abs(x)**ord)**(1./ord)
-#'             =====  ============================  ==========================
-#' 
-#'         dim (int, 2-tuple of ints, 2-list of ints, optional): If it is an int,
-#'             vector norm will be calculated, if it is 2-tuple of ints, matrix norm
-#'             will be calculated. If the value is None, matrix norm will be calculated
-#'             when the input tensor only has two dimensions, vector norm will be
-#'             calculated when the input tensor only has one dimension. If the input
-#'             tensor has more than two dimensions, the vector norm will be applied to
-#'             last dimension.
-#'         keepdim (bool, optional): whether the output tensors have `dim`
-#'             retained or not. Ignored if `dim` = ``None`` and
-#'             `out` = ``None``. Default: ``False``
-#'         out (Tensor, optional): the output tensor. Ignored if
-#'             `dim` = ``None`` and `out` = ``None``.
-#'         dtype (:class:`torch_dtype`, optional): the desired data type of
-#'             returned tensor. If specified, the input tensor is casted to
-#'             'dtype' while performing the operation. Default: None.
-#' 
-#' 
-#'     Example::
-#' 
-#'         >>> import torch
-#'         >>> a = torch.arange(9, dtype= torch.float) - 4
-#'         >>> b = a.reshape((3, 3))
-#'         >>> torch.norm(a)
-#'         tensor(7.7460)
-#'         >>> torch.norm(b)
-#'         tensor(7.7460)
-#'         >>> torch.norm(a, float('inf'))
-#'         tensor(4.)
-#'         >>> torch.norm(b, float('inf'))
-#'         tensor(4.)
-#'         >>> c = torch.tensor([[ 1, 2, 3],[-1, 1, 4]] , dtype= torch.float)
-#'         >>> torch.norm(c, dim=0)
-#'         tensor([1.4142, 2.2361, 5.0000])
-#'         >>> torch.norm(c, dim=1)
-#'         tensor([3.7417, 4.2426])
-#'         >>> torch.norm(c, p=1, dim=1)
-#'         tensor([6., 6.])
-#'         >>> d = torch.arange(8, dtype= torch.float).reshape(2,2,2)
-#'         >>> torch.norm(d, dim=(1,2))
-#'         tensor([ 3.7417, 11.2250])
-#'         >>> torch.norm(d[0, :, :]), torch.norm(d[1, :, :])
-#'         (tensor(3.7417), tensor(11.2250))
 #'
 #' 
 #'
-#'
+#' @param input (Tensor) the input tensor
+#' @param p (int, float, inf, -inf, 'fro', 'nuc', optional) the order of norm. Default: ``'fro'``        The following norms can be calculated:        =====  ============================  ==========================        ord    matrix norm                   vector norm        =====  ============================  ==========================        None   Frobenius norm                2-norm        'fro'  Frobenius norm                --        'nuc'  nuclear norm                  --        Other  as vec norm when dim is None  sum(abs(x)**ord)**(1./ord)        =====  ============================  ==========================
+#' @param dim (int, 2-tuple of ints, 2-list of ints, optional) If it is an int,        vector norm will be calculated, if it is 2-tuple of ints, matrix norm        will be calculated. If the value is None, matrix norm will be calculated        when the input tensor only has two dimensions, vector norm will be        calculated when the input tensor only has one dimension. If the input        tensor has more than two dimensions, the vector norm will be applied to        last dimension.
+#' @param keepdim (bool, optional) whether the output tensors have :attr:`dim`        retained or not. Ignored if :attr:`dim` = ``None`` and        :attr:`out` = ``None``. Default: ``False``
+#' @param out (Tensor, optional) the output tensor. Ignored if        :attr:`dim` = ``None`` and :attr:`out` = ``None``.
+#' @param dtype (:class:`torch.dtype`, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        :attr:'dtype' while performing the operation. Default: None.
 #'
 #' 
 #'
@@ -6041,34 +5875,11 @@ NULL
 #' Take \eqn{N} tensors, each of which can be either scalar or 1-dimensional
 #' vector, and create \eqn{N} N-dimensional grids, where the \eqn{i} :sup:`th` grid is defined by
 #' expanding the \eqn{i} :sup:`th` input over dimensions defined by other inputs.
-#' 
-#' 
-#'     Args:
-#'         tensors (list of Tensor): list of scalars or 1 dimensional tensors. Scalars will be
-#'         treated as tensors of size \eqn{(1,)} automatically
-#' 
-#'     Returns:
-#'         seq (sequence of Tensors): If the input has \eqn{k} tensors of size
-#'         \eqn{(N_1,), (N_2,), \ldots , (N_k,)}, then the output would also have \eqn{k} tensors,
-#'         where all tensors are of size \eqn{(N_1, N_2, \ldots , N_k)}.
-#' 
-#'     Example::
-#' 
-#'         >>> x = torch.tensor([1, 2, 3])
-#'         >>> y = torch.tensor([4, 5, 6])
-#'         >>> grid_x, grid_y = torch.meshgrid(x, y)
-#'         >>> grid_x
-#'         tensor([[1, 1, 1],
-#'                 [2, 2, 2],
-#'                 [3, 3, 3]])
-#'         >>> grid_y
-#'         tensor([[4, 5, 6],
-#'                 [4, 5, 6],
-#'                 [4, 5, 6]])
 #'
 #' 
 #'
-#'
+#' @param tensors (list of Tensor) list of scalars or 1 dimensional tensors. Scalars will be
+#' @param treated (1,) 
 #'
 #' 
 #'
@@ -6816,10 +6627,10 @@ NULL
 #' Nonzero
 #'
 #' @note
-#'     :func:`torch_nonzero(..., as_tuple=False) <torch.nonzero>` (default) returns a
+#'     [`torch_nonzero(..., as_tuple=False) <torch.nonzero>`] (default) returns a
 #'     2-D tensor where each row is the index for a nonzero value.
 #' 
-#'     :func:`torch_nonzero(..., as_tuple=True) <torch.nonzero>` returns a tuple of 1-D
+#'     [`torch_nonzero(..., as_tuple=True) <torch.nonzero>`] returns a tuple of 1-D
 #'     index tensors, allowing for advanced indexing, so ``x[x.nonzero(as_tuple=True)]``
 #'     gives all nonzero values of tensor ``x``. Of the returned tuple, each index tensor
 #'     contains nonzero indices for a certain dimension.
@@ -6998,22 +6809,22 @@ NULL
 #' rank matrix \eqn{A} of size \eqn{(m \times n)} and a matrix \eqn{B} of
 #' size \eqn{(m \times k)}.
 #' 
-#' If \eqn{m \geq n}, :func:`lstsq` solves the least-squares problem:
+#' If \eqn{m \geq n}, [`lstsq`] solves the least-squares problem:
 #' 
 #' \deqn{
-#' }
+#' 
 #'    \begin{array}{ll}
 #'    \min_X & \|AX-B\|_2.
 #'    \end{array}
-#' 
-#' If \eqn{m < n}, :func:`lstsq` solves the least-norm problem:
+#' }
+#' If \eqn{m < n}, [`lstsq`] solves the least-norm problem:
 #' 
 #' \deqn{
-#' }
+#' 
 #'    \begin{array}{ll}
 #'    \min_X & \|X\|_2 & \text{subject to} & AX = B.
 #'    \end{array}
-#' 
+#' }
 #' Returned tensor \eqn{X} has shape \eqn{(\max(m, n) \times k)}. The first \eqn{n}
 #' rows of \eqn{X} contains the solution. If \eqn{m \geq n}, the residual sum of squares
 #' for the solution in each column is given by the sum of squares of elements in the
@@ -7130,7 +6941,7 @@ NULL
 #' 
 #' @note
 #'     Since eigenvalues and eigenvectors might be complex, backward pass is supported only
-#'     for :func:`torch_symeig`
+#'     for [`torch_symeig`]
 #'
 #' @section Signatures:
 #' 
@@ -7225,16 +7036,16 @@ NULL
 #' the decomposition has the form:
 #' 
 #' \deqn{
-#' }
-#'   A = U^TU
 #' 
+#'   A = U^TU
+#' }
 #' If `upper` is ``False``, the returned matrix ``L`` is lower-triangular, and
 #' the decomposition has the form:
 #' 
 #' \deqn{
-#' }
-#'     A = LL^T
 #' 
+#'     A = LL^T
+#' }
 #' If `upper` is ``True``, and \eqn{A} is a batch of symmetric positive-definite
 #' matrices, then the returned tensor will be composed of upper-triangular Cholesky factors
 #' of each of the individual matrices. Similarly, when `upper` is ``False``, the returned
@@ -7462,7 +7273,7 @@ NULL
 #' This is a low-level function for calling LAPACK directly. This function
 #' returns a namedtuple (a, tau) as defined in `LAPACK documentation for geqrf`_ .
 #' 
-#' You'll generally want to use :func:`torch_qr` instead.
+#' You'll generally want to use [`torch_qr`] instead.
 #' 
 #' Computes a QR decomposition of `input`, but without constructing
 #' \eqn{Q} and \eqn{R} as explicit separate matrices.
@@ -7491,7 +7302,7 @@ NULL
 #' Orgqr
 #'
 #' Computes the orthogonal matrix `Q` of a QR factorization, from the `(input, input2)`
-#' tuple returned by :func:`torch_geqrf`.
+#' tuple returned by [`torch_geqrf`].
 #' 
 #' This directly calls the underlying LAPACK function `?orgqr`.
 #' See `LAPACK documentation for orgqr`_ for further details.
@@ -7515,7 +7326,7 @@ NULL
 #' Ormqr
 #'
 #' Multiplies `mat` (given by `input3`) by the orthogonal `Q` matrix of the QR factorization
-#' formed by :func:`torch_geqrf` that is represented by `(a, tau)` (given by (`input`, `input2`)).
+#' formed by [`torch_geqrf`] that is represented by `(a, tau)` (given by (`input`, `input2`)).
 #' 
 #' This directly calls the underlying LAPACK function `?ormqr`.
 #' See `LAPACK documentation for ormqr`_ for further details.

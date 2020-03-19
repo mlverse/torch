@@ -10,7 +10,7 @@
 }
 \description{
 Computes the orthogonal matrix \code{Q} of a QR factorization, from the \verb{(input, input2)}
-tuple returned by :func:\code{torch_geqrf}.
+tuple returned by \code{\link{torch_geqrf}}.
 }
 \details{
 This directly calls the underlying LAPACK function \code{?orgqr}.

@@ -36,7 +36,7 @@ arbitrary number of leading batch dimensions. If \code{normalized} is set to
 Returns the real and the imaginary parts together as one tensor of the same
 shape of \code{input}.
 
-The inverse of this function is :func:\code{~torch.ifft}.
+The inverse of this function is \code{\link{~torch.ifft}}.
 }
 \note{
 \preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -48,7 +48,7 @@ monitor and control the cache.
 \section{Warning}{
 
 For CPU tensors, this method is currently only available with MKL. Use
-:func:\code{torch_backends.mkl.is_available} to check if MKL is installed.
+\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
 
 \section{Signatures}{

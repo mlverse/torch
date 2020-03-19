@@ -12,10 +12,10 @@
 Nonzero
 }
 \note{
-\preformatted{:func:`torch_nonzero(..., as_tuple=False) <torch.nonzero>` (default) returns a
+\preformatted{[`torch_nonzero(..., as_tuple=False) <torch.nonzero>`] (default) returns a
 2-D tensor where each row is the index for a nonzero value.
 
-:func:`torch_nonzero(..., as_tuple=True) <torch.nonzero>` returns a tuple of 1-D
+[`torch_nonzero(..., as_tuple=True) <torch.nonzero>`] returns a tuple of 1-D
 index tensors, allowing for advanced indexing, so ``x[x.nonzero(as_tuple=True)]``
 gives all nonzero values of tensor ``x``. Of the returned tuple, each index tensor
 contains nonzero indices for a certain dimension.

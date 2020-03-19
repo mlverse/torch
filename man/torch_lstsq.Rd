@@ -16,22 +16,22 @@ rank matrix \eqn{A} of size \eqn{(m \times n)} and a matrix \eqn{B} of
 size \eqn{(m \times k)}.
 }
 \details{
-If \eqn{m \geq n}, :func:\code{lstsq} solves the least-squares problem:
+If \eqn{m \geq n}, \code{\link{lstsq}} solves the least-squares problem:
 
 \deqn{
-}
-\begin{array}{ll}
-\min_X & \|AX-B\|_2.
-\end{array}
 
-If \eqn{m < n}, :func:\code{lstsq} solves the least-norm problem:
+   \begin{array}{ll}
+   \min_X & \|AX-B\|_2.
+   \end{array}
+}
+If \eqn{m < n}, \code{\link{lstsq}} solves the least-norm problem:
 
 \deqn{
-}
-\begin{array}{ll}
-\min_X & \|X\|_2 & \text{subject to} & AX = B.
-\end{array}
 
+   \begin{array}{ll}
+   \min_X & \|X\|_2 & \text{subject to} & AX = B.
+   \end{array}
+}
 Returned tensor \eqn{X} has shape \eqn{(\max(m, n) \times k)}. The first \eqn{n}
 rows of \eqn{X} contains the solution. If \eqn{m \geq n}, the residual sum of squares
 for the solution in each column is given by the sum of squares of elements in the
