@@ -146,7 +146,7 @@ parse_math <- function(desc) {
   poss <- which(lines == "")
 
   if(length(poss) > 0) {
-    poss <- poss[poss > i[1]]
+    poss <- poss[poss > (i[1] + 1)]
   }
 
   if (length(poss) > 0)
