@@ -129,6 +129,7 @@ create_roxygen_params <- function(params) {
     return("#'")
 
   s <- sapply(params, function(x) {
+    x$desc <- inline_math(x$desc)
     glue::glue("#' @param {x$name} {x$type} {x$desc}")
   })
   str_c(s, collapse = "\n")
@@ -164,6 +165,10 @@ parse_math <- function(desc) {
     desc
 }
 
+inline_math <- function(x) {
+  str_replace_all(x, ":math:`([^`]+)`", "\\\\eqn{\\1}")
+}
+
 create_roxygen_desc <- function(desc) {
 
   if (desc == "" | is.null(desc))
@@ -171,7 +176,7 @@ create_roxygen_desc <- function(desc) {
 
   desc <- str_replace_all(desc, ":attr:", "")
   desc <- str_replace_all(desc, ":func:(`[^`]`)", "[\\1]")
-  desc <- str_replace_all(desc, ":math:`([^`]+)`", "\\\\eqn{\\1}")
+  desc <- inline_math(desc)
   desc <- str_replace_all(desc, "`torch\\.(.*)`", "`torch_\\1`")
   desc <- parse_math(desc)
   desc <- str_trim(desc)
