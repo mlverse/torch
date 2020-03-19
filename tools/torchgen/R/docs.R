@@ -176,6 +176,9 @@ create_roxygen_desc <- function(desc) {
   desc <- str_trim(desc)
 
   lines <- str_split(desc, "\n")[[1]]
+  lines <- str_replace_all(lines, "^.. note::", "@note")
+  lines <- str_replace_all(lines, "^.. warning::", "@section Warning:")
+
   str_c(str_c("#' ", lines), collapse = "\n")
 }
 
