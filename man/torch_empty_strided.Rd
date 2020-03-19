@@ -23,9 +23,9 @@ empty_strided(size, stride, dtype=None, layout=None, device=None, requires_grad=
 }
 \details{
 Returns a tensor filled with uninitialized data. The shape and strides of the tensor is
-defined by the variable argument :attr:\code{size} and :attr:\code{stride} respectively.
-\code{torch.empty_strided(size, stride)} is equivalent to
-\verb{torch.empty(size).as_strided(size, stride)}.
+defined by the variable argument \code{size} and \code{stride} respectively.
+\code{torch_empty_strided(size, stride)} is equivalent to
+\verb{torch_empty(size).as_strided(size, stride)}.
 
 .. warning::
 More than one element of the created tensor may refer to a single memory

@@ -17,22 +17,23 @@ cholesky(input, upper=False, out=None) -> Tensor
 Computes the Cholesky decomposition of a symmetric positive-definite
 matrix :math:\code{A} or for batches of symmetric positive-definite matrices.
 
-If :attr:\code{upper} is \code{True}, the returned matrix \code{U} is upper-triangular, and
+If \code{upper} is \code{True}, the returned matrix \code{U} is upper-triangular, and
 the decomposition has the form:
 
-.. math::
-
+\deqn{
+}
 A = U^TU
 
-If :attr:\code{upper} is \code{False}, the returned matrix \code{L} is lower-triangular, and
+If \code{upper} is \code{False}, the returned matrix \code{L} is lower-triangular, and
 the decomposition has the form:
 
-.. math::\preformatted{A = LL^T
+\deqn{
 }
+A = LL^T
 
-If :attr:\code{upper} is \code{True}, and :math:\code{A} is a batch of symmetric positive-definite
+If \code{upper} is \code{True}, and :math:\code{A} is a batch of symmetric positive-definite
 matrices, then the returned tensor will be composed of upper-triangular Cholesky factors
-of each of the individual matrices. Similarly, when :attr:\code{upper} is \code{False}, the returned
+of each of the individual matrices. Similarly, when \code{upper} is \code{False}, the returned
 tensor will be composed of lower-triangular Cholesky factors of each of the individual
 matrices.
 }

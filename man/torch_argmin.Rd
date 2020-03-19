@@ -16,14 +16,14 @@ argmin(input) -> LongTensor
 argmin(input, dim, keepdim=False, out=None) -> LongTensor
 }
 \details{
-Returns the indices of the minimum value of all elements in the :attr:\code{input} tensor.
+Returns the indices of the minimum value of all elements in the \code{input} tensor.
 
-This is the second value returned by :meth:\code{torch.min}. See its
+This is the second value returned by :meth:\code{torch_min}. See its
 documentation for the exact semantics of this method.
 
 Returns the indices of the minimum values of a tensor across a dimension.
 
-This is the second value returned by :meth:\code{torch.min}. See its
+This is the second value returned by :meth:\code{torch_min}. See its
 documentation for the exact semantics of this method.
 }
 \examples{

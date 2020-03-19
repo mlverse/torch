@@ -12,10 +12,11 @@
 lgamma(input, out=None) -> Tensor
 }
 \details{
-Computes the logarithm of the gamma function on :attr:\code{input}.
+Computes the logarithm of the gamma function on \code{input}.
 
-.. math::
-\text{out}\emph{{i} = \log \Gamma(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = \log \Gamma(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

@@ -17,5 +17,5 @@ chunk(input, chunks, dim=0) -> List of Tensors
 Splits a tensor into a specific number of chunks.
 
 Last chunk will be smaller if the tensor size along the given dimension
-:attr:\code{dim} is not divisible by :attr:\code{chunks}.
+\code{dim} is not divisible by \code{chunks}.
 }

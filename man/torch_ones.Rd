@@ -21,7 +21,7 @@ ones(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_gr
 }
 \details{
 Returns a tensor filled with the scalar value \code{1}, with the shape defined
-by the variable argument :attr:\code{size}.
+by the variable argument \code{size}.
 }
 \examples{
 \dontrun{

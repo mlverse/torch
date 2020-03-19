@@ -22,20 +22,20 @@ blackman_window(window_length, periodic=True, dtype=None, layout=torch.strided, 
 \details{
 Blackman window function.
 
-.. math::
-w\link{n} = 0.42 - 0.5 \cos \left( \frac{2 \pi n}{N - 1} \right) + 0.08 \cos \left( \frac{4 \pi n}{N - 1} \right)
-
+\deqn{
+    w[n] = 0.42 - 0.5 \cos \left( \frac{2 \pi n}{N - 1} \right) + 0.08 \cos \left( \frac{4 \pi n}{N - 1} \right)
+}
 where :math:\code{N} is the full window size.
 
-The input :attr:\code{window_length} is a positive integer controlling the
-returned window size. :attr:\code{periodic} flag determines whether the returned
+The input \code{window_length} is a positive integer controlling the
+returned window size. \code{periodic} flag determines whether the returned
 window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
-:meth:\code{torch.stft}. Therefore, if :attr:\code{periodic} is true, the :math:\code{N} in
+:meth:\code{torch_stft}. Therefore, if \code{periodic} is true, the :math:\code{N} in
 above formula is in fact :math:\verb{\\text\{window\\_length\} + 1}. Also, we always have
-\code{torch.blackman_window(L, periodic=True)} equal to
-\verb{torch.blackman_window(L + 1, periodic=False)[:-1])}.
+\code{torch_blackman_window(L, periodic=True)} equal to
+\verb{torch_blackman_window(L + 1, periodic=False)[:-1])}.
 
 .. note::
-If :attr:\code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
+If \code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
 }

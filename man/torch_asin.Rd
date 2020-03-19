@@ -12,10 +12,11 @@
 asin(input, out=None) -> Tensor
 }
 \details{
-Returns a new tensor with the arcsine  of the elements of :attr:\code{input}.
+Returns a new tensor with the arcsine  of the elements of \code{input}.
 
-.. math::
-\text{out}\emph{{i} = \sin^{-1}(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = \sin^{-1}(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

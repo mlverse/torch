@@ -26,14 +26,15 @@ arange(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=
 \details{
 Returns a 1-D tensor of size :math:\verb{\\left\\lceil \\frac\{\\text\{end\} - \\text\{start\}\}\{\\text\{step\}\} \\right\\rceil}
 with values from the interval \verb{[start, end)} taken with common difference
-:attr:\code{step} beginning from \code{start}.
+\code{step} beginning from \code{start}.
 
-Note that non-integer :attr:\code{step} is subject to floating point rounding errors when
-comparing against :attr:\code{end}; to avoid inconsistency, we advise adding a small epsilon to :attr:\code{end}
+Note that non-integer \code{step} is subject to floating point rounding errors when
+comparing against \code{end}; to avoid inconsistency, we advise adding a small epsilon to \code{end}
 in such cases.
 
-.. math::
-\text{out}\emph{{{i+1}} = \text{out}}{i} + \text{step}
+\deqn{
+    \text{out}_{{i+1}} = \text{out}_{i} + \text{step}
+}
 }
 \examples{
 \dontrun{

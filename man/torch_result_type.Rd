@@ -12,7 +12,7 @@
 result_type(tensor1, tensor2) -> dtype
 }
 \details{
-Returns the :class:\code{torch.dtype} that would result from performing an arithmetic
+Returns the :class:\code{torch_dtype} that would result from performing an arithmetic
 operation on the provided input tensors. See type promotion :ref:\verb{documentation <type-promotion-doc>}
 for more information on the type promotion logic.
 }

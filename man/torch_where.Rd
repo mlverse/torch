@@ -16,24 +16,24 @@ where(condition, x, y) -> Tensor
 where(condition) -> tuple of LongTensor
 }
 \details{
-Return a tensor of elements selected from either :attr:\code{x} or :attr:\code{y}, depending on :attr:\code{condition}.
+Return a tensor of elements selected from either \code{x} or \code{y}, depending on \code{condition}.
 
 The operation is defined as:
 
-.. math::
-\text{out}_i = \begin{cases}
-\text{x}_i & \text{if } \text{condition}_i \\
-\text{y}_i & \text{otherwise} \\
-\end{cases}
+\deqn{
+    \text{out}_i = \begin{cases}
+        \text{x}_i & \text{if } \text{condition}_i \\
+        \text{y}_i & \text{otherwise} \\
+    \end{cases}
+}
+.. note::
+The tensors \code{condition}, \code{x}, \code{y} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
+
+\code{torch_where(condition)} is identical to
+\code{torch_nonzero(condition, as_tuple=True)}.
 
 .. note::
-The tensors :attr:\code{condition}, :attr:\code{x}, :attr:\code{y} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
-
-\code{torch.where(condition)} is identical to
-\code{torch.nonzero(condition, as_tuple=True)}.
-
-.. note::
-See also :func:\code{torch.nonzero}.
+See also \code{\link{torch_nonzero}}.
 }
 \examples{
 \dontrun{

@@ -16,22 +16,22 @@ bernoulli(input, *, generator=None, out=None) -> Tensor
 \details{
 Draws binary random numbers (0 or 1) from a Bernoulli distribution.
 
-The :attr:\code{input} tensor should be a tensor containing probabilities
+The \code{input} tensor should be a tensor containing probabilities
 to be used for drawing the binary random number.
-Hence, all values in :attr:\code{input} have to be in the range:
+Hence, all values in \code{input} have to be in the range:
 :math:\verb{0 \\leq \\text\{input\}_i \\leq 1}.
 
 The :math:\verb{\\text\{i\}^\{th\}} element of the output tensor will draw a
 value :math:\code{1} according to the :math:\verb{\\text\{i\}^\{th\}} probability value given
-in :attr:\code{input}.
+in \code{input}.
 
-.. math::
-\text{out}\emph{{i} \sim \mathrm{Bernoulli}(p = \text{input}}{i})
+\deqn{
+    \text{out}_{i} \sim \mathrm{Bernoulli}(p = \text{input}_{i})
+}
+The returned \code{out} tensor only has values 0 or 1 and is of the same
+shape as \code{input}.
 
-The returned :attr:\code{out} tensor only has values 0 or 1 and is of the same
-shape as :attr:\code{input}.
-
-:attr:\code{out} can have integral \code{dtype}, but :attr:\code{input} must have floating
+\code{out} can have integral \code{dtype}, but \code{input} must have floating
 point \code{dtype}.
 }
 \examples{

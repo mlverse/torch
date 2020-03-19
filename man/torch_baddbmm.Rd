@@ -20,25 +20,25 @@
 baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
 }
 \details{
-Performs a batch matrix-matrix product of matrices in :attr:\code{batch1}
-and :attr:\code{batch2}.
-:attr:\code{input} is added to the final result.
+Performs a batch matrix-matrix product of matrices in \code{batch1}
+and \code{batch2}.
+\code{input} is added to the final result.
 
-:attr:\code{batch1} and :attr:\code{batch2} must be 3-D tensors each containing the same
+\code{batch1} and \code{batch2} must be 3-D tensors each containing the same
 number of matrices.
 
-If :attr:\code{batch1} is a :math:\verb{(b \\times n \\times m)} tensor, :attr:\code{batch2} is a
-:math:\verb{(b \\times m \\times p)} tensor, then :attr:\code{input} must be
+If \code{batch1} is a :math:\verb{(b \\times n \\times m)} tensor, \code{batch2} is a
+:math:\verb{(b \\times m \\times p)} tensor, then \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a
-:math:\verb{(b \\times n \\times p)} tensor and :attr:\code{out} will be a
-:math:\verb{(b \\times n \\times p)} tensor. Both :attr:\code{alpha} and :attr:\code{beta} mean the
-same as the scaling factors used in :meth:\code{torch.addbmm}.
+:math:\verb{(b \\times n \\times p)} tensor and \code{out} will be a
+:math:\verb{(b \\times n \\times p)} tensor. Both \code{alpha} and \code{beta} mean the
+same as the scaling factors used in :meth:\code{torch_addbmm}.
 
-.. math::
-\text{out}_i = \beta\ \text{input}_i + \alpha\ (\text{batch1}_i \mathbin{@} \text{batch2}_i)
-
-For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and
-:attr:\code{alpha} must be real numbers, otherwise they should be integers.
+\deqn{
+    \text{out}_i = \beta\ \text{input}_i + \alpha\ (\text{batch1}_i \mathbin{@} \text{batch2}_i)
+}
+For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
+\code{alpha} must be real numbers, otherwise they should be integers.
 }
 \examples{
 \dontrun{

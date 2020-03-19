@@ -17,24 +17,24 @@ symeig(input, eigenvectors=False, upper=True, out=None) -> (Tensor, Tensor)
 }
 \details{
 This function returns eigenvalues and eigenvectors
-of a real symmetric matrix :attr:\code{input} or a batch of real symmetric matrices,
+of a real symmetric matrix \code{input} or a batch of real symmetric matrices,
 represented by a namedtuple (eigenvalues, eigenvectors).
 
-This function calculates all eigenvalues (and vectors) of :attr:\code{input}
+This function calculates all eigenvalues (and vectors) of \code{input}
 such that :math:\verb{\\text\{input\} = V \\text\{diag\}(e) V^T}.
 
-The boolean argument :attr:\code{eigenvectors} defines computation of
+The boolean argument \code{eigenvectors} defines computation of
 both eigenvectors and eigenvalues or eigenvalues only.
 
 If it is \code{False}, only eigenvalues are computed. If it is \code{True},
 both eigenvalues and eigenvectors are computed.
 
-Since the input matrix :attr:\code{input} is supposed to be symmetric,
+Since the input matrix \code{input} is supposed to be symmetric,
 only the upper triangular portion is used by default.
 
-If :attr:\code{upper} is \code{False}, then lower triangular portion is used.
+If \code{upper} is \code{False}, then lower triangular portion is used.
 
-.. note:: The eigenvalues are returned in ascending order. If :attr:\code{input} is a batch of matrices,
+.. note:: The eigenvalues are returned in ascending order. If \code{input} is a batch of matrices,
 then the eigenvalues of each matrix in the batch is returned in ascending order.
 
 .. note:: Irrespective of the original strides, the returned matrix \code{V} will

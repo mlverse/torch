@@ -7,14 +7,14 @@
 Splits the tensor into chunks.
 }
 \details{
-\preformatted{If :attr:`split_size_or_sections` is an integer type, then :attr:`tensor` will
+\preformatted{If `split_size_or_sections` is an integer type, then `tensor` will
 be split into equally sized chunks (if possible). Last chunk will be smaller if
-the tensor size along the given dimension :attr:`dim` is not divisible by
-:attr:`split_size`.
+the tensor size along the given dimension `dim` is not divisible by
+`split_size`.
 
-If :attr:`split_size_or_sections` is a list, then :attr:`tensor` will be split
-into ``len(split_size_or_sections)`` chunks with sizes in :attr:`dim` according
-to :attr:`split_size_or_sections`.
+If `split_size_or_sections` is a list, then `tensor` will be split
+into ``len(split_size_or_sections)`` chunks with sizes in `dim` according
+to `split_size_or_sections`.
 
 Arguments:
     tensor (Tensor): tensor to split.

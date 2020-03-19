@@ -13,10 +13,11 @@ cosh(input, out=None) -> Tensor
 }
 \details{
 Returns a new tensor with the hyperbolic cosine  of the elements of
-:attr:\code{input}.
+\code{input}.
 
-.. math::
-\text{out}\emph{{i} = \cosh(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = \cosh(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

@@ -28,14 +28,14 @@ Returns the matrix norm or vector norm of a given tensor.
         calculated when the input tensor only has one dimension. If the input
         tensor has more than two dimensions, the vector norm will be applied to
         last dimension.
-    keepdim (bool, optional): whether the output tensors have :attr:`dim`
-        retained or not. Ignored if :attr:`dim` = ``None`` and
-        :attr:`out` = ``None``. Default: ``False``
+    keepdim (bool, optional): whether the output tensors have `dim`
+        retained or not. Ignored if `dim` = ``None`` and
+        `out` = ``None``. Default: ``False``
     out (Tensor, optional): the output tensor. Ignored if
-        :attr:`dim` = ``None`` and :attr:`out` = ``None``.
-    dtype (:class:`torch.dtype`, optional): the desired data type of
+        `dim` = ``None`` and `out` = ``None``.
+    dtype (:class:`torch_dtype`, optional): the desired data type of
         returned tensor. If specified, the input tensor is casted to
-        :attr:'dtype' while performing the operation. Default: None.
+        'dtype' while performing the operation. Default: None.
 
 
 Example::

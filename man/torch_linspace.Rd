@@ -24,10 +24,10 @@
 linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
 }
 \details{
-Returns a one-dimensional tensor of :attr:\code{steps}
-equally spaced points between :attr:\code{start} and :attr:\code{end}.
+Returns a one-dimensional tensor of \code{steps}
+equally spaced points between \code{start} and \code{end}.
 
-The output tensor is 1-D of size :attr:\code{steps}.
+The output tensor is 1-D of size \code{steps}.
 }
 \examples{
 \dontrun{

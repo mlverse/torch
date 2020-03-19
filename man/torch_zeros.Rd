@@ -21,7 +21,7 @@ zeros(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_g
 }
 \details{
 Returns a tensor filled with the scalar value \code{0}, with the shape defined
-by the variable argument :attr:\code{size}.
+by the variable argument \code{size}.
 }
 \examples{
 \dontrun{

@@ -7,5 +7,5 @@
 threshold_(input, threshold, value) -> Tensor
 }
 \details{
-In-place version of :func:\code{~threshold}.
+In-place version of \code{\link{~threshold}}.
 }

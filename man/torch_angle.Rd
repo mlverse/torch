@@ -12,10 +12,11 @@
 angle(input, out=None) -> Tensor
 }
 \details{
-Computes the element-wise angle (in radians) of the given :attr:\code{input} tensor.
+Computes the element-wise angle (in radians) of the given \code{input} tensor.
 
-.. math::
-\text{out}\emph{{i} = angle(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = angle(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

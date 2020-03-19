@@ -23,7 +23,7 @@ empty(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_g
 }
 \details{
 Returns a tensor filled with uninitialized data. The shape of the tensor is
-defined by the variable argument :attr:\code{size}.
+defined by the variable argument \code{size}.
 }
 \examples{
 \dontrun{

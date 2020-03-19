@@ -27,13 +27,13 @@ randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch
 }
 \details{
 Returns a tensor filled with random integers generated uniformly
-between :attr:\code{low} (inclusive) and :attr:\code{high} (exclusive).
+between \code{low} (inclusive) and \code{high} (exclusive).
 
-The shape of the tensor is defined by the variable argument :attr:\code{size}.
+The shape of the tensor is defined by the variable argument \code{size}.
 
 .. note:
-With the global dtype default (\code{torch.float32}), this function returns
-a tensor with dtype \code{torch.int64}.
+With the global dtype default (\code{torch_float32}), this function returns
+a tensor with dtype \code{torch_int64}.
 }
 \examples{
 \dontrun{

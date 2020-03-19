@@ -13,10 +13,11 @@ exp(input, out=None) -> Tensor
 }
 \details{
 Returns a new tensor with the exponential of the elements
-of the input tensor :attr:\code{input}.
+of the input tensor \code{input}.
 
-.. math::
-y_{i} = e^{x_{i}}
+\deqn{
+    y_{i} = e^{x_{i}}
+}
 }
 \examples{
 \dontrun{

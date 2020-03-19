@@ -17,43 +17,43 @@ expression:
 
 where :math:`m` is the index of the sliding window, and :math:`\\omega` is
 the frequency that :math:`0 \\leq \\omega < \\text\{n\\_fft\}`. When
-:attr:`onesided` is the default value ``True``,
+`onesided` is the default value ``True``,
 
-* :attr:`input` must be either a 1-D time sequence or a 2-D batch of time
+* `input` must be either a 1-D time sequence or a 2-D batch of time
   sequences.
 
-* If :attr:`hop_length` is ``None`` (default), it is treated as equal to
+* If `hop_length` is ``None`` (default), it is treated as equal to
   ``floor(n_fft / 4)``.
 
-* If :attr:`win_length` is ``None`` (default), it is treated as equal to
-  :attr:`n_fft`.
+* If `win_length` is ``None`` (default), it is treated as equal to
+  `n_fft`.
 
-* :attr:`window` can be a 1-D tensor of size :attr:`win_length`, e.g., from
-  :meth:`torch.hann_window`. If :attr:`window` is ``None`` (default), it is
+* `window` can be a 1-D tensor of size `win_length`, e.g., from
+  :meth:`torch_hann_window`. If `window` is ``None`` (default), it is
   treated as if having :math:`1` everywhere in the window. If
-  :math:`\\text\{win\\_length\} < \\text\{n\\_fft\}`, :attr:`window` will be padded on
-  both sides to length :attr:`n_fft` before being applied.
+  :math:`\\text\{win\\_length\} < \\text\{n\\_fft\}`, `window` will be padded on
+  both sides to length `n_fft` before being applied.
 
-* If :attr:`center` is ``True`` (default), :attr:`input` will be padded on
+* If `center` is ``True`` (default), `input` will be padded on
   both sides so that the :math:`t`-th frame is centered at time
   :math:`t \\times \\text\{hop\\_length\}`. Otherwise, the :math:`t`-th frame
   begins at time  :math:`t \\times \\text\{hop\\_length\}`.
 
-* :attr:`pad_mode` determines the padding method used on :attr:`input` when
-  :attr:`center` is ``True``. See :meth:`torch.nn.functional.pad` for
+* `pad_mode` determines the padding method used on `input` when
+  `center` is ``True``. See :meth:`torch_nn.functional.pad` for
   all available options. Default is ``"reflect"``.
 
-* If :attr:`onesided` is ``True`` (default), only values for :math:`\\omega`
+* If `onesided` is ``True`` (default), only values for :math:`\\omega`
   in :math:`\\left[0, 1, 2, \\dots, \\left\\lfloor \\frac\{\\text\{n\\_fft\}\}\{2\} \\right\\rfloor + 1\\right]`
   are returned because the real-to-complex Fourier transform satisfies the
   conjugate symmetry, i.e., :math:`X[m, \\omega] = X[m, \\text\{n\\_fft\} - \\omega]^*`.
 
-* If :attr:`normalized` is ``True`` (default is ``False``), the function
+* If `normalized` is ``True`` (default is ``False``), the function
   returns the normalized STFT results, i.e., multiplied by :math:`(\\text\{frame\\_length\})^\{-0.5\}`.
 
 Returns the real and the imaginary parts together as one tensor of size
 :math:`(* \\times N \\times T \\times 2)`, where :math:`*` is the optional
-batch size of :attr:`input`, :math:`N` is the number of frequencies where
+batch size of `input`, :math:`N` is the number of frequencies where
 STFT is applied, :math:`T` is the total number of frames used, and each pair
 in the last dimension represents a complex number as the real part and the
 imaginary part.
@@ -68,14 +68,14 @@ Arguments:
     hop_length (int, optional): the distance between neighboring sliding window
         frames. Default: ``None`` (treated as equal to ``floor(n_fft / 4)``)
     win_length (int, optional): the size of window frame and STFT filter.
-        Default: ``None``  (treated as equal to :attr:`n_fft`)
+        Default: ``None``  (treated as equal to `n_fft`)
     window (Tensor, optional): the optional window function.
         Default: ``None`` (treated as window of all :math:`1` s)
-    center (bool, optional): whether to pad :attr:`input` on both sides so
+    center (bool, optional): whether to pad `input` on both sides so
         that the :math:`t`-th frame is centered at time :math:`t \\times \\text\{hop\\_length\}`.
         Default: ``True``
     pad_mode (string, optional): controls the padding method used when
-        :attr:`center` is ``True``. Default: ``"reflect"``
+        `center` is ``True``. Default: ``"reflect"``
     normalized (bool, optional): controls whether to return the normalized STFT results
          Default: ``False``
     onesided (bool, optional): controls whether to return half of results to

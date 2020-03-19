@@ -13,7 +13,7 @@ trunc(input, out=None) -> Tensor
 }
 \details{
 Returns a new tensor with the truncated integer values of
-the elements of :attr:\code{input}.
+the elements of \code{input}.
 }
 \examples{
 \dontrun{

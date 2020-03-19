@@ -22,21 +22,21 @@ hann_window(window_length, periodic=True, dtype=None, layout=torch.strided, devi
 \details{
 Hann window function.
 
-.. math::
-w\link{n} = \frac{1}{2}\ \left\link[=1 - \\cos \\left( \\frac{2 \\pi n}{N - 1} \\right)\\right]{1 - \cos \left( \frac{2 \pi n}{N - 1} \right)\right} =
-\sin^2 \left( \frac{\pi n}{N - 1} \right),
-
+\deqn{
+    w[n] = \frac{1}{2}\ \left[1 - \cos \left( \frac{2 \pi n}{N - 1} \right)\right] =
+            \sin^2 \left( \frac{\pi n}{N - 1} \right),
+}
 where :math:\code{N} is the full window size.
 
-The input :attr:\code{window_length} is a positive integer controlling the
-returned window size. :attr:\code{periodic} flag determines whether the returned
+The input \code{window_length} is a positive integer controlling the
+returned window size. \code{periodic} flag determines whether the returned
 window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
-:meth:\code{torch.stft}. Therefore, if :attr:\code{periodic} is true, the :math:\code{N} in
+:meth:\code{torch_stft}. Therefore, if \code{periodic} is true, the :math:\code{N} in
 above formula is in fact :math:\verb{\\text\{window\\_length\} + 1}. Also, we always have
-\code{torch.hann_window(L, periodic=True)} equal to
-\verb{torch.hann_window(L + 1, periodic=False)[:-1])}.
+\code{torch_hann_window(L, periodic=True)} equal to
+\verb{torch_hann_window(L + 1, periodic=False)[:-1])}.
 
 .. note::
-If :attr:\code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
+If \code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
 }

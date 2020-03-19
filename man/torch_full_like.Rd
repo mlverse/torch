@@ -20,7 +20,7 @@
 full_like(input, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
 }
 \details{
-Returns a tensor with the same size as :attr:\code{input} filled with :attr:\code{fill_value}.
-\code{torch.full_like(input, fill_value)} is equivalent to
-\code{torch.full(input.size(), fill_value, dtype=input.dtype, layout=input.layout, device=input.device)}.
+Returns a tensor with the same size as \code{input} filled with \code{fill_value}.
+\code{torch_full_like(input, fill_value)} is equivalent to
+\code{torch_full(input.size(), fill_value, dtype=input.dtype, layout=input.layout, device=input.device)}.
 }

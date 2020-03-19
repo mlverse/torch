@@ -16,14 +16,15 @@
 cumprod(input, dim, out=None, dtype=None) -> Tensor
 }
 \details{
-Returns the cumulative product of elements of :attr:\code{input} in the dimension
-:attr:\code{dim}.
+Returns the cumulative product of elements of \code{input} in the dimension
+\code{dim}.
 
-For example, if :attr:\code{input} is a vector of size N, the result will also be
+For example, if \code{input} is a vector of size N, the result will also be
 a vector of size N, with elements.
 
-.. math::
-y_i = x_1 \times x_2\times x_3\times \dots \times x_i
+\deqn{
+    y_i = x_1 \times x_2\times x_3\times \dots \times x_i
+}
 }
 \examples{
 \dontrun{

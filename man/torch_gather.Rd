@@ -25,11 +25,11 @@ out[i][j][k] = input[i][index[i][j][k]][k]  # if dim == 1
 out[i][j][k] = input[i][j][index[i][j][k]]  # if dim == 2
 }
 
-If :attr:\code{input} is an n-dimensional tensor with size
+If \code{input} is an n-dimensional tensor with size
 :math:\verb{(x_0, x_1..., x_\{i-1\}, x_i, x_\{i+1\}, ..., x_\{n-1\})}
-and \code{dim = i}, then :attr:\code{index} must be an :math:\code{n}-dimensional tensor with
+and \code{dim = i}, then \code{index} must be an :math:\code{n}-dimensional tensor with
 size :math:\verb{(x_0, x_1, ..., x_\{i-1\}, y, x_\{i+1\}, ..., x_\{n-1\})} where :math:\verb{y \\geq 1}
-and :attr:\code{out} will have the same size as :attr:\code{index}.
+and \code{out} will have the same size as \code{index}.
 }
 \examples{
 \dontrun{

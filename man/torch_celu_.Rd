@@ -7,5 +7,5 @@
 celu_(input, alpha=1.) -> Tensor
 }
 \details{
-In-place version of :func:\code{~celu}.
+In-place version of \code{\link{~celu}}.
 }

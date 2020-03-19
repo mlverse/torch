@@ -19,26 +19,26 @@ Complex-to-complex Discrete Fourier Transform
 This method computes the complex-to-complex discrete Fourier transform.
 Ignoring the batch dimensions, it computes the following expression:
 
-.. math::
-X\link[=\\omega_1, \\dots, \\omega_d]{\omega_1, \dots, \omega_d} =
-\sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x\link[=n_1, \\dots, n_d]{n_1, \dots, n_d}
-e^{-j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
-
-where :math:\code{d} = :attr:\code{signal_ndim} is number of dimensions for the
+\deqn{
+    X[\omega_1, \dots, \omega_d] =
+        \sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x[n_1, \dots, n_d]
+         e^{-j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
+}
+where :math:\code{d} = \code{signal_ndim} is number of dimensions for the
 signal, and :math:\code{N_i} is the size of signal dimension :math:\code{i}.
 
 This method supports 1D, 2D and 3D complex-to-complex transforms, indicated
-by :attr:\code{signal_ndim}. :attr:\code{input} must be a tensor with last dimension
+by \code{signal_ndim}. \code{input} must be a tensor with last dimension
 of size 2, representing the real and imaginary components of complex
 numbers, and should have at least \code{signal_ndim + 1} dimensions with optionally
-arbitrary number of leading batch dimensions. If :attr:\code{normalized} is set to
+arbitrary number of leading batch dimensions. If \code{normalized} is set to
 \code{True}, this normalizes the result by dividing it with
 :math:\verb{\\sqrt\{\\prod_\{i=1\}^K N_i\}} so that the operator is unitary.
 
 Returns the real and the imaginary parts together as one tensor of the same
-shape of :attr:\code{input}.
+shape of \code{input}.
 
-The inverse of this function is :func:\code{~torch.ifft}.
+The inverse of this function is \code{\link{~torch.ifft}}.
 
 .. note::
 For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -48,7 +48,7 @@ monitor and control the cache.
 
 .. warning::
 For CPU tensors, this method is currently only available with MKL. Use
-:func:\code{torch.backends.mkl.is_available} to check if MKL is installed.
+\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
 \examples{
 \dontrun{

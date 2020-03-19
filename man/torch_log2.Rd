@@ -13,10 +13,11 @@ log2(input, out=None) -> Tensor
 }
 \details{
 Returns a new tensor with the logarithm to the base 2 of the elements
-of :attr:\code{input}.
+of \code{input}.
 
-.. math::
-y_{i} = \log_{2} (x_{i})
+\deqn{
+    y_{i} = \log_{2} (x_{i})
+}
 }
 \examples{
 \dontrun{

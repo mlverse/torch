@@ -17,26 +17,26 @@ diag_embed(input, offset=0, dim1=-2, dim2=-1) -> Tensor
 }
 \details{
 Creates a tensor whose diagonals of certain 2D planes (specified by
-:attr:\code{dim1} and :attr:\code{dim2}) are filled by :attr:\code{input}.
+\code{dim1} and \code{dim2}) are filled by \code{input}.
 To facilitate creating batched diagonal matrices, the 2D planes formed by
 the last two dimensions of the returned tensor are chosen by default.
 
-The argument :attr:\code{offset} controls which diagonal to consider:
+The argument \code{offset} controls which diagonal to consider:
 \itemize{
-\item If :attr:\code{offset} = 0, it is the main diagonal.
-\item If :attr:\code{offset} > 0, it is above the main diagonal.
-\item If :attr:\code{offset} < 0, it is below the main diagonal.
+\item If \code{offset} = 0, it is the main diagonal.
+\item If \code{offset} > 0, it is above the main diagonal.
+\item If \code{offset} < 0, it is below the main diagonal.
 }
 
 The size of the new matrix will be calculated to make the specified diagonal
 of the size of the last input dimension.
-Note that for :attr:\code{offset} other than :math:\code{0}, the order of :attr:\code{dim1}
-and :attr:\code{dim2} matters. Exchanging them is equivalent to changing the
-sign of :attr:\code{offset}.
+Note that for \code{offset} other than :math:\code{0}, the order of \code{dim1}
+and \code{dim2} matters. Exchanging them is equivalent to changing the
+sign of \code{offset}.
 
-Applying :meth:\code{torch.diagonal} to the output of this function with
+Applying :meth:\code{torch_diagonal} to the output of this function with
 the same arguments yields a matrix identical to input. However,
-:meth:\code{torch.diagonal} has different default dimensions, so those
+:meth:\code{torch_diagonal} has different default dimensions, so those
 need to be explicitly specified.
 }
 \examples{

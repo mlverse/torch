@@ -24,27 +24,27 @@ max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
 max(input, other, out=None) -> Tensor
 }
 \details{
-Returns the maximum value of all elements in the :attr:\code{input} tensor.
+Returns the maximum value of all elements in the \code{input} tensor.
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the maximum
-value of each row of the :attr:\code{input} tensor in the given dimension
-:attr:\code{dim}. And \code{indices} is the index location of each maximum value found
+value of each row of the \code{input} tensor in the given dimension
+\code{dim}. And \code{indices} is the index location of each maximum value found
 (argmax).
 
-If :attr:\code{keepdim} is \code{True}, the output tensors are of the same size
-as :attr:\code{input} except in the dimension :attr:\code{dim} where they are of size 1.
-Otherwise, :attr:\code{dim} is squeezed (see :func:\code{torch.squeeze}), resulting
-in the output tensors having 1 fewer dimension than :attr:\code{input}.
+If \code{keepdim} is \code{True}, the output tensors are of the same size
+as \code{input} except in the dimension \code{dim} where they are of size 1.
+Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting
+in the output tensors having 1 fewer dimension than \code{input}.
 
-Each element of the tensor :attr:\code{input} is compared with the corresponding
-element of the tensor :attr:\code{other} and an element-wise maximum is taken.
+Each element of the tensor \code{input} is compared with the corresponding
+element of the tensor \code{other} and an element-wise maximum is taken.
 
-The shapes of :attr:\code{input} and :attr:\code{other} don't need to match,
+The shapes of \code{input} and \code{other} don't need to match,
 but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 
-.. math::
-\text{out}_i = \max(\text{tensor}_i, \text{other}_i)
-
+\deqn{
+    \text{out}_i = \max(\text{tensor}_i, \text{other}_i)
+}
 .. note:: When the shapes do not match, the shape of the returned output tensor
 follows the :ref:\verb{broadcasting rules <broadcasting-semantics>}.
 }

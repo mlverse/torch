@@ -22,7 +22,7 @@
 full(size, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
 }
 \details{
-Returns a tensor of size :attr:\code{size} filled with :attr:\code{fill_value}.
+Returns a tensor of size \code{size} filled with \code{fill_value}.
 }
 \examples{
 \dontrun{

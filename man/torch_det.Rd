@@ -13,9 +13,9 @@ det(input) -> Tensor
 Calculates determinant of a square matrix or batches of square matrices.
 
 .. note::
-Backward through :meth:\code{det} internally uses SVD results when :attr:\code{input} is
+Backward through :meth:\code{det} internally uses SVD results when \code{input} is
 not invertible. In this case, double backward through :meth:\code{det} will be
-unstable in when :attr:\code{input} doesn't have distinct singular values. See
+unstable in when \code{input} doesn't have distinct singular values. See
 :meth:\code{~torch.svd} for details.
 }
 \examples{

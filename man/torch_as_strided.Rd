@@ -16,8 +16,8 @@
 as_strided(input, size, stride, storage_offset=0) -> Tensor
 }
 \details{
-Create a view of an existing \code{torch.Tensor} :attr:\code{input} with specified
-:attr:\code{size}, :attr:\code{stride} and :attr:\code{storage_offset}.
+Create a view of an existing \code{torch_Tensor} \code{input} with specified
+\code{size}, \code{stride} and \code{storage_offset}.
 
 .. warning::
 More than one element of a created tensor may refer to a single memory
@@ -25,7 +25,7 @@ location. As a result, in-place operations (especially ones that are
 vectorized) may result in incorrect behavior. If you need to write to
 the tensors, please clone them first.\preformatted{Many PyTorch functions, which return a view of a tensor, are internally
 implemented with this function. Those functions, like
-:meth:`torch.Tensor.expand`, are easier to read and are therefore more
+:meth:`torch_Tensor.expand`, are easier to read and are therefore more
 advisable to use.
 }
 }

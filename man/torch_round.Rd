@@ -12,7 +12,7 @@
 round(input, out=None) -> Tensor
 }
 \details{
-Returns a new tensor with each of the elements of :attr:\code{input} rounded
+Returns a new tensor with each of the elements of \code{input} rounded
 to the closest integer.
 }
 \examples{

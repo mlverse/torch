@@ -18,12 +18,12 @@
 allclose(input, other, rtol=1e-05, atol=1e-08, equal_nan=False) -> bool
 }
 \details{
-This function checks if all :attr:\code{input} and :attr:\code{other} satisfy the condition:
+This function checks if all \code{input} and \code{other} satisfy the condition:
 
-.. math::
-\lvert \text{input} - \text{other} \rvert \leq \texttt{atol} + \texttt{rtol} \times \lvert \text{other} \rvert
-
-elementwise, for all elements of :attr:\code{input} and :attr:\code{other}. The behaviour of this function is analogous to
+\deqn{
+    \lvert \text{input} - \text{other} \rvert \leq \texttt{atol} + \texttt{rtol} \times \lvert \text{other} \rvert
+}
+elementwise, for all elements of \code{input} and \code{other}. The behaviour of this function is analogous to
 \verb{numpy.allclose <https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html>}_
 }
 \examples{

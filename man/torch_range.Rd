@@ -25,14 +25,14 @@ range(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=N
 }
 \details{
 Returns a 1-D tensor of size :math:\verb{\\left\\lfloor \\frac\{\\text\{end\} - \\text\{start\}\}\{\\text\{step\}\} \\right\\rfloor + 1}
-with values from :attr:\code{start} to :attr:\code{end} with step :attr:\code{step}. Step is
+with values from \code{start} to \code{end} with step \code{step}. Step is
 the gap between two values in the tensor.
 
-.. math::
-\text{out}_{i+1} = \text{out}_i + \text{step}.
-
+\deqn{
+    \text{out}_{i+1} = \text{out}_i + \text{step}.
+}
 .. warning::
-This function is deprecated in favor of :func:\code{torch.arange}.
+This function is deprecated in favor of \code{\link{torch_arange}}.
 }
 \examples{
 \dontrun{

@@ -13,10 +13,11 @@ expm1(input, out=None) -> Tensor
 }
 \details{
 Returns a new tensor with the exponential of the elements minus 1
-of :attr:\code{input}.
+of \code{input}.
 
-.. math::
-y_{i} = e^{x_{i}} - 1
+\deqn{
+    y_{i} = e^{x_{i}} - 1
+}
 }
 \examples{
 \dontrun{

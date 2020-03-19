@@ -26,11 +26,11 @@
 logspace(start, end, steps=100, base=10.0, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
 }
 \details{
-Returns a one-dimensional tensor of :attr:\code{steps} points
-logarithmically spaced with base :attr:\code{base} between
+Returns a one-dimensional tensor of \code{steps} points
+logarithmically spaced with base \code{base} between
 :math:\verb{\{\\text\{base\}\}^\{\\text\{start\}\}} and :math:\verb{\{\\text\{base\}\}^\{\\text\{end\}\}}.
 
-The output tensor is 1-D of size :attr:\code{steps}.
+The output tensor is 1-D of size \code{steps}.
 }
 \examples{
 \dontrun{

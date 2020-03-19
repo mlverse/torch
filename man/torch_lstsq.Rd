@@ -18,18 +18,18 @@ Computes the solution to the least squares and least norm problems for a full
 rank matrix :math:\code{A} of size :math:\verb{(m \\times n)} and a matrix :math:\code{B} of
 size :math:\verb{(m \\times k)}.
 
-If :math:\verb{m \\geq n}, :func:\code{lstsq} solves the least-squares problem:
+If :math:\verb{m \\geq n}, \code{\link{lstsq}} solves the least-squares problem:
 
-.. math::
-
+\deqn{
+}
 \begin{array}{ll}
 \min_X & \|AX-B\|_2.
 \end{array}
 
-If :math:\code{m < n}, :func:\code{lstsq} solves the least-norm problem:
+If :math:\code{m < n}, \code{\link{lstsq}} solves the least-norm problem:
 
-.. math::
-
+\deqn{
+}
 \begin{array}{ll}
 \min_X & \|X\|_2 & \text{subject to} & AX = B.
 \end{array}

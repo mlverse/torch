@@ -19,30 +19,30 @@ rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor
 Real-to-complex Discrete Fourier Transform
 
 This method computes the real-to-complex discrete Fourier transform. It is
-mathematically equivalent with :func:\code{~torch.fft} with differences only in
+mathematically equivalent with \code{\link{~torch.fft}} with differences only in
 formats of the input and output.
 
 This method supports 1D, 2D and 3D real-to-complex transforms, indicated
-by :attr:\code{signal_ndim}. :attr:\code{input} must be a tensor with at least
+by \code{signal_ndim}. \code{input} must be a tensor with at least
 \code{signal_ndim} dimensions with optionally arbitrary number of leading batch
-dimensions. If :attr:\code{normalized} is set to \code{True}, this normalizes the result
+dimensions. If \code{normalized} is set to \code{True}, this normalizes the result
 by dividing it with :math:\verb{\\sqrt\{\\prod_\{i=1\}^K N_i\}} so that the operator is
 unitary, where :math:\code{N_i} is the size of signal dimension :math:\code{i}.
 
 The real-to-complex Fourier transform results follow conjugate symmetry:
 
-.. math::
-X\link[=\\omega_1, \\dots, \\omega_d]{\omega_1, \dots, \omega_d} = X^*\link[=N_1 - \\omega_1, \\dots, N_d - \\omega_d]{N_1 - \omega_1, \dots, N_d - \omega_d},
-
+\deqn{
+    X[\omega_1, \dots, \omega_d] = X^*[N_1 - \omega_1, \dots, N_d - \omega_d],
+}
 where the index arithmetic is computed modulus the size of the corresponding
 dimension, :math:\verb{\\ ^*} is the conjugate operator, and
-:math:\code{d} = :attr:\code{signal_ndim}. :attr:\code{onesided} flag controls whether to avoid
+:math:\code{d} = \code{signal_ndim}. \code{onesided} flag controls whether to avoid
 redundancy in the output results. If set to \code{True} (default), the output will
 not be full complex result of shape :math:\verb{(*, 2)}, where :math:\code{*} is the shape
-of :attr:\code{input}, but instead the last dimension will be halfed as of size
+of \code{input}, but instead the last dimension will be halfed as of size
 :math:\verb{\\lfloor \\frac\{N_d\}\{2\} \\rfloor + 1}.
 
-The inverse of this function is :func:\code{~torch.irfft}.
+The inverse of this function is \code{\link{~torch.irfft}}.
 
 .. note::
 For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -52,7 +52,7 @@ monitor and control the cache.
 
 .. warning::
 For CPU tensors, this method is currently only available with MKL. Use
-:func:\code{torch.backends.mkl.is_available} to check if MKL is installed.
+\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
 \examples{
 \dontrun{

@@ -19,13 +19,13 @@ zeros_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> 
 }
 \details{
 Returns a tensor filled with the scalar value \code{0}, with the same size as
-:attr:\code{input}. \code{torch.zeros_like(input)} is equivalent to
-\code{torch.zeros(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
+\code{input}. \code{torch_zeros_like(input)} is equivalent to
+\code{torch_zeros(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
 
 .. warning::
-As of 0.4, this function does not support an :attr:\code{out} keyword. As an alternative,
-the old \code{torch.zeros_like(input, out=output)} is equivalent to
-\code{torch.zeros(input.size(), out=output)}.
+As of 0.4, this function does not support an \code{out} keyword. As an alternative,
+the old \code{torch_zeros_like(input, out=output)} is equivalent to
+\code{torch_zeros(input.size(), out=output)}.
 }
 \examples{
 \dontrun{

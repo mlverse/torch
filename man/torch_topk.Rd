@@ -20,17 +20,17 @@
 topk(input, k, dim=None, largest=True, sorted=True, out=None) -> (Tensor, LongTensor)
 }
 \details{
-Returns the :attr:\code{k} largest elements of the given :attr:\code{input} tensor along
+Returns the \code{k} largest elements of the given \code{input} tensor along
 a given dimension.
 
-If :attr:\code{dim} is not given, the last dimension of the \code{input} is chosen.
+If \code{dim} is not given, the last dimension of the \code{input} is chosen.
 
-If :attr:\code{largest} is \code{False} then the \code{k} smallest elements are returned.
+If \code{largest} is \code{False} then the \code{k} smallest elements are returned.
 
 A namedtuple of \verb{(values, indices)} is returned, where the \code{indices} are the indices
 of the elements in the original \code{input} tensor.
 
-The boolean option :attr:\code{sorted} if \code{True}, will make sure that the returned
+The boolean option \code{sorted} if \code{True}, will make sure that the returned
 \code{k} elements are themselves sorted
 }
 \examples{

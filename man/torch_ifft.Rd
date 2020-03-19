@@ -20,24 +20,24 @@ This method computes the complex-to-complex inverse discrete Fourier
 transform. Ignoring the batch dimensions, it computes the following
 expression:
 
-.. math::
-X\link[=\\omega_1, \\dots, \\omega_d]{\omega_1, \dots, \omega_d} =
-\frac{1}{\prod_{i=1}^d N_i} \sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x\link[=n_1, \\dots, n_d]{n_1, \dots, n_d}
-e^{\ j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
-
-where :math:\code{d} = :attr:\code{signal_ndim} is number of dimensions for the
+\deqn{
+    X[\omega_1, \dots, \omega_d] =
+        \frac{1}{\prod_{i=1}^d N_i} \sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x[n_1, \dots, n_d]
+         e^{\ j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
+}
+where :math:\code{d} = \code{signal_ndim} is number of dimensions for the
 signal, and :math:\code{N_i} is the size of signal dimension :math:\code{i}.
 
-The argument specifications are almost identical with :func:\code{~torch.fft}.
-However, if :attr:\code{normalized} is set to \code{True}, this instead returns the
+The argument specifications are almost identical with \code{\link{~torch.fft}}.
+However, if \code{normalized} is set to \code{True}, this instead returns the
 results multiplied by :math:\verb{\\sqrt\{\\prod_\{i=1\}^d N_i\}}, to become a unitary
-operator. Therefore, to invert a :func:\code{~torch.fft}, the :attr:\code{normalized}
-argument should be set identically for :func:\code{~torch.fft}.
+operator. Therefore, to invert a \link[=`~torch.fft`, the `normalized`]{\code{~torch.fft}, the \code{normalized}}
+argument should be set identically for \code{\link{~torch.fft}}.
 
 Returns the real and the imaginary parts together as one tensor of the same
-shape of :attr:\code{input}.
+shape of \code{input}.
 
-The inverse of this function is :func:\code{~torch.fft}.
+The inverse of this function is \code{\link{~torch.fft}}.
 
 .. note::
 For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -47,7 +47,7 @@ monitor and control the cache.
 
 .. warning::
 For CPU tensors, this method is currently only available with MKL. Use
-:func:\code{torch.backends.mkl.is_available} to check if MKL is installed.
+\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
 \examples{
 \dontrun{

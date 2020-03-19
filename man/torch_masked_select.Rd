@@ -14,10 +14,10 @@
 masked_select(input, mask, out=None) -> Tensor
 }
 \details{
-Returns a new 1-D tensor which indexes the :attr:\code{input} tensor according to
-the boolean mask :attr:\code{mask} which is a \code{BoolTensor}.
+Returns a new 1-D tensor which indexes the \code{input} tensor according to
+the boolean mask \code{mask} which is a \code{BoolTensor}.
 
-The shapes of the :attr:\code{mask} tensor and the :attr:\code{input} tensor don't need
+The shapes of the \code{mask} tensor and the \code{input} tensor don't need
 to match, but they must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 
 .. note:: The returned tensor does \strong{not} use the same storage

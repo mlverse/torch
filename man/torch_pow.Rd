@@ -18,32 +18,33 @@ pow(input, exponent, out=None) -> Tensor
 pow(self, exponent, out=None) -> Tensor
 }
 \details{
-Takes the power of each element in :attr:\code{input} with :attr:\code{exponent} and
+Takes the power of each element in \code{input} with \code{exponent} and
 returns a tensor with the result.
 
-:attr:\code{exponent} can be either a single \code{float} number or a \code{Tensor}
-with the same number of elements as :attr:\code{input}.
+\code{exponent} can be either a single \code{float} number or a \code{Tensor}
+with the same number of elements as \code{input}.
 
-When :attr:\code{exponent} is a scalar value, the operation applied is:
+When \code{exponent} is a scalar value, the operation applied is:
 
-.. math::
-\text{out}_i = x_i ^ \text{exponent}
+\deqn{
+    \text{out}_i = x_i ^ \text{exponent}
+}
+When \code{exponent} is a tensor, the operation applied is:
 
-When :attr:\code{exponent} is a tensor, the operation applied is:
+\deqn{
+    \text{out}_i = x_i ^ {\text{exponent}_i}
+}
+When \code{exponent} is a tensor, the shapes of \code{input}
+and \code{exponent} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 
-.. math::
-\text{out}_i = x_i ^ {\text{exponent}_i}
-
-When :attr:\code{exponent} is a tensor, the shapes of :attr:\code{input}
-and :attr:\code{exponent} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
-
-:attr:\code{self} is a scalar \code{float} value, and :attr:\code{exponent} is a tensor.
-The returned tensor :attr:\code{out} is of the same shape as :attr:\code{exponent}
+\code{self} is a scalar \code{float} value, and \code{exponent} is a tensor.
+The returned tensor \code{out} is of the same shape as \code{exponent}
 
 The operation applied is:
 
-.. math::
-\text{out}_i = \text{self} ^ {\text{exponent}_i}
+\deqn{
+    \text{out}_i = \text{self} ^ {\text{exponent}_i}
+}
 }
 \examples{
 \dontrun{

@@ -12,13 +12,13 @@
 log1p(input, out=None) -> Tensor
 }
 \details{
-Returns a new tensor with the natural logarithm of (1 + :attr:\code{input}).
+Returns a new tensor with the natural logarithm of (1 + \code{input}).
 
-.. math::
-y_i = \log_{e} (x_i + 1)
-
-.. note:: This function is more accurate than :func:\code{torch.log} for small
-values of :attr:\code{input}
+\deqn{
+    y_i = \log_{e} (x_i + 1)
+}
+.. note:: This function is more accurate than \code{\link{torch_log}} for small
+values of \code{input}
 }
 \examples{
 \dontrun{

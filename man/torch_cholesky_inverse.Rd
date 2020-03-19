@@ -18,17 +18,18 @@ Computes the inverse of a symmetric positive-definite matrix :math:\code{A} usin
 Cholesky factor :math:\code{u}: returns matrix \code{inv}. The inverse is computed using
 LAPACK routines \code{dpotri} and \code{spotri} (and the corresponding MAGMA routines).
 
-If :attr:\code{upper} is \code{False}, :math:\code{u} is lower triangular
+If \code{upper} is \code{False}, :math:\code{u} is lower triangular
 such that the returned tensor is
 
-.. math::
-inv = (uu^{{T}})^{{-1}}
-
-If :attr:\code{upper} is \code{True} or not provided, :math:\code{u} is upper
+\deqn{
+    inv = (uu^{{T}})^{{-1}}
+}
+If \code{upper} is \code{True} or not provided, :math:\code{u} is upper
 triangular such that the returned tensor is
 
-.. math::
-inv = (u^T u)^{{-1}}
+\deqn{
+    inv = (u^T u)^{{-1}}
+}
 }
 \examples{
 \dontrun{

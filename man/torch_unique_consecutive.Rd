@@ -7,7 +7,7 @@
 Eliminates all but the first element from every consecutive group of equivalent elements.
 }
 \details{
-\preformatted{.. note:: This function is different from :func:`torch.unique` in the sense that this function
+\preformatted{.. note:: This function is different from [`torch_unique`] in the sense that this function
     only eliminates consecutive duplicate values. This semantics is similar to `std::unique`
     in C++.
 
@@ -25,12 +25,12 @@ Returns:
 
         - **output** (*Tensor*): the output list of unique scalar elements.
         - **inverse_indices** (*Tensor*): (optional) if
-          :attr:`return_inverse` is True, there will be an additional
+          `return_inverse` is True, there will be an additional
           returned tensor (same shape as input) representing the indices
           for where elements in the original input map to in the output;
           otherwise, this function will only return a single tensor.
         - **counts** (*Tensor*): (optional) if
-          :attr:`return_counts` is True, there will be an additional
+          `return_counts` is True, there will be an additional
           returned tensor (same shape as output or output.size(dim),
           if dim was specified) representing the number of occurrences
           for each unique value or tensor.

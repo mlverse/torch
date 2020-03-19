@@ -21,23 +21,23 @@ addbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
 }
 \details{
 Performs a batch matrix-matrix product of matrices stored
-in :attr:\code{batch1} and :attr:\code{batch2},
+in \code{batch1} and \code{batch2},
 with a reduced add step (all matrix multiplications get accumulated
 along the first dimension).
-:attr:\code{input} is added to the final result.
+\code{input} is added to the final result.
 
-:attr:\code{batch1} and :attr:\code{batch2} must be 3-D tensors each containing the
+\code{batch1} and \code{batch2} must be 3-D tensors each containing the
 same number of matrices.
 
-If :attr:\code{batch1} is a :math:\verb{(b \\times n \\times m)} tensor, :attr:\code{batch2} is a
-:math:\verb{(b \\times m \\times p)} tensor, :attr:\code{input} must be
+If \code{batch1} is a :math:\verb{(b \\times n \\times m)} tensor, \code{batch2} is a
+:math:\verb{(b \\times m \\times p)} tensor, \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a :math:\verb{(n \\times p)} tensor
-and :attr:\code{out} will be a :math:\verb{(n \\times p)} tensor.
+and \code{out} will be a :math:\verb{(n \\times p)} tensor.
 
-.. math::
-out = \beta\ \text{input} + \alpha\ (\sum_{i=0}^{b-1} \text{batch1}_i \mathbin{@} \text{batch2}_i)
-
-For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and :attr:\code{alpha}
+\deqn{
+    out = \beta\ \text{input} + \alpha\ (\sum_{i=0}^{b-1} \text{batch1}_i \mathbin{@} \text{batch2}_i)
+}
+For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and \code{alpha}
 must be real numbers, otherwise they should be integers.
 }
 \examples{

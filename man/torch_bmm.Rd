@@ -14,21 +14,21 @@
 bmm(input, mat2, out=None) -> Tensor
 }
 \details{
-Performs a batch matrix-matrix product of matrices stored in :attr:\code{input}
-and :attr:\code{mat2}.
+Performs a batch matrix-matrix product of matrices stored in \code{input}
+and \code{mat2}.
 
-:attr:\code{input} and :attr:\code{mat2} must be 3-D tensors each containing
+\code{input} and \code{mat2} must be 3-D tensors each containing
 the same number of matrices.
 
-If :attr:\code{input} is a :math:\verb{(b \\times n \\times m)} tensor, :attr:\code{mat2} is a
-:math:\verb{(b \\times m \\times p)} tensor, :attr:\code{out} will be a
+If \code{input} is a :math:\verb{(b \\times n \\times m)} tensor, \code{mat2} is a
+:math:\verb{(b \\times m \\times p)} tensor, \code{out} will be a
 :math:\verb{(b \\times n \\times p)} tensor.
 
-.. math::
-\text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
-
+\deqn{
+    \text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
+}
 .. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
-For broadcasting matrix products, see :func:\code{torch.matmul}.
+For broadcasting matrix products, see \code{\link{torch_matmul}}.
 }
 \examples{
 \dontrun{

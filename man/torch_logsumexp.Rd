@@ -16,17 +16,17 @@
 logsumexp(input, dim, keepdim=False, out=None)
 }
 \details{
-Returns the log of summed exponentials of each row of the :attr:\code{input}
-tensor in the given dimension :attr:\code{dim}. The computation is numerically
+Returns the log of summed exponentials of each row of the \code{input}
+tensor in the given dimension \code{dim}. The computation is numerically
 stabilized.
 
 For summation index :math:\code{j} given by \code{dim} and other indices :math:\code{i}, the result is\preformatted{.. math::
     \\text\{logsumexp\}(x)_\{i\} = \\log \\sum_j \\exp(x_\{ij\})
 }
 
-If :attr:\code{keepdim} is \code{True}, the output tensor is of the same size
-as :attr:\code{input} except in the dimension(s) :attr:\code{dim} where it is of size 1.
-Otherwise, :attr:\code{dim} is squeezed (see :func:\code{torch.squeeze}), resulting in the
+If \code{keepdim} is \code{True}, the output tensor is of the same size
+as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
+Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in the
 output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
 \examples{

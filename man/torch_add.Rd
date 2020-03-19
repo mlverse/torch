@@ -18,26 +18,26 @@ add(input, other, out=None)
 add(input, alpha=1, other, out=None)
 }
 \details{
-Adds the scalar :attr:\code{other} to each element of the input :attr:\code{input}
+Adds the scalar \code{other} to each element of the input \code{input}
 and returns a new resulting tensor.
 
-.. math::
-\text{out} = \text{input} + \text{other}
-
-If :attr:\code{input} is of type FloatTensor or DoubleTensor, :attr:\code{other} must be
+\deqn{
+    \text{out} = \text{input} + \text{other}
+}
+If \code{input} is of type FloatTensor or DoubleTensor, \code{other} must be
 a real number, otherwise it should be an integer.
 
-Each element of the tensor :attr:\code{other} is multiplied by the scalar
-:attr:\code{alpha} and added to each element of the tensor :attr:\code{input}.
+Each element of the tensor \code{other} is multiplied by the scalar
+\code{alpha} and added to each element of the tensor \code{input}.
 The resulting tensor is returned.
 
-The shapes of :attr:\code{input} and :attr:\code{other} must be
+The shapes of \code{input} and \code{other} must be
 :ref:\verb{broadcastable <broadcasting-semantics>}.
 
-.. math::
-\text{out} = \text{input} + \text{alpha} \times \text{other}
-
-If :attr:\code{other} is of type FloatTensor or DoubleTensor, :attr:\code{alpha} must be
+\deqn{
+    \text{out} = \text{input} + \text{alpha} \times \text{other}
+}
+If \code{other} is of type FloatTensor or DoubleTensor, \code{alpha} must be
 a real number, otherwise it should be an integer.
 }
 \examples{

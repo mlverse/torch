@@ -22,11 +22,11 @@
 randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
 }
 \details{
-Returns a tensor with the same shape as Tensor :attr:\code{input} filled with
-random integers generated uniformly between :attr:\code{low} (inclusive) and
-:attr:\code{high} (exclusive).
+Returns a tensor with the same shape as Tensor \code{input} filled with
+random integers generated uniformly between \code{low} (inclusive) and
+\code{high} (exclusive).
 
 .. note:
-With the global dtype default (\code{torch.float32}), this function returns
-a tensor with dtype \code{torch.int64}.
+With the global dtype default (\code{torch_float32}), this function returns
+a tensor with dtype \code{torch_int64}.
 }

@@ -12,11 +12,12 @@
 erfinv(input, out=None) -> Tensor
 }
 \details{
-Computes the inverse error function of each element of :attr:\code{input}.
+Computes the inverse error function of each element of \code{input}.
 The inverse error function is defined in the range :math:\verb{(-1, 1)} as:
 
-.. math::
-\mathrm{erfinv}(\mathrm{erf}(x)) = x
+\deqn{
+    \mathrm{erfinv}(\mathrm{erf}(x)) = x
+}
 }
 \examples{
 \dontrun{

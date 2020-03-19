@@ -14,9 +14,9 @@
 dist(input, other, p=2) -> Tensor
 }
 \details{
-Returns the p-norm of (:attr:\code{input} - :attr:\code{other})
+Returns the p-norm of (\code{input} - \code{other})
 
-The shapes of :attr:\code{input} and :attr:\code{other} must be
+The shapes of \code{input} and \code{other} must be
 :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
 \examples{

@@ -12,7 +12,7 @@
 inverse(input, out=None) -> Tensor
 }
 \details{
-Takes the inverse of the square matrix :attr:\code{input}. :attr:\code{input} can be batches
+Takes the inverse of the square matrix \code{input}. \code{input} can be batches
 of 2D square tensors, in which case this function would return a tensor composed of
 individual inverses.
 

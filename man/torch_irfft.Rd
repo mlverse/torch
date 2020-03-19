@@ -21,40 +21,40 @@ irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) ->
 Complex-to-real Inverse Discrete Fourier Transform
 
 This method computes the complex-to-real inverse discrete Fourier transform.
-It is mathematically equivalent with :func:\code{ifft} with differences only in
+It is mathematically equivalent with \code{\link{ifft}} with differences only in
 formats of the input and output.
 
-The argument specifications are almost identical with :func:\code{~torch.ifft}.
-Similar to :func:\code{~torch.ifft}, if :attr:\code{normalized} is set to \code{True},
+The argument specifications are almost identical with \code{\link{~torch.ifft}}.
+Similar to \link[=`~torch.ifft`, if `normalized` is set to ``True``]{\code{~torch.ifft}, if \code{normalized} is set to \code{True}},
 this normalizes the result by multiplying it with
 :math:\verb{\\sqrt\{\\prod_\{i=1\}^K N_i\}} so that the operator is unitary, where
 :math:\code{N_i} is the size of signal dimension :math:\code{i}.
 
 .. note::
-Due to the conjugate symmetry, :attr:\code{input} do not need to contain the full
+Due to the conjugate symmetry, \code{input} do not need to contain the full
 complex frequency values. Roughly half of the values will be sufficient, as
-is the case when :attr:\code{input} is given by :func:\code{~torch.rfft} with
-\code{rfft(signal, onesided=True)}. In such case, set the :attr:\code{onesided}
+is the case when \code{input} is given by \code{\link{~torch.rfft}} with
+\code{rfft(signal, onesided=True)}. In such case, set the \code{onesided}
 argument of this method to \code{True}. Moreover, the original signal shape
-information can sometimes be lost, optionally set :attr:\code{signal_sizes} to be
+information can sometimes be lost, optionally set \code{signal_sizes} to be
 the size of the original signal (without the batch dimensions if in batched
-mode) to recover it with correct shape.\preformatted{Therefore, to invert an :func:`~torch.rfft`, the :attr:`normalized` and
-:attr:`onesided` arguments should be set identically for :func:`~torch.irfft`,
-and preferrably a :attr:`signal_sizes` is given to avoid size mismatch. See the
+mode) to recover it with correct shape.\preformatted{Therefore, to invert an [`~torch.rfft`, the `normalized`] and
+`onesided` arguments should be set identically for [`~torch.irfft`],
+and preferrably a `signal_sizes` is given to avoid size mismatch. See the
 example below for a case of size mismatch.
 
-See :func:`~torch.rfft` for details on conjugate symmetry.
+See [`~torch.rfft`] for details on conjugate symmetry.
 }
 
-The inverse of this function is :func:\code{~torch.rfft}.
+The inverse of this function is \code{\link{~torch.rfft}}.
 
 .. warning::
 Generally speaking, input to this function should contain values
-following conjugate symmetry. Note that even if :attr:\code{onesided} is
+following conjugate symmetry. Note that even if \code{onesided} is
 \code{True}, often symmetry on some part is still needed. When this
-requirement is not satisfied, the behavior of :func:\code{~torch.irfft} is
-undefined. Since :func:\code{torch.autograd.gradcheck} estimates numerical
-Jacobian with point perturbations, :func:\code{~torch.irfft} will almost
+requirement is not satisfied, the behavior of \code{\link{~torch.irfft}} is
+undefined. Since \code{\link{torch_autograd.gradcheck}} estimates numerical
+Jacobian with point perturbations, \code{\link{~torch.irfft}} will almost
 certainly fail the check.
 
 .. note::
@@ -65,7 +65,7 @@ monitor and control the cache.
 
 .. warning::
 For CPU tensors, this method is currently only available with MKL. Use
-:func:\code{torch.backends.mkl.is_available} to check if MKL is installed.
+\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
 \examples{
 \dontrun{

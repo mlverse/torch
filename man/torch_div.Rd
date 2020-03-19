@@ -17,26 +17,26 @@ div(input, other, out=None) -> Tensor
 Divides each element of the input \code{input} with the scalar \code{other} and
 returns a new resulting tensor.
 
-.. math::
-\text{out}_i = \frac{\text{input}_i}{\text{other}}
-
-If the :class:\code{torch.dtype} of \code{input} and \code{other} differ, the
-:class:\code{torch.dtype} of the result tensor is determined following rules
+\deqn{
+    \text{out}_i = \frac{\text{input}_i}{\text{other}}
+}
+If the :class:\code{torch_dtype} of \code{input} and \code{other} differ, the
+:class:\code{torch_dtype} of the result tensor is determined following rules
 described in the type promotion :ref:\verb{documentation <type-promotion-doc>}. If
 \code{out} is specified, the result must be :ref:\verb{castable <type-promotion-doc>}
-to the :class:\code{torch.dtype} of the specified output tensor. Integral division
+to the :class:\code{torch_dtype} of the specified output tensor. Integral division
 by zero leads to undefined behavior.
 
 Each element of the tensor \code{input} is divided by each element of the tensor
 \code{other}. The resulting tensor is returned.
 
-.. math::
-\text{out}_i = \frac{\text{input}_i}{\text{other}_i}
-
-The shapes of \code{input} and \code{other} must be :ref:\verb{broadcastable <broadcasting-semantics>}. If the :class:\code{torch.dtype} of \code{input} and
-\code{other} differ, the :class:\code{torch.dtype} of the result tensor is determined
+\deqn{
+    \text{out}_i = \frac{\text{input}_i}{\text{other}_i}
+}
+The shapes of \code{input} and \code{other} must be :ref:\verb{broadcastable <broadcasting-semantics>}. If the :class:\code{torch_dtype} of \code{input} and
+\code{other} differ, the :class:\code{torch_dtype} of the result tensor is determined
 following rules described in the type promotion :ref:\verb{documentation <type-promotion-doc>}. If \code{out} is specified, the result must be
-:ref:\verb{castable <type-promotion-doc>} to the :class:\code{torch.dtype} of the
+:ref:\verb{castable <type-promotion-doc>} to the :class:\code{torch_dtype} of the
 specified output tensor. Integral division by zero leads to undefined behavior.
 }
 \examples{

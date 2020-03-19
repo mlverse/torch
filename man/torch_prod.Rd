@@ -18,15 +18,15 @@ prod(input, dtype=None) -> Tensor
 prod(input, dim, keepdim=False, dtype=None) -> Tensor
 }
 \details{
-Returns the product of all elements in the :attr:\code{input} tensor.
+Returns the product of all elements in the \code{input} tensor.
 
-Returns the product of each row of the :attr:\code{input} tensor in the given
-dimension :attr:\code{dim}.
+Returns the product of each row of the \code{input} tensor in the given
+dimension \code{dim}.
 
-If :attr:\code{keepdim} is \code{True}, the output tensor is of the same size
-as :attr:\code{input} except in the dimension :attr:\code{dim} where it is of size 1.
-Otherwise, :attr:\code{dim} is squeezed (see :func:\code{torch.squeeze}), resulting in
-the output tensor having 1 fewer dimension than :attr:\code{input}.
+If \code{keepdim} is \code{True}, the output tensor is of the same size
+as \code{input} except in the dimension \code{dim} where it is of size 1.
+Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in
+the output tensor having 1 fewer dimension than \code{input}.
 }
 \examples{
 \dontrun{

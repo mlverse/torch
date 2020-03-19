@@ -17,10 +17,10 @@ fmod(input, other, out=None) -> Tensor
 Computes the element-wise remainder of division.
 
 The dividend and divisor may contain both for integer and floating point
-numbers. The remainder has the same sign as the dividend :attr:\code{input}.
+numbers. The remainder has the same sign as the dividend \code{input}.
 
-When :attr:\code{other} is a tensor, the shapes of :attr:\code{input} and
-:attr:\code{other} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
+When \code{other} is a tensor, the shapes of \code{input} and
+\code{other} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
 \examples{
 \dontrun{

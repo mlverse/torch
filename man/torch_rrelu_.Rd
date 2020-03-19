@@ -7,5 +7,5 @@
 rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor
 }
 \details{
-In-place version of :func:\code{~rrelu}.
+In-place version of \code{\link{~rrelu}}.
 }

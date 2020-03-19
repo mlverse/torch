@@ -12,10 +12,11 @@
 sign(input, out=None) -> Tensor
 }
 \details{
-Returns a new tensor with the signs of the elements of :attr:\code{input}.
+Returns a new tensor with the signs of the elements of \code{input}.
 
-.. math::
-\text{out}\emph{{i} = \operatorname{sgn}(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = \operatorname{sgn}(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

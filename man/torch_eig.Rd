@@ -18,5 +18,5 @@ Computes the eigenvalues and eigenvectors of a real square matrix.
 
 .. note::
 Since eigenvalues and eigenvectors might be complex, backward pass is supported only
-for :func:\code{torch.symeig}
+for \code{\link{torch_symeig}}
 }

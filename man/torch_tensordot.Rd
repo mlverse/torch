@@ -7,26 +7,26 @@
 Returns a contraction of a and b over multiple dimensions.
 }
 \details{
-\preformatted{:attr:`tensordot` implements a generalized matrix product.
+\preformatted{`tensordot` implements a generalized matrix product.
 
 Args:
   a (Tensor): Left tensor to contract
   b (Tensor): Right tensor to contract
   dims (int or tuple of two lists of integers): number of dimensions to
-     contract or explicit lists of dimensions for :attr:`a` and
-     :attr:`b` respectively
+     contract or explicit lists of dimensions for `a` and
+     `b` respectively
 
-When called with an integer argument :attr:`dims` = :math:`d`, and the number of
-dimensions of :attr:`a` and :attr:`b` is :math:`m` and :math:`n`, respectively,
+When called with an integer argument `dims` = :math:`d`, and the number of
+dimensions of `a` and `b` is :math:`m` and :math:`n`, respectively,
 it computes
 
 .. math::
     r_\{i_0,...,i_\{m-d\}, i_d,...,i_n\}
       = \\sum_\{k_0,...,k_\{d-1\}\} a_\{i_0,...,i_\{m-d\},k_0,...,k_\{d-1\}\} \\times b_\{k_0,...,k_\{d-1\}, i_d,...,i_n\}.
 
-When called with :attr:`dims` of the list form, the given dimensions will be contracted
-in place of the last :math:`d` of :attr:`a` and the first :math:`d` of :math:`b`. The sizes
-in these dimensions must match, but :attr:`tensordot` will deal with broadcasted
+When called with `dims` of the list form, the given dimensions will be contracted
+in place of the last :math:`d` of `a` and the first :math:`d` of :math:`b`. The sizes
+in these dimensions must match, but `tensordot` will deal with broadcasted
 dimensions.
 
 Examples::

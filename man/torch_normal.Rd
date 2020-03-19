@@ -27,16 +27,16 @@ normal(mean, std, size, *, out=None) -> Tensor
 Returns a tensor of random numbers drawn from separate normal distributions
 whose mean and standard deviation are given.
 
-The :attr:\code{mean} is a tensor with the mean of
+The \code{mean} is a tensor with the mean of
 each output element's normal distribution
 
-The :attr:\code{std} is a tensor with the standard deviation of
+The \code{std} is a tensor with the standard deviation of
 each output element's normal distribution
 
-The shapes of :attr:\code{mean} and :attr:\code{std} don't need to match, but the
+The shapes of \code{mean} and \code{std} don't need to match, but the
 total number of elements in each tensor need to be the same.
 
-.. note:: When the shapes do not match, the shape of :attr:\code{mean}
+.. note:: When the shapes do not match, the shape of \code{mean}
 is used as the shape for the returned output tensor
 
 Similar to the function above, but the means are shared among all drawn
@@ -46,7 +46,7 @@ Similar to the function above, but the standard-deviations are shared among
 all drawn elements.
 
 Similar to the function above, but the means and standard deviations are shared
-among all drawn elements. The resulting tensor has size given by :attr:\code{size}.
+among all drawn elements. The resulting tensor has size given by \code{size}.
 }
 \examples{
 \dontrun{

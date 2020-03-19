@@ -18,8 +18,8 @@
 randn_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
 }
 \details{
-Returns a tensor with the same size as :attr:\code{input} that is filled with
+Returns a tensor with the same size as \code{input} that is filled with
 random numbers from a normal distribution with mean 0 and variance 1.
-\code{torch.randn_like(input)} is equivalent to
-\code{torch.randn(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
+\code{torch_randn_like(input)} is equivalent to
+\code{torch_randn(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
 }

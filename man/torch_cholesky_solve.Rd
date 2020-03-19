@@ -19,19 +19,19 @@ cholesky_solve(input, input2, upper=False, out=None) -> Tensor
 Solves a linear system of equations with a positive semidefinite
 matrix to be inverted given its Cholesky factor matrix :math:\code{u}.
 
-If :attr:\code{upper} is \code{False}, :math:\code{u} is and lower triangular and \code{c} is
+If \code{upper} is \code{False}, :math:\code{u} is and lower triangular and \code{c} is
 returned such that:
 
-.. math::
-c = (u u^T)^{{-1}} b
-
-If :attr:\code{upper} is \code{True} or not provided, :math:\code{u} is upper triangular
+\deqn{
+    c = (u u^T)^{{-1}} b
+}
+If \code{upper} is \code{True} or not provided, :math:\code{u} is upper triangular
 and \code{c} is returned such that:
 
-.. math::
-c = (u^T u)^{{-1}} b
-
-\code{torch.cholesky_solve(b, u)} can take in 2D inputs \verb{b, u} or inputs that are
+\deqn{
+    c = (u^T u)^{{-1}} b
+}
+\code{torch_cholesky_solve(b, u)} can take in 2D inputs \verb{b, u} or inputs that are
 batches of 2D matrices. If the inputs are batches, then returns
 batched outputs \code{c}
 }

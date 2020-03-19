@@ -15,15 +15,15 @@ matrix_rank(input, tol=None, symmetric=False) -> Tensor
 }
 \details{
 Returns the numerical rank of a 2-D tensor. The method to compute the
-matrix rank is done using SVD by default. If :attr:\code{symmetric} is \code{True},
-then :attr:\code{input} is assumed to be symmetric, and the computation of the
+matrix rank is done using SVD by default. If \code{symmetric} is \code{True},
+then \code{input} is assumed to be symmetric, and the computation of the
 rank is done by obtaining the eigenvalues.
 
-:attr:\code{tol} is the threshold below which the singular values (or the eigenvalues
-when :attr:\code{symmetric} is \code{True}) are considered to be 0. If :attr:\code{tol} is not
-specified, :attr:\code{tol} is set to \code{S.max() * max(S.size()) * eps} where \code{S} is the
-singular values (or the eigenvalues when :attr:\code{symmetric} is \code{True}), and \code{eps}
-is the epsilon value for the datatype of :attr:\code{input}.
+\code{tol} is the threshold below which the singular values (or the eigenvalues
+when \code{symmetric} is \code{True}) are considered to be 0. If \code{tol} is not
+specified, \code{tol} is set to \code{S.max() * max(S.size()) * eps} where \code{S} is the
+singular values (or the eigenvalues when \code{symmetric} is \code{True}), and \code{eps}
+is the epsilon value for the datatype of \code{input}.
 }
 \examples{
 \dontrun{

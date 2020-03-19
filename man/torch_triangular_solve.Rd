@@ -24,7 +24,7 @@ and multiple right-hand sides :math:\code{b}.
 In particular, solves :math:\code{AX = b} and assumes :math:\code{A} is upper-triangular
 with the default keyword arguments.
 
-\code{torch.triangular_solve(b, A)} can take in 2D inputs \verb{b, A} or inputs that are
+\code{torch_triangular_solve(b, A)} can take in 2D inputs \verb{b, A} or inputs that are
 batches of 2D matrices. If the inputs are batches, then returns
 batched outputs \code{X}
 }

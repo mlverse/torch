@@ -14,11 +14,11 @@
 transpose(input, dim0, dim1) -> Tensor
 }
 \details{
-Returns a tensor that is a transposed version of :attr:\code{input}.
-The given dimensions :attr:\code{dim0} and :attr:\code{dim1} are swapped.
+Returns a tensor that is a transposed version of \code{input}.
+The given dimensions \code{dim0} and \code{dim1} are swapped.
 
-The resulting :attr:\code{out} tensor shares it's underlying storage with the
-:attr:\code{input} tensor, so changing the content of one would change the content
+The resulting \code{out} tensor shares it's underlying storage with the
+\code{input} tensor, so changing the content of one would change the content
 of the other.
 }
 \examples{

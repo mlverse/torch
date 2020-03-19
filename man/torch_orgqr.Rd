@@ -13,7 +13,7 @@ orgqr(input, input2) -> Tensor
 }
 \details{
 Computes the orthogonal matrix \code{Q} of a QR factorization, from the \verb{(input, input2)}
-tuple returned by :func:\code{torch.geqrf}.
+tuple returned by \code{\link{torch_geqrf}}.
 
 This directly calls the underlying LAPACK function \code{?orgqr}.
 See \verb{LAPACK documentation for orgqr}_ for further details.

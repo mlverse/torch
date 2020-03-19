@@ -20,7 +20,7 @@ A, in order as a namedtuple \verb{solution, LU}.
 
 \code{LU} contains \code{L} and \code{U} factors for LU factorization of \code{A}.
 
-\code{torch.solve(B, A)} can take in 2D inputs \verb{B, A} or inputs that are
+\code{torch_solve(B, A)} can take in 2D inputs \verb{B, A} or inputs that are
 batches of 2D matrices. If the inputs are batches, then returns
 batched outputs \verb{solution, LU}.
 

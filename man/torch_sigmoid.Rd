@@ -12,10 +12,11 @@
 sigmoid(input, out=None) -> Tensor
 }
 \details{
-Returns a new tensor with the sigmoid of the elements of :attr:\code{input}.
+Returns a new tensor with the sigmoid of the elements of \code{input}.
 
-.. math::
-\text{out}\emph{{i} = \frac{1}{1 + e^{-\text{input}}{i}}}
+\deqn{
+    \text{out}_{i} = \frac{1}{1 + e^{-\text{input}_{i}}}
+}
 }
 \examples{
 \dontrun{

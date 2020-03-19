@@ -16,13 +16,13 @@
 cross(input, other, dim=-1, out=None) -> Tensor
 }
 \details{
-Returns the cross product of vectors in dimension :attr:\code{dim} of :attr:\code{input}
-and :attr:\code{other}.
+Returns the cross product of vectors in dimension \code{dim} of \code{input}
+and \code{other}.
 
-:attr:\code{input} and :attr:\code{other} must have the same size, and the size of their
-:attr:\code{dim} dimension should be 3.
+\code{input} and \code{other} must have the same size, and the size of their
+\code{dim} dimension should be 3.
 
-If :attr:\code{dim} is not given, it defaults to the first dimension found with the
+If \code{dim} is not given, it defaults to the first dimension found with the
 size 3.
 }
 \examples{

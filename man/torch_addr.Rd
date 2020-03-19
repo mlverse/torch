@@ -20,24 +20,24 @@
 addr(beta=1, input, alpha=1, vec1, vec2, out=None) -> Tensor
 }
 \details{
-Performs the outer-product of vectors :attr:\code{vec1} and :attr:\code{vec2}
-and adds it to the matrix :attr:\code{input}.
+Performs the outer-product of vectors \code{vec1} and \code{vec2}
+and adds it to the matrix \code{input}.
 
-Optional values :attr:\code{beta} and :attr:\code{alpha} are scaling factors on the
-outer product between :attr:\code{vec1} and :attr:\code{vec2} and the added matrix
-:attr:\code{input} respectively.
+Optional values \code{beta} and \code{alpha} are scaling factors on the
+outer product between \code{vec1} and \code{vec2} and the added matrix
+\code{input} respectively.
 
-.. math::
-\text{out} = \beta\ \text{input} + \alpha\ (\text{vec1} \otimes \text{vec2})
-
-If :attr:\code{vec1} is a vector of size \code{n} and :attr:\code{vec2} is a vector
-of size \code{m}, then :attr:\code{input} must be
+\deqn{
+    \text{out} = \beta\ \text{input} + \alpha\ (\text{vec1} \otimes \text{vec2})
+}
+If \code{vec1} is a vector of size \code{n} and \code{vec2} is a vector
+of size \code{m}, then \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a matrix of size
-:math:\verb{(n \\times m)} and :attr:\code{out} will be a matrix of size
+:math:\verb{(n \\times m)} and \code{out} will be a matrix of size
 :math:\verb{(n \\times m)}.
 
-For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and
-:attr:\code{alpha} must be real numbers, otherwise they should be integers
+For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
+\code{alpha} must be real numbers, otherwise they should be integers
 }
 \examples{
 \dontrun{

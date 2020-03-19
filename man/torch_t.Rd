@@ -10,7 +10,7 @@
 t(input) -> Tensor
 }
 \details{
-Expects :attr:\code{input} to be <= 2-D tensor and transposes dimensions 0
+Expects \code{input} to be <= 2-D tensor and transposes dimensions 0
 and 1.
 
 0-D and 1-D tensors are returned as it is and

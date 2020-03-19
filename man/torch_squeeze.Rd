@@ -14,13 +14,13 @@
 squeeze(input, dim=None, out=None) -> Tensor
 }
 \details{
-Returns a tensor with all the dimensions of :attr:\code{input} of size \code{1} removed.
+Returns a tensor with all the dimensions of \code{input} of size \code{1} removed.
 
 For example, if \code{input} is of shape:
 :math:\verb{(A \\times 1 \\times B \\times C \\times 1 \\times D)} then the \code{out} tensor
 will be of shape: :math:\verb{(A \\times B \\times C \\times D)}.
 
-When :attr:\code{dim} is given, a squeeze operation is done only in the given
+When \code{dim} is given, a squeeze operation is done only in the given
 dimension. If \code{input} is of shape: :math:\verb{(A \\times 1 \\times B)},
 \code{squeeze(input, 0)} leaves the tensor unchanged, but \code{squeeze(input, 1)}
 will squeeze the tensor to the shape :math:\verb{(A \\times B)}.

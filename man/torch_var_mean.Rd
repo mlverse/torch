@@ -18,20 +18,20 @@ var_mean(input, unbiased=True) -> (Tensor, Tensor)
 var_mean(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor)
 }
 \details{
-Returns the variance and mean of all elements in the :attr:\code{input} tensor.
+Returns the variance and mean of all elements in the \code{input} tensor.
 
-If :attr:\code{unbiased} is \code{False}, then the variance will be calculated via the
+If \code{unbiased} is \code{False}, then the variance will be calculated via the
 biased estimator. Otherwise, Bessel's correction will be used.
 
-Returns the variance and mean of each row of the :attr:\code{input} tensor in the given
-dimension :attr:\code{dim}.
+Returns the variance and mean of each row of the \code{input} tensor in the given
+dimension \code{dim}.
 
-If :attr:\code{keepdim} is \code{True}, the output tensor is of the same size
-as :attr:\code{input} except in the dimension(s) :attr:\code{dim} where it is of size 1.
-Otherwise, :attr:\code{dim} is squeezed (see :func:\code{torch.squeeze}), resulting in the
+If \code{keepdim} is \code{True}, the output tensor is of the same size
+as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
+Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in the
 output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 
-If :attr:\code{unbiased} is \code{False}, then the variance will be calculated via the
+If \code{unbiased} is \code{False}, then the variance will be calculated via the
 biased estimator. Otherwise, Bessel's correction will be used.
 }
 \examples{

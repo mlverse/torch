@@ -19,9 +19,9 @@ specified position.
 
 The returned tensor shares the same underlying data with this tensor.
 
-A :attr:\code{dim} value within the range \verb{[-input.dim() - 1, input.dim() + 1)}
-can be used. Negative :attr:\code{dim} will correspond to :meth:\code{unsqueeze}
-applied at :attr:\code{dim} = \code{dim + input.dim() + 1}.
+A \code{dim} value within the range \verb{[-input.dim() - 1, input.dim() + 1)}
+can be used. Negative \code{dim} will correspond to :meth:\code{unsqueeze}
+applied at \code{dim} = \code{dim + input.dim() + 1}.
 }
 \examples{
 \dontrun{

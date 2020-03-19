@@ -12,10 +12,11 @@
 conj(input, out=None) -> Tensor
 }
 \details{
-Computes the element-wise conjugate of the given :attr:\code{input} tensor.
+Computes the element-wise conjugate of the given \code{input} tensor.
 
-.. math::
-\text{out}\emph{{i} = conj(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = conj(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

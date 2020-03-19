@@ -17,7 +17,7 @@ argsort(input, dim=-1, descending=False, out=None) -> LongTensor
 Returns the indices that sort a tensor along a given dimension in ascending
 order by value.
 
-This is the second value returned by :meth:\code{torch.sort}.  See its documentation
+This is the second value returned by :meth:\code{torch_sort}.  See its documentation
 for the exact semantics of this method.
 }
 \examples{

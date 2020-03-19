@@ -18,21 +18,21 @@
 multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -> LongTensor
 }
 \details{
-Returns a tensor where each row contains :attr:\code{num_samples} indices sampled
+Returns a tensor where each row contains \code{num_samples} indices sampled
 from the multinomial probability distribution located in the corresponding row
-of tensor :attr:\code{input}.
+of tensor \code{input}.
 
 .. note::
-The rows of :attr:\code{input} do not need to sum to one (in which case we use
+The rows of \code{input} do not need to sum to one (in which case we use
 the values as weights), but must be non-negative, finite and have
 a non-zero sum.
 
 Indices are ordered from left to right according to when each was sampled
 (first samples are placed in first column).
 
-If :attr:\code{input} is a vector, :attr:\code{out} is a vector of size :attr:\code{num_samples}.
+If \code{input} is a vector, \code{out} is a vector of size \code{num_samples}.
 
-If :attr:\code{input} is a matrix with \code{m} rows, :attr:\code{out} is an matrix of shape
+If \code{input} is a matrix with \code{m} rows, \code{out} is an matrix of shape
 :math:\verb{(m \\times \\text\{num\\_samples\})}.
 
 If replacement is \code{True}, samples are drawn with replacement.
@@ -41,9 +41,9 @@ If not, they are drawn without replacement, which means that when a
 sample index is drawn for a row, it cannot be drawn again for that row.
 
 .. note::
-When drawn without replacement, :attr:\code{num_samples} must be lower than
-number of non-zero elements in :attr:\code{input} (or the min number of non-zero
-elements in each row of :attr:\code{input} if it is a matrix).
+When drawn without replacement, \code{num_samples} must be lower than
+number of non-zero elements in \code{input} (or the min number of non-zero
+elements in each row of \code{input} if it is a matrix).
 }
 \examples{
 \dontrun{

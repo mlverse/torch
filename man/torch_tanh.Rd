@@ -13,10 +13,11 @@ tanh(input, out=None) -> Tensor
 }
 \details{
 Returns a new tensor with the hyperbolic tangent of the elements
-of :attr:\code{input}.
+of \code{input}.
 
-.. math::
-\text{out}\emph{{i} = \tanh(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = \tanh(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

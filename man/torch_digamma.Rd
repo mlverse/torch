@@ -12,8 +12,9 @@ digamma(input, out=None) -> Tensor
 \details{
 Computes the logarithmic derivative of the gamma function on \code{input}.
 
-.. math::
-\psi(x) = \frac{d}{dx} \ln\left(\Gamma\left(x\right)\right) = \frac{\Gamma'(x)}{\Gamma(x)}
+\deqn{
+    \psi(x) = \frac{d}{dx} \ln\left(\Gamma\left(x\right)\right) = \frac{\Gamma'(x)}{\Gamma(x)}
+}
 }
 \examples{
 \dontrun{

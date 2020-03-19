@@ -20,8 +20,8 @@ histc(input, bins=100, min=0, max=0, out=None) -> Tensor
 \details{
 Computes the histogram of a tensor.
 
-The elements are sorted into equal width bins between :attr:\code{min} and
-:attr:\code{max}. If :attr:\code{min} and :attr:\code{max} are both zero, the minimum and
+The elements are sorted into equal width bins between \code{min} and
+\code{max}. If \code{min} and \code{max} are both zero, the minimum and
 maximum values of the data are used.
 }
 \examples{

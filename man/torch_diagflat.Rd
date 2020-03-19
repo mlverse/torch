@@ -13,16 +13,16 @@ diagflat(input, offset=0) -> Tensor
 }
 \details{
 \itemize{
-\item If :attr:\code{input} is a vector (1-D tensor), then returns a 2-D square tensor
-with the elements of :attr:\code{input} as the diagonal.
-\item If :attr:\code{input} is a tensor with more than one dimension, then returns a
-2-D tensor with diagonal elements equal to a flattened :attr:\code{input}.
+\item If \code{input} is a vector (1-D tensor), then returns a 2-D square tensor
+with the elements of \code{input} as the diagonal.
+\item If \code{input} is a tensor with more than one dimension, then returns a
+2-D tensor with diagonal elements equal to a flattened \code{input}.
 }
 
-The argument :attr:\code{offset} controls which diagonal to consider:
+The argument \code{offset} controls which diagonal to consider:
 \itemize{
-\item If :attr:\code{offset} = 0, it is the main diagonal.
-\item If :attr:\code{offset} > 0, it is above the main diagonal.
-\item If :attr:\code{offset} < 0, it is below the main diagonal.
+\item If \code{offset} = 0, it is the main diagonal.
+\item If \code{offset} > 0, it is above the main diagonal.
+\item If \code{offset} < 0, it is below the main diagonal.
 }
 }

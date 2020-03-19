@@ -17,17 +17,17 @@ svd(input, some=True, compute_uv=True, out=None) -> (Tensor, Tensor, Tensor)
 }
 \details{
 This function returns a namedtuple \verb{(U, S, V)} which is the singular value
-decomposition of a input real matrix or batches of real matrices :attr:\code{input} such that
+decomposition of a input real matrix or batches of real matrices \code{input} such that
 :math:\verb{input = U \\times diag(S) \\times V^T}.
 
-If :attr:\code{some} is \code{True} (default), the method returns the reduced singular value decomposition
-i.e., if the last two dimensions of :attr:\code{input} are \code{m} and \code{n}, then the returned
+If \code{some} is \code{True} (default), the method returns the reduced singular value decomposition
+i.e., if the last two dimensions of \code{input} are \code{m} and \code{n}, then the returned
 \code{U} and \code{V} matrices will contain only :math:\code{min(n, m)} orthonormal columns.
 
-If :attr:\code{compute_uv} is \code{False}, the returned \code{U} and \code{V} matrices will be zero matrices
-of shape :math:\verb{(m \\times m)} and :math:\verb{(n \\times n)} respectively. :attr:\code{some} will be ignored here.
+If \code{compute_uv} is \code{False}, the returned \code{U} and \code{V} matrices will be zero matrices
+of shape :math:\verb{(m \\times m)} and :math:\verb{(n \\times n)} respectively. \code{some} will be ignored here.
 
-.. note:: The singular values are returned in descending order. If :attr:\code{input} is a batch of matrices,
+.. note:: The singular values are returned in descending order. If \code{input} is a batch of matrices,
 then the singular values of each matrix in the batch is returned in descending order.
 
 .. note:: The implementation of SVD on CPU uses the LAPACK routine \code{?gesdd} (a divide-and-conquer
@@ -38,17 +38,17 @@ algorithm) instead of \code{?gesvd} for speed. Analogously, the SVD on GPU uses 
 will be transposed, i.e. with strides :code:\verb{U.contiguous().transpose(-2, -1).stride()}
 
 .. note:: Extra care needs to be taken when backward through \code{U} and \code{V}
-outputs. Such operation is really only stable when :attr:\code{input} is
+outputs. Such operation is really only stable when \code{input} is
 full rank with all distinct singular values. Otherwise, \code{NaN} can
 appear as the gradients are not properly defined. Also, notice that
 double backward will usually do an additional backward through \code{U} and
 \code{V} even if the original backward is only on \code{S}.
 
-.. note:: When :attr:\code{some} = \code{False}, the gradients on :code:\verb{U[..., :, min(m, n):]}
+.. note:: When \code{some} = \code{False}, the gradients on :code:\verb{U[..., :, min(m, n):]}
 and :code:\verb{V[..., :, min(m, n):]} will be ignored in backward as those vectors
 can be arbitrary bases of the subspaces.
 
-.. note:: When :attr:\code{compute_uv} = \code{False}, backward cannot be performed since \code{U} and \code{V}
+.. note:: When \code{compute_uv} = \code{False}, backward cannot be performed since \code{U} and \code{V}
 from the forward pass is required for the backward operation.
 }
 \examples{

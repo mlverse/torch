@@ -12,10 +12,11 @@
 abs(input, out=None) -> Tensor
 }
 \details{
-Computes the element-wise absolute value of the given :attr:\code{input} tensor.
+Computes the element-wise absolute value of the given \code{input} tensor.
 
-.. math::
-\text{out}\emph{{i} = |\text{input}}{i}|
+\deqn{
+    \text{out}_{i} = |\text{input}_{i}|
+}
 }
 \examples{
 \dontrun{

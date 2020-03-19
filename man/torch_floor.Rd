@@ -12,11 +12,12 @@
 floor(input, out=None) -> Tensor
 }
 \details{
-Returns a new tensor with the floor of the elements of :attr:\code{input},
+Returns a new tensor with the floor of the elements of \code{input},
 the largest integer less than or equal to each element.
 
-.. math::
-\text{out}\emph{{i} = \left\lfloor \text{input}}{i} \right\rfloor
+\deqn{
+    \text{out}_{i} = \left\lfloor \text{input}_{i} \right\rfloor
+}
 }
 \examples{
 \dontrun{

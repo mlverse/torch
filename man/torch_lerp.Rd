@@ -16,15 +16,15 @@
 lerp(input, end, weight, out=None)
 }
 \details{
-Does a linear interpolation of two tensors :attr:\code{start} (given by :attr:\code{input}) and :attr:\code{end} based
-on a scalar or tensor :attr:\code{weight} and returns the resulting :attr:\code{out} tensor.
+Does a linear interpolation of two tensors \code{start} (given by \code{input}) and \code{end} based
+on a scalar or tensor \code{weight} and returns the resulting \code{out} tensor.
 
-.. math::
-\text{out}_i = \text{start}_i + \text{weight}_i \times (\text{end}_i - \text{start}_i)
-
-The shapes of :attr:\code{start} and :attr:\code{end} must be
-:ref:\verb{broadcastable <broadcasting-semantics>}. If :attr:\code{weight} is a tensor, then
-the shapes of :attr:\code{weight}, :attr:\code{start}, and :attr:\code{end} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
+\deqn{
+    \text{out}_i = \text{start}_i + \text{weight}_i \times (\text{end}_i - \text{start}_i)
+}
+The shapes of \code{start} and \code{end} must be
+:ref:\verb{broadcastable <broadcasting-semantics>}. If \code{weight} is a tensor, then
+the shapes of \code{weight}, \code{start}, and \code{end} must be :ref:\verb{broadcastable <broadcasting-semantics>}.
 }
 \examples{
 \dontrun{

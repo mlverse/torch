@@ -20,23 +20,23 @@
 addmv(beta=1, input, alpha=1, mat, vec, out=None) -> Tensor
 }
 \details{
-Performs a matrix-vector product of the matrix :attr:\code{mat} and
-the vector :attr:\code{vec}.
-The vector :attr:\code{input} is added to the final result.
+Performs a matrix-vector product of the matrix \code{mat} and
+the vector \code{vec}.
+The vector \code{input} is added to the final result.
 
-If :attr:\code{mat} is a :math:\verb{(n \\times m)} tensor, :attr:\code{vec} is a 1-D tensor of
-size \code{m}, then :attr:\code{input} must be
+If \code{mat} is a :math:\verb{(n \\times m)} tensor, \code{vec} is a 1-D tensor of
+size \code{m}, then \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a 1-D tensor of size \code{n} and
-:attr:\code{out} will be 1-D tensor of size \code{n}.
+\code{out} will be 1-D tensor of size \code{n}.
 
-:attr:\code{alpha} and :attr:\code{beta} are scaling factors on matrix-vector product between
-:attr:\code{mat} and :attr:\code{vec} and the added tensor :attr:\code{input} respectively.
+\code{alpha} and \code{beta} are scaling factors on matrix-vector product between
+\code{mat} and \code{vec} and the added tensor \code{input} respectively.
 
-.. math::
-\text{out} = \beta\ \text{input} + \alpha\ (\text{mat} \mathbin{@} \text{vec})
-
-For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and
-:attr:\code{alpha} must be real numbers, otherwise they should be integers
+\deqn{
+    \text{out} = \beta\ \text{input} + \alpha\ (\text{mat} \mathbin{@} \text{vec})
+}
+For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
+\code{alpha} must be real numbers, otherwise they should be integers
 }
 \examples{
 \dontrun{

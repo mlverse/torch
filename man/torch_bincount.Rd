@@ -17,11 +17,11 @@ bincount(input, weights=None, minlength=0) -> Tensor
 Count the frequency of each value in an array of non-negative ints.
 
 The number of bins (size 1) is one larger than the largest value in
-:attr:\code{input} unless :attr:\code{input} is empty, in which case the result is a
-tensor of size 0. If :attr:\code{minlength} is specified, the number of bins is at least
-:attr:\code{minlength} and if :attr:\code{input} is empty, then the result is tensor of size
-:attr:\code{minlength} filled with zeros. If \code{n} is the value at position \code{i},
-\verb{out[n] += weights[i]} if :attr:\code{weights} is specified else
+\code{input} unless \code{input} is empty, in which case the result is a
+tensor of size 0. If \code{minlength} is specified, the number of bins is at least
+\code{minlength} and if \code{input} is empty, then the result is tensor of size
+\code{minlength} filled with zeros. If \code{n} is the value at position \code{i},
+\verb{out[n] += weights[i]} if \code{weights} is specified else
 \verb{out[n] += 1}.
 
 .. include:: cuda_deterministic.rst

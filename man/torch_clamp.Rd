@@ -22,27 +22,27 @@ clamp(input, *, min, out=None) -> Tensor
 clamp(input, *, max, out=None) -> Tensor
 }
 \details{
-Clamp all elements in :attr:\code{input} into the range \code{[} :attr:\code{min}, :attr:\code{max} \verb{]} and return
+Clamp all elements in \code{input} into the range \code{[} \code{min}, \code{max} \verb{]} and return
 a resulting tensor:
 
-.. math::
-y_i = \begin{cases}
-\text{min} & \text{if } x_i < \text{min} \\
-x_i & \text{if } \text{min} \leq x_i \leq \text{max} \\
-\text{max} & \text{if } x_i > \text{max}
-\end{cases}
+\deqn{
+    y_i = \begin{cases}
+        \text{min} & \text{if } x_i < \text{min} \\
+        x_i & \text{if } \text{min} \leq x_i \leq \text{max} \\
+        \text{max} & \text{if } x_i > \text{max}
+    \end{cases}
+}
+If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, args \code{min}
+and \code{max} must be real numbers, otherwise they should be integers.
 
-If :attr:\code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, args :attr:\code{min}
-and :attr:\code{max} must be real numbers, otherwise they should be integers.
+Clamps all elements in \code{input} to be larger or equal \code{min}.
 
-Clamps all elements in :attr:\code{input} to be larger or equal :attr:\code{min}.
-
-If :attr:\code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, :attr:\code{value}
+If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{value}
 should be a real number, otherwise it should be an integer.
 
-Clamps all elements in :attr:\code{input} to be smaller or equal :attr:\code{max}.
+Clamps all elements in \code{input} to be smaller or equal \code{max}.
 
-If :attr:\code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, :attr:\code{value}
+If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{value}
 should be a real number, otherwise it should be an integer.
 }
 \examples{

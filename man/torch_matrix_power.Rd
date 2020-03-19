@@ -12,12 +12,12 @@
 matrix_power(input, n) -> Tensor
 }
 \details{
-Returns the matrix raised to the power :attr:\code{n} for square matrices.
-For batch of matrices, each individual matrix is raised to the power :attr:\code{n}.
+Returns the matrix raised to the power \code{n} for square matrices.
+For batch of matrices, each individual matrix is raised to the power \code{n}.
 
-If :attr:\code{n} is negative, then the inverse of the matrix (if invertible) is
-raised to the power :attr:\code{n}.  For a batch of matrices, the batched inverse
-(if invertible) is raised to the power :attr:\code{n}. If :attr:\code{n} is 0, then an identity matrix
+If \code{n} is negative, then the inverse of the matrix (if invertible) is
+raised to the power \code{n}.  For a batch of matrices, the batched inverse
+(if invertible) is raised to the power \code{n}. If \code{n} is 0, then an identity matrix
 is returned.
 }
 \examples{

@@ -18,8 +18,8 @@
 rand_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
 }
 \details{
-Returns a tensor with the same size as :attr:\code{input} that is filled with
+Returns a tensor with the same size as \code{input} that is filled with
 random numbers from a uniform distribution on the interval :math:\verb{[0, 1)}.
-\code{torch.rand_like(input)} is equivalent to
-\code{torch.rand(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
+\code{torch_rand_like(input)} is equivalent to
+\code{torch_rand(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
 }

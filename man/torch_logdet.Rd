@@ -13,13 +13,13 @@ logdet(input) -> Tensor
 Calculates log determinant of a square matrix or batches of square matrices.
 
 .. note::
-Result is \code{-inf} if :attr:\code{input} has zero log determinant, and is \code{nan} if
-:attr:\code{input} has negative determinant.
+Result is \code{-inf} if \code{input} has zero log determinant, and is \code{nan} if
+\code{input} has negative determinant.
 
 .. note::
-Backward through :meth:\code{logdet} internally uses SVD results when :attr:\code{input}
+Backward through :meth:\code{logdet} internally uses SVD results when \code{input}
 is not invertible. In this case, double backward through :meth:\code{logdet} will
-be unstable in when :attr:\code{input} doesn't have distinct singular values. See
+be unstable in when \code{input} doesn't have distinct singular values. See
 :meth:\code{~torch.svd} for details.
 }
 \examples{

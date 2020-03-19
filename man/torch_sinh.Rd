@@ -13,10 +13,11 @@ sinh(input, out=None) -> Tensor
 }
 \details{
 Returns a new tensor with the hyperbolic sine of the elements of
-:attr:\code{input}.
+\code{input}.
 
-.. math::
-\text{out}\emph{{i} = \sinh(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = \sinh(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

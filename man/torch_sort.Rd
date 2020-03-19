@@ -16,12 +16,12 @@
 sort(input, dim=-1, descending=False, out=None) -> (Tensor, LongTensor)
 }
 \details{
-Sorts the elements of the :attr:\code{input} tensor along a given dimension
+Sorts the elements of the \code{input} tensor along a given dimension
 in ascending order by value.
 
-If :attr:\code{dim} is not given, the last dimension of the \code{input} is chosen.
+If \code{dim} is not given, the last dimension of the \code{input} is chosen.
 
-If :attr:\code{descending} is \code{True} then the elements are sorted in descending
+If \code{descending} is \code{True} then the elements are sorted in descending
 order by value.
 
 A namedtuple of (values, indices) is returned, where the \code{values} are the

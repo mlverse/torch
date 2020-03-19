@@ -12,11 +12,12 @@
 erfc(input, out=None) -> Tensor
 }
 \details{
-Computes the complementary error function of each element of :attr:\code{input}.
+Computes the complementary error function of each element of \code{input}.
 The complementary error function is defined as follows:
 
-.. math::
-\mathrm{erfc}(x) = 1 - \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt
+\deqn{
+    \mathrm{erfc}(x) = 1 - \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt
+}
 }
 \examples{
 \dontrun{

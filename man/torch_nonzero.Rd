@@ -13,8 +13,8 @@ nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensor
 }
 \details{
 .. note::
-:func:\verb{torch.nonzero(..., as_tuple=False) <torch.nonzero>} (default) returns a
-2-D tensor where each row is the index for a nonzero value.\preformatted{:func:`torch.nonzero(..., as_tuple=True) <torch.nonzero>` returns a tuple of 1-D
+\code{\link{torch_nonzero(..., as_tuple=False) <torch.nonzero>}} (default) returns a
+2-D tensor where each row is the index for a nonzero value.\preformatted{[`torch_nonzero(..., as_tuple=True) <torch.nonzero>`] returns a tuple of 1-D
 index tensors, allowing for advanced indexing, so ``x[x.nonzero(as_tuple=True)]``
 gives all nonzero values of tensor ``x``. Of the returned tuple, each index tensor
 contains nonzero indices for a certain dimension.
@@ -22,28 +22,28 @@ contains nonzero indices for a certain dimension.
 See below for more details on the two behaviors.
 }
 
-\strong{When} :attr:\code{as_tuple} \strong{is \code{False} (default)}:
+\strong{When} \code{as_tuple} \strong{is \code{False} (default)}:
 
 Returns a tensor containing the indices of all non-zero elements of
-:attr:\code{input}.  Each row in the result contains the indices of a non-zero
-element in :attr:\code{input}. The result is sorted lexicographically, with
+\code{input}.  Each row in the result contains the indices of a non-zero
+element in \code{input}. The result is sorted lexicographically, with
 the last index changing the fastest (C-style).
 
-If :attr:\code{input} has :math:\code{n} dimensions, then the resulting indices tensor
-:attr:\code{out} is of size :math:\verb{(z \\times n)}, where :math:\code{z} is the total number of
-non-zero elements in the :attr:\code{input} tensor.
+If \code{input} has :math:\code{n} dimensions, then the resulting indices tensor
+\code{out} is of size :math:\verb{(z \\times n)}, where :math:\code{z} is the total number of
+non-zero elements in the \code{input} tensor.
 
-\strong{When} :attr:\code{as_tuple} \strong{is \code{True}}:
+\strong{When} \code{as_tuple} \strong{is \code{True}}:
 
-Returns a tuple of 1-D tensors, one for each dimension in :attr:\code{input},
+Returns a tuple of 1-D tensors, one for each dimension in \code{input},
 each containing the indices (in that dimension) of all non-zero elements of
-:attr:\code{input} .
+\code{input} .
 
-If :attr:\code{input} has :math:\code{n} dimensions, then the resulting tuple contains :math:\code{n}
+If \code{input} has :math:\code{n} dimensions, then the resulting tuple contains :math:\code{n}
 tensors of size :math:\code{z}, where :math:\code{z} is the total number of
-non-zero elements in the :attr:\code{input} tensor.
+non-zero elements in the \code{input} tensor.
 
-As a special case, when :attr:\code{input} has zero dimensions and a nonzero scalar
+As a special case, when \code{input} has zero dimensions and a nonzero scalar
 value, it is treated as a one-dimensional tensor with one element.
 }
 \examples{

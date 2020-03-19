@@ -14,14 +14,14 @@
 cat(tensors, dim=0, out=None) -> Tensor
 }
 \details{
-Concatenates the given sequence of :attr:\code{seq} tensors in the given dimension.
+Concatenates the given sequence of \code{seq} tensors in the given dimension.
 All tensors must either have the same shape (except in the concatenating
 dimension) or be empty.
 
-:func:\code{torch.cat} can be seen as an inverse operation for :func:\code{torch.split}
-and :func:\code{torch.chunk}.
+\link[=`torch_cat` can be seen as an inverse operation for :func:`torch.split`]{\code{torch_cat} can be seen as an inverse operation for :func:\code{torch.split}}
+and \code{\link{torch_chunk}}.
 
-:func:\code{torch.cat} can be best understood via examples.
+\code{\link{torch_cat}} can be best understood via examples.
 }
 \examples{
 \dontrun{

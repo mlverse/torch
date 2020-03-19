@@ -16,9 +16,9 @@
 narrow(input, dim, start, length) -> Tensor
 }
 \details{
-Returns a new tensor that is a narrowed version of :attr:\code{input} tensor. The
-dimension :attr:\code{dim} is input from :attr:\code{start} to :attr:\code{start + length}. The
-returned tensor and :attr:\code{input} tensor share the same underlying storage.
+Returns a new tensor that is a narrowed version of \code{input} tensor. The
+dimension \code{dim} is input from \code{start} to \code{start + length}. The
+returned tensor and \code{input} tensor share the same underlying storage.
 }
 \examples{
 \dontrun{

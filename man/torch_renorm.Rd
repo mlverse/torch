@@ -18,9 +18,9 @@
 renorm(input, p, dim, maxnorm, out=None) -> Tensor
 }
 \details{
-Returns a tensor where each sub-tensor of :attr:\code{input} along dimension
-:attr:\code{dim} is normalized such that the \code{p}-norm of the sub-tensor is lower
-than the value :attr:\code{maxnorm}
+Returns a tensor where each sub-tensor of \code{input} along dimension
+\code{dim} is normalized such that the \code{p}-norm of the sub-tensor is lower
+than the value \code{maxnorm}
 
 .. note:: If the norm of a row is lower than \code{maxnorm}, the row is unchanged
 }

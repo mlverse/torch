@@ -16,9 +16,9 @@ Calculates the sign and log absolute value of the determinant(s) of a square mat
 If \code{input} has zero determinant, this returns \verb{(0, -inf)}.
 
 .. note::
-Backward through :meth:\code{slogdet} internally uses SVD results when :attr:\code{input}
+Backward through :meth:\code{slogdet} internally uses SVD results when \code{input}
 is not invertible. In this case, double backward through :meth:\code{slogdet}
-will be unstable in when :attr:\code{input} doesn't have distinct singular values.
+will be unstable in when \code{input} doesn't have distinct singular values.
 See :meth:\code{~torch.svd} for details.
 }
 \examples{

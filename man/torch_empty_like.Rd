@@ -18,9 +18,9 @@
 empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
 }
 \details{
-Returns an uninitialized tensor with the same size as :attr:\code{input}.
-\code{torch.empty_like(input)} is equivalent to
-\code{torch.empty(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
+Returns an uninitialized tensor with the same size as \code{input}.
+\code{torch_empty_like(input)} is equivalent to
+\code{torch_empty(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
 }
 \examples{
 \dontrun{

@@ -22,23 +22,23 @@ bartlett_window(window_length, periodic=True, dtype=None, layout=torch.strided, 
 \details{
 Bartlett window function.
 
-.. math::
-w\link{n} = 1 - \left| \frac{2n}{N-1} - 1 \right| = \begin{cases}
-\frac{2n}{N - 1} & \text{if } 0 \leq n \leq \frac{N - 1}{2} \\
-2 - \frac{2n}{N - 1} & \text{if } \frac{N - 1}{2} < n < N \\
-\end{cases},
-
+\deqn{
+    w[n] = 1 - \left| \frac{2n}{N-1} - 1 \right| = \begin{cases}
+        \frac{2n}{N - 1} & \text{if } 0 \leq n \leq \frac{N - 1}{2} \\
+        2 - \frac{2n}{N - 1} & \text{if } \frac{N - 1}{2} < n < N \\
+    \end{cases},
+}
 where :math:\code{N} is the full window size.
 
-The input :attr:\code{window_length} is a positive integer controlling the
-returned window size. :attr:\code{periodic} flag determines whether the returned
+The input \code{window_length} is a positive integer controlling the
+returned window size. \code{periodic} flag determines whether the returned
 window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
-:meth:\code{torch.stft}. Therefore, if :attr:\code{periodic} is true, the :math:\code{N} in
+:meth:\code{torch_stft}. Therefore, if \code{periodic} is true, the :math:\code{N} in
 above formula is in fact :math:\verb{\\text\{window\\_length\} + 1}. Also, we always have
-\code{torch.bartlett_window(L, periodic=True)} equal to
-\verb{torch.bartlett_window(L + 1, periodic=False)[:-1])}.
+\code{torch_bartlett_window(L, periodic=True)} equal to
+\verb{torch_bartlett_window(L + 1, periodic=False)[:-1])}.
 
 .. note::
-If :attr:\code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
+If \code{window_length} :math:\verb{=1}, the returned window contains a single value 1.
 }

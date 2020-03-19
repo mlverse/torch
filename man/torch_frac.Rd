@@ -7,11 +7,11 @@
 frac(input, out=None) -> Tensor
 }
 \details{
-Computes the fractional portion of each element in :attr:\code{input}.
+Computes the fractional portion of each element in \code{input}.
 
-.. math::
-\text{out}\emph{{i} = \text{input}}{i} - \left\lfloor |\text{input}\emph{{i}| \right\rfloor * \operatorname{sgn}(\text{input}}{i})
-
+\deqn{
+    \text{out}_{i} = \text{input}_{i} - \left\lfloor |\text{input}_{i}| \right\rfloor * \operatorname{sgn}(\text{input}_{i})
+}
 Example::
 }
 \examples{

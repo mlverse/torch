@@ -12,10 +12,11 @@
 imag(input, out=None) -> Tensor
 }
 \details{
-Computes the element-wise imag value of the given :attr:\code{input} tensor.
+Computes the element-wise imag value of the given \code{input} tensor.
 
-.. math::
-\text{out}\emph{{i} = imag(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = imag(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

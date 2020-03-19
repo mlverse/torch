@@ -14,15 +14,15 @@
 qr(input, some=True, out=None) -> (Tensor, Tensor)
 }
 \details{
-Computes the QR decomposition of a matrix or a batch of matrices :attr:\code{input},
+Computes the QR decomposition of a matrix or a batch of matrices \code{input},
 and returns a namedtuple (Q, R) of tensors such that :math:\verb{\\text\{input\} = Q R}
 with :math:\code{Q} being an orthogonal matrix or batch of orthogonal matrices and
 :math:\code{R} being an upper triangular matrix or batch of upper triangular matrices.
 
-If :attr:\code{some} is \code{True}, then this function returns the thin (reduced) QR factorization.
-Otherwise, if :attr:\code{some} is \code{False}, this function returns the complete QR factorization.
+If \code{some} is \code{True}, then this function returns the thin (reduced) QR factorization.
+Otherwise, if \code{some} is \code{False}, this function returns the complete QR factorization.
 
-.. note:: precision may be lost if the magnitudes of the elements of :attr:\code{input}
+.. note:: precision may be lost if the magnitudes of the elements of \code{input}
 are large
 
 .. note:: While it should always give you a valid decomposition, it may not

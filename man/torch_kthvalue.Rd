@@ -18,17 +18,19 @@
 kthvalue(input, k, dim=None, keepdim=False, out=None) -> (Tensor, LongTensor)
 }
 \details{
-Returns a namedtuple \verb{(values, indices)} where \code{values} is the :attr:\code{k} th
-smallest element of each row of the :attr:\code{input} tensor in the given dimension
-:attr:\code{dim}. And \code{indices} is the index location of each element found.
+Returns a namedtuple \verb{(values, indices)} where \code{values} is the \code{k} th
+smallest element of each row of the \code{input} tensor in the given dimension
+\code{dim}. And \code{indices} is the index location of each element found.
 
-If :attr:\code{dim} is not given, the last dimension of the \code{input} is chosen.
+If \code{dim} is not given, the last dimension of the \code{input} is chosen.
 
-If :attr:\code{keepdim} is \code{True}, both the :attr:\code{values} and :attr:\code{indices} tensors
-are the same size as :attr:\code{input}, except in the dimension :attr:\code{dim} where
-they are of size 1. Otherwise, :attr:\code{dim} is squeezed
-(see :func:\code{torch.squeeze}), resulting in both the :attr:\code{values} and
-:attr:\code{indices} tensors having 1 fewer dimension than the :attr:\code{input} tensor.
+If \code{keepdim} is \code{True}, both the \code{values} and \code{indices} tensors
+are the same size as \code{input}, except in the dimension \code{dim} where
+they are of size 1. Otherwise, \code{dim} is squeezed
+(see [\code{torch_squeeze}), resulting in both the \code{values}] and
+\code{indices} tensors having 1 fewer dimension than the \code{input} tensor.
+
+[\code{torch_squeeze}), resulting in both the \code{values}]: R:\%60torch_squeeze\%60),\%20resulting\%20in\%20both\%20the\%20\%60values\%60
 }
 \examples{
 \dontrun{

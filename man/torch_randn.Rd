@@ -24,10 +24,10 @@ Returns a tensor filled with random numbers from a normal distribution
 with mean \code{0} and variance \code{1} (also called the standard normal
 distribution).
 
-.. math::
-\text{out}_{i} \sim \mathcal{N}(0, 1)
-
-The shape of the tensor is defined by the variable argument :attr:\code{size}.
+\deqn{
+    \text{out}_{i} \sim \mathcal{N}(0, 1)
+}
+The shape of the tensor is defined by the variable argument \code{size}.
 }
 \examples{
 \dontrun{

@@ -12,16 +12,16 @@
 reshape(input, shape) -> Tensor
 }
 \details{
-Returns a tensor with the same data and number of elements as :attr:\code{input},
+Returns a tensor with the same data and number of elements as \code{input},
 but with the specified shape. When possible, the returned tensor will be a view
-of :attr:\code{input}. Otherwise, it will be a copy. Contiguous inputs and inputs
+of \code{input}. Otherwise, it will be a copy. Contiguous inputs and inputs
 with compatible strides can be reshaped without copying, but you should not
 depend on the copying vs. viewing behavior.
 
-See :meth:\code{torch.Tensor.view} on when it is possible to return a view.
+See :meth:\code{torch_Tensor.view} on when it is possible to return a view.
 
 A single dimension may be -1, in which case it's inferred from the remaining
-dimensions and the number of elements in :attr:\code{input}.
+dimensions and the number of elements in \code{input}.
 }
 \examples{
 \dontrun{

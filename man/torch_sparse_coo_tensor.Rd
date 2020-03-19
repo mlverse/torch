@@ -20,10 +20,10 @@
 sparse_coo_tensor(indices, values, size=None, dtype=None, device=None, requires_grad=False) -> Tensor
 }
 \details{
-Constructs a sparse tensors in COO(rdinate) format with non-zero elements at the given :attr:\code{indices}
-with the given :attr:\code{values}. A sparse tensor can be \code{uncoalesced}, in that case, there are duplicate
+Constructs a sparse tensors in COO(rdinate) format with non-zero elements at the given \code{indices}
+with the given \code{values}. A sparse tensor can be \code{uncoalesced}, in that case, there are duplicate
 coordinates in the indices, and the value at that index is the sum of all duplicate value entries:
-\code{torch.sparse}_.
+\code{torch_sparse}_.
 }
 \examples{
 \dontrun{

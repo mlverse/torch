@@ -20,16 +20,16 @@
 tril_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor
 }
 \details{
-Returns the indices of the lower triangular part of a :attr:\code{row}-by-
-:attr:\code{col} matrix in a 2-by-N Tensor, where the first row contains row
+Returns the indices of the lower triangular part of a \code{row}-by-
+\code{col} matrix in a 2-by-N Tensor, where the first row contains row
 coordinates of all indices and the second row contains column coordinates.
 Indices are ordered based on rows and then columns.
 
 The lower triangular part of the matrix is defined as the elements on and
 below the diagonal.
 
-The argument :attr:\code{offset} controls which diagonal to consider. If
-:attr:\code{offset} = 0, all elements on and below the main diagonal are
+The argument \code{offset} controls which diagonal to consider. If
+\code{offset} = 0, all elements on and below the main diagonal are
 retained. A positive value includes just as many diagonals above the main
 diagonal, and similarly a negative value excludes just as many diagonals below
 the main diagonal. The main diagonal are the set of indices

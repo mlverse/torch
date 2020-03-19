@@ -18,16 +18,16 @@
 addcdiv(input, value=1, tensor1, tensor2, out=None) -> Tensor
 }
 \details{
-Performs the element-wise division of :attr:\code{tensor1} by :attr:\code{tensor2},
-multiply the result by the scalar :attr:\code{value} and add it to :attr:\code{input}.
+Performs the element-wise division of \code{tensor1} by \code{tensor2},
+multiply the result by the scalar \code{value} and add it to \code{input}.
 
-.. math::
-\text{out}_i = \text{input}_i + \text{value} \times \frac{\text{tensor1}_i}{\text{tensor2}_i}
-
-The shapes of :attr:\code{input}, :attr:\code{tensor1}, and :attr:\code{tensor2} must be
+\deqn{
+    \text{out}_i = \text{input}_i + \text{value} \times \frac{\text{tensor1}_i}{\text{tensor2}_i}
+}
+The shapes of \code{input}, \code{tensor1}, and \code{tensor2} must be
 :ref:\verb{broadcastable <broadcasting-semantics>}.
 
-For inputs of type \code{FloatTensor} or \code{DoubleTensor}, :attr:\code{value} must be
+For inputs of type \code{FloatTensor} or \code{DoubleTensor}, \code{value} must be
 a real number, otherwise an integer.
 }
 \examples{

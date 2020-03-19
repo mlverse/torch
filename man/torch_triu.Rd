@@ -15,13 +15,13 @@ triu(input, diagonal=0, out=None) -> Tensor
 }
 \details{
 Returns the upper triangular part of a matrix (2-D tensor) or batch of matrices
-:attr:\code{input}, the other elements of the result tensor :attr:\code{out} are set to 0.
+\code{input}, the other elements of the result tensor \code{out} are set to 0.
 
 The upper triangular part of the matrix is defined as the elements on and
 above the diagonal.
 
-The argument :attr:\code{diagonal} controls which diagonal to consider. If
-:attr:\code{diagonal} = 0, all elements on and above the main diagonal are
+The argument \code{diagonal} controls which diagonal to consider. If
+\code{diagonal} = 0, all elements on and above the main diagonal are
 retained. A positive value excludes just as many diagonals above the main
 diagonal, and similarly a negative value includes just as many diagonals below
 the main diagonal. The main diagonal are the set of indices

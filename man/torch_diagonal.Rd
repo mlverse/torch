@@ -16,19 +16,19 @@
 diagonal(input, offset=0, dim1=0, dim2=1) -> Tensor
 }
 \details{
-Returns a partial view of :attr:\code{input} with the its diagonal elements
-with respect to :attr:\code{dim1} and :attr:\code{dim2} appended as a dimension
+Returns a partial view of \code{input} with the its diagonal elements
+with respect to \code{dim1} and \code{dim2} appended as a dimension
 at the end of the shape.
 
-The argument :attr:\code{offset} controls which diagonal to consider:
+The argument \code{offset} controls which diagonal to consider:
 \itemize{
-\item If :attr:\code{offset} = 0, it is the main diagonal.
-\item If :attr:\code{offset} > 0, it is above the main diagonal.
-\item If :attr:\code{offset} < 0, it is below the main diagonal.
+\item If \code{offset} = 0, it is the main diagonal.
+\item If \code{offset} > 0, it is above the main diagonal.
+\item If \code{offset} < 0, it is below the main diagonal.
 }
 
-Applying :meth:\code{torch.diag_embed} to the output of this function with
+Applying :meth:\code{torch_diag_embed} to the output of this function with
 the same arguments yields a diagonal matrix with the diagonal entries
-of the input. However, :meth:\code{torch.diag_embed} has different default
+of the input. However, :meth:\code{torch_diag_embed} has different default
 dimensions, so those need to be explicitly specified.
 }

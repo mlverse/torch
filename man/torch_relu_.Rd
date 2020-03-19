@@ -7,5 +7,5 @@
 relu_(input) -> Tensor
 }
 \details{
-In-place version of :func:\code{~relu}.
+In-place version of \code{\link{~relu}}.
 }

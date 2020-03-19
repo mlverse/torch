@@ -19,18 +19,18 @@ mode(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTe
 }
 \details{
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the mode
-value of each row of the :attr:\code{input} tensor in the given dimension
-:attr:\code{dim}, i.e. a value which appears most often
+value of each row of the \code{input} tensor in the given dimension
+\code{dim}, i.e. a value which appears most often
 in that row, and \code{indices} is the index location of each mode value found.
 
-By default, :attr:\code{dim} is the last dimension of the :attr:\code{input} tensor.
+By default, \code{dim} is the last dimension of the \code{input} tensor.
 
-If :attr:\code{keepdim} is \code{True}, the output tensors are of the same size as
-:attr:\code{input} except in the dimension :attr:\code{dim} where they are of size 1.
-Otherwise, :attr:\code{dim} is squeezed (see :func:\code{torch.squeeze}), resulting
-in the output tensors having 1 fewer dimension than :attr:\code{input}.
+If \code{keepdim} is \code{True}, the output tensors are of the same size as
+\code{input} except in the dimension \code{dim} where they are of size 1.
+Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting
+in the output tensors having 1 fewer dimension than \code{input}.
 
-.. note:: This function is not defined for \code{torch.cuda.Tensor} yet.
+.. note:: This function is not defined for \code{torch_cuda.Tensor} yet.
 }
 \examples{
 \dontrun{

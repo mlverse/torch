@@ -18,7 +18,7 @@ repeat_interleave(repeats) -> Tensor
 \details{
 Repeat elements of a tensor.
 
-.. warning::\preformatted{This is different from :func:`torch.repeat` but similar to `numpy.repeat`.
+.. warning::\preformatted{This is different from [`torch_repeat` but similar to `numpy.repeat`].
 }
 
 If the \code{repeats} is \verb{tensor([n1, n2, n3, ...])}, then the output will be

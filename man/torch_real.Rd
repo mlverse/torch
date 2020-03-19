@@ -12,10 +12,11 @@
 real(input, out=None) -> Tensor
 }
 \details{
-Computes the element-wise real value of the given :attr:\code{input} tensor.
+Computes the element-wise real value of the given \code{input} tensor.
 
-.. math::
-\text{out}\emph{{i} = real(\text{input}}{i})
+\deqn{
+    \text{out}_{i} = real(\text{input}_{i})
+}
 }
 \examples{
 \dontrun{

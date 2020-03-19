@@ -13,10 +13,11 @@ log(input, out=None) -> Tensor
 }
 \details{
 Returns a new tensor with the natural logarithm of the elements
-of :attr:\code{input}.
+of \code{input}.
 
-.. math::
-y_{i} = \log_{e} (x_{i})
+\deqn{
+    y_{i} = \log_{e} (x_{i})
+}
 }
 \examples{
 \dontrun{

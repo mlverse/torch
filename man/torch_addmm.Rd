@@ -20,22 +20,22 @@
 addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -> Tensor
 }
 \details{
-Performs a matrix multiplication of the matrices :attr:\code{mat1} and :attr:\code{mat2}.
-The matrix :attr:\code{input} is added to the final result.
+Performs a matrix multiplication of the matrices \code{mat1} and \code{mat2}.
+The matrix \code{input} is added to the final result.
 
-If :attr:\code{mat1} is a :math:\verb{(n \\times m)} tensor, :attr:\code{mat2} is a
-:math:\verb{(m \\times p)} tensor, then :attr:\code{input} must be
+If \code{mat1} is a :math:\verb{(n \\times m)} tensor, \code{mat2} is a
+:math:\verb{(m \\times p)} tensor, then \code{input} must be
 :ref:\verb{broadcastable <broadcasting-semantics>} with a :math:\verb{(n \\times p)} tensor
-and :attr:\code{out} will be a :math:\verb{(n \\times p)} tensor.
+and \code{out} will be a :math:\verb{(n \\times p)} tensor.
 
-:attr:\code{alpha} and :attr:\code{beta} are scaling factors on matrix-vector product between
-:attr:\code{mat1} and :attr:\code{mat2} and the added matrix :attr:\code{input} respectively.
+\code{alpha} and \code{beta} are scaling factors on matrix-vector product between
+\code{mat1} and \code{mat2} and the added matrix \code{input} respectively.
 
-.. math::
-\text{out} = \beta\ \text{input} + \alpha\ (\text{mat1}_i \mathbin{@} \text{mat2}_i)
-
-For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments :attr:\code{beta} and
-:attr:\code{alpha} must be real numbers, otherwise they should be integers.
+\deqn{
+    \text{out} = \beta\ \text{input} + \alpha\ (\text{mat1}_i \mathbin{@} \text{mat2}_i)
+}
+For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
+\code{alpha} must be real numbers, otherwise they should be integers.
 }
 \examples{
 \dontrun{

@@ -16,14 +16,14 @@ argmax(input) -> LongTensor
 argmax(input, dim, keepdim=False) -> LongTensor
 }
 \details{
-Returns the indices of the maximum value of all elements in the :attr:\code{input} tensor.
+Returns the indices of the maximum value of all elements in the \code{input} tensor.
 
-This is the second value returned by :meth:\code{torch.max}. See its
+This is the second value returned by :meth:\code{torch_max}. See its
 documentation for the exact semantics of this method.
 
 Returns the indices of the maximum values of a tensor across a dimension.
 
-This is the second value returned by :meth:\code{torch.max}. See its
+This is the second value returned by :meth:\code{torch_max}. See its
 documentation for the exact semantics of this method.
 }
 \examples{

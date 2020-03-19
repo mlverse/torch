@@ -7,5 +7,5 @@
 selu_(input) -> Tensor
 }
 \details{
-In-place version of :func:\code{~selu}.
+In-place version of \code{\link{~selu}}.
 }

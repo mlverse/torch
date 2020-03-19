@@ -15,9 +15,9 @@ geqrf(input, out=None) -> (Tensor, Tensor)
 This is a low-level function for calling LAPACK directly. This function
 returns a namedtuple (a, tau) as defined in \verb{LAPACK documentation for geqrf}_ .
 
-You'll generally want to use :func:\code{torch.qr} instead.
+You'll generally want to use \code{\link{torch_qr}} instead.
 
-Computes a QR decomposition of :attr:\code{input}, but without constructing
+Computes a QR decomposition of \code{input}, but without constructing
 :math:\code{Q} and :math:\code{R} as explicit separate matrices.
 
 Rather, this directly calls the underlying LAPACK function \code{?geqrf}

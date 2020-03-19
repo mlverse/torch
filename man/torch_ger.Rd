@@ -14,9 +14,9 @@
 ger(input, vec2, out=None) -> Tensor
 }
 \details{
-Outer product of :attr:\code{input} and :attr:\code{vec2}.
-If :attr:\code{input} is a vector of size :math:\code{n} and :attr:\code{vec2} is a vector of
-size :math:\code{m}, then :attr:\code{out} must be a matrix of size :math:\verb{(n \\times m)}.
+Outer product of \code{input} and \code{vec2}.
+If \code{input} is a vector of size :math:\code{n} and \code{vec2} is a vector of
+size :math:\code{m}, then \code{out} must be a matrix of size :math:\verb{(n \\times m)}.
 
 .. note:: This function does not :ref:\verb{broadcast <broadcasting-semantics>}.
 }
