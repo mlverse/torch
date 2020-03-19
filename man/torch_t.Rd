@@ -25,7 +25,7 @@ t(input) -> Tensor
 x = torch_randn(())
 x
 torch_t(x)
-x = torch_randn(3)
+x = torch_randn(c(3))
 x
 torch_t(x)
 x = torch_randn(2, 3)

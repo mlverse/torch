@@ -25,9 +25,9 @@ dist(input, other, p=2) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_randn(4)
+x = torch_randn(c(4))
 x
-y = torch_randn(4)
+y = torch_randn(c(4))
 y
 torch_dist(x, y, 3.5)
 torch_dist(x, y, 3)

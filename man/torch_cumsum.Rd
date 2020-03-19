@@ -32,7 +32,7 @@ cumsum(input, dim, out=None, dtype=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(10)
+a = torch_randn(c(10))
 a
 torch_cumsum(a, dim=0)
 }

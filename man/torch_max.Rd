@@ -72,9 +72,9 @@ torch_max(a, 1)
 }
 
 \dontrun{
-a = torch_randn(4)
+a = torch_randn(c(4))
 a
-b = torch_randn(4)
+b = torch_randn(c(4))
 b
 torch_max(a, b)
 }

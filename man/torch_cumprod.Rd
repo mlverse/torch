@@ -32,7 +32,7 @@ cumprod(input, dim, out=None, dtype=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(10)
+a = torch_randn(c(10))
 a
 torch_cumprod(a, dim=0)
 a[5] = 0.0

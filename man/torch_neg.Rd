@@ -24,7 +24,7 @@ neg(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(5)
+a = torch_randn(c(5))
 a
 torch_neg(a)
 }

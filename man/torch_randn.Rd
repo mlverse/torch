@@ -35,7 +35,7 @@ randn(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_g
 
 \examples{
 \dontrun{
-torch_randn(4)
+torch_randn(c(4))
 torch_randn(2, 3)
 }
 

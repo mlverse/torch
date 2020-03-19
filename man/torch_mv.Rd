@@ -30,7 +30,7 @@ mv(input, vec, out=None) -> Tensor
 \examples{
 \dontrun{
 mat = torch_randn(2, 3)
-vec = torch_randn(3)
+vec = torch_randn(c(3))
 torch_mv(mat, vec)
 }
 

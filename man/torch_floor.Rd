@@ -25,7 +25,7 @@ floor(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(4)
+a = torch_randn(c(4))
 a
 torch_floor(a)
 }

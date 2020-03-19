@@ -55,19 +55,19 @@ clamp(input, *, max, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(4)
+a = torch_randn(c(4))
 a
 torch_clamp(a, min=-0.5, max=0.5)
 }
 
 \dontrun{
-a = torch_randn(4)
+a = torch_randn(c(4))
 a
 torch_clamp(a, min=0.5)
 }
 
 \dontrun{
-a = torch_randn(4)
+a = torch_randn(c(4))
 a
 torch_clamp(a, max=0.5)
 }

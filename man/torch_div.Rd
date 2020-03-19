@@ -49,7 +49,7 @@ div(input, other, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(5)
+a = torch_randn(c(5))
 a
 torch_div(a, 0.5)
 }
@@ -57,7 +57,7 @@ torch_div(a, 0.5)
 \dontrun{
 a = torch_randn(4, 4)
 a
-b = torch_randn(4)
+b = torch_randn(c(4))
 b
 torch_div(a, b)
 }

@@ -35,7 +35,7 @@ input = torch_randn(3, 5)
 input
 torch_pinverse(input)
 # Batched pinverse example
-a = torch_randn(2,6,3)
+a = torch_randn(c(2,6,3))
 b = torch_pinverse(a)
 torch_matmul(b, a)
 }

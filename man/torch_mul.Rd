@@ -43,7 +43,7 @@ broadcastable .
 }
 \examples{
 \dontrun{
-a = torch_randn(3)
+a = torch_randn(c(3))
 a
 torch_mul(a, 100)
 }

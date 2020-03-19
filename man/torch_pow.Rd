@@ -54,7 +54,7 @@ pow(self, exponent, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(4)
+a = torch_randn(c(4))
 a
 torch_pow(a, 2)
 exp = torch_arange(1., 5.)
