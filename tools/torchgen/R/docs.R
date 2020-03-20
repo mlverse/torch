@@ -116,6 +116,31 @@ fix_torch_creation <- function(exam) {
   str_replace_all(exam, "torch_(randn|zeros|ones){1}\\(([0-9, ]+)\\)", "torch_\\1(c(\\2))")
 }
 
+fix_python_lists <- function(exam) {
+  exam <- str_replace_all(exam, "\\[([0-9, -j]+)\\]", "c(\\1)")
+  exam <- str_replace_all(exam, "\\[([(True),(False) ]+)\\]", "c(\\1)")
+  exam <- str_replace_all(exam, "(\\+|\\-) ([0-9]{1})j", "\\1 \\2i")
+  exam
+}
+
+fix_true_false <- function(exam) {
+  exam <- str_replace_all(exam, "True", "TRUE")
+  exam <- str_replace_all(exam, "False", "FALSE")
+  exam
+}
+
+fix_python_tuples <- function(exam) {
+  str_replace_all(exam, "([^a-z])\\(([^\\)]+)\\)", "\\1list(\\2)")
+}
+
+fix_dtype_function <- function(exam) {
+  str_replace_all(exam, "dtype=torch_([^ ^)^,]+)", "dtype=torch_\\1\\(\\)")
+}
+
+fix_method_call <- function(exam) {
+  str_replace_all(exam, "\\.([a-z]{1})", "$\\1")
+}
+
 get_examples <- function(doc) {
 
   doc <- clean_doc(doc)
@@ -136,6 +161,11 @@ get_examples <- function(doc) {
   example_code <- str_replace_all(example_code, "torch\\.", "torch_")
   example_code <- str_c(example_code, collapse = "\n")
   example_code <- fix_torch_creation(example_code)
+  example_code <- fix_python_lists(example_code)
+  example_code <- fix_true_false(example_code)
+  example_code <- fix_dtype_function(example_code)
+  example_code <- fix_method_call(example_code)
+  example_code <- fix_python_tuples(example_code)
   example_code
 }
 
