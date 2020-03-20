@@ -15,3 +15,9 @@ tensor of shape \eqn{(*, C, H \times r, W \times r)}.
 \details{
 See \code{~torch.nn.PixelShuffle} for details.
 }
+\section{Signatures}{
+
+
+Rearranges elements in a tensor of shape :math:\verb{(*, C \\times r^2, H, W)} to a
+}
+

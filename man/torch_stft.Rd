@@ -81,3 +81,9 @@ imaginary part.
   previous signature may cause error or return incorrect result.
 }
 }
+\section{Signatures}{
+
+
+Short-time Fourier transform (STFT).
+}
+

@@ -17,22 +17,18 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-mul(input, other, out=None)
-
-mul(input, other, out=None)
-}
-\details{
 Multiplies each element of the input \code{input} with the scalar
 \code{other} and returns a new resulting tensor.
 
+Each element of the tensor \code{input} is multiplied by the corresponding
+element of the Tensor \code{other}. The resulting tensor is returned.
+}
+\details{
 \deqn{
     \text{out}_i = \text{other} \times \text{input}_i
 }
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{other}
 should be a real number, otherwise it should be an integer
-
-Each element of the tensor \code{input} is multiplied by the corresponding
-element of the Tensor \code{other}. The resulting tensor is returned.
 
 The shapes of \code{input} and \code{other} must be
 broadcastable .
@@ -41,6 +37,16 @@ broadcastable .
     \text{out}_i = \text{input}_i \times \text{other}_i
 }
 }
+\section{Signatures}{
+
+
+mul(input, other, out=None)
+
+
+
+mul(input, other, out=None)
+}
+
 \examples{
 \dontrun{
 a = torch_randn(c(3))

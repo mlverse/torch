@@ -213,8 +213,6 @@ NULL
 
 #' Add
 #'
-#' add(input, other, out=None)
-#' 
 #' Adds the scalar `other` to each element of the input `input`
 #' and returns a new resulting tensor.
 #' 
@@ -224,7 +222,10 @@ NULL
 #' If `input` is of type FloatTensor or DoubleTensor, `other` must be
 #' a real number, otherwise it should be an integer.
 #'
+#' @section Signatures:
 #' 
+#' add(input, other, out=None)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param value (Number) the number to be added to each element of `input`
@@ -244,8 +245,6 @@ NULL
 
 #' Add
 #'
-#' add(input, alpha=1, other, out=None)
-#' 
 #' Each element of the tensor `other` is multiplied by the scalar
 #' `alpha` and added to each element of the tensor `input`.
 #' The resulting tensor is returned.
@@ -259,7 +258,10 @@ NULL
 #' If `other` is of type FloatTensor or DoubleTensor, `alpha` must be
 #' a real number, otherwise it should be an integer.
 #'
+#' @section Signatures:
 #' 
+#' add(input, alpha=1, other, out=None)
+#'
 #'
 #' @param input (Tensor) the first input tensor
 #' @param alpha (Number) the scalar multiplier for `other`
@@ -2947,8 +2949,6 @@ NULL
 
 #' Logsumexp
 #'
-#' logsumexp(input, dim, keepdim=False, out=None)
-#' 
 #' Returns the log of summed exponentials of each row of the `input`
 #' tensor in the given dimension `dim`. The computation is numerically
 #' stabilized.
@@ -2964,7 +2964,10 @@ NULL
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or ``len(dim)``) fewer dimension(s).
 #'
+#' @section Signatures:
 #' 
+#' logsumexp(input, dim, keepdim=False, out=None)
+#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
@@ -3508,8 +3511,6 @@ NULL
 
 #' Mul
 #'
-#' mul(input, other, out=None)
-#' 
 #' Multiplies each element of the input `input` with the scalar
 #' `other` and returns a new resulting tensor.
 #' 
@@ -3519,7 +3520,10 @@ NULL
 #' If `input` is of type `FloatTensor` or `DoubleTensor`, `other`
 #' should be a real number, otherwise it should be an integer
 #'
+#' @section Signatures:
 #' 
+#' mul(input, other, out=None)
+#'
 #'
 #' @param {input} NA 
 #' @param value (Number) the number to be multiplied to each element of `input`
@@ -3540,8 +3544,6 @@ NULL
 
 #' Mul
 #'
-#' mul(input, other, out=None)
-#' 
 #' Each element of the tensor `input` is multiplied by the corresponding
 #' element of the Tensor `other`. The resulting tensor is returned.
 #' 
@@ -3552,7 +3554,10 @@ NULL
 #'     \text{out}_i = \text{input}_i \times \text{other}_i
 #' }
 #'
+#' @section Signatures:
 #' 
+#' mul(input, other, out=None)
+#'
 #'
 #' @param input (Tensor) the first multiplicand tensor
 #' @param other (Tensor) the second multiplicand tensor
@@ -3820,7 +3825,10 @@ NULL
 #' 
 #' See `~torch.nn.PixelShuffle` for details.
 #'
+#' @section Signatures:
 #' 
+#' Rearranges elements in a tensor of shape :math:`(*, C \times r^2, H, W)` to a
+#'
 #'
 #' @param input (Tensor) the input tensor
 #' @param upscale_factor (int) factor to increase spatial resolution by
@@ -4680,7 +4688,10 @@ NULL
 #'       This function changed signature at version 0.4.1. Calling with the
 #'       previous signature may cause error or return incorrect result.
 #'
+#' @section Signatures:
 #' 
+#' Short-time Fourier transform (STFT).
+#'
 #'
 #' @param input (Tensor) the input tensor
 #' @param n_fft (int) size of Fourier transform
@@ -7702,8 +7713,6 @@ NULL
 
 #' Lerp
 #'
-#' lerp(input, end, weight, out=None)
-#' 
 #' Does a linear interpolation of two tensors `start` (given by `input`) and `end` based
 #' on a scalar or tensor `weight` and returns the resulting `out` tensor.
 #' 
@@ -7714,7 +7723,10 @@ NULL
 #' broadcastable . If `weight` is a tensor, then
 #' the shapes of `weight`, `start`, and `end` must be broadcastable .
 #'
+#' @section Signatures:
 #' 
+#' lerp(input, end, weight, out=None)
+#'
 #'
 #' @param input (Tensor) the tensor with the starting points
 #' @param end (Tensor) the tensor with the ending points

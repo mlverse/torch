@@ -13,13 +13,11 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-logsumexp(input, dim, keepdim=False, out=None)
-}
-\details{
 Returns the log of summed exponentials of each row of the \code{input}
 tensor in the given dimension \code{dim}. The computation is numerically
 stabilized.
-
+}
+\details{
 For summation index \eqn{j} given by \code{dim} and other indices \eqn{i}, the result is
 
 \deqn{
@@ -31,6 +29,12 @@ as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in the
 output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
+\section{Signatures}{
+
+
+logsumexp(input, dim, keepdim=False, out=None)
+}
+
 \examples{
 \dontrun{
 a = torch_randn(c(3, 3))
