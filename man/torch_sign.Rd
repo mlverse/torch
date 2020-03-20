@@ -24,7 +24,7 @@ sign(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_tensor([0.7, -1.2, 0., 2.3])
+a = torch_tensor(c(0.7, -1.2, 0., 2.3))
 a
 torch_sign(a)
 }

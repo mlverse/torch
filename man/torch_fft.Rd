@@ -60,14 +60,14 @@ fft(input, signal_ndim, normalized=False) -> Tensor
 \examples{
 \dontrun{
 # unbatched 2D FFT
-x = torch_randn(4, 3, 2)
+x = torch_randn(c(4, 3, 2))
 torch_fft(x, 2)
 # batched 1D FFT
 torch_fft(x, 1)
 # arbitrary number of batch dimensions, 2D FFT
-x = torch_randn(3, 3, 5, 5, 2)
+x = torch_randn(c(3, 3, 5, 5, 2))
 y = torch_fft(x, 2)
-y.shape
+y$shape
 }
 
 }

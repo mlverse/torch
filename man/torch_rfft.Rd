@@ -63,9 +63,9 @@ rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_randn(5, 5)
-torch_rfft(x, 2).shape
-torch_rfft(x, 2, onesided=False).shape
+x = torch_randn(c(5, 5))
+torch_rfft(x, 2)$shape
+torch_rfft(x, 2, onesided=FALSE)$shape
 }
 
 }

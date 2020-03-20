@@ -43,9 +43,9 @@ addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -> Tensor
 
 \examples{
 \dontrun{
-M = torch_randn(2, 3)
-mat1 = torch_randn(2, 3)
-mat2 = torch_randn(3, 3)
+M = torch_randn(c(2, 3))
+mat1 = torch_randn(c(2, 3))
+mat2 = torch_randn(c(3, 3))
 torch_addmm(M, mat1, mat2)
 }
 

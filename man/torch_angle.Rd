@@ -24,7 +24,7 @@ angle(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_angle(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))*180/3.14159
+torch_angle(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))*180/3.14159
 }
 
 }

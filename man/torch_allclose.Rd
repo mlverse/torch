@@ -32,10 +32,10 @@ allclose(input, other, rtol=1e-05, atol=1e-08, equal_nan=False) -> bool
 
 \examples{
 \dontrun{
-torch_allclose(torch_tensor([10000., 1e-07]), torch_tensor([10000.1, 1e-08]))
-torch_allclose(torch_tensor([10000., 1e-08]), torch_tensor([10000.1, 1e-09]))
+torch_allclose(torch_tensor(c(10000., 1e-07)), torch_tensor(c(10000.1, 1e-08)))
+torch_allclose(torch_tensor(c(10000., 1e-08)), torch_tensor(c(10000.1, 1e-09)))
 torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]))
-torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]), equal_nan=True)
+torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]), equal_nan=TRUE)
 }
 
 }

@@ -34,7 +34,7 @@ sort(input, dim=-1, descending=False, out=None) -> (Tensor, LongTensor)
 
 \examples{
 \dontrun{
-x = torch_randn(3, 4)
+x = torch_randn(c(3, 4))
 sorted, indices = torch_sort(x)
 sorted
 indices

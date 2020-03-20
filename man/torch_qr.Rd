@@ -36,16 +36,16 @@ qr(input, some=True, out=None) -> (Tensor, Tensor)
 
 \examples{
 \dontrun{
-a = torch_tensor([[12., -51, 4], [6, 167, -68], [-4, 24, -41]])
+a = torch_tensor(c([12., -51, 4], [6, 167, -68], [-4, 24, -41]))
 q, r = torch_qr(a)
 q
 r
-torch_mm(q, r).round()
-torch_mm(q.t(), q).round()
-a = torch_randn(3, 4, 5)
-q, r = torch_qr(a, some=False)
+torch_mm(q, r)$round()
+torch_mm(q$t(), q)$round()
+a = torch_randn(c(3, 4, 5))
+q, r = torch_qr(a, some=FALSE)
 torch_allclose(torch_matmul(q, r), a)
-torch_allclose(torch_matmul(q.transpose(-2, -1), q), torch_eye(5))
+torch_allclose(torch_matmul(q$transpose(-2, -1), q), torch_eye(5))
 }
 
 }

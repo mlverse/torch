@@ -29,8 +29,8 @@ mm(input, mat2, out=None) -> Tensor
 
 \examples{
 \dontrun{
-mat1 = torch_randn(2, 3)
-mat2 = torch_randn(3, 3)
+mat1 = torch_randn(c(2, 3))
+mat2 = torch_randn(c(3, 3))
 torch_mm(mat1, mat2)
 }
 

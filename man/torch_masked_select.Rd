@@ -30,9 +30,9 @@ masked_select(input, mask, out=None) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_randn(3, 4)
+x = torch_randn(c(3, 4))
 x
-mask = x.ge(0.5)
+mask = x$ge(0.5)
 mask
 torch_masked_select(x, mask)
 }

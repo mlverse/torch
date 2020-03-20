@@ -40,10 +40,10 @@ empty_strided(size, stride, dtype=None, layout=None, device=None, requires_grad=
 
 \examples{
 \dontrun{
-a = torch_empty_strided((2, 3), (1, 2))
+a = torch_empty_strided(list(2, 3), list(1, 2))
 a
-a.stride()
-a.size()
+a$stride()
+a$size()
 }
 
 }

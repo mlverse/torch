@@ -41,14 +41,14 @@ cholesky_solve(input, input2, upper=False, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(3, 3)
-a = torch_mm(a, a.t()) # make symmetric positive definite
+a = torch_randn(c(3, 3))
+a = torch_mm(a, a$t()) # make symmetric positive definite
 u = torch_cholesky(a)
 a
-b = torch_randn(3, 2)
+b = torch_randn(c(3, 2))
 b
 torch_cholesky_solve(b, u)
-torch_mm(a.inverse(), b)
+torch_mm(a$inverse(), b)
 }
 
 }

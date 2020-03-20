@@ -29,10 +29,10 @@ cat(tensors, dim=0, out=None) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_randn(2, 3)
+x = torch_randn(c(2, 3))
 x
-torch_cat((x, x, x), 0)
-torch_cat((x, x, x), 1)
+torch_cat(list(x, x, x), 0)
+torch_cat(list(x, x, x), 1)
 }
 
 }

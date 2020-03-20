@@ -29,7 +29,7 @@ unsqueeze(input, dim, out=None) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_tensor([1, 2, 3, 4])
+x = torch_tensor(c(1, 2, 3, 4))
 torch_unsqueeze(x, 0)
 torch_unsqueeze(x, 1)
 }

@@ -37,8 +37,8 @@ gather(input, dim, index, out=None, sparse_grad=False) -> Tensor
 
 \examples{
 \dontrun{
-t = torch_tensor([[1,2],[3,4]])
-torch_gather(t, 1, torch_tensor([[0,0],[1,0]]))
+t = torch_tensor(c([1,2],[3,4]))
+torch_gather(t, 1, torch_tensor(c([0,0],[1,0])))
 }
 
 }

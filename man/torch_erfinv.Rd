@@ -25,7 +25,7 @@ erfinv(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_erfinv(torch_tensor([0, 0.5, -1.]))
+torch_erfinv(torch_tensor(c(0, 0.5, -1.)))
 }
 
 }

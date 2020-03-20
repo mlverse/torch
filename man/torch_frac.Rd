@@ -19,7 +19,7 @@ frac(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_frac(torch_tensor([1, 2.5, -3.2]))
+torch_frac(torch_tensor(c(1, 2.5, -3.2)))
 }
 
 }

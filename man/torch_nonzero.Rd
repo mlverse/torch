@@ -55,11 +55,11 @@ nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensor
 
 \examples{
 \dontrun{
-torch_nonzero(torch_tensor([1, 1, 1, 0, 1]))
-torch_nonzero(torch_tensor([[0.6, 0.0, 0.0, 0.0],
-torch_nonzero(torch_tensor([1, 1, 1, 0, 1]), as_tuple=True)
-torch_nonzero(torch_tensor([[0.6, 0.0, 0.0, 0.0],
-torch_nonzero(torch_tensor(5), as_tuple=True)
+torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)))
+torch_nonzero(torch_tensor(c([0.6, 0.0, 0.0, 0.0),
+torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)), as_tuple=TRUE)
+torch_nonzero(torch_tensor(c([0.6, 0.0, 0.0, 0.0),
+torch_nonzero(torch_tensor(5), as_tuple=TRUE)
 }
 
 }

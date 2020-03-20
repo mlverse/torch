@@ -49,23 +49,23 @@ matmul(input, other, out=None) -> Tensor
 # vector x vector
 tensor1 = torch_randn(c(3))
 tensor2 = torch_randn(c(3))
-torch_matmul(tensor1, tensor2).size()
+torch_matmul(tensor1, tensor2)$size()
 # matrix x vector
-tensor1 = torch_randn(3, 4)
+tensor1 = torch_randn(c(3, 4))
 tensor2 = torch_randn(c(4))
-torch_matmul(tensor1, tensor2).size()
+torch_matmul(tensor1, tensor2)$size()
 # batched matrix x broadcasted vector
-tensor1 = torch_randn(10, 3, 4)
+tensor1 = torch_randn(c(10, 3, 4))
 tensor2 = torch_randn(c(4))
-torch_matmul(tensor1, tensor2).size()
+torch_matmul(tensor1, tensor2)$size()
 # batched matrix x batched matrix
-tensor1 = torch_randn(10, 3, 4)
-tensor2 = torch_randn(10, 4, 5)
-torch_matmul(tensor1, tensor2).size()
+tensor1 = torch_randn(c(10, 3, 4))
+tensor2 = torch_randn(c(10, 4, 5))
+torch_matmul(tensor1, tensor2)$size()
 # batched matrix x broadcasted matrix
-tensor1 = torch_randn(10, 3, 4)
-tensor2 = torch_randn(4, 5)
-torch_matmul(tensor1, tensor2).size()
+tensor1 = torch_randn(c(10, 3, 4))
+tensor2 = torch_randn(c(4, 5))
+torch_matmul(tensor1, tensor2)$size()
 }
 
 }

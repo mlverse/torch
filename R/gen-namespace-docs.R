@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' torch_abs(torch_tensor([-1, -2, 3]))
+#' torch_abs(torch_tensor(c(-1, -2, 3)))
 #' }
 #'
 #' @name torch_abs
@@ -43,7 +43,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_angle(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))*180/3.14159
+#' torch_angle(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))*180/3.14159
 #' }
 #'
 #' @name torch_angle
@@ -70,7 +70,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_real(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))
+#' torch_real(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
 #' }
 #'
 #' @name torch_real
@@ -97,7 +97,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_imag(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))
+#' torch_imag(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
 #' }
 #'
 #' @name torch_imag
@@ -124,7 +124,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_conj(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))
+#' torch_conj(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
 #' }
 #'
 #' @name torch_conj
@@ -396,10 +396,10 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_allclose(torch_tensor([10000., 1e-07]), torch_tensor([10000.1, 1e-08]))
-#' torch_allclose(torch_tensor([10000., 1e-08]), torch_tensor([10000.1, 1e-09]))
+#' torch_allclose(torch_tensor(c(10000., 1e-07)), torch_tensor(c(10000.1, 1e-08)))
+#' torch_allclose(torch_tensor(c(10000., 1e-08)), torch_tensor(c(10000.1, 1e-09)))
 #' torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]))
-#' torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]), equal_nan=True)
+#' torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]), equal_nan=TRUE)
 #' }
 #'
 #' @name torch_allclose
@@ -591,9 +591,9 @@ NULL
 #' \dontrun{
 #' x = torch_randn(c(3, 3))
 #' x
-#' t = torch_as_strided(x, (2, 2), (1, 2))
+#' t = torch_as_strided(x, list(2, 2), list(1, 2))
 #' t
-#' t = torch_as_strided(x, (2, 2), (1, 2), 1)
+#' t = torch_as_strided(x, list(2, 2), list(1, 2), 1)
 #' }
 #'
 #' @name torch_as_strided
@@ -699,7 +699,7 @@ NULL
 #' M = torch_randn(c(10, 3, 5))
 #' batch1 = torch_randn(c(10, 3, 4))
 #' batch2 = torch_randn(c(10, 4, 5))
-#' torch_baddbmm(M, batch1, batch2).size()
+#' torch_baddbmm(M, batch1, batch2)$size()
 #' }
 #'
 #' @name torch_baddbmm
@@ -785,7 +785,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = torch_empty(3, 3).uniform_(0, 1)  # generate a uniform random matrix with range [0, 1]
+#' a = torch_empty(3, 3)$uniform_list(0, 1)  # generate a uniform random matrix with range c(0, 1)
 #' a
 #' torch_bernoulli(a)
 #' a = torch_ones(c(3, 3)) # probability of drawing "1" is 1
@@ -825,11 +825,11 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' input = torch_randint(0, 8, (5,), dtype=torch_int64)
+#' input = torch_randint(0, 8, list(5,), dtype=torch_int64())
 #' weights = torch_linspace(0, 1, steps=5)
 #' input, weights
 #' torch_bincount(input)
-#' input.bincount(weights)
+#' input$bincount(weights)
 #' }
 #'
 #' @name torch_bincount
@@ -874,10 +874,10 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_logical_not(torch_tensor([True, False]))
-#' torch_logical_not(torch_tensor([0, 1, -10], dtype=torch_int8))
-#' torch_logical_not(torch_tensor([0., 1.5, -10.], dtype=torch_double))
-#' torch_logical_not(torch_tensor([0., 1., -10.], dtype=torch_double), out=torch_empty(3, dtype=torch_int16))
+#' torch_logical_not(torch_tensor(c(TRUE, FALSE)))
+#' torch_logical_not(torch_tensor(c(0, 1, -10), dtype=torch_int8()))
+#' torch_logical_not(torch_tensor(c(0., 1.5, -10.), dtype=torch_double()))
+#' torch_logical_not(torch_tensor(c(0., 1., -10.), dtype=torch_double()), out=torch_empty(3, dtype=torch_int16()))
 #' }
 #'
 #' @name torch_logical_not
@@ -902,13 +902,13 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_logical_xor(torch_tensor([True, False, True]), torch_tensor([True, False, False]))
-#' a = torch_tensor([0, 1, 10, 0], dtype=torch_int8)
-#' b = torch_tensor([4, 0, 1, 0], dtype=torch_int8)
+#' torch_logical_xor(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
+#' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
+#' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
 #' torch_logical_xor(a, b)
-#' torch_logical_xor(a.double(), b.double())
-#' torch_logical_xor(a.double(), b)
-#' torch_logical_xor(a, b, out=torch_empty(4, dtype=torch_bool))
+#' torch_logical_xor(a$double(), b$double())
+#' torch_logical_xor(a$double(), b)
+#' torch_logical_xor(a, b, out=torch_empty(4, dtype=torch_bool()))
 #' }
 #'
 #' @name torch_logical_xor
@@ -990,7 +990,7 @@ NULL
 #' input = torch_randn(c(10, 3, 4))
 #' mat2 = torch_randn(c(10, 4, 5))
 #' res = torch_bmm(input, mat2)
-#' res.size()
+#' res$size()
 #' }
 #'
 #' @name torch_bmm
@@ -1012,10 +1012,10 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_arange(3).view(1, 3)
-#' y = torch_arange(2).view(2, 1)
+#' x = torch_arange(3)$view(1, 3)
+#' y = torch_arange(2)$view(2, 1)
 #' a, b = torch_broadcast_tensors(x, y)
-#' a.size()
+#' a$size()
 #' a
 #' }
 #'
@@ -1049,8 +1049,8 @@ NULL
 #' \dontrun{
 #' x = torch_randn(c(2, 3))
 #' x
-#' torch_cat((x, x, x), 0)
-#' torch_cat((x, x, x), 1)
+#' torch_cat(list(x, x, x), 0)
+#' torch_cat(list(x, x, x), 1)
 #' }
 #'
 #' @name torch_cat
@@ -1560,7 +1560,7 @@ NULL
 #' a = torch_randn(c(10))
 #' a
 #' torch_cumprod(a, dim=0)
-#' a[5] = 0.0
+#' ac(5) = 0.0
 #' torch_cumprod(a, dim=0)
 #' }
 #'
@@ -1593,7 +1593,7 @@ NULL
 #' torch_det(A)
 #' A = torch_randn(c(3, 2, 2))
 #' A
-#' A.det()
+#' A$det()
 #' }
 #'
 #' @name torch_det
@@ -1803,7 +1803,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_dot(torch_tensor([2, 3]), torch_tensor([2, 1]))
+#' torch_dot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
 #' }
 #'
 #' @name torch_dot
@@ -1881,7 +1881,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_empty((2,3), dtype=torch_int64)
+#' torch_empty(list(2,3), dtype=torch_int64())
 #' }
 #'
 #' @name torch_empty_like
@@ -1918,10 +1918,10 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = torch_empty_strided((2, 3), (1, 2))
+#' a = torch_empty_strided(list(2, 3), list(1, 2))
 #' a
-#' a.stride()
-#' a.size()
+#' a$stride()
+#' a$size()
 #' }
 #'
 #' @name torch_empty_strided
@@ -1948,7 +1948,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_erf(torch_tensor([0, -1., 10.]))
+#' torch_erf(torch_tensor(c(0, -1., 10.)))
 #' }
 #'
 #' @name torch_erf
@@ -1976,7 +1976,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_erfc(torch_tensor([0, -1., 10.]))
+#' torch_erfc(torch_tensor(c(0, -1., 10.)))
 #' }
 #'
 #' @name torch_erfc
@@ -2004,7 +2004,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_exp(torch_tensor([0, math.log(2.)]))
+#' torch_exp(torch_tensor([0, math$log(2.)]))
 #' }
 #'
 #' @name torch_exp
@@ -2032,7 +2032,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_expm1(torch_tensor([0, math.log(2.)]))
+#' torch_expm1list(torch_tensor([0, math$log(2.)]))
 #' }
 #'
 #' @name torch_expm1
@@ -2084,7 +2084,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' t = torch_tensor([[[1, 2],
+#' t = torch_tensor(c([[1, 2),
 #' torch_flatten(t)
 #' torch_flatten(t, start_dim=1)
 #' }
@@ -2142,7 +2142,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_frac(torch_tensor([1, 2.5, -3.2]))
+#' torch_frac(torch_tensor(c(1, 2.5, -3.2)))
 #' }
 #'
 #' @name torch_frac
@@ -2170,7 +2170,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_full((2, 3), 3.141592)
+#' torch_full(list(2, 3), 3.141592)
 #' }
 #'
 #' @name torch_full
@@ -2380,7 +2380,7 @@ NULL
 #' # arbitrary number of batch dimensions, 2D FFT
 #' x = torch_randn(c(3, 3, 5, 5, 2))
 #' y = torch_fft(x, 2)
-#' y.shape
+#' y$shape
 #' }
 #'
 #' @name torch_fft
@@ -2502,8 +2502,8 @@ NULL
 #' @examples
 #' \dontrun{
 #' x = torch_randn(c(5, 5))
-#' torch_rfft(x, 2).shape
-#' torch_rfft(x, 2, onesided=False).shape
+#' torch_rfft(x, 2)$shape
+#' torch_rfft(x, 2, onesided=FALSE)$shape
 #' }
 #'
 #' @name torch_rfft
@@ -2578,16 +2578,16 @@ NULL
 #' @examples
 #' \dontrun{
 #' x = torch_randn(c(4, 4))
-#' torch_rfft(x, 2, onesided=True).shape
+#' torch_rfft(x, 2, onesided=TRUE)$shape
 #'     >>>
-#' # notice that with onesided=True, output size does not determine the original signal size
+#' # notice that with onesided=TRUE, output size does not determine the original signal size
 #' x = torch_randn(c(4, 5))
-#' torch_rfft(x, 2, onesided=True).shape
+#' torch_rfft(x, 2, onesided=TRUE)$shape
 #'     >>>
 #' # now we use the original shape to recover x
 #' x
-#' y = torch_rfft(x, 2, onesided=True)
-#' torch_irfft(y, 2, onesided=True, signal_sizes=x.shape)  # recover x
+#' y = torch_rfft(x, 2, onesided=TRUE)
+#' torch_irfft(y, 2, onesided=TRUE, signal_sizes=x$shape)  # recover x
 #' }
 #'
 #' @name torch_irfft
@@ -2626,7 +2626,7 @@ NULL
 #' x = torch_randn(c(2, 3, 4, 4))
 #' y = torch_inverse(x)
 #' z = torch_matmul(x, y)
-#' torch_max(torch_abs(z - torch_eye(4).expand_as(x))) # Max non-zero
+#' torch_max(torch_abs(z - torch_eye(4)$expand_as(x))) # Max non-zero
 #' }
 #'
 #' @name torch_inverse
@@ -2704,9 +2704,9 @@ NULL
 #' x = torch_arange(1., 6.)
 #' x
 #' torch_kthvalue(x, 4)
-#' x=torch_arange(1.,7.).resize_(2,3)
+#' x=torch_arange(1.,7.)$resize_list(2,3)
 #' x
-#' torch_kthvalue(x, 2, 0, True)
+#' torch_kthvalue(x, 2, 0, TRUE)
 #' }
 #'
 #' @name torch_kthvalue
@@ -2801,7 +2801,7 @@ NULL
 #' \dontrun{
 #' a = torch_rand(5)
 #' a
-#' torch_log10(a)
+#' torch_log10list(a)
 #' }
 #'
 #' @name torch_log10
@@ -2862,7 +2862,7 @@ NULL
 #' \dontrun{
 #' a = torch_rand(5)
 #' a
-#' torch_log2(a)
+#' torch_log2list(a)
 #' }
 #'
 #' @name torch_log2
@@ -2898,8 +2898,8 @@ NULL
 #' torch_det(A)
 #' torch_logdet(A)
 #' A
-#' A.det()
-#' A.det().log()
+#' A$det()
+#' A$det()$log()
 #' }
 #'
 #' @name torch_logdet
@@ -3024,23 +3024,23 @@ NULL
 #' # vector x vector
 #' tensor1 = torch_randn(c(3))
 #' tensor2 = torch_randn(c(3))
-#' torch_matmul(tensor1, tensor2).size()
+#' torch_matmul(tensor1, tensor2)$size()
 #' # matrix x vector
 #' tensor1 = torch_randn(c(3, 4))
 #' tensor2 = torch_randn(c(4))
-#' torch_matmul(tensor1, tensor2).size()
+#' torch_matmul(tensor1, tensor2)$size()
 #' # batched matrix x broadcasted vector
 #' tensor1 = torch_randn(c(10, 3, 4))
 #' tensor2 = torch_randn(c(4))
-#' torch_matmul(tensor1, tensor2).size()
+#' torch_matmul(tensor1, tensor2)$size()
 #' # batched matrix x batched matrix
 #' tensor1 = torch_randn(c(10, 3, 4))
 #' tensor2 = torch_randn(c(10, 4, 5))
-#' torch_matmul(tensor1, tensor2).size()
+#' torch_matmul(tensor1, tensor2)$size()
 #' # batched matrix x broadcasted matrix
 #' tensor1 = torch_randn(c(10, 3, 4))
 #' tensor2 = torch_randn(c(4, 5))
-#' torch_matmul(tensor1, tensor2).size()
+#' torch_matmul(tensor1, tensor2)$size()
 #' }
 #'
 #' @name torch_matmul
@@ -3076,7 +3076,7 @@ NULL
 #' a = torch_eye(10)
 #' torch_matrix_rank(a)
 #' b = torch_eye(10)
-#' b[0, 0] = 0
+#' bc(0, 0) = 0
 #' torch_matrix_rank(b)
 #' }
 #'
@@ -3265,7 +3265,7 @@ NULL
 #' a = torch_randn(c(4, 4))
 #' a
 #' torch_mean(a, 1)
-#' torch_mean(a, 1, True)
+#' torch_mean(a, 1, TRUE)
 #' }
 #'
 #' @name torch_mean
@@ -3494,9 +3494,9 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = torch_randint(10, (5,))
+#' a = torch_randint(10, list(5,))
 #' a
-#' b = a + (torch_randn(c(50, 1)) * 5).long()
+#' b = a + list(torch_randn(c(50, 1)) * 5)$long()
 #' torch_mode(b, 0)
 #' }
 #'
@@ -3627,7 +3627,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = torch_empty(2, 3).uniform_(1, 2)
+#' a = torch_empty(2, 3)$uniform_list(1, 2)
 #' a
 #' torch_mvlgamma(a, 2)
 #' }
@@ -3656,7 +3656,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+#' x = torch_tensor(c([1, 2, 3], [4, 5, 6], [7, 8, 9]))
 #' torch_narrow(x, 0, 0, 2)
 #' torch_narrow(x, 1, 1, 2)
 #' }
@@ -3803,7 +3803,7 @@ NULL
 #' \dontrun{
 #' input1 = torch_randn(c(100, 128))
 #' input2 = torch_randn(c(100, 128))
-#' output = F.cosine_similarity(input1, input2)
+#' output = F$cosine_similarity(input1, input2)
 #' print(output)
 #' }
 #'
@@ -3958,9 +3958,9 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_randint(3, 5, (3,))
-#' torch_randint(10, (2, 2))
-#' torch_randint(3, 10, (2, 2))
+#' torch_randint(3, 5, list(3,))
+#' torch_randint(10, list(2, 2))
+#' torch_randint(3, 10, list(2, 2))
 #' }
 #'
 #' @name torch_randint
@@ -4203,12 +4203,12 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_tensor([1, 2, 3])
-#' x.repeat_interleave(2)
-#' y = torch_tensor([[1, 2], [3, 4]])
+#' x = torch_tensor(c(1, 2, 3))
+#' x$repeat_interleave(2)
+#' y = torch_tensor(c([1, 2], [3, 4]))
 #' torch_repeat_interleave(y, 2)
 #' torch_repeat_interleave(y, 3, dim=1)
-#' torch_repeat_interleave(y, torch_tensor([1, 2]), dim=0)
+#' torch_repeat_interleave(y, torch_tensor(c(1, 2)), dim=0)
 #' }
 #'
 #' @name torch_repeat_interleave
@@ -4262,9 +4262,9 @@ NULL
 #' @examples
 #' \dontrun{
 #' a = torch_arange(4.)
-#' torch_reshape(a, (2, 2))
-#' b = torch_tensor([[0, 1], [2, 3]])
-#' torch_reshape(b, (-1,))
+#' torch_reshape(a, list(2, 2))
+#' b = torch_tensor(c([0, 1], [2, 3]))
+#' torch_reshape(b, list(-1,))
 #' }
 #'
 #' @name torch_reshape
@@ -4583,13 +4583,13 @@ NULL
 #' @examples
 #' \dontrun{
 #' x = torch_zeros(c(2, 1, 2, 1, 2))
-#' x.size()
+#' x$size()
 #' y = torch_squeeze(x)
-#' y.size()
+#' y$size()
 #' y = torch_squeeze(x, 0)
-#' y.size()
+#' y$size()
 #' y = torch_squeeze(x, 1)
-#' y.size()
+#' y$size()
 #' }
 #'
 #' @name torch_squeeze
@@ -4752,8 +4752,8 @@ NULL
 #' a = torch_randn(c(4, 4))
 #' a
 #' torch_sum(a, 1)
-#' b = torch_arange(4 * 5 * 6).view(4, 5, 6)
-#' torch_sum(b, (2, 1))
+#' b = torch_arange(4 * 5 * 6)$view(4, 5, 6)
+#' torch_sum(b, list(2, 1))
 #' }
 #'
 #' @name torch_sum
@@ -5161,9 +5161,9 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_arange(8).view(2, 2, 2)
+#' x = torch_arange(8)$view(2, 2, 2)
 #' x
-#' torch_flip(x, [0, 1])
+#' torch_flip(x, c(0, 1))
 #' }
 #'
 #' @name torch_flip
@@ -5190,11 +5190,11 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_tensor([1, 2, 3, 4, 5, 6, 7, 8]).view(4, 2)
+#' x = torch_tensor(c(1, 2, 3, 4, 5, 6, 7, 8))$view(4, 2)
 #' x
 #' torch_roll(x, 1, 0)
 #' torch_roll(x, -1, 0)
-#' torch_roll(x, shifts=(2, 1), dims=(0, 1))
+#' torch_roll(x, shifts=list(2, 1), dims=list(0, 1))
 #' }
 #'
 #' @name torch_roll
@@ -5219,12 +5219,12 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_arange(4).view(2, 2)
+#' x = torch_arange(4)$view(2, 2)
 #' x
-#' torch_rot90(x, 1, [0, 1])
-#' x = torch_arange(8).view(2, 2, 2)
+#' torch_rot90list(x, 1, c(0, 1))
+#' x = torch_arange(8)$view(2, 2, 2)
 #' x
-#' torch_rot90(x, 1, [1, 2])
+#' torch_rot90list(x, 1, c(1, 2))
 #' }
 #'
 #' @name torch_rot90
@@ -5248,9 +5248,9 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' y = torch_randn((2, 3))
+#' y = torch_randn(list(2, 3))
 #' y
-#' x = torch_tensor([[1, 3, 4], [1, 2, 3]])
+#' x = torch_tensor(c([1, 3, 4], [1, 2, 3]))
 #' torch_trapz(y, x)
 #' }
 #'
@@ -5324,13 +5324,13 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_tensor([1, 1, 2, 2, 3, 1, 1, 2])
+#' x = torch_tensor(c(1, 1, 2, 2, 3, 1, 1, 2))
 #' output = torch_unique_consecutive(x)
 #' output
-#' output, inverse_indices = torch_unique_consecutive(x, return_inverse=True)
+#' output, inverse_indices = torch_unique_consecutive(x, return_inverse=TRUE)
 #' output
 #' inverse_indices
-#' output, counts = torch_unique_consecutive(x, return_counts=True)
+#' output, counts = torch_unique_consecutive(x, return_counts=TRUE)
 #' output
 #' counts
 #' }
@@ -5363,7 +5363,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_tensor([1, 2, 3, 4])
+#' x = torch_tensor(c(1, 2, 3, 4))
 #' torch_unsqueeze(x, 0)
 #' torch_unsqueeze(x, 1)
 #' }
@@ -5648,18 +5648,18 @@ NULL
 #' \dontrun{
 #' import torch
 #' a = torch_arange(9, dtype= torch_float) - 4
-#' b = a.reshape((3, 3))
+#' b = a$reshape(list(3, 3))
 #' torch_norm(a)
 #' torch_norm(b)
 #' torch_norm(a, float('inf'))
 #' torch_norm(b, float('inf'))
-#' c = torch_tensor([[ 1, 2, 3],[-1, 1, 4]] , dtype= torch_float)
+#' c = torch_tensor(c([ 1, 2, 3],[-1, 1, 4]) , dtype= torch_float)
 #' torch_norm(c, dim=0)
 #' torch_norm(c, dim=1)
 #' torch_norm(c, p=1, dim=1)
-#' d = torch_arange(8, dtype= torch_float).reshape(2,2,2)
-#' torch_norm(d, dim=(1,2))
-#' torch_norm(d[0, :, :]), torch_norm(d[1, :, :])
+#' d = torch_arange(8, dtype= torch_float)$reshape(2,2,2)
+#' torch_norm(d, dim=list(1,2))
+#' torch_norm(dc(0, :, :)), torch_norm(dc(1, :, :))
 #' }
 #'
 #' @name torch_norm
@@ -5815,13 +5815,13 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' i = torch_tensor([[0, 1, 1],
-#' v = torch_tensor([3, 4, 5], dtype=torch_float32)
-#' torch_sparse_coo_tensor(i, v, [2, 4])
+#' i = torch_tensor(c([0, 1, 1),
+#' v = torch_tensor(c(3, 4, 5), dtype=torch_float32())
+#' torch_sparse_coo_tensor(i, v, c(2, 4))
 #' torch_sparse_coo_tensor(i, v)  # Shape inference
-#' torch_sparse_coo_tensor(i, v, [2, 4],
-#' S = torch_sparse_coo_tensor(torch_empty([1, 0]), [], [1])
-#' S = torch_sparse_coo_tensor(torch_empty([1, 0]), torch_empty([0, 2]), [1, 2])
+#' torch_sparse_coo_tensor(i, v, c(2, 4),
+#' S = torch_sparse_coo_tensor(torch_empty(c(1, 0]), [], [1))
+#' S = torch_sparse_coo_tensor(torch_empty(c(1, 0)), torch_empty(c(0, 2]), [1, 2))
 #' }
 #'
 #' @name torch_sparse_coo_tensor
@@ -5846,9 +5846,9 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_unbind(torch_tensor([[1, 2, 3],
-#'                            [4, 5, 6],
-#'                            [7, 8, 9]]))
+#' torch_unbind(torch_tensor(c([1, 2, 3),
+#'                            c(4, 5, 6),
+#'                            c(7, 8, 9])))
 #' }
 #'
 #' @name torch_unbind
@@ -5873,8 +5873,8 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_quantize_per_tensor(torch_tensor([-1.0, 0.0, 1.0, 2.0]), 0.1, 10, torch_quint8)
-#' torch_quantize_per_tensor(torch_tensor([-1.0, 0.0, 1.0, 2.0]), 0.1, 10, torch_quint8).int_repr()
+#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8)
+#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8)$int_repr()
 #' }
 #'
 #' @name torch_quantize_per_tensor
@@ -5900,9 +5900,9 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_tensor([[-1.0, 0.0], [1.0, 2.0]])
-#' torch_quantize_per_channel(x, torch_tensor([0.1, 0.01]), torch_tensor([10, 0]), 0, torch_quint8)
-#' torch_quantize_per_channel(x, torch_tensor([0.1, 0.01]), torch_tensor([10, 0]), 0, torch_quint8).int_repr()
+#' x = torch_tensor(c([-1.0, 0.0], [1.0, 2.0]))
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10, 0)), 0, torch_quint8)
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10, 0)), 0, torch_quint8)$int_repr()
 #' }
 #'
 #' @name torch_quantize_per_channel
@@ -5924,8 +5924,8 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_tensor([1, 2, 3])
-#' y = torch_tensor([4, 5, 6])
+#' x = torch_tensor(c(1, 2, 3))
+#' y = torch_tensor(c(4, 5, 6))
 #' grid_x, grid_y = torch_meshgrid(x, y)
 #' grid_x
 #' grid_y
@@ -5948,9 +5948,9 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = [1, 2, 3]
-#' b = [4, 5]
-#' list(itertools.product(a, b))
+#' a = c(1, 2, 3)
+#' b = c(4, 5)
+#' list(itertools$product(a, b))
 #' tensor_a = torch_tensor(a)
 #' tensor_b = torch_tensor(b)
 #' torch_cartesian_prod(tensor_a, tensor_b)
@@ -5979,14 +5979,14 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = [1, 2, 3]
-#' list(itertools.combinations(a, r=2))
-#' list(itertools.combinations(a, r=3))
-#' list(itertools.combinations_with_replacement(a, r=2))
+#' a = c(1, 2, 3)
+#' list(itertools$combinations(a, r=2))
+#' list(itertools$combinations(a, r=3))
+#' list(itertools$combinations_with_replacement(a, r=2))
 #' tensor_a = torch_tensor(a)
 #' torch_combinations(tensor_a)
 #' torch_combinations(tensor_a, r=3)
-#' torch_combinations(tensor_a, with_replacement=True)
+#' torch_combinations(tensor_a, with_replacement=TRUE)
 #' }
 #'
 #' @name torch_combinations
@@ -6011,8 +6011,8 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_result_type(torch_tensor([1, 2], dtype=torch_int), 1.0)
-#' torch_result_type(torch_tensor([1, 2], dtype=torch_uint8), torch_tensor(1))
+#' torch_result_type(torch_tensor(c(1, 2), dtype=torch_int()), 1.0)
+#' torch_result_type(torch_tensor(c(1, 2), dtype=torch_uint8()), torch_tensor(1))
 #' }
 #'
 #' @name torch_result_type
@@ -6407,7 +6407,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' x = torch_arange(1., 10.).view(3, 3)
+#' x = torch_arange(1., 10.)$view(3, 3)
 #' x
 #' torch_trace(x)
 #' }
@@ -6436,7 +6436,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_ne(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' torch_ne(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 #' }
 #'
 #' @name torch_ne
@@ -6463,7 +6463,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_eq(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' torch_eq(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 #' }
 #'
 #' @name torch_eq
@@ -6490,7 +6490,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_ge(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' torch_ge(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 #' }
 #'
 #' @name torch_ge
@@ -6517,7 +6517,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_le(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' torch_le(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 #' }
 #'
 #' @name torch_le
@@ -6544,7 +6544,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_gt(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' torch_gt(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 #' }
 #'
 #' @name torch_gt
@@ -6571,7 +6571,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_lt(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+#' torch_lt(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 #' }
 #'
 #' @name torch_lt
@@ -6596,8 +6596,8 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' src = torch_tensor([[4, 3, 5],
-#' torch_take(src, torch_tensor([0, 2, 5]))
+#' src = torch_tensor(c([4, 3, 5),
+#' torch_take(src, torch_tensor(c(0, 2, 5)))
 #' }
 #'
 #' @name torch_take
@@ -6634,7 +6634,7 @@ NULL
 #' \dontrun{
 #' x = torch_randn(c(3, 4))
 #' x
-#' indices = torch_tensor([0, 2])
+#' indices = torch_tensor(c(0, 2))
 #' torch_index_select(x, 0, indices)
 #' torch_index_select(x, 1, indices)
 #' }
@@ -6669,7 +6669,7 @@ NULL
 #' \dontrun{
 #' x = torch_randn(c(3, 4))
 #' x
-#' mask = x.ge(0.5)
+#' mask = x$ge(0.5)
 #' mask
 #' torch_masked_select(x, mask)
 #' }
@@ -6728,11 +6728,11 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_nonzero(torch_tensor([1, 1, 1, 0, 1]))
-#' torch_nonzero(torch_tensor([[0.6, 0.0, 0.0, 0.0],
-#' torch_nonzero(torch_tensor([1, 1, 1, 0, 1]), as_tuple=True)
-#' torch_nonzero(torch_tensor([[0.6, 0.0, 0.0, 0.0],
-#' torch_nonzero(torch_tensor(5), as_tuple=True)
+#' torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)))
+#' torch_nonzero(torch_tensor(c([0.6, 0.0, 0.0, 0.0),
+#' torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)), as_tuple=TRUE)
+#' torch_nonzero(torch_tensor(c([0.6, 0.0, 0.0, 0.0),
+#' torch_nonzero(torch_tensor(5), as_tuple=TRUE)
 #' }
 #'
 #' @name torch_nonzero
@@ -6770,8 +6770,8 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' t = torch_tensor([[1,2],[3,4]])
-#' torch_gather(t, 1, torch_tensor([[0,0],[1,0]]))
+#' t = torch_tensor(c([1,2],[3,4]))
+#' torch_gather(t, 1, torch_tensor(c([0,0],[1,0])))
 #' }
 #'
 #' @name torch_gather
@@ -6900,8 +6900,8 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' A = torch_tensor([[1., 1, 1],
-#' B = torch_tensor([[-10., -3],
+#' A = torch_tensor(c([1., 1, 1),
+#' B = torch_tensor(c([-10., -3),
 #' X, _ = torch_lstsq(B, A)
 #' X
 #' }
@@ -7071,10 +7071,10 @@ NULL
 #' u
 #' s
 #' v
-#' torch_dist(a, torch_mm(torch_mm(u, torch_diag(s)), v.t()))
+#' torch_dist(a, torch_mm(torch_mm(u, torch_diag(s)), v$t()))
 #' a_big = torch_randn(c(7, 5, 3))
 #' u, s, v = torch_svd(a_big)
-#' torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v.transpose(-2, -1)))
+#' torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v$transpose(-2, -1)))
 #' }
 #'
 #' @name torch_svd
@@ -7120,15 +7120,15 @@ NULL
 #' @examples
 #' \dontrun{
 #' a = torch_randn(c(3, 3))
-#' a = torch_mm(a, a.t()) # make symmetric positive-definite
+#' a = torch_mm(a, a$t()) # make symmetric positive-definite
 #' l = torch_cholesky(a)
 #' a
 #' l
-#' torch_mm(l, l.t())
+#' torch_mm(l, l$t())
 #' a = torch_randn(c(3, 2, 2))
-#' a = torch_matmul(a, a.transpose(-1, -2)) + 1e-03 # make symmetric positive-definite
+#' a = torch_matmul(a, a$transpose(-1, -2)) + 1e-03 # make symmetric positive-definite
 #' l = torch_cholesky(a)
-#' z = torch_matmul(l, l.transpose(-1, -2))
+#' z = torch_matmul(l, l$transpose(-1, -2))
 #' torch_max(torch_abs(z - a)) # Max non-zero
 #' }
 #'
@@ -7172,13 +7172,13 @@ NULL
 #' @examples
 #' \dontrun{
 #' a = torch_randn(c(3, 3))
-#' a = torch_mm(a, a.t()) # make symmetric positive definite
+#' a = torch_mm(a, a$t()) # make symmetric positive definite
 #' u = torch_cholesky(a)
 #' a
 #' b = torch_randn(c(3, 2))
 #' b
 #' torch_cholesky_solve(b, u)
-#' torch_mm(a.inverse(), b)
+#' torch_mm(a$inverse(), b)
 #' }
 #'
 #' @name torch_cholesky_solve
@@ -7217,15 +7217,15 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' A = torch_tensor([[6.80, -2.11,  5.66,  5.97,  8.23],
-#' B = torch_tensor([[4.02,  6.19, -8.22, -7.57, -3.03],
+#' A = torch_tensor(c([6.80, -2.11,  5.66,  5.97,  8.23),
+#' B = torch_tensor(c([4.02,  6.19, -8.22, -7.57, -3.03),
 #' X, LU = torch_solve(B, A)
 #' torch_dist(B, torch_mm(A, X))
 #' # Batched solver example
 #' A = torch_randn(c(2, 3, 1, 4, 4))
 #' B = torch_randn(c(2, 3, 1, 4, 6))
 #' X, LU = torch_solve(B, A)
-#' torch_dist(B, A.matmul(X))
+#' torch_dist(B, A$matmul(X))
 #' }
 #'
 #' @name torch_solve
@@ -7265,11 +7265,11 @@ NULL
 #' @examples
 #' \dontrun{
 #' a = torch_randn(c(3, 3))
-#' a = torch_mm(a, a.t()) + 1e-05 * torch_eye(3) # make symmetric positive definite
+#' a = torch_mm(a, a$t()) + 1e-05 * torch_eye(3) # make symmetric positive definite
 #' u = torch_cholesky(a)
 #' a
 #' torch_cholesky_inverse(u)
-#' a.inverse()
+#' a$inverse()
 #' }
 #'
 #' @name torch_cholesky_inverse
@@ -7306,16 +7306,16 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = torch_tensor([[12., -51, 4], [6, 167, -68], [-4, 24, -41]])
+#' a = torch_tensor(c([12., -51, 4], [6, 167, -68], [-4, 24, -41]))
 #' q, r = torch_qr(a)
 #' q
 #' r
-#' torch_mm(q, r).round()
-#' torch_mm(q.t(), q).round()
+#' torch_mm(q, r)$round()
+#' torch_mm(q$t(), q)$round()
 #' a = torch_randn(c(3, 4, 5))
-#' q, r = torch_qr(a, some=False)
+#' q, r = torch_qr(a, some=FALSE)
 #' torch_allclose(torch_matmul(q, r), a)
-#' torch_allclose(torch_matmul(q.transpose(-2, -1), q), torch_eye(5))
+#' torch_allclose(torch_matmul(q$transpose(-2, -1), q), torch_eye(5))
 #' }
 #'
 #' @name torch_qr
@@ -7476,10 +7476,10 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' weights = torch_tensor([0, 10, 3, 0], dtype=torch_float) # create a tensor of weights
+#' weights = torch_tensor(c(0, 10, 3, 0), dtype=torch_float()) # create a tensor of weights
 #' torch_multinomial(weights, 2)
 #' torch_multinomial(weights, 4) # ERROR!
-#' torch_multinomial(weights, 4, replacement=True)
+#' torch_multinomial(weights, 4, replacement=TRUE)
 #' }
 #'
 #' @name torch_multinomial
@@ -7533,7 +7533,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = torch_tensor([1, 0.5])
+#' a = torch_tensor(c(1, 0.5))
 #' torch_digamma(a)
 #' }
 #'
@@ -7565,7 +7565,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = torch_tensor([1, 0.5])
+#' a = torch_tensor(c(1, 0.5))
 #' torch_polygamma(1, a)
 #' }
 #'
@@ -7594,7 +7594,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_erfinv(torch_tensor([0, 0.5, -1.]))
+#' torch_erfinv(torch_tensor(c(0, 0.5, -1.)))
 #' }
 #'
 #' @name torch_erfinv
@@ -7621,7 +7621,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' a = torch_tensor([0.7, -1.2, 0., 2.3])
+#' a = torch_tensor(c(0.7, -1.2, 0., 2.3))
 #' a
 #' torch_sign(a)
 #' }
@@ -7691,7 +7691,7 @@ NULL
 #' \dontrun{
 #' a = torch_randn(c(4))
 #' a
-#' torch_atan2(a, torch_randn(c(4)))
+#' torch_atan2list(a, torch_randn(c(4)))
 #' }
 #'
 #' @name torch_atan2
@@ -7724,7 +7724,7 @@ NULL
 #' @examples
 #' \dontrun{
 #' start = torch_arange(1., 5.)
-#' end = torch_empty(4).fill_(10)
+#' end = torch_empty(4)$fill_list(10)
 #' start
 #' end
 #' torch_lerp(start, end, 0.5)
@@ -7758,7 +7758,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_histc(torch_tensor([1., 2, 1]), bins=4, min=0, max=3)
+#' torch_histc(torch_tensor(c(1., 2, 1)), bins=4, min=0, max=3)
 #' }
 #'
 #' @name torch_histc
@@ -7788,8 +7788,8 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_fmod(torch_tensor([-3., -2, -1, 1, 2, 3]), 2)
-#' torch_fmod(torch_tensor([1., 2, 3, 4, 5]), 1.5)
+#' torch_fmod(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
+#' torch_fmod(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
 #' }
 #'
 #' @name torch_fmod
@@ -7819,8 +7819,8 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_remainder(torch_tensor([-3., -2, -1, 1, 2, 3]), 2)
-#' torch_remainder(torch_tensor([1., 2, 3, 4, 5]), 1.5)
+#' torch_remainder(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
+#' torch_remainder(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
 #' }
 #'
 #' @name torch_remainder
@@ -7962,8 +7962,8 @@ NULL
 #' @examples
 #' \dontrun{
 #' x = torch_ones(c(3, 3))
-#' x[1].fill_(2)
-#' x[2].fill_(3)
+#' xc(1)$fill_list(2)
+#' xc(2)$fill_list(3)
 #' x
 #' torch_renorm(x, 1, 0, 5)
 #' }
@@ -7987,7 +7987,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_equal(torch_tensor([1, 2]), torch_tensor([1, 2]))
+#' torch_equal(torch_tensor(c(1, 2)), torch_tensor(c(1, 2)))
 #' }
 #'
 #' @name torch_equal
@@ -8101,7 +8101,7 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' torch_normal(2, 3, size=(1, 4))
+#' torch_normal(2, 3, size=list(1, 4))
 #' }
 #'
 #' @name torch_normal

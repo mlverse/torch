@@ -35,14 +35,14 @@ squeeze(input, dim=None, out=None) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_zeros(2, 1, 2, 1, 2)
-x.size()
+x = torch_zeros(c(2, 1, 2, 1, 2))
+x$size()
 y = torch_squeeze(x)
-y.size()
+y$size()
 y = torch_squeeze(x, 0)
-y.size()
+y$size()
 y = torch_squeeze(x, 1)
-y.size()
+y$size()
 }
 
 }

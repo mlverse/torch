@@ -28,7 +28,7 @@ torch_t(x)
 x = torch_randn(c(3))
 x
 torch_t(x)
-x = torch_randn(2, 3)
+x = torch_randn(c(2, 3))
 x
 torch_t(x)
 }

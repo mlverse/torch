@@ -49,9 +49,9 @@ torch_mul(a, 100)
 }
 
 \dontrun{
-a = torch_randn(4, 1)
+a = torch_randn(c(4, 1))
 a
-b = torch_randn(1, 4)
+b = torch_randn(c(1, 4))
 b
 torch_mul(a, b)
 }

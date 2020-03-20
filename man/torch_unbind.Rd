@@ -22,9 +22,9 @@ unbind(input, dim=0) -> seq
 
 \examples{
 \dontrun{
-torch_unbind(torch_tensor([[1, 2, 3],
-                           [4, 5, 6],
-                           [7, 8, 9]]))
+torch_unbind(torch_tensor(c([1, 2, 3),
+                           c(4, 5, 6),
+                           c(7, 8, 9])))
 }
 
 }

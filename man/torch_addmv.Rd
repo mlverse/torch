@@ -45,7 +45,7 @@ addmv(beta=1, input, alpha=1, mat, vec, out=None) -> Tensor
 \examples{
 \dontrun{
 M = torch_randn(c(2))
-mat = torch_randn(2, 3)
+mat = torch_randn(c(2, 3))
 vec = torch_randn(c(3))
 torch_addmv(M, mat, vec)
 }

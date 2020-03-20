@@ -19,7 +19,8 @@ LinkingTo:
 Imports:
     Rcpp,
     R6,
-    withr
+    withr,
+    rlang
 RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 Suggests:

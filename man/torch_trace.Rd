@@ -14,7 +14,7 @@ trace(input) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_arange(1., 10.).view(3, 3)
+x = torch_arange(1., 10.)$view(3, 3)
 x
 torch_trace(x)
 }

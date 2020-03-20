@@ -34,12 +34,12 @@ repeat_interleave(repeats) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_tensor([1, 2, 3])
-x.repeat_interleave(2)
-y = torch_tensor([[1, 2], [3, 4]])
+x = torch_tensor(c(1, 2, 3))
+x$repeat_interleave(2)
+y = torch_tensor(c([1, 2], [3, 4]))
 torch_repeat_interleave(y, 2)
 torch_repeat_interleave(y, 3, dim=1)
-torch_repeat_interleave(y, torch_tensor([1, 2]), dim=0)
+torch_repeat_interleave(y, torch_tensor(c(1, 2)), dim=0)
 }
 
 }

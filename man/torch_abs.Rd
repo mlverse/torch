@@ -24,7 +24,7 @@ abs(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_abs(torch_tensor([-1, -2, 3]))
+torch_abs(torch_tensor(c(-1, -2, 3)))
 }
 
 }

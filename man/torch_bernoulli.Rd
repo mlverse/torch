@@ -40,12 +40,12 @@ bernoulli(input, *, generator=None, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_empty(3, 3).uniform_(0, 1)  # generate a uniform random matrix with range [0, 1]
+a = torch_empty(3, 3)$uniform_list(0, 1)  # generate a uniform random matrix with range c(0, 1)
 a
 torch_bernoulli(a)
-a = torch_ones(3, 3) # probability of drawing "1" is 1
+a = torch_ones(c(3, 3)) # probability of drawing "1" is 1
 torch_bernoulli(a)
-a = torch_zeros(3, 3) # probability of drawing "1" is 0
+a = torch_zeros(c(3, 3)) # probability of drawing "1" is 0
 torch_bernoulli(a)
 }
 

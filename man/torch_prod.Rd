@@ -36,13 +36,13 @@ prod(input, dim, keepdim=False, dtype=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(1, 3)
+a = torch_randn(c(1, 3))
 a
 torch_prod(a)
 }
 
 \dontrun{
-a = torch_randn(4, 2)
+a = torch_randn(c(4, 2))
 a
 torch_prod(a, 1)
 }

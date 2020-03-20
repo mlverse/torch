@@ -34,7 +34,7 @@ matrix_rank(input, tol=None, symmetric=False) -> Tensor
 a = torch_eye(10)
 torch_matrix_rank(a)
 b = torch_eye(10)
-b[0, 0] = 0
+bc(0, 0) = 0
 torch_matrix_rank(b)
 }
 

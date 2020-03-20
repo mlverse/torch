@@ -25,9 +25,9 @@ quantize_per_channel(input, scales, zero_points, axis, dtype) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_tensor([[-1.0, 0.0], [1.0, 2.0]])
-torch_quantize_per_channel(x, torch_tensor([0.1, 0.01]), torch_tensor([10, 0]), 0, torch_quint8)
-torch_quantize_per_channel(x, torch_tensor([0.1, 0.01]), torch_tensor([10, 0]), 0, torch_quint8).int_repr()
+x = torch_tensor(c([-1.0, 0.0], [1.0, 2.0]))
+torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10, 0)), 0, torch_quint8)
+torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10, 0)), 0, torch_quint8)$int_repr()
 }
 
 }

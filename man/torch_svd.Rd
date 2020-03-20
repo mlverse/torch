@@ -58,16 +58,16 @@ svd(input, some=True, compute_uv=True, out=None) -> (Tensor, Tensor, Tensor)
 
 \examples{
 \dontrun{
-a = torch_randn(5, 3)
+a = torch_randn(c(5, 3))
 a
 u, s, v = torch_svd(a)
 u
 s
 v
-torch_dist(a, torch_mm(torch_mm(u, torch_diag(s)), v.t()))
-a_big = torch_randn(7, 5, 3)
+torch_dist(a, torch_mm(torch_mm(u, torch_diag(s)), v$t()))
+a_big = torch_randn(c(7, 5, 3))
 u, s, v = torch_svd(a_big)
-torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v.transpose(-2, -1)))
+torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v$transpose(-2, -1)))
 }
 
 }

@@ -39,9 +39,9 @@ mode(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTe
 
 \examples{
 \dontrun{
-a = torch_randint(10, (5,))
+a = torch_randint(10, list(5,))
 a
-b = a + (torch_randn(50, 1) * 5).long()
+b = a + list(torch_randn(c(50, 1)) * 5)$long()
 torch_mode(b, 0)
 }
 

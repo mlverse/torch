@@ -28,8 +28,8 @@ fmod(input, other, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_fmod(torch_tensor([-3., -2, -1, 1, 2, 3]), 2)
-torch_fmod(torch_tensor([1., 2, 3, 4, 5]), 1.5)
+torch_fmod(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
+torch_fmod(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
 }
 
 }

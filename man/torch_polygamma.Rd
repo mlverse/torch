@@ -31,7 +31,7 @@ polygamma(n, input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_tensor([1, 0.5])
+a = torch_tensor(c(1, 0.5))
 torch_polygamma(1, a)
 }
 

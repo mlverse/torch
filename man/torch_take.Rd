@@ -21,8 +21,8 @@ take(input, index) -> Tensor
 
 \examples{
 \dontrun{
-src = torch_tensor([[4, 3, 5],
-torch_take(src, torch_tensor([0, 2, 5]))
+src = torch_tensor(c([4, 3, 5),
+torch_take(src, torch_tensor(c(0, 2, 5)))
 }
 
 }

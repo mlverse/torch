@@ -28,12 +28,12 @@ logdet(input) -> Tensor
 
 \examples{
 \dontrun{
-A = torch_randn(3, 3)
+A = torch_randn(c(3, 3))
 torch_det(A)
 torch_logdet(A)
 A
-A.det()
-A.det().log()
+A$det()
+A$det()$log()
 }
 
 }

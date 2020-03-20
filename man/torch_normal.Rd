@@ -73,7 +73,7 @@ torch_normal(mean=torch_arange(1., 6.))
 }
 
 \dontrun{
-torch_normal(2, 3, size=(1, 4))
+torch_normal(2, 3, size=list(1, 4))
 }
 
 }

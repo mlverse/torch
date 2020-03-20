@@ -26,7 +26,7 @@ matrix_power(input, n) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(2, 2, 2)
+a = torch_randn(c(2, 2, 2))
 a
 torch_matrix_power(a, 3)
 }

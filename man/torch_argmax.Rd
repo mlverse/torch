@@ -34,13 +34,13 @@ argmax(input, dim, keepdim=False) -> LongTensor
 
 \examples{
 \dontrun{
-a = torch_randn(4, 4)
+a = torch_randn(c(4, 4))
 a
 torch_argmax(a)
 }
 
 \dontrun{
-a = torch_randn(4, 4)
+a = torch_randn(c(4, 4))
 a
 torch_argmax(a, dim=1)
 }

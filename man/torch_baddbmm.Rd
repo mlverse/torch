@@ -46,10 +46,10 @@ baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
 
 \examples{
 \dontrun{
-M = torch_randn(10, 3, 5)
-batch1 = torch_randn(10, 3, 4)
-batch2 = torch_randn(10, 4, 5)
-torch_baddbmm(M, batch1, batch2).size()
+M = torch_randn(c(10, 3, 5))
+batch1 = torch_randn(c(10, 3, 4))
+batch2 = torch_randn(c(10, 4, 5))
+torch_baddbmm(M, batch1, batch2)$size()
 }
 
 }

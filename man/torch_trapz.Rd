@@ -29,9 +29,9 @@ trapz(y, *, dx=1, dim=-1) -> Tensor
 
 \examples{
 \dontrun{
-y = torch_randn((2, 3))
+y = torch_randn(list(2, 3))
 y
-x = torch_tensor([[1, 3, 4], [1, 2, 3]])
+x = torch_tensor(c([1, 3, 4], [1, 2, 3]))
 torch_trapz(y, x)
 }
 

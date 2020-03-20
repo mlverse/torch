@@ -28,7 +28,7 @@ zeros(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_g
 
 \examples{
 \dontrun{
-torch_zeros(2, 3)
+torch_zeros(c(2, 3))
 torch_zeros(c(5))
 }
 

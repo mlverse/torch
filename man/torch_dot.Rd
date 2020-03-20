@@ -17,7 +17,7 @@ dot(input, tensor) -> Tensor
 
 \examples{
 \dontrun{
-torch_dot(torch_tensor([2, 3]), torch_tensor([2, 1]))
+torch_dot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
 }
 
 }

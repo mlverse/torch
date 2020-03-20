@@ -27,7 +27,7 @@ slogdet(input) -> (Tensor, Tensor)
 
 \examples{
 \dontrun{
-A = torch_randn(3, 3)
+A = torch_randn(c(3, 3))
 A
 torch_det(A)
 torch_logdet(A)

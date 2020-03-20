@@ -25,7 +25,7 @@ eq(input, other, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_eq(torch_tensor([[1, 2], [3, 4]]), torch_tensor([[1, 1], [4, 4]]))
+torch_eq(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 }
 
 }

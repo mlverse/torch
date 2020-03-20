@@ -27,7 +27,7 @@ transpose(input, dim0, dim1) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_randn(2, 3)
+x = torch_randn(c(2, 3))
 x
 torch_transpose(x, 0, 1)
 }

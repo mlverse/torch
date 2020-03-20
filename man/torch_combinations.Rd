@@ -23,14 +23,14 @@ combinations(input, r=2, with_replacement=False) -> seq
 
 \examples{
 \dontrun{
-a = [1, 2, 3]
-list(itertools.combinations(a, r=2))
-list(itertools.combinations(a, r=3))
-list(itertools.combinations_with_replacement(a, r=2))
+a = c(1, 2, 3)
+list(itertools$combinations(a, r=2))
+list(itertools$combinations(a, r=3))
+list(itertools$combinations_with_replacement(a, r=2))
 tensor_a = torch_tensor(a)
 torch_combinations(tensor_a)
 torch_combinations(tensor_a, r=3)
-torch_combinations(tensor_a, with_replacement=True)
+torch_combinations(tensor_a, with_replacement=TRUE)
 }
 
 }

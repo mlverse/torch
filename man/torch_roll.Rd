@@ -24,11 +24,11 @@ roll(input, shifts, dims=None) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_tensor([1, 2, 3, 4, 5, 6, 7, 8]).view(4, 2)
+x = torch_tensor(c(1, 2, 3, 4, 5, 6, 7, 8))$view(4, 2)
 x
 torch_roll(x, 1, 0)
 torch_roll(x, -1, 0)
-torch_roll(x, shifts=(2, 1), dims=(0, 1))
+torch_roll(x, shifts=list(2, 1), dims=list(0, 1))
 }
 
 }

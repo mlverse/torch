@@ -31,7 +31,7 @@ pinverse(input, rcond=1e-15) -> Tensor
 
 \examples{
 \dontrun{
-input = torch_randn(3, 5)
+input = torch_randn(c(3, 5))
 input
 torch_pinverse(input)
 # Batched pinverse example

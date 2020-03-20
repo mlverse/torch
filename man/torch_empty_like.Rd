@@ -27,7 +27,7 @@ empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> 
 
 \examples{
 \dontrun{
-torch_empty((2,3), dtype=torch_int64)
+torch_empty(list(2,3), dtype=torch_int64())
 }
 
 }

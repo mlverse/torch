@@ -39,9 +39,9 @@ kthvalue(input, k, dim=None, keepdim=False, out=None) -> (Tensor, LongTensor)
 x = torch_arange(1., 6.)
 x
 torch_kthvalue(x, 4)
-x=torch_arange(1.,7.).resize_(2,3)
+x=torch_arange(1.,7.)$resize_list(2,3)
 x
-torch_kthvalue(x, 2, 0, True)
+torch_kthvalue(x, 2, 0, TRUE)
 }
 
 }

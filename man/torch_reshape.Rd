@@ -30,9 +30,9 @@ reshape(input, shape) -> Tensor
 \examples{
 \dontrun{
 a = torch_arange(4.)
-torch_reshape(a, (2, 2))
-b = torch_tensor([[0, 1], [2, 3]])
-torch_reshape(b, (-1,))
+torch_reshape(a, list(2, 2))
+b = torch_tensor(c([0, 1], [2, 3]))
+torch_reshape(b, list(-1,))
 }
 
 }

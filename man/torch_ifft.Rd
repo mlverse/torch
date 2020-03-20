@@ -58,7 +58,7 @@ ifft(input, signal_ndim, normalized=False) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_randn(3, 3, 2)
+x = torch_randn(c(3, 3, 2))
 x
 y = torch_fft(x, 2)
 torch_ifft(y, 2)  # recover x

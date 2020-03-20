@@ -46,9 +46,9 @@ addbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
 
 \examples{
 \dontrun{
-M = torch_randn(3, 5)
-batch1 = torch_randn(10, 3, 4)
-batch2 = torch_randn(10, 4, 5)
+M = torch_randn(c(3, 5))
+batch1 = torch_randn(c(10, 3, 4))
+batch2 = torch_randn(c(10, 4, 5))
 torch_addbmm(M, batch1, batch2)
 }
 

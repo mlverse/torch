@@ -28,9 +28,9 @@ cosine_similarity(x1, x2, dim=1, eps=1e-8) -> Tensor
 
 \examples{
 \dontrun{
-input1 = torch_randn(100, 128)
-input2 = torch_randn(100, 128)
-output = F.cosine_similarity(input1, input2)
+input1 = torch_randn(c(100, 128))
+input2 = torch_randn(c(100, 128))
+output = F$cosine_similarity(input1, input2)
 print(output)
 }
 

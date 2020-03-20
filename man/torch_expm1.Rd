@@ -25,7 +25,7 @@ expm1(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_expm1(torch_tensor([0, math.log(2.)]))
+torch_expm1list(torch_tensor([0, math$log(2.)]))
 }
 
 }

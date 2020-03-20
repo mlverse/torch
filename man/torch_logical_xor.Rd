@@ -22,13 +22,13 @@ logical_xor(input, other, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_logical_xor(torch_tensor([True, False, True]), torch_tensor([True, False, False]))
-a = torch_tensor([0, 1, 10, 0], dtype=torch_int8)
-b = torch_tensor([4, 0, 1, 0], dtype=torch_int8)
+torch_logical_xor(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
+a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
+b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
 torch_logical_xor(a, b)
-torch_logical_xor(a.double(), b.double())
-torch_logical_xor(a.double(), b)
-torch_logical_xor(a, b, out=torch_empty(4, dtype=torch_bool))
+torch_logical_xor(a$double(), b$double())
+torch_logical_xor(a$double(), b)
+torch_logical_xor(a, b, out=torch_empty(4, dtype=torch_bool()))
 }
 
 }

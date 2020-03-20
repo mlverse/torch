@@ -77,17 +77,17 @@ irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) ->
 
 \examples{
 \dontrun{
-x = torch_randn(4, 4)
-torch_rfft(x, 2, onesided=True).shape
+x = torch_randn(c(4, 4))
+torch_rfft(x, 2, onesided=TRUE)$shape
     >>>
-# notice that with onesided=True, output size does not determine the original signal size
-x = torch_randn(4, 5)
-torch_rfft(x, 2, onesided=True).shape
+# notice that with onesided=TRUE, output size does not determine the original signal size
+x = torch_randn(c(4, 5))
+torch_rfft(x, 2, onesided=TRUE)$shape
     >>>
 # now we use the original shape to recover x
 x
-y = torch_rfft(x, 2, onesided=True)
-torch_irfft(y, 2, onesided=True, signal_sizes=x.shape)  # recover x
+y = torch_rfft(x, 2, onesided=TRUE)
+torch_irfft(y, 2, onesided=TRUE, signal_sizes=x$shape)  # recover x
 }
 
 }

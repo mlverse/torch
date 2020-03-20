@@ -25,7 +25,7 @@ erfc(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_erfc(torch_tensor([0, -1., 10.]))
+torch_erfc(torch_tensor(c(0, -1., 10.)))
 }
 
 }

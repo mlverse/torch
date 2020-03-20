@@ -35,7 +35,7 @@ cumprod(input, dim, out=None, dtype=None) -> Tensor
 a = torch_randn(c(10))
 a
 torch_cumprod(a, dim=0)
-a[5] = 0.0
+ac(5) = 0.0
 torch_cumprod(a, dim=0)
 }
 

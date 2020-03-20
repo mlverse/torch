@@ -32,11 +32,11 @@ bincount(input, weights=None, minlength=0) -> Tensor
 
 \examples{
 \dontrun{
-input = torch_randint(0, 8, (5,), dtype=torch_int64)
+input = torch_randint(0, 8, list(5,), dtype=torch_int64())
 weights = torch_linspace(0, 1, steps=5)
 input, weights
 torch_bincount(input)
-input.bincount(weights)
+input$bincount(weights)
 }
 
 }

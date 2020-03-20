@@ -24,8 +24,8 @@ lu_solve(input, LU_data, LU_pivots, out=None) -> Tensor
 
 \examples{
 \dontrun{
-A = torch_randn(2, 3, 3)
-b = torch_randn(2, 3, 1)
+A = torch_randn(c(2, 3, 3))
+b = torch_randn(c(2, 3, 1))
 A_LU = torch_lu(A)
 x = torch_lu_solve(b, *A_LU)
 torch_norm(torch_bmm(A, x) - b)

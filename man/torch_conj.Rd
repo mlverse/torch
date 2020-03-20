@@ -24,7 +24,7 @@ conj(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_conj(torch_tensor([-1 + 1j, -2 + 2j, 3 - 3j]))
+torch_conj(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
 }
 
 }

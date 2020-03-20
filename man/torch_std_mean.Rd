@@ -43,13 +43,13 @@ std(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor)
 
 \examples{
 \dontrun{
-a = torch_randn(1, 3)
+a = torch_randn(c(1, 3))
 a
 torch_std_mean(a)
 }
 
 \dontrun{
-a = torch_randn(4, 4)
+a = torch_randn(c(4, 4))
 a
 torch_std_mean(a, 1)
 }

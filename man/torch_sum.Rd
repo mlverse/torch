@@ -37,17 +37,17 @@ sum(input, dim, keepdim=False, dtype=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(1, 3)
+a = torch_randn(c(1, 3))
 a
 torch_sum(a)
 }
 
 \dontrun{
-a = torch_randn(4, 4)
+a = torch_randn(c(4, 4))
 a
 torch_sum(a, 1)
-b = torch_arange(4 * 5 * 6).view(4, 5, 6)
-torch_sum(b, (2, 1))
+b = torch_arange(4 * 5 * 6)$view(4, 5, 6)
+torch_sum(b, list(2, 1))
 }
 
 }

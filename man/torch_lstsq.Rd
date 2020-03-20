@@ -49,8 +49,8 @@ lstsq(input, A, out=None) -> Tensor
 
 \examples{
 \dontrun{
-A = torch_tensor([[1., 1, 1],
-B = torch_tensor([[-10., -3],
+A = torch_tensor(c([1., 1, 1),
+B = torch_tensor(c([-10., -3),
 X, _ = torch_lstsq(B, A)
 X
 }

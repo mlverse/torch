@@ -25,7 +25,7 @@ narrow(input, dim, start, length) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+x = torch_tensor(c([1, 2, 3], [4, 5, 6], [7, 8, 9]))
 torch_narrow(x, 0, 0, 2)
 torch_narrow(x, 1, 1, 2)
 }

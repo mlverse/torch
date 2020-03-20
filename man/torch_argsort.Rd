@@ -26,7 +26,7 @@ argsort(input, dim=-1, descending=False, out=None) -> LongTensor
 
 \examples{
 \dontrun{
-a = torch_randn(4, 4)
+a = torch_randn(c(4, 4))
 a
 torch_argsort(a, dim=1)
 }

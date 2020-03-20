@@ -22,12 +22,12 @@ rot90(input, k, dims) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_arange(4).view(2, 2)
+x = torch_arange(4)$view(2, 2)
 x
-torch_rot90(x, 1, [0, 1])
-x = torch_arange(8).view(2, 2, 2)
+torch_rot90list(x, 1, c(0, 1))
+x = torch_arange(8)$view(2, 2, 2)
 x
-torch_rot90(x, 1, [1, 2])
+torch_rot90list(x, 1, c(1, 2))
 }
 
 }

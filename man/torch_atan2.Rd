@@ -32,7 +32,7 @@ atan2(input, other, out=None) -> Tensor
 \dontrun{
 a = torch_randn(c(4))
 a
-torch_atan2(a, torch_randn(c(4)))
+torch_atan2list(a, torch_randn(c(4)))
 }
 
 }

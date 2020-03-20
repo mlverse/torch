@@ -38,10 +38,10 @@ bmm(input, mat2, out=None) -> Tensor
 
 \examples{
 \dontrun{
-input = torch_randn(10, 3, 4)
-mat2 = torch_randn(10, 4, 5)
+input = torch_randn(c(10, 3, 4))
+mat2 = torch_randn(c(10, 4, 5))
 res = torch_bmm(input, mat2)
-res.size()
+res$size()
 }
 
 }

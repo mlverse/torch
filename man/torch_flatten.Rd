@@ -21,7 +21,7 @@ flatten(input, start_dim=0, end_dim=-1) -> Tensor
 
 \examples{
 \dontrun{
-t = torch_tensor([[[1, 2],
+t = torch_tensor(c([[1, 2),
 torch_flatten(t)
 torch_flatten(t, start_dim=1)
 }

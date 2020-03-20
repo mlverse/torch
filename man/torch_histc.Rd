@@ -30,7 +30,7 @@ histc(input, bins=100, min=0, max=0, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_histc(torch_tensor([1., 2, 1]), bins=4, min=0, max=3)
+torch_histc(torch_tensor(c(1., 2, 1)), bins=4, min=0, max=3)
 }
 
 }

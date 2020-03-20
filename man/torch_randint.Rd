@@ -41,9 +41,9 @@ randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch
 
 \examples{
 \dontrun{
-torch_randint(3, 5, (3,))
-torch_randint(10, (2, 2))
-torch_randint(3, 10, (2, 2))
+torch_randint(3, 5, list(3,))
+torch_randint(10, list(2, 2))
+torch_randint(3, 10, list(2, 2))
 }
 
 }

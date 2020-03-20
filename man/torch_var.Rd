@@ -44,13 +44,13 @@ var(input, dim, keepdim=False, unbiased=True, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(1, 3)
+a = torch_randn(c(1, 3))
 a
 torch_var(a)
 }
 
 \dontrun{
-a = torch_randn(4, 4)
+a = torch_randn(c(4, 4))
 a
 torch_var(a, 1)
 }

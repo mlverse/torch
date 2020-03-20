@@ -28,8 +28,8 @@ ones(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_gr
 
 \examples{
 \dontrun{
-torch_ones(2, 3)
-torch_ones(5)
+torch_ones(c(2, 3))
+torch_ones(c(5))
 }
 
 }

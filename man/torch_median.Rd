@@ -41,13 +41,13 @@ median(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, Long
 
 \examples{
 \dontrun{
-a = torch_randn(1, 3)
+a = torch_randn(c(1, 3))
 a
 torch_median(a)
 }
 
 \dontrun{
-a = torch_randn(4, 5)
+a = torch_randn(c(4, 5))
 a
 torch_median(a, 1)
 }

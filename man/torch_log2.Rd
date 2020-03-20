@@ -27,7 +27,7 @@ log2(input, out=None) -> Tensor
 \dontrun{
 a = torch_rand(5)
 a
-torch_log2(a)
+torch_log2list(a)
 }
 
 }

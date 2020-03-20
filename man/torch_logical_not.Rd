@@ -20,10 +20,10 @@ logical_not(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_logical_not(torch_tensor([True, False]))
-torch_logical_not(torch_tensor([0, 1, -10], dtype=torch_int8))
-torch_logical_not(torch_tensor([0., 1.5, -10.], dtype=torch_double))
-torch_logical_not(torch_tensor([0., 1., -10.], dtype=torch_double), out=torch_empty(3, dtype=torch_int16))
+torch_logical_not(torch_tensor(c(TRUE, FALSE)))
+torch_logical_not(torch_tensor(c(0, 1, -10), dtype=torch_int8()))
+torch_logical_not(torch_tensor(c(0., 1.5, -10.), dtype=torch_double()))
+torch_logical_not(torch_tensor(c(0., 1., -10.), dtype=torch_double()), out=torch_empty(3, dtype=torch_int16()))
 }
 
 }

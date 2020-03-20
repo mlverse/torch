@@ -24,7 +24,7 @@ erf(input, out=None) -> Tensor
 
 \examples{
 \dontrun{
-torch_erf(torch_tensor([0, -1., 10.]))
+torch_erf(torch_tensor(c(0, -1., 10.)))
 }
 
 }

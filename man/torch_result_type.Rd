@@ -21,8 +21,8 @@ result_type(tensor1, tensor2) -> dtype
 
 \examples{
 \dontrun{
-torch_result_type(torch_tensor([1, 2], dtype=torch_int), 1.0)
-torch_result_type(torch_tensor([1, 2], dtype=torch_uint8), torch_tensor(1))
+torch_result_type(torch_tensor(c(1, 2), dtype=torch_int()), 1.0)
+torch_result_type(torch_tensor(c(1, 2), dtype=torch_uint8()), torch_tensor(1))
 }
 
 }

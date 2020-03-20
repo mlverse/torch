@@ -29,7 +29,7 @@ full(size, fill_value, out=None, dtype=None, layout=torch.strided, device=None, 
 
 \examples{
 \dontrun{
-torch_full((2, 3), 3.141592)
+torch_full(list(2, 3), 3.141592)
 }
 
 }

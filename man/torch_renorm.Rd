@@ -30,9 +30,9 @@ renorm(input, p, dim, maxnorm, out=None) -> Tensor
 
 \examples{
 \dontrun{
-x = torch_ones(3, 3)
-x[1].fill_(2)
-x[2].fill_(3)
+x = torch_ones(c(3, 3))
+xc(1)$fill_list(2)
+xc(2)$fill_list(3)
 x
 torch_renorm(x, 1, 0, 5)
 }

@@ -37,9 +37,9 @@ addcmul(input, value=1, tensor1, tensor2, out=None) -> Tensor
 
 \examples{
 \dontrun{
-t = torch_randn(1, 3)
-t1 = torch_randn(3, 1)
-t2 = torch_randn(1, 3)
+t = torch_randn(c(1, 3))
+t1 = torch_randn(c(3, 1))
+t2 = torch_randn(c(1, 3))
 torch_addcmul(t, 0.1, t1, t2)
 }
 

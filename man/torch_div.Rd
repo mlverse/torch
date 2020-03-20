@@ -55,7 +55,7 @@ torch_div(a, 0.5)
 }
 
 \dontrun{
-a = torch_randn(4, 4)
+a = torch_randn(c(4, 4))
 a
 b = torch_randn(c(4))
 b

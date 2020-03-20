@@ -30,13 +30,13 @@ sparse_coo_tensor(indices, values, size=None, dtype=None, device=None, requires_
 
 \examples{
 \dontrun{
-i = torch_tensor([[0, 1, 1],
-v = torch_tensor([3, 4, 5], dtype=torch_float32)
-torch_sparse_coo_tensor(i, v, [2, 4])
+i = torch_tensor(c([0, 1, 1),
+v = torch_tensor(c(3, 4, 5), dtype=torch_float32())
+torch_sparse_coo_tensor(i, v, c(2, 4))
 torch_sparse_coo_tensor(i, v)  # Shape inference
-torch_sparse_coo_tensor(i, v, [2, 4],
-S = torch_sparse_coo_tensor(torch_empty([1, 0]), [], [1])
-S = torch_sparse_coo_tensor(torch_empty([1, 0]), torch_empty([0, 2]), [1, 2])
+torch_sparse_coo_tensor(i, v, c(2, 4),
+S = torch_sparse_coo_tensor(torch_empty(c(1, 0]), [], [1))
+S = torch_sparse_coo_tensor(torch_empty(c(1, 0)), torch_empty(c(0, 2]), [1, 2))
 }
 
 }

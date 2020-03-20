@@ -45,7 +45,7 @@ diag_embed(input, offset=0, dim1=-2, dim2=-1) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(2, 3)
+a = torch_randn(c(2, 3))
 torch_diag_embed(a)
 torch_diag_embed(a, offset=1, dim1=0, dim2=2)
 }

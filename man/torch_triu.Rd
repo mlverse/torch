@@ -34,12 +34,12 @@ triu(input, diagonal=0, out=None) -> Tensor
 
 \examples{
 \dontrun{
-a = torch_randn(3, 3)
+a = torch_randn(c(3, 3))
 a
 torch_triu(a)
 torch_triu(a, diagonal=1)
 torch_triu(a, diagonal=-1)
-b = torch_randn(4, 6)
+b = torch_randn(c(4, 6))
 b
 torch_triu(b, diagonal=1)
 torch_triu(b, diagonal=-1)
