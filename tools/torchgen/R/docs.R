@@ -97,7 +97,7 @@ get_signature <- function(doc) {
   desc <- get_long_desc(doc)
   lines <- str_split(desc, "\n")[[1]]
 
-  if (str_detect(lines[1], "->"))
+  if (str_detect(lines[1], "->") | str_detect(lines[1], "[a-z]*\\("))
     return(lines[1])
   else
     return(NULL)
@@ -106,7 +106,7 @@ get_signature <- function(doc) {
 get_desc <- function(doc) {
   desc <- get_long_desc(doc)
   lines <- str_split(desc, "\n")[[1]]
-  if (str_detect(lines[1], "->"))
+  if (str_detect(lines[1], "->") | str_detect(lines[1], "[a-z]+\\("))
     return(str_c(lines[-1], collapse = "\n"))
   else
     desc
