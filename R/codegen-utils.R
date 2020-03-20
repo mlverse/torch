@@ -43,6 +43,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("IntArrayRef" %in% expected_types && is.numeric(obj))
     return(list(as.integer(obj), "IntArrayRef"))
   
+  if ("IntArrayRef" %in% expected_types && is.list(obj))
+    return(list(as.integer(obj), "IntArrayRef"))
+  
   if ("int64_t" %in% expected_types && is.numeric(obj) && length(obj) == 1)
     return(list(as.integer(obj), "int64_t"))
   
