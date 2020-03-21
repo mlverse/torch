@@ -13,15 +13,19 @@
 \item{dim}{(int) the dimension to apply unique. If \code{None}, the unique of the        flattened input is returned. default: \code{None}}
 }
 \description{
-Eliminates all but the first element from every consecutive group of equivalent elements.
+Unique_consecutive
 }
-\details{
-\preformatted{.. note:: This function is different from [`torch_unique`] in the sense that this function
+\section{TEST }{
+
+
+Eliminates all but the first element from every consecutive group of equivalent elements.\preformatted{.. note:: This function is different from [`torch_unique`] in the sense that this function
     only eliminates consecutive duplicate values. This semantics is similar to `std::unique`
     in C++.
 }
 }
+
 \examples{
+
 \dontrun{
 x = torch_tensor(c(1, 1, 2, 2, 3, 1, 1, 2))
 output = torch_unique_consecutive(x)

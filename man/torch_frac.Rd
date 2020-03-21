@@ -4,20 +4,20 @@
 \alias{torch_frac}
 \title{Frac}
 \description{
-Computes the fractional portion of each element in \code{input}.
+Frac
 }
-\details{
+\section{frac(input, out=None) -> Tensor }{
+
+
+Computes the fractional portion of each element in \code{input}.
+
 \deqn{
     \text{out}_{i} = \text{input}_{i} - \left\lfloor |\text{input}_{i}| \right\rfloor * \operatorname{sgn}(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-frac(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_frac(torch_tensor(c(1, 2.5, -3.2)))
 }

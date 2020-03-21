@@ -7,9 +7,16 @@
 \item{tensor}{(Tensor) A tensor to check}
 }
 \description{
+Isfinite
+}
+\section{TEST }{
+
+
 Returns a new tensor with boolean elements representing if each element is \code{Finite} or not.
 }
+
 \examples{
+
 \dontrun{
 torch_isfinite(torch_tensor([1, float('inf'), 2, float('-inf'), float('nan')]))
 }

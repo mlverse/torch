@@ -13,17 +13,7 @@
 \item{out}{(tuple, optional) the output tuple of tensors}
 }
 \description{
-This function returns a namedtuple \verb{(U, S, V)} which is the singular value
-decomposition of a input real matrix or batches of real matrices \code{input} such that
-\eqn{input = U \times diag(S) \times V^T}.
-}
-\details{
-If \code{some} is \code{True} (default), the method returns the reduced singular value decomposition
-i.e., if the last two dimensions of \code{input} are \code{m} and \code{n}, then the returned
-\code{U} and \code{V} matrices will contain only \eqn{min(n, m)} orthonormal columns.
-
-If \code{compute_uv} is \code{False}, the returned \code{U} and \code{V} matrices will be zero matrices
-of shape \eqn{(m \times m)} and \eqn{(n \times n)} respectively. \code{some} will be ignored here.
+Svd
 }
 \note{
 The singular values are returned in descending order. If \code{input} is a batch of matrices,
@@ -50,13 +40,23 @@ can be arbitrary bases of the subspaces.
 When \code{compute_uv} = \code{False}, backward cannot be performed since \code{U} and \code{V}
 from the forward pass is required for the backward operation.
 }
-\section{Signatures}{
+\section{svd(input, some=True, compute_uv=True, out=None) -> (Tensor, Tensor, Tensor) }{
 
 
-svd(input, some=True, compute_uv=True, out=None) -> (Tensor, Tensor, Tensor)
+This function returns a namedtuple \verb{(U, S, V)} which is the singular value
+decomposition of a input real matrix or batches of real matrices \code{input} such that
+\eqn{input = U \times diag(S) \times V^T}.
+
+If \code{some} is \code{True} (default), the method returns the reduced singular value decomposition
+i.e., if the last two dimensions of \code{input} are \code{m} and \code{n}, then the returned
+\code{U} and \code{V} matrices will contain only \eqn{min(n, m)} orthonormal columns.
+
+If \code{compute_uv} is \code{False}, the returned \code{U} and \code{V} matrices will be zero matrices
+of shape \eqn{(m \times m)} and \eqn{(n \times n)} respectively. \code{some} will be ignored here.
 }
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(5, 3))
 a

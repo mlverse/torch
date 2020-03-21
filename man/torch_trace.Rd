@@ -4,15 +4,16 @@
 \alias{torch_trace}
 \title{Trace}
 \description{
-Returns the sum of the elements of the diagonal of the input 2-D matrix.
+Trace
 }
-\section{Signatures}{
+\section{trace(input) -> Tensor }{
 
 
-trace(input) -> Tensor
+Returns the sum of the elements of the diagonal of the input 2-D matrix.
 }
 
 \examples{
+
 \dontrun{
 x = torch_arange(1., 10.)$view(3, 3)
 x

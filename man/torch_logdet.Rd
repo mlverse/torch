@@ -7,7 +7,7 @@
 \item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more                batch dimensions.}
 }
 \description{
-Calculates log determinant of a square matrix or batches of square matrices.
+Logdet
 }
 \note{
 \preformatted{Result is ``-inf`` if `input` has zero log determinant, and is ``nan`` if
@@ -20,13 +20,14 @@ be unstable in when `input` doesn't have distinct singular values. See
 `~torch.svd` for details.
 }
 }
-\section{Signatures}{
+\section{logdet(input) -> Tensor }{
 
 
-logdet(input) -> Tensor
+Calculates log determinant of a square matrix or batches of square matrices.
 }
 
 \examples{
+
 \dontrun{
 A = torch_randn(c(3, 3))
 torch_det(A)

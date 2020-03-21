@@ -11,12 +11,20 @@
 \item{y}{(Tensor) values selected at indices where \code{condition} is \code{False}}
 }
 \description{
+Where
+}
+\note{
+\preformatted{The tensors `condition`, `x`, `y` must be broadcastable .
+}
+
+\preformatted{See also [`torch_nonzero`].
+}
+}
+\section{where(condition, x, y) -> Tensor }{
+
+
 Return a tensor of elements selected from either \code{x} or \code{y}, depending on \code{condition}.
 
-\code{torch_where(condition)} is identical to
-\code{torch_nonzero(condition, as_tuple=True)}.
-}
-\details{
 The operation is defined as:
 
 \deqn{
@@ -26,29 +34,24 @@ The operation is defined as:
     \end{cases}
 }
 }
-\note{
-\preformatted{The tensors `condition`, `x`, `y` must be broadcastable .
-}
 
-\preformatted{See also [`torch_nonzero`].
-}
-}
-\section{Signatures}{
+\section{where(condition) -> tuple of LongTensor }{
 
 
-where(condition, x, y) -> Tensor
-
-
-
-where(condition) -> tuple of LongTensor
+\code{torch_where(condition)} is identical to
+\code{torch_nonzero(condition, as_tuple=True)}.
 }
 
 \examples{
+
 \dontrun{
 x = torch_randn(c(3, 2))
 y = torch_ones(c(3, 2))
 x
 torch_where(x > 0, x, y)
 }
+
+
+
 
 }

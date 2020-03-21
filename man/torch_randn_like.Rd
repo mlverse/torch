@@ -15,14 +15,19 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
+Randn_like
+}
+\section{randn_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor }{
+
+
 Returns a tensor with the same size as \code{input} that is filled with
 random numbers from a normal distribution with mean 0 and variance 1.
 \code{torch_randn_like(input)} is equivalent to
 \code{torch_randn(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
 }
-\section{Signatures}{
+
+\examples{
 
 
-randn_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
+
 }
-

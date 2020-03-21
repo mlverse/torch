@@ -9,22 +9,22 @@
 \item{n}{(int) the power to raise the matrix to}
 }
 \description{
+Matrix_power
+}
+\section{matrix_power(input, n) -> Tensor }{
+
+
 Returns the matrix raised to the power \code{n} for square matrices.
 For batch of matrices, each individual matrix is raised to the power \code{n}.
-}
-\details{
+
 If \code{n} is negative, then the inverse of the matrix (if invertible) is
 raised to the power \code{n}.  For a batch of matrices, the batched inverse
 (if invertible) is raised to the power \code{n}. If \code{n} is 0, then an identity matrix
 is returned.
 }
-\section{Signatures}{
-
-
-matrix_power(input, n) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(2, 2, 2))
 a

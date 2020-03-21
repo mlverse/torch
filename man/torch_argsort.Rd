@@ -11,20 +11,20 @@
 \item{descending}{(bool, optional) controls the sorting order (ascending or descending)}
 }
 \description{
+Argsort
+}
+\section{argsort(input, dim=-1, descending=False, out=None) -> LongTensor }{
+
+
 Returns the indices that sort a tensor along a given dimension in ascending
 order by value.
-}
-\details{
+
 This is the second value returned by \code{torch_sort}.  See its documentation
 for the exact semantics of this method.
 }
-\section{Signatures}{
-
-
-argsort(input, dim=-1, descending=False, out=None) -> LongTensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4, 4))
 a

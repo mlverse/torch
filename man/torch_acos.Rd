@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a new tensor with the arccosine  of the elements of \code{input}.
+Acos
 }
-\details{
+\section{acos(input, out=None) -> Tensor }{
+
+
+Returns a new tensor with the arccosine  of the elements of \code{input}.
+
 \deqn{
     \text{out}_{i} = \cos^{-1}(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-acos(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a

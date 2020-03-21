@@ -13,9 +13,15 @@
 \item{storage_offset}{(int, optional) the offset in the underlying storage of the output tensor}
 }
 \description{
+As_strided
+}
+\section{as_strided(input, size, stride, storage_offset=0) -> Tensor }{
+
+
 Create a view of an existing \code{torch_Tensor} \code{input} with specified
 \code{size}, \code{stride} and \code{storage_offset}.
 }
+
 \section{Warning}{
 
 More than one element of a created tensor may refer to a single memory
@@ -28,13 +34,8 @@ advisable to use.
 }
 }
 
-\section{Signatures}{
-
-
-as_strided(input, size, stride, storage_offset=0) -> Tensor
-}
-
 \examples{
+
 \dontrun{
 x = torch_randn(c(3, 3))
 x

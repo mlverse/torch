@@ -19,17 +19,21 @@
 \item{groups}{NA split input into groups, \eqn{\text{in\_channels}} should be divisible by      the number of groups. Default: 1}
 }
 \description{
+Conv3d
+}
+\section{conv3d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor }{
+
+
 Applies a 3D convolution over an input image composed of several input
 planes.
-}
-\details{
+
 See \code{~torch.nn.Conv3d} for details and output shape.
 
 .. include:: cudnn_deterministic.rst
 }
-\section{Signatures}{
+
+\examples{
 
 
-conv3d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor
+
 }
-

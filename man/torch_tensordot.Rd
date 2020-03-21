@@ -11,9 +11,17 @@
 \item{dims}{(int or tuple of two lists of integers) number of dimensions to     contract or explicit lists of dimensions for \code{a} and     \code{b} respectively}
 }
 \description{
-Returns a contraction of a and b over multiple dimensions.
+Tensordot
 }
-\details{
-\preformatted{`tensordot` implements a generalized matrix product.
+\section{TEST }{
+
+
+Returns a contraction of a and b over multiple dimensions.\preformatted{`tensordot` implements a generalized matrix product.
 }
+}
+
+\examples{
+
+
+
 }

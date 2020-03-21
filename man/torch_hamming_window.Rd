@@ -21,9 +21,20 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-Hamming window function.
+Hamming_window
 }
-\details{
+\note{
+\preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
+}
+
+\preformatted{This is a generalized version of `torch_hann_window`.
+}
+}
+\section{hamming_window(window_length, periodic=True, alpha=0.54, beta=0.46, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+
+
+Hamming window function.
+
 \deqn{
     w[n] = \alpha - \beta\ \cos \left( \frac{2 \pi n}{N - 1} \right),
 }
@@ -38,16 +49,9 @@ above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
 \code{torch_hamming_window(L, periodic=True)} equal to
 \verb{torch_hamming_window(L + 1, periodic=False)[:-1])}.
 }
-\note{
-\preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
-}
 
-\preformatted{This is a generalized version of `torch_hann_window`.
-}
-}
-\section{Signatures}{
+\examples{
 
 
-hamming_window(window_length, periodic=True, alpha=0.54, beta=0.46, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-}
 
+}

@@ -11,18 +11,19 @@
 \item{dims}{(int or tuple of ints) Axis along which to roll}
 }
 \description{
+Roll
+}
+\section{roll(input, shifts, dims=None) -> Tensor }{
+
+
 Roll the tensor along the given dimension(s). Elements that are shifted beyond the
 last position are re-introduced at the first position. If a dimension is not
 specified, the tensor will be flattened before rolling and then restored
 to the original shape.
 }
-\section{Signatures}{
-
-
-roll(input, shifts, dims=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 x = torch_tensor(c(1, 2, 3, 4, 5, 6, 7, 8))$view(4, 2)
 x

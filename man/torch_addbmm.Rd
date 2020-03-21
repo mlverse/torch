@@ -17,13 +17,17 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Addbmm
+}
+\section{addbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor }{
+
+
 Performs a batch matrix-matrix product of matrices stored
 in \code{batch1} and \code{batch2},
 with a reduced add step (all matrix multiplications get accumulated
 along the first dimension).
 \code{input} is added to the final result.
-}
-\details{
+
 \code{batch1} and \code{batch2} must be 3-D tensors each containing the
 same number of matrices.
 
@@ -38,13 +42,9 @@ and \code{out} will be a \eqn{(n \times p)} tensor.
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and \code{alpha}
 must be real numbers, otherwise they should be integers.
 }
-\section{Signatures}{
-
-
-addbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 M = torch_randn(c(3, 5))
 batch1 = torch_randn(c(10, 3, 4))

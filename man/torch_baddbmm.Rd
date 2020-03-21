@@ -17,11 +17,15 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Baddbmm
+}
+\section{baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor }{
+
+
 Performs a batch matrix-matrix product of matrices in \code{batch1}
 and \code{batch2}.
 \code{input} is added to the final result.
-}
-\details{
+
 \code{batch1} and \code{batch2} must be 3-D tensors each containing the same
 number of matrices.
 
@@ -38,13 +42,9 @@ same as the scaling factors used in \code{torch_addbmm}.
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
 \code{alpha} must be real numbers, otherwise they should be integers.
 }
-\section{Signatures}{
-
-
-baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 M = torch_randn(c(10, 3, 5))
 batch1 = torch_randn(c(10, 3, 4))

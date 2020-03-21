@@ -17,10 +17,14 @@
 \item{out}{(tuple, optional) the output tuple of (Tensor, LongTensor) that can be        optionally given to be used as output buffers}
 }
 \description{
+Topk
+}
+\section{topk(input, k, dim=None, largest=True, sorted=True, out=None) -> (Tensor, LongTensor) }{
+
+
 Returns the \code{k} largest elements of the given \code{input} tensor along
 a given dimension.
-}
-\details{
+
 If \code{dim} is not given, the last dimension of the \code{input} is chosen.
 
 If \code{largest} is \code{False} then the \code{k} smallest elements are returned.
@@ -31,13 +35,9 @@ of the elements in the original \code{input} tensor.
 The boolean option \code{sorted} if \code{True}, will make sure that the returned
 \code{k} elements are themselves sorted
 }
-\section{Signatures}{
-
-
-topk(input, k, dim=None, largest=True, sorted=True, out=None) -> (Tensor, LongTensor)
-}
 
 \examples{
+
 \dontrun{
 x = torch_arange(1., 6.)
 x

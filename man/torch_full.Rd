@@ -19,15 +19,16 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-Returns a tensor of size \code{size} filled with \code{fill_value}.
+Full
 }
-\section{Signatures}{
+\section{full(size, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
 
 
-full(size, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+Returns a tensor of size \code{size} filled with \code{fill_value}.
 }
 
 \examples{
+
 \dontrun{
 torch_full(list(2, 3), 3.141592)
 }

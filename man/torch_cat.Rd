@@ -11,23 +11,23 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Cat
+}
+\section{cat(tensors, dim=0, out=None) -> Tensor }{
+
+
 Concatenates the given sequence of \code{seq} tensors in the given dimension.
 All tensors must either have the same shape (except in the concatenating
 dimension) or be empty.
-}
-\details{
+
 \code{\link{torch_cat}} can be seen as an inverse operation for \code{\link{torch.split}}
 and \code{\link{torch_chunk}}.
 
 \code{\link{torch_cat}} can be best understood via examples.
 }
-\section{Signatures}{
-
-
-cat(tensors, dim=0, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 x = torch_randn(c(2, 3))
 x

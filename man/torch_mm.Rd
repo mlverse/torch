@@ -11,23 +11,23 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Performs a matrix multiplication of the matrices \code{input} and \code{mat2}.
-}
-\details{
-If \code{input} is a \eqn{(n \times m)} tensor, \code{mat2} is a
-\eqn{(m \times p)} tensor, \code{out} will be a \eqn{(n \times p)} tensor.
+Mm
 }
 \note{
 This function does not broadcast .
 For broadcasting matrix products, see \code{\link{torch_matmul}}.
 }
-\section{Signatures}{
+\section{mm(input, mat2, out=None) -> Tensor }{
 
 
-mm(input, mat2, out=None) -> Tensor
+Performs a matrix multiplication of the matrices \code{input} and \code{mat2}.
+
+If \code{input} is a \eqn{(n \times m)} tensor, \code{mat2} is a
+\eqn{(m \times p)} tensor, \code{out} will be a \eqn{(n \times p)} tensor.
 }
 
 \examples{
+
 \dontrun{
 mat1 = torch_randn(c(2, 3))
 mat2 = torch_randn(c(3, 3))

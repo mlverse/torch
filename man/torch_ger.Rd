@@ -11,20 +11,21 @@
 \item{out}{(Tensor, optional) optional output matrix}
 }
 \description{
-Outer product of \code{input} and \code{vec2}.
-If \code{input} is a vector of size \eqn{n} and \code{vec2} is a vector of
-size \eqn{m}, then \code{out} must be a matrix of size \eqn{(n \times m)}.
+Ger
 }
 \note{
 This function does not broadcast .
 }
-\section{Signatures}{
+\section{ger(input, vec2, out=None) -> Tensor }{
 
 
-ger(input, vec2, out=None) -> Tensor
+Outer product of \code{input} and \code{vec2}.
+If \code{input} is a vector of size \eqn{n} and \code{vec2} is a vector of
+size \eqn{m}, then \code{out} must be a matrix of size \eqn{(n \times m)}.
 }
 
 \examples{
+
 \dontrun{
 v1 = torch_arange(1., 5.)
 v2 = torch_arange(1., 4.)

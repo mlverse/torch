@@ -10,29 +10,45 @@
 
 \item{{keepdim}}{NA}
 
+\item{out}{(tuple, optional) the tuple of two output tensors (min, min_indices)}
+
 \item{input}{(Tensor) the input tensor.}
 
 \item{other}{(Tensor) the second input tensor}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Min
+}
+\note{
+When the shapes do not match, the shape of the returned output tensor
+follows the broadcasting rules .
+}
+\section{min(input) -> Tensor }{
+
+
 Returns the minimum value of all elements in the \code{input} tensor.
+}
+
+\section{min(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor) }{
+
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the minimum
 value of each row of the \code{input} tensor in the given dimension
 \code{dim}. And \code{indices} is the index location of each minimum value found
 (argmin).
 
-Each element of the tensor \code{input} is compared with the corresponding
-element of the tensor \code{other} and an element-wise minimum is taken.
-The resulting tensor is returned.
-}
-\details{
 If \code{keepdim} is \code{True}, the output tensors are of the same size as
 \code{input} except in the dimension \code{dim} where they are of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in
 the output tensors having 1 fewer dimension than \code{input}.
+}
+
+\section{min(input, other, out=None) -> Tensor }{
+
+
+Each element of the tensor \code{input} is compared with the corresponding
+element of the tensor \code{other} and an element-wise minimum is taken.
+The resulting tensor is returned.
 
 The shapes of \code{input} and \code{other} don't need to match,
 but they must be broadcastable .
@@ -41,36 +57,22 @@ but they must be broadcastable .
     \text{out}_i = \min(\text{tensor}_i, \text{other}_i)
 }
 }
-\note{
-When the shapes do not match, the shape of the returned output tensor
-follows the broadcasting rules .
-}
-\section{Signatures}{
-
-
-min(input) -> Tensor
-
-
-
-min(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
-
-
-
-min(input, other, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(1, 3))
 a
 torch_min(a)
 }
 
+
 \dontrun{
 a = torch_randn(c(4, 4))
 a
 torch_min(a, 1)
 }
+
 
 \dontrun{
 a = torch_randn(c(4))

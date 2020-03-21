@@ -7,20 +7,20 @@
 \item{input}{(Tensor) the input tensor.}
 }
 \description{
+T
+}
+\section{t(input) -> Tensor }{
+
+
 Expects \code{input} to be <= 2-D tensor and transposes dimensions 0
 and 1.
-}
-\details{
+
 0-D and 1-D tensors are returned as it is and
 2-D tensor can be seen as a short-hand function for \code{transpose(input, 0, 1)}.
 }
-\section{Signatures}{
-
-
-t(input) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 x = torch_randn(())
 x

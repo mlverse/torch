@@ -9,24 +9,24 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a new tensor with the natural logarithm of (1 + \code{input}).
-}
-\details{
-\deqn{
-    y_i = \log_{e} (x_i + 1)
-}
+Log1p
 }
 \note{
 This function is more accurate than \code{\link{torch_log}} for small
 values of \code{input}
 }
-\section{Signatures}{
+\section{log1p(input, out=None) -> Tensor }{
 
 
-log1p(input, out=None) -> Tensor
+Returns a new tensor with the natural logarithm of (1 + \code{input}).
+
+\deqn{
+    y_i = \log_{e} (x_i + 1)
+}
 }
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(5))
 a

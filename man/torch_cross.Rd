@@ -13,23 +13,23 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Cross
+}
+\section{cross(input, other, dim=-1, out=None) -> Tensor }{
+
+
 Returns the cross product of vectors in dimension \code{dim} of \code{input}
 and \code{other}.
-}
-\details{
+
 \code{input} and \code{other} must have the same size, and the size of their
 \code{dim} dimension should be 3.
 
 If \code{dim} is not given, it defaults to the first dimension found with the
 size 3.
 }
-\section{Signatures}{
-
-
-cross(input, other, dim=-1, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4, 3))
 a

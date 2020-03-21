@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Computes the logarithm of the gamma function on \code{input}.
+Lgamma
 }
-\details{
+\section{lgamma(input, out=None) -> Tensor }{
+
+
+Computes the logarithm of the gamma function on \code{input}.
+
 \deqn{
     \text{out}_{i} = \log \Gamma(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-lgamma(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_arange(0.5, 2, 0.5)
 torch_lgamma(a)

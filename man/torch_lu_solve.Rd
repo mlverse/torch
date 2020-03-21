@@ -13,16 +13,17 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Lu_solve
+}
+\section{lu_solve(input, LU_data, LU_pivots, out=None) -> Tensor }{
+
+
 Returns the LU solve of the linear system \eqn{Ax = b} using the partially pivoted
 LU factorization of A from \code{torch_lu}.
 }
-\section{Signatures}{
-
-
-lu_solve(input, LU_data, LU_pivots, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 A = torch_randn(c(2, 3, 3))
 b = torch_randn(c(2, 3, 1))

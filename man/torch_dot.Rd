@@ -4,18 +4,19 @@
 \alias{torch_dot}
 \title{Dot}
 \description{
-Computes the dot product (inner product) of two tensors.
+Dot
 }
 \note{
 This function does not broadcast .
 }
-\section{Signatures}{
+\section{dot(input, tensor) -> Tensor }{
 
 
-dot(input, tensor) -> Tensor
+Computes the dot product (inner product) of two tensors.
 }
 
 \examples{
+
 \dontrun{
 torch_dot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
 }

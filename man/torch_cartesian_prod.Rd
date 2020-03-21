@@ -7,10 +7,17 @@
 \item{*tensors}{NA any number of 1 dimensional tensors.}
 }
 \description{
+Cartesian_prod
+}
+\section{TEST }{
+
+
 Do cartesian product of the given sequence of tensors. The behavior is similar to
 python's \code{itertools.product}.
 }
+
 \examples{
+
 \dontrun{
 a = c(1, 2, 3)
 b = c(4, 5)

@@ -15,9 +15,7 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a tensor where each row contains \code{num_samples} indices sampled
-from the multinomial probability distribution located in the corresponding row
-of tensor \code{input}.
+Multinomial
 }
 \note{
 \preformatted{The rows of `input` do not need to sum to one (in which case we use
@@ -43,13 +41,16 @@ number of non-zero elements in `input` (or the min number of non-zero
 elements in each row of `input` if it is a matrix).
 }
 }
-\section{Signatures}{
+\section{multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -> LongTensor }{
 
 
-multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -> LongTensor
+Returns a tensor where each row contains \code{num_samples} indices sampled
+from the multinomial probability distribution located in the corresponding row
+of tensor \code{input}.
 }
 
 \examples{
+
 \dontrun{
 weights = torch_tensor(c(0, 10, 3, 0), dtype=torch_float()) # create a tensor of weights
 torch_multinomial(weights, 2)

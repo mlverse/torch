@@ -9,21 +9,21 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Log
+}
+\section{log(input, out=None) -> Tensor }{
+
+
 Returns a new tensor with the natural logarithm of the elements
 of \code{input}.
-}
-\details{
+
 \deqn{
     y_{i} = \log_{e} (x_{i})
 }
 }
-\section{Signatures}{
-
-
-log(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(5))
 a

@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a new tensor with the arcsine  of the elements of \code{input}.
+Asin
 }
-\details{
+\section{asin(input, out=None) -> Tensor }{
+
+
+Returns a new tensor with the arcsine  of the elements of \code{input}.
+
 \deqn{
     \text{out}_{i} = \sin^{-1}(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-asin(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a

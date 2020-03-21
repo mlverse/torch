@@ -9,21 +9,21 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Erfc
+}
+\section{erfc(input, out=None) -> Tensor }{
+
+
 Computes the complementary error function of each element of \code{input}.
 The complementary error function is defined as follows:
-}
-\details{
+
 \deqn{
     \mathrm{erfc}(x) = 1 - \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt
 }
 }
-\section{Signatures}{
-
-
-erfc(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_erfc(torch_tensor(c(0, -1., 10.)))
 }

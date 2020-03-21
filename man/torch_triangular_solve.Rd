@@ -15,10 +15,14 @@
 \item{unitriangular}{(bool, optional) whether \eqn{A} is unit triangular.        If True, the diagonal elements of \eqn{A} are assumed to be        1 and not referenced from \eqn{A}. Default: \code{False}.}
 }
 \description{
+Triangular_solve
+}
+\section{triangular_solve(input, A, upper=True, transpose=False, unitriangular=False) -> (Tensor, Tensor) }{
+
+
 Solves a system of equations with a triangular coefficient matrix \eqn{A}
 and multiple right-hand sides \eqn{b}.
-}
-\details{
+
 In particular, solves \eqn{AX = b} and assumes \eqn{A} is upper-triangular
 with the default keyword arguments.
 
@@ -26,9 +30,9 @@ with the default keyword arguments.
 batches of 2D matrices. If the inputs are batches, then returns
 batched outputs \code{X}
 }
-\section{Signatures}{
+
+\examples{
 
 
-triangular_solve(input, A, upper=True, transpose=False, unitriangular=False) -> (Tensor, Tensor)
+
 }
-

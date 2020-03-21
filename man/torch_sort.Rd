@@ -13,10 +13,14 @@
 \item{out}{(tuple, optional) the output tuple of (\code{Tensor}, \code{LongTensor}) that can        be optionally given to be used as output buffers}
 }
 \description{
+Sort
+}
+\section{sort(input, dim=-1, descending=False, out=None) -> (Tensor, LongTensor) }{
+
+
 Sorts the elements of the \code{input} tensor along a given dimension
 in ascending order by value.
-}
-\details{
+
 If \code{dim} is not given, the last dimension of the \code{input} is chosen.
 
 If \code{descending} is \code{True} then the elements are sorted in descending
@@ -26,13 +30,9 @@ A namedtuple of (values, indices) is returned, where the \code{values} are the
 sorted values and \code{indices} are the indices of the elements in the original
 \code{input} tensor.
 }
-\section{Signatures}{
-
-
-sort(input, dim=-1, descending=False, out=None) -> (Tensor, LongTensor)
-}
 
 \examples{
+
 \dontrun{
 x = torch_randn(c(3, 4))
 sorted, indices = torch_sort(x)

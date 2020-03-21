@@ -11,22 +11,22 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Computes the element-wise remainder of division.
+Remainder
 }
-\details{
+\section{remainder(input, other, out=None) -> Tensor }{
+
+
+Computes the element-wise remainder of division.
+
 The divisor and dividend may contain both for integer and floating point
 numbers. The remainder has the same sign as the divisor.
 
 When \code{other} is a tensor, the shapes of \code{input} and
 \code{other} must be broadcastable .
 }
-\section{Signatures}{
-
-
-remainder(input, other, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_remainder(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
 torch_remainder(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)

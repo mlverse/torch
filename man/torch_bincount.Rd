@@ -11,9 +11,13 @@
 \item{minlength}{(int) optional, minimum number of bins. Should be non-negative.}
 }
 \description{
-Count the frequency of each value in an array of non-negative ints.
+Bincount
 }
-\details{
+\section{bincount(input, weights=None, minlength=0) -> Tensor }{
+
+
+Count the frequency of each value in an array of non-negative ints.
+
 The number of bins (size 1) is one larger than the largest value in
 \code{input} unless \code{input} is empty, in which case the result is a
 tensor of size 0. If \code{minlength} is specified, the number of bins is at least
@@ -24,13 +28,9 @@ tensor of size 0. If \code{minlength} is specified, the number of bins is at lea
 
 .. include:: cuda_deterministic.rst
 }
-\section{Signatures}{
-
-
-bincount(input, weights=None, minlength=0) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 input = torch_randint(0, 8, list(5,), dtype=torch_int64())
 weights = torch_linspace(0, 1, steps=5)

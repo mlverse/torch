@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a new tensor with the signs of the elements of \code{input}.
+Sign
 }
-\details{
+\section{sign(input, out=None) -> Tensor }{
+
+
+Returns a new tensor with the signs of the elements of \code{input}.
+
 \deqn{
     \text{out}_{i} = \operatorname{sgn}(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-sign(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_tensor(c(0.7, -1.2, 0., 2.3))
 a

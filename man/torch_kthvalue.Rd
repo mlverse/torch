@@ -15,11 +15,15 @@
 \item{out}{(tuple, optional) the output tuple of (Tensor, LongTensor)                           can be optionally given to be used as output buffers}
 }
 \description{
+Kthvalue
+}
+\section{kthvalue(input, k, dim=None, keepdim=False, out=None) -> (Tensor, LongTensor) }{
+
+
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the \code{k} th
 smallest element of each row of the \code{input} tensor in the given dimension
 \code{dim}. And \code{indices} is the index location of each element found.
-}
-\details{
+
 If \code{dim} is not given, the last dimension of the \code{input} is chosen.
 
 If \code{keepdim} is \code{True}, both the \code{values} and \code{indices} tensors
@@ -28,13 +32,9 @@ they are of size 1. Otherwise, \code{dim} is squeezed
 (see \code{\link{torch_squeeze}}), resulting in both the \code{values} and
 \code{indices} tensors having 1 fewer dimension than the \code{input} tensor.
 }
-\section{Signatures}{
-
-
-kthvalue(input, k, dim=None, keepdim=False, out=None) -> (Tensor, LongTensor)
-}
 
 \examples{
+
 \dontrun{
 x = torch_arange(1., 6.)
 x

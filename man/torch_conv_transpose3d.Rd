@@ -21,17 +21,21 @@
 \item{dilation}{NA the spacing between kernel elements. Can be a single number or      a tuple \verb{(dT, dH, dW)}. Default: 1}
 }
 \description{
+Conv_transpose3d
+}
+\section{conv_transpose3d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor }{
+
+
 Applies a 3D transposed convolution operator over an input image
 composed of several input planes, sometimes also called "deconvolution"
-}
-\details{
+
 See \code{~torch.nn.ConvTranspose3d} for details and output shape.
 
 .. include:: cudnn_deterministic.rst
 }
-\section{Signatures}{
+
+\examples{
 
 
-conv_transpose3d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor
+
 }
-

@@ -4,11 +4,16 @@
 \alias{torch_selu_}
 \title{Selu_}
 \description{
+Selu_
+}
+\section{selu_(input) -> Tensor }{
+
+
 In-place version of \code{\link{~selu}}.
 }
-\section{Signatures}{
+
+\examples{
 
 
-selu_(input) -> Tensor
+
 }
-

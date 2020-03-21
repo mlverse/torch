@@ -11,19 +11,19 @@
 \item{out}{(Tensor, optional) the output tensor that must be a \code{BoolTensor}}
 }
 \description{
-Computes \eqn{\text{input} \geq \text{other}} element-wise.
+Ge
 }
-\details{
+\section{ge(input, other, out=None) -> Tensor }{
+
+
+Computes \eqn{\text{input} \geq \text{other}} element-wise.
+
 The second argument can be a number or a tensor whose shape is
 broadcastable  with the first argument.
 }
-\section{Signatures}{
-
-
-ge(input, other, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_ge(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 }

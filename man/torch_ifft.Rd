@@ -11,9 +11,20 @@
 \item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
 }
 \description{
-Complex-to-complex Inverse Discrete Fourier Transform
+Ifft
 }
-\details{
+\note{
+\preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
+repeatedly running FFT methods on tensors of same geometry with same
+configuration. See cufft-plan-cache for more details on how to
+monitor and control the cache.
+}
+}
+\section{ifft(input, signal_ndim, normalized=False) -> Tensor }{
+
+
+Complex-to-complex Inverse Discrete Fourier Transform
+
 This method computes the complex-to-complex inverse discrete Fourier
 transform. Ignoring the batch dimensions, it computes the following
 expression:
@@ -37,26 +48,15 @@ shape of \code{input}.
 
 The inverse of this function is \code{\link{~torch.fft}}.
 }
-\note{
-\preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
-repeatedly running FFT methods on tensors of same geometry with same
-configuration. See cufft-plan-cache for more details on how to
-monitor and control the cache.
-}
-}
+
 \section{Warning}{
 
 For CPU tensors, this method is currently only available with MKL. Use
 \code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
 
-\section{Signatures}{
-
-
-ifft(input, signal_ndim, normalized=False) -> Tensor
-}
-
 \examples{
+
 \dontrun{
 x = torch_randn(c(3, 3, 2))
 x

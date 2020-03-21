@@ -9,21 +9,21 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Tanh
+}
+\section{tanh(input, out=None) -> Tensor }{
+
+
 Returns a new tensor with the hyperbolic tangent of the elements
 of \code{input}.
-}
-\details{
+
 \deqn{
     \text{out}_{i} = \tanh(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-tanh(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a

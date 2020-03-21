@@ -9,12 +9,17 @@
 \item{operands}{(Tensor) The operands to compute the Einstein sum of.}
 }
 \description{
+Einsum
+}
+\section{einsum(equation, *operands) -> Tensor }{
+
+
 This function provides a way of computing multilinear expressions (i.e. sums of products) using the
 Einstein summation convention.
 }
-\section{Signatures}{
+
+\examples{
 
 
-einsum(equation, *operands) -> Tensor
+
 }
-

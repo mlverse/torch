@@ -4,25 +4,25 @@
 \alias{torch_clamp}
 \title{Clamp}
 \arguments{
+\item{input}{(Tensor) the input tensor.}
+
 \item{min}{(Number) lower-bound of the range to be clamped to}
 
 \item{max}{(Number) upper-bound of the range to be clamped to}
 
-\item{input}{(Tensor) the input tensor.}
-
-\item{value}{(Number) maximal value of each element in the output}
-
 \item{out}{(Tensor, optional) the output tensor.}
+
+\item{value}{(Number) minimal value of each element in the output}
 }
 \description{
+Clamp
+}
+\section{clamp(input, min, max, out=None) -> Tensor }{
+
+
 Clamp all elements in \code{input} into the range \code{[} \code{min}, \code{max} \verb{]} and return
 a resulting tensor:
 
-Clamps all elements in \code{input} to be larger or equal \code{min}.
-
-Clamps all elements in \code{input} to be smaller or equal \code{max}.
-}
-\details{
 \deqn{
     y_i = \begin{cases}
         \text{min} & \text{if } x_i < \text{min} \\
@@ -32,39 +32,41 @@ Clamps all elements in \code{input} to be smaller or equal \code{max}.
 }
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, args \code{min}
 and \code{max} must be real numbers, otherwise they should be integers.
+}
 
-If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{value}
-should be a real number, otherwise it should be an integer.
+\section{clamp(input, *, min, out=None) -> Tensor }{
+
+
+Clamps all elements in \code{input} to be larger or equal \code{min}.
 
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{value}
 should be a real number, otherwise it should be an integer.
 }
-\section{Signatures}{
+
+\section{clamp(input, *, max, out=None) -> Tensor }{
 
 
-clamp(input, min, max, out=None) -> Tensor
+Clamps all elements in \code{input} to be smaller or equal \code{max}.
 
-
-
-clamp(input, *, min, out=None) -> Tensor
-
-
-
-clamp(input, *, max, out=None) -> Tensor
+If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{value}
+should be a real number, otherwise it should be an integer.
 }
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a
 torch_clamp(a, min=-0.5, max=0.5)
 }
 
+
 \dontrun{
 a = torch_randn(c(4))
 a
 torch_clamp(a, min=0.5)
 }
+
 
 \dontrun{
 a = torch_randn(c(4))

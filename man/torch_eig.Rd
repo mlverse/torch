@@ -11,16 +11,21 @@
 \item{out}{(tuple, optional) the output tensors}
 }
 \description{
-Computes the eigenvalues and eigenvectors of a real square matrix.
+Eig
 }
 \note{
 \preformatted{Since eigenvalues and eigenvectors might be complex, backward pass is supported only
 for [`torch_symeig`]
 }
 }
-\section{Signatures}{
+\section{eig(input, eigenvectors=False, out=None) -> (Tensor, Tensor) }{
 
 
-eig(input, eigenvectors=False, out=None) -> (Tensor, Tensor)
+Computes the eigenvalues and eigenvectors of a real square matrix.
 }
 
+\examples{
+
+
+
+}

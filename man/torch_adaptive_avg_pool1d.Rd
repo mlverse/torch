@@ -7,15 +7,19 @@
 \item{output_size}{NA the target output size (single integer)}
 }
 \description{
+Adaptive_avg_pool1d
+}
+\section{adaptive_avg_pool1d(input, output_size) -> Tensor }{
+
+
 Applies a 1D adaptive average pooling over an input signal composed of
 several input planes.
-}
-\details{
+
 See \code{~torch.nn.AdaptiveAvgPool1d} for details and output shape.
 }
-\section{Signatures}{
+
+\examples{
 
 
-adaptive_avg_pool1d(input, output_size) -> Tensor
+
 }
-

@@ -17,18 +17,19 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
+Sparse_coo_tensor
+}
+\section{sparse_coo_tensor(indices, values, size=None, dtype=None, device=None, requires_grad=False) -> Tensor }{
+
+
 Constructs a sparse tensors in COO(rdinate) format with non-zero elements at the given \code{indices}
 with the given \code{values}. A sparse tensor can be \code{uncoalesced}, in that case, there are duplicate
 coordinates in the indices, and the value at that index is the sum of all duplicate value entries:
 \code{torch_sparse}_.
 }
-\section{Signatures}{
-
-
-sparse_coo_tensor(indices, values, size=None, dtype=None, device=None, requires_grad=False) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 i = torch_tensor(c([0, 1, 1),
 v = torch_tensor(c(3, 4, 5), dtype=torch_float32())

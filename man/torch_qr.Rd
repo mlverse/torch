@@ -11,14 +11,7 @@
 \item{out}{(tuple, optional) tuple of \code{Q} and \code{R} tensors                satisfying \code{input = torch.matmul(Q, R)}.                The dimensions of \code{Q} and \code{R} are \eqn{(*, m, k)} and \eqn{(*, k, n)}                respectively, where \eqn{k = \min(m, n)} if \verb{some:} is \code{True} and                \eqn{k = m} otherwise.}
 }
 \description{
-Computes the QR decomposition of a matrix or a batch of matrices \code{input},
-and returns a namedtuple (Q, R) of tensors such that \eqn{\text{input} = Q R}
-with \eqn{Q} being an orthogonal matrix or batch of orthogonal matrices and
-\eqn{R} being an upper triangular matrix or batch of upper triangular matrices.
-}
-\details{
-If \code{some} is \code{True}, then this function returns the thin (reduced) QR factorization.
-Otherwise, if \code{some} is \code{False}, this function returns the complete QR factorization.
+Qr
 }
 \note{
 precision may be lost if the magnitudes of the elements of \code{input}
@@ -28,13 +21,20 @@ While it should always give you a valid decomposition, it may not
 give you the same one across platforms - it will depend on your
 LAPACK implementation.
 }
-\section{Signatures}{
+\section{qr(input, some=True, out=None) -> (Tensor, Tensor) }{
 
 
-qr(input, some=True, out=None) -> (Tensor, Tensor)
+Computes the QR decomposition of a matrix or a batch of matrices \code{input},
+and returns a namedtuple (Q, R) of tensors such that \eqn{\text{input} = Q R}
+with \eqn{Q} being an orthogonal matrix or batch of orthogonal matrices and
+\eqn{R} being an upper triangular matrix or batch of upper triangular matrices.
+
+If \code{some} is \code{True}, then this function returns the thin (reduced) QR factorization.
+Otherwise, if \code{some} is \code{False}, this function returns the complete QR factorization.
 }
 
 \examples{
+
 \dontrun{
 a = torch_tensor(c([12., -51, 4], [6, 167, -68], [-4, 24, -41]))
 q, r = torch_qr(a)

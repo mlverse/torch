@@ -23,10 +23,12 @@
 \item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy Default: \code{True}}
 }
 \description{
-Short-time Fourier transform (STFT).
+Stft
 }
-\details{
-\preformatted{Ignoring the optional batch dimension, this method computes the following
+\section{Short-time Fourier transform (STFT). }{
+
+
+Short-time Fourier transform (STFT).\preformatted{Ignoring the optional batch dimension, this method computes the following
 expression:
 }
 
@@ -81,9 +83,9 @@ imaginary part.
   previous signature may cause error or return incorrect result.
 }
 }
-\section{Signatures}{
+
+\examples{
 
 
-Short-time Fourier transform (STFT).
+
 }
-

@@ -9,16 +9,17 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Logical_not
+}
+\section{logical_not(input, out=None) -> Tensor }{
+
+
 Computes the element-wise logical NOT of the given input tensor. If not specified, the output tensor will have the bool
 dtype. If the input tensor is not a bool tensor, zeros are treated as \code{False} and non-zeros are treated as \code{True}.
 }
-\section{Signatures}{
-
-
-logical_not(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_logical_not(torch_tensor(c(TRUE, FALSE)))
 torch_logical_not(torch_tensor(c(0, 1, -10), dtype=torch_int8()))

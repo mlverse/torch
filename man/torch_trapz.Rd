@@ -4,35 +4,39 @@
 \alias{torch_trapz}
 \title{Trapz}
 \arguments{
-\item{x}{(Tensor) The points at which the function \code{y} is sampled.        If \code{x} is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        \eqn{\int_a^b f = -\int_b^a f} is followed).}
-
 \item{y}{(Tensor) The values of the function to integrate}
 
-\item{dx}{(float) The distance between points at which \code{y} is sampled.}
+\item{x}{(Tensor) The points at which the function \code{y} is sampled.        If \code{x} is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        \eqn{\int_a^b f = -\int_b^a f} is followed).}
 
 \item{dim}{(int) The dimension along which to integrate.        By default, use the last dimension.}
+
+\item{dx}{(float) The distance between points at which \code{y} is sampled.}
 }
 \description{
+Trapz
+}
+\section{trapz(y, x, *, dim=-1) -> Tensor }{
+
+
 Estimate \eqn{\int y\,dx} along \code{dim}, using the trapezoid rule.
+}
+
+\section{trapz(y, *, dx=1, dim=-1) -> Tensor }{
+
 
 As above, but the sample points are spaced uniformly at a distance of \code{dx}.
 }
-\section{Signatures}{
-
-
-trapz(y, x, *, dim=-1) -> Tensor
-
-
-
-trapz(y, *, dx=1, dim=-1) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 y = torch_randn(list(2, 3))
 y
 x = torch_tensor(c([1, 3, 4], [1, 2, 3]))
 torch_trapz(y, x)
 }
+
+
+
 
 }

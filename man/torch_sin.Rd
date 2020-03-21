@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a new tensor with the sine of the elements of \code{input}.
+Sin
 }
-\details{
+\section{sin(input, out=None) -> Tensor }{
+
+
+Returns a new tensor with the sine of the elements of \code{input}.
+
 \deqn{
     \text{out}_{i} = \sin(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-sin(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a

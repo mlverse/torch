@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a new tensor with the arctangent  of the elements of \code{input}.
+Atan
 }
-\details{
+\section{atan(input, out=None) -> Tensor }{
+
+
+Returns a new tensor with the arctangent  of the elements of \code{input}.
+
 \deqn{
     \text{out}_{i} = \tan^{-1}(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-atan(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a

@@ -9,15 +9,19 @@
 \item{upscale_factor}{(int) factor to increase spatial resolution by}
 }
 \description{
+Pixel_shuffle
+}
+\section{Rearranges elements in a tensor of shape }{
+math:\verb{(*, C \\times r^2, H, W)} to a :
+
 Rearranges elements in a tensor of shape \eqn{(*, C \times r^2, H, W)} to a
 tensor of shape \eqn{(*, C, H \times r, W \times r)}.
-}
-\details{
+
 See \code{~torch.nn.PixelShuffle} for details.
 }
-\section{Signatures}{
+
+\examples{
 
 
-Rearranges elements in a tensor of shape :math:\verb{(*, C \\times r^2, H, W)} to a
+
 }
-

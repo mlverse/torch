@@ -19,15 +19,16 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-Returns a 2-D tensor with ones on the diagonal and zeros elsewhere.
+Eye
 }
-\section{Signatures}{
+\section{eye(n, m=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
 
 
-eye(n, m=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+Returns a 2-D tensor with ones on the diagonal and zeros elsewhere.
 }
 
 \examples{
+
 \dontrun{
 torch_eye(3)
 }

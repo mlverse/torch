@@ -21,11 +21,15 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
+Arange
+}
+\section{arange(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+
+
 Returns a 1-D tensor of size \eqn{\left\lceil \frac{\text{end} - \text{start}}{\text{step}} \right\rceil}
 with values from the interval \verb{[start, end)} taken with common difference
 \code{step} beginning from \code{start}.
-}
-\details{
+
 Note that non-integer \code{step} is subject to floating point rounding errors when
 comparing against \code{end}; to avoid inconsistency, we advise adding a small epsilon to \code{end}
 in such cases.
@@ -34,13 +38,9 @@ in such cases.
     \text{out}_{{i+1}} = \text{out}_{i} + \text{step}
 }
 }
-\section{Signatures}{
-
-
-arange(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_arange(5)
 torch_arange(1, 4)

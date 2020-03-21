@@ -9,16 +9,17 @@
 \item{to}{(dtype) The target \code{torch_dtype}.}
 }
 \description{
+Can_cast
+}
+\section{can_cast(from, to) -> bool }{
+
+
 Determines if a type conversion is allowed under PyTorch casting rules
 described in the type promotion documentation .
 }
-\section{Signatures}{
-
-
-can_cast(from, to) -> bool
-}
 
 \examples{
+
 \dontrun{
 torch_can_cast(torch_double, torch_float)
 torch_can_cast(torch_float, torch_int)

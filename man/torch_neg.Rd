@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a new tensor with the negative of the elements of \code{input}.
+Neg
 }
-\details{
+\section{neg(input, out=None) -> Tensor }{
+
+
+Returns a new tensor with the negative of the elements of \code{input}.
+
 \deqn{
     \text{out} = -1 \times \text{input}
 }
 }
-\section{Signatures}{
-
-
-neg(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(5))
 a

@@ -6,41 +6,42 @@
 \arguments{
 \item{input}{(Tensor) the input tensor.}
 
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to \code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
+
 \item{dim}{(int or tuple of ints) the dimension or dimensions to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to \code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
 }
 \description{
+Sum
+}
+\section{sum(input, dtype=None) -> Tensor }{
+
+
 Returns the sum of all elements in the \code{input} tensor.
+}
+
+\section{sum(input, dim, keepdim=False, dtype=None) -> Tensor }{
+
 
 Returns the sum of each row of the \code{input} tensor in the given
 dimension \code{dim}. If \code{dim} is a list of dimensions,
 reduce over all of them.
-}
-\details{
+
 If \code{keepdim} is \code{True}, the output tensor is of the same size
 as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in the
 output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
-\section{Signatures}{
-
-
-sum(input, dtype=None) -> Tensor
-
-
-
-sum(input, dim, keepdim=False, dtype=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(1, 3))
 a
 torch_sum(a)
 }
+
 
 \dontrun{
 a = torch_randn(c(4, 4))

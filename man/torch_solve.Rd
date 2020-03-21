@@ -11,16 +11,7 @@
 \item{out}{((Tensor, Tensor) optional output tuple.}
 }
 \description{
-This function returns the solution to the system of linear
-equations represented by \eqn{AX = B} and the LU factorization of
-A, in order as a namedtuple \verb{solution, LU}.
-}
-\details{
-\code{LU} contains \code{L} and \code{U} factors for LU factorization of \code{A}.
-
-\code{torch_solve(B, A)} can take in 2D inputs \verb{B, A} or inputs that are
-batches of 2D matrices. If the inputs are batches, then returns
-batched outputs \verb{solution, LU}.
+Solve
 }
 \note{
 \preformatted{Irrespective of the original strides, the returned matrices
@@ -29,13 +20,22 @@ batched outputs \verb{solution, LU}.
 `A.contiguous().transpose(-1, -2).stride()` respectively.
 }
 }
-\section{Signatures}{
+\section{torch.solve(input, A, out=None) -> (Tensor, Tensor) }{
 
 
-torch.solve(input, A, out=None) -> (Tensor, Tensor)
+This function returns the solution to the system of linear
+equations represented by \eqn{AX = B} and the LU factorization of
+A, in order as a namedtuple \verb{solution, LU}.
+
+\code{LU} contains \code{L} and \code{U} factors for LU factorization of \code{A}.
+
+\code{torch_solve(B, A)} can take in 2D inputs \verb{B, A} or inputs that are
+batches of 2D matrices. If the inputs are batches, then returns
+batched outputs \verb{solution, LU}.
 }
 
 \examples{
+
 \dontrun{
 A = torch_tensor(c([6.80, -2.11,  5.66,  5.97,  8.23),
 B = torch_tensor(c([4.02,  6.19, -8.22, -7.57, -3.03),

@@ -9,21 +9,21 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Erfinv
+}
+\section{erfinv(input, out=None) -> Tensor }{
+
+
 Computes the inverse error function of each element of \code{input}.
 The inverse error function is defined in the range \eqn{(-1, 1)} as:
-}
-\details{
+
 \deqn{
     \mathrm{erfinv}(\mathrm{erf}(x)) = x
 }
 }
-\section{Signatures}{
-
-
-erfinv(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_erfinv(torch_tensor(c(0, 0.5, -1.)))
 }

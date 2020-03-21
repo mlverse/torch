@@ -7,7 +7,7 @@
 \item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more                batch dimensions.}
 }
 \description{
-Calculates the sign and log absolute value of the determinant(s) of a square matrix or batches of square matrices.
+Slogdet
 }
 \note{
 \preformatted{If ``input`` has zero determinant, this returns ``(0, -inf)``.
@@ -19,13 +19,14 @@ will be unstable in when `input` doesn't have distinct singular values.
 See `~torch.svd` for details.
 }
 }
-\section{Signatures}{
+\section{slogdet(input) -> (Tensor, Tensor) }{
 
 
-slogdet(input) -> (Tensor, Tensor)
+Calculates the sign and log absolute value of the determinant(s) of a square matrix or batches of square matrices.
 }
 
 \examples{
+
 \dontrun{
 A = torch_randn(c(3, 3))
 A

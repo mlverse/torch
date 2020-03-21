@@ -11,10 +11,14 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Tril
+}
+\section{tril(input, diagonal=0, out=None) -> Tensor }{
+
+
 Returns the lower triangular part of the matrix (2-D tensor) or batch of matrices
 \code{input}, the other elements of the result tensor \code{out} are set to 0.
-}
-\details{
+
 The lower triangular part of the matrix is defined as the elements on and
 below the diagonal.
 
@@ -26,13 +30,9 @@ the main diagonal. The main diagonal are the set of indices
 \eqn{\lbrace (i, i) \rbrace} for \eqn{i \in [0, \min\{d_{1}, d_{2}\} - 1]} where
 \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 }
-\section{Signatures}{
-
-
-tril(input, diagonal=0, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(3, 3))
 a

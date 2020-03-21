@@ -11,16 +11,20 @@
 \item{input3}{(Tensor) the matrix to be multiplied.}
 }
 \description{
+Ormqr
+}
+\section{ormqr(input, input2, input3, left=True, transpose=False) -> Tensor }{
+
+
 Multiplies \code{mat} (given by \code{input3}) by the orthogonal \code{Q} matrix of the QR factorization
 formed by \code{\link{torch_geqrf}} that is represented by \verb{(a, tau)} (given by (\code{input}, \code{input2})).
-}
-\details{
+
 This directly calls the underlying LAPACK function \code{?ormqr}.
 See \verb{LAPACK documentation for ormqr}_ for further details.
 }
-\section{Signatures}{
+
+\examples{
 
 
-ormqr(input, input2, input3, left=True, transpose=False) -> Tensor
+
 }
-

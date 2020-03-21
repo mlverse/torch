@@ -9,21 +9,21 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Expm1
+}
+\section{expm1(input, out=None) -> Tensor }{
+
+
 Returns a new tensor with the exponential of the elements minus 1
 of \code{input}.
-}
-\details{
+
 \deqn{
     y_{i} = e^{x_{i}} - 1
 }
 }
-\section{Signatures}{
-
-
-expm1(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_expm1list(torch_tensor([0, math$log(2.)]))
 }

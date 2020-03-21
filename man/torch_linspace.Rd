@@ -21,19 +21,19 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
+Linspace
+}
+\section{linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+
+
 Returns a one-dimensional tensor of \code{steps}
 equally spaced points between \code{start} and \code{end}.
-}
-\details{
+
 The output tensor is 1-D of size \code{steps}.
-}
-\section{Signatures}{
-
-
-linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
 }
 
 \examples{
+
 \dontrun{
 torch_linspace(3, 10, steps=5)
 torch_linspace(-10, 10, steps=5)

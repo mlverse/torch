@@ -9,17 +9,18 @@
 \item{tensor2}{(Tensor or Number) an input tensor or number}
 }
 \description{
+Result_type
+}
+\section{result_type(tensor1, tensor2) -> dtype }{
+
+
 Returns the \code{torch_dtype} that would result from performing an arithmetic
 operation on the provided input tensors. See type promotion documentation
 for more information on the type promotion logic.
 }
-\section{Signatures}{
-
-
-result_type(tensor1, tensor2) -> dtype
-}
 
 \examples{
+
 \dontrun{
 torch_result_type(torch_tensor(c(1, 2), dtype=torch_int()), 1.0)
 torch_result_type(torch_tensor(c(1, 2), dtype=torch_uint8()), torch_tensor(1))

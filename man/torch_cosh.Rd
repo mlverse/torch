@@ -9,21 +9,21 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Cosh
+}
+\section{cosh(input, out=None) -> Tensor }{
+
+
 Returns a new tensor with the hyperbolic cosine  of the elements of
 \code{input}.
-}
-\details{
+
 \deqn{
     \text{out}_{i} = \cosh(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-cosh(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a

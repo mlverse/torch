@@ -6,20 +6,21 @@
 \arguments{
 \item{input}{(Tensor) the input tensor.}
 
-\item{self}{(float) the scalar base value for the power operation}
-
-\item{exponent}{(Tensor) the exponent tensor}
+\item{exponent}{(float or tensor) the exponent value}
 
 \item{out}{(Tensor, optional) the output tensor.}
+
+\item{self}{(float) the scalar base value for the power operation}
 }
 \description{
+Pow
+}
+\section{pow(input, exponent, out=None) -> Tensor }{
+
+
 Takes the power of each element in \code{input} with \code{exponent} and
 returns a tensor with the result.
 
-\code{self} is a scalar \code{float} value, and \code{exponent} is a tensor.
-The returned tensor \code{out} is of the same shape as \code{exponent}
-}
-\details{
 \code{exponent} can be either a single \code{float} number or a \code{Tensor}
 with the same number of elements as \code{input}.
 
@@ -35,6 +36,13 @@ When \code{exponent} is a tensor, the operation applied is:
 }
 When \code{exponent} is a tensor, the shapes of \code{input}
 and \code{exponent} must be broadcastable .
+}
+
+\section{pow(self, exponent, out=None) -> Tensor }{
+
+
+\code{self} is a scalar \code{float} value, and \code{exponent} is a tensor.
+The returned tensor \code{out} is of the same shape as \code{exponent}
 
 The operation applied is:
 
@@ -42,17 +50,9 @@ The operation applied is:
     \text{out}_i = \text{self} ^ {\text{exponent}_i}
 }
 }
-\section{Signatures}{
-
-
-pow(input, exponent, out=None) -> Tensor
-
-
-
-pow(self, exponent, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a
@@ -63,6 +63,7 @@ a
 exp
 torch_pow(a, exp)
 }
+
 
 \dontrun{
 exp = torch_arange(1., 5.)

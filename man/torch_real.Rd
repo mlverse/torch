@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Computes the element-wise real value of the given \code{input} tensor.
+Real
 }
-\details{
+\section{real(input, out=None) -> Tensor }{
+
+
+Computes the element-wise real value of the given \code{input} tensor.
+
 \deqn{
     \text{out}_{i} = real(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-real(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_real(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
 }

@@ -13,20 +13,20 @@
 \item{eps}{(float, optional) Small value to avoid division by zero.        Default: 1e-8}
 }
 \description{
-Returns cosine similarity between x1 and x2, computed along dim.
+Cosine_similarity
 }
-\details{
+\section{cosine_similarity(x1, x2, dim=1, eps=1e-8) -> Tensor }{
+
+
+Returns cosine similarity between x1 and x2, computed along dim.
+
 \deqn{
     \text{similarity} = \dfrac{x_1 \cdot x_2}{\max(\Vert x_1 \Vert _2 \cdot \Vert x_2 \Vert _2, \epsilon)}
 }
 }
-\section{Signatures}{
-
-
-cosine_similarity(x1, x2, dim=1, eps=1e-8) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 input1 = torch_randn(c(100, 128))
 input2 = torch_randn(c(100, 128))

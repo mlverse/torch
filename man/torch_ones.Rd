@@ -17,16 +17,17 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
+Ones
+}
+\section{ones(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+
+
 Returns a tensor filled with the scalar value \code{1}, with the shape defined
 by the variable argument \code{size}.
 }
-\section{Signatures}{
-
-
-ones(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_ones(c(2, 3))
 torch_ones(c(5))

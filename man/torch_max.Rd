@@ -10,28 +10,44 @@
 
 \item{{keepdim}}{NA \code{False}.}
 
+\item{out}{(tuple, optional) the result tuple of two output tensors (max, max_indices)}
+
 \item{input}{(Tensor) the input tensor.}
 
 \item{other}{(Tensor) the second input tensor}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Max
+}
+\note{
+When the shapes do not match, the shape of the returned output tensor
+follows the broadcasting rules .
+}
+\section{max(input) -> Tensor }{
+
+
 Returns the maximum value of all elements in the \code{input} tensor.
+}
+
+\section{max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor) }{
+
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the maximum
 value of each row of the \code{input} tensor in the given dimension
 \code{dim}. And \code{indices} is the index location of each maximum value found
 (argmax).
 
-Each element of the tensor \code{input} is compared with the corresponding
-element of the tensor \code{other} and an element-wise maximum is taken.
-}
-\details{
 If \code{keepdim} is \code{True}, the output tensors are of the same size
 as \code{input} except in the dimension \code{dim} where they are of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting
 in the output tensors having 1 fewer dimension than \code{input}.
+}
+
+\section{max(input, other, out=None) -> Tensor }{
+
+
+Each element of the tensor \code{input} is compared with the corresponding
+element of the tensor \code{other} and an element-wise maximum is taken.
 
 The shapes of \code{input} and \code{other} don't need to match,
 but they must be broadcastable .
@@ -40,36 +56,22 @@ but they must be broadcastable .
     \text{out}_i = \max(\text{tensor}_i, \text{other}_i)
 }
 }
-\note{
-When the shapes do not match, the shape of the returned output tensor
-follows the broadcasting rules .
-}
-\section{Signatures}{
-
-
-max(input) -> Tensor
-
-
-
-max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
-
-
-
-max(input, other, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(1, 3))
 a
 torch_max(a)
 }
 
+
 \dontrun{
 a = torch_randn(c(4, 4))
 a
 torch_max(a, 1)
 }
+
 
 \dontrun{
 a = torch_randn(c(4))

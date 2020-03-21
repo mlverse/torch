@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a new tensor with the cosine  of the elements of \code{input}.
+Cos
 }
-\details{
+\section{cos(input, out=None) -> Tensor }{
+
+
+Returns a new tensor with the cosine  of the elements of \code{input}.
+
 \deqn{
     \text{out}_{i} = \cos(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-cos(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a

@@ -9,9 +9,13 @@
 \item{p}{(int) the number of dimensions}
 }
 \description{
-Computes the multivariate log-gamma function (\verb{[reference]}_) with dimension \eqn{p} element-wise, given by
+Mvlgamma
 }
-\details{
+\section{mvlgamma(input, p) -> Tensor }{
+
+
+Computes the multivariate log-gamma function (\verb{[reference]}_) with dimension \eqn{p} element-wise, given by
+
 \deqn{
     \log(\Gamma_{p}(a)) = C + \displaystyle \sum_{i=1}^{p} \log\left(\Gamma\left(a - \frac{i - 1}{2}\right)\right)
 }
@@ -20,13 +24,9 @@ where \eqn{C = \log(\pi) \times \frac{p (p - 1)}{4}} and \eqn{\Gamma(\cdot)} is 
 If any of the elements are less than or equal to \eqn{\frac{p - 1}{2}}, then an error
 is thrown.
 }
-\section{Signatures}{
-
-
-mvlgamma(input, p) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_empty(2, 3)$uniform_list(1, 2)
 a

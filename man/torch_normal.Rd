@@ -4,30 +4,29 @@
 \alias{torch_normal}
 \title{Normal}
 \arguments{
+\item{mean}{(Tensor) the tensor of per-element means}
+
+\item{std}{(Tensor) the tensor of per-element standard deviations}
+
 \item{generator}{(\code{torch.Generator}, optional) a pseudorandom number generator for sampling}
 
-\item{mean}{(float) the mean for all distributions}
-
-\item{std}{(float) the standard deviation for all distributions}
+\item{out}{(Tensor, optional) the output tensor.}
 
 \item{size}{(int...) a sequence of integers defining the shape of the output tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Normal
+}
+\note{
+When the shapes do not match, the shape of \code{mean}
+is used as the shape for the returned output tensor
+}
+\section{normal(mean, std, *, generator=None, out=None) -> Tensor }{
+
+
 Returns a tensor of random numbers drawn from separate normal distributions
 whose mean and standard deviation are given.
 
-Similar to the function above, but the means are shared among all drawn
-elements.
-
-Similar to the function above, but the standard-deviations are shared among
-all drawn elements.
-
-Similar to the function above, but the means and standard deviations are shared
-among all drawn elements. The resulting tensor has size given by \code{size}.
-}
-\details{
 The \code{mean} is a tensor with the mean of
 each output element's normal distribution
 
@@ -37,40 +36,44 @@ each output element's normal distribution
 The shapes of \code{mean} and \code{std} don't need to match, but the
 total number of elements in each tensor need to be the same.
 }
-\note{
-When the shapes do not match, the shape of \code{mean}
-is used as the shape for the returned output tensor
+
+\section{normal(mean=0.0, std, out=None) -> Tensor }{
+
+
+Similar to the function above, but the means are shared among all drawn
+elements.
 }
-\section{Signatures}{
+
+\section{normal(mean, std=1.0, out=None) -> Tensor }{
 
 
-normal(mean, std, *, generator=None, out=None) -> Tensor
+Similar to the function above, but the standard-deviations are shared among
+all drawn elements.
+}
+
+\section{normal(mean, std, size, *, out=None) -> Tensor }{
 
 
-
-normal(mean=0.0, std, out=None) -> Tensor
-
-
-
-normal(mean, std=1.0, out=None) -> Tensor
-
-
-
-normal(mean, std, size, *, out=None) -> Tensor
+Similar to the function above, but the means and standard deviations are shared
+among all drawn elements. The resulting tensor has size given by \code{size}.
 }
 
 \examples{
+
 \dontrun{
 torch_normal(mean=torch_arange(1., 11.), std=torch_arange(1, 0, -0.1))
 }
+
 
 \dontrun{
 torch_normal(mean=0.5, std=torch_arange(1., 6.))
 }
 
+
 \dontrun{
 torch_normal(mean=torch_arange(1., 6.))
 }
+
 
 \dontrun{
 torch_normal(2, 3, size=list(1, 4))

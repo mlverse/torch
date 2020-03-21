@@ -17,10 +17,14 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Addr
+}
+\section{addr(beta=1, input, alpha=1, vec1, vec2, out=None) -> Tensor }{
+
+
 Performs the outer-product of vectors \code{vec1} and \code{vec2}
 and adds it to the matrix \code{input}.
-}
-\details{
+
 Optional values \code{beta} and \code{alpha} are scaling factors on the
 outer product between \code{vec1} and \code{vec2} and the added matrix
 \code{input} respectively.
@@ -37,13 +41,9 @@ broadcastable  with a matrix of size
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
 \code{alpha} must be real numbers, otherwise they should be integers
 }
-\section{Signatures}{
-
-
-addr(beta=1, input, alpha=1, vec1, vec2, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 vec1 = torch_arange(1., 4.)
 vec2 = torch_arange(1., 3.)

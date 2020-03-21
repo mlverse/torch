@@ -7,15 +7,16 @@
 \item{*tensors}{NA any number of tensors of the same type}
 }
 \description{
-Broadcasts the given tensors according to broadcasting-semantics.
+Broadcast_tensors
 }
-\section{Signatures}{
+\section{broadcast_tensors(*tensors) -> List of Tensors }{
 
 
-broadcast_tensors(*tensors) -> List of Tensors
+Broadcasts the given tensors according to broadcasting-semantics.
 }
 
 \examples{
+
 \dontrun{
 x = torch_arange(3)$view(1, 3)
 y = torch_arange(2)$view(2, 1)

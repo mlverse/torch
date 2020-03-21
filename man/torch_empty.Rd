@@ -19,16 +19,17 @@
 \item{pin_memory}{(bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: \code{False}.}
 }
 \description{
+Empty
+}
+\section{empty(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False, pin_memory=False) -> Tensor }{
+
+
 Returns a tensor filled with uninitialized data. The shape of the tensor is
 defined by the variable argument \code{size}.
 }
-\section{Signatures}{
-
-
-empty(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False, pin_memory=False) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_empty(2, 3)
 }

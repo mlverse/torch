@@ -7,20 +7,20 @@
 \item{input}{(Tensor) the tensor to compute the digamma function on}
 }
 \description{
-Computes the logarithmic derivative of the gamma function on \code{input}.
+Digamma
 }
-\details{
+\section{digamma(input, out=None) -> Tensor }{
+
+
+Computes the logarithmic derivative of the gamma function on \code{input}.
+
 \deqn{
     \psi(x) = \frac{d}{dx} \ln\left(\Gamma\left(x\right)\right) = \frac{\Gamma'(x)}{\Gamma(x)}
 }
 }
-\section{Signatures}{
-
-
-digamma(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_tensor(c(1, 0.5))
 torch_digamma(a)

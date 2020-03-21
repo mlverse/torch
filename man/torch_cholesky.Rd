@@ -11,10 +11,14 @@
 \item{out}{(Tensor, optional) the output matrix}
 }
 \description{
+Cholesky
+}
+\section{cholesky(input, upper=False, out=None) -> Tensor }{
+
+
 Computes the Cholesky decomposition of a symmetric positive-definite
 matrix \eqn{A} or for batches of symmetric positive-definite matrices.
-}
-\details{
+
 If \code{upper} is \code{True}, the returned matrix \code{U} is upper-triangular, and
 the decomposition has the form:
 
@@ -35,13 +39,9 @@ of each of the individual matrices. Similarly, when \code{upper} is \code{False}
 tensor will be composed of lower-triangular Cholesky factors of each of the individual
 matrices.
 }
-\section{Signatures}{
-
-
-cholesky(input, upper=False, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(3, 3))
 a = torch_mm(a, a$t()) # make symmetric positive-definite

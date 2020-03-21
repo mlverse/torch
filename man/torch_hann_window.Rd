@@ -17,9 +17,17 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
-Hann window function.
+Hann_window
 }
-\details{
+\note{
+\preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
+}
+}
+\section{hann_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+
+
+Hann window function.
+
 \deqn{
     w[n] = \frac{1}{2}\ \left[1 - \cos \left( \frac{2 \pi n}{N - 1} \right)\right] =
             \sin^2 \left( \frac{\pi n}{N - 1} \right),
@@ -35,13 +43,9 @@ above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
 \code{torch_hann_window(L, periodic=True)} equal to
 \verb{torch_hann_window(L + 1, periodic=False)[:-1])}.
 }
-\note{
-\preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
-}
-}
-\section{Signatures}{
+
+\examples{
 
 
-hann_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
-}
 
+}

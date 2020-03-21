@@ -4,15 +4,16 @@
 \alias{torch_equal}
 \title{Equal}
 \description{
-\code{True} if two tensors have the same size and elements, \code{False} otherwise.
+Equal
 }
-\section{Signatures}{
+\section{equal(input, other) -> bool }{
 
 
-equal(input, other) -> bool
+\code{True} if two tensors have the same size and elements, \code{False} otherwise.
 }
 
 \examples{
+
 \dontrun{
 torch_equal(torch_tensor(c(1, 2)), torch_tensor(c(1, 2)))
 }

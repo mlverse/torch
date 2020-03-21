@@ -9,14 +9,17 @@
 \item{offset}{(int, optional) the diagonal to consider. Default: 0 (main        diagonal).}
 }
 \description{
+Diagflat
+}
+\section{diagflat(input, offset=0) -> Tensor }{
+
 \itemize{
 \item If \code{input} is a vector (1-D tensor), then returns a 2-D square tensor
 with the elements of \code{input} as the diagonal.
 \item If \code{input} is a tensor with more than one dimension, then returns a
 2-D tensor with diagonal elements equal to a flattened \code{input}.
 }
-}
-\details{
+
 The argument \code{offset} controls which diagonal to consider:
 \itemize{
 \item If \code{offset} = 0, it is the main diagonal.
@@ -24,9 +27,9 @@ The argument \code{offset} controls which diagonal to consider:
 \item If \code{offset} < 0, it is below the main diagonal.
 }
 }
-\section{Signatures}{
+
+\examples{
 
 
-diagflat(input, offset=0) -> Tensor
+
 }
-

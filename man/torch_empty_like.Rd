@@ -15,17 +15,18 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
+Empty_like
+}
+\section{empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor }{
+
+
 Returns an uninitialized tensor with the same size as \code{input}.
 \code{torch_empty_like(input)} is equivalent to
 \code{torch_empty(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
 }
-\section{Signatures}{
-
-
-empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_empty(list(2,3), dtype=torch_int64())
 }

@@ -11,17 +11,18 @@
 \item{with_replacement}{(boolean, optional) whether to allow duplication in combination}
 }
 \description{
+Combinations
+}
+\section{combinations(input, r=2, with_replacement=False) -> seq }{
+
+
 Compute combinations of length \eqn{r} of the given tensor. The behavior is similar to
 python's \code{itertools.combinations} when \code{with_replacement} is set to \code{False}, and
 \code{itertools.combinations_with_replacement} when \code{with_replacement} is set to \code{True}.
 }
-\section{Signatures}{
-
-
-combinations(input, r=2, with_replacement=False) -> seq
-}
 
 \examples{
+
 \dontrun{
 a = c(1, 2, 3)
 list(itertools$combinations(a, r=2))

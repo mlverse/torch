@@ -13,11 +13,26 @@
 \item{out}{(tuple, optional) the output tuple of (Tensor, Tensor)}
 }
 \description{
+Symeig
+}
+\note{
+The eigenvalues are returned in ascending order. If \code{input} is a batch of matrices,
+then the eigenvalues of each matrix in the batch is returned in ascending order.
+
+Irrespective of the original strides, the returned matrix \code{V} will
+be transposed, i.e. with strides \verb{V.contiguous().transpose(-1, -2).stride()}.
+
+Extra care needs to be taken when backward through outputs. Such
+operation is really only stable when all eigenvalues are distinct.
+Otherwise, \code{NaN} can appear as the gradients are not properly defined.
+}
+\section{symeig(input, eigenvectors=False, upper=True, out=None) -> (Tensor, Tensor) }{
+
+
 This function returns eigenvalues and eigenvectors
 of a real symmetric matrix \code{input} or a batch of real symmetric matrices,
 represented by a namedtuple (eigenvalues, eigenvectors).
-}
-\details{
+
 This function calculates all eigenvalues (and vectors) of \code{input}
 such that \eqn{\text{input} = V \text{diag}(e) V^T}.
 
@@ -32,20 +47,9 @@ only the upper triangular portion is used by default.
 
 If \code{upper} is \code{False}, then lower triangular portion is used.
 }
-\note{
-The eigenvalues are returned in ascending order. If \code{input} is a batch of matrices,
-then the eigenvalues of each matrix in the batch is returned in ascending order.
 
-Irrespective of the original strides, the returned matrix \code{V} will
-be transposed, i.e. with strides \verb{V.contiguous().transpose(-1, -2).stride()}.
+\examples{
 
-Extra care needs to be taken when backward through outputs. Such
-operation is really only stable when all eigenvalues are distinct.
-Otherwise, \code{NaN} can appear as the gradients are not properly defined.
+
+
 }
-\section{Signatures}{
-
-
-symeig(input, eigenvectors=False, upper=True, out=None) -> (Tensor, Tensor)
-}
-

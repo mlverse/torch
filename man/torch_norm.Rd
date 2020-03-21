@@ -17,9 +17,16 @@
 \item{dtype}{(\code{torch.dtype}, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        'dtype' while performing the operation. Default: None.}
 }
 \description{
+Norm
+}
+\section{TEST }{
+
+
 Returns the matrix norm or vector norm of a given tensor.
 }
+
 \examples{
+
 \dontrun{
 import torch
 a = torch_arange(9, dtype= torch_float) - 4

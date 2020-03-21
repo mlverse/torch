@@ -13,5 +13,16 @@
 \item{compute_mode}{NA 'use_mm_for_euclid_dist_if_necessary' - will use matrix multiplication approach to calculate        euclidean distance (p = 2) if P > 25 or R > 25        'use_mm_for_euclid_dist' - will always use matrix multiplication approach to calculate        euclidean distance (p = 2)        'donot_use_mm_for_euclid_dist' - will never use matrix multiplication approach to calculate        euclidean distance (p = 2)        Default: use_mm_for_euclid_dist_if_necessary.}
 }
 \description{
+Cdist
+}
+\section{TEST }{
+
+
 Computes batched the p-norm distance between each pair of the two collections of row vectors.
+}
+
+\examples{
+
+
+
 }

@@ -15,18 +15,7 @@
 \item{signal_sizes}{(list or \code{torch.Size}, optional) the size of the original        signal (without batch dimension). Default: \code{None}}
 }
 \description{
-Complex-to-real Inverse Discrete Fourier Transform
-}
-\details{
-This method computes the complex-to-real inverse discrete Fourier transform.
-It is mathematically equivalent with \code{\link{ifft}} with differences only in
-formats of the input and output.
-
-The argument specifications are almost identical with \code{\link{~torch.ifft}}.
-Similar to \code{\link{~torch.ifft}}, if \code{normalized} is set to \code{True},
-this normalizes the result by multiplying it with
-\eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is unitary, where
-\eqn{N_i} is the size of signal dimension \eqn{i}.
+Irfft
 }
 \note{
 \preformatted{Due to the conjugate symmetry, `input` do not need to contain the full
@@ -54,6 +43,22 @@ configuration. See cufft-plan-cache for more details on how to
 monitor and control the cache.
 }
 }
+\section{irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) -> Tensor }{
+
+
+Complex-to-real Inverse Discrete Fourier Transform
+
+This method computes the complex-to-real inverse discrete Fourier transform.
+It is mathematically equivalent with \code{\link{ifft}} with differences only in
+formats of the input and output.
+
+The argument specifications are almost identical with \code{\link{~torch.ifft}}.
+Similar to \code{\link{~torch.ifft}}, if \code{normalized} is set to \code{True},
+this normalizes the result by multiplying it with
+\eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is unitary, where
+\eqn{N_i} is the size of signal dimension \eqn{i}.
+}
+
 \section{Warning}{
 
 Generally speaking, input to this function should contain values
@@ -69,13 +74,8 @@ For CPU tensors, this method is currently only available with MKL. Use
 \code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
 
-\section{Signatures}{
-
-
-irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) -> Tensor
-}
-
 \examples{
+
 \dontrun{
 x = torch_randn(c(4, 4))
 torch_rfft(x, 2, onesided=TRUE)$shape

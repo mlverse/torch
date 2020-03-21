@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Returns a new tensor with the sigmoid of the elements of \code{input}.
+Sigmoid
 }
-\details{
+\section{sigmoid(input, out=None) -> Tensor }{
+
+
+Returns a new tensor with the sigmoid of the elements of \code{input}.
+
 \deqn{
     \text{out}_{i} = \frac{1}{1 + e^{-\text{input}_{i}}}
 }
 }
-\section{Signatures}{
-
-
-sigmoid(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(4))
 a

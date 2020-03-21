@@ -7,13 +7,20 @@
 \item{matrices}{(Tensors...) a sequence of 2 or more 2-D tensors whose product is to be determined.}
 }
 \description{
+Chain_matmul
+}
+\section{TEST }{
+
+
 Returns the matrix product of the \eqn{N} 2-D tensors. This product is efficiently computed
 using the matrix chain order algorithm which selects the order in which incurs the lowest cost in terms
 of arithmetic operations (\verb{[CLRS]}_). Note that since this is a function to compute the product, \eqn{N}
 needs to be greater than or equal to 2; if equal to 2 then a trivial matrix-matrix product is returned.
 If \eqn{N} is 1, then this is a no-op - the original matrix is returned as is.
 }
+
 \examples{
+
 \dontrun{
 a = torch_randn(c(3, 4))
 b = torch_randn(c(4, 5))

@@ -9,20 +9,20 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
-Computes the element-wise conjugate of the given \code{input} tensor.
+Conj
 }
-\details{
+\section{conj(input, out=None) -> Tensor }{
+
+
+Computes the element-wise conjugate of the given \code{input} tensor.
+
 \deqn{
     \text{out}_{i} = conj(\text{input}_{i})
 }
 }
-\section{Signatures}{
-
-
-conj(input, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_conj(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
 }

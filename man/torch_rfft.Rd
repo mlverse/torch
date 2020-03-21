@@ -13,9 +13,20 @@
 \item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy. Default: \code{True}}
 }
 \description{
-Real-to-complex Discrete Fourier Transform
+Rfft
 }
-\details{
+\note{
+\preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
+repeatedly running FFT methods on tensors of same geometry with same
+configuration. See cufft-plan-cache for more details on how to
+monitor and control the cache.
+}
+}
+\section{rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor }{
+
+
+Real-to-complex Discrete Fourier Transform
+
 This method computes the real-to-complex discrete Fourier transform. It is
 mathematically equivalent with \code{\link{~torch.fft}} with differences only in
 formats of the input and output.
@@ -42,26 +53,15 @@ of \code{input}, but instead the last dimension will be halfed as of size
 
 The inverse of this function is \code{\link{~torch.irfft}}.
 }
-\note{
-\preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
-repeatedly running FFT methods on tensors of same geometry with same
-configuration. See cufft-plan-cache for more details on how to
-monitor and control the cache.
-}
-}
+
 \section{Warning}{
 
 For CPU tensors, this method is currently only available with MKL. Use
 \code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
 }
 
-\section{Signatures}{
-
-
-rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor
-}
-
 \examples{
+
 \dontrun{
 x = torch_randn(c(5, 5))
 torch_rfft(x, 2)$shape

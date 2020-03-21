@@ -7,7 +7,7 @@
 \item{input}{(Tensor) the input tensor of size \verb{(*, n, n)} where \code{*} is zero or more                batch dimensions.}
 }
 \description{
-Calculates determinant of a square matrix or batches of square matrices.
+Det
 }
 \note{
 \preformatted{Backward through `det` internally uses SVD results when `input` is
@@ -16,13 +16,14 @@ unstable in when `input` doesn't have distinct singular values. See
 `~torch.svd` for details.
 }
 }
-\section{Signatures}{
+\section{det(input) -> Tensor }{
 
 
-det(input) -> Tensor
+Calculates determinant of a square matrix or batches of square matrices.
 }
 
 \examples{
+
 \dontrun{
 A = torch_randn(c(3, 3))
 torch_det(A)

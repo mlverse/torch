@@ -15,13 +15,21 @@
 \item{indices}{(Tensor, optional) the output index tensor}
 }
 \description{
+Median
+}
+\section{median(input) -> Tensor }{
+
+
 Returns the median value of all elements in the \code{input} tensor.
+}
+
+\section{median(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor) }{
+
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the median
 value of each row of the \code{input} tensor in the given dimension
 \code{dim}. And \code{indices} is the index location of each median value found.
-}
-\details{
+
 By default, \code{dim} is the last dimension of the \code{input} tensor.
 
 If \code{keepdim} is \code{True}, the output tensors are of the same size
@@ -29,22 +37,15 @@ as \code{input} except in the dimension \code{dim} where they are of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in
 the outputs tensor having 1 fewer dimension than \code{input}.
 }
-\section{Signatures}{
-
-
-median(input) -> Tensor
-
-
-
-median(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor)
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(1, 3))
 a
 torch_median(a)
 }
+
 
 \dontrun{
 a = torch_randn(c(4, 5))

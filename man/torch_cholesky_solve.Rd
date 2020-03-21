@@ -13,10 +13,14 @@
 \item{out}{(Tensor, optional) the output tensor for \code{c}}
 }
 \description{
+Cholesky_solve
+}
+\section{cholesky_solve(input, input2, upper=False, out=None) -> Tensor }{
+
+
 Solves a linear system of equations with a positive semidefinite
 matrix to be inverted given its Cholesky factor matrix \eqn{u}.
-}
-\details{
+
 If \code{upper} is \code{False}, \eqn{u} is and lower triangular and \code{c} is
 returned such that:
 
@@ -33,13 +37,9 @@ and \code{c} is returned such that:
 batches of 2D matrices. If the inputs are batches, then returns
 batched outputs \code{c}
 }
-\section{Signatures}{
-
-
-cholesky_solve(input, input2, upper=False, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(3, 3))
 a = torch_mm(a, a$t()) # make symmetric positive definite

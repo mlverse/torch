@@ -11,19 +11,19 @@
 \item{out}{(Tensor, optional) the output tensor that must be a \code{BoolTensor}}
 }
 \description{
-Computes \eqn{\text{input} \leq \text{other}} element-wise.
+Le
 }
-\details{
+\section{le(input, other, out=None) -> Tensor }{
+
+
+Computes \eqn{\text{input} \leq \text{other}} element-wise.
+
 The second argument can be a number or a tensor whose shape is
 broadcastable  with the first argument.
 }
-\section{Signatures}{
-
-
-le(input, other, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 torch_le(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 }

@@ -23,20 +23,20 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
 \description{
+Logspace
+}
+\section{logspace(start, end, steps=100, base=10.0, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+
+
 Returns a one-dimensional tensor of \code{steps} points
 logarithmically spaced with base \code{base} between
 \eqn{{\text{base}}^{\text{start}}} and \eqn{{\text{base}}^{\text{end}}}.
-}
-\details{
+
 The output tensor is 1-D of size \code{steps}.
-}
-\section{Signatures}{
-
-
-logspace(start, end, steps=100, base=10.0, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
 }
 
 \examples{
+
 \dontrun{
 torch_logspace(start=-10, end=10, steps=5)
 torch_logspace(start=0.1, end=1.0, steps=5)

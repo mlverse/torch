@@ -17,12 +17,16 @@
 \item{layout}{(\code{torch.layout}, optional) currently only support \code{torch_strided}.}
 }
 \description{
+Tril_indices
+}
+\section{tril_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor }{
+
+
 Returns the indices of the lower triangular part of a \code{row}-by-
 \code{col} matrix in a 2-by-N Tensor, where the first row contains row
 coordinates of all indices and the second row contains column coordinates.
 Indices are ordered based on rows and then columns.
-}
-\details{
+
 The lower triangular part of the matrix is defined as the elements on and
 below the diagonal.
 
@@ -37,13 +41,9 @@ where \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 NOTE: when running on 'cuda', row * col must be less than \eqn{2^{59}} to
 prevent overflow during calculation.
 }
-\section{Signatures}{
-
-
-tril_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 a = torch_tril_indices(3, 3)
 a

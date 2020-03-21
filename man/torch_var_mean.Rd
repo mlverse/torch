@@ -6,21 +6,29 @@
 \arguments{
 \item{input}{(Tensor) the input tensor.}
 
+\item{unbiased}{(bool) whether to use the unbiased estimation or not}
+
 \item{dim}{(int or tuple of ints) the dimension or dimensions to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{unbiased}{(bool) whether to use the unbiased estimation or not}
 }
 \description{
+Var_mean
+}
+\section{var_mean(input, unbiased=True) -> (Tensor, Tensor) }{
+
+
 Returns the variance and mean of all elements in the \code{input} tensor.
+
+If \code{unbiased} is \code{False}, then the variance will be calculated via the
+biased estimator. Otherwise, Bessel's correction will be used.
+}
+
+\section{var_mean(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor) }{
+
 
 Returns the variance and mean of each row of the \code{input} tensor in the given
 dimension \code{dim}.
-}
-\details{
-If \code{unbiased} is \code{False}, then the variance will be calculated via the
-biased estimator. Otherwise, Bessel's correction will be used.
 
 If \code{keepdim} is \code{True}, the output tensor is of the same size
 as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
@@ -30,22 +38,15 @@ output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 If \code{unbiased} is \code{False}, then the variance will be calculated via the
 biased estimator. Otherwise, Bessel's correction will be used.
 }
-\section{Signatures}{
-
-
-var_mean(input, unbiased=True) -> (Tensor, Tensor)
-
-
-
-var_mean(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor)
-}
 
 \examples{
+
 \dontrun{
 a = torch_randn(c(1, 3))
 a
 torch_var_mean(a)
 }
+
 
 \dontrun{
 a = torch_randn(c(4, 4))

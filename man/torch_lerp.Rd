@@ -13,10 +13,14 @@
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
+Lerp
+}
+\section{lerp(input, end, weight, out=None) }{
+
+
 Does a linear interpolation of two tensors \code{start} (given by \code{input}) and \code{end} based
 on a scalar or tensor \code{weight} and returns the resulting \code{out} tensor.
-}
-\details{
+
 \deqn{
     \text{out}_i = \text{start}_i + \text{weight}_i \times (\text{end}_i - \text{start}_i)
 }
@@ -24,13 +28,9 @@ The shapes of \code{start} and \code{end} must be
 broadcastable . If \code{weight} is a tensor, then
 the shapes of \code{weight}, \code{start}, and \code{end} must be broadcastable .
 }
-\section{Signatures}{
-
-
-lerp(input, end, weight, out=None)
-}
 
 \examples{
+
 \dontrun{
 start = torch_arange(1., 5.)
 end = torch_empty(4)$fill_list(10)

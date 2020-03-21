@@ -11,11 +11,19 @@
 \item{out}{(tuple, optional) the optional destination tensor}
 }
 \description{
+Lstsq
+}
+\note{
+\preformatted{The case when \eqn{m < n} is not supported on the GPU.
+}
+}
+\section{lstsq(input, A, out=None) -> Tensor }{
+
+
 Computes the solution to the least squares and least norm problems for a full
 rank matrix \eqn{A} of size \eqn{(m \times n)} and a matrix \eqn{B} of
 size \eqn{(m \times k)}.
-}
-\details{
+
 If \eqn{m \geq n}, \code{\link{lstsq}} solves the least-squares problem:
 
 \deqn{
@@ -37,17 +45,9 @@ rows of \eqn{X} contains the solution. If \eqn{m \geq n}, the residual sum of sq
 for the solution in each column is given by the sum of squares of elements in the
 remaining \eqn{m - n} rows of that column.
 }
-\note{
-\preformatted{The case when \eqn{m < n} is not supported on the GPU.
-}
-}
-\section{Signatures}{
-
-
-lstsq(input, A, out=None) -> Tensor
-}
 
 \examples{
+
 \dontrun{
 A = torch_tensor(c([1., 1, 1),
 B = torch_tensor(c([-10., -3),

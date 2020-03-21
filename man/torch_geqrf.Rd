@@ -9,10 +9,14 @@
 \item{out}{(tuple, optional) the output tuple of (Tensor, Tensor)}
 }
 \description{
+Geqrf
+}
+\section{geqrf(input, out=None) -> (Tensor, Tensor) }{
+
+
 This is a low-level function for calling LAPACK directly. This function
 returns a namedtuple (a, tau) as defined in \verb{LAPACK documentation for geqrf}_ .
-}
-\details{
+
 You'll generally want to use \code{\link{torch_qr}} instead.
 
 Computes a QR decomposition of \code{input}, but without constructing
@@ -23,9 +27,9 @@ which produces a sequence of 'elementary reflectors'.
 
 See \verb{LAPACK documentation for geqrf}_ for further details.
 }
-\section{Signatures}{
+
+\examples{
 
 
-geqrf(input, out=None) -> (Tensor, Tensor)
+
 }
-
