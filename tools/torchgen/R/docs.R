@@ -237,8 +237,7 @@ remove_reference <- function(x) {
   str_replace_all(x, ":ref:`([^<^`]+)[^`]*`", "\\1")
 }
 
-create_roxygen_desc <- function(desc) {
-
+desc_prep <- function(desc) {
   if (desc == "" | is.null(desc))
     return("#' Empty description...")
 
@@ -257,6 +256,10 @@ create_roxygen_desc <- function(desc) {
   str_c(str_c("#' ", lines), collapse = "\n")
 }
 
+create_roxygen_desc <- function(desc) {
+  desc_prep(desc)
+}
+
 create_roxygen_title <- function(name) {
   str_c("#' ", str_to_title(name))
 }
@@ -272,7 +275,6 @@ create_roxygen_example <- function(exam) {
   examples <- str_split(exam, "\n")[[1]]
   examples <- str_c("#' ", examples)
   glue::glue(
-    "#' @examples",
     "#' \\dontrun{{",
     str_c(examples, collapse = "\n"),
     "#' }}",
@@ -293,17 +295,15 @@ create_roxygen_signature_section <- function(sign) {
   )
 }
 
-create_roxygen <- function(name, param, desc, exam, sign) {
+create_roxygen <- function(name, m) {
   str_c(
     create_roxygen_title(name),
     "#'",
-    create_roxygen_desc(desc),
+    create_roxygen_full_desc(m),
     "#'",
-    create_roxygen_signature_section(sign),
+    create_roxygen_full_params(m),
     "#'",
-    create_roxygen_params(param),
-    "#'",
-    create_roxygen_example(exam),
+    create_roxygen_full_examples(m),
     "#'",
     create_roxygen_rdname(name),
     "#'",
@@ -311,6 +311,36 @@ create_roxygen <- function(name, param, desc, exam, sign) {
     "NULL\n",
     sep =  "\n"
   )
+}
+
+create_roxygen_desc_section <- function(desc, sign) {
+
+  if (is.null(sign))
+    sign <- "TEST"
+
+  str_c(
+    str_c("#' @section ", sign, " :"),
+    "#'",
+    desc_prep(desc),
+    "#'",
+    sep = "\n"
+  )
+}
+
+create_roxygen_full_desc <- function(m) {
+  desc <- map_chr(m, ~create_roxygen_desc_section(.x$desc, .x$sign))
+  str_c(desc, collapse = "\n")
+}
+
+create_roxygen_full_params <- function(m) {
+  pars <- flatten(map(m, ~.x$args))
+  pars <- pars[!duplicated(map_chr(pars, ~.x$name))]
+  create_roxygen_params(pars)
+}
+
+create_roxygen_full_examples <- function(m) {
+  examples <- map_chr(m, ~create_roxygen_example(.x$exam))
+  str_c("#' @examples\n#'\n", str_c(examples, collapse = "\n#'\n#'\n"))
 }
 
 docum <- function(path) {
@@ -332,11 +362,7 @@ docum <- function(path) {
   d <- transpose(list(args = args, desc = desc, exam = exam, sign = sign))
   d <- map(d, transpose)
 
-  out <- imap(d, function(x, name) {
-    map(x, ~create_roxygen(name, .x$args, .x$desc, .x$exam, .x$sign))
-  })
-  out <- map(out, ~str_c(.x, collapse = "\n\n"))
-  out <- out[!is.na(out)]
+  out <- imap(d, ~create_roxygen(.y, .x))
   out <- reduce(out, function(x, y) str_c(x, y, sep = "\n\n"))
 
   readr::write_file(out, str_c(path, "/R/gen-namespace-docs.R"))
