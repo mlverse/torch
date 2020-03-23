@@ -39,6 +39,7 @@ Collate:
     'tensor.R'
     'gen-method.R'
     'gen-namespace-docs.R'
+    'gen-namespace-examples.R'
     'gen-namespace.R'
     'generator.R'
     'lantern_install.R'
