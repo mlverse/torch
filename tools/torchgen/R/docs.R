@@ -309,19 +309,52 @@ create_roxygen <- function(name, m) {
   )
 }
 
-create_examples <- function(name, m) {
-  examples <- create_roxygen_full_examples(m)
-  hash <- openssl::md5(examples, "md5")
+create_examples <- function(name, m, path, overwrite = "ask") {
 
-  str_c(
+  f <- readr::read_file(path)
+  old_hash <- str_match(f, glue::glue("# -> {name}: ([^ ]+) <-"))[1,2]
+
+  examples <- create_roxygen_full_examples(m)
+  hash <- openssl::md5(examples)
+
+  new_text <- str_c(
     glue::glue("# -> {name}: {hash} <-"),
     "#'",
     create_roxygen_rdname(name),
     "#'",
     create_roxygen_full_examples(m),
     "NULL",
+    glue::glue("# -> {name} <-"),
     sep = "\n"
   )
+
+  if (!is.na(old_hash) && old_hash != hash) {
+    old_text <- stringi::stri_extract(f, regex = glue::glue("# -> {name}: .+# -> {name} <-"),
+                          opts_regex = stringi::stri_opts_regex(dotall = TRUE))
+
+    if (overwrite == "ask") {
+      cat("------------------------------------\n")
+      cat("-------- Replace -------------------\n")
+      cat(old_text)
+      cat("\n")
+      cat("-------- For -------------------\n")
+      cat(new_text)
+      cat("\n")
+      word <- readline(prompt="y/n: ")
+    } else if (overwrite == "yes") {
+      word <- "y"
+    }
+
+    if (word == "y") {
+     f <- stringi::stri_replace(f, fixed = old_text, replacement = new_text)
+    }
+  }
+
+  if(is.na(old_hash)){
+    f <- str_c(f, new_text, sep = "\n\n")
+  }
+
+  readr::write_file(f, path)
 }
 
 create_roxygen_desc_section <- function(desc, sign) {
@@ -354,7 +387,7 @@ create_roxygen_full_examples <- function(m) {
   str_c("#' @examples\n#'\n", str_c(examples, collapse = "\n#'\n#'\n"))
 }
 
-docum <- function(path) {
+docum <- function(path, overwrite = "ask") {
 
   funs <- declarations() %>%
     keep(~"namespace" %in% .x$method_of) %>%
@@ -375,11 +408,14 @@ docum <- function(path) {
 
   out <- imap(d, ~create_roxygen(.y, .x))
   out <- reduce(out, function(x, y) str_c(x, y, sep = "\n\n"))
-  examples <- imap(d, ~create_examples(.y, .x)) %>%
-    reduce(~ str_c(.x, .y, sep = "\n\n"))
+
+  # rewrite examples
+  iwalk(d, ~create_examples(.y, .x,
+                            path = str_c(path, "/R/gen-namespace-examples.R"),
+                            overwrite = overwrite))
 
   readr::write_file(out, str_c(path, "/R/gen-namespace-docs.R"))
-  readr::write_file(examples, str_c(path, "/R/gen-namespace-examples.R"))
+  #readr::write_file(examples, str_c(path, "/R/gen-namespace-examples.R"))
 }
 
 

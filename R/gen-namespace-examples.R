@@ -1,4 +1,6 @@
-# -> abs: e5dcc7c79de65d8dfd1b04a5b19003df <-
+
+
+# -> abs: d67751a436577d634e3c777a853aca91 <-
 #'
 #' @name torch_abs
 #'
@@ -6,8 +8,9 @@
 #'
 #' torch_abs(torch_tensor(c(-1, -2, 3)))
 NULL
+# -> abs <-
 
-# -> angle: 9621fdde4144667b5f3fe4c9f7edc853 <-
+# -> angle: 858a1adaf7a0b5bd09953dbbf70376dd <-
 #'
 #' @name torch_angle
 #'
@@ -15,8 +18,9 @@ NULL
 #'
 #' torch_angle(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))*180/3.14159
 NULL
+# -> angle <-
 
-# -> real: ce82bd172d0842e27c33861733d35928 <-
+# -> real: 2e4771622de23ac64e47f112df9b4e43 <-
 #'
 #' @name torch_real
 #'
@@ -24,8 +28,9 @@ NULL
 #'
 #' torch_real(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
 NULL
+# -> real <-
 
-# -> imag: 57addec87c3caad9ba6674074a165f7c <-
+# -> imag: d426bdcc68428514ec161db7a8064358 <-
 #'
 #' @name torch_imag
 #'
@@ -33,8 +38,9 @@ NULL
 #'
 #' torch_imag(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
 NULL
+# -> imag <-
 
-# -> conj: a4675ce91c7382434d5f94e70d9da092 <-
+# -> conj: ad66b442c268738f2278da63aa2474ba <-
 #'
 #' @name torch_conj
 #'
@@ -42,8 +48,9 @@ NULL
 #'
 #' torch_conj(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
 NULL
+# -> conj <-
 
-# -> acos: de947e3c803bf4e24ab85d718ffecbbe <-
+# -> acos: 2ab027cdf77b7d3ee9add06c085dd0ac <-
 #'
 #' @name torch_acos
 #'
@@ -53,8 +60,9 @@ NULL
 #' a
 #' torch_acos(a)
 NULL
+# -> acos <-
 
-# -> avg_pool1d: 3558892c5062f8d69312142540f3b3ab <-
+# -> avg_pool1d: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_avg_pool1d
 #'
@@ -62,8 +70,9 @@ NULL
 #'
 #' 
 NULL
+# -> avg_pool1d <-
 
-# -> adaptive_avg_pool1d: 3558892c5062f8d69312142540f3b3ab <-
+# -> adaptive_avg_pool1d: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_adaptive_avg_pool1d
 #'
@@ -71,8 +80,9 @@ NULL
 #'
 #' 
 NULL
+# -> adaptive_avg_pool1d <-
 
-# -> add: e5234c5c58dc7d552ac91d3ae1586ebe <-
+# -> add: f37c4dbf3ceda27df9137fc81e92e89a <-
 #'
 #' @name torch_add
 #'
@@ -89,8 +99,9 @@ NULL
 #' b
 #' torch_add(a, 10, b)
 NULL
+# -> add <-
 
-# -> addmv: 95a7ca8251046a178e094a9b3b868fcc <-
+# -> addmv: 83d2c5833f1d727d7f56bc48f7463f5b <-
 #'
 #' @name torch_addmv
 #'
@@ -101,8 +112,9 @@ NULL
 #' vec = torch_randn(c(3))
 #' torch_addmv(M, mat, vec)
 NULL
+# -> addmv <-
 
-# -> addr: 7fe5b137e75dbe0559b35e9bb822b5bc <-
+# -> addr: 983b4707a573e2b3efd1fb8713873f9e <-
 #'
 #' @name torch_addr
 #'
@@ -113,8 +125,9 @@ NULL
 #' M = torch_zeros(c(3, 2))
 #' torch_addr(M, vec1, vec2)
 NULL
+# -> addr <-
 
-# -> allclose: 8c3297713c8bf069c062982c901b6cba <-
+# -> allclose: 75dc79b19d8c682e0ea3e86e5f669fdc <-
 #'
 #' @name torch_allclose
 #'
@@ -125,8 +138,9 @@ NULL
 #' torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]))
 #' torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]), equal_nan=TRUE)
 NULL
+# -> allclose <-
 
-# -> arange: 3b9e05598c28f78d92ed1f2445214942 <-
+# -> arange: 20cca3a72bc0fbf78059a808f4070c2f <-
 #'
 #' @name torch_arange
 #'
@@ -136,8 +150,9 @@ NULL
 #' torch_arange(1, 4)
 #' torch_arange(1, 2.5, 0.5)
 NULL
+# -> arange <-
 
-# -> argmax: d282510a6dcfc0e72f3200971137777d <-
+# -> argmax: e3fd429271eec8b076afde32f2efdf87 <-
 #'
 #' @name torch_argmax
 #'
@@ -152,8 +167,9 @@ NULL
 #' a
 #' torch_argmax(a, dim=1)
 NULL
+# -> argmax <-
 
-# -> argmin: 4803748c67670143bd6efdfb452e5a7e <-
+# -> argmin: 3414db8f263b133f52bdde7a3b110445 <-
 #'
 #' @name torch_argmin
 #'
@@ -168,8 +184,9 @@ NULL
 #' a
 #' torch_argmin(a, dim=1)
 NULL
+# -> argmin <-
 
-# -> as_strided: 01d0400373250adc462d043cf0eab2a3 <-
+# -> as_strided: 748e2c56a61bed2cbb0a275959890f66 <-
 #'
 #' @name torch_as_strided
 #'
@@ -181,8 +198,9 @@ NULL
 #' t
 #' t = torch_as_strided(x, list(2, 2), list(1, 2), 1)
 NULL
+# -> as_strided <-
 
-# -> asin: 06862ae1b297aaab8a06dc17014cc68d <-
+# -> asin: 809434925e6b1da5e9a818566ae0c99d <-
 #'
 #' @name torch_asin
 #'
@@ -192,8 +210,9 @@ NULL
 #' a
 #' torch_asin(a)
 NULL
+# -> asin <-
 
-# -> atan: deb98403fe30b6df0380ed4ae9387292 <-
+# -> atan: a835ea6b64d9edaf523d2e2035874ea0 <-
 #'
 #' @name torch_atan
 #'
@@ -203,8 +222,9 @@ NULL
 #' a
 #' torch_atan(a)
 NULL
+# -> atan <-
 
-# -> baddbmm: 6dcb499552161b4c566226d79cb2784d <-
+# -> baddbmm: 71b5d1eee47355a237e06fea2b98178e <-
 #'
 #' @name torch_baddbmm
 #'
@@ -215,8 +235,9 @@ NULL
 #' batch2 = torch_randn(c(10, 4, 5))
 #' torch_baddbmm(M, batch1, batch2)$size()
 NULL
+# -> baddbmm <-
 
-# -> bartlett_window: 3558892c5062f8d69312142540f3b3ab <-
+# -> bartlett_window: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_bartlett_window
 #'
@@ -224,8 +245,9 @@ NULL
 #'
 #' 
 NULL
+# -> bartlett_window <-
 
-# -> bernoulli: 9b88ad8f9841b4f4554546b7e0810cc8 <-
+# -> bernoulli: 108c25f843728b828911fb500fa4cc1e <-
 #'
 #' @name torch_bernoulli
 #'
@@ -239,8 +261,9 @@ NULL
 #' a = torch_zeros(c(3, 3)) # probability of drawing "1" is 0
 #' torch_bernoulli(a)
 NULL
+# -> bernoulli <-
 
-# -> bincount: 8f376efeb3f93eee77fa02e8daaf71a6 <-
+# -> bincount: 5bda0cdd59c9a9040efbb2be131f7294 <-
 #'
 #' @name torch_bincount
 #'
@@ -252,8 +275,9 @@ NULL
 #' torch_bincount(input)
 #' input$bincount(weights)
 NULL
+# -> bincount <-
 
-# -> bitwise_not: 3558892c5062f8d69312142540f3b3ab <-
+# -> bitwise_not: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_bitwise_not
 #'
@@ -261,8 +285,9 @@ NULL
 #'
 #' 
 NULL
+# -> bitwise_not <-
 
-# -> logical_not: 7bc862f74fd8849a25f5043c76d2be75 <-
+# -> logical_not: e5721fde5523e719dd89518a27395757 <-
 #'
 #' @name torch_logical_not
 #'
@@ -273,8 +298,9 @@ NULL
 #' torch_logical_not(torch_tensor(c(0., 1.5, -10.), dtype=torch_double()))
 #' torch_logical_not(torch_tensor(c(0., 1., -10.), dtype=torch_double()), out=torch_empty(3, dtype=torch_int16()))
 NULL
+# -> logical_not <-
 
-# -> logical_xor: f160bb410361a340b5e68613a4d89c49 <-
+# -> logical_xor: 947a25a9349705413ad7723681b625c9 <-
 #'
 #' @name torch_logical_xor
 #'
@@ -288,8 +314,9 @@ NULL
 #' torch_logical_xor(a$double(), b)
 #' torch_logical_xor(a, b, out=torch_empty(4, dtype=torch_bool()))
 NULL
+# -> logical_xor <-
 
-# -> blackman_window: 3558892c5062f8d69312142540f3b3ab <-
+# -> blackman_window: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_blackman_window
 #'
@@ -297,8 +324,9 @@ NULL
 #'
 #' 
 NULL
+# -> blackman_window <-
 
-# -> bmm: 94a2609444054e49db409a2c41e8e395 <-
+# -> bmm: b7a9569596d0289ef982d49fb198cdf2 <-
 #'
 #' @name torch_bmm
 #'
@@ -309,8 +337,9 @@ NULL
 #' res = torch_bmm(input, mat2)
 #' res$size()
 NULL
+# -> bmm <-
 
-# -> broadcast_tensors: 40a0612dc7ad6fe698efc663dee38fca <-
+# -> broadcast_tensors: dcecc783135dafb8a5c66509094bd1f1 <-
 #'
 #' @name torch_broadcast_tensors
 #'
@@ -322,8 +351,9 @@ NULL
 #' a$size()
 #' a
 NULL
+# -> broadcast_tensors <-
 
-# -> cat: f59111e8a11eeec3514d7e89b8c9df38 <-
+# -> cat: 062ab1fbc6fc255601fff1b0916ae2f2 <-
 #'
 #' @name torch_cat
 #'
@@ -334,8 +364,9 @@ NULL
 #' torch_cat(list(x, x, x), 0)
 #' torch_cat(list(x, x, x), 1)
 NULL
+# -> cat <-
 
-# -> ceil: 239c07102107a5f1bee737a4c4dda5cb <-
+# -> ceil: 1301bf94c5affb34ae2ac84bc039aad0 <-
 #'
 #' @name torch_ceil
 #'
@@ -345,8 +376,9 @@ NULL
 #' a
 #' torch_ceil(a)
 NULL
+# -> ceil <-
 
-# -> chain_matmul: d5fdd723ee4defcebfcda3f59c2d7583 <-
+# -> chain_matmul: 0ceea8ee82228e770cf45a9e77f87caf <-
 #'
 #' @name torch_chain_matmul
 #'
@@ -358,8 +390,9 @@ NULL
 #' d = torch_randn(c(6, 7))
 #' torch_chain_matmul(a, b, c, d)
 NULL
+# -> chain_matmul <-
 
-# -> chunk: 3558892c5062f8d69312142540f3b3ab <-
+# -> chunk: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_chunk
 #'
@@ -367,8 +400,9 @@ NULL
 #'
 #' 
 NULL
+# -> chunk <-
 
-# -> clamp: e0edd0190272b6f2d6da83e5a655a576 <-
+# -> clamp: b8715e8ea7b218126f0d0324d38f435b <-
 #'
 #' @name torch_clamp
 #'
@@ -388,8 +422,9 @@ NULL
 #' a
 #' torch_clamp(a, max=0.5)
 NULL
+# -> clamp <-
 
-# -> conv1d: 3558892c5062f8d69312142540f3b3ab <-
+# -> conv1d: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_conv1d
 #'
@@ -397,8 +432,9 @@ NULL
 #'
 #' 
 NULL
+# -> conv1d <-
 
-# -> conv2d: 3558892c5062f8d69312142540f3b3ab <-
+# -> conv2d: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_conv2d
 #'
@@ -406,8 +442,9 @@ NULL
 #'
 #' 
 NULL
+# -> conv2d <-
 
-# -> conv3d: 3558892c5062f8d69312142540f3b3ab <-
+# -> conv3d: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_conv3d
 #'
@@ -415,8 +452,9 @@ NULL
 #'
 #' 
 NULL
+# -> conv3d <-
 
-# -> conv_tbc: 3558892c5062f8d69312142540f3b3ab <-
+# -> conv_tbc: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_conv_tbc
 #'
@@ -424,8 +462,9 @@ NULL
 #'
 #' 
 NULL
+# -> conv_tbc <-
 
-# -> conv_transpose1d: 3558892c5062f8d69312142540f3b3ab <-
+# -> conv_transpose1d: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_conv_transpose1d
 #'
@@ -433,8 +472,9 @@ NULL
 #'
 #' 
 NULL
+# -> conv_transpose1d <-
 
-# -> conv_transpose2d: 3558892c5062f8d69312142540f3b3ab <-
+# -> conv_transpose2d: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_conv_transpose2d
 #'
@@ -442,8 +482,9 @@ NULL
 #'
 #' 
 NULL
+# -> conv_transpose2d <-
 
-# -> conv_transpose3d: 3558892c5062f8d69312142540f3b3ab <-
+# -> conv_transpose3d: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_conv_transpose3d
 #'
@@ -451,8 +492,9 @@ NULL
 #'
 #' 
 NULL
+# -> conv_transpose3d <-
 
-# -> cos: 5192040f1da2ab0b8d6b0bf3e9350bff <-
+# -> cos: 187369ee9e12f250c400a79ab1380184 <-
 #'
 #' @name torch_cos
 #'
@@ -462,8 +504,9 @@ NULL
 #' a
 #' torch_cos(a)
 NULL
+# -> cos <-
 
-# -> cosh: e5f66f0ceaa03000e5d9758a15720e11 <-
+# -> cosh: b80ef04beab2b73f83cea6e79cba081f <-
 #'
 #' @name torch_cosh
 #'
@@ -473,8 +516,9 @@ NULL
 #' a
 #' torch_cosh(a)
 NULL
+# -> cosh <-
 
-# -> cumsum: bfe9884a4685aef797f8b6217cb43134 <-
+# -> cumsum: f6094a9c0e6aa88b4e5ae3e7c484c96a <-
 #'
 #' @name torch_cumsum
 #'
@@ -484,8 +528,9 @@ NULL
 #' a
 #' torch_cumsum(a, dim=0)
 NULL
+# -> cumsum <-
 
-# -> cumprod: c2bd9e3600eca4d6b76296ec16b33c8a <-
+# -> cumprod: 9e8797a28630ef38431909cf4523ccb7 <-
 #'
 #' @name torch_cumprod
 #'
@@ -497,8 +542,9 @@ NULL
 #' ac(5) = 0.0
 #' torch_cumprod(a, dim=0)
 NULL
+# -> cumprod <-
 
-# -> det: 52d605bf0ed56dbe5250fe877a58cf67 <-
+# -> det: 9ceaddcc0529d47bc4610b7a0aa04346 <-
 #'
 #' @name torch_det
 #'
@@ -510,8 +556,9 @@ NULL
 #' A
 #' A$det()
 NULL
+# -> det <-
 
-# -> diag_embed: 5d05dd914f0c95d15c53edcb24b102b9 <-
+# -> diag_embed: d1fa41a75f777a11382c295654caebb8 <-
 #'
 #' @name torch_diag_embed
 #'
@@ -521,8 +568,9 @@ NULL
 #' torch_diag_embed(a)
 #' torch_diag_embed(a, offset=1, dim1=0, dim2=2)
 NULL
+# -> diag_embed <-
 
-# -> diagflat: 3558892c5062f8d69312142540f3b3ab <-
+# -> diagflat: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_diagflat
 #'
@@ -530,8 +578,9 @@ NULL
 #'
 #' 
 NULL
+# -> diagflat <-
 
-# -> diagonal: 3558892c5062f8d69312142540f3b3ab <-
+# -> diagonal: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_diagonal
 #'
@@ -539,8 +588,9 @@ NULL
 #'
 #' 
 NULL
+# -> diagonal <-
 
-# -> div: 00a982e99002adfd039a1a8392aabc5a <-
+# -> div: 0d44b6c1c7d9ef55370b4d6ac8800a21 <-
 #'
 #' @name torch_div
 #'
@@ -557,8 +607,9 @@ NULL
 #' b
 #' torch_div(a, b)
 NULL
+# -> div <-
 
-# -> dot: f9059f8763a0a2d50613c46c1b74d861 <-
+# -> dot: 403246ca3b8964ee4417df21198f74ae <-
 #'
 #' @name torch_dot
 #'
@@ -566,8 +617,9 @@ NULL
 #'
 #' torch_dot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
 NULL
+# -> dot <-
 
-# -> einsum: 3558892c5062f8d69312142540f3b3ab <-
+# -> einsum: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_einsum
 #'
@@ -575,8 +627,9 @@ NULL
 #'
 #' 
 NULL
+# -> einsum <-
 
-# -> empty: 0962765c175f729cb8042eed65dc3ee3 <-
+# -> empty: fc1319cd474c41b5f0544e2df95e87a2 <-
 #'
 #' @name torch_empty
 #'
@@ -584,8 +637,9 @@ NULL
 #'
 #' torch_empty(2, 3)
 NULL
+# -> empty <-
 
-# -> empty_like: 377c54c571c47d42e428b19201764263 <-
+# -> empty_like: 57c270b5f820634f47dc2ce3ba5b9a61 <-
 #'
 #' @name torch_empty_like
 #'
@@ -593,8 +647,9 @@ NULL
 #'
 #' torch_empty(list(2,3), dtype=torch_int64())
 NULL
+# -> empty_like <-
 
-# -> empty_strided: 46b420ae46859eccc00bc9ffd70bd09b <-
+# -> empty_strided: a5d33d461b4133d8cb364e4e9a9f5e57 <-
 #'
 #' @name torch_empty_strided
 #'
@@ -605,8 +660,9 @@ NULL
 #' a$stride()
 #' a$size()
 NULL
+# -> empty_strided <-
 
-# -> erf: 6df267ff8119f54fd357a05e105f5168 <-
+# -> erf: 4976cdbfc8a05adb26c48eb782b728a4 <-
 #'
 #' @name torch_erf
 #'
@@ -614,8 +670,9 @@ NULL
 #'
 #' torch_erf(torch_tensor(c(0, -1., 10.)))
 NULL
+# -> erf <-
 
-# -> erfc: c133a5a098565b1346023122c5945802 <-
+# -> erfc: 6f41b5feb9e66231441913a9bde46a36 <-
 #'
 #' @name torch_erfc
 #'
@@ -623,8 +680,9 @@ NULL
 #'
 #' torch_erfc(torch_tensor(c(0, -1., 10.)))
 NULL
+# -> erfc <-
 
-# -> exp: 1fe4878ed948c1efe4ad1fb0b87ad82d <-
+# -> exp: de21080c698e51ce84e372862e05accc <-
 #'
 #' @name torch_exp
 #'
@@ -632,8 +690,9 @@ NULL
 #'
 #' torch_exp(torch_tensor([0, math$log(2.)]))
 NULL
+# -> exp <-
 
-# -> expm1: fceee3efca02cabb971ad297660e1087 <-
+# -> expm1: 6eb1d24bf334a77043756ba548bda1b2 <-
 #'
 #' @name torch_expm1
 #'
@@ -641,8 +700,9 @@ NULL
 #'
 #' torch_expm1list(torch_tensor([0, math$log(2.)]))
 NULL
+# -> expm1 <-
 
-# -> eye: 2fe5a458ffa2244d8fdbb04a0f9f23b0 <-
+# -> eye: 7b16a282d66b8d7af0f412eb09346da0 <-
 #'
 #' @name torch_eye
 #'
@@ -650,8 +710,9 @@ NULL
 #'
 #' torch_eye(3)
 NULL
+# -> eye <-
 
-# -> flatten: 68cb4abaf3139c0692565056e8a2c8d1 <-
+# -> flatten: ab7be9f73864c6c5274a1a6364c95bcf <-
 #'
 #' @name torch_flatten
 #'
@@ -661,8 +722,9 @@ NULL
 #' torch_flatten(t)
 #' torch_flatten(t, start_dim=1)
 NULL
+# -> flatten <-
 
-# -> floor: 3c997f6f3c41725e799823c9e8c924d2 <-
+# -> floor: b31c152d9e90063827fb0131b02cf41b <-
 #'
 #' @name torch_floor
 #'
@@ -672,8 +734,9 @@ NULL
 #' a
 #' torch_floor(a)
 NULL
+# -> floor <-
 
-# -> frac: 0fd8f6b68e156eea7946996ac8c5535f <-
+# -> frac: 753ca2da9acd869db74186fc0c7d0bba <-
 #'
 #' @name torch_frac
 #'
@@ -681,8 +744,9 @@ NULL
 #'
 #' torch_frac(torch_tensor(c(1, 2.5, -3.2)))
 NULL
+# -> frac <-
 
-# -> full: 3829335d5969b2928c3abf7c74a2c32e <-
+# -> full: 385ba2d57942fb74ecaff11aad6a36cd <-
 #'
 #' @name torch_full
 #'
@@ -690,8 +754,9 @@ NULL
 #'
 #' torch_full(list(2, 3), 3.141592)
 NULL
+# -> full <-
 
-# -> full_like: 3558892c5062f8d69312142540f3b3ab <-
+# -> full_like: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_full_like
 #'
@@ -699,8 +764,9 @@ NULL
 #'
 #' 
 NULL
+# -> full_like <-
 
-# -> hann_window: 3558892c5062f8d69312142540f3b3ab <-
+# -> hann_window: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_hann_window
 #'
@@ -708,8 +774,9 @@ NULL
 #'
 #' 
 NULL
+# -> hann_window <-
 
-# -> hamming_window: 3558892c5062f8d69312142540f3b3ab <-
+# -> hamming_window: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_hamming_window
 #'
@@ -717,8 +784,9 @@ NULL
 #'
 #' 
 NULL
+# -> hamming_window <-
 
-# -> ger: bdb4f502392d061b8224371f41502ea1 <-
+# -> ger: 7f4239917757355b13e06da6ebcf56b5 <-
 #'
 #' @name torch_ger
 #'
@@ -728,8 +796,9 @@ NULL
 #' v2 = torch_arange(1., 4.)
 #' torch_ger(v1, v2)
 NULL
+# -> ger <-
 
-# -> fft: 14a19be0e41f8e8eaa49c1055e95aaf4 <-
+# -> fft: e1535611cd22ff7cc83737d4b4dc757e <-
 #'
 #' @name torch_fft
 #'
@@ -745,8 +814,9 @@ NULL
 #' y = torch_fft(x, 2)
 #' y$shape
 NULL
+# -> fft <-
 
-# -> ifft: 9e679f9ae3ea638ed2f7dc45b69b63b6 <-
+# -> ifft: 08194883af0b7f6defe5ddf45417c12b <-
 #'
 #' @name torch_ifft
 #'
@@ -757,8 +827,9 @@ NULL
 #' y = torch_fft(x, 2)
 #' torch_ifft(y, 2)  # recover x
 NULL
+# -> ifft <-
 
-# -> rfft: 8a2b61d4b0d12db349aaa5c7994ffca4 <-
+# -> rfft: 66062b6f0f65544a82d08c253dab9f84 <-
 #'
 #' @name torch_rfft
 #'
@@ -768,8 +839,9 @@ NULL
 #' torch_rfft(x, 2)$shape
 #' torch_rfft(x, 2, onesided=FALSE)$shape
 NULL
+# -> rfft <-
 
-# -> irfft: 78afad7a54b15a6cdd6a32220ce39068 <-
+# -> irfft: ddaf76706c8a1ebc40099f04b8fe48be <-
 #'
 #' @name torch_irfft
 #'
@@ -787,8 +859,9 @@ NULL
 #' y = torch_rfft(x, 2, onesided=TRUE)
 #' torch_irfft(y, 2, onesided=TRUE, signal_sizes=x$shape)  # recover x
 NULL
+# -> irfft <-
 
-# -> inverse: e6453516271a376f1c60043ddb21f01b <-
+# -> inverse: fe05348b6ac0ba0b8c2ea626c9cb6a60 <-
 #'
 #' @name torch_inverse
 #'
@@ -805,8 +878,9 @@ NULL
 #' z = torch_matmul(x, y)
 #' torch_max(torch_abs(z - torch_eye(4)$expand_as(x))) # Max non-zero
 NULL
+# -> inverse <-
 
-# -> isnan: 5bbd181d5054fa8c56ec44787620b0dd <-
+# -> isnan: 6a889d4dc3d9bb1d148523cfcafce28d <-
 #'
 #' @name torch_isnan
 #'
@@ -814,8 +888,9 @@ NULL
 #'
 #' torch_isnan(torch_tensor([1, float('nan'), 2]))
 NULL
+# -> isnan <-
 
-# -> is_floating_point: 3558892c5062f8d69312142540f3b3ab <-
+# -> is_floating_point: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_is_floating_point
 #'
@@ -823,8 +898,9 @@ NULL
 #'
 #' 
 NULL
+# -> is_floating_point <-
 
-# -> kthvalue: 14ef5044026a5d4768363e051173efa9 <-
+# -> kthvalue: 1b3dc147ae41919ecb3a6c33be12ca8b <-
 #'
 #' @name torch_kthvalue
 #'
@@ -837,8 +913,9 @@ NULL
 #' x
 #' torch_kthvalue(x, 2, 0, TRUE)
 NULL
+# -> kthvalue <-
 
-# -> linspace: 7ed06dd488b891d514eb151681a86b41 <-
+# -> linspace: 123864be88056e7381e09bc27976f492 <-
 #'
 #' @name torch_linspace
 #'
@@ -849,8 +926,9 @@ NULL
 #' torch_linspace(start=-10, end=10, steps=5)
 #' torch_linspace(start=-10, end=10, steps=1)
 NULL
+# -> linspace <-
 
-# -> log: 878d7cd15156b95b8ed35db633a1fdf1 <-
+# -> log: f7606d81dc184ad41e0f57be6da56ed8 <-
 #'
 #' @name torch_log
 #'
@@ -860,8 +938,9 @@ NULL
 #' a
 #' torch_log(a)
 NULL
+# -> log <-
 
-# -> log10: d00371ce4dc5e2fb821590110de44d9e <-
+# -> log10: 57c140ca705ac3090ff11a03ce195897 <-
 #'
 #' @name torch_log10
 #'
@@ -871,8 +950,9 @@ NULL
 #' a
 #' torch_log10list(a)
 NULL
+# -> log10 <-
 
-# -> log1p: 04b60fd63ecc4b6cec219f9d6208009c <-
+# -> log1p: efe674bae76df01732ce0293e8c8ebf3 <-
 #'
 #' @name torch_log1p
 #'
@@ -882,8 +962,9 @@ NULL
 #' a
 #' torch_log1p(a)
 NULL
+# -> log1p <-
 
-# -> log2: c3e8d550a6bef1520ceaba718121518e <-
+# -> log2: 3ca065eb4fea9e278f58109cad5ac6c6 <-
 #'
 #' @name torch_log2
 #'
@@ -893,8 +974,9 @@ NULL
 #' a
 #' torch_log2list(a)
 NULL
+# -> log2 <-
 
-# -> logdet: 175ddcc25def953620c12c230860c16f <-
+# -> logdet: f59a9e35be3196215068611ee0c524e3 <-
 #'
 #' @name torch_logdet
 #'
@@ -907,8 +989,9 @@ NULL
 #' A$det()
 #' A$det()$log()
 NULL
+# -> logdet <-
 
-# -> logspace: e230aee1021ed098cdda804a561048e0 <-
+# -> logspace: 09c08230adfbd9fcab12ae5e4c2e1a97 <-
 #'
 #' @name torch_logspace
 #'
@@ -919,8 +1002,9 @@ NULL
 #' torch_logspace(start=0.1, end=1.0, steps=1)
 #' torch_logspace(start=2, end=2, steps=1, base=2)
 NULL
+# -> logspace <-
 
-# -> logsumexp: adbac23c0616322708602e11d5210d9c <-
+# -> logsumexp: c82688e1cc56c89e807d3a61a67d8b71 <-
 #'
 #' @name torch_logsumexp
 #'
@@ -929,8 +1013,9 @@ NULL
 #' a = torch_randn(c(3, 3))
 #' torch_logsumexp(a, 1)
 NULL
+# -> logsumexp <-
 
-# -> matmul: 7de3f09d19269840c9448acaaad91714 <-
+# -> matmul: 110288a000325eeed22e5a4c6812a631 <-
 #'
 #' @name torch_matmul
 #'
@@ -957,8 +1042,9 @@ NULL
 #' tensor2 = torch_randn(c(4, 5))
 #' torch_matmul(tensor1, tensor2)$size()
 NULL
+# -> matmul <-
 
-# -> matrix_rank: 12524e09a5466173601049872f25a568 <-
+# -> matrix_rank: 041df6e3dfcfe7a231267bb49b944be8 <-
 #'
 #' @name torch_matrix_rank
 #'
@@ -970,8 +1056,9 @@ NULL
 #' bc(0, 0) = 0
 #' torch_matrix_rank(b)
 NULL
+# -> matrix_rank <-
 
-# -> matrix_power: bec29ab52f4ad873109be6b2aeea068d <-
+# -> matrix_power: 7c31064980c3fed7ea226c1bcc72b8de <-
 #'
 #' @name torch_matrix_power
 #'
@@ -981,8 +1068,9 @@ NULL
 #' a
 #' torch_matrix_power(a, 3)
 NULL
+# -> matrix_power <-
 
-# -> max: 129d62f124e5bfd94fcda2a8008e2689 <-
+# -> max: c1a333203dfab17cd432e2d9e0d31a30 <-
 #'
 #' @name torch_max
 #'
@@ -1004,8 +1092,9 @@ NULL
 #' b
 #' torch_max(a, b)
 NULL
+# -> max <-
 
-# -> mean: 5660b20f12e3b95de11939e779e542a2 <-
+# -> mean: 0092bec93cb1be5639f5c26d37176426 <-
 #'
 #' @name torch_mean
 #'
@@ -1021,8 +1110,9 @@ NULL
 #' torch_mean(a, 1)
 #' torch_mean(a, 1, TRUE)
 NULL
+# -> mean <-
 
-# -> median: bf4e2b607f0873ec10469b01f35c5937 <-
+# -> median: 59973f7512422de0cab6c363a58768c1 <-
 #'
 #' @name torch_median
 #'
@@ -1037,8 +1127,9 @@ NULL
 #' a
 #' torch_median(a, 1)
 NULL
+# -> median <-
 
-# -> min: 1d3170de29db8837306466047a756ce7 <-
+# -> min: 35719b459da328e3214f8ec0cdc4777e <-
 #'
 #' @name torch_min
 #'
@@ -1060,8 +1151,9 @@ NULL
 #' b
 #' torch_min(a, b)
 NULL
+# -> min <-
 
-# -> mm: 31d22540d159e4ebc7d64db1125f75b7 <-
+# -> mm: 371187e250a019670fbae0dbed04405d <-
 #'
 #' @name torch_mm
 #'
@@ -1071,8 +1163,9 @@ NULL
 #' mat2 = torch_randn(c(3, 3))
 #' torch_mm(mat1, mat2)
 NULL
+# -> mm <-
 
-# -> mode: 790faaee05b786fcbfbbad8766c8e125 <-
+# -> mode: 4ac2f0c2be982daf6861ad35f98d69f2 <-
 #'
 #' @name torch_mode
 #'
@@ -1083,8 +1176,9 @@ NULL
 #' b = a + list(torch_randn(c(50, 1)) * 5)$long()
 #' torch_mode(b, 0)
 NULL
+# -> mode <-
 
-# -> mul: db651f9e0e3787499cdfefa03bf0027e <-
+# -> mul: 66517b9d221f17098ea48081b599bac7 <-
 #'
 #' @name torch_mul
 #'
@@ -1101,8 +1195,9 @@ NULL
 #' b
 #' torch_mul(a, b)
 NULL
+# -> mul <-
 
-# -> mv: 88257ae2d0a34bd3285a88807a5b20cc <-
+# -> mv: 9dfff3e35d31c67763337639379fc1f5 <-
 #'
 #' @name torch_mv
 #'
@@ -1112,8 +1207,9 @@ NULL
 #' vec = torch_randn(c(3))
 #' torch_mv(mat, vec)
 NULL
+# -> mv <-
 
-# -> mvlgamma: a06bdd1ab524cd8b528bd5b6d85bb9e2 <-
+# -> mvlgamma: 17e1d8dc3a9d219efb75758bfbe9a9e2 <-
 #'
 #' @name torch_mvlgamma
 #'
@@ -1123,8 +1219,9 @@ NULL
 #' a
 #' torch_mvlgamma(a, 2)
 NULL
+# -> mvlgamma <-
 
-# -> narrow: e4e974f281419fabf23a337f1d28c4b2 <-
+# -> narrow: 8df7395de5a1fe0ed552cd4416a6d9c5 <-
 #'
 #' @name torch_narrow
 #'
@@ -1134,8 +1231,9 @@ NULL
 #' torch_narrow(x, 0, 0, 2)
 #' torch_narrow(x, 1, 1, 2)
 NULL
+# -> narrow <-
 
-# -> ones: f1494db89d4d1b821b559a6d55f571bf <-
+# -> ones: 1d5d18d0f8b2f7a288d69542f58f8167 <-
 #'
 #' @name torch_ones
 #'
@@ -1144,8 +1242,9 @@ NULL
 #' torch_ones(c(2, 3))
 #' torch_ones(c(5))
 NULL
+# -> ones <-
 
-# -> ones_like: d8cad9e7e1a614325aeccaed736f99d4 <-
+# -> ones_like: 70e3bc6c9ae2bd040fb322dbe2f09428 <-
 #'
 #' @name torch_ones_like
 #'
@@ -1154,8 +1253,9 @@ NULL
 #' input = torch_empty(2, 3)
 #' torch_ones_like(input)
 NULL
+# -> ones_like <-
 
-# -> cdist: 3558892c5062f8d69312142540f3b3ab <-
+# -> cdist: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_cdist
 #'
@@ -1163,8 +1263,9 @@ NULL
 #'
 #' 
 NULL
+# -> cdist <-
 
-# -> pdist: 3558892c5062f8d69312142540f3b3ab <-
+# -> pdist: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_pdist
 #'
@@ -1172,8 +1273,9 @@ NULL
 #'
 #' 
 NULL
+# -> pdist <-
 
-# -> cosine_similarity: b9752bed49729683d719eb23caa4328c <-
+# -> cosine_similarity: f6f66e6ba78bca3dfdeca3b8fd941f36 <-
 #'
 #' @name torch_cosine_similarity
 #'
@@ -1184,8 +1286,9 @@ NULL
 #' output = F$cosine_similarity(input1, input2)
 #' print(output)
 NULL
+# -> cosine_similarity <-
 
-# -> pixel_shuffle: 3558892c5062f8d69312142540f3b3ab <-
+# -> pixel_shuffle: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_pixel_shuffle
 #'
@@ -1193,8 +1296,9 @@ NULL
 #'
 #' 
 NULL
+# -> pixel_shuffle <-
 
-# -> pinverse: 9278cbb5b1cc0259f2e7c25d94d9ee37 <-
+# -> pinverse: 498255c51fcda39d937b53caf635fe30 <-
 #'
 #' @name torch_pinverse
 #'
@@ -1208,8 +1312,9 @@ NULL
 #' b = torch_pinverse(a)
 #' torch_matmul(b, a)
 NULL
+# -> pinverse <-
 
-# -> rand: e68d9f262ad9e5c98381551177852f0a <-
+# -> rand: f95ab78fefb383cafd2b4192885fd1be <-
 #'
 #' @name torch_rand
 #'
@@ -1218,8 +1323,9 @@ NULL
 #' torch_rand(4)
 #' torch_rand(2, 3)
 NULL
+# -> rand <-
 
-# -> rand_like: 3558892c5062f8d69312142540f3b3ab <-
+# -> rand_like: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_rand_like
 #'
@@ -1227,8 +1333,9 @@ NULL
 #'
 #' 
 NULL
+# -> rand_like <-
 
-# -> randint: 26b40bb65dea39c5661a2110b4fd7198 <-
+# -> randint: 94d6f44b2cdcc1b02dde215c47c29dfa <-
 #'
 #' @name torch_randint
 #'
@@ -1238,8 +1345,9 @@ NULL
 #' torch_randint(10, list(2, 2))
 #' torch_randint(3, 10, list(2, 2))
 NULL
+# -> randint <-
 
-# -> randint_like: 3558892c5062f8d69312142540f3b3ab <-
+# -> randint_like: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_randint_like
 #'
@@ -1247,8 +1355,9 @@ NULL
 #'
 #' 
 NULL
+# -> randint_like <-
 
-# -> randn: 207e9f15e08ccfb883eef97838abbf0d <-
+# -> randn: 35c32ff43f04e1a5f8f3cf6445b6d8d0 <-
 #'
 #' @name torch_randn
 #'
@@ -1257,8 +1366,9 @@ NULL
 #' torch_randn(c(4))
 #' torch_randn(c(2, 3))
 NULL
+# -> randn <-
 
-# -> randn_like: 3558892c5062f8d69312142540f3b3ab <-
+# -> randn_like: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_randn_like
 #'
@@ -1266,8 +1376,9 @@ NULL
 #'
 #' 
 NULL
+# -> randn_like <-
 
-# -> randperm: cb2f85bc9dce124f3a32d17e9c0e0a16 <-
+# -> randperm: fb99117e3838e358c0d679eabf182d6e <-
 #'
 #' @name torch_randperm
 #'
@@ -1275,8 +1386,9 @@ NULL
 #'
 #' torch_randperm(4)
 NULL
+# -> randperm <-
 
-# -> range: 0e7e7a272ee7d24e247a5ce9db1ce606 <-
+# -> range: 45a02da537b45d436d0fedf0e29a987d <-
 #'
 #' @name torch_range
 #'
@@ -1285,8 +1397,9 @@ NULL
 #' torch_range(1, 4)
 #' torch_range(1, 4, 0.5)
 NULL
+# -> range <-
 
-# -> reciprocal: b411de0d1e22b20b4da81226ebe2b16d <-
+# -> reciprocal: acd4500bfdd975c0a8c344292cf8f955 <-
 #'
 #' @name torch_reciprocal
 #'
@@ -1296,8 +1409,9 @@ NULL
 #' a
 #' torch_reciprocal(a)
 NULL
+# -> reciprocal <-
 
-# -> neg: df492a40744b54fc918863e0cdc224df <-
+# -> neg: 82adab499b82a5cc571270b31ca2fb81 <-
 #'
 #' @name torch_neg
 #'
@@ -1307,8 +1421,9 @@ NULL
 #' a
 #' torch_neg(a)
 NULL
+# -> neg <-
 
-# -> repeat_interleave: 98b685aa5bac07a476355bff55dc32e6 <-
+# -> repeat_interleave: 13cf46e105605936f55807aa8c5e5cc2 <-
 #'
 #' @name torch_repeat_interleave
 #'
@@ -1324,8 +1439,9 @@ NULL
 #'
 #' 
 NULL
+# -> repeat_interleave <-
 
-# -> reshape: f3082fb6e75532d1001838e1878c77a1 <-
+# -> reshape: 87c985ba483f47dbf33c5def81926f9a <-
 #'
 #' @name torch_reshape
 #'
@@ -1336,8 +1452,9 @@ NULL
 #' b = torch_tensor(c([0, 1], [2, 3]))
 #' torch_reshape(b, list(-1,))
 NULL
+# -> reshape <-
 
-# -> round: 8645352fbb37af2e4d8a88df678d7cf6 <-
+# -> round: 76fa7a264e0e6fc92826ee4aff8dba57 <-
 #'
 #' @name torch_round
 #'
@@ -1347,8 +1464,9 @@ NULL
 #' a
 #' torch_round(a)
 NULL
+# -> round <-
 
-# -> rrelu_: 3558892c5062f8d69312142540f3b3ab <-
+# -> rrelu_: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_rrelu_
 #'
@@ -1356,8 +1474,9 @@ NULL
 #'
 #' 
 NULL
+# -> rrelu_ <-
 
-# -> relu_: 3558892c5062f8d69312142540f3b3ab <-
+# -> relu_: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_relu_
 #'
@@ -1365,8 +1484,9 @@ NULL
 #'
 #' 
 NULL
+# -> relu_ <-
 
-# -> rsqrt: f16013bcf94efc81744b610e39f56f03 <-
+# -> rsqrt: a5b740997bfdcf6c7aaabd6f1e090ff4 <-
 #'
 #' @name torch_rsqrt
 #'
@@ -1376,8 +1496,9 @@ NULL
 #' a
 #' torch_rsqrt(a)
 NULL
+# -> rsqrt <-
 
-# -> selu_: 3558892c5062f8d69312142540f3b3ab <-
+# -> selu_: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_selu_
 #'
@@ -1385,8 +1506,9 @@ NULL
 #'
 #' 
 NULL
+# -> selu_ <-
 
-# -> celu_: 3558892c5062f8d69312142540f3b3ab <-
+# -> celu_: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_celu_
 #'
@@ -1394,8 +1516,9 @@ NULL
 #'
 #' 
 NULL
+# -> celu_ <-
 
-# -> sigmoid: f1e83a8077fa44fdbe8e58b54b3c1a0c <-
+# -> sigmoid: 048db144405d843bf7dce130440f0ceb <-
 #'
 #' @name torch_sigmoid
 #'
@@ -1405,8 +1528,9 @@ NULL
 #' a
 #' torch_sigmoid(a)
 NULL
+# -> sigmoid <-
 
-# -> sin: 96b72203e615e78f31c1e3131b033f6e <-
+# -> sin: a3445f69d5ccde3c4642d04f04cd4547 <-
 #'
 #' @name torch_sin
 #'
@@ -1416,8 +1540,9 @@ NULL
 #' a
 #' torch_sin(a)
 NULL
+# -> sin <-
 
-# -> sinh: 1954df08b82ff1b688e9ea9b322337a6 <-
+# -> sinh: 0c7b5dfd08bd6473101c8fd667dce2d5 <-
 #'
 #' @name torch_sinh
 #'
@@ -1427,8 +1552,9 @@ NULL
 #' a
 #' torch_sinh(a)
 NULL
+# -> sinh <-
 
-# -> slogdet: 9c0ac4d84a56d68e9b0a6959e3938a39 <-
+# -> slogdet: d4c8ce541efb53e78ab78ad3e4877866 <-
 #'
 #' @name torch_slogdet
 #'
@@ -1440,8 +1566,9 @@ NULL
 #' torch_logdet(A)
 #' torch_slogdet(A)
 NULL
+# -> slogdet <-
 
-# -> split: 3558892c5062f8d69312142540f3b3ab <-
+# -> split: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_split
 #'
@@ -1449,8 +1576,9 @@ NULL
 #'
 #' 
 NULL
+# -> split <-
 
-# -> squeeze: 4e20748b9e924bbc20cf37321ad7c149 <-
+# -> squeeze: 38da86d00c7f192edad4de4c29da2945 <-
 #'
 #' @name torch_squeeze
 #'
@@ -1465,8 +1593,9 @@ NULL
 #' y = torch_squeeze(x, 1)
 #' y$size()
 NULL
+# -> squeeze <-
 
-# -> stack: 3558892c5062f8d69312142540f3b3ab <-
+# -> stack: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_stack
 #'
@@ -1474,8 +1603,9 @@ NULL
 #'
 #' 
 NULL
+# -> stack <-
 
-# -> stft: 3558892c5062f8d69312142540f3b3ab <-
+# -> stft: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_stft
 #'
@@ -1483,8 +1613,9 @@ NULL
 #'
 #' 
 NULL
+# -> stft <-
 
-# -> sum: ff420e98393249e05692f368d5a1c323 <-
+# -> sum: 4a5dc728b3c8d01fcd333d25edefd056 <-
 #'
 #' @name torch_sum
 #'
@@ -1501,8 +1632,9 @@ NULL
 #' b = torch_arange(4 * 5 * 6)$view(4, 5, 6)
 #' torch_sum(b, list(2, 1))
 NULL
+# -> sum <-
 
-# -> sqrt: b76885f41f63ece994bbaf0ce467a641 <-
+# -> sqrt: 4403b89ab0f819281ea0a92a194f8735 <-
 #'
 #' @name torch_sqrt
 #'
@@ -1512,8 +1644,9 @@ NULL
 #' a
 #' torch_sqrt(a)
 NULL
+# -> sqrt <-
 
-# -> std: 7d8af1d6a638e0357a15e0e4c219e01f <-
+# -> std: 859760d7444b91c1875b131e43210a54 <-
 #'
 #' @name torch_std
 #'
@@ -1528,8 +1661,9 @@ NULL
 #' a
 #' torch_std(a, dim=1)
 NULL
+# -> std <-
 
-# -> std_mean: f4d2c004e60bf36f4215a074cc6be7a8 <-
+# -> std_mean: c2fed49efa35511c534adad076427c6b <-
 #'
 #' @name torch_std_mean
 #'
@@ -1544,8 +1678,9 @@ NULL
 #' a
 #' torch_std_mean(a, 1)
 NULL
+# -> std_mean <-
 
-# -> prod: b792cd8dd8a1ddb4f069fd8da55e2cc5 <-
+# -> prod: 794e486d1caa56c0be86a2e9dc5efcb6 <-
 #'
 #' @name torch_prod
 #'
@@ -1560,8 +1695,9 @@ NULL
 #' a
 #' torch_prod(a, 1)
 NULL
+# -> prod <-
 
-# -> t: 466a823d3577b9b648a30c710a666961 <-
+# -> t: 4250fd7ed25c43fb92ad9e82d508aed9 <-
 #'
 #' @name torch_t
 #'
@@ -1577,8 +1713,9 @@ NULL
 #' x
 #' torch_t(x)
 NULL
+# -> t <-
 
-# -> tan: 8714961810e22d139c5a9faa51067d0f <-
+# -> tan: ee053376407ce89e5a13d44ead2370bf <-
 #'
 #' @name torch_tan
 #'
@@ -1588,8 +1725,9 @@ NULL
 #' a
 #' torch_tan(a)
 NULL
+# -> tan <-
 
-# -> tanh: 1857c578567d80ce651197aa6a24d0e4 <-
+# -> tanh: 129dbdcce5c48a41368da2679efda266 <-
 #'
 #' @name torch_tanh
 #'
@@ -1599,8 +1737,9 @@ NULL
 #' a
 #' torch_tanh(a)
 NULL
+# -> tanh <-
 
-# -> tensordot: 3558892c5062f8d69312142540f3b3ab <-
+# -> tensordot: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_tensordot
 #'
@@ -1608,8 +1747,9 @@ NULL
 #'
 #' 
 NULL
+# -> tensordot <-
 
-# -> threshold_: 3558892c5062f8d69312142540f3b3ab <-
+# -> threshold_: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_threshold_
 #'
@@ -1617,8 +1757,9 @@ NULL
 #'
 #' 
 NULL
+# -> threshold_ <-
 
-# -> transpose: 2ad5294ea1d6dffa747e0df4a71aaf89 <-
+# -> transpose: 66189c6752878fe1bab38cd45b9f0b44 <-
 #'
 #' @name torch_transpose
 #'
@@ -1628,8 +1769,9 @@ NULL
 #' x
 #' torch_transpose(x, 0, 1)
 NULL
+# -> transpose <-
 
-# -> flip: f904826dc5bd710086a9dc2909395334 <-
+# -> flip: d68baa96bb21694841c117a8ae510cc1 <-
 #'
 #' @name torch_flip
 #'
@@ -1639,8 +1781,9 @@ NULL
 #' x
 #' torch_flip(x, c(0, 1))
 NULL
+# -> flip <-
 
-# -> roll: 00755e399c0dc98eda1f5d89f4aafa4c <-
+# -> roll: 8b35282a72c8230c8e14b5f51a12194a <-
 #'
 #' @name torch_roll
 #'
@@ -1652,8 +1795,9 @@ NULL
 #' torch_roll(x, -1, 0)
 #' torch_roll(x, shifts=list(2, 1), dims=list(0, 1))
 NULL
+# -> roll <-
 
-# -> rot90: a4904a61edbe4937c7e6f9759fd0188c <-
+# -> rot90: fb7f5152854707942aa716eaa06afe8a <-
 #'
 #' @name torch_rot90
 #'
@@ -1666,8 +1810,9 @@ NULL
 #' x
 #' torch_rot90list(x, 1, c(1, 2))
 NULL
+# -> rot90 <-
 
-# -> trapz: 2da24981fd6a01bd6aca237448fca81f <-
+# -> trapz: 17b62c0d13522f4dcb33b03e74e29bc1 <-
 #'
 #' @name torch_trapz
 #'
@@ -1681,8 +1826,9 @@ NULL
 #'
 #' 
 NULL
+# -> trapz <-
 
-# -> trunc: ee5d3a1108e6a41183cdc5329e123e93 <-
+# -> trunc: f245b418351aa4c3cc8798f09aafee6a <-
 #'
 #' @name torch_trunc
 #'
@@ -1692,8 +1838,9 @@ NULL
 #' a
 #' torch_trunc(a)
 NULL
+# -> trunc <-
 
-# -> unique_consecutive: 3558b04b7d86925537500c6b9e2ec7f7 <-
+# -> unique_consecutive: 9f5ea720f3a13719d75ef4bc2fc4004f <-
 #'
 #' @name torch_unique_consecutive
 #'
@@ -1709,8 +1856,9 @@ NULL
 #' output
 #' counts
 NULL
+# -> unique_consecutive <-
 
-# -> unsqueeze: 5ea03d7559a857db944438afe27144f0 <-
+# -> unsqueeze: 5c1b8ad792a08bb7ab6cd157d078f6b1 <-
 #'
 #' @name torch_unsqueeze
 #'
@@ -1720,8 +1868,9 @@ NULL
 #' torch_unsqueeze(x, 0)
 #' torch_unsqueeze(x, 1)
 NULL
+# -> unsqueeze <-
 
-# -> var: ffcbc64ae608322ab3a81abb9bd6ca79 <-
+# -> var: b0817af308e4b10f4ef1bd402cb128ea <-
 #'
 #' @name torch_var
 #'
@@ -1736,8 +1885,9 @@ NULL
 #' a
 #' torch_var(a, 1)
 NULL
+# -> var <-
 
-# -> var_mean: 7fc6b1cd7b3b3cb5c73ae138198998fc <-
+# -> var_mean: 2a4e6cdbfe967216d7efdd628d179889 <-
 #'
 #' @name torch_var_mean
 #'
@@ -1752,8 +1902,9 @@ NULL
 #' a
 #' torch_var_mean(a, 1)
 NULL
+# -> var_mean <-
 
-# -> where: 77969dcb74c1aedd058a13c288978649 <-
+# -> where: 8916a6fb35031f8f9eeeeba4d59dc464 <-
 #'
 #' @name torch_where
 #'
@@ -1767,8 +1918,9 @@ NULL
 #'
 #' 
 NULL
+# -> where <-
 
-# -> zeros: 0020d7561807e3ad278625fe7142bd81 <-
+# -> zeros: 7721a7c7aac9c797e272f299fd2a57fb <-
 #'
 #' @name torch_zeros
 #'
@@ -1777,8 +1929,9 @@ NULL
 #' torch_zeros(c(2, 3))
 #' torch_zeros(c(5))
 NULL
+# -> zeros <-
 
-# -> zeros_like: d0c14415655d05f80a653596649e990b <-
+# -> zeros_like: 075019bd5dd6e47910361930abff6593 <-
 #'
 #' @name torch_zeros_like
 #'
@@ -1787,8 +1940,9 @@ NULL
 #' input = torch_empty(2, 3)
 #' torch_zeros_like(input)
 NULL
+# -> zeros_like <-
 
-# -> norm: 4ab2ce890e5fa2350be2d8eb5fcf568f <-
+# -> norm: 6c2a9c1d53760d52a3f27d1d71b81bda <-
 #'
 #' @name torch_norm
 #'
@@ -1809,8 +1963,9 @@ NULL
 #' torch_norm(d, dim=list(1,2))
 #' torch_norm(dc(0, :, :)), torch_norm(dc(1, :, :))
 NULL
+# -> norm <-
 
-# -> pow: b92908baeb402c045e0bdff62c5d30aa <-
+# -> pow: d4402c27f8c224e56d20a232c1eac291 <-
 #'
 #' @name torch_pow
 #'
@@ -1830,8 +1985,9 @@ NULL
 #' base = 2
 #' torch_pow(base, exp)
 NULL
+# -> pow <-
 
-# -> addmm: b16eb2c0271824e00fa861289ad5b484 <-
+# -> addmm: d9ab8b42264729f3654e7d6b30b11b09 <-
 #'
 #' @name torch_addmm
 #'
@@ -1842,8 +1998,9 @@ NULL
 #' mat2 = torch_randn(c(3, 3))
 #' torch_addmm(M, mat1, mat2)
 NULL
+# -> addmm <-
 
-# -> sparse_coo_tensor: 15fd6329a825ca8e82796bc67a9381bf <-
+# -> sparse_coo_tensor: 89c4a3054942381686d7a96fb8161134 <-
 #'
 #' @name torch_sparse_coo_tensor
 #'
@@ -1857,8 +2014,9 @@ NULL
 #' S = torch_sparse_coo_tensor(torch_empty(c(1, 0]), [], [1))
 #' S = torch_sparse_coo_tensor(torch_empty(c(1, 0)), torch_empty(c(0, 2]), [1, 2))
 NULL
+# -> sparse_coo_tensor <-
 
-# -> unbind: 48a0b7748852254ec8a30b98f2c5daa6 <-
+# -> unbind: 5950592b8a9a3320a4ca6432754f5ebd <-
 #'
 #' @name torch_unbind
 #'
@@ -1868,8 +2026,9 @@ NULL
 #'                            c(4, 5, 6),
 #'                            c(7, 8, 9])))
 NULL
+# -> unbind <-
 
-# -> quantize_per_tensor: 33142780eb40ccc7ca3af7f1f3443f42 <-
+# -> quantize_per_tensor: 32638b3b40231e2fd3a25e68abd27834 <-
 #'
 #' @name torch_quantize_per_tensor
 #'
@@ -1878,8 +2037,9 @@ NULL
 #' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8)
 #' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8)$int_repr()
 NULL
+# -> quantize_per_tensor <-
 
-# -> quantize_per_channel: 717e167e8d0686bdb13a9951b591805f <-
+# -> quantize_per_channel: 9ad2eb8b48ffc73bf83c390027ad3313 <-
 #'
 #' @name torch_quantize_per_channel
 #'
@@ -1889,8 +2049,9 @@ NULL
 #' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10, 0)), 0, torch_quint8)
 #' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10, 0)), 0, torch_quint8)$int_repr()
 NULL
+# -> quantize_per_channel <-
 
-# -> meshgrid: 7579d1c2d9957802c45601241975f00c <-
+# -> meshgrid: 496caf98702e12950b9ddb68c3ac2985 <-
 #'
 #' @name torch_meshgrid
 #'
@@ -1902,8 +2063,9 @@ NULL
 #' grid_x
 #' grid_y
 NULL
+# -> meshgrid <-
 
-# -> cartesian_prod: 75e4a5fd1cef174b88942d482de3631f <-
+# -> cartesian_prod: 86b159a5b4c055cd6c77c3e5e1215fca <-
 #'
 #' @name torch_cartesian_prod
 #'
@@ -1916,8 +2078,9 @@ NULL
 #' tensor_b = torch_tensor(b)
 #' torch_cartesian_prod(tensor_a, tensor_b)
 NULL
+# -> cartesian_prod <-
 
-# -> combinations: 40a0b6616e8465b960480878c2edf19c <-
+# -> combinations: f79afc304b65429e99b41f6d4ec67211 <-
 #'
 #' @name torch_combinations
 #'
@@ -1932,8 +2095,9 @@ NULL
 #' torch_combinations(tensor_a, r=3)
 #' torch_combinations(tensor_a, with_replacement=TRUE)
 NULL
+# -> combinations <-
 
-# -> result_type: 457c93f9852cf95c4bd925dd6da73f9a <-
+# -> result_type: c18a90be7365222d04e6c6d98b05ccf1 <-
 #'
 #' @name torch_result_type
 #'
@@ -1942,8 +2106,9 @@ NULL
 #' torch_result_type(torch_tensor(c(1, 2), dtype=torch_int()), 1.0)
 #' torch_result_type(torch_tensor(c(1, 2), dtype=torch_uint8()), torch_tensor(1))
 NULL
+# -> result_type <-
 
-# -> can_cast: b8ee8211ab596021f31e0b59a7de8961 <-
+# -> can_cast: ceb9cd9a330a8fcff289af5c24c2c786 <-
 #'
 #' @name torch_can_cast
 #'
@@ -1952,8 +2117,9 @@ NULL
 #' torch_can_cast(torch_double, torch_float)
 #' torch_can_cast(torch_float, torch_int)
 NULL
+# -> can_cast <-
 
-# -> promote_types: 936479a5f7bc3567ce5d6d9c7853220c <-
+# -> promote_types: 8b3e750921514b2d4a64936cd0a71eb8 <-
 #'
 #' @name torch_promote_types
 #'
@@ -1962,8 +2128,9 @@ NULL
 #' torch_promote_types(torch_int32, torch_float32))
 #' torch_promote_types(torch_uint8, torch_long)
 NULL
+# -> promote_types <-
 
-# -> bitwise_xor: 3558892c5062f8d69312142540f3b3ab <-
+# -> bitwise_xor: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_bitwise_xor
 #'
@@ -1971,8 +2138,9 @@ NULL
 #'
 #' 
 NULL
+# -> bitwise_xor <-
 
-# -> addbmm: bf493966455d48aed3ce09c5d827f1d0 <-
+# -> addbmm: 2960d7952feaac5393ad64ea57e69ea2 <-
 #'
 #' @name torch_addbmm
 #'
@@ -1983,8 +2151,9 @@ NULL
 #' batch2 = torch_randn(c(10, 4, 5))
 #' torch_addbmm(M, batch1, batch2)
 NULL
+# -> addbmm <-
 
-# -> diag: 3558892c5062f8d69312142540f3b3ab <-
+# -> diag: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_diag
 #'
@@ -1992,8 +2161,9 @@ NULL
 #'
 #' 
 NULL
+# -> diag <-
 
-# -> cross: 5c132aee22d36da6aab6a348be801aca <-
+# -> cross: 5cd5cf62e999579a8349e3bc1817aa7d <-
 #'
 #' @name torch_cross
 #'
@@ -2006,8 +2176,9 @@ NULL
 #' torch_cross(a, b, dim=1)
 #' torch_cross(a, b)
 NULL
+# -> cross <-
 
-# -> triu: 4332b1ad6ffa185aaff45c27f56d8e0a <-
+# -> triu: 9d9e5620c90c5b08ef42c88df4cecabd <-
 #'
 #' @name torch_triu
 #'
@@ -2023,8 +2194,9 @@ NULL
 #' torch_triu(b, diagonal=1)
 #' torch_triu(b, diagonal=-1)
 NULL
+# -> triu <-
 
-# -> tril: 41eb03dc9264e93b2c74df8d5c8de1b3 <-
+# -> tril: 9476db556baac0139ee3adc08fd737c6 <-
 #'
 #' @name torch_tril
 #'
@@ -2038,8 +2210,9 @@ NULL
 #' torch_tril(b, diagonal=1)
 #' torch_tril(b, diagonal=-1)
 NULL
+# -> tril <-
 
-# -> tril_indices: 20cd0fcca0b6191d225bf0abd5094205 <-
+# -> tril_indices: 204301311a569bc8d7a607235b6ef7a5 <-
 #'
 #' @name torch_tril_indices
 #'
@@ -2052,8 +2225,9 @@ NULL
 #' a = torch_tril_indices(4, 3, 1)
 #' a
 NULL
+# -> tril_indices <-
 
-# -> triu_indices: 76d0b63800a88c072f23f21082747a60 <-
+# -> triu_indices: c51155db9b289aafdc030310a8cb83ff <-
 #'
 #' @name torch_triu_indices
 #'
@@ -2066,8 +2240,9 @@ NULL
 #' a = torch_triu_indices(4, 3, 1)
 #' a
 NULL
+# -> triu_indices <-
 
-# -> trace: 61b80c94b00b39311af82934ffa28527 <-
+# -> trace: 22523618567c5d2a75ab44934ae4dda9 <-
 #'
 #' @name torch_trace
 #'
@@ -2077,8 +2252,9 @@ NULL
 #' x
 #' torch_trace(x)
 NULL
+# -> trace <-
 
-# -> ne: 986b6728d94699f023780bab7f45b755 <-
+# -> ne: c8ea98d1362a7ed6745931fd3387cd02 <-
 #'
 #' @name torch_ne
 #'
@@ -2086,8 +2262,9 @@ NULL
 #'
 #' torch_ne(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 NULL
+# -> ne <-
 
-# -> eq: a33df8003eca79582c8f4a4bb462f71b <-
+# -> eq: be7c586a3ad2bd934e54f2dce6b3ed27 <-
 #'
 #' @name torch_eq
 #'
@@ -2095,8 +2272,9 @@ NULL
 #'
 #' torch_eq(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 NULL
+# -> eq <-
 
-# -> ge: a0bbf4c29678fad9aa9b72e88aa27251 <-
+# -> ge: bc97684018e2c69f04155c176c7ff136 <-
 #'
 #' @name torch_ge
 #'
@@ -2104,8 +2282,9 @@ NULL
 #'
 #' torch_ge(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 NULL
+# -> ge <-
 
-# -> le: b86c48a2ade49201678abb6d8ee55cfc <-
+# -> le: 51b6c3bd66c01f03698e01352cf8f91b <-
 #'
 #' @name torch_le
 #'
@@ -2113,8 +2292,9 @@ NULL
 #'
 #' torch_le(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 NULL
+# -> le <-
 
-# -> gt: 04e8640d3d9267e822c74b2f6106eb61 <-
+# -> gt: 90062435ff09b698ddab5f120bb2ccbb <-
 #'
 #' @name torch_gt
 #'
@@ -2122,8 +2302,9 @@ NULL
 #'
 #' torch_gt(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 NULL
+# -> gt <-
 
-# -> lt: c7eb35966f593463d6be264bb11d7193 <-
+# -> lt: 67ea0b1d72c2c8ecf4c9eefe67c6617e <-
 #'
 #' @name torch_lt
 #'
@@ -2131,8 +2312,9 @@ NULL
 #'
 #' torch_lt(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
 NULL
+# -> lt <-
 
-# -> take: 6e7180b10b856447bdb1ef0207afe0e6 <-
+# -> take: 2634a3085985dded8ac6c241469ad326 <-
 #'
 #' @name torch_take
 #'
@@ -2141,8 +2323,9 @@ NULL
 #' src = torch_tensor(c([4, 3, 5),
 #' torch_take(src, torch_tensor(c(0, 2, 5)))
 NULL
+# -> take <-
 
-# -> index_select: bb196a5a712a27ff8c564f2c58fd73e9 <-
+# -> index_select: b652b7dcc296fd86f3f57f0f7ecdf062 <-
 #'
 #' @name torch_index_select
 #'
@@ -2154,8 +2337,9 @@ NULL
 #' torch_index_select(x, 0, indices)
 #' torch_index_select(x, 1, indices)
 NULL
+# -> index_select <-
 
-# -> masked_select: 618a8ef1cbdcacc08bdb8feb9ce85a1e <-
+# -> masked_select: e70a628493edc8173a2cf1fcd186a248 <-
 #'
 #' @name torch_masked_select
 #'
@@ -2167,8 +2351,9 @@ NULL
 #' mask
 #' torch_masked_select(x, mask)
 NULL
+# -> masked_select <-
 
-# -> nonzero: 64ac786ea85b2c78b0b026f0bacf4743 <-
+# -> nonzero: 6d8257748a09b7b58993c46b38f0e31a <-
 #'
 #' @name torch_nonzero
 #'
@@ -2180,8 +2365,9 @@ NULL
 #' torch_nonzero(torch_tensor(c([0.6, 0.0, 0.0, 0.0),
 #' torch_nonzero(torch_tensor(5), as_tuple=TRUE)
 NULL
+# -> nonzero <-
 
-# -> gather: 8b78555961eb64349f87947472a2b135 <-
+# -> gather: afb4c650babd359a0e25636b444741ad <-
 #'
 #' @name torch_gather
 #'
@@ -2190,8 +2376,9 @@ NULL
 #' t = torch_tensor(c([1,2],[3,4]))
 #' torch_gather(t, 1, torch_tensor(c([0,0],[1,0])))
 NULL
+# -> gather <-
 
-# -> addcmul: 6a8d489cb7838a0068b6e66d827c9b57 <-
+# -> addcmul: 2af9b1673156c083576a65ace386d304 <-
 #'
 #' @name torch_addcmul
 #'
@@ -2202,8 +2389,9 @@ NULL
 #' t2 = torch_randn(c(1, 3))
 #' torch_addcmul(t, 0.1, t1, t2)
 NULL
+# -> addcmul <-
 
-# -> addcdiv: b8757adc5a9f772c5eb81edbfd542b30 <-
+# -> addcdiv: a3fcec9931af0042b5f5fac6f812b269 <-
 #'
 #' @name torch_addcdiv
 #'
@@ -2214,8 +2402,9 @@ NULL
 #' t2 = torch_randn(c(1, 3))
 #' torch_addcdiv(t, 0.1, t1, t2)
 NULL
+# -> addcdiv <-
 
-# -> lstsq: 023890b90fad2168bd32ee5acb32c8ab <-
+# -> lstsq: 0af50cba3dcf8ffd80ad812162fb7f33 <-
 #'
 #' @name torch_lstsq
 #'
@@ -2226,8 +2415,9 @@ NULL
 #' X, _ = torch_lstsq(B, A)
 #' X
 NULL
+# -> lstsq <-
 
-# -> triangular_solve: 3558892c5062f8d69312142540f3b3ab <-
+# -> triangular_solve: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_triangular_solve
 #'
@@ -2235,8 +2425,9 @@ NULL
 #'
 #' 
 NULL
+# -> triangular_solve <-
 
-# -> symeig: 3558892c5062f8d69312142540f3b3ab <-
+# -> symeig: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_symeig
 #'
@@ -2244,8 +2435,9 @@ NULL
 #'
 #' 
 NULL
+# -> symeig <-
 
-# -> eig: 3558892c5062f8d69312142540f3b3ab <-
+# -> eig: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_eig
 #'
@@ -2253,8 +2445,9 @@ NULL
 #'
 #' 
 NULL
+# -> eig <-
 
-# -> svd: f7e9c76244c545b0d618e9ab56b997e0 <-
+# -> svd: 47d9bb7bdad254caeab8884b29d7d089 <-
 #'
 #' @name torch_svd
 #'
@@ -2271,8 +2464,9 @@ NULL
 #' u, s, v = torch_svd(a_big)
 #' torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v$transpose(-2, -1)))
 NULL
+# -> svd <-
 
-# -> cholesky: f9842720c4f2766eceec4ecd5f0e5170 <-
+# -> cholesky: fa4f9078765e51caac6f19460a4c298a <-
 #'
 #' @name torch_cholesky
 #'
@@ -2290,8 +2484,9 @@ NULL
 #' z = torch_matmul(l, l$transpose(-1, -2))
 #' torch_max(torch_abs(z - a)) # Max non-zero
 NULL
+# -> cholesky <-
 
-# -> cholesky_solve: e085a866ed7458ff15b3740d33e8be63 <-
+# -> cholesky_solve: 12d0129f721e8467f93ffe629e8e569e <-
 #'
 #' @name torch_cholesky_solve
 #'
@@ -2306,8 +2501,9 @@ NULL
 #' torch_cholesky_solve(b, u)
 #' torch_mm(a$inverse(), b)
 NULL
+# -> cholesky_solve <-
 
-# -> solve: 3ffb4bec14cc18d40d261d75fb1236de <-
+# -> solve: df50588b379236734cc9a64acbbce5ae <-
 #'
 #' @name torch_solve
 #'
@@ -2323,8 +2519,9 @@ NULL
 #' X, LU = torch_solve(B, A)
 #' torch_dist(B, A$matmul(X))
 NULL
+# -> solve <-
 
-# -> cholesky_inverse: 311df498754dd47071821358bba55bf0 <-
+# -> cholesky_inverse: 848d88acf5dc9debea4b899b298b870d <-
 #'
 #' @name torch_cholesky_inverse
 #'
@@ -2337,8 +2534,9 @@ NULL
 #' torch_cholesky_inverse(u)
 #' a$inverse()
 NULL
+# -> cholesky_inverse <-
 
-# -> qr: eb384010e7e5a654c01cb5d09cf5c43c <-
+# -> qr: cd13e92083d63cd10fa043114695d130 <-
 #'
 #' @name torch_qr
 #'
@@ -2355,8 +2553,9 @@ NULL
 #' torch_allclose(torch_matmul(q, r), a)
 #' torch_allclose(torch_matmul(q$transpose(-2, -1), q), torch_eye(5))
 NULL
+# -> qr <-
 
-# -> geqrf: 3558892c5062f8d69312142540f3b3ab <-
+# -> geqrf: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_geqrf
 #'
@@ -2364,8 +2563,9 @@ NULL
 #'
 #' 
 NULL
+# -> geqrf <-
 
-# -> orgqr: 3558892c5062f8d69312142540f3b3ab <-
+# -> orgqr: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_orgqr
 #'
@@ -2373,8 +2573,9 @@ NULL
 #'
 #' 
 NULL
+# -> orgqr <-
 
-# -> ormqr: 3558892c5062f8d69312142540f3b3ab <-
+# -> ormqr: 943a6632ffecbe645a7a4a43192ee185 <-
 #'
 #' @name torch_ormqr
 #'
@@ -2382,8 +2583,9 @@ NULL
 #'
 #' 
 NULL
+# -> ormqr <-
 
-# -> lu_solve: 006d84a7d66969b7cd66c3a0fdb26748 <-
+# -> lu_solve: c0f3ad3b69367dc30938327109f883e8 <-
 #'
 #' @name torch_lu_solve
 #'
@@ -2395,8 +2597,9 @@ NULL
 #' x = torch_lu_solve(b, *A_LU)
 #' torch_norm(torch_bmm(A, x) - b)
 NULL
+# -> lu_solve <-
 
-# -> multinomial: 40effdd493dff97f74f918666d87ff47 <-
+# -> multinomial: 21dad4638e2dbe0c36cd0cd3e0e1e12d <-
 #'
 #' @name torch_multinomial
 #'
@@ -2407,8 +2610,9 @@ NULL
 #' torch_multinomial(weights, 4) # ERROR!
 #' torch_multinomial(weights, 4, replacement=TRUE)
 NULL
+# -> multinomial <-
 
-# -> lgamma: 527a28cc1f5c1d323c75d2c0ad1e6ced <-
+# -> lgamma: f7fea324140b7b370280b904c2c2a6ae <-
 #'
 #' @name torch_lgamma
 #'
@@ -2417,8 +2621,9 @@ NULL
 #' a = torch_arange(0.5, 2, 0.5)
 #' torch_lgamma(a)
 NULL
+# -> lgamma <-
 
-# -> digamma: de689631090acc6857392340a027da2a <-
+# -> digamma: ef012b03c92ee9f005d3b5a392340dc0 <-
 #'
 #' @name torch_digamma
 #'
@@ -2427,8 +2632,9 @@ NULL
 #' a = torch_tensor(c(1, 0.5))
 #' torch_digamma(a)
 NULL
+# -> digamma <-
 
-# -> polygamma: 825d64aa95b39404becdbd325b4ef39c <-
+# -> polygamma: f6adb11d5a3f6e72157a32551e4584d8 <-
 #'
 #' @name torch_polygamma
 #'
@@ -2437,8 +2643,9 @@ NULL
 #' a = torch_tensor(c(1, 0.5))
 #' torch_polygamma(1, a)
 NULL
+# -> polygamma <-
 
-# -> erfinv: 254273796a993a457382afb8498c126f <-
+# -> erfinv: 4e5124ffa5fbdb4aa818c64496d49b51 <-
 #'
 #' @name torch_erfinv
 #'
@@ -2446,8 +2653,9 @@ NULL
 #'
 #' torch_erfinv(torch_tensor(c(0, 0.5, -1.)))
 NULL
+# -> erfinv <-
 
-# -> sign: c7c2525aa236fd6e4bbd1a54c06eab1f <-
+# -> sign: 412fe6a4bb2dfe9370e746b0f231267a <-
 #'
 #' @name torch_sign
 #'
@@ -2457,8 +2665,9 @@ NULL
 #' a
 #' torch_sign(a)
 NULL
+# -> sign <-
 
-# -> dist: 75e000e7aae6baea576492ba6b6c1749 <-
+# -> dist: 6ecd50cefe7774770927770836f1db55 <-
 #'
 #' @name torch_dist
 #'
@@ -2473,8 +2682,9 @@ NULL
 #' torch_dist(x, y, 0)
 #' torch_dist(x, y, 1)
 NULL
+# -> dist <-
 
-# -> atan2: c32d8631c7895cb730295d27a72f85d0 <-
+# -> atan2: 079d8dfe03eb6076301dccc1f386d800 <-
 #'
 #' @name torch_atan2
 #'
@@ -2484,8 +2694,9 @@ NULL
 #' a
 #' torch_atan2list(a, torch_randn(c(4)))
 NULL
+# -> atan2 <-
 
-# -> lerp: 71d61510715131059e4e2699a61bd6f4 <-
+# -> lerp: f0f3a0218d7e6d89ee7397124f3ebd0f <-
 #'
 #' @name torch_lerp
 #'
@@ -2498,8 +2709,9 @@ NULL
 #' torch_lerp(start, end, 0.5)
 #' torch_lerp(start, end, torch_full_like(start, 0.5))
 NULL
+# -> lerp <-
 
-# -> histc: f5ce23581f8b8d8501080e28dbe71eb3 <-
+# -> histc: d3ac23440a13017904435b373a289ebc <-
 #'
 #' @name torch_histc
 #'
@@ -2507,8 +2719,9 @@ NULL
 #'
 #' torch_histc(torch_tensor(c(1., 2, 1)), bins=4, min=0, max=3)
 NULL
+# -> histc <-
 
-# -> fmod: 88f7054e335c8d19c413834d5a403c17 <-
+# -> fmod: 48f0420c8701cca2f79554e7dfe9f5e4 <-
 #'
 #' @name torch_fmod
 #'
@@ -2517,8 +2730,9 @@ NULL
 #' torch_fmod(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
 #' torch_fmod(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
 NULL
+# -> fmod <-
 
-# -> remainder: f84b84ba537d8ef796c1e71917f4b171 <-
+# -> remainder: b20c6555afa7d27c1140ff1f5b337bf4 <-
 #'
 #' @name torch_remainder
 #'
@@ -2527,8 +2741,9 @@ NULL
 #' torch_remainder(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
 #' torch_remainder(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
 NULL
+# -> remainder <-
 
-# -> sort: 3cef707b9b50dfa62d147421077aaa24 <-
+# -> sort: 9f1fc598fbb5f20f000878002ee1299b <-
 #'
 #' @name torch_sort
 #'
@@ -2542,8 +2757,9 @@ NULL
 #' sorted
 #' indices
 NULL
+# -> sort <-
 
-# -> argsort: 8d75a2a9c4f49faecb0d0db9979a4b5b <-
+# -> argsort: c5596fbc697d7819566e3002ae6e4647 <-
 #'
 #' @name torch_argsort
 #'
@@ -2553,8 +2769,9 @@ NULL
 #' a
 #' torch_argsort(a, dim=1)
 NULL
+# -> argsort <-
 
-# -> topk: 738e3ac71d3ef585c98097335da6cc66 <-
+# -> topk: c4a40d9553a19596080b2fe029ce3d76 <-
 #'
 #' @name torch_topk
 #'
@@ -2564,8 +2781,9 @@ NULL
 #' x
 #' torch_topk(x, 3)
 NULL
+# -> topk <-
 
-# -> renorm: 948e8829296cae446ef294eef9c12955 <-
+# -> renorm: a7b54455c60ff955000945fb62311fa6 <-
 #'
 #' @name torch_renorm
 #'
@@ -2577,8 +2795,9 @@ NULL
 #' x
 #' torch_renorm(x, 1, 0, 5)
 NULL
+# -> renorm <-
 
-# -> equal: 36d27f003eedfee7b69488720f12d2b1 <-
+# -> equal: 7c3ca1e7965de36729bbb40352c33d1b <-
 #'
 #' @name torch_equal
 #'
@@ -2586,8 +2805,9 @@ NULL
 #'
 #' torch_equal(torch_tensor(c(1, 2)), torch_tensor(c(1, 2)))
 NULL
+# -> equal <-
 
-# -> normal: 722fa249b7feefdb102097b37bb9840d <-
+# -> normal: d00d2407a603ac28ea06472e4f0b71de <-
 #'
 #' @name torch_normal
 #'
@@ -2604,8 +2824,9 @@ NULL
 #'
 #' torch_normal(2, 3, size=list(1, 4))
 NULL
+# -> normal <-
 
-# -> isfinite: b34f475941aebcaa05417313984a6f58 <-
+# -> isfinite: d2b35209a5b8843a5ac9329bc62467d8 <-
 #'
 #' @name torch_isfinite
 #'
@@ -2613,3 +2834,4 @@ NULL
 #'
 #' torch_isfinite(torch_tensor([1, float('inf'), 2, float('-inf'), float('nan')]))
 NULL
+# -> isfinite <-
