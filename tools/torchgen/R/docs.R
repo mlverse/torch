@@ -275,9 +275,7 @@ create_roxygen_example <- function(exam) {
   examples <- str_split(exam, "\n")[[1]]
   examples <- str_c("#' ", examples)
   glue::glue(
-    "#' \\dontrun{{",
     str_c(examples, collapse = "\n"),
-    "#' }}",
     .sep = "\n"
   )
 }
@@ -303,13 +301,26 @@ create_roxygen <- function(name, m) {
     "#'",
     create_roxygen_full_params(m),
     "#'",
-    create_roxygen_full_examples(m),
-    "#'",
     create_roxygen_rdname(name),
     "#'",
     "#' @export",
     "NULL\n",
     sep =  "\n"
+  )
+}
+
+create_examples <- function(name, m) {
+  examples <- create_roxygen_full_examples(m)
+  hash <- openssl::md5(examples, "md5")
+
+  str_c(
+    glue::glue("# -> {name}: {hash} <-"),
+    "#'",
+    create_roxygen_rdname(name),
+    "#'",
+    create_roxygen_full_examples(m),
+    "NULL",
+    sep = "\n"
   )
 }
 
@@ -364,8 +375,11 @@ docum <- function(path) {
 
   out <- imap(d, ~create_roxygen(.y, .x))
   out <- reduce(out, function(x, y) str_c(x, y, sep = "\n\n"))
+  examples <- imap(d, ~create_examples(.y, .x)) %>%
+    reduce(~ str_c(.x, .y, sep = "\n\n"))
 
   readr::write_file(out, str_c(path, "/R/gen-namespace-docs.R"))
+  readr::write_file(examples, str_c(path, "/R/gen-namespace-examples.R"))
 }
 
 
