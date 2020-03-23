@@ -307,7 +307,7 @@ int main(int argc, char *argv[])
 
             calls = buildCalls(name, config[idx]["arguments"], 1);
 
-            std::string firstType = config[idx]["arguments"][0]["type"].as<std::string>();
+            std::string firstType = config[idx]["arguments"][0]["dynamic_type"].as<std::string>();
             std::string firstName = config[idx]["arguments"][0]["name"].as<std::string>();
             functionCall = "((LanternObject<" + addNamespace(firstType) + ">*)" + firstName + ")->get().";
 
