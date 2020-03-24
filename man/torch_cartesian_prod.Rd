@@ -21,8 +21,7 @@ python's \code{itertools.product}.
 
 a = c(1, 2, 3)
 b = c(4, 5)
-list(itertools$product(a, b))
 tensor_a = torch_tensor(a)
 tensor_b = torch_tensor(b)
-torch_cartesian_prod(tensor_a, tensor_b)
+torch_cartesian_prod(list(tensor_a, tensor_b))
 }
