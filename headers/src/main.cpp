@@ -234,6 +234,11 @@ std::string buildReturn(YAML::Node node)
         type = "std::vector<void*>";
     }
 
+    if (type == "torch::TensorList")
+    {
+        type = "std::vector<torch::Tensor>";
+    }
+
     return type;
 }
 
