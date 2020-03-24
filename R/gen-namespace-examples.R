@@ -277,10 +277,11 @@ NULL
 #'
 #' @examples
 #'
-#' input = torch_randint(0, 8, list(5,), dtype=torch_int64())
+#' input = torch_randint(0, 8, list(5), options=list(dtype=torch_int64()))
 #' weights = torch_linspace(0, 1, steps=5)
-#' input, weights
-#' torch_bincount(input)
+#' input
+#' weights
+#' torch_bincount(input, weights)
 #' input$bincount(weights)
 NULL
 # -> bincount <-
@@ -343,7 +344,7 @@ NULL
 #' input = torch_randn(c(10, 3, 4))
 #' mat2 = torch_randn(c(10, 4, 5))
 #' res = torch_bmm(input, mat2)
-#' res$size()
+#' res
 NULL
 # -> bmm <-
 
@@ -353,11 +354,10 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(3)$view(1, 3)
-#' y = torch_arange(2)$view(2, 1)
-#' a, b = torch_broadcast_tensors(x, y)
-#' a$size()
-#' a
+#' x = torch_arange(end = 3)$view(c(1, 3))
+#' y = torch_arange(end = 2)$view(c(2, 1))
+#' out = torch_broadcast_tensors(list(x, y))
+#' out[[1]]
 NULL
 # -> broadcast_tensors <-
 
@@ -396,7 +396,7 @@ NULL
 #' b = torch_randn(c(4, 5))
 #' c = torch_randn(c(5, 6))
 #' d = torch_randn(c(6, 7))
-#' torch_chain_matmul(a, b, c, d)
+#' torch_chain_matmul(list(a, b, c, d))
 NULL
 # -> chain_matmul <-
 
@@ -2081,10 +2081,9 @@ NULL
 #'
 #' a = c(1, 2, 3)
 #' b = c(4, 5)
-#' list(itertools$product(a, b))
 #' tensor_a = torch_tensor(a)
 #' tensor_b = torch_tensor(b)
-#' torch_cartesian_prod(tensor_a, tensor_b)
+#' torch_cartesian_prod(list(tensor_a, tensor_b))
 NULL
 # -> cartesian_prod <-
 
@@ -2122,8 +2121,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_can_cast(torch_double, torch_float)
-#' torch_can_cast(torch_float, torch_int)
+#' torch_can_cast(torch_double(), torch_float())
+#' torch_can_cast(torch_float(), torch_int())
 NULL
 # -> can_cast <-
 
@@ -2133,8 +2132,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_promote_types(torch_int32, torch_float32))
-#' torch_promote_types(torch_uint8, torch_long)
+#' torch_promote_types(torch_int32(), torch_float32()))
+#' torch_promote_types(torch_uint8(), torch_long())
 NULL
 # -> promote_types <-
 
@@ -2487,10 +2486,12 @@ NULL
 #' l
 #' torch_mm(l, l$t())
 #' a = torch_randn(c(3, 2, 2))
+#' \dontrun{
 #' a = torch_matmul(a, a$transpose(-1, -2)) + 1e-03 # make symmetric positive-definite
 #' l = torch_cholesky(a)
 #' z = torch_matmul(l, l$transpose(-1, -2))
 #' torch_max(torch_abs(z - a)) # Max non-zero
+#' }
 NULL
 # -> cholesky <-
 
@@ -2535,12 +2536,14 @@ NULL
 #'
 #' @examples
 #'
+#' \dontrun{
 #' a = torch_randn(c(3, 3))
 #' a = torch_mm(a, a$t()) + 1e-05 * torch_eye(3) # make symmetric positive definite
 #' u = torch_cholesky(a)
 #' a
 #' torch_cholesky_inverse(u)
 #' a$inverse()
+#' }
 NULL
 # -> cholesky_inverse <-
 
