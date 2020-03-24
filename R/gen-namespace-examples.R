@@ -15,8 +15,10 @@ NULL
 #' @name torch_angle
 #'
 #' @examples
-#'
+#' \dontrun{
 #' torch_angle(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))*180/3.14159
+#' }
+#' 
 NULL
 # -> angle <-
 
@@ -97,7 +99,7 @@ NULL
 #' a
 #' b = torch_randn(c(4, 1))
 #' b
-#' torch_add(a, 10, b)
+#' torch_add(a, b)
 NULL
 # -> add <-
 
@@ -127,7 +129,7 @@ NULL
 NULL
 # -> addr <-
 
-# -> allclose: 75dc79b19d8c682e0ea3e86e5f669fdc <-
+# -> allclose: 778248f3567ec9b8ec3002a473c04dbf <-
 #'
 #' @name torch_allclose
 #'
@@ -135,8 +137,8 @@ NULL
 #'
 #' torch_allclose(torch_tensor(c(10000., 1e-07)), torch_tensor(c(10000.1, 1e-08)))
 #' torch_allclose(torch_tensor(c(10000., 1e-08)), torch_tensor(c(10000.1, 1e-09)))
-#' torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]))
-#' torch_allclose(torch_tensor([1.0, float('nan')]), torch_tensor([1.0, float('nan')]), equal_nan=TRUE)
+#' torch_allclose(torch_tensor(c(1.0, NaN)), torch_tensor(c(1.0, NaN)))
+#' torch_allclose(torch_tensor(c(1.0, NaN)), torch_tensor(c(1.0, NaN)), equal_nan=TRUE)
 NULL
 # -> allclose <-
 
@@ -146,7 +148,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_arange(5)
+#' torch_arange(end = 5)
 #' torch_arange(1, 4)
 #' torch_arange(1, 2.5, 0.5)
 NULL
@@ -158,9 +160,11 @@ NULL
 #'
 #' @examples
 #'
+#' \dontrun{
 #' a = torch_randn(c(4, 4))
 #' a
 #' torch_argmax(a)
+#' }
 #'
 #'
 #' a = torch_randn(c(4, 4))
@@ -175,9 +179,11 @@ NULL
 #'
 #' @examples
 #'
+#' \dontrun{
 #' a = torch_randn(c(4, 4))
 #' a
 #' torch_argmin(a)
+#' }
 #'
 #'
 #' a = torch_randn(c(4, 4))
@@ -192,11 +198,13 @@ NULL
 #'
 #' @examples
 #'
+#' \dontrun{
 #' x = torch_randn(c(3, 3))
 #' x
 #' t = torch_as_strided(x, list(2, 2), list(1, 2))
 #' t
 #' t = torch_as_strided(x, list(2, 2), list(1, 2), 1)
+#' }
 NULL
 # -> as_strided <-
 
@@ -233,7 +241,7 @@ NULL
 #' M = torch_randn(c(10, 3, 5))
 #' batch1 = torch_randn(c(10, 3, 4))
 #' batch2 = torch_randn(c(10, 4, 5))
-#' torch_baddbmm(M, batch1, batch2)$size()
+#' torch_baddbmm(M, batch1, batch2)
 NULL
 # -> baddbmm <-
 
@@ -253,7 +261,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_empty(3, 3)$uniform_list(0, 1)  # generate a uniform random matrix with range c(0, 1)
+#' a = torch_empty(c(3, 3))$uniform_(0, 1)  # generate a uniform random matrix with range c(0, 1)
 #' a
 #' torch_bernoulli(a)
 #' a = torch_ones(c(3, 3)) # probability of drawing "1" is 1
@@ -880,13 +888,13 @@ NULL
 NULL
 # -> inverse <-
 
-# -> isnan: 6a889d4dc3d9bb1d148523cfcafce28d <-
+# -> isnan: 9328fea60b8f3233e4a0cb9c57b77d4f <-
 #'
 #' @name torch_isnan
 #'
 #' @examples
 #'
-#' torch_isnan(torch_tensor([1, float('nan'), 2]))
+#' torch_isnan(torch_tensor(c(1, NaN, 2)))
 NULL
 # -> isnan <-
 
@@ -1942,7 +1950,7 @@ NULL
 NULL
 # -> zeros_like <-
 
-# -> norm: 6c2a9c1d53760d52a3f27d1d71b81bda <-
+# -> norm: 631c4b122bcf19cc961d74b56d4a527b <-
 #'
 #' @name torch_norm
 #'
@@ -1953,8 +1961,8 @@ NULL
 #' b = a$reshape(list(3, 3))
 #' torch_norm(a)
 #' torch_norm(b)
-#' torch_norm(a, float('inf'))
-#' torch_norm(b, float('inf'))
+#' torch_norm(a, Inf)
+#' torch_norm(b, Inf)
 #' c = torch_tensor(c([ 1, 2, 3],[-1, 1, 4]) , dtype= torch_float)
 #' torch_norm(c, dim=0)
 #' torch_norm(c, dim=1)
@@ -2387,7 +2395,7 @@ NULL
 #' t = torch_randn(c(1, 3))
 #' t1 = torch_randn(c(3, 1))
 #' t2 = torch_randn(c(1, 3))
-#' torch_addcmul(t, 0.1, t1, t2)
+#' torch_addcmul(t, t1, t2, 0.1)
 NULL
 # -> addcmul <-
 
@@ -2400,7 +2408,7 @@ NULL
 #' t = torch_randn(c(1, 3))
 #' t1 = torch_randn(c(3, 1))
 #' t2 = torch_randn(c(1, 3))
-#' torch_addcdiv(t, 0.1, t1, t2)
+#' torch_addcdiv(t, t1, t2, 0.1)
 NULL
 # -> addcdiv <-
 
@@ -2542,7 +2550,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c([12., -51, 4], [6, 167, -68], [-4, 24, -41]))
+#' a = torch_tensor(matrix(c(12., -51, 4, 6, 167, -68, -4, 24, -41), ncol = 3, byrow = TRUE))
 #' q, r = torch_qr(a)
 #' q
 #' r
@@ -2692,7 +2700,7 @@ NULL
 #'
 #' a = torch_randn(c(4))
 #' a
-#' torch_atan2list(a, torch_randn(c(4)))
+#' torch_atan2(a, torch_randn(c(4)))
 NULL
 # -> atan2 <-
 
@@ -2826,12 +2834,12 @@ NULL
 NULL
 # -> normal <-
 
-# -> isfinite: d2b35209a5b8843a5ac9329bc62467d8 <-
+# -> isfinite: 2e310d0d6bec1a2aa45b6477e93861b7 <-
 #'
 #' @name torch_isfinite
 #'
 #' @examples
 #'
-#' torch_isfinite(torch_tensor([1, float('inf'), 2, float('-inf'), float('nan')]))
+#' torch_isfinite(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
 NULL
 # -> isfinite <-

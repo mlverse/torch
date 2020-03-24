@@ -18,5 +18,5 @@ Returns a new tensor with boolean elements representing if each element is \code
 
 \examples{
 
-torch_isnan(torch_tensor([1, float('nan'), 2]))
+torch_isnan(torch_tensor(c(1, NaN, 2)))
 }

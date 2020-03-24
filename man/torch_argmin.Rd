@@ -34,9 +34,11 @@ documentation for the exact semantics of this method.
 
 \examples{
 
+\dontrun{
 a = torch_randn(c(4, 4))
 a
 torch_argmin(a)
+}
 
 
 a = torch_randn(c(4, 4))

@@ -40,7 +40,7 @@ point \code{dtype}.
 
 \examples{
 
-a = torch_empty(3, 3)$uniform_list(0, 1)  # generate a uniform random matrix with range c(0, 1)
+a = torch_empty(c(3, 3))$uniform_(0, 1)  # generate a uniform random matrix with range c(0, 1)
 a
 torch_bernoulli(a)
 a = torch_ones(c(3, 3)) # probability of drawing "1" is 1

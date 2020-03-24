@@ -18,5 +18,5 @@ Returns a new tensor with boolean elements representing if each element is \code
 
 \examples{
 
-torch_isfinite(torch_tensor([1, float('inf'), 2, float('-inf'), float('nan')]))
+torch_isfinite(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
 }

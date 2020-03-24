@@ -49,5 +49,5 @@ For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{be
 M = torch_randn(c(10, 3, 5))
 batch1 = torch_randn(c(10, 3, 4))
 batch2 = torch_randn(c(10, 4, 5))
-torch_baddbmm(M, batch1, batch2)$size()
+torch_baddbmm(M, batch1, batch2)
 }

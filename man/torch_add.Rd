@@ -57,5 +57,5 @@ a = torch_randn(c(4))
 a
 b = torch_randn(c(4, 1))
 b
-torch_add(a, 10, b)
+torch_add(a, b)
 }

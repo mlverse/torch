@@ -36,7 +36,7 @@ Otherwise, if \code{some} is \code{False}, this function returns the complete QR
 
 \examples{
 
-a = torch_tensor(c([12., -51, 4], [6, 167, -68], [-4, 24, -41]))
+a = torch_tensor(matrix(c(12., -51, 4, 6, 167, -68, -4, 24, -41), ncol = 3, byrow = TRUE))
 q, r = torch_qr(a)
 q
 r
