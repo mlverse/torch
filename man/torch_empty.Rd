@@ -31,5 +31,5 @@ defined by the variable argument \code{size}.
 
 \examples{
 
-torch_empty(2, 3)
+torch_empty(c(2, 3))
 }

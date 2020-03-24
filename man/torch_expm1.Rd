@@ -25,5 +25,5 @@ of \code{input}.
 
 \examples{
 
-torch_expm1list(torch_tensor([0, math$log(2.)]))
+torch_expm1(torch_tensor(c(0, log(2))))
 }

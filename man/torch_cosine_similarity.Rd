@@ -30,6 +30,6 @@ Returns cosine similarity between x1 and x2, computed along dim.
 
 input1 = torch_randn(c(100, 128))
 input2 = torch_randn(c(100, 128))
-output = F$cosine_similarity(input1, input2)
-print(output)
+output = torch_cosine_similarity(input1, input2)
+output
 }

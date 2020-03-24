@@ -25,5 +25,5 @@ broadcastable  with the first argument.
 
 \examples{
 
-torch_eq(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
+torch_eq(torch_tensor(c(1,2,3,4)), torch_tensor(c(1, 3, 2, 4)))
 }

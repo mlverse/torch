@@ -25,9 +25,6 @@ python's \code{itertools.combinations} when \code{with_replacement} is set to \c
 \examples{
 
 a = c(1, 2, 3)
-list(itertools$combinations(a, r=2))
-list(itertools$combinations(a, r=3))
-list(itertools$combinations_with_replacement(a, r=2))
 tensor_a = torch_tensor(a)
 torch_combinations(tensor_a)
 torch_combinations(tensor_a, r=3)

@@ -35,6 +35,4 @@ a vector of size N, with elements.
 a = torch_randn(c(10))
 a
 torch_cumprod(a, dim=0)
-ac(5) = 0.0
-torch_cumprod(a, dim=0)
 }

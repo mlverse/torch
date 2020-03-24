@@ -47,8 +47,9 @@ NULL
 #' @name torch_conj
 #'
 #' @examples
-#'
+#' \dontrun{
 #' torch_conj(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+#' }
 NULL
 # -> conj <-
 
@@ -547,8 +548,6 @@ NULL
 #' a = torch_randn(c(10))
 #' a
 #' torch_cumprod(a, dim=0)
-#' ac(5) = 0.0
-#' torch_cumprod(a, dim=0)
 NULL
 # -> cumprod <-
 
@@ -643,7 +642,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_empty(2, 3)
+#' torch_empty(c(2, 3))
 NULL
 # -> empty <-
 
@@ -653,7 +652,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_empty(list(2,3), dtype=torch_int64())
+#' torch_empty(list(2,3), options=list(dtype = torch_int64()))
 NULL
 # -> empty_like <-
 
@@ -665,8 +664,8 @@ NULL
 #'
 #' a = torch_empty_strided(list(2, 3), list(1, 2))
 #' a
-#' a$stride()
-#' a$size()
+#' a$stride(0)
+#' a$size(0)
 NULL
 # -> empty_strided <-
 
@@ -696,7 +695,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_exp(torch_tensor([0, math$log(2.)]))
+#' torch_exp(torch_tensor(c(0, log(2))))
 NULL
 # -> exp <-
 
@@ -706,7 +705,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_expm1list(torch_tensor([0, math$log(2.)]))
+#' torch_expm1(torch_tensor(c(0, log(2))))
 NULL
 # -> expm1 <-
 
@@ -1291,8 +1290,8 @@ NULL
 #'
 #' input1 = torch_randn(c(100, 128))
 #' input2 = torch_randn(c(100, 128))
-#' output = F$cosine_similarity(input1, input2)
-#' print(output)
+#' output = torch_cosine_similarity(input1, input2)
+#' output
 NULL
 # -> cosine_similarity <-
 
@@ -2094,9 +2093,6 @@ NULL
 #' @examples
 #'
 #' a = c(1, 2, 3)
-#' list(itertools$combinations(a, r=2))
-#' list(itertools$combinations(a, r=3))
-#' list(itertools$combinations_with_replacement(a, r=2))
 #' tensor_a = torch_tensor(a)
 #' torch_combinations(tensor_a)
 #' torch_combinations(tensor_a, r=3)
@@ -2181,7 +2177,9 @@ NULL
 #' b = torch_randn(c(4, 3))
 #' b
 #' torch_cross(a, b, dim=1)
+#' \dontrun{
 #' torch_cross(a, b)
+#' }
 NULL
 # -> cross <-
 
@@ -2277,7 +2275,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_eq(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
+#' torch_eq(torch_tensor(c(1,2,3,4)), torch_tensor(c(1, 3, 2, 4)))
 NULL
 # -> eq <-
 
