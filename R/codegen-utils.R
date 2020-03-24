@@ -43,6 +43,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("IntArrayRef" %in% expected_types && is.numeric(obj))
     return(list(as.integer(obj), "IntArrayRef"))
   
+  if ("IntArrayRef" %in% expected_types && is.list(obj))
+    return(list(as.integer(obj), "IntArrayRef"))
+  
   if ("int64_t" %in% expected_types && is.numeric(obj) && length(obj) == 1)
     return(list(as.integer(obj), "int64_t"))
   
@@ -67,7 +70,15 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("MemoryFormat" %in% expected_types && is.null(obj))
     return(list(cpp_nullopt(), "MemoryFormat"))
   
-  browser()
+  if ("Generator *" %in% expected_types && is_torch_generator(obj))
+    return(list(obj$ptr, "Generator *"))
+  
+  if ("Generator *" %in% expected_types && is.null(obj))
+    return(list(.generator_null$ptr, "Generator *"))
+  
+  if ("Scalar" %in% expected_types && is.null(obj)) 
+    return(list(cpp_nullopt(), "Scalar"))
+  
   stop("Can't convert argument", call.=FALSE)
 }
 
@@ -124,7 +135,10 @@ to_return_type <- function(res, types) {
       return(Tensor$new(ptr = res))
     
     if (dtype == "TensorList")
-      return(TensorList$new(ptr = res))
+      return(TensorList$new(ptr = res)$to_r())
+    
+    if (dtype == "ScalarType")
+      return(torch_dtype$new(ptr = res))
     
     browser()
   }
@@ -146,9 +160,15 @@ to_return_type <- function(res, types) {
       
     }
     
-  } 
+  } else if (length(types) > 1){
+    
+    out <- seq_along(res) %>% 
+      lapply(function(x) to_return_type(res[[x]], types[x]))
+    
+    return(out)
+  }
   
-  browser()
+
 }
 
 call_c_function <- function(fun_name, args, expected_types, nd_args, return_types, fun_type) {

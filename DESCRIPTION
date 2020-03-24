@@ -19,7 +19,8 @@ LinkingTo:
 Imports:
     Rcpp,
     R6,
-    withr
+    withr,
+    rlang
 RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 Suggests:
@@ -37,6 +38,8 @@ Collate:
     'dtype.R'
     'tensor.R'
     'gen-method.R'
+    'gen-namespace-docs.R'
+    'gen-namespace-examples.R'
     'gen-namespace.R'
     'generator.R'
     'lantern_install.R'

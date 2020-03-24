@@ -227,7 +227,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "double") {
-    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
+    result <- glue::glue("XPtrTorch(lantern_double({argument$name})).get()")
   }
 
   if (argument$dynamic_type == "std::array<bool,4>") {

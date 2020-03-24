@@ -19,6 +19,9 @@ test_that("Numeric tensors", {
   x <- array(c(1,2,3,4,5,6,7,8), dim = c(2,2,2))
   expect_equal_to_r(torch_tensor(x), x)
   
+  x <- c(NaN, -Inf, Inf)
+  expect_equal_to_r(torch_tensor(x), x)
+  
 })
 
 test_that("Integer tensors", {

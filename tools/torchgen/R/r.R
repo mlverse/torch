@@ -306,7 +306,7 @@ r_method_body <- function(decls) {
     "  expected_types = expected_types,",
     "  nd_args = nd_args,",
     "  return_types = return_types,",
-    "  fun_type = 'namespace'",
+    "  fun_type = 'method'",
     ")",
     .sep = "\n",
   )

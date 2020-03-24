@@ -1,3 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^deps.*
+^.github.*
+^.vscode.*
+tools/torchgen/.Rbuildignore

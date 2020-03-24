@@ -12,7 +12,7 @@ Tensor$set("public", "__and__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "__iand__", function(other) {
@@ -27,7 +27,7 @@ Tensor$set("public", "__iand__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "__ilshift__", function(other) {
@@ -42,7 +42,7 @@ Tensor$set("public", "__ilshift__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "__ior__", function(other) {
@@ -57,7 +57,7 @@ Tensor$set("public", "__ior__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "__irshift__", function(other) {
@@ -72,7 +72,7 @@ Tensor$set("public", "__irshift__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "__ixor__", function(other) {
@@ -87,7 +87,7 @@ Tensor$set("public", "__ixor__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "__lshift__", function(other) {
@@ -102,7 +102,7 @@ Tensor$set("public", "__lshift__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "__or__", function(other) {
@@ -117,7 +117,7 @@ Tensor$set("public", "__or__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "__rshift__", function(other) {
@@ -132,7 +132,7 @@ Tensor$set("public", "__rshift__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "__xor__", function(other) {
@@ -147,7 +147,7 @@ Tensor$set("public", "__xor__", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "_coalesced_", function(coalesced) {
@@ -162,7 +162,7 @@ Tensor$set("public", "_coalesced_", function(coalesced) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "_dimI", function() {
@@ -177,7 +177,7 @@ Tensor$set("public", "_dimI", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "_dimV", function() {
@@ -192,7 +192,7 @@ Tensor$set("public", "_dimV", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "_indices", function() {
@@ -207,7 +207,7 @@ Tensor$set("public", "_indices", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "_nnz", function() {
@@ -222,7 +222,7 @@ Tensor$set("public", "_nnz", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "_values", function() {
@@ -237,7 +237,7 @@ Tensor$set("public", "_values", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "_version", function() {
@@ -252,7 +252,7 @@ Tensor$set("public", "_version", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "abs", function() {
@@ -267,7 +267,7 @@ Tensor$set("public", "abs", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "abs_", function() {
@@ -282,7 +282,7 @@ Tensor$set("public", "abs_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "acos", function() {
@@ -297,7 +297,7 @@ Tensor$set("public", "acos", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "acos_", function() {
@@ -312,7 +312,7 @@ Tensor$set("public", "acos_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "add", function(other, alpha = 1) {
@@ -327,7 +327,7 @@ Tensor$set("public", "add", function(other, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "add_", function(other, alpha = 1) {
@@ -342,7 +342,7 @@ Tensor$set("public", "add_", function(other, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addbmm", function(batch1, batch2, beta = 1, alpha = 1) {
@@ -360,7 +360,7 @@ Tensor$set("public", "addbmm", function(batch1, batch2, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addbmm_", function(batch1, batch2, beta = 1, alpha = 1) {
@@ -378,7 +378,7 @@ Tensor$set("public", "addbmm_", function(batch1, batch2, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addcdiv", function(tensor1, tensor2, value = 1) {
@@ -396,7 +396,7 @@ Tensor$set("public", "addcdiv", function(tensor1, tensor2, value = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addcdiv_", function(tensor1, tensor2, value = 1) {
@@ -414,7 +414,7 @@ Tensor$set("public", "addcdiv_", function(tensor1, tensor2, value = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addcmul", function(tensor1, tensor2, value = 1) {
@@ -432,7 +432,7 @@ Tensor$set("public", "addcmul", function(tensor1, tensor2, value = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addcmul_", function(tensor1, tensor2, value = 1) {
@@ -450,7 +450,7 @@ Tensor$set("public", "addcmul_", function(tensor1, tensor2, value = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addmm", function(mat1, mat2, beta = 1, alpha = 1) {
@@ -468,7 +468,7 @@ Tensor$set("public", "addmm", function(mat1, mat2, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addmm_", function(mat1, mat2, beta = 1, alpha = 1) {
@@ -486,7 +486,7 @@ Tensor$set("public", "addmm_", function(mat1, mat2, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addmv", function(mat, vec, beta = 1, alpha = 1) {
@@ -504,7 +504,7 @@ Tensor$set("public", "addmv", function(mat, vec, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addmv_", function(mat, vec, beta = 1, alpha = 1) {
@@ -522,7 +522,7 @@ Tensor$set("public", "addmv_", function(mat, vec, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addr", function(vec1, vec2, beta = 1, alpha = 1) {
@@ -540,7 +540,7 @@ Tensor$set("public", "addr", function(vec1, vec2, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "addr_", function(vec1, vec2, beta = 1, alpha = 1) {
@@ -558,7 +558,7 @@ Tensor$set("public", "addr_", function(vec1, vec2, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "alias", function() {
@@ -573,7 +573,7 @@ Tensor$set("public", "alias", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "align_as", function(other) {
@@ -588,7 +588,7 @@ Tensor$set("public", "align_as", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "align_to", function(names, order, ellipsis_idx) {
@@ -606,7 +606,7 @@ Tensor$set("public", "align_to", function(names, order, ellipsis_idx) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "all", function(dim, keepdim = FALSE) {
@@ -621,7 +621,7 @@ Tensor$set("public", "all", function(dim, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "allclose", function(other, rtol = 0.000010, atol = 0.000000, equal_nan = FALSE) {
@@ -639,7 +639,7 @@ Tensor$set("public", "allclose", function(other, rtol = 0.000010, atol = 0.00000
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "angle", function() {
@@ -654,7 +654,7 @@ Tensor$set("public", "angle", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "any", function(dim, keepdim = FALSE) {
@@ -669,7 +669,7 @@ Tensor$set("public", "any", function(dim, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "argmax", function(dim = NULL, keepdim = FALSE) {
@@ -684,7 +684,7 @@ Tensor$set("public", "argmax", function(dim = NULL, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "argmin", function(dim = NULL, keepdim = FALSE) {
@@ -699,7 +699,7 @@ Tensor$set("public", "argmin", function(dim = NULL, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "argsort", function(dim = -1, descending = FALSE) {
@@ -714,7 +714,7 @@ Tensor$set("public", "argsort", function(dim = -1, descending = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "as_strided", function(size, stride, storage_offset = NULL) {
@@ -732,7 +732,7 @@ Tensor$set("public", "as_strided", function(size, stride, storage_offset = NULL)
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "as_strided_", function(size, stride, storage_offset = NULL) {
@@ -750,7 +750,7 @@ Tensor$set("public", "as_strided_", function(size, stride, storage_offset = NULL
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "asin", function() {
@@ -765,7 +765,7 @@ Tensor$set("public", "asin", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "asin_", function() {
@@ -780,7 +780,7 @@ Tensor$set("public", "asin_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "atan", function() {
@@ -795,7 +795,7 @@ Tensor$set("public", "atan", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "atan_", function() {
@@ -810,7 +810,7 @@ Tensor$set("public", "atan_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "atan2", function(other) {
@@ -825,7 +825,7 @@ Tensor$set("public", "atan2", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "atan2_", function(other) {
@@ -840,7 +840,7 @@ Tensor$set("public", "atan2_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE, create_graph = FALSE) {
@@ -858,7 +858,7 @@ Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE,
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "baddbmm", function(batch1, batch2, beta = 1, alpha = 1) {
@@ -876,7 +876,7 @@ Tensor$set("public", "baddbmm", function(batch1, batch2, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "baddbmm_", function(batch1, batch2, beta = 1, alpha = 1) {
@@ -894,7 +894,7 @@ Tensor$set("public", "baddbmm_", function(batch1, batch2, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "bernoulli", function(p, generator = NULL) {
@@ -909,7 +909,7 @@ Tensor$set("public", "bernoulli", function(p, generator = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "bernoulli_", function(p = 0.500000, generator = NULL) {
@@ -924,7 +924,7 @@ Tensor$set("public", "bernoulli_", function(p = 0.500000, generator = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "bincount", function(weights = list(), minlength = 0) {
@@ -939,7 +939,7 @@ Tensor$set("public", "bincount", function(weights = list(), minlength = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "bitwise_not", function() {
@@ -954,7 +954,7 @@ Tensor$set("public", "bitwise_not", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "bitwise_not_", function() {
@@ -969,7 +969,7 @@ Tensor$set("public", "bitwise_not_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "bitwise_xor", function(other) {
@@ -984,7 +984,7 @@ Tensor$set("public", "bitwise_xor", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "bitwise_xor_", function(other) {
@@ -999,7 +999,7 @@ Tensor$set("public", "bitwise_xor_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "bmm", function(mat2) {
@@ -1014,7 +1014,7 @@ Tensor$set("public", "bmm", function(mat2) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cauchy_", function(median = 0, sigma = 1, generator = NULL) {
@@ -1029,7 +1029,7 @@ Tensor$set("public", "cauchy_", function(median = 0, sigma = 1, generator = NULL
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "ceil", function() {
@@ -1044,7 +1044,7 @@ Tensor$set("public", "ceil", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "ceil_", function() {
@@ -1059,7 +1059,7 @@ Tensor$set("public", "ceil_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cholesky", function(upper = FALSE) {
@@ -1074,7 +1074,7 @@ Tensor$set("public", "cholesky", function(upper = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cholesky_inverse", function(upper = FALSE) {
@@ -1089,7 +1089,7 @@ Tensor$set("public", "cholesky_inverse", function(upper = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cholesky_solve", function(input2, upper = FALSE) {
@@ -1104,7 +1104,7 @@ Tensor$set("public", "cholesky_solve", function(input2, upper = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "chunk", function(chunks, dim = 0) {
@@ -1119,7 +1119,7 @@ Tensor$set("public", "chunk", function(chunks, dim = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "clamp", function(min = NULL, max = NULL) {
@@ -1134,7 +1134,7 @@ Tensor$set("public", "clamp", function(min = NULL, max = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "clamp_", function(min = NULL, max = NULL) {
@@ -1149,7 +1149,7 @@ Tensor$set("public", "clamp_", function(min = NULL, max = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "clamp_max", function(max) {
@@ -1164,7 +1164,7 @@ Tensor$set("public", "clamp_max", function(max) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "clamp_max_", function(max) {
@@ -1179,7 +1179,7 @@ Tensor$set("public", "clamp_max_", function(max) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "clamp_min", function(min) {
@@ -1194,7 +1194,7 @@ Tensor$set("public", "clamp_min", function(min) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "clamp_min_", function(min) {
@@ -1209,7 +1209,7 @@ Tensor$set("public", "clamp_min_", function(min) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "copy", function(memory_format = NULL) {
@@ -1224,7 +1224,7 @@ Tensor$set("public", "copy", function(memory_format = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "coalesce", function() {
@@ -1239,7 +1239,7 @@ Tensor$set("public", "coalesce", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "conj", function() {
@@ -1254,7 +1254,7 @@ Tensor$set("public", "conj", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "contiguous", function(memory_format = torch_contiguous_format()) {
@@ -1269,7 +1269,7 @@ Tensor$set("public", "contiguous", function(memory_format = torch_contiguous_for
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "copy_", function(src, non_blocking = FALSE) {
@@ -1284,7 +1284,7 @@ Tensor$set("public", "copy_", function(src, non_blocking = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cos", function() {
@@ -1299,7 +1299,7 @@ Tensor$set("public", "cos", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cos_", function() {
@@ -1314,7 +1314,7 @@ Tensor$set("public", "cos_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cosh", function() {
@@ -1329,7 +1329,7 @@ Tensor$set("public", "cosh", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cosh_", function() {
@@ -1344,7 +1344,7 @@ Tensor$set("public", "cosh_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cross", function(other, dim = NULL) {
@@ -1359,7 +1359,7 @@ Tensor$set("public", "cross", function(other, dim = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cumprod", function(dim, dtype = NULL) {
@@ -1374,7 +1374,7 @@ Tensor$set("public", "cumprod", function(dim, dtype = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "cumsum", function(dim, dtype = NULL) {
@@ -1389,7 +1389,7 @@ Tensor$set("public", "cumsum", function(dim, dtype = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "data", function() {
@@ -1404,7 +1404,7 @@ Tensor$set("public", "data", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "dense_dim", function() {
@@ -1419,7 +1419,7 @@ Tensor$set("public", "dense_dim", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "dequantize", function() {
@@ -1434,7 +1434,7 @@ Tensor$set("public", "dequantize", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "det", function() {
@@ -1449,7 +1449,7 @@ Tensor$set("public", "det", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "detach", function() {
@@ -1464,7 +1464,7 @@ Tensor$set("public", "detach", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "detach_", function() {
@@ -1479,7 +1479,7 @@ Tensor$set("public", "detach_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "diag", function(diagonal = 0) {
@@ -1494,7 +1494,7 @@ Tensor$set("public", "diag", function(diagonal = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "diag_embed", function(offset = 0, dim1 = -2, dim2 = -1) {
@@ -1509,7 +1509,7 @@ Tensor$set("public", "diag_embed", function(offset = 0, dim1 = -2, dim2 = -1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "diagflat", function(offset = 0) {
@@ -1524,7 +1524,7 @@ Tensor$set("public", "diagflat", function(offset = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "diagonal", function(offset = 0, dim1 = 0, dim2 = 1) {
@@ -1539,7 +1539,7 @@ Tensor$set("public", "diagonal", function(offset = 0, dim1 = 0, dim2 = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "digamma", function() {
@@ -1554,7 +1554,7 @@ Tensor$set("public", "digamma", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "digamma_", function() {
@@ -1569,7 +1569,7 @@ Tensor$set("public", "digamma_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "dist", function(other, p = 2) {
@@ -1584,7 +1584,7 @@ Tensor$set("public", "dist", function(other, p = 2) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "div", function(other) {
@@ -1599,7 +1599,7 @@ Tensor$set("public", "div", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "div_", function(other) {
@@ -1614,7 +1614,7 @@ Tensor$set("public", "div_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "dot", function(tensor) {
@@ -1629,7 +1629,7 @@ Tensor$set("public", "dot", function(tensor) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "eig", function(eigenvectors = FALSE) {
@@ -1644,7 +1644,7 @@ Tensor$set("public", "eig", function(eigenvectors = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "eq", function(other) {
@@ -1659,7 +1659,7 @@ Tensor$set("public", "eq", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "eq_", function(other) {
@@ -1674,7 +1674,7 @@ Tensor$set("public", "eq_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "equal", function(other) {
@@ -1689,7 +1689,7 @@ Tensor$set("public", "equal", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "erf", function() {
@@ -1704,7 +1704,7 @@ Tensor$set("public", "erf", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "erf_", function() {
@@ -1719,7 +1719,7 @@ Tensor$set("public", "erf_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "erfc", function() {
@@ -1734,7 +1734,7 @@ Tensor$set("public", "erfc", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "erfc_", function() {
@@ -1749,7 +1749,7 @@ Tensor$set("public", "erfc_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "erfinv", function() {
@@ -1764,7 +1764,7 @@ Tensor$set("public", "erfinv", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "erfinv_", function() {
@@ -1779,7 +1779,7 @@ Tensor$set("public", "erfinv_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "exp", function() {
@@ -1794,7 +1794,7 @@ Tensor$set("public", "exp", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "exp_", function() {
@@ -1809,7 +1809,7 @@ Tensor$set("public", "exp_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "expand", function(size, implicit = FALSE) {
@@ -1824,7 +1824,7 @@ Tensor$set("public", "expand", function(size, implicit = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "expand_as", function(other) {
@@ -1839,7 +1839,7 @@ Tensor$set("public", "expand_as", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "expm1", function() {
@@ -1854,7 +1854,7 @@ Tensor$set("public", "expm1", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "expm1_", function() {
@@ -1869,7 +1869,7 @@ Tensor$set("public", "expm1_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "exponential_", function(lambd = 1, generator = NULL) {
@@ -1884,7 +1884,7 @@ Tensor$set("public", "exponential_", function(lambd = 1, generator = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "fft", function(signal_ndim, normalized = FALSE) {
@@ -1899,7 +1899,7 @@ Tensor$set("public", "fft", function(signal_ndim, normalized = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "fill_", function(value) {
@@ -1914,7 +1914,7 @@ Tensor$set("public", "fill_", function(value) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "fill_diagonal_", function(fill_value, wrap = FALSE) {
@@ -1929,7 +1929,7 @@ Tensor$set("public", "fill_diagonal_", function(fill_value, wrap = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "flatten", function(dims, start_dim = 0, end_dim = -1, out_dim) {
@@ -1947,7 +1947,7 @@ Tensor$set("public", "flatten", function(dims, start_dim = 0, end_dim = -1, out_
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "flip", function(dims) {
@@ -1962,7 +1962,7 @@ Tensor$set("public", "flip", function(dims) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "floor", function() {
@@ -1977,7 +1977,7 @@ Tensor$set("public", "floor", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "floor_", function() {
@@ -1992,7 +1992,7 @@ Tensor$set("public", "floor_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "fmod", function(other) {
@@ -2007,7 +2007,7 @@ Tensor$set("public", "fmod", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "fmod_", function(other) {
@@ -2022,7 +2022,7 @@ Tensor$set("public", "fmod_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "frac", function() {
@@ -2037,7 +2037,7 @@ Tensor$set("public", "frac", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "frac_", function() {
@@ -2052,7 +2052,7 @@ Tensor$set("public", "frac_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "gather", function(dim, index, sparse_grad = FALSE) {
@@ -2070,7 +2070,7 @@ Tensor$set("public", "gather", function(dim, index, sparse_grad = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "ge", function(other) {
@@ -2085,7 +2085,7 @@ Tensor$set("public", "ge", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "ge_", function(other) {
@@ -2100,7 +2100,7 @@ Tensor$set("public", "ge_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "geometric_", function(p, generator = NULL) {
@@ -2115,7 +2115,7 @@ Tensor$set("public", "geometric_", function(p, generator = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "geqrf", function() {
@@ -2130,7 +2130,7 @@ Tensor$set("public", "geqrf", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "ger", function(vec2) {
@@ -2145,7 +2145,7 @@ Tensor$set("public", "ger", function(vec2) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "gt", function(other) {
@@ -2160,7 +2160,7 @@ Tensor$set("public", "gt", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "gt_", function(other) {
@@ -2175,7 +2175,7 @@ Tensor$set("public", "gt_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "hardshrink", function(lambd = 0.500000) {
@@ -2190,7 +2190,7 @@ Tensor$set("public", "hardshrink", function(lambd = 0.500000) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "hardshrink_backward", function(grad_out, lambd) {
@@ -2205,7 +2205,7 @@ Tensor$set("public", "hardshrink_backward", function(grad_out, lambd) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "histc", function(bins = 100, min = 0, max = 0) {
@@ -2220,7 +2220,7 @@ Tensor$set("public", "histc", function(bins = 100, min = 0, max = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "ifft", function(signal_ndim, normalized = FALSE) {
@@ -2235,7 +2235,7 @@ Tensor$set("public", "ifft", function(signal_ndim, normalized = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "imag", function() {
@@ -2250,7 +2250,7 @@ Tensor$set("public", "imag", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index", function(indices) {
@@ -2265,7 +2265,7 @@ Tensor$set("public", "index", function(indices) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index_add", function(dim, index, source) {
@@ -2283,7 +2283,7 @@ Tensor$set("public", "index_add", function(dim, index, source) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index_add_", function(dim, index, source) {
@@ -2298,7 +2298,7 @@ Tensor$set("public", "index_add_", function(dim, index, source) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index_copy", function(dim, index, source) {
@@ -2316,7 +2316,7 @@ Tensor$set("public", "index_copy", function(dim, index, source) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index_copy_", function(dim, index, source) {
@@ -2334,7 +2334,7 @@ Tensor$set("public", "index_copy_", function(dim, index, source) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index_fill", function(dim, index, value) {
@@ -2352,7 +2352,7 @@ Tensor$set("public", "index_fill", function(dim, index, value) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index_fill_", function(dim, index, value) {
@@ -2370,7 +2370,7 @@ Tensor$set("public", "index_fill_", function(dim, index, value) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index_put", function(indices, values, accumulate = FALSE) {
@@ -2388,7 +2388,7 @@ Tensor$set("public", "index_put", function(indices, values, accumulate = FALSE) 
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index_put_", function(indices, values, accumulate = FALSE) {
@@ -2406,7 +2406,7 @@ Tensor$set("public", "index_put_", function(indices, values, accumulate = FALSE)
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "index_select", function(dim, index) {
@@ -2421,7 +2421,7 @@ Tensor$set("public", "index_select", function(dim, index) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "indices", function() {
@@ -2436,7 +2436,7 @@ Tensor$set("public", "indices", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "int_repr", function() {
@@ -2451,7 +2451,7 @@ Tensor$set("public", "int_repr", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "inverse", function() {
@@ -2466,7 +2466,7 @@ Tensor$set("public", "inverse", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "irfft", function(signal_ndim, normalized = FALSE, onesided = TRUE, signal_sizes = list()) {
@@ -2484,7 +2484,7 @@ Tensor$set("public", "irfft", function(signal_ndim, normalized = FALSE, onesided
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_coalesced", function() {
@@ -2499,7 +2499,7 @@ Tensor$set("public", "is_coalesced", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_complex", function() {
@@ -2514,7 +2514,7 @@ Tensor$set("public", "is_complex", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_distributed", function() {
@@ -2529,7 +2529,7 @@ Tensor$set("public", "is_distributed", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_floating_point", function() {
@@ -2544,7 +2544,7 @@ Tensor$set("public", "is_floating_point", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_leaf", function() {
@@ -2559,7 +2559,7 @@ Tensor$set("public", "is_leaf", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_nonzero", function() {
@@ -2574,7 +2574,7 @@ Tensor$set("public", "is_nonzero", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_pinned", function() {
@@ -2589,7 +2589,7 @@ Tensor$set("public", "is_pinned", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_same_size", function(other) {
@@ -2604,7 +2604,7 @@ Tensor$set("public", "is_same_size", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_set_to", function(tensor) {
@@ -2619,7 +2619,7 @@ Tensor$set("public", "is_set_to", function(tensor) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "is_signed", function() {
@@ -2634,7 +2634,7 @@ Tensor$set("public", "is_signed", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "isclose", function(other, rtol = 0.000010, atol = 0.000000, equal_nan = FALSE) {
@@ -2652,7 +2652,7 @@ Tensor$set("public", "isclose", function(other, rtol = 0.000010, atol = 0.000000
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "item", function() {
@@ -2667,7 +2667,7 @@ Tensor$set("public", "item", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "kthvalue", function(k, dim = -1, keepdim = FALSE) {
@@ -2682,7 +2682,7 @@ Tensor$set("public", "kthvalue", function(k, dim = -1, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "le", function(other) {
@@ -2697,7 +2697,7 @@ Tensor$set("public", "le", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "le_", function(other) {
@@ -2712,7 +2712,7 @@ Tensor$set("public", "le_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "lerp", function(end, weight) {
@@ -2727,7 +2727,7 @@ Tensor$set("public", "lerp", function(end, weight) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "lerp_", function(end, weight) {
@@ -2742,7 +2742,7 @@ Tensor$set("public", "lerp_", function(end, weight) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "lgamma", function() {
@@ -2757,7 +2757,7 @@ Tensor$set("public", "lgamma", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "lgamma_", function() {
@@ -2772,7 +2772,7 @@ Tensor$set("public", "lgamma_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log", function() {
@@ -2787,7 +2787,7 @@ Tensor$set("public", "log", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log_", function() {
@@ -2802,7 +2802,7 @@ Tensor$set("public", "log_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log_normal_", function(mean = 1, std = 2, generator = NULL) {
@@ -2817,7 +2817,7 @@ Tensor$set("public", "log_normal_", function(mean = 1, std = 2, generator = NULL
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log_softmax", function(dim, dtype = NULL) {
@@ -2832,7 +2832,7 @@ Tensor$set("public", "log_softmax", function(dim, dtype = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log10", function() {
@@ -2847,7 +2847,7 @@ Tensor$set("public", "log10", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log10_", function() {
@@ -2862,7 +2862,7 @@ Tensor$set("public", "log10_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log1p", function() {
@@ -2877,7 +2877,7 @@ Tensor$set("public", "log1p", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log1p_", function() {
@@ -2892,7 +2892,7 @@ Tensor$set("public", "log1p_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log2", function() {
@@ -2907,7 +2907,7 @@ Tensor$set("public", "log2", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "log2_", function() {
@@ -2922,7 +2922,7 @@ Tensor$set("public", "log2_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "logdet", function() {
@@ -2937,7 +2937,7 @@ Tensor$set("public", "logdet", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "logical_not", function() {
@@ -2952,7 +2952,7 @@ Tensor$set("public", "logical_not", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "logical_not_", function() {
@@ -2967,7 +2967,7 @@ Tensor$set("public", "logical_not_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "logical_xor", function(other) {
@@ -2982,7 +2982,7 @@ Tensor$set("public", "logical_xor", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "logical_xor_", function(other) {
@@ -2997,7 +2997,7 @@ Tensor$set("public", "logical_xor_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "logsumexp", function(dim, keepdim = FALSE) {
@@ -3015,7 +3015,7 @@ Tensor$set("public", "logsumexp", function(dim, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "lstsq", function(A) {
@@ -3030,7 +3030,7 @@ Tensor$set("public", "lstsq", function(A) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "lt", function(other) {
@@ -3045,7 +3045,7 @@ Tensor$set("public", "lt", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "lt_", function(other) {
@@ -3060,7 +3060,7 @@ Tensor$set("public", "lt_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "lu_solve", function(LU_data, LU_pivots) {
@@ -3075,7 +3075,7 @@ Tensor$set("public", "lu_solve", function(LU_data, LU_pivots) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "masked_fill", function(mask, value) {
@@ -3090,7 +3090,7 @@ Tensor$set("public", "masked_fill", function(mask, value) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "masked_fill_", function(mask, value) {
@@ -3105,7 +3105,7 @@ Tensor$set("public", "masked_fill_", function(mask, value) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "masked_scatter", function(mask, source) {
@@ -3120,7 +3120,7 @@ Tensor$set("public", "masked_scatter", function(mask, source) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "masked_scatter_", function(mask, source) {
@@ -3135,7 +3135,7 @@ Tensor$set("public", "masked_scatter_", function(mask, source) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "masked_select", function(mask) {
@@ -3150,7 +3150,7 @@ Tensor$set("public", "masked_select", function(mask) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "matmul", function(other) {
@@ -3165,7 +3165,7 @@ Tensor$set("public", "matmul", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "matrix_power", function(n) {
@@ -3180,7 +3180,7 @@ Tensor$set("public", "matrix_power", function(n) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "max", function(dim, other, keepdim = FALSE) {
@@ -3198,7 +3198,7 @@ Tensor$set("public", "max", function(dim, other, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "max_values", function(dim, keepdim = FALSE) {
@@ -3216,7 +3216,7 @@ Tensor$set("public", "max_values", function(dim, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "mean", function(dim, keepdim = FALSE, dtype = NULL) {
@@ -3234,7 +3234,7 @@ Tensor$set("public", "mean", function(dim, keepdim = FALSE, dtype = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "median", function(dim, keepdim = FALSE) {
@@ -3249,7 +3249,7 @@ Tensor$set("public", "median", function(dim, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "min", function(dim, other, keepdim = FALSE) {
@@ -3267,7 +3267,7 @@ Tensor$set("public", "min", function(dim, other, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "min_values", function(dim, keepdim = FALSE) {
@@ -3285,7 +3285,7 @@ Tensor$set("public", "min_values", function(dim, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "mm", function(mat2) {
@@ -3300,7 +3300,7 @@ Tensor$set("public", "mm", function(mat2) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "mode", function(dim = -1, keepdim = FALSE) {
@@ -3315,7 +3315,7 @@ Tensor$set("public", "mode", function(dim = -1, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "mul", function(other) {
@@ -3330,7 +3330,7 @@ Tensor$set("public", "mul", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "mul_", function(other) {
@@ -3345,7 +3345,7 @@ Tensor$set("public", "mul_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "multinomial", function(num_samples, replacement = FALSE, generator = NULL) {
@@ -3363,7 +3363,7 @@ Tensor$set("public", "multinomial", function(num_samples, replacement = FALSE, g
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "mv", function(vec) {
@@ -3378,7 +3378,7 @@ Tensor$set("public", "mv", function(vec) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "mvlgamma", function(p) {
@@ -3393,7 +3393,7 @@ Tensor$set("public", "mvlgamma", function(p) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "mvlgamma_", function(p) {
@@ -3408,7 +3408,7 @@ Tensor$set("public", "mvlgamma_", function(p) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "narrow", function(dim, start, length) {
@@ -3423,7 +3423,7 @@ Tensor$set("public", "narrow", function(dim, start, length) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "narrow_copy", function(dim, start, length) {
@@ -3438,7 +3438,7 @@ Tensor$set("public", "narrow_copy", function(dim, start, length) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "ne", function(other) {
@@ -3453,7 +3453,7 @@ Tensor$set("public", "ne", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "ne_", function(other) {
@@ -3468,7 +3468,7 @@ Tensor$set("public", "ne_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "neg", function() {
@@ -3483,7 +3483,7 @@ Tensor$set("public", "neg", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "neg_", function() {
@@ -3498,7 +3498,7 @@ Tensor$set("public", "neg_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "new_empty", function(size, options = list()) {
@@ -3513,7 +3513,7 @@ Tensor$set("public", "new_empty", function(size, options = list()) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "new_full", function(size, fill_value, options = list()) {
@@ -3531,7 +3531,7 @@ Tensor$set("public", "new_full", function(size, fill_value, options = list()) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "new_zeros", function(size, options = list()) {
@@ -3546,7 +3546,7 @@ Tensor$set("public", "new_zeros", function(size, options = list()) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "nonzero", function() {
@@ -3561,7 +3561,7 @@ Tensor$set("public", "nonzero", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "nonzero_numpy", function() {
@@ -3576,7 +3576,7 @@ Tensor$set("public", "nonzero_numpy", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "norm", function(p = 2, dim, keepdim = FALSE, dtype) {
@@ -3591,7 +3591,7 @@ Tensor$set("public", "norm", function(p = 2, dim, keepdim = FALSE, dtype) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "normal_", function(mean = 0, std = 1, generator = NULL) {
@@ -3606,7 +3606,7 @@ Tensor$set("public", "normal_", function(mean = 0, std = 1, generator = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "numpy_T", function() {
@@ -3621,7 +3621,7 @@ Tensor$set("public", "numpy_T", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "orgqr", function(input2) {
@@ -3636,7 +3636,7 @@ Tensor$set("public", "orgqr", function(input2) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "ormqr", function(input2, input3, left = TRUE, transpose = FALSE) {
@@ -3654,7 +3654,7 @@ Tensor$set("public", "ormqr", function(input2, input3, left = TRUE, transpose = 
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "output_nr", function() {
@@ -3669,7 +3669,7 @@ Tensor$set("public", "output_nr", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "permute", function(dims) {
@@ -3684,7 +3684,7 @@ Tensor$set("public", "permute", function(dims) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "pin_memory", function() {
@@ -3699,7 +3699,7 @@ Tensor$set("public", "pin_memory", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "pinverse", function(rcond = 0.000000) {
@@ -3714,7 +3714,7 @@ Tensor$set("public", "pinverse", function(rcond = 0.000000) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "polygamma", function(n) {
@@ -3729,7 +3729,7 @@ Tensor$set("public", "polygamma", function(n) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "polygamma_", function(n) {
@@ -3744,7 +3744,7 @@ Tensor$set("public", "polygamma_", function(n) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "pow", function(exponent) {
@@ -3759,7 +3759,7 @@ Tensor$set("public", "pow", function(exponent) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "pow_", function(exponent) {
@@ -3774,7 +3774,7 @@ Tensor$set("public", "pow_", function(exponent) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "prelu", function(weight) {
@@ -3789,7 +3789,7 @@ Tensor$set("public", "prelu", function(weight) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "prelu_backward", function(grad_output, weight) {
@@ -3804,7 +3804,7 @@ Tensor$set("public", "prelu_backward", function(grad_output, weight) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "prod", function(dim, keepdim = FALSE, dtype = NULL) {
@@ -3822,7 +3822,7 @@ Tensor$set("public", "prod", function(dim, keepdim = FALSE, dtype = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "put_", function(index, source, accumulate = FALSE) {
@@ -3837,7 +3837,7 @@ Tensor$set("public", "put_", function(index, source, accumulate = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "q_per_channel_axis", function() {
@@ -3852,7 +3852,7 @@ Tensor$set("public", "q_per_channel_axis", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "q_per_channel_scales", function() {
@@ -3867,7 +3867,7 @@ Tensor$set("public", "q_per_channel_scales", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "q_per_channel_zero_points", function() {
@@ -3882,7 +3882,7 @@ Tensor$set("public", "q_per_channel_zero_points", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "q_scale", function() {
@@ -3897,7 +3897,7 @@ Tensor$set("public", "q_scale", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "q_zero_point", function() {
@@ -3912,7 +3912,7 @@ Tensor$set("public", "q_zero_point", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "qr", function(some = TRUE) {
@@ -3927,7 +3927,7 @@ Tensor$set("public", "qr", function(some = TRUE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "qscheme", function() {
@@ -3942,7 +3942,7 @@ Tensor$set("public", "qscheme", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "random_", function(from, to, generator = NULL) {
@@ -3957,7 +3957,7 @@ Tensor$set("public", "random_", function(from, to, generator = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "real", function() {
@@ -3972,7 +3972,7 @@ Tensor$set("public", "real", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "reciprocal", function() {
@@ -3987,7 +3987,7 @@ Tensor$set("public", "reciprocal", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "reciprocal_", function() {
@@ -4002,7 +4002,7 @@ Tensor$set("public", "reciprocal_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "refine_names", function(names) {
@@ -4017,7 +4017,7 @@ Tensor$set("public", "refine_names", function(names) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "relu", function() {
@@ -4032,7 +4032,7 @@ Tensor$set("public", "relu", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "relu_", function() {
@@ -4047,7 +4047,7 @@ Tensor$set("public", "relu_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "remainder", function(other) {
@@ -4062,7 +4062,7 @@ Tensor$set("public", "remainder", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "remainder_", function(other) {
@@ -4077,7 +4077,7 @@ Tensor$set("public", "remainder_", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "rename", function(names) {
@@ -4092,7 +4092,7 @@ Tensor$set("public", "rename", function(names) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "rename_", function(names) {
@@ -4107,7 +4107,7 @@ Tensor$set("public", "rename_", function(names) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "renorm", function(p, dim, maxnorm) {
@@ -4122,7 +4122,7 @@ Tensor$set("public", "renorm", function(p, dim, maxnorm) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "renorm_", function(p, dim, maxnorm) {
@@ -4137,7 +4137,7 @@ Tensor$set("public", "renorm_", function(p, dim, maxnorm) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "repeat", function(repeats) {
@@ -4152,7 +4152,7 @@ Tensor$set("public", "repeat", function(repeats) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "repeat_interleave", function(repeats, dim = NULL) {
@@ -4167,7 +4167,7 @@ Tensor$set("public", "repeat_interleave", function(repeats, dim = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "requires_grad_", function(requires_grad = TRUE) {
@@ -4182,7 +4182,7 @@ Tensor$set("public", "requires_grad_", function(requires_grad = TRUE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "reshape", function(shape) {
@@ -4197,7 +4197,7 @@ Tensor$set("public", "reshape", function(shape) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "reshape_as", function(other) {
@@ -4212,7 +4212,7 @@ Tensor$set("public", "reshape_as", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "resize_", function(size, memory_format = NULL) {
@@ -4227,7 +4227,7 @@ Tensor$set("public", "resize_", function(size, memory_format = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "resize_as_", function(the_template, memory_format = NULL) {
@@ -4242,7 +4242,7 @@ Tensor$set("public", "resize_as_", function(the_template, memory_format = NULL) 
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "rfft", function(signal_ndim, normalized = FALSE, onesided = TRUE) {
@@ -4260,7 +4260,7 @@ Tensor$set("public", "rfft", function(signal_ndim, normalized = FALSE, onesided 
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "roll", function(shifts, dims = list()) {
@@ -4275,7 +4275,7 @@ Tensor$set("public", "roll", function(shifts, dims = list()) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "rot90", function(k = 1, dims = c(0, 1)) {
@@ -4290,7 +4290,7 @@ Tensor$set("public", "rot90", function(k = 1, dims = c(0, 1)) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "round", function() {
@@ -4305,7 +4305,7 @@ Tensor$set("public", "round", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "round_", function() {
@@ -4320,7 +4320,7 @@ Tensor$set("public", "round_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "rsqrt", function() {
@@ -4335,7 +4335,7 @@ Tensor$set("public", "rsqrt", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "rsqrt_", function() {
@@ -4350,7 +4350,7 @@ Tensor$set("public", "rsqrt_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "scatter", function(dim, index, src, value) {
@@ -4368,7 +4368,7 @@ Tensor$set("public", "scatter", function(dim, index, src, value) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "scatter_", function(dim, index, src, value) {
@@ -4386,7 +4386,7 @@ Tensor$set("public", "scatter_", function(dim, index, src, value) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "scatter_add", function(dim, index, src) {
@@ -4404,7 +4404,7 @@ Tensor$set("public", "scatter_add", function(dim, index, src) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "scatter_add_", function(dim, index, src) {
@@ -4419,7 +4419,7 @@ Tensor$set("public", "scatter_add_", function(dim, index, src) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "select", function(dim, index) {
@@ -4434,7 +4434,7 @@ Tensor$set("public", "select", function(dim, index) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "set_", function(source, storage_offset, size, stride = list()) {
@@ -4452,7 +4452,7 @@ Tensor$set("public", "set_", function(source, storage_offset, size, stride = lis
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "set_data", function(new_data) {
@@ -4467,7 +4467,7 @@ Tensor$set("public", "set_data", function(new_data) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "set_quantizer_", function(quantizer) {
@@ -4482,7 +4482,7 @@ Tensor$set("public", "set_quantizer_", function(quantizer) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sigmoid", function() {
@@ -4497,7 +4497,7 @@ Tensor$set("public", "sigmoid", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sigmoid_", function() {
@@ -4512,7 +4512,7 @@ Tensor$set("public", "sigmoid_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sign", function() {
@@ -4527,7 +4527,7 @@ Tensor$set("public", "sign", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sign_", function() {
@@ -4542,7 +4542,7 @@ Tensor$set("public", "sign_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sin", function() {
@@ -4557,7 +4557,7 @@ Tensor$set("public", "sin", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sin_", function() {
@@ -4572,7 +4572,7 @@ Tensor$set("public", "sin_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sinh", function() {
@@ -4587,7 +4587,7 @@ Tensor$set("public", "sinh", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sinh_", function() {
@@ -4602,7 +4602,7 @@ Tensor$set("public", "sinh_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "size", function(dim) {
@@ -4617,7 +4617,7 @@ Tensor$set("public", "size", function(dim) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "slice", function(dim = 0, start = 0, end = 9223372036854775807, step = 1) {
@@ -4635,7 +4635,7 @@ Tensor$set("public", "slice", function(dim = 0, start = 0, end = 922337203685477
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "slogdet", function() {
@@ -4650,7 +4650,7 @@ Tensor$set("public", "slogdet", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "smm", function(mat2) {
@@ -4665,7 +4665,7 @@ Tensor$set("public", "smm", function(mat2) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "softmax", function(dim, dtype = NULL) {
@@ -4680,7 +4680,7 @@ Tensor$set("public", "softmax", function(dim, dtype = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "solve", function(A) {
@@ -4695,7 +4695,7 @@ Tensor$set("public", "solve", function(A) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sort", function(dim = -1, descending = FALSE) {
@@ -4710,7 +4710,7 @@ Tensor$set("public", "sort", function(dim = -1, descending = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sparse_dim", function() {
@@ -4725,7 +4725,7 @@ Tensor$set("public", "sparse_dim", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sparse_mask", function(mask) {
@@ -4740,7 +4740,7 @@ Tensor$set("public", "sparse_mask", function(mask) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sparse_resize_", function(size, sparse_dim, dense_dim) {
@@ -4758,7 +4758,7 @@ Tensor$set("public", "sparse_resize_", function(size, sparse_dim, dense_dim) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sparse_resize_and_clear_", function(size, sparse_dim, dense_dim) {
@@ -4776,7 +4776,7 @@ Tensor$set("public", "sparse_resize_and_clear_", function(size, sparse_dim, dens
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "split", function(split_size, dim = 0) {
@@ -4791,7 +4791,7 @@ Tensor$set("public", "split", function(split_size, dim = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "split_with_sizes", function(split_sizes, dim = 0) {
@@ -4806,7 +4806,7 @@ Tensor$set("public", "split_with_sizes", function(split_sizes, dim = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sqrt", function() {
@@ -4821,7 +4821,7 @@ Tensor$set("public", "sqrt", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sqrt_", function() {
@@ -4836,7 +4836,7 @@ Tensor$set("public", "sqrt_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "squeeze", function(dim) {
@@ -4851,7 +4851,7 @@ Tensor$set("public", "squeeze", function(dim) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "squeeze_", function(dim) {
@@ -4866,7 +4866,7 @@ Tensor$set("public", "squeeze_", function(dim) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sspaddmm", function(mat1, mat2, beta = 1, alpha = 1) {
@@ -4884,7 +4884,7 @@ Tensor$set("public", "sspaddmm", function(mat1, mat2, beta = 1, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "std", function(dim, unbiased = TRUE, keepdim = FALSE) {
@@ -4902,7 +4902,7 @@ Tensor$set("public", "std", function(dim, unbiased = TRUE, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "stft", function(n_fft, hop_length = NULL, win_length = NULL, window = list(), normalized = FALSE, onesided = TRUE) {
@@ -4921,7 +4921,7 @@ Tensor$set("public", "stft", function(n_fft, hop_length = NULL, win_length = NUL
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "stride", function(dim) {
@@ -4936,7 +4936,7 @@ Tensor$set("public", "stride", function(dim) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sub", function(other, alpha = 1) {
@@ -4951,7 +4951,7 @@ Tensor$set("public", "sub", function(other, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sub_", function(other, alpha = 1) {
@@ -4966,7 +4966,7 @@ Tensor$set("public", "sub_", function(other, alpha = 1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sum", function(dim, keepdim = FALSE, dtype = NULL) {
@@ -4984,7 +4984,7 @@ Tensor$set("public", "sum", function(dim, keepdim = FALSE, dtype = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "sum_to_size", function(size) {
@@ -4999,7 +4999,7 @@ Tensor$set("public", "sum_to_size", function(size) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "svd", function(some = TRUE, compute_uv = TRUE) {
@@ -5014,7 +5014,7 @@ Tensor$set("public", "svd", function(some = TRUE, compute_uv = TRUE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "symeig", function(eigenvectors = FALSE, upper = TRUE) {
@@ -5029,7 +5029,7 @@ Tensor$set("public", "symeig", function(eigenvectors = FALSE, upper = TRUE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "t", function() {
@@ -5044,7 +5044,7 @@ Tensor$set("public", "t", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "t_", function() {
@@ -5059,7 +5059,7 @@ Tensor$set("public", "t_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "take", function(index) {
@@ -5074,7 +5074,7 @@ Tensor$set("public", "take", function(index) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "tan", function() {
@@ -5089,7 +5089,7 @@ Tensor$set("public", "tan", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "tan_", function() {
@@ -5104,7 +5104,7 @@ Tensor$set("public", "tan_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "tanh", function() {
@@ -5119,7 +5119,7 @@ Tensor$set("public", "tanh", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "tanh_", function() {
@@ -5134,7 +5134,7 @@ Tensor$set("public", "tanh_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "to", function(device, options, other, dtype, non_blocking = FALSE, copy = FALSE, memory_format = NULL) {
@@ -5153,7 +5153,7 @@ Tensor$set("public", "to", function(device, options, other, dtype, non_blocking 
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "to_dense", function() {
@@ -5168,7 +5168,7 @@ Tensor$set("public", "to_dense", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "to_mkldnn", function() {
@@ -5183,7 +5183,7 @@ Tensor$set("public", "to_mkldnn", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "to_sparse", function(sparse_dim) {
@@ -5198,7 +5198,7 @@ Tensor$set("public", "to_sparse", function(sparse_dim) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "topk", function(k, dim = -1, largest = TRUE, sorted = TRUE) {
@@ -5216,7 +5216,7 @@ Tensor$set("public", "topk", function(k, dim = -1, largest = TRUE, sorted = TRUE
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "trace", function() {
@@ -5231,7 +5231,7 @@ Tensor$set("public", "trace", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "transpose", function(dim0, dim1) {
@@ -5249,7 +5249,7 @@ Tensor$set("public", "transpose", function(dim0, dim1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "transpose_", function(dim0, dim1) {
@@ -5264,7 +5264,7 @@ Tensor$set("public", "transpose_", function(dim0, dim1) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "triangular_solve", function(A, upper = TRUE, transpose = FALSE, unitriangular = FALSE) {
@@ -5282,7 +5282,7 @@ Tensor$set("public", "triangular_solve", function(A, upper = TRUE, transpose = F
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "tril", function(diagonal = 0) {
@@ -5297,7 +5297,7 @@ Tensor$set("public", "tril", function(diagonal = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "tril_", function(diagonal = 0) {
@@ -5312,7 +5312,7 @@ Tensor$set("public", "tril_", function(diagonal = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "triu", function(diagonal = 0) {
@@ -5327,7 +5327,7 @@ Tensor$set("public", "triu", function(diagonal = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "triu_", function(diagonal = 0) {
@@ -5342,7 +5342,7 @@ Tensor$set("public", "triu_", function(diagonal = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "trunc", function() {
@@ -5357,7 +5357,7 @@ Tensor$set("public", "trunc", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "trunc_", function() {
@@ -5372,7 +5372,7 @@ Tensor$set("public", "trunc_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "type_as", function(other) {
@@ -5387,7 +5387,7 @@ Tensor$set("public", "type_as", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "unbind", function(dim = 0) {
@@ -5402,7 +5402,7 @@ Tensor$set("public", "unbind", function(dim = 0) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "unflatten", function(dim, sizes, names) {
@@ -5420,7 +5420,7 @@ Tensor$set("public", "unflatten", function(dim, sizes, names) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "unfold", function(dimension, size, step) {
@@ -5438,7 +5438,7 @@ Tensor$set("public", "unfold", function(dimension, size, step) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "uniform_", function(from = 0, to = 1, generator = NULL) {
@@ -5453,7 +5453,7 @@ Tensor$set("public", "uniform_", function(from = 0, to = 1, generator = NULL) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "unsqueeze", function(dim) {
@@ -5468,7 +5468,7 @@ Tensor$set("public", "unsqueeze", function(dim) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "unsqueeze_", function(dim) {
@@ -5483,7 +5483,7 @@ Tensor$set("public", "unsqueeze_", function(dim) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "values", function() {
@@ -5498,7 +5498,7 @@ Tensor$set("public", "values", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "var", function(dim, unbiased = TRUE, keepdim = FALSE) {
@@ -5516,7 +5516,7 @@ Tensor$set("public", "var", function(dim, unbiased = TRUE, keepdim = FALSE) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "view", function(size) {
@@ -5531,7 +5531,7 @@ Tensor$set("public", "view", function(size) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "view_as", function(other) {
@@ -5546,7 +5546,7 @@ Tensor$set("public", "view_as", function(other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "where", function(condition, other) {
@@ -5561,7 +5561,7 @@ Tensor$set("public", "where", function(condition, other) {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
 Tensor$set("public", "zero_", function() {
@@ -5576,6 +5576,6 @@ Tensor$set("public", "zero_", function() {
     expected_types = expected_types,
     nd_args = nd_args,
     return_types = return_types,
-    fun_type = "namespace"
+    fun_type = "method"
   )
 })
