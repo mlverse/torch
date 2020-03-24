@@ -76,6 +76,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("Generator *" %in% expected_types && is.null(obj))
     return(list(.generator_null$ptr, "Generator *"))
   
+  if ("Scalar" %in% expected_types && is.null(obj)) 
+    return(list(cpp_nullopt(), "Scalar"))
+  
   stop("Can't convert argument", call.=FALSE)
 }
 
@@ -132,7 +135,7 @@ to_return_type <- function(res, types) {
       return(Tensor$new(ptr = res))
     
     if (dtype == "TensorList")
-      return(TensorList$new(ptr = res))
+      return(TensorList$new(ptr = res)$to_r())
     
     browser()
   }
