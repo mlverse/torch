@@ -30,6 +30,11 @@ void *lantern_int64_t(int64_t x)
   return (void *)new LanternObject<int64_t>(x);
 }
 
+void *lantern_double(double x)
+{
+  return (void *)new LanternObject<double>(x);
+}
+
 void *lantern_bool(bool x)
 {
   return (void *)new LanternObject<bool>(x);
