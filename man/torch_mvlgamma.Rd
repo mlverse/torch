@@ -28,7 +28,7 @@ is thrown.
 
 \examples{
 
-a = torch_empty(2, 3)$uniform_list(1, 2)
+a = torch_empty(c(2, 3))$uniform_(1, 2)
 a
 torch_mvlgamma(a, 2)
 }

@@ -22,7 +22,7 @@ and 1.
 
 \examples{
 
-x = torch_randn(())
+x = torch_randn(c(2,3))
 x
 torch_t(x)
 x = torch_randn(c(3))

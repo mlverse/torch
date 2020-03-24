@@ -27,5 +27,5 @@ of \code{input}.
 
 a = torch_rand(5)
 a
-torch_log10list(a)
+torch_log10(a)
 }

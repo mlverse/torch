@@ -33,7 +33,7 @@ the shapes of \code{weight}, \code{start}, and \code{end} must be broadcastable 
 \examples{
 
 start = torch_arange(1., 5.)
-end = torch_empty(4)$fill_list(10)
+end = torch_empty(4)$fill_(10)
 start
 end
 torch_lerp(start, end, 0.5)

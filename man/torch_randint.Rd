@@ -41,7 +41,7 @@ a tensor with dtype \code{torch_int64}.
 
 \examples{
 
-torch_randint(3, 5, list(3,))
-torch_randint(10, list(2, 2))
+torch_randint(3, 5, list(3))
+torch_randint(high = 10, size = list(2, 2))
 torch_randint(3, 10, list(2, 2))
 }

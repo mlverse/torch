@@ -24,7 +24,6 @@ expanding the \eqn{i} \code{th} input over dimensions defined by other inputs.
 
 x = torch_tensor(c(1, 2, 3))
 y = torch_tensor(c(4, 5, 6))
-grid_x, grid_y = torch_meshgrid(x, y)
-grid_x
-grid_y
+out = torch_meshgrid(list(x, y))
+out
 }

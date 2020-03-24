@@ -25,5 +25,5 @@ broadcastable  with the first argument.
 
 \examples{
 
-torch_gt(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
+torch_gt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 }

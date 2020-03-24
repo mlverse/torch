@@ -28,18 +28,11 @@ Returns the matrix norm or vector norm of a given tensor.
 
 \examples{
 
-import torch
-a = torch_arange(9, dtype= torch_float) - 4
+a = torch_arange(end = 9, options = list(dtype= torch_float()))
 b = a$reshape(list(3, 3))
 torch_norm(a)
 torch_norm(b)
 torch_norm(a, Inf)
 torch_norm(b, Inf)
-c = torch_tensor(c([ 1, 2, 3],[-1, 1, 4]) , dtype= torch_float)
-torch_norm(c, dim=0)
-torch_norm(c, dim=1)
-torch_norm(c, p=1, dim=1)
-d = torch_arange(8, dtype= torch_float)$reshape(2,2,2)
-torch_norm(d, dim=list(1,2))
-torch_norm(dc(0, :, :)), torch_norm(dc(1, :, :))
+
 }

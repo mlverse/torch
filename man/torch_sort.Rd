@@ -35,10 +35,8 @@ sorted values and \code{indices} are the indices of the elements in the original
 \examples{
 
 x = torch_randn(c(3, 4))
-sorted, indices = torch_sort(x)
-sorted
-indices
-sorted, indices = torch_sort(x, 0)
-sorted
-indices
+out = torch_sort(x)
+out
+out = torch_sort(x, 0)
+out
 }

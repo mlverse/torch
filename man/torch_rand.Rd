@@ -32,5 +32,5 @@ The shape of the tensor is defined by the variable argument \code{size}.
 \examples{
 
 torch_rand(4)
-torch_rand(2, 3)
+torch_rand(c(2, 3))
 }

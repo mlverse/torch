@@ -22,7 +22,7 @@ Flattens a contiguous range of dims in a tensor.
 
 \examples{
 
-t = torch_tensor(c([[1, 2),
+t = torch_tensor(matrix(c(1, 2), ncol = 2))
 torch_flatten(t)
 torch_flatten(t, start_dim=1)
 }

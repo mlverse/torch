@@ -55,8 +55,4 @@ value, it is treated as a one-dimensional tensor with one element.
 \examples{
 
 torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)))
-torch_nonzero(torch_tensor(c([0.6, 0.0, 0.0, 0.0),
-torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)), as_tuple=TRUE)
-torch_nonzero(torch_tensor(c([0.6, 0.0, 0.0, 0.0),
-torch_nonzero(torch_tensor(5), as_tuple=TRUE)
 }

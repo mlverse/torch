@@ -66,6 +66,6 @@ torch_fft(x, 2)
 torch_fft(x, 1)
 # arbitrary number of batch dimensions, 2D FFT
 x = torch_randn(c(3, 3, 5, 5, 2))
-y = torch_fft(x, 2)
-y$shape
+torch_fft(x, 2)
+
 }

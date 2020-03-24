@@ -137,6 +137,9 @@ to_return_type <- function(res, types) {
     if (dtype == "TensorList")
       return(TensorList$new(ptr = res)$to_r())
     
+    if (dtype == "ScalarType")
+      return(torch_dtype$new(ptr = res))
+    
     browser()
   }
   
@@ -157,9 +160,15 @@ to_return_type <- function(res, types) {
       
     }
     
-  } 
+  } else if (length(types) > 1){
+    
+    out <- seq_along(res) %>% 
+      lapply(function(x) to_return_type(res[[x]], types[x]))
+    
+    return(out)
+  }
   
-  browser()
+
 }
 
 call_c_function <- function(fun_name, args, expected_types, nd_args, return_types, fun_type) {

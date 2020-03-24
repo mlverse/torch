@@ -37,13 +37,9 @@ Otherwise, if \code{some} is \code{False}, this function returns the complete QR
 \examples{
 
 a = torch_tensor(matrix(c(12., -51, 4, 6, 167, -68, -4, 24, -41), ncol = 3, byrow = TRUE))
-q, r = torch_qr(a)
-q
-r
+out = torch_qr(a)
+q = out[[1]]
+r = out[[2]]
 torch_mm(q, r)$round()
 torch_mm(q$t(), q)$round()
-a = torch_randn(c(3, 4, 5))
-q, r = torch_qr(a, some=FALSE)
-torch_allclose(torch_matmul(q, r), a)
-torch_allclose(torch_matmul(q$transpose(-2, -1), q), torch_eye(5))
 }

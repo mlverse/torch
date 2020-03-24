@@ -22,7 +22,5 @@ Returns a tuple of all slices along a given dimension, already without it.
 
 \examples{
 
-torch_unbind(torch_tensor(c([1, 2, 3),
-                           c(4, 5, 6),
-                           c(7, 8, 9])))
+torch_unbind(torch_tensor(matrix(1:9, ncol = 3, byrow=TRUE)))
 }

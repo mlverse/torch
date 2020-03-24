@@ -23,6 +23,7 @@ Computes the element-wise real value of the given \code{input} tensor.
 }
 
 \examples{
-
+\dontrun{
 torch_real(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+}
 }

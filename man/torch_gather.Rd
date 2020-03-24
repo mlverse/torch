@@ -37,6 +37,6 @@ and \code{out} will have the same size as \code{index}.
 
 \examples{
 
-t = torch_tensor(c([1,2],[3,4]))
-torch_gather(t, 1, torch_tensor(c([0,0],[1,0])))
+t = torch_tensor(matrix(c(1,2,3,4), ncol = 2, byrow = TRUE))
+torch_gather(t, 1, torch_tensor(matrix(c(0,0,1,0), ncol = 2, byrow=TRUE), dtype = torch_int64()))
 }

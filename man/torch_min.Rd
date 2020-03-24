@@ -68,12 +68,12 @@ torch_min(a)
 
 a = torch_randn(c(4, 4))
 a
-torch_min(a, 1)
+torch_min(a, dim = 1)
 
 
 a = torch_randn(c(4))
 a
 b = torch_randn(c(4))
 b
-torch_min(a, b)
+torch_min(a, other = b)
 }

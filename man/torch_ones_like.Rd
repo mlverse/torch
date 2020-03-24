@@ -35,6 +35,6 @@ the old \code{torch_ones_like(input, out=output)} is equivalent to
 
 \examples{
 
-input = torch_empty(2, 3)
+input = torch_empty(c(2, 3))
 torch_ones_like(input)
 }

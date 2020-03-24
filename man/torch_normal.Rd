@@ -61,7 +61,8 @@ among all drawn elements. The resulting tensor has size given by \code{size}.
 
 \examples{
 
-torch_normal(mean=torch_arange(1., 11.), std=torch_arange(1, 0, -0.1))
+\dontrun{
+torch_normal(mean=0, std=torch_arange(1, 0, -0.1))
 
 
 torch_normal(mean=0.5, std=torch_arange(1., 6.))
@@ -71,4 +72,5 @@ torch_normal(mean=torch_arange(1., 6.))
 
 
 torch_normal(2, 3, size=list(1, 4))
+}
 }

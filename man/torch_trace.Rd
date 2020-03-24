@@ -15,7 +15,7 @@ Returns the sum of the elements of the diagonal of the input 2-D matrix.
 
 \examples{
 
-x = torch_arange(1., 10.)$view(3, 3)
+x = torch_arange(1., 10.)$view(c(3, 3))
 x
 torch_trace(x)
 }

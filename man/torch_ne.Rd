@@ -25,5 +25,5 @@ broadcastable  with the first argument.
 
 \examples{
 
-torch_ne(torch_tensor(c([1, 2], [3, 4])), torch_tensor(c([1, 1], [4, 4])))
+torch_ne(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(rep(c(1,4), each = 2), ncol = 2, byrow=TRUE)))
 }

@@ -78,14 +78,9 @@ For CPU tensors, this method is currently only available with MKL. Use
 \examples{
 
 x = torch_randn(c(4, 4))
-torch_rfft(x, 2, onesided=TRUE)$shape
-    >>>
-# notice that with onesided=TRUE, output size does not determine the original signal size
+torch_rfft(x, 2, onesided=TRUE)
 x = torch_randn(c(4, 5))
-torch_rfft(x, 2, onesided=TRUE)$shape
-    >>>
-# now we use the original shape to recover x
-x
+torch_rfft(x, 2, onesided=TRUE)
 y = torch_rfft(x, 2, onesided=TRUE)
-torch_irfft(y, 2, onesided=TRUE, signal_sizes=x$shape)  # recover x
+torch_irfft(y, 2, onesided=TRUE, signal_sizes=c(4,5))  # recover x
 }

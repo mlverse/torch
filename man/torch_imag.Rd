@@ -23,6 +23,7 @@ Computes the element-wise imag value of the given \code{input} tensor.
 }
 
 \examples{
-
+\dontrun{
 torch_imag(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+}
 }

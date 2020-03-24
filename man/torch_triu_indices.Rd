@@ -44,11 +44,12 @@ prevent overflow during calculation.
 }
 
 \examples{
-
+\dontrun{
 a = torch_triu_indices(3, 3)
 a
 a = torch_triu_indices(4, 3, -1)
 a
 a = torch_triu_indices(4, 3, 1)
 a
+}
 }

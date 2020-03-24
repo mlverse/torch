@@ -39,8 +39,7 @@ in the output tensors having 1 fewer dimension than \code{input}.
 
 \examples{
 
-a = torch_randint(10, list(5,))
+a = torch_randint(high = 50, size = list(5))
 a
-b = a + list(torch_randn(c(50, 1)) * 5)$long()
-torch_mode(b, 0)
+torch_mode(a, 0)
 }

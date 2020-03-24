@@ -37,7 +37,7 @@ of \code{index}; other dimensions have the same size as in the original tensor.
 
 x = torch_randn(c(3, 4))
 x
-indices = torch_tensor(c(0, 2))
+indices = torch_tensor(c(0, 2), dtype = torch_int64())
 torch_index_select(x, 0, indices)
 torch_index_select(x, 1, indices)
 }

@@ -33,7 +33,4 @@ is the epsilon value for the datatype of \code{input}.
 
 a = torch_eye(10)
 torch_matrix_rank(a)
-b = torch_eye(10)
-bc(0, 0) = 0
-torch_matrix_rank(b)
 }

@@ -26,8 +26,8 @@ individual inverses.
 }
 
 \examples{
-
-x = torch_rand(4, 4)
+\dontrun{
+x = torch_rand(c(4, 4))
 y = torch_inverse(x)
 z = torch_mm(x, y)
 z
@@ -37,4 +37,5 @@ x = torch_randn(c(2, 3, 4, 4))
 y = torch_inverse(x)
 z = torch_matmul(x, y)
 torch_max(torch_abs(z - torch_eye(4)$expand_as(x))) # Max non-zero
+}
 }

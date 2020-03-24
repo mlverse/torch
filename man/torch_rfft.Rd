@@ -64,6 +64,6 @@ For CPU tensors, this method is currently only available with MKL. Use
 \examples{
 
 x = torch_randn(c(5, 5))
-torch_rfft(x, 2)$shape
-torch_rfft(x, 2, onesided=FALSE)$shape
+torch_rfft(x, 2)
+torch_rfft(x, 2, onesided=FALSE)
 }
