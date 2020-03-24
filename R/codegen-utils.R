@@ -70,8 +70,11 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("MemoryFormat" %in% expected_types && is.null(obj))
     return(list(cpp_nullopt(), "MemoryFormat"))
   
+  if ("Generator *" %in% expected_types && is_torch_generator(obj))
+    return(list(obj$ptr, "Generator *"))
+  
   if ("Generator *" %in% expected_types && is.null(obj))
-    return(list(cpp_nullopt(), "Generator *"))
+    return(list(.generator_null$ptr, "Generator *"))
   
   stop("Can't convert argument", call.=FALSE)
 }
