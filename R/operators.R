@@ -43,5 +43,14 @@
   torch_lt(e1, e2)
 }
 
+#' @export
+`==.torch_tensor` <- function(e1, e2) {
+  torch_eq(e1, e2)
+}
+
+#' @export
+`!=.torch_tensor` <- function(e1, e2) {
+  torch_ne(e1, e2)
+}
 
 

@@ -68,3 +68,17 @@ test_that("<= works", {
   expect_equal_to_r(y <= 2, c(TRUE, FALSE))
   expect_equal_to_r(2 <= y, c(TRUE, TRUE))
 })
+
+test_that("== works", {
+  x <- torch_tensor(c(1,2))
+  y <- torch_tensor(c(2,2))
+  expect_equal_to_r(x == y, c(FALSE, TRUE))
+  expect_equal_to_r(x == 2, c(FALSE, TRUE))
+})
+
+test_that("!= works", {
+  x <- torch_tensor(c(1,2))
+  y <- torch_tensor(c(2,2))
+  expect_equal_to_r(x != y, c(TRUE, FALSE))
+  expect_equal_to_r(x != 2, c(TRUE, FALSE))
+})
