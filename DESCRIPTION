@@ -47,6 +47,7 @@ Collate:
     'lantern_sync.R'
     'layout.R'
     'memory_format.R'
+    'operators.R'
     'package.R'
     'qscheme.R'
     'reduction.R'

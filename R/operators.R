@@ -1,0 +1,47 @@
+#' @export
+`+.torch_tensor` <- function(e1, e2) {
+  torch_add(e1, e2)
+}
+
+#' @export
+`-.torch_tensor` <- function(e1, e2) {
+  torch_sub(e1, e2)
+}
+
+#' @export
+`*.torch_tensor` <- function(e1, e2) {
+  torch_mul(e1, e2)
+}
+
+#' @export
+`/.torch_tensor` <- function(e1, e2) {
+  torch_div(e1, e2)
+}
+
+#' @export
+`^.torch_tensor` <- function(e1, e2) {
+  torch_pow(e1, e2)
+}
+
+#' @export
+`>=.torch_tensor` <- function(e1, e2) {
+  torch_ge(e1, e2)
+}
+
+#' @export
+`>.torch_tensor` <- function(e1, e2) {
+  torch_gt(e1, e2)
+}
+
+#' @export
+`<=.torch_tensor` <- function(e1, e2) {
+  torch_le(e1, e2)
+}
+
+#' @export
+`<.torch_tensor` <- function(e1, e2) {
+  torch_lt(e1, e2)
+}
+
+
+
