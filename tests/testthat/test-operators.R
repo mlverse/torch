@@ -97,4 +97,5 @@ test_that("[ works", {
   x <- torch_randn(c(10,10,10))
   expect_equal(as_array(x[0,0,0]), as_array(x)[1,1,1])
   expect_equal(as_array(x[0,,]), as_array(x)[1,,])  
+  expect_equal(as_array(x[0:5,,]), as_array(x)[1:5,,])  
 })

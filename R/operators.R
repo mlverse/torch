@@ -64,15 +64,33 @@ length.torch_tensor <- function(x) {
 }
 
 slice_dim <- function(x, dim, s) {
-  if (is.name(s)) {
+  if (length(s) == 1 && all(is.na(s)))
     return(x)
-  } else if (length(s) == 1)
+  
+  if (length(s) == 1)
     return(torch_select(x, dim = dim, index = s))
+  
+  if (inherits(s, "slice"))
+    return(torch_slice(x, dim, s$start, s$end))
 }
+
+.d <- list(
+  `:` = function(x, y) {
+    e <- list(start = x, end = y)
+    attr(e, "class") <- "slice"
+    e
+  }
+)
 
 #' @export
 `[.torch_tensor` <- function(x, ...) {
-  slices <- rlang::dots_list(..., .preserve_empty = TRUE, .ignore_empty = "none")
+  slices <- lazyeval::lazy_dots(...)
+  slices <- lapply(slices, function(x) {
+    if(is.name(x$expr)) 
+      NA 
+    else 
+      lazyeval::lazy_eval(x, data = .d)
+  })
   d <- dim(x)
   for (dim in seq_along(slices)) {
     x <- slice_dim(x, dim - 1 - (length(d) - length(dim(x))), slices[[dim]])
