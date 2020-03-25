@@ -85,7 +85,9 @@ slice_dim <- function(x, dim, s) {
     e <- list(start = x, end = y, step = 1)
     attr(e, "class") <- "slice"
     e
-  }
+  },
+  
+  N = .Machine$integer.max
 )
 
 #' @export

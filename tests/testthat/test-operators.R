@@ -99,4 +99,9 @@ test_that("[ works", {
   expect_equal(as_array(x[0,,]), as_array(x)[1,,])  
   expect_equal(as_array(x[0:5,,]), as_array(x)[1:5,,])
   expect_equal(as_array(x[0:9:2,,]), as_array(x)[seq(1,10, by = 2),,])
+  
+  x <- torch_tensor(0:9)
+  expect_equal(as_array(x[-1]), 9)
+  expect_equal(as_array(x[-2:10]), c(8,9))
+  expect_equal(as_array(x[2:N]), c(2:9))
 })
