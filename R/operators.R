@@ -64,15 +64,15 @@ length.torch_tensor <- function(x) {
 }
 
 slice_dim <- function(x, dim, s) {
-  if (length(s) == 1)
-    torch_select(x, dim = dim, index = s)
-  else
-    stop("hi")
+  if (is.name(s)) {
+    return(x)
+  } else if (length(s) == 1)
+    return(torch_select(x, dim = dim, index = s))
 }
 
 #' @export
 `[.torch_tensor` <- function(x, ...) {
-  slices <- list(...)
+  slices <- rlang::dots_list(..., .preserve_empty = TRUE, .ignore_empty = "none")
   d <- dim(x)
   for (dim in seq_along(slices)) {
     x <- slice_dim(x, dim - 1 - (length(d) - length(dim(x))), slices[[dim]])
