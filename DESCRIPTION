@@ -20,7 +20,8 @@ Imports:
     Rcpp,
     R6,
     withr,
-    rlang
+    rlang,
+    lazyeval
 RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 Suggests:
