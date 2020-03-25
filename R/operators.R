@@ -71,12 +71,18 @@ slice_dim <- function(x, dim, s) {
     return(torch_select(x, dim = dim, index = s))
   
   if (inherits(s, "slice"))
-    return(torch_slice(x, dim, s$start, s$end))
+    return(torch_slice(x, dim, s$start, s$end, s$step))
 }
 
 .d <- list(
   `:` = function(x, y) {
-    e <- list(start = x, end = y)
+    
+    if (inherits(x, "slice")) {
+      x$step <- y
+      return(x)
+    }
+    
+    e <- list(start = x, end = y, step = 1)
     attr(e, "class") <- "slice"
     e
   }
