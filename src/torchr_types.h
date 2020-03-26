@@ -140,3 +140,23 @@ public:
   }
 };
 
+template<class T>
+class nullable {
+public:
+  T x;
+  bool is_null = false;
+  nullable (Rcpp::Nullable<T> x) {
+    if (x.isNotNull()) {
+      this->x = Rcpp::as<T>(x);
+    } else {
+      this->is_null = true;
+    }
+  };
+  void* get () {
+    if (this->is_null)
+      return nullptr;
+    else
+      return &(this->x);
+  }
+};
+

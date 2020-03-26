@@ -112,7 +112,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "int64_t") {
-    declaration <- "int64_t"
+    declaration <- "nullable<int64_t>"
   }
 
   if (argument$dynamic_type == "double") {
@@ -223,7 +223,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "int64_t") {
-    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "double") {

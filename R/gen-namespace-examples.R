@@ -182,11 +182,9 @@ NULL
 #'
 #' @examples
 #'
-#' \dontrun{
 #' a = torch_randn(c(4, 4))
 #' a
 #' torch_argmin(a)
-#' }
 #'
 #'
 #' a = torch_randn(c(4, 4))
@@ -201,13 +199,12 @@ NULL
 #'
 #' @examples
 #'
-#' \dontrun{
 #' x = torch_randn(c(3, 3))
 #' x
 #' t = torch_as_strided(x, list(2, 2), list(1, 2))
 #' t
 #' t = torch_as_strided(x, list(2, 2), list(1, 2), 1)
-#' }
+#' t
 NULL
 # -> as_strided <-
 
@@ -1840,13 +1837,11 @@ NULL
 #' @name torch_unique_consecutive
 #'
 #' @examples
-#' \dontrun{
 #' x = torch_tensor(c(1, 1, 2, 2, 3, 1, 1, 2))
 #' output = torch_unique_consecutive(x)
 #' output
 #' torch_unique_consecutive(x, return_inverse=TRUE)
 #' torch_unique_consecutive(x, return_counts=TRUE)
-#' }
 NULL
 # -> unique_consecutive <-
 
@@ -2153,9 +2148,7 @@ NULL
 #' b = torch_randn(c(4, 3))
 #' b
 #' torch_cross(a, b, dim=1)
-#' \dontrun{
 #' torch_cross(a, b)
-#' }
 NULL
 # -> cross <-
 

@@ -37,11 +37,10 @@ advisable to use.
 
 \examples{
 
-\dontrun{
 x = torch_randn(c(3, 3))
 x
 t = torch_as_strided(x, list(2, 2), list(1, 2))
 t
 t = torch_as_strided(x, list(2, 2), list(1, 2), 1)
-}
+t
 }

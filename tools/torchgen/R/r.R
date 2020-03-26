@@ -321,7 +321,7 @@ r <- function(path) {
   namespace_nms <- purrr::map_chr(namespace, ~.x$name)
 
   namespace_code <- split(namespace, namespace_nms) %>%
-    purrr::map(~ .x %>% r_namespace() %>% styler::style_text()) %>%
+    purrr::map(~ .x %>% r_namespace()) %>%
     purrr::flatten_chr()
 
   namespace_code <- c(
@@ -337,7 +337,7 @@ r <- function(path) {
   methods_nms <- purrr::map_chr(methods, ~.x$name)
 
   methods_code <- split(methods, methods_nms) %>%
-    purrr::map(~ .x %>% r_method() %>% styler::style_text()) %>%
+    purrr::map(~ .x %>% r_method()) %>%
     purrr::flatten_chr()
 
   methods_code <- c(

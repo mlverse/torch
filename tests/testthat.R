@@ -1,4 +1,4 @@
 library(testthat)
-library(torch)
+library(torchr)
 
 test_check("torchr")

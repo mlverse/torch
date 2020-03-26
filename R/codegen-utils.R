@@ -79,6 +79,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("Scalar" %in% expected_types && is.null(obj)) 
     return(list(cpp_nullopt(), "Scalar"))
   
+  if ("int64_t" %in%  expected_types && is.null(obj))
+    return(list(NULL, "int64_t"))
+  
   stop("Can't convert argument", call.=FALSE)
 }
 
