@@ -8734,7 +8734,7 @@ fun_type = 'namespace'
 }
 
 
-torch_logical_not <- function(self) {
+.torch_logical_not <- function(self) {
   args <- rlang::env_get_list(nms = c("self"))
 expected_types <- list(self = "Tensor")
 nd_args <- "self"

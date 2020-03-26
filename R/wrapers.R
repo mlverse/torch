@@ -43,3 +43,7 @@ torch_lu <- function(A, pivot=TRUE, get_infos=FALSE, out=NULL) {
   else
     return(result[1:2])
 }
+
+torch_logical_not <- function(self) {
+  .torch_logical_not(self)
+}

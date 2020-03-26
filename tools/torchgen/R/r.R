@@ -81,8 +81,16 @@ r_namespace <- function(decls) {
 ")
 }
 
+# functions in this list are generated with a preciding '.' in their names so
+# wrapers can be defined around them.
+internal_funs <- c("logical_not")
+
 r_namespace_name <- function(decls) {
-  glue::glue("torch_{decls[[1]]$name}")
+  if (decls[[1]]$name %in% internal_funs) {
+    glue::glue(".torch_{decls[[1]]$name}")
+  } else {
+    glue::glue("torch_{decls[[1]]$name}")
+  }
 }
 
 r_namespace_signature <- function(decls) {
