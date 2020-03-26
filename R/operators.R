@@ -87,19 +87,40 @@ slice_dim <- function(x, dim, s) {
     e
   },
   
-  N = .Machine$integer.max
+  N = .Machine$integer.max, 
+  
+  `..` = structure(list(), class = "fill")
 )
 
 #' @export
 `[.torch_tensor` <- function(x, ...) {
   slices <- lazyeval::lazy_dots(...)
+  
   slices <- lapply(slices, function(x) {
-    if(is.name(x$expr)) 
+    if(rlang::is_missing(x$expr)) 
       NA 
     else 
       lazyeval::lazy_eval(x, data = .d)
   })
+  
+  browser()
+  
   d <- dim(x)
+  
+  
+  if (length(slices) <= length(d)) {
+    if (inherits(slices[[1]], "fill")) {
+      slices <- slices[-1]
+      a <- as.list(rep(NA, length(d) - length(slices)))
+      slices <- append(a, slices)
+    } else if (inherits(slices[[length(slices)]], "fill")) {
+      slices <- slices[-length(slices)]
+      a <- as.list(rep(NA, length(d) - length(slices)))
+      slices <- append(slices, a)
+    }
+  }
+  
+  
   for (dim in seq_along(slices)) {
     x <- slice_dim(x, dim - 1 - (length(d) - length(dim(x))), slices[[dim]])
   }

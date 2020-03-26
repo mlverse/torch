@@ -104,4 +104,10 @@ test_that("[ works", {
   expect_equal(as_array(x[-1]), 9)
   expect_equal(as_array(x[-2:10]), c(8,9))
   expect_equal(as_array(x[2:N]), c(1:9))
+  
+  x <- torch_randn(c(10,10,10,10))
+  expect_equal(as_array(x[1,..]), as_array(x)[1,,,])
+  expect_equal(as_array(x[1,1,..]), as_array(x)[1,1,,])
+  expect_equal(as_array(x[..,1]), as_array(x)[,,,1])
+  expect_equal(as_array(x[..,1,1]), as_array(x)[,,1,1])
 })
