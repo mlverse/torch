@@ -35,4 +35,16 @@ i = torch_tensor(matrix(c(0, 1, 1, 2, 0, 2), ncol = 3, byrow = TRUE), dtype=torc
 v = torch_tensor(c(3, 4, 5), dtype=torch_float32())
 torch_sparse_coo_tensor(i, v)
 torch_sparse_coo_tensor(i, v, c(2, 4))
+
+# create empty sparse tensors
+S = torch_sparse_coo_tensor(
+  torch_empty(c(1, 0), options = list(dtype = torch_int64())), 
+  torch_tensor(numeric(), dtype = torch_float32()), 
+  c(1)
+)
+S = torch_sparse_coo_tensor(
+  torch_empty(c(1, 0), options = list(dtype = torch_int64())), 
+  torch_empty(c(0, 2)), 
+  c(1, 2)
+)
 }
