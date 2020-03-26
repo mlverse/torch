@@ -2599,13 +2599,11 @@ NULL
 #' @name torch_lu_solve
 #'
 #' @examples
-#' \dontrun{
 #' A = torch_randn(c(2, 3, 3))
 #' b = torch_randn(c(2, 3, 1))
-#' A_LU = torch_lu(A)
-#' x = torch_lu_solve(b, A_LU)
+#' out = torch_lu(A)
+#' x = torch_lu_solve(b, out[[1]], out[[2]])
 #' torch_norm(torch_bmm(A, x) - b)
-#' }
 NULL
 # -> lu_solve <-
 

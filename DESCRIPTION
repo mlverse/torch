@@ -56,3 +56,4 @@ Collate:
     'tensor_list.R'
     'tensor_options.R'
     'utils.R'
+    'wrapers.R'
