@@ -2791,13 +2791,11 @@ NULL
 #' @name torch_renorm
 #'
 #' @examples
-#' \dontrun{
 #' x = torch_ones(c(3, 3))
-#' xc(1)$fill_(2)
-#' xc(2)$fill_(3)
+#' x[2,]$fill_(2)
+#' x[3,]$fill_(3)
 #' x
 #' torch_renorm(x, 1, 0, 5)
-#' }
 NULL
 # -> renorm <-
 
