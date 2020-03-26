@@ -110,4 +110,8 @@ test_that("[ works", {
   expect_equal(as_array(x[1,1,..]), as_array(x)[1,1,,])
   expect_equal(as_array(x[..,1]), as_array(x)[,,,1])
   expect_equal(as_array(x[..,1,1]), as_array(x)[,,1,1])
+  
+  expect_error(x[1,], "incorrect number of dimensions")
+  expect_error(x[1,1,1,1,1], "incorrect number of dimensions")
+  expect_error(x[1,1,1,1,..], "incorrect number of dimensions")
 })

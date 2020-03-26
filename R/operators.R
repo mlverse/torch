@@ -103,8 +103,6 @@ slice_dim <- function(x, dim, s) {
       lazyeval::lazy_eval(x, data = .d)
   })
   
-  browser()
-  
   d <- dim(x)
   
   
@@ -120,6 +118,9 @@ slice_dim <- function(x, dim, s) {
     }
   }
   
+  if (length(slices) != length(d))
+    stop("incorrect number of dimensions. Specified " , length(slices), " should be ",
+         length(d), ".")
   
   for (dim in seq_along(slices)) {
     x <- slice_dim(x, dim - 1 - (length(d) - length(dim(x))), slices[[dim]])
