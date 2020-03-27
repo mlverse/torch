@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
-        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error", check_dir = "check")
+        run: rcmdcheck::rcmdcheck(args = "--no-manual --no-multiarch", error_on = "error", check_dir = "check")
         shell: Rscript {0}
       - name: Reveal testthat details
         run: find . -name testthat.Rout -exec cat '{}' ';'
