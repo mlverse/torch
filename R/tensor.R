@@ -58,6 +58,11 @@ as_array <- function(x) {
 
 #' @export
 as_array.torch_tensor <- function(x) {
+  
+  # dequantize before converting
+  if (x$is_quantized())
+    x <- x$dequantize()
+  
   a <- cpp_as_array(x$ptr)
   
   if (length(a$dim) <= 1L) {
