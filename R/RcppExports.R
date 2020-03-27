@@ -69,6 +69,18 @@ cpp_torch_bool <- function() {
     .Call('_torchr_cpp_torch_bool', PACKAGE = 'torchr')
 }
 
+cpp_torch_quint8 <- function() {
+    .Call('_torchr_cpp_torch_quint8', PACKAGE = 'torchr')
+}
+
+cpp_torch_qint8 <- function() {
+    .Call('_torchr_cpp_torch_qint8', PACKAGE = 'torchr')
+}
+
+cpp_torch_qint32 <- function() {
+    .Call('_torchr_cpp_torch_qint32', PACKAGE = 'torchr')
+}
+
 cpp_torch_method_backward_self_Tensor <- function(self, gradient, keep_graph, create_graph) {
     invisible(.Call('_torchr_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torchr', self, gradient, keep_graph, create_graph))
 }
@@ -6579,6 +6591,10 @@ cpp_torch_per_channel_symmetric <- function() {
 
 cpp_torch_per_tensor_symmetric <- function() {
     .Call('_torchr_cpp_torch_per_tensor_symmetric', PACKAGE = 'torchr')
+}
+
+cpp_Tensor_is_quantized <- function(self) {
+    .Call('_torchr_cpp_Tensor_is_quantized', PACKAGE = 'torchr', self)
 }
 
 cpp_torch_reduction_mean <- function() {

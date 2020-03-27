@@ -51,6 +51,7 @@ Collate:
     'operators.R'
     'package.R'
     'qscheme.R'
+    'quantization.R'
     'reduction.R'
     'scalar.R'
     'tensor_list.R'

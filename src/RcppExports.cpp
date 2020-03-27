@@ -185,6 +185,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_quint8
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_quint8();
+RcppExport SEXP _torchr_cpp_torch_quint8() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_quint8());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_qint8
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_qint8();
+RcppExport SEXP _torchr_cpp_torch_qint8() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_qint8());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_qint32
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_qint32();
+RcppExport SEXP _torchr_cpp_torch_qint32() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_qint32());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_backward_self_Tensor
 void cpp_torch_method_backward_self_Tensor(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> gradient, bool keep_graph, bool create_graph);
 RcppExport SEXP _torchr_cpp_torch_method_backward_self_Tensor(SEXP selfSEXP, SEXP gradientSEXP, SEXP keep_graphSEXP, SEXP create_graphSEXP) {
@@ -21991,6 +22021,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_Tensor_is_quantized
+bool cpp_Tensor_is_quantized(Rcpp::XPtr<XPtrTorchTensor> self);
+RcppExport SEXP _torchr_cpp_Tensor_is_quantized(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_Tensor_is_quantized(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_reduction_mean
 std::int64_t cpp_torch_reduction_mean();
 RcppExport SEXP _torchr_cpp_torch_reduction_mean() {
@@ -22164,6 +22205,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_int32", (DL_FUNC) &_torchr_cpp_torch_int32, 0},
     {"_torchr_cpp_torch_int64", (DL_FUNC) &_torchr_cpp_torch_int64, 0},
     {"_torchr_cpp_torch_bool", (DL_FUNC) &_torchr_cpp_torch_bool, 0},
+    {"_torchr_cpp_torch_quint8", (DL_FUNC) &_torchr_cpp_torch_quint8, 0},
+    {"_torchr_cpp_torch_qint8", (DL_FUNC) &_torchr_cpp_torch_qint8, 0},
+    {"_torchr_cpp_torch_qint32", (DL_FUNC) &_torchr_cpp_torch_qint32, 0},
     {"_torchr_cpp_torch_method_backward_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_backward_self_Tensor, 4},
     {"_torchr_cpp_torch_method_set_data_self_Tensor_new_data_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_set_data_self_Tensor_new_data_Tensor, 2},
     {"_torchr_cpp_torch_method_data_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_data_self_Tensor, 1},
@@ -23792,6 +23836,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_per_tensor_affine", (DL_FUNC) &_torchr_cpp_torch_per_tensor_affine, 0},
     {"_torchr_cpp_torch_per_channel_symmetric", (DL_FUNC) &_torchr_cpp_torch_per_channel_symmetric, 0},
     {"_torchr_cpp_torch_per_tensor_symmetric", (DL_FUNC) &_torchr_cpp_torch_per_tensor_symmetric, 0},
+    {"_torchr_cpp_Tensor_is_quantized", (DL_FUNC) &_torchr_cpp_Tensor_is_quantized, 1},
     {"_torchr_cpp_torch_reduction_mean", (DL_FUNC) &_torchr_cpp_torch_reduction_mean, 0},
     {"_torchr_cpp_torch_reduction_none", (DL_FUNC) &_torchr_cpp_torch_reduction_none, 0},
     {"_torchr_cpp_torch_reduction_sum", (DL_FUNC) &_torchr_cpp_torch_reduction_sum, 0},

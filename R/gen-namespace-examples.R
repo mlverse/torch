@@ -2022,10 +2022,8 @@ NULL
 #' @name torch_quantize_per_tensor
 #'
 #' @examples
-#' \dontrun{
-#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8)
-#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8)$int_repr()
-#' }
+#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8())
+#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8())$int_repr()
 NULL
 # -> quantize_per_tensor <-
 
@@ -2034,11 +2032,9 @@ NULL
 #' @name torch_quantize_per_channel
 #'
 #' @examples
-#' \dontrun{
 #' x = torch_tensor(matrix(c(-1.0, 0.0, 1.0, 2.0), ncol = 2, byrow = TRUE))
-#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10, 0)), 0, torch_quint8())
-#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10, 0)), 0, torch_quint8())$int_repr()
-#' }
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10L, 0L)), 0, torch_quint8())
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10L, 0L)), 0, torch_quint8())$int_repr()
 NULL
 # -> quantize_per_channel <-
 

@@ -4,20 +4,25 @@ NULL
 
 .generator_null <- NULL
 
-.onLoad <- function(libname, pkgname){
-  
-  if (!lantern_installed() && Sys.getenv("INSTALL_TORCH", unset = 0) == 1) {
-    packageStartupMessage("Installing torch to ", lantern_install_path(), " ...")
-    lantern_install()
-    if (lantern_installed())
-      packageStartupMessage("Successfully installed torch!\n")
-  }
-    
+.onAttach <- function(libname, pkgname) {
   if (!lantern_installed() && interactive()) {
     packageStartupMessage("You need to install libtorch in order to use torchr.\n")
     ans <- readline("Do you want to download it now? ~100Mb (yes/no)")
     if (ans == "yes" | ans == "y")
       lantern_install()
+    
+    if (lantern_installed()) {
+      packageStartupMessage("Torch was successfully installed.")
+      packageStartupMessage("Please restar your R session now.")
+    }
+      
+  }
+}
+
+.onLoad <- function(libname, pkgname){
+  
+  if (!lantern_installed() && Sys.getenv("INSTALL_TORCH", unset = 0) == 1) {
+    lantern_install()
   }
     
   if (lantern_installed()) {
@@ -31,3 +36,6 @@ NULL
 .onUnload <- function(libpath) {
   
 }
+
+
+
