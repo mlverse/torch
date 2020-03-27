@@ -58,12 +58,12 @@ torch_dimname_list <- function(names) {
 }
 
 #' @export
-as.character.torch_dimname_list <- function(x) {
+as.character.torch_dimname_list <- function(x, ...) {
   cpp_dimname_list_to_string(x$ptr)
 }
 
 #' @export
-as.character.torch_dimname <- function(x) {
+as.character.torch_dimname <- function(x, ...) {
   cpp_dimname_to_string(x$ptr)
 }
 
