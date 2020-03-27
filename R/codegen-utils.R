@@ -156,8 +156,7 @@ to_return_type <- function(res, types) {
       
     } else {
       
-      out <- seq_along(res) %>% 
-        lapply(function(x) to_return_type(res[[x]], type[x]))
+      out <- lapply(seq_along(res), function(x) to_return_type(res[[x]], type[x]))
       
       return(out)
       
@@ -165,8 +164,7 @@ to_return_type <- function(res, types) {
     
   } else if (length(types) > 1){
     
-    out <- seq_along(res) %>% 
-      lapply(function(x) to_return_type(res[[x]], types[x]))
+    out <- lapply(seq_along(res), function(x) to_return_type(res[[x]], types[x]))
     
     return(out)
   }

@@ -57,3 +57,4 @@ Collate:
     'tensor_options.R'
     'utils.R'
     'wrapers.R'
+StagedInstall: no

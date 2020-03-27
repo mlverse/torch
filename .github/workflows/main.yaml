@@ -19,6 +19,7 @@ jobs:
     name: ${{ matrix.os }}
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      INSTALL_TORCH: 1
       CRAN: ${{ matrix.cran }}
 
     steps:
@@ -30,7 +31,7 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
+          Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
       - name: Install dependencies
@@ -42,3 +43,6 @@ jobs:
       - name: Test
         run: |
           Rscript -e "testthat::test_package('torchr')"
+      - name: Check
+        run: |
+          Rscript -e 'rcmdcheck::rcmdcheck(error_on = "error")'
