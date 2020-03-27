@@ -19,6 +19,7 @@ jobs:
     name: ${{ matrix.os }}
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      INSTALL_TORCH: 1
       CRAN: ${{ matrix.cran }}
 
     steps:
@@ -30,15 +31,13 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
+          Rscript -e "install.packages(c('remotes'))" -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
       - name: Install dependencies
-        run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)"
-      - name: Install
-        run: | 
-          Rscript -e "remotes::install_local(INSTALL_opts = '--install-tests')"
-          Rscript -e "torchr:::lantern_install()"
-      - name: Test
-        run: |
-          Rscript -e "testthat::test_package('torchr')"
+        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+      - name: Check
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-multiarch"), error_on = "error", check_dir = "check")
+        shell: Rscript {0}
+      - name: Reveal testthat details
+        run: find . -name testthat.Rout -exec cat '{}' ';'
