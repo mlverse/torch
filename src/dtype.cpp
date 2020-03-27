@@ -50,3 +50,18 @@ Rcpp::XPtr<XPtrTorchDtype> cpp_torch_int64 () {
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_bool () {
   return make_xptr<XPtrTorchDtype>(lantern_Dtype_bool());
 }
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_quint8 () {
+  return make_xptr<XPtrTorchDtype>(lantern_Dtype_quint8());
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_qint8 () {
+  return make_xptr<XPtrTorchDtype>(lantern_Dtype_qint8());
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_qint32 () {
+  return make_xptr<XPtrTorchDtype>(lantern_Dtype_qint32());
+}

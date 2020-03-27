@@ -59,6 +59,15 @@ torch_long <- function() torch_dtype$new(cpp_torch_int64())
 torch_bool <- function() torch_dtype$new(cpp_torch_bool())
 
 #' @export
+torch_quint8 <- function() torch_dtype$new(cpp_torch_quint8())
+
+#' @export
+torch_qint8 <- function() torch_dtype$new(cpp_torch_qint8())
+
+#' @export
+torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
+
+#' @export
 `==.torch_dtype` <- function(e1, e2) {
   cpp_dtype_to_string(e1$ptr) == cpp_dtype_to_string(e2$ptr)
 }
