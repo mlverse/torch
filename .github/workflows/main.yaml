@@ -36,13 +36,6 @@ jobs:
           sudo -s eval "$sysreqs"
       - name: Install dependencies
         run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)"
-      - name: Install
-        run: | 
-          Rscript -e "remotes::install_local(INSTALL_opts = '--install-tests')"
-          Rscript -e "torchr:::lantern_install()"
-      - name: Test
-        run: |
-          Rscript -e "testthat::test_package('torchr')"
       - name: Check
         run: |
           Rscript -e 'rcmdcheck::rcmdcheck(error_on = "error")'
