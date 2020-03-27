@@ -41,6 +41,9 @@ Tensor <- R6::R6Class(
       cat(sprintf("torch_tensor \n"))
       cpp_torch_tensor_print(self$ptr)
       invisible(self)
+    },
+    dtype = function() {
+      torch_dtype$new(ptr = cpp_torch_tensor_dtype(self$ptr))
     }
   )
 )

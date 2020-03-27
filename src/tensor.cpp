@@ -8,6 +8,12 @@ void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x) {
   Rcpp::Rcout << std::string(s) << std::endl;
 };
 
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(Rcpp::XPtr<XPtrTorchTensor> x) {
+  XPtrTorchDtype out = lantern_Tensor_dtype(x->get());
+  return make_xptr<XPtrTorchDtype>(out);
+}
+
 // equivalent to (n-1):0 in R
 std::vector<int64_t> revert_int_seq (int n) {
   std::vector<int64_t> l(n);

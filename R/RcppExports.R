@@ -6617,6 +6617,10 @@ cpp_torch_tensor_print <- function(x) {
     invisible(.Call('_torchr_cpp_torch_tensor_print', PACKAGE = 'torchr', x))
 }
 
+cpp_torch_tensor_dtype <- function(x) {
+    .Call('_torchr_cpp_torch_tensor_dtype', PACKAGE = 'torchr', x)
+}
+
 cpp_torch_tensor <- function(x, dim, options, requires_grad) {
     .Call('_torchr_cpp_torch_tensor', PACKAGE = 'torchr', x, dim, options, requires_grad)
 }
