@@ -31,11 +31,11 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_github('r-hub/sysreqs')"
+          Rscript -e "install.packages(c('remotes'))" -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
       - name: Install dependencies
-        run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)"
+        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
         run: |
           Rscript -e 'rcmdcheck::rcmdcheck(error_on = "error")'
