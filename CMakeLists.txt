@@ -66,6 +66,7 @@ add_library(lantern SHARED
     src/Delete.cpp
     src/Reduction.cpp
     src/Quantization.cpp
+    src/Autograd.cpp
 )
 add_library(lantern::library ALIAS lantern)
 

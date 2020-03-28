@@ -125,7 +125,8 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Dtype_quint8)();
   LANTERN_API void *(LANTERN_PTR lantern_Dtype_qint8)();
   LANTERN_API void *(LANTERN_PTR lantern_Dtype_qint32)();
-  LANTERN_API bool(LANTERN_PTR lantern_Tensor_is_quantized)(void* x);
+  LANTERN_API bool(LANTERN_PTR lantern_Tensor_is_quantized)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_autograd_set_grad_mode)(bool enabled);
 
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
@@ -2003,6 +2004,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Dtype_qint8);
   LOAD_SYMBOL(lantern_Dtype_qint32);
   LOAD_SYMBOL(lantern_Tensor_is_quantized);
+  LOAD_SYMBOL(lantern_autograd_set_grad_mode);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
