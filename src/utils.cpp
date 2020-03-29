@@ -45,3 +45,9 @@ void *lantern_vector_get(void *x, int i)
   auto v = reinterpret_cast<LanternObject<std::vector<void *>> *>(x)->get();
   return v.at(i);
 }
+
+void *lantern_Tensor_undefined()
+{
+  torch::Tensor x = {};
+  return (void *)new LanternObject<torch::Tensor>(x);
+}
