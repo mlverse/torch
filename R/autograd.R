@@ -68,6 +68,11 @@ Tensor$set("public", "requires_grad", function() {
   cpp_tensor_requires_grad(self$ptr)
 })
 
+Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE, 
+                                          create_graph = FALSE) {
+  invisible(private$`_backward`(gradient, keep_graph, create_graph))
+})
+
 #' Set grad mode
 #' 
 #' Sets or disables gradient history.

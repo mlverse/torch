@@ -273,18 +273,32 @@ r_namespace_body <- function(decls) {
 r_method <- function(decls) {
 
   glue::glue(
-  'Tensor$set("public", "{r_method_name(decls)}", function({r_method_signature(decls)}) {{',
+  'Tensor$set("{r_method_env(decls)}", "{r_method_name(decls)}", function({r_method_signature(decls)}) {{',
   '  {r_method_body(decls)}',
   '}})'
   )
 
 }
 
-r_method_name <- function(decls) {
-  if (decls[[1]]$name == "clone")
-    return("copy")
+internal_methods <- c("backward")
 
-  decls[[1]]$name
+r_method_env <- function(decls) {
+  if (decls[[1]]$name %in% internal_methods)
+    "private"
+  else
+    "public"
+}
+
+r_method_name <- function(decls) {
+  name <- decls[[1]]$name
+
+  if (name == "clone")
+    name <- "copy"
+
+  if (name %in% internal_methods)
+    name <- paste0("_", name)
+
+  name
 }
 
 r_method_signature <- function(decls) {

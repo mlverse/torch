@@ -705,7 +705,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE, create_graph = FALSE) {  args <- rlang::env_get_list(nms = c("gradient", "keep_graph", "create_graph"))
+Tensor$set("private", "_backward", function(gradient = list(), keep_graph = FALSE, create_graph = FALSE) {  args <- rlang::env_get_list(nms = c("gradient", "keep_graph", "create_graph"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", gradient = "Tensor", keep_graph = "bool", 
     create_graph = "bool")
