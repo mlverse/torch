@@ -1,5 +1,10 @@
 #torch_zeros(1, names="hello") # trigger warning about named tensors
 
+skip_if_not_test_examples <- function() {
+  if (Sys.getenv("TEST_EXAMPLES", unset = "0") != "1")
+    skip("Not testing examples/readme. Set the env var TEST_EXAMPLES = 1.")
+}
+
 expect_equal_to_tensor <- function(object, expected) {
   expect_equal(as_array(object), as_array(expected))
 }
