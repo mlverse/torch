@@ -13,6 +13,10 @@ cpp_tensor_requires_grad <- function(self) {
     .Call('_torchr_cpp_tensor_requires_grad', PACKAGE = 'torchr', self)
 }
 
+cpp_tensor_register_hook <- function(self) {
+    invisible(.Call('_torchr_cpp_tensor_register_hook', PACKAGE = 'torchr', self))
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torchr_cpp_device_type_to_string', PACKAGE = 'torchr', device)
 }

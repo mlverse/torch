@@ -20,4 +20,13 @@ test_that("requires_grad works", {
   expect_true(!x$requires_grad())
 })
 
+test_that("register_hook", {
+  x <- torch_tensor(c(1), requires_grad = TRUE)
+  cpp_tensor_register_hook(x$ptr)
+  y <- 2 * x
+  y$backward()
+  x$grad()
+})
+
+
 
