@@ -33,11 +33,12 @@ Suggests:
 VignetteBuilder: knitr
 Collate: 
     'RcppExports.R'
+    'tensor.R'
+    'autograd.R'
     'codegen-utils.R'
     'device.R'
     'dimname_list.R'
     'dtype.R'
-    'tensor.R'
     'gen-method.R'
     'gen-namespace-docs.R'
     'gen-namespace-examples.R'

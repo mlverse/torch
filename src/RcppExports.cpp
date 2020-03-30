@@ -6,6 +6,27 @@
 
 using namespace Rcpp;
 
+// cpp_autograd_set_grad_mode
+void cpp_autograd_set_grad_mode(bool enabled);
+RcppExport SEXP _torchr_cpp_autograd_set_grad_mode(SEXP enabledSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type enabled(enabledSEXP);
+    cpp_autograd_set_grad_mode(enabled);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_tensor_grad
+Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_grad(Rcpp::XPtr<XPtrTorchTensor> self);
+RcppExport SEXP _torchr_cpp_tensor_grad(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_grad(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torchr_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -22197,8 +22218,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_tensor_undefined
+Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_undefined();
+RcppExport SEXP _torchr_cpp_tensor_undefined() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_undefined());
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_torchr_cpp_autograd_set_grad_mode", (DL_FUNC) &_torchr_cpp_autograd_set_grad_mode, 1},
+    {"_torchr_cpp_tensor_grad", (DL_FUNC) &_torchr_cpp_tensor_grad, 1},
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},
@@ -23863,6 +23896,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_tensor_options_print", (DL_FUNC) &_torchr_cpp_torch_tensor_options_print, 1},
     {"_torchr_cpp_nullptr", (DL_FUNC) &_torchr_cpp_nullptr, 0},
     {"_torchr_cpp_nullopt", (DL_FUNC) &_torchr_cpp_nullopt, 0},
+    {"_torchr_cpp_tensor_undefined", (DL_FUNC) &_torchr_cpp_tensor_undefined, 0},
     {NULL, NULL, 0}
 };
 

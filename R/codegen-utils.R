@@ -82,6 +82,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("int64_t" %in%  expected_types && is.null(obj))
     return(list(NULL, "int64_t"))
   
+  if ("Tensor" %in% expected_types && length(obj) == 0 && is.list(obj))
+    return(list(cpp_tensor_undefined(), "Tensor"))
+  
   stop("Can't convert argument", call.=FALSE)
 }
 
