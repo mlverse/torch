@@ -18,3 +18,8 @@ void *lantern_Tensor_grad(void *self)
     auto out = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().grad();
     return (void *)new LanternObject<torch::Tensor>(out);
 }
+
+bool lantern_Tensor_requires_grad(void *self)
+{
+    return reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().requires_grad();
+}
