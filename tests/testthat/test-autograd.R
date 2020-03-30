@@ -22,7 +22,7 @@ test_that("requires_grad works", {
 
 test_that("register_hook", {
   x <- torch_tensor(c(1), requires_grad = TRUE)
-  cpp_tensor_register_hook(x$ptr)
+  x$register_hook(function(grad) { print("hello")})
   y <- 2 * x
   y$backward()
   x$grad()

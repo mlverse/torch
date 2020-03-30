@@ -73,6 +73,15 @@ Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE,
   invisible(private$`_backward`(gradient, keep_graph, create_graph))
 })
 
+Tensor$set("public", "register_hook", function(hook) {
+  aux <- function(grad) {
+    print("yes")
+    hook(Tensor$new(ptr = grad))
+  }
+  cpp_tensor_register_hook(self$ptr, aux)
+})
+
+
 #' Set grad mode
 #' 
 #' Sets or disables gradient history.
