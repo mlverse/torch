@@ -130,6 +130,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_undefined)();
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_grad)(void *self);
   LANTERN_API bool(LANTERN_PTR lantern_Tensor_requires_grad)(void *self);
+  LANTERN_API void(LANTERN_PTR lantern_test_register_hook)();
 
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
@@ -2011,6 +2012,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_undefined);
   LOAD_SYMBOL(lantern_Tensor_grad);
   LOAD_SYMBOL(lantern_Tensor_requires_grad);
+  LOAD_SYMBOL(lantern_test_register_hook);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
