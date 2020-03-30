@@ -10,3 +10,8 @@ void cpp_autograd_set_grad_mode (bool enabled) {
 Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
   return make_xptr<XPtrTorchTensor>(lantern_Tensor_grad(self->get()));
 }
+
+// [[Rcpp::export]]
+bool cpp_tensor_requires_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
+  return lantern_Tensor_requires_grad(self->get());
+}

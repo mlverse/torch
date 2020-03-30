@@ -64,6 +64,10 @@ Tensor$set("public", "grad", function() {
   Tensor$new(ptr = cpp_tensor_grad(self$ptr))
 })
 
+Tensor$set("public", "requires_grad", function() {
+  cpp_tensor_requires_grad(self$ptr)
+})
+
 #' Set grad mode
 #' 
 #' Sets or disables gradient history.
