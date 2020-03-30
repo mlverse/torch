@@ -4,3 +4,4 @@
 ^.github.*
 ^.vscode.*
 tools/torchgen/.Rbuildignore
+^README\.Rmd$
