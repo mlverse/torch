@@ -132,7 +132,7 @@ extern "C"
   LANTERN_API bool(LANTERN_PTR lantern_Tensor_requires_grad)(void *self);
   LANTERN_API void(LANTERN_PTR lantern_test_register_hook)();
   LANTERN_API void(LANTERN_PTR lantern_Tensor_register_hook)(void *self, void *hook);
-  LANTERN_API void *(LANTERN_PTR lantern_new_hook)(void *fun);
+  LANTERN_API void *(LANTERN_PTR lantern_new_hook)(void (*fun)(void *, void *), void *custom);
 
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);

@@ -31,23 +31,30 @@ void lantern_Tensor_register_hook(void *self, void *hook)
     x.register_hook(h);
 }
 
-void *lantern_new_hook(void *fun)
+// Creating the hook in the right format to be passed to .register_hook
+// It takes a pointer a function that in turn will take a pointer to a
+// torch tensor and a function to apply over it.
+void *lantern_new_hook(void (*fun)(void *, void *), void *custom)
 {
-    auto foo = *reinterpret_cast<std::function<void(void *)> *>(fun);
-    auto out = [foo](torch::Tensor grad) {
-        foo((void *)new LanternObject<torch::Tensor>(grad));
+    auto out = [fun, custom](torch::Tensor grad) {
+        (*fun)((void *)new LanternObject<torch::Tensor>(grad), custom);
     };
     return (void *)new LanternObject<std::function<void(torch::Tensor)>>(out);
+}
+
+// Examples of usage of register hook
+// should be excluded before the PR is merged.
+void fun(void *x, void *custom)
+{
+    (*reinterpret_cast<std::function<void(void *)> *>(custom))(x);
 }
 
 void lantern_test_register_hook()
 {
     auto x = torch::randn(1, torch::requires_grad());
     auto y = (void *)new torch::Tensor(x);
-    void *fun = (void *)new std::function<void(void *)>([](void *x) {
-        std::cout << "hello hello" << std::endl;
-    });
-    auto f = lantern_new_hook(fun);
+    auto custom = (void *)new std::function<void(void *)>([](void *x) { std::cout << "hello hello" << std::endl; });
+    auto f = lantern_new_hook(&fun, custom);
     lantern_Tensor_register_hook(y, f);
     auto z = reinterpret_cast<LanternObject<torch::Tensor> *>(y)->get();
     auto k = 2 * z;
