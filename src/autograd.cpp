@@ -16,14 +16,19 @@ bool cpp_tensor_requires_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
   return lantern_Tensor_requires_grad(self->get());
 }
 
+#include <thread>
+
 // [[Rcpp::export]]
 void cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f) {
+  Rcpp::Rcout << std::this_thread::get_id() << std::endl;
   void *fun = (void *)new std::function<void(void *)>([f](void *x) {
+    Rcpp::Rcout << std::this_thread::get_id() << std::endl;
     Rcpp::Rcout << "hey" << std::endl;
     auto y = make_xptr<XPtrTorchTensor>(x);
     Rcpp::Rcout << "hey2" << std::endl;
-    f(y);
   });
   auto hook = lantern_new_hook(fun);
   lantern_Tensor_register_hook(self->get(), hook);
 }
+
+
