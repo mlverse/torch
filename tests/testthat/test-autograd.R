@@ -21,7 +21,6 @@ test_that("requires_grad works", {
 })
 
 test_that("register_hook", {
-  skip("skip test")
   x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { print("hello")})
   y <- 2 * x
