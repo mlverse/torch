@@ -38,6 +38,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_backward_self_Tensor
+void cpp_torch_method_backward_self_Tensor(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> gradient, bool keep_graph, bool create_graph);
+RcppExport SEXP _torchr_cpp_torch_method_backward_self_Tensor(SEXP selfSEXP, SEXP gradientSEXP, SEXP keep_graphSEXP, SEXP create_graphSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type gradient(gradientSEXP);
+    Rcpp::traits::input_parameter< bool >::type keep_graph(keep_graphSEXP);
+    Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
+    cpp_torch_method_backward_self_Tensor(self, gradient, keep_graph, create_graph);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_tensor_register_hook
 void cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f);
 RcppExport SEXP _torchr_cpp_tensor_register_hook(SEXP selfSEXP, SEXP fSEXP) {
@@ -256,19 +269,6 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     rcpp_result_gen = Rcpp::wrap(cpp_torch_qint32());
     return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_method_backward_self_Tensor
-void cpp_torch_method_backward_self_Tensor(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> gradient, bool keep_graph, bool create_graph);
-RcppExport SEXP _torchr_cpp_torch_method_backward_self_Tensor(SEXP selfSEXP, SEXP gradientSEXP, SEXP keep_graphSEXP, SEXP create_graphSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type gradient(gradientSEXP);
-    Rcpp::traits::input_parameter< bool >::type keep_graph(keep_graphSEXP);
-    Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
-    cpp_torch_method_backward_self_Tensor(self, gradient, keep_graph, create_graph);
-    return R_NilValue;
 END_RCPP
 }
 // cpp_torch_method_set_data_self_Tensor_new_data_Tensor
@@ -22255,6 +22255,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_autograd_set_grad_mode", (DL_FUNC) &_torchr_cpp_autograd_set_grad_mode, 1},
     {"_torchr_cpp_tensor_grad", (DL_FUNC) &_torchr_cpp_tensor_grad, 1},
     {"_torchr_cpp_tensor_requires_grad", (DL_FUNC) &_torchr_cpp_tensor_requires_grad, 1},
+    {"_torchr_cpp_torch_method_backward_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_backward_self_Tensor, 4},
     {"_torchr_cpp_tensor_register_hook", (DL_FUNC) &_torchr_cpp_tensor_register_hook, 2},
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
@@ -22276,7 +22277,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_quint8", (DL_FUNC) &_torchr_cpp_torch_quint8, 0},
     {"_torchr_cpp_torch_qint8", (DL_FUNC) &_torchr_cpp_torch_qint8, 0},
     {"_torchr_cpp_torch_qint32", (DL_FUNC) &_torchr_cpp_torch_qint32, 0},
-    {"_torchr_cpp_torch_method_backward_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_backward_self_Tensor, 4},
     {"_torchr_cpp_torch_method_set_data_self_Tensor_new_data_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_set_data_self_Tensor_new_data_Tensor, 2},
     {"_torchr_cpp_torch_method_data_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_data_self_Tensor, 1},
     {"_torchr_cpp_torch_method_is_leaf_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_is_leaf_self_Tensor, 1},

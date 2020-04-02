@@ -75,7 +75,6 @@ Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE,
 
 Tensor$set("public", "register_hook", function(hook) {
   aux <- function(grad) {
-    print("yes")
     hook(Tensor$new(ptr = grad))
   }
   cpp_tensor_register_hook(self$ptr, aux)
