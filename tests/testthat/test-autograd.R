@@ -26,6 +26,18 @@ test_that("register_hook", {
   y <- 2 * x
   expect_output(y$backward(), "hello")
   expect_equal_to_r(x$grad(), 2)
+  
+  # correctly sees the gradient
+  x <- torch_tensor(c(2), requires_grad = TRUE)
+  x$register_hook(function(grad) { print(grad)})
+  y <- 2 * x
+  expect_output(y$backward(), "torch_tensor")
+  
+  x <- torch_tensor(c(2), requires_grad = TRUE)
+  x$register_hook(function(grad) { 2* grad})
+  y <- 2 * x
+  y$backward()
+  expect_equal_to_r(x$grad(), 4)
 })
 
 

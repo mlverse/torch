@@ -20,7 +20,7 @@ bool cpp_tensor_requires_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
 
 #include <thread>
 
-std::deque<std::packaged_task<void()>> tasks;
+std::deque<std::packaged_task<void*()>> tasks;
 std::mutex tasks_mutex;
 std::atomic<bool> event_loop_running;
 
@@ -51,20 +51,20 @@ void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rc
   t.join();
 }
 
-void rcpp_call_hook (void* x, void* hook) {
-  (*reinterpret_cast<std::function<void(void*)> *>(hook))(x);
+void*  rcpp_call_hook (void* x, void* hook) {
+  return (*reinterpret_cast<std::function<void*(void*)> *>(hook))(x);
 }
 
 // [[Rcpp::export]]
 void cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f) {
   Rcpp::Rcout << std::this_thread::get_id() << std::endl;
   
-  auto r_hook = (void *)new std::function<void(void *)>([f](void *x) {
-    std::packaged_task<void()> task([f, x]() {
+  auto r_hook = (void *)new std::function<void*(void *)>([f](void *x) {
+    std::packaged_task<void*()> task([f, x]() {
       auto y = make_xptr<XPtrTorchTensor>(x);
-      f(y);
+      return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
     });
-    std::future<void> result = task.get_future();
+    std::future<void*> result = task.get_future();
     
     {
       std::lock_guard<std::mutex> lock(tasks_mutex);
@@ -72,7 +72,7 @@ void cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function 
     }
     
     // wait on result
-    result.get();
+    return result.get();
   });
   auto hook = lantern_new_hook(&rcpp_call_hook, r_hook);
   lantern_Tensor_register_hook(self->get(), hook);
