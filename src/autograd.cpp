@@ -37,10 +37,22 @@ void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rc
   Rcpp::Rcout << "spining new thread" << std::endl;
   
   event_loop_running = true;
-  std::thread t([&](){
-    lantern_Tensor_backward_tensor_tensor_bool_bool(self_ptr, gradient_ptr, 
-                                                    reinterpret_cast<void*>(&keep_graph_val), 
-                                                    reinterpret_cast<void*>(&create_graph_val)); 
+  
+  std::future<void> result = std::async([&](){
+    try
+    {
+      lantern_Tensor_backward_tensor_tensor_bool_bool(
+        self_ptr, gradient_ptr, 
+        reinterpret_cast<void*>(&keep_graph_val), 
+        reinterpret_cast<void*>(&create_graph_val)
+      );  
+    }
+    catch (...)
+    {
+      event_loop_running = false;
+      throw;
+    }
+     
     event_loop_running = false;
   });
   
@@ -48,7 +60,7 @@ void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rc
   
   event_loop_thread();
   
-  t.join();
+  result.get();
 }
 
 void*  rcpp_call_hook (void* x, void* hook) {

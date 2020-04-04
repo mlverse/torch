@@ -38,6 +38,7 @@ test_that("register_hook", {
   y <- 2 * x
   y$backward()
   expect_equal_to_r(x$grad(), 4)
+  expect_error(y$backward())
 })
 
 
