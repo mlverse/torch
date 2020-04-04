@@ -39,6 +39,12 @@ test_that("register_hook", {
   y$backward()
   expect_equal_to_r(x$grad(), 4)
   expect_error(y$backward())
+  
+  x <- torch_tensor(c(2), requires_grad = TRUE)
+  x$register_hook(function(grad) { print("ABABA")})
+  y <- 2 * x
+  y$register_hook(function(grad) { print("EBEBE")})
+  expect_output(y$backward(), "EBEBE.*ABABA")
 })
 
 
