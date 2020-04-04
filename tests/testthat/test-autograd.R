@@ -58,5 +58,24 @@ test_that("register hook: can throw exceptions in the hook", {
   expect_error(y$backward())
 })
 
+test_that("register_hook: grad non leaf", {
+  # see https://github.com/pytorch/pytorch/blob/e0ee8000ac68ae58580ca62a59d5f40a9dd8710c/test/test_autograd.py#L400
+  # This checks an edge case for register_hook.
+  # We want to capture grad of a nonleaf tensor,
+  # but avoid segfault during backward of other nonleaf tensors
+  x <- torch_randn(5, options = list(requires_grad=TRUE))
+  x_list <- x$unbind()
+  x0 <- x_list[[1]]
+  hook_results = NULL
+  hook <- function(grad) {
+    hook_results <<- grad
+  }
+  x0$register_hook(hook)
+  x_list[[1]]$backward()
+  
+  expect_equal_to_r(hook_results, 1)
+  expect_equal_to_r(x$grad(), c(1,0,0,0,0))
+})
+
 
 
