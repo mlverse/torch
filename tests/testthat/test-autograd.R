@@ -34,17 +34,28 @@ test_that("register_hook", {
   expect_output(y$backward(), "torch_tensor")
   
   x <- torch_tensor(c(2), requires_grad = TRUE)
+  x$register_hook(function(grad) { print("ABABA")})
+  y <- 2 * x
+  y$register_hook(function(grad) { print("EBEBE")})
+  expect_output(y$backward(), "EBEBE.*ABABA")
+})
+
+test_that("register hook: can throw exceptions in the lantern thread", {
+  skip_on_os("windows")
+  x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { 2* grad})
   y <- 2 * x
   y$backward()
   expect_equal_to_r(x$grad(), 4)
   expect_error(y$backward())
-  
+})
+
+test_that("register hook: can throw exceptions in the hook", {
+  skip_on_os("windows")
   x <- torch_tensor(c(2), requires_grad = TRUE)
-  x$register_hook(function(grad) { print("ABABA")})
+  x$register_hook(function(grad) { stop()})
   y <- 2 * x
-  y$register_hook(function(grad) { print("EBEBE")})
-  expect_output(y$backward(), "EBEBE.*ABABA")
+  expect_error(y$backward())
 })
 
 
