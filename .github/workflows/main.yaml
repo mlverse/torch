@@ -17,6 +17,7 @@ jobs:
             cran: https://demo.rstudiopm.com/all/__linux__/bionic/latest
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }}
+    timeout-minutes: 20
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       INSTALL_TORCH: 1
