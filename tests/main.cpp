@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
     void *t2 = lantern_zeros_like_tensor_memoryformat(t1, nullptr);
 
     lantern_test_register_hook();
+    test_hooks();
 
     std::cout << "Success!!" << std::endl;
     return 0;

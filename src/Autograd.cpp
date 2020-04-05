@@ -38,6 +38,7 @@ void lantern_Tensor_register_hook(void *self, void *hook)
 void *lantern_new_hook(void *(*fun)(void *, void *), void *custom)
 {
     auto out = [fun, custom](torch::Tensor grad) {
+        std::cout << "Calling the lantern hook" << std::endl;
         auto out = (*fun)((void *)new LanternObject<torch::Tensor>(grad), custom);
         auto ten = reinterpret_cast<LanternObject<torch::Tensor> *>(out)->get();
         return ten;
@@ -68,4 +69,27 @@ void lantern_test_register_hook()
     auto k = 2 * z;
     k.backward();
     std::cout << z.grad() << std::endl;
+}
+
+void test_hooks()
+{
+    auto x = torch::randn(1, torch::requires_grad());
+    auto y = 2 * x;
+
+    std::function<void(torch::Tensor)> hook1 = [](torch::Tensor grad) {
+        std::cout << "hey" << std::endl;
+    };
+    x.register_hook(hook1);
+
+    auto a = torch::randn(1, torch::requires_grad());
+    auto b = 2 * a;
+
+    std::function<void(torch::Tensor)> hook2 = [&](torch::Tensor grad) {
+        std::cout << "hello" << std::endl;
+        y.backward();
+    };
+
+    a.register_hook(hook2);
+
+    b.backward();
 }
