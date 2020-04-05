@@ -77,5 +77,21 @@ test_that("register_hook: grad non leaf", {
   expect_equal_to_r(x$grad(), c(1,0,0,0,0))
 })
 
+test_that("register_hook: can call a the hook inside a hook", {
+  skip("not working yet")
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  x$register_hook(function(grad) print("x"))
+  
+  a <- torch_tensor(1, requires_grad = TRUE)
+  b <- 2 * a
+  a$register_hook(function(grad) {
+    print("a")
+    y$backward()
+    print("b")
+  })
+  
+  a$backward()
+})
 
 

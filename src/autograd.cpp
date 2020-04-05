@@ -22,75 +22,8 @@ bool cpp_tensor_requires_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
 
 std::deque<std::packaged_task<void*()>> tasks;
 std::mutex tasks_mutex;
-std::atomic<bool> event_loop_running;
 
-void event_loop_thread();
-
-// [[Rcpp::export]]
-void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> gradient, bool keep_graph, bool create_graph) {
-  
-  auto self_ptr = self->get();
-  auto gradient_ptr = gradient->get();
-  auto keep_graph_val = keep_graph;
-  auto create_graph_val = create_graph;
-  
-  Rcpp::Rcout << "spining new thread" << std::endl;
-  
-  event_loop_running = true;
-  
-  std::future<void> result = std::async([&](){
-    try
-    {
-      lantern_Tensor_backward_tensor_tensor_bool_bool(
-        self_ptr, gradient_ptr, 
-        reinterpret_cast<void*>(&keep_graph_val), 
-        reinterpret_cast<void*>(&create_graph_val)
-      );  
-    }
-    catch (...)
-    {
-      event_loop_running = false;
-      throw;
-    }
-     
-    event_loop_running = false;
-  });
-  
-  Rcpp::Rcout << "thread started!" << std::endl;
-  
-  event_loop_thread();
-  
-  result.get();
-}
-
-void*  rcpp_call_hook (void* x, void* hook) {
-  return (*reinterpret_cast<std::function<void*(void*)> *>(hook))(x);
-}
-
-// [[Rcpp::export]]
-void cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f) {
-  Rcpp::Rcout << std::this_thread::get_id() << std::endl;
-  
-  auto r_hook = (void *)new std::function<void*(void *)>([f](void *x) {
-    std::packaged_task<void*()> task([f, x]() {
-      auto y = make_xptr<XPtrTorchTensor>(x);
-      return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
-    });
-    std::future<void*> result = task.get_future();
-    
-    {
-      std::lock_guard<std::mutex> lock(tasks_mutex);
-      tasks.push_back(std::move(task));
-    }
-    
-    // wait on result
-    return result.get();
-  });
-  auto hook = lantern_new_hook(&rcpp_call_hook, r_hook);
-  lantern_Tensor_register_hook(self->get(), hook);
-}
-
-void event_loop_thread()
+void event_loop_thread(std::atomic<bool> &event_loop_running)
 {
   Rcpp::Rcout << "entering the event loop thread!" << std::endl;
   Rcpp::Rcout << "event pool running: " << event_loop_running << std::endl;
@@ -99,6 +32,7 @@ void event_loop_thread()
     // process messages
     {
       std::unique_lock<std::mutex> lock(tasks_mutex);
+      //std::cout << "number of tasks " << tasks.size() << std::endl;
       while (!tasks.empty()) {
         auto task(std::move(tasks.front()));
         tasks.pop_front();
@@ -116,3 +50,80 @@ void event_loop_thread()
   
   Rcpp::Rcout << "leaving event_lopp thread;" << std::endl;
 }
+
+// [[Rcpp::export]]
+void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> gradient, bool keep_graph, bool create_graph) {
+  
+  auto self_ptr = self->get();
+  auto gradient_ptr = gradient->get();
+  auto keep_graph_val = keep_graph;
+  auto create_graph_val = create_graph;
+  
+  std::atomic<bool> event_loop_running;
+  
+  Rcpp::Rcout << "spining new thread" << std::endl;
+  
+  event_loop_running = true;
+  
+  std::future<void> result = std::async([&](){
+    std::cout << "running this fun async" << std::endl;
+    try
+    {
+      lantern_Tensor_backward_tensor_tensor_bool_bool(
+        self_ptr, gradient_ptr, 
+        reinterpret_cast<void*>(&keep_graph_val), 
+        reinterpret_cast<void*>(&create_graph_val)
+      );
+      std::cout << "finished backwarding" << std::endl;
+    }
+    catch (...)
+    {
+      event_loop_running = false;
+      throw;
+    }
+     
+    event_loop_running = false;
+  });
+  
+  Rcpp::Rcout << "thread started!" << std::endl;
+  
+  event_loop_thread(event_loop_running);
+  
+  result.get();
+}
+
+void*  rcpp_call_hook (void* x, void* hook) {
+  std::cout << "Calling hook" << std::endl;
+  return (*reinterpret_cast<std::function<void*(void*)> *>(hook))(x);
+}
+
+// [[Rcpp::export]]
+void cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f) {
+  Rcpp::Rcout << std::this_thread::get_id() << std::endl;
+  
+  auto r_hook = (void *)new std::function<void*(void *)>([f](void *x) {
+    
+    std::cout << "Creating packaged task!" << std::endl;
+    
+    std::packaged_task<void*()> task([f, x]() {
+      auto y = make_xptr<XPtrTorchTensor>(x);
+      return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
+    });
+    std::future<void*> result = task.get_future();
+    
+    std::cout << "OK! Locking tasks to push new task." << std::endl;
+    
+    {
+      std::lock_guard<std::mutex> lock(tasks_mutex);
+      std::cout << "Pushing new task" << std::endl;
+      tasks.push_front(std::move(task));
+    }
+    
+    // wait on result
+    return result.get();
+  });
+  auto hook = lantern_new_hook(&rcpp_call_hook, r_hook);
+  lantern_Tensor_register_hook(self->get(), hook);
+}
+
+
