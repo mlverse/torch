@@ -35,6 +35,7 @@ jobs:
       - name: Reveal testthat details
         run: find . -name testthat.Rout -exec cat '{}' ';'
       - name: Cleanup machine
+        if: always()
         run: |
           cd ../..
           rm -r torch
