@@ -34,3 +34,7 @@ jobs:
         shell: Rscript {0}
       - name: Reveal testthat details
         run: find . -name testthat.Rout -exec cat '{}' ';'
+      - name: Cleanup machine
+        run: |
+          cd ../..
+          rm -r torch
