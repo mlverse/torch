@@ -19,14 +19,6 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        env:
-          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
-        run: |
-          Rscript -e "install.packages(c('remotes'))" -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo -s eval "$sysreqs"
       - name: Install dependencies
         run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
