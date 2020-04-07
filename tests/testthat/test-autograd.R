@@ -2,17 +2,17 @@ test_that("can autograd", {
   x <- torch_tensor(c(1), requires_grad = TRUE)
   y <- 2 * x
   expect_invisible(y$backward())
-
+  
   expect_equal_to_r(x$grad(), 2)
 })
 
 test_that("requires_grad works", {
   x <- torch_tensor(c(1), requires_grad = TRUE)
   expect_true(x$requires_grad())
-
+  
   x <- torch_tensor(c(1), requires_grad = FALSE)
   expect_true(!x$requires_grad())
-
+  
   x <- torch_tensor(c(1), requires_grad = FALSE)
   x$requires_grad_(TRUE)
   expect_true(x$requires_grad())
@@ -26,13 +26,13 @@ test_that("register_hook", {
   y <- 2 * x
   expect_output(y$backward(), "hello")
   expect_equal_to_r(x$grad(), 2)
-
+  
   # correctly sees the gradient
   x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { print(grad)})
   y <- 2 * x
   expect_output(y$backward(), "torch_tensor")
-
+  
   x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { print("ABABA")})
   y <- 2 * x
@@ -72,7 +72,7 @@ test_that("register_hook: grad non leaf", {
   }
   x0$register_hook(hook)
   x_list[[1]]$backward()
-
+  
   expect_equal_to_r(hook_results, 1)
   expect_equal_to_r(x$grad(), c(1,0,0,0,0))
 })
@@ -94,6 +94,8 @@ test_that("register_hook: can call a the hook inside a hook", {
   a$backward()
   
   expect_equal(v, c("a", "x"))
+  
+  # add one more level of nesting  
   
   v <- NULL
   
@@ -119,6 +121,34 @@ test_that("register_hook: can call a the hook inside a hook", {
   
   expect_equal(v, c("k", "a", "x"))
   
+})
+
+test_that("register_hook: can have 2 hooks that call backwards on different graphs", {
+  
+  v <- NULL
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  x$register_hook(function(grad) v <<- c(v, "x"))
+  
+  a <- torch_tensor(1, requires_grad = TRUE)
+  b <- 2 * a
+  a$register_hook(function(grad) {v <<- c(v, "a")})
+  
+  k <- torch_tensor(1, requires_grad = TRUE)
+  l <- 2 * k
+  k$register_hook(function(grad) {
+    v <<- c(v, "k")
+    a$backward()
+  })
+  l$register_hook(function(grad) {
+    v <<- c(v, "l")
+    y$backward()
+  })
+  
+  l$backward()
+  
+  expect_equal(v, c("l", "x", "k", "a"))
 })
 
 

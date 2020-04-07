@@ -21,7 +21,7 @@ bool cpp_tensor_requires_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
 
 std::deque<std::packaged_task<void*()>> tasks;
 std::deque<std::packaged_task<void()>> backward_tasks;
-std::atomic<bool> is_nested;
+std::atomic<int> n_tasks = {0};
 std::mutex tasks_mutex;
 std::mutex backward_tasks_mutex;
 
@@ -72,22 +72,22 @@ void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rc
     catch (...)
     {
       event_loop_running = false;
-      is_nested = false;
+      n_tasks = n_tasks - 1;
       throw;
     }
     
     event_loop_running = false;
-    is_nested = false;
+    n_tasks = n_tasks - 1;
   });
   
-  if (!is_nested)
+  if (n_tasks == 0)
   {
+    n_tasks = n_tasks + 1;
     result = std::async(backward); 
-    is_nested = true;
   } 
   else 
   {
-    
+    n_tasks = n_tasks + 1;
     std::packaged_task<void()> task(backward);
     result = task.get_future();
     
