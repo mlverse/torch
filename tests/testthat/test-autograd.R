@@ -41,7 +41,7 @@ test_that("register_hook", {
 })
 
 test_that("register hook: can throw exceptions in the lantern thread", {
-  skip_on_os("windows")
+  skip("skip test")
   x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { 2* grad})
   y <- 2 * x
@@ -51,7 +51,7 @@ test_that("register hook: can throw exceptions in the lantern thread", {
 })
 
 test_that("register hook: can throw exceptions in the hook", {
-  skip_on_os("windows")
+  skip("skip test")
   x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { stop()})
   y <- 2 * x
