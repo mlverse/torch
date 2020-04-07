@@ -107,6 +107,17 @@ void*  rcpp_call_hook (void* x, void* hook) {
   return (*reinterpret_cast<std::function<void*(void*)> *>(hook))(x);
 }
 
+// Since hooks are arbitrary R functions, they must run in the main 
+// thread. In order to do it we call `backward` in a different thread 
+// see `cpp_backward` and leave the main thread free to execute the R
+// calbacks that are pushed to the `event_loop_thread` as `packaged_tasks`
+// in this function.
+//
+// However, the R hooks can by themselves call `backward` again and torch
+// does not allow us to use a different thread. so while we are waiting for
+// the hook to finish, we allow this thread to execute tasks in the thread
+// the hook as been called.
+//
 // [[Rcpp::export]]
 void cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f) {
   
