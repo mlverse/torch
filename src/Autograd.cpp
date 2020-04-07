@@ -7,6 +7,7 @@
 #include <torch/torch.h>
 
 #include "utils.hpp"
+#include <thread>
 
 void lantern_autograd_set_grad_mode(bool enabled)
 {
@@ -38,7 +39,6 @@ void lantern_Tensor_register_hook(void *self, void *hook)
 void *lantern_new_hook(void *(*fun)(void *, void *), void *custom)
 {
     auto out = [fun, custom](torch::Tensor grad) {
-        std::cout << "Calling the lantern hook" << std::endl;
         auto out = (*fun)((void *)new LanternObject<torch::Tensor>(grad), custom);
         auto ten = reinterpret_cast<LanternObject<torch::Tensor> *>(out)->get();
         return ten;
@@ -73,6 +73,10 @@ void lantern_test_register_hook()
 
 void test_hooks()
 {
+
+#include <torch/torch.h>
+#include <thread>
+
     auto x = torch::randn(1, torch::requires_grad());
     auto y = 2 * x;
 
@@ -86,10 +90,19 @@ void test_hooks()
 
     std::function<void(torch::Tensor)> hook2 = [&](torch::Tensor grad) {
         std::cout << "hello" << std::endl;
-        y.backward();
+        std::thread t([&]() {
+            y.backward();
+        });
+        // event looping
+        t.join();
     };
 
     a.register_hook(hook2);
 
-    b.backward();
+    std::thread t2([&]() {
+        b.backward();
+        //  wainting for requests for the R api
+    });
+
+    t2.join();
 }

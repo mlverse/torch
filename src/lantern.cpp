@@ -70,11 +70,7 @@ void *lantern__cast_half_tensor_bool(void *self, void *non_blocking)
 
 void *lantern_Tensor_backward_tensor_tensor_bool_bool(void *self, void *gradient, void *keep_graph, void *create_graph)
 {
-    std::cout << "Hello from backward " << std::endl;
-    auto x = ((LanternObject<torch::Tensor> *)self)->get();
-    x.backward();
-
-    //((LanternObject<torch::Tensor> *)self)->get().backward(((LanternObject<torch::Tensor> *)gradient)->get(), ((LanternObject<bool> *)keep_graph)->get(), ((LanternObject<bool> *)create_graph)->get());
+    ((LanternObject<torch::Tensor> *)self)->get().backward(((LanternObject<torch::Tensor> *)gradient)->get(), ((LanternObject<bool> *)keep_graph)->get(), ((LanternObject<bool> *)create_graph)->get());
     return NULL;
 }
 
