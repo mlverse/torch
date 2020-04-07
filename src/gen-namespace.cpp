@@ -1,8 +1,6 @@
 // This file is auto generated. Dont modify it by hand.
 #include "utils.hpp"
 
-
-
 // [[Rcpp::export]]
 void cpp_torch_method_set_data_self_Tensor_new_data_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> new_data) {
   lantern_Tensor_set_data_tensor_tensor(self->get(), new_data->get());

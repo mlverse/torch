@@ -425,7 +425,8 @@ SKIP_R_BINDIND <- c(
   "set_quantizer_", #https://github.com/pytorch/pytorch/blob/5dfcfeebb89304c1e7978cad7ada1227f19303f6/tools/autograd/gen_python_functions.py#L36
   "normal",
   "polygamma",
-  "_nnpack_available"
+  "_nnpack_available",
+  "backward"
 )
 
 cpp <- function(path) {
