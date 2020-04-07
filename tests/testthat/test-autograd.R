@@ -1,8 +1,21 @@
 test_that("can autograd", {
   x <- torch_tensor(c(1), requires_grad = TRUE)
   y <- 2 * x
-  expect_invisible(y$backward())
   
+  expect_invisible(y$backward())
+  expect_equal_to_r(x$grad(), 2)
+})
+
+test_that("can autograd with contexts", {
+
+  with_no_grad({
+    with_enable_grad({
+      x <- torch_tensor(c(1), requires_grad = TRUE)
+      y <- 2 * x
+    })
+  })
+
+  expect_invisible(y$backward())
   expect_equal_to_r(x$grad(), 2)
 })
 

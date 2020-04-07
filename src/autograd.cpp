@@ -57,7 +57,6 @@ void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rc
   std::atomic<bool> event_loop_running;
   
   event_loop_running = true;
-  std::future<void> result;
   
   std::function<void()> backward ([&](){
     
@@ -80,16 +79,18 @@ void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rc
     n_tasks = n_tasks - 1;
   });
   
+  std::packaged_task<void()> task(backward);
+  std::future<void> result = task.get_future();
+  
   if (n_tasks == 0)
   {
     n_tasks = n_tasks + 1;
-    result = std::async(backward); 
+    std::thread td (std::move(task));
+    td.detach();
   } 
   else 
   {
     n_tasks = n_tasks + 1;
-    std::packaged_task<void()> task(backward);
-    result = task.get_future();
     
     {
       std::lock_guard<std::mutex> lock(tasks_mutex);
