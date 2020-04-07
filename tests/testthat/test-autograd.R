@@ -90,7 +90,7 @@ test_that("register_hook: can call a the hook inside a hook", {
     print("b")
   })
   
-  a$backward()
+  expect_output(a$backward(), "x.*b")
 })
 
 
