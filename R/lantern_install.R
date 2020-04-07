@@ -1,4 +1,4 @@
-branch <- "register_hook"
+branch <- "master"
 
 install_config <- list(
   "1.4.0" = list(
