@@ -2,11 +2,6 @@
 #include "utils.hpp"
 
 // [[Rcpp::export]]
-void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> gradient, bool keep_graph, bool create_graph) {
-  lantern_Tensor_backward_tensor_tensor_bool_bool(self->get(), gradient->get(), reinterpret_cast<void*>(&keep_graph), reinterpret_cast<void*>(&create_graph));
-}
-
-// [[Rcpp::export]]
 void cpp_torch_method_set_data_self_Tensor_new_data_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> new_data) {
   lantern_Tensor_set_data_tensor_tensor(self->get(), new_data->get());
 }

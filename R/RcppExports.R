@@ -13,6 +13,14 @@ cpp_tensor_requires_grad <- function(self) {
     .Call('_torchr_cpp_tensor_requires_grad', PACKAGE = 'torchr', self)
 }
 
+cpp_torch_method_backward_self_Tensor <- function(self, gradient, keep_graph, create_graph) {
+    invisible(.Call('_torchr_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torchr', self, gradient, keep_graph, create_graph))
+}
+
+cpp_tensor_register_hook <- function(self, f) {
+    invisible(.Call('_torchr_cpp_tensor_register_hook', PACKAGE = 'torchr', self, f))
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torchr_cpp_device_type_to_string', PACKAGE = 'torchr', device)
 }
@@ -91,10 +99,6 @@ cpp_torch_qint8 <- function() {
 
 cpp_torch_qint32 <- function() {
     .Call('_torchr_cpp_torch_qint32', PACKAGE = 'torchr')
-}
-
-cpp_torch_method_backward_self_Tensor <- function(self, gradient, keep_graph, create_graph) {
-    invisible(.Call('_torchr_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torchr', self, gradient, keep_graph, create_graph))
 }
 
 cpp_torch_method_set_data_self_Tensor_new_data_Tensor <- function(self, new_data) {
