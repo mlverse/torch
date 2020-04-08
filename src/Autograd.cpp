@@ -25,11 +25,11 @@ bool lantern_Tensor_requires_grad(void *self)
     return reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().requires_grad();
 }
 
-void lantern_Tensor_register_hook(void *self, void *hook)
+unsigned int lantern_Tensor_register_hook(void *self, void *hook)
 {
     auto h = reinterpret_cast<LanternObject<std::function<torch::Tensor(torch::Tensor)>> *>(hook)->get();
     auto x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
-    x.register_hook(h);
+    return x.register_hook(h);
 }
 
 // Creating the hook in the right format to be passed to .register_hook
@@ -44,4 +44,9 @@ void *lantern_new_hook(void *(*fun)(void *, void *), void *custom)
         return ten;
     };
     return (void *)new LanternObject<std::function<torch::Tensor(torch::Tensor)>>(out);
+}
+
+void lantern_Tensor_remove_hook(void *self, unsigned int pos)
+{
+    reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().remove_hook(pos);
 }
