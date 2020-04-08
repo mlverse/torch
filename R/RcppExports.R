@@ -18,7 +18,11 @@ cpp_torch_method_backward_self_Tensor <- function(self, gradient, keep_graph, cr
 }
 
 cpp_tensor_register_hook <- function(self, f) {
-    invisible(.Call('_torchr_cpp_tensor_register_hook', PACKAGE = 'torchr', self, f))
+    .Call('_torchr_cpp_tensor_register_hook', PACKAGE = 'torchr', self, f)
+}
+
+cpp_tensor_remove_hook <- function(self, pos) {
+    invisible(.Call('_torchr_cpp_tensor_remove_hook', PACKAGE = 'torchr', self, pos))
 }
 
 cpp_device_type_to_string <- function(device) {

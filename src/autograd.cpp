@@ -119,7 +119,7 @@ void*  rcpp_call_hook (void* x, void* hook) {
 // the hook as been called.
 //
 // [[Rcpp::export]]
-void cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f) {
+unsigned int cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f) {
   
   auto r_hook = (void *)new std::function<void*(void *)>([f](void *x) {
     
@@ -157,7 +157,12 @@ void cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function 
   });
   
   auto hook = lantern_new_hook(&rcpp_call_hook, r_hook);
-  lantern_Tensor_register_hook(self->get(), hook);
+  return lantern_Tensor_register_hook(self->get(), hook);
 }
 
+// [[Rcpp::export]]
+void cpp_tensor_remove_hook (Rcpp::XPtr<XPtrTorchTensor> self, unsigned int pos)
+{
+  lantern_Tensor_remove_hook(self->get(), pos);
+}
 
