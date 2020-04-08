@@ -74,14 +74,14 @@ Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE,
 })
 
 Tensor$set("public", "register_hook", function(hook) {
-  aux <- function(grad) {
+  wrap <- function(grad) {
     out <- hook(Tensor$new(ptr = grad))
     if (!is_torch_tensor(out))
       cpp_tensor_undefined()
     else
       out$ptr
   }
-  cpp_tensor_register_hook(self$ptr, aux)
+  pos <- cpp_tensor_register_hook(self$ptr, wrap)
 })
 
 

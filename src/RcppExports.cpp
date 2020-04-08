@@ -52,14 +52,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_tensor_register_hook
-void cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f);
+unsigned int cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f);
 RcppExport SEXP _torchr_cpp_tensor_register_hook(SEXP selfSEXP, SEXP fSEXP) {
 BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
     Rcpp::traits::input_parameter< Rcpp::Function >::type f(fSEXP);
-    cpp_tensor_register_hook(self, f);
-    return R_NilValue;
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_register_hook(self, f));
+    return rcpp_result_gen;
 END_RCPP
 }
 // cpp_device_type_to_string
