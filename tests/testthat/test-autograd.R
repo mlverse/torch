@@ -164,4 +164,22 @@ test_that("register_hook: can have 2 hooks that call backwards on different grap
   expect_equal(v, c("l", "x", "k", "a"))
 })
 
+test_that("remove_hook", {
+  v <- NULL
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  
+  hook <- x$register_hook(function(grad) v <<- c(v, "x"))
+  y$backward()
+  
+  expect_equal(v, "x") # hook was added
+  
+  hook$remove()
+  
+  y <- 2 * x
+  y$backward()
+  
+  expect_equal(v, "x") # hook has been removed
+})
+
 

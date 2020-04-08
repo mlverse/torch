@@ -21,6 +21,10 @@ cpp_tensor_register_hook <- function(self, f) {
     .Call('_torchr_cpp_tensor_register_hook', PACKAGE = 'torchr', self, f)
 }
 
+cpp_tensor_remove_hook <- function(self, pos) {
+    invisible(.Call('_torchr_cpp_tensor_remove_hook', PACKAGE = 'torchr', self, pos))
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torchr_cpp_device_type_to_string', PACKAGE = 'torchr', device)
 }

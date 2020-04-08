@@ -63,6 +63,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_tensor_remove_hook
+void cpp_tensor_remove_hook(Rcpp::XPtr<XPtrTorchTensor> self, unsigned int pos);
+RcppExport SEXP _torchr_cpp_tensor_remove_hook(SEXP selfSEXP, SEXP posSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type pos(posSEXP);
+    cpp_tensor_remove_hook(self, pos);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torchr_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -22258,6 +22269,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_tensor_requires_grad", (DL_FUNC) &_torchr_cpp_tensor_requires_grad, 1},
     {"_torchr_cpp_torch_method_backward_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_backward_self_Tensor, 4},
     {"_torchr_cpp_tensor_register_hook", (DL_FUNC) &_torchr_cpp_tensor_register_hook, 2},
+    {"_torchr_cpp_tensor_remove_hook", (DL_FUNC) &_torchr_cpp_tensor_remove_hook, 2},
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},

@@ -73,6 +73,24 @@ Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE,
   invisible(private$`_backward`(gradient, keep_graph, create_graph))
 })
 
+torch_hook <- R6::R6Class(
+  classname = "torch_hook",
+  public = list(
+    x = NULL,
+    pos = NULL,
+    initialize = function(x, pos) {
+      self$x <- x
+      self$pos <- pos
+    },
+    remove = function() {
+      cpp_tensor_remove_hook(self$x$ptr, self$pos)
+    },
+    print = function() {
+      cat("<torch_hook>")
+    }
+  )
+)
+
 Tensor$set("public", "register_hook", function(hook) {
   wrap <- function(grad) {
     out <- hook(Tensor$new(ptr = grad))
@@ -82,6 +100,7 @@ Tensor$set("public", "register_hook", function(hook) {
       out$ptr
   }
   pos <- cpp_tensor_register_hook(self$ptr, wrap)
+  torch_hook$new(self, pos)
 })
 
 

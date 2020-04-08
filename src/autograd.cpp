@@ -160,4 +160,9 @@ unsigned int cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::F
   return lantern_Tensor_register_hook(self->get(), hook);
 }
 
+// [[Rcpp::export]]
+void cpp_tensor_remove_hook (Rcpp::XPtr<XPtrTorchTensor> self, unsigned int pos)
+{
+  lantern_Tensor_remove_hook(self->get(), pos);
+}
 

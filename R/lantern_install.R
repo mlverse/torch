@@ -1,4 +1,4 @@
-branch <- "master"
+branch <- "remove_hook"
 
 install_config <- list(
   "1.4.0" = list(
