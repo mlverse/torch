@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.14)
 
 project(lantern)
 
@@ -67,6 +67,7 @@ add_library(lantern SHARED
     src/Reduction.cpp
     src/Quantization.cpp
     src/Autograd.cpp
+    src/Function.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
