@@ -7,6 +7,7 @@
 #include <torch/torch.h>
 
 #include "utils.hpp"
+#include "Function.h"
 #include <thread>
 
 void lantern_autograd_set_grad_mode(bool enabled)
@@ -49,4 +50,49 @@ void *lantern_new_hook(void *(*fun)(void *, void *), void *custom)
 void lantern_Tensor_remove_hook(void *self, unsigned int pos)
 {
     reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().remove_hook(pos);
+}
+
+struct MyFunction : public LanternFunction
+{
+    variable_list forward(LanternAutogradContext *ctx, variable_list args)
+    {
+        ctx->save_for_backward(args);
+        return {args[0] + args[1] + args[0] * args[1]};
+    }
+
+    static variable_list backward(LanternAutogradContext *ctx, variable_list grad_output)
+    {
+        auto saved = ctx->get_saved_variables();
+        auto var1 = saved[0];
+        auto var2 = saved[1];
+        variable_list output = {grad_output[0] + grad_output[0] * var2, Variable(), grad_output[0] + grad_output[0] * var1};
+        return output;
+    }
+};
+
+void test_custom_function()
+{
+
+    Variable x = torch::randn({5, 5}, torch::requires_grad());
+    Variable y = torch::randn({5, 5}, torch::requires_grad());
+
+    auto res = LanternFunction::apply(
+        {x, y},
+        [](LanternAutogradContext *ctx, variable_list args) {
+            ctx->save_for_backward(args);
+            return variable_list({args[0] + args[1] + args[0] * args[1]});
+        },
+        [](LanternAutogradContext *ctx, variable_list grad_output) {
+            auto saved = ctx->get_saved_variables();
+            auto var1 = saved[0];
+            auto var2 = saved[1];
+            variable_list output = {grad_output[0] + grad_output[0] * var2, grad_output[0] + grad_output[0] * var1};
+            return output;
+        });
+
+    auto go = torch::ones({}, torch::requires_grad());
+    res[0].sum().backward(go, false, true);
+
+    std::cout << x.grad() << std::endl;
+    std::cout << y.grad() << std::endl;
 }
