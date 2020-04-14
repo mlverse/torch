@@ -133,6 +133,12 @@ extern "C"
   LANTERN_API unsigned int(LANTERN_PTR lantern_Tensor_register_hook)(void *self, void *hook);
   LANTERN_API void *(LANTERN_PTR lantern_new_hook)(void *(*fun)(void *, void *), void *custom);
   LANTERN_API void(LANTERN_PTR lantern_Tensor_remove_hook)(void *self, unsigned int pos);
+  LANTERN_API void(LANTERN_PTR test_custom_function)();
+  LANTERN_API void *(LANTERN_PTR lantern_variable_list_new)();
+  LANTERN_API void(LANTERN_PTR lantern_variable_list_push_back)(void *self, void *x);
+  LANTERN_API void *(LANTERN_PTR lantern_variable_list_get)(void *self, int64_t i);
+  LANTERN_API void(LANTERN_PTR lantern_variable_list_delete)(void *x);
+  LANTERN_API int64_t(LANTERN_PTR lantern_variable_list_size)(void *self);
 
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
@@ -2017,6 +2023,12 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_register_hook);
   LOAD_SYMBOL(lantern_new_hook);
   LOAD_SYMBOL(lantern_Tensor_remove_hook);
+  LOAD_SYMBOL(test_custom_function);
+  LOAD_SYMBOL(lantern_variable_list_new);
+  LOAD_SYMBOL(lantern_variable_list_push_back);
+  LOAD_SYMBOL(lantern_variable_list_get);
+  LOAD_SYMBOL(lantern_variable_list_delete);
+  LOAD_SYMBOL(lantern_variable_list_size);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
