@@ -71,6 +71,22 @@ void *lantern_variable_list_get(void *self, int64_t i)
     return (void *)new LanternObject<torch::Tensor>(out);
 }
 
+int64_t lantern_variable_list_size(void *self)
+{
+    auto s = reinterpret_cast<LanternObject<variable_list> *>(self)->get();
+    return s.size();
+}
+
+void *lantern_Function_forward(void *(*fun)(void *, void *, void *), void *custom)
+{
+    auto out = [fun, custom](LanternAutogradContext *ctx, variable_list inputs) {
+        auto out = (*fun)(custom, (void *)ctx, (void *)new LanternObject<variable_list>(inputs));
+        auto vl = reinterpret_cast<LanternObject<variable_list> *>(out)->get();
+        return vl;
+    };
+    return (void *)new LanternObject<std::function<variable_list(LanternAutogradContext *, variable_list)>>(out);
+}
+
 struct MyFunction : public LanternFunction
 {
     variable_list forward(LanternAutogradContext *ctx, variable_list args)
