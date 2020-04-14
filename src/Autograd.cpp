@@ -52,6 +52,25 @@ void lantern_Tensor_remove_hook(void *self, unsigned int pos)
     reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().remove_hook(pos);
 }
 
+void *lantern_variable_list_new()
+{
+    auto out = new LanternObject<variable_list>();
+    return (void *)out;
+}
+
+void lantern_variable_list_push_back(void *self, void *x)
+{
+    auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
+    reinterpret_cast<LanternObject<variable_list> *>(self)->get().push_back(t);
+}
+
+void *lantern_variable_list_get(void *self, int64_t i)
+{
+    auto s = reinterpret_cast<LanternObject<variable_list> *>(self)->get();
+    torch::Tensor out = s[i];
+    return (void *)new LanternObject<torch::Tensor>(out);
+}
+
 struct MyFunction : public LanternFunction
 {
     variable_list forward(LanternAutogradContext *ctx, variable_list args)
