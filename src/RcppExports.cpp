@@ -74,6 +74,17 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_Function_forward
+Rcpp::XPtr<XPtrTorch> cpp_Function_forward(Rcpp::Function f);
+RcppExport SEXP _torchr_cpp_Function_forward(SEXP fSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::Function >::type f(fSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_Function_forward(f));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torchr_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -22281,6 +22292,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_method_backward_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_backward_self_Tensor, 4},
     {"_torchr_cpp_tensor_register_hook", (DL_FUNC) &_torchr_cpp_tensor_register_hook, 2},
     {"_torchr_cpp_tensor_remove_hook", (DL_FUNC) &_torchr_cpp_tensor_remove_hook, 2},
+    {"_torchr_cpp_Function_forward", (DL_FUNC) &_torchr_cpp_Function_forward, 1},
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},

@@ -166,3 +166,52 @@ void cpp_tensor_remove_hook (Rcpp::XPtr<XPtrTorchTensor> self, unsigned int pos)
   lantern_Tensor_remove_hook(self->get(), pos);
 }
 
+void*  rcpp_call_forward (void* forward, void* ctx, void* inputs) {
+  return (*reinterpret_cast<std::function<void*(void*, void*)> *>(forward))(ctx, inputs);
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorch> cpp_Function_forward (Rcpp::Function f)
+{
+  auto forward = (void *)new std::function<void*(void *, void*)>([f](void *ctx, void* inputs) {
+    
+    std::packaged_task<void*()> task([f, ctx, inputs]() {
+      auto inp = make_xptr<XPtrTorchvariable_list>(inputs);
+      auto con = make_xptr<XPtrTorch>(ctx);
+      return Rcpp::as<Rcpp::XPtr<XPtrTorchvariable_list>>(f(con, inp))->get();
+    });
+    std::future<void*> result = task.get_future();
+    
+    {
+      std::lock_guard<std::mutex> lock(tasks_mutex);
+      tasks.push_front(std::move(task));
+    }
+    
+    std::future_status status;
+    do {
+      status = result.wait_for(std::chrono::seconds(0));
+      if (status == std::future_status::timeout) {
+        
+        std::unique_lock<std::mutex> lock(backward_tasks_mutex);
+        while (!backward_tasks.empty()) {
+          auto task(std::move(backward_tasks.front()));
+          backward_tasks.pop_front();
+          
+          // unlock during the task
+          lock.unlock();
+          task();
+          lock.lock();
+        }
+        
+      } 
+    } while (status != std::future_status::ready); 
+    
+    return result.get();
+  });
+  
+  XPtrTorch out = lantern_Function_forward(&rcpp_call_forward, forward);
+  return make_xptr<XPtrTorch>(out);
+}
+
+
+
