@@ -6681,3 +6681,7 @@ cpp_tensor_undefined <- function() {
     .Call('_torchr_cpp_tensor_undefined', PACKAGE = 'torchr')
 }
 
+cpp_torch_variable_list <- function(x) {
+    .Call('_torchr_cpp_torch_variable_list', PACKAGE = 'torchr', x)
+}
+

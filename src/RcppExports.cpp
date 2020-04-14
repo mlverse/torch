@@ -22262,6 +22262,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_variable_list
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List& x);
+RcppExport SEXP _torchr_cpp_torch_variable_list(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_variable_list(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_autograd_set_grad_mode", (DL_FUNC) &_torchr_cpp_autograd_set_grad_mode, 1},
@@ -23934,6 +23945,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_nullptr", (DL_FUNC) &_torchr_cpp_nullptr, 0},
     {"_torchr_cpp_nullopt", (DL_FUNC) &_torchr_cpp_nullopt, 0},
     {"_torchr_cpp_tensor_undefined", (DL_FUNC) &_torchr_cpp_tensor_undefined, 0},
+    {"_torchr_cpp_torch_variable_list", (DL_FUNC) &_torchr_cpp_torch_variable_list, 1},
     {NULL, NULL, 0}
 };
 

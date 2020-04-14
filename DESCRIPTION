@@ -58,5 +58,6 @@ Collate:
     'tensor_list.R'
     'tensor_options.R'
     'utils.R'
+    'variable_list.R'
     'wrapers.R'
 StagedInstall: no
