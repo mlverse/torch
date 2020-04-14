@@ -73,20 +73,24 @@ struct MyFunction : public LanternFunction
 void test_custom_function()
 {
 
+    int mul = 2;
     Variable x = torch::randn({5, 5}, torch::requires_grad());
     Variable y = torch::randn({5, 5}, torch::requires_grad());
 
     auto res = LanternFunction::apply(
         {x, y},
-        [](LanternAutogradContext *ctx, variable_list args) {
+        [&](LanternAutogradContext *ctx, variable_list args) {
             ctx->save_for_backward(args);
-            return variable_list({args[0] + args[1] + args[0] * args[1]});
+            ctx->saved_data["mul"] = mul;
+            return variable_list({args[0] + mul * args[1] + args[0] * args[1]});
         },
         [](LanternAutogradContext *ctx, variable_list grad_output) {
             auto saved = ctx->get_saved_variables();
+            int mul = ctx->saved_data["mul"].toInt();
             auto var1 = saved[0];
             auto var2 = saved[1];
-            variable_list output = {grad_output[0] + grad_output[0] * var2, grad_output[0] + grad_output[0] * var1};
+            variable_list output = {grad_output[0] + grad_output[0] * var2,
+                                    grad_output[0] * mul + grad_output[0] * var1};
             return output;
         });
 
