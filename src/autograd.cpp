@@ -171,14 +171,22 @@ void*  rcpp_call_forward (void* forward, void* ctx, void* inputs) {
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_Function_forward (Rcpp::Function f)
+Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
 {
-  auto forward = (void *)new std::function<void*(void *, void*)>([f](void *ctx, void* inputs) {
+  auto fun = (void *)new std::function<void*(void *, void*)>([f](void *ctx, void* inputs) {
+    
+    std::cout << "Executing function" << std::endl;
     
     std::packaged_task<void*()> task([f, ctx, inputs]() {
+      std::cout << "Executing task" << std::endl;
       auto inp = make_xptr<XPtrTorchvariable_list>(inputs);
       auto con = make_xptr<XPtrTorch>(ctx);
-      return Rcpp::as<Rcpp::XPtr<XPtrTorchvariable_list>>(f(con, inp))->get();
+      std::cout << "Executing task ...." << std::endl;
+      auto r_out = f(con, inp);
+      std::cout << "R function exec was fine." << std::endl;
+      auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchvariable_list>>(r_out)->get();
+      std::cout << "Executing task ........" << std::endl;
+      return out;
     });
     std::future<void*> result = task.get_future();
     
@@ -187,30 +195,84 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_forward (Rcpp::Function f)
       tasks.push_front(std::move(task));
     }
     
+    std::cout << "Task is sent, now waiting." << std::endl;
+    
     std::future_status status;
     do {
-      status = result.wait_for(std::chrono::seconds(0));
+      status = result.wait_for(std::chrono::seconds(1));
+      std::cout << "still waiting." << std::endl;
+      
+      
       if (status == std::future_status::timeout) {
         
-        std::unique_lock<std::mutex> lock(backward_tasks_mutex);
-        while (!backward_tasks.empty()) {
-          auto task(std::move(backward_tasks.front()));
-          backward_tasks.pop_front();
-          
-          // unlock during the task
-          lock.unlock();
-          task();
-          lock.lock();
-        }
+        // std::unique_lock<std::mutex> lock(backward_tasks_mutex);
+        // std::cout << "acquired waiting." << std::endl;
+        // while (!backward_tasks.empty()) {
+        //   auto task(std::move(backward_tasks.front()));
+        //   backward_tasks.pop_front();
+        //   
+        //   // unlock during the task
+        //   lock.unlock();
+        //   task();
+        //   lock.lock();
+        // }
         
-      } 
+      } else if (status == std::future_status::ready) {
+        std::cout << "ready" << std::endl;
+      } else if (status ==  std::future_status::deferred) {
+        std::cout << "defered" << std::endl;
+      }
+      
     } while (status != std::future_status::ready); 
     
-    return result.get();
+    std::cout << "results are ready; returning!" << std::endl;
+    auto out = result.get();
+    std::cout << "results are ready truely; returning!" << std::endl;
+    
+    return out;
   });
   
-  XPtrTorch out = lantern_Function_forward(&rcpp_call_forward, forward);
+  XPtrTorch out = lantern_Function_lambda(&rcpp_call_forward, fun);
   return make_xptr<XPtrTorch>(out);
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvariable_list> inputs,
+                                                       Rcpp::XPtr<XPtrTorch> forward,
+                                                       Rcpp::XPtr<XPtrTorch> backward)
+{
+  
+  auto inputs_ = inputs->get();
+  auto forward_ = forward->get();
+  auto backward_ = backward->get();
+  
+  std::atomic<bool> event_loop_running;
+  event_loop_running = true;
+  
+  std::function<XPtrTorchvariable_list()> apply ([&](){
+    
+    XPtrTorchvariable_list out = lantern_Function_apply(
+      inputs_,
+      forward_,
+      backward_
+    );
+    
+    event_loop_running = false;
+    return out;
+  });
+  
+  std::packaged_task<XPtrTorchvariable_list()> task(apply);
+  std::future<XPtrTorchvariable_list> result = task.get_future();
+  
+  std::thread td (std::move(task));
+  td.detach();
+  
+  Rcpp::Rcout << "Starting the event loop" << std::endl;
+  
+  event_loop_thread(event_loop_running);
+  
+  auto out = result.get();
+  return make_xptr<XPtrTorchvariable_list>(out);
 }
 
 

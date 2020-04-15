@@ -74,14 +74,27 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// cpp_Function_forward
-Rcpp::XPtr<XPtrTorch> cpp_Function_forward(Rcpp::Function f);
-RcppExport SEXP _torchr_cpp_Function_forward(SEXP fSEXP) {
+// cpp_Function_lambda
+Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f);
+RcppExport SEXP _torchr_cpp_Function_lambda(SEXP fSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::Function >::type f(fSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_Function_forward(f));
+    rcpp_result_gen = Rcpp::wrap(cpp_Function_lambda(f));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_Function_apply
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply(Rcpp::XPtr<XPtrTorchvariable_list> inputs, Rcpp::XPtr<XPtrTorch> forward, Rcpp::XPtr<XPtrTorch> backward);
+RcppExport SEXP _torchr_cpp_Function_apply(SEXP inputsSEXP, SEXP forwardSEXP, SEXP backwardSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type forward(forwardSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type backward(backwardSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_Function_apply(inputs, forward, backward));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -22284,6 +22297,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_variable_list_to_r_list
+Rcpp::List cpp_variable_list_to_r_list(Rcpp::XPtr<XPtrTorchvariable_list> x);
+RcppExport SEXP _torchr_cpp_variable_list_to_r_list(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_variable_list_to_r_list(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_autograd_set_grad_mode", (DL_FUNC) &_torchr_cpp_autograd_set_grad_mode, 1},
@@ -22292,7 +22316,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_method_backward_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_backward_self_Tensor, 4},
     {"_torchr_cpp_tensor_register_hook", (DL_FUNC) &_torchr_cpp_tensor_register_hook, 2},
     {"_torchr_cpp_tensor_remove_hook", (DL_FUNC) &_torchr_cpp_tensor_remove_hook, 2},
-    {"_torchr_cpp_Function_forward", (DL_FUNC) &_torchr_cpp_Function_forward, 1},
+    {"_torchr_cpp_Function_lambda", (DL_FUNC) &_torchr_cpp_Function_lambda, 1},
+    {"_torchr_cpp_Function_apply", (DL_FUNC) &_torchr_cpp_Function_apply, 3},
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},
@@ -23958,6 +23983,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_nullopt", (DL_FUNC) &_torchr_cpp_nullopt, 0},
     {"_torchr_cpp_tensor_undefined", (DL_FUNC) &_torchr_cpp_tensor_undefined, 0},
     {"_torchr_cpp_torch_variable_list", (DL_FUNC) &_torchr_cpp_torch_variable_list, 1},
+    {"_torchr_cpp_variable_list_to_r_list", (DL_FUNC) &_torchr_cpp_variable_list_to_r_list, 1},
     {NULL, NULL, 0}
 };
 

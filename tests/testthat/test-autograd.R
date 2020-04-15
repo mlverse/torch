@@ -182,4 +182,34 @@ test_that("remove_hook", {
   expect_equal(v, "x") # hook has been removed
 })
 
+test_that("creating lambda functions", {
+  
+  f <- function(ctx, inputs) {
+    x <- variable_list$new(ptr = inputs)$to_r()
+    out <- list(x[[1]] + 2* x[[2]] + x[[1]] * x[[2]])
+    torch_variable_list(out)$ptr
+  }
+  
+  b <- function(ctx, grad_output) {
+    x <- variable_list$new(ptr = grad_output)$to_r()
+    torch_variable_list(list(x[[1]], x[[1]]))$ptr
+  }
+  
+  f_ <- cpp_Function_lambda(f)
+  b_ <- cpp_Function_lambda(b)
+  
+  x <- torch_randn(c(5,5), options= list(requires_grad = TRUE))
+  y <- torch_randn(c(5,5), options= list(requires_grad = TRUE))
+  
+  res <- cpp_Function_apply(torch_variable_list(list(x, y))$ptr, f_, b_)
+  res <- variable_list$new(ptr = res)$to_r()
+  go <- torch_ones(c(1), options = list(requires_grad = TRUE))
+  s <- res[[1]]$sum()
+  
+  s$backward()
+  
+  y$grad()
+  
+})
+
 

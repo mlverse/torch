@@ -25,8 +25,12 @@ cpp_tensor_remove_hook <- function(self, pos) {
     invisible(.Call('_torchr_cpp_tensor_remove_hook', PACKAGE = 'torchr', self, pos))
 }
 
-cpp_Function_forward <- function(f) {
-    .Call('_torchr_cpp_Function_forward', PACKAGE = 'torchr', f)
+cpp_Function_lambda <- function(f) {
+    .Call('_torchr_cpp_Function_lambda', PACKAGE = 'torchr', f)
+}
+
+cpp_Function_apply <- function(inputs, forward, backward) {
+    .Call('_torchr_cpp_Function_apply', PACKAGE = 'torchr', inputs, forward, backward)
 }
 
 cpp_device_type_to_string <- function(device) {
@@ -6687,5 +6691,9 @@ cpp_tensor_undefined <- function() {
 
 cpp_torch_variable_list <- function(x) {
     .Call('_torchr_cpp_torch_variable_list', PACKAGE = 'torchr', x)
+}
+
+cpp_variable_list_to_r_list <- function(x) {
+    .Call('_torchr_cpp_variable_list_to_r_list', PACKAGE = 'torchr', x)
 }
 

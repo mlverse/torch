@@ -14,7 +14,7 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List &x)
   return make_xptr<XPtrTorchvariable_list>(out);
 }
 
-// // [[Rcpp::export]]
+// [[Rcpp::export]]
 Rcpp::List cpp_variable_list_to_r_list(Rcpp::XPtr<XPtrTorchvariable_list> x)
 {
 
