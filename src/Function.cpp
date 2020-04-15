@@ -46,6 +46,8 @@ variable_list LanternFunction::apply(
         outputs = forward(&node->ctx_, args);
     }
 
+    std::cout << "Forward was successful" << std::endl;
+
     auto wrapped_outputs = _wrap_outputs(
         args,
         node->ctx_.get_non_differentiable(),

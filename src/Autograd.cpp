@@ -77,14 +77,25 @@ int64_t lantern_variable_list_size(void *self)
     return s.size();
 }
 
-void *lantern_Function_forward(void *(*fun)(void *, void *, void *), void *custom)
+void *lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custom)
 {
     auto out = [fun, custom](LanternAutogradContext *ctx, variable_list inputs) {
         auto out = (*fun)(custom, (void *)ctx, (void *)new LanternObject<variable_list>(inputs));
+        std::cout << "Sucessfully executed R function" << std::endl;
         auto vl = reinterpret_cast<LanternObject<variable_list> *>(out)->get();
         return vl;
     };
     return (void *)new LanternObject<std::function<variable_list(LanternAutogradContext *, variable_list)>>(out);
+}
+
+void *lantern_Function_apply(void *inputs, void *forward, void *backward)
+{
+    auto out = LanternFunction::apply(
+        reinterpret_cast<LanternObject<variable_list> *>(inputs)->get(),
+        reinterpret_cast<LanternObject<std::function<variable_list(LanternAutogradContext *, variable_list)>> *>(forward)->get(),
+        reinterpret_cast<LanternObject<std::function<variable_list(LanternAutogradContext *, variable_list)>> *>(backward)->get());
+
+    return (void *)new LanternObject<variable_list>(out);
 }
 
 struct MyFunction : public LanternFunction
