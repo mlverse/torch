@@ -114,3 +114,25 @@ Tensor$set("public", "register_hook", function(hook) {
 autograd_set_grad_mode <- function(enabled) {
   cpp_autograd_set_grad_mode(enabled)
 }
+
+AutogradContext <- R6::R6Class(
+  classname = "torch_autograd_context",
+  public = list(
+    
+    ptr = NULL,
+    
+    initialize = function(ptr) {
+      self$ptr <- ptr
+    },
+    
+    save_for_backward = function(vars) {
+      cpp_autograd_context_save_for_backward(self$ptr, torch_variable_list(vars)$ptr)
+    },
+    
+    get_saved_variables = function() {
+      vl <- variable_list$new(ptr = cpp_autograd_context_get_saved_variables(self$ptr))
+      vl$to_r()
+    }
+
+  )
+)

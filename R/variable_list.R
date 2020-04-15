@@ -20,7 +20,7 @@ variable_list <- R6:::R6Class(
 )
 
 torch_variable_list <- function(x) {
-  TensorList$new(x)
+  variable_list$new(x)
 }
 
 is_torch_variable_list <- function(x) {

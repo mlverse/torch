@@ -275,5 +275,18 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvaria
   return make_xptr<XPtrTorchvariable_list>(out);
 }
 
+// [[Rcpp::export]]
+void cpp_autograd_context_save_for_backward (Rcpp::XPtr<XPtrTorch> self, 
+                                                              Rcpp::XPtr<XPtrTorchvariable_list> vars)
+{
+  lantern_AutogradContext_save_for_backward(self->get(), vars->get());
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_autograd_context_get_saved_variables (Rcpp::XPtr<XPtrTorch> self)
+{
+  XPtrTorchvariable_list out = lantern_AutogradContext_get_saved_variables(self->get());
+  return make_xptr<XPtrTorchvariable_list>(out);
+}
 
 

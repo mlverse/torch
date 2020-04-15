@@ -33,6 +33,14 @@ cpp_Function_apply <- function(inputs, forward, backward) {
     .Call('_torchr_cpp_Function_apply', PACKAGE = 'torchr', inputs, forward, backward)
 }
 
+cpp_autograd_context_save_for_backward <- function(self, vars) {
+    invisible(.Call('_torchr_cpp_autograd_context_save_for_backward', PACKAGE = 'torchr', self, vars))
+}
+
+cpp_autograd_context_get_saved_variables <- function(self) {
+    .Call('_torchr_cpp_autograd_context_get_saved_variables', PACKAGE = 'torchr', self)
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torchr_cpp_device_type_to_string', PACKAGE = 'torchr', device)
 }

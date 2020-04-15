@@ -185,14 +185,21 @@ test_that("remove_hook", {
 test_that("creating lambda functions", {
   
   f <- function(ctx, inputs) {
+    ctx <- AutogradContext$new(ctx)
     x <- variable_list$new(ptr = inputs)$to_r()
+    ctx$save_for_backward(x)
     out <- list(x[[1]] + 2* x[[2]] + x[[1]] * x[[2]])
     torch_variable_list(out)$ptr
   }
   
   b <- function(ctx, grad_output) {
+    ctx <- AutogradContext$new(ctx)
     x <- variable_list$new(ptr = grad_output)$to_r()
-    torch_variable_list(list(x[[1]], x[[1]]))$ptr
+    y <- ctx$get_saved_variables()
+    print(y)
+    torch_variable_list(list(
+      x[[1]] + x[[1]]*y[[2]], x[[1]] + x[[1]] * y[[1]]
+      ))$ptr
   }
   
   f_ <- cpp_Function_lambda(f)

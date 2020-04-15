@@ -98,6 +98,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_autograd_context_save_for_backward
+void cpp_autograd_context_save_for_backward(Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> vars);
+RcppExport SEXP _torchr_cpp_autograd_context_save_for_backward(SEXP selfSEXP, SEXP varsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type vars(varsSEXP);
+    cpp_autograd_context_save_for_backward(self, vars);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_autograd_context_get_saved_variables
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_autograd_context_get_saved_variables(Rcpp::XPtr<XPtrTorch> self);
+RcppExport SEXP _torchr_cpp_autograd_context_get_saved_variables(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_autograd_context_get_saved_variables(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torchr_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -22318,6 +22340,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_tensor_remove_hook", (DL_FUNC) &_torchr_cpp_tensor_remove_hook, 2},
     {"_torchr_cpp_Function_lambda", (DL_FUNC) &_torchr_cpp_Function_lambda, 1},
     {"_torchr_cpp_Function_apply", (DL_FUNC) &_torchr_cpp_Function_apply, 3},
+    {"_torchr_cpp_autograd_context_save_for_backward", (DL_FUNC) &_torchr_cpp_autograd_context_save_for_backward, 2},
+    {"_torchr_cpp_autograd_context_get_saved_variables", (DL_FUNC) &_torchr_cpp_autograd_context_get_saved_variables, 1},
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},
