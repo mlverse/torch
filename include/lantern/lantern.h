@@ -141,7 +141,8 @@ extern "C"
   LANTERN_API int64_t(LANTERN_PTR lantern_variable_list_size)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Function_lambda)(void *(*fun)(void *, void *, void *), void *custom);
   LANTERN_API void *(LANTERN_PTR lantern_Function_apply)(void *inputs, void *forward, void *backward);
-
+  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_save_for_backward)(void *self, void *vars);
+  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_saved_variables)(void *self);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2033,6 +2034,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_variable_list_size);
   LOAD_SYMBOL(lantern_Function_lambda);
   LOAD_SYMBOL(lantern_Function_apply);
+  LOAD_SYMBOL(lantern_AutogradContext_save_for_backward);
+  LOAD_SYMBOL(lantern_AutogradContext_get_saved_variables);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)

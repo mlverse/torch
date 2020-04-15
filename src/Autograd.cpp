@@ -98,23 +98,17 @@ void *lantern_Function_apply(void *inputs, void *forward, void *backward)
     return (void *)new LanternObject<variable_list>(out);
 }
 
-struct MyFunction : public LanternFunction
+void lantern_AutogradContext_save_for_backward(void *self, void *vars)
 {
-    variable_list forward(LanternAutogradContext *ctx, variable_list args)
-    {
-        ctx->save_for_backward(args);
-        return {args[0] + args[1] + args[0] * args[1]};
-    }
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    ctx->save_for_backward(reinterpret_cast<LanternObject<variable_list> *>(vars)->get());
+}
 
-    static variable_list backward(LanternAutogradContext *ctx, variable_list grad_output)
-    {
-        auto saved = ctx->get_saved_variables();
-        auto var1 = saved[0];
-        auto var2 = saved[1];
-        variable_list output = {grad_output[0] + grad_output[0] * var2, Variable(), grad_output[0] + grad_output[0] * var1};
-        return output;
-    }
-};
+void *lantern_AutogradContext_get_saved_variables(void *self)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    return (void *)new LanternObject<variable_list>(ctx->get_saved_variables());
+}
 
 void test_custom_function()
 {
