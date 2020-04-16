@@ -136,3 +136,57 @@ AutogradContext <- R6::R6Class(
 
   )
 )
+
+autograd_function <- function(forward, backward) {
+  
+  
+  other <- NULL
+  variables <- NULL
+  
+  f <- function(ctx, inputs) {
+    inputs <- variable_list$new(ptr = inputs)$to_r()
+    names(inputs) <- names(variables)
+    args <- append(inputs, other)
+    args$ctx <- AutogradContext$new(ctx)
+    res <- do.call(forward, args)
+    
+    if (!is.list(res))
+      res <- list(res)
+    
+    torch_variable_list(res)$ptr
+  }
+  b <- function(ctx, grad_output) {
+    ctx <- AutogradContext$new(ctx)
+    grad_output <- variable_list$new(ptr = grad_output)$to_r()
+    res <- backward(ctx, grad_output)
+    
+    if (!is.list(res))
+      res <- list(res)
+    
+    torch_variable_list(res)$ptr
+  }
+  
+  f_ <- cpp_Function_lambda(f)
+  b_ <- cpp_Function_lambda(b)
+  
+  
+  function(...) {
+    
+    args <- list(...)
+    
+    variables <<- Filter(
+      function(arg) {is_torch_tensor(arg) && arg$requires_grad()}, 
+      args
+    )
+    
+    other <<- Filter(
+      function(arg) {!(is_torch_tensor(arg) && arg$requires_grad())}, 
+      args
+    )
+    
+    res <- cpp_Function_apply(torch_variable_list(variables)$ptr, f_, b_)
+    res <- variable_list$new(ptr = res)$to_r()
+    res  
+  }
+  
+}

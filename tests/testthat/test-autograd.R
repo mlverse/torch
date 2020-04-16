@@ -220,3 +220,30 @@ test_that("creating lambda functions", {
 })
 
 
+test_that("custom autograd api", {
+  
+  forward <- function(ctx, var1, mul, var2) {
+    ctx$save_for_backward(list(var1, var2))
+    var1 + mul*var2 + var1 * var2
+  }
+  
+  backward <- function(ctx, grad_output) {
+    y <- ctx$get_saved_variables()
+    x <- grad_output
+    list(x[[1]] + x[[1]]*y[[2]], x[[1]] + x[[1]] * y[[1]])
+  }
+  
+  custom <- autograd_function(forward, backward)
+  
+  x <- torch_randn(c(5,5), options= list(requires_grad = TRUE))
+  y <- torch_randn(c(5,5), options= list(requires_grad = TRUE))
+  
+  res <- custom(var1 = x, mul = 2, var2 = y)
+  go <- torch_ones(c(1), options = list(requires_grad = TRUE))
+  s <- res[[1]]$sum()
+  
+  s$backward()
+  
+  y$grad()
+  
+})
