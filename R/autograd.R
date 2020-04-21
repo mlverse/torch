@@ -156,6 +156,7 @@ autograd_function <- function(forward, backward) {
   variables <- NULL
   argument_names <- NULL
   argument_needs_grad <- NULL
+  forward_returns_list <- TRUE
   
   f <- function(ctx, inputs) {
     inputs <- variable_list$new(ptr = inputs)$to_r()
@@ -167,19 +168,24 @@ autograd_function <- function(forward, backward) {
     
     res <- do.call(forward, args)
     
-    if (!is.list(res))
+    if (!is.list(res)) {
+      forward_returns_list <<- FALSE
       res <- list(res)
-    
+    }
+      
     torch_variable_list(res)$ptr
   }
   
   b <- function(ctx, grad_output) {
     ctx <- AutogradContext$new(ctx)
     grad_output <- variable_list$new(ptr = grad_output)$to_r()
+    
     res <- backward(ctx, grad_output)
     
-    if (!is.list(res))
-      res <- list(res)
+    argument_names <- ctx$get_argument_names()
+    argument_needs_grad <- ctx$get_argument_needs_grad()
+    
+    res <- res[argument_names[argument_needs_grad]]
     
     torch_variable_list(res)$ptr
   }
@@ -187,27 +193,32 @@ autograd_function <- function(forward, backward) {
   f_ <- cpp_Function_lambda(f)
   b_ <- cpp_Function_lambda(b)
   
-  
-  function(...) {
-    
-    args <- list(...)
-    
-    variables <<- Filter(
-      function(arg) {is_torch_tensor(arg) && arg$requires_grad()}, 
-      args
-    )
-    
-    other <<- Filter(
-      function(arg) {!(is_torch_tensor(arg) && arg$requires_grad())}, 
-      args
-    )
-    
-    argument_names <<- names(args)
-    argument_needs_grad <<- names(args) %in% names(variables)
-    
-    res <- cpp_Function_apply(torch_variable_list(variables)$ptr, f_, b_)
-    res <- variable_list$new(ptr = res)$to_r()
-    res  
-  }
-  
+  rlang::new_function(
+    args = formals(forward)[-1],
+    body = quote({
+      
+      args <- as.list(environment())
+      
+      variables <<- Filter(
+        function(arg) {is_torch_tensor(arg) && arg$requires_grad()}, 
+        args
+      )
+      
+      other <<- Filter(
+        function(arg) {!(is_torch_tensor(arg) && arg$requires_grad())}, 
+        args
+      )
+      
+      argument_names <<- names(args)
+      argument_needs_grad <<- names(args) %in% names(variables)
+      
+      res <- cpp_Function_apply(torch_variable_list(variables)$ptr, f_, b_)
+      res <- variable_list$new(ptr = res)$to_r()
+      
+      if (!forward_returns_list)
+       res <- res[[1]]
+      
+      res
+    })
+  )
 }

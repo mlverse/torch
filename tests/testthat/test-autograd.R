@@ -228,11 +228,12 @@ test_that("custom autograd api", {
   }
   
   backward <- function(ctx, grad_output) {
-    print(ctx$get_argument_names())
-    print(ctx$get_argument_needs_grad())
     y <- ctx$get_saved_variables()
     x <- grad_output
-    list(x[[1]] + x[[1]]*y[[2]], x[[1]] + x[[1]] * y[[1]])
+    list(
+      var1 = x[[1]] + x[[1]]*y[[2]], 
+      var2 = x[[1]] + x[[1]] * y[[1]]
+    )
   }
   
   custom <- autograd_function(forward, backward)
@@ -242,10 +243,11 @@ test_that("custom autograd api", {
   
   res <- custom(var1 = x, mul = 2, var2 = y)
   go <- torch_ones(c(1), options = list(requires_grad = TRUE))
-  s <- res[[1]]$sum()
+  s <- res$sum()
   
   s$backward()
   
   y$grad()
+  x$grad()
   
 })
