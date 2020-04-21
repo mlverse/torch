@@ -143,6 +143,17 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Function_apply)(void *inputs, void *forward, void *backward);
   LANTERN_API void(LANTERN_PTR lantern_AutogradContext_save_for_backward)(void *self, void *vars);
   LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_saved_variables)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_vector_string_new)();
+  LANTERN_API void(LANTERN_PTR lantern_vector_string_push_back)(void *self, const char *x);
+  LANTERN_API int64_t(LANTERN_PTR lantern_vector_string_size)(void *self);
+  LANTERN_API const char *(LANTERN_PTR lantern_vector_string_at)(void *self, int64_t i);
+  LANTERN_API void *(LANTERN_PTR lantern_vector_bool_new)();
+  LANTERN_API void(LANTERN_PTR lantern_vector_bool_push_back)(void *self, bool x);
+  LANTERN_API int64_t(LANTERN_PTR lantern_vector_bool_size)(void *self);
+  LANTERN_API bool(LANTERN_PTR lantern_vector_bool_at)(void *self, int64_t i);
+  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_set_arguments)(void *self, void *names, void *needs_grad);
+  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_argument_names)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_argument_needs_grad)(void *self);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2036,6 +2047,17 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Function_apply);
   LOAD_SYMBOL(lantern_AutogradContext_save_for_backward);
   LOAD_SYMBOL(lantern_AutogradContext_get_saved_variables);
+  LOAD_SYMBOL(lantern_vector_string_new);
+  LOAD_SYMBOL(lantern_vector_string_push_back);
+  LOAD_SYMBOL(lantern_vector_string_size);
+  LOAD_SYMBOL(lantern_vector_string_at);
+  LOAD_SYMBOL(lantern_vector_bool_new);
+  LOAD_SYMBOL(lantern_vector_bool_push_back);
+  LOAD_SYMBOL(lantern_vector_bool_size);
+  LOAD_SYMBOL(lantern_vector_bool_at);
+  LOAD_SYMBOL(lantern_AutogradContext_set_arguments);
+  LOAD_SYMBOL(lantern_AutogradContext_get_argument_names);
+  LOAD_SYMBOL(lantern_AutogradContext_get_argument_needs_grad);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)

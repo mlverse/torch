@@ -51,3 +51,43 @@ void *lantern_Tensor_undefined()
   torch::Tensor x = {};
   return (void *)new LanternObject<torch::Tensor>(x);
 }
+
+void *lantern_vector_string_new()
+{
+  return (void *)new std::vector<std::string>();
+}
+
+void lantern_vector_string_push_back(void *self, const char *x)
+{
+  reinterpret_cast<std::vector<std::string> *>(self)->push_back(std::string(x));
+}
+
+int64_t lantern_vector_string_size(void *self)
+{
+  return reinterpret_cast<std::vector<std::string> *>(self)->size();
+}
+
+const char *lantern_vector_string_at(void *self, int64_t i)
+{
+  return reinterpret_cast<std::vector<std::string> *>(self)->at(i).c_str();
+}
+
+void *lantern_vector_bool_new()
+{
+  return (void *)new std::vector<bool>();
+}
+
+void lantern_vector_bool_push_back(void *self, bool x)
+{
+  reinterpret_cast<std::vector<bool> *>(self)->push_back(x);
+}
+
+int64_t lantern_vector_bool_size(void *self)
+{
+  return reinterpret_cast<std::vector<bool> *>(self)->size();
+}
+
+bool lantern_vector_bool_at(void *self, int64_t i)
+{
+  return reinterpret_cast<std::vector<bool> *>(self)->at(i);
+}

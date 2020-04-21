@@ -249,5 +249,21 @@ const std::unordered_set<at::TensorImpl *> &LanternAutogradContext::get_non_diff
     return non_differentiable_;
 }
 
+void LanternAutogradContext::set_arguments(std::vector<std::string> names, std::vector<bool> needs_grad)
+{
+    this->argument_names_ = names;
+    this->argument_needs_grad_ = needs_grad;
+};
+
+std::vector<std::string> LanternAutogradContext::get_argument_names()
+{
+    return argument_names_;
+};
+
+std::vector<bool> LanternAutogradContext::get_argument_needs_grad()
+{
+    return argument_needs_grad_;
+};
+
 } // namespace autograd
 } // namespace torch

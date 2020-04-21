@@ -41,11 +41,17 @@ struct LanternAutogradContext
     const std::unordered_set<at::TensorImpl *> &get_dirty() const;
     const std::unordered_set<at::TensorImpl *> &get_non_differentiable() const;
 
+    void set_arguments(std::vector<std::string> names, std::vector<bool> needs_grad);
+    std::vector<std::string> get_argument_names();
+    std::vector<bool> get_argument_needs_grad();
+
 private:
     std::unordered_set<at::TensorImpl *> non_differentiable_;
     std::unordered_set<at::TensorImpl *> dirty_inputs_;
     std::vector<torch::autograd::SavedVariable> saved_variables_;
     variable_list to_save_;
+    std::vector<std::string> argument_names_;
+    std::vector<bool> argument_needs_grad_;
 
     // The CppNode in the autograd graph that owns this AutogradContext. We need a
     // weak_ptr to avoid a refcycle. Since grad_fn_ owns this AutogradContext, it
