@@ -41,6 +41,18 @@ cpp_autograd_context_get_saved_variables <- function(self) {
     .Call('_torchr_cpp_autograd_context_get_saved_variables', PACKAGE = 'torchr', self)
 }
 
+cpp_autograd_context_set_arguments <- function(self, names, needs_grad) {
+    invisible(.Call('_torchr_cpp_autograd_context_set_arguments', PACKAGE = 'torchr', self, names, needs_grad))
+}
+
+cpp_autograd_context_get_argument_names <- function(self) {
+    .Call('_torchr_cpp_autograd_context_get_argument_names', PACKAGE = 'torchr', self)
+}
+
+cpp_autograd_context_get_argument_needs_grad <- function(self) {
+    .Call('_torchr_cpp_autograd_context_get_argument_needs_grad', PACKAGE = 'torchr', self)
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torchr_cpp_device_type_to_string', PACKAGE = 'torchr', device)
 }

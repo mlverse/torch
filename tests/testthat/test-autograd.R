@@ -228,6 +228,8 @@ test_that("custom autograd api", {
   }
   
   backward <- function(ctx, grad_output) {
+    print(ctx$get_argument_names())
+    print(ctx$get_argument_needs_grad())
     y <- ctx$get_saved_variables()
     x <- grad_output
     list(x[[1]] + x[[1]]*y[[2]], x[[1]] + x[[1]] * y[[1]])
