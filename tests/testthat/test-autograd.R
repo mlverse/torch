@@ -252,3 +252,26 @@ test_that("Autograd extension envolving 2 variables", {
   expect_equal_to_r(y$grad(), 3*(4^2))
 })
 
+test_that("Named values in saved variables", {
+  
+  custom_pow <- autograd_function(
+    forward = function(ctx, var1) {
+      ctx$save_for_backward(list(var1 = var1, var2 = 2*var1))
+      var1^2
+    },
+    backward = function(ctx, grad_output) {
+      v <- ctx$get_saved_variables()
+      expect_tensor(v$var1)
+      expect_tensor(v$var2)
+      
+      list(var1 = v$var2)
+    }
+  )
+  
+  x <- torch_tensor(c(3), requires_grad = TRUE)
+  out <- custom_pow(x)
+  out$backward()
+  
+  expect_equal_to_r(out, 9)
+  expect_equal_to_r(x$grad(), 6)
+})

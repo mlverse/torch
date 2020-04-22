@@ -154,6 +154,8 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lantern_AutogradContext_set_arguments)(void *self, void *names, void *needs_grad);
   LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_argument_names)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_argument_needs_grad)(void *self);
+  LANTERN_API void (LANTERN_PTR lantern_AutogradContext_set_saved_variables_names)(void* self, void* names);
+  LANTERN_API void*(LANTERN_PTR lantern_AutogradContext_get_saved_variables_names) (void* self);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2058,6 +2060,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_AutogradContext_set_arguments);
   LOAD_SYMBOL(lantern_AutogradContext_get_argument_names);
   LOAD_SYMBOL(lantern_AutogradContext_get_argument_needs_grad);
+  LOAD_SYMBOL(lantern_AutogradContext_set_saved_variables_names);
+  LOAD_SYMBOL(lantern_AutogradContext_get_saved_variables_names)
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)

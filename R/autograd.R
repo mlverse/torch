@@ -127,11 +127,25 @@ AutogradContext <- R6::R6Class(
     
     save_for_backward = function(vars) {
       cpp_autograd_context_save_for_backward(self$ptr, torch_variable_list(vars)$ptr)
+      
+      if (is.null(names(vars)))
+        nms <- rep("", length(vars))
+      else
+        nms <- names(vars)
+      
+      cpp_autograd_context_set_saved_variables_names(self$ptr, nms)
     },
     
     get_saved_variables = function() {
       vl <- variable_list$new(ptr = cpp_autograd_context_get_saved_variables(self$ptr))
-      vl$to_r()
+      vl <- vl$to_r()
+      
+      nms <- cpp_autograd_context_get_saved_variables_names(self$ptr)
+      
+      if (!all(nms == ""))
+        names(vl) <- nms
+      
+      vl
     },
     
     set_arguments = function(names, needs_grad) {

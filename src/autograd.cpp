@@ -332,3 +332,28 @@ std::vector<bool> cpp_autograd_context_get_argument_needs_grad (Rcpp::XPtr<XPtrT
   }
   return out;
 }
+
+// [[Rcpp::export]]
+void cpp_autograd_context_set_saved_variables_names (Rcpp::XPtr<XPtrTorch> self, std::vector<std::string> names)
+{
+  auto names_ = lantern_vector_string_new();
+  for (int i = 0; i < names.size(); i ++)
+  {
+    lantern_vector_string_push_back(names_, names.at(i).c_str());
+  }
+  
+  lantern_AutogradContext_set_saved_variables_names(self->get(), names_);
+}
+
+// [[Rcpp::export]]
+std::vector<std::string> cpp_autograd_context_get_saved_variables_names (Rcpp::XPtr<XPtrTorch> self)
+{
+  auto v = lantern_AutogradContext_get_saved_variables_names(self->get());
+  auto size = lantern_vector_string_size(v);
+  std::vector<std::string> out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(std::string(lantern_vector_string_at(v, i)));
+  }
+  return out;
+}
