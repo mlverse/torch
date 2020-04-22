@@ -182,72 +182,33 @@ test_that("remove_hook", {
   expect_equal(v, "x") # hook has been removed
 })
 
-test_that("creating lambda functions", {
-  
-  f <- function(ctx, inputs) {
-    ctx <- AutogradContext$new(ctx)
-    x <- variable_list$new(ptr = inputs)$to_r()
-    ctx$save_for_backward(x)
-    out <- list(x[[1]] + 2* x[[2]] + x[[1]] * x[[2]])
-    torch_variable_list(out)$ptr
-  }
-  
-  b <- function(ctx, grad_output) {
-    ctx <- AutogradContext$new(ctx)
-    x <- variable_list$new(ptr = grad_output)$to_r()
-    y <- ctx$get_saved_variables()
-    print(y)
-    torch_variable_list(list(
-      x[[1]] + x[[1]]*y[[2]], x[[1]] + x[[1]] * y[[1]]
-      ))$ptr
-  }
-  
-  f_ <- cpp_Function_lambda(f)
-  b_ <- cpp_Function_lambda(b)
-  
-  x <- torch_randn(c(5,5), options= list(requires_grad = TRUE))
-  y <- torch_randn(c(5,5), options= list(requires_grad = TRUE))
-  
-  res <- cpp_Function_apply(torch_variable_list(list(x, y))$ptr, f_, b_)
-  res <- variable_list$new(ptr = res)$to_r()
-  go <- torch_ones(c(1), options = list(requires_grad = TRUE))
-  s <- res[[1]]$sum()
-  
-  s$backward()
-  
-  y$grad()
-  
-})
 
+test_that("Simple autograd extension", {
 
-test_that("custom autograd api", {
+  custom_pow <- autograd_function(
+    forward = function(ctx, var1) {
+      ctx$save_for_backward(list(var1))
+      var1^2
+    },
+    backward = function(ctx, grad_output) {
+      v <- ctx$get_saved_variables()[[1]]
+      expect_tensor(v)
+      list(var1 = 2*v)
+    }
+  )
   
-  forward <- function(ctx, var1, mul, var2) {
-    ctx$save_for_backward(list(var1, var2))
-    var1 + mul*var2 + var1 * var2
-  }
+  x <- torch_tensor(c(3), requires_grad = TRUE)
+  out <- custom_pow(x)
+  out$backward()
   
-  backward <- function(ctx, grad_output) {
-    y <- ctx$get_saved_variables()
-    x <- grad_output
-    list(
-      var1 = x[[1]] + x[[1]]*y[[2]], 
-      var2 = x[[1]] + x[[1]] * y[[1]]
-    )
-  }
+  expect_equal_to_r(out, 9)
+  expect_equal_to_r(x$grad(), 6)
   
-  custom <- autograd_function(forward, backward)
-  
-  x <- torch_randn(c(5,5), options= list(requires_grad = TRUE))
-  y <- torch_randn(c(5,5), options= list(requires_grad = TRUE))
-  
-  res <- custom(var1 = x, mul = 2, var2 = y)
-  go <- torch_ones(c(1), options = list(requires_grad = TRUE))
-  s <- res$sum()
-  
-  s$backward()
-  
-  y$grad()
+  x <- torch_tensor(c(3), requires_grad = TRUE)
+  out <- custom_pow(x)*custom_pow(x)
+  out$backward()
   x$grad()
   
+  expect_equal_to_r(out, 81)
+  expect_equal_to_r(x$grad(), 12)
 })
