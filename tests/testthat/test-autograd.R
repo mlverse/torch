@@ -212,3 +212,43 @@ test_that("Simple autograd extension", {
   expect_equal_to_r(out, 81)
   expect_equal_to_r(x$grad(), 12)
 })
+
+test_that("Autograd extension envolving 2 variables", {
+  
+  custom <- autograd_function(
+    forward = function(ctx, a, b) {
+      ctx$save_for_backward(list(a, b))
+      a^2 + b^3
+    },
+    backward = function(ctx, grad_output) {
+      a <- ctx$get_saved_variables()[[1]]
+      b <- ctx$get_saved_variables()[[2]]
+      expect_tensor(a)
+      expect_tensor(b)
+      # we must respect the named list and not the order.
+      list(b = 3*(b^2), a = 2*a)
+    }
+  )
+  x <- torch_tensor(c(3), requires_grad = TRUE)
+  y <- torch_tensor(c(4), requires_grad = TRUE)
+  out <- custom(x, y)
+  out$backward()
+  
+  expect_equal_to_r(out, (3^2) + (4^3))
+  expect_equal_to_r(x$grad(), 2*3)
+  expect_equal_to_r(y$grad(), 3*(4^2))
+  
+  x <- torch_tensor(c(3), requires_grad = TRUE)
+  y <- torch_tensor(c(4), requires_grad = TRUE)
+  
+  # order the order of the arguments must be respected even
+  # even if they are passed in a different order in the
+  # function call.
+  out <- custom(b = y, a = x)
+  out$backward()
+  
+  expect_equal_to_r(out, (3^2) + (4^3))
+  expect_equal_to_r(x$grad(), 2*3)
+  expect_equal_to_r(y$grad(), 3*(4^2))
+})
+
