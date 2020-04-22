@@ -130,6 +130,18 @@ void *lantern_AutogradContext_get_argument_needs_grad(void *self)
     return (void *)new std::vector<bool>(ctx->get_argument_needs_grad());
 }
 
+void lantern_AutogradContext_set_saved_variables_names(void *self, void *names)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    ctx->set_saved_variables_names(*reinterpret_cast<std::vector<std::string> *>(names));
+}
+
+void *lantern_AutogradContext_get_saved_variables_names(void *self)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    return (void *)new std::vector<std::string>(ctx->get_saved_variables_names());
+}
+
 void test_custom_function()
 {
 

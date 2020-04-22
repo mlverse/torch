@@ -44,6 +44,8 @@ struct LanternAutogradContext
     void set_arguments(std::vector<std::string> names, std::vector<bool> needs_grad);
     std::vector<std::string> get_argument_names();
     std::vector<bool> get_argument_needs_grad();
+    void set_saved_variables_names(std::vector<std::string> names);
+    std::vector<std::string> get_saved_variables_names();
 
 private:
     std::unordered_set<at::TensorImpl *> non_differentiable_;
@@ -52,6 +54,7 @@ private:
     variable_list to_save_;
     std::vector<std::string> argument_names_;
     std::vector<bool> argument_needs_grad_;
+    std::vector<std::string> saved_variables_names_;
 
     // The CppNode in the autograd graph that owns this AutogradContext. We need a
     // weak_ptr to avoid a refcycle. Since grad_fn_ owns this AutogradContext, it

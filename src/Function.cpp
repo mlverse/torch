@@ -265,5 +265,15 @@ std::vector<bool> LanternAutogradContext::get_argument_needs_grad()
     return argument_needs_grad_;
 };
 
+void LanternAutogradContext::set_saved_variables_names(std::vector<std::string> names)
+{
+    this->saved_variables_names_ = names;
+}
+
+std::vector<std::string> LanternAutogradContext::get_saved_variables_names()
+{
+    return this->saved_variables_names_;
+}
+
 } // namespace autograd
 } // namespace torch
