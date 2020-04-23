@@ -126,6 +126,9 @@ AutogradContext <- R6::R6Class(
     },
     
     save_for_backward = function(vars) {
+      
+      vars <- Filter(Negate(is.null), vars)
+      
       cpp_autograd_context_save_for_backward(self$ptr, torch_variable_list(vars)$ptr)
       
       if (is.null(names(vars)))
@@ -160,6 +163,11 @@ AutogradContext <- R6::R6Class(
       cpp_autograd_context_get_argument_needs_grad(self$ptr)
     }
 
+  ),
+  active = list(
+    needs_input_grad = function() {
+      setNames(as.list(self$get_argument_needs_grad()), self$get_argument_names())
+    }
   )
 )
 

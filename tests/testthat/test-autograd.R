@@ -275,3 +275,57 @@ test_that("Named values in saved variables", {
   expect_equal_to_r(out, 9)
   expect_equal_to_r(x$grad(), 6)
 })
+
+test_that("Can have optional arguments in forward", {
+  
+  linear <- autograd_function(
+    forward = function(ctx, input, weight, bias = NULL) {
+      ctx$save_for_backward(list(input = input, weight = weight, bias = bias))
+      output <- input$mm(weight$t())
+      if (!is.null(bias))
+        output <- output + bias$unsqueeze(0)$expand_as(output)
+      output
+    },
+    backward = function(ctx, grad_output) {
+      s <- ctx$get_saved_variables()
+      
+      grads <- list(
+        input = NULL,
+        weight = NULL,
+        bias = NULL
+      )
+      
+      if (ctx$needs_input_grad$input)
+        grads$input <- grad_output[[1]]$mm(s$weight)
+      
+      if (ctx$needs_input_grad$weight)
+        grads$weight <- grad_output[[1]]$t()$mm(s$input)
+      
+      if (!is.null(s$bias) && ctx$needs_input_grad$bias)
+        grads$bias <- grad_output[[1]]$sum(dim = 0)
+      
+      grads
+    }
+  )
+  
+  x <- torch_tensor(matrix(c(1,1,1,1), ncol = 2))
+  w <- torch_tensor(matrix(c(2,3), ncol = 2), requires_grad = TRUE)
+  y <- torch_tensor(matrix(c(2,2), ncol = 1))
+  
+  o <- linear(x, w)
+  l <- torch_mean((y - o)^2)
+  l$backward()
+  expect_equal_to_r(w$grad(), matrix(c(6,6), ncol = 2))
+  
+  x <- torch_tensor(matrix(c(1,1,1,1), ncol = 2))
+  w <- torch_tensor(matrix(c(2,3), ncol = 2), requires_grad = TRUE)
+  b <- torch_tensor(0, requires_grad = TRUE)
+  y <- torch_tensor(matrix(c(2,2), ncol = 1))
+  
+  o <- linear(x, w, b)
+  l <- torch_mean((y - o)^2)
+  l$backward()
+  
+  expect_equal_to_r(w$grad(), matrix(c(6,6), ncol = 2))
+  expect_equal_to_r(b$grad(), 6)
+})
