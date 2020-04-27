@@ -81,7 +81,6 @@ void *lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custom
 {
     auto out = [fun, custom](LanternAutogradContext *ctx, variable_list inputs) {
         auto out = (*fun)(custom, (void *)ctx, (void *)new LanternObject<variable_list>(inputs));
-        std::cout << "Sucessfully executed R function" << std::endl;
         auto vl = reinterpret_cast<LanternObject<variable_list> *>(out)->get();
         return vl;
     };

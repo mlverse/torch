@@ -20,7 +20,6 @@ variable_list LanternFunction::apply(
 
     node->is_variable_input_.reserve(num_inputs);
 
-    std::cout << num_inputs << std::endl;
     for (size_t i = 0; i < num_inputs; i++)
     {
         node->is_variable_input_.push_back(true);
@@ -46,16 +45,12 @@ variable_list LanternFunction::apply(
         outputs = forward(&node->ctx_, args);
     }
 
-    std::cout << "Forward was successful" << std::endl;
-
     auto wrapped_outputs = _wrap_outputs(
         args,
         node->ctx_.get_non_differentiable(),
         node->ctx_.get_dirty(),
         outputs,
         is_executable ? node : nullptr);
-
-    std::cout << wrapped_outputs.size() << std::endl;
 
     node->output_info_.reserve(wrapped_outputs.size());
     for (auto &output : wrapped_outputs)
