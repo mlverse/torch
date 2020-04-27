@@ -54,7 +54,7 @@ test_that("register_hook", {
 })
 
 test_that("register hook: can throw exceptions in the lantern thread", {
-  skip("skip test")
+  skip_on_os("windows")
   x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { 2* grad})
   y <- 2 * x
@@ -64,7 +64,7 @@ test_that("register hook: can throw exceptions in the lantern thread", {
 })
 
 test_that("register hook: can throw exceptions in the hook", {
-  skip("skip test")
+  skip_on_os("windows")
   x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { stop()})
   y <- 2 * x
@@ -284,9 +284,11 @@ test_that("Can have optional arguments in forward", {
       output <- input$mm(weight$t())
       if (!is.null(bias))
         output <- output + bias$unsqueeze(0)$expand_as(output)
+      
       output
     },
     backward = function(ctx, grad_output) {
+      
       s <- ctx$get_saved_variables()
       
       grads <- list(
