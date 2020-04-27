@@ -213,11 +213,21 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvaria
   
   std::function<XPtrTorchvariable_list()> apply ([&](){
     
-    XPtrTorchvariable_list out = lantern_Function_apply(
-      inputs_,
-      forward_,
-      backward_
-    );
+    XPtrTorchvariable_list out = nullptr;
+    
+    try 
+    {
+      out = lantern_Function_apply(
+        inputs_,
+        forward_,
+        backward_
+      );  
+    }
+    catch (...)
+    {
+      event_loop_running = false;
+      throw;
+    }
     
     event_loop_running = false;
     return out;

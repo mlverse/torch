@@ -331,3 +331,40 @@ test_that("Can have optional arguments in forward", {
   expect_equal_to_r(w$grad(), matrix(c(6,6), ncol = 2))
   expect_equal_to_r(b$grad(), 6)
 })
+
+test_that("Catch errors in forward and backward R functions", {
+  skip_on_os("windows")
+  
+  custom_pow <- autograd_function(
+    forward = function(ctx, var1) {
+      stop("stop forward")
+      ctx$save_for_backward(list(var1))
+      var1^2
+    },
+    backward = function(ctx, grad_output) {
+      v <- ctx$get_saved_variables()[[1]]
+      expect_tensor(v)
+      list(var1 = 2*v)
+    }
+  )
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  expect_error(custom_pow(x), "stop forward")
+  
+  custom_pow <- autograd_function(
+    forward = function(ctx, var1) {
+      ctx$save_for_backward(list(var1))
+      var1^2
+    },
+    backward = function(ctx, grad_output) {
+      v <- ctx$get_saved_variables()[[1]]
+      expect_tensor(v)
+      stop("stop backward")
+      list(var1 = 2*v)
+    }
+  )
+  
+  r <- custom_pow(x)
+  expect_error(r$backward(), "stop backward")
+})
+
