@@ -121,15 +121,20 @@ AutogradContext <- R6::R6Class(
     
     ptr = NULL,
     
-    initialize = function(ptr) {
+    initialize = function(ptr, env) {
       self$ptr <- ptr
+      private$.env <- env
     },
     
-    save_for_backward = function(vars) {
+    save_for_backward = function(args) {
+  
+      private$.env$.is_torch_tensor <- as.logical(sapply(args, is_torch_tensor))
       
-      vars <- Filter(Negate(is.null), vars)
+      vars <- args[private$.env$.is_torch_tensor]
+      other <- args[!private$.env$.is_torch_tensor]
       
       cpp_autograd_context_save_for_backward(self$ptr, torch_variable_list(vars)$ptr)
+      private$.env$.other <- other
       
       if (is.null(names(vars)))
         nms <- rep("", length(vars))
@@ -140,15 +145,35 @@ AutogradContext <- R6::R6Class(
     },
     
     get_saved_variables = function() {
-      vl <- variable_list$new(ptr = cpp_autograd_context_get_saved_variables(self$ptr))
-      vl <- vl$to_r()
+      
+      # retrieve variables
+      vars <- variable_list$new(ptr = cpp_autograd_context_get_saved_variables(self$ptr))
+      vars <- vars$to_r()
       
       nms <- cpp_autograd_context_get_saved_variables_names(self$ptr)
-      
       if (!all(nms == ""))
-        names(vl) <- nms
+        names(vars) <- nms
       
-      vl
+      # retrieve other
+      other <- private$.env$.other
+      
+      # retrieve order
+      is_tensors <- private$.env$.is_torch_tensor
+      indexes <- integer(length = length(is_tensors))
+      indexes[is_tensors] <- cumsum(is_tensors[is_tensors])
+      indexes[!is_tensors] <- cumsum(!is_tensors[!is_tensors])
+      
+      mapply(
+        FUN = function(is_tensor, index) {
+          if (is_tensor)
+            vars[index]
+          else
+            other[index]
+        }, 
+        is_tensors,
+        indexes,
+        USE.NAMES = FALSE
+      )
     },
     
     set_arguments = function(names, needs_grad) {
@@ -162,77 +187,78 @@ AutogradContext <- R6::R6Class(
     get_argument_needs_grad = function() {
       cpp_autograd_context_get_argument_needs_grad(self$ptr)
     }
-
   ),
   active = list(
     needs_input_grad = function() {
       setNames(as.list(self$get_argument_needs_grad()), self$get_argument_names())
     }
+  ),
+  private  = list(
+    .env = NULL
   )
 )
 
 autograd_function <- function(forward, backward) {
-  
-  .env <- rlang::new_environment()
-  .env$forward_returns_list <- TRUE
-  
-  f <- function(ctx, inputs) {
-    inputs <- variable_list$new(ptr = inputs)$to_r()
-    names(inputs) <- names(.env$variables)
-    args <- append(inputs, .env$other)
-    
-    args$ctx <- AutogradContext$new(ctx)
-    args$ctx$set_arguments(argument_names, argument_needs_grad)
-    
-    res <- do.call(forward, args)
-    
-    if (!is.list(res)) {
-      .env$forward_returns_list <- FALSE
-      res <- list(res)
-    }
-      
-    torch_variable_list(res)$ptr
-  }
-  
-  b <- function(ctx, grad_output) {
-    ctx <- AutogradContext$new(ctx)
-    grad_output <- variable_list$new(ptr = grad_output)$to_r()
-    
-    res <- backward(ctx, grad_output)
-    
-    argument_names <- ctx$get_argument_names()
-    argument_needs_grad <- ctx$get_argument_needs_grad()
-    
-    res <- res[argument_names[argument_needs_grad]]
-    
-    torch_variable_list(res)$ptr
-  }
-  
-  f_ <- cpp_Function_lambda(f)
-  b_ <- cpp_Function_lambda(b)
-  
   rlang::new_function(
     args = rlang::fn_fmls(forward)[-1],
     body = rlang::expr({
       
+      # environment to transfer info from this function to
+      # the forward/backward function
+      .env <- rlang::new_environment()
+      .env$forward_returns_list <- TRUE
+      
+      # create the c++ lambda wrapping the R function
+      .f <- function(ctx, inputs) {
+        inputs <- variable_list$new(ptr = inputs)$to_r()
+        names(inputs) <- names(.env$variables)
+        args <- append(inputs, .env$other)
+        
+        args$ctx <- AutogradContext$new(ctx, .env)
+        args$ctx$set_arguments(.env$argument_names, .env$argument_needs_grad)
+        
+        res <- do.call(forward, args)
+        
+        if (!is.list(res)) {
+          .env$forward_returns_list <- FALSE
+          res <- list(res)
+        }
+        
+        torch_variable_list(res)$ptr
+      }
+      .b <- function(ctx, grad_output) {
+        ctx <- AutogradContext$new(ctx, .env)
+        
+        grad_output <- variable_list$new(ptr = grad_output)$to_r()
+        
+        res <- backward(ctx, grad_output)
+        
+        argument_names <- ctx$get_argument_names()
+        argument_needs_grad <- ctx$get_argument_needs_grad()
+        
+        res <- res[argument_names[argument_needs_grad]]
+        
+        torch_variable_list(res)$ptr
+      }
+      
+      .f_ <- cpp_Function_lambda(.f)
+      .b_ <- cpp_Function_lambda(.b)
+      
+      # passing the variables through cpp_Function_apply
+      # other arguments are passed through `.env`
       args <- rlang::list2(!!!rlang::fn_fmls_syms(forward)[-1])
+      is_var <- sapply(args, function(arg) {is_torch_tensor(arg) && arg$requires_grad()})    
+    
+      .env$variables <- args[is_var]
+      .env$other <- args[!is_var]
       
-      .env$variables <<- Filter(
-        function(arg) {is_torch_tensor(arg) && arg$requires_grad()}, 
-        args
-      )
+      .env$argument_names <- names(args)
+      .env$argument_needs_grad <- names(args) %in% names(.env$variables)
       
-      .env$other <<- Filter(
-        function(arg) {!(is_torch_tensor(arg) && arg$requires_grad())}, 
-        args
-      )
-      
-      argument_names <<- names(args)
-      argument_needs_grad <<- names(args) %in% names(.env$variables)
-      
-      res <- cpp_Function_apply(torch_variable_list(.env$variables)$ptr, f_, b_)
+      res <- cpp_Function_apply(torch_variable_list(.env$variables)$ptr, .f_, .b_)
       res <- variable_list$new(ptr = res)$to_r()
       
+      # post processing of results
       if (!.env$forward_returns_list)
        res <- res[[1]]
       

@@ -368,3 +368,35 @@ test_that("Catch errors in forward and backward R functions", {
   expect_error(r$backward(), "stop backward")
 })
 
+test_that("Can pass constants to save_for_backward", {
+  
+  custom_pow <- autograd_function(
+    forward = function(ctx, var1, i) {
+      ctx$save_for_backward(list(var1 = var1, i = i))
+      var1^i
+    },
+    backward = function(ctx, grad_output) {
+      v <- ctx$get_saved_variables()
+      expect_tensor(v$var1)
+      expect_is(v$i, "numeric")
+      expect_named(v, c("var1", "i"))
+      list(var1 = v$i*(v$var1^(v$i - 1)))
+    }
+  )
+  
+  x <- torch_tensor(2, requires_grad = TRUE)
+  r <- custom_pow(x, 2)
+  r$backward()
+  
+  expect_equal_to_r(r, 4)
+  expect_equal_to_r(x$grad(), 2*2)
+  
+  x <- torch_tensor(2, requires_grad = TRUE)
+  r <- custom_pow(x, 3)
+  r$backward()
+  
+  expect_equal_to_r(r, 8)
+  expect_equal_to_r(x$grad(), 3*2^(3-1))
+  
+})
+
