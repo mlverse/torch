@@ -78,14 +78,22 @@ Here, we give an additional example of a function that is parametrized by non-Te
 ```{r}
 mul_constant <- autograd_function(
   forward = function(ctx, tensor, constant) {
-    ctx$save_for_backward(constant)
+    ctx$save_for_backward(constant = constant)
     tensor * constant
   },
   backward = function(ctx, grad_output) {
-    v <- ctx$get_saved_variables()
+    v <- ctx$saved_variables
     list(
       tensor = grad_output * v$constant
     )
   }
 )
 ```
+
+```{r}
+x <- torch_tensor(1, requires_grad = TRUE)
+o <- mul_constant(x, 2)
+o$backward()
+x$grad()
+```
+
