@@ -298,13 +298,13 @@ test_that("Can have optional arguments in forward", {
       )
       
       if (ctx$needs_input_grad$input)
-        grads$input <- grad_output[[1]]$mm(s$weight)
+        grads$input <- grad_output$mm(s$weight)
       
       if (ctx$needs_input_grad$weight)
-        grads$weight <- grad_output[[1]]$t()$mm(s$input)
+        grads$weight <- grad_output$t()$mm(s$input)
       
       if (!is.null(s$bias) && ctx$needs_input_grad$bias)
-        grads$bias <- grad_output[[1]]$sum(dim = 0)
+        grads$bias <- grad_output$sum(dim = 0)
       
       grads
     }
@@ -398,5 +398,44 @@ test_that("Can pass constants to save_for_backward", {
   expect_equal_to_r(r, 8)
   expect_equal_to_r(x$grad(), 3*2^(3-1))
   
+})
+
+test_that("Forward can return a list", {
+  
+  custom_pow <- autograd_function(
+    forward = function(ctx, var1, i) {
+      ctx$save_for_backward(list(var1 = var1, i = i))
+      list(var1^i, var1^(i+1))
+    },
+    backward = function(ctx, grad_output) {
+      v <- ctx$get_saved_variables()
+      expect_tensor(grad_output[[1]])
+      expect_tensor(grad_output[[2]])
+      list(var1 = v$i*(v$var1^(v$i - 1)))
+    }
+  )
+  
+  x <- torch_tensor(2, requires_grad = TRUE)
+  r <- custom_pow(x, 2)
+  r[[1]]$backward()
+  expect_equal_to_r(x$grad(), 4)
+  
+  custom_pow <- autograd_function(
+    forward = function(ctx, var1, i) {
+      ctx$save_for_backward(list(var1 = var1, i = i))
+      list(var1^i, var1^(i+1))
+    },
+    backward = function(ctx, out1, out2) {
+      v <- ctx$get_saved_variables()
+      expect_tensor(out1)
+      expect_tensor(out2)
+      list(var1 = v$i*(v$var1^(v$i - 1)))
+    }
+  )
+  
+  x <- torch_tensor(2, requires_grad = TRUE)
+  r <- custom_pow(x, 2)
+  r[[1]]$backward()
+  expect_equal_to_r(x$grad(), 4)
 })
 

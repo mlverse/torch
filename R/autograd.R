@@ -227,11 +227,26 @@ autograd_function <- function(forward, backward) {
         torch_variable_list(res)$ptr
       }
       .b <- function(ctx, grad_output) {
-        ctx <- AutogradContext$new(ctx, .env)
         
+        # parse pointers to R objects
+        ctx <- AutogradContext$new(ctx, .env)
         grad_output <- variable_list$new(ptr = grad_output)$to_r()
         
-        res <- backward(ctx, grad_output)
+        # destructure the grad_output list
+        fmls <- rlang::fn_fmls_names(backward)[-1] # remove the context
+        if (length(grad_output) > length(fmls)) {
+          if (length(fmls) == 1) # and length(grad_output) > 1
+            grad_output <- list(grad_output)
+          else {
+            d <- length(grad_output) - length(fmls)
+            grad_output <- append(
+              grad_output[1:(length(grad_output) - (d + 1))],
+              list(grad_output[(length(grad_output) - d):length(grad_output)])
+            )  
+          }
+        }
+        args <- append(list(ctx), grad_output)
+        res <- do.call(backward, args)
         
         argument_names <- ctx$get_argument_names()
         argument_needs_grad <- ctx$get_argument_needs_grad()
