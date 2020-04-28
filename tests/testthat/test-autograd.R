@@ -187,7 +187,7 @@ test_that("Simple autograd extension", {
 
   custom_pow <- autograd_function(
     forward = function(ctx, var1) {
-      ctx$save_for_backward(list(var1))
+      ctx$save_for_backward(var1)
       var1^2
     },
     backward = function(ctx, grad_output) {
@@ -217,7 +217,7 @@ test_that("Autograd extension envolving 2 variables", {
   
   custom <- autograd_function(
     forward = function(ctx, a, b) {
-      ctx$save_for_backward(list(a, b))
+      ctx$save_for_backward(a, b)
       a^2 + b^3
     },
     backward = function(ctx, grad_output) {
@@ -256,7 +256,7 @@ test_that("Named values in saved variables", {
   
   custom_pow <- autograd_function(
     forward = function(ctx, var1) {
-      ctx$save_for_backward(list(var1 = var1, var2 = 2*var1))
+      ctx$save_for_backward(var1 = var1, var2 = 2*var1)
       var1^2
     },
     backward = function(ctx, grad_output) {
@@ -280,7 +280,7 @@ test_that("Can have optional arguments in forward", {
   
   linear <- autograd_function(
     forward = function(ctx, input, weight, bias = NULL) {
-      ctx$save_for_backward(list(input = input, weight = weight, bias = bias))
+      ctx$save_for_backward(input = input, weight = weight, bias = bias)
       output <- input$mm(weight$t())
       if (!is.null(bias))
         output <- output + bias$unsqueeze(0)$expand_as(output)
@@ -338,7 +338,7 @@ test_that("Catch errors in forward and backward R functions", {
   custom_pow <- autograd_function(
     forward = function(ctx, var1) {
       stop("stop forward")
-      ctx$save_for_backward(list(var1))
+      ctx$save_for_backward(var1)
       var1^2
     },
     backward = function(ctx, grad_output) {
@@ -353,7 +353,7 @@ test_that("Catch errors in forward and backward R functions", {
   
   custom_pow <- autograd_function(
     forward = function(ctx, var1) {
-      ctx$save_for_backward(list(var1))
+      ctx$save_for_backward(var1)
       var1^2
     },
     backward = function(ctx, grad_output) {
@@ -372,7 +372,7 @@ test_that("Can pass constants to save_for_backward", {
   
   custom_pow <- autograd_function(
     forward = function(ctx, var1, i) {
-      ctx$save_for_backward(list(var1 = var1, i = i))
+      ctx$save_for_backward(var1 = var1, i = i)
       var1^i
     },
     backward = function(ctx, grad_output) {
@@ -404,7 +404,7 @@ test_that("Forward can return a list", {
   
   custom_pow <- autograd_function(
     forward = function(ctx, var1, i) {
-      ctx$save_for_backward(list(var1 = var1, i = i))
+      ctx$save_for_backward(var1 = var1, i = i)
       list(var1^i, var1^(i+1))
     },
     backward = function(ctx, grad_output) {
@@ -422,7 +422,7 @@ test_that("Forward can return a list", {
   
   custom_pow <- autograd_function(
     forward = function(ctx, var1, i) {
-      ctx$save_for_backward(list(var1 = var1, i = i))
+      ctx$save_for_backward(var1 = var1, i = i)
       list(var1^i, var1^(i+1))
     },
     backward = function(ctx, out1, out2) {

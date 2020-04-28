@@ -126,7 +126,9 @@ AutogradContext <- R6::R6Class(
       private$.env <- env
     },
     
-    save_for_backward = function(args) {
+    save_for_backward = function(...) {
+      
+      args <- rlang::list2(...)
   
       private$.env$.is_torch_tensor <- as.logical(sapply(args, is_torch_tensor))
       
@@ -191,6 +193,9 @@ AutogradContext <- R6::R6Class(
   active = list(
     needs_input_grad = function() {
       setNames(as.list(self$get_argument_needs_grad()), self$get_argument_names())
+    },
+    saved_variables = function() {
+      self$get_saved_variables()
     }
   ),
   private  = list(
