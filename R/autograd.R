@@ -1,7 +1,6 @@
 #' @include tensor.R
+NULL
 
-#' With no grad
-#'
 #' Temporarily modify gradient recording.
 #'
 #' @param code code to be executed with no gradient recording.
@@ -203,6 +202,42 @@ AutogradContext <- R6::R6Class(
   )
 )
 
+#' Records operation history and defines formulas for differentiating ops.
+#' 
+#' Every operation performed on Tensor's creates a new function object, that 
+#' performs the computation, and records that it happened. The history is 
+#' retained in the form of a DAG of functions, with edges denoting data 
+#' dependencies (input <- output). Then, when backward is called, the graph is 
+#' processed in the topological ordering, by calling `backward()` methods of each 
+#' Function object, and passing returned gradients on to next Function's.
+#' 
+#' @param forward Performs the operation. It must accept a context `ctx` as the first argument, 
+#'   followed by any number of arguments (tensors or other types). The context can be 
+#'   used to store tensors that can be then retrieved during the backward pass.
+#' @param backward Defines a formula for differentiating the operation. It must accept 
+#'   a context `ctx` as the first argument, followed by as many outputs did `forward()` 
+#'   return, and it should return a named list. Each argument is the gradient w.r.t 
+#'   the given output, and each element in the returned list should be the gradient 
+#'   w.r.t. the corresponding input. The context can be used to retrieve tensors saved 
+#'   during the forward pass. It also has an attribute `ctx$needs_input_grad` as a 
+#'   named list of booleans representing whether each input needs gradient. 
+#'   E.g., `backward()` will have `ctx$needs_input_grad$input = TRUE` if the `input`
+#'   argument to `forward()` needs gradient computated w.r.t. the output.
+#'   
+#' @examples 
+#' 
+#' exp2 <- autograd_function(
+#'   forward = function(ctx, i) {
+#'     result <- i$exp()
+#'     ctx$save_for_backward(result = result)
+#'     result
+#'   },
+#'   backward = function(ctx, grad_output) {
+#'     list(i = grad_output * ctx$saved_variable$result)
+#'   }
+#' )
+#' 
+#' @export
 autograd_function <- function(forward, backward) {
   rlang::new_function(
     args = rlang::fn_fmls(forward)[-1],
