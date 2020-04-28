@@ -191,7 +191,7 @@ test_that("Simple autograd extension", {
       var1^2
     },
     backward = function(ctx, grad_output) {
-      v <- ctx$get_saved_variables()[[1]]
+      v <- ctx$saved_variables[[1]]
       expect_tensor(v)
       list(var1 = 2*v)
     }
@@ -221,8 +221,8 @@ test_that("Autograd extension envolving 2 variables", {
       a^2 + b^3
     },
     backward = function(ctx, grad_output) {
-      a <- ctx$get_saved_variables()[[1]]
-      b <- ctx$get_saved_variables()[[2]]
+      a <- ctx$saved_variables[[1]]
+      b <- ctx$saved_variables[[2]]
       expect_tensor(a)
       expect_tensor(b)
       # we must respect the named list and not the order.
@@ -260,7 +260,7 @@ test_that("Named values in saved variables", {
       var1^2
     },
     backward = function(ctx, grad_output) {
-      v <- ctx$get_saved_variables()
+      v <- ctx$saved_variables
       expect_tensor(v$var1)
       expect_tensor(v$var2)
       
@@ -289,7 +289,7 @@ test_that("Can have optional arguments in forward", {
     },
     backward = function(ctx, grad_output) {
       
-      s <- ctx$get_saved_variables()
+      s <- ctx$saved_variables
       
       grads <- list(
         input = NULL,
@@ -342,7 +342,7 @@ test_that("Catch errors in forward and backward R functions", {
       var1^2
     },
     backward = function(ctx, grad_output) {
-      v <- ctx$get_saved_variables()[[1]]
+      v <- ctx$saved_variables[[1]]
       expect_tensor(v)
       list(var1 = 2*v)
     }
@@ -357,7 +357,7 @@ test_that("Catch errors in forward and backward R functions", {
       var1^2
     },
     backward = function(ctx, grad_output) {
-      v <- ctx$get_saved_variables()[[1]]
+      v <- ctx$saved_variables[[1]]
       expect_tensor(v)
       stop("stop backward")
       list(var1 = 2*v)
@@ -376,7 +376,7 @@ test_that("Can pass constants to save_for_backward", {
       var1^i
     },
     backward = function(ctx, grad_output) {
-      v <- ctx$get_saved_variables()
+      v <- ctx$saved_variables
       expect_tensor(v$var1)
       expect_is(v$i, "numeric")
       expect_named(v, c("var1", "i"))
@@ -408,7 +408,7 @@ test_that("Forward can return a list", {
       list(var1^i, var1^(i+1))
     },
     backward = function(ctx, grad_output) {
-      v <- ctx$get_saved_variables()
+      v <- ctx$saved_variables
       expect_tensor(grad_output[[1]])
       expect_tensor(grad_output[[2]])
       list(var1 = v$i*(v$var1^(v$i - 1)))
@@ -426,7 +426,7 @@ test_that("Forward can return a list", {
       list(var1^i, var1^(i+1))
     },
     backward = function(ctx, out1, out2) {
-      v <- ctx$get_saved_variables()
+      v <- ctx$saved_variables
       expect_tensor(out1)
       expect_tensor(out2)
       list(var1 = v$i*(v$var1^(v$i - 1)))

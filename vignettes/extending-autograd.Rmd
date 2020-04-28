@@ -42,7 +42,7 @@ Below you can find code for a linear function:
 ```{r}
 linear <- autograd_function(
   forward = function(ctx, input, weight, bias = NULL) {
-    ctx$save_for_backward(list(input = input, weight = weight, bias = bias))
+    ctx$save_for_backward(input = input, weight = weight, bias = bias)
     output <- input$mm(weight$t())
     if (!is.null(bias))
       output <- output + bias$unsqueeze(0)$expand_as(output)
@@ -51,7 +51,7 @@ linear <- autograd_function(
   },
   backward = function(ctx, grad_output) {
     
-    s <- ctx$get_saved_variables()
+    s <- ctx$saved_variables
     
     grads <- list(
       input = NULL,
