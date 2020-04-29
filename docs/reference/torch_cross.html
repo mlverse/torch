@@ -95,6 +95,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -167,26 +170,26 @@ size 3.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7279  0.7508 -0.4068
-#&gt;  0.3114  1.4250 -1.1203
-#&gt; -0.3751  0.9284  1.1601
-#&gt; -0.1421  0.1146 -0.2543
+#&gt;  0.0243 -1.4921 -1.4085
+#&gt;  1.3373 -1.1988  1.6358
+#&gt;  0.3970 -0.7878  1.0753
+#&gt;  0.0312  0.6855 -3.0102
 #&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0632  1.9197 -1.2698
-#&gt; -0.3580 -0.3398  0.4150
-#&gt;  1.5928 -0.0757  0.3392
-#&gt; -0.1611  0.3639 -0.1731
+#&gt;  1.5127 -0.9969  0.8368
+#&gt; -0.4713 -0.0937  0.5712
+#&gt; -0.4676  1.2112  0.5925
+#&gt; -1.0638  1.4568 -1.3405
 #&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='fu'>torch_cross</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1725  0.9500  1.4448
-#&gt;  0.2108  0.2719  0.4044
-#&gt;  0.4028  1.9750 -1.4504
-#&gt;  0.0727  0.0164 -0.0333
+#&gt; -2.6528 -2.1510  2.2330
+#&gt; -0.5314 -1.5348 -0.6904
+#&gt; -1.7691 -0.7380  0.1125
+#&gt;  3.4662  3.2441  0.7748
 #&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='fu'>torch_cross</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1725  0.9500  1.4448
-#&gt;  0.2108  0.2719  0.4044
-#&gt;  0.4028  1.9750 -1.4504
-#&gt;  0.0727  0.0164 -0.0333
+#&gt; -2.6528 -2.1510  2.2330
+#&gt; -0.5314 -1.5348 -0.6904
+#&gt; -1.7691 -0.7380  0.1125
+#&gt;  3.4662  3.2441  0.7748
 #&gt; [ CPUFloatType{4,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

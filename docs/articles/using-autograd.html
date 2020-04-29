@@ -57,6 +57,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -203,26 +206,26 @@
 <span id="cb10-53"><a href="#cb10-53"></a>    })</span>
 <span id="cb10-54"><a href="#cb10-54"></a>    </span>
 <span id="cb10-55"><a href="#cb10-55"></a>}</span>
-<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 43.1944 </span></span>
-<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 39.76564 </span></span>
-<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 36.72143 </span></span>
-<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 34.01487 </span></span>
-<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 31.60432 </span></span>
-<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 29.44513 </span></span>
-<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 27.51169 </span></span>
-<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 25.76728 </span></span>
-<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 24.18859 </span></span>
-<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 22.75647 </span></span>
-<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 21.4481 </span></span>
-<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 20.25265 </span></span>
-<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 19.15836 </span></span>
-<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 18.15492 </span></span>
-<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 17.23107 </span></span>
-<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 16.37527 </span></span>
-<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 15.58397 </span></span>
-<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 14.85032 </span></span>
-<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 14.16865 </span></span>
-<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 13.53423</span></span></code></pre></div>
+<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 69.63779 </span></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 64.34746 </span></span>
+<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 59.57198 </span></span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 55.24584 </span></span>
+<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 51.32189 </span></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 47.76328 </span></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 44.51353 </span></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 41.53828 </span></span>
+<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 38.82073 </span></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 36.33484 </span></span>
+<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 34.05214 </span></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 31.95492 </span></span>
+<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 30.02137 </span></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 28.23679 </span></span>
+<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 26.58571 </span></span>
+<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 25.05633 </span></span>
+<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 23.63741 </span></span>
+<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 22.32113 </span></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 21.09805 </span></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 19.95875</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">

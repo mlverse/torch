@@ -95,6 +95,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -168,27 +171,27 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.1892
-#&gt;  0.9076
-#&gt; -0.1795
-#&gt; -0.5615
-#&gt; -1.8249
-#&gt; -0.7253
-#&gt;  1.0996
-#&gt;  0.1972
-#&gt;  1.2671
-#&gt; -0.2309
+#&gt;  0.0227
+#&gt;  0.6936
+#&gt;  0.9344
+#&gt; -0.2496
+#&gt;  0.4486
+#&gt;  1.5454
+#&gt; -1.1294
+#&gt; -0.4822
+#&gt;  0.4963
+#&gt;  0.5460
 #&gt; [ CPUFloatType{10} ]</div><div class='input'><span class='fu'>torch_cumsum</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>0</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.1892
-#&gt; -0.2816
-#&gt; -0.4611
-#&gt; -1.0226
-#&gt; -2.8476
-#&gt; -3.5729
-#&gt; -2.4733
-#&gt; -2.2762
-#&gt; -1.0091
-#&gt; -1.2400
+#&gt;  0.0227
+#&gt;  0.7163
+#&gt;  1.6507
+#&gt;  1.4011
+#&gt;  1.8498
+#&gt;  3.3951
+#&gt;  2.2658
+#&gt;  1.7835
+#&gt;  2.2799
+#&gt;  2.8258
 #&gt; [ CPUFloatType{10} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

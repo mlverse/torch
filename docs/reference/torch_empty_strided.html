@@ -95,6 +95,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -185,8 +188,8 @@ the tensors, please clone them first.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'>torch_empty_strided</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0000e+00 -1.5168e-32  2.2101e-10
-#&gt;  2.5244e-29 -1.5849e+29  4.5592e+30
+#&gt;  0.0000e+00 -7.3414e-06  2.2101e-10
+#&gt;  4.6566e-10  4.6577e-10  4.5592e+30
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='no'>a</span>$<span class='fu'>stride</span>(<span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='no'>a</span>$<span class='fu'>size</span>(<span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -95,6 +95,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -175,15 +178,15 @@ documentation for the exact semantics of this method.</p>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4341  1.8615 -0.4165  0.4344
-#&gt;  0.3553 -0.7266  0.0670  0.0016
-#&gt;  0.0852 -0.6296 -0.9632 -0.3028
-#&gt;  0.3381  1.3690  0.6029 -0.8354
+#&gt;  1.0465  1.3522  0.9779 -0.2336
+#&gt;  1.2870 -0.8320  0.8338 -1.4105
+#&gt;  0.1909  0.3209  0.0195 -0.8006
+#&gt; -0.8634 -1.9225 -1.3255 -1.1015
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmax</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  1
 #&gt;  0
-#&gt;  0
 #&gt;  1
+#&gt;  0
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

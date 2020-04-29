@@ -95,6 +95,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -172,9 +175,9 @@ output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_logsumexp</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.4024
-#&gt;  2.6154
-#&gt;  1.5286
+#&gt;  2.3627
+#&gt;  2.3646
+#&gt;  1.0570
 #&gt; [ CPUFloatType{3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

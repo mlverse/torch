@@ -95,6 +95,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -178,22 +181,22 @@ batched outputs <code>c</code></p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive definite</span>
 <span class='no'>u</span> <span class='kw'>=</span> <span class='fu'><a href='torch_cholesky.html'>torch_cholesky</a></span>(<span class='no'>a</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.3633  0.1393  0.2584
-#&gt;  0.1393  0.5482  1.2816
-#&gt;  0.2584  1.2816  4.5538
+#&gt;  1.8578 -0.7450 -1.1474
+#&gt; -0.7450  2.0137  2.3573
+#&gt; -1.1474  2.3573  4.7188
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.6964 -0.0104
-#&gt;  1.2746 -0.1290
-#&gt; -0.4981  0.3702
+#&gt;  0.3610 -0.3008
+#&gt;  0.6186  0.1249
+#&gt; -0.4004  0.2466
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'>torch_cholesky_solve</span>(<span class='no'>b</span>, <span class='no'>u</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.6382  0.0388
-#&gt;  8.1262 -1.2576
-#&gt; -2.3035  0.4330
+#&gt;  0.2798 -0.1558
+#&gt;  1.0366 -0.0300
+#&gt; -0.5346  0.0294
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>$<span class='fu'>inverse</span>(), <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.6382  0.0388
-#&gt;  8.1262 -1.2576
-#&gt; -2.3035  0.4330
+#&gt;  0.2798 -0.1558
+#&gt;  1.0366 -0.0300
+#&gt; -0.5346  0.0294
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

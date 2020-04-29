@@ -95,6 +95,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -158,15 +161,15 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.3536
-#&gt;  1.2921
-#&gt; -0.5273
-#&gt; -2.3597
+#&gt;  1.0794
+#&gt; -0.1563
+#&gt; -1.4863
+#&gt; -1.2474
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_floor</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2
 #&gt;  1
 #&gt; -1
-#&gt; -3
+#&gt; -2
+#&gt; -2
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

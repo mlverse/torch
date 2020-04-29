@@ -95,6 +95,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -162,21 +165,21 @@ See `~torch.svd` for details.
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4789  0.2844  0.8307
-#&gt;  0.9418 -0.7997  0.5998
-#&gt;  0.1648 -2.1329  1.9959
+#&gt; -0.7006  0.9226 -0.9767
+#&gt;  0.1103  0.9532  0.1632
+#&gt;  0.0836 -1.6285  0.0488
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'><a href='torch_det.html'>torch_det</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.91398
+#&gt; 0.0421392
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'><a href='torch_logdet.html'>torch_logdet</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; nan
+#&gt; -3.16678
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_slogdet</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -1
+#&gt; 1
 #&gt; [ CPUFloatType{} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; 0.649184
+#&gt; -3.16678
 #&gt; [ CPUFloatType{} ]
 #&gt; </div></pre>
   </div>

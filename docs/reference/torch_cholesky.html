@@ -95,6 +95,9 @@
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
     <li>
+      <a href="../articles/indexing.html">Indexing tensors</a>
+    </li>
+    <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
   </ul>
@@ -174,17 +177,17 @@ matrices.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive-definite</span>
 <span class='no'>l</span> <span class='kw'>=</span> <span class='fu'>torch_cholesky</span>(<span class='no'>a</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  5.0219 -2.0177 -2.4347
-#&gt; -2.0177  5.1953  2.0478
-#&gt; -2.4347  2.0478  1.5587
+#&gt;  2.8689 -1.5397 -0.1611
+#&gt; -1.5397  9.9965 -1.0365
+#&gt; -0.1611 -1.0365  0.7561
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>l</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.2410  0.0000  0.0000
-#&gt; -0.9004  2.0940  0.0000
-#&gt; -1.0864  0.5108  0.3426
+#&gt;  1.6938  0.0000  0.0000
+#&gt; -0.9090  3.0282  0.0000
+#&gt; -0.0951 -0.3708  0.7807
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>l</span>, <span class='no'>l</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>())</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  5.0219 -2.0177 -2.4347
-#&gt; -2.0177  5.1953  2.0478
-#&gt; -2.4347  2.0478  1.5587
+#&gt;  2.8689 -1.5397 -0.1611
+#&gt; -1.5397  9.9966 -1.0365
+#&gt; -0.1611 -1.0365  0.7561
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'>transpose</span>(-<span class='fl'>1</span>, -<span class='fl'>2</span>)) + <span class='fl'>1e-03</span> <span class='co'># make symmetric positive-definite</span>
