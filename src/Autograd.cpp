@@ -7,6 +7,7 @@
 #include <torch/torch.h>
 
 #include "utils.hpp"
+#include "Function.h"
 #include <thread>
 
 void lantern_autograd_set_grad_mode(bool enabled)
@@ -49,4 +50,138 @@ void *lantern_new_hook(void *(*fun)(void *, void *), void *custom)
 void lantern_Tensor_remove_hook(void *self, unsigned int pos)
 {
     reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().remove_hook(pos);
+}
+
+void *lantern_variable_list_new()
+{
+    auto out = new LanternObject<variable_list>();
+    return (void *)out;
+}
+
+void lantern_variable_list_push_back(void *self, void *x)
+{
+    auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
+    reinterpret_cast<LanternObject<variable_list> *>(self)->get().push_back(t);
+}
+
+void *lantern_variable_list_get(void *self, int64_t i)
+{
+    auto s = reinterpret_cast<LanternObject<variable_list> *>(self)->get();
+    torch::Tensor out = s[i];
+    return (void *)new LanternObject<torch::Tensor>(out);
+}
+
+int64_t lantern_variable_list_size(void *self)
+{
+    auto s = reinterpret_cast<LanternObject<variable_list> *>(self)->get();
+    return s.size();
+}
+
+void *lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custom)
+{
+    auto out = [fun, custom](LanternAutogradContext *ctx, variable_list inputs) {
+        auto out = (*fun)(custom, (void *)ctx, (void *)new LanternObject<variable_list>(inputs));
+        auto vl = reinterpret_cast<LanternObject<variable_list> *>(out)->get();
+        return vl;
+    };
+    return (void *)new LanternObject<std::function<variable_list(LanternAutogradContext *, variable_list)>>(out);
+}
+
+void *lantern_Function_apply(void *inputs, void *forward, void *backward)
+{
+    auto out = LanternFunction::apply(
+        reinterpret_cast<LanternObject<variable_list> *>(inputs)->get(),
+        reinterpret_cast<LanternObject<std::function<variable_list(LanternAutogradContext *, variable_list)>> *>(forward)->get(),
+        reinterpret_cast<LanternObject<std::function<variable_list(LanternAutogradContext *, variable_list)>> *>(backward)->get());
+
+    return (void *)new LanternObject<variable_list>(out);
+}
+
+void lantern_AutogradContext_save_for_backward(void *self, void *vars)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    ctx->save_for_backward(reinterpret_cast<LanternObject<variable_list> *>(vars)->get());
+}
+
+void *lantern_AutogradContext_get_saved_variables(void *self)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    return (void *)new LanternObject<variable_list>(ctx->get_saved_variables());
+}
+
+void lantern_AutogradContext_set_arguments(void *self, void *names, void *needs_grad)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    ctx->set_arguments(
+        *reinterpret_cast<std::vector<std::string> *>(names),
+        *reinterpret_cast<std::vector<bool> *>(needs_grad));
+}
+
+void *lantern_AutogradContext_get_argument_names(void *self)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    return (void *)new std::vector<std::string>(ctx->get_argument_names());
+}
+
+void *lantern_AutogradContext_get_argument_needs_grad(void *self)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    return (void *)new std::vector<bool>(ctx->get_argument_needs_grad());
+}
+
+void lantern_AutogradContext_set_saved_variables_names(void *self, void *names)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    ctx->set_saved_variables_names(*reinterpret_cast<std::vector<std::string> *>(names));
+}
+
+void *lantern_AutogradContext_get_saved_variables_names(void *self)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    return (void *)new std::vector<std::string>(ctx->get_saved_variables_names());
+}
+
+void lantern_AutogradContext_mark_dirty(void *self, void *inputs)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    auto vars = reinterpret_cast<LanternObject<variable_list> *>(inputs)->get();
+    ctx->mark_dirty(vars);
+}
+
+void lantern_AutogradContext_mark_non_differentiable(void *self, void *outputs)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    auto vars = reinterpret_cast<LanternObject<variable_list> *>(outputs)->get();
+    ctx->mark_non_differentiable(vars);
+}
+
+void test_custom_function()
+{
+
+    int mul = 2;
+    Variable x = torch::randn({5, 5}, torch::requires_grad());
+    Variable y = torch::randn({5, 5}, torch::requires_grad());
+
+    auto res = LanternFunction::apply(
+        {x, y},
+        [&](LanternAutogradContext *ctx, variable_list args) {
+            ctx->save_for_backward(args);
+            ctx->saved_data["mul"] = mul;
+            return variable_list({args[0] + mul * args[1] + args[0] * args[1]});
+        },
+        [](LanternAutogradContext *ctx, variable_list grad_output) {
+            auto saved = ctx->get_saved_variables();
+            int mul = ctx->saved_data["mul"].toInt();
+            auto var1 = saved[0];
+            auto var2 = saved[1];
+            variable_list output = {grad_output[0] + grad_output[0] * var2,
+                                    grad_output[0] * mul + grad_output[0] * var1};
+            return output;
+        });
+
+    auto go = torch::ones({}, torch::requires_grad());
+    res[0].sum().backward(go, false, true);
+
+    std::cout << x.grad() << std::endl;
+    std::cout << y.grad() << std::endl;
 }

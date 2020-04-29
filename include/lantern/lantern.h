@@ -133,6 +133,31 @@ extern "C"
   LANTERN_API unsigned int(LANTERN_PTR lantern_Tensor_register_hook)(void *self, void *hook);
   LANTERN_API void *(LANTERN_PTR lantern_new_hook)(void *(*fun)(void *, void *), void *custom);
   LANTERN_API void(LANTERN_PTR lantern_Tensor_remove_hook)(void *self, unsigned int pos);
+  LANTERN_API void(LANTERN_PTR test_custom_function)();
+  LANTERN_API void *(LANTERN_PTR lantern_variable_list_new)();
+  LANTERN_API void(LANTERN_PTR lantern_variable_list_push_back)(void *self, void *x);
+  LANTERN_API void *(LANTERN_PTR lantern_variable_list_get)(void *self, int64_t i);
+  LANTERN_API void(LANTERN_PTR lantern_variable_list_delete)(void *x);
+  LANTERN_API int64_t(LANTERN_PTR lantern_variable_list_size)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_Function_lambda)(void *(*fun)(void *, void *, void *), void *custom);
+  LANTERN_API void *(LANTERN_PTR lantern_Function_apply)(void *inputs, void *forward, void *backward);
+  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_save_for_backward)(void *self, void *vars);
+  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_saved_variables)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_vector_string_new)();
+  LANTERN_API void(LANTERN_PTR lantern_vector_string_push_back)(void *self, const char *x);
+  LANTERN_API int64_t(LANTERN_PTR lantern_vector_string_size)(void *self);
+  LANTERN_API const char *(LANTERN_PTR lantern_vector_string_at)(void *self, int64_t i);
+  LANTERN_API void *(LANTERN_PTR lantern_vector_bool_new)();
+  LANTERN_API void(LANTERN_PTR lantern_vector_bool_push_back)(void *self, bool x);
+  LANTERN_API int64_t(LANTERN_PTR lantern_vector_bool_size)(void *self);
+  LANTERN_API bool(LANTERN_PTR lantern_vector_bool_at)(void *self, int64_t i);
+  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_set_arguments)(void *self, void *names, void *needs_grad);
+  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_argument_names)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_argument_needs_grad)(void *self);
+  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_set_saved_variables_names)(void *self, void *names);
+  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_saved_variables_names)(void *self);
+  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_dirty)(void *self, void *inputs);
+  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_non_differentiable)(void *self, void *outputs);
 
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
@@ -2017,7 +2042,31 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_register_hook);
   LOAD_SYMBOL(lantern_new_hook);
   LOAD_SYMBOL(lantern_Tensor_remove_hook);
-
+  LOAD_SYMBOL(test_custom_function);
+  LOAD_SYMBOL(lantern_variable_list_new);
+  LOAD_SYMBOL(lantern_variable_list_push_back);
+  LOAD_SYMBOL(lantern_variable_list_get);
+  LOAD_SYMBOL(lantern_variable_list_delete);
+  LOAD_SYMBOL(lantern_variable_list_size);
+  LOAD_SYMBOL(lantern_Function_lambda);
+  LOAD_SYMBOL(lantern_Function_apply);
+  LOAD_SYMBOL(lantern_AutogradContext_save_for_backward);
+  LOAD_SYMBOL(lantern_AutogradContext_get_saved_variables);
+  LOAD_SYMBOL(lantern_vector_string_new);
+  LOAD_SYMBOL(lantern_vector_string_push_back);
+  LOAD_SYMBOL(lantern_vector_string_size);
+  LOAD_SYMBOL(lantern_vector_string_at);
+  LOAD_SYMBOL(lantern_vector_bool_new);
+  LOAD_SYMBOL(lantern_vector_bool_push_back);
+  LOAD_SYMBOL(lantern_vector_bool_size);
+  LOAD_SYMBOL(lantern_vector_bool_at);
+  LOAD_SYMBOL(lantern_AutogradContext_set_arguments);
+  LOAD_SYMBOL(lantern_AutogradContext_get_argument_names);
+  LOAD_SYMBOL(lantern_AutogradContext_get_argument_needs_grad);
+  LOAD_SYMBOL(lantern_AutogradContext_set_saved_variables_names);
+  LOAD_SYMBOL(lantern_AutogradContext_get_saved_variables_names);
+  LOAD_SYMBOL(lantern_AutogradContext_mark_dirty);
+  LOAD_SYMBOL(lantern_AutogradContext_mark_non_differentiable);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
