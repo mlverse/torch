@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
+    <li>
+      <a href="../articles/using-autograd.html">Using autograd</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -154,9 +157,9 @@ If \(N\) is 1, then this is a no-op - the original matrix is returned as is.</p>
 <span class='no'>c</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>6</span>))
 <span class='no'>d</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>7</span>))
 <span class='fu'>torch_chain_matmul</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -10.8079  -5.2613  13.1296  -5.0580   6.3582 -10.9381   2.6892
-#&gt; -21.9180   2.4572   3.8916  -5.7983  10.9814 -10.9217  24.3946
-#&gt; -43.5182 -21.0969  15.4019 -20.6893   9.1850 -23.1855   8.4520
+#&gt;  16.2756  12.9260  -7.9453  -6.2452  11.9736   9.4538  -6.3789
+#&gt;  21.0831  17.1918 -13.6066  -9.6798  11.4148   8.3448  -7.3726
+#&gt;  -9.7108  -6.2841  -6.1041  -2.1745 -12.2017  -8.2978   1.8962
 #&gt; [ CPUFloatType{3,7} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

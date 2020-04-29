@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
+    <li>
+      <a href="../articles/using-autograd.html">Using autograd</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -180,34 +183,34 @@ a real number, otherwise it should be an integer.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.6862
-#&gt; -0.0264
-#&gt; -1.8619
-#&gt;  1.3476
+#&gt;  0.3495
+#&gt; -1.3258
+#&gt;  0.5363
+#&gt; -0.4946
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='fl'>20</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  19.3138
-#&gt;  19.9736
-#&gt;  18.1381
-#&gt;  21.3476
+#&gt;  20.3495
+#&gt;  18.6742
+#&gt;  20.5363
+#&gt;  19.5054
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4465
-#&gt; -1.0559
-#&gt; -0.2244
-#&gt;  0.1044
+#&gt; -1.2865
+#&gt;  0.4445
+#&gt;  0.2176
+#&gt; -2.3218
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.9167
-#&gt;  0.5807
-#&gt; -1.1770
-#&gt;  0.8279
+#&gt;  0.6429
+#&gt; -0.7107
+#&gt;  2.0847
+#&gt;  0.8089
 #&gt; [ CPUFloatType{4,1} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4702 -1.9726 -1.1411 -0.8124
-#&gt;  1.0273 -0.4751  0.3563  0.6851
-#&gt; -0.7305 -2.2329 -1.4015 -1.0727
-#&gt;  1.2745 -0.2279  0.6035  0.9323
+#&gt; -0.6437  1.0874  0.8605 -1.6790
+#&gt; -1.9972 -0.2662 -0.4931 -3.0325
+#&gt;  0.7982  2.5292  2.3023 -0.2371
+#&gt; -0.4776  1.2534  1.0265 -1.5129
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

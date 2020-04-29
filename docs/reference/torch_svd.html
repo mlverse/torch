@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
+    <li>
+      <a href="../articles/using-autograd.html">Using autograd</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -186,24 +189,24 @@ of shape \((m \times m)\) and \((n \times n)\) respectively. <code>some</code> w
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7092  1.3021 -0.3177
-#&gt;  0.8515  0.7175  0.8518
-#&gt;  0.1267  1.3023  0.2946
-#&gt;  0.7146 -0.5864  1.2580
-#&gt;  0.9947 -0.9658 -0.0847
+#&gt;  0.6725  0.3114 -0.8111
+#&gt; -0.3368 -0.7193 -0.9568
+#&gt; -0.3290 -0.7480 -0.8634
+#&gt; -1.0988 -1.2466  0.7193
+#&gt;  0.8387 -0.2098 -1.9567
 #&gt; [ CPUFloatType{5,3} ]</div><div class='input'><span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_svd</span>(<span class='no'>a</span>)
 <span class='no'>u</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
 <span class='no'>s</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]]
 <span class='no'>v</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>3</span>]]
 <span class='fu'><a href='torch_dist.html'>torch_dist</a></span>(<span class='no'>a</span>, <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>u</span>, <span class='fu'><a href='torch_diag.html'>torch_diag</a></span>(<span class='no'>s</span>)), <span class='no'>v</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 6.66275e-07
+#&gt; 9.16755e-07
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>a_big</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>7</span>, <span class='fl'>5</span>, <span class='fl'>3</span>))
 <span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_svd</span>(<span class='no'>a_big</span>)
 <span class='no'>u</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
 <span class='no'>s</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]]
 <span class='no'>v</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>3</span>]]
 <span class='fu'><a href='torch_dist.html'>torch_dist</a></span>(<span class='no'>a_big</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>u</span>, <span class='fu'><a href='torch_diag_embed.html'>torch_diag_embed</a></span>(<span class='no'>s</span>)), <span class='no'>v</span>$<span class='fu'>transpose</span>(-<span class='fl'>2</span>, -<span class='fl'>1</span>)))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 2.67266e-06
+#&gt; 3.20382e-06
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
+    <li>
+      <a href="../articles/using-autograd.html">Using autograd</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -165,25 +168,25 @@ documentation for the exact semantics of this method.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.4649 -0.8143 -0.0742 -0.9608
-#&gt; -0.6989  0.5919  2.7192  0.3250
-#&gt;  0.0801 -0.3357 -0.9871  0.6467
-#&gt; -1.7514 -0.2832 -0.9061 -0.6615
+#&gt; -0.0560  1.1918  0.0866 -1.8247
+#&gt;  1.3528 -0.5502 -1.5669 -2.0030
+#&gt; -0.8325 -2.2118 -1.0334  0.6242
+#&gt; -0.9322  1.0201  0.6969 -1.5953
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 12
+#&gt; 9
 #&gt; [ CPULongType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1596  0.4178 -0.0744 -1.1211
-#&gt; -0.3079  1.0272  0.3276 -1.8560
-#&gt; -0.0270  0.7428 -1.6285  1.6067
-#&gt;  0.7704  1.7024  3.3311  1.5284
+#&gt; -0.9954  0.2164  1.6728 -0.9872
+#&gt; -0.1956 -0.7447  0.2569 -0.4120
+#&gt;  0.1240  0.6980 -0.9656 -0.8334
+#&gt;  0.8601  0.6085 -0.6740  1.1460
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3
-#&gt;  3
-#&gt;  2
 #&gt;  0
+#&gt;  1
+#&gt;  2
+#&gt;  2
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

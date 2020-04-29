@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
+    <li>
+      <a href="../articles/using-autograd.html">Using autograd</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -156,24 +159,24 @@ unstable in when `input` doesn't have distinct singular values. See
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_det</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -3.81325
+#&gt; -2.88067
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
 <span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.3355 -0.6316
-#&gt;  -1.2149 -0.1683
+#&gt;   0.9953 -2.2108
+#&gt;  -1.4243  0.7192
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -1.5246  0.5011
-#&gt;   1.1302 -0.5512
+#&gt;   0.4159  0.0116
+#&gt;   0.1465  0.4464
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.7326 -0.5069
-#&gt;  -0.8751  1.4854
+#&gt;  -0.8297  0.3562
+#&gt;  -0.3418 -0.5723
 #&gt; [ CPUFloatType{3,2,2} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.7108
-#&gt;  0.2739
-#&gt;  0.6446
+#&gt; -2.4329
+#&gt;  0.1840
+#&gt;  0.5966
 #&gt; [ CPUFloatType{3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

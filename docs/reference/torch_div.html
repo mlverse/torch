@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
+    <li>
+      <a href="../articles/using-autograd.html">Using autograd</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -175,36 +178,36 @@ specified output tensor. Integral division by zero leads to undefined behavior.<
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4842
-#&gt;  0.4087
-#&gt; -0.4683
-#&gt;  0.8376
-#&gt;  0.1329
+#&gt;  0.7405
+#&gt;  0.3810
+#&gt;  0.0554
+#&gt;  0.4045
+#&gt; -0.4331
 #&gt; [ CPUFloatType{5} ]</div><div class='input'><span class='fu'>torch_div</span>(<span class='no'>a</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.9683
-#&gt;  0.8175
-#&gt; -0.9366
-#&gt;  1.6751
-#&gt;  0.2659
+#&gt;  1.4809
+#&gt;  0.7620
+#&gt;  0.1109
+#&gt;  0.8089
+#&gt; -0.8663
 #&gt; [ CPUFloatType{5} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.6613 -1.3270 -0.4601  1.5481
-#&gt;  1.0808 -0.0979 -0.4624  0.2645
-#&gt;  1.1278  1.3825  0.1055 -0.0115
-#&gt; -0.0508  0.1101  1.1014 -1.8532
+#&gt; -0.7604 -0.2650 -1.3216  0.7130
+#&gt; -0.1465 -0.7153 -0.6758 -2.2232
+#&gt;  1.1632 -0.6052 -0.4435 -1.6429
+#&gt;  0.9089  1.2900  1.8062  0.5082
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2057
-#&gt;  0.0160
-#&gt;  1.2597
-#&gt;  0.2869
+#&gt; -0.1687
+#&gt;  0.7372
+#&gt;  0.9004
+#&gt; -0.4921
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_div</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;   8.0778 -82.9552  -0.3652   5.3964
-#&gt;  -5.2552  -6.1169  -0.3671   0.9221
-#&gt;  -5.4841  86.4209   0.0837  -0.0402
-#&gt;   0.2471   6.8843   0.8744  -6.4601
+#&gt;  4.5078 -0.3594 -1.4677 -1.4490
+#&gt;  0.8687 -0.9703 -0.7505  4.5182
+#&gt; -6.8956 -0.8209 -0.4926  3.3388
+#&gt; -5.3885  1.7497  2.0060 -1.0327
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

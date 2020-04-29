@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
+    <li>
+      <a href="../articles/using-autograd.html">Using autograd</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -184,9 +187,9 @@ must be real numbers, otherwise they should be integers.</p>
 <span class='no'>batch1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>batch2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_addbmm</span>(<span class='no'>M</span>, <span class='no'>batch1</span>, <span class='no'>batch2</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;   7.5021   5.1713  -0.5245   2.7434   4.4925
-#&gt;  -5.5093   3.1126  -3.6248   0.4721  13.3832
-#&gt;   1.3431   0.9037  -0.0621   9.5650  -0.1429
+#&gt;   8.6515  -6.8865   1.1544   5.9125 -10.6743
+#&gt;  -4.7858   3.9369   0.2551   6.2419   2.8769
+#&gt;  -1.4440  10.8042  -5.2675  -2.7420   0.8404
 #&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

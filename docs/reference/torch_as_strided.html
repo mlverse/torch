@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending Autograd</a>
     </li>
+    <li>
+      <a href="../articles/using-autograd.html">Using autograd</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -173,17 +176,17 @@ advisable to use.
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2258  0.7149 -0.3319
-#&gt;  1.1747  0.7312 -0.1757
-#&gt; -1.9376 -0.4029  1.1986
+#&gt; -2.2045  1.2104  0.4943
+#&gt; -0.7122 -0.9951  2.4982
+#&gt;  0.3810  0.3676  0.4086
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>t</span> <span class='kw'>=</span> <span class='fu'>torch_as_strided</span>(<span class='no'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
 <span class='no'>t</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2258 -0.3319
-#&gt;  0.7149  1.1747
+#&gt; -2.2045  0.4943
+#&gt;  1.2104 -0.7122
 #&gt; [ CPUFloatType{2,2} ]</div><div class='input'><span class='no'>t</span> <span class='kw'>=</span> <span class='fu'>torch_as_strided</span>(<span class='no'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fl'>1</span>)
 <span class='no'>t</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7149  1.1747
-#&gt; -0.3319  0.7312
+#&gt;  1.2104 -0.7122
+#&gt;  0.4943 -0.9951
 #&gt; [ CPUFloatType{2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
