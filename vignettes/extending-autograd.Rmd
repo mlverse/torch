@@ -29,11 +29,11 @@ Adding operations to autograd requires implementing a new `autograd_function` fo
 
 It's the user's responsibility to use the special functions in the forward's `ctx` properly in order to ensure that the new `autograd_function` works properly with the autograd engine.
 
--   `save_for_backward()` must be used when saving input or ouput of the forward to be used later in the backward.
+- `save_for_backward()` must be used when saving input or ouput of the forward to be used later in the backward.
 
--   (Not implemented) `mark_dirty()` must be used to mark any input that is modified inplace by the forward function.
+- `mark_dirty()` must be used to mark any input that is modified inplace by the forward function.
 
--   (Not implemented) `mark_non_differentiable()` must be used to tell the engine if an output is not differentiable.
+- `mark_non_differentiable()` must be used to tell the engine if an output is not differentiable.
 
 ## Examples
 
