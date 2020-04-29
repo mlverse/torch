@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -186,24 +186,24 @@ of shape \((m \times m)\) and \((n \times n)\) respectively. <code>some</code> w
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0341 -0.6076 -0.2779
-#&gt;  0.5965  3.0044 -0.1269
-#&gt;  0.4213  0.7650  0.1035
-#&gt;  1.6457 -1.8061 -0.2076
-#&gt; -0.1050 -0.9384 -0.1034
+#&gt;  0.7092  1.3021 -0.3177
+#&gt;  0.8515  0.7175  0.8518
+#&gt;  0.1267  1.3023  0.2946
+#&gt;  0.7146 -0.5864  1.2580
+#&gt;  0.9947 -0.9658 -0.0847
 #&gt; [ CPUFloatType{5,3} ]</div><div class='input'><span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_svd</span>(<span class='no'>a</span>)
 <span class='no'>u</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
 <span class='no'>s</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]]
 <span class='no'>v</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>3</span>]]
 <span class='fu'><a href='torch_dist.html'>torch_dist</a></span>(<span class='no'>a</span>, <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>u</span>, <span class='fu'><a href='torch_diag.html'>torch_diag</a></span>(<span class='no'>s</span>)), <span class='no'>v</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 9.42255e-07
+#&gt; 6.66275e-07
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>a_big</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>7</span>, <span class='fl'>5</span>, <span class='fl'>3</span>))
 <span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_svd</span>(<span class='no'>a_big</span>)
 <span class='no'>u</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
 <span class='no'>s</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]]
 <span class='no'>v</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>3</span>]]
 <span class='fu'><a href='torch_dist.html'>torch_dist</a></span>(<span class='no'>a_big</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>u</span>, <span class='fu'><a href='torch_diag_embed.html'>torch_diag_embed</a></span>(<span class='no'>s</span>)), <span class='no'>v</span>$<span class='fu'>transpose</span>(-<span class='fl'>2</span>, -<span class='fl'>1</span>)))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 4.04819e-06
+#&gt; 2.67266e-06
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

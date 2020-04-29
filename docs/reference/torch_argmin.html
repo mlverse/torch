@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -165,25 +165,25 @@ documentation for the exact semantics of this method.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0409 -0.6009  0.6222 -0.1922
-#&gt;  0.3974 -0.5675 -2.3313 -1.0472
-#&gt;  1.6694  0.0125 -1.1391  1.4922
-#&gt;  0.5941 -0.3120 -0.2983 -1.0289
+#&gt;  1.4649 -0.8143 -0.0742 -0.9608
+#&gt; -0.6989  0.5919  2.7192  0.3250
+#&gt;  0.0801 -0.3357 -0.9871  0.6467
+#&gt; -1.7514 -0.2832 -0.9061 -0.6615
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 6
+#&gt; 12
 #&gt; [ CPULongType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8497 -1.4244 -1.2722 -0.5924
-#&gt; -0.5719  0.7246  0.0179  1.3239
-#&gt; -0.7383 -1.3851  0.4082 -0.7054
-#&gt;  0.3727  0.0302  0.5519  0.7952
+#&gt; -0.1596  0.4178 -0.0744 -1.1211
+#&gt; -0.3079  1.0272  0.3276 -1.8560
+#&gt; -0.0270  0.7428 -1.6285  1.6067
+#&gt;  0.7704  1.7024  3.3311  1.5284
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1
+#&gt;  3
+#&gt;  3
+#&gt;  2
 #&gt;  0
-#&gt;  1
-#&gt;  1
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

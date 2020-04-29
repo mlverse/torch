@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -178,26 +178,26 @@ need to be explicitly specified.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.6207  0.0000  0.0000
-#&gt;   0.0000  0.4319  0.0000
-#&gt;   0.0000  0.0000  0.2799
+#&gt;  -0.3485  0.0000  0.0000
+#&gt;   0.0000 -1.3604  0.0000
+#&gt;   0.0000  0.0000  1.0953
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.8607  0.0000  0.0000
-#&gt;   0.0000 -1.1025  0.0000
-#&gt;   0.0000  0.0000 -0.3338
+#&gt;   0.9605  0.0000  0.0000
+#&gt;   0.0000  2.2129  0.0000
+#&gt;   0.0000  0.0000 -0.0484
 #&gt; [ CPUFloatType{2,3,3} ]</div><div class='input'><span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>, <span class='kw'>offset</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>dim1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>dim2</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.0000 -0.6207  0.0000  0.0000
-#&gt;   0.0000  0.8607  0.0000  0.0000
+#&gt;   0.0000 -0.3485  0.0000  0.0000
+#&gt;   0.0000  0.9605  0.0000  0.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0000  0.0000  0.4319  0.0000
-#&gt;   0.0000  0.0000 -1.1025  0.0000
+#&gt;   0.0000  0.0000 -1.3604  0.0000
+#&gt;   0.0000  0.0000  2.2129  0.0000
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.0000  0.0000  0.0000  0.2799
-#&gt;   0.0000  0.0000  0.0000 -0.3338
+#&gt;   0.0000  0.0000  0.0000  1.0953
+#&gt;   0.0000  0.0000  0.0000 -0.0484
 #&gt; 
 #&gt; (4,.,.) = 
 #&gt;   0  0  0  0

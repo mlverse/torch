@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -178,22 +178,22 @@ biased estimator. Otherwise, Bessel's correction will be used.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.5745  0.6887  0.2816
+#&gt; -0.5653  0.7608 -0.1048
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_var</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.436969
+#&gt; 0.453283
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2464  0.9425 -0.3996 -0.7931
-#&gt;  0.2297 -0.4301  0.4966  1.3458
-#&gt;  0.4315  0.6207  0.9320 -1.5314
-#&gt;  0.8455  0.5213  0.4970 -0.9874
+#&gt;  0.5460 -0.6957 -0.9848 -1.4111
+#&gt;  0.7543 -1.2300  0.7928 -0.2779
+#&gt;  0.0157  1.5274 -0.7838  0.2636
+#&gt;  0.8113 -0.1070  0.9391 -0.3431
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_var</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5587
-#&gt;  0.5405
-#&gt;  1.2447
-#&gt;  0.6722
+#&gt;  0.7077
+#&gt;  0.9291
+#&gt;  0.9185
+#&gt;  0.4156
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
