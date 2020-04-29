@@ -70,6 +70,13 @@ public:
   }
 };
 
+class XPtrTorchvariable_list : public XPtrTorch {
+public:
+  XPtrTorchvariable_list (void* x) : XPtrTorch{NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_variable_list_delete));
+  }
+};
+
 class XPtrTorchint64_t : public XPtrTorch {
 public:
   XPtrTorchint64_t (void* x) : XPtrTorch{NULL} {

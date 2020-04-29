@@ -166,3 +166,176 @@ void cpp_tensor_remove_hook (Rcpp::XPtr<XPtrTorchTensor> self, unsigned int pos)
   lantern_Tensor_remove_hook(self->get(), pos);
 }
 
+void*  rcpp_call_forward (void* forward, void* ctx, void* inputs) {
+  return (*reinterpret_cast<std::function<void*(void*, void*)> *>(forward))(ctx, inputs);
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
+{
+  auto fun = (void *)new std::function<void*(void *, void*)>([f](void *ctx, void* inputs) {
+    
+    std::packaged_task<void*()> task([f, ctx, inputs]() {
+      auto inp = make_xptr<XPtrTorchvariable_list>(inputs);
+      auto con = make_xptr<XPtrTorch>(ctx);
+      auto r_out = f(con, inp);
+      auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchvariable_list>>(r_out)->get();
+      return out;
+    });
+    
+    std::future<void*> result = task.get_future();
+    
+    {
+      std::lock_guard<std::mutex> lock(tasks_mutex);
+      tasks.push_front(std::move(task));
+    }
+    
+    auto out = result.get();
+    return out;
+  });
+  
+  XPtrTorch out = lantern_Function_lambda(&rcpp_call_forward, fun);
+  return make_xptr<XPtrTorch>(out);
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvariable_list> inputs,
+                                                       Rcpp::XPtr<XPtrTorch> forward,
+                                                       Rcpp::XPtr<XPtrTorch> backward)
+{
+  
+  auto inputs_ = inputs->get();
+  auto forward_ = forward->get();
+  auto backward_ = backward->get();
+  
+  std::atomic<bool> event_loop_running;
+  event_loop_running = true;
+  
+  std::function<XPtrTorchvariable_list()> apply ([&](){
+    
+    XPtrTorchvariable_list out = nullptr;
+    
+    try 
+    {
+      out = lantern_Function_apply(
+        inputs_,
+        forward_,
+        backward_
+      );  
+    }
+    catch (...)
+    {
+      event_loop_running = false;
+      throw;
+    }
+    
+    event_loop_running = false;
+    return out;
+  });
+  
+  std::packaged_task<XPtrTorchvariable_list()> task(apply);
+  std::future<XPtrTorchvariable_list> result = task.get_future();
+  
+  std::thread td (std::move(task));
+  td.detach();
+  
+  event_loop_thread(event_loop_running);
+  
+  auto out = result.get();
+  return make_xptr<XPtrTorchvariable_list>(out);
+}
+
+// [[Rcpp::export]]
+void cpp_autograd_context_save_for_backward (Rcpp::XPtr<XPtrTorch> self, 
+                                                              Rcpp::XPtr<XPtrTorchvariable_list> vars)
+{
+  lantern_AutogradContext_save_for_backward(self->get(), vars->get());
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_autograd_context_get_saved_variables (Rcpp::XPtr<XPtrTorch> self)
+{
+  XPtrTorchvariable_list out = lantern_AutogradContext_get_saved_variables(self->get());
+  return make_xptr<XPtrTorchvariable_list>(out);
+}
+
+// [[Rcpp::export]]
+void cpp_autograd_context_set_arguments (Rcpp::XPtr<XPtrTorch> self, std::vector<std::string> names, std::vector<bool> needs_grad)
+{
+  auto names_ = lantern_vector_string_new();
+  for (int i = 0; i < names.size(); i ++)
+  {
+    lantern_vector_string_push_back(names_, names.at(i).c_str());
+  }
+  
+  auto needs_grad_ = lantern_vector_bool_new();
+  for (int i = 0; i < needs_grad.size(); i++)
+  {
+    lantern_vector_bool_push_back(needs_grad_, needs_grad.at(i));
+  }
+  
+  lantern_AutogradContext_set_arguments(self->get(), names_, needs_grad_);
+}
+
+// [[Rcpp::export]]
+std::vector<std::string> cpp_autograd_context_get_argument_names (Rcpp::XPtr<XPtrTorch> self)
+{
+  auto v = lantern_AutogradContext_get_argument_names(self->get());
+  auto size = lantern_vector_string_size(v);
+  std::vector<std::string> out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(std::string(lantern_vector_string_at(v, i)));
+  }
+  return out;
+}
+
+// [[Rcpp::export]]
+std::vector<bool> cpp_autograd_context_get_argument_needs_grad (Rcpp::XPtr<XPtrTorch> self)
+{
+  auto v = lantern_AutogradContext_get_argument_needs_grad(self->get());
+  auto size = lantern_vector_bool_size(v);
+  std::vector<bool> out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(lantern_vector_bool_at(v, i));
+  }
+  return out;
+}
+
+// [[Rcpp::export]]
+void cpp_autograd_context_set_saved_variables_names (Rcpp::XPtr<XPtrTorch> self, std::vector<std::string> names)
+{
+  auto names_ = lantern_vector_string_new();
+  for (int i = 0; i < names.size(); i ++)
+  {
+    lantern_vector_string_push_back(names_, names.at(i).c_str());
+  }
+  
+  lantern_AutogradContext_set_saved_variables_names(self->get(), names_);
+}
+
+// [[Rcpp::export]]
+std::vector<std::string> cpp_autograd_context_get_saved_variables_names (Rcpp::XPtr<XPtrTorch> self)
+{
+  auto v = lantern_AutogradContext_get_saved_variables_names(self->get());
+  auto size = lantern_vector_string_size(v);
+  std::vector<std::string> out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(std::string(lantern_vector_string_at(v, i)));
+  }
+  return out;
+}
+
+// [[Rcpp::export]]
+void cpp_autograd_context_mark_dirty (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> inputs)
+{
+  lantern_AutogradContext_mark_dirty(self->get(), inputs->get());
+}
+
+// [[Rcpp::export]]
+void cpp_autograd_context_mark_non_differentiable (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> outputs)
+{
+  lantern_AutogradContext_mark_non_differentiable(self->get(), outputs->get());
+}

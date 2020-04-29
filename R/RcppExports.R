@@ -25,6 +25,50 @@ cpp_tensor_remove_hook <- function(self, pos) {
     invisible(.Call('_torchr_cpp_tensor_remove_hook', PACKAGE = 'torchr', self, pos))
 }
 
+cpp_Function_lambda <- function(f) {
+    .Call('_torchr_cpp_Function_lambda', PACKAGE = 'torchr', f)
+}
+
+cpp_Function_apply <- function(inputs, forward, backward) {
+    .Call('_torchr_cpp_Function_apply', PACKAGE = 'torchr', inputs, forward, backward)
+}
+
+cpp_autograd_context_save_for_backward <- function(self, vars) {
+    invisible(.Call('_torchr_cpp_autograd_context_save_for_backward', PACKAGE = 'torchr', self, vars))
+}
+
+cpp_autograd_context_get_saved_variables <- function(self) {
+    .Call('_torchr_cpp_autograd_context_get_saved_variables', PACKAGE = 'torchr', self)
+}
+
+cpp_autograd_context_set_arguments <- function(self, names, needs_grad) {
+    invisible(.Call('_torchr_cpp_autograd_context_set_arguments', PACKAGE = 'torchr', self, names, needs_grad))
+}
+
+cpp_autograd_context_get_argument_names <- function(self) {
+    .Call('_torchr_cpp_autograd_context_get_argument_names', PACKAGE = 'torchr', self)
+}
+
+cpp_autograd_context_get_argument_needs_grad <- function(self) {
+    .Call('_torchr_cpp_autograd_context_get_argument_needs_grad', PACKAGE = 'torchr', self)
+}
+
+cpp_autograd_context_set_saved_variables_names <- function(self, names) {
+    invisible(.Call('_torchr_cpp_autograd_context_set_saved_variables_names', PACKAGE = 'torchr', self, names))
+}
+
+cpp_autograd_context_get_saved_variables_names <- function(self) {
+    .Call('_torchr_cpp_autograd_context_get_saved_variables_names', PACKAGE = 'torchr', self)
+}
+
+cpp_autograd_context_mark_dirty <- function(self, inputs) {
+    invisible(.Call('_torchr_cpp_autograd_context_mark_dirty', PACKAGE = 'torchr', self, inputs))
+}
+
+cpp_autograd_context_mark_non_differentiable <- function(self, outputs) {
+    invisible(.Call('_torchr_cpp_autograd_context_mark_non_differentiable', PACKAGE = 'torchr', self, outputs))
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torchr_cpp_device_type_to_string', PACKAGE = 'torchr', device)
 }
@@ -6679,5 +6723,13 @@ cpp_nullopt <- function() {
 
 cpp_tensor_undefined <- function() {
     .Call('_torchr_cpp_tensor_undefined', PACKAGE = 'torchr')
+}
+
+cpp_torch_variable_list <- function(x) {
+    .Call('_torchr_cpp_torch_variable_list', PACKAGE = 'torchr', x)
+}
+
+cpp_variable_list_to_r_list <- function(x) {
+    .Call('_torchr_cpp_variable_list_to_r_list', PACKAGE = 'torchr', x)
 }
 

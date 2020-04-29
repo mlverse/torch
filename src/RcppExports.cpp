@@ -74,6 +74,130 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_Function_lambda
+Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f);
+RcppExport SEXP _torchr_cpp_Function_lambda(SEXP fSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::Function >::type f(fSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_Function_lambda(f));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_Function_apply
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply(Rcpp::XPtr<XPtrTorchvariable_list> inputs, Rcpp::XPtr<XPtrTorch> forward, Rcpp::XPtr<XPtrTorch> backward);
+RcppExport SEXP _torchr_cpp_Function_apply(SEXP inputsSEXP, SEXP forwardSEXP, SEXP backwardSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type forward(forwardSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type backward(backwardSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_Function_apply(inputs, forward, backward));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_autograd_context_save_for_backward
+void cpp_autograd_context_save_for_backward(Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> vars);
+RcppExport SEXP _torchr_cpp_autograd_context_save_for_backward(SEXP selfSEXP, SEXP varsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type vars(varsSEXP);
+    cpp_autograd_context_save_for_backward(self, vars);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_autograd_context_get_saved_variables
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_autograd_context_get_saved_variables(Rcpp::XPtr<XPtrTorch> self);
+RcppExport SEXP _torchr_cpp_autograd_context_get_saved_variables(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_autograd_context_get_saved_variables(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_autograd_context_set_arguments
+void cpp_autograd_context_set_arguments(Rcpp::XPtr<XPtrTorch> self, std::vector<std::string> names, std::vector<bool> needs_grad);
+RcppExport SEXP _torchr_cpp_autograd_context_set_arguments(SEXP selfSEXP, SEXP namesSEXP, SEXP needs_gradSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< std::vector<bool> >::type needs_grad(needs_gradSEXP);
+    cpp_autograd_context_set_arguments(self, names, needs_grad);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_autograd_context_get_argument_names
+std::vector<std::string> cpp_autograd_context_get_argument_names(Rcpp::XPtr<XPtrTorch> self);
+RcppExport SEXP _torchr_cpp_autograd_context_get_argument_names(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_autograd_context_get_argument_names(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_autograd_context_get_argument_needs_grad
+std::vector<bool> cpp_autograd_context_get_argument_needs_grad(Rcpp::XPtr<XPtrTorch> self);
+RcppExport SEXP _torchr_cpp_autograd_context_get_argument_needs_grad(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_autograd_context_get_argument_needs_grad(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_autograd_context_set_saved_variables_names
+void cpp_autograd_context_set_saved_variables_names(Rcpp::XPtr<XPtrTorch> self, std::vector<std::string> names);
+RcppExport SEXP _torchr_cpp_autograd_context_set_saved_variables_names(SEXP selfSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type names(namesSEXP);
+    cpp_autograd_context_set_saved_variables_names(self, names);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_autograd_context_get_saved_variables_names
+std::vector<std::string> cpp_autograd_context_get_saved_variables_names(Rcpp::XPtr<XPtrTorch> self);
+RcppExport SEXP _torchr_cpp_autograd_context_get_saved_variables_names(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_autograd_context_get_saved_variables_names(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_autograd_context_mark_dirty
+void cpp_autograd_context_mark_dirty(Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> inputs);
+RcppExport SEXP _torchr_cpp_autograd_context_mark_dirty(SEXP selfSEXP, SEXP inputsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type inputs(inputsSEXP);
+    cpp_autograd_context_mark_dirty(self, inputs);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_autograd_context_mark_non_differentiable
+void cpp_autograd_context_mark_non_differentiable(Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> outputs);
+RcppExport SEXP _torchr_cpp_autograd_context_mark_non_differentiable(SEXP selfSEXP, SEXP outputsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type outputs(outputsSEXP);
+    cpp_autograd_context_mark_non_differentiable(self, outputs);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torchr_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -22262,6 +22386,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_variable_list
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List& x);
+RcppExport SEXP _torchr_cpp_torch_variable_list(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_variable_list(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_variable_list_to_r_list
+Rcpp::List cpp_variable_list_to_r_list(Rcpp::XPtr<XPtrTorchvariable_list> x);
+RcppExport SEXP _torchr_cpp_variable_list_to_r_list(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_variable_list_to_r_list(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_autograd_set_grad_mode", (DL_FUNC) &_torchr_cpp_autograd_set_grad_mode, 1},
@@ -22270,6 +22416,17 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_method_backward_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_backward_self_Tensor, 4},
     {"_torchr_cpp_tensor_register_hook", (DL_FUNC) &_torchr_cpp_tensor_register_hook, 2},
     {"_torchr_cpp_tensor_remove_hook", (DL_FUNC) &_torchr_cpp_tensor_remove_hook, 2},
+    {"_torchr_cpp_Function_lambda", (DL_FUNC) &_torchr_cpp_Function_lambda, 1},
+    {"_torchr_cpp_Function_apply", (DL_FUNC) &_torchr_cpp_Function_apply, 3},
+    {"_torchr_cpp_autograd_context_save_for_backward", (DL_FUNC) &_torchr_cpp_autograd_context_save_for_backward, 2},
+    {"_torchr_cpp_autograd_context_get_saved_variables", (DL_FUNC) &_torchr_cpp_autograd_context_get_saved_variables, 1},
+    {"_torchr_cpp_autograd_context_set_arguments", (DL_FUNC) &_torchr_cpp_autograd_context_set_arguments, 3},
+    {"_torchr_cpp_autograd_context_get_argument_names", (DL_FUNC) &_torchr_cpp_autograd_context_get_argument_names, 1},
+    {"_torchr_cpp_autograd_context_get_argument_needs_grad", (DL_FUNC) &_torchr_cpp_autograd_context_get_argument_needs_grad, 1},
+    {"_torchr_cpp_autograd_context_set_saved_variables_names", (DL_FUNC) &_torchr_cpp_autograd_context_set_saved_variables_names, 2},
+    {"_torchr_cpp_autograd_context_get_saved_variables_names", (DL_FUNC) &_torchr_cpp_autograd_context_get_saved_variables_names, 1},
+    {"_torchr_cpp_autograd_context_mark_dirty", (DL_FUNC) &_torchr_cpp_autograd_context_mark_dirty, 2},
+    {"_torchr_cpp_autograd_context_mark_non_differentiable", (DL_FUNC) &_torchr_cpp_autograd_context_mark_non_differentiable, 2},
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},
@@ -23934,6 +24091,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_nullptr", (DL_FUNC) &_torchr_cpp_nullptr, 0},
     {"_torchr_cpp_nullopt", (DL_FUNC) &_torchr_cpp_nullopt, 0},
     {"_torchr_cpp_tensor_undefined", (DL_FUNC) &_torchr_cpp_tensor_undefined, 0},
+    {"_torchr_cpp_torch_variable_list", (DL_FUNC) &_torchr_cpp_torch_variable_list, 1},
+    {"_torchr_cpp_variable_list_to_r_list", (DL_FUNC) &_torchr_cpp_variable_list_to_r_list, 1},
     {NULL, NULL, 0}
 };
 
