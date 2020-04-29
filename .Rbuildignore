@@ -5,3 +5,7 @@
 ^.vscode.*
 tools/torchgen/.Rbuildignore
 ^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$

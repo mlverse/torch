@@ -1,0 +1,6 @@
+pandoc: 2.9.2.1
+pkgdown: 1.4.1.9000
+pkgdown_sha: d01672efa3baa80fd7ab238b7143080b0daf49a4
+articles:
+  extending-autograd: extending-autograd.html
+
