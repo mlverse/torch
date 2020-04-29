@@ -141,6 +141,20 @@ void *lantern_AutogradContext_get_saved_variables_names(void *self)
     return (void *)new std::vector<std::string>(ctx->get_saved_variables_names());
 }
 
+void lantern_AutogradContext_mark_dirty(void *self, void *inputs)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    auto vars = reinterpret_cast<LanternObject<variable_list> *>(inputs)->get();
+    ctx->mark_dirty(vars);
+}
+
+void lantern_AutogradContext_mark_non_differentiable(void *self, void *outputs)
+{
+    auto ctx = reinterpret_cast<LanternAutogradContext *>(self);
+    auto vars = reinterpret_cast<LanternObject<variable_list> *>(outputs)->get();
+    ctx->mark_non_differentiable(vars);
+}
+
 void test_custom_function()
 {
 
