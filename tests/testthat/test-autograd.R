@@ -439,3 +439,84 @@ test_that("Forward can return a list", {
   expect_equal_to_r(x$grad(), 4)
 })
 
+test_that("can use mark_dirty", {
+  # https://github.com/pytorch/pytorch/blob/master/test/test_autograd.py#L1388
+  double_in_place <- autograd_function(
+    forward = function(ctx, x) {
+      x$mul_(2)
+      ctx$mark_dirty(x)
+      list(x, x)
+    },
+    backward = function(ctx, g1, g2) {
+      list(x = g1 * 2 + g2 * 2)
+    }
+  )
+  
+  x <- torch_tensor(5, requires_grad = TRUE)
+  expect_error(double_in_place(x), "leaf Variable that requires grad")
+  
+  # https://github.com/pytorch/pytorch/blob/master/test/test_autograd.py#L1936
+  
+  inplace <- autograd_function(
+    forward = function(ctx, a, b) {
+      ctx$mark_dirty(a)
+      list(a$add_(b), b + 2)
+    },
+    backward = function(ctx, ga, gb) {
+      list(a = ga, b = ga + gb)
+    }
+  )
+  
+  x <- torch_tensor(2)
+  y <- torch_tensor(3, requires_grad = TRUE)
+  r <- inplace(x, y)
+  expect_equal_to_tensor(r[[1]], x)
+  expect_true(r[[1]]$requires_grad())
+  r[[1]]$backward()
+  expect_equal_to_r(y$grad(), 1)
+})
+
+test_that("mark_non_differentiable", {
+ 
+  # https://github.com/pytorch/pytorch/blob/master/test/test_autograd.py#L1309
+  
+  myfun <- autograd_function(
+    forward = function(ctx, input) {
+      output <- input > 0
+      ctx$mark_non_differentiable(output)
+      output
+    },
+    backward = function(ctx, g) {
+      list(input = g * 0)
+    }
+  )
+  
+  x <- torch_tensor(c(-1, 2), requires_grad = TRUE)
+  mask <- myfun(x)
+  
+  expect_false(mask$requires_grad())
+  y <- x$masked_fill(mask, 0)
+  expect_no_error(y$sum()$backward())
+  
+  myfun <- autograd_function(
+    forward = function(ctx, input) {
+      a <- input + 1
+      b <- input + 2
+      ctx$mark_non_differentiable(a)
+      list(a, b)
+    },
+    backward = function(ctx, ga, gb) {
+      expect_equal_to_r(ga, 0)
+      expect_equal_to_r(gb, 1)
+      list(input = gb)
+    }
+  )
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  r <- myfun(x)
+  expect_false(r[[1]]$requires_grad())
+  expect_true(r[[2]]$requires_grad())
+  r[[2]]$backward()
+  expect_equal_to_r(x$grad(), 1)
+})
+

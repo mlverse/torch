@@ -61,6 +61,14 @@ cpp_autograd_context_get_saved_variables_names <- function(self) {
     .Call('_torchr_cpp_autograd_context_get_saved_variables_names', PACKAGE = 'torchr', self)
 }
 
+cpp_autograd_context_mark_dirty <- function(self, inputs) {
+    invisible(.Call('_torchr_cpp_autograd_context_mark_dirty', PACKAGE = 'torchr', self, inputs))
+}
+
+cpp_autograd_context_mark_non_differentiable <- function(self, outputs) {
+    invisible(.Call('_torchr_cpp_autograd_context_mark_non_differentiable', PACKAGE = 'torchr', self, outputs))
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torchr_cpp_device_type_to_string', PACKAGE = 'torchr', device)
 }

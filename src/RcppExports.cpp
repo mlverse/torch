@@ -176,6 +176,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_autograd_context_mark_dirty
+void cpp_autograd_context_mark_dirty(Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> inputs);
+RcppExport SEXP _torchr_cpp_autograd_context_mark_dirty(SEXP selfSEXP, SEXP inputsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type inputs(inputsSEXP);
+    cpp_autograd_context_mark_dirty(self, inputs);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_autograd_context_mark_non_differentiable
+void cpp_autograd_context_mark_non_differentiable(Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> outputs);
+RcppExport SEXP _torchr_cpp_autograd_context_mark_non_differentiable(SEXP selfSEXP, SEXP outputsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type outputs(outputsSEXP);
+    cpp_autograd_context_mark_non_differentiable(self, outputs);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torchr_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -22403,6 +22425,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_autograd_context_get_argument_needs_grad", (DL_FUNC) &_torchr_cpp_autograd_context_get_argument_needs_grad, 1},
     {"_torchr_cpp_autograd_context_set_saved_variables_names", (DL_FUNC) &_torchr_cpp_autograd_context_set_saved_variables_names, 2},
     {"_torchr_cpp_autograd_context_get_saved_variables_names", (DL_FUNC) &_torchr_cpp_autograd_context_get_saved_variables_names, 1},
+    {"_torchr_cpp_autograd_context_mark_dirty", (DL_FUNC) &_torchr_cpp_autograd_context_mark_dirty, 2},
+    {"_torchr_cpp_autograd_context_mark_non_differentiable", (DL_FUNC) &_torchr_cpp_autograd_context_mark_non_differentiable, 2},
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},

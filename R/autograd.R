@@ -120,9 +120,11 @@ AutogradContext <- R6::R6Class(
     
     ptr = NULL,
     
-    initialize = function(ptr, env) {
+    initialize = function(ptr, env, argument_names = NULL, argument_needs_grad = NULL) {
       self$ptr <- ptr
       private$.env <- env
+      if (!is.null(argument_names) && !is.null(argument_needs_grad))
+        private$set_arguments(argument_names, argument_needs_grad)
     },
     
     save_for_backward = function(...) {
@@ -177,28 +179,39 @@ AutogradContext <- R6::R6Class(
       )
     },
     
-    set_arguments = function(names, needs_grad) {
-      cpp_autograd_context_set_arguments(self$ptr, names, needs_grad)
+    mark_non_differentiable = function(...) {
+      vars <- rlang::list2(...)
+      var_list <- torch_variable_list(vars)
+      cpp_autograd_context_mark_non_differentiable(self$ptr, var_list$ptr)
+      invisible(NULL)
     },
     
-    get_argument_names = function() {
-      cpp_autograd_context_get_argument_names(self$ptr)
-    },
-    
-    get_argument_needs_grad = function() {
-      cpp_autograd_context_get_argument_needs_grad(self$ptr)
+    mark_dirty = function(...) {
+      vars <- rlang::list2(...)
+      var_list <- torch_variable_list(vars)
+      cpp_autograd_context_mark_dirty(self$ptr, var_list$ptr)
+      invisible(NULL)
     }
   ),
   active = list(
     needs_input_grad = function() {
-      setNames(as.list(self$get_argument_needs_grad()), self$get_argument_names())
+      setNames(as.list(private$get_argument_needs_grad()), private$get_argument_names())
     },
     saved_variables = function() {
       self$get_saved_variables()
     }
   ),
   private  = list(
-    .env = NULL
+    .env = NULL,
+    set_arguments = function(names, needs_grad) {
+      cpp_autograd_context_set_arguments(self$ptr, names, needs_grad)
+    },
+    get_argument_names = function() {
+      cpp_autograd_context_get_argument_names(self$ptr)
+    },
+    get_argument_needs_grad = function() {
+      cpp_autograd_context_get_argument_needs_grad(self$ptr)
+    }
   )
 )
 
@@ -254,8 +267,8 @@ autograd_function <- function(forward, backward) {
         names(inputs) <- names(.env$variables)
         args <- append(inputs, .env$other)
         
-        args$ctx <- AutogradContext$new(ctx, .env)
-        args$ctx$set_arguments(.env$argument_names, .env$argument_needs_grad)
+        args$ctx <- AutogradContext$new(ctx, .env, .env$argument_names, 
+                                        .env$argument_needs_grad)
         
         res <- do.call(forward, args)
         
@@ -288,8 +301,9 @@ autograd_function <- function(forward, backward) {
         args <- append(list(ctx), grad_output)
         res <- do.call(backward, args)
         
-        argument_names <- ctx$get_argument_names()
-        argument_needs_grad <- ctx$get_argument_needs_grad()
+        needs_grad <- ctx$needs_input_grad
+        argument_names <- names(needs_grad)
+        argument_needs_grad <- as.logical(needs_grad)
         
         res <- res[argument_names[argument_needs_grad]]
         

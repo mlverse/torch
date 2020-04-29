@@ -327,3 +327,15 @@ std::vector<std::string> cpp_autograd_context_get_saved_variables_names (Rcpp::X
   }
   return out;
 }
+
+// [[Rcpp::export]]
+void cpp_autograd_context_mark_dirty (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> inputs)
+{
+  lantern_AutogradContext_mark_dirty(self->get(), inputs->get());
+}
+
+// [[Rcpp::export]]
+void cpp_autograd_context_mark_non_differentiable (Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> outputs)
+{
+  lantern_AutogradContext_mark_non_differentiable(self->get(), outputs->get());
+}
