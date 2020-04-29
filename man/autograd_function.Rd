@@ -9,7 +9,8 @@ autograd_function(forward, backward)
 \arguments{
 \item{forward}{Performs the operation. It must accept a context \code{ctx} as the first argument,
 followed by any number of arguments (tensors or other types). The context can be
-used to store tensors that can be then retrieved during the backward pass.}
+used to store tensors that can be then retrieved during the backward pass.
+See \link{AutogradContext} for more information about context methods.}
 
 \item{backward}{Defines a formula for differentiating the operation. It must accept
 a context \code{ctx} as the first argument, followed by as many outputs did \code{forward()}
@@ -19,7 +20,8 @@ w.r.t. the corresponding input. The context can be used to retrieve tensors save
 during the forward pass. It also has an attribute \code{ctx$needs_input_grad} as a
 named list of booleans representing whether each input needs gradient.
 E.g., \code{backward()} will have \code{ctx$needs_input_grad$input = TRUE} if the \code{input}
-argument to \code{forward()} needs gradient computated w.r.t. the output.}
+argument to \code{forward()} needs gradient computated w.r.t. the output.
+See \link{AutogradContext} for more information about context methods.}
 }
 \description{
 Every operation performed on Tensor's creates a new function object, that

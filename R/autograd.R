@@ -114,12 +114,22 @@ autograd_set_grad_mode <- function(enabled) {
   cpp_autograd_set_grad_mode(enabled)
 }
 
+#' Class representing the context.
+#'  
 AutogradContext <- R6::R6Class(
   classname = "torch_autograd_context",
   public = list(
     
+    #' @field ptr (Dev related) pointer to the context c++ object.
     ptr = NULL,
     
+    #' @description 
+    #' (Dev related) Initializes the context. Not user related.
+    #' 
+    #' @param ptr pointer to the c++ object
+    #' @param env environment that encloses both forward and backward
+    #' @param argument_names names of forward arguments
+    #' @param argument_needs_grad whether each argument in forward needs grad.
     initialize = function(ptr, env, argument_names = NULL, argument_needs_grad = NULL) {
       self$ptr <- ptr
       private$.env <- env
@@ -127,6 +137,20 @@ AutogradContext <- R6::R6Class(
         private$set_arguments(argument_names, argument_needs_grad)
     },
     
+    #' @description
+    #' Saves given objects for a future call to backward().
+    #'
+    #' This should be called at most once, and only from inside the `forward()` 
+    #' method.
+    #' 
+    #' Later, saved objects can be accessed through the `saved_variables` attribute. 
+    #' Before returning them to the user, a check is made to ensure they weren’t used 
+    #' in any in-place operation that modified their content.
+    #' 
+    #' Arguments can also be any kind of R object.
+    #'
+    #' @param ... any kind of R object that will be saved for the backward pass.
+    #'   It's common to pass named arguments.
     save_for_backward = function(...) {
       
       args <- rlang::list2(...)
@@ -147,6 +171,68 @@ AutogradContext <- R6::R6Class(
       cpp_autograd_context_set_saved_variables_names(self$ptr, nms)
     },
     
+    #' @description
+    #' Marks outputs as non-differentiable.
+    #' 
+    #' This should be called at most once, only from inside the `forward()` method, 
+    #' and all arguments should be outputs.
+    #' 
+    #' This will mark outputs as not requiring gradients, increasing the efficiency 
+    #' of backward computation. You still need to accept a gradient for each output 
+    #' in `backward()`, but it’s always going to be a zero tensor with the same 
+    #' shape as the shape of a corresponding output.
+    #' 
+    #' This is used e.g. for indices returned from a max Function.
+    #' 
+    #' @param ... non-differentiable outputs.
+    mark_non_differentiable = function(...) {
+      vars <- rlang::list2(...)
+      var_list <- torch_variable_list(vars)
+      cpp_autograd_context_mark_non_differentiable(self$ptr, var_list$ptr)
+      invisible(NULL)
+    },
+    
+    #' @description 
+    #' Marks given tensors as modified in an in-place operation.
+    #'
+    #' This should be called at most once, only from inside the `forward()` method, 
+    #' and all arguments should be inputs.
+    #' 
+    #' Every tensor that’s been modified in-place in a call to `forward()` should 
+    #' be given to this function, to ensure correctness of our checks. It doesn’t 
+    #' matter whether the function is called before or after modification.
+    #' 
+    #' @param ... tensors that are modified in-place.
+    mark_dirty = function(...) {
+      vars <- rlang::list2(...)
+      var_list <- torch_variable_list(vars)
+      cpp_autograd_context_mark_dirty(self$ptr, var_list$ptr)
+      invisible(NULL)
+    }
+  ),
+  active = list(
+    
+    #' @field needs_input_grad boolean listing arguments of `forward` and whether they require_grad.
+    needs_input_grad = function() {
+      setNames(as.list(private$get_argument_needs_grad()), private$get_argument_names())
+    },
+    
+    #' @field saved_variables list of objects that were saved for backward via `save_for_backward`.
+    saved_variables = function() {
+      private$get_saved_variables()
+    }
+  ),
+  private  = list(
+    .env = NULL,
+    set_arguments = function(names, needs_grad) {
+      cpp_autograd_context_set_arguments(self$ptr, names, needs_grad)
+    },
+    get_argument_names = function() {
+      cpp_autograd_context_get_argument_names(self$ptr)
+    },
+    get_argument_needs_grad = function() {
+      cpp_autograd_context_get_argument_needs_grad(self$ptr)
+    },
     get_saved_variables = function() {
       
       # retrieve variables
@@ -177,40 +263,6 @@ AutogradContext <- R6::R6Class(
         indexes,
         USE.NAMES = FALSE
       )
-    },
-    
-    mark_non_differentiable = function(...) {
-      vars <- rlang::list2(...)
-      var_list <- torch_variable_list(vars)
-      cpp_autograd_context_mark_non_differentiable(self$ptr, var_list$ptr)
-      invisible(NULL)
-    },
-    
-    mark_dirty = function(...) {
-      vars <- rlang::list2(...)
-      var_list <- torch_variable_list(vars)
-      cpp_autograd_context_mark_dirty(self$ptr, var_list$ptr)
-      invisible(NULL)
-    }
-  ),
-  active = list(
-    needs_input_grad = function() {
-      setNames(as.list(private$get_argument_needs_grad()), private$get_argument_names())
-    },
-    saved_variables = function() {
-      self$get_saved_variables()
-    }
-  ),
-  private  = list(
-    .env = NULL,
-    set_arguments = function(names, needs_grad) {
-      cpp_autograd_context_set_arguments(self$ptr, names, needs_grad)
-    },
-    get_argument_names = function() {
-      cpp_autograd_context_get_argument_names(self$ptr)
-    },
-    get_argument_needs_grad = function() {
-      cpp_autograd_context_get_argument_needs_grad(self$ptr)
     }
   )
 )
@@ -227,6 +279,7 @@ AutogradContext <- R6::R6Class(
 #' @param forward Performs the operation. It must accept a context `ctx` as the first argument, 
 #'   followed by any number of arguments (tensors or other types). The context can be 
 #'   used to store tensors that can be then retrieved during the backward pass.
+#'   See [AutogradContext] for more information about context methods.
 #' @param backward Defines a formula for differentiating the operation. It must accept 
 #'   a context `ctx` as the first argument, followed by as many outputs did `forward()` 
 #'   return, and it should return a named list. Each argument is the gradient w.r.t 
@@ -236,6 +289,7 @@ AutogradContext <- R6::R6Class(
 #'   named list of booleans representing whether each input needs gradient. 
 #'   E.g., `backward()` will have `ctx$needs_input_grad$input = TRUE` if the `input`
 #'   argument to `forward()` needs gradient computated w.r.t. the output.
+#'   See [AutogradContext] for more information about context methods.
 #'   
 #' @examples 
 #' 
