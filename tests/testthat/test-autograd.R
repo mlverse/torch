@@ -440,20 +440,6 @@ test_that("Forward can return a list", {
 })
 
 test_that("can use mark_dirty", {
-  # https://github.com/pytorch/pytorch/blob/master/test/test_autograd.py#L1388
-  double_in_place <- autograd_function(
-    forward = function(ctx, x) {
-      x$mul_(2)
-      ctx$mark_dirty(x)
-      list(x, x)
-    },
-    backward = function(ctx, g1, g2) {
-      list(x = g1 * 2 + g2 * 2)
-    }
-  )
-  
-  x <- torch_tensor(5, requires_grad = TRUE)
-  expect_error(double_in_place(x), "leaf Variable that requires grad")
   
   # https://github.com/pytorch/pytorch/blob/master/test/test_autograd.py#L1936
   
@@ -474,6 +460,22 @@ test_that("can use mark_dirty", {
   expect_true(r[[1]]$requires_grad())
   r[[1]]$backward()
   expect_equal_to_r(y$grad(), 1)
+  
+  # https://github.com/pytorch/pytorch/blob/master/test/test_autograd.py#L1388
+  double_in_place <- autograd_function(
+    forward = function(ctx, x) {
+      x$mul_(2)
+      ctx$mark_dirty(x)
+      list(x, x)
+    },
+    backward = function(ctx, g1, g2) {
+      list(x = g1 * 2 + g2 * 2)
+    }
+  )
+  
+  x <- torch_tensor(5, requires_grad = TRUE)
+  skip_on_os("windows")
+  expect_error(double_in_place(x), "leaf Variable that requires grad")
 })
 
 test_that("mark_non_differentiable", {
