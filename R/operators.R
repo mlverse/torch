@@ -94,10 +94,10 @@ slice_dim <- function(x, dim, s) {
 
 #' @export
 `[.torch_tensor` <- function(x, ...) {
-  slices <- lazyeval::lazy_dots(...)
+  slices <- rlang::enquos(..., .ignore_empty = "none")
   
   slices <- lapply(slices, function(x) {
-    if(rlang::is_missing(x$expr)) 
+    if(rlang::is_missing(rlang::quo_get_expr(x))) 
       NA 
     else 
       lazyeval::lazy_eval(x, data = .d)

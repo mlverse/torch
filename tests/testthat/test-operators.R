@@ -114,4 +114,10 @@ test_that("[ works", {
   expect_error(x[1,], "incorrect number of dimensions")
   expect_error(x[1,1,1,1,1], "incorrect number of dimensions")
   expect_error(x[1,1,1,1,..], "incorrect number of dimensions")
+  
+  x <- torch_randn(c(10,10,10,10))
+  i <- c(1,2,3,4)
+  expect_equal(as_array(x[!!!i]), as_array(x)[1,2,3,4])
+  i <- c(1,2)
+  expect_equal(as_array(x[!!!i,3,4]), as_array(x)[1,2,3,4])
 })
