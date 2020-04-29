@@ -1,0 +1,92 @@
+---
+title: "Indexing tensors"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Subsetting tensors}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(torchr)
+```
+
+In this article we describe the indexing operator for
+torch tensors and how it compares to the R indexing
+operator for arrays.
+
+Torch's indexing semantics are closer to numpy's semantics than R's. You will find a lot of similarities between this article and the `numpy` indexing article available [here](https://docs.scipy.org/doc/numpy-1.10.0/user/basics.indexing.html).
+
+## Single element indexing
+
+Single element indexing for a 1-D tensors is what one expects. It is 1-based, and, unlike R, accepts negative
+indices for indexing from the end of the array.
+
+```{r}
+x <- torch_tensor(1:10)
+x[1]
+x[-1]
+```
+You can also subset matrices and higher dimensions arrays using the same syntax:
+
+```{r}
+x <- x$reshape(shape = c(2,5))
+x
+x[1,3]
+x[1,-1]
+```
+Note that if one indexes a multidimensional tensor with 
+fewer indices than dimensions, one gets an error, unlike R, that would flatten the array. For example:
+
+```{r, error=TRUE}
+x[1]
+```
+
+## Other indexing options
+
+It is possible to slice and stride arrays to extract arrays of the same number of dimensions, but of different sizes than the original. A few examples illustrates best:
+
+```{r}
+x <- torch_tensor(1:10)
+x
+x[2:5]
+x[1:(-7)]
+```
+You can also use the `1:10:2` syntax which means 1 to 10 by 2. For example:
+
+```{r}
+x[1:5:2]
+```
+Another special syntax is the `N`, meaning the size of the specified dimension.
+
+```{r}
+x[5:N]
+```
+## Dealing with variable number of indices
+
+The index syntax is very powerful but limiting when dealing with a variable number of indices. For example, if you want to write a function that can handle arguments with various numbers of dimensions without having to write special case code for each number of possible dimensions, how can that be done? If one supplies to the index a tuple, the tuple will be interpreted as a list of indices. For example:
+
+```{r}
+z <- torch_tensor(1:125)$reshape(c(5,5,5))
+```
+
+If you want to always subset the first or last dimension you can use the `..`:
+
+```{r}
+z[1,..]
+z[..,1]
+```
+You can also use the unsplice operator here, for example:
+
+```{r}
+i <- c(5,5,5)
+z[!!!i]
+```
+More complex indexing should make use of `torch_select` or `torch_slice`.
