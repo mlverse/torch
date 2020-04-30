@@ -1,4 +1,4 @@
-branch <- "master"
+branch <- "update-v1.5"
 
 install_config <- list(
   "1.4.0" = list(
