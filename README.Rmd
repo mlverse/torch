@@ -52,9 +52,9 @@ w <- torch_tensor(2, requires_grad = TRUE)
 b <- torch_tensor(3, requires_grad = TRUE)
 y <- w * x + b
 y$backward()
-x$grad()
-w$grad()
-b$grad()
+x$grad
+w$grad
+b$grad
 ```
 
 ### Linear Regression
@@ -80,12 +80,12 @@ for (i in 1:100) {
   loss$backward()
   
   with_no_grad({
-    w$sub_(w$grad()*lr)
-    b$sub_(b$grad()*lr)   
+    w$sub_(w$grad*lr)
+    b$sub_(b$grad*lr)   
   })
   
-  w$grad()$zero_()
-  b$grad()$zero_()
+  w$grad$zero_()
+  b$grad$zero_()
 }
 print(w)
 print(b) 

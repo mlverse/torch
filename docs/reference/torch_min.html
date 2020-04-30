@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Min</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_min.Rd</code></div>
     </div>
 
@@ -138,23 +138,19 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>NA</p></td>
+      <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
       <th>dim</th>
-      <td><p>NA</p></td>
+      <td><p>(int) the dimension to reduce.</p></td>
     </tr>
     <tr>
       <th>keepdim</th>
-      <td><p>NA</p></td>
+      <td><p>(bool) whether the output tensor has <code>dim</code> retained or not.</p></td>
     </tr>
     <tr>
       <th>out</th>
       <td><p>(tuple, optional) the tuple of two output tensors (min, min_indices)</p></td>
-    </tr>
-    <tr>
-      <th>input</th>
-      <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
       <th>other</th>
@@ -181,6 +177,14 @@ follows the broadcasting rules .</p>
 value of each row of the <code>input</code> tensor in the given dimension
 <code>dim</code>. And <code>indices</code> is the index location of each minimum value found
 (argmin).</p>
+    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
+
+    
+
+<p><code>indices</code> does not necessarily contain the first occurrence of each
+minimal value found, unless it is unique.
+The exact implementation details are device-specific.
+Do not expect the same result when run on CPU and GPU in general.</p>
 <p>If <code>keepdim</code> is <code>True</code>, the output tensors are of the same size as
 <code>input</code> except in the dimension <code>dim</code> where they are of size 1.
 Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>torch_squeeze</a></code>), resulting in
@@ -203,51 +207,51 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7699  1.6879  1.1890
+#&gt; -0.3123 -2.2389  1.4095
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_min</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.769913
+#&gt; -2.23887
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4275 -0.2965 -1.4326  1.2610
-#&gt;  1.7526  0.1202 -0.4081 -1.2744
-#&gt; -0.4332  0.8954  1.2446  0.0539
-#&gt;  0.3583 -0.5450 -1.7812 -1.7994
+#&gt; -0.1971  1.0718 -0.4695 -0.3637
+#&gt;  0.0066  1.8264  0.9202 -0.6354
+#&gt;  1.0495  0.4193 -0.2820 -0.3689
+#&gt; -0.5145 -0.1958  2.5342  1.1472
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_min</span>(<span class='no'>a</span>, <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -1.4326
-#&gt; -1.2744
-#&gt; -0.4332
-#&gt; -1.7994
+#&gt; -0.4695
+#&gt; -0.6354
+#&gt; -0.3689
+#&gt; -0.5145
 #&gt; [ CPUFloatType{4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
 #&gt;  2
 #&gt;  3
-#&gt;  0
 #&gt;  3
+#&gt;  0
 #&gt; [ CPULongType{4} ]
 #&gt; </div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.9779
-#&gt;  0.1017
-#&gt;  0.3309
-#&gt; -0.0877
+#&gt;  0.8035
+#&gt;  0.4126
+#&gt;  1.8232
+#&gt;  0.8105
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.7992
-#&gt;  1.6616
-#&gt;  0.6802
-#&gt;  0.7872
+#&gt; -0.8246
+#&gt;  0.5413
+#&gt;  1.7656
+#&gt;  0.0457
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_min</span>(<span class='no'>a</span>, <span class='kw'>other</span> <span class='kw'>=</span> <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.9779
-#&gt;  0.1017
-#&gt;  0.3309
-#&gt; -0.0877
+#&gt; -0.8246
+#&gt;  0.4126
+#&gt;  1.7656
+#&gt;  0.0457
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -257,6 +261,7 @@ $$</p>
       <li><a href="#note">Note</a></li>
       <li><a href="#min-input-gt-tensor-">min(input) -&gt; Tensor </a></li>
       <li><a href="#min-input-dim-keepdim-false-out-none-gt-tensor-longtensor-">min(input, dim, keepdim=False, out=None) -&gt; (Tensor, LongTensor) </a></li>
+      <li><a href="#warning">Warning</a></li>
       <li><a href="#min-input-other-out-none-gt-tensor-">min(input, other, out=None) -&gt; Tensor </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

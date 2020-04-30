@@ -67,7 +67,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -88,7 +88,7 @@
       <h1>Using autograd</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dfalbel/torch/blob/master/vignettes/using-autograd.Rmd"><code>vignettes/using-autograd.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/using-autograd.Rmd"><code>vignettes/using-autograd.Rmd</code></a></small>
       <div class="hidden name"><code>using-autograd.Rmd</code></div>
 
     </div>
@@ -111,7 +111,7 @@
 <p>Actual computation of gradients is triggered by calling <code>backward()</code> on the output tensor.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>y<span class="op">$</span><span class="kw">backward</span>()</span></code></pre></div>
 <p>That executed, <code>x</code> now has a non-empty field <code>grad</code> that stores the gradient of <code>y</code> with respect to <code>x</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>x<span class="op">$</span><span class="kw">grad</span>()</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>x<span class="op">$</span>grad</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; torch_tensor </span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;  0.2500  0.2500</span></span>
 <span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;  0.2500  0.2500</span></span>
@@ -141,10 +141,10 @@
 <span id="cb8-13"><a href="#cb8-13"></a>out.grad_fn.next_functions[<span class="dv">0</span>][<span class="dv">0</span>].next_functions[<span class="dv">0</span>][<span class="dv">0</span>].next_functions[<span class="dv">0</span>][<span class="dv">0</span>].next_functions[<span class="dv">1</span>][<span class="dv">0</span>].next_functions</span></code></pre></div>
 <p>After calling <code>out$backward()</code>, all tensors in the graph will have their respective gradients created. Without our calls to <code>retain_grad</code> above, <code>z$grad</code> and <code>y$grad</code> would be empty:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>out<span class="op">$</span><span class="kw">backward</span>()</span>
-<span id="cb9-2"><a href="#cb9-2"></a>z<span class="op">$</span><span class="kw">grad</span>()</span>
-<span id="cb9-3"><a href="#cb9-3"></a>y<span class="op">$</span><span class="kw">grad</span>()</span>
-<span id="cb9-4"><a href="#cb9-4"></a>x2<span class="op">$</span><span class="kw">grad</span>()</span>
-<span id="cb9-5"><a href="#cb9-5"></a>x1<span class="op">$</span><span class="kw">grad</span>()</span></code></pre></div>
+<span id="cb9-2"><a href="#cb9-2"></a>z<span class="op">$</span>grad</span>
+<span id="cb9-3"><a href="#cb9-3"></a>y<span class="op">$</span>grad</span>
+<span id="cb9-4"><a href="#cb9-4"></a>x2<span class="op">$</span>grad</span>
+<span id="cb9-5"><a href="#cb9-5"></a>x1<span class="op">$</span>grad</span></code></pre></div>
 <p>Thus acquainted with autograd, we’re ready to modify our example.</p>
 </div>
 <div id="the-simple-network-now-using-autograd" class="section level2">
@@ -192,40 +192,40 @@
 <span id="cb10-39"><a href="#cb10-39"></a>    <span class="co"># Wrap in torch.no_grad() because this is a part we DON'T want to record for automatic gradient computation</span></span>
 <span id="cb10-40"><a href="#cb10-40"></a>    <span class="kw"><a href="../reference/with_no_grad.html">with_no_grad</a></span>({</span>
 <span id="cb10-41"><a href="#cb10-41"></a>      </span>
-<span id="cb10-42"><a href="#cb10-42"></a>      w1<span class="op">$</span><span class="kw">sub_</span>(learning_rate <span class="op">*</span><span class="st"> </span>w1<span class="op">$</span><span class="kw">grad</span>())</span>
-<span id="cb10-43"><a href="#cb10-43"></a>      w2<span class="op">$</span><span class="kw">sub_</span>(learning_rate <span class="op">*</span><span class="st"> </span>w2<span class="op">$</span><span class="kw">grad</span>())</span>
-<span id="cb10-44"><a href="#cb10-44"></a>      b1<span class="op">$</span><span class="kw">sub_</span>(learning_rate <span class="op">*</span><span class="st"> </span>b1<span class="op">$</span><span class="kw">grad</span>())</span>
-<span id="cb10-45"><a href="#cb10-45"></a>      b2<span class="op">$</span><span class="kw">sub_</span>(learning_rate <span class="op">*</span><span class="st"> </span>b2<span class="op">$</span><span class="kw">grad</span>())</span>
+<span id="cb10-42"><a href="#cb10-42"></a>      w1<span class="op">$</span><span class="kw">sub_</span>(learning_rate <span class="op">*</span><span class="st"> </span>w1<span class="op">$</span>grad)</span>
+<span id="cb10-43"><a href="#cb10-43"></a>      w2<span class="op">$</span><span class="kw">sub_</span>(learning_rate <span class="op">*</span><span class="st"> </span>w2<span class="op">$</span>grad)</span>
+<span id="cb10-44"><a href="#cb10-44"></a>      b1<span class="op">$</span><span class="kw">sub_</span>(learning_rate <span class="op">*</span><span class="st"> </span>b1<span class="op">$</span>grad)</span>
+<span id="cb10-45"><a href="#cb10-45"></a>      b2<span class="op">$</span><span class="kw">sub_</span>(learning_rate <span class="op">*</span><span class="st"> </span>b2<span class="op">$</span>grad)</span>
 <span id="cb10-46"><a href="#cb10-46"></a>      </span>
 <span id="cb10-47"><a href="#cb10-47"></a>      <span class="co"># Zero the gradients after every pass, because they'd accumulate otherwise</span></span>
-<span id="cb10-48"><a href="#cb10-48"></a>      w1<span class="op">$</span><span class="kw">grad</span>()<span class="op">$</span><span class="kw">zero_</span>()</span>
-<span id="cb10-49"><a href="#cb10-49"></a>      w2<span class="op">$</span><span class="kw">grad</span>()<span class="op">$</span><span class="kw">zero_</span>()</span>
-<span id="cb10-50"><a href="#cb10-50"></a>      b1<span class="op">$</span><span class="kw">grad</span>()<span class="op">$</span><span class="kw">zero_</span>()</span>
-<span id="cb10-51"><a href="#cb10-51"></a>      b2<span class="op">$</span><span class="kw">grad</span>()<span class="op">$</span><span class="kw">zero_</span>()</span>
+<span id="cb10-48"><a href="#cb10-48"></a>      w1<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</span>
+<span id="cb10-49"><a href="#cb10-49"></a>      w2<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</span>
+<span id="cb10-50"><a href="#cb10-50"></a>      b1<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</span>
+<span id="cb10-51"><a href="#cb10-51"></a>      b2<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</span>
 <span id="cb10-52"><a href="#cb10-52"></a>    </span>
 <span id="cb10-53"><a href="#cb10-53"></a>    })</span>
 <span id="cb10-54"><a href="#cb10-54"></a>    </span>
 <span id="cb10-55"><a href="#cb10-55"></a>}</span>
-<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 69.63779 </span></span>
-<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 64.34746 </span></span>
-<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 59.57198 </span></span>
-<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 55.24584 </span></span>
-<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 51.32189 </span></span>
-<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 47.76328 </span></span>
-<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 44.51353 </span></span>
-<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 41.53828 </span></span>
-<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 38.82073 </span></span>
-<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 36.33484 </span></span>
-<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 34.05214 </span></span>
-<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 31.95492 </span></span>
-<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 30.02137 </span></span>
-<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 28.23679 </span></span>
-<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 26.58571 </span></span>
-<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 25.05633 </span></span>
-<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 23.63741 </span></span>
-<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 22.32113 </span></span>
-<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 21.09805 </span></span>
-<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 19.95875</span></span></code></pre></div>
+<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 32.80969 </span></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 30.03394 </span></span>
+<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 27.53496 </span></span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 25.28588 </span></span>
+<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 23.26456 </span></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 21.43041 </span></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 19.76855 </span></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 18.26452 </span></span>
+<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 16.90207 </span></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 15.66516 </span></span>
+<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 14.54156 </span></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 13.51934 </span></span>
+<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 12.58846 </span></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 11.73963 </span></span>
+<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 10.96635 </span></span>
+<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 10.26359 </span></span>
+<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 9.620815 </span></span>
+<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 9.032287 </span></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 8.492757 </span></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 7.997826</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">

@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Randint</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_randint.Rd</code></div>
     </div>
 
@@ -174,11 +174,12 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="randint-low-high-size-generator-none-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"><a class="anchor" href="#randint-low-high-size-generator-none-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"></a>randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="randint-low-high-size-generator-none-out-none-"><a class="anchor" href="#randint-low-high-size-generator-none-out-none-"></a>randint(low=0, high, size, *, generator=None, out=None, \ </h2>
 
     
 
 
+<p>dtype=None, layout=torch.strided, device=None, requires_grad=False) -&gt; Tensor</p>
 <p>Returns a tensor filled with random integers generated uniformly
 between <code>low</code> (inclusive) and <code>high</code> (exclusive).</p>
 <p>The shape of the tensor is defined by the variable argument <code>size</code>.</p>
@@ -189,22 +190,22 @@ a tensor with dtype <code>torch_int64</code>.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>torch_randint</span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>3</span>))</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  3
 #&gt;  4
-#&gt;  3
-#&gt;  3
+#&gt;  4
 #&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='fu'>torch_randint</span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3  0
-#&gt;  5  2
+#&gt;  3  7
+#&gt;  3  3
 #&gt; [ CPUFloatType{2,2} ]</div><div class='input'><span class='fu'>torch_randint</span>(<span class='fl'>3</span>, <span class='fl'>10</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  7  5
-#&gt;  4  6
+#&gt;  5  8
+#&gt;  9  5
 #&gt; [ CPUFloatType{2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#randint-low-high-size-generator-none-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-">randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -&gt; Tensor </a></li>
+      <li><a href="#randint-low-high-size-generator-none-out-none-">randint(low=0, high, size, *, generator=None, out=None, \ </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

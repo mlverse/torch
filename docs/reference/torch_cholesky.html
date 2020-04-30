@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cholesky</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_cholesky.Rd</code></div>
     </div>
 
@@ -177,17 +177,17 @@ matrices.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive-definite</span>
 <span class='no'>l</span> <span class='kw'>=</span> <span class='fu'>torch_cholesky</span>(<span class='no'>a</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.8689 -1.5397 -0.1611
-#&gt; -1.5397  9.9965 -1.0365
-#&gt; -0.1611 -1.0365  0.7561
+#&gt;  1.7641  2.4526  0.8777
+#&gt;  2.4526  6.7024 -0.9361
+#&gt;  0.8777 -0.9361  2.3442
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>l</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.6938  0.0000  0.0000
-#&gt; -0.9090  3.0282  0.0000
-#&gt; -0.0951 -0.3708  0.7807
+#&gt;  1.3282  0.0000  0.0000
+#&gt;  1.8466  1.8145  0.0000
+#&gt;  0.6608 -1.1884  0.7037
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>l</span>, <span class='no'>l</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>())</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.8689 -1.5397 -0.1611
-#&gt; -1.5397  9.9966 -1.0365
-#&gt; -0.1611 -1.0365  0.7561
+#&gt;  1.7641  2.4526  0.8777
+#&gt;  2.4526  6.7024 -0.9361
+#&gt;  0.8777 -0.9361  2.3442
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'>transpose</span>(-<span class='fl'>1</span>, -<span class='fl'>2</span>)) + <span class='fl'>1e-03</span> <span class='co'># make symmetric positive-definite</span>

@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Addcdiv</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_addcdiv.Rd</code></div>
     </div>
 
@@ -141,10 +141,6 @@
       <td><p>(Tensor) the tensor to be added</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>(Number, optional) multiplier for \(\text{tensor1} / \text{tensor2}\)</p></td>
-    </tr>
-    <tr>
       <th>tensor1</th>
       <td><p>(Tensor) the numerator tensor</p></td>
     </tr>
@@ -153,22 +149,40 @@
       <td><p>(Tensor) the denominator tensor</p></td>
     </tr>
     <tr>
+      <th>value</th>
+      <td><p>(Number, optional) multiplier for \(\text{tensor1} / \text{tensor2}\)</p></td>
+    </tr>
+    <tr>
       <th>out</th>
       <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addcdiv-input-value-tensor-tensor-out-none-gt-tensor-"><a class="anchor" href="#addcdiv-input-value-tensor-tensor-out-none-gt-tensor-"></a>addcdiv(input, value=1, tensor1, tensor2, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="addcdiv-input-tensor-tensor-value-out-none-gt-tensor-"><a class="anchor" href="#addcdiv-input-tensor-tensor-value-out-none-gt-tensor-"></a>addcdiv(input, tensor1, tensor2, *, value=1, out=None) -&gt; Tensor </h2>
 
     
 
 
 <p>Performs the element-wise division of <code>tensor1</code> by <code>tensor2</code>,
 multiply the result by the scalar <code>value</code> and add it to <code>input</code>.</p>
+    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
+
+    
+
+<p>Integer division with addcdiv is deprecated, and in a future release
+addcdiv will perform a true division of <code>tensor1</code> and <code>tensor2</code>.
+The current addcdiv behavior can be replicated using <code>floor_divide</code>
+for integral inputs
+(<code>input</code> + <code>value</code> * <code>tensor1</code> // <code>tensor2</code>)
+and <code>div</code> for float inputs
+(<code>input</code> + <code>value</code> * <code>tensor1</code> / <code>tensor2</code>).
+The new addcdiv behavior can be implemented with <code>true_divide</code>
+(<code>input</code> + <code>value</code> * torch.true_divide(<code>tensor1</code>,
+<code>tensor2</code>).</p>
 <p>$$
     \text{out}_i = \text{input}_i + \text{value} \times \frac{\text{tensor1}_i}{\text{tensor2}_i}
-$$
-The shapes of <code>input</code>, <code>tensor1</code>, and <code>tensor2</code> must be
+$$</p>
+<p>The shapes of <code>input</code>, <code>tensor1</code>, and <code>tensor2</code> must be
 broadcastable .</p>
 <p>For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, <code>value</code> must be
 a real number, otherwise an integer.</p>
@@ -179,16 +193,17 @@ a real number, otherwise an integer.</p>
 <span class='no'>t1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>1</span>))
 <span class='no'>t2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_addcdiv</span>(<span class='no'>t</span>, <span class='no'>t1</span>, <span class='no'>t2</span>, <span class='fl'>0.1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0556 -1.7309  0.0902
-#&gt; -1.3504 -1.5914 -2.1541
-#&gt; -1.2480 -1.6399 -1.3748
+#&gt; -0.8888 -1.1803  2.0660
+#&gt; -0.9385 -1.4889  2.2176
+#&gt; -0.9006 -1.2538  2.1021
 #&gt; [ CPUFloatType{3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#addcdiv-input-value-tensor-tensor-out-none-gt-tensor-">addcdiv(input, value=1, tensor1, tensor2, out=None) -&gt; Tensor </a></li>
+      <li><a href="#addcdiv-input-tensor-tensor-value-out-none-gt-tensor-">addcdiv(input, tensor1, tensor2, *, value=1, out=None) -&gt; Tensor </a></li>
+      <li><a href="#warning">Warning</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

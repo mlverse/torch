@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_add.Rd</code></div>
     </div>
 
@@ -145,12 +145,12 @@
       <td><p>(Number) the number to be added to each element of <code>input</code></p></td>
     </tr>
     <tr>
-      <th>alpha</th>
-      <td><p>(Number) the scalar multiplier for <code>other</code></p></td>
-    </tr>
-    <tr>
       <th>other</th>
       <td><p>(Tensor) the second input tensor</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>(Number) the scalar multiplier for <code>other</code></p></td>
     </tr>
     </table>
 
@@ -166,7 +166,7 @@ and returns a new resulting tensor.</p>
 $$
 If <code>input</code> is of type FloatTensor or DoubleTensor, <code>other</code> must be
 a real number, otherwise it should be an integer.</p>
-    <h2 class="hasAnchor" id="add-input-alpha-other-out-none-"><a class="anchor" href="#add-input-alpha-other-out-none-"></a>add(input, alpha=1, other, out=None) </h2>
+    <h2 class="hasAnchor" id="add-input-other-alpha-out-none-"><a class="anchor" href="#add-input-other-alpha-out-none-"></a>add(input, other, *, alpha=1, out=None) </h2>
 
     
 
@@ -186,34 +186,34 @@ a real number, otherwise it should be an integer.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.7831
-#&gt; -0.3443
-#&gt; -1.3146
-#&gt;  1.1096
+#&gt;  0.5106
+#&gt;  1.1763
+#&gt;  0.8637
+#&gt;  0.7289
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='fl'>20</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  19.2169
-#&gt;  19.6557
-#&gt;  18.6854
-#&gt;  21.1096
+#&gt;  20.5106
+#&gt;  21.1763
+#&gt;  20.8637
+#&gt;  20.7289
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0296
-#&gt; -1.8373
-#&gt;  0.0329
-#&gt;  0.0636
+#&gt; -0.3022
+#&gt; -0.0095
+#&gt; -0.8454
+#&gt; -0.8205
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6486
-#&gt;  0.5791
-#&gt;  1.7143
-#&gt;  0.3055
+#&gt;  0.4426
+#&gt;  1.1565
+#&gt; -0.7812
+#&gt; -0.7738
 #&gt; [ CPUFloatType{4,1} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3809 -1.1886  0.6815  0.7122
-#&gt; -0.4505 -1.2581  0.6120  0.6427
-#&gt;  0.6847 -0.1230  1.7472  1.7778
-#&gt; -0.7241 -1.5318  0.3384  0.3691
+#&gt;  0.1404  0.4331 -0.4028 -0.3779
+#&gt;  0.8543  1.1469  0.3111  0.3360
+#&gt; -1.0833 -0.7907 -1.6265 -1.6017
+#&gt; -1.0759 -0.7833 -1.6191 -1.5943
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -221,7 +221,7 @@ a real number, otherwise it should be an integer.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#add-input-other-out-none-">add(input, other, out=None) </a></li>
-      <li><a href="#add-input-alpha-other-out-none-">add(input, alpha=1, other, out=None) </a></li>
+      <li><a href="#add-input-other-alpha-out-none-">add(input, other, *, alpha=1, out=None) </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

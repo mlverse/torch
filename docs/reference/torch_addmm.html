@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Addmm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_addmm.Rd</code></div>
     </div>
 
@@ -137,16 +137,8 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>beta</th>
-      <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
-    </tr>
-    <tr>
       <th>input</th>
       <td><p>(Tensor) matrix to be added</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>(Number, optional) multiplier for \(mat1 @ mat2\) (\(\alpha\))</p></td>
     </tr>
     <tr>
       <th>mat1</th>
@@ -157,12 +149,20 @@
       <td><p>(Tensor) the second matrix to be multiplied</p></td>
     </tr>
     <tr>
+      <th>beta</th>
+      <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>(Number, optional) multiplier for \(mat1 @ mat2\) (\(\alpha\))</p></td>
+    </tr>
+    <tr>
       <th>out</th>
       <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addmm-beta-input-alpha-mat-mat-out-none-gt-tensor-"><a class="anchor" href="#addmm-beta-input-alpha-mat-mat-out-none-gt-tensor-"></a>addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="addmm-input-mat-mat-beta-alpha-out-none-gt-tensor-"><a class="anchor" href="#addmm-input-mat-mat-beta-alpha-out-none-gt-tensor-"></a>addmm(input, mat1, mat2, *, beta=1, alpha=1, out=None) -&gt; Tensor </h2>
 
     
 
@@ -187,15 +187,15 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class='no'>mat1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='no'>mat2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_addmm</span>(<span class='no'>M</span>, <span class='no'>mat1</span>, <span class='no'>mat2</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3701 -2.7744  2.0927
-#&gt; -0.8553 -1.0208  1.7269
+#&gt; -1.5714  1.1013  1.1601
+#&gt;  3.5992 -2.3185  5.4233
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#addmm-beta-input-alpha-mat-mat-out-none-gt-tensor-">addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -&gt; Tensor </a></li>
+      <li><a href="#addmm-input-mat-mat-beta-alpha-out-none-gt-tensor-">addmm(input, mat1, mat2, *, beta=1, alpha=1, out=None) -&gt; Tensor </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

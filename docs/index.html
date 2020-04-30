@@ -67,7 +67,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -105,12 +105,12 @@
 <span id="cb2-4"><a href="#cb2-4"></a>y</span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; torch_tensor </span></span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; (1,.,.) = </span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;   0.5178  0.2795</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   0.9975  0.9788</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;   0.3347  0.2410</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   0.0348  0.7088</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; </span></span>
 <span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; (2,.,.) = </span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt;   0.9774  0.7181</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;   0.4617  0.7350</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt;   0.2776  0.4821</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;   0.7043  0.7275</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; [ CPUDoubleType{2,2,2} ]</span></span>
 <span id="cb2-14"><a href="#cb2-14"></a><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(x, <span class="kw">as_array</span>(y))</span>
 <span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
@@ -123,15 +123,15 @@
 <span id="cb3-3"><a href="#cb3-3"></a>b &lt;-<span class="st"> </span><span class="kw">torch_tensor</span>(<span class="dv">3</span>, <span class="dt">requires_grad =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb3-4"><a href="#cb3-4"></a>y &lt;-<span class="st"> </span>w <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>b</span>
 <span id="cb3-5"><a href="#cb3-5"></a>y<span class="op">$</span><span class="kw">backward</span>()</span>
-<span id="cb3-6"><a href="#cb3-6"></a>x<span class="op">$</span><span class="kw">grad</span>()</span>
+<span id="cb3-6"><a href="#cb3-6"></a>x<span class="op">$</span>grad</span>
 <span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; torch_tensor </span></span>
 <span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;  2</span></span>
 <span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; [ CPUFloatType{1} ]</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>w<span class="op">$</span><span class="kw">grad</span>()</span>
+<span id="cb3-10"><a href="#cb3-10"></a>w<span class="op">$</span>grad</span>
 <span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; torch_tensor </span></span>
 <span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;  1</span></span>
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; [ CPUFloatType{1} ]</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>b<span class="op">$</span><span class="kw">grad</span>()</span>
+<span id="cb3-14"><a href="#cb3-14"></a>b<span class="op">$</span>grad</span>
 <span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; torch_tensor </span></span>
 <span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt;  1</span></span>
 <span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; [ CPUFloatType{1} ]</span></span></code></pre></div>
@@ -155,23 +155,22 @@
 <span id="cb4-12"><a href="#cb4-12"></a>  loss<span class="op">$</span><span class="kw">backward</span>()</span>
 <span id="cb4-13"><a href="#cb4-13"></a>  </span>
 <span id="cb4-14"><a href="#cb4-14"></a>  <span class="kw"><a href="reference/with_no_grad.html">with_no_grad</a></span>({</span>
-<span id="cb4-15"><a href="#cb4-15"></a>    w<span class="op">$</span><span class="kw">sub_</span>(w<span class="op">$</span><span class="kw">grad</span>()<span class="op">*</span>lr)</span>
-<span id="cb4-16"><a href="#cb4-16"></a>    b<span class="op">$</span><span class="kw">sub_</span>(b<span class="op">$</span><span class="kw">grad</span>()<span class="op">*</span>lr)   </span>
+<span id="cb4-15"><a href="#cb4-15"></a>    w<span class="op">$</span><span class="kw">sub_</span>(w<span class="op">$</span>grad<span class="op">*</span>lr)</span>
+<span id="cb4-16"><a href="#cb4-16"></a>    b<span class="op">$</span><span class="kw">sub_</span>(b<span class="op">$</span>grad<span class="op">*</span>lr)   </span>
 <span id="cb4-17"><a href="#cb4-17"></a>  })</span>
 <span id="cb4-18"><a href="#cb4-18"></a>  </span>
-<span id="cb4-19"><a href="#cb4-19"></a>  w<span class="op">$</span><span class="kw">grad</span>()<span class="op">$</span><span class="kw">zero_</span>()</span>
-<span id="cb4-20"><a href="#cb4-20"></a>  b<span class="op">$</span><span class="kw">grad</span>()<span class="op">$</span><span class="kw">zero_</span>()</span>
+<span id="cb4-19"><a href="#cb4-19"></a>  w<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</span>
+<span id="cb4-20"><a href="#cb4-20"></a>  b<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</span>
 <span id="cb4-21"><a href="#cb4-21"></a>}</span>
 <span id="cb4-22"><a href="#cb4-22"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(w)</span>
 <span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; torch_tensor </span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt;  0.5011</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; -0.6997</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt;  0.4948</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; -0.7033</span></span>
 <span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt; [ CPUFloatType{2,1} ]</span></span>
 <span id="cb4-27"><a href="#cb4-27"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(b) </span>
 <span id="cb4-28"><a href="#cb4-28"></a><span class="co">#&gt; torch_tensor </span></span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; 0.01 *</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt;  9.9441</span></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt; [ CPUFloatType{1} ]</span></span></code></pre></div>
+<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt;  0.1047</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt; [ CPUFloatType{1} ]</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -181,9 +180,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/dfalbel/torch">https://​github.com/​dfalbel/​torch</a>
+<li>Browse source code at <br><a href="https://github.com/mlverse/torch">https://​github.com/​mlverse/​torch</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/dfalbel/torch/issues">https://​github.com/​dfalbel/​torch/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/mlverse/torch/issues">https://​github.com/​mlverse/​torch/​issues</a>
 </li>
 </ul>
 </div>

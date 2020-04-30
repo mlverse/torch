@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Narrow</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_narrow.Rd</code></div>
     </div>
 
@@ -165,15 +165,15 @@ returned tensor and <code>input</code> tensor share the same underlying storage.
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>7</span>, <span class='fl'>8</span>, <span class='fl'>9</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>byrow</span><span class='kw'>=</span> <span class='fl'>TRUE</span>))
-<span class='fu'>torch_narrow</span>(<span class='no'>x</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
+<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>9</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>byrow</span><span class='kw'>=</span> <span class='fl'>TRUE</span>))
+<span class='fu'>torch_narrow</span>(<span class='no'>x</span>, <span class='fl'>0</span>, <span class='fu'>torch_tensor</span>(<span class='fl'>0L</span>)$<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='kw'>dim</span> <span class='kw'>=</span> <span class='fl'>0</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  1  2  3
 #&gt;  4  5  6
-#&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_narrow</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt; [ CPUIntType{2,3} ]</div><div class='input'><span class='fu'>torch_narrow</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fu'>torch_tensor</span>(<span class='fl'>1L</span>)$<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='kw'>dim</span> <span class='kw'>=</span> <span class='fl'>0</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  2  3
 #&gt;  5  6
 #&gt;  8  9
-#&gt; [ CPUFloatType{3,2} ]</div></pre>
+#&gt; [ CPUIntType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

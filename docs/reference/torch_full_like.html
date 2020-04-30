@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Full_like</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_full_like.Rd</code></div>
     </div>
 
@@ -160,13 +160,18 @@
       <th>requires_grad</th>
       <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
     </tr>
+    <tr>
+      <th>memory_format</th>
+      <td><p>(<code>torch.memory_format</code>, optional) the desired memory format of        returned Tensor. Default: <code>torch_preserve_format</code>.</p></td>
+    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="full-like-input-fill-value-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"><a class="anchor" href="#full-like-input-fill-value-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"></a>full_like(input, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="full-like-input-fill-value-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-"><a class="anchor" href="#full-like-input-fill-value-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-"></a>full_like(input, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False, </h2>
 
     
 
 
+<p>memory_format=torch.preserve_format) -&gt; Tensor</p>
 <p>Returns a tensor with the same size as <code>input</code> filled with <code>fill_value</code>.
 <code>torch_full_like(input, fill_value)</code> is equivalent to
 <code><a href='torch_full.html'>torch_full(input.size(), fill_value, dtype=input.dtype, layout=input.layout, device=input.device)</a></code>.</p>
@@ -180,7 +185,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#full-like-input-fill-value-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-">full_like(input, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -&gt; Tensor </a></li>
+      <li><a href="#full-like-input-fill-value-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-">full_like(input, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False, </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

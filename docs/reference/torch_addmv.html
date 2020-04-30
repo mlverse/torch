@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Addmv</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_addmv.Rd</code></div>
     </div>
 
@@ -137,16 +137,8 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>beta</th>
-      <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
-    </tr>
-    <tr>
       <th>input</th>
       <td><p>(Tensor) vector to be added</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>(Number, optional) multiplier for \(mat @ vec\) (\(\alpha\))</p></td>
     </tr>
     <tr>
       <th>mat</th>
@@ -157,12 +149,20 @@
       <td><p>(Tensor) vector to be multiplied</p></td>
     </tr>
     <tr>
+      <th>beta</th>
+      <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>(Number, optional) multiplier for \(mat @ vec\) (\(\alpha\))</p></td>
+    </tr>
+    <tr>
       <th>out</th>
       <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addmv-beta-input-alpha-mat-vec-out-none-gt-tensor-"><a class="anchor" href="#addmv-beta-input-alpha-mat-vec-out-none-gt-tensor-"></a>addmv(beta=1, input, alpha=1, mat, vec, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="addmv-input-mat-vec-beta-alpha-out-none-gt-tensor-"><a class="anchor" href="#addmv-input-mat-vec-beta-alpha-out-none-gt-tensor-"></a>addmv(input, mat, vec, *, beta=1, alpha=1, out=None) -&gt; Tensor </h2>
 
     
 
@@ -188,15 +188,15 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class='no'>mat</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='no'>vec</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
 <span class='fu'>torch_addmv</span>(<span class='no'>M</span>, <span class='no'>mat</span>, <span class='no'>vec</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.2528
-#&gt;  2.1271
+#&gt; -1.2964
+#&gt;  2.6349
 #&gt; [ CPUFloatType{2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#addmv-beta-input-alpha-mat-vec-out-none-gt-tensor-">addmv(beta=1, input, alpha=1, mat, vec, out=None) -&gt; Tensor </a></li>
+      <li><a href="#addmv-input-mat-vec-beta-alpha-out-none-gt-tensor-">addmv(input, mat, vec, *, beta=1, alpha=1, out=None) -&gt; Tensor </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

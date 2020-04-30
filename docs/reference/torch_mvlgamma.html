@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Mvlgamma</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_mvlgamma.Rd</code></div>
     </div>
 
@@ -151,13 +151,13 @@
     
 
 
-<p>Computes the multivariate log-gamma function (<code>[reference]</code>_) with dimension \(p\) element-wise, given by</p>
+<p>Computes the <code>multivariate log-gamma function &lt;https://en.wikipedia.org/wiki/Multivariate_gamma_function&gt;</code>_) with dimension
+\(p\) element-wise, given by</p>
 <p>$$
     \log(\Gamma_{p}(a)) = C + \displaystyle \sum_{i=1}^{p} \log\left(\Gamma\left(a - \frac{i - 1}{2}\right)\right)
 $$
 where \(C = \log(\pi) \times \frac{p (p - 1)}{4}\) and \(\Gamma(\cdot)\) is the Gamma function.</p>
-<p>If any of the elements are less than or equal to \(\frac{p - 1}{2}\), then an error
-is thrown.</p>
+<p>All elements must be greater than \(\frac{p - 1}{2}\), otherwise an error would be thrown.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

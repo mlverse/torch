@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Mode</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_mode.Rd</code></div>
     </div>
 
@@ -149,19 +149,15 @@
       <td><p>(bool) whether the output tensor has <code>dim</code> retained or not.</p></td>
     </tr>
     <tr>
-      <th>values</th>
-      <td><p>(Tensor, optional) the output tensor</p></td>
-    </tr>
-    <tr>
-      <th>indices</th>
-      <td><p>(Tensor, optional) the output index tensor</p></td>
+      <th>out</th>
+      <td><p>(tuple, optional) the result tuple of two output tensors (values, indices)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>This function is not defined for <code>torch_cuda.Tensor</code> yet.</p>
-    <h2 class="hasAnchor" id="mode-input-dim-keepdim-false-values-none-indices-none-gt-tensor-longtensor-"><a class="anchor" href="#mode-input-dim-keepdim-false-values-none-indices-none-gt-tensor-longtensor-"></a>mode(input, dim=-1, keepdim=False, values=None, indices=None) -&gt; (Tensor, LongTensor) </h2>
+    <h2 class="hasAnchor" id="mode-input-dim-keepdim-false-out-none-gt-tensor-longtensor-"><a class="anchor" href="#mode-input-dim-keepdim-false-out-none-gt-tensor-longtensor-"></a>mode(input, dim=-1, keepdim=False, out=None) -&gt; (Tensor, LongTensor) </h2>
 
     
 
@@ -180,19 +176,19 @@ in the output tensors having 1 fewer dimension than <code>input</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>5</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  24
-#&gt;  35
-#&gt;  24
-#&gt;  12
+#&gt;  42
+#&gt;  25
 #&gt;  39
+#&gt;  23
+#&gt;  30
 #&gt; [ CPUFloatType{5} ]</div><div class='input'><span class='fu'>torch_mode</span>(<span class='no'>a</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; 24
+#&gt; 23
 #&gt; [ CPUFloatType{} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; 2
+#&gt; 3
 #&gt; [ CPULongType{} ]
 #&gt; </div></pre>
   </div>
@@ -201,7 +197,7 @@ in the output tensors having 1 fewer dimension than <code>input</code>.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#note">Note</a></li>
-      <li><a href="#mode-input-dim-keepdim-false-values-none-indices-none-gt-tensor-longtensor-">mode(input, dim=-1, keepdim=False, values=None, indices=None) -&gt; (Tensor, LongTensor) </a></li>
+      <li><a href="#mode-input-dim-keepdim-false-out-none-gt-tensor-longtensor-">mode(input, dim=-1, keepdim=False, out=None) -&gt; (Tensor, LongTensor) </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

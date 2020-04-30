@@ -31,12 +31,12 @@ y <- torch_tensor(x, dtype = torch_float64())
 y
 #> torch_tensor 
 #> (1,.,.) = 
-#>   0.5178  0.2795
-#>   0.9975  0.9788
+#>   0.3347  0.2410
+#>   0.0348  0.7088
 #> 
 #> (2,.,.) = 
-#>   0.9774  0.7181
-#>   0.4617  0.7350
+#>   0.2776  0.4821
+#>   0.7043  0.7275
 #> [ CPUDoubleType{2,2,2} ]
 identical(x, as_array(y))
 #> [1] TRUE
@@ -53,15 +53,15 @@ w <- torch_tensor(2, requires_grad = TRUE)
 b <- torch_tensor(3, requires_grad = TRUE)
 y <- w * x + b
 y$backward()
-x$grad()
+x$grad
 #> torch_tensor 
 #>  2
 #> [ CPUFloatType{1} ]
-w$grad()
+w$grad
 #> torch_tensor 
 #>  1
 #> [ CPUFloatType{1} ]
-b$grad()
+b$grad
 #> torch_tensor 
 #>  1
 #> [ CPUFloatType{1} ]
@@ -90,21 +90,20 @@ for (i in 1:100) {
   loss$backward()
   
   with_no_grad({
-    w$sub_(w$grad()*lr)
-    b$sub_(b$grad()*lr)   
+    w$sub_(w$grad*lr)
+    b$sub_(b$grad*lr)   
   })
   
-  w$grad()$zero_()
-  b$grad()$zero_()
+  w$grad$zero_()
+  b$grad$zero_()
 }
 print(w)
 #> torch_tensor 
-#>  0.5011
-#> -0.6997
+#>  0.4948
+#> -0.7033
 #> [ CPUFloatType{2,1} ]
 print(b) 
 #> torch_tensor 
-#> 0.01 *
-#>  9.9441
+#>  0.1047
 #> [ CPUFloatType{1} ]
 ```

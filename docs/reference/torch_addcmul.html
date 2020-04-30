@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Addcmul</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_addcmul.Rd</code></div>
     </div>
 
@@ -141,10 +141,6 @@
       <td><p>(Tensor) the tensor to be added</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>(Number, optional) multiplier for \(tensor1 .* tensor2\)</p></td>
-    </tr>
-    <tr>
       <th>tensor1</th>
       <td><p>(Tensor) the tensor to be multiplied</p></td>
     </tr>
@@ -153,12 +149,16 @@
       <td><p>(Tensor) the tensor to be multiplied</p></td>
     </tr>
     <tr>
+      <th>value</th>
+      <td><p>(Number, optional) multiplier for \(tensor1 .* tensor2\)</p></td>
+    </tr>
+    <tr>
       <th>out</th>
       <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addcmul-input-value-tensor-tensor-out-none-gt-tensor-"><a class="anchor" href="#addcmul-input-value-tensor-tensor-out-none-gt-tensor-"></a>addcmul(input, value=1, tensor1, tensor2, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="addcmul-input-tensor-tensor-value-out-none-gt-tensor-"><a class="anchor" href="#addcmul-input-tensor-tensor-value-out-none-gt-tensor-"></a>addcmul(input, tensor1, tensor2, *, value=1, out=None) -&gt; Tensor </h2>
 
     
 
@@ -180,16 +180,16 @@ a real number, otherwise an integer.</p>
 <span class='no'>t1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>1</span>))
 <span class='no'>t2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_addcmul</span>(<span class='no'>t</span>, <span class='no'>t1</span>, <span class='no'>t2</span>, <span class='fl'>0.1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.7633  0.2889  0.1545
-#&gt; -1.6592  0.3015  0.0450
-#&gt; -1.7653  0.2886  0.1566
+#&gt;  0.0768 -0.3615  2.1395
+#&gt;  0.1346 -0.3436  2.1831
+#&gt;  0.1567 -0.3368  2.1997
 #&gt; [ CPUFloatType{3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#addcmul-input-value-tensor-tensor-out-none-gt-tensor-">addcmul(input, value=1, tensor1, tensor2, out=None) -&gt; Tensor </a></li>
+      <li><a href="#addcmul-input-tensor-tensor-value-out-none-gt-tensor-">addcmul(input, tensor1, tensor2, *, value=1, out=None) -&gt; Tensor </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>T</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_t.Rd</code></div>
     </div>
 
@@ -149,36 +149,36 @@
 
 <p>Expects <code>input</code> to be &lt;= 2-D tensor and transposes dimensions 0
 and 1.</p>
-<p>0-D and 1-D tensors are returned as it is and
-2-D tensor can be seen as a short-hand function for <code>transpose(input, 0, 1)</code>.</p>
+<p>0-D and 1-D tensors are returned as is. When input is a 2-D tensor this
+is equivalent to <code>transpose(input, 0, 1)</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.3220  1.3151 -0.9785
-#&gt;  0.0754 -0.1224  0.1544
+#&gt;  0.8083 -0.1637  1.7114
+#&gt; -0.2222  0.7437  0.4880
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_t</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.3220  0.0754
-#&gt;  1.3151 -0.1224
-#&gt; -0.9785  0.1544
+#&gt;  0.8083 -0.2222
+#&gt; -0.1637  0.7437
+#&gt;  1.7114  0.4880
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4777
-#&gt;  1.5248
-#&gt; -0.5081
+#&gt; -0.7714
+#&gt;  1.5780
+#&gt; -0.5655
 #&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='fu'>torch_t</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4777
-#&gt;  1.5248
-#&gt; -0.5081
+#&gt; -0.7714
+#&gt;  1.5780
+#&gt; -0.5655
 #&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.2363  1.1121 -0.0601
-#&gt;  1.1630  1.9112  0.4024
+#&gt; -1.0644 -2.2127 -0.6301
+#&gt; -0.0117 -1.0717  0.5647
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_t</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.2363  1.1630
-#&gt;  1.1121  1.9112
-#&gt; -0.0601  0.4024
+#&gt; -1.0644 -0.0117
+#&gt; -2.2127 -1.0717
+#&gt; -0.6301  0.5647
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

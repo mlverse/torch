@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Div</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_div.Rd</code></div>
     </div>
 
@@ -153,15 +153,6 @@
 
 <p>Divides each element of the input <code>input</code> with the scalar <code>other</code> and
 returns a new resulting tensor.</p>
-<p>$$
-    \text{out}_i = \frac{\text{input}_i}{\text{other}}
-$$
-If the <code>torch_dtype</code> of <code>input</code> and <code>other</code> differ, the
-<code>torch_dtype</code> of the result tensor is determined following rules
-described in the type promotion documentation . If
-<code>out</code> is specified, the result must be castable
-to the <code>torch_dtype</code> of the specified output tensor. Integral division
-by zero leads to undefined behavior.</p>
 
 
 <p>Each element of the tensor <code>input</code> is divided by each element of the tensor
@@ -176,41 +167,58 @@ following rules described in the type promotion documentation
 . If <code>out</code> is specified, the result must be
 castable  to the <code>torch_dtype</code> of the
 specified output tensor. Integral division by zero leads to undefined behavior.</p>
+    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
+
+    
+
+<p>Integer division using div is deprecated, and in a future release div will
+perform true division like <code><a href='torch_true_divide.html'>torch_true_divide</a></code>.
+Use <code><a href='torch_floor_divide.html'>torch_floor_divide</a></code> (// in Python) to perform integer division,
+instead.</p>
+<p>$$
+    \text{out}_i = \frac{\text{input}_i}{\text{other}}
+$$
+If the <code>torch_dtype</code> of <code>input</code> and <code>other</code> differ, the
+<code>torch_dtype</code> of the result tensor is determined following rules
+described in the type promotion documentation . If
+<code>out</code> is specified, the result must be castable
+to the <code>torch_dtype</code> of the specified output tensor. Integral division
+by zero leads to undefined behavior.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8682
-#&gt;  1.4319
-#&gt;  0.0284
-#&gt;  0.3992
-#&gt; -0.8106
+#&gt;  1.7491
+#&gt;  1.0545
+#&gt; -0.9421
+#&gt;  1.4904
+#&gt; -1.2488
 #&gt; [ CPUFloatType{5} ]</div><div class='input'><span class='fu'>torch_div</span>(<span class='no'>a</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.7364
-#&gt;  2.8638
-#&gt;  0.0567
-#&gt;  0.7984
-#&gt; -1.6213
+#&gt;  3.4982
+#&gt;  2.1090
+#&gt; -1.8843
+#&gt;  2.9809
+#&gt; -2.4975
 #&gt; [ CPUFloatType{5} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.1357  0.5563  0.6955 -1.2786
-#&gt;  0.4258 -1.0868  1.3424 -0.2401
-#&gt;  1.4080 -0.5536 -0.3271 -1.1902
-#&gt; -0.1756  0.6139 -0.7103  0.8725
+#&gt; -0.8645 -0.0644  1.6837 -0.2799
+#&gt;  0.8651  0.3207  0.9701 -0.7295
+#&gt; -0.3726 -1.2875 -3.4855  1.6616
+#&gt;  0.5742 -1.1932 -0.3622  1.1164
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4679
-#&gt;  0.2458
-#&gt; -0.2811
-#&gt; -0.6740
+#&gt; -1.5981
+#&gt;  1.4460
+#&gt; -1.3709
+#&gt;  0.5575
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_div</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.4274  2.2636 -2.4742  1.8969
-#&gt; -0.9101 -4.4221 -4.7757  0.3562
-#&gt; -3.0093 -2.2527  1.1638  1.7658
-#&gt;  0.3754  2.4982  2.5272 -1.2945
+#&gt;  0.5410 -0.0446 -1.2281 -0.5020
+#&gt; -0.5413  0.2218 -0.7076 -1.3086
+#&gt;  0.2331 -0.8904  2.5424  2.9806
+#&gt; -0.3593 -0.8252  0.2642  2.0026
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -218,6 +226,7 @@ specified output tensor. Integral division by zero leads to undefined behavior.<
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#div-input-other-out-none-gt-tensor-">div(input, other, out=None) -&gt; Tensor </a></li>
+      <li><a href="#warning">Warning</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

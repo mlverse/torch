@@ -11,7 +11,7 @@ NULL
 #'   x$sub_(torch_tensor(as.numeric(1:5)))
 #' })
 #' x
-#' x$grad()
+#' x$grad
 #'
 #' @export
 with_no_grad <- function(code) {
@@ -45,7 +45,7 @@ with_no_grad <- function(code) {
 #'   })
 #' })
 #' y$backward()
-#' x$grad()
+#' x$grad
 #' 
 #' @export
 with_enable_grad <- function(code) {
@@ -59,7 +59,7 @@ with_enable_grad <- function(code) {
   )(code)
 }
 
-Tensor$set("public", "grad", function() {
+Tensor$set("active", "grad", function() {
   Tensor$new(ptr = cpp_tensor_grad(self$ptr))
 })
 

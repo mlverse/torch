@@ -94,6 +94,6 @@ mul_constant <- autograd_function(
 x <- torch_tensor(1, requires_grad = TRUE)
 o <- mul_constant(x, 2)
 o$backward()
-x$grad()
+x$grad
 ```
 

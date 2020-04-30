@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Argsort</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_argsort.Rd</code></div>
     </div>
 
@@ -150,7 +150,7 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="argsort-input-dim-descending-false-out-none-gt-longtensor-"><a class="anchor" href="#argsort-input-dim-descending-false-out-none-gt-longtensor-"></a>argsort(input, dim=-1, descending=False, out=None) -&gt; LongTensor </h2>
+    <h2 class="hasAnchor" id="argsort-input-dim-descending-false-gt-longtensor-"><a class="anchor" href="#argsort-input-dim-descending-false-gt-longtensor-"></a>argsort(input, dim=-1, descending=False) -&gt; LongTensor </h2>
 
     
 
@@ -164,14 +164,14 @@ for the exact semantics of this method.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3516  0.0558  0.4502 -0.1997
-#&gt;  0.8827 -0.7131 -0.1145 -0.2103
-#&gt;  1.9403 -0.4770  1.4378 -0.0100
-#&gt;  0.7986 -0.2995 -0.5173 -0.5837
+#&gt; -0.1451  0.0243  0.0393  0.6534
+#&gt;  0.0234 -0.3764 -1.4528  0.7252
+#&gt;  1.4355 -1.2343 -0.7441 -0.4864
+#&gt;  0.6842 -0.0743 -0.5347 -1.5948
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argsort</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3  1  0  2
-#&gt;  1  3  2  0
-#&gt;  1  3  2  0
+#&gt;  0  1  2  3
+#&gt;  2  1  0  3
+#&gt;  1  2  3  0
 #&gt;  3  2  1  0
 #&gt; [ CPULongType{4,4} ]</div></pre>
   </div>
@@ -179,7 +179,7 @@ for the exact semantics of this method.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#argsort-input-dim-descending-false-out-none-gt-longtensor-">argsort(input, dim=-1, descending=False, out=None) -&gt; LongTensor </a></li>
+      <li><a href="#argsort-input-dim-descending-false-gt-longtensor-">argsort(input, dim=-1, descending=False) -&gt; LongTensor </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

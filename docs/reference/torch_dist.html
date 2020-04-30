@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Dist</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_dist.Rd</code></div>
     </div>
 
@@ -163,24 +163,24 @@ broadcastable .</p>
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5701
-#&gt; -1.0919
-#&gt;  0.2347
-#&gt; -0.0438
+#&gt; -1.4395
+#&gt;  1.0109
+#&gt; -0.3180
+#&gt; -0.5616
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>y</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5532
-#&gt;  1.1868
-#&gt;  0.9805
-#&gt;  0.1878
+#&gt; -0.2121
+#&gt; -0.2534
+#&gt; -0.9109
+#&gt;  0.8899
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_dist</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='fl'>3.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 2.29194
+#&gt; 1.82208
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_dist</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 2.30586
+#&gt; 1.92528
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_dist</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; 4
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_dist</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 3.27303
+#&gt; 4.53607
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Rfft</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_rfft.Rd</code></div>
     </div>
 
@@ -202,64 +202,64 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -9.0486  0.0000
-#&gt;   3.3984  3.8772
-#&gt;  -2.0963 -0.6790
+#&gt;  -2.9895  0.0000
+#&gt;   1.0754  1.9543
+#&gt;   3.3471  1.5897
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   6.8695 -5.0117
-#&gt;  -7.1796 -0.7196
-#&gt;   3.6330 -3.3802
+#&gt;  -0.0638 -0.7798
+#&gt;  -3.6570 -1.9376
+#&gt;   0.6173 -0.0214
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -2.1129 -0.6279
-#&gt;   1.3425 -1.8493
-#&gt;   5.3903 -0.2415
+#&gt;  -2.0513  2.7088
+#&gt;   4.5910 -1.6240
+#&gt;  -2.9322  1.2053
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -2.1129  0.6279
-#&gt;   8.2678 -0.2639
-#&gt;  -0.0085 -2.2347
+#&gt;  -2.0513 -2.7088
+#&gt;   1.5819  5.7576
+#&gt;   1.1480  0.2629
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   6.8695  5.0117
-#&gt;  -2.2952 -4.5269
-#&gt;   2.4825  1.0690
+#&gt;  -0.0638  0.7798
+#&gt;  -1.7140 -3.0937
+#&gt;  -3.3966 -2.6553
 #&gt; [ CPUFloatType{5,3,2} ]</div><div class='input'><span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -9.0486  0.0000
-#&gt;   3.3984  3.8772
-#&gt;  -2.0963 -0.6790
-#&gt;  -2.0963  0.6790
-#&gt;   3.3984 -3.8772
+#&gt;  -2.9895  0.0000
+#&gt;   1.0754  1.9543
+#&gt;   3.3471  1.5897
+#&gt;   3.3471 -1.5897
+#&gt;   1.0754 -1.9543
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   6.8695 -5.0117
-#&gt;  -7.1796 -0.7196
-#&gt;   3.6330 -3.3802
-#&gt;   2.4825 -1.0690
-#&gt;  -2.2952  4.5269
+#&gt;  -0.0638 -0.7798
+#&gt;  -3.6570 -1.9376
+#&gt;   0.6173 -0.0214
+#&gt;  -3.3966  2.6553
+#&gt;  -1.7140  3.0937
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -2.1129 -0.6279
-#&gt;   1.3425 -1.8493
-#&gt;   5.3903 -0.2415
-#&gt;  -0.0085  2.2347
-#&gt;   8.2678  0.2639
+#&gt;  -2.0513  2.7088
+#&gt;   4.5910 -1.6240
+#&gt;  -2.9322  1.2053
+#&gt;   1.1480 -0.2629
+#&gt;   1.5819 -5.7576
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -2.1129  0.6279
-#&gt;   8.2678 -0.2639
-#&gt;  -0.0085 -2.2347
-#&gt;   5.3903  0.2415
-#&gt;   1.3425  1.8493
+#&gt;  -2.0513 -2.7088
+#&gt;   1.5819  5.7576
+#&gt;   1.1480  0.2629
+#&gt;  -2.9322 -1.2053
+#&gt;   4.5910  1.6240
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   6.8695  5.0117
-#&gt;  -2.2952 -4.5269
-#&gt;   2.4825  1.0690
-#&gt;   3.6330  3.3802
-#&gt;  -7.1796  0.7196
+#&gt;  -0.0638  0.7798
+#&gt;  -1.7140 -3.0937
+#&gt;  -3.3966 -2.6553
+#&gt;   0.6173  0.0214
+#&gt;  -3.6570  1.9376
 #&gt; [ CPUFloatType{5,5,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

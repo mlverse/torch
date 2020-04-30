@@ -67,7 +67,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -88,7 +88,7 @@
       <h1>Extending Autograd</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dfalbel/torch/blob/master/vignettes/extending-autograd.Rmd"><code>vignettes/extending-autograd.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/extending-autograd.Rmd"><code>vignettes/extending-autograd.Rmd</code></a></small>
       <div class="hidden name"><code>extending-autograd.Rmd</code></div>
 
     </div>
@@ -162,7 +162,7 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>x &lt;-<span class="st"> </span><span class="kw">torch_tensor</span>(<span class="dv">1</span>, <span class="dt">requires_grad =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a>o &lt;-<span class="st"> </span><span class="kw">mul_constant</span>(x, <span class="dv">2</span>)</span>
 <span id="cb4-3"><a href="#cb4-3"></a>o<span class="op">$</span><span class="kw">backward</span>()</span>
-<span id="cb4-4"><a href="#cb4-4"></a>x<span class="op">$</span><span class="kw">grad</span>()</span>
+<span id="cb4-4"><a href="#cb4-4"></a>x<span class="op">$</span>grad</span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; torch_tensor </span></span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;  2</span></span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; [ CPUFloatType{1} ]</span></span></code></pre></div>

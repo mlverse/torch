@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Baddbmm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_baddbmm.Rd</code></div>
     </div>
 
@@ -137,16 +137,8 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>beta</th>
-      <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
-    </tr>
-    <tr>
       <th>input</th>
       <td><p>(Tensor) the tensor to be added</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>(Number, optional) multiplier for \(\text{batch1} \mathbin{@} \text{batch2}\) (\(\alpha\))</p></td>
     </tr>
     <tr>
       <th>batch1</th>
@@ -157,12 +149,20 @@
       <td><p>(Tensor) the second batch of matrices to be multiplied</p></td>
     </tr>
     <tr>
+      <th>beta</th>
+      <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>(Number, optional) multiplier for \(\text{batch1} \mathbin{@} \text{batch2}\) (\(\alpha\))</p></td>
+    </tr>
+    <tr>
       <th>out</th>
       <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="baddbmm-beta-input-alpha-batch-batch-out-none-gt-tensor-"><a class="anchor" href="#baddbmm-beta-input-alpha-batch-batch-out-none-gt-tensor-"></a>baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="baddbmm-input-batch-batch-beta-alpha-out-none-gt-tensor-"><a class="anchor" href="#baddbmm-input-batch-batch-beta-alpha-out-none-gt-tensor-"></a>baddbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -&gt; Tensor </h2>
 
     
 
@@ -191,61 +191,61 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class='no'>batch2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_baddbmm</span>(<span class='no'>M</span>, <span class='no'>batch1</span>, <span class='no'>batch2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   2.5532  0.5630  1.0450 -1.6589 -2.8716
-#&gt;   0.7226  0.9734  0.8653  1.7153 -0.2198
-#&gt;  -4.5768 -0.8717 -3.2530 -4.2584  0.2332
+#&gt;   0.4086 -0.1319 -2.4229 -0.6790 -2.7644
+#&gt;   2.9735 -3.0729 -3.5474  3.0386 -3.3105
+#&gt;  -0.2321 -2.5519  1.1687  2.0901  2.0255
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.2190 -0.7162 -2.6078 -0.0106  2.2166
-#&gt;  -1.4823 -1.1109  2.4768  1.5547  0.4615
-#&gt;  -3.8128 -2.4184 -0.0166  2.2174  2.4476
+#&gt;   4.2929 -0.0632 -3.3609 -3.9961 -3.6218
+#&gt;  -2.3232  6.3805  2.8947  2.6431  4.4884
+#&gt;  -1.1716 -1.3549  0.4311 -1.0087 -1.5547
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -0.3630  0.3426 -2.0910  0.0219  1.8372
-#&gt;  -0.1157 -2.3000 -0.3902  2.6760  2.5820
-#&gt;  -0.7991 -0.8670 -1.5908  1.6476  0.4549
+#&gt;   2.6543 -3.6751  4.7672 -1.5458  2.6800
+#&gt;   1.5108 -0.9735  1.5353 -0.6669  2.4693
+#&gt;   3.7937  4.2420 -4.8250  0.5501 -0.0045
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   2.6230  0.2776 -3.5993  1.2619  2.0755
-#&gt;  -1.5890  2.9232  1.6261 -0.5379  0.1033
-#&gt;   0.0418  2.3737  0.9034  3.8939 -0.0550
+#&gt;  -2.1402  2.7593  0.4142  0.6072  0.7739
+#&gt;  -2.3675 -0.6650  2.2894  2.3624  0.5521
+#&gt;   3.9384  0.5546 -3.4977  0.2526 -2.8048
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -6.4528 -2.1301  2.6023 -4.2910  0.3549
-#&gt;  -0.5229 -1.6363 -1.8690  3.4745 -1.3358
-#&gt;  -1.7701  4.0583  2.7307 -3.4307  0.3482
+#&gt;  -1.6179 -0.9343  0.1546  0.0249  3.1176
+#&gt;  -0.2339 -1.1694 -0.1834 -0.6989  2.2302
+#&gt;   3.2895  1.7844 -0.6464 -2.5934  0.6664
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;   0.5250  2.6148  7.3087 -2.2597 -0.8844
-#&gt;  -0.6999  0.4086 -3.9714 -0.3649 -1.1583
-#&gt;  -1.6487 -0.8045 -3.4602 -0.5155 -1.1977
+#&gt;   4.3108  1.6098 -4.2820 -4.9751 -1.3385
+#&gt;  -1.2841  1.0904 -0.3107 -1.4630 -2.4803
+#&gt;  -1.2213 -1.0533  7.8249  4.9803 -5.9947
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;   3.2993  1.1186 -0.7007 -1.6347 -1.7633
-#&gt;  -2.3803  1.0018 -1.4944  0.6228 -2.8728
-#&gt;   0.5978 -3.2697  0.6900 -0.0148  0.7469
+#&gt;   7.6157 -2.7609  5.0972 -9.5594  1.9370
+#&gt;   4.2212  2.0898 -0.4607  0.4602  0.6318
+#&gt;  -1.1059 -2.8189 -0.9679 -2.8032  2.5772
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;   0.8415 -3.9278  2.9679 -0.7600 -0.5658
-#&gt;   2.7138 -0.1678  1.3842 -1.1456 -2.1884
-#&gt;  -0.0082  4.9714  0.0048 -1.8658 -2.5015
+#&gt;  -0.3177 -3.2567 -2.8523 -2.6314  1.0519
+#&gt;  -0.2955 -0.7180  0.4652  0.0919 -0.7616
+#&gt;  -1.2092  1.0623 -0.4367  0.6406 -1.8889
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;  -4.7181  4.0568 -0.4870 -1.4846 -0.8356
-#&gt;   0.8999  2.7887 -0.4951 -0.2899 -0.7583
-#&gt;  -3.4310  3.9947 -1.3769 -0.1857 -1.6050
+#&gt;   0.3747  2.2490 -0.2106  0.2778  5.0679
+#&gt;   0.8472  1.0071 -2.3066  2.6764 -1.2833
+#&gt;  -1.1964 -0.3771 -0.7953 -0.1499  2.8546
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;  -4.4024 -1.7683 -0.9539 -0.2584  2.4847
-#&gt;  -3.2632 -3.0065 -0.6278  2.3107  0.6357
-#&gt;  -1.7312  0.7416  0.0108 -0.9520 -4.2298
+#&gt;  -0.7333 -1.3927 -0.7068  0.6814  2.3310
+#&gt;  -0.3349 -0.9126  0.2941  0.6945 -2.3597
+#&gt;  -2.0452  0.8141 -5.4876  0.8605  0.5648
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#baddbmm-beta-input-alpha-batch-batch-out-none-gt-tensor-">baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -&gt; Tensor </a></li>
+      <li><a href="#baddbmm-input-batch-batch-beta-alpha-out-none-gt-tensor-">baddbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -&gt; Tensor </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

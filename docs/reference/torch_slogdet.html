@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Slogdet</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_slogdet.Rd</code></div>
     </div>
 
@@ -165,13 +165,13 @@ See `~torch.svd` for details.
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.7006  0.9226 -0.9767
-#&gt;  0.1103  0.9532  0.1632
-#&gt;  0.0836 -1.6285  0.0488
+#&gt;  0.5272 -0.2890  1.3516
+#&gt; -2.5228  1.3911 -1.8030
+#&gt; -0.2665 -0.8950 -1.2302
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'><a href='torch_det.html'>torch_det</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.0421392
+#&gt; 2.55797
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'><a href='torch_logdet.html'>torch_logdet</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -3.16678
+#&gt; 0.939212
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_slogdet</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt; 1
@@ -179,7 +179,7 @@ See `~torch.svd` for details.
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; -3.16678
+#&gt; 0.939212
 #&gt; [ CPUFloatType{} ]
 #&gt; </div></pre>
   </div>

@@ -3,7 +3,7 @@ test_that("can autograd", {
   y <- 2 * x
   
   expect_invisible(y$backward())
-  expect_equal_to_r(x$grad(), 2)
+  expect_equal_to_r(x$grad, 2)
 })
 
 test_that("can autograd with contexts", {
@@ -16,7 +16,7 @@ test_that("can autograd with contexts", {
   })
 
   expect_invisible(y$backward())
-  expect_equal_to_r(x$grad(), 2)
+  expect_equal_to_r(x$grad, 2)
 })
 
 test_that("requires_grad works", {
@@ -38,7 +38,7 @@ test_that("register_hook", {
   x$register_hook(function(grad) { print("hello")})
   y <- 2 * x
   expect_output(y$backward(), "hello")
-  expect_equal_to_r(x$grad(), 2)
+  expect_equal_to_r(x$grad, 2)
   
   # correctly sees the gradient
   x <- torch_tensor(c(2), requires_grad = TRUE)
@@ -59,7 +59,7 @@ test_that("register hook: can throw exceptions in the lantern thread", {
   x$register_hook(function(grad) { 2* grad})
   y <- 2 * x
   y$backward()
-  expect_equal_to_r(x$grad(), 4)
+  expect_equal_to_r(x$grad, 4)
   expect_error(y$backward())
 })
 
@@ -87,7 +87,7 @@ test_that("register_hook: grad non leaf", {
   x_list[[1]]$backward()
   
   expect_equal_to_r(hook_results, 1)
-  expect_equal_to_r(x$grad(), c(1,0,0,0,0))
+  expect_equal_to_r(x$grad, c(1,0,0,0,0))
 })
 
 test_that("register_hook: can call a the hook inside a hook", {
@@ -202,15 +202,15 @@ test_that("Simple autograd extension", {
   out$backward()
   
   expect_equal_to_r(out, 9)
-  expect_equal_to_r(x$grad(), 6)
+  expect_equal_to_r(x$grad, 6)
   
   x <- torch_tensor(c(3), requires_grad = TRUE)
   out <- custom_pow(x)*custom_pow(x)
   out$backward()
-  x$grad()
+  x$grad
   
   expect_equal_to_r(out, 81)
-  expect_equal_to_r(x$grad(), 12)
+  expect_equal_to_r(x$grad, 12)
 })
 
 test_that("Autograd extension envolving 2 variables", {
@@ -235,8 +235,8 @@ test_that("Autograd extension envolving 2 variables", {
   out$backward()
   
   expect_equal_to_r(out, (3^2) + (4^3))
-  expect_equal_to_r(x$grad(), 2*3)
-  expect_equal_to_r(y$grad(), 3*(4^2))
+  expect_equal_to_r(x$grad, 2*3)
+  expect_equal_to_r(y$grad, 3*(4^2))
   
   x <- torch_tensor(c(3), requires_grad = TRUE)
   y <- torch_tensor(c(4), requires_grad = TRUE)
@@ -248,8 +248,8 @@ test_that("Autograd extension envolving 2 variables", {
   out$backward()
   
   expect_equal_to_r(out, (3^2) + (4^3))
-  expect_equal_to_r(x$grad(), 2*3)
-  expect_equal_to_r(y$grad(), 3*(4^2))
+  expect_equal_to_r(x$grad, 2*3)
+  expect_equal_to_r(y$grad, 3*(4^2))
 })
 
 test_that("Named values in saved variables", {
@@ -273,7 +273,7 @@ test_that("Named values in saved variables", {
   out$backward()
   
   expect_equal_to_r(out, 9)
-  expect_equal_to_r(x$grad(), 6)
+  expect_equal_to_r(x$grad, 6)
 })
 
 test_that("Can have optional arguments in forward", {
@@ -317,7 +317,7 @@ test_that("Can have optional arguments in forward", {
   o <- linear(x, w)
   l <- torch_mean((y - o)^2)
   l$backward()
-  expect_equal_to_r(w$grad(), matrix(c(6,6), ncol = 2))
+  expect_equal_to_r(w$grad, matrix(c(6,6), ncol = 2))
   
   x <- torch_tensor(matrix(c(1,1,1,1), ncol = 2))
   w <- torch_tensor(matrix(c(2,3), ncol = 2), requires_grad = TRUE)
@@ -328,8 +328,8 @@ test_that("Can have optional arguments in forward", {
   l <- torch_mean((y - o)^2)
   l$backward()
   
-  expect_equal_to_r(w$grad(), matrix(c(6,6), ncol = 2))
-  expect_equal_to_r(b$grad(), 6)
+  expect_equal_to_r(w$grad, matrix(c(6,6), ncol = 2))
+  expect_equal_to_r(b$grad, 6)
 })
 
 test_that("Catch errors in forward and backward R functions", {
@@ -389,14 +389,14 @@ test_that("Can pass constants to save_for_backward", {
   r$backward()
   
   expect_equal_to_r(r, 4)
-  expect_equal_to_r(x$grad(), 2*2)
+  expect_equal_to_r(x$grad, 2*2)
   
   x <- torch_tensor(2, requires_grad = TRUE)
   r <- custom_pow(x, 3)
   r$backward()
   
   expect_equal_to_r(r, 8)
-  expect_equal_to_r(x$grad(), 3*2^(3-1))
+  expect_equal_to_r(x$grad, 3*2^(3-1))
   
 })
 
@@ -418,7 +418,7 @@ test_that("Forward can return a list", {
   x <- torch_tensor(2, requires_grad = TRUE)
   r <- custom_pow(x, 2)
   r[[1]]$backward()
-  expect_equal_to_r(x$grad(), 4)
+  expect_equal_to_r(x$grad, 4)
   
   custom_pow <- autograd_function(
     forward = function(ctx, var1, i) {
@@ -436,7 +436,7 @@ test_that("Forward can return a list", {
   x <- torch_tensor(2, requires_grad = TRUE)
   r <- custom_pow(x, 2)
   r[[1]]$backward()
-  expect_equal_to_r(x$grad(), 4)
+  expect_equal_to_r(x$grad, 4)
 })
 
 test_that("can use mark_dirty", {
@@ -459,7 +459,7 @@ test_that("can use mark_dirty", {
   expect_equal_to_tensor(r[[1]], x)
   expect_true(r[[1]]$requires_grad())
   r[[1]]$backward()
-  expect_equal_to_r(y$grad(), 1)
+  expect_equal_to_r(y$grad, 1)
   
   # https://github.com/pytorch/pytorch/blob/master/test/test_autograd.py#L1388
   double_in_place <- autograd_function(
@@ -519,7 +519,7 @@ test_that("mark_non_differentiable", {
   expect_false(r[[1]]$requires_grad())
   expect_true(r[[2]]$requires_grad())
   r[[2]]$backward()
-  expect_equal_to_r(x$grad(), 1)
+  expect_equal_to_r(x$grad, 1)
 })
 
 test_that("retain_grad is invisible", {

@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Mean</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_mean.Rd</code></div>
     </div>
 
@@ -177,27 +177,27 @@ output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1785 -0.9113  0.1588
+#&gt;  0.1560  0.4750 -0.7285
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_mean</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.191348
+#&gt; -0.0324936
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0192 -1.0844  0.0687  0.9400
-#&gt;  0.2188  2.1277  1.6008 -0.0702
-#&gt;  0.2735 -0.8070  1.4063 -0.3642
-#&gt; -1.1142 -0.0351  1.2415 -0.4360
+#&gt;  0.9492 -1.0908 -1.3157 -0.6277
+#&gt;  0.0138 -0.0954 -1.0700 -0.6461
+#&gt;  0.2994  1.7290 -0.5178  0.5416
+#&gt;  0.9652 -1.0233  0.6784 -0.1326
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_mean</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0141
-#&gt;  0.9692
-#&gt;  0.1272
-#&gt; -0.0860
+#&gt; -0.5212
+#&gt; -0.4494
+#&gt;  0.5131
+#&gt;  0.1219
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_mean</span>(<span class='no'>a</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0141
-#&gt;  0.9692
-#&gt;  0.1272
-#&gt; -0.0860
+#&gt; -0.5212
+#&gt; -0.4494
+#&gt;  0.5131
+#&gt;  0.1219
 #&gt; [ CPUFloatType{4,1} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

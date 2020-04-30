@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Ifft</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_ifft.Rd</code></div>
     </div>
 
@@ -195,35 +195,35 @@ shape of <code>input</code>.</p>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   2.5035 -1.5665
-#&gt;   1.5696 -1.9767
-#&gt;   1.0156 -1.4147
+#&gt;   0.0909 -0.5957
+#&gt;   0.5896 -0.8222
+#&gt;  -1.6963  0.1246
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.6595  1.0240
-#&gt;   0.0810 -1.7643
-#&gt;   1.1698  1.4734
+#&gt;  -0.4612  0.4689
+#&gt;  -0.4066  1.0511
+#&gt;  -1.6989  0.6323
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.1389 -0.0013
-#&gt;  -0.6523 -1.8501
-#&gt;  -0.0284  1.1733
+#&gt;  -1.3527 -0.9021
+#&gt;   0.6394  0.7264
+#&gt;   0.4695  0.2552
 #&gt; [ CPUFloatType{3,3,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_fft.html'>torch_fft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>)
 <span class='fu'>torch_ifft</span>(<span class='no'>y</span>, <span class='fl'>2</span>)  <span class='co'># recover x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   2.5035 -1.5665
-#&gt;   1.5696 -1.9767
-#&gt;   1.0156 -1.4147
+#&gt;   0.0909 -0.5957
+#&gt;   0.5896 -0.8222
+#&gt;  -1.6963  0.1246
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.6595  1.0240
-#&gt;   0.0810 -1.7643
-#&gt;   1.1698  1.4734
+#&gt;  -0.4612  0.4689
+#&gt;  -0.4066  1.0511
+#&gt;  -1.6989  0.6323
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.1389 -0.0013
-#&gt;  -0.6523 -1.8501
-#&gt;  -0.0284  1.1733
+#&gt;  -1.3527 -0.9021
+#&gt;   0.6394  0.7264
+#&gt;   0.4695  0.2552
 #&gt; [ CPUFloatType{3,3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

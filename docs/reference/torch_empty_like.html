@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Empty_like</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_empty_like.Rd</code></div>
     </div>
 
@@ -156,9 +156,13 @@
       <th>requires_grad</th>
       <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
     </tr>
+    <tr>
+      <th>memory_format</th>
+      <td><p>(<code>torch.memory_format</code>, optional) the desired memory format of        returned Tensor. Default: <code>torch_preserve_format</code>.</p></td>
+    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="empty-like-input-dtype-none-layout-none-device-none-requires-grad-false-gt-tensor-"><a class="anchor" href="#empty-like-input-dtype-none-layout-none-device-none-requires-grad-false-gt-tensor-"></a>empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="empty-like-input-dtype-none-layout-none-device-none-requires-grad-false-memory-format-torch-preserve-format-gt-tensor-"><a class="anchor" href="#empty-like-input-dtype-none-layout-none-device-none-requires-grad-false-memory-format-torch-preserve-format-gt-tensor-"></a>empty_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -&gt; Tensor </h2>
 
     
 
@@ -170,15 +174,15 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='kw'>options</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_int64</span>()))</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.4024e+14  0.0000e+00  8.5899e+09
-#&gt;  1.4024e+14  1.4024e+14  1.0000e+00
+#&gt;  1.4044e+14  1.4044e+14  1.4044e+14
+#&gt;  0.0000e+00  8.5899e+09  1.4044e+14
 #&gt; [ CPULongType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#empty-like-input-dtype-none-layout-none-device-none-requires-grad-false-gt-tensor-">empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -&gt; Tensor </a></li>
+      <li><a href="#empty-like-input-dtype-none-layout-none-device-none-requires-grad-false-memory-format-torch-preserve-format-gt-tensor-">empty_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -&gt; Tensor </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

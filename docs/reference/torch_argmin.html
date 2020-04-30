@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Argmin</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_argmin.Rd</code></div>
     </div>
 
@@ -171,25 +171,25 @@ documentation for the exact semantics of this method.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3239  0.8989 -0.7837 -0.7384
-#&gt; -1.3382  0.8648 -1.0805  0.0666
-#&gt; -1.6505 -1.0906  0.1752 -1.5557
-#&gt; -1.7788 -0.5062 -1.0905 -0.0737
+#&gt;  0.2592 -1.6167  2.3360 -0.4008
+#&gt;  0.8222  1.8442 -0.1604 -1.2432
+#&gt;  0.5393 -0.8630  1.8053 -0.5714
+#&gt; -0.9181 -1.7551  0.9124  1.6093
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 12
+#&gt; 13
 #&gt; [ CPULongType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.2474  0.3277 -1.4129 -0.3222
-#&gt; -1.7639 -0.7573 -0.2922 -0.3554
-#&gt; -1.7295  0.8296 -1.4590  0.0962
-#&gt; -0.7629 -2.6999  1.1873  0.5217
+#&gt;  0.6447  0.7665 -0.0657 -0.0842
+#&gt; -1.1814 -1.2545  0.2088 -1.3095
+#&gt;  0.6304  0.7475  0.0864  0.4817
+#&gt;  0.2664  0.0562  0.3252 -2.2525
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  3
+#&gt;  3
 #&gt;  2
-#&gt;  0
-#&gt;  0
-#&gt;  1
+#&gt;  3
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

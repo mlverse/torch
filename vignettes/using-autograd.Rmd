@@ -55,7 +55,7 @@ y$backward()
 That executed, `x` now has a non-empty field `grad` that stores the gradient of `y` with respect to `x`:
 
 ```{r}
-x$grad()
+x$grad
 ```
 
 With a longer chain of computations, we can peek at how torch builds up a graph of backward operations.
@@ -94,10 +94,10 @@ After calling `out$backward()`, all tensors in the graph will have their respect
 
 ```{r, eval = FALSE}
 out$backward()
-z$grad()
-y$grad()
-x2$grad()
-x1$grad()
+z$grad
+y$grad
+x2$grad
+x1$grad
 ```
 
 Thus acquainted with autograd, we're ready to modify our example. 
@@ -148,16 +148,16 @@ for (t in 1:200) {
     # Wrap in torch.no_grad() because this is a part we DON'T want to record for automatic gradient computation
     with_no_grad({
       
-      w1$sub_(learning_rate * w1$grad())
-      w2$sub_(learning_rate * w2$grad())
-      b1$sub_(learning_rate * b1$grad())
-      b2$sub_(learning_rate * b2$grad())
+      w1$sub_(learning_rate * w1$grad)
+      w2$sub_(learning_rate * w2$grad)
+      b1$sub_(learning_rate * b1$grad)
+      b2$sub_(learning_rate * b2$grad)
       
       # Zero the gradients after every pass, because they'd accumulate otherwise
-      w1$grad()$zero_()
-      w2$grad()$zero_()
-      b1$grad()$zero_()
-      b2$grad()$zero_()
+      w1$grad$zero_()
+      w2$grad$zero_()
+      b1$grad$zero_()
+      b2$grad$zero_()
     
     })
     

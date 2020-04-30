@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Clamp</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_clamp.Rd</code></div>
     </div>
 
@@ -195,41 +195,41 @@ should be a real number, otherwise it should be an integer.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.7219
-#&gt;  0.0059
-#&gt; -0.2788
-#&gt; -2.3313
+#&gt; -0.4809
+#&gt; -0.2704
+#&gt;  0.2476
+#&gt;  0.3364
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>min</span><span class='kw'>=</span>-<span class='fl'>0.5</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5000
-#&gt;  0.0059
-#&gt; -0.2788
-#&gt; -0.5000
+#&gt; -0.4809
+#&gt; -0.2704
+#&gt;  0.2476
+#&gt;  0.3364
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0511
-#&gt;  0.4241
-#&gt;  1.4285
-#&gt;  0.8964
+#&gt;  0.2414
+#&gt; -2.6763
+#&gt; -0.2926
+#&gt;  0.2744
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>min</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  0.5000
 #&gt;  0.5000
-#&gt;  1.4285
-#&gt;  0.8964
+#&gt;  0.5000
+#&gt;  0.5000
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.4700
-#&gt; -0.5945
-#&gt; -1.4332
-#&gt;  1.0138
+#&gt;  0.7875
+#&gt; -0.5617
+#&gt;  1.8789
+#&gt; -0.8810
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.4700
-#&gt; -0.5945
-#&gt; -1.4332
 #&gt;  0.5000
+#&gt; -0.5617
+#&gt;  0.5000
+#&gt; -0.8810
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

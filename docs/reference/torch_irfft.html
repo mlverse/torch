@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Irfft</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_irfft.Rd</code></div>
     </div>
 
@@ -172,7 +172,7 @@ mode) to recover it with correct shape.
 
 Therefore, to invert an [`~torch.rfft`], the `normalized` and
 `onesided` arguments should be set identically for [`~torch.irfft`],
-and preferrably a `signal_sizes` is given to avoid size mismatch. See the
+and preferably a `signal_sizes` is given to avoid size mismatch. See the
 example below for a case of size mismatch.
 
 See [`~torch.rfft`] for details on conjugate symmetry.
@@ -219,51 +219,51 @@ certainly fail the check.</p>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.4274  0.0000
-#&gt;  -0.3677  2.2369
-#&gt;   4.0786  0.0000
+#&gt;  -0.1960  0.0000
+#&gt;  -0.1021 -2.6924
+#&gt;   2.8881  0.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   4.5785 -2.9957
-#&gt;   2.8983 -0.9322
-#&gt;  -1.3661 -2.4990
+#&gt;  -1.0797  0.5842
+#&gt;  -2.0240  2.1314
+#&gt;   4.7192  0.7881
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   2.5778  0.0000
-#&gt;   0.0777  2.4836
-#&gt;   2.1943  0.0000
+#&gt;  -6.6976  0.0000
+#&gt;   2.9370  4.2544
+#&gt;  -1.1390  0.0000
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   4.5785  2.9957
-#&gt;  -1.2574 -1.2631
-#&gt;  -1.3661  2.4990
+#&gt;  -1.0797 -0.5842
+#&gt;   2.9102  1.1837
+#&gt;   4.7192 -0.7881
 #&gt; [ CPUFloatType{4,3,2} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   2.8782  0.0000
-#&gt;  -3.1325  0.3591
-#&gt;   7.4064  2.9775
+#&gt;   11.9610   0.0000
+#&gt;    2.4357  -1.0653
+#&gt;   -2.9715   0.0211
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.5171  3.7418
-#&gt;  -1.5812 -1.1052
-#&gt;   2.2080 -7.8287
+#&gt;  -1.4833 -4.6173
+#&gt;   0.6754  0.3138
+#&gt;  -0.4865  3.8329
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   2.5115  0.0000
-#&gt;  -3.0398 -3.0401
-#&gt;   6.1837 -0.9563
+#&gt;  -3.4442  0.0000
+#&gt;  -0.2324 -1.3309
+#&gt;  -6.1446 -7.8466
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -0.5171 -3.7418
-#&gt;  -4.6696  0.6681
-#&gt;   2.2700  0.3706
+#&gt;  -1.4833  4.6173
+#&gt;  -4.7328  0.7031
+#&gt;   6.2089 -2.8044
 #&gt; [ CPUFloatType{4,3,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'>torch_irfft</span>(<span class='no'>y</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>signal_sizes</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7823 -1.0117  1.4474  2.1150 -2.2440
-#&gt;  0.7544 -1.9107 -0.2138 -0.1876 -0.2216
-#&gt;  1.2403 -0.7573  1.6299 -0.4370 -0.0698
-#&gt; -0.4917  0.6349  0.6896 -0.0339  1.1637
+#&gt; -0.2473  1.0255 -0.2427  0.8880 -0.0359
+#&gt;  1.1913  0.9982  0.6556  1.0996  2.2152
+#&gt; -0.2836  2.8131 -1.0323  0.2506  1.1231
+#&gt;  1.5174 -0.7817  2.1146 -1.2600 -0.0478
 #&gt; [ CPUFloatType{4,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

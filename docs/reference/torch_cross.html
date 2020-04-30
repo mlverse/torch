@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cross</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_cross.Rd</code></div>
     </div>
 
@@ -170,26 +170,26 @@ size 3.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0243 -1.4921 -1.4085
-#&gt;  1.3373 -1.1988  1.6358
-#&gt;  0.3970 -0.7878  1.0753
-#&gt;  0.0312  0.6855 -3.0102
+#&gt; -0.1194  0.1618 -0.8473
+#&gt;  0.6897  0.4363  0.4690
+#&gt;  0.6365  1.9229  1.7753
+#&gt;  1.8531 -0.0707 -1.2913
 #&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.5127 -0.9969  0.8368
-#&gt; -0.4713 -0.0937  0.5712
-#&gt; -0.4676  1.2112  0.5925
-#&gt; -1.0638  1.4568 -1.3405
+#&gt;  0.8795 -0.9612  0.1029
+#&gt;  0.0209  1.1078 -1.2390
+#&gt;  0.5186  0.0608  1.0892
+#&gt;  0.0190 -2.3137 -0.3733
 #&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='fu'>torch_cross</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.6528 -2.1510  2.2330
-#&gt; -0.5314 -1.5348 -0.6904
-#&gt; -1.7691 -0.7380  0.1125
-#&gt;  3.4662  3.2441  0.7748
+#&gt; -0.7978 -0.7329 -0.0275
+#&gt; -1.0603  0.8644  0.7549
+#&gt;  1.9864  0.2274 -0.9585
+#&gt; -2.9612  0.6671 -4.2861
 #&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='fu'>torch_cross</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.6528 -2.1510  2.2330
-#&gt; -0.5314 -1.5348 -0.6904
-#&gt; -1.7691 -0.7380  0.1125
-#&gt;  3.4662  3.2441  0.7748
+#&gt; -0.7978 -0.7329 -0.0275
+#&gt; -1.0603  0.8644  0.7549
+#&gt;  1.9864  0.2274 -0.9585
+#&gt; -2.9612  0.6671 -4.2861
 #&gt; [ CPUFloatType{4,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/dfalbel/torch">
+  <a href="https://github.com/mlverse/torch">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Addr</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/dfalbel/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_addr.Rd</code></div>
     </div>
 
@@ -137,16 +137,8 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>beta</th>
-      <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
-    </tr>
-    <tr>
       <th>input</th>
       <td><p>(Tensor) matrix to be added</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>(Number, optional) multiplier for \(\text{vec1} \otimes \text{vec2}\) (\(\alpha\))</p></td>
     </tr>
     <tr>
       <th>vec1</th>
@@ -157,12 +149,20 @@
       <td><p>(Tensor) the second vector of the outer product</p></td>
     </tr>
     <tr>
+      <th>beta</th>
+      <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>(Number, optional) multiplier for \(\text{vec1} \otimes \text{vec2}\) (\(\alpha\))</p></td>
+    </tr>
+    <tr>
       <th>out</th>
       <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addr-beta-input-alpha-vec-vec-out-none-gt-tensor-"><a class="anchor" href="#addr-beta-input-alpha-vec-vec-out-none-gt-tensor-"></a>addr(beta=1, input, alpha=1, vec1, vec2, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="addr-input-vec-vec-beta-alpha-out-none-gt-tensor-"><a class="anchor" href="#addr-input-vec-vec-beta-alpha-out-none-gt-tensor-"></a>addr(input, vec1, vec2, *, beta=1, alpha=1, out=None) -&gt; Tensor </h2>
 
     
 
@@ -198,7 +198,7 @@ broadcastable  with a matrix of size
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#addr-beta-input-alpha-vec-vec-out-none-gt-tensor-">addr(beta=1, input, alpha=1, vec1, vec2, out=None) -&gt; Tensor </a></li>
+      <li><a href="#addr-input-vec-vec-beta-alpha-out-none-gt-tensor-">addr(input, vec1, vec2, *, beta=1, alpha=1, out=None) -&gt; Tensor </a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
