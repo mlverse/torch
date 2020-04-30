@@ -72,6 +72,10 @@ Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE,
   invisible(private$`_backward`(gradient, keep_graph, create_graph))
 })
 
+Tensor$set("public", "retain_grad", function() {
+  invisible(private$`_retain_grad`())
+})
+
 torch_hook <- R6::R6Class(
   classname = "torch_hook",
   public = list(

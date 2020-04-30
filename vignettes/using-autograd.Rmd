@@ -62,7 +62,7 @@ With a longer chain of computations, we can peek at how torch builds up a graph 
 
 Here is a slightly more complex example. We call `retain_grad()` on `y` and `z` just for demonstration purposes; by default, intermediate gradients -- while of course they have to be computed -- aren't stored, in order to save memory.
 
-```{r, eval = FALSE}
+```{r}
 x1 <- torch_ones(c(2,2), options = list(requires_grad = TRUE))
 x2 <- torch_tensor(1.1, requires_grad = TRUE)
 y <- x1 * (x2 + 2)

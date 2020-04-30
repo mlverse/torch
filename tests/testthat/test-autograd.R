@@ -522,3 +522,7 @@ test_that("mark_non_differentiable", {
   expect_equal_to_r(x$grad(), 1)
 })
 
+test_that("retain_grad is invisible", {
+  x <- torch_tensor(1, requires_grad = TRUE)
+  expect_invisible(x$retain_grad())
+})
