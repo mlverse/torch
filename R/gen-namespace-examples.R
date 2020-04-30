@@ -1223,9 +1223,9 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_tensor(matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), ncol = 3, byrow= TRUE))
-#' torch_narrow(x, 0, 0, 2)
-#' torch_narrow(x, 1, 1, 2)
+#' x = torch_tensor(matrix(c(1:9), ncol = 3, byrow= TRUE))
+#' torch_narrow(x, 0, torch_tensor(0L)$sum(dim = 0), 2)
+#' torch_narrow(x, 1, torch_tensor(1L)$sum(dim = 0), 2)
 NULL
 # -> narrow <-
 
@@ -2849,9 +2849,9 @@ NULL
 #' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
 #' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
 #' torch_logical_and(a, b)
-#' torch_logical_and(a$double(), b$double())
-#' torch_logical_and(a$double(), b)
-#' torch_logical_and(a, b, out=torch_empty(4, dtype=torch_bool()))
+#' \dontrun{
+#' torch_logical_and(a, b, out=torch_empty(4, options = list(dtype=torch_bool())))
+#' }
 NULL
 # -> logical_and <-
 
@@ -2865,9 +2865,11 @@ NULL
 #' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
 #' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
 #' torch_logical_or(a, b)
+#' \dontrun{
 #' torch_logical_or(a$double(), b$double())
 #' torch_logical_or(a$double(), b)
 #' torch_logical_or(a, b, out=torch_empty(4, dtype=torch_bool()))
+#' }
 NULL
 # -> logical_or <-
 
@@ -2949,7 +2951,7 @@ NULL
 #'
 #' @examples
 #'
-#' rates = torch_rand(4, 4) * 5  # rate parameter between 0 and 5
+#' rates = torch_rand(c(4, 4)) * 5  # rate parameter between 0 and 5
 #' torch_poisson(rates)
 NULL
 # -> poisson <-

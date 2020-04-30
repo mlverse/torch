@@ -27,7 +27,7 @@ torch_logical_and(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE
 a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
 b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
 torch_logical_and(a, b)
-torch_logical_and(a$double(), b$double())
-torch_logical_and(a$double(), b)
-torch_logical_and(a, b, out=torch_empty(4, dtype=torch_bool()))
+\dontrun{
+torch_logical_and(a, b, out=torch_empty(4, options = list(dtype=torch_bool())))
+}
 }
