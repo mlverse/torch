@@ -158,6 +158,7 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_dirty)(void *self, void *inputs);
   LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_non_differentiable)(void *self, void *outputs);
   LANTERN_API void *(LANTERN_PTR lantern_optional_double)(double x, bool is_null);
+  LANTERN_API void (LANTERN_PTR test_grad_fn)();
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2123,6 +2124,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_AutogradContext_mark_dirty);
   LOAD_SYMBOL(lantern_AutogradContext_mark_non_differentiable);
   LOAD_SYMBOL(lantern_optional_double);
+  LOAD_SYMBOL(test_grad_fn);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)

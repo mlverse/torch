@@ -176,6 +176,25 @@ void *lantern_autograd_grad(void *outputs, void *inputs, void *grad_outputs,
 void *lantern_Tensor_grad_fn(void *self)
 {
     auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+    std::cout << t.grad_fn()->name() << std::endl;
     auto f = t.grad_fn().get();
-    return (void *)f;
+    return reinterpret_cast<void *>(f);
+}
+
+const char *lantern_AutogradNode_name(void *self)
+{
+    auto x = new std::string(reinterpret_cast<torch::autograd::Node *>(self)->name());
+    return x->c_str();
+}
+
+void test_grad_fn()
+{
+    auto x = torch::randn({1}, torch::requires_grad());
+    auto y = 2 * x;
+    std::cout << "take 1" << std::endl;
+    std::cout << y.grad_fn()->name() << std::endl;
+    std::cout << "take 2" << std::endl;
+    auto o = (void *)new LanternObject<torch::Tensor>(y);
+    auto s = std::string(lantern_AutogradNode_name(lantern_Tensor_grad_fn(o)));
+    std::cout << s << std::endl;
 }
