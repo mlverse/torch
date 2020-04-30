@@ -26,7 +26,7 @@ returned tensor and \code{input} tensor share the same underlying storage.
 
 \examples{
 
-x = torch_tensor(matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), ncol = 3, byrow= TRUE))
-torch_narrow(x, 0, 0, 2)
-torch_narrow(x, 1, 1, 2)
+x = torch_tensor(matrix(c(1:9), ncol = 3, byrow= TRUE))
+torch_narrow(x, 0, torch_tensor(0L)$sum(dim = 0), 2)
+torch_narrow(x, 1, torch_tensor(1L)$sum(dim = 0), 2)
 }

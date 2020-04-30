@@ -42,7 +42,12 @@ NULL
 #'
 #' @section real(input, out=None) -> Tensor :
 #'
-#' Computes the element-wise real value of the given `input` tensor.
+#' Returns the real part of the `input` tensor. If
+#' `input` is a real (non-complex) tensor, this function just
+#' returns it.
+#' 
+#' @section Warning:
+#'     Not yet implemented for complex tensors.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = real(\text{input}_{i})
@@ -62,7 +67,10 @@ NULL
 #'
 #' @section imag(input, out=None) -> Tensor :
 #'
-#' Computes the element-wise imag value of the given `input` tensor.
+#' Returns the imaginary part of the `input` tensor.
+#' 
+#' @section Warning:
+#'     Not yet implemented.
 #' 
 #' \deqn{
 #'     \text{out}_{i} = imag(\text{input}_{i})
@@ -172,7 +180,7 @@ NULL
 #' If `input` is of type FloatTensor or DoubleTensor, `other` must be
 #' a real number, otherwise it should be an integer.
 #'
-#' @section add(input, alpha=1, other, out=None) :
+#' @section add(input, other, *, alpha=1, out=None) :
 #'
 #' Each element of the tensor `other` is multiplied by the scalar
 #' `alpha` and added to each element of the tensor `input`.
@@ -190,8 +198,8 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param value (Number) the number to be added to each element of `input`
-#' @param alpha (Number) the scalar multiplier for `other`
 #' @param other (Tensor) the second input tensor
+#' @param alpha (Number) the scalar multiplier for `other`
 #'
 #' @name torch_add
 #'
@@ -201,7 +209,7 @@ NULL
 
 #' Addmv
 #'
-#' @section addmv(beta=1, input, alpha=1, mat, vec, out=None) -> Tensor :
+#' @section addmv(input, mat, vec, *, beta=1, alpha=1, out=None) -> Tensor :
 #'
 #' Performs a matrix-vector product of the matrix `mat` and
 #' the vector `vec`.
@@ -222,11 +230,11 @@ NULL
 #' `alpha` must be real numbers, otherwise they should be integers
 #'
 #'
-#' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
 #' @param input (Tensor) vector to be added
-#' @param alpha (Number, optional) multiplier for \eqn{mat @ vec} (\eqn{\alpha})
 #' @param mat (Tensor) matrix to be multiplied
 #' @param vec (Tensor) vector to be multiplied
+#' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
+#' @param alpha (Number, optional) multiplier for \eqn{mat @ vec} (\eqn{\alpha})
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_addmv
@@ -237,7 +245,7 @@ NULL
 
 #' Addr
 #'
-#' @section addr(beta=1, input, alpha=1, vec1, vec2, out=None) -> Tensor :
+#' @section addr(input, vec1, vec2, *, beta=1, alpha=1, out=None) -> Tensor :
 #'
 #' Performs the outer-product of vectors `vec1` and `vec2`
 #' and adds it to the matrix `input`.
@@ -259,11 +267,11 @@ NULL
 #' `alpha` must be real numbers, otherwise they should be integers
 #'
 #'
-#' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
 #' @param input (Tensor) matrix to be added
-#' @param alpha (Number, optional) multiplier for \eqn{\text{vec1} \otimes \text{vec2}} (\eqn{\alpha})
 #' @param vec1 (Tensor) the first vector of the outer product
 #' @param vec2 (Tensor) the second vector of the outer product
+#' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
+#' @param alpha (Number, optional) multiplier for \eqn{\text{vec1} \otimes \text{vec2}} (\eqn{\alpha})
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_addr
@@ -455,7 +463,7 @@ NULL
 
 #' Baddbmm
 #'
-#' @section baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor :
+#' @section baddbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -> Tensor :
 #'
 #' Performs a batch matrix-matrix product of matrices in `batch1`
 #' and `batch2`.
@@ -478,11 +486,11 @@ NULL
 #' `alpha` must be real numbers, otherwise they should be integers.
 #'
 #'
-#' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
 #' @param input (Tensor) the tensor to be added
-#' @param alpha (Number, optional) multiplier for \eqn{\text{batch1} \mathbin{@} \text{batch2}} (\eqn{\alpha})
 #' @param batch1 (Tensor) the first batch of matrices to be multiplied
 #' @param batch2 (Tensor) the second batch of matrices to be multiplied
+#' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
+#' @param alpha (Number, optional) multiplier for \eqn{\text{batch1} \mathbin{@} \text{batch2}} (\eqn{\alpha})
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_baddbmm
@@ -645,6 +653,42 @@ NULL
 NULL
 
 
+#' Logical_and
+#'
+#' @section logical_and(input, other, out=None) -> Tensor :
+#'
+#' Computes the element-wise logical AND of the given input tensors. Zeros are treated as ``False`` and nonzeros are
+#' treated as ``True``.
+#'
+#'
+#' @param input (Tensor) the input tensor.
+#' @param other (Tensor) the tensor to compute AND with
+#' @param out (Tensor, optional) the output tensor.
+#'
+#' @name torch_logical_and
+#'
+#' @export
+NULL
+
+
+#' Logical_or
+#'
+#' @section logical_or(input, other, out=None) -> Tensor :
+#'
+#' Computes the element-wise logical OR of the given input tensors. Zeros are treated as ``False`` and nonzeros are
+#' treated as ``True``.
+#'
+#'
+#' @param input (Tensor) the input tensor.
+#' @param other (Tensor) the tensor to compute OR with
+#' @param out (Tensor, optional) the output tensor.
+#'
+#' @name torch_logical_or
+#'
+#' @export
+NULL
+
+
 #' Blackman_window
 #'
 #' @section blackman_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor :
@@ -796,7 +840,8 @@ NULL
 #'
 #' @section chunk(input, chunks, dim=0) -> List of Tensors :
 #'
-#' Splits a tensor into a specific number of chunks.
+#' Splits a tensor into a specific number of chunks. Each chunk is a view of
+#' the input tensor.
 #' 
 #' Last chunk will be smaller if the tensor size along the given dimension
 #' `dim` is not divisible by `chunks`.
@@ -1075,27 +1120,47 @@ NULL
 NULL
 
 
-#' Cumsum
+#' Cummax
 #'
-#' @section cumsum(input, dim, out=None, dtype=None) -> Tensor :
+#' @section cummax(input, dim, out=None) -> (Tensor, LongTensor) :
 #'
-#' Returns the cumulative sum of elements of `input` in the dimension
-#' `dim`.
-#' 
-#' For example, if `input` is a vector of size N, the result will also be
-#' a vector of size N, with elements.
+#' Returns a namedtuple ``(values, indices)`` where ``values`` is the cumulative maximum of
+#' elements of `input` in the dimension `dim`. And ``indices`` is the index
+#' location of each maximum value found in the dimension `dim`.
 #' 
 #' \deqn{
-#'     y_i = x_1 + x_2 + x_3 + \dots + x_i
+#'     y_i = max(x_1, x_2, x_3, \dots, x_i)
 #' }
 #'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to do the operation over
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to `dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
-#' @param out (Tensor, optional) the output tensor.
+#' @param out (tuple, optional) the result tuple of two output tensors (values, indices)
 #'
-#' @name torch_cumsum
+#' @name torch_cummax
+#'
+#' @export
+NULL
+
+
+#' Cummin
+#'
+#' @section cummin(input, dim, out=None) -> (Tensor, LongTensor) :
+#'
+#' Returns a namedtuple ``(values, indices)`` where ``values`` is the cumulative minimum of
+#' elements of `input` in the dimension `dim`. And ``indices`` is the index
+#' location of each maximum value found in the dimension `dim`.
+#' 
+#' \deqn{
+#'     y_i = min(x_1, x_2, x_3, \dots, x_i)
+#' }
+#'
+#'
+#' @param input (Tensor) the input tensor.
+#' @param dim (int) the dimension to do the operation over
+#' @param out (tuple, optional) the result tuple of two output tensors (values, indices)
+#'
+#' @name torch_cummin
 #'
 #' @export
 NULL
@@ -1122,6 +1187,32 @@ NULL
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_cumprod
+#'
+#' @export
+NULL
+
+
+#' Cumsum
+#'
+#' @section cumsum(input, dim, out=None, dtype=None) -> Tensor :
+#'
+#' Returns the cumulative sum of elements of `input` in the dimension
+#' `dim`.
+#' 
+#' For example, if `input` is a vector of size N, the result will also be
+#' a vector of size N, with elements.
+#' 
+#' \deqn{
+#'     y_i = x_1 + x_2 + x_3 + \dots + x_i
+#' }
+#'
+#'
+#' @param input (Tensor) the input tensor.
+#' @param dim (int) the dimension to do the operation over
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to `dtype` before the operation        is performed. This is useful for preventing data type overflows. Default: None.
+#' @param out (Tensor, optional) the output tensor.
+#'
+#' @name torch_cumsum
 #'
 #' @export
 NULL
@@ -1249,6 +1340,12 @@ NULL
 #' Divides each element of the input ``input`` with the scalar ``other`` and
 #' returns a new resulting tensor.
 #' 
+#' @section Warning:
+#'     Integer division using div is deprecated, and in a future release div will
+#'     perform true division like [`torch_true_divide`].
+#'     Use [`torch_floor_divide`] (// in Python) to perform integer division,
+#'     instead.
+#' 
 #' \deqn{
 #'     \text{out}_i = \frac{\text{input}_i}{\text{other}}
 #' }
@@ -1334,6 +1431,7 @@ NULL
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #' @param pin_memory (bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: ``False``.
+#' @param memory_format (`torch.memory_format`, optional) the desired memory format of        returned Tensor. Default: ``torch_contiguous_format``.
 #'
 #' @name torch_empty
 #'
@@ -1343,7 +1441,7 @@ NULL
 
 #' Empty_like
 #'
-#' @section empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor :
+#' @section empty_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -> Tensor :
 #'
 #' Returns an uninitialized tensor with the same size as `input`.
 #' ``torch_empty_like(input)`` is equivalent to
@@ -1355,6 +1453,7 @@ NULL
 #' @param layout (`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of `input`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of `input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#' @param memory_format (`torch.memory_format`, optional) the desired memory format of        returned Tensor. Default: ``torch_preserve_format``.
 #'
 #' @name torch_empty_like
 #'
@@ -1534,6 +1633,27 @@ NULL
 NULL
 
 
+#' Floor_divide
+#'
+#' @section floor_divide(input, other, out=None) -> Tensor :
+#'
+#' Return the division of the inputs rounded down to the nearest integer. See [`torch_div`]
+#' for type promotion and broadcasting rules.
+#' 
+#' \deqn{
+#'     \text{{out}}_i = \left\lfloor \frac{{\text{{input}}_i}}{{\text{{other}}_i}} \right\rfloor
+#' }
+#'
+#'
+#' @param input (Tensor) the numerator tensor
+#' @param other (Tensor or Scalar) the denominator
+#'
+#' @name torch_floor_divide
+#'
+#' @export
+NULL
+
+
 #' Frac
 #'
 #' @section frac(input, out=None) -> Tensor :
@@ -1558,6 +1678,13 @@ NULL
 #' @section full(size, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor :
 #'
 #' Returns a tensor of size `size` filled with `fill_value`.
+#' 
+#' @section Warning:
+#'     In PyTorch 1.5 a bool or integral `fill_value` will produce a warning if
+#'     `dtype` or `out` are not set.
+#'     In a future PyTorch release, when `dtype` and `out` are not set
+#'     a bool `fill_value` will return a tensor of torch.bool dtype,
+#'     and an integral `fill_value` will return a tensor of torch.long dtype.
 #'
 #'
 #' @param size (int...) a list, tuple, or `torch_Size` of integers defining the        shape of the output tensor.
@@ -1576,8 +1703,10 @@ NULL
 
 #' Full_like
 #'
-#' @section full_like(input, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor :
+#' @section full_like(input, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False, :
 #'
+#' memory_format=torch.preserve_format) -> Tensor
+#' 
 #' Returns a tensor with the same size as `input` filled with `fill_value`.
 #' ``torch_full_like(input, fill_value)`` is equivalent to
 #' ``torch_full(input.size(), fill_value, dtype=input.dtype, layout=input.layout, device=input.device)``.
@@ -1589,6 +1718,7 @@ NULL
 #' @param layout (`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of `input`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of `input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#' @param memory_format (`torch.memory_format`, optional) the desired memory format of        returned Tensor. Default: ``torch_preserve_format``.
 #'
 #' @name torch_full_like
 #'
@@ -1880,7 +2010,7 @@ NULL
 #' 
 #'     Therefore, to invert an [`~torch.rfft`], the `normalized` and
 #'     `onesided` arguments should be set identically for [`~torch.irfft`],
-#'     and preferrably a `signal_sizes` is given to avoid size mismatch. See the
+#'     and preferably a `signal_sizes` is given to avoid size mismatch. See the
 #'     example below for a case of size mismatch.
 #' 
 #'     See [`~torch.rfft`] for details on conjugate symmetry.
@@ -1968,6 +2098,22 @@ NULL
 #' @param input (Tensor) the PyTorch tensor to test
 #'
 #' @name torch_is_floating_point
+#'
+#' @export
+NULL
+
+
+#' Is_complex
+#'
+#' @section is_complex(input) -> (bool) :
+#'
+#' Returns True if the data type of `input` is a complex data type i.e.,
+#' one of ``torch_complex64``, and ``torch.complex128``.
+#'
+#'
+#' @param input (Tensor) the PyTorch tensor to test
+#'
+#' @name torch_is_complex
 #'
 #' @export
 NULL
@@ -2287,7 +2433,7 @@ NULL
 #'
 #' @section max(input) -> Tensor :
 #'
-#' Returns the maximum value of all elements in the `input` tensor.
+#' Returns the maximum value of all elements in the ``input`` tensor.
 #'
 #' @section max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor) :
 #'
@@ -2296,17 +2442,23 @@ NULL
 #' `dim`. And ``indices`` is the index location of each maximum value found
 #' (argmax).
 #' 
-#' If `keepdim` is ``True``, the output tensors are of the same size
-#' as `input` except in the dimension `dim` where they are of size 1.
-#' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting
-#' in the output tensors having 1 fewer dimension than `input`.
+#' @section Warning:
+#'     ``indices`` does not necessarily contain the first occurrence of each
+#'     maximal value found, unless it is unique.
+#'     The exact implementation details are device-specific.
+#'     Do not expect the same result when run on CPU and GPU in general.
+#' 
+#' If ``keepdim`` is ``True``, the output tensors are of the same size
+#' as ``input`` except in the dimension ``dim`` where they are of size 1.
+#' Otherwise, ``dim`` is squeezed (see [`torch_squeeze`]), resulting
+#' in the output tensors having 1 fewer dimension than ``input``.
 #'
 #' @section max(input, other, out=None) -> Tensor :
 #'
-#' Each element of the tensor `input` is compared with the corresponding
-#' element of the tensor `other` and an element-wise maximum is taken.
+#' Each element of the tensor ``input`` is compared with the corresponding
+#' element of the tensor ``other`` and an element-wise maximum is taken.
 #' 
-#' The shapes of `input` and `other` don't need to match,
+#' The shapes of ``input`` and ``other`` don't need to match,
 #' but they must be broadcastable .
 #' 
 #' \deqn{
@@ -2316,11 +2468,10 @@ NULL
 #'           follows the broadcasting rules .
 #'
 #'
-#' @param {input} NA 
-#' @param {dim} NA 
-#' @param {keepdim} NA ``False``.
-#' @param out (tuple, optional) the result tuple of two output tensors (max, max_indices)
 #' @param input (Tensor) the input tensor.
+#' @param dim (int) the dimension to reduce.
+#' @param keepdim (bool) whether the output tensor has `dim` retained or not. Default: ``False``.
+#' @param out (tuple, optional) the result tuple of two output tensors (max, max_indices)
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_max
@@ -2365,7 +2516,7 @@ NULL
 #'
 #' Returns the median value of all elements in the `input` tensor.
 #'
-#' @section median(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor) :
+#' @section median(input, dim=-1, keepdim=False, out=None) -> (Tensor, LongTensor) :
 #'
 #' Returns a namedtuple ``(values, indices)`` where ``values`` is the median
 #' value of each row of the `input` tensor in the given dimension
@@ -2382,8 +2533,7 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
-#' @param values (Tensor, optional) the output tensor
-#' @param indices (Tensor, optional) the output index tensor
+#' @param out (tuple, optional) the result tuple of two output tensors (max, max_indices)
 #'
 #' @name torch_median
 #'
@@ -2403,6 +2553,12 @@ NULL
 #' value of each row of the `input` tensor in the given dimension
 #' `dim`. And ``indices`` is the index location of each minimum value found
 #' (argmin).
+#' 
+#' @section Warning:
+#'     ``indices`` does not necessarily contain the first occurrence of each
+#'     minimal value found, unless it is unique.
+#'     The exact implementation details are device-specific.
+#'     Do not expect the same result when run on CPU and GPU in general.
 #' 
 #' If `keepdim` is ``True``, the output tensors are of the same size as
 #' `input` except in the dimension `dim` where they are of size 1.
@@ -2425,11 +2581,10 @@ NULL
 #'           follows the broadcasting rules .
 #'
 #'
-#' @param {input} NA 
-#' @param {dim} NA 
-#' @param {keepdim} NA 
-#' @param out (tuple, optional) the tuple of two output tensors (min, min_indices)
 #' @param input (Tensor) the input tensor.
+#' @param dim (int) the dimension to reduce.
+#' @param keepdim (bool) whether the output tensor has `dim` retained or not.
+#' @param out (tuple, optional) the tuple of two output tensors (min, min_indices)
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_min
@@ -2463,7 +2618,7 @@ NULL
 
 #' Mode
 #'
-#' @section mode(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor) :
+#' @section mode(input, dim=-1, keepdim=False, out=None) -> (Tensor, LongTensor) :
 #'
 #' Returns a namedtuple ``(values, indices)`` where ``values`` is the mode
 #' value of each row of the `input` tensor in the given dimension
@@ -2483,8 +2638,7 @@ NULL
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the dimension to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
-#' @param values (Tensor, optional) the output tensor
-#' @param indices (Tensor, optional) the output index tensor
+#' @param out (tuple, optional) the result tuple of two output tensors (values, indices)
 #'
 #' @name torch_mode
 #'
@@ -2558,15 +2712,16 @@ NULL
 #'
 #' @section mvlgamma(input, p) -> Tensor :
 #'
-#' Computes the multivariate log-gamma function (`[reference]`_) with dimension \eqn{p} element-wise, given by
+#' Computes the `multivariate log-gamma function
+#' <https://en.wikipedia.org/wiki/Multivariate_gamma_function>`_) with dimension
+#' \eqn{p} element-wise, given by
 #' 
 #' \deqn{
 #'     \log(\Gamma_{p}(a)) = C + \displaystyle \sum_{i=1}^{p} \log\left(\Gamma\left(a - \frac{i - 1}{2}\right)\right)
 #' }
 #' where \eqn{C = \log(\pi) \times \frac{p (p - 1)}{4}} and \eqn{\Gamma(\cdot)} is the Gamma function.
 #' 
-#' If any of the elements are less than or equal to \eqn{\frac{p - 1}{2}}, then an error
-#' is thrown.
+#' All elements must be greater than \eqn{\frac{p - 1}{2}}, otherwise an error would be thrown.
 #'
 #'
 #' @param input (Tensor) the tensor to compute the multivariate log-gamma function
@@ -2621,7 +2776,7 @@ NULL
 
 #' Ones_like
 #'
-#' @section ones_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor :
+#' @section ones_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -> Tensor :
 #'
 #' Returns a tensor filled with the scalar value `1`, with the same size as
 #' `input`. ``torch_ones_like(input)`` is equivalent to
@@ -2638,6 +2793,7 @@ NULL
 #' @param layout (`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of `input`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of `input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#' @param memory_format (`torch.memory_format`, optional) the desired memory format of        returned Tensor. Default: ``torch_preserve_format``.
 #'
 #' @name torch_ones_like
 #'
@@ -2784,7 +2940,7 @@ NULL
 
 #' Rand_like
 #'
-#' @section rand_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor :
+#' @section rand_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -> Tensor :
 #'
 #' Returns a tensor with the same size as `input` that is filled with
 #' random numbers from a uniform distribution on the interval \eqn{[0, 1)}.
@@ -2797,6 +2953,7 @@ NULL
 #' @param layout (`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of `input`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of `input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#' @param memory_format (`torch.memory_format`, optional) the desired memory format of        returned Tensor. Default: ``torch_preserve_format``.
 #'
 #' @name torch_rand_like
 #'
@@ -2806,8 +2963,10 @@ NULL
 
 #' Randint
 #'
-#' @section randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor :
+#' @section randint(low=0, high, size, *, generator=None, out=None, \ :
 #'
+#' dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
+#' 
 #' Returns a tensor filled with random integers generated uniformly
 #' between `low` (inclusive) and `high` (exclusive).
 #' 
@@ -2836,8 +2995,10 @@ NULL
 
 #' Randint_like
 #'
-#' @section randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor :
+#' @section randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False, :
 #'
+#' memory_format=torch.preserve_format) -> Tensor
+#' 
 #' Returns a tensor with the same shape as Tensor `input` filled with
 #' random integers generated uniformly between `low` (inclusive) and
 #' `high` (exclusive).
@@ -2854,6 +3015,7 @@ NULL
 #' @param layout (`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of `input`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of `input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#' @param memory_format (`torch.memory_format`, optional) the desired memory format of        returned Tensor. Default: ``torch_preserve_format``.
 #'
 #' @name torch_randint_like
 #'
@@ -2890,7 +3052,7 @@ NULL
 
 #' Randn_like
 #'
-#' @section randn_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor :
+#' @section randn_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -> Tensor :
 #'
 #' Returns a tensor with the same size as `input` that is filled with
 #' random numbers from a normal distribution with mean 0 and variance 1.
@@ -2903,6 +3065,7 @@ NULL
 #' @param layout (`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of `input`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of `input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#' @param memory_format (`torch.memory_format`, optional) the desired memory format of        returned Tensor. Default: ``torch_preserve_format``.
 #'
 #' @name torch_randn_like
 #'
@@ -3008,7 +3171,7 @@ NULL
 #' 
 #' @section Warning:
 #' 
-#'     This is different from [`torch_repeat`] but similar to `numpy.repeat`.
+#'     This is different from `torch_Tensor.repeat` but similar to ``numpy.repeat``.
 #'
 #' @section repeat_interleave(repeats) -> Tensor :
 #'
@@ -3239,7 +3402,7 @@ NULL
 #'
 #' @section TEST :
 #'
-#' Splits the tensor into chunks.
+#' Splits the tensor into chunks. Each chunk is a view of the original tensor.
 #' 
 #'     If `split_size_or_sections` is an integer type, then `tensor` will
 #'     be split into equally sized chunks (if possible). Last chunk will be smaller if
@@ -3437,6 +3600,22 @@ NULL
 NULL
 
 
+#' Square
+#'
+#' @section square(input, out=None) -> Tensor :
+#'
+#' Returns a new tensor with the square of the elements of `input`.
+#'
+#'
+#' @param input (Tensor) the input tensor.
+#' @param out (Tensor, optional) the output tensor.
+#'
+#' @name torch_square
+#'
+#' @export
+NULL
+
+
 #' Std
 #'
 #' @section std(input, unbiased=True) -> Tensor :
@@ -3446,7 +3625,7 @@ NULL
 #' If `unbiased` is ``False``, then the standard-deviation will be calculated
 #' via the biased estimator. Otherwise, Bessel's correction will be used.
 #'
-#' @section std(input, dim, keepdim=False, unbiased=True, out=None) -> Tensor :
+#' @section std(input, dim, unbiased=True, keepdim=False, out=None) -> Tensor :
 #'
 #' Returns the standard-deviation of each row of the `input` tensor in the
 #' dimension `dim`. If `dim` is a list of dimensions,
@@ -3484,7 +3663,7 @@ NULL
 #' If `unbiased` is ``False``, then the standard-deviation will be calculated
 #' via the biased estimator. Otherwise, Bessel's correction will be used.
 #'
-#' @section std(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor) :
+#' @section std_mean(input, dim, unbiased=True, keepdim=False) -> (Tensor, Tensor) :
 #'
 #' Returns the standard-deviation and mean of each row of the `input` tensor in the
 #' dimension `dim`. If `dim` is a list of dimensions,
@@ -3547,8 +3726,8 @@ NULL
 #' Expects `input` to be <= 2-D tensor and transposes dimensions 0
 #' and 1.
 #' 
-#' 0-D and 1-D tensors are returned as it is and
-#' 2-D tensor can be seen as a short-hand function for ``transpose(input, 0, 1)``.
+#' 0-D and 1-D tensors are returned as is. When input is a 2-D tensor this
+#' is equivalent to ``transpose(input, 0, 1)``.
 #'
 #'
 #' @param input (Tensor) the input tensor.
@@ -3732,6 +3911,29 @@ NULL
 NULL
 
 
+#' True_divide
+#'
+#' @section true_divide(dividend, divisor) -> Tensor :
+#'
+#' Performs "true division" that always computes the division
+#' in floating point. Analogous to division in Python 3 and equivalent to
+#' [`torch_div`] except when both inputs have bool or integer scalar types,
+#' in which case they are cast to the default (floating) scalar type before the division.
+#' 
+#' \deqn{
+#'     \text{out}_i = \frac{\text{dividend}_i}{\text{divisor}}
+#' }
+#'
+#'
+#' @param dividend (Tensor) the dividend
+#' @param divisor (Tensor or Scalar) the divisor
+#'
+#' @name torch_true_divide
+#'
+#' @export
+NULL
+
+
 #' Trunc
 #'
 #' @section trunc(input, out=None) -> Tensor :
@@ -3773,7 +3975,7 @@ NULL
 
 #' Unsqueeze
 #'
-#' @section unsqueeze(input, dim, out=None) -> Tensor :
+#' @section unsqueeze(input, dim) -> Tensor :
 #'
 #' Returns a new tensor with a dimension of size one inserted at the
 #' specified position.
@@ -3787,7 +3989,6 @@ NULL
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int) the index at which to insert the singleton dimension
-#' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_unsqueeze
 #'
@@ -3927,7 +4128,7 @@ NULL
 
 #' Zeros_like
 #'
-#' @section zeros_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor :
+#' @section zeros_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -> Tensor :
 #'
 #' Returns a tensor filled with the scalar value `0`, with the same size as
 #' `input`. ``torch_zeros_like(input)`` is equivalent to
@@ -3944,8 +4145,31 @@ NULL
 #' @param layout (`torch.layout`, optional) the desired layout of returned tensor.        Default: if ``None``, defaults to the layout of `input`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, defaults to the device of `input`.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
+#' @param memory_format (`torch.memory_format`, optional) the desired memory format of        returned Tensor. Default: ``torch_preserve_format``.
 #'
 #' @name torch_zeros_like
+#'
+#' @export
+NULL
+
+
+#' Poisson
+#'
+#' @section poisson(input *, generator=None) -> Tensor :
+#'
+#' Returns a tensor of the same size as `input` with each element
+#' sampled from a Poisson distribution with rate parameter given by the corresponding
+#' element in `input` i.e.,
+#' 
+#' \deqn{
+#'     \text{out}_i \sim \text{Poisson}(\text{input}_i)
+#' }
+#'
+#'
+#' @param input (Tensor) the input tensor containing the rates of the Poisson distribution
+#' @param generator (`torch.Generator`, optional) a pseudorandom number generator for sampling
+#'
+#' @name torch_poisson
 #'
 #' @export
 NULL
@@ -4019,7 +4243,7 @@ NULL
 
 #' Addmm
 #'
-#' @section addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -> Tensor :
+#' @section addmm(input, mat1, mat2, *, beta=1, alpha=1, out=None) -> Tensor :
 #'
 #' Performs a matrix multiplication of the matrices `mat1` and `mat2`.
 #' The matrix `input` is added to the final result.
@@ -4039,11 +4263,11 @@ NULL
 #' `alpha` must be real numbers, otherwise they should be integers.
 #'
 #'
-#' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
 #' @param input (Tensor) matrix to be added
-#' @param alpha (Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})
 #' @param mat1 (Tensor) the first matrix to be multiplied
 #' @param mat2 (Tensor) the second matrix to be multiplied
+#' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
+#' @param alpha (Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_addmm
@@ -4237,6 +4461,42 @@ NULL
 NULL
 
 
+#' Bitwise_and
+#'
+#' @section bitwise_and(input, other, out=None) -> Tensor :
+#'
+#' Computes the bitwise AND of `input` and `other`. The input tensor must be of
+#' integral or Boolean types. For bool tensors, it computes the logical AND.
+#'
+#'
+#' @param input NA the first input tensor
+#' @param other NA the second input tensor
+#' @param out (Tensor, optional) the output tensor.
+#'
+#' @name torch_bitwise_and
+#'
+#' @export
+NULL
+
+
+#' Bitwise_or
+#'
+#' @section bitwise_or(input, other, out=None) -> Tensor :
+#'
+#' Computes the bitwise OR of `input` and `other`. The input tensor must be of
+#' integral or Boolean types. For bool tensors, it computes the logical OR.
+#'
+#'
+#' @param input NA the first input tensor
+#' @param other NA the second input tensor
+#' @param out (Tensor, optional) the output tensor.
+#'
+#' @name torch_bitwise_or
+#'
+#' @export
+NULL
+
+
 #' Bitwise_xor
 #'
 #' @section bitwise_xor(input, other, out=None) -> Tensor :
@@ -4257,7 +4517,7 @@ NULL
 
 #' Addbmm
 #'
-#' @section addbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor :
+#' @section addbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -> Tensor :
 #'
 #' Performs a batch matrix-matrix product of matrices stored
 #' in `batch1` and `batch2`,
@@ -4280,11 +4540,11 @@ NULL
 #' must be real numbers, otherwise they should be integers.
 #'
 #'
+#' @param batch1 (Tensor) the first batch of matrices to be multiplied
+#' @param batch2 (Tensor) the second batch of matrices to be multiplied
 #' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
 #' @param input (Tensor) matrix to be added
 #' @param alpha (Number, optional) multiplier for `batch1 @ batch2` (\eqn{\alpha})
-#' @param batch1 (Tensor) the first batch of matrices to be multiplied
-#' @param batch2 (Tensor) the second batch of matrices to be multiplied
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_addbmm
@@ -4422,8 +4682,9 @@ NULL
 #' \eqn{\lbrace (i, i) \rbrace} for \eqn{i \in [0, \min\{d_{1}, d_{2}\} - 1]}
 #' where \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 #' 
-#' NOTE: when running on 'cuda', row * col must be less than \eqn{2^{59}} to
-#' prevent overflow during calculation.
+#' @note
+#'     When running on CUDA, ``row * col`` must be less than \eqn{2^{59}} to
+#'     prevent overflow during calculation.
 #'
 #'
 #' @param row (``int``) number of rows in the 2-D matrix.
@@ -4459,8 +4720,9 @@ NULL
 #' \eqn{\lbrace (i, i) \rbrace} for \eqn{i \in [0, \min\{d_{1}, d_{2}\} - 1]}
 #' where \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 #' 
-#' NOTE: when running on 'cuda', row * col must be less than \eqn{2^{59}} to
-#' prevent overflow during calculation.
+#' @note
+#'     When running on CUDA, ``row * col`` must be less than \eqn{2^{59}} to
+#'     prevent overflow during calculation.
 #'
 #'
 #' @param row (``int``) number of rows in the 2-D matrix.
@@ -4672,7 +4934,7 @@ NULL
 #'
 #'
 #' @param input (Tensor) the input tensor.
-#' @param mask (ByteTensor) the tensor containing the binary mask to index with
+#' @param mask (BoolTensor) the tensor containing the binary mask to index with
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_masked_select
@@ -4764,7 +5026,7 @@ NULL
 
 #' Addcmul
 #'
-#' @section addcmul(input, value=1, tensor1, tensor2, out=None) -> Tensor :
+#' @section addcmul(input, tensor1, tensor2, *, value=1, out=None) -> Tensor :
 #'
 #' Performs the element-wise multiplication of `tensor1`
 #' by `tensor2`, multiply the result by the scalar `value`
@@ -4781,9 +5043,9 @@ NULL
 #'
 #'
 #' @param input (Tensor) the tensor to be added
-#' @param value (Number, optional) multiplier for \eqn{tensor1 .* tensor2}
 #' @param tensor1 (Tensor) the tensor to be multiplied
 #' @param tensor2 (Tensor) the tensor to be multiplied
+#' @param value (Number, optional) multiplier for \eqn{tensor1 .* tensor2}
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_addcmul
@@ -4794,14 +5056,27 @@ NULL
 
 #' Addcdiv
 #'
-#' @section addcdiv(input, value=1, tensor1, tensor2, out=None) -> Tensor :
+#' @section addcdiv(input, tensor1, tensor2, *, value=1, out=None) -> Tensor :
 #'
 #' Performs the element-wise division of `tensor1` by `tensor2`,
 #' multiply the result by the scalar `value` and add it to `input`.
 #' 
+#' @section Warning:
+#'     Integer division with addcdiv is deprecated, and in a future release
+#'     addcdiv will perform a true division of `tensor1` and `tensor2`.
+#'     The current addcdiv behavior can be replicated using [`floor_divide`]
+#'     for integral inputs
+#'     (`input` + `value` * `tensor1` // `tensor2`)
+#'     and [`div`] for float inputs
+#'     (`input` + `value` * `tensor1` / `tensor2`).
+#'     The new addcdiv behavior can be implemented with [`true_divide`]
+#'     (`input` + `value` * torch.true_divide(`tensor1`,
+#'     `tensor2`).
+#' 
 #' \deqn{
 #'     \text{out}_i = \text{input}_i + \text{value} \times \frac{\text{tensor1}_i}{\text{tensor2}_i}
 #' }
+#' 
 #' The shapes of `input`, `tensor1`, and `tensor2` must be
 #' broadcastable .
 #' 
@@ -4810,9 +5085,9 @@ NULL
 #'
 #'
 #' @param input (Tensor) the tensor to be added
-#' @param value (Number, optional) multiplier for \eqn{\text{tensor1} / \text{tensor2}}
 #' @param tensor1 (Tensor) the numerator tensor
 #' @param tensor2 (Tensor) the denominator tensor
+#' @param value (Number, optional) multiplier for \eqn{\text{tensor1} / \text{tensor2}}
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_addcdiv
@@ -5579,7 +5854,7 @@ NULL
 
 #' Argsort
 #'
-#' @section argsort(input, dim=-1, descending=False, out=None) -> LongTensor :
+#' @section argsort(input, dim=-1, descending=False) -> LongTensor :
 #'
 #' Returns the indices that sort a tensor along a given dimension in ascending
 #' order by value.
@@ -5724,6 +5999,21 @@ NULL
 #' @param tensor (Tensor) A tensor to check
 #'
 #' @name torch_isfinite
+#'
+#' @export
+NULL
+
+
+#' Isinf
+#'
+#' @section TEST :
+#'
+#' Returns a new tensor with boolean elements representing if each element is `+/-INF` or not.
+#'
+#'
+#' @param tensor (Tensor) A tensor to check
+#'
+#' @name torch_isinf
 #'
 #' @export
 NULL

@@ -18,12 +18,16 @@
 \item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, defaults to the device of \code{input}.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
+
+\item{memory_format}{(\code{torch.memory_format}, optional) the desired memory format of        returned Tensor. Default: \code{torch_preserve_format}.}
 }
 \description{
 Randint_like
 }
-\section{randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+\section{randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False, }{
 
+
+memory_format=torch.preserve_format) -> Tensor
 
 Returns a tensor with the same shape as Tensor \code{input} filled with
 random integers generated uniformly between \code{low} (inclusive) and

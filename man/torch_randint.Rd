@@ -26,8 +26,10 @@
 \description{
 Randint
 }
-\section{randint(low=0, high, size, *, generator=None, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+\section{randint(low=0, high, size, *, generator=None, out=None, \ }{
 
+
+dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor
 
 Returns a tensor filled with random integers generated uniformly
 between \code{low} (inclusive) and \code{high} (exclusive).

@@ -14,11 +14,13 @@
 \item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, defaults to the device of \code{input}.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
+
+\item{memory_format}{(\code{torch.memory_format}, optional) the desired memory format of        returned Tensor. Default: \code{torch_preserve_format}.}
 }
 \description{
 Empty_like
 }
-\section{empty_like(input, dtype=None, layout=None, device=None, requires_grad=False) -> Tensor }{
+\section{empty_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -> Tensor }{
 
 
 Returns an uninitialized tensor with the same size as \code{input}.

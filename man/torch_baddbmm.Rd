@@ -5,22 +5,22 @@
 \alias{torch_baddbmm}
 \title{Baddbmm}
 \arguments{
-\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
-
 \item{input}{(Tensor) the tensor to be added}
-
-\item{alpha}{(Number, optional) multiplier for \eqn{\text{batch1} \mathbin{@} \text{batch2}} (\eqn{\alpha})}
 
 \item{batch1}{(Tensor) the first batch of matrices to be multiplied}
 
 \item{batch2}{(Tensor) the second batch of matrices to be multiplied}
+
+\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
+
+\item{alpha}{(Number, optional) multiplier for \eqn{\text{batch1} \mathbin{@} \text{batch2}} (\eqn{\alpha})}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Baddbmm
 }
-\section{baddbmm(beta=1, input, alpha=1, batch1, batch2, out=None) -> Tensor }{
+\section{baddbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -> Tensor }{
 
 
 Performs a batch matrix-matrix product of matrices in \code{batch1}

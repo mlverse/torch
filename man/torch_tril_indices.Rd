@@ -20,6 +20,11 @@
 \description{
 Tril_indices
 }
+\note{
+\preformatted{When running on CUDA, ``row * col`` must be less than \eqn{2^{59}} to
+prevent overflow during calculation.
+}
+}
 \section{tril_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor }{
 
 
@@ -38,9 +43,6 @@ diagonal, and similarly a negative value excludes just as many diagonals below
 the main diagonal. The main diagonal are the set of indices
 \eqn{\lbrace (i, i) \rbrace} for \eqn{i \in [0, \min\{d_{1}, d_{2}\} - 1]}
 where \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
-
-NOTE: when running on 'cuda', row * col must be less than \eqn{2^{59}} to
-prevent overflow during calculation.
 }
 
 \examples{

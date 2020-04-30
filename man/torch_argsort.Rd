@@ -14,7 +14,7 @@
 \description{
 Argsort
 }
-\section{argsort(input, dim=-1, descending=False, out=None) -> LongTensor }{
+\section{argsort(input, dim=-1, descending=False) -> LongTensor }{
 
 
 Returns the indices that sort a tensor along a given dimension in ascending

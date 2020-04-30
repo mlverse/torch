@@ -25,7 +25,7 @@ If \code{unbiased} is \code{False}, then the standard-deviation will be calculat
 via the biased estimator. Otherwise, Bessel's correction will be used.
 }
 
-\section{std(input, dim, keepdim=False, unbiased=True) -> (Tensor, Tensor) }{
+\section{std_mean(input, dim, unbiased=True, keepdim=False) -> (Tensor, Tensor) }{
 
 
 Returns the standard-deviation and mean of each row of the \code{input} tensor in the

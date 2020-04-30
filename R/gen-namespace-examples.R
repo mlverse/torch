@@ -1223,9 +1223,9 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_tensor(matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), ncol = 3, byrow= TRUE))
-#' torch_narrow(x, 0, 0, 2)
-#' torch_narrow(x, 1, 1, 2)
+#' x = torch_tensor(matrix(c(1:9), ncol = 3, byrow= TRUE))
+#' torch_narrow(x, 0, torch_tensor(0L)$sum(dim = 0), 2)
+#' torch_narrow(x, 1, torch_tensor(1L)$sum(dim = 0), 2)
 NULL
 # -> narrow <-
 
@@ -2838,3 +2838,150 @@ NULL
 #' torch_isfinite(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
 NULL
 # -> isfinite <-
+
+# -> logical_and: 2fd62dde47e072501a4e652b24862d03 <-
+#'
+#' @name torch_logical_and
+#'
+#' @examples
+#'
+#' torch_logical_and(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
+#' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
+#' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
+#' torch_logical_and(a, b)
+#' \dontrun{
+#' torch_logical_and(a, b, out=torch_empty(4, options = list(dtype=torch_bool())))
+#' }
+NULL
+# -> logical_and <-
+
+# -> logical_or: b02dcb9041f32e5506dd4ea911f523e2 <-
+#'
+#' @name torch_logical_or
+#'
+#' @examples
+#'
+#' torch_logical_or(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
+#' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
+#' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
+#' torch_logical_or(a, b)
+#' \dontrun{
+#' torch_logical_or(a$double(), b$double())
+#' torch_logical_or(a$double(), b)
+#' torch_logical_or(a, b, out=torch_empty(4, dtype=torch_bool()))
+#' }
+NULL
+# -> logical_or <-
+
+# -> cummax: c6caab76ec2e2a82766108186c3e736d <-
+#'
+#' @name torch_cummax
+#'
+#' @examples
+#'
+#' a = torch_randn(c(10))
+#' a
+#' torch_cummax(a, dim=0)
+NULL
+# -> cummax <-
+
+# -> cummin: 9c7c3817d592a264549692ecd0b8440e <-
+#'
+#' @name torch_cummin
+#'
+#' @examples
+#'
+#' a = torch_randn(c(10))
+#' a
+#' torch_cummin(a, dim=0)
+NULL
+# -> cummin <-
+
+# -> floor_divide: c913397c4c025ed2e753191375508813 <-
+#'
+#' @name torch_floor_divide
+#'
+#' @examples
+#'
+#' a = torch_tensor(c(4.0, 3.0))
+#' b = torch_tensor(c(2.0, 2.0))
+#' torch_floor_divide(a, b)
+#' torch_floor_divide(a, 1.4)
+NULL
+# -> floor_divide <-
+
+# -> is_complex: 943a6632ffecbe645a7a4a43192ee185 <-
+#'
+#' @name torch_is_complex
+#'
+#' @examples
+#'
+#' 
+NULL
+# -> is_complex <-
+
+# -> square: cf1b3195377f1b4e052e22932d61b186 <-
+#'
+#' @name torch_square
+#'
+#' @examples
+#'
+#' a = torch_randn(c(4))
+#' a
+#' torch_square(a)
+NULL
+# -> square <-
+
+# -> true_divide: 7bcbf6c439736cf9eb725cec8d1ca73c <-
+#'
+#' @name torch_true_divide
+#'
+#' @examples
+#'
+#' dividend = torch_tensor(c(5, 3), dtype=torch_int())
+#' divisor = torch_tensor(c(3, 2), dtype=torch_int())
+#' torch_true_divide(dividend, divisor)
+#' torch_true_divide(dividend, 2)
+NULL
+# -> true_divide <-
+
+# -> poisson: 4ab231954488da8fd133ce813da9d696 <-
+#'
+#' @name torch_poisson
+#'
+#' @examples
+#'
+#' rates = torch_rand(c(4, 4)) * 5  # rate parameter between 0 and 5
+#' torch_poisson(rates)
+NULL
+# -> poisson <-
+
+# -> bitwise_and: 943a6632ffecbe645a7a4a43192ee185 <-
+#'
+#' @name torch_bitwise_and
+#'
+#' @examples
+#'
+#' 
+NULL
+# -> bitwise_and <-
+
+# -> bitwise_or: 943a6632ffecbe645a7a4a43192ee185 <-
+#'
+#' @name torch_bitwise_or
+#'
+#' @examples
+#'
+#' 
+NULL
+# -> bitwise_or <-
+
+# -> isinf: 7c5614e21bd63db036d261ef73b2f1f2 <-
+#'
+#' @name torch_isinf
+#'
+#' @examples
+#'
+#' torch_isinf(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
+NULL
+# -> isinf <-

@@ -5,22 +5,22 @@
 \alias{torch_addmm}
 \title{Addmm}
 \arguments{
-\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
-
 \item{input}{(Tensor) matrix to be added}
-
-\item{alpha}{(Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})}
 
 \item{mat1}{(Tensor) the first matrix to be multiplied}
 
 \item{mat2}{(Tensor) the second matrix to be multiplied}
+
+\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
+
+\item{alpha}{(Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addmm
 }
-\section{addmm(beta=1, input, alpha=1, mat1, mat2, out=None) -> Tensor }{
+\section{addmm(input, mat1, mat2, *, beta=1, alpha=1, out=None) -> Tensor }{
 
 
 Performs a matrix multiplication of the matrices \code{mat1} and \code{mat2}.

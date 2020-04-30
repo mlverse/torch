@@ -17,7 +17,7 @@ Split
 \section{TEST }{
 
 
-Splits the tensor into chunks.\preformatted{If `split_size_or_sections` is an integer type, then `tensor` will
+Splits the tensor into chunks. Each chunk is a view of the original tensor.\preformatted{If `split_size_or_sections` is an integer type, then `tensor` will
 be split into equally sized chunks (if possible). Last chunk will be smaller if
 the tensor size along the given dimension `dim` is not divisible by
 `split_size`.

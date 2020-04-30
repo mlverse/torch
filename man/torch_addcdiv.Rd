@@ -7,26 +7,41 @@
 \arguments{
 \item{input}{(Tensor) the tensor to be added}
 
-\item{value}{(Number, optional) multiplier for \eqn{\text{tensor1} / \text{tensor2}}}
-
 \item{tensor1}{(Tensor) the numerator tensor}
 
 \item{tensor2}{(Tensor) the denominator tensor}
+
+\item{value}{(Number, optional) multiplier for \eqn{\text{tensor1} / \text{tensor2}}}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addcdiv
 }
-\section{addcdiv(input, value=1, tensor1, tensor2, out=None) -> Tensor }{
+\section{addcdiv(input, tensor1, tensor2, *, value=1, out=None) -> Tensor }{
 
 
 Performs the element-wise division of \code{tensor1} by \code{tensor2},
 multiply the result by the scalar \code{value} and add it to \code{input}.
+}
+
+\section{Warning}{
+
+Integer division with addcdiv is deprecated, and in a future release
+addcdiv will perform a true division of \code{tensor1} and \code{tensor2}.
+The current addcdiv behavior can be replicated using \code{\link{floor_divide}}
+for integral inputs
+(\code{input} + \code{value} * \code{tensor1} // \code{tensor2})
+and \code{\link{div}} for float inputs
+(\code{input} + \code{value} * \code{tensor1} / \code{tensor2}).
+The new addcdiv behavior can be implemented with \code{\link{true_divide}}
+(\code{input} + \code{value} * torch.true_divide(\code{tensor1},
+\code{tensor2}).
 
 \deqn{
     \text{out}_i = \text{input}_i + \text{value} \times \frac{\text{tensor1}_i}{\text{tensor2}_i}
 }
+
 The shapes of \code{input}, \code{tensor1}, and \code{tensor2} must be
 broadcastable .
 

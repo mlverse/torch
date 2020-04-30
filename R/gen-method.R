@@ -786,6 +786,32 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
+Tensor$set("public", "bitwise_and", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = c("Scalar", "Tensor"))
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'bitwise_and',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "bitwise_and_", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = c("Scalar", "Tensor"))
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'bitwise_and_',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
 Tensor$set("public", "bitwise_not", function() {  args <- list()
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor")
@@ -806,6 +832,32 @@ nd_args <- "self"
 return_types <- list(list('Tensor'))
 call_c_function(
   fun_name = 'bitwise_not_',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "bitwise_or", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = c("Scalar", "Tensor"))
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'bitwise_or',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "bitwise_or_", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = c("Scalar", "Tensor"))
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'bitwise_or_',
   args = args,
   expected_types = expected_types,
   nd_args = nd_args,
@@ -1150,6 +1202,32 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
+Tensor$set("public", "cummax", function(dim) {  args <- rlang::env_get_list(nms = c("dim"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"))
+nd_args <- c("self", "dim")
+return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+  fun_name = 'cummax',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "cummin", function(dim) {  args <- rlang::env_get_list(nms = c("dim"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"))
+nd_args <- c("self", "dim")
+return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+  fun_name = 'cummin',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
 Tensor$set("public", "cumprod", function(dim, dtype = NULL) {  args <- rlang::env_get_list(nms = c("dim", "dtype"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), dtype = "ScalarType")
@@ -1293,10 +1371,11 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "diagonal", function(offset = 0, dim1 = 0, dim2 = 1) {  args <- rlang::env_get_list(nms = c("offset", "dim1", "dim2"))
+Tensor$set("public", "diagonal", function(outdim, dim1 = 0, dim2 = 1, offset = 0) {  args <- rlang::env_get_list(nms = c("outdim", "dim1", "dim2", "offset"))
 args <- append(list(self = self), args)
-expected_types <- list(self = "Tensor", offset = "int64_t", dim1 = "int64_t", dim2 = "int64_t")
-nd_args <- "self"
+expected_types <- list(self = "Tensor", outdim = "Dimname", dim1 = c("int64_t", 
+"Dimname"), dim2 = c("int64_t", "Dimname"), offset = "int64_t")
+nd_args <- c("self", "outdim")
 return_types <- list(list('Tensor'))
 call_c_function(
   fun_name = 'diagonal',
@@ -1697,6 +1776,32 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
+Tensor$set("public", "floor_divide", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"))
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'floor_divide',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "floor_divide_", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"))
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'floor_divide_',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
 Tensor$set("public", "fmod", function(other) {  args <- rlang::env_get_list(nms = c("other"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", other = c("Scalar", "Tensor"))
@@ -1900,19 +2005,6 @@ nd_args <- c("self", "signal_ndim")
 return_types <- list(list('Tensor'))
 call_c_function(
   fun_name = 'ifft',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
-Tensor$set("public", "imag", function() {  args <- list()
-args <- append(list(self = self), args)
-expected_types <- list(self = "Tensor")
-nd_args <- "self"
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'imag',
   args = args,
   expected_types = expected_types,
   nd_args = nd_args,
@@ -2503,6 +2595,32 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
+Tensor$set("public", "logical_and", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = "Tensor")
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'logical_and',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "logical_and_", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = "Tensor")
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'logical_and_',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
 Tensor$set("public", "logical_not", function() {  args <- list()
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor")
@@ -2523,6 +2641,32 @@ nd_args <- "self"
 return_types <- list(list('Tensor'))
 call_c_function(
   fun_name = 'logical_not_',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "logical_or", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = "Tensor")
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'logical_or',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "logical_or_", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = "Tensor")
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'logical_or_',
   args = args,
   expected_types = expected_types,
   nd_args = nd_args,
@@ -2904,7 +3048,8 @@ call_c_function(
 )})
 Tensor$set("public", "narrow", function(dim, start, length) {  args <- rlang::env_get_list(nms = c("dim", "start", "length"))
 args <- append(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = "int64_t", start = "int64_t", length = "int64_t")
+expected_types <- list(self = "Tensor", dim = "int64_t", start = c("int64_t", "Tensor"
+), length = "int64_t")
 nd_args <- c("self", "dim", "start", "length")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -3374,19 +3519,6 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "real", function() {  args <- list()
-args <- append(list(self = self), args)
-expected_types <- list(self = "Tensor")
-nd_args <- "self"
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'real',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
 Tensor$set("public", "reciprocal", function() {  args <- list()
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor")
@@ -3615,6 +3747,19 @@ nd_args <- c("self", "the_template")
 return_types <- list(list('Tensor'))
 call_c_function(
   fun_name = 'resize_as_',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "retain_grad", function() {  args <- list()
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list("void"))
+call_c_function(
+  fun_name = 'retain_grad',
   args = args,
   expected_types = expected_types,
   nd_args = nd_args,
@@ -4123,6 +4268,32 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
+Tensor$set("public", "square", function() {  args <- list()
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'square',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "square_", function() {  args <- list()
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'square_',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
 Tensor$set("public", "squeeze", function(dim) {  args <- rlang::env_get_list(nms = c("dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"))
@@ -4543,6 +4714,32 @@ nd_args <- "self"
 return_types <- list(list('Tensor'))
 call_c_function(
   fun_name = 'triu_',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "true_divide", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"))
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'true_divide',
+  args = args,
+  expected_types = expected_types,
+  nd_args = nd_args,
+  return_types = return_types,
+  fun_type = 'method'
+)})
+Tensor$set("public", "true_divide_", function(other) {  args <- rlang::env_get_list(nms = c("other"))
+args <- append(list(self = self), args)
+expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"))
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+  fun_name = 'true_divide_',
   args = args,
   expected_types = expected_types,
   nd_args = nd_args,

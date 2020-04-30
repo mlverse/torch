@@ -85,6 +85,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("Tensor" %in% expected_types && length(obj) == 0 && is.list(obj))
     return(list(cpp_tensor_undefined(), "Tensor"))
   
+  if ("double" %in% expected_types && is.null(obj))
+    return(list(NULL, "double"))
+  
   stop("Can't convert argument", call.=FALSE)
 }
 
