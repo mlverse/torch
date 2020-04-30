@@ -96,5 +96,5 @@ void lantern_MemoryFormat_delete(void *x)
 
 void lantern_variable_list_delete(void *x)
 {
-  lantern_delete<LanternObject<variable_list>>(x);
+  lantern_delete<LanternObject<torch::autograd::variable_list>>(x);
 }

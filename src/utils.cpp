@@ -35,6 +35,17 @@ void *lantern_double(double x)
   return (void *)new LanternObject<double>(x);
 }
 
+void *lantern_optional_double(double x, bool is_null)
+{
+  c10::optional<double> out;
+  if (is_null)
+    out = NULL;
+  else
+    out = x;
+
+  return (void *)new LanternObject<c10::optional<double>>(out);
+}
+
 void *lantern_bool(bool x)
 {
   return (void *)new LanternObject<bool>(x);

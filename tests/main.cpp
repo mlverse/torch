@@ -55,7 +55,6 @@ int main(int argc, char *argv[])
     // zeros_like
     std::vector<int64_t> x1(2, 2);
     void *t1 = lantern_rand_intarrayref_tensoroptions(lantern_vector_int64_t(&x[0], 2), lantern_TensorOptions());
-    void *t2 = lantern_zeros_like_tensor_memoryformat(t1, nullptr);
 
     std::cout << "Success!!" << std::endl;
     return 0;
