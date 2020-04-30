@@ -157,7 +157,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_saved_variables_names)(void *self);
   LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_dirty)(void *self, void *inputs);
   LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_non_differentiable)(void *self, void *outputs);
-
+  LANTERN_API void *(LANTERN_PTR lantern_optional_double)(double x, bool is_null);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -174,6 +174,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_output_nr_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor__version_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_requires_grad__tensor_bool)(void *self, void *_requires_grad);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_retain_grad_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_rename__tensor_dimnamelist)(void *self, void *names);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_rename_tensor_dimnamelist)(void *self, void *names);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_align_to_tensor_dimnamelist)(void *self, void *names);
@@ -185,6 +186,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_unflatten_tensor_intt_intarrayref_dimnamelist)(void *self, void *dim, void *sizes, void *names);
   LANTERN_API void *(LANTERN_PTR lantern__use_cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt)(void *log_probs, void *targets, void *input_lengths, void *target_lengths, void *blank);
   LANTERN_API void *(LANTERN_PTR lantern__cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool_bool)(void *log_probs, void *targets, void *input_lengths, void *target_lengths, void *blank, void *deterministic, void *zero_infinity);
+  LANTERN_API void *(LANTERN_PTR lantern__use_cudnn_rnn_flatten_weight)();
   LANTERN_API void *(LANTERN_PTR lantern__cudnn_rnn_flatten_weight_tensorlist_intt_intt_intt_intt_intt_bool_bool)(void *weight_arr, void *weight_stride0, void *input_size, void *mode, void *hidden_size, void *num_layers, void *batch_first, void *bidirectional);
   LANTERN_API void *(LANTERN_PTR lantern__cudnn_rnn_tensor_tensorlist_intt_tensor_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor)(void *input, void *weight, void *weight_stride0, void *weight_buf, void *hx, void *cx, void *mode, void *hidden_size, void *num_layers, void *batch_first, void *dropout, void *train, void *bidirectional, void *batch_sizes, void *dropout_state);
   LANTERN_API void *(LANTERN_PTR lantern__cudnn_rnn_backward_tensor_tensorlist_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor_tensor_stdarraybool)(void *input, void *weight, void *weight_stride0, void *weight_buf, void *hx, void *cx, void *output, void *grad_output, void *grad_hy, void *grad_cy, void *mode, void *hidden_size, void *num_layers, void *batch_first, void *dropout, void *train, void *bidirectional, void *batch_sizes, void *dropout_state, void *reserve, void *output_mask);
@@ -215,11 +217,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_angle_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_angle_out_tensor_tensor)(void *out, void *self);
   LANTERN_API void *(LANTERN_PTR lantern_real_tensor)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_real_tensor)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_real_out_tensor_tensor)(void *out, void *self);
   LANTERN_API void *(LANTERN_PTR lantern_imag_tensor)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_imag_tensor)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_imag_out_tensor_tensor)(void *out, void *self);
   LANTERN_API void *(LANTERN_PTR lantern_conj_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_conj_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_conj_out_tensor_tensor)(void *out, void *self);
@@ -295,6 +293,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_bartlett_window_intt_tensoroptions)(void *window_length, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_bartlett_window_intt_bool_tensoroptions)(void *window_length, void *periodic, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)(void *input, void *weight, void *bias, void *running_mean, void *running_var, void *training, void *momentum, void *eps, void *cudnn_enabled);
+  LANTERN_API void *(LANTERN_PTR lantern_quantized_batch_norm_tensor_tensor_tensor_tensor_tensor_double_double_intt)(void *input, void *weight, void *bias, void *mean, void *var, void *eps, void *output_scale, void *output_zero_point);
   LANTERN_API void *(LANTERN_PTR lantern__batch_norm_impl_index_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)(void *input, void *weight, void *bias, void *running_mean, void *running_var, void *training, void *momentum, void *eps, void *cudnn_enabled);
   LANTERN_API void *(LANTERN_PTR lantern__batch_norm_impl_index_backward_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_stdarraybool_tensor)(void *impl_index, void *input, void *grad_output, void *weight, void *running_mean, void *running_var, void *save_mean, void *save_var_transform, void *train, void *eps, void *output_mask, void *reservedSpace);
   LANTERN_API void *(LANTERN_PTR lantern_bernoulli_tensor_generator)(void *self, void *generator);
@@ -305,6 +304,10 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_bernoulli_tensor_double_generator)(void *self, void *p, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_bernoulli_tensor_double_generator)(void *self, void *p, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_bilinear_tensor_tensor_tensor_tensor)(void *input1, void *input2, void *weight, void *bias);
+  LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_tensor_tensor_tensor_intt)(void *self, void *target, void *weight, void *reduction);
+  LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_out_tensor_tensor_tensor_tensor_intt)(void *out, void *self, void *target, void *weight, void *reduction);
+  LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_backward_tensor_tensor_tensor_tensor_intt)(void *grad_output, void *self, void *target, void *weight, void *reduction);
+  LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_backward_out_tensor_tensor_tensor_tensor_tensor_intt)(void *grad_input, void *grad_output, void *self, void *target, void *weight, void *reduction);
   LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_with_logits_tensor_tensor_tensor_tensor_intt)(void *self, void *target, void *weight, void *pos_weight, void *reduction);
   LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_with_logits_backward_tensor_tensor_tensor_tensor_tensor_intt)(void *grad_output, void *self, void *target, void *weight, void *pos_weight, void *reduction);
   LANTERN_API void *(LANTERN_PTR lantern_bincount_tensor_tensor_intt)(void *self, void *weights, void *minlength);
@@ -321,6 +324,14 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_logical_xor_tensor_tensor)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_logical_xor__tensor_tensor)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_logical_xor_out_tensor_tensor_tensor)(void *out, void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_logical_and_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_logical_and_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_logical_and__tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_logical_and_out_tensor_tensor_tensor)(void *out, void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_logical_or_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_logical_or_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_logical_or__tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_logical_or_out_tensor_tensor_tensor)(void *out, void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_blackman_window_intt_tensoroptions)(void *window_length, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_blackman_window_intt_bool_tensoroptions)(void *window_length, void *periodic, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_bmm_tensor_tensor)(void *self, void *mat2);
@@ -389,29 +400,43 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)(void *input, void *weight, void *bias, void *running_mean, void *running_var, void *training, void *exponential_average_factor, void *epsilon);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_tensor)(void *input, void *grad_output, void *weight, void *running_mean, void *running_var, void *save_mean, void *save_var, void *epsilon, void *reserveSpace);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)(void *self, void *weight, void *bias, void *padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic);
+  LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)(void *self, void *weight, void *padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)(void *self_size, void *grad_output, void *weight, void *padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)(void *self, void *grad_output, void *weight, void *padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic, void *output_mask);
-  LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_backward_bias_tensor)(void *grad_output);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)(void *weight_size, void *grad_output, void *self, void *padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_transpose_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)(void *self, void *weight, void *bias, void *padding, void *output_padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic);
+  LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)(void *self, void *weight, void *padding, void *output_padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)(void *self, void *grad_output, void *weight, void *padding, void *output_padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic, void *output_mask);
-  LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_transpose_backward_bias_tensor)(void *grad_output);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_transpose_backward_input_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)(void *grad_output, void *weight, void *padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_convolution_transpose_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)(void *weight_size, void *grad_output, void *self, void *padding, void *stride, void *dilation, void *groups, void *benchmark, void *deterministic);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_grid_sampler_tensor_tensor)(void *self, void *grid);
   LANTERN_API void *(LANTERN_PTR lantern_cudnn_grid_sampler_backward_tensor_tensor_tensor)(void *self, void *grid, void *grad_output);
-  LANTERN_API void *(LANTERN_PTR lantern_cumsum_tensor_intt_scalartype)(void *self, void *dim, void *dtype);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_cumsum_tensor_intt_scalartype)(void *self, void *dim, void *dtype);
-  LANTERN_API void *(LANTERN_PTR lantern_cumsum_out_tensor_tensor_intt_scalartype)(void *out, void *self, void *dim, void *dtype);
-  LANTERN_API void *(LANTERN_PTR lantern_cumsum_tensor_dimname_scalartype)(void *self, void *dim, void *dtype);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_cumsum_tensor_dimname_scalartype)(void *self, void *dim, void *dtype);
-  LANTERN_API void *(LANTERN_PTR lantern_cumsum_out_tensor_tensor_dimname_scalartype)(void *out, void *self, void *dim, void *dtype);
+  LANTERN_API void *(LANTERN_PTR lantern_cummax_tensor_intt)(void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_cummax_tensor_intt)(void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_cummax_out_tensor_tensor_tensor_intt)(void *values, void *indices, void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_cummax_tensor_dimname)(void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_cummax_tensor_dimname)(void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_cummax_out_tensor_tensor_tensor_dimname)(void *values, void *indices, void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern__cummax_helper_tensor_tensor_tensor_intt)(void *self, void *values, void *indices, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_cummin_tensor_intt)(void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_cummin_tensor_intt)(void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_cummin_out_tensor_tensor_tensor_intt)(void *values, void *indices, void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_cummin_tensor_dimname)(void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_cummin_tensor_dimname)(void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_cummin_out_tensor_tensor_tensor_dimname)(void *values, void *indices, void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern__cummin_helper_tensor_tensor_tensor_intt)(void *self, void *values, void *indices, void *dim);
   LANTERN_API void *(LANTERN_PTR lantern_cumprod_tensor_intt_scalartype)(void *self, void *dim, void *dtype);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_cumprod_tensor_intt_scalartype)(void *self, void *dim, void *dtype);
   LANTERN_API void *(LANTERN_PTR lantern_cumprod_out_tensor_tensor_intt_scalartype)(void *out, void *self, void *dim, void *dtype);
   LANTERN_API void *(LANTERN_PTR lantern_cumprod_tensor_dimname_scalartype)(void *self, void *dim, void *dtype);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_cumprod_tensor_dimname_scalartype)(void *self, void *dim, void *dtype);
   LANTERN_API void *(LANTERN_PTR lantern_cumprod_out_tensor_tensor_dimname_scalartype)(void *out, void *self, void *dim, void *dtype);
+  LANTERN_API void *(LANTERN_PTR lantern_cumsum_tensor_intt_scalartype)(void *self, void *dim, void *dtype);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_cumsum_tensor_intt_scalartype)(void *self, void *dim, void *dtype);
+  LANTERN_API void *(LANTERN_PTR lantern_cumsum_out_tensor_tensor_intt_scalartype)(void *out, void *self, void *dim, void *dtype);
+  LANTERN_API void *(LANTERN_PTR lantern_cumsum_tensor_dimname_scalartype)(void *self, void *dim, void *dtype);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_cumsum_tensor_dimname_scalartype)(void *self, void *dim, void *dtype);
+  LANTERN_API void *(LANTERN_PTR lantern_cumsum_out_tensor_tensor_dimname_scalartype)(void *out, void *self, void *dim, void *dtype);
   LANTERN_API void *(LANTERN_PTR lantern_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_intt_bool)(void *log_probs, void *targets, void *input_lengths, void *target_lengths, void *blank, void *reduction, void *zero_infinity);
   LANTERN_API void *(LANTERN_PTR lantern_ctc_loss_tensor_tensor_tensor_tensor_intt_intt_bool)(void *log_probs, void *targets, void *input_lengths, void *target_lengths, void *blank, void *reduction, void *zero_infinity);
   LANTERN_API void *(LANTERN_PTR lantern__ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool)(void *log_probs, void *targets, void *input_lengths, void *target_lengths, void *blank, void *zero_infinity);
@@ -424,6 +449,8 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_diagflat_tensor_intt)(void *self, void *offset);
   LANTERN_API void *(LANTERN_PTR lantern_diagonal_tensor_intt_intt_intt)(void *self, void *offset, void *dim1, void *dim2);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_diagonal_tensor_intt_intt_intt)(void *self, void *offset, void *dim1, void *dim2);
+  LANTERN_API void *(LANTERN_PTR lantern_diagonal_tensor_dimname_dimname_dimname_intt)(void *self, void *outdim, void *dim1, void *dim2, void *offset);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_diagonal_tensor_dimname_dimname_dimname_intt)(void *self, void *outdim, void *dim1, void *dim2, void *offset);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_fill_diagonal__tensor_scalar_bool)(void *self, void *fill_value, void *wrap);
   LANTERN_API void *(LANTERN_PTR lantern_div_tensor_tensor)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_div_tensor_tensor)(void *self, void *other);
@@ -441,8 +468,8 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_embedding_dense_backward_tensor_tensor_intt_intt_bool)(void *grad_output, void *indices, void *num_weights, void *padding_idx, void *scale_grad_by_freq);
   LANTERN_API void *(LANTERN_PTR lantern_embedding_renorm__tensor_tensor_double_double)(void *self, void *indices, void *max_norm, void *norm_type);
   LANTERN_API void *(LANTERN_PTR lantern_embedding_sparse_backward_tensor_tensor_intt_intt_bool)(void *grad, void *indices, void *num_weights, void *padding_idx, void *scale_grad_by_freq);
-  LANTERN_API void *(LANTERN_PTR lantern_embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor)(void *weight, void *indices, void *offsets, void *scale_grad_by_freq, void *mode, void *sparse, void *per_sample_weights);
-  LANTERN_API void *(LANTERN_PTR lantern__embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor)(void *weight, void *indices, void *offsets, void *scale_grad_by_freq, void *mode, void *sparse, void *per_sample_weights);
+  LANTERN_API void *(LANTERN_PTR lantern_embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool)(void *weight, void *indices, void *offsets, void *scale_grad_by_freq, void *mode, void *sparse, void *per_sample_weights, void *include_last_offset);
+  LANTERN_API void *(LANTERN_PTR lantern__embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool)(void *weight, void *indices, void *offsets, void *scale_grad_by_freq, void *mode, void *sparse, void *per_sample_weights, void *include_last_offset);
   LANTERN_API void *(LANTERN_PTR lantern__embedding_bag_backward_tensor_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_bool_tensor)(void *grad, void *indices, void *offsets, void *offset2bag, void *bag_size, void *maximum_indices, void *num_weights, void *scale_grad_by_freq, void *mode, void *sparse, void *per_sample_weights);
   LANTERN_API void *(LANTERN_PTR lantern__embedding_bag_sparse_backward_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor)(void *grad, void *indices, void *offsets, void *offset2bag, void *bag_size, void *num_weights, void *scale_grad_by_freq, void *mode, void *per_sample_weights);
   LANTERN_API void *(LANTERN_PTR lantern__embedding_bag_dense_backward_tensor_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor)(void *grad, void *indices, void *offsets, void *offset2bag, void *bag_size, void *maximum_indices, void *num_weights, void *scale_grad_by_freq, void *mode, void *per_sample_weights);
@@ -456,7 +483,6 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern__empty_per_channel_affine_quantized_intarrayref_tensor_tensor_intt_tensoroptions_memoryformat)(void *size, void *scales, void *zero_points, void *axis, void *options, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_resize__tensor_intarrayref_memoryformat)(void *self, void *size, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_empty_out_tensor_intarrayref_memoryformat)(void *out, void *size, void *memory_format);
-  LANTERN_API void *(LANTERN_PTR lantern_empty_like_tensor_memoryformat)(void *self, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_empty_like_tensor_tensoroptions_memoryformat)(void *self, void *options, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_empty_strided_intarrayref_intarrayref_tensoroptions)(void *size, void *stride, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_erf_tensor)(void *self);
@@ -502,6 +528,13 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_floor__tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_floor__tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_floor_out_tensor_tensor)(void *out, void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_floor_divide_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_floor_divide_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_floor_divide__tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_floor_divide_out_tensor_tensor_tensor)(void *out, void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_floor_divide_tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_floor_divide_tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_floor_divide__tensor_scalar)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_frac_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_frac_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_frac__tensor)(void *self);
@@ -510,7 +543,6 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_full_intarrayref_scalar_dimnamelist_tensoroptions)(void *size, void *fill_value, void *names, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_full_intarrayref_scalar_tensoroptions)(void *size, void *fill_value, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_full_out_tensor_intarrayref_scalar)(void *out, void *size, void *fill_value);
-  LANTERN_API void *(LANTERN_PTR lantern_full_like_tensor_scalar_memoryformat)(void *self, void *fill_value, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_full_like_tensor_scalar_tensoroptions_memoryformat)(void *self, void *fill_value, void *options, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_from_file_stdstring_bool_intt_tensoroptions)(void *filename, void *shared, void *size, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_grid_sampler_tensor_tensor_intt_intt_bool)(void *input, void *grid, void *interpolation_mode, void *padding_mode, void *align_corners);
@@ -729,7 +761,10 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_narrow_copy_tensor_intt_intt_intt)(void *self, void *dim, void *start, void *length);
   LANTERN_API void *(LANTERN_PTR lantern_narrow_tensor_intt_intt_intt)(void *self, void *dim, void *start, void *length);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_narrow_tensor_intt_intt_intt)(void *self, void *dim, void *start, void *length);
+  LANTERN_API void *(LANTERN_PTR lantern_narrow_tensor_intt_tensor_intt)(void *self, void *dim, void *start, void *length);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_narrow_tensor_intt_tensor_intt)(void *self, void *dim, void *start, void *length);
   LANTERN_API void *(LANTERN_PTR lantern_native_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)(void *input, void *weight, void *bias, void *running_mean, void *running_var, void *training, void *momentum, void *eps);
+  LANTERN_API void *(LANTERN_PTR lantern_native_batch_norm_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_double)(void *out, void *save_mean, void *save_invstd, void *input, void *weight, void *bias, void *running_mean, void *running_var, void *training, void *momentum, void *eps);
   LANTERN_API void *(LANTERN_PTR lantern_batch_norm_stats_tensor_double)(void *input, void *eps);
   LANTERN_API void *(LANTERN_PTR lantern_batch_norm_elemt_tensor_tensor_tensor_tensor_tensor_double)(void *input, void *weight, void *bias, void *mean, void *invstd, void *eps);
   LANTERN_API void *(LANTERN_PTR lantern_batch_norm_elemt_out_tensor_tensor_tensor_tensor_tensor_tensor_double)(void *out, void *input, void *weight, void *bias, void *mean, void *invstd, void *eps);
@@ -747,10 +782,10 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_ones_intarrayref_dimnamelist_tensoroptions)(void *size, void *names, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_ones_intarrayref_tensoroptions)(void *size, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_ones_out_tensor_intarrayref)(void *out, void *size);
-  LANTERN_API void *(LANTERN_PTR lantern_ones_like_tensor_memoryformat)(void *self, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_ones_like_tensor_tensoroptions_memoryformat)(void *self, void *options, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_pairwise_distance_tensor_tensor_double_double_bool)(void *x1, void *x2, void *p, void *eps, void *keepdim);
   LANTERN_API void *(LANTERN_PTR lantern_cdist_tensor_tensor_double_intt)(void *x1, void *x2, void *p, void *compute_mode);
+  LANTERN_API void *(LANTERN_PTR lantern__cdist_forward_tensor_tensor_double_intt)(void *x1, void *x2, void *p, void *compute_mode);
   LANTERN_API void *(LANTERN_PTR lantern__cdist_backward_tensor_tensor_tensor_double_tensor)(void *grad, void *x1, void *x2, void *p, void *cdist);
   LANTERN_API void *(LANTERN_PTR lantern_pdist_tensor_double)(void *self, void *p);
   LANTERN_API void *(LANTERN_PTR lantern__pdist_forward_tensor_double)(void *self, void *p);
@@ -771,7 +806,6 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_rand_intarrayref_generator_tensoroptions)(void *size, void *generator, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_rand_out_tensor_intarrayref)(void *out, void *size);
   LANTERN_API void *(LANTERN_PTR lantern_rand_out_tensor_intarrayref_generator)(void *out, void *size, void *generator);
-  LANTERN_API void *(LANTERN_PTR lantern_rand_like_tensor_memoryformat)(void *self, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_rand_like_tensor_tensoroptions_memoryformat)(void *self, void *options, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_randint_intt_intarrayref_tensoroptions)(void *high, void *size, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_randint_intt_intarrayref_generator_tensoroptions)(void *high, void *size, void *generator, void *options);
@@ -781,8 +815,6 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_randint_out_tensor_intt_intarrayref_generator)(void *out, void *high, void *size, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_randint_out_tensor_intt_intt_intarrayref)(void *out, void *low, void *high, void *size);
   LANTERN_API void *(LANTERN_PTR lantern_randint_out_tensor_intt_intt_intarrayref_generator)(void *out, void *low, void *high, void *size, void *generator);
-  LANTERN_API void *(LANTERN_PTR lantern_randint_like_tensor_intt_memoryformat)(void *self, void *high, void *memory_format);
-  LANTERN_API void *(LANTERN_PTR lantern_randint_like_tensor_intt_intt_memoryformat)(void *self, void *low, void *high, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_randint_like_tensor_intt_tensoroptions_memoryformat)(void *self, void *high, void *options, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_randint_like_tensor_intt_intt_tensoroptions_memoryformat)(void *self, void *low, void *high, void *options, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_randn_intarrayref_tensoroptions)(void *size, void *options);
@@ -791,7 +823,6 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_randn_intarrayref_generator_dimnamelist_tensoroptions)(void *size, void *generator, void *names, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_randn_out_tensor_intarrayref)(void *out, void *size);
   LANTERN_API void *(LANTERN_PTR lantern_randn_out_tensor_intarrayref_generator)(void *out, void *size, void *generator);
-  LANTERN_API void *(LANTERN_PTR lantern_randn_like_tensor_memoryformat)(void *self, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_randn_like_tensor_tensoroptions_memoryformat)(void *self, void *options, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_randperm_intt_tensoroptions)(void *n, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_randperm_intt_generator_tensoroptions)(void *n, void *generator, void *options);
@@ -927,6 +958,10 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_sqrt__tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_sqrt__tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_sqrt_out_tensor_tensor)(void *out, void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_square_tensor)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_square_tensor)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_square__tensor)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_square__tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_std_tensor_bool)(void *self, void *unbiased);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_std_tensor_bool)(void *self, void *unbiased);
   LANTERN_API void *(LANTERN_PTR lantern_std_tensor_intarrayref_bool_bool)(void *self, void *dim, void *unbiased, void *keepdim);
@@ -982,6 +1017,13 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_trapz_tensor_double_intt)(void *y, void *dx, void *dim);
   LANTERN_API void *(LANTERN_PTR lantern__trilinear_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt)(void *i1, void *i2, void *i3, void *expand1, void *expand2, void *expand3, void *sumdim, void *unroll_dim);
   LANTERN_API void *(LANTERN_PTR lantern_triplet_margin_loss_tensor_tensor_tensor_double_double_double_bool_intt)(void *anchor, void *positive, void *negative, void *margin, void *p, void *eps, void *swap, void *reduction);
+  LANTERN_API void *(LANTERN_PTR lantern_true_divide_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_true_divide_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_true_divide__tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_true_divide_out_tensor_tensor_tensor)(void *out, void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_true_divide_tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_true_divide_tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_true_divide__tensor_scalar)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_trunc_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_trunc_tensor)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_trunc__tensor)(void *self);
@@ -1022,7 +1064,6 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_zeros_intarrayref_dimnamelist_tensoroptions)(void *size, void *names, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_zeros_intarrayref_tensoroptions)(void *size, void *options);
   LANTERN_API void *(LANTERN_PTR lantern_zeros_out_tensor_intarrayref)(void *out, void *size);
-  LANTERN_API void *(LANTERN_PTR lantern_zeros_like_tensor_memoryformat)(void *self, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern_zeros_like_tensor_tensoroptions_memoryformat)(void *self, void *options, void *memory_format);
   LANTERN_API void *(LANTERN_PTR lantern__standard_gamma_grad_tensor_tensor)(void *self, void *output);
   LANTERN_API void *(LANTERN_PTR lantern__standard_gamma_tensor_generator)(void *self, void *generator);
@@ -1244,12 +1285,28 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_eq__tensor_tensor)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_ne__tensor_scalar)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_ne__tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_bitwise_and_out_tensor_tensor_tensor)(void *out, void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_bitwise_and_out_tensor_tensor_scalar)(void *out, void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_bitwise_and_tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_bitwise_and_tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_bitwise_and_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_bitwise_and_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_bitwise_and__tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_bitwise_and__tensor_tensor)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern___and___tensor_scalar)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor___and___tensor_scalar)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern___and___tensor_tensor)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor___and___tensor_tensor)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor___iand___tensor_scalar)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor___iand___tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_bitwise_or_out_tensor_tensor_tensor)(void *out, void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_bitwise_or_out_tensor_tensor_scalar)(void *out, void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_bitwise_or_tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_bitwise_or_tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_bitwise_or_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_bitwise_or_tensor_tensor)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_bitwise_or__tensor_scalar)(void *self, void *other);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_bitwise_or__tensor_tensor)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern___or___tensor_scalar)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor___or___tensor_scalar)(void *self, void *other);
   LANTERN_API void *(LANTERN_PTR lantern___or___tensor_tensor)(void *self, void *other);
@@ -1306,7 +1363,6 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_random__tensor_intt_generator)(void *self, void *to, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_random__tensor_generator)(void *self, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_uniform__tensor_double_double_generator)(void *self, void *from, void *to, void *generator);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_normal__tensor_double_double_generator)(void *self, void *mean, void *std, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_cauchy__tensor_double_double_generator)(void *self, void *median, void *sigma, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_log_normal__tensor_double_double_generator)(void *self, void *mean, void *std, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_exponential__tensor_double_generator)(void *self, void *lambd, void *generator);
@@ -1531,6 +1587,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_pow_tensor_tensor)(void *self, void *exponent);
   LANTERN_API void *(LANTERN_PTR lantern_pow_out_tensor_scalar_tensor)(void *out, void *self, void *exponent);
   LANTERN_API void *(LANTERN_PTR lantern_pow_scalar_tensor)(void *self, void *exponent);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_normal__tensor_double_double_generator)(void *self, void *mean, void *std, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_normal_out_tensor_tensor_double_generator)(void *out, void *mean, void *std, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_normal_out_tensor_double_tensor_generator)(void *out, void *mean, void *std, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_normal_out_tensor_tensor_tensor_generator)(void *out, void *mean, void *std, void *generator);
@@ -1547,6 +1604,8 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern__cumprod_out_tensor_tensor_intt)(void *out, void *self, void *dim);
   LANTERN_API void *(LANTERN_PTR lantern__var_tensor_bool)(void *self, void *unbiased);
   LANTERN_API void *(LANTERN_PTR lantern__std_tensor_bool)(void *self, void *unbiased);
+  LANTERN_API void *(LANTERN_PTR lantern__amp_non_finite_check_and_unscale__tensor_tensor_tensor)(void *self, void *found_inf, void *inv_scale);
+  LANTERN_API void *(LANTERN_PTR lantern__amp_update_scale_tensor_tensor_tensor_double_double_intt)(void *growth_tracker, void *current_scale, void *found_inf, void *scale_growth_factor, void *scale_backoff_factor, void *growth_interval);
   LANTERN_API void *(LANTERN_PTR lantern__cat_tensorlist_intt)(void *tensors, void *dim);
   LANTERN_API void *(LANTERN_PTR lantern__cat_out_tensor_tensorlist_intt)(void *out, void *tensors, void *dim);
   LANTERN_API void *(LANTERN_PTR lantern__mode_tensor_intt_bool)(void *self, void *dim, void *keepdim);
@@ -1555,10 +1614,6 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern__max_out_tensor_tensor_tensor_intt_bool)(void *max, void *max_indices, void *self, void *dim, void *keepdim);
   LANTERN_API void *(LANTERN_PTR lantern__min_tensor_intt_bool)(void *self, void *dim, void *keepdim);
   LANTERN_API void *(LANTERN_PTR lantern__min_out_tensor_tensor_tensor_intt_bool)(void *min, void *min_indices, void *self, void *dim, void *keepdim);
-  LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_out_tensor_tensor_tensor_tensor_intt)(void *out, void *self, void *target, void *weight, void *reduction);
-  LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_tensor_tensor_tensor_intt)(void *self, void *target, void *weight, void *reduction);
-  LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_backward_out_tensor_tensor_tensor_tensor_tensor_intt)(void *grad_input, void *grad_output, void *self, void *target, void *weight, void *reduction);
-  LANTERN_API void *(LANTERN_PTR lantern_binary_cross_entropy_backward_tensor_tensor_tensor_tensor_intt)(void *grad_output, void *self, void *target, void *weight, void *reduction);
   LANTERN_API void *(LANTERN_PTR lantern_mse_loss_out_tensor_tensor_tensor_intt)(void *out, void *self, void *target, void *reduction);
   LANTERN_API void *(LANTERN_PTR lantern_mse_loss_tensor_tensor_intt)(void *self, void *target, void *reduction);
   LANTERN_API void *(LANTERN_PTR lantern_mse_loss_backward_out_tensor_tensor_tensor_tensor_intt)(void *grad_input, void *grad_output, void *self, void *target, void *reduction);
@@ -1606,6 +1661,10 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_glu_tensor_intt)(void *self, void *dim);
   LANTERN_API void *(LANTERN_PTR lantern_glu_backward_out_tensor_tensor_tensor_intt)(void *grad_input, void *grad_output, void *self, void *dim);
   LANTERN_API void *(LANTERN_PTR lantern_glu_backward_tensor_tensor_intt)(void *grad_output, void *self, void *dim);
+  LANTERN_API void *(LANTERN_PTR lantern_hardsigmoid_out_tensor_tensor)(void *out, void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_hardsigmoid_tensor)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_hardsigmoid__tensor)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_hardsigmoid_backward_tensor_tensor)(void *grad_output, void *self);
   LANTERN_API void *(LANTERN_PTR lantern_hardtanh_out_tensor_tensor_scalar_scalar)(void *out, void *self, void *min_val, void *max_val);
   LANTERN_API void *(LANTERN_PTR lantern_hardtanh_tensor_scalar_scalar)(void *self, void *min_val, void *max_val);
   LANTERN_API void *(LANTERN_PTR lantern_hardtanh_backward_out_tensor_tensor_tensor_scalar_scalar)(void *grad_input, void *grad_output, void *self, void *min_val, void *max_val);
@@ -1613,8 +1672,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_hardtanh__tensor_scalar_scalar)(void *self, void *min_val, void *max_val);
   LANTERN_API void *(LANTERN_PTR lantern_leaky_relu_out_tensor_tensor_scalar)(void *out, void *self, void *negative_slope);
   LANTERN_API void *(LANTERN_PTR lantern_leaky_relu_tensor_scalar)(void *self, void *negative_slope);
-  LANTERN_API void *(LANTERN_PTR lantern_leaky_relu_backward_out_tensor_tensor_tensor_scalar)(void *grad_input, void *grad_output, void *self, void *negative_slope);
-  LANTERN_API void *(LANTERN_PTR lantern_leaky_relu_backward_tensor_tensor_scalar)(void *grad_output, void *self, void *negative_slope);
+  LANTERN_API void *(LANTERN_PTR lantern_leaky_relu_backward_tensor_tensor_scalar_bool)(void *grad_output, void *self, void *negative_slope, void *self_is_result);
   LANTERN_API void *(LANTERN_PTR lantern_leaky_relu__tensor_scalar)(void *self, void *negative_slope);
   LANTERN_API void *(LANTERN_PTR lantern_log_sigmoid_out_tensor_tensor)(void *out, void *self);
   LANTERN_API void *(LANTERN_PTR lantern_log_sigmoid_tensor)(void *self);
@@ -1624,8 +1682,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_log_sigmoid_backward_tensor_tensor_tensor)(void *grad_output, void *self, void *buffer);
   LANTERN_API void *(LANTERN_PTR lantern_rrelu_with_noise_out_tensor_tensor_tensor_scalar_scalar_bool_generator)(void *out, void *self, void *noise, void *lower, void *upper, void *training, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_rrelu_with_noise_tensor_tensor_scalar_scalar_bool_generator)(void *self, void *noise, void *lower, void *upper, void *training, void *generator);
-  LANTERN_API void *(LANTERN_PTR lantern_rrelu_with_noise_backward_out_tensor_tensor_tensor_tensor_scalar_scalar_bool)(void *grad_input, void *grad_output, void *self, void *noise, void *lower, void *upper, void *training);
-  LANTERN_API void *(LANTERN_PTR lantern_rrelu_with_noise_backward_tensor_tensor_tensor_scalar_scalar_bool)(void *grad_output, void *self, void *noise, void *lower, void *upper, void *training);
+  LANTERN_API void *(LANTERN_PTR lantern_rrelu_with_noise_backward_tensor_tensor_tensor_scalar_scalar_bool_bool)(void *grad_output, void *self, void *noise, void *lower, void *upper, void *training, void *self_is_result);
   LANTERN_API void *(LANTERN_PTR lantern_rrelu_with_noise__tensor_tensor_scalar_scalar_bool_generator)(void *self, void *noise, void *lower, void *upper, void *training, void *generator);
   LANTERN_API void *(LANTERN_PTR lantern_softplus_out_tensor_tensor_scalar_scalar)(void *out, void *self, void *beta, void *threshold);
   LANTERN_API void *(LANTERN_PTR lantern_softplus_tensor_scalar_scalar)(void *self, void *beta, void *threshold);
@@ -1704,35 +1761,34 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_replication_pad3d_tensor_intarrayref)(void *self, void *padding);
   LANTERN_API void *(LANTERN_PTR lantern_replication_pad3d_backward_out_tensor_tensor_tensor_intarrayref)(void *grad_input, void *grad_output, void *self, void *padding);
   LANTERN_API void *(LANTERN_PTR lantern_replication_pad3d_backward_tensor_tensor_intarrayref)(void *grad_output, void *self, void *padding);
-  LANTERN_API void *(LANTERN_PTR lantern__test_optional_float_tensor_double)(void *self, void *scale);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_linear1d_out_tensor_tensor_intarrayref_bool)(void *out, void *self, void *output_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_linear1d_tensor_intarrayref_bool)(void *self, void *output_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_linear1d_backward_out_tensor_tensor_intarrayref_intarrayref_bool)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool)(void *grad_output, void *output_size, void *input_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_bilinear2d_out_tensor_tensor_intarrayref_bool)(void *out, void *self, void *output_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_bilinear2d_tensor_intarrayref_bool)(void *self, void *output_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_bilinear2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool)(void *grad_output, void *output_size, void *input_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_bicubic2d_out_tensor_tensor_intarrayref_bool)(void *out, void *self, void *output_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_bicubic2d_tensor_intarrayref_bool)(void *self, void *output_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_bicubic2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool)(void *grad_output, void *output_size, void *input_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_trilinear3d_out_tensor_tensor_intarrayref_bool)(void *out, void *self, void *output_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_trilinear3d_tensor_intarrayref_bool)(void *self, void *output_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_trilinear3d_backward_out_tensor_tensor_intarrayref_intarrayref_bool)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool)(void *grad_output, void *output_size, void *input_size, void *align_corners);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest1d_out_tensor_tensor_intarrayref)(void *out, void *self, void *output_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest1d_tensor_intarrayref)(void *self, void *output_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest1d_backward_out_tensor_tensor_intarrayref_intarrayref)(void *grad_input, void *grad_output, void *output_size, void *input_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref)(void *grad_output, void *output_size, void *input_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest2d_out_tensor_tensor_intarrayref)(void *out, void *self, void *output_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest2d_tensor_intarrayref)(void *self, void *output_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest2d_backward_out_tensor_tensor_intarrayref_intarrayref)(void *grad_input, void *grad_output, void *output_size, void *input_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref)(void *grad_output, void *output_size, void *input_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest3d_out_tensor_tensor_intarrayref)(void *out, void *self, void *output_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest3d_tensor_intarrayref)(void *self, void *output_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest3d_backward_out_tensor_tensor_intarrayref_intarrayref)(void *grad_input, void *grad_output, void *output_size, void *input_size);
-  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref)(void *grad_output, void *output_size, void *input_size);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_linear1d_out_tensor_tensor_intarrayref_bool_double)(void *out, void *self, void *output_size, void *align_corners, void *scales);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_linear1d_tensor_intarrayref_bool_double)(void *self, void *output_size, void *align_corners, void *scales);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_linear1d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *align_corners, void *scales);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_double)(void *grad_output, void *output_size, void *input_size, void *align_corners, void *scales);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_bilinear2d_out_tensor_tensor_intarrayref_bool_double_double)(void *out, void *self, void *output_size, void *align_corners, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_bilinear2d_tensor_intarrayref_bool_double_double)(void *self, void *output_size, void *align_corners, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_bilinear2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *align_corners, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool_double_double)(void *grad_output, void *output_size, void *input_size, void *align_corners, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_bicubic2d_out_tensor_tensor_intarrayref_bool_double_double)(void *out, void *self, void *output_size, void *align_corners, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_bicubic2d_tensor_intarrayref_bool_double_double)(void *self, void *output_size, void *align_corners, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_bicubic2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *align_corners, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool_double_double)(void *grad_output, void *output_size, void *input_size, void *align_corners, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_trilinear3d_out_tensor_tensor_intarrayref_bool_double_double_double)(void *out, void *self, void *output_size, void *align_corners, void *scales_d, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_trilinear3d_tensor_intarrayref_bool_double_double_double)(void *self, void *output_size, void *align_corners, void *scales_d, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_trilinear3d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double_double)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *align_corners, void *scales_d, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool_double_double_double)(void *grad_output, void *output_size, void *input_size, void *align_corners, void *scales_d, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest1d_out_tensor_tensor_intarrayref_double)(void *out, void *self, void *output_size, void *scales);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest1d_tensor_intarrayref_double)(void *self, void *output_size, void *scales);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest1d_backward_out_tensor_tensor_intarrayref_intarrayref_double)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *scales);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref_double)(void *grad_output, void *output_size, void *input_size, void *scales);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest2d_out_tensor_tensor_intarrayref_double_double)(void *out, void *self, void *output_size, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest2d_tensor_intarrayref_double_double)(void *self, void *output_size, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest2d_backward_out_tensor_tensor_intarrayref_intarrayref_double_double)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref_double_double)(void *grad_output, void *output_size, void *input_size, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest3d_out_tensor_tensor_intarrayref_double_double_double)(void *out, void *self, void *output_size, void *scales_d, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest3d_tensor_intarrayref_double_double_double)(void *self, void *output_size, void *scales_d, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest3d_backward_out_tensor_tensor_intarrayref_intarrayref_double_double_double)(void *grad_input, void *grad_output, void *output_size, void *input_size, void *scales_d, void *scales_h, void *scales_w);
+  LANTERN_API void *(LANTERN_PTR lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref_double_double_double)(void *grad_output, void *output_size, void *input_size, void *scales_d, void *scales_h, void *scales_w);
   LANTERN_API void *(LANTERN_PTR lantern_sigmoid_backward_out_tensor_tensor_tensor)(void *grad_input, void *grad_output, void *output);
   LANTERN_API void *(LANTERN_PTR lantern_sigmoid_backward_tensor_tensor)(void *grad_output, void *output);
   LANTERN_API void *(LANTERN_PTR lantern_tanh_backward_out_tensor_tensor_tensor)(void *grad_input, void *grad_output, void *output);
@@ -1776,6 +1832,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_im2col_backward_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)(void *grad_input, void *grad_output, void *input_size, void *kernel_size, void *dilation, void *padding, void *stride);
   LANTERN_API void *(LANTERN_PTR lantern_im2col_backward_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)(void *grad_output, void *input_size, void *kernel_size, void *dilation, void *padding, void *stride);
   LANTERN_API void *(LANTERN_PTR lantern_isfinite_tensor)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_isinf_tensor)(void *self);
   /* Autogen Headers -- End */
 
 #ifdef __cplusplus
@@ -2065,6 +2122,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_AutogradContext_get_saved_variables_names);
   LOAD_SYMBOL(lantern_AutogradContext_mark_dirty);
   LOAD_SYMBOL(lantern_AutogradContext_mark_non_differentiable);
+  LOAD_SYMBOL(lantern_optional_double);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
@@ -2081,6 +2139,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_output_nr_tensor)
   LOAD_SYMBOL(lantern_Tensor__version_tensor)
   LOAD_SYMBOL(lantern_Tensor_requires_grad__tensor_bool)
+  LOAD_SYMBOL(lantern_Tensor_retain_grad_tensor)
   LOAD_SYMBOL(lantern_Tensor_rename__tensor_dimnamelist)
   LOAD_SYMBOL(lantern_Tensor_rename_tensor_dimnamelist)
   LOAD_SYMBOL(lantern_Tensor_align_to_tensor_dimnamelist)
@@ -2092,6 +2151,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_unflatten_tensor_intt_intarrayref_dimnamelist)
   LOAD_SYMBOL(lantern__use_cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt)
   LOAD_SYMBOL(lantern__cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool_bool)
+  LOAD_SYMBOL(lantern__use_cudnn_rnn_flatten_weight)
   LOAD_SYMBOL(lantern__cudnn_rnn_flatten_weight_tensorlist_intt_intt_intt_intt_intt_bool_bool)
   LOAD_SYMBOL(lantern__cudnn_rnn_tensor_tensorlist_intt_tensor_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor)
   LOAD_SYMBOL(lantern__cudnn_rnn_backward_tensor_tensorlist_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor_tensor_stdarraybool)
@@ -2122,11 +2182,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_angle_tensor)
   LOAD_SYMBOL(lantern_angle_out_tensor_tensor)
   LOAD_SYMBOL(lantern_real_tensor)
-  LOAD_SYMBOL(lantern_Tensor_real_tensor)
-  LOAD_SYMBOL(lantern_real_out_tensor_tensor)
   LOAD_SYMBOL(lantern_imag_tensor)
-  LOAD_SYMBOL(lantern_Tensor_imag_tensor)
-  LOAD_SYMBOL(lantern_imag_out_tensor_tensor)
   LOAD_SYMBOL(lantern_conj_tensor)
   LOAD_SYMBOL(lantern_Tensor_conj_tensor)
   LOAD_SYMBOL(lantern_conj_out_tensor_tensor)
@@ -2202,6 +2258,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_bartlett_window_intt_tensoroptions)
   LOAD_SYMBOL(lantern_bartlett_window_intt_bool_tensoroptions)
   LOAD_SYMBOL(lantern_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)
+  LOAD_SYMBOL(lantern_quantized_batch_norm_tensor_tensor_tensor_tensor_tensor_double_double_intt)
   LOAD_SYMBOL(lantern__batch_norm_impl_index_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)
   LOAD_SYMBOL(lantern__batch_norm_impl_index_backward_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_stdarraybool_tensor)
   LOAD_SYMBOL(lantern_bernoulli_tensor_generator)
@@ -2212,6 +2269,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_bernoulli_tensor_double_generator)
   LOAD_SYMBOL(lantern_Tensor_bernoulli_tensor_double_generator)
   LOAD_SYMBOL(lantern_bilinear_tensor_tensor_tensor_tensor)
+  LOAD_SYMBOL(lantern_binary_cross_entropy_tensor_tensor_tensor_intt)
+  LOAD_SYMBOL(lantern_binary_cross_entropy_out_tensor_tensor_tensor_tensor_intt)
+  LOAD_SYMBOL(lantern_binary_cross_entropy_backward_tensor_tensor_tensor_tensor_intt)
+  LOAD_SYMBOL(lantern_binary_cross_entropy_backward_out_tensor_tensor_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(lantern_binary_cross_entropy_with_logits_tensor_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(lantern_binary_cross_entropy_with_logits_backward_tensor_tensor_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(lantern_bincount_tensor_tensor_intt)
@@ -2228,6 +2289,14 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_logical_xor_tensor_tensor)
   LOAD_SYMBOL(lantern_Tensor_logical_xor__tensor_tensor)
   LOAD_SYMBOL(lantern_logical_xor_out_tensor_tensor_tensor)
+  LOAD_SYMBOL(lantern_logical_and_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_logical_and_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_logical_and__tensor_tensor)
+  LOAD_SYMBOL(lantern_logical_and_out_tensor_tensor_tensor)
+  LOAD_SYMBOL(lantern_logical_or_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_logical_or_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_logical_or__tensor_tensor)
+  LOAD_SYMBOL(lantern_logical_or_out_tensor_tensor_tensor)
   LOAD_SYMBOL(lantern_blackman_window_intt_tensoroptions)
   LOAD_SYMBOL(lantern_blackman_window_intt_bool_tensoroptions)
   LOAD_SYMBOL(lantern_bmm_tensor_tensor)
@@ -2296,29 +2365,43 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_cudnn_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)
   LOAD_SYMBOL(lantern_cudnn_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_tensor)
   LOAD_SYMBOL(lantern_cudnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+  LOAD_SYMBOL(lantern_cudnn_convolution_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
   LOAD_SYMBOL(lantern_cudnn_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
   LOAD_SYMBOL(lantern_cudnn_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)
-  LOAD_SYMBOL(lantern_cudnn_convolution_backward_bias_tensor)
   LOAD_SYMBOL(lantern_cudnn_convolution_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
   LOAD_SYMBOL(lantern_cudnn_convolution_transpose_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+  LOAD_SYMBOL(lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)
   LOAD_SYMBOL(lantern_cudnn_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)
-  LOAD_SYMBOL(lantern_cudnn_convolution_transpose_backward_bias_tensor)
   LOAD_SYMBOL(lantern_cudnn_convolution_transpose_backward_input_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
   LOAD_SYMBOL(lantern_cudnn_convolution_transpose_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
   LOAD_SYMBOL(lantern_cudnn_grid_sampler_tensor_tensor)
   LOAD_SYMBOL(lantern_cudnn_grid_sampler_backward_tensor_tensor_tensor)
-  LOAD_SYMBOL(lantern_cumsum_tensor_intt_scalartype)
-  LOAD_SYMBOL(lantern_Tensor_cumsum_tensor_intt_scalartype)
-  LOAD_SYMBOL(lantern_cumsum_out_tensor_tensor_intt_scalartype)
-  LOAD_SYMBOL(lantern_cumsum_tensor_dimname_scalartype)
-  LOAD_SYMBOL(lantern_Tensor_cumsum_tensor_dimname_scalartype)
-  LOAD_SYMBOL(lantern_cumsum_out_tensor_tensor_dimname_scalartype)
+  LOAD_SYMBOL(lantern_cummax_tensor_intt)
+  LOAD_SYMBOL(lantern_Tensor_cummax_tensor_intt)
+  LOAD_SYMBOL(lantern_cummax_out_tensor_tensor_tensor_intt)
+  LOAD_SYMBOL(lantern_cummax_tensor_dimname)
+  LOAD_SYMBOL(lantern_Tensor_cummax_tensor_dimname)
+  LOAD_SYMBOL(lantern_cummax_out_tensor_tensor_tensor_dimname)
+  LOAD_SYMBOL(lantern__cummax_helper_tensor_tensor_tensor_intt)
+  LOAD_SYMBOL(lantern_cummin_tensor_intt)
+  LOAD_SYMBOL(lantern_Tensor_cummin_tensor_intt)
+  LOAD_SYMBOL(lantern_cummin_out_tensor_tensor_tensor_intt)
+  LOAD_SYMBOL(lantern_cummin_tensor_dimname)
+  LOAD_SYMBOL(lantern_Tensor_cummin_tensor_dimname)
+  LOAD_SYMBOL(lantern_cummin_out_tensor_tensor_tensor_dimname)
+  LOAD_SYMBOL(lantern__cummin_helper_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(lantern_cumprod_tensor_intt_scalartype)
   LOAD_SYMBOL(lantern_Tensor_cumprod_tensor_intt_scalartype)
   LOAD_SYMBOL(lantern_cumprod_out_tensor_tensor_intt_scalartype)
   LOAD_SYMBOL(lantern_cumprod_tensor_dimname_scalartype)
   LOAD_SYMBOL(lantern_Tensor_cumprod_tensor_dimname_scalartype)
   LOAD_SYMBOL(lantern_cumprod_out_tensor_tensor_dimname_scalartype)
+  LOAD_SYMBOL(lantern_cumsum_tensor_intt_scalartype)
+  LOAD_SYMBOL(lantern_Tensor_cumsum_tensor_intt_scalartype)
+  LOAD_SYMBOL(lantern_cumsum_out_tensor_tensor_intt_scalartype)
+  LOAD_SYMBOL(lantern_cumsum_tensor_dimname_scalartype)
+  LOAD_SYMBOL(lantern_Tensor_cumsum_tensor_dimname_scalartype)
+  LOAD_SYMBOL(lantern_cumsum_out_tensor_tensor_dimname_scalartype)
   LOAD_SYMBOL(lantern_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_intt_bool)
   LOAD_SYMBOL(lantern_ctc_loss_tensor_tensor_tensor_tensor_intt_intt_bool)
   LOAD_SYMBOL(lantern__ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool)
@@ -2331,6 +2414,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_diagflat_tensor_intt)
   LOAD_SYMBOL(lantern_diagonal_tensor_intt_intt_intt)
   LOAD_SYMBOL(lantern_Tensor_diagonal_tensor_intt_intt_intt)
+  LOAD_SYMBOL(lantern_diagonal_tensor_dimname_dimname_dimname_intt)
+  LOAD_SYMBOL(lantern_Tensor_diagonal_tensor_dimname_dimname_dimname_intt)
   LOAD_SYMBOL(lantern_Tensor_fill_diagonal__tensor_scalar_bool)
   LOAD_SYMBOL(lantern_div_tensor_tensor)
   LOAD_SYMBOL(lantern_Tensor_div_tensor_tensor)
@@ -2348,8 +2433,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_embedding_dense_backward_tensor_tensor_intt_intt_bool)
   LOAD_SYMBOL(lantern_embedding_renorm__tensor_tensor_double_double)
   LOAD_SYMBOL(lantern_embedding_sparse_backward_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(lantern_embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor)
-  LOAD_SYMBOL(lantern__embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor)
+  LOAD_SYMBOL(lantern_embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool)
+  LOAD_SYMBOL(lantern__embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool)
   LOAD_SYMBOL(lantern__embedding_bag_backward_tensor_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_bool_tensor)
   LOAD_SYMBOL(lantern__embedding_bag_sparse_backward_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor)
   LOAD_SYMBOL(lantern__embedding_bag_dense_backward_tensor_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor)
@@ -2363,7 +2448,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern__empty_per_channel_affine_quantized_intarrayref_tensor_tensor_intt_tensoroptions_memoryformat)
   LOAD_SYMBOL(lantern_Tensor_resize__tensor_intarrayref_memoryformat)
   LOAD_SYMBOL(lantern_empty_out_tensor_intarrayref_memoryformat)
-  LOAD_SYMBOL(lantern_empty_like_tensor_memoryformat)
   LOAD_SYMBOL(lantern_empty_like_tensor_tensoroptions_memoryformat)
   LOAD_SYMBOL(lantern_empty_strided_intarrayref_intarrayref_tensoroptions)
   LOAD_SYMBOL(lantern_erf_tensor)
@@ -2409,6 +2493,13 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_floor__tensor)
   LOAD_SYMBOL(lantern_Tensor_floor__tensor)
   LOAD_SYMBOL(lantern_floor_out_tensor_tensor)
+  LOAD_SYMBOL(lantern_floor_divide_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_floor_divide_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_floor_divide__tensor_tensor)
+  LOAD_SYMBOL(lantern_floor_divide_out_tensor_tensor_tensor)
+  LOAD_SYMBOL(lantern_floor_divide_tensor_scalar)
+  LOAD_SYMBOL(lantern_Tensor_floor_divide_tensor_scalar)
+  LOAD_SYMBOL(lantern_Tensor_floor_divide__tensor_scalar)
   LOAD_SYMBOL(lantern_frac_tensor)
   LOAD_SYMBOL(lantern_Tensor_frac_tensor)
   LOAD_SYMBOL(lantern_frac__tensor)
@@ -2417,7 +2508,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_full_intarrayref_scalar_dimnamelist_tensoroptions)
   LOAD_SYMBOL(lantern_full_intarrayref_scalar_tensoroptions)
   LOAD_SYMBOL(lantern_full_out_tensor_intarrayref_scalar)
-  LOAD_SYMBOL(lantern_full_like_tensor_scalar_memoryformat)
   LOAD_SYMBOL(lantern_full_like_tensor_scalar_tensoroptions_memoryformat)
   LOAD_SYMBOL(lantern_from_file_stdstring_bool_intt_tensoroptions)
   LOAD_SYMBOL(lantern_grid_sampler_tensor_tensor_intt_intt_bool)
@@ -2636,7 +2726,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_narrow_copy_tensor_intt_intt_intt)
   LOAD_SYMBOL(lantern_narrow_tensor_intt_intt_intt)
   LOAD_SYMBOL(lantern_Tensor_narrow_tensor_intt_intt_intt)
+  LOAD_SYMBOL(lantern_narrow_tensor_intt_tensor_intt)
+  LOAD_SYMBOL(lantern_Tensor_narrow_tensor_intt_tensor_intt)
   LOAD_SYMBOL(lantern_native_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)
+  LOAD_SYMBOL(lantern_native_batch_norm_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_double)
   LOAD_SYMBOL(lantern_batch_norm_stats_tensor_double)
   LOAD_SYMBOL(lantern_batch_norm_elemt_tensor_tensor_tensor_tensor_tensor_double)
   LOAD_SYMBOL(lantern_batch_norm_elemt_out_tensor_tensor_tensor_tensor_tensor_tensor_double)
@@ -2654,10 +2747,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_ones_intarrayref_dimnamelist_tensoroptions)
   LOAD_SYMBOL(lantern_ones_intarrayref_tensoroptions)
   LOAD_SYMBOL(lantern_ones_out_tensor_intarrayref)
-  LOAD_SYMBOL(lantern_ones_like_tensor_memoryformat)
   LOAD_SYMBOL(lantern_ones_like_tensor_tensoroptions_memoryformat)
   LOAD_SYMBOL(lantern_pairwise_distance_tensor_tensor_double_double_bool)
   LOAD_SYMBOL(lantern_cdist_tensor_tensor_double_intt)
+  LOAD_SYMBOL(lantern__cdist_forward_tensor_tensor_double_intt)
   LOAD_SYMBOL(lantern__cdist_backward_tensor_tensor_tensor_double_tensor)
   LOAD_SYMBOL(lantern_pdist_tensor_double)
   LOAD_SYMBOL(lantern__pdist_forward_tensor_double)
@@ -2678,7 +2771,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_rand_intarrayref_generator_tensoroptions)
   LOAD_SYMBOL(lantern_rand_out_tensor_intarrayref)
   LOAD_SYMBOL(lantern_rand_out_tensor_intarrayref_generator)
-  LOAD_SYMBOL(lantern_rand_like_tensor_memoryformat)
   LOAD_SYMBOL(lantern_rand_like_tensor_tensoroptions_memoryformat)
   LOAD_SYMBOL(lantern_randint_intt_intarrayref_tensoroptions)
   LOAD_SYMBOL(lantern_randint_intt_intarrayref_generator_tensoroptions)
@@ -2688,8 +2780,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_randint_out_tensor_intt_intarrayref_generator)
   LOAD_SYMBOL(lantern_randint_out_tensor_intt_intt_intarrayref)
   LOAD_SYMBOL(lantern_randint_out_tensor_intt_intt_intarrayref_generator)
-  LOAD_SYMBOL(lantern_randint_like_tensor_intt_memoryformat)
-  LOAD_SYMBOL(lantern_randint_like_tensor_intt_intt_memoryformat)
   LOAD_SYMBOL(lantern_randint_like_tensor_intt_tensoroptions_memoryformat)
   LOAD_SYMBOL(lantern_randint_like_tensor_intt_intt_tensoroptions_memoryformat)
   LOAD_SYMBOL(lantern_randn_intarrayref_tensoroptions)
@@ -2698,7 +2788,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_randn_intarrayref_generator_dimnamelist_tensoroptions)
   LOAD_SYMBOL(lantern_randn_out_tensor_intarrayref)
   LOAD_SYMBOL(lantern_randn_out_tensor_intarrayref_generator)
-  LOAD_SYMBOL(lantern_randn_like_tensor_memoryformat)
   LOAD_SYMBOL(lantern_randn_like_tensor_tensoroptions_memoryformat)
   LOAD_SYMBOL(lantern_randperm_intt_tensoroptions)
   LOAD_SYMBOL(lantern_randperm_intt_generator_tensoroptions)
@@ -2834,6 +2923,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_sqrt__tensor)
   LOAD_SYMBOL(lantern_Tensor_sqrt__tensor)
   LOAD_SYMBOL(lantern_sqrt_out_tensor_tensor)
+  LOAD_SYMBOL(lantern_square_tensor)
+  LOAD_SYMBOL(lantern_Tensor_square_tensor)
+  LOAD_SYMBOL(lantern_square__tensor)
+  LOAD_SYMBOL(lantern_Tensor_square__tensor)
   LOAD_SYMBOL(lantern_std_tensor_bool)
   LOAD_SYMBOL(lantern_Tensor_std_tensor_bool)
   LOAD_SYMBOL(lantern_std_tensor_intarrayref_bool_bool)
@@ -2889,6 +2982,13 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_trapz_tensor_double_intt)
   LOAD_SYMBOL(lantern__trilinear_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt)
   LOAD_SYMBOL(lantern_triplet_margin_loss_tensor_tensor_tensor_double_double_double_bool_intt)
+  LOAD_SYMBOL(lantern_true_divide_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_true_divide_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_true_divide__tensor_tensor)
+  LOAD_SYMBOL(lantern_true_divide_out_tensor_tensor_tensor)
+  LOAD_SYMBOL(lantern_true_divide_tensor_scalar)
+  LOAD_SYMBOL(lantern_Tensor_true_divide_tensor_scalar)
+  LOAD_SYMBOL(lantern_Tensor_true_divide__tensor_scalar)
   LOAD_SYMBOL(lantern_trunc_tensor)
   LOAD_SYMBOL(lantern_Tensor_trunc_tensor)
   LOAD_SYMBOL(lantern_trunc__tensor)
@@ -2929,7 +3029,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_zeros_intarrayref_dimnamelist_tensoroptions)
   LOAD_SYMBOL(lantern_zeros_intarrayref_tensoroptions)
   LOAD_SYMBOL(lantern_zeros_out_tensor_intarrayref)
-  LOAD_SYMBOL(lantern_zeros_like_tensor_memoryformat)
   LOAD_SYMBOL(lantern_zeros_like_tensor_tensoroptions_memoryformat)
   LOAD_SYMBOL(lantern__standard_gamma_grad_tensor_tensor)
   LOAD_SYMBOL(lantern__standard_gamma_tensor_generator)
@@ -3151,12 +3250,28 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_eq__tensor_tensor)
   LOAD_SYMBOL(lantern_Tensor_ne__tensor_scalar)
   LOAD_SYMBOL(lantern_Tensor_ne__tensor_tensor)
+  LOAD_SYMBOL(lantern_bitwise_and_out_tensor_tensor_tensor)
+  LOAD_SYMBOL(lantern_bitwise_and_out_tensor_tensor_scalar)
+  LOAD_SYMBOL(lantern_bitwise_and_tensor_scalar)
+  LOAD_SYMBOL(lantern_Tensor_bitwise_and_tensor_scalar)
+  LOAD_SYMBOL(lantern_bitwise_and_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_bitwise_and_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_bitwise_and__tensor_scalar)
+  LOAD_SYMBOL(lantern_Tensor_bitwise_and__tensor_tensor)
   LOAD_SYMBOL(lantern___and___tensor_scalar)
   LOAD_SYMBOL(lantern_Tensor___and___tensor_scalar)
   LOAD_SYMBOL(lantern___and___tensor_tensor)
   LOAD_SYMBOL(lantern_Tensor___and___tensor_tensor)
   LOAD_SYMBOL(lantern_Tensor___iand___tensor_scalar)
   LOAD_SYMBOL(lantern_Tensor___iand___tensor_tensor)
+  LOAD_SYMBOL(lantern_bitwise_or_out_tensor_tensor_tensor)
+  LOAD_SYMBOL(lantern_bitwise_or_out_tensor_tensor_scalar)
+  LOAD_SYMBOL(lantern_bitwise_or_tensor_scalar)
+  LOAD_SYMBOL(lantern_Tensor_bitwise_or_tensor_scalar)
+  LOAD_SYMBOL(lantern_bitwise_or_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_bitwise_or_tensor_tensor)
+  LOAD_SYMBOL(lantern_Tensor_bitwise_or__tensor_scalar)
+  LOAD_SYMBOL(lantern_Tensor_bitwise_or__tensor_tensor)
   LOAD_SYMBOL(lantern___or___tensor_scalar)
   LOAD_SYMBOL(lantern_Tensor___or___tensor_scalar)
   LOAD_SYMBOL(lantern___or___tensor_tensor)
@@ -3213,7 +3328,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_random__tensor_intt_generator)
   LOAD_SYMBOL(lantern_Tensor_random__tensor_generator)
   LOAD_SYMBOL(lantern_Tensor_uniform__tensor_double_double_generator)
-  LOAD_SYMBOL(lantern_Tensor_normal__tensor_double_double_generator)
   LOAD_SYMBOL(lantern_Tensor_cauchy__tensor_double_double_generator)
   LOAD_SYMBOL(lantern_Tensor_log_normal__tensor_double_double_generator)
   LOAD_SYMBOL(lantern_Tensor_exponential__tensor_double_generator)
@@ -3438,6 +3552,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_pow_tensor_tensor)
   LOAD_SYMBOL(lantern_pow_out_tensor_scalar_tensor)
   LOAD_SYMBOL(lantern_pow_scalar_tensor)
+  LOAD_SYMBOL(lantern_Tensor_normal__tensor_double_double_generator)
   LOAD_SYMBOL(lantern_normal_out_tensor_tensor_double_generator)
   LOAD_SYMBOL(lantern_normal_out_tensor_double_tensor_generator)
   LOAD_SYMBOL(lantern_normal_out_tensor_tensor_tensor_generator)
@@ -3454,6 +3569,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern__cumprod_out_tensor_tensor_intt)
   LOAD_SYMBOL(lantern__var_tensor_bool)
   LOAD_SYMBOL(lantern__std_tensor_bool)
+  LOAD_SYMBOL(lantern__amp_non_finite_check_and_unscale__tensor_tensor_tensor)
+  LOAD_SYMBOL(lantern__amp_update_scale_tensor_tensor_tensor_double_double_intt)
   LOAD_SYMBOL(lantern__cat_tensorlist_intt)
   LOAD_SYMBOL(lantern__cat_out_tensor_tensorlist_intt)
   LOAD_SYMBOL(lantern__mode_tensor_intt_bool)
@@ -3462,10 +3579,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern__max_out_tensor_tensor_tensor_intt_bool)
   LOAD_SYMBOL(lantern__min_tensor_intt_bool)
   LOAD_SYMBOL(lantern__min_out_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(lantern_binary_cross_entropy_out_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(lantern_binary_cross_entropy_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(lantern_binary_cross_entropy_backward_out_tensor_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(lantern_binary_cross_entropy_backward_tensor_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(lantern_mse_loss_out_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(lantern_mse_loss_tensor_tensor_intt)
   LOAD_SYMBOL(lantern_mse_loss_backward_out_tensor_tensor_tensor_tensor_intt)
@@ -3513,6 +3626,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_glu_tensor_intt)
   LOAD_SYMBOL(lantern_glu_backward_out_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(lantern_glu_backward_tensor_tensor_intt)
+  LOAD_SYMBOL(lantern_hardsigmoid_out_tensor_tensor)
+  LOAD_SYMBOL(lantern_hardsigmoid_tensor)
+  LOAD_SYMBOL(lantern_hardsigmoid__tensor)
+  LOAD_SYMBOL(lantern_hardsigmoid_backward_tensor_tensor)
   LOAD_SYMBOL(lantern_hardtanh_out_tensor_tensor_scalar_scalar)
   LOAD_SYMBOL(lantern_hardtanh_tensor_scalar_scalar)
   LOAD_SYMBOL(lantern_hardtanh_backward_out_tensor_tensor_tensor_scalar_scalar)
@@ -3520,8 +3637,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_hardtanh__tensor_scalar_scalar)
   LOAD_SYMBOL(lantern_leaky_relu_out_tensor_tensor_scalar)
   LOAD_SYMBOL(lantern_leaky_relu_tensor_scalar)
-  LOAD_SYMBOL(lantern_leaky_relu_backward_out_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(lantern_leaky_relu_backward_tensor_tensor_scalar)
+  LOAD_SYMBOL(lantern_leaky_relu_backward_tensor_tensor_scalar_bool)
   LOAD_SYMBOL(lantern_leaky_relu__tensor_scalar)
   LOAD_SYMBOL(lantern_log_sigmoid_out_tensor_tensor)
   LOAD_SYMBOL(lantern_log_sigmoid_tensor)
@@ -3531,8 +3647,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_log_sigmoid_backward_tensor_tensor_tensor)
   LOAD_SYMBOL(lantern_rrelu_with_noise_out_tensor_tensor_tensor_scalar_scalar_bool_generator)
   LOAD_SYMBOL(lantern_rrelu_with_noise_tensor_tensor_scalar_scalar_bool_generator)
-  LOAD_SYMBOL(lantern_rrelu_with_noise_backward_out_tensor_tensor_tensor_tensor_scalar_scalar_bool)
-  LOAD_SYMBOL(lantern_rrelu_with_noise_backward_tensor_tensor_tensor_scalar_scalar_bool)
+  LOAD_SYMBOL(lantern_rrelu_with_noise_backward_tensor_tensor_tensor_scalar_scalar_bool_bool)
   LOAD_SYMBOL(lantern_rrelu_with_noise__tensor_tensor_scalar_scalar_bool_generator)
   LOAD_SYMBOL(lantern_softplus_out_tensor_tensor_scalar_scalar)
   LOAD_SYMBOL(lantern_softplus_tensor_scalar_scalar)
@@ -3611,35 +3726,34 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_replication_pad3d_tensor_intarrayref)
   LOAD_SYMBOL(lantern_replication_pad3d_backward_out_tensor_tensor_tensor_intarrayref)
   LOAD_SYMBOL(lantern_replication_pad3d_backward_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(lantern__test_optional_float_tensor_double)
-  LOAD_SYMBOL(lantern_upsample_linear1d_out_tensor_tensor_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_linear1d_tensor_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_linear1d_backward_out_tensor_tensor_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_bilinear2d_out_tensor_tensor_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_bilinear2d_tensor_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_bilinear2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_bicubic2d_out_tensor_tensor_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_bicubic2d_tensor_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_bicubic2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_trilinear3d_out_tensor_tensor_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_trilinear3d_tensor_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_trilinear3d_backward_out_tensor_tensor_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(lantern_upsample_nearest1d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest1d_tensor_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest1d_backward_out_tensor_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest2d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest2d_tensor_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest2d_backward_out_tensor_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest3d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest3d_tensor_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest3d_backward_out_tensor_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref)
+  LOAD_SYMBOL(lantern_upsample_linear1d_out_tensor_tensor_intarrayref_bool_double)
+  LOAD_SYMBOL(lantern_upsample_linear1d_tensor_intarrayref_bool_double)
+  LOAD_SYMBOL(lantern_upsample_linear1d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double)
+  LOAD_SYMBOL(lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_double)
+  LOAD_SYMBOL(lantern_upsample_bilinear2d_out_tensor_tensor_intarrayref_bool_double_double)
+  LOAD_SYMBOL(lantern_upsample_bilinear2d_tensor_intarrayref_bool_double_double)
+  LOAD_SYMBOL(lantern_upsample_bilinear2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double)
+  LOAD_SYMBOL(lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool_double_double)
+  LOAD_SYMBOL(lantern_upsample_bicubic2d_out_tensor_tensor_intarrayref_bool_double_double)
+  LOAD_SYMBOL(lantern_upsample_bicubic2d_tensor_intarrayref_bool_double_double)
+  LOAD_SYMBOL(lantern_upsample_bicubic2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double)
+  LOAD_SYMBOL(lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool_double_double)
+  LOAD_SYMBOL(lantern_upsample_trilinear3d_out_tensor_tensor_intarrayref_bool_double_double_double)
+  LOAD_SYMBOL(lantern_upsample_trilinear3d_tensor_intarrayref_bool_double_double_double)
+  LOAD_SYMBOL(lantern_upsample_trilinear3d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double_double)
+  LOAD_SYMBOL(lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool_double_double_double)
+  LOAD_SYMBOL(lantern_upsample_nearest1d_out_tensor_tensor_intarrayref_double)
+  LOAD_SYMBOL(lantern_upsample_nearest1d_tensor_intarrayref_double)
+  LOAD_SYMBOL(lantern_upsample_nearest1d_backward_out_tensor_tensor_intarrayref_intarrayref_double)
+  LOAD_SYMBOL(lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref_double)
+  LOAD_SYMBOL(lantern_upsample_nearest2d_out_tensor_tensor_intarrayref_double_double)
+  LOAD_SYMBOL(lantern_upsample_nearest2d_tensor_intarrayref_double_double)
+  LOAD_SYMBOL(lantern_upsample_nearest2d_backward_out_tensor_tensor_intarrayref_intarrayref_double_double)
+  LOAD_SYMBOL(lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref_double_double)
+  LOAD_SYMBOL(lantern_upsample_nearest3d_out_tensor_tensor_intarrayref_double_double_double)
+  LOAD_SYMBOL(lantern_upsample_nearest3d_tensor_intarrayref_double_double_double)
+  LOAD_SYMBOL(lantern_upsample_nearest3d_backward_out_tensor_tensor_intarrayref_intarrayref_double_double_double)
+  LOAD_SYMBOL(lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref_double_double_double)
   LOAD_SYMBOL(lantern_sigmoid_backward_out_tensor_tensor_tensor)
   LOAD_SYMBOL(lantern_sigmoid_backward_tensor_tensor)
   LOAD_SYMBOL(lantern_tanh_backward_out_tensor_tensor_tensor)
@@ -3683,6 +3797,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_im2col_backward_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
   LOAD_SYMBOL(lantern_im2col_backward_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
   LOAD_SYMBOL(lantern_isfinite_tensor)
+  LOAD_SYMBOL(lantern_isinf_tensor)
   /* Autogen Symbols -- End */
 
   return true;
