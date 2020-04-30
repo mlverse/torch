@@ -11,9 +11,7 @@
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
 
-\item{values}{(Tensor, optional) the output tensor}
-
-\item{indices}{(Tensor, optional) the output index tensor}
+\item{out}{(tuple, optional) the result tuple of two output tensors (values, indices)}
 }
 \description{
 Mode
@@ -21,7 +19,7 @@ Mode
 \note{
 This function is not defined for \code{torch_cuda.Tensor} yet.
 }
-\section{mode(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor) }{
+\section{mode(input, dim=-1, keepdim=False, out=None) -> (Tensor, LongTensor) }{
 
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the mode

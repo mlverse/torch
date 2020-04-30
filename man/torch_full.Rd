@@ -28,6 +28,15 @@ Full
 Returns a tensor of size \code{size} filled with \code{fill_value}.
 }
 
+\section{Warning}{
+
+In PyTorch 1.5 a bool or integral \code{fill_value} will produce a warning if
+\code{dtype} or \code{out} are not set.
+In a future PyTorch release, when \code{dtype} and \code{out} are not set
+a bool \code{fill_value} will return a tensor of torch.bool dtype,
+and an integral \code{fill_value} will return a tensor of torch.long dtype.
+}
+
 \examples{
 
 torch_full(list(2, 3), 3.141592)

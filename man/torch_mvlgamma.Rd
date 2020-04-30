@@ -15,15 +15,15 @@ Mvlgamma
 \section{mvlgamma(input, p) -> Tensor }{
 
 
-Computes the multivariate log-gamma function (\verb{[reference]}_) with dimension \eqn{p} element-wise, given by
+Computes the \verb{multivariate log-gamma function <https://en.wikipedia.org/wiki/Multivariate_gamma_function>}_) with dimension
+\eqn{p} element-wise, given by
 
 \deqn{
     \log(\Gamma_{p}(a)) = C + \displaystyle \sum_{i=1}^{p} \log\left(\Gamma\left(a - \frac{i - 1}{2}\right)\right)
 }
 where \eqn{C = \log(\pi) \times \frac{p (p - 1)}{4}} and \eqn{\Gamma(\cdot)} is the Gamma function.
 
-If any of the elements are less than or equal to \eqn{\frac{p - 1}{2}}, then an error
-is thrown.
+All elements must be greater than \eqn{\frac{p - 1}{2}}, otherwise an error would be thrown.
 }
 
 \examples{

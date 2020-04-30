@@ -15,7 +15,14 @@ Real
 \section{real(input, out=None) -> Tensor }{
 
 
-Computes the element-wise real value of the given \code{input} tensor.
+Returns the real part of the \code{input} tensor. If
+\code{input} is a real (non-complex) tensor, this function just
+returns it.
+}
+
+\section{Warning}{
+
+Not yet implemented for complex tensors.
 
 \deqn{
     \text{out}_{i} = real(\text{input}_{i})

@@ -5,22 +5,22 @@
 \alias{torch_addmv}
 \title{Addmv}
 \arguments{
-\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
-
 \item{input}{(Tensor) vector to be added}
-
-\item{alpha}{(Number, optional) multiplier for \eqn{mat @ vec} (\eqn{\alpha})}
 
 \item{mat}{(Tensor) matrix to be multiplied}
 
 \item{vec}{(Tensor) vector to be multiplied}
+
+\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
+
+\item{alpha}{(Number, optional) multiplier for \eqn{mat @ vec} (\eqn{\alpha})}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addmv
 }
-\section{addmv(beta=1, input, alpha=1, mat, vec, out=None) -> Tensor }{
+\section{addmv(input, mat, vec, *, beta=1, alpha=1, out=None) -> Tensor }{
 
 
 Performs a matrix-vector product of the matrix \code{mat} and

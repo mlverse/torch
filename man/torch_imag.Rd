@@ -15,7 +15,12 @@ Imag
 \section{imag(input, out=None) -> Tensor }{
 
 
-Computes the element-wise imag value of the given \code{input} tensor.
+Returns the imaginary part of the \code{input} tensor.
+}
+
+\section{Warning}{
+
+Not yet implemented.
 
 \deqn{
     \text{out}_{i} = imag(\text{input}_{i})

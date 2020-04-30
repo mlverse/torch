@@ -7,7 +7,7 @@
 \arguments{
 \item{input}{(Tensor) the input tensor.}
 
-\item{mask}{(ByteTensor) the tensor containing the binary mask to index with}
+\item{mask}{(BoolTensor) the tensor containing the binary mask to index with}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

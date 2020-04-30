@@ -11,9 +11,7 @@
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
 
-\item{values}{(Tensor, optional) the output tensor}
-
-\item{indices}{(Tensor, optional) the output index tensor}
+\item{out}{(tuple, optional) the result tuple of two output tensors (max, max_indices)}
 }
 \description{
 Median
@@ -24,7 +22,7 @@ Median
 Returns the median value of all elements in the \code{input} tensor.
 }
 
-\section{median(input, dim=-1, keepdim=False, values=None, indices=None) -> (Tensor, LongTensor) }{
+\section{median(input, dim=-1, keepdim=False, out=None) -> (Tensor, LongTensor) }{
 
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the median

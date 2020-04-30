@@ -18,6 +18,8 @@
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 
 \item{pin_memory}{(bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: \code{False}.}
+
+\item{memory_format}{(\code{torch.memory_format}, optional) the desired memory format of        returned Tensor. Default: \code{torch_contiguous_format}.}
 }
 \description{
 Empty

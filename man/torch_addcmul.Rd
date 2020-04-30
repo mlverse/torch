@@ -7,18 +7,18 @@
 \arguments{
 \item{input}{(Tensor) the tensor to be added}
 
-\item{value}{(Number, optional) multiplier for \eqn{tensor1 .* tensor2}}
-
 \item{tensor1}{(Tensor) the tensor to be multiplied}
 
 \item{tensor2}{(Tensor) the tensor to be multiplied}
+
+\item{value}{(Number, optional) multiplier for \eqn{tensor1 .* tensor2}}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addcmul
 }
-\section{addcmul(input, value=1, tensor1, tensor2, out=None) -> Tensor }{
+\section{addcmul(input, tensor1, tensor2, *, value=1, out=None) -> Tensor }{
 
 
 Performs the element-wise multiplication of \code{tensor1}

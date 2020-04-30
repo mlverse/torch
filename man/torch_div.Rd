@@ -18,16 +18,6 @@ Div
 Divides each element of the input \code{input} with the scalar \code{other} and
 returns a new resulting tensor.
 
-\deqn{
-    \text{out}_i = \frac{\text{input}_i}{\text{other}}
-}
-If the \code{torch_dtype} of \code{input} and \code{other} differ, the
-\code{torch_dtype} of the result tensor is determined following rules
-described in the type promotion documentation . If
-\code{out} is specified, the result must be castable
-to the \code{torch_dtype} of the specified output tensor. Integral division
-by zero leads to undefined behavior.
-
 
 
 Each element of the tensor \code{input} is divided by each element of the tensor
@@ -43,6 +33,24 @@ following rules described in the type promotion documentation
 . If \code{out} is specified, the result must be
 castable  to the \code{torch_dtype} of the
 specified output tensor. Integral division by zero leads to undefined behavior.
+}
+
+\section{Warning}{
+
+Integer division using div is deprecated, and in a future release div will
+perform true division like \code{\link{torch_true_divide}}.
+Use \code{\link{torch_floor_divide}} (// in Python) to perform integer division,
+instead.
+
+\deqn{
+    \text{out}_i = \frac{\text{input}_i}{\text{other}}
+}
+If the \code{torch_dtype} of \code{input} and \code{other} differ, the
+\code{torch_dtype} of the result tensor is determined following rules
+described in the type promotion documentation . If
+\code{out} is specified, the result must be castable
+to the \code{torch_dtype} of the specified output tensor. Integral division
+by zero leads to undefined behavior.
 }
 
 \examples{

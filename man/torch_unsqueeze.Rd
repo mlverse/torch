@@ -8,13 +8,11 @@
 \item{input}{(Tensor) the input tensor.}
 
 \item{dim}{(int) the index at which to insert the singleton dimension}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Unsqueeze
 }
-\section{unsqueeze(input, dim, out=None) -> Tensor }{
+\section{unsqueeze(input, dim) -> Tensor }{
 
 
 Returns a new tensor with a dimension of size one inserted at the

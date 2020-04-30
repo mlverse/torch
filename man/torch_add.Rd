@@ -9,9 +9,9 @@
 
 \item{value}{(Number) the number to be added to each element of \code{input}}
 
-\item{alpha}{(Number) the scalar multiplier for \code{other}}
-
 \item{other}{(Tensor) the second input tensor}
+
+\item{alpha}{(Number) the scalar multiplier for \code{other}}
 }
 \description{
 Add
@@ -29,7 +29,7 @@ If \code{input} is of type FloatTensor or DoubleTensor, \code{other} must be
 a real number, otherwise it should be an integer.
 }
 
-\section{add(input, alpha=1, other, out=None) }{
+\section{add(input, other, *, alpha=1, out=None) }{
 
 
 Each element of the tensor \code{other} is multiplied by the scalar

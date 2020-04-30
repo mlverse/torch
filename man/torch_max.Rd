@@ -5,15 +5,13 @@
 \alias{torch_max}
 \title{Max}
 \arguments{
-\item{{input}}{NA}
+\item{input}{(Tensor) the input tensor.}
 
-\item{{dim}}{NA}
+\item{dim}{(int) the dimension to reduce.}
 
-\item{{keepdim}}{NA \code{False}.}
+\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not. Default: \code{False}.}
 
 \item{out}{(tuple, optional) the result tuple of two output tensors (max, max_indices)}
-
-\item{input}{(Tensor) the input tensor.}
 
 \item{other}{(Tensor) the second input tensor}
 }
@@ -37,6 +35,14 @@ Returns a namedtuple \verb{(values, indices)} where \code{values} is the maximum
 value of each row of the \code{input} tensor in the given dimension
 \code{dim}. And \code{indices} is the index location of each maximum value found
 (argmax).
+}
+
+\section{Warning}{
+
+\code{indices} does not necessarily contain the first occurrence of each
+maximal value found, unless it is unique.
+The exact implementation details are device-specific.
+Do not expect the same result when run on CPU and GPU in general.
 
 If \code{keepdim} is \code{True}, the output tensors are of the same size
 as \code{input} except in the dimension \code{dim} where they are of size 1.

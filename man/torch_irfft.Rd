@@ -30,7 +30,7 @@ mode) to recover it with correct shape.
 
 Therefore, to invert an [`~torch.rfft`], the `normalized` and
 `onesided` arguments should be set identically for [`~torch.irfft`],
-and preferrably a `signal_sizes` is given to avoid size mismatch. See the
+and preferably a `signal_sizes` is given to avoid size mismatch. See the
 example below for a case of size mismatch.
 
 See [`~torch.rfft`] for details on conjugate symmetry.

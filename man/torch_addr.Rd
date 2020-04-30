@@ -5,22 +5,22 @@
 \alias{torch_addr}
 \title{Addr}
 \arguments{
-\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
-
 \item{input}{(Tensor) matrix to be added}
-
-\item{alpha}{(Number, optional) multiplier for \eqn{\text{vec1} \otimes \text{vec2}} (\eqn{\alpha})}
 
 \item{vec1}{(Tensor) the first vector of the outer product}
 
 \item{vec2}{(Tensor) the second vector of the outer product}
+
+\item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
+
+\item{alpha}{(Number, optional) multiplier for \eqn{\text{vec1} \otimes \text{vec2}} (\eqn{\alpha})}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addr
 }
-\section{addr(beta=1, input, alpha=1, vec1, vec2, out=None) -> Tensor }{
+\section{addr(input, vec1, vec2, *, beta=1, alpha=1, out=None) -> Tensor }{
 
 
 Performs the outer-product of vectors \code{vec1} and \code{vec2}
