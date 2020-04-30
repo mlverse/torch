@@ -5,7 +5,7 @@ install_config <- list(
     "cpu" = list(
       "darwin" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.4.0.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.5.0.zip",
           path = "libtorch/lib",
           filter = ".dylib"
         ),
@@ -13,7 +13,7 @@ install_config <- list(
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.4.0.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.5.0.zip",
           path = "libtorch/lib",
           filter = ".dll"
         ),
@@ -21,7 +21,7 @@ install_config <- list(
       ),
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.4.0%2Bcpu.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcpu.zip",
           path = "libtorch/lib"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/Linux.zip", branch)
