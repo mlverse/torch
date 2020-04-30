@@ -115,7 +115,11 @@ cpp_parameter_type <- function(argument) {
     declaration <- "nullable<int64_t>"
   }
 
-  if (argument$dynamic_type == "double") {
+  if (argument$dynamic_type == "double" && argument$type == "c10::optional<double>") {
+    declaration <- "nullable<double>"
+  }
+
+  if (argument$dynamic_type == "double" && !argument$type == "c10::optional<double>") {
     declaration <- "double"
   }
 
@@ -226,8 +230,12 @@ cpp_argument_transform <- function(argument) {
     result <- glue::glue("{argument$name}.get()")
   }
 
-  if (argument$dynamic_type == "double") {
+  if (argument$dynamic_type == "double" && !argument$type == "c10::optional<double>") {
     result <- glue::glue("XPtrTorch(lantern_double({argument$name})).get()")
+  }
+
+  if (argument$dynamic_type == "double" && argument$type == "c10::optional<double>") {
+    result <- glue::glue("XPtrTorch(lantern_optional_double({argument$name}.x, {argument$name}.is_null)).get()")
   }
 
   if (argument$dynamic_type == "std::array<bool,4>") {
@@ -426,7 +434,8 @@ SKIP_R_BINDIND <- c(
   "normal",
   "polygamma",
   "_nnpack_available",
-  "backward"
+  "backward",
+  "_use_cudnn_rnn_flatten_weight"
 )
 
 cpp <- function(path) {
