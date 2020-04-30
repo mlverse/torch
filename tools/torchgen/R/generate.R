@@ -3,7 +3,7 @@
 #' @param path the path to the root odf the torch package.
 #'
 #' @export
-generate <- function(path) {
+generate <- function(path = "../..") {
   cat("Starting code generation ...\n")
   cpp(path)
   r(path)
