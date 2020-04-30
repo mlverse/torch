@@ -63,7 +63,7 @@ Tensor$set("active", "grad", function() {
   Tensor$new(ptr = cpp_tensor_grad(self$ptr))
 })
 
-Tensor$set("public", "requires_grad", function() {
+Tensor$set("active", "requires_grad", function() {
   cpp_tensor_requires_grad(self$ptr)
 })
 
@@ -374,7 +374,7 @@ autograd_function <- function(forward, backward) {
       # passing the variables through cpp_Function_apply
       # other arguments are passed through `.env`
       args <- rlang::list2(!!!rlang::fn_fmls_syms(forward)[-1])
-      is_var <- sapply(args, function(arg) {is_torch_tensor(arg) && arg$requires_grad()})    
+      is_var <- sapply(args, function(arg) {is_torch_tensor(arg) && arg$requires_grad})    
     
       .env$variables <- args[is_var]
       .env$other <- args[!is_var]

@@ -21,16 +21,16 @@ test_that("can autograd with contexts", {
 
 test_that("requires_grad works", {
   x <- torch_tensor(c(1), requires_grad = TRUE)
-  expect_true(x$requires_grad())
+  expect_true(x$requires_grad)
   
   x <- torch_tensor(c(1), requires_grad = FALSE)
-  expect_true(!x$requires_grad())
+  expect_true(!x$requires_grad)
   
   x <- torch_tensor(c(1), requires_grad = FALSE)
   x$requires_grad_(TRUE)
-  expect_true(x$requires_grad())
+  expect_true(x$requires_grad)
   x$requires_grad_(FALSE)
-  expect_true(!x$requires_grad())
+  expect_true(!x$requires_grad)
 })
 
 test_that("register_hook", {
@@ -457,7 +457,7 @@ test_that("can use mark_dirty", {
   y <- torch_tensor(3, requires_grad = TRUE)
   r <- inplace(x, y)
   expect_equal_to_tensor(r[[1]], x)
-  expect_true(r[[1]]$requires_grad())
+  expect_true(r[[1]]$requires_grad)
   r[[1]]$backward()
   expect_equal_to_r(y$grad, 1)
   
@@ -496,7 +496,7 @@ test_that("mark_non_differentiable", {
   x <- torch_tensor(c(-1, 2), requires_grad = TRUE)
   mask <- myfun(x)
   
-  expect_false(mask$requires_grad())
+  expect_false(mask$requires_grad)
   y <- x$masked_fill(mask, 0)
   expect_no_error(y$sum()$backward())
   
@@ -516,8 +516,8 @@ test_that("mark_non_differentiable", {
   
   x <- torch_tensor(1, requires_grad = TRUE)
   r <- myfun(x)
-  expect_false(r[[1]]$requires_grad())
-  expect_true(r[[2]]$requires_grad())
+  expect_false(r[[1]]$requires_grad)
+  expect_true(r[[2]]$requires_grad)
   r[[2]]$backward()
   expect_equal_to_r(x$grad, 1)
 })
