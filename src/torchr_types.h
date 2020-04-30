@@ -165,5 +165,11 @@ public:
     else
       return &(this->x);
   }
+  T get_value () {
+    if (this->is_null)
+      return NULL;
+    else
+      return this->x;
+  }
 };
 
