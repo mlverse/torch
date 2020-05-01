@@ -42,7 +42,7 @@ y <- x$mean()
 
 we find that `y` now has a non-empty `grad_fn` that tells torch how to compute the gradient of `y` with respect to `x`:
 
-```{r, eval=FALSE}
+```{r}
 y$grad_fn
 ```
 
@@ -74,25 +74,25 @@ out <- z$mean()
 
 Starting from `out$grad_fn`, we can follow the graph all back to the leaf nodes:
 
-```{r, eval = FALSE}
+```{r}
 # how to compute the gradient for mean, the last operation executed
 out$grad_fn
 # how to compute the gradient for the multiplication by 3 in z = y$pow(2) * 3
-out.grad_fn.next_functions
+out$grad_fn$next_functions
 # how to compute the gradient for pow in z = y.pow(2) * 3
-out.grad_fn.next_functions[0][0].next_functions
+out$grad_fn$next_functions[[1]]$next_functions
 # how to compute the gradient for the multiplication in y = x * (x + 2)
-out.grad_fn.next_functions[0][0].next_functions[0][0].next_functions
+out$grad_fn$next_functions[[1]]$next_functions[[1]]$next_functions
 # how to compute the gradient for the two branches of y = x * (x + 2),
 # where the left branch is a leaf node (AccumulateGrad for x1)
-out.grad_fn.next_functions[0][0].next_functions[0][0].next_functions[0][0].next_functions
+out$grad_fn$next_functions[[1]]$next_functions[[1]]$next_functions[[1]]$next_functions
 # here we arrive at the other leaf node (AccumulateGrad for x2)
-out.grad_fn.next_functions[0][0].next_functions[0][0].next_functions[0][0].next_functions[1][0].next_functions
+out$grad_fn$next_functions[[1]]$next_functions[[1]]$next_functions[[1]]$next_functions[[2]]$next_functions
 ```
 
 After calling `out$backward()`, all tensors in the graph will have their respective gradients created. Without our calls to `retain_grad` above, `z$grad` and `y$grad` would be empty:
 
-```{r, eval = FALSE}
+```{r}
 out$backward()
 z$grad
 y$grad

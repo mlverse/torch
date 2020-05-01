@@ -526,3 +526,13 @@ test_that("retain_grad is invisible", {
   x <- torch_tensor(1, requires_grad = TRUE)
   expect_invisible(x$retain_grad())
 })
+
+test_that("grad_fn works", {
+  x <- torch_ones(c(2,2), options = list(requires_grad = TRUE))
+  y <- x$mean()
+  expect_output(print(y$grad_fn), "MeanBackward0")
+  k <- y$grad_fn$next_functions
+  expect_length(k, 1)
+  l <- k$next_functions
+  expect_length(l, 0)
+})

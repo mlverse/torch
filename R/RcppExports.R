@@ -69,6 +69,22 @@ cpp_autograd_context_mark_non_differentiable <- function(self, outputs) {
     invisible(.Call('_torchr_cpp_autograd_context_mark_non_differentiable', PACKAGE = 'torchr', self, outputs))
 }
 
+cpp_tensor_grad_fn <- function(self) {
+    .Call('_torchr_cpp_tensor_grad_fn', PACKAGE = 'torchr', self)
+}
+
+cpp_autograd_node_name <- function(self) {
+    .Call('_torchr_cpp_autograd_node_name', PACKAGE = 'torchr', self)
+}
+
+cpp_autograd_node_next_edges <- function(self) {
+    .Call('_torchr_cpp_autograd_node_next_edges', PACKAGE = 'torchr', self)
+}
+
+cpp_autograd_edge_function <- function(self) {
+    .Call('_torchr_cpp_autograd_edge_function', PACKAGE = 'torchr', self)
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torchr_cpp_device_type_to_string', PACKAGE = 'torchr', device)
 }
