@@ -158,7 +158,14 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_dirty)(void *self, void *inputs);
   LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_non_differentiable)(void *self, void *outputs);
   LANTERN_API void *(LANTERN_PTR lantern_optional_double)(double x, bool is_null);
-  LANTERN_API void (LANTERN_PTR test_grad_fn)();
+  LANTERN_API void(LANTERN_PTR test_grad_fn)();
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_grad_fn)(void *self);
+  LANTERN_API const char *(LANTERN_PTR lantern_Node_name)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_Node_next_edges)(void *self);
+  LANTERN_API int64_t(LANTERN_PTR lantern_edge_list_size)(void *self);
+  LANTERN_API void *(LANTERN_PTR lantern_edge_list_at)(void *self, int64_t i);
+  LANTERN_API void *(LANTERN_PTR lantern_Edge_function)(void *self);
+
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2125,6 +2132,12 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_AutogradContext_mark_non_differentiable);
   LOAD_SYMBOL(lantern_optional_double);
   LOAD_SYMBOL(test_grad_fn);
+  LOAD_SYMBOL(lantern_Tensor_grad_fn);
+  LOAD_SYMBOL(lantern_Node_name);
+  LOAD_SYMBOL(lantern_Node_next_edges);
+  LOAD_SYMBOL(lantern_edge_list_size);
+  LOAD_SYMBOL(lantern_edge_list_at);
+  LOAD_SYMBOL(lantern_Edge_function);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
