@@ -165,6 +165,7 @@ extern "C"
   LANTERN_API int64_t(LANTERN_PTR lantern_edge_list_size)(void *self);
   LANTERN_API void *(LANTERN_PTR lantern_edge_list_at)(void *self, int64_t i);
   LANTERN_API void *(LANTERN_PTR lantern_Edge_function)(void *self);
+  LANTERN_API void(LANTERN_PTR lantern_vector_int64_t_delete)(void *x);
 
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
@@ -2138,6 +2139,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_edge_list_size);
   LOAD_SYMBOL(lantern_edge_list_at);
   LOAD_SYMBOL(lantern_Edge_function);
+  LOAD_SYMBOL(lantern_vector_int64_t_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
