@@ -51,6 +51,19 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_autograd_backward
+void cpp_autograd_backward(Rcpp::XPtr<XPtrTorchvariable_list> tensors, Rcpp::XPtr<XPtrTorchvariable_list> grad_tensors, bool retain_graph, bool create_graph);
+RcppExport SEXP _torchr_cpp_autograd_backward(SEXP tensorsSEXP, SEXP grad_tensorsSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type tensors(tensorsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type grad_tensors(grad_tensorsSEXP);
+    Rcpp::traits::input_parameter< bool >::type retain_graph(retain_graphSEXP);
+    Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
+    cpp_autograd_backward(tensors, grad_tensors, retain_graph, create_graph);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_tensor_register_hook
 unsigned int cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f);
 RcppExport SEXP _torchr_cpp_tensor_register_hook(SEXP selfSEXP, SEXP fSEXP) {
@@ -23236,6 +23249,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_tensor_grad", (DL_FUNC) &_torchr_cpp_tensor_grad, 1},
     {"_torchr_cpp_tensor_requires_grad", (DL_FUNC) &_torchr_cpp_tensor_requires_grad, 1},
     {"_torchr_cpp_torch_method_backward_self_Tensor", (DL_FUNC) &_torchr_cpp_torch_method_backward_self_Tensor, 4},
+    {"_torchr_cpp_autograd_backward", (DL_FUNC) &_torchr_cpp_autograd_backward, 4},
     {"_torchr_cpp_tensor_register_hook", (DL_FUNC) &_torchr_cpp_tensor_register_hook, 2},
     {"_torchr_cpp_tensor_remove_hook", (DL_FUNC) &_torchr_cpp_tensor_remove_hook, 2},
     {"_torchr_cpp_Function_lambda", (DL_FUNC) &_torchr_cpp_Function_lambda, 1},

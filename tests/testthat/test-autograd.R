@@ -536,3 +536,18 @@ test_that("grad_fn works", {
   l <- k$next_functions
   expect_length(l, 0)
 })
+
+test_that("autograd_backward", {
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  
+  a <- torch_tensor(1, requires_grad = TRUE)
+  b <- 3 * a
+  
+  on <- torch_ones(c(1))
+  autograd_backward(list(y, b), list(on, on))
+  
+  expect_equal_to_r(x$grad, 2)
+  expect_equal_to_r(a$grad, 3)
+})

@@ -429,3 +429,19 @@ Node <- R6::R6Class(
 Tensor$set("active", "grad_fn", function() {
   Node$new(cpp_tensor_grad_fn(self$ptr))
 })
+
+autograd_backward <- function(tensors, grad_tensors, retain_graph = create_graph, 
+                              create_graph = FALSE) {
+  
+  tensors_ <- torch_variable_list(tensors)
+  grad_tensors_ <- torch_variable_list(grad_tensors)
+  
+  cpp_autograd_backward(
+    tensors_$ptr,
+    grad_tensors_$ptr,
+    retain_graph,
+    create_graph
+  )
+  
+  invisible(NULL)
+}

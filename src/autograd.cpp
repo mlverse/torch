@@ -103,6 +103,61 @@ void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rc
   result.get();
 }
 
+// [[Rcpp::export]]
+void cpp_autograd_backward (Rcpp::XPtr<XPtrTorchvariable_list> tensors, 
+                            Rcpp::XPtr<XPtrTorchvariable_list> grad_tensors,
+                            bool retain_graph,
+                            bool create_graph
+                            )
+{
+  auto tensors_ = tensors->get();
+  auto grad_tensors_ = grad_tensors->get();
+  
+  std::atomic<bool> event_loop_running;
+  event_loop_running = true;
+  
+  std::function<void()> backward ([&](){
+    
+    try
+    {
+      lantern_autograd_backward(tensors_, grad_tensors_, retain_graph, 
+                                create_graph);
+    }
+    catch (...)
+    {
+      event_loop_running = false;
+      n_tasks = n_tasks - 1;
+      throw;
+    }
+    
+    event_loop_running = false;
+    n_tasks = n_tasks - 1;
+  });
+  
+  std::packaged_task<void()> task(backward);
+  std::future<void> result = task.get_future();
+  
+  if (n_tasks == 0)
+  {
+    n_tasks = n_tasks + 1;
+    std::thread td (std::move(task));
+    td.detach();
+  } 
+  else 
+  {
+    n_tasks = n_tasks + 1;
+    
+    {
+      std::lock_guard<std::mutex> lock(tasks_mutex);
+      backward_tasks.push_front(std::move(task));
+    }
+    
+  }
+  
+  event_loop_thread(event_loop_running);
+  result.get();
+}
+  
 void*  rcpp_call_hook (void* x, void* hook) {
   return (*reinterpret_cast<std::function<void*(void*)> *>(hook))(x);
 }
