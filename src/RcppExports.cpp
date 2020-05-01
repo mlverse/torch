@@ -198,6 +198,50 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_tensor_grad_fn
+Rcpp::XPtr<XPtrTorch> cpp_tensor_grad_fn(Rcpp::XPtr<XPtrTorchTensor> self);
+RcppExport SEXP _torchr_cpp_tensor_grad_fn(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_grad_fn(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_autograd_node_name
+std::string cpp_autograd_node_name(Rcpp::XPtr<XPtrTorch> self);
+RcppExport SEXP _torchr_cpp_autograd_node_name(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_autograd_node_name(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_autograd_node_next_edges
+Rcpp::List cpp_autograd_node_next_edges(Rcpp::XPtr<XPtrTorch> self);
+RcppExport SEXP _torchr_cpp_autograd_node_next_edges(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_autograd_node_next_edges(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_autograd_edge_function
+Rcpp::XPtr<XPtrTorch> cpp_autograd_edge_function(Rcpp::XPtr<XPtrTorch> self);
+RcppExport SEXP _torchr_cpp_autograd_edge_function(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_autograd_edge_function(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torchr_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -23205,6 +23249,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_autograd_context_get_saved_variables_names", (DL_FUNC) &_torchr_cpp_autograd_context_get_saved_variables_names, 1},
     {"_torchr_cpp_autograd_context_mark_dirty", (DL_FUNC) &_torchr_cpp_autograd_context_mark_dirty, 2},
     {"_torchr_cpp_autograd_context_mark_non_differentiable", (DL_FUNC) &_torchr_cpp_autograd_context_mark_non_differentiable, 2},
+    {"_torchr_cpp_tensor_grad_fn", (DL_FUNC) &_torchr_cpp_tensor_grad_fn, 1},
+    {"_torchr_cpp_autograd_node_name", (DL_FUNC) &_torchr_cpp_autograd_node_name, 1},
+    {"_torchr_cpp_autograd_node_next_edges", (DL_FUNC) &_torchr_cpp_autograd_node_next_edges, 1},
+    {"_torchr_cpp_autograd_edge_function", (DL_FUNC) &_torchr_cpp_autograd_edge_function, 1},
     {"_torchr_cpp_device_type_to_string", (DL_FUNC) &_torchr_cpp_device_type_to_string, 1},
     {"_torchr_cpp_device_index_to_int", (DL_FUNC) &_torchr_cpp_device_index_to_int, 1},
     {"_torchr_cpp_torch_device", (DL_FUNC) &_torchr_cpp_torch_device, 2},

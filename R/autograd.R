@@ -393,3 +393,39 @@ autograd_function <- function(forward, backward) {
     })
   )
 }
+
+Edge <- R6::R6Class(
+  classname = "autograd_edge",
+  public = list(
+    ptr = NULL,
+    initialize = function(ptr) {
+      self$ptr <- ptr
+    },
+    func = function() {
+      Node$new(cpp_autograd_edge_function(self$ptr))
+    }
+  )
+)
+
+Node <- R6::R6Class(
+  classname = "autograd_node",
+  public = list(
+    ptr = NULL,
+    initialize = function(ptr) {
+      self$ptr <- ptr
+    },
+    print = function() {
+      cat(cpp_autograd_node_name(self$ptr))
+    }
+  ),
+  active = list(
+    next_functions = function() {
+      l <- lapply(cpp_autograd_node_next_edges(self$ptr), Edge$new)
+      lapply(l, function(x) x$func())
+    }
+  )
+)
+
+Tensor$set("active", "grad_fn", function() {
+  Node$new(cpp_tensor_grad_fn(self$ptr))
+})

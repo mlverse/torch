@@ -339,3 +339,36 @@ void cpp_autograd_context_mark_non_differentiable (Rcpp::XPtr<XPtrTorch> self, R
 {
   lantern_AutogradContext_mark_non_differentiable(self->get(), outputs->get());
 }
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorch> cpp_tensor_grad_fn (Rcpp::XPtr<XPtrTorchTensor> self)
+{
+  return make_xptr<XPtrTorch>(lantern_Tensor_grad_fn(self->get()));
+}
+
+// [[Rcpp::export]]
+std::string cpp_autograd_node_name (Rcpp::XPtr<XPtrTorch> self)
+{
+  return std::string(lantern_Node_name(self->get()));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_autograd_node_next_edges (Rcpp::XPtr<XPtrTorch> self)
+{
+  auto next_edges = lantern_Node_next_edges(self->get());
+  
+  Rcpp::List out;
+  auto sze = lantern_edge_list_size(next_edges);
+  for (int i = 0; i < sze; i ++)
+  {
+    out.push_back(make_xptr<XPtrTorch>(lantern_edge_list_at(next_edges, i)));
+  }
+  
+  return out;
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorch> cpp_autograd_edge_function(Rcpp::XPtr<XPtrTorch> self)
+{
+  return make_xptr<XPtrTorch>(lantern_Edge_function(self->get()));
+}

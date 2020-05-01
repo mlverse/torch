@@ -166,17 +166,17 @@ be unstable in when `input` doesn't have distinct singular values. See
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'><a href='torch_det.html'>torch_det</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 1.48488
+#&gt; 0.620604
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_logdet</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.395331
+#&gt; -0.477062
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7179  2.2681  0.0756
-#&gt; -1.2314  1.1398 -0.7334
-#&gt;  0.9736 -0.1641  0.9026
+#&gt;  0.1414  0.0825 -0.4444
+#&gt;  1.7440  0.4832 -0.5275
+#&gt;  0.2934 -0.7254 -0.8240
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 1.48488
+#&gt; 0.620604
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()$<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.395331
+#&gt; -0.477062
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

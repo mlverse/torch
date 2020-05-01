@@ -84,6 +84,13 @@ public:
   }
 };
 
+class XPtrTorchvector_int64_t : public XPtrTorch {
+public:
+  XPtrTorchvector_int64_t (void* x) : XPtrTorch{NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_vector_int64_t_delete));
+  }
+};
+
 class XPtrTorchbool : public XPtrTorch {
 public:
   XPtrTorchbool (void* x) : XPtrTorch{NULL} {
