@@ -30,12 +30,12 @@ XPtrTorchTensor tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std
   XPtrTorchTensorOptions options = lantern_TensorOptions();
   
   if (dtype == "double") {
-    options = lantern_TensorOptions_dtype(options.get(), lantern_Dtype_float64());
+    options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_float64()).get());
   } else if (dtype == "int") {
-    options = lantern_TensorOptions_dtype(options.get(), lantern_Dtype_int32());
+    options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int32()).get());
   }
 
-  options = lantern_TensorOptions_device(options.get(), lantern_Device("cpu", 0, false));
+  options = lantern_TensorOptions_device(options.get(), XPtrTorchDevice(lantern_Device("cpu", 0, false)).get());
 
   XPtrTorchTensor tensor = lantern_from_blob(vec.begin(), &dim[0], dim.size(), options.get());
 
@@ -46,7 +46,7 @@ XPtrTorchTensor tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std
   }
 
   auto reverse_dim = revert_int_seq(dim.size());
-  tensor = lantern_Tensor_permute(tensor.get(), lantern_vector_int64_t(&reverse_dim[0], reverse_dim.size()));
+  tensor = lantern_Tensor_permute(tensor.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(&reverse_dim[0], reverse_dim.size())).get());
   tensor = lantern_Tensor_contiguous(tensor.get());
 
   return tensor;
