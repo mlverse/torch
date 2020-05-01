@@ -29,6 +29,11 @@ void lantern_int64_t_delete(void *x)
   lantern_delete<LanternObject<int64_t>>(x);
 }
 
+void lantern_vector_int64_t_delete(void *x)
+{
+  lantern_delete<LanternObject<std::vector<int64_t>>>(x);
+}
+
 void lantern_TensorList_delete(void *x)
 {
   lantern_delete<LanternObject<std::vector<torch::Tensor>>>(x);
@@ -66,7 +71,7 @@ void lantern_Dtype_delete(void *x)
 
 void lantern_Device_delete(void *x)
 {
-  lantern_delete<LanternObject<torch::Device>>(x);
+  lantern_delete<LanternPtr<torch::Device>>(x);
 }
 
 void lantern_Layout_delete(void *x)
