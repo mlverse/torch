@@ -26,6 +26,6 @@ with_no_grad({
   })
 })
 y$backward()
-x$grad()
+x$grad
 
 }

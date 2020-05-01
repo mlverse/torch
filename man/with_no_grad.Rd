@@ -18,6 +18,6 @@ with_no_grad({
   x$sub_(torch_tensor(as.numeric(1:5)))
 })
 x
-x$grad()
+x$grad
 
 }
