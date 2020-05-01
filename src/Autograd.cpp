@@ -155,9 +155,12 @@ void lantern_AutogradContext_mark_non_differentiable(void *self, void *outputs)
     ctx->mark_non_differentiable(vars);
 }
 
-void lantern_autograd_backward(void *tensors, void *grad_tensors, void *retain_graph, bool create_graph)
+void lantern_autograd_backward(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph)
 {
-    torch::autograd::backward(((LanternObject<torch::autograd::variable_list> *)tensors)->get(), ((LanternObject<torch::autograd::variable_list> *)grad_tensors)->get(), ((LanternObject<bool> *)retain_graph)->get(), ((LanternObject<bool> *)create_graph)->get());
+    torch::autograd::backward(
+        ((LanternObject<torch::autograd::variable_list> *)tensors)->get(),
+        ((LanternObject<torch::autograd::variable_list> *)grad_tensors)->get(),
+        retain_graph, create_graph);
 }
 
 void *lantern_autograd_grad(void *outputs, void *inputs, void *grad_outputs,
