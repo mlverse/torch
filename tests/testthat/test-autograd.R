@@ -550,4 +550,16 @@ test_that("autograd_backward", {
   
   expect_equal_to_r(x$grad, 2)
   expect_equal_to_r(a$grad, 3)
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  
+  a <- torch_tensor(1, requires_grad = TRUE)
+  b <- 3 * a
+  
+  on <- torch_ones(c(1))
+  autograd_backward(list(y, b))
+  
+  expect_equal_to_r(x$grad, 2)
+  expect_equal_to_r(a$grad, 3)
 })
