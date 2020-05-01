@@ -177,5 +177,61 @@ void *lantern_Tensor_grad_fn(void *self)
 {
     auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
     auto f = t.grad_fn().get();
-    return (void *)f;
+    return reinterpret_cast<void *>(f);
+}
+
+const char *lantern_Node_name(void *self)
+{
+    auto x = new std::string(reinterpret_cast<torch::autograd::Node *>(self)->name());
+    return x->c_str();
+}
+
+void *lantern_Node_next_edges(void *self)
+{
+    auto n = reinterpret_cast<torch::autograd::Node *>(self);
+    auto out = new LanternObject<torch::autograd::edge_list>(n->next_edges());
+    return (void *)out;
+}
+
+int64_t lantern_edge_list_size(void *self)
+{
+    auto e = reinterpret_cast<LanternObject<torch::autograd::edge_list> *>(self)->get();
+    return e.size();
+}
+
+void *lantern_edge_list_at(void *self, int64_t i)
+{
+    auto e = reinterpret_cast<LanternObject<torch::autograd::edge_list> *>(self)->get();
+    auto out = new LanternObject<torch::autograd::Edge>(e.at(i));
+    return (void *)out;
+}
+
+void *lantern_Edge_function(void *self)
+{
+    auto e = reinterpret_cast<LanternObject<torch::autograd::Edge> *>(self)->get();
+    auto out = e.function.get();
+    return (void *)out;
+}
+
+void test_grad_fn()
+{
+    auto x = torch::randn({1}, torch::requires_grad());
+    auto y = 2 * x;
+    std::cout << "take 1" << std::endl;
+    std::cout << y.grad_fn()->name() << std::endl;
+    std::cout << "take 2" << std::endl;
+    auto o = (void *)new LanternObject<torch::Tensor>(y);
+    auto s = std::string(lantern_Node_name(lantern_Tensor_grad_fn(o)));
+    std::cout << s << std::endl;
+
+    std::cout << "take 3" << std::endl;
+    auto gf = lantern_Tensor_grad_fn(o);
+    auto el = lantern_Node_next_edges(gf);
+    std::cout << "hi" << std::endl;
+    std::cout << lantern_edge_list_size(el) << std::endl;
+    auto e = lantern_edge_list_at(el, 0);
+    auto f = lantern_Edge_function(e);
+    std::cout << "hey" << std::endl;
+    auto k = std::string(lantern_Node_name(f));
+    std::cout << k << std::endl;
 }
