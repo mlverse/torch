@@ -165,13 +165,13 @@ See `~torch.svd` for details.
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5272 -0.2890  1.3516
-#&gt; -2.5228  1.3911 -1.8030
-#&gt; -0.2665 -0.8950 -1.2302
+#&gt; -0.0709 -0.7861  0.8710
+#&gt; -0.8331 -0.7661  0.4120
+#&gt;  0.0004  0.2805 -0.4633
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'><a href='torch_det.html'>torch_det</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 2.55797
+#&gt; 0.0830784
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'><a href='torch_logdet.html'>torch_logdet</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.939212
+#&gt; -2.48797
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_slogdet</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt; 1
@@ -179,7 +179,7 @@ See `~torch.svd` for details.
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; 0.939212
+#&gt; -2.48797
 #&gt; [ CPUFloatType{} ]
 #&gt; </div></pre>
   </div>
