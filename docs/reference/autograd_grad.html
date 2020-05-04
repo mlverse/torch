@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mm — torch_mm • torchr</title>
+<title>Computes and returns the sum of gradients of outputs w.r.t. the inputs. — autograd_grad • torchr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,10 @@
 
 
 
-<meta property="og:title" content="Mm — torch_mm" />
-<meta property="og:description" content="Mm" />
+<meta property="og:title" content="Computes and returns the sum of gradients of outputs w.r.t. the inputs. — autograd_grad" />
+<meta property="og:description" content="grad_outputs should be a list of length matching output containing the “vector”
+in Jacobian-vector product, usually the pre-computed gradients w.r.t. each of
+the outputs. If an output doesn’t require_grad, then the gradient can be None)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,61 +125,96 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Mm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
-    <div class="hidden name"><code>torch_mm.Rd</code></div>
+    <h1>Computes and returns the sum of gradients of outputs w.r.t. the inputs.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/autograd.R'><code>R/autograd.R</code></a></small>
+    <div class="hidden name"><code>autograd_grad.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Mm</p>
+    <p><code>grad_outputs</code> should be a list of length matching output containing the “vector”
+in Jacobian-vector product, usually the pre-computed gradients w.r.t. each of
+the outputs. If an output doesn’t require_grad, then the gradient can be None).</p>
     </div>
 
+    <pre class="usage"><span class='fu'>autograd_grad</span>(
+  <span class='no'>outputs</span>,
+  <span class='no'>inputs</span>,
+  <span class='kw'>grad_outputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>retain_graph</span> <span class='kw'>=</span> <span class='no'>create_graph</span>,
+  <span class='kw'>create_graph</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>allow_unused</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) the first matrix to be multiplied</p></td>
+      <th>outputs</th>
+      <td><p>(sequence of Tensor) – outputs of the differentiated function.</p></td>
     </tr>
     <tr>
-      <th>mat2</th>
-      <td><p>(Tensor) the second matrix to be multiplied</p></td>
+      <th>inputs</th>
+      <td><p>(sequence of Tensor) – Inputs w.r.t. which the gradient will be
+returned (and not accumulated into .grad).</p></td>
     </tr>
     <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
+      <th>grad_outputs</th>
+      <td><p>(sequence of Tensor) – The “vector” in the Jacobian-vector
+product. Usually gradients w.r.t. each output. None values can be specified for
+scalar Tensors or ones that don’t require grad. If a None value would be acceptable
+for all <code>grad_tensors</code>, then this argument is optional. Default: None.</p></td>
+    </tr>
+    <tr>
+      <th>retain_graph</th>
+      <td><p>(bool, optional) – If <code>FALSE</code>, the graph used to compute the
+grad will be freed. Note that in nearly all cases setting this option to <code>TRUE</code> is
+not needed and often can be worked around in a much more efficient way.
+Defaults to the value of <code>create_graph</code>.</p></td>
+    </tr>
+    <tr>
+      <th>create_graph</th>
+      <td><p>(bool, optional) – If <code>TRUE, graph of the derivative will  be constructed, allowing to compute higher order derivative products.  Default: </code>FALSE`.</p></td>
+    </tr>
+    <tr>
+      <th>allow_unused</th>
+      <td><p>(bool, optional) – If <code>FALSE</code>, specifying inputs that were
+not used when computing outputs (and therefore their grad is always zero) is an
+error. Defaults to <code>FALSE</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function does not broadcast .
-For broadcasting matrix products, see <code><a href='torch_matmul.html'>torch_matmul</a></code>.</p>
-    <h2 class="hasAnchor" id="mm-input-mat-out-none-gt-tensor-"><a class="anchor" href="#mm-input-mat-out-none-gt-tensor-"></a>mm(input, mat2, out=None) -&gt; Tensor </h2>
-
-    
-
-
-<p>Performs a matrix multiplication of the matrices <code>input</code> and <code>mat2</code>.</p>
-<p>If <code>input</code> is a \((n \times m)\) tensor, <code>mat2</code> is a
-\((m \times p)\) tensor, <code>out</code> will be a \((n \times p)\) tensor.</p>
+    <p>If only_inputs is <code>TRUE</code>, the function will only return a list of gradients w.r.t
+the specified inputs. If it’s <code>FALSE</code>, then gradient w.r.t. all remaining leaves
+will still be computed, and will be accumulated into their <code>.grad</code> attribute.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>mat1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='no'>mat2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='fu'>torch_mm</span>(<span class='no'>mat1</span>, <span class='no'>mat2</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.9369  0.5363 -0.0555
-#&gt; -0.1355 -1.8773 -0.0439
-#&gt; [ CPUFloatType{2,3} ]</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'>torch_tensor</span>(<span class='fl'>0.5</span>, <span class='kw'>requires_grad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'>torch_tensor</span>(<span class='fl'>0.9</span>, <span class='kw'>requires_grad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>100</span>))
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span> * <span class='no'>x</span> + <span class='fl'>1</span>
+<span class='no'>loss</span> <span class='kw'>&lt;-</span> (<span class='no'>y</span> - (<span class='no'>w</span>*<span class='no'>x</span> + <span class='no'>b</span>))^<span class='fl'>2</span>
+<span class='no'>loss</span> <span class='kw'>&lt;-</span> <span class='no'>loss</span>$<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>()
+
+<span class='no'>o</span> <span class='kw'>&lt;-</span> <span class='fu'>autograd_grad</span>(<span class='no'>loss</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>w</span>, <span class='no'>b</span>))
+<span class='no'>o</span></div><div class='output co'>#&gt; [[1]]
+#&gt; torch_tensor 
+#&gt; -0.9935
+#&gt; [ CPUFloatType{1} ]
+#&gt; 
+#&gt; [[2]]
+#&gt; torch_tensor 
+#&gt; -1.6206
+#&gt; [ CPUFloatType{1} ]
+#&gt; </div><div class='input'> 
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#mm-input-mat-out-none-gt-tensor-">mm(input, mat2, out=None) -&gt; Tensor </a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

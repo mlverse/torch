@@ -177,22 +177,22 @@ output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1311  0.1718  0.4330
+#&gt;  0.5978  1.3438  0.7438
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_sum</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.735924
+#&gt; 2.6854
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3460 -0.4139 -0.5029  0.1009
-#&gt; -1.1030 -0.4125 -0.5020 -0.3857
-#&gt;  0.0049  0.7011 -0.0004  0.0197
-#&gt;  0.7565  1.8542  0.7159  1.7919
+#&gt; -0.6520 -0.1242 -0.3409 -0.1368
+#&gt; -0.1947 -0.1212 -0.0353 -0.0535
+#&gt; -0.3644  0.0152  0.3857  0.4141
+#&gt; -0.7187 -1.0918 -0.1741 -0.6921
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_sum</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.1619
-#&gt; -2.4031
-#&gt;  0.7253
-#&gt;  5.1184
+#&gt; -1.2540
+#&gt; -0.4048
+#&gt;  0.4506
+#&gt; -2.6767
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>4</span> * <span class='fl'>5</span> * <span class='fl'>6</span>)$<span class='fu'>view</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>))
 <span class='fu'>torch_sum</span>(<span class='no'>b</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>))</div><div class='output co'>#&gt; torch_tensor 
 #&gt;   435

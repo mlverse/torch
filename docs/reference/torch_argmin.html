@@ -171,25 +171,25 @@ documentation for the exact semantics of this method.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2500  0.5053  0.0867 -0.1833
-#&gt;  2.2775  0.0537  0.0561  0.3066
-#&gt;  0.0934 -2.6365 -0.0634 -0.9089
-#&gt; -0.7837  0.7257  0.1763 -0.9322
+#&gt;  0.9786  2.0602  0.4263 -0.5433
+#&gt;  0.2130 -0.1855  0.6301  1.5469
+#&gt; -0.0684  0.6691  0.6748 -0.7379
+#&gt;  0.5635  0.2459 -0.6317 -0.3992
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 9
+#&gt; 11
 #&gt; [ CPULongType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.7106 -0.2330  1.6383 -1.4856
-#&gt; -0.7309 -2.2622 -0.7390  1.2233
-#&gt;  0.4237 -0.2046  0.0109 -1.5245
-#&gt;  0.0150 -0.0851  2.1672 -0.7977
+#&gt;  0.1204  0.0883  0.2562 -2.0324
+#&gt; -0.8407 -0.9381 -2.2005 -0.7091
+#&gt;  1.1540  0.4383 -1.2388  0.1425
+#&gt; -0.2815 -0.1592 -0.8863 -0.3691
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0
-#&gt;  1
 #&gt;  3
-#&gt;  3
+#&gt;  2
+#&gt;  2
+#&gt;  2
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

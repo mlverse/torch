@@ -17,6 +17,10 @@ cpp_torch_method_backward_self_Tensor <- function(self, gradient, keep_graph, cr
     invisible(.Call('_torchr_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torchr', self, gradient, keep_graph, create_graph))
 }
 
+cpp_autograd_backward <- function(tensors, grad_tensors, retain_graph, create_graph) {
+    invisible(.Call('_torchr_cpp_autograd_backward', PACKAGE = 'torchr', tensors, grad_tensors, retain_graph, create_graph))
+}
+
 cpp_tensor_register_hook <- function(self, f) {
     .Call('_torchr_cpp_tensor_register_hook', PACKAGE = 'torchr', self, f)
 }
@@ -83,6 +87,10 @@ cpp_autograd_node_next_edges <- function(self) {
 
 cpp_autograd_edge_function <- function(self) {
     .Call('_torchr_cpp_autograd_edge_function', PACKAGE = 'torchr', self)
+}
+
+cpp_autograd_grad <- function(outputs, inputs, grad_outputs, retain_graph, create_graph, allow_unused) {
+    .Call('_torchr_cpp_autograd_grad', PACKAGE = 'torchr', outputs, inputs, grad_outputs, retain_graph, create_graph, allow_unused)
 }
 
 cpp_device_type_to_string <- function(device) {

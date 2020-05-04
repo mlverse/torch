@@ -429,3 +429,149 @@ Node <- R6::R6Class(
 Tensor$set("active", "grad_fn", function() {
   Node$new(cpp_tensor_grad_fn(self$ptr))
 })
+
+#' Computes the sum of gradients of given tensors w.r.t. graph leaves.
+#' 
+#' The graph is differentiated using the chain rule. If any of tensors are 
+#' non-scalar (i.e. their data has more than one element) and require gradient, 
+#' then the Jacobian-vector product would be computed, in this case the function 
+#' additionally requires specifying `grad_tensors`. It should be a sequence of 
+#' matching length, that contains the “vector” in the Jacobian-vector product, 
+#' usually the gradient of the differentiated function w.r.t. corresponding 
+#' tensors (None is an acceptable value for all tensors that don’t need gradient 
+#' tensors).
+#' 
+#' This function accumulates gradients in the leaves - you might need to zero 
+#' them before calling it.
+#' 
+#' @param tensors (list of Tensor) – Tensors of which the derivative will 
+#' be computed.
+#' @param grad_tensors (list of (Tensor or `NULL)) – The “vector” in the 
+#' Jacobian-vector product, usually gradients w.r.t. each element of 
+#' corresponding tensors. `NULL` values can be specified for scalar Tensors or 
+#' ones that don’t require grad. If a `NULL` value would be acceptable for all 
+#' grad_tensors, then this argument is optional.
+#' @param retain_graph (bool, optional) – If `FALSE`, the graph used to compute 
+#' the grad will be freed. Note that in nearly all cases setting this option to 
+#' `TRUE` is not needed and often can be worked around in a much more efficient 
+#' way. Defaults to the value of `create_graph`.
+#' @param create_graph (bool, optional) – If `TRUE`, graph of the derivative will 
+#' be constructed, allowing to compute higher order derivative products. 
+#' Defaults to `FALSE`.
+#' 
+#' @examples
+#' x <- torch_tensor(1, requires_grad = TRUE)
+#' y <- 2 * x
+#' 
+#' a <- torch_tensor(1, requires_grad = TRUE)
+#' b <- 3 * a
+#' 
+#' autograd_backward(list(y, b))
+#' 
+#' @export
+autograd_backward <- function(tensors, grad_tensors = NULL, retain_graph = create_graph, 
+                              create_graph = FALSE) {
+  
+  if (!is.list(tensors)) 
+    tensors <- list(tensors)
+  
+  tensors_ <- torch_variable_list(tensors)
+  
+  if (is.null(grad_tensors))
+    grad_tensors <- lapply(seq_along(tensors), function(x) NULL)
+  else if (!is.list(grad_tensors))
+    grad_tensors <- list(grad_tensors)
+  
+  null <- sapply(grad_tensors, is.null)
+  if (length(null) > 0) {
+    grad_tensors[null] <- lapply(
+      seq_along(null), 
+      function(x) Tensor$new(ptr = cpp_tensor_undefined())
+    )  
+  }
+    
+  grad_tensors_ <- torch_variable_list(grad_tensors)
+  
+  cpp_autograd_backward(
+    tensors_$ptr,
+    grad_tensors_$ptr,
+    retain_graph,
+    create_graph
+  )
+  
+  invisible(NULL)
+}
+
+#' Computes and returns the sum of gradients of outputs w.r.t. the inputs.
+#' 
+#' `grad_outputs` should be a list of length matching output containing the “vector” 
+#' in Jacobian-vector product, usually the pre-computed gradients w.r.t. each of 
+#' the outputs. If an output doesn’t require_grad, then the gradient can be None).
+#' 
+#' If only_inputs is `TRUE`, the function will only return a list of gradients w.r.t 
+#' the specified inputs. If it’s `FALSE`, then gradient w.r.t. all remaining leaves 
+#' will still be computed, and will be accumulated into their `.grad` attribute.
+#' @param outputs (sequence of Tensor) – outputs of the differentiated function.
+#' @param inputs (sequence of Tensor) – Inputs w.r.t. which the gradient will be 
+#' returned (and not accumulated into .grad).
+#' @param grad_outputs (sequence of Tensor) – The “vector” in the Jacobian-vector 
+#' product. Usually gradients w.r.t. each output. None values can be specified for 
+#' scalar Tensors or ones that don’t require grad. If a None value would be acceptable 
+#' for all `grad_tensors`, then this argument is optional. Default: None.
+#' @param retain_graph (bool, optional) – If `FALSE`, the graph used to compute the 
+#' grad will be freed. Note that in nearly all cases setting this option to `TRUE` is 
+#' not needed and often can be worked around in a much more efficient way. 
+#' Defaults to the value of `create_graph`.
+#' @param create_graph (bool, optional) – If `TRUE, graph of the derivative will 
+#' be constructed, allowing to compute higher order derivative products. 
+#' Default: `FALSE`.
+#' @param allow_unused (bool, optional) – If `FALSE`, specifying inputs that were 
+#' not used when computing outputs (and therefore their grad is always zero) is an 
+#' error. Defaults to `FALSE`
+#' 
+#' @examples 
+#' w <- torch_tensor(0.5, requires_grad = TRUE)
+#' b <- torch_tensor(0.9, requires_grad = TRUE)
+#' x <- torch_tensor(runif(100))
+#' y <- 2 * x + 1
+#' loss <- (y - (w*x + b))^2
+#' loss <- loss$mean()
+#' 
+#' o <- autograd_grad(loss, list(w, b))
+#' o
+#'  
+#' @export
+autograd_grad <- function(outputs, inputs, grad_outputs = NULL, retain_graph = create_graph,
+                          create_graph = FALSE, allow_unused = FALSE) {
+  
+  if (!is.list(outputs))
+    outputs <- list(outputs)
+  
+  outputs_ <- torch_variable_list(outputs)
+  
+  if (!is.list(inputs))
+    inputs <- list(inputs)
+  
+  inputs_ <- torch_variable_list(inputs)
+  
+  if (is.null(grad_outputs)) {
+    grad_outputs <- lapply(
+      seq_along(outputs), 
+      function(x) Tensor$new(ptr = cpp_tensor_undefined())
+    )
+  } else if (!is.list(grad_outputs)) {
+    grad_outputs <- list(grad_outputs)
+  }
+    
+  grad_outputs_ <- torch_variable_list(grad_outputs)
+  
+  out <- cpp_autograd_grad(
+    outputs_$ptr,
+    inputs_$ptr,
+    grad_outputs_$ptr,
+    retain_graph, 
+    create_graph, 
+    allow_unused
+  )
+  variable_list$new(ptr = out)$to_r()
+}

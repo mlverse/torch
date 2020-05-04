@@ -174,30 +174,30 @@ sorted values and <code>indices</code> are the indices of the elements in the or
 <span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_sort</span>(<span class='no'>x</span>)
 <span class='no'>out</span></div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -0.7591 -0.1858  0.0002  1.0168
-#&gt; -1.3868 -0.2655  0.8058  0.8205
-#&gt; -1.4017 -0.8699 -0.4972 -0.2281
+#&gt; -0.6483 -0.3043 -0.1696  0.3501
+#&gt; -2.7351 -1.9478  0.0757  0.6770
+#&gt; -0.9043  0.4404  0.5332  0.9844
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  0  1  2  3
-#&gt;  3  2  0  1
-#&gt;  1  3  2  0
+#&gt;  2  1  3  0
+#&gt;  2  0  3  1
+#&gt;  3  2  1  0
 #&gt; [ CPULongType{3,4} ]
 #&gt; </div><div class='input'><span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_sort</span>(<span class='no'>x</span>, <span class='fl'>0</span>)
 <span class='no'>out</span></div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -0.7591 -1.4017 -0.4972 -1.3868
-#&gt; -0.2281 -0.1858 -0.2655 -0.8699
-#&gt;  0.8058  0.8205  0.0002  1.0168
+#&gt; -1.9478 -0.3043 -2.7351 -0.9043
+#&gt;  0.3501  0.5332 -0.6483 -0.1696
+#&gt;  0.9844  0.6770  0.4404  0.0757
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  0  2  2  1
-#&gt;  2  0  1  2
-#&gt;  1  1  0  0
+#&gt;  1  0  1  2
+#&gt;  0  2  0  0
+#&gt;  2  1  2  1
 #&gt; [ CPULongType{3,4} ]
 #&gt; </div></pre>
   </div>

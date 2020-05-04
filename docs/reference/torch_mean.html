@@ -177,27 +177,27 @@ output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3252 -2.6562  0.6116
+#&gt;  0.1785  0.3252 -0.4104
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_mean</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.573125
+#&gt; 0.0311037
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7880 -1.5067 -0.8173 -1.7964
-#&gt;  0.1114 -1.1205 -0.4235 -1.2161
-#&gt; -1.2751 -1.2902 -0.8343 -0.3839
-#&gt; -1.4565  1.5875 -0.1526  0.6014
+#&gt;  1.0697  0.9846 -1.2079 -0.5671
+#&gt;  0.1920 -0.7200 -0.9019 -0.7474
+#&gt; -0.1915  0.7986 -0.3791 -0.3507
+#&gt;  1.3496 -0.9046  1.4309  1.7471
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_mean</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8331
-#&gt; -0.6622
-#&gt; -0.9459
-#&gt;  0.1449
+#&gt;  0.0698
+#&gt; -0.5443
+#&gt; -0.0306
+#&gt;  0.9058
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_mean</span>(<span class='no'>a</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8331
-#&gt; -0.6622
-#&gt; -0.9459
-#&gt;  0.1449
+#&gt;  0.0698
+#&gt; -0.5443
+#&gt; -0.0306
+#&gt;  0.9058
 #&gt; [ CPUFloatType{4,1} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

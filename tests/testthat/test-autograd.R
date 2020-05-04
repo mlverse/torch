@@ -536,3 +536,204 @@ test_that("grad_fn works", {
   l <- k$next_functions
   expect_length(l, 0)
 })
+
+test_that("autograd_backward", {
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  
+  a <- torch_tensor(1, requires_grad = TRUE)
+  b <- 3 * a
+  
+  on <- torch_ones(c(1))
+  autograd_backward(list(y, b), list(on, on))
+  
+  expect_equal_to_r(x$grad, 2)
+  expect_equal_to_r(a$grad, 3)
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  
+  a <- torch_tensor(1, requires_grad = TRUE)
+  b <- 3 * a
+  
+  on <- torch_ones(c(1))
+  autograd_backward(list(y, b))
+  
+  expect_equal_to_r(x$grad, 2)
+  expect_equal_to_r(a$grad, 3)
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  
+  a <- torch_tensor(1, requires_grad = TRUE)
+  b <- 3 * a
+  
+  on <- torch_ones(c(1))
+  autograd_backward(list(y, b), list(NULL, on))
+  
+  expect_equal_to_r(x$grad, 2)
+  expect_equal_to_r(a$grad, 3)
+})
+
+test_that("autograd_backward works for single tensors", {
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  
+  autograd_backward(y)
+  expect_equal_to_r(x$grad, 2)
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  on <- torch_tensor(1)
+  y <- 2 * x
+  
+  autograd_backward(y, on)
+  expect_equal_to_r(x$grad, 2)
+})
+
+test_that("autograd_grad works", {
+  
+  x <- torch_randn(c(2, 2), options = list(requires_grad=TRUE))
+  y <- torch_randn(c(2, 2), options = list(requires_grad=TRUE))
+  z <- x^2 + y * x + y^2
+  z$backward(torch_ones(c(2, 2)), create_graph=TRUE)
+  
+  x_grad <- 2 * x + y
+  y_grad <- x + 2 * y
+  expect_equal_to_tensor(x$grad, x_grad)
+  expect_equal_to_tensor(y$grad, y_grad)
+  
+  grad_sum <- 2 * x$grad + y$grad
+  x_hv <- autograd_grad(
+    outputs = grad_sum,
+    grad_outputs = torch_ones(c(2,2)),
+    inputs = x,
+    create_graph = TRUE
+  )
+  
+  expected_x_hv = torch_ones(c(2, 2)) * 5
+  expected_y_hv = torch_ones(c(2, 2)) * 4
+  
+  expect_equal_to_tensor(x_hv[[1]], expected_x_hv)
+  expect_equal_to_tensor(x$grad, x_grad)
+  expect_equal_to_tensor(y$grad, y_grad)
+})
+
+test_that("autograd_grad with non-leafs", {
+  
+  x_init <- torch_randn(c(2,2), options=list(requires_grad = TRUE))
+  x <- x_init
+  y <- torch_randn(c(2,2), options=list(requires_grad = TRUE))
+  grad_output <- torch_ones(c(2, 2))
+  
+  fn <- function(x) {
+    x^2 + y * x + y^2
+  }
+  
+  for (i in 1:5) {
+    o <- autograd_grad(
+      fn(x),
+      x,
+      grad_output = grad_output,
+      create_graph = TRUE
+    )
+  }
+  
+  
+  grad_x_expected <- 2 * x + y
+  expect_undefined_tensor(x$grad)
+  expect_undefined_tensor(y$grad)
+  expect_equal_to_tensor(o[[1]], grad_x_expected)
+  
+  x <- x + 0.05 * o[[1]]
+  val_init <- fn(x_init)$sum()
+  val_final <- fn(x)$sum()
+  expect_true(as_array(val_final > val_init))
+  
+  x$backward(grad_output) 
+  expect_equal_to_tensor(y$grad, (5/100) * torch_ones(c(2,2)))
+  expect_equal_to_tensor(x_init$grad, 1.1 * torch_ones(c(2,2)))
+})
+
+test_that("autograd_grad non leaf many outputs", {
+  
+  # This checks an edge case for function callbacks
+  # We want to capture two grads of a function, but can only
+  # register a single callback.
+  x <- torch_randn(c(4, 2), options = list(requires_grad=TRUE))
+  o <- x$chunk(2)
+  a <- o[[1]]
+  b <- o[[2]]
+  
+  hook <- function(...) {
+    hook_called <<- TRUE
+  }
+  
+  hook_called <- FALSE
+  x$register_hook(hook)
+  
+  go <- torch_randn(c(2, 2))
+  o <- autograd_grad(
+    a + 2 * b, 
+    list(a, b), 
+    grad_outputs=go, 
+    create_graph=TRUE)
+  
+  expect_equal_to_tensor(o[[1]], go)
+  expect_equal_to_tensor(o[[2]], go * 2)
+  expect_false(hook_called)
+  expect_undefined_tensor(x$grad)
+})
+
+test_that("autograd_grad retain grad", {
+  
+  w <- torch_tensor(0.5, requires_grad = TRUE)
+  b <- torch_tensor(0.9, requires_grad = TRUE)
+  x <- torch_tensor(runif(100))
+  y <- 2 * x + 1
+  loss <- (y - (w*x + b))^2
+  loss <- loss$mean()
+  
+  out <- autograd_grad(loss, list(w, b))
+  expect_length(out, 2)
+  skip_on_os("windows")
+  expect_error(autograd_grad(loss, list(w, b)), regexp = "graph a second time")
+  
+  w <- torch_tensor(0.5, requires_grad = TRUE)
+  b <- torch_tensor(0.9, requires_grad = TRUE)
+  x <- torch_tensor(runif(100))
+  y <- 2 * x + 1
+  loss <- (y - (w*x + b))^2
+  loss <- loss$mean()
+  
+  out <- autograd_grad(loss, list(w, b), retain_graph = TRUE)
+  expect_length(out, 2)
+  out <- autograd_grad(loss, list(w, b))
+  expect_length(out, 2)
+})
+
+test_that("autograd_grad allow unused", {
+  
+  w <- torch_tensor(0.5, requires_grad = TRUE)
+  b <- torch_tensor(0.9, requires_grad = TRUE)
+  x <- torch_tensor(runif(100))
+  y <- 2 * x + 1
+  loss <- (y - (w*x))^2
+  loss <- loss$mean()
+  skip_on_os("windows")
+  expect_error(
+    autograd_grad(loss, list(w, b)),
+    regexp = "not have been used in the graph"
+  )
+  
+  w <- torch_tensor(0.5, requires_grad = TRUE)
+  b <- torch_tensor(0.9, requires_grad = TRUE)
+  x <- torch_tensor(runif(100))
+  y <- 2 * x + 1
+  loss <- (y - (w*x))^2
+  loss <- loss$mean()
+  
+  out <- autograd_grad(loss, list(w, b), allow_unused = TRUE)
+  expect_undefined_tensor(out[[2]])
+  expect_length(out, 2)
+})
