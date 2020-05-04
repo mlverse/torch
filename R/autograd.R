@@ -433,13 +433,23 @@ Tensor$set("active", "grad_fn", function() {
 autograd_backward <- function(tensors, grad_tensors = NULL, retain_graph = create_graph, 
                               create_graph = FALSE) {
   
-  if (!is.list(tensors)) tensors <- list(tensors)
+  if (!is.list(tensors)) 
+    tensors <- list(tensors)
+  
   tensors_ <- torch_variable_list(tensors)
   
   if (is.null(grad_tensors))
-    grad_tensors <- list()
+    grad_tensors <- lapply(seq_along(tensors), function(x) NULL)
   else if (!is.list(grad_tensors))
     grad_tensors <- list(grad_tensors)
+  
+  null <- sapply(grad_tensors, is.null)
+  if (length(null) > 0) {
+    grad_tensors[null] <- lapply(
+      seq_along(null), 
+      function(x) Tensor$new(ptr = cpp_tensor_undefined())
+    )  
+  }
     
   grad_tensors_ <- torch_variable_list(grad_tensors)
   
