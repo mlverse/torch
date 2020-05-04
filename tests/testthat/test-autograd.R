@@ -563,3 +563,18 @@ test_that("autograd_backward", {
   expect_equal_to_r(x$grad, 2)
   expect_equal_to_r(a$grad, 3)
 })
+
+test_that("autograd_backward works for single tensors", {
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- 2 * x
+  
+  autograd_backward(y)
+  expect_equal_to_r(x$grad, 2)
+  
+  x <- torch_tensor(1, requires_grad = TRUE)
+  on <- torch_tensor(1)
+  y <- 2 * x
+  
+  autograd_backward(y, on)
+  expect_equal_to_r(x$grad, 2)
+})
