@@ -427,3 +427,21 @@ Rcpp::XPtr<XPtrTorch> cpp_autograd_edge_function(Rcpp::XPtr<XPtrTorch> self)
 {
   return make_xptr<XPtrTorch>(lantern_Edge_function(self->get()));
 }
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchvariable_list> cpp_autograd_grad(Rcpp::XPtr<XPtrTorchvariable_list> outputs,
+                                                     Rcpp::XPtr<XPtrTorchvariable_list> inputs,
+                                                     Rcpp::XPtr<XPtrTorchvariable_list> grad_outputs,
+                                                     bool retain_graph,
+                                                     bool create_graph,
+                                                     bool allow_unused) {
+  XPtrTorchvariable_list out = lantern_autograd_grad(
+    outputs->get(),
+    inputs->get(),
+    grad_outputs->get(),
+    retain_graph,
+    create_graph,
+    allow_unused
+  );
+  return make_xptr<XPtrTorchvariable_list>(out);
+}   

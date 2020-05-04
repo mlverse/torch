@@ -167,7 +167,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_Edge_function)(void *self);
   LANTERN_API void(LANTERN_PTR lantern_vector_int64_t_delete)(void *x);
   LANTERN_API void(LANTERN_PTR lantern_autograd_backward)(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph);
-  LANTERN_API void *(LANTERN_PTR lantern_autograd_grad)(void *outputs, void *inputs, void *grad_outputs, void *retain_graph, bool create_graph, bool allow_unused);
+  LANTERN_API void *(LANTERN_PTR lantern_autograd_grad)(void *outputs, void *inputs, void *grad_outputs, bool retain_graph, bool create_graph, bool allow_unused);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
