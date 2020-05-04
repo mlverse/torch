@@ -164,13 +164,13 @@ void lantern_autograd_backward(void *tensors, void *grad_tensors, bool retain_gr
 }
 
 void *lantern_autograd_grad(void *outputs, void *inputs, void *grad_outputs,
-                            void *retain_graph, bool create_graph, bool allow_unused)
+                            bool retain_graph, bool create_graph, bool allow_unused)
 {
     auto out = torch::autograd::grad(
         reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(outputs)->get(),
         reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(inputs)->get(),
         reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(grad_outputs)->get(),
-        reinterpret_cast<LanternObject<c10::optional<bool>> *>(retain_graph)->get(),
+        retain_graph,
         create_graph,
         allow_unused);
     return (void *)new LanternObject<torch::autograd::variable_list>(out);
