@@ -184,29 +184,26 @@ need to be explicitly specified.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.3207  0.0000  0.0000
-#&gt;   0.0000 -1.2538  0.0000
-#&gt;   0.0000  0.0000  0.0367
+#&gt;  -1.9166  0.0000  0.0000
+#&gt;   0.0000  1.2523  0.0000
+#&gt;   0.0000  0.0000  0.3902
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  0.01 *
-#&gt;   8.3495  0.0000  0.0000
-#&gt;    0.0000 -30.1486  0.0000
-#&gt;    0.0000  0.0000 -2.4493
+#&gt;   1.0231  0.0000  0.0000
+#&gt;   0.0000 -1.0068  0.0000
+#&gt;   0.0000  0.0000  0.8587
 #&gt; [ CPUFloatType{2,3,3} ]</div><div class='input'><span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>, <span class='kw'>offset</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>dim1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>dim2</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  0.01 *
-#&gt;   0.0000 -32.0727  0.0000  0.0000
-#&gt;    0.0000  8.3495  0.0000  0.0000
+#&gt;   0.0000 -1.9166  0.0000  0.0000
+#&gt;   0.0000  1.0231  0.0000  0.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0000  0.0000 -1.2538  0.0000
-#&gt;   0.0000  0.0000 -0.3015  0.0000
+#&gt;   0.0000  0.0000  1.2523  0.0000
+#&gt;   0.0000  0.0000 -1.0068  0.0000
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  0.01 *
-#&gt;   0.0000  0.0000  0.0000  3.6654
-#&gt;    0.0000  0.0000  0.0000 -2.4493
+#&gt;   0.0000  0.0000  0.0000  0.3902
+#&gt;   0.0000  0.0000  0.0000  0.8587
 #&gt; 
 #&gt; (4,.,.) = 
 #&gt;   0  0  0  0

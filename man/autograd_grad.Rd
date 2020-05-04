@@ -53,6 +53,7 @@ y <- 2 * x + 1
 loss <- (y - (w*x + b))^2
 loss <- loss$mean()
 
-autograd_grad(loss, list(w, b))
+o <- autograd_grad(loss, list(w, b))
+o
  
 }

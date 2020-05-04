@@ -737,4 +737,3 @@ test_that("autograd_grad allow unused", {
   expect_undefined_tensor(out[[2]])
   expect_length(out, 2)
 })
-

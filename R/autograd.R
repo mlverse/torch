@@ -537,7 +537,8 @@ autograd_backward <- function(tensors, grad_tensors = NULL, retain_graph = creat
 #' loss <- (y - (w*x + b))^2
 #' loss <- loss$mean()
 #' 
-#' autograd_grad(loss, list(w, b))
+#' o <- autograd_grad(loss, list(w, b))
+#' o
 #'  
 #' @export
 autograd_grad <- function(outputs, inputs, grad_outputs = NULL, retain_graph = create_graph,
