@@ -155,19 +155,22 @@ void lantern_AutogradContext_mark_non_differentiable(void *self, void *outputs)
     ctx->mark_non_differentiable(vars);
 }
 
-void lantern_autograd_backward(void *tensors, void *grad_tensors, void *retain_graph, bool create_graph)
+void lantern_autograd_backward(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph)
 {
-    torch::autograd::backward(((LanternObject<torch::autograd::variable_list> *)tensors)->get(), ((LanternObject<torch::autograd::variable_list> *)grad_tensors)->get(), ((LanternObject<bool> *)retain_graph)->get(), ((LanternObject<bool> *)create_graph)->get());
+    torch::autograd::backward(
+        ((LanternObject<torch::autograd::variable_list> *)tensors)->get(),
+        ((LanternObject<torch::autograd::variable_list> *)grad_tensors)->get(),
+        retain_graph, create_graph);
 }
 
 void *lantern_autograd_grad(void *outputs, void *inputs, void *grad_outputs,
-                            void *retain_graph, bool create_graph, bool allow_unused)
+                            bool retain_graph, bool create_graph, bool allow_unused)
 {
     auto out = torch::autograd::grad(
         reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(outputs)->get(),
         reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(inputs)->get(),
         reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(grad_outputs)->get(),
-        reinterpret_cast<LanternObject<c10::optional<bool>> *>(retain_graph)->get(),
+        retain_graph,
         create_graph,
         allow_unused);
     return (void *)new LanternObject<torch::autograd::variable_list>(out);
