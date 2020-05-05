@@ -22959,6 +22959,37 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_layout_to_string
+std::string cpp_layout_to_string(Rcpp::XPtr<XPtrTorchLayout> layout_ptr);
+RcppExport SEXP _torchr_cpp_layout_to_string(SEXP layout_ptrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchLayout> >::type layout_ptr(layout_ptrSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_layout_to_string(layout_ptr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_strided
+Rcpp::XPtr<XPtrTorchLayout> cpp_torch_strided();
+RcppExport SEXP _torchr_cpp_torch_strided() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_strided());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_sparse
+Rcpp::XPtr<XPtrTorchLayout> cpp_torch_sparse();
+RcppExport SEXP _torchr_cpp_torch_sparse() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_sparse());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_memory_format_to_string
 std::string cpp_memory_format_to_string(Rcpp::XPtr<XPtrTorchMemoryFormat> x);
 RcppExport SEXP _torchr_cpp_memory_format_to_string(SEXP xSEXP) {
@@ -24978,6 +25009,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_generator_set_current_seed", (DL_FUNC) &_torchr_cpp_generator_set_current_seed, 2},
     {"_torchr_cpp_lantern_init", (DL_FUNC) &_torchr_cpp_lantern_init, 1},
     {"_torchr_cpp_lantern_test", (DL_FUNC) &_torchr_cpp_lantern_test, 0},
+    {"_torchr_cpp_layout_to_string", (DL_FUNC) &_torchr_cpp_layout_to_string, 1},
+    {"_torchr_cpp_torch_strided", (DL_FUNC) &_torchr_cpp_torch_strided, 0},
+    {"_torchr_cpp_torch_sparse", (DL_FUNC) &_torchr_cpp_torch_sparse, 0},
     {"_torchr_cpp_memory_format_to_string", (DL_FUNC) &_torchr_cpp_memory_format_to_string, 1},
     {"_torchr_cpp_torch_contiguous_format", (DL_FUNC) &_torchr_cpp_torch_contiguous_format, 0},
     {"_torchr_cpp_torch_preserve_format", (DL_FUNC) &_torchr_cpp_torch_preserve_format, 0},
