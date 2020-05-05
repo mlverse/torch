@@ -168,6 +168,9 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lantern_vector_int64_t_delete)(void *x);
   LANTERN_API void(LANTERN_PTR lantern_autograd_backward)(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph);
   LANTERN_API void *(LANTERN_PTR lantern_autograd_grad)(void *outputs, void *inputs, void *grad_outputs, bool retain_graph, bool create_graph, bool allow_unused);
+  LANTERN_API void *(LANTERN_PTR lantern_Layout_strided)();
+  LANTERN_API void *(LANTERN_PTR lantern_Layout_sparse)();
+  LANTERN_API const char * (LANTERN_PTR lantern_Layout_string)(void* x);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2143,6 +2146,9 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_vector_int64_t_delete);
   LOAD_SYMBOL(lantern_autograd_backward);
   LOAD_SYMBOL(lantern_autograd_grad);
+  LOAD_SYMBOL(lantern_Layout_strided);
+  LOAD_SYMBOL(lantern_Layout_sparse);
+  LOAD_SYMBOL(lantern_Layout_string);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
