@@ -314,7 +314,7 @@ test_that("zeros_like", {
   x <- torch_ones(c(2))
   expect_tensor(y <- torch_zeros_like(x))
   expect_equal_to_tensor(y, torch_tensor(c(0,0)))
-  expect_tensor(torch_zeros_like(x, options = list(dtype = torch_int())))
+  expect_tensor(torch_zeros_like(x, dtype = torch_int()))
 })
 
 test_that("zeros_out", {
