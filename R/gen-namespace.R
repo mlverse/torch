@@ -3147,7 +3147,7 @@ fun_type = 'namespace'
 }
 
 
-torch_arange <- function(start, end, step, options = list()) {
+.torch_arange <- function(start, end, step, options = list()) {
   args <- rlang::env_get_list(nms = c("start", "end", "step", "options"))
 expected_types <- list(start = "Scalar", end = "Scalar", step = "Scalar", options = "TensorOptions")
 nd_args <- c("start", "end", "step")
@@ -6040,7 +6040,7 @@ fun_type = 'namespace'
 }
 
 
-torch_empty <- function(size, names, options = list(), memory_format = NULL) {
+.torch_empty <- function(size, names, options = list(), memory_format = NULL) {
   args <- rlang::env_get_list(nms = c("size", "names", "options", "memory_format"))
 expected_types <- list(size = "IntArrayRef", names = "DimnameList", options = "TensorOptions", 
     memory_format = "MemoryFormat")
@@ -6057,7 +6057,7 @@ fun_type = 'namespace'
 }
 
 
-torch_empty_like <- function(self, options = list(), memory_format = NULL) {
+.torch_empty_like <- function(self, options = list(), memory_format = NULL) {
   args <- rlang::env_get_list(nms = c("self", "options", "memory_format"))
 expected_types <- list(self = "Tensor", options = "TensorOptions", memory_format = "MemoryFormat")
 nd_args <- "self"
@@ -6089,7 +6089,7 @@ fun_type = 'namespace'
 }
 
 
-torch_empty_strided <- function(size, stride, options = list()) {
+.torch_empty_strided <- function(size, stride, options = list()) {
   args <- rlang::env_get_list(nms = c("size", "stride", "options"))
 expected_types <- list(size = "IntArrayRef", stride = "IntArrayRef", options = "TensorOptions")
 nd_args <- c("size", "stride")
@@ -6378,7 +6378,7 @@ fun_type = 'namespace'
 }
 
 
-torch_eye <- function(n, m, options = list()) {
+.torch_eye <- function(n, m, options = list()) {
   args <- rlang::env_get_list(nms = c("n", "m", "options"))
 expected_types <- list(n = "int64_t", m = "int64_t", options = "TensorOptions")
 nd_args <- c("n", "m")
@@ -7084,7 +7084,7 @@ fun_type = 'namespace'
 }
 
 
-torch_full <- function(size, fill_value, names, options = list()) {
+.torch_full <- function(size, fill_value, names, options = list()) {
   args <- rlang::env_get_list(nms = c("size", "fill_value", "names", "options"))
 expected_types <- list(size = "IntArrayRef", fill_value = "Scalar", names = "DimnameList", 
     options = "TensorOptions")
@@ -7101,7 +7101,7 @@ fun_type = 'namespace'
 }
 
 
-torch_full_like <- function(self, fill_value, options = list(), memory_format = NULL) {
+.torch_full_like <- function(self, fill_value, options = list(), memory_format = NULL) {
   args <- rlang::env_get_list(nms = c("self", "fill_value", "options", "memory_format"))
 expected_types <- list(self = "Tensor", fill_value = "Scalar", options = "TensorOptions", 
     memory_format = "MemoryFormat")
@@ -8647,7 +8647,7 @@ fun_type = 'namespace'
 }
 
 
-torch_linspace <- function(start, end, steps = 100, options = list()) {
+.torch_linspace <- function(start, end, steps = 100, options = list()) {
   args <- rlang::env_get_list(nms = c("start", "end", "steps", "options"))
 expected_types <- list(start = "Scalar", end = "Scalar", steps = "int64_t", options = "TensorOptions")
 nd_args <- c("start", "end")
@@ -9128,7 +9128,7 @@ fun_type = 'namespace'
 }
 
 
-torch_logspace <- function(start, end, steps = 100, base = 10.000000, options = list()) {
+.torch_logspace <- function(start, end, steps = 100, base = 10.000000, options = list()) {
   args <- rlang::env_get_list(nms = c("start", "end", "steps", "base", "options"))
 expected_types <- list(start = "Scalar", end = "Scalar", steps = "int64_t", base = "double", 
     options = "TensorOptions")
@@ -11509,7 +11509,7 @@ fun_type = 'namespace'
 }
 
 
-torch_ones <- function(size, names, options = list()) {
+.torch_ones <- function(size, names, options = list()) {
   args <- rlang::env_get_list(nms = c("size", "names", "options"))
 expected_types <- list(size = "IntArrayRef", names = "DimnameList", options = "TensorOptions")
 nd_args <- c("size", "names")
@@ -11525,7 +11525,7 @@ fun_type = 'namespace'
 }
 
 
-torch_ones_like <- function(self, options = list(), memory_format = NULL) {
+.torch_ones_like <- function(self, options = list(), memory_format = NULL) {
   args <- rlang::env_get_list(nms = c("self", "options", "memory_format"))
 expected_types <- list(self = "Tensor", options = "TensorOptions", memory_format = "MemoryFormat")
 nd_args <- "self"
@@ -12178,7 +12178,7 @@ fun_type = 'namespace'
 }
 
 
-torch_rand <- function(size, generator, names, options = list()) {
+.torch_rand <- function(size, generator, names, options = list()) {
   args <- rlang::env_get_list(nms = c("size", "generator", "names", "options"))
 expected_types <- list(size = "IntArrayRef", generator = "Generator *", names = "DimnameList", 
     options = "TensorOptions")
@@ -12195,7 +12195,7 @@ fun_type = 'namespace'
 }
 
 
-torch_rand_like <- function(self, options = list(), memory_format = NULL) {
+.torch_rand_like <- function(self, options = list(), memory_format = NULL) {
   args <- rlang::env_get_list(nms = c("self", "options", "memory_format"))
 expected_types <- list(self = "Tensor", options = "TensorOptions", memory_format = "MemoryFormat")
 nd_args <- "self"
@@ -12227,7 +12227,7 @@ fun_type = 'namespace'
 }
 
 
-torch_randint <- function(low, high, size, generator, options = list()) {
+.torch_randint <- function(low, high, size, generator, options = list()) {
   args <- rlang::env_get_list(nms = c("low", "high", "size", "generator", "options"))
 expected_types <- list(low = "int64_t", high = "int64_t", size = "IntArrayRef", 
     generator = "Generator *", options = "TensorOptions")
@@ -12244,7 +12244,7 @@ fun_type = 'namespace'
 }
 
 
-torch_randint_like <- function(self, low, high, options = list(), memory_format = NULL) {
+.torch_randint_like <- function(self, low, high, options = list(), memory_format = NULL) {
   args <- rlang::env_get_list(nms = c("self", "low", "high", "options", "memory_format"))
 expected_types <- list(self = "Tensor", low = "int64_t", high = "int64_t", options = "TensorOptions", 
     memory_format = "MemoryFormat")
@@ -12278,7 +12278,7 @@ fun_type = 'namespace'
 }
 
 
-torch_randn <- function(size, generator, names, options = list()) {
+.torch_randn <- function(size, generator, names, options = list()) {
   args <- rlang::env_get_list(nms = c("size", "generator", "names", "options"))
 expected_types <- list(size = "IntArrayRef", generator = "Generator *", names = "DimnameList", 
     options = "TensorOptions")
@@ -12295,7 +12295,7 @@ fun_type = 'namespace'
 }
 
 
-torch_randn_like <- function(self, options = list(), memory_format = NULL) {
+.torch_randn_like <- function(self, options = list(), memory_format = NULL) {
   args <- rlang::env_get_list(nms = c("self", "options", "memory_format"))
 expected_types <- list(self = "Tensor", options = "TensorOptions", memory_format = "MemoryFormat")
 nd_args <- "self"
@@ -12327,7 +12327,7 @@ fun_type = 'namespace'
 }
 
 
-torch_randperm <- function(n, generator, options = list()) {
+.torch_randperm <- function(n, generator, options = list()) {
   args <- rlang::env_get_list(nms = c("n", "generator", "options"))
 expected_types <- list(n = "int64_t", generator = "Generator *", options = "TensorOptions")
 nd_args <- c("n", "generator")
@@ -12359,7 +12359,7 @@ fun_type = 'namespace'
 }
 
 
-torch_range <- function(start, end, step = 1, options = list()) {
+.torch_range <- function(start, end, step = 1, options = list()) {
   args <- rlang::env_get_list(nms = c("start", "end", "step", "options"))
 expected_types <- list(start = "Scalar", end = "Scalar", step = "Scalar", options = "TensorOptions")
 nd_args <- c("start", "end")
@@ -16248,7 +16248,7 @@ fun_type = 'namespace'
 }
 
 
-torch_zeros <- function(size, names, options = list()) {
+.torch_zeros <- function(size, names, options = list()) {
   args <- rlang::env_get_list(nms = c("size", "names", "options"))
 expected_types <- list(size = "IntArrayRef", names = "DimnameList", options = "TensorOptions")
 nd_args <- c("size", "names")
@@ -16264,7 +16264,7 @@ fun_type = 'namespace'
 }
 
 
-torch_zeros_like <- function(self, options = list(), memory_format = NULL) {
+.torch_zeros_like <- function(self, options = list(), memory_format = NULL) {
   args <- rlang::env_get_list(nms = c("self", "options", "memory_format"))
 expected_types <- list(self = "Tensor", options = "TensorOptions", memory_format = "MemoryFormat")
 nd_args <- "self"
