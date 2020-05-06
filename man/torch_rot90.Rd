@@ -23,10 +23,10 @@ Rotation direction is from the first towards the second axis if k > 0, and from 
 
 \examples{
 
-x = torch_arange(end = 4)$view(c(2, 2))
+x = torch_arange(0, 4)$view(c(2, 2))
 x
 torch_rot90(x, 1, c(0, 1))
-x = torch_arange(end = 8)$view(c(2, 2, 2))
+x = torch_arange(0, 8)$view(c(2, 2, 2))
 x
 torch_rot90(x, 1, c(1, 2))
 }
