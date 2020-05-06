@@ -190,15 +190,12 @@ a tensor with dtype <code>torch_int64</code>.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>torch_randint</span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>3</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  4
+#&gt;  3
 #&gt;  3
 #&gt;  4
-#&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='fu'>torch_randint</span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  7  0
-#&gt;  4  3
-#&gt; [ CPUFloatType{2,2} ]</div><div class='input'><span class='fu'>torch_randint</span>(<span class='fl'>3</span>, <span class='fl'>10</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  7  3
-#&gt;  6  3
+#&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='fu'>torch_randint</span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))</div><div class='output co'>#&gt; <span class='error'>Error in torch_randint(high = 10, size = list(2, 2)): argument "low" is missing, with no default</span></div><div class='input'><span class='fu'>torch_randint</span>(<span class='fl'>3</span>, <span class='fl'>10</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  8  5
+#&gt;  5  4
 #&gt; [ CPUFloatType{2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -156,29 +156,29 @@ is equivalent to <code>transpose(input, 0, 1)</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4697  0.6953 -0.5223
-#&gt;  1.1554 -0.7371 -1.5110
+#&gt;  0.8721 -0.9502 -0.5050
+#&gt;  0.6520  0.8782  0.3722
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_t</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4697  1.1554
-#&gt;  0.6953 -0.7371
-#&gt; -0.5223 -1.5110
+#&gt;  0.8721  0.6520
+#&gt; -0.9502  0.8782
+#&gt; -0.5050  0.3722
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6630
-#&gt;  0.6418
-#&gt; -1.1964
+#&gt;  1.6321
+#&gt; -0.1773
+#&gt; -0.3341
 #&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='fu'>torch_t</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6630
-#&gt;  0.6418
-#&gt; -1.1964
+#&gt;  1.6321
+#&gt; -0.1773
+#&gt; -0.3341
 #&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.3642  0.7048 -0.9153
-#&gt;  0.5241 -0.2110  0.1158
+#&gt; -0.4670 -1.1653  1.0434
+#&gt; -0.1290  0.0607  0.1442
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_t</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.3642  0.5241
-#&gt;  0.7048 -0.2110
-#&gt; -0.9153  0.1158
+#&gt; -0.4670 -0.1290
+#&gt; -1.1653  0.0607
+#&gt;  1.0434  0.1442
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
