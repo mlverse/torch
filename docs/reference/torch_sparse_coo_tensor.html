@@ -205,14 +205,15 @@ coordinates in the indices, and the value at that index is the sum of all duplic
 #&gt; ]</div><div class='input'>
 <span class='co'># create empty sparse tensors</span>
 <span class='no'>S</span> <span class='kw'>=</span> <span class='fu'>torch_sparse_coo_tensor</span>(
-  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>), <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_int64</span>())),
+  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_int64</span>()),
   <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span>(), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_float32</span>()),
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>)
-)</div><div class='output co'>#&gt; <span class='error'>Error in resolve_size(...): You should specify a single size argument.</span></div><div class='input'><span class='no'>S</span> <span class='kw'>=</span> <span class='fu'>torch_sparse_coo_tensor</span>(
-  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>), <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_int64</span>())),
+)
+<span class='no'>S</span> <span class='kw'>=</span> <span class='fu'>torch_sparse_coo_tensor</span>(
+  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_int64</span>()),
   <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>)),
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
-)</div><div class='output co'>#&gt; <span class='error'>Error in resolve_size(...): You should specify a single size argument.</span></div></pre>
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

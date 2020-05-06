@@ -207,51 +207,51 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1917 -0.5238 -0.2240
+#&gt;  0.6697 -0.2907 -1.2524
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_min</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.523772
+#&gt; -1.25245
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0345  0.6520 -0.9609 -0.1605
-#&gt;  0.1003  0.0661 -1.4981  0.5162
-#&gt; -0.1367  0.7478  1.7544 -2.4346
-#&gt;  0.9856  1.7006 -0.3247  0.8027
+#&gt; -0.1811  0.2049  0.7770 -0.4666
+#&gt;  1.6189 -1.1178 -0.5545 -1.4901
+#&gt; -0.0725  0.2495 -2.1246 -1.2349
+#&gt;  3.3056  0.3625 -1.1273  0.4970
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_min</span>(<span class='no'>a</span>, <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -1.0345
-#&gt; -1.4981
-#&gt; -2.4346
-#&gt; -0.3247
+#&gt; -0.4666
+#&gt; -1.4901
+#&gt; -2.1246
+#&gt; -1.1273
 #&gt; [ CPUFloatType{4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  0
-#&gt;  2
 #&gt;  3
+#&gt;  3
+#&gt;  2
 #&gt;  2
 #&gt; [ CPULongType{4} ]
 #&gt; </div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3848
-#&gt;  2.2164
-#&gt;  1.4957
-#&gt; -0.9258
+#&gt;  0.1471
+#&gt;  0.7589
+#&gt;  1.8436
+#&gt; -0.9019
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1558
-#&gt;  1.2768
-#&gt;  0.4973
-#&gt; -1.2660
+#&gt; -1.1331
+#&gt;  1.2553
+#&gt;  0.7069
+#&gt; -0.8401
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_min</span>(<span class='no'>a</span>, <span class='kw'>other</span> <span class='kw'>=</span> <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3848
-#&gt;  1.2768
-#&gt;  0.4973
-#&gt; -1.2660
+#&gt; -1.1331
+#&gt;  0.7589
+#&gt;  0.7069
+#&gt; -0.9019
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
