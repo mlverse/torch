@@ -42,7 +42,7 @@ in such cases.
 
 \examples{
 
-torch_arange(end = 5)
+torch_arange(start = 0, end = 5)
 torch_arange(1, 4)
 torch_arange(1, 2.5, 0.5)
 }

@@ -151,8 +151,8 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>3</span>)$<span class='fu'>view</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>2</span>)$<span class='fu'>view</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>))
+<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>0</span>, <span class='fl'>3</span>)$<span class='fu'>view</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
+<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>)$<span class='fu'>view</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>))
 <span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_broadcast_tensors</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>x</span>, <span class='no'>y</span>))
 <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  0  1  2

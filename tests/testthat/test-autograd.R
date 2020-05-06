@@ -76,7 +76,7 @@ test_that("register_hook: grad non leaf", {
   # This checks an edge case for register_hook.
   # We want to capture grad of a nonleaf tensor,
   # but avoid segfault during backward of other nonleaf tensors
-  x <- torch_randn(5, options = list(requires_grad=TRUE))
+  x <- torch_randn(5, requires_grad=TRUE)
   x_list <- x$unbind()
   x0 <- x_list[[1]]
   hook_results = NULL
@@ -528,7 +528,7 @@ test_that("retain_grad is invisible", {
 })
 
 test_that("grad_fn works", {
-  x <- torch_ones(c(2,2), options = list(requires_grad = TRUE))
+  x <- torch_ones(c(2,2), requires_grad = TRUE)
   y <- x$mean()
   expect_output(print(y$grad_fn), "MeanBackward0")
   k <- y$grad_fn$next_functions
@@ -593,8 +593,8 @@ test_that("autograd_backward works for single tensors", {
 
 test_that("autograd_grad works", {
   
-  x <- torch_randn(c(2, 2), options = list(requires_grad=TRUE))
-  y <- torch_randn(c(2, 2), options = list(requires_grad=TRUE))
+  x <- torch_randn(c(2, 2), requires_grad=TRUE)
+  y <- torch_randn(c(2, 2), requires_grad=TRUE)
   z <- x^2 + y * x + y^2
   z$backward(torch_ones(c(2, 2)), create_graph=TRUE)
   
@@ -621,9 +621,9 @@ test_that("autograd_grad works", {
 
 test_that("autograd_grad with non-leafs", {
   
-  x_init <- torch_randn(c(2,2), options=list(requires_grad = TRUE))
+  x_init <- torch_randn(c(2,2), requires_grad = TRUE)
   x <- x_init
-  y <- torch_randn(c(2,2), options=list(requires_grad = TRUE))
+  y <- torch_randn(c(2,2), requires_grad = TRUE)
   grad_output <- torch_ones(c(2, 2))
   
   fn <- function(x) {
@@ -660,7 +660,7 @@ test_that("autograd_grad non leaf many outputs", {
   # This checks an edge case for function callbacks
   # We want to capture two grads of a function, but can only
   # register a single callback.
-  x <- torch_randn(c(4, 2), options = list(requires_grad=TRUE))
+  x <- torch_randn(c(4, 2), requires_grad=TRUE)
   o <- x$chunk(2)
   a <- o[[1]]
   b <- o[[2]]

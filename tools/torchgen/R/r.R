@@ -81,9 +81,17 @@ r_namespace <- function(decls) {
 ")
 }
 
+creation_ops <- c("ones", "ones_like", "rand", "rand_like", "randint",
+                  "randint_like", "randn", "randn_like", "randperm",
+                  "zeros", "zeros_like", "arange", "range", "linspace",
+                  "logspace", "eye", "empty", "empty_like", "empty_strided",
+                  "full", "full_like")
+
 # functions in this list are generated with a preciding '.' in their names so
 # wrapers can be defined around them.
 internal_funs <- c("logical_not")
+internal_funs <- c(internal_funs, creation_ops)
+
 
 r_namespace_name <- function(decls) {
   if (decls[[1]]$name %in% internal_funs) {

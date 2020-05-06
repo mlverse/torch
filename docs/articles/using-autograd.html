@@ -103,7 +103,7 @@
 <a href="#automatic-differentiation-with-autograd" class="anchor"></a>Automatic differentiation with autograd</h2>
 <p>Torch uses a module called <em>autograd</em> to record operations performed on tensors, and store what has to be done to obtain the respective gradients. These actions are stored as functions, and those functions are applied in order when the gradient of the output (normally, the loss) with respect to those tensors is calculated: starting from the output node and <em>propagating</em> gradients <em>back</em> through the network. This is a form of <em>reverse mode automatic differentiation</em>.</p>
 <p>As users, we can see a bit of this implementation. As a prerequisite for this “recording” to happen, tensors have to be created with <code>requires_grad = TRUE</code>. E.g.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_ones.html">torch_ones</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="dt">options =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">requires_grad =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_ones.html">torch_ones</a></span>(<span class="dv">2</span>,<span class="dv">2</span>, <span class="dt">requires_grad =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>To be clear, this is a tensor <em>with respect to which</em> gradients have to be calculated – normally, a tensor representing a weight or a bias, not the input data <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. If we now perform some operation on that tensor, assigning the result to <code>y</code></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>y &lt;-<span class="st"> </span>x<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>()</span></code></pre></div>
 <p>we find that <code>y</code> now has a non-empty <code>grad_fn</code> that tells torch how to compute the gradient of <code>y</code> with respect to <code>x</code>:</p>
@@ -119,7 +119,7 @@
 <span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; [ CPUFloatType{2,2} ]</span></span></code></pre></div>
 <p>With a longer chain of computations, we can peek at how torch builds up a graph of backward operations.</p>
 <p>Here is a slightly more complex example. We call <code>retain_grad()</code> on <code>y</code> and <code>z</code> just for demonstration purposes; by default, intermediate gradients – while of course they have to be computed – aren’t stored, in order to save memory.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>x1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_ones.html">torch_ones</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="dt">options =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">requires_grad =</span> <span class="ot">TRUE</span>))</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>x1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_ones.html">torch_ones</a></span>(<span class="dv">2</span>,<span class="dv">2</span>, <span class="dt">requires_grad =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a>x2 &lt;-<span class="st"> </span><span class="kw">torch_tensor</span>(<span class="fl">1.1</span>, <span class="dt">requires_grad =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb7-3"><a href="#cb7-3"></a>y &lt;-<span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>(x2 <span class="op">+</span><span class="st"> </span><span class="dv">2</span>)</span>
 <span id="cb7-4"><a href="#cb7-4"></a>y<span class="op">$</span><span class="kw">retain_grad</span>()</span>
@@ -188,20 +188,20 @@
 <span id="cb10-6"><a href="#cb10-6"></a><span class="co"># number of observations in training set</span></span>
 <span id="cb10-7"><a href="#cb10-7"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
 <span id="cb10-8"><a href="#cb10-8"></a><span class="co"># create random data</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_randn.html">torch_randn</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(n, d_in))</span>
+<span id="cb10-9"><a href="#cb10-9"></a>x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_randn.html">torch_randn</a></span>(n, d_in)</span>
 <span id="cb10-10"><a href="#cb10-10"></a>y &lt;-<span class="st"> </span>x[,<span class="dv">1</span>]<span class="op">*</span><span class="fl">0.2</span> <span class="op">-</span><span class="st"> </span>x[..,<span class="dv">2</span>]<span class="op">*</span><span class="fl">1.3</span> <span class="op">-</span><span class="st"> </span>x[..,<span class="dv">3</span>]<span class="op">*</span><span class="fl">0.5</span> <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/torch_randn.html">torch_randn</a></span>(n)</span>
 <span id="cb10-11"><a href="#cb10-11"></a>y &lt;-<span class="st"> </span>y<span class="op">$</span><span class="kw">unsqueeze</span>(<span class="dt">dim =</span> <span class="dv">1</span>)</span>
 <span id="cb10-12"><a href="#cb10-12"></a><span class="co">### initialize weights ---------------------------------------------------------</span></span>
 <span id="cb10-13"><a href="#cb10-13"></a><span class="co"># dimensionality of hidden layer</span></span>
 <span id="cb10-14"><a href="#cb10-14"></a>d_hidden &lt;-<span class="st"> </span><span class="dv">32</span></span>
 <span id="cb10-15"><a href="#cb10-15"></a><span class="co"># weights connecting input to hidden layer</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a>w1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_randn.html">torch_randn</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(d_in, d_hidden), <span class="dt">options =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">requires_grad =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb10-16"><a href="#cb10-16"></a>w1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_randn.html">torch_randn</a></span>(d_in, d_hidden, <span class="dt">requires_grad =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb10-17"><a href="#cb10-17"></a><span class="co"># weights connecting hidden to output layer</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a>w2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_randn.html">torch_randn</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(d_hidden, d_out), <span class="dt">options =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">requires_grad =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb10-18"><a href="#cb10-18"></a>w2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_randn.html">torch_randn</a></span>(d_hidden, d_out, <span class="dt">requires_grad =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb10-19"><a href="#cb10-19"></a><span class="co"># hidden layer bias</span></span>
-<span id="cb10-20"><a href="#cb10-20"></a>b1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_zeros.html">torch_zeros</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, d_hidden), <span class="dt">options =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">requires_grad =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb10-20"><a href="#cb10-20"></a>b1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_zeros.html">torch_zeros</a></span>(<span class="dv">1</span>, d_hidden, <span class="dt">requires_grad =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb10-21"><a href="#cb10-21"></a><span class="co"># output layer bias</span></span>
-<span id="cb10-22"><a href="#cb10-22"></a>b2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_zeros.html">torch_zeros</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, d_out), <span class="dt">options =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">requires_grad =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb10-22"><a href="#cb10-22"></a>b2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_zeros.html">torch_zeros</a></span>(<span class="dv">1</span>, d_out,<span class="dt">requires_grad =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb10-23"><a href="#cb10-23"></a><span class="co">### network parameters ---------------------------------------------------------</span></span>
 <span id="cb10-24"><a href="#cb10-24"></a>learning_rate &lt;-<span class="st"> </span><span class="fl">1e-4</span></span>
 <span id="cb10-25"><a href="#cb10-25"></a><span class="co">### training loop --------------------------------------------------------------</span></span>
@@ -235,26 +235,26 @@
 <span id="cb10-53"><a href="#cb10-53"></a>    })</span>
 <span id="cb10-54"><a href="#cb10-54"></a>    </span>
 <span id="cb10-55"><a href="#cb10-55"></a>}</span>
-<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 53.68182 </span></span>
-<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 48.09063 </span></span>
-<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 43.26986 </span></span>
-<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 39.09941 </span></span>
-<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 35.46558 </span></span>
-<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 32.29713 </span></span>
-<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 29.52747 </span></span>
-<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 27.11148 </span></span>
-<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 24.99151 </span></span>
-<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 23.12594 </span></span>
-<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 21.47989 </span></span>
-<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 20.02423 </span></span>
-<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 18.73151 </span></span>
-<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 17.57208 </span></span>
-<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 16.53722 </span></span>
-<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 15.61329 </span></span>
-<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 14.78617 </span></span>
-<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 14.04375 </span></span>
-<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 13.37584 </span></span>
-<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 12.77057</span></span></code></pre></div>
+<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 28.33999 </span></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 26.54191 </span></span>
+<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 24.98072 </span></span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 23.61579 </span></span>
+<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 22.41495 </span></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 21.3575 </span></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 20.41723 </span></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 19.57757 </span></span>
+<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 18.82267 </span></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 18.14077 </span></span>
+<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 17.5213 </span></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 16.95567 </span></span>
+<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 16.43675 </span></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 15.95893 </span></span>
+<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 15.5164 </span></span>
+<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 15.10462 </span></span>
+<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 14.71947 </span></span>
+<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 14.3554 </span></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 14.013 </span></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 13.69001</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">

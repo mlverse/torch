@@ -36,6 +36,7 @@ Collate:
     'tensor.R'
     'autograd.R'
     'codegen-utils.R'
+    'creation-ops.R'
     'device.R'
     'dimname_list.R'
     'dtype.R'

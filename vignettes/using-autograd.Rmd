@@ -30,7 +30,7 @@ As users, we can see a bit of this implementation. As a prerequisite for this "r
 E.g.
 
 ```{r}
-x <- torch_ones(c(2,2), options = list(requires_grad = TRUE))
+x <- torch_ones(2,2, requires_grad = TRUE)
 ```
 
 To be clear, this is a tensor _with respect to which_ gradients have to be calculated -- normally, a tensor representing a weight or a bias, not the input data ^[Unless we _want_ to change the data, as in adversarial example generation].
@@ -63,7 +63,7 @@ With a longer chain of computations, we can peek at how torch builds up a graph 
 Here is a slightly more complex example. We call `retain_grad()` on `y` and `z` just for demonstration purposes; by default, intermediate gradients -- while of course they have to be computed -- aren't stored, in order to save memory.
 
 ```{r}
-x1 <- torch_ones(c(2,2), options = list(requires_grad = TRUE))
+x1 <- torch_ones(2,2, requires_grad = TRUE)
 x2 <- torch_tensor(1.1, requires_grad = TRUE)
 y <- x1 * (x2 + 2)
 y$retain_grad()
@@ -115,20 +115,20 @@ d_out <- 1
 # number of observations in training set
 n <- 100
 # create random data
-x <- torch_randn(c(n, d_in))
+x <- torch_randn(n, d_in)
 y <- x[,1]*0.2 - x[..,2]*1.3 - x[..,3]*0.5 + torch_randn(n)
 y <- y$unsqueeze(dim = 1)
 ### initialize weights ---------------------------------------------------------
 # dimensionality of hidden layer
 d_hidden <- 32
 # weights connecting input to hidden layer
-w1 <- torch_randn(c(d_in, d_hidden), options = list(requires_grad = TRUE))
+w1 <- torch_randn(d_in, d_hidden, requires_grad = TRUE)
 # weights connecting hidden to output layer
-w2 <- torch_randn(c(d_hidden, d_out), options = list(requires_grad = TRUE))
+w2 <- torch_randn(d_hidden, d_out, requires_grad = TRUE)
 # hidden layer bias
-b1 <- torch_zeros(c(1, d_hidden), options = list(requires_grad = TRUE))
+b1 <- torch_zeros(1, d_hidden, requires_grad = TRUE)
 # output layer bias
-b2 <- torch_zeros(c(1, d_out), options = list(requires_grad = TRUE))
+b2 <- torch_zeros(1, d_out,requires_grad = TRUE)
 ### network parameters ---------------------------------------------------------
 learning_rate <- 1e-4
 ### training loop --------------------------------------------------------------

@@ -6869,6 +6869,18 @@ cpp_lantern_test <- function() {
     invisible(.Call('_torchr_cpp_lantern_test', PACKAGE = 'torchr'))
 }
 
+cpp_layout_to_string <- function(layout_ptr) {
+    .Call('_torchr_cpp_layout_to_string', PACKAGE = 'torchr', layout_ptr)
+}
+
+cpp_torch_strided <- function() {
+    .Call('_torchr_cpp_torch_strided', PACKAGE = 'torchr')
+}
+
+cpp_torch_sparse <- function() {
+    .Call('_torchr_cpp_torch_sparse', PACKAGE = 'torchr')
+}
+
 cpp_memory_format_to_string <- function(x) {
     .Call('_torchr_cpp_memory_format_to_string', PACKAGE = 'torchr', x)
 }

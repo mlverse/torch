@@ -180,38 +180,38 @@ biased estimator. Otherwise, Bessel's correction will be used.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4086 -0.2189 -0.6886
+#&gt; -1.1784 -1.2844 -0.7158
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_var_mean</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; 0.303025
+#&gt; 0.0914285
 #&gt; [ CPUFloatType{} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; -0.166313
+#&gt; -1.05955
 #&gt; [ CPUFloatType{} ]
 #&gt; </div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8073  0.8183 -0.8192  0.0773
-#&gt; -0.1744 -1.2846  0.4797  0.0278
-#&gt;  0.0588 -0.6418 -0.2783  0.8315
-#&gt; -0.1949  2.0302  1.2109  0.1404
+#&gt;  2.0601 -0.2583  0.4802 -0.0402
+#&gt;  0.1607 -0.4641 -1.7399  1.6944
+#&gt;  0.2435 -0.7627 -2.0930 -0.9149
+#&gt; -1.0356  0.5555  1.5942 -0.1575
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_var_mean</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt;  0.6217
-#&gt;  0.5617
-#&gt;  0.3947
-#&gt;  1.0357
+#&gt;  1.0955
+#&gt;  2.0363
+#&gt;  0.9162
+#&gt;  1.2395
 #&gt; [ CPUFloatType{4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; -0.1827
-#&gt; -0.2379
-#&gt; -0.0074
-#&gt;  0.7966
+#&gt;  0.5604
+#&gt; -0.0872
+#&gt; -0.8818
+#&gt;  0.2391
 #&gt; [ CPUFloatType{4} ]
 #&gt; </div></pre>
   </div>

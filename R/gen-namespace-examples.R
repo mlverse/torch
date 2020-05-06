@@ -151,7 +151,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_arange(end = 5)
+#' torch_arange(start = 0, end = 5)
 #' torch_arange(1, 4)
 #' torch_arange(1, 2.5, 0.5)
 NULL
@@ -277,7 +277,7 @@ NULL
 #'
 #' @examples
 #'
-#' input = torch_randint(0, 8, list(5), options=list(dtype=torch_int64()))
+#' input = torch_randint(0, 8, list(5), dtype=torch_int64())
 #' weights = torch_linspace(0, 1, steps=5)
 #' input
 #' weights
@@ -352,8 +352,8 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(end = 3)$view(c(1, 3))
-#' y = torch_arange(end = 2)$view(c(2, 1))
+#' x = torch_arange(0, 3)$view(c(1, 3))
+#' y = torch_arange(0, 2)$view(c(2, 1))
 #' out = torch_broadcast_tensors(list(x, y))
 #' out[[1]]
 NULL
@@ -649,7 +649,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_empty(list(2,3), options=list(dtype = torch_int64()))
+#' torch_empty(list(2,3), dtype = torch_int64())
 NULL
 # -> empty_like <-
 
@@ -1168,7 +1168,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_randint(high = 50, size = list(5))
+#' a = torch_randint(0, 50, size = list(5))
 #' a
 #' torch_mode(a, 0)
 NULL
@@ -1338,7 +1338,7 @@ NULL
 #' @examples
 #'
 #' torch_randint(3, 5, list(3))
-#' torch_randint(high = 10, size = list(2, 2))
+#' torch_randint(0, 10, size = list(2, 2))
 #' torch_randint(3, 10, list(2, 2))
 NULL
 # -> randint <-
@@ -1441,7 +1441,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_arange(end = 4)
+#' a = torch_arange(0, 4)
 #' torch_reshape(a, list(2, 2))
 #' b = torch_tensor(matrix(c(0, 1, 2, 3), ncol = 2, byrow=TRUE))
 #' torch_reshape(b, list(-1))
@@ -1623,7 +1623,7 @@ NULL
 #' a = torch_randn(c(4, 4))
 #' a
 #' torch_sum(a, 1)
-#' b = torch_arange(end = 4 * 5 * 6)$view(c(4, 5, 6))
+#' b = torch_arange(0, 4 * 5 * 6)$view(c(4, 5, 6))
 #' torch_sum(b, list(2, 1))
 NULL
 # -> sum <-
@@ -1771,7 +1771,7 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(end = 8)$view(c(2, 2, 2))
+#' x = torch_arange(0, 8)$view(c(2, 2, 2))
 #' x
 #' torch_flip(x, c(0, 1))
 NULL
@@ -1797,10 +1797,10 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(end = 4)$view(c(2, 2))
+#' x = torch_arange(0, 4)$view(c(2, 2))
 #' x
 #' torch_rot90(x, 1, c(0, 1))
-#' x = torch_arange(end = 8)$view(c(2, 2, 2))
+#' x = torch_arange(0, 8)$view(c(2, 2, 2))
 #' x
 #' torch_rot90(x, 1, c(1, 2))
 NULL
@@ -1937,7 +1937,7 @@ NULL
 #'
 #' @examples
 #' 
-#' a = torch_arange(end = 9, options = list(dtype= torch_float()))
+#' a = torch_arange(0, 9, dtype = torch_float())
 #' b = a$reshape(list(3, 3))
 #' torch_norm(a)
 #' torch_norm(b)
@@ -1995,12 +1995,12 @@ NULL
 #' 
 #' # create empty sparse tensors
 #' S = torch_sparse_coo_tensor(
-#'   torch_empty(c(1, 0), options = list(dtype = torch_int64())), 
+#'   torch_empty(c(1, 0), dtype = torch_int64()), 
 #'   torch_tensor(numeric(), dtype = torch_float32()), 
 #'   c(1)
 #' )
 #' S = torch_sparse_coo_tensor(
-#'   torch_empty(c(1, 0), options = list(dtype = torch_int64())), 
+#'   torch_empty(c(1, 0), dtype = torch_int64()), 
 #'   torch_empty(c(0, 2)), 
 #'   c(1, 2)
 #' )
@@ -2850,7 +2850,7 @@ NULL
 #' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
 #' torch_logical_and(a, b)
 #' \dontrun{
-#' torch_logical_and(a, b, out=torch_empty(4, options = list(dtype=torch_bool())))
+#' torch_logical_and(a, b, out=torch_empty(4, dtype=torch_bool()))
 #' }
 NULL
 # -> logical_and <-

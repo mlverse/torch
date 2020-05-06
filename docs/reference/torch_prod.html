@@ -176,22 +176,22 @@ the output tensor having 1 fewer dimension than <code>input</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0346 -1.2563  0.8089
+#&gt; -0.3501 -0.0662 -0.9928
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_prod</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 1.05137
+#&gt; -0.0230251
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>2</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1493 -0.4971
-#&gt; -0.5175  0.8900
-#&gt; -2.7267 -0.1670
-#&gt;  1.2175 -1.5212
+#&gt; -1.1785  0.1420
+#&gt;  0.9254  0.1481
+#&gt;  0.2465  1.2635
+#&gt; -0.1546  0.5548
 #&gt; [ CPUFloatType{4,2} ]</div><div class='input'><span class='fu'>torch_prod</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0742
-#&gt; -0.4606
-#&gt;  0.4555
-#&gt; -1.8521
+#&gt; -0.1673
+#&gt;  0.1371
+#&gt;  0.3115
+#&gt; -0.0858
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
