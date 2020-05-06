@@ -175,17 +175,17 @@ of <code>index</code>; other dimensions have the same size as in the original te
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4238 -0.0271 -1.8541  1.1158
-#&gt;  1.4587  0.4341  0.6958  0.2141
-#&gt; -1.4547  0.0451 -1.6783 -1.2508
+#&gt;  0.1722 -0.4199 -0.3299 -0.8104
+#&gt; -2.1615  0.0319  0.7913  0.8496
+#&gt; -0.6144 -0.5754  0.5125  0.9456
 #&gt; [ CPUFloatType{3,4} ]</div><div class='input'><span class='no'>indices</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_int64</span>())
 <span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>0</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4238 -0.0271 -1.8541  1.1158
-#&gt; -1.4547  0.0451 -1.6783 -1.2508
+#&gt;  0.1722 -0.4199 -0.3299 -0.8104
+#&gt; -0.6144 -0.5754  0.5125  0.9456
 #&gt; [ CPUFloatType{2,4} ]</div><div class='input'><span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4238 -1.8541
-#&gt;  1.4587  0.6958
-#&gt; -1.4547 -1.6783
+#&gt;  0.1722 -0.3299
+#&gt; -2.1615  0.7913
+#&gt; -0.6144  0.5125
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

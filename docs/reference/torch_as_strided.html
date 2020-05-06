@@ -179,17 +179,17 @@ advisable to use.
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8034  0.4952 -1.1863
-#&gt;  0.5123 -0.0849  0.9109
-#&gt;  0.1213 -1.7314 -1.1100
+#&gt; -0.2117  0.9915  0.2739
+#&gt;  0.1127  0.3305  0.7255
+#&gt;  0.2576  1.9423  0.1482
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>t</span> <span class='kw'>=</span> <span class='fu'>torch_as_strided</span>(<span class='no'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
 <span class='no'>t</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8034 -1.1863
-#&gt;  0.4952  0.5123
+#&gt; -0.2117  0.2739
+#&gt;  0.9915  0.1127
 #&gt; [ CPUFloatType{2,2} ]</div><div class='input'><span class='no'>t</span> <span class='kw'>=</span> <span class='fu'>torch_as_strided</span>(<span class='no'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fl'>1</span>)
 <span class='no'>t</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4952  0.5123
-#&gt; -1.1863 -0.0849
+#&gt;  0.9915  0.1127
+#&gt;  0.2739  0.3305
 #&gt; [ CPUFloatType{2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

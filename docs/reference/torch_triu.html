@@ -171,37 +171,37 @@ the main diagonal. The main diagonal are the set of indices
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0663  1.2455 -1.3456
-#&gt; -2.3031 -1.2061  0.2639
-#&gt; -0.6324 -1.1548 -1.0093
+#&gt;  0.6744  1.3735 -0.6800
+#&gt;  1.4381  0.2272  1.5315
+#&gt; -1.0772  0.5648 -0.5911
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0663  1.2455 -1.3456
-#&gt;  0.0000 -1.2061  0.2639
-#&gt;  0.0000  0.0000 -1.0093
+#&gt;  0.6744  1.3735 -0.6800
+#&gt;  0.0000  0.2272  1.5315
+#&gt;  0.0000  0.0000 -0.5911
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>a</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0000  1.2455 -1.3456
-#&gt;  0.0000  0.0000  0.2639
+#&gt;  0.0000  1.3735 -0.6800
+#&gt;  0.0000  0.0000  1.5315
 #&gt;  0.0000  0.0000  0.0000
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>a</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0663  1.2455 -1.3456
-#&gt; -2.3031 -1.2061  0.2639
-#&gt;  0.0000 -1.1548 -1.0093
+#&gt;  0.6744  1.3735 -0.6800
+#&gt;  1.4381  0.2272  1.5315
+#&gt;  0.0000  0.5648 -0.5911
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1557  1.4217  0.4717  1.4757  0.4502 -0.7962
-#&gt;  0.2555  0.0161  0.0248 -1.0078  0.5702  0.1867
-#&gt; -0.5720 -1.9339 -0.8815  0.5215  0.3022  0.1831
-#&gt;  0.6844 -0.8288  1.2361  0.2607  1.2722  1.0790
+#&gt; -1.7667 -0.0011 -0.0901 -0.2565 -0.9640  1.2469
+#&gt;  0.3613 -0.4282  2.5042  0.2955 -1.3061  0.6203
+#&gt;  0.4290  2.1279  0.4152 -0.0235 -1.7217 -0.3072
+#&gt;  0.6674  0.5385 -0.1131 -0.4461 -0.5940 -0.2732
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0000  1.4217  0.4717  1.4757  0.4502 -0.7962
-#&gt;  0.0000  0.0000  0.0248 -1.0078  0.5702  0.1867
-#&gt;  0.0000  0.0000  0.0000  0.5215  0.3022  0.1831
-#&gt;  0.0000  0.0000  0.0000  0.0000  1.2722  1.0790
+#&gt;  0.0000 -0.0011 -0.0901 -0.2565 -0.9640  1.2469
+#&gt;  0.0000  0.0000  2.5042  0.2955 -1.3061  0.6203
+#&gt;  0.0000  0.0000  0.0000 -0.0235 -1.7217 -0.3072
+#&gt;  0.0000  0.0000  0.0000  0.0000 -0.5940 -0.2732
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1557  1.4217  0.4717  1.4757  0.4502 -0.7962
-#&gt;  0.2555  0.0161  0.0248 -1.0078  0.5702  0.1867
-#&gt;  0.0000 -1.9339 -0.8815  0.5215  0.3022  0.1831
-#&gt;  0.0000  0.0000  1.2361  0.2607  1.2722  1.0790
+#&gt; -1.7667 -0.0011 -0.0901 -0.2565 -0.9640  1.2469
+#&gt;  0.3613 -0.4282  2.5042  0.2955 -1.3061  0.6203
+#&gt;  0.0000  2.1279  0.4152 -0.0235 -1.7217 -0.3072
+#&gt;  0.0000  0.0000 -0.1131 -0.4461 -0.5940 -0.2732
 #&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
