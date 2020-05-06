@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# torch
+# torch <a href='https://mlverse.github.io/torch'><img src='man/figures/torch.png' align="right" height="139" /></a>
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -31,12 +31,12 @@ y <- torch_tensor(x, dtype = torch_float64())
 y
 #> torch_tensor 
 #> (1,.,.) = 
-#>   0.3347  0.2410
-#>   0.0348  0.7088
+#>   0.0302  0.3979
+#>   0.3338  0.2530
 #> 
 #> (2,.,.) = 
-#>   0.2776  0.4821
-#>   0.7043  0.7275
+#>   0.2180  0.5275
+#>   0.6412  0.5127
 #> [ CPUDoubleType{2,2,2} ]
 identical(x, as_array(y))
 #> [1] TRUE
@@ -99,11 +99,12 @@ for (i in 1:100) {
 }
 print(w)
 #> torch_tensor 
-#>  0.4948
-#> -0.7033
+#>  0.5063
+#> -0.6939
 #> [ CPUFloatType{2,1} ]
 print(b) 
 #> torch_tensor 
-#>  0.1047
+#> 0.01 *
+#>  9.3250
 #> [ CPUFloatType{1} ]
 ```
