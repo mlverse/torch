@@ -1,0 +1,4904 @@
+nnf_adaptive_avg_pool1d <- function(output_size) {
+# 
+stop('not implemented')
+}
+
+nnf_adaptive_avg_pool2d <- function(output_size) {
+# def adaptive_avg_pool2d(input, output_size):
+#     # type: (Tensor, BroadcastingList2[int]) -> Tensor
+#     r"""
+#     Applies a 2D adaptive average pooling over an input signal composed of
+#     several input planes.
+# 
+#     See :class:`~torch.nn.AdaptiveAvgPool2d` for details and output shape.
+# 
+#     Args:
+#         output_size: the target output size (single integer or
+#             double-integer tuple)
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 adaptive_avg_pool2d, (input,), input, output_size)
+#     _output_size = _list_with_default(output_size, input.size())
+#     return torch._C._nn.adaptive_avg_pool2d(input, _output_size)
+# 
+stop('not implemented')
+}
+
+nnf_adaptive_avg_pool3d <- function(output_size) {
+# def adaptive_avg_pool3d(input, output_size):
+#     # type: (Tensor, BroadcastingList3[int]) -> Tensor
+#     r"""
+#     Applies a 3D adaptive average pooling over an input signal composed of
+#     several input planes.
+# 
+#     See :class:`~torch.nn.AdaptiveAvgPool3d` for details and output shape.
+# 
+#     Args:
+#         output_size: the target output size (single integer or
+#             triple-integer tuple)
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 adaptive_avg_pool3d, (input,), input, output_size)
+#     _output_size = _list_with_default(output_size, input.size())
+#     return torch._C._nn.adaptive_avg_pool3d(input, _output_size)
+# 
+stop('not implemented')
+}
+
+nnf_adaptive_max_pool1d <- function(output_size, return_indices) {
+#     def fn(*args, **kwargs):
+#         dispatch_flag = False
+#         if arg_name in kwargs:
+#             dispatch_flag = kwargs[arg_name]
+#         elif arg_index < len(args):
+#             dispatch_flag = args[arg_index]
+# 
+#         if dispatch_flag:
+#             return if_true(*args, **kwargs)
+#         else:
+#             return if_false(*args, **kwargs)
+# 
+stop('not implemented')
+}
+
+nnf_adaptive_max_pool1d_with_indices <- function(output_size, return_indices) {
+# def adaptive_max_pool1d_with_indices(input, output_size, return_indices=False):
+#     # type: (Tensor, BroadcastingList1[int], bool) -> Tuple[Tensor, Tensor]
+#     r"""Applies a 1D adaptive max pooling over an input signal composed of
+#     several input planes.
+# 
+#     See :class:`~torch.nn.AdaptiveMaxPool1d` for details and output shape.
+# 
+#     Args:
+#         output_size: the target output size (single integer)
+#         return_indices: whether to return pooling indices. Default: ``False``
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 adaptive_max_pool1d_with_indices, (input,), input, output_size,
+#                 return_indices=return_indices)
+#     return torch.adaptive_max_pool1d(input, output_size)
+# 
+stop('not implemented')
+}
+
+nnf_adaptive_max_pool2d <- function(output_size, return_indices) {
+#     def fn(*args, **kwargs):
+#         dispatch_flag = False
+#         if arg_name in kwargs:
+#             dispatch_flag = kwargs[arg_name]
+#         elif arg_index < len(args):
+#             dispatch_flag = args[arg_index]
+# 
+#         if dispatch_flag:
+#             return if_true(*args, **kwargs)
+#         else:
+#             return if_false(*args, **kwargs)
+# 
+stop('not implemented')
+}
+
+nnf_adaptive_max_pool2d_with_indices <- function(output_size, return_indices) {
+# def adaptive_max_pool2d_with_indices(input, output_size, return_indices=False):
+#     # type: (Tensor, BroadcastingList2[int], bool) -> Tuple[Tensor, Tensor]
+#     r"""Applies a 2D adaptive max pooling over an input signal composed of
+#     several input planes.
+# 
+#     See :class:`~torch.nn.AdaptiveMaxPool2d` for details and output shape.
+# 
+#     Args:
+#         output_size: the target output size (single integer or
+#             double-integer tuple)
+#         return_indices: whether to return pooling indices. Default: ``False``
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 adaptive_max_pool2d_with_indices, (input,), input, output_size,
+#                 return_indices=return_indices)
+#     output_size = _list_with_default(output_size, input.size())
+#     return torch._C._nn.adaptive_max_pool2d(input, output_size)
+# 
+stop('not implemented')
+}
+
+nnf_adaptive_max_pool3d <- function(output_size, return_indices) {
+#     def fn(*args, **kwargs):
+#         dispatch_flag = False
+#         if arg_name in kwargs:
+#             dispatch_flag = kwargs[arg_name]
+#         elif arg_index < len(args):
+#             dispatch_flag = args[arg_index]
+# 
+#         if dispatch_flag:
+#             return if_true(*args, **kwargs)
+#         else:
+#             return if_false(*args, **kwargs)
+# 
+stop('not implemented')
+}
+
+nnf_adaptive_max_pool3d_with_indices <- function(output_size, return_indices) {
+# def adaptive_max_pool3d_with_indices(input, output_size, return_indices=False):
+#     # type: (Tensor, BroadcastingList3[int], bool) -> Tuple[Tensor, Tensor]
+#     r"""Applies a 3D adaptive max pooling over an input signal composed of
+#     several input planes.
+# 
+#     See :class:`~torch.nn.AdaptiveMaxPool3d` for details and output shape.
+# 
+#     Args:
+#         output_size: the target output size (single integer or
+#             triple-integer tuple)
+#         return_indices: whether to return pooling indices. Default: ``False``
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 adaptive_max_pool3d_with_indices, (input,), input, output_size,
+#                 return_indices=return_indices)
+#     output_size = _list_with_default(output_size, input.size())
+#     return torch._C._nn.adaptive_max_pool3d(input, output_size)
+# 
+stop('not implemented')
+}
+
+nnf_affine_grid <- function(theta, size, align_corners) {
+# def affine_grid(theta, size, align_corners=None):
+#     # type: (Tensor, List[int], Optional[bool]) -> Tensor
+#     r"""Generates a 2D or 3D flow field (sampling grid), given a batch of
+#     affine matrices :attr:`theta`.
+# 
+#     .. note::
+#         This function is often used in conjunction with :func:`grid_sample`
+#         to build `Spatial Transformer Networks`_ .
+# 
+#     Args:
+#         theta (Tensor): input batch of affine matrices with shape
+#             (:math:`N \times 2 \times 3`) for 2D or
+#             (:math:`N \times 3 \times 4`) for 3D
+#         size (torch.Size): the target output image size.
+#             (:math:`N \times C \times H \times W` for 2D or
+#             :math:`N \times C \times D \times H \times W` for 3D)
+#             Example: torch.Size((32, 3, 24, 24))
+#         align_corners (bool, optional): if ``True``, consider ``-1`` and ``1``
+#             to refer to the centers of the corner pixels rather than the image corners.
+#             Refer to :func:`grid_sample` for a more complete description.
+#             A grid generated by :func:`affine_grid` should be passed to :func:`grid_sample`
+#             with the same setting for this option.
+#             Default: ``False``
+# 
+#     Returns:
+#         output (Tensor): output Tensor of size (:math:`N \times H \times W \times 2`)
+# 
+#     .. _`Spatial Transformer Networks`:
+#         https://arxiv.org/abs/1506.02025
+# 
+#     .. warning::
+#         When ``align_corners = True``, the grid positions depend on the pixel
+#         size relative to the input image size, and so the locations sampled by
+#         :func:`grid_sample` will differ for the same input given at different
+#         resolutions (that is, after being upsampled or downsampled).
+#         The default behavior up to version 1.2.0 was ``align_corners = True``.
+#         Since then, the default behavior has been changed to ``align_corners = False``,
+#         in order to bring it in line with the default for :func:`interpolate`.
+#     .. warning::
+#         When ``align_corners = True``, 2D affine transforms on 1D data and
+#         3D affine transforms on 2D data (that is, when one of the spatial
+#         dimensions has unit size) are ill-defined, and not an intended use case.
+#         This is not a problem when ``align_corners = False``.
+#         Up to version 1.2.0, all grid points along a unit dimension were
+#         considered arbitrarily to be at ``-1``.
+#         From version 1.3.0, under ``align_corners = True`` all grid points
+#         along a unit dimension are condsidered to be at ```0``
+#         (the center of the input image).
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(theta) is not Tensor and has_torch_function((theta,)):
+#             return handle_torch_function(
+#                 affine_grid, (theta,), theta, size, align_corners=align_corners)
+#     if align_corners is None:
+#         warnings.warn("Default grid_sample and affine_grid behavior has changed "
+#                       "to align_corners=False since 1.3.0. Please specify "
+#                       "align_corners=True if the old behavior is desired. "
+#                       "See the documentation of grid_sample for details.")
+#         align_corners = False
+# 
+#     # enforce floating point dtype on theta
+#     if not theta.is_floating_point():
+#         raise ValueError("Expected theta to have floating point type, but got {}"
+#                          .format(theta.dtype))
+#     # check that shapes and sizes match
+#     if len(size) == 4:
+#         if theta.dim() != 3 or theta.shape[-2] != 2 or theta.shape[-1] != 3:
+#             raise ValueError("Expected a batch of 2D affine matrices of shape Nx2x3 "
+#                              "for size {}. Got {}.".format(size, theta.shape))
+#         spatial_size = size[-2:]  # spatial dimension sizes
+#     elif len(size) == 5:
+#         if theta.dim() != 3 or theta.shape[-2] != 3 or theta.shape[-1] != 4:
+#             raise ValueError("Expected a batch of 3D affine matrices of shape Nx3x4 "
+#                              "for size {}. Got {}.".format(size, theta.shape))
+#         spatial_size = size[-3:]  # spatial dimension sizes
+#     else:
+#         raise NotImplementedError("affine_grid only supports 4D and 5D sizes, "
+#                                   "for 2D and 3D affine transforms, respectively. "
+#                                   "Got size {}.".format(size))
+#     # check for empty span
+#     if align_corners and min(spatial_size) == 1:
+#         warnings.warn("Since version 1.3.0, affine_grid behavior has changed "
+#                       "for unit-size grids when align_corners=True. "
+#                       "This is not an intended use case of affine_grid. "
+#                       "See the documentation of affine_grid for details.")
+#     elif min(size) <= 0:
+#         raise ValueError("Expected non-zero, positive output size. Got {}"
+#                          .format(size))
+# 
+#     return torch.affine_grid_generator(theta, size, align_corners)
+# 
+stop('not implemented')
+}
+
+nnf_alpha_dropout <- function() {
+# def alpha_dropout(input, p=0.5, training=False, inplace=False):
+#     # type: (Tensor, float, bool, bool) -> Tensor
+#     r"""Applies alpha dropout to the input.
+# 
+#     See :class:`~torch.nn.AlphaDropout` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 alpha_dropout, (input,), input, p=p, training=training, inplace=inplace)
+#     if p < 0. or p > 1.:
+#         raise ValueError("dropout probability has to be between 0 and 1, "
+#                          "but got {}".format(p))
+#     return (_VF.alpha_dropout_(input, p, training)
+#             if inplace
+#             else _VF.alpha_dropout(input, p, training))
+# 
+stop('not implemented')
+}
+
+nnf_avg_pool1d <- function(input, kernel_size, stride, padding, ceil_mode, count_include_pad) {
+# 
+stop('not implemented')
+}
+
+nnf_avg_pool2d <- function(input, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override) {
+# 
+stop('not implemented')
+}
+
+nnf_avg_pool3d <- function(input, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override) {
+# 
+stop('not implemented')
+}
+
+nnf_batch_norm <- function() {
+# def batch_norm(input, running_mean, running_var, weight=None, bias=None,
+#                training=False, momentum=0.1, eps=1e-5):
+#     # type: (Tensor, Optional[Tensor], Optional[Tensor], Optional[Tensor], Optional[Tensor], bool, float, float) -> Tensor  # noqa
+#     r"""Applies Batch Normalization for each channel across a batch of data.
+# 
+#     See :class:`~torch.nn.BatchNorm1d`, :class:`~torch.nn.BatchNorm2d`,
+#     :class:`~torch.nn.BatchNorm3d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 batch_norm, (input,), input, running_mean, running_var, weight=weight,
+#                 bias=bias, training=training, momentum=momentum, eps=eps)
+#     if training:
+#         _verify_batch_size(input.size())
+# 
+#     return torch.batch_norm(
+#         input, weight, bias, running_mean, running_var,
+#         training, momentum, eps, torch.backends.cudnn.enabled
+#     )
+# 
+stop('not implemented')
+}
+
+nnf_bilinear <- function() {
+# def bilinear(input1, input2, weight, bias=None):
+#     # type: (Tensor, Tensor, Tensor, Optional[Tensor]) -> Tensor
+#     r"""
+#     Applies a bilinear transformation to the incoming data:
+#     :math:`y = x_1 A x_2 + b`
+# 
+#     Shape:
+# 
+#         - input1: :math:`(N, *, H_{in1})` where :math:`H_{in1}=\text{in1\_features}`
+#           and :math:`*` means any number of additional dimensions.
+#           All but the last dimension of the inputs should be the same.
+#         - input2: :math:`(N, *, H_{in2})` where :math:`H_{in2}=\text{in2\_features}`
+#         - weight: :math:`(\text{out\_features}, \text{in1\_features},
+#           \text{in2\_features})`
+#         - bias: :math:`(\text{out\_features})`
+#         - output: :math:`(N, *, H_{out})` where :math:`H_{out}=\text{out\_features}`
+#           and all but the last dimension are the same shape as the input.
+#     """
+#     return torch.bilinear(input1, input2, weight, bias)
+# 
+stop('not implemented')
+}
+
+nnf_binary_cross_entropy <- function(input, target, weight, size_average, reduce, reduction) {
+# def binary_cross_entropy(input, target, weight=None, size_average=None,
+#                          reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], Optional[bool], str) -> Tensor
+#     r"""Function that measures the Binary Cross Entropy
+#     between the target and the output.
+# 
+#     See :class:`~torch.nn.BCELoss` for details.
+# 
+#     Args:
+#         input: Tensor of arbitrary shape
+#         target: Tensor of the same shape as input
+#         weight (Tensor, optional): a manual rescaling weight
+#                 if provided it's repeated to match input tensor shape
+#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
+#             the losses are averaged over each loss element in the batch. Note that for
+#             some losses, there multiple elements per sample. If the field :attr:`size_average`
+#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
+#             when reduce is ``False``. Default: ``True``
+#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
+#             losses are averaged or summed over observations for each minibatch depending
+#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
+#             batch element instead and ignores :attr:`size_average`. Default: ``True``
+#         reduction (string, optional): Specifies the reduction to apply to the output:
+#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
+#             ``'mean'``: the sum of the output will be divided by the number of
+#             elements in the output, ``'sum'``: the output will be summed. Note: :attr:`size_average`
+#             and :attr:`reduce` are in the process of being deprecated, and in the meantime,
+#             specifying either of those two args will override :attr:`reduction`. Default: ``'mean'``
+# 
+#     Examples::
+# 
+#         >>> input = torch.randn((3, 2), requires_grad=True)
+#         >>> target = torch.rand((3, 2), requires_grad=False)
+#         >>> loss = F.binary_cross_entropy(F.sigmoid(input), target)
+#         >>> loss.backward()
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 binary_cross_entropy, tens_ops, input, target, weight=weight,
+#                 size_average=size_average, reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         reduction_enum = _Reduction.get_enum(reduction)
+#     if target.size() != input.size():
+#         warnings.warn("Using a target size ({}) that is different to the input size ({}) is deprecated. "
+#                       "Please ensure they have the same size.".format(target.size(), input.size()),
+#                       stacklevel=2)
+#     if input.numel() != target.numel():
+#         raise ValueError("Target and input must have the same number of elements. target nelement ({}) "
+#                          "!= input nelement ({})".format(target.numel(), input.numel()))
+# 
+#     if weight is not None:
+#         new_size = _infer_size(target.size(), weight.size())
+#         weight = weight.expand(new_size)
+# 
+#     return torch._C._nn.binary_cross_entropy(
+#         input, target, weight, reduction_enum)
+# 
+stop('not implemented')
+}
+
+nnf_binary_cross_entropy_with_logits <- function(input, target, weight, size_average, reduce, reduction, pos_weight) {
+# def binary_cross_entropy_with_logits(input, target, weight=None, size_average=None,
+#                                      reduce=None, reduction='mean', pos_weight=None):
+#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], Optional[bool], str, Optional[Tensor]) -> Tensor
+#     r"""Function that measures Binary Cross Entropy between target and output
+#     logits.
+# 
+#     See :class:`~torch.nn.BCEWithLogitsLoss` for details.
+# 
+#     Args:
+#         input: Tensor of arbitrary shape
+#         target: Tensor of the same shape as input
+#         weight (Tensor, optional): a manual rescaling weight
+#             if provided it's repeated to match input tensor shape
+#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
+#             the losses are averaged over each loss element in the batch. Note that for
+#             some losses, there multiple elements per sample. If the field :attr:`size_average`
+#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
+#             when reduce is ``False``. Default: ``True``
+#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
+#             losses are averaged or summed over observations for each minibatch depending
+#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
+#             batch element instead and ignores :attr:`size_average`. Default: ``True``
+#         reduction (string, optional): Specifies the reduction to apply to the output:
+#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
+#             ``'mean'``: the sum of the output will be divided by the number of
+#             elements in the output, ``'sum'``: the output will be summed. Note: :attr:`size_average`
+#             and :attr:`reduce` are in the process of being deprecated, and in the meantime,
+#             specifying either of those two args will override :attr:`reduction`. Default: ``'mean'``
+#         pos_weight (Tensor, optional): a weight of positive examples.
+#                 Must be a vector with length equal to the number of classes.
+# 
+#     Examples::
+# 
+#          >>> input = torch.randn(3, requires_grad=True)
+#          >>> target = torch.empty(3).random_(2)
+#          >>> loss = F.binary_cross_entropy_with_logits(input, target)
+#          >>> loss.backward()
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 binary_cross_entropy_with_logits, tens_ops, input, target, weight=weight,
+#                 size_average=size_average, reduce=reduce, reduction=reduction,
+#                 pos_weight=pos_weight)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         reduction_enum = _Reduction.get_enum(reduction)
+# 
+#     if not (target.size() == input.size()):
+#         raise ValueError("Target size ({}) must be the same as input size ({})".format(target.size(), input.size()))
+# 
+#     return torch.binary_cross_entropy_with_logits(input, target, weight, pos_weight, reduction_enum)
+# 
+stop('not implemented')
+}
+
+nnf_boolean_dispatch <- function() {
+# def boolean_dispatch(arg_name, arg_index, default, if_true, if_false, module_name, func_name):
+#     """
+#     Dispatches to either of 2 script functions based on a boolean argument.
+#     In TorchScript, the boolean argument must be constant so that the correct
+#     function to use can be determined at compile time.
+#     """
+#     def fn(*args, **kwargs):
+#         dispatch_flag = False
+#         if arg_name in kwargs:
+#             dispatch_flag = kwargs[arg_name]
+#         elif arg_index < len(args):
+#             dispatch_flag = args[arg_index]
+# 
+#         if dispatch_flag:
+#             return if_true(*args, **kwargs)
+#         else:
+#             return if_false(*args, **kwargs)
+# 
+#     if if_true.__doc__ is None and if_false.__doc__ is not None:
+#         doc = if_false.__doc__
+#         if_true.__doc__ = doc
+#     elif if_false.__doc__ is None and if_true.__doc__ is not None:
+#         doc = if_true.__doc__
+#         if_false.__doc__ = doc
+#     elif if_false.__doc__ is None and if_true.__doc__ is None:
+#         # neither function has a docstring
+#         doc = None
+#     else:
+#         raise RuntimeError("only one function can have a docstring")
+#     fn.__doc__ = doc
+# 
+#     if module_name is not None:
+#         fn.__module__ = module_name
+#     if func_name is not None:
+#         fn.__name__ = func_name
+# 
+#     boolean_dispatched[fn] = {
+#         "if_true": if_true,
+#         "if_false": if_false,
+#         "index": arg_index,
+#         "default": default,
+#         "arg_name": arg_name
+#     }
+#     return fn
+# 
+stop('not implemented')
+}
+
+nnf_celu <- function() {
+# def celu(input, alpha=1., inplace=False):
+#     # type: (Tensor, float, bool) -> Tensor
+#     r"""celu(input, alpha=1., inplace=False) -> Tensor
+# 
+#     Applies element-wise,
+#     :math:`\text{CELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x/\alpha) - 1))`.
+# 
+#     See :class:`~torch.nn.CELU` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(celu, (input,), input, alpha=alpha,
+#                                          inplace=inplace)
+#     if inplace:
+#         result = torch.celu_(input, alpha)
+#     else:
+#         result = torch.celu(input, alpha)
+#     return result
+# 
+stop('not implemented')
+}
+
+nnf_celu_ <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_conv1d <- function(input, weight, bias, stride, padding, dilation, groups) {
+# 
+stop('not implemented')
+}
+
+nnf_conv2d <- function(input, weight, bias, stride, padding, dilation, groups) {
+# 
+stop('not implemented')
+}
+
+nnf_conv3d <- function(input, weight, bias, stride, padding, dilation, groups) {
+# 
+stop('not implemented')
+}
+
+nnf_conv_tbc <- function(input, weight, bias, pad) {
+# 
+stop('not implemented')
+}
+
+nnf_conv_transpose1d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) {
+# 
+stop('not implemented')
+}
+
+nnf_conv_transpose2d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) {
+# 
+stop('not implemented')
+}
+
+nnf_conv_transpose3d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) {
+# 
+stop('not implemented')
+}
+
+nnf_cosine_embedding_loss <- function() {
+# def cosine_embedding_loss(input1, input2, target, margin=0, size_average=None,
+#                           reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Tensor, float, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""cosine_embedding_loss(input1, input2, target, margin=0, size_average=None, reduce=None, reduction='mean') -> Tensor
+# 
+#     See :class:`~torch.nn.CosineEmbeddingLoss` for details.
+#     """  # noqa
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input1, input2, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 cosine_embedding_loss, tens_ops, input1, input2, target, margin=margin,
+#                 size_average=size_average, reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         reduction_enum = _Reduction.get_enum(reduction)
+#     return torch.cosine_embedding_loss(input1, input2, target, margin, reduction_enum)
+# 
+stop('not implemented')
+}
+
+nnf_cosine_similarity <- function(x1, x2, dim, eps) {
+# 
+stop('not implemented')
+}
+
+nnf_cross_entropy <- function(input, target, weight, size_average, ignore_index, reduce, reduction) {
+# def cross_entropy(input, target, weight=None, size_average=None, ignore_index=-100,
+#                   reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], int, Optional[bool], str) -> Tensor
+#     r"""This criterion combines `log_softmax` and `nll_loss` in a single
+#     function.
+# 
+#     See :class:`~torch.nn.CrossEntropyLoss` for details.
+# 
+#     Args:
+#         input (Tensor) : :math:`(N, C)` where `C = number of classes` or :math:`(N, C, H, W)`
+#             in case of 2D Loss, or :math:`(N, C, d_1, d_2, ..., d_K)` where :math:`K \geq 1`
+#             in the case of K-dimensional loss.
+#         target (Tensor) : :math:`(N)` where each value is :math:`0 \leq \text{targets}[i] \leq C-1`,
+#             or :math:`(N, d_1, d_2, ..., d_K)` where :math:`K \geq 1` for
+#             K-dimensional loss.
+#         weight (Tensor, optional): a manual rescaling weight given to each
+#             class. If given, has to be a Tensor of size `C`
+#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
+#             the losses are averaged over each loss element in the batch. Note that for
+#             some losses, there multiple elements per sample. If the field :attr:`size_average`
+#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
+#             when reduce is ``False``. Default: ``True``
+#         ignore_index (int, optional): Specifies a target value that is ignored
+#             and does not contribute to the input gradient. When :attr:`size_average` is
+#             ``True``, the loss is averaged over non-ignored targets. Default: -100
+#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
+#             losses are averaged or summed over observations for each minibatch depending
+#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
+#             batch element instead and ignores :attr:`size_average`. Default: ``True``
+#         reduction (string, optional): Specifies the reduction to apply to the output:
+#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
+#             ``'mean'``: the sum of the output will be divided by the number of
+#             elements in the output, ``'sum'``: the output will be summed. Note: :attr:`size_average`
+#             and :attr:`reduce` are in the process of being deprecated, and in the meantime,
+#             specifying either of those two args will override :attr:`reduction`. Default: ``'mean'``
+# 
+#     Examples::
+# 
+#         >>> input = torch.randn(3, 5, requires_grad=True)
+#         >>> target = torch.randint(5, (3,), dtype=torch.int64)
+#         >>> loss = F.cross_entropy(input, target)
+#         >>> loss.backward()
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 cross_entropy, tens_ops, input, target, weight=weight,
+#                 size_average=size_average, ignore_index=ignore_index, reduce=reduce,
+#                 reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction = _Reduction.legacy_get_string(size_average, reduce)
+#     return nll_loss(log_softmax(input, 1), target, weight, None, ignore_index, None, reduction)
+# 
+stop('not implemented')
+}
+
+nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blank, reduction, zero_infinity) {
+# def ctc_loss(log_probs, targets, input_lengths, target_lengths, blank=0,
+#              reduction='mean', zero_infinity=False):
+#     # type: (Tensor, Tensor, Tensor, Tensor, int, str, bool) -> Tensor
+#     r"""The Connectionist Temporal Classification loss.
+# 
+#     See :class:`~torch.nn.CTCLoss` for details.
+# 
+#     .. include:: cudnn_deterministic.rst
+#     .. include:: cuda_deterministic_backward.rst
+# 
+#     Args:
+#         log_probs: :math:`(T, N, C)` where `C = number of characters in alphabet including blank`,
+#             `T = input length`, and `N = batch size`.
+#             The logarithmized probabilities of the outputs
+#             (e.g. obtained with :func:`torch.nn.functional.log_softmax`).
+#         targets: :math:`(N, S)` or `(sum(target_lengths))`.
+#             Targets cannot be blank. In the second form, the targets are assumed to be concatenated.
+#         input_lengths: :math:`(N)`.
+#             Lengths of the inputs (must each be :math:`\leq T`)
+#         target_lengths: :math:`(N)`.
+#             Lengths of the targets
+#         blank (int, optional):
+#             Blank label. Default :math:`0`.
+#         reduction (string, optional): Specifies the reduction to apply to the output:
+#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
+#             ``'mean'``: the output losses will be divided by the target lengths and
+#             then the mean over the batch is taken, ``'sum'``: the output will be
+#             summed. Default: ``'mean'``
+#         zero_infinity (bool, optional):
+#             Whether to zero infinite losses and the associated gradients.
+#             Default: ``False``
+#             Infinite losses mainly occur when the inputs are too short
+#             to be aligned to the targets.
+# 
+#     Example::
+# 
+#         >>> log_probs = torch.randn(50, 16, 20).log_softmax(2).detach().requires_grad_()
+#         >>> targets = torch.randint(1, 20, (16, 30), dtype=torch.long)
+#         >>> input_lengths = torch.full((16,), 50, dtype=torch.long)
+#         >>> target_lengths = torch.randint(10,30,(16,), dtype=torch.long)
+#         >>> loss = F.ctc_loss(log_probs, targets, input_lengths, target_lengths)
+#         >>> loss.backward()
+#     """
+#     return torch.ctc_loss(log_probs, targets, input_lengths, target_lengths, blank, _Reduction.get_enum(reduction),
+#                           zero_infinity)
+# 
+stop('not implemented')
+}
+
+nnf_dropout <- function(p, training, inplace) {
+# def dropout(input, p=0.5, training=True, inplace=False):
+#     # type: (Tensor, float, bool, bool) -> Tensor
+#     r"""
+#     During training, randomly zeroes some of the elements of the input
+#     tensor with probability :attr:`p` using samples from a Bernoulli
+#     distribution.
+# 
+#     See :class:`~torch.nn.Dropout` for details.
+# 
+#     Args:
+#         p: probability of an element to be zeroed. Default: 0.5
+#         training: apply dropout if is ``True``. Default: ``True``
+#         inplace: If set to ``True``, will do this operation in-place. Default: ``False``
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 dropout, (input,), input, p=p, training=training, inplace=inplace)
+#     if p < 0. or p > 1.:
+#         raise ValueError("dropout probability has to be between 0 and 1, "
+#                          "but got {}".format(p))
+#     return (_VF.dropout_(input, p, training)
+#             if inplace
+#             else _VF.dropout(input, p, training))
+# 
+stop('not implemented')
+}
+
+nnf_dropout2d <- function(p, training, inplace) {
+# def dropout2d(input, p=0.5, training=True, inplace=False):
+#     # type: (Tensor, float, bool, bool) -> Tensor
+#     r"""
+#     Randomly zero out entire channels (a channel is a 2D feature map,
+#     e.g., the :math:`j`-th channel of the :math:`i`-th sample in the
+#     batched input is a 2D tensor :math:`\text{input}[i, j]`) of the input tensor).
+#     Each channel will be zeroed out independently on every forward call with
+#     probability :attr:`p` using samples from a Bernoulli distribution.
+# 
+#     See :class:`~torch.nn.Dropout2d` for details.
+# 
+#     Args:
+#         p: probability of a channel to be zeroed. Default: 0.5
+#         training: apply dropout if is ``True``. Default: ``True``
+#         inplace: If set to ``True``, will do this operation in-place. Default: ``False``
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 dropout2d, (input,), input, p=p, training=training, inplace=inplace)
+#     if p < 0. or p > 1.:
+#         raise ValueError("dropout probability has to be between 0 and 1, "
+#                          "but got {}".format(p))
+#     return (_VF.feature_dropout_(input, p, training)
+#             if inplace
+#             else _VF.feature_dropout(input, p, training))
+# 
+stop('not implemented')
+}
+
+nnf_dropout3d <- function(p, training, inplace) {
+# def dropout3d(input, p=0.5, training=True, inplace=False):
+#     # type: (Tensor, float, bool, bool) -> Tensor
+#     r"""
+#     Randomly zero out entire channels (a channel is a 3D feature map,
+#     e.g., the :math:`j`-th channel of the :math:`i`-th sample in the
+#     batched input is a 3D tensor :math:`\text{input}[i, j]`) of the input tensor).
+#     Each channel will be zeroed out independently on every forward call with
+#     probability :attr:`p` using samples from a Bernoulli distribution.
+# 
+#     See :class:`~torch.nn.Dropout3d` for details.
+# 
+#     Args:
+#         p: probability of a channel to be zeroed. Default: 0.5
+#         training: apply dropout if is ``True``. Default: ``True``
+#         inplace: If set to ``True``, will do this operation in-place. Default: ``False``
+#     """
+#     # This is 100% the same code as dropout2d. We duplicate this code so that
+#     # stack traces are not confusing.
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 dropout3d, (input,), input, p=p, training=training, inplace=inplace)
+#     if p < 0. or p > 1.:
+#         raise ValueError("dropout probability has to be between 0 and 1, "
+#                          "but got {}".format(p))
+#     return (_VF.feature_dropout_(input, p, training)
+#             if inplace
+#             else _VF.feature_dropout(input, p, training))
+# 
+stop('not implemented')
+}
+
+nnf_elu <- function() {
+# def elu(input, alpha=1., inplace=False):
+#     # type: (Tensor, float, bool) -> Tensor
+#     r"""Applies element-wise,
+#     :math:`\text{ELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x) - 1))`.
+# 
+#     See :class:`~torch.nn.ELU` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(elu, (input,), input, alpha=alpha,
+#                                          inplace=inplace)
+#     if inplace:
+#         result = torch._C._nn.elu_(input, alpha)
+#     else:
+#         result = torch._C._nn.elu(input, alpha)
+#     return result
+# 
+stop('not implemented')
+}
+
+nnf_elu_ <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_embedding <- function(input, weight, padding_idx, max_norm, norm_type, scale_grad_by_freq, sparse) {
+# def embedding(input, weight, padding_idx=None, max_norm=None, norm_type=2.,
+#               scale_grad_by_freq=False, sparse=False):
+#     # type: (Tensor, Tensor, Optional[int], Optional[float], float, bool, bool) -> Tensor
+#     r"""A simple lookup table that looks up embeddings in a fixed dictionary and size.
+# 
+#     This module is often used to retrieve word embeddings using indices.
+#     The input to the module is a list of indices, and the embedding matrix,
+#     and the output is the corresponding word embeddings.
+# 
+#     See :class:`torch.nn.Embedding` for more details.
+# 
+#     Args:
+#         input (LongTensor): Tensor containing indices into the embedding matrix
+#         weight (Tensor): The embedding matrix with number of rows equal to the maximum possible index + 1,
+#             and number of columns equal to the embedding size
+#         padding_idx (int, optional): If given, pads the output with the embedding vector at :attr:`padding_idx`
+#                                          (initialized to zeros) whenever it encounters the index.
+#         max_norm (float, optional): If given, each embedding vector with norm larger than :attr:`max_norm`
+#                                     is renormalized to have norm :attr:`max_norm`.
+#                                     Note: this will modify :attr:`weight` in-place.
+#         norm_type (float, optional): The p of the p-norm to compute for the :attr:`max_norm` option. Default ``2``.
+#         scale_grad_by_freq (boolean, optional): If given, this will scale gradients by the inverse of frequency of
+#                                                 the words in the mini-batch. Default ``False``.
+#         sparse (bool, optional): If ``True``, gradient w.r.t. :attr:`weight` will be a sparse tensor. See Notes under
+#                                  :class:`torch.nn.Embedding` for more details regarding sparse gradients.
+# 
+#     Shape:
+#         - Input: LongTensor of arbitrary shape containing the indices to extract
+#         - Weight: Embedding matrix of floating point type with shape `(V, embedding_dim)`,
+#                             where V = maximum index + 1 and embedding_dim = the embedding size
+#         - Output: `(*, embedding_dim)`, where `*` is the input shape
+# 
+#     Examples::
+# 
+#         >>> # a batch of 2 samples of 4 indices each
+#         >>> input = torch.tensor([[1,2,4,5],[4,3,2,9]])
+#         >>> # an embedding matrix containing 10 tensors of size 3
+#         >>> embedding_matrix = torch.rand(10, 3)
+#         >>> F.embedding(input, embedding_matrix)
+#         tensor([[[ 0.8490,  0.9625,  0.6753],
+#                  [ 0.9666,  0.7761,  0.6108],
+#                  [ 0.6246,  0.9751,  0.3618],
+#                  [ 0.4161,  0.2419,  0.7383]],
+# 
+#                 [[ 0.6246,  0.9751,  0.3618],
+#                  [ 0.0237,  0.7794,  0.0528],
+#                  [ 0.9666,  0.7761,  0.6108],
+#                  [ 0.3385,  0.8612,  0.1867]]])
+# 
+#         >>> # example with padding_idx
+#         >>> weights = torch.rand(10, 3)
+#         >>> weights[0, :].zero_()
+#         >>> embedding_matrix = weights
+#         >>> input = torch.tensor([[0,2,0,5]])
+#         >>> F.embedding(input, embedding_matrix, padding_idx=0)
+#         tensor([[[ 0.0000,  0.0000,  0.0000],
+#                  [ 0.5609,  0.5384,  0.8720],
+#                  [ 0.0000,  0.0000,  0.0000],
+#                  [ 0.6262,  0.2438,  0.7471]]])
+#     """
+#     if padding_idx is not None:
+#         if padding_idx > 0:
+#             assert padding_idx < weight.size(0), 'Padding_idx must be within num_embeddings'
+#         elif padding_idx < 0:
+#             assert padding_idx >= -weight.size(0), 'Padding_idx must be within num_embeddings'
+#             padding_idx = weight.size(0) + padding_idx
+#     else:
+#         padding_idx = -1
+#     if max_norm is not None:
+#         # `embedding_renorm_` will call .contiguous() on input anyways, so we
+#         # call it here and take advantage of the improved locality in the
+#         # `embedding` call below too.
+#         input = input.contiguous()
+#         # XXX: equivalent to
+#         # with torch.no_grad():
+#         #   torch.nembedding_renorm_
+#         # remove once script supports set_grad_enabled
+#         _no_grad_embedding_renorm_(weight, input, max_norm, norm_type)
+#     return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+# 
+stop('not implemented')
+}
+
+nnf_embedding_bag <- function(input, weight, offsets, max_norm, norm_type, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset, The) {
+# def embedding_bag(input, weight, offsets=None, max_norm=None, norm_type=2,
+#                   scale_grad_by_freq=False, mode='mean', sparse=False,
+#                   per_sample_weights=None, include_last_offset=False):
+#     # type: (Tensor, Tensor, Optional[Tensor], Optional[float], float, bool, str, bool, Optional[Tensor], bool) -> Tensor
+#     r"""Computes sums, means or maxes of `bags` of embeddings, without instantiating the
+#     intermediate embeddings.
+# 
+#     See :class:`torch.nn.EmbeddingBag` for more details.
+# 
+#     .. include:: cuda_deterministic_backward.rst
+# 
+#     Args:
+#         input (LongTensor): Tensor containing bags of indices into the embedding matrix
+#         weight (Tensor): The embedding matrix with number of rows equal to the maximum possible index + 1,
+#             and number of columns equal to the embedding size
+#         offsets (LongTensor, optional): Only used when :attr:`input` is 1D. :attr:`offsets` determines
+#                              the starting index position of each bag (sequence) in :attr:`input`.
+#         max_norm (float, optional): If given, each embedding vector with norm larger than :attr:`max_norm`
+#                                     is renormalized to have norm :attr:`max_norm`.
+#                                     Note: this will modify :attr:`weight` in-place.
+#         norm_type (float, optional): The ``p`` in the ``p``-norm to compute for the :attr:`max_norm` option.
+#                                      Default ``2``.
+#         scale_grad_by_freq (boolean, optional): if given, this will scale gradients by the inverse of frequency of
+#                                                 the words in the mini-batch. Default ``False``.
+#                                                 Note: this option is not supported when ``mode="max"``.
+#         mode (string, optional): ``"sum"``, ``"mean"`` or ``"max"``. Specifies the way to reduce the bag.
+#                                  Default: ``"mean"``
+#         sparse (bool, optional): if ``True``, gradient w.r.t. :attr:`weight` will be a sparse tensor. See Notes under
+#                                  :class:`torch.nn.Embedding` for more details regarding sparse gradients.
+#                                  Note: this option is not supported when ``mode="max"``.
+#         per_sample_weights (Tensor, optional): a tensor of float / double weights, or None
+#             to indicate all weights should be taken to be 1. If specified, :attr:`per_sample_weights`
+#             must have exactly the same shape as input and is treated as having the same
+#             :attr:`offsets`, if those are not None.
+# 
+#         include_last_offset (bool, optional): if ``True``, the size of offsets is equal to the number of bags + 1.
+#         The last element is the size of the input, or the ending index position of the last bag (sequence).
+# 
+# 
+#     Shape:
+# 
+#         - :attr:`input` (LongTensor) and :attr:`offsets` (LongTensor, optional)
+# 
+#           - If :attr:`input` is 2D of shape `(B, N)`,
+# 
+#             it will be treated as ``B`` bags (sequences) each of fixed length ``N``, and
+#             this will return ``B`` values aggregated in a way depending on the :attr:`mode`.
+#             :attr:`offsets` is ignored and required to be ``None`` in this case.
+# 
+#           - If :attr:`input` is 1D of shape `(N)`,
+# 
+#             it will be treated as a concatenation of multiple bags (sequences).
+#             :attr:`offsets` is required to be a 1D tensor containing the
+#             starting index positions of each bag in :attr:`input`. Therefore,
+#             for :attr:`offsets` of shape `(B)`, :attr:`input` will be viewed as
+#             having ``B`` bags. Empty bags (i.e., having 0-length) will have
+#             returned vectors filled by zeros.
+# 
+#         - :attr:`weight` (Tensor): the learnable weights of the module of
+#           shape `(num_embeddings, embedding_dim)`
+# 
+#         - :attr:`per_sample_weights` (Tensor, optional). Has the same shape as
+#           :attr:`input`.
+# 
+#         - :attr:`output`: aggregated embedding values of shape `(B, embedding_dim)`
+# 
+#     Examples::
+# 
+#         >>> # an Embedding module containing 10 tensors of size 3
+#         >>> embedding_matrix = torch.rand(10, 3)
+#         >>> # a batch of 2 samples of 4 indices each
+#         >>> input = torch.tensor([1,2,4,5,4,3,2,9])
+#         >>> offsets = torch.tensor([0,4])
+#         >>> F.embedding_bag(embedding_matrix, input, offsets)
+#         tensor([[ 0.3397,  0.3552,  0.5545],
+#                 [ 0.5893,  0.4386,  0.5882]])
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, weight)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 embedding_bag, tens_ops, input, weight, offsets=offsets, max_norm=max_norm,
+#                 norm_type=norm_type, scale_grad_by_freq=scale_grad_by_freq, mode=mode,
+#                 sparse=sparse, per_sample_weights=per_sample_weights,
+#                 include_last_offset=include_last_offset)
+#     # Check for backward compatibility.
+#     # Used to be embedding_bag(weight, input, ...)
+#     # Now is     embedding_bag(input, weight, ...)
+#     if weight.dtype == torch.long and input.is_floating_point():
+#         warnings.warn("Argument order of nn.functional.embedding_bag was changed. "
+#                       "Usage `embedding_bag(weight, input, ...)` is deprecated, "
+#                       "and should now be `embedding_bag(input, weight, ...)`.")
+#         weight, input = input, weight
+# 
+#     if per_sample_weights is not None and input.size() != per_sample_weights.size():
+#         raise ValueError("embedding_bag: If per_sample_weights ({}) is not None, "
+#                          "then it must have the same shape as the input ({})"
+#                          .format(per_sample_weights.shape, input.shape))
+# 
+#     if input.dim() == 2:
+#         if offsets is not None:
+#             raise ValueError("if input is 2D, then offsets has to be None"
+#                              ", as input is treated is a mini-batch of"
+#                              " fixed length sequences. However, found "
+#                              "offsets of type {}".format(type(offsets)))
+#         offsets = torch.arange(0, input.numel(), input.size(1),
+#                                dtype=torch.long, device=input.device)
+# 
+#         input = input.reshape(-1)
+#         if per_sample_weights is not None:
+#             per_sample_weights = per_sample_weights.reshape(-1)
+#     elif input.dim() == 1:
+#         if offsets is None:
+#             raise ValueError("offsets has to be a 1D Tensor but got None")
+#         if offsets.dim() != 1:
+#             raise ValueError("offsets has to be a 1D Tensor")
+#     else:
+#         raise ValueError("input has to be 1D or 2D Tensor,"
+#                          " but got Tensor of dimension {}".format(input.dim()))
+#     if mode == 'sum':
+#         mode_enum = 0
+#     elif mode == 'mean':
+#         mode_enum = 1
+#     elif mode == 'max':
+#         mode_enum = 2
+# 
+#         if scale_grad_by_freq:
+#             raise ValueError("max mode does not support scaling the gradient by the frequency")
+# 
+#         if sparse:
+#             raise ValueError("max mode does not support sparse weights")
+# 
+#     else:
+#         raise ValueError("mode has to be one of sum, mean or max")
+# 
+#     if max_norm is not None:
+#         # XXX: equivalent to
+#         # with torch.no_grad():
+#         #   torch.nembedding_renorm_
+#         # remove once script supports set_grad_enabled
+#         _no_grad_embedding_renorm_(weight, input, max_norm, norm_type)
+# 
+#     if per_sample_weights is not None and mode != 'sum':
+#         raise NotImplementedError("embedding_bag: per_sample_weights was not None. "
+#                                   "per_sample_weights is only supported for mode='sum' "
+#                                   "(got mode='{}'). Please open a feature request on GitHub."
+#                                   .format(mode))
+# 
+#     ret, _, _, _ = torch.embedding_bag(
+#         weight,
+#         input,
+#         offsets,
+#         scale_grad_by_freq,
+#         mode_enum,
+#         sparse,
+#         per_sample_weights,
+#         include_last_offset)
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_fold <- function() {
+# def fold(input, output_size, kernel_size, dilation=1, padding=0, stride=1):
+#     # type: (Tensor, BroadcastingList2[int], BroadcastingList2[int], BroadcastingList2[int], BroadcastingList2[int], BroadcastingList2[int]) -> Tensor  # noqa
+#     r"""Combines an array of sliding local blocks into a large containing
+#     tensor.
+# 
+#     .. warning::
+#         Currently, only 4-D output tensors (batched image-like tensors) are
+#         supported.
+# 
+#     See :class:`torch.nn.Fold` for details
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 fold, (input,), input, output_size, kernel_size, dilation=dilation,
+#                 padding=padding, stride=stride)
+#     if input.dim() == 3:
+#         msg = '{} must be int or 2-tuple for 3D input'
+#         assert_int_or_pair(output_size, 'output_size', msg)
+#         assert_int_or_pair(kernel_size, 'kernel_size', msg)
+#         assert_int_or_pair(dilation, 'dilation', msg)
+#         assert_int_or_pair(padding, 'padding', msg)
+#         assert_int_or_pair(stride, 'stride', msg)
+# 
+#         return torch._C._nn.col2im(input, _pair(output_size), _pair(kernel_size),
+#                                    _pair(dilation), _pair(padding), _pair(stride))
+#     else:
+#         raise NotImplementedError("Input Error: Only 3D input Tensors are supported (got {}D)".format(input.dim()))
+# 
+stop('not implemented')
+}
+
+nnf_fractional_max_pool2d <- function(kernel_size, output_size, output_ratio, return_indices) {
+#     def fn(*args, **kwargs):
+#         dispatch_flag = False
+#         if arg_name in kwargs:
+#             dispatch_flag = kwargs[arg_name]
+#         elif arg_index < len(args):
+#             dispatch_flag = args[arg_index]
+# 
+#         if dispatch_flag:
+#             return if_true(*args, **kwargs)
+#         else:
+#             return if_false(*args, **kwargs)
+# 
+stop('not implemented')
+}
+
+nnf_fractional_max_pool2d_with_indices <- function(kernel_size, output_size, output_ratio, return_indices) {
+# def fractional_max_pool2d_with_indices(input, kernel_size, output_size=None,
+#                                        output_ratio=None, return_indices=False,
+#                                        _random_samples=None):
+#     # type: (Tensor, BroadcastingList2[int], Optional[BroadcastingList2[int]], Optional[BroadcastingList2[float]], bool, Optional[Tensor]) -> Tuple[Tensor, Tensor]  # noqa
+#     r"""Applies 2D fractional max pooling over an input signal composed of several input planes.
+# 
+#     Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
+# 
+#     The max-pooling operation is applied in :math:`kH \times kW` regions by a stochastic
+#     step size determined by the target output size.
+#     The number of output features is equal to the number of input planes.
+# 
+#     Args:
+#         kernel_size: the size of the window to take a max over.
+#                      Can be a single number :math:`k` (for a square kernel of :math:`k \times k`)
+#                      or a tuple `(kH, kW)`
+#         output_size: the target output size of the image of the form :math:`oH \times oW`.
+#                      Can be a tuple `(oH, oW)` or a single number :math:`oH` for a square image :math:`oH \times oH`
+#         output_ratio: If one wants to have an output size as a ratio of the input size, this option can be given.
+#                       This has to be a number or tuple in the range (0, 1)
+#         return_indices: if ``True``, will return the indices along with the outputs.
+#                         Useful to pass to :func:`~torch.nn.functional.max_unpool2d`.
+# 
+#     Examples::
+#         >>> input = torch.randn(20, 16, 50, 32)
+#         >>> # pool of square window of size=3, and target output size 13x12
+#         >>> F.fractional_max_pool2d(input, 3, output_size=(13, 12))
+#         >>> # pool of square window and target output size being half of input image size
+#         >>> F.fractional_max_pool2d(input, 3, output_ratio=(0.5, 0.5))
+# 
+#     .. _Fractional MaxPooling:
+#         http://arxiv.org/abs/1412.6071
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 fractional_max_pool2d_with_indices, (input,), input, kernel_size,
+#                 output_size=output_size, output_ratio=output_ratio,
+#                 return_indices=return_indices, _random_samples=_random_samples)
+#     if output_size is None and output_ratio is None:
+#         raise ValueError("fractional_max_pool2d requires specifying either "
+#                          "an output_size or an output_ratio")
+#     if output_size is None:
+#         assert output_ratio is not None
+#         _output_ratio = _pair(output_ratio)
+#         output_size = [int(input.size(2) * _output_ratio[0]),
+#                        int(input.size(3) * _output_ratio[1])]
+# 
+#     if _random_samples is None:
+#         _random_samples = torch.rand(input.size(0), input.size(1), 2, dtype=input.dtype, device=input.device)
+#     return torch._C._nn.fractional_max_pool2d(input, kernel_size, output_size, _random_samples)
+# 
+stop('not implemented')
+}
+
+nnf_fractional_max_pool3d <- function(kernel_size, output_size, output_ratio, return_indices) {
+#     def fn(*args, **kwargs):
+#         dispatch_flag = False
+#         if arg_name in kwargs:
+#             dispatch_flag = kwargs[arg_name]
+#         elif arg_index < len(args):
+#             dispatch_flag = args[arg_index]
+# 
+#         if dispatch_flag:
+#             return if_true(*args, **kwargs)
+#         else:
+#             return if_false(*args, **kwargs)
+# 
+stop('not implemented')
+}
+
+nnf_fractional_max_pool3d_with_indices <- function(kernel_size, output_size, output_ratio, return_indices) {
+# def fractional_max_pool3d_with_indices(input, kernel_size, output_size=None,
+#                                        output_ratio=None, return_indices=False,
+#                                        _random_samples=None):
+#     # type: (Tensor, BroadcastingList3[int], Optional[BroadcastingList3[int]], Optional[BroadcastingList3[float]], bool, Optional[Tensor]) -> Tuple[Tensor, Tensor]  # noqa
+#     r"""Applies 3D fractional max pooling over an input signal composed of several input planes.
+# 
+#     Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
+# 
+#     The max-pooling operation is applied in :math:`kT \times kH \times kW` regions by a stochastic
+#     step size determined by the target output size.
+#     The number of output features is equal to the number of input planes.
+# 
+#     Args:
+#         kernel_size: the size of the window to take a max over.
+#                      Can be a single number :math:`k` (for a square kernel of :math:`k \times k \times k`)
+#                      or a tuple `(kT, kH, kW)`
+#         output_size: the target output size of the form :math:`oT \times oH \times oW`.
+#                      Can be a tuple `(oT, oH, oW)` or a single number :math:`oH` for a cubic output
+#                       :math:`oH \times oH \times oH`
+#         output_ratio: If one wants to have an output size as a ratio of the input size, this option can be given.
+#                       This has to be a number or tuple in the range (0, 1)
+#         return_indices: if ``True``, will return the indices along with the outputs.
+#                         Useful to pass to :func:`~torch.nn.functional.max_unpool3d`.
+# 
+#     Examples::
+#         >>> input = torch.randn(20, 16, 50, 32, 16)
+#         >>> # pool of cubic window of size=3, and target output size 13x12x11
+#         >>> F.fractional_max_pool3d(input, 3, output_size=(13, 12, 11))
+#         >>> # pool of cubic window and target output size being half of input size
+#         >>> F.fractional_max_pool3d(input, 3, output_ratio=(0.5, 0.5, 0.5))
+# 
+#     .. _Fractional MaxPooling:
+#         http://arxiv.org/abs/1412.6071
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 fractional_max_pool3d_with_indices, (input,), input, kernel_size,
+#                 output_size=output_size, output_ratio=output_ratio,
+#                 return_indices=return_indices, _random_samples=_random_samples)
+#     if output_size is None and output_ratio is None:
+#         raise ValueError("fractional_max_pool3d requires specifying either "
+#                          "an output_size or an output_ratio")
+#     if output_size is None:
+#         assert output_ratio is not None
+#         _output_ratio = _triple(output_ratio)
+#         output_size = [int(input.size(2) * _output_ratio[0]),
+#                        int(input.size(3) * _output_ratio[1]),
+#                        int(input.size(4) * _output_ratio[2])]
+# 
+#     if _random_samples is None:
+#         _random_samples = torch.rand(input.size(0), input.size(1), 3, dtype=input.dtype, device=input.device)
+#     return torch._C._nn.fractional_max_pool3d(input, kernel_size, output_size, _random_samples)
+# 
+stop('not implemented')
+}
+
+nnf_gelu <- function() {
+# def gelu(input):
+#     r"""gelu(input) -> Tensor
+# 
+#     Applies element-wise the function
+#     :math:`\text{GELU}(x) = x * \Phi(x)`
+# 
+#     where :math:`\Phi(x)` is the Cumulative Distribution Function for Gaussian Distribution.
+# 
+#     See `Gaussian Error Linear Units (GELUs) <https://arxiv.org/abs/1606.08415>`_.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(gelu, (input,), input)
+#     return torch._C._nn.gelu(input)
+# 
+stop('not implemented')
+}
+
+nnf_glu <- function(input, dim) {
+# def glu(input, dim=-1):
+#     # type: (Tensor, int) -> Tensor
+#     r"""
+#     glu(input, dim=-1) -> Tensor
+# 
+#     The gated linear unit. Computes:
+# 
+#     .. math ::
+#         \text{GLU}(a, b) = a \otimes \sigma(b)
+# 
+#     where `input` is split in half along `dim` to form `a` and `b`, :math:`\sigma`
+#     is the sigmoid function and :math:`\otimes` is the element-wise product between matrices.
+# 
+#     See `Language Modeling with Gated Convolutional Networks <https://arxiv.org/abs/1612.08083>`_.
+# 
+#     Args:
+#         input (Tensor): input tensor
+#         dim (int): dimension on which to split the input. Default: -1
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(glu, (input,), input, dim=dim)
+#     if input.dim() == 0:
+#         raise RuntimeError("glu does not suppport scalars because halving size must be even")
+#     return torch._C._nn.glu(input, dim)
+# 
+stop('not implemented')
+}
+
+nnf_grad <- function() {
+# """Gradient interface"""
+# 
+# import torch
+# from .modules.utils import _single, _pair, _triple
+# 
+# 
+# def _grad_input_padding(grad_output, input_size, stride, padding, kernel_size):
+#     input_size = list(input_size)
+#     k = grad_output.dim() - 2
+# 
+#     if len(input_size) == k + 2:
+#         input_size = input_size[-k:]
+#     if len(input_size) != k:
+#         raise ValueError("input_size must have {} elements (got {})"
+#                          .format(k + 2, len(input_size)))
+# 
+#     def dim_size(d):
+#         return ((grad_output.size(d + 2) - 1) * stride[d] - 2 * padding[d] +
+#                 kernel_size[d])
+# 
+#     min_sizes = [dim_size(d) for d in range(k)]
+#     max_sizes = [min_sizes[d] + stride[d] - 1 for d in range(k)]
+#     for size, min_size, max_size in zip(input_size, min_sizes, max_sizes):
+#         if size < min_size or size > max_size:
+#             raise ValueError(
+#                 ("requested an input grad size of {}, but valid sizes range "
+#                  "from {} to {} (for a grad_output of {})").format(
+#                      input_size, min_sizes, max_sizes,
+#                      grad_output.size()[2:]))
+# 
+#     return tuple(input_size[d] - min_sizes[d] for d in range(k))
+# 
+# 
+# def conv1d_input(input_size, weight, grad_output, stride=1, padding=0, dilation=1, groups=1):
+#     r"""
+#     Computes the gradient of conv1d with respect to the input of the convolution.
+#     This is same as the 1D transposed convolution operator under the hood but requires
+#     the shape of the gradient w.r.t. input to be specified explicitly.
+# 
+#     Args:
+#         input_size : Shape of the input gradient tensor
+#         weight: weight tensor (out_channels x in_channels/groups x kW)
+#         grad_output : output gradient tensor (minibatch x out_channels x oW)
+#         stride (int or tuple, optional): Stride of the convolution. Default: 1
+#         padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0
+#         dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#         groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
+# 
+#     Examples::
+# 
+#         >>> input = torch.randn(1,1,3, requires_grad=True)
+#         >>> weight = torch.randn(1,1,1, requires_grad=True)
+#         >>> output = F.conv1d(input, weight)
+#         >>> grad_output = torch.randn(output.shape)
+#         >>> grad_input = torch.autograd.grad(output, input, grad_output)
+#         >>> F.grad.conv1d_input(input.shape, weight, grad_output)
+# 
+#     """
+#     stride = _single(stride)
+#     padding = _single(padding)
+#     dilation = _single(dilation)
+#     kernel_size = [weight.shape[2]]
+# 
+#     if input_size is None:
+#         raise ValueError("grad.conv1d_input requires specifying an input_size")
+# 
+#     grad_input_padding = _grad_input_padding(grad_output, input_size, stride,
+#                                              padding, kernel_size)
+# 
+#     return torch.conv_transpose1d(
+#         grad_output, weight, None, stride, padding, grad_input_padding, groups,
+#         dilation)
+# 
+# 
+# def conv1d_weight(input, weight_size, grad_output, stride=1, padding=0, dilation=1, groups=1):
+#     r"""
+#     Computes the gradient of conv1d with respect to the weight of the convolution.
+# 
+#     Args:
+#         input: input tensor of shape (minibatch x in_channels x iW)
+#         weight_size : Shape of the weight gradient tensor
+#         grad_output : output gradient tensor (minibatch x out_channels x oW)
+#         stride (int or tuple, optional): Stride of the convolution. Default: 1
+#         padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0
+#         dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#         groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
+# 
+#     Examples::
+# 
+#         >>> input = torch.randn(1,1,3, requires_grad=True)
+#         >>> weight = torch.randn(1,1,1, requires_grad=True)
+#         >>> output = F.conv1d(input, weight)
+#         >>> grad_output = torch.randn(output.shape)
+#         >>> grad_weight = torch.autograd.grad(output, filter, grad_output)
+#         >>> F.grad.conv1d_weight(input, weight.shape, grad_output)
+# 
+#     """
+#     stride = _single(stride)
+#     padding = _single(padding)
+#     dilation = _single(dilation)
+#     in_channels = input.shape[1]
+#     out_channels = grad_output.shape[1]
+#     min_batch = input.shape[0]
+# 
+#     grad_output = grad_output.contiguous().repeat(1, in_channels // groups, 1)
+#     grad_output = grad_output.contiguous().view(
+#         grad_output.shape[0] * grad_output.shape[1], 1, grad_output.shape[2])
+# 
+#     input = input.contiguous().view(1, input.shape[0] * input.shape[1],
+#                                     input.shape[2])
+# 
+#     grad_weight = torch.conv1d(input, grad_output, None, dilation, padding,
+#                                stride, in_channels * min_batch)
+# 
+#     grad_weight = grad_weight.contiguous().view(
+#         min_batch, grad_weight.shape[1] // min_batch, grad_weight.shape[2])
+# 
+#     return grad_weight.sum(dim=0).view(
+#         in_channels // groups, out_channels, grad_weight.shape[2]).transpose(
+#             0, 1).narrow(2, 0, weight_size[2])
+# 
+# 
+# def conv2d_input(input_size, weight, grad_output, stride=1, padding=0, dilation=1, groups=1):
+#     r"""
+#     Computes the gradient of conv2d with respect to the input of the convolution.
+#     This is same as the 2D transposed convolution operator under the hood but requires
+#     the shape of the gradient w.r.t. input to be specified explicitly.
+# 
+#     Args:
+#         input_size : Shape of the input gradient tensor
+#         weight: weight tensor (out_channels x in_channels/groups x kH x kW)
+#         grad_output : output gradient tensor (minibatch x out_channels x oH x oW)
+#         stride (int or tuple, optional): Stride of the convolution. Default: 1
+#         padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0
+#         dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#         groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
+# 
+#     Examples::
+# 
+#         >>> input = torch.randn(1,1,3,3, requires_grad=True)
+#         >>> weight = torch.randn(1,1,1,2, requires_grad=True)
+#         >>> output = F.conv2d(input, weight)
+#         >>> grad_output = torch.randn(output.shape)
+#         >>> grad_input = torch.autograd.grad(output, input, grad_output)
+#         >>> F.grad.conv2d_input(input.shape, weight, grad_output)
+# 
+#     """
+#     stride = _pair(stride)
+#     padding = _pair(padding)
+#     dilation = _pair(dilation)
+#     kernel_size = (weight.shape[2], weight.shape[3])
+# 
+#     if input_size is None:
+#         raise ValueError("grad.conv2d_input requires specifying an input_size")
+# 
+#     grad_input_padding = _grad_input_padding(grad_output, input_size, stride,
+#                                              padding, kernel_size)
+# 
+#     return torch.conv_transpose2d(
+#         grad_output, weight, None, stride, padding, grad_input_padding, groups,
+#         dilation)
+# 
+# 
+# def conv2d_weight(input, weight_size, grad_output, stride=1, padding=0, dilation=1, groups=1):
+#     r"""
+#     Computes the gradient of conv2d with respect to the weight of the convolution.
+# 
+#     Args:
+#         input: input tensor of shape (minibatch x in_channels x iH x iW)
+#         weight_size : Shape of the weight gradient tensor
+#         grad_output : output gradient tensor (minibatch x out_channels x oH x oW)
+#         stride (int or tuple, optional): Stride of the convolution. Default: 1
+#         padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0
+#         dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#         groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
+# 
+#     Examples::
+# 
+#         >>> input = torch.randn(1,1,3,3, requires_grad=True)
+#         >>> weight = torch.randn(1,1,1,2, requires_grad=True)
+#         >>> output = F.conv2d(input, weight)
+#         >>> grad_output = torch.randn(output.shape)
+#         >>> grad_weight = torch.autograd.grad(output, filter, grad_output)
+#         >>> F.grad.conv2d_weight(input, weight.shape, grad_output)
+# 
+#     """
+#     stride = _pair(stride)
+#     padding = _pair(padding)
+#     dilation = _pair(dilation)
+#     in_channels = input.shape[1]
+#     out_channels = grad_output.shape[1]
+#     min_batch = input.shape[0]
+# 
+#     grad_output = grad_output.contiguous().repeat(1, in_channels // groups, 1,
+#                                                   1)
+#     grad_output = grad_output.contiguous().view(
+#         grad_output.shape[0] * grad_output.shape[1], 1, grad_output.shape[2],
+#         grad_output.shape[3])
+# 
+#     input = input.contiguous().view(1, input.shape[0] * input.shape[1],
+#                                     input.shape[2], input.shape[3])
+# 
+#     grad_weight = torch.conv2d(input, grad_output, None, dilation, padding,
+#                                stride, in_channels * min_batch)
+# 
+#     grad_weight = grad_weight.contiguous().view(
+#         min_batch, grad_weight.shape[1] // min_batch, grad_weight.shape[2],
+#         grad_weight.shape[3])
+# 
+#     return grad_weight.sum(dim=0).view(
+#         in_channels // groups, out_channels,
+#         grad_weight.shape[2], grad_weight.shape[3]).transpose(0, 1).narrow(
+#             2, 0, weight_size[2]).narrow(3, 0, weight_size[3])
+# 
+# 
+# def conv3d_input(input_size, weight, grad_output, stride=1, padding=0, dilation=1, groups=1):
+#     r"""
+#     Computes the gradient of conv3d with respect to the input of the convolution.
+#     This is same as the 3D transposed convolution operator under the hood but requires
+#     the shape of the gradient w.r.t. input to be specified explicitly.
+# 
+#     Args:
+#         input_size : Shape of the input gradient tensor
+#         weight: weights tensor (out_channels x in_channels/groups x kT x kH x kW)
+#         grad_output : output gradient tensor (minibatch x out_channels x oT x oH x oW)
+#         stride (int or tuple, optional): Stride of the convolution. Default: 1
+#         padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0
+#         dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#         groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
+# 
+#     Examples::
+# 
+#         >>> input = torch.randn(2, 8, 10, 10, 20, requires_grad=True)
+#         >>> weight = torch.randn(4, 8, 2, 3, 3, requires_grad=True)
+#         >>> output = F.conv3d(input, weight)
+#         >>> grad_output = torch.randn(output.shape)
+#         >>> grad_input = torch.autograd.grad(output, input, grad_output)
+#         >>> F.grad.conv3d_input(input.shape, weight, grad_output)
+# 
+#     """
+#     stride = _triple(stride)
+#     padding = _triple(padding)
+#     dilation = _triple(dilation)
+#     kernel_size = (weight.shape[2], weight.shape[3], weight.shape[4])
+# 
+#     if input_size is None:
+#         raise ValueError("grad.conv3d_input requires specifying an input_size")
+# 
+#     grad_input_padding = _grad_input_padding(grad_output, input_size, stride,
+#                                              padding, kernel_size)
+# 
+#     return torch.conv_transpose3d(
+#         grad_output, weight, None, stride, padding, grad_input_padding, groups,
+#         dilation)
+# 
+# 
+# def conv3d_weight(input, weight_size, grad_output, stride=1, padding=0, dilation=1, groups=1):
+#     r"""
+#     Computes the gradient of conv3d with respect to the weight of the convolution.
+# 
+#     Args:
+#         input: input tensor of shape (minibatch x in_channels x iT x iH x iW)
+#         weight_size : Shape of the weight gradient tensor
+#         grad_output : output gradient tensor (minibatch x out_channels x oT x oH x oW)
+#         stride (int or tuple, optional): Stride of the convolution. Default: 1
+#         padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0
+#         dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#         groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
+# 
+#     Examples::
+# 
+#         >>> input = torch.randn(2, 8, 10, 10, 20, requires_grad=True)
+#         >>> weight = torch.randn(4, 8, 2, 3, 3, requires_grad=True)
+#         >>> output = F.conv3d(input, weight)
+#         >>> grad_output = torch.randn(output.shape)
+#         >>> grad_weight = torch.autograd.grad(output, weight, grad_output)
+#         >>> F.grad.conv3d_weight(input, weight.shape, grad_output)
+# 
+#     """
+#     stride = _triple(stride)
+#     padding = _triple(padding)
+#     dilation = _triple(dilation)
+#     in_channels = input.shape[1]
+#     out_channels = grad_output.shape[1]
+#     min_batch = input.shape[0]
+# 
+#     grad_output = grad_output.repeat(1, in_channels // groups, 1, 1, 1)
+#     grad_output = grad_output.contiguous().view(
+#         grad_output.shape[0] * grad_output.shape[1], 1, grad_output.shape[2],
+#         grad_output.shape[3], grad_output.shape[4])
+# 
+#     input = input.contiguous().view(1, input.shape[0] * input.shape[1],
+#                                     input.shape[2], input.shape[3],
+#                                     input.shape[4])
+# 
+#     grad_weight = torch.conv3d(input, grad_output, None, dilation, padding,
+#                                stride, in_channels * min_batch)
+# 
+#     grad_weight = grad_weight.contiguous().view(
+#         min_batch, grad_weight.shape[1] // min_batch, grad_weight.shape[2],
+#         grad_weight.shape[3], grad_weight.shape[4])
+# 
+#     return grad_weight.sum(dim=0).view(
+#         in_channels // groups, out_channels, grad_weight.shape[2],
+#         grad_weight.shape[3], grad_weight.shape[4]).transpose(0, 1).narrow(
+#             2, 0, weight_size[2]).narrow(3, 0, weight_size[3]).narrow(
+#                 4, 0, weight_size[4])
+# 
+stop('not implemented')
+}
+
+nnf_grid_sample <- function(input, grid, mode, padding_mode, align_corners) {
+# def grid_sample(input, grid, mode='bilinear', padding_mode='zeros', align_corners=None):
+#     # type: (Tensor, Tensor, str, str, Optional[bool]) -> Tensor
+#     r"""Given an :attr:`input` and a flow-field :attr:`grid`, computes the
+#     ``output`` using :attr:`input` values and pixel locations from :attr:`grid`.
+# 
+#     Currently, only spatial (4-D) and volumetric (5-D) :attr:`input` are
+#     supported.
+# 
+#     In the spatial (4-D) case, for :attr:`input` with shape
+#     :math:`(N, C, H_\text{in}, W_\text{in})` and :attr:`grid` with shape
+#     :math:`(N, H_\text{out}, W_\text{out}, 2)`, the output will have shape
+#     :math:`(N, C, H_\text{out}, W_\text{out})`.
+# 
+#     For each output location ``output[n, :, h, w]``, the size-2 vector
+#     ``grid[n, h, w]`` specifies :attr:`input` pixel locations ``x`` and ``y``,
+#     which are used to interpolate the output value ``output[n, :, h, w]``.
+#     In the case of 5D inputs, ``grid[n, d, h, w]`` specifies the
+#     ``x``, ``y``, ``z`` pixel locations for interpolating
+#     ``output[n, :, d, h, w]``. :attr:`mode` argument specifies ``nearest`` or
+#     ``bilinear`` interpolation method to sample the input pixels.
+# 
+#     :attr:`grid` specifies the sampling pixel locations normalized by the
+#     :attr:`input` spatial dimensions. Therefore, it should have most values in
+#     the range of ``[-1, 1]``. For example, values ``x = -1, y = -1`` is the
+#     left-top pixel of :attr:`input`, and values  ``x = 1, y = 1`` is the
+#     right-bottom pixel of :attr:`input`.
+# 
+#     If :attr:`grid` has values outside the range of ``[-1, 1]``, the corresponding
+#     outputs are handled as defined by :attr:`padding_mode`. Options are
+# 
+#         * ``padding_mode="zeros"``: use ``0`` for out-of-bound grid locations,
+#         * ``padding_mode="border"``: use border values for out-of-bound grid locations,
+#         * ``padding_mode="reflection"``: use values at locations reflected by
+#           the border for out-of-bound grid locations. For location far away
+#           from the border, it will keep being reflected until becoming in bound,
+#           e.g., (normalized) pixel location ``x = -3.5`` reflects by border ``-1``
+#           and becomes ``x' = 1.5``, then reflects by border ``1`` and becomes
+#           ``x'' = -0.5``.
+# 
+#     .. note::
+#         This function is often used in conjunction with :func:`affine_grid`
+#         to build `Spatial Transformer Networks`_ .
+#     .. include:: cuda_deterministic_backward.rst
+# 
+#     Args:
+#         input (Tensor): input of shape :math:`(N, C, H_\text{in}, W_\text{in})` (4-D case)
+#                         or :math:`(N, C, D_\text{in}, H_\text{in}, W_\text{in})` (5-D case)
+#         grid (Tensor): flow-field of shape :math:`(N, H_\text{out}, W_\text{out}, 2)` (4-D case)
+#                        or :math:`(N, D_\text{out}, H_\text{out}, W_\text{out}, 3)` (5-D case)
+#         mode (str): interpolation mode to calculate output values
+#             ``'bilinear'`` | ``'nearest'``. Default: ``'bilinear'``
+#         padding_mode (str): padding mode for outside grid values
+#             ``'zeros'`` | ``'border'`` | ``'reflection'``. Default: ``'zeros'``
+#         align_corners (bool, optional): Geometrically, we consider the pixels of the
+#             input  as squares rather than points.
+#             If set to ``True``, the extrema (``-1`` and ``1``) are considered as referring
+#             to the center points of the input's corner pixels. If set to ``False``, they
+#             are instead considered as referring to the corner points of the input's corner
+#             pixels, making the sampling more resolution agnostic.
+#             This option parallels the ``align_corners`` option in
+#             :func:`interpolate`, and so whichever option is used here
+#             should also be used there to resize the input image before grid sampling.
+#             Default: ``False``
+# 
+#     Returns:
+#         output (Tensor): output Tensor
+# 
+#     .. _`Spatial Transformer Networks`:
+#         https://arxiv.org/abs/1506.02025
+# 
+#     .. warning::
+#         When ``align_corners = True``, the grid positions depend on the pixel
+#         size relative to the input image size, and so the locations sampled by
+#         :func:`grid_sample` will differ for the same input given at different
+#         resolutions (that is, after being upsampled or downsampled).
+#         The default behavior up to version 1.2.0 was ``align_corners = True``.
+#         Since then, the default behavior has been changed to ``align_corners = False``,
+#         in order to bring it in line with the default for :func:`interpolate`.
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, grid)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 grid_sample, tens_ops, input, grid, mode=mode, padding_mode=padding_mode,
+#                 align_corners=align_corners)
+#     if mode != 'bilinear' and mode != 'nearest':
+#         raise ValueError("nn.functional.grid_sample(): expected mode to be "
+#                          "'bilinear' or 'nearest', but got: '{}'".format(mode))
+#     if padding_mode != 'zeros' and padding_mode != 'border' and padding_mode != 'reflection':
+#         raise ValueError("nn.functional.grid_sample(): expected padding_mode "
+#                          "to be 'zeros', 'border', or 'reflection', "
+#                          "but got: '{}'".format(padding_mode))
+# 
+#     if mode == 'bilinear':
+#         mode_enum = 0
+#     else:  # mode == 'nearest'
+#         mode_enum = 1
+# 
+#     if padding_mode == 'zeros':
+#         padding_mode_enum = 0
+#     elif padding_mode == 'border':
+#         padding_mode_enum = 1
+#     else:  # padding_mode == 'reflection'
+#         padding_mode_enum = 2
+# 
+#     if align_corners is None:
+#         warnings.warn("Default grid_sample and affine_grid behavior has changed "
+#                       "to align_corners=False since 1.3.0. Please specify "
+#                       "align_corners=True if the old behavior is desired. "
+#                       "See the documentation of grid_sample for details.")
+#         align_corners = False
+# 
+#     return torch.grid_sampler(input, grid, mode_enum, padding_mode_enum, align_corners)
+# 
+stop('not implemented')
+}
+
+nnf_group_norm <- function() {
+# def group_norm(input, num_groups, weight=None, bias=None, eps=1e-5):
+#     # type: (Tensor, int, Optional[Tensor], Optional[Tensor], float) -> Tensor
+#     r"""Applies Group Normalization for last certain number of dimensions.
+# 
+#     See :class:`~torch.nn.GroupNorm` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 group_norm, (input,), input, num_groups, weight=weight, bias=bias, eps=eps)
+#     _verify_batch_size([
+#         input.size(0) * input.size(1) // num_groups, num_groups]
+#         + list(input.size()[2:]))
+#     return torch.group_norm(input, num_groups, weight, bias, eps,
+#                             torch.backends.cudnn.enabled)
+# 
+stop('not implemented')
+}
+
+nnf_gumbel_softmax <- function(logits, tau, hard, dim) {
+# def gumbel_softmax(logits, tau=1, hard=False, eps=1e-10, dim=-1):
+#     # type: (Tensor, float, bool, float, int) -> Tensor
+#     r"""
+#     Samples from the Gumbel-Softmax distribution (`Link 1`_  `Link 2`_) and optionally discretizes.
+# 
+#     Args:
+#       logits: `[..., num_features]` unnormalized log probabilities
+#       tau: non-negative scalar temperature
+#       hard: if ``True``, the returned samples will be discretized as one-hot vectors,
+#             but will be differentiated as if it is the soft sample in autograd
+#       dim (int): A dimension along which softmax will be computed. Default: -1.
+# 
+#     Returns:
+#       Sampled tensor of same shape as `logits` from the Gumbel-Softmax distribution.
+#       If ``hard=True``, the returned samples will be one-hot, otherwise they will
+#       be probability distributions that sum to 1 across `dim`.
+# 
+#     .. note::
+#       This function is here for legacy reasons, may be removed from nn.Functional in the future.
+# 
+#     .. note::
+#       The main trick for `hard` is to do  `y_hard - y_soft.detach() + y_soft`
+# 
+#       It achieves two things:
+#       - makes the output value exactly one-hot
+#       (since we add then subtract y_soft value)
+#       - makes the gradient equal to y_soft gradient
+#       (since we strip all other gradients)
+# 
+#     Examples::
+#         >>> logits = torch.randn(20, 32)
+#         >>> # Sample soft categorical using reparametrization trick:
+#         >>> F.gumbel_softmax(logits, tau=1, hard=False)
+#         >>> # Sample hard categorical using "Straight-through" trick:
+#         >>> F.gumbel_softmax(logits, tau=1, hard=True)
+# 
+#     .. _Link 1:
+#         https://arxiv.org/abs/1611.00712
+#     .. _Link 2:
+#         https://arxiv.org/abs/1611.01144
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(logits) is not Tensor and has_torch_function((logits,)):
+#             return handle_torch_function(
+#                 gumbel_softmax, (logits,), logits, tau=tau, hard=hard, eps=eps, dim=dim)
+#     if eps != 1e-10:
+#         warnings.warn("`eps` parameter is deprecated and has no effect.")
+# 
+#     gumbels = -torch.empty_like(logits, memory_format=torch.legacy_contiguous_format).exponential_().log()  # ~Gumbel(0,1)
+#     gumbels = (logits + gumbels) / tau  # ~Gumbel(logits,tau)
+#     y_soft = gumbels.softmax(dim)
+# 
+#     if hard:
+#         # Straight through.
+#         index = y_soft.max(dim, keepdim=True)[1]
+#         y_hard = torch.zeros_like(logits, memory_format=torch.legacy_contiguous_format).scatter_(dim, index, 1.0)
+#         ret = y_hard - y_soft.detach() + y_soft
+#     else:
+#         # Reparametrization trick.
+#         ret = y_soft
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_handle_torch_function <- function() {
+# def handle_torch_function(
+#         public_api, relevant_args, *args, **kwargs):
+#     """Implement a function with checks for __torch_function__ overrides.
+# 
+#     See torch::autograd::handle_torch_function for the equivalent of this
+#     function in the C++ implementation.
+# 
+#     Arguments
+#     ---------
+#     public_api : function
+#         Function exposed by the public torch API originally called like
+#         ``public_api(*args, **kwargs)`` on which arguments are now being
+#         checked.
+#     relevant_args : iterable
+#         Iterable of arguments to check for __torch_function__ methods.
+#     args : tuple
+#         Arbitrary positional arguments originally passed into ``public_api``.
+#     kwargs : tuple
+#         Arbitrary keyword arguments originally passed into ``public_api``.
+# 
+#     Returns
+#     -------
+#     Result from calling `implementation()` or an `__torch_function__`
+#     method, as appropriate.
+# 
+#     Raises
+#     ------
+#     TypeError : if no implementation is found.
+# 
+#     """
+#     # Check for __torch_function__ methods.
+#     overloaded_args = _get_overloaded_args(relevant_args)
+#     # overloaded_args already have unique types.
+#     types = tuple(map(type, overloaded_args))
+# 
+#     # Call overrides
+#     for overloaded_arg in overloaded_args:
+#         # Use `public_api` instead of `implementation` so __torch_function__
+#         # implementations can do equality/identity comparisons.
+#         result = overloaded_arg.__torch_function__(public_api, types, args, kwargs)
+# 
+#         if result is not NotImplemented:
+#             return result
+# 
+#     func_name = '{}.{}'.format(public_api.__module__, public_api.__name__)
+#     raise TypeError("no implementation found for '{}' on types that implement "
+#                     '__torch_function__: {}'
+#                     .format(func_name, list(map(type, overloaded_args))))
+# 
+stop('not implemented')
+}
+
+nnf_hardshrink <- function() {
+# def hardshrink(input, lambd=0.5):
+#     # type: (Tensor, float) -> Tensor
+#     r"""
+#     hardshrink(input, lambd=0.5) -> Tensor
+# 
+#     Applies the hard shrinkage function element-wise
+# 
+#     See :class:`~torch.nn.Hardshrink` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(hardshrink, (input,), input, lambd=lambd)
+#     return torch.hardshrink(input, lambd)
+# 
+stop('not implemented')
+}
+
+nnf_hardsigmoid <- function(inplace) {
+# def hardsigmoid(input, inplace=False):
+#     r"""hardsigmoid(input) -> Tensor
+# 
+#     Applies the element-wise function :math:`\text{Hardsigmoid}(x) = \frac{ReLU6(x + 3)}{6}`
+# 
+#     Args:
+#         inplace: If set to ``True``, will do this operation in-place. Default: ``False``
+# 
+#     See :class:`~torch.nn.Hardsigmoid` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(hardsigmoid, (input,), input, inplace=inplace)
+#     if inplace:
+#         return torch._C._nn.hardsigmoid_(input)
+#     return torch._C._nn.hardsigmoid(input)
+# 
+stop('not implemented')
+}
+
+nnf_hardtanh <- function() {
+# def hardtanh(input, min_val=-1., max_val=1., inplace=False):
+#     # type: (Tensor, float, float, bool) -> Tensor
+#     r"""
+#     hardtanh(input, min_val=-1., max_val=1., inplace=False) -> Tensor
+# 
+#     Applies the HardTanh function element-wise. See :class:`~torch.nn.Hardtanh` for more
+#     details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 hardtanh, (input,), input, min_val=min_val, max_val=max_val,
+#                 inplace=inplace)
+#     if inplace:
+#         result = torch._C._nn.hardtanh_(input, min_val, max_val)
+#     else:
+#         result = torch._C._nn.hardtanh(input, min_val, max_val)
+#     return result
+# 
+stop('not implemented')
+}
+
+nnf_hardtanh_ <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_has_torch_function <- function() {
+# def has_torch_function(relevant_args):
+#     """Check for __torch_function__ implementations in the elements of an iterable
+# 
+#     Arguments
+#     ---------
+#     relevant_args : iterable
+#         Iterable or aguments to check for __torch_function__ methods.
+# 
+#     Returns
+#     -------
+#     True if any of the elements of relevant_args have __torch_function__
+#     implementations, False otherwise.
+#     """
+#     return any(hasattr(a, '__torch_function__') for a in relevant_args)
+# 
+stop('not implemented')
+}
+
+nnf_hinge_embedding_loss <- function() {
+# def hinge_embedding_loss(input, target, margin=1.0, size_average=None,
+#                          reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, float, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""hinge_embedding_loss(input, target, margin=1.0, size_average=None, reduce=None, reduction='mean') -> Tensor
+# 
+#     See :class:`~torch.nn.HingeEmbeddingLoss` for details.
+#     """  # noqa
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 hinge_embedding_loss, tens_ops, input, target, margin=margin,
+#                 size_average=size_average, reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         reduction_enum = _Reduction.get_enum(reduction)
+#     return torch.hinge_embedding_loss(input, target, margin, reduction_enum)
+# 
+stop('not implemented')
+}
+
+nnf_instance_norm <- function() {
+# def instance_norm(input, running_mean=None, running_var=None, weight=None,
+#                   bias=None, use_input_stats=True, momentum=0.1, eps=1e-5):
+#     # type: (Tensor, Optional[Tensor], Optional[Tensor], Optional[Tensor], Optional[Tensor], bool, float, float) -> Tensor  # noqa
+#     r"""Applies Instance Normalization for each channel in each data sample in a
+#     batch.
+# 
+#     See :class:`~torch.nn.InstanceNorm1d`, :class:`~torch.nn.InstanceNorm2d`,
+#     :class:`~torch.nn.InstanceNorm3d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 instance_norm, (input,), input, running_mean=running_mean,
+#                 running_var=running_var, weight=weight, bias=bias,
+#                 use_input_stats=use_input_stats, momentum=momentum, eps=eps)
+#     _verify_batch_size(input.size())
+#     return torch.instance_norm(
+#         input, weight, bias, running_mean, running_var,
+#         use_input_stats, momentum, eps, torch.backends.cudnn.enabled
+#     )
+# 
+stop('not implemented')
+}
+
+nnf_interpolate <- function(input, size, scale_factor, mode, align_corners, recompute_scale_factor) {
+# def interpolate(input, size=None, scale_factor=None, mode='nearest', align_corners=None, recompute_scale_factor=None):  # noqa: F811
+#     # type: (Tensor, Optional[int], Optional[List[float]], str, Optional[bool], Optional[bool]) -> Tensor
+#     r"""Down/up samples the input to either the given :attr:`size` or the given
+#     :attr:`scale_factor`
+# 
+#     The algorithm used for interpolation is determined by :attr:`mode`.
+# 
+#     Currently temporal, spatial and volumetric sampling are supported, i.e.
+#     expected inputs are 3-D, 4-D or 5-D in shape.
+# 
+#     The input dimensions are interpreted in the form:
+#     `mini-batch x channels x [optional depth] x [optional height] x width`.
+# 
+#     The modes available for resizing are: `nearest`, `linear` (3D-only),
+#     `bilinear`, `bicubic` (4D-only), `trilinear` (5D-only), `area`
+# 
+#     Args:
+#         input (Tensor): the input tensor
+#         size (int or Tuple[int] or Tuple[int, int] or Tuple[int, int, int]):
+#             output spatial size.
+#         scale_factor (float or Tuple[float]): multiplier for spatial size. Has to match input size if it is a tuple.
+#         mode (str): algorithm used for upsampling:
+#             ``'nearest'`` | ``'linear'`` | ``'bilinear'`` | ``'bicubic'`` |
+#             ``'trilinear'`` | ``'area'``. Default: ``'nearest'``
+#         align_corners (bool, optional): Geometrically, we consider the pixels of the
+#             input and output as squares rather than points.
+#             If set to ``True``, the input and output tensors are aligned by the
+#             center points of their corner pixels, preserving the values at the corner pixels.
+#             If set to ``False``, the input and output tensors are aligned by the corner
+#             points of their corner pixels, and the interpolation uses edge value padding
+#             for out-of-boundary values, making this operation *independent* of input size
+#             when :attr:`scale_factor` is kept the same. This only has an effect when :attr:`mode`
+#             is ``'linear'``, ``'bilinear'``, ``'bicubic'`` or ``'trilinear'``.
+#             Default: ``False``
+#         recompute_scale_factor (bool, optional): recompute the scale_factor for use in the
+#             interpolation calculation.  When `scale_factor` is passed as a parameter, it is used
+#             to compute the `output_size`.  If `recompute_scale_factor` is ```True`` or not specified,
+#             a new `scale_factor` will be computed based on the output and input sizes for use in the
+#             interpolation computation (i.e. the computation will be identical to if the computed
+#             `output_size` were passed-in explicitly).  Otherwise, the passed-in `scale_factor` will
+#             be used in the interpolation computation.  Note that when `scale_factor` is floating-point,
+#             the recomputed scale_factor may differ from the one passed in due to rounding and precision
+#             issues.
+# 
+#     .. note::
+#         With ``mode='bicubic'``, it's possible to cause overshoot, in other words it can produce
+#         negative values or values greater than 255 for images.
+#         Explicitly call ``result.clamp(min=0, max=255)`` if you want to reduce the overshoot
+#         when displaying the image.
+# 
+#     .. warning::
+#         With ``align_corners = True``, the linearly interpolating modes
+#         (`linear`, `bilinear`, and `trilinear`) don't proportionally align the
+#         output and input pixels, and thus the output values can depend on the
+#         input size. This was the default behavior for these modes up to version
+#         0.3.1. Since then, the default behavior is ``align_corners = False``.
+#         See :class:`~torch.nn.Upsample` for concrete examples on how this
+#         affects the outputs.
+# 
+#     .. warning::
+#         When scale_factor is specified, if recompute_scale_factor=True,
+#         scale_factor is used to compute the output_size which will then
+#         be used to infer new scales for the interpolation. This is the current
+#         default behavior when recompute_scale_factor is not specified.
+#         The default behavior for recompute_scale_factor will change to False
+#         in 1.6.0, and scale_factor will be used in the interpolation
+#         calculation.
+# 
+#     .. include:: cuda_deterministic_backward.rst
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 interpolate, (input,), input, size=size, scale_factor=scale_factor,
+#                 mode=mode, align_corners=align_corners,
+#                 recompute_scale_factor=recompute_scale_factor)
+# 
+#     if mode in ('nearest', 'area'):
+#         if align_corners is not None:
+#             raise ValueError("align_corners option can only be set with the "
+#                              "interpolating modes: linear | bilinear | bicubic | trilinear")
+#     else:
+#         if align_corners is None:
+#             warnings.warn("Default upsampling behavior when mode={} is changed "
+#                           "to align_corners=False since 0.4.0. Please specify "
+#                           "align_corners=True if the old behavior is desired. "
+#                           "See the documentation of nn.Upsample for details.".format(mode))
+#             align_corners = False
+# 
+#     scale_factor_len = input.dim() - 2
+#     scale_factor_list = torch.jit.annotate(List[Optional[float]], [None for _ in range(scale_factor_len)])
+#     if scale_factor is not None and recompute_scale_factor is False:
+#         if isinstance(scale_factor, list):
+#             _scale_factor_repeated = scale_factor
+#         else:
+#             _scale_factor_repeated = [scale_factor for _ in range(scale_factor_len)]  # noqa: C416
+#         scale_factor_list = torch.jit.annotate(List[Optional[float]], [elem for elem in _scale_factor_repeated])  # noqa: C416
+# 
+#     # TODO: rewrite _interp_output_size as inner function when TS supports closures
+#     closed_over_args = (input, size, scale_factor, recompute_scale_factor)
+#     if input.dim() == 3 and mode == 'nearest':
+#         return torch._C._nn.upsample_nearest1d(input, _interp_output_size(1, closed_over_args), scale_factor_list[0])
+#     elif input.dim() == 4 and mode == 'nearest':
+#         return torch._C._nn.upsample_nearest2d(input, _interp_output_size(2, closed_over_args), 
+#                                                scale_factor_list[0], scale_factor_list[1])
+#     elif input.dim() == 5 and mode == 'nearest':
+#         return torch._C._nn.upsample_nearest3d(input, _interp_output_size(3, closed_over_args),
+#                                                scale_factor_list[0], scale_factor_list[1], scale_factor_list[2])
+#     elif input.dim() == 3 and mode == 'area':
+#         return adaptive_avg_pool1d(input, _interp_output_size(1, closed_over_args))
+#     elif input.dim() == 4 and mode == 'area':
+#         return adaptive_avg_pool2d(input, _interp_output_size(2, closed_over_args))
+#     elif input.dim() == 5 and mode == 'area':
+#         return adaptive_avg_pool3d(input, _interp_output_size(3, closed_over_args))
+#     elif input.dim() == 3 and mode == 'linear':
+#         assert align_corners is not None
+#         return torch._C._nn.upsample_linear1d(input, _interp_output_size(1, closed_over_args), align_corners, scale_factor_list[0])
+#     elif input.dim() == 3 and mode == 'bilinear':
+#         raise NotImplementedError("Got 3D input, but bilinear mode needs 4D input")
+#     elif input.dim() == 3 and mode == 'trilinear':
+#         raise NotImplementedError("Got 3D input, but trilinear mode needs 5D input")
+#     elif input.dim() == 4 and mode == 'linear':
+#         raise NotImplementedError("Got 4D input, but linear mode needs 3D input")
+#     elif input.dim() == 4 and mode == 'bilinear':
+#         assert align_corners is not None
+#         return torch._C._nn.upsample_bilinear2d(input, _interp_output_size(2, closed_over_args), align_corners, 
+#                                                 scale_factor_list[0], scale_factor_list[1])
+#     elif input.dim() == 4 and mode == 'trilinear':
+#         raise NotImplementedError("Got 4D input, but trilinear mode needs 5D input")
+#     elif input.dim() == 5 and mode == 'linear':
+#         raise NotImplementedError("Got 5D input, but linear mode needs 3D input")
+#     elif input.dim() == 5 and mode == 'bilinear':
+#         raise NotImplementedError("Got 5D input, but bilinear mode needs 4D input")
+#     elif input.dim() == 5 and mode == 'trilinear':
+#         assert align_corners is not None
+#         return torch._C._nn.upsample_trilinear3d(input, _interp_output_size(3, closed_over_args), align_corners,
+#                                                  scale_factor_list[0], scale_factor_list[1], scale_factor_list[2])
+#     elif input.dim() == 4 and mode == 'bicubic':
+#         assert align_corners is not None
+#         return torch._C._nn.upsample_bicubic2d(input, _interp_output_size(2, closed_over_args), align_corners, 
+#                                                scale_factor_list[0], scale_factor_list[1])
+#     else:
+#         raise NotImplementedError("Input Error: Only 3D, 4D and 5D input Tensors supported"
+#                                   " (got {}D) for the modes: nearest | linear | bilinear | bicubic | trilinear"
+#                                   " (got {})".format(input.dim(), mode))
+# 
+stop('not implemented')
+}
+
+nnf_kl_div <- function(input, target, size_average, reduce, reduction) {
+# def kl_div(input, target, size_average=None, reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""The `Kullback-Leibler divergence`_ Loss.
+# 
+#     See :class:`~torch.nn.KLDivLoss` for details.
+# 
+#     Args:
+#         input: Tensor of arbitrary shape
+#         target: Tensor of the same shape as input
+#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
+#             the losses are averaged over each loss element in the batch. Note that for
+#             some losses, there multiple elements per sample. If the field :attr:`size_average`
+#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
+#             when reduce is ``False``. Default: ``True``
+#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
+#             losses are averaged or summed over observations for each minibatch depending
+#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
+#             batch element instead and ignores :attr:`size_average`. Default: ``True``
+#         reduction (string, optional): Specifies the reduction to apply to the output:
+#             ``'none'`` | ``'batchmean'`` | ``'sum'`` | ``'mean'``.
+#             ``'none'``: no reduction will be applied
+#             ``'batchmean'``: the sum of the output will be divided by the batchsize
+#             ``'sum'``: the output will be summed
+#             ``'mean'``: the output will be divided by the number of elements in the output
+#             Default: ``'mean'``
+# 
+#     .. note::
+#         :attr:`size_average` and :attr:`reduce` are in the process of being deprecated,
+#         and in the meantime, specifying either of those two args will override :attr:`reduction`.
+# 
+#     .. note::
+#         :attr:``reduction`` = ``'mean'`` doesn't return the true kl divergence value, please use
+#         :attr:``reduction`` = ``'batchmean'`` which aligns with KL math definition.
+#         In the next major release, ``'mean'`` will be changed to be the same as 'batchmean'.
+# 
+#     .. _Kullback-Leibler divergence:
+#         https://en.wikipedia.org/wiki/Kullback-Leibler_divergence
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 kl_div, tens_ops, input, target, size_average=size_average,
+#                 reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         if reduction == 'mean':
+#             warnings.warn("reduction: 'mean' divides the total loss by both the batch size and the support size."
+#                           "'batchmean' divides only by the batch size, and aligns with the KL div math definition."
+#                           "'mean' will be changed to behave the same as 'batchmean' in the next major release.")
+# 
+#         # special case for batchmean
+#         if reduction == 'batchmean':
+#             reduction_enum = _Reduction.get_enum('sum')
+#         else:
+#             reduction_enum = _Reduction.get_enum(reduction)
+# 
+#     reduced = torch.kl_div(input, target, reduction_enum)
+# 
+#     if reduction == 'batchmean' and input.dim() != 0:
+#         reduced = reduced / input.size()[0]
+# 
+#     return reduced
+# 
+stop('not implemented')
+}
+
+nnf_l1_loss <- function() {
+# def l1_loss(input, target, size_average=None, reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""l1_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor
+# 
+#     Function that takes the mean element-wise absolute value difference.
+# 
+#     See :class:`~torch.nn.L1Loss` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 l1_loss, tens_ops, input, target, size_average=size_average, reduce=reduce,
+#                 reduction=reduction)
+#     if not (target.size() == input.size()):
+#         warnings.warn("Using a target size ({}) that is different to the input size ({}). "
+#                       "This will likely lead to incorrect results due to broadcasting. "
+#                       "Please ensure they have the same size.".format(target.size(), input.size()),
+#                       stacklevel=2)
+#     if size_average is not None or reduce is not None:
+#         reduction = _Reduction.legacy_get_string(size_average, reduce)
+#     if target.requires_grad:
+#         ret = torch.abs(input - target)
+#         if reduction != 'none':
+#             ret = torch.mean(ret) if reduction == 'mean' else torch.sum(ret)
+#     else:
+#         expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+#         ret = torch._C._nn.l1_loss(expanded_input, expanded_target, _Reduction.get_enum(reduction))
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_layer_norm <- function() {
+# def layer_norm(input, normalized_shape, weight=None, bias=None, eps=1e-5):
+#     # type: (Tensor, List[int], Optional[Tensor], Optional[Tensor], float) -> Tensor
+#     r"""Applies Layer Normalization for last certain number of dimensions.
+# 
+#     See :class:`~torch.nn.LayerNorm` for details.
+#     """
+#     return torch.layer_norm(input, normalized_shape, weight, bias, eps,
+#                             torch.backends.cudnn.enabled)
+# 
+stop('not implemented')
+}
+
+nnf_leaky_relu <- function() {
+# def leaky_relu(input, negative_slope=0.01, inplace=False):
+#     # type: (Tensor, float, bool) -> Tensor
+#     r"""
+#     leaky_relu(input, negative_slope=0.01, inplace=False) -> Tensor
+# 
+#     Applies element-wise,
+#     :math:`\text{LeakyReLU}(x) = \max(0, x) + \text{negative\_slope} * \min(0, x)`
+# 
+#     See :class:`~torch.nn.LeakyReLU` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 leaky_relu, (input,), input, negative_slope=negative_slope,
+#                 inplace=inplace)
+#     if inplace:
+#         result = torch._C._nn.leaky_relu_(input, negative_slope)
+#     else:
+#         result = torch._C._nn.leaky_relu(input, negative_slope)
+#     return result
+# 
+stop('not implemented')
+}
+
+nnf_leaky_relu_ <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_linear <- function() {
+# def linear(input, weight, bias=None):
+#     # type: (Tensor, Tensor, Optional[Tensor]) -> Tensor
+#     r"""
+#     Applies a linear transformation to the incoming data: :math:`y = xA^T + b`.
+# 
+#     Shape:
+# 
+#         - Input: :math:`(N, *, in\_features)` where `*` means any number of
+#           additional dimensions
+#         - Weight: :math:`(out\_features, in\_features)`
+#         - Bias: :math:`(out\_features)`
+#         - Output: :math:`(N, *, out\_features)`
+#     """
+#     tens_ops = (input, weight)
+#     if not torch.jit.is_scripting():
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(linear, tens_ops, input, weight, bias=bias)
+#     if input.dim() == 2 and bias is not None:
+#         # fused op is marginally faster
+#         ret = torch.addmm(bias, input, weight.t())
+#     else:
+#         output = input.matmul(weight.t())
+#         if bias is not None:
+#             output += bias
+#         ret = output
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_local_response_norm <- function() {
+# def local_response_norm(input, size, alpha=1e-4, beta=0.75, k=1.):
+#     # type: (Tensor, int, float, float, float) -> Tensor
+#     r"""Applies local response normalization over an input signal composed of
+#     several input planes, where channels occupy the second dimension.
+#     Applies normalization across channels.
+# 
+#     See :class:`~torch.nn.LocalResponseNorm` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 local_response_norm, (input,), input, size, alpha=alpha, beta=beta, k=k)
+#     dim = input.dim()
+#     if dim < 3:
+#         raise ValueError('Expected 3D or higher dimensionality \
+#                          input (got {} dimensions)'.format(dim))
+#     div = input.mul(input).unsqueeze(1)
+#     if dim == 3:
+#         div = pad(div, (0, 0, size // 2, (size - 1) // 2))
+#         div = avg_pool2d(div, (size, 1), stride=1).squeeze(1)
+#     else:
+#         sizes = input.size()
+#         div = div.view(sizes[0], 1, sizes[1], sizes[2], -1)
+#         div = pad(div, (0, 0, 0, 0, size // 2, (size - 1) // 2))
+#         div = avg_pool3d(div, (size, 1, 1), stride=1).squeeze(1)
+#         div = div.view(sizes)
+#     div = div.mul(alpha).add(k).pow(beta)
+#     return input / div
+# 
+stop('not implemented')
+}
+
+nnf_log_softmax <- function(input, dim, dtype) {
+# def log_softmax(input, dim=None, _stacklevel=3, dtype=None):
+#     # type: (Tensor, Optional[int], int, Optional[int]) -> Tensor
+#     r"""Applies a softmax followed by a logarithm.
+# 
+#     While mathematically equivalent to log(softmax(x)), doing these two
+#     operations separately is slower, and numerically unstable. This function
+#     uses an alternative formulation to compute the output and gradient correctly.
+# 
+#     See :class:`~torch.nn.LogSoftmax` for more details.
+# 
+#     Arguments:
+#         input (Tensor): input
+#         dim (int): A dimension along which log_softmax will be computed.
+#         dtype (:class:`torch.dtype`, optional): the desired data type of returned tensor.
+#           If specified, the input tensor is casted to :attr:`dtype` before the operation
+#           is performed. This is useful for preventing data type overflows. Default: None.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 log_softmax, (input,), input, dim=dim, _stacklevel=_stacklevel, dtype=dtype)
+#     if dim is None:
+#         dim = _get_softmax_dim('log_softmax', input.dim(), _stacklevel)
+#     if dtype is None:
+#         ret = input.log_softmax(dim)
+#     else:
+#         ret = input.log_softmax(dim, dtype=dtype)
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_logsigmoid <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_lp_pool1d <- function() {
+# def lp_pool1d(input, norm_type, kernel_size, stride=None, ceil_mode=False):
+#     # type: (Tensor, float, int, Optional[BroadcastingList1[int]], bool) -> Tensor
+#     r"""Applies a 1D power-average pooling over an input signal composed of
+#     several input planes. If the sum of all inputs to the power of `p` is
+#     zero, the gradient is set to zero as well.
+# 
+#     See :class:`~torch.nn.LPPool1d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 lp_pool1d, (input,), input, norm_type, kernel_size, stride=stride,
+#                 ceil_mode=ceil_mode)
+#     if stride is not None:
+#         out = avg_pool1d(input.pow(norm_type), kernel_size, stride, 0, ceil_mode)
+#     else:
+#         out = avg_pool1d(input.pow(norm_type), kernel_size, padding=0, ceil_mode=ceil_mode)
+# 
+#     return (torch.sign(out) * relu(torch.abs(out))).mul(kernel_size).pow(1. / norm_type)
+# 
+stop('not implemented')
+}
+
+nnf_lp_pool2d <- function() {
+# def lp_pool2d(input, norm_type, kernel_size, stride=None, ceil_mode=False):
+#     # type: (Tensor, float, int, Optional[BroadcastingList2[int]], bool) -> Tensor
+#     r"""Applies a 2D power-average pooling over an input signal composed of
+#     several input planes. If the sum of all inputs to the power of `p` is
+#     zero, the gradient is set to zero as well.
+# 
+#     See :class:`~torch.nn.LPPool2d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 lp_pool2d, (input,), input, norm_type, kernel_size, stride=stride,
+#                 ceil_mode=ceil_mode)
+#     kw, kh = utils._pair(kernel_size)
+#     if stride is not None:
+#         out = avg_pool2d(input.pow(norm_type), kernel_size, stride, 0, ceil_mode)
+#     else:
+#         out = avg_pool2d(input.pow(norm_type), kernel_size, padding=0, ceil_mode=ceil_mode)
+# 
+#     return (torch.sign(out) * relu(torch.abs(out))).mul(kw * kh).pow(1. / norm_type)
+# 
+stop('not implemented')
+}
+
+nnf_margin_ranking_loss <- function() {
+# def margin_ranking_loss(input1, input2, target, margin=0, size_average=None,
+#                         reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Tensor, float, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""margin_ranking_loss(input1, input2, target, margin=0, size_average=None, reduce=None, reduction='mean') -> Tensor
+# 
+#     See :class:`~torch.nn.MarginRankingLoss` for details.
+#     """  # noqa
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input1, input2, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 margin_ranking_loss, tens_ops, input1, input2, target, margin=margin,
+#                 size_average=size_average, reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         reduction_enum = _Reduction.get_enum(reduction)
+#     if input1.dim() == 0 or input2.dim() == 0 or target.dim() == 0:
+#         raise RuntimeError(("margin_ranking_loss does not support scalars, got sizes: "
+#                             "input1: {}, input2: {}, target: {} ".format(input1.size(), input2.size(), target.size())))
+#     return torch.margin_ranking_loss(input1, input2, target, margin, reduction_enum)
+# 
+stop('not implemented')
+}
+
+nnf_math <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_max_pool1d <- function() {
+#     def fn(*args, **kwargs):
+#         dispatch_flag = False
+#         if arg_name in kwargs:
+#             dispatch_flag = kwargs[arg_name]
+#         elif arg_index < len(args):
+#             dispatch_flag = args[arg_index]
+# 
+#         if dispatch_flag:
+#             return if_true(*args, **kwargs)
+#         else:
+#             return if_false(*args, **kwargs)
+# 
+stop('not implemented')
+}
+
+nnf_max_pool1d_with_indices <- function() {
+# def max_pool1d_with_indices(input, kernel_size, stride=None, padding=0,
+#                             dilation=1, ceil_mode=False, return_indices=False):
+#     # type: (Tensor, BroadcastingList1[int], Optional[BroadcastingList1[int]], BroadcastingList1[int], BroadcastingList1[int], bool, bool) -> Tuple[Tensor, Tensor]  # noqa
+#     r"""Applies a 1D max pooling over an input signal composed of several input
+#     planes.
+# 
+#     See :class:`~torch.nn.MaxPool1d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 max_pool1d_with_indices, (input,), input, kernel_size,
+#                 stride=stride, padding=padding, dilation=dilation, ceil_mode=ceil_mode,
+#                 return_indices=return_indices)
+#     if stride is None:
+#         stride = torch.jit.annotate(List[int], [])
+#     return torch.max_pool1d_with_indices(
+#         input, kernel_size, stride, padding, dilation, ceil_mode)
+# 
+stop('not implemented')
+}
+
+nnf_max_pool2d <- function() {
+#     def fn(*args, **kwargs):
+#         dispatch_flag = False
+#         if arg_name in kwargs:
+#             dispatch_flag = kwargs[arg_name]
+#         elif arg_index < len(args):
+#             dispatch_flag = args[arg_index]
+# 
+#         if dispatch_flag:
+#             return if_true(*args, **kwargs)
+#         else:
+#             return if_false(*args, **kwargs)
+# 
+stop('not implemented')
+}
+
+nnf_max_pool2d_with_indices <- function() {
+# def max_pool2d_with_indices(input, kernel_size, stride=None, padding=0, dilation=1,
+#                             ceil_mode=False, return_indices=False):
+#     # type: (Tensor, BroadcastingList2[int], Optional[BroadcastingList2[int]], BroadcastingList2[int], BroadcastingList2[int], bool, bool) -> Tuple[Tensor, Tensor]  # noqa
+#     r"""Applies a 2D max pooling over an input signal composed of several input
+#     planes.
+# 
+#     See :class:`~torch.nn.MaxPool2d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 max_pool2d_with_indices, (input,), input, kernel_size,
+#                 stride=stride, padding=padding, dilation=dilation, ceil_mode=ceil_mode,
+#                 return_indices=return_indices)
+#     if stride is None:
+#         stride = torch.jit.annotate(List[int], [])
+#     return torch._C._nn.max_pool2d_with_indices(input, kernel_size, stride, padding, dilation, ceil_mode)
+# 
+stop('not implemented')
+}
+
+nnf_max_pool3d <- function() {
+#     def fn(*args, **kwargs):
+#         dispatch_flag = False
+#         if arg_name in kwargs:
+#             dispatch_flag = kwargs[arg_name]
+#         elif arg_index < len(args):
+#             dispatch_flag = args[arg_index]
+# 
+#         if dispatch_flag:
+#             return if_true(*args, **kwargs)
+#         else:
+#             return if_false(*args, **kwargs)
+# 
+stop('not implemented')
+}
+
+nnf_max_pool3d_with_indices <- function() {
+# def max_pool3d_with_indices(input, kernel_size, stride=None, padding=0,
+#                             dilation=1, ceil_mode=False, return_indices=False):
+#     # type: (Tensor, BroadcastingList3[int], Optional[BroadcastingList3[int]], BroadcastingList3[int], BroadcastingList3[int], bool, bool) -> Tuple[Tensor, Tensor]  # noqa
+#     r"""Applies a 3D max pooling over an input signal composed of several input
+#     planes.
+# 
+#     See :class:`~torch.nn.MaxPool3d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 max_pool3d_with_indices, (input,), input, kernel_size,
+#                 stride=stride, padding=padding, dilation=dilation, ceil_mode=ceil_mode,
+#                 return_indices=return_indices)
+#     if stride is None:
+#         stride = torch.jit.annotate(List[int], [])
+#     return torch._C._nn.max_pool3d_with_indices(
+#         input, kernel_size, stride, padding, dilation, ceil_mode)
+# 
+stop('not implemented')
+}
+
+nnf_max_unpool1d <- function() {
+# def max_unpool1d(input, indices, kernel_size, stride=None, padding=0,
+#                  output_size=None):
+#     # type: (Tensor, Tensor, BroadcastingList1[int], Optional[BroadcastingList1[int]], BroadcastingList1[int], Optional[BroadcastingList1[int]]) -> Tensor  # noqa
+#     r"""Computes a partial inverse of :class:`MaxPool1d`.
+# 
+#     See :class:`~torch.nn.MaxUnpool1d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 max_unpool1d, (input,), input, indices, kernel_size,
+#                 stride=stride, padding=padding, output_size=output_size)
+#     kernel_size = _single(kernel_size)
+#     if stride is not None:
+#         _stride = _single(stride)
+#     else:
+#         _stride = kernel_size
+#     padding = _single(padding)
+#     output_size = _unpool_output_size(input, kernel_size, _stride, padding,
+#                                       output_size)
+#     if isinstance(output_size, list):
+#         output_size = output_size + [1]
+#     else:
+#         output_size = output_size + (1,)
+#     return torch._C._nn.max_unpool2d(input.unsqueeze(3), indices.unsqueeze(3),
+#                                      output_size).squeeze(3)
+# 
+stop('not implemented')
+}
+
+nnf_max_unpool2d <- function() {
+# def max_unpool2d(input, indices, kernel_size, stride=None, padding=0,
+#                  output_size=None):
+#     # type: (Tensor, Tensor, BroadcastingList2[int], Optional[BroadcastingList2[int]], BroadcastingList2[int], Optional[BroadcastingList2[int]]) -> Tensor  # noqa
+#     r"""Computes a partial inverse of :class:`MaxPool2d`.
+# 
+#     See :class:`~torch.nn.MaxUnpool2d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 max_unpool2d, (input,), input, indices, kernel_size,
+#                 stride=stride, padding=padding, output_size=output_size)
+#     kernel_size = _pair(kernel_size)
+#     if stride is not None:
+#         _stride = _pair(stride)
+#     else:
+#         _stride = kernel_size
+#     padding = _pair(padding)
+#     output_size = _unpool_output_size(input, kernel_size, _stride, padding,
+#                                       output_size)
+#     return torch._C._nn.max_unpool2d(input, indices, output_size)
+# 
+stop('not implemented')
+}
+
+nnf_max_unpool3d <- function() {
+# def max_unpool3d(input, indices, kernel_size, stride=None, padding=0,
+#                  output_size=None):
+#     # type: (Tensor, Tensor, BroadcastingList3[int], Optional[BroadcastingList3[int]], BroadcastingList3[int], Optional[BroadcastingList3[int]]) -> Tensor  # noqa
+#     r"""Computes a partial inverse of :class:`MaxPool3d`.
+# 
+#     See :class:`~torch.nn.MaxUnpool3d` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 max_unpool3d, (input,), input, indices, kernel_size,
+#                 stride=stride, padding=padding, output_size=output_size)
+#     kernel_size = _triple(kernel_size)
+#     if stride is not None:
+#         _stride = _triple(stride)
+#     else:
+#         _stride = kernel_size
+#     padding = _triple(padding)
+#     output_size = _unpool_output_size(input, kernel_size, _stride, padding,
+#                                       output_size)
+#     return torch._C._nn.max_unpool3d(
+#         input, indices, output_size, _stride, padding)
+# 
+stop('not implemented')
+}
+
+nnf_mse_loss <- function() {
+# def mse_loss(input, target, size_average=None, reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""mse_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor
+# 
+#     Measures the element-wise mean squared error.
+# 
+#     See :class:`~torch.nn.MSELoss` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 mse_loss, tens_ops, input, target, size_average=size_average, reduce=reduce,
+#                 reduction=reduction)
+#     if not (target.size() == input.size()):
+#         warnings.warn("Using a target size ({}) that is different to the input size ({}). "
+#                       "This will likely lead to incorrect results due to broadcasting. "
+#                       "Please ensure they have the same size.".format(target.size(), input.size()),
+#                       stacklevel=2)
+#     if size_average is not None or reduce is not None:
+#         reduction = _Reduction.legacy_get_string(size_average, reduce)
+#     if target.requires_grad:
+#         ret = (input - target) ** 2
+#         if reduction != 'none':
+#             ret = torch.mean(ret) if reduction == 'mean' else torch.sum(ret)
+#     else:
+#         expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+#         ret = torch._C._nn.mse_loss(expanded_input, expanded_target, _Reduction.get_enum(reduction))
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_multi_head_attention_forward <- function(query,, embed_dim_to_check, num_heads, in_proj_weight,, bias_k,, add_zero_attn, dropout_p, out_proj_weight,, training, key_padding_mask, need_weights, attn_mask, use_separate_proj_weight, q_proj_weight,, static_k,, Inputs:, -, -, -, -, -, -, -, Outputs:, -, -) {
+# def multi_head_attention_forward(query,                           # type: Tensor
+#                                  key,                             # type: Tensor
+#                                  value,                           # type: Tensor
+#                                  embed_dim_to_check,              # type: int
+#                                  num_heads,                       # type: int
+#                                  in_proj_weight,                  # type: Tensor
+#                                  in_proj_bias,                    # type: Tensor
+#                                  bias_k,                          # type: Optional[Tensor]
+#                                  bias_v,                          # type: Optional[Tensor]
+#                                  add_zero_attn,                   # type: bool
+#                                  dropout_p,                       # type: float
+#                                  out_proj_weight,                 # type: Tensor
+#                                  out_proj_bias,                   # type: Tensor
+#                                  training=True,                   # type: bool
+#                                  key_padding_mask=None,           # type: Optional[Tensor]
+#                                  need_weights=True,               # type: bool
+#                                  attn_mask=None,                  # type: Optional[Tensor]
+#                                  use_separate_proj_weight=False,  # type: bool
+#                                  q_proj_weight=None,              # type: Optional[Tensor]
+#                                  k_proj_weight=None,              # type: Optional[Tensor]
+#                                  v_proj_weight=None,              # type: Optional[Tensor]
+#                                  static_k=None,                   # type: Optional[Tensor]
+#                                  static_v=None                    # type: Optional[Tensor]
+#                                  ):
+#     # type: (...) -> Tuple[Tensor, Optional[Tensor]]
+#     r"""
+#     Args:
+#         query, key, value: map a query and a set of key-value pairs to an output.
+#             See "Attention Is All You Need" for more details.
+#         embed_dim_to_check: total dimension of the model.
+#         num_heads: parallel attention heads.
+#         in_proj_weight, in_proj_bias: input projection weight and bias.
+#         bias_k, bias_v: bias of the key and value sequences to be added at dim=0.
+#         add_zero_attn: add a new batch of zeros to the key and
+#                        value sequences at dim=1.
+#         dropout_p: probability of an element to be zeroed.
+#         out_proj_weight, out_proj_bias: the output projection weight and bias.
+#         training: apply dropout if is ``True``.
+#         key_padding_mask: if provided, specified padding elements in the key will
+#             be ignored by the attention. This is an binary mask. When the value is True,
+#             the corresponding value on the attention layer will be filled with -inf.
+#         need_weights: output attn_output_weights.
+#         attn_mask: 2D or 3D mask that prevents attention to certain positions. This is an additive mask
+#             (i.e. the values will be added to the attention layer). A 2D mask will be broadcasted for all
+#             the batches while a 3D mask allows to specify a different mask for the entries of each batch.
+#         use_separate_proj_weight: the function accept the proj. weights for query, key,
+#             and value in different forms. If false, in_proj_weight will be used, which is
+#             a combination of q_proj_weight, k_proj_weight, v_proj_weight.
+#         q_proj_weight, k_proj_weight, v_proj_weight, in_proj_bias: input projection weight and bias.
+#         static_k, static_v: static key and value used for attention operators.
+# 
+# 
+#     Shape:
+#         Inputs:
+#         - query: :math:`(L, N, E)` where L is the target sequence length, N is the batch size, E is
+#           the embedding dimension.
+#         - key: :math:`(S, N, E)`, where S is the source sequence length, N is the batch size, E is
+#           the embedding dimension.
+#         - value: :math:`(S, N, E)` where S is the source sequence length, N is the batch size, E is
+#           the embedding dimension.
+#         - key_padding_mask: :math:`(N, S)`, ByteTensor, where N is the batch size, S is the source sequence length.
+#         - attn_mask: 2D mask :math:`(L, S)` where L is the target sequence length, S is the source sequence length.
+#           3D mask :math:`(N*num_heads, L, S)` where N is the batch size, L is the target sequence length,
+#           S is the source sequence length.
+#         - static_k: :math:`(N*num_heads, S, E/num_heads)`, where S is the source sequence length,
+#           N is the batch size, E is the embedding dimension. E/num_heads is the head dimension.
+#         - static_v: :math:`(N*num_heads, S, E/num_heads)`, where S is the source sequence length,
+#           N is the batch size, E is the embedding dimension. E/num_heads is the head dimension.
+# 
+#         Outputs:
+#         - attn_output: :math:`(L, N, E)` where L is the target sequence length, N is the batch size,
+#           E is the embedding dimension.
+#         - attn_output_weights: :math:`(N, L, S)` where N is the batch size,
+#           L is the target sequence length, S is the source sequence length.
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (query, key, value, in_proj_weight, in_proj_bias, bias_k, bias_v,
+#                     out_proj_weight, out_proj_bias)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 multi_head_attention_forward, tens_ops, query, key, value,
+#                 embed_dim_to_check, num_heads, in_proj_weight, in_proj_bias,
+#                 bias_k, bias_v, add_zero_attn, dropout_p, out_proj_weight,
+#                 out_proj_bias, training=training, key_padding_mask=key_padding_mask,
+#                 need_weights=need_weights, attn_mask=attn_mask,
+#                 use_separate_proj_weight=use_separate_proj_weight,
+#                 q_proj_weight=q_proj_weight, k_proj_weight=k_proj_weight,
+#                 v_proj_weight=v_proj_weight, static_k=static_k, static_v=static_v)
+#     tgt_len, bsz, embed_dim = query.size()
+#     assert embed_dim == embed_dim_to_check
+#     assert key.size() == value.size()
+# 
+#     head_dim = embed_dim // num_heads
+#     assert head_dim * num_heads == embed_dim, "embed_dim must be divisible by num_heads"
+#     scaling = float(head_dim) ** -0.5
+# 
+#     if not use_separate_proj_weight:
+#         if torch.equal(query, key) and torch.equal(key, value):
+#             # self-attention
+#             q, k, v = linear(query, in_proj_weight, in_proj_bias).chunk(3, dim=-1)
+# 
+#         elif torch.equal(key, value):
+#             # encoder-decoder attention
+#             # This is inline in_proj function with in_proj_weight and in_proj_bias
+#             _b = in_proj_bias
+#             _start = 0
+#             _end = embed_dim
+#             _w = in_proj_weight[_start:_end, :]
+#             if _b is not None:
+#                 _b = _b[_start:_end]
+#             q = linear(query, _w, _b)
+# 
+#             if key is None:
+#                 assert value is None
+#                 k = None
+#                 v = None
+#             else:
+# 
+#                 # This is inline in_proj function with in_proj_weight and in_proj_bias
+#                 _b = in_proj_bias
+#                 _start = embed_dim
+#                 _end = None
+#                 _w = in_proj_weight[_start:, :]
+#                 if _b is not None:
+#                     _b = _b[_start:]
+#                 k, v = linear(key, _w, _b).chunk(2, dim=-1)
+# 
+#         else:
+#             # This is inline in_proj function with in_proj_weight and in_proj_bias
+#             _b = in_proj_bias
+#             _start = 0
+#             _end = embed_dim
+#             _w = in_proj_weight[_start:_end, :]
+#             if _b is not None:
+#                 _b = _b[_start:_end]
+#             q = linear(query, _w, _b)
+# 
+#             # This is inline in_proj function with in_proj_weight and in_proj_bias
+#             _b = in_proj_bias
+#             _start = embed_dim
+#             _end = embed_dim * 2
+#             _w = in_proj_weight[_start:_end, :]
+#             if _b is not None:
+#                 _b = _b[_start:_end]
+#             k = linear(key, _w, _b)
+# 
+#             # This is inline in_proj function with in_proj_weight and in_proj_bias
+#             _b = in_proj_bias
+#             _start = embed_dim * 2
+#             _end = None
+#             _w = in_proj_weight[_start:, :]
+#             if _b is not None:
+#                 _b = _b[_start:]
+#             v = linear(value, _w, _b)
+#     else:
+#         q_proj_weight_non_opt = torch.jit._unwrap_optional(q_proj_weight)
+#         len1, len2 = q_proj_weight_non_opt.size()
+#         assert len1 == embed_dim and len2 == query.size(-1)
+# 
+#         k_proj_weight_non_opt = torch.jit._unwrap_optional(k_proj_weight)
+#         len1, len2 = k_proj_weight_non_opt.size()
+#         assert len1 == embed_dim and len2 == key.size(-1)
+# 
+#         v_proj_weight_non_opt = torch.jit._unwrap_optional(v_proj_weight)
+#         len1, len2 = v_proj_weight_non_opt.size()
+#         assert len1 == embed_dim and len2 == value.size(-1)
+# 
+#         if in_proj_bias is not None:
+#             q = linear(query, q_proj_weight_non_opt, in_proj_bias[0:embed_dim])
+#             k = linear(key, k_proj_weight_non_opt, in_proj_bias[embed_dim:(embed_dim * 2)])
+#             v = linear(value, v_proj_weight_non_opt, in_proj_bias[(embed_dim * 2):])
+#         else:
+#             q = linear(query, q_proj_weight_non_opt, in_proj_bias)
+#             k = linear(key, k_proj_weight_non_opt, in_proj_bias)
+#             v = linear(value, v_proj_weight_non_opt, in_proj_bias)
+#     q = q * scaling
+# 
+#     if attn_mask is not None:
+#         if attn_mask.dim() == 2:
+#             attn_mask = attn_mask.unsqueeze(0)
+#             if list(attn_mask.size()) != [1, query.size(0), key.size(0)]:
+#                 raise RuntimeError('The size of the 2D attn_mask is not correct.')
+#         elif attn_mask.dim() == 3:
+#             if list(attn_mask.size()) != [bsz * num_heads, query.size(0), key.size(0)]:
+#                 raise RuntimeError('The size of the 3D attn_mask is not correct.')
+#         else:
+#             raise RuntimeError("attn_mask's dimension {} is not supported".format(attn_mask.dim()))
+#         # attn_mask's dim is 3 now.
+# 
+#     if bias_k is not None and bias_v is not None:
+#         if static_k is None and static_v is None:
+#             k = torch.cat([k, bias_k.repeat(1, bsz, 1)])
+#             v = torch.cat([v, bias_v.repeat(1, bsz, 1)])
+#             if attn_mask is not None:
+#                 attn_mask = pad(attn_mask, (0, 1))
+#             if key_padding_mask is not None:
+#                 key_padding_mask = pad(key_padding_mask, (0, 1))
+#         else:
+#             assert static_k is None, "bias cannot be added to static key."
+#             assert static_v is None, "bias cannot be added to static value."
+#     else:
+#         assert bias_k is None
+#         assert bias_v is None
+# 
+#     q = q.contiguous().view(tgt_len, bsz * num_heads, head_dim).transpose(0, 1)
+#     if k is not None:
+#         k = k.contiguous().view(-1, bsz * num_heads, head_dim).transpose(0, 1)
+#     if v is not None:
+#         v = v.contiguous().view(-1, bsz * num_heads, head_dim).transpose(0, 1)
+# 
+#     if static_k is not None:
+#         assert static_k.size(0) == bsz * num_heads
+#         assert static_k.size(2) == head_dim
+#         k = static_k
+# 
+#     if static_v is not None:
+#         assert static_v.size(0) == bsz * num_heads
+#         assert static_v.size(2) == head_dim
+#         v = static_v
+# 
+#     src_len = k.size(1)
+# 
+#     if key_padding_mask is not None:
+#         assert key_padding_mask.size(0) == bsz
+#         assert key_padding_mask.size(1) == src_len
+# 
+#     if add_zero_attn:
+#         src_len += 1
+#         k = torch.cat([k, torch.zeros((k.size(0), 1) + k.size()[2:], dtype=k.dtype, device=k.device)], dim=1)
+#         v = torch.cat([v, torch.zeros((v.size(0), 1) + v.size()[2:], dtype=v.dtype, device=v.device)], dim=1)
+#         if attn_mask is not None:
+#             attn_mask = pad(attn_mask, (0, 1))
+#         if key_padding_mask is not None:
+#             key_padding_mask = pad(key_padding_mask, (0, 1))
+# 
+#     attn_output_weights = torch.bmm(q, k.transpose(1, 2))
+#     assert list(attn_output_weights.size()) == [bsz * num_heads, tgt_len, src_len]
+# 
+#     if attn_mask is not None:
+#         attn_output_weights += attn_mask
+# 
+#     if key_padding_mask is not None:
+#         attn_output_weights = attn_output_weights.view(bsz, num_heads, tgt_len, src_len)
+#         attn_output_weights = attn_output_weights.masked_fill(
+#             key_padding_mask.unsqueeze(1).unsqueeze(2),
+#             float('-inf'),
+#         )
+#         attn_output_weights = attn_output_weights.view(bsz * num_heads, tgt_len, src_len)
+# 
+#     attn_output_weights = softmax(
+#         attn_output_weights, dim=-1)
+#     attn_output_weights = dropout(attn_output_weights, p=dropout_p, training=training)
+# 
+#     attn_output = torch.bmm(attn_output_weights, v)
+#     assert list(attn_output.size()) == [bsz * num_heads, tgt_len, head_dim]
+#     attn_output = attn_output.transpose(0, 1).contiguous().view(tgt_len, bsz, embed_dim)
+#     attn_output = linear(attn_output, out_proj_weight, out_proj_bias)
+# 
+#     if need_weights:
+#         # average attention weights over heads
+#         attn_output_weights = attn_output_weights.view(bsz, num_heads, tgt_len, src_len)
+#         return attn_output, attn_output_weights.sum(dim=1) / num_heads
+#     else:
+#         return attn_output, None
+# 
+stop('not implemented')
+}
+
+nnf_multi_margin_loss <- function() {
+# def multi_margin_loss(input, target, p=1, margin=1., weight=None, size_average=None,
+#                       reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, int, float, Optional[Tensor], Optional[bool], Optional[bool], str) -> Tensor
+#     r"""multi_margin_loss(input, target, p=1, margin=1, weight=None, size_average=None,
+#                           reduce=None, reduction='mean') -> Tensor
+# 
+#     See :class:`~torch.nn.MultiMarginLoss` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 multi_margin_loss, tens_ops, input, target, p=p, margin=margin,
+#                 weight=weight, size_average=size_average, reduce=reduce,
+#                 reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         reduction_enum = _Reduction.get_enum(reduction)
+#     if p != 1 and p != 2:
+#         raise ValueError('only p == 1 and p == 2 supported')
+#     if weight is not None:
+#         if weight.dim() != 1:
+#             raise ValueError('weight must be one-dimensional')
+# 
+#     return torch._C._nn.multi_margin_loss(input, target, p, margin, weight, reduction_enum)
+# 
+stop('not implemented')
+}
+
+nnf_multilabel_margin_loss <- function() {
+# def multilabel_margin_loss(input, target, size_average=None, reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""multilabel_margin_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor
+# 
+#     See :class:`~torch.nn.MultiLabelMarginLoss` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 multilabel_margin_loss, tens_ops, input, target, size_average=size_average,
+#                 reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         reduction_enum = _Reduction.get_enum(reduction)
+#     return torch._C._nn.multilabel_margin_loss(input, target, reduction_enum)
+# 
+stop('not implemented')
+}
+
+nnf_multilabel_soft_margin_loss <- function() {
+# def multilabel_soft_margin_loss(input, target, weight=None, size_average=None,
+#                                 reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], Optional[bool], str) -> Tensor
+#     r"""multilabel_soft_margin_loss(input, target, weight=None, size_average=None) -> Tensor
+# 
+#     See :class:`~torch.nn.MultiLabelSoftMarginLoss` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 multilabel_soft_margin_loss, tens_ops, input, target, weight=weight,
+#                 size_average=size_average, reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction = _Reduction.legacy_get_string(size_average, reduce)
+# 
+#     loss = -(target * logsigmoid(input) + (1 - target) * logsigmoid(-input))
+# 
+#     if weight is not None:
+#         loss = loss * weight
+# 
+#     loss = loss.sum(dim=1) / input.size(1)  # only return N loss values
+# 
+#     if reduction == 'none':
+#         ret = loss
+#     elif reduction == 'mean':
+#         ret = loss.mean()
+#     elif reduction == 'sum':
+#         ret = loss.sum()
+#     else:
+#         ret = input
+#         raise ValueError(reduction + " is not valid")
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_nll_loss <- function(input, target, weight, size_average, ignore_index, reduce, reduction) {
+# def nll_loss(input, target, weight=None, size_average=None, ignore_index=-100,
+#              reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], int, Optional[bool], str) -> Tensor
+#     r"""The negative log likelihood loss.
+# 
+#     See :class:`~torch.nn.NLLLoss` for details.
+# 
+#     Args:
+#         input: :math:`(N, C)` where `C = number of classes` or :math:`(N, C, H, W)`
+#             in case of 2D Loss, or :math:`(N, C, d_1, d_2, ..., d_K)` where :math:`K \geq 1`
+#             in the case of K-dimensional loss.
+#         target: :math:`(N)` where each value is :math:`0 \leq \text{targets}[i] \leq C-1`,
+#             or :math:`(N, d_1, d_2, ..., d_K)` where :math:`K \geq 1` for
+#             K-dimensional loss.
+#         weight (Tensor, optional): a manual rescaling weight given to each
+#             class. If given, has to be a Tensor of size `C`
+#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
+#             the losses are averaged over each loss element in the batch. Note that for
+#             some losses, there multiple elements per sample. If the field :attr:`size_average`
+#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
+#             when reduce is ``False``. Default: ``True``
+#         ignore_index (int, optional): Specifies a target value that is ignored
+#             and does not contribute to the input gradient. When :attr:`size_average` is
+#             ``True``, the loss is averaged over non-ignored targets. Default: -100
+#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
+#             losses are averaged or summed over observations for each minibatch depending
+#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
+#             batch element instead and ignores :attr:`size_average`. Default: ``True``
+#         reduction (string, optional): Specifies the reduction to apply to the output:
+#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
+#             ``'mean'``: the sum of the output will be divided by the number of
+#             elements in the output, ``'sum'``: the output will be summed. Note: :attr:`size_average`
+#             and :attr:`reduce` are in the process of being deprecated, and in the meantime,
+#             specifying either of those two args will override :attr:`reduction`. Default: ``'mean'``
+# 
+#     Example::
+# 
+#         >>> # input is of size N x C = 3 x 5
+#         >>> input = torch.randn(3, 5, requires_grad=True)
+#         >>> # each element in target has to have 0 <= value < C
+#         >>> target = torch.tensor([1, 0, 4])
+#         >>> output = F.nll_loss(F.log_softmax(input), target)
+#         >>> output.backward()
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 nll_loss, tens_ops, input, target, weight=weight, size_average=size_average,
+#                 ignore_index=ignore_index, reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction = _Reduction.legacy_get_string(size_average, reduce)
+#     dim = input.dim()
+#     if dim < 2:
+#         raise ValueError('Expected 2 or more dimensions (got {})'.format(dim))
+# 
+#     if input.size(0) != target.size(0):
+#         raise ValueError('Expected input batch_size ({}) to match target batch_size ({}).'
+#                          .format(input.size(0), target.size(0)))
+#     if dim == 2:
+#         ret = torch._C._nn.nll_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index)
+#     elif dim == 4:
+#         ret = torch._C._nn.nll_loss2d(input, target, weight, _Reduction.get_enum(reduction), ignore_index)
+#     else:
+#         # dim == 3 or dim > 4
+#         n = input.size(0)
+#         c = input.size(1)
+#         out_size = (n,) + input.size()[2:]
+#         if target.size()[1:] != input.size()[2:]:
+#             raise ValueError('Expected target size {}, got {}'.format(
+#                 out_size, target.size()))
+#         input = input.contiguous()
+#         target = target.contiguous()
+#         # support empty batches, see #15870
+#         if input.numel() > 0:
+#             input = input.view(n, c, 1, -1)
+#         else:
+#             input = input.view(n, c, 0, 0)
+#         if target.numel() > 0:
+#             target = target.view(n, 1, -1)
+#         else:
+#             target = target.view(n, 0, 0)
+#         reduction_enum = _Reduction.get_enum(reduction)
+#         if reduction != 'none':
+#             ret = torch._C._nn.nll_loss2d(
+#                 input, target, weight, reduction_enum, ignore_index)
+#         else:
+#             out = torch._C._nn.nll_loss2d(
+#                 input, target, weight, reduction_enum, ignore_index)
+#             ret = out.view(out_size)
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_normalize <- function(input, p, dim, eps, out) {
+# def normalize(input, p=2, dim=1, eps=1e-12, out=None):
+#     # type: (Tensor, float, int, float, Optional[Tensor]) -> Tensor
+#     r"""Performs :math:`L_p` normalization of inputs over specified dimension.
+# 
+#     For a tensor :attr:`input` of sizes :math:`(n_0, ..., n_{dim}, ..., n_k)`, each
+#     :math:`n_{dim}` -element vector :math:`v` along dimension :attr:`dim` is transformed as
+# 
+#     .. math::
+#         v = \frac{v}{\max(\lVert v \rVert_p, \epsilon)}.
+# 
+#     With the default arguments it uses the Euclidean norm over vectors along dimension :math:`1` for normalization.
+# 
+#     Args:
+#         input: input tensor of any shape
+#         p (float): the exponent value in the norm formulation. Default: 2
+#         dim (int): the dimension to reduce. Default: 1
+#         eps (float): small value to avoid division by zero. Default: 1e-12
+#         out (Tensor, optional): the output tensor. If :attr:`out` is used, this
+#                                 operation won't be differentiable.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 normalize, (input,), input, p=p, dim=dim, eps=eps, out=out)
+#     if out is None:
+#         denom = input.norm(p, dim, keepdim=True).clamp_min(eps).expand_as(input)
+#         return input / denom
+#     else:
+#         denom = input.norm(p, dim, keepdim=True).clamp_min_(eps).expand_as(input)
+#         return torch.div(input, denom, out=out)
+# 
+stop('not implemented')
+}
+
+nnf_one_hot <- function(tensor, num_classes) {
+# 
+stop('not implemented')
+}
+
+nnf_pad <- function(input, pad, mode, value) {
+# def _pad(input, pad, mode='constant', value=0):
+#     # type: (Tensor, List[int], str, float) -> Tensor
+#     r"""Pads tensor.
+# 
+#     Padding size:
+#         The padding size by which to pad some dimensions of :attr:`input`
+#         are described starting from the last dimension and moving forward.
+#         :math:`\left\lfloor\frac{\text{len(pad)}}{2}\right\rfloor` dimensions
+#         of ``input`` will be padded.
+#         For example, to pad only the last dimension of the input tensor, then
+#         :attr:`pad` has the form
+#         :math:`(\text{padding\_left}, \text{padding\_right})`;
+#         to pad the last 2 dimensions of the input tensor, then use
+#         :math:`(\text{padding\_left}, \text{padding\_right},`
+#         :math:`\text{padding\_top}, \text{padding\_bottom})`;
+#         to pad the last 3 dimensions, use
+#         :math:`(\text{padding\_left}, \text{padding\_right},`
+#         :math:`\text{padding\_top}, \text{padding\_bottom}`
+#         :math:`\text{padding\_front}, \text{padding\_back})`.
+# 
+#     Padding mode:
+#         See :class:`torch.nn.ConstantPad2d`, :class:`torch.nn.ReflectionPad2d`, and
+#         :class:`torch.nn.ReplicationPad2d` for concrete examples on how each of the
+#         padding modes works. Constant padding is implemented for arbitrary dimensions.
+#         Replicate padding is implemented for padding the last 3 dimensions of 5D input
+#         tensor, or the last 2 dimensions of 4D input tensor, or the last dimension of
+#         3D input tensor. Reflect padding is only implemented for padding the last 2
+#         dimensions of 4D input tensor, or the last dimension of 3D input tensor.
+# 
+#     .. include:: cuda_deterministic_backward.rst
+# 
+#     Args:
+#         input (Tensor): N-dimensional tensor
+#         pad (tuple): m-elements tuple, where
+#             :math:`\frac{m}{2} \leq` input dimensions and :math:`m` is even.
+#         mode: ``'constant'``, ``'reflect'``, ``'replicate'`` or ``'circular'``.
+#             Default: ``'constant'``
+#         value: fill value for ``'constant'`` padding. Default: ``0``
+# 
+#     Examples::
+# 
+#         >>> t4d = torch.empty(3, 3, 4, 2)
+#         >>> p1d = (1, 1) # pad last dim by 1 on each side
+#         >>> out = F.pad(t4d, p1d, "constant", 0)  # effectively zero padding
+#         >>> print(out.size())
+#         torch.Size([3, 3, 4, 4])
+#         >>> p2d = (1, 1, 2, 2) # pad last dim by (1, 1) and 2nd to last by (2, 2)
+#         >>> out = F.pad(t4d, p2d, "constant", 0)
+#         >>> print(out.size())
+#         torch.Size([3, 3, 8, 4])
+#         >>> t4d = torch.empty(3, 3, 4, 2)
+#         >>> p3d = (0, 1, 2, 1, 3, 3) # pad by (0, 1), (2, 1), and (3, 3)
+#         >>> out = F.pad(t4d, p3d, "constant", 0)
+#         >>> print(out.size())
+#         torch.Size([3, 9, 7, 3])
+# 
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 _pad, (input,), input, pad, mode=mode, value=value)
+#     assert len(pad) % 2 == 0, 'Padding length must be divisible by 2'
+#     assert len(pad) // 2 <= input.dim(), 'Padding length too large'
+#     if mode == 'constant':
+#         return _VF.constant_pad_nd(input, pad, value)
+#     else:
+#         assert value == 0, 'Padding mode "{}"" doesn\'t take in value argument'.format(mode)
+#         if input.dim() == 3:
+#             assert len(pad) == 2, '3D tensors expect 2 values for padding'
+#             if mode == 'reflect':
+#                 return torch._C._nn.reflection_pad1d(input, pad)
+#             elif mode == 'replicate':
+#                 return torch._C._nn.replication_pad1d(input, pad)
+#             elif mode == 'circular':
+#                 return _pad_circular(input, pad)
+#             else:
+#                 raise NotImplementedError
+# 
+#         elif input.dim() == 4:
+#             assert len(pad) == 4, '4D tensors expect 4 values for padding'
+#             if mode == 'reflect':
+#                 return torch._C._nn.reflection_pad2d(input, pad)
+#             elif mode == 'replicate':
+#                 return torch._C._nn.replication_pad2d(input, pad)
+#             elif mode == 'circular':
+#                 return _pad_circular(input, pad)
+#             else:
+#                 raise NotImplementedError
+# 
+#         elif input.dim() == 5:
+#             assert len(pad) == 6, '5D tensors expect 6 values for padding'
+#             if mode == 'reflect':
+#                 raise NotImplementedError
+#             elif mode == 'replicate':
+#                 return torch._C._nn.replication_pad3d(input, pad)
+#             elif mode == 'circular':
+#                 return _pad_circular(input, pad)
+#             else:
+#                 raise NotImplementedError
+#         else:
+#             raise NotImplementedError("Only 3D, 4D, 5D padding with non-constant padding are supported for now")
+# 
+stop('not implemented')
+}
+
+nnf_pairwise_distance <- function() {
+# def pairwise_distance(x1, x2, p=2., eps=1e-6, keepdim=False):
+#     # type: (Tensor, Tensor, float, float, bool) -> Tensor
+#     r"""
+#     See :class:`torch.nn.PairwiseDistance` for details
+#     """
+#     return torch.pairwise_distance(x1, x2, p, eps, keepdim)
+# 
+stop('not implemented')
+}
+
+nnf_pdist <- function(input, p) {
+# 
+stop('not implemented')
+}
+
+nnf_pixel_shuffle <- function(input, upscale_factor) {
+# 
+stop('not implemented')
+}
+
+nnf_poisson_nll_loss <- function(input, target, log_input, full, size_average, eps, reduce, reduction) {
+# def poisson_nll_loss(input, target, log_input=True, full=False, size_average=None, eps=1e-8,
+#                      reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, bool, bool, Optional[bool], float, Optional[bool], str) -> Tensor
+#     r"""Poisson negative log likelihood loss.
+# 
+#     See :class:`~torch.nn.PoissonNLLLoss` for details.
+# 
+#     Args:
+#         input: expectation of underlying Poisson distribution.
+#         target: random sample :math:`target \sim \text{Poisson}(input)`.
+#         log_input: if ``True`` the loss is computed as
+#             :math:`\exp(\text{input}) - \text{target} * \text{input}`, if ``False`` then loss is
+#             :math:`\text{input} - \text{target} * \log(\text{input}+\text{eps})`. Default: ``True``
+#         full: whether to compute full loss, i. e. to add the Stirling
+#             approximation term. Default: ``False``
+#             :math:`\text{target} * \log(\text{target}) - \text{target} + 0.5 * \log(2 * \pi * \text{target})`.
+#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
+#             the losses are averaged over each loss element in the batch. Note that for
+#             some losses, there multiple elements per sample. If the field :attr:`size_average`
+#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
+#             when reduce is ``False``. Default: ``True``
+#         eps (float, optional): Small value to avoid evaluation of :math:`\log(0)` when
+#             :attr:`log_input`=``False``. Default: 1e-8
+#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
+#             losses are averaged or summed over observations for each minibatch depending
+#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
+#             batch element instead and ignores :attr:`size_average`. Default: ``True``
+#         reduction (string, optional): Specifies the reduction to apply to the output:
+#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
+#             ``'mean'``: the sum of the output will be divided by the number of
+#             elements in the output, ``'sum'``: the output will be summed. Note: :attr:`size_average`
+#             and :attr:`reduce` are in the process of being deprecated, and in the meantime,
+#             specifying either of those two args will override :attr:`reduction`. Default: ``'mean'``
+# 
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 poisson_nll_loss, tens_ops, input, target, log_input=log_input, full=full,
+#                 size_average=size_average, eps=eps, reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction = _Reduction.legacy_get_string(size_average, reduce)
+#     if reduction != 'none' and reduction != 'mean' and reduction != 'sum':
+#         ret = input
+#         raise ValueError(reduction + " is not valid")
+# 
+#     ret = torch.poisson_nll_loss(input, target, log_input, full, eps, _Reduction.get_enum(reduction))
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_prelu <- function() {
+# def prelu(input, weight):
+#     # type: (Tensor, Tensor) -> Tensor
+#     r"""prelu(input, weight) -> Tensor
+# 
+#     Applies element-wise the function
+#     :math:`\text{PReLU}(x) = \max(0,x) + \text{weight} * \min(0,x)` where weight is a
+#     learnable parameter.
+# 
+#     See :class:`~torch.nn.PReLU` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(prelu, (input,), input, weight)
+#     return torch.prelu(input, weight)
+# 
+stop('not implemented')
+}
+
+nnf_relu <- function() {
+# def relu(input, inplace=False):
+#     # type: (Tensor, bool) -> Tensor
+#     r"""relu(input, inplace=False) -> Tensor
+# 
+#     Applies the rectified linear unit function element-wise. See
+#     :class:`~torch.nn.ReLU` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(relu, (input,), input, inplace=inplace)
+#     if inplace:
+#         result = torch.relu_(input)
+#     else:
+#         result = torch.relu(input)
+#     return result
+# 
+stop('not implemented')
+}
+
+nnf_relu6 <- function() {
+# def relu6(input, inplace=False):
+#     # type: (Tensor, bool) -> Tensor
+#     r"""relu6(input, inplace=False) -> Tensor
+# 
+#     Applies the element-wise function :math:`\text{ReLU6}(x) = \min(\max(0,x), 6)`.
+# 
+#     See :class:`~torch.nn.ReLU6` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(relu6, (input,), input, inplace=inplace)
+#     return hardtanh(input, 0., 6., inplace)
+# 
+stop('not implemented')
+}
+
+nnf_relu_ <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_rrelu <- function() {
+# def rrelu(input, lower=1. / 8, upper=1. / 3, training=False, inplace=False):
+#     # type: (Tensor, float, float, bool, bool) -> Tensor
+#     r"""rrelu(input, lower=1./8, upper=1./3, training=False, inplace=False) -> Tensor
+# 
+#     Randomized leaky ReLU.
+# 
+#     See :class:`~torch.nn.RReLU` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 rrelu, (input,), input, lower=lower, upper=upper,
+#                 training=training, inplace=inplace)
+#     if inplace:
+#         result = torch.rrelu_(input, lower, upper, training)
+#     else:
+#         result = torch.rrelu(input, lower, upper, training)
+#     return result
+# 
+stop('not implemented')
+}
+
+nnf_rrelu_ <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_selu <- function() {
+# def selu(input, inplace=False):
+#     # type: (Tensor, bool) -> Tensor
+#     r"""selu(input, inplace=False) -> Tensor
+# 
+#     Applies element-wise,
+#     :math:`\text{SELU}(x) = scale * (\max(0,x) + \min(0, \alpha * (\exp(x) - 1)))`,
+#     with :math:`\alpha=1.6732632423543772848170429916717` and
+#     :math:`scale=1.0507009873554804934193349852946`.
+# 
+#     See :class:`~torch.nn.SELU` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(selu, (input,), input, inplace=inplace)
+#     if inplace:
+#         result = torch.selu_(input)
+#     else:
+#         result = torch.selu(input)
+#     return result
+# 
+stop('not implemented')
+}
+
+nnf_selu_ <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_sigmoid <- function() {
+# def sigmoid(input):
+#     r"""sigmoid(input) -> Tensor
+# 
+#     Applies the element-wise function :math:`\text{Sigmoid}(x) = \frac{1}{1 + \exp(-x)}`
+# 
+#     See :class:`~torch.nn.Sigmoid` for more details.
+#     """
+#     warnings.warn("nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.")
+#     return input.sigmoid()
+# 
+stop('not implemented')
+}
+
+nnf_smooth_l1_loss <- function() {
+# def smooth_l1_loss(input, target, size_average=None, reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""Function that uses a squared term if the absolute
+#     element-wise error falls below 1 and an L1 term otherwise.
+# 
+#     See :class:`~torch.nn.SmoothL1Loss` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 smooth_l1_loss, tens_ops, input, target, size_average=size_average,
+#                 reduce=reduce, reduction=reduction)
+#     if not (target.size() == input.size()):
+#         warnings.warn("Using a target size ({}) that is different to the input size ({}). "
+#                       "This will likely lead to incorrect results due to broadcasting. "
+#                       "Please ensure they have the same size.".format(target.size(), input.size()),
+#                       stacklevel=2)
+#     if size_average is not None or reduce is not None:
+#         reduction = _Reduction.legacy_get_string(size_average, reduce)
+#     if target.requires_grad:
+#         ret = _smooth_l1_loss(input, target)
+#         if reduction != 'none':
+#             ret = torch.mean(ret) if reduction == 'mean' else torch.sum(ret)
+#     else:
+#         expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+#         ret = torch._C._nn.smooth_l1_loss(expanded_input, expanded_target, _Reduction.get_enum(reduction))
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_soft_margin_loss <- function() {
+# def soft_margin_loss(input, target, size_average=None, reduce=None, reduction='mean'):
+#     # type: (Tensor, Tensor, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""soft_margin_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor
+# 
+#     See :class:`~torch.nn.SoftMarginLoss` for details.
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (input, target)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 soft_margin_loss, tens_ops, input, target, size_average=size_average,
+#                 reduce=reduce, reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         reduction_enum = _Reduction.get_enum(reduction)
+#     return torch._C._nn.soft_margin_loss(input, target, reduction_enum)
+# 
+stop('not implemented')
+}
+
+nnf_softmax <- function(input, dim, dtype) {
+# def softmax(input, dim=None, _stacklevel=3, dtype=None):
+#     # type: (Tensor, Optional[int], int, Optional[int]) -> Tensor
+#     r"""Applies a softmax function.
+# 
+#     Softmax is defined as:
+# 
+#     :math:`\text{Softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}`
+# 
+#     It is applied to all slices along dim, and will re-scale them so that the elements
+#     lie in the range `[0, 1]` and sum to 1.
+# 
+#     See :class:`~torch.nn.Softmax` for more details.
+# 
+#     Arguments:
+#         input (Tensor): input
+#         dim (int): A dimension along which softmax will be computed.
+#         dtype (:class:`torch.dtype`, optional): the desired data type of returned tensor.
+#           If specified, the input tensor is casted to :attr:`dtype` before the operation
+#           is performed. This is useful for preventing data type overflows. Default: None.
+# 
+#     .. note::
+#         This function doesn't work directly with NLLLoss,
+#         which expects the Log to be computed between the Softmax and itself.
+#         Use log_softmax instead (it's faster and has better numerical properties).
+# 
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 softmax, (input,), input, dim=dim, _stacklevel=_stacklevel, dtype=dtype)
+#     if dim is None:
+#         dim = _get_softmax_dim('softmax', input.dim(), _stacklevel)
+#     if dtype is None:
+#         ret = input.softmax(dim)
+#     else:
+#         ret = input.softmax(dim, dtype=dtype)
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_softmin <- function(input, dim, dtype) {
+# def softmin(input, dim=None, _stacklevel=3, dtype=None):
+#     # type: (Tensor, Optional[int], int, Optional[int]) -> Tensor
+#     r"""Applies a softmin function.
+# 
+#     Note that :math:`\text{Softmin}(x) = \text{Softmax}(-x)`. See softmax definition for mathematical formula.
+# 
+#     See :class:`~torch.nn.Softmin` for more details.
+# 
+#     Arguments:
+#         input (Tensor): input
+#         dim (int): A dimension along which softmin will be computed (so every slice
+#             along dim will sum to 1).
+#         dtype (:class:`torch.dtype`, optional): the desired data type of returned tensor.
+#           If specified, the input tensor is casted to :attr:`dtype` before the operation
+#           is performed. This is useful for preventing data type overflows. Default: None.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 softmin, (input,), input, dim=dim, _stacklevel=_stacklevel, dtype=dtype)
+#     if dim is None:
+#         dim = _get_softmax_dim('softmin', input.dim(), _stacklevel)
+#     if dtype is None:
+#         ret = (-input).softmax(dim)
+#     else:
+#         ret = (-input).softmax(dim, dtype=dtype)
+#     return ret
+# 
+stop('not implemented')
+}
+
+nnf_softplus <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_softshrink <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_softsign <- function() {
+# def softsign(input):
+#     r"""softsign(input) -> Tensor
+# 
+#     Applies element-wise, the function :math:`\text{SoftSign}(x) = \frac{x}{1 + |x|}`
+# 
+#     See :class:`~torch.nn.Softsign` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(softsign, (input,), input)
+#     return input / (input.abs() + 1)
+# 
+stop('not implemented')
+}
+
+nnf_tanh <- function() {
+# def tanh(input):
+#     r"""tanh(input) -> Tensor
+# 
+#     Applies element-wise,
+#     :math:`\text{Tanh}(x) = \tanh(x) = \frac{\exp(x) - \exp(-x)}{\exp(x) + \exp(-x)}`
+# 
+#     See :class:`~torch.nn.Tanh` for more details.
+#     """
+#     warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+#     return input.tanh()
+# 
+stop('not implemented')
+}
+
+nnf_tanhshrink <- function() {
+# def tanhshrink(input):
+#     r"""tanhshrink(input) -> Tensor
+# 
+#     Applies element-wise, :math:`\text{Tanhshrink}(x) = x - \text{Tanh}(x)`
+# 
+#     See :class:`~torch.nn.Tanhshrink` for more details.
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(tanhshrink, (input,), input)
+#     return input - input.tanh()
+# 
+stop('not implemented')
+}
+
+nnf_threshold <- function() {
+# def threshold(input, threshold, value, inplace=False):
+#     # type: (Tensor, float, float, bool) -> Tensor
+#     r"""Thresholds each element of the input Tensor.
+# 
+#     See :class:`~torch.nn.Threshold` for more details.
+#     """
+#     if inplace:
+#         result = _VF.threshold_(input, threshold, value)
+#     else:
+#         result = _VF.threshold(input, threshold, value)
+#     return result
+# 
+stop('not implemented')
+}
+
+nnf_threshold_ <- function() {
+# 
+stop('not implemented')
+}
+
+nnf_torch <- function() {
+# # @lint-ignore-every PYTHON3COMPATIMPORTS
+# 
+# r"""
+# The torch package contains data structures for multi-dimensional
+# tensors and mathematical operations over these are defined.
+# Additionally, it provides many utilities for efficient serializing of
+# Tensors and arbitrary types, and other useful utilities.
+# 
+# It has a CUDA counterpart, that enables you to run your tensor computations
+# on an NVIDIA GPU with compute capability >= 3.0.
+# """
+# 
+# import os
+# import sys
+# import platform
+# import ctypes
+# 
+# if sys.version_info < (3,):
+#     raise Exception("Python 2 has reached end-of-life and is no longer supported by PyTorch.")
+# 
+# from ._utils import _import_dotted_name
+# from ._utils_internal import get_file_path, prepare_multiprocessing_environment, \
+#     USE_RTLD_GLOBAL_WITH_LIBTORCH
+# from .version import __version__
+# from ._six import string_classes as _string_classes
+# 
+# __all__ = [
+#     'typename', 'is_tensor', 'is_storage', 'set_default_tensor_type',
+#     'set_rng_state', 'get_rng_state', 'manual_seed', 'initial_seed', 'seed',
+#     'save', 'load', 'set_printoptions', 'chunk', 'split', 'stack', 'matmul',
+#     'no_grad', 'enable_grad', 'rand', 'randn',
+#     'DoubleStorage', 'FloatStorage', 'LongStorage', 'IntStorage',
+#     'ShortStorage', 'CharStorage', 'ByteStorage', 'BoolStorage',
+#     'DoubleTensor', 'FloatTensor', 'LongTensor', 'IntTensor',
+#     'ShortTensor', 'CharTensor', 'ByteTensor', 'BoolTensor', 'Tensor',
+#     'lobpcg',
+# ]
+# 
+# ################################################################################
+# # Load the extension module
+# ################################################################################
+# 
+# if platform.system() == 'Windows':
+#     is_conda = os.path.exists(os.path.join(sys.prefix, 'conda-meta'))
+#     py_dll_path = os.path.join(sys.exec_prefix, 'Library', 'bin')
+#     th_dll_path = os.path.join(os.path.dirname(__file__), 'lib')
+# 
+#     if not os.path.exists(os.path.join(th_dll_path, 'nvToolsExt64_1.dll')) and \
+#             not os.path.exists(os.path.join(py_dll_path, 'nvToolsExt64_1.dll')):
+#         nvtoolsext_dll_path = os.path.join(
+#             os.getenv('NVTOOLSEXT_PATH', 'C:\\Program Files\\NVIDIA Corporation\\NvToolsExt'), 'bin', 'x64')
+#     else:
+#         nvtoolsext_dll_path = ''
+# 
+#     from .version import cuda as cuda_version
+#     import glob
+#     if cuda_version and len(glob.glob(os.path.join(th_dll_path, 'cudart64*.dll'))) == 0 and \
+#             len(glob.glob(os.path.join(py_dll_path, 'cudart64*.dll'))) == 0:
+#         cuda_version_1 = cuda_version.replace('.', '_')
+#         cuda_path_var = 'CUDA_PATH_V' + cuda_version_1
+#         default_path = 'C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v' + cuda_version
+#         cuda_path = os.path.join(os.getenv(cuda_path_var, default_path), 'bin')
+#     else:
+#         cuda_path = ''
+# 
+#     if sys.version_info >= (3, 8):
+#         dll_paths = list(filter(os.path.exists, [th_dll_path, py_dll_path, nvtoolsext_dll_path, cuda_path]))
+# 
+#         for dll_path in dll_paths:
+#             os.add_dll_directory(dll_path)
+# 
+#     if is_conda or sys.version_info < (3, 8):
+#         dll_paths = [th_dll_path, py_dll_path, nvtoolsext_dll_path, cuda_path]
+#         dll_paths = list(filter(os.path.exists, dll_paths)) + [os.environ['PATH']]
+# 
+#         os.environ['PATH'] = ';'.join(dll_paths)
+# 
+#     import glob
+#     dlls = glob.glob(os.path.join(th_dll_path, '*.dll'))
+#     for dll in dlls:
+#         ctypes.CDLL(dll)
+# 
+# 
+# # See Note [Global dependencies]
+# def _load_global_deps():
+#     if platform.system() == 'Windows':
+#         return
+# 
+#     lib_name = 'libtorch_global_deps' + ('.dylib' if platform.system() == 'Darwin' else '.so')
+#     here = os.path.abspath(__file__)
+#     lib_path = os.path.join(os.path.dirname(here), 'lib', lib_name)
+# 
+#     ctypes.CDLL(lib_path, mode=ctypes.RTLD_GLOBAL)
+# 
+# 
+# if (USE_RTLD_GLOBAL_WITH_LIBTORCH or os.getenv('TORCH_USE_RTLD_GLOBAL')) and \
+#         platform.system() != 'Windows':
+#     # Do it the hard way.  You might want to load libtorch with RTLD_GLOBAL in a
+#     # few circumstances:
+#     #
+#     #   1. You're in a build environment (e.g., fbcode) where
+#     #      libtorch_global_deps is not available, but you still need
+#     #      to get mkl to link in with RTLD_GLOBAL or it will just
+#     #      not work.
+#     #
+#     #   2. You're trying to run PyTorch under UBSAN and you need
+#     #      to ensure that only one copy of libtorch is loaded, so
+#     #      vptr checks work properly
+#     #
+#     # If you're using this setting, you must verify that all the libraries
+#     # you load consistently use the same libstdc++, or you may have
+#     # mysterious segfaults.
+#     #
+#     import os as _dl_flags
+#     if not hasattr(_dl_flags, 'RTLD_GLOBAL') or not hasattr(_dl_flags, 'RTLD_LAZY'):
+#         try:
+#             # next try if DLFCN exists
+#             import DLFCN as _dl_flags
+#         except ImportError:
+#             # as a last attempt, use compile-time constants
+#             import torch._dl as _dl_flags
+#     old_flags = sys.getdlopenflags()
+#     sys.setdlopenflags(_dl_flags.RTLD_GLOBAL | _dl_flags.RTLD_LAZY)
+#     from torch._C import *
+#     sys.setdlopenflags(old_flags)
+#     del old_flags
+#     del _dl_flags
+# 
+# else:
+#     # Easy way.  You want this most of the time, because it will prevent
+#     # C++ symbols from libtorch clobbering C++ symbols from other
+#     # libraries, leading to mysterious segfaults.
+#     #
+#     # See Note [Global dependencies]
+#     _load_global_deps()
+#     from torch._C import *
+# 
+# __all__ += [name for name in dir(_C)
+#             if name[0] != '_' and
+#             not name.endswith('Base')]
+# 
+# ################################################################################
+# # Define basic utilities
+# ################################################################################
+# 
+# 
+# def typename(o):
+#     if isinstance(o, torch.Tensor):
+#         return o.type()
+# 
+#     module = ''
+#     class_name = ''
+#     if hasattr(o, '__module__') and o.__module__ != 'builtins' \
+#             and o.__module__ != '__builtin__' and o.__module__ is not None:
+#         module = o.__module__ + '.'
+# 
+#     if hasattr(o, '__qualname__'):
+#         class_name = o.__qualname__
+#     elif hasattr(o, '__name__'):
+#         class_name = o.__name__
+#     else:
+#         class_name = o.__class__.__name__
+# 
+#     return module + class_name
+# 
+# 
+# def is_tensor(obj):
+#     r"""Returns True if `obj` is a PyTorch tensor.
+# 
+#     Args:
+#         obj (Object): Object to test
+#     """
+#     return isinstance(obj, torch.Tensor)
+# 
+# 
+# def is_storage(obj):
+#     r"""Returns True if `obj` is a PyTorch storage object.
+# 
+#     Args:
+#         obj (Object): Object to test
+#     """
+#     return type(obj) in _storage_classes
+# 
+# 
+# def set_default_tensor_type(t):
+#     r"""Sets the default ``torch.Tensor`` type to floating point tensor type
+#     ``t``. This type will also be used as default floating point type for
+#     type inference in :func:`torch.tensor`.
+# 
+#     The default floating point tensor type is initially ``torch.FloatTensor``.
+# 
+#     Args:
+#         t (type or string): the floating point tensor type or its name
+# 
+#     Example::
+# 
+#         >>> torch.tensor([1.2, 3]).dtype    # initial default for floating point is torch.float32
+#         torch.float32
+#         >>> torch.set_default_tensor_type(torch.DoubleTensor)
+#         >>> torch.tensor([1.2, 3]).dtype    # a new floating point tensor
+#         torch.float64
+# 
+#     """
+#     if isinstance(t, _string_classes):
+#         t = _import_dotted_name(t)
+#     _C._set_default_tensor_type(t)
+# 
+# 
+# def set_default_dtype(d):
+#     r"""Sets the default floating point dtype to :attr:`d`. This type will be
+#     used as default floating point type for type inference in
+#     :func:`torch.tensor`.
+# 
+#     The default floating point dtype is initially ``torch.float32``.
+# 
+#     Args:
+#         d (:class:`torch.dtype`): the floating point dtype to make the default
+# 
+#     Example::
+# 
+#         >>> torch.tensor([1.2, 3]).dtype           # initial default for floating point is torch.float32
+#         torch.float32
+#         >>> torch.set_default_dtype(torch.float64)
+#         >>> torch.tensor([1.2, 3]).dtype           # a new floating point tensor
+#         torch.float64
+# 
+#     """
+#     _C._set_default_dtype(d)
+# 
+# # If you edit these imports, please update torch/__init__.py.in as well
+# from .random import set_rng_state, get_rng_state, manual_seed, initial_seed, seed
+# from .serialization import save, load
+# from ._tensor_str import set_printoptions
+# 
+# ################################################################################
+# # Define Storage and Tensor classes
+# ################################################################################
+# 
+# from .tensor import Tensor
+# from .storage import _StorageBase
+# 
+# 
+# class DoubleStorage(_C.DoubleStorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class FloatStorage(_C.FloatStorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class HalfStorage(_C.HalfStorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class LongStorage(_C.LongStorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class IntStorage(_C.IntStorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class ShortStorage(_C.ShortStorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class CharStorage(_C.CharStorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class ByteStorage(_C.ByteStorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class BoolStorage(_C.BoolStorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class BFloat16Storage(_C.BFloat16StorageBase, _StorageBase):
+#     pass
+# 
+# 
+# class QUInt8Storage(_C.QUInt8StorageBase, _StorageBase):
+#     pass
+# 
+# class QInt8Storage(_C.QInt8StorageBase, _StorageBase):
+#     pass
+# 
+# class QInt32Storage(_C.QInt32StorageBase, _StorageBase):
+#     pass
+# 
+# 
+# _storage_classes = {
+#     DoubleStorage, FloatStorage, LongStorage, IntStorage, ShortStorage,
+#     CharStorage, ByteStorage, HalfStorage, BoolStorage, QUInt8Storage, QInt8Storage,
+#     QInt32Storage, BFloat16Storage
+# }
+# 
+# # The _tensor_classes set is initialized by the call to _C._initialize_tensor_type_bindings()
+# _tensor_classes = set()
+# 
+# 
+# ################################################################################
+# # Initialize extension
+# ################################################################################
+# 
+# def manager_path():
+#     if platform.system() == 'Windows':
+#         return b""
+#     path = get_file_path('torch', 'bin', 'torch_shm_manager')
+#     prepare_multiprocessing_environment(get_file_path('torch'))
+#     if not os.path.exists(path):
+#         raise RuntimeError("Unable to find torch_shm_manager at " + path)
+#     return path.encode('utf-8')
+# 
+# 
+# # Shared memory manager needs to know the exact location of manager executable
+# _C._initExtension(manager_path())
+# del manager_path
+# 
+# for name in dir(_C._VariableFunctions):
+#     if name.startswith('__'):
+#         continue
+#     globals()[name] = getattr(_C._VariableFunctions, name)
+# 
+# ################################################################################
+# # Import interface functions defined in Python
+# ################################################################################
+# 
+# # needs to be after the above ATen bindings so we can overwrite from Python side
+# from .functional import *
+# 
+# 
+# ################################################################################
+# # Remove unnecessary members
+# ################################################################################
+# 
+# del DoubleStorageBase
+# del FloatStorageBase
+# del LongStorageBase
+# del IntStorageBase
+# del ShortStorageBase
+# del CharStorageBase
+# del ByteStorageBase
+# del BoolStorageBase
+# del QUInt8StorageBase
+# del BFloat16StorageBase
+# 
+# ################################################################################
+# # Import most common subpackages
+# ################################################################################
+# 
+# import torch.cuda
+# import torch.autograd
+# from torch.autograd import no_grad, enable_grad, set_grad_enabled
+# import torch.nn
+# import torch.nn.intrinsic
+# import torch.nn.quantized
+# import torch.optim
+# import torch.multiprocessing
+# import torch.sparse
+# import torch.utils.backcompat
+# import torch.onnx
+# import torch.jit
+# import torch.hub
+# import torch.random
+# import torch.distributions
+# import torch.testing
+# import torch.backends.cuda
+# import torch.backends.mkl
+# import torch.backends.mkldnn
+# import torch.backends.openmp
+# import torch.backends.quantized
+# import torch.quantization
+# import torch.utils.data
+# import torch.__config__
+# import torch.__future__
+# 
+# _C._init_names(list(torch._storage_classes))
+# 
+# # attach docstrings to torch and tensor functions
+# from . import _torch_docs, _tensor_docs, _storage_docs
+# del _torch_docs, _tensor_docs, _storage_docs
+# 
+# 
+# def compiled_with_cxx11_abi():
+#     r"""Returns whether PyTorch was built with _GLIBCXX_USE_CXX11_ABI=1"""
+#     return _C._GLIBCXX_USE_CXX11_ABI
+# 
+# 
+# # Import the ops "namespace"
+# from torch._ops import ops
+# from torch._classes import classes
+# 
+# # Import the quasi random sampler
+# import torch.quasirandom
+# 
+# # If you are seeing this, it means that this call site was not checked if
+# # the memory format could be preserved, and it was switched to old default
+# # behaviour of contiguous
+# legacy_contiguous_format = contiguous_format
+# 
+# # Register fork handler to initialize OpenMP in child processes (see gh-28389)
+# from torch.multiprocessing._atfork import register_after_fork
+# register_after_fork(torch.get_num_threads)
+# del register_after_fork
+# 
+# # Import tools that require fully imported torch (for applying
+# # torch.jit.script as a decorator, for instance):
+# from ._lobpcg import lobpcg
+# 
+stop('not implemented')
+}
+
+nnf_triplet_margin_loss <- function() {
+# def triplet_margin_loss(anchor, positive, negative, margin=1.0, p=2, eps=1e-6, swap=False, size_average=None,
+#                         reduce=None, reduction="mean"):
+#     # type: (Tensor, Tensor, Tensor, float, float, float, bool, Optional[bool], Optional[bool], str) -> Tensor
+#     r"""
+#     See :class:`~torch.nn.TripletMarginLoss` for details
+#     """
+#     if not torch.jit.is_scripting():
+#         tens_ops = (anchor, positive, negative)
+#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
+#             return handle_torch_function(
+#                 triplet_margin_loss, tens_ops, anchor, positive, negative, margin=margin,
+#                 p=p, eps=eps, swap=swap, size_average=size_average, reduce=reduce,
+#                 reduction=reduction)
+#     if size_average is not None or reduce is not None:
+#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
+#     else:
+#         reduction_enum = _Reduction.get_enum(reduction)
+#     return torch.triplet_margin_loss(anchor, positive, negative, margin, p, eps,
+#                                      swap, reduction_enum)
+# 
+stop('not implemented')
+}
+
+nnf_unfold <- function() {
+# def unfold(input, kernel_size, dilation=1, padding=0, stride=1):
+#     # type: (Tensor, BroadcastingList2[int], BroadcastingList2[int], BroadcastingList2[int], BroadcastingList2[int]) -> Tensor  # noqa
+#     r"""Extracts sliding local blocks from an batched input tensor.
+# 
+#     .. warning::
+#         Currently, only 4-D input tensors (batched image-like tensors) are
+#         supported.
+# 
+#     .. warning::
+# 
+#         More than one element of the unfolded tensor may refer to a single
+#         memory location. As a result, in-place operations (especially ones that
+#         are vectorized) may result in incorrect behavior. If you need to write
+#         to the tensor, please clone it first.
+# 
+# 
+#     See :class:`torch.nn.Unfold` for details
+#     """
+#     if not torch.jit.is_scripting():
+#         if type(input) is not Tensor and has_torch_function((input,)):
+#             return handle_torch_function(
+#                 unfold, (input,), input, kernel_size, dilation=dilation,
+#                 padding=padding, stride=stride)
+#     if input.dim() == 4:
+#         msg = '{} must be int or 2-tuple for 4D input'
+#         assert_int_or_pair(kernel_size, 'kernel_size', msg)
+#         assert_int_or_pair(dilation, 'dilation', msg)
+#         assert_int_or_pair(padding, 'padding', msg)
+#         assert_int_or_pair(stride, 'stride', msg)
+# 
+#         return torch._C._nn.im2col(input, _pair(kernel_size),
+#                                    _pair(dilation), _pair(padding), _pair(stride))
+#     else:
+#         raise NotImplementedError("Input Error: Only 4D input Tensors are supported (got {}D)".format(input.dim()))
+# 
+stop('not implemented')
+}
+
+nnf_upsample <- function(input, size, scale_factor, mode, align_corners) {
+# def upsample(input, size=None, scale_factor=None, mode='nearest', align_corners=None):  # noqa: F811
+#     r"""Upsamples the input to either the given :attr:`size` or the given
+#     :attr:`scale_factor`
+# 
+#     .. warning::
+#         This function is deprecated in favor of :func:`torch.nn.functional.interpolate`.
+#         This is equivalent with ``nn.functional.interpolate(...)``.
+# 
+#     .. include:: cuda_deterministic_backward.rst
+# 
+#     The algorithm used for upsampling is determined by :attr:`mode`.
+# 
+#     Currently temporal, spatial and volumetric upsampling are supported, i.e.
+#     expected inputs are 3-D, 4-D or 5-D in shape.
+# 
+#     The input dimensions are interpreted in the form:
+#     `mini-batch x channels x [optional depth] x [optional height] x width`.
+# 
+#     The modes available for upsampling are: `nearest`, `linear` (3D-only),
+#     `bilinear`, `bicubic` (4D-only), `trilinear` (5D-only)
+# 
+#     Args:
+#         input (Tensor): the input tensor
+#         size (int or Tuple[int] or Tuple[int, int] or Tuple[int, int, int]):
+#             output spatial size.
+#         scale_factor (float or Tuple[float]): multiplier for spatial size. Has to be an integer.
+#         mode (string): algorithm used for upsampling:
+#             ``'nearest'`` | ``'linear'`` | ``'bilinear'`` | ``'bicubic'`` |
+#             ``'trilinear'``. Default: ``'nearest'``
+#         align_corners (bool, optional): Geometrically, we consider the pixels of the
+#             input and output as squares rather than points.
+#             If set to ``True``, the input and output tensors are aligned by the
+#             center points of their corner pixels, preserving the values at the corner pixels.
+#             If set to ``False``, the input and output tensors are aligned by the corner
+#             points of their corner pixels, and the interpolation uses edge value padding
+#             for out-of-boundary values, making this operation *independent* of input size
+#             when :attr:`scale_factor` is kept the same. This only has an effect when :attr:`mode`
+#             is ``'linear'``, ``'bilinear'``, ``'bicubic'`` or ``'trilinear'``.
+#             Default: ``False``
+# 
+#     .. note::
+#         With ``mode='bicubic'``, it's possible to cause overshoot, in other words it can produce
+#         negative values or values greater than 255 for images.
+#         Explicitly call ``result.clamp(min=0, max=255)`` if you want to reduce the overshoot
+#         when displaying the image.
+# 
+#     .. warning::
+#         With ``align_corners = True``, the linearly interpolating modes
+#         (`linear`, `bilinear`, and `trilinear`) don't proportionally align the
+#         output and input pixels, and thus the output values can depend on the
+#         input size. This was the default behavior for these modes up to version
+#         0.3.1. Since then, the default behavior is ``align_corners = False``.
+#         See :class:`~torch.nn.Upsample` for concrete examples on how this
+#         affects the outputs.
+# 
+#     """
+#     warnings.warn("nn.functional.upsample is deprecated. Use nn.functional.interpolate instead.")
+#     return interpolate(input, size, scale_factor, mode, align_corners)
+# 
+stop('not implemented')
+}
+
+nnf_upsample_bilinear <- function(input, size, scale_factor) {
+# def upsample_bilinear(input, size=None, scale_factor=None):  # noqa: F811
+#     r"""Upsamples the input, using bilinear upsampling.
+# 
+#     .. warning::
+#         This function is deprecated in favor of :func:`torch.nn.functional.interpolate`.
+#         This is equivalent with
+#         ``nn.functional.interpolate(..., mode='bilinear', align_corners=True)``.
+# 
+#     Expected inputs are spatial (4 dimensional). Use `upsample_trilinear` fo
+#     volumetric (5 dimensional) inputs.
+# 
+#     Args:
+#         input (Tensor): input
+#         size (int or Tuple[int, int]): output spatial size.
+#         scale_factor (int or Tuple[int, int]): multiplier for spatial size
+# 
+#     .. include:: cuda_deterministic_backward.rst
+#     """
+#     # DeprecationWarning is ignored by default
+#     warnings.warn("nn.functional.upsample_bilinear is deprecated. Use nn.functional.interpolate instead.")
+#     return interpolate(input, size, scale_factor, mode='bilinear', align_corners=True)
+# 
+stop('not implemented')
+}
+
+nnf_upsample_nearest <- function(input, size, scale_factor) {
+# def upsample_nearest(input, size=None, scale_factor=None):  # noqa: F811
+#     r"""Upsamples the input, using nearest neighbours' pixel values.
+# 
+#     .. warning::
+#         This function is deprecated in favor of :func:`torch.nn.functional.interpolate`.
+#         This is equivalent with ``nn.functional.interpolate(..., mode='nearest')``.
+# 
+#     Currently spatial and volumetric upsampling are supported (i.e. expected
+#     inputs are 4 or 5 dimensional).
+# 
+#     Args:
+#         input (Tensor): input
+#         size (int or Tuple[int, int] or Tuple[int, int, int]): output spatia
+#             size.
+#         scale_factor (int): multiplier for spatial size. Has to be an integer.
+# 
+#     .. include:: cuda_deterministic_backward.rst
+#     """
+#     # DeprecationWarning is ignored by default
+#     warnings.warn("nn.functional.upsample_nearest is deprecated. Use nn.functional.interpolate instead.")
+#     return interpolate(input, size, scale_factor, mode='nearest')
+# 
+stop('not implemented')
+}
+
+nnf_warnings <- function() {
+# """Python part of the warnings subsystem."""
+# 
+# import sys
+# 
+# 
+# __all__ = ["warn", "warn_explicit", "showwarning",
+#            "formatwarning", "filterwarnings", "simplefilter",
+#            "resetwarnings", "catch_warnings"]
+# 
+# def showwarning(message, category, filename, lineno, file=None, line=None):
+#     """Hook to write a warning to a file; replace if you like."""
+#     msg = WarningMessage(message, category, filename, lineno, file, line)
+#     _showwarnmsg_impl(msg)
+# 
+# def formatwarning(message, category, filename, lineno, line=None):
+#     """Function to format a warning the standard way."""
+#     msg = WarningMessage(message, category, filename, lineno, None, line)
+#     return _formatwarnmsg_impl(msg)
+# 
+# def _showwarnmsg_impl(msg):
+#     file = msg.file
+#     if file is None:
+#         file = sys.stderr
+#         if file is None:
+#             # sys.stderr is None when run with pythonw.exe:
+#             # warnings get lost
+#             return
+#     text = _formatwarnmsg(msg)
+#     try:
+#         file.write(text)
+#     except OSError:
+#         # the file (probably stderr) is invalid - this warning gets lost.
+#         pass
+# 
+# def _formatwarnmsg_impl(msg):
+#     category = msg.category.__name__
+#     s =  f"{msg.filename}:{msg.lineno}: {category}: {msg.message}\n"
+# 
+#     if msg.line is None:
+#         try:
+#             import linecache
+#             line = linecache.getline(msg.filename, msg.lineno)
+#         except Exception:
+#             # When a warning is logged during Python shutdown, linecache
+#             # and the import machinery don't work anymore
+#             line = None
+#             linecache = None
+#     else:
+#         line = msg.line
+#     if line:
+#         line = line.strip()
+#         s += "  %s\n" % line
+# 
+#     if msg.source is not None:
+#         try:
+#             import tracemalloc
+#         # Logging a warning should not raise a new exception:
+#         # catch Exception, not only ImportError and RecursionError.
+#         except Exception:
+#             # don't suggest to enable tracemalloc if it's not available
+#             tracing = True
+#             tb = None
+#         else:
+#             tracing = tracemalloc.is_tracing()
+#             try:
+#                 tb = tracemalloc.get_object_traceback(msg.source)
+#             except Exception:
+#                 # When a warning is logged during Python shutdown, tracemalloc
+#                 # and the import machinery don't work anymore
+#                 tb = None
+# 
+#         if tb is not None:
+#             s += 'Object allocated at (most recent call last):\n'
+#             for frame in tb:
+#                 s += ('  File "%s", lineno %s\n'
+#                       % (frame.filename, frame.lineno))
+# 
+#                 try:
+#                     if linecache is not None:
+#                         line = linecache.getline(frame.filename, frame.lineno)
+#                     else:
+#                         line = None
+#                 except Exception:
+#                     line = None
+#                 if line:
+#                     line = line.strip()
+#                     s += '    %s\n' % line
+#         elif not tracing:
+#             s += (f'{category}: Enable tracemalloc to get the object '
+#                   f'allocation traceback\n')
+#     return s
+# 
+# # Keep a reference to check if the function was replaced
+# _showwarning_orig = showwarning
+# 
+# def _showwarnmsg(msg):
+#     """Hook to write a warning to a file; replace if you like."""
+#     try:
+#         sw = showwarning
+#     except NameError:
+#         pass
+#     else:
+#         if sw is not _showwarning_orig:
+#             # warnings.showwarning() was replaced
+#             if not callable(sw):
+#                 raise TypeError("warnings.showwarning() must be set to a "
+#                                 "function or method")
+# 
+#             sw(msg.message, msg.category, msg.filename, msg.lineno,
+#                msg.file, msg.line)
+#             return
+#     _showwarnmsg_impl(msg)
+# 
+# # Keep a reference to check if the function was replaced
+# _formatwarning_orig = formatwarning
+# 
+# def _formatwarnmsg(msg):
+#     """Function to format a warning the standard way."""
+#     try:
+#         fw = formatwarning
+#     except NameError:
+#         pass
+#     else:
+#         if fw is not _formatwarning_orig:
+#             # warnings.formatwarning() was replaced
+#             return fw(msg.message, msg.category,
+#                       msg.filename, msg.lineno, msg.line)
+#     return _formatwarnmsg_impl(msg)
+# 
+# def filterwarnings(action, message="", category=Warning, module="", lineno=0,
+#                    append=False):
+#     """Insert an entry into the list of warnings filters (at the front).
+# 
+#     'action' -- one of "error", "ignore", "always", "default", "module",
+#                 or "once"
+#     'message' -- a regex that the warning message must match
+#     'category' -- a class that the warning must be a subclass of
+#     'module' -- a regex that the module name must match
+#     'lineno' -- an integer line number, 0 matches all warnings
+#     'append' -- if true, append to the list of filters
+#     """
+#     assert action in ("error", "ignore", "always", "default", "module",
+#                       "once"), "invalid action: %r" % (action,)
+#     assert isinstance(message, str), "message must be a string"
+#     assert isinstance(category, type), "category must be a class"
+#     assert issubclass(category, Warning), "category must be a Warning subclass"
+#     assert isinstance(module, str), "module must be a string"
+#     assert isinstance(lineno, int) and lineno >= 0, \
+#            "lineno must be an int >= 0"
+# 
+#     if message or module:
+#         import re
+# 
+#     if message:
+#         message = re.compile(message, re.I)
+#     else:
+#         message = None
+#     if module:
+#         module = re.compile(module)
+#     else:
+#         module = None
+# 
+#     _add_filter(action, message, category, module, lineno, append=append)
+# 
+# def simplefilter(action, category=Warning, lineno=0, append=False):
+#     """Insert a simple entry into the list of warnings filters (at the front).
+# 
+#     A simple filter matches all modules and messages.
+#     'action' -- one of "error", "ignore", "always", "default", "module",
+#                 or "once"
+#     'category' -- a class that the warning must be a subclass of
+#     'lineno' -- an integer line number, 0 matches all warnings
+#     'append' -- if true, append to the list of filters
+#     """
+#     assert action in ("error", "ignore", "always", "default", "module",
+#                       "once"), "invalid action: %r" % (action,)
+#     assert isinstance(lineno, int) and lineno >= 0, \
+#            "lineno must be an int >= 0"
+#     _add_filter(action, None, category, None, lineno, append=append)
+# 
+# def _add_filter(*item, append):
+#     # Remove possible duplicate filters, so new one will be placed
+#     # in correct place. If append=True and duplicate exists, do nothing.
+#     if not append:
+#         try:
+#             filters.remove(item)
+#         except ValueError:
+#             pass
+#         filters.insert(0, item)
+#     else:
+#         if item not in filters:
+#             filters.append(item)
+#     _filters_mutated()
+# 
+# def resetwarnings():
+#     """Clear the list of warning filters, so that no filters are active."""
+#     filters[:] = []
+#     _filters_mutated()
+# 
+# class _OptionError(Exception):
+#     """Exception used by option processing helpers."""
+#     pass
+# 
+# # Helper to process -W options passed via sys.warnoptions
+# def _processoptions(args):
+#     for arg in args:
+#         try:
+#             _setoption(arg)
+#         except _OptionError as msg:
+#             print("Invalid -W option ignored:", msg, file=sys.stderr)
+# 
+# # Helper for _processoptions()
+# def _setoption(arg):
+#     parts = arg.split(':')
+#     if len(parts) > 5:
+#         raise _OptionError("too many fields (max 5): %r" % (arg,))
+#     while len(parts) < 5:
+#         parts.append('')
+#     action, message, category, module, lineno = [s.strip()
+#                                                  for s in parts]
+#     action = _getaction(action)
+#     category = _getcategory(category)
+#     if message or module:
+#         import re
+#     if message:
+#         message = re.escape(message)
+#     if module:
+#         module = re.escape(module) + r'\Z'
+#     if lineno:
+#         try:
+#             lineno = int(lineno)
+#             if lineno < 0:
+#                 raise ValueError
+#         except (ValueError, OverflowError):
+#             raise _OptionError("invalid lineno %r" % (lineno,)) from None
+#     else:
+#         lineno = 0
+#     filterwarnings(action, message, category, module, lineno)
+# 
+# # Helper for _setoption()
+# def _getaction(action):
+#     if not action:
+#         return "default"
+#     if action == "all": return "always" # Alias
+#     for a in ('default', 'always', 'ignore', 'module', 'once', 'error'):
+#         if a.startswith(action):
+#             return a
+#     raise _OptionError("invalid action: %r" % (action,))
+# 
+# # Helper for _setoption()
+# def _getcategory(category):
+#     if not category:
+#         return Warning
+#     if '.' not in category:
+#         import builtins as m
+#         klass = category
+#     else:
+#         module, _, klass = category.rpartition('.')
+#         try:
+#             m = __import__(module, None, None, [klass])
+#         except ImportError:
+#             raise _OptionError("invalid module name: %r" % (module,)) from None
+#     try:
+#         cat = getattr(m, klass)
+#     except AttributeError:
+#         raise _OptionError("unknown warning category: %r" % (category,)) from None
+#     if not issubclass(cat, Warning):
+#         raise _OptionError("invalid warning category: %r" % (category,))
+#     return cat
+# 
+# 
+# def _is_internal_frame(frame):
+#     """Signal whether the frame is an internal CPython implementation detail."""
+#     filename = frame.f_code.co_filename
+#     return 'importlib' in filename and '_bootstrap' in filename
+# 
+# 
+# def _next_external_frame(frame):
+#     """Find the next frame that doesn't involve CPython internals."""
+#     frame = frame.f_back
+#     while frame is not None and _is_internal_frame(frame):
+#         frame = frame.f_back
+#     return frame
+# 
+# 
+# # Code typically replaced by _warnings
+# def warn(message, category=None, stacklevel=1, source=None):
+#     """Issue a warning, or maybe ignore it or raise an exception."""
+#     # Check if message is already a Warning object
+#     if isinstance(message, Warning):
+#         category = message.__class__
+#     # Check category argument
+#     if category is None:
+#         category = UserWarning
+#     if not (isinstance(category, type) and issubclass(category, Warning)):
+#         raise TypeError("category must be a Warning subclass, "
+#                         "not '{:s}'".format(type(category).__name__))
+#     # Get context information
+#     try:
+#         if stacklevel <= 1 or _is_internal_frame(sys._getframe(1)):
+#             # If frame is too small to care or if the warning originated in
+#             # internal code, then do not try to hide any frames.
+#             frame = sys._getframe(stacklevel)
+#         else:
+#             frame = sys._getframe(1)
+#             # Look for one frame less since the above line starts us off.
+#             for x in range(stacklevel-1):
+#                 frame = _next_external_frame(frame)
+#                 if frame is None:
+#                     raise ValueError
+#     except ValueError:
+#         globals = sys.__dict__
+#         lineno = 1
+#     else:
+#         globals = frame.f_globals
+#         lineno = frame.f_lineno
+#     if '__name__' in globals:
+#         module = globals['__name__']
+#     else:
+#         module = "<string>"
+#     filename = globals.get('__file__')
+#     if filename:
+#         fnl = filename.lower()
+#         if fnl.endswith(".pyc"):
+#             filename = filename[:-1]
+#     else:
+#         if module == "__main__":
+#             try:
+#                 filename = sys.argv[0]
+#             except AttributeError:
+#                 # embedded interpreters don't have sys.argv, see bug #839151
+#                 filename = '__main__'
+#         if not filename:
+#             filename = module
+#     registry = globals.setdefault("__warningregistry__", {})
+#     warn_explicit(message, category, filename, lineno, module, registry,
+#                   globals, source)
+# 
+# def warn_explicit(message, category, filename, lineno,
+#                   module=None, registry=None, module_globals=None,
+#                   source=None):
+#     lineno = int(lineno)
+#     if module is None:
+#         module = filename or "<unknown>"
+#         if module[-3:].lower() == ".py":
+#             module = module[:-3] # XXX What about leading pathname?
+#     if registry is None:
+#         registry = {}
+#     if registry.get('version', 0) != _filters_version:
+#         registry.clear()
+#         registry['version'] = _filters_version
+#     if isinstance(message, Warning):
+#         text = str(message)
+#         category = message.__class__
+#     else:
+#         text = message
+#         message = category(message)
+#     key = (text, category, lineno)
+#     # Quick test for common case
+#     if registry.get(key):
+#         return
+#     # Search the filters
+#     for item in filters:
+#         action, msg, cat, mod, ln = item
+#         if ((msg is None or msg.match(text)) and
+#             issubclass(category, cat) and
+#             (mod is None or mod.match(module)) and
+#             (ln == 0 or lineno == ln)):
+#             break
+#     else:
+#         action = defaultaction
+#     # Early exit actions
+#     if action == "ignore":
+#         return
+# 
+#     # Prime the linecache for formatting, in case the
+#     # "file" is actually in a zipfile or something.
+#     import linecache
+#     linecache.getlines(filename, module_globals)
+# 
+#     if action == "error":
+#         raise message
+#     # Other actions
+#     if action == "once":
+#         registry[key] = 1
+#         oncekey = (text, category)
+#         if onceregistry.get(oncekey):
+#             return
+#         onceregistry[oncekey] = 1
+#     elif action == "always":
+#         pass
+#     elif action == "module":
+#         registry[key] = 1
+#         altkey = (text, category, 0)
+#         if registry.get(altkey):
+#             return
+#         registry[altkey] = 1
+#     elif action == "default":
+#         registry[key] = 1
+#     else:
+#         # Unrecognized actions are errors
+#         raise RuntimeError(
+#               "Unrecognized action (%r) in warnings.filters:\n %s" %
+#               (action, item))
+#     # Print message and context
+#     msg = WarningMessage(message, category, filename, lineno, source)
+#     _showwarnmsg(msg)
+# 
+# 
+# class WarningMessage(object):
+# 
+#     _WARNING_DETAILS = ("message", "category", "filename", "lineno", "file",
+#                         "line", "source")
+# 
+#     def __init__(self, message, category, filename, lineno, file=None,
+#                  line=None, source=None):
+#         self.message = message
+#         self.category = category
+#         self.filename = filename
+#         self.lineno = lineno
+#         self.file = file
+#         self.line = line
+#         self.source = source
+#         self._category_name = category.__name__ if category else None
+# 
+#     def __str__(self):
+#         return ("{message : %r, category : %r, filename : %r, lineno : %s, "
+#                     "line : %r}" % (self.message, self._category_name,
+#                                     self.filename, self.lineno, self.line))
+# 
+# 
+# class catch_warnings(object):
+# 
+#     """A context manager that copies and restores the warnings filter upon
+#     exiting the context.
+# 
+#     The 'record' argument specifies whether warnings should be captured by a
+#     custom implementation of warnings.showwarning() and be appended to a list
+#     returned by the context manager. Otherwise None is returned by the context
+#     manager. The objects appended to the list are arguments whose attributes
+#     mirror the arguments to showwarning().
+# 
+#     The 'module' argument is to specify an alternative module to the module
+#     named 'warnings' and imported under that name. This argument is only useful
+#     when testing the warnings module itself.
+# 
+#     """
+# 
+#     def __init__(self, *, record=False, module=None):
+#         """Specify whether to record warnings and if an alternative module
+#         should be used other than sys.modules['warnings'].
+# 
+#         For compatibility with Python 3.0, please consider all arguments to be
+#         keyword-only.
+# 
+#         """
+#         self._record = record
+#         self._module = sys.modules['warnings'] if module is None else module
+#         self._entered = False
+# 
+#     def __repr__(self):
+#         args = []
+#         if self._record:
+#             args.append("record=True")
+#         if self._module is not sys.modules['warnings']:
+#             args.append("module=%r" % self._module)
+#         name = type(self).__name__
+#         return "%s(%s)" % (name, ", ".join(args))
+# 
+#     def __enter__(self):
+#         if self._entered:
+#             raise RuntimeError("Cannot enter %r twice" % self)
+#         self._entered = True
+#         self._filters = self._module.filters
+#         self._module.filters = self._filters[:]
+#         self._module._filters_mutated()
+#         self._showwarning = self._module.showwarning
+#         self._showwarnmsg_impl = self._module._showwarnmsg_impl
+#         if self._record:
+#             log = []
+#             self._module._showwarnmsg_impl = log.append
+#             # Reset showwarning() to the default implementation to make sure
+#             # that _showwarnmsg() calls _showwarnmsg_impl()
+#             self._module.showwarning = self._module._showwarning_orig
+#             return log
+#         else:
+#             return None
+# 
+#     def __exit__(self, *exc_info):
+#         if not self._entered:
+#             raise RuntimeError("Cannot exit %r without entering first" % self)
+#         self._module.filters = self._filters
+#         self._module._filters_mutated()
+#         self._module.showwarning = self._showwarning
+#         self._module._showwarnmsg_impl = self._showwarnmsg_impl
+# 
+# 
+# # Private utility function called by _PyErr_WarnUnawaitedCoroutine
+# def _warn_unawaited_coroutine(coro):
+#     msg_lines = [
+#         f"coroutine '{coro.__qualname__}' was never awaited\n"
+#     ]
+#     if coro.cr_origin is not None:
+#         import linecache, traceback
+#         def extract():
+#             for filename, lineno, funcname in reversed(coro.cr_origin):
+#                 line = linecache.getline(filename, lineno)
+#                 yield (filename, lineno, funcname, line)
+#         msg_lines.append("Coroutine created at (most recent call last)\n")
+#         msg_lines += traceback.format_list(list(extract()))
+#     msg = "".join(msg_lines).rstrip("\n")
+#     # Passing source= here means that if the user happens to have tracemalloc
+#     # enabled and tracking where the coroutine was created, the warning will
+#     # contain that traceback. This does mean that if they have *both*
+#     # coroutine origin tracking *and* tracemalloc enabled, they'll get two
+#     # partially-redundant tracebacks. If we wanted to be clever we could
+#     # probably detect this case and avoid it, but for now we don't bother.
+#     warn(msg, category=RuntimeWarning, stacklevel=2, source=coro)
+# 
+# 
+# # filters contains a sequence of filter 5-tuples
+# # The components of the 5-tuple are:
+# # - an action: error, ignore, always, default, module, or once
+# # - a compiled regex that must match the warning message
+# # - a class representing the warning category
+# # - a compiled regex that must match the module that is being warned
+# # - a line number for the line being warning, or 0 to mean any line
+# # If either if the compiled regexs are None, match anything.
+# try:
+#     from _warnings import (filters, _defaultaction, _onceregistry,
+#                            warn, warn_explicit, _filters_mutated)
+#     defaultaction = _defaultaction
+#     onceregistry = _onceregistry
+#     _warnings_defaults = True
+# except ImportError:
+#     filters = []
+#     defaultaction = "default"
+#     onceregistry = {}
+# 
+#     _filters_version = 1
+# 
+#     def _filters_mutated():
+#         global _filters_version
+#         _filters_version += 1
+# 
+#     _warnings_defaults = False
+# 
+# 
+# # Module initialization
+# _processoptions(sys.warnoptions)
+# if not _warnings_defaults:
+#     # Several warning categories are ignored by default in regular builds
+#     if not hasattr(sys, 'gettotalrefcount'):
+#         filterwarnings("default", category=DeprecationWarning,
+#                        module="__main__", append=1)
+#         simplefilter("ignore", category=DeprecationWarning, append=1)
+#         simplefilter("ignore", category=PendingDeprecationWarning, append=1)
+#         simplefilter("ignore", category=ImportWarning, append=1)
+#         simplefilter("ignore", category=ResourceWarning, append=1)
+# 
+# del _warnings_defaults
+# 
+stop('not implemented')
+}

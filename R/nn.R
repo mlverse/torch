@@ -39,15 +39,19 @@ is_nn_module <- function(x) {
   inherits(x, "nn_module")
 }
 
-nn_module <- function(initialize, forward) {
+nn_module <- function(classname = NULL, initialize, forward, ...) {
   R6::R6Class(
+    classname = classname,
     inherit = nn_Module,
     lock_objects = FALSE,
     public = list(
       initialize = initialize,
-      forward = forward
+      forward = forward,
+      ...
     )
   )
 }
+
+
 
 

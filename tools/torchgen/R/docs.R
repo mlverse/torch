@@ -4,11 +4,8 @@ library(purrr)
 #
 #
 # doc <- torch[["mean"]][["__doc__"]]
-
-torch <- reticulate::import("torch")
-
-get_doc <- function(nm) {
-  er <- try(doc <- torch[[nm]][["__doc__"]], silent = TRUE)
+get_doc <- function(nm, module) {
+  er <- try(doc <- module[[nm]][["__doc__"]], silent = TRUE)
   if (inherits(er, "try-error"))
     return(NULL)
   else
@@ -155,7 +152,7 @@ get_examples <- function(doc) {
 
   doc <- clean_doc(doc)
   lines <- str_split(doc, "\n")[[1]]
-  i <- which(lines == "Example::")
+  i <- which(lines == "Example::" | lines == "Examples::")
 
   if (length(i) == 0)
     return(NULL)
@@ -276,8 +273,8 @@ create_roxygen_title <- function(name) {
   str_c("#' ", str_to_title(name))
 }
 
-create_roxygen_rdname <- function(name) {
-  str_c("#' @name torch_", name)
+create_roxygen_rdname <- function(name, prefix = "torch_") {
+  str_c("#' @name ",prefix, name)
 }
 
 create_roxygen_example <- function(exam) {
@@ -305,7 +302,7 @@ create_roxygen_signature_section <- function(sign) {
   )
 }
 
-create_roxygen <- function(name, m) {
+create_roxygen <- function(name, m, prefix = "torch_") {
   str_c(
     create_roxygen_title(name),
     "#'",
@@ -313,7 +310,7 @@ create_roxygen <- function(name, m) {
     "#'",
     create_roxygen_full_params(m),
     "#'",
-    create_roxygen_rdname(name),
+    create_roxygen_rdname(name, prefix),
     "#'",
     "#' @export",
     "NULL\n",
@@ -321,7 +318,7 @@ create_roxygen <- function(name, m) {
   )
 }
 
-create_examples <- function(name, m, path, overwrite = "ask") {
+create_examples <- function(name, m, path, overwrite = "ask", prefix = "torch_") {
 
   f <- readr::read_file(path)
   old_hash <- str_match(f, glue::glue("# -> {name}: ([^ ]+) <-"))[1,2]
@@ -332,7 +329,7 @@ create_examples <- function(name, m, path, overwrite = "ask") {
   new_text <- str_c(
     glue::glue("# -> {name}: {hash} <-"),
     "#'",
-    create_roxygen_rdname(name),
+    create_roxygen_rdname(name, prefix = prefix),
     "#'",
     create_roxygen_full_examples(m),
     "NULL",
@@ -372,7 +369,7 @@ create_examples <- function(name, m, path, overwrite = "ask") {
 create_roxygen_desc_section <- function(desc, sign) {
 
   if (is.null(sign))
-    sign <- "TEST"
+    return(desc_prep(desc))
 
   str_c(
     str_c("#' @section ", sign, " :"),
@@ -407,7 +404,9 @@ docum <- function(path, overwrite = "ask") {
     unique() %>%
     set_names()
 
-  docs <- map(funs, get_doc) %>% discard(is.null)
+  torch <- reticulate::import("torch")
+
+  docs <- map(funs, ~get_doc(.x, torch)) %>% discard(is.null)
   docs <- map(docs, get_signatures)
 
   args <- map(docs, function(.x) { map(.x, . %>% get_args %>% parse_args)})
