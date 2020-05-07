@@ -4070,7 +4070,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "size", function(dim) {  args <- rlang::env_get_list(nms = c("dim"))
+Tensor$set("private", "_size", function(dim) {  args <- rlang::env_get_list(nms = c("dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"))
 nd_args <- c("self", "dim")
