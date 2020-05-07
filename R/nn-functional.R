@@ -1,265 +1,81 @@
-nnf_adaptive_avg_pool1d <- function(output_size) {
-# 
-stop('not implemented')
+nnf_adaptive_avg_pool1d <- function(input, output_size) {
+  torch_adaptive_avg_pool1d(input, output_size)
 }
 
-nnf_adaptive_avg_pool2d <- function(output_size) {
-# def adaptive_avg_pool2d(input, output_size):
-#     # type: (Tensor, BroadcastingList2[int]) -> Tensor
-#     r"""
-#     Applies a 2D adaptive average pooling over an input signal composed of
-#     several input planes.
-# 
-#     See :class:`~torch.nn.AdaptiveAvgPool2d` for details and output shape.
-# 
-#     Args:
-#         output_size: the target output size (single integer or
-#             double-integer tuple)
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 adaptive_avg_pool2d, (input,), input, output_size)
-#     _output_size = _list_with_default(output_size, input.size())
-#     return torch._C._nn.adaptive_avg_pool2d(input, _output_size)
-# 
-stop('not implemented')
+nnf_adaptive_avg_pool2d <- function(input, output_size) {
+  torch_adaptive_avg_pool2d(input, output_size)
 }
 
-nnf_adaptive_avg_pool3d <- function(output_size) {
-# def adaptive_avg_pool3d(input, output_size):
-#     # type: (Tensor, BroadcastingList3[int]) -> Tensor
-#     r"""
-#     Applies a 3D adaptive average pooling over an input signal composed of
-#     several input planes.
-# 
-#     See :class:`~torch.nn.AdaptiveAvgPool3d` for details and output shape.
-# 
-#     Args:
-#         output_size: the target output size (single integer or
-#             triple-integer tuple)
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 adaptive_avg_pool3d, (input,), input, output_size)
-#     _output_size = _list_with_default(output_size, input.size())
-#     return torch._C._nn.adaptive_avg_pool3d(input, _output_size)
-# 
-stop('not implemented')
+nnf_adaptive_avg_pool3d <- function(input, output_size) {
+  torch_adaptive_avg_pool3d(input, output_size)
 }
 
-nnf_adaptive_max_pool1d <- function(output_size, return_indices) {
-#     def fn(*args, **kwargs):
-#         dispatch_flag = False
-#         if arg_name in kwargs:
-#             dispatch_flag = kwargs[arg_name]
-#         elif arg_index < len(args):
-#             dispatch_flag = args[arg_index]
-# 
-#         if dispatch_flag:
-#             return if_true(*args, **kwargs)
-#         else:
-#             return if_false(*args, **kwargs)
-# 
-stop('not implemented')
+nnf_adaptive_max_pool1d <- function(input, output_size, return_indices = FALSE) {
+  o <- torch_adaptive_max_pool1d(input, output_size)
+  if (!return_indices)
+    o <- o[[1]]
+  
+  o
 }
 
-nnf_adaptive_max_pool1d_with_indices <- function(output_size, return_indices) {
-# def adaptive_max_pool1d_with_indices(input, output_size, return_indices=False):
-#     # type: (Tensor, BroadcastingList1[int], bool) -> Tuple[Tensor, Tensor]
-#     r"""Applies a 1D adaptive max pooling over an input signal composed of
-#     several input planes.
-# 
-#     See :class:`~torch.nn.AdaptiveMaxPool1d` for details and output shape.
-# 
-#     Args:
-#         output_size: the target output size (single integer)
-#         return_indices: whether to return pooling indices. Default: ``False``
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 adaptive_max_pool1d_with_indices, (input,), input, output_size,
-#                 return_indices=return_indices)
-#     return torch.adaptive_max_pool1d(input, output_size)
-# 
-stop('not implemented')
+nnf_adaptive_max_pool1d_with_indices <- function(input, output_size) {
+  torch_adaptive_max_pool1d(input, output_size)
 }
 
-nnf_adaptive_max_pool2d <- function(output_size, return_indices) {
-#     def fn(*args, **kwargs):
-#         dispatch_flag = False
-#         if arg_name in kwargs:
-#             dispatch_flag = kwargs[arg_name]
-#         elif arg_index < len(args):
-#             dispatch_flag = args[arg_index]
-# 
-#         if dispatch_flag:
-#             return if_true(*args, **kwargs)
-#         else:
-#             return if_false(*args, **kwargs)
-# 
-stop('not implemented')
+nnf_adaptive_max_pool2d <- function(input, output_size, return_indices = FALSE) {
+  o <- torch_adaptive_max_pool2d(input, output_size)
+  if (!return_indices)
+    o <- o[[1]]
+  
+  o
 }
 
-nnf_adaptive_max_pool2d_with_indices <- function(output_size, return_indices) {
-# def adaptive_max_pool2d_with_indices(input, output_size, return_indices=False):
-#     # type: (Tensor, BroadcastingList2[int], bool) -> Tuple[Tensor, Tensor]
-#     r"""Applies a 2D adaptive max pooling over an input signal composed of
-#     several input planes.
-# 
-#     See :class:`~torch.nn.AdaptiveMaxPool2d` for details and output shape.
-# 
-#     Args:
-#         output_size: the target output size (single integer or
-#             double-integer tuple)
-#         return_indices: whether to return pooling indices. Default: ``False``
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 adaptive_max_pool2d_with_indices, (input,), input, output_size,
-#                 return_indices=return_indices)
-#     output_size = _list_with_default(output_size, input.size())
-#     return torch._C._nn.adaptive_max_pool2d(input, output_size)
-# 
-stop('not implemented')
+nnf_adaptive_max_pool2d_with_indices <- function(input, output_size) {
+  torch_adaptive_max_pool2d(input, output_size)
 }
 
-nnf_adaptive_max_pool3d <- function(output_size, return_indices) {
-#     def fn(*args, **kwargs):
-#         dispatch_flag = False
-#         if arg_name in kwargs:
-#             dispatch_flag = kwargs[arg_name]
-#         elif arg_index < len(args):
-#             dispatch_flag = args[arg_index]
-# 
-#         if dispatch_flag:
-#             return if_true(*args, **kwargs)
-#         else:
-#             return if_false(*args, **kwargs)
-# 
-stop('not implemented')
+nnf_adaptive_max_pool3d <- function(input, output_size, return_indices = FALSE) {
+  o <- torch_adaptive_max_pool3d(input, output_size)
+  if (!return_indices)
+    o <- o[[1]]
+  
+  o
 }
 
-nnf_adaptive_max_pool3d_with_indices <- function(output_size, return_indices) {
-# def adaptive_max_pool3d_with_indices(input, output_size, return_indices=False):
-#     # type: (Tensor, BroadcastingList3[int], bool) -> Tuple[Tensor, Tensor]
-#     r"""Applies a 3D adaptive max pooling over an input signal composed of
-#     several input planes.
-# 
-#     See :class:`~torch.nn.AdaptiveMaxPool3d` for details and output shape.
-# 
-#     Args:
-#         output_size: the target output size (single integer or
-#             triple-integer tuple)
-#         return_indices: whether to return pooling indices. Default: ``False``
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 adaptive_max_pool3d_with_indices, (input,), input, output_size,
-#                 return_indices=return_indices)
-#     output_size = _list_with_default(output_size, input.size())
-#     return torch._C._nn.adaptive_max_pool3d(input, output_size)
-# 
-stop('not implemented')
+nnf_adaptive_max_pool3d_with_indices <- function(input, output_size) {
+  torch_adaptive_max_pool3d(input, output_size)
 }
 
-nnf_affine_grid <- function(theta, size, align_corners) {
-# def affine_grid(theta, size, align_corners=None):
-#     # type: (Tensor, List[int], Optional[bool]) -> Tensor
-#     r"""Generates a 2D or 3D flow field (sampling grid), given a batch of
-#     affine matrices :attr:`theta`.
-# 
-#     .. note::
-#         This function is often used in conjunction with :func:`grid_sample`
-#         to build `Spatial Transformer Networks`_ .
-# 
-#     Args:
-#         theta (Tensor): input batch of affine matrices with shape
-#             (:math:`N \times 2 \times 3`) for 2D or
-#             (:math:`N \times 3 \times 4`) for 3D
-#         size (torch.Size): the target output image size.
-#             (:math:`N \times C \times H \times W` for 2D or
-#             :math:`N \times C \times D \times H \times W` for 3D)
-#             Example: torch.Size((32, 3, 24, 24))
-#         align_corners (bool, optional): if ``True``, consider ``-1`` and ``1``
-#             to refer to the centers of the corner pixels rather than the image corners.
-#             Refer to :func:`grid_sample` for a more complete description.
-#             A grid generated by :func:`affine_grid` should be passed to :func:`grid_sample`
-#             with the same setting for this option.
-#             Default: ``False``
-# 
-#     Returns:
-#         output (Tensor): output Tensor of size (:math:`N \times H \times W \times 2`)
-# 
-#     .. _`Spatial Transformer Networks`:
-#         https://arxiv.org/abs/1506.02025
-# 
-#     .. warning::
-#         When ``align_corners = True``, the grid positions depend on the pixel
-#         size relative to the input image size, and so the locations sampled by
-#         :func:`grid_sample` will differ for the same input given at different
-#         resolutions (that is, after being upsampled or downsampled).
-#         The default behavior up to version 1.2.0 was ``align_corners = True``.
-#         Since then, the default behavior has been changed to ``align_corners = False``,
-#         in order to bring it in line with the default for :func:`interpolate`.
-#     .. warning::
-#         When ``align_corners = True``, 2D affine transforms on 1D data and
-#         3D affine transforms on 2D data (that is, when one of the spatial
-#         dimensions has unit size) are ill-defined, and not an intended use case.
-#         This is not a problem when ``align_corners = False``.
-#         Up to version 1.2.0, all grid points along a unit dimension were
-#         considered arbitrarily to be at ``-1``.
-#         From version 1.3.0, under ``align_corners = True`` all grid points
-#         along a unit dimension are condsidered to be at ```0``
-#         (the center of the input image).
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(theta) is not Tensor and has_torch_function((theta,)):
-#             return handle_torch_function(
-#                 affine_grid, (theta,), theta, size, align_corners=align_corners)
-#     if align_corners is None:
-#         warnings.warn("Default grid_sample and affine_grid behavior has changed "
-#                       "to align_corners=False since 1.3.0. Please specify "
-#                       "align_corners=True if the old behavior is desired. "
-#                       "See the documentation of grid_sample for details.")
-#         align_corners = False
-# 
-#     # enforce floating point dtype on theta
-#     if not theta.is_floating_point():
-#         raise ValueError("Expected theta to have floating point type, but got {}"
-#                          .format(theta.dtype))
-#     # check that shapes and sizes match
-#     if len(size) == 4:
-#         if theta.dim() != 3 or theta.shape[-2] != 2 or theta.shape[-1] != 3:
-#             raise ValueError("Expected a batch of 2D affine matrices of shape Nx2x3 "
-#                              "for size {}. Got {}.".format(size, theta.shape))
-#         spatial_size = size[-2:]  # spatial dimension sizes
-#     elif len(size) == 5:
-#         if theta.dim() != 3 or theta.shape[-2] != 3 or theta.shape[-1] != 4:
-#             raise ValueError("Expected a batch of 3D affine matrices of shape Nx3x4 "
-#                              "for size {}. Got {}.".format(size, theta.shape))
-#         spatial_size = size[-3:]  # spatial dimension sizes
-#     else:
-#         raise NotImplementedError("affine_grid only supports 4D and 5D sizes, "
-#                                   "for 2D and 3D affine transforms, respectively. "
-#                                   "Got size {}.".format(size))
-#     # check for empty span
-#     if align_corners and min(spatial_size) == 1:
-#         warnings.warn("Since version 1.3.0, affine_grid behavior has changed "
-#                       "for unit-size grids when align_corners=True. "
-#                       "This is not an intended use case of affine_grid. "
-#                       "See the documentation of affine_grid for details.")
-#     elif min(size) <= 0:
-#         raise ValueError("Expected non-zero, positive output size. Got {}"
-#                          .format(size))
-# 
-#     return torch.affine_grid_generator(theta, size, align_corners)
-# 
-stop('not implemented')
+nnf_affine_grid <- function(theta, size, align_corners = FALSE) {
+
+  if (!x$is_floating_point()) {
+    value_error("Expected theta to have floating point type, but got", 
+                "{as.character(x$dtype())}")
+  }
+  
+  if (length(size) == 4) {
+    
+    if (theta$dim() != 3 || tail(theta$shape, 2)[1] != 2 || tail(theta$shape, 1) != 3) {
+      value_error("Expected a batch of 2D affine matrices of shape Nx2x3 ",
+                  "for size {size}. Got {theta$shape}.")
+    }
+    
+    spatial_size <- tail(size, 2) #spatial dimension sizes
+  } else if (length(size) == 5) {
+    
+    if (theta$dim() != 3 || tail(theta$shape, 2)[1] != 3 || tail(theta$shape, 1) != 4) {
+      value_error("Expected a batch of 2D affine matrices of shape Nx3x4 ",
+                  "for size {size}. Got {theta$shape}.")
+    }
+    
+    spatial_size <- tail(size, 3) #spatial dimension sizes
+  } else {
+    not_implemented_error("affine_grid only supports 4D and 5D sizes, ",
+                          "for 2D and 3D affine transforms, respectively. ",
+                          "Got size {size}.")
+  }
+  
+  torch_affine_grid_generator(theta, size, align_corners)
 }
 
 nnf_alpha_dropout <- function() {
@@ -2728,7 +2544,7 @@ nnf_mse_loss <- function() {
 stop('not implemented')
 }
 
-nnf_multi_head_attention_forward <- function(query,, embed_dim_to_check, num_heads, in_proj_weight,, bias_k,, add_zero_attn, dropout_p, out_proj_weight,, training, key_padding_mask, need_weights, attn_mask, use_separate_proj_weight, q_proj_weight,, static_k,, Inputs:, -, -, -, -, -, -, -, Outputs:, -, -) {
+nnf_multi_head_attention_forward <- function(query, embed_dim_to_check, num_heads, in_proj_weight, bias_k, add_zero_attn, dropout_p, out_proj_weight, training, key_padding_mask, need_weights, attn_mask, use_separate_proj_weight, q_proj_weight) {
 # def multi_head_attention_forward(query,                           # type: Tensor
 #                                  key,                             # type: Tensor
 #                                  value,                           # type: Tensor
