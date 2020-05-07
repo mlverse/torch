@@ -20,6 +20,11 @@ torch_dtype <- R6::R6Class(
 )
 
 #' @export
+as.character.torch_dtype <- function(x, ...) {
+  cpp_dtype_to_string(x$ptr)
+}
+
+#' @export
 torch_float32 <- function() torch_dtype$new(cpp_torch_float32())
 #' @export
 torch_float <- function() torch_dtype$new(cpp_torch_float32())
