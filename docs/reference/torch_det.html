@@ -162,24 +162,24 @@ unstable in when `input` doesn't have distinct singular values. See
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_det</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.37777
+#&gt; -1.67494
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
 <span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.0650 -1.6272
-#&gt;   1.3161 -2.3169
+#&gt;  -0.9314 -0.5838
+#&gt;   0.3872 -0.7344
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.9108 -0.4573
-#&gt;  -0.6368 -0.1692
+#&gt;   2.7404 -1.8207
+#&gt;  -0.2660  1.0903
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -0.4476  1.0595
-#&gt;  -0.6651  0.1261
+#&gt;  -0.6054 -0.8842
+#&gt;  -1.1739 -0.6641
 #&gt; [ CPUFloatType{3,2,2} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3259
-#&gt; -0.1371
-#&gt;  0.6483
+#&gt;  0.9100
+#&gt;  2.5033
+#&gt; -0.6359
 #&gt; [ CPUFloatType{3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

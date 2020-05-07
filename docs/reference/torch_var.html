@@ -184,22 +184,22 @@ biased estimator. Otherwise, Bessel's correction will be used.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.2649 -0.8538 -1.3342
+#&gt; -0.9321 -1.0082 -0.8096
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_var</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.673249
+#&gt; 0.0100476
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.5060 -1.4609  0.6866 -0.0556
-#&gt; -0.4634 -0.3510  1.4791  0.6033
-#&gt; -0.8689 -0.0181 -1.3176  0.2302
-#&gt; -3.3303  1.0021 -0.0186  0.1247
+#&gt;  0.7942 -0.6308 -0.0787 -1.1756
+#&gt;  1.2910  0.4130  0.8420 -0.6885
+#&gt;  0.3423 -0.0566  1.8390  0.3483
+#&gt;  0.5296 -0.3319 -0.2164 -1.5948
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_var</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.5875
-#&gt;  0.8292
-#&gt;  0.5233
-#&gt;  3.6255
+#&gt;  0.7064
+#&gt;  0.7192
+#&gt;  0.6982
+#&gt;  0.7767
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
