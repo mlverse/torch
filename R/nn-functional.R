@@ -272,110 +272,45 @@ nnf_embedding_bag <- function(input, weight, offsets = NULL, max_norm = NULL,
   ret[[1]]
 }
 
-nnf_fold <- function() {
-# def fold(input, output_size, kernel_size, dilation=1, padding=0, stride=1):
-#     # type: (Tensor, BroadcastingList2[int], BroadcastingList2[int], BroadcastingList2[int], BroadcastingList2[int], BroadcastingList2[int]) -> Tensor  # noqa
-#     r"""Combines an array of sliding local blocks into a large containing
-#     tensor.
-# 
-#     .. warning::
-#         Currently, only 4-D output tensors (batched image-like tensors) are
-#         supported.
-# 
-#     See :class:`torch.nn.Fold` for details
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 fold, (input,), input, output_size, kernel_size, dilation=dilation,
-#                 padding=padding, stride=stride)
-#     if input.dim() == 3:
-#         msg = '{} must be int or 2-tuple for 3D input'
-#         assert_int_or_pair(output_size, 'output_size', msg)
-#         assert_int_or_pair(kernel_size, 'kernel_size', msg)
-#         assert_int_or_pair(dilation, 'dilation', msg)
-#         assert_int_or_pair(padding, 'padding', msg)
-#         assert_int_or_pair(stride, 'stride', msg)
-# 
-#         return torch._C._nn.col2im(input, _pair(output_size), _pair(kernel_size),
-#                                    _pair(dilation), _pair(padding), _pair(stride))
-#     else:
-#         raise NotImplementedError("Input Error: Only 3D input Tensors are supported (got {}D)".format(input.dim()))
-# 
-stop('not implemented')
+pair <- function(x) {
+  if (length(x) == 1)
+    rep(x, 2)
+  else
+    x
 }
 
-nnf_fractional_max_pool2d <- function(kernel_size, output_size, output_ratio, return_indices) {
-#     def fn(*args, **kwargs):
-#         dispatch_flag = False
-#         if arg_name in kwargs:
-#             dispatch_flag = kwargs[arg_name]
-#         elif arg_index < len(args):
-#             dispatch_flag = args[arg_index]
-# 
-#         if dispatch_flag:
-#             return if_true(*args, **kwargs)
-#         else:
-#             return if_false(*args, **kwargs)
-# 
-stop('not implemented')
+nnf_fold <- function(input, output_size, kernel_size, dilation=1, padding=0, stride=1) {
+  torch_col2im(self = input, output_size = pair(output_size), 
+               kernel_size = pair(kernel_size), dilation = pair(dilation), 
+               padding = pair(padding), stride = pair(stride))
 }
 
-nnf_fractional_max_pool2d_with_indices <- function(kernel_size, output_size, output_ratio, return_indices) {
-# def fractional_max_pool2d_with_indices(input, kernel_size, output_size=None,
-#                                        output_ratio=None, return_indices=False,
-#                                        _random_samples=None):
-#     # type: (Tensor, BroadcastingList2[int], Optional[BroadcastingList2[int]], Optional[BroadcastingList2[float]], bool, Optional[Tensor]) -> Tuple[Tensor, Tensor]  # noqa
-#     r"""Applies 2D fractional max pooling over an input signal composed of several input planes.
-# 
-#     Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
-# 
-#     The max-pooling operation is applied in :math:`kH \times kW` regions by a stochastic
-#     step size determined by the target output size.
-#     The number of output features is equal to the number of input planes.
-# 
-#     Args:
-#         kernel_size: the size of the window to take a max over.
-#                      Can be a single number :math:`k` (for a square kernel of :math:`k \times k`)
-#                      or a tuple `(kH, kW)`
-#         output_size: the target output size of the image of the form :math:`oH \times oW`.
-#                      Can be a tuple `(oH, oW)` or a single number :math:`oH` for a square image :math:`oH \times oH`
-#         output_ratio: If one wants to have an output size as a ratio of the input size, this option can be given.
-#                       This has to be a number or tuple in the range (0, 1)
-#         return_indices: if ``True``, will return the indices along with the outputs.
-#                         Useful to pass to :func:`~torch.nn.functional.max_unpool2d`.
-# 
-#     Examples::
-#         >>> input = torch.randn(20, 16, 50, 32)
-#         >>> # pool of square window of size=3, and target output size 13x12
-#         >>> F.fractional_max_pool2d(input, 3, output_size=(13, 12))
-#         >>> # pool of square window and target output size being half of input image size
-#         >>> F.fractional_max_pool2d(input, 3, output_ratio=(0.5, 0.5))
-# 
-#     .. _Fractional MaxPooling:
-#         http://arxiv.org/abs/1412.6071
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 fractional_max_pool2d_with_indices, (input,), input, kernel_size,
-#                 output_size=output_size, output_ratio=output_ratio,
-#                 return_indices=return_indices, _random_samples=_random_samples)
-#     if output_size is None and output_ratio is None:
-#         raise ValueError("fractional_max_pool2d requires specifying either "
-#                          "an output_size or an output_ratio")
-#     if output_size is None:
-#         assert output_ratio is not None
-#         _output_ratio = _pair(output_ratio)
-#         output_size = [int(input.size(2) * _output_ratio[0]),
-#                        int(input.size(3) * _output_ratio[1])]
-# 
-#     if _random_samples is None:
-#         _random_samples = torch.rand(input.size(0), input.size(1), 2, dtype=input.dtype, device=input.device)
-#     return torch._C._nn.fractional_max_pool2d(input, kernel_size, output_size, _random_samples)
-# 
-stop('not implemented')
+nnf_fractional_max_pool2d <- function(input, kernel_size, output_size=NULL,
+                                      output_ratio=NULL, return_indices=FALSE,
+                                      random_samples = NULL) {
+  
+  if (is.null(output_size)) {
+    output_ratio_ <- pair(output_ratio)
+    output_size <- list(
+      as.integer(input$size(2) * output_ratio_[[1]]),
+      as.integer(input$size(3) * output_ratio_[[2]])
+    )
+  }
+  
+  if (is.null(random_samples)) {
+    random_samples <- torch_rand(input$size(0), input$size(1), 2, 
+                                 dtype = input$dtype, device = input$device)
+  }
+  
+  res <- torch_fractional_max_pool2d(self = input, kernel_size = kernel_size, 
+                              output_size = output_size, random_samples = random_samples)
+  
+  if (return_indices)
+    res
+  else
+    res[[1]]
 }
+
 
 nnf_fractional_max_pool3d <- function(kernel_size, output_size, output_ratio, return_indices) {
 #     def fn(*args, **kwargs):
