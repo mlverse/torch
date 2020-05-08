@@ -237,167 +237,39 @@ nnf_embedding <- function(input, weight, padding_idx=NULL, max_norm=NULL, norm_t
                   scale_grad_by_freq = scale_grad_by_freq, sparse = sparse)  
 }
 
-nnf_embedding_bag <- function(input, weight, offsets, max_norm, norm_type, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset, The) {
-# def embedding_bag(input, weight, offsets=None, max_norm=None, norm_type=2,
-#                   scale_grad_by_freq=False, mode='mean', sparse=False,
-#                   per_sample_weights=None, include_last_offset=False):
-#     # type: (Tensor, Tensor, Optional[Tensor], Optional[float], float, bool, str, bool, Optional[Tensor], bool) -> Tensor
-#     r"""Computes sums, means or maxes of `bags` of embeddings, without instantiating the
-#     intermediate embeddings.
-# 
-#     See :class:`torch.nn.EmbeddingBag` for more details.
-# 
-#     .. include:: cuda_deterministic_backward.rst
-# 
-#     Args:
-#         input (LongTensor): Tensor containing bags of indices into the embedding matrix
-#         weight (Tensor): The embedding matrix with number of rows equal to the maximum possible index + 1,
-#             and number of columns equal to the embedding size
-#         offsets (LongTensor, optional): Only used when :attr:`input` is 1D. :attr:`offsets` determines
-#                              the starting index position of each bag (sequence) in :attr:`input`.
-#         max_norm (float, optional): If given, each embedding vector with norm larger than :attr:`max_norm`
-#                                     is renormalized to have norm :attr:`max_norm`.
-#                                     Note: this will modify :attr:`weight` in-place.
-#         norm_type (float, optional): The ``p`` in the ``p``-norm to compute for the :attr:`max_norm` option.
-#                                      Default ``2``.
-#         scale_grad_by_freq (boolean, optional): if given, this will scale gradients by the inverse of frequency of
-#                                                 the words in the mini-batch. Default ``False``.
-#                                                 Note: this option is not supported when ``mode="max"``.
-#         mode (string, optional): ``"sum"``, ``"mean"`` or ``"max"``. Specifies the way to reduce the bag.
-#                                  Default: ``"mean"``
-#         sparse (bool, optional): if ``True``, gradient w.r.t. :attr:`weight` will be a sparse tensor. See Notes under
-#                                  :class:`torch.nn.Embedding` for more details regarding sparse gradients.
-#                                  Note: this option is not supported when ``mode="max"``.
-#         per_sample_weights (Tensor, optional): a tensor of float / double weights, or None
-#             to indicate all weights should be taken to be 1. If specified, :attr:`per_sample_weights`
-#             must have exactly the same shape as input and is treated as having the same
-#             :attr:`offsets`, if those are not None.
-# 
-#         include_last_offset (bool, optional): if ``True``, the size of offsets is equal to the number of bags + 1.
-#         The last element is the size of the input, or the ending index position of the last bag (sequence).
-# 
-# 
-#     Shape:
-# 
-#         - :attr:`input` (LongTensor) and :attr:`offsets` (LongTensor, optional)
-# 
-#           - If :attr:`input` is 2D of shape `(B, N)`,
-# 
-#             it will be treated as ``B`` bags (sequences) each of fixed length ``N``, and
-#             this will return ``B`` values aggregated in a way depending on the :attr:`mode`.
-#             :attr:`offsets` is ignored and required to be ``None`` in this case.
-# 
-#           - If :attr:`input` is 1D of shape `(N)`,
-# 
-#             it will be treated as a concatenation of multiple bags (sequences).
-#             :attr:`offsets` is required to be a 1D tensor containing the
-#             starting index positions of each bag in :attr:`input`. Therefore,
-#             for :attr:`offsets` of shape `(B)`, :attr:`input` will be viewed as
-#             having ``B`` bags. Empty bags (i.e., having 0-length) will have
-#             returned vectors filled by zeros.
-# 
-#         - :attr:`weight` (Tensor): the learnable weights of the module of
-#           shape `(num_embeddings, embedding_dim)`
-# 
-#         - :attr:`per_sample_weights` (Tensor, optional). Has the same shape as
-#           :attr:`input`.
-# 
-#         - :attr:`output`: aggregated embedding values of shape `(B, embedding_dim)`
-# 
-#     Examples::
-# 
-#         >>> # an Embedding module containing 10 tensors of size 3
-#         >>> embedding_matrix = torch.rand(10, 3)
-#         >>> # a batch of 2 samples of 4 indices each
-#         >>> input = torch.tensor([1,2,4,5,4,3,2,9])
-#         >>> offsets = torch.tensor([0,4])
-#         >>> F.embedding_bag(embedding_matrix, input, offsets)
-#         tensor([[ 0.3397,  0.3552,  0.5545],
-#                 [ 0.5893,  0.4386,  0.5882]])
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, weight)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 embedding_bag, tens_ops, input, weight, offsets=offsets, max_norm=max_norm,
-#                 norm_type=norm_type, scale_grad_by_freq=scale_grad_by_freq, mode=mode,
-#                 sparse=sparse, per_sample_weights=per_sample_weights,
-#                 include_last_offset=include_last_offset)
-#     # Check for backward compatibility.
-#     # Used to be embedding_bag(weight, input, ...)
-#     # Now is     embedding_bag(input, weight, ...)
-#     if weight.dtype == torch.long and input.is_floating_point():
-#         warnings.warn("Argument order of nn.functional.embedding_bag was changed. "
-#                       "Usage `embedding_bag(weight, input, ...)` is deprecated, "
-#                       "and should now be `embedding_bag(input, weight, ...)`.")
-#         weight, input = input, weight
-# 
-#     if per_sample_weights is not None and input.size() != per_sample_weights.size():
-#         raise ValueError("embedding_bag: If per_sample_weights ({}) is not None, "
-#                          "then it must have the same shape as the input ({})"
-#                          .format(per_sample_weights.shape, input.shape))
-# 
-#     if input.dim() == 2:
-#         if offsets is not None:
-#             raise ValueError("if input is 2D, then offsets has to be None"
-#                              ", as input is treated is a mini-batch of"
-#                              " fixed length sequences. However, found "
-#                              "offsets of type {}".format(type(offsets)))
-#         offsets = torch.arange(0, input.numel(), input.size(1),
-#                                dtype=torch.long, device=input.device)
-# 
-#         input = input.reshape(-1)
-#         if per_sample_weights is not None:
-#             per_sample_weights = per_sample_weights.reshape(-1)
-#     elif input.dim() == 1:
-#         if offsets is None:
-#             raise ValueError("offsets has to be a 1D Tensor but got None")
-#         if offsets.dim() != 1:
-#             raise ValueError("offsets has to be a 1D Tensor")
-#     else:
-#         raise ValueError("input has to be 1D or 2D Tensor,"
-#                          " but got Tensor of dimension {}".format(input.dim()))
-#     if mode == 'sum':
-#         mode_enum = 0
-#     elif mode == 'mean':
-#         mode_enum = 1
-#     elif mode == 'max':
-#         mode_enum = 2
-# 
-#         if scale_grad_by_freq:
-#             raise ValueError("max mode does not support scaling the gradient by the frequency")
-# 
-#         if sparse:
-#             raise ValueError("max mode does not support sparse weights")
-# 
-#     else:
-#         raise ValueError("mode has to be one of sum, mean or max")
-# 
-#     if max_norm is not None:
-#         # XXX: equivalent to
-#         # with torch.no_grad():
-#         #   torch.nembedding_renorm_
-#         # remove once script supports set_grad_enabled
-#         _no_grad_embedding_renorm_(weight, input, max_norm, norm_type)
-# 
-#     if per_sample_weights is not None and mode != 'sum':
-#         raise NotImplementedError("embedding_bag: per_sample_weights was not None. "
-#                                   "per_sample_weights is only supported for mode='sum' "
-#                                   "(got mode='{}'). Please open a feature request on GitHub."
-#                                   .format(mode))
-# 
-#     ret, _, _, _ = torch.embedding_bag(
-#         weight,
-#         input,
-#         offsets,
-#         scale_grad_by_freq,
-#         mode_enum,
-#         sparse,
-#         per_sample_weights,
-#         include_last_offset)
-#     return ret
-# 
-stop('not implemented')
+nnf_embedding_bag <- function(input, weight, offsets = NULL, max_norm = NULL, 
+                              norm_type = 2, scale_grad_by_freq = FALSE, 
+                              mode = "mean", sparse= FALSE, per_sample_weights = NULL,
+                              include_last_offset = FALSE) {
+
+  if (input$dim() == 2) {
+    input <- input$reshape(-1)
+    if (!is.null(per_sample_weights)) {
+      per_sample_weights <- per_sample_weights$reshape(-1)
+    }
+  } 
+  
+  if (mode == 'sum') {
+    mode_enum <- 0
+  } else if (mode == "mean") {
+    mode_enum <- 1
+  } else if (mode == "max") {
+    mode_enum <- 2
+  }
+    
+  if (!is.null(max_norm)) {
+    input <- input$contiguous()
+    with_no_grad({
+      torch_embedding_renorm_(weight, input, max_norm, norm_type)
+    })
+  }
+  
+  ret <- torch_embedding_bag(weight = weight, indices = input, offsets = offsets, 
+                      scale_grad_by_freq = scale_grad_by_freq, mode = mode_enum,
+                      sparse = sparse, per_sample_weights = per_sample_weights, 
+                      include_last_offset = include_last_offset)
+                      
+  ret[[1]]
 }
 
 nnf_fold <- function() {
