@@ -99,96 +99,39 @@ nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL,
                                          reduction_enum(reduction))
 }
 
-nnf_boolean_dispatch <- function() {
-# def boolean_dispatch(arg_name, arg_index, default, if_true, if_false, module_name, func_name):
-#     """
-#     Dispatches to either of 2 script functions based on a boolean argument.
-#     In TorchScript, the boolean argument must be constant so that the correct
-#     function to use can be determined at compile time.
-#     """
-#     def fn(*args, **kwargs):
-#         dispatch_flag = False
-#         if arg_name in kwargs:
-#             dispatch_flag = kwargs[arg_name]
-#         elif arg_index < len(args):
-#             dispatch_flag = args[arg_index]
-# 
-#         if dispatch_flag:
-#             return if_true(*args, **kwargs)
-#         else:
-#             return if_false(*args, **kwargs)
-# 
-#     if if_true.__doc__ is None and if_false.__doc__ is not None:
-#         doc = if_false.__doc__
-#         if_true.__doc__ = doc
-#     elif if_false.__doc__ is None and if_true.__doc__ is not None:
-#         doc = if_true.__doc__
-#         if_false.__doc__ = doc
-#     elif if_false.__doc__ is None and if_true.__doc__ is None:
-#         # neither function has a docstring
-#         doc = None
-#     else:
-#         raise RuntimeError("only one function can have a docstring")
-#     fn.__doc__ = doc
-# 
-#     if module_name is not None:
-#         fn.__module__ = module_name
-#     if func_name is not None:
-#         fn.__name__ = func_name
-# 
-#     boolean_dispatched[fn] = {
-#         "if_true": if_true,
-#         "if_false": if_false,
-#         "index": arg_index,
-#         "default": default,
-#         "arg_name": arg_name
-#     }
-#     return fn
-# 
-stop('not implemented')
+nnf_celu <- function(input, alpha = 1, inplace = FALSE) {
+  if (inplace)
+    torch_celu_(input, alpha)
+  else
+    torch_celu(input, alpha)
 }
 
-nnf_celu <- function() {
-# def celu(input, alpha=1., inplace=False):
-#     # type: (Tensor, float, bool) -> Tensor
-#     r"""celu(input, alpha=1., inplace=False) -> Tensor
-# 
-#     Applies element-wise,
-#     :math:`\text{CELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x/\alpha) - 1))`.
-# 
-#     See :class:`~torch.nn.CELU` for more details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(celu, (input,), input, alpha=alpha,
-#                                          inplace=inplace)
-#     if inplace:
-#         result = torch.celu_(input, alpha)
-#     else:
-#         result = torch.celu(input, alpha)
-#     return result
-# 
-stop('not implemented')
+nnf_celu_ <- function(input, alpha = 1) {
+  torch_celu_(input, alpha)
 }
 
-nnf_celu_ <- function() {
-# 
-stop('not implemented')
+nnf_conv1d <- function(input, weight, bias = NULL, stride = 1, padding = 0, dilation = 1, 
+                       groups = 1) {
+  torch_conv1d(
+    input = input, weight = weight, bias = bias, stride = stride,
+    padding = padding, dilation = dilation, groups = groups
+  )
 }
 
-nnf_conv1d <- function(input, weight, bias, stride, padding, dilation, groups) {
-# 
-stop('not implemented')
+nnf_conv2d <- function(input, weight, bias = NULL, stride = 1, padding = 0, dilation = 1, 
+                       groups = 1) {
+  torch_conv2d(
+    input = input, weight = weight, bias = bias, stride = stride,
+    padding = padding, dilation = dilation, groups = groups
+  )
 }
 
-nnf_conv2d <- function(input, weight, bias, stride, padding, dilation, groups) {
-# 
-stop('not implemented')
-}
-
-nnf_conv3d <- function(input, weight, bias, stride, padding, dilation, groups) {
-# 
-stop('not implemented')
+nnf_conv3d <- function(input, weight, bias = NULL, stride = 1, padding = 0, dilation = 1, 
+                       groups = 1) {
+  torch_conv3d(
+    input = input, weight = weight, bias = bias, stride = stride,
+    padding = padding, dilation = dilation, groups = groups
+  )
 }
 
 nnf_conv_tbc <- function(input, weight, bias, pad) {
@@ -196,358 +139,102 @@ nnf_conv_tbc <- function(input, weight, bias, pad) {
 stop('not implemented')
 }
 
-nnf_conv_transpose1d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) {
-# 
-stop('not implemented')
+nnf_conv_transpose1d <- function(input, weight, bias=NULL, stride=1, padding=0, 
+                                 output_padding=0, groups=1, dilation=1) {
+  torch_conv_transpose1d(
+    input = input, weight = weight, bias = bias, stride = stride,
+    padding = padding, output_padding = output_padding, groups = groups,
+    dilation = dilation
+  )
 }
 
-nnf_conv_transpose2d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) {
-# 
-stop('not implemented')
+nnf_conv_transpose2d <- function(input, weight, bias=NULL, stride=1, padding=0, 
+                                 output_padding=0, groups=1, dilation=1) {
+  torch_conv_transpose2d(
+    input = input, weight = weight, bias = bias, stride = stride,
+    padding = padding, output_padding = output_padding, groups = groups,
+    dilation = dilation
+  )
 }
 
-nnf_conv_transpose3d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) {
-# 
-stop('not implemented')
+nnf_conv_transpose3d <- function(input, weight, bias=NULL, stride=1, padding=0, 
+                                 output_padding=0, groups=1, dilation=1) {
+  torch_conv_transpose3d(
+    input = input, weight = weight, bias = bias, stride = stride,
+    padding = padding, output_padding = output_padding, groups = groups,
+    dilation = dilation
+  )
 }
 
-nnf_cosine_embedding_loss <- function() {
-# def cosine_embedding_loss(input1, input2, target, margin=0, size_average=None,
-#                           reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, Tensor, float, Optional[bool], Optional[bool], str) -> Tensor
-#     r"""cosine_embedding_loss(input1, input2, target, margin=0, size_average=None, reduce=None, reduction='mean') -> Tensor
-# 
-#     See :class:`~torch.nn.CosineEmbeddingLoss` for details.
-#     """  # noqa
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input1, input2, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 cosine_embedding_loss, tens_ops, input1, input2, target, margin=margin,
-#                 size_average=size_average, reduce=reduce, reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
-#     else:
-#         reduction_enum = _Reduction.get_enum(reduction)
-#     return torch.cosine_embedding_loss(input1, input2, target, margin, reduction_enum)
-# 
-stop('not implemented')
+nnf_cosine_embedding_loss <- function(input1, input2, target, margin=0, 
+                                      size_average=NULL, reduction=c("mean", "sum", "none")) {
+  torch_cosine_embedding_loss(input1 = input1, input2 = input2, target = target, 
+                              margin = margin, reduction = reduction_enum(reduction))
 }
 
-nnf_cosine_similarity <- function(x1, x2, dim, eps) {
-# 
-stop('not implemented')
+nnf_cosine_similarity <- function(x1, x2, dim=1, eps=1e-8) {
+  torch_cosine_similarity(x1 = x1, x2 = x2, dim = dim, eps = eps)
 }
 
-nnf_cross_entropy <- function(input, target, weight, size_average, ignore_index, reduce, reduction) {
-# def cross_entropy(input, target, weight=None, size_average=None, ignore_index=-100,
-#                   reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], int, Optional[bool], str) -> Tensor
-#     r"""This criterion combines `log_softmax` and `nll_loss` in a single
-#     function.
-# 
-#     See :class:`~torch.nn.CrossEntropyLoss` for details.
-# 
-#     Args:
-#         input (Tensor) : :math:`(N, C)` where `C = number of classes` or :math:`(N, C, H, W)`
-#             in case of 2D Loss, or :math:`(N, C, d_1, d_2, ..., d_K)` where :math:`K \geq 1`
-#             in the case of K-dimensional loss.
-#         target (Tensor) : :math:`(N)` where each value is :math:`0 \leq \text{targets}[i] \leq C-1`,
-#             or :math:`(N, d_1, d_2, ..., d_K)` where :math:`K \geq 1` for
-#             K-dimensional loss.
-#         weight (Tensor, optional): a manual rescaling weight given to each
-#             class. If given, has to be a Tensor of size `C`
-#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
-#             the losses are averaged over each loss element in the batch. Note that for
-#             some losses, there multiple elements per sample. If the field :attr:`size_average`
-#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
-#             when reduce is ``False``. Default: ``True``
-#         ignore_index (int, optional): Specifies a target value that is ignored
-#             and does not contribute to the input gradient. When :attr:`size_average` is
-#             ``True``, the loss is averaged over non-ignored targets. Default: -100
-#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
-#             losses are averaged or summed over observations for each minibatch depending
-#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
-#             batch element instead and ignores :attr:`size_average`. Default: ``True``
-#         reduction (string, optional): Specifies the reduction to apply to the output:
-#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
-#             ``'mean'``: the sum of the output will be divided by the number of
-#             elements in the output, ``'sum'``: the output will be summed. Note: :attr:`size_average`
-#             and :attr:`reduce` are in the process of being deprecated, and in the meantime,
-#             specifying either of those two args will override :attr:`reduction`. Default: ``'mean'``
-# 
-#     Examples::
-# 
-#         >>> input = torch.randn(3, 5, requires_grad=True)
-#         >>> target = torch.randint(5, (3,), dtype=torch.int64)
-#         >>> loss = F.cross_entropy(input, target)
-#         >>> loss.backward()
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 cross_entropy, tens_ops, input, target, weight=weight,
-#                 size_average=size_average, ignore_index=ignore_index, reduce=reduce,
-#                 reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction = _Reduction.legacy_get_string(size_average, reduce)
-#     return nll_loss(log_softmax(input, 1), target, weight, None, ignore_index, None, reduction)
-# 
-stop('not implemented')
+nnf_cross_entropy <- function(input, target, weight=NULL, ignore_index=-100, 
+                              reduction=c("mean", "sum", "none")) {
+  torch_nll_loss(self = torch_log_softmax(input, 1), target = target, weight = weight, 
+                 reduction = reduction_enum(reduction), ignore_index = ignore_index)
 }
 
-nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blank, reduction, zero_infinity) {
-# def ctc_loss(log_probs, targets, input_lengths, target_lengths, blank=0,
-#              reduction='mean', zero_infinity=False):
-#     # type: (Tensor, Tensor, Tensor, Tensor, int, str, bool) -> Tensor
-#     r"""The Connectionist Temporal Classification loss.
-# 
-#     See :class:`~torch.nn.CTCLoss` for details.
-# 
-#     .. include:: cudnn_deterministic.rst
-#     .. include:: cuda_deterministic_backward.rst
-# 
-#     Args:
-#         log_probs: :math:`(T, N, C)` where `C = number of characters in alphabet including blank`,
-#             `T = input length`, and `N = batch size`.
-#             The logarithmized probabilities of the outputs
-#             (e.g. obtained with :func:`torch.nn.functional.log_softmax`).
-#         targets: :math:`(N, S)` or `(sum(target_lengths))`.
-#             Targets cannot be blank. In the second form, the targets are assumed to be concatenated.
-#         input_lengths: :math:`(N)`.
-#             Lengths of the inputs (must each be :math:`\leq T`)
-#         target_lengths: :math:`(N)`.
-#             Lengths of the targets
-#         blank (int, optional):
-#             Blank label. Default :math:`0`.
-#         reduction (string, optional): Specifies the reduction to apply to the output:
-#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
-#             ``'mean'``: the output losses will be divided by the target lengths and
-#             then the mean over the batch is taken, ``'sum'``: the output will be
-#             summed. Default: ``'mean'``
-#         zero_infinity (bool, optional):
-#             Whether to zero infinite losses and the associated gradients.
-#             Default: ``False``
-#             Infinite losses mainly occur when the inputs are too short
-#             to be aligned to the targets.
-# 
-#     Example::
-# 
-#         >>> log_probs = torch.randn(50, 16, 20).log_softmax(2).detach().requires_grad_()
-#         >>> targets = torch.randint(1, 20, (16, 30), dtype=torch.long)
-#         >>> input_lengths = torch.full((16,), 50, dtype=torch.long)
-#         >>> target_lengths = torch.randint(10,30,(16,), dtype=torch.long)
-#         >>> loss = F.ctc_loss(log_probs, targets, input_lengths, target_lengths)
-#         >>> loss.backward()
-#     """
-#     return torch.ctc_loss(log_probs, targets, input_lengths, target_lengths, blank, _Reduction.get_enum(reduction),
-#                           zero_infinity)
-# 
-stop('not implemented')
+nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blank=0,
+                         reduction=c('mean', "sum", "none"), zero_infinity=FALSE) {
+  torch_ctc_loss(log_probs = log_probs, targets = targets, input_lengths = input_lengths,
+                 target_lengths = target_lengths, blank = blank, reduction = reduction_enum(reduction),
+                 zero_infinity = zero_infinity)
 }
 
-nnf_dropout <- function(p, training, inplace) {
-# def dropout(input, p=0.5, training=True, inplace=False):
-#     # type: (Tensor, float, bool, bool) -> Tensor
-#     r"""
-#     During training, randomly zeroes some of the elements of the input
-#     tensor with probability :attr:`p` using samples from a Bernoulli
-#     distribution.
-# 
-#     See :class:`~torch.nn.Dropout` for details.
-# 
-#     Args:
-#         p: probability of an element to be zeroed. Default: 0.5
-#         training: apply dropout if is ``True``. Default: ``True``
-#         inplace: If set to ``True``, will do this operation in-place. Default: ``False``
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 dropout, (input,), input, p=p, training=training, inplace=inplace)
-#     if p < 0. or p > 1.:
-#         raise ValueError("dropout probability has to be between 0 and 1, "
-#                          "but got {}".format(p))
-#     return (_VF.dropout_(input, p, training)
-#             if inplace
-#             else _VF.dropout(input, p, training))
-# 
-stop('not implemented')
+nnf_dropout <- function(input, p=0.5, training=TRUE, inplace=FALSE) {
+  if (inplace)
+    torch_dropout_(input, p, training)
+  else
+    torch_dropout(input, p, training)
 }
 
-nnf_dropout2d <- function(p, training, inplace) {
-# def dropout2d(input, p=0.5, training=True, inplace=False):
-#     # type: (Tensor, float, bool, bool) -> Tensor
-#     r"""
-#     Randomly zero out entire channels (a channel is a 2D feature map,
-#     e.g., the :math:`j`-th channel of the :math:`i`-th sample in the
-#     batched input is a 2D tensor :math:`\text{input}[i, j]`) of the input tensor).
-#     Each channel will be zeroed out independently on every forward call with
-#     probability :attr:`p` using samples from a Bernoulli distribution.
-# 
-#     See :class:`~torch.nn.Dropout2d` for details.
-# 
-#     Args:
-#         p: probability of a channel to be zeroed. Default: 0.5
-#         training: apply dropout if is ``True``. Default: ``True``
-#         inplace: If set to ``True``, will do this operation in-place. Default: ``False``
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 dropout2d, (input,), input, p=p, training=training, inplace=inplace)
-#     if p < 0. or p > 1.:
-#         raise ValueError("dropout probability has to be between 0 and 1, "
-#                          "but got {}".format(p))
-#     return (_VF.feature_dropout_(input, p, training)
-#             if inplace
-#             else _VF.feature_dropout(input, p, training))
-# 
-stop('not implemented')
+nnf_dropout2d <- function(input, p=0.5, training=TRUE, inplace=FALSE) {
+  if (inplace)
+    torch_feature_dropout_(input, p, training)
+  else
+    torch_feature_dropout(input, p, training)
 }
 
-nnf_dropout3d <- function(p, training, inplace) {
-# def dropout3d(input, p=0.5, training=True, inplace=False):
-#     # type: (Tensor, float, bool, bool) -> Tensor
-#     r"""
-#     Randomly zero out entire channels (a channel is a 3D feature map,
-#     e.g., the :math:`j`-th channel of the :math:`i`-th sample in the
-#     batched input is a 3D tensor :math:`\text{input}[i, j]`) of the input tensor).
-#     Each channel will be zeroed out independently on every forward call with
-#     probability :attr:`p` using samples from a Bernoulli distribution.
-# 
-#     See :class:`~torch.nn.Dropout3d` for details.
-# 
-#     Args:
-#         p: probability of a channel to be zeroed. Default: 0.5
-#         training: apply dropout if is ``True``. Default: ``True``
-#         inplace: If set to ``True``, will do this operation in-place. Default: ``False``
-#     """
-#     # This is 100% the same code as dropout2d. We duplicate this code so that
-#     # stack traces are not confusing.
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 dropout3d, (input,), input, p=p, training=training, inplace=inplace)
-#     if p < 0. or p > 1.:
-#         raise ValueError("dropout probability has to be between 0 and 1, "
-#                          "but got {}".format(p))
-#     return (_VF.feature_dropout_(input, p, training)
-#             if inplace
-#             else _VF.feature_dropout(input, p, training))
-# 
-stop('not implemented')
+nnf_dropout3d <- function(input, p=0.5, training=TRUE, inplace=FALSE) {
+  if (inplace)
+    torch_feature_dropout_(input, p, training)
+  else
+    torch_feature_dropout(input, p, training)
 }
 
-nnf_elu <- function() {
-# def elu(input, alpha=1., inplace=False):
-#     # type: (Tensor, float, bool) -> Tensor
-#     r"""Applies element-wise,
-#     :math:`\text{ELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x) - 1))`.
-# 
-#     See :class:`~torch.nn.ELU` for more details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(elu, (input,), input, alpha=alpha,
-#                                          inplace=inplace)
-#     if inplace:
-#         result = torch._C._nn.elu_(input, alpha)
-#     else:
-#         result = torch._C._nn.elu(input, alpha)
-#     return result
-# 
-stop('not implemented')
+nnf_elu <- function(input, alpha=1, inplace=FALSE) {
+  if(inplace)
+    torch_elu_(input, alpha = alpha)
+  else
+    torch_elu(input, alpha = alpha)
 }
 
-nnf_elu_ <- function() {
-# 
-stop('not implemented')
+nnf_elu_ <- function(input, alpha=1) {
+  torch_elu_(input, alpha = alpha)
 }
 
-nnf_embedding <- function(input, weight, padding_idx, max_norm, norm_type, scale_grad_by_freq, sparse) {
-# def embedding(input, weight, padding_idx=None, max_norm=None, norm_type=2.,
-#               scale_grad_by_freq=False, sparse=False):
-#     # type: (Tensor, Tensor, Optional[int], Optional[float], float, bool, bool) -> Tensor
-#     r"""A simple lookup table that looks up embeddings in a fixed dictionary and size.
-# 
-#     This module is often used to retrieve word embeddings using indices.
-#     The input to the module is a list of indices, and the embedding matrix,
-#     and the output is the corresponding word embeddings.
-# 
-#     See :class:`torch.nn.Embedding` for more details.
-# 
-#     Args:
-#         input (LongTensor): Tensor containing indices into the embedding matrix
-#         weight (Tensor): The embedding matrix with number of rows equal to the maximum possible index + 1,
-#             and number of columns equal to the embedding size
-#         padding_idx (int, optional): If given, pads the output with the embedding vector at :attr:`padding_idx`
-#                                          (initialized to zeros) whenever it encounters the index.
-#         max_norm (float, optional): If given, each embedding vector with norm larger than :attr:`max_norm`
-#                                     is renormalized to have norm :attr:`max_norm`.
-#                                     Note: this will modify :attr:`weight` in-place.
-#         norm_type (float, optional): The p of the p-norm to compute for the :attr:`max_norm` option. Default ``2``.
-#         scale_grad_by_freq (boolean, optional): If given, this will scale gradients by the inverse of frequency of
-#                                                 the words in the mini-batch. Default ``False``.
-#         sparse (bool, optional): If ``True``, gradient w.r.t. :attr:`weight` will be a sparse tensor. See Notes under
-#                                  :class:`torch.nn.Embedding` for more details regarding sparse gradients.
-# 
-#     Shape:
-#         - Input: LongTensor of arbitrary shape containing the indices to extract
-#         - Weight: Embedding matrix of floating point type with shape `(V, embedding_dim)`,
-#                             where V = maximum index + 1 and embedding_dim = the embedding size
-#         - Output: `(*, embedding_dim)`, where `*` is the input shape
-# 
-#     Examples::
-# 
-#         >>> # a batch of 2 samples of 4 indices each
-#         >>> input = torch.tensor([[1,2,4,5],[4,3,2,9]])
-#         >>> # an embedding matrix containing 10 tensors of size 3
-#         >>> embedding_matrix = torch.rand(10, 3)
-#         >>> F.embedding(input, embedding_matrix)
-#         tensor([[[ 0.8490,  0.9625,  0.6753],
-#                  [ 0.9666,  0.7761,  0.6108],
-#                  [ 0.6246,  0.9751,  0.3618],
-#                  [ 0.4161,  0.2419,  0.7383]],
-# 
-#                 [[ 0.6246,  0.9751,  0.3618],
-#                  [ 0.0237,  0.7794,  0.0528],
-#                  [ 0.9666,  0.7761,  0.6108],
-#                  [ 0.3385,  0.8612,  0.1867]]])
-# 
-#         >>> # example with padding_idx
-#         >>> weights = torch.rand(10, 3)
-#         >>> weights[0, :].zero_()
-#         >>> embedding_matrix = weights
-#         >>> input = torch.tensor([[0,2,0,5]])
-#         >>> F.embedding(input, embedding_matrix, padding_idx=0)
-#         tensor([[[ 0.0000,  0.0000,  0.0000],
-#                  [ 0.5609,  0.5384,  0.8720],
-#                  [ 0.0000,  0.0000,  0.0000],
-#                  [ 0.6262,  0.2438,  0.7471]]])
-#     """
-#     if padding_idx is not None:
-#         if padding_idx > 0:
-#             assert padding_idx < weight.size(0), 'Padding_idx must be within num_embeddings'
-#         elif padding_idx < 0:
-#             assert padding_idx >= -weight.size(0), 'Padding_idx must be within num_embeddings'
-#             padding_idx = weight.size(0) + padding_idx
-#     else:
-#         padding_idx = -1
-#     if max_norm is not None:
-#         # `embedding_renorm_` will call .contiguous() on input anyways, so we
-#         # call it here and take advantage of the improved locality in the
-#         # `embedding` call below too.
-#         input = input.contiguous()
-#         # XXX: equivalent to
-#         # with torch.no_grad():
-#         #   torch.nembedding_renorm_
-#         # remove once script supports set_grad_enabled
-#         _no_grad_embedding_renorm_(weight, input, max_norm, norm_type)
-#     return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
-# 
-stop('not implemented')
+nnf_embedding <- function(input, weight, padding_idx=NULL, max_norm=NULL, norm_type=2,
+                          scale_grad_by_freq=FALSE, sparse=FALSE) {
+  if (is.null(padding_idx))
+    padding_idx <- -1
+  
+  if (!is.null(max_norm)) {
+    input <- input$contiguous()
+    with_no_grad({
+      torch_embedding_renorm_(weight, input, max_norm, norm_type)
+    })
+  }
+  
+  torch_embedding(weight = weight, input = input, padding_idx = padding_idx,
+                  scale_grad_by_freq = scale_grad_by_freq, sparse = sparse)  
 }
 
 nnf_embedding_bag <- function(input, weight, offsets, max_norm, norm_type, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset, The) {
