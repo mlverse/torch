@@ -57,192 +57,46 @@ nnf_alpha_dropout <- function(input, p = 0.5, training = FALSE, inplace = FALSE)
     torch_alpha_dropout(input, p, training)
 }
 
-nnf_avg_pool1d <- function(input, kernel_size, stride, padding, ceil_mode, count_include_pad) {
-# 
-stop('not implemented')
+nnf_avg_pool1d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
+                           count_include_pad = TRUE) {
+  torch_avg_pool1d(input, kernel_size, stride, padding, ceil_mode, count_include_pad)
 }
 
-nnf_avg_pool2d <- function(input, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override) {
-# 
-stop('not implemented')
+nnf_avg_pool2d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
+                           count_include_pad = TRUE, divisor_override = NULL) {
+  torch_avg_pool2d(input, kernel_size, stride, padding, ceil_mode, count_include_pad,
+                   divisor_override)
 }
 
-nnf_avg_pool3d <- function(input, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override) {
-# 
-stop('not implemented')
+nnf_avg_pool3d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
+                           count_include_pad = TRUE, divisor_override = NULL) {
+  torch_avg_pool3d(input, kernel_size, stride, padding, ceil_mode, count_include_pad,
+                   divisor_override)
 }
 
-nnf_batch_norm <- function() {
-# def batch_norm(input, running_mean, running_var, weight=None, bias=None,
-#                training=False, momentum=0.1, eps=1e-5):
-#     # type: (Tensor, Optional[Tensor], Optional[Tensor], Optional[Tensor], Optional[Tensor], bool, float, float) -> Tensor  # noqa
-#     r"""Applies Batch Normalization for each channel across a batch of data.
-# 
-#     See :class:`~torch.nn.BatchNorm1d`, :class:`~torch.nn.BatchNorm2d`,
-#     :class:`~torch.nn.BatchNorm3d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 batch_norm, (input,), input, running_mean, running_var, weight=weight,
-#                 bias=bias, training=training, momentum=momentum, eps=eps)
-#     if training:
-#         _verify_batch_size(input.size())
-# 
-#     return torch.batch_norm(
-#         input, weight, bias, running_mean, running_var,
-#         training, momentum, eps, torch.backends.cudnn.enabled
-#     )
-# 
-stop('not implemented')
+nnf_batch_norm <- function(input, running_mean, running_var, weight = NULL, bias = NULL,
+                           training = FALSE, momentum = 0.1, eps = 1e-5) {
+  torch_batch_norm(input = input, weight = weight, bias = bias, running_mean = running_mean,
+                   running_var = running_var, training = training, momentum = momentum,
+                   eps = eps, cudnn_enabled = backends_cudnn_enabled())
 }
 
-nnf_bilinear <- function() {
-# def bilinear(input1, input2, weight, bias=None):
-#     # type: (Tensor, Tensor, Tensor, Optional[Tensor]) -> Tensor
-#     r"""
-#     Applies a bilinear transformation to the incoming data:
-#     :math:`y = x_1 A x_2 + b`
-# 
-#     Shape:
-# 
-#         - input1: :math:`(N, *, H_{in1})` where :math:`H_{in1}=\text{in1\_features}`
-#           and :math:`*` means any number of additional dimensions.
-#           All but the last dimension of the inputs should be the same.
-#         - input2: :math:`(N, *, H_{in2})` where :math:`H_{in2}=\text{in2\_features}`
-#         - weight: :math:`(\text{out\_features}, \text{in1\_features},
-#           \text{in2\_features})`
-#         - bias: :math:`(\text{out\_features})`
-#         - output: :math:`(N, *, H_{out})` where :math:`H_{out}=\text{out\_features}`
-#           and all but the last dimension are the same shape as the input.
-#     """
-#     return torch.bilinear(input1, input2, weight, bias)
-# 
-stop('not implemented')
+nnf_bilinear <- function(input1, input2, weight, bias = NULL) {
+  torch_bilinear(input1, input2, weight, bias)
 }
 
-nnf_binary_cross_entropy <- function(input, target, weight, size_average, reduce, reduction) {
-# def binary_cross_entropy(input, target, weight=None, size_average=None,
-#                          reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], Optional[bool], str) -> Tensor
-#     r"""Function that measures the Binary Cross Entropy
-#     between the target and the output.
-# 
-#     See :class:`~torch.nn.BCELoss` for details.
-# 
-#     Args:
-#         input: Tensor of arbitrary shape
-#         target: Tensor of the same shape as input
-#         weight (Tensor, optional): a manual rescaling weight
-#                 if provided it's repeated to match input tensor shape
-#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
-#             the losses are averaged over each loss element in the batch. Note that for
-#             some losses, there multiple elements per sample. If the field :attr:`size_average`
-#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
-#             when reduce is ``False``. Default: ``True``
-#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
-#             losses are averaged or summed over observations for each minibatch depending
-#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
-#             batch element instead and ignores :attr:`size_average`. Default: ``True``
-#         reduction (string, optional): Specifies the reduction to apply to the output:
-#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
-#             ``'mean'``: the sum of the output will be divided by the number of
-#             elements in the output, ``'sum'``: the output will be summed. Note: :attr:`size_average`
-#             and :attr:`reduce` are in the process of being deprecated, and in the meantime,
-#             specifying either of those two args will override :attr:`reduction`. Default: ``'mean'``
-# 
-#     Examples::
-# 
-#         >>> input = torch.randn((3, 2), requires_grad=True)
-#         >>> target = torch.rand((3, 2), requires_grad=False)
-#         >>> loss = F.binary_cross_entropy(F.sigmoid(input), target)
-#         >>> loss.backward()
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 binary_cross_entropy, tens_ops, input, target, weight=weight,
-#                 size_average=size_average, reduce=reduce, reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
-#     else:
-#         reduction_enum = _Reduction.get_enum(reduction)
-#     if target.size() != input.size():
-#         warnings.warn("Using a target size ({}) that is different to the input size ({}) is deprecated. "
-#                       "Please ensure they have the same size.".format(target.size(), input.size()),
-#                       stacklevel=2)
-#     if input.numel() != target.numel():
-#         raise ValueError("Target and input must have the same number of elements. target nelement ({}) "
-#                          "!= input nelement ({})".format(target.numel(), input.numel()))
-# 
-#     if weight is not None:
-#         new_size = _infer_size(target.size(), weight.size())
-#         weight = weight.expand(new_size)
-# 
-#     return torch._C._nn.binary_cross_entropy(
-#         input, target, weight, reduction_enum)
-# 
-stop('not implemented')
+nnf_binary_cross_entropy <- function(input, target, weight = NULL, size_average = NULL, 
+                                     reduction = c("mean", "sum", "none")) {
+  torch_binary_cross_entropy(input, target, weight, size_average=size_average,
+                             reduction=reduction_enum(reduction))
 }
 
-nnf_binary_cross_entropy_with_logits <- function(input, target, weight, size_average, reduce, reduction, pos_weight) {
-# def binary_cross_entropy_with_logits(input, target, weight=None, size_average=None,
-#                                      reduce=None, reduction='mean', pos_weight=None):
-#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], Optional[bool], str, Optional[Tensor]) -> Tensor
-#     r"""Function that measures Binary Cross Entropy between target and output
-#     logits.
-# 
-#     See :class:`~torch.nn.BCEWithLogitsLoss` for details.
-# 
-#     Args:
-#         input: Tensor of arbitrary shape
-#         target: Tensor of the same shape as input
-#         weight (Tensor, optional): a manual rescaling weight
-#             if provided it's repeated to match input tensor shape
-#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
-#             the losses are averaged over each loss element in the batch. Note that for
-#             some losses, there multiple elements per sample. If the field :attr:`size_average`
-#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
-#             when reduce is ``False``. Default: ``True``
-#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
-#             losses are averaged or summed over observations for each minibatch depending
-#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
-#             batch element instead and ignores :attr:`size_average`. Default: ``True``
-#         reduction (string, optional): Specifies the reduction to apply to the output:
-#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
-#             ``'mean'``: the sum of the output will be divided by the number of
-#             elements in the output, ``'sum'``: the output will be summed. Note: :attr:`size_average`
-#             and :attr:`reduce` are in the process of being deprecated, and in the meantime,
-#             specifying either of those two args will override :attr:`reduction`. Default: ``'mean'``
-#         pos_weight (Tensor, optional): a weight of positive examples.
-#                 Must be a vector with length equal to the number of classes.
-# 
-#     Examples::
-# 
-#          >>> input = torch.randn(3, requires_grad=True)
-#          >>> target = torch.empty(3).random_(2)
-#          >>> loss = F.binary_cross_entropy_with_logits(input, target)
-#          >>> loss.backward()
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 binary_cross_entropy_with_logits, tens_ops, input, target, weight=weight,
-#                 size_average=size_average, reduce=reduce, reduction=reduction,
-#                 pos_weight=pos_weight)
-#     if size_average is not None or reduce is not None:
-#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
-#     else:
-#         reduction_enum = _Reduction.get_enum(reduction)
-# 
-#     if not (target.size() == input.size()):
-#         raise ValueError("Target size ({}) must be the same as input size ({})".format(target.size(), input.size()))
-# 
-#     return torch.binary_cross_entropy_with_logits(input, target, weight, pos_weight, reduction_enum)
-# 
-stop('not implemented')
+nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL, 
+                                                 size_average = NULL, 
+                                                 reduction = c("mean", "sum", "none"), 
+                                                 pos_weight = NULL) {
+  torch_binary_cross_entropy_with_logits(input, target, weigth, pos_weight, 
+                                         reduction_enum(reduction))
 }
 
 nnf_boolean_dispatch <- function() {
