@@ -47,56 +47,14 @@ nnf_adaptive_max_pool3d_with_indices <- function(input, output_size) {
 }
 
 nnf_affine_grid <- function(theta, size, align_corners = FALSE) {
-
-  if (!x$is_floating_point()) {
-    value_error("Expected theta to have floating point type, but got", 
-                "{as.character(x$dtype())}")
-  }
-  
-  if (length(size) == 4) {
-    
-    if (theta$dim() != 3 || tail(theta$shape, 2)[1] != 2 || tail(theta$shape, 1) != 3) {
-      value_error("Expected a batch of 2D affine matrices of shape Nx2x3 ",
-                  "for size {size}. Got {theta$shape}.")
-    }
-    
-    spatial_size <- tail(size, 2) #spatial dimension sizes
-  } else if (length(size) == 5) {
-    
-    if (theta$dim() != 3 || tail(theta$shape, 2)[1] != 3 || tail(theta$shape, 1) != 4) {
-      value_error("Expected a batch of 2D affine matrices of shape Nx3x4 ",
-                  "for size {size}. Got {theta$shape}.")
-    }
-    
-    spatial_size <- tail(size, 3) #spatial dimension sizes
-  } else {
-    not_implemented_error("affine_grid only supports 4D and 5D sizes, ",
-                          "for 2D and 3D affine transforms, respectively. ",
-                          "Got size {size}.")
-  }
-  
   torch_affine_grid_generator(theta, size, align_corners)
 }
 
-nnf_alpha_dropout <- function() {
-# def alpha_dropout(input, p=0.5, training=False, inplace=False):
-#     # type: (Tensor, float, bool, bool) -> Tensor
-#     r"""Applies alpha dropout to the input.
-# 
-#     See :class:`~torch.nn.AlphaDropout` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 alpha_dropout, (input,), input, p=p, training=training, inplace=inplace)
-#     if p < 0. or p > 1.:
-#         raise ValueError("dropout probability has to be between 0 and 1, "
-#                          "but got {}".format(p))
-#     return (_VF.alpha_dropout_(input, p, training)
-#             if inplace
-#             else _VF.alpha_dropout(input, p, training))
-# 
-stop('not implemented')
+nnf_alpha_dropout <- function(input, p = 0.5, training = FALSE, inplace = FALSE) {
+  if (inplace)
+    torch_alpha_dropout_(input, p, training)
+  else
+    torch_alpha_dropout(input, p, training)
 }
 
 nnf_avg_pool1d <- function(input, kernel_size, stride, padding, ceil_mode, count_include_pad) {
