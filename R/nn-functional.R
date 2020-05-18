@@ -693,24 +693,12 @@ nnf_grid_sample <- function(input, grid, mode = c("bilinear", "nearest"),
                      padding_mode = padding_mode_enum, align_corners = align_corners)
 }
 
-nnf_group_norm <- function() {
-# def group_norm(input, num_groups, weight=None, bias=None, eps=1e-5):
-#     # type: (Tensor, int, Optional[Tensor], Optional[Tensor], float) -> Tensor
-#     r"""Applies Group Normalization for last certain number of dimensions.
-# 
-#     See :class:`~torch.nn.GroupNorm` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 group_norm, (input,), input, num_groups, weight=weight, bias=bias, eps=eps)
-#     _verify_batch_size([
-#         input.size(0) * input.size(1) // num_groups, num_groups]
-#         + list(input.size()[2:]))
-#     return torch.group_norm(input, num_groups, weight, bias, eps,
-#                             torch.backends.cudnn.enabled)
-# 
-stop('not implemented')
+nnf_group_norm <- function(input, num_groups, weight = NULL, bias = NULL,
+                           eps = 1e-5) {
+  
+  torch_group_norm(input, input, num_groups = num_groups, weight = weight,
+                   bias = bias, eps = eps #TODO ,cudnn_enabled = backends_cudnn_enabled
+  )
 }
 
 nnf_gumbel_softmax <- function(logits, tau, hard, dim) {
