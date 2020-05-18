@@ -666,122 +666,31 @@ nnf_grad <- function() {
 stop('not implemented')
 }
 
-nnf_grid_sample <- function(input, grid, mode, padding_mode, align_corners) {
-# def grid_sample(input, grid, mode='bilinear', padding_mode='zeros', align_corners=None):
-#     # type: (Tensor, Tensor, str, str, Optional[bool]) -> Tensor
-#     r"""Given an :attr:`input` and a flow-field :attr:`grid`, computes the
-#     ``output`` using :attr:`input` values and pixel locations from :attr:`grid`.
-# 
-#     Currently, only spatial (4-D) and volumetric (5-D) :attr:`input` are
-#     supported.
-# 
-#     In the spatial (4-D) case, for :attr:`input` with shape
-#     :math:`(N, C, H_\text{in}, W_\text{in})` and :attr:`grid` with shape
-#     :math:`(N, H_\text{out}, W_\text{out}, 2)`, the output will have shape
-#     :math:`(N, C, H_\text{out}, W_\text{out})`.
-# 
-#     For each output location ``output[n, :, h, w]``, the size-2 vector
-#     ``grid[n, h, w]`` specifies :attr:`input` pixel locations ``x`` and ``y``,
-#     which are used to interpolate the output value ``output[n, :, h, w]``.
-#     In the case of 5D inputs, ``grid[n, d, h, w]`` specifies the
-#     ``x``, ``y``, ``z`` pixel locations for interpolating
-#     ``output[n, :, d, h, w]``. :attr:`mode` argument specifies ``nearest`` or
-#     ``bilinear`` interpolation method to sample the input pixels.
-# 
-#     :attr:`grid` specifies the sampling pixel locations normalized by the
-#     :attr:`input` spatial dimensions. Therefore, it should have most values in
-#     the range of ``[-1, 1]``. For example, values ``x = -1, y = -1`` is the
-#     left-top pixel of :attr:`input`, and values  ``x = 1, y = 1`` is the
-#     right-bottom pixel of :attr:`input`.
-# 
-#     If :attr:`grid` has values outside the range of ``[-1, 1]``, the corresponding
-#     outputs are handled as defined by :attr:`padding_mode`. Options are
-# 
-#         * ``padding_mode="zeros"``: use ``0`` for out-of-bound grid locations,
-#         * ``padding_mode="border"``: use border values for out-of-bound grid locations,
-#         * ``padding_mode="reflection"``: use values at locations reflected by
-#           the border for out-of-bound grid locations. For location far away
-#           from the border, it will keep being reflected until becoming in bound,
-#           e.g., (normalized) pixel location ``x = -3.5`` reflects by border ``-1``
-#           and becomes ``x' = 1.5``, then reflects by border ``1`` and becomes
-#           ``x'' = -0.5``.
-# 
-#     .. note::
-#         This function is often used in conjunction with :func:`affine_grid`
-#         to build `Spatial Transformer Networks`_ .
-#     .. include:: cuda_deterministic_backward.rst
-# 
-#     Args:
-#         input (Tensor): input of shape :math:`(N, C, H_\text{in}, W_\text{in})` (4-D case)
-#                         or :math:`(N, C, D_\text{in}, H_\text{in}, W_\text{in})` (5-D case)
-#         grid (Tensor): flow-field of shape :math:`(N, H_\text{out}, W_\text{out}, 2)` (4-D case)
-#                        or :math:`(N, D_\text{out}, H_\text{out}, W_\text{out}, 3)` (5-D case)
-#         mode (str): interpolation mode to calculate output values
-#             ``'bilinear'`` | ``'nearest'``. Default: ``'bilinear'``
-#         padding_mode (str): padding mode for outside grid values
-#             ``'zeros'`` | ``'border'`` | ``'reflection'``. Default: ``'zeros'``
-#         align_corners (bool, optional): Geometrically, we consider the pixels of the
-#             input  as squares rather than points.
-#             If set to ``True``, the extrema (``-1`` and ``1``) are considered as referring
-#             to the center points of the input's corner pixels. If set to ``False``, they
-#             are instead considered as referring to the corner points of the input's corner
-#             pixels, making the sampling more resolution agnostic.
-#             This option parallels the ``align_corners`` option in
-#             :func:`interpolate`, and so whichever option is used here
-#             should also be used there to resize the input image before grid sampling.
-#             Default: ``False``
-# 
-#     Returns:
-#         output (Tensor): output Tensor
-# 
-#     .. _`Spatial Transformer Networks`:
-#         https://arxiv.org/abs/1506.02025
-# 
-#     .. warning::
-#         When ``align_corners = True``, the grid positions depend on the pixel
-#         size relative to the input image size, and so the locations sampled by
-#         :func:`grid_sample` will differ for the same input given at different
-#         resolutions (that is, after being upsampled or downsampled).
-#         The default behavior up to version 1.2.0 was ``align_corners = True``.
-#         Since then, the default behavior has been changed to ``align_corners = False``,
-#         in order to bring it in line with the default for :func:`interpolate`.
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, grid)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 grid_sample, tens_ops, input, grid, mode=mode, padding_mode=padding_mode,
-#                 align_corners=align_corners)
-#     if mode != 'bilinear' and mode != 'nearest':
-#         raise ValueError("nn.functional.grid_sample(): expected mode to be "
-#                          "'bilinear' or 'nearest', but got: '{}'".format(mode))
-#     if padding_mode != 'zeros' and padding_mode != 'border' and padding_mode != 'reflection':
-#         raise ValueError("nn.functional.grid_sample(): expected padding_mode "
-#                          "to be 'zeros', 'border', or 'reflection', "
-#                          "but got: '{}'".format(padding_mode))
-# 
-#     if mode == 'bilinear':
-#         mode_enum = 0
-#     else:  # mode == 'nearest'
-#         mode_enum = 1
-# 
-#     if padding_mode == 'zeros':
-#         padding_mode_enum = 0
-#     elif padding_mode == 'border':
-#         padding_mode_enum = 1
-#     else:  # padding_mode == 'reflection'
-#         padding_mode_enum = 2
-# 
-#     if align_corners is None:
-#         warnings.warn("Default grid_sample and affine_grid behavior has changed "
-#                       "to align_corners=False since 1.3.0. Please specify "
-#                       "align_corners=True if the old behavior is desired. "
-#                       "See the documentation of grid_sample for details.")
-#         align_corners = False
-# 
-#     return torch.grid_sampler(input, grid, mode_enum, padding_mode_enum, align_corners)
-# 
-stop('not implemented')
+nnf_grid_sample <- function(input, grid, mode = c("bilinear", "nearest"), 
+                            padding_mode = c("zeros", "border", "reflection"), 
+                            align_corners = FALSE) {
+  
+  if (mode == "bilinear")
+    mode_enum <- 0
+  else if (mode == "nearest")
+    mode_enum <- 1
+  else
+    value_error("Unknown mode name '{mode}'. Supported modes are 'bilinear'",
+                "and 'nearest'.")
+  
+  
+  if (padding_mode == "zeros")
+    padding_mode_enum <- 0
+  else if (padding_mode == "border")
+    padding_mode_enum <- 1
+  else if (padding_mode == "reflection")
+    padding_mode_enum <- 2
+  else
+    value_error("Unknown padding mode name '{padding_mode}'. Supported modes are",
+                "'zeros', 'border' and 'reflection'.")
+  
+  torch_grid_sampler(input = input, grid = grid, interpolation_mode = mode_enum,
+                     padding_mode = padding_mode_enum, align_corners = align_corners)
 }
 
 nnf_group_norm <- function() {
