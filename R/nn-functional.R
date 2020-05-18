@@ -312,127 +312,47 @@ nnf_fractional_max_pool2d <- function(input, kernel_size, output_size=NULL,
 }
 
 
-nnf_fractional_max_pool3d <- function(kernel_size, output_size, output_ratio, return_indices) {
-#     def fn(*args, **kwargs):
-#         dispatch_flag = False
-#         if arg_name in kwargs:
-#             dispatch_flag = kwargs[arg_name]
-#         elif arg_index < len(args):
-#             dispatch_flag = args[arg_index]
-# 
-#         if dispatch_flag:
-#             return if_true(*args, **kwargs)
-#         else:
-#             return if_false(*args, **kwargs)
-# 
-stop('not implemented')
+nnf_fractional_max_pool3d <- function(kernel_size, output_size = NULL, output_ratio = NULL, 
+                                      return_indices = FALSE, random_samples = NULL) {
+  
+  
+  if (is.null(output_size)) {
+    
+    if (length(output_size) == 1)
+      
+      output_ratio_ <- rep(output_size, 3)
+      output_size <- c(
+        input$size(2) * output_ratio_[1],
+        input$size(3) * output_ratio_[2],
+        input$size(4) * output_ratio_[3],
+      )
+  }
+  
+  if (is.null(random_samples)) {
+    random_samples <- torch_rand(input$size(0), input$size(1), 3, dtype = input$dtype, 
+                                 device = input$device)
+  }
+  
+  res <- torch_fractional_max_pool3d(
+    self = input, 
+    kernel_size = kernel_size,
+    output_size = output_size,
+    random_samples = random_samples
+  )
+  
+  
+  if (return_indices)
+    res
+  else
+    res[[1]]
 }
 
-nnf_fractional_max_pool3d_with_indices <- function(kernel_size, output_size, output_ratio, return_indices) {
-# def fractional_max_pool3d_with_indices(input, kernel_size, output_size=None,
-#                                        output_ratio=None, return_indices=False,
-#                                        _random_samples=None):
-#     # type: (Tensor, BroadcastingList3[int], Optional[BroadcastingList3[int]], Optional[BroadcastingList3[float]], bool, Optional[Tensor]) -> Tuple[Tensor, Tensor]  # noqa
-#     r"""Applies 3D fractional max pooling over an input signal composed of several input planes.
-# 
-#     Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
-# 
-#     The max-pooling operation is applied in :math:`kT \times kH \times kW` regions by a stochastic
-#     step size determined by the target output size.
-#     The number of output features is equal to the number of input planes.
-# 
-#     Args:
-#         kernel_size: the size of the window to take a max over.
-#                      Can be a single number :math:`k` (for a square kernel of :math:`k \times k \times k`)
-#                      or a tuple `(kT, kH, kW)`
-#         output_size: the target output size of the form :math:`oT \times oH \times oW`.
-#                      Can be a tuple `(oT, oH, oW)` or a single number :math:`oH` for a cubic output
-#                       :math:`oH \times oH \times oH`
-#         output_ratio: If one wants to have an output size as a ratio of the input size, this option can be given.
-#                       This has to be a number or tuple in the range (0, 1)
-#         return_indices: if ``True``, will return the indices along with the outputs.
-#                         Useful to pass to :func:`~torch.nn.functional.max_unpool3d`.
-# 
-#     Examples::
-#         >>> input = torch.randn(20, 16, 50, 32, 16)
-#         >>> # pool of cubic window of size=3, and target output size 13x12x11
-#         >>> F.fractional_max_pool3d(input, 3, output_size=(13, 12, 11))
-#         >>> # pool of cubic window and target output size being half of input size
-#         >>> F.fractional_max_pool3d(input, 3, output_ratio=(0.5, 0.5, 0.5))
-# 
-#     .. _Fractional MaxPooling:
-#         http://arxiv.org/abs/1412.6071
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 fractional_max_pool3d_with_indices, (input,), input, kernel_size,
-#                 output_size=output_size, output_ratio=output_ratio,
-#                 return_indices=return_indices, _random_samples=_random_samples)
-#     if output_size is None and output_ratio is None:
-#         raise ValueError("fractional_max_pool3d requires specifying either "
-#                          "an output_size or an output_ratio")
-#     if output_size is None:
-#         assert output_ratio is not None
-#         _output_ratio = _triple(output_ratio)
-#         output_size = [int(input.size(2) * _output_ratio[0]),
-#                        int(input.size(3) * _output_ratio[1]),
-#                        int(input.size(4) * _output_ratio[2])]
-# 
-#     if _random_samples is None:
-#         _random_samples = torch.rand(input.size(0), input.size(1), 3, dtype=input.dtype, device=input.device)
-#     return torch._C._nn.fractional_max_pool3d(input, kernel_size, output_size, _random_samples)
-# 
-stop('not implemented')
+nnf_gelu <- function(input) {
+  torch_gelu(self = input)
 }
 
-nnf_gelu <- function() {
-# def gelu(input):
-#     r"""gelu(input) -> Tensor
-# 
-#     Applies element-wise the function
-#     :math:`\text{GELU}(x) = x * \Phi(x)`
-# 
-#     where :math:`\Phi(x)` is the Cumulative Distribution Function for Gaussian Distribution.
-# 
-#     See `Gaussian Error Linear Units (GELUs) <https://arxiv.org/abs/1606.08415>`_.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(gelu, (input,), input)
-#     return torch._C._nn.gelu(input)
-# 
-stop('not implemented')
-}
-
-nnf_glu <- function(input, dim) {
-# def glu(input, dim=-1):
-#     # type: (Tensor, int) -> Tensor
-#     r"""
-#     glu(input, dim=-1) -> Tensor
-# 
-#     The gated linear unit. Computes:
-# 
-#     .. math ::
-#         \text{GLU}(a, b) = a \otimes \sigma(b)
-# 
-#     where `input` is split in half along `dim` to form `a` and `b`, :math:`\sigma`
-#     is the sigmoid function and :math:`\otimes` is the element-wise product between matrices.
-# 
-#     See `Language Modeling with Gated Convolutional Networks <https://arxiv.org/abs/1612.08083>`_.
-# 
-#     Args:
-#         input (Tensor): input tensor
-#         dim (int): dimension on which to split the input. Default: -1
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(glu, (input,), input, dim=dim)
-#     if input.dim() == 0:
-#         raise RuntimeError("glu does not suppport scalars because halving size must be even")
-#     return torch._C._nn.glu(input, dim)
-# 
-stop('not implemented')
+nnf_glu <- function(input, dim = -1) {
+  torch_glu(self = input, dim = dim)
 }
 
 nnf_grad <- function() {

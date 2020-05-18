@@ -48,8 +48,13 @@ Tensor <- R6::R6Class(
     dim = function() {
       length(self$size())
     },
-    size = function() {
-      cpp_tensor_dim(self$ptr)
+    size = function(dim) {
+      x <- cpp_tensor_dim(self$ptr)
+      
+      if (missing(dim))
+        return(x)
+      
+      x[dim + 1]
     }
   ),
   active = list(
