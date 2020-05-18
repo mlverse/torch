@@ -134,9 +134,8 @@ nnf_conv3d <- function(input, weight, bias = NULL, stride = 1, padding = 0, dila
   )
 }
 
-nnf_conv_tbc <- function(input, weight, bias, pad) {
-# 
-stop('not implemented')
+nnf_conv_tbc <- function(input, weight, bias, pad = 0) {
+  torch_conv_tbc(self = input, weight = weight, bias = bias, pad = pad)
 }
 
 nnf_conv_transpose1d <- function(input, weight, bias=NULL, stride=1, padding=0, 
