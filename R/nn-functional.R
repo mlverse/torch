@@ -771,71 +771,26 @@ nnf_handle_torch_function <- function() {
 stop('not implemented')
 }
 
-nnf_hardshrink <- function() {
-# def hardshrink(input, lambd=0.5):
-#     # type: (Tensor, float) -> Tensor
-#     r"""
-#     hardshrink(input, lambd=0.5) -> Tensor
-# 
-#     Applies the hard shrinkage function element-wise
-# 
-#     See :class:`~torch.nn.Hardshrink` for more details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(hardshrink, (input,), input, lambd=lambd)
-#     return torch.hardshrink(input, lambd)
-# 
-stop('not implemented')
+nnf_hardshrink <- function(input, lambd = 0.5) {
+  torch_hardshrink(input, lambd)
 }
 
-nnf_hardsigmoid <- function(inplace) {
-# def hardsigmoid(input, inplace=False):
-#     r"""hardsigmoid(input) -> Tensor
-# 
-#     Applies the element-wise function :math:`\text{Hardsigmoid}(x) = \frac{ReLU6(x + 3)}{6}`
-# 
-#     Args:
-#         inplace: If set to ``True``, will do this operation in-place. Default: ``False``
-# 
-#     See :class:`~torch.nn.Hardsigmoid` for more details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(hardsigmoid, (input,), input, inplace=inplace)
-#     if inplace:
-#         return torch._C._nn.hardsigmoid_(input)
-#     return torch._C._nn.hardsigmoid(input)
-# 
-stop('not implemented')
+nnf_hardsigmoid <- function(input, inplace = FALSE) {
+  if (inplace)
+    torch_hardsigmoid_(input)
+  else
+    torch_hardsigmoid(input)
 }
 
-nnf_hardtanh <- function() {
-# def hardtanh(input, min_val=-1., max_val=1., inplace=False):
-#     # type: (Tensor, float, float, bool) -> Tensor
-#     r"""
-#     hardtanh(input, min_val=-1., max_val=1., inplace=False) -> Tensor
-# 
-#     Applies the HardTanh function element-wise. See :class:`~torch.nn.Hardtanh` for more
-#     details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 hardtanh, (input,), input, min_val=min_val, max_val=max_val,
-#                 inplace=inplace)
-#     if inplace:
-#         result = torch._C._nn.hardtanh_(input, min_val, max_val)
-#     else:
-#         result = torch._C._nn.hardtanh(input, min_val, max_val)
-#     return result
-# 
-stop('not implemented')
+nnf_hardtanh <- function(input, min_val = -1, max_val = 1, inplace = FALSE) {
+  if (inplace)
+    torch_hardtanh_(input, min_val, max_val)
+  else
+    torch_hardtanh(input, min_val, max_val)
 }
 
-nnf_hardtanh_ <- function() {
-# 
-stop('not implemented')
+nnf_hardtanh_ <- function(input, min_val = -1, max_val = 1) {
+  nnf_hardtanh(input, min_val, max_val, inplace = TRUE)
 }
 
 nnf_has_torch_function <- function() {
@@ -857,52 +812,18 @@ nnf_has_torch_function <- function() {
 stop('not implemented')
 }
 
-nnf_hinge_embedding_loss <- function() {
-# def hinge_embedding_loss(input, target, margin=1.0, size_average=None,
-#                          reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, float, Optional[bool], Optional[bool], str) -> Tensor
-#     r"""hinge_embedding_loss(input, target, margin=1.0, size_average=None, reduce=None, reduction='mean') -> Tensor
-# 
-#     See :class:`~torch.nn.HingeEmbeddingLoss` for details.
-#     """  # noqa
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 hinge_embedding_loss, tens_ops, input, target, margin=margin,
-#                 size_average=size_average, reduce=reduce, reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
-#     else:
-#         reduction_enum = _Reduction.get_enum(reduction)
-#     return torch.hinge_embedding_loss(input, target, margin, reduction_enum)
-# 
-stop('not implemented')
+nnf_hinge_embedding_loss <- function(input, target, margin = 1, reduction = "mean") {
+  torch_hinge_embedding_loss(input, target, margin, 
+                             reduction = reduction_enum(reduction))
 }
 
-nnf_instance_norm <- function() {
-# def instance_norm(input, running_mean=None, running_var=None, weight=None,
-#                   bias=None, use_input_stats=True, momentum=0.1, eps=1e-5):
-#     # type: (Tensor, Optional[Tensor], Optional[Tensor], Optional[Tensor], Optional[Tensor], bool, float, float) -> Tensor  # noqa
-#     r"""Applies Instance Normalization for each channel in each data sample in a
-#     batch.
-# 
-#     See :class:`~torch.nn.InstanceNorm1d`, :class:`~torch.nn.InstanceNorm2d`,
-#     :class:`~torch.nn.InstanceNorm3d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 instance_norm, (input,), input, running_mean=running_mean,
-#                 running_var=running_var, weight=weight, bias=bias,
-#                 use_input_stats=use_input_stats, momentum=momentum, eps=eps)
-#     _verify_batch_size(input.size())
-#     return torch.instance_norm(
-#         input, weight, bias, running_mean, running_var,
-#         use_input_stats, momentum, eps, torch.backends.cudnn.enabled
-#     )
-# 
-stop('not implemented')
+nnf_instance_norm <- function(input, running_mean = NULL, running_var = NULL,
+                              weight = NULL, bias = NULL, use_input_stats = TRUE,
+                              momentum = 0.1, eps = 1e-5) {
+  
+  torch_instance_norm(input, weight, bias, running_mean, running_var,
+                      use_input_stats, momentum, eps, FALSE #TODO backend_cudnn_enabled)
+  )
 }
 
 nnf_interpolate <- function(input, size, scale_factor, mode, align_corners, recompute_scale_factor) {
