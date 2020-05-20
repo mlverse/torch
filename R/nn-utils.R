@@ -18,3 +18,14 @@ list_with_default <- function(out_size, defaults) {
     }
   )
 }
+
+nn_util_ntuple <- function(n) {
+  function(x) {
+   if (length(x) > 1)
+     return(x)
+    
+    rep(x, n)
+  }
+}
+
+nn_util_pair <- nn_util_ntuple(2)

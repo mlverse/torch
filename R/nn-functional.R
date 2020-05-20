@@ -1073,79 +1073,38 @@ nnf_logsigmoid <- function(input) {
   torch_log_sigmoid(input)
 }
 
-nnf_lp_pool1d <- function() {
-# def lp_pool1d(input, norm_type, kernel_size, stride=None, ceil_mode=False):
-#     # type: (Tensor, float, int, Optional[BroadcastingList1[int]], bool) -> Tensor
-#     r"""Applies a 1D power-average pooling over an input signal composed of
-#     several input planes. If the sum of all inputs to the power of `p` is
-#     zero, the gradient is set to zero as well.
-# 
-#     See :class:`~torch.nn.LPPool1d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 lp_pool1d, (input,), input, norm_type, kernel_size, stride=stride,
-#                 ceil_mode=ceil_mode)
-#     if stride is not None:
-#         out = avg_pool1d(input.pow(norm_type), kernel_size, stride, 0, ceil_mode)
-#     else:
-#         out = avg_pool1d(input.pow(norm_type), kernel_size, padding=0, ceil_mode=ceil_mode)
-# 
-#     return (torch.sign(out) * relu(torch.abs(out))).mul(kernel_size).pow(1. / norm_type)
-# 
-stop('not implemented')
+nnf_lp_pool1d <- function(input, norm_type, kernel_size, stride = NULL, 
+                          ceil_mode = FALSE) {
+  
+  if (!is.null(stride)) {
+    out <- nnf_avg_pool1d(input$pow(norm_type), kernel_size, stride, 0, ceil_mode)
+  } else {
+    out <- nnf_avg_pool1d(input$pow(norm_type), kernel_size, padding = 0, 
+                          ceil_mode = ceil_mode)
+    
+  }
+  
+  (torch_sign(out) * nnf_relu(torch_abs(out)))$mul(kernel_size)$pow(1/norm_type)
 }
 
-nnf_lp_pool2d <- function() {
-# def lp_pool2d(input, norm_type, kernel_size, stride=None, ceil_mode=False):
-#     # type: (Tensor, float, int, Optional[BroadcastingList2[int]], bool) -> Tensor
-#     r"""Applies a 2D power-average pooling over an input signal composed of
-#     several input planes. If the sum of all inputs to the power of `p` is
-#     zero, the gradient is set to zero as well.
-# 
-#     See :class:`~torch.nn.LPPool2d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 lp_pool2d, (input,), input, norm_type, kernel_size, stride=stride,
-#                 ceil_mode=ceil_mode)
-#     kw, kh = utils._pair(kernel_size)
-#     if stride is not None:
-#         out = avg_pool2d(input.pow(norm_type), kernel_size, stride, 0, ceil_mode)
-#     else:
-#         out = avg_pool2d(input.pow(norm_type), kernel_size, padding=0, ceil_mode=ceil_mode)
-# 
-#     return (torch.sign(out) * relu(torch.abs(out))).mul(kw * kh).pow(1. / norm_type)
-# 
-stop('not implemented')
+nnf_lp_pool2d <- function(input, norm_type, kernel_size, stride = NULL, 
+                          ceil_mode = FALSE) {
+  
+  k <- nn_util_pair(kernel_size)
+  if (!is.null(stride)) {
+    out <- nnf_avg_pool2d(input$pow(norm_type), kernel_size, stride, 0, ceil_mode)
+  } else {
+    out <- nnf_avg_pool2d(input$pow(norm_type), kernel_size, padding = 0, 
+                          ceil_mode = ceil_mode)
+  }
+  
+  (torch$sign(out) * nnf_relu(torch$abs(out)))$mul(k[[1]] * k[[2]])$pow(1/norm_type)
 }
 
-nnf_margin_ranking_loss <- function() {
-# def margin_ranking_loss(input1, input2, target, margin=0, size_average=None,
-#                         reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, Tensor, float, Optional[bool], Optional[bool], str) -> Tensor
-#     r"""margin_ranking_loss(input1, input2, target, margin=0, size_average=None, reduce=None, reduction='mean') -> Tensor
-# 
-#     See :class:`~torch.nn.MarginRankingLoss` for details.
-#     """  # noqa
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input1, input2, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 margin_ranking_loss, tens_ops, input1, input2, target, margin=margin,
-#                 size_average=size_average, reduce=reduce, reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
-#     else:
-#         reduction_enum = _Reduction.get_enum(reduction)
-#     if input1.dim() == 0 or input2.dim() == 0 or target.dim() == 0:
-#         raise RuntimeError(("margin_ranking_loss does not support scalars, got sizes: "
-#                             "input1: {}, input2: {}, target: {} ".format(input1.size(), input2.size(), target.size())))
-#     return torch.margin_ranking_loss(input1, input2, target, margin, reduction_enum)
-# 
-stop('not implemented')
+nnf_margin_ranking_loss <- function(input1, input2, target, margin = 0,
+                                    reduction = "mean") {
+  torch_margin_ranking_loss(input1, input2, target, margin, 
+                            reduction_enum(reduction))
 }
 
 nnf_math <- function() {
