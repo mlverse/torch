@@ -2018,46 +2018,19 @@ nnf_prelu <- function() {
 stop('not implemented')
 }
 
-nnf_relu <- function() {
-# def relu(input, inplace=False):
-#     # type: (Tensor, bool) -> Tensor
-#     r"""relu(input, inplace=False) -> Tensor
-# 
-#     Applies the rectified linear unit function element-wise. See
-#     :class:`~torch.nn.ReLU` for more details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(relu, (input,), input, inplace=inplace)
-#     if inplace:
-#         result = torch.relu_(input)
-#     else:
-#         result = torch.relu(input)
-#     return result
-# 
-stop('not implemented')
+nnf_relu <- function(input, inplace = FALSE) {
+  if (inplace)
+    torch_relu_(input)
+  else
+    torch_relu(input)
 }
 
-nnf_relu6 <- function() {
-# def relu6(input, inplace=False):
-#     # type: (Tensor, bool) -> Tensor
-#     r"""relu6(input, inplace=False) -> Tensor
-# 
-#     Applies the element-wise function :math:`\text{ReLU6}(x) = \min(\max(0,x), 6)`.
-# 
-#     See :class:`~torch.nn.ReLU6` for more details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(relu6, (input,), input, inplace=inplace)
-#     return hardtanh(input, 0., 6., inplace)
-# 
-stop('not implemented')
+nnf_relu6 <- function(input, inplace = FALSE) {
+  nnf_hardtanh(input, 0, 6, inplace)
 }
 
-nnf_relu_ <- function() {
-# 
-stop('not implemented')
+nnf_relu_ <- function(input) {
+  nnf_relu(input, inplace = TRUE)
 }
 
 nnf_rrelu <- function() {
