@@ -1039,37 +1039,24 @@ nnf_linear <- function(input, weight, bias = NULL) {
   ret
 }
 
-nnf_local_response_norm <- function() {
-# def local_response_norm(input, size, alpha=1e-4, beta=0.75, k=1.):
-#     # type: (Tensor, int, float, float, float) -> Tensor
-#     r"""Applies local response normalization over an input signal composed of
-#     several input planes, where channels occupy the second dimension.
-#     Applies normalization across channels.
-# 
-#     See :class:`~torch.nn.LocalResponseNorm` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 local_response_norm, (input,), input, size, alpha=alpha, beta=beta, k=k)
-#     dim = input.dim()
-#     if dim < 3:
-#         raise ValueError('Expected 3D or higher dimensionality \
-#                          input (got {} dimensions)'.format(dim))
-#     div = input.mul(input).unsqueeze(1)
-#     if dim == 3:
-#         div = pad(div, (0, 0, size // 2, (size - 1) // 2))
-#         div = avg_pool2d(div, (size, 1), stride=1).squeeze(1)
-#     else:
-#         sizes = input.size()
-#         div = div.view(sizes[0], 1, sizes[1], sizes[2], -1)
-#         div = pad(div, (0, 0, 0, 0, size // 2, (size - 1) // 2))
-#         div = avg_pool3d(div, (size, 1, 1), stride=1).squeeze(1)
-#         div = div.view(sizes)
-#     div = div.mul(alpha).add(k).pow(beta)
-#     return input / div
-# 
-stop('not implemented')
+nnf_local_response_norm <- function(input, size, alpha = 1e-4, beta = 0.75, k = 1) {
+  
+  dim <- input$dim()
+  div <- input$mul(input)$unsqueeze(1)
+  
+  if (dim == 3) {
+    div <- nnf_pad(div, c(0, 0, as.integer(size/2), as.integer((size - 1)/2)))
+    div <- nnf_avg_pool2d(div, c(size, 1), stride = 1)$squeeze(1)
+  } else {
+    sizes <- input$size()
+    div <- div$view(sizes[1], 1, sizes[2], sizes[3], -1)
+    div <- nnf_pad(div, c(0,0,0,0, as.integer(size/2), as.integer((size - 1)/2)))
+    div <- nnf_avg_pool3d(div, c(size, 1, 1), stride = 1)$squeeze(1)
+    div <- div$view(sizes)
+  }
+  
+  div <- div$mul(alpha)$add(k)$pow(beta)
+  input/div
 }
 
 nnf_log_softmax <- function(input, dim, dtype) {
@@ -1920,110 +1907,86 @@ nnf_one_hot <- function(tensor, num_classes) {
 stop('not implemented')
 }
 
-nnf_pad <- function(input, pad, mode, value) {
-# def _pad(input, pad, mode='constant', value=0):
-#     # type: (Tensor, List[int], str, float) -> Tensor
-#     r"""Pads tensor.
-# 
-#     Padding size:
-#         The padding size by which to pad some dimensions of :attr:`input`
-#         are described starting from the last dimension and moving forward.
-#         :math:`\left\lfloor\frac{\text{len(pad)}}{2}\right\rfloor` dimensions
-#         of ``input`` will be padded.
-#         For example, to pad only the last dimension of the input tensor, then
-#         :attr:`pad` has the form
-#         :math:`(\text{padding\_left}, \text{padding\_right})`;
-#         to pad the last 2 dimensions of the input tensor, then use
-#         :math:`(\text{padding\_left}, \text{padding\_right},`
-#         :math:`\text{padding\_top}, \text{padding\_bottom})`;
-#         to pad the last 3 dimensions, use
-#         :math:`(\text{padding\_left}, \text{padding\_right},`
-#         :math:`\text{padding\_top}, \text{padding\_bottom}`
-#         :math:`\text{padding\_front}, \text{padding\_back})`.
-# 
-#     Padding mode:
-#         See :class:`torch.nn.ConstantPad2d`, :class:`torch.nn.ReflectionPad2d`, and
-#         :class:`torch.nn.ReplicationPad2d` for concrete examples on how each of the
-#         padding modes works. Constant padding is implemented for arbitrary dimensions.
-#         Replicate padding is implemented for padding the last 3 dimensions of 5D input
-#         tensor, or the last 2 dimensions of 4D input tensor, or the last dimension of
-#         3D input tensor. Reflect padding is only implemented for padding the last 2
-#         dimensions of 4D input tensor, or the last dimension of 3D input tensor.
-# 
-#     .. include:: cuda_deterministic_backward.rst
-# 
-#     Args:
-#         input (Tensor): N-dimensional tensor
-#         pad (tuple): m-elements tuple, where
-#             :math:`\frac{m}{2} \leq` input dimensions and :math:`m` is even.
-#         mode: ``'constant'``, ``'reflect'``, ``'replicate'`` or ``'circular'``.
-#             Default: ``'constant'``
-#         value: fill value for ``'constant'`` padding. Default: ``0``
-# 
-#     Examples::
-# 
-#         >>> t4d = torch.empty(3, 3, 4, 2)
-#         >>> p1d = (1, 1) # pad last dim by 1 on each side
-#         >>> out = F.pad(t4d, p1d, "constant", 0)  # effectively zero padding
-#         >>> print(out.size())
-#         torch.Size([3, 3, 4, 4])
-#         >>> p2d = (1, 1, 2, 2) # pad last dim by (1, 1) and 2nd to last by (2, 2)
-#         >>> out = F.pad(t4d, p2d, "constant", 0)
-#         >>> print(out.size())
-#         torch.Size([3, 3, 8, 4])
-#         >>> t4d = torch.empty(3, 3, 4, 2)
-#         >>> p3d = (0, 1, 2, 1, 3, 3) # pad by (0, 1), (2, 1), and (3, 3)
-#         >>> out = F.pad(t4d, p3d, "constant", 0)
-#         >>> print(out.size())
-#         torch.Size([3, 9, 7, 3])
-# 
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 _pad, (input,), input, pad, mode=mode, value=value)
-#     assert len(pad) % 2 == 0, 'Padding length must be divisible by 2'
-#     assert len(pad) // 2 <= input.dim(), 'Padding length too large'
-#     if mode == 'constant':
-#         return _VF.constant_pad_nd(input, pad, value)
-#     else:
-#         assert value == 0, 'Padding mode "{}"" doesn\'t take in value argument'.format(mode)
-#         if input.dim() == 3:
-#             assert len(pad) == 2, '3D tensors expect 2 values for padding'
-#             if mode == 'reflect':
-#                 return torch._C._nn.reflection_pad1d(input, pad)
-#             elif mode == 'replicate':
-#                 return torch._C._nn.replication_pad1d(input, pad)
-#             elif mode == 'circular':
-#                 return _pad_circular(input, pad)
-#             else:
-#                 raise NotImplementedError
-# 
-#         elif input.dim() == 4:
-#             assert len(pad) == 4, '4D tensors expect 4 values for padding'
-#             if mode == 'reflect':
-#                 return torch._C._nn.reflection_pad2d(input, pad)
-#             elif mode == 'replicate':
-#                 return torch._C._nn.replication_pad2d(input, pad)
-#             elif mode == 'circular':
-#                 return _pad_circular(input, pad)
-#             else:
-#                 raise NotImplementedError
-# 
-#         elif input.dim() == 5:
-#             assert len(pad) == 6, '5D tensors expect 6 values for padding'
-#             if mode == 'reflect':
-#                 raise NotImplementedError
-#             elif mode == 'replicate':
-#                 return torch._C._nn.replication_pad3d(input, pad)
-#             elif mode == 'circular':
-#                 return _pad_circular(input, pad)
-#             else:
-#                 raise NotImplementedError
-#         else:
-#             raise NotImplementedError("Only 3D, 4D, 5D padding with non-constant padding are supported for now")
-# 
-stop('not implemented')
+nnf_pad_circular <- function(input, padding) {
+  
+  input <- torch_cat(list(input, input[,,1:tail(padding,1)]), dim = 2)
+  input <- torch_cat(list(input[,,c(
+    (-(rev(padding)[[1]] + rev(padding)[[2]])):(-rev(padding)[1])
+  )],
+  input), dim = 2)
+  
+  if (length(padding) > 2) {
+    input <- torch_cat(list(input, input[,,,1:(rev(padding)[3])]), dim = 3)
+    input <- torch_cat(list(input[,,,c(
+      (-(rev(padding)[3] + rev(padding)[4])):(-rev(padding[3]))
+    )],
+    input), dim = 3)
+  }
+  
+  if (length(padding) > 4) {
+    input <- torch_cat(list(input, input[,,,,1:(rev(padding)[5])]), dim = 4)
+    input <- torch_cat(list(input[,,,,c(
+      (-(rev(padding)[5] + rev(padding)[6])):(-rev(padding[5]))
+    )],
+    input), dim = 4)
+  }
+  
+  input
+}
+
+nnf_pad <- function(input, pad, mode = "constant", value = 0) {
+  
+  if (mode == "constant") {
+    return(torch_constant_pad_nd(input, pad, value))
+  } else {
+    
+    if (input$dim() == 3) {
+      
+      
+      if (mode == "reflect")
+        return(torch_reflection_pad1d(input, pad))
+      
+      if (mode == "replicate")
+        return(torch_replication_pad1d(input, pad))
+      
+      if (mode == "circular")
+        return(nnf_pad_circular(input, pad))
+      
+      not_implemented_error()
+      
+    } 
+    
+    if (input$dim() == 4) {
+      
+      if (mode == "reflect")
+        return(torch_reflection_pad2d(input, pad))
+      
+      if (mode == "replicate")
+        return(torch_replication_pad2d(input, pad))
+      
+      if (mode == "circular")
+        return(nnf_pad_circular(input, pad))
+      
+      not_implemented_error()
+    }
+    
+    if (input$dim() == 5) {
+      
+      if (mode == "reflect")
+        not_implemented_error()
+      
+      if (mode == "replicate")
+        return(torch_replication_pad3d(input, pad))
+      
+      if (mode == "circular")
+        return(nnf_pad_circular(input, pad))
+      
+      
+    }
+    
+  }
+  
+  not_implemented_error("Only 3D, 4D, 5D padding with non-constant padding are supported for now")
 }
 
 nnf_pairwise_distance <- function() {
