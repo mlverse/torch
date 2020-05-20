@@ -1107,125 +1107,36 @@ nnf_margin_ranking_loss <- function(input1, input2, target, margin = 0,
                             reduction_enum(reduction))
 }
 
-nnf_math <- function() {
-# 
-stop('not implemented')
+nnf_max_pool1d <- function(input, kernel_size, stride=NULL, padding=0, dilation=1,
+                           ceil_mode=FALSE, return_indices=FALSE) {
+  
+  if (return_indices)
+    torch_max_pool1d_with_indices(input, kernel_size, stride, padding, dilation,
+                     ceil_mode)
+  else
+    torch_max_pool1d(input, kernel_size, stride, padding, dilation,
+                     ceil_mode)
 }
 
-nnf_max_pool1d <- function() {
-#     def fn(*args, **kwargs):
-#         dispatch_flag = False
-#         if arg_name in kwargs:
-#             dispatch_flag = kwargs[arg_name]
-#         elif arg_index < len(args):
-#             dispatch_flag = args[arg_index]
-# 
-#         if dispatch_flag:
-#             return if_true(*args, **kwargs)
-#         else:
-#             return if_false(*args, **kwargs)
-# 
-stop('not implemented')
+
+nnf_max_pool2d <- function(input, kernel_size, stride=NULL, padding=0, dilation=1,
+                           ceil_mode=FALSE, return_indices=FALSE) {
+  if (return_indices)
+    torch_max_pool2d_with_indices(input, kernel_size, stride, padding, dilation,
+                                  ceil_mode)
+  else
+    torch_max_pool2d(input, kernel_size, stride, padding, dilation,
+                     ceil_mode)
 }
 
-nnf_max_pool1d_with_indices <- function() {
-# def max_pool1d_with_indices(input, kernel_size, stride=None, padding=0,
-#                             dilation=1, ceil_mode=False, return_indices=False):
-#     # type: (Tensor, BroadcastingList1[int], Optional[BroadcastingList1[int]], BroadcastingList1[int], BroadcastingList1[int], bool, bool) -> Tuple[Tensor, Tensor]  # noqa
-#     r"""Applies a 1D max pooling over an input signal composed of several input
-#     planes.
-# 
-#     See :class:`~torch.nn.MaxPool1d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 max_pool1d_with_indices, (input,), input, kernel_size,
-#                 stride=stride, padding=padding, dilation=dilation, ceil_mode=ceil_mode,
-#                 return_indices=return_indices)
-#     if stride is None:
-#         stride = torch.jit.annotate(List[int], [])
-#     return torch.max_pool1d_with_indices(
-#         input, kernel_size, stride, padding, dilation, ceil_mode)
-# 
-stop('not implemented')
-}
-
-nnf_max_pool2d <- function() {
-#     def fn(*args, **kwargs):
-#         dispatch_flag = False
-#         if arg_name in kwargs:
-#             dispatch_flag = kwargs[arg_name]
-#         elif arg_index < len(args):
-#             dispatch_flag = args[arg_index]
-# 
-#         if dispatch_flag:
-#             return if_true(*args, **kwargs)
-#         else:
-#             return if_false(*args, **kwargs)
-# 
-stop('not implemented')
-}
-
-nnf_max_pool2d_with_indices <- function() {
-# def max_pool2d_with_indices(input, kernel_size, stride=None, padding=0, dilation=1,
-#                             ceil_mode=False, return_indices=False):
-#     # type: (Tensor, BroadcastingList2[int], Optional[BroadcastingList2[int]], BroadcastingList2[int], BroadcastingList2[int], bool, bool) -> Tuple[Tensor, Tensor]  # noqa
-#     r"""Applies a 2D max pooling over an input signal composed of several input
-#     planes.
-# 
-#     See :class:`~torch.nn.MaxPool2d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 max_pool2d_with_indices, (input,), input, kernel_size,
-#                 stride=stride, padding=padding, dilation=dilation, ceil_mode=ceil_mode,
-#                 return_indices=return_indices)
-#     if stride is None:
-#         stride = torch.jit.annotate(List[int], [])
-#     return torch._C._nn.max_pool2d_with_indices(input, kernel_size, stride, padding, dilation, ceil_mode)
-# 
-stop('not implemented')
-}
-
-nnf_max_pool3d <- function() {
-#     def fn(*args, **kwargs):
-#         dispatch_flag = False
-#         if arg_name in kwargs:
-#             dispatch_flag = kwargs[arg_name]
-#         elif arg_index < len(args):
-#             dispatch_flag = args[arg_index]
-# 
-#         if dispatch_flag:
-#             return if_true(*args, **kwargs)
-#         else:
-#             return if_false(*args, **kwargs)
-# 
-stop('not implemented')
-}
-
-nnf_max_pool3d_with_indices <- function() {
-# def max_pool3d_with_indices(input, kernel_size, stride=None, padding=0,
-#                             dilation=1, ceil_mode=False, return_indices=False):
-#     # type: (Tensor, BroadcastingList3[int], Optional[BroadcastingList3[int]], BroadcastingList3[int], BroadcastingList3[int], bool, bool) -> Tuple[Tensor, Tensor]  # noqa
-#     r"""Applies a 3D max pooling over an input signal composed of several input
-#     planes.
-# 
-#     See :class:`~torch.nn.MaxPool3d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 max_pool3d_with_indices, (input,), input, kernel_size,
-#                 stride=stride, padding=padding, dilation=dilation, ceil_mode=ceil_mode,
-#                 return_indices=return_indices)
-#     if stride is None:
-#         stride = torch.jit.annotate(List[int], [])
-#     return torch._C._nn.max_pool3d_with_indices(
-#         input, kernel_size, stride, padding, dilation, ceil_mode)
-# 
-stop('not implemented')
+nnf_max_pool3d <- function(input, kernel_size, stride=NULL, padding=0, dilation=1,
+                           ceil_mode=FALSE, return_indices=FALSE) {
+  if (return_indices)
+    torch_max_pool3d_with_indices(input, kernel_size, stride, padding, dilation,
+                                  ceil_mode)
+  else
+    torch_max_pool3d(input, kernel_size, stride, padding, dilation,
+                     ceil_mode)
 }
 
 nnf_max_unpool1d <- function() {
