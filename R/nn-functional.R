@@ -1010,78 +1010,33 @@ nnf_l1_loss <- function(input, target, reduction = "mean") {
   ret
 }
 
-nnf_layer_norm <- function() {
-# def layer_norm(input, normalized_shape, weight=None, bias=None, eps=1e-5):
-#     # type: (Tensor, List[int], Optional[Tensor], Optional[Tensor], float) -> Tensor
-#     r"""Applies Layer Normalization for last certain number of dimensions.
-# 
-#     See :class:`~torch.nn.LayerNorm` for details.
-#     """
-#     return torch.layer_norm(input, normalized_shape, weight, bias, eps,
-#                             torch.backends.cudnn.enabled)
-# 
-stop('not implemented')
+nnf_layer_norm <- function(input, normalized_shape, weight = NULL, bias = NULL,
+                           eps = 1e-5) {
+  torch_layer_norm(
+    input, normalized_shape, weight, bias, eps, FALSE #TODO backends_cudnn_enabled
+  )
 }
 
-nnf_leaky_relu <- function() {
-# def leaky_relu(input, negative_slope=0.01, inplace=False):
-#     # type: (Tensor, float, bool) -> Tensor
-#     r"""
-#     leaky_relu(input, negative_slope=0.01, inplace=False) -> Tensor
-# 
-#     Applies element-wise,
-#     :math:`\text{LeakyReLU}(x) = \max(0, x) + \text{negative\_slope} * \min(0, x)`
-# 
-#     See :class:`~torch.nn.LeakyReLU` for more details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 leaky_relu, (input,), input, negative_slope=negative_slope,
-#                 inplace=inplace)
-#     if inplace:
-#         result = torch._C._nn.leaky_relu_(input, negative_slope)
-#     else:
-#         result = torch._C._nn.leaky_relu(input, negative_slope)
-#     return result
-# 
-stop('not implemented')
+nnf_leaky_relu <- function(input, negative_slope = 0.01, inplace = FALSE) {
+  if (inplace)
+    torch_leaky_relu_(input, negative_slope)
+  else
+    torch_leaky_relu(input, negative_slope)
 }
 
-nnf_leaky_relu_ <- function() {
-# 
-stop('not implemented')
-}
 
-nnf_linear <- function() {
-# def linear(input, weight, bias=None):
-#     # type: (Tensor, Tensor, Optional[Tensor]) -> Tensor
-#     r"""
-#     Applies a linear transformation to the incoming data: :math:`y = xA^T + b`.
-# 
-#     Shape:
-# 
-#         - Input: :math:`(N, *, in\_features)` where `*` means any number of
-#           additional dimensions
-#         - Weight: :math:`(out\_features, in\_features)`
-#         - Bias: :math:`(out\_features)`
-#         - Output: :math:`(N, *, out\_features)`
-#     """
-#     tens_ops = (input, weight)
-#     if not torch.jit.is_scripting():
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(linear, tens_ops, input, weight, bias=bias)
-#     if input.dim() == 2 and bias is not None:
-#         # fused op is marginally faster
-#         ret = torch.addmm(bias, input, weight.t())
-#     else:
-#         output = input.matmul(weight.t())
-#         if bias is not None:
-#             output += bias
-#         ret = output
-#     return ret
-# 
-stop('not implemented')
+nnf_linear <- function(input, weight, bias = NULL) {
+  
+  if (input$dim() == 2 && !is.null(bias)) {
+    ret <- torch_addmm(bias, input, weight$t())
+  } else {
+    output <- input$matmul(weight$t())
+    if (!is.null(bias))
+      output <- output + bias
+    ret <- output
+  }
+  
+  ret
 }
 
 nnf_local_response_norm <- function() {
