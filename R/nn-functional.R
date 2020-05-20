@@ -1059,42 +1059,18 @@ nnf_local_response_norm <- function(input, size, alpha = 1e-4, beta = 0.75, k = 
   input/div
 }
 
-nnf_log_softmax <- function(input, dim, dtype) {
-# def log_softmax(input, dim=None, _stacklevel=3, dtype=None):
-#     # type: (Tensor, Optional[int], int, Optional[int]) -> Tensor
-#     r"""Applies a softmax followed by a logarithm.
-# 
-#     While mathematically equivalent to log(softmax(x)), doing these two
-#     operations separately is slower, and numerically unstable. This function
-#     uses an alternative formulation to compute the output and gradient correctly.
-# 
-#     See :class:`~torch.nn.LogSoftmax` for more details.
-# 
-#     Arguments:
-#         input (Tensor): input
-#         dim (int): A dimension along which log_softmax will be computed.
-#         dtype (:class:`torch.dtype`, optional): the desired data type of returned tensor.
-#           If specified, the input tensor is casted to :attr:`dtype` before the operation
-#           is performed. This is useful for preventing data type overflows. Default: None.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 log_softmax, (input,), input, dim=dim, _stacklevel=_stacklevel, dtype=dtype)
-#     if dim is None:
-#         dim = _get_softmax_dim('log_softmax', input.dim(), _stacklevel)
-#     if dtype is None:
-#         ret = input.log_softmax(dim)
-#     else:
-#         ret = input.log_softmax(dim, dtype=dtype)
-#     return ret
-# 
-stop('not implemented')
+nnf_log_softmax <- function(input, dim = NULL, dtype = NULL, ...) {
+
+  if (is.null(dtype))
+    ret <- input$log_softmax(dim())
+  else
+    ret <- input$log_softmax(dim, dtype = dtype)
+  
+  ret  
 }
 
-nnf_logsigmoid <- function() {
-# 
-stop('not implemented')
+nnf_logsigmoid <- function(input) {
+  torch_log_sigmoid(input)
 }
 
 nnf_lp_pool1d <- function() {
