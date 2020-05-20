@@ -969,73 +969,25 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
                         " (got {mode})")
 }
 
-nnf_kl_div <- function(input, target, size_average, reduce, reduction) {
-# def kl_div(input, target, size_average=None, reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, Optional[bool], Optional[bool], str) -> Tensor
-#     r"""The `Kullback-Leibler divergence`_ Loss.
-# 
-#     See :class:`~torch.nn.KLDivLoss` for details.
-# 
-#     Args:
-#         input: Tensor of arbitrary shape
-#         target: Tensor of the same shape as input
-#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
-#             the losses are averaged over each loss element in the batch. Note that for
-#             some losses, there multiple elements per sample. If the field :attr:`size_average`
-#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
-#             when reduce is ``False``. Default: ``True``
-#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
-#             losses are averaged or summed over observations for each minibatch depending
-#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
-#             batch element instead and ignores :attr:`size_average`. Default: ``True``
-#         reduction (string, optional): Specifies the reduction to apply to the output:
-#             ``'none'`` | ``'batchmean'`` | ``'sum'`` | ``'mean'``.
-#             ``'none'``: no reduction will be applied
-#             ``'batchmean'``: the sum of the output will be divided by the batchsize
-#             ``'sum'``: the output will be summed
-#             ``'mean'``: the output will be divided by the number of elements in the output
-#             Default: ``'mean'``
-# 
-#     .. note::
-#         :attr:`size_average` and :attr:`reduce` are in the process of being deprecated,
-#         and in the meantime, specifying either of those two args will override :attr:`reduction`.
-# 
-#     .. note::
-#         :attr:``reduction`` = ``'mean'`` doesn't return the true kl divergence value, please use
-#         :attr:``reduction`` = ``'batchmean'`` which aligns with KL math definition.
-#         In the next major release, ``'mean'`` will be changed to be the same as 'batchmean'.
-# 
-#     .. _Kullback-Leibler divergence:
-#         https://en.wikipedia.org/wiki/Kullback-Leibler_divergence
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 kl_div, tens_ops, input, target, size_average=size_average,
-#                 reduce=reduce, reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
-#     else:
-#         if reduction == 'mean':
-#             warnings.warn("reduction: 'mean' divides the total loss by both the batch size and the support size."
-#                           "'batchmean' divides only by the batch size, and aligns with the KL div math definition."
-#                           "'mean' will be changed to behave the same as 'batchmean' in the next major release.")
-# 
-#         # special case for batchmean
-#         if reduction == 'batchmean':
-#             reduction_enum = _Reduction.get_enum('sum')
-#         else:
-#             reduction_enum = _Reduction.get_enum(reduction)
-# 
-#     reduced = torch.kl_div(input, target, reduction_enum)
-# 
-#     if reduction == 'batchmean' and input.dim() != 0:
-#         reduced = reduced / input.size()[0]
-# 
-#     return reduced
-# 
-stop('not implemented')
+nnf_kl_div <- function(input, target, reduction = "mean") {
+  
+  if (reduction == "mean")
+    warn("reduction: 'mean' divides the total loss by both the batch size and the support size.",
+         "'batchmean' divides only by the batch size, and aligns with the KL div math definition.",
+         "'mean' will be changed to behave the same as 'batchmean' in the next major release.")
+
+  
+  if (reduction == "batchmean")
+    red_enum <- reduction_enum("sum")
+  else
+    red_enum <- reduction_enum(reduction)
+  
+  reduced <- torch_kl_div(input, target, red_enum)
+  
+  if (reduction == "batchmean")
+    reduced <- reduced/ input$size(0)
+  
+  reduced
 }
 
 nnf_l1_loss <- function() {
