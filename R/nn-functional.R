@@ -1221,38 +1221,26 @@ nnf_max_unpool3d <- function(input, indices, kernel_size, stride = NULL,
   torch_max_unpool3d(input, indices, output_size, stride, padding)
 }
 
-nnf_mse_loss <- function() {
-# def mse_loss(input, target, size_average=None, reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, Optional[bool], Optional[bool], str) -> Tensor
-#     r"""mse_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor
-# 
-#     Measures the element-wise mean squared error.
-# 
-#     See :class:`~torch.nn.MSELoss` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 mse_loss, tens_ops, input, target, size_average=size_average, reduce=reduce,
-#                 reduction=reduction)
-#     if not (target.size() == input.size()):
-#         warnings.warn("Using a target size ({}) that is different to the input size ({}). "
-#                       "This will likely lead to incorrect results due to broadcasting. "
-#                       "Please ensure they have the same size.".format(target.size(), input.size()),
-#                       stacklevel=2)
-#     if size_average is not None or reduce is not None:
-#         reduction = _Reduction.legacy_get_string(size_average, reduce)
-#     if target.requires_grad:
-#         ret = (input - target) ** 2
-#         if reduction != 'none':
-#             ret = torch.mean(ret) if reduction == 'mean' else torch.sum(ret)
-#     else:
-#         expanded_input, expanded_target = torch.broadcast_tensors(input, target)
-#         ret = torch._C._nn.mse_loss(expanded_input, expanded_target, _Reduction.get_enum(reduction))
-#     return ret
-# 
-stop('not implemented')
+nnf_mse_loss <- function(input, target, reduction = "mean") {
+  
+  if (target$requires_grad) {
+    ret <- (input - target) ^ 2
+    if (!is.null(reduction)) {
+      
+      if (reduction == "mean")
+        ret <- torch_mean(ret)
+      else
+        ret <- torch_sum(ret)
+      
+    }
+  } else {
+    
+    expanded <- torch_broadcast_tensors(list(input, target))
+    ret <- torch_mse_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
+    
+  }
+  
+  ret
 }
 
 nnf_multi_head_attention_forward <- function(query, embed_dim_to_check, num_heads, in_proj_weight, bias_k, add_zero_attn, dropout_p, out_proj_weight, training, key_padding_mask, need_weights, attn_mask, use_separate_proj_weight, q_proj_weight) {
