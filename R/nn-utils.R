@@ -29,3 +29,4 @@ nn_util_ntuple <- function(n) {
 }
 
 nn_util_pair <- nn_util_ntuple(2)
+nn_util_triple <- nn_util_ntuple(3)

@@ -1139,88 +1139,86 @@ nnf_max_pool3d <- function(input, kernel_size, stride=NULL, padding=0, dilation=
                      ceil_mode)
 }
 
-nnf_max_unpool1d <- function() {
-# def max_unpool1d(input, indices, kernel_size, stride=None, padding=0,
-#                  output_size=None):
-#     # type: (Tensor, Tensor, BroadcastingList1[int], Optional[BroadcastingList1[int]], BroadcastingList1[int], Optional[BroadcastingList1[int]]) -> Tensor  # noqa
-#     r"""Computes a partial inverse of :class:`MaxPool1d`.
-# 
-#     See :class:`~torch.nn.MaxUnpool1d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 max_unpool1d, (input,), input, indices, kernel_size,
-#                 stride=stride, padding=padding, output_size=output_size)
-#     kernel_size = _single(kernel_size)
-#     if stride is not None:
-#         _stride = _single(stride)
-#     else:
-#         _stride = kernel_size
-#     padding = _single(padding)
-#     output_size = _unpool_output_size(input, kernel_size, _stride, padding,
-#                                       output_size)
-#     if isinstance(output_size, list):
-#         output_size = output_size + [1]
-#     else:
-#         output_size = output_size + (1,)
-#     return torch._C._nn.max_unpool2d(input.unsqueeze(3), indices.unsqueeze(3),
-#                                      output_size).squeeze(3)
-# 
-stop('not implemented')
+
+unpool_output_size <- function(input, kernel_size, stride, padding, output_size) {
+  
+  input_size <- input$size()
+  default_size <- list()
+  for (d in seq_along(kernel_size)) {
+    default_size[[d]] <- (input_size[d+2] - 1) * stride[d] + kernel_size[d] - 
+      2 * padding[d]
+  }
+  
+  if (is.null(output_size)) {
+    ret <- default_size
+  } else {
+    
+    if (length(output_size) == (length(kernel_size) + 2)) {
+      output_size <- output_size[-c(1,2)] 
+    }
+    
+    if (length(output_size) != length(kernel_size)) {
+      value_error("output_size should be a sequence containing ",
+                  "{length(kernel_size)} or {length(kernel_size) + 2} elements", 
+                  "but it has a length of '{length(output_size)}'")
+    }
+    
+    for (d in seq_along(kernel_size)) {
+      min_size <- default_size[d] - stride[d]
+      max_size <- default_size[d] + stride[d]
+    }
+    
+    ret <- output_size
+    
+  }
+    
+  ret
 }
 
-nnf_max_unpool2d <- function() {
-# def max_unpool2d(input, indices, kernel_size, stride=None, padding=0,
-#                  output_size=None):
-#     # type: (Tensor, Tensor, BroadcastingList2[int], Optional[BroadcastingList2[int]], BroadcastingList2[int], Optional[BroadcastingList2[int]]) -> Tensor  # noqa
-#     r"""Computes a partial inverse of :class:`MaxPool2d`.
-# 
-#     See :class:`~torch.nn.MaxUnpool2d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 max_unpool2d, (input,), input, indices, kernel_size,
-#                 stride=stride, padding=padding, output_size=output_size)
-#     kernel_size = _pair(kernel_size)
-#     if stride is not None:
-#         _stride = _pair(stride)
-#     else:
-#         _stride = kernel_size
-#     padding = _pair(padding)
-#     output_size = _unpool_output_size(input, kernel_size, _stride, padding,
-#                                       output_size)
-#     return torch._C._nn.max_unpool2d(input, indices, output_size)
-# 
-stop('not implemented')
+nnf_max_unpool1d <- function(input, indices, kernel_size, stride = NULL,
+                             padding = 0, output_size = NULL) {
+  if (is.null(stride))
+    stride <- kernel_size
+  
+  output_size <- unpool_output_size(input, kernel_size, stride, padding,
+                                    output_size)
+  
+  output_size <- c(output_size, 1)
+  
+  torch_max_unpool2d(input$unsqueeze(3), indices$unsqueeze(3), output_size)$squeeze(3)
 }
 
-nnf_max_unpool3d <- function() {
-# def max_unpool3d(input, indices, kernel_size, stride=None, padding=0,
-#                  output_size=None):
-#     # type: (Tensor, Tensor, BroadcastingList3[int], Optional[BroadcastingList3[int]], BroadcastingList3[int], Optional[BroadcastingList3[int]]) -> Tensor  # noqa
-#     r"""Computes a partial inverse of :class:`MaxPool3d`.
-# 
-#     See :class:`~torch.nn.MaxUnpool3d` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 max_unpool3d, (input,), input, indices, kernel_size,
-#                 stride=stride, padding=padding, output_size=output_size)
-#     kernel_size = _triple(kernel_size)
-#     if stride is not None:
-#         _stride = _triple(stride)
-#     else:
-#         _stride = kernel_size
-#     padding = _triple(padding)
-#     output_size = _unpool_output_size(input, kernel_size, _stride, padding,
-#                                       output_size)
-#     return torch._C._nn.max_unpool3d(
-#         input, indices, output_size, _stride, padding)
-# 
-stop('not implemented')
+nnf_max_unpool2d <- function(input, indices, kernel_size, stride = NULL,
+                             padding = 0, output_size = NULL) {
+  
+  kernel_size <- nn_util_pair(kernel_size)
+  if(is.null(stride))
+    stride <- kernel_size
+  else
+    stride <- nn_util_pair(stride)
+  
+  padding <- nn_util_pair(padding)
+  
+  output_size <- unpool_output_size(input, kernel_size, stride, padding,
+                                    output_size)
+  
+  torch_max_unpool2d(input, indices, output_size)
+}
+
+nnf_max_unpool3d <- function(input, indices, kernel_size, stride = NULL,
+                             padding = 0, output_size = NULL){
+  
+  kernel_size <- nn_util_triple(kernel_size)
+  padding <- nn_util_triple(padding)
+  if (is.null(stride))
+    stride <- kernel_size
+  else
+    stride <- nn_util_triple(stride)
+  
+  output_size <- unpool_output_size(input, kernel_size, stride, padding,
+                                    output_size)
+  
+  torch_max_unpool3d(input, indices, output_size, stride, padding)
 }
 
 nnf_mse_loss <- function() {
