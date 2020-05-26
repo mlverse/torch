@@ -406,59 +406,6 @@ nnf_gumbel_softmax <- function(logits, tau = 1, hard = FALSE, dim = -1) {
   ret
 }
 
-nnf_handle_torch_function <- function() {
-# def handle_torch_function(
-#         public_api, relevant_args, *args, **kwargs):
-#     """Implement a function with checks for __torch_function__ overrides.
-# 
-#     See torch::autograd::handle_torch_function for the equivalent of this
-#     function in the C++ implementation.
-# 
-#     Arguments
-#     ---------
-#     public_api : function
-#         Function exposed by the public torch API originally called like
-#         ``public_api(*args, **kwargs)`` on which arguments are now being
-#         checked.
-#     relevant_args : iterable
-#         Iterable of arguments to check for __torch_function__ methods.
-#     args : tuple
-#         Arbitrary positional arguments originally passed into ``public_api``.
-#     kwargs : tuple
-#         Arbitrary keyword arguments originally passed into ``public_api``.
-# 
-#     Returns
-#     -------
-#     Result from calling `implementation()` or an `__torch_function__`
-#     method, as appropriate.
-# 
-#     Raises
-#     ------
-#     TypeError : if no implementation is found.
-# 
-#     """
-#     # Check for __torch_function__ methods.
-#     overloaded_args = _get_overloaded_args(relevant_args)
-#     # overloaded_args already have unique types.
-#     types = tuple(map(type, overloaded_args))
-# 
-#     # Call overrides
-#     for overloaded_arg in overloaded_args:
-#         # Use `public_api` instead of `implementation` so __torch_function__
-#         # implementations can do equality/identity comparisons.
-#         result = overloaded_arg.__torch_function__(public_api, types, args, kwargs)
-# 
-#         if result is not NotImplemented:
-#             return result
-# 
-#     func_name = '{}.{}'.format(public_api.__module__, public_api.__name__)
-#     raise TypeError("no implementation found for '{}' on types that implement "
-#                     '__torch_function__: {}'
-#                     .format(func_name, list(map(type, overloaded_args))))
-# 
-stop('not implemented')
-}
-
 nnf_hardshrink <- function(input, lambd = 0.5) {
   torch_hardshrink(input, lambd)
 }
@@ -479,25 +426,6 @@ nnf_hardtanh <- function(input, min_val = -1, max_val = 1, inplace = FALSE) {
 
 nnf_hardtanh_ <- function(input, min_val = -1, max_val = 1) {
   nnf_hardtanh(input, min_val, max_val, inplace = TRUE)
-}
-
-nnf_has_torch_function <- function() {
-# def has_torch_function(relevant_args):
-#     """Check for __torch_function__ implementations in the elements of an iterable
-# 
-#     Arguments
-#     ---------
-#     relevant_args : iterable
-#         Iterable or aguments to check for __torch_function__ methods.
-# 
-#     Returns
-#     -------
-#     True if any of the elements of relevant_args have __torch_function__
-#     implementations, False otherwise.
-#     """
-#     return any(hasattr(a, '__torch_function__') for a in relevant_args)
-# 
-stop('not implemented')
 }
 
 nnf_hinge_embedding_loss <- function(input, target, margin = 1, reduction = "mean") {
@@ -931,273 +859,210 @@ nnf_mse_loss <- function(input, target, reduction = "mean") {
   ret
 }
 
-nnf_multi_head_attention_forward <- function(query, embed_dim_to_check, num_heads, in_proj_weight, bias_k, add_zero_attn, dropout_p, out_proj_weight, training, key_padding_mask, need_weights, attn_mask, use_separate_proj_weight, q_proj_weight) {
-# def multi_head_attention_forward(query,                           # type: Tensor
-#                                  key,                             # type: Tensor
-#                                  value,                           # type: Tensor
-#                                  embed_dim_to_check,              # type: int
-#                                  num_heads,                       # type: int
-#                                  in_proj_weight,                  # type: Tensor
-#                                  in_proj_bias,                    # type: Tensor
-#                                  bias_k,                          # type: Optional[Tensor]
-#                                  bias_v,                          # type: Optional[Tensor]
-#                                  add_zero_attn,                   # type: bool
-#                                  dropout_p,                       # type: float
-#                                  out_proj_weight,                 # type: Tensor
-#                                  out_proj_bias,                   # type: Tensor
-#                                  training=True,                   # type: bool
-#                                  key_padding_mask=None,           # type: Optional[Tensor]
-#                                  need_weights=True,               # type: bool
-#                                  attn_mask=None,                  # type: Optional[Tensor]
-#                                  use_separate_proj_weight=False,  # type: bool
-#                                  q_proj_weight=None,              # type: Optional[Tensor]
-#                                  k_proj_weight=None,              # type: Optional[Tensor]
-#                                  v_proj_weight=None,              # type: Optional[Tensor]
-#                                  static_k=None,                   # type: Optional[Tensor]
-#                                  static_v=None                    # type: Optional[Tensor]
-#                                  ):
-#     # type: (...) -> Tuple[Tensor, Optional[Tensor]]
-#     r"""
-#     Args:
-#         query, key, value: map a query and a set of key-value pairs to an output.
-#             See "Attention Is All You Need" for more details.
-#         embed_dim_to_check: total dimension of the model.
-#         num_heads: parallel attention heads.
-#         in_proj_weight, in_proj_bias: input projection weight and bias.
-#         bias_k, bias_v: bias of the key and value sequences to be added at dim=0.
-#         add_zero_attn: add a new batch of zeros to the key and
-#                        value sequences at dim=1.
-#         dropout_p: probability of an element to be zeroed.
-#         out_proj_weight, out_proj_bias: the output projection weight and bias.
-#         training: apply dropout if is ``True``.
-#         key_padding_mask: if provided, specified padding elements in the key will
-#             be ignored by the attention. This is an binary mask. When the value is True,
-#             the corresponding value on the attention layer will be filled with -inf.
-#         need_weights: output attn_output_weights.
-#         attn_mask: 2D or 3D mask that prevents attention to certain positions. This is an additive mask
-#             (i.e. the values will be added to the attention layer). A 2D mask will be broadcasted for all
-#             the batches while a 3D mask allows to specify a different mask for the entries of each batch.
-#         use_separate_proj_weight: the function accept the proj. weights for query, key,
-#             and value in different forms. If false, in_proj_weight will be used, which is
-#             a combination of q_proj_weight, k_proj_weight, v_proj_weight.
-#         q_proj_weight, k_proj_weight, v_proj_weight, in_proj_bias: input projection weight and bias.
-#         static_k, static_v: static key and value used for attention operators.
-# 
-# 
-#     Shape:
-#         Inputs:
-#         - query: :math:`(L, N, E)` where L is the target sequence length, N is the batch size, E is
-#           the embedding dimension.
-#         - key: :math:`(S, N, E)`, where S is the source sequence length, N is the batch size, E is
-#           the embedding dimension.
-#         - value: :math:`(S, N, E)` where S is the source sequence length, N is the batch size, E is
-#           the embedding dimension.
-#         - key_padding_mask: :math:`(N, S)`, ByteTensor, where N is the batch size, S is the source sequence length.
-#         - attn_mask: 2D mask :math:`(L, S)` where L is the target sequence length, S is the source sequence length.
-#           3D mask :math:`(N*num_heads, L, S)` where N is the batch size, L is the target sequence length,
-#           S is the source sequence length.
-#         - static_k: :math:`(N*num_heads, S, E/num_heads)`, where S is the source sequence length,
-#           N is the batch size, E is the embedding dimension. E/num_heads is the head dimension.
-#         - static_v: :math:`(N*num_heads, S, E/num_heads)`, where S is the source sequence length,
-#           N is the batch size, E is the embedding dimension. E/num_heads is the head dimension.
-# 
-#         Outputs:
-#         - attn_output: :math:`(L, N, E)` where L is the target sequence length, N is the batch size,
-#           E is the embedding dimension.
-#         - attn_output_weights: :math:`(N, L, S)` where N is the batch size,
-#           L is the target sequence length, S is the source sequence length.
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (query, key, value, in_proj_weight, in_proj_bias, bias_k, bias_v,
-#                     out_proj_weight, out_proj_bias)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 multi_head_attention_forward, tens_ops, query, key, value,
-#                 embed_dim_to_check, num_heads, in_proj_weight, in_proj_bias,
-#                 bias_k, bias_v, add_zero_attn, dropout_p, out_proj_weight,
-#                 out_proj_bias, training=training, key_padding_mask=key_padding_mask,
-#                 need_weights=need_weights, attn_mask=attn_mask,
-#                 use_separate_proj_weight=use_separate_proj_weight,
-#                 q_proj_weight=q_proj_weight, k_proj_weight=k_proj_weight,
-#                 v_proj_weight=v_proj_weight, static_k=static_k, static_v=static_v)
-#     tgt_len, bsz, embed_dim = query.size()
-#     assert embed_dim == embed_dim_to_check
-#     assert key.size() == value.size()
-# 
-#     head_dim = embed_dim // num_heads
-#     assert head_dim * num_heads == embed_dim, "embed_dim must be divisible by num_heads"
-#     scaling = float(head_dim) ** -0.5
-# 
-#     if not use_separate_proj_weight:
-#         if torch.equal(query, key) and torch.equal(key, value):
-#             # self-attention
-#             q, k, v = linear(query, in_proj_weight, in_proj_bias).chunk(3, dim=-1)
-# 
-#         elif torch.equal(key, value):
-#             # encoder-decoder attention
-#             # This is inline in_proj function with in_proj_weight and in_proj_bias
-#             _b = in_proj_bias
-#             _start = 0
-#             _end = embed_dim
-#             _w = in_proj_weight[_start:_end, :]
-#             if _b is not None:
-#                 _b = _b[_start:_end]
-#             q = linear(query, _w, _b)
-# 
-#             if key is None:
-#                 assert value is None
-#                 k = None
-#                 v = None
-#             else:
-# 
-#                 # This is inline in_proj function with in_proj_weight and in_proj_bias
-#                 _b = in_proj_bias
-#                 _start = embed_dim
-#                 _end = None
-#                 _w = in_proj_weight[_start:, :]
-#                 if _b is not None:
-#                     _b = _b[_start:]
-#                 k, v = linear(key, _w, _b).chunk(2, dim=-1)
-# 
-#         else:
-#             # This is inline in_proj function with in_proj_weight and in_proj_bias
-#             _b = in_proj_bias
-#             _start = 0
-#             _end = embed_dim
-#             _w = in_proj_weight[_start:_end, :]
-#             if _b is not None:
-#                 _b = _b[_start:_end]
-#             q = linear(query, _w, _b)
-# 
-#             # This is inline in_proj function with in_proj_weight and in_proj_bias
-#             _b = in_proj_bias
-#             _start = embed_dim
-#             _end = embed_dim * 2
-#             _w = in_proj_weight[_start:_end, :]
-#             if _b is not None:
-#                 _b = _b[_start:_end]
-#             k = linear(key, _w, _b)
-# 
-#             # This is inline in_proj function with in_proj_weight and in_proj_bias
-#             _b = in_proj_bias
-#             _start = embed_dim * 2
-#             _end = None
-#             _w = in_proj_weight[_start:, :]
-#             if _b is not None:
-#                 _b = _b[_start:]
-#             v = linear(value, _w, _b)
-#     else:
-#         q_proj_weight_non_opt = torch.jit._unwrap_optional(q_proj_weight)
-#         len1, len2 = q_proj_weight_non_opt.size()
-#         assert len1 == embed_dim and len2 == query.size(-1)
-# 
-#         k_proj_weight_non_opt = torch.jit._unwrap_optional(k_proj_weight)
-#         len1, len2 = k_proj_weight_non_opt.size()
-#         assert len1 == embed_dim and len2 == key.size(-1)
-# 
-#         v_proj_weight_non_opt = torch.jit._unwrap_optional(v_proj_weight)
-#         len1, len2 = v_proj_weight_non_opt.size()
-#         assert len1 == embed_dim and len2 == value.size(-1)
-# 
-#         if in_proj_bias is not None:
-#             q = linear(query, q_proj_weight_non_opt, in_proj_bias[0:embed_dim])
-#             k = linear(key, k_proj_weight_non_opt, in_proj_bias[embed_dim:(embed_dim * 2)])
-#             v = linear(value, v_proj_weight_non_opt, in_proj_bias[(embed_dim * 2):])
-#         else:
-#             q = linear(query, q_proj_weight_non_opt, in_proj_bias)
-#             k = linear(key, k_proj_weight_non_opt, in_proj_bias)
-#             v = linear(value, v_proj_weight_non_opt, in_proj_bias)
-#     q = q * scaling
-# 
-#     if attn_mask is not None:
-#         if attn_mask.dim() == 2:
-#             attn_mask = attn_mask.unsqueeze(0)
-#             if list(attn_mask.size()) != [1, query.size(0), key.size(0)]:
-#                 raise RuntimeError('The size of the 2D attn_mask is not correct.')
-#         elif attn_mask.dim() == 3:
-#             if list(attn_mask.size()) != [bsz * num_heads, query.size(0), key.size(0)]:
-#                 raise RuntimeError('The size of the 3D attn_mask is not correct.')
-#         else:
-#             raise RuntimeError("attn_mask's dimension {} is not supported".format(attn_mask.dim()))
-#         # attn_mask's dim is 3 now.
-# 
-#     if bias_k is not None and bias_v is not None:
-#         if static_k is None and static_v is None:
-#             k = torch.cat([k, bias_k.repeat(1, bsz, 1)])
-#             v = torch.cat([v, bias_v.repeat(1, bsz, 1)])
-#             if attn_mask is not None:
-#                 attn_mask = pad(attn_mask, (0, 1))
-#             if key_padding_mask is not None:
-#                 key_padding_mask = pad(key_padding_mask, (0, 1))
-#         else:
-#             assert static_k is None, "bias cannot be added to static key."
-#             assert static_v is None, "bias cannot be added to static value."
-#     else:
-#         assert bias_k is None
-#         assert bias_v is None
-# 
-#     q = q.contiguous().view(tgt_len, bsz * num_heads, head_dim).transpose(0, 1)
-#     if k is not None:
-#         k = k.contiguous().view(-1, bsz * num_heads, head_dim).transpose(0, 1)
-#     if v is not None:
-#         v = v.contiguous().view(-1, bsz * num_heads, head_dim).transpose(0, 1)
-# 
-#     if static_k is not None:
-#         assert static_k.size(0) == bsz * num_heads
-#         assert static_k.size(2) == head_dim
-#         k = static_k
-# 
-#     if static_v is not None:
-#         assert static_v.size(0) == bsz * num_heads
-#         assert static_v.size(2) == head_dim
-#         v = static_v
-# 
-#     src_len = k.size(1)
-# 
-#     if key_padding_mask is not None:
-#         assert key_padding_mask.size(0) == bsz
-#         assert key_padding_mask.size(1) == src_len
-# 
-#     if add_zero_attn:
-#         src_len += 1
-#         k = torch.cat([k, torch.zeros((k.size(0), 1) + k.size()[2:], dtype=k.dtype, device=k.device)], dim=1)
-#         v = torch.cat([v, torch.zeros((v.size(0), 1) + v.size()[2:], dtype=v.dtype, device=v.device)], dim=1)
-#         if attn_mask is not None:
-#             attn_mask = pad(attn_mask, (0, 1))
-#         if key_padding_mask is not None:
-#             key_padding_mask = pad(key_padding_mask, (0, 1))
-# 
-#     attn_output_weights = torch.bmm(q, k.transpose(1, 2))
-#     assert list(attn_output_weights.size()) == [bsz * num_heads, tgt_len, src_len]
-# 
-#     if attn_mask is not None:
-#         attn_output_weights += attn_mask
-# 
-#     if key_padding_mask is not None:
-#         attn_output_weights = attn_output_weights.view(bsz, num_heads, tgt_len, src_len)
-#         attn_output_weights = attn_output_weights.masked_fill(
-#             key_padding_mask.unsqueeze(1).unsqueeze(2),
-#             float('-inf'),
-#         )
-#         attn_output_weights = attn_output_weights.view(bsz * num_heads, tgt_len, src_len)
-# 
-#     attn_output_weights = softmax(
-#         attn_output_weights, dim=-1)
-#     attn_output_weights = dropout(attn_output_weights, p=dropout_p, training=training)
-# 
-#     attn_output = torch.bmm(attn_output_weights, v)
-#     assert list(attn_output.size()) == [bsz * num_heads, tgt_len, head_dim]
-#     attn_output = attn_output.transpose(0, 1).contiguous().view(tgt_len, bsz, embed_dim)
-#     attn_output = linear(attn_output, out_proj_weight, out_proj_bias)
-# 
-#     if need_weights:
-#         # average attention weights over heads
-#         attn_output_weights = attn_output_weights.view(bsz, num_heads, tgt_len, src_len)
-#         return attn_output, attn_output_weights.sum(dim=1) / num_heads
-#     else:
-#         return attn_output, None
-# 
-stop('not implemented')
+nnf_multi_head_attention_forward <- function(
+  query,                           # type: Tensor
+  key,                             # type: Tensor
+  value,                           # type: Tensor
+  embed_dim_to_check,              # type: int
+  num_heads,                       # type: int
+  in_proj_weight,                  # type: Tensor
+  in_proj_bias,                    # type: Tensor
+  bias_k,                          # type: Optional[Tensor]
+  bias_v,                          # type: Optional[Tensor]
+  add_zero_attn,                   # type: bool
+  dropout_p,                       # type: float
+  out_proj_weight,                 # type: Tensor
+  out_proj_bias,                   # type: Tensor
+  training=TRUE,                   # type: bool
+  key_padding_mask=NULL,           # type: Optional[Tensor]
+  need_weights=TRUE,               # type: bool
+  attn_mask=NULL,                  # type: Optional[Tensor]
+  use_separate_proj_weight=FALSE,  # type: bool
+  q_proj_weight=NULL,              # type: Optional[Tensor]
+  k_proj_weight=NULL,              # type: Optional[Tensor]
+  v_proj_weight=NULL,              # type: Optional[Tensor]
+  static_k=NULL,                   # type: Optional[Tensor]
+  static_v=NULL                    # type: Optional[Tensor])
+  ) {
+
+  o <- query$size()
+  tgt_len <- o[[1]]; bsz <- o[[2]]; embed_dim <- o[[3]];
+  
+  
+  head_dim <- floor(embed_dim / num_heads) 
+  
+  scaling <- head_dim^(-0.5)
+  
+  if (!use_separate_proj_weight) {
+    
+    if (torch_equal(query, key) & torch_equal(key, value)) {
+      # self-attention
+      o <- nnf_linear(query, in_proj_weight, in_proj_bias)$chunk(3, dim = -1)
+      q <- o[[1]]; k <- o[[2]]; v <- o[[3]]
+    } else if (torch_equal(key, value)) {
+      # encoder-decoder attention
+      #             # This is inline in_proj function with in_proj_weight and in_proj_bias
+      b_ <- in_proj_bias
+      start_ <- 1
+      end_ <- embed_dim
+      w_ <- in_proj_weight[start_:end_,]
+      
+      if (!is.null(b_)) {
+        b_ <- b_[start_:end_] 
+      }
+      
+      q <- nnf_linear(query, w_, b_)
+      
+      if (is.null(key)) {
+        k <- NULL
+        v <- NULL
+      } else {
+        b_ <- in_proj_bias
+        start_ <- embed_dim
+        end_ <- NULL
+        w_ <- in_proj_weight[start_:N, ]
+        if (!is.null(b_)) {
+          b_ <- b_[start_:N]
+          o <- nnf_linear(key, w_, b_)$chunk(2, dim = -1)
+          k <- o[[1]]; v <- o[[2]]
+        }
+        
+      }
+      
+    } else {
+      
+      # This is inline in_proj function with in_proj_weight and in_proj_bias
+      b_ <- in_proj_bias
+      start_ <- 0
+      end_ <- embed_dim
+      w_ <- in_proj_weight[start_:end_, ]
+      if (!is.null(b_))
+        b_ <- b_[start_:end_]
+      q <- nnf_linear(query, w_, b_)
+      
+      
+      # This is inline in_proj function with in_proj_weight and in_proj_bias
+      b_ <- in_proj_bias
+      start_ <- embed_dim
+      end_ <- embed_dim * 2
+      w_ <- in_proj_weight[start_:end_,]
+      if (!is.null(b_))
+        b_ <- b_[start_:end_]
+      k <- nnf_linear(key, w_, b_)
+      
+      # This is inline in_proj function with in_proj_weight and in_proj_bias
+      b_ <- in_proj_bias
+      start_ <- embed_dim * 2
+      end_ <- NULL
+      w_ <- in_proj_weight[start_:N,]
+      if (!is.null(b_)) {
+        b_ <- b_[start_:N]
+      }
+      v <- nnf_linear(value, w_, b_)
+      
+    }
+    
+  } else {
+    
+    if (!is.null(in_proj_bias)) {
+      q <- nnf_linear(query, q_proj_weight, in_proj_bias[1:embed_dim])
+      k <- nnf_linear(key, k_proj_weight, in_proj_bias[embed_dim:(embed_dim * 2)])
+      v <- nnf_linear(value, v_proj_weight, in_proj_bias[(embed_dim*2):N])
+    } else {
+      q <- nnf_linear(query, q_proj_weight, in_proj_bias)
+      k <- nnf_linear(key, k_proj_weight, in_proj_bias)
+      v <- nnf_linear(value, v_proj_weight, in_proj_bias)
+    }
+    
+  }
+  
+  q <- q * scaling
+  
+  if (!is.null(bias_k) && !is.null(bias_v)) {
+    if (is.null(static_k) && is.null(static_v)) {
+      k <- torch_cat(list(k, bias_k[["repeat"]](c(1, bsz, 1))))
+      v <- torch_cat(list(v, bias_v[["repeat"]](c(1, bsz, 1))))
+      
+      if (!is.null(attn_mask))
+        attn_mask <- nnf_pad(attn_mask, c(0,1))
+      
+      if (!is.null(key_padding_mask))
+        key_padding_mask <- nnf_pad(key_padding_mask, c(0,1))
+      
+    }
+  }
+  
+  q <- q$contiguous()$view(tgt_len, bsz * num_heads, head_dim)$transpose(0,1)
+  
+  if (!is.null(k))
+    k <- k$contiguous()$view(-1, bsz * num_heads, head_dim)$transpose(0,1)
+  
+  if (!is.null(v))
+    v <- v$contiguous()$view(-1, bsz * num_heads, head_dim)$transpose(0,1)
+  
+  
+  if (!is.null(static_k))
+    k <- static_k
+  
+  if (!is.null(static_v))
+    v <- static_v
+  
+  src_len <- k$size(1)   
+  
+  if (add_zero_attn) {
+    src_len <- src_len + 1
+    k_size <- k$size()
+    k <- torch_cat(list(k, torch_zeros(append(list(k_size[1], 1), k_size[3:length(k_size)]),
+                                       dtype = k$dtype, device = k$device)), dim = 1)
+    v_size
+    k <- torch_cat(list(k, torch_zeros(append(list(v_size[1], 1), v_size[3:length(v_size)]),
+                                       dtype = v$dtype, device = v$device)), dim = 1)
+    
+    if (!is.null(attn_mask)) {
+      attn_mask <- nnf_pad(attn_mask, list(0,1))
+    }
+    
+    if (!is.null(key_padding_mask)) {
+      key_padding_mask <- nnf_pad(key_padding_mask, list(0,1))
+    }
+    
+  }
+  
+  attn_output_weights <- torch_bmm(q, k$transpose(1, 2))
+  
+  if (!is.null(attn_mask)) {
+    if (attn_mask$dtype == torch_bool()) {
+      attn_output_weights$masked_fill_(attn_mask, -Inf)
+    } else {
+      attn_output_weights <- attn_output_weights + attn_mask
+    }
+  }
+  
+  if (!is.null(key_padding_mask)) {
+    attn_output_weights <- attn_output_weights$view(vsz, num_heads, tgt_len, src_len)
+    attn_output_weights <- attn_output_weights$masked_fill(
+      key_padding_mask$unsqueeze(1)$unsqueeze(2),
+      -Inf
+    )
+    attn_output_weights <- attn_output_weights$view(bsz * num_heads, tgt_len, 
+                                                    src_len)
+  }
+  
+  attn_output_weights <- nnf_softmax(attn_output_weights, dim=-1)
+  attn_output_weights <- nnf_dropout(attn_output_weights, p=dropout_p, 
+                                     training=training)
+  
+  attn_output <- torch_bmm(attn_output_weights, v)
+  attn_output <- attn_output$transpose(0, 1)$contiguous()$view(tgt_len, bsz, embed_dim)
+  attn_output <- nnf_linear(attn_output, out_proj_weight, out_proj_bias)
+  
+  if (need_weights) {
+    attn_output_weights <- attn_output_weights$view(bsz, num_heads, tgt_len, 
+                                                    src_len)
+    return(list(attn_output, attn_output_weights$sum(dim = 1)/num_heads))
+  } else {
+    return(list(attn_output, NULL))
+  }
 }
 
 nnf_multi_margin_loss <- function() {
