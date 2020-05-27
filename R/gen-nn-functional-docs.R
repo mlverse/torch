@@ -698,37 +698,6 @@ NULL
 #' @export
 NULL
 
-
-#' Elu
-#'
-#' Applies element-wise,
-#'     \eqn{\text{ELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x) - 1))}.
-#' 
-#'     See `~torch.nn.ELU` for more details.
-#'
-#'
-#'
-#' @name nnf_elu
-#'
-#' @export
-NULL
-
-
-#' Elu_
-#'
-#' @section elu_(input, alpha=1.) -> Tensor :
-#'
-#' In-place version of [`~elu`].
-#'
-#'
-#'
-#'
-#' @name nnf_elu_
-#'
-#' @export
-NULL
-
-
 #' Embedding
 #'
 #' A simple lookup table that looks up embeddings in a fixed dictionary and size.
@@ -1064,21 +1033,7 @@ NULL
 NULL
 
 
-#' Hardshrink
-#'
-#' @section hardshrink(input, lambd=0.5) -> Tensor :
-#'
-#' Applies the hard shrinkage function element-wise
-#' 
-#'     See `~torch.nn.Hardshrink` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_hardshrink
-#'
-#' @export
-NULL
+
 
 
 #' Hardsigmoid
@@ -1257,40 +1212,6 @@ NULL
 #' @export
 NULL
 
-
-#' Leaky_relu
-#'
-#' @section leaky_relu(input, negative_slope=0.01, inplace=False) -> Tensor :
-#'
-#' Applies element-wise,
-#'     \eqn{\text{LeakyReLU}(x) = \max(0, x) + \text{negative\_slope} * \min(0, x)}
-#' 
-#'     See `~torch.nn.LeakyReLU` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_leaky_relu
-#'
-#' @export
-NULL
-
-
-#' Leaky_relu_
-#'
-#' @section leaky_relu_(input, negative_slope=0.01) -> Tensor :
-#'
-#' In-place version of [`~leaky_relu`].
-#'
-#'
-#'
-#'
-#' @name nnf_leaky_relu_
-#'
-#' @export
-NULL
-
-
 #' Linear
 #'
 #' Applies a linear transformation to the incoming data: \eqn{y = xA^T + b}.
@@ -1345,24 +1266,6 @@ NULL
 #'
 #' @export
 NULL
-
-
-#' Logsigmoid
-#'
-#' @section logsigmoid(input) -> Tensor :
-#'
-#' Applies element-wise \eqn{\text{LogSigmoid}(x_i) = \log \left(\frac{1}{1 + \exp(-x_i)}\right)}
-#' 
-#' See `~torch.nn.LogSigmoid` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_logsigmoid
-#'
-#' @export
-NULL
-
 
 #' Lp_pool1d
 #'
@@ -1936,42 +1839,6 @@ NULL
 #'
 #' @export
 NULL
-
-
-#' Selu
-#'
-#' @section selu(input, inplace=False) -> Tensor :
-#'
-#' Applies element-wise,
-#'     \eqn{\text{SELU}(x) = scale * (\max(0,x) + \min(0, \alpha * (\exp(x) - 1)))},
-#'     with \eqn{\alpha=1.6732632423543772848170429916717} and
-#'     \eqn{scale=1.0507009873554804934193349852946}.
-#' 
-#'     See `~torch.nn.SELU` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_selu
-#'
-#' @export
-NULL
-
-
-#' Selu_
-#'
-#' @section selu_(input) -> Tensor :
-#'
-#' In-place version of [`~selu`].
-#'
-#'
-#'
-#'
-#' @name nnf_selu_
-#'
-#' @export
-NULL
-
 
 #' Sigmoid
 #'

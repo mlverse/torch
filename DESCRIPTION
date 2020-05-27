@@ -58,6 +58,7 @@ Collate:
     'nn-utils.R'
     'nn.R'
     'nn_linear.R'
+    'nnf-activation.R'
     'operators.R'
     'package.R'
     'qscheme.R'

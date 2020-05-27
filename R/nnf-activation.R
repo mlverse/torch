@@ -1,3 +1,14 @@
+#' Elu
+#'
+#' Applies element-wise,
+#' \deqn{ELU(x) = max(0,x) + min(0, \alpha * (exp(x) - 1))}.
+#'
+#' @param input (N,∗) tensor, where * means, any number of additional 
+#'   dimensions
+#' @param alpha the alpha value for the ELU formulation. Default: 1.0
+#' @param inplace can optionally do the operation in-place. Default: FALSE
+#'
+#' @export
 nnf_elu <- function(input, alpha=1, inplace=FALSE) {
   if(inplace)
     torch_elu_(input, alpha = alpha)
@@ -5,10 +16,22 @@ nnf_elu <- function(input, alpha=1, inplace=FALSE) {
     torch_elu(input, alpha = alpha)
 }
 
+#' @rdname nnf_elu
+#' @export
 nnf_elu_ <- function(input, alpha=1) {
   torch_elu_(input, alpha = alpha)
 }
 
+#' Selu
+#'
+#' Applies element-wise,
+#' \deqn{SELU(x) = scale * (max(0,x) + min(0, \alpha * (exp(x) - 1)))},
+#' with \eqn{\alpha=1.6732632423543772848170429916717} and
+#' \eqn{scale=1.0507009873554804934193349852946}.
+#' 
+#' @inheritParams nnf_elu
+#'
+#' @export
 nnf_selu <- function(input, inplace = FALSE) {
   if (inplace)
     torch_selu_(input)
@@ -16,14 +39,33 @@ nnf_selu <- function(input, inplace = FALSE) {
     torch_selu(input)
 }
 
+#' @rdname nnf_selu
+#' @export
 nnf_selu_ <- function(input) {
   nnf_selu(input, inplace = TRUE)
 }
 
+#' Hardshrink
+#'
+#' Applies the hard shrinkage function element-wise
+#' 
+#' @inheritParams nnf_elu
+#' @param lambd the lambda value for the Hardshrink formulation. Default: 0.5
+#' 
+#' @export
 nnf_hardshrink <- function(input, lambd = 0.5) {
   torch_hardshrink(input, lambd)
 }
 
+#' Hardtanh
+#'
+#' Applies the HardTanh function element-wise.
+#' 
+#' @inheritParams nnf_elu
+#' @param min_val minimum value of the linear region range. Default: -1
+#' @param max_val maximum value of the linear region range. Default: 1
+#'
+#' @export
 nnf_hardtanh <- function(input, min_val = -1, max_val = 1, inplace = FALSE) {
   if (inplace)
     torch_hardtanh_(input, min_val, max_val)
@@ -31,10 +73,22 @@ nnf_hardtanh <- function(input, min_val = -1, max_val = 1, inplace = FALSE) {
     torch_hardtanh(input, min_val, max_val)
 }
 
+#' @rdname nnf_hardtanh
+#' @export
 nnf_hardtanh_ <- function(input, min_val = -1, max_val = 1) {
   nnf_hardtanh(input, min_val, max_val, inplace = TRUE)
 }
 
+#' Leaky_relu
+#'
+#'
+#' Applies element-wise,
+#' \eqn{LeakyReLU(x) = max(0, x) + negative_slope * min(0, x)}
+#'
+#' @inheritParams nnf_elu
+#' @param negative_slope Controls the angle of the negative slope. Default: 1e-2
+#'
+#' @export
 nnf_leaky_relu <- function(input, negative_slope = 0.01, inplace = FALSE) {
   if (inplace)
     torch_leaky_relu_(input, negative_slope)
@@ -42,6 +96,13 @@ nnf_leaky_relu <- function(input, negative_slope = 0.01, inplace = FALSE) {
     torch_leaky_relu(input, negative_slope)
 }
 
+#' Logsigmoid
+#'
+#' Applies element-wise \eqn{LogSigmoid(x_i) = log(\frac{1}{1 + exp(-x_i)})}
+#' 
+#' @inheritParams nnf_elu
+#'
+#' @export
 nnf_logsigmoid <- function(input) {
   torch_log_sigmoid(input)
 }
