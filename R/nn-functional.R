@@ -1065,226 +1065,89 @@ nnf_multi_head_attention_forward <- function(
   }
 }
 
-nnf_multi_margin_loss <- function() {
-# def multi_margin_loss(input, target, p=1, margin=1., weight=None, size_average=None,
-#                       reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, int, float, Optional[Tensor], Optional[bool], Optional[bool], str) -> Tensor
-#     r"""multi_margin_loss(input, target, p=1, margin=1, weight=None, size_average=None,
-#                           reduce=None, reduction='mean') -> Tensor
-# 
-#     See :class:`~torch.nn.MultiMarginLoss` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 multi_margin_loss, tens_ops, input, target, p=p, margin=margin,
-#                 weight=weight, size_average=size_average, reduce=reduce,
-#                 reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
-#     else:
-#         reduction_enum = _Reduction.get_enum(reduction)
-#     if p != 1 and p != 2:
-#         raise ValueError('only p == 1 and p == 2 supported')
-#     if weight is not None:
-#         if weight.dim() != 1:
-#             raise ValueError('weight must be one-dimensional')
-# 
-#     return torch._C._nn.multi_margin_loss(input, target, p, margin, weight, reduction_enum)
-# 
-stop('not implemented')
+nnf_multi_margin_loss <- function(input, target, p = 1, margin = 1, weight = NULL,
+                                  reduction = "mean") {
+  torch_multi_margin_loss(input, target, p, margin, weight, 
+                          reduction = reduction_enum(reduction))
 }
 
-nnf_multilabel_margin_loss <- function() {
-# def multilabel_margin_loss(input, target, size_average=None, reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, Optional[bool], Optional[bool], str) -> Tensor
-#     r"""multilabel_margin_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor
-# 
-#     See :class:`~torch.nn.MultiLabelMarginLoss` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 multilabel_margin_loss, tens_ops, input, target, size_average=size_average,
-#                 reduce=reduce, reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction_enum = _Reduction.legacy_get_enum(size_average, reduce)
-#     else:
-#         reduction_enum = _Reduction.get_enum(reduction)
-#     return torch._C._nn.multilabel_margin_loss(input, target, reduction_enum)
-# 
-stop('not implemented')
+nnf_multilabel_margin_loss <- function(input, target, reduction = "mean") {
+  torch_multilabel_margin_loss(input, target, reduction_enum(reduction))
 }
 
-nnf_multilabel_soft_margin_loss <- function() {
-# def multilabel_soft_margin_loss(input, target, weight=None, size_average=None,
-#                                 reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], Optional[bool], str) -> Tensor
-#     r"""multilabel_soft_margin_loss(input, target, weight=None, size_average=None) -> Tensor
-# 
-#     See :class:`~torch.nn.MultiLabelSoftMarginLoss` for details.
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 multilabel_soft_margin_loss, tens_ops, input, target, weight=weight,
-#                 size_average=size_average, reduce=reduce, reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction = _Reduction.legacy_get_string(size_average, reduce)
-# 
-#     loss = -(target * logsigmoid(input) + (1 - target) * logsigmoid(-input))
-# 
-#     if weight is not None:
-#         loss = loss * weight
-# 
-#     loss = loss.sum(dim=1) / input.size(1)  # only return N loss values
-# 
-#     if reduction == 'none':
-#         ret = loss
-#     elif reduction == 'mean':
-#         ret = loss.mean()
-#     elif reduction == 'sum':
-#         ret = loss.sum()
-#     else:
-#         ret = input
-#         raise ValueError(reduction + " is not valid")
-#     return ret
-# 
-stop('not implemented')
+nnf_multilabel_soft_margin_loss <- function(input, target, weight, reduction = "mean") {
+  loss <- -(target * nnf_logsigmoid(input) + (1 - target) * nnf_logsigmoid(-input))
+  
+  if (!is.null(weight))
+    loss <- loss * weight
+  
+  loss <- loss$sum(dim = 1)  / input$size(1)
+  
+  if (reduction == "none")
+    ret <- loss
+  else if (reduction == "mean")
+    ret <- loss$mean()
+  else if (reduction == "sum")
+    ret <- loss$sum()
+  else
+    value_error("reduction is not valid.")
+  
+  ret
 }
 
-nnf_nll_loss <- function(input, target, weight, size_average, ignore_index, reduce, reduction) {
-# def nll_loss(input, target, weight=None, size_average=None, ignore_index=-100,
-#              reduce=None, reduction='mean'):
-#     # type: (Tensor, Tensor, Optional[Tensor], Optional[bool], int, Optional[bool], str) -> Tensor
-#     r"""The negative log likelihood loss.
-# 
-#     See :class:`~torch.nn.NLLLoss` for details.
-# 
-#     Args:
-#         input: :math:`(N, C)` where `C = number of classes` or :math:`(N, C, H, W)`
-#             in case of 2D Loss, or :math:`(N, C, d_1, d_2, ..., d_K)` where :math:`K \geq 1`
-#             in the case of K-dimensional loss.
-#         target: :math:`(N)` where each value is :math:`0 \leq \text{targets}[i] \leq C-1`,
-#             or :math:`(N, d_1, d_2, ..., d_K)` where :math:`K \geq 1` for
-#             K-dimensional loss.
-#         weight (Tensor, optional): a manual rescaling weight given to each
-#             class. If given, has to be a Tensor of size `C`
-#         size_average (bool, optional): Deprecated (see :attr:`reduction`). By default,
-#             the losses are averaged over each loss element in the batch. Note that for
-#             some losses, there multiple elements per sample. If the field :attr:`size_average`
-#             is set to ``False``, the losses are instead summed for each minibatch. Ignored
-#             when reduce is ``False``. Default: ``True``
-#         ignore_index (int, optional): Specifies a target value that is ignored
-#             and does not contribute to the input gradient. When :attr:`size_average` is
-#             ``True``, the loss is averaged over non-ignored targets. Default: -100
-#         reduce (bool, optional): Deprecated (see :attr:`reduction`). By default, the
-#             losses are averaged or summed over observations for each minibatch depending
-#             on :attr:`size_average`. When :attr:`reduce` is ``False``, returns a loss per
-#             batch element instead and ignores :attr:`size_average`. Default: ``True``
-#         reduction (string, optional): Specifies the reduction to apply to the output:
-#             ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
-#             ``'mean'``: the sum of the output will be divided by the number of
-#             elements in the output, ``'sum'``: the output will be summed. Note: :attr:`size_average`
-#             and :attr:`reduce` are in the process of being deprecated, and in the meantime,
-#             specifying either of those two args will override :attr:`reduction`. Default: ``'mean'``
-# 
-#     Example::
-# 
-#         >>> # input is of size N x C = 3 x 5
-#         >>> input = torch.randn(3, 5, requires_grad=True)
-#         >>> # each element in target has to have 0 <= value < C
-#         >>> target = torch.tensor([1, 0, 4])
-#         >>> output = F.nll_loss(F.log_softmax(input), target)
-#         >>> output.backward()
-#     """
-#     if not torch.jit.is_scripting():
-#         tens_ops = (input, target)
-#         if any([type(t) is not Tensor for t in tens_ops]) and has_torch_function(tens_ops):
-#             return handle_torch_function(
-#                 nll_loss, tens_ops, input, target, weight=weight, size_average=size_average,
-#                 ignore_index=ignore_index, reduce=reduce, reduction=reduction)
-#     if size_average is not None or reduce is not None:
-#         reduction = _Reduction.legacy_get_string(size_average, reduce)
-#     dim = input.dim()
-#     if dim < 2:
-#         raise ValueError('Expected 2 or more dimensions (got {})'.format(dim))
-# 
-#     if input.size(0) != target.size(0):
-#         raise ValueError('Expected input batch_size ({}) to match target batch_size ({}).'
-#                          .format(input.size(0), target.size(0)))
-#     if dim == 2:
-#         ret = torch._C._nn.nll_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index)
-#     elif dim == 4:
-#         ret = torch._C._nn.nll_loss2d(input, target, weight, _Reduction.get_enum(reduction), ignore_index)
-#     else:
-#         # dim == 3 or dim > 4
-#         n = input.size(0)
-#         c = input.size(1)
-#         out_size = (n,) + input.size()[2:]
-#         if target.size()[1:] != input.size()[2:]:
-#             raise ValueError('Expected target size {}, got {}'.format(
-#                 out_size, target.size()))
-#         input = input.contiguous()
-#         target = target.contiguous()
-#         # support empty batches, see #15870
-#         if input.numel() > 0:
-#             input = input.view(n, c, 1, -1)
-#         else:
-#             input = input.view(n, c, 0, 0)
-#         if target.numel() > 0:
-#             target = target.view(n, 1, -1)
-#         else:
-#             target = target.view(n, 0, 0)
-#         reduction_enum = _Reduction.get_enum(reduction)
-#         if reduction != 'none':
-#             ret = torch._C._nn.nll_loss2d(
-#                 input, target, weight, reduction_enum, ignore_index)
-#         else:
-#             out = torch._C._nn.nll_loss2d(
-#                 input, target, weight, reduction_enum, ignore_index)
-#             ret = out.view(out_size)
-#     return ret
-# 
-stop('not implemented')
+nnf_nll_loss <- function(input, target, weight = NULL, ignore_index, 
+                         reduction = "mean") {
+  
+  dim <- input$dim()
+  
+  if (dim < 2)
+    value_error("Expected 2 or more dimensions, got '{dim}'.")
+  
+  if (dim == 2)
+    ret <- torch_nll_loss(input, target, weight, reduction_enum(reduction), 
+                          ignore_index)
+  else if (dim == 4)
+    ret <- torch_nll_loss2d(input, target, weight, reduction_enum(reduction),
+                            ignore_index)
+  else {
+    n <- input$size(0)
+    c <- input$size(1)
+    out_size <- c(n, input$size()[-c(1:2)])
+    
+    input <- input$contiguous()
+    target <- target$contiguous()
+    
+    if (input$numel() > 0)
+      input <- input$view(n, c, 1, -1)
+    else
+      input <- input$view(n, c, 0, 0)
+    
+    if (target$numel() > 0)
+      target <- target$view(n, 1, -1)
+    else
+      target <- target$view(n, 0, 0)
+    
+    if (reduction != "none") {
+      ret <- torch_nll_loss2d(input, target, weight, reduction_enum(reduction),
+                              ignore_index)
+    } else {
+      out <- torch_nll_loss2d(input, target, weight, reduction_enum(reduction),
+                              ignore_index)
+      ret <- out$view(out_size)
+    }
+  }
+  
+  ret
 }
 
-nnf_normalize <- function(input, p, dim, eps, out) {
-# def normalize(input, p=2, dim=1, eps=1e-12, out=None):
-#     # type: (Tensor, float, int, float, Optional[Tensor]) -> Tensor
-#     r"""Performs :math:`L_p` normalization of inputs over specified dimension.
-# 
-#     For a tensor :attr:`input` of sizes :math:`(n_0, ..., n_{dim}, ..., n_k)`, each
-#     :math:`n_{dim}` -element vector :math:`v` along dimension :attr:`dim` is transformed as
-# 
-#     .. math::
-#         v = \frac{v}{\max(\lVert v \rVert_p, \epsilon)}.
-# 
-#     With the default arguments it uses the Euclidean norm over vectors along dimension :math:`1` for normalization.
-# 
-#     Args:
-#         input: input tensor of any shape
-#         p (float): the exponent value in the norm formulation. Default: 2
-#         dim (int): the dimension to reduce. Default: 1
-#         eps (float): small value to avoid division by zero. Default: 1e-12
-#         out (Tensor, optional): the output tensor. If :attr:`out` is used, this
-#                                 operation won't be differentiable.
-#     """
-#     if not torch.jit.is_scripting():
-#         if type(input) is not Tensor and has_torch_function((input,)):
-#             return handle_torch_function(
-#                 normalize, (input,), input, p=p, dim=dim, eps=eps, out=out)
-#     if out is None:
-#         denom = input.norm(p, dim, keepdim=True).clamp_min(eps).expand_as(input)
-#         return input / denom
-#     else:
-#         denom = input.norm(p, dim, keepdim=True).clamp_min_(eps).expand_as(input)
-#         return torch.div(input, denom, out=out)
-# 
-stop('not implemented')
+nnf_normalize <- function(input, p = 2, dim = 1, eps = 1e-12, out = NULL) {
+  if (is.null(out)) {
+    denom <- input$norm(p, dim, keepdim = TRUE)$clamp_min(eps)$expand_as(input)
+    return(input/denom)
+  } else {
+    denom <- input$norm(p, dim, keepdim=TRUE)$clamp_min_(eps)$expand_as(input)
+    return(torch_div_out(input, denom, out))
+  }
 }
 
 nnf_one_hot <- function(tensor, num_classes) {
