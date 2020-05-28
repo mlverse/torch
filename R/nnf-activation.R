@@ -107,6 +107,17 @@ nnf_logsigmoid <- function(input) {
   torch_log_sigmoid(input)
 }
 
+#' Gumbel_softmax
+#'
+#' Samples from the Gumbel-Softmax distribution and 
+#' optionally discretizes.
+#'
+#' @param logits `[..., num_features]` unnormalized log probabilities
+#' @param tau non-negative scalar temperature
+#' @param hard if ``True``, the returned samples will be discretized as one-hot vectors,        but will be differentiated as if it is the soft sample in autograd
+#' @param dim (int) A dimension along which softmax will be computed. Default: -1.
+#'
+#' @export
 nnf_gumbel_softmax <- function(logits, tau = 1, hard = FALSE, dim = -1) {
   gumbels <- -torch_empty_like(logits, memory_format = torch_contiguous_format())
   gumbels <- gumbels$exponential_()$log()
@@ -124,6 +135,23 @@ nnf_gumbel_softmax <- function(logits, tau = 1, hard = FALSE, dim = -1) {
   ret
 }
 
+#' Softmax
+#'
+#' Applies a softmax function.
+#' 
+#' Softmax is defined as:
+#' 
+#' \deqn{Softmax(x_{i}) = exp(x_i)/\sum_j exp(x_j)}
+#' 
+#' It is applied to all slices along dim, and will re-scale them so that the elements
+#' lie in the range `[0, 1]` and sum to 1.
+#'
+#' @param input (Tensor) input
+#' @param dim (int) A dimension along which softmax will be computed.
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.      If specified, the input tensor is casted to `dtype` before the operation      is performed. This is useful for preventing data type overflows. 
+#'   Default: NULL.
+#'
+#' @export
 nnf_softmax <- function(input, dim, dtype = NULL) {
   if (is.null(dtype))
     ret <- input$softmax(dim)
@@ -133,6 +161,23 @@ nnf_softmax <- function(input, dim, dtype = NULL) {
   ret
 }
 
+#' Softmin
+#'
+#' Applies a softmin function.
+#' 
+#' Note that 
+#' 
+#' \deqn{Softmin(x) = Softmax(-x)}. 
+#' 
+#' See [nnf_softmax] definition for mathematical formula.
+#'
+#' @param input (Tensor) input
+#' @param dim (int) A dimension along which softmin will be computed 
+#'   (so every slice        along dim will sum to 1).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.      If specified, the input tensor is casted to `dtype` before the operation      is performed. 
+#'   This is useful for preventing data type overflows. Default: NULL.
+#'
+#' @export
 nnf_softmin <- function(input, dim, dtype = NULL) {
   if (is.null(dtype))
     ret <- (-input)$softmax(dim)

@@ -978,24 +978,6 @@ NULL
 NULL
 
 
-#' Gumbel_softmax
-#'
-#' @section Samples from the Gumbel-Softmax distribution (`Link 1`_  `Link 2`_) and optionally discretizes. :
-#'
-#' Samples from the Gumbel-Softmax distribution (`Link 1`_  `Link 2`_) and optionally discretizes.
-#'
-#'
-#' @param logits NA `[..., num_features]` unnormalized log probabilities
-#' @param tau NA non-negative scalar temperature
-#' @param hard NA if ``True``, the returned samples will be discretized as one-hot vectors,        but will be differentiated as if it is the soft sample in autograd
-#' @param dim (int) A dimension along which softmax will be computed. Default: -1.
-#'
-#' @name nnf_gumbel_softmax
-#'
-#' @export
-NULL
-
-
 #' Handle_torch_function
 #'
 #' Implement a function with checks for __torch_function__ overrides.
@@ -1886,46 +1868,6 @@ NULL
 #' @export
 NULL
 
-
-#' Softmax
-#'
-#' Applies a softmax function.
-#' 
-#'     Softmax is defined as:
-#' 
-#'     \eqn{\text{Softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}}
-#' 
-#'     It is applied to all slices along dim, and will re-scale them so that the elements
-#'     lie in the range `[0, 1]` and sum to 1.
-#' 
-#'     See `~torch.nn.Softmax` for more details.
-#'
-#' @param input (Tensor) input
-#' @param dim (int) A dimension along which softmax will be computed.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.      If specified, the input tensor is casted to `dtype` before the operation      is performed. This is useful for preventing data type overflows. Default: None.
-#'
-#' @name nnf_softmax
-#'
-#' @export
-NULL
-
-
-#' Softmin
-#'
-#' Applies a softmin function.
-#' 
-#'     Note that \eqn{\text{Softmin}(x) = \text{Softmax}(-x)}. See softmax definition for mathematical formula.
-#' 
-#'     See `~torch.nn.Softmin` for more details.
-#'
-#' @param input (Tensor) input
-#' @param dim (int) A dimension along which softmin will be computed (so every slice        along dim will sum to 1).
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.      If specified, the input tensor is casted to `dtype` before the operation      is performed. This is useful for preventing data type overflows. Default: None.
-#'
-#' @name nnf_softmin
-#'
-#' @export
-NULL
 
 
 #' Softplus
