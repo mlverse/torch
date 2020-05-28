@@ -7,7 +7,13 @@
 #'   dimensions
 #' @param alpha the alpha value for the ELU formulation. Default: 1.0
 #' @param inplace can optionally do the operation in-place. Default: FALSE
-#'
+#' 
+#' @examples 
+#' x <- torch_randn(2, 2)
+#' y <- nnf_elu(x, alpha = 1)
+#' nnf_elu_(x, alpha = 1)
+#' torch_equal(x, y)
+#' 
 #' @export
 nnf_elu <- function(input, alpha=1, inplace=FALSE) {
   if(inplace)
@@ -30,7 +36,13 @@ nnf_elu_ <- function(input, alpha=1) {
 #' \eqn{scale=1.0507009873554804934193349852946}.
 #' 
 #' @inheritParams nnf_elu
-#'
+#' 
+#' @examples 
+#' x <- torch_randn(2, 2)
+#' y <- nnf_selu(x)
+#' nnf_selu_(x)
+#' torch_equal(x, y)
+#' 
 #' @export
 nnf_selu <- function(input, inplace = FALSE) {
   if (inplace)
@@ -187,6 +199,22 @@ nnf_softmin <- function(input, dim, dtype = NULL) {
   ret
 }
 
+#' Log_softmax
+#'
+#' Applies a softmax followed by a logarithm.
+#' 
+#' While mathematically equivalent to log(softmax(x)), doing these two
+#' operations separately is slower, and numerically unstable. This function
+#' uses an alternative formulation to compute the output and gradient correctly.
+#' 
+#' @param input (Tensor) input
+#' @param dim (int) A dimension along which log_softmax will be computed.
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.      
+#'   If specified, the input tensor is casted to `dtype` before the operation      
+#'   is performed. This is useful for preventing data type overflows. 
+#'   Default: `NULL`.
+#'
+#' @export
 nnf_log_softmax <- function(input, dim = NULL, dtype = NULL, ...) {
   
   if (is.null(dtype))
@@ -197,18 +225,66 @@ nnf_log_softmax <- function(input, dim = NULL, dtype = NULL, ...) {
   ret  
 }
 
+#' Glu
+#'
+#' The gated linear unit. Computes:
+#' 
+#' \deqn{GLU(a, b) = a \otimes \sigma(b)}
+#'         
+#' where `input` is split in half along `dim` to form `a` and `b`, \eqn{\sigma}
+#' is the sigmoid function and \eqn{\otimes} is the element-wise product 
+#' between matrices.
+#' 
+#' See [Language Modeling with Gated Convolutional Networks](https://arxiv.org/abs/1612.08083).
+#'
+#' @param input (Tensor) input tensor
+#' @param dim (int) dimension on which to split the input. Default: -1
+#'
+#' @export
 nnf_glu <- function(input, dim = -1) {
   torch_glu(self = input, dim = dim)
 }
 
+#' Gelu
+#'
+#' @section gelu(input) -> Tensor :
+#'
+#' Applies element-wise the function
+#' \eqn{GELU(x) = x * \Phi(x)}
+#' 
+#' where \eqn{\Phi(x)} is the Cumulative Distribution Function for 
+#' Gaussian Distribution.
+#' 
+#' See \href{https://arxiv.org/abs/1606.08415}{Gaussian Error Linear Units (GELUs)}.
+#' 
+#' @inheritParams nnf_elu
+#'
+#' @export
 nnf_gelu <- function(input) {
   torch_gelu(self = input)
 }
 
+#' Prelu
+#'
+#' Applies element-wise the function
+#' \eqn{PReLU(x) = max(0,x) + weight * min(0,x)} 
+#' where weight is a learnable parameter.
+#' 
+#' @inheritParams nnf_elu
+#' @param weight (Tensor) the learnable weights
+#'
+#' @export
 nnf_prelu <- function(input, weight) {
   torch_prelu(input, weight)
 }
 
+#' Relu
+#'
+#' Applies the rectified linear unit function element-wise.
+#' 
+#' @inheritParams nnf_elu
+#'
+#' @export
 nnf_relu <- function(input, inplace = FALSE) {
   if (inplace)
     torch_relu_(input)
@@ -216,14 +292,32 @@ nnf_relu <- function(input, inplace = FALSE) {
     torch_relu(input)
 }
 
+#' Relu6
+#'
+#' Applies the element-wise function \eqn{ReLU6(x) = min(max(0,x), 6)}.
+#' @inheritParams nnf_elu
+#'
+#' @export
 nnf_relu6 <- function(input, inplace = FALSE) {
   nnf_hardtanh(input, 0, 6, inplace)
 }
 
+#' @rdname nnf_relu
+#' @export
 nnf_relu_ <- function(input) {
   nnf_relu(input, inplace = TRUE)
 }
 
+#' Rrelu
+#'
+#' Randomized leaky ReLU.
+#'
+#' @inheritParams nnf_elu
+#' @param lower lower bound of the uniform distribution. Default: 1/8
+#' @param upper upper bound of the uniform distribution. Default: 1/3
+#' @param training bool wether it's a training pass. DEfault: FALSE
+#'
+#' @export
 nnf_rrelu <- function(input, lower = 1/8, upper = 1/3, training = FALSE,
                       inplace = FALSE) {
   
@@ -235,10 +329,20 @@ nnf_rrelu <- function(input, lower = 1/8, upper = 1/3, training = FALSE,
   result
 }
 
+#' @rdname nnf_rrelu
+#' @export
 nnf_rrelu_ <- function(input, lower = 1/8, upper = 1/3, training = FALSE) {
   nnf_rrelu(input, lower, upper, training = TRUE)
 }
 
+#' Celu
+#'
+#' Applies element-wise, \eqn{CELU(x) = max(0,x) + min(0, \alpha * (exp(x \alpha) - 1))}.
+#' 
+#' @inheritParams nnf_elu
+#' @param alpha the alpha value for the CELU formulation. Default: 1.0
+#'
+#' @export
 nnf_celu <- function(input, alpha = 1, inplace = FALSE) {
   if (inplace)
     torch_celu_(input, alpha)
@@ -246,26 +350,71 @@ nnf_celu <- function(input, alpha = 1, inplace = FALSE) {
     torch_celu(input, alpha)
 }
 
+#' @rdname nnf_celu
+#' @export
 nnf_celu_ <- function(input, alpha = 1) {
   torch_celu_(input, alpha)
 }
 
+#' Softplus
+#'
+#' Applies element-wise, the function \eqn{Softplus(x) = 1/\beta * log(1 + exp(\beta * x))}.
+#' 
+#' For numerical stability the implementation reverts to the linear function
+#' when \eqn{input * \beta > threshold}.
+#' 
+#' @inheritParams nnf_elu
+#' @param beta the beta value for the Softplus formulation. Default: 1
+#' @param threshold values above this revert to a linear function. Default: 20
+#' 
+#' @export
 nnf_softplus <- function(input, beta = 1, threshold = 20) {
   torch_softplus(input, beta, threshold)
 }
 
+#' Softshrink
+#'
+#' Applies the soft shrinkage function elementwise
+#' 
+#' @inheritParams nnf_elu
+#' @param lambd the lambda (must be no less than zero) value for the Softshrink 
+#'   formulation. Default: 0.5
+#'
+#' @export
 nnf_softshrink <- function(input, lambd = 0.5) {
   torch_softshrink(input, lambd)
 }
 
+#' Softsign
+#'
+#' Applies element-wise, the function \eqn{SoftSign(x) = x/(1 + |x|}
+#' 
+#' @inheritParams nnf_elu
+#'
+#' @export
 nnf_softsign <- function(input) {
   input / (input$abs() + 1)
 }
 
+#' Tanhshrink
+#'
+#' Applies element-wise, \eqn{Tanhshrink(x) = x - Tanh(x)}
+#'
+#' @inheritParams nnf_elu
+#'
+#' @export
 nnf_tanhshrink <- function(input) {
   input - input$tanh()
 }
 
+#' Threshold
+#'
+#' Thresholds each element of the input Tensor.
+#' @inheritParams nnf_elu
+#' @param threshold The value to threshold at
+#' @param value The value to replace with
+#'
+#' @export
 nnf_threshold <- function(input, threshold, value, inplace = FALSE) {
   if (inplace)
     torch_threshold_(input, threshold, value)
@@ -273,10 +422,43 @@ nnf_threshold <- function(input, threshold, value, inplace = FALSE) {
     torch_threshold(input, threshold, value)
 }
 
+#' @rdname nnf_threshold
+#' @export
 nnf_threshold_ <- function(input, threshold, value) {
   nnf_threshold(input, threshold, value, TRUE)
 }
 
+#' Multi head attention forward
+#' 
+#' Allows the model to jointly attend to information from different representation 
+#' subspaces. See reference: Attention Is All You Need
+#'
+#' @param query map a query and a set of key-value pairs to an output.            
+#'   See "Attention Is All You Need" for more details.
+#' @param embed_dim_to_check  total dimension of the model.
+#' @param num_heads  parallel attention heads.
+#' @param in_proj_weight  input projection weight and bias.
+#' @param bias_k bias of the key and value sequences to be added at dim=0.
+#' @param add_zero_attn  add a new batch of zeros to the key and                       
+#'   value sequences at dim=1.
+#' @param dropout_p  probability of an element to be zeroed.
+#' @param out_proj_weight the output projection weight and bias.
+#' @param training  apply dropout if is `TRUE`.
+#' @param key_padding_mask  if provided, specified padding elements in the key will            
+#'   be ignored by the attention. This is an binary mask. When the value is True            
+#'   the corresponding value on the attention layer will be filled with -inf.
+#' @param need_weights  output attn_output_weights.
+#' @param attn_mask  2D or 3D mask that prevents attention to certain positions. 
+#'   This is an additive mask (i.e. the values will be added to the attention layer). 
+#'   A 2D mask will be broadcasted for all the batches while a 3D mask allows to 
+#'   specify a different mask for the entries of each batch.
+#' @param use_separate_proj_weight  the function accept the proj. weights for 
+#'   query, key, and value in different forms. If false, in_proj_weight will be used, 
+#'   which is a combination of q_proj_weight, k_proj_weight, v_proj_weight.
+#' @param q_proj_weight input projection weight and bias.
+#' @param static_k static key and value used for attention operators.
+#'
+#' @export
 nnf_multi_head_attention_forward <- function(
   query,                           # type: Tensor
   key,                             # type: Tensor

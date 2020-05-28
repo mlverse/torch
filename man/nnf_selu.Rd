@@ -25,4 +25,9 @@ with \eqn{\alpha=1.6732632423543772848170429916717} and
 \examples{
 
 
+x <- torch_randn(2, 2)
+y <- nnf_selu(x)
+nnf_selu_(x)
+torch_equal(x, y)
+
 }

@@ -346,39 +346,6 @@ NULL
 NULL
 
 
-#' Celu
-#'
-#' @section celu(input, alpha=1., inplace=False) -> Tensor :
-#'
-#' Applies element-wise,
-#'     \eqn{\text{CELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x/\alpha) - 1))}.
-#' 
-#'     See `~torch.nn.CELU` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_celu
-#'
-#' @export
-NULL
-
-
-#' Celu_
-#'
-#' @section celu_(input, alpha=1.) -> Tensor :
-#'
-#' In-place version of [`~celu`].
-#'
-#'
-#'
-#'
-#' @name nnf_celu_
-#'
-#' @export
-NULL
-
-
 #' Conv1d
 #'
 #' @section conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor :
@@ -852,49 +819,6 @@ NULL
 NULL
 
 
-#' Gelu
-#'
-#' @section gelu(input) -> Tensor :
-#'
-#' Applies element-wise the function
-#'     \eqn{\text{GELU}(x) = x * \Phi(x)}
-#' 
-#'     where \eqn{\Phi(x)} is the Cumulative Distribution Function for Gaussian Distribution.
-#' 
-#'     See `Gaussian Error Linear Units (GELUs) <https://arxiv.org/abs/1606.08415>`_.
-#'
-#'
-#'
-#'
-#' @name nnf_gelu
-#'
-#' @export
-NULL
-
-
-#' Glu
-#'
-#' @section glu(input, dim=-1) -> Tensor :
-#'
-#' The gated linear unit. Computes:
-#' 
-#'     .. math ::
-#'         \text{GLU}(a, b) = a \otimes \sigma(b)
-#' 
-#'     where `input` is split in half along `dim` to form `a` and `b`, \eqn{\sigma}
-#'     is the sigmoid function and \eqn{\otimes} is the element-wise product between matrices.
-#' 
-#'     See `Language Modeling with Gated Convolutional Networks <https://arxiv.org/abs/1612.08083>`_.
-#'
-#'
-#' @param input (Tensor) input tensor
-#' @param dim (int) dimension on which to split the input. Default: -1
-#'
-#' @name nnf_glu
-#'
-#' @export
-NULL
-
 
 #' Grad
 #'
@@ -1230,24 +1154,7 @@ NULL
 NULL
 
 
-#' Log_softmax
-#'
-#' Applies a softmax followed by a logarithm.
-#' 
-#'     While mathematically equivalent to log(softmax(x)), doing these two
-#'     operations separately is slower, and numerically unstable. This function
-#'     uses an alternative formulation to compute the output and gradient correctly.
-#' 
-#'     See `~torch.nn.LogSoftmax` for more details.
-#'
-#' @param input (Tensor) input
-#' @param dim (int) A dimension along which log_softmax will be computed.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.      If specified, the input tensor is casted to `dtype` before the operation      is performed. This is useful for preventing data type overflows. Default: None.
-#'
-#' @name nnf_log_softmax
-#'
-#' @export
-NULL
+
 
 #' Lp_pool1d
 #'
@@ -1458,33 +1365,7 @@ NULL
 NULL
 
 
-#' Multi_head_attention_forward
-#'
-#' Args:
-#'
-#' @param query, NA map a query and a set of key-value pairs to an output.            See "Attention Is All You Need" for more details.
-#' @param embed_dim_to_check NA total dimension of the model.
-#' @param num_heads NA parallel attention heads.
-#' @param in_proj_weight, NA input projection weight and bias.
-#' @param bias_k, NA bias of the key and value sequences to be added at dim=0.
-#' @param add_zero_attn NA add a new batch of zeros to the key and                       value sequences at dim=1.
-#' @param dropout_p NA probability of an element to be zeroed.
-#' @param out_proj_weight, NA the output projection weight and bias.
-#' @param training NA apply dropout if is ``True``.
-#' @param key_padding_mask NA if provided, specified padding elements in the key will            be ignored by the attention. This is an binary mask. When the value is True,            the corresponding value on the attention layer will be filled with -inf.
-#' @param need_weights NA output attn_output_weights.
-#' @param attn_mask NA 2D or 3D mask that prevents attention to certain positions. This is an additive mask            (i.e. the values will be added to the attention layer). A 2D mask will be broadcasted for all            the batches while a 3D mask allows to specify a different mask for the entries of each batch.
-#' @param use_separate_proj_weight NA the function accept the proj. weights for query, key,            and value in different forms. If false, in_proj_weight will be used, which is            a combination of q_proj_weight, k_proj_weight, v_proj_weight.
-#' @param q_proj_weight, NA input projection weight and bias.
-#' @param static_k, NA static key and value used for attention operators.    Shape:
-#' @param Inputs: NA 
-#' @param - NA \eqn{(L, N, E)} where L is the target sequence length, N is the batch size, E is          the embedding dimension.
-#' @param Outputs: NA 
-#'
-#' @name nnf_multi_head_attention_forward
-#'
-#' @export
-NULL
+
 
 
 #' Multi_margin_loss
@@ -1723,105 +1604,6 @@ NULL
 #' @export
 NULL
 
-
-#' Prelu
-#'
-#' @section prelu(input, weight) -> Tensor :
-#'
-#' Applies element-wise the function
-#'     \eqn{\text{PReLU}(x) = \max(0,x) + \text{weight} * \min(0,x)} where weight is a
-#'     learnable parameter.
-#' 
-#'     See `~torch.nn.PReLU` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_prelu
-#'
-#' @export
-NULL
-
-
-#' Relu
-#'
-#' @section relu(input, inplace=False) -> Tensor :
-#'
-#' Applies the rectified linear unit function element-wise. See
-#'     `~torch.nn.ReLU` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_relu
-#'
-#' @export
-NULL
-
-
-#' Relu6
-#'
-#' @section relu6(input, inplace=False) -> Tensor :
-#'
-#' Applies the element-wise function \eqn{\text{ReLU6}(x) = \min(\max(0,x), 6)}.
-#' 
-#'     See `~torch.nn.ReLU6` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_relu6
-#'
-#' @export
-NULL
-
-
-#' Relu_
-#'
-#' @section relu_(input) -> Tensor :
-#'
-#' In-place version of [`~relu`].
-#'
-#'
-#'
-#'
-#' @name nnf_relu_
-#'
-#' @export
-NULL
-
-
-#' Rrelu
-#'
-#' @section rrelu(input, lower=1./8, upper=1./3, training=False, inplace=False) -> Tensor :
-#'
-#' Randomized leaky ReLU.
-#' 
-#'     See `~torch.nn.RReLU` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_rrelu
-#'
-#' @export
-NULL
-
-
-#' Rrelu_
-#'
-#' @section rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor :
-#'
-#' In-place version of [`~rrelu`].
-#'
-#'
-#'
-#'
-#' @name nnf_rrelu_
-#'
-#' @export
-NULL
-
 #' Sigmoid
 #'
 #' @section sigmoid(input) -> Tensor :
@@ -1870,60 +1652,6 @@ NULL
 
 
 
-#' Softplus
-#'
-#' @section softplus(input, beta=1, threshold=20) -> Tensor :
-#'
-#' Applies element-wise, the function \eqn{\text{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))}.
-#' 
-#' For numerical stability the implementation reverts to the linear function
-#' when \eqn{input \times \beta > threshold}.
-#' 
-#' See `~torch.nn.Softplus` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_softplus
-#'
-#' @export
-NULL
-
-
-#' Softshrink
-#'
-#' @section softshrink(input, lambd=0.5) -> Tensor :
-#'
-#' Applies the soft shrinkage function elementwise
-#' 
-#' See `~torch.nn.Softshrink` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_softshrink
-#'
-#' @export
-NULL
-
-
-#' Softsign
-#'
-#' @section softsign(input) -> Tensor :
-#'
-#' Applies element-wise, the function \eqn{\text{SoftSign}(x) = \frac{x}{1 + |x|}}
-#' 
-#'     See `~torch.nn.Softsign` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_softsign
-#'
-#' @export
-NULL
-
-
 #' Tanh
 #'
 #' @section tanh(input) -> Tensor :
@@ -1937,52 +1665,6 @@ NULL
 #'
 #'
 #' @name nnf_tanh
-#'
-#' @export
-NULL
-
-
-#' Tanhshrink
-#'
-#' @section tanhshrink(input) -> Tensor :
-#'
-#' Applies element-wise, \eqn{\text{Tanhshrink}(x) = x - \text{Tanh}(x)}
-#' 
-#'     See `~torch.nn.Tanhshrink` for more details.
-#'
-#'
-#'
-#'
-#' @name nnf_tanhshrink
-#'
-#' @export
-NULL
-
-
-#' Threshold
-#'
-#' Thresholds each element of the input Tensor.
-#' 
-#'     See `~torch.nn.Threshold` for more details.
-#'
-#'
-#'
-#' @name nnf_threshold
-#'
-#' @export
-NULL
-
-
-#' Threshold_
-#'
-#' @section threshold_(input, threshold, value) -> Tensor :
-#'
-#' In-place version of [`~threshold`].
-#'
-#'
-#'
-#'
-#' @name nnf_threshold_
 #'
 #' @export
 NULL
