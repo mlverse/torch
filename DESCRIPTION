@@ -60,6 +60,7 @@ Collate:
     'nn_linear.R'
     'nnf-activation.R'
     'nnf-batchnorm.R'
+    'nnf-conv.R'
     'operators.R'
     'package.R'
     'qscheme.R'

@@ -92,60 +92,19 @@ nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL,
                                          reduction_enum(reduction))
 }
 
-nnf_conv1d <- function(input, weight, bias = NULL, stride = 1, padding = 0, dilation = 1, 
-                       groups = 1) {
-  torch_conv1d(
-    input = input, weight = weight, bias = bias, stride = stride,
-    padding = padding, dilation = dilation, groups = groups
-  )
-}
 
-nnf_conv2d <- function(input, weight, bias = NULL, stride = 1, padding = 0, dilation = 1, 
-                       groups = 1) {
-  torch_conv2d(
-    input = input, weight = weight, bias = bias, stride = stride,
-    padding = padding, dilation = dilation, groups = groups
-  )
-}
 
-nnf_conv3d <- function(input, weight, bias = NULL, stride = 1, padding = 0, dilation = 1, 
-                       groups = 1) {
-  torch_conv3d(
-    input = input, weight = weight, bias = bias, stride = stride,
-    padding = padding, dilation = dilation, groups = groups
-  )
-}
+
+
+
 
 nnf_conv_tbc <- function(input, weight, bias, pad = 0) {
   torch_conv_tbc(self = input, weight = weight, bias = bias, pad = pad)
 }
 
-nnf_conv_transpose1d <- function(input, weight, bias=NULL, stride=1, padding=0, 
-                                 output_padding=0, groups=1, dilation=1) {
-  torch_conv_transpose1d(
-    input = input, weight = weight, bias = bias, stride = stride,
-    padding = padding, output_padding = output_padding, groups = groups,
-    dilation = dilation
-  )
-}
 
-nnf_conv_transpose2d <- function(input, weight, bias=NULL, stride=1, padding=0, 
-                                 output_padding=0, groups=1, dilation=1) {
-  torch_conv_transpose2d(
-    input = input, weight = weight, bias = bias, stride = stride,
-    padding = padding, output_padding = output_padding, groups = groups,
-    dilation = dilation
-  )
-}
 
-nnf_conv_transpose3d <- function(input, weight, bias=NULL, stride=1, padding=0, 
-                                 output_padding=0, groups=1, dilation=1) {
-  torch_conv_transpose3d(
-    input = input, weight = weight, bias = bias, stride = stride,
-    padding = padding, output_padding = output_padding, groups = groups,
-    dilation = dilation
-  )
-}
+
 
 nnf_cosine_embedding_loss <- function(input1, input2, target, margin=0, 
                                       size_average=NULL, reduction=c("mean", "sum", "none")) {
