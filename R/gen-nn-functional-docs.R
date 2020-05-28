@@ -251,19 +251,7 @@ NULL
 NULL
 
 
-#' Batch_norm
-#'
-#' Applies Batch Normalization for each channel across a batch of data.
-#' 
-#'     See `~torch.nn.BatchNorm1d`, `~torch.nn.BatchNorm2d`,
-#'     `~torch.nn.BatchNorm3d` for details.
-#'
-#'
-#'
-#' @name nnf_batch_norm
-#'
-#' @export
-NULL
+
 
 
 #' Bilinear

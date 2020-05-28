@@ -74,13 +74,6 @@ nnf_avg_pool3d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
                    divisor_override)
 }
 
-nnf_batch_norm <- function(input, running_mean, running_var, weight = NULL, bias = NULL,
-                           training = FALSE, momentum = 0.1, eps = 1e-5) {
-  torch_batch_norm(input = input, weight = weight, bias = bias, running_mean = running_mean,
-                   running_var = running_var, training = training, momentum = momentum,
-                   eps = eps, cudnn_enabled = backends_cudnn_enabled())
-}
-
 nnf_bilinear <- function(input1, input2, weight, bias = NULL) {
   torch_bilinear(input1, input2, weight, bias)
 }
