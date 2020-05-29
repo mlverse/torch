@@ -62,6 +62,7 @@ Collate:
     'nnf-batchnorm.R'
     'nnf-conv.R'
     'nnf-distance.R'
+    'nnf-dropout.R'
     'operators.R'
     'package.R'
     'qscheme.R'

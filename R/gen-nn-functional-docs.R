@@ -164,18 +164,7 @@ NULL
 NULL
 
 
-#' Alpha_dropout
-#'
-#' Applies alpha dropout to the input.
-#' 
-#'     See `~torch.nn.AlphaDropout` for details.
-#'
-#'
-#'
-#' @name nnf_alpha_dropout
-#'
-#' @export
-NULL
+
 
 
 #' Avg_pool1d
@@ -412,69 +401,6 @@ NULL
 #' @export
 NULL
 
-
-#' Dropout
-#'
-#' During training, randomly zeroes some of the elements of the input
-#'     tensor with probability `p` using samples from a Bernoulli
-#'     distribution.
-#' 
-#'     See `~torch.nn.Dropout` for details.
-#'
-#' @param p NA probability of an element to be zeroed. Default: 0.5
-#' @param training NA apply dropout if is ``True``. Default: ``True``
-#' @param inplace NA If set to ``True``, will do this operation in-place. Default: ``False``
-#'
-#' @name nnf_dropout
-#'
-#' @export
-NULL
-
-
-#' Dropout2d
-#'
-#' @section Randomly zero out entire channels (a channel is a 2D feature map, :
-#'
-#' Randomly zero out entire channels (a channel is a 2D feature map,
-#'     e.g., the \eqn{j}-th channel of the \eqn{i}-th sample in the
-#'     batched input is a 2D tensor \eqn{\text{input}[i, j]}) of the input tensor).
-#'     Each channel will be zeroed out independently on every forward call with
-#'     probability `p` using samples from a Bernoulli distribution.
-#' 
-#'     See `~torch.nn.Dropout2d` for details.
-#'
-#'
-#' @param p NA probability of a channel to be zeroed. Default: 0.5
-#' @param training NA apply dropout if is ``True``. Default: ``True``
-#' @param inplace NA If set to ``True``, will do this operation in-place. Default: ``False``
-#'
-#' @name nnf_dropout2d
-#'
-#' @export
-NULL
-
-
-#' Dropout3d
-#'
-#' @section Randomly zero out entire channels (a channel is a 3D feature map, :
-#'
-#' Randomly zero out entire channels (a channel is a 3D feature map,
-#'     e.g., the \eqn{j}-th channel of the \eqn{i}-th sample in the
-#'     batched input is a 3D tensor \eqn{\text{input}[i, j]}) of the input tensor).
-#'     Each channel will be zeroed out independently on every forward call with
-#'     probability `p` using samples from a Bernoulli distribution.
-#' 
-#'     See `~torch.nn.Dropout3d` for details.
-#'
-#'
-#' @param p NA probability of a channel to be zeroed. Default: 0.5
-#' @param training NA apply dropout if is ``True``. Default: ``True``
-#' @param inplace NA If set to ``True``, will do this operation in-place. Default: ``False``
-#'
-#' @name nnf_dropout3d
-#'
-#' @export
-NULL
 
 #' Embedding
 #'

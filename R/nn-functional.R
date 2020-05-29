@@ -50,13 +50,6 @@ nnf_affine_grid <- function(theta, size, align_corners = FALSE) {
   torch_affine_grid_generator(theta, size, align_corners)
 }
 
-nnf_alpha_dropout <- function(input, p = 0.5, training = FALSE, inplace = FALSE) {
-  if (inplace)
-    torch_alpha_dropout_(input, p, training)
-  else
-    torch_alpha_dropout(input, p, training)
-}
-
 nnf_avg_pool1d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
                            count_include_pad = TRUE) {
   torch_avg_pool1d(input, kernel_size, stride, padding, ceil_mode, count_include_pad)
@@ -127,26 +120,7 @@ nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blan
                  zero_infinity = zero_infinity)
 }
 
-nnf_dropout <- function(input, p=0.5, training=TRUE, inplace=FALSE) {
-  if (inplace)
-    torch_dropout_(input, p, training)
-  else
-    torch_dropout(input, p, training)
-}
 
-nnf_dropout2d <- function(input, p=0.5, training=TRUE, inplace=FALSE) {
-  if (inplace)
-    torch_feature_dropout_(input, p, training)
-  else
-    torch_feature_dropout(input, p, training)
-}
-
-nnf_dropout3d <- function(input, p=0.5, training=TRUE, inplace=FALSE) {
-  if (inplace)
-    torch_feature_dropout_(input, p, training)
-  else
-    torch_feature_dropout(input, p, training)
-}
 
 
 nnf_embedding <- function(input, weight, padding_idx=NULL, max_norm=NULL, norm_type=2,
