@@ -350,86 +350,6 @@ NULL
 NULL
 
 
-#' Conv_transpose1d
-#'
-#' @section conv_transpose1d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor :
-#'
-#' Applies a 1D transposed convolution operator over an input signal
-#' composed of several input planes, sometimes also called "deconvolution".
-#' 
-#' See `~torch.nn.ConvTranspose1d` for details and output shape.
-#' 
-#' .. include:: cudnn_deterministic.rst
-#'
-#'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iW)}
-#' @param weight NA filters of shape \eqn{(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kW)}
-#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: None
-#' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sW,)``. Default: 1
-#' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padW,)``. Default: 0
-#' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple ``(out_padW)``. Default: 0
-#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
-#' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dW,)``. Default: 1
-#'
-#' @name nnf_conv_transpose1d
-#'
-#' @export
-NULL
-
-
-#' Conv_transpose2d
-#'
-#' @section conv_transpose2d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor :
-#'
-#' Applies a 2D transposed convolution operator over an input image
-#' composed of several input planes, sometimes also called "deconvolution".
-#' 
-#' See `~torch.nn.ConvTranspose2d` for details and output shape.
-#' 
-#' .. include:: cudnn_deterministic.rst
-#'
-#'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iH , iW)}
-#' @param weight NA filters of shape \eqn{(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kH , kW)}
-#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: None
-#' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sH, sW)``. Default: 1
-#' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padH, padW)``. Default: 0
-#' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple ``(out_padH, out_padW)``.      Default: 0
-#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
-#' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dH, dW)``. Default: 1
-#'
-#' @name nnf_conv_transpose2d
-#'
-#' @export
-NULL
-
-
-#' Conv_transpose3d
-#'
-#' @section conv_transpose3d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -> Tensor :
-#'
-#' Applies a 3D transposed convolution operator over an input image
-#' composed of several input planes, sometimes also called "deconvolution"
-#' 
-#' See `~torch.nn.ConvTranspose3d` for details and output shape.
-#' 
-#' .. include:: cudnn_deterministic.rst
-#'
-#'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iT , iH , iW)}
-#' @param weight NA filters of shape \eqn{(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kT , kH , kW)}
-#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: None
-#' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sT, sH, sW)``. Default: 1
-#' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padT, padH, padW)``. Default: 0
-#' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple      ``(out_padT, out_padH, out_padW)``. Default: 0
-#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
-#' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dT, dH, dW)`. Default: 1
-#'
-#' @name nnf_conv_transpose3d
-#'
-#' @export
-NULL
-
 
 #' Cosine_embedding_loss
 #'
@@ -626,23 +546,7 @@ NULL
 NULL
 
 
-#' Fold
-#'
-#' Combines an array of sliding local blocks into a large containing
-#'     tensor.
-#' 
-#'     .. warning::
-#'         Currently, only 4-D output tensors (batched image-like tensors) are
-#'         supported.
-#' 
-#'     See `torch_nn.Fold` for details
-#'
-#'
-#'
-#' @name nnf_fold
-#'
-#' @export
-NULL
+
 
 
 #' Fractional_max_pool2d
@@ -1610,30 +1514,7 @@ NULL
 NULL
 
 
-#' Unfold
-#'
-#' Extracts sliding local blocks from an batched input tensor.
-#' 
-#'     .. warning::
-#'         Currently, only 4-D input tensors (batched image-like tensors) are
-#'         supported.
-#' 
-#'     .. warning::
-#' 
-#'         More than one element of the unfolded tensor may refer to a single
-#'         memory location. As a result, in-place operations (especially ones that
-#'         are vectorized) may result in incorrect behavior. If you need to write
-#'         to the tensor, please clone it first.
-#' 
-#' 
-#'     See `torch_nn.Unfold` for details
-#'
-#'
-#'
-#' @name nnf_unfold
-#'
-#' @export
-NULL
+
 
 
 #' Upsample

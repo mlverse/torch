@@ -202,18 +202,7 @@ nnf_embedding_bag <- function(input, weight, offsets = NULL, max_norm = NULL,
   ret[[1]]
 }
 
-pair <- function(x) {
-  if (length(x) == 1)
-    rep(x, 2)
-  else
-    x
-}
 
-nnf_fold <- function(input, output_size, kernel_size, dilation=1, padding=0, stride=1) {
-  torch_col2im(self = input, output_size = pair(output_size), 
-               kernel_size = pair(kernel_size), dilation = pair(dilation), 
-               padding = pair(padding), stride = pair(stride))
-}
 
 nnf_fractional_max_pool2d <- function(input, kernel_size, output_size=NULL,
                                       output_ratio=NULL, return_indices=FALSE,
@@ -966,11 +955,3 @@ nnf_triplet_margin_loss <- function(anchor, positive, negative, margin = 1, p = 
                             reduction_enum(reduction))
 }
 
-nnf_unfold <- function(input, kernel_size, dilation = 1, padding = 0, stride = 1) {
-  if (input$dim() == 4) {
-    torch_im2col(input, nn_util_pair(kernel_size), nn_util_pair(dilation), 
-                 nn_util_pair(padding), nn_util_pair(stride))
-  } else {
-    not_implemented_error("Input Error: Only 4D input Tensors are supported (got {input$dim()}D)")
-  }
-}
