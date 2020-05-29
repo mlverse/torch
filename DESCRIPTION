@@ -63,6 +63,7 @@ Collate:
     'nnf-conv.R'
     'nnf-distance.R'
     'nnf-dropout.R'
+    'nnf-embedding.R'
     'operators.R'
     'package.R'
     'qscheme.R'

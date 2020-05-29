@@ -402,55 +402,10 @@ NULL
 NULL
 
 
-#' Embedding
-#'
-#' A simple lookup table that looks up embeddings in a fixed dictionary and size.
-#' 
-#'     This module is often used to retrieve word embeddings using indices.
-#'     The input to the module is a list of indices, and the embedding matrix,
-#'     and the output is the corresponding word embeddings.
-#' 
-#'     See `torch_nn.Embedding` for more details.
-#'
-#' @param input (LongTensor) Tensor containing indices into the embedding matrix
-#' @param weight (Tensor) The embedding matrix with number of rows equal to the maximum possible index + 1,        and number of columns equal to the embedding size
-#' @param padding_idx (int, optional) If given, pads the output with the embedding vector at `padding_idx`                                     (initialized to zeros) whenever it encounters the index.
-#' @param max_norm (float, optional) If given, each embedding vector with norm larger than `max_norm`                                is renormalized to have norm `max_norm`.                                Note: this will modify `weight` in-place.
-#' @param norm_type (float, optional) The p of the p-norm to compute for the `max_norm` option. Default ``2``.
-#' @param scale_grad_by_freq (boolean, optional) If given, this will scale gradients by the inverse of frequency of                                            the words in the mini-batch. Default ``False``.
-#' @param sparse (bool, optional) If ``True``, gradient w.r.t. `weight` will be a sparse tensor. See Notes under                             `torch_nn.Embedding` for more details regarding sparse gradients.
-#'
-#' @name nnf_embedding
-#'
-#' @export
-NULL
 
 
-#' Embedding_bag
-#'
-#' Computes sums, means or maxes of `bags` of embeddings, without instantiating the
-#'     intermediate embeddings.
-#' 
-#'     See `torch_nn.EmbeddingBag` for more details.
-#' 
-#'     .. include:: cuda_deterministic_backward.rst
-#'
-#' @param input (LongTensor) Tensor containing bags of indices into the embedding matrix
-#' @param weight (Tensor) The embedding matrix with number of rows equal to the maximum possible index + 1,        and number of columns equal to the embedding size
-#' @param offsets (LongTensor, optional) Only used when `input` is 1D. `offsets` determines                         the starting index position of each bag (sequence) in `input`.
-#' @param max_norm (float, optional) If given, each embedding vector with norm larger than `max_norm`                                is renormalized to have norm `max_norm`.                                Note: this will modify `weight` in-place.
-#' @param norm_type (float, optional) The ``p`` in the ``p``-norm to compute for the `max_norm` option.                                 Default ``2``.
-#' @param scale_grad_by_freq (boolean, optional) if given, this will scale gradients by the inverse of frequency of                                            the words in the mini-batch. Default ``False``.                                            Note: this option is not supported when ``mode="max"``.
-#' @param mode (string, optional) ``"sum"``, ``"mean"`` or ``"max"``. Specifies the way to reduce the bag.                             Default: ``"mean"``
-#' @param sparse (bool, optional) if ``True``, gradient w.r.t. `weight` will be a sparse tensor. See Notes under                             `torch_nn.Embedding` for more details regarding sparse gradients.                             Note: this option is not supported when ``mode="max"``.
-#' @param per_sample_weights (Tensor, optional) a tensor of float / double weights, or None        to indicate all weights should be taken to be 1. If specified, `per_sample_weights`        must have exactly the same shape as input and is treated as having the same        `offsets`, if those are not None.
-#' @param include_last_offset (bool, optional) if ``True``, the size of offsets is equal to the number of bags + 1.
-#' @param The (sequence) 
-#'
-#' @name nnf_embedding_bag
-#'
-#' @export
-NULL
+
+
 
 
 

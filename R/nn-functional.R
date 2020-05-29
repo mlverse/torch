@@ -123,56 +123,9 @@ nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blan
 
 
 
-nnf_embedding <- function(input, weight, padding_idx=NULL, max_norm=NULL, norm_type=2,
-                          scale_grad_by_freq=FALSE, sparse=FALSE) {
-  if (is.null(padding_idx))
-    padding_idx <- -1
-  
-  if (!is.null(max_norm)) {
-    input <- input$contiguous()
-    with_no_grad({
-      torch_embedding_renorm_(weight, input, max_norm, norm_type)
-    })
-  }
-  
-  torch_embedding(weight = weight, input = input, padding_idx = padding_idx,
-                  scale_grad_by_freq = scale_grad_by_freq, sparse = sparse)  
-}
 
-nnf_embedding_bag <- function(input, weight, offsets = NULL, max_norm = NULL, 
-                              norm_type = 2, scale_grad_by_freq = FALSE, 
-                              mode = "mean", sparse= FALSE, per_sample_weights = NULL,
-                              include_last_offset = FALSE) {
 
-  if (input$dim() == 2) {
-    input <- input$reshape(-1)
-    if (!is.null(per_sample_weights)) {
-      per_sample_weights <- per_sample_weights$reshape(-1)
-    }
-  } 
-  
-  if (mode == 'sum') {
-    mode_enum <- 0
-  } else if (mode == "mean") {
-    mode_enum <- 1
-  } else if (mode == "max") {
-    mode_enum <- 2
-  }
-    
-  if (!is.null(max_norm)) {
-    input <- input$contiguous()
-    with_no_grad({
-      torch_embedding_renorm_(weight, input, max_norm, norm_type)
-    })
-  }
-  
-  ret <- torch_embedding_bag(weight = weight, indices = input, offsets = offsets, 
-                      scale_grad_by_freq = scale_grad_by_freq, mode = mode_enum,
-                      sparse = sparse, per_sample_weights = per_sample_weights, 
-                      include_last_offset = include_last_offset)
-                      
-  ret[[1]]
-}
+
 
 
 
