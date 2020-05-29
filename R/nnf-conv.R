@@ -132,7 +132,7 @@ nnf_conv_transpose3d <- function(input, weight, bias=NULL, stride=1, padding=0,
 #' Combines an array of sliding local blocks into a large containing
 #' tensor.
 #' 
-#' @section Warning
+#' @section Warning:
 #' 
 #' Currently, only 4-D output tensors (batched image-like tensors) are
 #' supported.
@@ -152,12 +152,12 @@ nnf_fold <- function(input, output_size, kernel_size, dilation=1, padding=0, str
 #'
 #' Extracts sliding local blocks from an batched input tensor.
 #' 
-#' @section Warning
+#' @section Warning:
 #'         
 #' Currently, only 4-D input tensors (batched image-like tensors) are
 #' supported.
 #' 
-#' @section Warning
+#' @section Warning:
 #' 
 #' More than one element of the unfolded tensor may refer to a single
 #' memory location. As a result, in-place operations (especially ones that

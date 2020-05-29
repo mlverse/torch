@@ -23,6 +23,20 @@ Default: 1}
 \description{
 Extracts sliding local blocks from an batched input tensor.
 }
+\section{Warning}{
+
+
+Currently, only 4-D input tensors (batched image-like tensors) are
+supported.
+
+
+
+More than one element of the unfolded tensor may refer to a single
+memory location. As a result, in-place operations (especially ones that
+are vectorized) may result in incorrect behavior. If you need to write
+to the tensor, please clone it first.
+}
+
 \examples{
 
 

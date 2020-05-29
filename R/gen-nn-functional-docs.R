@@ -366,26 +366,7 @@ NULL
 NULL
 
 
-#' Cosine_similarity
-#'
-#' @section cosine_similarity(x1, x2, dim=1, eps=1e-8) -> Tensor :
-#'
-#' Returns cosine similarity between x1 and x2, computed along dim.
-#' 
-#' \deqn{
-#'     \text{similarity} = \dfrac{x_1 \cdot x_2}{\max(\Vert x_1 \Vert _2 \cdot \Vert x_2 \Vert _2, \epsilon)}
-#' }
-#'
-#'
-#' @param x1 (Tensor) First input.
-#' @param x2 (Tensor) Second input (of size matching x1).
-#' @param dim (int, optional) Dimension of vectors. Default: 1
-#' @param eps (float, optional) Small value to avoid division by zero.        Default: 1e-8
-#'
-#' @name nnf_cosine_similarity
-#'
-#' @export
-NULL
+
 
 
 #' Cross_entropy
@@ -1339,44 +1320,10 @@ NULL
 NULL
 
 
-#' Pairwise_distance
-#'
-#' See `torch_nn.PairwiseDistance` for details
-#'
-#'
-#'
-#' @name nnf_pairwise_distance
-#'
-#' @export
-NULL
 
 
-#' Pdist
-#'
-#' @section pdist(input, p=2) -> Tensor :
-#'
-#' Computes the p-norm distance between every pair of row vectors in the input.
-#' This is identical to the upper triangular portion, excluding the diagonal, of
-#' `torch_norm(input[:, None] - input, dim=2, p=p)`. This function will be faster
-#' if the rows are contiguous.
-#' 
-#' If input has shape \eqn{N \times M} then the output will have shape
-#' \eqn{\frac{1}{2} N (N - 1)}.
-#' 
-#' This function is equivalent to `scipy.spatial.distance.pdist(input,
-#' 'minkowski', p=p)` if \eqn{p \in (0, \infty)}. When \eqn{p = 0} it is
-#' equivalent to `scipy.spatial.distance.pdist(input, 'hamming') * M`.
-#' When \eqn{p = \infty}, the closest scipy function is
-#' `scipy.spatial.distance.pdist(xn, lambda x, y: np.abs(x - y).max())`.
-#'
-#'
-#' @param input NA input tensor of shape \eqn{N \times M}.
-#' @param p NA p value for the p-norm distance to calculate between each vector pair        \eqn{\in [0, \infty]}.
-#'
-#' @name nnf_pdist
-#'
-#' @export
-NULL
+
+
 
 
 #' Pixel_shuffle

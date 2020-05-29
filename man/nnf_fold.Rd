@@ -34,6 +34,13 @@ Default: 1}
 Combines an array of sliding local blocks into a large containing
 tensor.
 }
+\section{Warning}{
+
+
+Currently, only 4-D output tensors (batched image-like tensors) are
+supported.
+}
+
 \examples{
 
 

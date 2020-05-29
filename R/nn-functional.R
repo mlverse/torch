@@ -112,9 +112,7 @@ nnf_cosine_embedding_loss <- function(input1, input2, target, margin=0,
                               margin = margin, reduction = reduction_enum(reduction))
 }
 
-nnf_cosine_similarity <- function(x1, x2, dim=1, eps=1e-8) {
-  torch_cosine_similarity(x1 = x1, x2 = x2, dim = dim, eps = eps)
-}
+
 
 nnf_cross_entropy <- function(input, target, weight=NULL, ignore_index=-100, 
                               reduction=c("mean", "sum", "none")) {
@@ -889,13 +887,9 @@ nnf_pad <- function(input, pad, mode = "constant", value = 0) {
   not_implemented_error("Only 3D, 4D, 5D padding with non-constant padding are supported for now")
 }
 
-nnf_pairwise_distance <- function(x1, x2, p = 2, eps = 1e-6, keepdim = FALSE) {
-  torch_pairwise_distance(x1, x2, p, eps, keepdim)
-}
 
-nnf_pdist <- function(input, p = 2) {
-  torch_pdist(input, p)
-}
+
+
 
 nnf_pixel_shuffle <- function(input, upscale_factor) {
   torch_pixel_shuffle(input, upscale_factor)
