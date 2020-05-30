@@ -268,45 +268,10 @@ NULL
 NULL
 
 
-#' Binary_cross_entropy
-#'
-#' Function that measures the Binary Cross Entropy
-#'     between the target and the output.
-#' 
-#'     See `~torch.nn.BCELoss` for details.
-#'
-#' @param input NA Tensor of arbitrary shape
-#' @param target NA Tensor of the same shape as input
-#' @param weight (Tensor, optional) a manual rescaling weight            if provided it's repeated to match input tensor shape
-#' @param size_average (bool, optional) Deprecated (see `reduction`). By default,        the losses are averaged over each loss element in the batch. Note that for        some losses, there multiple elements per sample. If the field `size_average`        is set to ``False``, the losses are instead summed for each minibatch. Ignored        when reduce is ``False``. Default: ``True``
-#' @param reduce (bool, optional) Deprecated (see `reduction`). By default, the        losses are averaged or summed over observations for each minibatch depending        on `size_average`. When `reduce` is ``False``, returns a loss per        batch element instead and ignores `size_average`. Default: ``True``
-#' @param reduction (string, optional) Specifies the reduction to apply to the output:        ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,        ``'mean'``: the sum of the output will be divided by the number of        elements in the output, ``'sum'``: the output will be summed. Note: `size_average`        and `reduce` are in the process of being deprecated, and in the meantime,        specifying either of those two args will override `reduction`. Default: ``'mean'``
-#'
-#' @name nnf_binary_cross_entropy
-#'
-#' @export
-NULL
 
 
-#' Binary_cross_entropy_with_logits
-#'
-#' Function that measures Binary Cross Entropy between target and output
-#'     logits.
-#' 
-#'     See `~torch.nn.BCEWithLogitsLoss` for details.
-#'
-#' @param input NA Tensor of arbitrary shape
-#' @param target NA Tensor of the same shape as input
-#' @param weight (Tensor, optional) a manual rescaling weight        if provided it's repeated to match input tensor shape
-#' @param size_average (bool, optional) Deprecated (see `reduction`). By default,        the losses are averaged over each loss element in the batch. Note that for        some losses, there multiple elements per sample. If the field `size_average`        is set to ``False``, the losses are instead summed for each minibatch. Ignored        when reduce is ``False``. Default: ``True``
-#' @param reduce (bool, optional) Deprecated (see `reduction`). By default, the        losses are averaged or summed over observations for each minibatch depending        on `size_average`. When `reduce` is ``False``, returns a loss per        batch element instead and ignores `size_average`. Default: ``True``
-#' @param reduction (string, optional) Specifies the reduction to apply to the output:        ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,        ``'mean'``: the sum of the output will be divided by the number of        elements in the output, ``'sum'``: the output will be summed. Note: `size_average`        and `reduce` are in the process of being deprecated, and in the meantime,        specifying either of those two args will override `reduction`. Default: ``'mean'``
-#' @param pos_weight (Tensor, optional) a weight of positive examples.            Must be a vector with length equal to the number of classes.
-#'
-#' @name nnf_binary_cross_entropy_with_logits
-#'
-#' @export
-NULL
+
+
 
 
 #' Boolean_dispatch
@@ -340,66 +305,16 @@ NULL
 
 
 
-#' Cosine_embedding_loss
-#'
-#' @section cosine_embedding_loss(input1, input2, target, margin=0, size_average=None, reduce=None, reduction='mean') -> Tensor :
-#'
-#' See `~torch.nn.CosineEmbeddingLoss` for details.
-#'
-#'
-#'
-#'
-#' @name nnf_cosine_embedding_loss
-#'
-#' @export
-NULL
 
 
 
 
 
-#' Cross_entropy
-#'
-#' This criterion combines `log_softmax` and `nll_loss` in a single
-#'     function.
-#' 
-#'     See `~torch.nn.CrossEntropyLoss` for details.
-#'
-#' @param input (Tensor) \eqn{(N, C)} where `C = number of classes` or \eqn{(N, C, H, W)}        in case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1}        in the case of K-dimensional loss.
-#' @param target (Tensor) \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1},        or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for        K-dimensional loss.
-#' @param weight (Tensor, optional) a manual rescaling weight given to each        class. If given, has to be a Tensor of size `C`
-#' @param size_average (bool, optional) Deprecated (see `reduction`). By default,        the losses are averaged over each loss element in the batch. Note that for        some losses, there multiple elements per sample. If the field `size_average`        is set to ``False``, the losses are instead summed for each minibatch. Ignored        when reduce is ``False``. Default: ``True``
-#' @param ignore_index (int, optional) Specifies a target value that is ignored        and does not contribute to the input gradient. When `size_average` is        ``True``, the loss is averaged over non-ignored targets. Default: -100
-#' @param reduce (bool, optional) Deprecated (see `reduction`). By default, the        losses are averaged or summed over observations for each minibatch depending        on `size_average`. When `reduce` is ``False``, returns a loss per        batch element instead and ignores `size_average`. Default: ``True``
-#' @param reduction (string, optional) Specifies the reduction to apply to the output:        ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,        ``'mean'``: the sum of the output will be divided by the number of        elements in the output, ``'sum'``: the output will be summed. Note: `size_average`        and `reduce` are in the process of being deprecated, and in the meantime,        specifying either of those two args will override `reduction`. Default: ``'mean'``
-#'
-#' @name nnf_cross_entropy
-#'
-#' @export
-NULL
 
 
-#' Ctc_loss
-#'
-#' The Connectionist Temporal Classification loss.
-#' 
-#'     See `~torch.nn.CTCLoss` for details.
-#' 
-#'     .. include:: cudnn_deterministic.rst
-#'     .. include:: cuda_deterministic_backward.rst
-#'
-#' @param log_probs NA \eqn{(T, N, C)} where `C = number of characters in alphabet including blank`,        `T = input length`, and `N = batch size`.        The logarithmized probabilities of the outputs        (e.g. obtained with [`torch_nn.functional.log_softmax`]).
-#' @param targets NA \eqn{(N, S)} or `(sum(target_lengths))`.        Targets cannot be blank. In the second form, the targets are assumed to be concatenated.
-#' @param input_lengths NA \eqn{(N)}.        Lengths of the inputs (must each be \eqn{\leq T})
-#' @param target_lengths NA \eqn{(N)}.        Lengths of the targets
-#' @param blank (int, optional) Blank label. Default \eqn{0}.
-#' @param reduction (string, optional) Specifies the reduction to apply to the output:        ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,        ``'mean'``: the output losses will be divided by the target lengths and        then the mean over the batch is taken, ``'sum'``: the output will be        summed. Default: ``'mean'``
-#' @param zero_infinity (bool, optional) Whether to zero infinite losses and the associated gradients.        Default: ``False``        Infinite losses mainly occur when the inputs are too short        to be aligned to the targets.
-#'
-#' @name nnf_ctc_loss
-#'
-#' @export
-NULL
+
+
+
 
 
 
@@ -686,19 +601,7 @@ NULL
 NULL
 
 
-#' Hinge_embedding_loss
-#'
-#' @section hinge_embedding_loss(input, target, margin=1.0, size_average=None, reduce=None, reduction='mean') -> Tensor :
-#'
-#' See `~torch.nn.HingeEmbeddingLoss` for details.
-#'
-#'
-#'
-#'
-#' @name nnf_hinge_embedding_loss
-#'
-#' @export
-NULL
+
 
 
 #' Interpolate
@@ -730,39 +633,10 @@ NULL
 NULL
 
 
-#' Kl_div
-#'
-#' The `Kullback-Leibler divergence`_ Loss.
-#' 
-#'     See `~torch.nn.KLDivLoss` for details.
-#'
-#' @param input NA Tensor of arbitrary shape
-#' @param target NA Tensor of the same shape as input
-#' @param size_average (bool, optional) Deprecated (see `reduction`). By default,        the losses are averaged over each loss element in the batch. Note that for        some losses, there multiple elements per sample. If the field `size_average`        is set to ``False``, the losses are instead summed for each minibatch. Ignored        when reduce is ``False``. Default: ``True``
-#' @param reduce (bool, optional) Deprecated (see `reduction`). By default, the        losses are averaged or summed over observations for each minibatch depending        on `size_average`. When `reduce` is ``False``, returns a loss per        batch element instead and ignores `size_average`. Default: ``True``
-#' @param reduction (string, optional) Specifies the reduction to apply to the output:        ``'none'`` | ``'batchmean'`` | ``'sum'`` | ``'mean'``.        ``'none'``: no reduction will be applied        ``'batchmean'``: the sum of the output will be divided by the batchsize        ``'sum'``: the output will be summed        ``'mean'``: the output will be divided by the number of elements in the output        Default: ``'mean'``
-#'
-#' @name nnf_kl_div
-#'
-#' @export
-NULL
 
 
-#' L1_loss
-#'
-#' @section l1_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor :
-#'
-#' Function that takes the mean element-wise absolute value difference.
-#' 
-#'     See `~torch.nn.L1Loss` for details.
-#'
-#'
-#'
-#'
-#' @name nnf_l1_loss
-#'
-#' @export
-NULL
+
+
 
 
 #' Layer_norm
@@ -778,24 +652,7 @@ NULL
 #' @export
 NULL
 
-#' Linear
-#'
-#' Applies a linear transformation to the incoming data: \eqn{y = xA^T + b}.
-#' 
-#'     Shape:
-#' 
-#'         - Input: \eqn{(N, *, in\_features)} where `*` means any number of
-#'           additional dimensions
-#'         - Weight: \eqn{(out\_features, in\_features)}
-#'         - Bias: \eqn{(out\_features)}
-#'         - Output: \eqn{(N, *, out\_features)}
-#'
-#'
-#'
-#' @name nnf_linear
-#'
-#' @export
-NULL
+
 
 
 #' Local_response_norm
@@ -848,19 +705,6 @@ NULL
 NULL
 
 
-#' Margin_ranking_loss
-#'
-#' @section margin_ranking_loss(input1, input2, target, margin=0, size_average=None, reduce=None, reduction='mean') -> Tensor :
-#'
-#' See `~torch.nn.MarginRankingLoss` for details.
-#'
-#'
-#'
-#'
-#' @name nnf_margin_ranking_loss
-#'
-#' @export
-NULL
 
 
 #' Math
@@ -1008,91 +852,22 @@ NULL
 NULL
 
 
-#' Mse_loss
-#'
-#' @section mse_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor :
-#'
-#' Measures the element-wise mean squared error.
-#' 
-#'     See `~torch.nn.MSELoss` for details.
-#'
-#'
-#'
-#'
-#' @name nnf_mse_loss
-#'
-#' @export
-NULL
 
 
 
 
 
-#' Multi_margin_loss
-#'
-#' @section multi_margin_loss(input, target, p=1, margin=1, weight=None, size_average=None, :
-#'
-#' reduce=None, reduction='mean') -> Tensor
-#' 
-#'     See `~torch.nn.MultiMarginLoss` for details.
-#'
-#'
-#'
-#'
-#' @name nnf_multi_margin_loss
-#'
-#' @export
-NULL
 
 
-#' Multilabel_margin_loss
-#'
-#' @section multilabel_margin_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor :
-#'
-#' See `~torch.nn.MultiLabelMarginLoss` for details.
-#'
-#'
-#'
-#'
-#' @name nnf_multilabel_margin_loss
-#'
-#' @export
-NULL
 
 
-#' Multilabel_soft_margin_loss
-#'
-#' @section multilabel_soft_margin_loss(input, target, weight=None, size_average=None) -> Tensor :
-#'
-#' See `~torch.nn.MultiLabelSoftMarginLoss` for details.
-#'
-#'
-#'
-#'
-#' @name nnf_multilabel_soft_margin_loss
-#'
-#' @export
-NULL
 
 
-#' Nll_loss
-#'
-#' The negative log likelihood loss.
-#' 
-#'     See `~torch.nn.NLLLoss` for details.
-#'
-#' @param input NA \eqn{(N, C)} where `C = number of classes` or \eqn{(N, C, H, W)}        in case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1}        in the case of K-dimensional loss.
-#' @param target NA \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1},        or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for        K-dimensional loss.
-#' @param weight (Tensor, optional) a manual rescaling weight given to each        class. If given, has to be a Tensor of size `C`
-#' @param size_average (bool, optional) Deprecated (see `reduction`). By default,        the losses are averaged over each loss element in the batch. Note that for        some losses, there multiple elements per sample. If the field `size_average`        is set to ``False``, the losses are instead summed for each minibatch. Ignored        when reduce is ``False``. Default: ``True``
-#' @param ignore_index (int, optional) Specifies a target value that is ignored        and does not contribute to the input gradient. When `size_average` is        ``True``, the loss is averaged over non-ignored targets. Default: -100
-#' @param reduce (bool, optional) Deprecated (see `reduction`). By default, the        losses are averaged or summed over observations for each minibatch depending        on `size_average`. When `reduce` is ``False``, returns a loss per        batch element instead and ignores `size_average`. Default: ``True``
-#' @param reduction (string, optional) Specifies the reduction to apply to the output:        ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,        ``'mean'``: the sum of the output will be divided by the number of        elements in the output, ``'sum'``: the output will be summed. Note: `size_average`        and `reduce` are in the process of being deprecated, and in the meantime,        specifying either of those two args will override `reduction`. Default: ``'mean'``
-#'
-#' @name nnf_nll_loss
-#'
-#' @export
-NULL
+
+
+
+
+
 
 
 #' Normalize
@@ -1210,25 +985,7 @@ NULL
 NULL
 
 
-#' Poisson_nll_loss
-#'
-#' Poisson negative log likelihood loss.
-#' 
-#'     See `~torch.nn.PoissonNLLLoss` for details.
-#'
-#' @param input NA expectation of underlying Poisson distribution.
-#' @param target NA random sample \eqn{target \sim \text{Poisson}(input)}.
-#' @param log_input NA if ``True`` the loss is computed as        \eqn{\exp(\text{input}) - \text{target} * \text{input}}, if ``False`` then loss is        \eqn{\text{input} - \text{target} * \log(\text{input}+\text{eps})}. Default: ``True``
-#' @param full NA whether to compute full loss, i. e. to add the Stirling        approximation term. Default: ``False``        \eqn{\text{target} * \log(\text{target}) - \text{target} + 0.5 * \log(2 * \pi * \text{target})}.
-#' @param size_average (bool, optional) Deprecated (see `reduction`). By default,        the losses are averaged over each loss element in the batch. Note that for        some losses, there multiple elements per sample. If the field `size_average`        is set to ``False``, the losses are instead summed for each minibatch. Ignored        when reduce is ``False``. Default: ``True``
-#' @param eps (float, optional) Small value to avoid evaluation of \eqn{\log(0)} when        `log_input`=``False``. Default: 1e-8
-#' @param reduce (bool, optional) Deprecated (see `reduction`). By default, the        losses are averaged or summed over observations for each minibatch depending        on `size_average`. When `reduce` is ``False``, returns a loss per        batch element instead and ignores `size_average`. Default: ``True``
-#' @param reduction (string, optional) Specifies the reduction to apply to the output:        ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,        ``'mean'``: the sum of the output will be divided by the number of        elements in the output, ``'sum'``: the output will be summed. Note: `size_average`        and `reduce` are in the process of being deprecated, and in the meantime,        specifying either of those two args will override `reduction`. Default: ``'mean'``
-#'
-#' @name nnf_poisson_nll_loss
-#'
-#' @export
-NULL
+
 
 #' Sigmoid
 #'
@@ -1247,34 +1004,9 @@ NULL
 NULL
 
 
-#' Smooth_l1_loss
-#'
-#' Function that uses a squared term if the absolute
-#'     element-wise error falls below 1 and an L1 term otherwise.
-#' 
-#'     See `~torch.nn.SmoothL1Loss` for details.
-#'
-#'
-#'
-#' @name nnf_smooth_l1_loss
-#'
-#' @export
-NULL
 
 
-#' Soft_margin_loss
-#'
-#' @section soft_margin_loss(input, target, size_average=None, reduce=None, reduction='mean') -> Tensor :
-#'
-#' See `~torch.nn.SoftMarginLoss` for details.
-#'
-#'
-#'
-#'
-#' @name nnf_soft_margin_loss
-#'
-#' @export
-NULL
+
 
 
 
@@ -1314,16 +1046,7 @@ NULL
 NULL
 
 
-#' Triplet_margin_loss
-#'
-#' See `~torch.nn.TripletMarginLoss` for details
-#'
-#'
-#'
-#' @name nnf_triplet_margin_loss
-#'
-#' @export
-NULL
+
 
 
 
