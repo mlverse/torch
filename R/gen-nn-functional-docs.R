@@ -479,18 +479,7 @@ NULL
 NULL
 
 
-#' Group_norm
-#'
-#' Applies Group Normalization for last certain number of dimensions.
-#' 
-#'     See `~torch.nn.GroupNorm` for details.
-#'
-#'
-#'
-#' @name nnf_group_norm
-#'
-#' @export
-NULL
+
 
 
 #' Handle_torch_function
@@ -635,40 +624,6 @@ NULL
 
 
 
-
-
-
-
-#' Layer_norm
-#'
-#' Applies Layer Normalization for last certain number of dimensions.
-#' 
-#'     See `~torch.nn.LayerNorm` for details.
-#'
-#'
-#'
-#' @name nnf_layer_norm
-#'
-#' @export
-NULL
-
-
-
-
-#' Local_response_norm
-#'
-#' Applies local response normalization over an input signal composed of
-#'     several input planes, where channels occupy the second dimension.
-#'     Applies normalization across channels.
-#' 
-#'     See `~torch.nn.LocalResponseNorm` for details.
-#'
-#'
-#'
-#' @name nnf_local_response_norm
-#'
-#' @export
-NULL
 
 
 
@@ -870,28 +825,7 @@ NULL
 
 
 
-#' Normalize
-#'
-#' Performs \eqn{L_p} normalization of inputs over specified dimension.
-#' 
-#'     For a tensor `input` of sizes \eqn{(n_0, ..., n_{dim}, ..., n_k)}, each
-#'     \eqn{n_{dim}} -element vector \eqn{v} along dimension `dim` is transformed as
-#' 
-#' \deqn{
-#'         v = \frac{v}{\max(\lVert v \rVert_p, \epsilon)}.
-#' }
-#'     With the default arguments it uses the Euclidean norm over vectors along dimension \eqn{1} for normalization.
-#'
-#' @param input NA input tensor of any shape
-#' @param p (float) the exponent value in the norm formulation. Default: 2
-#' @param dim (int) the dimension to reduce. Default: 1
-#' @param eps (float) small value to avoid division by zero. Default: 1e-12
-#' @param out (Tensor, optional) the output tensor. If `out` is used, this                            operation won't be differentiable.
-#'
-#' @name nnf_normalize
-#'
-#' @export
-NULL
+
 
 
 #' One_hot

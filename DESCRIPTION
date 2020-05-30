@@ -68,6 +68,7 @@ Collate:
     'nnf-instancenorm.R'
     'nnf-linear.R'
     'nnf-loss.R'
+    'nnf-normalization.R'
     'operators.R'
     'package.R'
     'qscheme.R'

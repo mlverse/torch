@@ -184,13 +184,6 @@ nnf_grid_sample <- function(input, grid, mode = c("bilinear", "nearest"),
                      padding_mode = padding_mode_enum, align_corners = align_corners)
 }
 
-nnf_group_norm <- function(input, num_groups, weight = NULL, bias = NULL,
-                           eps = 1e-5) {
-  
-  torch_group_norm(input, input, num_groups = num_groups, weight = weight,
-                   bias = bias, eps = eps #TODO ,cudnn_enabled = backends_cudnn_enabled
-  )
-}
 
 
 nnf_hardsigmoid <- function(input, inplace = FALSE) {
@@ -348,32 +341,8 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
 
 
 
-nnf_layer_norm <- function(input, normalized_shape, weight = NULL, bias = NULL,
-                           eps = 1e-5) {
-  torch_layer_norm(
-    input, normalized_shape, weight, bias, eps, FALSE #TODO backends_cudnn_enabled
-  )
-}
 
-nnf_local_response_norm <- function(input, size, alpha = 1e-4, beta = 0.75, k = 1) {
-  
-  dim <- input$dim()
-  div <- input$mul(input)$unsqueeze(1)
-  
-  if (dim == 3) {
-    div <- nnf_pad(div, c(0, 0, as.integer(size/2), as.integer((size - 1)/2)))
-    div <- nnf_avg_pool2d(div, c(size, 1), stride = 1)$squeeze(1)
-  } else {
-    sizes <- input$size()
-    div <- div$view(sizes[1], 1, sizes[2], sizes[3], -1)
-    div <- nnf_pad(div, c(0,0,0,0, as.integer(size/2), as.integer((size - 1)/2)))
-    div <- nnf_avg_pool3d(div, c(size, 1, 1), stride = 1)$squeeze(1)
-    div <- div$view(sizes)
-  }
-  
-  div <- div$mul(alpha)$add(k)$pow(beta)
-  input/div
-}
+
 
 nnf_lp_pool1d <- function(input, norm_type, kernel_size, stride = NULL, 
                           ceil_mode = FALSE) {
@@ -518,15 +487,6 @@ nnf_max_unpool3d <- function(input, indices, kernel_size, stride = NULL,
 }
 
 
-nnf_normalize <- function(input, p = 2, dim = 1, eps = 1e-12, out = NULL) {
-  if (is.null(out)) {
-    denom <- input$norm(p, dim, keepdim = TRUE)$clamp_min(eps)$expand_as(input)
-    return(input/denom)
-  } else {
-    denom <- input$norm(p, dim, keepdim=TRUE)$clamp_min_(eps)$expand_as(input)
-    return(torch_div_out(input, denom, out))
-  }
-}
 
 nnf_one_hot <- function(tensor, num_classes = -1) {
   torch_one_hot(tensor, num_classes)
