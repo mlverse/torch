@@ -701,22 +701,6 @@ NULL
 NULL
 
 
-#' Instance_norm
-#'
-#' Applies Instance Normalization for each channel in each data sample in a
-#'     batch.
-#' 
-#'     See `~torch.nn.InstanceNorm1d`, `~torch.nn.InstanceNorm2d`,
-#'     `~torch.nn.InstanceNorm3d` for details.
-#'
-#'
-#'
-#' @name nnf_instance_norm
-#'
-#' @export
-NULL
-
-
 #' Interpolate
 #'
 #' Down/up samples the input to either the given `size` or the given
