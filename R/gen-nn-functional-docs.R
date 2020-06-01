@@ -852,46 +852,7 @@ NULL
 NULL
 
 
-#' Pad
-#'
-#' Pads tensor.
-#' 
-#'     Padding size:
-#'         The padding size by which to pad some dimensions of `input`
-#'         are described starting from the last dimension and moving forward.
-#'         \eqn{\left\lfloor\frac{\text{len(pad)}}{2}\right\rfloor} dimensions
-#'         of ``input`` will be padded.
-#'         For example, to pad only the last dimension of the input tensor, then
-#'         `pad` has the form
-#'         \eqn{(\text{padding\_left}, \text{padding\_right})};
-#'         to pad the last 2 dimensions of the input tensor, then use
-#'         \eqn{(\text{padding\_left}, \text{padding\_right},}
-#'         \eqn{\text{padding\_top}, \text{padding\_bottom})};
-#'         to pad the last 3 dimensions, use
-#'         \eqn{(\text{padding\_left}, \text{padding\_right},}
-#'         \eqn{\text{padding\_top}, \text{padding\_bottom}}
-#'         \eqn{\text{padding\_front}, \text{padding\_back})}.
-#' 
-#'     Padding mode:
-#'         See `torch_nn.ConstantPad2d`, `torch.nn.ReflectionPad2d`, and
-#'         `torch_nn.ReplicationPad2d` for concrete examples on how each of the
-#'         padding modes works. Constant padding is implemented for arbitrary dimensions.
-#'         Replicate padding is implemented for padding the last 3 dimensions of 5D input
-#'         tensor, or the last 2 dimensions of 4D input tensor, or the last dimension of
-#'         3D input tensor. Reflect padding is only implemented for padding the last 2
-#'         dimensions of 4D input tensor, or the last dimension of 3D input tensor.
-#' 
-#'     .. include:: cuda_deterministic_backward.rst
-#'
-#' @param input (Tensor) N-dimensional tensor
-#' @param pad (tuple) m-elements tuple, where        \eqn{\frac{m}{2} \leq} input dimensions and \eqn{m} is even.
-#' @param mode NA ``'constant'``, ``'reflect'``, ``'replicate'`` or ``'circular'``.        Default: ``'constant'``
-#' @param value NA fill value for ``'constant'`` padding. Default: ``0``
-#'
-#' @name nnf_pad
-#'
-#' @export
-NULL
+
 
 
 
