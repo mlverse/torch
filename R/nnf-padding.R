@@ -29,7 +29,7 @@ nnf_pad_circular <- function(input, padding) {
 #'
 #' Pads tensor.
 #' 
-#' @sectioon Padding size:
+#' @section Padding size:
 #'         
 #' The padding size by which to pad some dimensions of `input`
 #' are described starting from the last dimension and moving forward.

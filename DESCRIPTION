@@ -71,6 +71,7 @@ Collate:
     'nnf-normalization.R'
     'nnf-padding.R'
     'nnf-pixelshuffle.R'
+    'nnf-pooling.R'
     'operators.R'
     'package.R'
     'qscheme.R'

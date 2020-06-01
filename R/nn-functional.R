@@ -1,71 +1,11 @@
-nnf_adaptive_avg_pool1d <- function(input, output_size) {
-  torch_adaptive_avg_pool1d(input, output_size)
-}
 
-nnf_adaptive_avg_pool2d <- function(input, output_size) {
-  torch_adaptive_avg_pool2d(input, output_size)
-}
 
-nnf_adaptive_avg_pool3d <- function(input, output_size) {
-  torch_adaptive_avg_pool3d(input, output_size)
-}
-
-nnf_adaptive_max_pool1d <- function(input, output_size, return_indices = FALSE) {
-  o <- torch_adaptive_max_pool1d(input, output_size)
-  if (!return_indices)
-    o <- o[[1]]
-  
-  o
-}
-
-nnf_adaptive_max_pool1d_with_indices <- function(input, output_size) {
-  torch_adaptive_max_pool1d(input, output_size)
-}
-
-nnf_adaptive_max_pool2d <- function(input, output_size, return_indices = FALSE) {
-  o <- torch_adaptive_max_pool2d(input, output_size)
-  if (!return_indices)
-    o <- o[[1]]
-  
-  o
-}
-
-nnf_adaptive_max_pool2d_with_indices <- function(input, output_size) {
-  torch_adaptive_max_pool2d(input, output_size)
-}
-
-nnf_adaptive_max_pool3d <- function(input, output_size, return_indices = FALSE) {
-  o <- torch_adaptive_max_pool3d(input, output_size)
-  if (!return_indices)
-    o <- o[[1]]
-  
-  o
-}
-
-nnf_adaptive_max_pool3d_with_indices <- function(input, output_size) {
-  torch_adaptive_max_pool3d(input, output_size)
-}
 
 nnf_affine_grid <- function(theta, size, align_corners = FALSE) {
   torch_affine_grid_generator(theta, size, align_corners)
 }
 
-nnf_avg_pool1d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
-                           count_include_pad = TRUE) {
-  torch_avg_pool1d(input, kernel_size, stride, padding, ceil_mode, count_include_pad)
-}
 
-nnf_avg_pool2d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
-                           count_include_pad = TRUE, divisor_override = NULL) {
-  torch_avg_pool2d(input, kernel_size, stride, padding, ceil_mode, count_include_pad,
-                   divisor_override)
-}
-
-nnf_avg_pool3d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
-                           count_include_pad = TRUE, divisor_override = NULL) {
-  torch_avg_pool3d(input, kernel_size, stride, padding, ceil_mode, count_include_pad,
-                   divisor_override)
-}
 
 nnf_bilinear <- function(input1, input2, weight, bias = NULL) {
   torch_bilinear(input1, input2, weight, bias)
@@ -95,67 +35,7 @@ nnf_conv_tbc <- function(input, weight, bias, pad = 0) {
 
 
 
-nnf_fractional_max_pool2d <- function(input, kernel_size, output_size=NULL,
-                                      output_ratio=NULL, return_indices=FALSE,
-                                      random_samples = NULL) {
-  
-  if (is.null(output_size)) {
-    output_ratio_ <- pair(output_ratio)
-    output_size <- list(
-      as.integer(input$size(2) * output_ratio_[[1]]),
-      as.integer(input$size(3) * output_ratio_[[2]])
-    )
-  }
-  
-  if (is.null(random_samples)) {
-    random_samples <- torch_rand(input$size(0), input$size(1), 2, 
-                                 dtype = input$dtype, device = input$device)
-  }
-  
-  res <- torch_fractional_max_pool2d(self = input, kernel_size = kernel_size, 
-                              output_size = output_size, random_samples = random_samples)
-  
-  if (return_indices)
-    res
-  else
-    res[[1]]
-}
 
-
-nnf_fractional_max_pool3d <- function(kernel_size, output_size = NULL, output_ratio = NULL, 
-                                      return_indices = FALSE, random_samples = NULL) {
-  
-  
-  if (is.null(output_size)) {
-    
-    if (length(output_size) == 1)
-      
-      output_ratio_ <- rep(output_size, 3)
-      output_size <- c(
-        input$size(2) * output_ratio_[1],
-        input$size(3) * output_ratio_[2],
-        input$size(4) * output_ratio_[3],
-      )
-  }
-  
-  if (is.null(random_samples)) {
-    random_samples <- torch_rand(input$size(0), input$size(1), 3, dtype = input$dtype, 
-                                 device = input$device)
-  }
-  
-  res <- torch_fractional_max_pool3d(
-    self = input, 
-    kernel_size = kernel_size,
-    output_size = output_size,
-    random_samples = random_samples
-  )
-  
-  
-  if (return_indices)
-    res
-  else
-    res[[1]]
-}
 
 nnf_grid_sample <- function(input, grid, mode = c("bilinear", "nearest"), 
                             padding_mode = c("zeros", "border", "reflection"), 
@@ -344,147 +224,11 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
 
 
 
-nnf_lp_pool1d <- function(input, norm_type, kernel_size, stride = NULL, 
-                          ceil_mode = FALSE) {
-  
-  if (!is.null(stride)) {
-    out <- nnf_avg_pool1d(input$pow(norm_type), kernel_size, stride, 0, ceil_mode)
-  } else {
-    out <- nnf_avg_pool1d(input$pow(norm_type), kernel_size, padding = 0, 
-                          ceil_mode = ceil_mode)
-    
-  }
-  
-  (torch_sign(out) * nnf_relu(torch_abs(out)))$mul(kernel_size)$pow(1/norm_type)
-}
-
-nnf_lp_pool2d <- function(input, norm_type, kernel_size, stride = NULL, 
-                          ceil_mode = FALSE) {
-  
-  k <- nn_util_pair(kernel_size)
-  if (!is.null(stride)) {
-    out <- nnf_avg_pool2d(input$pow(norm_type), kernel_size, stride, 0, ceil_mode)
-  } else {
-    out <- nnf_avg_pool2d(input$pow(norm_type), kernel_size, padding = 0, 
-                          ceil_mode = ceil_mode)
-  }
-  
-  (torch$sign(out) * nnf_relu(torch$abs(out)))$mul(k[[1]] * k[[2]])$pow(1/norm_type)
-}
-
-nnf_max_pool1d <- function(input, kernel_size, stride=NULL, padding=0, dilation=1,
-                           ceil_mode=FALSE, return_indices=FALSE) {
-  
-  if (return_indices)
-    torch_max_pool1d_with_indices(input, kernel_size, stride, padding, dilation,
-                     ceil_mode)
-  else
-    torch_max_pool1d(input, kernel_size, stride, padding, dilation,
-                     ceil_mode)
-}
 
 
-nnf_max_pool2d <- function(input, kernel_size, stride=NULL, padding=0, dilation=1,
-                           ceil_mode=FALSE, return_indices=FALSE) {
-  if (return_indices)
-    torch_max_pool2d_with_indices(input, kernel_size, stride, padding, dilation,
-                                  ceil_mode)
-  else
-    torch_max_pool2d(input, kernel_size, stride, padding, dilation,
-                     ceil_mode)
-}
-
-nnf_max_pool3d <- function(input, kernel_size, stride=NULL, padding=0, dilation=1,
-                           ceil_mode=FALSE, return_indices=FALSE) {
-  if (return_indices)
-    torch_max_pool3d_with_indices(input, kernel_size, stride, padding, dilation,
-                                  ceil_mode)
-  else
-    torch_max_pool3d(input, kernel_size, stride, padding, dilation,
-                     ceil_mode)
-}
 
 
-unpool_output_size <- function(input, kernel_size, stride, padding, output_size) {
-  
-  input_size <- input$size()
-  default_size <- list()
-  for (d in seq_along(kernel_size)) {
-    default_size[[d]] <- (input_size[d+2] - 1) * stride[d] + kernel_size[d] - 
-      2 * padding[d]
-  }
-  
-  if (is.null(output_size)) {
-    ret <- default_size
-  } else {
-    
-    if (length(output_size) == (length(kernel_size) + 2)) {
-      output_size <- output_size[-c(1,2)] 
-    }
-    
-    if (length(output_size) != length(kernel_size)) {
-      value_error("output_size should be a sequence containing ",
-                  "{length(kernel_size)} or {length(kernel_size) + 2} elements", 
-                  "but it has a length of '{length(output_size)}'")
-    }
-    
-    for (d in seq_along(kernel_size)) {
-      min_size <- default_size[d] - stride[d]
-      max_size <- default_size[d] + stride[d]
-    }
-    
-    ret <- output_size
-    
-  }
-    
-  ret
-}
 
-nnf_max_unpool1d <- function(input, indices, kernel_size, stride = NULL,
-                             padding = 0, output_size = NULL) {
-  if (is.null(stride))
-    stride <- kernel_size
-  
-  output_size <- unpool_output_size(input, kernel_size, stride, padding,
-                                    output_size)
-  
-  output_size <- c(output_size, 1)
-  
-  torch_max_unpool2d(input$unsqueeze(3), indices$unsqueeze(3), output_size)$squeeze(3)
-}
-
-nnf_max_unpool2d <- function(input, indices, kernel_size, stride = NULL,
-                             padding = 0, output_size = NULL) {
-  
-  kernel_size <- nn_util_pair(kernel_size)
-  if(is.null(stride))
-    stride <- kernel_size
-  else
-    stride <- nn_util_pair(stride)
-  
-  padding <- nn_util_pair(padding)
-  
-  output_size <- unpool_output_size(input, kernel_size, stride, padding,
-                                    output_size)
-  
-  torch_max_unpool2d(input, indices, output_size)
-}
-
-nnf_max_unpool3d <- function(input, indices, kernel_size, stride = NULL,
-                             padding = 0, output_size = NULL){
-  
-  kernel_size <- nn_util_triple(kernel_size)
-  padding <- nn_util_triple(padding)
-  if (is.null(stride))
-    stride <- kernel_size
-  else
-    stride <- nn_util_triple(stride)
-  
-  output_size <- unpool_output_size(input, kernel_size, stride, padding,
-                                    output_size)
-  
-  torch_max_unpool3d(input, indices, output_size, stride, padding)
-}
 
 
 

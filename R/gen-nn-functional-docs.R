@@ -1,145 +1,3 @@
-#' Adaptive_avg_pool1d
-#'
-#' @section adaptive_avg_pool1d(input, output_size) -> Tensor :
-#'
-#' Applies a 1D adaptive average pooling over an input signal composed of
-#' several input planes.
-#' 
-#' See `~torch.nn.AdaptiveAvgPool1d` for details and output shape.
-#'
-#'
-#' @param output_size NA the target output size (single integer)
-#'
-#' @name nnf_adaptive_avg_pool1d
-#'
-#' @export
-NULL
-
-
-#' Adaptive_avg_pool2d
-#'
-#' Applies a 2D adaptive average pooling over an input signal composed of
-#'     several input planes.
-#' 
-#'     See `~torch.nn.AdaptiveAvgPool2d` for details and output shape.
-#'
-#' @param output_size NA the target output size (single integer or        double-integer tuple)
-#'
-#' @name nnf_adaptive_avg_pool2d
-#'
-#' @export
-NULL
-
-
-#' Adaptive_avg_pool3d
-#'
-#' Applies a 3D adaptive average pooling over an input signal composed of
-#'     several input planes.
-#' 
-#'     See `~torch.nn.AdaptiveAvgPool3d` for details and output shape.
-#'
-#' @param output_size NA the target output size (single integer or        triple-integer tuple)
-#'
-#' @name nnf_adaptive_avg_pool3d
-#'
-#' @export
-NULL
-
-
-#' Adaptive_max_pool1d
-#'
-#' Applies a 1D adaptive max pooling over an input signal composed of
-#'     several input planes.
-#' 
-#'     See `~torch.nn.AdaptiveMaxPool1d` for details and output shape.
-#'
-#' @param output_size NA the target output size (single integer)
-#' @param return_indices NA whether to return pooling indices. Default: ``False``
-#'
-#' @name nnf_adaptive_max_pool1d
-#'
-#' @export
-NULL
-
-
-#' Adaptive_max_pool1d_with_indices
-#'
-#' Applies a 1D adaptive max pooling over an input signal composed of
-#'     several input planes.
-#' 
-#'     See `~torch.nn.AdaptiveMaxPool1d` for details and output shape.
-#'
-#' @param output_size NA the target output size (single integer)
-#' @param return_indices NA whether to return pooling indices. Default: ``False``
-#'
-#' @name nnf_adaptive_max_pool1d_with_indices
-#'
-#' @export
-NULL
-
-
-#' Adaptive_max_pool2d
-#'
-#' Applies a 2D adaptive max pooling over an input signal composed of
-#'     several input planes.
-#' 
-#'     See `~torch.nn.AdaptiveMaxPool2d` for details and output shape.
-#'
-#' @param output_size NA the target output size (single integer or        double-integer tuple)
-#' @param return_indices NA whether to return pooling indices. Default: ``False``
-#'
-#' @name nnf_adaptive_max_pool2d
-#'
-#' @export
-NULL
-
-
-#' Adaptive_max_pool2d_with_indices
-#'
-#' Applies a 2D adaptive max pooling over an input signal composed of
-#'     several input planes.
-#' 
-#'     See `~torch.nn.AdaptiveMaxPool2d` for details and output shape.
-#'
-#' @param output_size NA the target output size (single integer or        double-integer tuple)
-#' @param return_indices NA whether to return pooling indices. Default: ``False``
-#'
-#' @name nnf_adaptive_max_pool2d_with_indices
-#'
-#' @export
-NULL
-
-
-#' Adaptive_max_pool3d
-#'
-#' Applies a 3D adaptive max pooling over an input signal composed of
-#'     several input planes.
-#' 
-#'     See `~torch.nn.AdaptiveMaxPool3d` for details and output shape.
-#'
-#' @param output_size NA the target output size (single integer or        triple-integer tuple)
-#' @param return_indices NA whether to return pooling indices. Default: ``False``
-#'
-#' @name nnf_adaptive_max_pool3d
-#'
-#' @export
-NULL
-
-
-#' Adaptive_max_pool3d_with_indices
-#'
-#' Applies a 3D adaptive max pooling over an input signal composed of
-#'     several input planes.
-#' 
-#'     See `~torch.nn.AdaptiveMaxPool3d` for details and output shape.
-#'
-#' @param output_size NA the target output size (single integer or        triple-integer tuple)
-#' @param return_indices NA whether to return pooling indices. Default: ``False``
-#'
-#' @name nnf_adaptive_max_pool3d_with_indices
-#'
-#' @export
-NULL
 
 
 #' Affine_grid
@@ -167,77 +25,13 @@ NULL
 
 
 
-#' Avg_pool1d
-#'
-#' @section avg_pool1d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True) -> Tensor :
-#'
-#' Applies a 1D average pooling over an input signal composed of several
-#' input planes.
-#' 
-#' See `~torch.nn.AvgPool1d` for details and output shape.
-#'
-#'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iW)}
-#' @param kernel_size NA the size of the window. Can be a single number or a      tuple `(kW,)`
-#' @param stride NA the stride of the window. Can be a single number or a tuple      `(sW,)`. Default: `kernel_size`
-#' @param padding NA implicit zero paddings on both sides of the input. Can be a      single number or a tuple `(padW,)`. Default: 0
-#' @param ceil_mode NA when True, will use `ceil` instead of `floor` to compute the        output shape. Default: ``False``
-#' @param count_include_pad NA when True, will include the zero-padding in the        averaging calculation. Default: ``True``
-#'
-#' @name nnf_avg_pool1d
-#'
-#' @export
-NULL
 
 
-#' Avg_pool2d
-#'
-#' @section avg_pool2d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True, divisor_override=None) -> Tensor :
-#'
-#' Applies 2D average-pooling operation in \eqn{kH \times kW} regions by step size
-#' \eqn{sH \times sW} steps. The number of output features is equal to the number of
-#' input planes.
-#' 
-#' See `~torch.nn.AvgPool2d` for details and output shape.
-#'
-#'
-#' @param input NA input tensor \eqn{(\text{minibatch} , \text{in\_channels} , iH , iW)}
-#' @param kernel_size NA size of the pooling region. Can be a single number or a      tuple `(kH, kW)`
-#' @param stride NA stride of the pooling operation. Can be a single number or a      tuple `(sH, sW)`. Default: `kernel_size`
-#' @param padding NA implicit zero paddings on both sides of the input. Can be a      single number or a tuple `(padH, padW)`. Default: 0
-#' @param ceil_mode NA when True, will use `ceil` instead of `floor` in the formula        to compute the output shape. Default: ``False``
-#' @param count_include_pad NA when True, will include the zero-padding in the        averaging calculation. Default: ``True``
-#' @param divisor_override NA if specified, it will be used as divisor, otherwise         size of the pooling region will be used. Default: None
-#'
-#' @name nnf_avg_pool2d
-#'
-#' @export
-NULL
 
 
-#' Avg_pool3d
-#'
-#' @section avg_pool3d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True, divisor_override=None) -> Tensor :
-#'
-#' Applies 3D average-pooling operation in \eqn{kT \times kH \times kW} regions by step
-#' size \eqn{sT \times sH \times sW} steps. The number of output features is equal to
-#' \eqn{\lfloor\frac{\text{input planes}}{sT}\rfloor}.
-#' 
-#' See `~torch.nn.AvgPool3d` for details and output shape.
-#'
-#'
-#' @param input NA input tensor \eqn{(\text{minibatch} , \text{in\_channels} , iT \times iH , iW)}
-#' @param kernel_size NA size of the pooling region. Can be a single number or a      tuple `(kT, kH, kW)`
-#' @param stride NA stride of the pooling operation. Can be a single number or a      tuple `(sT, sH, sW)`. Default: `kernel_size`
-#' @param padding NA implicit zero paddings on both sides of the input. Can be a      single number or a tuple `(padT, padH, padW)`, Default: 0
-#' @param ceil_mode NA when True, will use `ceil` instead of `floor` in the formula        to compute the output shape
-#' @param count_include_pad NA when True, will include the zero-padding in the        averaging calculation
-#' @param divisor_override NA if specified, it will be used as divisor, otherwise        size of the pooling region will be used. Default: None
-#'
-#' @name nnf_avg_pool3d
-#'
-#' @export
-NULL
+
+
+
 
 
 
@@ -324,90 +118,6 @@ NULL
 
 
 
-
-
-#' Fractional_max_pool2d
-#'
-#' Applies 2D fractional max pooling over an input signal composed of several input planes.
-#' 
-#'     Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
-#' 
-#'     The max-pooling operation is applied in \eqn{kH \times kW} regions by a stochastic
-#'     step size determined by the target output size.
-#'     The number of output features is equal to the number of input planes.
-#'
-#' @param kernel_size NA the size of the window to take a max over.                 Can be a single number \eqn{k} (for a square kernel of \eqn{k \times k})                 or a tuple `(kH, kW)`
-#' @param output_size NA the target output size of the image of the form \eqn{oH \times oW}.                 Can be a tuple `(oH, oW)` or a single number \eqn{oH} for a square image \eqn{oH \times oH}
-#' @param output_ratio NA If one wants to have an output size as a ratio of the input size, this option can be given.                  This has to be a number or tuple in the range (0, 1)
-#' @param return_indices NA if ``True``, will return the indices along with the outputs.                    Useful to pass to [`~torch.nn.functional.max_unpool2d`].
-#'
-#' @name nnf_fractional_max_pool2d
-#'
-#' @export
-NULL
-
-
-#' Fractional_max_pool2d_with_indices
-#'
-#' Applies 2D fractional max pooling over an input signal composed of several input planes.
-#' 
-#'     Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
-#' 
-#'     The max-pooling operation is applied in \eqn{kH \times kW} regions by a stochastic
-#'     step size determined by the target output size.
-#'     The number of output features is equal to the number of input planes.
-#'
-#' @param kernel_size NA the size of the window to take a max over.                 Can be a single number \eqn{k} (for a square kernel of \eqn{k \times k})                 or a tuple `(kH, kW)`
-#' @param output_size NA the target output size of the image of the form \eqn{oH \times oW}.                 Can be a tuple `(oH, oW)` or a single number \eqn{oH} for a square image \eqn{oH \times oH}
-#' @param output_ratio NA If one wants to have an output size as a ratio of the input size, this option can be given.                  This has to be a number or tuple in the range (0, 1)
-#' @param return_indices NA if ``True``, will return the indices along with the outputs.                    Useful to pass to [`~torch.nn.functional.max_unpool2d`].
-#'
-#' @name nnf_fractional_max_pool2d_with_indices
-#'
-#' @export
-NULL
-
-
-#' Fractional_max_pool3d
-#'
-#' Applies 3D fractional max pooling over an input signal composed of several input planes.
-#' 
-#'     Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
-#' 
-#'     The max-pooling operation is applied in \eqn{kT \times kH \times kW} regions by a stochastic
-#'     step size determined by the target output size.
-#'     The number of output features is equal to the number of input planes.
-#'
-#' @param kernel_size NA the size of the window to take a max over.                 Can be a single number \eqn{k} (for a square kernel of \eqn{k \times k \times k})                 or a tuple `(kT, kH, kW)`
-#' @param output_size NA the target output size of the form \eqn{oT \times oH \times oW}.                 Can be a tuple `(oT, oH, oW)` or a single number \eqn{oH} for a cubic output                  \eqn{oH \times oH \times oH}
-#' @param output_ratio NA If one wants to have an output size as a ratio of the input size, this option can be given.                  This has to be a number or tuple in the range (0, 1)
-#' @param return_indices NA if ``True``, will return the indices along with the outputs.                    Useful to pass to [`~torch.nn.functional.max_unpool3d`].
-#'
-#' @name nnf_fractional_max_pool3d
-#'
-#' @export
-NULL
-
-
-#' Fractional_max_pool3d_with_indices
-#'
-#' Applies 3D fractional max pooling over an input signal composed of several input planes.
-#' 
-#'     Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
-#' 
-#'     The max-pooling operation is applied in \eqn{kT \times kH \times kW} regions by a stochastic
-#'     step size determined by the target output size.
-#'     The number of output features is equal to the number of input planes.
-#'
-#' @param kernel_size NA the size of the window to take a max over.                 Can be a single number \eqn{k} (for a square kernel of \eqn{k \times k \times k})                 or a tuple `(kT, kH, kW)`
-#' @param output_size NA the target output size of the form \eqn{oT \times oH \times oW}.                 Can be a tuple `(oT, oH, oW)` or a single number \eqn{oH} for a cubic output                  \eqn{oH \times oH \times oH}
-#' @param output_ratio NA If one wants to have an output size as a ratio of the input size, this option can be given.                  This has to be a number or tuple in the range (0, 1)
-#' @param return_indices NA if ``True``, will return the indices along with the outputs.                    Useful to pass to [`~torch.nn.functional.max_unpool3d`].
-#'
-#' @name nnf_fractional_max_pool3d_with_indices
-#'
-#' @export
-NULL
 
 
 
@@ -628,36 +338,10 @@ NULL
 
 
 
-#' Lp_pool1d
-#'
-#' Applies a 1D power-average pooling over an input signal composed of
-#'     several input planes. If the sum of all inputs to the power of `p` is
-#'     zero, the gradient is set to zero as well.
-#' 
-#'     See `~torch.nn.LPPool1d` for details.
-#'
-#'
-#'
-#' @name nnf_lp_pool1d
-#'
-#' @export
-NULL
 
 
-#' Lp_pool2d
-#'
-#' Applies a 2D power-average pooling over an input signal composed of
-#'     several input planes. If the sum of all inputs to the power of `p` is
-#'     zero, the gradient is set to zero as well.
-#' 
-#'     See `~torch.nn.LPPool2d` for details.
-#'
-#'
-#'
-#' @name nnf_lp_pool2d
-#'
-#' @export
-NULL
+
+
 
 
 
@@ -675,136 +359,13 @@ NULL
 NULL
 
 
-#' Max_pool1d
-#'
-#' Applies a 1D max pooling over an input signal composed of several input
-#'     planes.
-#' 
-#'     See `~torch.nn.MaxPool1d` for details.
-#'
-#'
-#'
-#' @name nnf_max_pool1d
-#'
-#' @export
-NULL
 
 
-#' Max_pool1d_with_indices
-#'
-#' Applies a 1D max pooling over an input signal composed of several input
-#'     planes.
-#' 
-#'     See `~torch.nn.MaxPool1d` for details.
-#'
-#'
-#'
-#' @name nnf_max_pool1d_with_indices
-#'
-#' @export
-NULL
 
 
-#' Max_pool2d
-#'
-#' Applies a 2D max pooling over an input signal composed of several input
-#'     planes.
-#' 
-#'     See `~torch.nn.MaxPool2d` for details.
-#'
-#'
-#'
-#' @name nnf_max_pool2d
-#'
-#' @export
-NULL
 
 
-#' Max_pool2d_with_indices
-#'
-#' Applies a 2D max pooling over an input signal composed of several input
-#'     planes.
-#' 
-#'     See `~torch.nn.MaxPool2d` for details.
-#'
-#'
-#'
-#' @name nnf_max_pool2d_with_indices
-#'
-#' @export
-NULL
 
-
-#' Max_pool3d
-#'
-#' Applies a 3D max pooling over an input signal composed of several input
-#'     planes.
-#' 
-#'     See `~torch.nn.MaxPool3d` for details.
-#'
-#'
-#'
-#' @name nnf_max_pool3d
-#'
-#' @export
-NULL
-
-
-#' Max_pool3d_with_indices
-#'
-#' Applies a 3D max pooling over an input signal composed of several input
-#'     planes.
-#' 
-#'     See `~torch.nn.MaxPool3d` for details.
-#'
-#'
-#'
-#' @name nnf_max_pool3d_with_indices
-#'
-#' @export
-NULL
-
-
-#' Max_unpool1d
-#'
-#' Computes a partial inverse of `MaxPool1d`.
-#' 
-#'     See `~torch.nn.MaxUnpool1d` for details.
-#'
-#'
-#'
-#' @name nnf_max_unpool1d
-#'
-#' @export
-NULL
-
-
-#' Max_unpool2d
-#'
-#' Computes a partial inverse of `MaxPool2d`.
-#' 
-#'     See `~torch.nn.MaxUnpool2d` for details.
-#'
-#'
-#'
-#' @name nnf_max_unpool2d
-#'
-#' @export
-NULL
-
-
-#' Max_unpool3d
-#'
-#' Computes a partial inverse of `MaxPool3d`.
-#' 
-#'     See `~torch.nn.MaxUnpool3d` for details.
-#'
-#'
-#'
-#' @name nnf_max_unpool3d
-#'
-#' @export
-NULL
 
 
 
