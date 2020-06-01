@@ -498,9 +498,6 @@ nnf_one_hot <- function(tensor, num_classes = -1) {
 
 
 
-nnf_pixel_shuffle <- function(input, upscale_factor) {
-  torch_pixel_shuffle(input, upscale_factor)
-}
 
 
 

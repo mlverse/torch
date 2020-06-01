@@ -70,6 +70,7 @@ Collate:
     'nnf-loss.R'
     'nnf-normalization.R'
     'nnf-padding.R'
+    'nnf-pixelshuffle.R'
     'operators.R'
     'package.R'
     'qscheme.R'

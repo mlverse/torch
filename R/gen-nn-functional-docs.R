@@ -861,23 +861,7 @@ NULL
 
 
 
-#' Pixel_shuffle
-#'
-#' @section Rearranges elements in a tensor of shape :math:`(*, C \times r^2, H, W)` to a :
-#'
-#' Rearranges elements in a tensor of shape \eqn{(*, C \times r^2, H, W)} to a
-#' tensor of shape \eqn{(*, C, H \times r, W \times r)}.
-#' 
-#' See `~torch.nn.PixelShuffle` for details.
-#'
-#'
-#' @param input (Tensor) the input tensor
-#' @param upscale_factor (int) factor to increase spatial resolution by
-#'
-#' @name nnf_pixel_shuffle
-#'
-#' @export
-NULL
+
 
 
 
