@@ -332,7 +332,7 @@ nn_init_calculate_correct_fan <- function(tensor, mode) {
 #'   
 #' @examples
 #' w <- torch_empty(3, 5)
-#' nn_init_kaiming_uniform_(w, mode = "fan_in", nonlinearuty = "leaky_relu")
+#' nn_init_kaiming_uniform_(w, mode = "fan_in", nonlinearity = "leaky_relu")
 #' 
 #' @export
 nn_init_kaiming_uniform_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity = "leay_relu") {
