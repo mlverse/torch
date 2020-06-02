@@ -44,6 +44,22 @@ Tensor <- R6::R6Class(
     },
     dtype = function() {
       torch_dtype$new(ptr = cpp_torch_tensor_dtype(self$ptr))
+    },
+    dim = function() {
+      length(self$size())
+    },
+    size = function(dim) {
+      x <- cpp_tensor_dim(self$ptr)
+      
+      if (missing(dim))
+        return(x)
+      
+      x[dim + 1]
+    }
+  ),
+  active = list(
+    shape = function() {
+      self$size()
     }
   )
 )
