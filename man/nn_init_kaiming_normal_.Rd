@@ -31,6 +31,6 @@ normal distribution.
 }
 \examples{
 w <- torch_empty(3, 5)
-nn_init_kaiming_normal_(w, mode = "fan_in", nonlinearuty = "leaky_relu")
+nn_init_kaiming_normal_(w, mode = "fan_in", nonlinearity = "leaky_relu")
 
 }
