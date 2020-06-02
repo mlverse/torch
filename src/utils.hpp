@@ -1,4 +1,4 @@
-#include "torchr_types.h"
+#include "torch_types.h"
 
 template <class type>
 Rcpp::XPtr<type> make_xptr  (type x) {

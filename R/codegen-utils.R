@@ -183,6 +183,6 @@ call_c_function <- function(fun_name, args, expected_types, nd_args, return_type
   args_t <- all_arguments_to_torch_type(args, expected_types)
   nd_args_types <- args_t[[2]][base::names(args_t[[2]]) %in% nd_args]
   fun_name <- make_cpp_function_name(fun_name, nd_args_types, fun_type)
-  out <- do_call(getNamespace('torchr')[[fun_name]], args_t[[1]])
+  out <- do_call(getNamespace('torch')[[fun_name]], args_t[[1]])
   to_return_type(out, return_types)
 }

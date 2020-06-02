@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(torchr)
+library(torch)
 ```
 
 Adding operations to autograd requires implementing a new `autograd_function` for each operation. Recall that `autograd_functions`s are what `autograd` uses to compute the results and gradients, and encode the operation history. Every new function requires you to implement 2 methods:

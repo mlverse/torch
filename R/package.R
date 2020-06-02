@@ -1,4 +1,4 @@
-#' @useDynLib torchr
+#' @useDynLib torch
 #' @importFrom Rcpp sourceCpp
 NULL
 
@@ -6,7 +6,7 @@ NULL
 
 .onAttach <- function(libname, pkgname) {
   if (!lantern_installed() && interactive()) {
-    packageStartupMessage("You need to install libtorch in order to use torchr.\n")
+    packageStartupMessage("You need to install libtorch in order to use torch.\n")
     ans <- readline("Do you want to download it now? ~100Mb (yes/no)")
     if (ans == "yes" | ans == "y")
       lantern_install()
