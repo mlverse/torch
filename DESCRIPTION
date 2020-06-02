@@ -52,6 +52,7 @@ Collate:
     'lantern_sync.R'
     'layout.R'
     'memory_format.R'
+    'nn-init.R'
     'nn-utils.R'
     'nn.R'
     'nn_linear.R'

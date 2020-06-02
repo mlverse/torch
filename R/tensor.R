@@ -55,6 +55,9 @@ Tensor <- R6::R6Class(
         return(x)
       
       x[dim + 1]
+    },
+    numel = function() {
+      cpp_tensor_numel(self$ptr)
     }
   ),
   active = list(

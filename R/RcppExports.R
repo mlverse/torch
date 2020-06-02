@@ -6957,6 +6957,10 @@ cpp_tensor_dim <- function(x) {
     .Call('_torchr_cpp_tensor_dim', PACKAGE = 'torchr', x)
 }
 
+cpp_tensor_numel <- function(x) {
+    .Call('_torchr_cpp_tensor_numel', PACKAGE = 'torchr', x)
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call('_torchr_cpp_torch_tensor_list', PACKAGE = 'torchr', x)
 }

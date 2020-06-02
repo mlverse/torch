@@ -159,3 +159,8 @@ std::vector<int> cpp_tensor_dim (Rcpp::XPtr<XPtrTorchTensor> x) {
   return out;
 }
 
+// [[Rcpp::export]]
+int cpp_tensor_numel (Rcpp::XPtr<XPtrTorchTensor> x) {
+  return lantern_Tensor_numel(x->get());
+}
+
