@@ -15,7 +15,7 @@ nnf_max_pool3d(
 )
 }
 \arguments{
-\item{input}{input tensor (minibatch, in_channels , iT \times iH , iW)}
+\item{input}{input tensor (minibatch, in_channels , iT * iH , iW)}
 
 \item{kernel_size}{size of the pooling region. Can be a single number or a
 tuple \verb{(kT, kH, kW)}}

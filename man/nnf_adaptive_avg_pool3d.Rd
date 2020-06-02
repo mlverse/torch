@@ -7,7 +7,7 @@
 nnf_adaptive_avg_pool3d(input, output_size)
 }
 \arguments{
-\item{input}{input tensor (minibatch, in_channels , iT \times iH , iW)}
+\item{input}{input tensor (minibatch, in_channels , iT * iH , iW)}
 
 \item{output_size}{the target output size (single integer or triple-integer tuple)}
 }

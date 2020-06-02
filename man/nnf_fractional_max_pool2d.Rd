@@ -17,11 +17,11 @@ nnf_fractional_max_pool2d(
 \item{input}{the input tensor}
 
 \item{kernel_size}{the size of the window to take a max over. Can be a
-single number \eqn{k} (for a square kernel of \eqn{k \times k}) or
+single number \eqn{k} (for a square kernel of \eqn{k * k}) or
 a tuple \verb{(kH, kW)}}
 
-\item{output_size}{the target output size of the image of the form \eqn{oH \times oW}.
-Can be a tuple \verb{(oH, oW)} or a single number \eqn{oH} for a square image \eqn{oH \times oH}}
+\item{output_size}{the target output size of the image of the form \eqn{oH * oW}.
+Can be a tuple \verb{(oH, oW)} or a single number \eqn{oH} for a square image \eqn{oH * oH}}
 
 \item{output_ratio}{If one wants to have an output size as a ratio of the input size,
 this option can be given. This has to be a number or tuple in the range (0, 1)}
@@ -36,7 +36,7 @@ Applies 2D fractional max pooling over an input signal composed of several input
 \details{
 Fractional MaxPooling is described in detail in the paper \verb{Fractional MaxPooling}_ by Ben Graham
 
-The max-pooling operation is applied in \eqn{kH \times kW} regions by a stochastic
+The max-pooling operation is applied in \eqn{kH * kW} regions by a stochastic
 step size determined by the target output size.
 The number of output features is equal to the number of input planes.
 }

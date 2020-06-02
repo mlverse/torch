@@ -7,7 +7,7 @@
 nnf_adaptive_max_pool3d(input, output_size, return_indices = FALSE)
 }
 \arguments{
-\item{input}{input tensor (minibatch, in_channels , iT \times iH , iW)}
+\item{input}{input tensor (minibatch, in_channels , iT * iH , iW)}
 
 \item{output_size}{the target output size (single integer or triple-integer tuple)}
 

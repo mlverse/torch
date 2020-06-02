@@ -15,7 +15,7 @@ nnf_avg_pool3d(
 )
 }
 \arguments{
-\item{input}{input tensor (minibatch, in_channels , iT \times iH , iW)}
+\item{input}{input tensor (minibatch, in_channels , iT * iH , iW)}
 
 \item{kernel_size}{size of the pooling region. Can be a single number or a
 tuple \verb{(kT, kH, kW)}}
@@ -36,7 +36,7 @@ averaging calculation}
 size of the pooling region will be used. Default: \code{NULL}}
 }
 \description{
-Applies 3D average-pooling operation in \eqn{kT \times kH \times kW} regions by step
-size \eqn{sT \times sH \times sW} steps. The number of output features is equal to
+Applies 3D average-pooling operation in \eqn{kT * kH * kW} regions by step
+size \eqn{sT * sH * sW} steps. The number of output features is equal to
 \eqn{\lfloor\frac{\text{input planes}}{sT}\rfloor}.
 }

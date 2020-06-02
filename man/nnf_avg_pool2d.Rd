@@ -37,6 +37,6 @@ size of the pooling region will be used. Default: \code{NULL}}
 }
 \description{
 Applies 2D average-pooling operation in \eqn{kH * kW} regions by step size
-\eqn{sH \times sW} steps. The number of output features is equal to the number of
+\eqn{sH * sW} steps. The number of output features is equal to the number of
 input planes.
 }

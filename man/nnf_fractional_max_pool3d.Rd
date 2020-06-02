@@ -14,11 +14,11 @@ nnf_fractional_max_pool3d(
 }
 \arguments{
 \item{kernel_size}{the size of the window to take a max over. Can be a single number \eqn{k}
-(for a square kernel of \eqn{k \times k \times k}) or a tuple \verb{(kT, kH, kW)}}
+(for a square kernel of \eqn{k * k * k}) or a tuple \verb{(kT, kH, kW)}}
 
-\item{output_size}{the target output size of the form \eqn{oT \times oH \times oW}.
+\item{output_size}{the target output size of the form \eqn{oT * oH * oW}.
 Can be a tuple \verb{(oT, oH, oW)} or a single number \eqn{oH} for a cubic output
-\eqn{oH \times oH \times oH}}
+\eqn{oH * oH * oH}}
 
 \item{output_ratio}{If one wants to have an output size as a ratio of the
 input size, this option can be given. This has to be a number or tuple in the
@@ -34,7 +34,7 @@ Applies 3D fractional max pooling over an input signal composed of several input
 \details{
 Fractional MaxPooling is described in detail in the paper \verb{Fractional MaxPooling}_ by Ben Graham
 
-The max-pooling operation is applied in \eqn{kT \times kH \times kW} regions by a stochastic
+The max-pooling operation is applied in \eqn{kT * kH * kW} regions by a stochastic
 step size determined by the target output size.
 The number of output features is equal to the number of input planes.
 }

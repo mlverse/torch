@@ -25,7 +25,7 @@ nnf_avg_pool1d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 #' Avg_pool2d
 #'
 #' Applies 2D average-pooling operation in \eqn{kH * kW} regions by step size
-#' \eqn{sH \times sW} steps. The number of output features is equal to the number of
+#' \eqn{sH * sW} steps. The number of output features is equal to the number of
 #' input planes.
 #'
 #'
@@ -52,11 +52,11 @@ nnf_avg_pool2d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 
 #' Avg_pool3d
 #'
-#' Applies 3D average-pooling operation in \eqn{kT \times kH \times kW} regions by step
-#' size \eqn{sT \times sH \times sW} steps. The number of output features is equal to
+#' Applies 3D average-pooling operation in \eqn{kT * kH * kW} regions by step
+#' size \eqn{sT * sH * sW} steps. The number of output features is equal to
 #' \eqn{\lfloor\frac{\text{input planes}}{sT}\rfloor}.
 #'
-#' @param input input tensor (minibatch, in_channels , iT \times iH , iW)
+#' @param input input tensor (minibatch, in_channels , iT * iH , iW)
 #' @param kernel_size size of the pooling region. Can be a single number or a      
 #'   tuple `(kT, kH, kW)`
 #' @param stride stride of the pooling operation. Can be a single number or a
@@ -343,16 +343,16 @@ nnf_max_unpool3d <- function(input, indices, kernel_size, stride = NULL,
 #' 
 #' Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
 #' 
-#' The max-pooling operation is applied in \eqn{kH \times kW} regions by a stochastic
+#' The max-pooling operation is applied in \eqn{kH * kW} regions by a stochastic
 #' step size determined by the target output size.
 #' The number of output features is equal to the number of input planes.
 #'
 #' @param input the input tensor
 #' @param kernel_size the size of the window to take a max over. Can be a 
-#'   single number \eqn{k} (for a square kernel of \eqn{k \times k}) or 
+#'   single number \eqn{k} (for a square kernel of \eqn{k * k}) or 
 #'   a tuple `(kH, kW)`
-#' @param output_size the target output size of the image of the form \eqn{oH \times oW}.
-#'   Can be a tuple `(oH, oW)` or a single number \eqn{oH} for a square image \eqn{oH \times oH}
+#' @param output_size the target output size of the image of the form \eqn{oH * oW}.
+#'   Can be a tuple `(oH, oW)` or a single number \eqn{oH} for a square image \eqn{oH * oH}
 #' @param output_ratio If one wants to have an output size as a ratio of the input size, 
 #'   this option can be given. This has to be a number or tuple in the range (0, 1)
 #' @param return_indices if ``True``, will return the indices along with the outputs.
@@ -391,16 +391,16 @@ nnf_fractional_max_pool2d <- function(input, kernel_size, output_size=NULL,
 #' 
 #' Fractional MaxPooling is described in detail in the paper `Fractional MaxPooling`_ by Ben Graham
 #' 
-#' The max-pooling operation is applied in \eqn{kT \times kH \times kW} regions by a stochastic
+#' The max-pooling operation is applied in \eqn{kT * kH * kW} regions by a stochastic
 #' step size determined by the target output size.
 #' The number of output features is equal to the number of input planes.
 #'
 #' @param input the input tensor
 #' @param kernel_size the size of the window to take a max over. Can be a single number \eqn{k} 
-#'   (for a square kernel of \eqn{k \times k \times k}) or a tuple `(kT, kH, kW)`
-#' @param output_size the target output size of the form \eqn{oT \times oH \times oW}. 
+#'   (for a square kernel of \eqn{k * k * k}) or a tuple `(kT, kH, kW)`
+#' @param output_size the target output size of the form \eqn{oT * oH * oW}. 
 #'   Can be a tuple `(oT, oH, oW)` or a single number \eqn{oH} for a cubic output 
-#'   \eqn{oH \times oH \times oH}
+#'   \eqn{oH * oH * oH}
 #' @param output_ratio If one wants to have an output size as a ratio of the 
 #'   input size, this option can be given. This has to be a number or tuple in the 
 #'   range (0, 1)
