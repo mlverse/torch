@@ -84,6 +84,11 @@ Rcpp::IntegerVector tensor_dimensions (XPtrTorchTensor x) {
   return dimensions;
 }
 
+// [[Rcpp::export]]
+Rcpp::XPtr<double *> tensor_dptr (Rcpp::XPtr<XPtrTorchTensor> ten) {
+  return make_xptr<double*>(lantern_Tensor_data_ptr_double(ten->get()));
+}
+
 Rcpp::List tensor_to_r_array_double (XPtrTorchTensor x) {
   XPtrTorchTensor ten = lantern_Tensor_contiguous(x.get());
   auto d_ptr = lantern_Tensor_data_ptr_double(ten.get());

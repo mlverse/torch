@@ -23169,6 +23169,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// tensor_dptr
+Rcpp::XPtr<double *> tensor_dptr(Rcpp::XPtr<XPtrTorchTensor> ten);
+RcppExport SEXP _torchr_tensor_dptr(SEXP tenSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type ten(tenSEXP);
+    rcpp_result_gen = Rcpp::wrap(tensor_dptr(ten));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_as_array
 Rcpp::List cpp_as_array(Rcpp::XPtr<XPtrTorchTensor> x);
 RcppExport SEXP _torchr_cpp_as_array(SEXP xSEXP) {
@@ -25029,6 +25040,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchr_cpp_torch_tensor_print", (DL_FUNC) &_torchr_cpp_torch_tensor_print, 1},
     {"_torchr_cpp_torch_tensor_dtype", (DL_FUNC) &_torchr_cpp_torch_tensor_dtype, 1},
     {"_torchr_cpp_torch_tensor", (DL_FUNC) &_torchr_cpp_torch_tensor, 4},
+    {"_torchr_tensor_dptr", (DL_FUNC) &_torchr_tensor_dptr, 1},
     {"_torchr_cpp_as_array", (DL_FUNC) &_torchr_cpp_as_array, 1},
     {"_torchr_cpp_tensor_dim", (DL_FUNC) &_torchr_cpp_tensor_dim, 1},
     {"_torchr_cpp_torch_tensor_list", (DL_FUNC) &_torchr_cpp_torch_tensor_list, 1},

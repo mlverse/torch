@@ -6949,6 +6949,10 @@ cpp_torch_tensor <- function(x, dim, options, requires_grad) {
     .Call('_torchr_cpp_torch_tensor', PACKAGE = 'torchr', x, dim, options, requires_grad)
 }
 
+tensor_dptr <- function(ten) {
+    .Call('_torchr_tensor_dptr', PACKAGE = 'torchr', ten)
+}
+
 cpp_as_array <- function(x) {
     .Call('_torchr_cpp_as_array', PACKAGE = 'torchr', x)
 }
