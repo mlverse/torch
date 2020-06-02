@@ -91,6 +91,22 @@ nnf_hardtanh_ <- function(input, min_val = -1, max_val = 1) {
   nnf_hardtanh(input, min_val, max_val, inplace = TRUE)
 }
 
+#' Hardsigmoid
+#'
+#' Applies the element-wise function \eqn{\text{Hardsigmoid}(x) = \frac{ReLU6(x + 3)}{6}}
+#' 
+#' @inheritParams nnf_elu
+#' @param inplace NA If set to ``True``, will do this operation in-place. Default: ``False``
+#'
+#' @export
+nnf_hardsigmoid <- function(input, inplace = FALSE) {
+  if (inplace)
+    torch_hardsigmoid_(input)
+  else
+    torch_hardsigmoid(input)
+}
+
+
 #' Leaky_relu
 #'
 #'

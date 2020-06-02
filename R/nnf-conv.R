@@ -126,3 +126,21 @@ nnf_conv_transpose3d <- function(input, weight, bias=NULL, stride=1, padding=0,
     dilation = dilation
   )
 }
+
+#' Conv_tbc
+#'
+#' Applies a 1-dimensional sequence convolution over an input sequence.
+#' Input and output dimensions are (Time, Batch, Channels) - hence TBC.
+#'
+#' @param input input tensor of shape \eqn{(\text{sequence length} \times 
+#'   batch \times \text{in\_channels})}
+#' @param weight filter of shape (\eqn{\text{kernel width} \times \text{in\_channels} 
+#'   \times \text{out\_channels}})
+#' @param bias bias of shape (\eqn{\text{out\_channels}})
+#' @param pad number of timesteps to pad. Default: 0
+#'
+#' @export
+nnf_conv_tbc <- function(input, weight, bias, pad = 0) {
+  torch_conv_tbc(self = input, weight = weight, bias = bias, pad = pad)
+}
+

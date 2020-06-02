@@ -22,3 +22,24 @@ nnf_linear <- function(input, weight, bias = NULL) {
   
   ret
 }
+
+#' Bilinear
+#'
+#' Applies a bilinear transformation to the incoming data:
+#' \eqn{y = x_1 A x_2 + b}
+#' 
+#' 
+#' @param input1 \eqn{(N, *, H_{in1})} where \eqn{H_{in1}=\text{in1\_features}}
+#'  and \eqn{*} means any number of additional dimensions.
+#'  All but the last dimension of the inputs should be the same.
+#' @param input2 \eqn{(N, *, H_{in2})} where \eqn{H_{in2}=\text{in2\_features}}
+#' @param weight \eqn{(\text{out\_features}, \text{in1\_features},
+#'  \text{in2\_features})}
+#' @param bias \eqn{(\text{out\_features})}
+#' @param output: \eqn{(N, *, H_{out})} where \eqn{H_{out}=\text{out\_features}}
+#'  and all but the last dimension are the same shape as the input.
+#'
+#' @export
+nnf_bilinear <- function(input1, input2, weight, bias = NULL) {
+  torch_bilinear(input1, input2, weight, bias)
+}

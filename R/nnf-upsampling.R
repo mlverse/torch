@@ -1,79 +1,3 @@
-
-
-
-nnf_affine_grid <- function(theta, size, align_corners = FALSE) {
-  torch_affine_grid_generator(theta, size, align_corners)
-}
-
-
-
-nnf_bilinear <- function(input1, input2, weight, bias = NULL) {
-  torch_bilinear(input1, input2, weight, bias)
-}
-
-
-
-
-
-
-
-
-
-nnf_conv_tbc <- function(input, weight, bias, pad = 0) {
-  torch_conv_tbc(self = input, weight = weight, bias = bias, pad = pad)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-nnf_grid_sample <- function(input, grid, mode = c("bilinear", "nearest"), 
-                            padding_mode = c("zeros", "border", "reflection"), 
-                            align_corners = FALSE) {
-  
-  if (mode == "bilinear")
-    mode_enum <- 0
-  else if (mode == "nearest")
-    mode_enum <- 1
-  else
-    value_error("Unknown mode name '{mode}'. Supported modes are 'bilinear'",
-                "and 'nearest'.")
-  
-  
-  if (padding_mode == "zeros")
-    padding_mode_enum <- 0
-  else if (padding_mode == "border")
-    padding_mode_enum <- 1
-  else if (padding_mode == "reflection")
-    padding_mode_enum <- 2
-  else
-    value_error("Unknown padding mode name '{padding_mode}'. Supported modes are",
-                "'zeros', 'border' and 'reflection'.")
-  
-  torch_grid_sampler(input = input, grid = grid, interpolation_mode = mode_enum,
-                     padding_mode = padding_mode_enum, align_corners = align_corners)
-}
-
-
-
-nnf_hardsigmoid <- function(input, inplace = FALSE) {
-  if (inplace)
-    torch_hardsigmoid_(input)
-  else
-    torch_hardsigmoid(input)
-}
-
-
 interp_output_size <- function(input, size, scale_factor, recompute_scale_factor) {
   dim <- input$dim() - 2
   
@@ -132,6 +56,52 @@ interp_output_size <- function(input, size, scale_factor, recompute_scale_factor
   )
 }
 
+#' Interpolate
+#'
+#' Down/up samples the input to either the given `size` or the given
+#' `scale_factor`
+#' 
+#' The algorithm used for interpolation is determined by `mode`.
+#' 
+#' Currently temporal, spatial and volumetric sampling are supported, i.e.
+#' expected inputs are 3-D, 4-D or 5-D in shape.
+#' 
+#' The input dimensions are interpreted in the form:
+#' `mini-batch x channels x [optional depth] x [optional height] x width`.
+#' 
+#' The modes available for resizing are: `nearest`, `linear` (3D-only),
+#' `bilinear`, `bicubic` (4D-only), `trilinear` (5D-only), `area`
+#'
+#' @param input (Tensor) the input tensor
+#' @param size (int or Tuple[int] or Tuple[int, int] or Tuple[int, int, int]) 
+#'   output spatial size.
+#' @param scale_factor (float or Tuple[float]) multiplier for spatial size. 
+#'   Has to match input size if it is a tuple.
+#' @param mode (str) algorithm used for upsampling: 'nearest' | 'linear' | 'bilinear' 
+#'  | 'bicubic' | 'trilinear' | 'area' Default: 'nearest'
+#' @param align_corners (bool, optional) Geometrically, we consider the pixels
+#'   of the input and output as squares rather than points. If set to TRUE, 
+#'   the input and output tensors are aligned by the center points of their corner 
+#'   pixels, preserving the values at the corner pixels. If set to False, the 
+#'   input and output tensors are aligned by the corner points of their corner pixels, 
+#'   and the interpolation uses edge value padding for out-of-boundary values, 
+#'   making this operation *independent* of input size when `scale_factor` is kept 
+#'   the same. This only has an effect when `mode`  is ``'linear'``, ``'bilinear'``, 
+#'   ``'bicubic'`` or ``'trilinear'``.  Default: ``False``
+#' @param recompute_scale_factor (bool, optional) recompute the scale_factor 
+#'   for use in the interpolation calculation.  When `scale_factor` is passed 
+#'   as a parameter, it is used to compute the `output_size`.  If `recompute_scale_factor` 
+#'   is ```True`` or not specified, a new `scale_factor` will be computed based on 
+#'   the output and input sizes for use in the interpolation computation (i.e. the 
+#'   computation will be identical to if the computed `output_size` were passed-in 
+#'   explicitly).  Otherwise, the passed-in `scale_factor` will be used in the 
+#'   interpolation computation.  Note that when `scale_factor` is floating-point, 
+#'   the recomputed scale_factor may differ from the one passed in due to rounding 
+#'   and precision issues.
+#'
+#' @name nnf_interpolate
+#'
+#' @export
 nnf_interpolate <- function(input, size = NULL, scale_factor = NULL, 
                             mode = "nearest", align_corners = FALSE, 
                             recompute_scale_factor = NULL) {
@@ -144,7 +114,7 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   
   sfl <- scale_factor_repeated
   sze <- interp_output_size(input, size = size, scale_factor = scale_factor, 
-                                    recompute_scale_factor = recompute_scale_factor)
+                            recompute_scale_factor = recompute_scale_factor)
   
   if (input$dim() == 3 && mode == "nearest") {
     return(torch_upsample_nearest1d(input, output_size = sze, scales = sfl[[1]]))
@@ -198,14 +168,14 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   if (input$dim() == 5 && mode == "linear") {
     not_implemented_error("Got 5D input, but trilinear mode needs 3D input")
   }
-    
+  
   if (input$dim() == 5 && mode == "bilinear") {
     not_implemented_error("Got 5D input, but bilinear mode needs 4D input")
   }
   
   if (inpt$dim() == 5 && mode == "trilinear") {
     return(torch_upsample_trilinear3d(input, sze, align_corners, sfl[[1]], sfl[[2]], 
-                               sfl[[3]]))
+                                      sfl[[3]]))
   }
   
   if (input$dim() ==4 && mode == "bicubic") {
@@ -216,35 +186,3 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
                         " (got {input$dim()}D) for the modes: nearest | linear | bilinear | bicubic | trilinear",
                         " (got {mode})")
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-nnf_one_hot <- function(tensor, num_classes = -1) {
-  torch_one_hot(tensor, num_classes)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
