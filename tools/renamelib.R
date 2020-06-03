@@ -1,8 +1,7 @@
 libs_path <- getwd()
 
-for (lib in dir(libs_path, pattern = "torch.")) {
+for (lib in dir(libs_path, pattern = "torch\\.")) {
   file.copy(file.path(libs_path, lib), file.path(libs_path, gsub("torch", "torchpkg", lib)))
-  unlink(file.path(libs_path, lib))
 }
 
 exports_path <- normalizePath(file.path(libs_path, "..", "R", "RcppExports.R"))
