@@ -23193,7 +23193,7 @@ END_RCPP
 }
 // cpp_tensor_numel
 int cpp_tensor_numel(Rcpp::XPtr<XPtrTorchTensor> x);
-RcppExport SEXP _torchr_cpp_tensor_numel(SEXP xSEXP) {
+RcppExport SEXP _torch_cpp_tensor_numel(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -25042,6 +25042,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
     {"_torch_cpp_tensor_dim", (DL_FUNC) &_torch_cpp_tensor_dim, 1},
+    {"_torch_cpp_tensor_numel", (DL_FUNC) &_torch_cpp_tensor_numel, 1},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
