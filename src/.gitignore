@@ -1,3 +1,4 @@
 *.o
 *.so
 *.dll
+torchpkg_types.h
