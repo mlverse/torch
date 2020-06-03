@@ -1,5 +1,5 @@
 nn_Module <- R6::R6Class(
-  classname = "nn_module",
+  classname = "nn_Module",
   lock_objects = FALSE,
   active = list(
     parameters = function() {
@@ -40,7 +40,7 @@ is_nn_module <- function(x) {
 }
 
 nn_module <- function(classname = NULL, initialize, forward, ...) {
-  R6::R6Class(
+  Module <- R6::R6Class(
     classname = classname,
     inherit = nn_Module,
     lock_objects = FALSE,
@@ -50,6 +50,29 @@ nn_module <- function(classname = NULL, initialize, forward, ...) {
       ...
     )
   )
+  fun <- rlang::new_function(
+    args = rlang::fn_fmls(initialize), 
+    body = rlang::expr({
+      instance <- Module$new(!!!rlang::fn_fmls_syms(initialize))
+      f <- instance$forward
+      attr(f, "class") <- "nn_module"
+      attr(f, "module") <- instance
+      f
+    })
+  )
+  attr(fun, "class") <- "nn_module"
+  attr(fun, "module") <- Module
+  fun
+}
+
+`$.nn_module` <- function(x, y) {
+  x <- attr(x, "module")
+  NextMethod("$", x)
+}
+
+print.nn_module <- function(x, ...) {
+  x <- attr(x, "module")
+  print(x)
 }
 
 

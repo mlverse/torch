@@ -335,7 +335,7 @@ nn_init_calculate_correct_fan <- function(tensor, mode) {
 #' nn_init_kaiming_uniform_(w, mode = "fan_in", nonlinearity = "leaky_relu")
 #' 
 #' @export
-nn_init_kaiming_uniform_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity = "leay_relu") {
+nn_init_kaiming_uniform_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity = "leaky_relu") {
   fan <- nn_init_calculate_correct_fan(tensor, mode)
   gain <- nn_init_calculate_gain(nonlinearity, a)
   std <- gain/sqrt(fan)

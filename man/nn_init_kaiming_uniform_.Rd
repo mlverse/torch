@@ -8,7 +8,7 @@ nn_init_kaiming_uniform_(
   tensor,
   a = 0,
   mode = "fan_in",
-  nonlinearity = "leay_relu"
+  nonlinearity = "leaky_relu"
 )
 }
 \arguments{
