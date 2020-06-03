@@ -2,6 +2,4 @@ all: $(SHLIB) rename
 
 rename:
 	@echo "Renaming torch lib to torchpkg"
-	cp $(SHLIB) torchpkg.dll
-	rm -f $(SHLIB)
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/renamelib.R"
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript" "../tools/renamelib.R"
