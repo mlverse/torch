@@ -1,0 +1,5 @@
+all: $(SHLIB) rename
+
+rename:
+	@echo "Renaming torch lib to torchpkg"
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript" "../tools/renamelib.R"

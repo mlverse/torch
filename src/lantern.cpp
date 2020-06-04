@@ -1,4 +1,4 @@
-#include "torchr_types.h"
+#include "torch_types.h"
 
 using namespace Rcpp;
 

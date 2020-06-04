@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(torchr)
+library(torch)
 ```
 
 So far, all we've been using from torch is _tensors_, but we've been performing all calculations ourselves -- the computing the predictions, the loss, the gradients (and thus, the necessary updates to the weights), and the new weight values. In this chapter, we'll make a significant change: Namely, we spare ourselves the cumbersome calculation of gradients, and have torch do it for us.
