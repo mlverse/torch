@@ -1,4 +1,4 @@
-name: Build
+name: Lantern
 
 on: [push, deployment]
 
