@@ -13,7 +13,7 @@ NULL
     
     if (lantern_installed()) {
       packageStartupMessage("Torch was successfully installed.")
-      packageStartupMessage("Please restar your R session now.")
+      packageStartupMessage("Please restart your R session now.")
     }
       
   }
