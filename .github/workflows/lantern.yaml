@@ -1,6 +1,6 @@
 name: Lantern
 
-on: [push, deployment]
+on: [push]
 
 jobs:
   build:
