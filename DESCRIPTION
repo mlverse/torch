@@ -57,6 +57,7 @@ Collate:
     'memory_format.R'
     'nn.R'
     'nn-activation.R'
+    'nn-batchnorm.R'
     'nn-init.R'
     'nn-linear.R'
     'nn-utils.R'
