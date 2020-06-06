@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Min — torch_min • torchr</title>
+<title>Min — torch_min • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -207,51 +207,51 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5111  1.2523 -1.1229
+#&gt; -0.6682  0.6258  0.7013
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_min</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.12295
+#&gt; -0.668231
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3564  1.2117  0.1388  0.5869
-#&gt; -0.1848  0.3765  0.1305  1.6527
-#&gt;  0.0315  2.1619  0.5486 -1.4426
-#&gt;  0.5879 -0.9258  0.8620 -0.8854
+#&gt; -0.8401 -1.1244 -0.4889 -0.3646
+#&gt;  1.3380  1.4890 -0.7736 -2.3400
+#&gt;  1.4062 -0.4690 -0.0766  0.8155
+#&gt; -0.0194  0.3335  0.4259  0.0462
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_min</span>(<span class='no'>a</span>, <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -0.3564
-#&gt; -0.1848
-#&gt; -1.4426
-#&gt; -0.9258
+#&gt; -1.1244
+#&gt; -2.3400
+#&gt; -0.4690
+#&gt; -0.0194
 #&gt; [ CPUFloatType{4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  0
-#&gt;  0
+#&gt;  1
 #&gt;  3
 #&gt;  1
+#&gt;  0
 #&gt; [ CPULongType{4} ]
 #&gt; </div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.6300
-#&gt;  1.6088
-#&gt;  2.1564
-#&gt;  0.4299
+#&gt;  0.5888
+#&gt;  0.2560
+#&gt;  0.0213
+#&gt; -0.3803
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.2239
-#&gt; -1.4586
-#&gt; -0.9037
-#&gt;  0.0866
+#&gt; -0.6955
+#&gt; -1.1073
+#&gt; -1.5299
+#&gt; -0.4022
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_min</span>(<span class='no'>a</span>, <span class='kw'>other</span> <span class='kw'>=</span> <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.2239
-#&gt; -1.4586
-#&gt; -0.9037
-#&gt;  0.0866
+#&gt; -0.6955
+#&gt; -1.1073
+#&gt; -1.5299
+#&gt; -0.4022
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -272,7 +272,7 @@ $$</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

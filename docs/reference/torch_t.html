@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>T — torch_t • torchr</title>
+<title>T — torch_t • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -156,29 +156,31 @@ is equivalent to <code>transpose(input, 0, 1)</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.2106 -1.4554 -0.2237
-#&gt;  0.7696 -0.5135  0.0341
+#&gt; -0.6650  0.5981  0.2046
+#&gt; -0.3163  0.6088  0.2845
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_t</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.2106  0.7696
-#&gt; -1.4554 -0.5135
-#&gt; -0.2237  0.0341
+#&gt; -0.6650 -0.3163
+#&gt;  0.5981  0.6088
+#&gt;  0.2046  0.2845
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3866
-#&gt; -0.3623
-#&gt; -1.6938
+#&gt; 0.01 *
+#&gt; -0.8064
+#&gt; -93.0972
+#&gt;  6.8426
 #&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='fu'>torch_t</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3866
-#&gt; -0.3623
-#&gt; -1.6938
+#&gt; 0.01 *
+#&gt; -0.8064
+#&gt; -93.0972
+#&gt;  6.8426
 #&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.6436 -0.3557  0.4094
-#&gt;  0.4712 -1.0082 -1.1204
+#&gt;  0.7976 -0.9500  0.9336
+#&gt;  0.4326 -2.2970 -0.2936
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_t</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.6436  0.4712
-#&gt; -0.3557 -1.0082
-#&gt;  0.4094 -1.1204
+#&gt;  0.7976  0.4326
+#&gt; -0.9500 -2.2970
+#&gt;  0.9336 -0.2936
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -195,7 +197,7 @@ is equivalent to <code>transpose(input, 0, 1)</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

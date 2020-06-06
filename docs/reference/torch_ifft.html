@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ifft — torch_ifft • torchr</title>
+<title>Ifft — torch_ifft • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -195,35 +195,35 @@ shape of <code>input</code>.</p>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.4743 -1.6866
-#&gt;   0.3812  1.2491
-#&gt;   1.1465  2.2176
+#&gt;   0.7085 -1.2135
+#&gt;   1.3671  0.2277
+#&gt;  -1.2973 -1.0018
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.3761  0.6684
-#&gt;   0.5646  0.9020
-#&gt;   0.4845 -0.9307
+#&gt;  -1.9989 -0.2107
+#&gt;   0.0776 -0.2490
+#&gt;   0.4695 -1.4418
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.7815 -0.7555
-#&gt;  -0.2224  1.9265
-#&gt;  -0.3261 -1.3141
+#&gt;  -0.5785  0.8568
+#&gt;  -0.9919 -0.6018
+#&gt;  -0.4367 -0.3944
 #&gt; [ CPUFloatType{3,3,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_fft.html'>torch_fft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>)
 <span class='fu'>torch_ifft</span>(<span class='no'>y</span>, <span class='fl'>2</span>)  <span class='co'># recover x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.4743 -1.6866
-#&gt;   0.3812  1.2491
-#&gt;   1.1465  2.2176
+#&gt;   0.7085 -1.2135
+#&gt;   1.3671  0.2277
+#&gt;  -1.2973 -1.0018
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.3761  0.6684
-#&gt;   0.5646  0.9020
-#&gt;   0.4845 -0.9307
+#&gt;  -1.9989 -0.2107
+#&gt;   0.0776 -0.2490
+#&gt;   0.4695 -1.4418
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.7815 -0.7555
-#&gt;  -0.2224  1.9265
-#&gt;  -0.3261 -1.3141
+#&gt;  -0.5785  0.8568
+#&gt;  -0.9919 -0.6018
+#&gt;  -0.4367 -0.3944
 #&gt; [ CPUFloatType{3,3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -242,7 +242,7 @@ shape of <code>input</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

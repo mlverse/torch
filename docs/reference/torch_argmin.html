@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Argmin — torch_argmin • torchr</title>
+<title>Argmin — torch_argmin • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -171,24 +171,24 @@ documentation for the exact semantics of this method.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4693 -0.4053 -0.1496 -0.9902
-#&gt; -0.2683 -0.9392 -0.6758  1.3139
-#&gt; -0.0585 -0.0237  0.1255 -0.5296
-#&gt;  0.6492 -0.4474 -1.7080 -0.1985
+#&gt;  0.6237  0.8040  0.6241 -0.4633
+#&gt;  0.5476  0.3652 -0.5216 -0.9469
+#&gt;  1.6649  0.6340  1.5736  0.4653
+#&gt; -0.3484 -0.2719  1.1984 -1.5913
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 14
+#&gt; 15
 #&gt; [ CPULongType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.9357  0.5824 -1.0312  0.7504
-#&gt; -0.4638 -0.1355  0.6446  0.9739
-#&gt; -0.1976 -0.3677  0.9006 -0.6532
-#&gt;  0.2156  0.4264 -0.4234  0.5929
+#&gt; -1.2431 -0.0779 -0.3983  0.2762
+#&gt;  0.8538  0.0959 -0.0082  0.4531
+#&gt; -0.7550  1.1969  1.2078 -0.5135
+#&gt; -0.1470  0.6374 -1.4834 -0.6630
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0
 #&gt;  2
 #&gt;  0
-#&gt;  3
 #&gt;  2
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
@@ -207,7 +207,7 @@ documentation for the exact semantics of this method.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

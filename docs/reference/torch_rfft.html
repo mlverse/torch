@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rfft — torch_rfft • torchr</title>
+<title>Rfft — torch_rfft • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -202,64 +202,64 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -2.7806  0.0000
-#&gt;  -9.1608 -1.3452
-#&gt;   1.4311  1.1814
+#&gt;  -5.2220  0.0000
+#&gt;  -3.6562  4.9288
+#&gt;  -3.3618 -0.3793
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -2.1552  1.6326
-#&gt;   2.2895  6.1471
-#&gt;  -1.5210 -10.4016
+#&gt;   4.8870 -2.5090
+#&gt;  -1.3385  4.6021
+#&gt;   2.0763  6.3336
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -3.3960 -2.5888
-#&gt;  -1.0022 -1.7921
-#&gt;   0.9123  2.9851
+#&gt;  -1.2029 -3.3719
+#&gt;  -4.9723 -0.7751
+#&gt;   2.0172  3.0397
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -3.3960  2.5888
-#&gt;   2.9419  0.2764
-#&gt;   3.6369 -0.8820
+#&gt;  -1.2029  3.3719
+#&gt;  -2.5577  1.0561
+#&gt;   6.9638 -1.7690
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -2.1552 -1.6326
-#&gt;   2.6420 -0.3077
-#&gt;   0.5512  0.7745
+#&gt;   4.8870  2.5090
+#&gt;  -5.3342 -1.4554
+#&gt;   8.4600 -1.1152
 #&gt; [ CPUFloatType{5,3,2} ]</div><div class='input'><span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -2.7806  0.0000
-#&gt;  -9.1608 -1.3452
-#&gt;   1.4311  1.1814
-#&gt;   1.4311 -1.1814
-#&gt;  -9.1608  1.3452
+#&gt;  -5.2220  0.0000
+#&gt;  -3.6562  4.9288
+#&gt;  -3.3618 -0.3793
+#&gt;  -3.3618  0.3793
+#&gt;  -3.6562 -4.9288
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -2.1552  1.6326
-#&gt;   2.2895  6.1471
-#&gt;  -1.5210 -10.4016
-#&gt;   0.5512 -0.7745
-#&gt;   2.6420  0.3077
+#&gt;   4.8870 -2.5090
+#&gt;  -1.3385  4.6021
+#&gt;   2.0763  6.3336
+#&gt;   8.4600  1.1152
+#&gt;  -5.3342  1.4554
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -3.3960 -2.5888
-#&gt;  -1.0022 -1.7921
-#&gt;   0.9123  2.9851
-#&gt;   3.6369  0.8820
-#&gt;   2.9419 -0.2764
+#&gt;  -1.2029 -3.3719
+#&gt;  -4.9723 -0.7751
+#&gt;   2.0172  3.0397
+#&gt;   6.9638  1.7690
+#&gt;  -2.5577 -1.0561
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -3.3960  2.5888
-#&gt;   2.9419  0.2764
-#&gt;   3.6369 -0.8820
-#&gt;   0.9123 -2.9851
-#&gt;  -1.0022  1.7921
+#&gt;  -1.2029  3.3719
+#&gt;  -2.5577  1.0561
+#&gt;   6.9638 -1.7690
+#&gt;   2.0172 -3.0397
+#&gt;  -4.9723  0.7751
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   -2.1552  -1.6326
-#&gt;    2.6420  -0.3077
-#&gt;    0.5512   0.7745
-#&gt;   -1.5210  10.4016
-#&gt;    2.2895  -6.1471
+#&gt;   4.8870  2.5090
+#&gt;  -5.3342 -1.4554
+#&gt;   8.4600 -1.1152
+#&gt;   2.0763 -6.3336
+#&gt;  -1.3385 -4.6021
 #&gt; [ CPUFloatType{5,5,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -278,7 +278,7 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

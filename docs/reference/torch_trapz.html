@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Trapz — torch_trapz • torchr</title>
+<title>Trapz — torch_trapz • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -171,12 +171,12 @@
     <pre class="examples"><div class='input'>
 <span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='no'>y</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.2155 -0.5600  0.7257
-#&gt;  0.2004  0.4635 -0.8524
+#&gt; -0.7743 -1.2781  0.4959
+#&gt;  0.6720  1.3889 -0.0609
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>byrow</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
 <span class='fu'>torch_trapz</span>(<span class='no'>y</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.6926
-#&gt;  0.1375
+#&gt; -2.4435
+#&gt;  1.6944
 #&gt; [ CPUFloatType{2} ]</div><div class='input'>
 </div></pre>
   </div>
@@ -195,7 +195,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

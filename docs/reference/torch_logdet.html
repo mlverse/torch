@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Logdet — torch_logdet • torchr</title>
+<title>Logdet — torch_logdet • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -166,17 +166,17 @@ be unstable in when `input` doesn't have distinct singular values. See
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'><a href='torch_det.html'>torch_det</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.490936
+#&gt; 0.322585
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_logdet</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; nan
+#&gt; -1.13139
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0359  1.0494  0.7954
-#&gt;  0.2123 -0.4513 -0.6727
-#&gt;  1.1581  1.1507  1.5722
+#&gt;  0.5644  1.4448 -0.4170
+#&gt; -0.2765 -1.0532 -0.4604
+#&gt; -0.6560 -0.6727  0.7672
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.490936
+#&gt; 0.322585
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()$<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; nan
+#&gt; -1.13139
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -194,7 +194,7 @@ be unstable in when `input` doesn't have distinct singular values. See
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

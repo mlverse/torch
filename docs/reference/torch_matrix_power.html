@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Matrix_power — torch_matrix_power • torchr</title>
+<title>Matrix_power — torch_matrix_power • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -163,20 +163,21 @@ is returned.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   2.1196  0.1671
-#&gt;   0.3068 -0.8473
+#&gt;  -1.1080 -0.6970
+#&gt;   0.3738 -0.7149
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -1.9723  0.0829
-#&gt;  -0.1351 -1.6567
+#&gt;  0.01 *
+#&gt;   5.9631 -96.9880
+#&gt;   -102.8615 -150.0976
 #&gt; [ CPUFloatType{2,2,2} ]</div><div class='input'><span class='fu'>torch_matrix_power</span>(<span class='no'>a</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   9.6972  0.5790
-#&gt;   1.0635 -0.5864
+#&gt;  -0.5964 -1.5824
+#&gt;   0.8486  0.2959
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -7.6093  0.8197
-#&gt;  -1.3367 -4.4878
+#&gt;  -1.3782 -3.0693
+#&gt;  -3.2552 -6.3169
 #&gt; [ CPUFloatType{2,2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -193,7 +194,7 @@ is returned.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

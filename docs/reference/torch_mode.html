@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mode — torch_mode • torchr</title>
+<title>Mode — torch_mode • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -176,10 +176,10 @@ in the output tensors having 1 fewer dimension than <code>input</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span>(<span class='fl'>0</span>, <span class='fl'>50</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>5</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  14
-#&gt;  26
-#&gt;  40
-#&gt;  15
+#&gt;  19
+#&gt;  29
+#&gt;  20
+#&gt;  43
 #&gt;   2
 #&gt; [ CPUFloatType{5} ]</div><div class='input'><span class='fu'>torch_mode</span>(<span class='no'>a</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
@@ -207,7 +207,7 @@ in the output tensors having 1 fewer dimension than <code>input</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

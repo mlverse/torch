@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add — torch_add • torchr</title>
+<title>Add — torch_add • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -186,34 +186,34 @@ a real number, otherwise it should be an integer.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.6652
-#&gt;  0.4295
-#&gt;  0.6064
-#&gt; -0.5474
+#&gt;  0.3766
+#&gt;  0.2980
+#&gt; -0.3306
+#&gt; -0.1553
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='fl'>20</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  19.3348
-#&gt;  20.4295
-#&gt;  20.6064
-#&gt;  19.4526
+#&gt;  20.3766
+#&gt;  20.2980
+#&gt;  19.6694
+#&gt;  19.8447
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8717
-#&gt; -0.6972
-#&gt; -1.5787
-#&gt;  1.1559
+#&gt;  0.2634
+#&gt; -0.3127
+#&gt;  0.3279
+#&gt;  0.0938
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0447
-#&gt;  0.2216
-#&gt;  0.0750
-#&gt;  0.1409
+#&gt; -0.9428
+#&gt;  0.2656
+#&gt; -0.0625
+#&gt;  1.8104
 #&gt; [ CPUFloatType{4,1} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8270 -0.6525 -1.5340  1.2006
-#&gt; -0.6501 -0.4756 -1.3571  1.3775
-#&gt; -0.7967 -0.6221 -1.5037  1.2309
-#&gt; -0.7308 -0.5562 -1.4378  1.2969
+#&gt; -0.6794 -1.2555 -0.6149 -0.8490
+#&gt;  0.5290 -0.0471  0.5935  0.3594
+#&gt;  0.2009 -0.3753  0.2654  0.0313
+#&gt;  2.0737  1.4976  2.1383  1.9042
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -231,7 +231,7 @@ a real number, otherwise it should be an integer.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

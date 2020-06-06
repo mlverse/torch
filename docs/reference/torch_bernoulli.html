@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bernoulli — torch_bernoulli • torchr</title>
+<title>Bernoulli — torch_bernoulli • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -175,13 +175,13 @@ point <code>dtype</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))$<span class='fu'>uniform_</span>(<span class='fl'>0</span>, <span class='fl'>1</span>)  <span class='co'># generate a uniform random matrix with range c(0, 1)</span>
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4666  0.6223  0.0293
-#&gt;  0.3311  0.3295  0.4024
-#&gt;  0.4563  0.5072  0.7706
+#&gt;  0.1626  0.5896  0.5032
+#&gt;  0.8020  0.3368  0.6261
+#&gt;  0.4789  0.1496  0.5278
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_bernoulli</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  0  0  0
+#&gt;  0  1  1
 #&gt;  0  0  1
-#&gt;  1  1  0
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>)) <span class='co'># probability of drawing "1" is 1</span>
 <span class='fu'>torch_bernoulli</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  1  1  1
@@ -208,7 +208,7 @@ point <code>dtype</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

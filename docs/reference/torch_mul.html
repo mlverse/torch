@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mul — torch_mul • torchr</title>
+<title>Mul — torch_mul • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -188,29 +188,29 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5348
-#&gt;  0.8402
-#&gt;  1.0256
+#&gt; -1.3128
+#&gt;  0.0966
+#&gt; -0.4937
 #&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='fu'>torch_mul</span>(<span class='no'>a</span>, <span class='fl'>100</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;   53.4791
-#&gt;   84.0243
-#&gt;  102.5570
+#&gt; -131.2837
+#&gt;    9.6596
+#&gt;  -49.3712
 #&gt; [ CPUFloatType{3} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.7818
-#&gt; -0.9883
-#&gt; -1.5906
-#&gt;  0.5785
+#&gt;  0.6866
+#&gt; -1.0891
+#&gt; -1.8984
+#&gt; -2.3084
 #&gt; [ CPUFloatType{4,1} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5520  0.6860  0.3135 -0.4962
+#&gt;  1.2499  0.5791 -1.5868  1.4754
 #&gt; [ CPUFloatType{1,4} ]</div><div class='input'><span class='fu'>torch_mul</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.9836 -1.2223 -0.5585  0.8841
-#&gt;  0.5456 -0.6779 -0.3098  0.4904
-#&gt;  0.8781 -1.0911 -0.4986  0.7893
-#&gt; -0.3193  0.3968  0.1813 -0.2870
+#&gt;  0.8582  0.3976 -1.0895  1.0130
+#&gt; -1.3612 -0.6307  1.7281 -1.6068
+#&gt; -2.3727 -1.0994  3.0123 -2.8008
+#&gt; -2.8852 -1.3369  3.6630 -3.4058
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -227,7 +227,7 @@ $$</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

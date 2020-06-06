@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cummax — torch_cummax • torchr</title>
+<title>Cummax — torch_cummax • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -166,42 +166,42 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.0919
-#&gt; -0.3975
-#&gt; -0.0549
-#&gt; -0.3074
-#&gt; -0.2338
-#&gt; -0.6097
-#&gt; -0.8554
-#&gt; -0.1746
-#&gt;  1.1487
-#&gt;  0.0288
+#&gt;  0.7953
+#&gt;  2.3806
+#&gt;  1.1999
+#&gt;  0.0195
+#&gt; -0.0584
+#&gt; -3.1397
+#&gt;  0.9219
+#&gt; -0.1720
+#&gt;  1.0079
+#&gt; -0.3227
 #&gt; [ CPUFloatType{10} ]</div><div class='input'><span class='fu'>torch_cummax</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>0</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -2.0919
-#&gt; -0.3975
-#&gt; -0.0549
-#&gt; -0.0549
-#&gt; -0.0549
-#&gt; -0.0549
-#&gt; -0.0549
-#&gt; -0.0549
-#&gt;  1.1487
-#&gt;  1.1487
+#&gt;  0.7953
+#&gt;  2.3806
+#&gt;  2.3806
+#&gt;  2.3806
+#&gt;  2.3806
+#&gt;  2.3806
+#&gt;  2.3806
+#&gt;  2.3806
+#&gt;  2.3806
+#&gt;  2.3806
 #&gt; [ CPUFloatType{10} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
 #&gt;  0
 #&gt;  1
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  8
-#&gt;  8
+#&gt;  1
+#&gt;  1
+#&gt;  1
+#&gt;  1
+#&gt;  1
+#&gt;  1
+#&gt;  1
+#&gt;  1
 #&gt; [ CPULongType{10} ]
 #&gt; </div></pre>
   </div>
@@ -219,7 +219,7 @@ $$</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tril — torch_tril • torchr</title>
+<title>Tril — torch_tril • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -171,29 +171,29 @@ the main diagonal. The main diagonal are the set of indices
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1775 -1.2338 -0.8288
-#&gt;  0.7528  3.2867 -0.9219
-#&gt;  0.2666  0.1110  0.8551
+#&gt; -1.8122  1.3884 -0.9325
+#&gt;  0.3570  0.1847 -1.4482
+#&gt; -0.9831  0.5612 -1.0157
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_tril</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1775  0.0000  0.0000
-#&gt;  0.7528  3.2867  0.0000
-#&gt;  0.2666  0.1110  0.8551
+#&gt; -1.8122  0.0000  0.0000
+#&gt;  0.3570  0.1847  0.0000
+#&gt; -0.9831  0.5612 -1.0157
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0366  0.7329 -1.1932  0.7695  0.7551  0.5420
-#&gt; -0.9626  1.1220  1.5235 -0.1274 -1.9229  0.0717
-#&gt;  0.0800  0.1359  0.3490 -0.6192 -0.8555  1.0444
-#&gt;  0.5209 -1.0040  2.0503 -0.0446  0.2178 -0.7357
+#&gt;  0.7878 -1.2351 -1.1845  1.1655 -0.1240 -1.9722
+#&gt; -0.4403 -1.1923  0.0345 -0.2122  1.4317  1.4729
+#&gt; -0.0271  0.8078  1.4385 -2.2943 -0.5277 -2.0995
+#&gt; -0.5427 -1.3345  0.8703 -0.0269  0.0720 -0.4149
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_tril</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0366  0.7329  0.0000  0.0000  0.0000  0.0000
-#&gt; -0.9626  1.1220  1.5235  0.0000  0.0000  0.0000
-#&gt;  0.0800  0.1359  0.3490 -0.6192  0.0000  0.0000
-#&gt;  0.5209 -1.0040  2.0503 -0.0446  0.2178  0.0000
+#&gt;  0.7878 -1.2351  0.0000  0.0000  0.0000  0.0000
+#&gt; -0.4403 -1.1923  0.0345  0.0000  0.0000  0.0000
+#&gt; -0.0271  0.8078  1.4385 -2.2943  0.0000  0.0000
+#&gt; -0.5427 -1.3345  0.8703 -0.0269  0.0720  0.0000
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_tril</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
-#&gt; -0.9626  0.0000  0.0000  0.0000  0.0000  0.0000
-#&gt;  0.0800  0.1359  0.0000  0.0000  0.0000  0.0000
-#&gt;  0.5209 -1.0040  2.0503  0.0000  0.0000  0.0000
+#&gt; -0.4403  0.0000  0.0000  0.0000  0.0000  0.0000
+#&gt; -0.0271  0.8078  0.0000  0.0000  0.0000  0.0000
+#&gt; -0.5427 -1.3345  0.8703  0.0000  0.0000  0.0000
 #&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -210,7 +210,7 @@ the main diagonal. The main diagonal are the set of indices
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Median — torch_median • torchr</title>
+<title>Median — torch_median • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -178,31 +178,31 @@ the outputs tensor having 1 fewer dimension than <code>input</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8255  1.4591 -1.5371
+#&gt;  2.0686 -0.1858 -1.7831
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_median</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.82552
+#&gt; -0.185819
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1806  0.1109 -0.4178  0.6476  0.0150
-#&gt;  0.1620 -0.6920  1.0172  0.2203  1.1324
-#&gt;  0.9250  0.5248 -1.0646 -1.5437 -1.0961
-#&gt;  0.8796  0.1136 -1.7397  0.0288  1.1979
+#&gt; -0.7037  1.5314  0.0987  0.4093  0.0149
+#&gt;  0.2102 -0.4796  1.1710 -0.6471 -1.0971
+#&gt; -1.2724  0.8590 -2.5133 -1.3924  0.9349
+#&gt;  0.6166  1.4430  0.7730 -1.0221 -0.6471
 #&gt; [ CPUFloatType{4,5} ]</div><div class='input'><span class='fu'>torch_median</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt;  0.1109
-#&gt;  0.2203
-#&gt; -1.0646
-#&gt;  0.1136
+#&gt;  0.0987
+#&gt; -0.4796
+#&gt; -1.2724
+#&gt;  0.6166
 #&gt; [ CPUFloatType{4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  1
-#&gt;  3
 #&gt;  2
 #&gt;  1
+#&gt;  0
+#&gt;  0
 #&gt; [ CPULongType{4} ]
 #&gt; </div></pre>
   </div>
@@ -221,7 +221,7 @@ the outputs tensor having 1 fewer dimension than <code>input</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

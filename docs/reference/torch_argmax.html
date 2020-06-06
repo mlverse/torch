@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Argmax — torch_argmax • torchr</title>
+<title>Argmax — torch_argmax • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -178,15 +178,15 @@ documentation for the exact semantics of this method.</p>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4547 -0.6577  0.4314  1.1926
-#&gt;  0.5731  0.4004  0.4600 -0.4734
-#&gt;  0.3722 -2.7025 -0.0831 -0.4184
-#&gt; -0.5137 -0.3643 -0.6379 -0.5871
+#&gt; -1.0362 -0.2646 -1.1195 -0.6008
+#&gt; -1.6153 -0.8280  0.1862  0.9235
+#&gt; -1.0097  0.4796 -1.7700  1.1982
+#&gt;  1.9679 -1.6142 -1.7965 -1.1159
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmax</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1
+#&gt;  3
 #&gt;  3
 #&gt;  0
-#&gt;  0
-#&gt;  1
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -204,7 +204,7 @@ documentation for the exact semantics of this method.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

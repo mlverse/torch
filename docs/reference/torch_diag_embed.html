@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Diag_embed — torch_diag_embed • torchr</title>
+<title>Diag_embed — torch_diag_embed • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -184,26 +184,28 @@ need to be explicitly specified.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.4654  0.0000  0.0000
-#&gt;   0.0000  0.5578  0.0000
-#&gt;   0.0000  0.0000 -0.2810
+#&gt;   0.2626  0.0000  0.0000
+#&gt;   0.0000  0.0415  0.0000
+#&gt;   0.0000  0.0000  0.0229
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.2763  0.0000  0.0000
-#&gt;   0.0000  1.5019  0.0000
-#&gt;   0.0000  0.0000 -0.2840
+#&gt;  -0.5443  0.0000  0.0000
+#&gt;   0.0000 -0.8699  0.0000
+#&gt;   0.0000  0.0000 -1.0679
 #&gt; [ CPUFloatType{2,3,3} ]</div><div class='input'><span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>, <span class='kw'>offset</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>dim1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>dim2</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.0000  0.4654  0.0000  0.0000
-#&gt;   0.0000  0.2763  0.0000  0.0000
+#&gt;   0.0000  0.2626  0.0000  0.0000
+#&gt;   0.0000 -0.5443  0.0000  0.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0000  0.0000  0.5578  0.0000
-#&gt;   0.0000  0.0000  1.5019  0.0000
+#&gt;  0.01 *
+#&gt;   0.0000  0.0000  4.1520  0.0000
+#&gt;    0.0000  0.0000 -86.9908  0.0000
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.0000  0.0000  0.0000 -0.2810
-#&gt;   0.0000  0.0000  0.0000 -0.2840
+#&gt;  0.01 *
+#&gt;   0.0000  0.0000  0.0000  2.2865
+#&gt;    0.0000  0.0000  0.0000 -106.7900
 #&gt; 
 #&gt; (4,.,.) = 
 #&gt;   0  0  0  0
@@ -224,7 +226,7 @@ need to be explicitly specified.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

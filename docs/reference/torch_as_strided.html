@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>As_strided — torch_as_strided • torchr</title>
+<title>As_strided — torch_as_strided • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -179,17 +179,17 @@ advisable to use.
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0924 -0.0234 -0.9562
-#&gt; -0.7398  0.2793  1.0074
-#&gt; -0.5504 -0.9034  1.0000
+#&gt; -0.8626  3.1028  0.8659
+#&gt;  0.0286  1.0561  0.3667
+#&gt;  0.5952 -1.2597  0.7320
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>t</span> <span class='kw'>=</span> <span class='fu'>torch_as_strided</span>(<span class='no'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
 <span class='no'>t</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0924 -0.9562
-#&gt; -0.0234 -0.7398
+#&gt; -0.8626  0.8659
+#&gt;  3.1028  0.0286
 #&gt; [ CPUFloatType{2,2} ]</div><div class='input'><span class='no'>t</span> <span class='kw'>=</span> <span class='fu'>torch_as_strided</span>(<span class='no'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fl'>1</span>)
 <span class='no'>t</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0234 -0.7398
-#&gt; -0.9562  0.2793
+#&gt;  3.1028  0.0286
+#&gt;  0.8659  1.0561
 #&gt; [ CPUFloatType{2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -207,7 +207,7 @@ advisable to use.
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

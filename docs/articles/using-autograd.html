@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Using autograd • torchr</title>
+<title>Using autograd • torch</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -95,7 +95,7 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(torchr)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(torch)</span></code></pre></div>
 <p>So far, all we’ve been using from torch is <em>tensors</em>, but we’ve been performing all calculations ourselves – the computing the predictions, the loss, the gradients (and thus, the necessary updates to the weights), and the new weight values. In this chapter, we’ll make a significant change: Namely, we spare ourselves the cumbersome calculation of gradients, and have torch do it for us.</p>
 <p>Before we see that in action, let’s get some more background.</p>
 <div id="automatic-differentiation-with-autograd" class="section level2">
@@ -235,26 +235,26 @@
 <span id="cb10-53"><a href="#cb10-53"></a>    })</span>
 <span id="cb10-54"><a href="#cb10-54"></a>    </span>
 <span id="cb10-55"><a href="#cb10-55"></a>}</span>
-<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 14.97989 </span></span>
-<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 14.27934 </span></span>
-<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 13.63388 </span></span>
-<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 13.03667 </span></span>
-<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 12.48134 </span></span>
-<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 11.96351 </span></span>
-<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 11.47934 </span></span>
-<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 11.02816 </span></span>
-<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 10.60673 </span></span>
-<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 10.21228 </span></span>
-<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 9.842949 </span></span>
-<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 9.49681 </span></span>
-<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 9.172069 </span></span>
-<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 8.867094 </span></span>
-<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 8.580454 </span></span>
-<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 8.311239 </span></span>
-<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 8.057633 </span></span>
-<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 7.818479 </span></span>
-<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 7.592761 </span></span>
-<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 7.379554</span></span></code></pre></div>
+<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 27.98672 </span></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 25.73948 </span></span>
+<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 23.72826 </span></span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 21.92483 </span></span>
+<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 20.30446 </span></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 18.84585 </span></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 17.53293 </span></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 16.3467 </span></span>
+<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 15.27256 </span></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 14.29793 </span></span>
+<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 13.4138 </span></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 12.61041 </span></span>
+<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 11.87794 </span></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 11.20877 </span></span>
+<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 10.59684 </span></span>
+<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 10.03651 </span></span>
+<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 9.522843 </span></span>
+<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 9.050833 </span></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 8.616449 </span></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 8.216067</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">
@@ -282,7 +282,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

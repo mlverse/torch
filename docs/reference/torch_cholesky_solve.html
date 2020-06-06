@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cholesky_solve — torch_cholesky_solve • torchr</title>
+<title>Cholesky_solve — torch_cholesky_solve • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -181,22 +181,22 @@ batched outputs <code>c</code></p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive definite</span>
 <span class='no'>u</span> <span class='kw'>=</span> <span class='fu'><a href='torch_cholesky.html'>torch_cholesky</a></span>(<span class='no'>a</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.3745 -0.7663 -0.9383
-#&gt; -0.7663  2.1404  0.6044
-#&gt; -0.9383  0.6044  1.0473
+#&gt;  1.9748  0.2825 -0.4662
+#&gt;  0.2825  1.6776  0.1180
+#&gt; -0.4662  0.1180  0.2643
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7532 -0.6327
-#&gt;  0.8298  1.2442
-#&gt;  1.0893  0.4178
+#&gt;  0.0161  0.5220
+#&gt;  0.3156  0.2779
+#&gt;  1.4733  0.7046
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'>torch_cholesky_solve</span>(<span class='no'>b</span>, <span class='no'>u</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3.4688 -0.2620
-#&gt;  0.5475  0.5270
-#&gt;  3.8318 -0.1399
+#&gt;   2.7058   1.7680
+#&gt;  -1.0273  -0.5563
+#&gt;  10.8040   6.0321
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>$<span class='fu'>inverse</span>(), <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3.4688 -0.2620
-#&gt;  0.5475  0.5270
-#&gt;  3.8318 -0.1399
+#&gt;   2.7058   1.7680
+#&gt;  -1.0273  -0.5563
+#&gt;  10.8040   6.0321
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -213,7 +213,7 @@ batched outputs <code>c</code></p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pinverse — torch_pinverse • torchr</title>
+<title>Pinverse — torch_pinverse • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -171,28 +171,28 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
     <pre class="examples"><div class='input'>
 <span class='no'>input</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>))
 <span class='no'>input</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0184 -1.0383  0.5382  0.2130  0.9199
-#&gt;  0.6591 -1.6142  1.4367  0.1049  1.0936
-#&gt; -1.2781  0.4057 -0.8190 -1.1938  2.1391
+#&gt; -0.3433 -0.7854  0.4317 -0.6119  0.2667
+#&gt; -0.3441  0.1552  0.1178 -1.9445  1.8625
+#&gt; -0.0112  0.0630  0.0054  1.0786  0.5432
 #&gt; [ CPUFloatType{3,5} ]</div><div class='input'><span class='fu'>torch_pinverse</span>(<span class='no'>input</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.9845  0.6474 -0.0195
-#&gt; -0.9556  0.2840  0.1567
-#&gt; -0.8610  0.7056  0.0258
-#&gt;  1.6065 -0.8969 -0.3467
-#&gt;  0.1599  0.1025  0.2425
+#&gt; -0.3119  0.0092 -0.1201
+#&gt; -0.9023  0.2109 -0.1470
+#&gt;  0.4608 -0.0738  0.1256
+#&gt;  0.0347 -0.1813  0.6179
+#&gt;  0.0247  0.3364  0.6272
 #&gt; [ CPUFloatType{5,3} ]</div><div class='input'><span class='co'># Batched pinverse example</span>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>6</span>,<span class='fl'>3</span>))
 <span class='no'>b</span> <span class='kw'>=</span> <span class='fu'>torch_pinverse</span>(<span class='no'>a</span>)
 <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>b</span>, <span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.0000e+00  1.8999e-07 -1.3411e-07
-#&gt;   1.0058e-07  1.0000e+00 -5.9605e-08
-#&gt;   1.1921e-07 -1.3411e-07  1.0000e+00
+#&gt;   1.0000  0.0000  0.0000
+#&gt;   0.0000  1.0000  0.0000
+#&gt;  -0.0000 -0.0000  1.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.0000e+00  1.7881e-07  4.4703e-08
-#&gt;   1.4901e-08  1.0000e+00 -5.2154e-08
-#&gt;  -1.4901e-07  7.4506e-08  1.0000e+00
+#&gt;   1.0000e+00  1.5341e-07 -1.0383e-07
+#&gt;  -5.4017e-08  1.0000e+00 -1.2666e-07
+#&gt;  -9.9884e-08  5.9605e-08  1.0000e+00
 #&gt; [ CPUFloatType{2,3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -210,7 +210,7 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">

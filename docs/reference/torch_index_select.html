@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Index_select — torch_index_select • torchr</title>
+<title>Index_select — torch_index_select • torch</title>
 
 
 <!-- jquery -->
@@ -68,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torchr</a>
+        <a class="navbar-link" href="../index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -175,17 +175,17 @@ of <code>index</code>; other dimensions have the same size as in the original te
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3231 -1.2716  0.0728 -2.8121
-#&gt; -0.1922  0.7533 -1.3713  0.0430
-#&gt;  1.0088 -2.0878  0.8634  0.8365
+#&gt;  1.2190  0.5585 -2.2935  0.4667
+#&gt;  1.1554 -0.2999  0.1842  1.3491
+#&gt; -0.0867 -0.7316  0.5475  1.1769
 #&gt; [ CPUFloatType{3,4} ]</div><div class='input'><span class='no'>indices</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_int64</span>())
 <span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>0</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3231 -1.2716  0.0728 -2.8121
-#&gt;  1.0088 -2.0878  0.8634  0.8365
+#&gt;  1.2190  0.5585 -2.2935  0.4667
+#&gt; -0.0867 -0.7316  0.5475  1.1769
 #&gt; [ CPUFloatType{2,4} ]</div><div class='input'><span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3231  0.0728
-#&gt; -0.1922 -1.3713
-#&gt;  1.0088  0.8634
+#&gt;  1.2190 -2.2935
+#&gt;  1.1554  0.1842
+#&gt; -0.0867  0.5475
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -203,7 +203,7 @@ of <code>index</code>; other dimensions have the same size as in the original te
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel.</p>
+  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">
