@@ -171,29 +171,29 @@ the main diagonal. The main diagonal are the set of indices
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.8122  1.3884 -0.9325
-#&gt;  0.3570  0.1847 -1.4482
-#&gt; -0.9831  0.5612 -1.0157
+#&gt;  1.2224  0.7903 -1.6567
+#&gt; -1.3716  1.0805 -0.0448
+#&gt; -0.1206 -1.6822  0.0297
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_tril</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.8122  0.0000  0.0000
-#&gt;  0.3570  0.1847  0.0000
-#&gt; -0.9831  0.5612 -1.0157
+#&gt;  1.2224  0.0000  0.0000
+#&gt; -1.3716  1.0805  0.0000
+#&gt; -0.1206 -1.6822  0.0297
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7878 -1.2351 -1.1845  1.1655 -0.1240 -1.9722
-#&gt; -0.4403 -1.1923  0.0345 -0.2122  1.4317  1.4729
-#&gt; -0.0271  0.8078  1.4385 -2.2943 -0.5277 -2.0995
-#&gt; -0.5427 -1.3345  0.8703 -0.0269  0.0720 -0.4149
+#&gt; -0.4708 -1.8021  0.0919  0.5167  0.7481 -0.0997
+#&gt; -0.5552  0.2153  0.6010 -0.1228  0.7932 -0.1948
+#&gt; -1.6327 -0.0721  1.5347  0.4116 -2.1327  0.7258
+#&gt;  0.4355 -0.5770 -0.1757 -1.3349 -1.4942 -2.0821
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_tril</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7878 -1.2351  0.0000  0.0000  0.0000  0.0000
-#&gt; -0.4403 -1.1923  0.0345  0.0000  0.0000  0.0000
-#&gt; -0.0271  0.8078  1.4385 -2.2943  0.0000  0.0000
-#&gt; -0.5427 -1.3345  0.8703 -0.0269  0.0720  0.0000
+#&gt; -0.4708 -1.8021  0.0000  0.0000  0.0000  0.0000
+#&gt; -0.5552  0.2153  0.6010  0.0000  0.0000  0.0000
+#&gt; -1.6327 -0.0721  1.5347  0.4116  0.0000  0.0000
+#&gt;  0.4355 -0.5770 -0.1757 -1.3349 -1.4942  0.0000
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_tril</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
-#&gt; -0.4403  0.0000  0.0000  0.0000  0.0000  0.0000
-#&gt; -0.0271  0.8078  0.0000  0.0000  0.0000  0.0000
-#&gt; -0.5427 -1.3345  0.8703  0.0000  0.0000  0.0000
+#&gt; -0.5552  0.0000  0.0000  0.0000  0.0000  0.0000
+#&gt; -1.6327 -0.0721  0.0000  0.0000  0.0000  0.0000
+#&gt;  0.4355 -0.5770 -0.1757  0.0000  0.0000  0.0000
 #&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

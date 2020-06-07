@@ -195,35 +195,35 @@ shape of <code>input</code>.</p>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.7085 -1.2135
-#&gt;   1.3671  0.2277
-#&gt;  -1.2973 -1.0018
+#&gt;  -1.1936 -1.4113
+#&gt;   0.1038 -0.2216
+#&gt;   0.0194 -0.0036
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -1.9989 -0.2107
-#&gt;   0.0776 -0.2490
-#&gt;   0.4695 -1.4418
+#&gt;   0.0357 -0.1221
+#&gt;  -0.0202 -0.4473
+#&gt;   0.4083  2.0660
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -0.5785  0.8568
-#&gt;  -0.9919 -0.6018
-#&gt;  -0.4367 -0.3944
+#&gt;   0.7146  1.0094
+#&gt;  -0.7796 -1.5299
+#&gt;   0.5091  0.3085
 #&gt; [ CPUFloatType{3,3,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_fft.html'>torch_fft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>)
 <span class='fu'>torch_ifft</span>(<span class='no'>y</span>, <span class='fl'>2</span>)  <span class='co'># recover x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.7085 -1.2135
-#&gt;   1.3671  0.2277
-#&gt;  -1.2973 -1.0018
+#&gt;  -1.1936 -1.4113
+#&gt;   0.1038 -0.2216
+#&gt;   0.0194 -0.0036
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -1.9989 -0.2107
-#&gt;   0.0776 -0.2490
-#&gt;   0.4695 -1.4418
+#&gt;   0.0357 -0.1221
+#&gt;  -0.0202 -0.4473
+#&gt;   0.4083  2.0660
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -0.5785  0.8568
-#&gt;  -0.9919 -0.6018
-#&gt;  -0.4367 -0.3944
+#&gt;   0.7146  1.0094
+#&gt;  -0.7796 -1.5299
+#&gt;   0.5091  0.3085
 #&gt; [ CPUFloatType{3,3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

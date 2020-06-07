@@ -4,12 +4,16 @@ nn_Module <- R6::R6Class(
   public = list(
     training = TRUE,
     
+    forward = function(...) {
+      not_implemented_error("Forward methood is not implemented")
+    },
+    
     register_parameter = function(name, param) {
       private$parameters_[[name]] <- param
     },
     
     register_buffer = function(name, tensor, persistent = TRUE) {
-      private$buffers_[[name]] <- param
+      private$buffers_[[name]] <- tensor
       
       if (persistent) {
         private$non_persistent_buffers_ <- private$non_persistent_buffers_[
@@ -87,9 +91,9 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
     )
   )
   fun <- rlang::new_function(
-    args = rlang::fn_fmls(initialize), 
+    args = rlang::fn_fmls(Module$new), 
     body = rlang::expr({
-      instance <- Module$new(!!!rlang::fn_fmls_syms(initialize))
+      instance <- Module$new(!!!rlang::fn_fmls_syms(Module$new))
       f <- instance$forward
       attr(f, "class") <- "nn_module"
       attr(f, "module") <- instance

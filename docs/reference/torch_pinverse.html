@@ -171,28 +171,28 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
     <pre class="examples"><div class='input'>
 <span class='no'>input</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>))
 <span class='no'>input</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3433 -0.7854  0.4317 -0.6119  0.2667
-#&gt; -0.3441  0.1552  0.1178 -1.9445  1.8625
-#&gt; -0.0112  0.0630  0.0054  1.0786  0.5432
+#&gt; -0.8381  1.4916  0.2239 -0.2103  0.7451
+#&gt; -1.1864  1.2347  1.2632  0.3684  0.1312
+#&gt; -2.0070 -0.5026 -1.2172 -0.3592  0.8235
 #&gt; [ CPUFloatType{3,5} ]</div><div class='input'><span class='fu'>torch_pinverse</span>(<span class='no'>input</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3119  0.0092 -0.1201
-#&gt; -0.9023  0.2109 -0.1470
-#&gt;  0.4608 -0.0738  0.1256
-#&gt;  0.0347 -0.1813  0.6179
-#&gt;  0.0247  0.3364  0.6272
+#&gt;  0.2569 -0.4111 -0.3458
+#&gt;  0.6149 -0.1402 -0.1985
+#&gt; -0.3112  0.4844 -0.1360
+#&gt; -0.3113  0.2874  0.0005
+#&gt;  0.4057 -0.2461  0.0495
 #&gt; [ CPUFloatType{5,3} ]</div><div class='input'><span class='co'># Batched pinverse example</span>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>6</span>,<span class='fl'>3</span>))
 <span class='no'>b</span> <span class='kw'>=</span> <span class='fu'>torch_pinverse</span>(<span class='no'>a</span>)
 <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>b</span>, <span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.0000  0.0000  0.0000
-#&gt;   0.0000  1.0000  0.0000
-#&gt;  -0.0000 -0.0000  1.0000
+#&gt;   1.0000e+00 -5.9605e-08 -3.0617e-08
+#&gt;   2.3842e-07  1.0000e+00  2.0280e-07
+#&gt;  -2.9802e-07  1.1176e-07  1.0000e+00
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.0000e+00  1.5341e-07 -1.0383e-07
-#&gt;  -5.4017e-08  1.0000e+00 -1.2666e-07
-#&gt;  -9.9884e-08  5.9605e-08  1.0000e+00
+#&gt;   1.0000e+00 -4.4703e-08 -1.7323e-07
+#&gt;  -1.3411e-07  1.0000e+00 -8.1956e-08
+#&gt;  -3.5390e-08 -5.9605e-08  1.0000e+00
 #&gt; [ CPUFloatType{2,3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

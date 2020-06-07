@@ -175,13 +175,13 @@ point <code>dtype</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))$<span class='fu'>uniform_</span>(<span class='fl'>0</span>, <span class='fl'>1</span>)  <span class='co'># generate a uniform random matrix with range c(0, 1)</span>
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1626  0.5896  0.5032
-#&gt;  0.8020  0.3368  0.6261
-#&gt;  0.4789  0.1496  0.5278
+#&gt;  0.4731  0.0591  0.9196
+#&gt;  0.8338  0.9017  0.9258
+#&gt;  0.6644  0.8359  0.6560
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_bernoulli</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0  0  0
-#&gt;  0  1  1
 #&gt;  0  0  1
+#&gt;  0  1  1
+#&gt;  1  1  0
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>)) <span class='co'># probability of drawing "1" is 1</span>
 <span class='fu'>torch_bernoulli</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  1  1  1

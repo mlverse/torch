@@ -219,51 +219,51 @@ certainly fail the check.</p>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   6.8098  0.0000
-#&gt;  -0.7037 -1.1575
-#&gt;  -1.2394  0.0000
+#&gt;  -1.7115  0.0000
+#&gt;   5.1543 -1.4601
+#&gt;   3.9153  0.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.4708 -0.5992
-#&gt;  -2.6580  2.5632
-#&gt;  -0.9282  0.6387
+#&gt;  -1.2453  2.2081
+#&gt;   7.3462 -2.0700
+#&gt;   2.0505 -0.0365
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   2.5958  0.0000
-#&gt;  -6.8146 -4.1746
-#&gt;  -2.8385  0.0000
+#&gt;   2.8308  0.0000
+#&gt;   3.4537 -0.1772
+#&gt;   0.1396  0.0000
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   1.4708  0.5992
-#&gt;  -1.2342  4.3370
-#&gt;  -0.9282 -0.6387
+#&gt;  -1.2453 -2.2081
+#&gt;  -0.8922  4.2072
+#&gt;   2.0505  0.0365
 #&gt; [ CPUFloatType{4,3,2} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -2.2565  0.0000
-#&gt;  -2.5327  0.8341
-#&gt;   3.0115  1.0109
+#&gt;   1.1392  0.0000
+#&gt;  -1.4902 -1.1479
+#&gt;  -2.8004  4.3244
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   2.2508  0.4609
-#&gt;  -0.9089  0.9697
-#&gt;   2.5512 -2.0208
+#&gt;  -0.7232 -3.5241
+#&gt;   2.0890  2.1965
+#&gt;   0.8884 -1.3381
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   4.7906  0.0000
-#&gt;   3.8024  1.8242
-#&gt;  -2.5441  3.7635
+#&gt;  -2.9348  0.0000
+#&gt;   5.2129 -4.5993
+#&gt;   3.3682  4.7432
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   2.2508 -0.4609
-#&gt;   0.9879  0.5280
-#&gt;  -1.3899  2.5656
+#&gt;  -0.7232  3.5241
+#&gt;  -1.6821 -1.4109
+#&gt;   2.2363  1.3073
 #&gt; [ CPUFloatType{4,3,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'>torch_irfft</span>(<span class='no'>y</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>signal_sizes</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6495 -0.4462  0.5546  0.0314  0.9696
-#&gt; -0.0619 -1.2237  0.7459  0.1805 -1.6331
-#&gt; -0.0487 -0.3644  0.1179 -0.5502  0.3535
-#&gt; -0.7987 -0.2596 -0.4894  0.8904 -0.8740
+#&gt;  0.6201 -0.3925  0.7690 -1.5332 -0.2739
+#&gt; -0.8273 -0.0605  0.6888  1.8739  1.1056
+#&gt;  0.0584  0.3784  0.8846 -1.6140  0.2053
+#&gt; -1.3397  0.4445 -0.0635 -0.2778  0.4929
 #&gt; [ CPUFloatType{4,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -188,9 +188,8 @@ the tensors, please clone them first.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'>torch_empty_strided</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; 1e-33 *
-#&gt;  3.0074     nan  0.0000
-#&gt;   0.0000  0.0000  0.0000
+#&gt;  4.4726e+21  2.7945e+20  7.0688e+28
+#&gt;  8.4843e+26  2.1723e+29  5.5596e+31
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='no'>a</span>$<span class='fu'>stride</span>(<span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='no'>a</span>$<span class='fu'>size</span>(<span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

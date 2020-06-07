@@ -195,41 +195,41 @@ should be a real number, otherwise it should be an integer.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.2587
-#&gt;  1.7968
-#&gt; -1.3656
-#&gt; -1.8894
+#&gt;  0.7530
+#&gt; -1.1304
+#&gt; -1.4090
+#&gt; -1.0803
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>min</span><span class='kw'>=</span>-<span class='fl'>0.5</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.2587
 #&gt;  0.5000
+#&gt; -0.5000
 #&gt; -0.5000
 #&gt; -0.5000
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8411
-#&gt; -1.0723
-#&gt;  0.2307
-#&gt; -0.4185
+#&gt;  0.6812
+#&gt;  0.2781
+#&gt; -1.1807
+#&gt;  1.2088
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>min</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8411
+#&gt;  0.6812
 #&gt;  0.5000
 #&gt;  0.5000
-#&gt;  0.5000
+#&gt;  1.2088
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.4449
-#&gt; -0.6784
-#&gt;  0.3440
-#&gt; -0.5188
+#&gt; -0.7644
+#&gt;  0.3969
+#&gt; -0.5429
+#&gt;  0.7692
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt; -0.7644
+#&gt;  0.3969
+#&gt; -0.5429
 #&gt;  0.5000
-#&gt; -0.6784
-#&gt;  0.3440
-#&gt; -0.5188
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

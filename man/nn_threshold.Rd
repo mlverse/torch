@@ -4,7 +4,7 @@
 \alias{nn_threshold}
 \title{Threshoold module}
 \usage{
-nn_threshold(threshold, value, inplace = FALSE)
+nn_threshold(...)
 }
 \arguments{
 \item{threshold}{The value to threshold at}
