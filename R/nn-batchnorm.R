@@ -14,7 +14,7 @@ nn_norm_base_ <- nn_module(
     
     if (self$affine) {
       self$weight <- nn_parameter(torch_empty(num_features))
-      self$bias = nn_parameter(torch_empty(num_features))
+      self$bias <- nn_parameter(torch_empty(num_features))
     } else {
       self$weight <- NULL
       self$bias <- NULL

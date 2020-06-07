@@ -8,6 +8,10 @@ nn_Module <- R6::R6Class(
       not_implemented_error("Forward methood is not implemented")
     },
     
+    add_module = function(name, module) {
+      private$modules_[[name]] <- module
+    },
+    
     register_parameter = function(name, param) {
       private$parameters_[[name]] <- param
     },
@@ -31,20 +35,12 @@ nn_Module <- R6::R6Class(
   private = list(
     parameters_ = list(),
     buffers_ = list(),
+    modules_ = list(),
     non_persistent_buffers_ = character()
   ),
   active = list(
     parameters = function() {
-      nms <- names(self)
-      nms <- nms[nms != "parameters"]
-      pars <- lapply(
-        nms,
-        function(nm) {
-          x <- self[[nm]]
-          if (is_nn_module(x))
-            return(x$parameters)
-        }
-      )
+      pars <- lapply(private$modules_, function(x) x$parameters)
       pars <- append(pars, private$parameters_)
       unlist(pars, recursive = TRUE, use.names = TRUE)
     }
@@ -107,19 +103,49 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
 
 #' @export
 `$.nn_module` <- function(x, y) {
-  x <- attr(x, "module")
+  module <- attr(x, "module")
+  do.call("$", args = list(module, y))
+}
+
+#' @export
+`$.nn_Module` <- function(x, y) {
+  
+  if (!is.null(x[[".__enclos_env__"]][["private"]][["parameters_"]])) {
+    pars <- x[[".__enclos_env__"]][["private"]][["parameters_"]]
+    if (y %in% names(pars))
+      return(pars[[y]])
+  }
+  
+  if (!is.null(x[[".__enclos_env__"]][["private"]][["buffers_"]])) {
+    bufs <- x[[".__enclos_env__"]][["private"]][["buffers_"]]
+    if (y %in% names(bufs))
+      return(bufs[[y]])
+  }
+  
+  if (!is.null(x[[".__enclos_env__"]][["private"]][["modules_"]])) {
+    mods <- x[[".__enclos_env__"]][["private"]][["modules_"]]
+    if (y %in% names(mods))
+      return(mods[[y]])
+  }
+  
   NextMethod("$", x)
 }
+
 
 #' @export
 `$<-.nn_Module` <- function(x, name, value) {
   
-  if (inherits(value, "nn_parameter"))
+  if (inherits(value, "nn_parameter")) {
     x$register_parameter(name, value)
-  else if (inherits(value, "nn_buffer"))
+  } else if (inherits(value, "nn_buffer")) {
     x$register_buffer(name, value, attr(value, "persistent"))
-  
-  NextMethod("$<-", x)
+  } else if (is_nn_module(value)) {
+    x$add_module(name, value)
+  } else {
+    NextMethod("$<-", x)
+  }
+    
+  invisible(x)
 }
 
 #' @export
