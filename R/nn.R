@@ -109,6 +109,14 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
 
 #' @export
 `$.nn_Module` <- function(x, y) {
+  x[[y]]
+}
+
+#' @export
+`[[.nn_Module` <- function(x, y) {
+  
+  if (y == ".__enclos_env__")
+    return(NextMethod())
   
   if (!is.null(x[[".__enclos_env__"]][["private"]][["parameters_"]])) {
     pars <- x[[".__enclos_env__"]][["private"]][["parameters_"]]
@@ -128,13 +136,11 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
       return(mods[[y]])
   }
   
-  NextMethod("$", x)
+  NextMethod("[[", x)
 }
 
-
 #' @export
-`$<-.nn_Module` <- function(x, name, value) {
-  
+`[[<-.nn_Module` <- function(x, name, value) {
   if (inherits(value, "nn_parameter")) {
     x$register_parameter(name, value)
   } else if (inherits(value, "nn_buffer")) {
@@ -144,7 +150,13 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
   } else {
     NextMethod("$<-", x)
   }
-    
+  
+  invisible(x)
+}
+
+#' @export
+`$<-.nn_Module` <- function(x, name, value) {
+  x[[name]] <- value
   invisible(x)
 }
 
