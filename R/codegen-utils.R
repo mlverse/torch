@@ -34,7 +34,7 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("Scalar" %in% expected_types && is_scalar_atomic(obj)) 
     return(list(torch_scalar(obj)$ptr, "Scalar"))
   
-  if ("Tensor" %in% expected_types && is.atomic(obj))
+  if ("Tensor" %in% expected_types && is.atomic(obj) && !is.null(obj))
     return(list(torch_tensor(obj)$ptr, "Tensor"))
   
   if ("DimnameList" %in% expected_types && is.character(obj))
@@ -83,6 +83,9 @@ argument_to_torch_type <- function(obj, expected_types) {
     return(list(NULL, "int64_t"))
   
   if ("Tensor" %in% expected_types && length(obj) == 0 && is.list(obj))
+    return(list(cpp_tensor_undefined(), "Tensor"))
+  
+  if ("Tensor" %in% expected_types && is.null(obj))
     return(list(cpp_tensor_undefined(), "Tensor"))
   
   if ("double" %in% expected_types && is.null(obj))
