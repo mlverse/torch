@@ -36,7 +36,7 @@ nn_threshold <- nn_module(
     self$value <- value
     self$inplace <- inplace
   },
-  forward = function() {
+  forward = function(input) {
     nnf_threshold(input, self$threshold, self$value, self$inplace)
   }
 )
