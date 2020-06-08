@@ -21,12 +21,21 @@ list_with_default <- function(out_size, defaults) {
 
 nn_util_ntuple <- function(n) {
   function(x) {
-   if (length(x) > 1)
-     return(x)
+    
+    if (length(x) != n && length(x) != 1)
+      value_error("Expected a single value or a vector of size '{n}', got '{lenght(x)}")
+    
+    if (length(x) > 1)
+      return(x)
     
     rep(x, n)
   }
 }
 
+nn_util_single <- nn_util_ntuple(1)
 nn_util_pair <- nn_util_ntuple(2)
 nn_util_triple <- nn_util_ntuple(3)
+
+nn_util_reverse_repeat_tuple <- function(t, n) {
+  rep(rev(t), each = n)
+}
