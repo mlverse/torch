@@ -5,8 +5,8 @@ skip_if_not_test_examples <- function() {
     skip("Not testing examples/readme. Set the env var TEST_EXAMPLES = 1.")
 }
 
-expect_equal_to_tensor <- function(object, expected) {
-  expect_equal(as_array(object), as_array(expected))
+expect_equal_to_tensor <- function(object, expected, ...) {
+  expect_equal(as_array(object), as_array(expected), ...)
 }
 
 expect_not_equal_to_tensor <- function(object, expected) {

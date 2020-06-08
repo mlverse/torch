@@ -40,7 +40,7 @@ test_that("rnn dropout", {
       hy <- out[[2]]
       
       
-      expect_equal_to_tensor(output$min(), output$max())
+      expect_equal_to_tensor(output$min(), output$max(), tolerance = 1e-2)
       
       output_val <- output[1,1,1]
       
@@ -53,10 +53,10 @@ test_that("rnn dropout", {
         expect_equal_to_r(output_val < 12000, TRUE)
       }
       
-      expect_equal_to_tensor(hy[1,,]$min(), hy[1,,]$max())
-      expect_equal_to_tensor(hy[2,,]$min(), hy[2,,]$max())
+      expect_equal_to_tensor(hy[1,,]$min(), hy[1,,]$max(), tolerance = 1e-2)
+      expect_equal_to_tensor(hy[2,,]$min(), hy[2,,]$max(), tolerance = 1e-2)
       expect_equal_to_r(hy[1,1,1], 10)
-      expect_equal_to_tensor(hy[2,1,1], output_val)
+      expect_equal_to_tensor(hy[2,1,1], output_val, tolerance = 1e-2)
       
     }
   }
