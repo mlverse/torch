@@ -1,6 +1,15 @@
 #' @include nn.R
 NULL
 
+nn_apply_permutation <- function(tensor, permutation, dim = 1) {
+  tensor$index_select(dim, permutation)
+}
+
+rnn_impls_ <- list(
+  RNN_RELU = torch_rnn_relu,
+  RNN_TANH = torch_rnn_tanh
+)
+
 nn_rnn_base <- nn_module(
   "nn_rnn_base",
   initialize = function(mode, input_size, hidden_size, num_layers = 1, bias = TRUE, 
@@ -51,7 +60,7 @@ nn_rnn_base <- nn_module(
         
         w_ih <- nn_parameter(torch_empty(gate_size, layer_input_size))
         w_hh <- nn_parameter(torch_empty(gate_size, hidden_size))
-        b_ih <- nn_parameter(toorch_empty(gate_size))
+        b_ih <- nn_parameter(torch_empty(gate_size))
         
         # Second bias vector included for CuDNN compatibility. Only one
         # bias vector is needed in standard definition.
@@ -63,15 +72,15 @@ nn_rnn_base <- nn_module(
         else
           suffix <- ""
         
-        param_names <- glue::glue(c(
-          "weight_ih_l{layer}{suffix}",
-          "weight_hh_l{layer}{suffix}"
-          ))
+        param_names <- c(
+          glue::glue("weight_ih_l{layer}{suffix}"),
+          glue::glue("weight_hh_l{layer}{suffix}")
+        )
         if (bias) {
-          param_names <- c(param_names, glue::glue(c(
-            "bias_ih_l{layer}{suffix}",
-            "bias_hh_l{layer}{suffix}"
-          )))
+          param_names <- c(param_names, c(
+            glue::glue("bias_ih_l{layer}{suffix}"),
+            glue::glue("bias_hh_l{layer}{suffix}")
+          ))
         }
         
         for (i in seq_along(param_names)) {
@@ -85,7 +94,7 @@ nn_rnn_base <- nn_module(
     }
     
     self$flat_weights_ <- lapply(
-      self$flat_weights_names_,
+      self$flat_weight_names_,
       function(wn) {
         self[[wn]]
       }
@@ -102,5 +111,86 @@ nn_rnn_base <- nn_module(
     for (weight in self$parameters) {
       nn_init_uniform_(weight, -stdv, stdv)
     }
+  },
+  permute_hidden = function(hx, permutation) {
+    if (is.null(permutation))
+      hx
+    else
+      nn_apply_permutation(hx, permutation)
+  },
+  forward = function(input, hx = NULL) {
+    
+    batch_sizes <- NULL
+    if (self$batch_first)
+      max_batch_size <- input$size(0)
+    else
+      max_batch_size <- input$size(1)
+    
+    sorted_indices <- NULL
+    unsorted_indices <- NULL
+    
+    if (is.null(hx)) {
+      num_directions <- ifelse(self$bidirectional, 2, 1)
+      hx <- torch_zeros(self$num_layers * num_directions,
+                        max_batch_size, self.hidden_size,
+                        dtype=input$dtype(), device=input$device())
+      
+    } else {
+      hx <- self$permute_hidden(hx, sorted_indices)  
+    }
+    
+    impl_ <- rnn_impls_[[self$mode]]
+    
+    if (is.null(batch_sizes)) {
+      result <- impl_(input = input, hx  = hx, 
+                      params = self$flat_weights_, has_biases = self$bias,
+                      num_layers = self$num_layers, dropout = self$dropout, 
+                      train = self$training,
+                      bidirectional = self$bidirectional,
+                      batch_first = self$batch_first
+                      )
+    } else {
+      result <- impl_(input = input, batch_sizes = batch_sizes, hx  = hx, 
+                      params = self$flat_weights_, has_biases = self$bias,
+                      num_layers = self$num_layers, dropout = self$dropout, 
+                      train = self$training, bidirectional = self$bidirectional, 
+                      batch_first = self$batch_first)
+    }
+        
+    output <- result[[1]]
+    hidden <- result[[2]]
+    
+    list(output, self$permute_hidden(hidden, unsorted_indices))
+  }
+)
+
+#' RNN module
+#' 
+#' @examples
+#' rnn <- nn_rnn(10, 20, 2)
+#' input <- torch_randn(5, 3, 10)
+#' h0 <- torch_randn(2, 3, 20)
+#' rnn(input, h0)
+#'
+#' @export
+nn_rnn <- nn_module(
+  "nn_rnn",
+  inherit = nn_rnn_base,
+  initialize = function(...) {
+    args <- list(...)
+    
+    self$nonlinearity <- args$nonlinearity
+    args$nonlinearity <- NULL
+    
+    if (self$nonlinearity == "tanh" || is.null(args$nonlinearity))
+      mode <- "RNN_TANH"
+    else if (self$nonlinearity == "relu")
+      mode <- "RNN_RELU"
+    else
+      value_error("Unknown nonlinearity '{self$nonlinearity}'")
+    
+    args$mode <- mode
+    
+    do.call(super$initialize, args)
   }
 )
