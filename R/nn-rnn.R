@@ -166,23 +166,118 @@ nn_rnn_base <- nn_module(
 
 #' RNN module
 #' 
+#' Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\text{ReLU}} non-linearity
+#' to an input sequence.
+#' 
+#' For each element in the input sequence, each layer computes the following
+#' function:
+#' 
+#' \deqn{
+#' h_t = \tanh(W_{ih} x_t + b_{ih} + W_{hh} h_{(t-1)} + b_{hh})
+#' }
+#'   
+#' where \eqn{h_t} is the hidden state at time `t`, \eqn{x_t} is
+#' the input at time `t`, and \eqn{h_{(t-1)}} is the hidden state of the
+#' previous layer at time `t-1` or the initial hidden state at time `0`.
+#' If `nonlinearity` is `'relu'`, then \eqn{\text{ReLU}} is used instead of 
+#' \eqn{\tanh}.
+#' 
+#' @param input_size The number of expected features in the input `x`
+#' @param hidden_size The number of features in the hidden state `h`
+#' @param num_layers Number of recurrent layers. E.g., setting `num_layers=2`
+#'   would mean stacking two RNNs together to form a `stacked RNN`,
+#'   with the second RNN taking in outputs of the first RNN and
+#'   computing the final results. Default: 1
+#' @param nonlinearity The non-linearity to use. Can be either `'tanh'` or 
+#'   `'relu'`. Default: `'tanh'`
+#' @param bias If `FALSE`, then the layer does not use bias weights `b_ih` and 
+#'   `b_hh`. Default: `TRUE`
+#' @param batch_first If `TRUE`, then the input and output tensors are provided
+#'   as `(batch, seq, feature)`. Default: `FALSE`
+#' @param dropout If non-zero, introduces a `Dropout` layer on the outputs of each
+#'   RNN layer except the last layer, with dropout probability equal to
+#'   `dropout`. Default: 0
+#' @param bidirectional: If `TRUE`, becomes a bidirectional RNN. Default: `FALSE`
+#' 
+#' @section Inputs: 
+#' 
+#' - **input** of shape `(seq_len, batch, input_size)`: tensor containing the features
+#' of the input sequence. The input can also be a packed variable length
+#' sequence. 
+#' - **h_0** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
+#' containing the initial hidden state for each element in the batch.
+#' Defaults to zero if not provided. If the RNN is bidirectional,
+#' num_directions should be 2, else it should be 1.
+#'
+#'
+#'
+#' @section Outputs: 
+#' 
+#' - **output** of shape `(seq_len, batch, num_directions * hidden_size)`: tensor
+#' containing the output features (`h_t`) from the last layer of the RNN,
+#' for each `t`.  If a :class:`nn_packed_sequence` has
+#' been given as the input, the output will also be a packed sequence.
+#' For the unpacked case, the directions can be separated
+#' using `output$view(seq_len, batch, num_directions, hidden_size)`,
+#' with forward and backward being direction `0` and `1` respectively.
+#' Similarly, the directions can be separated in the packed case.
+#' 
+#' - **h_n** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
+#' containing the hidden state for `t = seq_len`.
+#' Like *output*, the layers can be separated using
+#' `h_n$view(num_layers, num_directions, batch, hidden_size)`.
+#' 
+#' @section Shape:
+#' 
+#' - Input1: \eqn{(L, N, H_{in})} tensor containing input features where
+#'  \eqn{H_{in}=\text{input_size}} and `L` represents a sequence length.
+#' - Input2: \eqn{(S, N, H_{out})} tensor
+#'   containing the initial hidden state for each element in the batch.
+#'   \eqn{H_{out}=\text{hidden_size}}
+#'   Defaults to zero if not provided. where \eqn{S=\text{num_layers} * \text{num_directions}}
+#'   If the RNN is bidirectional, num_directions should be 2, else it should be 1.
+#' - Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\text{num_directions} * \text{hidden_size}}
+#' - Output2: \eqn{(S, N, H_{out})} tensor containing the next hidden state
+#'   for each element in the batch
+#'   
+#' @section Attributes:
+#' - weight_ih_l[k]: the learnable input-hidden weights of the k-th layer,
+#'   of shape `(hidden_size, input_size)` for `k = 0`. Otherwise, the shape is
+#'   `(hidden_size, num_directions * hidden_size)`
+#' - weight_hh_l[k]: the learnable hidden-hidden weights of the k-th layer,
+#'   of shape `(hidden_size, hidden_size)`
+#' - bias_ih_l[k]: the learnable input-hidden bias of the k-th layer,
+#'   of shape `(hidden_size)`
+#' - bias_hh_l[k]: the learnable hidden-hidden bias of the k-th layer,
+#'   of shape `(hidden_size)`
+#'   
+#' @section Note:
+#' 
+#' All the weights and biases are initialized from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}
+#' where \eqn{k = \frac{1}{\text{hidden\_size}}}
+#' 
 #' @examples
 #' rnn <- nn_rnn(10, 20, 2)
 #' input <- torch_randn(5, 3, 10)
 #' h0 <- torch_randn(2, 3, 20)
 #' rnn(input, h0)
-#'
+#' 
 #' @export
 nn_rnn <- nn_module(
   "nn_rnn",
   inherit = nn_rnn_base,
   initialize = function(...) {
+    
     args <- list(...)
     
-    self$nonlinearity <- args$nonlinearity
+    if (is.null(args$nonlinearity))
+      self$nonlinearity <- "tanh"
+    else
+      self$nonlinearity <- args$nonlinearity  
+    
     args$nonlinearity <- NULL
     
-    if (self$nonlinearity == "tanh" || is.null(args$nonlinearity))
+    if (self$nonlinearity == "tanh")
       mode <- "RNN_TANH"
     else if (self$nonlinearity == "relu")
       mode <- "RNN_RELU"
