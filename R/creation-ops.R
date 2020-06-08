@@ -1,5 +1,5 @@
 resolve_size <- function(...) {
-  size <- list(...)
+  size <- rlang::list2(...)
   
   if (!is.null(size[["size"]])) {
     
