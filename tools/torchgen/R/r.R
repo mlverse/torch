@@ -16,13 +16,19 @@ get_arguments_with_default <- function(methods) {
 
 #' @importFrom rlang .data
 get_arguments_order <- function(methods) {
-  methods %>%
+
+  order <- methods %>%
     purrr::map(~.x$arguments) %>%
     purrr::map(~purrr::map_chr(.x, ~.x$name)) %>%
     purrr::map_dfr(~tibble::tibble(name = .x, id = seq_along(.x))) %>%
     dplyr::group_by(.data$name) %>%
-    dplyr::summarise(id_max = max(.data$id)) %>%
-    dplyr::arrange(.data$id_max) %>%
+    dplyr::summarise(id_max = max(.data$id))
+
+  if (methods[[1]]$name %in% c("rnn_tanh", "rnn_relu"))
+    order$id_max[order$name == "bidirectional"] <- order$id_max[order$name == "bidirectional"] + 1
+
+  order %>%
+    dplyr::arrange(id_max) %>%
     purrr::pluck("name")
 }
 
