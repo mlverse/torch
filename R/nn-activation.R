@@ -194,3 +194,90 @@ nn_relu6 <- nn_module(
     super$initialize(0, 6, inplace)
   }
 )
+
+
+#' Sigmoid module
+#' 
+#' Applies the element-wise function:
+#'
+#' \deqn{
+#'   \text{Sigmoid}(x) = \sigma(x) = \frac{1}{1 + \exp(-x)}
+#' }
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#'   dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_sigmoid()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_sigmoid <- nn_module(
+  "nn_sigmoid",
+  initialize = function() {},
+  forward = function(input) {
+    torch_sigmoid(input)
+  }
+)
+
+#' Hardsigmoid module
+#' 
+#' Applies the element-wise function:
+#'
+#' \deqn{
+#' \text{Hardsigmoid}(x) = \begin{cases}
+#'   0 & \text{if~} x \le -3, \\
+#'   1 & \text{if~} x \ge +3, \\
+#'   x / 6 + 1 / 2 & \text{otherwise}
+#' \end{cases}
+#' }
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#' dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_hardsigmoid()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_hardsigmoid <- nn_module(
+  "nn_hardsigmoid",
+  initialize = function() {},
+  forward = function(input) {
+    nnf_hardsigmoid(input)
+  }
+)
+
+#' Tanh module
+#' 
+#' Applies the element-wise function:
+#' 
+#' \deqn{
+#'   \text{Tanh}(x) = \tanh(x) = \frac{\exp(x) - \exp(-x)} {\exp(x) + \exp(-x)}
+#' }
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#'   dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_tanh()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_tanh <- nn_module(
+  "nn_tanh",
+  initialize = function() {},
+  forward = function(input) {
+    torch_tanh(input)
+  }
+)
