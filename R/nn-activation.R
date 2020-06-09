@@ -165,3 +165,32 @@ nn_hardtanh <- nn_module(
   }
 )
 
+#' ReLu6 module
+#' 
+#' Applies the element-wise function:
+#'
+#' \deqn{
+#'   \text{ReLU6}(x) = \min(\max(0,x), 6)
+#' }
+#' 
+#' @param inplace can optionally do the operation in-place. Default: `FALSE`
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#'   dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_relu6()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_relu6 <- nn_module(
+  "nn_relu6",
+  inherit = nn_hardtanh,
+  initialize = function(inplace = FALSE) {
+    super$initialize(0, 6, inplace)
+  }
+)
