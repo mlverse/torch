@@ -57,6 +57,30 @@ nnf_selu_ <- function(input) {
   nnf_selu(input, inplace = TRUE)
 }
 
+nnf_hardswish <- function(input, inplaxce = FALSE) {
+  
+}
+
+#' Hardswish
+#' 
+#' Applies the hardswish function, element-wise, as described in the paper:
+#' Searching for MobileNetV3.
+#' 
+#' \deqn{
+#'   \text{Hardswish}(x) = \begin{cases}
+#' 0 & \text{if~} x \le -3, \\
+#' x & \text{if~} x \ge +3, \\
+#' x \cdot (x + 3) /6 & \text{otherwise}
+#' \end{cases}
+#' }
+#' 
+#' @inheritParams nnf_elu
+#' 
+#' @export
+nnf_hardswish <- function(input, inplace = FALSE){
+  not_implemented_error("not yet implemented.")
+}
+
 #' Hardshrink
 #'
 #' Applies the hard shrinkage function element-wise
