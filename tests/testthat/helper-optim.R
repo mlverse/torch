@@ -30,10 +30,7 @@ expect_optim_works <- function(optim, defaults) {
     }  
   }
   
-  profvis::profvis({
-    iterate()
-  })
-    
-
+  iterate()
+  
   expect_true(as_array(fn()) <= as_array(initial_value)/2)
 }
