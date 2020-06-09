@@ -101,3 +101,9 @@ as_array.torch_tensor <- function(x) {
 is_torch_tensor <- function(x) {
   inherits(x, "torch_tensor")
 }
+
+is_undefined_tensor <- function(x) {
+  # TODO: correctrly transform undefined to NULL and fix.
+  out <- paste0(capture.output(print(x)), collapse = " ")
+  grepl("undefined", out)
+}

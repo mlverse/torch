@@ -82,6 +82,8 @@ Collate:
     'nnf-upsampling.R'
     'nnf-vision.R'
     'operators.R'
+    'optim.R'
+    'optim-sgd.R'
     'package.R'
     'qscheme.R'
     'quantization.R'
