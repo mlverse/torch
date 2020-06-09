@@ -59,6 +59,7 @@ Collate:
     'nn-activation.R'
     'nn-batchnorm.R'
     'nn-conv.R'
+    'nn-dropout.R'
     'nn-init.R'
     'nn-linear.R'
     'nn-pooling.R'
