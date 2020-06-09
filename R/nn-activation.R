@@ -121,4 +121,47 @@ nn_rrelu <- nn_module(
   }
 )
 
+#' Hardtanh module
+#' 
+#' Applies the HardTanh function element-wise
+#' HardTanh is defined as:
+#' 
+#' \deqn{
+#' \text{HardTanh}(x) = \begin{cases}
+#'   1 & \text{ if } x > 1 \\
+#'   -1 & \text{ if } x < -1 \\
+#'   x & \text{ otherwise } \\
+#' \end{cases}
+#' }
+#' 
+#' The range of the linear region :math:`[-1, 1]` can be adjusted using
+#' `min_val` and `max_val`.
+#' 
+#' @param min_val minimum value of the linear region range. Default: -1
+#' @param max_val maximum value of the linear region range. Default: 1
+#' @param inplace can optionally do the operation in-place. Default: `FALSE`
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#'   dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_hardtanh(-2, 2)
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_hardtanh <- nn_module(
+  "nn_hardtanh",
+  initialize = function(min_val = -1, max_val = 1, inplace = FALSE) {
+    self$min_val = min_val
+    self$max_val = max_val
+    self$inplace = inplace
+  },
+  forward = function(input) {
+    nnf_hardtanh(input, self$min_val, self$max_val, self$inplace)
+  }
+)
 

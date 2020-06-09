@@ -1,4 +1,4 @@
-#' @Include nn.R
+#' @include nn.R
 NULL
 
 nn_dropout_nd <- nn_module(
