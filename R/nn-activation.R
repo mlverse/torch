@@ -301,9 +301,11 @@ nn_tanh <- nn_module(
 #' - Output: \eqn{(N, *)}, same shape as the input
 #' 
 #' @examples
+#' \dontrun{
 #' m <- nn_hardswish()
 #' input <- torch_randn(2)
 #' output <- m(input)
+#' }
 #' 
 #' @export
 nn_hardswish <- nn_module(
