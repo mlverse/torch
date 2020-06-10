@@ -1,7 +1,7 @@
 expect_optim_works <- function(optim, defaults) {
   
   w_true <- torch_randn(10, 1)
-  x <- torch_randn(1000, 10)
+  x <- torch_randn(100, 10)
   y <- torch_mm(x, w_true)
   
   loss <- function(y, y_pred) {
@@ -24,13 +24,12 @@ expect_optim_works <- function(optim, defaults) {
   
   initial_value <- fn()
   
-  iterate <- function() {
-    for (i in seq_len(200)) {
-      opt$step(fn)
-    }  
-  }
+  #p <- profvis::profvis({opt$step(fn)})
   
-  iterate()
+  for (i in seq_len(200)) {
+    opt$step(fn)
+  }  
+  
   
   expect_true(as_array(fn()) <= as_array(initial_value)/2)
 }

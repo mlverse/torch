@@ -32,7 +32,7 @@ dimensions
 }
 
 \examples{
-m <- nnn_hardshrink()
+m <- nn_hardshrink()
 input <- torch_randn(2)
 output <- m(input)
 

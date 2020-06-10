@@ -501,7 +501,7 @@ nn_gelu <- nn_module(
 #' - Output: \eqn{(N, *)}, same shape as the input
 #' 
 #' @examples
-#' m <- nnn_hardshrink()
+#' m <- nn_hardshrink()
 #' input <- torch_randn(2)
 #' output <- m(input)
 #' 
