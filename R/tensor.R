@@ -1,7 +1,10 @@
-Tensor <- R6::R6Class(
-  classname = "torch_tensor",
+#' @include R7.R
+
+Tensor <- R7Class(
+  classname = "torch_tensor", 
+  # lock_class = FALSE,
+  # lock_objects = FALSE,
   public = list(
-    ptr = NULL,
     initialize = function(data = NULL, dtype = NULL, device = NULL, requires_grad = FALSE, 
                           pin_memory = FALSE, ptr = NULL) {
       
