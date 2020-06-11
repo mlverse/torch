@@ -561,3 +561,269 @@ nn_leaky_relu <- nn_module(
   }
 )
 
+#' LogSigmoid module
+#' 
+#' Applies the element-wise function:
+#' \deqn{
+#'   \text{LogSigmoid}(x) = \log\left(\frac{ 1 }{ 1 + \exp(-x)}\right)
+#'  }
+#'
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#' dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_log_sigmoid()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_log_sigmoid <- nn_module(
+  "nn_log_sigmoid",
+  initialize = function() {},
+  forward = function(input) {
+    nnf_logsigmoid(input)
+  }
+)
+
+#' Softplus module
+#' 
+#' Applies the element-wise function:
+#' \deqn{
+#'   \text{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))
+#' }
+#' 
+#' SoftPlus is a smooth approximation to the ReLU function and can be used
+#' to constrain the output of a machine to always be positive.
+#' For numerical stability the implementation reverts to the linear function
+#' when \eqn{input \times \beta > threshold}.
+#' 
+#' @param beta the \eqn{\beta} value for the Softplus formulation. Default: 1
+#' @param threshold values above this revert to a linear function. Default: 20
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#' dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_softplus()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_softplus <- nn_module(
+  "nn_softplus",
+  initialize = function(beta=1, threshold=20) {
+    self$beta <- beta
+    self$threshold <- threshold
+  },
+  forward = function(input) {
+    nnf_softplus(input, self$beta, self$threshold)
+  }
+)
+
+#' Softshrink module
+#' 
+#' Applies the soft shrinkage function elementwise:
+#' 
+#' \deqn{
+#'   \text{SoftShrinkage}(x) =
+#'   \begin{cases}
+#' x - \lambda, & \text{ if } x > \lambda \\
+#' x + \lambda, & \text{ if } x < -\lambda \\
+#' 0, & \text{ otherwise }
+#' \end{cases}
+#' 
+#' }
+#' 
+#' @param lambd the \eqn{\lambda} (must be no less than zero) value for the Softshrink formulation. Default: 0.5
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#' dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_softshrink()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_softshrink <- nn_module(
+  "nn_softshrink",
+  initialize = function(lambd = 0.5) {
+    self$lambd <- lambd
+  },
+  forward = function(input) {
+    nnf_softshrink(input, self$lambd)
+  }
+)
+
+#' MultiHead attention
+#' 
+#' Allows the model to jointly attend to information
+#' from different representation subspaces.
+#' See reference: Attention Is All You Need
+#' 
+#' \deqn{
+#'   \text{MultiHead}(Q, K, V) = \text{Concat}(head_1,\dots,head_h)W^O
+#' \text{where} head_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)
+#' }
+#' 
+#' @param embed_dim total dimension of the model.
+#' @param num_heads parallel attention heads.
+#' @param dropout a Dropout layer on attn_output_weights. Default: 0.0.
+#' @param bias add bias as module parameter. Default: True.
+#' @param add_bias_kv add bias to the key and value sequences at dim=0.
+#' @param add_zero_attn add a new batch of zeros to the key and
+#'   value sequences at dim=1.
+#' @param kdim total number of features in key. Default: `NULL`
+#' @param vdim total number of features in value. Default: `NULL`.
+#'   Note: if kdim and vdim are `NULL`, they will be set to embed_dim such that
+#'   query, key, and value have the same number of features.
+#'   
+#' @section Shape:
+#' 
+#' Inputs:
+#' 
+#' - query: \eqn{(L, N, E)} where L is the target sequence length, N is the batch size, E is
+#' the embedding dimension.
+#' - key: \eqn{(S, N, E)}, where S is the source sequence length, N is the batch size, E is
+#' the embedding dimension.
+#' - value: \eqn{(S, N, E)} where S is the source sequence length, N is the batch size, E is
+#' the embedding dimension.
+#' - key_padding_mask: \eqn{(N, S)} where N is the batch size, S is the source sequence length.
+#'   If a ByteTensor is provided, the non-zero positions will be ignored while the position
+#'   with the zero positions will be unchanged. If a BoolTensor is provided, the positions with the
+#'   value of ``True`` will be ignored while the position with the value of ``False`` will be unchanged.
+#' - attn_mask: 2D mask \eqn{(L, S)} where L is the target sequence length, S is the source sequence length.
+#'   3D mask \eqn{(N*num_heads, L, S)} where N is the batch size, L is the target sequence length,
+#'   S is the source sequence length. attn_mask ensure that position i is allowed to attend the unmasked
+#'   positions. If a ByteTensor is provided, the non-zero positions are not allowed to attend
+#'   while the zero positions will be unchanged. If a BoolTensor is provided, positions with ``True``
+#'   is not allowed to attend while ``False`` values will be unchanged. If a FloatTensor
+#'   is provided, it will be added to the attention weight.
+#' 
+#' Outputs:
+#'   
+#' - attn_output: \eqn{(L, N, E)} where L is the target sequence length, N is the batch size,
+#'   E is the embedding dimension.
+#' - attn_output_weights: \eqn{(N, L, S)} where N is the batch size,
+#'   L is the target sequence length, S is the source sequence length.
+#'   
+#' @examples
+#' \dontrun{
+#' multihead_attn = nn_multihead_attention(embed_dim, num_heads)
+#' out <- multihead_attn(query, key, value)
+#' attn_output <- out[[1]]
+#' attn_output_weights <- out[[2]]
+#' }
+#' 
+#' @export
+nn_multihead_attention <- nn_module(
+  "nn_multihead_attention",
+  initialize = function(embed_dim, num_heads, dropout=0., bias=TRUE, add_bias_kv=FALSE, 
+                        add_zero_attn=FALSE, kdim=NULL, vdim=NULL) {
+    
+    self$embed_dim <- embed_dim
+    
+    if (!is.null(kdim))
+      self$kdim <- kdim
+    else
+      self$kdim <- embed_dim
+    
+    if (!is.null(vdim))
+      self$vdim <- vdim
+    else
+      self$vdim <- embed_dim
+    
+    self$qkv_same_embed_dim_ <- self$kdim == embed_dim && self$vdim == embed_dim
+    
+    self$num_heads <- num_heads
+    self$dropout <- dropout
+    self$head_dim <- embed_dim %/% num_heads
+    
+    if (!self$qkv_same_embed_dim_) {
+      self$q_proj_weight <- nn_parameter(torch_empty(embed_dim, embed_dim))
+      self$k_proj_weight = nn_parameter(torch_empty(embed_dim, self$kdim))
+      self$v_proj_weight = nn_parameter(torch_empty(embed_dim, self$vdim))
+      self$register_parameter('in_proj_weight', NULL)
+    } else {
+      self$in_proj_weight = nn_parameter(torch_empty(3 * embed_dim, embed_dim))
+      self$register_parameter('q_proj_weight', NULL)
+      self$register_parameter('k_proj_weight', NULL)
+      self$register_parameter('v_proj_weight', NULL)
+    }
+    
+    if (bias)
+      self$in_proj_bias <- nn_parameter(torch_empty(3 * embed_dim))
+    else
+      self$register_parameter("in_proj_bias", NULL)
+    
+    self$out_proj <- nn_linear(embed_dim, embed_dim, bias=bias)
+    
+    if (add_bias_kv) {
+      self$bias_k <- nn_parameter(torch_empty(1, 1, embed_dim))
+      self$bias_v <- nn_parameter(torch_empty(1, 1, embed_dim))
+    } else {
+      self$bias_k <- NULL
+      self$bias_v <- NULL
+    }
+      
+    self$add_zero_attn <- add_zero_attn
+    
+    self$reset_parameters()
+  },
+  reset_parameters = function() {
+    
+    if (self$qkv_same_embed_dim) {
+      nn_init_xavier_uniform_(self$in_proj_weight)
+    } else {
+      nn_init_xavier_uniform_(self$q_proj_weight)
+      nn_init_xavier_uniform_(self$k_proj_weight)
+      nn_init_xavier_uniform_(self$v_proj_weight)
+    }
+    
+    if (!is.null(self$in_proj_bias)) {
+      nn_init_constant_(self$in_proj_bias, 0)
+      nn_init_constant_(self$out_proj_bias, 0)
+    }
+    
+    if (!is.null(self$bias_k)) {
+      nn_init_xavier_normal_(self$bias_k)
+    }
+    
+    if (!is.null(self$bias_v)) {
+      nn_init_xavier_normal_(self$bias_v)
+    }
+    
+  },
+  forward = function(query, key, value, key_padding_mask=NULL,
+                     need_weights=TRUE, attn_mask=NULL) {
+    if (!self$qkv_same_embed_dim_) {
+      nnf_multi_head_attention_forward(
+        query, key, value, self$embed_dim, self$num_heads,
+        self$in_proj_weight, self$in_proj_bias,
+        self$bias_k, self$bias_v, self$add_zero_attn,
+        self$dropout, self$out_proj.weight, self$out_proj.bias,
+        training=self$training,
+        key_padding_mask=key_padding_mask, need_weights=need_weights,
+        attn_mask=attn_mask, use_separate_proj_weight=TRUE,
+        q_proj_weight=self$q_proj_weight, k_proj_weight=self$k_proj_weight,
+        v_proj_weight=self$v_proj_weight)
+    } else {
+      nnf_multi_head_attention_forward(
+        query, key, value, self$embed_dim, self$num_heads,
+        self$in_proj_weight, self$in_proj_bias,
+        self$bias_k, self$bias_v, self$add_zero_attn,
+        self$dropout, self$out_proj.weight, self$out_proj.bias,
+        training=self$training,
+        key_padding_mask=key_padding_mask, need_weights=need_weights,
+        attn_mask=attn_mask)
+    }
+  }
+)

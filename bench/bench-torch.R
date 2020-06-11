@@ -6,5 +6,6 @@ w <- torch_randn(784, 10)
 
 bench::mark(
   torch_mm(x, w),
-  x$mm(w)
+  x$mm(w),
+  min_time = 1
 )

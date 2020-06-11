@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hardshwink module — nn_hardshrink • torch</title>
+<title>Softshrink module — nn_softshrink • torch</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Hardshwink module — nn_hardshrink" />
-<meta property="og:description" content="Applies the hard shrinkage function element-wise:" />
+<meta property="og:title" content="Softshrink module — nn_softshrink" />
+<meta property="og:description" content="Applies the soft shrinkage function elementwise:" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,36 +123,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Hardshwink module</h1>
+    <h1>Softshrink module</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-activation.R'><code>R/nn-activation.R</code></a></small>
-    <div class="hidden name"><code>nn_hardshrink.Rd</code></div>
+    <div class="hidden name"><code>nn_softshrink.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Applies the hard shrinkage function element-wise:</p>
+    <p>Applies the soft shrinkage function elementwise:</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_hardshrink</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_softshrink</span>(<span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>lambd</th>
-      <td><p>the \(\lambda\) value for the Hardshrink formulation. Default: 0.5</p></td>
+      <td><p>the \(\lambda\) (must be no less than zero) value for the Softshrink formulation. Default: 0.5</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>$$
-  \text{HardShrink}(x) =
+  \text{SoftShrinkage}(x) =
   \begin{cases}
-x, &amp; \text{ if } x &gt; \lambda \\
-x, &amp; \text{ if } x &lt; -\lambda \\
+x - \lambda, &amp; \text{ if } x &gt; \lambda \\
+x + \lambda, &amp; \text{ if } x &lt; -\lambda \\
 0, &amp; \text{ otherwise }
-\end{cases}
-$$</p>
+\end{cases}$$</p>
     <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
 
     
@@ -165,7 +164,7 @@ dimensions</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_hardshrink</span>()
+    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_softshrink</span>()
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>)
 <span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)</div></pre>
   </div>

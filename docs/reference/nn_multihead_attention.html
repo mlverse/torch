@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hardshwink module — nn_hardshrink • torch</title>
+<title>MultiHead attention — nn_multihead_attention • torch</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,10 @@
 
 
 
-<meta property="og:title" content="Hardshwink module — nn_hardshrink" />
-<meta property="og:description" content="Applies the hard shrinkage function element-wise:" />
+<meta property="og:title" content="MultiHead attention — nn_multihead_attention" />
+<meta property="og:description" content="Allows the model to jointly attend to information
+from different representation subspaces.
+See reference: Attention Is All You Need" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,51 +125,105 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Hardshwink module</h1>
+    <h1>MultiHead attention</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-activation.R'><code>R/nn-activation.R</code></a></small>
-    <div class="hidden name"><code>nn_hardshrink.Rd</code></div>
+    <div class="hidden name"><code>nn_multihead_attention.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Applies the hard shrinkage function element-wise:</p>
+    <p>Allows the model to jointly attend to information
+from different representation subspaces.
+See reference: Attention Is All You Need</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_hardshrink</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_multihead_attention</span>(<span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lambd</th>
-      <td><p>the \(\lambda\) value for the Hardshrink formulation. Default: 0.5</p></td>
+      <th>embed_dim</th>
+      <td><p>total dimension of the model.</p></td>
+    </tr>
+    <tr>
+      <th>num_heads</th>
+      <td><p>parallel attention heads.</p></td>
+    </tr>
+    <tr>
+      <th>dropout</th>
+      <td><p>a Dropout layer on attn_output_weights. Default: 0.0.</p></td>
+    </tr>
+    <tr>
+      <th>bias</th>
+      <td><p>add bias as module parameter. Default: True.</p></td>
+    </tr>
+    <tr>
+      <th>add_bias_kv</th>
+      <td><p>add bias to the key and value sequences at dim=0.</p></td>
+    </tr>
+    <tr>
+      <th>add_zero_attn</th>
+      <td><p>add a new batch of zeros to the key and
+value sequences at dim=1.</p></td>
+    </tr>
+    <tr>
+      <th>kdim</th>
+      <td><p>total number of features in key. Default: <code>NULL</code></p></td>
+    </tr>
+    <tr>
+      <th>vdim</th>
+      <td><p>total number of features in value. Default: <code>NULL</code>.
+Note: if kdim and vdim are <code>NULL</code>, they will be set to embed_dim such that
+query, key, and value have the same number of features.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>$$
-  \text{HardShrink}(x) =
-  \begin{cases}
-x, &amp; \text{ if } x &gt; \lambda \\
-x, &amp; \text{ if } x &lt; -\lambda \\
-0, &amp; \text{ otherwise }
-\end{cases}
+  \text{MultiHead}(Q, K, V) = \text{Concat}(head_1,\dots,head_h)W^O
+\text{where} head_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)
 $$</p>
     <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
 
     
 
-<ul>
-<li><p>Input: \((N, *)\) where <code>*</code> means, any number of additional
-dimensions</p></li>
-<li><p>Output: \((N, *)\), same shape as the input</p></li>
+
+<p>Inputs:</p><ul>
+<li><p>query: \((L, N, E)\) where L is the target sequence length, N is the batch size, E is
+the embedding dimension.</p></li>
+<li><p>key: \((S, N, E)\), where S is the source sequence length, N is the batch size, E is
+the embedding dimension.</p></li>
+<li><p>value: \((S, N, E)\) where S is the source sequence length, N is the batch size, E is
+the embedding dimension.</p></li>
+<li><p>key_padding_mask: \((N, S)\) where N is the batch size, S is the source sequence length.
+If a ByteTensor is provided, the non-zero positions will be ignored while the position
+with the zero positions will be unchanged. If a BoolTensor is provided, the positions with the
+value of <code>True</code> will be ignored while the position with the value of <code>False</code> will be unchanged.</p></li>
+<li><p>attn_mask: 2D mask \((L, S)\) where L is the target sequence length, S is the source sequence length.
+3D mask \((N*num_heads, L, S)\) where N is the batch size, L is the target sequence length,
+S is the source sequence length. attn_mask ensure that position i is allowed to attend the unmasked
+positions. If a ByteTensor is provided, the non-zero positions are not allowed to attend
+while the zero positions will be unchanged. If a BoolTensor is provided, positions with <code>True</code>
+is not allowed to attend while <code>False</code> values will be unchanged. If a FloatTensor
+is provided, it will be added to the attention weight.</p></li>
+</ul>
+
+<p>Outputs:</p><ul>
+<li><p>attn_output: \((L, N, E)\) where L is the target sequence length, N is the batch size,
+E is the embedding dimension.</p></li>
+<li><p>attn_output_weights: \((N, L, S)\) where N is the batch size,
+L is the target sequence length, S is the source sequence length.</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_hardshrink</span>()
-<span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>multihead_attn</span> <span class='kw'>=</span> <span class='fu'>nn_multihead_attention</span>(<span class='no'>embed_dim</span>, <span class='no'>num_heads</span>)
+<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>multihead_attn</span>(<span class='no'>query</span>, <span class='no'>key</span>, <span class='no'>value</span>)
+<span class='no'>attn_output</span> <span class='kw'>&lt;-</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
+<span class='no'>attn_output_weights</span> <span class='kw'>&lt;-</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]]
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

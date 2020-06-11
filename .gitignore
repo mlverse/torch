@@ -12,3 +12,4 @@ c_cpp_properties.json
 *.tmp
 inst/doc
 torch.xcworkspace
+test.html

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hardshwink module — nn_hardshrink • torch</title>
+<title>Softplus module — nn_softplus • torch</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Hardshwink module — nn_hardshrink" />
-<meta property="og:description" content="Applies the hard shrinkage function element-wise:" />
+<meta property="og:title" content="Softplus module — nn_softplus" />
+<meta property="og:description" content="Applies the element-wise function:
+$$
+  \text{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))
+$$" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,36 +126,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Hardshwink module</h1>
+    <h1>Softplus module</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-activation.R'><code>R/nn-activation.R</code></a></small>
-    <div class="hidden name"><code>nn_hardshrink.Rd</code></div>
+    <div class="hidden name"><code>nn_softplus.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Applies the hard shrinkage function element-wise:</p>
+    <p>Applies the element-wise function:
+$$
+  \text{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))
+$$</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_hardshrink</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_softplus</span>(<span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lambd</th>
-      <td><p>the \(\lambda\) value for the Hardshrink formulation. Default: 0.5</p></td>
+      <th>beta</th>
+      <td><p>the \(\beta\) value for the Softplus formulation. Default: 1</p></td>
+    </tr>
+    <tr>
+      <th>threshold</th>
+      <td><p>values above this revert to a linear function. Default: 20</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>$$
-  \text{HardShrink}(x) =
-  \begin{cases}
-x, &amp; \text{ if } x &gt; \lambda \\
-x, &amp; \text{ if } x &lt; -\lambda \\
-0, &amp; \text{ otherwise }
-\end{cases}
-$$</p>
+    <p>SoftPlus is a smooth approximation to the ReLU function and can be used
+to constrain the output of a machine to always be positive.
+For numerical stability the implementation reverts to the linear function
+when \(input \times \beta &gt; threshold\).</p>
     <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
 
     
@@ -165,7 +171,7 @@ dimensions</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_hardshrink</span>()
+    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_softplus</span>()
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>)
 <span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)</div></pre>
   </div>
