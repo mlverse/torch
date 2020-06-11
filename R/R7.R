@@ -74,6 +74,6 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
     f
 }
 
-# print.R7 <- function(x, ...) {
-#   x$print()
-# }
+print.R7 <- function(x, ...) {
+  x$print()
+}
