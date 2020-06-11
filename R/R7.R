@@ -51,6 +51,7 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   generator
 }
 
+#' @export
 `$.R7` <- function(x, name) {
   o <- rlang::env_get(x, name, default = NULL, inherit = TRUE)
   
@@ -74,6 +75,7 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
     f
 }
 
+#' @export
 print.R7 <- function(x, ...) {
   x$print()
 }
