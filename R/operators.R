@@ -1,10 +1,16 @@
 #' @export
 `+.torch_tensor` <- function(e1, e2) {
+  if (missing(e2))
+    e2 <- torch_zeros_like(e1)
+  
   torch_add(e1, e2)
 }
 
 #' @export
 `-.torch_tensor` <- function(e1, e2) {
+  if (missing(e2))
+    e2 <- torch_zeros_like(e1)
+  
   torch_sub(e1, e2)
 }
 
