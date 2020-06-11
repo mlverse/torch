@@ -827,3 +827,265 @@ nn_multihead_attention <- nn_module(
     }
   }
 )
+
+#' PReLU module
+#' 
+#' Applies the element-wise function:
+#' \deqn{
+#'   \text{PReLU}(x) = \max(0,x) + a * \min(0,x)
+#' }
+#' or
+#' \deqn{
+#'   \text{PReLU}(x) =
+#'   \begin{cases}
+#' x, & \text{ if } x \geq 0 \\
+#' ax, & \text{ otherwise }
+#' \end{cases}
+#' }
+#' 
+#' Here \eqn{a} is a learnable parameter. When called without arguments, `nn.prelu()` uses a single
+#' parameter \eqn{a} across all input channels. If called with `nn_prelu(nChannels)`,
+#' a separate \eqn{a} is used for each input channel.
+#' 
+#' @note weight decay should not be used when learning \eqn{a} for good performance.
+#' 
+#' @note Channel dim is the 2nd dim of input. When input has dims < 2, then there is
+#'   no channel dim and the number of channels = 1.
+#'   
+#' @param num_parameters (int): number of \eqn{a} to learn.
+#'   Although it takes an int as input, there is only two values are legitimate:
+#'   1, or the number of channels at input. Default: 1
+#' @param init (float): the initial value of \eqn{a}. Default: 0.25
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#'   dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @section Attributes:
+#' 
+#' - weight (Tensor): the learnable weights of shape (`num_parameters`).
+#' 
+#' @examples
+#' m <- nn_prelu()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_prelu <- nn_module(
+  "nn_prelu",
+  initialize = function(num_parameters=1, init=0.25) {
+    self$num_parameters <- num_parameters
+    self$weight <- nn_parameter(torch_empty(num_parameters)$fill_(init))
+  },
+  forward = function(input) {
+    nnf_prelu(input, self$weight)
+  }
+)
+
+#' Softsign module
+#' 
+#' Applies the element-wise function:
+#' \deqn{
+#'   \text{SoftSign}(x) = \frac{x}{ 1 + |x|}
+#' }
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#' dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_softsign()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_softsign <- nn_module(
+  "nn_softsign",
+  initialize = function() {},
+  forward = function(input) {
+    nnf_softsign(input)
+  }
+)
+
+#' Tanhshrink module
+#' 
+#' Applies the element-wise function:
+#'
+#' \deqn{
+#'   \text{Tanhshrink}(x) = x - \tanh(x)
+#' }
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where `*` means, any number of additional
+#' dimensions
+#' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' m <- nn_tanhshrink()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' 
+#' @export
+nn_tanhshrink <- nn_module(
+  "nn_tanhshrink",
+  initialize = function() {},
+  forward = function(input) {
+    nnf_tanhshrink(input)
+  }
+)
+
+#' Softmin
+#' 
+#' Applies the Softmin function to an n-dimensional input Tensor
+#' rescaling them so that the elements of the n-dimensional output Tensor
+#' lie in the range `[0, 1]` and sum to 1.
+#' Softmin is defined as:
+#' 
+#' \deqn{
+#'   \text{Softmin}(x_{i}) = \frac{\exp(-x_i)}{\sum_j \exp(-x_j)}
+#' }
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(*)} where `*` means, any number of additional
+#' dimensions
+#' - Output: \eqn{(*)}, same shape as the input
+#' 
+#' @param dim (int): A dimension along which Softmin will be computed (so every slice
+#'    along dim will sum to 1).
+#'    
+#' @return     
+#' a Tensor of the same dimension and shape as the input, with
+#' values in the range [0, 1]
+#' 
+#' @examples
+#' m <- nn_softmin(dim = 0)
+#' input <- torch_randn(2, 2)
+#' output <- m(input)
+#' 
+#' @export
+nn_softmin <- nn_module(
+  "nn_softmin",
+  initialize = function(dim) {
+    self$dim <- dim
+  },
+  forward = function(input) {
+    nnf_softmin(input, self$dim)
+  }
+)
+
+#' Softmax module
+#' 
+#' Applies the Softmax function to an n-dimensional input Tensor
+#' rescaling them so that the elements of the n-dimensional output Tensor
+#' lie in the range [0,1] and sum to 1.
+#' Softmax is defined as:
+#'
+#' \deqn{
+#'   \text{Softmax}(x_{i}) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}
+#' }
+#' 
+#' When the input Tensor is a sparse tensor then the unspecifed
+#' values are treated as `-Inf`.
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(*)} where `*` means, any number of additional
+#' dimensions
+#' - Output: \eqn{(*)}, same shape as the input
+#' 
+#' @return:
+#' a Tensor of the same dimension and shape as the input with
+#' values in the range [0, 1]
+#' 
+#' @param dim (int): A dimension along which Softmax will be computed (so every slice
+#'                                                                along dim will sum to 1).
+#' @note
+#' This module doesn't work directly with NLLLoss,
+#' which expects the Log to be computed between the Softmax and itself.
+#' Use `LogSoftmax` instead (it's faster and has better numerical properties).
+#' 
+#' @examples
+#' m <- nn_softmax(1)
+#' input <- torch_randn(2, 3)
+#' output <- m(input)
+#' 
+#' @export
+nn_softmax <- nn_module(
+  "nn_softmax",
+  initialize = function(dim) {
+    self$dim <- dim
+  },
+  forward = function(input) {
+    nnf_softmax(input, self$dim)
+  }
+)
+
+#' Softmax2d module
+#' 
+#' Applies SoftMax over features to each spatial location.
+#' When given an image of `Channels x Height x Width`, it will
+#' apply `Softmax` to each location \eqn{(Channels, h_i, w_j)}
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C, H, W)}
+#' - Output: \eqn{(N, C, H, W)} (same shape as input)
+#' 
+#' @return 
+#' a Tensor of the same dimension and shape as the input with
+#' values in the range [0, 1]
+#' 
+#' @examples
+#' m <- nn_softmax2d()
+#' input <- torch_randn(2, 3, 12, 13)
+#' output <- m(input)
+#' 
+#' @export
+nn_softmax2d <- nn_module(
+  "nn_softmax2d",
+  initialize = function() {},
+  forward = function(input) {
+    nnf_softmax(input, dim = 1)
+  }
+)
+
+#' LogSoftmax module
+#' 
+#' Applies the \eqn{\log(\text{Softmax}(x))} function to an n-dimensional
+#' input Tensor. The LogSoftmax formulation can be simplified as:
+#' 
+#' \deqn{
+#'   \text{LogSoftmax}(x_{i}) = \log\left(\frac{\exp(x_i) }{ \sum_j \exp(x_j)} \right)
+#' }
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(*)} where `*` means, any number of additional
+#' dimensions
+#' - Output: \eqn{(*)}, same shape as the input
+#' 
+#' @param dim (int): A dimension along which LogSoftmax will be computed.
+#' 
+#' @return
+#' a Tensor of the same dimension and shape as the input with
+#' values in the range [-inf, 0)
+#' 
+#' @examples
+#' m <- nn_log_softmax(1)
+#' input <- torch_randn(2, 3)
+#' output <- m(input)
+#' 
+#' @export
+nn_log_softmax <- nn_module(
+  "nn_log_softmax",
+  initialize = function(dim) {
+    self$dim <- dim
+  },
+  forward = function(input) {
+    nnf_log_softmax(input, self$dim)
+  }
+)

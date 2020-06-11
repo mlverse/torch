@@ -258,7 +258,7 @@ nnf_softmin <- function(input, dim, dtype = NULL) {
 nnf_log_softmax <- function(input, dim = NULL, dtype = NULL, ...) {
   
   if (is.null(dtype))
-    ret <- input$log_softmax(dim())
+    ret <- input$log_softmax(dim)
   else
     ret <- input$log_softmax(dim, dtype = dtype)
   
