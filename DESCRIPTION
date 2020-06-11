@@ -35,6 +35,7 @@ Suggests:
     bit64
 VignetteBuilder: knitr
 Collate: 
+    'R7.R'
     'RcppExports.R'
     'tensor.R'
     'autograd.R'
