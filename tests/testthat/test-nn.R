@@ -65,3 +65,47 @@ test_that("nn_sequential", {
   expect_s3_class(model, "mynet")
   expect_s3_class(model, "nn_module")
 })
+
+test_that("nn_module_list", {
+  x <- nn_module_list(list(
+    nn_linear(10, 100),
+    nn_relu(),
+    nn_linear(100, 10)
+  ))
+  
+  expect_s3_class(x[[1]], "nn_linear")
+  expect_s3_class(x[[2]], "nn_relu")
+  expect_s3_class(x[[3]], "nn_linear")
+  
+  x$append(nn_relu6())
+  expect_s3_class(x[[4]], "nn_relu6")
+  
+  x$extend(list(nn_celu(), nn_gelu()))
+  expect_s3_class(x[[5]], "nn_celu")
+  expect_s3_class(x[[6]], "nn_gelu")
+  
+  x$insert(index = 1, nn_dropout())
+  expect_s3_class(x[[1]], "nn_dropout")
+  
+  expect_length(x, 7)
+})
+
+test_that("module_list inside a module", {
+  
+  my_module <- nn_module(
+   initialize = function() {
+     self$linears <- nn_module_list(lapply(1:10, function(x) nn_linear(10, 10)))
+   },
+   forward = function(x) {
+    for (i in 1:length(self$linears))
+      x <- self$linears[[i]](x)
+    x
+   }
+  )
+  
+  m <- my_module()
+  expect_length(m$parameters, 20)
+  output <- m(torch_randn(5, 10))
+  expect_tensor(output)
+  
+})

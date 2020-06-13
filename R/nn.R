@@ -226,9 +226,31 @@ nn_sequential <- function(... , name = NULL) {
   module(...)
 }
 
+#' Holds submodules in a list.
+#' 
+#' [nn_module_list] can be indexed like a regular R list, but
+#' modules it contains are properly registered, and will be visible by all
+#' `nn_module` methods.
+#' 
+#' @param modules a list of modules to add
+#' 
+#' @examples
+#' 
+#' my_module <- nn_module(
+#'  initialize = function() {
+#'    self$linears <- nn_module_list(lapply(1:10, function(x) nn_linear(10, 10)))
+#'  },
+#'  forward = function(x) {
+#'   for (i in 1:length(self$linears))
+#'     x <- self$linears[[i]](x)
+#'   x
+#'  }
+#' )
+#'
+#' @export
 nn_module_list <- nn_module(
   "nn_module_list",
-  initialize = function(modules) {
+  initialize = function(modules = list()) {
     for (i in seq_along(modules))
       self$add_module(i, modules[[i]])
   },
@@ -242,3 +264,16 @@ nn_module_list <- nn_module(
     private$modules_ <- append(private$modules_, modules)
   }
 )
+
+#' @export
+`[[.nn_module_list` <- function(x, y) {
+  if (rlang::is_scalar_integerish(y))
+    x$.__enclos_env__$private$modules_[[y]]
+  else
+    NextMethod("[[")
+}
+
+#' @export
+length.nn_module_list <- function(x, ...) {
+  length(x$.__enclos_env__$private$modules_)
+}
