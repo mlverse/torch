@@ -66,6 +66,7 @@ Collate:
     'nn-pooling.R'
     'nn-rnn.R'
     'nn-utils.R'
+    'nn_adaptive.R'
     'nnf-activation.R'
     'nnf-batchnorm.R'
     'nnf-conv.R'

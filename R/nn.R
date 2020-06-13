@@ -5,7 +5,7 @@ nn_Module <- R6::R6Class(
     training = TRUE,
     
     forward = function(...) {
-      not_implemented_error("Forward methood is not implemented")
+      not_implemented_error("Forward method is not implemented")
     },
     
     add_module = function(name, module) {
@@ -182,6 +182,43 @@ print.nn_module <- function(x, ...) {
   print(x)
 }
 
-
-
+#' A sequential container
+#' 
+#' A sequential container.
+#' Modules will be added to it in the order they are passed in the constructor.
+#' See examples.
+#' 
+#' @param ... sequence of modules to be added
+#' @param name optional name for the generated module.
+#' 
+#' @examples 
+#' 
+#' model <- nn_sequential(
+#'   nn_conv2d(1, 20, 5),
+#'   nn_relu(),
+#'   nn_conv2d(20, 64, 5),
+#'   nn_relu()
+#' )
+#' input <- torch_randn(32, 1, 28, 28)
+#' output <- model(input)
+#' 
+#' @export
+nn_sequential <- function(... , name = NULL) {
+  module <- nn_module(
+    classname = ifelse(is.null(name), "nn_sequential", name),
+    initialize = function(...) {
+      modules <- list(...)
+      for (i in seq_along(modules)) {
+        self$add_module(name = i, module = modules[[i]])  
+      }
+    },
+    forward = function(input) {
+      for (module in private$modules_) {
+        input <- module(input)
+      }
+      input
+    }
+  )
+  module(...)
+}
 
