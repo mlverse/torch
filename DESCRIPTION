@@ -93,6 +93,7 @@ Collate:
     'scalar.R'
     'tensor_list.R'
     'tensor_options.R'
+    'utils-data.R'
     'utils.R'
     'variable_list.R'
     'wrapers.R'
