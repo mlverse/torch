@@ -83,6 +83,33 @@ is_nn_module <- function(x) {
   inherits(x, "nn_module")
 }
 
+#' Base class for all neural network modules.
+#' 
+#' Your models should also subclass this class.
+#' 
+#' Modules can also contain other Modules, allowing to nest them in a tree 
+#' structure. You can assign the submodules as regular attributes.
+#' 
+#' @param classname an optional name for the module
+#' @param inherit an optional module to inherit from
+#' @param ... methods implementation 
+#' 
+#' @examples 
+#' model <- nn_module(
+#'  initialize = function() {
+#'    self$conv1 <- nn_conv2d(1, 20, 5)
+#'    self$conv2 <- nn_conv2d(20, 20, 5)
+#'  },
+#'  forward = function(input) {
+#'    input <- self$conv1(input)
+#'    input <- nnf_relu(input)
+#'    input <- self$conv2(input)
+#'    input <- nnf_relu(input)
+#'    input
+#'  }
+#' )
+#' 
+#' @export
 nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
   
   if (inherits(inherit, "nn_module"))
