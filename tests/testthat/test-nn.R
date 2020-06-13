@@ -37,3 +37,17 @@ test_that("nn_modules can have child modules", {
   expect_equal(output$dim(), 2)
   
 })
+
+test_that("nn_sequential", {
+  model <- nn_sequential(
+    nn_linear(10, 100),
+    nn_relu(),
+    nn_linear(100, 1)
+  )
+  
+  input <- torch_randn(1000, 10)
+  output <- model(input)
+  
+  expect_tensor(output)
+  expect_equal(output$shape, c(1000, 1))
+})
