@@ -96,17 +96,21 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
       ...
     )
   )
+  
+  classes <- c(classname, "nn_module")
+  
   fun <- rlang::new_function(
     args = rlang::fn_fmls(Module$new), 
     body = rlang::expr({
       instance <- Module$new(!!!rlang::fn_fmls_syms(Module$new))
       f <- instance$forward
-      attr(f, "class") <- "nn_module"
+      
+      attr(f, "class") <- classes
       attr(f, "module") <- instance
       f
     })
   )
-  attr(fun, "class") <- "nn_module"
+  attr(fun, "class") <- classes
   attr(fun, "module") <- Module
   fun
 }
@@ -222,3 +226,19 @@ nn_sequential <- function(... , name = NULL) {
   module(...)
 }
 
+nn_module_list <- nn_module(
+  "nn_module_list",
+  initialize = function(modules) {
+    for (i in seq_along(modules))
+      self$add_module(i, modules[[i]])
+  },
+  insert = function(index, module) {
+    private$modules_ <- append(private$modules_, list(module), after = index - 1)
+  },
+  append = function(module) {
+    private$modules_ <- append(private$modules_, list(module))
+  },
+  extend  = function(modules) {
+    private$modules_ <- append(private$modules_, modules)
+  }
+)
