@@ -6861,6 +6861,34 @@ cpp_generator_set_current_seed <- function(generator, seed) {
     invisible(.Call('_torch_cpp_generator_set_current_seed', PACKAGE = 'torchpkg', generator, seed))
 }
 
+cpp_torch_tensor_index <- function(self, index) {
+    .Call('_torch_cpp_torch_tensor_index', PACKAGE = 'torchpkg', self, index)
+}
+
+cpp_torch_tensor_index_new <- function() {
+    .Call('_torch_cpp_torch_tensor_index_new', PACKAGE = 'torchpkg')
+}
+
+cpp_torch_tensor_index_append_tensor <- function(self, x) {
+    invisible(.Call('_torch_cpp_torch_tensor_index_append_tensor', PACKAGE = 'torchpkg', self, x))
+}
+
+cpp_torch_tensor_index_append_bool <- function(self, x) {
+    invisible(.Call('_torch_cpp_torch_tensor_index_append_bool', PACKAGE = 'torchpkg', self, x))
+}
+
+cpp_torch_tensor_index_append_ellipsis <- function(self) {
+    invisible(.Call('_torch_cpp_torch_tensor_index_append_ellipsis', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_tensor_index_append_none <- function(self) {
+    invisible(.Call('_torch_cpp_torch_tensor_index_append_none', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_tensor_index_append_slice <- function(self, x) {
+    invisible(.Call('_torch_cpp_torch_tensor_index_append_slice', PACKAGE = 'torchpkg', self, x))
+}
+
 cpp_lantern_init <- function(path) {
     invisible(.Call('_torch_cpp_lantern_init', PACKAGE = 'torchpkg', path))
 }

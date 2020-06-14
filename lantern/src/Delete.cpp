@@ -103,3 +103,8 @@ void lantern_variable_list_delete(void *x)
 {
   lantern_delete<LanternObject<torch::autograd::variable_list>>(x);
 }
+
+void lantern_TensorIndex_delete (void * x) 
+{
+  lantern_delete<LanternObject<std::vector<torch::indexing::TensorIndex>>>(x);
+}

@@ -13359,7 +13359,7 @@ fun_name = 'selu',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
-return_types = return_types,
+return_types = retu.rn_types,
 fun_type = 'namespace'
 )
 }

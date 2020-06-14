@@ -170,7 +170,15 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_autograd_grad)(void *outputs, void *inputs, void *grad_outputs, bool retain_graph, bool create_graph, bool allow_unused);
   LANTERN_API void *(LANTERN_PTR lantern_Layout_strided)();
   LANTERN_API void *(LANTERN_PTR lantern_Layout_sparse)();
-  LANTERN_API const char * (LANTERN_PTR lantern_Layout_string)(void* x);
+  LANTERN_API const char *(LANTERN_PTR lantern_Layout_string)(void *x);
+  LANTERN_API void *(LANTERN_PTR lantern_TensorIndex_new)();
+  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_tensor)(void *self, void *x);
+  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_ellipsis)(void *self);
+  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_slice)(void *self, void *x);
+  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_none)(void *self);
+  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_bool)(void *self, bool x);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_index)(void *self, void *index);
+  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_delete)(void *x);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2149,6 +2157,14 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Layout_strided);
   LOAD_SYMBOL(lantern_Layout_sparse);
   LOAD_SYMBOL(lantern_Layout_string);
+  LOAD_SYMBOL(lantern_TensorIndex_new);
+  LOAD_SYMBOL(lantern_TensorIndex_append_tensor);
+  LOAD_SYMBOL(lantern_TensorIndex_append_ellipsis);
+  LOAD_SYMBOL(lantern_TensorIndex_append_slice);
+  LOAD_SYMBOL(lantern_TensorIndex_append_none);
+  LOAD_SYMBOL(lantern_TensorIndex_append_bool);
+  LOAD_SYMBOL(lantern_Tensor_index);
+  LOAD_SYMBOL(lantern_TensorIndex_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
