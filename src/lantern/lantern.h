@@ -177,8 +177,13 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_slice)(void *self, void *x);
   LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_none)(void *self);
   LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_bool)(void *self, bool x);
+  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_int64)(void *self, int64_t x);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_index)(void *self, void *index);
   LANTERN_API void(LANTERN_PTR lantern_TensorIndex_delete)(void *x);
+  LANTERN_API void *(LANTERN_PTR lantern_Slice)(void *start, void *end, void *step);
+  LANTERN_API void *(LANTERN_PTR lantern_optional_int64_t)(int64_t x, bool is_null);
+  LANTERN_API void(LANTERN_PTR lantern_Slice_delete)(void *x);
+  LANTERN_API void(LANTERN_PTR lantern_optional_int64_t_delete)(void *x);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2163,8 +2168,13 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_TensorIndex_append_slice);
   LOAD_SYMBOL(lantern_TensorIndex_append_none);
   LOAD_SYMBOL(lantern_TensorIndex_append_bool);
+  LOAD_SYMBOL(lantern_TensorIndex_append_int64);
   LOAD_SYMBOL(lantern_Tensor_index);
   LOAD_SYMBOL(lantern_TensorIndex_delete);
+  LOAD_SYMBOL(lantern_Slice);
+  LOAD_SYMBOL(lantern_optional_int64_t);
+  LOAD_SYMBOL(lantern_Slice_delete);
+  LOAD_SYMBOL(lantern_optional_int64_t_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)

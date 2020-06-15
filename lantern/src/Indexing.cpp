@@ -42,6 +42,20 @@ void lantern_TensorIndex_append_bool(void *self, bool x)
     reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().push_back(x);
 }
 
+void lantern_TensorIndex_append_int64(void *self, int64_t x)
+{
+    reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().push_back(x);
+}
+
+void *lantern_Slice(void *start, void *end, void *step)
+{
+    auto out = torch::indexing::Slice(
+        reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(start)->get(),
+        reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(end)->get(),
+        reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(step)->get());
+    return (void *)new LanternObject<Slice>(out);
+}
+
 void *lantern_Tensor_index(void *self, void *index)
 {
     torch::Tensor ten = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
