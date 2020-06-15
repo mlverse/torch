@@ -1,3 +1,4 @@
+Sys.setenv(KMP_DUPLICATE_LIB_OK=TRUE)
 #torch_zeros(1, names="hello") # trigger warning about named tensors
 
 skip_if_not_test_examples <- function() {
