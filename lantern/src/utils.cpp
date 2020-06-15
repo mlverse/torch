@@ -50,7 +50,7 @@ void *lantern_optional_int64_t(int64_t x, bool is_null)
 {
   c10::optional<int64_t> out;
   if (is_null)
-    out = NULL;
+    out = c10::nullopt;
   else
     out = x;
 

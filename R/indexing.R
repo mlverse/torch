@@ -1,36 +1,6 @@
-Slice <- function(start = NULL, end = NULL, step = NULL) {
+Slice <- function(start = NULL, end = NULL, step = 1) {
   cpp_torch_slice(cpp_optional_int64_t(start), cpp_optional_int64_t(end), 
                   cpp_optional_int64_t(step))
-}
-
-.torch_index <- function(x, slices) {
-  
-  x <- torch_randn(10, 10)
-  slices <- c(0, TRUE)
-  
-  index <- cpp_torch_tensor_index_new()
-  for (s in slices) {
-    if (rlang::is_scalar_integerish(s))
-      cpp_torch_tensor_index_append_int64(index, s)
-    else if (is.na(el))
-      cpp_torch_tensor_index_append_none(index)
-    else if (is.logical(el))
-      cpp_torch_tensor_index_append_bool(index, el)
-  }
-  
-  p <- cpp_torch_tensor_index(x$ptr, index)
-  Tensor$new(ptr = p)
-}
-
-slice_dim <- function(x, dim, s) {
-  if (length(s) == 1 && all(is.na(s)))
-    return(x)
-  
-  if (length(s) == 1)
-    return(torch_select(x, dim = dim, index = ifelse(s > 0, s - 1, s)))
-  
-  if (inherits(s, "slice"))
-    return(torch_slice(x, dim, s$start, s$end, s$step))
 }
 
 .d <- list(
@@ -77,20 +47,36 @@ slice_dim <- function(x, dim, s) {
     }
   }
   
+  if (length(slices) == (length(d) + 1) && inherits(slices[[length(slices)]], "fill"))
+    slices <- slices[1:(length(slices) -1)]
+  
   if (length(slices) != length(d))
     stop("incorrect number of dimensions. Specified " , length(slices), " should be ",
          length(d), ".")
   
   index <- cpp_torch_tensor_index_new()
-  for (el in slices) {
-    if (rlang::is_scalar_integerish(el))
-      cpp_torch_tensor_index_append_int64(index, el)
+  for (s in slices) {
+    if (rlang::is_scalar_integerish(s))
+      cpp_torch_tensor_index_append_int64(index, ifelse(s > 0, s - 1, s))
+    else if (rlang::is_scalar_atomic(s) && is.na(s))
+      cpp_torch_tensor_index_append_slice(index, Slice())
+    else if (is.logical(s))
+      cpp_torch_tensor_index_append_bool(index, s)
+    else if (inherits(s, "slice"))
+      cpp_torch_tensor_index_append_slice(index, Slice(s$start, s$end, s$step))
+    else if (rlang::is_integerish(s)) {
+      
+      if (all(s > 0)) {
+        s <- s - 1
+      } else if (all(s < 0)) {
+        # nothing to do
+      } else {
+        value_error("All indices must be positive/or negative, not mixed.")
+      }
+      
+      cpp_torch_tensor_index_append_tensor(index, torch_tensor(s, dtype = torch_long())$ptr)
+    }
   }
   
-  return(Tensor$new(ptr = cpp_torch_tensor_index(x$ptr, index)))
-  
-  for (dim in seq_along(slices)) {
-    x <- slice_dim(x, dim - 1 - (length(d) - length(dim(x))), slices[[dim]])
-  }
-  x
+  Tensor$new(ptr = cpp_torch_tensor_index(x$ptr, index))
 }

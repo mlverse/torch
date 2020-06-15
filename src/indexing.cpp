@@ -1,6 +1,6 @@
 #include "torch_types.h"
 #include "utils.hpp" 
-
+ 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor_index(Rcpp::XPtr<XPtrTorchTensor> self, 
                                                    Rcpp::XPtr<XPtrTorchTensorIndex> index)

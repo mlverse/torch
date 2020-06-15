@@ -49,10 +49,25 @@ void lantern_TensorIndex_append_int64(void *self, int64_t x)
 
 void *lantern_Slice(void *start, void *end, void *step)
 {
-    auto out = torch::indexing::Slice(
-        reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(start)->get(),
-        reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(end)->get(),
-        reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(step)->get());
+    auto start_ = reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(start)->get();
+    if (start_ == c10::nullopt)
+    {
+        start_ = None;
+    }
+
+    auto end_ = reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(end)->get();
+    if (end_ == c10::nullopt)
+    {
+        end_ = None;
+    }
+
+    auto step_ = reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(step)->get();
+    if (step_ == c10::nullopt)
+    {
+        step_ = None;
+    }
+
+    auto out = torch::indexing::Slice(start_, end_, step_);
     return (void *)new LanternObject<Slice>(out);
 }
 
