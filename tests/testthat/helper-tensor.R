@@ -27,6 +27,11 @@ expect_equal_to_r <- function(object, expected) {
   expect_equal(as_array(object), expected)
 } 
 
+expect_tensor_shape <- function(object, expected) {
+  expect_tensor(object)
+  expect_equal(object$shape, expected)
+}
+
 expect_undefined_tensor <- function(object) {
   # TODO
 }
