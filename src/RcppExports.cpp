@@ -22940,6 +22940,105 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_torch_tensor_index
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor_index(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensorIndex> index);
+RcppExport SEXP _torch_cpp_torch_tensor_index(SEXP selfSEXP, SEXP indexSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorIndex> >::type index(indexSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor_index(self, index));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_tensor_index_new
+Rcpp::XPtr<XPtrTorchTensorIndex> cpp_torch_tensor_index_new();
+RcppExport SEXP _torch_cpp_torch_tensor_index_new() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor_index_new());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_tensor_index_append_tensor
+void cpp_torch_tensor_index_append_tensor(Rcpp::XPtr<XPtrTorchTensorIndex> self, Rcpp::XPtr<XPtrTorchTensor> x);
+RcppExport SEXP _torch_cpp_torch_tensor_index_append_tensor(SEXP selfSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorIndex> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
+    cpp_torch_tensor_index_append_tensor(self, x);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_tensor_index_append_bool
+void cpp_torch_tensor_index_append_bool(Rcpp::XPtr<XPtrTorchTensorIndex> self, bool x);
+RcppExport SEXP _torch_cpp_torch_tensor_index_append_bool(SEXP selfSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorIndex> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< bool >::type x(xSEXP);
+    cpp_torch_tensor_index_append_bool(self, x);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_tensor_index_append_int64
+void cpp_torch_tensor_index_append_int64(Rcpp::XPtr<XPtrTorchTensorIndex> self, int64_t x);
+RcppExport SEXP _torch_cpp_torch_tensor_index_append_int64(SEXP selfSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorIndex> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< int64_t >::type x(xSEXP);
+    cpp_torch_tensor_index_append_int64(self, x);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_tensor_index_append_ellipsis
+void cpp_torch_tensor_index_append_ellipsis(Rcpp::XPtr<XPtrTorchTensorIndex> self);
+RcppExport SEXP _torch_cpp_torch_tensor_index_append_ellipsis(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorIndex> >::type self(selfSEXP);
+    cpp_torch_tensor_index_append_ellipsis(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_tensor_index_append_none
+void cpp_torch_tensor_index_append_none(Rcpp::XPtr<XPtrTorchTensorIndex> self);
+RcppExport SEXP _torch_cpp_torch_tensor_index_append_none(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorIndex> >::type self(selfSEXP);
+    cpp_torch_tensor_index_append_none(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_tensor_index_append_slice
+void cpp_torch_tensor_index_append_slice(Rcpp::XPtr<XPtrTorchTensorIndex> self, Rcpp::XPtr<XPtrTorch> x);
+RcppExport SEXP _torch_cpp_torch_tensor_index_append_slice(SEXP selfSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorIndex> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type x(xSEXP);
+    cpp_torch_tensor_index_append_slice(self, x);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_slice
+Rcpp::XPtr<XPtrTorchSlice> cpp_torch_slice(Rcpp::XPtr<XPtrTorchoptional_int64_t> start, Rcpp::XPtr<XPtrTorchoptional_int64_t> end, Rcpp::XPtr<XPtrTorchoptional_int64_t> step);
+RcppExport SEXP _torch_cpp_torch_slice(SEXP startSEXP, SEXP endSEXP, SEXP stepSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchoptional_int64_t> >::type start(startSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchoptional_int64_t> >::type end(endSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchoptional_int64_t> >::type step(stepSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_slice(start, end, step));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_lantern_init
 void cpp_lantern_init(std::string path);
 RcppExport SEXP _torch_cpp_lantern_init(SEXP pathSEXP) {
@@ -23266,6 +23365,17 @@ BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     rcpp_result_gen = Rcpp::wrap(cpp_nullopt());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_optional_int64_t
+Rcpp::XPtr<XPtrTorchoptional_int64_t> cpp_optional_int64_t(Rcpp::Nullable<int64_t> x);
+RcppExport SEXP _torch_cpp_optional_int64_t(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::Nullable<int64_t> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_optional_int64_t(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -25018,6 +25128,15 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_generator", (DL_FUNC) &_torch_cpp_torch_generator, 0},
     {"_torch_cpp_generator_current_seed", (DL_FUNC) &_torch_cpp_generator_current_seed, 1},
     {"_torch_cpp_generator_set_current_seed", (DL_FUNC) &_torch_cpp_generator_set_current_seed, 2},
+    {"_torch_cpp_torch_tensor_index", (DL_FUNC) &_torch_cpp_torch_tensor_index, 2},
+    {"_torch_cpp_torch_tensor_index_new", (DL_FUNC) &_torch_cpp_torch_tensor_index_new, 0},
+    {"_torch_cpp_torch_tensor_index_append_tensor", (DL_FUNC) &_torch_cpp_torch_tensor_index_append_tensor, 2},
+    {"_torch_cpp_torch_tensor_index_append_bool", (DL_FUNC) &_torch_cpp_torch_tensor_index_append_bool, 2},
+    {"_torch_cpp_torch_tensor_index_append_int64", (DL_FUNC) &_torch_cpp_torch_tensor_index_append_int64, 2},
+    {"_torch_cpp_torch_tensor_index_append_ellipsis", (DL_FUNC) &_torch_cpp_torch_tensor_index_append_ellipsis, 1},
+    {"_torch_cpp_torch_tensor_index_append_none", (DL_FUNC) &_torch_cpp_torch_tensor_index_append_none, 1},
+    {"_torch_cpp_torch_tensor_index_append_slice", (DL_FUNC) &_torch_cpp_torch_tensor_index_append_slice, 2},
+    {"_torch_cpp_torch_slice", (DL_FUNC) &_torch_cpp_torch_slice, 3},
     {"_torch_cpp_lantern_init", (DL_FUNC) &_torch_cpp_lantern_init, 1},
     {"_torch_cpp_lantern_test", (DL_FUNC) &_torch_cpp_lantern_test, 0},
     {"_torch_cpp_layout_to_string", (DL_FUNC) &_torch_cpp_layout_to_string, 1},
@@ -25049,6 +25168,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_tensor_options_print", (DL_FUNC) &_torch_cpp_torch_tensor_options_print, 1},
     {"_torch_cpp_nullptr", (DL_FUNC) &_torch_cpp_nullptr, 0},
     {"_torch_cpp_nullopt", (DL_FUNC) &_torch_cpp_nullopt, 0},
+    {"_torch_cpp_optional_int64_t", (DL_FUNC) &_torch_cpp_optional_int64_t, 1},
     {"_torch_cpp_tensor_undefined", (DL_FUNC) &_torch_cpp_tensor_undefined, 0},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},

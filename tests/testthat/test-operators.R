@@ -92,32 +92,3 @@ test_that("length works", {
   x <- torch_randn(c(2,2))
   expect_equal(length(x), 4)
 })
-
-test_that("[ works", {
-  x <- torch_randn(c(10,10,10))
-  expect_equal(as_array(x[1,1,1]), as_array(x)[1,1,1])
-  expect_equal(as_array(x[1,,]), as_array(x)[1,,])  
-  expect_equal(as_array(x[1:5,,]), as_array(x)[1:5,,])
-  expect_equal(as_array(x[1:10:2,,]), as_array(x)[seq(1,10, by = 2),,])
-  
-  x <- torch_tensor(0:9)
-  expect_equal(as_array(x[-1]), 9)
-  expect_equal(as_array(x[-2:10]), c(8,9))
-  expect_equal(as_array(x[2:N]), c(1:9))
-  
-  x <- torch_randn(c(10,10,10,10))
-  expect_equal(as_array(x[1,..]), as_array(x)[1,,,])
-  expect_equal(as_array(x[1,1,..]), as_array(x)[1,1,,])
-  expect_equal(as_array(x[..,1]), as_array(x)[,,,1])
-  expect_equal(as_array(x[..,1,1]), as_array(x)[,,1,1])
-  
-  expect_error(x[1,], "incorrect number of dimensions")
-  expect_error(x[1,1,1,1,1], "incorrect number of dimensions")
-  expect_error(x[1,1,1,1,..], "incorrect number of dimensions")
-  
-  x <- torch_randn(c(10,10,10,10))
-  i <- c(1,2,3,4)
-  expect_equal(as_array(x[!!!i]), as_array(x)[1,2,3,4])
-  i <- c(1,2)
-  expect_equal(as_array(x[!!!i,3,4]), as_array(x)[1,2,3,4])
-})

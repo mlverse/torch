@@ -154,6 +154,27 @@ public:
   }
 };
 
+class XPtrTorchTensorIndex : public XPtrTorch {
+public:
+  XPtrTorchTensorIndex (void* x) : XPtrTorch{NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_TensorIndex_delete));
+  }
+};
+
+class XPtrTorchoptional_int64_t : public XPtrTorch {
+public:
+  XPtrTorchoptional_int64_t (void* x) : XPtrTorch{NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_optional_int64_t_delete));
+  }
+};
+
+class XPtrTorchSlice : public XPtrTorch {
+public:
+  XPtrTorchSlice (void* x) : XPtrTorch{NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_Slice_delete));
+  }
+};
+
 template<class T>
 class nullable {
 public:
