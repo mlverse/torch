@@ -184,6 +184,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_optional_int64_t)(int64_t x, bool is_null);
   LANTERN_API void(LANTERN_PTR lantern_Slice_delete)(void *x);
   LANTERN_API void(LANTERN_PTR lantern_optional_int64_t_delete)(void *x);
+  LANTERN_API void *(LANTERN_PTR lantern_Tensor_device)(void *self);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2175,6 +2176,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_optional_int64_t);
   LOAD_SYMBOL(lantern_Slice_delete);
   LOAD_SYMBOL(lantern_optional_int64_t_delete);
+  LOAD_SYMBOL(lantern_Tensor_device);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)

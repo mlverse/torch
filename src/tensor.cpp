@@ -164,3 +164,9 @@ int cpp_tensor_numel (Rcpp::XPtr<XPtrTorchTensor> x) {
   return lantern_Tensor_numel(x->get());
 }
 
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchDevice> cpp_tensor_device (Rcpp::XPtr<XPtrTorchTensor> self) {
+  XPtrTorchDevice out = lantern_Tensor_device(self->get());
+  return make_xptr<XPtrTorchDevice>(out);
+}
+

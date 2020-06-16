@@ -122,3 +122,10 @@ void *lantern_Tensor_dtype(void *self)
   torch::Dtype dtype = c10::typeMetaToScalarType(x.dtype());
   return (void *)new LanternObject<torch::Dtype>(dtype);
 }
+
+void *lantern_Tensor_device(void *self)
+{
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Device device = x.device();
+  return (void *)new LanternPtr<torch::Device>(device);
+}

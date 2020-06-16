@@ -6997,6 +6997,10 @@ cpp_tensor_numel <- function(x) {
     .Call('_torch_cpp_tensor_numel', PACKAGE = 'torchpkg', x)
 }
 
+cpp_tensor_device <- function(self) {
+    .Call('_torch_cpp_tensor_device', PACKAGE = 'torchpkg', self)
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torchpkg', x)
 }

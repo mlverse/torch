@@ -48,6 +48,9 @@ Tensor <- R7Class(
     dtype = function() {
       torch_dtype$new(ptr = cpp_torch_tensor_dtype(self$ptr))
     },
+    device = function() {
+      Device$new(ptr = cpp_tensor_device(self$ptr))
+    },
     dim = function() {
       length(self$size())
     },
