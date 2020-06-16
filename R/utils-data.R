@@ -11,6 +11,10 @@ Dataset <- R6::R6Class(
   )
 )
 
+is_map_dataset <- function(x) {
+  inherits(x, "utils_dataset")
+}
+
 #' An abstract class representing a `Dataset`.
 #' 
 #' All datasets that represent a map from keys to data samples should subclass
@@ -41,7 +45,12 @@ utils_dataset <- function(..., name = NULL) {
 
 #' @export
 `[.utils_dataset` <- function(x, y) {
-  x$get_item(y)
+  x$.getitem(y)
+}
+
+#' @export
+length.utils_dataset <- function(x) {
+  x$.length()
 }
 
 TensorDataset <- utils_dataset(
@@ -55,16 +64,18 @@ TensorDataset <- utils_dataset(
     
     self$tensors <- tensors
   },
-  get_item = function(index) {
+  .getitem = function(index) {
+    
+    if (is.list(index)) {
+      index <- unlist(index)
+    }
+    
     lapply(self$tensors, function(x) {
-      if (x$dim() == 1)
-        x[index]
-      else
         x[index, ..]
     })
   },
-  length = function() {
-    self$tensors[[0]]$shape[1]
+  .length = function() {
+    self$tensors[[1]]$shape[1]
   }
 )
 

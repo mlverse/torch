@@ -5,10 +5,15 @@ as_iterator <- function(x) {
     i <<- i + 1
     
     if (i > n)
-      return(NULL)
+      stop_iteration_error()
     
     x[[i]]
   }
+}
+
+#' @export
+length.utils_sampler <- function(x) {
+  x$.length()
 }
 
 Sampler <- R6::R6Class(
@@ -18,7 +23,7 @@ Sampler <- R6::R6Class(
     initialize = function(data_source) {
       
     },
-    iter = function() {
+    .iter = function() {
       not_implemented_error()
     }
   )
@@ -32,20 +37,20 @@ SequentialSampler <- R6::R6Class(
     initialize = function(data_source) {
       self$data_source <- data_source
     },
-    iter = function() {
+    .iter = function() {
       i <- 0
       n <- length(self$data_source)
       function() {
         i <<- i + 1
         
         if (i > n)
-          return(NULL)
+          stop_iteration_error()
         
         i
       }
     },
-    lenght = function() {
-      lenght(self$data_source)
+    .length = function() {
+      length(self$data_source)
     }
   )
 )
@@ -58,10 +63,10 @@ RandomSampler <- R6::R6Class(
     initialize = function(data_source, replacement=FALSE, num_samples=NULL, generator = NULL) {
       self$data_source <- data_source
       self$replacement <- replacement
-      self$num_samples_ <- num_samples
+      self$.num_samples <- num_samples
       self$generator <- generator
     },
-    iter = function() {
+    .iter = function() {
       n <- length(self$data_source)
       if (self$replacement) {
         rand_tensor <- torch_randint(low = 1, high = n, size = self$num_samples,
@@ -72,7 +77,7 @@ RandomSampler <- R6::R6Class(
       rand_tensor <- as_array(rand_tensor)
       as_iterator(rand_tensor)
     },
-    length = function() {
+    .length = function() {
       self$num_samples
     }
   ),
@@ -81,7 +86,7 @@ RandomSampler <- R6::R6Class(
       if (is.null(self$num_samples_))
         length(self$data_source)
       else
-        self$num_samples_
+        self$.num_samples
     }
   )
 )
@@ -96,17 +101,25 @@ BatchSampler <- R6::R6Class(
       self$batch_size <- batch_size
       self$drop_last <- drop_last
     },
-    iter = function() {
-      s <- sampler$iter()
+    .iter = function() {
+      s <- self$sampler$.iter()
       function() {
         batch <- list()
         for (i in seq_len(self$batch_size)) {
-          i <- s()
           
-          if (is.null(i))
+          er <- FALSE
+          
+          tryCatch(
+            obs <- s(),
+            stop_iteration_error = function(err) {
+              er <<- TRUE
+            }
+          )
+          
+          if (er)
             break
           
-          batch <- append(batch, i)
+          batch <- append(batch, obs)
         }
         
         if (length(batch) == self$batch_size)
@@ -115,14 +128,14 @@ BatchSampler <- R6::R6Class(
         if (length(batch) > 0 && !self$drop_last)
           return(batch)
           
-        NULL
+        stop_iteration_error()
       }
     },
-    length = function() {
+    .length = function() {
       if (self$drop_last) {
-        lenght(self$sampler) %/% self$batch_size
+        length(self$sampler) %/% self$batch_size
       } else {
-        (lenght(self$sampler) + self$batch_size - 1) %/% self$batch_size
+        (length(self$sampler) + self$batch_size - 1) %/% self$batch_size
       }
     }
   )

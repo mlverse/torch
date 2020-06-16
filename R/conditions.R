@@ -9,3 +9,7 @@ not_implemented_error <- function(...) {
 warn <- function(...) {
   rlang::warn(glue::glue(...), class = "warning")
 }
+
+stop_iteration_error <- function(...) {
+  rlang::abort(glue::glue(...), class = "stop_iteration_error")
+}
