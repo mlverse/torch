@@ -13,6 +13,9 @@ test_that("Can create a tensor", {
   
   x <- torch_tensor(1, dtype = torch_double())
   expect_true(x$dtype() == torch_double())
+  
+  device <- x$device()
+  expect_equal(device$type, "cpu")
 })
 
 test_that("Numeric tensors", {
