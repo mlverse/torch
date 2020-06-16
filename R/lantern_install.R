@@ -40,7 +40,11 @@ lantern_installed <- function() {
 
 lib_installed <- function(library_name, install_path) {
   x <- list.files(install_path)
-  grepl(library_name, x)
+  
+  if (library_name == "liblantern")
+    any(grepl("lantern", x))
+  else if (library_name == "libtorch")
+    any(grepl("torch", x))
 }
 
 lantern_install_lib <- function(library_name, library_url, install_path, source_path, filter) {
@@ -78,7 +82,7 @@ lantern_install_libs <- function(version, type, install_path, check_installed = 
   for (library_name in names(install_info)) {
     
     if (check_installed) {
-      if (any(lib_installed(library_name, install_path))) {
+      if (lib_installed(library_name, install_path)) {
         message("skipping installation of ", library_name, " since it's already installed.")
         next
       }
