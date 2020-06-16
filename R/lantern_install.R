@@ -102,7 +102,7 @@ lantern_install_libs <- function(version, type, install_path, check_installed = 
 #' @export
 
 lantern_install <- function(version = "1.5.0", type = "cpu", reinstall = FALSE,
-                            check_installed = FALSE) {
+                            check_installed = FALSE, install_path = NULL) {
   if (reinstall) {
     unlink(lantern_install_path(), recursive = TRUE)
   }
@@ -111,7 +111,9 @@ lantern_install <- function(version = "1.5.0", type = "cpu", reinstall = FALSE,
     stop("Lantern is already installed.")
   }
   
-  install_path <- lantern_install_path()
+  if (is.null(install_path))
+    install_path <- lantern_install_path()
+  
   dir.create(install_path, showWarnings = FALSE)
   
   lantern_install_libs(version, type, install_path, check_installed)
