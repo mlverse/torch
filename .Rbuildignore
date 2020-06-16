@@ -9,3 +9,4 @@ tools/torchgen/.Rbuildignore
 ^docs$
 ^pkgdown$
 ^\.github$
+^lantern$
