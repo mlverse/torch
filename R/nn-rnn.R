@@ -132,7 +132,7 @@ nn_rnn_base <- nn_module(
     if (is.null(hx)) {
       num_directions <- ifelse(self$bidirectional, 2, 1)
       hx <- torch_zeros(self$num_layers * num_directions,
-                        max_batch_size, self.hidden_size,
+                        max_batch_size, self$hidden_size,
                         dtype=input$dtype(), device=input$device())
       
     } else {
