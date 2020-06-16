@@ -1,6 +1,10 @@
-lantern_sync <- function(sync_lib = FALSE) {
+lantern_sync <- function(sync_lib = FALSE, inst = FALSE) {
   if (!dir.exists("src/lantern")) dir.create("src/lantern")
-  file.copy(dir("lantern/include/lantern/", full.names = TRUE), "src/lantern/", overwrite = TRUE)
+  
+  if (!all(tools::md5sum(dir("lantern/include/lantern/", full.names = TRUE)) %in% 
+          tools::md5sum(dir("src/lantern/", full.names = TRUE)))) {
+    file.copy(dir("lantern/include/lantern/", full.names = TRUE), "src/lantern/", overwrite = TRUE)  
+  }
   
   if (sync_lib) {
     lib_dest <- file.path(system.file("", package = "torch"), "deps")

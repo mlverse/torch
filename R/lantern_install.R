@@ -1,7 +1,7 @@
 branch <- "master"
 
 install_config <- list(
-  "1.4.0" = list(
+  "1.5.0" = list(
     "cpu" = list(
       "darwin" = list(
         "libtorch" = list(
@@ -38,6 +38,11 @@ lantern_installed <- function() {
   dir.exists(lantern_install_path())
 }
 
+lib_installed <- function(library_name, install_path) {
+  x <- list.files(install_path)
+  grepl(library_name, x)
+}
+
 lantern_install_lib <- function(library_name, library_url, install_path, source_path, filter) {
   library_extension <- paste0(".", tools::file_ext(library_url))
   temp_file <- tempfile(fileext = library_extension)
@@ -55,7 +60,7 @@ lantern_install_lib <- function(library_name, library_url, install_path, source_
   file.copy(source_files, install_path, recursive = TRUE)
 }
 
-lantern_install_libs <- function(version, type, install_path) {
+lantern_install_libs <- function(version, type, install_path, check_installed = FALSE) {
   current_os <- tolower(Sys.info()[["sysname"]])
   
   if (!version %in% names(install_config))
@@ -71,6 +76,14 @@ lantern_install_libs <- function(version, type, install_path) {
   install_info <- install_config[[version]][[type]][[current_os]]
   
   for (library_name in names(install_info)) {
+    
+    if (check_installed) {
+      if (any(lib_installed(library_name, install_path))) {
+        message("skipping installation of ", library_name, " since it's already installed.")
+        next
+      }
+    }
+    
     library_info <- install_info[[library_name]]
     
     if (!is.list(library_info)) library_info <- list(url = library_info, filter = "", path = "")
@@ -88,17 +101,18 @@ lantern_install_libs <- function(version, type, install_path) {
 
 #' @export
 
-lantern_install <- function(version = "1.4.0", type = "cpu", reinstall = FALSE) {
+lantern_install <- function(version = "1.5.0", type = "cpu", reinstall = FALSE,
+                            check_installed = FALSE) {
   if (reinstall) {
     unlink(lantern_install_path(), recursive = TRUE)
   }
   
-  if (lantern_installed()) {
+  if (lantern_installed() && !check_installed) {
     stop("Lantern is already installed.")
   }
   
   install_path <- lantern_install_path()
-  dir.create(install_path)
+  dir.create(install_path, showWarnings = FALSE)
   
-  lantern_install_libs(version, type, install_path)
+  lantern_install_libs(version, type, install_path, check_installed)
 }

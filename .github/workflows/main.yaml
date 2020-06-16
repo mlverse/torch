@@ -37,6 +37,9 @@ jobs:
           sudo -s eval "$sysreqs"
       - name: Install dependencies
         run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+      - name: Build lantern and get libtorch
+        run: | 
+          Rscript tools/buildlantern.R
       - name: Check
         run:  |
           print(Sys.info())
