@@ -70,6 +70,7 @@ add_library(lantern SHARED
     src/Function.cpp
     src/Layout.cpp
     src/Indexing.cpp
+    src/Cuda.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
