@@ -7,21 +7,21 @@ project(lantern)
 ############################################################
 
 function(download_file url filename)
-    #if(NOT EXISTS ${filename})
+    if(NOT EXISTS ${filename})
         message("-- Downloading ${filename}")
         file(DOWNLOAD  ${url} ${filename}
              TIMEOUT 300
              TLS_VERIFY ON
         )
-    #endif()
+    endif()
 endfunction()
 
-function(retrieve_lib filename)
-    download_file("https://download.pytorch.org/libtorch/cpu/${filename}" "${CMAKE_CURRENT_BINARY_DIR}/${filename}")
+function(retrieve_lib url)
+    download_file("${url}" "${CMAKE_CURRENT_BINARY_DIR}/libtorch.zip")
 
     if(NOT EXISTS "libtorch")
-        message("-- Extracting ${filename}")
-        execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf ${filename}
+        message("-- Extracting libtorch")
+        execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf libtorch.zip
                         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
     endif()
 endfunction()
@@ -31,13 +31,25 @@ endfunction()
 ############################################################
 
 if(APPLE)
-    retrieve_lib("libtorch-macos-1.5.0.zip")
-else()
-    if(WIN32)
-        retrieve_lib("libtorch-win-shared-with-deps-1.5.0.zip")
+    if(DEFINED ENV{CUDA})
+        message(FATAL_ERROR, "CUDA not supported on macos")
     else()
-        retrieve_lib("libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcpu.zip")
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.5.0.zip")
     endif()
+elseif(WIN32)
+    if(DEFINED ENV{CUDA})
+        message(FATAL_ERROR, "CUDA not supported on Windows")
+    else()
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.5.0.zip")
+    endif()
+elseif(UNIX)
+    if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.1')
+        retrieve_lib("https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu101.zip")
+    else()
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcpu.zip")
+    endif()
+else()
+    message(FATAL_ERROR, "OS not supported.")
 endif()
 
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_CURRENT_BINARY_DIR}/libtorch/share/cmake/Torch")
