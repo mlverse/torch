@@ -16,8 +16,3 @@ jobs:
         run: docker build -f docker/Dockerfile -t testtorch .
       - name: Run checks
         run: docker run --rm --gpus all testtorch sh torch/tools/check.sh
-      - name: Cleanup machine
-        if: always()
-        run: |
-          cd ../..
-          rm -r torch
