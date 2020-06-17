@@ -340,7 +340,7 @@ nnf_margin_ranking_loss <- function(input1, input2, target, margin = 0,
 #'   does not contribute to the input gradient. 
 #'
 #' @export
-nnf_nll_loss <- function(input, target, weight = NULL, ignore_index, 
+nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100, 
                          reduction = "mean") {
   
   dim <- input$dim()
