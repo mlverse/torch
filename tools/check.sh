@@ -1,11 +1,10 @@
 cd torch
 
 # install dependencies --------
-Rscript -e "install.packages(c('remotes'))" -e "remotes::install_github('r-hub/sysreqs')"
-sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
--s eval "$sysreqs"
+apt-get install -y libcurl4-openssl-dev libssl-dev
 
-Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+Rscript -e "install.packages(c('remotes', 'rcmdcheck'))"
+Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
 # build lantern and torch -----
 Rscript tools/buildlantern.R
