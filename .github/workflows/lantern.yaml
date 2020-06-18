@@ -70,12 +70,17 @@ jobs:
         with:
           name: ${{runner.os}}
           path: ${{runner.workspace}}/artifacts
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
       - name: upload
+        if: github.ref == 'refs/heads/master'
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{runner.workspace}}/artifacts/${{matrix.artifacts}}
-          tag: lantern-${{  github.event.release.tag_name  }}
+          tag: lantern-${{ steps.extract_branch.outputs.branch }}
           asset_name: ${{ matrix.os }}-cpu
           overwrite: true
   autogen:
