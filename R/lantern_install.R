@@ -9,7 +9,7 @@ install_config <- list(
           path = "libtorch/lib",
           filter = ".dylib"
         ),
-        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/macOS.zip", branch)
+        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)
       ),
       "windows" = list(
         "libtorch" = list(
@@ -17,14 +17,14 @@ install_config <- list(
           path = "libtorch/lib",
           filter = ".dll"
         ),
-        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/Windows.zip", branch)
+        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/Windows-cpu.zip", branch)
       ),
       "linux" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcpu.zip",
           path = "libtorch/lib"
         ),
-        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/Linux.zip", branch)
+        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/Linux-cpu.zip", branch)
       )
     ),
     "10.1" = list(
