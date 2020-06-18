@@ -93,6 +93,18 @@ cpp_autograd_grad <- function(outputs, inputs, grad_outputs, retain_graph, creat
     .Call('_torch_cpp_autograd_grad', PACKAGE = 'torchpkg', outputs, inputs, grad_outputs, retain_graph, create_graph, allow_unused)
 }
 
+cpp_cuda_is_available <- function() {
+    .Call('_torch_cpp_cuda_is_available', PACKAGE = 'torchpkg')
+}
+
+cpp_cuda_device_count <- function() {
+    .Call('_torch_cpp_cuda_device_count', PACKAGE = 'torchpkg')
+}
+
+cpp_cuda_current_device <- function() {
+    .Call('_torch_cpp_cuda_current_device', PACKAGE = 'torchpkg')
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torch_cpp_device_type_to_string', PACKAGE = 'torchpkg', device)
 }

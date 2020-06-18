@@ -18,7 +18,7 @@ int lantern_cuda_device_count()
     return torch::cuda::device_count();
 }
 
-int64_t lantern_cuda_cudnn_is_available()
+int64_t lantern_cuda_current_device()
 {
     return at::detail::getCUDAHooks().current_device();
 }

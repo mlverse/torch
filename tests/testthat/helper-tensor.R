@@ -6,6 +6,11 @@ skip_if_not_test_examples <- function() {
     skip("Not testing examples/readme. Set the env var TEST_EXAMPLES = 1.")
 }
 
+skip_if_cuda_not_available <- function() {
+  if (!cuda_is_available())
+    skip("A GPU is not available for testing.")
+}
+
 expect_equal_to_tensor <- function(object, expected, ...) {
   expect_equal(as_array(object), as_array(expected), ...)
 }

@@ -43,6 +43,7 @@ Collate:
     'codegen-utils.R'
     'conditions.R'
     'creation-ops.R'
+    'cuda.R'
     'device.R'
     'dimname_list.R'
     'dtype.R'
