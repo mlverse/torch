@@ -74,11 +74,10 @@ jobs:
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{runner.workspace}}/artifacts/*.${{ matrix.libext }}
+          file: ${{runner.workspace}}/artifacts/${{matrix.artifacts}}
           tag: lantern-${{ github.ref }}
           asset_name: ${{ matrix.os }}-cpu
           overwrite: true
-          file_glob: true
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)
