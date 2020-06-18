@@ -70,17 +70,26 @@ jobs:
         with:
           name: ${{runner.os}}
           path: ${{runner.workspace}}/artifacts
-      - name: zip files
-        uses: montudor/action-zip@v0.1.0
+  upload:
+    needs: build
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        name: [macOS, Linux, Windows]
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v1
         with:
-          args: zip -j -qq -r ${{runner.workspace}}/${{ matrix.os }}.zip ${{runner.workspace}}/artifacts/${{matrix.artifacts}}
-      - name: upload
-        uses: svenstaro/upload-release-action@v1-release
+          name: ${{ matrix.name }}
+      - uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -j -qq -r ./${{ matrix.name }}.zip ./${{ matrix.name }}
+      - uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{runner.workspace}}/${{ matrix.os }}.zip
+          file: ${{ matrix.name }}.zip
           tag: ${{ github.ref }}
-          asset_name: ${{ matrix.os }}-cpu.zip
+          asset_name: ${{ matrix.name }}-cpu.zip
           overwrite: true
   autogen:
     runs-on: ubuntu-16.04
