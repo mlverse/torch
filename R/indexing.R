@@ -18,6 +18,8 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
   
   N = .Machine$integer.max, 
   
+  newaxis = NULL,
+  
   `..` = structure(list(), class = "fill")
 )
 
@@ -50,7 +52,7 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
   if (length(slices) == (length(d) + 1) && inherits(slices[[length(slices)]], "fill"))
     slices <- slices[1:(length(slices) -1)]
   
-  if (length(slices) != length(d))
+  if (length(slices) != length(d) && !any(sapply(slices, is.null)))
     stop("incorrect number of dimensions. Specified " , length(slices), " should be ",
          length(d), ".")
   
@@ -64,6 +66,8 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
       cpp_torch_tensor_index_append_bool(index, s)
     else if (inherits(s, "slice"))
       cpp_torch_tensor_index_append_slice(index, Slice(s$start, s$end, s$step))
+    else if (is.null(s))
+      cpp_torch_tensor_index_append_none(index)
     else if (rlang::is_integerish(s)) {
       
       if (all(s > 0)) {
