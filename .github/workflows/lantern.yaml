@@ -78,7 +78,7 @@ jobs:
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{runner.workspace}}/${{ ${{ matrix.os }} }}.zip
+          file: ${{runner.workspace}}/${{ matrix.os }}.zip
           tag: ${{ github.ref }}
           asset_name: ${{ matrix.os }}-cpu.zip
           overwrite: true
