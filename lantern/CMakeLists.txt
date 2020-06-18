@@ -83,6 +83,7 @@ add_library(lantern SHARED
     src/Layout.cpp
     src/Indexing.cpp
     src/Cuda.cpp
+    src/NNUtilsRnn.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
