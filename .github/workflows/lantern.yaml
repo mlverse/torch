@@ -84,13 +84,22 @@ jobs:
       - uses: montudor/action-zip@v0.1.0
         with:
           args: zip -j -qq -r ./${{ matrix.name }}.zip ./${{ matrix.name }}
-      - uses: svenstaro/upload-release-action@v1-release
+      - name: Upload to lantern builds
+        uses: actions-hub/gcloud@master
+        env:
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          CLI: gsutil
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ matrix.name }}.zip
-          tag: ${{ github.ref }}
-          asset_name: ${{ matrix.name }}-cpu.zip
-          overwrite: true
+          args: cp ${{ matrix.name }}.zip gs://lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.name }}-cpu.zip
+      - name: Upload to latest
+        uses: actions-hub/gcloud@master
+        env:
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          CLI: gsutil
+        with:
+          args: cp ${{ matrix.name }}.zip gs://lantern-builds/${{ github.ref }}/latest/${{ matrix.name }}-cpu.zip
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)
