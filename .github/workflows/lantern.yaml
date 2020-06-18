@@ -74,7 +74,7 @@ jobs:
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: artifacts/*
+          file: ${{runner.workspace}}/artifacts/*.${{ matrix.libext }}
           tag: ${{ github.ref }}
           asset_name: ${{ matrix.os }}-cpu
           overwrite: true
