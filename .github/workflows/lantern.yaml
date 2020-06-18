@@ -75,7 +75,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{runner.workspace}}/artifacts/${{matrix.artifacts}}
-          tag: lantern-${{ github.ref }}
+          tag: lantern-${{  github.event.release.tag_name  }}
           asset_name: ${{ matrix.os }}-cpu
           overwrite: true
   autogen:
