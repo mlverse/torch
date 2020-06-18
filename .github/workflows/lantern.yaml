@@ -73,7 +73,7 @@ jobs:
       - name: zip files
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -j -qq -r ${{runner.workspace}}/${{ matrix.os }}.zip ${{runner.workspace}}/artifacts
+          args: zip -j -qq -r ${{runner.workspace}}/${{ matrix.os }}.zip ${{runner.workspace}}/artifacts/${{matrix.artifact}}
       - name: upload
         uses: svenstaro/upload-release-action@v1-release
         with:
