@@ -38,4 +38,14 @@ test_that("[ works", {
   
   x <- torch_randn(10)
   expect_equal_to_tensor(x[1:5,..], x[1:5])
+  
+  x <- torch_randn(10)
+  expect_tensor_shape(x[, NULL], c(10, 1))
+  expect_tensor_shape(x[NULL, , NULL], c(1, 10, 1))
+  expect_tensor_shape(x[NULL, , NULL, NULL], c(1, 10, 1, 1))
+  
+  x <- torch_randn(10)
+  expect_tensor_shape(x[, newaxis], c(10, 1))
+  expect_tensor_shape(x[newaxis, , newaxis], c(1, 10, 1))
+  expect_tensor_shape(x[newaxis, , newaxis, newaxis], c(1, 10, 1, 1))
 })
