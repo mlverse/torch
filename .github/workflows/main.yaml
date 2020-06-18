@@ -26,7 +26,7 @@ jobs:
     timeout-minutes: 30
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      INSTALL_TORCH: 1${{ matrix.install }}
+      INSTALL_TORCH: ${{ matrix.install }}
       CRAN: ${{ matrix.cran }}
 
     steps:
