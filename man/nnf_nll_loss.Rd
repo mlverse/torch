@@ -4,7 +4,13 @@
 \alias{nnf_nll_loss}
 \title{Nll_loss}
 \usage{
-nnf_nll_loss(input, target, weight = NULL, ignore_index, reduction = "mean")
+nnf_nll_loss(
+  input,
+  target,
+  weight = NULL,
+  ignore_index = -100,
+  reduction = "mean"
+)
 }
 \arguments{
 \item{input}{\eqn{(N, C)} where \verb{C = number of classes} or \eqn{(N, C, H, W)} in

@@ -26,6 +26,14 @@ install_config <- list(
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/Linux.zip", branch)
       )
+    ),
+    "10.1" = list(
+      "linux" = list(
+        "libtorch" = list(
+          url = "https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu101.zip",
+          path = "libtorch/lib"
+        )
+      )
     )
   )
 )
@@ -105,7 +113,7 @@ lantern_install_libs <- function(version, type, install_path, check_installed = 
 
 #' @export
 
-lantern_install <- function(version = "1.5.0", type = "cpu", reinstall = FALSE,
+lantern_install <- function(version = "1.5.0", type = Sys.getenv("CUDA", unset = "cpu"), reinstall = FALSE,
                             check_installed = FALSE, install_path = NULL) {
   if (reinstall) {
     unlink(lantern_install_path(), recursive = TRUE)

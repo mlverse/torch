@@ -185,6 +185,10 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lantern_Slice_delete)(void *x);
   LANTERN_API void(LANTERN_PTR lantern_optional_int64_t_delete)(void *x);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_device)(void *self);
+  LANTERN_API bool (LANTERN_PTR lantern_cuda_is_available) ();
+  LANTERN_API int (LANTERN_PTR lantern_cuda_device_count) ();
+  LANTERN_API int64_t (LANTERN_PTR lantern_cuda_current_device) ();
+  LANTERN_API void (LANTERN_PTR lantern_cuda_show_config) ();
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2177,6 +2181,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Slice_delete);
   LOAD_SYMBOL(lantern_optional_int64_t_delete);
   LOAD_SYMBOL(lantern_Tensor_device);
+  LOAD_SYMBOL(lantern_cuda_is_available);
+  LOAD_SYMBOL(lantern_cuda_device_count);
+  LOAD_SYMBOL(lantern_cuda_current_device);
+  LOAD_SYMBOL(lantern_cuda_show_config);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
