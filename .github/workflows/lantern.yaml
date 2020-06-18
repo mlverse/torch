@@ -72,7 +72,7 @@ jobs:
           path: ${{runner.workspace}}/artifacts
   upload:
     needs: build
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         name: [macOS, Linux, Windows]
@@ -91,7 +91,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.name }}.zip gs://torch-lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.name }}.zip
+          args: cp ${{ matrix.name }}.zip gs://lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.name }}-cpu.zip
       - name: Upload to latest
         uses: actions-hub/gcloud@master
         env:
@@ -99,7 +99,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.name }}.zip gs://torch-lantern-builds/${{ github.ref }}/latest/${{ matrix.name }}.zip
+          args: cp ${{ matrix.name }}.zip gs://lantern-builds/${{ github.ref }}/latest/${{ matrix.name }}-cpu.zip
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)
