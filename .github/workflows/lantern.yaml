@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build:
+    if: ${{ github.event_name != 'pull_request'}}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
