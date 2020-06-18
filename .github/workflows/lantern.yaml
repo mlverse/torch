@@ -75,7 +75,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{runner.workspace}}/artifacts/*.${{ matrix.libext }}
-          tag: ${{ github.ref }}
+          tag: lantern-${{ github.ref }}
           asset_name: ${{ matrix.os }}-cpu
           overwrite: true
           file_glob: true
