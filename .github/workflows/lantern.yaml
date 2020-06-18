@@ -1,10 +1,12 @@
 name: Lantern
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
-    if: ${{ github.event_name != 'pull_request'}}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
