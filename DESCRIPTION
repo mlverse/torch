@@ -53,7 +53,7 @@ Collate:
     'gen-namespace.R'
     'generator.R'
     'indexing.R'
-    'lantern_install.R'
+    'install.R'
     'lantern_load.R'
     'lantern_sync.R'
     'layout.R'

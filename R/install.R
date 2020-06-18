@@ -38,12 +38,14 @@ install_config <- list(
   )
 )
 
-lantern_install_path <- function() {
+#' @keywords internal
+#' @export
+install_path <- function() {
   normalizePath(file.path(system.file("", package = "torch"), "deps"), mustWork = FALSE)
 }
 
-lantern_installed <- function() {
-  dir.exists(lantern_install_path())
+install_exists <- function() {
+  dir.exists(install_path())
 }
 
 lib_installed <- function(library_name, install_path) {
@@ -72,7 +74,7 @@ lantern_install_lib <- function(library_name, library_url, install_path, source_
   file.copy(source_files, install_path, recursive = TRUE)
 }
 
-lantern_install_libs <- function(version, type, install_path, check_installed = FALSE) {
+lantern_install_libs <- function(version, type, install_path) {
   current_os <- tolower(Sys.info()[["sysname"]])
   
   if (!version %in% names(install_config))
@@ -89,11 +91,9 @@ lantern_install_libs <- function(version, type, install_path, check_installed = 
   
   for (library_name in names(install_info)) {
     
-    if (check_installed) {
-      if (lib_installed(library_name, install_path)) {
-        message("skipping installation of ", library_name, " since it's already installed.")
-        next
-      }
+    if (lib_installed(library_name, install_path)) {
+      message("skipping installation of ", library_name, " since it's already installed.")
+      next
     }
     
     library_info <- install_info[[library_name]]
@@ -111,22 +111,27 @@ lantern_install_libs <- function(version, type, install_path, check_installed = 
   invisible(install_path)
 }
 
+#' Install Torch
+#' 
+#' Installs Torch and its dependencies.
+#' 
+#' @param version The Torch version to install. 
+#' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
+#' @param reinstall Re-install Torch even if its already installed?
+#' @param path Optional path to install or check for an already existing installation.
+#' 
 #' @export
-
-lantern_install <- function(version = "1.5.0", type = Sys.getenv("CUDA", unset = "cpu"), reinstall = FALSE,
-                            check_installed = FALSE, install_path = NULL) {
+install_torch <- function(version = "1.5.0", type = Sys.getenv("CUDA", unset = "cpu"), reinstall = FALSE,
+                          path = install_path()) {
   if (reinstall) {
-    unlink(lantern_install_path(), recursive = TRUE)
+    unlink(path, recursive = TRUE)
   }
   
-  if (lantern_installed() && !check_installed) {
+  if (dir.exists(path)) {
     stop("Lantern is already installed.")
   }
   
-  if (is.null(install_path))
-    install_path <- lantern_install_path()
+  dir.create(path, showWarnings = FALSE)
   
-  dir.create(install_path, showWarnings = FALSE)
-  
-  lantern_install_libs(version, type, install_path, check_installed)
+  lantern_install_libs(version, type, path)
 }

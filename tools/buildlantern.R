@@ -20,7 +20,7 @@ if (dir.exists("lantern")) {
   
   # download torch
   source("R/lantern_install.R")
-  lantern_install(check_installed = TRUE, install_path = normalizePath("deps/"))
+  install_torch(path = normalizePath("deps/"))
   
   # copy deps to inst
   if (fs::dir_exists("inst/deps"))

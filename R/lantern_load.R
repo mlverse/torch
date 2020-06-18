@@ -6,8 +6,8 @@ lantern_default <- function() {
 }
 
 lantern_start <- function(version = lantern_default()) {
-  if (!lantern_installed()) {
-    stop("Torch is not installed, please run 'torch_install()'.")
+  if (!install_exists()) {
+    stop("Torch is not installed, please run 'install_torch()'.")
   }
   
   if (.globals$lantern_started) return()
