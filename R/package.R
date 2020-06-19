@@ -5,13 +5,10 @@ NULL
 .generator_null <- NULL
 
 .onAttach <- function(libname, pkgname) {
-  if (!install_exists() && interactive()) {
-    install_torch()
-  }
 }
 
 .onLoad <- function(libname, pkgname){
-  if (!install_exists() && Sys.getenv("INSTALL_TORCH", unset = 0) == 1) {
+  if (!install_exists() && !Sys.getenv("INSTALL_TORCH", unset = 1) == 0) {
     install_torch()
   }
     
