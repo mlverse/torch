@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nll_loss — nnf_nll_loss • torch</title>
+<title>Pad a list of variable length Tensors with <code>padding_value</code> — nn_utils_rnn_pad_sequence • torch</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Nll_loss — nnf_nll_loss" />
-<meta property="og:description" content="The negative log likelihood loss." />
+<meta property="og:title" content="Pad a list of variable length Tensors with <code>padding_value</code> — nn_utils_rnn_pad_sequence" />
+<meta property="og:description" content="pad_sequence stacks a list of Tensors along a new dimension,
+and pads them to equal length. For example, if the input is list of
+sequences with size L x * and if batch_first is False, and T x B x *
+otherwise." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,62 +126,69 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Nll_loss</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nnf-loss.R'><code>R/nnf-loss.R</code></a></small>
-    <div class="hidden name"><code>nnf_nll_loss.Rd</code></div>
+    <h1>Pad a list of variable length Tensors with <code>padding_value</code></h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-utils-rnn.R'><code>R/nn-utils-rnn.R</code></a></small>
+    <div class="hidden name"><code>nn_utils_rnn_pad_sequence.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The negative log likelihood loss.</p>
+    <p><code>pad_sequence</code> stacks a list of Tensors along a new dimension,
+and pads them to equal length. For example, if the input is list of
+sequences with size <code>L x *</code> and if batch_first is False, and <code>T x B x *</code>
+otherwise.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_nll_loss</span>(
-  <span class='no'>input</span>,
-  <span class='no'>target</span>,
-  <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ignore_index</span> <span class='kw'>=</span> -<span class='fl'>100</span>,
-  <span class='kw'>reduction</span> <span class='kw'>=</span> <span class='st'>"mean"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>nn_utils_rnn_pad_sequence</span>(<span class='no'>sequence</span>, <span class='kw'>batch_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>padding_value</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>\((N, C)\) where <code>C = number of classes</code> or \((N, C, H, W)\) in
-case of 2D Loss, or \((N, C, d_1, d_2, ..., d_K)\) where \(K \geq 1\) in
-the case of K-dimensional loss.</p></td>
+      <th>batch_first</th>
+      <td><p>(bool, optional): output will be in <code>B x T x *</code> if <code>TRUE</code>,
+or in <code>T x B x *</code> otherwise</p></td>
     </tr>
     <tr>
-      <th>target</th>
-      <td><p>\((N)\) where each value is \(0 \leq \text{targets}[i] \leq C-1\),
-or \((N, d_1, d_2, ..., d_K)\) where \(K \geq 1\) for K-dimensional loss.</p></td>
+      <th>padding_value</th>
+      <td><p>(float, optional): value for padded elements. Default: 0.</p></td>
     </tr>
     <tr>
-      <th>weight</th>
-      <td><p>(Tensor, optional) a manual rescaling weight given to each class.
-If given, has to be a Tensor of size <code>C</code></p></td>
-    </tr>
-    <tr>
-      <th>ignore_index</th>
-      <td><p>(int, optional) Specifies a target value that is ignored and
-does not contribute to the input gradient.</p></td>
-    </tr>
-    <tr>
-      <th>reduction</th>
-      <td><p>(string, optional) – Specifies the reduction to apply to the
-output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean':
-the sum of the output will be divided by the number of elements in the output,
-'sum': the output will be summed. Default: 'mean'</p></td>
+      <th>sequences</th>
+      <td><p>(listTensor): list of variable length sequences.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Tensor of size <code>T x B x *</code> if <code>batch_first</code> is <code>FALSE</code>.
+Tensor of size <code>B x T x *</code> otherwise</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>B</code> is batch size. It is equal to the number of elements in <code>sequences</code>.
+<code>T</code> is length of the longest sequence.
+<code>L</code> is length of the sequence.
+<code>*</code> is any number of trailing dimensions, including none.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This function returns a Tensor of size <code>T x B x *</code> or <code>B x T x *</code>
+where <code>T</code> is the length of the longest sequence. This function assumes
+trailing dimensions and type of all the Tensors in sequences are same.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span>(<span class='fl'>25</span>, <span class='fl'>300</span>)
+<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span>(<span class='fl'>22</span>, <span class='fl'>300</span>)
+<span class='no'>c</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span>(<span class='fl'>15</span>, <span class='fl'>300</span>)
+<span class='fu'>nn_utils_rnn_pad_sequence</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='no'>c</span>))$<span class='fu'>size</span>()</div><div class='output co'>#&gt; [1]  25   3 300</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#note">Note</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

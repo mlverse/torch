@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nll_loss — nnf_nll_loss • torch</title>
+<title>Packs a Tensor containing padded sequences of variable length. — nn_utils_rnn_pack_padded_sequence • torch</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Nll_loss — nnf_nll_loss" />
-<meta property="og:description" content="The negative log likelihood loss." />
+<meta property="og:title" content="Packs a Tensor containing padded sequences of variable length. — nn_utils_rnn_pack_padded_sequence" />
+<meta property="og:description" content="input can be of size T x B x * where T is the length of the
+longest sequence (equal to lengths[1]), B is the batch size, and
+* is any number of dimensions (including 0). If batch_first is
+TRUE, B x T x * input is expected." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,21 +126,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Nll_loss</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nnf-loss.R'><code>R/nnf-loss.R</code></a></small>
-    <div class="hidden name"><code>nnf_nll_loss.Rd</code></div>
+    <h1>Packs a Tensor containing padded sequences of variable length.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-utils-rnn.R'><code>R/nn-utils-rnn.R</code></a></small>
+    <div class="hidden name"><code>nn_utils_rnn_pack_padded_sequence.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The negative log likelihood loss.</p>
+    <p><code>input</code> can be of size <code>T x B x *</code> where <code>T</code> is the length of the
+longest sequence (equal to <code>lengths[1]</code>), <code>B</code> is the batch size, and
+<code>*</code> is any number of dimensions (including 0). If <code>batch_first</code> is
+<code>TRUE</code>, <code>B x T x *</code> <code>input</code> is expected.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_nll_loss</span>(
+    <pre class="usage"><span class='fu'>nn_utils_rnn_pack_padded_sequence</span>(
   <span class='no'>input</span>,
-  <span class='no'>target</span>,
-  <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ignore_index</span> <span class='kw'>=</span> -<span class='fl'>100</span>,
-  <span class='kw'>reduction</span> <span class='kw'>=</span> <span class='st'>"mean"</span>
+  <span class='no'>lengths</span>,
+  <span class='kw'>batch_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>enforce_sorted</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -145,40 +150,49 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>\((N, C)\) where <code>C = number of classes</code> or \((N, C, H, W)\) in
-case of 2D Loss, or \((N, C, d_1, d_2, ..., d_K)\) where \(K \geq 1\) in
-the case of K-dimensional loss.</p></td>
+      <td><p>(Tensor): padded batch of variable length sequences.</p></td>
     </tr>
     <tr>
-      <th>target</th>
-      <td><p>\((N)\) where each value is \(0 \leq \text{targets}[i] \leq C-1\),
-or \((N, d_1, d_2, ..., d_K)\) where \(K \geq 1\) for K-dimensional loss.</p></td>
+      <th>lengths</th>
+      <td><p>(Tensor): list of sequences lengths of each batch element.</p></td>
     </tr>
     <tr>
-      <th>weight</th>
-      <td><p>(Tensor, optional) a manual rescaling weight given to each class.
-If given, has to be a Tensor of size <code>C</code></p></td>
+      <th>batch_first</th>
+      <td><p>(bool, optional): if <code>TRUE</code>, the input is expected in <code>B x T x *</code>
+format.</p></td>
     </tr>
     <tr>
-      <th>ignore_index</th>
-      <td><p>(int, optional) Specifies a target value that is ignored and
-does not contribute to the input gradient.</p></td>
-    </tr>
-    <tr>
-      <th>reduction</th>
-      <td><p>(string, optional) – Specifies the reduction to apply to the
-output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean':
-the sum of the output will be divided by the number of elements in the output,
-'sum': the output will be summed. Default: 'mean'</p></td>
+      <th>enforce_sorted</th>
+      <td><p>(bool, optional): if <code>TRUE</code>, the input is expected to
+contain sequences sorted by length in a decreasing order. If
+<code>FALSE</code>, the input will get sorted unconditionally. Default: <code>TRUE</code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a <code>PackedSequence</code> object</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For unsorted sequences, use <code>enforce_sorted = FALSE</code>. If <code>enforce_sorted</code> is
+<code>TRUE</code>, the sequences should be sorted by length in a decreasing order, i.e.
+<code>input[,1]</code> should be the longest sequence, and <code>input[,B]</code> the shortest
+one. <code>enforce_sorted = TRUE</code> is only necessary for ONNX export.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This function accepts any input that has at least two dimensions. You
+can apply it to pack the labels, and use the output of the RNN with
+them to compute the loss directly. A Tensor can be retrieved from
+a <code>PackedSequence</code> object by accessing its <code>.data</code> attribute.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#note">Note</a></li>
     </ul>
 
   </div>

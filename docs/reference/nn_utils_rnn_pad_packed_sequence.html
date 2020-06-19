@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nll_loss — nnf_nll_loss • torch</title>
+<title>Pads a packed batch of variable length sequences. — nn_utils_rnn_pad_packed_sequence • torch</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Nll_loss — nnf_nll_loss" />
-<meta property="og:description" content="The negative log likelihood loss." />
+<meta property="og:title" content="Pads a packed batch of variable length sequences. — nn_utils_rnn_pad_packed_sequence" />
+<meta property="og:description" content="It is an inverse operation to pack_padded_sequence." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,62 +123,101 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Nll_loss</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nnf-loss.R'><code>R/nnf-loss.R</code></a></small>
-    <div class="hidden name"><code>nnf_nll_loss.Rd</code></div>
+    <h1>Pads a packed batch of variable length sequences.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-utils-rnn.R'><code>R/nn-utils-rnn.R</code></a></small>
+    <div class="hidden name"><code>nn_utils_rnn_pad_packed_sequence.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The negative log likelihood loss.</p>
+    <p>It is an inverse operation to pack_padded_sequence.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_nll_loss</span>(
-  <span class='no'>input</span>,
-  <span class='no'>target</span>,
-  <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ignore_index</span> <span class='kw'>=</span> -<span class='fl'>100</span>,
-  <span class='kw'>reduction</span> <span class='kw'>=</span> <span class='st'>"mean"</span>
+    <pre class="usage"><span class='fu'>nn_utils_rnn_pad_packed_sequence</span>(
+  <span class='no'>sequence</span>,
+  <span class='kw'>batch_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>padding_value</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>total_lenght</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>\((N, C)\) where <code>C = number of classes</code> or \((N, C, H, W)\) in
-case of 2D Loss, or \((N, C, d_1, d_2, ..., d_K)\) where \(K \geq 1\) in
-the case of K-dimensional loss.</p></td>
+      <th>sequence</th>
+      <td><p>(PackedSequence): batch to pad</p></td>
     </tr>
     <tr>
-      <th>target</th>
-      <td><p>\((N)\) where each value is \(0 \leq \text{targets}[i] \leq C-1\),
-or \((N, d_1, d_2, ..., d_K)\) where \(K \geq 1\) for K-dimensional loss.</p></td>
+      <th>batch_first</th>
+      <td><p>(bool, optional): if <code>True</code>, the output will be in ``B x T x *`
+format.</p></td>
     </tr>
     <tr>
-      <th>weight</th>
-      <td><p>(Tensor, optional) a manual rescaling weight given to each class.
-If given, has to be a Tensor of size <code>C</code></p></td>
+      <th>padding_value</th>
+      <td><p>(float, optional): values for padded elements.</p></td>
     </tr>
     <tr>
-      <th>ignore_index</th>
-      <td><p>(int, optional) Specifies a target value that is ignored and
-does not contribute to the input gradient.</p></td>
-    </tr>
-    <tr>
-      <th>reduction</th>
-      <td><p>(string, optional) – Specifies the reduction to apply to the
-output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean':
-the sum of the output will be divided by the number of elements in the output,
-'sum': the output will be summed. Default: 'mean'</p></td>
+      <th>total_length</th>
+      <td><p>(int, optional): if not <code>None</code>, the output will be padded to
+have length <code>total_length</code>. This method will throw <code>ValueError</code>
+if <code>total_length</code> is less than the max sequence length in
+<code>sequence</code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Tuple of Tensor containing the padded sequence, and a Tensor
+containing the list of lengths of each sequence in the batch.
+Batch elements will be re-ordered as they were ordered originally when
+the batch was passed to <code>pack_padded_sequence</code> or <code>pack_sequence</code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The returned Tensor's data will be of size <code>T x B x *</code>, where <code>T</code> is the length
+of the longest sequence and <code>B</code> is the batch size. If <code>batch_first</code> is <code>TRUE</code>,
+the data will be transposed into <code>B x T x *</code> format.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p><code>total_length</code> is useful to implement the
+<code>pack sequence -&gt; recurrent network -&gt; unpack sequence</code> pattern in a
+<code>nn_module</code> wrapped in <code>~torch.nn.DataParallel</code>.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>seq</span> <span class='kw'>&lt;-</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>0</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>0</span>,<span class='fl'>0</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>)))
+<span class='no'>lens</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>1</span>,<span class='fl'>3</span>)
+<span class='no'>packed</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='nn_utils_rnn_pack_padded_sequence.html'>nn_utils_rnn_pack_padded_sequence</a></span>(<span class='no'>seq</span>, <span class='no'>lens</span>, <span class='kw'>batch_first</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                                            <span class='kw'>enforce_sorted</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>packed</span></div><div class='output co'>#&gt; &lt;PackedSequence&gt;
+#&gt;   Public:
+#&gt;     batch_sizes: active binding
+#&gt;     clone: function (deep = FALSE) 
+#&gt;     data: active binding
+#&gt;     initialize: function (ptr = NULL) 
+#&gt;     ptr: externalptr
+#&gt;     sorted_indices: active binding
+#&gt;     unsorted_indices: active binding</div><div class='input'><span class='fu'>nn_utils_rnn_pad_packed_sequence</span>(<span class='no'>packed</span>, <span class='kw'>batch_first</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; torch_tensor 
+#&gt;  1  2  0
+#&gt;  3  0  0
+#&gt;  4  5  6
+#&gt; [ CPUFloatType{3,3} ]
+#&gt; 
+#&gt; [[2]]
+#&gt; torch_tensor 
+#&gt;  2
+#&gt;  1
+#&gt;  3
+#&gt; [ CPULongType{3} ]
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#note">Note</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
