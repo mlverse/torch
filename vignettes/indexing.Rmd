@@ -27,7 +27,7 @@ Torch's indexing semantics are closer to numpy's semantics than R's. You will fi
 ## Single element indexing
 
 Single element indexing for a 1-D tensors is what one expects. It is 1-based, and, unlike R, accepts negative
-indices for indexing from the end of the array.
+indices for indexing from the end of the array (In R, negative indexes are used to remove elements).
 
 ```{r}
 x <- torch_tensor(1:10)
@@ -49,7 +49,7 @@ fewer indices than dimensions, one gets an error, unlike R, that would flatten t
 x[1]
 ```
 
-## Other indexing options
+## Slicing and striding
 
 It is possible to slice and stride arrays to extract arrays of the same number of dimensions, but of different sizes than the original. A few examples illustrates best:
 
@@ -64,11 +64,66 @@ You can also use the `1:10:2` syntax which means 1 to 10 by 2. For example:
 ```{r}
 x[1:5:2]
 ```
+
 Another special syntax is the `N`, meaning the size of the specified dimension.
 
 ```{r}
 x[5:N]
 ```
+
+## Getting the complete dimension
+
+Like in R, you can skip indexing dimension by leaving an empty index for that dimension.
+
+Considering a matrix:
+
+```{r}
+x <- torch_randn(2, 3)
+x
+```
+
+The following syntax will give you the first row:
+
+```{r}
+x[1,]
+```
+
+And this would give you the first 2 columns:
+
+```{r}
+x[,1:2]
+```
+
+## Droping dimensions
+
+By default, when indexing by a single integer, this dimension will be dropped to
+avoid the singleton dimension:
+
+```{r}
+x <- torch_randn(2, 3)
+x[1,]$shape
+```
+You can optionally use the `drop = FALSE` argument to avoid dropping the dimension.
+
+```{r}
+x[1,,drop = FALSE]$shape
+```
+## Adding a new dimension
+
+It's possible to add a new dimension to a tensor using an index like syntax:
+
+```{r}
+x <- torch_tensor(c(10))
+x$shape
+x[, newaxis]$shape
+x[, newaxis, newaxis]$shape
+```
+You can also use `NULL` instead of `newaxis`:
+
+```{r}
+x[,NULL]$shape
+```
+
 ## Dealing with variable number of indices
 
 The index syntax is very powerful but limiting when dealing with a variable number of indices. For example, if you want to write a function that can handle arguments with various numbers of dimensions without having to write special case code for each number of possible dimensions, how can that be done? If one supplies to the index a tuple, the tuple will be interpreted as a list of indices. For example:
@@ -89,4 +144,5 @@ You can also use the unsplice operator here, for example:
 i <- c(5,5,5)
 z[!!!i]
 ```
+
 More complex indexing should make use of `torch_select` or `torch_slice`.
