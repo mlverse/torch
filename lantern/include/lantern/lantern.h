@@ -199,6 +199,7 @@ extern "C"
   LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pad_packed_sequence)(void *sequence, bool batch_first,
                                                                            double padding_value, void *total_length);
   LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pad_sequence)(void *sequence, bool batch_first, double padding_value);
+  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_PackedSequence_new)(void *data, void *batch_sizes, void *sorted_indices, void *unsorted_indices);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2204,6 +2205,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_nn_utils_rnn_pack_sequence);
   LOAD_SYMBOL(lantern_nn_utils_rnn_pad_packed_sequence);
   LOAD_SYMBOL(lantern_nn_utils_rnn_pad_sequence);
+  LOAD_SYMBOL(lantern_nn_utils_rnn_PackedSequence_new);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)

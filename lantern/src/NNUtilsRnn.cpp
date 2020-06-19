@@ -53,6 +53,16 @@ void *lantern_nn_utils_rnn_pad_sequence(void *sequence, bool batch_first, double
     return (void *)new LanternObject<torch::Tensor>(out);
 }
 
+void *lantern_nn_utils_rnn_PackedSequence_new(void *data, void *batch_sizes, void *sorted_indices, void *unsorted_indices)
+{
+    auto out = torch::nn::utils::rnn::PackedSequence(
+        reinterpret_cast<LanternObject<torch::Tensor> *>(data)->get(),
+        reinterpret_cast<LanternObject<torch::Tensor> *>(batch_sizes)->get(),
+        reinterpret_cast<LanternObject<torch::Tensor> *>(sorted_indices)->get(),
+        reinterpret_cast<LanternObject<torch::Tensor> *>(unsorted_indices)->get());
+    return (void *)new LanternPtr<torch::nn::utils::rnn::PackedSequence>(out);
+}
+
 void *lantern_nn_utils_PackedSequence_data(void *input)
 {
     auto x = reinterpret_cast<LanternPtr<torch::nn::utils::rnn::PackedSequence> *>(input)->get();

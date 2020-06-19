@@ -120,14 +120,26 @@ nn_rnn_base <- nn_module(
   },
   forward = function(input, hx = NULL) {
     
-    batch_sizes <- NULL
-    if (self$batch_first)
-      max_batch_size <- input$size(0)
-    else
-      max_batch_size <- input$size(1)
+    is_packed <- is_packed_sequence(input)
     
-    sorted_indices <- NULL
-    unsorted_indices <- NULL
+    if (is_packed) {
+      batch_sizes <- input$batch_sizes
+      sorted_indices <- input$sorted_indices
+      unsorted_indices <- input$unsorted_indices
+      max_batch_size <- as_array(batch_sizes[1]$to(dtype = torch_int()))
+      input <- input$data
+    } else {
+      batch_sizes <- NULL
+      if (self$batch_first)
+        max_batch_size <- input$size(0)
+      else
+        max_batch_size <- input$size(1)
+      
+      sorted_indices <- NULL
+      unsorted_indices <- NULL  
+    }
+    
+    
     
     if (is.null(hx)) {
       num_directions <- ifelse(self$bidirectional, 2, 1)
@@ -150,15 +162,19 @@ nn_rnn_base <- nn_module(
                       batch_first = self$batch_first
                       )
     } else {
-      result <- impl_(input = input, batch_sizes = batch_sizes, hx  = hx, 
+      result <- impl_(data = input, hx  = hx, batch_sizes = batch_sizes,
                       params = self$flat_weights_, has_biases = self$bias,
                       num_layers = self$num_layers, dropout = self$dropout, 
-                      train = self$training, bidirectional = self$bidirectional, 
-                      batch_first = self$batch_first)
+                      train = self$training,
+                      bidirectional = self$bidirectional)
     }
         
     output <- result[[1]]
     hidden <- result[[2]]
+    
+    if (is_packed)
+      output <- new_packed_sequence(output, batch_sizes, sorted_indices,
+                                   unsorted_indices)
     
     list(output, self$permute_hidden(hidden, unsorted_indices))
   }

@@ -22,6 +22,20 @@ PackedSequence <- R6::R6Class(
   )
 )
 
+new_packed_sequence <- function(data, batch_sizes, sorted_indices, unsorted_indices) {
+  o <- cpp_nn_utils_PackedSequence_new(
+    data$ptr,
+    batch_sizes$ptr,
+    sorted_indices$ptr,
+    unsorted_indices$ptr
+  )
+  PackedSequence$new(ptr = o)
+}
+
+is_packed_sequence <- function(x) {
+  inherits(x, "PackedSequence")
+}
+
 #' Packs a Tensor containing padded sequences of variable length.
 #' 
 #' `input` can be of size `T x B x *` where `T` is the length of the
