@@ -22,7 +22,7 @@ void *lantern_nn_utils_rnn_pack_padded_sequence(void *input, void *lengths, bool
 void *lantern_nn_utils_rnn_pack_sequence(void *sequence, bool enforce_sorted)
 {
     auto out = torch::nn::utils::rnn::pack_sequence(
-        reinterpret_cast<LanternObject<torch::TensorList> *>(sequence)->get(),
+        reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(sequence)->get(),
         enforce_sorted);
 
     return (void *)new LanternPtr<torch::nn::utils::rnn::PackedSequence>(out);

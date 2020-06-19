@@ -12,6 +12,41 @@ Rcpp::XPtr<XPtrTorchPackedSequence> cpp_nn_utils_rnn_pack_padded_sequence (
 }
 
 // [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchPackedSequence> cpp_nn_utils_pack_sequence (
+    Rcpp::XPtr<XPtrTorchTensorList> sequence, bool enforce_sorted) {
+  XPtrTorchPackedSequence out = lantern_nn_utils_rnn_pack_sequence(
+    sequence->get(), enforce_sorted
+  );
+  return make_xptr<XPtrTorchPackedSequence>(out);
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchTensorList> cpp_nn_utils_pad_packed_sequence (
+  Rcpp::XPtr<XPtrTorchPackedSequence> sequence,
+  bool batch_first,
+  double padding_value,
+  Rcpp::XPtr<XPtrTorchoptional_int64_t> total_length
+) {
+  XPtrTorchTensorList out = lantern_nn_utils_rnn_pad_packed_sequence(
+    sequence->get(),
+    batch_first, padding_value,
+    total_length->get()
+  );  
+  return make_xptr<XPtrTorchTensorList>(out);
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_rnn_pad_sequence (
+  Rcpp::XPtr<XPtrTorchTensorList> sequence,
+  bool batch_first,
+  double padding_value
+) {
+  XPtrTorchTensor out = lantern_nn_utils_rnn_pad_sequence(sequence->get(), batch_first,
+                                                           padding_value);
+  return make_xptr<XPtrTorchTensor>(out);
+}
+
+// [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_data (Rcpp::XPtr<XPtrTorchPackedSequence> x)
 {
   XPtrTorchTensor out = lantern_nn_utils_PackedSequence_data(x->get());
