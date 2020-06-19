@@ -61,3 +61,24 @@ test_that("rnn dropout", {
     }
   }
 })
+
+test_that("rnn packed sequence", {
+  
+  x <- torch_tensor(rbind(
+    c(1, 2, 0, 0),
+    c(1, 2, 3, 0),
+    c(1, 2, 3, 4)
+  ), dtype = torch_float())
+  x <- x[,,newaxis]
+  lens <- torch_tensor(c(2,3,4), dtype = torch_long())
+  
+  p <- nn_utils_rnn_pack_padded_sequence(x, lens, batch_first = TRUE, 
+                                         enforce_sorted = FALSE)
+  
+  rnn <- nn_rnn(1, 4, nonlinearity = "relu")
+  out <- rnn(p)
+  
+  unpack <- nn_utils_rnn_pad_packed_sequence(out[[1]])
+  expect_tensor_shape(unpack[[1]], c(4, 3, 4))
+  expect_equal_to_r(unpack[[2]]$to(dtype = torch_int()), c(2, 3, 4))
+})
