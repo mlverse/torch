@@ -92,7 +92,6 @@ lantern_install_libs <- function(version, type, install_path) {
   for (library_name in names(install_info)) {
     
     if (lib_installed(library_name, install_path)) {
-      message("skipping installation of ", library_name, " since it's already installed.")
       next
     }
     
@@ -127,11 +126,9 @@ install_torch <- function(version = "1.5.0", type = Sys.getenv("CUDA", unset = "
     unlink(path, recursive = TRUE)
   }
   
-  if (dir.exists(path)) {
-    stop("Lantern is already installed.")
+  if (!dir.exists(path)) {
+    dir.create(path, showWarnings = FALSE)
   }
-  
-  dir.create(path, showWarnings = FALSE)
   
   lantern_install_libs(version, type, path)
 }
