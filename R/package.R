@@ -9,7 +9,7 @@ NULL
     packageStartupMessage("You need to install libtorch in order to use torch.\n")
     ans <- readline("Do you want to download it now? ~100Mb (yes/no)")
     if (ans == "yes" | ans == "y")
-      lantern_install()
+      install_torch()
     
     if (install_exists()) {
       packageStartupMessage("Torch was successfully installed.")

@@ -19,7 +19,7 @@ if (dir.exists("lantern")) {
   lantern_sync(TRUE)  
   
   # download torch
-  source("R/lantern_install.R")
+  source("R/install.R")
   install_torch(path = normalizePath("deps/"))
   
   # copy deps to inst
