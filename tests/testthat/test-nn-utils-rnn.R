@@ -28,3 +28,27 @@ test_that("pack_sequence", {
   expect_equal_to_r(to_int(p$data), c(1, 4, 6, 2, 5, 3))
   expect_equal_to_r(to_int(p$batch_sizes), c(3, 2, 1))
 })
+
+test_that("pad_packed_sequence", {
+  seq <- torch_tensor(rbind(
+    c(1, 2, 0),
+    c(3, 0, 0),
+    c(4, 5, 6)
+  ), dtype = torch_long())
+  lens <- as.integer(c(2, 1, 3))
+  packed <- nn_utils_rnn_pack_padded_sequence(seq, lens, batch_first=TRUE, 
+                                              enforce_sorted=FALSE)
+  o <- nn_utils_rnn_pad_packed_sequence(packed, batch_first=TRUE)
+  expect_equal_to_tensor(to_int(o[[1]]), to_int(seq))
+  expect_equal_to_r(to_int(o[[2]]), lens)
+})
+
+test_that("pad_sequence", {
+  
+  x <- torch_ones(25, 300)
+  y <- torch_ones(22, 300)
+  z <- torch_ones(15, 300)
+  
+  o <- nn_utils_rnn_pad_sequence(list(x, y, z))
+  expect_tensor_shape(o, c(25, 3, 300))
+})

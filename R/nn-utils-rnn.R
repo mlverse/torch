@@ -45,14 +45,20 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
   )
 }
 
-nn_utils_rnn_pad_padded_sequence <- function(sequence, batch_first = FALSE, 
+nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE, 
                                              padding_value = 0, total_lenght = NULL) {
-  o <- cpp_nn_utils_pad_packed_sequence(sequence$ptr, batch_forst, padding_value, 
+  o <- cpp_nn_utils_pad_packed_sequence(sequence$ptr, batch_first, padding_value, 
                                         cpp_optional_int64_t(total_lenght))
   TensorList$new(ptr = o)$to_r()
 }
 
 nn_utils_rnn_pad_sequence <- function(sequence, batch_first = FALSE, padding_value = 0) {
+  
+  if (is_torch_tensor(sequence))
+    sequence <- list(sequence)
+  
+  sequence <- TensorList$new(x = sequence)
+  
   o <- cpp_nn_utils_pad_sequence(sequence$ptr, batch_first, padding_value)
   Tensor$new(ptr = o)
 }

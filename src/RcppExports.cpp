@@ -23200,16 +23200,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_nn_utils_rnn_pad_sequence
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_rnn_pad_sequence(Rcpp::XPtr<XPtrTorchTensorList> sequence, bool batch_first, double padding_value);
-RcppExport SEXP _torch_cpp_nn_utils_rnn_pad_sequence(SEXP sequenceSEXP, SEXP batch_firstSEXP, SEXP padding_valueSEXP) {
+// cpp_nn_utils_pad_sequence
+Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_pad_sequence(Rcpp::XPtr<XPtrTorchTensorList> sequence, bool batch_first, double padding_value);
+RcppExport SEXP _torch_cpp_nn_utils_pad_sequence(SEXP sequenceSEXP, SEXP batch_firstSEXP, SEXP padding_valueSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorList> >::type sequence(sequenceSEXP);
     Rcpp::traits::input_parameter< bool >::type batch_first(batch_firstSEXP);
     Rcpp::traits::input_parameter< double >::type padding_value(padding_valueSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_rnn_pad_sequence(sequence, batch_first, padding_value));
+    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_pad_sequence(sequence, batch_first, padding_value));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -25290,7 +25290,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_nn_utils_rnn_pack_padded_sequence", (DL_FUNC) &_torch_cpp_nn_utils_rnn_pack_padded_sequence, 4},
     {"_torch_cpp_nn_utils_pack_sequence", (DL_FUNC) &_torch_cpp_nn_utils_pack_sequence, 2},
     {"_torch_cpp_nn_utils_pad_packed_sequence", (DL_FUNC) &_torch_cpp_nn_utils_pad_packed_sequence, 4},
-    {"_torch_cpp_nn_utils_rnn_pad_sequence", (DL_FUNC) &_torch_cpp_nn_utils_rnn_pad_sequence, 3},
+    {"_torch_cpp_nn_utils_pad_sequence", (DL_FUNC) &_torch_cpp_nn_utils_pad_sequence, 3},
     {"_torch_cpp_nn_utils_PackedSequence_data", (DL_FUNC) &_torch_cpp_nn_utils_PackedSequence_data, 1},
     {"_torch_cpp_nn_utils_PackedSequence_batch_sizes", (DL_FUNC) &_torch_cpp_nn_utils_PackedSequence_batch_sizes, 1},
     {"_torch_cpp_nn_utils_PackedSequence_sorted_indices", (DL_FUNC) &_torch_cpp_nn_utils_PackedSequence_sorted_indices, 1},

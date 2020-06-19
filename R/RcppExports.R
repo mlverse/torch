@@ -6957,8 +6957,8 @@ cpp_nn_utils_pad_packed_sequence <- function(sequence, batch_first, padding_valu
     .Call('_torch_cpp_nn_utils_pad_packed_sequence', PACKAGE = 'torchpkg', sequence, batch_first, padding_value, total_length)
 }
 
-cpp_nn_utils_rnn_pad_sequence <- function(sequence, batch_first, padding_value) {
-    .Call('_torch_cpp_nn_utils_rnn_pad_sequence', PACKAGE = 'torchpkg', sequence, batch_first, padding_value)
+cpp_nn_utils_pad_sequence <- function(sequence, batch_first, padding_value) {
+    .Call('_torch_cpp_nn_utils_pad_sequence', PACKAGE = 'torchpkg', sequence, batch_first, padding_value)
 }
 
 cpp_nn_utils_PackedSequence_data <- function(x) {

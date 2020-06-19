@@ -36,7 +36,7 @@ Rcpp::XPtr<XPtrTorchTensorList> cpp_nn_utils_pad_packed_sequence (
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_rnn_pad_sequence (
+Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_pad_sequence (
   Rcpp::XPtr<XPtrTorchTensorList> sequence,
   bool batch_first,
   double padding_value
