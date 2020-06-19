@@ -145,7 +145,7 @@ install_type <- function(version) {
 #' 
 #' @export
 install_torch <- function(version = "1.5.0", type = install_type(version = version), reinstall = FALSE,
-                          path = install_path()) {
+                          path = install_path(), ...) {
   if (reinstall) {
     unlink(path, recursive = TRUE)
   }
@@ -157,5 +157,6 @@ install_torch <- function(version = "1.5.0", type = install_type(version = versi
   lantern_install_libs(version, type, path)
   
   # reinitialize lantern, might happen if installation fails on load and manual install required
-  lantern_start(reload = TRUE)
+  if (!identical(list(...)$load, FALSE))
+    lantern_start(reload = TRUE)
 }
