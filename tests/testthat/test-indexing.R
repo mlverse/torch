@@ -16,8 +16,8 @@ test_that("[ works", {
   expect_equal(as_array(x[..,1]), as_array(x)[,,,1])
   expect_equal(as_array(x[..,1,1]), as_array(x)[,,1,1])
   
-  expect_error(x[1,], "incorrect number of dimensions")
-  expect_error(x[1,1,1,1,1], "incorrect number of dimensions")
+  expect_error(x[1,], "incorrect number of dimensions", class = "value_error")
+  expect_error(x[1,1,1,1,1], "too many indices", class = "c10::IndexError")
   
   x <- torch_randn(c(10,10,10,10))
   i <- c(1,2,3,4)
@@ -48,4 +48,9 @@ test_that("[ works", {
   expect_tensor_shape(x[, newaxis], c(10, 1))
   expect_tensor_shape(x[newaxis, , newaxis], c(1, 10, 1))
   expect_tensor_shape(x[newaxis, , newaxis, newaxis], c(1, 10, 1, 1))
+  
+  x <- torch_randn(10, 10)
+  expect_tensor_shape(x[1,,drop=FALSE], c(1, 10))
+  expect_tensor_shape(x[..,1,drop=FALSE], c(10, 1))
+  expect_tensor_shape(x[..,-1,drop=FALSE], c(10, 1))
 })
