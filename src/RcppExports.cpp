@@ -23160,6 +23160,103 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_nn_utils_rnn_pack_padded_sequence
+Rcpp::XPtr<XPtrTorchPackedSequence> cpp_nn_utils_rnn_pack_padded_sequence(Rcpp::XPtr<XPtrTorchTensor> input, Rcpp::XPtr<XPtrTorchTensor> lengths, bool batch_first, bool enforce_sorted);
+RcppExport SEXP _torch_cpp_nn_utils_rnn_pack_padded_sequence(SEXP inputSEXP, SEXP lengthsSEXP, SEXP batch_firstSEXP, SEXP enforce_sortedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type lengths(lengthsSEXP);
+    Rcpp::traits::input_parameter< bool >::type batch_first(batch_firstSEXP);
+    Rcpp::traits::input_parameter< bool >::type enforce_sorted(enforce_sortedSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_rnn_pack_padded_sequence(input, lengths, batch_first, enforce_sorted));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_nn_utils_pack_sequence
+Rcpp::XPtr<XPtrTorchPackedSequence> cpp_nn_utils_pack_sequence(Rcpp::XPtr<XPtrTorchTensorList> sequence, bool enforce_sorted);
+RcppExport SEXP _torch_cpp_nn_utils_pack_sequence(SEXP sequenceSEXP, SEXP enforce_sortedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorList> >::type sequence(sequenceSEXP);
+    Rcpp::traits::input_parameter< bool >::type enforce_sorted(enforce_sortedSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_pack_sequence(sequence, enforce_sorted));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_nn_utils_pad_packed_sequence
+Rcpp::XPtr<XPtrTorchTensorList> cpp_nn_utils_pad_packed_sequence(Rcpp::XPtr<XPtrTorchPackedSequence> sequence, bool batch_first, double padding_value, Rcpp::XPtr<XPtrTorchoptional_int64_t> total_length);
+RcppExport SEXP _torch_cpp_nn_utils_pad_packed_sequence(SEXP sequenceSEXP, SEXP batch_firstSEXP, SEXP padding_valueSEXP, SEXP total_lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchPackedSequence> >::type sequence(sequenceSEXP);
+    Rcpp::traits::input_parameter< bool >::type batch_first(batch_firstSEXP);
+    Rcpp::traits::input_parameter< double >::type padding_value(padding_valueSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchoptional_int64_t> >::type total_length(total_lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_pad_packed_sequence(sequence, batch_first, padding_value, total_length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_nn_utils_pad_sequence
+Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_pad_sequence(Rcpp::XPtr<XPtrTorchTensorList> sequence, bool batch_first, double padding_value);
+RcppExport SEXP _torch_cpp_nn_utils_pad_sequence(SEXP sequenceSEXP, SEXP batch_firstSEXP, SEXP padding_valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorList> >::type sequence(sequenceSEXP);
+    Rcpp::traits::input_parameter< bool >::type batch_first(batch_firstSEXP);
+    Rcpp::traits::input_parameter< double >::type padding_value(padding_valueSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_pad_sequence(sequence, batch_first, padding_value));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_nn_utils_PackedSequence_data
+Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_data(Rcpp::XPtr<XPtrTorchPackedSequence> x);
+RcppExport SEXP _torch_cpp_nn_utils_PackedSequence_data(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchPackedSequence> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_PackedSequence_data(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_nn_utils_PackedSequence_batch_sizes
+Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_batch_sizes(Rcpp::XPtr<XPtrTorchPackedSequence> x);
+RcppExport SEXP _torch_cpp_nn_utils_PackedSequence_batch_sizes(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchPackedSequence> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_PackedSequence_batch_sizes(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_nn_utils_PackedSequence_sorted_indices
+Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_sorted_indices(Rcpp::XPtr<XPtrTorchPackedSequence> x);
+RcppExport SEXP _torch_cpp_nn_utils_PackedSequence_sorted_indices(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchPackedSequence> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_PackedSequence_sorted_indices(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_nn_utils_PackedSequence_unsorted_indices
+Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_unsorted_indices(Rcpp::XPtr<XPtrTorchPackedSequence> x);
+RcppExport SEXP _torch_cpp_nn_utils_PackedSequence_unsorted_indices(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchPackedSequence> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_nn_utils_PackedSequence_unsorted_indices(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_qscheme_to_string
 std::string cpp_qscheme_to_string(Rcpp::XPtr<XPtrTorchQScheme> x);
 RcppExport SEXP _torch_cpp_qscheme_to_string(SEXP xSEXP) {
@@ -25190,6 +25287,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_contiguous_format", (DL_FUNC) &_torch_cpp_torch_contiguous_format, 0},
     {"_torch_cpp_torch_preserve_format", (DL_FUNC) &_torch_cpp_torch_preserve_format, 0},
     {"_torch_cpp_torch_channels_last_format", (DL_FUNC) &_torch_cpp_torch_channels_last_format, 0},
+    {"_torch_cpp_nn_utils_rnn_pack_padded_sequence", (DL_FUNC) &_torch_cpp_nn_utils_rnn_pack_padded_sequence, 4},
+    {"_torch_cpp_nn_utils_pack_sequence", (DL_FUNC) &_torch_cpp_nn_utils_pack_sequence, 2},
+    {"_torch_cpp_nn_utils_pad_packed_sequence", (DL_FUNC) &_torch_cpp_nn_utils_pad_packed_sequence, 4},
+    {"_torch_cpp_nn_utils_pad_sequence", (DL_FUNC) &_torch_cpp_nn_utils_pad_sequence, 3},
+    {"_torch_cpp_nn_utils_PackedSequence_data", (DL_FUNC) &_torch_cpp_nn_utils_PackedSequence_data, 1},
+    {"_torch_cpp_nn_utils_PackedSequence_batch_sizes", (DL_FUNC) &_torch_cpp_nn_utils_PackedSequence_batch_sizes, 1},
+    {"_torch_cpp_nn_utils_PackedSequence_sorted_indices", (DL_FUNC) &_torch_cpp_nn_utils_PackedSequence_sorted_indices, 1},
+    {"_torch_cpp_nn_utils_PackedSequence_unsorted_indices", (DL_FUNC) &_torch_cpp_nn_utils_PackedSequence_unsorted_indices, 1},
     {"_torch_cpp_qscheme_to_string", (DL_FUNC) &_torch_cpp_qscheme_to_string, 1},
     {"_torch_cpp_torch_per_channel_affine", (DL_FUNC) &_torch_cpp_torch_per_channel_affine, 0},
     {"_torch_cpp_torch_per_tensor_affine", (DL_FUNC) &_torch_cpp_torch_per_tensor_affine, 0},

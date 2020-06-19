@@ -6945,6 +6945,38 @@ cpp_torch_channels_last_format <- function() {
     .Call('_torch_cpp_torch_channels_last_format', PACKAGE = 'torchpkg')
 }
 
+cpp_nn_utils_rnn_pack_padded_sequence <- function(input, lengths, batch_first, enforce_sorted) {
+    .Call('_torch_cpp_nn_utils_rnn_pack_padded_sequence', PACKAGE = 'torchpkg', input, lengths, batch_first, enforce_sorted)
+}
+
+cpp_nn_utils_pack_sequence <- function(sequence, enforce_sorted) {
+    .Call('_torch_cpp_nn_utils_pack_sequence', PACKAGE = 'torchpkg', sequence, enforce_sorted)
+}
+
+cpp_nn_utils_pad_packed_sequence <- function(sequence, batch_first, padding_value, total_length) {
+    .Call('_torch_cpp_nn_utils_pad_packed_sequence', PACKAGE = 'torchpkg', sequence, batch_first, padding_value, total_length)
+}
+
+cpp_nn_utils_pad_sequence <- function(sequence, batch_first, padding_value) {
+    .Call('_torch_cpp_nn_utils_pad_sequence', PACKAGE = 'torchpkg', sequence, batch_first, padding_value)
+}
+
+cpp_nn_utils_PackedSequence_data <- function(x) {
+    .Call('_torch_cpp_nn_utils_PackedSequence_data', PACKAGE = 'torchpkg', x)
+}
+
+cpp_nn_utils_PackedSequence_batch_sizes <- function(x) {
+    .Call('_torch_cpp_nn_utils_PackedSequence_batch_sizes', PACKAGE = 'torchpkg', x)
+}
+
+cpp_nn_utils_PackedSequence_sorted_indices <- function(x) {
+    .Call('_torch_cpp_nn_utils_PackedSequence_sorted_indices', PACKAGE = 'torchpkg', x)
+}
+
+cpp_nn_utils_PackedSequence_unsorted_indices <- function(x) {
+    .Call('_torch_cpp_nn_utils_PackedSequence_unsorted_indices', PACKAGE = 'torchpkg', x)
+}
+
 cpp_qscheme_to_string <- function(x) {
     .Call('_torch_cpp_qscheme_to_string', PACKAGE = 'torchpkg', x)
 }

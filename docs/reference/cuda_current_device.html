@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nll_loss — nnf_nll_loss • torch</title>
+<title>Returns the index of a currently selected device. — cuda_current_device • torch</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Nll_loss — nnf_nll_loss" />
-<meta property="og:description" content="The negative log likelihood loss." />
+<meta property="og:title" content="Returns the index of a currently selected device. — cuda_current_device" />
+<meta property="og:description" content="Returns the index of a currently selected device." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,62 +123,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Nll_loss</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nnf-loss.R'><code>R/nnf-loss.R</code></a></small>
-    <div class="hidden name"><code>nnf_nll_loss.Rd</code></div>
+    <h1>Returns the index of a currently selected device.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/cuda.R'><code>R/cuda.R</code></a></small>
+    <div class="hidden name"><code>cuda_current_device.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The negative log likelihood loss.</p>
+    <p>Returns the index of a currently selected device.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_nll_loss</span>(
-  <span class='no'>input</span>,
-  <span class='no'>target</span>,
-  <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ignore_index</span> <span class='kw'>=</span> -<span class='fl'>100</span>,
-  <span class='kw'>reduction</span> <span class='kw'>=</span> <span class='st'>"mean"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>cuda_current_device</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>input</th>
-      <td><p>\((N, C)\) where <code>C = number of classes</code> or \((N, C, H, W)\) in
-case of 2D Loss, or \((N, C, d_1, d_2, ..., d_K)\) where \(K \geq 1\) in
-the case of K-dimensional loss.</p></td>
-    </tr>
-    <tr>
-      <th>target</th>
-      <td><p>\((N)\) where each value is \(0 \leq \text{targets}[i] \leq C-1\),
-or \((N, d_1, d_2, ..., d_K)\) where \(K \geq 1\) for K-dimensional loss.</p></td>
-    </tr>
-    <tr>
-      <th>weight</th>
-      <td><p>(Tensor, optional) a manual rescaling weight given to each class.
-If given, has to be a Tensor of size <code>C</code></p></td>
-    </tr>
-    <tr>
-      <th>ignore_index</th>
-      <td><p>(int, optional) Specifies a target value that is ignored and
-does not contribute to the input gradient.</p></td>
-    </tr>
-    <tr>
-      <th>reduction</th>
-      <td><p>(string, optional) – Specifies the reduction to apply to the
-output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean':
-the sum of the output will be divided by the number of elements in the output,
-'sum': the output will be summed. Default: 'mean'</p></td>
-    </tr>
-    </table>
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

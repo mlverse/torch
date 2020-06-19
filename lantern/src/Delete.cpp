@@ -118,3 +118,8 @@ void lantern_optional_int64_t_delete(void *x)
 {
   lantern_delete<LanternObject<c10::optional<int64_t>>>(x);
 }
+
+void lantern_PackedSequence_delete(void *x)
+{
+  lantern_delete<LanternPtr<torch::nn::utils::rnn::PackedSequence>>(x);
+}

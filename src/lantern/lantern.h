@@ -185,10 +185,20 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lantern_Slice_delete)(void *x);
   LANTERN_API void(LANTERN_PTR lantern_optional_int64_t_delete)(void *x);
   LANTERN_API void *(LANTERN_PTR lantern_Tensor_device)(void *self);
-  LANTERN_API bool (LANTERN_PTR lantern_cuda_is_available) ();
-  LANTERN_API int (LANTERN_PTR lantern_cuda_device_count) ();
-  LANTERN_API int64_t (LANTERN_PTR lantern_cuda_current_device) ();
-  LANTERN_API void (LANTERN_PTR lantern_cuda_show_config) ();
+  LANTERN_API bool(LANTERN_PTR lantern_cuda_is_available)();
+  LANTERN_API int(LANTERN_PTR lantern_cuda_device_count)();
+  LANTERN_API int64_t(LANTERN_PTR lantern_cuda_current_device)();
+  LANTERN_API void(LANTERN_PTR lantern_cuda_show_config)();
+  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pack_padded_sequence)(void *input, void *lengths, bool batch_first, bool enforce_sorted);
+  LANTERN_API void(LANTERN_PTR lantern_PackedSequence_delete)(void *x);
+  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_PackedSequence_batch_sizes)(void *input);
+  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_PackedSequence_data)(void *input);
+  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_PackedSequence_sorted_indices)(void *input);
+  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_PackedSequence_unsorted_indices)(void *input);
+  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pack_sequence)(void *sequence, bool enforce_sorted);
+  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pad_packed_sequence)(void *sequence, bool batch_first,
+                                                                           double padding_value, void *total_length);
+  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pad_sequence)(void *sequence, bool batch_first, double padding_value);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2185,6 +2195,15 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_cuda_device_count);
   LOAD_SYMBOL(lantern_cuda_current_device);
   LOAD_SYMBOL(lantern_cuda_show_config);
+  LOAD_SYMBOL(lantern_nn_utils_rnn_pack_padded_sequence);
+  LOAD_SYMBOL(lantern_PackedSequence_delete);
+  LOAD_SYMBOL(lantern_nn_utils_PackedSequence_data);
+  LOAD_SYMBOL(lantern_nn_utils_PackedSequence_batch_sizes);
+  LOAD_SYMBOL(lantern_nn_utils_PackedSequence_sorted_indices);
+  LOAD_SYMBOL(lantern_nn_utils_PackedSequence_unsorted_indices);
+  LOAD_SYMBOL(lantern_nn_utils_rnn_pack_sequence);
+  LOAD_SYMBOL(lantern_nn_utils_rnn_pad_packed_sequence);
+  LOAD_SYMBOL(lantern_nn_utils_rnn_pad_sequence);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)

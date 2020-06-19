@@ -91,6 +91,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   if ("double" %in% expected_types && is.null(obj))
     return(list(NULL, "double"))
   
+  if ("Device" %in% expected_types && is_torch_device(obj))
+    return(list(obj$ptr, "Device"))
+  
   stop("Can't convert argument", call.=FALSE)
 }
 
