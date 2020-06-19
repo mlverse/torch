@@ -74,8 +74,12 @@ lantern_install_lib <- function(library_name, library_url, install_path, source_
   file.copy(source_files, install_path, recursive = TRUE)
 }
 
+install_os <- function() {
+  tolower(Sys.info()[["sysname"]])
+}
+
 lantern_install_libs <- function(version, type, install_path) {
-  current_os <- tolower(Sys.info()[["sysname"]])
+  current_os <- install_os()
   
   if (!version %in% names(install_config))
     stop("Version ", version, " is not available, available versions: ",
@@ -110,6 +114,26 @@ lantern_install_libs <- function(version, type, install_path) {
   invisible(install_path)
 }
 
+#' @keywords internal
+#' @export
+install_type <- function(version) {
+  if (nchar(Sys.getenv("CUDA")) > 0) return(Sys.getenv("CUDA"))
+  if (install_os() != "linux") return("cpu")
+  
+  versions_file <- "/usr/local/cuda/version.txt"
+  if (!file.exists(versions_file)) return("cpu")
+  
+  cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
+  versions_available <- names(install_config[[version]])
+  
+  if (!cuda_version %in% versions_available) {
+    message("Cuda ", cuda_version, " detected but torch only supports: ", paste(versions_available, collapse = ", "))
+    return("cpu")
+  }
+  
+  cuda_version
+}
+
 #' Install Torch
 #' 
 #' Installs Torch and its dependencies.
@@ -120,7 +144,7 @@ lantern_install_libs <- function(version, type, install_path) {
 #' @param path Optional path to install or check for an already existing installation.
 #' 
 #' @export
-install_torch <- function(version = "1.5.0", type = Sys.getenv("CUDA", unset = "cpu"), reinstall = FALSE,
+install_torch <- function(version = "1.5.0", type = install_type(version = version), reinstall = FALSE,
                           path = install_path()) {
   if (reinstall) {
     unlink(path, recursive = TRUE)
