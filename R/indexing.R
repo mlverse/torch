@@ -24,7 +24,8 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
 )
 
 #' @export
-`[.torch_tensor` <- function(x, ...) {
+`[.torch_tensor` <- function(x, ..., drop = TRUE) {
+  
   slices <- rlang::enquos(..., .ignore_empty = "none")
   
   slices <- lapply(slices, function(x) {
@@ -34,32 +35,25 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
       lazyeval::lazy_eval(x, data = .d)
   })
   
-  d <- dim(x)
-  
-  
-  if (length(slices) <= length(d)) {
-    if (inherits(slices[[1]], "fill")) {
-      slices <- slices[-1]
-      a <- as.list(rep(NA, length(d) - length(slices)))
-      slices <- append(a, slices)
-    } else if (inherits(slices[[length(slices)]], "fill")) {
-      slices <- slices[-length(slices)]
-      a <- as.list(rep(NA, length(d) - length(slices)))
-      slices <- append(slices, a)
-    }
+  if (length(slices) < length(dim(x))) {
+    
+    if (!inherits(slices[[1]], "fill") && 
+        !inherits(slices[[length(slices)]], "fill"))
+      value_error("incorrect number of dimensions")
+    
   }
-  
-  if (length(slices) == (length(d) + 1) && inherits(slices[[length(slices)]], "fill"))
-    slices <- slices[1:(length(slices) -1)]
-  
-  if (length(slices) != length(d) && !any(sapply(slices, is.null)))
-    stop("incorrect number of dimensions. Specified " , length(slices), " should be ",
-         length(d), ".")
   
   index <- cpp_torch_tensor_index_new()
   for (s in slices) {
-    if (rlang::is_scalar_integerish(s))
-      cpp_torch_tensor_index_append_int64(index, ifelse(s > 0, s - 1, s))
+    if (rlang::is_scalar_integerish(s)) {
+      cpp_torch_tensor_index_append_int64(index, ifelse(s > 0, s - 1, s))   
+      
+      if (!drop)
+        cpp_torch_tensor_index_append_none(index)
+      
+    } 
+    else if (inherits(s, "fill")) 
+      cpp_torch_tensor_index_append_ellipsis(index)
     else if (rlang::is_scalar_atomic(s) && is.na(s))
       cpp_torch_tensor_index_append_slice(index, Slice())
     else if (is.logical(s))
@@ -69,7 +63,7 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
     else if (is.null(s))
       cpp_torch_tensor_index_append_none(index)
     else if (rlang::is_integerish(s)) {
-      
+    
       if (all(s > 0)) {
         s <- s - 1
       } else if (all(s < 0)) {
