@@ -155,4 +155,7 @@ install_torch <- function(version = "1.5.0", type = install_type(version = versi
   }
   
   lantern_install_libs(version, type, path)
+  
+  # reinitialize lantern, might happen if installation fails on load and manual install required
+  lantern_start(reload = TRUE)
 }
