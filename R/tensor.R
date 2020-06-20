@@ -2,8 +2,6 @@
 
 Tensor <- R7Class(
   classname = "torch_tensor", 
-  # lock_class = FALSE,
-  # lock_objects = FALSE,
   public = list(
     initialize = function(data = NULL, dtype = NULL, device = NULL, requires_grad = FALSE, 
                           pin_memory = FALSE, ptr = NULL) {
@@ -112,4 +110,25 @@ is_undefined_tensor <- function(x) {
   # TODO: correctrly transform undefined to NULL and fix.
   out <- paste0(capture.output(print(x)), collapse = " ")
   grepl("undefined", out)
+}
+
+#' @importFrom utils .DollarNames
+#' @export
+.DollarNames.torch_tensor <- function(x, pattern = "") {
+  candidates <- names(parent.env(parent.env(x)))
+  candidates <- sort(candidates[grepl(pattern, candidates)])
+  attr(candidates, "helpHandler") <- "torch:::help_handler"
+  candidates
+}
+
+help_handler <- function(type, topic, source, ...) {
+  
+  signature <- rlang::fn_fmls_names(parent.env(Tensor)[[topic]])
+  signature <- paste0(signature, collapse = ", ")
+  signature <- paste0(topic, "(", signature, ")")
+                                    
+  if (type == "completion")
+    return(list(title = topic, signature = signature))
+
+  return(NULL)  
 }

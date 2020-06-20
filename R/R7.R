@@ -76,6 +76,9 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
 }
 
 #' @export
+`[[.R7` <- `$.R7`
+
+#' @export
 print.R7 <- function(x, ...) {
   x$print()
 }
