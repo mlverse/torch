@@ -14,7 +14,7 @@ test_that("[ works", {
   expect_equal(as_array(x[1,..]), as_array(x)[1,,,])
   expect_equal(as_array(x[1,1,..]), as_array(x)[1,1,,])
   expect_equal(as_array(x[..,1]), as_array(x)[,,,1])
-  expect_equal(as_array(x[..,1,1]), as_array(x)[,,1,1])\
+  expect_equal(as_array(x[..,1,1]), as_array(x)[,,1,1])
   
   x <- torch_randn(c(10,10,10,10))
   i <- c(1,2,3,4)
