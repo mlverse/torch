@@ -20,9 +20,15 @@ NULL
   }
     
   if (install_exists() && install_success && Sys.getenv("LOAD_TORCH", unset = 1) != 0) {
-    lantern_start() 
-    .generator_null <<- torch_generator()
-    .generator_null$set_current_seed(seed = abs(.Random.seed[1]))
+    # in case init fails aallow user to restart session rather than blocking install
+    tryCatch({
+      lantern_start() 
+      .generator_null <<- torch_generator()
+      .generator_null$set_current_seed(seed = abs(.Random.seed[1]))
+    }, error = function(e) {
+      warning("Torch failed to start, restart your R session to try again. ", e$message, call. = FALSE)
+      FALSE
+    })
   }
 }
 
