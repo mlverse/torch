@@ -5,32 +5,31 @@ NULL
 .generator_null <- NULL
 
 .onAttach <- function(libname, pkgname) {
-  if (!install_exists() && interactive()) {
-    packageStartupMessage("You need to install libtorch in order to use torch.\n")
-    ans <- readline("Do you want to download it now? ~100Mb (yes/no)")
-    if (ans == "yes" | ans == "y")
-      install_torch()
-    
-    if (install_exists()) {
-      packageStartupMessage("Torch was successfully installed.")
-      packageStartupMessage("Please restart your R session now.")
-    }
-      
-  }
 }
 
 .onLoad <- function(libname, pkgname){
-  
-  if (!install_exists() && Sys.getenv("INSTALL_TORCH", unset = 0) == 1) {
-    install_torch()
+  install_success <- TRUE
+  if (!install_exists() && Sys.getenv("INSTALL_TORCH", unset = 1) != 0) {
+    install_success <- tryCatch({
+      install_torch()
+      TRUE
+    }, error = function(e) {
+      warning("Failed to install Torch, manually run install_torch(). ", e$message, call. = FALSE)
+      FALSE
+    })
   }
     
-  if (install_exists()) {
-    lantern_start() 
-    .generator_null <<- torch_generator()
-    .generator_null$set_current_seed(seed = abs(.Random.seed[1]))
+  if (install_exists() && install_success && Sys.getenv("LOAD_TORCH", unset = 1) != 0) {
+    # in case init fails aallow user to restart session rather than blocking install
+    tryCatch({
+      lantern_start() 
+      .generator_null <<- torch_generator()
+      .generator_null$set_current_seed(seed = abs(.Random.seed[1]))
+    }, error = function(e) {
+      warning("Torch failed to start, restart your R session to try again. ", e$message, call. = FALSE)
+      FALSE
+    })
   }
-  
 }
 
 .onUnload <- function(libpath) {

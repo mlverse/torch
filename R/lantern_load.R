@@ -5,12 +5,12 @@ lantern_default <- function() {
   "1.4.0" 
 }
 
-lantern_start <- function(version = lantern_default()) {
+lantern_start <- function(version = lantern_default(), reload = FALSE) {
   if (!install_exists()) {
     stop("Torch is not installed, please run 'install_torch()'.")
   }
   
-  if (.globals$lantern_started) return()
+  if (.globals$lantern_started && !reload) return()
   
   cpp_lantern_init(install_path())
   
