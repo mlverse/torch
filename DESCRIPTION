@@ -99,6 +99,7 @@ Collate:
     'tensor_options.R'
     'utils-data-collate.R'
     'utils-data-dataloader.R'
+    'utils-data-enum.R'
     'utils-data-fetcher.R'
     'utils-data-sampler.R'
     'utils-data.R'
