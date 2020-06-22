@@ -52,6 +52,7 @@ Collate:
     'gen-namespace-examples.R'
     'gen-namespace.R'
     'generator.R'
+    'help.R'
     'indexing.R'
     'install.R'
     'lantern_load.R'
