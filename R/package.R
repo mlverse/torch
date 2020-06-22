@@ -9,7 +9,7 @@ NULL
 
 .onLoad <- function(libname, pkgname){
   install_success <- TRUE
-  if (!install_exists() && !Sys.getenv("INSTALL_TORCH", unset = 1) == 0) {
+  if (!install_exists() && Sys.getenv("INSTALL_TORCH", unset = 1) != 0) {
     install_success <- tryCatch({
       install_torch()
       TRUE
@@ -19,7 +19,7 @@ NULL
     })
   }
     
-  if (install_exists() && install_success) {
+  if (install_exists() && install_success && Sys.getenv("LOAD_TORCH", unset = 1) != 0) {
     lantern_start() 
     .generator_null <<- torch_generator()
     .generator_null$set_current_seed(seed = abs(.Random.seed[1]))
