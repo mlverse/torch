@@ -2,8 +2,6 @@
 
 Tensor <- R7Class(
   classname = "torch_tensor", 
-  # lock_class = FALSE,
-  # lock_objects = FALSE,
   public = list(
     initialize = function(data = NULL, dtype = NULL, device = NULL, requires_grad = FALSE, 
                           pin_memory = FALSE, ptr = NULL) {
@@ -113,3 +111,4 @@ is_undefined_tensor <- function(x) {
   out <- paste0(capture.output(print(x)), collapse = " ")
   grepl("undefined", out)
 }
+
