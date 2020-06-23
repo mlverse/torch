@@ -200,6 +200,11 @@ extern "C"
                                                                            double padding_value, void *total_length);
   LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pad_sequence)(void *sequence, bool batch_first, double padding_value);
   LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_PackedSequence_new)(void *data, void *batch_sizes, void *sorted_indices, void *unsorted_indices);
+  LANTERN_API void *(LANTERN_PTR lantern_Scalar_dtype)(void *self);
+  LANTERN_API float(LANTERN_PTR lantern_Scalar_to_float)(void *self);
+  LANTERN_API int(LANTERN_PTR lantern_Scalar_to_int)(void *self);
+  LANTERN_API double(LANTERN_PTR lantern_Scalar_to_double)(void *self);
+  LANTERN_API bool(LANTERN_PTR lantern_Scalar_to_bool)(void *self);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2206,6 +2211,11 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_nn_utils_rnn_pad_packed_sequence);
   LOAD_SYMBOL(lantern_nn_utils_rnn_pad_sequence);
   LOAD_SYMBOL(lantern_nn_utils_rnn_PackedSequence_new);
+  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_dtype);
+  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_to_float);
+  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_to_int);
+  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_to_double);
+  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_to_bool);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
