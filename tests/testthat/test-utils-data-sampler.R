@@ -1,7 +1,7 @@
 test_that("sampler's lenght", {
   x <- torch_randn(1000, 10)
   y <- torch_randn(1000)
-  data <- utils_dataset_tensor(x, y)
+  data <- tensor_dataset(x, y)
   
   sampler <- SequentialSampler$new(data)
   expect_length(sampler, 1000)

@@ -1,5 +1,5 @@
 Dataset <- R6::R6Class(
-  classname = "utils_dataset", 
+  classname = "dataset", 
   lock_objects = FALSE,
   public = list(
     get_item = function(index) {
@@ -12,7 +12,7 @@ Dataset <- R6::R6Class(
 )
 
 is_map_dataset <- function(x) {
-  inherits(x, "utils_dataset")
+  inherits(x, "dataset")
 }
 
 #' An abstract class representing a `Dataset`.
@@ -32,7 +32,7 @@ is_map_dataset <- function(x) {
 #' @param ... public methods for the dataset class
 #' 
 #' @export
-utils_dataset <- function(..., name = NULL) {
+dataset <- function(..., name = NULL) {
   R6::R6Class(
     classname = name,
     lock_objects = FALSE,
@@ -44,17 +44,17 @@ utils_dataset <- function(..., name = NULL) {
 }
 
 #' @export
-`[.utils_dataset` <- function(x, y) {
+`[.dataset` <- function(x, y) {
   x$.getitem(y)
 }
 
 #' @export
-length.utils_dataset <- function(x) {
+length.dataset <- function(x) {
   x$.length()
 }
 
-TensorDataset <- utils_dataset(
-  name = "utils_dataset_tensor",
+TensorDataset <- dataset(
+  name = "tensor_dataset",
   initialize = function(...) {
     tensors <- list(...)
     lens <- sapply(tensors, function(x) x$shape[1])
@@ -86,7 +86,7 @@ TensorDataset <- utils_dataset(
 #' @param ... tensors that have the same size of the first dimension.
 #'
 #' @export
-utils_dataset_tensor <- function(...) {
+tensor_dataset <- function(...) {
   TensorDataset$new(...)
 }
 

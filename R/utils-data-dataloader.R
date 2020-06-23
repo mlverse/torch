@@ -1,6 +1,6 @@
 #' @export
-length.utils_data_loader <- function(x) {
-  x$.lenght()
+length.dataloader <- function(x) {
+  x$.length()
 }
 
 #' Creates an iterator from a DataLoader
@@ -10,6 +10,15 @@ length.utils_data_loader <- function(x) {
 #' @export
 dataloader_make_iter <- function(dataloader) {
   dataloader$.iter()
+}
+
+#' Checks if the object is a dataloader
+#'
+#' @param x object to check
+#' 
+#' @export
+is_dataloader <- function(x) {
+  inherits(x, "dataloader")
 }
 
 #' Get the next element of a dataloader iterator
@@ -58,11 +67,11 @@ dataloader_get_next <- function(iter) {
 #'   input, after seeding and before data loading. (default: `NULL`)
 #'
 #' @export
-utils_dataloader <- function(dataset, batch_size = 1, shuffle = FALSE, 
-                             sampler=NULL,
-                             batch_sampler=NULL, num_workers=0, collate_fn=NULL,
-                             pin_memory=FALSE, drop_last=FALSE, timeout=0,
-                             worker_init_fn=NULL) {
+dataloader <- function(dataset, batch_size = 1, shuffle = FALSE, 
+                       sampler=NULL,
+                       batch_sampler=NULL, num_workers=0, collate_fn=NULL,
+                       pin_memory=FALSE, drop_last=FALSE, timeout=0,
+                       worker_init_fn=NULL) {
   
   multiprocessing_context <- NULL
   generator <- NULL
@@ -73,7 +82,7 @@ utils_dataloader <- function(dataset, batch_size = 1, shuffle = FALSE,
 }
 
 DataLoader <- R6::R6Class(
-  classname = "utils_data_loader",
+  classname = "dataloader",
   lock_objects = FALSE,
   public = list(
     initialize = function(dataset, batch_size=1, shuffle=FALSE, sampler=NULL,
@@ -141,7 +150,7 @@ DataLoader <- R6::R6Class(
       }
         
     },
-    .lenght = function() {
+    .length = function() {
       if (self$.dataset_kind == "iterable") {
         not_implemented_error()
       } else {

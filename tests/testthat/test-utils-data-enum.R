@@ -2,8 +2,8 @@ test_that("dataloader_enum", {
   
   x <- torch_randn(100, 100)
   y <- torch_randn(100, 1)
-  dataset <- utils_dataset_tensor(x, y)
-  dl <- utils_dataloader(dataset = dataset, batch_size = 32)
+  dataset <- tensor_dataset(x, y)
+  dl <- dataloader(dataset = dataset, batch_size = 32)
   
   i <- 1
   for (b in dataloader_enum(dl)) {
