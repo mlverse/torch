@@ -29,6 +29,36 @@ void *lantern_Scalar(void *value, const char *type)
   return (void *)new LanternObject<torch::Scalar>(out);
 }
 
+void *lantern_Scalar_dtype(void *self)
+{
+  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
+  return (void *)new LanternObject<torch::Dtype>(v.type());
+}
+
+float lantern_Scalar_to_float(void *self)
+{
+  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
+  return v.toFloat();
+}
+
+int lantern_Scalar_to_int(void *self)
+{
+  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
+  return v.toInt();
+}
+
+double lantern_Scalar_to_double(void *self)
+{
+  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
+  return v.toDouble();
+}
+
+bool lantern_Scalar_to_bool(void *self)
+{
+  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
+  return v.toBool();
+}
+
 void *lantern_Scalar_nullopt()
 {
   return (void *)new LanternObject<c10::optional<torch::Scalar>>(c10::nullopt);

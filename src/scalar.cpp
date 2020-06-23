@@ -35,3 +35,34 @@ Rcpp::XPtr<XPtrTorchScalar> cpp_torch_scalar (SEXP x) {
 
   return make_xptr<XPtrTorchScalar>(out);
 }
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_scalar_dtype (Rcpp::XPtr<XPtrTorchScalar> self)
+{
+  XPtrTorchScalarType out = lantern_Scalar_dtype(self->get());
+  return make_xptr<XPtrTorchScalarType>(out);
+}
+
+// [[Rcpp::export]]
+int cpp_torch_scalar_to_int (Rcpp::XPtr<XPtrTorchScalar> self) 
+{
+  return lantern_Scalar_to_int(self->get());
+}
+
+// [[Rcpp::export]]
+double cpp_torch_scalar_to_double (Rcpp::XPtr<XPtrTorchScalar> self)
+{
+  return lantern_Scalar_to_double(self->get());
+}
+
+// [[Rcpp::export]]
+float cpp_torch_scalar_to_float (Rcpp::XPtr<XPtrTorchScalar> self)
+{
+  return lantern_Scalar_to_float(self->get());
+}
+
+// [[Rcpp::export]]
+bool cpp_torch_scalar_to_bool (Rcpp::XPtr<XPtrTorchScalar> self)
+{
+  return lantern_Scalar_to_bool(self->get());
+}
