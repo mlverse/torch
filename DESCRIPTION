@@ -33,7 +33,6 @@ Suggests:
     knitr,
     rmarkdown,
     bit64,
-    readr,
     fs
 VignetteBuilder: knitr
 Collate: 

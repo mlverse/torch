@@ -120,21 +120,22 @@ mnist_dataset <- dataset(
 )
 
 read_sn3_pascalvincent <- function(path) {
-  x <- readr::read_file_raw(path)
+  x <- gzfile(path, open = "rb")
+  on.exit({close(x)})
   
-  magic <- readBin(x[1:4], endian = "big", what = integer())
+  magic <- readBin(x, endian = "big", what = integer(), n = 1)
   n_dimensions <- magic %% 256
   ty <- magic %/% 256
   
-  dim <- readBin(x[-c(1:4)], what = integer(), size = 4, endian = "big",
+  dim <- readBin(x, what = integer(), size = 4, endian = "big",
           n = n_dimensions)
   
-  a <- x[-c(1:((n_dimensions + 1)*4))]
   a <- readBin(
-    a, 
+    x, 
     what = "int", endian = "big", n = prod(dim),
     size = 1, signed = FALSE
   )
+  
   a <- array(a, dim = rev(dim))
   a <- aperm(a, perm = rev(seq_along(dim)))
   a
