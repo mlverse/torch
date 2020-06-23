@@ -29,18 +29,28 @@ is_map_dataset <- function(x) {
 #' sampler that yields integral indices.  To make it work with a map-style
 #' dataset with non-integral indices/keys, a custom sampler must be provided.
 #' 
+#' @param name a name for the dataset. It it's also used as the class
+#'   for it.
 #' @param ... public methods for the dataset class
 #' 
 #' @export
-dataset <- function(..., name = NULL) {
-  R6::R6Class(
+dataset <- function(name = NULL, ...) {
+  
+  args <- list(...)
+  active <- args$active
+  
+  if (!is.null(active))
+    args <- args[-which(names(args) == "active")]
+  
+  d <- R6::R6Class(
     classname = name,
     lock_objects = FALSE,
     inherit = Dataset,
-    public = list(
-      ...
-    )
+    public = args,
+    active = active
   )
+  
+  d$new
 }
 
 #' @export
@@ -53,10 +63,17 @@ length.dataset <- function(x) {
   x$.length()
 }
 
-TensorDataset <- dataset(
+#' Dataset wrapping tensors.
+#' 
+#' Each sample will be retrieved by indexing tensors along the first dimension.
+#' 
+#' @param ... tensors that have the same size of the first dimension.
+#'
+#' @export
+tensor_dataset <- dataset(
   name = "tensor_dataset",
   initialize = function(...) {
-    tensors <- list(...)
+    tensors <- rlang::list2(...)
     lens <- sapply(tensors, function(x) x$shape[1])
     
     if (!length(unique(lens)))
@@ -79,14 +96,9 @@ TensorDataset <- dataset(
   }
 )
 
-#' Dataset wrapping tensors.
-#' 
-#' Each sample will be retrieved by indexing tensors along the first dimension.
-#' 
-#' @param ... tensors that have the same size of the first dimension.
-#'
-#' @export
-tensor_dataset <- function(...) {
-  TensorDataset$new(...)
-}
+
+
+
+
+
 

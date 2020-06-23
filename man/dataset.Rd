@@ -4,9 +4,12 @@
 \alias{dataset}
 \title{An abstract class representing a \code{Dataset}.}
 \usage{
-dataset(..., name = NULL)
+dataset(name = NULL, ...)
 }
 \arguments{
+\item{name}{a name for the dataset. It it's also used as the class
+for it.}
+
 \item{...}{public methods for the dataset class}
 }
 \description{
