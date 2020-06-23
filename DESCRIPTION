@@ -32,7 +32,9 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    bit64
+    bit64,
+    readr,
+    fs
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
