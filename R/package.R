@@ -9,7 +9,7 @@ NULL
 
 .onLoad <- function(libname, pkgname){
   install_success <- TRUE
-  if (!install_exists() && Sys.getenv("INSTALL_TORCH", unset = 1) != 0) {
+  if (!install_exists() && Sys.getenv("TORCH_INSTALL", unset = 1) != 0) {
     install_success <- tryCatch({
       install_torch()
       TRUE
@@ -19,7 +19,7 @@ NULL
     })
   }
     
-  if (install_exists() && install_success && Sys.getenv("LOAD_TORCH", unset = 1) != 0) {
+  if (install_exists() && install_success && Sys.getenv("TORCH_LOAD", unset = 1) != 0) {
     # in case init fails aallow user to restart session rather than blocking install
     tryCatch({
       lantern_start() 

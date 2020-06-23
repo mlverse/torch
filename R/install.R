@@ -40,8 +40,30 @@ install_config <- list(
 
 #' @keywords internal
 #' @export
-install_path <- function() {
-  normalizePath(file.path(system.file("", package = "torch"), "deps"), mustWork = FALSE)
+install_path <- function(version = "1.5.0") {
+  path <- Sys.getenv("TORCH_HOME")
+  if (nchar(path) > 0) {
+    if (!dir.exists(path)) {
+      warning("The TORCH_HOME path does not exists.")
+      path <- ""
+    }
+    else {
+      install_info <- install_config[[version]][["cpu"]][[install_os()]]
+      for (library_name in names(install_info)) {
+        if (!lib_installed(library_name, path)) {
+          warning("The TORCH_HOME path is missing the '", library_name, "' library.")
+          path <- ""
+        }
+      }
+    }
+  }
+  
+  if (nchar(path) > 0) {
+    path
+  }
+  else {
+    normalizePath(file.path(system.file("", package = "torch"), "deps"), mustWork = FALSE)
+  }
 }
 
 install_exists <- function() {
@@ -120,8 +142,18 @@ install_type <- function(version) {
   if (nchar(Sys.getenv("CUDA")) > 0) return(Sys.getenv("CUDA"))
   if (install_os() != "linux") return("cpu")
   
-  versions_file <- "/usr/local/cuda/version.txt"
-  if (!file.exists(versions_file)) return("cpu")
+  versions_file <- NULL
+  cuda_home <- Sys.getenv("CUDA_HOME")
+  
+  if (nchar(cuda_home) > 0) {
+    versions_file <- file.path(cuda_home, "version.txt")
+    if (!file.exists(versions_file)) versions_file <- NULL
+  }
+  
+  if (is.null(versions_file)) {
+    versions_file <- "/usr/local/cuda/version.txt"
+    if (!file.exists(versions_file)) return("cpu")
+  }
   
   cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
   versions_available <- names(install_config[[version]])
@@ -142,6 +174,14 @@ install_type <- function(version) {
 #' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
 #' @param reinstall Re-install Torch even if its already installed?
 #' @param path Optional path to install or check for an already existing installation.
+#' 
+#' @details 
+#' 
+#' When using \code{path} to install in a specific location, make sure the \code{TORCH_HOME} environment
+#' variable is set to this same path to reuse this installation. The \code{TORCH_INSTALL} environment
+#' variable can be set to \code{0} to prevent auto-installing torch and \code{TORCH_LOAD} set to \code{0}
+#' to avoid loading dependencies automatically. These environment variables are meant for advanced use
+#' cases and troubleshootinng only.
 #' 
 #' @export
 install_torch <- function(version = "1.5.0", type = install_type(version = version), reinstall = FALSE,
