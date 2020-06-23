@@ -9,3 +9,21 @@ test_that("__and__", {
   expect_tensor(y)
   expect_equal_to_tensor(y, x)
 })
+
+test_that("item", {
+  
+  x <- torch_tensor(1)
+  expect_equal(x$item(), 1)
+  
+  x <- torch_tensor(1L)
+  expect_equal(x$item(), 1L)
+  
+  x <- torch_tensor(TRUE)
+  expect_equal(x$item(), TRUE)
+  
+  x <- torch_tensor(1.5)
+  expect_equal(x$item(), 1.5)
+  
+  x <- torch_tensor(1.5, dtype = torch_double())
+  expect_equal(x$item(), 1.5)
+})

@@ -7021,6 +7021,26 @@ cpp_torch_scalar <- function(x) {
     .Call('_torch_cpp_torch_scalar', PACKAGE = 'torchpkg', x)
 }
 
+cpp_torch_scalar_dtype <- function(self) {
+    .Call('_torch_cpp_torch_scalar_dtype', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_scalar_to_int <- function(self) {
+    .Call('_torch_cpp_torch_scalar_to_int', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_scalar_to_double <- function(self) {
+    .Call('_torch_cpp_torch_scalar_to_double', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_scalar_to_float <- function(self) {
+    .Call('_torch_cpp_torch_scalar_to_float', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_scalar_to_bool <- function(self) {
+    .Call('_torch_cpp_torch_scalar_to_bool', PACKAGE = 'torchpkg', self)
+}
+
 cpp_torch_tensor_print <- function(x) {
     invisible(.Call('_torch_cpp_torch_tensor_print', PACKAGE = 'torchpkg', x))
 }

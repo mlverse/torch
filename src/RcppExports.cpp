@@ -23374,6 +23374,61 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_scalar_dtype
+Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_scalar_dtype(Rcpp::XPtr<XPtrTorchScalar> self);
+RcppExport SEXP _torch_cpp_torch_scalar_dtype(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_dtype(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_scalar_to_int
+int cpp_torch_scalar_to_int(Rcpp::XPtr<XPtrTorchScalar> self);
+RcppExport SEXP _torch_cpp_torch_scalar_to_int(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_to_int(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_scalar_to_double
+double cpp_torch_scalar_to_double(Rcpp::XPtr<XPtrTorchScalar> self);
+RcppExport SEXP _torch_cpp_torch_scalar_to_double(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_to_double(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_scalar_to_float
+float cpp_torch_scalar_to_float(Rcpp::XPtr<XPtrTorchScalar> self);
+RcppExport SEXP _torch_cpp_torch_scalar_to_float(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_to_float(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_scalar_to_bool
+bool cpp_torch_scalar_to_bool(Rcpp::XPtr<XPtrTorchScalar> self);
+RcppExport SEXP _torch_cpp_torch_scalar_to_bool(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_to_bool(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor_print
 void cpp_torch_tensor_print(Rcpp::XPtr<XPtrTorchTensor> x);
 RcppExport SEXP _torch_cpp_torch_tensor_print(SEXP xSEXP) {
@@ -25320,6 +25375,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_reduction_none", (DL_FUNC) &_torch_cpp_torch_reduction_none, 0},
     {"_torch_cpp_torch_reduction_sum", (DL_FUNC) &_torch_cpp_torch_reduction_sum, 0},
     {"_torch_cpp_torch_scalar", (DL_FUNC) &_torch_cpp_torch_scalar, 1},
+    {"_torch_cpp_torch_scalar_dtype", (DL_FUNC) &_torch_cpp_torch_scalar_dtype, 1},
+    {"_torch_cpp_torch_scalar_to_int", (DL_FUNC) &_torch_cpp_torch_scalar_to_int, 1},
+    {"_torch_cpp_torch_scalar_to_double", (DL_FUNC) &_torch_cpp_torch_scalar_to_double, 1},
+    {"_torch_cpp_torch_scalar_to_float", (DL_FUNC) &_torch_cpp_torch_scalar_to_float, 1},
+    {"_torch_cpp_torch_scalar_to_bool", (DL_FUNC) &_torch_cpp_torch_scalar_to_bool, 1},
     {"_torch_cpp_torch_tensor_print", (DL_FUNC) &_torch_cpp_torch_tensor_print, 1},
     {"_torch_cpp_torch_tensor_dtype", (DL_FUNC) &_torch_cpp_torch_tensor_dtype, 1},
     {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},

@@ -156,7 +156,7 @@ to_return_type <- function(res, types) {
       return(torch_dtype$new(ptr = res))
     
     if (dtype == "Scalar")
-      return(Scalar$new(ptr = res))
+      return(Scalar$new(ptr = res)$to_r())
     
   }
   

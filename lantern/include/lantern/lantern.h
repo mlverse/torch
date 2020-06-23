@@ -2211,11 +2211,11 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_nn_utils_rnn_pad_packed_sequence);
   LOAD_SYMBOL(lantern_nn_utils_rnn_pad_sequence);
   LOAD_SYMBOL(lantern_nn_utils_rnn_PackedSequence_new);
-  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_dtype);
-  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_to_float);
-  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_to_int);
-  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_to_double);
-  LOAD_SYMBOL(LANTERN_PTR lantern_Scalar_to_bool);
+  LOAD_SYMBOL(lantern_Scalar_dtype);
+  LOAD_SYMBOL(lantern_Scalar_to_float);
+  LOAD_SYMBOL(lantern_Scalar_to_int);
+  LOAD_SYMBOL(lantern_Scalar_to_double);
+  LOAD_SYMBOL(lantern_Scalar_to_bool);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
