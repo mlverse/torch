@@ -3,7 +3,7 @@ test_that("dataloader works", {
   y <- torch_randn(1000, 1)
   dataset <- utils_dataset_tensor(x, y)
   
-  dl <- DataLoader$new(dataset = dataset, batch_size = 32)
+  dl <- utils_dataloader(dataset = dataset, batch_size = 32)
   expect_length(dl, 1000 %/% 32 + 1)
   
   iter <- dl$.iter()
