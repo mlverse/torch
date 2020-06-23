@@ -26,7 +26,7 @@ new_enum_env <- function(data, parent) {
 #' @param max_len maximum number of iterations.
 #' 
 #' @export
-enum <- function(dataloader, max_len = 1e6) {
+dataloader_enum <- function(dataloader, max_len = 1e6) {
   iter <- dataloader$.iter()
   
   if (is.na(length(dataloader)))

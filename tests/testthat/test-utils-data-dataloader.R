@@ -18,3 +18,26 @@ test_that("dataloader works", {
   
   expect_error(iter$.next(), class = "stop_iteration_error")
 })
+
+test_that("dataloader iteration", {
+  
+  x <- torch_randn(100, 100)
+  y <- torch_randn(100, 1)
+  dataset <- utils_dataset_tensor(x, y)
+  dl <- utils_dataloader(dataset = dataset, batch_size = 32)
+  
+  # iterating with a while loop
+  iter <- dataloader_make_iter(dl)
+  while(!is.null(batch <- dataloader_get_next(iter))) {
+    expect_tensor(batch[[1]])
+    expect_tensor(batch[[2]])
+  }
+  
+  # iterating with an enum
+  for (batch in dataloader_enum(dl)) {
+    expect_tensor(batch[[1]])
+    expect_tensor(batch[[2]])    
+  }
+  
+})
+

@@ -3,6 +3,29 @@ length.utils_data_loader <- function(x) {
   x$.lenght()
 }
 
+#' Creates an iterator from a DataLoader
+#'
+#' @param dataloader a dataloader object.
+#' 
+#' @export
+dataloader_make_iter <- function(dataloader) {
+  dataloader$.iter()
+}
+
+#' Get the next element of a dataloader iterator
+#' 
+#' @param iter a DataLoader iter created with [dataloader_make_iter].
+#'
+#' @export
+dataloader_get_next <- function(iter) {
+  tryCatch(
+    expr = iter$.next(),
+    stop_iteration_error = function(e) {
+      NULL
+    }
+  )
+}
+
 #' Data loader. Combines a dataset and a sampler, and provides
 #' single- or multi-process iterators over the dataset.
 #' 
