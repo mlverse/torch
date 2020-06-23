@@ -30,7 +30,7 @@ test_that("dataloader iteration", {
   
   # iterating with a while loop
   iter <- dataloader_make_iter(dl)
-  while(!is.null(batch <- dataloader_get_next(iter))) {
+  while(!is.null(batch <- dataloader_next(iter))) {
     expect_tensor(batch[[1]])
     expect_tensor(batch[[2]])
   }

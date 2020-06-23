@@ -26,7 +26,7 @@ is_dataloader <- function(x) {
 #' @param iter a DataLoader iter created with [dataloader_make_iter].
 #'
 #' @export
-dataloader_get_next <- function(iter) {
+dataloader_next <- function(iter) {
   tryCatch(
     expr = iter$.next(),
     stop_iteration_error = function(e) {
