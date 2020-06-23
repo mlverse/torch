@@ -142,8 +142,18 @@ install_type <- function(version) {
   if (nchar(Sys.getenv("CUDA")) > 0) return(Sys.getenv("CUDA"))
   if (install_os() != "linux") return("cpu")
   
-  versions_file <- "/usr/local/cuda/version.txt"
-  if (!file.exists(versions_file)) return("cpu")
+  versions_file <- NULL
+  cuda_home <- Sys.getenv("CUDA_HOME")
+  
+  if (nchar(cuda_home) > 0) {
+    versions_file <- file.path(cuda_home, "version.txt")
+    if (!file.exists(versions_file)) versions_file <- NULL
+  }
+  
+  if (is.null(versions_file)) {
+    versions_file <- "/usr/local/cuda/version.txt"
+    if (!file.exists(versions_file)) return("cpu")
+  }
   
   cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
   versions_available <- names(install_config[[version]])
