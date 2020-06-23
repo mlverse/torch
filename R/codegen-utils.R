@@ -154,8 +154,6 @@ to_return_type <- function(res, types) {
     
     if (dtype == "ScalarType")
       return(torch_dtype$new(ptr = res))
-    
-    browser()
   }
   
   if (length(types) == 1) {
