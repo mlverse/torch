@@ -20,21 +20,31 @@ new_enum_env <- function(data, parent) {
   parent.env(x)[["batch"]][[name]]
 }
 
-#' Dataloader enum
+#' Enumerate an iterator
 #' 
-#' @param dataloader the dataloader to enumerate.
+#' @param x the generator to enumerate.
+#' 
+#' @export
+enumerate <- function(x, ...) {
+  UseMethod("enumerate")
+}
+
+
+#' Enumerate an iterator
+#' 
+#' @inheritParams enumerate
 #' @param max_len maximum number of iterations.
 #' 
 #' @export
-dataloader_enum <- function(dataloader, max_len = 1e6) {
-  iter <- dataloader$.iter()
+enumerate.dataloader <- function(x, max_len = 1e6, ...) {
+  iter <- x$.iter()
   
-  if (is.na(length(dataloader)))
+  if (is.na(length(x)))
     len <- max_len
   else
-    len <- length(dataloader)
+    len <- length(x)
   
-  p <- rlang::env(.iter = dataloader$.iter())
+  p <- rlang::env(.iter = x$.iter())
   
   v <- vector(mode = "list", length = len)
   for (i in seq_along(v)) 

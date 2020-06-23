@@ -36,7 +36,7 @@ test_that("dataloader iteration", {
   }
   
   # iterating with an enum
-  for (batch in dataloader_enum(dl)) {
+  for (batch in enumerate(dl)) {
     expect_tensor(batch[[1]])
     expect_tensor(batch[[2]])    
   }
