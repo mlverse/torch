@@ -11,5 +11,3 @@ Rscript tools/buildlantern.R
 
 # check -----------
 Rscript -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-multiarch", "--no-build-vignettes"), build_args = c("--no-build-vignettes"), error_on = "error", check_dir = "check")'
-
-find . -name testthat.Rout -exec cat '{}' ';'
