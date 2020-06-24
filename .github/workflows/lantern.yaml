@@ -64,10 +64,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/build
-      - name: Run cmake
-        working-directory: ${{runner.workspace}}/build
+      - name: Prep cmake
+        if: matrix.cuda == '10.1'
         env:
           CUDA: ${{matrix.cuda}}
+      - name: Run cmake
+        working-directory: ${{runner.workspace}}/build
         run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{github.workspace}}/lantern
       - name: Run make
         working-directory: ${{runner.workspace}}/build
