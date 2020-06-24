@@ -43,9 +43,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -54,15 +51,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -235,26 +248,26 @@
 <span id="cb10-53"><a href="#cb10-53"></a>    })</span>
 <span id="cb10-54"><a href="#cb10-54"></a>    </span>
 <span id="cb10-55"><a href="#cb10-55"></a>}</span>
-<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 9.634838 </span></span>
-<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 9.112011 </span></span>
-<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 8.631184 </span></span>
-<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 8.191401 </span></span>
-<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 7.788765 </span></span>
-<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 7.419058 </span></span>
-<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 7.078829 </span></span>
-<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 6.765117 </span></span>
-<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 6.475481 </span></span>
-<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 6.207703 </span></span>
-<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 5.957942 </span></span>
-<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 5.723822 </span></span>
-<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 5.50606 </span></span>
-<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 5.303478 </span></span>
-<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 5.114913 </span></span>
-<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 4.938968 </span></span>
-<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 4.774002 </span></span>
-<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 4.619851 </span></span>
-<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 4.475645 </span></span>
-<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 4.340602</span></span></code></pre></div>
+<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; 10 8.92985 </span></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; 20 8.773548 </span></span>
+<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; 30 8.622643 </span></span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; 40 8.477003 </span></span>
+<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; 50 8.336488 </span></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; 60 8.201152 </span></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="co">#&gt; 70 8.07071 </span></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; 80 7.944475 </span></span>
+<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt; 90 7.822354 </span></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; 100 7.704161 </span></span>
+<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; 110 7.588936 </span></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; 120 7.47709 </span></span>
+<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt; 130 7.368572 </span></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; 140 7.263315 </span></span>
+<span id="cb10-70"><a href="#cb10-70"></a><span class="co">#&gt; 150 7.161032 </span></span>
+<span id="cb10-71"><a href="#cb10-71"></a><span class="co">#&gt; 160 7.061241 </span></span>
+<span id="cb10-72"><a href="#cb10-72"></a><span class="co">#&gt; 170 6.964347 </span></span>
+<span id="cb10-73"><a href="#cb10-73"></a><span class="co">#&gt; 180 6.870148 </span></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="co">#&gt; 190 6.778527 </span></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="co">#&gt; 200 6.689248</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">

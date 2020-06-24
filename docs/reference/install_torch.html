@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -132,8 +145,12 @@
     <p>Installs Torch and its dependencies.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>install_torch</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"1.5.0"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"CUDA"</span>, <span class='kw'>unset</span> <span class='kw'>=</span>
-  <span class='st'>"cpu"</span>), <span class='kw'>reinstall</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'>install_path</span>())</pre>
+    <pre class="usage"><span class='fu'>install_torch</span>(
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"1.5.0"</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"CUDA"</span>, <span class='kw'>unset</span> <span class='kw'>=</span> <span class='st'>"cpu"</span>),
+  <span class='kw'>reinstall</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'>install_path</span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

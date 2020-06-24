@@ -83,9 +83,6 @@ is set to True." />
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -94,15 +91,31 @@ is set to True." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -168,20 +181,20 @@ elements in the tuple are Tensor, IntTensor. Default: NULL</p></td>
 <span class='fu'>torch_lu</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.8706  0.8684 -0.9952
-#&gt;  -0.6032  1.5928  1.1255
-#&gt;  -0.0210 -0.3042  0.9833
+#&gt;   3.0780  1.4262 -0.1615
+#&gt;   0.3453 -1.4211 -0.5654
+#&gt;   0.1604  0.2117 -1.1086
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -1.0920 -0.6686 -0.8807
-#&gt;   0.6830 -0.0847 -1.6480
-#&gt;   0.3532 -0.6562 -1.8262
+#&gt;  -0.4466 -1.8840 -0.2613
+#&gt;   0.9428  2.6469 -0.1144
+#&gt;  -0.9862 -0.1092  0.9452
 #&gt; [ CPUFloatType{2,3,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
 #&gt;  3  3  3
-#&gt;  3  2  3
+#&gt;  3  3  3
 #&gt; [ CPUIntType{2,3} ]
 #&gt; </div><div class='input'>
 </div></pre>

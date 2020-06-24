@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -171,27 +184,27 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.2714
-#&gt; -0.2632
-#&gt;  1.3750
-#&gt;  1.1770
-#&gt; -0.5170
-#&gt; -1.0848
-#&gt; -0.0877
-#&gt;  1.6423
-#&gt; -0.4652
-#&gt; -0.6408
+#&gt;  2.1198
+#&gt; -1.7962
+#&gt; -1.6128
+#&gt; -1.1833
+#&gt; -0.5498
+#&gt;  0.2472
+#&gt;  2.0684
+#&gt; -0.2294
+#&gt;  1.1407
+#&gt; -0.6312
 #&gt; [ CPUFloatType{10} ]</div><div class='input'><span class='fu'>torch_cumsum</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>0</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.2714
-#&gt;  1.0082
-#&gt;  2.3832
-#&gt;  3.5602
-#&gt;  3.0432
-#&gt;  1.9584
-#&gt;  1.8707
-#&gt;  3.5130
-#&gt;  3.0479
-#&gt;  2.4070
+#&gt;  2.1198
+#&gt;  0.3236
+#&gt; -1.2892
+#&gt; -2.4725
+#&gt; -3.0223
+#&gt; -2.7750
+#&gt; -0.7066
+#&gt; -0.9361
+#&gt;  0.2046
+#&gt; -0.4266
 #&gt; [ CPUFloatType{10} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

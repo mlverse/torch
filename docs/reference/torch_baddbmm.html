@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -191,54 +204,54 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class='no'>batch2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_baddbmm</span>(<span class='no'>M</span>, <span class='no'>batch1</span>, <span class='no'>batch2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -1.6787  2.0314  1.2549 -2.7328 -0.9348
-#&gt;  -1.4016  2.5952 -0.3919 -4.1463 -3.0413
-#&gt;   3.3021 -4.1538 -2.9062  1.3808  0.1147
+#&gt;  -1.1403 -2.0772 -1.0342 -2.1076 -3.2058
+#&gt;   0.5761 -1.0230  2.0671 -4.5006 -1.1638
+#&gt;   0.8183 -0.0283 -1.8167  1.2359  0.7314
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.9870 -1.2963 -0.0099  1.0946 -0.1383
-#&gt;   1.9285  0.5897  1.5681 -3.4840  2.0954
-#&gt;  -4.9153 -4.2186 -0.1972  5.4469 -0.2840
+#&gt;   1.2070  0.1409  2.3537 -4.5628 -0.1956
+#&gt;  -0.8237 -2.0352  0.0042 -3.1503  1.5271
+#&gt;   1.1854  1.8535 -2.3019  1.7193  2.2565
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -0.1157  2.8187 -3.5382 -3.3947 -0.0725
-#&gt;   3.8278 -0.8539 -4.9322  4.1646  1.3901
-#&gt;  -1.6439  1.2888  3.6871 -0.2153  0.0447
+#&gt;  -1.8520 -1.6407  3.6943 -1.8162  0.2008
+#&gt;  -1.3840 -3.6728  1.6408  1.7387 -0.7981
+#&gt;  -3.1045  0.8430  0.3375 -1.3672 -4.3350
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   0.2495 -0.9665 -4.0786  2.0208 -6.6237
-#&gt;   1.8837  1.2176 -1.8546 -1.9990  0.4833
-#&gt;  -1.4732  0.2611  1.7934 -3.1066  1.7640
+#&gt;  -1.4809 -1.7378 -1.0159 -1.1894  0.5405
+#&gt;   0.3029 -0.9445  0.4184 -3.3596 -1.4046
+#&gt;   8.4450 -1.7790 -3.2170  1.7701 -0.9535
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   0.3231  3.4471 -0.3898  1.9896 -0.4485
-#&gt;  -0.6839 -0.1687  0.0817 -1.6182 -1.1401
-#&gt;  -1.0763  1.6901 -1.4985 -2.6097  1.4127
+#&gt;  -0.1882  2.5772  0.4789 -1.0103  0.2899
+#&gt;  -0.0421 -0.7433 -2.8022  0.8514  0.6782
+#&gt;  -0.8239 -1.7311 -0.9458 -1.6117 -0.7590
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;  -2.9000  3.5119  0.3104  3.0941  0.6468
-#&gt;  -0.8512  0.6199  1.4214 -2.5565  1.4088
-#&gt;   0.4149  2.4709  0.9033 -3.4140  1.9910
+#&gt;   2.8543  1.6671 -0.9586 -1.4598  0.3051
+#&gt;   1.2260 -2.2559  1.1991 -1.3935  1.2239
+#&gt;   5.8864 -0.1640 -1.0754 -1.1036 -1.1612
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;   1.9112 -1.6762 -1.2935  1.9919 -1.3121
-#&gt;  -1.4324  0.2533 -1.4418 -0.7376  2.5693
-#&gt;  -1.8764 -0.6390  0.3073 -0.8234 -1.2394
+#&gt;  -1.6532 -6.5230  1.6286 -0.9639  3.6315
+#&gt;   2.8938 -0.8208 -0.1894  1.5177 -0.4426
+#&gt;   2.8894  1.8410 -0.4210  0.3656  1.0621
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;  -1.0046 -3.7089 -3.3011 -1.4064  2.3962
-#&gt;  -2.0504 -0.3565 -4.6171 -1.4163  1.3077
-#&gt;  -3.4724 -4.9256 -1.1683  1.8977  3.7177
+#&gt;   1.4635 -0.1913 -2.1934 -0.0364 -0.1622
+#&gt;  -2.9659  3.1366  4.7708  0.6117  5.2870
+#&gt;   1.0049 -1.6613 -2.7772 -0.9207 -1.3406
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;   0.6828 -4.4898  2.3931  1.8958  3.3958
-#&gt;   2.3514  4.1079  1.0885  4.8814 -2.3379
-#&gt;  -2.0156  0.1399  2.0392 -5.8598 -1.1166
+#&gt;  -0.9938  4.6514 -3.3263  0.0002  2.6826
+#&gt;   0.5544 -0.3407 -1.2752  2.4611 -0.7240
+#&gt;  -0.9223  0.4438 -1.7749  1.8554 -1.6793
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;  -1.8884 -3.9670 -1.7042  0.2452 -2.1942
-#&gt;  -1.9236  1.4160  1.3687  0.0669  0.8410
-#&gt;   1.5376  0.1860 -3.9083 -1.1117 -0.6757
+#&gt;   0.0233  1.8430 -0.0793 -1.1301 -0.5614
+#&gt;   2.3342 -1.0095 -1.9395 -1.7002  0.3202
+#&gt;  -2.7181 -2.1336 -2.0500 -0.3343  1.2045
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

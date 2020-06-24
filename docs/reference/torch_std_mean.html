@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -181,38 +194,38 @@ via the biased estimator. Otherwise, Bessel's correction will be used.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.9597 -0.4032 -1.0707
+#&gt; -1.0273  1.2272  2.0787
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_std_mean</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; 1.59225
+#&gt; 1.60496
 #&gt; [ CPUFloatType{} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; 0.161936
+#&gt; 0.759516
 #&gt; [ CPUFloatType{} ]
 #&gt; </div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5568  1.5005  0.4914  2.4290
-#&gt; -0.8748 -0.3086 -0.0217  0.4132
-#&gt;  1.5194 -0.1060 -0.9213  0.1436
-#&gt;  1.1747 -1.3945 -0.2690  0.0256
+#&gt; -0.1696  0.3629  0.1533  0.3829
+#&gt;  0.1295 -0.3523 -1.7629  0.3259
+#&gt; -0.7266 -0.5052 -0.6815  1.2718
+#&gt;  1.6575 -0.5300 -0.7018  0.7289
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_std_mean</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt;  1.2872
-#&gt;  0.5400
-#&gt;  1.0146
-#&gt;  1.0557
+#&gt;  0.2566
+#&gt;  0.9427
+#&gt;  0.9596
+#&gt;  1.1134
 #&gt; [ CPUFloatType{4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  0.9660
-#&gt; -0.1980
-#&gt;  0.1589
-#&gt; -0.1158
+#&gt;  0.1824
+#&gt; -0.4149
+#&gt; -0.1604
+#&gt;  0.2886
 #&gt; [ CPUFloatType{4} ]
 #&gt; </div></pre>
   </div>

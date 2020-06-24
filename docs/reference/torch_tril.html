@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -171,29 +184,30 @@ the main diagonal. The main diagonal are the set of indices
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.2224  0.7903 -1.6567
-#&gt; -1.3716  1.0805 -0.0448
-#&gt; -0.1206 -1.6822  0.0297
+#&gt;  0.4774 -0.5631 -1.0834
+#&gt;  0.2519  1.1085  1.0313
+#&gt;  1.6358  1.5314  0.5369
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_tril</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.2224  0.0000  0.0000
-#&gt; -1.3716  1.0805  0.0000
-#&gt; -0.1206 -1.6822  0.0297
+#&gt;  0.4774  0.0000  0.0000
+#&gt;  0.2519  1.1085  0.0000
+#&gt;  1.6358  1.5314  0.5369
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4708 -1.8021  0.0919  0.5167  0.7481 -0.0997
-#&gt; -0.5552  0.2153  0.6010 -0.1228  0.7932 -0.1948
-#&gt; -1.6327 -0.0721  1.5347  0.4116 -2.1327  0.7258
-#&gt;  0.4355 -0.5770 -0.1757 -1.3349 -1.4942 -2.0821
+#&gt;  7.1791e-01  8.6553e-01  3.5167e-01  4.1554e-01 -1.3461e-01 -1.6545e+00
+#&gt; -1.1076e+00 -1.3425e+00 -1.7212e+00 -8.4988e-01 -6.3164e-01 -1.1763e+00
+#&gt; -1.7094e+00 -2.8315e-01  6.6712e-01 -4.3584e-01  1.0351e-02  2.9878e+00
+#&gt;  1.6058e-05 -1.0500e+00 -1.5827e+00 -8.0200e-01  9.5174e-01  8.2979e-02
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_tril</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4708 -1.8021  0.0000  0.0000  0.0000  0.0000
-#&gt; -0.5552  0.2153  0.6010  0.0000  0.0000  0.0000
-#&gt; -1.6327 -0.0721  1.5347  0.4116  0.0000  0.0000
-#&gt;  0.4355 -0.5770 -0.1757 -1.3349 -1.4942  0.0000
+#&gt;  0.7179  0.8655  0.0000  0.0000  0.0000  0.0000
+#&gt; -1.1076 -1.3425 -1.7212  0.0000  0.0000  0.0000
+#&gt; -1.7094 -0.2832  0.6671 -0.4358  0.0000  0.0000
+#&gt;  0.0000 -1.0500 -1.5827 -0.8020  0.9517  0.0000
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_tril</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt; 1e-05 *
 #&gt;  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
-#&gt; -0.5552  0.0000  0.0000  0.0000  0.0000  0.0000
-#&gt; -1.6327 -0.0721  0.0000  0.0000  0.0000  0.0000
-#&gt;  0.4355 -0.5770 -0.1757  0.0000  0.0000  0.0000
+#&gt;  -110762.1670  0.0000  0.0000  0.0000  0.0000  0.0000
+#&gt;  -170937.1567 -28315.0166  0.0000  0.0000  0.0000  0.0000
+#&gt;   1.6058 -105002.0576 -158265.7099  0.0000  0.0000  0.0000
 #&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

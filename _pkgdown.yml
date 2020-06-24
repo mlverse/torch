@@ -2,3 +2,24 @@ destination: docs
 template:
   params:
     bootswatch: united
+
+navbar:
+ structure:
+  left:  [home, articles, examples, reference, news]
+  right: [github]
+ components:
+  articles:
+    text: Articles
+    menu:
+     - text: Indexing
+       href: articles/indexing.html
+     - text: Autograd
+     - text: Using autograd
+       href: articles/using-autograd.html
+     - text: Extending autograd
+       href: articles/extending-autograd.html
+  examples:
+    text: Examples
+    menu:
+    - text: mnist-mlp
+      href: articles/examples/mnist-mlp.html

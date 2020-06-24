@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -174,30 +187,30 @@ sorted values and <code>indices</code> are the indices of the elements in the or
 <span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_sort</span>(<span class='no'>x</span>)
 <span class='no'>out</span></div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -1.7722  0.0475  0.2456  1.3367
-#&gt; -1.1512  0.4618  1.4940  1.5777
-#&gt; -0.9268 -0.7190 -0.4745 -0.1007
+#&gt;  0.0862  0.5333  1.1015  1.1361
+#&gt; -0.4636  0.4902  0.8132  1.0349
+#&gt; -0.0226  0.1081  1.2971  1.3718
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
+#&gt;  3  2  1  0
 #&gt;  3  0  2  1
-#&gt;  1  2  3  0
-#&gt;  0  3  1  2
+#&gt;  0  2  3  1
 #&gt; [ CPULongType{3,4} ]
 #&gt; </div><div class='input'><span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_sort</span>(<span class='no'>x</span>, <span class='fl'>0</span>)
 <span class='no'>out</span></div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -0.9268 -1.1512 -0.1007 -1.7722
-#&gt;  0.0475 -0.4745  0.2456 -0.7190
-#&gt;  1.5777  1.3367  0.4618  1.4940
+#&gt; -0.0226  1.0349  0.1081 -0.4636
+#&gt;  0.4902  1.1015  0.5333  0.0862
+#&gt;  1.1361  1.3718  0.8132  1.2971
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  2  1  2  0
-#&gt;  0  2  0  2
-#&gt;  1  0  1  1
+#&gt;  2  1  2  1
+#&gt;  1  0  0  0
+#&gt;  0  2  1  2
 #&gt; [ CPULongType{3,4} ]
 #&gt; </div></pre>
   </div>

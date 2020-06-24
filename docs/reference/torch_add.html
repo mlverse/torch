@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -186,35 +199,34 @@ a real number, otherwise it should be an integer.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.01 *
-#&gt;  4.5679
-#&gt; -104.5420
-#&gt; -119.7858
-#&gt; -21.2622
+#&gt;  1.2215
+#&gt; -0.5726
+#&gt; -0.9431
+#&gt; -1.6062
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='fl'>20</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  20.0457
-#&gt;  18.9546
-#&gt;  18.8021
-#&gt;  19.7874
+#&gt;  21.2215
+#&gt;  19.4274
+#&gt;  19.0569
+#&gt;  18.3938
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3341
-#&gt;  1.6559
-#&gt;  0.5557
-#&gt; -1.6374
+#&gt;  0.1444
+#&gt;  0.5736
+#&gt;  2.2173
+#&gt;  0.6965
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.4075
-#&gt;  0.3215
-#&gt; -0.2715
-#&gt;  0.8455
+#&gt; -0.6581
+#&gt; -0.1174
+#&gt; -1.1037
+#&gt; -0.2051
 #&gt; [ CPUFloatType{4,1} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0735  0.2483 -0.8519 -3.0450
-#&gt;  0.6556  1.9774  0.8772 -1.3159
-#&gt;  0.0626  1.3843  0.2842 -1.9089
-#&gt;  1.1796  2.5014  1.4012 -0.7919
+#&gt; -0.5137 -0.0845  1.5592  0.0384
+#&gt;  0.0270  0.4562  2.1000  0.5792
+#&gt; -0.9593 -0.5301  1.1136 -0.4072
+#&gt; -0.0607  0.3684  2.0122  0.4914
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

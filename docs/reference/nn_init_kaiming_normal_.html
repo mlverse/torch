@@ -83,9 +83,6 @@ normal distribution." />
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -94,15 +91,31 @@ normal distribution." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -172,9 +185,9 @@ or 'leaky_relu' (default).</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
 <span class='fu'>nn_init_kaiming_normal_</span>(<span class='no'>w</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"fan_in"</span>, <span class='kw'>nonlinearity</span> <span class='kw'>=</span> <span class='st'>"leaky_relu"</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0488 -0.4593 -0.6007 -0.6934  0.2802
-#&gt;  0.4730  0.0423 -1.0361 -0.3668 -0.1119
-#&gt;  0.0359  0.7433  0.4557  1.4592 -0.4827
+#&gt; -0.7415 -0.4026 -0.1830  0.9564  0.5827
+#&gt;  0.8907 -1.0440  0.0456 -0.1924  1.1919
+#&gt; -1.1077 -0.2889  0.0341  0.3169 -0.3735
 #&gt; [ CPUFloatType{3,5} ]</div><div class='input'>
 </div></pre>
   </div>

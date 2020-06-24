@@ -79,9 +79,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -90,15 +87,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -190,9 +203,58 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="dataloader.html">dataloader()</a></code> </p>
+        </td>
+        <td><p>Data loader. Combines a dataset and a sampler, and provides
+single- or multi-process iterators over the dataset.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataloader_make_iter.html">dataloader_make_iter()</a></code> </p>
+        </td>
+        <td><p>Creates an iterator from a DataLoader</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataloader_next.html">dataloader_next()</a></code> </p>
+        </td>
+        <td><p>Get the next element of a dataloader iterator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataset.html">dataset()</a></code> </p>
+        </td>
+        <td><p>An abstract class representing a <code>Dataset</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="enumerate.html">enumerate()</a></code> </p>
+        </td>
+        <td><p>Enumerate an iterator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="enumerate.dataloader.html">enumerate(<i>&lt;dataloader&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Enumerate an iterator</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="install_torch.html">install_torch()</a></code> </p>
         </td>
         <td><p>Install Torch</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_dataloader.html">is_dataloader()</a></code> </p>
+        </td>
+        <td><p>Checks if the object is a dataloader</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mnist_dataset.html">mnist_dataset()</a></code> </p>
+        </td>
+        <td><p>MNIST dataset</p></td>
       </tr><tr>
         
         <td>
@@ -1141,6 +1203,12 @@
           <p><code><a href="optim_sgd.html">optim_sgd()</a></code> </p>
         </td>
         <td><p>SGD optimizer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tensor_dataset.html">tensor_dataset()</a></code> </p>
+        </td>
+        <td><p>Dataset wrapping tensors.</p></td>
       </tr><tr>
         
         <td>
@@ -2551,18 +2619,6 @@
           <p><code><a href="torch_zeros_like.html">torch_zeros_like</a></code> </p>
         </td>
         <td><p>Zeros_like</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="utils_dataset.html">utils_dataset()</a></code> </p>
-        </td>
-        <td><p>An abstract class representing a <code>Dataset</code>.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="utils_dataset_tensor.html">utils_dataset_tensor()</a></code> </p>
-        </td>
-        <td><p>Dataset wrapping tensors.</p></td>
       </tr><tr>
         
         <td>

@@ -44,3 +44,13 @@ for (epoch in 1:10) {
   }
 }
 
+
+# p <- profvis::profvis({
+#   optimizer$zero_grad()
+#   output <- model(b[[1]])
+#   loss <- nnf_nll_loss(output, b[[2]])
+#   loss$backward()
+#   optimizer$step()
+# })
+# 
+# htmlwidgets::saveWidget(p, "~/Downloads/profile.html")

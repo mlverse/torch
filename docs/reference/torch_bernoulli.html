@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -175,13 +188,13 @@ point <code>dtype</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))$<span class='fu'>uniform_</span>(<span class='fl'>0</span>, <span class='fl'>1</span>)  <span class='co'># generate a uniform random matrix with range c(0, 1)</span>
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4731  0.0591  0.9196
-#&gt;  0.8338  0.9017  0.9258
-#&gt;  0.6644  0.8359  0.6560
+#&gt;  0.2563  0.6703  0.4422
+#&gt;  0.8030  0.1124  0.8943
+#&gt;  0.2515  0.3284  0.5211
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_bernoulli</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0  0  1
-#&gt;  0  1  1
-#&gt;  1  1  0
+#&gt;  0  1  0
+#&gt;  1  0  1
+#&gt;  1  0  1
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>)) <span class='co'># probability of drawing "1" is 1</span>
 <span class='fu'>torch_bernoulli</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  1  1  1
