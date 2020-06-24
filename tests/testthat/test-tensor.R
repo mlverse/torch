@@ -75,4 +75,8 @@ test_that("Pass only device argument to `to`", {
   expect_tensor(x$to(dtype = torch_int()))
   expect_tensor(x$to(device = torch_device("cpu")))
   expect_tensor(x$to(device = torch_device("cpu"), dtype = torch_int()))
+  
+  y <- torch_tensor(1, dtype = torch_long())
+  k <- x$to(other = y)
+  expect_true(k$dtype() == torch_long())
 })
