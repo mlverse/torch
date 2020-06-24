@@ -32,7 +32,8 @@ install_config <- list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu101.zip",
           path = "libtorch/lib"
-        )
+        ),
+        "liblantern" = sprintf("https://storage.googleapis.com/lantern-builds/refs/heads/%s/latest/Linux-cpu.zip", branch)
       )
     )
   )
