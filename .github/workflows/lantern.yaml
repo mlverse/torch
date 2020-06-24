@@ -104,7 +104,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Logs
-          path: /var/log/
+          path: /var/log/nvidia-installer.log
   upload:
     needs: build
     runs-on: ubuntu-18.04
