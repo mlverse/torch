@@ -62,6 +62,20 @@ Tensor <- R7Class(
     },
     numel = function() {
       cpp_tensor_numel(self$ptr)
+    },
+    to = function(..., non_blocking = FALSE, copy = FALSE, 
+                  memory_format = torch_preserve_format()) {
+      
+      args <- list(...)
+      args$non_blocking <- non_blocking
+      args$copy <- copy
+      args$memory_format <- memory_format
+      
+      if (is.null(args$dtype) && !is.null(args$device))
+        args$dtype <- self$dtype()
+      
+
+      do.call(private$`_to`, args)
     }
   ),
   active = list(
