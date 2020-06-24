@@ -107,7 +107,7 @@ nnf_max_pool1d <- function(input, kernel_size, stride=NULL, padding=0, dilation=
 #'
 #'
 #' @export
-nnf_max_pool2d <- function(input, kernel_size, stride=NULL, padding=0, dilation=1,
+nnf_max_pool2d <- function(input, kernel_size, stride=kernel_size, padding=0, dilation=1,
                            ceil_mode=FALSE, return_indices=FALSE) {
   if (return_indices)
     torch_max_pool2d_with_indices(input, kernel_size, stride, padding, dilation,
