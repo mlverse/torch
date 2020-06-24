@@ -23,7 +23,7 @@ jobs:
             fixlib:
             flavor: Release
             artifacts: lantern.dll
-            upload: ${{runner.os}}
+            upload: Windows
           - os: ubuntu-18.04
             cuda:
             library: liblantern.so
@@ -35,7 +35,7 @@ jobs:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
             flavor: Release
             artifacts: liblantern.so
-            upload: ${{runner.os}}
+            upload: Linux
           - os: macos-10.15
             cuda:
             library: liblantern.dylib
@@ -47,7 +47,7 @@ jobs:
             fixlib: install_name_tool -add_rpath @loader_path/. liblantern.dylib
             flavor: Release
             artifacts: liblantern.dylib
-            upload: ${{runner.os}}
+            upload: macOS
           - os: ubuntu-18.04
             cuda: 10.1
             library: liblantern.so
