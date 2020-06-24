@@ -59,3 +59,13 @@ test_that("Logical tensors", {
   expect_equal_to_r(torch_tensor(x), x)
   
 })
+
+test_that("Cuda tensor convertion", {
+  skip_if_cuda_not_available()
+  
+  x <- torch_tensor(1, device = torch_device("cuda"))
+  expect_error(as_array(x), class = "runtime_error")
+  
+  x <- x$to(dtype = torch_float(), device = torch_device("cpu"))
+  expect_equal_to_r(x, 1)
+})
