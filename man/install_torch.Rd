@@ -4,8 +4,12 @@
 \alias{install_torch}
 \title{Install Torch}
 \usage{
-install_torch(version = "1.5.0", type = Sys.getenv("CUDA", unset =
-  "cpu"), reinstall = FALSE, path = install_path())
+install_torch(
+  version = "1.5.0",
+  type = Sys.getenv("CUDA", unset = "cpu"),
+  reinstall = FALSE,
+  path = install_path()
+)
 }
 \arguments{
 \item{version}{The Torch version to install.}

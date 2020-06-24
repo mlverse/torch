@@ -1,5 +1,5 @@
 Dataset <- R6::R6Class(
-  classname = "utils_dataset", 
+  classname = "dataset", 
   lock_objects = FALSE,
   public = list(
     get_item = function(index) {
@@ -12,7 +12,7 @@ Dataset <- R6::R6Class(
 )
 
 is_map_dataset <- function(x) {
-  inherits(x, "utils_dataset")
+  inherits(x, "dataset")
 }
 
 #' An abstract class representing a `Dataset`.
@@ -29,34 +29,51 @@ is_map_dataset <- function(x) {
 #' sampler that yields integral indices.  To make it work with a map-style
 #' dataset with non-integral indices/keys, a custom sampler must be provided.
 #' 
+#' @param name a name for the dataset. It it's also used as the class
+#'   for it.
 #' @param ... public methods for the dataset class
 #' 
 #' @export
-utils_dataset <- function(..., name = NULL) {
-  R6::R6Class(
+dataset <- function(name = NULL, ...) {
+  
+  args <- list(...)
+  active <- args$active
+  
+  if (!is.null(active))
+    args <- args[-which(names(args) == "active")]
+  
+  d <- R6::R6Class(
     classname = name,
     lock_objects = FALSE,
     inherit = Dataset,
-    public = list(
-      ...
-    )
+    public = args,
+    active = active
   )
+  
+  d$new
 }
 
 #' @export
-`[.utils_dataset` <- function(x, y) {
+`[.dataset` <- function(x, y) {
   x$.getitem(y)
 }
 
 #' @export
-length.utils_dataset <- function(x) {
+length.dataset <- function(x) {
   x$.length()
 }
 
-TensorDataset <- utils_dataset(
-  name = "utils_dataset_tensor",
+#' Dataset wrapping tensors.
+#' 
+#' Each sample will be retrieved by indexing tensors along the first dimension.
+#' 
+#' @param ... tensors that have the same size of the first dimension.
+#'
+#' @export
+tensor_dataset <- dataset(
+  name = "tensor_dataset",
   initialize = function(...) {
-    tensors <- list(...)
+    tensors <- rlang::list2(...)
     lens <- sapply(tensors, function(x) x$shape[1])
     
     if (!length(unique(lens)))
@@ -79,14 +96,9 @@ TensorDataset <- utils_dataset(
   }
 )
 
-#' Dataset wrapping tensors.
-#' 
-#' Each sample will be retrieved by indexing tensors along the first dimension.
-#' 
-#' @param ... tensors that have the same size of the first dimension.
-#'
-#' @export
-utils_dataset_tensor <- function(...) {
-  TensorDataset$new(...)
-}
+
+
+
+
+
 

@@ -32,7 +32,8 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    bit64
+    bit64,
+    fs
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
@@ -44,6 +45,8 @@ Collate:
     'conditions.R'
     'creation-ops.R'
     'cuda.R'
+    'utils-data.R'
+    'dataset-mnist.R'
     'device.R'
     'dimname_list.R'
     'dtype.R'
@@ -99,9 +102,9 @@ Collate:
     'tensor_options.R'
     'utils-data-collate.R'
     'utils-data-dataloader.R'
+    'utils-data-enum.R'
     'utils-data-fetcher.R'
     'utils-data-sampler.R'
-    'utils-data.R'
     'utils.R'
     'variable_list.R'
     'wrapers.R'
