@@ -91,7 +91,7 @@ jobs:
         uses: actions-hub/gcloud@master
         env:
           PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
           args: cp ${{ matrix.name }}.zip gs://torch-lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.name }}-cpu.zip
