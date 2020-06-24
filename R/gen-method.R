@@ -4546,7 +4546,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "to", function(device, options, other, dtype, non_blocking = FALSE, copy = FALSE, memory_format = NULL) {  args <- rlang::env_get_list(nms = c("device", "options", "other", "dtype", "non_blocking", "copy", "memory_format"))
+Tensor$set("private", "_to", function(device, options, other, dtype, non_blocking = FALSE, copy = FALSE, memory_format = NULL) {  args <- rlang::env_get_list(nms = c("device", "options", "other", "dtype", "non_blocking", "copy", "memory_format"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", device = "Device", options = "TensorOptions", 
     other = "Tensor", dtype = "ScalarType", non_blocking = "bool", 
