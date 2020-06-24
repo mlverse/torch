@@ -205,6 +205,7 @@ extern "C"
   LANTERN_API int(LANTERN_PTR lantern_Scalar_to_int)(void *self);
   LANTERN_API double(LANTERN_PTR lantern_Scalar_to_double)(void *self);
   LANTERN_API bool(LANTERN_PTR lantern_Scalar_to_bool)(void *self);
+  LANTERN_API bool(LANTERN_PTR lantern_Tensor_is_undefined)(void *self);
   /* Autogen Headers -- Start */
   LANTERN_API void *(LANTERN_PTR lantern__cast_byte_tensor_bool)(void *self, void *non_blocking);
   LANTERN_API void *(LANTERN_PTR lantern__cast_char_tensor_bool)(void *self, void *non_blocking);
@@ -2216,6 +2217,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Scalar_to_int);
   LOAD_SYMBOL(lantern_Scalar_to_double);
   LOAD_SYMBOL(lantern_Scalar_to_bool);
+  LOAD_SYMBOL(lantern_Tensor_is_undefined);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
