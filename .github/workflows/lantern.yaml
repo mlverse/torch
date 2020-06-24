@@ -66,10 +66,8 @@ jobs:
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/build
       - name: Prep cmake
-        if: matrix.cuda != 0
-        env:
-          CUDA: ${{matrix.cuda}}
-        run: CUDA=${{matrix.cuda}}
+        if: ${{ matrix.cuda != 0 }}
+        run: echo ::set-env name=CUDA::${{matrix.cuda}}
       - name: Run cmake
         working-directory: ${{runner.workspace}}/build
         run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{github.workspace}}/lantern
