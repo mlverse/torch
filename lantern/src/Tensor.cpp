@@ -129,3 +129,9 @@ void *lantern_Tensor_device(void *self)
   torch::Device device = x.device();
   return (void *)new LanternPtr<torch::Device>(device);
 }
+
+bool lantern_Tensor_is_undefined(void *self)
+{
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  return x.dtype() == torch::ScalarType::Undefined;
+}

@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -181,22 +194,22 @@ batched outputs <code>c</code></p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive definite</span>
 <span class='no'>u</span> <span class='kw'>=</span> <span class='fu'><a href='torch_cholesky.html'>torch_cholesky</a></span>(<span class='no'>a</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3.9230 -0.6041  2.5438
-#&gt; -0.6041  8.4103 -0.3371
-#&gt;  2.5438 -0.3371  3.3445
+#&gt;  2.1550  0.9040 -0.6314
+#&gt;  0.9040  0.9183 -0.4892
+#&gt; -0.6314 -0.4892  0.3532
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5439 -0.1543
-#&gt;  0.3509 -1.6708
-#&gt; -1.2727 -0.8421
+#&gt;  0.4666 -0.3681
+#&gt; -1.1056  0.1592
+#&gt;  2.5210  1.3689
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'>torch_cholesky_solve</span>(<span class='no'>b</span>, <span class='no'>u</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7707  0.2094
-#&gt;  0.0586 -0.2009
-#&gt; -0.9608 -0.4313
+#&gt;   4.5750   1.7853
+#&gt;   9.3452   8.3144
+#&gt;  28.2566  18.5812
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>$<span class='fu'>inverse</span>(), <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7707  0.2094
-#&gt;  0.0586 -0.2009
-#&gt; -0.9608 -0.4313
+#&gt;   4.5750   1.7853
+#&gt;   9.3452   8.3144
+#&gt;  28.2566  18.5812
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

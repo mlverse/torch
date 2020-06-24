@@ -170,3 +170,9 @@ Rcpp::XPtr<XPtrTorchDevice> cpp_tensor_device (Rcpp::XPtr<XPtrTorchTensor> self)
   return make_xptr<XPtrTorchDevice>(out);
 }
 
+// [[Rcpp::export]]
+bool cpp_tensor_is_undefined (Rcpp::XPtr<XPtrTorchTensor> self)
+{
+  return lantern_Tensor_is_undefined(self->get());
+}
+

@@ -107,8 +107,6 @@ is_torch_tensor <- function(x) {
 }
 
 is_undefined_tensor <- function(x) {
-  # TODO: correctrly transform undefined to NULL and fix.
-  out <- paste0(capture.output(print(x)), collapse = " ")
-  grepl("undefined", out)
+  cpp_tensor_is_undefined(x$ptr)
 }
 

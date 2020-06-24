@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -195,35 +208,35 @@ shape of <code>input</code>.</p>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -1.1936 -1.4113
-#&gt;   0.1038 -0.2216
-#&gt;   0.0194 -0.0036
+#&gt;   0.9276  1.5282
+#&gt;  -0.5420  0.6038
+#&gt;   0.9541  1.2911
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0357 -0.1221
-#&gt;  -0.0202 -0.4473
-#&gt;   0.4083  2.0660
+#&gt;  -1.7680 -1.1067
+#&gt;  -2.1733 -1.5637
+#&gt;  -0.1659  1.2090
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.7146  1.0094
-#&gt;  -0.7796 -1.5299
-#&gt;   0.5091  0.3085
+#&gt;  -0.0908  1.3150
+#&gt;  -0.9451  0.5114
+#&gt;  -1.3563 -1.5251
 #&gt; [ CPUFloatType{3,3,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_fft.html'>torch_fft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>)
 <span class='fu'>torch_ifft</span>(<span class='no'>y</span>, <span class='fl'>2</span>)  <span class='co'># recover x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -1.1936 -1.4113
-#&gt;   0.1038 -0.2216
-#&gt;   0.0194 -0.0036
+#&gt;   0.9276  1.5282
+#&gt;  -0.5420  0.6038
+#&gt;   0.9541  1.2911
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0357 -0.1221
-#&gt;  -0.0202 -0.4473
-#&gt;   0.4083  2.0660
+#&gt;  -1.7680 -1.1067
+#&gt;  -2.1733 -1.5637
+#&gt;  -0.1659  1.2090
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.7146  1.0094
-#&gt;  -0.7796 -1.5299
-#&gt;   0.5091  0.3085
+#&gt;  -0.0908  1.3150
+#&gt;  -0.9451  0.5114
+#&gt;  -1.3563 -1.5251
 #&gt; [ CPUFloatType{3,3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

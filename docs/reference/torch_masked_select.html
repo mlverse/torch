@@ -81,9 +81,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -92,15 +89,31 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -168,21 +181,20 @@ to match, but they must be broadcastable .</p>
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.1034  1.6034  0.7725  0.6605
-#&gt;  0.1279 -1.2512  0.5549  0.7721
-#&gt; -1.5371 -0.3152  0.4992 -0.6270
+#&gt;  1.0410 -1.1779 -0.3275  1.3502
+#&gt; -1.5399 -0.8450  0.3502 -0.5816
+#&gt;  0.7662  0.1238 -0.1595  1.4532
 #&gt; [ CPUFloatType{3,4} ]</div><div class='input'><span class='no'>mask</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='fu'>ge</span>(<span class='fl'>0.5</span>)
 <span class='no'>mask</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0  1  1  1
-#&gt;  0  0  1  1
+#&gt;  1  0  0  1
 #&gt;  0  0  0  0
+#&gt;  1  0  0  1
 #&gt; [ CPUBoolType{3,4} ]</div><div class='input'><span class='fu'>torch_masked_select</span>(<span class='no'>x</span>, <span class='no'>mask</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.6034
-#&gt;  0.7725
-#&gt;  0.6605
-#&gt;  0.5549
-#&gt;  0.7721
-#&gt; [ CPUFloatType{5} ]</div></pre>
+#&gt;  1.0410
+#&gt;  1.3502
+#&gt;  0.7662
+#&gt;  1.4532
+#&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

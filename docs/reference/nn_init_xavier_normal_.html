@@ -83,9 +83,6 @@ distribution." />
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -94,15 +91,31 @@ distribution." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/extending-autograd.html">Extending Autograd</a>
+      <a href="../articles/indexing.html">Indexing</a>
     </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing tensors</a>
-    </li>
+    <li class="dropdown-header">Autograd</li>
     <li>
       <a href="../articles/using-autograd.html">Using autograd</a>
     </li>
+    <li>
+      <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
   </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -155,9 +168,9 @@ distribution.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
 <span class='fu'>nn_init_xavier_normal_</span>(<span class='no'>w</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.5848 -2.3508  0.2196  1.8177  3.2413
-#&gt;  1.1011  0.7792  0.5390 -3.6486 -3.1468
-#&gt; -1.0319 -3.4737  3.0091 -0.4499 -4.9862
+#&gt;  1.3691 -0.1195  2.8073  0.7087 -2.5727
+#&gt;  0.6295  0.2508  1.3190 -0.7838  1.2254
+#&gt;  0.0110 -1.1451 -1.1653  2.2463 -1.0186
 #&gt; [ CPUFloatType{3,5} ]</div><div class='input'>
 </div></pre>
   </div>
