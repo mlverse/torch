@@ -11,6 +11,7 @@ prepare_method <- function(m, active = FALSE) {
   m
 }
 
+#' @importFrom rlang env_bind
 R7Class <- function(classname = NULL, public = list(), private = list(),
                     active = list()) {
   
@@ -21,9 +22,9 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   active <- lapply(active, prepare_method, active = TRUE)
   private <- lapply(private, prepare_method)
   
-  rlang::env_bind(methods, !!!public)
-  rlang::env_bind(methods, !!!active)
-  rlang::env_bind(private_methods, !!!private)
+  env_bind(methods, !!!public)
+  env_bind(methods, !!!active)
+  env_bind(private_methods, !!!private)
   
   class(private_methods) <- "R7"
   methods$private <- private_methods
@@ -39,11 +40,11 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   
   generator$set <- function(which, name, value) {
     if (which == "public")
-      rlang::env_bind(methods, !!name := prepare_method(value))
+      env_bind(methods, !!name := prepare_method(value))
     else if (which == "active")
-      rlang::env_bind(methods, !!name := prepare_method(value, active = TRUE))
+      env_bind(methods, !!name := prepare_method(value, active = TRUE))
     else if (which == "private")
-      rlang::env_bind(methods$private, !!name := prepare_method(value))
+      env_bind(methods$private, !!name := prepare_method(value))
     else
       stop("can only set to public, private and active")
   }
@@ -51,14 +52,15 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   generator
 }
 
+#' @importFrom rlang env_get
 #' @export
 `$.R7` <- function(x, name) {
-  o <- rlang::env_get(x, name, default = NULL, inherit = TRUE)
+  o <- env_get(x, name, default = NULL, inherit = TRUE)
   
   if (name == "private")
     attr(o, "self") <- x
   
-  if (!rlang::is_function(o))
+  if (!is.function(o))
     return(o)
   
   if (!is.null(attr(x, "self"))) {

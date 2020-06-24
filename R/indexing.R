@@ -23,19 +23,22 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
   `..` = structure(list(), class = "fill")
 )
 
+#' @importFrom rlang is_function is_missing quo_get_expr enquos eval_tidy is_scalar_atomic is_integerish is_scalar_integerish
 #' @export
 `[.torch_tensor` <- function(x, ..., drop = TRUE) {
   
-  slices <- rlang::enquos(..., .ignore_empty = "none")
+  slices <- enquos(..., .ignore_empty = "none")
   
   slices <- lapply(slices, function(x) {
-    if(rlang::is_missing(rlang::quo_get_expr(x))) 
+    if(is_missing(quo_get_expr(x))) 
       NA 
     else 
-      lazyeval::lazy_eval(x, data = .d)
+      eval_tidy(x, data = .d)
   })
   
-  if (length(slices) < length(dim(x))) {
+  d <- cpp_tensor_dim(x$ptr)
+  
+  if (length(slices) < length(d)) {
     
     if (!inherits(slices[[1]], "fill") && 
         !inherits(slices[[length(slices)]], "fill"))
@@ -45,7 +48,7 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
   
   index <- cpp_torch_tensor_index_new()
   for (s in slices) {
-    if (rlang::is_scalar_integerish(s)) {
+    if (is_scalar_integerish(s)) {
       cpp_torch_tensor_index_append_int64(index, ifelse(s > 0, s - 1, s))   
       
       if (!drop)
@@ -54,7 +57,7 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
     } 
     else if (inherits(s, "fill")) 
       cpp_torch_tensor_index_append_ellipsis(index)
-    else if (rlang::is_scalar_atomic(s) && is.na(s))
+    else if (is_scalar_atomic(s) && is.na(s))
       cpp_torch_tensor_index_append_slice(index, Slice())
     else if (is.logical(s))
       cpp_torch_tensor_index_append_bool(index, s)
@@ -62,7 +65,7 @@ Slice <- function(start = NULL, end = NULL, step = 1) {
       cpp_torch_tensor_index_append_slice(index, Slice(s$start, s$end, s$step))
     else if (is.null(s))
       cpp_torch_tensor_index_append_none(index)
-    else if (rlang::is_integerish(s)) {
+    else if (is_integerish(s)) {
     
       if (all(s > 0)) {
         s <- s - 1
