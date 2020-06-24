@@ -27,11 +27,20 @@ net <- nn_module(
 
 model <- net()
 optimizer <- optim_sgd(model$parameters, lr = 0.01)
-for (b in enumerate(dl)) {
-  optimizer$zero_grad()
-  output <- model(b[[1]])
-  loss <- nnf_nll_loss(output, b[[2]])
-  loss$backward()
-  optimizer$step()
-  print(loss)
+
+epochs <- 10
+pb <- progress::progress_bar$new(total = epochs, format = "[:bar] :eta Loss: :loss")
+
+for (epoch in 1:10) {
+  pb <- progress::progress_bar$new(total = length(dl), 
+                                   format = "[:bar] :eta Loss: :loss")
+  for (b in enumerate(dl)) {
+    optimizer$zero_grad()
+    output <- model(b[[1]])
+    loss <- nnf_nll_loss(output, b[[2]])
+    loss$backward()
+    optimizer$step()
+    pb$tick(tokens = list(loss = loss$item()))
+  }
 }
+
