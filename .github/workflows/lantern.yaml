@@ -68,9 +68,9 @@ jobs:
       - name: Prep cmake
         if: ${{ matrix.cuda != 0 }}
         run: |
-          wget --quiet http://us.download.nvidia.com/tesla/418.152.00/NVIDIA-Linux-x86_64-418.152.00.run
-          chmod +x NVIDIA-Linux-x86_64-418.152.00.run
-          sudo ./NVIDIA-Linux-x86_64-418.152.00.run --silent --no-kernel-module --disable-nouveau --no-cc-version-check --no-unified-memory --no-drm --no-install-libglvnd --no-glvnd-glx-client --no-glvnd-egl-client
+          wget --quiet https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.39_linux.run
+          chmod +x cuda_10.1.105_418.39_linux.run
+          sudo ./cuda_10.1.105_418.39_linux.run --silent
           echo ::set-env name=CUDA::${{matrix.cuda}}
           echo ::set-env name=CUDA_TOOLKIT_ROOT_DIR::/usr/local/cuda
           dir /usr/local
