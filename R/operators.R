@@ -69,5 +69,27 @@ length.torch_tensor <- function(x) {
   prod(dim(x))
 }
 
+#' @export
+as.numeric.torch_tensor <- function(x, ...) {
+  as.numeric(as_array(x))
+}
+
+#' @export
+as.integer.torch_tensor <- function(x, ...) {
+  as.integer(as_array(x))
+}
+
+#' @export
+as.logical.torch_tensor <- function(x, ...) {
+  as.logical(as_array(x))
+}
+
+#' @export
+as.double.torch_tensor <- function(x, ...) {
+  as.double(as_array(x))
+}
+
+
+
 
 

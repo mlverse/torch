@@ -92,3 +92,13 @@ test_that("length works", {
   x <- torch_randn(c(2,2))
   expect_equal(length(x), 4)
 })
+
+test_that("as.*", {
+  x <- array(runif(200), dim = c(10, 5, 2))
+  t <- torch_tensor(x)
+  
+  expect_equal(as.numeric(t), as.numeric(x), tolerance = 1e-7)
+  expect_equal(as.integer(t), as.integer(x))
+  expect_equal(as.double(t), as.double(x), tolerance = 1e-7)
+  expect_equal(as.logical(t > 0.5), as.logical(x > 0.5))
+})
