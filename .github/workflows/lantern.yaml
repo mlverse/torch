@@ -99,6 +99,12 @@ jobs:
         with:
           name: ${{matrix.upload}}
           path: ${{runner.workspace}}/artifacts
+      - name: Upload logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: Logs
+          path: /var/log/
   upload:
     needs: build
     runs-on: ubuntu-18.04
