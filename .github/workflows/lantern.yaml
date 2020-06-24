@@ -11,9 +11,10 @@ jobs:
     strategy:
       matrix:
         os: [windows-2019, ubuntu-18.04, macos-10.15]
+        cuda: [0, 10.1]
         include:
           - os: windows-2019
-            cuda:
+            cuda: 0
             library: lantern.dll
             test: "& './lanterntest.exe' "
             make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
@@ -25,7 +26,7 @@ jobs:
             artifacts: lantern.dll
             upload: Windows
           - os: ubuntu-18.04
-            cuda:
+            cuda: 0
             library: liblantern.so
             test: ./lanterntest
             make: make
@@ -37,7 +38,7 @@ jobs:
             artifacts: liblantern.so
             upload: Linux
           - os: macos-10.15
-            cuda:
+            cuda: 0
             library: liblantern.dylib
             test: ./lanterntest
             make: make
@@ -65,7 +66,7 @@ jobs:
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/build
       - name: Prep cmake
-        if: matrix.cuda == '10.1'
+        if: matrix.cuda != 0
         env:
           CUDA: ${{matrix.cuda}}
         run: CUDA=${{matrix.cuda}}
