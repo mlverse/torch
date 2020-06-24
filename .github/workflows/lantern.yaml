@@ -70,7 +70,7 @@ jobs:
         run: |
           wget http://us.download.nvidia.com/tesla/418.126.02/NVIDIA-Linux-x86_64-418.126.02.run
           chmod +x NVIDIA-Linux-x86_64-418.126.02.run
-          sudo ./NVIDIA-Linux-x86_64-418.126.02.run --silent
+          sudo ./NVIDIA-Linux-x86_64-418.126.02.run --silent --toolkit
           echo ::set-env name=CUDA::${{matrix.cuda}}
       - name: Run cmake
         working-directory: ${{runner.workspace}}/build
