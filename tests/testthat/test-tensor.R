@@ -80,3 +80,17 @@ test_that("Pass only device argument to `to`", {
   k <- x$to(other = y)
   expect_true(k$dtype() == torch_long())
 })
+
+test_that("cuda and cpu methods", {
+  skip_if_cuda_not_available()
+  
+  x <- torch_tensor(1)
+  y <- x$cuda()
+  
+  expect_true(y$device()$type, "cuda")
+  
+  k <- y$cpu()
+  
+  expect_true(k$device()$type, "cpu")
+  
+})
