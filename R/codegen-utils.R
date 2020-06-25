@@ -7,6 +7,9 @@ is_scalar_atomic <- function(x) {
 
 argument_to_torch_type <- function(obj, expected_types) {
   
+  if (is.name(obj))
+    return(NULL)
+  
   if ("Tensor" %in% expected_types && is_torch_tensor(obj))
     return(list(obj$ptr, "Tensor"))
   
@@ -178,7 +181,6 @@ to_return_type <- function(res, types) {
 }
 
 call_c_function <- function(fun_name, args, expected_types, nd_args, return_types, fun_type) {
-  args <- Filter(Negate(is.name), args)
   args_t <- all_arguments_to_torch_type(args, expected_types)
   nd_args_types <- args_t[[2]][names(args_t[[2]]) %in% nd_args]
   fun_name <- make_cpp_function_name(fun_name, nd_args_types, fun_type)
