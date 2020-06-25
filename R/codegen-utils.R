@@ -108,8 +108,10 @@ all_arguments_to_torch_type <- function(all_arguments, expected_types) {
   list(arguments, types)
 }
 
+clean_chars <- c("'", "\"", "%", "#", ":", ">", "<", ",", " ", "*")
+
 clean_names <- function(x) {
-  cpp_clean_names(x, c("'", "\"", "%", "#", ":", ">", "<", ",", " ", "*"))
+  cpp_clean_names(x, clean_chars)
 }
 
 make_cpp_function_name <- function(method_name, arg_types, type) {
