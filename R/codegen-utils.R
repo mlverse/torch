@@ -195,5 +195,10 @@ call_c_function <- function(fun_name, args, expected_types, nd_args, return_type
     value_error("{fun_name} does not exist")
   
   out <- do_call(f, args_t[[1]])
+  
+  if (cpp_lantern_has_error()) {
+    stop(cpp_lantern_last_error())
+  }
+  
   to_return_type(out, return_types)
 }
