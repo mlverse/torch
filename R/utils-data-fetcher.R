@@ -24,7 +24,11 @@ MapDatasetFetcher <- R6::R6Class(
     },
     fetch = function(possibly_batched_index) {
       if (self$auto_collation) {
-        data <- lapply(possibly_batched_index, function(idx) self$dataset[idx])
+        data <- vector(mode = "list", length = length(possibly_batched_index))
+        dataset <- self$dataset
+        for (i in seq_along(data)) {
+          data[[i]] <- dataset[possibly_batched_index[[i]]]
+        }
       } else {
         data <- self$dataset[possibly_batched_index]
       }
