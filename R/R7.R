@@ -55,7 +55,8 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
 #' @importFrom rlang env_get
 #' @export
 `$.R7` <- function(x, name) {
-  o <- env_get(x, name, default = NULL, inherit = TRUE)
+  #o <- env_get(x, name, default = NULL, inherit = TRUE)
+  o <- mget(name, envir = x, inherits = TRUE, ifnotfound = list(NULL))[[1]]
   
   if (name == "private")
     attr(o, "self") <- x
