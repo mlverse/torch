@@ -80,3 +80,21 @@ torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
 is_torch_dtype <- function(x) {
   inherits(x, "torch_dtype")
 }
+
+#' Gets and sets the default floating point dtype.
+#' 
+#' @param d The default floating point dtype to set. Initially set to 
+#'   `torch_float()`.
+#' 
+#' @rdname default_dtype
+#'
+#' @export
+torch_set_default_dtype <- function(d) {
+  cpp_set_default_dtype(d$ptr)
+}
+
+#' @rdname default_dtype
+#' @export
+torch_get_default_dtype <- function() {
+  torch_dtype$new(cpp_get_default_dtype())
+}

@@ -185,6 +185,14 @@ cpp_torch_qint32 <- function() {
     .Call('_torch_cpp_torch_qint32', PACKAGE = 'torchpkg')
 }
 
+cpp_set_default_dtype <- function(x) {
+    invisible(.Call('_torch_cpp_set_default_dtype', PACKAGE = 'torchpkg', x))
+}
+
+cpp_get_default_dtype <- function() {
+    .Call('_torch_cpp_get_default_dtype', PACKAGE = 'torchpkg')
+}
+
 cpp_torch_method_set_data_self_Tensor_new_data_Tensor <- function(self, new_data) {
     invisible(.Call('_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor', PACKAGE = 'torchpkg', self, new_data))
 }

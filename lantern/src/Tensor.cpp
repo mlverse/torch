@@ -135,3 +135,4 @@ bool lantern_Tensor_is_undefined(void *self)
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.dtype() == torch::ScalarType::Undefined;
 }
+

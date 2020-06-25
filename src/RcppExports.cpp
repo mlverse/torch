@@ -510,6 +510,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_set_default_dtype
+void cpp_set_default_dtype(Rcpp::XPtr<XPtrTorchDtype> x);
+RcppExport SEXP _torch_cpp_set_default_dtype(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDtype> >::type x(xSEXP);
+    cpp_set_default_dtype(x);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_get_default_dtype
+Rcpp::XPtr<XPtrTorchDtype> cpp_get_default_dtype();
+RcppExport SEXP _torch_cpp_get_default_dtype() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_get_default_dtype());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_set_data_self_Tensor_new_data_Tensor
 void cpp_torch_method_set_data_self_Tensor_new_data_Tensor(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> new_data);
 RcppExport SEXP _torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor(SEXP selfSEXP, SEXP new_dataSEXP) {
@@ -23677,6 +23697,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_quint8", (DL_FUNC) &_torch_cpp_torch_quint8, 0},
     {"_torch_cpp_torch_qint8", (DL_FUNC) &_torch_cpp_torch_qint8, 0},
     {"_torch_cpp_torch_qint32", (DL_FUNC) &_torch_cpp_torch_qint32, 0},
+    {"_torch_cpp_set_default_dtype", (DL_FUNC) &_torch_cpp_set_default_dtype, 1},
+    {"_torch_cpp_get_default_dtype", (DL_FUNC) &_torch_cpp_get_default_dtype, 0},
     {"_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor", (DL_FUNC) &_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor, 2},
     {"_torch_cpp_torch_method_data_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_data_self_Tensor, 1},
     {"_torch_cpp_torch_method_is_leaf_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_is_leaf_self_Tensor, 1},

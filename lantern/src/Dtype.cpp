@@ -72,3 +72,15 @@ const char *lantern_Dtype_type(void *dtype)
 {
   return toString(reinterpret_cast<LanternObject<torch::Dtype> *>(dtype)->get());
 }
+
+void lantern_set_default_dtype(void *dtype)
+{
+  torch::Dtype dt = reinterpret_cast<LanternObject<torch::Dtype> *>(dtype)->get();
+  torch::set_default_dtype(c10::scalarTypeToTypeMeta(dt));
+}
+
+void *lantern_get_default_dtype()
+{
+  auto dt = torch::get_default_dtype();
+  return (void *)new LanternObject<torch::Dtype>(c10::typeMetaToScalarType(dt));
+}
