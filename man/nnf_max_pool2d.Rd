@@ -7,7 +7,7 @@
 nnf_max_pool2d(
   input,
   kernel_size,
-  stride = NULL,
+  stride = kernel_size,
   padding = 0,
   dilation = 1,
   ceil_mode = FALSE,

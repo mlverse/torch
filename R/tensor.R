@@ -76,6 +76,19 @@ Tensor <- R7Class(
       
 
       do.call(private$`_to`, args)
+    },
+    cuda = function(device=NULL, non_blocking=FALSE, memory_format=torch_preserve_format()) {
+      
+      if (is.null(device))
+        device <- cuda_current_device()
+      
+      if (!device$type == "cuda")
+        value_error("You must pass a cuda device.")
+      
+      self$to(device = device, non_blocking=non_blocking, memory_format = memory_format)
+    },
+    cpu = function(memory_format=torch_preserve_format()) {
+      self$to(device = torch_device("cpu"), memory_format = memory_format)
     }
   ),
   active = list(
