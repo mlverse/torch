@@ -6,9 +6,10 @@
 \usage{
 install_torch(
   version = "1.5.0",
-  type = Sys.getenv("CUDA", unset = "cpu"),
+  type = install_type(version = version),
   reinstall = FALSE,
-  path = install_path()
+  path = install_path(),
+  ...
 )
 }
 \arguments{
@@ -22,4 +23,11 @@ install_torch(
 }
 \description{
 Installs Torch and its dependencies.
+}
+\details{
+When using \code{path} to install in a specific location, make sure the \code{TORCH_HOME} environment
+variable is set to this same path to reuse this installation. The \code{TORCH_INSTALL} environment
+variable can be set to \code{0} to prevent auto-installing torch and \code{TORCH_LOAD} set to \code{0}
+to avoid loading dependencies automatically. These environment variables are meant for advanced use
+cases and troubleshootinng only.
 }
