@@ -94,3 +94,10 @@ test_that("cuda and cpu methods", {
   expect_true(k$device()$type, "cpu")
   
 })
+
+test_that("stride", {
+  x <- torch_randn(10, 10)
+  expect_identical(x$stride(), c(10, 1))
+  expect_identical(x$stride(0), 10)
+  expect_identical(x$stride(1), 1)
+})
