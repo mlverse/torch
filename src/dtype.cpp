@@ -65,3 +65,16 @@ Rcpp::XPtr<XPtrTorchDtype> cpp_torch_qint8 () {
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_qint32 () {
   return make_xptr<XPtrTorchDtype>(lantern_Dtype_qint32());
 }
+
+// [[Rcpp::export]]
+void cpp_set_default_dtype (Rcpp::XPtr<XPtrTorchDtype> x)
+{
+  lantern_set_default_dtype(x->get());
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchDtype> cpp_get_default_dtype ()
+{
+  XPtrTorchDtype out = lantern_get_default_dtype();
+  return make_xptr<XPtrTorchDtype>(out);
+}
