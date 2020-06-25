@@ -23108,6 +23108,26 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_lantern_has_error
+bool cpp_lantern_has_error();
+RcppExport SEXP _torch_cpp_lantern_has_error() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_lantern_has_error());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_lantern_last_error
+std::string cpp_lantern_last_error();
+RcppExport SEXP _torch_cpp_lantern_last_error() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_lantern_last_error());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_layout_to_string
 std::string cpp_layout_to_string(Rcpp::XPtr<XPtrTorchLayout> layout_ptr);
 RcppExport SEXP _torch_cpp_layout_to_string(SEXP layout_ptrSEXP) {
@@ -25421,6 +25441,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_slice", (DL_FUNC) &_torch_cpp_torch_slice, 3},
     {"_torch_cpp_lantern_init", (DL_FUNC) &_torch_cpp_lantern_init, 1},
     {"_torch_cpp_lantern_test", (DL_FUNC) &_torch_cpp_lantern_test, 0},
+    {"_torch_cpp_lantern_has_error", (DL_FUNC) &_torch_cpp_lantern_has_error, 0},
+    {"_torch_cpp_lantern_last_error", (DL_FUNC) &_torch_cpp_lantern_last_error, 0},
     {"_torch_cpp_layout_to_string", (DL_FUNC) &_torch_cpp_layout_to_string, 1},
     {"_torch_cpp_torch_strided", (DL_FUNC) &_torch_cpp_torch_strided, 0},
     {"_torch_cpp_torch_sparse", (DL_FUNC) &_torch_cpp_torch_sparse, 0},

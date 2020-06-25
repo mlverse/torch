@@ -6925,6 +6925,14 @@ cpp_lantern_test <- function() {
     invisible(.Call('_torch_cpp_lantern_test', PACKAGE = 'torchpkg'))
 }
 
+cpp_lantern_has_error <- function() {
+    .Call('_torch_cpp_lantern_has_error', PACKAGE = 'torchpkg')
+}
+
+cpp_lantern_last_error <- function() {
+    .Call('_torch_cpp_lantern_last_error', PACKAGE = 'torchpkg')
+}
+
 cpp_layout_to_string <- function(layout_ptr) {
     .Call('_torch_cpp_layout_to_string', PACKAGE = 'torchpkg', layout_ptr)
 }
