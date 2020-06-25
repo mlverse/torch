@@ -89,6 +89,14 @@ Tensor <- R7Class(
     },
     cpu = function(memory_format=torch_preserve_format()) {
       self$to(device = torch_device("cpu"), memory_format = memory_format)
+    },
+    stride = function(dim) {
+      if (missing(dim)) {
+        d <- self$dim()
+        sapply(seq_len(d) - 1, private$`_stride`)
+      } else {
+        private$`_stride`(dim)
+      }
     }
   ),
   active = list(

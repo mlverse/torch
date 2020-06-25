@@ -295,7 +295,7 @@ r_method <- function(decls) {
 
 }
 
-internal_methods <- c("backward", "retain_grad", "size", "to")
+internal_methods <- c("backward", "retain_grad", "size", "to", "stride")
 
 r_method_env <- function(decls) {
   if (decls[[1]]$name %in% internal_methods)
