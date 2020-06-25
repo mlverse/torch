@@ -161,20 +161,32 @@ install_type <- function(version) {
   if (nchar(Sys.getenv("CUDA")) > 0) return(Sys.getenv("CUDA"))
   if (install_os() != "linux") return("cpu")
   
-  versions_file <- NULL
+  cuda_version <- NULL
   cuda_home <- Sys.getenv("CUDA_HOME")
   
   if (nchar(cuda_home) > 0) {
     versions_file <- file.path(cuda_home, "version.txt")
-    if (!file.exists(versions_file)) versions_file <- NULL
+    if (file.exists(versions_file)) {
+      cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
+    }
   }
   
-  if (is.null(versions_file)) {
+  if (is.null(cuda_version)) {
     versions_file <- "/usr/local/cuda/version.txt"
-    if (!file.exists(versions_file)) return("cpu")
+    if (file.exists(versions_file)) {
+      cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
+    }
   }
   
-  cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
+  if (is.null(cuda_version)) {
+    smi <- tryCatch(system2("nvidia-smi", stdout = TRUE, stderr = TRUE), error = function(e) NULL)
+    if (!is.null(smi)) {
+      cuda_version <- gsub(".*CUDA Version: | +\\|", "", smi[grepl("CUDA", smi)])
+    }
+  }
+  
+  if (is.null(cuda_version)) return("cpu")
+  
   versions_available <- names(install_config[[version]])
   
   if (!cuda_version %in% versions_available) {
