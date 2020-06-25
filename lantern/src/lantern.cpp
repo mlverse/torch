@@ -8,6 +8,15 @@
 
 #include "utils.hpp"
 
+std::string *pLanternLastError = NULL;
+
+const char* lanternLastError() {
+  if (pLanternLastError == NULL)
+    return NULL;
+  else
+    return pLanternLastError->c_str();
+}
+
 void lanternTest()
 {
     std::cout << "-- Lantern: 0.1.0" << std::endl;

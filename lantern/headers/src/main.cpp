@@ -302,6 +302,10 @@ int main(int argc, char *argv[])
                 }
             }
             bodies.push_back("  } catch(const std::exception& ex) {");
+            bodies.push_back("    pLanternLastError = new std::string(ex.what());");
+            bodies.push_back("    return NULL;");
+            bodies.push_back("  } catch(...) {");
+            bodies.push_back("    pLanternLastError = new std::string(\"Unknown error.\");");
             bodies.push_back("    return NULL;");
             bodies.push_back("  }");
             bodies.push_back("}");

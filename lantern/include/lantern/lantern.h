@@ -34,6 +34,7 @@ extern "C"
 {
 #endif
 
+  LANTERN_API const char*(LANTERN_PTR lanternLastError)();
   LANTERN_API void(LANTERN_PTR lanternTest)();
   LANTERN_API void *(LANTERN_PTR lantern_Device)(const char *type, int64_t index, bool useIndex);
   LANTERN_API const char *(LANTERN_PTR lantern_Device_type)(void *device);
