@@ -68,7 +68,7 @@ jobs:
       - name: Prep cmake
         if: ${{ matrix.cuda != 0 }}
         run: |
-          wget --quiet https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.39_linux.run
+          wget --quiet https://storage.googleapis.com/torch-lantern-builds/cuda/cuda_10.1.105_418.39_linux.run
           chmod +x cuda_10.1.105_418.39_linux.run
           sudo ./cuda_10.1.105_418.39_linux.run --silent --toolkit
           echo ::set-env name=CUDA::${{matrix.cuda}}
