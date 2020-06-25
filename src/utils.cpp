@@ -1,5 +1,6 @@
 #include "torch_types.h"
 #include "utils.hpp"
+#include <algorithm>
 
 // [[Rcpp::export]]
 Rcpp::XPtr<std::nullptr_t> cpp_nullptr () {
@@ -28,3 +29,15 @@ Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_undefined () {
   return make_xptr<XPtrTorchTensor>(XPtrTorchTensor(lantern_Tensor_undefined()));
 }
 
+// [[Rcpp::export]]
+std::string cpp_clean_names (std::string x, std::vector<std::string> r)
+{
+  std::string out = x;
+  char replace;
+  for (int i = 0; i < r.size(); i ++)
+  {
+    replace = r[i][0];
+    out.erase(std::remove(out.begin(), out.end(), replace), out.end());  
+  }
+  return out;
+}

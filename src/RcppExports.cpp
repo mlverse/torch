@@ -23627,6 +23627,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_clean_names
+std::string cpp_clean_names(std::string x, std::vector<std::string> r);
+RcppExport SEXP _torch_cpp_clean_names(SEXP xSEXP, SEXP rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type r(rSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_clean_names(x, r));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_variable_list
 Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_variable_list(SEXP xSEXP) {
@@ -25429,6 +25441,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_nullopt", (DL_FUNC) &_torch_cpp_nullopt, 0},
     {"_torch_cpp_optional_int64_t", (DL_FUNC) &_torch_cpp_optional_int64_t, 1},
     {"_torch_cpp_tensor_undefined", (DL_FUNC) &_torch_cpp_tensor_undefined, 0},
+    {"_torch_cpp_clean_names", (DL_FUNC) &_torch_cpp_clean_names, 2},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
     {NULL, NULL, 0}
