@@ -186,6 +186,8 @@ to_return_type <- function(res, types) {
 }
 
 cpp_handle_error <- function(result) {
+  force(result)
+  
   if (cpp_lantern_has_error()) {
     last_error <- cpp_lantern_last_error()
     cpp_lantern_error_clear()
