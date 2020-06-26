@@ -57,5 +57,5 @@ test_that("indexing error expectations", {
   
   x <- torch_randn(c(10,10,10,10))
   expect_error(x[1,], "incorrect number of dimensions", class = "value_error")
-  expect_error(x[1,1,1,1,1], class = "c10::IndexError")
+  expect_error(x[1,1,1,1,1])
 })
