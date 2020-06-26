@@ -11,7 +11,7 @@ argument_to_torch_type <- function(obj, expected_types) {
     return(NULL)
   
   if (any("Tensor" == expected_types) && is_torch_tensor(obj))
-    return(list(obj$ptr, "Tensor"))
+    return(list(get("ptr", obj, inherits = FALSE), "Tensor"))
   
   if (any("Scalar" == expected_types) && is_torch_scalar(obj))
     return(list(obj$ptr, "Scalar"))
