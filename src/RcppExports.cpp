@@ -23128,6 +23128,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_lantern_error_clear
+void cpp_lantern_error_clear();
+RcppExport SEXP _torch_cpp_lantern_error_clear() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    cpp_lantern_error_clear();
+    return R_NilValue;
+END_RCPP
+}
 // cpp_layout_to_string
 std::string cpp_layout_to_string(Rcpp::XPtr<XPtrTorchLayout> layout_ptr);
 RcppExport SEXP _torch_cpp_layout_to_string(SEXP layout_ptrSEXP) {
@@ -25443,6 +25452,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_lantern_test", (DL_FUNC) &_torch_cpp_lantern_test, 0},
     {"_torch_cpp_lantern_has_error", (DL_FUNC) &_torch_cpp_lantern_has_error, 0},
     {"_torch_cpp_lantern_last_error", (DL_FUNC) &_torch_cpp_lantern_last_error, 0},
+    {"_torch_cpp_lantern_error_clear", (DL_FUNC) &_torch_cpp_lantern_error_clear, 0},
     {"_torch_cpp_layout_to_string", (DL_FUNC) &_torch_cpp_layout_to_string, 1},
     {"_torch_cpp_torch_strided", (DL_FUNC) &_torch_cpp_torch_strided, 0},
     {"_torch_cpp_torch_sparse", (DL_FUNC) &_torch_cpp_torch_sparse, 0},
