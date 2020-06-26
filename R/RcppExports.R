@@ -7049,6 +7049,18 @@ cpp_torch_scalar_to_bool <- function(self) {
     .Call('_torch_cpp_torch_scalar_to_bool', PACKAGE = 'torchpkg', self)
 }
 
+cpp_Tensor_storage <- function(self) {
+    .Call('_torch_cpp_Tensor_storage', PACKAGE = 'torchpkg', self)
+}
+
+cpp_Tensor_has_storage <- function(self) {
+    .Call('_torch_cpp_Tensor_has_storage', PACKAGE = 'torchpkg', self)
+}
+
+cpp_Storage_data_ptr <- function(self) {
+    .Call('_torch_cpp_Storage_data_ptr', PACKAGE = 'torchpkg', self)
+}
+
 cpp_torch_tensor_print <- function(x) {
     invisible(.Call('_torch_cpp_torch_tensor_print', PACKAGE = 'torchpkg', x))
 }

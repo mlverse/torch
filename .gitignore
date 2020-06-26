@@ -14,3 +14,5 @@ inst/doc
 torch.xcworkspace
 test.html
 .vscode
+lantern/.idea*
+lantern/cmake-build*
