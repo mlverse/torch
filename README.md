@@ -25,18 +25,18 @@ create a Torch Tensor from an R object. And then convert back from a
 torch Tensor to an R object.
 
 ``` r
-library(torchr)
+library(torch)
 x <- array(runif(8), dim = c(2, 2, 2))
 y <- torch_tensor(x, dtype = torch_float64())
 y
 #> torch_tensor 
 #> (1,.,.) = 
-#>   0.0302  0.3979
-#>   0.3338  0.2530
+#>   0.8687  0.0157
+#>   0.4237  0.8971
 #> 
 #> (2,.,.) = 
-#>   0.2180  0.5275
-#>   0.6412  0.5127
+#>   0.4021  0.5509
+#>   0.3374  0.9034
 #> [ CPUDoubleType{2,2,2} ]
 identical(x, as_array(y))
 #> [1] TRUE
@@ -76,35 +76,40 @@ scratch using torch’s Autograd.
 tensors in place.
 
 ``` r
-x <- matrix(runif(100), ncol = 2)
-y <- matrix(0.1 + 0.5 * x[,1] - 0.7 * x[,2], ncol = 1)
-x_t <- torch_tensor(x)
-y_t <- torch_tensor(y)
-w <- torch_tensor(matrix(rnorm(2), nrow = 2), requires_grad = TRUE)
-b <- torch_tensor(0, requires_grad = TRUE)
+x <- torch_randn(100, 2)
+y <- 0.1 + 0.5*x[,1] - 0.7*x[,2]
+
+w <- torch_randn(2, 1, requires_grad = TRUE)
+b <- torch_zeros(1, requires_grad = TRUE)
+
 lr <- 0.5
 for (i in 1:100) {
-  y_hat <- torch_mm(x_t, w) + b
-  loss <- torch_mean((y_t - y_hat)^2)
+  y_hat <- torch_mm(x, w) + b
+  loss <- torch_mean((y - y_hat$squeeze(1))^2)
   
   loss$backward()
   
   with_no_grad({
     w$sub_(w$grad*lr)
     b$sub_(b$grad*lr)   
+    
+    w$grad$zero_()
+    b$grad$zero_()
   })
-  
-  w$grad$zero_()
-  b$grad$zero_()
 }
 print(w)
 #> torch_tensor 
-#>  0.5063
-#> -0.6939
+#>  0.5000
+#> -0.7000
 #> [ CPUFloatType{2,1} ]
 print(b) 
 #> torch_tensor 
 #> 0.01 *
-#>  9.3250
+#> 10.0000
 #> [ CPUFloatType{1} ]
 ```
+
+## Contributing
+
+No matter your current skills it’s possible to contribute to `torch`
+development. See the contributing guide for more information.
