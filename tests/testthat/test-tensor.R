@@ -89,6 +89,10 @@ test_that("cuda and cpu methods", {
   
   expect_true(y$device()$type, "cuda")
   
+  # calling twice dont error
+  y$cuda()
+  expect_true(y$device()$type, "cuda")
+  
   k <- y$cpu()
   
   expect_true(k$device()$type, "cpu")
