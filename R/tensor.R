@@ -80,8 +80,8 @@ Tensor <- R7Class(
     cuda = function(device=NULL, non_blocking=FALSE, memory_format=torch_preserve_format()) {
       
       if (is.null(device))
-        device <- cuda_current_device()
-      
+        device <- torch_device("cuda")
+        
       if (!device$type == "cuda")
         value_error("You must pass a cuda device.")
       
