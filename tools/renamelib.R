@@ -1,7 +1,9 @@
 libs_path <- getwd()
 
 for (lib in dir(libs_path, pattern = "torch\\.")) {
-  file.copy(file.path(libs_path, lib), file.path(libs_path, gsub("torch", "torchpkg", lib)))
+  file.copy(file.path(libs_path, lib),
+            file.path(libs_path, gsub("torch", "torchpkg", lib)),
+            overwrite = TRUE)
   
   # Uncomment CRAN release
   # unlink(file.path(libs_path, lib))
