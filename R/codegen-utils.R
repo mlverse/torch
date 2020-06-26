@@ -102,12 +102,21 @@ argument_to_torch_type <- function(obj, expected_types) {
 
 all_arguments_to_torch_type <- function(all_arguments, expected_types) {
   
+  arguments <- list()
+  types <- character()
   for (nm in names(all_arguments)) {
-    all_arguments[[nm]] <- argument_to_torch_type(all_arguments[[nm]], expected_types[[nm]])
+    values_and_types <- argument_to_torch_type(all_arguments[[nm]], expected_types[[nm]])
+    if (!is.null(values_and_types)) {
+      
+      if (is.null(values_and_types[[1]]))
+        arguments[nm] <- list(NULL)
+      else
+        arguments[[nm]] <- values_and_types[[1]]
+      
+      types[[nm]] <- values_and_types[[2]]
+    }
   }
-  
-  arguments <- lapply(all_arguments, function(x) x[[1]])
-  types <- sapply(all_arguments, function(x) x[[2]])
+
   list(arguments, types)
 }
 
