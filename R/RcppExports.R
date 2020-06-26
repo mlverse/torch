@@ -117,6 +117,10 @@ cpp_torch_device <- function(type, index) {
     .Call('_torch_cpp_torch_device', PACKAGE = 'torchpkg', type, index)
 }
 
+cpp_optional_device_guard <- function(device) {
+    .Call('_torch_cpp_optional_device_guard', PACKAGE = 'torchpkg', device)
+}
+
 cpp_torch_dimname <- function(str) {
     .Call('_torch_cpp_torch_dimname', PACKAGE = 'torchpkg', str)
 }

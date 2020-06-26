@@ -22,3 +22,12 @@ Rcpp::XPtr<XPtrTorchDevice> cpp_torch_device(std::string type, Rcpp::Nullable<st
 
   return make_xptr<XPtrTorchDevice>(device);
 }
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchOptionalDeviceGuard> cpp_optional_device_guard (Rcpp::XPtr<XPtrTorchDevice> device)
+{
+  Rcpp::Rcout << "hey!" << std::endl;
+  void* dg = lantern_OptionalDeviceGuard_set_device(device->get());
+  return make_xptr<XPtrTorchOptionalDeviceGuard>(dg);
+}
+

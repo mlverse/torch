@@ -335,6 +335,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_optional_device_guard
+Rcpp::XPtr<XPtrTorchOptionalDeviceGuard> cpp_optional_device_guard(Rcpp::XPtr<XPtrTorchDevice> device);
+RcppExport SEXP _torch_cpp_optional_device_guard(SEXP deviceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDevice> >::type device(deviceSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_optional_device_guard(device));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_dimname
 Rcpp::XPtr<XPtrTorchDimname> cpp_torch_dimname(const std::string& str);
 RcppExport SEXP _torch_cpp_torch_dimname(SEXP strSEXP) {
@@ -23719,6 +23730,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_device_type_to_string", (DL_FUNC) &_torch_cpp_device_type_to_string, 1},
     {"_torch_cpp_device_index_to_int", (DL_FUNC) &_torch_cpp_device_index_to_int, 1},
     {"_torch_cpp_torch_device", (DL_FUNC) &_torch_cpp_torch_device, 2},
+    {"_torch_cpp_optional_device_guard", (DL_FUNC) &_torch_cpp_optional_device_guard, 1},
     {"_torch_cpp_torch_dimname", (DL_FUNC) &_torch_cpp_torch_dimname, 1},
     {"_torch_cpp_torch_dimname_list", (DL_FUNC) &_torch_cpp_torch_dimname_list, 1},
     {"_torch_cpp_dimname_to_string", (DL_FUNC) &_torch_cpp_dimname_to_string, 1},
