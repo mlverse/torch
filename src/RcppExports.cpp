@@ -23639,6 +23639,33 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_suffix
+std::string cpp_suffix(std::vector<std::string> arg_names, std::vector<std::string> arg_types);
+RcppExport SEXP _torch_cpp_suffix(SEXP arg_namesSEXP, SEXP arg_typesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_names(arg_namesSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_types(arg_typesSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_suffix(arg_names, arg_types));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_make_function_name
+std::string cpp_make_function_name(std::string method_name, std::vector<std::string> arg_names, std::vector<std::string> arg_types, std::string type, std::vector<std::string> remove_characters);
+RcppExport SEXP _torch_cpp_make_function_name(SEXP method_nameSEXP, SEXP arg_namesSEXP, SEXP arg_typesSEXP, SEXP typeSEXP, SEXP remove_charactersSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type method_name(method_nameSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_names(arg_namesSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_types(arg_typesSEXP);
+    Rcpp::traits::input_parameter< std::string >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type remove_characters(remove_charactersSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_make_function_name(method_name, arg_names, arg_types, type, remove_characters));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_variable_list
 Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_variable_list(SEXP xSEXP) {
@@ -25442,6 +25469,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_optional_int64_t", (DL_FUNC) &_torch_cpp_optional_int64_t, 1},
     {"_torch_cpp_tensor_undefined", (DL_FUNC) &_torch_cpp_tensor_undefined, 0},
     {"_torch_cpp_clean_names", (DL_FUNC) &_torch_cpp_clean_names, 2},
+    {"_torch_cpp_suffix", (DL_FUNC) &_torch_cpp_suffix, 2},
+    {"_torch_cpp_make_function_name", (DL_FUNC) &_torch_cpp_make_function_name, 5},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
     {NULL, NULL, 0}
