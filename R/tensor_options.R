@@ -10,6 +10,10 @@ TensorOptions <- R6::R6Class(
         return(NULL)
       }
       
+      if (is.character(device)){
+        device <- torch_device(device)
+      }
+      
       self$ptr <- cpp_torch_tensor_options(dtype$ptr, layout$ptr, device$ptr, requires_grad,
                                            pinned_memory)
     },
