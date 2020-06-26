@@ -123,3 +123,8 @@ void lantern_PackedSequence_delete(void *x)
 {
   lantern_delete<LanternPtr<torch::nn::utils::rnn::PackedSequence>>(x);
 }
+
+void lantern_OptionalDeviceGuard_delete(void *x)
+{
+  lantern_delete<c10::OptionalDeviceGuard>(x);
+}

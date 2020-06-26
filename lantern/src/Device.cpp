@@ -123,3 +123,10 @@ int64_t lantern_Device_index(void *device)
 {
   return ((LanternPtr<torch::Device> *)device)->get().index();
 }
+
+void *lantern_OptionalDeviceGuard_set_device(void *device)
+{
+  auto device_guard = new c10::OptionalDeviceGuard;
+  device_guard->reset_device(reinterpret_cast<LanternPtr<torch::Device> *>(device)->get());
+  return (void *)device_guard;
+}
