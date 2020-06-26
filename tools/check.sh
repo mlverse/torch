@@ -1,8 +1,5 @@
 cd torch
 
-# install dependencies --------
-apt-get install -y libcurl4-openssl-dev libssl-dev
-
 Rscript -e "install.packages(c('remotes', 'rcmdcheck'))"
 Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
