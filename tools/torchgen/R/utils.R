@@ -42,28 +42,6 @@ namespace_methods <- memoise::memoise(function() {
     purrr::keep(~"namespace" %in% .x$method_of)
 })
 
-clean_names <- function(x) {
-  # adapted from janitor::make_clean_names
-  x <- gsub("'", "", x)
-  x <- gsub("\"", "", x)
-  x <- gsub("%", ".percent_", x)
-  x <- gsub("#", ".number_", x)
-  x <- gsub(":", "", x)
-  x <- gsub("<", "", x)
-  x <- gsub(">", "", x)
-  x <- gsub(",", "", x)
-  x <- gsub(" *", "", x, fixed = TRUE)
-  x <- gsub("^[[:space:][:punct:]]+", "", x)
-  x
-}
+clean_names <- torch:::clean_names
 
-make_cpp_function_name <- function(method_name, arg_types, type) {
-
-  suffix <- paste(names(arg_types), arg_types, sep = "_")
-  suffix <- paste(suffix, collapse = "_")
-
-  if (length(suffix) == 0)
-    suffix <- ""
-
-  clean_names(sprintf("cpp_torch_%s_%s_%s", type, method_name, suffix))
-}
+make_cpp_function_name <- torch:::make_cpp_function_name

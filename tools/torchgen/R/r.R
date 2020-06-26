@@ -204,7 +204,7 @@ r_list_of_arguments_helper <- function(args) {
   args <- purrr::map_chr(args, r_argument_name)
 
   args <- glue::glue('"{args}"') %>% glue::glue_collapse(sep = ", ")
-  glue::glue("args <- rlang::env_get_list(nms = c({args}))")
+  glue::glue("args <- mget(x = c({args}))")
 }
 
 r_namespace_list_of_arguments <- function(decls) {

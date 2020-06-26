@@ -7113,6 +7113,18 @@ cpp_tensor_undefined <- function() {
     .Call('_torch_cpp_tensor_undefined', PACKAGE = 'torchpkg')
 }
 
+cpp_clean_names <- function(x, r) {
+    .Call('_torch_cpp_clean_names', PACKAGE = 'torchpkg', x, r)
+}
+
+cpp_suffix <- function(arg_names, arg_types) {
+    .Call('_torch_cpp_suffix', PACKAGE = 'torchpkg', arg_names, arg_types)
+}
+
+cpp_make_function_name <- function(method_name, arg_names, arg_types, type, remove_characters) {
+    .Call('_torch_cpp_make_function_name', PACKAGE = 'torchpkg', method_name, arg_names, arg_types, type, remove_characters)
+}
+
 cpp_torch_variable_list <- function(x) {
     .Call('_torch_cpp_torch_variable_list', PACKAGE = 'torchpkg', x)
 }
