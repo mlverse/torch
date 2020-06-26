@@ -201,134 +201,134 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 <span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
 <span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
 <span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 3.73174
+#&gt; -2.37961
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='co'># matrix x vector</span>
 <span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4115
-#&gt;  3.5397
-#&gt;  0.0928
+#&gt; -0.3198
+#&gt;  0.0653
+#&gt;  0.3550
 #&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='co'># batched matrix x broadcasted vector</span>
 <span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.5827  2.6949 -1.3013
-#&gt;  0.7192 -1.5363 -0.7182
-#&gt; -0.3708 -0.0438  0.8197
-#&gt; -0.7875  0.8994 -1.8001
-#&gt;  1.3229 -1.3084  0.3698
-#&gt; -1.9201  2.1622 -0.1773
-#&gt;  0.5786 -1.5993 -0.8559
-#&gt;  3.1901  0.9263 -0.7546
-#&gt; -0.9247 -2.9735  1.7972
-#&gt;  0.6887  0.4814  0.2335
+#&gt; -1.2162  0.5417  1.3272
+#&gt;  0.7006 -0.2425 -0.5578
+#&gt; -1.0573  0.4057 -0.6394
+#&gt;  1.6030  1.8447 -1.8793
+#&gt;  0.0370 -0.0203 -1.7582
+#&gt; -0.3430 -2.1128 -0.2493
+#&gt; -0.3039 -3.4963 -0.0323
+#&gt;  1.8722  0.8350 -1.8420
+#&gt;  0.4691  0.9965 -0.7580
+#&gt;  1.4223  3.4256 -3.3550
 #&gt; [ CPUFloatType{10,3} ]</div><div class='input'><span class='co'># batched matrix x batched matrix</span>
 <span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -1.0245  0.8449 -0.7120 -0.1708  0.0676
-#&gt;   1.4217  3.3911  0.6550  1.7426 -2.1456
-#&gt;   0.4247 -1.3422  0.0493 -0.5735  0.0949
+#&gt;   1.1113 -1.1552  0.8760 -0.8790 -2.8580
+#&gt;  -0.2041 -0.6704  0.3028  1.1685 -1.3819
+#&gt;   3.9735 -1.1724 -2.3308  1.2773  2.3590
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.2540 -0.9837  0.8524 -1.0587  0.3196
-#&gt;  -1.1599 -1.2633 -0.7615  0.6941 -1.5605
-#&gt;   3.2021  0.7883  1.1156 -1.6008  1.0204
+#&gt;  -1.8590 -1.1571  1.6596  3.4932 -0.2053
+#&gt;   0.7907  1.5118  2.3988  1.1325 -1.4084
+#&gt;   0.7586  0.7758 -0.3884 -4.7001 -1.7690
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -2.4101  1.5616  1.3150 -3.4160 -1.7665
-#&gt;  -0.0040  0.3949  2.7630 -3.1926 -1.0730
-#&gt;   0.8214 -0.1401  0.6880 -2.8071 -2.3101
+#&gt;   1.3623 -2.2671  0.6622 -4.7628  3.8033
+#&gt;   1.6976  0.1071  2.5860 -2.4877  3.6707
+#&gt;  -0.6107 -2.2086  0.8495  1.6411 -0.0588
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -0.3839  1.5893 -3.6436 -4.7059  2.9374
-#&gt;  -4.9267 -0.3690  4.8539 -0.6227 -4.8704
-#&gt;   0.1376  0.8120 -3.7900 -5.0406  3.0316
+#&gt;  -0.6850 -2.4919  1.6825  0.0037 -0.2940
+#&gt;  -0.3664  0.6351 -0.2900  1.3225  1.2269
+#&gt;  -2.3694 -4.7235  3.2173  1.7753  1.4479
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   0.6562  5.1001 -2.3387  0.0102 -0.8945
-#&gt;   0.6922 -3.7446 -0.6112  0.6796  2.0216
-#&gt;  -0.0199  5.6328  0.8415  0.3285 -1.3051
+#&gt;  -1.1360  0.8370 -0.0065 -1.3364 -6.1653
+#&gt;  -0.4376 -1.4373  1.2980 -1.2722 -3.8815
+#&gt;  -2.4885  2.9614 -3.5468 -1.5805 -1.4790
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;   0.9286  0.2641  1.0525  0.9980  0.4851
-#&gt;  -0.5903 -2.1345 -0.3125  0.2031  1.0148
-#&gt;   2.9825  4.4798 -2.6958  1.1492  0.6500
+#&gt;   0.0274 -1.8097  0.1383  0.7062 -0.2213
+#&gt;  -0.7995 -2.1534  1.1278  0.4569  1.6627
+#&gt;  -0.4890 -1.9242  3.1078  1.0225 -0.2666
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;  -0.2238 -0.5147  0.4704  0.3624  0.2358
-#&gt;  -3.3406 -0.2978  0.4195  3.5891 -2.5762
-#&gt;  -0.9460 -2.3469 -1.6619 -3.2283 -0.6149
+#&gt;  -0.8293 -0.7764  0.7245  0.9477 -0.4161
+#&gt;  -0.7256 -0.7374  0.0962  0.3372  0.3064
+#&gt;   1.4338 -1.3974  1.2873  0.5058 -0.3121
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;   0.0699  1.0762  4.0092  0.1633  1.8639
-#&gt;   2.7599  3.4194  0.5122  2.0457 -0.5986
-#&gt;   2.5415  3.0959 -2.1131  2.0791 -1.8277
+#&gt;  -0.9770  1.1870 -6.5508 -1.2618 -1.3953
+#&gt;  -1.5671  1.2927 -3.4435 -0.5430 -1.0933
+#&gt;  -0.3111 -0.6995 -1.8576  0.4555 -0.1343
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;  -0.0951 -0.1282 -0.7652  1.8993  0.5640
-#&gt;  -0.6378 -0.8623  0.1689 -0.9280  1.2023
-#&gt;  -2.1805 -1.3852 -2.3629 -1.6894  3.2962
+#&gt;   1.1739 -0.6017  0.5432 -0.7958 -2.5355
+#&gt;   2.8817  0.4214 -0.1819 -1.2467 -2.2137
+#&gt;  -0.8617 -0.8101  0.6802  0.0556 -2.7424
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;  -0.5315  1.7623 -0.3792 -0.4425  0.8818
-#&gt;  -0.8631  0.2120 -0.5367 -0.8567  1.3216
-#&gt;  -0.9344  0.9088  0.5899 -1.1179 -1.7244
+#&gt;  -1.6688 -2.1020  1.6298 -1.4685 -0.7954
+#&gt;  -0.0248  0.4468  0.0037 -0.2339  0.3715
+#&gt;   0.0273  0.6181  0.3543 -1.4158  0.0447
 #&gt; [ CPUFloatType{10,3,5} ]</div><div class='input'><span class='co'># batched matrix x broadcasted matrix</span>
 <span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -4.4810  3.2554  6.0841 -1.0117  3.9206
-#&gt;   0.8889 -0.2357  0.8999  2.2952 -1.8829
-#&gt;  -2.6604  2.5916  6.1432  0.9864  0.7025
+#&gt;  -0.2903 -0.1713  1.5687  0.2440  0.8829
+#&gt;  -1.1501  0.0086 -0.6468 -0.3439 -0.7836
+#&gt;  -0.4925  0.2729 -2.5634 -0.7050 -2.1906
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -2.3561  1.3166  3.0731  1.1236  3.2472
-#&gt;  -1.3011  1.9987  5.0089 -0.1287 -0.2196
-#&gt;   2.7747 -1.0899 -1.0301  1.5347 -5.1708
+#&gt;   0.3274 -1.6134 -2.5264 -0.1420 -0.8973
+#&gt;   0.5083 -3.8758 -1.4592  0.2918  0.0364
+#&gt;   0.7792 -1.2554 -2.9096 -0.2987 -1.5335
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -0.3180  0.3614  0.6155 -1.6093  1.8880
-#&gt;  -1.5611  0.7715  1.4717  1.0149  1.0426
-#&gt;  -4.0554  2.2548  3.0323 -1.8050  4.5958
+#&gt;   0.0405 -2.4622  0.6054  0.3894  0.7997
+#&gt;   0.1680  1.7805  1.3400  0.1231  0.7338
+#&gt;  -0.2414 -1.4517  0.0232  0.1096  0.1513
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -1.2326  0.3929 -0.2714  1.1295 -1.8483
-#&gt;  -0.7872 -0.2010 -0.8013  0.1374  2.5753
-#&gt;   0.9791 -1.1289 -1.8809  0.9289  0.7395
+#&gt;  -0.1626  1.7795  4.2497  0.5559  2.2954
+#&gt;   0.3687  0.7221 -0.0990  0.0198  0.1044
+#&gt;   0.4858  1.7425  0.5109 -0.0192  0.1279
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -1.0499  0.5348  0.3582 -0.2332  0.0163
-#&gt;  -2.6341  1.5109  2.6744  1.0204  1.2279
-#&gt;   3.6258 -2.2115 -4.6907 -1.4654 -3.3297
+#&gt;  -1.9948  3.0173  0.5147 -0.6715 -1.0102
+#&gt;   0.5201 -2.5219 -2.8538 -0.1559 -1.2146
+#&gt;  -0.3154 -2.8353  0.9963  0.5307  1.3404
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;  -2.8084  0.3528 -0.8032 -0.6248  5.9909
-#&gt;   3.3837 -1.6526 -2.4162  0.2684 -3.9548
-#&gt;   1.5162 -1.0458 -2.6265  0.2145 -3.4753
+#&gt;  -1.2946  3.9233 -0.2768 -0.7591 -1.3455
+#&gt;   0.1517 -1.3708  4.3827  0.9880  3.0092
+#&gt;   0.4771 -2.0279 -1.7461  0.0110 -0.5293
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;   1.6609 -1.1019 -2.5406 -0.0657 -2.7526
-#&gt;   2.6352 -1.0475 -0.9002  3.0114 -6.9826
-#&gt;  -2.0996  2.1623  5.6533  1.7140  0.3396
+#&gt;  -0.9860  2.3166  0.7560 -0.3039 -0.2300
+#&gt;   0.4438  0.0314  1.0753  0.2857  0.8275
+#&gt;  -0.6210  0.5084  3.2703  0.4971  2.0039
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;  -5.1709  3.1816  6.9473  1.6506  5.9466
-#&gt;  -3.4099  2.6091  6.6739  2.5913  2.6344
-#&gt;   1.3836 -1.2238 -3.3656 -1.3986 -0.8137
+#&gt;   0.4506  1.0349  3.2408  0.6333  2.2187
+#&gt;   2.0914 -2.5862  1.6400  1.0634  2.3967
+#&gt;   0.3238  0.9694 -0.4193 -0.0741 -0.1474
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;  -0.6961  0.2595  0.7204  1.7522 -0.4876
-#&gt;   1.1652 -0.8838 -2.5106 -1.8549 -0.1696
-#&gt;   0.6479 -0.5438 -1.8835 -0.3433 -2.1348
+#&gt;  -0.3307  2.5837 -2.5615 -0.9645 -2.6573
+#&gt;   0.3015  3.3034 -2.1871 -0.7720 -2.0481
+#&gt;   0.5390 -1.2913 -0.7913  0.0995 -0.1046
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;  -1.5713  0.8517  2.5633  1.2122  3.3083
-#&gt;   4.3215 -3.4144 -7.0254  1.2452 -4.8852
-#&gt;   4.0163 -2.3574 -4.9049 -1.0801 -4.6177
+#&gt;   0.2949 -0.5820 -1.6155 -0.1612 -0.7567
+#&gt;  -0.3058 -1.8320 -0.3674  0.0708 -0.0356
+#&gt;  -0.5654 -1.5082 -1.8227 -0.2263 -0.8751
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

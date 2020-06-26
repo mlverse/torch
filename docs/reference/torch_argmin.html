@@ -184,25 +184,25 @@ documentation for the exact semantics of this method.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5313 -0.6437  2.0874 -0.6926
-#&gt;  1.4097  1.0133  1.4586  0.7012
-#&gt;  0.1823 -0.9045 -1.2324 -0.4086
-#&gt; -0.4135 -2.4613 -1.2378  0.2678
+#&gt;  1.6416  1.0551 -0.1648 -1.7722
+#&gt;  1.7110 -0.4657  0.0843  1.5698
+#&gt; -0.9455  1.3457  0.2076 -0.9894
+#&gt; -2.0847  1.1386 -0.2182  1.0545
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 13
+#&gt; 12
 #&gt; [ CPULongType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.4457 -0.9500  0.5651 -0.2923
-#&gt; -0.7181  1.8235  1.5445  1.1518
-#&gt; -1.5904 -0.7130 -0.9002  0.2028
-#&gt; -1.0067 -1.3845 -0.3122 -0.5276
+#&gt; -0.3604 -1.0423  0.9780 -1.2052
+#&gt;  0.3993 -0.0517 -0.7131 -1.4085
+#&gt; -0.1945  0.3397 -1.2391 -0.1698
+#&gt; -0.9233 -0.2634  1.4732 -0.1863
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1
+#&gt;  3
+#&gt;  3
+#&gt;  2
 #&gt;  0
-#&gt;  0
-#&gt;  1
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

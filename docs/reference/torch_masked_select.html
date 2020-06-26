@@ -181,19 +181,19 @@ to match, but they must be broadcastable .</p>
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0410 -1.1779 -0.3275  1.3502
-#&gt; -1.5399 -0.8450  0.3502 -0.5816
-#&gt;  0.7662  0.1238 -0.1595  1.4532
+#&gt; -0.5938 -0.6930 -1.7913 -0.2730
+#&gt;  0.8917  1.0252 -0.5416  0.5701
+#&gt; -0.8321 -0.9320  0.9096 -0.5736
 #&gt; [ CPUFloatType{3,4} ]</div><div class='input'><span class='no'>mask</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='fu'>ge</span>(<span class='fl'>0.5</span>)
 <span class='no'>mask</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1  0  0  1
 #&gt;  0  0  0  0
-#&gt;  1  0  0  1
+#&gt;  1  1  0  1
+#&gt;  0  0  1  0
 #&gt; [ CPUBoolType{3,4} ]</div><div class='input'><span class='fu'>torch_masked_select</span>(<span class='no'>x</span>, <span class='no'>mask</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0410
-#&gt;  1.3502
-#&gt;  0.7662
-#&gt;  1.4532
+#&gt;  0.8917
+#&gt;  1.0252
+#&gt;  0.5701
+#&gt;  0.9096
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

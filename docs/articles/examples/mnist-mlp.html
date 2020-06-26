@@ -139,31 +139,27 @@
 <span id="cb1-29"><a href="#cb1-29"></a>optimizer &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/optim_sgd.html">optim_sgd</a></span>(model<span class="op">$</span>parameters, <span class="dt">lr =</span> <span class="fl">0.01</span>)</span>
 <span id="cb1-30"><a href="#cb1-30"></a></span>
 <span id="cb1-31"><a href="#cb1-31"></a>epochs &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a>pb &lt;-<span class="st"> </span>progress<span class="op">::</span>progress_bar<span class="op">$</span><span class="kw">new</span>(<span class="dt">total =</span> epochs, <span class="dt">format =</span> <span class="st">"[:bar] :eta Loss: :loss"</span>)</span>
-<span id="cb1-33"><a href="#cb1-33"></a></span>
-<span id="cb1-34"><a href="#cb1-34"></a><span class="cf">for</span> (epoch <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</span>
-<span id="cb1-35"><a href="#cb1-35"></a>  pb &lt;-<span class="st"> </span>progress<span class="op">::</span>progress_bar<span class="op">$</span><span class="kw">new</span>(<span class="dt">total =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(dl), </span>
-<span id="cb1-36"><a href="#cb1-36"></a>                                   <span class="dt">format =</span> <span class="st">"[:bar] :eta Loss: :loss"</span>)</span>
-<span id="cb1-37"><a href="#cb1-37"></a>  <span class="cf">for</span> (b <span class="cf">in</span> <span class="kw"><a href="../../reference/enumerate.html">enumerate</a></span>(dl)) {</span>
-<span id="cb1-38"><a href="#cb1-38"></a>    optimizer<span class="op">$</span><span class="kw">zero_grad</span>()</span>
-<span id="cb1-39"><a href="#cb1-39"></a>    output &lt;-<span class="st"> </span><span class="kw">model</span>(b[[<span class="dv">1</span>]])</span>
-<span id="cb1-40"><a href="#cb1-40"></a>    loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/nnf_nll_loss.html">nnf_nll_loss</a></span>(output, b[[<span class="dv">2</span>]])</span>
-<span id="cb1-41"><a href="#cb1-41"></a>    loss<span class="op">$</span><span class="kw">backward</span>()</span>
-<span id="cb1-42"><a href="#cb1-42"></a>    optimizer<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/step.html">step</a></span>()</span>
-<span id="cb1-43"><a href="#cb1-43"></a>    pb<span class="op">$</span><span class="kw">tick</span>(<span class="dt">tokens =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">loss =</span> loss<span class="op">$</span><span class="kw">item</span>()))</span>
-<span id="cb1-44"><a href="#cb1-44"></a>  }</span>
-<span id="cb1-45"><a href="#cb1-45"></a>}</span>
-<span id="cb1-46"><a href="#cb1-46"></a></span>
-<span id="cb1-47"><a href="#cb1-47"></a></span>
-<span id="cb1-48"><a href="#cb1-48"></a><span class="co"># p &lt;- profvis::profvis({</span></span>
-<span id="cb1-49"><a href="#cb1-49"></a><span class="co">#   optimizer$zero_grad()</span></span>
-<span id="cb1-50"><a href="#cb1-50"></a><span class="co">#   output &lt;- model(b[[1]])</span></span>
-<span id="cb1-51"><a href="#cb1-51"></a><span class="co">#   loss &lt;- nnf_nll_loss(output, b[[2]])</span></span>
-<span id="cb1-52"><a href="#cb1-52"></a><span class="co">#   loss$backward()</span></span>
-<span id="cb1-53"><a href="#cb1-53"></a><span class="co">#   optimizer$step()</span></span>
-<span id="cb1-54"><a href="#cb1-54"></a><span class="co"># })</span></span>
-<span id="cb1-55"><a href="#cb1-55"></a><span class="co"># </span></span>
-<span id="cb1-56"><a href="#cb1-56"></a><span class="co"># htmlwidgets::saveWidget(p, "~/Downloads/profile.html")</span></span></code></pre></div>
+<span id="cb1-32"><a href="#cb1-32"></a></span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="cf">for</span> (epoch <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</span>
+<span id="cb1-34"><a href="#cb1-34"></a>  </span>
+<span id="cb1-35"><a href="#cb1-35"></a>  pb &lt;-<span class="st"> </span>progress<span class="op">::</span>progress_bar<span class="op">$</span><span class="kw">new</span>(</span>
+<span id="cb1-36"><a href="#cb1-36"></a>    <span class="dt">total =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(dl), </span>
+<span id="cb1-37"><a href="#cb1-37"></a>    <span class="dt">format =</span> <span class="st">"[:bar] :eta Loss: :loss"</span></span>
+<span id="cb1-38"><a href="#cb1-38"></a>  )</span>
+<span id="cb1-39"><a href="#cb1-39"></a>  l &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>()</span>
+<span id="cb1-40"><a href="#cb1-40"></a>  </span>
+<span id="cb1-41"><a href="#cb1-41"></a>  <span class="cf">for</span> (b <span class="cf">in</span> <span class="kw"><a href="../../reference/enumerate.html">enumerate</a></span>(dl)) {</span>
+<span id="cb1-42"><a href="#cb1-42"></a>    optimizer<span class="op">$</span><span class="kw">zero_grad</span>()</span>
+<span id="cb1-43"><a href="#cb1-43"></a>    output &lt;-<span class="st"> </span><span class="kw">model</span>(b[[<span class="dv">1</span>]])</span>
+<span id="cb1-44"><a href="#cb1-44"></a>    loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/nnf_nll_loss.html">nnf_nll_loss</a></span>(output, b[[<span class="dv">2</span>]])</span>
+<span id="cb1-45"><a href="#cb1-45"></a>    loss<span class="op">$</span><span class="kw">backward</span>()</span>
+<span id="cb1-46"><a href="#cb1-46"></a>    optimizer<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/step.html">step</a></span>()</span>
+<span id="cb1-47"><a href="#cb1-47"></a>    l &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(l, loss<span class="op">$</span><span class="kw">item</span>())</span>
+<span id="cb1-48"><a href="#cb1-48"></a>    pb<span class="op">$</span><span class="kw">tick</span>(<span class="dt">tokens =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">loss =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(l)))</span>
+<span id="cb1-49"><a href="#cb1-49"></a>  }</span>
+<span id="cb1-50"><a href="#cb1-50"></a>  </span>
+<span id="cb1-51"><a href="#cb1-51"></a>  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Loss at epoch %d: %3f</span><span class="ch">\n</span><span class="st">"</span>, epoch, <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(l)))</span>
+<span id="cb1-52"><a href="#cb1-52"></a>}</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

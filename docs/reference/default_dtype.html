@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Std_mean — torch_std_mean • torch</title>
+<title>Gets and sets the default floating point dtype. — torch_set_default_dtype • torch</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Std_mean — torch_std_mean" />
-<meta property="og:description" content="Std_mean" />
+<meta property="og:title" content="Gets and sets the default floating point dtype. — torch_set_default_dtype" />
+<meta property="og:description" content="Gets and sets the default floating point dtype." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -136,107 +136,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Std_mean</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
-    <div class="hidden name"><code>torch_std_mean.Rd</code></div>
+    <h1>Gets and sets the default floating point dtype.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/dtype.R'><code>R/dtype.R</code></a></small>
+    <div class="hidden name"><code>default_dtype.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Std_mean</p>
+    <p>Gets and sets the default floating point dtype.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_set_default_dtype</span>(<span class='no'>d</span>)
+
+<span class='fu'>torch_get_default_dtype</span>()</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) the input tensor.</p></td>
-    </tr>
-    <tr>
-      <th>unbiased</th>
-      <td><p>(bool) whether to use the unbiased estimation or not</p></td>
-    </tr>
-    <tr>
-      <th>dim</th>
-      <td><p>(int or tuple of ints) the dimension or dimensions to reduce.</p></td>
-    </tr>
-    <tr>
-      <th>keepdim</th>
-      <td><p>(bool) whether the output tensor has <code>dim</code> retained or not.</p></td>
+      <th>d</th>
+      <td><p>The default floating point dtype to set. Initially set to
+<code>torch_float()</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="std-mean-input-unbiased-true-gt-tensor-tensor-"><a class="anchor" href="#std-mean-input-unbiased-true-gt-tensor-tensor-"></a>std_mean(input, unbiased=True) -&gt; (Tensor, Tensor) </h2>
 
-    
-
-
-<p>Returns the standard-deviation and mean of all elements in the <code>input</code> tensor.</p>
-<p>If <code>unbiased</code> is <code>False</code>, then the standard-deviation will be calculated
-via the biased estimator. Otherwise, Bessel's correction will be used.</p>
-    <h2 class="hasAnchor" id="std-mean-input-dim-unbiased-true-keepdim-false-gt-tensor-tensor-"><a class="anchor" href="#std-mean-input-dim-unbiased-true-keepdim-false-gt-tensor-tensor-"></a>std_mean(input, dim, unbiased=True, keepdim=False) -&gt; (Tensor, Tensor) </h2>
-
-    
-
-
-<p>Returns the standard-deviation and mean of each row of the <code>input</code> tensor in the
-dimension <code>dim</code>. If <code>dim</code> is a list of dimensions,
-reduce over all of them.</p>
-<p>If <code>keepdim</code> is <code>True</code>, the output tensor is of the same size
-as <code>input</code> except in the dimension(s) <code>dim</code> where it is of size 1.
-Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>torch_squeeze</a></code>), resulting in the
-output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
-<p>If <code>unbiased</code> is <code>False</code>, then the standard-deviation will be calculated
-via the biased estimator. Otherwise, Bessel's correction will be used.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
-<span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.6144 -2.9917 -1.7513
-#&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_std_mean</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; [[1]]
-#&gt; torch_tensor 
-#&gt; 1.189
-#&gt; [ CPUFloatType{} ]
-#&gt; 
-#&gt; [[2]]
-#&gt; torch_tensor 
-#&gt; -1.78582
-#&gt; [ CPUFloatType{} ]
-#&gt; </div><div class='input'>
-
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.6452  0.3112 -0.1588  0.1467
-#&gt;  0.3483 -0.1891 -1.9356 -1.3604
-#&gt; -0.2484 -0.9746  0.6699  0.6831
-#&gt; -1.1936 -0.6555  0.4976  0.3278
-#&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_std_mean</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [[1]]
-#&gt; torch_tensor 
-#&gt;  0.4203
-#&gt;  1.0479
-#&gt;  0.8006
-#&gt;  0.8057
-#&gt; [ CPUFloatType{4} ]
-#&gt; 
-#&gt; [[2]]
-#&gt; torch_tensor 
-#&gt; 0.01 *
-#&gt; -8.6513
-#&gt; -78.4203
-#&gt;  3.2514
-#&gt; -25.5905
-#&gt; [ CPUFloatType{4} ]
-#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#std-mean-input-unbiased-true-gt-tensor-tensor-">std_mean(input, unbiased=True) -&gt; (Tensor, Tensor) </a></li>
-      <li><a href="#std-mean-input-dim-unbiased-true-keepdim-false-gt-tensor-tensor-">std_mean(input, dim, unbiased=True, keepdim=False) -&gt; (Tensor, Tensor) </a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

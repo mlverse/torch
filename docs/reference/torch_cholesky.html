@@ -190,17 +190,17 @@ matrices.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive-definite</span>
 <span class='no'>l</span> <span class='kw'>=</span> <span class='fu'>torch_cholesky</span>(<span class='no'>a</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0041 -1.1538  0.0759
-#&gt; -1.1538  2.1576 -2.0805
-#&gt;  0.0759 -2.0805  4.7908
+#&gt;  8.9398 -4.8110 -2.3832
+#&gt; -4.8110  3.7767  3.0418
+#&gt; -2.3832  3.0418  3.8036
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>l</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0020  0.0000  0.0000
-#&gt; -1.1514  0.9120  0.0000
-#&gt;  0.0757 -2.1856  0.0910
+#&gt;  2.9900  0.0000  0.0000
+#&gt; -1.6091  1.0898  0.0000
+#&gt; -0.7971  1.6143  0.7498
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>l</span>, <span class='no'>l</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>())</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0041 -1.1538  0.0759
-#&gt; -1.1538  2.1576 -2.0805
-#&gt;  0.0759 -2.0805  4.7908
+#&gt;  8.9398 -4.8110 -2.3832
+#&gt; -4.8110  3.7767  3.0418
+#&gt; -2.3832  3.0418  3.8036
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'>transpose</span>(-<span class='fl'>1</span>, -<span class='fl'>2</span>)) + <span class='fl'>1e-03</span> <span class='co'># make symmetric positive-definite</span>

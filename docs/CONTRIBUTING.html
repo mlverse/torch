@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Orthogonal initialization — nn_init_orthogonal_ • torch</title>
+<title>Contributing to torch • torch</title>
 
 
 <!-- jquery -->
@@ -29,18 +29,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Orthogonal initialization — nn_init_orthogonal_" />
-<meta property="og:description" content="Fills the input Tensor with a (semi) orthogonal matrix, as
-described in Exact solutions to the nonlinear dynamics of learning in deep linear neural networks - Saxe, A. et al. (2013). The input tensor must have
-at least 2 dimensions, and for tensors with more than 2 dimensions the
-trailing dimensions are flattened." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Contributing to torch" />
 
 
 
@@ -59,7 +54,7 @@ trailing dimensions are flattened." />
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -71,7 +66,7 @@ trailing dimensions are flattened." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torch</a>
+        <a class="navbar-link" href="index.html">torch</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
@@ -79,7 +74,7 @@ trailing dimensions are flattened." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
@@ -92,14 +87,14 @@ trailing dimensions are flattened." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/indexing.html">Indexing</a>
+      <a href="articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
     <li>
-      <a href="../articles/using-autograd.html">Using autograd</a>
+      <a href="articles/using-autograd.html">Using autograd</a>
     </li>
     <li>
-      <a href="../articles/extending-autograd.html">Extending autograd</a>
+      <a href="articles/extending-autograd.html">Extending autograd</a>
     </li>
   </ul>
 </li>
@@ -111,12 +106,12 @@ trailing dimensions are flattened." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+      <a href="articles/examples/mnist-mlp.html">mnist-mlp</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -137,54 +132,48 @@ trailing dimensions are flattened." />
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Orthogonal initialization</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-init.R'><code>R/nn-init.R</code></a></small>
-    <div class="hidden name"><code>nn_init_orthogonal_.Rd</code></div>
+      <h1>Contributing to torch</h1>
     </div>
 
-    <div class="ref-description">
-    <p>Fills the input <code>Tensor</code> with a (semi) orthogonal matrix, as
-described in <code>Exact solutions to the nonlinear dynamics of learning in deep linear neural networks</code> - Saxe, A. et al. (2013). The input tensor must have
-at least 2 dimensions, and for tensors with more than 2 dimensions the
-trailing dimensions are flattened.</p>
-    </div>
+<div id="contributing-to-torch" class="section level1">
 
-    <pre class="usage"><span class='fu'>nn_init_orthogonal_</span>(<span class='no'>tensor</span>, <span class='kw'>gain</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>tensor</th>
-      <td><p>an n-dimensional <code>Tensor</code></p></td>
-    </tr>
-    <tr>
-      <th>gain</th>
-      <td><p>optional scaling factor</p></td>
-    </tr>
-    </table>
-
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>,<span class='fl'>5</span>)
-<span class='fu'>nn_init_orthogonal_</span>(<span class='no'>w</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5972  0.0230 -0.3342  0.4297  0.5887
-#&gt;  0.5622  0.4278  0.6424  0.0854 -0.2847
-#&gt; -0.5608  0.5583  0.1521  0.5424  0.2374
-#&gt; [ CPUFloatType{3,5} ]</div><div class='input'>
-</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-  </div>
+<p>This outlines how to propose a change to torch. For more detailed info about contributing to this, and other tidyverse packages, please see the <a href="https://rstd.io/tidy-contrib"><strong>development contributing guide</strong></a>.</p>
+<div id="fixing-typos" class="section level2">
+<h2 class="hasAnchor">
+<a href="#fixing-typos" class="anchor"></a>Fixing typos</h2>
+<p>You can fix typos, spelling mistakes, or grammatical errors in the documentation directly using the GitHub web interface, as long as the changes are made in the <em>source</em> file. This generally means you’ll need to edit <a href="https://roxygen2.r-lib.org/articles/roxygen2.html">roxygen2 comments</a> in an <code>.R</code>, not a <code>.Rd</code> file. You can find the <code>.R</code> file that generates the <code>.Rd</code> by reading the comment in the first line.</p>
 </div>
+<div id="filing-bugs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#filing-bugs" class="anchor"></a>Filing bugs</h2>
+<p>If you find a bug in <code>torch</code> please open an issue <a href="https://github.com/mlverse/torch/issues">here</a>. Please, provide detailed information on how to reproduce the bug. It would be great to also provide a <a href="https://reprex.tidyverse.org/"><code>reprex</code></a>.</p>
+</div>
+<div id="feature-requests" class="section level2">
+<h2 class="hasAnchor">
+<a href="#feature-requests" class="anchor"></a>Feature requests</h2>
+<p>Feel free to open issues <a href="https://github.com/mlverse/torch/issues">here</a> and add the <code>feature-request</code> tag. Try searching if there’s already an open issue for your <code>feature-request</code>, in this case it’s better to comment or upvote it intead of opening a new one.</p>
+</div>
+<div id="examples" class="section level2">
+<h2 class="hasAnchor">
+<a href="#examples" class="anchor"></a>Examples</h2>
+<p>We welcome contributed examples. feel free to open a PR with new examples. The should be placed in the <code>vignettes/examples</code> folder.</p>
+<p>The examples should be an .R file and a .Rmd file with the same name that just renders the code.</p>
+<p>See <a href="https://github.com/mlverse/torch/blob/master/vignettes/examples/mnist-mlp.R">mnist-mlp.R</a> and <a href="https://github.com/mlverse/torch/blob/master/vignettes/examples/mnist-mlp.Rmd">mnist-mlp.Rmd</a></p>
+<p>One must be able to run the example without manually downloading any dataset/file. You should also add an entry to the <a href="https://github.com/mlverse/torch/blob/master/_pkgdown.yml#L24-L25"><code>_pkgdown.yaml</code> file</a>.</p>
+</div>
+<div id="code-contributions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#code-contributions" class="anchor"></a>Code contributions</h2>
+<p>We have many open issues in the <a href="https://github.com/mlverse/torch/issues">github repo</a> if there’s one item that you want to work on, you can comment on it an ask for directions.</p>
+</div>
+</div>
+
+  </div>
+
+</div>
+
 
 
       <footer>

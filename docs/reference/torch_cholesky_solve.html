@@ -194,22 +194,22 @@ batched outputs <code>c</code></p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive definite</span>
 <span class='no'>u</span> <span class='kw'>=</span> <span class='fu'><a href='torch_cholesky.html'>torch_cholesky</a></span>(<span class='no'>a</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.1550  0.9040 -0.6314
-#&gt;  0.9040  0.9183 -0.4892
-#&gt; -0.6314 -0.4892  0.3532
+#&gt;  3.0847  0.4213  1.6806
+#&gt;  0.4213  2.6911  0.2249
+#&gt;  1.6806  0.2249  1.3869
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4666 -0.3681
-#&gt; -1.1056  0.1592
-#&gt;  2.5210  1.3689
+#&gt; -0.8484 -1.8776
+#&gt;  0.1869 -0.5207
+#&gt;  0.1012  0.6911
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'>torch_cholesky_solve</span>(<span class='no'>b</span>, <span class='no'>u</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;   4.5750   1.7853
-#&gt;   9.3452   8.3144
-#&gt;  28.2566  18.5812
+#&gt; -0.9430 -2.5766
+#&gt;  0.1171 -0.0940
+#&gt;  1.1966  3.6356
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>$<span class='fu'>inverse</span>(), <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;   4.5750   1.7853
-#&gt;   9.3452   8.3144
-#&gt;  28.2566  18.5812
+#&gt; -0.9430 -2.5766
+#&gt;  0.1171 -0.0940
+#&gt;  1.1966  3.6356
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
