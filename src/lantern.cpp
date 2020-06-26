@@ -22,5 +22,14 @@ bool cpp_lantern_has_error() {
 
 // [[Rcpp::export]]
 std::string cpp_lantern_last_error() {
-  return std::string(lanternLastError());
+  const char* pError = lanternLastError();
+  if (pError == NULL)
+    return std::string("");
+  
+  return std::string(pError);
+}
+
+// [[Rcpp::export]]
+void cpp_lantern_error_clear() {
+  lanternLastErrorClear();
 }

@@ -10,11 +10,17 @@
 
 std::string *pLanternLastError = NULL;
 
-const char* lanternLastError() {
+const char* lanternLastError()
+{
   if (pLanternLastError == NULL)
     return NULL;
   else
     return pLanternLastError->c_str();
+}
+
+void lanternLastErrorClear()
+{
+  pLanternLastError = NULL;
 }
 
 void lanternTest()

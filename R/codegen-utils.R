@@ -197,7 +197,9 @@ call_c_function <- function(fun_name, args, expected_types, nd_args, return_type
   out <- do_call(f, args_t[[1]])
   
   if (cpp_lantern_has_error()) {
-    stop(cpp_lantern_last_error())
+    last_error <- cpp_lantern_last_error()
+    cpp_lantern_error_clear()
+    stop(last_error)
   }
   
   to_return_type(out, return_types)
