@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -181,15 +188,15 @@ broadcastable .</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.6169
-#&gt; -1.4913
-#&gt; -2.0116
-#&gt;  0.4741
+#&gt;  1.5345
+#&gt; -1.0349
+#&gt; -1.2481
+#&gt; -0.2392
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_atan2</span>(<span class='no'>a</span>, <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>)))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.3871
-#&gt; -1.6679
-#&gt; -1.7928
-#&gt;  2.6061
+#&gt;  1.4160
+#&gt; -2.1925
+#&gt; -0.8276
+#&gt; -0.2070
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

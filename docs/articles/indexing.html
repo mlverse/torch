@@ -51,6 +51,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -69,8 +72,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
+<li class="dropdown-header">Vision</li>
+    <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -200,21 +207,21 @@
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/torch_randn.html">torch_randn</a></span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>x</span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; torch_tensor </span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; -0.5174  0.4965  0.2876</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; -0.7304  1.2454  0.2337</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt;  0.1022  0.5167 -0.7508</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;  1.1705 -0.2243  0.3953</span></span>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; [ CPUFloatType{2,3} ]</span></span></code></pre></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>x[<span class="dv">1</span>,]</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; torch_tensor </span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; -0.5174</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;  0.4965</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;  0.2876</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;  0.1022</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;  0.5167</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; -0.7508</span></span>
 <span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; [ CPUFloatType{3} ]</span></span></code></pre></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; torch_tensor </span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; -0.5174  0.4965</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; -0.7304  1.2454</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt;  0.1022  0.5167</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;  1.1705 -0.2243</span></span>
 <span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; [ CPUFloatType{2,2} ]</span></span></code></pre></div>
 </div>
 <div id="droping-dimensions" class="section level2">

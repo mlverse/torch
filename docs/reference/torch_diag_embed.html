@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -197,26 +204,26 @@ need to be explicitly specified.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.6086  0.0000  0.0000
-#&gt;   0.0000 -0.1716  0.0000
-#&gt;   0.0000  0.0000  1.3728
+#&gt;   1.2480  0.0000  0.0000
+#&gt;   0.0000  1.6831  0.0000
+#&gt;   0.0000  0.0000  0.0076
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.9429  0.0000  0.0000
-#&gt;   0.0000 -1.2919  0.0000
-#&gt;   0.0000  0.0000 -0.1957
+#&gt;   0.9348  0.0000  0.0000
+#&gt;   0.0000 -1.1223  0.0000
+#&gt;   0.0000  0.0000  0.7119
 #&gt; [ CPUFloatType{2,3,3} ]</div><div class='input'><span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>, <span class='kw'>offset</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>dim1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>dim2</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.0000 -0.6086  0.0000  0.0000
-#&gt;   0.0000  0.9429  0.0000  0.0000
+#&gt;   0.0000  1.2480  0.0000  0.0000
+#&gt;   0.0000  0.9348  0.0000  0.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0000  0.0000 -0.1716  0.0000
-#&gt;   0.0000  0.0000 -1.2919  0.0000
+#&gt;   0.0000  0.0000  1.6831  0.0000
+#&gt;   0.0000  0.0000 -1.1223  0.0000
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.0000  0.0000  0.0000  1.3728
-#&gt;   0.0000  0.0000  0.0000 -0.1957
+#&gt;   0.0000  0.0000  0.0000  0.0076
+#&gt;   0.0000  0.0000  0.0000  0.7119
 #&gt; 
 #&gt; (4,.,.) = 
 #&gt;   0  0  0  0

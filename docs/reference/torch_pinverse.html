@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -184,28 +191,28 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
     <pre class="examples"><div class='input'>
 <span class='no'>input</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>))
 <span class='no'>input</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1771 -0.1277  0.4883 -0.7870  0.1536
-#&gt;  0.8599 -0.4588  0.0356  1.2477  0.2630
-#&gt; -0.9473 -1.1949  0.6104 -1.1295 -0.2687
+#&gt; -0.5093 -1.3586  0.4624  0.2282 -0.7146
+#&gt; -1.1385  0.0685  0.3987  0.1347  1.3165
+#&gt; -0.9570  1.9990 -1.2909 -0.4181 -0.9217
 #&gt; [ CPUFloatType{3,5} ]</div><div class='input'><span class='fu'>torch_pinverse</span>(<span class='no'>input</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8391  0.4266 -0.3564
-#&gt;  0.3146 -0.4585 -0.6048
-#&gt;  1.0516  0.3849 -0.0661
-#&gt; -0.6824  0.2705  0.0834
-#&gt;  0.9001  0.2726 -0.2764
+#&gt; -0.4397 -0.4374 -0.2888
+#&gt; -0.3414  0.0243  0.1631
+#&gt;  0.0543  0.1028 -0.1461
+#&gt;  0.0543  0.0397 -0.0359
+#&gt; -0.3845  0.3448 -0.2103
 #&gt; [ CPUFloatType{5,3} ]</div><div class='input'><span class='co'># Batched pinverse example</span>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>6</span>,<span class='fl'>3</span>))
 <span class='no'>b</span> <span class='kw'>=</span> <span class='fu'>torch_pinverse</span>(<span class='no'>a</span>)
 <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>b</span>, <span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.0000e+00 -5.9605e-08 -4.4703e-08
-#&gt;   1.4901e-08  1.0000e+00 -4.0978e-08
-#&gt;   7.4506e-08  5.5879e-08  1.0000e+00
+#&gt;   1.0000e+00  1.3784e-07  1.0803e-07
+#&gt;  -3.7253e-08  1.0000e+00  2.5891e-07
+#&gt;  -5.9605e-08 -3.3528e-08  1.0000e+00
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.0000e+00  1.4808e-07 -1.8626e-07
-#&gt;   1.1921e-07  1.0000e+00  1.6205e-07
-#&gt;   5.9605e-08 -7.3574e-08  1.0000e+00
+#&gt;   1.0000e+00  5.2154e-08 -1.7881e-07
+#&gt;  -5.9605e-08  1.0000e+00  8.9407e-08
+#&gt;  -5.9605e-08 -3.7253e-08  1.0000e+00
 #&gt; [ CPUFloatType{2,3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -198,22 +205,22 @@ via the biased estimator. Otherwise, Bessel's correction will be used.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.9144  0.3101 -0.0327
+#&gt;  0.4955 -0.0373 -0.4843
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_std</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.631675
+#&gt; 0.490552
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.8591 -0.6661 -0.0349 -1.0586
-#&gt;  0.4250 -0.5721  1.2162  0.2538
-#&gt; -0.4117 -0.1020  1.1821  1.9365
-#&gt;  0.4416  1.0970 -0.8926  0.0822
+#&gt;  0.9203  1.1066 -0.8159 -0.5546
+#&gt;  1.5307  0.1133 -0.5696  1.2234
+#&gt;  0.8110 -0.7280  0.7640 -0.7218
+#&gt;  1.9211  0.0538 -0.9575 -1.3945
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_std</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.7737
-#&gt;  0.7335
-#&gt;  1.1001
-#&gt;  0.8305
+#&gt;  0.9894
+#&gt;  0.9759
+#&gt;  0.8734
+#&gt;  1.4741
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
