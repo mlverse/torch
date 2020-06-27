@@ -97,6 +97,9 @@ Tensor <- R7Class(
       } else {
         private$`_stride`(dim)
       }
+    },
+    is_contiguous = function() {
+      cpp_tensor_is_contiguous(self$ptr)
     }
   ),
   active = list(
