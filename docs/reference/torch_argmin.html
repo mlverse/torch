@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -184,25 +191,25 @@ documentation for the exact semantics of this method.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.6416  1.0551 -0.1648 -1.7722
-#&gt;  1.7110 -0.4657  0.0843  1.5698
-#&gt; -0.9455  1.3457  0.2076 -0.9894
-#&gt; -2.0847  1.1386 -0.2182  1.0545
+#&gt; -0.4118 -0.9672  0.2185  1.0924
+#&gt;  1.7189  0.6154 -1.4004  0.2964
+#&gt;  0.5216  0.9087  0.1407 -1.2497
+#&gt;  1.0930 -0.3835 -0.6061  1.3624
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 12
+#&gt; 6
 #&gt; [ CPULongType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3604 -1.0423  0.9780 -1.2052
-#&gt;  0.3993 -0.0517 -0.7131 -1.4085
-#&gt; -0.1945  0.3397 -1.2391 -0.1698
-#&gt; -0.9233 -0.2634  1.4732 -0.1863
+#&gt;  1.2451 -1.4834 -2.0925 -0.1798
+#&gt;  0.5640 -0.9888 -0.4802 -0.8833
+#&gt; -0.0349 -0.3207 -0.4660  0.9148
+#&gt;  1.8179  0.7134 -0.2468  0.9256
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3
-#&gt;  3
 #&gt;  2
-#&gt;  0
+#&gt;  1
+#&gt;  2
+#&gt;  2
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -184,27 +191,27 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4704
-#&gt;  1.4223
-#&gt;  1.1738
-#&gt;  0.7282
-#&gt;  0.9689
-#&gt;  1.2232
-#&gt; -0.9322
-#&gt; -0.3381
-#&gt;  1.2374
-#&gt;  2.3053
+#&gt; -0.8416
+#&gt;  0.4333
+#&gt; -0.4679
+#&gt; -0.8919
+#&gt; -0.3301
+#&gt; -0.0339
+#&gt; -0.4897
+#&gt; -1.1311
+#&gt; -1.4731
+#&gt; -0.9011
 #&gt; [ CPUFloatType{10} ]</div><div class='input'><span class='fu'>torch_cumsum</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>0</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4704
-#&gt;  0.9519
-#&gt;  2.1257
-#&gt;  2.8539
-#&gt;  3.8229
-#&gt;  5.0461
-#&gt;  4.1139
-#&gt;  3.7758
-#&gt;  5.0132
-#&gt;  7.3185
+#&gt; -0.8416
+#&gt; -0.4083
+#&gt; -0.8762
+#&gt; -1.7681
+#&gt; -2.0983
+#&gt; -2.1322
+#&gt; -2.6219
+#&gt; -3.7529
+#&gt; -5.2261
+#&gt; -6.1271
 #&gt; [ CPUFloatType{10} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

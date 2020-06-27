@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -194,22 +201,22 @@ batched outputs <code>c</code></p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive definite</span>
 <span class='no'>u</span> <span class='kw'>=</span> <span class='fu'><a href='torch_cholesky.html'>torch_cholesky</a></span>(<span class='no'>a</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3.0847  0.4213  1.6806
-#&gt;  0.4213  2.6911  0.2249
-#&gt;  1.6806  0.2249  1.3869
+#&gt;   3.8415  -0.2191   2.7920
+#&gt;  -0.2191   4.5465   6.0028
+#&gt;   2.7920   6.0028  10.7656
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8484 -1.8776
-#&gt;  0.1869 -0.5207
-#&gt;  0.1012  0.6911
+#&gt;  1.2246 -0.2244
+#&gt;  0.5929 -1.0500
+#&gt;  1.1082  0.4790
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'>torch_cholesky_solve</span>(<span class='no'>b</span>, <span class='no'>u</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.9430 -2.5766
-#&gt;  0.1171 -0.0940
-#&gt;  1.1966  3.6356
+#&gt;  1.8448 -4.7115
+#&gt;  2.7106 -8.0742
+#&gt; -1.8869  5.7685
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>$<span class='fu'>inverse</span>(), <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.9430 -2.5766
-#&gt;  0.1171 -0.0940
-#&gt;  1.1966  3.6356
+#&gt;  1.8448 -4.7115
+#&gt;  2.7106 -8.0742
+#&gt; -1.8869  5.7685
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

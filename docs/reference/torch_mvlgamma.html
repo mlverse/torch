@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -176,11 +183,11 @@ where \(C = \log(\pi) \times \frac{p (p - 1)}{4}\) and \(\Gamma(\cdot)\) is the 
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))$<span class='fu'>uniform_</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.5755  1.8613  1.5259
-#&gt;  1.0235  1.3902  1.7034
+#&gt;  1.3902  1.7034  1.1663
+#&gt;  1.6929  1.6962  1.7477
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_mvlgamma</span>(<span class='no'>a</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4179  0.4037  0.4385
-#&gt;  1.0868  0.5273  0.3909
+#&gt;  0.5273  0.3909  0.8011
+#&gt;  0.3918  0.3915  0.3897
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

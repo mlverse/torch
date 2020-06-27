@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -199,34 +206,34 @@ a real number, otherwise it should be an integer.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6592
-#&gt; -0.4389
-#&gt; -0.2957
-#&gt; -1.4148
+#&gt; -2.3453
+#&gt;  0.4201
+#&gt;  0.8056
+#&gt;  0.4007
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='fl'>20</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  20.6592
-#&gt;  19.5611
-#&gt;  19.7043
-#&gt;  18.5852
+#&gt;  17.6547
+#&gt;  20.4201
+#&gt;  20.8056
+#&gt;  20.4007
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0150
-#&gt; -0.2962
-#&gt; -0.7625
-#&gt;  0.7368
+#&gt; -1.7433
+#&gt;  0.4334
+#&gt; -0.0335
+#&gt; -0.8046
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1580
-#&gt; -0.0584
-#&gt; -0.4418
-#&gt;  0.2763
+#&gt;  1.9842
+#&gt; -1.2331
+#&gt;  1.2785
+#&gt; -0.7455
 #&gt; [ CPUFloatType{4,1} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8570 -0.4543 -0.9205  0.5788
-#&gt;  0.9566 -0.3546 -0.8209  0.6784
-#&gt;  0.5732 -0.7380 -1.2043  0.2950
-#&gt;  1.2913 -0.0200 -0.4862  1.0130
+#&gt;  0.2410  2.4176  1.9507  1.1796
+#&gt; -2.9764 -0.7998 -1.2667 -2.0377
+#&gt; -0.4647  1.7119  1.2450  0.4739
+#&gt; -2.4887 -0.3121 -0.7790 -1.5500
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

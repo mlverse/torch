@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -174,17 +181,17 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_rand.html'>torch_rand</a></span>(<span class='fl'>5</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5471
-#&gt;  0.2827
-#&gt;  0.4483
-#&gt;  0.4511
-#&gt;  0.3045
+#&gt;  0.8896
+#&gt;  0.4131
+#&gt;  0.9534
+#&gt;  0.3417
+#&gt;  0.0101
 #&gt; [ CPUFloatType{5} ]</div><div class='input'><span class='fu'>torch_log2</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8701
-#&gt; -1.8225
-#&gt; -1.1575
-#&gt; -1.1486
-#&gt; -1.7156
+#&gt; -0.1688
+#&gt; -1.2754
+#&gt; -0.0688
+#&gt; -1.5492
+#&gt; -6.6226
 #&gt; [ CPUFloatType{5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

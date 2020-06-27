@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -179,17 +186,17 @@ be unstable in when `input` doesn't have distinct singular values. See
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'><a href='torch_det.html'>torch_det</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.861908
+#&gt; -0.583641
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_logdet</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.148606
+#&gt; nan
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1894  0.4658 -1.0472
-#&gt;  0.6081 -0.0399 -0.7193
-#&gt; -0.6486 -0.8475  0.1367
+#&gt; -0.9045  2.1737 -0.1822
+#&gt;  0.2464 -0.3835 -0.8773
+#&gt;  0.5088 -0.3878 -0.5142
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.861908
+#&gt; -0.583641
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()$<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.148606
+#&gt; nan
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

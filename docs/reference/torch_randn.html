@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -191,13 +198,13 @@ The shape of the tensor is defined by the variable argument <code>size</code>.</
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>torch_randn</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.9532
-#&gt; -0.3602
-#&gt;  1.1942
-#&gt; -1.2811
+#&gt;  0.1769
+#&gt;  1.5478
+#&gt; -0.8871
+#&gt; -0.8477
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_randn</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1812 -0.6659  1.5620
-#&gt; -1.2648 -0.5620  0.7303
+#&gt;  1.2484  1.0939 -0.1743
+#&gt;  0.2503 -0.0494  2.2941
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

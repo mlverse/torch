@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -207,7 +214,7 @@ batched outputs <code>solution, LU</code>.</p>
 <span class='no'>X</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
 <span class='no'>LU</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]]
 <span class='fu'><a href='torch_dist.html'>torch_dist</a></span>(<span class='no'>B</span>, <span class='no'>A</span>$<span class='fu'>matmul</span>(<span class='no'>X</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 2.44514e-06
+#&gt; 5.62799e-06
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

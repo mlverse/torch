@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -181,20 +188,23 @@ to match, but they must be broadcastable .</p>
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5938 -0.6930 -1.7913 -0.2730
-#&gt;  0.8917  1.0252 -0.5416  0.5701
-#&gt; -0.8321 -0.9320  0.9096 -0.5736
+#&gt;  1.2835 -0.7208  0.0672  1.0638
+#&gt;  1.3561 -1.8924  0.8533  0.7159
+#&gt;  2.9560  0.6744 -0.1289  0.4879
 #&gt; [ CPUFloatType{3,4} ]</div><div class='input'><span class='no'>mask</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='fu'>ge</span>(<span class='fl'>0.5</span>)
 <span class='no'>mask</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0  0  0  0
-#&gt;  1  1  0  1
-#&gt;  0  0  1  0
+#&gt;  1  0  0  1
+#&gt;  1  0  1  1
+#&gt;  1  1  0  0
 #&gt; [ CPUBoolType{3,4} ]</div><div class='input'><span class='fu'>torch_masked_select</span>(<span class='no'>x</span>, <span class='no'>mask</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8917
-#&gt;  1.0252
-#&gt;  0.5701
-#&gt;  0.9096
-#&gt; [ CPUFloatType{4} ]</div></pre>
+#&gt;  1.2835
+#&gt;  1.0638
+#&gt;  1.3561
+#&gt;  0.8533
+#&gt;  0.7159
+#&gt;  2.9560
+#&gt;  0.6744
+#&gt; [ CPUFloatType{7} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
