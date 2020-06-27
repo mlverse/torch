@@ -690,7 +690,7 @@ test_that("autograd_grad retain grad", {
   loss <- loss$mean()
   
   out <- autograd_grad(loss, list(w, b))
-  expect_length(out, 2)f
+  expect_length(out, 2)
   expect_error(autograd_grad(loss, list(w, b)), regexp = "graph a second time")
   
   w <- torch_tensor(0.5, requires_grad = TRUE)
