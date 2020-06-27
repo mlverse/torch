@@ -44,4 +44,6 @@ namespace_methods <- memoise::memoise(function() {
 
 clean_names <- torch:::clean_names
 
-make_cpp_function_name <- torch:::make_cpp_function_name
+make_cpp_function_name <- function(method_name, arg_types, type) {
+  torch:::make_cpp_function_name(method_name, unlist(arg_types), type)
+}
