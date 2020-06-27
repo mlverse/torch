@@ -1,0 +1,117 @@
+---
+title: "Creating tensors"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating tensors}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(torch)
+```
+
+In this article we describe all the possibilities available to create `torch` 
+tensors in R.
+
+## From R objects
+
+You can create tensors from R objects using the `torch_tensor` function. The 
+`torch_tensor` function takes R a vector, matrix or array and creates a `torch_tensor`
+with the data.
+
+You can see a few examples below:
+
+```{r}
+torch_tensor(c(1,2,3))
+torch_tensor(matrix(1:10, ncol = 5, nrow = 2))
+torch_tensor(array(runif(12), dim = c(2, 2, 3)))
+```
+
+Note that by default we will create tensors in the `cpu` device and that we will
+convert their numeric to the corresponding torch `dtype`.
+
+> **Note** currently, only numeric and boolean types are supported.
+
+You can always modify the dtype and the device when converting an R object to 
+a torch tensor. For example:
+
+```{r}
+torch_tensor(1, dtype = torch_long())
+torch_tensor(1, device = torch_device("cpu"), dtype = torch_float64())
+```
+
+Other options available when creating a tensor are:
+
+- `requires_grad`: boolean indicating if you want `autograd` to record operations 
+  on them for automatic differentiation.
+- `pin_memmory`: – If set, returned tensor would be allocated in the pinned memory. 
+  Works only for CPU tensors.
+  
+These options are available for all functions that can be used to create new tensors,
+including the factory functions listed in the next section.
+
+## Using creation functions
+
+You can also use the `torch_*` functionslisted below to create torch tensors 
+using some algorithm. 
+
+For example, the `torch_randn` function will create tensors using the normal 
+distribution with mean equals to 0 and standard deviation equals 1. You can
+use the `...` to pass the size of the dimensions, ie, the code below will 
+create a normally distributed tensor with shape 5x3.
+
+```{r}
+x <- torch_randn(5, 3)
+x
+```
+
+Another example is the `torch_ones` function, which creates a tensor filled with 
+ones.
+
+```{r}
+x <- torch_ones(2, 4, dtype = torch_int64(), device = "cpu")
+x
+```
+
+Here is the full list of functions that can be used to create tensors in torch:
+
+- `torch_arange`: Returns a tensor with a sequence of integers,
+- `torch_empty`: Returns a tensor with uninitialized values,
+- `torch_eye`: Returns an identity matrix,
+- `torch_full`: Returns a tensor filled with a single value,
+- `torch_linspace`: Returns a tensor with values linearly spaced in some interval,
+- `torch_logspace`: Returns a tensor with values logarithmically spaced in some interval,
+- `torch_ones`: Returns a tensor filled with all ones,
+- `torch_rand`: Returns a tensor filled with values drawn from a uniform distribution on [0, 1).
+- `torch_randint`: Returns a tensor with integers randomly drawn from an interval,
+- `torch_randn`: Returns a tensor filled with values drawn from a unit normal distribution,
+- `torch_randperm`: Returns a tensor filled with a random permutation of integers in some interval,
+- `torch_zeros`: Returns a tensor filled with all zeros.
+
+## Convertion
+
+Once a tensor exists you can convert it between dtypes and move to different 
+devices with to `to` method. For example:
+
+```{r}
+x <- torch_tensor(1)
+y <- x$to(dtype = torch_int32())
+x
+y
+```
+
+You can also copy a tensor the GPU using:
+
+```{r, eval = FALSE}
+x <- torch_tensor(1)
+y <- x$to(torch_device("cuda"))
+```
+
