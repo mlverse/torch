@@ -185,6 +185,18 @@ to_return_type <- function(res, types) {
 
 }
 
+cpp_handle_error <- function(result) {
+  force(result)
+  
+  if (cpp_lantern_has_error()) {
+    last_error <- cpp_lantern_last_error()
+    cpp_lantern_error_clear()
+    stop(last_error)
+  }
+  
+  result
+}
+
 call_c_function <- function(fun_name, args, expected_types, nd_args, return_types, fun_type) {
   args_t <- all_arguments_to_torch_type(args, expected_types)
   nd_args_types <- args_t[[2]][names(args_t[[2]]) %in% nd_args]
@@ -195,5 +207,6 @@ call_c_function <- function(fun_name, args, expected_types, nd_args, return_type
     value_error("{fun_name} does not exist")
   
   out <- do_call(f, args_t[[1]])
+  
   to_return_type(out, return_types)
 }
