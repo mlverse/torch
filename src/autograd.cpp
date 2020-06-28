@@ -15,6 +15,12 @@ Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
 }
 
 // [[Rcpp::export]]
+void cpp_tensor_set_grad_ (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> new_grad)
+{
+  lantern_Tensor_set_grad_(self->get(), new_grad->get());
+}
+
+// [[Rcpp::export]]
 bool cpp_tensor_requires_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
   return lantern_Tensor_requires_grad(self->get());
 }

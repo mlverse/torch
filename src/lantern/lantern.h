@@ -210,6 +210,7 @@ extern "C"
   LANTERN_API bool(LANTERN_PTR lantern_Tensor_is_undefined)(void *self);
   LANTERN_API void(LANTERN_PTR lantern_set_default_dtype)(void *dtype);
   LANTERN_API void *(LANTERN_PTR lantern_get_default_dtype)();
+  LANTERN_API void (LANTERN_PTR lantern_Tensor_set_grad_)(void* self, void* new_grad);
   /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
 LANTERN_API void* (LANTERN_PTR lantern__cast_char_tensor_bool)(void* self, void* non_blocking);
@@ -2226,6 +2227,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Tensor_is_undefined);
   LOAD_SYMBOL(lantern_set_default_dtype);
   LOAD_SYMBOL(lantern_get_default_dtype);
+  LOAD_SYMBOL(lantern_Tensor_set_grad_);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)

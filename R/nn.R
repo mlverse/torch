@@ -45,7 +45,7 @@ nn_Module <- R6::R6Class(
     .apply = function(fn) {
       
       for (module in private$modules_) {
-        model$.apply(fn)
+        module$.apply(fn)
       }
       
       for (param_name in names(private$parameters_)) {
@@ -66,7 +66,7 @@ nn_Module <- R6::R6Class(
             grad_applied <- fn(param$grad)
           })
           grad_applied$requires_grad_(param$grad$requires_grad)
-          private$parameters_[[param_name]]$grad$set_data(grad_applied)
+          private$parameters_[[param_name]]$set_grad_(grad_applied)
         }
         
       }
