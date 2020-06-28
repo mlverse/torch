@@ -40,6 +40,68 @@ nn_Module <- R6::R6Class(
     
     eval = function() {
       self$train(FALSE)
+    },
+    
+    .apply = function(fn) {
+      
+      for (module in private$modules_) {
+        model$.apply(fn)
+      }
+      
+      for (param_name in names(private$parameters_)) {
+        param <- private$parameters_[[param_name]]
+        
+        if (!is.null(param)) {
+          # Tensors stored in modules are graph leaves, and we don't want to
+          # track autograd history of `param_applied`, so we have to use
+          # `with torch.no_grad():`
+          with_no_grad({
+            param_applied <- fn(param)
+          })
+          private$parameters_[[param_name]] <- nn_parameter(param_applied)
+        }
+        
+        if (!is_undefined_tensor(param$grad)) {
+          with_no_grad({
+            grad_applied <- fn(param$grad)
+          })
+          grad_applied$requires_grad_(param$grad$requires_grad)
+          private$parameters_[[param_name]]$grad$set_data(grad_applied)
+        }
+        
+      }
+      
+      for (buf_name in names(private$buffers_)) {
+        buf <- private$buffers_[[buf_name]]
+        if (!is.null(buf)) {
+          private$buffers_[[buf_name]] <- fn(buf)
+        }
+      }
+      
+      invisible(self)
+    },
+    cuda = function(device = NULL) {
+      self$.apply(function(x) x$cuda())
+    },
+    cpu = function() {
+      self$.apply(function(x) x$cpu())
+    },
+    to = function(dtype = NULL, device = NULL, tensor = NULL, non_blocking = FALSE, copy = FALSE, 
+                  memory_format = torch_preserve_format()) {
+      
+      if (!is.null(dtype)) {
+        if (!dtype$is_floating_point)
+          value_error("nn.Module.to only accepts floating point '
+                      'dtypes, but got desired dtype {dtype}")
+      }
+
+      self$.apply(function(x) {
+        if (x$is_floating_point())
+          x$to(dtype, device, tensor, non_blocking, copy, memory_format)
+        else
+          x$to(device = device, non_blocking = non_blocking, copy = copy, 
+               memory_format = memory_format)
+      })
     }
   ),
   private = list(

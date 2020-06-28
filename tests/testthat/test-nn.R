@@ -109,3 +109,22 @@ test_that("module_list inside a module", {
   expect_tensor(output)
   
 })
+
+test_that("to", {
+  
+  net <- nn_linear(10, 10)
+  net$to(dtype = torch_double())
+  
+  expect_true(net$weight$dtype() == torch_double())
+  expect_true(net$bias$dtype() == torch_double())
+  
+  skip_if_cuda_not_available()
+  net$cuda()
+  expect_equal(net$weight$device()$type == "cuda")
+  expect_equal(net$bias$device()$type == "cuda")
+  
+  net$cpu()
+  expect_equal(net$weight$device()$type == "cpu")
+  expect_equal(net$bias$device()$type == "cpu")
+  
+})
