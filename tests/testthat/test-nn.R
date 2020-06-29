@@ -154,3 +154,28 @@ test_that("to", {
   expect_equal(net$bias$device()$type,"cpu")
   
 })
+
+test_that("state_dict for modules", {
+  
+  Net <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 1)
+      self$norm <- nn_batch_norm1d(1)
+    },
+    forward = function(x) {
+      x <- self$linear(x)
+      x <- self$norm(x)
+      x
+    }
+  )
+  net <- Net()
+  s <- net$state_dict()  
+  s
+  
+  expect_length(s, 7)
+  expect_equal_to_tensor(s[[1]], net$linear$weight)
+  expect_equal_to_tensor(s[[2]], net$linear$bias)
+  expect_equal_to_tensor(s[[5]], net$norm$running_mean)
+  expect_equal_to_tensor(s[[6]], net$norm$running_var)
+  
+})

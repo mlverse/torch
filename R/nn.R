@@ -132,7 +132,18 @@ nn_Module <- R6::R6Class(
     
     state_dict = function(prefix = "", keepvars = FALSE) {
       
+      out <- list()
+      out <- c(out, self$.save_to_state_dict(prefix, keepvars))
       
+      for (module_name in names(private$modules_)) {
+        module <- private$modules_[[module_name]]
+        if (!is.null(module)) {
+          out <- c(out, module$state_dict(prefix = paste0(prefix, module_name, "."), 
+                            keepvars = keepvars))
+        }
+      }
+      
+      out
     }
   ),
   private = list(
