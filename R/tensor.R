@@ -63,18 +63,24 @@ Tensor <- R7Class(
     numel = function() {
       cpp_tensor_numel(self$ptr)
     },
-    to = function(..., non_blocking = FALSE, copy = FALSE, 
-                  memory_format = torch_preserve_format()) {
+    to = function(dtype = NULL, device = NULL, other = NULL, non_blocking = FALSE, 
+                  copy = FALSE, memory_format = torch_preserve_format()) {
       
-      args <- list(...)
+    
+      if (!is.null(other))
+        args <- list(other = other)
+      else if (is.null(device))
+        args <- list(dtype = dtype)
+      else
+        args <- list(dtype = dtype, device = device) 
+      
       args$non_blocking <- non_blocking
       args$copy <- copy
       args$memory_format <- memory_format
       
-      if (is.null(args$dtype) && !is.null(args$device))
+      if (is.null(args$dtype) && is.null(args$other))
         args$dtype <- self$dtype()
       
-
       do.call(private$`_to`, args)
     },
     cuda = function(device=NULL, non_blocking=FALSE, memory_format=torch_preserve_format()) {

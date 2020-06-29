@@ -76,6 +76,10 @@ Tensor$set("public", "retain_grad", function() {
   invisible(private$`_retain_grad`())
 })
 
+Tensor$set("public", "set_grad_", function(new_grad) {
+  cpp_tensor_set_grad_(self$ptr, new_grad$ptr)
+})
+
 torch_hook <- R6::R6Class(
   classname = "torch_hook",
   public = list(

@@ -21,6 +21,13 @@ void *lantern_Tensor_grad(void *self)
     return (void *)new LanternObject<torch::Tensor>(out);
 }
 
+void lantern_Tensor_set_grad_(void* self, void * new_grad)
+{
+  auto t =  reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  auto g = reinterpret_cast<LanternObject<torch::Tensor> *>(new_grad)->get();
+  t.grad() = g;
+}
+
 bool lantern_Tensor_requires_grad(void *self)
 {
     return reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().requires_grad();

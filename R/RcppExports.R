@@ -9,6 +9,10 @@ cpp_tensor_grad <- function(self) {
     cpp_handle_error(cpp_handle_error(.Call('_torch_cpp_tensor_grad', PACKAGE = 'torchpkg', self)))
 }
 
+cpp_tensor_set_grad_ <- function(self, new_grad) {
+    invisible(cpp_handle_error(.Call('_torch_cpp_tensor_set_grad_', PACKAGE = 'torchpkg', self, new_grad)))
+}
+
 cpp_tensor_requires_grad <- function(self) {
     cpp_handle_error(cpp_handle_error(.Call('_torch_cpp_tensor_requires_grad', PACKAGE = 'torchpkg', self)))
 }

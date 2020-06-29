@@ -109,3 +109,48 @@ test_that("module_list inside a module", {
   expect_tensor(output)
   
 })
+
+test_that("to", {
+  
+  net <- nn_linear(10, 10)
+  net$to(dtype = torch_double())
+  
+  expect_true(net$weight$dtype() == torch_double())
+  expect_true(net$bias$dtype() == torch_double())
+  
+  
+  Net <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 1)
+      self$norm <- nn_batch_norm1d(1)
+    },
+    forward = function(x) {
+      x <- self$linear(x)
+      x <- self$norm(x)
+      x
+    }
+  )
+  net <- Net()
+  x <- torch_randn(10, 10)
+  y <- net(x)
+  r <- torch_mean(y)
+  r$backward()
+  
+  net$to(dtype = torch_double())
+  
+  expect_true(net$linear$weight$dtype() == torch_double())
+  expect_true(net$linear$bias$dtype() == torch_double())
+  expect_true(net$norm$running_mean$dtype() == torch_double())
+  expect_true(net$norm$running_var$dtype() == torch_double())
+  expect_true(net$linear$weight$grad$dtype() == torch_double())
+  
+  skip_if_cuda_not_available()
+  net$cuda()
+  expect_equal(net$weight$device()$type, "cuda")
+  expect_equal(net$bias$device()$type, "cuda")
+  
+  net$cpu()
+  expect_equal(net$weight$device()$type, "cpu")
+  expect_equal(net$bias$device()$type,"cpu")
+  
+})
