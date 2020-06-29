@@ -105,3 +105,12 @@ test_that("stride", {
   expect_identical(x$stride(0), 10)
   expect_identical(x$stride(1), 1)
 })
+
+test_that("is_contiguous", {
+  
+  x <- torch_randn(10, 10)
+  expect_true(x$is_contiguous())
+  x$t_()
+  expect_true(!x$is_contiguous())
+  
+})

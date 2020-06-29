@@ -307,9 +307,6 @@ r_method_env <- function(decls) {
 r_method_name <- function(decls) {
   name <- decls[[1]]$name
 
-  if (name == "clone")
-    name <- "copy"
-
   if (name %in% internal_methods)
     name <- paste0("_", name)
 

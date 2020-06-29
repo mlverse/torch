@@ -11,7 +11,7 @@ if (dir.exists("lantern")) {
   
   withr::with_dir("lantern/build", {
     system("cmake ..")
-    system("cmake --build . --target lantern --config Release")  
+    system("cmake --build . --target lantern --config Release --parallel 8")  
   })
 
   # copy lantern

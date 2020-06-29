@@ -176,3 +176,9 @@ bool cpp_tensor_is_undefined (Rcpp::XPtr<XPtrTorchTensor> self)
   return lantern_Tensor_is_undefined(self->get());
 }
 
+// [[Rcpp::export]]
+bool cpp_tensor_is_contiguous (Rcpp::XPtr<XPtrTorchTensor> self)
+{
+  return lantern_Tensor_is_contiguous(self->get());
+}
+

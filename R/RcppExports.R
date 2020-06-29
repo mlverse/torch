@@ -7061,6 +7061,18 @@ cpp_torch_scalar_to_bool <- function(self) {
     cpp_handle_error(cpp_handle_error(.Call('_torch_cpp_torch_scalar_to_bool', PACKAGE = 'torchpkg', self)))
 }
 
+cpp_Tensor_storage <- function(self) {
+    .Call('_torch_cpp_Tensor_storage', PACKAGE = 'torchpkg', self)
+}
+
+cpp_Tensor_has_storage <- function(self) {
+    .Call('_torch_cpp_Tensor_has_storage', PACKAGE = 'torchpkg', self)
+}
+
+cpp_Storage_data_ptr <- function(self) {
+    .Call('_torch_cpp_Storage_data_ptr', PACKAGE = 'torchpkg', self)
+}
+
 cpp_torch_tensor_print <- function(x) {
     invisible(cpp_handle_error(cpp_handle_error(.Call('_torch_cpp_torch_tensor_print', PACKAGE = 'torchpkg', x))))
 }
@@ -7091,6 +7103,10 @@ cpp_tensor_device <- function(self) {
 
 cpp_tensor_is_undefined <- function(self) {
     cpp_handle_error(cpp_handle_error(.Call('_torch_cpp_tensor_is_undefined', PACKAGE = 'torchpkg', self)))
+}
+
+cpp_tensor_is_contiguous <- function(self) {
+    .Call('_torch_cpp_tensor_is_contiguous', PACKAGE = 'torchpkg', self)
 }
 
 cpp_torch_tensor_list <- function(x) {
