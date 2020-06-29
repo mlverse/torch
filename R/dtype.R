@@ -24,6 +24,29 @@ as.character.torch_dtype <- function(x, ...) {
   cpp_dtype_to_string(x$ptr)
 }
 
+dtype_from_string <- function(str) {
+  switch (tolower(str),
+    "float" = torch_float(),
+    "float32" = torch_float32(),
+    "float64" = torch_float64(),
+    "double" = torch_double(),
+    "float16" = torch_float16(),
+    "half" = torch_half(),
+    "uint8" = torch_uint8(),
+    "int8" = torch_int8(),
+    "int16" = torch_int16(),
+    "short" = torch_short(),
+    "int32" = torch_int32(),
+    "int" = torch_int(),
+    "int64" = torch_int64(),
+    "long" = torch_long(),
+    "bool" = torch_bool(),
+    "quint8" = torch_quint8(),
+    "qint8" = torch_qint8(),
+    "qint32" = torch_qint32()
+  )
+}
+
 #' @export
 torch_float32 <- function() torch_dtype$new(cpp_torch_float32())
 #' @export
