@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -175,10 +182,10 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>rates</span> <span class='kw'>=</span> <span class='fu'><a href='torch_rand.html'>torch_rand</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>)) * <span class='fl'>5</span>  <span class='co'># rate parameter between 0 and 5</span>
 <span class='fu'>torch_poisson</span>(<span class='no'>rates</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2  0  0  6
-#&gt;  2  2  8  5
-#&gt;  5  0  1  2
-#&gt;  5  0  3  3
+#&gt;  0  3  1  2
+#&gt;  2  1  5  3
+#&gt;  4  2  4  1
+#&gt;  1  0  3  0
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

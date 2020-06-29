@@ -91,6 +91,9 @@ is set to True." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -109,8 +112,12 @@ is set to True." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -181,20 +188,20 @@ elements in the tuple are Tensor, IntTensor. Default: NULL</p></td>
 <span class='fu'>torch_lu</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -2.2083 -1.4874  0.3435
-#&gt;  -0.0384 -1.9080 -1.4830
-#&gt;   0.2520  0.0314 -0.0721
+#&gt;   0.6938  0.9729  1.2666
+#&gt;   0.3948 -0.5709 -1.8963
+#&gt;   0.9797  0.5815 -0.5899
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -1.3850  0.6093  0.6132
-#&gt;   0.6766 -0.8677 -0.8321
-#&gt;   0.5929  0.6949 -1.0895
+#&gt;  -1.8531 -0.2316 -0.6086
+#&gt;   0.1135  1.3647 -0.1498
+#&gt;   0.2346  0.4005  0.0214
 #&gt; [ CPUFloatType{2,3,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
 #&gt;  2  2  3
-#&gt;  2  3  3
+#&gt;  3  3  3
 #&gt; [ CPUIntType{2,3} ]
 #&gt; </div><div class='input'>
 </div></pre>

@@ -10,6 +10,16 @@ test_that("__and__", {
   expect_equal_to_tensor(y, x)
 })
 
+test_that("clone", {
+  
+  x <- torch_randn(10, 10)
+  y <- x$clone()
+  
+  expect_equal_to_tensor(x, y)
+  expect_true(! x$storage()$data_ptr() == y$storage()$data_ptr())
+ 
+})
+
 test_that("item", {
   
   x <- torch_tensor(1)

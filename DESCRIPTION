@@ -98,6 +98,7 @@ Collate:
     'quantization.R'
     'reduction.R'
     'scalar.R'
+    'storage.R'
     'tensor_list.R'
     'tensor_options.R'
     'utils-data-collate.R'

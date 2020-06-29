@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -175,24 +182,25 @@ unstable in when `input` doesn't have distinct singular values. See
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_det</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.046413
+#&gt; 0.480488
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
 <span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.1814  0.0011
-#&gt;  -0.5346  0.5673
+#&gt;  -0.5255 -0.1535
+#&gt;  -0.6931 -0.6311
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0637  1.8920
-#&gt;  -1.2966  0.1305
+#&gt;  0.01 *
+#&gt;  -7.1440 -49.5890
+#&gt;   -128.0330 -154.2893
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -1.4226 -0.1668
-#&gt;   1.5463 -0.5941
+#&gt;   0.1935 -0.6411
+#&gt;   1.2664  1.1412
 #&gt; [ CPUFloatType{3,2,2} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1035
-#&gt;  2.4615
-#&gt;  1.1030
+#&gt;  0.2252
+#&gt; -0.5247
+#&gt;  1.0327
 #&gt; [ CPUFloatType{3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

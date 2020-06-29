@@ -92,6 +92,9 @@ trailing dimensions are flattened." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -110,8 +113,12 @@ trailing dimensions are flattened." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -170,9 +177,9 @@ trailing dimensions are flattened.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>,<span class='fl'>5</span>)
 <span class='fu'>nn_init_orthogonal_</span>(<span class='no'>w</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5972  0.0230 -0.3342  0.4297  0.5887
-#&gt;  0.5622  0.4278  0.6424  0.0854 -0.2847
-#&gt; -0.5608  0.5583  0.1521  0.5424  0.2374
+#&gt;  0.1595  0.1070  0.5508 -0.1093  0.8049
+#&gt; -0.5126 -0.4252 -0.3083  0.5180  0.4394
+#&gt;  0.3874  0.4503  0.0228  0.8030 -0.0432
 #&gt; [ CPUFloatType{3,5} ]</div><div class='input'>
 </div></pre>
   </div>

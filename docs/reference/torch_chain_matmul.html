@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -173,9 +180,9 @@ If \(N\) is 1, then this is a no-op - the original matrix is returned as is.</p>
 <span class='no'>c</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>6</span>))
 <span class='no'>d</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>7</span>))
 <span class='fu'>torch_chain_matmul</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  12.7716  20.2503   7.7538 -13.5675  25.1044  18.3215  -0.7668
-#&gt; -12.4937 -12.4024  -8.7018  12.4178 -20.3706 -15.8089  -5.1378
-#&gt;   6.4866  11.8973   6.7678  -8.2224  13.2674   9.8721  -2.9982
+#&gt;  30.2029  -4.2118   7.0224  -8.0350   8.0048  20.4973  18.7344
+#&gt;  37.8088  11.9236   3.3578 -10.8967  -1.3074  25.0973  19.3134
+#&gt;  14.0909   0.1985   2.1048  -3.6515   2.5577   8.6584   8.2248
 #&gt; [ CPUFloatType{3,7} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

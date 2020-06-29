@@ -136,3 +136,8 @@ bool lantern_Tensor_is_undefined(void *self)
   return x.dtype() == torch::ScalarType::Undefined;
 }
 
+bool lantern_Tensor_is_contiguous(void *self)
+{
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  return x.is_contiguous();
+}

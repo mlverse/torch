@@ -89,6 +89,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -107,8 +110,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -191,15 +198,15 @@ documentation for the exact semantics of this method.</p>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7419  0.1131  0.8543 -0.4463
-#&gt; -0.4627  1.1222  0.1574 -0.9720
-#&gt; -0.7885  0.0096  1.5811 -0.7522
-#&gt;  1.2189  0.2380 -1.0597  0.5160
+#&gt; -0.4246  0.5570 -0.2311 -1.8952
+#&gt;  0.2595  0.6579 -1.1486 -0.8021
+#&gt; -1.1541  0.7955 -0.9770 -2.2117
+#&gt;  0.1137 -0.3595 -0.1008  0.4997
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmax</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2
 #&gt;  1
-#&gt;  2
-#&gt;  0
+#&gt;  1
+#&gt;  1
+#&gt;  3
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

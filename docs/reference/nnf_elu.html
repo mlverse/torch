@@ -90,6 +90,9 @@ $$ELU(x) = max(0,x) + min(0, \alpha * (exp(x) - 1))$$." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/tensor-creation.html">Creating tensors</a>
+    </li>
+    <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
     <li class="dropdown-header">Autograd</li>
@@ -108,8 +111,12 @@ $$ELU(x) = max(0,x) + min(0, \alpha * (exp(x) - 1))$$." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Vision</li>
     <li>
       <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
+    </li>
+    <li>
+      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
   </ul>
 </li>
@@ -174,8 +181,8 @@ dimensions</p></td>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>)
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>nnf_elu</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='fu'>nnf_elu_</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8566 -0.8348
-#&gt; -0.8920 -0.2448
+#&gt; -0.3243  0.4303
+#&gt;  0.4869  0.3897
 #&gt; [ CPUFloatType{2,2} ]</div><div class='input'><span class='fu'><a href='torch_equal.html'>torch_equal</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 </div></pre>
   </div>

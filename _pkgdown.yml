@@ -11,6 +11,8 @@ navbar:
   articles:
     text: Articles
     menu:
+     - text: Creating tensors
+       href: articles/tensor-creation.html
      - text: Indexing
        href: articles/indexing.html
      - text: Autograd
@@ -21,5 +23,8 @@ navbar:
   examples:
     text: Examples
     menu:
+    - text: Vision
     - text: mnist-mlp
       href: articles/examples/mnist-mlp.html
+    - text: mnist-cnn
+      href: articles/examples/mnist-cnn.html
