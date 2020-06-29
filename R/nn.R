@@ -144,6 +144,42 @@ nn_Module <- R6::R6Class(
       }
       
       out
+    },
+    
+    .load_from_state_dict = function(state_dict, prefix){
+      
+      persistent_buffers <- private$buffers_[!names(private$buffers_) %in% private$non_persistent_buffers_]
+      local_name_params <- c(private$parameters_, persistent_buffers)
+      local_state <- local_name_params[!sapply(local_name_params, is.null)]
+      
+      for (name in names(local_state)) {
+        key <- paste0(prefix, name)
+        if (key %in% names(state_dict)) {
+         input_param <- state_dict[[key]] 
+         param <- local_state[[name]]
+         with_no_grad({
+           param$copy_(input_param)
+         })
+        }
+      }
+      
+    },
+    
+    load_state_dict = function(state_dict) {
+      
+      load <- function(module, state_dict, prefix="") {
+        module$.load_from_state_dict(state_dict, prefix)
+        for (nm in names(private$modules_)) {
+         child <- module$.__enclos_env__$private$modules_[[nm]]
+         if (!is.null(child)) {
+           load(child, state_dict, prefix = paste0(prefix, nm, "."))
+         }
+        }
+      }
+      
+      load(self, state_dict)
+      
+      invisible(self)
     }
   ),
   private = list(

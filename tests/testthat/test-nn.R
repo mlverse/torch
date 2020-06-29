@@ -178,4 +178,14 @@ test_that("state_dict for modules", {
   expect_equal_to_tensor(s[[5]], net$norm$running_mean)
   expect_equal_to_tensor(s[[6]], net$norm$running_var)
   
+  net2 <- Net()
+  net2$load_state_dict(s)
+  s <- net2$state_dict()
+  
+  expect_length(s, 7)
+  expect_equal_to_tensor(s[[1]], net$linear$weight)
+  expect_equal_to_tensor(s[[2]], net$linear$bias)
+  expect_equal_to_tensor(s[[5]], net$norm$running_mean)
+  expect_equal_to_tensor(s[[6]], net$norm$running_var)
+  
 })
