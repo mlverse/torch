@@ -102,6 +102,37 @@ nn_Module <- R6::R6Class(
           x$to(device = device, non_blocking = non_blocking, copy = copy, 
                memory_format = memory_format)
       })
+    },
+    
+    .save_to_state_dict = function(prefix, keepvars) {
+      
+      out <- list()
+      
+      for (param_name in names(private$parameters_)) {
+        param <- private$parameters_[[param_name]]
+        if (!is.null(param)) {
+          
+          if (!keepvars)
+            param$detach
+          out[[paste0(prefix, param_name)]] <- param
+        }
+      }
+      
+      for (buf_name in names(private$buffers_)) {
+        buf <- private$buffers_[[buf_name]]
+        if (!is.null(buf) && !buf_name %in% private$non_persistent_buffers_) {
+          if (!keepvars)
+            buf$detach()
+          out[[paste0(prefix, buf_name)]] <- buf
+        }
+      }
+      
+      out
+    },
+    
+    state_dict = function(prefix = "", keepvars = FALSE) {
+      
+      
     }
   ),
   private = list(
