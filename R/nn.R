@@ -160,6 +160,8 @@ nn_Module <- R6::R6Class(
          with_no_grad({
            param$copy_(input_param)
          })
+        } else {
+          value_error("Could not find {key} in the state_dict.")
         }
       }
       

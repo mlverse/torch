@@ -146,12 +146,12 @@ test_that("to", {
   
   skip_if_cuda_not_available()
   net$cuda()
-  expect_equal(net$weight$device()$type, "cuda")
-  expect_equal(net$bias$device()$type, "cuda")
+  expect_equal(net$linear$weight$device()$type, "cuda")
+  expect_equal(net$linear$bias$device()$type, "cuda")
   
   net$cpu()
-  expect_equal(net$weight$device()$type, "cpu")
-  expect_equal(net$bias$device()$type,"cpu")
+  expect_equal(net$linear$weight$device()$type, "cpu")
+  expect_equal(net$linear$bias$device()$type,"cpu")
   
 })
 
@@ -187,5 +187,9 @@ test_that("state_dict for modules", {
   expect_equal_to_tensor(s[[2]], net$linear$bias)
   expect_equal_to_tensor(s[[5]], net$norm$running_mean)
   expect_equal_to_tensor(s[[6]], net$norm$running_var)
+  
+  
+  s <- s[-7]
+  expect_error(net2$load_state_dict(s), class = "value_error")
   
 })
