@@ -26,8 +26,8 @@ Torch's indexing semantics are closer to numpy's semantics than R's. You will fi
 
 ## Single element indexing
 
-Single element indexing for a 1-D tensors is what one expects. It is 1-based, and, unlike R, accepts negative
-indices for indexing from the end of the array (In R, negative indexes are used to remove elements).
+Single element indexing for a 1-D tensors works mostly as expected. Like R, it is 1-based. Unlike R though, it accepts negative
+indices for indexing from the end of the array. (In R, negative indices are used to remove elements.)
 
 ```{r}
 x <- torch_tensor(1:10)
@@ -43,7 +43,7 @@ x[1,3]
 x[1,-1]
 ```
 Note that if one indexes a multidimensional tensor with 
-fewer indices than dimensions, one gets an error, unlike R, that would flatten the array. For example:
+fewer indices than dimensions, one gets an error, unlike in R that would flatten the array. For example:
 
 ```{r, error=TRUE}
 x[1]
@@ -51,7 +51,7 @@ x[1]
 
 ## Slicing and striding
 
-It is possible to slice and stride arrays to extract arrays of the same number of dimensions, but of different sizes than the original. A few examples illustrates best:
+It is possible to slice and stride arrays to extract sub-arrays of the same number of dimensions, but of different sizes than the original. This is best illustrated by a few examples:
 
 ```{r}
 x <- torch_tensor(1:10)
@@ -59,7 +59,7 @@ x
 x[2:5]
 x[1:(-7)]
 ```
-You can also use the `1:10:2` syntax which means 1 to 10 by 2. For example:
+You can also use the `1:10:2` syntax which means: In the range from 1 to 10, take every second item. For example:
 
 ```{r}
 x[1:5:2]
@@ -73,9 +73,9 @@ x[5:N]
 
 ## Getting the complete dimension
 
-Like in R, you can skip indexing dimension by leaving an empty index for that dimension.
+Like in R, you can take all elements in a dimension by leaving an index empty.
 
-Considering a matrix:
+Consider a matrix:
 
 ```{r}
 x <- torch_randn(2, 3)
@@ -94,7 +94,7 @@ And this would give you the first 2 columns:
 x[,1:2]
 ```
 
-## Droping dimensions
+## Dropping dimensions
 
 By default, when indexing by a single integer, this dimension will be dropped to
 avoid the singleton dimension:
@@ -110,7 +110,7 @@ x[1,,drop = FALSE]$shape
 ```
 ## Adding a new dimension
 
-It's possible to add a new dimension to a tensor using an index like syntax:
+It's possible to add a new dimension to a tensor using index-like syntax:
 
 ```{r}
 x <- torch_tensor(c(10))
@@ -126,19 +126,14 @@ x[,NULL]$shape
 
 ## Dealing with variable number of indices
 
-The index syntax is very powerful but limiting when dealing with a variable number of indices. For example, if you want to write a function that can handle arguments with various numbers of dimensions without having to write special case code for each number of possible dimensions, how can that be done? If one supplies to the index a tuple, the tuple will be interpreted as a list of indices. For example:
+Sometimes we don't know how many dimensions a tensor has, but we do know what to do with the last available dimension, or the first one. To subsume all others, we can use `..`:
 
 ```{r}
 z <- torch_tensor(1:125)$reshape(c(5,5,5))
-```
-
-If you want to always subset the first or last dimension you can use the `..`:
-
-```{r}
 z[1,..]
 z[..,1]
 ```
-You can also use the unsplice operator here, for example:
+If an index is stored in a variable, it can be convenient to use the *unsplice* operator, like so:
 
 ```{r}
 i <- c(5,5,5)
