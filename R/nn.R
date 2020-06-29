@@ -102,6 +102,86 @@ nn_Module <- R6::R6Class(
           x$to(device = device, non_blocking = non_blocking, copy = copy, 
                memory_format = memory_format)
       })
+    },
+    
+    .save_to_state_dict = function(prefix, keepvars) {
+      
+      out <- list()
+      
+      for (param_name in names(private$parameters_)) {
+        param <- private$parameters_[[param_name]]
+        if (!is.null(param)) {
+          
+          if (!keepvars)
+            param$detach
+          out[[paste0(prefix, param_name)]] <- param
+        }
+      }
+      
+      for (buf_name in names(private$buffers_)) {
+        buf <- private$buffers_[[buf_name]]
+        if (!is.null(buf) && !buf_name %in% private$non_persistent_buffers_) {
+          if (!keepvars)
+            buf$detach()
+          out[[paste0(prefix, buf_name)]] <- buf
+        }
+      }
+      
+      out
+    },
+    
+    state_dict = function(prefix = "", keepvars = FALSE) {
+      
+      out <- list()
+      out <- c(out, self$.save_to_state_dict(prefix, keepvars))
+      
+      for (module_name in names(private$modules_)) {
+        module <- private$modules_[[module_name]]
+        if (!is.null(module)) {
+          out <- c(out, module$state_dict(prefix = paste0(prefix, module_name, "."), 
+                            keepvars = keepvars))
+        }
+      }
+      
+      out
+    },
+    
+    .load_from_state_dict = function(state_dict, prefix){
+      
+      persistent_buffers <- private$buffers_[!names(private$buffers_) %in% private$non_persistent_buffers_]
+      local_name_params <- c(private$parameters_, persistent_buffers)
+      local_state <- local_name_params[!sapply(local_name_params, is.null)]
+      
+      for (name in names(local_state)) {
+        key <- paste0(prefix, name)
+        if (key %in% names(state_dict)) {
+         input_param <- state_dict[[key]] 
+         param <- local_state[[name]]
+         with_no_grad({
+           param$copy_(input_param)
+         })
+        } else {
+          value_error("Could not find {key} in the state_dict.")
+        }
+      }
+      
+    },
+    
+    load_state_dict = function(state_dict) {
+      
+      load <- function(module, state_dict, prefix="") {
+        module$.load_from_state_dict(state_dict, prefix)
+        for (nm in names(private$modules_)) {
+         child <- module$.__enclos_env__$private$modules_[[nm]]
+         if (!is.null(child)) {
+           load(child, state_dict, prefix = paste0(prefix, nm, "."))
+         }
+        }
+      }
+      
+      load(self, state_dict)
+      
+      invisible(self)
     }
   ),
   private = list(
