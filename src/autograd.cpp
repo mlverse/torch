@@ -4,6 +4,13 @@
 #include <future>
 #include <thread>
 
+#define LANTERN_ERROR_HANDLE                                                    \
+if (lanternLastError() != NULL) {                                               \
+  std::string last = lanternLastError();                                        \
+  lanternLastErrorClear();                                                      \
+  throw Rcpp::exception(last.c_str());                                                  \
+} 
+
 // [[Rcpp::export]]
 void cpp_autograd_set_grad_mode (bool enabled) {
   lantern_autograd_set_grad_mode(enabled);
@@ -278,6 +285,11 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvaria
         backward_
       );
       LANTERN_ERROR_HANDLE
+    }
+    catch (const std::exception& ex)
+    {
+      event_loop_running = false;
+      throw Rcpp::exception(ex.what());
     }
     catch (...)
     {
