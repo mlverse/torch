@@ -216,6 +216,11 @@ extern "C"
   LANTERN_API const char *(LANTERN_PTR lantern_Storage_data_ptr)(void *self);
   LANTERN_API void(LANTERN_PTR lantern_Storage_delete)(void *x);
   LANTERN_API bool(LANTERN_PTR lantern_Tensor_is_contiguous)(void *self);
+  LANTERN_API const char  * (LANTERN_PTR lantern_tensor_save) (void* self);
+  LANTERN_API void * (LANTERN_PTR lantern_tensor_load) (const char * s);
+  LANTERN_API void * (LANTERN_PTR lantern_test_tensor)();
+  LANTERN_API void (LANTERN_PTR lantern_test_print)(void* x); 
+  LANTERN_API size_t (LANTERN_PTR lantern_tensor_serialized_size) (const char * s);
   /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
 LANTERN_API void* (LANTERN_PTR lantern__cast_char_tensor_bool)(void* self, void* non_blocking);
@@ -2238,6 +2243,11 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_Storage_data_ptr);
   LOAD_SYMBOL(lantern_Storage_delete);
   LOAD_SYMBOL(lantern_Tensor_is_contiguous);
+  LOAD_SYMBOL(lantern_tensor_save);
+  LOAD_SYMBOL(lantern_tensor_load);
+  LOAD_SYMBOL(lantern_test_tensor);
+  LOAD_SYMBOL(lantern_test_print);
+  LOAD_SYMBOL(lantern_tensor_serialized_size);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)

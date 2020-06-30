@@ -23423,6 +23423,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_tensor_save
+std::string cpp_tensor_save(Rcpp::XPtr<XPtrTorchTensor> x);
+RcppExport SEXP _torch_cpp_tensor_save(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_save(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_tensor_load
+Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_load(std::string s);
+RcppExport SEXP _torch_cpp_tensor_load(SEXP sSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type s(sSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_load(s));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_scalar
 Rcpp::XPtr<XPtrTorchScalar> cpp_torch_scalar(SEXP x);
 RcppExport SEXP _torch_cpp_torch_scalar(SEXP xSEXP) {
@@ -25534,6 +25556,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_reduction_mean", (DL_FUNC) &_torch_cpp_torch_reduction_mean, 0},
     {"_torch_cpp_torch_reduction_none", (DL_FUNC) &_torch_cpp_torch_reduction_none, 0},
     {"_torch_cpp_torch_reduction_sum", (DL_FUNC) &_torch_cpp_torch_reduction_sum, 0},
+    {"_torch_cpp_tensor_save", (DL_FUNC) &_torch_cpp_tensor_save, 1},
+    {"_torch_cpp_tensor_load", (DL_FUNC) &_torch_cpp_tensor_load, 1},
     {"_torch_cpp_torch_scalar", (DL_FUNC) &_torch_cpp_torch_scalar, 1},
     {"_torch_cpp_torch_scalar_dtype", (DL_FUNC) &_torch_cpp_torch_scalar_dtype, 1},
     {"_torch_cpp_torch_scalar_to_int", (DL_FUNC) &_torch_cpp_torch_scalar_to_int, 1},

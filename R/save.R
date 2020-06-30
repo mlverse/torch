@@ -15,9 +15,8 @@ torch_save <- function(obj, path, ...) {
 
 #' @export
 torch_save.torch_tensor <- function(obj, path, ...) {
-  values <- as_array(obj)
-  meta <- list(dtype = as.character(obj$dtype()))
-  saveRDS(list(values = values, meta = meta, type = "tensor"), file = path)
+  values <- cpp_tensor_save(obj$ptr)
+  saveRDS(list(values = values, type = "tensor"), file = path)
   invisible(obj)
 }
 
@@ -52,7 +51,7 @@ torch_load <- function(path) {
 }
 
 torch_load_tensor <- function(obj) {
-  torch_tensor(obj$values, dtype = dtype_from_string(obj$meta$dtype))
+  Tensor$new(ptr = cpp_tensor_load(obj$values))
 }
 
 torch_load_module <- function(obj) {

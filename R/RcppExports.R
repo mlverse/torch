@@ -7041,6 +7041,14 @@ cpp_torch_reduction_sum <- function() {
     cpp_handle_error(.Call('_torch_cpp_torch_reduction_sum', PACKAGE = 'torchpkg'))
 }
 
+cpp_tensor_save <- function(x) {
+    cpp_handle_error(.Call('_torch_cpp_tensor_save', PACKAGE = 'torchpkg', x))
+}
+
+cpp_tensor_load <- function(s) {
+    cpp_handle_error(.Call('_torch_cpp_tensor_load', PACKAGE = 'torchpkg', s))
+}
+
 cpp_torch_scalar <- function(x) {
     cpp_handle_error(.Call('_torch_cpp_torch_scalar', PACKAGE = 'torchpkg', x))
 }

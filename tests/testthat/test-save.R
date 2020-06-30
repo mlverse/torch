@@ -14,9 +14,11 @@ test_that("save a module", {
   Net <- nn_module(
     initialize = function() {
       self$linear <- nn_linear(10, 1)
+      self$norm <- nn_batch_norm1d(1)
     },
     forward = function(x) {
       x <- self$linear(x)
+      x <- self$norm(x)
       x
     }
   )
