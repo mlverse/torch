@@ -413,8 +413,8 @@ Rcpp::List cpp_autograd_node_next_edges (Rcpp::XPtr<XPtrTorch> self)
   auto next_edges = lantern_Node_next_edges(self->get());
   
   Rcpp::List out;
-  auto sze = lantern_edge_list_size(next_edges);
-  for (int i = 0; i < sze; i ++)
+  auto size = lantern_edge_list_size(next_edges);
+  for (int i = 0; i < size; i ++)
   {
     out.push_back(make_xptr<XPtrTorch>(lantern_edge_list_at(next_edges, i)));
   }
