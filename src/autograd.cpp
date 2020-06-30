@@ -276,7 +276,8 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvaria
         inputs_,
         forward_,
         backward_
-      );  
+      );
+      LANTERN_ERROR_HANDLE
     }
     catch (...)
     {

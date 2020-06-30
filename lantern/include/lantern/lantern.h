@@ -37,6 +37,12 @@
   pLanternLastError = new std::string("Unknown error.");         \
   return NULL;                                                   \
 }
+#define LANTERN_ERROR_HANDLE                                     \
+  if (lanternLastError() != NULL) {                              \
+    std::string last = lanternLastError();                       \
+    lanternLastErrorClear();                                     \
+    throw last;                                                  \
+  } 
 
 #ifdef __cplusplus
 extern "C"
