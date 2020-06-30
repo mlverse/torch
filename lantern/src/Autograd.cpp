@@ -3,6 +3,7 @@
 #define LANTERN_BUILD
 
 #include "lantern/lantern.h"
+extern std::string *pLanternLastError;
 
 #include <torch/torch.h>
 
@@ -89,12 +90,14 @@ void *lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custom
 
 void *lantern_Function_apply(void *inputs, void *forward, void *backward)
 {
+    LANTERN_FUNCTION_START
     auto out = torch::autograd::LanternFunction::apply(
         reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(inputs)->get(),
         reinterpret_cast<LanternObject<std::function<torch::autograd::variable_list(torch::autograd::LanternAutogradContext *, torch::autograd::variable_list)>> *>(forward)->get(),
         reinterpret_cast<LanternObject<std::function<torch::autograd::variable_list(torch::autograd::LanternAutogradContext *, torch::autograd::variable_list)>> *>(backward)->get());
 
     return (void *)new LanternObject<torch::autograd::variable_list>(out);
+    LANTERN_FUNCTION_END
 }
 
 void lantern_AutogradContext_save_for_backward(void *self, void *vars)
