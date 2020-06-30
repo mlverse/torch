@@ -282,7 +282,7 @@ int main(int argc, char *argv[])
 
             bodies.push_back("void* lantern_" + function + "(" + arguments + ")");
             bodies.push_back("{");
-            bodies.push_back("  try {");
+            bodies.push_back("  LANTERN_FUNCTION_START");
             if (returns == "void" | (config[idx]["returns"].size() == 0))
             {
                 bodies.push_back("    " + functionCall + name + "(" + calls + ");");
@@ -301,13 +301,7 @@ int main(int argc, char *argv[])
                     bodies.push_back("        " + calls + ")));");
                 }
             }
-            bodies.push_back("  } catch(const std::exception& ex) {");
-            bodies.push_back("    pLanternLastError = new std::string(ex.what());");
-            bodies.push_back("    return NULL;");
-            bodies.push_back("  } catch(...) {");
-            bodies.push_back("    pLanternLastError = new std::string(\"Unknown error.\");");
-            bodies.push_back("    return NULL;");
-            bodies.push_back("  }");
+            bodies.push_back("  LANTERN_FUNCTION_END");
             bodies.push_back("}");
             bodies.push_back("");
         }
@@ -326,6 +320,7 @@ int main(int argc, char *argv[])
 
             bodies.push_back("void* lantern_Tensor_" + function + "(" + arguments + ")");
             bodies.push_back("{");
+            bodies.push_back("  LANTERN_FUNCTION_START");
             if (returns == "void" | (config[idx]["returns"].size() == 0))
             {
                 bodies.push_back("    " + functionCall + name + "(" + calls + ");");
@@ -344,6 +339,7 @@ int main(int argc, char *argv[])
                     bodies.push_back("        " + calls + ")));");
                 }
             }
+            bodies.push_back("  LANTERN_FUNCTION_END");
             bodies.push_back("}");
             bodies.push_back("");
         }

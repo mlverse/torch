@@ -53,8 +53,6 @@ test_that("[ works", {
 })
 
 test_that("indexing error expectations", {
-  skip_on_os("windows") # currently bombs on windows.
-  
   x <- torch_randn(c(10,10,10,10))
   expect_error(x[1,], "incorrect number of dimensions", class = "value_error")
   expect_error(x[1,1,1,1,1])

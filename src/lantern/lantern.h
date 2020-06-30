@@ -28,6 +28,16 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <iostream>
+
+#define LANTERN_FUNCTION_START try {
+#define LANTERN_FUNCTION_END } catch(const std::exception& ex) { \
+  pLanternLastError = new std::string(ex.what());                \
+  return NULL;                                                   \
+} catch(...) {                                                   \
+  pLanternLastError = new std::string("Unknown error.");         \
+  return NULL;                                                   \
+}
 
 #ifdef __cplusplus
 extern "C"

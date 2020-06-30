@@ -54,7 +54,6 @@ test_that("register_hook", {
 })
 
 test_that("register hook: can throw exceptions in the lantern thread", {
-  skip_on_os("windows")
   x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { 2* grad})
   y <- 2 * x
@@ -64,7 +63,6 @@ test_that("register hook: can throw exceptions in the lantern thread", {
 })
 
 test_that("register hook: can throw exceptions in the hook", {
-  skip_on_os("windows")
   x <- torch_tensor(c(2), requires_grad = TRUE)
   x$register_hook(function(grad) { stop()})
   y <- 2 * x
@@ -333,8 +331,6 @@ test_that("Can have optional arguments in forward", {
 })
 
 test_that("Catch errors in forward and backward R functions", {
-  skip_on_os("windows")
-  
   custom_pow <- autograd_function(
     forward = function(ctx, var1) {
       stop("stop forward")
@@ -474,7 +470,6 @@ test_that("can use mark_dirty", {
   )
   
   x <- torch_tensor(5, requires_grad = TRUE)
-  skip_on_os("windows")
   expect_error(double_in_place(x), "leaf Variable that requires grad")
 })
 
@@ -696,7 +691,6 @@ test_that("autograd_grad retain grad", {
   
   out <- autograd_grad(loss, list(w, b))
   expect_length(out, 2)
-  skip_on_os("windows")
   expect_error(autograd_grad(loss, list(w, b)), regexp = "graph a second time")
   
   w <- torch_tensor(0.5, requires_grad = TRUE)
@@ -720,7 +714,6 @@ test_that("autograd_grad allow unused", {
   y <- 2 * x + 1
   loss <- (y - (w*x))^2
   loss <- loss$mean()
-  skip_on_os("windows")
   expect_error(
     autograd_grad(loss, list(w, b)),
     regexp = "not have been used in the graph"

@@ -4,6 +4,13 @@
 #include <future>
 #include <thread>
 
+#define LANTERN_ERROR_HANDLE                                                    \
+if (lanternLastError() != NULL) {                                               \
+  std::string last = lanternLastError();                                        \
+  lanternLastErrorClear();                                                      \
+  throw Rcpp::exception(last.c_str());                                                  \
+} 
+
 // [[Rcpp::export]]
 void cpp_autograd_set_grad_mode (bool enabled) {
   lantern_autograd_set_grad_mode(enabled);
@@ -282,7 +289,13 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvaria
         inputs_,
         forward_,
         backward_
-      );  
+      );
+      LANTERN_ERROR_HANDLE
+    }
+    catch (const std::exception& ex)
+    {
+      event_loop_running = false;
+      throw Rcpp::exception(ex.what());
     }
     catch (...)
     {
@@ -419,8 +432,8 @@ Rcpp::List cpp_autograd_node_next_edges (Rcpp::XPtr<XPtrTorch> self)
   auto next_edges = lantern_Node_next_edges(self->get());
   
   Rcpp::List out;
-  auto sze = lantern_edge_list_size(next_edges);
-  for (int i = 0; i < sze; i ++)
+  auto size = lantern_edge_list_size(next_edges);
+  for (int i = 0; i < size; i ++)
   {
     out.push_back(make_xptr<XPtrTorch>(lantern_edge_list_at(next_edges, i)));
   }
