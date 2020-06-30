@@ -320,6 +320,7 @@ int main(int argc, char *argv[])
 
             bodies.push_back("void* lantern_Tensor_" + function + "(" + arguments + ")");
             bodies.push_back("{");
+            bodies.push_back("  LANTERN_FUNCTION_START");
             if (returns == "void" | (config[idx]["returns"].size() == 0))
             {
                 bodies.push_back("    " + functionCall + name + "(" + calls + ");");
@@ -338,6 +339,7 @@ int main(int argc, char *argv[])
                     bodies.push_back("        " + calls + ")));");
                 }
             }
+            bodies.push_back("  LANTERN_FUNCTION_END");
             bodies.push_back("}");
             bodies.push_back("");
         }
