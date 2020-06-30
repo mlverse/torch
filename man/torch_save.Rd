@@ -2,15 +2,21 @@
 % Please edit documentation in R/save.R
 \name{torch_save}
 \alias{torch_save}
-\title{Saves an object to a disk file}
+\title{Saves an object to a disk file.}
 \usage{
 torch_save(obj, path, ...)
 }
 \arguments{
 \item{obj}{the saved object}
 
-\item{path}{a path to save the object}
+\item{path}{a connection or the name of the file to save.}
 }
 \description{
-Saves an object to a disk file
+This function is experimental, don't use for long
+term storage.
 }
+\seealso{
+Other torch_save: 
+\code{\link{torch_load}()}
+}
+\concept{torch_save}

@@ -12,3 +12,8 @@ torch_load(path)
 \description{
 Loads a saved object
 }
+\seealso{
+Other torch_save: 
+\code{\link{torch_save}()}
+}
+\concept{torch_save}

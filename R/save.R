@@ -1,7 +1,12 @@
-#' Saves an object to a disk file
+#' Saves an object to a disk file.
+#' 
+#' This function is experimental, don't use for long
+#' term storage.
 #' 
 #' @param obj the saved object
 #' @param path a connection or the name of the file to save.
+#'
+#' @family torch_save
 #'
 #' @export
 torch_save <- function(obj, path, ...) {
@@ -34,6 +39,8 @@ torch_save.nn_module <- function(obj, path, ...) {
 #' Loads a saved object
 #'
 #' @param path a path to the saved object 
+#' 
+#' @family torch_save
 #' 
 #' @export
 torch_load <- function(path) {
