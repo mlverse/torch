@@ -95,9 +95,9 @@ nnf_mse_loss <- function(input, target, reduction = "mean") {
 #' @inheritParams nnf_l1_loss
 #' 
 #' @export
-nnf_binary_cross_entropy <- function(input, target, weight = NULL, size_average = NULL, 
+nnf_binary_cross_entropy <- function(input, target, weight = NULL, 
                                      reduction = c("mean", "sum", "none")) {
-  torch_binary_cross_entropy(input, target, weight, size_average=size_average,
+  torch_binary_cross_entropy(input, target, weight, 
                              reduction=reduction_enum(reduction))
 }
 
