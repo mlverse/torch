@@ -5,7 +5,9 @@
 std::string cpp_tensor_save (Rcpp::XPtr<XPtrTorchTensor> x)
 {
   const char * s = lantern_tensor_save(x->get());
-  return std::string(s);
+  auto out = std::string(s);
+  lantern_const_char_delete(s);
+  return out;
 }
 
 // [[Rcpp::export]]

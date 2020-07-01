@@ -221,6 +221,7 @@ extern "C"
   LANTERN_API void * (LANTERN_PTR lantern_test_tensor)();
   LANTERN_API void (LANTERN_PTR lantern_test_print)(void* x); 
   LANTERN_API size_t (LANTERN_PTR lantern_tensor_serialized_size) (const char * s);
+  LANTERN_API void (LANTERN_PTR lantern_const_char_delete) (const char * x);
   /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
 LANTERN_API void* (LANTERN_PTR lantern__cast_char_tensor_bool)(void* self, void* non_blocking);
@@ -2248,6 +2249,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(lantern_test_tensor);
   LOAD_SYMBOL(lantern_test_print);
   LOAD_SYMBOL(lantern_tensor_serialized_size);
+  LOAD_SYMBOL(lantern_const_char_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(lantern__cast_char_tensor_bool)
