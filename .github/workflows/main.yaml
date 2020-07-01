@@ -51,7 +51,7 @@ jobs:
       - name: Check
         run:  |
           print(Sys.info())
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-multiarch", "--no-tests"), error_on = "error", path = "torch", check_dir = "check")
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-multiarch", "--no-tests"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
       - name: Test
         run: |
