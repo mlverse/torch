@@ -89,15 +89,8 @@ PerformanceReporter <- R6::R6Class("PerformanceReporter",
                                          time = self$results$time
                                        )
                                        
-                                       summary <- data %>%
-                                         dplyr::group_by(context) %>%
-                                         dplyr::summarise(time = sum(time)) %>%
-                                         dplyr::mutate(time = format(time, width = "9", digits = "3", scientific = F))
-                                       
-                                       total <- data %>%
-                                         dplyr::summarise(time = sum(time)) %>%
-                                         dplyr::mutate(time = format(time, digits = "3", scientific = F)) %>%
-                                         dplyr::pull()
+                                       summary <- aggregate(time ~ context, data, sum)
+                                       total <- sum(data$time)
                                        
                                        cat("\n")
                                        cat("--- Performance Summary  ----\n\n")
