@@ -71,6 +71,7 @@ Collate:
     'nn-linear.R'
     'nn-pooling.R'
     'nn-rnn.R'
+    'nn-sparse.R'
     'nn-utils-rnn.R'
     'nn-utils.R'
     'nn_adaptive.R'
