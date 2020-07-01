@@ -47,6 +47,7 @@ test_that("nn_conv_transpose2d", {
 })
 
 test_that("nn_conv_transpose3d", {
+  skip_on_os("windows")
   
   input <- torch_randn(20, 16, 10, 50, 100)
   
