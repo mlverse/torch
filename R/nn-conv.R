@@ -716,7 +716,7 @@ nn_conv_transpose1d <- nn_module(
 #' TRUE`.
 #' 
 #' @param in_channels (int): Number of channels in the input image
-#' @paramout_channels (int): Number of channels produced by the convolution
+#' @param out_channels (int): Number of channels produced by the convolution
 #' @param kernel_size (int or tuple): Size of the convolving kernel
 #' @param stride (int or tuple, optional): Stride of the convolution. Default: 1
 #' @param padding (int or tuple, optional): ``dilation * (kernel_size - 1) - padding`` zero-padding
@@ -759,7 +759,7 @@ nn_conv_transpose1d <- nn_module(
 #' input <- torch_randn(20, 16, 50, 100)
 #' output <- m(input)
 #' # exact output size can be also specified as an argument
-#' input <- torch.randn(1, 16, 12, 12)
+#' input <- torch_randn(1, 16, 12, 12)
 #' downsample <- nn_conv2d(16, 16, 3, stride=2, padding=1)
 #' upsample <- nn_conv_transpose2d(16, 16, 3, stride=2, padding=1)
 #' h <- downsample(input)
