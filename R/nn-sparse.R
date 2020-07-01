@@ -18,6 +18,7 @@ NULL
 #' @param scale_grad_by_freq (boolean, optional): If given, this will scale gradients by the inverse of frequency of
 #'   the words in the mini-batch. Default ``False``.
 #' @param sparse (bool, optional): If ``True``, gradient w.r.t. `weight` matrix will be a sparse tensor.
+#' @param .weight (Tensor) embeddings weights (in case you want to set it manually)
 #' 
 #' See Notes for more details regarding sparse gradients.
 #' 
