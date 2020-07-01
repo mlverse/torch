@@ -94,6 +94,7 @@ PerformanceReporter <- R6::R6Class("PerformanceReporter",
                                        data$context[which(is.na(data$context))] <- "empty"
                                        
                                        summary <- aggregate(time ~ context, data, sum)
+                                       summary$time <- format(summary$time, width = "9", digits = "3", scientific = F)
                                        total <- sum(data$time)
                                        
                                        cat("\n")
