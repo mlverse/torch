@@ -49,6 +49,14 @@ void *lantern_new_hook(void *(*fun)(void *, void *), void *custom)
 {
     auto out = [fun, custom](torch::Tensor grad) {
         auto out = (*fun)((void *)new LanternObject<torch::Tensor>(grad), custom);
+      
+        // Exceptions from the host need to be properly converted to handle different compilers
+        if (lanternLastError() != NULL) {
+          std::string last = lanternLastError();
+          lanternLastErrorClear();
+          throw last;
+        } 
+        
         auto ten = reinterpret_cast<LanternObject<torch::Tensor> *>(out)->get();
         return ten;
     };
