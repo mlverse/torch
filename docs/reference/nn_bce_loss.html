@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Binary_cross_entropy — nnf_binary_cross_entropy • torch</title>
+<title>Binary cross entropy loss — nn_bce_loss • torch</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="Binary_cross_entropy — nnf_binary_cross_entropy" />
-<meta property="og:description" content="Function that measures the Binary Cross Entropy
-between the target and the output." />
+<meta property="og:title" content="Binary cross entropy loss — nn_bce_loss" />
+<meta property="og:description" content="Creates a criterion that measures the Binary Cross Entropy
+between the target and the output:" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -144,49 +144,96 @@ between the target and the output." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Binary_cross_entropy</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nnf-loss.R'><code>R/nnf-loss.R</code></a></small>
-    <div class="hidden name"><code>nnf_binary_cross_entropy.Rd</code></div>
+    <h1>Binary cross entropy loss</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-loss.R'><code>R/nn-loss.R</code></a></small>
+    <div class="hidden name"><code>nn_bce_loss.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function that measures the Binary Cross Entropy
-between the target and the output.</p>
+    <p>Creates a criterion that measures the Binary Cross Entropy
+between the target and the output:</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_binary_cross_entropy</span>(
-  <span class='no'>input</span>,
-  <span class='no'>target</span>,
-  <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>reduction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mean"</span>, <span class='st'>"sum"</span>, <span class='st'>"none"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>nn_bce_loss</span>(<span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>tensor (N,∗) where *∗ means, any number of additional dimensions</p></td>
-    </tr>
-    <tr>
-      <th>target</th>
-      <td><p>tensor (N,∗) , same shape as the input</p></td>
+      <th>weight</th>
+      <td><p>(Tensor, optional): a manual rescaling weight given to the loss
+of each batch element. If given, has to be a Tensor of size <code>nbatch</code>.</p></td>
     </tr>
     <tr>
       <th>reduction</th>
-      <td><p>(string, optional) – Specifies the reduction to apply to the
-output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean':
-the sum of the output will be divided by the number of elements in the output,
-'sum': the output will be summed. Default: 'mean'</p></td>
+      <td><p>(string, optional): Specifies the reduction to apply to the output:
+<code>'none'</code> | <code>'mean'</code> | <code>'sum'</code>. <code>'none'</code>: no reduction will be applied,
+<code>'mean'</code>: the sum of the output will be divided by the number of
+elements in the output, <code>'sum'</code>: the output will be summed. Note: <code>size_average</code>
+and <code>reduce</code> are in the process of being deprecated, and in the meantime,
+specifying either of those two args will override <code>reduction</code>. Default: <code>'mean'</code></p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>The unreduced (i.e. with <code>reduction</code> set to <code>'none'</code>) loss can be described as:
+$$
+  \ell(x, y) = L = \{l_1,\dots,l_N\}^\top, \quad
+l_n = - w_n \left[ y_n \cdot \log x_n + (1 - y_n) \cdot \log (1 - x_n) \right]
+$$
+where \(N\) is the batch size. If <code>reduction</code> is not <code>'none'</code>
+(default <code>'mean'</code>), then</p>
+<p>$$
+  \ell(x, y) = \begin{cases}
+\operatorname{mean}(L), &amp; \text{if reduction} = \text{'mean';}\\
+\operatorname{sum}(L),  &amp; \text{if reduction} = \text{'sum'.}
+\end{cases}
+$$</p>
+<p>This is used for measuring the error of a reconstruction in for example
+an auto-encoder. Note that the targets \(y\) should be numbers
+between 0 and 1.</p>
+<p>Notice that if \(x_n\) is either 0 or 1, one of the log terms would be
+mathematically undefined in the above loss equation. PyTorch chooses to set
+\(\log (0) = -\infty\), since \(\lim_{x\to 0} \log (x) = -\infty\).</p>
+<p>However, an infinite term in the loss equation is not desirable for several reasons.
+For one, if either \(y_n = 0\) or \((1 - y_n) = 0\), then we would be
+multiplying 0 with infinity. Secondly, if we have an infinite loss value, then
+we would also have an infinite term in our gradient, since
+\(\lim_{x\to 0} \frac{d}{dx} \log (x) = \infty\).</p>
+<p>This would make BCELoss's backward method nonlinear with respect to \(x_n\),
+and using it for things like linear regression would not be straight-forward.
+Our solution is that BCELoss clamps its log function outputs to be greater than
+or equal to -100. This way, we can always have a finite loss value and a linear
+backward method.</p>
+    <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
+
+    
+
+<ul>
+<li><p>Input: \((N, *)\) where \(*\) means, any number of additional
+dimensions</p></li>
+<li><p>Target: \((N, *)\), same shape as the input</p></li>
+<li><p>Output: scalar. If <code>reduction</code> is <code>'none'</code>, then \((N, *)\), same
+shape as input.</p></li>
+</ul>
+
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='nn_sigmoid.html'>nn_sigmoid</a></span>()
+<span class='no'>loss</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_bce_loss</span>()
+<span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>3</span>, <span class='kw'>requires_grad</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>target</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_rand.html'>torch_rand</a></span>(<span class='fl'>3</span>)
+<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>loss</span>(<span class='fu'>m</span>(<span class='no'>input</span>), <span class='no'>target</span>)
+<span class='no'>output</span>$<span class='fu'>backward</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#shape">Shape</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
