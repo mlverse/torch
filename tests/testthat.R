@@ -108,6 +108,7 @@ PerformanceReporter <- R6::R6Class("PerformanceReporter",
                                        self$cat_line("Failed:   ", format(self$n_fail, width = 5))
                                        self$cat_line("Warnings: ", format(self$n_warn, width = 5))
                                        self$cat_line("Skipped:  ", format(self$n_skip, width = 5))
+                                       cat("\n\n")
                                        if (length(self$failures) > 0)
                                          self$cat_line("Failures:  ",
                                                        do.call(paste, as.list(c(self$failures, sep = "\n"))))
