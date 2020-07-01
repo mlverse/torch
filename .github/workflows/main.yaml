@@ -53,10 +53,13 @@ jobs:
           print(Sys.info())
           rcmdcheck::rcmdcheck(build_args = c("--no-build-vignettes"), args = c("--no-manual", "--no-build-vignettes", "--no-vignettes", "--no-multiarch", "--no-install"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
-      - name: Test
+      - name: Install
         run: |
           torch_package <- dir("check", full.names = TRUE, pattern = "torch_")
           install.packages(torch_package, repos = NULL, type = "source", INSTALL_opts = "--no-multiarch")
+        shell: Rscript {0}
+      - name: Test
+        run: |
           setwd("tests")
           source("testthat.R")
         shell: Rscript {0}
