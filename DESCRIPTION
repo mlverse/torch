@@ -33,7 +33,8 @@ Suggests:
     knitr,
     rmarkdown,
     bit64,
-    fs
+    fs,
+    palmerpenguins
 VignetteBuilder: knitr
 Collate: 
     'R7.R'

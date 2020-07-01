@@ -2,7 +2,7 @@
 title: "Loading data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Creating tensors}
+  %\VignetteIndexEntry{Loading data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-#library(torch)
+library(torch)
 ```
 
 ## Datasets and data loaders
@@ -59,10 +59,7 @@ your own `dataset` to train on [Allison Horst\'s penguins](https://github.com/al
 ## A custom dataset
 
 ```{r}
-# remotes::install_github("allisonhorst/palmerpenguins")
 library(palmerpenguins)
-library(dplyr)
-library(purrr)
 
 penguins
 ```
@@ -103,11 +100,14 @@ penguins_dataset <- dataset(
   },
   
   prepare_penguin_data = function() {
+    
+    input <- na.omit(penguins) 
     # conveniently, the categorical data are already factors
-    input <- na.omit(penguins) %>%
-      mutate_if(is.factor, compose(partial(`-`, ... = , 1), as.integer)) %>%
-      # mutate_if(is.factor, as.integer) %>%
-      as.matrix()
+    input$species <- as.numeric(input$species) - 1
+    input$island <- as.numeric(input$island) - 1
+    input$sex <- as.numeric(input$sex) - 1
+    
+    input <- as.matrix(input)
     torch_tensor(input)
   }
 )
