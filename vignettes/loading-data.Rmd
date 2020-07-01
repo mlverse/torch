@@ -60,6 +60,7 @@ your own `dataset` to train on [Allison Horst\'s penguins](https://github.com/al
 
 ```{r}
 library(palmerpenguins)
+library(magrittr)
 
 penguins
 ```
@@ -83,7 +84,7 @@ penguins_dataset <- dataset(
   name = "penguins_dataset",
   
   initialize = function() {
-    self$data <- prepare_penguin_data()
+    self$data <- self$prepare_penguin_data()
   },
   
   .getitem = function(index) {
@@ -183,7 +184,6 @@ for (epoch in 1:10) {
   l <- c()
   
   for (b in enumerate(dl)) {
-    print(b[[2]])
     optimizer$zero_grad()
     output <- model(b[[1]])
     loss <- nnf_nll_loss(output, b[[2]])
