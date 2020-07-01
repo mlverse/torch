@@ -51,11 +51,15 @@ jobs:
       - name: Check
         run:  |
           print(Sys.info())
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-multiarch"), error_on = "error", check_dir = "check")
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-multiarch", "--no-tests"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
-      - name: Reveal testthat details
-        if: always()
-        run: find . -name testthat.* -exec cat '{}' ';'
+      - name: Test
+        run: |
+          torch_package <- dir(".", full.names = TRUE, pattern = "torch_")
+          install.packages(torch_package, repos = NULL, type = "source")
+          setwd("tests")
+          source("testthat.R")
+        shell: Rscript {0}
   gpu:
     runs-on: self-hosted
     env:
