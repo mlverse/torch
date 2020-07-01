@@ -1,3 +1,5 @@
+context("generator")
+
 test_that("can create and use simple generators", {
   x <- torch_generator()
   x$set_current_seed(12345678L)

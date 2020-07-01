@@ -1,3 +1,5 @@
+context("readme")
+
 test_that("can render readme.Rmd", {
   skip_if_not_test_examples()
   x <- tempfile(fileext = "md")

@@ -1,3 +1,5 @@
+context("scalar")
+
 test_that("double scalar", {
   expect_true(is_torch_scalar(torch_scalar(1)))
 })

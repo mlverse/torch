@@ -1,3 +1,5 @@
+context("nn-rnn")
+
 test_that("rnn nonlinearity", {
   rnn <- nn_rnn(1, 10)
   expect_equal(rnn$nonlinearity, "tanh")

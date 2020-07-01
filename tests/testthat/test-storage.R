@@ -1,3 +1,5 @@
+context("storage")
+
 test_that("storage", {
 
   x <- torch_tensor(1)

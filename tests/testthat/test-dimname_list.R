@@ -1,3 +1,5 @@
+context("dimname-list")
+
 test_that("dimname can be created", {
   x <- torch_dimname("hello")
   expect_output(print(x))
