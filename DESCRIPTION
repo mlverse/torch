@@ -35,6 +35,8 @@ Suggests:
     bit64,
     fs,
     palmerpenguins
+Remotes:
+    allisonhorst/palmerpenguins
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
