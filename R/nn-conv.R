@@ -615,24 +615,43 @@ nn_conv_transpose_nd <- nn_module(
 #' \eqn{k = \frac{groups}{C_\text{out} * \text{kernel\_size}}}
 #' 
 #' - bias (Tensor):   the learnable bias of the module of shape (out_channels).
-#' If `bias` is `True`, then the values of these weights are
+#' If `bias` is `TRUE`, then the values of these weights are
 #' sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
 #' \eqn{k = \frac{groups}{C_\text{out} * \text{kernel\_size}}}
+#' 
+#' @examples
+#' m <- nn_conv_transpose1d(32, 16, 2)
+#' input <- torch_randn(10, 32, 2)
+#' output <- m(input)
 #' 
 #' @export
 nn_conv_transpose1d <- nn_module(
   "nn_conv_transpose1d",
   inherit = nn_conv_transpose_nd,
-  initialize = function(in_channels,
-                        out_channels,
-                        kernel_size,
-                        stride = 1,
-                        padding = 0,
-                        output_padding = 0,
-                        groups = 1,
-                        bias = TRUE,
-                        dilation = 1,
-                        padding_mode = 'zeros') {
+  initialize = function(in_channels, out_channels, kernel_size, stride = 1,
+                        padding = 0, output_padding = 0, groups = 1, bias = TRUE,
+                        dilation = 1, padding_mode = 'zeros') {
     
+    kernel_size <- nn_util_single(kernel_size)
+    stride <- nn_util_single(stride)
+    padding <- nn_util_single(padding)
+    dilation <- nn_util_single(dilation)
+    output_padding <- nn_util_single(output_padding)
+    
+    super$initialize(in_channels, out_channels, kernel_size, stride, padding, dilation,
+                     TRUE, output_padding, groups, bias, padding_mode)
+    
+  },
+  forward = function(input, output_size = NULL) {
+    
+    if (self$padding_mode != "zeros") 
+      value_error("Only `zeros` padding mode is supported for ConvTranspose1d")
+    
+    output_padding <- self$.output_padding(input, output_size, self$stride, 
+                                          self$padding, self$kernel_size)
+    
+    
+    nnf_conv_transpose1d(input, self$weight, self$bias, self$stride, self$padding,
+                         output_padding, self$groups, self$dilation)    
   }
 )
