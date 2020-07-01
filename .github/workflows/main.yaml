@@ -51,10 +51,12 @@ jobs:
       - name: Check
         run:  |
           print(Sys.info())
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-multiarch", "--no-tests"), error_on = "error", check_dir = "check")
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-vignettes", "--no-multiarch", "--no-install"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
       - name: Test
         run: |
+          torch_package <- dir("check", full.names = TRUE, pattern = "torch_")
+          install.packages(torch_package, repos = NULL, type = "source", INSTALL_opts = "--no-multiarch")
           setwd("tests")
           source("testthat.R")
         shell: Rscript {0}
