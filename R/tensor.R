@@ -106,6 +106,13 @@ Tensor <- R7Class(
     },
     is_contiguous = function() {
       cpp_tensor_is_contiguous(self$ptr)
+    },
+    copy_ = function(src, non_blocking = FALSE) {
+      
+      if (is_null_external_pointer(self$ptr))
+        self$ptr <- torch_empty_like(src)$ptr
+      
+      private$`_copy_`(src, non_blocking)
     }
   ),
   active = list(

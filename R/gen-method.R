@@ -1124,7 +1124,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "copy_", function(src, non_blocking = FALSE) {  args <- mget(x = c("src", "non_blocking"))
+Tensor$set("private", "_copy_", function(src, non_blocking = FALSE) {  args <- mget(x = c("src", "non_blocking"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", src = "Tensor", non_blocking = "bool")
 nd_args <- c("self", "src")
