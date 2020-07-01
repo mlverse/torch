@@ -18,6 +18,9 @@ test_that("pack_padded_sequence", {
   expect_equal_to_r(to_int(p$sorted_indices), c(2, 1, 0))
   expect_equal_to_r(to_int(p$unsorted_indices), c(2, 1, 0))
   
+  expect_error(nn_utils_rnn_pack_padded_sequence(x, lens, batch_first = TRUE, 
+                                                 enforce_sorted = TRUE))
+  
   x <- torch_tensor(rbind(
     c(1, 2, 3, 4),
     c(1, 2, 3, 0),
