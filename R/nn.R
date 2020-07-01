@@ -298,6 +298,12 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
   do.call("$", args = list(module, y))
 }
 
+#'@export
+`[[.nn_module` <- function(x, y) {
+  module <- attr(x, "module")
+  do.call("[[", args = list(module, y))
+}
+
 #' @export
 `$.nn_Module` <- function(x, y) {
   x[[y]]
@@ -308,6 +314,9 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
   
   if (y == ".__enclos_env__")
     return(NextMethod())
+  
+  if (is.numeric(y))
+    return(x[[".__enclos_env__"]][["private"]][["modules_"]][[y]])
   
   if (!is.null(x[[".__enclos_env__"]][["private"]][["parameters_"]])) {
     pars <- x[[".__enclos_env__"]][["private"]][["parameters_"]]
