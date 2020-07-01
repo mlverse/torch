@@ -10,6 +10,11 @@
 
 std::string *pLanternLastError = NULL;
 
+void lanternSetLastError(const char* error)
+{
+  pLanternLastError = new std::string(error);
+}
+
 const char* lanternLastError()
 {
   if (pLanternLastError == NULL)
