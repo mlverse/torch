@@ -50,9 +50,8 @@ jobs:
           Rscript tools/buildlantern.R
       - name: Check
         run:  |
-          R CMD build --no-build-vignettes .
-          R CMD check --no-manual --no-multiarch --ignore-vignettes --no-tests torch*tar.gz
-        shell: bash
+          ./R CMD build --no-build-vignettes .
+          ./R CMD check --no-manual --no-multiarch --ignore-vignettes --no-tests torch*tar.gz
       - name: Test
         run: |
           torch_package <- dir(".", full.names = TRUE, pattern = "torch_")
