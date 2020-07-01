@@ -35,7 +35,7 @@ nnf_embedding <- function(input, weight, padding_idx=NULL, max_norm=NULL, norm_t
     })
   }
   
-  torch_embedding(weight = weight, input = input, padding_idx = padding_idx,
+  torch_embedding(weight = weight, indices = input, padding_idx = padding_idx,
                   scale_grad_by_freq = scale_grad_by_freq, sparse = sparse)  
 }
 
