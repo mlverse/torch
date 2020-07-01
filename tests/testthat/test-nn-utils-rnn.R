@@ -5,6 +5,8 @@ to_int <- function(x) {
 }
 
 test_that("pack_padded_sequence", {
+  skip_on_os("windows")
+  
   x <- torch_tensor(rbind(
     c(1, 2, 0, 0),
     c(1, 2, 3, 0),
@@ -22,6 +24,8 @@ test_that("pack_padded_sequence", {
 })
 
 test_that("pack_sequence", {
+  skip_on_os("windows")
+  
   x <- torch_tensor(c(1,2,3), dtype = torch_long())
   y <- torch_tensor(c(4, 5), dtype = torch_long())
   z <- torch_tensor(c(6), dtype = torch_long())
@@ -32,6 +36,8 @@ test_that("pack_sequence", {
 })
 
 test_that("pad_packed_sequence", {
+  skip_on_os("windows")
+  
   seq <- torch_tensor(rbind(
     c(1, 2, 0),
     c(3, 0, 0),
@@ -46,6 +52,7 @@ test_that("pad_packed_sequence", {
 })
 
 test_that("pad_sequence", {
+  skip_on_os("windows")
   
   x <- torch_ones(25, 300)
   y <- torch_ones(22, 300)
