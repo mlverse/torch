@@ -193,3 +193,39 @@ test_that("state_dict for modules", {
   expect_error(net2$load_state_dict(s), class = "value_error")
   
 })
+
+test_that("zero_grad", {
+  
+  Net <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 1)
+      self$norm <- nn_batch_norm1d(1)
+    },
+    forward = function(x) {
+      x <- self$linear(x)
+      x <- self$norm(x)
+      x
+    }
+  )
+  net <- Net()
+  
+  expect_no_error(net$zero_grad())
+  expect_true(is_undefined_tensor(net$linear$weight$grad))
+  
+  x <- torch_randn(100, 10)
+  l <- torch_mean(net(x))
+  l$backward()
+  
+  expect_false(as_array(torch_all(net$linear$weight$grad == 0)))
+  expect_false(as_array(torch_all(net$linear$bias$grad == 0)))
+  expect_false(as_array(torch_all(net$norm$weight$grad == 0)))
+  expect_false(as_array(torch_all(net$norm$bias$grad == 0)))
+  
+  net$zero_grad()
+  
+  expect_true(as_array(torch_all(net$linear$weight$grad == 0)))
+  expect_true(as_array(torch_all(net$linear$bias$grad == 0)))
+  expect_true(as_array(torch_all(net$norm$weight$grad == 0)))
+  expect_true(as_array(torch_all(net$norm$bias$grad == 0)))
+  
+})
