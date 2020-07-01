@@ -334,3 +334,134 @@ nn_conv2d <- nn_module(
     self$conv_forward_(input, self$weight)
   }
 )
+
+#' Conv3D module
+#' 
+#' Applies a 3D convolution over an input signal composed of several input
+#' planes.
+#' In the simplest case, the output value of the layer with input size \eqn{(N, C_{in}, D, H, W)}
+#' and output \eqn{(N, C_{out}, D_{out}, H_{out}, W_{out})} can be precisely described as:
+#' 
+#' \deqn{
+#'   out(N_i, C_{out_j}) = bias(C_{out_j}) +
+#'   \sum_{k = 0}^{C_{in} - 1} weight(C_{out_j}, k) \star input(N_i, k)
+#' }
+#' 
+#' where \eqn{\star} is the valid 3D `cross-correlation` operator
+#' 
+#' * `stride` controls the stride for the cross-correlation.
+#' * `padding` controls the amount of implicit zero-paddings on both
+#' sides for `padding` number of points for each dimension.
+#' * `dilation` controls the spacing between the kernel points; also known as the à trous algorithm.
+#' It is harder to describe, but this `link`_ has a nice visualization of what `dilation` does.
+#' * `groups` controls the connections between inputs and outputs.
+#' `in_channels` and `out_channels` must both be divisible by
+#' `groups`. For example,
+#' * At groups=1, all inputs are convolved to all outputs.
+#' * At groups=2, the operation becomes equivalent to having two conv
+#' layers side by side, each seeing half the input channels,
+#' and producing half the output channels, and both subsequently
+#' concatenated.
+#' * At groups= `in_channels`, each input channel is convolved with
+#' its own set of filters, of size 
+#' \eqn{\left\lfloor\frac{out\_channels}{in\_channels}\right\rfloor}.
+#' 
+#' The parameters `kernel_size`, `stride`, `padding`, `dilation` can either be:
+#' - a single `int` -- in which case the same value is used for the depth, height and width dimension
+#' - a `tuple` of three ints -- in which case, the first `int` is used for the depth dimension,
+#' the second `int` for the height dimension and the third `int` for the width dimension
+#' 
+#' @note
+#' Depending of the size of your kernel, several (of the last)
+#' columns of the input might be lost, because it is a valid `cross-correlation`_,
+#' and not a full `cross-correlation`_.
+#' It is up to the user to add proper padding.
+#' 
+#' @note
+#' When `groups == in_channels` and `out_channels == K * in_channels`,
+#' where `K` is a positive integer, this operation is also termed in
+#' literature as depthwise convolution.
+#' In other words, for an input of size \eqn{(N, C_{in}, D_{in}, H_{in}, W_{in})},
+#' a depthwise convolution with a depthwise multiplier `K`, can be constructed by arguments
+#' \eqn{(in\_channels=C_{in}, out\_channels=C_{in} \times K, ..., groups=C_{in})}.
+#' 
+#' @note
+#' In some circumstances when using the CUDA backend with CuDNN, this operator
+#' may select a nondeterministic algorithm to increase performance. If this is
+#' undesirable, you can try to make the operation deterministic (potentially at
+#' a performance cost) by setting `torch.backends.cudnn.deterministic = TRUE`.
+#' Please see the notes on :doc:`/notes/randomness` for background.
+#' 
+#' @param in_channels (int): Number of channels in the input image
+#' @param out_channels (int): Number of channels produced by the convolution
+#' @param kernel_size (int or tuple): Size of the convolving kernel
+#' @param stride (int or tuple, optional): Stride of the convolution. Default: 1
+#' @param padding (int or tuple, optional): Zero-padding added to all three sides of the input. Default: 0
+#' @param padding_mode (string, optional): `'zeros'`, `'reflect'`, `'replicate'` or `'circular'`. Default: `'zeros'`
+#' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#' @param groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
+#' @param bias (bool, optional): If `TRUE`, adds a learnable bias to the output. Default: `TRUE`
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C_{in}, D_{in}, H_{in}, W_{in})}
+#' - Output: \eqn{(N, C_{out}, D_{out}, H_{out}, W_{out})} where
+#'  \deqn{
+#'   D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] - \text{dilation}[0]
+#'     \times (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+#'  }
+#'  \deqn{
+#'   H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] - \text{dilation}[1]
+#'     \times (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+#'  }
+#'  \deqn{
+#'   W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] - \text{dilation}[2]
+#'     \times (\text{kernel\_size}[2] - 1) - 1}{\text{stride}[2]} + 1\right\rfloor
+#'  }
+#' 
+#' @section Attributes:
+#' 
+#' - weight (Tensor): the learnable weights of the module of shape
+#' \eqn{(\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}},}
+#' \eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]}, \text{kernel\_size[2]})}.
+#' The values of these weights are sampled from
+#' \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
+#' \eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+#' - bias (Tensor):   the learnable bias of the module of shape (out_channels). If `bias` is ``True``,
+#' then the values of these weights are
+#' sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
+#' \eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+#' 
+#' @examples
+#' # With square kernels and equal stride
+#' m <- nn_conv3d(16, 33, 3, stride=2)
+#' # non-square kernels and unequal stride and with padding
+#' m <- nn_conv3d(16, 33, c(3, 5, 2), stride=c(2, 1, 1), padding=c(4, 2, 0))
+#' input <- torch_randn(20, 16, 10, 50, 100)
+#' output <- m(input)
+#' 
+#' @export
+nn_conv3d <- nn_module(
+  "nn_conv3d",
+  inherit = nn_conv_nd,
+  initialize = function(in_channels, out_channels, kernel_size, stride = 1,
+                        padding = 0, dilation = 1, groups = 1, bias = TRUE,
+                        padding_mode = 'zeros') {
+    kernel_size <- nn_util_triple(kernel_size)
+    stride <- nn_util_triple(stride)
+    padding <- nn_util_triple(padding)
+    dilation <- nn_util_triple(dilation)
+    super$initialize(in_channels, out_channels, kernel_size, stride, padding, 
+                     dilation, FALSE, nn_util_triple(0), groups, bias, 
+                     padding_mode)
+  },
+  forward = function(input) {
+    if (self$padding_mode != "zeros") {
+      nnf_conv3d(F.pad(input, self$reversed_padding_repeated_twice_, mode=self$padding_mode),
+               self$weight, self$bias, self$stride, nn_util_triple(0),
+               self$dilation, self$groups)
+    } else {
+      nnf_conv3d(input, self$weight, self$bias, self$stride,
+               self$padding, self$dilation, self$groups)
+    }
+  }
+)
