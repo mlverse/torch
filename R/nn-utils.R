@@ -22,9 +22,6 @@ list_with_default <- function(out_size, defaults) {
 nn_util_ntuple <- function(n) {
   function(x) {
     
-    if (length(x) != n && length(x) != 1)
-      value_error("Expected a single value or a vector of size '{n}', got '{lenght(x)}")
-    
     if (length(x) > 1)
       return(x)
     

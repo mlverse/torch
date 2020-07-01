@@ -128,3 +128,8 @@ void lantern_Storage_delete(void *x)
 {
   lantern_delete<LanternObject<torch::Storage>>(x);
 }
+
+void lantern_const_char_delete (const char * x)
+{
+  delete []x;
+}

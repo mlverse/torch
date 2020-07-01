@@ -182,6 +182,14 @@ nn_Module <- R6::R6Class(
       load(self, state_dict)
       
       invisible(self)
+    },
+    zero_grad = function() {
+      for (p in self$parameters) {
+        if (!is_undefined_tensor(p$grad)) {
+          p$grad$detach_()
+          p$grad$zero_()
+        }
+      }
     }
   ),
   private = list(
