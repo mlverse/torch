@@ -806,3 +806,150 @@ nn_conv_transpose2d <- nn_module(
     )
   }
 )
+
+#' ConvTranpose3D module
+#' 
+#' Applies a 3D transposed convolution operator over an input image composed of several input
+#' planes.
+#' 
+#' The transposed convolution operator multiplies each input value element-wise by a learnable kernel,
+#' and sums over the outputs from all input feature planes.
+#' 
+#' This module can be seen as the gradient of Conv3d with respect to its input.
+#' It is also known as a fractionally-strided convolution or
+#' a deconvolution (although it is not an actual deconvolution operation).
+#' 
+#' * `stride` controls the stride for the cross-correlation.
+#' * `padding` controls the amount of implicit zero-paddings on both
+#'   sides for ``dilation * (kernel_size - 1) - padding`` number of points. See note
+#'   below for details.
+#' * `output_padding` controls the additional size added to one side
+#'   of the output shape. See note below for details.
+#' * `dilation` controls the spacing between the kernel points; also known as the à trous algorithm.
+#'   It is harder to describe, but this `link`_ has a nice visualization of what `dilation` does.
+#' * `groups` controls the connections between inputs and outputs.
+#'   `in_channels` and `out_channels` must both be divisible by
+#'   `groups`. For example,
+#'   * At groups=1, all inputs are convolved to all outputs.
+#'   * At groups=2, the operation becomes equivalent to having two conv
+#'     layers side by side, each seeing half the input channels,
+#'     and producing half the output channels, and both subsequently
+#'     concatenated.
+#'   * At groups= `in_channels`, each input channel is convolved with
+#'     its own set of filters (of size
+#'     \eqn{\left\lfloor\frac{out\_channels}{in\_channels}\right\rfloor}).
+#' 
+#' The parameters `kernel_size`, `stride`, `padding`, `output_padding`
+#' can either be:
+#' 
+#' - a single ``int`` -- in which case the same value is used for the depth, height and width dimensions
+#' - a ``tuple`` of three ints -- in which case, the first `int` is used for the depth dimension,
+#' the second `int` for the height dimension and the third `int` for the width dimension
+#' 
+#' @note
+#' Depending of the size of your kernel, several (of the last)
+#' columns of the input might be lost, because it is a valid `cross-correlation`_,
+#' and not a full `cross-correlation`_.
+#' It is up to the user to add proper padding.
+#' 
+#' @note
+#' The `padding` argument effectively adds ``dilation * (kernel_size - 1) - padding``
+#' amount of zero padding to both sizes of the input. This is set so that
+#' when a `~torch.nn.Conv3d` and a `~torch.nn.ConvTranspose3d`
+#' are initialized with same parameters, they are inverses of each other in
+#' regard to the input and output shapes. However, when ``stride > 1``,
+#' `~torch.nn.Conv3d` maps multiple input shapes to the same output
+#' shape. `output_padding` is provided to resolve this ambiguity by
+#' effectively increasing the calculated output shape on one side. Note
+#' that `output_padding` is only used to find output shape, but does
+#' not actually add zero-padding to output.
+#' 
+#' @note
+#' In some circumstances when using the CUDA backend with CuDNN, this operator
+#' may select a nondeterministic algorithm to increase performance. If this is
+#' undesirable, you can try to make the operation deterministic (potentially at
+#' a performance cost) by setting ``torch.backends.cudnn.deterministic =
+#' TRUE``.
+#' 
+#' @param in_channels (int): Number of channels in the input image
+#' @param out_channels (int): Number of channels produced by the convolution
+#' @param kernel_size (int or tuple): Size of the convolving kernel
+#' @param stride (int or tuple, optional): Stride of the convolution. Default: 1
+#' @param padding (int or tuple, optional): ``dilation * (kernel_size - 1) - padding`` zero-padding
+#'   will be added to both sides of each dimension in the input. Default: 0
+#'   output_padding (int or tuple, optional): Additional size added to one side
+#'   of each dimension in the output shape. Default: 0
+#' @param groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
+#' @param bias (bool, optional): If ``True``, adds a learnable bias to the output. Default: ``True``
+#' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C_{in}, D_{in}, H_{in}, W_{in})}
+#' - Output: \eqn{(N, C_{out}, D_{out}, H_{out}, W_{out})} where
+#' \deqn{
+#'   D_{out} = (D_{in} - 1) \times \text{stride}[0] - 2 \times \text{padding}[0] + \text{dilation}[0]
+#' \times (\text{kernel\_size}[0] - 1) + \text{output\_padding}[0] + 1
+#' }
+#' \deqn{
+#'   H_{out} = (H_{in} - 1) \times \text{stride}[1] - 2 \times \text{padding}[1] + \text{dilation}[1]
+#' \times (\text{kernel\_size}[1] - 1) + \text{output\_padding}[1] + 1
+#' }
+#' \deqn{
+#'   W_{out} = (W_{in} - 1) \times \text{stride}[2] - 2 \times \text{padding}[2] + \text{dilation}[2]
+#' \times (\text{kernel\_size}[2] - 1) + \text{output\_padding}[2] + 1
+#' }
+#' 
+#' @section Attributes:
+#' - weight (Tensor): the learnable weights of the module of shape
+#'   \eqn{(\text{in\_channels}, \frac{\text{out\_channels}}{\text{groups}},}
+#'   \eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]}, \text{kernel\_size[2]})}.
+#'   The values of these weights are sampled from
+#'   \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
+#'   \eqn{k = \frac{groups}{C_\text{out} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+#' - bias (Tensor):   the learnable bias of the module of shape (out_channels)
+#'   If `bias` is ``True``, then the values of these weights are
+#'   sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
+#'   \eqn{k = \frac{groups}{C_\text{out} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+#' 
+#' @examples
+#' # With square kernels and equal stride
+#' m <- nn_conv_transpose3d(16, 33, 3, stride=2)
+#' # non-square kernels and unequal stride and with padding
+#' m <- nn_conv_transpose3d(16, 33, c(3, 5, 2), stride=c(2, 1, 1), padding=c(0, 4, 2))
+#' input <- torch_randn(20, 16, 10, 50, 100)
+#' output <- m(input)
+#' 
+#' @export
+nn_conv_transpose3d <- nn_module(
+  "nn_conv_transpose3d",
+  inherit = nn_conv_transpose_nd,
+  initialize = function(in_channels, out_channels, kernel_size, stride = 1,
+                        padding = 0, output_padding = 0, groups = 1, bias = TRUE,
+                        dilation = 1, padding_mode = 'zeros') {
+    
+    kernel_size <- nn_util_triple(kernel_size)
+    stride <- nn_util_triple(stride)
+    padding <- nn_util_triple(padding)
+    dilation <- nn_util_triple(dilation)
+    output_padding <- nn_util_triple(output_padding)
+    
+    super$initialize(
+      in_channels, out_channels, kernel_size, stride, padding, dilation,
+      TRUE, output_padding, groups, bias, padding_mode
+    )
+  },
+  forward = function(input, output_size = NULL) {
+    
+    if (self$padding_mode != "zeros")
+      value_error("Only `zeros` padding mode is supported for ConvTranspose3d")
+    
+    output_padding <- self$.output_padding(input, output_size, self$stride, 
+                                           self$padding, self$kernel_size)
+    
+    
+    nnf_conv_transpose3d(
+      input, self$weight, self$bias, self$stride, self$padding,
+      output_padding, self$groups, self$dilation
+    )
+  }
+)
