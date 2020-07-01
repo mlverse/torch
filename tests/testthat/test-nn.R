@@ -229,3 +229,26 @@ test_that("zero_grad", {
   expect_true(as_array(torch_all(net$norm$bias$grad == 0)))
   
 })
+
+test_that("index modules with integers", {
+  
+  Net <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 1)
+      self$norm <- nn_batch_norm1d(1)
+    },
+    forward = function(x) {
+      x <- self$linear(x)
+      x <- self$norm(x)
+      x
+    }
+  )
+  net <- Net()
+  
+  expect_equal_to_tensor(net[[1]]$weight, net$linear$weight)
+  
+  net <- nn_linear(10, 10)
+  
+  expect_error(net[[1]], "out of bounds")
+  
+})
