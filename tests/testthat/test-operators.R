@@ -1,3 +1,5 @@
+context("operators")
+
 test_that("+ works", {
   x <- torch_tensor(c(1,2,3,4))
   expect_equal_to_r(x + x, 2*c(1,2,3,4))

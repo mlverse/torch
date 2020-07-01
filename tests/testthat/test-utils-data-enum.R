@@ -1,3 +1,5 @@
+context("utils-data-enum")
+
 test_that("enumerate", {
   
   x <- torch_randn(100, 100)

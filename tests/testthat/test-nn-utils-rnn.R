@@ -1,3 +1,5 @@
+context("nn-utils-rnn")
+
 to_int <- function(x) {
   x$to(dtype = torch_int())
 }

@@ -1,3 +1,5 @@
+context("nn-linear")
+
 test_that("nn_linear", {
   
   linear <- nn_linear(10, 1)

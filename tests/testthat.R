@@ -86,8 +86,12 @@ PerformanceReporter <- R6::R6Class("PerformanceReporter",
                                        cat("\n")
                                        data <- data.frame(
                                          context = self$results$context,
-                                         time = self$results$time
+                                         time = self$results$time,
+                                         stringsAsFactors = FALSE
                                        )
+                                       
+                                       # handle cases where no context is given
+                                       data$context[which(is.na(data$context))] <- "empty"
                                        
                                        summary <- aggregate(time ~ context, data, sum)
                                        total <- sum(data$time)

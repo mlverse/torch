@@ -1,3 +1,5 @@
+context("dtype")
+
 test_that("Can create dtypes", {
   expect_s3_class(torch_float32(), "torch_dtype")
   expect_s3_class(torch_float(), "torch_dtype")

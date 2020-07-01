@@ -1,3 +1,5 @@
+context("r7")
+
 test_that("R7Class", {
   
   MyClass <- R7Class(

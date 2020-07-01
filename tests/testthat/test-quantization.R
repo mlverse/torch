@@ -1,3 +1,5 @@
+context("quantization")
+
 test_that("can create quantized tensors", {
   x <- torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8())
   expect_tensor(x)

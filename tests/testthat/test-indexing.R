@@ -1,3 +1,5 @@
+context("indexing")
+
 test_that("[ works", {
   x <- torch_randn(c(10,10,10))
   expect_equal(as_array(x[1,1,1]), as_array(x)[1,1,1])

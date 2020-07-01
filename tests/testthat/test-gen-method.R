@@ -1,3 +1,5 @@
+context("gen-method")
+
 test_that("__and__", {
   x <- torch_tensor(TRUE)
   y <- x$`__and__`(x)

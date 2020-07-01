@@ -1,3 +1,5 @@
+context("dataset-mnist")
+
 test_that("tests for the mnist dataset", {
   
   dir <- tempfile(fileext = "/")

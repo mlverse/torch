@@ -1,3 +1,5 @@
+context("device")
+
 test_that("Can create devices", {
   device <- torch_device("cuda")
   expect_equal(device$type, "cuda")

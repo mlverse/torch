@@ -1,3 +1,5 @@
+context("nn")
+
 test_that("nn_module", {
   my_net <- nn_module(
     "my_net",

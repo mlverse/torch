@@ -1,3 +1,5 @@
+context("autograd")
+
 test_that("can autograd", {
   x <- torch_tensor(c(1), requires_grad = TRUE)
   y <- 2 * x
