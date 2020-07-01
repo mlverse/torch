@@ -21,9 +21,11 @@ const char  * lantern_tensor_save (void* self)
     std::ostringstream oss;
     torch::save(t, oss);
 
-    auto str = new std::string(macaron::Base64::Encode(oss.str()));
+    auto str = std::string(macaron::Base64::Encode(oss.str()));
     
-    return str->c_str();
+    char *cstr = new char[str.length() + 1];
+    strcpy(cstr, str.c_str());
+    return cstr;
 }
 
 std::size_t lantern_tensor_serialized_size (const char * s)
