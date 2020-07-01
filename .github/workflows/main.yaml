@@ -52,7 +52,7 @@ jobs:
         run:  |
           R CMD build --no-build-vignettes .
           R CMD check --no-manual --no-multiarch --ignore-vignettes --no-tests torch*tar.gz
-        shell: cmd
+        shell: bash
       - name: Test
         run: |
           torch_package <- dir(".", full.names = TRUE, pattern = "torch_")
