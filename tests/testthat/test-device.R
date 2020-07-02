@@ -16,6 +16,11 @@ test_that("Can create devices", {
   device <- torch_device("cpu", 0)
   expect_equal(device$type, "cpu")
   expect_equal(device$index, 0)
+  
+  skip_if_cuda_not_available()
+  
+  x <- torch_tensor(1, device = torch_device("cuda:0"))
+  expect_equal(x$device()$type, "cuda")
 })
 
 test_that("use string to define the device", {

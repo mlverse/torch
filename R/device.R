@@ -14,7 +14,7 @@ Device <- R6::R6Class(
         if (!is.null(index))
           stop("type should not include an index because index was passed explicitly ", type)
         
-        spl <- strsplit("cuda:1", ":", fixed = TRUE)[[1]]
+        spl <- strsplit(type, ":", fixed = TRUE)[[1]]
         type <- spl[1]
         index <- as.integer(spl[2])
       }
