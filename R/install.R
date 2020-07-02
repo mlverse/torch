@@ -103,7 +103,7 @@ lantern_install_lib <- function(library_name, library_url, install_path, source_
   temp_file <- tempfile(fileext = library_extension)
   temp_path <- tempfile()
   
-  download.file(library_url, temp_file)
+  utils::download.file(library_url, temp_file)
   
   uncompress <- if (identical(library_extension, "tgz")) untar else unzip
   
