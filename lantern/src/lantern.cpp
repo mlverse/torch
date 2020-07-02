@@ -10,6 +10,11 @@
 
 std::string *pLanternLastError = NULL;
 
+const char* lanternVersion()
+{
+  return "0.1.0";
+}
+
 void lanternSetLastError(const char* error)
 {
   pLanternLastError = new std::string(error);

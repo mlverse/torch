@@ -43,6 +43,7 @@ extern "C"
 {
 #endif
 
+  LANTERN_API const char*(LANTERN_PTR lanternVersion)();
   LANTERN_API void(LANTERN_PTR lanternSetLastError)(const char*);
   LANTERN_API void(LANTERN_PTR lanternLastErrorClear)();
   LANTERN_API const char*(LANTERN_PTR lanternLastError)();
@@ -2073,6 +2074,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   if (!lanternLoadLibrary(libPath, pError))
     return false;
 
+  LOAD_SYMBOL(lanternVersion);
   LOAD_SYMBOL(lanternSetLastError);
   LOAD_SYMBOL(lanternLastErrorClear);
   LOAD_SYMBOL(lanternLastError);
