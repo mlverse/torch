@@ -8,6 +8,17 @@
 
 #include "utils.hpp"
 
+#include <easylogging++.h>
+INITIALIZE_EASYLOGGINGPP
+void lanternConfigure(bool verbose)
+{
+  el::Configurations defaultConf;
+  defaultConf.setToDefault();
+  defaultConf.setGlobally(el::ConfigurationType::Format, "%datetime %level Lantern(%thread): %msg");
+  defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
+  el::Loggers::reconfigureLogger("default", defaultConf);
+  
+}
 std::string *pLanternLastError = NULL;
 
 const char* lanternVersion()
