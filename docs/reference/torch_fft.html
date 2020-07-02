@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Fft — torch_fft" />
 <meta property="og:description" content="Fft" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -88,11 +91,16 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
     </li>
     <li>
       <a href="../articles/indexing.html">Indexing</a>
+    </li>
+    <li class="dropdown-header">Datasets</li>
+    <li>
+      <a href="../articles/loading-data.html">Loading Data</a>
     </li>
     <li class="dropdown-header">Autograd</li>
     <li>
@@ -125,7 +133,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/mlverse/torch">
+  <a href="https://github.com/mlverse/torch/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -217,375 +225,369 @@ shape of <code>input</code>.</p>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='fu'>torch_fft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   3.1269  0.9525
-#&gt;  -2.5551 -9.2671
-#&gt;  -0.3517 -3.9285
+#&gt;   0.6538  2.3902
+#&gt;  -0.0407 -2.1009
+#&gt;  -1.7075  0.2743
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.3474 -1.2334
-#&gt;  -4.5162  4.7339
-#&gt;   0.2207 -1.8316
+#&gt;  -7.3254 -4.1155
+#&gt;  -3.4979  4.6414
+#&gt;  -1.9202  6.4543
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   4.1118  2.3770
-#&gt;   4.5216  0.1284
-#&gt;   2.5540 -10.7896
+#&gt;   0.7929  2.8143
+#&gt;  -1.5744 -1.1399
+#&gt;   1.8256  0.9958
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   2.4745  5.5189
-#&gt;   4.1149  2.1041
-#&gt;  -2.7162 -7.8699
+#&gt;  -1.1778  4.2228
+#&gt;  -1.2220 -6.5910
+#&gt;  -4.3523 -0.8053
 #&gt; [ CPUFloatType{4,3,2} ]</div><div class='input'><span class='co'># batched 1D FFT</span>
 <span class='fu'>torch_fft</span>(<span class='no'>x</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   2.7652  1.9038
-#&gt;   0.3913 -0.5752
-#&gt;  -0.0733 -6.1049
+#&gt;  -1.7641  1.3280
+#&gt;  -1.5838 -1.2976
+#&gt;  -1.5386  1.7298
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.4418 -0.6379
-#&gt;  -2.4266 -4.5066
-#&gt;  -2.2360  2.4495
+#&gt;   2.0498 -1.6429
+#&gt;  -2.4247 -0.8092
+#&gt;  -2.6982  0.4276
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.8542 -0.2390
-#&gt;   0.5920 -3.9942
-#&gt;   1.1744 -1.2541
+#&gt;   2.4875  1.2743
+#&gt;   0.7762 -0.3228
+#&gt;   1.5976 -1.0947
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -1.9343 -0.0744
-#&gt;  -1.1117 -0.1911
-#&gt;   0.7832  0.9810
+#&gt;  -2.1193  1.4309
+#&gt;   3.1915  0.3287
+#&gt;   0.9316 -0.7884
 #&gt; [ CPUFloatType{4,3,2} ]</div><div class='input'><span class='co'># arbitrary number of batch dimensions, 2D FFT</span>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>2</span>))
 <span class='fu'>torch_fft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,1,1,.,.) = 
-#&gt;   -3.0607  -2.0808
-#&gt;   -0.7614  11.3993
-#&gt;   -9.7078  -1.1342
-#&gt;    5.3198  -1.8183
-#&gt;   -2.2561   1.1860
+#&gt;  -5.9427  2.3830
+#&gt;  -0.9876  3.9555
+#&gt;  -7.3313  3.1490
+#&gt;   4.2801 -8.8746
+#&gt;  -7.3879  5.3391
 #&gt; 
 #&gt; (2,1,1,.,.) = 
-#&gt;   5.9581  5.6764
-#&gt;  -0.7409  5.7791
-#&gt;  -2.2354 -3.3075
-#&gt;   1.5357 -5.2179
-#&gt;  -0.4934 -10.6985
+#&gt;    4.5545   3.1398
+#&gt;    6.6397  12.7704
+#&gt;  -11.8139  -3.3971
+#&gt;   -6.0994   3.0087
+#&gt;    0.8275   1.3478
 #&gt; 
 #&gt; (3,1,1,.,.) = 
-#&gt;   5.6713 -1.4706
-#&gt;   7.7647  0.3945
-#&gt;   1.7536 -2.3804
-#&gt;  -2.7693 -1.4015
-#&gt;   7.3998  7.8926
+#&gt;   -0.1075   2.4478
+#&gt;   -6.8575   1.1242
+#&gt;   -6.0275   3.7266
+#&gt;    4.3421  11.8535
+#&gt;   -1.6037   7.5695
 #&gt; 
 #&gt; (1,2,1,.,.) = 
-#&gt;  -7.3846  1.0945
-#&gt;   2.6440 -0.0749
-#&gt;   0.8468  0.6714
-#&gt;   2.8560 -0.5236
-#&gt;   4.6443 -11.6895
+#&gt;   2.8736 -2.1080
+#&gt;   1.0969 -7.3034
+#&gt;   9.1364 -0.4367
+#&gt;   2.2691 -3.3444
+#&gt;  -4.3820 -4.2208
 #&gt; 
 #&gt; (2,2,1,.,.) = 
-#&gt;  -2.6286  4.1849
-#&gt;   0.0714  9.0369
-#&gt;   2.2322  3.0162
-#&gt;  -6.9693  3.6747
-#&gt;   2.1045  5.4243
+#&gt;  -0.9118  4.7446
+#&gt;   1.1206  7.9196
+#&gt;   1.6641  0.7576
+#&gt;   3.0925  1.1970
+#&gt;   8.5249 -1.4439
 #&gt; 
 #&gt; (3,2,1,.,.) = 
-#&gt;   12.0462  -0.1237
-#&gt;    6.1222   4.7002
-#&gt;    2.4700   9.5251
-#&gt;   -2.4001   6.1526
-#&gt;    6.2922  -4.2304
+#&gt;   4.8518  0.1233
+#&gt;  -6.2846  7.4662
+#&gt;  -1.7859  6.2408
+#&gt;   1.5846 -0.8276
+#&gt;   1.2933 -3.6956
 #&gt; 
 #&gt; (1,3,1,.,.) = 
-#&gt;   7.1441  1.4981
-#&gt;  -4.1623 -0.3252
-#&gt;   2.9155 -1.5450
-#&gt;   7.9392 -1.9687
-#&gt;  -2.3094  0.0935
+#&gt;   -2.0138  -1.6578
+#&gt;   -4.5817  -4.3853
+#&gt;   -4.8263  -1.1006
+#&gt;    1.6396  -3.9959
+#&gt;    0.3164  18.2475
 #&gt; 
 #&gt; (2,3,1,.,.) = 
-#&gt;  -0.9630 -6.0835
-#&gt;   0.4546 -6.4689
-#&gt;  -0.0282 -9.4388
-#&gt;  -7.4903 -1.5077
-#&gt;   1.7163 -6.8045
+#&gt;    7.8291   2.7374
+#&gt;   -5.7064  -9.9621
+#&gt;   -2.8155  -0.1657
+#&gt;   -3.9620  12.4611
+#&gt;    3.4435   3.2326
 #&gt; 
 #&gt; (3,3,1,.,.) = 
-#&gt;  -8.3626  2.2797
-#&gt;   3.1811 -3.3831
-#&gt;   4.2462  2.6255
-#&gt;  -3.0474  6.3158
-#&gt;   6.0139  3.5483
+#&gt;   4.4183  3.6809
+#&gt;   3.2348 -0.1091
+#&gt;   6.8238 -4.1220
+#&gt;  -4.5586 -7.4389
+#&gt;   5.1245 -2.3675
 #&gt; 
 #&gt; (1,1,2,.,.) = 
-#&gt;   1.6137  2.7773
-#&gt;   0.8053  2.4957
-#&gt;   2.0098  4.0531
-#&gt;   7.1536 -4.0740
-#&gt;   0.5047 -3.4478
+#&gt;   9.7920  0.6806
+#&gt;  -0.3190 -3.7368
+#&gt;   0.7023 -0.9383
+#&gt;   4.7008 -1.5883
+#&gt;  -3.9566  3.6726
 #&gt; 
 #&gt; (2,1,2,.,.) = 
-#&gt;    6.9573  15.8894
-#&gt;   -2.4017  -1.8492
-#&gt;    6.6191  -0.4522
-#&gt;    0.2472   0.4819
-#&gt;    2.7057   4.7820
+#&gt;  -3.0512  1.9221
+#&gt;  -0.2157  0.0452
+#&gt;  -2.9183 -4.3607
+#&gt;   8.7492  7.3246
+#&gt;   1.5165  9.6445
 #&gt; 
 #&gt; (3,1,2,.,.) = 
-#&gt;  -5.5708 -0.4651
-#&gt;  -3.3221 -7.2540
-#&gt;   4.7071  8.4420
-#&gt;  -1.0274  5.4142
-#&gt;  -6.8729 -0.6304
+#&gt;   -0.0073  -0.8282
+#&gt;   -0.6035  -5.8420
+#&gt;   12.4597  -2.4005
+#&gt;    2.2515  11.3698
+#&gt;    4.6597   4.6143
 #&gt; 
 #&gt; (1,2,2,.,.) = 
-#&gt;   1.1419  4.0883
-#&gt;  -4.2120  4.7751
-#&gt;  -0.8735 -2.5643
-#&gt;  -2.3289  0.6712
-#&gt;  -3.3304  4.8199
+#&gt;  -1.2314 -3.1506
+#&gt;   1.3068  1.5538
+#&gt;   8.0836 -3.6069
+#&gt;   0.0689  7.7218
+#&gt;   1.6400  7.3772
 #&gt; 
 #&gt; (2,2,2,.,.) = 
-#&gt;  -0.5676  9.9439
-#&gt;  -3.4647  4.7481
-#&gt;  -1.3951  0.8998
-#&gt;   5.0574 -4.5266
-#&gt;  -6.7789 -1.1194
+#&gt;   7.2325 -3.6465
+#&gt;   6.0541 -4.9124
+#&gt;  -2.4519  2.3710
+#&gt;  -9.0196  8.2937
+#&gt;  -6.5627 -7.3668
 #&gt; 
 #&gt; (3,2,2,.,.) = 
-#&gt;   3.8036  6.1886
-#&gt;  -7.1878  3.4328
-#&gt;   1.1591  3.7105
-#&gt;  -7.5438  0.0551
-#&gt;   8.2602  9.0398
+#&gt;   4.8670  9.0995
+#&gt;   0.0583  4.9745
+#&gt;   3.3052 -2.3065
+#&gt;  -1.0784 -3.5113
+#&gt;  -1.3564 -2.9838
 #&gt; 
 #&gt; (1,3,2,.,.) = 
-#&gt;  -5.2171 -13.2233
-#&gt;  -2.0567 -1.1374
-#&gt;   4.2039 -1.5208
-#&gt;   1.9455 -4.7267
-#&gt;   9.0767 -4.1536
+#&gt;   0.1958 -0.7882
+#&gt;  -2.9442 -4.7447
+#&gt;  -0.6995 -5.9500
+#&gt;  -4.5564 -0.7496
+#&gt;   5.6657 -3.0886
 #&gt; 
 #&gt; (2,3,2,.,.) = 
-#&gt;   3.7466 -4.5032
-#&gt;   1.4704 -2.0007
-#&gt;  -1.9988 -0.1092
-#&gt;  -4.4596 -0.3324
-#&gt;   2.1152 -13.2775
+#&gt;   7.0723 -4.2332
+#&gt;   7.6992 -0.9180
+#&gt;   2.7281 -8.0427
+#&gt;   5.9747  1.6752
+#&gt;  -2.7002 -0.1596
 #&gt; 
 #&gt; (3,3,2,.,.) = 
-#&gt;   -3.3043   0.5113
-#&gt;   -2.8777   4.2746
-#&gt;   -3.3955   1.7092
-#&gt;    9.2973  10.1919
-#&gt;   -1.5666   2.8480
+#&gt;   5.7039  1.1480
+#&gt;   2.7226  3.4380
+#&gt;  -4.1206  0.7478
+#&gt;  -1.0942 -2.8951
+#&gt;  -1.4779  1.0268
 #&gt; 
 #&gt; (1,1,3,.,.) = 
-#&gt;    0.3320   4.6616
-#&gt;    0.8167   2.9600
-#&gt;    0.4455   4.4140
-#&gt;   -1.3307  10.8842
-#&gt;   -9.4580   1.1702
+#&gt;   7.1011 -0.2380
+#&gt;  -3.5223  3.5401
+#&gt;   5.7742  1.4789
+#&gt;  -4.6115  2.6932
+#&gt;  -2.7191 -4.2168
 #&gt; 
 #&gt; (2,1,3,.,.) = 
-#&gt;   -1.8528   7.6680
-#&gt;    8.2839  14.2152
-#&gt;    2.9796  -3.5969
-#&gt;   -1.7270   1.0632
-#&gt;    0.1975  -0.5567
+#&gt;  -5.7986  6.4509
+#&gt;  -5.6827 -6.2617
+#&gt;  -4.3300  2.0698
+#&gt;   6.8867 -2.4145
+#&gt;   9.1154  3.2265
 #&gt; 
 #&gt; (3,1,3,.,.) = 
-#&gt;  -0.7397  2.4980
-#&gt;  -2.3425  1.0752
-#&gt;  -1.2656 -9.2947
-#&gt;  -7.2362 -3.9018
-#&gt;   5.9827  2.7699
+#&gt;   2.4795  1.2525
+#&gt;   5.3633 -4.1375
+#&gt;  -2.7429 -0.0403
+#&gt;   1.9457  1.0570
+#&gt;   0.7156 -1.8286
 #&gt; 
 #&gt; (1,2,3,.,.) = 
-#&gt;  -15.5498   1.0546
-#&gt;    1.3051   0.4347
-#&gt;   -1.4093   7.5153
-#&gt;   -6.1192   4.7335
-#&gt;   -4.9058  -4.5730
+#&gt;  -0.0121 -3.2482
+#&gt;  -2.3066  3.7388
+#&gt;  -8.0017  3.0797
+#&gt;   6.7179  4.0203
+#&gt;  -2.2814 -5.3970
 #&gt; 
 #&gt; (2,2,3,.,.) = 
-#&gt;  -3.6604  1.9234
-#&gt;  -0.8458 -0.4348
-#&gt;  -1.8828  3.6361
-#&gt;   1.8287 -1.8895
-#&gt;   2.6902 -5.2685
+#&gt;   0.6086 -5.4349
+#&gt;   3.6174  2.9092
+#&gt;  -7.8689 -13.5817
+#&gt;  -6.2091 -1.2536
+#&gt;  -0.3103  7.7553
 #&gt; 
 #&gt; (3,2,3,.,.) = 
-#&gt;  -1.3802 -0.7002
-#&gt;   2.3379  2.1387
-#&gt;   0.3050 -2.9317
-#&gt;   8.0050 -0.7583
-#&gt;  -5.9590 -1.9482
+#&gt;  -10.8803   3.3297
+#&gt;   -6.5093  -1.5097
+#&gt;   -8.7847  -4.2053
+#&gt;  -11.8536  -7.2926
+#&gt;   -7.0811  -8.0697
 #&gt; 
 #&gt; (1,3,3,.,.) = 
-#&gt;   6.9329  6.3405
-#&gt;   3.6646 -13.5643
-#&gt;  -2.9506  5.9330
-#&gt;  -2.8361 -7.1243
-#&gt;   0.7209 -3.3815
+#&gt;  -2.9286  6.8577
+#&gt;   3.9069  0.3475
+#&gt;   0.2377 -3.9633
+#&gt;   7.2230  9.0634
+#&gt;   6.9915  5.3864
 #&gt; 
 #&gt; (2,3,3,.,.) = 
-#&gt;   1.5262  2.7090
-#&gt;   5.2327  2.3287
-#&gt;   6.2155 -2.0571
-#&gt;  -4.2310 -4.1960
-#&gt;   3.1807  2.8638
+#&gt;  -0.5471  3.3024
+#&gt;   5.6635  0.4806
+#&gt;   9.6620  8.0607
+#&gt;  -1.2398  1.4398
+#&gt;   1.1879  4.9579
 #&gt; 
 #&gt; (3,3,3,.,.) = 
-#&gt;   0.5015  2.4013
-#&gt;   9.8059 -7.5275
-#&gt;  -0.3134  3.5004
-#&gt;   2.5308  1.6895
-#&gt;   7.3772 -7.0387
+#&gt;    7.0490   9.4731
+#&gt;   -2.1840   7.1841
+#&gt;    1.6218   0.4988
+#&gt;   12.1390  10.0518
+#&gt;  -10.0381   3.5385
 #&gt; 
 #&gt; (1,1,4,.,.) = 
-#&gt;  -13.6532   4.4051
-#&gt;  -10.4147   5.0181
-#&gt;   -1.1286   1.7529
-#&gt;    2.8230  -5.6151
-#&gt;   -7.9838  -2.6413
+#&gt;  -9.0473 -4.1510
+#&gt;   4.4224 -11.9244
+#&gt;   0.2593  5.7600
+#&gt;   5.8278  2.6686
+#&gt;  -3.3019 -3.9117
 #&gt; 
 #&gt; (2,1,4,.,.) = 
-#&gt;    4.0084   7.7560
-#&gt;   -0.2307  -0.0883
-#&gt;    4.3662  10.6252
-#&gt;   -2.3291  -0.1440
-#&gt;    1.5278   0.1987
+#&gt;   0.3849  3.7750
+#&gt;   4.9458 -3.1538
+#&gt;   7.8825 -1.8965
+#&gt;   0.3016 -0.8280
+#&gt;  -1.3189 -2.3694
 #&gt; 
 #&gt; (3,1,4,.,.) = 
-#&gt;  -9.1532 -6.4304
-#&gt;   6.9663 -1.3172
-#&gt;  -3.9041 -5.8065
-#&gt;   0.3933 -2.6468
-#&gt;   8.6516  4.8018
+#&gt;  -2.7014 -5.1757
+#&gt;   3.8298 -5.0397
+#&gt;  -2.6360 -0.4463
+#&gt;  -4.8332  3.6021
+#&gt;   3.3230 -1.7663
 #&gt; 
 #&gt; (1,2,4,.,.) = 
-#&gt;  -0.3304  5.5103
-#&gt;  -10.1824  6.2636
-#&gt;   2.9708 -8.4041
-#&gt;  -10.9114 -7.5795
-#&gt;  -2.4482 -5.0504
+#&gt;   8.1613 -2.2573
+#&gt;  -3.2551  1.3833
+#&gt;   4.3634  6.3142
+#&gt;   0.5248 -7.8280
+#&gt;   0.8889 -3.6975
 #&gt; 
 #&gt; (2,2,4,.,.) = 
-#&gt;  -8.0483  0.7491
-#&gt;  -5.7506 -2.1713
-#&gt;   2.0948  6.2371
-#&gt;  -4.2344 -0.3634
-#&gt;  -5.2435 -3.3073
+#&gt;   2.2364  3.2553
+#&gt;   3.8263  3.7596
+#&gt;  -3.3828  1.5186
+#&gt;   0.7146 -5.7372
+#&gt;  -3.8133 -0.6495
 #&gt; 
 #&gt; (3,2,4,.,.) = 
-#&gt;   4.8102  5.9549
-#&gt;   0.1113  4.5301
-#&gt;   7.1013  5.4995
-#&gt;  -4.5926 -3.2111
-#&gt;   6.9338  6.1466
+#&gt;  -10.9589   5.8050
+#&gt;   -5.3726   5.7243
+#&gt;    4.5528  -6.0136
+#&gt;    7.4999  -0.2582
+#&gt;    3.3877   6.1032
 #&gt; 
 #&gt; (1,3,4,.,.) = 
-#&gt;    6.1493   4.0264
-#&gt;    1.4464  13.3106
-#&gt;    1.6339   6.9375
-#&gt;    2.8700   6.0982
-#&gt;   -1.5679   1.1448
+#&gt;   0.7270  6.1670
+#&gt;  -6.5006 -5.9085
+#&gt;   2.4775  1.7599
+#&gt;  -3.6453  4.0545
+#&gt;   5.4839  1.2570
 #&gt; 
 #&gt; (2,3,4,.,.) = 
-#&gt;   2.6702  3.4808
-#&gt;   6.4623  4.0797
-#&gt;   1.3476  4.3666
-#&gt;  -3.1097 -6.0254
-#&gt;   0.4799 -3.6648
+#&gt;  -6.8501 -5.9425
+#&gt;   1.7361  1.2303
+#&gt;  -0.0090  2.3497
+#&gt;  -1.8686 -0.6607
+#&gt;   2.4513 -1.8840
 #&gt; 
 #&gt; (3,3,4,.,.) = 
-#&gt;   3.7527  5.6061
-#&gt;  -2.6108  2.9753
-#&gt;  -4.2929 -6.6872
-#&gt;   3.3525 -9.4171
-#&gt;  -5.5593 -3.8154
+#&gt;   5.9438 -1.2280
+#&gt;  -8.8390  9.0097
+#&gt;   2.8616 -1.3395
+#&gt;  -9.2470  0.0511
+#&gt;  -0.1519 -1.3970
 #&gt; 
 #&gt; (1,1,5,.,.) = 
-#&gt;  -6.2914 -3.7980
-#&gt;  -0.1560  2.0582
-#&gt;  -1.9810  0.4032
-#&gt;   2.8557  3.1879
-#&gt;  -7.8761  5.1946
+#&gt;  -3.3137  1.7789
+#&gt;   2.6371  2.7102
+#&gt;   4.4069 -4.4288
+#&gt;  -3.4736  1.9758
+#&gt;  -4.3432 -4.9600
 #&gt; 
 #&gt; (2,1,5,.,.) = 
-#&gt;  -1.4126  1.8956
-#&gt;   6.4759 -3.8589
-#&gt;   7.1188 -1.0978
-#&gt;  -5.6880  1.9322
-#&gt;  -6.6137 -5.2791
+#&gt;  -2.1086 -0.6690
+#&gt;  -3.5679 -1.3710
+#&gt;  -3.9918 -4.4313
+#&gt;   3.3377 -1.4201
+#&gt;   4.3771  2.7254
 #&gt; 
 #&gt; (3,1,5,.,.) = 
-#&gt;   0.3488 -3.0268
-#&gt;   2.4352 -3.3522
-#&gt;   9.2019 -6.0556
-#&gt;  -2.2342 -1.8149
-#&gt;   2.2566 -1.4601
+#&gt;  -9.5478  4.2810
+#&gt;  -5.3256 -5.4435
+#&gt;   1.0563 -2.9631
+#&gt;   3.6469 -2.4466
+#&gt;   2.9408  6.8321
 #&gt; 
 #&gt; (1,2,5,.,.) = 
-#&gt;  -2.9594 -1.2969
-#&gt;   2.0627 -1.3316
-#&gt;   3.2959  2.1453
-#&gt;   4.5162 -6.4966
-#&gt;  -7.8497  5.9245
+#&gt;  -3.1676  4.9672
+#&gt;   5.1714  2.4288
+#&gt;   0.3678  5.9836
+#&gt;  -1.7141  3.7235
+#&gt;  -5.0729 -2.1338
 #&gt; 
 #&gt; (2,2,5,.,.) = 
-#&gt;  -6.4284  7.8053
-#&gt;   1.0767 -1.3863
-#&gt;   8.8502  8.3183
-#&gt;   0.7857  1.9681
-#&gt;  -3.2123 -1.1060
+#&gt;   3.2250  3.2594
+#&gt;   1.1617 -3.0566
+#&gt;  -1.8365 -0.7719
+#&gt;  -0.5639 -2.4706
+#&gt;   5.6257  9.9585
 #&gt; 
 #&gt; (3,2,5,.,.) = 
-#&gt;  -3.9549 -5.9318
-#&gt;   1.7523  2.4051
-#&gt;   3.3194  5.8822
-#&gt;   0.0958  5.6401
-#&gt;  -0.5973  1.8942
+#&gt;  -0.1548 -9.0428
+#&gt;   0.6164 -2.1338
+#&gt;  -2.3196  1.0116
+#&gt;   6.2667 -8.7648
+#&gt;  -6.9029 -2.2244
 #&gt; 
 #&gt; (1,3,5,.,.) = 
-#&gt;   0.6352  1.7775
-#&gt;  -1.8487 -0.7606
-#&gt;   4.7322  8.5498
-#&gt;  -0.2256  0.7480
-#&gt;  -8.2643 -1.3865
+#&gt;   6.4957 -2.0517
+#&gt;   0.6094 -3.5123
+#&gt;  -4.1952 -8.5566
+#&gt;   4.5907 -4.7177
+#&gt;  -7.8233 -2.9789
 #&gt; 
 #&gt; (2,3,5,.,.) = 
-#&gt;   1.4332  0.5647
-#&gt;   3.8933  7.6698
-#&gt;  -9.0813  0.8803
-#&gt;  -0.8624  1.6519
-#&gt;   3.8879  2.2301
+#&gt;   1.4311 -0.1023
+#&gt;  -1.5866  3.9124
+#&gt;   3.7206 -2.0941
+#&gt;  -13.1653  5.1716
+#&gt;  -0.5996  7.7850
 #&gt; 
 #&gt; (3,3,5,.,.) = 
-#&gt;  -6.1772 -0.0762
-#&gt;   4.7082  2.9675
-#&gt;   3.5757 -5.9739
-#&gt;  -0.3279  1.5277
-#&gt;  -4.3354 -0.5859
+#&gt;   0.8066 -1.9938
+#&gt;  -10.3948  0.4750
+#&gt;  -6.6004  6.0039
+#&gt;   0.0750  6.6125
+#&gt;  -1.6083 -0.2164
 #&gt; [ CPUFloatType{3,3,5,5,2} ]</div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#fft-input-signal-ndim-normalized-false-gt-tensor-">fft(input, signal_ndim, normalized=False) -&gt; Tensor </a></li>
-      <li><a href="#warning">Warning</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -596,7 +598,7 @@ shape of <code>input</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

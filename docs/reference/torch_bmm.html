@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Bmm — torch_bmm" />
 <meta property="og:description" content="Bmm" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -88,11 +91,16 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
     </li>
     <li>
       <a href="../articles/indexing.html">Indexing</a>
+    </li>
+    <li class="dropdown-header">Datasets</li>
+    <li>
+      <a href="../articles/loading-data.html">Loading Data</a>
     </li>
     <li class="dropdown-header">Autograd</li>
     <li>
@@ -125,7 +133,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/mlverse/torch">
+  <a href="https://github.com/mlverse/torch/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -197,65 +205,60 @@ $$</p>
 <span class='no'>res</span> <span class='kw'>=</span> <span class='fu'>torch_bmm</span>(<span class='no'>input</span>, <span class='no'>mat2</span>)
 <span class='no'>res</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.4810 -3.8862 -0.6360  4.7232  3.4954
-#&gt;  -0.1906 -2.9850 -2.3733  3.4274  0.9894
-#&gt;   1.3230 -0.0257 -3.4623 -0.3454  1.8202
+#&gt;   1.1745  1.9056 -0.9863 -2.3934 -1.3069
+#&gt;   1.3692  0.3791 -0.0341 -0.2138  1.0240
+#&gt;   2.0640  1.6461 -1.3174 -0.6458  1.1465
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.3136  1.2998  0.1779  1.7448  2.9434
-#&gt;   1.4301  2.4857 -1.0745  2.4742  3.4763
-#&gt;   0.1725  2.4205 -2.6732  2.0590  3.4500
+#&gt;  -1.4357 -1.6141 -0.5452  0.4601 -0.9672
+#&gt;  -2.1103  0.4079 -0.5910 -0.9853 -1.3962
+#&gt;  -3.0251 -1.8102 -0.1124 -0.3983  0.0524
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -1.1241  0.6023 -1.5348 -2.1619 -2.8092
-#&gt;   0.5506 -0.3041 -0.1659  0.9251  2.2883
-#&gt;  -0.3035 -3.2013 -0.4295  2.2507  3.9028
+#&gt;   0.0590 -3.0489 -1.6948 -1.6117 -2.8706
+#&gt;   2.5704 -1.8781  1.7294 -0.6041  0.9296
+#&gt;  -4.3975 -0.0287 -2.2884 -4.4353 -0.5809
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   0.1065  1.4173  1.1992 -0.0503 -0.1201
-#&gt;  -0.1524 -0.9645 -6.1269 -1.2613  3.2294
-#&gt;   0.2087  0.9056 -0.1299 -3.4663 -2.7709
+#&gt;   -1.9596  -0.3429   2.3779   0.2105   3.2258
+#&gt;   -1.0426  -0.7531   0.4453  -1.0624  12.3185
+#&gt;    0.7665  -1.6109   0.2223  -0.6109   0.1197
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -0.4655 -1.1896  0.0018 -0.0180  0.5612
-#&gt;  -1.2008  2.5886  0.4804 -1.6062  1.8784
-#&gt;   0.0711  2.3897  0.7693 -0.7885  1.1344
+#&gt;  -1.5448 -1.1669  0.8417 -0.3208  0.3590
+#&gt;   0.5674  1.3536 -0.9211 -2.3607 -0.1648
+#&gt;   0.1414 -0.8032 -0.0501  2.5116 -0.2105
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;  -1.0970  1.3536  1.0811 -1.9103  2.6837
-#&gt;   2.7371  0.5648 -0.9161 -4.1339  3.9011
-#&gt;  -0.7459  2.3405 -0.5041 -0.7489  2.8337
+#&gt;  -0.6188 -0.3471 -0.0005  0.2015  1.3495
+#&gt;   0.8262 -1.8843 -0.7714 -2.0338  0.1879
+#&gt;   0.8399  0.5305 -1.2765 -0.1254 -1.1123
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;  -1.5387  0.2769 -1.6734 -0.6808  0.6839
-#&gt;  -2.4320  6.8926  2.8228  0.5861  1.0656
-#&gt;   4.7034 -5.1779  0.4174  0.1485 -2.7007
+#&gt;  -0.2501 -2.8244 -1.4297  0.0888 -2.9237
+#&gt;  -1.1889  0.1134 -0.0686  0.1014  0.7825
+#&gt;   0.1186  1.1271  0.0892  1.0449  0.6209
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;  -0.1557 -0.3498 -1.7397 -3.6324  2.9935
-#&gt;  -1.2862 -0.5034 -1.7978 -2.2431  1.1642
-#&gt;   7.4131 -0.8078  0.5200 -0.4595  0.2365
+#&gt;  -1.0997 -2.1891 -1.8006 -3.0030  2.7693
+#&gt;   1.4913  0.3336  0.2121  0.0021 -4.9589
+#&gt;   0.0988  0.3188 -0.0340  1.2144 -0.0815
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;  -3.3582 -1.0544  1.6696  0.9335 -0.8285
-#&gt;  -0.5341 -0.6120 -0.1374  0.7783  1.8157
-#&gt;   4.8516 -0.1463  0.0206  6.9989 -0.5377
+#&gt;   1.4224 -0.2146 -0.7632 -1.9639  2.1865
+#&gt;  -2.4053  0.2016  2.2731  3.3917  0.3603
+#&gt;  -2.7371  0.2854  2.9043  3.4133  2.6291
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;   0.0379  0.7356  0.2464 -1.9521 -2.7243
-#&gt;   0.4943  1.2687  1.0980 -3.8939 -2.3259
-#&gt;   0.4141 -3.4522 -3.7885  3.2081 -0.2202
+#&gt;  -1.1746 -1.4925 -2.7750  1.3687 -1.1787
+#&gt;  -0.0823 -0.5667 -0.7986  0.8820 -0.4830
+#&gt;   2.1016  0.6070  1.3933 -1.8003 -0.4758
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#bmm-input-mat-out-none-gt-tensor-">bmm(input, mat2, out=None) -&gt; Tensor </a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -266,7 +269,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

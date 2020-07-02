@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Rfft — torch_rfft" />
 <meta property="og:description" content="Rfft" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -88,11 +91,16 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
     </li>
     <li>
       <a href="../articles/indexing.html">Indexing</a>
+    </li>
+    <li class="dropdown-header">Datasets</li>
+    <li>
+      <a href="../articles/loading-data.html">Loading Data</a>
     </li>
     <li class="dropdown-header">Autograd</li>
     <li>
@@ -125,7 +133,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/mlverse/torch">
+  <a href="https://github.com/mlverse/torch/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -222,76 +230,70 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.7981  0.0000
-#&gt;   0.6722 -2.6845
-#&gt;   5.2374 -1.3287
+#&gt;   3.9069  0.0000
+#&gt;   6.1332 -7.1960
+#&gt;   1.1799  3.1917
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.7845 -1.1174
-#&gt;   8.4891 -3.9620
-#&gt;   3.0784 -4.7354
+#&gt;   2.7608 -2.5656
+#&gt;   2.9372  2.4412
+#&gt;  -5.0360  5.2319
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   2.7803  2.9670
-#&gt;   2.6271  5.7163
-#&gt;  -0.6144 -7.1863
+#&gt;   2.1129 -2.5218
+#&gt;   0.5721  0.4728
+#&gt;   2.7971  4.8230
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   2.7803 -2.9670
-#&gt;  -0.8117 -3.2777
-#&gt;   2.0968 -1.9049
+#&gt;   2.1129  2.5218
+#&gt;   0.2330  3.8823
+#&gt;   7.7532  0.6730
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   1.7845  1.1174
-#&gt;  -4.0628 -2.2012
-#&gt;   1.9542 -3.9232
+#&gt;   2.7608  2.5656
+#&gt;   0.6659 -0.7688
+#&gt;  -1.2298  7.1500
 #&gt; [ CPUFloatType{5,3,2} ]</div><div class='input'><span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.7981  0.0000
-#&gt;   0.6722 -2.6845
-#&gt;   5.2374 -1.3287
-#&gt;   5.2374  1.3287
-#&gt;   0.6722  2.6845
+#&gt;   3.9069  0.0000
+#&gt;   6.1332 -7.1960
+#&gt;   1.1799  3.1917
+#&gt;   1.1799 -3.1917
+#&gt;   6.1332  7.1960
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.7845 -1.1174
-#&gt;   8.4891 -3.9620
-#&gt;   3.0784 -4.7354
-#&gt;   1.9542  3.9232
-#&gt;  -4.0628  2.2012
+#&gt;   2.7608 -2.5656
+#&gt;   2.9372  2.4412
+#&gt;  -5.0360  5.2319
+#&gt;  -1.2298 -7.1500
+#&gt;   0.6659  0.7688
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   2.7803  2.9670
-#&gt;   2.6271  5.7163
-#&gt;  -0.6144 -7.1863
-#&gt;   2.0968  1.9049
-#&gt;  -0.8117  3.2777
+#&gt;   2.1129 -2.5218
+#&gt;   0.5721  0.4728
+#&gt;   2.7971  4.8230
+#&gt;   7.7532 -0.6730
+#&gt;   0.2330 -3.8823
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   2.7803 -2.9670
-#&gt;  -0.8117 -3.2777
-#&gt;   2.0968 -1.9049
-#&gt;  -0.6144  7.1863
-#&gt;   2.6271 -5.7163
+#&gt;   2.1129  2.5218
+#&gt;   0.2330  3.8823
+#&gt;   7.7532  0.6730
+#&gt;   2.7971 -4.8230
+#&gt;   0.5721 -0.4728
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   1.7845  1.1174
-#&gt;  -4.0628 -2.2012
-#&gt;   1.9542 -3.9232
-#&gt;   3.0784  4.7354
-#&gt;   8.4891  3.9620
+#&gt;   2.7608  2.5656
+#&gt;   0.6659 -0.7688
+#&gt;  -1.2298  7.1500
+#&gt;  -5.0360 -5.2319
+#&gt;   2.9372 -2.4412
 #&gt; [ CPUFloatType{5,5,2} ]</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#rfft-input-signal-ndim-normalized-false-onesided-true-gt-tensor-">rfft(input, signal_ndim, normalized=False, onesided=True) -&gt; Tensor </a></li>
-      <li><a href="#warning">Warning</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -302,7 +304,7 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

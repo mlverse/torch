@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Cosine_similarity — torch_cosine_similarity" />
 <meta property="og:description" content="Cosine_similarity" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -88,11 +91,16 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
     </li>
     <li>
       <a href="../articles/indexing.html">Indexing</a>
+    </li>
+    <li class="dropdown-header">Datasets</li>
+    <li>
+      <a href="../articles/loading-data.html">Loading Data</a>
     </li>
     <li class="dropdown-header">Autograd</li>
     <li>
@@ -125,7 +133,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/mlverse/torch">
+  <a href="https://github.com/mlverse/torch/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -190,116 +198,112 @@ $$</p>
 <span class='no'>input2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>128</span>))
 <span class='no'>output</span> <span class='kw'>=</span> <span class='fu'>torch_cosine_similarity</span>(<span class='no'>input1</span>, <span class='no'>input2</span>)
 <span class='no'>output</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1569
-#&gt;  0.1006
-#&gt;  0.0153
+#&gt;  0.0263
+#&gt; -0.0763
 #&gt;  0.0789
-#&gt;  0.1126
-#&gt;  0.0797
-#&gt;  0.0259
-#&gt; -0.0052
-#&gt;  0.1218
-#&gt;  0.0131
-#&gt; -0.0693
-#&gt; -0.1339
-#&gt; -0.0372
-#&gt; -0.0876
-#&gt;  0.1678
-#&gt; -0.0871
-#&gt; -0.0124
-#&gt;  0.0135
-#&gt;  0.0111
-#&gt; -0.0506
-#&gt;  0.0127
-#&gt; -0.0708
-#&gt;  0.0137
-#&gt;  0.0140
-#&gt;  0.0780
-#&gt;  0.1152
-#&gt; -0.0042
-#&gt; -0.0594
-#&gt;  0.0262
-#&gt; -0.2342
-#&gt;  0.1262
-#&gt; -0.0988
-#&gt; -0.0387
-#&gt;  0.0286
-#&gt;  0.0143
-#&gt;  0.0216
-#&gt;  0.1066
-#&gt; -0.0184
-#&gt;  0.0295
-#&gt; -0.0732
-#&gt; -0.1372
-#&gt; -0.0231
-#&gt; -0.0352
-#&gt; -0.0515
-#&gt;  0.2235
-#&gt; -0.1587
-#&gt; -0.1000
-#&gt; -0.0332
-#&gt; -0.0116
-#&gt;  0.1577
-#&gt; -0.1124
-#&gt; -0.0848
-#&gt;  0.2118
-#&gt;  0.1197
-#&gt;  0.0648
-#&gt;  0.1678
-#&gt; -0.0088
-#&gt;  0.2057
-#&gt; -0.0278
-#&gt; -0.0856
-#&gt; -0.0495
-#&gt;  0.0248
-#&gt;  0.0910
-#&gt;  0.0317
-#&gt;  0.0760
-#&gt; -0.1908
+#&gt;  0.0770
+#&gt; -0.0968
+#&gt; -0.0367
+#&gt; -0.0316
+#&gt; -0.0499
+#&gt; -0.1581
+#&gt;  0.0673
+#&gt; -0.0110
+#&gt; -0.0916
+#&gt;  0.0374
+#&gt; -0.0762
+#&gt; -0.0754
+#&gt; -0.2115
+#&gt;  0.0153
+#&gt; -0.1287
+#&gt; -0.0884
+#&gt; -0.0211
+#&gt; -0.0918
+#&gt; -0.0012
+#&gt;  0.1748
+#&gt;  0.0642
+#&gt;  0.0451
+#&gt; -0.0335
+#&gt; -0.1944
+#&gt; -0.1517
+#&gt;  0.0920
+#&gt; -0.1079
+#&gt; -0.2428
+#&gt; -0.0909
+#&gt;  0.0691
+#&gt; -0.1527
+#&gt;  0.0953
+#&gt;  0.0458
+#&gt;  0.0122
+#&gt;  0.0996
+#&gt;  0.0538
+#&gt; -0.1366
+#&gt; -0.1217
+#&gt; -0.0312
+#&gt;  0.0610
+#&gt; -0.0650
+#&gt; -0.0338
+#&gt;  0.1201
+#&gt; -0.1051
+#&gt; -0.0883
+#&gt;  0.0415
+#&gt; -0.0773
+#&gt;  0.0222
+#&gt; -0.0438
+#&gt;  0.0102
+#&gt; -0.0022
+#&gt; -0.0893
+#&gt;  0.0891
+#&gt;  0.0776
+#&gt; -0.1275
+#&gt;  0.0418
+#&gt; -0.0716
+#&gt; -0.1250
+#&gt;  0.0285
+#&gt;  0.0687
+#&gt;  0.1884
+#&gt; -0.0453
+#&gt; -0.0510
+#&gt; -0.1294
+#&gt; -0.1340
+#&gt;  0.0145
+#&gt;  0.0501
+#&gt;  0.1669
+#&gt;  0.0125
+#&gt;  0.0337
+#&gt;  0.1500
+#&gt; -0.1540
+#&gt;  0.1909
+#&gt;  0.0979
+#&gt; -0.0350
+#&gt; -0.0622
+#&gt;  0.0173
+#&gt; -0.0972
+#&gt; -0.0858
+#&gt;  0.0274
 #&gt; -0.0196
-#&gt;  0.1030
-#&gt;  0.0001
-#&gt; -0.1256
-#&gt; -0.1372
-#&gt;  0.0761
-#&gt;  0.1186
-#&gt; -0.0794
-#&gt; -0.0374
-#&gt; -0.0475
-#&gt;  0.1376
-#&gt; -0.0452
-#&gt; -0.1993
-#&gt;  0.0900
-#&gt; -0.0780
-#&gt; -0.0765
-#&gt;  0.0552
-#&gt;  0.0656
-#&gt;  0.1303
-#&gt;  0.0220
-#&gt; -0.1305
-#&gt; -0.0221
-#&gt; -0.0103
-#&gt;  0.0126
-#&gt;  0.0111
-#&gt; -0.0132
-#&gt;  0.0390
-#&gt;  0.0566
-#&gt; -0.1246
-#&gt; -0.1158
-#&gt; -0.1314
-#&gt;  0.1597
-#&gt;  0.0721
-#&gt;  0.1145
+#&gt; -0.2183
+#&gt;  0.0174
+#&gt; -0.0238
+#&gt; -0.0479
+#&gt; -0.0530
+#&gt;  0.0421
+#&gt; -0.0530
+#&gt; -0.1692
+#&gt;  0.0488
+#&gt; -0.0140
+#&gt; -0.1420
+#&gt; -0.0361
+#&gt;  0.1230
+#&gt;  0.0648
+#&gt;  0.0388
+#&gt; -0.0385
 #&gt; [ CPUFloatType{100} ]</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#cosine-similarity-x-x-dim-eps-e-gt-tensor-">cosine_similarity(x1, x2, dim=1, eps=1e-8) -&gt; Tensor </a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -310,7 +314,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

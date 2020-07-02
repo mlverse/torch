@@ -11,10 +11,14 @@ navbar:
   articles:
     text: Articles
     menu:
+     - text: Tensors
      - text: Creating tensors
        href: articles/tensor-creation.html
      - text: Indexing
        href: articles/indexing.html
+     - text: Datasets
+     - text: Loading Data
+       href: articles/loading-data.html
      - text: Autograd
      - text: Using autograd
        href: articles/using-autograd.html
