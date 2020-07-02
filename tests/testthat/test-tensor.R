@@ -1,3 +1,5 @@
+context("tensor")
+
 test_that("Can create a tensor", {
   x <- torch_tensor(1)
   expect_s3_class(x, "torch_tensor")

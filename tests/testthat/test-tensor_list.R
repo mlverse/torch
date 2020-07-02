@@ -1,3 +1,5 @@
+context("tensor-list")
+
 test_that("torch_tensor_list works correctly", {
   
   x <- list(torch_tensor(1), torch_tensor(2))

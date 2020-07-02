@@ -1,3 +1,5 @@
+context("creation-ops")
+
 test_that("torch_ones", {
   x <- torch_ones(5,5,
                   dtype = torch_float32(), layout = torch_strided(), 

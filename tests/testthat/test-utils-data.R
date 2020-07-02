@@ -1,3 +1,5 @@
+context("utils-data")
+
 test_that("tensor dataset", {
   x <- torch_randn(1000, 10)
   y <- torch_randn(1000)

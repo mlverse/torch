@@ -1,3 +1,5 @@
+context("gen-namespace")
+
 test_that("__and__", {
   x <- torch_tensor(TRUE)
   expect_equal_to_tensor(torch___and__(x, x), x)

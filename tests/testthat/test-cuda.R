@@ -1,3 +1,5 @@
+context("cuda")
+
 test_that("cuda", {
   skip_if_cuda_not_available()
  

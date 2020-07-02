@@ -1,3 +1,5 @@
+context("utils-data-dataloader")
+
 test_that("dataloader works", {
   x <- torch_randn(1000, 100)
   y <- torch_randn(1000, 1)

@@ -1,3 +1,5 @@
+context("utils-data-sampler")
+
 test_that("sampler's lenght", {
   x <- torch_randn(1000, 10)
   y <- torch_randn(1000)
