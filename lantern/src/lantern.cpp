@@ -10,10 +10,17 @@
 
 #include <easylogging++.h>
 INITIALIZE_EASYLOGGINGPP
+
+void lanternCrashHandler(int sig) {
+  LOG(ERROR) << "Crash(" << sig << "): " << el::base::debug::StackTrace();     
+  el::Helpers::crashAbort(sig);
+}
+  
 void lanternConfigure(bool verbose)
 {
   el::Configurations defaultConf;
   defaultConf.setToDefault();
+  el::Helpers::setCrashHandler(lanternCrashHandler);
   defaultConf.setGlobally(el::ConfigurationType::Format, "%datetime %level Lantern(%thread): %msg");
   defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
   el::Loggers::reconfigureLogger("default", defaultConf);
