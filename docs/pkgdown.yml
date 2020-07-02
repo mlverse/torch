@@ -1,11 +1,13 @@
-pandoc: 2.9.2.1
-pkgdown: 1.4.1.9000
-pkgdown_sha: d01672efa3baa80fd7ab238b7143080b0daf49a4
+pandoc: 2.7.3
+pkgdown: 1.5.1
+pkgdown_sha: ~
 articles:
   mnist-cnn: examples/mnist-cnn.html
   mnist-mlp: examples/mnist-mlp.html
   extending-autograd: extending-autograd.html
   indexing: indexing.html
+  loading-data: loading-data.html
   tensor-creation: tensor-creation.html
   using-autograd: using-autograd.html
+last_built: 2020-07-02T19:07Z
 

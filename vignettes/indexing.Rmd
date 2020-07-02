@@ -2,7 +2,7 @@
 title: "Indexing tensors"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Subsetting tensors}
+  %\VignetteIndexEntry{Indexing tensors}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
