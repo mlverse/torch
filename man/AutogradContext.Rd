@@ -36,6 +36,7 @@ Class representing the context.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 (Dev related) Initializes the context. Not user related.
 \subsection{Usage}{
@@ -63,6 +64,7 @@ Class representing the context.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-save_for_backward"></a>}}
+\if{latex}{\out{\hypertarget{method-save_for_backward}{}}}
 \subsection{Method \code{save_for_backward()}}{
 Saves given objects for a future call to backward().
 
@@ -89,6 +91,7 @@ It's common to pass named arguments.}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-mark_non_differentiable"></a>}}
+\if{latex}{\out{\hypertarget{method-mark_non_differentiable}{}}}
 \subsection{Method \code{mark_non_differentiable()}}{
 Marks outputs as non-differentiable.
 
@@ -115,6 +118,7 @@ This is used e.g. for indices returned from a max Function.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-mark_dirty"></a>}}
+\if{latex}{\out{\hypertarget{method-mark_dirty}{}}}
 \subsection{Method \code{mark_dirty()}}{
 Marks given tensors as modified in an in-place operation.
 
@@ -138,6 +142,7 @@ matter whether the function is called before or after modification.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
