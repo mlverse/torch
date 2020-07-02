@@ -190,38 +190,46 @@ void*  rcpp_call_hook (void* x, void* hook) {
 unsigned int cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f) {
   
   auto r_hook = (void *)new std::function<void*(void *)>([f](void *x) {
-    
-    std::packaged_task<void*()> task([f, x]() {
-      auto y = make_xptr<XPtrTorchTensor>(x);
-      return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
-    });
-    std::future<void*> result = task.get_future();
-    
-    {
-      std::lock_guard<std::mutex> lock(tasks_mutex);
-      tasks.push_front(std::move(task));
-    }
-    
-    std::future_status status;
-    do {
-      status = result.wait_for(std::chrono::seconds(0));
-      if (status == std::future_status::timeout) {
-        
-        std::unique_lock<std::mutex> lock(backward_tasks_mutex);
-        while (!backward_tasks.empty()) {
-          auto task(std::move(backward_tasks.front()));
-          backward_tasks.pop_front();
+    try {
+      std::packaged_task<void*()> task([f, x]() {
+        auto y = make_xptr<XPtrTorchTensor>(x);
+        return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
+      });
+      std::future<void*> result = task.get_future();
+      
+      {
+        std::lock_guard<std::mutex> lock(tasks_mutex);
+        tasks.push_front(std::move(task));
+      }
+      
+      std::future_status status;
+      do {
+        status = result.wait_for(std::chrono::seconds(0));
+        if (status == std::future_status::timeout) {
           
-          // unlock during the task
-          lock.unlock();
-          task();
-          lock.lock();
-        }
-        
-      } 
-    } while (status != std::future_status::ready); 
-    
-    return result.get();
+          std::unique_lock<std::mutex> lock(backward_tasks_mutex);
+          while (!backward_tasks.empty()) {
+            auto task(std::move(backward_tasks.front()));
+            backward_tasks.pop_front();
+            
+            // unlock during the task
+            lock.unlock();
+            task();
+            lock.lock();
+          }
+          
+        } 
+      } while (status != std::future_status::ready); 
+      
+      return result.get();
+    }
+    catch(const std::exception& ex) {
+      lanternSetLastError(ex.what());
+      return NULL;
+    } catch(...) {
+      lanternSetLastError("Torch hook error.");
+      return NULL;
+    }
   });
   
   auto hook = lantern_new_hook(&rcpp_call_hook, r_hook);
