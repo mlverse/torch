@@ -18,7 +18,11 @@ void lanternConfigure(bool verbose)
   defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
   el::Loggers::reconfigureLogger("default", defaultConf);
   
+  if (verbose) {
+    el::Loggers::setVerboseLevel(el::base::type::VerboseLevel());
+  }
 }
+
 std::string *pLanternLastError = NULL;
 
 const char* lanternVersion()

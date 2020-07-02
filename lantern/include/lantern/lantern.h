@@ -29,11 +29,17 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#define LANTERN_FUNCTION_START try {
-#define LANTERN_FUNCTION_END } catch(const std::exception& ex) { \
+#define LANTERN_FUNCTION_START                                   \
+  VLOG(INFO) << "Entering " << __func__;                          \
+  try {
+#define LANTERN_FUNCTION_END                                     \
+  VLOG(INFO) << "Exiting " << __func__;                           \
+} catch(const std::exception& ex) {                              \
+  VLOG(INFO) << "Error " << ex.what() << " in " << __func__;      \
   pLanternLastError = new std::string(ex.what());                \
   return NULL;                                                   \
 } catch(...) {                                                   \
+  VLOG(INFO) << "Error in " << __func__;                          \
   pLanternLastError = new std::string("Unknown error.");         \
   return NULL;                                                   \
 }
