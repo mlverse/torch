@@ -2,7 +2,7 @@
 title: "Extending Autograd"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{extending-autograd}
+  %\VignetteIndexEntry{Extending Autograd}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -8,7 +8,6 @@ nnf_binary_cross_entropy(
   input,
   target,
   weight = NULL,
-  size_average = NULL,
   reduction = c("mean", "sum", "none")
 )
 }

@@ -25,7 +25,7 @@ Imports:
     withr,
     rlang,
     lazyeval
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
     testthat (>= 2.1.0),
@@ -72,6 +72,7 @@ Collate:
     'nn-dropout.R'
     'nn-init.R'
     'nn-linear.R'
+    'nn-loss.R'
     'nn-pooling.R'
     'nn-rnn.R'
     'nn-sparse.R'
