@@ -93,3 +93,84 @@ nn_bce_loss <- nn_module(
     nnf_binary_cross_entropy(input, target, weight=self$weight, reduction=self$reduction)
   }
 )
+
+#' CrossEntropyLoss module
+#' 
+#' This criterion combines [nn_log_softmax] and [nn_nll_loss] in one single class.
+#' It is useful when training a classification problem with `C` classes.
+#' 
+#' If provided, the optional argument `weight` should be a 1D `Tensor`
+#' assigning weight to each of the classes.
+#' 
+#' This is particularly useful when you have an unbalanced training set.
+#' The `input` is expected to contain raw, unnormalized scores for each class.
+#' `input` has to be a Tensor of size either \eqn{(minibatch, C)} or
+#' \eqn{(minibatch, C, d_1, d_2, ..., d_K)}
+#' with \eqn{K \geq 1} for the `K`-dimensional case (described later).
+#' 
+#' This criterion expects a class index in the range \eqn{[0, C-1]} as the
+#' `target` for each value of a 1D tensor of size `minibatch`; if `ignore_index`
+#' is specified, this criterion also accepts this class index (this index may not
+#' necessarily be in the class range).
+#' 
+#' The loss can be described as:
+#' \deqn{
+#'   \text{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
+#' = -x[class] + \log\left(\sum_j \exp(x[j])\right)
+#' }
+#' or in the case of the `weight` argument being specified:
+#' \deqn{
+#'   \text{loss}(x, class) = weight[class] \left(-x[class] + \log\left(\sum_j \exp(x[j])\right)\right)
+#' }
+#' 
+#' The losses are averaged across observations for each minibatch.
+#' Can also be used for higher dimension inputs, such as 2D images, by providing
+#' an input of size \eqn{(minibatch, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1},
+#' where \eqn{K} is the number of dimensions, and a target of appropriate shape
+#' (see below).
+#' 
+#' @param weight (Tensor, optional): a manual rescaling weight given to each class.
+#'   If given, has to be a Tensor of size `C`
+#' @param ignore_index (int, optional): Specifies a target value that is ignored
+#'   and does not contribute to the input gradient. When `size_average` is
+#'   `TRUE`, the loss is averaged over non-ignored targets.
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in the meantime,
+#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   
+#' @section Shape:
+#' - Input: \eqn{(N, C)} where `C = number of classes`, or
+#' \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
+#' in the case of `K`-dimensional loss.
+#' - Target: \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1}, or
+#' \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
+#' K-dimensional loss.
+#' - Output: scalar.
+#' If `reduction` is `'none'`, then the same size as the target:
+#'   \eqn{(N)}, or
+#' \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case
+#' of K-dimensional loss.
+#' 
+#' @examples
+#' loss <- nn_cross_entropy_loss()
+#' input <- torch_randn(3, 5, requires_grad=TRUE)
+#' target <- torch_randint(low = 0, high = 5, size = 3, dtype = torch_long())
+#' output <- loss(input, target)
+#' output$backward()
+#' 
+#' @export
+nn_cross_entropy_loss <- nn_module(
+  "nn_crossentropy_loss",
+  inherit = nn_weighted_loss,
+  initialize = function(weight = NULL, ignore_index = -100, reduction = "mean") {
+    self$ignore_index <- ignore_index
+    super$initialize(weight, reduction)
+  },
+  forward = function(input, target) {
+    nnf_cross_entropy(input, target, weight = self$weight, 
+                      ignore_index = self$ignore_index, reduction = self$reduction)
+  }
+)
