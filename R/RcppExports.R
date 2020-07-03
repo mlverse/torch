@@ -13849,7 +13849,6 @@ cpp_lantern_configure <- function(log) {
 
 cpp_lantern_version <- function() {
     cpp_handle_error(.Call('_torch_cpp_lantern_version', PACKAGE = 'torchpkg'))
->>>>>>> rebuild rcpp heders
 }
 
 cpp_lantern_init <- function(path) {
