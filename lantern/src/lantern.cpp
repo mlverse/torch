@@ -18,7 +18,7 @@ void lanternConfigure(bool log)
   defaultConf.setGlobally(el::ConfigurationType::Format, "%datetime %level: %msg");
   if (log) defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
   defaultConf.setGlobally(el::ConfigurationType::ToFile, log ? "true" : "false");
-  defaultConf.setGlobally(el::ConfigurationType::ToStandardOutput, "false");
+  defaultConf.setGlobally(el::ConfigurationType::ToStandardOutput, log ? "true" : "false");
   defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
   el::Loggers::setDefaultConfigurations(defaultConf, true);
 }
