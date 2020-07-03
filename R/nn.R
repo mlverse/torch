@@ -78,7 +78,7 @@ nn_Module <- R6::R6Class(
         }
       }
       
-      invisible(self)
+      invisible(create_nn_module_callable(self))
     },
     cuda = function(device = NULL) {
       self$.apply(function(x) x$cuda())
@@ -181,7 +181,7 @@ nn_Module <- R6::R6Class(
       
       load(self, state_dict)
       
-      invisible(self)
+      invisible(create_nn_module_callable(self))
     },
     zero_grad = function() {
       for (p in self$parameters) {
@@ -265,31 +265,36 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
   if (inherits(inherit, "nn_module"))
     inherit <- attr(inherit, "module")
     
+  classes <- c(classname, "nn_module")
+  
   Module <- R6::R6Class(
     classname = classname,
     inherit = inherit,
     lock_objects = FALSE,
     public = list(
+      .classes = classes,
       ...
     )
   )
-  
-  classes <- c(classname, "nn_module")
   
   fun <- rlang::new_function(
     args = rlang::fn_fmls(Module$new), 
     body = rlang::expr({
       instance <- Module$new(!!!rlang::fn_fmls_syms(Module$new))
-      f <- instance$forward
-      
-      attr(f, "class") <- classes
-      attr(f, "module") <- instance
-      f
+      create_nn_module_callable(instance)
     })
   )
   attr(fun, "class") <- classes
   attr(fun, "module") <- Module
   fun
+}
+
+create_nn_module_callable <- function(instance) {
+  f <- instance$forward
+  
+  attr(f, "class") <- instance$.classes
+  attr(f, "module") <- instance
+  f
 }
 
 #' @export
