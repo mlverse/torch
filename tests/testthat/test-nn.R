@@ -254,3 +254,14 @@ test_that("index modules with integers", {
   expect_error(net[[1]], "out of bounds")
   
 })
+
+test_that("to still returns an nn_module", {
+  
+  x <- nn_linear(10, 10)
+  y <- x$to(device ="cpu")
+  
+  expect_s3_class(y, "nn_module")
+  
+  expect_tensor_shape(y(torch_randn(10, 10)), c(10, 10))
+  
+})
