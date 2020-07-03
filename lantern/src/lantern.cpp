@@ -16,7 +16,7 @@ void lanternConfigure(bool log)
   el::Configurations defaultConf;
   defaultConf.setToDefault();
   defaultConf.setGlobally(el::ConfigurationType::Format, "%datetime %level: %msg");
-  defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
+  if (log) defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
   defaultConf.setGlobally(el::ConfigurationType::ToFile, log ? "true" : "false");
   defaultConf.setGlobally(el::ConfigurationType::ToStandardOutput, "false");
   defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
@@ -27,7 +27,7 @@ std::string *pLanternLastError = NULL;
 
 const char* lanternVersion()
 {
-  return "0.1.0";
+  return "0.1.0.9002";
 }
 
 void lanternSetLastError(const char* error)
