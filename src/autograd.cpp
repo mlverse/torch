@@ -192,8 +192,17 @@ unsigned int cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::F
   auto r_hook = (void *)new std::function<void*(void *)>([f](void *x) {
     
     std::packaged_task<void*()> task([f, x]() {
-      auto y = make_xptr<XPtrTorchTensor>(x);
-      return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
+      try {
+        auto y = make_xptr<XPtrTorchTensor>(x);
+        return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
+      }
+      catch(const std::exception& ex) {
+        lanternSetLastError(ex.what());
+        return (void *)NULL;
+      } catch(...) {
+        lanternSetLastError("Torch hook error.");
+        return (void *)NULL;
+      }
     });
     std::future<void*> result = task.get_future();
     

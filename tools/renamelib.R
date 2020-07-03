@@ -43,6 +43,7 @@ call_skips <- paste(
   sep = "|")
 for (i in call_entries) {
   if (grepl(call_skips, exports_content[[i]])) next
+  if (grepl("cpp_handle_error\\(", exports_content[[i]])) next
   exports_content[[i]] <- gsub(".Call\\(", "cpp_handle_error(.Call(", exports_content[[i]])
   exports_content[[i]] <- paste0(exports_content[[i]], ")")
 }

@@ -3,6 +3,16 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
+void cpp_lantern_configure(bool log) {
+  lanternConfigure(log);
+}
+
+// [[Rcpp::export]]
+std::string cpp_lantern_version() {
+  return std::string(lanternVersion());
+}
+
+// [[Rcpp::export]]
 void cpp_lantern_init(std::string path) {
   std::string error;
   if (!lanternInit(path, &error))

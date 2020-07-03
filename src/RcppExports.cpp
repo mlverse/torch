@@ -23100,6 +23100,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_lantern_configure
+void cpp_lantern_configure(bool log);
+RcppExport SEXP _torch_cpp_lantern_configure(SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    cpp_lantern_configure(log);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_lantern_version
+std::string cpp_lantern_version();
+RcppExport SEXP _torch_cpp_lantern_version() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_lantern_version());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_lantern_init
 void cpp_lantern_init(std::string path);
 RcppExport SEXP _torch_cpp_lantern_init(SEXP pathSEXP) {
@@ -25526,6 +25546,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_tensor_index_append_none", (DL_FUNC) &_torch_cpp_torch_tensor_index_append_none, 1},
     {"_torch_cpp_torch_tensor_index_append_slice", (DL_FUNC) &_torch_cpp_torch_tensor_index_append_slice, 2},
     {"_torch_cpp_torch_slice", (DL_FUNC) &_torch_cpp_torch_slice, 3},
+    {"_torch_cpp_lantern_configure", (DL_FUNC) &_torch_cpp_lantern_configure, 1},
+    {"_torch_cpp_lantern_version", (DL_FUNC) &_torch_cpp_lantern_version, 0},
     {"_torch_cpp_lantern_init", (DL_FUNC) &_torch_cpp_lantern_init, 1},
     {"_torch_cpp_lantern_test", (DL_FUNC) &_torch_cpp_lantern_test, 0},
     {"_torch_cpp_lantern_has_error", (DL_FUNC) &_torch_cpp_lantern_has_error, 0},

@@ -28,13 +28,18 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include <iostream>
 
-#define LANTERN_FUNCTION_START try {
-#define LANTERN_FUNCTION_END } catch(const std::exception& ex) { \
+#define LANTERN_FUNCTION_START                                   \
+  LOG(INFO) << "Entering " << __func__;                          \
+  try {
+#define LANTERN_FUNCTION_END                                     \
+  LOG(INFO) << "Exiting " << __func__;                           \
+} catch(const std::exception& ex) {                              \
+  LOG(INFO) << "Error " << ex.what() << " in " << __func__;      \
   pLanternLastError = new std::string(ex.what());                \
   return NULL;                                                   \
 } catch(...) {                                                   \
+  LOG(INFO) << "Error in " << __func__;                          \
   pLanternLastError = new std::string("Unknown error.");         \
   return NULL;                                                   \
 }
@@ -44,6 +49,9 @@ extern "C"
 {
 #endif
 
+  LANTERN_API void(LANTERN_PTR lanternConfigure)(bool log);
+  LANTERN_API const char*(LANTERN_PTR lanternVersion)();
+  LANTERN_API void(LANTERN_PTR lanternSetLastError)(const char*);
   LANTERN_API void(LANTERN_PTR lanternLastErrorClear)();
   LANTERN_API const char*(LANTERN_PTR lanternLastError)();
   LANTERN_API void(LANTERN_PTR lanternTest)();
@@ -2073,6 +2081,9 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   if (!lanternLoadLibrary(libPath, pError))
     return false;
 
+  LOAD_SYMBOL(lanternConfigure);
+  LOAD_SYMBOL(lanternVersion);
+  LOAD_SYMBOL(lanternSetLastError);
   LOAD_SYMBOL(lanternLastErrorClear);
   LOAD_SYMBOL(lanternLastError);
   LOAD_SYMBOL(lanternTest);
