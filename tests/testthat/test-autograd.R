@@ -472,7 +472,6 @@ test_that("can use mark_dirty", {
   )
   
   x <- torch_tensor(5, requires_grad = TRUE)
-  skip_on_os("windows")
   expect_error(double_in_place(x), "leaf Variable that requires grad")
 })
 
@@ -694,7 +693,6 @@ test_that("autograd_grad retain grad", {
   
   out <- autograd_grad(loss, list(w, b))
   expect_length(out, 2)
-  skip_on_os("windows")
   expect_error(autograd_grad(loss, list(w, b)), regexp = "graph a second time")
   
   w <- torch_tensor(0.5, requires_grad = TRUE)
@@ -718,7 +716,6 @@ test_that("autograd_grad allow unused", {
   y <- 2 * x + 1
   loss <- (y - (w*x))^2
   loss <- loss$mean()
-  skip_on_os("windows")
   expect_error(
     autograd_grad(loss, list(w, b)),
     regexp = "not have been used in the graph"
