@@ -13,17 +13,14 @@ INITIALIZE_EASYLOGGINGPP
 
 void lanternConfigure(bool log)
 {
-  if (log)
-  {
-    el::Configurations defaultConf;
-    defaultConf.setToDefault();
-    defaultConf.setGlobally(el::ConfigurationType::Format, "%datetime %level: %msg");
-    defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
-    defaultConf.setGlobally(el::ConfigurationType::ToFile, "true");
-    defaultConf.setGlobally(el::ConfigurationType::ToStandardOutput, "false");
-    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
-    el::Loggers::setDefaultConfigurations(defaultConf, true);
-  }
+  el::Configurations defaultConf;
+  defaultConf.setToDefault();
+  defaultConf.setGlobally(el::ConfigurationType::Format, "%datetime %level: %msg");
+  defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
+  defaultConf.setGlobally(el::ConfigurationType::ToFile, log ? "true" : "false");
+  defaultConf.setGlobally(el::ConfigurationType::ToStandardOutput, "false");
+  defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
+  el::Loggers::setDefaultConfigurations(defaultConf, true);
 }
 
 std::string *pLanternLastError = NULL;
