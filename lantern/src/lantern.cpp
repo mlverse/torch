@@ -11,22 +11,18 @@
 #include <easylogging++.h>
 INITIALIZE_EASYLOGGINGPP
 
-void lanternCrashHandler(int sig) {
-  LOG(ERROR) << "Crash(" << sig << "): " << el::base::debug::StackTrace();     
-  el::Helpers::crashAbort(sig);
-}
-  
-void lanternConfigure(bool verbose)
+void lanternConfigure(bool log)
 {
-  el::Configurations defaultConf;
-  defaultConf.setToDefault();
-  el::Helpers::setCrashHandler(lanternCrashHandler);
-  defaultConf.setGlobally(el::ConfigurationType::Format, "%datetime %level Lantern(%thread): %msg");
-  defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
-  el::Loggers::reconfigureLogger("default", defaultConf);
-  
-  if (verbose) {
-    el::Loggers::setVerboseLevel(el::base::type::VerboseLevel());
+  if (log)
+  {
+    el::Configurations defaultConf;
+    defaultConf.setToDefault();
+    defaultConf.setGlobally(el::ConfigurationType::Format, "%datetime %level: %msg");
+    defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
+    defaultConf.setGlobally(el::ConfigurationType::ToFile, "true");
+    defaultConf.setGlobally(el::ConfigurationType::ToStandardOutput, "false");
+    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
+    el::Loggers::setDefaultConfigurations(defaultConf, true);
   }
 }
 
@@ -39,6 +35,7 @@ const char* lanternVersion()
 
 void lanternSetLastError(const char* error)
 {
+  LOG(INFO) << "Setting last error to " << error;
   pLanternLastError = new std::string(error);
 }
 
@@ -46,12 +43,15 @@ const char* lanternLastError()
 {
   if (pLanternLastError == NULL)
     return NULL;
-  else
+  else {
+    LOG(INFO) << "Has last error set to " << pLanternLastError->c_str();
     return pLanternLastError->c_str();
+  }
 }
 
 void lanternLastErrorClear()
 {
+  LOG(INFO) << "Cleared last error";
   pLanternLastError = NULL;
 }
 

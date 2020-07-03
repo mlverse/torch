@@ -65,7 +65,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 retrieve_lib("https://github.com/amrayn/easyloggingpp/archive/v9.96.7.zip" "easyloggingpp-9.96.7")
 file(COPY "${CMAKE_CURRENT_BINARY_DIR}/easyloggingpp-9.96.7/src/easylogging++.h" DESTINATION "${CMAKE_SOURCE_DIR}/include")
 file(COPY "${CMAKE_CURRENT_BINARY_DIR}/easyloggingpp-9.96.7/src/easylogging++.cc" DESTINATION "${CMAKE_SOURCE_DIR}/src")
-add_definitions(-DELPP_ENABLE_THREADING -DELPP_FEATURE_CRASH_LOG)
+add_definitions(-DELPP_NO_DEFAULT_LOG_FILE)
 
 ############################################################
 # Library

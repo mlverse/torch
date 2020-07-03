@@ -30,16 +30,16 @@
 #include <stdio.h>
 
 #define LANTERN_FUNCTION_START                                   \
-  VLOG(INFO) << "Entering " << __func__;                          \
+  LOG(INFO) << "Entering " << __func__;                          \
   try {
 #define LANTERN_FUNCTION_END                                     \
-  VLOG(INFO) << "Exiting " << __func__;                           \
+  LOG(INFO) << "Exiting " << __func__;                           \
 } catch(const std::exception& ex) {                              \
-  VLOG(INFO) << "Error " << ex.what() << " in " << __func__;      \
+  LOG(INFO) << "Error " << ex.what() << " in " << __func__;      \
   pLanternLastError = new std::string(ex.what());                \
   return NULL;                                                   \
 } catch(...) {                                                   \
-  VLOG(INFO) << "Error in " << __func__;                          \
+  LOG(INFO) << "Error in " << __func__;                          \
   pLanternLastError = new std::string("Unknown error.");         \
   return NULL;                                                   \
 }
@@ -49,7 +49,7 @@ extern "C"
 {
 #endif
 
-  LANTERN_API void(LANTERN_PTR lanternConfigure)(bool verbose);
+  LANTERN_API void(LANTERN_PTR lanternConfigure)(bool log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
   LANTERN_API void(LANTERN_PTR lanternSetLastError)(const char*);
   LANTERN_API void(LANTERN_PTR lanternLastErrorClear)();
