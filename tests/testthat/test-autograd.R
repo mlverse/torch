@@ -333,8 +333,6 @@ test_that("Can have optional arguments in forward", {
 })
 
 test_that("Catch errors in forward and backward R functions", {
-  skip_on_os("windows")
-  
   custom_pow <- autograd_function(
     forward = function(ctx, var1) {
       stop("stop forward")
