@@ -1,16 +1,16 @@
 test_that("conv3d", {
   
-  input <- torch_randn(20, 16, 10, 50, 100)
+  input <- torch_randn(20, 16, 10, 5, 10)
   
   m <- nn_conv3d(16, 33, 3, stride=2)
   o <- m(input)
   
-  expect_tensor_shape(o, c(20, 33,  4, 24, 49))
+  expect_tensor_shape(o, c(20, 33,  4, 2, 4))
   
   m <- nn_conv3d(16, 33, c(3, 5, 2), stride=c(2, 1, 1), padding=c(4, 2, 0))
   o <- m(input)
   
-  expect_tensor_shape(o, c(20, 33,  8, 50, 99))
+  expect_tensor_shape(o, c(20, 33,  8, 5, 9))
 })
 
 test_that("nn_conv_transpose1d", {
@@ -25,15 +25,15 @@ test_that("nn_conv_transpose1d", {
 
 test_that("nn_conv_transpose2d", {
   
-  input <- torch_randn(20, 16, 50, 100)
+  input <- torch_randn(20, 16, 10, 10)
   m <- nn_conv_transpose2d(16, 33, 3, stride=2)
   
   output <- m(input)
-  expect_tensor_shape(output, c(20, 33, 101, 201))
+  expect_tensor_shape(output, c(20, 33, 21, 21))
   
   m <- nn_conv_transpose2d(16, 33, c(3, 5), stride=c(2, 1), padding=c(4, 2))
   output <- m(input)
-  expect_tensor_shape(output, c(20, 33, 93, 100))
+  expect_tensor_shape(output, c(20, 33, 13, 10))
   
   # exact output size can be also specified as an argument
   input <- torch_randn(1, 16, 12, 12)
@@ -49,16 +49,16 @@ test_that("nn_conv_transpose2d", {
 test_that("nn_conv_transpose3d", {
   skip_on_os("windows")
   
-  input <- torch_randn(20, 16, 10, 50, 100)
+  input <- torch_randn(20, 16, 10, 5, 10)
   
   # With square kernels and equal stride
   m <- nn_conv_transpose3d(16, 33, 3, stride=2)
   output <- m(input)
-  expect_tensor_shape(output, c(20L, 33L, 21L, 101L, 201L))
+  expect_tensor_shape(output, c(20L, 33L, 21L, 11L, 21L))
   
   # non-square kernels and unequal stride and with padding
   m <- nn_conv_transpose3d(16, 33, c(3, 5, 2), stride=c(2, 1, 1), padding=c(0, 4, 2))
   output <- m(input)
   
-  expect_tensor_shape(output, c(20L, 33L, 21L, 46L, 97L))
+  expect_tensor_shape(output, c(20L, 33L, 21L, 1L, 7L))
 })
