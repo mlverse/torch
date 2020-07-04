@@ -128,7 +128,7 @@ optim_SGD <- R6::R6Class(
 #' 
 #' @examples
 #' \dontrun{
-#' optimizer <- optim_sgd(model.parameters(), lr=0.1, momentum=0.9)
+#' optimizer <- optim_sgd(model$parameters(), lr=0.1, momentum=0.9)
 #' optimizer$zero_grad()
 #' loss_fn(model(input), target)$backward()
 #' optimizer$step()

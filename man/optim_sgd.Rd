@@ -63,7 +63,7 @@ The Nesterov version is analogously modified.
 
 \examples{
 \dontrun{
-optimizer <- optim_sgd(model.parameters(), lr=0.1, momentum=0.9)
+optimizer <- optim_sgd(model$parameters(), lr=0.1, momentum=0.9)
 optimizer$zero_grad()
 loss_fn(model(input), target)$backward()
 optimizer$step()

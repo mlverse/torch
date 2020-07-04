@@ -24,8 +24,6 @@ expect_optim_works <- function(optim, defaults) {
   
   initial_value <- fn()
   
-  #p <- profvis::profvis({opt$step(fn)})
-  
   for (i in seq_len(200)) {
     opt$step(fn)
   }  
