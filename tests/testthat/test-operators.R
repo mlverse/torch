@@ -12,6 +12,7 @@ test_that("- works", {
   expect_equal_to_r(x - x, rep(0, 4))
   expect_equal_to_r(x - 2, c(1,2,3,4) - 2)
   expect_equal_to_r(2 - x, 2 - c(1,2,3,4))
+  expect_equal_to_r(-x, - c(1,2,3,4))
 })
 
 test_that("* works", {

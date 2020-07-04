@@ -8,8 +8,10 @@
 
 #' @export
 `-.torch_tensor` <- function(e1, e2) {
-  if (missing(e2))
-    e2 <- torch_zeros_like(e1)
+  if (missing(e2)) {
+    e2 <- e1
+    e1 <- torch_zeros_like(e1)
+  }
   
   torch_sub(e1, e2)
 }
