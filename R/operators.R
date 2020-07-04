@@ -30,6 +30,16 @@
 }
 
 #' @export
+`%%.torch_tensor` <- function(e1, e2) {
+  torch_fmod(e1, e2)
+}
+
+#' @export
+`%/%.torch_tensor` <- function(e1, e2) {
+  torch_floor_divide(e1, e2)
+}
+
+#' @export
 `>=.torch_tensor` <- function(e1, e2) {
   torch_ge(e1, e2)
 }
@@ -57,6 +67,21 @@
 #' @export
 `!=.torch_tensor` <- function(e1, e2) {
   torch_ne(e1, e2)
+}
+
+#' @export
+`&.torch_tensor` <- function(e1, e2) {
+  torch_logical_and(e1, e2)
+}
+
+#' @export
+`|.torch_tensor` <- function(e1, e2) {
+  torch_logical_or(e1, e2)
+}
+
+#' @export
+`!.torch_tensor` <- function(x) {
+  torch_logical_not(x)
 }
 
 #' @export
@@ -89,7 +114,167 @@ as.double.torch_tensor <- function(x, ...) {
   as.double(as_array(x))
 }
 
+#' @export
+abs.torch_tensor <- function(x) {
+  torch_abs(x)
+}
 
+#' @export
+sign.torch_tensor <- function(x) {
+  torch_sign(x)
+}
 
+#' @export
+sqrt.torch_tensor <- function(x) {
+  torch_sqrt(x)
+}
 
+#' @export
+ceiling.torch_tensor <- function(x) {
+  torch_ceil(x)
+}
 
+#' @export
+floor.torch_tensor <- function(x) {
+  torch_floor(x)
+}
+
+#' @export
+trunc.torch_tensor <- function(x) {
+  torch_trunc(x)
+}
+
+#' @export
+cumsum.torch_tensor <- function(x) {
+  torch_cumsum(x, dim = 0)
+}
+
+#' @export
+log.torch_tensor <- function(x, base) {
+  if (!missing(base)) {
+    torch_log(x)/torch_log(base)
+  } else {
+    torch_log(x)
+  }
+}
+
+#' @export
+log10.torch_tensor <- function(x) {
+  torch_log10(x)
+}
+
+#' @export
+log2.torch_tensor <- function(x) {
+  torch_log2(x)
+}
+
+#' @export
+log1p.torch_tensor <- function(x) {
+  torch_log1p(x)
+}
+
+#' @export
+acos.torch_tensor <- function(x) {
+  torch_acos(x)
+}
+
+#' @export
+asin.torch_tensor <- function(x) {
+  torch_asin(x)
+}
+
+#' @export
+atan.torch_tensor <- function(x) {
+  torch_atan(x)
+}
+
+#' @export
+exp.torch_tensor <- function(x) {
+  torch_exp(x)
+}
+
+#' @export
+expm1.torch_tensor <- function(x) {
+  torch_expm1(x)
+}
+
+#' @export
+cos.torch_tensor <- function(x) {
+  torch_cos(x)
+}
+
+#' @export
+cosh.torch_tensor <- function(x) {
+  torch_cosh(x)
+}
+
+#' @export
+sin.torch_tensor <- function(x) {
+  torch_sin(x)
+}
+
+#' @export
+sinh.torch_tensor <- function(x) {
+  torch_sinh(x)
+}
+
+#' @export
+tan.torch_tensor <- function(x) {
+  torch_tan(x)
+}
+
+#' @export
+tanh.torch_tensor <- function(x) {
+  torch_tanh(x)
+}
+
+# helper function to replace nan in tensors
+replace_nan <- function(tensor, value) {
+  torch_where(torch_isnan(tensor),
+              torch_full_like(tensor, value),
+              tensor)
+}
+
+#' @export
+max.torch_tensor <- function(..., na.rm = FALSE) {
+  l <- if (na.rm) lapply(list(...), function(tensor) replace_nan(tensor, -Inf)) else list(...) 
+  l_max <- lapply(l, torch_max)
+  Reduce(function(x, y) torch_max(x, other = y), l_max)
+}
+
+#' @export
+min.torch_tensor <- function(..., na.rm = FALSE) {
+  l <- if (na.rm) lapply(list(...), function(tensor) replace_nan(tensor, Inf)) else list(...) 
+  l_min <- lapply(l, torch_min)
+  Reduce(function(x, y) torch_min(x, other = y), l_min)
+}
+
+#' @export
+prod.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
+  l <- if (na.rm) lapply(list(...), function(tensor) replace_nan(tensor, 1)) else list(...) 
+  if (length(l) == 1) {
+    if (!missing(dim)) {
+      return(torch_prod(l[[1]], dim = dim, keepdim = keepdim))
+    } else {
+      return(torch_prod(l[[1]]))
+    }
+  } else {
+    stopifnot(missing(dim))
+    return(Reduce(`*`, lapply(l, torch_prod)))
+  }
+}
+
+#' @export
+sum.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
+  l <- if (na.rm) lapply(list(...), function(tensor) replace_nan(tensor, 0)) else list(...) 
+  if (length(l) == 1) {
+    if (!missing(dim)) {
+      return(torch_sum(l[[1]], dim = dim, keepdim = keepdim))
+    } else {
+      return(torch_sum(l[[1]]))
+    }
+  } else {
+    stopifnot(missing(dim))
+    return(Reduce(`+`, lapply(l, torch_sum)))
+  }
+}
