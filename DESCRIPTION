@@ -97,6 +97,7 @@ Collate:
     'nnf-vision.R'
     'operators.R'
     'optim.R'
+    'optim-adam.R'
     'optim-sgd.R'
     'package.R'
     'qscheme.R'
