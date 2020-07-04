@@ -214,7 +214,7 @@ test_that("zero_grad", {
   expect_no_error(net$zero_grad())
   expect_true(is_undefined_tensor(net$linear$weight$grad))
   
-  x <- torch_randn(100, 10)
+  x <- torch_randn(500, 10)
   l <- torch_mean(net(x))
   l$backward()
   
