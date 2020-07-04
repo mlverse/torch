@@ -67,7 +67,7 @@ optim_Adam <- R6::R6Class(
               param$state[["exp_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
               param$state[["exp_avg_sq"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
               if (amsgrad) {
-                param$state[['max_exp_avg_sq']] <- torch_zeros_like(p, memory_format=torch_preserve_format())
+                param$state[['max_exp_avg_sq']] <- torch_zeros_like(param, memory_format=torch_preserve_format())
               }
             }
             
@@ -92,12 +92,9 @@ optim_Adam <- R6::R6Class(
             exp_avg_sq$mul_(beta2)$addcmul_(grad, grad, value=1 - beta2)
             
             if (amsgrad) {
+              
               # Maintains the maximum of all 2nd moment running avg. till now
-              cpp_torch_namespace_max_out_out_Tensor_self_Tensor_other_Tensor(
-                max_exp_avg_sq$ptr,
-                max_exp_avg_sq$ptr,
-                exp_avg_sq$ptr
-              )
+              max_exp_avg_sq$set_data(max_exp_avg_sq$max(other = exp_avg_sq))
               # Use the max. for normalizing running avg. of gradient
               denom <- (max_exp_avg_sq$sqrt() / sqrt(bias_correction2))$add_(group$eps)
             } else {
