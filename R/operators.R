@@ -228,30 +228,26 @@ tanh.torch_tensor <- function(x) {
   torch_tanh(x)
 }
 
-# helper function to replace nan in tensors
-replace_nan <- function(tensor, value) {
-  torch_where(torch_isnan(tensor),
-              torch_full_like(tensor, value),
-              tensor)
-}
-
 #' @export
 max.torch_tensor <- function(..., na.rm = FALSE) {
-  l <- if (na.rm) lapply(list(...), function(tensor) replace_nan(tensor, -Inf)) else list(...) 
+  if (na.rm) stop('torch Tensors do not have NAs ')
+  l <- list(...) 
   l_max <- lapply(l, torch_max)
   Reduce(function(x, y) torch_max(x, other = y), l_max)
 }
 
 #' @export
 min.torch_tensor <- function(..., na.rm = FALSE) {
-  l <- if (na.rm) lapply(list(...), function(tensor) replace_nan(tensor, Inf)) else list(...) 
+  if (na.rm) stop('torch Tensors do not have NAs ')
+  l <- list(...)
   l_min <- lapply(l, torch_min)
   Reduce(function(x, y) torch_min(x, other = y), l_min)
 }
 
 #' @export
 prod.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
-  l <- if (na.rm) lapply(list(...), function(tensor) replace_nan(tensor, 1)) else list(...) 
+  if (na.rm) stop('torch Tensors do not have NAs ')
+  l <- list(...)
   if (length(l) == 1) {
     if (!missing(dim)) {
       return(torch_prod(l[[1]], dim = dim, keepdim = keepdim))
@@ -266,7 +262,8 @@ prod.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
 
 #' @export
 sum.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
-  l <- if (na.rm) lapply(list(...), function(tensor) replace_nan(tensor, 0)) else list(...) 
+  if (na.rm) stop('torch Tensors do not have NAs ')
+  l <- list(...)
   if (length(l) == 1) {
     if (!missing(dim)) {
       return(torch_sum(l[[1]], dim = dim, keepdim = keepdim))

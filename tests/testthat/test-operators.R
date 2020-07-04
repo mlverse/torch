@@ -198,32 +198,25 @@ test_that("exp* work", {
 test_that("max min work", {
   x <- array(runif(200), dim = c(10, 5, 2))
   y <- c(1, 2, 3)
-  z <- c(2, 3, NA)
   expect_equal(as.numeric(max(torch_tensor(x))), max(x), tolerance = 1e-7)
   expect_equal(as.numeric(max(torch_tensor(x), torch_tensor(y))), max(x, y), tolerance = 1e-7)
-  expect_equal(as.numeric(max(torch_tensor(x), torch_tensor(z), na.rm = TRUE)), max(x, z, na.rm = TRUE), tolerance = 1e-7)
   expect_equal(as.numeric(min(torch_tensor(x))), min(x), tolerance = 1e-7)
   expect_equal(as.numeric(min(torch_tensor(x), torch_tensor(y))), min(x, y), tolerance = 1e-7)
-  expect_equal(as.numeric(min(torch_tensor(x), torch_tensor(z), na.rm = TRUE)), min(x, z, na.rm = TRUE), tolerance = 1e-7)
 })
 
 test_that("prod works", {
   x <- array(runif(200), dim = c(10, 5, 2))
   y <- c(1, 2, 3)
-  z <- c(2, 3, NA)
   expect_equal(as.numeric(prod(torch_tensor(x))), prod(x))
   expect_equal(as.numeric(prod(torch_tensor(x), dim = 0)), as.numeric(torch_prod(x, dim = 0)), tolerance = 1e-7)
   expect_equal(as.numeric(prod(torch_tensor(x), torch_tensor(y))), prod(x, y), tolerance = 1e-7)
-  expect_equal(as.numeric(prod(torch_tensor(x), torch_tensor(z), na.rm = TRUE)), prod(x, z, na.rm = TRUE), tolerance = 1e-7)
 })
 
 test_that("sum works", {
   x <- array(runif(200), dim = c(10, 5, 2))
   y <- c(1, 2, 3)
-  z <- c(2, 3, NA)
   expect_equal(as.numeric(sum(torch_tensor(x))), sum(x), tolerance = 1e-7)
   expect_equal(as.numeric(sum(torch_tensor(x), dim = 0)), as.numeric(torch_sum(x, dim = 0)), tolerance = 1e-7)
   expect_equal(as.numeric(sum(torch_tensor(x), torch_tensor(y))), sum(x, y), tolerance = 1e-7)
-  expect_equal(as.numeric(sum(torch_tensor(x), torch_tensor(z), na.rm = TRUE)), sum(x, z, na.rm = TRUE), tolerance = 1e-7)
 })
 
