@@ -230,7 +230,7 @@ tanh.torch_tensor <- function(x) {
 
 #' @export
 max.torch_tensor <- function(..., na.rm = FALSE) {
-  if (na.rm) stop('torch Tensors do not have NAs ')
+  if (na.rm) stop('Torch tensors do not have NAs!')
   l <- list(...) 
   l_max <- lapply(l, torch_max)
   Reduce(function(x, y) torch_max(x, other = y), l_max)
@@ -238,7 +238,7 @@ max.torch_tensor <- function(..., na.rm = FALSE) {
 
 #' @export
 min.torch_tensor <- function(..., na.rm = FALSE) {
-  if (na.rm) stop('torch Tensors do not have NAs ')
+  if (na.rm) stop('Torch tensors do not have NAs!')
   l <- list(...)
   l_min <- lapply(l, torch_min)
   Reduce(function(x, y) torch_min(x, other = y), l_min)
@@ -246,7 +246,7 @@ min.torch_tensor <- function(..., na.rm = FALSE) {
 
 #' @export
 prod.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
-  if (na.rm) stop('torch Tensors do not have NAs ')
+  if (na.rm) stop('Torch tensors do not have NAs!')
   l <- list(...)
   if (length(l) == 1) {
     if (!missing(dim)) {
@@ -262,7 +262,7 @@ prod.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
 
 #' @export
 sum.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
-  if (na.rm) stop('torch Tensors do not have NAs ')
+  if (na.rm) stop('Torch tensors do not have NAs!')
   l <- list(...)
   if (length(l) == 1) {
     if (!missing(dim)) {
