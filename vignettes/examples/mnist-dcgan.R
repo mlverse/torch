@@ -1,3 +1,5 @@
+library(torch)
+
 dir <- "~/Downloads/mnist"
 
 ds <- mnist_dataset(
@@ -13,21 +15,21 @@ dl <- dataloader(ds, batch_size = 32, shuffle = TRUE)
 
 generator <- nn_module(
   "generator", 
-  initialize = function(input_dim, num_filters, output_dim) {
+  initialize = function(latent_dim, out_channels) {
     self$main <- nn_sequential(
-      nn_conv_transpose2d(input_dim, num_filters[1], kernel_size = 4, 
+      nn_conv_transpose2d(latent_dim, 512, kernel_size = 4, 
                           stride = 1, padding = 0, bias = FALSE),
-      nn_batch_norm2d(num_filters[1]),
+      nn_batch_norm2d(512),
       nn_relu(),
-      nn_conv_transpose2d(num_filters[1], num_filters[2], kernel_size = 4, 
+      nn_conv_transpose2d(512, 256, kernel_size = 4, 
                           stride = 2, padding = 1, bias = FALSE),
-      nn_batch_norm2d(num_filters[2]),
+      nn_batch_norm2d(256),
       nn_relu(),
-      nn_conv_transpose2d(num_filters[2], num_filters[3], kernel_size = 4, 
+      nn_conv_transpose2d(256, 128, kernel_size = 4, 
                           stride = 2, padding = 1, bias = FALSE),
-      nn_batch_norm2d(num_filters[3]),
+      nn_batch_norm2d(128),
       nn_relu(),
-      nn_conv_transpose2d(num_filters[3], output_dim, kernel_size = 4, 
+      nn_conv_transpose2d(128, out_channels, kernel_size = 4, 
                           stride = 2, padding = 3, bias = FALSE),
       nn_tanh()
     )
@@ -39,9 +41,9 @@ generator <- nn_module(
 
 discriminator <- nn_module(
   "discriminator",
-  initialize = function() {
+  initialize = function(in_channels) {
     self$main <- nn_sequential(
-      nn_conv2d(1, 16, kernel_size = 4, stride = 2, padding = 1, bias = FALSE),
+      nn_conv2d(in_channels, 16, kernel_size = 4, stride = 2, padding = 1, bias = FALSE),
       nn_relu(),
       nn_conv2d(16, 32, kernel_size = 4, stride = 2, padding = 1, bias = FALSE),
       nn_batch_norm2d(32),
@@ -63,20 +65,27 @@ discriminator <- nn_module(
   }
 )
 
-G <- generator(100, c(512, 256, 128), 1)
-D <- discriminator()
-
-G_optimizer <- optim_adam(G$parameters, lr = 2 * 1e-4, betas = c(0.5, 0.999))
-D_optimizer <- optim_adam(D$parameters, lr = 2 * 1e-4, betas = c(0.5, 0.999))
-
 plot_gen <- function(noise) {
   img <- G(noise)
+  img <- img$cpu()
   img <- img[1,1,,,newaxis]/2 + 0.5
   img <- torch_stack(list(img, img, img), dim = 2)[..,1]
   img <- as.raster(as_array(img))
   plot(img)
 }
-fixed_noise <- torch_randn(1, 100, 1, 1)
+
+device <- torch_device(ifelse(cuda_is_available(),  "cuda", "cpu"))
+
+G <- generator(latent_dim = 100, out_channels = 1)
+D <- discriminator(in_channels = 1)
+
+G$to(device = device)
+D$to(device = device)
+
+G_optimizer <- optim_adam(G$parameters, lr = 2 * 1e-4, betas = c(0.5, 0.999))
+D_optimizer <- optim_adam(D$parameters, lr = 2 * 1e-4, betas = c(0.5, 0.999))
+
+fixed_noise <- torch_randn(1, 100, 1, 1, device = device)
 
 loss <- nn_bce_loss()
 
@@ -91,15 +100,16 @@ for (epoch in 1:10) {
   
   for (b in enumerate(dl)) {
     
-    y_real <- torch_ones(32)
-    y_fake <- torch_zeros(32)
+    y_real <- torch_ones(32, device = device)
+    y_fake <- torch_zeros(32, device = device)
     
-    noise <- torch_randn(32, 100, 1, 1)
+    noise <- torch_randn(32, 100, 1, 1, device = device)
     fake <- G(noise)
     
-    # train the discriminator ---
+    img <- b[[1]]$to(device = device)
     
-    D_loss <- loss(D(b[[1]]), y_real) + loss(D(fake$detach()), y_fake)
+    # train the discriminator ---
+    D_loss <- loss(D(img), y_real) + loss(D(fake$detach()), y_fake)
     
     D_optimizer$zero_grad()
     D_loss$backward()
@@ -121,5 +131,3 @@ for (epoch in 1:10) {
   
   cat(sprintf("Epoch %d - Loss D: %3f Loss G: %3f\n", epoch, mean(lossd), mean(lossg)))
 }
-
-
