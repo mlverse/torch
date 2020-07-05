@@ -20,7 +20,7 @@ At the first package load additional software will be installed.
 
 ## Example
 
-Currently this package is only a prrof of concept and you can only
+Currently this package is only a proof of concept and you can only
 create a Torch Tensor from an R object. And then convert back from a
 torch Tensor to an R object.
 
