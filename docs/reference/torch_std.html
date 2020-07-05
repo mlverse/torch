@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -213,22 +216,22 @@ via the biased estimator. Otherwise, Bessel's correction will be used.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.2212 -0.0202  0.4927
+#&gt; -0.3956 -0.7907  0.7318
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_std</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.623829
+#&gt; 0.790085
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2743  0.5739  0.6146  0.9361
-#&gt;  0.6085  0.9326 -0.1847 -3.0802
-#&gt;  0.2248 -0.1062 -0.9201  0.3781
-#&gt;  0.4208 -0.6510 -0.7921  0.0070
+#&gt; -0.3360  0.8160 -1.3373  0.6514
+#&gt;  0.6496 -0.0788 -0.3204  1.4095
+#&gt; -0.8432 -0.5909  0.3100  1.4403
+#&gt;  0.3878 -0.9973  2.0163  0.6568
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_std</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5172
-#&gt;  1.8275
-#&gt;  0.5792
-#&gt;  0.5688
+#&gt;  0.9968
+#&gt;  0.7808
+#&gt;  1.0337
+#&gt;  1.2352
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

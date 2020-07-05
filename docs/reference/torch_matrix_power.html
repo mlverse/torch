@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -191,22 +194,20 @@ is returned.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.2071  0.3780
-#&gt;  -0.5045  0.0826
+#&gt;  -1.1720 -0.5900
+#&gt;   0.4700 -1.8772
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.3898 -0.2683
-#&gt;   0.5863  0.2666
+#&gt;   0.4840 -0.0442
+#&gt;   2.1904 -0.5338
 #&gt; [ CPUFloatType{2,2,2} ]</div><div class='input'><span class='fu'>torch_matrix_power</span>(<span class='no'>a</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  0.01 *
-#&gt;   5.4362 -5.9758
-#&gt;    7.9752  0.8559
+#&gt;  -0.4391 -4.0242
+#&gt;   3.2056 -5.2488
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  0.01 *
-#&gt;   2.1487  1.0261
-#&gt;   -2.2421 -0.3611
+#&gt;   0.0714 -0.0072
+#&gt;   0.3596 -0.0957
 #&gt; [ CPUFloatType{2,2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

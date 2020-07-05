@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -209,22 +212,22 @@ batched outputs <code>c</code></p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive definite</span>
 <span class='no'>u</span> <span class='kw'>=</span> <span class='fu'><a href='torch_cholesky.html'>torch_cholesky</a></span>(<span class='no'>a</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3.1556 -0.7314 -0.1760
-#&gt; -0.7314  0.1828  0.1168
-#&gt; -0.1760  0.1168  0.6770
+#&gt;  2.2865 -1.0828 -1.0635
+#&gt; -1.0828  1.3720  1.2752
+#&gt; -1.0635  1.2752  1.5453
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.2306  1.3854
-#&gt;  0.3226  1.2456
-#&gt;  1.7452 -1.8279
+#&gt;  1.0747  0.2150
+#&gt;  0.6874 -0.9005
+#&gt;  1.0716  0.3363
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'>torch_cholesky_solve</span>(<span class='no'>b</span>, <span class='no'>u</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;   20.0912   86.3579
-#&gt;   86.7275  381.8104
-#&gt;   -7.1625  -46.1242
+#&gt;  1.1847 -0.2179
+#&gt;  0.1448 -3.8255
+#&gt;  1.3892  3.2246
 #&gt; [ CPUFloatType{3,2} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>$<span class='fu'>inverse</span>(), <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;   20.0911   86.3577
-#&gt;   86.7273  381.8092
-#&gt;   -7.1625  -46.1241
+#&gt;  1.1847 -0.2179
+#&gt;  0.1448 -3.8255
+#&gt;  1.3892  3.2246
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

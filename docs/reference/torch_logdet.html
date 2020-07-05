@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -194,17 +197,17 @@ be unstable in when `input` doesn't have distinct singular values. See
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'><a href='torch_det.html'>torch_det</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 1.53809
+#&gt; 5.51615
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='fu'>torch_logdet</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.430541
+#&gt; 1.70768
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4016  1.8304 -1.8544
-#&gt;  0.2144 -0.0205 -1.1661
-#&gt; -0.7520  0.1449 -0.0779
+#&gt; -1.3088 -0.3603  1.6172
+#&gt; -1.3030 -0.0374 -1.6438
+#&gt; -0.4520 -1.3751  0.1073
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 1.53809
+#&gt; 5.51615
 #&gt; [ CPUFloatType{} ]</div><div class='input'><span class='no'>A</span>$<span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span>()$<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>()</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.430541
+#&gt; 1.70768
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

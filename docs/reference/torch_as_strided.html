@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -207,18 +210,17 @@ advisable to use.
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0168 -0.7891 -0.6764
-#&gt; -0.2499 -0.0602  0.5284
-#&gt; -1.6220 -1.8723 -0.4804
+#&gt;  2.8817 -1.3220 -1.0298
+#&gt;  0.6456  0.0173  0.2237
+#&gt;  1.0576  1.5944  1.4732
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>t</span> <span class='kw'>=</span> <span class='fu'>torch_as_strided</span>(<span class='no'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
 <span class='no'>t</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.01 *
-#&gt; -1.6798 -67.6353
-#&gt;  -78.9127 -24.9900
+#&gt;  2.8817 -1.0298
+#&gt; -1.3220  0.6456
 #&gt; [ CPUFloatType{2,2} ]</div><div class='input'><span class='no'>t</span> <span class='kw'>=</span> <span class='fu'>torch_as_strided</span>(<span class='no'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fl'>1</span>)
 <span class='no'>t</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.7891 -0.2499
-#&gt; -0.6764 -0.0602
+#&gt; -1.3220  0.6456
+#&gt; -1.0298  0.0173
 #&gt; [ CPUFloatType{2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

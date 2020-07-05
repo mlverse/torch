@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -199,28 +202,28 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
     <pre class="examples"><div class='input'>
 <span class='no'>input</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>))
 <span class='no'>input</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2264 -0.0329  0.6990 -1.6327 -0.1358
-#&gt;  0.1323  0.0109  1.5492  1.8007 -0.4490
-#&gt; -1.5412  1.0334 -0.0066  0.1515  1.3396
+#&gt; -0.5273 -0.6899 -0.7569 -1.0002 -1.4116
+#&gt;  0.6017  0.3560  1.0231  0.5205 -1.4691
+#&gt;  0.9735  1.1349  0.3368  0.0509  0.7903
 #&gt; [ CPUFloatType{3,5} ]</div><div class='input'><span class='fu'>torch_pinverse</span>(<span class='no'>input</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1018 -0.0362 -0.2989
-#&gt;  0.0102  0.0231  0.1990
-#&gt;  0.4503  0.4091  0.0503
-#&gt; -0.3993  0.1863  0.0386
-#&gt; -0.0776 -0.0785  0.2450
+#&gt;  0.1710  0.1185  0.4753
+#&gt;  0.1769  0.0530  0.5393
+#&gt; -0.3060  0.2841 -0.1853
+#&gt; -0.5594  0.1873 -0.5062
+#&gt; -0.2984 -0.3552  0.0169
 #&gt; [ CPUFloatType{5,3} ]</div><div class='input'><span class='co'># Batched pinverse example</span>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>6</span>,<span class='fl'>3</span>))
 <span class='no'>b</span> <span class='kw'>=</span> <span class='fu'>torch_pinverse</span>(<span class='no'>a</span>)
 <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>b</span>, <span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.0000  0.0000 -0.0000
-#&gt;   0.0000  1.0000  0.0000
-#&gt;   0.0000  0.0000  1.0000
+#&gt;   1.0000e+00 -3.5763e-07  1.1921e-07
+#&gt;  -6.7055e-08  1.0000e+00  1.4901e-08
+#&gt;   8.5682e-08 -3.2783e-07  1.0000e+00
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.0000e+00  5.0664e-07 -3.4273e-07
-#&gt;   1.6391e-07  1.0000e+00 -1.0431e-07
-#&gt;   6.3330e-08 -4.4703e-08  1.0000e+00
+#&gt;   1.0000 -0.0000  0.0000
+#&gt;  -0.0000  1.0000  0.0000
+#&gt;   0.0000  0.0000  1.0000
 #&gt; [ CPUFloatType{2,3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

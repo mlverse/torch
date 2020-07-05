@@ -84,6 +84,9 @@
     <li>
       <a href="../../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -107,7 +110,7 @@
 
       
 
-      </header><script src="mnist-cnn_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="mnist-cnn_files/header-attrs-2.3/header-attrs.js"></script><script src="mnist-cnn_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>mnist-cnn</h1>
@@ -166,7 +169,7 @@
 
 <span class="kw">for</span> (<span class="no">epoch</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fl">10</span>) {
 
-  <span class="no">pb</span> <span class="kw">&lt;-</span> <span class="kw pkg">progress</span><span class="kw ns">::</span><span class="no">progress_bar</span>$<span class="fu">new</span>(
+  <span class="no">pb</span> <span class="kw">&lt;-</span> <span class="kw pkg">progress</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/progress/man/progress_bar.html">progress_bar</a></span>$<span class="fu">new</span>(
     <span class="kw">total</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">dl</span>),
     <span class="kw">format</span> <span class="kw">=</span> <span class="st">"[:bar] :eta Loss: :loss"</span>
   )

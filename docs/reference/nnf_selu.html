@@ -128,6 +128,9 @@ with \(\alpha=1.6732632423543772848170429916717\) and
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -189,8 +192,8 @@ dimensions</p></td>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>)
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>nnf_selu</span>(<span class='no'>x</span>)
 <span class='fu'>nnf_selu_</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.9556  0.6446
-#&gt; -1.2354  0.1074
+#&gt;  0.7964  1.0567
+#&gt; -0.3747  0.0008
 #&gt; [ CPUFloatType{2,2} ]</div><div class='input'><span class='fu'><a href='torch_equal.html'>torch_equal</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 </div></pre>
   </div>
