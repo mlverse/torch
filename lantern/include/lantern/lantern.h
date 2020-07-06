@@ -29,19 +29,21 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#define LANTERN_FUNCTION_START                                   \
-  LOG(INFO) << "Entering " << __func__;                          \
+extern bool lanternLogEnabled;
+#define LLOG(...) if (lanternLogEnabled) { printf("%ld INFO ", time(NULL)) ; printf(__VA_ARGS__); printf("\n"); }
+
+#define LANTERN_FUNCTION_START                                     \
+  LLOG("Entering %s", __func__)                                    \
   try {
-#define LANTERN_FUNCTION_END                                     \
-  LOG(INFO) << "Exiting " << __func__;                           \
-} catch(const std::exception& ex) {                              \
-  LOG(INFO) << "Error " << ex.what() << " in " << __func__;      \
-  pLanternLastError = new std::string(ex.what());                \
-  return NULL;                                                   \
-} catch(...) {                                                   \
-  LOG(INFO) << "Error in " << __func__;                          \
-  pLanternLastError = new std::string("Unknown error.");         \
-  return NULL;                                                   \
+#define LANTERN_FUNCTION_END                                       \
+} catch(const std::exception& ex) {                                \
+  LLOG("Error %s in %s", ex.what(), __func__)                      \
+  pLanternLastError = new std::string(ex.what());                  \
+  return NULL;                                                     \
+} catch(...) {                                                     \
+  LLOG("Error in %s", __func__)                                    \
+  pLanternLastError = new std::string("Unknown error. ");          \
+  return NULL;                                                     \
 }
 
 #ifdef __cplusplus
