@@ -4,11 +4,22 @@
 #include <future>
 #include <thread>
 
-#define LANTERN_ERROR_HANDLE                                                    \
-if (lanternLastError() != NULL) {                                               \
-  std::string last = lanternLastError();                                        \
-  lanternLastErrorClear();                                                      \
-  throw Rcpp::exception(last.c_str());                                                  \
+#define LANTERN_CALLBACK_START                                     \
+  try {
+#define LANTERN_CALLBACK_END(unknown, ret)                         \
+} catch(const std::exception& ex) {                                \
+  lanternSetLastError(ex.what());                                  \
+  return (void *)(ret);                                            \
+} catch(...) {                                                     \
+  lanternSetLastError(unknown);                                    \
+  return (void *)(ret);                                            \
+}
+
+#define LANTERN_ERROR_HANDLE                                       \
+if (lanternLastError() != NULL) {                                  \
+  std::string last = lanternLastError();                           \
+  lanternLastErrorClear();                                         \
+  throw Rcpp::exception(last.c_str());                             \
 } 
 
 // [[Rcpp::export]]
@@ -192,17 +203,10 @@ unsigned int cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::F
   auto r_hook = (void *)new std::function<void*(void *)>([f](void *x) {
     
     std::packaged_task<void*()> task([f, x]() {
-      try {
-        auto y = make_xptr<XPtrTorchTensor>(x);
-        return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
-      }
-      catch(const std::exception& ex) {
-        lanternSetLastError(ex.what());
-        return (void *)NULL;
-      } catch(...) {
-        lanternSetLastError("Torch hook error.");
-        return (void *)NULL;
-      }
+      LANTERN_CALLBACK_START
+      auto y = make_xptr<XPtrTorchTensor>(x);
+      return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
+      LANTERN_CALLBACK_END("Unknon error in hook.", NULL)
     });
     std::future<void*> result = task.get_future();
     
@@ -251,7 +255,7 @@ void*  rcpp_call_forward (void* forward, void* ctx, void* inputs) {
 Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
 {
   auto fun = (void *)new std::function<void*(void *, void*)>([f](void *ctx, void* inputs) {
-    
+    LANTERN_CALLBACK_START
     std::packaged_task<void*()> task([f, ctx, inputs]() {
       auto inp = make_xptr<XPtrTorchvariable_list>(inputs);
       auto con = make_xptr<XPtrTorch>(ctx);
@@ -267,8 +271,8 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
       tasks.push_front(std::move(task));
     }
     
-    auto out = result.get();
-    return out;
+    return result.get();
+    LANTERN_CALLBACK_END("Unknown error in lambda function.", lantern_variable_list_new())
   });
   
   XPtrTorch out = lantern_Function_lambda(&rcpp_call_forward, fun);
