@@ -119,6 +119,35 @@ mnist_dataset <- dataset(
   )
 )
 
+#' Kuzushiji-MNIST
+#' 
+#' The [Kuzushiji-MNIST dataset](https://github.com/rois-codh/kmnist).
+#' 
+#' @param root (string): Root directory of dataset where `KMNIST/processed/training.pt`
+#'   and  `KMNIST/processed/test.pt` exist.
+#' @param train (bool, optional): If TRUE, creates dataset from `training.pt`,
+#'   otherwise from `test.pt`.
+#' @param download (bool, optional): If true, downloads the dataset from the internet and
+#'   puts it in root directory. If dataset is already downloaded, it is not
+#'   downloaded again.
+#' @param transform (callable, optional): A function/transform that  takes in an PIL image
+#'   and returns a transformed version. E.g, `transforms.RandomCrop`
+#' @param target_transform (callable, optional): A function/transform that takes in the
+#'   target and transforms it.
+#'   
+#' @export
+kmnist_dataset <- dataset(
+  name = "kminst_dataset",
+  inherit = mnist_dataset,
+  resources = list(
+    c("http://codh.rois.ac.jp/kmnist/dataset/kmnist/train-images-idx3-ubyte.gz", "bdb82020997e1d708af4cf47b453dcf7"),
+    c("http://codh.rois.ac.jp/kmnist/dataset/kmnist/train-labels-idx1-ubyte.gz", "e144d726b3acfaa3e44228e80efcd344"),
+    c("http://codh.rois.ac.jp/kmnist/dataset/kmnist/t10k-images-idx3-ubyte.gz", "5c965bf0a639b31b8f53240b1b52f4d7"),
+    c("http://codh.rois.ac.jp/kmnist/dataset/kmnist/t10k-labels-idx1-ubyte.gz", "7320c461ea6c1c855c0b718fb2a4b134")
+  ),
+  classes = c('o', 'ki', 'su', 'tsu', 'na', 'ha', 'ma', 'ya', 're', 'wo')
+)
+
 read_sn3_pascalvincent <- function(path) {
   x <- gzfile(path, open = "rb")
   on.exit({close(x)})
