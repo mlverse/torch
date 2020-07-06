@@ -11,7 +11,7 @@
   lanternSetLastError(ex.what());                                  \
   return (void *)(ret);                                            \
 } catch(std::string& ex) {                                         \
-  lanternSetLastError(ex);                                         \
+  lanternSetLastError(ex.c_str());                                 \
   return (void *)(ret);                                            \
 } catch(...) {                                                     \
   lanternSetLastError(unknown);                                    \
