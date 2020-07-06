@@ -265,3 +265,32 @@ test_that("to still returns an nn_module", {
   expect_tensor_shape(y(torch_randn(10, 10)), c(10, 10))
   
 })
+
+test_that("moodule$apply", {
+  
+  Net <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 1)
+      self$norm <- nn_batch_norm1d(1)
+    },
+    forward = function(x) {
+      x <- self$linear(x)
+      x <- self$norm(x)
+      x
+    }
+  )
+  
+  net <- Net()
+  zero <- function(x) {
+    if (!is.null(x$weight)) {
+      with_no_grad({
+        x$weight$zero_()
+      })  
+    }
+  }
+  net$apply(zero)
+  
+  expect_equal_to_tensor(net$linear$weight, torch_zeros_like(net$linear$weight))
+  expect_equal_to_tensor(net$norm$weight, torch_zeros_like(net$norm$weight))
+  
+})

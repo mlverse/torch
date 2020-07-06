@@ -190,7 +190,16 @@ nn_Module <- R6::R6Class(
           p$grad$zero_()
         }
       }
+    },
+    
+    apply = function(fn) {
+      for (module in private$modules_) {
+        module$apply(fn)
+      }
+      fn(self)
+      invisible(create_nn_module_callable(self))
     }
+    
   ),
   private = list(
     parameters_ = list(),
