@@ -34,23 +34,28 @@ is_map_dataset <- function(x) {
 #' @param ... public methods for the dataset class
 #' 
 #' @export
-dataset <- function(name = NULL, ...) {
+dataset <- function(name = NULL, inherit = Dataset, ...) {
   
   args <- list(...)
-  active <- args$active
   
+  active <- args$active
   if (!is.null(active))
     args <- args[-which(names(args) == "active")]
   
+  if (!is.null(attr(inherit, "Dataset")))
+    inherit <- attr(inherit, "Dataset")
+    
   d <- R6::R6Class(
     classname = name,
     lock_objects = FALSE,
-    inherit = Dataset,
+    inherit = inherit,
     public = args,
     active = active
   )
   
-  d$new
+  f <- d$new
+  attr(f, "Dataset") <- d
+  f
 }
 
 #' @export
