@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -191,11 +194,11 @@ where \(C = \log(\pi) \times \frac{p (p - 1)}{4}\) and \(\Gamma(\cdot)\) is the 
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))$<span class='fu'>uniform_</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.5628  1.0006  1.1691
-#&gt;  1.4843  1.0556  1.2789
+#&gt;  1.0556  1.2789  1.8263
+#&gt;  1.6091  1.0696  1.5213
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_mvlgamma</span>(<span class='no'>a</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4226  1.1432  0.7965
-#&gt;  0.4604  1.0132  0.6409
+#&gt;  1.0132  0.6409  0.3968
+#&gt;  0.4073  0.9829  0.4407
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

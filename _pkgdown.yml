@@ -32,3 +32,5 @@ navbar:
       href: articles/examples/mnist-mlp.html
     - text: mnist-cnn
       href: articles/examples/mnist-cnn.html
+    - text: mnist-dcgan
+      href: articles/examples/mnist-dcgan.html

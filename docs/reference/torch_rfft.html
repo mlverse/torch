@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -230,64 +233,64 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   3.9069  0.0000
-#&gt;   6.1332 -7.1960
-#&gt;   1.1799  3.1917
+#&gt;   3.5070  0.0000
+#&gt;  -6.3379  0.2220
+#&gt;   4.9062 -2.4598
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   2.7608 -2.5656
-#&gt;   2.9372  2.4412
-#&gt;  -5.0360  5.2319
+#&gt;   0.7748  0.5208
+#&gt;   3.2574 -5.6462
+#&gt;   0.6710 -1.1890
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   2.1129 -2.5218
-#&gt;   0.5721  0.4728
-#&gt;   2.7971  4.8230
+#&gt;  -4.9145  3.8910
+#&gt;  -4.9101  5.5667
+#&gt;   3.5799 -2.7796
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   2.1129  2.5218
-#&gt;   0.2330  3.8823
-#&gt;   7.7532  0.6730
+#&gt;  -4.9145 -3.8910
+#&gt;   4.5738  4.3227
+#&gt;  -2.6069  0.7337
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   2.7608  2.5656
-#&gt;   0.6659 -0.7688
-#&gt;  -1.2298  7.1500
+#&gt;   0.7748 -0.5208
+#&gt;   0.8272  0.1695
+#&gt;  -1.2826 -5.7721
 #&gt; [ CPUFloatType{5,3,2} ]</div><div class='input'><span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   3.9069  0.0000
-#&gt;   6.1332 -7.1960
-#&gt;   1.1799  3.1917
-#&gt;   1.1799 -3.1917
-#&gt;   6.1332  7.1960
+#&gt;   3.5070  0.0000
+#&gt;  -6.3379  0.2220
+#&gt;   4.9062 -2.4598
+#&gt;   4.9062  2.4598
+#&gt;  -6.3379 -0.2220
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   2.7608 -2.5656
-#&gt;   2.9372  2.4412
-#&gt;  -5.0360  5.2319
-#&gt;  -1.2298 -7.1500
-#&gt;   0.6659  0.7688
+#&gt;   0.7748  0.5208
+#&gt;   3.2574 -5.6462
+#&gt;   0.6710 -1.1890
+#&gt;  -1.2826  5.7721
+#&gt;   0.8272 -0.1695
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   2.1129 -2.5218
-#&gt;   0.5721  0.4728
-#&gt;   2.7971  4.8230
-#&gt;   7.7532 -0.6730
-#&gt;   0.2330 -3.8823
+#&gt;  -4.9145  3.8910
+#&gt;  -4.9101  5.5667
+#&gt;   3.5799 -2.7796
+#&gt;  -2.6069 -0.7337
+#&gt;   4.5738 -4.3227
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   2.1129  2.5218
-#&gt;   0.2330  3.8823
-#&gt;   7.7532  0.6730
-#&gt;   2.7971 -4.8230
-#&gt;   0.5721 -0.4728
+#&gt;  -4.9145 -3.8910
+#&gt;   4.5738  4.3227
+#&gt;  -2.6069  0.7337
+#&gt;   3.5799  2.7796
+#&gt;  -4.9101 -5.5667
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   2.7608  2.5656
-#&gt;   0.6659 -0.7688
-#&gt;  -1.2298  7.1500
-#&gt;  -5.0360 -5.2319
-#&gt;   2.9372 -2.4412
+#&gt;   0.7748 -0.5208
+#&gt;   0.8272  0.1695
+#&gt;  -1.2826 -5.7721
+#&gt;   0.6710  1.1890
+#&gt;   3.2574  5.6462
 #&gt; [ CPUFloatType{5,5,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -203,13 +206,13 @@ point <code>dtype</code>.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))$<span class='fu'>uniform_</span>(<span class='fl'>0</span>, <span class='fl'>1</span>)  <span class='co'># generate a uniform random matrix with range c(0, 1)</span>
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4168  0.9872  0.7867
-#&gt;  0.6836  0.2282  0.3014
-#&gt;  0.6749  0.1681  0.8949
+#&gt;  0.2282  0.3014  0.6749
+#&gt;  0.1681  0.8949  0.5381
+#&gt;  0.1645  0.5959  0.9234
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_bernoulli</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0  1  1
 #&gt;  0  0  0
-#&gt;  0  0  1
+#&gt;  0  1  1
+#&gt;  0  1  1
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>)) <span class='co'># probability of drawing "1" is 1</span>
 <span class='fu'>torch_bernoulli</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  1  1  1

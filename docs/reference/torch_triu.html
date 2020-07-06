@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -199,37 +202,37 @@ the main diagonal. The main diagonal are the set of indices
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3862 -0.2357  0.5704
-#&gt;  0.5558 -0.4488 -0.3904
-#&gt;  1.4073 -1.7850 -0.0894
+#&gt; -0.8321  0.2296  0.6339
+#&gt; -1.4584 -0.1590 -0.5214
+#&gt;  1.1335 -0.5759 -2.3110
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3862 -0.2357  0.5704
-#&gt;  0.0000 -0.4488 -0.3904
-#&gt;  0.0000  0.0000 -0.0894
+#&gt; -0.8321  0.2296  0.6339
+#&gt;  0.0000 -0.1590 -0.5214
+#&gt;  0.0000  0.0000 -2.3110
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>a</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0000 -0.2357  0.5704
-#&gt;  0.0000  0.0000 -0.3904
+#&gt;  0.0000  0.2296  0.6339
+#&gt;  0.0000  0.0000 -0.5214
 #&gt;  0.0000  0.0000  0.0000
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>a</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3862 -0.2357  0.5704
-#&gt;  0.5558 -0.4488 -0.3904
-#&gt;  0.0000 -1.7850 -0.0894
+#&gt; -0.8321  0.2296  0.6339
+#&gt; -1.4584 -0.1590 -0.5214
+#&gt;  0.0000 -0.5759 -2.3110
 #&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0168 -0.4837  2.5254  1.0138  0.0936 -0.7116
-#&gt;  1.2263 -1.0299  0.6360  1.8586  1.1980 -0.2932
-#&gt; -1.2835 -0.1012  1.4770 -2.0518 -1.5150 -0.5947
-#&gt;  1.3577 -2.1740  1.3421  0.3728  0.4461 -0.9936
+#&gt;  0.3661  1.2127 -1.2771  0.8142 -0.2304  1.0573
+#&gt;  0.1653 -0.0557 -0.7823 -2.3254  1.1375 -0.1148
+#&gt; -0.2817  0.0859 -1.2968  0.0273  1.0071  0.0363
+#&gt;  0.8186 -1.4656  1.3009 -0.4574  0.5969  0.0608
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0000 -0.4837  2.5254  1.0138  0.0936 -0.7116
-#&gt;  0.0000  0.0000  0.6360  1.8586  1.1980 -0.2932
-#&gt;  0.0000  0.0000  0.0000 -2.0518 -1.5150 -0.5947
-#&gt;  0.0000  0.0000  0.0000  0.0000  0.4461 -0.9936
+#&gt;  0.0000  1.2127 -1.2771  0.8142 -0.2304  1.0573
+#&gt;  0.0000  0.0000 -0.7823 -2.3254  1.1375 -0.1148
+#&gt;  0.0000  0.0000  0.0000  0.0273  1.0071  0.0363
+#&gt;  0.0000  0.0000  0.0000  0.0000  0.5969  0.0608
 #&gt; [ CPUFloatType{4,6} ]</div><div class='input'><span class='fu'>torch_triu</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.0168 -0.4837  2.5254  1.0138  0.0936 -0.7116
-#&gt;  1.2263 -1.0299  0.6360  1.8586  1.1980 -0.2932
-#&gt;  0.0000 -0.1012  1.4770 -2.0518 -1.5150 -0.5947
-#&gt;  0.0000  0.0000  1.3421  0.3728  0.4461 -0.9936
+#&gt;  0.3661  1.2127 -1.2771  0.8142 -0.2304  1.0573
+#&gt;  0.1653 -0.0557 -0.7823 -2.3254  1.1375 -0.1148
+#&gt;  0.0000  0.0859 -1.2968  0.0273  1.0071  0.0363
+#&gt;  0.0000  0.0000  1.3009 -0.4574  0.5969  0.0608
 #&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

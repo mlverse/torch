@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -193,12 +196,12 @@ of the other.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8275  0.2687  0.4284
-#&gt;  0.2057 -0.2063  0.0312
+#&gt; -0.6485  1.1785 -0.4345
+#&gt;  0.3932 -0.0823  1.6974
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_transpose</span>(<span class='no'>x</span>, <span class='fl'>0</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8275  0.2057
-#&gt;  0.2687 -0.2063
-#&gt;  0.4284  0.0312
+#&gt; -0.6485  0.3932
+#&gt;  1.1785 -0.0823
+#&gt; -0.4345  1.6974
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

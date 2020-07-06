@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -188,9 +191,9 @@ If \(N\) is 1, then this is a no-op - the original matrix is returned as is.</p>
 <span class='no'>c</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>6</span>))
 <span class='no'>d</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>7</span>))
 <span class='fu'>torch_chain_matmul</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt;   2.0943   3.8123 -13.6250 -14.2998   1.6971  -0.6454  -4.7941
-#&gt; -10.2585  -2.7219  16.5745   9.0715  -3.8223  -2.2886   3.3800
-#&gt;  16.9294   5.3907 -30.6877 -17.4281   7.7560   4.3074  -7.2602
+#&gt;   5.6439  -0.1779  -5.9123  -3.4097  -2.0155  -4.0229  -1.3628
+#&gt;   7.2858  -2.7516   6.9377   7.9371  21.8088   2.3520 -10.6818
+#&gt;   9.5587  -4.6262 -15.8297   0.8866  -2.2961  -2.1549   0.6902
 #&gt; [ CPUFloatType{3,7} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

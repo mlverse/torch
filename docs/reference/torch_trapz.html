@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -199,12 +202,12 @@
     <pre class="examples"><div class='input'>
 <span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='no'>y</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.1411 -0.9035 -0.6229
-#&gt;  0.9061 -1.3901 -0.3899
+#&gt;  1.4560 -0.5121 -2.1712
+#&gt;  0.5177  0.3804  0.4427
 #&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>byrow</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
 <span class='fu'>torch_trapz</span>(<span class='no'>y</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5256
-#&gt; -1.1320
+#&gt; -0.3977
+#&gt;  0.8606
 #&gt; [ CPUFloatType{2} ]</div><div class='input'>
 </div></pre>
   </div>

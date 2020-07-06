@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -212,26 +215,26 @@ need to be explicitly specified.</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.8700  0.0000  0.0000
-#&gt;   0.0000  2.4435  0.0000
-#&gt;   0.0000  0.0000  1.3747
+#&gt;   0.4466  0.0000  0.0000
+#&gt;   0.0000  0.9917  0.0000
+#&gt;   0.0000  0.0000 -1.4456
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.2728  0.0000  0.0000
-#&gt;   0.0000 -0.7072  0.0000
-#&gt;   0.0000  0.0000 -0.1288
+#&gt;   0.8875  0.0000  0.0000
+#&gt;   0.0000  1.0382  0.0000
+#&gt;   0.0000  0.0000  2.0147
 #&gt; [ CPUFloatType{2,3,3} ]</div><div class='input'><span class='fu'>torch_diag_embed</span>(<span class='no'>a</span>, <span class='kw'>offset</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>dim1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>dim2</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.0000  0.8700  0.0000  0.0000
-#&gt;   0.0000  0.2728  0.0000  0.0000
+#&gt;   0.0000  0.4466  0.0000  0.0000
+#&gt;   0.0000  0.8875  0.0000  0.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0000  0.0000  2.4435  0.0000
-#&gt;   0.0000  0.0000 -0.7072  0.0000
+#&gt;   0.0000  0.0000  0.9917  0.0000
+#&gt;   0.0000  0.0000  1.0382  0.0000
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.0000  0.0000  0.0000  1.3747
-#&gt;   0.0000  0.0000  0.0000 -0.1288
+#&gt;   0.0000  0.0000  0.0000 -1.4456
+#&gt;   0.0000  0.0000  0.0000  2.0147
 #&gt; 
 #&gt; (4,.,.) = 
 #&gt;   0  0  0  0

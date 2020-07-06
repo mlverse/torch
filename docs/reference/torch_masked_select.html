@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -196,21 +199,19 @@ to match, but they must be broadcastable .</p>
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0189  0.9272  0.2813  0.7298
-#&gt; -0.9519 -1.4434 -0.8169  1.5119
-#&gt; -0.7218  1.2583  0.5245 -0.5202
+#&gt;  0.7165 -0.3300  0.6964 -0.1945
+#&gt; -1.0127 -0.9927 -0.3893  0.0444
+#&gt; -0.4914 -0.9095 -0.8418  2.5187
 #&gt; [ CPUFloatType{3,4} ]</div><div class='input'><span class='no'>mask</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='fu'>ge</span>(<span class='fl'>0.5</span>)
 <span class='no'>mask</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0  1  0  1
+#&gt;  1  0  1  0
+#&gt;  0  0  0  0
 #&gt;  0  0  0  1
-#&gt;  0  1  1  0
 #&gt; [ CPUBoolType{3,4} ]</div><div class='input'><span class='fu'>torch_masked_select</span>(<span class='no'>x</span>, <span class='no'>mask</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.9272
-#&gt;  0.7298
-#&gt;  1.5119
-#&gt;  1.2583
-#&gt;  0.5245
-#&gt; [ CPUFloatType{5} ]</div></pre>
+#&gt;  0.7165
+#&gt;  0.6964
+#&gt;  2.5187
+#&gt; [ CPUFloatType{3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

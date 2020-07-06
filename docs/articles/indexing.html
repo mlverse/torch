@@ -84,6 +84,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -107,7 +110,7 @@
 
       
 
-      </header><script src="indexing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="indexing_files/header-attrs-2.3/header-attrs.js"></script><script src="indexing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Indexing tensors</h1>
@@ -212,21 +215,21 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">2</span>, <span class="fl">3</span>)
 <span class="no">x</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.3880 -0.1607 -0.5363</span>
-<span class="co">#&gt; -0.2395  0.2673 -1.7572</span>
+<span class="co">#&gt; -1.1863 -1.9509 -0.3524</span>
+<span class="co">#&gt; -0.9577  0.1135 -1.7498</span>
 <span class="co">#&gt; [ CPUFloatType{2,3} ]</span></pre></body></html></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">x</span>[<span class="fl">1</span>,]
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.3880</span>
-<span class="co">#&gt; -0.1607</span>
-<span class="co">#&gt; -0.5363</span>
+<span class="co">#&gt; -1.1863</span>
+<span class="co">#&gt; -1.9509</span>
+<span class="co">#&gt; -0.3524</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></pre></body></html></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">x</span>[,<span class="fl">1</span>:<span class="fl">2</span>]
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.3880 -0.1607</span>
-<span class="co">#&gt; -0.2395  0.2673</span>
+<span class="co">#&gt; -1.1863 -1.9509</span>
+<span class="co">#&gt; -0.9577  0.1135</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></body></html></div>
 </div>
 <div id="dropping-dimensions" class="section level2">

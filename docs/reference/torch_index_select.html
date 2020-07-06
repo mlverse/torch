@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -203,17 +206,17 @@ of <code>index</code>; other dimensions have the same size as in the original te
     <pre class="examples"><div class='input'>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.3646 -0.0278 -1.0814 -1.9364
-#&gt;  1.6946 -0.4611 -1.9319 -1.8129
-#&gt;  1.9425 -0.5303 -0.5905 -1.3148
+#&gt; -0.4119 -0.9084 -0.2058  0.6623
+#&gt; -0.7713  1.2502 -1.3211 -0.3917
+#&gt; -0.7180  1.0813 -0.4049  0.6989
 #&gt; [ CPUFloatType{3,4} ]</div><div class='input'><span class='no'>indices</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_int64</span>())
 <span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>0</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.3646 -0.0278 -1.0814 -1.9364
-#&gt;  1.9425 -0.5303 -0.5905 -1.3148
+#&gt; -0.4119 -0.9084 -0.2058  0.6623
+#&gt; -0.7180  1.0813 -0.4049  0.6989
 #&gt; [ CPUFloatType{2,4} ]</div><div class='input'><span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.3646 -1.0814
-#&gt;  1.6946 -1.9319
-#&gt;  1.9425 -0.5905
+#&gt; -0.4119 -0.2058
+#&gt; -0.7713 -1.3211
+#&gt; -0.7180 -0.4049
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -199,25 +202,25 @@ documentation for the exact semantics of this method.</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.4540  1.0559 -0.2123 -0.0959
-#&gt; -1.6404 -1.4737 -0.9287 -1.2562
-#&gt;  1.0944 -1.5114  0.7530  1.7703
-#&gt;  1.1729 -0.0781 -0.5965 -1.8268
+#&gt;  3.3513e-01 -2.3507e-01 -6.9102e-01  1.7954e-02
+#&gt;  1.6427e+00 -3.6621e-01 -2.0760e+00  7.2642e-02
+#&gt;  8.4440e-02  8.9394e-01 -1.2944e+00 -9.7879e-05
+#&gt; -9.4790e-02 -7.3476e-01 -9.6850e-01  8.5480e-01
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 15
+#&gt; 6
 #&gt; [ CPULongType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.7465  1.5828  0.3605 -0.2214
-#&gt;  0.7565 -0.9244 -1.4485  0.7458
-#&gt;  0.6008  0.4704  0.8442 -0.2170
-#&gt; -1.9292 -2.1756 -0.2528 -0.4802
+#&gt;  1.5920 -1.4242  1.6164 -0.2802
+#&gt; -0.5818 -1.8050  0.7485  1.0217
+#&gt; -0.1692  0.3597 -0.2543  0.2064
+#&gt;  1.3153  0.2537  0.7045 -0.0802
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0
+#&gt;  1
+#&gt;  1
 #&gt;  2
 #&gt;  3
-#&gt;  1
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

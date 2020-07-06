@@ -125,6 +125,9 @@
     <li>
       <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
     </li>
+    <li>
+      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -194,42 +197,42 @@ $$</p>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3751
-#&gt; -0.6010
-#&gt;  1.7446
-#&gt; -0.1877
-#&gt; -0.1277
-#&gt; -0.0612
-#&gt; -1.8206
-#&gt;  0.6495
-#&gt;  0.8354
-#&gt;  0.2696
+#&gt;  1.8440
+#&gt; -1.1104
+#&gt;  1.7543
+#&gt; -0.4391
+#&gt;  0.0807
+#&gt; -2.0722
+#&gt; -0.2054
+#&gt; -0.5958
+#&gt;  3.0642
+#&gt; -0.1375
 #&gt; [ CPUFloatType{10} ]</div><div class='input'><span class='fu'>torch_cummax</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>0</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt;  0.3751
-#&gt;  0.3751
-#&gt;  1.7446
-#&gt;  1.7446
-#&gt;  1.7446
-#&gt;  1.7446
-#&gt;  1.7446
-#&gt;  1.7446
-#&gt;  1.7446
-#&gt;  1.7446
+#&gt;  1.8440
+#&gt;  1.8440
+#&gt;  1.8440
+#&gt;  1.8440
+#&gt;  1.8440
+#&gt;  1.8440
+#&gt;  1.8440
+#&gt;  1.8440
+#&gt;  3.0642
+#&gt;  3.0642
 #&gt; [ CPUFloatType{10} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
 #&gt;  0
 #&gt;  0
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  2
+#&gt;  0
+#&gt;  0
+#&gt;  0
+#&gt;  0
+#&gt;  0
+#&gt;  0
+#&gt;  8
+#&gt;  8
 #&gt; [ CPULongType{10} ]
 #&gt; </div></pre>
   </div>
