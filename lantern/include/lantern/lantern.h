@@ -40,6 +40,10 @@ extern bool lanternLogEnabled;
   LLOG("Error %s in %s", ex.what(), __func__)                      \
   pLanternLastError = new std::string(ex.what());                  \
   return NULL;                                                     \
+} catch(std::string& ex) {                                         \
+  LLOG("Error %s in %s", ex.c_str(), __func__)                     \
+  pLanternLastError = new std::string(ex);                         \
+  return NULL;                                                     \
 } catch(...) {                                                     \
   LLOG("Error in %s", __func__)                                    \
   pLanternLastError = new std::string("Unknown error. ");          \

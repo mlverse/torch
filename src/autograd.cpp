@@ -10,6 +10,9 @@
 } catch(const std::exception& ex) {                                \
   lanternSetLastError(ex.what());                                  \
   return (void *)(ret);                                            \
+} catch(std::string& ex) {                                         \
+  lanternSetLastError(ex);                                         \
+  return (void *)(ret);                                            \
 } catch(...) {                                                     \
   lanternSetLastError(unknown);                                    \
   return (void *)(ret);                                            \
