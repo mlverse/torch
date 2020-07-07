@@ -78,7 +78,7 @@ jobs:
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/build
       - name: Prep cmake cuda 10.1
-        if: ${{ matrix.cuda == "10.1" }}
+        if: ${{ matrix.cuda == 10.1 }}
         run: |
           wget --quiet https://storage.googleapis.com/torch-lantern-builds/cuda/cuda_10.1.105_418.39_linux.run
           chmod +x cuda_10.1.105_418.39_linux.run
@@ -94,7 +94,7 @@ jobs:
           echo ::set-env name=CUDNN_LIBRARY_PATH::/usr/local/cuda/lib64
           echo ::set-env name=CUDNN_INCLUDE_PATH::/usr/local/cuda/include
       - name: Prep cmake cuda 10.2
-        if: ${{ matrix.cuda == "10.2" }}
+        if: ${{ matrix.cuda == 10.2 }}
         run: |
           wget --quiet http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
           chmod +x cuda_10.2.89_440.33.01_linux.run
