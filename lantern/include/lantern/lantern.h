@@ -11,11 +11,13 @@
 #ifdef LANTERN_BUILD
 #define LANTERN_PTR
 #define LANTERN_HEADERS_ONLY
+#define HOST_API //
 #ifdef _WIN32
 #define LANTERN_API extern "C" __declspec(dllexport)
 #endif
 #else
 #define LANTERN_PTR *
+#define HOST_API
 #endif
 
 #ifndef LANTERN_API
