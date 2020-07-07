@@ -152,19 +152,24 @@ jobs:
         include:
           - name: macOS
             artifact: macOS
+            upload: macOS
             hw: cpu
           - name: Linux
             artifact: Linux
+            upload: Linux
             hw: cpu
           - name: Windows
             artifact: Windows
+            upload: Windows
             hw: cpu
           - name: Cuda101
             artifact: Linux-Cuda-101
+            upload: Linux
             hw: gpu
             version: -101
           - name: Cuda102
             artifact: Linux-Cuda-102
+            upload: Linux
             hw: gpu
             version: -102
     steps:
@@ -182,7 +187,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.name }}-${{ matrix.hw }}${{ matrix.version }}.zip
+          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.upload }}-${{ matrix.hw }}${{ matrix.version }}.zip
       - name: Upload to latest
         uses: actions-hub/gcloud@master
         env:
@@ -190,7 +195,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/latest/${{ matrix.name }}-${{ matrix.hw }}${{ matrix.version }}.zip
+          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/latest/${{ matrix.upload }}-${{ matrix.hw }}${{ matrix.version }}.zip
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)
