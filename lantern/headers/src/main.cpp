@@ -318,9 +318,20 @@ int main(int argc, char *argv[])
             std::string firstName = config[idx]["arguments"][0]["name"].as<std::string>();
             functionCall = "((LanternObject<" + addNamespace(firstType) + ">*)" + firstName + ")->get().";
 
+            bool skipCuda102 = function == "true_divide_tensor_scalar" ||
+                               function == "true_divide__tensor_scalar" ||
+                               function == "true_divide_tensor_tensor" ||
+                               function == "true_divide__tensor_tensor";
+
             bodies.push_back("void* lantern_Tensor_" + function + "(" + arguments + ")");
             bodies.push_back("{");
             bodies.push_back("  LANTERN_FUNCTION_START");
+            if (skipCuda102)
+            {
+                bodies.push_back("#ifdef CUDA102");
+                bodies.push_back("    throw \"Not Implemented\";");
+                bodies.push_back("#else");
+            }
             if (returns == "void" | (config[idx]["returns"].size() == 0))
             {
                 bodies.push_back("    " + functionCall + name + "(" + calls + ");");
@@ -338,6 +349,10 @@ int main(int argc, char *argv[])
                     bodies.push_back("    return (void *) new LanternObject<" + returns + ">(to_vector(" + functionCall + name + "(");
                     bodies.push_back("        " + calls + ")));");
                 }
+            }
+            if (skipCuda102)
+            {
+                bodies.push_back("#endif");
             }
             bodies.push_back("  LANTERN_FUNCTION_END");
             bodies.push_back("}");
