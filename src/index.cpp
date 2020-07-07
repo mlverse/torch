@@ -189,6 +189,13 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       continue;
     }
     
+    if (Rf_inherits(slice, "torch_tensor"))
+    {
+      Rcpp::Environment e = slice;
+      Rcpp::XPtr<XPtrTorchTensor> t = e["ptr"];
+      lantern_TensorIndex_append_tensor(index.get(), t->get());
+    }
+    
   }
   
   return index;

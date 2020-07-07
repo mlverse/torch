@@ -61,3 +61,18 @@ test_that("indexing error expectations", {
   expect_error(x[0])
   expect_error(x[c(0, 1)])
 })
+
+test_that("indexing with boolean tensor", {
+  
+  x <- torch_tensor(c(-1, -2, 0, 1, 2))
+  expect_tensor_equal_to_r(x[x < 0], c(-1, -2))
+  
+  x <- torch_tensor(rbind(
+    c(-1, -2, 0, 1, 2),
+    c(2, 1, 0, -1, -2)
+  ))
+  
+  expect_tensor_equal_to_r(x[x < 0], c(-1, -2, -1, -2))
+  
+  expect_error(x[x < 0, 1])
+})
