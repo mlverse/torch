@@ -88,8 +88,8 @@ init_weights <- function(m) {
   } 
 }
 
-gen[[1]]$apply(init_weights)
-disc[[1]]$apply(init_weights)
+G[[1]]$apply(init_weights)
+D[[1]]$apply(init_weights)
 
 G$to(device = device)
 D$to(device = device)
