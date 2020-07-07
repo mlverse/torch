@@ -65,14 +65,23 @@ test_that("indexing error expectations", {
 test_that("indexing with boolean tensor", {
   
   x <- torch_tensor(c(-1, -2, 0, 1, 2))
-  expect_tensor_equal_to_r(x[x < 0], c(-1, -2))
+  expect_equal_to_r(x[x < 0], c(-1, -2))
   
   x <- torch_tensor(rbind(
     c(-1, -2, 0, 1, 2),
     c(2, 1, 0, -1, -2)
   ))
   
-  expect_tensor_equal_to_r(x[x < 0], c(-1, -2, -1, -2))
+  expect_equal_to_r(x[x < 0], c(-1, -2, -1, -2))
   
   expect_error(x[x < 0, 1])
+})
+
+test_that("slice with negative indexes", {
+  
+  x <- torch_tensor(c(1,2,3))
+  expect_equal_to_r(x[2:-1], c(2,3))
+  expect_equal_to_r(x[-2:-1], c(2,3))
+  expect_equal_to_r(x[-3:-2], c(1,2))
+  
 })
