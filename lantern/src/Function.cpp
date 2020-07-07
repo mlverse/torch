@@ -103,6 +103,13 @@ variable_list LanternNode::apply(variable_list &&inputs)
     }
 
     auto outputs = this->backward_(&ctx_, backward_inputs);
+    LLOG("Checking outputs")
+    if (lanternLastError() != NULL) {
+        std::string last = lanternLastError();
+        LLOG("Checking outputs, exception: %s", last.c_str());
+        lanternLastErrorClear();
+        throw std::runtime_error(last.c_str());
+    } 
 
     int num_forward_inputs = is_variable_input_.size();
     int num_outputs = outputs.size();
