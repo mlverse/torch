@@ -137,10 +137,6 @@ cpp_dimname_list_to_string <- function(x) {
     cpp_handle_error(.Call('_torch_cpp_dimname_list_to_string', PACKAGE = 'torchpkg', x))
 }
 
-export_dots_standardize <- function(env, eval_env) {
-    cpp_handle_error(.Call('_torch_export_dots_standardize', PACKAGE = 'torchpkg', env, eval_env))
-}
-
 cpp_dtype_to_string <- function(dtype) {
     cpp_handle_error(.Call('_torch_cpp_dtype_to_string', PACKAGE = 'torchpkg', dtype))
 }
@@ -6889,6 +6885,18 @@ cpp_generator_set_current_seed <- function(generator, seed) {
     invisible(cpp_handle_error(.Call('_torch_cpp_generator_set_current_seed', PACKAGE = 'torchpkg', generator, seed)))
 }
 
+enquos0 <- function(env) {
+    cpp_handle_error(.Call('_torch_enquos0', PACKAGE = 'torchpkg', env))
+}
+
+evaluate_slices <- function(quosures, mask) {
+    cpp_handle_error(.Call('_torch_evaluate_slices', PACKAGE = 'torchpkg', quosures, mask))
+}
+
+Tensor_slice <- function(self, e, drop, mask) {
+    cpp_handle_error(.Call('_torch_Tensor_slice', PACKAGE = 'torchpkg', self, e, drop, mask))
+}
+
 cpp_torch_tensor_index <- function(self, index) {
     cpp_handle_error(.Call('_torch_cpp_torch_tensor_index', PACKAGE = 'torchpkg', self, index))
 }
@@ -7095,18 +7103,6 @@ cpp_Tensor_has_storage <- function(self) {
 
 cpp_Storage_data_ptr <- function(self) {
     cpp_handle_error(.Call('_torch_cpp_Storage_data_ptr', PACKAGE = 'torchpkg', self))
-}
-
-enquos0 <- function(env) {
-    cpp_handle_error(.Call('_torch_enquos0', PACKAGE = 'torchpkg', env))
-}
-
-evaluate_slices <- function(quosures, mask) {
-    cpp_handle_error(.Call('_torch_evaluate_slices', PACKAGE = 'torchpkg', quosures, mask))
-}
-
-Tensor_slice <- function(self, e, drop, mask) {
-    cpp_handle_error(.Call('_torch_Tensor_slice', PACKAGE = 'torchpkg', self, e, drop, mask))
 }
 
 cpp_torch_tensor_print <- function(x) {

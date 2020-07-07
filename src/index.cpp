@@ -119,12 +119,15 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       {
         s = s-1;
       }
+      else if (s == 0)
+      {
+        Rcpp::stop("Indexing in R is 1-based and found a 0.");
+      }
     
       lantern_TensorIndex_append_int64(index.get(), s);
       
       if (!drop)
       {
-        Rcpp::Rcout << "hello";
         lantern_TensorIndex_append_none(index.get());
       }
       
@@ -168,6 +171,10 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
         if (v[j] > 0)
         {
           v[j] = v[j] - 1; // make it 0-based.
+        }
+        else if (v[j] == 0)
+        {
+          Rcpp::stop("Indexing in R is 1-based and found a 0.");
         }
       }
     

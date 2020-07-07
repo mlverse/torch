@@ -57,4 +57,7 @@ test_that("[ works", {
 test_that("indexing error expectations", {
   x <- torch_randn(c(10,10,10,10))
   expect_error(x[1,1,1,1,1])
+  x <- torch_tensor(10)
+  expect_error(x[0])
+  expect_error(x[c(0, 1)])
 })
