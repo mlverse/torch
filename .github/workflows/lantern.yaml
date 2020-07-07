@@ -102,7 +102,7 @@ jobs:
           echo ::set-env name=CUDA::${{matrix.cuda}}
           echo ::set-env name=CUDA_TOOLKIT_ROOT_DIR::/usr/local/cuda
           dir /usr/local
-          wget --quiet https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.2_20191118/cudnn-10.2-linux-x64-v7.6.5.32.tgz
+          wget --quiet https://storage.cloud.google.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz
           tar -xzvf cudnn-10.2-linux-x64-v7.6.5.32.tgz
           sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
           sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
