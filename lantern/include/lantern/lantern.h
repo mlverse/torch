@@ -26,29 +26,37 @@
 #endif
 #endif
 
+#ifndef LANTERN_HOST_HANDLER
+#define LANTERN_HOST_HANDLER
+#endif
+
 #include <stdint.h>
 #include <stdio.h>
 
 extern bool lanternLogEnabled;
 #define LLOG(...) if (lanternLogEnabled) { printf("%ld INFO ", time(NULL)) ; printf(__VA_ARGS__); printf("\n"); }
 
+#ifdef LANTERN_BUILD
+extern std::string *pLanternLastError;
+#endif
 #define LANTERN_FUNCTION_START                                     \
   LLOG("Entering %s", __func__)                                    \
   try {
-#define LANTERN_FUNCTION_END                                       \
+#define LANTERN_FUNCTION_END_RET(ret)                              \
 } catch(const std::exception& ex) {                                \
   LLOG("Error %s in %s", ex.what(), __func__)                      \
   pLanternLastError = new std::string(ex.what());                  \
-  return NULL;                                                     \
+  return ret;                                                      \
 } catch(std::string& ex) {                                         \
   LLOG("Error %s in %s", ex.c_str(), __func__)                     \
   pLanternLastError = new std::string(ex);                         \
-  return NULL;                                                     \
+  return ret;                                                      \
 } catch(...) {                                                     \
   LLOG("Error in %s", __func__)                                    \
   pLanternLastError = new std::string("Unknown error. ");          \
-  return NULL;                                                     \
+  return ret;                                                      \
 }
+#define LANTERN_FUNCTION_END LANTERN_FUNCTION_END_RET(NULL)
 
 #ifdef __cplusplus
 extern "C"
