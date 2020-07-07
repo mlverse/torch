@@ -693,6 +693,7 @@ test_that("autograd_grad retain grad", {
   
   out <- autograd_grad(loss, list(w, b))
   expect_length(out, 2)
+  skip_on_os("windows")
   expect_error(autograd_grad(loss, list(w, b)), regexp = "graph a second time")
   
   w <- torch_tensor(0.5, requires_grad = TRUE)
