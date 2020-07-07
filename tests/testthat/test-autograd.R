@@ -717,6 +717,7 @@ test_that("autograd_grad allow unused", {
   y <- 2 * x + 1
   loss <- (y - (w*x))^2
   loss <- loss$mean()
+  skip_on_os("windows")
   expect_error(
     autograd_grad(loss, list(w, b)),
     regexp = "not have been used in the graph"
