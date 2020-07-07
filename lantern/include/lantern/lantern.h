@@ -1967,6 +1967,10 @@ void *pLibrary = NULL;
   if (!laternLoadSymbol(pLibrary, #name, (void **)&name, pError)) \
     return false;
 
+#define LOAD_SYMBOL2(name, dest)                                         \
+  if (!laternLoadSymbol(pLibrary, #name, (void **)&dest, pError)) \
+    return false;
+
 void lanternLoadError(std::string *pError)
 {
 #ifdef _WIN32
