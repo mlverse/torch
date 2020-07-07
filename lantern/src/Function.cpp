@@ -2,6 +2,15 @@
 #include <torch/csrc/autograd/functions/accumulate_grad.h>
 #include <torch/torch.h>
 
+#include "lantern/lantern.h"
+
+#define LANTERN_ERROR_HANDLE                                         \
+if (lanternLastError() != NULL) {                                    \
+    std::string last = lanternLastError();                           \
+    lanternLastErrorClear();                                         \
+    throw std::string(last.c_str());                                 \
+} 
+
 namespace torch
 {
 namespace autograd
@@ -43,6 +52,7 @@ variable_list LanternFunction::apply(
     {
         AutoGradMode grad_mode(false);
         outputs = forward(&node->ctx_, args);
+        LANTERN_ERROR_HANDLE
     }
 
     auto wrapped_outputs = _wrap_outputs(
@@ -93,6 +103,13 @@ variable_list LanternNode::apply(variable_list &&inputs)
     }
 
     auto outputs = this->backward_(&ctx_, backward_inputs);
+    LLOG("Checking outputs")
+    if (lanternLastError() != NULL) {
+        std::string last = lanternLastError();
+        LLOG("Checking outputs, exception: %s", last.c_str());
+        lanternLastErrorClear();
+        throw std::runtime_error(last.c_str());
+    } 
 
     int num_forward_inputs = is_variable_input_.size();
     int num_outputs = outputs.size();
