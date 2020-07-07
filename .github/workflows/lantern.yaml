@@ -60,7 +60,19 @@ jobs:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
             flavor: Release
             artifacts: liblantern.so
-            upload: Linux-Cuda
+            upload: Linux-Cuda-101
+          - os: ubuntu-18.04
+            cuda: 10.2
+            library: liblantern.so
+            test: ./lanterntest
+            make: make
+            build: build
+            libext:
+            exeext:
+            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
+            flavor: Release
+            artifacts: liblantern.so
+            upload: Linux-Cuda-102
     steps:
       - uses: actions/checkout@v2
       - name: Create environment
@@ -132,8 +144,13 @@ jobs:
             artifact: Windows
             hw: cpu
           - name: Linux
-            artifact: Linux-Cuda
+            artifact: Linux-Cuda-101
             hw: gpu
+            version: -101
+          - name: Linux
+            artifact: Linux-Cuda-102
+            hw: gpu
+            version: -102
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v1
@@ -149,7 +166,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.name }}-${{ matrix.hw }}.zip
+          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.name }}-${{ matrix.hw }}${{ matrix.version }}.zip
       - name: Upload to latest
         uses: actions-hub/gcloud@master
         env:
@@ -157,7 +174,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/latest/${{ matrix.name }}-${{ matrix.hw }}.zip
+          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/latest/${{ matrix.name }}-${{ matrix.hw }}${{ matrix.version }}.zip
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)
