@@ -390,6 +390,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// export_dots_standardize
+SEXP export_dots_standardize(SEXP env, SEXP eval_env);
+RcppExport SEXP _torch_export_dots_standardize(SEXP envSEXP, SEXP eval_envSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type env(envSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type eval_env(eval_envSEXP);
+    rcpp_result_gen = Rcpp::wrap(export_dots_standardize(env, eval_env));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_dtype_to_string
 std::string cpp_dtype_to_string(Rcpp::XPtr<XPtrTorchDtype> dtype);
 RcppExport SEXP _torch_cpp_dtype_to_string(SEXP dtypeSEXP) {
@@ -23564,6 +23576,43 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// enquos0
+std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env);
+RcppExport SEXP _torch_enquos0(SEXP envSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::Environment >::type env(envSEXP);
+    rcpp_result_gen = Rcpp::wrap(enquos0(env));
+    return rcpp_result_gen;
+END_RCPP
+}
+// evaluate_slices
+std::vector<Rcpp::RObject> evaluate_slices(std::vector<Rcpp::RObject> quosures, Rcpp::List mask);
+RcppExport SEXP _torch_evaluate_slices(SEXP quosuresSEXP, SEXP maskSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<Rcpp::RObject> >::type quosures(quosuresSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type mask(maskSEXP);
+    rcpp_result_gen = Rcpp::wrap(evaluate_slices(quosures, mask));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Tensor_slice
+Rcpp::XPtr<XPtrTorchTensor> Tensor_slice(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e, bool drop, Rcpp::List mask);
+RcppExport SEXP _torch_Tensor_slice(SEXP selfSEXP, SEXP eSEXP, SEXP dropSEXP, SEXP maskSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Environment >::type e(eSEXP);
+    Rcpp::traits::input_parameter< bool >::type drop(dropSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type mask(maskSEXP);
+    rcpp_result_gen = Rcpp::wrap(Tensor_slice(self, e, drop, mask));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor_print
 void cpp_torch_tensor_print(Rcpp::XPtr<XPtrTorchTensor> x);
 RcppExport SEXP _torch_cpp_torch_tensor_print(SEXP xSEXP) {
@@ -23850,6 +23899,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_dimname_list", (DL_FUNC) &_torch_cpp_torch_dimname_list, 1},
     {"_torch_cpp_dimname_to_string", (DL_FUNC) &_torch_cpp_dimname_to_string, 1},
     {"_torch_cpp_dimname_list_to_string", (DL_FUNC) &_torch_cpp_dimname_list_to_string, 1},
+    {"_torch_export_dots_standardize", (DL_FUNC) &_torch_export_dots_standardize, 2},
     {"_torch_cpp_dtype_to_string", (DL_FUNC) &_torch_cpp_dtype_to_string, 1},
     {"_torch_cpp_torch_float32", (DL_FUNC) &_torch_cpp_torch_float32, 0},
     {"_torch_cpp_torch_float64", (DL_FUNC) &_torch_cpp_torch_float64, 0},
@@ -25589,6 +25639,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_Tensor_storage", (DL_FUNC) &_torch_cpp_Tensor_storage, 1},
     {"_torch_cpp_Tensor_has_storage", (DL_FUNC) &_torch_cpp_Tensor_has_storage, 1},
     {"_torch_cpp_Storage_data_ptr", (DL_FUNC) &_torch_cpp_Storage_data_ptr, 1},
+    {"_torch_enquos0", (DL_FUNC) &_torch_enquos0, 1},
+    {"_torch_evaluate_slices", (DL_FUNC) &_torch_evaluate_slices, 2},
+    {"_torch_Tensor_slice", (DL_FUNC) &_torch_Tensor_slice, 4},
     {"_torch_cpp_torch_tensor_print", (DL_FUNC) &_torch_cpp_torch_tensor_print, 1},
     {"_torch_cpp_torch_tensor_dtype", (DL_FUNC) &_torch_cpp_torch_tensor_dtype, 1},
     {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},

@@ -5,3 +5,9 @@ bench::mark(min_time = 1,
   x[1,,],
   torch_select(x, 0, 1)
 )
+
+
+profvis::profvis({
+  for (i in 1:500)
+    x[1,,]
+})
