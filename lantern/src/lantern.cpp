@@ -6930,16 +6930,24 @@ void* lantern_true_divide_tensor_tensor(void* self, void* other)
 void* lantern_Tensor_true_divide_tensor_tensor(void* self, void* other)
 {
   LANTERN_FUNCTION_START
+#ifdef CUDA102
+    throw "Not Implemented";
+#else
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().true_divide(
         ((LanternObject<torch::Tensor>*)other)->get()));
+#endif
   LANTERN_FUNCTION_END
 }
 
 void* lantern_Tensor_true_divide__tensor_tensor(void* self, void* other)
 {
   LANTERN_FUNCTION_START
+#ifdef CUDA102
+    throw "Not Implemented";
+#else
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().true_divide_(
         ((LanternObject<torch::Tensor>*)other)->get()));
+#endif
   LANTERN_FUNCTION_END
 }
 
@@ -6962,16 +6970,24 @@ void* lantern_true_divide_tensor_scalar(void* self, void* other)
 void* lantern_Tensor_true_divide_tensor_scalar(void* self, void* other)
 {
   LANTERN_FUNCTION_START
+#ifdef CUDA102
+    throw "Not Implemented";
+#else
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().true_divide(
         ((LanternObject<torch::Scalar>*)other)->get()));
+#endif
   LANTERN_FUNCTION_END
 }
 
 void* lantern_Tensor_true_divide__tensor_scalar(void* self, void* other)
 {
   LANTERN_FUNCTION_START
+#ifdef CUDA102
+    throw "Not Implemented";
+#else
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().true_divide_(
         ((LanternObject<torch::Scalar>*)other)->get()));
+#endif
   LANTERN_FUNCTION_END
 }
 
