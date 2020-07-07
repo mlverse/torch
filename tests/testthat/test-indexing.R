@@ -84,4 +84,6 @@ test_that("slice with negative indexes", {
   expect_equal_to_r(x[-2:-1], c(2,3))
   expect_equal_to_r(x[-3:-2], c(1,2))
   
+  expect_equal_to_r(x[c(-1, -2)], c(3, 2))
+  
 })
