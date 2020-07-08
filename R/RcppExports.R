@@ -6901,42 +6901,6 @@ Tensor_slice_put <- function(self, e, rhs, mask) {
     invisible(cpp_handle_error(.Call('_torch_Tensor_slice_put', PACKAGE = 'torchpkg', self, e, rhs, mask)))
 }
 
-cpp_torch_tensor_index <- function(self, index) {
-    cpp_handle_error(.Call('_torch_cpp_torch_tensor_index', PACKAGE = 'torchpkg', self, index))
-}
-
-cpp_torch_tensor_index_new <- function() {
-    cpp_handle_error(.Call('_torch_cpp_torch_tensor_index_new', PACKAGE = 'torchpkg'))
-}
-
-cpp_torch_tensor_index_append_tensor <- function(self, x) {
-    invisible(cpp_handle_error(.Call('_torch_cpp_torch_tensor_index_append_tensor', PACKAGE = 'torchpkg', self, x)))
-}
-
-cpp_torch_tensor_index_append_bool <- function(self, x) {
-    invisible(cpp_handle_error(.Call('_torch_cpp_torch_tensor_index_append_bool', PACKAGE = 'torchpkg', self, x)))
-}
-
-cpp_torch_tensor_index_append_int64 <- function(self, x) {
-    invisible(cpp_handle_error(.Call('_torch_cpp_torch_tensor_index_append_int64', PACKAGE = 'torchpkg', self, x)))
-}
-
-cpp_torch_tensor_index_append_ellipsis <- function(self) {
-    invisible(cpp_handle_error(.Call('_torch_cpp_torch_tensor_index_append_ellipsis', PACKAGE = 'torchpkg', self)))
-}
-
-cpp_torch_tensor_index_append_none <- function(self) {
-    invisible(cpp_handle_error(.Call('_torch_cpp_torch_tensor_index_append_none', PACKAGE = 'torchpkg', self)))
-}
-
-cpp_torch_tensor_index_append_slice <- function(self, x) {
-    invisible(cpp_handle_error(.Call('_torch_cpp_torch_tensor_index_append_slice', PACKAGE = 'torchpkg', self, x)))
-}
-
-cpp_torch_slice <- function(start, end, step) {
-    cpp_handle_error(.Call('_torch_cpp_torch_slice', PACKAGE = 'torchpkg', start, end, step))
-}
-
 cpp_lantern_configure <- function(log) {
     invisible(cpp_handle_error(.Call('_torch_cpp_lantern_configure', PACKAGE = 'torchpkg', log)))
 }
