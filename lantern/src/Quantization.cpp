@@ -8,7 +8,7 @@
 
 #include "utils.hpp"
 
-bool lantern_Tensor_is_quantized(void *x)
+bool _lantern_Tensor_is_quantized(void *x)
 {
     return reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get().is_quantized();
 }

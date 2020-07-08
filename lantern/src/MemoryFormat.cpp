@@ -8,22 +8,22 @@
 
 #include "utils.hpp"
 
-void *lantern_MemoryFormat_Contiguous()
+void *_lantern_MemoryFormat_Contiguous()
 {
   return (void *)new LanternObject<torch::MemoryFormat>(torch::MemoryFormat::Contiguous);
 }
 
-void *lantern_MemoryFormat_Preserve()
+void *_lantern_MemoryFormat_Preserve()
 {
   return (void *)new LanternObject<torch::MemoryFormat>(torch::MemoryFormat::Preserve);
 }
 
-void *lantern_MemoryFormat_ChannelsLast()
+void *_lantern_MemoryFormat_ChannelsLast()
 {
   return (void *)new LanternObject<torch::MemoryFormat>(torch::MemoryFormat::ChannelsLast);
 }
 
-const char *lantern_MemoryFormat_type(void *format)
+const char *_lantern_MemoryFormat_type(void *format)
 {
 
   torch::MemoryFormat y = reinterpret_cast<LanternObject<torch::MemoryFormat> *>(format)->get();

@@ -8,16 +8,19 @@
 
 #include "utils.hpp"
 
-void *lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size, void *options)
+void *_lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size, void *options)
 {
+  LANTERN_FUNCTION_START
   return (void *)new LanternObject<torch::Tensor>(torch::from_blob(
       data,
       std::vector<int64_t>(sizes, sizes + sizes_size),
       reinterpret_cast<LanternObject<torch::TensorOptions> *>(options)->get()));
+  LANTERN_FUNCTION_END
 }
 
-const char *lantern_Tensor_StreamInsertion(void *x)
+const char *_lantern_Tensor_StreamInsertion(void *x)
 {
+  LANTERN_FUNCTION_START
   std::stringstream ss;
 
   auto tensor = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
@@ -34,110 +37,145 @@ const char *lantern_Tensor_StreamInsertion(void *x)
   char *cstr = new char[str.length() + 1];
   strcpy(cstr, str.c_str());
   return cstr;
+  LANTERN_FUNCTION_END
 }
 
-void *lantern_Tensor_clone(void *self)
+void *_lantern_Tensor_clone(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return (void *)new LanternObject<torch::Tensor>(x.clone());
+  LANTERN_FUNCTION_END
 }
 
-void *lantern_Tensor_permute(void *self, void *dims)
+void *_lantern_Tensor_permute(void *self, void *dims)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   std::vector<int64_t> y = reinterpret_cast<LanternObject<std::vector<int64_t>> *>(dims)->get();
   return (void *)new LanternObject<torch::Tensor>(x.permute(y));
+  LANTERN_FUNCTION_END
 }
 
-void *lantern_Tensor_contiguous(void *self)
+void *_lantern_Tensor_contiguous(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return (void *)new LanternObject<torch::Tensor>(x.contiguous());
+  LANTERN_FUNCTION_END
 }
 
-void *lantern_Tensor_to(void *self, void *options)
+void *_lantern_Tensor_to(void *self, void *options)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   torch::TensorOptions y = reinterpret_cast<LanternObject<torch::TensorOptions> *>(options)->get();
   return (void *)new LanternObject<torch::Tensor>(x.to(y));
+  LANTERN_FUNCTION_END
 }
 
-void *lantern_Tensor_set_requires_grad(void *self, bool requires_grad)
+void *_lantern_Tensor_set_requires_grad(void *self, bool requires_grad)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return (void *)new LanternObject<torch::Tensor>(x.set_requires_grad(requires_grad));
+  LANTERN_FUNCTION_END
 }
 
-double *lantern_Tensor_data_ptr_double(void *self)
+double *_lantern_Tensor_data_ptr_double(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.data_ptr<double>();
+  LANTERN_FUNCTION_END
 }
 
-uint8_t *lantern_Tensor_data_ptr_uint8_t(void *self)
+uint8_t *_lantern_Tensor_data_ptr_uint8_t(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.data_ptr<uint8_t>();
+  LANTERN_FUNCTION_END
 }
 
-int32_t *lantern_Tensor_data_ptr_int32_t(void *self)
+int32_t *_lantern_Tensor_data_ptr_int32_t(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.data_ptr<int32_t>();
+  LANTERN_FUNCTION_END
 }
 
-int16_t *lantern_Tensor_data_ptr_int16_t(void *self)
+int16_t *_lantern_Tensor_data_ptr_int16_t(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.data_ptr<int16_t>();
+  LANTERN_FUNCTION_END
 }
 
-bool *lantern_Tensor_data_ptr_bool(void *self)
+bool *_lantern_Tensor_data_ptr_bool(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.data_ptr<bool>();
+  LANTERN_FUNCTION_END
 }
 
-int64_t lantern_Tensor_numel(void *self)
+int64_t _lantern_Tensor_numel(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.numel();
+  LANTERN_FUNCTION_END_RET(0)
 }
 
-int64_t lantern_Tensor_ndimension(void *self)
+int64_t _lantern_Tensor_ndimension(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.ndimension();
+  LANTERN_FUNCTION_END_RET(0)
 }
 
-int64_t lantern_Tensor_size(void *self, int64_t i)
+int64_t _lantern_Tensor_size(void *self, int64_t i)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.size(i);
+  LANTERN_FUNCTION_END_RET(0)
 }
 
-void *lantern_Tensor_dtype(void *self)
+void *_lantern_Tensor_dtype(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   torch::Dtype dtype = c10::typeMetaToScalarType(x.dtype());
   return (void *)new LanternObject<torch::Dtype>(dtype);
+  LANTERN_FUNCTION_END
 }
 
-void *lantern_Tensor_device(void *self)
+void *_lantern_Tensor_device(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   torch::Device device = x.device();
   return (void *)new LanternPtr<torch::Device>(device);
+  LANTERN_FUNCTION_END
 }
 
-bool lantern_Tensor_is_undefined(void *self)
+bool _lantern_Tensor_is_undefined(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.dtype() == torch::ScalarType::Undefined;
+  LANTERN_FUNCTION_END_RET(false)
 }
 
-bool lantern_Tensor_is_contiguous(void *self)
+bool _lantern_Tensor_is_contiguous(void *self)
 {
+  LANTERN_FUNCTION_START
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   return x.is_contiguous();
+  LANTERN_FUNCTION_END_RET(false)
 }
