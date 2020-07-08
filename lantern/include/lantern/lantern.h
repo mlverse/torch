@@ -74,191 +74,374 @@ extern "C"
   LANTERN_API void(LANTERN_PTR lanternLastErrorClear)();
   LANTERN_API const char*(LANTERN_PTR lanternLastError)();
   LANTERN_API void(LANTERN_PTR lanternTest)();
-  LANTERN_API void *(LANTERN_PTR lantern_Device)(const char *type, int64_t index, bool useIndex);
-  LANTERN_API const char *(LANTERN_PTR lantern_Device_type)(void *device);
-  LANTERN_API int64_t(LANTERN_PTR lantern_Device_index)(void *device);
-  LANTERN_API void *(LANTERN_PTR lantern_from_blob)(void *data, int64_t *sizes, size_t sizes_size, void *options);
-  LANTERN_API const char *(LANTERN_PTR lantern_Tensor_StreamInsertion)(void *x);
-  LANTERN_API void *(LANTERN_PTR lantern_TensorOptions)();
-  LANTERN_API void *(LANTERN_PTR lantern_TensorOptions_dtype)(void *self, void *dtype);
-  LANTERN_API void *(LANTERN_PTR lantern_TensorOptions_layout)(void *self, void *layout);
-  LANTERN_API void *(LANTERN_PTR lantern_TensorOptions_device)(void *self, void *device);
-  LANTERN_API void *(LANTERN_PTR lantern_TensorOptions_requires_grad)(void *self, bool requires_grad);
-  LANTERN_API void *(LANTERN_PTR lantern_TensorOptions_pinned_memory)(void *self, bool pinned_memory);
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_float32)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_float64)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_float16)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_uint8)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_int8)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_int16)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_int32)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_int64)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_bool)();
-  LANTERN_API const char *(LANTERN_PTR lantern_Dtype_type)(void *dtype);
-  LANTERN_API void *(LANTERN_PTR lantern_vector_int64_t)(int64_t *x, size_t x_size);
-  LANTERN_API void *(LANTERN_PTR lantern_IntArrayRef)(int64_t *x, size_t x_size);
-  LANTERN_API void *(LANTERN_PTR lantern_MemoryFormat_Contiguous)();
-  LANTERN_API void *(LANTERN_PTR lantern_MemoryFormat_Preserve)();
-  LANTERN_API void *(LANTERN_PTR lantern_MemoryFormat_ChannelsLast)();
-  LANTERN_API const char *(LANTERN_PTR lantern_MemoryFormat_type)(void *format);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_clone)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_permute)(void *self, void *dims);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_contiguous)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_to)(void *self, void *options);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_set_requires_grad)(void *self, bool requires_grad);
-  LANTERN_API double *(LANTERN_PTR lantern_Tensor_data_ptr_double)(void *self);
-  LANTERN_API uint8_t *(LANTERN_PTR lantern_Tensor_data_ptr_uint8_t)(void *self);
-  LANTERN_API int32_t *(LANTERN_PTR lantern_Tensor_data_ptr_int32_t)(void *self);
-  LANTERN_API int16_t *(LANTERN_PTR lantern_Tensor_data_ptr_int16_t)(void *self);
-  LANTERN_API bool *(LANTERN_PTR lantern_Tensor_data_ptr_bool)(void *self);
-  LANTERN_API int64_t(LANTERN_PTR lantern_Tensor_numel)(void *self);
-  LANTERN_API int64_t(LANTERN_PTR lantern_Tensor_size)(void *self, int64_t i);
-  LANTERN_API int64_t(LANTERN_PTR lantern_Tensor_ndimension)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_dtype)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_Generator)();
-  LANTERN_API uint64_t(LANTERN_PTR lantern_Generator_current_seed)(void *generator);
-  LANTERN_API void(LANTERN_PTR lantern_Generator_set_current_seed)(void *generator, uint64_t seed);
-  LANTERN_API void *(LANTERN_PTR lantern_QScheme_per_channel_affine)();
-  LANTERN_API void *(LANTERN_PTR lantern_QScheme_per_tensor_affine)();
-  LANTERN_API void *(LANTERN_PTR lantern_QScheme_per_channel_symmetric)();
-  LANTERN_API void *(LANTERN_PTR lantern_QScheme_per_tensor_symmetric)();
-  LANTERN_API const char *(LANTERN_PTR lantern_QScheme_type)(void *x);
-  LANTERN_API void *(LANTERN_PTR lantern_TensorList)();
-  LANTERN_API void(LANTERN_PTR lantern_TensorList_push_back)(void *self, void *x);
-  LANTERN_API void *(LANTERN_PTR lantern_TensorList_at)(void *self, int64_t i);
-  LANTERN_API int64_t(LANTERN_PTR lantern_TensorList_size)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_Scalar)(void *value, const char *type);
-  LANTERN_API void *(LANTERN_PTR lantern_vector_get)(void *x, int i);
-  LANTERN_API void *(LANTERN_PTR lantern_int)(int x);
-  LANTERN_API void *(LANTERN_PTR lantern_int64_t)(int64_t x);
-  LANTERN_API void *(LANTERN_PTR lantern_bool)(bool x);
-  LANTERN_API void *(LANTERN_PTR lantern_Dimname)(const char *name);
-  LANTERN_API void *(LANTERN_PTR lantern_DimnameList)();
-  LANTERN_API void(LANTERN_PTR lantern_DimnameList_push_back)(void *list, void *dimname);
-  LANTERN_API const char *(LANTERN_PTR lantern_Dimname_to_string)(void *dimname);
-  LANTERN_API int64_t(LANTERN_PTR lantern_DimnameList_size)(void *list);
-  LANTERN_API void *(LANTERN_PTR lantern_DimnameList_at)(void *list, int i);
-  LANTERN_API void *(LANTERN_PTR lantern_Scalar_nullopt)();
-  LANTERN_API void(LANTERN_PTR lantern_Tensor_delete)(void *);
-  LANTERN_API void(LANTERN_PTR lantern_bool_delete)(void *);
-  LANTERN_API void(LANTERN_PTR lantern_int64_t_delete)(void *);
-  LANTERN_API void(LANTERN_PTR lantern_TensorList_delete)(void *);
-  LANTERN_API void(LANTERN_PTR lantern_double_delete)(void *);
-  LANTERN_API void(LANTERN_PTR lantern_QScheme_delete)(void *);
-  LANTERN_API void(LANTERN_PTR lantern_Scalar_delete)(void *);
-  LANTERN_API void(LANTERN_PTR lantern_ScalarType_delete)(void *);
-  LANTERN_API void(LANTERN_PTR lantern_TensorOptions_delete)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_Dtype_delete)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_Device_delete)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_Layout_delete)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_TensorOptions_print)(void *self);
-  LANTERN_API void(LANTERN_PTR lantern_TensorOptions_address)(void *self);
-  LANTERN_API void(LANTERN_PTR lantern_Generator_delete)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_Dimname_delete)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_DimnameList_delete)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_MemoryFormat_delete)(void *x);
-  LANTERN_API int64_t(LANTERN_PTR lantern_Reduction_Sum)();
-  LANTERN_API int64_t(LANTERN_PTR lantern_Reduction_None)();
-  LANTERN_API int64_t(LANTERN_PTR lantern_Reduction_Mean)();
-  LANTERN_API void *(LANTERN_PTR lantern_double)(double x);
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_quint8)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_qint8)();
-  LANTERN_API void *(LANTERN_PTR lantern_Dtype_qint32)();
-  LANTERN_API bool(LANTERN_PTR lantern_Tensor_is_quantized)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_autograd_set_grad_mode)(bool enabled);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_undefined)();
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_grad)(void *self);
-  LANTERN_API bool(LANTERN_PTR lantern_Tensor_requires_grad)(void *self);
-  LANTERN_API unsigned int(LANTERN_PTR lantern_Tensor_register_hook)(void *self, void *hook);
-  LANTERN_API void *(LANTERN_PTR lantern_new_hook)(void *(*fun)(void *, void *), void *custom);
-  LANTERN_API void(LANTERN_PTR lantern_Tensor_remove_hook)(void *self, unsigned int pos);
-  LANTERN_API void *(LANTERN_PTR lantern_variable_list_new)();
-  LANTERN_API void(LANTERN_PTR lantern_variable_list_push_back)(void *self, void *x);
-  LANTERN_API void *(LANTERN_PTR lantern_variable_list_get)(void *self, int64_t i);
-  LANTERN_API void(LANTERN_PTR lantern_variable_list_delete)(void *x);
-  LANTERN_API int64_t(LANTERN_PTR lantern_variable_list_size)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_Function_lambda)(void *(*fun)(void *, void *, void *), void *custom);
-  LANTERN_API void *(LANTERN_PTR lantern_Function_apply)(void *inputs, void *forward, void *backward);
-  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_save_for_backward)(void *self, void *vars);
-  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_saved_variables)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_vector_string_new)();
-  LANTERN_API void(LANTERN_PTR lantern_vector_string_push_back)(void *self, const char *x);
-  LANTERN_API int64_t(LANTERN_PTR lantern_vector_string_size)(void *self);
-  LANTERN_API const char *(LANTERN_PTR lantern_vector_string_at)(void *self, int64_t i);
-  LANTERN_API void *(LANTERN_PTR lantern_vector_bool_new)();
-  LANTERN_API void(LANTERN_PTR lantern_vector_bool_push_back)(void *self, bool x);
-  LANTERN_API int64_t(LANTERN_PTR lantern_vector_bool_size)(void *self);
-  LANTERN_API bool(LANTERN_PTR lantern_vector_bool_at)(void *self, int64_t i);
-  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_set_arguments)(void *self, void *names, void *needs_grad);
-  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_argument_names)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_argument_needs_grad)(void *self);
-  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_set_saved_variables_names)(void *self, void *names);
-  LANTERN_API void *(LANTERN_PTR lantern_AutogradContext_get_saved_variables_names)(void *self);
-  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_dirty)(void *self, void *inputs);
-  LANTERN_API void(LANTERN_PTR lantern_AutogradContext_mark_non_differentiable)(void *self, void *outputs);
-  LANTERN_API void *(LANTERN_PTR lantern_optional_double)(double x, bool is_null);
-  LANTERN_API void(LANTERN_PTR test_grad_fn)();
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_grad_fn)(void *self);
-  LANTERN_API const char *(LANTERN_PTR lantern_Node_name)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_Node_next_edges)(void *self);
-  LANTERN_API int64_t(LANTERN_PTR lantern_edge_list_size)(void *self);
-  LANTERN_API void *(LANTERN_PTR lantern_edge_list_at)(void *self, int64_t i);
-  LANTERN_API void *(LANTERN_PTR lantern_Edge_function)(void *self);
-  LANTERN_API void(LANTERN_PTR lantern_vector_int64_t_delete)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_autograd_backward)(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph);
-  LANTERN_API void *(LANTERN_PTR lantern_autograd_grad)(void *outputs, void *inputs, void *grad_outputs, bool retain_graph, bool create_graph, bool allow_unused);
-  LANTERN_API void *(LANTERN_PTR lantern_Layout_strided)();
-  LANTERN_API void *(LANTERN_PTR lantern_Layout_sparse)();
-  LANTERN_API const char *(LANTERN_PTR lantern_Layout_string)(void *x);
-  LANTERN_API void *(LANTERN_PTR lantern_TensorIndex_new)();
-  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_tensor)(void *self, void *x);
-  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_ellipsis)(void *self);
-  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_slice)(void *self, void *x);
-  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_none)(void *self);
-  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_bool)(void *self, bool x);
-  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_append_int64)(void *self, int64_t x);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_index)(void *self, void *index);
-  LANTERN_API void(LANTERN_PTR lantern_TensorIndex_delete)(void *x);
-  LANTERN_API void *(LANTERN_PTR lantern_Slice)(void *start, void *end, void *step);
-  LANTERN_API void *(LANTERN_PTR lantern_optional_int64_t)(int64_t x, bool is_null);
-  LANTERN_API void(LANTERN_PTR lantern_Slice_delete)(void *x);
-  LANTERN_API void(LANTERN_PTR lantern_optional_int64_t_delete)(void *x);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_device)(void *self);
-  LANTERN_API bool(LANTERN_PTR lantern_cuda_is_available)();
-  LANTERN_API int(LANTERN_PTR lantern_cuda_device_count)();
-  LANTERN_API int64_t(LANTERN_PTR lantern_cuda_current_device)();
-  LANTERN_API void(LANTERN_PTR lantern_cuda_show_config)();
-  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pack_padded_sequence)(void *input, void *lengths, bool batch_first, bool enforce_sorted);
-  LANTERN_API void(LANTERN_PTR lantern_PackedSequence_delete)(void *x);
-  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_PackedSequence_batch_sizes)(void *input);
-  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_PackedSequence_data)(void *input);
-  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_PackedSequence_sorted_indices)(void *input);
-  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_PackedSequence_unsorted_indices)(void *input);
-  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pack_sequence)(void *sequence, bool enforce_sorted);
-  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pad_packed_sequence)(void *sequence, bool batch_first,
-                                                                           double padding_value, void *total_length);
-  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_pad_sequence)(void *sequence, bool batch_first, double padding_value);
-  LANTERN_API void *(LANTERN_PTR lantern_nn_utils_rnn_PackedSequence_new)(void *data, void *batch_sizes, void *sorted_indices, void *unsorted_indices);
-  LANTERN_API void *(LANTERN_PTR lantern_Scalar_dtype)(void *self);
-  LANTERN_API float(LANTERN_PTR lantern_Scalar_to_float)(void *self);
-  LANTERN_API int(LANTERN_PTR lantern_Scalar_to_int)(void *self);
-  LANTERN_API double(LANTERN_PTR lantern_Scalar_to_double)(void *self);
-  LANTERN_API bool(LANTERN_PTR lantern_Scalar_to_bool)(void *self);
-  LANTERN_API bool(LANTERN_PTR lantern_Tensor_is_undefined)(void *self);
-  LANTERN_API void(LANTERN_PTR lantern_set_default_dtype)(void *dtype);
-  LANTERN_API void *(LANTERN_PTR lantern_get_default_dtype)();
-  LANTERN_API void (LANTERN_PTR lantern_Tensor_set_grad_)(void* self, void* new_grad);
-  LANTERN_API void *(LANTERN_PTR lantern_Tensor_storage)(void *self);
-  LANTERN_API bool(LANTERN_PTR lantern_Tensor_has_storage)(void *self);
-  LANTERN_API const char *(LANTERN_PTR lantern_Storage_data_ptr)(void *self);
-  LANTERN_API void(LANTERN_PTR lantern_Storage_delete)(void *x);
-  LANTERN_API bool(LANTERN_PTR lantern_Tensor_is_contiguous)(void *self);
-  LANTERN_API const char  * (LANTERN_PTR lantern_tensor_save) (void* self);
-  LANTERN_API void * (LANTERN_PTR lantern_tensor_load) (const char * s);
-  LANTERN_API void * (LANTERN_PTR lantern_test_tensor)();
-  LANTERN_API void (LANTERN_PTR lantern_test_print)(void* x); 
-  LANTERN_API size_t (LANTERN_PTR lantern_tensor_serialized_size) (const char * s);
-  LANTERN_API void (LANTERN_PTR lantern_const_char_delete) (const char * x);
+  LANTERN_API void *(LANTERN_PTR _lantern_Device)(const char *type, int64_t index, bool useIndex);
+  HOST_API void * lantern_Device(const char *type, int64_t index, bool useIndex) { return LANTERN_HOST_HANDLER(_lantern_Device(type, index, useIndex)); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_Device_type)(void *device);
+  HOST_API const char * lantern_Device_type(void *device) { return LANTERN_HOST_HANDLER(_lantern_Device_type(device)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_Device_index)(void *device);
+  HOST_API int64_t lantern_Device_index(void *device) { return LANTERN_HOST_HANDLER(_lantern_Device_index(device)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_from_blob)(void *data, int64_t *sizes, size_t sizes_size, void *options);
+  HOST_API void * lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size, void *options) { return LANTERN_HOST_HANDLER(_lantern_from_blob(data, sizes, sizes_size, options)); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_Tensor_StreamInsertion)(void *x);
+  HOST_API const char * lantern_Tensor_StreamInsertion(void *x) { return LANTERN_HOST_HANDLER(_lantern_Tensor_StreamInsertion(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_TensorOptions)();
+  HOST_API void * lantern_TensorOptions() { return LANTERN_HOST_HANDLER(_lantern_TensorOptions()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_TensorOptions_dtype)(void *self, void *dtype);
+  HOST_API void * lantern_TensorOptions_dtype(void *self, void *dtype) { return LANTERN_HOST_HANDLER(_lantern_TensorOptions_dtype(self, dtype)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_TensorOptions_layout)(void *self, void *layout);
+  HOST_API void * lantern_TensorOptions_layout(void *self, void *layout) { return LANTERN_HOST_HANDLER(_lantern_TensorOptions_layout(self, layout)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_TensorOptions_device)(void *self, void *device);
+  HOST_API void * lantern_TensorOptions_device(void *self, void *device) { return LANTERN_HOST_HANDLER(_lantern_TensorOptions_device(self, device)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_TensorOptions_requires_grad)(void *self, bool requires_grad);
+  HOST_API void * lantern_TensorOptions_requires_grad(void *self, bool requires_grad) { return LANTERN_HOST_HANDLER(_lantern_TensorOptions_requires_grad(self, requires_grad)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_TensorOptions_pinned_memory)(void *self, bool pinned_memory);
+  HOST_API void * lantern_TensorOptions_pinned_memory(void *self, bool pinned_memory) { return LANTERN_HOST_HANDLER(_lantern_TensorOptions_pinned_memory(self, pinned_memory)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_float32)();
+  HOST_API void * lantern_Dtype_float32() { return LANTERN_HOST_HANDLER(_lantern_Dtype_float32()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_float64)();
+  HOST_API void * lantern_Dtype_float64() { return LANTERN_HOST_HANDLER(_lantern_Dtype_float64()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_float16)();
+  HOST_API void * lantern_Dtype_float16() { return LANTERN_HOST_HANDLER(_lantern_Dtype_float16()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_uint8)();
+  HOST_API void * lantern_Dtype_uint8() { return LANTERN_HOST_HANDLER(_lantern_Dtype_uint8()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_int8)();
+  HOST_API void * lantern_Dtype_int8() { return LANTERN_HOST_HANDLER(_lantern_Dtype_int8()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_int16)();
+  HOST_API void * lantern_Dtype_int16() { return LANTERN_HOST_HANDLER(_lantern_Dtype_int16()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_int32)();
+  HOST_API void * lantern_Dtype_int32() { return LANTERN_HOST_HANDLER(_lantern_Dtype_int32()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_int64)();
+  HOST_API void * lantern_Dtype_int64() { return LANTERN_HOST_HANDLER(_lantern_Dtype_int64()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_bool)();
+  HOST_API void * lantern_Dtype_bool() { return LANTERN_HOST_HANDLER(_lantern_Dtype_bool()); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_Dtype_type)(void *dtype);
+  HOST_API const char * lantern_Dtype_type(void *dtype) { return LANTERN_HOST_HANDLER(_lantern_Dtype_type(dtype)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_vector_int64_t)(int64_t *x, size_t x_size);
+  HOST_API void * lantern_vector_int64_t(int64_t *x, size_t x_size) { return LANTERN_HOST_HANDLER(_lantern_vector_int64_t(x, x_size)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_IntArrayRef)(int64_t *x, size_t x_size);
+  HOST_API void * lantern_IntArrayRef(int64_t *x, size_t x_size) { return LANTERN_HOST_HANDLER(_lantern_IntArrayRef(x, x_size)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_MemoryFormat_Contiguous)();
+  HOST_API void * lantern_MemoryFormat_Contiguous() { return LANTERN_HOST_HANDLER(_lantern_MemoryFormat_Contiguous()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_MemoryFormat_Preserve)();
+  HOST_API void * lantern_MemoryFormat_Preserve() { return LANTERN_HOST_HANDLER(_lantern_MemoryFormat_Preserve()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_MemoryFormat_ChannelsLast)();
+  HOST_API void * lantern_MemoryFormat_ChannelsLast() { return LANTERN_HOST_HANDLER(_lantern_MemoryFormat_ChannelsLast()); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_MemoryFormat_type)(void *format);
+  HOST_API const char * lantern_MemoryFormat_type(void *format) { return LANTERN_HOST_HANDLER(_lantern_MemoryFormat_type(format)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_clone)(void *self);
+  HOST_API void * lantern_Tensor_clone(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_clone(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_permute)(void *self, void *dims);
+  HOST_API void * lantern_Tensor_permute(void *self, void *dims) { return LANTERN_HOST_HANDLER(_lantern_Tensor_permute(self, dims)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_contiguous)(void *self);
+  HOST_API void * lantern_Tensor_contiguous(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_contiguous(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_to)(void *self, void *options);
+  HOST_API void * lantern_Tensor_to(void *self, void *options) { return LANTERN_HOST_HANDLER(_lantern_Tensor_to(self, options)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_set_requires_grad)(void *self, bool requires_grad);
+  HOST_API void * lantern_Tensor_set_requires_grad(void *self, bool requires_grad) { return LANTERN_HOST_HANDLER(_lantern_Tensor_set_requires_grad(self, requires_grad)); }
+  LANTERN_API double *(LANTERN_PTR _lantern_Tensor_data_ptr_double)(void *self);
+  HOST_API double * lantern_Tensor_data_ptr_double(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_data_ptr_double(self)); }
+  LANTERN_API uint8_t *(LANTERN_PTR _lantern_Tensor_data_ptr_uint8_t)(void *self);
+  HOST_API uint8_t * lantern_Tensor_data_ptr_uint8_t(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_data_ptr_uint8_t(self)); }
+  LANTERN_API int32_t *(LANTERN_PTR _lantern_Tensor_data_ptr_int32_t)(void *self);
+  HOST_API int32_t * lantern_Tensor_data_ptr_int32_t(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_data_ptr_int32_t(self)); }
+  LANTERN_API int16_t *(LANTERN_PTR _lantern_Tensor_data_ptr_int16_t)(void *self);
+  HOST_API int16_t * lantern_Tensor_data_ptr_int16_t(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_data_ptr_int16_t(self)); }
+  LANTERN_API bool *(LANTERN_PTR _lantern_Tensor_data_ptr_bool)(void *self);
+  HOST_API bool * lantern_Tensor_data_ptr_bool(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_data_ptr_bool(self)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_Tensor_numel)(void *self);
+  HOST_API int64_t lantern_Tensor_numel(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_numel(self)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_Tensor_size)(void *self, int64_t i);
+  HOST_API int64_t lantern_Tensor_size(void *self, int64_t i) { return LANTERN_HOST_HANDLER(_lantern_Tensor_size(self, i)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_Tensor_ndimension)(void *self);
+  HOST_API int64_t lantern_Tensor_ndimension(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_ndimension(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_dtype)(void *self);
+  HOST_API void * lantern_Tensor_dtype(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_dtype(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Generator)();
+  HOST_API void * lantern_Generator() { return LANTERN_HOST_HANDLER(_lantern_Generator()); }
+  LANTERN_API uint64_t(LANTERN_PTR _lantern_Generator_current_seed)(void *generator);
+  HOST_API uint64_t lantern_Generator_current_seed(void *generator) { return LANTERN_HOST_HANDLER(_lantern_Generator_current_seed(generator)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Generator_set_current_seed)(void *generator, uint64_t seed);
+  HOST_API void lantern_Generator_set_current_seed(void *generator, uint64_t seed) { return LANTERN_HOST_HANDLER(_lantern_Generator_set_current_seed(generator, seed)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_QScheme_per_channel_affine)();
+  HOST_API void * lantern_QScheme_per_channel_affine() { return LANTERN_HOST_HANDLER(_lantern_QScheme_per_channel_affine()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_QScheme_per_tensor_affine)();
+  HOST_API void * lantern_QScheme_per_tensor_affine() { return LANTERN_HOST_HANDLER(_lantern_QScheme_per_tensor_affine()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_QScheme_per_channel_symmetric)();
+  HOST_API void * lantern_QScheme_per_channel_symmetric() { return LANTERN_HOST_HANDLER(_lantern_QScheme_per_channel_symmetric()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_QScheme_per_tensor_symmetric)();
+  HOST_API void * lantern_QScheme_per_tensor_symmetric() { return LANTERN_HOST_HANDLER(_lantern_QScheme_per_tensor_symmetric()); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_QScheme_type)(void *x);
+  HOST_API const char * lantern_QScheme_type(void *x) { return LANTERN_HOST_HANDLER(_lantern_QScheme_type(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_TensorList)();
+  HOST_API void * lantern_TensorList() { return LANTERN_HOST_HANDLER(_lantern_TensorList()); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorList_push_back)(void *self, void *x);
+  HOST_API void lantern_TensorList_push_back(void *self, void *x) { return LANTERN_HOST_HANDLER(_lantern_TensorList_push_back(self, x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_TensorList_at)(void *self, int64_t i);
+  HOST_API void * lantern_TensorList_at(void *self, int64_t i) { return LANTERN_HOST_HANDLER(_lantern_TensorList_at(self, i)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_TensorList_size)(void *self);
+  HOST_API int64_t lantern_TensorList_size(void *self) { return LANTERN_HOST_HANDLER(_lantern_TensorList_size(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Scalar)(void *value, const char *type);
+  HOST_API void * lantern_Scalar(void *value, const char *type) { return LANTERN_HOST_HANDLER(_lantern_Scalar(value, type)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_vector_get)(void *x, int i);
+  HOST_API void * lantern_vector_get(void *x, int i) { return LANTERN_HOST_HANDLER(_lantern_vector_get(x, i)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_int)(int x);
+  HOST_API void * lantern_int(int x) { return LANTERN_HOST_HANDLER(_lantern_int(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_int64_t)(int64_t x);
+  HOST_API void * lantern_int64_t(int64_t x) { return LANTERN_HOST_HANDLER(_lantern_int64_t(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_bool)(bool x);
+  HOST_API void * lantern_bool(bool x) { return LANTERN_HOST_HANDLER(_lantern_bool(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dimname)(const char *name);
+  HOST_API void * lantern_Dimname(const char *name) { return LANTERN_HOST_HANDLER(_lantern_Dimname(name)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_DimnameList)();
+  HOST_API void * lantern_DimnameList() { return LANTERN_HOST_HANDLER(_lantern_DimnameList()); }
+  LANTERN_API void(LANTERN_PTR _lantern_DimnameList_push_back)(void *list, void *dimname);
+  HOST_API void lantern_DimnameList_push_back(void *list, void *dimname) { return LANTERN_HOST_HANDLER(_lantern_DimnameList_push_back(list, dimname)); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_Dimname_to_string)(void *dimname);
+  HOST_API const char * lantern_Dimname_to_string(void *dimname) { return LANTERN_HOST_HANDLER(_lantern_Dimname_to_string(dimname)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_DimnameList_size)(void *list);
+  HOST_API int64_t lantern_DimnameList_size(void *list) { return LANTERN_HOST_HANDLER(_lantern_DimnameList_size(list)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_DimnameList_at)(void *list, int i);
+  HOST_API void * lantern_DimnameList_at(void *list, int i) { return LANTERN_HOST_HANDLER(_lantern_DimnameList_at(list, i)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Scalar_nullopt)();
+  HOST_API void * lantern_Scalar_nullopt() { return LANTERN_HOST_HANDLER(_lantern_Scalar_nullopt()); }
+  LANTERN_API void(LANTERN_PTR _lantern_Tensor_delete)(void *);
+  HOST_API void lantern_Tensor_delete(void * x) { return LANTERN_HOST_HANDLER(_lantern_Tensor_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_bool_delete)(void *);
+  HOST_API void lantern_bool_delete(void * x) { return LANTERN_HOST_HANDLER(_lantern_bool_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_int64_t_delete)(void *);
+  HOST_API void lantern_int64_t_delete(void * x) { return LANTERN_HOST_HANDLER(_lantern_int64_t_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorList_delete)(void *);
+  HOST_API void lantern_TensorList_delete(void * x) { return LANTERN_HOST_HANDLER(_lantern_TensorList_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_double_delete)(void *);
+  HOST_API void lantern_double_delete(void * x) { return LANTERN_HOST_HANDLER(_lantern_double_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_QScheme_delete)(void *);
+  HOST_API void lantern_QScheme_delete(void * x) { return LANTERN_HOST_HANDLER(_lantern_QScheme_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Scalar_delete)(void *);
+  HOST_API void lantern_Scalar_delete(void * x) { return LANTERN_HOST_HANDLER(_lantern_Scalar_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_ScalarType_delete)(void *);
+  HOST_API void lantern_ScalarType_delete(void * x) { return LANTERN_HOST_HANDLER(_lantern_ScalarType_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorOptions_delete)(void *x);
+  HOST_API void lantern_TensorOptions_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_TensorOptions_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Dtype_delete)(void *x);
+  HOST_API void lantern_Dtype_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_Dtype_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Device_delete)(void *x);
+  HOST_API void lantern_Device_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_Device_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Layout_delete)(void *x);
+  HOST_API void lantern_Layout_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_Layout_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorOptions_print)(void *self);
+  HOST_API void lantern_TensorOptions_print(void *self) { return LANTERN_HOST_HANDLER(_lantern_TensorOptions_print(self)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorOptions_address)(void *self);
+  HOST_API void lantern_TensorOptions_address(void *self) { return LANTERN_HOST_HANDLER(_lantern_TensorOptions_address(self)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Generator_delete)(void *x);
+  HOST_API void lantern_Generator_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_Generator_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Dimname_delete)(void *x);
+  HOST_API void lantern_Dimname_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_Dimname_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_DimnameList_delete)(void *x);
+  HOST_API void lantern_DimnameList_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_DimnameList_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_MemoryFormat_delete)(void *x);
+  HOST_API void lantern_MemoryFormat_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_MemoryFormat_delete(x)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_Reduction_Sum)();
+  HOST_API int64_t lantern_Reduction_Sum() { return LANTERN_HOST_HANDLER(_lantern_Reduction_Sum()); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_Reduction_None)();
+  HOST_API int64_t lantern_Reduction_None() { return LANTERN_HOST_HANDLER(_lantern_Reduction_None()); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_Reduction_Mean)();
+  HOST_API int64_t lantern_Reduction_Mean() { return LANTERN_HOST_HANDLER(_lantern_Reduction_Mean()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_double)(double x);
+  HOST_API void * lantern_double(double x) { return LANTERN_HOST_HANDLER(_lantern_double(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_quint8)();
+  HOST_API void * lantern_Dtype_quint8() { return LANTERN_HOST_HANDLER(_lantern_Dtype_quint8()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_qint8)();
+  HOST_API void * lantern_Dtype_qint8() { return LANTERN_HOST_HANDLER(_lantern_Dtype_qint8()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_qint32)();
+  HOST_API void * lantern_Dtype_qint32() { return LANTERN_HOST_HANDLER(_lantern_Dtype_qint32()); }
+  LANTERN_API bool(LANTERN_PTR _lantern_Tensor_is_quantized)(void *x);
+  HOST_API bool lantern_Tensor_is_quantized(void *x) { return LANTERN_HOST_HANDLER(_lantern_Tensor_is_quantized(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_autograd_set_grad_mode)(bool enabled);
+  HOST_API void lantern_autograd_set_grad_mode(bool enabled) { return LANTERN_HOST_HANDLER(_lantern_autograd_set_grad_mode(enabled)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_undefined)();
+  HOST_API void * lantern_Tensor_undefined() { return LANTERN_HOST_HANDLER(_lantern_Tensor_undefined()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_grad)(void *self);
+  HOST_API void * lantern_Tensor_grad(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_grad(self)); }
+  LANTERN_API bool(LANTERN_PTR _lantern_Tensor_requires_grad)(void *self);
+  HOST_API bool lantern_Tensor_requires_grad(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_requires_grad(self)); }
+  LANTERN_API unsigned int(LANTERN_PTR _lantern_Tensor_register_hook)(void *self, void *hook);
+  HOST_API unsigned int lantern_Tensor_register_hook(void *self, void *hook) { return LANTERN_HOST_HANDLER(_lantern_Tensor_register_hook(self, hook)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_new_hook)(void *(*fun)(void *, void *), void *custom);
+  HOST_API void * lantern_new_hook(void *(*fun)(void *, void *), void *custom) { return LANTERN_HOST_HANDLER(_lantern_new_hook(fun, custom)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Tensor_remove_hook)(void *self, unsigned int pos);
+  HOST_API void lantern_Tensor_remove_hook(void *self, unsigned int pos) { return LANTERN_HOST_HANDLER(_lantern_Tensor_remove_hook(self, pos)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_variable_list_new)();
+  HOST_API void * lantern_variable_list_new() { return LANTERN_HOST_HANDLER(_lantern_variable_list_new()); }
+  LANTERN_API void(LANTERN_PTR _lantern_variable_list_push_back)(void *self, void *x);
+  HOST_API void lantern_variable_list_push_back(void *self, void *x) { return LANTERN_HOST_HANDLER(_lantern_variable_list_push_back(self, x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_variable_list_get)(void *self, int64_t i);
+  HOST_API void * lantern_variable_list_get(void *self, int64_t i) { return LANTERN_HOST_HANDLER(_lantern_variable_list_get(self, i)); }
+  LANTERN_API void(LANTERN_PTR _lantern_variable_list_delete)(void *x);
+  HOST_API void lantern_variable_list_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_variable_list_delete(x)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_variable_list_size)(void *self);
+  HOST_API int64_t lantern_variable_list_size(void *self) { return LANTERN_HOST_HANDLER(_lantern_variable_list_size(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Function_lambda)(void *(*fun)(void *, void *, void *), void *custom);
+  HOST_API void * lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custom) { return LANTERN_HOST_HANDLER(_lantern_Function_lambda(fun, custom)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Function_apply)(void *inputs, void *forward, void *backward);
+  HOST_API void * lantern_Function_apply(void *inputs, void *forward, void *backward) { return LANTERN_HOST_HANDLER(_lantern_Function_apply(inputs, forward, backward)); }
+  LANTERN_API void(LANTERN_PTR _lantern_AutogradContext_save_for_backward)(void *self, void *vars);
+  HOST_API void lantern_AutogradContext_save_for_backward(void *self, void *vars) { return LANTERN_HOST_HANDLER(_lantern_AutogradContext_save_for_backward(self, vars)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_AutogradContext_get_saved_variables)(void *self);
+  HOST_API void * lantern_AutogradContext_get_saved_variables(void *self) { return LANTERN_HOST_HANDLER(_lantern_AutogradContext_get_saved_variables(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_vector_string_new)();
+  HOST_API void * lantern_vector_string_new() { return LANTERN_HOST_HANDLER(_lantern_vector_string_new()); }
+  LANTERN_API void(LANTERN_PTR _lantern_vector_string_push_back)(void *self, const char *x);
+  HOST_API void lantern_vector_string_push_back(void *self, const char *x) { return LANTERN_HOST_HANDLER(_lantern_vector_string_push_back(self, x)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_vector_string_size)(void *self);
+  HOST_API int64_t lantern_vector_string_size(void *self) { return LANTERN_HOST_HANDLER(_lantern_vector_string_size(self)); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_vector_string_at)(void *self, int64_t i);
+  HOST_API const char * lantern_vector_string_at(void *self, int64_t i) { return LANTERN_HOST_HANDLER(_lantern_vector_string_at(self, i)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_vector_bool_new)();
+  HOST_API void * lantern_vector_bool_new() { return LANTERN_HOST_HANDLER(_lantern_vector_bool_new()); }
+  LANTERN_API void(LANTERN_PTR _lantern_vector_bool_push_back)(void *self, bool x);
+  HOST_API void lantern_vector_bool_push_back(void *self, bool x) { return LANTERN_HOST_HANDLER(_lantern_vector_bool_push_back(self, x)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_vector_bool_size)(void *self);
+  HOST_API int64_t lantern_vector_bool_size(void *self) { return LANTERN_HOST_HANDLER(_lantern_vector_bool_size(self)); }
+  LANTERN_API bool(LANTERN_PTR _lantern_vector_bool_at)(void *self, int64_t i);
+  HOST_API bool lantern_vector_bool_at(void *self, int64_t i) { return LANTERN_HOST_HANDLER(_lantern_vector_bool_at(self, i)); }
+  LANTERN_API void(LANTERN_PTR _lantern_AutogradContext_set_arguments)(void *self, void *names, void *needs_grad);
+  HOST_API void lantern_AutogradContext_set_arguments(void *self, void *names, void *needs_grad) { return LANTERN_HOST_HANDLER(_lantern_AutogradContext_set_arguments(self, names, needs_grad)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_AutogradContext_get_argument_names)(void *self);
+  HOST_API void * lantern_AutogradContext_get_argument_names(void *self) { return LANTERN_HOST_HANDLER(_lantern_AutogradContext_get_argument_names(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_AutogradContext_get_argument_needs_grad)(void *self);
+  HOST_API void * lantern_AutogradContext_get_argument_needs_grad(void *self) { return LANTERN_HOST_HANDLER(_lantern_AutogradContext_get_argument_needs_grad(self)); }
+  LANTERN_API void(LANTERN_PTR _lantern_AutogradContext_set_saved_variables_names)(void *self, void *names);
+  HOST_API void lantern_AutogradContext_set_saved_variables_names(void *self, void *names) { return LANTERN_HOST_HANDLER(_lantern_AutogradContext_set_saved_variables_names(self, names)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_AutogradContext_get_saved_variables_names)(void *self);
+  HOST_API void * lantern_AutogradContext_get_saved_variables_names(void *self) { return LANTERN_HOST_HANDLER(_lantern_AutogradContext_get_saved_variables_names(self)); }
+  LANTERN_API void(LANTERN_PTR _lantern_AutogradContext_mark_dirty)(void *self, void *inputs);
+  HOST_API void lantern_AutogradContext_mark_dirty(void *self, void *inputs) { return LANTERN_HOST_HANDLER(_lantern_AutogradContext_mark_dirty(self, inputs)); }
+  LANTERN_API void(LANTERN_PTR _lantern_AutogradContext_mark_non_differentiable)(void *self, void *outputs);
+  HOST_API void lantern_AutogradContext_mark_non_differentiable(void *self, void *outputs) { return LANTERN_HOST_HANDLER(_lantern_AutogradContext_mark_non_differentiable(self, outputs)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_optional_double)(double x, bool is_null);
+  HOST_API void * lantern_optional_double(double x, bool is_null) { return LANTERN_HOST_HANDLER(_lantern_optional_double(x, is_null)); }
+  LANTERN_API void(LANTERN_PTR _test_grad_fn)();
+  HOST_API void test_grad_fn(double x, bool is_null) { return LANTERN_HOST_HANDLER(_test_grad_fn()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_grad_fn)(void *self);
+  HOST_API void * lantern_Tensor_grad_fn(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_grad_fn(self)); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_Node_name)(void *self);
+  HOST_API const char * lantern_Node_name(void *self) { return LANTERN_HOST_HANDLER(_lantern_Node_name(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Node_next_edges)(void *self);
+  HOST_API void * lantern_Node_next_edges(void *self) { return LANTERN_HOST_HANDLER(_lantern_Node_next_edges(self)); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_edge_list_size)(void *self);
+  HOST_API int64_t lantern_edge_list_size(void *self) { return LANTERN_HOST_HANDLER(_lantern_edge_list_size(self)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_edge_list_at)(void *self, int64_t i);
+  HOST_API void * lantern_edge_list_at(void *self, int64_t i) { return LANTERN_HOST_HANDLER(_lantern_edge_list_at(self, i)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Edge_function)(void *self);
+  HOST_API void * lantern_Edge_function(void *self) { return LANTERN_HOST_HANDLER(_lantern_Edge_function(self)); }
+  LANTERN_API void(LANTERN_PTR _lantern_vector_int64_t_delete)(void *x);
+  HOST_API void lantern_vector_int64_t_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_vector_int64_t_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_autograd_backward)(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph);
+  HOST_API void lantern_autograd_backward(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph) { return LANTERN_HOST_HANDLER(_lantern_autograd_backward(tensors, grad_tensors, retain_graph, create_graph)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_autograd_grad)(void *outputs, void *inputs, void *grad_outputs, bool retain_graph, bool create_graph, bool allow_unused);
+  HOST_API void * lantern_autograd_grad(void *outputs, void *inputs, void *grad_outputs, bool retain_graph, bool create_graph, bool allow_unused) { return LANTERN_HOST_HANDLER(_lantern_autograd_grad(outputs, inputs, grad_outputs, retain_graph, create_graph, allow_unused)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_strided)();
+  HOST_API void * lantern_Layout_strided() { return LANTERN_HOST_HANDLER(_lantern_Layout_strided()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse)();
+  HOST_API void * lantern_Layout_sparse() { return LANTERN_HOST_HANDLER(_lantern_Layout_sparse()); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_Layout_string)(void *x);
+  HOST_API const char * lantern_Layout_string(void *x) { return LANTERN_HOST_HANDLER(_lantern_Layout_string(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_TensorIndex_new)();
+  HOST_API void * lantern_TensorIndex_new() { return LANTERN_HOST_HANDLER(_lantern_TensorIndex_new()); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorIndex_append_tensor)(void *self, void *x);
+  HOST_API void lantern_TensorIndex_append_tensor(void *self, void *x) { return LANTERN_HOST_HANDLER(_lantern_TensorIndex_append_tensor(self, x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorIndex_append_ellipsis)(void *self);
+  HOST_API void lantern_TensorIndex_append_ellipsis(void *self) { return LANTERN_HOST_HANDLER(_lantern_TensorIndex_append_ellipsis(self)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorIndex_append_slice)(void *self, void *x);
+  HOST_API void lantern_TensorIndex_append_slice(void *self, void *x) { return LANTERN_HOST_HANDLER(_lantern_TensorIndex_append_slice(self, x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorIndex_append_none)(void *self);
+  HOST_API void lantern_TensorIndex_append_none(void *self) { return LANTERN_HOST_HANDLER(_lantern_TensorIndex_append_none(self)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorIndex_append_bool)(void *self, bool x);
+  HOST_API void lantern_TensorIndex_append_bool(void *self, bool x) { return LANTERN_HOST_HANDLER(_lantern_TensorIndex_append_bool(self, x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorIndex_append_int64)(void *self, int64_t x);
+  HOST_API void lantern_TensorIndex_append_int64(void *self, int64_t x) { return LANTERN_HOST_HANDLER(_lantern_TensorIndex_append_int64(self, x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_index)(void *self, void *index);
+  HOST_API void * lantern_Tensor_index(void *self, void *index) { return LANTERN_HOST_HANDLER(_lantern_Tensor_index(self, index)); }
+  LANTERN_API void(LANTERN_PTR _lantern_TensorIndex_delete)(void *x);
+  HOST_API void lantern_TensorIndex_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_TensorIndex_delete(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Slice)(void *start, void *end, void *step);
+  HOST_API void * lantern_Slice(void *start, void *end, void *step) { return LANTERN_HOST_HANDLER(_lantern_Slice(start, end, step)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_optional_int64_t)(int64_t x, bool is_null);
+  HOST_API void * lantern_optional_int64_t(int64_t x, bool is_null) { return LANTERN_HOST_HANDLER(_lantern_optional_int64_t(x, is_null)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Slice_delete)(void *x);
+  HOST_API void lantern_Slice_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_Slice_delete(x)); }
+  LANTERN_API void(LANTERN_PTR _lantern_optional_int64_t_delete)(void *x);
+  HOST_API void lantern_optional_int64_t_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_optional_int64_t_delete(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_device)(void *self);
+  HOST_API void * lantern_Tensor_device(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_device(self)); }
+  LANTERN_API bool(LANTERN_PTR _lantern_cuda_is_available)();
+  HOST_API bool lantern_cuda_is_available() { return LANTERN_HOST_HANDLER(_lantern_cuda_is_available()); }
+  LANTERN_API int(LANTERN_PTR _lantern_cuda_device_count)();
+  HOST_API int lantern_cuda_device_count() { return LANTERN_HOST_HANDLER(_lantern_cuda_device_count()); }
+  LANTERN_API int64_t(LANTERN_PTR _lantern_cuda_current_device)();
+  HOST_API int64_t lantern_cuda_current_device() { return LANTERN_HOST_HANDLER(_lantern_cuda_current_device()); }
+  LANTERN_API void(LANTERN_PTR _lantern_cuda_show_config)();
+  HOST_API void lantern_cuda_show_config() { return LANTERN_HOST_HANDLER(_lantern_cuda_show_config()); }
+  LANTERN_API void *(LANTERN_PTR _lantern_nn_utils_rnn_pack_padded_sequence)(void *input, void *lengths, bool batch_first, bool enforce_sorted);
+  HOST_API void * lantern_nn_utils_rnn_pack_padded_sequence(void *input, void *lengths, bool batch_first, bool enforce_sorted) { return LANTERN_HOST_HANDLER(_lantern_nn_utils_rnn_pack_padded_sequence(input, lengths, batch_first, enforce_sorted)); }
+  LANTERN_API void(LANTERN_PTR _lantern_PackedSequence_delete)(void *x);
+  HOST_API void lantern_PackedSequence_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_PackedSequence_delete(x)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_nn_utils_PackedSequence_batch_sizes)(void *input);
+  HOST_API void * lantern_nn_utils_PackedSequence_batch_sizes(void *input) { return LANTERN_HOST_HANDLER(_lantern_nn_utils_PackedSequence_batch_sizes(input)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_nn_utils_PackedSequence_data)(void *input);
+  HOST_API void * lantern_nn_utils_PackedSequence_data(void *input) { return LANTERN_HOST_HANDLER(_lantern_nn_utils_PackedSequence_data(input)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_nn_utils_PackedSequence_sorted_indices)(void *input);
+  HOST_API void * lantern_nn_utils_PackedSequence_sorted_indices(void *input) { return LANTERN_HOST_HANDLER(_lantern_nn_utils_PackedSequence_sorted_indices(input)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_nn_utils_PackedSequence_unsorted_indices)(void *input);
+  HOST_API void * lantern_nn_utils_PackedSequence_unsorted_indices(void *input) { return LANTERN_HOST_HANDLER(_lantern_nn_utils_PackedSequence_unsorted_indices(input)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_nn_utils_rnn_pack_sequence)(void *sequence, bool enforce_sorted);
+  HOST_API void * lantern_nn_utils_rnn_pack_sequence(void *sequence, bool enforce_sorted) { return LANTERN_HOST_HANDLER(_lantern_nn_utils_rnn_pack_sequence(sequence, enforce_sorted)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_nn_utils_rnn_pad_packed_sequence)(void *sequence, bool batch_first, double padding_value, void *total_length);
+  HOST_API void * lantern_nn_utils_rnn_pad_packed_sequence(void *sequence, bool batch_first, double padding_value, void *total_length) { return LANTERN_HOST_HANDLER(_lantern_nn_utils_rnn_pad_packed_sequence(sequence, batch_first, padding_value, total_length)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_nn_utils_rnn_pad_sequence)(void *sequence, bool batch_first, double padding_value);
+  HOST_API void * lantern_nn_utils_rnn_pad_sequence(void *sequence, bool batch_first, double padding_value) { return LANTERN_HOST_HANDLER(_lantern_nn_utils_rnn_pad_sequence(sequence, batch_first, padding_value)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_nn_utils_rnn_PackedSequence_new)(void *data, void *batch_sizes, void *sorted_indices, void *unsorted_indices);
+  HOST_API void * lantern_nn_utils_rnn_PackedSequence_new(void *data, void *batch_sizes, void *sorted_indices, void *unsorted_indices) { return LANTERN_HOST_HANDLER(_lantern_nn_utils_rnn_PackedSequence_new(data, batch_sizes, sorted_indices, unsorted_indices)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Scalar_dtype)(void *self);
+  HOST_API void * lantern_Scalar_dtype(void *self) { return LANTERN_HOST_HANDLER(_lantern_Scalar_dtype(self)); }
+  LANTERN_API float(LANTERN_PTR _lantern_Scalar_to_float)(void *self);
+  HOST_API float lantern_Scalar_to_float(void *self) { return LANTERN_HOST_HANDLER(_lantern_Scalar_to_float(self)); }
+  LANTERN_API int(LANTERN_PTR _lantern_Scalar_to_int)(void *self);
+  HOST_API int lantern_Scalar_to_int(void *self) { return LANTERN_HOST_HANDLER(_lantern_Scalar_to_int(self)); }
+  LANTERN_API double(LANTERN_PTR _lantern_Scalar_to_double)(void *self);
+  HOST_API double lantern_Scalar_to_double(void *self) { return LANTERN_HOST_HANDLER(_lantern_Scalar_to_double(self)); }
+  LANTERN_API bool(LANTERN_PTR _lantern_Scalar_to_bool)(void *self);
+  HOST_API bool lantern_Scalar_to_bool(void *self) { return LANTERN_HOST_HANDLER(_lantern_Scalar_to_bool(self)); }
+  LANTERN_API bool(LANTERN_PTR _lantern_Tensor_is_undefined)(void *self);
+  HOST_API bool lantern_Tensor_is_undefined(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_is_undefined(self)); }
+  LANTERN_API void(LANTERN_PTR _lantern_set_default_dtype)(void *dtype);
+  HOST_API void lantern_set_default_dtype(void *dtype) { return LANTERN_HOST_HANDLER(_lantern_set_default_dtype(dtype)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_get_default_dtype)();
+  HOST_API void * lantern_get_default_dtype() { return LANTERN_HOST_HANDLER(_lantern_get_default_dtype()); }
+  LANTERN_API void (LANTERN_PTR _lantern_Tensor_set_grad_)(void* self, void* new_grad);
+  HOST_API void lantern_Tensor_set_grad_(void* self, void* new_grad) { return LANTERN_HOST_HANDLER(_lantern_Tensor_set_grad_(self, new_grad)); }
+  LANTERN_API void *(LANTERN_PTR _lantern_Tensor_storage)(void *self);
+  HOST_API void * lantern_Tensor_storage(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_storage(self)); }
+  LANTERN_API bool(LANTERN_PTR _lantern_Tensor_has_storage)(void *self);
+  HOST_API bool lantern_Tensor_has_storage(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_has_storage(self)); }
+  LANTERN_API const char *(LANTERN_PTR _lantern_Storage_data_ptr)(void *self);
+  HOST_API const char * lantern_Storage_data_ptr(void *self) { return LANTERN_HOST_HANDLER(_lantern_Storage_data_ptr(self)); }
+  LANTERN_API void(LANTERN_PTR _lantern_Storage_delete)(void *x);
+  HOST_API void lantern_Storage_delete(void *x) { return LANTERN_HOST_HANDLER(_lantern_Storage_delete(x)); }
+  LANTERN_API bool(LANTERN_PTR _lantern_Tensor_is_contiguous)(void *self);
+  HOST_API bool lantern_Tensor_is_contiguous(void *self) { return LANTERN_HOST_HANDLER(_lantern_Tensor_is_contiguous(self)); }
+  LANTERN_API const char  * (LANTERN_PTR _lantern_tensor_save) (void* self);
+  HOST_API const char  * lantern_tensor_save(void* self) { return LANTERN_HOST_HANDLER(_lantern_tensor_save(self)); }
+  LANTERN_API void * (LANTERN_PTR _lantern_tensor_load) (const char * s);
+  HOST_API void * lantern_tensor_load(const char * s) { return LANTERN_HOST_HANDLER(_lantern_tensor_load(s)); }
+  LANTERN_API void * (LANTERN_PTR _lantern_test_tensor)();
+  HOST_API void * lantern_test_tensor() { return LANTERN_HOST_HANDLER(_lantern_test_tensor()); }
+  LANTERN_API void (LANTERN_PTR _lantern_test_print)(void* x); 
+  HOST_API void lantern_test_print(void* x) { return LANTERN_HOST_HANDLER(_lantern_test_print(x)); }
+  LANTERN_API size_t (LANTERN_PTR _lantern_tensor_serialized_size) (const char * s);
+  HOST_API size_t lantern_tensor_serialized_size(const char * s) { return LANTERN_HOST_HANDLER(_lantern_tensor_serialized_size(s)); }
+  LANTERN_API void (LANTERN_PTR _lantern_const_char_delete) (const char * x);
+  HOST_API void lantern_const_char_delete(const char * x) { return LANTERN_HOST_HANDLER(_lantern_const_char_delete(x)); }
   /* Autogen Headers -- Start */
 LANTERN_API void* (LANTERN_PTR lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
 LANTERN_API void* (LANTERN_PTR lantern__cast_char_tensor_bool)(void* self, void* non_blocking);
