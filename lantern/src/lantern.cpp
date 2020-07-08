@@ -8,31 +8,22 @@
 
 #include "utils.hpp"
 
-#include <easylogging++.h>
-INITIALIZE_EASYLOGGINGPP
-
+bool lanternLogEnabled = false;
 void lanternConfigure(bool log)
 {
-  el::Configurations defaultConf;
-  defaultConf.setToDefault();
-  defaultConf.setGlobally(el::ConfigurationType::Format, "%datetime %level: %msg");
-  if (log) defaultConf.setGlobally(el::ConfigurationType::Filename, "torch.log");
-  defaultConf.setGlobally(el::ConfigurationType::ToFile, log ? "true" : "false");
-  defaultConf.setGlobally(el::ConfigurationType::ToStandardOutput, log ? "true" : "false");
-  defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
-  el::Loggers::setDefaultConfigurations(defaultConf, true);
+  lanternLogEnabled = log;
 }
 
 std::string *pLanternLastError = NULL;
 
 const char* lanternVersion()
 {
-  return "0.1.0.9002";
+  return "0.1.0.9004";
 }
 
 void lanternSetLastError(const char* error)
 {
-  LOG(INFO) << "Setting last error to " << error;
+  LLOG("Setting last error to %s", error);
   pLanternLastError = new std::string(error);
 }
 
@@ -41,14 +32,14 @@ const char* lanternLastError()
   if (pLanternLastError == NULL)
     return NULL;
   else {
-    LOG(INFO) << "Has last error set to " << pLanternLastError->c_str();
+    LLOG("Has last error set to %s", pLanternLastError->c_str());
     return pLanternLastError->c_str();
   }
 }
 
 void lanternLastErrorClear()
 {
-  LOG(INFO) << "Cleared last error";
+  LLOG("Cleared last error");
   pLanternLastError = NULL;
 }
 
@@ -6939,16 +6930,24 @@ void* lantern_true_divide_tensor_tensor(void* self, void* other)
 void* lantern_Tensor_true_divide_tensor_tensor(void* self, void* other)
 {
   LANTERN_FUNCTION_START
+#ifdef CUDA102
+    throw "Not Implemented";
+#else
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().true_divide(
         ((LanternObject<torch::Tensor>*)other)->get()));
+#endif
   LANTERN_FUNCTION_END
 }
 
 void* lantern_Tensor_true_divide__tensor_tensor(void* self, void* other)
 {
   LANTERN_FUNCTION_START
+#ifdef CUDA102
+    throw "Not Implemented";
+#else
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().true_divide_(
         ((LanternObject<torch::Tensor>*)other)->get()));
+#endif
   LANTERN_FUNCTION_END
 }
 
@@ -6971,16 +6970,24 @@ void* lantern_true_divide_tensor_scalar(void* self, void* other)
 void* lantern_Tensor_true_divide_tensor_scalar(void* self, void* other)
 {
   LANTERN_FUNCTION_START
+#ifdef CUDA102
+    throw "Not Implemented";
+#else
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().true_divide(
         ((LanternObject<torch::Scalar>*)other)->get()));
+#endif
   LANTERN_FUNCTION_END
 }
 
 void* lantern_Tensor_true_divide__tensor_scalar(void* self, void* other)
 {
   LANTERN_FUNCTION_START
+#ifdef CUDA102
+    throw "Not Implemented";
+#else
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().true_divide_(
         ((LanternObject<torch::Scalar>*)other)->get()));
+#endif
   LANTERN_FUNCTION_END
 }
 

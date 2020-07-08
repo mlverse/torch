@@ -44,7 +44,11 @@ elseif(WIN32)
     endif()
 elseif(UNIX)
     if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.1')
+        add_compile_definitions(CUDA101)
         retrieve_lib("https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu101.zip" "libtorch")
+    elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.2')
+        add_compile_definitions(CUDA102)
+        retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu102.zip" "libtorch")
     else()
         retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcpu.zip" "libtorch")
     endif()
@@ -59,20 +63,10 @@ find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
 ############################################################
-# EasyLoggingPP
-############################################################
-
-retrieve_lib("https://github.com/amrayn/easyloggingpp/archive/v9.96.7.zip" "easyloggingpp-9.96.7")
-file(COPY "${CMAKE_CURRENT_BINARY_DIR}/easyloggingpp-9.96.7/src/easylogging++.h" DESTINATION "${CMAKE_SOURCE_DIR}/include")
-file(COPY "${CMAKE_CURRENT_BINARY_DIR}/easyloggingpp-9.96.7/src/easylogging++.cc" DESTINATION "${CMAKE_SOURCE_DIR}/src")
-add_definitions(-DELPP_NO_DEFAULT_LOG_FILE)
-
-############################################################
 # Library
 ############################################################
 
 add_library(lantern SHARED 
-    src/easylogging++.cc
     src/lantern.cpp
     src/TensorOptions.cpp
     src/Dtype.cpp

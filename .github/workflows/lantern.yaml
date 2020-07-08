@@ -60,13 +60,25 @@ jobs:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
             flavor: Release
             artifacts: liblantern.so
-            upload: Linux-Cuda
+            upload: Linux-Cuda-101
+          - os: ubuntu-18.04
+            cuda: 10.2
+            library: liblantern.so
+            test: ./lanterntest
+            make: make
+            build: build
+            libext:
+            exeext:
+            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
+            flavor: Release
+            artifacts: liblantern.so
+            upload: Linux-Cuda-102
     steps:
       - uses: actions/checkout@v2
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/build
-      - name: Prep cmake
-        if: ${{ matrix.cuda != 0 }}
+      - name: Prep cmake cuda 10.1
+        if: ${{ matrix.cuda == 10.1 }}
         run: |
           wget --quiet https://storage.googleapis.com/torch-lantern-builds/cuda/cuda_10.1.105_418.39_linux.run
           chmod +x cuda_10.1.105_418.39_linux.run
@@ -76,6 +88,22 @@ jobs:
           dir /usr/local
           wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.1-linux-x64-v7.6.5.32.tgz
           tar -xzvf cudnn-10.1-linux-x64-v7.6.5.32.tgz
+          sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
+          sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+          sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+          echo ::set-env name=CUDNN_LIBRARY_PATH::/usr/local/cuda/lib64
+          echo ::set-env name=CUDNN_INCLUDE_PATH::/usr/local/cuda/include
+      - name: Prep cmake cuda 10.2
+        if: ${{ matrix.cuda == 10.2 }}
+        run: |
+          wget --quiet http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
+          chmod +x cuda_10.2.89_440.33.01_linux.run
+          sudo ./cuda_10.2.89_440.33.01_linux.run --silent --toolkit
+          echo ::set-env name=CUDA::${{matrix.cuda}}
+          echo ::set-env name=CUDA_TOOLKIT_ROOT_DIR::/usr/local/cuda
+          dir /usr/local
+          wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz
+          tar -xzvf cudnn-10.2-linux-x64-v7.6.5.32.tgz
           sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
           sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
@@ -120,20 +148,30 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        name: [macOS, Linux, Windows]
+        name: [macOS, Linux, Windows, Cuda101, Cuda102]
         include:
           - name: macOS
             artifact: macOS
+            upload: macOS
             hw: cpu
           - name: Linux
             artifact: Linux
+            upload: Linux
             hw: cpu
           - name: Windows
             artifact: Windows
+            upload: Windows
             hw: cpu
-          - name: Linux
-            artifact: Linux-Cuda
+          - name: Cuda101
+            artifact: Linux-Cuda-101
+            upload: Linux
             hw: gpu
+            version: -101
+          - name: Cuda102
+            artifact: Linux-Cuda-102
+            upload: Linux
+            hw: gpu
+            version: -102
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v1
@@ -149,7 +187,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.name }}-${{ matrix.hw }}.zip
+          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.upload }}-${{ matrix.hw }}${{ matrix.version }}.zip
       - name: Upload to latest
         uses: actions-hub/gcloud@master
         env:
@@ -157,7 +195,7 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/latest/${{ matrix.name }}-${{ matrix.hw }}.zip
+          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/latest/${{ matrix.upload }}-${{ matrix.hw }}${{ matrix.version }}.zip
   autogen:
     runs-on: ubuntu-16.04
     name: autogen (ubuntu-16.04)
