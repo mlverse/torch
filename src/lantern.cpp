@@ -2,6 +2,15 @@
 
 using namespace Rcpp;
 
+void lantern_host_handler()
+{
+  if (lanternLastError() != NULL) {
+    std::string last = lanternLastError();
+    lanternLastErrorClear();
+    throw Rcpp::exception(last.c_str());
+  } 
+}
+
 // [[Rcpp::export]]
 void cpp_lantern_configure(bool log) {
   lanternConfigure(log);

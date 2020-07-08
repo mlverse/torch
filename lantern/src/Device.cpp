@@ -10,6 +10,7 @@
 
 void *_lantern_Device(const char *type, int64_t index, bool useIndex)
 {
+  LANTERN_FUNCTION_START
   std::string deviceName(type);
   torch::DeviceType deviceType = torch::DeviceType::CPU;
   torch::DeviceIndex deviceIndex = index;
@@ -63,10 +64,12 @@ void *_lantern_Device(const char *type, int64_t index, bool useIndex)
   }
 
   return (void *)new LanternPtr<torch::Device>(device);
+  LANTERN_FUNCTION_END
 }
 
 const char *_lantern_Device_type(void *device)
 {
+  LANTERN_FUNCTION_START
   torch::Device type = ((LanternPtr<torch::Device> *)device)->get().type();
 
   if (type == torch::DeviceType::CPU)
@@ -117,9 +120,12 @@ const char *_lantern_Device_type(void *device)
   {
     return "unknown";
   }
+  LANTERN_FUNCTION_END
 }
 
 int64_t _lantern_Device_index(void *device)
 {
+  LANTERN_FUNCTION_START
   return ((LanternPtr<torch::Device> *)device)->get().index();
+  LANTERN_FUNCTION_END_RET(0)
 }
