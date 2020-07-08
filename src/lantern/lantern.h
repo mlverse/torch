@@ -62,6 +62,17 @@ extern std::string *pLanternLastError;
   return ret;                                                      \
 }
 #define LANTERN_FUNCTION_END LANTERN_FUNCTION_END_RET(NULL)
+#define LANTERN_FUNCTION_END_VOID                                  \
+} catch(const std::exception& ex) {                                \
+  LLOG("Error %s in %s", ex.what(), __func__)                      \
+  pLanternLastError = new std::string(ex.what());                  \
+} catch(std::string& ex) {                                         \
+  LLOG("Error %s in %s", ex.c_str(), __func__)                     \
+  pLanternLastError = new std::string(ex);                         \
+} catch(...) {                                                     \
+  LLOG("Error in %s", __func__)                                    \
+  pLanternLastError = new std::string("Unknown error. ");          \
+}
 
 #ifdef __cplusplus
 extern "C"
