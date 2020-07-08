@@ -17,10 +17,10 @@ for (entry in lantern) {
     if (length(calls) == 0) calls <- ""
     calls <- stringi::stri_extract(calls, regex = "[a-zA-Z0-9]+$")
     if (length(calls) == 0 || is.na(calls)) calls <- ""
-    calls <- paste(calls, collapse = ",")
+    calls <- paste(calls, collapse = ", ")
     
     ret <- stringi::stri_extract(entry, regex = "LANTERN_API [^\\(]+\\(")
-    ret <- gsub("LANTERN_API | +\\(", "", ret)
+    ret <- gsub("LANTERN_API | *\\(", "", ret)
     
     entry <- c(
       gsub("LANTERN_PTR lantern_", "LANTERN_PTR _lantern_", entry),
@@ -28,7 +28,7 @@ for (entry in lantern) {
     )
   }
   
-  if (grepl("LOAD_SYMBOL\\(", entry)) {
+  if (length(entry) == 1 && grepl("LOAD_SYMBOL\\(", entry)) {
     func_name <- gsub(".*LOAD_SYMBOL\\(|\\).*", "", entry)
     entry <- gsub("LOAD_SYMBOL\\(.*\\)", paste0("LOAD_SYMBOL2(", func_name, ", _", func_name, ")"), entry)
   }
