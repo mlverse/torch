@@ -3,15 +3,12 @@
 #include <string>
 #include <memory>
 
-#include <Rcpp.h>
-
-#define LANTERN_HOST_HANDLER if (lanternLastError() != NULL) {     \
-  std::string last = lanternLastError();                           \
-  lanternLastErrorClear();                                         \
-  throw Rcpp::exception(last.c_str());                             \
-} 
+void lantern_host_handler();
+#define LANTERN_HOST_HANDLER lantern_host_handler();
 
 #include "lantern/lantern.h"
+
+#include <Rcpp.h>
 
 class XPtrTorch
 {
