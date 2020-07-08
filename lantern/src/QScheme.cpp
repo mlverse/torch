@@ -9,23 +9,31 @@
 #include "utils.hpp"
 
 void* _lantern_QScheme_per_channel_affine () {
+  LANTERN_FUNCTION_START
   return (void *) new LanternObject<torch::QScheme>(torch::QScheme::PER_CHANNEL_AFFINE);
+  LANTERN_FUNCTION_END
 }
 
 void* _lantern_QScheme_per_tensor_affine () {
+  LANTERN_FUNCTION_START
   return (void *) new LanternObject<torch::QScheme>(torch::QScheme::PER_TENSOR_AFFINE);
+  LANTERN_FUNCTION_END
 }
 
 void* _lantern_QScheme_per_channel_symmetric () {
+  LANTERN_FUNCTION_START
   return (void *) new LanternObject<torch::QScheme>(torch::QScheme::PER_CHANNEL_SYMMETRIC);
+  LANTERN_FUNCTION_END
 }
 
 void* _lantern_QScheme_per_tensor_symmetric () {
+  LANTERN_FUNCTION_START
   return (void *) new LanternObject<torch::QScheme>(torch::QScheme::PER_TENSOR_SYMMETRIC);
+  LANTERN_FUNCTION_END
 }
 
 const char * _lantern_QScheme_type(void* x) {
-  
+  LANTERN_FUNCTION_START
   torch::QScheme y = reinterpret_cast<LanternObject<torch::QScheme>*>(x)->get();
   
   if (y == torch::QScheme::PER_CHANNEL_AFFINE) {
@@ -45,4 +53,5 @@ const char * _lantern_QScheme_type(void* x) {
   }
   
   return "not handled";
+  LANTERN_FUNCTION_END
 }
