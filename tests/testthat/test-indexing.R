@@ -94,4 +94,22 @@ test_that("subset assignment", {
   x[1,1] <- torch_tensor(0)
   expect_equal_to_r(x[1,1], 0)
   
+  x[1,1] <- 0
+  expect_equal_to_r(x[1,1], 0)
+  
+  x[1,2] <- 1L
+  expect_equal_to_r(x[1,2], 1)
+  
+  x <- torch_tensor(c(TRUE, FALSE))
+  x[2] <- TRUE
+  expect_equal_to_r(x[2], TRUE)
+  
+  x <- torch_tensor(rbind(
+    c(-1, -2, 0, 1, 2),
+    c(2, 1, 0, -1, -2)
+  ))
+  
+  x[x <= 0] <- 1
+  expect_true(as_array(torch_all(x > 0)))
+  
 })
