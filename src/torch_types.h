@@ -2,8 +2,16 @@
 #define LANTERN_HEADERS_ONLY
 #include <string>
 #include <memory>
-#include "lantern/lantern.h"
+
 #include <Rcpp.h>
+
+#define LANTERN_HOST_HANDLER if (lanternLastError() != NULL) {     \
+  std::string last = lanternLastError();                           \
+  lanternLastErrorClear();                                         \
+  throw Rcpp::exception(last.c_str());                             \
+} 
+
+#include "lantern/lantern.h"
 
 class XPtrTorch
 {
