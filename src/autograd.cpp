@@ -303,7 +303,7 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvaria
     catch(std::string& ex)
     {
       event_loop_running = false;
-      throw Rcpp::exception(ex);
+      throw Rcpp::exception(ex.c_str());
     }
     catch (const std::exception& ex)
     {
