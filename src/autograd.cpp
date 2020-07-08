@@ -306,7 +306,11 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvaria
         forward_,
         backward_
       );
-      LANTERN_ERROR_HANDLE
+    }
+    catch(std::string& ex)
+    {
+      event_loop_running = false;
+      throw Rcpp::exception(ex);
     }
     catch (const std::exception& ex)
     {
