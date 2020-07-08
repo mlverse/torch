@@ -294,7 +294,7 @@ int main(int argc, char *argv[])
         if (hasMethodOf(config[idx], "namespace"))
         {
             headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_" + function + ")(" + arguments + ");");
-            headers.push_back("  HOST_API void* lantern_" + function + "(" + arguments + ") { void* ret = " + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");
+            headers.push_back("  HOST_API void* lantern_" + function + "(" + arguments + ") { void* ret = _lantern_" + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");
   
             calls = buildCalls(name, config[idx]["arguments"], 0);
             functionCall = "torch::";
