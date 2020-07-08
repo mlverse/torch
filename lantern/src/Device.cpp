@@ -8,7 +8,7 @@
 
 #include "utils.hpp"
 
-void *lantern_Device(const char *type, int64_t index, bool useIndex)
+void *_lantern_Device(const char *type, int64_t index, bool useIndex)
 {
   std::string deviceName(type);
   torch::DeviceType deviceType = torch::DeviceType::CPU;
@@ -65,7 +65,7 @@ void *lantern_Device(const char *type, int64_t index, bool useIndex)
   return (void *)new LanternPtr<torch::Device>(device);
 }
 
-const char *lantern_Device_type(void *device)
+const char *_lantern_Device_type(void *device)
 {
   torch::Device type = ((LanternPtr<torch::Device> *)device)->get().type();
 
@@ -119,7 +119,7 @@ const char *lantern_Device_type(void *device)
   }
 }
 
-int64_t lantern_Device_index(void *device)
+int64_t _lantern_Device_index(void *device)
 {
   return ((LanternPtr<torch::Device> *)device)->get().index();
 }

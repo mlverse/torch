@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     std::vector<int64_t> x1(2, 2);
     void *t1 = lantern_rand_intarrayref_tensoroptions(lantern_vector_int64_t(&x[0], 2), lantern_TensorOptions());
 
-    test_grad_fn();
+    _test_grad_fn();
 
     //save
     void* tensor_to_save = lantern_test_tensor();

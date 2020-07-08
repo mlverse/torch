@@ -54,6 +54,23 @@ std::string buildArguments(std::string name, YAML::Node node)
     return arguments;
 }
 
+std::string buildArgumentsCalls(std::string name, YAML::Node node)
+{
+    std::string arguments = "";
+
+    for (size_t idx = 0; idx < node.size(); idx++)
+    {
+        if (idx > 0)
+        {
+            arguments += ", ";
+        }
+
+        arguments += node[idx]["name"].as<std::string>();
+    }
+
+    return arguments;
+}
+
 std::string addNamespace(std::string name)
 {
     std::vector<std::string> objects;
@@ -268,6 +285,7 @@ int main(int argc, char *argv[])
 
         std::string name = config[idx]["name"].as<std::string>();
         std::string arguments = buildArguments(name, config[idx]["arguments"]);
+        std::string argumentsCalls = buildArgumentsCalls(name, config[idx]["arguments"]);
         std::string function = toFunction(name, config[idx]["arguments"]);
         std::string returns = buildReturn(config[idx]["returns"]);
 
@@ -275,12 +293,13 @@ int main(int argc, char *argv[])
         std::string functionCall = "";
         if (hasMethodOf(config[idx], "namespace"))
         {
-            headers.push_back("LANTERN_API void* (LANTERN_PTR lantern_" + function + ")(" + arguments + ");");
-
+            headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_" + function + ")(" + arguments + ");");
+            headers.push_back("  HOST_API void* lantern_" + function + "(" + arguments + ") { return LANTERN_HOST_HANDLER(_lantern_" + function + "(" + argumentsCalls + ")); }");
+  
             calls = buildCalls(name, config[idx]["arguments"], 0);
             functionCall = "torch::";
 
-            bodies.push_back("void* lantern_" + function + "(" + arguments + ")");
+            bodies.push_back("void* _lantern_" + function + "(" + arguments + ")");
             bodies.push_back("{");
             bodies.push_back("  LANTERN_FUNCTION_START");
             if (returns == "void" | (config[idx]["returns"].size() == 0))
@@ -310,8 +329,9 @@ int main(int argc, char *argv[])
         functionCall = "";
         if (hasMethodOf(config[idx], "Tensor"))
         {
-            headers.push_back("LANTERN_API void* (LANTERN_PTR lantern_Tensor_" + function + ")(" + arguments + ");");
-
+            headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_" + function + ")(" + arguments + ");");
+            headers.push_back("  HOST_API void* lantern_Tensor_" + function + "(" + arguments + ") { return LANTERN_HOST_HANDLER(_lantern_Tensor_" + function + "(" + argumentsCalls + ")); }");
+  
             calls = buildCalls(name, config[idx]["arguments"], 1);
 
             std::string firstType = config[idx]["arguments"][0]["dynamic_type"].as<std::string>();
@@ -323,7 +343,7 @@ int main(int argc, char *argv[])
                                function == "true_divide_tensor_tensor" ||
                                function == "true_divide__tensor_tensor";
 
-            bodies.push_back("void* lantern_Tensor_" + function + "(" + arguments + ")");
+            bodies.push_back("void* _lantern_Tensor_" + function + "(" + arguments + ")");
             bodies.push_back("{");
             bodies.push_back("  LANTERN_FUNCTION_START");
             if (skipCuda102)
@@ -371,12 +391,12 @@ int main(int argc, char *argv[])
 
         if (hasMethodOf(config[idx], "namespace"))
         {
-            symbols.push_back("  LOAD_SYMBOL(lantern_" + toFunction(name, config[idx]["arguments"]) + ")");
+            symbols.push_back("  LOAD_SYMBOL(_lantern_" + toFunction(name, config[idx]["arguments"]) + ")");
         }
 
         if (hasMethodOf(config[idx], "Tensor"))
         {
-            symbols.push_back("  LOAD_SYMBOL(lantern_Tensor_" + toFunction(name, config[idx]["arguments"]) + ")");
+            symbols.push_back("  LOAD_SYMBOL(_lantern_Tensor_" + toFunction(name, config[idx]["arguments"]) + ")");
         }
     }
 

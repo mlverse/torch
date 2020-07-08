@@ -10,44 +10,44 @@
 
 using namespace torch::indexing;
 
-void *lantern_TensorIndex_new()
+void *_lantern_TensorIndex_new()
 {
     return (void *)new LanternObject<std::vector<at::indexing::TensorIndex>>();
 }
 
-void lantern_TensorIndex_append_tensor(void *self, void *x)
+void _lantern_TensorIndex_append_tensor(void *self, void *x)
 {
     torch::Tensor ten = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
     reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().push_back(ten);
 }
 
-void lantern_TensorIndex_append_ellipsis(void *self)
+void _lantern_TensorIndex_append_ellipsis(void *self)
 {
     reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().push_back(Ellipsis);
 }
 
-void lantern_TensorIndex_append_slice(void *self, void *x)
+void _lantern_TensorIndex_append_slice(void *self, void *x)
 {
     torch::indexing::Slice slice = reinterpret_cast<LanternObject<torch::indexing::Slice> *>(x)->get();
     reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().push_back(slice);
 }
 
-void lantern_TensorIndex_append_none(void *self)
+void _lantern_TensorIndex_append_none(void *self)
 {
     reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().push_back(None);
 }
 
-void lantern_TensorIndex_append_bool(void *self, bool x)
+void _lantern_TensorIndex_append_bool(void *self, bool x)
 {
     reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().push_back(x);
 }
 
-void lantern_TensorIndex_append_int64(void *self, int64_t x)
+void _lantern_TensorIndex_append_int64(void *self, int64_t x)
 {
     reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().push_back(x);
 }
 
-void *lantern_Slice(void *start, void *end, void *step)
+void *_lantern_Slice(void *start, void *end, void *step)
 {
     auto start_ = reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(start)->get();
     if (start_ == c10::nullopt)
@@ -71,7 +71,7 @@ void *lantern_Slice(void *start, void *end, void *step)
     return (void *)new LanternObject<Slice>(out);
 }
 
-void *lantern_Tensor_index(void *self, void *index)
+void *_lantern_Tensor_index(void *self, void *index)
 {
     torch::Tensor ten = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
     torch::Tensor out = ten.index(reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(index)->get());

@@ -44,15 +44,15 @@ discriminator <- nn_module(
   initialize = function(in_channels) {
     self$main <- nn_sequential(
       nn_conv2d(in_channels, 16, kernel_size = 4, stride = 2, padding = 1, bias = FALSE),
-      nn_relu(),
+      nn_leaky_relu(0.2, inplace = TRUE),
       nn_conv2d(16, 32, kernel_size = 4, stride = 2, padding = 1, bias = FALSE),
       nn_batch_norm2d(32),
-      nn_relu(),
+      nn_leaky_relu(0.2, inplace = TRUE),
       nn_conv2d(32, 64, kernel_size = 4, stride = 2, padding = 1, bias = FALSE),
       nn_batch_norm2d(64),
-      nn_relu(),
+      nn_leaky_relu(0.2, inplace = TRUE),
       nn_conv2d(64, 128, kernel_size = 4, stride = 2, padding = 1, bias = FALSE),
-      nn_relu()
+      nn_leaky_relu(0.2, inplace = TRUE)
     )
     self$linear <- nn_linear(128, 1)
     self$sigmoid <- nn_sigmoid()
@@ -78,6 +78,18 @@ device <- torch_device(ifelse(cuda_is_available(),  "cuda", "cpu"))
 
 G <- generator(latent_dim = 100, out_channels = 1)
 D <- discriminator(in_channels = 1)
+
+init_weights <- function(m) {
+  if (grepl("conv", m$.classes[[1]])) {
+    nn_init_normal_(m$weight$data(), 0.0, 0.02)
+  } else if (grepl("batch_norm", m$.classes[[1]])) {
+    nn_init_normal_(m$weight$data(), 1.0, 0.02)
+    nn_init_constant_(m$bias$data(), 0)
+  } 
+}
+
+G[[1]]$apply(init_weights)
+D[[1]]$apply(init_weights)
 
 G$to(device = device)
 D$to(device = device)
