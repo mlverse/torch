@@ -75,6 +75,7 @@ test_that("indexing with boolean tensor", {
   expect_equal_to_r(x[x < 0], c(-1, -2, -1, -2))
   
   expect_error(x[x < 0, 1])
+  
 })
 
 test_that("slice with negative indexes", {
@@ -115,5 +116,14 @@ test_that("subset assignment", {
   x <- torch_tensor(c(1,2,3,4,5))
   x[1:2] <- c(0, 0)
   expect_equal_to_r(x[1:2], c(0, 0))
+  
+})
+
+test_that("indexing with R boolean vectors", {
+  
+  x <- torch_tensor(c(1,2))
+  expect_equal_to_r(x[TRUE], matrix(c(1,2), nrow = 1))
+  expect_equal_to_r(x[FALSE], matrix(data = 1, ncol = 2, nrow = 0))
+  expect_equal_to_r(x[c(TRUE, FALSE)], 1)
   
 })

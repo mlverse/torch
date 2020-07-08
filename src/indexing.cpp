@@ -134,6 +134,15 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       continue;
     }
     
+    // scalar boolean
+    if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1)
+    {
+      bool s = Rf_asLogical(slice);
+      lantern_TensorIndex_append_bool(index.get(), s);
+      
+      continue;
+    }
+    
     // the fill sybol was passed. in this case we add the ellipsis ...
     if (Rf_inherits(slice, "fill"))
     {
@@ -181,6 +190,23 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       // Create the integer Tensor
       XPtrTorchTensorOptions options = lantern_TensorOptions();
       options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
+      std::vector<int64_t> dim = {LENGTH(slice)};
+      
+      Rcpp::XPtr<XPtrTorchTensor> tensor = cpp_torch_tensor(v, dim, make_xptr<XPtrTorchTensorOptions>(options), false);
+      
+      lantern_TensorIndex_append_tensor(index.get(), tensor->get());
+      continue;
+    }
+    
+    // if it's a numeric vector
+    if (TYPEOF(slice) == LGLSXP && LENGTH(slice) > 1)
+    {
+      
+      Rcpp::LogicalVector v = slice;
+      
+      // Create the integer Tensor
+      XPtrTorchTensorOptions options = lantern_TensorOptions();
+      options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_bool()).get());
       std::vector<int64_t> dim = {LENGTH(slice)};
       
       Rcpp::XPtr<XPtrTorchTensor> tensor = cpp_torch_tensor(v, dim, make_xptr<XPtrTorchTensorOptions>(options), false);
