@@ -93,10 +93,11 @@ test_that("subset assignment", {
   
   x <- torch_randn(2,2)
   x[1,1] <- torch_tensor(0)
+  x
   expect_equal_to_r(x[1,1], 0)
   
-  x[1,1] <- 0
-  expect_equal_to_r(x[1,1], 0)
+  x[1,2] <- 0
+  expect_equal_to_r(x[1,2], 0)
   
   x[1,2] <- 1L
   expect_equal_to_r(x[1,2], 1)
