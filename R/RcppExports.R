@@ -6897,6 +6897,10 @@ Tensor_slice <- function(self, e, drop, mask) {
     cpp_handle_error(.Call('_torch_Tensor_slice', PACKAGE = 'torchpkg', self, e, drop, mask))
 }
 
+Tensor_slice_put <- function(self, e, rhs, mask) {
+    invisible(cpp_handle_error(.Call('_torch_Tensor_slice_put', PACKAGE = 'torchpkg', self, e, rhs, mask)))
+}
+
 cpp_torch_tensor_index <- function(self, index) {
     cpp_handle_error(.Call('_torch_cpp_torch_tensor_index', PACKAGE = 'torchpkg', self, index))
 }

@@ -211,3 +211,21 @@ Rcpp::XPtr<XPtrTorchTensor> Tensor_slice(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp:
   return make_xptr<XPtrTorchTensor>(out);
 }
 
+// [[Rcpp::export]]
+void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
+                      SEXP rhs, Rcpp::List mask)
+{
+  auto dots = evaluate_slices(enquos0(e), mask);
+  auto index = slices_to_index(dots, true);
+  
+  if (Rf_inherits(rhs, "torch_tensor"))
+  {
+    Rcpp::Environment e = rhs;
+    Rcpp::XPtr<XPtrTorchTensor> t = e["ptr"];
+    lantern_Tensor_index_put_tensor_(self->get(), index.get(), t->get());  
+    return;
+  }
+  
+  Rcpp::stop("rhs must be a tensor or scalar");
+}
+

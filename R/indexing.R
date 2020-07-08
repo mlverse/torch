@@ -32,3 +32,13 @@ tensor_slice <- function(tensor, ..., drop = TRUE) {
 `[.torch_tensor` <- function(x, ..., drop = TRUE) {
   tensor_slice(x, ..., drop = drop)
 }
+
+tensor_slice_put_ <- function(tensor, ..., value) {
+  Tensor_slice_put(tensor$ptr, environment(), value, mask = .d)
+}
+
+#' @export
+`[<-.torch_tensor` <- function(x, ..., value) {
+  tensor_slice_put_(x, ..., value = value)
+  invisible(x)
+}

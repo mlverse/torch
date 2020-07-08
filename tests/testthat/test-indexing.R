@@ -87,3 +87,11 @@ test_that("slice with negative indexes", {
   expect_equal_to_r(x[c(-1, -2)], c(3, 2))
   
 })
+
+test_that("subset assignment", {
+  
+  x <- torch_randn(2,2)
+  x[1,1] <- torch_tensor(0)
+  expect_equal_to_r(x[1,1], 0)
+  
+})

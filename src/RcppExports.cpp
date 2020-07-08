@@ -23038,6 +23038,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// Tensor_slice_put
+void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e, SEXP rhs, Rcpp::List mask);
+RcppExport SEXP _torch_Tensor_slice_put(SEXP selfSEXP, SEXP eSEXP, SEXP rhsSEXP, SEXP maskSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Environment >::type e(eSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rhs(rhsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type mask(maskSEXP);
+    Tensor_slice_put(self, e, rhs, mask);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_torch_tensor_index
 Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor_index(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensorIndex> index);
 RcppExport SEXP _torch_cpp_torch_tensor_index(SEXP selfSEXP, SEXP indexSEXP) {
@@ -25577,6 +25590,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_enquos0", (DL_FUNC) &_torch_enquos0, 1},
     {"_torch_evaluate_slices", (DL_FUNC) &_torch_evaluate_slices, 2},
     {"_torch_Tensor_slice", (DL_FUNC) &_torch_Tensor_slice, 4},
+    {"_torch_Tensor_slice_put", (DL_FUNC) &_torch_Tensor_slice_put, 4},
     {"_torch_cpp_torch_tensor_index", (DL_FUNC) &_torch_cpp_torch_tensor_index, 2},
     {"_torch_cpp_torch_tensor_index_new", (DL_FUNC) &_torch_cpp_torch_tensor_index_new, 0},
     {"_torch_cpp_torch_tensor_index_append_tensor", (DL_FUNC) &_torch_cpp_torch_tensor_index_append_tensor, 2},
