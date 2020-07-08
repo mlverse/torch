@@ -65,11 +65,11 @@ nn_embedding <- nn_module(
     
     if (!is.null(padding_idx)) {
       
-      if (padding_idx > 0 && padding > num_embeddings) {
+      if (padding_idx > 0 && padding_idx > num_embeddings) {
         value_error("padding idx must be within num_embeddings")
       } else if (padding_idx < 0) {
         
-        if (padding_idx >= (-num_embeddings))
+        if (padding_idx <= (-num_embeddings))
           value_error("padding idx must be within num_embeddings")
         
         padding_idx <- self$num_embeddings + padding_idx
