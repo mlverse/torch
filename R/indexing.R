@@ -34,6 +34,10 @@ tensor_slice <- function(tensor, ..., drop = TRUE) {
 }
 
 tensor_slice_put_ <- function(tensor, ..., value) {
+  
+  if (length(value) > 1 && is.atomic(value))
+    value <- torch_tensor(value)
+  
   Tensor_slice_put(tensor$ptr, environment(), value, mask = .d)
 }
 
