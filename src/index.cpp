@@ -237,6 +237,6 @@ void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
     return;
   }
   
-  Rcpp::stop("rhs must be a tensor or scalar");
+  Rcpp::stop("rhs must be a torch_tensor or scalar value.");
 }
 
