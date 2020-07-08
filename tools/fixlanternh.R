@@ -15,7 +15,7 @@ for (entry in lantern) {
     
     calls <- strsplit(params, ",")[[1]]
     if (length(calls) == 0) calls <- ""
-    calls <- stringi::stri_extract(calls, regex = "[a-zA-Z0-9]+$")
+    calls <- stringi::stri_extract(calls, regex = "[a-zA-Z0-9_]+$")
     if (length(calls) == 0 || is.na(calls)) calls <- ""
     calls <- paste(calls, collapse = ", ")
     
@@ -30,7 +30,7 @@ for (entry in lantern) {
   
   if (length(entry) == 1 && grepl("LOAD_SYMBOL\\(", entry)) {
     func_name <- gsub(".*LOAD_SYMBOL\\(|\\).*", "", entry)
-    entry <- gsub("LOAD_SYMBOL\\(.*\\)", paste0("LOAD_SYMBOL2(", func_name, ", _", func_name, ")"), entry)
+    entry <- gsub("LOAD_SYMBOL\\(.*\\)", paste0("LOAD_SYMBOL(_", func_name, ")"), entry)
   }
   
   fixed <- c(fixed, entry)
