@@ -50,7 +50,7 @@ NULL
 #' input <- torch_tensor(rbind(c(1,2,4,5),c(4,3,2,9)), dtype = torch_long())
 #' embedding(input)
 #' # example with padding_idx
-#' embedding <- nn_embedding(10, 3, padding_idx=0)
+#' embedding <- nn_embedding(10, 3, padding_idx=1)
 #' input <- torch_tensor(matrix(c(0,2,0,5), nrow = 1), dtype = torch_long())
 #' embedding(input)
 #' 
