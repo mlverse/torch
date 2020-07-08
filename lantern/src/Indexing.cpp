@@ -78,7 +78,7 @@ void *_lantern_Tensor_index(void *self, void *index)
     return (void *)new LanternObject<torch::Tensor>(out);
 }
 
-void lantern_Tensor_index_put_tensor_ (void* self, void* index, void* rhs)
+void _lantern_Tensor_index_put_tensor_ (void* self, void* index, void* rhs)
 {
     torch::Tensor ten = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
     auto i = reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(index)->get();
@@ -86,7 +86,7 @@ void lantern_Tensor_index_put_tensor_ (void* self, void* index, void* rhs)
     ten.index_put_(i, r);
 }
 
-void lantern_Tensor_index_put_scalar_ (void* self, void* index, void* rhs)
+void _lantern_Tensor_index_put_scalar_ (void* self, void* index, void* rhs)
 {
     torch::Tensor ten = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
     auto i = reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(index)->get();
