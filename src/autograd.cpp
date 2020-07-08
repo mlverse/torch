@@ -18,13 +18,6 @@
   return (void *)(ret);                                            \
 }
 
-#define LANTERN_ERROR_HANDLE                                       \
-if (lanternLastError() != NULL) {                                  \
-  std::string last = lanternLastError();                           \
-  lanternLastErrorClear();                                         \
-  throw Rcpp::exception(last.c_str());                             \
-} 
-
 // [[Rcpp::export]]
 void cpp_autograd_set_grad_mode (bool enabled) {
   lantern_autograd_set_grad_mode(enabled);
