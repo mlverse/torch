@@ -443,9 +443,9 @@ extern "C"
   LANTERN_API void (LANTERN_PTR _lantern_const_char_delete) (const char * x);
   HOST_API void lantern_const_char_delete(const char * x) { return LANTERN_HOST_HANDLER(_lantern_const_char_delete(x)); }
   LANTERN_API void (LANTERN_PTR _lantern_Tensor_index_put_tensor_) (void* self, void* index, void* rhs);
-  HOST_API void lantern_Tensor_index_put_tensor_ (void* self, void* index, void* rhs) { return return LANTERN_HOST_HANDLER(_lantern_Tensor_index_put_tensor_(self, index, rhs));}
+  HOST_API void lantern_Tensor_index_put_tensor_ (void* self, void* index, void* rhs) { return LANTERN_HOST_HANDLER(_lantern_Tensor_index_put_tensor_(self, index, rhs));}
   LANTERN_API void (LANTERN_PTR _lantern_Tensor_index_put_scalar_) (void* self, void* index, void* rhs);
-  HOST_API void lantern_Tensor_index_put_scalar_ (void* self, void* index, void* rhs) { return return LANTERN_HOST_HANDLER(_lantern_Tensor_index_put_scalar_(self, index, rhs));}
+  HOST_API void lantern_Tensor_index_put_scalar_ (void* self, void* index, void* rhs) { return LANTERN_HOST_HANDLER(_lantern_Tensor_index_put_scalar_(self, index, rhs));}
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { return LANTERN_HOST_HANDLER(_lantern__cast_byte_tensor_bool(self, non_blocking)); }
