@@ -14,7 +14,7 @@ std::string size_t_to_string( std::size_t i) {
     return ss.str();
 }
 
-const char  * lantern_tensor_save (void* self)
+const char  * _lantern_tensor_save (void* self)
 {
     auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
 
@@ -28,7 +28,7 @@ const char  * lantern_tensor_save (void* self)
     return cstr;
 }
 
-std::size_t lantern_tensor_serialized_size (const char * s)
+std::size_t _lantern_tensor_serialized_size (const char * s)
 {
     std::istringstream iss_size(std::string(s, 20));
     std::size_t size;
@@ -36,7 +36,7 @@ std::size_t lantern_tensor_serialized_size (const char * s)
     return size;
 }
 
-void * lantern_tensor_load (const char * s) 
+void * _lantern_tensor_load (const char * s) 
 {
     std::string str;
     macaron::Base64::Decode(std::string(s), str);
@@ -47,12 +47,12 @@ void * lantern_tensor_load (const char * s)
     return (void*) new LanternObject<torch::Tensor>(t);
 }
 
-void* lantern_test_tensor ()
+void* _lantern_test_tensor ()
 {
     return (void*) new LanternObject<torch::Tensor>(torch::ones({5, 5}));
 }
 
-void lantern_test_print (void * x)
+void _lantern_test_print (void * x)
 {
     auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
     std::cout << t << std::endl;

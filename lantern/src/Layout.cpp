@@ -7,17 +7,17 @@
 #include <torch/torch.h>
 
 #include "utils.hpp"
-void *lantern_Layout_strided()
+void *_lantern_Layout_strided()
 {
     return (void *)new LanternObject<torch::Layout>(torch::kStrided);
 }
 
-void *lantern_Layout_sparse()
+void *_lantern_Layout_sparse()
 {
     return (void *)new LanternObject<torch::Layout>(torch::kSparse);
 }
 
-const char *lantern_Layout_string(void *x)
+const char *_lantern_Layout_string(void *x)
 {
     auto out = new std::string;
     auto l = reinterpret_cast<LanternObject<torch::Layout> *>(x)->get();
