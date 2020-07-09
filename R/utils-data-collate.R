@@ -1,7 +1,7 @@
 utils_data_default_collate <- function(batch) {
   elem <- batch[[1]]
   if (is_torch_tensor(elem))
-    return(torch_stack(batch, dim = 0))
+    return(torch_stack(batch, dim = 1))
   else if (is.list(elem)) {
     lapply(seq_along(elem), function(i) {
       utils_data_default_collate(lapply(batch, function(x) x[[i]]))

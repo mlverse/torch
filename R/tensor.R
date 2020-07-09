@@ -99,7 +99,7 @@ Tensor <- R7Class(
     stride = function(dim) {
       if (missing(dim)) {
         d <- self$dim()
-        sapply(seq_len(d) - 1, private$`_stride`)
+        sapply(seq_len(d), private$`_stride`)
       } else {
         private$`_stride`(dim)
       }

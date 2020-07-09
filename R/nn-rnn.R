@@ -1,7 +1,7 @@
 #' @include nn.R
 NULL
 
-nn_apply_permutation <- function(tensor, permutation, dim = 1) {
+nn_apply_permutation <- function(tensor, permutation, dim = 2) {
   tensor$index_select(dim, permutation)
 }
 

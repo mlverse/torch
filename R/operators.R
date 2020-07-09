@@ -148,7 +148,7 @@ trunc.torch_tensor <- function(x) {
 
 #' @export
 cumsum.torch_tensor <- function(x) {
-  torch_cumsum(x, dim = 0)
+  torch_cumsum(x, dim = 1)
 }
 
 #' @export
