@@ -9,8 +9,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD5
     DEBIAN_FRONTEND="noninteractive" apt-get install -y r-base
     
 RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main' && \
-    apt-get update && \
-    apt-get install -y --allow-unauthenticated cmake
+    apt update && \
+    apt install -y --allow-unauthenticated cmake
     
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get update && \
