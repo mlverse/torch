@@ -73,9 +73,11 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: https://demo.rstudiopm.com/all/__linux__/bionic/latest
+      DOCKER_FILE: docker/cuda-{{ matrix.cuda }}
+      DOCKER_TAG: torch{{ matrix.cuda }}
     steps:
       - uses: actions/checkout@v2
       - name: Build image
-        run: docker build -f docker/cuda-{{ matrix.cuda }} -t torch{{ matrix.cuda }} .
+        run: docker build -f $DOCKER_FILE -t $DOCKER_TAG .
       - name: Run checks
-        run: docker run --rm --gpus all torch{{ matrix.cuda }} sh torch/tools/check.sh
+        run: docker run --rm --gpus all $DOCKER_TAG sh torch/tools/check.sh
