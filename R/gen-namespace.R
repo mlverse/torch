@@ -383,7 +383,7 @@ fun_type = 'namespace'
 }
 
 
-torch__cat <- function(tensors, dim = 0) {
+torch__cat <- function(tensors, dim = 1) {
   args <- mget(x = c("tensors", "dim"))
 expected_types <- list(tensors = "TensorList", dim = "int64_t")
 nd_args <- "tensors"
@@ -399,7 +399,7 @@ fun_type = 'namespace'
 }
 
 
-torch__cat_out <- function(out, tensors, dim = 0) {
+torch__cat_out <- function(out, tensors, dim = 1) {
   args <- mget(x = c("out", "tensors", "dim"))
 expected_types <- list(out = "Tensor", tensors = "TensorList", dim = "int64_t")
 nd_args <- c("out", "tensors")
@@ -2263,7 +2263,7 @@ fun_type = 'namespace'
 }
 
 
-torch__weight_norm <- function(v, g, dim = 0) {
+torch__weight_norm <- function(v, g, dim = 1) {
   args <- mget(x = c("v", "g", "dim"))
 expected_types <- list(v = "Tensor", g = "Tensor", dim = "int64_t")
 nd_args <- c("v", "g")
@@ -2279,7 +2279,7 @@ fun_type = 'namespace'
 }
 
 
-torch__weight_norm_cuda_interface <- function(v, g, dim = 0) {
+torch__weight_norm_cuda_interface <- function(v, g, dim = 1) {
   args <- mget(x = c("v", "g", "dim"))
 expected_types <- list(v = "Tensor", g = "Tensor", dim = "int64_t")
 nd_args <- c("v", "g")
@@ -4161,7 +4161,7 @@ fun_type = 'namespace'
 }
 
 
-torch_cat <- function(tensors, dim = 0) {
+torch_cat <- function(tensors, dim = 1) {
   args <- mget(x = c("tensors", "dim"))
 expected_types <- list(tensors = "TensorList", dim = c("int64_t", "Dimname"))
 nd_args <- "tensors"
@@ -4177,7 +4177,7 @@ fun_type = 'namespace'
 }
 
 
-torch_cat_out <- function(out, tensors, dim = 0) {
+torch_cat_out <- function(out, tensors, dim = 1) {
   args <- mget(x = c("out", "tensors", "dim"))
 expected_types <- list(out = "Tensor", tensors = "TensorList", dim = c("int64_t", 
 "Dimname"))
@@ -4402,7 +4402,7 @@ fun_type = 'namespace'
 }
 
 
-torch_chunk <- function(self, chunks, dim = 0) {
+torch_chunk <- function(self, chunks, dim = 1) {
   args <- mget(x = c("self", "chunks", "dim"))
 expected_types <- list(self = "Tensor", chunks = "int64_t", dim = "int64_t")
 nd_args <- c("self", "chunks")
@@ -11394,7 +11394,7 @@ fun_type = 'namespace'
 }
 
 
-torch_norm_except_dim <- function(v, pow = 2, dim = 0) {
+torch_norm_except_dim <- function(v, pow = 2, dim = 1) {
   args <- mget(x = c("v", "pow", "dim"))
 expected_types <- list(v = "Tensor", pow = "int64_t", dim = "int64_t")
 nd_args <- "v"
@@ -13605,7 +13605,7 @@ fun_type = 'namespace'
 }
 
 
-torch_slice <- function(self, dim = 0, start = 0, end = 9223372036854775807, step = 1) {
+torch_slice <- function(self, dim = 1, start = 0, end = 9223372036854775807, step = 1) {
   args <- mget(x = c("self", "dim", "start", "end", "step"))
 expected_types <- list(self = "Tensor", dim = "int64_t", start = "int64_t", end = "int64_t", 
     step = "int64_t")
@@ -14359,7 +14359,7 @@ fun_type = 'namespace'
 }
 
 
-torch_split <- function(self, split_size, dim = 0) {
+torch_split <- function(self, split_size, dim = 1) {
   args <- mget(x = c("self", "split_size", "dim"))
 expected_types <- list(self = "Tensor", split_size = "int64_t", dim = "int64_t")
 nd_args <- c("self", "split_size")
@@ -14375,7 +14375,7 @@ fun_type = 'namespace'
 }
 
 
-torch_split_with_sizes <- function(self, split_sizes, dim = 0) {
+torch_split_with_sizes <- function(self, split_sizes, dim = 1) {
   args <- mget(x = c("self", "split_sizes", "dim"))
 expected_types <- list(self = "Tensor", split_sizes = "IntArrayRef", dim = "int64_t")
 nd_args <- c("self", "split_sizes")
@@ -14521,7 +14521,7 @@ fun_type = 'namespace'
 }
 
 
-torch_stack <- function(tensors, dim = 0) {
+torch_stack <- function(tensors, dim = 1) {
   args <- mget(x = c("tensors", "dim"))
 expected_types <- list(tensors = "TensorList", dim = "int64_t")
 nd_args <- "tensors"
@@ -14537,7 +14537,7 @@ fun_type = 'namespace'
 }
 
 
-torch_stack_out <- function(out, tensors, dim = 0) {
+torch_stack_out <- function(out, tensors, dim = 1) {
   args <- mget(x = c("out", "tensors", "dim"))
 expected_types <- list(out = "Tensor", tensors = "TensorList", dim = "int64_t")
 nd_args <- c("out", "tensors")
@@ -15593,7 +15593,7 @@ fun_type = 'namespace'
 }
 
 
-torch_unbind <- function(self, dim = 0) {
+torch_unbind <- function(self, dim = 1) {
   args <- mget(x = c("self", "dim"))
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"))
 nd_args <- "self"

@@ -190,6 +190,11 @@ r_argument_with_default <- function(name, decls) {
 
   name <- r_argument_name(name)
   default <- r_argument_default(default)
+
+  # make it 1-based
+  if (name == "dim" && default == "0")
+    default <- "1"
+
   glue::glue("{name} = {default}")
 }
 
