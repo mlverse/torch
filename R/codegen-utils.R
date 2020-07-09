@@ -5,6 +5,17 @@ is_scalar_atomic <- function(x) {
     FALSE
 }
 
+as_1_based_dim <- function(x) {
+  x <- as.integer(x)
+  if (x == 0) {
+    value_error("Dimension is 1-based.")
+  } else if (obj > 0) {
+    x - 1
+  } else {
+    x
+  }
+}
+
 argument_to_torch_type <- function(obj, expected_types) {
   
   if (is.name(obj))
@@ -42,6 +53,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   
   if (any("DimnameList" == expected_types) && is.character(obj))
     return(list(torch_dimname_list(obj)$ptr, "DimnameList"))
+  
+  if (any("IntArrayRef" == expected_types) && any("DimnameList" == expected_types) && is.numeric(obj))
+      return(list(as_1_based_dim(obj), "IntArrayRef"))
   
   if (any("IntArrayRef" == expected_types) && is.numeric(obj))
     return(list(as.integer(obj), "IntArrayRef"))
