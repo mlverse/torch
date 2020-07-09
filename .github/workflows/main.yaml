@@ -65,6 +65,8 @@ jobs:
           source("testthat.R")
         shell: Rscript {0}
   gpu:
+    matrix: 
+      cuda: ["101", "102"]
     runs-on: self-hosted
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -72,6 +74,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build image
-        run: docker build -f docker/Dockerfile -t testtorch .
+        run: docker build -f docker/cuda-{{ matrix.cuda }} -t torch{{ matrix.cuda }} .
       - name: Run checks
-        run: docker run --rm --gpus all testtorch sh torch/tools/check.sh
+        run: docker run --rm --gpus all torch{{ matrix.cuda }} sh torch/tools/check.sh
