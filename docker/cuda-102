@@ -8,6 +8,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD5
     apt-get update && \
     DEBIAN_FRONTEND="noninteractive" apt-get install -y r-base
     
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
+    
 RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main' && \
     apt update && \
     apt install -y --allow-unauthenticated cmake
