@@ -6,7 +6,7 @@ RUN apt-get update && \
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
     add-apt-repository 'deb [arch=amd64,i386] https://cloud.r-project.org/bin/linux/ubuntu bionic-cran40/' && \
     apt-get update && \
-    apt-get install -y r-base
+    DEBIAN_FRONTEND="noninteractive" apt-get install -y r-base
     
 RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main' && \
     apt-get update && \
