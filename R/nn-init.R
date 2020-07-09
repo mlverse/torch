@@ -245,7 +245,7 @@ nn_init_calculate_fan_in_and_fan_out <- function(tensor) {
   receptive_field_size <- 1
   
   if (dimensions > 2)
-    receptive_field_size <- tensor[0,0,..]$numel()
+    receptive_field_size <- tensor[1,1,..]$numel()
   
   fan_in <- num_input_fmaps * receptive_field_size
   fan_out <- num_output_fmaps * receptive_field_size

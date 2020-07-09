@@ -9,7 +9,7 @@ test_that("nn_embedding", {
   expect_equal_to_tensor(output[1,1,], embedding$weight[2,])
   
   # example with padding_idx
-  embedding <- nn_embedding(10, 3, padding_idx=0)
+  embedding <- nn_embedding(10, 3, padding_idx=1)
   input <- torch_tensor(matrix(c(0,2,0,5), nrow = 1), dtype = torch_long())
   output <- embedding(input)
 
