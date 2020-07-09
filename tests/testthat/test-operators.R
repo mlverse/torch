@@ -209,7 +209,7 @@ test_that("prod works", {
   x <- array(runif(200), dim = c(10, 5, 2))
   y <- c(1, 2, 3)
   expect_equal(as.numeric(prod(torch_tensor(x))), prod(x))
-  expect_equal(as.numeric(prod(torch_tensor(x), dim = 0)), as.numeric(torch_prod(x, dim = 0)), tolerance = 1e-5)
+  expect_equal(as.numeric(prod(torch_tensor(x), dim = 1)), as.numeric(torch_prod(x, dim = 1)), tolerance = 1e-5)
   expect_equal(as.numeric(prod(torch_tensor(x), torch_tensor(y))), prod(x, y), tolerance = 1e-5)
 })
 
@@ -217,7 +217,7 @@ test_that("sum works", {
   x <- array(runif(200), dim = c(10, 5, 2))
   y <- c(1, 2, 3)
   expect_equal(as.numeric(sum(torch_tensor(x))), sum(x), tolerance = 1e-5)
-  expect_equal(as.numeric(sum(torch_tensor(x), dim = 0)), as.numeric(torch_sum(x, dim = 0)), tolerance = 1e-5)
+  expect_equal(as.numeric(sum(torch_tensor(x), dim = 1)), as.numeric(torch_sum(x, dim = 1)), tolerance = 1e-5)
   expect_equal(as.numeric(sum(torch_tensor(x), torch_tensor(y))), sum(x, y), tolerance = 1e-5)
 })
 

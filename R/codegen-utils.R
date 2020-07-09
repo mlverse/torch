@@ -9,7 +9,7 @@ as_1_based_dim <- function(x) {
   x <- as.integer(x)
   if (x == 0) {
     value_error("Dimension is 1-based.")
-  } else if (obj > 0) {
+  } else if (x > 0) {
     x - 1
   } else {
     x

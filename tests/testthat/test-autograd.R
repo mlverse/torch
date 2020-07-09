@@ -304,7 +304,7 @@ test_that("Can have optional arguments in forward", {
         grads$weight <- grad_output$t()$mm(s$input)
       
       if (!is.null(s$bias) && ctx$needs_input_grad$bias)
-        grads$bias <- grad_output$sum(dim = 0)
+        grads$bias <- grad_output$sum(dim = 1)
       
       grads
     }
