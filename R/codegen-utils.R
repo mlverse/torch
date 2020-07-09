@@ -16,7 +16,7 @@ as_1_based_dim <- function(x) {
   }
 }
 
-argument_to_torch_type <- function(obj, expected_types) {
+argument_to_torch_type <- function(obj, expected_types, arg_name) {
   
   if (is.name(obj))
     return(NULL)
@@ -62,6 +62,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   
   if (any("IntArrayRef" == expected_types) && is.list(obj))
     return(list(as.integer(obj), "IntArrayRef"))
+  
+  if (any("int64_t" == expected_types) && is.numeric(obj) && length(obj) == 1 && arg_name == "dim")
+    return(list(as_1_based_dim(obj), "int64_t"))
   
   if (any("int64_t" == expected_types) && is.numeric(obj) && length(obj) == 1)
     return(list(as.integer(obj), "int64_t"))
@@ -122,7 +125,7 @@ all_arguments_to_torch_type <- function(all_arguments, expected_types) {
   arguments <- list()
   types <- character()
   for (nm in names(all_arguments)) {
-    values_and_types <- argument_to_torch_type(all_arguments[[nm]], expected_types[[nm]])
+    values_and_types <- argument_to_torch_type(all_arguments[[nm]], expected_types[[nm]], nm)
     if (!is.null(values_and_types)) {
       
       if (is.null(values_and_types[[1]]))
