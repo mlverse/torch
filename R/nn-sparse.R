@@ -50,7 +50,7 @@ NULL
 #' input <- torch_tensor(rbind(c(1,2,4,5),c(4,3,2,9)), dtype = torch_long())
 #' embedding(input)
 #' # example with padding_idx
-#' embedding <- nn_embedding(10, 3, padding_idx=0)
+#' embedding <- nn_embedding(10, 3, padding_idx=1)
 #' input <- torch_tensor(matrix(c(0,2,0,5), nrow = 1), dtype = torch_long())
 #' embedding(input)
 #' 
@@ -65,11 +65,11 @@ nn_embedding <- nn_module(
     
     if (!is.null(padding_idx)) {
       
-      if (padding_idx > 0 && padding > num_embeddings) {
+      if (padding_idx > 0 && padding_idx > num_embeddings) {
         value_error("padding idx must be within num_embeddings")
       } else if (padding_idx < 0) {
         
-        if (padding_idx >= (-num_embeddings))
+        if (padding_idx <= (-num_embeddings))
           value_error("padding idx must be within num_embeddings")
         
         padding_idx <- self$num_embeddings + padding_idx

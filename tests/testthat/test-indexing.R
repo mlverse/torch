@@ -56,6 +56,75 @@ test_that("[ works", {
 
 test_that("indexing error expectations", {
   x <- torch_randn(c(10,10,10,10))
-  expect_error(x[1,], "incorrect number of dimensions", class = "value_error")
   expect_error(x[1,1,1,1,1])
+  x <- torch_tensor(10)
+  expect_error(x[0])
+  expect_error(x[c(0, 1)])
+})
+
+test_that("indexing with boolean tensor", {
+  
+  x <- torch_tensor(c(-1, -2, 0, 1, 2))
+  expect_equal_to_r(x[x < 0], c(-1, -2))
+  
+  x <- torch_tensor(rbind(
+    c(-1, -2, 0, 1, 2),
+    c(2, 1, 0, -1, -2)
+  ))
+  
+  expect_equal_to_r(x[x < 0], c(-1, -2, -1, -2))
+  
+  expect_error(x[x < 0, 1])
+  
+})
+
+test_that("slice with negative indexes", {
+  
+  x <- torch_tensor(c(1,2,3))
+  expect_equal_to_r(x[2:-1], c(2,3))
+  expect_equal_to_r(x[-2:-1], c(2,3))
+  expect_equal_to_r(x[-3:-2], c(1,2))
+  
+  expect_equal_to_r(x[c(-1, -2)], c(3, 2))
+  
+})
+
+test_that("subset assignment", {
+  
+  x <- torch_randn(2,2)
+  x[1,1] <- torch_tensor(0)
+  x
+  expect_equal_to_r(x[1,1], 0)
+  
+  x[1,2] <- 0
+  expect_equal_to_r(x[1,2], 0)
+  
+  x[1,2] <- 1L
+  expect_equal_to_r(x[1,2], 1)
+  
+  x <- torch_tensor(c(TRUE, FALSE))
+  x[2] <- TRUE
+  expect_equal_to_r(x[2], TRUE)
+  
+  x <- torch_tensor(rbind(
+    c(-1, -2, 0, 1, 2),
+    c(2, 1, 0, -1, -2)
+  ))
+  
+  x[x <= 0] <- 1
+  expect_true(as_array(torch_all(x > 0)))
+  
+  x <- torch_tensor(c(1,2,3,4,5))
+  x[1:2] <- c(0, 0)
+  expect_equal_to_r(x[1:2], c(0, 0))
+  
+})
+
+test_that("indexing with R boolean vectors", {
+  
+  x <- torch_tensor(c(1,2))
+  expect_equal_to_r(x[TRUE], matrix(c(1,2), nrow = 1))
+  expect_equal_to_r(x[FALSE], matrix(data = 1, ncol = 2, nrow = 0))
+  expect_equal_to_r(x[c(TRUE, FALSE)], 1)
+  
 })

@@ -6885,40 +6885,20 @@ cpp_generator_set_current_seed <- function(generator, seed) {
     invisible(.Call('_torch_cpp_generator_set_current_seed', PACKAGE = 'torchpkg', generator, seed))
 }
 
-cpp_torch_tensor_index <- function(self, index) {
-    .Call('_torch_cpp_torch_tensor_index', PACKAGE = 'torchpkg', self, index)
+enquos0 <- function(env) {
+    .Call('_torch_enquos0', PACKAGE = 'torchpkg', env)
 }
 
-cpp_torch_tensor_index_new <- function() {
-    .Call('_torch_cpp_torch_tensor_index_new', PACKAGE = 'torchpkg')
+evaluate_slices <- function(quosures, mask) {
+    .Call('_torch_evaluate_slices', PACKAGE = 'torchpkg', quosures, mask)
 }
 
-cpp_torch_tensor_index_append_tensor <- function(self, x) {
-    invisible(.Call('_torch_cpp_torch_tensor_index_append_tensor', PACKAGE = 'torchpkg', self, x))
+Tensor_slice <- function(self, e, drop, mask) {
+    .Call('_torch_Tensor_slice', PACKAGE = 'torchpkg', self, e, drop, mask)
 }
 
-cpp_torch_tensor_index_append_bool <- function(self, x) {
-    invisible(.Call('_torch_cpp_torch_tensor_index_append_bool', PACKAGE = 'torchpkg', self, x))
-}
-
-cpp_torch_tensor_index_append_int64 <- function(self, x) {
-    invisible(.Call('_torch_cpp_torch_tensor_index_append_int64', PACKAGE = 'torchpkg', self, x))
-}
-
-cpp_torch_tensor_index_append_ellipsis <- function(self) {
-    invisible(.Call('_torch_cpp_torch_tensor_index_append_ellipsis', PACKAGE = 'torchpkg', self))
-}
-
-cpp_torch_tensor_index_append_none <- function(self) {
-    invisible(.Call('_torch_cpp_torch_tensor_index_append_none', PACKAGE = 'torchpkg', self))
-}
-
-cpp_torch_tensor_index_append_slice <- function(self, x) {
-    invisible(.Call('_torch_cpp_torch_tensor_index_append_slice', PACKAGE = 'torchpkg', self, x))
-}
-
-cpp_torch_slice <- function(start, end, step) {
-    .Call('_torch_cpp_torch_slice', PACKAGE = 'torchpkg', start, end, step)
+Tensor_slice_put <- function(self, e, rhs, mask) {
+    invisible(.Call('_torch_Tensor_slice_put', PACKAGE = 'torchpkg', self, e, rhs, mask))
 }
 
 cpp_lantern_configure <- function(log) {
