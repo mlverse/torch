@@ -47,7 +47,7 @@ unsigned int _lantern_Tensor_register_hook(void *self, void *hook)
     auto h = reinterpret_cast<LanternObject<std::function<torch::Tensor(torch::Tensor)>> *>(hook)->get();
     auto x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
     return x.register_hook(h);
-    LANTERN_FUNCTION_END_VOID
+    LANTERN_FUNCTION_END_RET(0)
 }
 
 // Creating the hook in the right format to be passed to .register_hook
@@ -99,7 +99,7 @@ void *_lantern_variable_list_get(void *self, int64_t i)
     auto s = reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(self)->get();
     torch::Tensor out = s[i];
     return (void *)new LanternObject<torch::Tensor>(out);
-    LANTERN_FUNCTION_END_VOID
+    LANTERN_FUNCTION_END
 }
 
 int64_t _lantern_variable_list_size(void *self)

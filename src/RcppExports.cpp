@@ -23052,11 +23052,11 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_lantern_configure
-void cpp_lantern_configure(bool log);
+void cpp_lantern_configure(int log);
 RcppExport SEXP _torch_cpp_lantern_configure(SEXP logSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    Rcpp::traits::input_parameter< int >::type log(logSEXP);
     cpp_lantern_configure(log);
     return R_NilValue;
 END_RCPP
