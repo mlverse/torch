@@ -30,6 +30,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       INSTALL_TORCH: ${{ matrix.install }}
       CRAN: ${{ matrix.cran }}
+      TORCH_LOG: 2
 
     steps:
       - uses: actions/checkout@v1
@@ -64,6 +65,9 @@ jobs:
           setwd("tests")
           source("testthat.R")
         shell: Rscript {0}
+      - name: Logs
+        if: ${{ failure() }}
+        run: cat lantern.log
   gpu:
     runs-on: self-hosted
     env:

@@ -14,7 +14,7 @@ lantern_start <- function(version = lantern_default(), reload = FALSE) {
   
   cpp_lantern_init(normalizePath(install_path()))
   
-  log_enabled <- Sys.getenv("TORCH_LOG", "0") == "1"
+  log_enabled <- as.integer(Sys.getenv("TORCH_LOG", "0"))
   cpp_lantern_configure(log_enabled)
   
   .globals$lantern_started <- TRUE

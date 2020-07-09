@@ -268,7 +268,7 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
     }
     
     return result.get();
-    LANTERN_CALLBACK_END("Unknown error in lambda function.", lantern_variable_list_new())
+    LANTERN_CALLBACK_END("Unknown error in lambda function.", _lantern_variable_list_new())
   });
   
   XPtrTorch out = lantern_Function_lambda(&rcpp_call_forward, fun);
