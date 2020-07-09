@@ -8,8 +8,8 @@
 
 #include "utils.hpp"
 
-bool lanternLogEnabled = false;
-void lanternConfigure(bool log)
+int lanternLogEnabled = 0;
+void lanternConfigure(int log)
 {
   lanternLogEnabled = log;
 }

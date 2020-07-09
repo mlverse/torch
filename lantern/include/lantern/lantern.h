@@ -38,8 +38,19 @@
 #include <stdint.h>
 #include <stdio.h>
 
-extern bool lanternLogEnabled;
-#define LLOG(...) if (lanternLogEnabled) { printf("%ld INFO ", time(NULL)) ; printf(__VA_ARGS__); printf("\n"); }
+extern int lanternLogEnabled;
+#define LLOG(...) if ((lanternLogEnabled & 1) == 1) {              \
+  printf("%ld INFO ", time(NULL));                                 \
+  printf(__VA_ARGS__);                                             \
+  printf("\n");                                                    \
+}                                                                  \
+if ((lanternLogEnabled & 2) == 2) {                                \
+  FILE *pFile = fopen("lantern.log", "a");                         \
+  fprintf(pFile, "%ld INFO ", time(NULL));                         \
+  fprintf(pFile, __VA_ARGS__);                                     \
+  fprintf(pFile, "\n");                                            \
+  fclose(pFile);                                                   \
+}
 
 #ifdef LANTERN_BUILD
 extern std::string *pLanternLastError;
@@ -79,7 +90,7 @@ extern "C"
 {
 #endif
 
-  LANTERN_API void(LANTERN_PTR lanternConfigure)(bool log);
+  LANTERN_API void(LANTERN_PTR lanternConfigure)(int log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
   LANTERN_API void(LANTERN_PTR lanternSetLastError)(const char*);
   LANTERN_API void(LANTERN_PTR lanternLastErrorClear)();

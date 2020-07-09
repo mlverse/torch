@@ -47,7 +47,7 @@ void lantern_host_handler()
 }
 
 // [[Rcpp::export]]
-void cpp_lantern_configure(bool log) {
+void cpp_lantern_configure(int log) {
   lanternConfigure(log);
 }
 
