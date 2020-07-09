@@ -1,13 +1,48 @@
 #include "torch_types.h"
+#include <regex>
 
 using namespace Rcpp;
+
+std::string translate_dim_error_msg (std::string msg)
+{
+  auto regex = std::regex("(?:.|\\r?\\n)*Dimension out of range \\(expected to be in range of \\[-[0-9]+, ([0-9]+)\\], but got ([0-9]+)\\)(?:.|\\r?\\n)*");
+  std::smatch m;
+  
+  if (std::regex_match(msg, m, regex))
+  {
+    auto l = msg.length();
+    msg.replace(m.position(1), m.length(1), std::to_string(std::stoi(m[1].str()) + 1));
+    
+    // treat the case when we get 9 and we inscreased the lenght of 
+    // the string by 1.
+    int d = 0;
+    if (l < msg.length())
+    {
+      d = msg.length() - l;
+    }
+    
+    auto i = msg.substr(m.position(2) + d, m.length(2));
+    msg.replace(m.position(2) + d, m.length(2), std::to_string(std::stoi(i) + 1));
+  }
+  
+  return msg;
+}
+
+// translate error messages
+std::string translate_error_message (std::string msg)
+{
+  return translate_dim_error_msg(msg);
+}
 
 void lantern_host_handler()
 {
   if (lanternLastError() != NULL) {
     std::string last = lanternLastError();
     lanternLastErrorClear();
-    throw Rcpp::exception(last.c_str());
+    
+    std::string error_msg = translate_error_message(std::string(last.c_str()));
+    
+    throw Rcpp::exception(error_msg.c_str());
   } 
 }
 
