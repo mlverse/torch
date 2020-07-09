@@ -65,8 +65,10 @@ jobs:
           source("testthat.R")
         shell: Rscript {0}
   gpu:
-    matrix: 
-      cuda: ["101", "102"]
+    strategy:
+      fail-fast: false
+      matrix: 
+        cuda: ["101", "102"]
     runs-on: self-hosted
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
