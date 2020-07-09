@@ -283,7 +283,7 @@ test_that("Can have optional arguments in forward", {
       ctx$save_for_backward(input = input, weight = weight, bias = bias)
       output <- input$mm(weight$t())
       if (!is.null(bias))
-        output <- output + bias$unsqueeze(0)$expand_as(output)
+        output <- output + bias$unsqueeze(1)$expand_as(output)
       
       output
     },

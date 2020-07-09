@@ -120,8 +120,8 @@ test_that("eye", {
 
 test_that("empty_strided", {
   x <- torch_empty_strided(c(2,2), stride = c(1,2))
-  expect_equal(x$stride(0), 1)
-  expect_equal(x$stride(1), 2)
+  expect_equal(x$stride(1), 1)
+  expect_equal(x$stride(2), 2)
 })
 
 test_that("full", {
