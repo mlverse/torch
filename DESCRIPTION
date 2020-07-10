@@ -115,5 +115,6 @@ Collate:
     'utils-data-sampler.R'
     'utils.R'
     'variable_list.R'
+    'vision_utils.R'
     'wrapers.R'
 StagedInstall: no
