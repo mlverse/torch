@@ -1988,7 +1988,7 @@ NULL
 #'
 #' @examples
 #'
-#' i = torch_tensor(matrix(c(0, 1, 1, 2, 0, 2), ncol = 3, byrow = TRUE), dtype=torch_int64())
+#' i = torch_tensor(matrix(c(1, 2, 2, 3, 1, 3), ncol = 3, byrow = TRUE), dtype=torch_int64())
 #' v = torch_tensor(c(3, 4, 5), dtype=torch_float32())
 #' torch_sparse_coo_tensor(i, v)
 #' torch_sparse_coo_tensor(i, v, c(2, 4))

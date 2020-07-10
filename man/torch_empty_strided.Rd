@@ -44,5 +44,5 @@ the tensors, please clone them first.
 a = torch_empty_strided(list(2, 3), list(1, 2))
 a
 a$stride(1)
-a$size(0)
+a$size(1)
 }
