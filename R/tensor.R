@@ -58,7 +58,7 @@ Tensor <- R7Class(
       if (missing(dim))
         return(x)
       
-      x[dim + 1]
+      x[dim]
     },
     numel = function() {
       cpp_tensor_numel(self$ptr)
