@@ -5,7 +5,7 @@ using namespace Rcpp;
 
 std::string translate_dim_error_msg (std::string msg)
 {
-  auto regex = std::regex("(?:.|\\r?\\n)*Dimension out of range \\(expected to be in range of \\[-[0-9]+, ([0-9]+)\\], but got ([0-9]+)\\)(?:.|\\r?\\n)*");
+  auto regex = std::regex("(?:.|\\r?\\n)*Dimension out of range \\(expected to be in range of \\[-[0-9]+, ([0-9]+)\\], but got (-?[0-9]+)\\)(?:.|\\r?\\n)*");
   std::smatch m;
   
   if (std::regex_match(msg, m, regex))
@@ -21,8 +21,14 @@ std::string translate_dim_error_msg (std::string msg)
       d = msg.length() - l;
     }
     
-    auto i = msg.substr(m.position(2) + d, m.length(2));
-    msg.replace(m.position(2) + d, m.length(2), std::to_string(std::stoi(i) + 1));
+    auto i = std::stoi(msg.substr(m.position(2) + d, m.length(2)));
+    
+    if (i > 0)
+    {
+      i  = i + 1;
+    }
+    
+    msg.replace(m.position(2) + d, m.length(2), std::to_string(i));
   }
   
   return msg;
