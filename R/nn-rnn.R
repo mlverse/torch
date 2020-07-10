@@ -131,9 +131,9 @@ nn_rnn_base <- nn_module(
     } else {
       batch_sizes <- NULL
       if (self$batch_first)
-        max_batch_size <- input$size(0)
-      else
         max_batch_size <- input$size(1)
+      else
+        max_batch_size <- input$size(2)
       
       sorted_indices <- NULL
       unsorted_indices <- NULL  

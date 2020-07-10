@@ -53,7 +53,7 @@ nnf_kl_div <- function(input, target, reduction = "mean") {
   reduced <- torch_kl_div(input, target, red_enum)
   
   if (reduction == "batchmean")
-    reduced <- reduced/ input$size(0)
+    reduced <- reduced/ input$size(1)
   
   reduced
 }
@@ -121,7 +121,7 @@ nnf_hinge_embedding_loss <- function(input, target, margin = 1, reduction = "mea
 #' 
 #' Creates a criterion that optimizes a multi-class classification hinge loss 
 #' (margin-based loss) between input x (a 2D mini-batch Tensor) and output y 
-#' (which is a 1D tensor of target class indices, `0 ≤ y ≤x$size(1)−1` ).
+#' (which is a 1D tensor of target class indices, `0 ≤ y ≤x$size(2)−1` ).
 #' 
 #' @inheritParams nnf_l1_loss
 #' @param p Has a default value of 1. 1 and 2 are the only supported values.
@@ -221,7 +221,7 @@ nnf_multilabel_soft_margin_loss <- function(input, target, weight, reduction = "
   if (!is.null(weight))
     loss <- loss * weight
   
-  loss <- loss$sum(dim = 1)  / input$size(1)
+  loss <- loss$sum(dim = 1)  / input$size(2)
   
   if (reduction == "none")
     ret <- loss
@@ -355,8 +355,8 @@ nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
     ret <- torch_nll_loss2d(input, target, weight, reduction_enum(reduction),
                             ignore_index)
   else {
-    n <- input$size(0)
-    c <- input$size(1)
+    n <- input$size(1)
+    c <- input$size(2)
     out_size <- c(n, input$size()[-c(1:2)])
     
     input <- input$contiguous()

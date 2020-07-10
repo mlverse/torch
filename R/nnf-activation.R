@@ -647,7 +647,7 @@ nnf_multi_head_attention_forward <- function(
   if (!is.null(static_v))
     v <- static_v
   
-  src_len <- k$size(1)   
+  src_len <- k$size(2)   
   
   if (add_zero_attn) {
     src_len <- src_len + 1

@@ -26,12 +26,12 @@ vision_make_grid <-
     }
     if(scale) tensor <- min_max_scale(tensor)
     
-    nmaps <- tensor$size(0)
+    nmaps <- tensor$size(1)
     xmaps <- min(num_rows, nmaps)
     ymaps <- ceiling(nmaps / xmaps)
-    height <- floor(tensor$size(2) + padding)
-    width <- floor(tensor$size(3) + padding)
-    num_channels <- tensor$size(1)
+    height <- floor(tensor$size(3) + padding)
+    width <- floor(tensor$size(4) + padding)
+    num_channels <- tensor$size(2)
     grid <-
       tensor$new_full(c(num_channels, height * ymaps + padding, width * xmaps + padding),
                       pad_value)

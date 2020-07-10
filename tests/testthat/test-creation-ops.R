@@ -61,7 +61,7 @@ test_that("randn_like", {
 
 test_that("randperm", {
   x <- torch_randperm(10)
-  expect_equal(x$size(0), 10)
+  expect_equal(x$size(1), 10)
 })
 
 test_that("zeros", {
@@ -94,20 +94,20 @@ test_that("empty_like", {
 
 test_that("arange", {
   x <- torch_arange(1,10)
-  expect_equal(x$size(0), 9)
+  expect_equal(x$size(1), 9)
   
   expect_warning(x <- torch_range(1, 10))
-  expect_equal(x$size(0), 9)
+  expect_equal(x$size(1), 9)
 })
 
 test_that("linspace", {
   x <- torch_linspace(1,10, 100)
-  expect_equal(x$size(0), 100)
+  expect_equal(x$size(1), 100)
 })
 
 test_that("logspace", {
   x <- torch_logspace(1,10, 100)
-  expect_equal(x$size(0), 100)
+  expect_equal(x$size(1), 100)
 })
 
 test_that("eye", {
