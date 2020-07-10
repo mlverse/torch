@@ -89,8 +89,7 @@ penguins_dataset <- dataset(
   
   .getitem = function(index) {
     
-    # tbd replace following https://github.com/mlverse/torch/issues/135
-    x <- self$data[index, 2:N]
+    x <- self$data[index, 2:-1]
     y <- self$data[index, 1]$to(torch_long())
     
     list(x, y)
