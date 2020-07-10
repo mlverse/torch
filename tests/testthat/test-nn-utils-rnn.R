@@ -17,8 +17,8 @@ test_that("pack_padded_sequence", {
   
   expect_equal_to_r(to_int(p$data), c(1, 1, 1, 2, 2, 2, 3, 3, 4))
   expect_equal_to_r(to_int(p$batch_sizes), c(3, 3, 2, 1))
-  expect_equal_to_r(to_int(p$sorted_indices), c(2, 1, 0))
-  expect_equal_to_r(to_int(p$unsorted_indices), c(2, 1, 0))
+  expect_equal_to_r(to_int(p$sorted_indices), c(3, 2, 1))
+  expect_equal_to_r(to_int(p$unsorted_indices), c(3, 2, 1))
   
   expect_error(nn_utils_rnn_pack_padded_sequence(x, lens, batch_first = TRUE, 
                                                  enforce_sorted = TRUE))

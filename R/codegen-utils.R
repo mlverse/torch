@@ -19,6 +19,9 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   if (is.name(obj))
     return(NULL)
   
+  if (arg_name == "index" && any("Tensor" == expected_types) && is_torch_tensor(obj))
+    return(list(get("ptr", obj$sub(1L, alpha = 1L), inherits = FALSE), "Tensor"))
+  
   if (any("Tensor" == expected_types) && is_torch_tensor(obj))
     return(list(get("ptr", obj, inherits = FALSE), "Tensor"))
   
@@ -45,6 +48,9 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   
   if (any("Scalar" == expected_types) && is_scalar_atomic(obj))
     return(list(torch_scalar(obj)$ptr, "Scalar"))
+  
+  if (arg_name == "index" && any("Tensor" == expected_types) && is.atomic(obj) && !is.null(obj))
+    return(list(torch_tensor(obj - 1, dtype = torch_long())$ptr, "Tensor"))
   
   if (any("Tensor" == expected_types) && is.atomic(obj) && !is.null(obj))
     return(list(torch_tensor(obj)$ptr, "Tensor"))
