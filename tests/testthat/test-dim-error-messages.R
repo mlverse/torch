@@ -57,3 +57,33 @@ test_that("more than 1 dim", {
   )
   
 })
+
+test_that("dim1 & dim2", {
+  
+  x <- torch_randn(2,2)
+  
+  expect_error(
+    torch_transpose(x, 3, 1),
+    regex = "Dimension out of range (expected to be in range of [-2, 2], but got 3)",
+    fixed = TRUE
+  )
+  
+  expect_error(
+    torch_transpose(x, 2, 3),
+    regex = "Dimension out of range (expected to be in range of [-2, 2], but got 3)",
+    fixed = TRUE
+  )
+  
+  expect_error(
+    torch_diag_embed(x, dim1 = 4, dim2 = 1),
+    "Dimension out of range (expected to be in range of [-3, 3], but got 4)",
+    fixed = TRUE
+  )
+  
+  expect_error(
+    torch_diag_embed(x, dim1 = 3, dim2 = 4),
+    "Dimension out of range (expected to be in range of [-3, 3], but got 4)",
+    fixed= TRUE
+  )
+  
+})
