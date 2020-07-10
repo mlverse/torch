@@ -1,6 +1,6 @@
 # Script to fix lantern headers
 
-lantern_h <- "~/RStudio/torch/lantern/include/lantern/lantern.h"
+lantern_h <- here::here("lantern/include/lantern/lantern.h")
 lantern <- readLines(lantern_h)
 
 fixed <- NULL
