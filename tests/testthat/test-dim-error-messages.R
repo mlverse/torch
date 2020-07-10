@@ -5,7 +5,17 @@ test_that("out of bound error message", {
   funs <- list(
     torch_sum,
     torch_mean,
-    torch_median
+    torch_median,
+    torch_max,
+    torch_min,
+    torch_cummax,
+    torch_cummin,
+    torch_mode,
+    torch_size,
+    torch_softmax,
+    torch_std,
+    torch_squeeze,
+    torch_var
   )
   
   for (f in funs) {
@@ -25,5 +35,17 @@ test_that("out of bound error message", {
       fixed = TRUE
     )  
   }
+  
+})
+
+test_that("more than 1 dim", {
+  
+  x <- torch_randn(2,2,2)
+ 
+  expect_error(
+    torch_sum(x, dim = c(1,4)),
+    regex = "Dimension out of range (expected to be in range of [-3, 3], but got 4)",
+    fixed = TRUE
+  )
   
 })

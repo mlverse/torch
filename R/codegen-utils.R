@@ -7,13 +7,11 @@ is_scalar_atomic <- function(x) {
 
 as_1_based_dim <- function(x) {
   x <- as.integer(x)
-  if (x == 0) {
-    value_error("Dimension is 1-based.")
-  } else if (x > 0) {
-    x - 1
-  } else {
-    x
-  }
+  
+  if (any(x == 0))
+    value_error("Dimension is 1-based and found 0.")
+  
+  ifelse(x > 0, x - 1, x)
 }
 
 argument_to_torch_type <- function(obj, expected_types, arg_name) {
