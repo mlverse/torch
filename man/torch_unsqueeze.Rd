@@ -28,6 +28,6 @@ applied at \code{dim} = \code{dim + input.dim() + 1}.
 \examples{
 
 x = torch_tensor(c(1, 2, 3, 4))
-torch_unsqueeze(x, 0)
 torch_unsqueeze(x, 1)
+torch_unsqueeze(x, 2)
 }

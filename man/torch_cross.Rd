@@ -35,6 +35,6 @@ a = torch_randn(c(4, 3))
 a
 b = torch_randn(c(4, 3))
 b
-torch_cross(a, b, dim=1)
+torch_cross(a, b, dim=2)
 torch_cross(a, b)
 }

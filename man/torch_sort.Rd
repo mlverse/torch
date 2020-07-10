@@ -37,6 +37,6 @@ sorted values and \code{indices} are the indices of the elements in the original
 x = torch_randn(c(3, 4))
 out = torch_sort(x)
 out
-out = torch_sort(x, 0)
+out = torch_sort(x, 1)
 out
 }

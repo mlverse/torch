@@ -34,5 +34,5 @@ a vector of size N, with elements.
 
 a = torch_randn(c(10))
 a
-torch_cumsum(a, dim=0)
+torch_cumsum(a, dim=1)
 }

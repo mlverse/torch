@@ -35,7 +35,7 @@ dimensions
 }
 
 \examples{
-m <- nn_softmin(dim = 0)
+m <- nn_softmin(dim = 1)
 input <- torch_randn(2, 2)
 output <- m(input)
 
