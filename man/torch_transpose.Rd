@@ -29,5 +29,5 @@ of the other.
 
 x = torch_randn(c(2, 3))
 x
-torch_transpose(x, 0, 1)
+torch_transpose(x, 1, 2)
 }
