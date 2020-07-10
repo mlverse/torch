@@ -42,12 +42,12 @@ vision_make_grid <-
         if (k >= nmaps)
           break
         grid$narrow(
-          dim = 1,
-          start = torch_tensor(y * height + padding, dtype = torch_int64())$sum(dim = 0),
+          dim = 2,
+          start = torch_tensor(y * height + padding, dtype = torch_int64())$sum(dim = 1),
           length = height - padding
         )$narrow(
-          dim = 2,
-          start = torch_tensor(x * width + padding, dtype = torch_int64())$sum(dim = 0),
+          dim = 3,
+          start = torch_tensor(x * width + padding, dtype = torch_int64())$sum(dim = 1),
           length = width - padding
         )$copy_(tensor[k + 1, , ,])
         k <- k + 1
