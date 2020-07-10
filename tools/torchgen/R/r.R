@@ -174,6 +174,24 @@ r_argument <- function(name, decls) {
     r_argument_with_default(name, decls)
 }
 
+
+can_be_numeric <- function(x) {
+  suppressWarnings(x <- as.numeric(x))
+  !is.na(x)
+}
+
+to_1_based <- function(x) {
+
+  x <- as.numeric(x)
+
+  if (x >= 0)
+    out <- x + 1
+  else
+    out <- x
+
+  as.character(out)
+}
+
 r_argument_with_default <- function(name, decls) {
 
   default <- purrr::map(decls, ~.x$arguments) %>%
@@ -192,8 +210,8 @@ r_argument_with_default <- function(name, decls) {
   default <- r_argument_default(default)
 
   # make it 1-based
-  if (name == "dim" && default == "0")
-    default <- "1"
+  if (name %in% c("dim", "dim0", "dim1", "dim2") && can_be_numeric(default))
+    default <- to_1_based(default)
 
   glue::glue("{name} = {default}")
 }

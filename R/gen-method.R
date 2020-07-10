@@ -1371,7 +1371,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "diagonal", function(outdim, dim1 = 0, dim2 = 1, offset = 0) {  args <- mget(x = c("outdim", "dim1", "dim2", "offset"))
+Tensor$set("public", "diagonal", function(outdim, dim1 = 1, dim2 = 2, offset = 0) {  args <- mget(x = c("outdim", "dim1", "dim2", "offset"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", outdim = "Dimname", dim1 = c("int64_t", 
 "Dimname"), dim2 = c("int64_t", "Dimname"), offset = "int64_t")

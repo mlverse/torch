@@ -5040,7 +5040,7 @@ fun_type = 'namespace'
 }
 
 
-torch_cosine_similarity <- function(x1, x2, dim = 1, eps = 0.000000) {
+torch_cosine_similarity <- function(x1, x2, dim = 2, eps = 0.000000) {
   args <- mget(x = c("x1", "x2", "dim", "eps"))
 expected_types <- list(x1 = "Tensor", x2 = "Tensor", dim = "int64_t", eps = "double")
 nd_args <- c("x1", "x2")
@@ -5641,7 +5641,7 @@ fun_type = 'namespace'
 }
 
 
-torch_diagonal <- function(self, outdim, dim1 = 0, dim2 = 1, offset = 0) {
+torch_diagonal <- function(self, outdim, dim1 = 1, dim2 = 2, offset = 0) {
   args <- mget(x = c("self", "outdim", "dim1", "dim2", "offset"))
 expected_types <- list(self = "Tensor", outdim = "Dimname", dim1 = c("int64_t", 
 "Dimname"), dim2 = c("int64_t", "Dimname"), offset = "int64_t")
