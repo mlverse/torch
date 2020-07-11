@@ -9528,7 +9528,7 @@ fun_type = 'namespace'
 }
 
 
-torch_max_pool1d_with_indices <- function(self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
+.torch_max_pool1d_with_indices <- function(self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
   args <- mget(x = c("self", "kernel_size", "stride", "padding", "dilation", "ceil_mode"))
 expected_types <- list(self = "Tensor", kernel_size = "IntArrayRef", stride = "IntArrayRef", 
     padding = "IntArrayRef", dilation = "IntArrayRef", ceil_mode = "bool")
@@ -9562,7 +9562,7 @@ fun_type = 'namespace'
 }
 
 
-torch_max_pool2d_with_indices <- function(self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
+.torch_max_pool2d_with_indices <- function(self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
   args <- mget(x = c("self", "kernel_size", "stride", "padding", "dilation", "ceil_mode"))
 expected_types <- list(self = "Tensor", kernel_size = "IntArrayRef", stride = "IntArrayRef", 
     padding = "IntArrayRef", dilation = "IntArrayRef", ceil_mode = "bool")
@@ -9617,7 +9617,7 @@ fun_type = 'namespace'
 }
 
 
-torch_max_pool2d_with_indices_out <- function(out, indices, self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
+.torch_max_pool2d_with_indices_out <- function(out, indices, self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
   args <- mget(x = c("out", "indices", "self", "kernel_size", "stride", "padding", "dilation", "ceil_mode"))
 expected_types <- list(out = "Tensor", indices = "Tensor", self = "Tensor", kernel_size = "IntArrayRef", 
     stride = "IntArrayRef", padding = "IntArrayRef", dilation = "IntArrayRef", 
@@ -9652,7 +9652,7 @@ fun_type = 'namespace'
 }
 
 
-torch_max_pool3d_with_indices <- function(self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
+.torch_max_pool3d_with_indices <- function(self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
   args <- mget(x = c("self", "kernel_size", "stride", "padding", "dilation", "ceil_mode"))
 expected_types <- list(self = "Tensor", kernel_size = "IntArrayRef", stride = "IntArrayRef", 
     padding = "IntArrayRef", dilation = "IntArrayRef", ceil_mode = "bool")
@@ -9707,7 +9707,7 @@ fun_type = 'namespace'
 }
 
 
-torch_max_pool3d_with_indices_out <- function(out, indices, self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
+.torch_max_pool3d_with_indices_out <- function(out, indices, self, kernel_size, stride = list(), padding = 0, dilation = 1, ceil_mode = FALSE) {
   args <- mget(x = c("out", "indices", "self", "kernel_size", "stride", "padding", "dilation", "ceil_mode"))
 expected_types <- list(out = "Tensor", indices = "Tensor", self = "Tensor", kernel_size = "IntArrayRef", 
     stride = "IntArrayRef", padding = "IntArrayRef", dilation = "IntArrayRef", 
