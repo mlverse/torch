@@ -34,10 +34,27 @@ std::string translate_dim_error_msg (std::string msg)
   return msg;
 }
 
+std::string translate_dim_size_error_msg (std::string msg)
+{
+  
+  auto regex = std::regex("(?:.|\\r?\\n)*dimension ([0-9]+) does not have size [0-9]+(?:.|\\r?\\n)*");
+  std::smatch m;
+  
+  if (std::regex_match(msg, m, regex))
+  {
+    msg.replace(m.position(1), m.length(1), std::to_string(std::stoi(m[1].str()) + 1));
+  }
+  
+  return msg;
+}
+
 // translate error messages
 std::string translate_error_message (std::string msg)
 {
-  return translate_dim_error_msg(msg);
+  std::string out;
+  out = translate_dim_size_error_msg(msg);
+  out = translate_dim_error_msg(out);
+  return out;
 }
 
 void lantern_host_handler()

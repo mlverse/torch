@@ -87,3 +87,16 @@ test_that("dim1 & dim2", {
   )
   
 })
+
+test_that("dimension x does not have size y", {
+  
+  a <- torch_randn(c(4, 3))
+  b <- torch_randn(c(4, 3))
+  
+  expect_error(
+    torch_cross(a, b, dim=1),
+    regex = "dimension 1 does not have size 3",
+    fixed = TRUE
+  )
+  
+})
