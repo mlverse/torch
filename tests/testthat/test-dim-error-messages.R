@@ -100,3 +100,18 @@ test_that("dimension x does not have size y", {
   )
   
 })
+
+test_that("indices", {
+  
+  x <- torch_randn(4, 4, 2)
+  e <- torch_max_pool2d_with_indices(x, kernel_size = c(2,2))
+  
+  i <- as_array(torch_max(e[[2]])$to(torch_int()))
+  
+  expect_error(
+    torch_max_unpool2d(e[[1]], indices = e[[2]]$add(10L, 1L), output_size = c(4,4)),
+    paste0("Found an invalid max index: ", i + 10),
+    fixed = TRUE
+  )
+  
+})
