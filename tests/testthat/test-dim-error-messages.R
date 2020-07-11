@@ -107,10 +107,12 @@ test_that("indices error message", {
   e <- torch_max_pool2d_with_indices(x, kernel_size = c(2,2))
   
   i <- as_array(torch_max(e[[2]])$to(torch_int()))
+  indices <- torch_ones_like(e[[2]])
+  indices[1,..] <- 35L
   
   expect_error(
-    torch_max_unpool2d(e[[1]], indices = e[[2]]$add(10L, 1L), output_size = c(4,4)),
-    paste0("Found an invalid max index: ", i + 10),
+    torch_max_unpool2d(e[[1]], indices = indices, output_size = c(4,4)),
+    paste0("Found an invalid max index: ", 35),
     fixed = TRUE
   )
   
