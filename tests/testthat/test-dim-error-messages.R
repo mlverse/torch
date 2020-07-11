@@ -101,7 +101,7 @@ test_that("dimension x does not have size y", {
   
 })
 
-test_that("indices", {
+test_that("indices error message", {
   
   x <- torch_randn(4, 4, 2)
   e <- torch_max_pool2d_with_indices(x, kernel_size = c(2,2))
