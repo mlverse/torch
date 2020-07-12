@@ -51,7 +51,7 @@ test_that("save more complicated module", {
       x <- nnf_relu(x)
       x <- nnf_max_pool2d(x, 2)
       x <- self$dropout1(x)
-      x <- torch_flatten(x, start_dim = 1)
+      x <- torch_flatten(x, start_dim = 2)
       x <- self$fc1(x)
       x <- nnf_relu(x)
       x <- self$dropout2(x)
