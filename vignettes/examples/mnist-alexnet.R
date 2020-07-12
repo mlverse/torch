@@ -15,7 +15,7 @@ ds <- tiny_imagenet_dataset(
     x$squeeze(1)
   }
 )
-dl <- dataloader(ds, batch_size = 32, shuffle = TRUE)
+dl <- dataloader(ds, batch_size = 128, shuffle = TRUE)
 
 net <- nn_module(
   "Net",
@@ -53,7 +53,14 @@ net <- nn_module(
   }
 )
 
+if (cuda_is_available()) {
+  device <- torch_device("cuda")
+} else {
+  device <- torch_device("cpu")
+}
+  
 model <- net(num_classes = 200)
+model$to(device = device)
 optimizer <- optim_sgd(model$parameters, lr = 0.01)
 
 epochs <- 10
@@ -68,8 +75,8 @@ for (epoch in 1:10) {
   
   for (b in enumerate(dl)) {
     optimizer$zero_grad()
-    output <- model(b[[1]])
-    loss <- nnf_nll_loss(output, b[[2]])
+    output <- model(b[[1]]$to(device = device))
+    loss <- nnf_nll_loss(output, b[[2]]$to(device = device))
     loss$backward()
     optimizer$step()
     l <- c(l, loss$item())
