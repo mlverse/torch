@@ -1,8 +1,8 @@
 
-IMG_EXTENSIONS <-  c('.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm', '.tif', '.tiff', '.webp')
+IMG_EXTENSIONS <-  c('jpg', 'jpeg', 'png', 'ppm', 'bmp', 'pgm', 'tif', 'tiff', 'webp')
 
 has_file_allowed_extension <- function(filename, extensions) {
-  fs::path_ext(x) %in% extensions 
+  tolower(fs::path_ext(filename)) %in% tolower(extensions )
 }
 
 is_image_file <- function(filename) {
@@ -57,14 +57,14 @@ folder_dataset <- dataset(
     self$transform <- transform
     self$target_transform <- target_transform
     
-    classes_to_idx <- self$.find_classes(root)
+    class_to_idx <- self$.find_classes(root)
     samples <- folder_make_dataset(self$root, class_to_idx, extensions, is_valid_file)
     
     if (length(samples[[1]]) == 0) {
       
       msg <- glue::glue("Found 0 files in subfolders of {self$root}")
       if (!is.null(extensions)) {
-        msg <- paste0(msg, glue::glue("Supported extensions are {paste(extensions, collapse=',')}"))
+        msg <- paste0(msg, glue::glue("\nSupported extensions are {paste(extensions, collapse=',')}"))
       }
       
       runtime_error(msg)
@@ -73,7 +73,7 @@ folder_dataset <- dataset(
     self$loader <- loader
     self$extensions <- extensions
     
-    self$classes <- classes
+    self$classes <- names(class_to_idx)
     self$class_to_idx <- class_to_idx
     self$samples <- samples
     self$targets <- samples[[2]]
@@ -81,6 +81,7 @@ folder_dataset <- dataset(
   },
   .find_classes = function(dir) {
     dirs <- fs::dir_ls(dir, recurse = FALSE, type = "directory")
+    dirs <- sapply(fs::path_split(dirs), function(x) tail(x, 1))
     class_too_idx <- seq_along(dirs)
     names(class_too_idx) <- sort(dirs)
     class_too_idx
@@ -102,5 +103,31 @@ folder_dataset <- dataset(
   },
   .length = function() {
     length(self$samples[[1]])
+  }
+)
+
+magick_loader <- function(path) {
+  
+  if (!require(magick))
+    runtime_error("The `magick` package must be installed to load images.")
+  
+  magick::image_read(path)
+}
+
+image_folder_dataset <- dataset(
+  "image_folder",
+  inherit = folder_dataset,
+  initialize = function(root, transform=NULL, target_transform=NULL,
+                        loader=magick_loader, is_valid_file=NULL) {
+    
+    if (!is.null(is_valid_file))
+      extensions <- NULL
+    else
+      extensions <- IMG_EXTENSIONS
+    
+    super$initialize(root, loader, extensions, transform=transform,
+                     target_transform=target_transform,
+                     is_valid_file=is_valid_file)
+    self$imgs <- self$samples
   }
 )
