@@ -128,3 +128,16 @@ test_that("torch_flatten dim error", {
   )
   
 })
+
+test_that("index argument", {
+  
+  x <- torch_tensor(c(1,2,3))
+  expect_equal(as_array(torch_select(x, 1, 1)), 1)
+  
+  expect_error(
+    torch_select(x, 1, 4),
+    regex = "index 4 out of range for tensor of size [3] at dimension 1",
+    fixed = TRUE
+  )
+  
+})
