@@ -117,3 +117,14 @@ test_that("indices error message", {
   )
   
 })
+
+test_that("torch_flatten dim error", {
+  
+  x <- torch_randn(2,2)
+  expect_error(
+    torch_flatten(x, start_dim = 3),
+    "Dimension out of range (expected to be in range of [-2, 2], but got 3)",
+    fixed = TRUE
+  )
+  
+})
