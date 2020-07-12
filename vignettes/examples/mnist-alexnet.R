@@ -1,11 +1,18 @@
-dir <- "~/Downloads/mnist"
+dir <- "~/Downloads/hello"
 
-ds <- mnist_dataset(
+ds <- tiny_imagenet_dataset(
   dir, 
   download = TRUE, 
   transform = function(x) {
-    x <- x$to(dtype = torch_float())/256
-    x[newaxis,..]
+    x <- magick::image_resize(x, "224x224")
+    x <- as.integer(magick::image_data(d[1][[1]], "rgb"))
+    x <- torch_tensor(x)
+    x <- x/256
+    x <- x$permute(c(2, 0, 1))
+  },
+  target_transform = function(x) {
+    x <- torch_tensor(x - 1, dtype = torch_long())
+    x$squeeze(1)
   }
 )
 dl <- dataloader(ds, batch_size = 32, shuffle = TRUE)
@@ -17,7 +24,7 @@ net <- nn_module(
       nn_conv2d(3, 64, kernel_size = 11, stride = 4, padding = 2),
       nn_relu(),
       nn_max_pool2d(kernel_size = 3, stride = 2),
-      nnf_conv2d(64, 192, kernel_size = 5, padding = 2),
+      nn_conv2d(64, 192, kernel_size = 5, padding = 2),
       nn_relu(),
       nn_max_pool2d(kernel_size = 3, stride = 2),
       nn_conv2d(192, 384, kernel_size = 3, padding = 1),
@@ -26,10 +33,10 @@ net <- nn_module(
       nn_relu(),
       nn_max_pool2d(kernel_size = 3, stride = 2)
     )
-    self$avgpool <- nnf_adaptive_avg_pool2d(c(6,6))
+    self$avgpool <- nn_max_pool2d(c(6,6))
     self$classifier <- nn_sequential(
       nn_dropout(),
-      nn_linear(256 * 6 * 6, 4096),
+      nn_linear(256, 4096),
       nn_relu(),
       nn_dropout(),
       nn_linear(4096, 4096),
@@ -40,13 +47,13 @@ net <- nn_module(
   forward = function(x) {
     x <- self$features(x)
     x <- self$avgpool(x)
-    x <- torch_flatten(x, 1)
+    x <- torch_flatten(x, start_dim = 2)
     x <- self$classifier(x)
-    x
+    nnf_log_softmax(x,dim = 1)
   }
 )
 
-model <- net()
+model <- net(num_classes = 200)
 optimizer <- optim_sgd(model$parameters, lr = 0.01)
 
 epochs <- 10
