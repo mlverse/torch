@@ -212,7 +212,7 @@ r_argument_with_default <- function(name, decls) {
   default <- r_argument_default(default)
 
   # make it 1-based
-  if (name %in% c("dim", "dim0", "dim1", "dim2") && can_be_numeric(default))
+  if (name %in% c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim") && can_be_numeric(default))
     default <- to_1_based(default)
 
   glue::glue("{name} = {default}")

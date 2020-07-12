@@ -6695,7 +6695,7 @@ fun_type = 'namespace'
 }
 
 
-torch_flatten <- function(self, dims, start_dim = 0, end_dim = -1, out_dim) {
+torch_flatten <- function(self, dims, start_dim = 1, end_dim = -1, out_dim) {
   args <- mget(x = c("self", "dims", "start_dim", "end_dim", "out_dim"))
 expected_types <- list(self = "Tensor", dims = "DimnameList", start_dim = c("int64_t", 
 "Dimname"), end_dim = c("int64_t", "Dimname"), out_dim = "Dimname")

@@ -1723,7 +1723,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "flatten", function(dims, start_dim = 0, end_dim = -1, out_dim) {  args <- mget(x = c("dims", "start_dim", "end_dim", "out_dim"))
+Tensor$set("public", "flatten", function(dims, start_dim = 1, end_dim = -1, out_dim) {  args <- mget(x = c("dims", "start_dim", "end_dim", "out_dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dims = "DimnameList", start_dim = c("int64_t", 
 "Dimname"), end_dim = c("int64_t", "Dimname"), out_dim = "Dimname")
