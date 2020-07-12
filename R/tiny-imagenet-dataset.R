@@ -10,6 +10,8 @@ tiny_imagenet_dataset <- dataset(
     if (!fs::dir_exists(root))
       fs::dir_create(root)
     
+    self$root <- root
+    
     if (download)
       self$download()
     
