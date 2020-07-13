@@ -104,8 +104,8 @@ test_that("cuda and cpu methods", {
 test_that("stride", {
   x <- torch_randn(10, 10)
   expect_identical(x$stride(), c(10, 1))
-  expect_identical(x$stride(0), 10)
-  expect_identical(x$stride(1), 1)
+  expect_identical(x$stride(1), 10)
+  expect_identical(x$stride(2), 1)
 })
 
 test_that("is_contiguous", {

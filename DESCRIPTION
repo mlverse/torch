@@ -116,5 +116,6 @@ Collate:
     'utils.R'
     'variable_list.R'
     'vision_utils.R'
+    'with-indices.R'
     'wrapers.R'
 StagedInstall: no

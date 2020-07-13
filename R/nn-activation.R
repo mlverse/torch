@@ -963,7 +963,7 @@ nn_tanhshrink <- nn_module(
 #' values in the range [0, 1]
 #' 
 #' @examples
-#' m <- nn_softmin(dim = 0)
+#' m <- nn_softmin(dim = 1)
 #' input <- torch_randn(2, 2)
 #' output <- m(input)
 #' 

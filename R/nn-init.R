@@ -240,8 +240,8 @@ nn_init_dirac_ <- function(tensor, grooups = 1) {
 nn_init_calculate_fan_in_and_fan_out <- function(tensor) {
   
   dimensions <- tensor$dim()
-  num_input_fmaps <- tensor$size(1)
-  num_output_fmaps <- tensor$size(0)
+  num_input_fmaps <- tensor$size(2)
+  num_output_fmaps <- tensor$size(1)
   receptive_field_size <- 1
   
   if (dimensions > 2)
@@ -381,7 +381,7 @@ nn_init_kaiming_normal_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity
 #' 
 #' @export
 nn_init_orthogonal_ <- function(tensor, gain = 1) {
- rows <- tensor$size(0)
+ rows <- tensor$size(1)
  cols <- floor(tensor$numel() / rows)
  flattened <- torch_randn(rows, cols)
  

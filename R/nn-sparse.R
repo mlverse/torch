@@ -51,7 +51,7 @@ NULL
 #' embedding(input)
 #' # example with padding_idx
 #' embedding <- nn_embedding(10, 3, padding_idx=1)
-#' input <- torch_tensor(matrix(c(0,2,0,5), nrow = 1), dtype = torch_long())
+#' input <- torch_tensor(matrix(c(1,3,1,6), nrow = 1), dtype = torch_long())
 #' embedding(input)
 #' 
 #' @export

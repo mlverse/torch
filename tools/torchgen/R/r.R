@@ -96,7 +96,10 @@ creation_ops <- c("ones", "ones_like", "rand", "rand_like", "randint",
 
 # functions in this list are generated with a preciding '.' in their names so
 # wrapers can be defined around them.
-internal_funs <- c("logical_not")
+internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_indices",
+                   "max_pool2d_with_indices_out", "max_pool3d_with_indices",
+                   "max_pool3d_with_indices_out", "max", "min", "max_out", "min_out",
+                   "nll_loss", "nll_loss2d")
 internal_funs <- c(internal_funs, creation_ops)
 
 
@@ -174,6 +177,24 @@ r_argument <- function(name, decls) {
     r_argument_with_default(name, decls)
 }
 
+
+can_be_numeric <- function(x) {
+  suppressWarnings(x <- as.numeric(x))
+  !is.na(x)
+}
+
+to_1_based <- function(x) {
+
+  x <- as.numeric(x)
+
+  if (x >= 0)
+    out <- x + 1
+  else
+    out <- x
+
+  as.character(out)
+}
+
 r_argument_with_default <- function(name, decls) {
 
   default <- purrr::map(decls, ~.x$arguments) %>%
@@ -190,6 +211,11 @@ r_argument_with_default <- function(name, decls) {
 
   name <- r_argument_name(name)
   default <- r_argument_default(default)
+
+  # make it 1-based
+  if (name %in% c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim") && can_be_numeric(default))
+    default <- to_1_based(default)
+
   glue::glue("{name} = {default}")
 }
 

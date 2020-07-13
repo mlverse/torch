@@ -498,7 +498,7 @@ nn_conv_transpose_nd <- nn_module(
       
       for (d in seq_len(k)) {
         
-        dim_size <- (input$size(d + 2 - 1) - 1) * stride[d] - 2*padding[d] + 
+        dim_size <- (input$size(d + 2) - 1) * stride[d] - 2*padding[d] + 
           kernel_size[d]
         
         min_sizes[[d]] <- dim_size

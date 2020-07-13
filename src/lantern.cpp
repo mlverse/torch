@@ -1,4 +1,5 @@
 #include "torch_types.h"
+#include "translate_messages.h"
 
 using namespace Rcpp;
 
@@ -7,7 +8,10 @@ void lantern_host_handler()
   if (lanternLastError() != NULL) {
     std::string last = lanternLastError();
     lanternLastErrorClear();
-    throw Rcpp::exception(last.c_str());
+    
+    std::string error_msg = translate_error_message(std::string(last.c_str()));
+    
+    throw Rcpp::exception(error_msg.c_str());
   } 
 }
 

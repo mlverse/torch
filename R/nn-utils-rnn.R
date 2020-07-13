@@ -14,10 +14,10 @@ PackedSequence <- R6::R6Class(
       Tensor$new(ptr = cpp_nn_utils_PackedSequence_batch_sizes(self$ptr))
     },
     sorted_indices = function() {
-      Tensor$new(ptr = cpp_nn_utils_PackedSequence_sorted_indices(self$ptr))
+      Tensor$new(ptr = cpp_nn_utils_PackedSequence_sorted_indices(self$ptr))$add(1L, alpha = 1L)
     },
     unsorted_indices = function() {
-      Tensor$new(ptr = cpp_nn_utils_PackedSequence_unsorted_indices(self$ptr))
+      Tensor$new(ptr = cpp_nn_utils_PackedSequence_unsorted_indices(self$ptr))$add(1L, alpha = 1L)
     }
   )
 )
@@ -26,8 +26,8 @@ new_packed_sequence <- function(data, batch_sizes, sorted_indices, unsorted_indi
   o <- cpp_nn_utils_PackedSequence_new(
     data$ptr,
     batch_sizes$ptr,
-    sorted_indices$ptr,
-    unsorted_indices$ptr
+    sorted_indices$sub(1L, 1L)$ptr,
+    unsorted_indices$sub(1L, 1L)$ptr
   )
   PackedSequence$new(ptr = o)
 }

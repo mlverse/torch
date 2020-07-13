@@ -58,7 +58,7 @@ Tensor <- R7Class(
       if (missing(dim))
         return(x)
       
-      x[dim + 1]
+      x[dim]
     },
     numel = function() {
       cpp_tensor_numel(self$ptr)
@@ -99,7 +99,7 @@ Tensor <- R7Class(
     stride = function(dim) {
       if (missing(dim)) {
         d <- self$dim()
-        sapply(seq_len(d) - 1, private$`_stride`)
+        sapply(seq_len(d), private$`_stride`)
       } else {
         private$`_stride`(dim)
       }

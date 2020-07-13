@@ -5,10 +5,28 @@ is_scalar_atomic <- function(x) {
     FALSE
 }
 
-argument_to_torch_type <- function(obj, expected_types) {
+as_1_based_dim <- function(x) {
+  x <- as.integer(x)
+  
+  if (any(x == 0))
+    value_error("Dimension is 1-based, but found 0.")
+  
+  ifelse(x > 0, x - 1, x)
+}
+
+as_1_based_tensor_list <- function(x) {
+  tensors <- x$to_r()
+  tensors <- lapply(tensors, function(x) x$sub(1L, 0L))
+  torch_tensor_list(tensors)
+}
+
+argument_to_torch_type <- function(obj, expected_types, arg_name) {
   
   if (is.name(obj))
     return(NULL)
+  
+  if (any(arg_name == c("index", "indices", "dims")) && any("Tensor" == expected_types) && is_torch_tensor(obj))
+    return(list(get("ptr", obj$sub(1L, alpha = 1L), inherits = FALSE), "Tensor"))
   
   if (any("Tensor" == expected_types) && is_torch_tensor(obj))
     return(list(get("ptr", obj, inherits = FALSE), "Tensor"))
@@ -19,6 +37,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   if (any("DimnameList" == expected_types) && is_torch_dimname_list(obj))
     return(list(obj$ptr, "DimnameList"))
   
+  if (arg_name == "indices" && any("TensorList" == expected_types) && is_torch_tensor_list(obj))
+    return(list(as_1_based_tensor_list(obj)$ptr, "TensorList"))
+    
   if (any("TensorList" == expected_types) && is_torch_tensor_list(obj))
     return(list(obj$ptr, "TensorList"))
   
@@ -37,17 +58,29 @@ argument_to_torch_type <- function(obj, expected_types) {
   if (any("Scalar" == expected_types) && is_scalar_atomic(obj))
     return(list(torch_scalar(obj)$ptr, "Scalar"))
   
+  if (arg_name == "index" && any("Tensor" == expected_types) && is.atomic(obj) && !is.null(obj))
+    return(list(torch_tensor(obj - 1, dtype = torch_long())$ptr, "Tensor"))
+  
   if (any("Tensor" == expected_types) && is.atomic(obj) && !is.null(obj))
     return(list(torch_tensor(obj)$ptr, "Tensor"))
   
   if (any("DimnameList" == expected_types) && is.character(obj))
     return(list(torch_dimname_list(obj)$ptr, "DimnameList"))
   
+  if (any("IntArrayRef" == expected_types) && (is.numeric(obj) || is.list(obj)) && arg_name == "dims")
+    return(list(as_1_based_dim(obj), "IntArrayRef"))
+  
+  if (any("IntArrayRef" == expected_types) && any("DimnameList" == expected_types) && is.numeric(obj))
+      return(list(as_1_based_dim(obj), "IntArrayRef"))
+  
   if (any("IntArrayRef" == expected_types) && is.numeric(obj))
     return(list(as.integer(obj), "IntArrayRef"))
   
   if (any("IntArrayRef" == expected_types) && is.list(obj))
     return(list(as.integer(obj), "IntArrayRef"))
+  
+  if (any("int64_t" == expected_types) && is.numeric(obj) && length(obj) == 1 && any(arg_name == c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim", "index")))
+    return(list(as_1_based_dim(obj), "int64_t"))
   
   if (any("int64_t" == expected_types) && is.numeric(obj) && length(obj) == 1)
     return(list(as.integer(obj), "int64_t"))
@@ -66,6 +99,9 @@ argument_to_torch_type <- function(obj, expected_types) {
   
   if (any("TensorOptions" == expected_types) && is.list(obj))
     return(list(as_torch_tensor_options(obj)$ptr, "TensorOptions"))
+  
+  if (arg_name == "indices" && any("TensorList" == expected_types) && is.list(obj))
+    return(list(torch_tensor_list(lapply(obj, function(x) x$sub(1L, 1L)))$ptr, "TensorList"))
   
   if (any("TensorList" == expected_types) && is.list(obj))
     return(list(torch_tensor_list(obj)$ptr, "TensorList"))
@@ -108,7 +144,7 @@ all_arguments_to_torch_type <- function(all_arguments, expected_types) {
   arguments <- list()
   types <- character()
   for (nm in names(all_arguments)) {
-    values_and_types <- argument_to_torch_type(all_arguments[[nm]], expected_types[[nm]])
+    values_and_types <- argument_to_torch_type(all_arguments[[nm]], expected_types[[nm]], nm)
     if (!is.null(values_and_types)) {
       
       if (is.null(values_and_types[[1]]))

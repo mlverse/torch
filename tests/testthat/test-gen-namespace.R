@@ -266,14 +266,14 @@ test_that("torch_upsample_trilinear3d_out", {
 test_that("var", {
   x <- torch_rand(100, names = "a")
   expect_tensor(torch_var(x))
-  expect_tensor(torch_var(x, dim = 0))
+  expect_tensor(torch_var(x, dim = 1))
   expect_tensor(torch_var(x, dim = "a"))
 })
 
 test_that("var_mean", {
   x <- torch_rand(100, names = "a")
   lapply(torch_var_mean(x), expect_tensor)
-  lapply(torch_var_mean(x, dim = 0), expect_tensor)
+  lapply(torch_var_mean(x, dim = 1), expect_tensor)
   lapply(torch_var_mean(x, dim = "a"), expect_tensor)
 })
 

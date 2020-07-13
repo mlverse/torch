@@ -17,7 +17,7 @@ net <- nn_module(
   },
   forward = function(x) {
     x %>% 
-      torch_flatten(start_dim = 1) %>% 
+      torch_flatten(start_dim = 2) %>% 
       self$fc1() %>% 
       nnf_relu() %>% 
       self$fc2() %>% 

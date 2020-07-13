@@ -59,7 +59,7 @@ discriminator <- nn_module(
   },
   forward = function(input) {
     x <- self$main(input)
-    x <- torch_flatten(x, start_dim = 1)
+    x <- torch_flatten(x, start_dim = 2)
     x <- self$linear(x)
     self$sigmoid(x)
   }

@@ -39,3 +39,19 @@ test_that("item", {
   x <- torch_tensor(1.5, dtype = torch_double())
   expect_equal(x$item(), 1.5)
 })
+
+test_that("permute", {
+  
+  x <- torch_randn(2,3,4)
+  y <- x$permute(c(3,2,1))
+  
+  expect_tensor_shape(y, c(4,3,2))
+  
+  expect_error(
+    x$permute(c(2,1, 0)),
+    regex = "Dimension is 1-based, but found 0.",
+    fixed = TRUE,
+    class = "value_error"
+  )
+  
+})
