@@ -8,10 +8,10 @@ ds <- tiny_imagenet_dataset(
     x <- as.integer(magick::image_data(x, "rgb"))  
     x <- torch_tensor(x)
     x <- x/256
-    x <- x$permute(c(2, 0, 1))
+    x <- x$permute(c(3, 1, 2))
   },
   target_transform = function(x) {
-    x <- torch_tensor(x - 1, dtype = torch_long())
+    x <- torch_tensor(x, dtype = torch_long())
     x$squeeze(1)
   }
 )
