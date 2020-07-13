@@ -9,7 +9,7 @@ as_1_based_dim <- function(x) {
   x <- as.integer(x)
   
   if (any(x == 0))
-    value_error("Dimension is 1-based and found 0.")
+    value_error("Dimension is 1-based, but found 0.")
   
   ifelse(x > 0, x - 1, x)
 }
