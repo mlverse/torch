@@ -1773,7 +1773,7 @@ NULL
 #'
 #' x = torch_arange(0, 8)$view(c(2, 2, 2))
 #' x
-#' torch_flip(x, c(0, 1))
+#' torch_flip(x, c(1, 2))
 NULL
 # -> flip <-
 
@@ -1785,9 +1785,9 @@ NULL
 #'
 #' x = torch_tensor(c(1, 2, 3, 4, 5, 6, 7, 8))$view(c(4, 2))
 #' x
-#' torch_roll(x, 1, 0)
-#' torch_roll(x, -1, 0)
-#' torch_roll(x, shifts=list(2, 1), dims=list(0, 1))
+#' torch_roll(x, 1, 1)
+#' torch_roll(x, -1, 1)
+#' torch_roll(x, shifts=list(2, 1), dims=list(1, 2))
 NULL
 # -> roll <-
 
@@ -1799,7 +1799,7 @@ NULL
 #'
 #' x = torch_arange(0, 4)$view(c(2, 2))
 #' x
-#' torch_rot90(x, 1, c(0, 1))
+#' torch_rot90(x, 1, c(1, 2))
 #' x = torch_arange(0, 8)$view(c(2, 2, 2))
 #' x
 #' torch_rot90(x, 1, c(1, 2))

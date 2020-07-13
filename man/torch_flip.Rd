@@ -22,5 +22,5 @@ Reverse the order of a n-D tensor along given axis in dims.
 
 x = torch_arange(0, 8)$view(c(2, 2, 2))
 x
-torch_flip(x, c(0, 1))
+torch_flip(x, c(1, 2))
 }
