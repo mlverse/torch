@@ -25,7 +25,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   if (is.name(obj))
     return(NULL)
   
-  if (any(arg_name == c("index", "indices")) && any("Tensor" == expected_types) && is_torch_tensor(obj))
+  if (any(arg_name == c("index", "indices", "dims")) && any("Tensor" == expected_types) && is_torch_tensor(obj))
     return(list(get("ptr", obj$sub(1L, alpha = 1L), inherits = FALSE), "Tensor"))
   
   if (any("Tensor" == expected_types) && is_torch_tensor(obj))
@@ -66,6 +66,9 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   
   if (any("DimnameList" == expected_types) && is.character(obj))
     return(list(torch_dimname_list(obj)$ptr, "DimnameList"))
+  
+  if (any("IntArrayRef" == expected_types) && is.numeric(obj) && arg_name == "dims")
+    return(list(as_1_based_dim(obj), "IntArrayRef"))
   
   if (any("IntArrayRef" == expected_types) && any("DimnameList" == expected_types) && is.numeric(obj))
       return(list(as_1_based_dim(obj), "IntArrayRef"))
