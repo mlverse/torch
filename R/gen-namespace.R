@@ -9477,7 +9477,7 @@ fun_type = 'namespace'
 }
 
 
-torch_max <- function(self, dim, other, keepdim = FALSE) {
+.torch_max <- function(self, dim, other, keepdim = FALSE) {
   args <- mget(x = c("self", "dim", "other", "keepdim"))
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), other = "Tensor", 
     keepdim = "bool")
@@ -9494,7 +9494,7 @@ fun_type = 'namespace'
 }
 
 
-torch_max_out <- function(max, out, max_values, other, self, dim, keepdim = FALSE) {
+.torch_max_out <- function(max, out, max_values, other, self, dim, keepdim = FALSE) {
   args <- mget(x = c("max", "out", "max_values", "other", "self", "dim", "keepdim"))
 expected_types <- list(max = "Tensor", out = "Tensor", max_values = "Tensor", other = "Tensor", 
     self = "Tensor", dim = c("int64_t", "Dimname"), keepdim = "bool")
@@ -9964,7 +9964,7 @@ fun_type = 'namespace'
 }
 
 
-torch_min <- function(self, dim, other, keepdim = FALSE) {
+.torch_min <- function(self, dim, other, keepdim = FALSE) {
   args <- mget(x = c("self", "dim", "other", "keepdim"))
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), other = "Tensor", 
     keepdim = "bool")
@@ -9981,7 +9981,7 @@ fun_type = 'namespace'
 }
 
 
-torch_min_out <- function(min, out, min_indices, other, self, dim, keepdim = FALSE) {
+.torch_min_out <- function(min, out, min_indices, other, self, dim, keepdim = FALSE) {
   args <- mget(x = c("min", "out", "min_indices", "other", "self", "dim", "keepdim"))
 expected_types <- list(min = "Tensor", out = "Tensor", min_indices = "Tensor", 
     other = "Tensor", self = "Tensor", dim = c("int64_t", "Dimname"

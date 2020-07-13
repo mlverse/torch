@@ -98,7 +98,7 @@ creation_ops <- c("ones", "ones_like", "rand", "rand_like", "randint",
 # wrapers can be defined around them.
 internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_indices",
                    "max_pool2d_with_indices_out", "max_pool3d_with_indices",
-                   "max_pool3d_with_indices_out")
+                   "max_pool3d_with_indices_out", "max", "min", "max_out", "min_out")
 internal_funs <- c(internal_funs, creation_ops)
 
 
