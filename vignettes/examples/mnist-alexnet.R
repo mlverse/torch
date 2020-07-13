@@ -1,11 +1,11 @@
-dir <- "~/Downloads/hello"
+dir <- "~/Downloads/tiny-imagenet"
 
 ds <- tiny_imagenet_dataset(
   dir, 
   download = TRUE, 
   transform = function(x) {
     x <- magick::image_resize(x, "224x224")
-    x <- as.integer(magick::image_data(d[1][[1]], "rgb"))
+    x <- as.integer(magick::image_data(x, "rgb"))  
     x <- torch_tensor(x)
     x <- x/256
     x <- x$permute(c(2, 0, 1))
@@ -15,6 +15,7 @@ ds <- tiny_imagenet_dataset(
     x$squeeze(1)
   }
 )
+
 dl <- dataloader(ds, batch_size = 128, shuffle = TRUE)
 
 net <- nn_module(
@@ -49,7 +50,6 @@ net <- nn_module(
     x <- self$avgpool(x)
     x <- torch_flatten(x, start_dim = 2)
     x <- self$classifier(x)
-    nnf_log_softmax(x,dim = 1)
   }
 )
 
@@ -61,11 +61,12 @@ if (cuda_is_available()) {
   
 model <- net(num_classes = 200)
 model$to(device = device)
-optimizer <- optim_sgd(model$parameters, lr = 0.01)
+optimizer <- optim_adam(model$parameters)
+loss_fun <- nn_cross_entropy_loss()
 
 epochs <- 10
 
-for (epoch in 1:10) {
+for (epoch in 1:50) {
   
   pb <- progress::progress_bar$new(
     total = length(dl), 
@@ -76,7 +77,7 @@ for (epoch in 1:10) {
   for (b in enumerate(dl)) {
     optimizer$zero_grad()
     output <- model(b[[1]]$to(device = device))
-    loss <- nnf_nll_loss(output, b[[2]]$to(device = device))
+    loss <- loss_fun(output, b[[2]]$to(device = device))
     loss$backward()
     optimizer$step()
     l <- c(l, loss$item())
