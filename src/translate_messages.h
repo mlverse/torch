@@ -89,6 +89,19 @@ std::string translate_index_out_of_range_msg (std::string msg)
   return msg;
 }
 
+std::string translate_target_index_msg (std::string msg)
+{
+  auto regex = std::regex("(?:.|\\r?\\n)*Target (-?[0-9]+) is out of bounds.(?:.|\\r?\\n)*");
+  std::smatch m;
+  
+  if (std::regex_match(msg, m, regex))
+  {
+    msg.replace(m.position(1), m.length(1), std::to_string(std::stoi(m[1].str()) + 1));
+  }
+  
+  return msg;
+}
+
 // translate error messages
 std::string translate_error_message (std::string msg)
 {
@@ -97,5 +110,6 @@ std::string translate_error_message (std::string msg)
   out = translate_dim_error_msg(out);
   out = translate_max_index_msg(out);
   out = translate_index_out_of_range_msg(out);
+  out = translate_target_index_msg(out);
   return out;
 }

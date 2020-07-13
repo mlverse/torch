@@ -141,3 +141,21 @@ test_that("index argument", {
   )
   
 })
+
+test_that("torch_nll_loss out of bound", {
+  
+  x <- torch_randn(1, 5)
+  
+  expect_error(
+    torch_nll_loss(x, torch_tensor(0, dtype = torch_long())),
+    regex = "Target 0 is out of bounds.",
+    fixed = TRUE
+  )
+  
+  expect_error(
+    torch_nll_loss(x, torch_tensor(6, dtype = torch_long())),
+    regex = "Target 6 is out of bounds.",
+    fixed = TRUE
+  )
+  
+})

@@ -11113,7 +11113,7 @@ fun_type = 'namespace'
 }
 
 
-torch_nll_loss <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100) {
+.torch_nll_loss <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100) {
   args <- mget(x = c("self", "target", "weight", "reduction", "ignore_index"))
 expected_types <- list(self = "Tensor", target = "Tensor", weight = "Tensor", reduction = "int64_t", 
     ignore_index = "int64_t")
@@ -11221,7 +11221,7 @@ fun_type = 'namespace'
 }
 
 
-torch_nll_loss2d <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100) {
+.torch_nll_loss2d <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100) {
   args <- mget(x = c("self", "target", "weight", "reduction", "ignore_index"))
 expected_types <- list(self = "Tensor", target = "Tensor", weight = "Tensor", reduction = "int64_t", 
     ignore_index = "int64_t")
