@@ -72,7 +72,7 @@ RandomSampler <- R6::R6Class(
         rand_tensor <- torch_randint(low = 1, high = n, size = self$num_samples,
                                      dtype = torch_long(), generator = self$generator)
       } else {
-        rand_tensor <- torch_randperm(n)#, generator = self$generator)
+        rand_tensor <- torch_randperm(n)$add(1L, 1L)#, generator = self$generator)
       }
       rand_tensor <- as_array(rand_tensor$to(dtype = torch_int()))
       as_iterator(rand_tensor)

@@ -52,7 +52,7 @@ mnist_dataset <- dataset(
       
     data <- readRDS(file.path(self$processed_folder, data_file))
     self$data <- torch_tensor(data[[1]])
-    self$targets <- torch_tensor(data[[2]], dtype = torch_long())
+    self$targets <- torch_tensor(data[[2]] + 1L, dtype = torch_long())
   },
   download = function() {
     
