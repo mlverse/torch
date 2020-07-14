@@ -142,7 +142,7 @@ floor.torch_tensor <- function(x) {
 }
 
 #' @export
-trunc.torch_tensor <- function(x) {
+trunc.torch_tensor <- function(x, ...) {
   torch_trunc(x)
 }
 
