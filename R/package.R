@@ -2,6 +2,8 @@
 #' @importFrom Rcpp sourceCpp
 NULL
 
+globalVariables(c("..", "self", "private"))
+
 .generator_null <- NULL
 
 .onAttach <- function(libname, pkgname) {
