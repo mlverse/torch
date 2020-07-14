@@ -133,11 +133,3 @@ z <- torch_tensor(1:125)$reshape(c(5,5,5))
 z[1,..]
 z[..,1]
 ```
-If an index is stored in a variable, it can be convenient to use the *unsplice* operator, like so:
-
-```{r}
-i <- c(5,5,5)
-z[!!!i]
-```
-
-More complex indexing should make use of `torch_select` or `torch_slice`.
