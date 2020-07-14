@@ -249,7 +249,7 @@ nnf_multilabel_soft_margin_loss <- function(input, target, weight, reduction = "
 #' @param negative the negative input tensor
 #' @param margin Default: 1.
 #' @param p The norm degree for pairwise distance. Default: 2.
-#' @param eps 
+#' @param eps (float, optional) Small value to avoid division by zero.
 #' @param swap The distance swap is described in detail in the paper Learning shallow 
 #'   convolutional feature descriptors with triplet losses by V. Balntas, E. Riba et al. 
 #'   Default: `FALSE`.
