@@ -23,7 +23,7 @@ nnf_l1_loss <- function(input, target, reduction = "mean") {
       
     }
   } else {
-    expanded <- torch_broadcast_tensors(input, target)
+    expanded <- torch_broadcast_tensors(list(input, target))
     ret <- torch_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
   }
   
