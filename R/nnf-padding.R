@@ -1,6 +1,6 @@
 nnf_pad_circular <- function(input, padding) {
   
-  input <- torch_cat(list(input, input[,,1:tail(padding,1)]), dim = 2)
+  input <- torch_cat(list(input, input[,,1:(utils::tail(padding,1))]), dim = 2)
   input <- torch_cat(list(input[,,c(
     (-(rev(padding)[[1]] + rev(padding)[[2]])):(-rev(padding)[1])
   )],
