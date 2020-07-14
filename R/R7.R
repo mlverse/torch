@@ -12,6 +12,7 @@ prepare_method <- function(m, active = FALSE) {
 }
 
 #' @importFrom rlang env_bind
+#' @importFrom rlang :=
 R7Class <- function(classname = NULL, public = list(), private = list(),
                     active = list()) {
   
