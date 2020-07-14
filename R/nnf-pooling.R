@@ -364,7 +364,7 @@ nnf_fractional_max_pool2d <- function(input, kernel_size, output_size=NULL,
                                       random_samples = NULL) {
   
   if (is.null(output_size)) {
-    output_ratio_ <- pair(output_ratio)
+    output_ratio_ <- nn_util_pair(output_ratio)
     output_size <- list(
       as.integer(input$size(3) * output_ratio_[[1]]),
       as.integer(input$size(4) * output_ratio_[[2]])
@@ -407,19 +407,20 @@ nnf_fractional_max_pool2d <- function(input, kernel_size, output_size=NULL,
 #' @param return_indices if ``True``, will return the indices along with the outputs. 
 #'
 #' @export
-nnf_fractional_max_pool3d <- function(kernel_size, output_size = NULL, output_ratio = NULL, 
+nnf_fractional_max_pool3d <- function(input, kernel_size, output_size = NULL, output_ratio = NULL, 
                                       return_indices = FALSE, random_samples = NULL) {
   
   
   if (is.null(output_size)) {
+  
+    if (is.null(output_ratio))
+      value_error("output_ratio should not be NULL if output_size is NULL")
     
-    if (length(output_size) == 1)
-      
-      output_ratio_ <- rep(output_size, 3)
+    output_ratio_ <- nn_util_triple(output_ratio)
     output_size <- c(
       input$size(3) * output_ratio_[1],
       input$size(4) * output_ratio_[2],
-      input$size(5) * output_ratio_[3],
+      input$size(5) * output_ratio_[3]
     )
   }
   
@@ -490,5 +491,5 @@ nnf_lp_pool2d <- function(input, norm_type, kernel_size, stride = NULL,
                           ceil_mode = ceil_mode)
   }
   
-  (torch$sign(out) * nnf_relu(torch$abs(out)))$mul(k[[1]] * k[[2]])$pow(1/norm_type)
+  (torch_sign(out) * nnf_relu(torch_abs(out)))$mul(k[[1]] * k[[2]])$pow(1/norm_type)
 }

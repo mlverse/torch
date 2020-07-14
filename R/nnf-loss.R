@@ -426,6 +426,6 @@ nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL,
                                                  size_average = NULL, 
                                                  reduction = c("mean", "sum", "none"), 
                                                  pos_weight = NULL) {
-  torch_binary_cross_entropy_with_logits(input, target, weigth, pos_weight, 
+  torch_binary_cross_entropy_with_logits(input, target, weight, pos_weight, 
                                          reduction_enum(reduction))
 }

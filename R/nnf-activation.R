@@ -654,7 +654,7 @@ nnf_multi_head_attention_forward <- function(
     k_size <- k$size()
     k <- torch_cat(list(k, torch_zeros(append(list(k_size[1], 1), k_size[3:length(k_size)]),
                                        dtype = k$dtype, device = k$device)), dim = 1)
-    v_size
+    v_size <- v$size()
     k <- torch_cat(list(k, torch_zeros(append(list(v_size[1], 1), v_size[3:length(v_size)]),
                                        dtype = v$dtype, device = v$device)), dim = 1)
     
@@ -679,7 +679,7 @@ nnf_multi_head_attention_forward <- function(
   }
   
   if (!is.null(key_padding_mask)) {
-    attn_output_weights <- attn_output_weights$view(vsz, num_heads, tgt_len, src_len)
+    attn_output_weights <- attn_output_weights$view(bsz, num_heads, tgt_len, src_len)
     attn_output_weights <- attn_output_weights$masked_fill(
       key_padding_mask$unsqueeze(1)$unsqueeze(2),
       -Inf

@@ -173,7 +173,7 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
     not_implemented_error("Got 5D input, but bilinear mode needs 4D input")
   }
   
-  if (inpt$dim() == 5 && mode == "trilinear") {
+  if (input$dim() == 5 && mode == "trilinear") {
     return(torch_upsample_trilinear3d(input, sze, align_corners, sfl[[1]], sfl[[2]], 
                                       sfl[[3]]))
   }

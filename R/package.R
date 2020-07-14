@@ -2,7 +2,7 @@
 #' @importFrom Rcpp sourceCpp
 NULL
 
-globalVariables(c("..", "self", "private"))
+globalVariables(c("..", "self", "private", "N"))
 
 .generator_null <- NULL
 
