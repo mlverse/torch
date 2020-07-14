@@ -35,7 +35,9 @@ Suggests:
     bit64,
     fs,
     palmerpenguins,
-    magrittr
+    magrittr,
+    glue,
+    magick
 Remotes:
     allisonhorst/palmerpenguins
 VignetteBuilder: knitr
