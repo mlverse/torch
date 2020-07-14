@@ -1,5 +1,5 @@
 #include "torch_types.h"
-#include "utils.hpp"
+#include "utils.h"
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchScalar> cpp_torch_scalar (SEXP x) {

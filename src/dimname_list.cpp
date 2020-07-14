@@ -1,6 +1,6 @@
 
 #include "torch_types.h"
-#include "utils.hpp"
+#include "utils.h"
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchDimname> cpp_torch_dimname(const std::string& str) {

@@ -1,5 +1,5 @@
 #include "torch_types.h"
-#include "utils.hpp"
+#include "utils.h"
 
 // [[Rcpp::export]]
 std::string cpp_layout_to_string(Rcpp::XPtr<XPtrTorchLayout> layout_ptr) {

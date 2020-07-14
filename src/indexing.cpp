@@ -1,5 +1,5 @@
 #include "torch_types.h"
-#include "utils.hpp"
+#include "utils.h"
 
 static R_len_t dots_size(SEXP dots) {
   if (dots == R_UnboundValue) {
