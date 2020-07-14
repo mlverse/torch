@@ -16,3 +16,4 @@ test.html
 .vscode
 lantern/.idea*
 lantern/cmake-build*
+check/
