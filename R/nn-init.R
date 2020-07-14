@@ -20,8 +20,8 @@ nn_init_no_grad_trunc_normal <- function(tensor, mean, std, a, b) {
   
   with_no_grad({
     
-    l <- pnorm((a - mean) / std)
-    u <- pnorm((b - mean) / std)
+    l <- stats::pnorm((a - mean) / std)
+    u <- stats::pnorm((b - mean) / std)
     
     # Uniformly fill tensor with values from [l, u], then translate to
     # [2l-1, 2u-1].
@@ -226,7 +226,7 @@ nn_init_eye_ <- function(tensor) {
 #' }
 #' 
 #' @export
-nn_init_dirac_ <- function(tensor, grooups = 1) {
+nn_init_dirac_ <- function(tensor, groups = 1) {
   
   sizes <- tensor$size()
   dimensions <- length(sizes)

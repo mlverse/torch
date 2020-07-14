@@ -23,7 +23,10 @@ Imports:
     Rcpp,
     R6,
     withr,
-    rlang
+    rlang,
+    methods,
+    utils,
+    stats
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
