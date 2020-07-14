@@ -34,7 +34,8 @@ Suggests:
     rmarkdown,
     bit64,
     fs,
-    palmerpenguins
+    palmerpenguins,
+    magrittr
 Remotes:
     allisonhorst/palmerpenguins
 VignetteBuilder: knitr
