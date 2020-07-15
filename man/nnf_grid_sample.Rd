@@ -28,7 +28,7 @@ input  as squares rather than points. If set to \code{True}, the extrema (\code{
 \code{1}) are considered as referring to the center points of the input's corner pixels.
 If set to \code{False}, they are instead considered as referring to the corner
 points of the input's corner pixels, making the sampling more resolution
-agnostic. This option parallels the \code{align_corners} option in  \code{\link{interpolate}}, and
+agnostic. This option parallels the \code{align_corners} option in  \code{\link[=nnf_interpolate]{nnf_interpolate()}}, and
 so whichever option is used here should also be used there to resize the input
 image before grid sampling. Default: \code{False}}
 }
@@ -75,7 +75,7 @@ and becomes \verb{x' = 1.5}, then reflects by border \code{1} and becomes
 \section{Note}{
 
 
-This function is often used in conjunction with \code{\link{affine_grid}}
+This function is often used in conjunction with \code{\link[=nnf_affine_grid]{nnf_affine_grid()}}
 to build \verb{Spatial Transformer Networks}_ .
 }
 

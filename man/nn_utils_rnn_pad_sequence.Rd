@@ -12,7 +12,7 @@ or in \verb{T x B x *} otherwise}
 
 \item{padding_value}{(float, optional): value for padded elements. Default: 0.}
 
-\item{sequences}{(list\link{Tensor}): list of variable length sequences.}
+\item{sequences}{\code{(list[Tensor])}: list of variable length sequences.}
 }
 \value{
 Tensor of size \verb{T x B x *} if \code{batch_first} is \code{FALSE}.

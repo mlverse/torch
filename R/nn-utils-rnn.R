@@ -183,7 +183,7 @@ nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE,
 #' where `T` is the length of the longest sequence. This function assumes
 #' trailing dimensions and type of all the Tensors in sequences are same.
 #' 
-#' @param sequences (list[Tensor]): list of variable length sequences.
+#' @param sequences `(list[Tensor])`: list of variable length sequences.
 #' @param batch_first (bool, optional): output will be in `B x T x *` if `TRUE`, 
 #' or in `T x B x *` otherwise
 #' @param padding_value (float, optional): value for padded elements. Default: 0.
