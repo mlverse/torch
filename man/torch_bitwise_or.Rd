@@ -21,7 +21,3 @@ Computes the bitwise OR of \code{input} and \code{other}. The input tensor must 
 integral or Boolean types. For bool tensors, it computes the logical OR.
 }
 
-\examples{
-
-
-}

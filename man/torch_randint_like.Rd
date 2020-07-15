@@ -38,7 +38,3 @@ With the global dtype default (\code{torch_float32}), this function returns
 a tensor with dtype \code{torch_int64}.
 }
 
-\examples{
-
-
-}

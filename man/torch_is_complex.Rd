@@ -17,7 +17,3 @@ Returns True if the data type of \code{input} is a complex data type i.e.,
 one of \code{torch_complex64}, and \code{torch.complex128}.
 }
 
-\examples{
-
-
-}

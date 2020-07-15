@@ -24,7 +24,3 @@ Last chunk will be smaller if the tensor size along the given dimension
 \code{dim} is not divisible by \code{chunks}.
 }
 
-\examples{
-
-
-}

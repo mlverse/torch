@@ -31,5 +31,11 @@ The argument \code{offset} controls which diagonal to consider:
 
 \examples{
 
-
+a = torch_randn(c(3))
+a
+torch_diagflat(a)
+torch_diagflat(a, 1)
+a = torch_randn(c(2, 2))
+a
+torch_diagflat(a)
 }

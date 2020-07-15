@@ -23,5 +23,7 @@ See \code{~torch.nn.PixelShuffle} for details.
 
 \examples{
 
-
+input = torch_randn(c(1, 9, 4, 4))
+output = nnf_pixel_shuffle(input, 3)
+print(output$size())
 }

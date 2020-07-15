@@ -13,7 +13,3 @@ Threshold_
 In-place version of \code{\link{~threshold}}.
 }
 
-\examples{
-
-
-}

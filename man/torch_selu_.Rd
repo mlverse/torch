@@ -13,7 +13,3 @@ Selu_
 In-place version of \code{\link{~selu}}.
 }
 
-\examples{
-
-
-}

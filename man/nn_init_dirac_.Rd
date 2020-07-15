@@ -4,7 +4,7 @@
 \alias{nn_init_dirac_}
 \title{Dirac initialization}
 \usage{
-nn_init_dirac_(tensor, grooups = 1)
+nn_init_dirac_(tensor, groups = 1)
 }
 \arguments{
 \item{tensor}{a {3, 4, 5}-dimensional \code{torch.Tensor}}

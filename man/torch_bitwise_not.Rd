@@ -19,7 +19,3 @@ Computes the bitwise NOT of the given input tensor. The input tensor must be of
 integral or Boolean types. For bool tensors, it computes the logical NOT.
 }
 
-\examples{
-
-
-}

@@ -31,7 +31,3 @@ The argument \code{diagonal} controls which diagonal to consider:
 }
 }
 
-\examples{
-
-
-}

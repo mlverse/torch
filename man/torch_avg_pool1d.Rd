@@ -29,7 +29,3 @@ input planes.
 See \code{~torch.nn.AvgPool1d} for details and output shape.
 }
 
-\examples{
-
-
-}

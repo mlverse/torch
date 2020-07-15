@@ -19,7 +19,3 @@ several input planes.
 See \code{~torch.nn.AdaptiveAvgPool1d} for details and output shape.
 }
 
-\examples{
-
-
-}

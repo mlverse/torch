@@ -35,5 +35,7 @@ See \code{~torch.nn.Conv1d} for details and output shape.
 
 \examples{
 
-
+filters = torch_randn(c(33, 16, 3))
+inputs = torch_randn(c(20, 16, 50))
+nnf_conv1d(inputs, filters)
 }

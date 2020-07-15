@@ -22,7 +22,3 @@ Concatenates sequence of tensors along a new dimension.
 All tensors need to be of the same size.
 }
 
-\examples{
-
-
-}

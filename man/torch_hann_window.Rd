@@ -45,7 +45,3 @@ above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
 \verb{torch_hann_window(L + 1, periodic=False)[:-1])}.
 }
 
-\examples{
-
-
-}

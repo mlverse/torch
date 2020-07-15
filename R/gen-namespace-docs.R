@@ -4945,8 +4945,6 @@ NULL
 
 #' Nonzero
 #'
-#' @section nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensors :
-#'
 #' @note
 #'     [`torch_nonzero(..., as_tuple=False) <torch.nonzero>`] (default) returns a
 #'     2-D tensor where each row is the index for a nonzero value.
@@ -4957,7 +4955,8 @@ NULL
 #'     contains nonzero indices for a certain dimension.
 #' 
 #'     See below for more details on the two behaviors.
-#' 
+#'     
+#' @section nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensors :
 #' 
 #' **When** `as_tuple` **is ``False`` (default)**:
 #' 

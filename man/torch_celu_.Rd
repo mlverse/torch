@@ -13,7 +13,3 @@ Celu_
 In-place version of \code{\link{~celu}}.
 }
 
-\examples{
-
-
-}

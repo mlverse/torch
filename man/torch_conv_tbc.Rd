@@ -23,7 +23,3 @@ Applies a 1-dimensional sequence convolution over an input sequence.
 Input and output dimensions are (Time, Batch, Channels) - hence TBC.
 }
 
-\examples{
-
-
-}

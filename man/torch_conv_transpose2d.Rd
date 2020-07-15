@@ -37,5 +37,8 @@ See \code{~torch.nn.ConvTranspose2d} for details and output shape.
 
 \examples{
 
-
+# With square kernels and equal stride
+inputs = torch_randn(c(1, 4, 5, 5))
+weights = torch_randn(c(4, 8, 3, 3))
+nnf_conv_transpose2d(inputs, weights, padding=1)
 }

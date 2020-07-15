@@ -29,7 +29,3 @@ which produces a sequence of 'elementary reflectors'.
 See \verb{LAPACK documentation for geqrf}_ for further details.
 }
 
-\examples{
-
-
-}

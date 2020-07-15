@@ -25,7 +25,3 @@ for [`torch_symeig`]
 Computes the eigenvalues and eigenvectors of a real square matrix.
 }
 
-\examples{
-
-
-}

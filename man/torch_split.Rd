@@ -28,7 +28,3 @@ to `split_size_or_sections`.
 }
 }
 
-\examples{
-
-
-}

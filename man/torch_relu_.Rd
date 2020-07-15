@@ -13,7 +13,3 @@ Relu_
 In-place version of \code{\link{~relu}}.
 }
 
-\examples{
-
-
-}

@@ -85,7 +85,3 @@ imaginary part.
 }
 }
 
-\examples{
-
-
-}
