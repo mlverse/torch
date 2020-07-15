@@ -393,6 +393,10 @@ create_roxygen_full_params <- function(m) {
 
 create_roxygen_full_examples <- function(m) {
   examples <- map_chr(m, ~create_roxygen_example(.x$exam))
+
+  if (all(examples== "#' "))
+    return("#'")
+
   str_c("#' @examples\n#'\n", str_c(examples, collapse = "\n#'\n#'\n"))
 }
 
@@ -425,7 +429,7 @@ docum <- function(path, overwrite = "ask") {
                             path = str_c(path, "/R/gen-namespace-examples.R"),
                             overwrite = overwrite))
 
-  readr::write_file(out, str_c(path, "/R/gen-namespace-docs.R"))
+  #readr::write_file(out, str_c(path, "/R/gen-namespace-docs.R"))
   #readr::write_file(examples, str_c(path, "/R/gen-namespace-examples.R"))
 }
 
