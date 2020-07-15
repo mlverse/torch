@@ -24,7 +24,7 @@ nn_max_pool_nd <- nn_module(
 #' Applies a 1D max pooling over an input signal composed of several input
 #' planes.
 #' 
-#' In the simplest case, the output value of the layer with input size :math:`(N, C, L)`
+#' In the simplest case, the output value of the layer with input size \eqn{(N, C, L)}
 #' and output \eqn{(N, C, L_{out})} can be precisely described as:
 #' 
 #' \deqn{
@@ -42,7 +42,7 @@ nn_max_pool_nd <- nn_module(
 #' @param padding implicit zero padding to be added on both sides
 #' @param dilation a parameter that controls the stride of elements in the window
 #' @param return_indices if `TRUE`, will return the max indices along with the outputs.
-#'    Useful for [nn_max_unpool1d] later.
+#'    Useful for  `nn_max_unpool1d()` later.
 #' @param ceil_mode when `TRUE`, will use `ceil` instead of `floor` to compute the output shape
 #' 
 #' @param Shape:
@@ -105,7 +105,7 @@ nn_max_pool1d <- nn_module(
 #' @param padding implicit zero padding to be added on both sides
 #' @param dilation a parameter that controls the stride of elements in the window
 #' @param return_indices if `TRUE`, will return the max indices along with the outputs.
-#'   Useful for [nn_max_unpool2d] later.
+#'   Useful for `nn_max_unpool2d()` later.
 #' @param ceil_mode when `TRUE`, will use `ceil` instead of `floor` to compute the output shape
 #' 
 #' @section Shape:

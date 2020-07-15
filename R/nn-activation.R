@@ -960,7 +960,7 @@ nn_tanhshrink <- nn_module(
 #'    
 #' @return     
 #' a Tensor of the same dimension and shape as the input, with
-#' values in the range [0, 1]
+#' values in the range `[0, 1]`.
 #' 
 #' @examples
 #' m <- nn_softmin(dim = 1)
@@ -982,7 +982,7 @@ nn_softmin <- nn_module(
 #' 
 #' Applies the Softmax function to an n-dimensional input Tensor
 #' rescaling them so that the elements of the n-dimensional output Tensor
-#' lie in the range [0,1] and sum to 1.
+#' lie in the range `[0,1]` and sum to 1.
 #' Softmax is defined as:
 #'
 #' \deqn{
@@ -1000,7 +1000,7 @@ nn_softmin <- nn_module(
 #' 
 #' @return:
 #' a Tensor of the same dimension and shape as the input with
-#' values in the range [0, 1]
+#' values in the range `[0, 1]`
 #' 
 #' @param dim (int): A dimension along which Softmax will be computed (so every slice
 #'                                                                along dim will sum to 1).
@@ -1037,7 +1037,7 @@ nn_softmax <- nn_module(
 #' 
 #' @return 
 #' a Tensor of the same dimension and shape as the input with
-#' values in the range [0, 1]
+#' values in the range `[0, 1]`
 #' 
 #' @examples
 #' m <- nn_softmax2d()

@@ -16,7 +16,7 @@ nn_max_pool2d(...)
 \item{dilation}{a parameter that controls the stride of elements in the window}
 
 \item{return_indices}{if \code{TRUE}, will return the max indices along with the outputs.
-Useful for \link{nn_max_unpool2d} later.}
+Useful for \code{nn_max_unpool2d()} later.}
 
 \item{ceil_mode}{when \code{TRUE}, will use \code{ceil} instead of \code{floor} to compute the output shape}
 }

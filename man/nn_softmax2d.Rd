@@ -8,7 +8,7 @@ nn_softmax2d(...)
 }
 \value{
 a Tensor of the same dimension and shape as the input with
-values in the range \link{0, 1}
+values in the range \verb{[0, 1]}
 }
 \description{
 Applies SoftMax over features to each spatial location.

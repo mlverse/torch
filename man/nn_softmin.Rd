@@ -12,7 +12,7 @@ along dim will sum to 1).}
 }
 \value{
 a Tensor of the same dimension and shape as the input, with
-values in the range \link{0, 1}
+values in the range \verb{[0, 1]}.
 }
 \description{
 Applies the Softmin function to an n-dimensional input Tensor

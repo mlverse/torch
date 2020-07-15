@@ -96,7 +96,7 @@ nn_bce_loss <- nn_module(
 
 #' CrossEntropyLoss module
 #' 
-#' This criterion combines [nn_log_softmax] and [nn_nll_loss] in one single class.
+#' This criterion combines [nn_log_softmax()] and `nn_nll_loss()` in one single class.
 #' It is useful when training a classification problem with `C` classes.
 #' 
 #' If provided, the optional argument `weight` should be a 1D `Tensor`

@@ -257,14 +257,14 @@ nn_rnn_base <- nn_module(
 #'   for each element in the batch
 #'   
 #' @section Attributes:
-#' - weight_ih_l[k]: the learnable input-hidden weights of the k-th layer,
+#' - `weight_ih_l[k]`: the learnable input-hidden weights of the k-th layer,
 #'   of shape `(hidden_size, input_size)` for `k = 0`. Otherwise, the shape is
 #'   `(hidden_size, num_directions * hidden_size)`
-#' - weight_hh_l[k]: the learnable hidden-hidden weights of the k-th layer,
+#' - `weight_hh_l[k]`: the learnable hidden-hidden weights of the k-th layer,
 #'   of shape `(hidden_size, hidden_size)`
-#' - bias_ih_l[k]: the learnable input-hidden bias of the k-th layer,
+#' - `bias_ih_l[k]`: the learnable input-hidden bias of the k-th layer,
 #'   of shape `(hidden_size)`
-#' - bias_hh_l[k]: the learnable hidden-hidden bias of the k-th layer,
+#' - `bias_hh_l[k]`: the learnable hidden-hidden bias of the k-th layer,
 #'   of shape `(hidden_size)`
 #'   
 #' @section Note:

@@ -16,7 +16,7 @@ nn_max_pool1d(...)
 \item{dilation}{a parameter that controls the stride of elements in the window}
 
 \item{return_indices}{if \code{TRUE}, will return the max indices along with the outputs.
-Useful for \link{nn_max_unpool1d} later.}
+Useful for  \code{nn_max_unpool1d()} later.}
 
 \item{ceil_mode}{when \code{TRUE}, will use \code{ceil} instead of \code{floor} to compute the output shape}
 
@@ -35,7 +35,7 @@ Applies a 1D max pooling over an input signal composed of several input
 planes.
 }
 \details{
-In the simplest case, the output value of the layer with input size :math:\verb{(N, C, L)}
+In the simplest case, the output value of the layer with input size \eqn{(N, C, L)}
 and output \eqn{(N, C, L_{out})} can be precisely described as:
 
 \deqn{

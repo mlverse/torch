@@ -95,7 +95,7 @@ nn_utils_rnn_pack_padded_sequence <- function(input, lengths, batch_first=FALSE,
 #' 
 #' p <- nn_utils_rnn_pack_sequence(list(x, y, z))
 #' 
-#' @param sequences (list[Tensor]): A list of sequences of decreasing length.
+#' @param sequences `(list[Tensor])`: A list of sequences of decreasing length.
 #' @param enforce_sorted (bool, optional): if `TRUE`, checks that the input
 #'   contains sequences sorted by length in a decreasing order. If
 #'   `FALSE`, this condition is not checked. Default: `TRUE`.
@@ -117,7 +117,7 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 
 #' Pads a packed batch of variable length sequences.
 #' 
-#' It is an inverse operation to [pack_padded_sequence].
+#' It is an inverse operation to [nn_utils_rnn_pack_padded_sequence()].
 #' 
 #' The returned Tensor's data will be of size `T x B x *`, where `T` is the length
 #' of the longest sequence and `B` is the batch size. If `batch_first` is `TRUE`,
@@ -140,7 +140,7 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 #' @param batch_first (bool, optional): if ``True``, the output will be in ``B x T x *`
 #'    format.
 #' @param padding_value (float, optional): values for padded elements.
-#' @param total_length (int, optional): if not ``None``, the output will be padded to
+#' @param total_length (int, optional): if not `NULL`, the output will be padded to
 #'    have length `total_length`. This method will throw `ValueError`
 #'    if `total_length` is less than the max sequence length in
 #'    `sequence`.
@@ -149,7 +149,8 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 #' Tuple of Tensor containing the padded sequence, and a Tensor
 #' containing the list of lengths of each sequence in the batch.
 #' Batch elements will be re-ordered as they were ordered originally when
-#' the batch was passed to `pack_padded_sequence` or `pack_sequence`.
+#' the batch was passed to [nn_utils_rnn_pack_padded_sequence()] or 
+#' [nn_utils_rnn_pack_sequence()].
 #' 
 #' @export
 nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE, 

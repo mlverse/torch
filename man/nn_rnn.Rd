@@ -99,14 +99,14 @@ for each element in the batch
 \section{Attributes}{
 
 \itemize{
-\item weight_ih_l\link{k}: the learnable input-hidden weights of the k-th layer,
+\item \code{weight_ih_l[k]}: the learnable input-hidden weights of the k-th layer,
 of shape \verb{(hidden_size, input_size)} for \code{k = 0}. Otherwise, the shape is
 \verb{(hidden_size, num_directions * hidden_size)}
-\item weight_hh_l\link{k}: the learnable hidden-hidden weights of the k-th layer,
+\item \code{weight_hh_l[k]}: the learnable hidden-hidden weights of the k-th layer,
 of shape \verb{(hidden_size, hidden_size)}
-\item bias_ih_l\link{k}: the learnable input-hidden bias of the k-th layer,
+\item \code{bias_ih_l[k]}: the learnable input-hidden bias of the k-th layer,
 of shape \code{(hidden_size)}
-\item bias_hh_l\link{k}: the learnable hidden-hidden bias of the k-th layer,
+\item \code{bias_hh_l[k]}: the learnable hidden-hidden bias of the k-th layer,
 of shape \code{(hidden_size)}
 }
 }

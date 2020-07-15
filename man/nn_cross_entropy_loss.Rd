@@ -22,7 +22,7 @@ and \code{reduce} are in the process of being deprecated, and in the meantime,
 specifying either of those two args will override \code{reduction}. Default: \code{'mean'}}
 }
 \description{
-This criterion combines \link{nn_log_softmax} and \link{nn_nll_loss} in one single class.
+This criterion combines \code{\link[=nn_log_softmax]{nn_log_softmax()}} and \code{nn_nll_loss()} in one single class.
 It is useful when training a classification problem with \code{C} classes.
 }
 \details{

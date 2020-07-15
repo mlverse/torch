@@ -13,12 +13,12 @@ along dim will sum to 1).}
 \value{
 :
 a Tensor of the same dimension and shape as the input with
-values in the range \link{0, 1}
+values in the range \verb{[0, 1]}
 }
 \description{
 Applies the Softmax function to an n-dimensional input Tensor
 rescaling them so that the elements of the n-dimensional output Tensor
-lie in the range \link{0,1} and sum to 1.
+lie in the range \verb{[0,1]} and sum to 1.
 Softmax is defined as:
 }
 \details{
