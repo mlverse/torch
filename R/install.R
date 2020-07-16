@@ -155,7 +155,6 @@ lantern_install_libs <- function(version, type, install_path) {
 }
 
 #' @keywords internal
-#' @export
 install_type <- function(version) {
   if (nchar(Sys.getenv("CUDA")) > 0) return(Sys.getenv("CUDA"))
   if (install_os() != "linux") return("cpu")
