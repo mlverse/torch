@@ -4,7 +4,7 @@
 \alias{nn_tanh}
 \title{Tanh module}
 \usage{
-nn_tanh(...)
+nn_tanh()
 }
 \description{
 Applies the element-wise function:

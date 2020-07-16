@@ -4,7 +4,7 @@
 \alias{nn_glu}
 \title{GLU module}
 \usage{
-nn_glu(...)
+nn_glu(dim = -1)
 }
 \arguments{
 \item{dim}{(int): the dimension on which to split the input. Default: -1}

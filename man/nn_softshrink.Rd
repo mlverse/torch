@@ -4,7 +4,7 @@
 \alias{nn_softshrink}
 \title{Softshrink module}
 \usage{
-nn_softshrink(...)
+nn_softshrink(lambd = 0.5)
 }
 \arguments{
 \item{lambd}{the \eqn{\lambda} (must be no less than zero) value for the Softshrink formulation. Default: 0.5}

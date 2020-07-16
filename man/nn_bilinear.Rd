@@ -4,7 +4,7 @@
 \alias{nn_bilinear}
 \title{Bilinear module}
 \usage{
-nn_bilinear(...)
+nn_bilinear(in1_features, in2_features, out_features, bias = TRUE)
 }
 \arguments{
 \item{in1_features}{size of each first input sample}

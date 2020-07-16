@@ -4,7 +4,7 @@
 \alias{nn_celu}
 \title{CELU module}
 \usage{
-nn_celu(...)
+nn_celu(alpha = 1, inplace = FALSE)
 }
 \arguments{
 \item{alpha}{the \eqn{\alpha} value for the CELU formulation. Default: 1.0}

@@ -4,7 +4,7 @@
 \alias{nn_softmax}
 \title{Softmax module}
 \usage{
-nn_softmax(...)
+nn_softmax(dim)
 }
 \arguments{
 \item{dim}{(int): A dimension along which Softmax will be computed (so every slice

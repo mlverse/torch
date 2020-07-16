@@ -4,7 +4,7 @@
 \alias{nn_rrelu}
 \title{RReLU module}
 \usage{
-nn_rrelu(...)
+nn_rrelu(lower = 1/8, upper = 1/3, inplace = FALSE)
 }
 \arguments{
 \item{lower}{lower bound of the uniform distribution. Default: \eqn{\frac{1}{8}}}

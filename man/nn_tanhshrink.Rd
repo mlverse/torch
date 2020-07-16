@@ -4,7 +4,7 @@
 \alias{nn_tanhshrink}
 \title{Tanhshrink module}
 \usage{
-nn_tanhshrink(...)
+nn_tanhshrink()
 }
 \description{
 Applies the element-wise function:

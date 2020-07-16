@@ -4,7 +4,16 @@
 \alias{nn_embedding}
 \title{Embedding module}
 \usage{
-nn_embedding(...)
+nn_embedding(
+  num_embeddings,
+  embedding_dim,
+  padding_idx = NULL,
+  max_norm = NULL,
+  norm_type = 2,
+  scale_grad_by_freq = FALSE,
+  sparse = FALSE,
+  .weight = NULL
+)
 }
 \arguments{
 \item{num_embeddings}{(int): size of the dictionary of embeddings}

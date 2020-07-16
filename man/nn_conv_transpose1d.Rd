@@ -4,7 +4,18 @@
 \alias{nn_conv_transpose1d}
 \title{ConvTranspose1D}
 \usage{
-nn_conv_transpose1d(...)
+nn_conv_transpose1d(
+  in_channels,
+  out_channels,
+  kernel_size,
+  stride = 1,
+  padding = 0,
+  output_padding = 0,
+  groups = 1,
+  bias = TRUE,
+  dilation = 1,
+  padding_mode = "zeros"
+)
 }
 \arguments{
 \item{in_channels}{(int): Number of channels in the input image}

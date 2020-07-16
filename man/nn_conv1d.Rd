@@ -4,7 +4,17 @@
 \alias{nn_conv1d}
 \title{Conv1D module}
 \usage{
-nn_conv1d(...)
+nn_conv1d(
+  in_channels,
+  out_channels,
+  kernel_size,
+  stride = 1,
+  padding = 0,
+  dilation = 1,
+  groups = 1,
+  bias = TRUE,
+  padding_mode = "zeros"
+)
 }
 \arguments{
 \item{in_channels}{(int): Number of channels in the input image}
@@ -18,9 +28,6 @@ nn_conv1d(...)
 \item{padding}{(int or tuple, optional): Zero-padding added to both sides of
 the input. Default: 0}
 
-\item{padding_mode}{(string, optional): \code{'zeros'}, \code{'reflect'},
-\code{'replicate'} or \code{'circular'}. Default: \code{'zeros'}}
-
 \item{dilation}{(int or tuple, optional): Spacing between kernel
 elements. Default: 1}
 
@@ -29,6 +36,9 @@ channels to output channels. Default: 1}
 
 \item{bias}{(bool, optional): If \code{TRUE}, adds a learnable bias to the
 output. Default: \code{TRUE}}
+
+\item{padding_mode}{(string, optional): \code{'zeros'}, \code{'reflect'},
+\code{'replicate'} or \code{'circular'}. Default: \code{'zeros'}}
 }
 \description{
 Applies a 1D convolution over an input signal composed of several input

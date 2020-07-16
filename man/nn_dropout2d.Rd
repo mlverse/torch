@@ -4,7 +4,7 @@
 \alias{nn_dropout2d}
 \title{Dropout2D module}
 \usage{
-nn_dropout2d(...)
+nn_dropout2d(p = 0.5, inplace = FALSE)
 }
 \arguments{
 \item{p}{(float, optional): probability of an element to be zero-ed.}

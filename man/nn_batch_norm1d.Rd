@@ -4,7 +4,13 @@
 \alias{nn_batch_norm1d}
 \title{BatchNorm1D module}
 \usage{
-nn_batch_norm1d(...)
+nn_batch_norm1d(
+  num_features,
+  eps = 1e-05,
+  momentum = 0.1,
+  affine = TRUE,
+  track_running_stats = TRUE
+)
 }
 \arguments{
 \item{num_features}{\eqn{C} from an expected input of size

@@ -4,7 +4,7 @@
 \alias{nn_selu}
 \title{SELU module}
 \usage{
-nn_selu(...)
+nn_selu(inplace = FALSE)
 }
 \arguments{
 \item{inplace}{(bool, optional): can optionally do the operation in-place. Default: \code{FALSE}}

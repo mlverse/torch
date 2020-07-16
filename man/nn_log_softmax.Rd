@@ -4,7 +4,7 @@
 \alias{nn_log_softmax}
 \title{LogSoftmax module}
 \usage{
-nn_log_softmax(...)
+nn_log_softmax(dim)
 }
 \arguments{
 \item{dim}{(int): A dimension along which LogSoftmax will be computed.}

@@ -4,7 +4,13 @@
 \alias{nn_adaptive_log_softmax_with_loss}
 \title{AdaptiveLogSoftmaxWithLoss module}
 \usage{
-nn_adaptive_log_softmax_with_loss(...)
+nn_adaptive_log_softmax_with_loss(
+  in_features,
+  n_classes,
+  cutoffs,
+  div_value = 4,
+  head_bias = FALSE
+)
 }
 \arguments{
 \item{in_features}{(int): Number of features in the input tensor

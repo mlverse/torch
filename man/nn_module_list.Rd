@@ -4,7 +4,7 @@
 \alias{nn_module_list}
 \title{Holds submodules in a list.}
 \usage{
-nn_module_list(...)
+nn_module_list(modules = list())
 }
 \arguments{
 \item{modules}{a list of modules to add}

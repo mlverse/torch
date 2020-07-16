@@ -4,7 +4,7 @@
 \alias{nn_hardshrink}
 \title{Hardshwink module}
 \usage{
-nn_hardshrink(...)
+nn_hardshrink(lambd = 0.5)
 }
 \arguments{
 \item{lambd}{the \eqn{\lambda} value for the Hardshrink formulation. Default: 0.5}

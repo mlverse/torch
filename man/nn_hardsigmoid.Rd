@@ -4,7 +4,7 @@
 \alias{nn_hardsigmoid}
 \title{Hardsigmoid module}
 \usage{
-nn_hardsigmoid(...)
+nn_hardsigmoid()
 }
 \description{
 Applies the element-wise function:

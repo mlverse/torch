@@ -4,7 +4,7 @@
 \alias{nn_prelu}
 \title{PReLU module}
 \usage{
-nn_prelu(...)
+nn_prelu(num_parameters = 1, init = 0.25)
 }
 \arguments{
 \item{num_parameters}{(int): number of \eqn{a} to learn.

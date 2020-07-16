@@ -4,7 +4,7 @@
 \alias{nn_softplus}
 \title{Softplus module}
 \usage{
-nn_softplus(...)
+nn_softplus(beta = 1, threshold = 20)
 }
 \arguments{
 \item{beta}{the \eqn{\beta} value for the Softplus formulation. Default: 1}

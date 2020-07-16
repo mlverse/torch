@@ -4,7 +4,7 @@
 \alias{nn_hardswish}
 \title{Hardswish module}
 \usage{
-nn_hardswish(...)
+nn_hardswish()
 }
 \description{
 Applies the hardswish function, element-wise, as described in the paper:

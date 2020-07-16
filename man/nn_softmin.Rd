@@ -4,7 +4,7 @@
 \alias{nn_softmin}
 \title{Softmin}
 \usage{
-nn_softmin(...)
+nn_softmin(dim)
 }
 \arguments{
 \item{dim}{(int): A dimension along which Softmin will be computed (so every slice

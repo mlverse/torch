@@ -4,7 +4,16 @@
 \alias{nn_multihead_attention}
 \title{MultiHead attention}
 \usage{
-nn_multihead_attention(...)
+nn_multihead_attention(
+  embed_dim,
+  num_heads,
+  dropout = 0,
+  bias = TRUE,
+  add_bias_kv = FALSE,
+  add_zero_attn = FALSE,
+  kdim = NULL,
+  vdim = NULL
+)
 }
 \arguments{
 \item{embed_dim}{total dimension of the model.}

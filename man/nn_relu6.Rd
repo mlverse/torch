@@ -4,7 +4,7 @@
 \alias{nn_relu6}
 \title{ReLu6 module}
 \usage{
-nn_relu6(...)
+nn_relu6(inplace = FALSE)
 }
 \arguments{
 \item{inplace}{can optionally do the operation in-place. Default: \code{FALSE}}

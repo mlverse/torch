@@ -4,7 +4,7 @@
 \alias{nn_gelu}
 \title{GELU module}
 \usage{
-nn_gelu(...)
+nn_gelu()
 }
 \description{
 Applies the Gaussian Error Linear Units function:

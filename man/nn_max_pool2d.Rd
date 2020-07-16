@@ -4,7 +4,14 @@
 \alias{nn_max_pool2d}
 \title{MaxPool2D module}
 \usage{
-nn_max_pool2d(...)
+nn_max_pool2d(
+  kernel_size,
+  stride = NULL,
+  padding = 0,
+  dilation = 1,
+  return_indices = FALSE,
+  ceil_mode = FALSE
+)
 }
 \arguments{
 \item{kernel_size}{the size of the window to take a max over}

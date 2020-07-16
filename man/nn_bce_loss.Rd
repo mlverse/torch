@@ -4,7 +4,7 @@
 \alias{nn_bce_loss}
 \title{Binary cross entropy loss}
 \usage{
-nn_bce_loss(...)
+nn_bce_loss(weight = NULL, reduction = "mean")
 }
 \arguments{
 \item{weight}{(Tensor, optional): a manual rescaling weight given to the loss

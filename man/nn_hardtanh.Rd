@@ -4,7 +4,7 @@
 \alias{nn_hardtanh}
 \title{Hardtanh module}
 \usage{
-nn_hardtanh(...)
+nn_hardtanh(min_val = -1, max_val = 1, inplace = FALSE)
 }
 \arguments{
 \item{min_val}{minimum value of the linear region range. Default: -1}

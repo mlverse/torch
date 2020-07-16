@@ -4,7 +4,7 @@
 \alias{nn_leaky_relu}
 \title{LeakyReLU module}
 \usage{
-nn_leaky_relu(...)
+nn_leaky_relu(negative_slope = 0.01, inplace = FALSE)
 }
 \arguments{
 \item{negative_slope}{Controls the angle of the negative slope. Default: 1e-2}

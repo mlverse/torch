@@ -4,7 +4,7 @@
 \alias{nn_cross_entropy_loss}
 \title{CrossEntropyLoss module}
 \usage{
-nn_cross_entropy_loss(...)
+nn_cross_entropy_loss(weight = NULL, ignore_index = -100, reduction = "mean")
 }
 \arguments{
 \item{weight}{(Tensor, optional): a manual rescaling weight given to each class.

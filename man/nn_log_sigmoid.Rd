@@ -4,7 +4,7 @@
 \alias{nn_log_sigmoid}
 \title{LogSigmoid module}
 \usage{
-nn_log_sigmoid(...)
+nn_log_sigmoid()
 }
 \description{
 Applies the element-wise function:

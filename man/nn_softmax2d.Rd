@@ -4,7 +4,7 @@
 \alias{nn_softmax2d}
 \title{Softmax2d module}
 \usage{
-nn_softmax2d(...)
+nn_softmax2d()
 }
 \value{
 a Tensor of the same dimension and shape as the input with

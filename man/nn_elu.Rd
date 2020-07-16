@@ -4,7 +4,7 @@
 \alias{nn_elu}
 \title{ELU module}
 \usage{
-nn_elu(...)
+nn_elu(alpha = 1, inplace = FALSE)
 }
 \arguments{
 \item{alpha}{the \eqn{\alpha} value for the ELU formulation. Default: 1.0}

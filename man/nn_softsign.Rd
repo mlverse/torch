@@ -4,7 +4,7 @@
 \alias{nn_softsign}
 \title{Softsign module}
 \usage{
-nn_softsign(...)
+nn_softsign()
 }
 \description{
 Applies the element-wise function:

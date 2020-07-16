@@ -4,7 +4,7 @@
 \alias{nn_linear}
 \title{Linear module}
 \usage{
-nn_linear(...)
+nn_linear(in_features, out_features, bias = TRUE)
 }
 \arguments{
 \item{in_features}{size of each input sample}
