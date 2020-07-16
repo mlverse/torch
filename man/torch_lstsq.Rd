@@ -33,7 +33,7 @@ If \eqn{m \geq n}, \code{\link[=torch_lstsq]{torch_lstsq()}} solves the least-sq
    \min_X & \|AX-B\|_2.
    \end{array}
 }
-If \eqn{m < n}, \code{\link{lstsq}} solves the least-norm problem:
+If \eqn{m < n}, \code{\link[=torch_lstsq]{torch_lstsq()}} solves the least-norm problem:
 
 \deqn{
 

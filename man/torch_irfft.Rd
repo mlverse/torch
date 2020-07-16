@@ -11,7 +11,7 @@
 
 \item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
 
-\item{onesided}{(bool, optional) controls whether \code{input} was halfed to avoid        redundancy, e.g., by \code{\link{rfft}}. Default: \code{True}}
+\item{onesided}{(bool, optional) controls whether \code{input} was halfed to avoid        redundancy, e.g., by \code{\link[=torch_rfft]{torch_rfft()}}. Default: \code{True}}
 
 \item{signal_sizes}{(list or \code{torch.Size}, optional) the size of the original        signal (without batch dimension). Default: \code{None}}
 }
@@ -50,7 +50,7 @@ monitor and control the cache.
 Complex-to-real Inverse Discrete Fourier Transform
 
 This method computes the complex-to-real inverse discrete Fourier transform.
-It is mathematically equivalent with \code{\link{ifft}} with differences only in
+It is mathematically equivalent with \code{\link{torch_ifft}} with differences only in
 formats of the input and output.
 
 The argument specifications are almost identical with \code{\link{torch_ifft}}.
