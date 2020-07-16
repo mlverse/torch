@@ -128,9 +128,18 @@ torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALS
   Tensor$new(data, dtype, device, requires_grad, pin_memory)
 }
 
+#' Converts to array
+#' 
+#' @param x object to be converted into an array
+#' 
 #' @export
 as_array <- function(x) {
   UseMethod("as_array", x)
+}
+
+#' @export
+as.array.torch_tensor <- function(x, ...) {
+  as_array(x)
 }
 
 #' @export
