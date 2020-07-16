@@ -59,7 +59,7 @@
 #' 
 #' 
 #' @param in_features (int): Number of features in the input tensor
-#'   n_classes (int): Number of classes in the dataset
+#' @param n_classes (int): Number of classes in the dataset
 #' @param cutoffs (Sequence): Cutoffs used to assign targets to their buckets
 #' @param div_value (float, optional): value used as an exponent to compute sizes
 #'   of the clusters. Default: 4.0

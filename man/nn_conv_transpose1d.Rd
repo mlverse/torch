@@ -37,6 +37,9 @@ of the output shape. Default: 0}
 \item{bias}{(bool, optional): If \code{True}, adds a learnable bias to the output. Default: \code{TRUE}}
 
 \item{dilation}{(int or tuple, optional): Spacing between kernel elements. Default: 1}
+
+\item{padding_mode}{(string, optional): \code{'zeros'}, \code{'reflect'},
+\code{'replicate'} or \code{'circular'}. Default: \code{'zeros'}}
 }
 \description{
 Applies a 1D transposed convolution operator over an input image

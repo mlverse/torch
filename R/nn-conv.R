@@ -257,14 +257,14 @@ nn_conv1d <- nn_module(
 #' @param out_channels (int): Number of channels produced by the convolution
 #' @param kernel_size (int or tuple): Size of the convolving kernel
 #' @param stride (int or tuple, optional): Stride of the convolution. Default: 1
-#'   padding (int or tuple, optional): Zero-padding added to both sides of
+#' @param padding (int or tuple, optional): Zero-padding added to both sides of
 #'   the input. Default: 0
 #' @param padding_mode (string, optional): `'zeros'`, `'reflect'`,
 #'   `'replicate'` or `'circular'`. Default: `'zeros'`
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
 #' @param groups (int, optional): Number of blocked connections from input
 #'   channels to output channels. Default: 1
-#' @param sbias (bool, optional): If `TRUE`, adds a learnable bias to the
+#' @param bias (bool, optional): If `TRUE`, adds a learnable bias to the
 #'   output. Default: `TRUE`
 #'   
 #' @section Shape:
@@ -597,6 +597,7 @@ nn_conv_transpose_nd <- nn_module(
 #' @param groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
 #' @param bias (bool, optional): If `True`, adds a learnable bias to the output. Default: `TRUE`
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#' @inheritParams nn_conv1d
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, C_{in}, L_{in})}
@@ -726,6 +727,7 @@ nn_conv_transpose1d <- nn_module(
 #' @param groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
 #' @param bias (bool, optional): If ``True``, adds a learnable bias to the output. Default: ``True``
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#' @inheritParams nn_conv2d
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, C_{in}, H_{in}, W_{in})}
@@ -882,6 +884,8 @@ nn_conv_transpose2d <- nn_module(
 #' @param groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
 #' @param bias (bool, optional): If ``True``, adds a learnable bias to the output. Default: ``True``
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#' @inheritParams nn_conv3d
+#' @inheritParams nn_conv_transpose2d
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, C_{in}, D_{in}, H_{in}, W_{in})}

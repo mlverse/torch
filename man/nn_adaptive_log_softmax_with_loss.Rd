@@ -13,8 +13,9 @@ nn_adaptive_log_softmax_with_loss(
 )
 }
 \arguments{
-\item{in_features}{(int): Number of features in the input tensor
-n_classes (int): Number of classes in the dataset}
+\item{in_features}{(int): Number of features in the input tensor}
+
+\item{n_classes}{(int): Number of classes in the dataset}
 
 \item{cutoffs}{(Sequence): Cutoffs used to assign targets to their buckets}
 

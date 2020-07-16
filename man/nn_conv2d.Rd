@@ -23,8 +23,9 @@ nn_conv2d(
 
 \item{kernel_size}{(int or tuple): Size of the convolving kernel}
 
-\item{stride}{(int or tuple, optional): Stride of the convolution. Default: 1
-padding (int or tuple, optional): Zero-padding added to both sides of
+\item{stride}{(int or tuple, optional): Stride of the convolution. Default: 1}
+
+\item{padding}{(int or tuple, optional): Zero-padding added to both sides of
 the input. Default: 0}
 
 \item{dilation}{(int or tuple, optional): Spacing between kernel elements. Default: 1}
@@ -32,11 +33,11 @@ the input. Default: 0}
 \item{groups}{(int, optional): Number of blocked connections from input
 channels to output channels. Default: 1}
 
+\item{bias}{(bool, optional): If \code{TRUE}, adds a learnable bias to the
+output. Default: \code{TRUE}}
+
 \item{padding_mode}{(string, optional): \code{'zeros'}, \code{'reflect'},
 \code{'replicate'} or \code{'circular'}. Default: \code{'zeros'}}
-
-\item{sbias}{(bool, optional): If \code{TRUE}, adds a learnable bias to the
-output. Default: \code{TRUE}}
 }
 \description{
 Applies a 2D convolution over an input signal composed of several input
