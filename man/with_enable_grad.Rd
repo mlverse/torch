@@ -11,7 +11,7 @@ with_enable_grad(code)
 }
 \description{
 Context-manager that enables gradient calculation.
-Enables gradient calculation, if it has been disabled via \link{with_no_grad} or \link{set_grad_enabled}.
+Enables gradient calculation, if it has been disabled via \link{with_no_grad}.
 }
 \details{
 This context manager is thread local; it will not affect computation in

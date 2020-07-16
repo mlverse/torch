@@ -326,9 +326,9 @@ NULL
 #' @param end (Number) the ending value for the set of points
 #' @param step (Number) the gap between each pair of adjacent points. Default: ``1``.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]). If `dtype` is not given, infer the data type from the other input        arguments. If any of `start`, `end`, or `stop` are floating-point, the        `dtype` is inferred to be the default dtype, see        `~torch.get_default_dtype`. Otherwise, the `dtype` is inferred to        be `torch.int64`.
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`). If `dtype` is not given, infer the data type from the other input        arguments. If any of `start`, `end`, or `stop` are floating-point, the        `dtype` is inferred to be the default dtype, see        `~torch.get_default_dtype`. Otherwise, the `dtype` is inferred to        be `torch.int64`.
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_arange
@@ -528,9 +528,9 @@ NULL
 #'
 #' @param window_length (int) the size of returned window
 #' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]). Only floating point types are supported.
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`). Only floating point types are supported.
 #' @param layout (`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch_strided`` (dense layout) is supported.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_bartlett_window
@@ -715,9 +715,9 @@ NULL
 #'
 #' @param window_length (int) the size of returned window
 #' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]). Only floating point types are supported.
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`). Only floating point types are supported.
 #' @param layout (`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch_strided`` (dense layout) is supported.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_blackman_window
@@ -780,7 +780,7 @@ NULL
 #' All tensors must either have the same shape (except in the concatenating
 #' dimension) or be empty.
 #' 
-#' [`torch_cat`] can be seen as an inverse operation for [`torch.split`]
+#' [`torch_cat`] can be seen as an inverse operation for [torch_split()]
 #' and [`torch_chunk`].
 #' 
 #' [`torch_cat`] can be best understood via examples.
@@ -1426,9 +1426,9 @@ NULL
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #' @param pin_memory (bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: ``False``.
 #' @param memory_format (`torch.memory_format`, optional) the desired memory format of        returned Tensor. Default: ``torch_contiguous_format``.
@@ -1479,9 +1479,9 @@ NULL
 #'
 #' @param size (tuple of ints) the shape of the output tensor
 #' @param stride (tuple of ints) the strides of the output tensor
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #' @param pin_memory (bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: ``False``.
 #'
@@ -1584,9 +1584,9 @@ NULL
 #' @param n (int) the number of rows
 #' @param m (int, optional) the number of columns with default being `n`
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_eye
@@ -1690,9 +1690,9 @@ NULL
 #' @param size (int...) a list, tuple, or `torch_Size` of integers defining the        shape of the output tensor.
 #' @param fill_value NA the number to fill the output tensor with.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_full
@@ -1753,9 +1753,9 @@ NULL
 #'
 #' @param window_length (int) the size of returned window
 #' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]). Only floating point types are supported.
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`). Only floating point types are supported.
 #' @param layout (`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch_strided`` (dense layout) is supported.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_hann_window
@@ -1795,9 +1795,9 @@ NULL
 #' @param periodic (bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.
 #' @param alpha (float, optional) The coefficient \eqn{\alpha} in the equation above
 #' @param beta (float, optional) The coefficient \eqn{\beta} in the equation above
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]). Only floating point types are supported.
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`). Only floating point types are supported.
 #' @param layout (`torch.layout`, optional) the desired layout of returned window tensor. Only          ``torch_strided`` (dense layout) is supported.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_hamming_window
@@ -1855,7 +1855,7 @@ NULL
 #' Returns the real and the imaginary parts together as one tensor of the same
 #' shape of `input`.
 #' 
-#' The inverse of this function is [`~torch.ifft`].
+#' The inverse of this function is [`torch_ifft`].
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -1865,7 +1865,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
+#'     `torch_backends.mkl.is_available` to check if MKL is installed.
 #'
 #'
 #' @param input (Tensor) the input tensor of at least `signal_ndim` ``+ 1``        dimensions
@@ -1896,16 +1896,16 @@ NULL
 #' where \eqn{d} = `signal_ndim` is number of dimensions for the
 #' signal, and \eqn{N_i} is the size of signal dimension \eqn{i}.
 #' 
-#' The argument specifications are almost identical with [`~torch.fft`].
+#' The argument specifications are almost identical with [`torch_fft`].
 #' However, if `normalized` is set to ``True``, this instead returns the
 #' results multiplied by \eqn{\sqrt{\prod_{i=1}^d N_i}}, to become a unitary
-#' operator. Therefore, to invert a [`~torch.fft`], the `normalized`
-#' argument should be set identically for [`~torch.fft`].
+#' operator. Therefore, to invert a [`torch_fft`], the `normalized`
+#' argument should be set identically for [`torch_fft`].
 #' 
 #' Returns the real and the imaginary parts together as one tensor of the same
 #' shape of `input`.
 #' 
-#' The inverse of this function is [`~torch.fft`].
+#' The inverse of this function is [`torch_fft`].
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -1915,7 +1915,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
+#'     `torch_backends.mkl.is_available` to check if MKL is installed.
 #'
 #'
 #' @param input (Tensor) the input tensor of at least `signal_ndim` ``+ 1``        dimensions
@@ -1935,7 +1935,7 @@ NULL
 #' Real-to-complex Discrete Fourier Transform
 #' 
 #' This method computes the real-to-complex discrete Fourier transform. It is
-#' mathematically equivalent with [`~torch.fft`] with differences only in
+#' mathematically equivalent with [`torch_fft`] with differences only in
 #' formats of the input and output.
 #' 
 #' This method supports 1D, 2D and 3D real-to-complex transforms, indicated
@@ -1958,7 +1958,7 @@ NULL
 #' of `input`, but instead the last dimension will be halfed as of size
 #' \eqn{\lfloor \frac{N_d}{2} \rfloor + 1}.
 #' 
-#' The inverse of this function is [`~torch.irfft`].
+#' The inverse of this function is [`torch_irfft`].
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -1968,7 +1968,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
+#'     `torch_backends.mkl.is_available` to check if MKL is installed.
 #'
 #'
 #' @param input (Tensor) the input tensor of at least `signal_ndim` dimensions
@@ -1992,8 +1992,8 @@ NULL
 #' It is mathematically equivalent with [`ifft`] with differences only in
 #' formats of the input and output.
 #' 
-#' The argument specifications are almost identical with [`~torch.ifft`].
-#' Similar to [`~torch.ifft`], if `normalized` is set to ``True``,
+#' The argument specifications are almost identical with [`torch_ifft`].
+#' Similar to [`torch_ifft`], if `normalized` is set to ``True``,
 #' this normalizes the result by multiplying it with
 #' \eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is unitary, where
 #' \eqn{N_i} is the size of signal dimension \eqn{i}.
@@ -2009,7 +2009,7 @@ NULL
 #'     mode) to recover it with correct shape.
 #' 
 #'     Therefore, to invert an [`~torch.rfft`], the `normalized` and
-#'     `onesided` arguments should be set identically for [`~torch.irfft`],
+#'     `onesided` arguments should be set identically for [`torch_irfft`],
 #'     and preferably a `signal_sizes` is given to avoid size mismatch. See the
 #'     example below for a case of size mismatch.
 #' 
@@ -2021,9 +2021,9 @@ NULL
 #'     Generally speaking, input to this function should contain values
 #'     following conjugate symmetry. Note that even if `onesided` is
 #'     ``True``, often symmetry on some part is still needed. When this
-#'     requirement is not satisfied, the behavior of [`~torch.irfft`] is
-#'     undefined. Since [`torch_autograd.gradcheck`] estimates numerical
-#'     Jacobian with point perturbations, [`~torch.irfft`] will almost
+#'     requirement is not satisfied, the behavior of [`torch_irfft`] is
+#'     undefined. Since `torch_autograd.gradcheck` estimates numerical
+#'     Jacobian with point perturbations, [`torch_irfft`] will almost
 #'     certainly fail the check.
 #' 
 #' @note
@@ -2034,7 +2034,7 @@ NULL
 #' 
 #' @section Warning:
 #'     For CPU tensors, this method is currently only available with MKL. Use
-#'     [`torch_backends.mkl.is_available`] to check if MKL is installed.
+#'     `torch_backends.mkl.is_available` to check if MKL is installed.
 #'
 #'
 #' @param input (Tensor) the input tensor of at least `signal_ndim` ``+ 1``        dimensions
@@ -2162,9 +2162,9 @@ NULL
 #' @param end (float) the ending value for the set of points
 #' @param steps (int) number of points to sample between `start`        and `end`. Default: ``100``.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_linspace
@@ -2299,9 +2299,9 @@ NULL
 #' @param steps (int) number of points to sample between `start`        and `end`. Default: ``100``.
 #' @param base (float) base of the logarithm function. Default: ``10.0``.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_logspace
@@ -2763,9 +2763,9 @@ NULL
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_ones
@@ -2927,9 +2927,9 @@ NULL
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_rand
@@ -2982,9 +2982,9 @@ NULL
 #' @param size (tuple) a tuple defining the shape of the output tensor.
 #' @param generator (`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_randint
@@ -3039,9 +3039,9 @@ NULL
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_randn
@@ -3084,7 +3084,7 @@ NULL
 #' @param out (Tensor, optional) the output tensor.
 #' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: ``torch_int64``.
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_randperm
@@ -3112,9 +3112,9 @@ NULL
 #' @param end (float) the ending value for the set of points
 #' @param step (float) the gap between each pair of adjacent points. Default: ``1``.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]). If `dtype` is not given, infer the data type from the other input        arguments. If any of `start`, `end`, or `stop` are floating-point, the        `dtype` is inferred to be the default dtype, see        `~torch.get_default_dtype`. Otherwise, the `dtype` is inferred to        be `torch.int64`.
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`). If `dtype` is not given, infer the data type from the other input        arguments. If any of `start`, `end`, or `stop` are floating-point, the        `dtype` is inferred to be the default dtype, see        `~torch.get_default_dtype`. Otherwise, the `dtype` is inferred to        be `torch.int64`.
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_range
@@ -3302,7 +3302,7 @@ NULL
 #'
 #' @section celu_(input, alpha=1.) -> Tensor :
 #'
-#' In-place version of [`~celu`].
+#' In-place version of [torch_celu()].
 #'
 #'
 #'
@@ -4115,9 +4115,9 @@ NULL
 #'
 #' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' @param out (Tensor, optional) the output tensor.
-#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see [`torch_set_default_tensor_type`]).
+#' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: ``torch_strided``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_zeros
@@ -4290,7 +4290,7 @@ NULL
 #' @param values (array_like) Initial values for the tensor. Can be a list, tuple,        NumPy ``ndarray``, scalar, and other types.
 #' @param size (list, tuple, or `torch.Size`, optional) Size of the sparse tensor. If not        provided the size will be inferred as the minimum size big enough to hold all non-zero        elements.
 #' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if None, infers data type from `values`.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: ``False``.
 #'
 #' @name torch_sparse_coo_tensor
@@ -4691,7 +4691,7 @@ NULL
 #' @param col (``int``) number of columns in the 2-D matrix.
 #' @param offset (``int``) diagonal offset from the main diagonal.        Default: if not provided, 0.
 #' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, ``torch_long``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param layout (`torch.layout`, optional) currently only support ``torch_strided``.
 #'
 #' @name torch_tril_indices
@@ -4729,7 +4729,7 @@ NULL
 #' @param col (``int``) number of columns in the 2-D matrix.
 #' @param offset (``int``) diagonal offset from the main diagonal.        Default: if not provided, 0.
 #' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if ``None``, ``torch_long``.
-#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see [`torch_set_default_tensor_type`]). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
+#' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if ``None``, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param layout (`torch.layout`, optional) currently only support ``torch_strided``.
 #'
 #' @name torch_triu_indices
@@ -5063,12 +5063,12 @@ NULL
 #' @section Warning:
 #'     Integer division with addcdiv is deprecated, and in a future release
 #'     addcdiv will perform a true division of `tensor1` and `tensor2`.
-#'     The current addcdiv behavior can be replicated using [`floor_divide`]
+#'     The current addcdiv behavior can be replicated using [torch_floor_divide()]
 #'     for integral inputs
 #'     (`input` + `value` * `tensor1` // `tensor2`)
-#'     and [`div`] for float inputs
+#'     and [torch_div()] for float inputs
 #'     (`input` + `value` * `tensor1` / `tensor2`).
-#'     The new addcdiv behavior can be implemented with [`true_divide`]
+#'     The new addcdiv behavior can be implemented with [torch_true_divide()]
 #'     (`input` + `value` * torch.true_divide(`tensor1`,
 #'     `tensor2`).
 #' 

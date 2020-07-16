@@ -29,7 +29,7 @@ monitor and control the cache.
 Real-to-complex Discrete Fourier Transform
 
 This method computes the real-to-complex discrete Fourier transform. It is
-mathematically equivalent with \code{\link{~torch.fft}} with differences only in
+mathematically equivalent with \code{\link{torch_fft}} with differences only in
 formats of the input and output.
 
 This method supports 1D, 2D and 3D real-to-complex transforms, indicated
@@ -52,13 +52,13 @@ not be full complex result of shape \eqn{(*, 2)}, where \eqn{*} is the shape
 of \code{input}, but instead the last dimension will be halfed as of size
 \eqn{\lfloor \frac{N_d}{2} \rfloor + 1}.
 
-The inverse of this function is \code{\link{~torch.irfft}}.
+The inverse of this function is \code{\link{torch_irfft}}.
 }
 
 \section{Warning}{
 
 For CPU tensors, this method is currently only available with MKL. Use
-\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
+\code{torch_backends.mkl.is_available} to check if MKL is installed.
 }
 
 \examples{

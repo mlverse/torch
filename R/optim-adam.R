@@ -119,7 +119,7 @@ optim_Adam <- R6::R6Class(
 #' @param params (iterable): iterable of parameters to optimize or dicts defining
 #'   parameter groups
 #' @param lr (float, optional): learning rate (default: 1e-3)
-#' @param betas (Tuple[float, float], optional): coefficients used for computing
+#' @param betas (`Tuple[float, float]`, optional): coefficients used for computing
 #'   running averages of gradient and its square (default: (0.9, 0.999))
 #' @param eps (float, optional): term added to the denominator to improve
 #'   numerical stability (default: 1e-8)

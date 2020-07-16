@@ -48,13 +48,13 @@ arbitrary number of leading batch dimensions. If \code{normalized} is set to
 Returns the real and the imaginary parts together as one tensor of the same
 shape of \code{input}.
 
-The inverse of this function is \code{\link{~torch.ifft}}.
+The inverse of this function is \code{\link{torch_ifft}}.
 }
 
 \section{Warning}{
 
 For CPU tensors, this method is currently only available with MKL. Use
-\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
+\code{torch_backends.mkl.is_available} to check if MKL is installed.
 }
 
 \examples{

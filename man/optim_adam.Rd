@@ -19,7 +19,7 @@ parameter groups}
 
 \item{lr}{(float, optional): learning rate (default: 1e-3)}
 
-\item{betas}{(Tuple\link{float, float}, optional): coefficients used for computing
+\item{betas}{(\code{Tuple[float, float]}, optional): coefficients used for computing
 running averages of gradient and its square (default: (0.9, 0.999))}
 
 \item{eps}{(float, optional): term added to the denominator to improve

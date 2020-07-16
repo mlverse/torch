@@ -13,7 +13,7 @@
 
 \item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if None, infers data type from \code{values}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see \code{\link{torch_set_default_tensor_type}}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }

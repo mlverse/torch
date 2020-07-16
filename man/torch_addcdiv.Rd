@@ -29,12 +29,12 @@ multiply the result by the scalar \code{value} and add it to \code{input}.
 
 Integer division with addcdiv is deprecated, and in a future release
 addcdiv will perform a true division of \code{tensor1} and \code{tensor2}.
-The current addcdiv behavior can be replicated using \code{\link{floor_divide}}
+The current addcdiv behavior can be replicated using \code{\link[=torch_floor_divide]{torch_floor_divide()}}
 for integral inputs
 (\code{input} + \code{value} * \code{tensor1} // \code{tensor2})
-and \code{\link{div}} for float inputs
+and \code{\link[=torch_div]{torch_div()}} for float inputs
 (\code{input} + \code{value} * \code{tensor1} / \code{tensor2}).
-The new addcdiv behavior can be implemented with \code{\link{true_divide}}
+The new addcdiv behavior can be implemented with \code{\link[=torch_true_divide]{torch_true_divide()}}
 (\code{input} + \code{value} * torch.true_divide(\code{tensor1},
 \code{tensor2}).
 

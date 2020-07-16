@@ -38,22 +38,22 @@ expression:
 where \eqn{d} = \code{signal_ndim} is number of dimensions for the
 signal, and \eqn{N_i} is the size of signal dimension \eqn{i}.
 
-The argument specifications are almost identical with \code{\link{~torch.fft}}.
+The argument specifications are almost identical with \code{\link{torch_fft}}.
 However, if \code{normalized} is set to \code{True}, this instead returns the
 results multiplied by \eqn{\sqrt{\prod_{i=1}^d N_i}}, to become a unitary
-operator. Therefore, to invert a \code{\link{~torch.fft}}, the \code{normalized}
-argument should be set identically for \code{\link{~torch.fft}}.
+operator. Therefore, to invert a \code{\link{torch_fft}}, the \code{normalized}
+argument should be set identically for \code{\link{torch_fft}}.
 
 Returns the real and the imaginary parts together as one tensor of the same
 shape of \code{input}.
 
-The inverse of this function is \code{\link{~torch.fft}}.
+The inverse of this function is \code{\link{torch_fft}}.
 }
 
 \section{Warning}{
 
 For CPU tensors, this method is currently only available with MKL. Use
-\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
+\code{torch_backends.mkl.is_available} to check if MKL is installed.
 }
 
 \examples{

@@ -21,7 +21,7 @@ Concatenates the given sequence of \code{seq} tensors in the given dimension.
 All tensors must either have the same shape (except in the concatenating
 dimension) or be empty.
 
-\code{\link{torch_cat}} can be seen as an inverse operation for \code{\link{torch.split}}
+\code{\link{torch_cat}} can be seen as an inverse operation for \code{\link[=torch_split]{torch_split()}}
 and \code{\link{torch_chunk}}.
 
 \code{\link{torch_cat}} can be best understood via examples.
