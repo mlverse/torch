@@ -47,51 +47,78 @@ dtype_from_string <- function(str) {
   )
 }
 
+
+#' Torch data types
+#' 
+#' Returns the correspondent data type.
+#' 
+#' @name torch_dtype
+#' @rdname torch_dtype
+#'
+NULL
+
+#' @rdname torch_dtype
 #' @export
 torch_float32 <- function() torch_dtype$new(cpp_torch_float32())
+#' @rdname torch_dtype
 #' @export
 torch_float <- function() torch_dtype$new(cpp_torch_float32())
-
+#' @rdname torch_dtype
 #' @export
 torch_float64 <- function() torch_dtype$new(cpp_torch_float64())
+#' @rdname torch_dtype
 #' @export
 torch_double <- function() torch_dtype$new(cpp_torch_float64())
 
+#' @rdname torch_dtype
 #' @export
 torch_float16 <- function() torch_dtype$new(cpp_torch_float16())
+#' @rdname torch_dtype
 #' @export
 torch_half <- function() torch_dtype$new(cpp_torch_float16())
 
+#' @rdname torch_dtype
 #' @export
 torch_uint8 <- function() torch_dtype$new(cpp_torch_uint8())
 
+#' @rdname torch_dtype
 #' @export
 torch_int8 <- function() torch_dtype$new(cpp_torch_int8())
 
+#' @rdname torch_dtype
 #' @export
 torch_int16 <- function() torch_dtype$new(cpp_torch_int16())
+#' @rdname torch_dtype
 #' @export
 torch_short <- function() torch_dtype$new(cpp_torch_int16())
 
+#' @rdname torch_dtype
 #' @export
 torch_int32 <- function() torch_dtype$new(cpp_torch_int32())
+#' @rdname torch_dtype
 #' @export
 torch_int <- function() torch_dtype$new(cpp_torch_int32())
 
+#' @rdname torch_dtype
 #' @export
 torch_int64 <- function() torch_dtype$new(cpp_torch_int64())
+#' @rdname torch_dtype
 #' @export
 torch_long <- function() torch_dtype$new(cpp_torch_int64())
 
+#' @rdname torch_dtype
 #' @export
 torch_bool <- function() torch_dtype$new(cpp_torch_bool())
 
+#' @rdname torch_dtype
 #' @export
 torch_quint8 <- function() torch_dtype$new(cpp_torch_quint8())
 
+#' @rdname torch_dtype
 #' @export
 torch_qint8 <- function() torch_dtype$new(cpp_torch_qint8())
 
+#' @rdname torch_dtype
 #' @export
 torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
 
@@ -100,6 +127,11 @@ torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
   cpp_dtype_to_string(e1$ptr) == cpp_dtype_to_string(e2$ptr)
 }
 
+#' Check if object is a torch data type
+#' 
+#' @param x object to check.
+#' 
+#' @export
 is_torch_dtype <- function(x) {
   inherits(x, "torch_dtype")
 }
