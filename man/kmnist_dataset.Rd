@@ -4,7 +4,13 @@
 \alias{kmnist_dataset}
 \title{Kuzushiji-MNIST}
 \usage{
-kmnist_dataset(...)
+kmnist_dataset(
+  root,
+  train = TRUE,
+  transform = NULL,
+  target_transform = NULL,
+  download = FALSE
+)
 }
 \arguments{
 \item{root}{(string): Root directory of dataset where \code{KMNIST/processed/training.pt}
@@ -13,15 +19,15 @@ and  \code{KMNIST/processed/test.pt} exist.}
 \item{train}{(bool, optional): If TRUE, creates dataset from \code{training.pt},
 otherwise from \code{test.pt}.}
 
-\item{download}{(bool, optional): If true, downloads the dataset from the internet and
-puts it in root directory. If dataset is already downloaded, it is not
-downloaded again.}
-
 \item{transform}{(callable, optional): A function/transform that  takes in an PIL image
 and returns a transformed version. E.g, \code{transforms.RandomCrop}}
 
 \item{target_transform}{(callable, optional): A function/transform that takes in the
 target and transforms it.}
+
+\item{download}{(bool, optional): If true, downloads the dataset from the internet and
+puts it in root directory. If dataset is already downloaded, it is not
+downloaded again.}
 }
 \description{
 The \href{https://github.com/rois-codh/kmnist}{Kuzushiji-MNIST dataset}.

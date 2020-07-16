@@ -23,6 +23,7 @@ new_enum_env <- function(data, parent) {
 #' Enumerate an iterator
 #' 
 #' @param x the generator to enumerate.
+#' @param ... passed to specific methods.
 #' 
 #' @export
 enumerate <- function(x, ...) {

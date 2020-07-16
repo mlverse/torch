@@ -203,6 +203,7 @@ install_type <- function(version) {
 #' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
 #' @param reinstall Re-install Torch even if its already installed?
 #' @param path Optional path to install or check for an already existing installation.
+#' @param ... other optional arguments (like `load` for manual installation.)
 #' 
 #' @details 
 #' 

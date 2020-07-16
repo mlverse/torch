@@ -10,6 +10,9 @@ dataset(name = NULL, inherit = Dataset, ...)
 \item{name}{a name for the dataset. It it's also used as the class
 for it.}
 
+\item{inherit}{you can optionally inherit from a dataset when creating a
+new dataset.}
+
 \item{...}{public methods for the dataset class}
 }
 \description{

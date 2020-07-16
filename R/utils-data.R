@@ -15,6 +15,15 @@ is_map_dataset <- function(x) {
   inherits(x, "dataset")
 }
 
+get_init <- function(x) {
+  
+  if (!is.null(x$public_methods$initialize))
+    return(x$public_methods$initialize)
+  else
+    return(get_init(x$get_inherit()))
+  
+}
+
 #' An abstract class representing a `Dataset`.
 #' 
 #' All datasets that represent a map from keys to data samples should subclass
@@ -31,6 +40,8 @@ is_map_dataset <- function(x) {
 #' 
 #' @param name a name for the dataset. It it's also used as the class
 #'   for it.
+#' @param inherit you can optionally inherit from a dataset when creating a 
+#'   new dataset.
 #' @param ... public methods for the dataset class
 #' 
 #' @export
@@ -53,7 +64,15 @@ dataset <- function(name = NULL, inherit = Dataset, ...) {
     active = active
   )
   
-  f <- d$new
+  init <- get_init(d)
+  # same signature as the init method, but calls with dataset$new.
+  f <- rlang::new_function(
+    args = rlang::fn_fmls(init),
+    body = rlang::expr({
+      d$new(!!!rlang::fn_fmls_syms(init))
+    })
+  )
+
   attr(f, "Dataset") <- d
   f
 }
