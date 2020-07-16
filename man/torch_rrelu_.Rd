@@ -10,6 +10,6 @@ Rrelu_
 \section{rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor }{
 
 
-In-place version of \code{\link{~rrelu}}.
+In-place version of \code{torch_rrelu}.
 }
 

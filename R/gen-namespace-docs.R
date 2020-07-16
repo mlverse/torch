@@ -2008,14 +2008,14 @@ NULL
 #'     the size of the original signal (without the batch dimensions if in batched
 #'     mode) to recover it with correct shape.
 #' 
-#'     Therefore, to invert an [`~torch.rfft`], the `normalized` and
-#'     `onesided` arguments should be set identically for [`torch_irfft`],
+#'     Therefore, to invert an [torch_rfft()], the `normalized` and
+#'     `onesided` arguments should be set identically for [torch_irfft()],
 #'     and preferably a `signal_sizes` is given to avoid size mismatch. See the
 #'     example below for a case of size mismatch.
 #' 
-#'     See [`~torch.rfft`] for details on conjugate symmetry.
+#'     See [torch_rfft()] for details on conjugate symmetry.
 #' 
-#' The inverse of this function is [`~torch.rfft`].
+#' The inverse of this function is [torch_rfft()].
 #' 
 #' @section Warning:
 #'     Generally speaking, input to this function should contain values
@@ -3236,7 +3236,7 @@ NULL
 #'
 #' @section rrelu_(input, lower=1./8, upper=1./3, training=False) -> Tensor :
 #'
-#' In-place version of [`~rrelu`].
+#' In-place version of `torch_rrelu`.
 #'
 #'
 #'
@@ -3251,7 +3251,7 @@ NULL
 #'
 #' @section relu_(input) -> Tensor :
 #'
-#' In-place version of [`~relu`].
+#' In-place version of `torch_relu`.
 #'
 #'
 #'
@@ -3287,7 +3287,7 @@ NULL
 #'
 #' @section selu_(input) -> Tensor :
 #'
-#' In-place version of [`~selu`].
+#' In-place version of `toch_selu`.
 #'
 #'
 #'
@@ -3302,7 +3302,7 @@ NULL
 #'
 #' @section celu_(input, alpha=1.) -> Tensor :
 #'
-#' In-place version of [torch_celu()].
+#' In-place version of `torch_celu`.
 #'
 #'
 #'
@@ -3802,7 +3802,7 @@ NULL
 #'
 #' @section threshold_(input, threshold, value) -> Tensor :
 #'
-#' In-place version of [`~threshold`].
+#' In-place version of `torch_threshold`.
 #'
 #'
 #'
@@ -5103,7 +5103,7 @@ NULL
 #' rank matrix \eqn{A} of size \eqn{(m \times n)} and a matrix \eqn{B} of
 #' size \eqn{(m \times k)}.
 #' 
-#' If \eqn{m \geq n}, [`lstsq`] solves the least-squares problem:
+#' If \eqn{m \geq n}, [torch_lstsq()] solves the least-squares problem:
 #' 
 #' \deqn{
 #' 

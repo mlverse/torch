@@ -10,6 +10,6 @@ Threshold_
 \section{threshold_(input, threshold, value) -> Tensor }{
 
 
-In-place version of \code{\link{~threshold}}.
+In-place version of \code{torch_threshold}.
 }
 

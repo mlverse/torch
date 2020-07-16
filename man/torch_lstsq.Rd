@@ -25,7 +25,7 @@ Computes the solution to the least squares and least norm problems for a full
 rank matrix \eqn{A} of size \eqn{(m \times n)} and a matrix \eqn{B} of
 size \eqn{(m \times k)}.
 
-If \eqn{m \geq n}, \code{\link{lstsq}} solves the least-squares problem:
+If \eqn{m \geq n}, \code{\link[=torch_lstsq]{torch_lstsq()}} solves the least-squares problem:
 
 \deqn{
 

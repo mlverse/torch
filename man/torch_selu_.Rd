@@ -10,6 +10,6 @@ Selu_
 \section{selu_(input) -> Tensor }{
 
 
-In-place version of \code{\link{~selu}}.
+In-place version of \code{toch_selu}.
 }
 

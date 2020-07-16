@@ -28,15 +28,15 @@ information can sometimes be lost, optionally set `signal_sizes` to be
 the size of the original signal (without the batch dimensions if in batched
 mode) to recover it with correct shape.
 
-Therefore, to invert an [`~torch.rfft`], the `normalized` and
-`onesided` arguments should be set identically for [`torch_irfft`],
+Therefore, to invert an [torch_rfft()], the `normalized` and
+`onesided` arguments should be set identically for [torch_irfft()],
 and preferably a `signal_sizes` is given to avoid size mismatch. See the
 example below for a case of size mismatch.
 
-See [`~torch.rfft`] for details on conjugate symmetry.
+See [torch_rfft()] for details on conjugate symmetry.
 }
 
-The inverse of this function is \code{\link{~torch.rfft}}.
+The inverse of this function is \code{\link[=torch_rfft]{torch_rfft()}}.
 
 \preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
 repeatedly running FFT methods on tensors of same geometry with same

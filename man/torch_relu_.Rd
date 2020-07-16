@@ -10,6 +10,6 @@ Relu_
 \section{relu_(input) -> Tensor }{
 
 
-In-place version of \code{\link{~relu}}.
+In-place version of \code{torch_relu}.
 }
 
