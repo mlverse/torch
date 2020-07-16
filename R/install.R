@@ -58,7 +58,6 @@ install_config <- list(
 )
 
 #' @keywords internal
-#' @export
 install_path <- function(version = "1.5.0") {
   path <- Sys.getenv("TORCH_HOME")
   if (nchar(path) > 0) {
