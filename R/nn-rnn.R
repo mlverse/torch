@@ -213,7 +213,8 @@ nn_rnn_base <- nn_module(
 #' @param dropout If non-zero, introduces a `Dropout` layer on the outputs of each
 #'   RNN layer except the last layer, with dropout probability equal to
 #'   `dropout`. Default: 0
-#' @param bidirectional: If `TRUE`, becomes a bidirectional RNN. Default: `FALSE`
+#' @param bidirectional If `TRUE`, becomes a bidirectional RNN. Default: `FALSE`
+#' @param ... other arguments that can be passed to the super class.
 #' 
 #' @section Inputs: 
 #' 
@@ -282,16 +283,16 @@ nn_rnn_base <- nn_module(
 nn_rnn <- nn_module(
   "nn_rnn",
   inherit = nn_rnn_base,
-  initialize = function(...) {
+  initialize = function(input_size, hidden_size, num_layers = 1, nonlinearity = NULL,
+                        batch_first = FALSE,  dropout = 0., bidirectional = FALSE,
+                        ...) {
     
     args <- list(...)
     
-    if (is.null(args$nonlinearity))
+    if (is.null(nonlinearity))
       self$nonlinearity <- "tanh"
     else
-      self$nonlinearity <- args$nonlinearity  
-    
-    args$nonlinearity <- NULL
+      self$nonlinearity <- nonlinearity  
     
     if (self$nonlinearity == "tanh")
       mode <- "RNN_TANH"
@@ -300,8 +301,9 @@ nn_rnn <- nn_module(
     else
       value_error("Unknown nonlinearity '{self$nonlinearity}'")
     
-    args$mode <- mode
-    
-    do.call(super$initialize, args)
+    super$initialize(mode, input_size = input_size, hidden_size = hidden_size,
+                     num_layers = num_layers,
+                     batch_first = batch_first, dropout = dropout, 
+                     bidirectional = bidirectional, ...)
   }
 )

@@ -36,8 +36,11 @@ nnf_linear <- function(input, weight, bias = NULL) {
 #' @param weight \eqn{(\text{out\_features}, \text{in1\_features},
 #'  \text{in2\_features})}
 #' @param bias \eqn{(\text{out\_features})}
-#' @param output: \eqn{(N, *, H_{out})} where \eqn{H_{out}=\text{out\_features}}
-#'  and all but the last dimension are the same shape as the input.
+#' 
+#' @return  
+#' 
+#' output \eqn{(N, *, H_{out})} where \eqn{H_{out}=\text{out\_features}}
+#' and all but the last dimension are the same shape as the input.
 #'
 #' @export
 nnf_bilinear <- function(input1, input2, weight, bias = NULL) {

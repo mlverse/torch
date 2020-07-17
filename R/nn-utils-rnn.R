@@ -154,9 +154,9 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 #' 
 #' @export
 nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE, 
-                                             padding_value = 0, total_lenght = NULL) {
+                                             padding_value = 0, total_length = NULL) {
   o <- cpp_nn_utils_pad_packed_sequence(sequence$ptr, batch_first, padding_value, 
-                                        cpp_optional_int64_t(total_lenght))
+                                        cpp_optional_int64_t(total_length))
   TensorList$new(ptr = o)$to_r()
 }
 
@@ -193,14 +193,14 @@ nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE,
 #' Tensor of size `B x T x *` otherwise
 #' 
 #' @export
-nn_utils_rnn_pad_sequence <- function(sequence, batch_first = FALSE, padding_value = 0) {
+nn_utils_rnn_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0) {
   
-  if (is_torch_tensor(sequence))
-    sequence <- list(sequence)
+  if (is_torch_tensor(sequences))
+    sequences <- list(sequences)
   
-  sequence <- TensorList$new(x = sequence)
+  sequences <- TensorList$new(x = sequences)
   
-  o <- cpp_nn_utils_pad_sequence(sequence$ptr, batch_first, padding_value)
+  o <- cpp_nn_utils_pad_sequence(sequences$ptr, batch_first, padding_value)
   Tensor$new(ptr = o)
 }
 

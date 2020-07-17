@@ -31,6 +31,9 @@ will be added to both sides of each dimension in the input. Default: 0
 output_padding (int or tuple, optional): Additional size added to one side
 of each dimension in the output shape. Default: 0}
 
+\item{output_padding}{(int or tuple, optional): Additional size added to one side
+of each dimension in the output shape. Default: 0}
+
 \item{groups}{(int, optional): Number of blocked connections from input channels to output channels. Default: 1}
 
 \item{bias}{(bool, optional): If \code{True}, adds a learnable bias to the output. Default: \code{True}}

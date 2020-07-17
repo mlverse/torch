@@ -26,16 +26,6 @@ nn_max_pool1d(
 Useful for  \code{nn_max_unpool1d()} later.}
 
 \item{ceil_mode}{when \code{TRUE}, will use \code{ceil} instead of \code{floor} to compute the output shape}
-
-\item{Shape:}{\itemize{
-\item Input: \eqn{(N, C, L_{in})}
-\item Output: \eqn{(N, C, L_{out})}, where
-}
-
-\deqn{
-  L_{out} = \left\lfloor \frac{L_{in} + 2 \times \text{padding} - \text{dilation}
-    \times (\text{kernel\_size} - 1) - 1}{\text{stride}} + 1\right\rfloor
-}}
 }
 \description{
 Applies a 1D max pooling over an input signal composed of several input
@@ -55,6 +45,19 @@ for \code{padding} number of points. \code{dilation} controls the spacing betwee
 It is harder to describe, but this \href{https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md}{link}
 has a nice visualization of what \code{dilation} does.
 }
+\section{Shape}{
+
+\itemize{
+\item Input: \eqn{(N, C, L_{in})}
+\item Output: \eqn{(N, C, L_{out})}, where
+}
+
+\deqn{
+  L_{out} = \left\lfloor \frac{L_{in} + 2 \times \text{padding} - \text{dilation}
+    \times (\text{kernel\_size} - 1) - 1}{\text{stride}} + 1\right\rfloor
+}
+}
+
 \examples{
 # pool of size=3, stride=2
 m <- nn_max_pool1d(3, stride=2)

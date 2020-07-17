@@ -17,9 +17,10 @@ All but the last dimension of the inputs should be the same.}
 \text{in2\_features})}}
 
 \item{bias}{\eqn{(\text{out\_features})}}
-
-\item{output:}{\eqn{(N, *, H_{out})} where \eqn{H_{out}=\text{out\_features}}
-and all but the last dimension are the same shape as the input.}
+}
+\value{
+output \eqn{(N, *, H_{out})} where \eqn{H_{out}=\text{out\_features}}
+and all but the last dimension are the same shape as the input.
 }
 \description{
 Applies a bilinear transformation to the incoming data:

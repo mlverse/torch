@@ -92,6 +92,7 @@ nnf_mse_loss <- function(input, target, reduction = "mean") {
 #' Function that measures the Binary Cross Entropy
 #' between the target and the output.
 #'
+#' @param weight (tensor) weight for each value.
 #' @inheritParams nnf_l1_loss
 #' 
 #' @export
@@ -423,7 +424,6 @@ nnf_cross_entropy <- function(input, target, weight=NULL, ignore_index=-100,
 #'
 #' @export
 nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL, 
-                                                 size_average = NULL, 
                                                  reduction = c("mean", "sum", "none"), 
                                                  pos_weight = NULL) {
   torch_binary_cross_entropy_with_logits(input, target, weight, pos_weight, 

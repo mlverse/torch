@@ -45,7 +45,7 @@ nn_max_pool_nd <- nn_module(
 #'    Useful for  `nn_max_unpool1d()` later.
 #' @param ceil_mode when `TRUE`, will use `ceil` instead of `floor` to compute the output shape
 #' 
-#' @param Shape:
+#' @section Shape:
 #' - Input: \eqn{(N, C, L_{in})}
 #' - Output: \eqn{(N, C, L_{out})}, where
 #' 

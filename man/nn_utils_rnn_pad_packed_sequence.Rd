@@ -8,7 +8,7 @@ nn_utils_rnn_pad_packed_sequence(
   sequence,
   batch_first = FALSE,
   padding_value = 0,
-  total_lenght = NULL
+  total_length = NULL
 )
 }
 \arguments{
