@@ -9,6 +9,7 @@ nn_rnn(
   hidden_size,
   num_layers = 1,
   nonlinearity = NULL,
+  bias = TRUE,
   batch_first = FALSE,
   dropout = 0,
   bidirectional = FALSE,
@@ -28,6 +29,9 @@ computing the final results. Default: 1}
 \item{nonlinearity}{The non-linearity to use. Can be either \code{'tanh'} or
 \code{'relu'}. Default: \code{'tanh'}}
 
+\item{bias}{If \code{FALSE}, then the layer does not use bias weights \code{b_ih} and
+\code{b_hh}. Default: \code{TRUE}}
+
 \item{batch_first}{If \code{TRUE}, then the input and output tensors are provided
 as \verb{(batch, seq, feature)}. Default: \code{FALSE}}
 
@@ -38,9 +42,6 @@ RNN layer except the last layer, with dropout probability equal to
 \item{bidirectional}{If \code{TRUE}, becomes a bidirectional RNN. Default: \code{FALSE}}
 
 \item{...}{other arguments that can be passed to the super class.}
-
-\item{bias}{If \code{FALSE}, then the layer does not use bias weights \code{b_ih} and
-\code{b_hh}. Default: \code{TRUE}}
 }
 \description{
 Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\text{ReLU}} non-linearity

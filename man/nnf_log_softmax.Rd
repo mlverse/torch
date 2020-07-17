@@ -4,7 +4,7 @@
 \alias{nnf_log_softmax}
 \title{Log_softmax}
 \usage{
-nnf_log_softmax(input, dim = NULL, dtype = NULL, ...)
+nnf_log_softmax(input, dim = NULL, dtype = NULL)
 }
 \arguments{
 \item{input}{(Tensor) input}

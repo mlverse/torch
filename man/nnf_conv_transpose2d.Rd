@@ -28,6 +28,8 @@ tuple \verb{(sH, sW)}. Default: 1}
 \item{padding}{implicit paddings on both sides of the input. Can be a
 single number or a tuple \verb{(padH, padW)}. Default: 0}
 
+\item{output_padding}{padding applied to the output}
+
 \item{groups}{split input into groups, \code{in_channels} should be divisible by the
 number of groups. Default: 1}
 

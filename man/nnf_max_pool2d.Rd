@@ -26,6 +26,9 @@ tuple \verb{(sH, sW)}. Default: \code{kernel_size}}
 \item{padding}{implicit zero paddings on both sides of the input. Can be a
 single number or a tuple \verb{(padH, padW)}. Default: 0}
 
+\item{dilation}{controls the spacing between the kernel points; also known as
+the à trous algorithm.}
+
 \item{ceil_mode}{when True, will use \code{ceil} instead of \code{floor} in the formula
 to compute the output shape. Default: \code{FALSE}}
 

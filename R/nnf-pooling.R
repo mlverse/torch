@@ -83,6 +83,8 @@ nnf_avg_pool3d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 #' planes.
 #' 
 #' @inheritParams nnf_avg_pool1d
+#' @param dilation controls the spacing between the kernel points; also known as 
+#'   the à trous algorithm.
 #' @param return_indices whether to return the indices where the max occurs.
 #'
 #' @export
@@ -404,7 +406,8 @@ nnf_fractional_max_pool2d <- function(input, kernel_size, output_size=NULL,
 #' @param output_ratio If one wants to have an output size as a ratio of the 
 #'   input size, this option can be given. This has to be a number or tuple in the 
 #'   range (0, 1)
-#' @param return_indices if ``True``, will return the indices along with the outputs. 
+#' @param return_indices if ``True``, will return the indices along with the outputs.
+#' @param random_samples undocumented argument. 
 #'
 #' @export
 nnf_fractional_max_pool3d <- function(input, kernel_size, output_size = NULL, output_ratio = NULL, 

@@ -214,6 +214,7 @@ nnf_soft_margin_loss <- function(input, target, reduction = "mean") {
 #' max-entropy, between input x and target y of size (N, C).
 #' 
 #' @inheritParams nnf_l1_loss
+#' @param weight weight tensor to apply on the loss.
 #'
 #' @export
 nnf_multilabel_soft_margin_loss <- function(input, target, weight, reduction = "mean") {

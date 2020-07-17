@@ -284,8 +284,8 @@ nn_rnn <- nn_module(
   "nn_rnn",
   inherit = nn_rnn_base,
   initialize = function(input_size, hidden_size, num_layers = 1, nonlinearity = NULL,
-                        batch_first = FALSE,  dropout = 0., bidirectional = FALSE,
-                        ...) {
+                        bias = TRUE, batch_first = FALSE, dropout = 0., 
+                        bidirectional = FALSE, ...) {
     
     args <- list(...)
     
@@ -302,7 +302,7 @@ nn_rnn <- nn_module(
       value_error("Unknown nonlinearity '{self$nonlinearity}'")
     
     super$initialize(mode, input_size = input_size, hidden_size = hidden_size,
-                     num_layers = num_layers,
+                     num_layers = num_layers, bias = bias,
                      batch_first = batch_first, dropout = dropout, 
                      bidirectional = bidirectional, ...)
   }

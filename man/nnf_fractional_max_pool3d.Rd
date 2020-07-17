@@ -28,6 +28,8 @@ input size, this option can be given. This has to be a number or tuple in the
 range (0, 1)}
 
 \item{return_indices}{if \code{True}, will return the indices along with the outputs.}
+
+\item{random_samples}{undocumented argument.}
 }
 \description{
 Applies 3D fractional max pooling over an input signal composed of several input planes.
