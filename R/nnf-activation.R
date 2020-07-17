@@ -514,6 +514,12 @@ nnf_threshold_ <- function(input, threshold, value) {
 #'   while the zero positions will be unchanged. If a BoolTensor is provided, positions with ``True``
 #'   is not allowed to attend while ``False`` values will be unchanged. If a FloatTensor
 #'   is provided, it will be added to the attention weight.
+#' @param in_proj_bias currently undocumented.
+#' @param bias_v currently undocumented.
+#' @param out_proj_bias currently undocumented.
+#' @param k_proj_weight currently undocumented.
+#' @param v_proj_weight currently undocumented.
+#' @param static_v currently undocumented.
 #' 
 #' @export
 nnf_multi_head_attention_forward <- function(

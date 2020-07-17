@@ -46,7 +46,11 @@ the embedding dimension.}
 
 \item{in_proj_weight}{input projection weight and bias.}
 
+\item{in_proj_bias}{currently undocumented.}
+
 \item{bias_k}{bias of the key and value sequences to be added at dim=0.}
+
+\item{bias_v}{currently undocumented.}
 
 \item{add_zero_attn}{add a new batch of zeros to the key and
 value sequences at dim=1.}
@@ -54,6 +58,8 @@ value sequences at dim=1.}
 \item{dropout_p}{probability of an element to be zeroed.}
 
 \item{out_proj_weight}{the output projection weight and bias.}
+
+\item{out_proj_bias}{currently undocumented.}
 
 \item{training}{apply dropout if is \code{TRUE}.}
 
@@ -78,7 +84,13 @@ which is a combination of q_proj_weight, k_proj_weight, v_proj_weight.}
 
 \item{q_proj_weight}{input projection weight and bias.}
 
+\item{k_proj_weight}{currently undocumented.}
+
+\item{v_proj_weight}{currently undocumented.}
+
 \item{static_k}{static key and value used for attention operators.}
+
+\item{static_v}{currently undocumented.}
 }
 \description{
 Allows the model to jointly attend to information from different representation
