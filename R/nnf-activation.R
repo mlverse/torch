@@ -3,7 +3,7 @@
 #' Applies element-wise,
 #' \deqn{ELU(x) = max(0,x) + min(0, \alpha * (exp(x) - 1))}.
 #'
-#' @param input (N,∗) tensor, where * means, any number of additional 
+#' @param input (N,*) tensor, where * means, any number of additional 
 #'   dimensions
 #' @param alpha the alpha value for the ELU formulation. Default: 1.0
 #' @param inplace can optionally do the operation in-place. Default: FALSE
@@ -67,10 +67,10 @@ nnf_hardswish <- function(input, inplaxce = FALSE) {
 #' Searching for MobileNetV3.
 #' 
 #' \deqn{
-#'   \text{Hardswish}(x) = \begin{cases}
-#' 0 & \text{if~} x \le -3, \\
-#' x & \text{if~} x \ge +3, \\
-#' x \cdot (x + 3) /6 & \text{otherwise}
+#'   \mbox{Hardswish}(x) = \begin{cases}
+#' 0 & \mbox{if~} x \le -3, \\
+#' x & \mbox{if~} x \ge +3, \\
+#' x \cdot (x + 3) /6 & \mbox{otherwise}
 #' \end{cases}
 #' }
 #' 
@@ -117,7 +117,7 @@ nnf_hardtanh_ <- function(input, min_val = -1, max_val = 1) {
 
 #' Hardsigmoid
 #'
-#' Applies the element-wise function \eqn{\text{Hardsigmoid}(x) = \frac{ReLU6(x + 3)}{6}}
+#' Applies the element-wise function \eqn{\mbox{Hardsigmoid}(x) = \frac{ReLU6(x + 3)}{6}}
 #' 
 #' @inheritParams nnf_elu
 #' @param inplace NA If set to ``True``, will do this operation in-place. Default: ``False``

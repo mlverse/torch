@@ -42,7 +42,7 @@ Considering the specific case of Momentum, the update can be written as
 \deqn{
   \begin{aligned}
 v_{t+1} & = \mu * v_{t} + g_{t+1}, \\
-p_{t+1} & = p_{t} - \text{lr} * v_{t+1},
+p_{t+1} & = p_{t} - \mbox{lr} * v_{t+1},
 \end{aligned}
 }
 
@@ -54,7 +54,7 @@ other frameworks which employ an update of the form
 
 \deqn{
   \begin{aligned}
-v_{t+1} & = \mu * v_{t} + \text{lr} * g_{t+1}, \\
+v_{t+1} & = \mu * v_{t} + \mbox{lr} * g_{t+1}, \\
 p_{t+1} & = p_{t} - v_{t+1}.
 \end{aligned}
 }

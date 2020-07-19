@@ -20,7 +20,7 @@ sampled from a Poisson distribution with rate parameter given by the correspondi
 element in \code{input} i.e.,
 
 \deqn{
-    \text{out}_i \sim \text{Poisson}(\text{input}_i)
+    \mbox{out}_i \sim \mbox{Poisson}(\mbox{input}_i)
 }
 }
 

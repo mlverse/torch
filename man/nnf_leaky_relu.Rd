@@ -7,7 +7,7 @@
 nnf_leaky_relu(input, negative_slope = 0.01, inplace = FALSE)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{negative_slope}{Controls the angle of the negative slope. Default: 1e-2}

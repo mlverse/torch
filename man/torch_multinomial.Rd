@@ -30,7 +30,7 @@ Indices are ordered from left to right according to when each was sampled
 If \code{input} is a vector, \code{out} is a vector of size \code{num_samples}.
 
 If \code{input} is a matrix with \code{m} rows, \code{out} is an matrix of shape
-\eqn{(m \times \text{num\_samples})}.
+\eqn{(m \times \mbox{num\_samples})}.
 
 If replacement is \code{True}, samples are drawn with replacement.
 

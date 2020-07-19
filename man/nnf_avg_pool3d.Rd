@@ -38,5 +38,5 @@ size of the pooling region will be used. Default: \code{NULL}}
 \description{
 Applies 3D average-pooling operation in \eqn{kT * kH * kW} regions by step
 size \eqn{sT * sH * sW} steps. The number of output features is equal to
-\eqn{\lfloor\frac{\text{input planes}}{sT}\rfloor}.
+\eqn{\lfloor \frac{ \mbox{input planes} }{sT} \rfloor}.
 }

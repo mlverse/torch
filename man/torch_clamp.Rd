@@ -26,9 +26,9 @@ a resulting tensor:
 
 \deqn{
     y_i = \begin{cases}
-        \text{min} & \text{if } x_i < \text{min} \\
-        x_i & \text{if } \text{min} \leq x_i \leq \text{max} \\
-        \text{max} & \text{if } x_i > \text{max}
+        \mbox{min} & \mbox{if } x_i < \mbox{min} \\
+        x_i & \mbox{if } \mbox{min} \leq x_i \leq \mbox{max} \\
+        \mbox{max} & \mbox{if } x_i > \mbox{max}
     \end{cases}
 }
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, args \code{min}

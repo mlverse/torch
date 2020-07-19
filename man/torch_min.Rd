@@ -61,7 +61,7 @@ The shapes of \code{input} and \code{other} don't need to match,
 but they must be broadcastable .
 
 \deqn{
-    \text{out}_i = \min(\text{tensor}_i, \text{other}_i)
+    \mbox{out}_i = \min(\mbox{tensor}_i, \mbox{other}_i)
 }
 }
 

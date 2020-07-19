@@ -18,7 +18,7 @@ Sin
 Returns a new tensor with the sine of the elements of \code{input}.
 
 \deqn{
-    \text{out}_{i} = \sin(\text{input}_{i})
+    \mbox{out}_{i} = \sin(\mbox{input}_{i})
 }
 }
 

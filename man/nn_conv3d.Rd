@@ -99,16 +99,16 @@ Please see the notes on :doc:\verb{/notes/randomness} for background.
 \item Input: \eqn{(N, C_{in}, D_{in}, H_{in}, W_{in})}
 \item Output: \eqn{(N, C_{out}, D_{out}, H_{out}, W_{out})} where
 \deqn{
-  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] - \text{dilation}[0]
-    \times (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \mbox{padding}[0] - \mbox{dilation}[0]
+    \times (\mbox{kernel\_size}[0] - 1) - 1}{\mbox{stride}[0]} + 1\right\rfloor
  }
 \deqn{
-  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] - \text{dilation}[1]
-    \times (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \mbox{padding}[1] - \mbox{dilation}[1]
+    \times (\mbox{kernel\_size}[1] - 1) - 1}{\mbox{stride}[1]} + 1\right\rfloor
  }
 \deqn{
-  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] - \text{dilation}[2]
-    \times (\text{kernel\_size}[2] - 1) - 1}{\text{stride}[2]} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \mbox{padding}[2] - \mbox{dilation}[2]
+    \times (\mbox{kernel\_size}[2] - 1) - 1}{\mbox{stride}[2]} + 1\right\rfloor
  }
 }
 }
@@ -117,15 +117,15 @@ Please see the notes on :doc:\verb{/notes/randomness} for background.
 
 \itemize{
 \item weight (Tensor): the learnable weights of the module of shape
-\eqn{(\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}},}
-\eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]}, \text{kernel\_size[2]})}.
+\eqn{(\mbox{out\_channels}, \frac{\mbox{in\_channels}}{\mbox{groups}},}
+\eqn{\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]}, \mbox{kernel\_size[2]})}.
 The values of these weights are sampled from
 \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+\eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 \item bias (Tensor):   the learnable bias of the module of shape (out_channels). If \code{bias} is \code{True},
 then the values of these weights are
 sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+\eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 }
 }
 

@@ -31,8 +31,8 @@ Bartlett window function.
 
 \deqn{
     w[n] = 1 - \left| \frac{2n}{N-1} - 1 \right| = \begin{cases}
-        \frac{2n}{N - 1} & \text{if } 0 \leq n \leq \frac{N - 1}{2} \\
-        2 - \frac{2n}{N - 1} & \text{if } \frac{N - 1}{2} < n < N \\
+        \frac{2n}{N - 1} & \mbox{if } 0 \leq n \leq \frac{N - 1}{2} \\
+        2 - \frac{2n}{N - 1} & \mbox{if } \frac{N - 1}{2} < n < N \\
     \end{cases},
 }
 where \eqn{N} is the full window size.
@@ -42,7 +42,7 @@ returned window size. \code{periodic} flag determines whether the returned
 window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
 \code{torch_stft}. Therefore, if \code{periodic} is true, the \eqn{N} in
-above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
+above formula is in fact \eqn{\mbox{window\_length} + 1}. Also, we always have
 \code{torch_bartlett_window(L, periodic=True)} equal to
 \verb{torch_bartlett_window(L + 1, periodic=False)[:-1])}.
 }

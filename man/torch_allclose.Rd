@@ -24,7 +24,7 @@ Allclose
 This function checks if all \code{input} and \code{other} satisfy the condition:
 
 \deqn{
-    \lvert \text{input} - \text{other} \rvert \leq \texttt{atol} + \texttt{rtol} \times \lvert \text{other} \rvert
+    \lvert \mbox{input} - \mbox{other} \rvert \leq \mboxtt{atol} + \mboxtt{rtol} \times \lvert \mbox{other} \rvert
 }
 elementwise, for all elements of \code{input} and \code{other}. The behaviour of this function is analogous to
 \verb{numpy.allclose <https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html>}_

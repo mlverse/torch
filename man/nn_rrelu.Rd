@@ -24,16 +24,16 @@ The function is defined as:
 
 \deqn{
 
-\text{RReLU}(x) =
+\mbox{RReLU}(x) =
 \begin{cases}
-x & \text{if } x \geq 0 \\
-ax & \text{ otherwise }
+x & \mbox{if } x \geq 0 \\
+ax & \mbox{ otherwise }
 \end{cases}
 
 }
 
 where \eqn{a} is randomly sampled from uniform distribution
-\eqn{\mathcal{U}(\text{lower}, \text{upper})}.
+\eqn{\mathcal{U}(\mbox{lower}, \mbox{upper})}.
 See: https://arxiv.org/pdf/1505.00853.pdf
 }
 \section{Shape}{

@@ -25,7 +25,7 @@ returns it.
 Not yet implemented for complex tensors.
 
 \deqn{
-    \text{out}_{i} = real(\text{input}_{i})
+    \mbox{out}_{i} = real(\mbox{input}_{i})
 }
 }
 

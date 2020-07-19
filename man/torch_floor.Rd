@@ -19,7 +19,7 @@ Returns a new tensor with the floor of the elements of \code{input},
 the largest integer less than or equal to each element.
 
 \deqn{
-    \text{out}_{i} = \left\lfloor \text{input}_{i} \right\rfloor
+    \mbox{out}_{i} = \left\lfloor \mbox{input}_{i} \right\rfloor
 }
 }
 

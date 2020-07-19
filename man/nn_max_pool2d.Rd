@@ -40,8 +40,8 @@ can be precisely described as:
 
   \begin{aligned}
 out(N_i, C_j, h, w) ={} & \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
-& \text{input}(N_i, C_j, \text{stride[0]} \times h + m,
-               \text{stride[1]} \times w + n)
+& \mbox{input}(N_i, C_j, \mbox{stride[0]} \times h + m,
+               \mbox{stride[1]} \times w + n)
 \end{aligned}
 
 }
@@ -65,13 +65,13 @@ and the second \code{int} for the width dimension
 }
 
 \deqn{
-  H_{out} = \left\lfloor\frac{H_{in} + 2 * \text{padding[0]} - \text{dilation[0]}
-    \times (\text{kernel\_size[0]} - 1) - 1}{\text{stride[0]}} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in} + 2 * \mbox{padding[0]} - \mbox{dilation[0]}
+    \times (\mbox{kernel\_size[0]} - 1) - 1}{\mbox{stride[0]}} + 1\right\rfloor
 }
 
 \deqn{
-  W_{out} = \left\lfloor\frac{W_{in} + 2 * \text{padding[1]} - \text{dilation[1]}
-    \times (\text{kernel\_size[1]} - 1) - 1}{\text{stride[1]}} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in} + 2 * \mbox{padding[1]} - \mbox{dilation[1]}
+    \times (\mbox{kernel\_size[1]} - 1) - 1}{\mbox{stride[1]}} + 1\right\rfloor
 }
 }
 

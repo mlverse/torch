@@ -42,8 +42,8 @@ See reference: Attention Is All You Need
 }
 \details{
 \deqn{
-  \text{MultiHead}(Q, K, V) = \text{Concat}(head_1,\dots,head_h)W^O
-\text{where} head_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)
+  \mbox{MultiHead}(Q, K, V) = \mbox{Concat}(head_1,\dots,head_h)W^O
+\mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V)
 }
 }
 \section{Shape}{

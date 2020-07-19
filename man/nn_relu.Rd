@@ -11,7 +11,7 @@ nn_relu(inplace = FALSE)
 }
 \description{
 Applies the rectified linear unit function element-wise
-\deqn{\text{ReLU}(x) = (x)^+ = \max(0, x)}
+\deqn{\mbox{ReLU}(x) = (x)^+ = \max(0, x)}
 }
 \section{Shape}{
 

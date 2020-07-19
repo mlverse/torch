@@ -7,9 +7,9 @@
 nnf_hinge_embedding_loss(input, target, margin = 1, reduction = "mean")
 }
 \arguments{
-\item{input}{tensor (N,∗) where *∗ means, any number of additional dimensions}
+\item{input}{tensor (N,*) where ** means, any number of additional dimensions}
 
-\item{target}{tensor (N,∗) , same shape as the input}
+\item{target}{tensor (N,*) , same shape as the input}
 
 \item{margin}{Has a default value of 1.}
 

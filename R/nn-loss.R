@@ -32,8 +32,8 @@ nn_weighted_loss <- nn_module(
 #' 
 #' \deqn{
 #'   \ell(x, y) = \begin{cases}
-#' \operatorname{mean}(L), & \text{if reduction} = \text{'mean';}\\
-#' \operatorname{sum}(L),  & \text{if reduction} = \text{'sum'.}
+#' \operatorname{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
+#' \operatorname{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
 #' \end{cases}
 #' }
 #' 
@@ -115,12 +115,12 @@ nn_bce_loss <- nn_module(
 #' 
 #' The loss can be described as:
 #' \deqn{
-#'   \text{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
+#'   \mbox{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
 #' = -x[class] + \log\left(\sum_j \exp(x[j])\right)
 #' }
 #' or in the case of the `weight` argument being specified:
 #' \deqn{
-#'   \text{loss}(x, class) = weight[class] \left(-x[class] + \log\left(\sum_j \exp(x[j])\right)\right)
+#'   \mbox{loss}(x, class) = weight[class] \left(-x[class] + \log\left(\sum_j \exp(x[j])\right)\right)
 #' }
 #' 
 #' The losses are averaged across observations for each minibatch.
@@ -145,7 +145,7 @@ nn_bce_loss <- nn_module(
 #' - Input: \eqn{(N, C)} where `C = number of classes`, or
 #' \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
 #' in the case of `K`-dimensional loss.
-#' - Target: \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1}, or
+#' - Target: \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, or
 #' \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
 #' K-dimensional loss.
 #' - Output: scalar.

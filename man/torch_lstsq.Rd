@@ -38,7 +38,7 @@ If \eqn{m < n}, \code{\link[=torch_lstsq]{torch_lstsq()}} solves the least-norm 
 \deqn{
 
    \begin{array}{ll}
-   \min_X & \|X\|_2 & \text{subject to} & AX = B.
+   \min_X & \|X\|_2 & \mbox{subject to} & AX = B.
    \end{array}
 }
 Returned tensor \eqn{X} has shape \eqn{(\max(m, n) \times k)}. The first \eqn{n}

@@ -28,7 +28,7 @@ NULL
 #' 
 #' @section Shape:
 #' - Input: \eqn{(*)}, LongTensor of arbitrary shape containing the indices to extract
-#' - Output: \eqn{(*, H)}, where `*` is the input shape and \eqn{H=\text{embedding\_dim}}
+#' - Output: \eqn{(*, H)}, where `*` is the input shape and \eqn{H=\mbox{embedding\_dim}}
 #' 
 #' @note 
 #' Keep in mind that only a limited number of optimizers support

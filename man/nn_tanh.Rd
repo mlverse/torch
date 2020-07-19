@@ -11,7 +11,7 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{Tanh}(x) = \tanh(x) = \frac{\exp(x) - \exp(-x)} {\exp(x) + \exp(-x)}
+  \mbox{Tanh}(x) = \tanh(x) = \frac{\exp(x) - \exp(-x)} {\exp(x) + \exp(-x)}
 }
 }
 \section{Shape}{

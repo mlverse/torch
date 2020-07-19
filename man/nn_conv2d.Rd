@@ -45,12 +45,12 @@ planes.
 }
 \details{
 In the simplest case, the output value of the layer with input size
-\eqn{(N, C_{\text{in}}, H, W)} and output \eqn{(N, C_{\text{out}}, H_{\text{out}}, W_{\text{out}})}
+\eqn{(N, C_{\mbox{in}}, H, W)} and output \eqn{(N, C_{\mbox{out}}, H_{\mbox{out}}, W_{\mbox{out}})}
 can be precisely described as:
 
 \deqn{
-\text{out}(N_i, C_{\text{out}_j}) = \text{bias}(C_{\text{out}_j}) +
-  \sum_{k = 0}^{C_{\text{in}} - 1} \text{weight}(C_{\text{out}_j}, k) \star \text{input}(N_i, k)
+\mbox{out}(N_i, C_{\mbox{out}_j}) = \mbox{bias}(C_{\mbox{out}_j}) +
+  \sum_{k = 0}^{C_{\mbox{in}} - 1} \mbox{weight}(C_{\mbox{out}_j}, k) \star \mbox{input}(N_i, k)
 }
 
 where \eqn{\star} is the valid 2D cross-correlation operator,
@@ -115,12 +115,12 @@ a performance cost) by setting \code{backends_cudnn_deterministic = TRUE}.
 \item Input: \eqn{(N, C_{in}, H_{in}, W_{in})}
 \item Output: \eqn{(N, C_{out}, H_{out}, W_{out})} where
 \deqn{
-  H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \text{padding}[0] - \text{dilation}[0]
-    \times (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \mbox{padding}[0] - \mbox{dilation}[0]
+    \times (\mbox{kernel\_size}[0] - 1) - 1}{\mbox{stride}[0]} + 1\right\rfloor
 }
 \deqn{
-  W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \text{padding}[1] - \text{dilation}[1]
-    \times (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \mbox{padding}[1] - \mbox{dilation}[1]
+    \times (\mbox{kernel\_size}[1] - 1) - 1}{\mbox{stride}[1]} + 1\right\rfloor
 }
 }
 }
@@ -129,16 +129,16 @@ a performance cost) by setting \code{backends_cudnn_deterministic = TRUE}.
 
 \itemize{
 \item weight (Tensor): the learnable weights of the module of shape
-\eqn{(\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}}},
-\eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]})}.
+\eqn{(\mbox{out\_channels}, \frac{\mbox{in\_channels}}{\mbox{groups}}},
+\eqn{\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]})}.
 The values of these weights are sampled from
 \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{1}\text{kernel\_size}[i]}}
+\eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}}
 \item bias (Tensor): the learnable bias of the module of shape
 (out_channels). If \code{bias} is \code{TRUE},
 then the values of these weights are
 sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{1}\text{kernel\_size}[i]}}
+\eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}}
 }
 }
 

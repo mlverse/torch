@@ -18,7 +18,7 @@ Neg
 Returns a new tensor with the negative of the elements of \code{input}.
 
 \deqn{
-    \text{out} = -1 \times \text{input}
+    \mbox{out} = -1 \times \mbox{input}
 }
 }
 

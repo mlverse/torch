@@ -19,7 +19,7 @@ Returns a new tensor with the hyperbolic sine of the elements of
 \code{input}.
 
 \deqn{
-    \text{out}_{i} = \sinh(\text{input}_{i})
+    \mbox{out}_{i} = \sinh(\mbox{input}_{i})
 }
 }
 

@@ -44,7 +44,7 @@ RNN layer except the last layer, with dropout probability equal to
 \item{...}{other arguments that can be passed to the super class.}
 }
 \description{
-Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\text{ReLU}} non-linearity
+Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\mbox{ReLU}} non-linearity
 to an input sequence.
 }
 \details{
@@ -58,7 +58,7 @@ h_t = \tanh(W_{ih} x_t + b_{ih} + W_{hh} h_{(t-1)} + b_{hh})
 where \eqn{h_t} is the hidden state at time \code{t}, \eqn{x_t} is
 the input at time \code{t}, and \eqn{h_{(t-1)}} is the hidden state of the
 previous layer at time \code{t-1} or the initial hidden state at time \code{0}.
-If \code{nonlinearity} is \code{'relu'}, then \eqn{\text{ReLU}} is used instead of
+If \code{nonlinearity} is \code{'relu'}, then \eqn{\mbox{ReLU}} is used instead of
 \eqn{\tanh}.
 }
 \section{Inputs}{
@@ -96,13 +96,13 @@ Like \emph{output}, the layers can be separated using
 
 \itemize{
 \item Input1: \eqn{(L, N, H_{in})} tensor containing input features where
-\eqn{H_{in}=\text{input_size}} and \code{L} represents a sequence length.
+\eqn{H_{in}=\mbox{input_size}} and \code{L} represents a sequence length.
 \item Input2: \eqn{(S, N, H_{out})} tensor
 containing the initial hidden state for each element in the batch.
-\eqn{H_{out}=\text{hidden_size}}
-Defaults to zero if not provided. where \eqn{S=\text{num_layers} * \text{num_directions}}
+\eqn{H_{out}=\mbox{hidden_size}}
+Defaults to zero if not provided. where \eqn{S=\mbox{num_layers} * \mbox{num_directions}}
 If the RNN is bidirectional, num_directions should be 2, else it should be 1.
-\item Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\text{num_directions} * \text{hidden_size}}
+\item Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\mbox{num_directions} * \mbox{hidden_size}}
 \item Output2: \eqn{(S, N, H_{out})} tensor containing the next hidden state
 for each element in the batch
 }
@@ -127,7 +127,7 @@ of shape \code{(hidden_size)}
 
 
 All the weights and biases are initialized from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}
-where \eqn{k = \frac{1}{\text{hidden\_size}}}
+where \eqn{k = \frac{1}{\mbox{hidden\_size}}}
 }
 
 \examples{

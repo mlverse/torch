@@ -19,10 +19,10 @@ HardTanh is defined as:
 }
 \details{
 \deqn{
-\text{HardTanh}(x) = \begin{cases}
-  1 & \text{ if } x > 1 \\
-  -1 & \text{ if } x < -1 \\
-  x & \text{ otherwise } \\
+\mbox{HardTanh}(x) = \begin{cases}
+  1 & \mbox{ if } x > 1 \\
+  -1 & \mbox{ if } x < -1 \\
+  x & \mbox{ otherwise } \\
 \end{cases}
 }
 

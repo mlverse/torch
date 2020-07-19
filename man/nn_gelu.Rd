@@ -8,7 +8,7 @@ nn_gelu()
 }
 \description{
 Applies the Gaussian Error Linear Units function:
-\deqn{\text{GELU}(x) = x * \Phi(x)}
+\deqn{\mbox{GELU}(x) = x * \Phi(x)}
 }
 \details{
 where \eqn{\Phi(x)} is the Cumulative Distribution Function for Gaussian Distribution.

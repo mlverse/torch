@@ -5,7 +5,7 @@
 #' Computes the element-wise absolute value of the given `input` tensor.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = |\text{input}_{i}|
+#'     \mbox{out}_{i} = |\mbox{input}_{i}|
 #' }
 #'
 #'
@@ -25,7 +25,7 @@ NULL
 #' Computes the element-wise angle (in radians) of the given `input` tensor.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = angle(\text{input}_{i})
+#'     \mbox{out}_{i} = angle(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -50,7 +50,7 @@ NULL
 #'     Not yet implemented for complex tensors.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = real(\text{input}_{i})
+#'     \mbox{out}_{i} = real(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -73,7 +73,7 @@ NULL
 #'     Not yet implemented.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = imag(\text{input}_{i})
+#'     \mbox{out}_{i} = imag(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -93,7 +93,7 @@ NULL
 #' Computes the element-wise conjugate of the given `input` tensor.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = conj(\text{input}_{i})
+#'     \mbox{out}_{i} = conj(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -113,7 +113,7 @@ NULL
 #' Returns a new tensor with the arccosine  of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \cos^{-1}(\text{input}_{i})
+#'     \mbox{out}_{i} = \cos^{-1}(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -136,7 +136,7 @@ NULL
 #' See `~torch.nn.AvgPool1d` for details and output shape.
 #'
 #'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iW)}
+#' @param input NA input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iW)}
 #' @param kernel_size NA the size of the window. Can be a single number or a      tuple `(kW,)`
 #' @param stride NA the stride of the window. Can be a single number or a tuple      `(sW,)`. Default: `kernel_size`
 #' @param padding NA implicit zero paddings on both sides of the input. Can be a      single number or a tuple `(padW,)`. Default: 0
@@ -175,7 +175,7 @@ NULL
 #' and returns a new resulting tensor.
 #' 
 #' \deqn{
-#'     \text{out} = \text{input} + \text{other}
+#'     \mbox{out} = \mbox{input} + \mbox{other}
 #' }
 #' If `input` is of type FloatTensor or DoubleTensor, `other` must be
 #' a real number, otherwise it should be an integer.
@@ -190,7 +190,7 @@ NULL
 #' broadcastable .
 #' 
 #' \deqn{
-#'     \text{out} = \text{input} + \text{alpha} \times \text{other}
+#'     \mbox{out} = \mbox{input} + \mbox{alpha} \times \mbox{other}
 #' }
 #' If `other` is of type FloatTensor or DoubleTensor, `alpha` must be
 #' a real number, otherwise it should be an integer.
@@ -224,7 +224,7 @@ NULL
 #' `mat` and `vec` and the added tensor `input` respectively.
 #' 
 #' \deqn{
-#'     \text{out} = \beta\ \text{input} + \alpha\ (\text{mat} \mathbin{@} \text{vec})
+#'     \mbox{out} = \beta\ \mbox{input} + \alpha\ (\mbox{mat} \mathbin{@} \mbox{vec})
 #' }
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and
 #' `alpha` must be real numbers, otherwise they should be integers
@@ -255,7 +255,7 @@ NULL
 #' `input` respectively.
 #' 
 #' \deqn{
-#'     \text{out} = \beta\ \text{input} + \alpha\ (\text{vec1} \otimes \text{vec2})
+#'     \mbox{out} = \beta\ \mbox{input} + \alpha\ (\mbox{vec1} \otimes \mbox{vec2})
 #' }
 #' If `vec1` is a vector of size `n` and `vec2` is a vector
 #' of size `m`, then `input` must be
@@ -271,7 +271,7 @@ NULL
 #' @param vec1 (Tensor) the first vector of the outer product
 #' @param vec2 (Tensor) the second vector of the outer product
 #' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
-#' @param alpha (Number, optional) multiplier for \eqn{\text{vec1} \otimes \text{vec2}} (\eqn{\alpha})
+#' @param alpha (Number, optional) multiplier for \eqn{\mbox{vec1} \otimes \mbox{vec2}} (\eqn{\alpha})
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_addr
@@ -287,7 +287,7 @@ NULL
 #' This function checks if all `input` and `other` satisfy the condition:
 #' 
 #' \deqn{
-#'     \lvert \text{input} - \text{other} \rvert \leq \texttt{atol} + \texttt{rtol} \times \lvert \text{other} \rvert
+#'     \lvert \mbox{input} - \mbox{other} \rvert \leq \mboxtt{atol} + \mboxtt{rtol} \times \lvert \mbox{other} \rvert
 #' }
 #' elementwise, for all elements of `input` and `other`. The behaviour of this function is analogous to
 #' `numpy.allclose <https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html>`_
@@ -309,7 +309,7 @@ NULL
 #'
 #' @section arange(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor :
 #'
-#' Returns a 1-D tensor of size \eqn{\left\lceil \frac{\text{end} - \text{start}}{\text{step}} \right\rceil}
+#' Returns a 1-D tensor of size \eqn{\left\lceil \frac{\mbox{end} - \mbox{start}}{\mbox{step}} \right\rceil}
 #' with values from the interval ``[start, end)`` taken with common difference
 #' `step` beginning from `start`.
 #' 
@@ -318,7 +318,7 @@ NULL
 #' in such cases.
 #' 
 #' \deqn{
-#'     \text{out}_{{i+1}} = \text{out}_{i} + \text{step}
+#'     \mbox{out}_{{i+1}} = \mbox{out}_{i} + \mbox{step}
 #' }
 #'
 #'
@@ -428,7 +428,7 @@ NULL
 #' Returns a new tensor with the arcsine  of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \sin^{-1}(\text{input}_{i})
+#'     \mbox{out}_{i} = \sin^{-1}(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -448,7 +448,7 @@ NULL
 #' Returns a new tensor with the arctangent  of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \tan^{-1}(\text{input}_{i})
+#'     \mbox{out}_{i} = \tan^{-1}(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -480,7 +480,7 @@ NULL
 #' same as the scaling factors used in `torch_addbmm`.
 #' 
 #' \deqn{
-#'     \text{out}_i = \beta\ \text{input}_i + \alpha\ (\text{batch1}_i \mathbin{@} \text{batch2}_i)
+#'     \mbox{out}_i = \beta\ \mbox{input}_i + \alpha\ (\mbox{batch1}_i \mathbin{@} \mbox{batch2}_i)
 #' }
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and
 #' `alpha` must be real numbers, otherwise they should be integers.
@@ -490,7 +490,7 @@ NULL
 #' @param batch1 (Tensor) the first batch of matrices to be multiplied
 #' @param batch2 (Tensor) the second batch of matrices to be multiplied
 #' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
-#' @param alpha (Number, optional) multiplier for \eqn{\text{batch1} \mathbin{@} \text{batch2}} (\eqn{\alpha})
+#' @param alpha (Number, optional) multiplier for \eqn{\mbox{batch1} \mathbin{@} \mbox{batch2}} (\eqn{\alpha})
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_baddbmm
@@ -507,8 +507,8 @@ NULL
 #' 
 #' \deqn{
 #'     w[n] = 1 - \left| \frac{2n}{N-1} - 1 \right| = \begin{cases}
-#'         \frac{2n}{N - 1} & \text{if } 0 \leq n \leq \frac{N - 1}{2} \\
-#'         2 - \frac{2n}{N - 1} & \text{if } \frac{N - 1}{2} < n < N \\
+#'         \frac{2n}{N - 1} & \mbox{if } 0 \leq n \leq \frac{N - 1}{2} \\
+#'         2 - \frac{2n}{N - 1} & \mbox{if } \frac{N - 1}{2} < n < N \\
 #'     \end{cases},
 #' }
 #' where \eqn{N} is the full window size.
@@ -518,7 +518,7 @@ NULL
 #' window trims off the last duplicate value from the symmetric window and is
 #' ready to be used as a periodic window with functions like
 #' `torch_stft`. Therefore, if `periodic` is true, the \eqn{N} in
-#' above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
+#' above formula is in fact \eqn{\mbox{window\_length} + 1}. Also, we always have
 #' ``torch_bartlett_window(L, periodic=True)`` equal to
 #' ``torch_bartlett_window(L + 1, periodic=False)[:-1])``.
 #' 
@@ -548,14 +548,14 @@ NULL
 #' The `input` tensor should be a tensor containing probabilities
 #' to be used for drawing the binary random number.
 #' Hence, all values in `input` have to be in the range:
-#' \eqn{0 \leq \text{input}_i \leq 1}.
+#' \eqn{0 \leq \mbox{input}_i \leq 1}.
 #' 
-#' The \eqn{\text{i}^{th}} element of the output tensor will draw a
-#' value \eqn{1} according to the \eqn{\text{i}^{th}} probability value given
+#' The \eqn{\mbox{i}^{th}} element of the output tensor will draw a
+#' value \eqn{1} according to the \eqn{\mbox{i}^{th}} probability value given
 #' in `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} \sim \mathrm{Bernoulli}(p = \text{input}_{i})
+#'     \mbox{out}_{i} \sim \mathrm{Bernoulli}(p = \mbox{input}_{i})
 #' }
 #' The returned `out` tensor only has values 0 or 1 and is of the same
 #' shape as `input`.
@@ -705,7 +705,7 @@ NULL
 #' window trims off the last duplicate value from the symmetric window and is
 #' ready to be used as a periodic window with functions like
 #' `torch_stft`. Therefore, if `periodic` is true, the \eqn{N} in
-#' above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
+#' above formula is in fact \eqn{\mbox{window\_length} + 1}. Also, we always have
 #' ``torch_blackman_window(L, periodic=True)`` equal to
 #' ``torch_blackman_window(L + 1, periodic=False)[:-1])``.
 #' 
@@ -741,7 +741,7 @@ NULL
 #' \eqn{(b \times n \times p)} tensor.
 #' 
 #' \deqn{
-#'     \text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
+#'     \mbox{out}_i = \mbox{input}_i \mathbin{@} \mbox{mat2}_i
 #' }
 #' @note This function does not broadcast .
 #'           For broadcasting matrix products, see [`torch_matmul`].
@@ -804,7 +804,7 @@ NULL
 #' the smallest integer greater than or equal to each element.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \left\lceil \text{input}_{i} \right\rceil = \left\lfloor \text{input}_{i} \right\rfloor + 1
+#'     \mbox{out}_{i} = \left\lceil \mbox{input}_{i} \right\rceil = \left\lfloor \mbox{input}_{i} \right\rfloor + 1
 #' }
 #'
 #'
@@ -866,9 +866,9 @@ NULL
 #' 
 #' \deqn{
 #'     y_i = \begin{cases}
-#'         \text{min} & \text{if } x_i < \text{min} \\
-#'         x_i & \text{if } \text{min} \leq x_i \leq \text{max} \\
-#'         \text{max} & \text{if } x_i > \text{max}
+#'         \mbox{min} & \mbox{if } x_i < \mbox{min} \\
+#'         x_i & \mbox{if } \mbox{min} \leq x_i \leq \mbox{max} \\
+#'         \mbox{max} & \mbox{if } x_i > \mbox{max}
 #'     \end{cases}
 #' }
 #' If `input` is of type `FloatTensor` or `DoubleTensor`, args `min`
@@ -913,13 +913,13 @@ NULL
 #' .. include:: cudnn_deterministic.rst
 #'
 #'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iW)}
-#' @param weight NA filters of shape \eqn{(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kW)}
-#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: ``None``
+#' @param input NA input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iW)}
+#' @param weight NA filters of shape \eqn{(\mbox{out\_channels} , \frac{\mbox{in\_channels}}{\mbox{groups}} , kW)}
+#' @param bias NA optional bias of shape \eqn{(\mbox{out\_channels})}. Default: ``None``
 #' @param stride NA the stride of the convolving kernel. Can be a single number or      a one-element tuple `(sW,)`. Default: 1
 #' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a one-element tuple `(padW,)`. Default: 0
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a one-element tuple `(dW,)`. Default: 1
-#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by      the number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\mbox{in\_channels}} should be divisible by      the number of groups. Default: 1
 #'
 #' @name torch_conv1d
 #'
@@ -939,13 +939,13 @@ NULL
 #' .. include:: cudnn_deterministic.rst
 #'
 #'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iH , iW)}
-#' @param weight NA filters of shape \eqn{(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kH , kW)}
-#' @param bias NA optional bias tensor of shape \eqn{(\text{out\_channels})}. Default: ``None``
+#' @param input NA input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iH , iW)}
+#' @param weight NA filters of shape \eqn{(\mbox{out\_channels} , \frac{\mbox{in\_channels}}{\mbox{groups}} , kH , kW)}
+#' @param bias NA optional bias tensor of shape \eqn{(\mbox{out\_channels})}. Default: ``None``
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple `(sH, sW)`. Default: 1
 #' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a tuple `(padH, padW)`. Default: 0
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dH, dW)`. Default: 1
-#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\mbox{in\_channels}} should be divisible by the      number of groups. Default: 1
 #'
 #' @name torch_conv2d
 #'
@@ -965,13 +965,13 @@ NULL
 #' .. include:: cudnn_deterministic.rst
 #'
 #'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iT , iH , iW)}
-#' @param weight NA filters of shape \eqn{(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kT , kH , kW)}
-#' @param bias NA optional bias tensor of shape \eqn{(\text{out\_channels})}. Default: None
+#' @param input NA input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iT , iH , iW)}
+#' @param weight NA filters of shape \eqn{(\mbox{out\_channels} , \frac{\mbox{in\_channels}}{\mbox{groups}} , kT , kH , kW)}
+#' @param bias NA optional bias tensor of shape \eqn{(\mbox{out\_channels})}. Default: None
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple `(sT, sH, sW)`. Default: 1
 #' @param padding NA implicit paddings on both sides of the input. Can be a      single number or a tuple `(padT, padH, padW)`. Default: 0
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dT, dH, dW)`. Default: 1
-#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by      the number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\mbox{in\_channels}} should be divisible by      the number of groups. Default: 1
 #'
 #' @name torch_conv3d
 #'
@@ -987,9 +987,9 @@ NULL
 #' Input and output dimensions are (Time, Batch, Channels) - hence TBC.
 #'
 #'
-#' @param input NA input tensor of shape \eqn{(\text{sequence length} \times batch \times \text{in\_channels})}
-#' @param weight NA filter of shape (\eqn{\text{kernel width} \times \text{in\_channels} \times \text{out\_channels}})
-#' @param bias NA bias of shape (\eqn{\text{out\_channels}})
+#' @param input NA input tensor of shape \eqn{(\mbox{sequence length} \times batch \times \mbox{in\_channels})}
+#' @param weight NA filter of shape (\eqn{\mbox{kernel width} \times \mbox{in\_channels} \times \mbox{out\_channels}})
+#' @param bias NA bias of shape (\eqn{\mbox{out\_channels}})
 #' @param pad NA number of timesteps to pad. Default: 0
 #'
 #' @name torch_conv_tbc
@@ -1010,13 +1010,13 @@ NULL
 #' .. include:: cudnn_deterministic.rst
 #'
 #'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iW)}
-#' @param weight NA filters of shape \eqn{(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kW)}
-#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: None
+#' @param input NA input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iW)}
+#' @param weight NA filters of shape \eqn{(\mbox{in\_channels} , \frac{\mbox{out\_channels}}{\mbox{groups}} , kW)}
+#' @param bias NA optional bias of shape \eqn{(\mbox{out\_channels})}. Default: None
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sW,)``. Default: 1
 #' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padW,)``. Default: 0
 #' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple ``(out_padW)``. Default: 0
-#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\mbox{in\_channels}} should be divisible by the      number of groups. Default: 1
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dW,)``. Default: 1
 #'
 #' @name torch_conv_transpose1d
@@ -1037,13 +1037,13 @@ NULL
 #' .. include:: cudnn_deterministic.rst
 #'
 #'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iH , iW)}
-#' @param weight NA filters of shape \eqn{(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kH , kW)}
-#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: None
+#' @param input NA input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iH , iW)}
+#' @param weight NA filters of shape \eqn{(\mbox{in\_channels} , \frac{\mbox{out\_channels}}{\mbox{groups}} , kH , kW)}
+#' @param bias NA optional bias of shape \eqn{(\mbox{out\_channels})}. Default: None
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sH, sW)``. Default: 1
 #' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padH, padW)``. Default: 0
 #' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple ``(out_padH, out_padW)``.      Default: 0
-#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\mbox{in\_channels}} should be divisible by the      number of groups. Default: 1
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple ``(dH, dW)``. Default: 1
 #'
 #' @name torch_conv_transpose2d
@@ -1064,13 +1064,13 @@ NULL
 #' .. include:: cudnn_deterministic.rst
 #'
 #'
-#' @param input NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iT , iH , iW)}
-#' @param weight NA filters of shape \eqn{(\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kT , kH , kW)}
-#' @param bias NA optional bias of shape \eqn{(\text{out\_channels})}. Default: None
+#' @param input NA input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iT , iH , iW)}
+#' @param weight NA filters of shape \eqn{(\mbox{in\_channels} , \frac{\mbox{out\_channels}}{\mbox{groups}} , kT , kH , kW)}
+#' @param bias NA optional bias of shape \eqn{(\mbox{out\_channels})}. Default: None
 #' @param stride NA the stride of the convolving kernel. Can be a single number or a      tuple ``(sT, sH, sW)``. Default: 1
 #' @param padding NA ``dilation * (kernel_size - 1) - padding`` zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      ``(padT, padH, padW)``. Default: 0
 #' @param output_padding NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple      ``(out_padT, out_padH, out_padW)``. Default: 0
-#' @param groups NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1
+#' @param groups NA split input into groups, \eqn{\mbox{in\_channels}} should be divisible by the      number of groups. Default: 1
 #' @param dilation NA the spacing between kernel elements. Can be a single number or      a tuple `(dT, dH, dW)`. Default: 1
 #'
 #' @name torch_conv_transpose3d
@@ -1086,7 +1086,7 @@ NULL
 #' Returns a new tensor with the cosine  of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \cos(\text{input}_{i})
+#'     \mbox{out}_{i} = \cos(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -1107,7 +1107,7 @@ NULL
 #' `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \cosh(\text{input}_{i})
+#'     \mbox{out}_{i} = \cosh(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -1347,7 +1347,7 @@ NULL
 #'     instead.
 #' 
 #' \deqn{
-#'     \text{out}_i = \frac{\text{input}_i}{\text{other}}
+#'     \mbox{out}_i = \frac{\mbox{input}_i}{\mbox{other}}
 #' }
 #' If the `torch_dtype` of ``input`` and ``other`` differ, the
 #' `torch_dtype` of the result tensor is determined following rules
@@ -1362,7 +1362,7 @@ NULL
 #' ``other``. The resulting tensor is returned.
 #' 
 #' \deqn{
-#'     \text{out}_i = \frac{\text{input}_i}{\text{other}_i}
+#'     \mbox{out}_i = \frac{\mbox{input}_i}{\mbox{other}_i}
 #' }
 #' The shapes of ``input`` and ``other`` must be broadcastable
 #' . If the `torch_dtype` of ``input`` and
@@ -1620,7 +1620,7 @@ NULL
 #' the largest integer less than or equal to each element.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \left\lfloor \text{input}_{i} \right\rfloor
+#'     \mbox{out}_{i} = \left\lfloor \mbox{input}_{i} \right\rfloor
 #' }
 #'
 #'
@@ -1641,7 +1641,7 @@ NULL
 #' for type promotion and broadcasting rules.
 #' 
 #' \deqn{
-#'     \text{{out}}_i = \left\lfloor \frac{{\text{{input}}_i}}{{\text{{other}}_i}} \right\rfloor
+#'     \mbox{{out}}_i = \left\lfloor \frac{{\mbox{{input}}_i}}{{\mbox{{other}}_i}} \right\rfloor
 #' }
 #'
 #'
@@ -1661,7 +1661,7 @@ NULL
 #' Computes the fractional portion of each element in `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \text{input}_{i} - \left\lfloor |\text{input}_{i}| \right\rfloor * \operatorname{sgn}(\text{input}_{i})
+#'     \mbox{out}_{i} = \mbox{input}_{i} - \left\lfloor |\mbox{input}_{i}| \right\rfloor * \operatorname{sgn}(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -1743,7 +1743,7 @@ NULL
 #' window trims off the last duplicate value from the symmetric window and is
 #' ready to be used as a periodic window with functions like
 #' `torch_stft`. Therefore, if `periodic` is true, the \eqn{N} in
-#' above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
+#' above formula is in fact \eqn{\mbox{window\_length} + 1}. Also, we always have
 #' ``torch_hann_window(L, periodic=True)`` equal to
 #' ``torch_hann_window(L + 1, periodic=False)[:-1])``.
 #' 
@@ -1780,7 +1780,7 @@ NULL
 #' window trims off the last duplicate value from the symmetric window and is
 #' ready to be used as a periodic window with functions like
 #' `torch_stft`. Therefore, if `periodic` is true, the \eqn{N} in
-#' above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
+#' above formula is in fact \eqn{\mbox{window\_length} + 1}. Also, we always have
 #' ``torch_hamming_window(L, periodic=True)`` equal to
 #' ``torch_hamming_window(L + 1, periodic=False)[:-1])``.
 #' 
@@ -2289,7 +2289,7 @@ NULL
 #'
 #' Returns a one-dimensional tensor of `steps` points
 #' logarithmically spaced with base `base` between
-#' \eqn{{\text{base}}^{\text{start}}} and \eqn{{\text{base}}^{\text{end}}}.
+#' \eqn{{\mbox{base}}^{\mbox{start}}} and \eqn{{\mbox{base}}^{\mbox{end}}}.
 #' 
 #' The output tensor is 1-D of size `steps`.
 #'
@@ -2321,7 +2321,7 @@ NULL
 #' For summation index \eqn{j} given by `dim` and other indices \eqn{i}, the result is
 #' 
 #' \deqn{
-#'         \text{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
+#'         \mbox{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
 #' }
 #' 
 #' If `keepdim` is ``True``, the output tensor is of the same size
@@ -2462,7 +2462,7 @@ NULL
 #' but they must be broadcastable .
 #' 
 #' \deqn{
-#'     \text{out}_i = \max(\text{tensor}_i, \text{other}_i)
+#'     \mbox{out}_i = \max(\mbox{tensor}_i, \mbox{other}_i)
 #' }
 #' @note When the shapes do not match, the shape of the returned output tensor
 #'           follows the broadcasting rules .
@@ -2575,7 +2575,7 @@ NULL
 #' but they must be broadcastable .
 #' 
 #' \deqn{
-#'     \text{out}_i = \min(\text{tensor}_i, \text{other}_i)
+#'     \mbox{out}_i = \min(\mbox{tensor}_i, \mbox{other}_i)
 #' }
 #' @note When the shapes do not match, the shape of the returned output tensor
 #'           follows the broadcasting rules .
@@ -2654,7 +2654,7 @@ NULL
 #' `other` and returns a new resulting tensor.
 #' 
 #' \deqn{
-#'     \text{out}_i = \text{other} \times \text{input}_i
+#'     \mbox{out}_i = \mbox{other} \times \mbox{input}_i
 #' }
 #' If `input` is of type `FloatTensor` or `DoubleTensor`, `other`
 #' should be a real number, otherwise it should be an integer
@@ -2668,7 +2668,7 @@ NULL
 #' broadcastable .
 #' 
 #' \deqn{
-#'     \text{out}_i = \text{input}_i \times \text{other}_i
+#'     \mbox{out}_i = \mbox{input}_i \times \mbox{other}_i
 #' }
 #'
 #'
@@ -2854,7 +2854,7 @@ NULL
 #' Returns cosine similarity between x1 and x2, computed along dim.
 #' 
 #' \deqn{
-#'     \text{similarity} = \dfrac{x_1 \cdot x_2}{\max(\Vert x_1 \Vert _2 \cdot \Vert x_2 \Vert _2, \epsilon)}
+#'     \mbox{similarity} = \frac{x_1 \cdot x_2}{\max(\Vert x_1 \Vert _2 \cdot \Vert x_2 \Vert _2, \epsilon)}
 #' }
 #'
 #'
@@ -3032,7 +3032,7 @@ NULL
 #' distribution).
 #' 
 #' \deqn{
-#'     \text{out}_{i} \sim \mathcal{N}(0, 1)
+#'     \mbox{out}_{i} \sim \mathcal{N}(0, 1)
 #' }
 #' The shape of the tensor is defined by the variable argument `size`.
 #'
@@ -3097,12 +3097,12 @@ NULL
 #'
 #' @section range(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor :
 #'
-#' Returns a 1-D tensor of size \eqn{\left\lfloor \frac{\text{end} - \text{start}}{\text{step}} \right\rfloor + 1}
+#' Returns a 1-D tensor of size \eqn{\left\lfloor \frac{\mbox{end} - \mbox{start}}{\mbox{step}} \right\rfloor + 1}
 #' with values from `start` to `end` with step `step`. Step is
 #' the gap between two values in the tensor.
 #' 
 #' \deqn{
-#'     \text{out}_{i+1} = \text{out}_i + \text{step}.
+#'     \mbox{out}_{i+1} = \mbox{out}_i + \mbox{step}.
 #' }
 #' @section Warning:
 #'     This function is deprecated in favor of [`torch_arange`].
@@ -3130,7 +3130,7 @@ NULL
 #' Returns a new tensor with the reciprocal of the elements of `input`
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \frac{1}{\text{input}_{i}}
+#'     \mbox{out}_{i} = \frac{1}{\mbox{input}_{i}}
 #' }
 #'
 #'
@@ -3150,7 +3150,7 @@ NULL
 #' Returns a new tensor with the negative of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out} = -1 \times \text{input}
+#'     \mbox{out} = -1 \times \mbox{input}
 #' }
 #'
 #'
@@ -3270,7 +3270,7 @@ NULL
 #' the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \frac{1}{\sqrt{\text{input}_{i}}}
+#'     \mbox{out}_{i} = \frac{1}{\sqrt{\mbox{input}_{i}}}
 #' }
 #'
 #'
@@ -3320,7 +3320,7 @@ NULL
 #' Returns a new tensor with the sigmoid of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \frac{1}{1 + e^{-\text{input}_{i}}}
+#'     \mbox{out}_{i} = \frac{1}{1 + e^{-\mbox{input}_{i}}}
 #' }
 #'
 #'
@@ -3340,7 +3340,7 @@ NULL
 #' Returns a new tensor with the sine of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \sin(\text{input}_{i})
+#'     \mbox{out}_{i} = \sin(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -3361,7 +3361,7 @@ NULL
 #' `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \sinh(\text{input}_{i})
+#'     \mbox{out}_{i} = \sinh(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -3482,12 +3482,12 @@ NULL
 #'     expression:
 #' 
 #' \deqn{
-#'         X[m, \omega] = \sum_{k = 0}^{\text{win\_length-1}}%
-#'                             \text{window}[k]\ \text{input}[m \times \text{hop\_length} + k]\ %
-#'                             \exp\left(- j \frac{2 \pi \cdot \omega k}{\text{win\_length}}\right),
+#'         X[m, \omega] = \sum_{k = 0}^{\mbox{win\_length-1}}%
+#'                             \mbox{window}[k]\ \mbox{input}[m \times \mbox{hop\_length} + k]\ %
+#'                             \exp\left(- j \frac{2 \pi \cdot \omega k}{\mbox{win\_length}}\right),
 #' }
 #'     where \eqn{m} is the index of the sliding window, and \eqn{\omega} is
-#'     the frequency that \eqn{0 \leq \omega < \text{n\_fft}}. When
+#'     the frequency that \eqn{0 \leq \omega < \mbox{n\_fft}}. When
 #'     `onesided` is the default value ``True``,
 #' 
 #'     * `input` must be either a 1-D time sequence or a 2-D batch of time
@@ -3502,25 +3502,25 @@ NULL
 #'     * `window` can be a 1-D tensor of size `win_length`, e.g., from
 #'       `torch_hann_window`. If `window` is ``None`` (default), it is
 #'       treated as if having \eqn{1} everywhere in the window. If
-#'       \eqn{\text{win\_length} < \text{n\_fft}}, `window` will be padded on
+#'       \eqn{\mbox{win\_length} < \mbox{n\_fft}}, `window` will be padded on
 #'       both sides to length `n_fft` before being applied.
 #' 
 #'     * If `center` is ``True`` (default), `input` will be padded on
 #'       both sides so that the \eqn{t}-th frame is centered at time
-#'       \eqn{t \times \text{hop\_length}}. Otherwise, the \eqn{t}-th frame
-#'       begins at time  \eqn{t \times \text{hop\_length}}.
+#'       \eqn{t \times \mbox{hop\_length}}. Otherwise, the \eqn{t}-th frame
+#'       begins at time  \eqn{t \times \mbox{hop\_length}}.
 #' 
 #'     * `pad_mode` determines the padding method used on `input` when
 #'       `center` is ``True``. See `torch_nn.functional.pad` for
 #'       all available options. Default is ``"reflect"``.
 #' 
 #'     * If `onesided` is ``True`` (default), only values for \eqn{\omega}
-#'       in \eqn{\left[0, 1, 2, \dots, \left\lfloor \frac{\text{n\_fft}}{2} \right\rfloor + 1\right]}
+#'       in \eqn{\left[0, 1, 2, \dots, \left\lfloor \frac{\mbox{n\_fft}}{2} \right\rfloor + 1\right]}
 #'       are returned because the real-to-complex Fourier transform satisfies the
-#'       conjugate symmetry, i.e., \eqn{X[m, \omega] = X[m, \text{n\_fft} - \omega]^*}.
+#'       conjugate symmetry, i.e., \eqn{X[m, \omega] = X[m, \mbox{n\_fft} - \omega]^*}.
 #' 
 #'     * If `normalized` is ``True`` (default is ``False``), the function
-#'       returns the normalized STFT results, i.e., multiplied by \eqn{(\text{frame\_length})^{-0.5}}.
+#'       returns the normalized STFT results, i.e., multiplied by \eqn{(\mbox{frame\_length})^{-0.5}}.
 #' 
 #'     Returns the real and the imaginary parts together as one tensor of size
 #'     \eqn{(* \times N \times T \times 2)}, where \eqn{*} is the optional
@@ -3539,7 +3539,7 @@ NULL
 #' @param hop_length (int, optional) the distance between neighboring sliding window        frames. Default: ``None`` (treated as equal to ``floor(n_fft / 4)``)
 #' @param win_length (int, optional) the size of window frame and STFT filter.        Default: ``None``  (treated as equal to `n_fft`)
 #' @param window (Tensor, optional) the optional window function.        Default: ``None`` (treated as window of all \eqn{1} s)
-#' @param center (bool, optional) whether to pad `input` on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \text{hop\_length}}.        Default: ``True``
+#' @param center (bool, optional) whether to pad `input` on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.        Default: ``True``
 #' @param pad_mode (string, optional) controls the padding method used when        `center` is ``True``. Default: ``"reflect"``
 #' @param normalized (bool, optional) controls whether to return the normalized STFT results         Default: ``False``
 #' @param onesided (bool, optional) controls whether to return half of results to        avoid redundancy Default: ``True``
@@ -3587,7 +3587,7 @@ NULL
 #' Returns a new tensor with the square-root of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \sqrt{\text{input}_{i}}
+#'     \mbox{out}_{i} = \sqrt{\mbox{input}_{i}}
 #' }
 #'
 #'
@@ -3745,7 +3745,7 @@ NULL
 #' Returns a new tensor with the tangent of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \tan(\text{input}_{i})
+#'     \mbox{out}_{i} = \tan(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -3766,7 +3766,7 @@ NULL
 #' of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \tanh(\text{input}_{i})
+#'     \mbox{out}_{i} = \tanh(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -3921,7 +3921,7 @@ NULL
 #' in which case they are cast to the default (floating) scalar type before the division.
 #' 
 #' \deqn{
-#'     \text{out}_i = \frac{\text{dividend}_i}{\text{divisor}}
+#'     \mbox{out}_i = \frac{\mbox{dividend}_i}{\mbox{divisor}}
 #' }
 #'
 #'
@@ -4078,9 +4078,9 @@ NULL
 #' The operation is defined as:
 #' 
 #' \deqn{
-#'     \text{out}_i = \begin{cases}
-#'         \text{x}_i & \text{if } \text{condition}_i \\
-#'         \text{y}_i & \text{otherwise} \\
+#'     \mbox{out}_i = \begin{cases}
+#'         \mbox{x}_i & \mbox{if } \mbox{condition}_i \\
+#'         \mbox{y}_i & \mbox{otherwise} \\
 #'     \end{cases}
 #' }
 #' @note
@@ -4162,7 +4162,7 @@ NULL
 #' element in `input` i.e.,
 #' 
 #' \deqn{
-#'     \text{out}_i \sim \text{Poisson}(\text{input}_i)
+#'     \mbox{out}_i \sim \mbox{Poisson}(\mbox{input}_i)
 #' }
 #'
 #'
@@ -4208,12 +4208,12 @@ NULL
 #' When `exponent` is a scalar value, the operation applied is:
 #' 
 #' \deqn{
-#'     \text{out}_i = x_i ^ \text{exponent}
+#'     \mbox{out}_i = x_i ^ \mbox{exponent}
 #' }
 #' When `exponent` is a tensor, the operation applied is:
 #' 
 #' \deqn{
-#'     \text{out}_i = x_i ^ {\text{exponent}_i}
+#'     \mbox{out}_i = x_i ^ {\mbox{exponent}_i}
 #' }
 #' When `exponent` is a tensor, the shapes of `input`
 #' and `exponent` must be broadcastable .
@@ -4226,7 +4226,7 @@ NULL
 #' The operation applied is:
 #' 
 #' \deqn{
-#'     \text{out}_i = \text{self} ^ {\text{exponent}_i}
+#'     \mbox{out}_i = \mbox{self} ^ {\mbox{exponent}_i}
 #' }
 #'
 #'
@@ -4257,7 +4257,7 @@ NULL
 #' `mat1` and `mat2` and the added matrix `input` respectively.
 #' 
 #' \deqn{
-#'     \text{out} = \beta\ \text{input} + \alpha\ (\text{mat1}_i \mathbin{@} \text{mat2}_i)
+#'     \mbox{out} = \beta\ \mbox{input} + \alpha\ (\mbox{mat1}_i \mathbin{@} \mbox{mat2}_i)
 #' }
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and
 #' `alpha` must be real numbers, otherwise they should be integers.
@@ -4534,7 +4534,7 @@ NULL
 #' and `out` will be a \eqn{(n \times p)} tensor.
 #' 
 #' \deqn{
-#'     out = \beta\ \text{input} + \alpha\ (\sum_{i=0}^{b-1} \text{batch1}_i \mathbin{@} \text{batch2}_i)
+#'     out = \beta\ \mbox{input} + \alpha\ (\sum_{i=0}^{b-1} \mbox{batch1}_i \mathbin{@} \mbox{batch2}_i)
 #' }
 #' For inputs of type `FloatTensor` or `DoubleTensor`, arguments `beta` and `alpha`
 #' must be real numbers, otherwise they should be integers.
@@ -4797,7 +4797,7 @@ NULL
 #'
 #' @section ge(input, other, out=None) -> Tensor :
 #'
-#' Computes \eqn{\text{input} \geq \text{other}} element-wise.
+#' Computes \eqn{\mbox{input} \geq \mbox{other}} element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' broadcastable  with the first argument.
@@ -4817,7 +4817,7 @@ NULL
 #'
 #' @section le(input, other, out=None) -> Tensor :
 #'
-#' Computes \eqn{\text{input} \leq \text{other}} element-wise.
+#' Computes \eqn{\mbox{input} \leq \mbox{other}} element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' broadcastable  with the first argument.
@@ -4837,7 +4837,7 @@ NULL
 #'
 #' @section gt(input, other, out=None) -> Tensor :
 #'
-#' Computes \eqn{\text{input} > \text{other}} element-wise.
+#' Computes \eqn{\mbox{input} > \mbox{other}} element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' broadcastable  with the first argument.
@@ -4857,7 +4857,7 @@ NULL
 #'
 #' @section lt(input, other, out=None) -> Tensor :
 #'
-#' Computes \eqn{\text{input} < \text{other}} element-wise.
+#' Computes \eqn{\mbox{input} < \mbox{other}} element-wise.
 #' 
 #' The second argument can be a number or a tensor whose shape is
 #' broadcastable  with the first argument.
@@ -5032,7 +5032,7 @@ NULL
 #' and add it to `input`.
 #' 
 #' \deqn{
-#'     \text{out}_i = \text{input}_i + \text{value} \times \text{tensor1}_i \times \text{tensor2}_i
+#'     \mbox{out}_i = \mbox{input}_i + \mbox{value} \times \mbox{tensor1}_i \times \mbox{tensor2}_i
 #' }
 #' The shapes of `tensor`, `tensor1`, and `tensor2` must be
 #' broadcastable .
@@ -5073,7 +5073,7 @@ NULL
 #'     `tensor2`).
 #' 
 #' \deqn{
-#'     \text{out}_i = \text{input}_i + \text{value} \times \frac{\text{tensor1}_i}{\text{tensor2}_i}
+#'     \mbox{out}_i = \mbox{input}_i + \mbox{value} \times \frac{\mbox{tensor1}_i}{\mbox{tensor2}_i}
 #' }
 #' 
 #' The shapes of `input`, `tensor1`, and `tensor2` must be
@@ -5086,7 +5086,7 @@ NULL
 #' @param input (Tensor) the tensor to be added
 #' @param tensor1 (Tensor) the numerator tensor
 #' @param tensor2 (Tensor) the denominator tensor
-#' @param value (Number, optional) multiplier for \eqn{\text{tensor1} / \text{tensor2}}
+#' @param value (Number, optional) multiplier for \eqn{\mbox{tensor1} / \mbox{tensor2}}
 #' @param out (Tensor, optional) the output tensor.
 #'
 #' @name torch_addcdiv
@@ -5116,7 +5116,7 @@ NULL
 #' \deqn{
 #' 
 #'    \begin{array}{ll}
-#'    \min_X & \|X\|_2 & \text{subject to} & AX = B.
+#'    \min_X & \|X\|_2 & \mbox{subject to} & AX = B.
 #'    \end{array}
 #' }
 #' Returned tensor \eqn{X} has shape \eqn{(\max(m, n) \times k)}. The first \eqn{n}
@@ -5174,7 +5174,7 @@ NULL
 #' represented by a namedtuple (eigenvalues, eigenvectors).
 #' 
 #' This function calculates all eigenvalues (and vectors) of `input`
-#' such that \eqn{\text{input} = V \text{diag}(e) V^T}.
+#' such that \eqn{\mbox{input} = V \mbox{diag}(e) V^T}.
 #' 
 #' The boolean argument `eigenvectors` defines computation of
 #' both eigenvectors and eigenvalues or eigenvalues only.
@@ -5423,7 +5423,7 @@ NULL
 #' @section qr(input, some=True, out=None) -> (Tensor, Tensor) :
 #'
 #' Computes the QR decomposition of a matrix or a batch of matrices `input`,
-#' and returns a namedtuple (Q, R) of tensors such that \eqn{\text{input} = Q R}
+#' and returns a namedtuple (Q, R) of tensors such that \eqn{\mbox{input} = Q R}
 #' with \eqn{Q} being an orthogonal matrix or batch of orthogonal matrices and
 #' \eqn{R} being an upper triangular matrix or batch of upper triangular matrices.
 #' 
@@ -5554,7 +5554,7 @@ NULL
 #' If `input` is a vector, `out` is a vector of size `num_samples`.
 #' 
 #' If `input` is a matrix with `m` rows, `out` is an matrix of shape
-#' \eqn{(m \times \text{num\_samples})}.
+#' \eqn{(m \times \mbox{num\_samples})}.
 #' 
 #' If replacement is ``True``, samples are drawn with replacement.
 #' 
@@ -5586,7 +5586,7 @@ NULL
 #' Computes the logarithm of the gamma function on `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \log \Gamma(\text{input}_{i})
+#'     \mbox{out}_{i} = \log \Gamma(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -5670,7 +5670,7 @@ NULL
 #' Returns a new tensor with the signs of the elements of `input`.
 #' 
 #' \deqn{
-#'     \text{out}_{i} = \operatorname{sgn}(\text{input}_{i})
+#'     \mbox{out}_{i} = \operatorname{sgn}(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -5707,11 +5707,11 @@ NULL
 #'
 #' @section atan2(input, other, out=None) -> Tensor :
 #'
-#' Element-wise arctangent of \eqn{\text{input}_{i} / \text{other}_{i}}
+#' Element-wise arctangent of \eqn{\mbox{input}_{i} / \mbox{other}_{i}}
 #' with consideration of the quadrant. Returns a new tensor with the signed angles
-#' in radians between vector \eqn{(\text{other}_{i}, \text{input}_{i})}
-#' and vector \eqn{(1, 0)}. (Note that \eqn{\text{other}_{i}}, the second
-#' parameter, is the x-coordinate, while \eqn{\text{input}_{i}}, the first
+#' in radians between vector \eqn{(\mbox{other}_{i}, \mbox{input}_{i})}
+#' and vector \eqn{(1, 0)}. (Note that \eqn{\mbox{other}_{i}}, the second
+#' parameter, is the x-coordinate, while \eqn{\mbox{input}_{i}}, the first
 #' parameter, is the y-coordinate.)
 #' 
 #' The shapes of ``input`` and ``other`` must be
@@ -5736,7 +5736,7 @@ NULL
 #' on a scalar or tensor `weight` and returns the resulting `out` tensor.
 #' 
 #' \deqn{
-#'     \text{out}_i = \text{start}_i + \text{weight}_i \times (\text{end}_i - \text{start}_i)
+#'     \mbox{out}_i = \mbox{start}_i + \mbox{weight}_i \times (\mbox{end}_i - \mbox{start}_i)
 #' }
 #' The shapes of `start` and `end` must be
 #' broadcastable . If `weight` is a tensor, then

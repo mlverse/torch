@@ -11,10 +11,10 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-\text{Hardsigmoid}(x) = \begin{cases}
-  0 & \text{if~} x \le -3, \\
-  1 & \text{if~} x \ge +3, \\
-  x / 6 + 1 / 2 & \text{otherwise}
+\mbox{Hardsigmoid}(x) = \begin{cases}
+  0 & \mbox{if~} x \le -3, \\
+  1 & \mbox{if~} x \ge +3, \\
+  x / 6 + 1 / 2 & \mbox{otherwise}
 \end{cases}
 }
 }

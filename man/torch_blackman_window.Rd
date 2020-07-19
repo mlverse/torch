@@ -39,7 +39,7 @@ returned window size. \code{periodic} flag determines whether the returned
 window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
 \code{torch_stft}. Therefore, if \code{periodic} is true, the \eqn{N} in
-above formula is in fact \eqn{\text{window\_length} + 1}. Also, we always have
+above formula is in fact \eqn{\mbox{window\_length} + 1}. Also, we always have
 \code{torch_blackman_window(L, periodic=True)} equal to
 \verb{torch_blackman_window(L + 1, periodic=False)[:-1])}.
 }

@@ -31,7 +31,7 @@ Logspace
 
 Returns a one-dimensional tensor of \code{steps} points
 logarithmically spaced with base \code{base} between
-\eqn{{\text{base}}^{\text{start}}} and \eqn{{\text{base}}^{\text{end}}}.
+\eqn{{\mbox{base}}^{\mbox{start}}} and \eqn{{\mbox{base}}^{\mbox{end}}}.
 
 The output tensor is 1-D of size \code{steps}.
 }

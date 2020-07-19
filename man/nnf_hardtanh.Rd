@@ -10,7 +10,7 @@ nnf_hardtanh(input, min_val = -1, max_val = 1, inplace = FALSE)
 nnf_hardtanh_(input, min_val = -1, max_val = 1)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{min_val}{minimum value of the linear region range. Default: -1}

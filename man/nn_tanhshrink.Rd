@@ -11,7 +11,7 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{Tanhshrink}(x) = x - \tanh(x)
+  \mbox{Tanhshrink}(x) = x - \tanh(x)
 }
 }
 \section{Shape}{

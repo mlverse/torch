@@ -17,7 +17,7 @@ Gt
 \section{gt(input, other, out=None) -> Tensor }{
 
 
-Computes \eqn{\text{input} > \text{other}} element-wise.
+Computes \eqn{\mbox{input} > \mbox{other}} element-wise.
 
 The second argument can be a number or a tensor whose shape is
 broadcastable  with the first argument.

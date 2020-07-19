@@ -9,7 +9,7 @@ nn_log_sigmoid()
 \description{
 Applies the element-wise function:
 \deqn{
-  \text{LogSigmoid}(x) = \log\left(\frac{ 1 }{ 1 + \exp(-x)}\right)
+  \mbox{LogSigmoid}(x) = \log\left(\frac{ 1 }{ 1 + \exp(-x)}\right)
  }
 }
 \section{Shape}{

@@ -28,7 +28,7 @@ with mean \code{0} and variance \code{1} (also called the standard normal
 distribution).
 
 \deqn{
-    \text{out}_{i} \sim \mathcal{N}(0, 1)
+    \mbox{out}_{i} \sim \mathcal{N}(0, 1)
 }
 The shape of the tensor is defined by the variable argument \code{size}.
 }

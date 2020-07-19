@@ -19,7 +19,7 @@ Return the division of the inputs rounded down to the nearest integer. See \code
 for type promotion and broadcasting rules.
 
 \deqn{
-    \text{{out}}_i = \left\lfloor \frac{{\text{{input}}_i}}{{\text{{other}}_i}} \right\rfloor
+    \mbox{{out}}_i = \left\lfloor \frac{{\mbox{{input}}_i}}{{\mbox{{other}}_i}} \right\rfloor
 }
 }
 

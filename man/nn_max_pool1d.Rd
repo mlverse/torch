@@ -36,7 +36,7 @@ In the simplest case, the output value of the layer with input size \eqn{(N, C, 
 and output \eqn{(N, C, L_{out})} can be precisely described as:
 
 \deqn{
-  out(N_i, C_j, k) = \max_{m=0, \ldots, \text{kernel\_size} - 1}
+  out(N_i, C_j, k) = \max_{m=0, \ldots, \mbox{kernel\_size} - 1}
 input(N_i, C_j, stride \times k + m)
 }
 
@@ -53,8 +53,8 @@ has a nice visualization of what \code{dilation} does.
 }
 
 \deqn{
-  L_{out} = \left\lfloor \frac{L_{in} + 2 \times \text{padding} - \text{dilation}
-    \times (\text{kernel\_size} - 1) - 1}{\text{stride}} + 1\right\rfloor
+  L_{out} = \left\lfloor \frac{L_{in} + 2 \times \mbox{padding} - \mbox{dilation}
+    \times (\mbox{kernel\_size} - 1) - 1}{\mbox{stride}} + 1\right\rfloor
 }
 }
 

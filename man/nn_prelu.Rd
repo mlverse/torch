@@ -16,14 +16,14 @@ Although it takes an int as input, there is only two values are legitimate:
 \description{
 Applies the element-wise function:
 \deqn{
-  \text{PReLU}(x) = \max(0,x) + a * \min(0,x)
+  \mbox{PReLU}(x) = \max(0,x) + a * \min(0,x)
 }
 or
 \deqn{
-  \text{PReLU}(x) =
+  \mbox{PReLU}(x) =
   \begin{cases}
-x, & \text{ if } x \geq 0 \\
-ax, & \text{ otherwise }
+x, & \mbox{ if } x \geq 0 \\
+ax, & \mbox{ otherwise }
 \end{cases}
 }
 }

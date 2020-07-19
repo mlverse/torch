@@ -18,7 +18,7 @@ Angle
 Computes the element-wise angle (in radians) of the given \code{input} tensor.
 
 \deqn{
-    \text{out}_{i} = angle(\text{input}_{i})
+    \mbox{out}_{i} = angle(\mbox{input}_{i})
 }
 }
 

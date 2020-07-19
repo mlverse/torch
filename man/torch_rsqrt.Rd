@@ -19,7 +19,7 @@ Returns a new tensor with the reciprocal of the square-root of each of
 the elements of \code{input}.
 
 \deqn{
-    \text{out}_{i} = \frac{1}{\sqrt{\text{input}_{i}}}
+    \mbox{out}_{i} = \frac{1}{\sqrt{\mbox{input}_{i}}}
 }
 }
 

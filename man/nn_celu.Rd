@@ -16,7 +16,7 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{CELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x/\alpha) - 1))
+  \mbox{CELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x/\alpha) - 1))
 }
 
 More details can be found in the paper

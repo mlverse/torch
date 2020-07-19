@@ -23,7 +23,7 @@ Softmax is defined as:
 }
 \details{
 \deqn{
-  \text{Softmax}(x_{i}) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}
+  \mbox{Softmax}(x_{i}) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}
 }
 
 When the input Tensor is a sparse tensor then the unspecifed

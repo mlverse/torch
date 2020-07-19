@@ -23,7 +23,7 @@ Does a linear interpolation of two tensors \code{start} (given by \code{input}) 
 on a scalar or tensor \code{weight} and returns the resulting \code{out} tensor.
 
 \deqn{
-    \text{out}_i = \text{start}_i + \text{weight}_i \times (\text{end}_i - \text{start}_i)
+    \mbox{out}_i = \mbox{start}_i + \mbox{weight}_i \times (\mbox{end}_i - \mbox{start}_i)
 }
 The shapes of \code{start} and \code{end} must be
 broadcastable . If \code{weight} is a tensor, then

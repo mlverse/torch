@@ -7,7 +7,7 @@
 nnf_hardswish(input, inplace = FALSE)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{inplace}{can optionally do the operation in-place. Default: FALSE}
@@ -18,10 +18,10 @@ Searching for MobileNetV3.
 }
 \details{
 \deqn{
-  \text{Hardswish}(x) = \begin{cases}
-0 & \text{if~} x \le -3, \\
-x & \text{if~} x \ge +3, \\
-x \cdot (x + 3) /6 & \text{otherwise}
+  \mbox{Hardswish}(x) = \begin{cases}
+0 & \mbox{if~} x \le -3, \\
+x & \mbox{if~} x \ge +3, \\
+x \cdot (x + 3) /6 & \mbox{otherwise}
 \end{cases}
 }
 }

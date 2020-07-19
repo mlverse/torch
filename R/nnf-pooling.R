@@ -54,7 +54,7 @@ nnf_avg_pool2d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 #'
 #' Applies 3D average-pooling operation in \eqn{kT * kH * kW} regions by step
 #' size \eqn{sT * sH * sW} steps. The number of output features is equal to
-#' \eqn{\lfloor\frac{\text{input planes}}{sT}\rfloor}.
+#' \eqn{\lfloor \frac{ \mbox{input planes} }{sT} \rfloor}.
 #'
 #' @param input input tensor (minibatch, in_channels , iT * iH , iW)
 #' @param kernel_size size of the pooling region. Can be a single number or a      

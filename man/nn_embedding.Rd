@@ -67,7 +67,7 @@ initialized from \eqn{\mathcal{N}(0, 1)}
 
 \itemize{
 \item Input: \eqn{(*)}, LongTensor of arbitrary shape containing the indices to extract
-\item Output: \eqn{(*, H)}, where \code{*} is the input shape and \eqn{H=\text{embedding\_dim}}
+\item Output: \eqn{(*, H)}, where \code{*} is the input shape and \eqn{H=\mbox{embedding\_dim}}
 }
 }
 

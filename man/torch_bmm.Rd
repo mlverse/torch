@@ -32,7 +32,7 @@ If \code{input} is a \eqn{(b \times n \times m)} tensor, \code{mat2} is a
 \eqn{(b \times n \times p)} tensor.
 
 \deqn{
-    \text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
+    \mbox{out}_i = \mbox{input}_i \mathbin{@} \mbox{mat2}_i
 }
 }
 

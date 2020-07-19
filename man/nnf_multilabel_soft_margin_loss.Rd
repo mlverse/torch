@@ -7,9 +7,9 @@
 nnf_multilabel_soft_margin_loss(input, target, weight, reduction = "mean")
 }
 \arguments{
-\item{input}{tensor (N,∗) where *∗ means, any number of additional dimensions}
+\item{input}{tensor (N,*) where ** means, any number of additional dimensions}
 
-\item{target}{tensor (N,∗) , same shape as the input}
+\item{target}{tensor (N,*) , same shape as the input}
 
 \item{weight}{weight tensor to apply on the loss.}
 

@@ -21,8 +21,8 @@ Threshold is defined as:
 \deqn{
   y = 
   \begin{cases}
-  x, &\text{ if } x > \text{threshold} \\
-  \text{value}, &\text{ otherwise }
+  x, &\mbox{ if } x > \mbox{threshold} \\
+  \mbox{value}, &\mbox{ otherwise }
   \end{cases}
 }
 }

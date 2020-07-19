@@ -13,7 +13,7 @@
 
 \item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
-\item{alpha}{(Number, optional) multiplier for \eqn{\text{batch1} \mathbin{@} \text{batch2}} (\eqn{\alpha})}
+\item{alpha}{(Number, optional) multiplier for \eqn{\mbox{batch1} \mathbin{@} \mbox{batch2}} (\eqn{\alpha})}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
@@ -38,7 +38,7 @@ broadcastable  with a
 same as the scaling factors used in \code{torch_addbmm}.
 
 \deqn{
-    \text{out}_i = \beta\ \text{input}_i + \alpha\ (\text{batch1}_i \mathbin{@} \text{batch2}_i)
+    \mbox{out}_i = \beta\ \mbox{input}_i + \alpha\ (\mbox{batch1}_i \mathbin{@} \mbox{batch2}_i)
 }
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
 \code{alpha} must be real numbers, otherwise they should be integers.

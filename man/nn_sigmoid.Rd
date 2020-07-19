@@ -11,7 +11,7 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{Sigmoid}(x) = \sigma(x) = \frac{1}{1 + \exp(-x)}
+  \mbox{Sigmoid}(x) = \sigma(x) = \frac{1}{1 + \exp(-x)}
 }
 }
 \section{Shape}{

@@ -42,12 +42,12 @@ necessarily be in the class range).
 
 The loss can be described as:
 \deqn{
-  \text{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
+  \mbox{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
 = -x[class] + \log\left(\sum_j \exp(x[j])\right)
 }
 or in the case of the \code{weight} argument being specified:
 \deqn{
-  \text{loss}(x, class) = weight[class] \left(-x[class] + \log\left(\sum_j \exp(x[j])\right)\right)
+  \mbox{loss}(x, class) = weight[class] \left(-x[class] + \log\left(\sum_j \exp(x[j])\right)\right)
 }
 
 The losses are averaged across observations for each minibatch.
@@ -62,7 +62,7 @@ where \eqn{K} is the number of dimensions, and a target of appropriate shape
 \item Input: \eqn{(N, C)} where \verb{C = number of classes}, or
 \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
 in the case of \code{K}-dimensional loss.
-\item Target: \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1}, or
+\item Target: \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, or
 \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
 K-dimensional loss.
 \item Output: scalar.

@@ -60,7 +60,7 @@ The shapes of \code{input} and \code{other} don't need to match,
 but they must be broadcastable .
 
 \deqn{
-    \text{out}_i = \max(\text{tensor}_i, \text{other}_i)
+    \mbox{out}_i = \max(\mbox{tensor}_i, \mbox{other}_i)
 }
 }
 

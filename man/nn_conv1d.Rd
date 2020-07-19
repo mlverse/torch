@@ -44,14 +44,14 @@ output. Default: \code{TRUE}}
 Applies a 1D convolution over an input signal composed of several input
 planes.
 In the simplest case, the output value of the layer with input size
-\eqn{(N, C_{\text{in}}, L)} and output \eqn{(N, C_{\text{out}}, L_{\text{out}})} can be
+\eqn{(N, C_{\mbox{in}}, L)} and output \eqn{(N, C_{\mbox{out}}, L_{\mbox{out}})} can be
 precisely described as:
 }
 \details{
 \deqn{
-\text{out}(N_i, C_{\text{out}_j}) = \text{bias}(C_{\text{out}_j}) +
-  \sum_{k = 0}^{C_{in} - 1} \text{weight}(C_{\text{out}_j}, k)
-\star \text{input}(N_i, k)
+\mbox{out}(N_i, C_{\mbox{out}_j}) = \mbox{bias}(C_{\mbox{out}_j}) +
+  \sum_{k = 0}^{C_{in} - 1} \mbox{weight}(C_{\mbox{out}_j}, k)
+\star \mbox{input}(N_i, k)
 }
 
 where \eqn{\star} is the valid
@@ -95,7 +95,7 @@ where \code{K} is a positive integer, this operation is also termed in
 literature as depthwise convolution.
 In other words, for an input of size \eqn{(N, C_{in}, L_{in})},
 a depthwise convolution with a depthwise multiplier \code{K}, can be constructed by arguments
-\eqn{(C_\text{in}=C_{in}, C_\text{out}=C_{in} \times K, ..., \text{groups}=C_{in})}.
+\eqn{(C_{\mbox{in}}=C_{in}, C_{\mbox{out}}=C_{in} \times K, ..., \mbox{groups}=C_{in})}.
 }
 
 \section{Shape}{
@@ -107,8 +107,8 @@ a depthwise convolution with a depthwise multiplier \code{K}, can be constructed
 
 \deqn{
 
-  L_{out} = \left\lfloor\frac{L_{in} + 2 \times \text{padding} - \text{dilation}
-    \times (\text{kernel\_size} - 1) - 1}{\text{stride}} + 1\right\rfloor
+  L_{out} = \left\lfloor\frac{L_{in} + 2 \times \mbox{padding} - \mbox{dilation}
+    \times (\mbox{kernel\_size} - 1) - 1}{\mbox{stride}} + 1\right\rfloor
     
 }
 }
@@ -117,14 +117,14 @@ a depthwise convolution with a depthwise multiplier \code{K}, can be constructed
 
 \itemize{
 \item weight (Tensor): the learnable weights of the module of shape
-\eqn{(\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}}, \text{kernel\_size})}.
+\eqn{(\mbox{out\_channels}, \frac{\mbox{in\_channels}}{\mbox{groups}}, \mbox{kernel\_size})}.
 The values of these weights are sampled from
 \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{in} * \text{kernel\_size}}}
+\eqn{k = \frac{groups}{C_{\mbox{in}} * \mbox{kernel\_size}}}
 \item bias (Tensor): the learnable bias of the module of shape
 (out_channels). If \code{bias} is \code{TRUE}, then the values of these weights are
 sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{in} * \text{kernel\_size}}}
+\eqn{k = \frac{groups}{C_{\mbox{in}} * \mbox{kernel\_size}}}
 }
 }
 

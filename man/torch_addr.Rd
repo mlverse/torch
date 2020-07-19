@@ -13,7 +13,7 @@
 
 \item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
-\item{alpha}{(Number, optional) multiplier for \eqn{\text{vec1} \otimes \text{vec2}} (\eqn{\alpha})}
+\item{alpha}{(Number, optional) multiplier for \eqn{\mbox{vec1} \otimes \mbox{vec2}} (\eqn{\alpha})}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
@@ -31,7 +31,7 @@ outer product between \code{vec1} and \code{vec2} and the added matrix
 \code{input} respectively.
 
 \deqn{
-    \text{out} = \beta\ \text{input} + \alpha\ (\text{vec1} \otimes \text{vec2})
+    \mbox{out} = \beta\ \mbox{input} + \alpha\ (\mbox{vec1} \otimes \mbox{vec2})
 }
 If \code{vec1} is a vector of size \code{n} and \code{vec2} is a vector
 of size \code{m}, then \code{input} must be

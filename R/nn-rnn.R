@@ -182,7 +182,7 @@ nn_rnn_base <- nn_module(
 
 #' RNN module
 #' 
-#' Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\text{ReLU}} non-linearity
+#' Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\mbox{ReLU}} non-linearity
 #' to an input sequence.
 #' 
 #' For each element in the input sequence, each layer computes the following
@@ -195,7 +195,7 @@ nn_rnn_base <- nn_module(
 #' where \eqn{h_t} is the hidden state at time `t`, \eqn{x_t} is
 #' the input at time `t`, and \eqn{h_{(t-1)}} is the hidden state of the
 #' previous layer at time `t-1` or the initial hidden state at time `0`.
-#' If `nonlinearity` is `'relu'`, then \eqn{\text{ReLU}} is used instead of 
+#' If `nonlinearity` is `'relu'`, then \eqn{\mbox{ReLU}} is used instead of 
 #' \eqn{\tanh}.
 #' 
 #' @param input_size The number of expected features in the input `x`
@@ -247,13 +247,13 @@ nn_rnn_base <- nn_module(
 #' @section Shape:
 #' 
 #' - Input1: \eqn{(L, N, H_{in})} tensor containing input features where
-#'  \eqn{H_{in}=\text{input_size}} and `L` represents a sequence length.
+#'  \eqn{H_{in}=\mbox{input_size}} and `L` represents a sequence length.
 #' - Input2: \eqn{(S, N, H_{out})} tensor
 #'   containing the initial hidden state for each element in the batch.
-#'   \eqn{H_{out}=\text{hidden_size}}
-#'   Defaults to zero if not provided. where \eqn{S=\text{num_layers} * \text{num_directions}}
+#'   \eqn{H_{out}=\mbox{hidden_size}}
+#'   Defaults to zero if not provided. where \eqn{S=\mbox{num_layers} * \mbox{num_directions}}
 #'   If the RNN is bidirectional, num_directions should be 2, else it should be 1.
-#' - Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\text{num_directions} * \text{hidden_size}}
+#' - Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\mbox{num_directions} * \mbox{hidden_size}}
 #' - Output2: \eqn{(S, N, H_{out})} tensor containing the next hidden state
 #'   for each element in the batch
 #'   
@@ -271,7 +271,7 @@ nn_rnn_base <- nn_module(
 #' @section Note:
 #' 
 #' All the weights and biases are initialized from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}
-#' where \eqn{k = \frac{1}{\text{hidden\_size}}}
+#' where \eqn{k = \frac{1}{\mbox{hidden\_size}}}
 #' 
 #' @examples
 #' rnn <- nn_rnn(10, 20, 2)

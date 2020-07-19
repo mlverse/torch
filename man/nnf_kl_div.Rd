@@ -7,9 +7,9 @@
 nnf_kl_div(input, target, reduction = "mean")
 }
 \arguments{
-\item{input}{tensor (N,∗) where *∗ means, any number of additional dimensions}
+\item{input}{tensor (N,*) where ** means, any number of additional dimensions}
 
-\item{target}{tensor (N,∗) , same shape as the input}
+\item{target}{tensor (N,*) , same shape as the input}
 
 \item{reduction}{(string, optional) – Specifies the reduction to apply to the
 output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean':

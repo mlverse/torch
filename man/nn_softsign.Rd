@@ -9,7 +9,7 @@ nn_softsign()
 \description{
 Applies the element-wise function:
 \deqn{
-  \text{SoftSign}(x) = \frac{x}{ 1 + |x|}
+  \mbox{SoftSign}(x) = \frac{x}{ 1 + |x|}
 }
 }
 \section{Shape}{

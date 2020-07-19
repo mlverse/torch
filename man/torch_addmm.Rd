@@ -35,7 +35,7 @@ and \code{out} will be a \eqn{(n \times p)} tensor.
 \code{mat1} and \code{mat2} and the added matrix \code{input} respectively.
 
 \deqn{
-    \text{out} = \beta\ \text{input} + \alpha\ (\text{mat1}_i \mathbin{@} \text{mat2}_i)
+    \mbox{out} = \beta\ \mbox{input} + \alpha\ (\mbox{mat1}_i \mathbin{@} \mbox{mat2}_i)
 }
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
 \code{alpha} must be real numbers, otherwise they should be integers.

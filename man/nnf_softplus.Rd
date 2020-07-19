@@ -7,7 +7,7 @@
 nnf_softplus(input, beta = 1, threshold = 20)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{beta}{the beta value for the Softplus formulation. Default: 1}

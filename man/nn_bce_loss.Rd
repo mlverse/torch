@@ -32,8 +32,8 @@ where \eqn{N} is the batch size. If \code{reduction} is not \code{'none'}
 
 \deqn{
   \ell(x, y) = \begin{cases}
-\operatorname{mean}(L), & \text{if reduction} = \text{'mean';}\\
-\operatorname{sum}(L),  & \text{if reduction} = \text{'sum'.}
+\operatorname{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
+\operatorname{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
 \end{cases}
 }
 

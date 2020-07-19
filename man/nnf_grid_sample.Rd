@@ -13,9 +13,9 @@ nnf_grid_sample(
 )
 }
 \arguments{
-\item{input}{(Tensor) input of shape \eqn{(N, C, H_\text{in}, W_\text{in})} (4-D case)                    or \eqn{(N, C, D_\text{in}, H_\text{in}, W_\text{in})} (5-D case)}
+\item{input}{(Tensor) input of shape \eqn{(N, C, H_{\mbox{in}}, W_{\mbox{in}})} (4-D case)                    or \eqn{(N, C, D_{\mbox{in}}, H_{\mbox{in}}, W_{\mbox{in}})} (5-D case)}
 
-\item{grid}{(Tensor) flow-field of shape \eqn{(N, H_\text{out}, W_\text{out}, 2)} (4-D case)                   or \eqn{(N, D_\text{out}, H_\text{out}, W_\text{out}, 3)} (5-D case)}
+\item{grid}{(Tensor) flow-field of shape \eqn{(N, H_{\mbox{out}}, W_{\mbox{out}}, 2)} (4-D case)                   or \eqn{(N, D_{\mbox{out}}, H_{\mbox{out}}, W_{\mbox{out}}, 3)} (5-D case)}
 
 \item{mode}{(str) interpolation mode to calculate output values \code{'bilinear'} | \code{'nearest'}.
 Default: \code{'bilinear'}}
@@ -41,9 +41,9 @@ Currently, only spatial (4-D) and volumetric (5-D) \code{input} are
 supported.
 
 In the spatial (4-D) case, for \code{input} with shape
-\eqn{(N, C, H_\text{in}, W_\text{in})} and \code{grid} with shape
-\eqn{(N, H_\text{out}, W_\text{out}, 2)}, the output will have shape
-\eqn{(N, C, H_\text{out}, W_\text{out})}.
+\eqn{(N, C, H_{\mbox{in}}, W_{\mbox{in}})} and \code{grid} with shape
+\eqn{(N, H_{\mbox{out}}, W_{\mbox{out}}, 2)}, the output will have shape
+\eqn{(N, C, H_{\mbox{out}}, W_{\mbox{out}})}.
 
 For each output location \verb{output[n, :, h, w]}, the size-2 vector
 \code{grid[n, h, w]} specifies \code{input} pixel locations \code{x} and \code{y},

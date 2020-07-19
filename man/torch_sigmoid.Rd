@@ -18,7 +18,7 @@ Sigmoid
 Returns a new tensor with the sigmoid of the elements of \code{input}.
 
 \deqn{
-    \text{out}_{i} = \frac{1}{1 + e^{-\text{input}_{i}}}
+    \mbox{out}_{i} = \frac{1}{1 + e^{-\mbox{input}_{i}}}
 }
 }
 

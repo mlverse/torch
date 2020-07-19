@@ -15,7 +15,7 @@
 
 \item{window}{(Tensor, optional) the optional window function.        Default: \code{None} (treated as window of all \eqn{1} s)}
 
-\item{center}{(bool, optional) whether to pad \code{input} on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \text{hop\_length}}.        Default: \code{True}}
+\item{center}{(bool, optional) whether to pad \code{input} on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.        Default: \code{True}}
 
 \item{pad_mode}{(string, optional) controls the padding method used when        \code{center} is \code{True}. Default: \code{"reflect"}}
 
@@ -34,12 +34,12 @@ expression:
 }
 
 \deqn{
-        X[m, \omega] = \sum_{k = 0}^{\text{win\_length-1}}%
-                            \text{window}[k]\ \text{input}[m \times \text{hop\_length} + k]\ %
-                            \exp\left(- j \frac{2 \pi \cdot \omega k}{\text{win\_length}}\right),
+        X[m, \omega] = \sum_{k = 0}^{\mbox{win\_length-1}}%
+                            \mbox{window}[k]\ \mbox{input}[m \times \mbox{hop\_length} + k]\ %
+                            \exp\left(- j \frac{2 \pi \cdot \omega k}{\mbox{win\_length}}\right),
 }
 where \eqn{m} is the index of the sliding window, and \eqn{\omega} is
-the frequency that \eqn{0 \leq \omega < \text{n\_fft}}. When
+the frequency that \eqn{0 \leq \omega < \mbox{n\_fft}}. When
 \code{onesided} is the default value \code{True},\preformatted{* `input` must be either a 1-D time sequence or a 2-D batch of time
   sequences.
 
@@ -52,25 +52,25 @@ the frequency that \eqn{0 \leq \omega < \text{n\_fft}}. When
 * `window` can be a 1-D tensor of size `win_length`, e.g., from
   `torch_hann_window`. If `window` is ``None`` (default), it is
   treated as if having \eqn{1} everywhere in the window. If
-  \eqn{\text{win\_length} < \text{n\_fft}}, `window` will be padded on
+  \eqn{\mbox{win\_length} < \mbox{n\_fft}}, `window` will be padded on
   both sides to length `n_fft` before being applied.
 
 * If `center` is ``True`` (default), `input` will be padded on
   both sides so that the \eqn{t}-th frame is centered at time
-  \eqn{t \times \text{hop\_length}}. Otherwise, the \eqn{t}-th frame
-  begins at time  \eqn{t \times \text{hop\_length}}.
+  \eqn{t \times \mbox{hop\_length}}. Otherwise, the \eqn{t}-th frame
+  begins at time  \eqn{t \times \mbox{hop\_length}}.
 
 * `pad_mode` determines the padding method used on `input` when
   `center` is ``True``. See `torch_nn.functional.pad` for
   all available options. Default is ``"reflect"``.
 
 * If `onesided` is ``True`` (default), only values for \eqn{\omega}
-  in \eqn{\left[0, 1, 2, \dots, \left\lfloor \frac{\text{n\_fft}}{2} \right\rfloor + 1\right]}
+  in \eqn{\left[0, 1, 2, \dots, \left\lfloor \frac{\mbox{n\_fft}}{2} \right\rfloor + 1\right]}
   are returned because the real-to-complex Fourier transform satisfies the
-  conjugate symmetry, i.e., \eqn{X[m, \omega] = X[m, \text{n\_fft} - \omega]^*}.
+  conjugate symmetry, i.e., \eqn{X[m, \omega] = X[m, \mbox{n\_fft} - \omega]^*}.
 
 * If `normalized` is ``True`` (default is ``False``), the function
-  returns the normalized STFT results, i.e., multiplied by \eqn{(\text{frame\_length})^{-0.5}}.
+  returns the normalized STFT results, i.e., multiplied by \eqn{(\mbox{frame\_length})^{-0.5}}.
 
 Returns the real and the imaginary parts together as one tensor of size
 \eqn{(* \times N \times T \times 2)}, where \eqn{*} is the optional

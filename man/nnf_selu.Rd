@@ -10,7 +10,7 @@ nnf_selu(input, inplace = FALSE)
 nnf_selu_(input)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{inplace}{can optionally do the operation in-place. Default: FALSE}

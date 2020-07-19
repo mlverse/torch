@@ -2,8 +2,8 @@
 #'
 #' Function that takes the mean element-wise absolute value difference.
 #' 
-#' @param input tensor (N,∗) where *∗ means, any number of additional dimensions
-#' @param target tensor (N,∗) , same shape as the input
+#' @param input tensor (N,*) where ** means, any number of additional dimensions
+#' @param target tensor (N,*) , same shape as the input
 #' @param reduction (string, optional) – Specifies the reduction to apply to the 
 #'   output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean': 
 #'   the sum of the output will be divided by the number of elements in the output, 
@@ -293,8 +293,8 @@ nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blan
 #' Poisson negative log likelihood loss.
 #'
 #' @inheritParams nnf_l1_loss
-#' @param log_input if `TRUE` the loss is computed as \eqn{\exp(\text{input}) - \text{target} * \text{input}}, 
-#'   if `FALSE` then loss is \eqn{\text{input} - \text{target} * \log(\text{input}+\text{eps})}. 
+#' @param log_input if `TRUE` the loss is computed as \eqn{\exp(\mbox{input}) - \mbox{target} * \mbox{input}}, 
+#'   if `FALSE` then loss is \eqn{\mbox{input} - \mbox{target} * \log(\mbox{input}+\mbox{eps})}. 
 #'   Default: `TRUE`.
 #' @param full whether to compute full loss, i. e. to add the Stirling approximation
 #'  term. Default: `FALSE`.
@@ -334,7 +334,7 @@ nnf_margin_ranking_loss <- function(input1, input2, target, margin = 0,
 #' @param input \eqn{(N, C)} where `C = number of classes` or \eqn{(N, C, H, W)} in 
 #'   case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} in 
 #'   the case of K-dimensional loss.
-#' @param target \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1}, 
+#' @param target \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, 
 #'   or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for K-dimensional loss.
 #' @param weight (Tensor, optional) a manual rescaling weight given to each class. 
 #'   If given, has to be a Tensor of size `C`
@@ -396,7 +396,7 @@ nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
 #' @param input (Tensor) \eqn{(N, C)} where `C = number of classes` or \eqn{(N, C, H, W)} 
 #'   in case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} 
 #'   in the case of K-dimensional loss.
-#' @param target (Tensor) \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1}, 
+#' @param target (Tensor) \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, 
 #'   or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for K-dimensional loss.
 #' @param weight (Tensor, optional) a manual rescaling weight given to each class. If 
 #'   given, has to be a Tensor of size `C`

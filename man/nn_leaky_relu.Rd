@@ -16,15 +16,15 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{LeakyReLU}(x) = \max(0, x) + \text{negative\_slope} * \min(0, x)
+  \mbox{LeakyReLU}(x) = \max(0, x) + \mbox{negative\_slope} * \min(0, x)
 }
 or
 
 \deqn{
-  \text{LeakyRELU}(x) =
+  \mbox{LeakyRELU}(x) =
   \begin{cases}
-x, & \text{ if } x \geq 0 \\
-\text{negative\_slope} \times x, & \text{ otherwise }
+x, & \mbox{ if } x \geq 0 \\
+\mbox{negative\_slope} \times x, & \mbox{ otherwise }
 \end{cases}
 }
 }

@@ -35,7 +35,7 @@ of a real symmetric matrix \code{input} or a batch of real symmetric matrices,
 represented by a namedtuple (eigenvalues, eigenvectors).
 
 This function calculates all eigenvalues (and vectors) of \code{input}
-such that \eqn{\text{input} = V \text{diag}(e) V^T}.
+such that \eqn{\mbox{input} = V \mbox{diag}(e) V^T}.
 
 The boolean argument \code{eigenvectors} defines computation of
 both eigenvectors and eigenvalues or eigenvalues only.

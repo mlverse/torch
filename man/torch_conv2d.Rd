@@ -5,11 +5,11 @@
 \alias{torch_conv2d}
 \title{Conv2d}
 \arguments{
-\item{input}{NA input tensor of shape \eqn{(\text{minibatch} , \text{in\_channels} , iH , iW)}}
+\item{input}{NA input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iH , iW)}}
 
-\item{weight}{NA filters of shape \eqn{(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kH , kW)}}
+\item{weight}{NA filters of shape \eqn{(\mbox{out\_channels} , \frac{\mbox{in\_channels}}{\mbox{groups}} , kH , kW)}}
 
-\item{bias}{NA optional bias tensor of shape \eqn{(\text{out\_channels})}. Default: \code{None}}
+\item{bias}{NA optional bias tensor of shape \eqn{(\mbox{out\_channels})}. Default: \code{None}}
 
 \item{stride}{NA the stride of the convolving kernel. Can be a single number or a      tuple \verb{(sH, sW)}. Default: 1}
 
@@ -17,7 +17,7 @@
 
 \item{dilation}{NA the spacing between kernel elements. Can be a single number or      a tuple \verb{(dH, dW)}. Default: 1}
 
-\item{groups}{NA split input into groups, \eqn{\text{in\_channels}} should be divisible by the      number of groups. Default: 1}
+\item{groups}{NA split input into groups, \eqn{\mbox{in\_channels}} should be divisible by the      number of groups. Default: 1}
 }
 \description{
 Conv2d

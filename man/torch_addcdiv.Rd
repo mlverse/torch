@@ -11,7 +11,7 @@
 
 \item{tensor2}{(Tensor) the denominator tensor}
 
-\item{value}{(Number, optional) multiplier for \eqn{\text{tensor1} / \text{tensor2}}}
+\item{value}{(Number, optional) multiplier for \eqn{\mbox{tensor1} / \mbox{tensor2}}}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }
@@ -39,7 +39,7 @@ The new addcdiv behavior can be implemented with \code{\link[=torch_true_divide]
 \code{tensor2}).
 
 \deqn{
-    \text{out}_i = \text{input}_i + \text{value} \times \frac{\text{tensor1}_i}{\text{tensor2}_i}
+    \mbox{out}_i = \mbox{input}_i + \mbox{value} \times \frac{\mbox{tensor1}_i}{\mbox{tensor2}_i}
 }
 
 The shapes of \code{input}, \code{tensor1}, and \code{tensor2} must be

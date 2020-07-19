@@ -18,7 +18,7 @@ Lgamma
 Computes the logarithm of the gamma function on \code{input}.
 
 \deqn{
-    \text{out}_{i} = \log \Gamma(\text{input}_{i})
+    \mbox{out}_{i} = \log \Gamma(\mbox{input}_{i})
 }
 }
 

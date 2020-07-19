@@ -29,9 +29,9 @@ Return a tensor of elements selected from either \code{x} or \code{y}, depending
 The operation is defined as:
 
 \deqn{
-    \text{out}_i = \begin{cases}
-        \text{x}_i & \text{if } \text{condition}_i \\
-        \text{y}_i & \text{otherwise} \\
+    \mbox{out}_i = \begin{cases}
+        \mbox{x}_i & \mbox{if } \mbox{condition}_i \\
+        \mbox{y}_i & \mbox{otherwise} \\
     \end{cases}
 }
 }

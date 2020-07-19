@@ -60,7 +60,7 @@ evaluation time as well.
 This \code{momentum} argument is different from one used in optimizer
 classes and the conventional notion of momentum. Mathematically, the
 update rule for running statistics here is
-\eqn{\hat{x}_\text{new} = (1 - \text{momentum}) \times \hat{x} + \text{momentum} \times x_t},
+\eqn{\hat{x}_\mbox{new} = (1 - \mbox{momentum}) \times \hat{x} + \mbox{momentum} \times x_t},
 where \eqn{\hat{x}} is the estimated statistic and \eqn{x_t} is the
 new observed value.
 Because the Batch Normalization is done over the \code{C} dimension, computing statistics

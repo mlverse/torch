@@ -17,7 +17,7 @@ nnf_cross_entropy(
 in case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1}
 in the case of K-dimensional loss.}
 
-\item{target}{(Tensor) \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1},
+\item{target}{(Tensor) \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1},
 or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for K-dimensional loss.}
 
 \item{weight}{(Tensor, optional) a manual rescaling weight given to each class. If

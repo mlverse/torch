@@ -108,7 +108,7 @@ optim_SGD <- R6::R6Class(
 #' \deqn{
 #'   \begin{aligned}
 #' v_{t+1} & = \mu * v_{t} + g_{t+1}, \\
-#' p_{t+1} & = p_{t} - \text{lr} * v_{t+1},
+#' p_{t+1} & = p_{t} - \mbox{lr} * v_{t+1},
 #' \end{aligned}
 #' }
 #' 
@@ -120,7 +120,7 @@ optim_SGD <- R6::R6Class(
 #' 
 #' \deqn{
 #'   \begin{aligned}
-#' v_{t+1} & = \mu * v_{t} + \text{lr} * g_{t+1}, \\
+#' v_{t+1} & = \mu * v_{t} + \mbox{lr} * g_{t+1}, \\
 #' p_{t+1} & = p_{t} - v_{t+1}.
 #' \end{aligned}
 #' }

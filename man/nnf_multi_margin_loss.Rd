@@ -14,9 +14,9 @@ nnf_multi_margin_loss(
 )
 }
 \arguments{
-\item{input}{tensor (N,∗) where *∗ means, any number of additional dimensions}
+\item{input}{tensor (N,*) where ** means, any number of additional dimensions}
 
-\item{target}{tensor (N,∗) , same shape as the input}
+\item{target}{tensor (N,*) , same shape as the input}
 
 \item{p}{Has a default value of 1. 1 and 2 are the only supported values.}
 

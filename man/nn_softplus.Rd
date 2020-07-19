@@ -14,7 +14,7 @@ nn_softplus(beta = 1, threshold = 20)
 \description{
 Applies the element-wise function:
 \deqn{
-  \text{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))
+  \mbox{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))
 }
 }
 \details{

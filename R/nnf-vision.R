@@ -34,9 +34,9 @@ nnf_affine_grid <- function(theta, size, align_corners = FALSE) {
 #' supported.
 #' 
 #' In the spatial (4-D) case, for `input` with shape
-#' \eqn{(N, C, H_\text{in}, W_\text{in})} and `grid` with shape
-#' \eqn{(N, H_\text{out}, W_\text{out}, 2)}, the output will have shape
-#' \eqn{(N, C, H_\text{out}, W_\text{out})}.
+#' \eqn{(N, C, H_{\mbox{in}}, W_{\mbox{in}})} and `grid` with shape
+#' \eqn{(N, H_{\mbox{out}}, W_{\mbox{out}}, 2)}, the output will have shape
+#' \eqn{(N, C, H_{\mbox{out}}, W_{\mbox{out}})}.
 #' 
 #' For each output location `output[n, :, h, w]`, the size-2 vector
 #' `grid[n, h, w]` specifies `input` pixel locations `x` and `y`,
@@ -69,8 +69,8 @@ nnf_affine_grid <- function(theta, size, align_corners = FALSE) {
 #' This function is often used in conjunction with [nnf_affine_grid()]
 #' to build `Spatial Transformer Networks`_ .
 #'
-#' @param input (Tensor) input of shape \eqn{(N, C, H_\text{in}, W_\text{in})} (4-D case)                    or \eqn{(N, C, D_\text{in}, H_\text{in}, W_\text{in})} (5-D case)
-#' @param grid (Tensor) flow-field of shape \eqn{(N, H_\text{out}, W_\text{out}, 2)} (4-D case)                   or \eqn{(N, D_\text{out}, H_\text{out}, W_\text{out}, 3)} (5-D case)
+#' @param input (Tensor) input of shape \eqn{(N, C, H_{\mbox{in}}, W_{\mbox{in}})} (4-D case)                    or \eqn{(N, C, D_{\mbox{in}}, H_{\mbox{in}}, W_{\mbox{in}})} (5-D case)
+#' @param grid (Tensor) flow-field of shape \eqn{(N, H_{\mbox{out}}, W_{\mbox{out}}, 2)} (4-D case)                   or \eqn{(N, D_{\mbox{out}}, H_{\mbox{out}}, W_{\mbox{out}}, 3)} (5-D case)
 #' @param mode (str) interpolation mode to calculate output values `'bilinear'` | `'nearest'`. 
 #'   Default: `'bilinear'`
 #' @param padding_mode (str) padding mode for outside grid values `'zeros'` | `'border'` 

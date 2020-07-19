@@ -17,7 +17,7 @@ Ge
 \section{ge(input, other, out=None) -> Tensor }{
 
 
-Computes \eqn{\text{input} \geq \text{other}} element-wise.
+Computes \eqn{\mbox{input} \geq \mbox{other}} element-wise.
 
 The second argument can be a number or a tensor whose shape is
 broadcastable  with the first argument.

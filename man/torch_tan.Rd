@@ -18,7 +18,7 @@ Tan
 Returns a new tensor with the tangent of the elements of \code{input}.
 
 \deqn{
-    \text{out}_{i} = \tan(\text{input}_{i})
+    \mbox{out}_{i} = \tan(\mbox{input}_{i})
 }
 }
 

@@ -10,7 +10,7 @@ nnf_rrelu(input, lower = 1/8, upper = 1/3, training = FALSE, inplace = FALSE)
 nnf_rrelu_(input, lower = 1/8, upper = 1/3, training = FALSE)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{lower}{lower bound of the uniform distribution. Default: 1/8}

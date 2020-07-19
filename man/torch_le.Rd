@@ -17,7 +17,7 @@ Le
 \section{le(input, other, out=None) -> Tensor }{
 
 
-Computes \eqn{\text{input} \leq \text{other}} element-wise.
+Computes \eqn{\mbox{input} \leq \mbox{other}} element-wise.
 
 The second argument can be a number or a tensor whose shape is
 broadcastable  with the first argument.

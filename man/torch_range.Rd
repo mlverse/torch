@@ -27,12 +27,12 @@ Range
 \section{range(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
 
 
-Returns a 1-D tensor of size \eqn{\left\lfloor \frac{\text{end} - \text{start}}{\text{step}} \right\rfloor + 1}
+Returns a 1-D tensor of size \eqn{\left\lfloor \frac{\mbox{end} - \mbox{start}}{\mbox{step}} \right\rfloor + 1}
 with values from \code{start} to \code{end} with step \code{step}. Step is
 the gap between two values in the tensor.
 
 \deqn{
-    \text{out}_{i+1} = \text{out}_i + \text{step}.
+    \mbox{out}_{i+1} = \mbox{out}_i + \mbox{step}.
 }
 }
 

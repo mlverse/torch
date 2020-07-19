@@ -18,7 +18,7 @@ Atan
 Returns a new tensor with the arctangent  of the elements of \code{input}.
 
 \deqn{
-    \text{out}_{i} = \tan^{-1}(\text{input}_{i})
+    \mbox{out}_{i} = \tan^{-1}(\mbox{input}_{i})
 }
 }
 

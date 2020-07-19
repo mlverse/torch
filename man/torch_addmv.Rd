@@ -36,7 +36,7 @@ broadcastable  with a 1-D tensor of size \code{n} and
 \code{mat} and \code{vec} and the added tensor \code{input} respectively.
 
 \deqn{
-    \text{out} = \beta\ \text{input} + \alpha\ (\text{mat} \mathbin{@} \text{vec})
+    \mbox{out} = \beta\ \mbox{input} + \alpha\ (\mbox{mat} \mathbin{@} \mbox{vec})
 }
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
 \code{alpha} must be real numbers, otherwise they should be integers

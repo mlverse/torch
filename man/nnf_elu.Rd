@@ -10,7 +10,7 @@ nnf_elu(input, alpha = 1, inplace = FALSE)
 nnf_elu_(input, alpha = 1)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{alpha}{the alpha value for the ELU formulation. Default: 1.0}

@@ -35,7 +35,7 @@
 #'   to the last, third cluster.
 #' * `div_value` is used to compute the size of each additional cluster,
 #'   which is given as
-#'   \eqn{\left\lfloor\frac{\texttt{in\_features}}{\texttt{div\_value}^{idx}}\right\rfloor},
+#'   \eqn{\left\lfloor\frac{\mboxtt{in\_features}}{\mboxtt{div\_value}^{idx}}\right\rfloor},
 #'   where \eqn{idx} is the cluster index (with clusters
 #'   for less frequent words having larger indices,
 #'   and indices starting from \eqn{1}).
@@ -77,8 +77,8 @@
 #' 
 #' @section Shape:
 #' 
-#' - input: \eqn{(N, \texttt{in\_features})}
-#' - target: \eqn{(N)} where each value satisfies \eqn{0 <= \texttt{target[i]} <= \texttt{n\_classes}}
+#' - input: \eqn{(N, \mboxtt{in\_features})}
+#' - target: \eqn{(N)} where each value satisfies \eqn{0 <= \mboxtt{target[i]} <= \mboxtt{n\_classes}}
 #' - output1: \eqn{(N)}
 #' - output2: `Scalar`
 #' 

@@ -16,7 +16,7 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{ELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x) - 1))
+  \mbox{ELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x) - 1))
 }
 }
 \section{Shape}{

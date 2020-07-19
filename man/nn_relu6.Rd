@@ -14,7 +14,7 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{ReLU6}(x) = \min(\max(0,x), 6)
+  \mbox{ReLU6}(x) = \min(\max(0,x), 6)
 }
 }
 \section{Shape}{

@@ -7,19 +7,19 @@
 nnf_bilinear(input1, input2, weight, bias = NULL)
 }
 \arguments{
-\item{input1}{\eqn{(N, *, H_{in1})} where \eqn{H_{in1}=\text{in1\_features}}
+\item{input1}{\eqn{(N, *, H_{in1})} where \eqn{H_{in1}=\mbox{in1\_features}}
 and \eqn{*} means any number of additional dimensions.
 All but the last dimension of the inputs should be the same.}
 
-\item{input2}{\eqn{(N, *, H_{in2})} where \eqn{H_{in2}=\text{in2\_features}}}
+\item{input2}{\eqn{(N, *, H_{in2})} where \eqn{H_{in2}=\mbox{in2\_features}}}
 
-\item{weight}{\eqn{(\text{out\_features}, \text{in1\_features},
-\text{in2\_features})}}
+\item{weight}{\eqn{(\mbox{out\_features}, \mbox{in1\_features},
+\mbox{in2\_features})}}
 
-\item{bias}{\eqn{(\text{out\_features})}}
+\item{bias}{\eqn{(\mbox{out\_features})}}
 }
 \value{
-output \eqn{(N, *, H_{out})} where \eqn{H_{out}=\text{out\_features}}
+output \eqn{(N, *, H_{out})} where \eqn{H_{out}=\mbox{out\_features}}
 and all but the last dimension are the same shape as the input.
 }
 \description{

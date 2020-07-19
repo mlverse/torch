@@ -22,7 +22,7 @@ Softmin is defined as:
 }
 \details{
 \deqn{
-  \text{Softmin}(x_{i}) = \frac{\exp(-x_i)}{\sum_j \exp(-x_j)}
+  \mbox{Softmin}(x_{i}) = \frac{\exp(-x_i)}{\sum_j \exp(-x_j)}
 }
 }
 \section{Shape}{

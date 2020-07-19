@@ -22,14 +22,14 @@ Draws binary random numbers (0 or 1) from a Bernoulli distribution.
 The \code{input} tensor should be a tensor containing probabilities
 to be used for drawing the binary random number.
 Hence, all values in \code{input} have to be in the range:
-\eqn{0 \leq \text{input}_i \leq 1}.
+\eqn{0 \leq \mbox{input}_i \leq 1}.
 
-The \eqn{\text{i}^{th}} element of the output tensor will draw a
-value \eqn{1} according to the \eqn{\text{i}^{th}} probability value given
+The \eqn{\mbox{i}^{th}} element of the output tensor will draw a
+value \eqn{1} according to the \eqn{\mbox{i}^{th}} probability value given
 in \code{input}.
 
 \deqn{
-    \text{out}_{i} \sim \mathrm{Bernoulli}(p = \text{input}_{i})
+    \mbox{out}_{i} \sim \mathrm{Bernoulli}(p = \mbox{input}_{i})
 }
 The returned \code{out} tensor only has values 0 or 1 and is of the same
 shape as \code{input}.
