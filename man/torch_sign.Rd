@@ -18,7 +18,7 @@ Sign
 Returns a new tensor with the signs of the elements of \code{input}.
 
 \deqn{
-    \mbox{out}_{i} = \operatorname{sgn}(\mbox{input}_{i})
+    \mbox{out}_{i} = \mbox{sgn}(\mbox{input}_{i})
 }
 }
 

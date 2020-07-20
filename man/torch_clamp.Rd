@@ -30,6 +30,7 @@ a resulting tensor:
         x_i & \mbox{if } \mbox{min} \leq x_i \leq \mbox{max} \\
         \mbox{max} & \mbox{if } x_i > \mbox{max}
     \end{array}
+    \right.
 }
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, args \code{min}
 and \code{max} must be real numbers, otherwise they should be integers.

@@ -23,13 +23,12 @@ as described in the paper:
 The function is defined as:
 
 \deqn{
-
 \mbox{RReLU}(x) =
 \left\{ \begin{array}{ll}
 x & \mbox{if } x \geq 0 \\
 ax & \mbox{ otherwise }
 \end{array}
-
+\right.
 }
 
 where \eqn{a} is randomly sampled from uniform distribution

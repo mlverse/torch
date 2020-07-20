@@ -25,6 +25,7 @@ or
 x, & \mbox{ if } x \geq 0 \\
 ax, & \mbox{ otherwise }
 \end{array}
+\right.
 }
 }
 \details{

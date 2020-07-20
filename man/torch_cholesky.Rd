@@ -24,14 +24,12 @@ If \code{upper} is \code{True}, the returned matrix \code{U} is upper-triangular
 the decomposition has the form:
 
 \deqn{
-
   A = U^TU
 }
 If \code{upper} is \code{False}, the returned matrix \code{L} is lower-triangular, and
 the decomposition has the form:
 
 \deqn{
-
     A = LL^T
 }
 If \code{upper} is \code{True}, and \eqn{A} is a batch of symmetric positive-definite

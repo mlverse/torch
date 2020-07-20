@@ -33,7 +33,8 @@ Bartlett window function.
     w[n] = 1 - \left| \frac{2n}{N-1} - 1 \right| = \left\{ \begin{array}{ll}
         \frac{2n}{N - 1} & \mbox{if } 0 \leq n \leq \frac{N - 1}{2} \\
         2 - \frac{2n}{N - 1} & \mbox{if } \frac{N - 1}{2} < n < N \\
-    \end{array},
+    \end{array}
+    \right. ,
 }
 where \eqn{N} is the full window size.
 

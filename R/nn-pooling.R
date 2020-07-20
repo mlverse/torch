@@ -34,7 +34,7 @@ nn_max_pool_nd <- nn_module(
 #' 
 #' If `padding` is non-zero, then the input is implicitly zero-padded on both sides
 #' for `padding` number of points. `dilation` controls the spacing between the kernel points.
-#' It is harder to describe, but this [link]( https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md) 
+#' It is harder to describe, but this [link](https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md) 
 #' has a nice visualization of what `dilation` does.
 #' 
 #' @param kernel_size the size of the window to take a max over
@@ -81,18 +81,16 @@ nn_max_pool1d <- nn_module(
 #' can be precisely described as:
 #'
 #' \deqn{
-#' 
-#'   \begin{aligned}
+#'   \begin{array}{ll}
 #' out(N_i, C_j, h, w) ={} & \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
 #' & \mbox{input}(N_i, C_j, \mbox{stride[0]} \times h + m,
 #'                \mbox{stride[1]} \times w + n)
-#' \end{aligned}
-#' 
+#' \end{array}
 #' } 
 #' 
 #' If `padding` is non-zero, then the input is implicitly zero-padded on both sides
 #' for `padding` number of points. `dilation` controls the spacing between the kernel points.
-#' It is harder to describe, but this `link`_ has a nice visualization of what `dilation` does.
+#' It is harder to describe, but this `link` has a nice visualization of what `dilation` does.
 #' 
 #' The parameters `kernel_size`, `stride`, `padding`, `dilation` can either be:
 #' 

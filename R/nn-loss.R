@@ -35,6 +35,7 @@ nn_weighted_loss <- nn_module(
 #' \mbox{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
 #' \mbox{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
 #' \end{array}
+#' \right.
 #' }
 #' 
 #' This is used for measuring the error of a reconstruction in for example

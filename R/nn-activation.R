@@ -12,6 +12,7 @@ NULL
 #'   x, &\mbox{ if } x > \mbox{threshold} \\
 #'   \mbox{value}, &\mbox{ otherwise }
 #'   \end{array}
+#'   \right.
 #' }
 #' 
 #' @param threshold The value to threshold at
@@ -80,13 +81,12 @@ nn_relu <- nn_module(
 #' The function is defined as:
 #' 
 #' \deqn{
-#' 
 #' \mbox{RReLU}(x) =
 #' \left\{ \begin{array}{ll}
 #' x & \mbox{if } x \geq 0 \\
 #' ax & \mbox{ otherwise }
 #' \end{array}
-#' 
+#' \right.
 #' }
 #' 
 #' where \eqn{a} is randomly sampled from uniform distribution
@@ -132,6 +132,7 @@ nn_rrelu <- nn_module(
 #'   -1 & \mbox{ if } x < -1 \\
 #'   x & \mbox{ otherwise } \\
 #' \end{array}
+#' \right.
 #' }
 #' 
 #' The range of the linear region :math:`[-1, 1]` can be adjusted using
@@ -234,6 +235,7 @@ nn_sigmoid <- nn_module(
 #'   1 & \mbox{if~} x \ge +3, \\
 #'   x / 6 + 1 / 2 & \mbox{otherwise}
 #' \end{array}
+#' \right.
 #' }
 #' 
 #' @section Shape:
@@ -494,6 +496,7 @@ nn_gelu <- nn_module(
 #' x, & \mbox{ if } x < -\lambda \\
 #' 0, & \mbox{ otherwise }
 #' \end{array}
+#' \right.
 #' }
 #' 
 #' @param lambd the \eqn{\lambda} value for the Hardshrink formulation. Default: 0.5
@@ -535,6 +538,7 @@ nn_hardshrink <- nn_module(
 #' x, & \mbox{ if } x \geq 0 \\
 #' \mbox{negative\_slope} \times x, & \mbox{ otherwise }
 #' \end{array}
+#' \right.
 #' }
 #' 
 #' @param negative_slope Controls the angle of the negative slope. Default: 1e-2
@@ -639,7 +643,7 @@ nn_softplus <- nn_module(
 #' x + \lambda, & \mbox{ if } x < -\lambda \\
 #' 0, & \mbox{ otherwise }
 #' \end{array}
-#' 
+#' \right.
 #' }
 #' 
 #' @param lambd the \eqn{\lambda} (must be no less than zero) value for the Softshrink formulation. Default: 0.5
@@ -843,6 +847,7 @@ nn_multihead_attention <- nn_module(
 #' x, & \mbox{ if } x \geq 0 \\
 #' ax, & \mbox{ otherwise }
 #' \end{array}
+#' \right.
 #' }
 #' 
 #' Here \eqn{a} is a learnable parameter. When called without arguments, `nn.prelu()` uses a single

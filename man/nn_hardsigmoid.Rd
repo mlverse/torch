@@ -16,6 +16,7 @@ Applies the element-wise function:
   1 & \mbox{if~} x \ge +3, \\
   x / 6 + 1 / 2 & \mbox{otherwise}
 \end{array}
+\right.
 }
 }
 \section{Shape}{

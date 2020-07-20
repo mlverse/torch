@@ -33,6 +33,7 @@ The operation is defined as:
         \mbox{x}_i & \mbox{if } \mbox{condition}_i \\
         \mbox{y}_i & \mbox{otherwise} \\
     \end{array}
+    \right.
 }
 }
 

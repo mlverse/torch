@@ -28,12 +28,12 @@ with the same number of elements as \code{input}.
 When \code{exponent} is a scalar value, the operation applied is:
 
 \deqn{
-    \mbox{out}_i = x_i ^ \mbox{exponent}
+    \mbox{out}_i = x_i^{\mbox{exponent}}
 }
 When \code{exponent} is a tensor, the operation applied is:
 
 \deqn{
-    \mbox{out}_i = x_i ^ {\mbox{exponent}_i}
+    \mbox{out}_i = x_i^{\mbox{exponent}_i}
 }
 When \code{exponent} is a tensor, the shapes of \code{input}
 and \code{exponent} must be broadcastable .

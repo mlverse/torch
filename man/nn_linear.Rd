@@ -34,10 +34,10 @@ are the same shape as the input and :math:\code{H_out = out_features}.
 \verb{(out_features, in_features)}. The values are
 initialized from \eqn{U(-\sqrt{k}, \sqrt{k})}s, where
 \eqn{k = \frac{1}{\mbox{in\_features}}}
-\item bias: the learnable bias of the module of shape :math:\eqn{(\mbox{out_features})}.
+\item bias: the learnable bias of the module of shape \eqn{(\mbox{out\_features})}.
 If \code{bias} is \code{TRUE}, the values are initialized from
 \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{1}{\mbox{in_features}}}
+\eqn{k = \frac{1}{\mbox{in\_features}}}
 }
 }
 

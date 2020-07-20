@@ -28,7 +28,6 @@ size \eqn{(m \times k)}.
 If \eqn{m \geq n}, \code{\link[=torch_lstsq]{torch_lstsq()}} solves the least-squares problem:
 
 \deqn{
-
    \begin{array}{ll}
    \min_X & \|AX-B\|_2.
    \end{array}
@@ -36,12 +35,11 @@ If \eqn{m \geq n}, \code{\link[=torch_lstsq]{torch_lstsq()}} solves the least-sq
 If \eqn{m < n}, \code{\link[=torch_lstsq]{torch_lstsq()}} solves the least-norm problem:
 
 \deqn{
-
-   \begin{array}{ll}
+   \begin{array}{lll}
    \min_X & \|X\|_2 & \mbox{subject to} & AX = B.
    \end{array}
 }
-Returned tensor \eqn{X} has shape \eqn{(\max(m, n) \times k)}. The first \eqn{n}
+Returned tensor \eqn{X} has shape \eqn{(\mbox{max}(m, n) \times k)}. The first \eqn{n}
 rows of \eqn{X} contains the solution. If \eqn{m \geq n}, the residual sum of squares
 for the solution in each column is given by the sum of squares of elements in the
 remaining \eqn{m - n} rows of that column.

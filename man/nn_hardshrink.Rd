@@ -20,6 +20,7 @@ x, & \mbox{ if } x > \lambda \\
 x, & \mbox{ if } x < -\lambda \\
 0, & \mbox{ otherwise }
 \end{array}
+\right.
 }
 }
 \section{Shape}{

@@ -509,7 +509,8 @@ NULL
 #'     w[n] = 1 - \left| \frac{2n}{N-1} - 1 \right| = \left\{ \begin{array}{ll}
 #'         \frac{2n}{N - 1} & \mbox{if } 0 \leq n \leq \frac{N - 1}{2} \\
 #'         2 - \frac{2n}{N - 1} & \mbox{if } \frac{N - 1}{2} < n < N \\
-#'     \end{array},
+#'     \end{array}
+#'     \right. ,
 #' }
 #' where \eqn{N} is the full window size.
 #' 
@@ -870,6 +871,7 @@ NULL
 #'         x_i & \mbox{if } \mbox{min} \leq x_i \leq \mbox{max} \\
 #'         \mbox{max} & \mbox{if } x_i > \mbox{max}
 #'     \end{array}
+#'     \right.
 #' }
 #' If `input` is of type `FloatTensor` or `DoubleTensor`, args `min`
 #' and `max` must be real numbers, otherwise they should be integers.
@@ -4082,6 +4084,7 @@ NULL
 #'         \mbox{x}_i & \mbox{if } \mbox{condition}_i \\
 #'         \mbox{y}_i & \mbox{otherwise} \\
 #'     \end{array}
+#'     \right.
 #' }
 #' @note
 #'     The tensors `condition`, `x`, `y` must be broadcastable .
@@ -4208,12 +4211,12 @@ NULL
 #' When `exponent` is a scalar value, the operation applied is:
 #' 
 #' \deqn{
-#'     \mbox{out}_i = x_i ^ \mbox{exponent}
+#'     \mbox{out}_i = x_i^{\mbox{exponent}}
 #' }
 #' When `exponent` is a tensor, the operation applied is:
 #' 
 #' \deqn{
-#'     \mbox{out}_i = x_i ^ {\mbox{exponent}_i}
+#'     \mbox{out}_i = x_i^{\mbox{exponent}_i}
 #' }
 #' When `exponent` is a tensor, the shapes of `input`
 #' and `exponent` must be broadcastable .
@@ -5106,7 +5109,6 @@ NULL
 #' If \eqn{m \geq n}, [torch_lstsq()] solves the least-squares problem:
 #' 
 #' \deqn{
-#' 
 #'    \begin{array}{ll}
 #'    \min_X & \|AX-B\|_2.
 #'    \end{array}
@@ -5114,12 +5116,11 @@ NULL
 #' If \eqn{m < n}, [torch_lstsq()] solves the least-norm problem:
 #' 
 #' \deqn{
-#' 
-#'    \begin{array}{ll}
+#'    \begin{array}{lll}
 #'    \min_X & \|X\|_2 & \mbox{subject to} & AX = B.
 #'    \end{array}
 #' }
-#' Returned tensor \eqn{X} has shape \eqn{(\max(m, n) \times k)}. The first \eqn{n}
+#' Returned tensor \eqn{X} has shape \eqn{(\mbox{max}(m, n) \times k)}. The first \eqn{n}
 #' rows of \eqn{X} contains the solution. If \eqn{m \geq n}, the residual sum of squares
 #' for the solution in each column is given by the sum of squares of elements in the
 #' remaining \eqn{m - n} rows of that column.
@@ -5292,14 +5293,12 @@ NULL
 #' the decomposition has the form:
 #' 
 #' \deqn{
-#' 
 #'   A = U^TU
 #' }
 #' If `upper` is ``False``, the returned matrix ``L`` is lower-triangular, and
 #' the decomposition has the form:
 #' 
 #' \deqn{
-#' 
 #'     A = LL^T
 #' }
 #' If `upper` is ``True``, and \eqn{A} is a batch of symmetric positive-definite

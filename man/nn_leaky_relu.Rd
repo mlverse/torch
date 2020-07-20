@@ -26,6 +26,7 @@ or
 x, & \mbox{ if } x \geq 0 \\
 \mbox{negative\_slope} \times x, & \mbox{ otherwise }
 \end{array}
+\right.
 }
 }
 \section{Shape}{

@@ -37,18 +37,16 @@ output \eqn{(N, C, H_{out}, W_{out})} and \code{kernel_size} \eqn{(kH, kW)}
 can be precisely described as:
 
 \deqn{
-
-  \begin{aligned}
+  \begin{array}{ll}
 out(N_i, C_j, h, w) ={} & \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
 & \mbox{input}(N_i, C_j, \mbox{stride[0]} \times h + m,
                \mbox{stride[1]} \times w + n)
-\end{aligned}
-
+\end{array}
 }
 
 If \code{padding} is non-zero, then the input is implicitly zero-padded on both sides
 for \code{padding} number of points. \code{dilation} controls the spacing between the kernel points.
-It is harder to describe, but this \code{link}_ has a nice visualization of what \code{dilation} does.
+It is harder to describe, but this \code{link} has a nice visualization of what \code{dilation} does.
 
 The parameters \code{kernel_size}, \code{stride}, \code{padding}, \code{dilation} can either be:
 \itemize{

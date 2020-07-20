@@ -24,6 +24,7 @@ HardTanh is defined as:
   -1 & \mbox{ if } x < -1 \\
   x & \mbox{ otherwise } \\
 \end{array}
+\right.
 }
 
 The range of the linear region :math:\verb{[-1, 1]} can be adjusted using

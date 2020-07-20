@@ -24,6 +24,7 @@ Threshold is defined as:
   x, &\mbox{ if } x > \mbox{threshold} \\
   \mbox{value}, &\mbox{ otherwise }
   \end{array}
+  \right.
 }
 }
 \section{Shape}{

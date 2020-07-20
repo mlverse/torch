@@ -96,13 +96,13 @@ Like \emph{output}, the layers can be separated using
 
 \itemize{
 \item Input1: \eqn{(L, N, H_{in})} tensor containing input features where
-\eqn{H_{in}=\mbox{input_size}} and \code{L} represents a sequence length.
+\eqn{H_{in}=\mbox{input\_size}} and \code{L} represents a sequence length.
 \item Input2: \eqn{(S, N, H_{out})} tensor
 containing the initial hidden state for each element in the batch.
-\eqn{H_{out}=\mbox{hidden_size}}
-Defaults to zero if not provided. where \eqn{S=\mbox{num_layers} * \mbox{num_directions}}
+\eqn{H_{out}=\mbox{hidden\_size}}
+Defaults to zero if not provided. where \eqn{S=\mbox{num\_layers} * \mbox{num\_directions}}
 If the RNN is bidirectional, num_directions should be 2, else it should be 1.
-\item Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\mbox{num_directions} * \mbox{hidden_size}}
+\item Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\mbox{num\_directions} * \mbox{hidden\_size}}
 \item Output2: \eqn{(S, N, H_{out})} tensor containing the next hidden state
 for each element in the batch
 }

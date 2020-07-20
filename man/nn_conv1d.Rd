@@ -106,10 +106,8 @@ a depthwise convolution with a depthwise multiplier \code{K}, can be constructed
 }
 
 \deqn{
-
   L_{out} = \left\lfloor\frac{L_{in} + 2 \times \mbox{padding} - \mbox{dilation}
     \times (\mbox{kernel\_size} - 1) - 1}{\mbox{stride}} + 1\right\rfloor
-    
 }
 }
 

@@ -13,7 +13,7 @@ Frac
 Computes the fractional portion of each element in \code{input}.
 
 \deqn{
-    \mbox{out}_{i} = \mbox{input}_{i} - \left\lfloor |\mbox{input}_{i}| \right\rfloor * \operatorname{sgn}(\mbox{input}_{i})
+    \mbox{out}_{i} = \mbox{input}_{i} - \left\lfloor |\mbox{input}_{i}| \right\rfloor * \mbox{sgn}(\mbox{input}_{i})
 }
 }
 

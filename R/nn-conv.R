@@ -138,10 +138,8 @@ nn_conv_nd <- nn_module(
 #' - Output: \eqn{(N, C_{out}, L_{out})} where
 #' 
 #' \deqn{
-#'
 #'   L_{out} = \left\lfloor\frac{L_{in} + 2 \times \mbox{padding} - \mbox{dilation}
 #'     \times (\mbox{kernel\_size} - 1) - 1}{\mbox{stride}} + 1\right\rfloor
-#'     
 #' }
 #' 
 #' @section Attributes:

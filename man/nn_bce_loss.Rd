@@ -32,9 +32,10 @@ where \eqn{N} is the batch size. If \code{reduction} is not \code{'none'}
 
 \deqn{
   \ell(x, y) = \left\{ \begin{array}{ll}
-\operatorname{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
-\operatorname{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
+\mbox{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
+\mbox{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
 \end{array}
+\right.
 }
 
 This is used for measuring the error of a reconstruction in for example
