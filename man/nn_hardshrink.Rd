@@ -15,11 +15,11 @@ Applies the hard shrinkage function element-wise:
 \details{
 \deqn{
   \mbox{HardShrink}(x) =
-  \begin{cases}
+  \left\{ \begin{array}{ll}
 x, & \mbox{ if } x > \lambda \\
 x, & \mbox{ if } x < -\lambda \\
 0, & \mbox{ otherwise }
-\end{cases}
+\end{array}
 }
 }
 \section{Shape}{

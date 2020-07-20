@@ -66,13 +66,13 @@ nnf_hardswish <- function(input, inplaxce = FALSE) {
 #' Applies the hardswish function, element-wise, as described in the paper:
 #' Searching for MobileNetV3.
 #' 
-#' \deqn{
-#'   \mbox{Hardswish}(x) = \begin{cases}
-#' 0 & \mbox{if~} x \le -3, \\
-#' x & \mbox{if~} x \ge +3, \\
-#' x \cdot (x + 3) /6 & \mbox{otherwise}
-#' \end{cases}
-#' }
+#' \deqn{ \mbox{Hardswish}(x) = \left\{
+#'   \begin{array}{ll}
+#'   0 & \mbox{if } x \le -3, \\
+#'   x & \mbox{if } x \ge +3, \\
+#'   x \cdot (x + 3)/6 & \mbox{otherwise}
+#'   \end{array}
+#'   \right. }
 #' 
 #' @inheritParams nnf_elu
 #' 

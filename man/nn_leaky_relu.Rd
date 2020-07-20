@@ -22,10 +22,10 @@ or
 
 \deqn{
   \mbox{LeakyRELU}(x) =
-  \begin{cases}
+  \left\{ \begin{array}{ll}
 x, & \mbox{ if } x \geq 0 \\
 \mbox{negative\_slope} \times x, & \mbox{ otherwise }
-\end{cases}
+\end{array}
 }
 }
 \section{Shape}{

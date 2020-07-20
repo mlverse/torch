@@ -19,11 +19,11 @@ HardTanh is defined as:
 }
 \details{
 \deqn{
-\mbox{HardTanh}(x) = \begin{cases}
+\mbox{HardTanh}(x) = \left\{ \begin{array}{ll}
   1 & \mbox{ if } x > 1 \\
   -1 & \mbox{ if } x < -1 \\
   x & \mbox{ otherwise } \\
-\end{cases}
+\end{array}
 }
 
 The range of the linear region :math:\verb{[-1, 1]} can be adjusted using

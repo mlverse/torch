@@ -25,7 +25,7 @@ For a tensor \code{input} of sizes \eqn{(n_0, ..., n_{dim}, ..., n_k)}, each
 \eqn{n_{dim}} -element vector \eqn{v} along dimension \code{dim} is transformed as
 
 \deqn{
-        v = \frac{v}{\max(\lVert v \rVert_p, \epsilon)}.
+        v = \frac{v}{\max(\Vert v \Vert_p, \epsilon)}.
 }
 
 With the default arguments it uses the Euclidean norm over vectors along

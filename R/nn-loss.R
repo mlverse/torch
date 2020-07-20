@@ -31,10 +31,10 @@ nn_weighted_loss <- nn_module(
 #' (default `'mean'`), then
 #' 
 #' \deqn{
-#'   \ell(x, y) = \begin{cases}
-#' \operatorname{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
-#' \operatorname{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
-#' \end{cases}
+#'   \ell(x, y) = \left\{ \begin{array}{ll}
+#' \mbox{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
+#' \mbox{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
+#' \end{array}
 #' }
 #' 
 #' This is used for measuring the error of a reconstruction in for example

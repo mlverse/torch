@@ -29,10 +29,10 @@ Return a tensor of elements selected from either \code{x} or \code{y}, depending
 The operation is defined as:
 
 \deqn{
-    \mbox{out}_i = \begin{cases}
+    \mbox{out}_i = \left\{ \begin{array}{ll}
         \mbox{x}_i & \mbox{if } \mbox{condition}_i \\
         \mbox{y}_i & \mbox{otherwise} \\
-    \end{cases}
+    \end{array}
 }
 }
 

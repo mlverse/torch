@@ -25,10 +25,10 @@ The function is defined as:
 \deqn{
 
 \mbox{RReLU}(x) =
-\begin{cases}
+\left\{ \begin{array}{ll}
 x & \mbox{if } x \geq 0 \\
 ax & \mbox{ otherwise }
-\end{cases}
+\end{array}
 
 }
 

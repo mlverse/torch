@@ -15,11 +15,11 @@ Applies the soft shrinkage function elementwise:
 \details{
 \deqn{
   \mbox{SoftShrinkage}(x) =
-  \begin{cases}
+  \left\{ \begin{array}{ll}
 x - \lambda, & \mbox{ if } x > \lambda \\
 x + \lambda, & \mbox{ if } x < -\lambda \\
 0, & \mbox{ otherwise }
-\end{cases}
+\end{array}
 
 }
 }

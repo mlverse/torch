@@ -25,11 +25,11 @@ Clamp all elements in \code{input} into the range \code{[} \code{min}, \code{max
 a resulting tensor:
 
 \deqn{
-    y_i = \begin{cases}
+    y_i = \left\{ \begin{array}{ll}
         \mbox{min} & \mbox{if } x_i < \mbox{min} \\
         x_i & \mbox{if } \mbox{min} \leq x_i \leq \mbox{max} \\
         \mbox{max} & \mbox{if } x_i > \mbox{max}
-    \end{cases}
+    \end{array}
 }
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, args \code{min}
 and \code{max} must be real numbers, otherwise they should be integers.

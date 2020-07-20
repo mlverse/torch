@@ -20,10 +20,10 @@ Thresholds each element of the input Tensor.
 Threshold is defined as:
 \deqn{
   y = 
-  \begin{cases}
+  \left\{ \begin{array}{ll}
   x, &\mbox{ if } x > \mbox{threshold} \\
   \mbox{value}, &\mbox{ otherwise }
-  \end{cases}
+  \end{array}
 }
 }
 \section{Shape}{

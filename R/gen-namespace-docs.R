@@ -287,7 +287,7 @@ NULL
 #' This function checks if all `input` and `other` satisfy the condition:
 #' 
 #' \deqn{
-#'     \lvert \mbox{input} - \mbox{other} \rvert \leq \mboxtt{atol} + \mboxtt{rtol} \times \lvert \mbox{other} \rvert
+#'     \vert \mbox{input} - \mbox{other} \vert \leq \mbox{atol} + \mbox{rtol} \times \vert \mbox{other} \vert
 #' }
 #' elementwise, for all elements of `input` and `other`. The behaviour of this function is analogous to
 #' `numpy.allclose <https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html>`_
@@ -506,10 +506,10 @@ NULL
 #' Bartlett window function.
 #' 
 #' \deqn{
-#'     w[n] = 1 - \left| \frac{2n}{N-1} - 1 \right| = \begin{cases}
+#'     w[n] = 1 - \left| \frac{2n}{N-1} - 1 \right| = \left\{ \begin{array}{ll}
 #'         \frac{2n}{N - 1} & \mbox{if } 0 \leq n \leq \frac{N - 1}{2} \\
 #'         2 - \frac{2n}{N - 1} & \mbox{if } \frac{N - 1}{2} < n < N \\
-#'     \end{cases},
+#'     \end{array},
 #' }
 #' where \eqn{N} is the full window size.
 #' 
@@ -865,11 +865,11 @@ NULL
 #' a resulting tensor:
 #' 
 #' \deqn{
-#'     y_i = \begin{cases}
+#'     y_i = \left\{ \begin{array}{ll}
 #'         \mbox{min} & \mbox{if } x_i < \mbox{min} \\
 #'         x_i & \mbox{if } \mbox{min} \leq x_i \leq \mbox{max} \\
 #'         \mbox{max} & \mbox{if } x_i > \mbox{max}
-#'     \end{cases}
+#'     \end{array}
 #' }
 #' If `input` is of type `FloatTensor` or `DoubleTensor`, args `min`
 #' and `max` must be real numbers, otherwise they should be integers.
@@ -1661,7 +1661,7 @@ NULL
 #' Computes the fractional portion of each element in `input`.
 #' 
 #' \deqn{
-#'     \mbox{out}_{i} = \mbox{input}_{i} - \left\lfloor |\mbox{input}_{i}| \right\rfloor * \operatorname{sgn}(\mbox{input}_{i})
+#'     \mbox{out}_{i} = \mbox{input}_{i} - \left\lfloor |\mbox{input}_{i}| \right\rfloor * \mbox{sgn}(\mbox{input}_{i})
 #' }
 #'
 #'
@@ -4078,10 +4078,10 @@ NULL
 #' The operation is defined as:
 #' 
 #' \deqn{
-#'     \mbox{out}_i = \begin{cases}
+#'     \mbox{out}_i = \left\{ \begin{array}{ll}
 #'         \mbox{x}_i & \mbox{if } \mbox{condition}_i \\
 #'         \mbox{y}_i & \mbox{otherwise} \\
-#'     \end{cases}
+#'     \end{array}
 #' }
 #' @note
 #'     The tensors `condition`, `x`, `y` must be broadcastable .
@@ -5670,7 +5670,7 @@ NULL
 #' Returns a new tensor with the signs of the elements of `input`.
 #' 
 #' \deqn{
-#'     \mbox{out}_{i} = \operatorname{sgn}(\mbox{input}_{i})
+#'     \mbox{out}_{i} = \mbox{sgn}(\mbox{input}_{i})
 #' }
 #'
 #'

@@ -31,10 +31,10 @@ where \eqn{N} is the batch size. If \code{reduction} is not \code{'none'}
 (default \code{'mean'}), then
 
 \deqn{
-  \ell(x, y) = \begin{cases}
+  \ell(x, y) = \left\{ \begin{array}{ll}
 \operatorname{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
 \operatorname{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
-\end{cases}
+\end{array}
 }
 
 This is used for measuring the error of a reconstruction in for example

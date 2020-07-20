@@ -33,5 +33,5 @@ the sum of the output will be divided by the number of elements in the output,
 \description{
 Creates a criterion that optimizes a multi-class classification hinge loss
 (margin-based loss) between input x (a 2D mini-batch Tensor) and output y
-(which is a 1D tensor of target class indices, \verb{0 ≤ y ≤x$size(2)−1} ).
+(which is a 1D tensor of target class indices, \verb{0 <= y <= x$size(2) - 1} ).
 }

@@ -8,10 +8,10 @@ NULL
 #' Threshold is defined as:
 #' \deqn{
 #'   y = 
-#'   \begin{cases}
+#'   \left\{ \begin{array}{ll}
 #'   x, &\mbox{ if } x > \mbox{threshold} \\
 #'   \mbox{value}, &\mbox{ otherwise }
-#'   \end{cases}
+#'   \end{array}
 #' }
 #' 
 #' @param threshold The value to threshold at
@@ -82,10 +82,10 @@ nn_relu <- nn_module(
 #' \deqn{
 #' 
 #' \mbox{RReLU}(x) =
-#' \begin{cases}
+#' \left\{ \begin{array}{ll}
 #' x & \mbox{if } x \geq 0 \\
 #' ax & \mbox{ otherwise }
-#' \end{cases}
+#' \end{array}
 #' 
 #' }
 #' 
@@ -127,11 +127,11 @@ nn_rrelu <- nn_module(
 #' HardTanh is defined as:
 #' 
 #' \deqn{
-#' \mbox{HardTanh}(x) = \begin{cases}
+#' \mbox{HardTanh}(x) = \left\{ \begin{array}{ll}
 #'   1 & \mbox{ if } x > 1 \\
 #'   -1 & \mbox{ if } x < -1 \\
 #'   x & \mbox{ otherwise } \\
-#' \end{cases}
+#' \end{array}
 #' }
 #' 
 #' The range of the linear region :math:`[-1, 1]` can be adjusted using
@@ -229,11 +229,11 @@ nn_sigmoid <- nn_module(
 #' Applies the element-wise function:
 #'
 #' \deqn{
-#' \mbox{Hardsigmoid}(x) = \begin{cases}
+#' \mbox{Hardsigmoid}(x) = \left\{ \begin{array}{ll}
 #'   0 & \mbox{if~} x \le -3, \\
 #'   1 & \mbox{if~} x \ge +3, \\
 #'   x / 6 + 1 / 2 & \mbox{otherwise}
-#' \end{cases}
+#' \end{array}
 #' }
 #' 
 #' @section Shape:
@@ -286,13 +286,15 @@ nn_tanh <- nn_module(
 #' 
 #' Applies the hardswish function, element-wise, as described in the paper:
 #' [Searching for MobileNetV3](https://arxiv.org/abs/1905.02244)
-#' \deqn{
-#'   \mbox{Hardswish}(x) = \begin{cases}
-#' 0 & \mbox{if~} x \le -3, \\
-#' x & \mbox{if~} x \ge +3, \\
-#' x \cdot (x + 3) /6 & \mbox{otherwise}
-#' \end{cases}
-#' }
+#' 
+#' 
+#' \deqn{ \mbox{Hardswish}(x) = \left\{
+#'   \begin{array}{ll}
+#'   0 & \mbox{if } x \le -3, \\
+#'   x & \mbox{if } x \ge +3, \\
+#'   x \cdot (x + 3)/6 & \mbox{otherwise}
+#'   \end{array}
+#'   \right. }
 #' 
 #' @section Shape:
 #' 
@@ -487,11 +489,11 @@ nn_gelu <- nn_module(
 #' 
 #' \deqn{
 #'   \mbox{HardShrink}(x) =
-#'   \begin{cases}
+#'   \left\{ \begin{array}{ll}
 #' x, & \mbox{ if } x > \lambda \\
 #' x, & \mbox{ if } x < -\lambda \\
 #' 0, & \mbox{ otherwise }
-#' \end{cases}
+#' \end{array}
 #' }
 #' 
 #' @param lambd the \eqn{\lambda} value for the Hardshrink formulation. Default: 0.5
@@ -529,10 +531,10 @@ nn_hardshrink <- nn_module(
 #' 
 #' \deqn{
 #'   \mbox{LeakyRELU}(x) =
-#'   \begin{cases}
+#'   \left\{ \begin{array}{ll}
 #' x, & \mbox{ if } x \geq 0 \\
 #' \mbox{negative\_slope} \times x, & \mbox{ otherwise }
-#' \end{cases}
+#' \end{array}
 #' }
 #' 
 #' @param negative_slope Controls the angle of the negative slope. Default: 1e-2
@@ -632,11 +634,11 @@ nn_softplus <- nn_module(
 #' 
 #' \deqn{
 #'   \mbox{SoftShrinkage}(x) =
-#'   \begin{cases}
+#'   \left\{ \begin{array}{ll}
 #' x - \lambda, & \mbox{ if } x > \lambda \\
 #' x + \lambda, & \mbox{ if } x < -\lambda \\
 #' 0, & \mbox{ otherwise }
-#' \end{cases}
+#' \end{array}
 #' 
 #' }
 #' 
@@ -837,10 +839,10 @@ nn_multihead_attention <- nn_module(
 #' or
 #' \deqn{
 #'   \mbox{PReLU}(x) =
-#'   \begin{cases}
+#'   \left\{ \begin{array}{ll}
 #' x, & \mbox{ if } x \geq 0 \\
 #' ax, & \mbox{ otherwise }
-#' \end{cases}
+#' \end{array}
 #' }
 #' 
 #' Here \eqn{a} is a learnable parameter. When called without arguments, `nn.prelu()` uses a single

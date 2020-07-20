@@ -21,10 +21,10 @@ Applies the element-wise function:
 or
 \deqn{
   \mbox{PReLU}(x) =
-  \begin{cases}
+  \left\{ \begin{array}{ll}
 x, & \mbox{ if } x \geq 0 \\
 ax, & \mbox{ otherwise }
-\end{cases}
+\end{array}
 }
 }
 \details{
