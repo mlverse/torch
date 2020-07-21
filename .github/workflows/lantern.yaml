@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - lantern-x86
 
 jobs:
   build:
@@ -25,6 +26,18 @@ jobs:
             flavor: Release
             artifacts: lantern.dll
             upload: Windows
+          - os: windows-2019
+            cuda: 0
+            library: lantern.dll
+            test: "& './lanterntest.exe' "
+            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release;Platform=x86"
+            build: build/Release
+            libext: .dll
+            exeext: .exe
+            fixlib:
+            flavor: Release
+            artifacts: lantern.dll
+            upload: Windows-x86
           - os: ubuntu-18.04
             cuda: 0
             library: liblantern.so
