@@ -3,10 +3,6 @@ FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04
 RUN apt-get update && \
     apt-get install -y apt-transport-https ca-certificates gnupg software-properties-common wget libcurl4-openssl-dev libssl-dev
     
-RUN add-apt-repository -y ppa:cran/imagemagick && \
-    apt-get update && \
-    apt-get install -y libmagick++-dev 
-
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
     add-apt-repository 'deb [arch=amd64,i386] https://cloud.r-project.org/bin/linux/ubuntu xenial-cran40/' && \
     apt-get update && \
@@ -22,6 +18,10 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 \
                          --slave /usr/bin/g++ g++ /usr/bin/g++-7  && \
     update-alternatives --config gcc
-    
+
+RUN add-apt-repository -y ppa:cran/imagemagick && \
+    apt-get update && \
+    apt-get install -y libmagick++-dev 
+
 ENV CUDA 10.1    
 ADD . torch/
