@@ -19,8 +19,7 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
                          --slave /usr/bin/g++ g++ /usr/bin/g++-7  && \
     update-alternatives --config gcc
 
-RUN add-apt-repository -y ppa:cran/imagemagick && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y libmagick++-dev 
 
 ENV CUDA 10.1    
