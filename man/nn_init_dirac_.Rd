@@ -19,8 +19,10 @@ of groups>1, each group of channels preserves identity.
 }
 \examples{
 \dontrun{
+\dontrun{
 w <- torch_empty(3, 16, 5, 5)
 nn_init_dirac_(w)
 }
 
+}
 }

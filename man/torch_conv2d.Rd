@@ -34,9 +34,11 @@ See \code{~torch.nn.Conv2d} for details and output shape.
 }
 
 \examples{
+\dontrun{
 
 # With square kernels and equal stride
 filters = torch_randn(c(8,4,3,3))
 inputs = torch_randn(c(1,4,5,5))
 nnf_conv2d(inputs, filters, padding=1)
+}
 }

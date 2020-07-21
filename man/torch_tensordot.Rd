@@ -22,6 +22,7 @@ Returns a contraction of a and b over multiple dimensions.\preformatted{`tensord
 }
 
 \examples{
+\dontrun{
 
 a = torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
 b = torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
@@ -30,5 +31,6 @@ torch_tensordot(a, b, dims_self=c(1, 0), dims_other = c(0, 1))
 a = torch_randn(3, 4, 5, device='cuda')
 b = torch_randn(4, 5, 6, device='cuda')
 c = torch_tensordot(a, b, dims=2)$cpu()
+}
 }
 }

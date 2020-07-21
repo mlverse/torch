@@ -53,6 +53,8 @@ value, it is treated as a one-dimensional tensor with one element.
 }
 
 \examples{
+\dontrun{
 
 torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)))
+}
 }

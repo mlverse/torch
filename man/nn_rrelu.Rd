@@ -45,8 +45,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_rrelu(0.1, 0.3)
 input <- torch_randn(2)
 m(input)
 
+}
 }

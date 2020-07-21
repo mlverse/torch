@@ -28,9 +28,11 @@ and \code{\link{torch_chunk}}.
 }
 
 \examples{
+\dontrun{
 
 x = torch_randn(c(2, 3))
 x
 torch_cat(list(x, x, x), 1)
 torch_cat(list(x, x, x), 2)
+}
 }

@@ -27,6 +27,8 @@ Returns a random permutation of integers from \code{0} to \code{n - 1}.
 }
 
 \examples{
+\dontrun{
 
 torch_randperm(4)
+}
 }

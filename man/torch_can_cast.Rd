@@ -20,7 +20,9 @@ described in the type promotion documentation .
 }
 
 \examples{
+\dontrun{
 
 torch_can_cast(torch_double(), torch_float())
 torch_can_cast(torch_float(), torch_int())
+}
 }

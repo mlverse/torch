@@ -40,6 +40,7 @@ batched outputs \code{c}
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(3, 3))
 a = torch_mm(a, a$t()) # make symmetric positive definite
@@ -49,4 +50,5 @@ b = torch_randn(c(3, 2))
 b
 torch_cholesky_solve(b, u)
 torch_mm(a$inverse(), b)
+}
 }

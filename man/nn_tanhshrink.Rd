@@ -24,8 +24,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_tanhshrink()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

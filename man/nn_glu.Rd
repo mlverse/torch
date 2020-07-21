@@ -24,8 +24,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_glu()
 input <- torch_randn(4, 2)
 output <- m(input)
 
+}
 }

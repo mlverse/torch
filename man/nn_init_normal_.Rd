@@ -17,7 +17,9 @@ nn_init_normal_(tensor, mean = 0, std = 1)
 Fills the input Tensor with values drawn from the normal distribution
 }
 \examples{
+\dontrun{
 w <- torch_empty(3, 5)
 nn_init_normal_(w)
 
+}
 }

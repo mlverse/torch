@@ -57,9 +57,11 @@ For CPU tensors, this method is currently only available with MKL. Use
 }
 
 \examples{
+\dontrun{
 
 x = torch_randn(c(3, 3, 2))
 x
 y = torch_fft(x, 2)
 torch_ifft(y, 2)  # recover x
+}
 }

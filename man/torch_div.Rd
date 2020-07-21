@@ -54,6 +54,7 @@ by zero leads to undefined behavior.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(5))
 a
@@ -65,4 +66,5 @@ a
 b = torch_randn(c(4))
 b
 torch_div(a, b)
+}
 }

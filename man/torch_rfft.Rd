@@ -62,8 +62,10 @@ For CPU tensors, this method is currently only available with MKL. Use
 }
 
 \examples{
+\dontrun{
 
 x = torch_randn(c(5, 5))
 torch_rfft(x, 2)
 torch_rfft(x, 2, onesided=FALSE)
+}
 }

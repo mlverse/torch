@@ -39,8 +39,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_leaky_relu(0.1)
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

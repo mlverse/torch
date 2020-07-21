@@ -76,6 +76,7 @@ For CPU tensors, this method is currently only available with MKL. Use
 }
 
 \examples{
+\dontrun{
 
 x = torch_randn(c(4, 4))
 torch_rfft(x, 2, onesided=TRUE)
@@ -83,4 +84,5 @@ x = torch_randn(c(4, 5))
 torch_rfft(x, 2, onesided=TRUE)
 y = torch_rfft(x, 2, onesided=TRUE)
 torch_irfft(y, 2, onesided=TRUE, signal_sizes=c(4,5))  # recover x
+}
 }

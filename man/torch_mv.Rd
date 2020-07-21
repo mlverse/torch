@@ -28,8 +28,10 @@ size \eqn{m}, \code{out} will be 1-D of size \eqn{n}.
 }
 
 \examples{
+\dontrun{
 
 mat = torch_randn(c(2, 3))
 vec = torch_randn(c(3))
 torch_mv(mat, vec)
+}
 }

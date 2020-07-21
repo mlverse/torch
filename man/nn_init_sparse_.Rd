@@ -21,7 +21,9 @@ as described in \verb{Deep learning via Hessian-free optimization} - Martens, J.
 }
 \examples{
 \dontrun{
+\dontrun{
 w <- torch_empty(3, 5)
 nn_init_sparse_(w, sparsity = 0.1)
+}
 }
 }

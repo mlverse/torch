@@ -23,8 +23,10 @@ Returns a new tensor with the square-root of the elements of \code{input}.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_sqrt(a)
+}
 }

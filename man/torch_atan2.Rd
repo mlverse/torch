@@ -29,8 +29,10 @@ broadcastable .
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_atan2(a, torch_randn(c(4)))
+}
 }

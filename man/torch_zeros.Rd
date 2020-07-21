@@ -28,7 +28,9 @@ by the variable argument \code{size}.
 }
 
 \examples{
+\dontrun{
 
 torch_zeros(c(2, 3))
 torch_zeros(c(5))
+}
 }

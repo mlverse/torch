@@ -24,6 +24,8 @@ The complementary error function is defined as follows:
 }
 
 \examples{
+\dontrun{
 
 torch_erfc(torch_tensor(c(0, -1., 10.)))
+}
 }

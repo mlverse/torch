@@ -36,10 +36,12 @@ It has been proposed in \href{https://arxiv.org/abs/1412.6980}{Adam: A Method fo
 }
 \examples{
 \dontrun{
+\dontrun{
 optimizer <- optim_adam(model$parameters(), lr=0.1)
 optimizer$zero_grad()
 loss_fn(model(input), target)$backward()
 optimizer$step()
 }
 
+}
 }

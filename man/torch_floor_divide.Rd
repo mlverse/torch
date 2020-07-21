@@ -24,9 +24,11 @@ for type promotion and broadcasting rules.
 }
 
 \examples{
+\dontrun{
 
 a = torch_tensor(c(4.0, 3.0))
 b = torch_tensor(c(2.0, 2.0))
 torch_floor_divide(a, b)
 torch_floor_divide(a, 1.4)
+}
 }

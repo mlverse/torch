@@ -26,8 +26,10 @@ size \eqn{m}, then \code{out} must be a matrix of size \eqn{(n \times m)}.
 }
 
 \examples{
+\dontrun{
 
 v1 = torch_arange(1., 5.)
 v2 = torch_arange(1., 4.)
 torch_ger(v1, v2)
+}
 }

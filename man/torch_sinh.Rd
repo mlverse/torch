@@ -24,8 +24,10 @@ Returns a new tensor with the hyperbolic sine of the elements of
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_sinh(a)
+}
 }

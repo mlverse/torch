@@ -32,8 +32,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_celu()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

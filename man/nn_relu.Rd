@@ -23,8 +23,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_relu()
 input <- torch_randn(2)
 m(input)
 
+}
 }

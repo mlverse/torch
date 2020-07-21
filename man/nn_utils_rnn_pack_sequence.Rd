@@ -27,10 +27,12 @@ is \code{TRUE}, the sequences should be sorted in the order of decreasing length
 \code{enforce_sorted = TRUE} is only necessary for ONNX export.
 }
 \examples{
+\dontrun{
 x <- torch_tensor(c(1,2,3), dtype = torch_long())
 y <- torch_tensor(c(4, 5), dtype = torch_long())
 z <- torch_tensor(c(6), dtype = torch_long())
 
 p <- nn_utils_rnn_pack_sequence(list(x, y, z))
 
+}
 }

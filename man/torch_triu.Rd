@@ -33,6 +33,7 @@ the main diagonal. The main diagonal are the set of indices
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(3, 3))
 a
@@ -43,4 +44,5 @@ b = torch_randn(c(4, 6))
 b
 torch_triu(b, diagonal=1)
 torch_triu(b, diagonal=-1)
+}
 }

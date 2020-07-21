@@ -27,8 +27,10 @@ location of each maximum value found in the dimension \code{dim}.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(10))
 a
 torch_cummin(a, dim=1)
+}
 }

@@ -22,6 +22,7 @@ A \code{torch_device}  is an object representing the device on which a \code{tor
 is or will be allocated.
 }
 \examples{
+\dontrun{
 
 # Via string
 torch_device("cuda:1")
@@ -32,4 +33,5 @@ torch_device("cuda") # current cuda device
 torch_device("cuda", 0)
 torch_device("cpu", 0)
 
+}
 }

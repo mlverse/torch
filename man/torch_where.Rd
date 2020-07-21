@@ -45,6 +45,7 @@ The operation is defined as:
 }
 
 \examples{
+\dontrun{
 
 \dontrun{
 x = torch_randn(c(3, 2))
@@ -55,4 +56,5 @@ torch_where(x > 0, x, y)
 
 
 
+}
 }

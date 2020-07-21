@@ -36,7 +36,9 @@ the old \code{torch_zeros_like(input, out=output)} is equivalent to
 }
 
 \examples{
+\dontrun{
 
 input = torch_empty(c(2, 3))
 torch_zeros_like(input)
+}
 }

@@ -34,10 +34,12 @@ of \code{index}; other dimensions have the same size as in the original tensor.
 }
 
 \examples{
+\dontrun{
 
 x = torch_randn(c(3, 4))
 x
 indices = torch_tensor(c(1, 3), dtype = torch_int64())
 torch_index_select(x, 1, indices)
 torch_index_select(x, 2, indices)
+}
 }

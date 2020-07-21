@@ -21,6 +21,7 @@ Modules can also contain other Modules, allowing to nest them in a tree
 structure. You can assign the submodules as regular attributes.
 }
 \examples{
+\dontrun{
 model <- nn_module(
  initialize = function() {
    self$conv1 <- nn_conv2d(1, 20, 5)
@@ -35,4 +36,5 @@ model <- nn_module(
  }
 )
 
+}
 }

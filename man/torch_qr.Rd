@@ -35,6 +35,7 @@ Otherwise, if \code{some} is \code{False}, this function returns the complete QR
 }
 
 \examples{
+\dontrun{
 
 a = torch_tensor(matrix(c(12., -51, 4, 6, 167, -68, -4, 24, -41), ncol = 3, byrow = TRUE))
 out = torch_qr(a)
@@ -42,4 +43,5 @@ q = out[[1]]
 r = out[[2]]
 torch_mm(q, r)$round()
 torch_mm(q$t(), q)$round()
+}
 }

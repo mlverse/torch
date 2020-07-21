@@ -20,6 +20,7 @@ Einstein summation convention.
 }
 
 \examples{
+\dontrun{
 
 x = torch_randn(c(5))
 y = torch_randn(c(4))
@@ -37,4 +38,5 @@ A = torch_randn(c(4, 3, 3))
 torch_einsum('...ii->...i', list(A)) # batch diagonal
 A = torch_randn(c(2, 3, 4, 5))
 torch_einsum('...ij->...ji', list(A))$shape # batch permute
+}
 }

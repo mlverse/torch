@@ -34,9 +34,11 @@ The output tensor is 1-D of size \code{steps}.
 }
 
 \examples{
+\dontrun{
 
 torch_linspace(3, 10, steps=5)
 torch_linspace(-10, 10, steps=5)
 torch_linspace(start=-10, end=10, steps=5)
 torch_linspace(start=-10, end=10, steps=1)
+}
 }

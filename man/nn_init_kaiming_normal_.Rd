@@ -30,7 +30,9 @@ described in \verb{Delving deep into rectifiers: Surpassing human-level performa
 normal distribution.
 }
 \examples{
+\dontrun{
 w <- torch_empty(3, 5)
 nn_init_kaiming_normal_(w, mode = "fan_in", nonlinearity = "leaky_relu")
 
+}
 }

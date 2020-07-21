@@ -35,8 +35,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_softmin(dim = 1)
 input <- torch_randn(2, 2)
 output <- m(input)
 
+}
 }

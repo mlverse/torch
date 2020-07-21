@@ -43,9 +43,11 @@ For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{be
 }
 
 \examples{
+\dontrun{
 
 M = torch_randn(c(2))
 mat = torch_randn(c(2, 3))
 vec = torch_randn(c(3))
 torch_addmv(M, mat, vec)
+}
 }

@@ -32,6 +32,8 @@ defined by the variable argument \code{size}.
 }
 
 \examples{
+\dontrun{
 
 torch_empty(c(2, 3))
+}
 }

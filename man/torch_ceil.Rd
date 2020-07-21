@@ -24,8 +24,10 @@ the smallest integer greater than or equal to each element.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_ceil(a)
+}
 }

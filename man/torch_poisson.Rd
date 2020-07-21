@@ -25,7 +25,9 @@ element in \code{input} i.e.,
 }
 
 \examples{
+\dontrun{
 
 rates = torch_rand(c(4, 4)) * 5  # rate parameter between 0 and 5
 torch_poisson(rates)
+}
 }

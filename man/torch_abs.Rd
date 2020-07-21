@@ -23,6 +23,8 @@ Computes the element-wise absolute value of the given \code{input} tensor.
 }
 
 \examples{
+\dontrun{
 
 torch_abs(torch_tensor(c(-1, -2, 3)))
+}
 }

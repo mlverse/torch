@@ -36,6 +36,7 @@ triangular such that the returned tensor is
 }
 
 \examples{
+\dontrun{
 
 \dontrun{
 a = torch_randn(c(3, 3))
@@ -44,5 +45,6 @@ u = torch_cholesky(a)
 a
 torch_cholesky_inverse(u)
 a$inverse()
+}
 }
 }

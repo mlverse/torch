@@ -29,6 +29,8 @@ Returns a 2-D tensor with ones on the diagonal and zeros elsewhere.
 }
 
 \examples{
+\dontrun{
 
 torch_eye(3)
+}
 }

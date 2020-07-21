@@ -23,8 +23,10 @@ Returns a new tensor with the negative of the elements of \code{input}.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(5))
 a
 torch_neg(a)
+}
 }

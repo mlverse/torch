@@ -35,8 +35,10 @@ identity function.
 }
 
 \examples{
+\dontrun{
 m <- nn_dropout(p = 0.2)
 input <- torch_randn(20, 16)
 output <- m(input)
 
+}
 }

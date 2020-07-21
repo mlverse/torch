@@ -29,10 +29,12 @@ to match, but they must be broadcastable .
 }
 
 \examples{
+\dontrun{
 
 x = torch_randn(c(3, 4))
 x
 mask = x$ge(0.5)
 mask
 torch_masked_select(x, mask)
+}
 }

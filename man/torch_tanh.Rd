@@ -24,8 +24,10 @@ of \code{input}.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_tanh(a)
+}
 }
