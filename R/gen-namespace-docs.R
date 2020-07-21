@@ -5116,7 +5116,7 @@ NULL
 #' If \eqn{m < n}, [torch_lstsq()] solves the least-norm problem:
 #' 
 #' \deqn{
-#'    \begin{array}{lll}
+#'    \begin{array}{llll}
 #'    \min_X & \|X\|_2 & \mbox{subject to} & AX = B.
 #'    \end{array}
 #' }
