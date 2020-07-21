@@ -13,9 +13,11 @@ jobs:
       matrix:
         os: [windows-2019, ubuntu-18.04, macos-10.15]
         cuda: [0]
+        x86: [0]
         include:
           - os: windows-2019
             cuda: 0
+            x86: 0
             library: lantern.dll
             test: "& './lanterntest.exe' "
             make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
@@ -28,6 +30,7 @@ jobs:
             upload: Windows
           - os: windows-2019
             cuda: 0
+            x86: 1
             library: lantern.dll
             test: "& './lanterntest.exe' "
             make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release;Platform=x86"
@@ -40,6 +43,7 @@ jobs:
             upload: Windows-x86
           - os: ubuntu-18.04
             cuda: 0
+            x86: 0
             library: liblantern.so
             test: ./lanterntest
             make: make
@@ -52,6 +56,7 @@ jobs:
             upload: Linux
           - os: macos-10.15
             cuda: 0
+            x86: 0
             library: liblantern.dylib
             test: ./lanterntest
             make: make
@@ -64,6 +69,7 @@ jobs:
             upload: macOS
           - os: ubuntu-18.04
             cuda: 10.1
+            x86: 0
             library: liblantern.so
             test: ./lanterntest
             make: make
@@ -76,6 +82,7 @@ jobs:
             upload: Linux-Cuda-101
           - os: ubuntu-18.04
             cuda: 10.2
+            x86: 0
             library: liblantern.so
             test: ./lanterntest
             make: make
