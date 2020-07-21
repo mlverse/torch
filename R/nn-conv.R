@@ -914,13 +914,14 @@ nn_conv_transpose2d <- nn_module(
 #'   \eqn{k = \frac{groups}{C_{\mbox{out}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 #' 
 #' @examples
+#' \dontrun{
 #' # With square kernels and equal stride
 #' m <- nn_conv_transpose3d(16, 33, 3, stride=2)
 #' # non-square kernels and unequal stride and with padding
 #' m <- nn_conv_transpose3d(16, 33, c(3, 5, 2), stride=c(2, 1, 1), padding=c(0, 4, 2))
 #' input <- torch_randn(20, 16, 10, 50, 100)
 #' output <- m(input)
-#' 
+#' }
 #' @export
 nn_conv_transpose3d <- nn_module(
   "nn_conv_transpose3d",

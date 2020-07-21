@@ -17,3 +17,4 @@ tools/torchgen/.Rbuildignore
 ^bench/.*
 ^docker/.*
 ^test.html
+^LICENSE\.md$

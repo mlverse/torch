@@ -494,10 +494,11 @@ NULL
 #' @name torch_conv_transpose3d
 #'
 #' @examples
-#'
+#' \dontrun{
 #' inputs = torch_randn(c(20, 16, 50, 10, 20))
 #' weights = torch_randn(c(16, 33, 3, 3, 3))
 #' nnf_conv_transpose3d(inputs, weights)
+#' }
 NULL
 # -> conv_transpose3d <-
 
@@ -2035,8 +2036,10 @@ NULL
 #'
 #' @examples
 #' x = torch_tensor(matrix(c(-1.0, 0.0, 1.0, 2.0), ncol = 2, byrow = TRUE))
-#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10L, 0L)), 0, torch_quint8())
-#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10L, 0L)), 0, torch_quint8())$int_repr()
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
+#'                            torch_tensor(c(10L, 0L)), 0, torch_quint8())
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
+#'                            torch_tensor(c(10L, 0L)), 0, torch_quint8())$int_repr()
 NULL
 # -> quantize_per_channel <-
 
@@ -2242,7 +2245,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_ne(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(rep(c(1,4), each = 2), ncol = 2, byrow=TRUE)))
+#' torch_ne(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(rep(c(1,4), each = 2), ncol = 2, byrow=TRUE)))
 NULL
 # -> ne <-
 
@@ -2262,7 +2266,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_ge(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' torch_ge(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 NULL
 # -> ge <-
 
@@ -2272,7 +2277,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_le(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' torch_le(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 NULL
 # -> le <-
 
@@ -2282,7 +2288,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_gt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' torch_gt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 NULL
 # -> gt <-
 
@@ -2292,7 +2299,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_lt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' torch_lt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 NULL
 # -> lt <-
 
