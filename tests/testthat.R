@@ -134,4 +134,5 @@ PerformanceReporter <- R6::R6Class("PerformanceReporter",
                                    )
 )
 
-test_check("torch", reporter = "performance")
+if (Sys.getenv("TORCH_TEST", unset = 0) == 1)
+  test_check("torch", reporter = "performance")
