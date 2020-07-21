@@ -11,7 +11,8 @@ globalVariables(c("..", "self", "private", "N"))
 
 .onLoad <- function(libname, pkgname){
   install_success <- TRUE
-  if (!install_exists() && Sys.getenv("TORCH_INSTALL", unset = 1) != 0) {
+  if (!install_exists() && Sys.getenv("TORCH_INSTALL", unset = 1) != 0 && 
+      interactive()) {
     install_success <- tryCatch({
       install_torch()
       TRUE
