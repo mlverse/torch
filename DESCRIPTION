@@ -125,4 +125,3 @@ Collate:
     'vision_utils.R'
     'with-indices.R'
     'wrapers.R'
-StagedInstall: no
