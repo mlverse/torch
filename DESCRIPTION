@@ -3,7 +3,7 @@ Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
 Version: 0.0.1.9000
 Authors@R: c(
-    person("Daniel", "Falbel", email = "dfalbel@gmail.com", role = c("aut", "cre")),
+    person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre")),
     person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut")),
     person("Dmitriy", "Selivanov", role = c("ctb")),
     person("Athos", "Damiani", role = c("ctb")),
