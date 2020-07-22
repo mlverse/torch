@@ -56,7 +56,7 @@ jobs:
       - name: Check
         run:  |
           print(Sys.info())
-          rcmdcheck::rcmdcheck(args = c("--no-multiarch"), error_on = "error", check_dir = "check")
+          rcmdcheck::rcmdcheck(args = c("--no-multiarch"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
       - name: Install
         run: |
