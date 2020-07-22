@@ -12,23 +12,18 @@ RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ xenial main' && \
     apt-get update && \
     apt-get install -y --allow-unauthenticated cmake
     
+RUN add-apt-repository -y ppa:cran/imagemagick && \
+    apt-get update && \
+    apt-get install -y libmagick++-dev 
+    
+RUN Rscript -e "install.packages('magick')"
+    
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get update && \
     apt-get install -y g++-7 && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 \
                          --slave /usr/bin/g++ g++ /usr/bin/g++-7  && \
     update-alternatives --config gcc
-
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
-
-RUN curl -sfLO http://www.imagemagick.org/download/ImageMagick-6.9.0-4.tar.gz && \
-    echo 'cf51a1c6ebf627c627a8e6ac20aecce5f1425907c2cdb98c5a60f329c5c6caf2  ImageMagick-6.9.0-4.tar.gz' | sha256sum -c - && \
-    tar -xzf ImageMagick-6.9.0-4.tar.gz && \
-    cd ImageMagick-6.9.0-4 && \
-    ./configure --prefix /usr/local && \
-    make install && \
-    cd .. && \
-    rm -rf  ImageMagick*
 
 ENV CUDA 10.1    
 ADD . torch/
