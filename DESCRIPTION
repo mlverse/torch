@@ -1,7 +1,7 @@
 Package: torch
 Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
-Version: 0.0.1.9000
+Version: 0.0.1
 Authors@R: c(
     person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre")),
     person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut")),
@@ -16,7 +16,7 @@ URL: http://mlverse.github.io/torch, https://github.com/mlverse/torch
 BugReports: https://github.com/mlverse/torch/issues
 Encoding: UTF-8
 LazyData: true
-SystemRequirements: C++11
+SystemRequirements: C++11, LibTorch (https://pytorch.org/)
 LinkingTo:
     Rcpp
 Imports:
@@ -36,12 +36,9 @@ Suggests:
     rmarkdown,
     bit64,
     fs,
-    palmerpenguins,
     magrittr,
     glue,
     magick
-Remotes:
-    allisonhorst/palmerpenguins
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
