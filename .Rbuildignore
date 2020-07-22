@@ -18,3 +18,4 @@ tools/torchgen/.Rbuildignore
 ^docker/.*
 ^test.html
 ^LICENSE\.md$
+^.*torchpkg.dll$
