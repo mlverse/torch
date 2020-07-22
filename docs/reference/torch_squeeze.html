@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -200,7 +200,8 @@ dimension. If <code>input</code> is of shape: \((A \times 1 \times B)\),
 will squeeze the tensor to the shape \((A \times B)\).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_zeros.html'>torch_zeros</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,1,1,.,.) = 
@@ -223,7 +224,7 @@ will squeeze the tensor to the shape \((A \times B)\).</p>
 #&gt; (2,.,.) = 
 #&gt;   0  0
 #&gt;   0  0
-#&gt; [ CPUFloatType{2,2,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'>torch_squeeze</span>(<span class='no'>x</span>, <span class='fl'>0</span>)
+#&gt; [ CPUFloatType{2,2,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'>torch_squeeze</span>(<span class='no'>x</span>, <span class='fl'>1</span>)
 <span class='no'>y</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,1,1,.,.) = 
 #&gt;   0  0
@@ -236,7 +237,7 @@ will squeeze the tensor to the shape \((A \times B)\).</p>
 #&gt; 
 #&gt; (2,1,2,.,.) = 
 #&gt;   0  0
-#&gt; [ CPUFloatType{2,1,2,1,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'>torch_squeeze</span>(<span class='no'>x</span>, <span class='fl'>1</span>)
+#&gt; [ CPUFloatType{2,1,2,1,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'>torch_squeeze</span>(<span class='no'>x</span>, <span class='fl'>2</span>)
 <span class='no'>y</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,1,.,.) = 
 #&gt;   0  0
@@ -249,7 +250,8 @@ will squeeze the tensor to the shape \((A \times B)\).</p>
 #&gt; 
 #&gt; (2,2,.,.) = 
 #&gt;   0  0
-#&gt; [ CPUFloatType{2,2,1,2} ]</div></pre>
+#&gt; [ CPUFloatType{2,2,1,2} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

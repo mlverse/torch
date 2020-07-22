@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -197,15 +197,16 @@ tensor of size 0. If <code>minlength</code> is specified, the number of bins is 
 <p>.. include:: cuda_deterministic.rst</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>input</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span>(<span class='fl'>0</span>, <span class='fl'>8</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>5</span>), <span class='kw'>dtype</span><span class='kw'>=</span><span class='fu'>torch_int64</span>())
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
+<span class='no'>input</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span>(<span class='fl'>0</span>, <span class='fl'>8</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>5</span>), <span class='kw'>dtype</span><span class='kw'>=</span><span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>())
 <span class='no'>weights</span> <span class='kw'>=</span> <span class='fu'><a href='torch_linspace.html'>torch_linspace</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>steps</span><span class='kw'>=</span><span class='fl'>5</span>)
 <span class='no'>input</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt;  2
+#&gt;  7
 #&gt;  5
 #&gt;  3
-#&gt;  2
-#&gt;  4
-#&gt;  3
+#&gt;  6
 #&gt; [ CPULongType{5} ]</div><div class='input'><span class='no'>weights</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt;  0.0000
 #&gt;  0.2500
@@ -215,18 +216,23 @@ tensor of size 0. If <code>minlength</code> is specified, the number of bins is 
 #&gt; [ CPUFloatType{5} ]</div><div class='input'><span class='fu'>torch_bincount</span>(<span class='no'>input</span>, <span class='no'>weights</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  0.0000
 #&gt;  0.0000
-#&gt;  0.5000
-#&gt;  1.2500
+#&gt;  0.0000
 #&gt;  0.7500
 #&gt;  0.0000
-#&gt; [ CPUFloatType{6} ]</div><div class='input'><span class='no'>input</span>$<span class='fu'>bincount</span>(<span class='no'>weights</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0000
-#&gt;  0.0000
 #&gt;  0.5000
-#&gt;  1.2500
+#&gt;  1.0000
+#&gt;  0.2500
+#&gt; [ CPUFloatType{8} ]</div><div class='input'><span class='no'>input</span>$<span class='fu'>bincount</span>(<span class='no'>weights</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.0000
+#&gt;  0.0000
+#&gt;  0.0000
 #&gt;  0.7500
 #&gt;  0.0000
-#&gt; [ CPUFloatType{6} ]</div></pre>
+#&gt;  0.5000
+#&gt;  1.0000
+#&gt;  0.2500
+#&gt; [ CPUFloatType{8} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

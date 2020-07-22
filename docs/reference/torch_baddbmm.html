@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -185,7 +185,7 @@
     </tr>
     <tr>
       <th>alpha</th>
-      <td><p>(Number, optional) multiplier for \(\text{batch1} \mathbin{@} \text{batch2}\) (\(\alpha\))</p></td>
+      <td><p>(Number, optional) multiplier for \(\mbox{batch1} \mathbin{@} \mbox{batch2}\) (\(\alpha\))</p></td>
     </tr>
     <tr>
       <th>out</th>
@@ -210,67 +210,69 @@ broadcastable  with a
 \((b \times n \times p)\) tensor. Both <code>alpha</code> and <code>beta</code> mean the
 same as the scaling factors used in <code>torch_addbmm</code>.</p>
 <p>$$
-    \text{out}_i = \beta\ \text{input}_i + \alpha\ (\text{batch1}_i \mathbin{@} \text{batch2}_i)
+    \mbox{out}_i = \beta\ \mbox{input}_i + \alpha\ (\mbox{batch1}_i \mathbin{@} \mbox{batch2}_i)
 $$
 For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, arguments <code>beta</code> and
 <code>alpha</code> must be real numbers, otherwise they should be integers.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>M</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>5</span>))
 <span class='no'>batch1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>batch2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_baddbmm</span>(<span class='no'>M</span>, <span class='no'>batch1</span>, <span class='no'>batch2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.1623 -0.8945 -0.7083 -0.5098  1.8863
-#&gt;  -1.7398  1.5535 -1.1064 -2.4936 -4.8015
-#&gt;  -0.9498 -2.0626  2.8053 -2.3076  4.8870
+#&gt;   3.2697 -5.0643  0.0743 -0.2398 -2.5402
+#&gt;  -0.3596 -0.1524 -2.2537 -0.6132  0.4815
+#&gt;   1.1825 -2.2500  0.8243  1.5010 -2.4894
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.2770  0.4785  0.6231 -2.0273  0.4719
-#&gt;   1.3485 -0.2652 -0.2742  2.3936 -1.6460
-#&gt;   1.8253 -0.6899 -2.0034  0.8925 -1.8625
+#&gt;   0.4770 -0.8900  3.0012  2.0244  2.9934
+#&gt;  -2.0624 -0.7371 -0.6249 -1.4119 -1.0305
+#&gt;   0.4525  1.1938  1.2075  2.4423  0.5840
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -3.4049  0.3737  2.1011 -4.5712 -0.8729
-#&gt;   0.3567 -2.4400  2.3724  0.4648  1.1680
-#&gt;   0.2966  2.7215 -3.8875  0.3012 -2.9279
+#&gt;  -1.5483  0.0002 -0.7736 -0.1712  2.3502
+#&gt;   1.3820  1.9069 -1.1504  2.8244 -0.5037
+#&gt;  -0.7816  0.0485  3.1307 -0.7125  2.3957
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   1.1837 -2.3174 -0.5976  0.7243  0.7572
-#&gt;  -1.5662 -2.9552 -3.6862 -0.8178 -1.2672
-#&gt;  -1.5868 -2.3584 -4.7540  1.2936  0.4639
+#&gt;   3.2263  1.9973 -2.7929 -0.6880 -1.8358
+#&gt;   3.9498  0.1835 -3.6300 -0.7907 -2.9265
+#&gt;   1.5720 -1.5571 -0.5235  0.2169 -0.7204
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -1.1826  1.8518 -1.2862  1.6741  0.4696
-#&gt;  -0.5811  1.0851 -0.6095  0.0923 -0.6831
-#&gt;  -0.9173  1.1436  1.0274 -0.3018  0.9600
+#&gt;  -1.5198 -1.4044  0.6454  1.6571  1.6412
+#&gt;   0.6481 -0.1620  0.7348 -2.5747 -1.5232
+#&gt;  -3.9663  0.6486 -0.1782 -0.2130 -0.2005
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;  -2.3841  2.0972  0.1690 -0.8854  1.7577
-#&gt;  -1.4880 -1.0068  1.0955  1.9172  1.3200
-#&gt;   1.9998 -2.5735  1.7700 -0.8084  0.6639
+#&gt;  -0.7923 -0.1696 -0.0210 -1.4651  0.1979
+#&gt;  -0.2874  2.4903 -2.5324  0.1213  4.3363
+#&gt;   0.8367  0.5843  2.6930 -0.5081 -0.7514
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;   1.5850 -0.2581  1.7557  1.8170  1.1146
-#&gt;  -1.3755  1.1506  1.5608  0.5163 -0.7551
-#&gt;  -4.7177  0.3904 -3.9869 -2.4507 -0.1843
+#&gt;   0.9376 -5.8062 -2.4161 -2.2368  1.7258
+#&gt;  -0.5255  2.0584  1.1016 -2.1323 -1.1418
+#&gt;  -1.8125  0.8110 -0.2142  1.9131  2.4363
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;  -1.4142  0.3812 -0.5827  2.4009  2.4612
-#&gt;   1.0664  0.7697 -0.0849 -1.7689 -0.7120
-#&gt;  -2.4835  1.2062  3.4435 -2.4068  0.6938
+#&gt;  -1.3094  0.0064 -0.5161  4.1986 -0.5380
+#&gt;  -4.8329 -0.6216  0.9426 -3.9339 -1.2310
+#&gt;   7.8403  0.3146 -1.0314  3.4608  2.3111
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;  -0.2502 -1.9590  0.2099 -1.9351  0.8795
-#&gt;  -1.8157 -2.5600 -2.0693 -5.0928 -1.9493
-#&gt;  -0.2993 -1.8608  0.6234 -1.2150  0.8637
+#&gt;  -0.9910 -4.0243  4.6838 -4.8655  0.7247
+#&gt;   1.0314  0.6343  0.5493 -0.0418 -0.5915
+#&gt;   0.1801  0.7773 -1.0913  0.2247 -2.3853
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;   0.2680  1.9062 -3.9999 -0.6981 -0.7610
-#&gt;   3.9964 -3.5544  2.3229 -1.9821 -2.7605
-#&gt;   1.7847 -2.6976  2.0470 -2.4955 -1.7834
-#&gt; [ CPUFloatType{10,3,5} ]</div></pre>
+#&gt;  -1.1792  0.4361 -0.6693 -0.4414  0.9327
+#&gt;  -4.9029 -6.8475 -4.1729 -2.2513  0.6501
+#&gt;   1.3470  1.4167 -0.9282  0.5063 -2.4436
+#&gt; [ CPUFloatType{10,3,5} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

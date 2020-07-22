@@ -74,7 +74,7 @@ uniform distribution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -201,12 +201,14 @@ or 'leaky_relu' (default).</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
 <span class='fu'>nn_init_kaiming_uniform_</span>(<span class='no'>w</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"fan_in"</span>, <span class='kw'>nonlinearity</span> <span class='kw'>=</span> <span class='st'>"leaky_relu"</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.7346  0.7460 -0.1933 -0.2699  0.8112
-#&gt; -0.7825 -0.7528  0.5129  0.1513  0.4588
-#&gt;  0.7606 -0.4530 -0.7420  1.0928  0.1926
+#&gt; -0.7460  0.2070 -0.1066 -0.4344 -0.4666
+#&gt; -0.5351 -0.4524  0.0950 -1.0077 -0.2169
+#&gt; -0.9525  0.8753  0.0070 -0.4553 -0.3445
 #&gt; [ CPUFloatType{3,5} ]</div><div class='input'>
+# }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

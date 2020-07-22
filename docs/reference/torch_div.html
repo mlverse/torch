@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -189,7 +189,7 @@ returns a new resulting tensor.</p>
 <p>Each element of the tensor <code>input</code> is divided by each element of the tensor
 <code>other</code>. The resulting tensor is returned.</p>
 <p>$$
-    \text{out}_i = \frac{\text{input}_i}{\text{other}_i}
+    \mbox{out}_i = \frac{\mbox{input}_i}{\mbox{other}_i}
 $$
 The shapes of <code>input</code> and <code>other</code> must be broadcastable
 . If the <code>torch_dtype</code> of <code>input</code> and
@@ -207,7 +207,7 @@ perform true division like <code><a href='torch_true_divide.html'>torch_true_div
 Use <code><a href='torch_floor_divide.html'>torch_floor_divide</a></code> (// in Python) to perform integer division,
 instead.</p>
 <p>$$
-    \text{out}_i = \frac{\text{input}_i}{\text{other}}
+    \mbox{out}_i = \frac{\mbox{input}_i}{\mbox{other}}
 $$
 If the <code>torch_dtype</code> of <code>input</code> and <code>other</code> differ, the
 <code>torch_dtype</code> of the result tensor is determined following rules
@@ -217,40 +217,42 @@ to the <code>torch_dtype</code> of the specified output tensor. Integral divisio
 by zero leads to undefined behavior.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.2191
-#&gt;  2.0494
-#&gt; -1.2400
-#&gt;  0.9420
-#&gt; -0.1167
+#&gt; -1.2469
+#&gt; -0.8301
+#&gt;  0.6777
+#&gt;  0.4991
+#&gt;  2.3110
 #&gt; [ CPUFloatType{5} ]</div><div class='input'><span class='fu'>torch_div</span>(<span class='no'>a</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4383
-#&gt;  4.0988
-#&gt; -2.4801
-#&gt;  1.8840
-#&gt; -0.2335
+#&gt; -2.4938
+#&gt; -1.6601
+#&gt;  1.3554
+#&gt;  0.9983
+#&gt;  4.6219
 #&gt; [ CPUFloatType{5} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3372  1.2193 -0.2772  0.3384
-#&gt; -1.3998  0.4567 -0.1921 -1.1242
-#&gt;  0.4058  0.7653 -1.0178  1.7583
-#&gt;  0.1159  1.0024 -0.8520  1.4414
+#&gt; -0.1627  0.0346  0.2195  0.4264
+#&gt; -1.3478 -2.4998 -1.5522  0.7143
+#&gt;  0.2875 -1.3762  0.8071 -0.8691
+#&gt;  0.7893 -1.7013 -0.2038 -0.3908
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.4943
-#&gt;  0.8061
-#&gt;  1.0483
-#&gt;  0.4692
+#&gt; -0.2924
+#&gt;  1.8341
+#&gt;  0.0283
+#&gt; -0.6063
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_div</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2257  1.5126 -0.2645  0.7213
-#&gt;  0.9368  0.5665 -0.1833 -2.3961
-#&gt; -0.2716  0.9494 -0.9709  3.7477
-#&gt; -0.0776  1.2435 -0.8128  3.0722
-#&gt; [ CPUFloatType{4,4} ]</div></pre>
+#&gt;   0.5566   0.0188   7.7430  -0.7033
+#&gt;   4.6100  -1.3630 -54.7623  -1.1781
+#&gt;  -0.9833  -0.7503  28.4751   1.4334
+#&gt;  -2.6995  -0.9276  -7.1916   0.6445
+#&gt; [ CPUFloatType{4,4} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

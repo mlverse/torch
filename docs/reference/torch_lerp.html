@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -193,14 +193,15 @@
 <p>Does a linear interpolation of two tensors <code>start</code> (given by <code>input</code>) and <code>end</code> based
 on a scalar or tensor <code>weight</code> and returns the resulting <code>out</code> tensor.</p>
 <p>$$
-    \text{out}_i = \text{start}_i + \text{weight}_i \times (\text{end}_i - \text{start}_i)
+    \mbox{out}_i = \mbox{start}_i + \mbox{weight}_i \times (\mbox{end}_i - \mbox{start}_i)
 $$
 The shapes of <code>start</code> and <code>end</code> must be
 broadcastable . If <code>weight</code> is a tensor, then
 the shapes of <code>weight</code>, <code>start</code>, and <code>end</code> must be broadcastable .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>start</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
 <span class='no'>end</span> <span class='kw'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>4</span>)$<span class='fu'>fill_</span>(<span class='fl'>10</span>)
 <span class='no'>start</span></div><div class='output co'>#&gt; torch_tensor 
@@ -223,7 +224,8 @@ the shapes of <code>weight</code>, <code>start</code>, and <code>end</code> must
 #&gt;  6.0000
 #&gt;  6.5000
 #&gt;  7.0000
-#&gt; [ CPUFloatType{4} ]</div></pre>
+#&gt; [ CPUFloatType{4} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

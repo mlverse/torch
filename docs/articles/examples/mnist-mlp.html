@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@
   <span class="no">dir</span>,
   <span class="kw">download</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
   <span class="kw">transform</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>) {
-    <span class="no">x</span>$<span class="fu">to</span>(<span class="kw">dtype</span> <span class="kw">=</span> <span class="fu">torch_float</span>())/<span class="fl">256</span>
+    <span class="no">x</span>$<span class="fu">to</span>(<span class="kw">dtype</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_float</a></span>())/<span class="fl">256</span>
   }
 )
 <span class="no">dl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dataloader.html">dataloader</a></span>(<span class="no">ds</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">shuffle</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
@@ -142,7 +142,7 @@
   },
   <span class="kw">forward</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>) {
     <span class="no">x</span> <span class="kw">%&gt;%</span>
-      <span class="fu"><a href="../../reference/torch_flatten.html">torch_flatten</a></span>(<span class="kw">start_dim</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+      <span class="fu"><a href="../../reference/torch_flatten.html">torch_flatten</a></span>(<span class="kw">start_dim</span> <span class="kw">=</span> <span class="fl">2</span>) <span class="kw">%&gt;%</span>
       <span class="no">self</span>$<span class="fu">fc1</span>() <span class="kw">%&gt;%</span>
       <span class="fu"><a href="../../reference/nnf_relu.html">nnf_relu</a></span>() <span class="kw">%&gt;%</span>
       <span class="no">self</span>$<span class="fu">fc2</span>() <span class="kw">%&gt;%</span>

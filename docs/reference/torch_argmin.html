@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -199,29 +199,31 @@ documentation for the exact semantics of this method.</p>
 documentation for the exact semantics of this method.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3.3513e-01 -2.3507e-01 -6.9102e-01  1.7954e-02
-#&gt;  1.6427e+00 -3.6621e-01 -2.0760e+00  7.2642e-02
-#&gt;  8.4440e-02  8.9394e-01 -1.2944e+00 -9.7879e-05
-#&gt; -9.4790e-02 -7.3476e-01 -9.6850e-01  8.5480e-01
+#&gt;  1.6530 -1.9398 -0.7858 -0.6979
+#&gt;  1.3467  2.4378  2.4695 -0.0903
+#&gt;  0.5428 -0.8464 -0.8918 -0.2703
+#&gt;  1.0460 -0.3144  0.2131 -0.1355
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 6
+#&gt; 1
 #&gt; [ CPULongType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.5920 -1.4242  1.6164 -0.2802
-#&gt; -0.5818 -1.8050  0.7485  1.0217
-#&gt; -0.1692  0.3597 -0.2543  0.2064
-#&gt;  1.3153  0.2537  0.7045 -0.0802
+#&gt;  0.3917 -1.7360  2.1245 -0.4908
+#&gt; -1.2249 -0.1974  0.3145 -1.2540
+#&gt;  2.5169  0.8670  1.2077  0.5393
+#&gt;  0.2843 -0.6558 -0.7945  1.3721
 #&gt; [ CPUFloatType{4,4} ]</div><div class='input'><span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  1
-#&gt;  1
-#&gt;  2
+#&gt;  0
 #&gt;  3
-#&gt; [ CPULongType{4} ]</div></pre>
+#&gt;  1
+#&gt; [ CPULongType{4} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

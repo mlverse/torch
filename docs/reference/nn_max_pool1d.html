@@ -73,7 +73,7 @@ planes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -165,7 +165,14 @@ planes." />
 planes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_max_pool1d</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_max_pool1d</span>(
+  <span class='no'>kernel_size</span>,
+  <span class='kw'>stride</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>dilation</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>return_indices</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ceil_mode</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,44 +196,48 @@ planes.</p>
     <tr>
       <th>return_indices</th>
       <td><p>if <code>TRUE</code>, will return the max indices along with the outputs.
-Useful for nn_max_unpool1d later.</p></td>
+Useful for  <code>nn_max_unpool1d()</code> later.</p></td>
     </tr>
     <tr>
       <th>ceil_mode</th>
       <td><p>when <code>TRUE</code>, will use <code>ceil</code> instead of <code>floor</code> to compute the output shape</p></td>
     </tr>
-    <tr>
-      <th>Shape:</th>
-      <td><ul>
-<li><p>Input: \((N, C, L_{in})\)</p></li>
-<li><p>Output: \((N, C, L_{out})\), where</p></li>
-</ul>
-
-<p>$$
-  L_{out} = \left\lfloor \frac{L_{in} + 2 \times \text{padding} - \text{dilation}
-    \times (\text{kernel\_size} - 1) - 1}{\text{stride}} + 1\right\rfloor
-$$</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>In the simplest case, the output value of the layer with input size :math:<code>(N, C, L)</code>
+    <p>In the simplest case, the output value of the layer with input size \((N, C, L)\)
 and output \((N, C, L_{out})\) can be precisely described as:</p>
 <p>$$
-  out(N_i, C_j, k) = \max_{m=0, \ldots, \text{kernel\_size} - 1}
+  out(N_i, C_j, k) = \max_{m=0, \ldots, \mbox{kernel\_size} - 1}
 input(N_i, C_j, stride \times k + m)
 $$</p>
 <p>If <code>padding</code> is non-zero, then the input is implicitly zero-padded on both sides
 for <code>padding</code> number of points. <code>dilation</code> controls the spacing between the kernel points.
 It is harder to describe, but this <a href='https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md'>link</a>
 has a nice visualization of what <code>dilation</code> does.</p>
+    <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
+
+    
+
+<ul>
+<li><p>Input: \((N, C, L_{in})\)</p></li>
+<li><p>Output: \((N, C, L_{out})\), where</p></li>
+</ul>
+
+<p>$$
+  L_{out} = \left\lfloor \frac{L_{in} + 2 \times \mbox{padding} - \mbox{dilation}
+    \times (\mbox{kernel\_size} - 1) - 1}{\mbox{stride}} + 1\right\rfloor
+$$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># pool of size=3, stride=2</span>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='co'># pool of size=3, stride=2</span>
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_max_pool1d</span>(<span class='fl'>3</span>, <span class='kw'>stride</span><span class='kw'>=</span><span class='fl'>2</span>)
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)</div></pre>
+<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
+
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

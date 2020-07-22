@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -199,31 +199,33 @@ a vector of size N, with elements.</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1926
-#&gt;  0.6362
-#&gt; -0.0431
-#&gt; -0.9752
-#&gt; -0.6420
-#&gt; -1.9167
-#&gt; -0.3440
-#&gt; -0.2033
-#&gt;  1.4040
-#&gt;  0.2520
-#&gt; [ CPUFloatType{10} ]</div><div class='input'><span class='fu'>torch_cumsum</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>0</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1926
-#&gt;  0.8288
-#&gt;  0.7857
-#&gt; -0.1895
-#&gt; -0.8315
-#&gt; -2.7482
-#&gt; -3.0922
-#&gt; -3.2955
-#&gt; -1.8915
-#&gt; -1.6396
-#&gt; [ CPUFloatType{10} ]</div></pre>
+#&gt;  0.2718
+#&gt;  0.1169
+#&gt;  0.3449
+#&gt; -1.6346
+#&gt; -0.0393
+#&gt; -0.0197
+#&gt;  0.0704
+#&gt;  0.5245
+#&gt; -1.4307
+#&gt; -0.8103
+#&gt; [ CPUFloatType{10} ]</div><div class='input'><span class='fu'>torch_cumsum</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.2718
+#&gt;  0.3887
+#&gt;  0.7335
+#&gt; -0.9010
+#&gt; -0.9403
+#&gt; -0.9600
+#&gt; -0.8896
+#&gt; -0.3651
+#&gt; -1.7958
+#&gt; -2.6060
+#&gt; [ CPUFloatType{10} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

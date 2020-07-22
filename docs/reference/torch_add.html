@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -193,7 +193,7 @@
 <p>Adds the scalar <code>other</code> to each element of the input <code>input</code>
 and returns a new resulting tensor.</p>
 <p>$$
-    \text{out} = \text{input} + \text{other}
+    \mbox{out} = \mbox{input} + \mbox{other}
 $$
 If <code>input</code> is of type FloatTensor or DoubleTensor, <code>other</code> must be
 a real number, otherwise it should be an integer.</p>
@@ -208,44 +208,46 @@ The resulting tensor is returned.</p>
 <p>The shapes of <code>input</code> and <code>other</code> must be
 broadcastable .</p>
 <p>$$
-    \text{out} = \text{input} + \text{alpha} \times \text{other}
+    \mbox{out} = \mbox{input} + \mbox{alpha} \times \mbox{other}
 $$
 If <code>other</code> is of type FloatTensor or DoubleTensor, <code>alpha</code> must be
 a real number, otherwise it should be an integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6128
-#&gt; -1.1645
-#&gt;  0.3413
-#&gt;  0.0634
+#&gt;  0.2160
+#&gt;  0.1973
+#&gt; -0.1795
+#&gt; -0.9024
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='fl'>20</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  20.6128
-#&gt;  18.8355
-#&gt;  20.3413
-#&gt;  20.0634
+#&gt;  20.2160
+#&gt;  20.1973
+#&gt;  19.8204
+#&gt;  19.0976
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0661
-#&gt; -0.4272
-#&gt;  0.1442
-#&gt;  0.5145
+#&gt; -1.6998
+#&gt; -0.1848
+#&gt; -0.4348
+#&gt; -0.7475
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.4450
-#&gt;  0.3247
-#&gt; -0.5883
-#&gt;  1.0715
+#&gt;  0.9213
+#&gt;  0.5193
+#&gt;  0.3855
+#&gt; -1.5317
 #&gt; [ CPUFloatType{4,1} ]</div><div class='input'><span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3789  1.0179  1.5892  1.9596
-#&gt; -0.7414 -0.1024  0.4689  0.8393
-#&gt; -1.6545 -1.0155 -0.4442 -0.0738
-#&gt;  0.0054  0.6444  1.2157  1.5860
-#&gt; [ CPUFloatType{4,4} ]</div></pre>
+#&gt; -0.7785  0.7364  0.4865  0.1738
+#&gt; -1.1805  0.3345  0.0845 -0.2282
+#&gt; -1.3142  0.2007 -0.0492 -0.3619
+#&gt; -3.2315 -1.7166 -1.9665 -2.2792
+#&gt; [ CPUFloatType{4,4} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

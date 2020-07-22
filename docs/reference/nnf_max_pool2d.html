@@ -73,7 +73,7 @@ planes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -196,6 +196,11 @@ tuple <code>(sH, sW)</code>. Default: <code>kernel_size</code></p></td>
       <th>padding</th>
       <td><p>implicit zero paddings on both sides of the input. Can be a
 single number or a tuple <code>(padH, padW)</code>. Default: 0</p></td>
+    </tr>
+    <tr>
+      <th>dilation</th>
+      <td><p>controls the spacing between the kernel points; also known as
+the à trous algorithm.</p></td>
     </tr>
     <tr>
       <th>ceil_mode</th>

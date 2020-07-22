@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -187,13 +187,10 @@
     )
   }
 )</pre></body></html></div>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu">torch_tensor</span>(<span class="fl">1</span>, <span class="kw">requires_grad</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">1</span>, <span class="kw">requires_grad</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="no">o</span> <span class="kw">&lt;-</span> <span class="fu">mul_constant</span>(<span class="no">x</span>, <span class="fl">2</span>)
 <span class="no">o</span>$<span class="fu">backward</span>()
-<span class="no">x</span>$<span class="no">grad</span>
-<span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  2</span>
-<span class="co">#&gt; [ CPUFloatType{1} ]</span></pre></body></html></div>
+<span class="no">x</span>$<span class="no">grad</span></pre></body></html></div>
 </div>
   </div>
 

@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -172,30 +172,29 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input1</th>
-      <td><p>\((N, *, H_{in1})\) where \(H_{in1}=\text{in1\_features}\)
+      <td><p>\((N, *, H_{in1})\) where \(H_{in1}=\mbox{in1\_features}\)
 and \(*\) means any number of additional dimensions.
 All but the last dimension of the inputs should be the same.</p></td>
     </tr>
     <tr>
       <th>input2</th>
-      <td><p>\((N, *, H_{in2})\) where \(H_{in2}=\text{in2\_features}\)</p></td>
+      <td><p>\((N, *, H_{in2})\) where \(H_{in2}=\mbox{in2\_features}\)</p></td>
     </tr>
     <tr>
       <th>weight</th>
-      <td><p>\((\text{out\_features}, \text{in1\_features},
-\text{in2\_features})\)</p></td>
+      <td><p>\((\mbox{out\_features}, \mbox{in1\_features},
+\mbox{in2\_features})\)</p></td>
     </tr>
     <tr>
       <th>bias</th>
-      <td><p>\((\text{out\_features})\)</p></td>
-    </tr>
-    <tr>
-      <th>output:</th>
-      <td><p>\((N, *, H_{out})\) where \(H_{out}=\text{out\_features}\)
-and all but the last dimension are the same shape as the input.</p></td>
+      <td><p>\((\mbox{out\_features})\)</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>output \((N, *, H_{out})\) where \(H_{out}=\mbox{out\_features}\)
+and all but the last dimension are the same shape as the input.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

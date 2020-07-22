@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -215,14 +215,10 @@ returned window size. <code>periodic</code> flag determines whether the returned
 window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
 <code>torch_stft</code>. Therefore, if <code>periodic</code> is true, the \(N\) in
-above formula is in fact \(\text{window\_length} + 1\). Also, we always have
+above formula is in fact \(\mbox{window\_length} + 1\). Also, we always have
 <code>torch_hann_window(L, periodic=True)</code> equal to
 <code>torch_hann_window(L + 1, periodic=False)[:-1])</code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

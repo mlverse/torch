@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -163,6 +163,7 @@
 <h2 class="hasAnchor">
 <a href="#fixing-typos" class="anchor"></a>Fixing typos</h2>
 <p>You can fix typos, spelling mistakes, or grammatical errors in the documentation directly using the GitHub web interface, as long as the changes are made in the <em>source</em> file. This generally means you’ll need to edit <a href="https://roxygen2.r-lib.org/articles/roxygen2.html">roxygen2 comments</a> in an <code>.R</code>, not a <code>.Rd</code> file. You can find the <code>.R</code> file that generates the <code>.Rd</code> by reading the comment in the first line.</p>
+<p>See also the [Documentation] section.</p>
 </div>
 <div id="filing-bugs" class="section level2">
 <h2 class="hasAnchor">
@@ -186,6 +187,11 @@
 <h2 class="hasAnchor">
 <a href="#code-contributions" class="anchor"></a>Code contributions</h2>
 <p>We have many open issues in the <a href="https://github.com/mlverse/torch/issues">github repo</a> if there’s one item that you want to work on, you can comment on it an ask for directions.</p>
+</div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h2>
+<p>We use roxygen2 to generate the documentation. IN order to update the docs, edit the file in the <code>R</code> directory. To regenerate and preview the docs, use the custom <code>tools/document.R</code> script, as we need to patch roxygen2 to avoid running the examples on CRAN.</p>
 </div>
 </div>
 

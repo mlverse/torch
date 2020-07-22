@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -163,7 +163,7 @@
     <p>Applies a linear transformation to the incoming data: <code>y = xA^T + b</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_linear</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_linear</span>(<span class='no'>in_features</span>, <span class='no'>out_features</span>, <span class='kw'>bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,19 +202,21 @@ are the same shape as the input and :math:<code>H_out = out_features</code>.</p>
 <li><p>weight: the learnable weights of the module of shape
 <code>(out_features, in_features)</code>. The values are
 initialized from \(U(-\sqrt{k}, \sqrt{k})\)s, where
-\(k = \frac{1}{\text{in\_features}}\)</p></li>
-<li><p>bias: the learnable bias of the module of shape :math:\((\text{out_features})\).
+\(k = \frac{1}{\mbox{in\_features}}\)</p></li>
+<li><p>bias: the learnable bias of the module of shape \((\mbox{out\_features})\).
 If <code>bias</code> is <code>TRUE</code>, the values are initialized from
 \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
-\(k = \frac{1}{\text{in_features}}\)</p></li>
+\(k = \frac{1}{\mbox{in\_features}}\)</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_linear</span>(<span class='fl'>20</span>, <span class='fl'>30</span>)
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_linear</span>(<span class='fl'>20</span>, <span class='fl'>30</span>)
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>128</span>, <span class='fl'>20</span>)
 <span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>output</span>$<span class='fu'>size</span>())</div><div class='output co'>#&gt; [1] 128  30</div><div class='input'>
+# }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

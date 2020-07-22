@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -195,31 +195,34 @@
 <p>Computes the solution to the least squares and least norm problems for a full
 rank matrix \(A\) of size \((m \times n)\) and a matrix \(B\) of
 size \((m \times k)\).</p>
-<p>If \(m \geq n\), <code>lstsq</code> solves the least-squares problem:</p>
-<p>$$   \begin{array}{ll}
+<p>If \(m \geq n\), <code>torch_lstsq()</code> solves the least-squares problem:</p>
+<p>$$
+   \begin{array}{ll}
    \min_X &amp; \|AX-B\|_2.
    \end{array}
 $$
-If \(m &lt; n\), <code>lstsq</code> solves the least-norm problem:</p>
-<p>$$   \begin{array}{ll}
-   \min_X &amp; \|X\|_2 &amp; \text{subject to} &amp; AX = B.
+If \(m &lt; n\), <code>torch_lstsq()</code> solves the least-norm problem:</p>
+<p>$$
+   \begin{array}{llll}
+   \min_X &amp; \|X\|_2 &amp; \mbox{subject to} &amp; AX = B.
    \end{array}
 $$
-Returned tensor \(X\) has shape \((\max(m, n) \times k)\). The first \(n\)
+Returned tensor \(X\) has shape \((\mbox{max}(m, n) \times k)\). The first \(n\)
 rows of \(X\) contains the solution. If \(m \geq n\), the residual sum of squares
 for the solution in each column is given by the sum of squares of elements in the
 remaining \(m - n\) rows of that column.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>A</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
+<span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(
  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>),
  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span>),
  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>2</span>),
  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>2</span>,<span class='fl'>5</span>),
  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>4</span>,<span class='fl'>3</span>)
 ))
-<span class='no'>B</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(
+<span class='no'>B</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(
  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>10</span>, -<span class='fl'>3</span>),
  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>12</span>, <span class='fl'>14</span>),
  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>14</span>, <span class='fl'>12</span>),
@@ -233,7 +236,8 @@ remaining \(m - n\) rows of that column.</p>
 #&gt;   1.0000   2.0000
 #&gt;  10.9635   4.8501
 #&gt;   8.9332   5.2418
-#&gt; [ CPUFloatType{5,2} ]</div></pre>
+#&gt; [ CPUFloatType{5,2} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

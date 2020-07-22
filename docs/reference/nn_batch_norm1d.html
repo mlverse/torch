@@ -74,7 +74,7 @@ Batch Normalization: Accelerating Deep Network Training by Reducing Internal Cov
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -167,7 +167,13 @@ inputs with optional additional channel dimension) as described in the paper
 <a href='https://arxiv.org/abs/1502.03167'>Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_batch_norm1d</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_batch_norm1d</span>(
+  <span class='no'>num_features</span>,
+  <span class='kw'>eps</span> <span class='kw'>=</span> <span class='fl'>1e-05</span>,
+  <span class='kw'>momentum</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
+  <span class='kw'>affine</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>track_running_stats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,7 +232,7 @@ evaluation time as well.</p>
 <p>This <code>momentum</code> argument is different from one used in optimizer
 classes and the conventional notion of momentum. Mathematically, the
 update rule for running statistics here is
-\(\hat{x}_\text{new} = (1 - \text{momentum}) \times \hat{x} + \text{momentum} \times x_t\),
+\(\hat{x}_{\mbox{new}} = (1 - \mbox{momentum}) \times \hat{x} + \mbox{momentum} \times x_t\),
 where \(\hat{x}\) is the estimated statistic and \(x_t\) is the
 new observed value.</p>
 <p>Because the Batch Normalization is done over the <code>C</code> dimension, computing statistics
@@ -242,12 +248,15 @@ on <code>(N, L)</code> slices, it's common terminology to call this Temporal Bat
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># With Learnable Parameters</span>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='co'># With Learnable Parameters</span>
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_batch_norm1d</span>(<span class='fl'>100</span>)
 <span class='co'># Without Learnable Parameters</span>
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_batch_norm1d</span>(<span class='fl'>100</span>, <span class='kw'>affine</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>100</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)</div></pre>
+<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
+
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

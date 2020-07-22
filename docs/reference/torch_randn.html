@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -202,21 +202,23 @@
 with mean <code>0</code> and variance <code>1</code> (also called the standard normal
 distribution).</p>
 <p>$$
-    \text{out}_{i} \sim \mathcal{N}(0, 1)
+    \mbox{out}_{i} \sim \mathcal{N}(0, 1)
 $$
 The shape of the tensor is defined by the variable argument <code>size</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='fu'>torch_randn</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.3924
-#&gt;  0.8078
-#&gt;  0.2544
-#&gt; -1.5036
+#&gt; -0.5578
+#&gt; -1.6968
+#&gt; -0.0944
+#&gt; -0.7900
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_randn</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0663  1.2166 -1.3432
-#&gt; -0.0032 -1.5927 -0.3009
-#&gt; [ CPUFloatType{2,3} ]</div></pre>
+#&gt; -2.1279  1.0919  2.2659
+#&gt;  0.1722  0.1719 -1.1738
+#&gt; [ CPUFloatType{2,3} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

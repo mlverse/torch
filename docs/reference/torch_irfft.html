@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -181,7 +181,7 @@
     </tr>
     <tr>
       <th>onesided</th>
-      <td><p>(bool, optional) controls whether <code>input</code> was halfed to avoid        redundancy, e.g., by <code>rfft</code>. Default: <code>True</code></p></td>
+      <td><p>(bool, optional) controls whether <code>input</code> was halfed to avoid        redundancy, e.g., by <code><a href='torch_rfft.html'>torch_rfft()</a></code>. Default: <code>True</code></p></td>
     </tr>
     <tr>
       <th>signal_sizes</th>
@@ -201,15 +201,15 @@ information can sometimes be lost, optionally set `signal_sizes` to be
 the size of the original signal (without the batch dimensions if in batched
 mode) to recover it with correct shape.
 
-Therefore, to invert an [`~torch.rfft`], the `normalized` and
-`onesided` arguments should be set identically for [`~torch.irfft`],
+Therefore, to invert an [torch_rfft()], the `normalized` and
+`onesided` arguments should be set identically for [torch_irfft()],
 and preferably a `signal_sizes` is given to avoid size mismatch. See the
 example below for a case of size mismatch.
 
-See [`~torch.rfft`] for details on conjugate symmetry.
+See [torch_rfft()] for details on conjugate symmetry.
 </pre>
 
-<p>The inverse of this function is <code>~torch.rfft</code>.</p>
+<p>The inverse of this function is <code><a href='torch_rfft.html'>torch_rfft()</a></code>.</p>
 <pre>For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
 repeatedly running FFT methods on tensors of same geometry with same
 configuration. See cufft-plan-cache for more details on how to
@@ -223,10 +223,10 @@ monitor and control the cache.
 
 <p>Complex-to-real Inverse Discrete Fourier Transform</p>
 <p>This method computes the complex-to-real inverse discrete Fourier transform.
-It is mathematically equivalent with <code>ifft</code> with differences only in
+It is mathematically equivalent with <code><a href='torch_ifft.html'>torch_ifft</a></code> with differences only in
 formats of the input and output.</p>
-<p>The argument specifications are almost identical with <code>~torch.ifft</code>.
-Similar to <code>~torch.ifft</code>, if <code>normalized</code> is set to <code>True</code>,
+<p>The argument specifications are almost identical with <code><a href='torch_ifft.html'>torch_ifft</a></code>.
+Similar to <code><a href='torch_ifft.html'>torch_ifft</a></code>, if <code>normalized</code> is set to <code>True</code>,
 this normalizes the result by multiplying it with
 \(\sqrt{\prod_{i=1}^K N_i}\) so that the operator is unitary, where
 \(N_i\) is the size of signal dimension \(i\).</p>
@@ -237,65 +237,67 @@ this normalizes the result by multiplying it with
 <p>Generally speaking, input to this function should contain values
 following conjugate symmetry. Note that even if <code>onesided</code> is
 <code>True</code>, often symmetry on some part is still needed. When this
-requirement is not satisfied, the behavior of <code>~torch.irfft</code> is
+requirement is not satisfied, the behavior of <code>torch_irfft</code> is
 undefined. Since <code>torch_autograd.gradcheck</code> estimates numerical
-Jacobian with point perturbations, <code>~torch.irfft</code> will almost
+Jacobian with point perturbations, <code>torch_irfft</code> will almost
 certainly fail the check.</p>
 
 <p>For CPU tensors, this method is currently only available with MKL. Use
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
 <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -5.6944  0.0000
-#&gt;  -0.5041  1.1061
-#&gt;   1.2212  0.0000
+#&gt;  -2.6442  0.0000
+#&gt;   3.2951 -1.0012
+#&gt;  -10.0001  0.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.5871  2.0119
-#&gt;   3.8632  0.8442
-#&gt;   0.7951 -0.2922
+#&gt;   1.3956 -4.9153
+#&gt;   3.1204  7.3054
+#&gt;  -1.9820  2.2872
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.9795  0.0000
-#&gt;   2.3520  5.4460
-#&gt;  -7.4510  0.0000
+#&gt;   3.3926  0.0000
+#&gt;   5.2495  2.0603
+#&gt;  -4.0185  0.0000
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   1.5871 -2.0119
-#&gt;   2.5582  2.3422
-#&gt;   0.7951  0.2922
+#&gt;   1.3956  4.9153
+#&gt;   4.1712  1.2315
+#&gt;  -1.9820 -2.2872
 #&gt; [ CPUFloatType{4,3,2} ]</div><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -2.0770  0.0000
-#&gt;   1.2611 -6.3241
-#&gt;   1.4162  2.1853
+#&gt;   6.1729  0.0000
+#&gt;   2.7828 -0.8086
+#&gt;   0.0001 -0.7514
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -2.2778  6.2227
-#&gt;  -3.3691 -1.1593
-#&gt;  -1.4549 -1.6400
+#&gt;  -0.3550  1.3322
+#&gt;  -1.3598  3.0191
+#&gt;   1.5158 -3.2844
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -0.8259  0.0000
-#&gt;   4.0406  1.4396
-#&gt;   2.4919 -0.1014
+#&gt;   5.1938  0.0000
+#&gt;  -2.5545  1.6405
+#&gt;   7.3076  5.2401
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -2.2778 -6.2227
-#&gt;  -1.3658 -2.3947
-#&gt;  -2.0427  0.3693
+#&gt;  -0.3550 -1.3322
+#&gt;   0.9130 -2.5817
+#&gt;  -0.4966 -2.0859
 #&gt; [ CPUFloatType{4,3,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'>torch_irfft</span>(<span class='no'>y</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>signal_sizes</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2752  0.3661  0.1672 -0.9794 -1.1434
-#&gt; -0.9930 -0.1245  0.5163 -1.1786 -1.6444
-#&gt;  1.8269 -0.2770 -0.1033 -0.8977 -0.1357
-#&gt;  0.0968  1.2096  1.0895  0.0892  0.3136
-#&gt; [ CPUFloatType{4,5} ]</div></pre>
+#&gt;  1.3437 -0.2165  0.6494  0.9663 -0.0787
+#&gt; -0.7215  1.0848 -0.3526 -0.1508 -0.2811
+#&gt;  1.3002 -0.5011  1.6580 -0.1709  0.7330
+#&gt;  0.4254  1.6956 -1.7164 -0.2147  0.7211
+#&gt; [ CPUFloatType{4,5} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

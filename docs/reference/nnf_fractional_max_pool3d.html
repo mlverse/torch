@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -164,6 +164,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>nnf_fractional_max_pool3d</span>(
+  <span class='no'>input</span>,
   <span class='no'>kernel_size</span>,
   <span class='kw'>output_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>output_ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -174,6 +175,10 @@
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>input</th>
+      <td><p>the input tensor</p></td>
+    </tr>
     <tr>
       <th>kernel_size</th>
       <td><p>the size of the window to take a max over. Can be a single number \(k\)
@@ -196,8 +201,8 @@ range (0, 1)</p></td>
       <td><p>if <code>True</code>, will return the indices along with the outputs.</p></td>
     </tr>
     <tr>
-      <th>input</th>
-      <td><p>the input tensor</p></td>
+      <th>random_samples</th>
+      <td><p>undocumented argument.</p></td>
     </tr>
     </table>
 

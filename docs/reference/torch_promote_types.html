@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -188,8 +188,10 @@ documentation  for more information on the type
 promotion logic.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>torch_promote_types</span>(<span class='fu'>torch_int32</span>(), <span class='fu'>torch_float32</span>())</div><div class='output co'>#&gt; torch_Float</div><div class='input'><span class='fu'>torch_promote_types</span>(<span class='fu'>torch_uint8</span>(), <span class='fu'>torch_long</span>())</div><div class='output co'>#&gt; torch_Long</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
+<span class='fu'>torch_promote_types</span>(<span class='fu'><a href='torch_dtype.html'>torch_int32</a></span>(), <span class='fu'><a href='torch_dtype.html'>torch_float32</a></span>())</div><div class='output co'>#&gt; torch_Float</div><div class='input'><span class='fu'>torch_promote_types</span>(<span class='fu'><a href='torch_dtype.html'>torch_uint8</a></span>(), <span class='fu'><a href='torch_dtype.html'>torch_long</a></span>())</div><div class='output co'>#&gt; torch_Long</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

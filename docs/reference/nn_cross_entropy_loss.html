@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="CrossEntropyLoss module — nn_cross_entropy_loss" />
-<meta property="og:description" content="This criterion combines nn_log_softmax and nn_nll_loss in one single class.
+<meta property="og:description" content="This criterion combines nn_log_softmax() and nn_nll_loss() in one single class.
 It is useful when training a classification problem with C classes." />
 
 
@@ -73,7 +73,7 @@ It is useful when training a classification problem with C classes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -161,11 +161,11 @@ It is useful when training a classification problem with C classes." />
     </div>
 
     <div class="ref-description">
-    <p>This criterion combines <a href='nn_log_softmax.html'>nn_log_softmax</a> and nn_nll_loss in one single class.
+    <p>This criterion combines <code><a href='nn_log_softmax.html'>nn_log_softmax()</a></code> and <code>nn_nll_loss()</code> in one single class.
 It is useful when training a classification problem with <code>C</code> classes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_cross_entropy_loss</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_cross_entropy_loss</span>(<span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ignore_index</span> <span class='kw'>=</span> -<span class='fl'>100</span>, <span class='kw'>reduction</span> <span class='kw'>=</span> <span class='st'>"mean"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,12 +207,12 @@ is specified, this criterion also accepts this class index (this index may not
 necessarily be in the class range).</p>
 <p>The loss can be described as:
 $$
-  \text{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
+  \mbox{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
 = -x[class] + \log\left(\sum_j \exp(x[j])\right)
 $$
 or in the case of the <code>weight</code> argument being specified:
 $$
-  \text{loss}(x, class) = weight[class] \left(-x[class] + \log\left(\sum_j \exp(x[j])\right)\right)
+  \mbox{loss}(x, class) = weight[class] \left(-x[class] + \log\left(\sum_j \exp(x[j])\right)\right)
 $$</p>
 <p>The losses are averaged across observations for each minibatch.
 Can also be used for higher dimension inputs, such as 2D images, by providing
@@ -227,7 +227,7 @@ where \(K\) is the number of dimensions, and a target of appropriate shape
 <li><p>Input: \((N, C)\) where <code>C = number of classes</code>, or
 \((N, C, d_1, d_2, ..., d_K)\) with \(K \geq 1\)
 in the case of <code>K</code>-dimensional loss.</p></li>
-<li><p>Target: \((N)\) where each value is \(0 \leq \text{targets}[i] \leq C-1\), or
+<li><p>Target: \((N)\) where each value is \(0 \leq \mbox{targets}[i] \leq C-1\), or
 \((N, d_1, d_2, ..., d_K)\) with \(K \geq 1\) in the case of
 K-dimensional loss.</p></li>
 <li><p>Output: scalar.
@@ -239,11 +239,14 @@ of K-dimensional loss.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>loss</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_cross_entropy_loss</span>()
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='no'>loss</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_cross_entropy_loss</span>()
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='kw'>requires_grad</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>target</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span>(<span class='kw'>low</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_long</span>())
+<span class='no'>target</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span>(<span class='kw'>low</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_long</a></span>())
 <span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>loss</span>(<span class='no'>input</span>, <span class='no'>target</span>)
-<span class='no'>output</span>$<span class='fu'>backward</span>()</div></pre>
+<span class='no'>output</span>$<span class='fu'>backward</span>()
+
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

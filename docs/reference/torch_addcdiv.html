@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -181,7 +181,7 @@
     </tr>
     <tr>
       <th>value</th>
-      <td><p>(Number, optional) multiplier for \(\text{tensor1} / \text{tensor2}\)</p></td>
+      <td><p>(Number, optional) multiplier for \(\mbox{tensor1} / \mbox{tensor2}\)</p></td>
     </tr>
     <tr>
       <th>out</th>
@@ -202,16 +202,16 @@ multiply the result by the scalar <code>value</code> and add it to <code>input</
 
 <p>Integer division with addcdiv is deprecated, and in a future release
 addcdiv will perform a true division of <code>tensor1</code> and <code>tensor2</code>.
-The current addcdiv behavior can be replicated using <code>floor_divide</code>
+The current addcdiv behavior can be replicated using <code><a href='torch_floor_divide.html'>torch_floor_divide()</a></code>
 for integral inputs
 (<code>input</code> + <code>value</code> * <code>tensor1</code> // <code>tensor2</code>)
-and <code>div</code> for float inputs
+and <code><a href='torch_div.html'>torch_div()</a></code> for float inputs
 (<code>input</code> + <code>value</code> * <code>tensor1</code> / <code>tensor2</code>).
-The new addcdiv behavior can be implemented with <code>true_divide</code>
+The new addcdiv behavior can be implemented with <code><a href='torch_true_divide.html'>torch_true_divide()</a></code>
 (<code>input</code> + <code>value</code> * torch.true_divide(<code>tensor1</code>,
 <code>tensor2</code>).</p>
 <p>$$
-    \text{out}_i = \text{input}_i + \text{value} \times \frac{\text{tensor1}_i}{\text{tensor2}_i}
+    \mbox{out}_i = \mbox{input}_i + \mbox{value} \times \frac{\mbox{tensor1}_i}{\mbox{tensor2}_i}
 $$</p>
 <p>The shapes of <code>input</code>, <code>tensor1</code>, and <code>tensor2</code> must be
 broadcastable .</p>
@@ -219,15 +219,17 @@ broadcastable .</p>
 a real number, otherwise an integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>t</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>t1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>1</span>))
 <span class='no'>t2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_addcdiv</span>(<span class='no'>t</span>, <span class='no'>t1</span>, <span class='no'>t2</span>, <span class='fl'>0.1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.2292  1.6202 -0.7335
-#&gt;  0.4151  1.4808 -0.8162
-#&gt; -0.0251  1.8109 -0.6204
-#&gt; [ CPUFloatType{3,3} ]</div></pre>
+#&gt; -0.3050 -0.1424  0.5617
+#&gt; -0.3424  0.0045  1.0519
+#&gt; -0.2932 -0.1885  0.4079
+#&gt; [ CPUFloatType{3,3} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -195,7 +195,7 @@ tensor in the given dimension <code>dim</code>. The computation is numerically
 stabilized.</p>
 <p>For summation index \(j\) given by <code>dim</code> and other indices \(i\), the result is</p>
 <p>$$
-        \text{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
+        \mbox{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
 $$</p>
 <p>If <code>keepdim</code> is <code>True</code>, the output tensor is of the same size
 as <code>input</code> except in the dimension(s) <code>dim</code> where it is of size 1.
@@ -203,13 +203,15 @@ Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>
 output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_logsumexp</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3.3482
-#&gt;  2.1530
-#&gt;  2.1787
-#&gt; [ CPUFloatType{3} ]</div></pre>
+#&gt;  1.9705
+#&gt;  0.9976
+#&gt;  1.5809
+#&gt; [ CPUFloatType{3} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

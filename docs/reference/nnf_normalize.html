@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -195,7 +195,7 @@
     <p>For a tensor <code>input</code> of sizes \((n_0, ..., n_{dim}, ..., n_k)\), each
 \(n_{dim}\) -element vector \(v\) along dimension <code>dim</code> is transformed as</p>
 <p>$$
-        v = \frac{v}{\max(\lVert v \rVert_p, \epsilon)}.
+        v = \frac{v}{\max(\Vert v \Vert_p, \epsilon)}.
 $$</p>
 <p>With the default arguments it uses the Euclidean norm over vectors along
 dimension \(1\) for normalization.</p>

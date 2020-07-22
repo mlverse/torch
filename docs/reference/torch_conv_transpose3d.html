@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -169,15 +169,15 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>NA input tensor of shape \((\text{minibatch} , \text{in\_channels} , iT , iH , iW)\)</p></td>
+      <td><p>NA input tensor of shape \((\mbox{minibatch} , \mbox{in\_channels} , iT , iH , iW)\)</p></td>
     </tr>
     <tr>
       <th>weight</th>
-      <td><p>NA filters of shape \((\text{in\_channels} , \frac{\text{out\_channels}}{\text{groups}} , kT , kH , kW)\)</p></td>
+      <td><p>NA filters of shape \((\mbox{in\_channels} , \frac{\mbox{out\_channels}}{\mbox{groups}} , kT , kH , kW)\)</p></td>
     </tr>
     <tr>
       <th>bias</th>
-      <td><p>NA optional bias of shape \((\text{out\_channels})\). Default: None</p></td>
+      <td><p>NA optional bias of shape \((\mbox{out\_channels})\). Default: None</p></td>
     </tr>
     <tr>
       <th>stride</th>
@@ -193,7 +193,7 @@
     </tr>
     <tr>
       <th>groups</th>
-      <td><p>NA split input into groups, \(\text{in\_channels}\) should be divisible by the      number of groups. Default: 1</p></td>
+      <td><p>NA split input into groups, \(\mbox{in\_channels}\) should be divisible by the      number of groups. Default: 1</p></td>
     </tr>
     <tr>
       <th>dilation</th>
@@ -212,9 +212,7 @@ composed of several input planes, sometimes also called "deconvolution"</p>
 <p>.. include:: cudnn_deterministic.rst</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-
-</div></pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

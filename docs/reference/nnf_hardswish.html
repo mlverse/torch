@@ -73,7 +73,7 @@ Searching for MobileNetV3." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -172,7 +172,7 @@ Searching for MobileNetV3.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>(N,∗) tensor, where * means, any number of additional
+      <td><p>(N,*) tensor, where * means, any number of additional
 dimensions</p></td>
     </tr>
     <tr>
@@ -183,13 +183,13 @@ dimensions</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>$$
-  \text{Hardswish}(x) = \begin{cases}
-0 &amp; \text{if~} x \le -3, \\
-x &amp; \text{if~} x \ge +3, \\
-x \cdot (x + 3) /6 &amp; \text{otherwise}
-\end{cases}
-$$</p>
+    <p>$$ \mbox{Hardswish}(x) = \left\{
+  \begin{array}{ll}
+  0 &amp; \mbox{if } x \le -3, \\
+  x &amp; \mbox{if } x \ge +3, \\
+  x \cdot (x + 3)/6 &amp; \mbox{otherwise}
+  \end{array}
+  \right. $$</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

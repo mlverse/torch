@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="RNN module — nn_rnn" />
-<meta property="og:description" content="Applies a multi-layer Elman RNN with \(\tanh\) or \(\text{ReLU}\) non-linearity
+<meta property="og:description" content="Applies a multi-layer Elman RNN with \(\tanh\) or \(\mbox{ReLU}\) non-linearity
 to an input sequence." />
 
 
@@ -73,7 +73,7 @@ to an input sequence." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -161,11 +161,21 @@ to an input sequence." />
     </div>
 
     <div class="ref-description">
-    <p>Applies a multi-layer Elman RNN with \(\tanh\) or \(\text{ReLU}\) non-linearity
+    <p>Applies a multi-layer Elman RNN with \(\tanh\) or \(\mbox{ReLU}\) non-linearity
 to an input sequence.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_rnn</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_rnn</span>(
+  <span class='no'>input_size</span>,
+  <span class='no'>hidden_size</span>,
+  <span class='kw'>num_layers</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>nonlinearity</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>batch_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>dropout</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>bidirectional</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,8 +217,12 @@ RNN layer except the last layer, with dropout probability equal to
 <code>dropout</code>. Default: 0</p></td>
     </tr>
     <tr>
-      <th>bidirectional:</th>
+      <th>bidirectional</th>
       <td><p>If <code>TRUE</code>, becomes a bidirectional RNN. Default: <code>FALSE</code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other arguments that can be passed to the super class.</p></td>
     </tr>
     </table>
 
@@ -222,7 +236,7 @@ $$</p>
 <p>where \(h_t\) is the hidden state at time <code>t</code>, \(x_t\) is
 the input at time <code>t</code>, and \(h_{(t-1)}\) is the hidden state of the
 previous layer at time <code>t-1</code> or the initial hidden state at time <code>0</code>.
-If <code>nonlinearity</code> is <code>'relu'</code>, then \(\text{ReLU}\) is used instead of
+If <code>nonlinearity</code> is <code>'relu'</code>, then \(\mbox{ReLU}\) is used instead of
 \(\tanh\).</p>
     <h2 class="hasAnchor" id="inputs"><a class="anchor" href="#inputs"></a>Inputs</h2>
 
@@ -263,13 +277,13 @@ Like <em>output</em>, the layers can be separated using
 
 <ul>
 <li><p>Input1: \((L, N, H_{in})\) tensor containing input features where
-\(H_{in}=\text{input_size}\) and <code>L</code> represents a sequence length.</p></li>
+\(H_{in}=\mbox{input\_size}\) and <code>L</code> represents a sequence length.</p></li>
 <li><p>Input2: \((S, N, H_{out})\) tensor
 containing the initial hidden state for each element in the batch.
-\(H_{out}=\text{hidden_size}\)
-Defaults to zero if not provided. where \(S=\text{num_layers} * \text{num_directions}\)
+\(H_{out}=\mbox{hidden\_size}\)
+Defaults to zero if not provided. where \(S=\mbox{num\_layers} * \mbox{num\_directions}\)
 If the RNN is bidirectional, num_directions should be 2, else it should be 1.</p></li>
-<li><p>Output1: \((L, N, H_{all})\) where \(H_{all}=\text{num_directions} * \text{hidden_size}\)</p></li>
+<li><p>Output1: \((L, N, H_{all})\) where \(H_{all}=\mbox{num\_directions} * \mbox{hidden\_size}\)</p></li>
 <li><p>Output2: \((S, N, H_{out})\) tensor containing the next hidden state
 for each element in the batch</p></li>
 </ul>
@@ -279,14 +293,14 @@ for each element in the batch</p></li>
     
 
 <ul>
-<li><p>weight_ih_lk: the learnable input-hidden weights of the k-th layer,
+<li><p><code>weight_ih_l[k]</code>: the learnable input-hidden weights of the k-th layer,
 of shape <code>(hidden_size, input_size)</code> for <code>k = 0</code>. Otherwise, the shape is
 <code>(hidden_size, num_directions * hidden_size)</code></p></li>
-<li><p>weight_hh_lk: the learnable hidden-hidden weights of the k-th layer,
+<li><p><code>weight_hh_l[k]</code>: the learnable hidden-hidden weights of the k-th layer,
 of shape <code>(hidden_size, hidden_size)</code></p></li>
-<li><p>bias_ih_lk: the learnable input-hidden bias of the k-th layer,
+<li><p><code>bias_ih_l[k]</code>: the learnable input-hidden bias of the k-th layer,
 of shape <code>(hidden_size)</code></p></li>
-<li><p>bias_hh_lk: the learnable hidden-hidden bias of the k-th layer,
+<li><p><code>bias_hh_l[k]</code>: the learnable hidden-hidden bias of the k-th layer,
 of shape <code>(hidden_size)</code></p></li>
 </ul>
 
@@ -296,109 +310,111 @@ of shape <code>(hidden_size)</code></p></li>
 
 
 <p>All the weights and biases are initialized from \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\)
-where \(k = \frac{1}{\text{hidden\_size}}\)</p>
+where \(k = \frac{1}{\mbox{hidden\_size}}\)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rnn</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_rnn</span>(<span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='no'>rnn</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_rnn</span>(<span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>2</span>)
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>10</span>)
 <span class='no'>h0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>20</span>)
 <span class='fu'>rnn</span>(<span class='no'>input</span>, <span class='no'>h0</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  Columns 1 to 9 -0.0450  0.2275 -0.4077  0.7221 -0.6667  0.1383 -0.7369  0.2237 -0.1367
-#&gt;   0.3671 -0.6049 -0.5849  0.6251 -0.2441  0.2619  0.0253 -0.0825 -0.0936
-#&gt;  -0.4253 -0.0698 -0.0761  0.2025 -0.5423  0.2784  0.3202  0.4417 -0.7740
+#&gt;  Columns 1 to 9  0.1563  0.2797  0.4653  0.8483 -0.5044  0.5032 -0.2032  0.8317 -0.0350
+#&gt;   0.1632 -0.1904  0.5733  0.3198 -0.3562  0.3904 -0.6873  0.7901 -0.9472
+#&gt;  -0.6539 -0.6025  0.4797 -0.8375  0.7255 -0.4198  0.5030 -0.1419  0.2092
 #&gt; 
-#&gt; Columns 10 to 18 -0.1700  0.0034 -0.8964 -0.9198 -0.7022 -0.3096  0.6773  0.2286 -0.8212
-#&gt;  -0.3435 -0.4357 -0.3306  0.1745  0.1221  0.3041  0.5086  0.4532 -0.0845
-#&gt;   0.2640  0.8148 -0.3550 -0.5655 -0.8097  0.1487 -0.4068 -0.4634  0.0614
+#&gt; Columns 10 to 18  0.9481 -0.2581 -0.6185 -0.7787 -0.2685 -0.7144 -0.3700  0.4854  0.0008
+#&gt;   0.8805 -0.2755 -0.9071 -0.5580 -0.0061 -0.8662 -0.7541  0.7855 -0.6157
+#&gt;   0.5480  0.5395 -0.1759  0.2965  0.7805 -0.2651 -0.8080  0.2643  0.7689
 #&gt; 
-#&gt; Columns 19 to 20 -0.3440  0.5179
-#&gt;   0.7779  0.8953
-#&gt;   0.4660  0.6423
+#&gt; Columns 19 to 20  0.3487 -0.1631
+#&gt;   0.2535  0.5113
+#&gt;  -0.0188  0.3766
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  Columns 1 to 9 -0.3582 -0.7956  0.4462 -0.7726  0.0521  0.2200 -0.1152 -0.5630  0.3734
-#&gt;  -0.4799 -0.4202 -0.2155 -0.0588 -0.4309  0.4847 -0.3443 -0.5467 -0.0543
-#&gt;  -0.7544 -0.4532 -0.1407 -0.4278 -0.0827  0.2435 -0.2162 -0.3907 -0.1011
+#&gt;  Columns 1 to 9  0.1416  0.4498  0.1932  0.1637 -0.5115 -0.7125 -0.4544 -0.1721 -0.0345
+#&gt;  -0.7202  0.1668  0.1129  0.6700 -0.6155  0.2947 -0.4558  0.1086  0.1323
+#&gt;   0.3006 -0.0124 -0.0014  0.5341 -0.0718  0.3542 -0.1502  0.4042 -0.5156
 #&gt; 
-#&gt; Columns 10 to 18  0.0736  0.3639 -0.2185  0.3749 -0.0111  0.7981 -0.2350 -0.0253  0.1595
-#&gt;   0.4333  0.6557 -0.4204 -0.3173  0.3908  0.5348  0.6021  0.2237 -0.1009
-#&gt;   0.4562 -0.0913 -0.3012 -0.1139  0.4183  0.3039 -0.2912 -0.3884  0.2192
+#&gt; Columns 10 to 18  0.8057  0.2908 -0.1019 -0.2748  0.2799  0.6493 -0.7338  0.1910  0.1886
+#&gt;  -0.1154  0.1593 -0.5129 -0.6648  0.1733 -0.2496 -0.0886  0.2975  0.5137
+#&gt;   0.8810  0.4194 -0.0103 -0.8285 -0.0348 -0.0102 -0.6628  0.1669 -0.4613
 #&gt; 
-#&gt; Columns 19 to 20  0.4460 -0.5698
-#&gt;   0.4400 -0.0834
-#&gt;   0.6187 -0.1766
+#&gt; Columns 19 to 20 -0.0403  0.0080
+#&gt;  -0.0600 -0.4162
+#&gt;   0.0908  0.6937
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  Columns 1 to 9 -0.3402 -0.2592 -0.5211  0.2471 -0.2847 -0.2706 -0.0609 -0.2234  0.2405
-#&gt;  -0.2662  0.0575 -0.4005 -0.1628  0.0863  0.2703 -0.1572  0.2288  0.6992
-#&gt;  -0.1689 -0.3406 -0.1957 -0.0160 -0.1255 -0.2871  0.0128 -0.2830  0.4683
+#&gt;  Columns 1 to 9 -0.1978  0.2242  0.0024  0.3932 -0.4801 -0.4895 -0.5400 -0.0527 -0.4520
+#&gt;   0.4544  0.0302  0.4917  0.2736 -0.5769 -0.1859 -0.4959  0.0229 -0.2535
+#&gt;  -0.5535  0.3675  0.5847  0.6636 -0.3288 -0.2481 -0.1065 -0.0289 -0.5147
 #&gt; 
-#&gt; Columns 10 to 18 -0.0034 -0.0486  0.2790 -0.2818 -0.2299 -0.0231  0.3832  0.0291  0.2660
-#&gt;   0.0408  0.2657  0.1230  0.1941  0.2390  0.0019  0.2926  0.2653 -0.1557
-#&gt;  -0.1236 -0.1120  0.0060 -0.1511 -0.1384  0.2748  0.4960 -0.0688  0.0340
+#&gt; Columns 10 to 18  0.8121  0.5476 -0.5889 -0.2491  0.5971  0.3482 -0.4202  0.5075  0.0695
+#&gt;   0.8887  0.3603 -0.1642 -0.3072  0.2559 -0.0096 -0.6545  0.5044  0.5036
+#&gt;   0.6373 -0.1207  0.0495 -0.3367  0.4293  0.4361 -0.3157  0.3224  0.6757
 #&gt; 
-#&gt; Columns 19 to 20 -0.3132 -0.3465
-#&gt;  -0.2362  0.2123
-#&gt;  -0.0361  0.1588
+#&gt; Columns 19 to 20 -0.0226 -0.0955
+#&gt;   0.6364  0.2054
+#&gt;   0.1772 -0.2871
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  Columns 1 to 9 -0.2134 -0.7002 -0.0058 -0.2570 -0.3701  0.3556 -0.2925  0.0129  0.2546
-#&gt;  -0.0360 -0.4036  0.4746 -0.4007  0.1530 -0.3018  0.1495  0.1202  0.1550
-#&gt;  -0.3565 -0.7167  0.1709 -0.4197 -0.2487  0.1707 -0.1795 -0.0590 -0.0206
+#&gt;  Columns 1 to 9 -0.5002  0.2480 -0.0165  0.4973 -0.7685  0.0885 -0.3330 -0.2697 -0.1477
+#&gt;  -0.5379  0.1719  0.2126  0.1891 -0.5105  0.2180 -0.5122 -0.1882 -0.4472
+#&gt;   0.0806  0.0901  0.5329  0.3643 -0.6769  0.4601 -0.5399 -0.3066 -0.0994
 #&gt; 
-#&gt; Columns 10 to 18  0.1315 -0.2278 -0.6795  0.3050  0.0342  0.4811 -0.0010 -0.0135 -0.2659
-#&gt;   0.0595  0.0181 -0.1329  0.6455 -0.2651  0.3084 -0.2344  0.0875  0.1125
-#&gt;   0.2097  0.0047 -0.2817  0.3009 -0.1316  0.3746 -0.0177  0.1325 -0.0471
+#&gt; Columns 10 to 18  0.4677 -0.0194 -0.3609 -0.2897  0.3666  0.0276  0.0770  0.5985  0.5201
+#&gt;   0.6046 -0.2503 -0.4701 -0.1266  0.3423  0.1259 -0.2631  0.5912  0.1230
+#&gt;   0.6537 -0.2490 -0.3203 -0.3803  0.0304 -0.0077  0.1981  0.6495 -0.0583
 #&gt; 
-#&gt; Columns 19 to 20  0.4823  0.4343
-#&gt;   0.0368  0.1256
-#&gt;   0.3974 -0.1822
+#&gt; Columns 19 to 20 -0.0329 -0.2124
+#&gt;   0.1306  0.0613
+#&gt;   0.0430 -0.0534
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  Columns 1 to 9 -0.1355 -0.4083 -0.2001  0.0834 -0.4540  0.2423  0.0177 -0.6781  0.2902
-#&gt;  -0.4247 -0.0863  0.0213  0.3566 -0.4386  0.2214 -0.3811 -0.4175  0.3920
-#&gt;  -0.4470 -0.3697 -0.1741  0.0373 -0.1536 -0.1044 -0.0745 -0.2894  0.2854
+#&gt;  Columns 1 to 9 -0.3560  0.0896  0.2468  0.0908 -0.3990 -0.1175 -0.3947 -0.0834  0.1421
+#&gt;   0.1891 -0.0772  0.2671  0.0296 -0.1929 -0.2009 -0.5507 -0.2240  0.2121
+#&gt;  -0.1833  0.2226 -0.0158  0.5592 -0.5925  0.0255 -0.6282 -0.1562  0.0561
 #&gt; 
-#&gt; Columns 10 to 18  0.0430  0.1788 -0.6262 -0.4004  0.0606  0.7225  0.3877 -0.0528  0.2496
-#&gt;   0.3322  0.0008 -0.1720  0.0401  0.3725  0.2212 -0.0147 -0.2648 -0.0608
-#&gt;   0.1549 -0.2045  0.2249 -0.1287 -0.0823  0.2605  0.0401  0.0610 -0.0826
+#&gt; Columns 10 to 18  0.5649 -0.0882 -0.4652 -0.2057  0.0088  0.0349 -0.0315  0.3252  0.6167
+#&gt;   0.5626  0.3505 -0.2768 -0.4894 -0.0599  0.4348 -0.1352  0.2022  0.2273
+#&gt;   0.2647  0.0037 -0.3756 -0.3976 -0.0172 -0.1532 -0.4150  0.3451  0.3110
 #&gt; 
-#&gt; Columns 19 to 20  0.2690  0.4394
-#&gt;   0.1857  0.1339
-#&gt;  -0.0976 -0.3507
+#&gt; Columns 19 to 20  0.2250  0.1283
+#&gt;  -0.0717  0.2627
+#&gt;   0.1909 -0.1445
 #&gt; [ CPUFloatType{5,3,20} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  Columns 1 to 9 -0.1757  0.4477  0.5398  0.3722  0.5698  0.6913  0.3120  0.8522 -0.4493
-#&gt;  -0.0649 -0.3889  0.4403  0.6093 -0.2854 -0.7365  0.0727 -0.4360  0.2342
-#&gt;  -0.3436 -0.0606 -0.1078  0.1138 -0.4242 -0.0799  0.4655 -0.0752  0.1212
+#&gt;  Columns 1 to 9 -0.2977 -0.3901 -0.3494 -0.6523  0.3627  0.1448 -0.3341  0.2196  0.1126
+#&gt;   0.2888 -0.7529  0.1781 -0.0379 -0.2393  0.3807  0.1044 -0.0212 -0.5096
+#&gt;  -0.1402 -0.3835 -0.2036  0.3084  0.1285 -0.3805  0.1103  0.0476  0.2100
 #&gt; 
-#&gt; Columns 10 to 18  0.3280  0.4952  0.2430  0.6829  0.2111  0.5742 -0.8084 -0.5070  0.4987
-#&gt;  -0.3675 -0.2563  0.6384  0.1112 -0.4150 -0.0470  0.3778 -0.0940 -0.2094
-#&gt;   0.0078 -0.3756  0.0949 -0.2207 -0.0863 -0.2936 -0.0224 -0.0871 -0.2699
+#&gt; Columns 10 to 18 -0.6325 -0.1108 -0.1481  0.0602  0.7081 -0.3749  0.6918 -0.4901 -0.2858
+#&gt;   0.2888  0.4654  0.2154 -0.3173  0.4848  0.3496 -0.1522 -0.0645 -0.5102
+#&gt;   0.2073  0.5197  0.0807  0.4554  0.0247 -0.2980 -0.3274 -0.1698 -0.0551
 #&gt; 
-#&gt; Columns 19 to 20  0.7389  0.2508
-#&gt;  -0.0740  0.4142
-#&gt;  -0.2614  0.5583
+#&gt; Columns 19 to 20  0.0842  0.0867
+#&gt;   0.1297 -0.4188
+#&gt;   0.6599 -0.5773
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  Columns 1 to 9 -0.1355 -0.4083 -0.2001  0.0834 -0.4540  0.2423  0.0177 -0.6781  0.2902
-#&gt;  -0.4247 -0.0863  0.0213  0.3566 -0.4386  0.2214 -0.3811 -0.4175  0.3920
-#&gt;  -0.4470 -0.3697 -0.1741  0.0373 -0.1536 -0.1044 -0.0745 -0.2894  0.2854
+#&gt;  Columns 1 to 9 -0.3560  0.0896  0.2468  0.0908 -0.3990 -0.1175 -0.3947 -0.0834  0.1421
+#&gt;   0.1891 -0.0772  0.2671  0.0296 -0.1929 -0.2009 -0.5507 -0.2240  0.2121
+#&gt;  -0.1833  0.2226 -0.0158  0.5592 -0.5925  0.0255 -0.6282 -0.1562  0.0561
 #&gt; 
-#&gt; Columns 10 to 18  0.0430  0.1788 -0.6262 -0.4004  0.0606  0.7225  0.3877 -0.0528  0.2496
-#&gt;   0.3322  0.0008 -0.1720  0.0401  0.3725  0.2212 -0.0147 -0.2648 -0.0608
-#&gt;   0.1549 -0.2045  0.2249 -0.1287 -0.0823  0.2605  0.0401  0.0610 -0.0826
+#&gt; Columns 10 to 18  0.5649 -0.0882 -0.4652 -0.2057  0.0088  0.0349 -0.0315  0.3252  0.6167
+#&gt;   0.5626  0.3505 -0.2768 -0.4894 -0.0599  0.4348 -0.1352  0.2022  0.2273
+#&gt;   0.2647  0.0037 -0.3756 -0.3976 -0.0172 -0.1532 -0.4150  0.3451  0.3110
 #&gt; 
-#&gt; Columns 19 to 20  0.2690  0.4394
-#&gt;   0.1857  0.1339
-#&gt;  -0.0976 -0.3507
+#&gt; Columns 19 to 20  0.2250  0.1283
+#&gt;  -0.0717  0.2627
+#&gt;   0.1909 -0.1445
 #&gt; [ CPUFloatType{2,3,20} ]
 #&gt; </div><div class='input'>
+# }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -73,7 +73,7 @@ Efficient softmax approximation for GPUs by Edouard Grave, Armand Joulin, Mousta
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -165,15 +165,24 @@ Efficient softmax approximation for GPUs by Edouard Grave, Armand Joulin, Mousta
 <a href='https://arxiv.org/abs/1609.04309'>Efficient softmax approximation for GPUs by Edouard Grave, Armand Joulin, Moustapha Cissé, David Grangier, and Hervé Jégou</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_adaptive_log_softmax_with_loss</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_adaptive_log_softmax_with_loss</span>(
+  <span class='no'>in_features</span>,
+  <span class='no'>n_classes</span>,
+  <span class='no'>cutoffs</span>,
+  <span class='kw'>div_value</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>head_bias</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>in_features</th>
-      <td><p>(int): Number of features in the input tensor
-n_classes (int): Number of classes in the dataset</p></td>
+      <td><p>(int): Number of features in the input tensor</p></td>
+    </tr>
+    <tr>
+      <th>n_classes</th>
+      <td><p>(int): Number of classes in the dataset</p></td>
     </tr>
     <tr>
       <th>cutoffs</th>
@@ -229,7 +238,7 @@ assigned to the second cluster, while targets
 to the last, third cluster.</p></li>
 <li><p><code>div_value</code> is used to compute the size of each additional cluster,
 which is given as
-\(\left\lfloor\frac{\texttt{in\_features}}{\texttt{div\_value}^{idx}}\right\rfloor\),
+\(\left\lfloor\frac{\mbox{in\_features}}{\mbox{div\_value}^{idx}}\right\rfloor\),
 where \(idx\) is the cluster index (with clusters
 for less frequent words having larger indices,
 and indices starting from \(1\)).</p></li>
@@ -257,8 +266,8 @@ label should be represented by the index <code>n_classes - 1</code>.</p>
     
 
 <ul>
-<li><p>input: \((N, \texttt{in\_features})\)</p></li>
-<li><p>target: \((N)\) where each value satisfies \(0 &lt;= \texttt{target[i]} &lt;= \texttt{n\_classes}\)</p></li>
+<li><p>input: \((N, \mbox{in\_features})\)</p></li>
+<li><p>target: \((N)\) where each value satisfies \(0 &lt;= \mbox{target[i]} &lt;= \mbox{n\_classes}\)</p></li>
 <li><p>output1: \((N)\)</p></li>
 <li><p>output2: <code>Scalar</code></p></li>
 </ul>

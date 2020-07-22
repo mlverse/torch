@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -188,7 +188,8 @@
 structure. You can assign the submodules as regular attributes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_module</span>(
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_module</span>(
  <span class='kw'>initialize</span> <span class='kw'>=</span> <span class='kw'>function</span>() {
    <span class='no'>self</span>$<span class='no'>conv1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='nn_conv2d.html'>nn_conv2d</a></span>(<span class='fl'>1</span>, <span class='fl'>20</span>, <span class='fl'>5</span>)
    <span class='no'>self</span>$<span class='no'>conv2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='nn_conv2d.html'>nn_conv2d</a></span>(<span class='fl'>20</span>, <span class='fl'>20</span>, <span class='fl'>5</span>)
@@ -200,7 +201,9 @@ structure. You can assign the submodules as regular attributes.</p>
    <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='nnf_relu.html'>nnf_relu</a></span>(<span class='no'>input</span>)
    <span class='no'>input</span>
  }
-)</div></pre>
+)
+
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
