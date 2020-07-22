@@ -19,6 +19,8 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
                          --slave /usr/bin/g++ g++ /usr/bin/g++-7  && \
     update-alternatives --config gcc
 
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+
 RUN add-apt-repository -y ppa:opencpu/imagemagick && \
     apt-get update && \
     apt-get install -y libmagick++-dev 
