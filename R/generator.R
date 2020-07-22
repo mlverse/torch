@@ -16,7 +16,7 @@ Generator <- R6::R6Class(
       cat("torch_generator()")
     },
     current_seed = function() {
-      if (!requireNamespace(bit64))
+      if (!requireNamespace("bit64"))
         warning("bit64 is required to correctly show the seed.")
       
       cpp_generator_current_seed(self$ptr)
