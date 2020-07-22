@@ -31,6 +31,7 @@ jobs:
       INSTALL_TORCH: ${{ matrix.install }}
       CRAN: ${{ matrix.cran }}
       TORCH_LOG: 2
+      TORCH_TEST: 1
 
     steps:
       - uses: actions/checkout@v1
@@ -79,6 +80,7 @@ jobs:
       CRAN: https://demo.rstudiopm.com/all/__linux__/bionic/latest
       DOCKER_FILE: ${{ format('docker/cuda-{0}', matrix.cuda) }}
       DOCKER_TAG: ${{ format('torch{0}', matrix.cuda) }}
+      TORCH_TEST: 1
     steps:
       - uses: actions/checkout@v2
       - name: Build image
