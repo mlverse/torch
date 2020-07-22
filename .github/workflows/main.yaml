@@ -32,6 +32,7 @@ jobs:
       CRAN: ${{ matrix.cran }}
       TORCH_LOG: 2
       TORCH_TEST: 1
+      TORCH_INSTALL: 1
 
     steps:
       - uses: actions/checkout@v1
@@ -81,6 +82,7 @@ jobs:
       DOCKER_FILE: ${{ format('docker/cuda-{0}', matrix.cuda) }}
       DOCKER_TAG: ${{ format('torch{0}', matrix.cuda) }}
       TORCH_TEST: 1
+      TORCH_INSTALL: 1
     steps:
       - uses: actions/checkout@v2
       - name: Build image
