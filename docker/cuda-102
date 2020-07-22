@@ -21,6 +21,8 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
                          --slave /usr/bin/g++ g++ /usr/bin/g++-7  && \
     update-alternatives --config gcc
     
+RUN locale-gen en_US.UTF-8 && \
+    update-locale 
 
 ENV CUDA 10.2    
 ADD . torch/
