@@ -10,6 +10,8 @@ You can fix typos, spelling mistakes, or grammatical errors in the documentation
 This generally means you'll need to edit [roxygen2 comments](https://roxygen2.r-lib.org/articles/roxygen2.html) in an `.R`, not a `.Rd` file. 
 You can find the `.R` file that generates the `.Rd` by reading the comment in the first line.
 
+See also the [Documentation] section.
+
 ## Filing bugs
 
 If you find a bug in `torch` please open an issue [here](https://github.com/mlverse/torch/issues).
@@ -43,4 +45,9 @@ We have many open issues in the [github repo](https://github.com/mlverse/torch/i
 if there's one item that you want to work on, you can comment on it an ask for
 directions.
 
+## Documentation
 
+We use roxygen2 to generate the documentation. IN order to update the docs, edit
+the file in the `R` directory. To regenerate and preview the docs, use the custom
+`tools/document.R` script, as we need to patch roxygen2 to avoid running the examples
+on CRAN.
