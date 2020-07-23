@@ -183,29 +183,31 @@ r_argument <- function(name, decls) {
 
 
 can_be_numeric <- function(x) {
+  e <- try(
+    x <- eval(parse(text = x)),
+    silent = TRUE
+  )
 
-  x <- stringr::str_replace_all(x, "L", "")
+  if (inherits(e, "try-error"))
+    return(FALSE)
 
-  suppressWarnings(x <- as.numeric(x))
-  !is.na(x)
+  is.numeric(x)
 }
 
 to_1_based <- function(x) {
 
-  is_int <- stringr::str_detect(x, "L$")
-  x <- stringr::str_replace_all(x, "L", "")
+  x <- eval(parse(text = x))
 
-  x <- as.numeric(x)
+  is_int <- is.integer(x)
 
-  if (x >= 0)
-    out <- x + 1
-  else
-    out <- x
-
+  out <- ifelse(x >= 0, x + 1, x)
   out <- as.character(out)
 
   if (is_int)
     out <- paste0(out, "L")
+
+  if (length(out) > 1)
+    out <- paste0("c(", paste(out, collapse = ","), ")")
 
   out
 }
@@ -228,7 +230,9 @@ r_argument_with_default <- function(name, decls) {
   default <- r_argument_default(default)
 
   # make it 1-based
-  if (name %in% c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim") && can_be_numeric(default))
+  if (name %in% c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim", "dims_self",
+                  "dims_other")
+      && can_be_numeric(default))
     default <- to_1_based(default)
 
   glue::glue("{name} = {default}")

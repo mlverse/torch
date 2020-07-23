@@ -161,6 +161,16 @@ test_that("_cholesky_solve_helper", {
   expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
 })
 
+test_that("tensordot", {
+  
+  a <- torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
+  b <- torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
+  out <- torch_tensordot(a, b, dims_self=c(2, 1), dims_other = c(1, 2))
+  
+  expect_tensor_shape(out, c(5,2))
+  
+})
+
 test_that("upsample_nearest1d_out", {
   x <- torch_rand(c(2,2,2))
   y <- torch_zeros(c(2,2,2))
@@ -256,7 +266,7 @@ test_that("upsample_trilinear3d_backward_out", {
   expect_tensor(torch_upsample_trilinear3d_backward_out(y, x, c(2,2,2), c(2,2,2,2,2), align_corners = TRUE))
 })
 
-test_that("torch_upsample_trilinear3d_out", {
+test_that("upsample_trilinear3d_out", {
   x <- torch_rand(c(2,2,2,2,2))
   y <- torch_rand(c(2,2))
   expect_tensor(torch_upsample_trilinear3d_out(y, x, c(2,2,2), align_corners = TRUE))
