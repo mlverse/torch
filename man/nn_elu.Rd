@@ -4,7 +4,7 @@
 \alias{nn_elu}
 \title{ELU module}
 \usage{
-nn_elu(...)
+nn_elu(alpha = 1, inplace = FALSE)
 }
 \arguments{
 \item{alpha}{the \eqn{\alpha} value for the ELU formulation. Default: 1.0}
@@ -16,7 +16,7 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{ELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x) - 1))
+  \mbox{ELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x) - 1))
 }
 }
 \section{Shape}{
@@ -29,8 +29,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_elu()
 input <- torch_randn(2)
 output <-  m(input)
 
+}
 }

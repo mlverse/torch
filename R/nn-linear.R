@@ -43,11 +43,11 @@ nn_identity <- nn_module(
 #' - weight: the learnable weights of the module of shape
 #'   `(out_features, in_features)`. The values are
 #'   initialized from \eqn{U(-\sqrt{k}, \sqrt{k})}s, where
-#'   \eqn{k = \frac{1}{\text{in\_features}}}
-#' - bias: the learnable bias of the module of shape :math:\eqn{(\text{out_features})}.
+#'   \eqn{k = \frac{1}{\mbox{in\_features}}}
+#' - bias: the learnable bias of the module of shape \eqn{(\mbox{out\_features})}.
 #'   If `bias` is `TRUE`, the values are initialized from
 #'   \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#'   \eqn{k = \frac{1}{\text{in_features}}}
+#'   \eqn{k = \frac{1}{\mbox{in\_features}}}
 #'   
 #' @examples 
 #' m <- nn_linear(20, 30)
@@ -96,23 +96,23 @@ nn_linear <- nn_module(
 #'   
 #' @section Shape:
 #' 
-#' - Input1: \eqn{(N, *, H_{in1})} \eqn{H_{in1}=\text{in1_features}} and
+#' - Input1: \eqn{(N, *, H_{in1})} \eqn{H_{in1}=\mbox{in1\_features}} and
 #'   \eqn{*} means any number of additional dimensions. All but the last 
 #'   dimension of the inputs should be the same.
-#' - Input2: \eqn{(N, *, H_{in2})} where \eqn{H_{in2}=\text{in2_features}}.
-#' - Output: \eqn{(N, *, H_{out})} where \eqn{H_{out}=\text{out_features}}
+#' - Input2: \eqn{(N, *, H_{in2})} where \eqn{H_{in2}=\mbox{in2\_features}}.
+#' - Output: \eqn{(N, *, H_{out})} where \eqn{H_{out}=\mbox{out\_features}}
 #'   and all but the last dimension are the same shape as the input.
 #'
 #' @section Attributes:
 #'   
 #' - weight: the learnable weights of the module of shape
-#'   \eqn{(\text{out_features}, \text{in1_features}, \text{in2_features})}.
+#'   \eqn{(\mbox{out\_features}, \mbox{in1\_features}, \mbox{in2\_features})}.
 #'   The values are initialized from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}, where
-#'   \eqn{k = \frac{1}{\text{in1_features}}}
-#' - bias: the learnable bias of the module of shape \eqn{(\text{out_features})}.
+#'   \eqn{k = \frac{1}{\mbox{in1\_features}}}
+#' - bias: the learnable bias of the module of shape \eqn{(\mbox{out\_features})}.
 #'   If `bias` is `TRUE`, the values are initialized from
 #'   \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}, where 
-#'   \eqn{k = \frac{1}{\text{in1_features}}}
+#'   \eqn{k = \frac{1}{\mbox{in1\_features}}}
 #'   
 #' @examples 
 #' m <- nn_bilinear(20, 30, 50)

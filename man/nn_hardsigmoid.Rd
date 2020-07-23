@@ -4,18 +4,19 @@
 \alias{nn_hardsigmoid}
 \title{Hardsigmoid module}
 \usage{
-nn_hardsigmoid(...)
+nn_hardsigmoid()
 }
 \description{
 Applies the element-wise function:
 }
 \details{
 \deqn{
-\text{Hardsigmoid}(x) = \begin{cases}
-  0 & \text{if~} x \le -3, \\
-  1 & \text{if~} x \ge +3, \\
-  x / 6 + 1 / 2 & \text{otherwise}
-\end{cases}
+\mbox{Hardsigmoid}(x) = \left\{ \begin{array}{ll}
+  0 & \mbox{if~} x \le -3, \\
+  1 & \mbox{if~} x \ge +3, \\
+  x / 6 + 1 / 2 & \mbox{otherwise}
+\end{array}
+\right.
 }
 }
 \section{Shape}{
@@ -28,8 +29,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_hardsigmoid()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

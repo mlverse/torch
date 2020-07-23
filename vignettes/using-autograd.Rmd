@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = 0), 1)
 )
 ```
 

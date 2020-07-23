@@ -4,7 +4,7 @@
 \alias{nn_hardshrink}
 \title{Hardshwink module}
 \usage{
-nn_hardshrink(...)
+nn_hardshrink(lambd = 0.5)
 }
 \arguments{
 \item{lambd}{the \eqn{\lambda} value for the Hardshrink formulation. Default: 0.5}
@@ -14,12 +14,13 @@ Applies the hard shrinkage function element-wise:
 }
 \details{
 \deqn{
-  \text{HardShrink}(x) =
-  \begin{cases}
-x, & \text{ if } x > \lambda \\
-x, & \text{ if } x < -\lambda \\
-0, & \text{ otherwise }
-\end{cases}
+  \mbox{HardShrink}(x) =
+  \left\{ \begin{array}{ll}
+x, & \mbox{ if } x > \lambda \\
+x, & \mbox{ if } x < -\lambda \\
+0, & \mbox{ otherwise }
+\end{array}
+\right.
 }
 }
 \section{Shape}{
@@ -32,8 +33,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_hardshrink()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

@@ -7,7 +7,7 @@
 torch_lu(A, pivot = TRUE, get_infos = FALSE, out = NULL)
 }
 \arguments{
-\item{A}{(Tensor) the tensor to factor of size (*, m, n)(∗,m,n)}
+\item{A}{(Tensor) the tensor to factor of size (\emph{, m, n)(},m,n)}
 
 \item{pivot}{(bool, optional) – controls whether pivoting is done. Default: TRUE}
 
@@ -23,8 +23,10 @@ tuple containing the LU factorization and pivots of A. Pivoting is done if pivot
 is set to True.
 }
 \examples{
+\dontrun{
 
 A = torch_randn(c(2, 3, 3))
 torch_lu(A)
 
+}
 }

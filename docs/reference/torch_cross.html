@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -198,30 +198,32 @@ and <code>other</code>.</p>
 size 3.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1098  1.6309 -0.5930
-#&gt; -1.0832  1.6867 -1.7942
-#&gt;  1.2487  0.4137  0.5979
-#&gt;  1.6294  0.0309 -0.8073
+#&gt; -1.1643 -0.5561  0.7230
+#&gt; -0.0220  2.0844 -0.3671
+#&gt; -1.4814 -0.9811 -1.6675
+#&gt;  0.4909  0.6285 -0.6379
 #&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
 <span class='no'>b</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0033  0.5396  1.1581
-#&gt;  0.6449 -0.5603  0.2822
-#&gt; -0.6852 -1.1682  0.4893
-#&gt; -1.4765  1.5353 -0.7223
-#&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='fu'>torch_cross</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.2088 -0.1291  0.0538
-#&gt; -0.5293 -0.8515 -0.4809
-#&gt;  0.9009 -1.0206 -1.1753
-#&gt;  1.2172  2.3689  2.5475
+#&gt; -1.5896 -1.4300 -0.5647
+#&gt; -1.4339 -1.2857  0.3288
+#&gt; -0.9875  0.1254  0.1272
+#&gt;  0.6789 -0.6983 -0.5560
+#&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='fu'>torch_cross</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1.3479 -1.8068  0.7810
+#&gt;  0.2135  0.5336  3.0171
+#&gt;  0.0842  1.8351 -1.1546
+#&gt; -0.7949 -0.1601 -0.7695
 #&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='fu'>torch_cross</span>(<span class='no'>a</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.2088 -0.1291  0.0538
-#&gt; -0.5293 -0.8515 -0.4809
-#&gt;  0.9009 -1.0206 -1.1753
-#&gt;  1.2172  2.3689  2.5475
-#&gt; [ CPUFloatType{4,3} ]</div></pre>
+#&gt;  1.3479 -1.8068  0.7810
+#&gt;  0.2135  0.5336  3.0171
+#&gt;  0.0842  1.8351 -1.1546
+#&gt; -0.7949 -0.1601 -0.7695
+#&gt; [ CPUFloatType{4,3} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

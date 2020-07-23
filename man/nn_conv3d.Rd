@@ -4,7 +4,17 @@
 \alias{nn_conv3d}
 \title{Conv3D module}
 \usage{
-nn_conv3d(...)
+nn_conv3d(
+  in_channels,
+  out_channels,
+  kernel_size,
+  stride = 1,
+  padding = 0,
+  dilation = 1,
+  groups = 1,
+  bias = TRUE,
+  padding_mode = "zeros"
+)
 }
 \arguments{
 \item{in_channels}{(int): Number of channels in the input image}
@@ -17,13 +27,13 @@ nn_conv3d(...)
 
 \item{padding}{(int or tuple, optional): Zero-padding added to all three sides of the input. Default: 0}
 
-\item{padding_mode}{(string, optional): \code{'zeros'}, \code{'reflect'}, \code{'replicate'} or \code{'circular'}. Default: \code{'zeros'}}
-
 \item{dilation}{(int or tuple, optional): Spacing between kernel elements. Default: 1}
 
 \item{groups}{(int, optional): Number of blocked connections from input channels to output channels. Default: 1}
 
 \item{bias}{(bool, optional): If \code{TRUE}, adds a learnable bias to the output. Default: \code{TRUE}}
+
+\item{padding_mode}{(string, optional): \code{'zeros'}, \code{'reflect'}, \code{'replicate'} or \code{'circular'}. Default: \code{'zeros'}}
 }
 \description{
 Applies a 3D convolution over an input signal composed of several input
@@ -89,16 +99,16 @@ Please see the notes on :doc:\verb{/notes/randomness} for background.
 \item Input: \eqn{(N, C_{in}, D_{in}, H_{in}, W_{in})}
 \item Output: \eqn{(N, C_{out}, D_{out}, H_{out}, W_{out})} where
 \deqn{
-  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] - \text{dilation}[0]
-    \times (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \mbox{padding}[0] - \mbox{dilation}[0]
+    \times (\mbox{kernel\_size}[0] - 1) - 1}{\mbox{stride}[0]} + 1\right\rfloor
  }
 \deqn{
-  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] - \text{dilation}[1]
-    \times (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \mbox{padding}[1] - \mbox{dilation}[1]
+    \times (\mbox{kernel\_size}[1] - 1) - 1}{\mbox{stride}[1]} + 1\right\rfloor
  }
 \deqn{
-  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] - \text{dilation}[2]
-    \times (\text{kernel\_size}[2] - 1) - 1}{\text{stride}[2]} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \mbox{padding}[2] - \mbox{dilation}[2]
+    \times (\mbox{kernel\_size}[2] - 1) - 1}{\mbox{stride}[2]} + 1\right\rfloor
  }
 }
 }
@@ -107,19 +117,20 @@ Please see the notes on :doc:\verb{/notes/randomness} for background.
 
 \itemize{
 \item weight (Tensor): the learnable weights of the module of shape
-\eqn{(\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}},}
-\eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]}, \text{kernel\_size[2]})}.
+\eqn{(\mbox{out\_channels}, \frac{\mbox{in\_channels}}{\mbox{groups}},}
+\eqn{\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]}, \mbox{kernel\_size[2]})}.
 The values of these weights are sampled from
 \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+\eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 \item bias (Tensor):   the learnable bias of the module of shape (out_channels). If \code{bias} is \code{True},
 then the values of these weights are
 sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+\eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 }
 }
 
 \examples{
+\dontrun{
 # With square kernels and equal stride
 m <- nn_conv3d(16, 33, 3, stride=2)
 # non-square kernels and unequal stride and with padding
@@ -127,4 +138,5 @@ m <- nn_conv3d(16, 33, c(3, 5, 2), stride=c(2, 1, 1), padding=c(4, 2, 0))
 input <- torch_randn(20, 16, 10, 50, 100)
 output <- m(input)
 
+}
 }

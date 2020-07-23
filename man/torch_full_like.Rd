@@ -32,7 +32,3 @@ Returns a tensor with the same size as \code{input} filled with \code{fill_value
 \code{torch_full(input.size(), fill_value, dtype=input.dtype, layout=input.layout, device=input.device)}.
 }
 
-\examples{
-
-
-}

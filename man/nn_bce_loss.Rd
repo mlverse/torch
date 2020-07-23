@@ -4,7 +4,7 @@
 \alias{nn_bce_loss}
 \title{Binary cross entropy loss}
 \usage{
-nn_bce_loss(...)
+nn_bce_loss(weight = NULL, reduction = "mean")
 }
 \arguments{
 \item{weight}{(Tensor, optional): a manual rescaling weight given to the loss
@@ -31,10 +31,11 @@ where \eqn{N} is the batch size. If \code{reduction} is not \code{'none'}
 (default \code{'mean'}), then
 
 \deqn{
-  \ell(x, y) = \begin{cases}
-\operatorname{mean}(L), & \text{if reduction} = \text{'mean';}\\
-\operatorname{sum}(L),  & \text{if reduction} = \text{'sum'.}
-\end{cases}
+  \ell(x, y) = \left\{ \begin{array}{ll}
+\mbox{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
+\mbox{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
+\end{array}
+\right.
 }
 
 This is used for measuring the error of a reconstruction in for example
@@ -69,6 +70,7 @@ shape as input.
 }
 
 \examples{
+\dontrun{
 m <- nn_sigmoid()
 loss <- nn_bce_loss()
 input <- torch_randn(3, requires_grad=TRUE)
@@ -76,4 +78,5 @@ target <- torch_rand(3)
 output <- loss(m(input), target)
 output$backward()
 
+}
 }

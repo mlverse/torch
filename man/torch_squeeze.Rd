@@ -34,6 +34,7 @@ will squeeze the tensor to the shape \eqn{(A \times B)}.
 }
 
 \examples{
+\dontrun{
 
 x = torch_zeros(c(2, 1, 2, 1, 2))
 x
@@ -43,4 +44,5 @@ y = torch_squeeze(x, 1)
 y
 y = torch_squeeze(x, 2)
 y
+}
 }

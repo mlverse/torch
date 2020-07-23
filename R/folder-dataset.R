@@ -108,7 +108,7 @@ folder_dataset <- dataset(
 
 magick_loader <- function(path) {
   
-  if (!require(magick))
+  if (!requireNamespace("magick"))
     runtime_error("The `magick` package must be installed to load images.")
   
   magick::image_read(path)

@@ -17,13 +17,16 @@ Le
 \section{le(input, other, out=None) -> Tensor }{
 
 
-Computes \eqn{\text{input} \leq \text{other}} element-wise.
+Computes \eqn{\mbox{input} \leq \mbox{other}} element-wise.
 
 The second argument can be a number or a tensor whose shape is
 broadcastable  with the first argument.
 }
 
 \examples{
+\dontrun{
 
-torch_le(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+torch_le(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+         torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+}
 }

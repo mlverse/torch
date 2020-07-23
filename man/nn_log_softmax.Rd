@@ -4,7 +4,7 @@
 \alias{nn_log_softmax}
 \title{LogSoftmax module}
 \usage{
-nn_log_softmax(...)
+nn_log_softmax(dim)
 }
 \arguments{
 \item{dim}{(int): A dimension along which LogSoftmax will be computed.}
@@ -14,12 +14,12 @@ a Tensor of the same dimension and shape as the input with
 values in the range [-inf, 0)
 }
 \description{
-Applies the \eqn{\log(\text{Softmax}(x))} function to an n-dimensional
+Applies the \eqn{\log(\mbox{Softmax}(x))} function to an n-dimensional
 input Tensor. The LogSoftmax formulation can be simplified as:
 }
 \details{
 \deqn{
-  \text{LogSoftmax}(x_{i}) = \log\left(\frac{\exp(x_i) }{ \sum_j \exp(x_j)} \right)
+  \mbox{LogSoftmax}(x_{i}) = \log\left(\frac{\exp(x_i) }{ \sum_j \exp(x_j)} \right)
 }
 }
 \section{Shape}{
@@ -32,8 +32,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_log_softmax(1)
 input <- torch_randn(2, 3)
 output <- m(input)
 
+}
 }

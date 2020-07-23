@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -200,37 +200,39 @@ sorted values and <code>indices</code> are the indices of the elements in the or
 <code>input</code> tensor.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_sort</span>(<span class='no'>x</span>)
 <span class='no'>out</span></div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -0.8222  0.0589  0.2085  0.4970
-#&gt;  0.1380  0.3437  0.4788  0.5762
-#&gt;  0.1528  0.2297  0.3396  0.5739
+#&gt; -0.9253 -0.3520 -0.0946  1.1472
+#&gt; -0.6827  0.1674  0.7136  1.4204
+#&gt; -0.4754 -0.0864  0.5561  1.1917
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  3  1  2  0
-#&gt;  3  2  0  1
-#&gt;  3  0  2  1
+#&gt;  3  0  1  2
+#&gt;  0  1  2  3
+#&gt;  2  0  3  1
 #&gt; [ CPULongType{3,4} ]
-#&gt; </div><div class='input'><span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_sort</span>(<span class='no'>x</span>, <span class='fl'>0</span>)
+#&gt; </div><div class='input'><span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_sort</span>(<span class='no'>x</span>, <span class='fl'>1</span>)
 <span class='no'>out</span></div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt;  0.2297  0.0589  0.2085 -0.8222
-#&gt;  0.4788  0.5739  0.3396  0.1380
-#&gt;  0.4970  0.5762  0.3437  0.1528
+#&gt; -0.6827 -0.0946 -0.4754 -0.9253
+#&gt; -0.3520  0.1674  0.7136  0.5561
+#&gt; -0.0864  1.1917  1.1472  1.4204
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  2  0  0  0
-#&gt;  1  2  2  1
+#&gt;  1  0  2  0
 #&gt;  0  1  1  2
+#&gt;  2  2  0  1
 #&gt; [ CPULongType{3,4} ]
-#&gt; </div></pre>
+#&gt; </div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

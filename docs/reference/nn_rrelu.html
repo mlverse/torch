@@ -73,7 +73,7 @@ as described in the paper:" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -165,7 +165,7 @@ as described in the paper:" />
 as described in the paper:</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_rrelu</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_rrelu</span>(<span class='kw'>lower</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>8</span>, <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>3</span>, <span class='kw'>inplace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,13 +188,16 @@ as described in the paper:</p>
 
     <p><code>Empirical Evaluation of Rectified Activations in Convolutional Network</code>.</p>
 <p>The function is defined as:</p>
-<p>$$\text{RReLU}(x) =
-\begin{cases}
-x &amp; \text{if } x \geq 0 \\
-ax &amp; \text{ otherwise }
-\end{cases}$$</p>
+<p>$$
+\mbox{RReLU}(x) =
+\left\{ \begin{array}{ll}
+x &amp; \mbox{if } x \geq 0 \\
+ax &amp; \mbox{ otherwise }
+\end{array}
+\right.
+$$</p>
 <p>where \(a\) is randomly sampled from uniform distribution
-\(\mathcal{U}(\text{lower}, \text{upper})\).
+\(\mathcal{U}(\mbox{lower}, \mbox{upper})\).
 See: https://arxiv.org/pdf/1505.00853.pdf</p>
     <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
 
@@ -208,12 +211,14 @@ dimensions</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_rrelu</span>(<span class='fl'>0.1</span>, <span class='fl'>0.3</span>)
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_rrelu</span>(<span class='fl'>0.1</span>, <span class='fl'>0.3</span>)
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>)
 <span class='fu'>m</span>(<span class='no'>input</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1722
-#&gt; -0.2322
+#&gt; -0.0421
+#&gt;  1.4246
 #&gt; [ CPUFloatType{2} ]</div><div class='input'>
+# }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

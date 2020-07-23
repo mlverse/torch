@@ -106,10 +106,10 @@ optim_SGD <- R6::R6Class(
 #' 
 #' Considering the specific case of Momentum, the update can be written as
 #' \deqn{
-#'   \begin{aligned}
+#'   \begin{array}{ll}
 #' v_{t+1} & = \mu * v_{t} + g_{t+1}, \\
-#' p_{t+1} & = p_{t} - \text{lr} * v_{t+1},
-#' \end{aligned}
+#' p_{t+1} & = p_{t} - \mbox{lr} * v_{t+1},
+#' \end{array}
 #' }
 #' 
 #' where \eqn{p}, \eqn{g}, \eqn{v} and \eqn{\mu} denote the 
@@ -119,10 +119,10 @@ optim_SGD <- R6::R6Class(
 #' other frameworks which employ an update of the form
 #' 
 #' \deqn{
-#'   \begin{aligned}
-#' v_{t+1} & = \mu * v_{t} + \text{lr} * g_{t+1}, \\
+#'   \begin{array}{ll}
+#' v_{t+1} & = \mu * v_{t} + \mbox{lr} * g_{t+1}, \\
 #' p_{t+1} & = p_{t} - v_{t+1}.
-#' \end{aligned}
+#' \end{array}
 #' }
 #' The Nesterov version is analogously modified.
 #' 

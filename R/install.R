@@ -58,7 +58,6 @@ install_config <- list(
 )
 
 #' @keywords internal
-#' @export
 install_path <- function(version = "1.5.0") {
   path <- Sys.getenv("TORCH_HOME")
   if (nchar(path) > 0) {
@@ -156,7 +155,6 @@ lantern_install_libs <- function(version, type, install_path) {
 }
 
 #' @keywords internal
-#' @export
 install_type <- function(version) {
   if (nchar(Sys.getenv("CUDA")) > 0) return(Sys.getenv("CUDA"))
   if (install_os() != "linux") return("cpu")
@@ -205,6 +203,7 @@ install_type <- function(version) {
 #' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
 #' @param reinstall Re-install Torch even if its already installed?
 #' @param path Optional path to install or check for an already existing installation.
+#' @param ... other optional arguments (like `load` for manual installation.)
 #' 
 #' @details 
 #' 

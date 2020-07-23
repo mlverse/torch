@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -193,16 +193,18 @@ The given dimensions <code>dim0</code> and <code>dim1</code> are swapped.</p>
 of the other.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.6485  1.1785 -0.4345
-#&gt;  0.3932 -0.0823  1.6974
-#&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_transpose</span>(<span class='no'>x</span>, <span class='fl'>0</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.6485  0.3932
-#&gt;  1.1785 -0.0823
-#&gt; -0.4345  1.6974
-#&gt; [ CPUFloatType{3,2} ]</div></pre>
+#&gt;  0.3114 -0.1716  0.4504
+#&gt; -0.4723 -1.0927  2.1773
+#&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='fu'>torch_transpose</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.3114 -0.4723
+#&gt; -0.1716 -1.0927
+#&gt;  0.4504  2.1773
+#&gt; [ CPUFloatType{3,2} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

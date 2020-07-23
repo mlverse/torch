@@ -4,7 +4,14 @@
 \alias{nn_max_pool2d}
 \title{MaxPool2D module}
 \usage{
-nn_max_pool2d(...)
+nn_max_pool2d(
+  kernel_size,
+  stride = NULL,
+  padding = 0,
+  dilation = 1,
+  return_indices = FALSE,
+  ceil_mode = FALSE
+)
 }
 \arguments{
 \item{kernel_size}{the size of the window to take a max over}
@@ -16,7 +23,7 @@ nn_max_pool2d(...)
 \item{dilation}{a parameter that controls the stride of elements in the window}
 
 \item{return_indices}{if \code{TRUE}, will return the max indices along with the outputs.
-Useful for \link{nn_max_unpool2d} later.}
+Useful for \code{nn_max_unpool2d()} later.}
 
 \item{ceil_mode}{when \code{TRUE}, will use \code{ceil} instead of \code{floor} to compute the output shape}
 }
@@ -30,18 +37,16 @@ output \eqn{(N, C, H_{out}, W_{out})} and \code{kernel_size} \eqn{(kH, kW)}
 can be precisely described as:
 
 \deqn{
-
-  \begin{aligned}
+  \begin{array}{ll}
 out(N_i, C_j, h, w) ={} & \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
-& \text{input}(N_i, C_j, \text{stride[0]} \times h + m,
-               \text{stride[1]} \times w + n)
-\end{aligned}
-
+& \mbox{input}(N_i, C_j, \mbox{stride[0]} \times h + m,
+               \mbox{stride[1]} \times w + n)
+\end{array}
 }
 
 If \code{padding} is non-zero, then the input is implicitly zero-padded on both sides
 for \code{padding} number of points. \code{dilation} controls the spacing between the kernel points.
-It is harder to describe, but this \code{link}_ has a nice visualization of what \code{dilation} does.
+It is harder to describe, but this \code{link} has a nice visualization of what \code{dilation} does.
 
 The parameters \code{kernel_size}, \code{stride}, \code{padding}, \code{dilation} can either be:
 \itemize{
@@ -58,17 +63,18 @@ and the second \code{int} for the width dimension
 }
 
 \deqn{
-  H_{out} = \left\lfloor\frac{H_{in} + 2 * \text{padding[0]} - \text{dilation[0]}
-    \times (\text{kernel\_size[0]} - 1) - 1}{\text{stride[0]}} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in} + 2 * \mbox{padding[0]} - \mbox{dilation[0]}
+    \times (\mbox{kernel\_size[0]} - 1) - 1}{\mbox{stride[0]}} + 1\right\rfloor
 }
 
 \deqn{
-  W_{out} = \left\lfloor\frac{W_{in} + 2 * \text{padding[1]} - \text{dilation[1]}
-    \times (\text{kernel\_size[1]} - 1) - 1}{\text{stride[1]}} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in} + 2 * \mbox{padding[1]} - \mbox{dilation[1]}
+    \times (\mbox{kernel\_size[1]} - 1) - 1}{\mbox{stride[1]}} + 1\right\rfloor
 }
 }
 
 \examples{
+\dontrun{
 # pool of square window of size=3, stride=2
 m <- nn_max_pool2d(3, stride=2)
 # pool of non-square window
@@ -76,4 +82,5 @@ m <- nn_max_pool2d(c(3, 2), stride=c(2, 1))
 input <- torch_randn(20, 16, 50, 32)
 output <- m(input)
 
+}
 }

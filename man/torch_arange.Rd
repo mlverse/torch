@@ -13,11 +13,11 @@
 
 \item{out}{(Tensor, optional) the output tensor.}
 
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see \code{\link{torch_set_default_tensor_type}}). If \code{dtype} is not given, infer the data type from the other input        arguments. If any of \code{start}, \code{end}, or \code{stop} are floating-point, the        \code{dtype} is inferred to be the default dtype, see        \code{~torch.get_default_dtype}. Otherwise, the \code{dtype} is inferred to        be \code{torch.int64}.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see \code{torch_set_default_tensor_type}). If \code{dtype} is not given, infer the data type from the other input        arguments. If any of \code{start}, \code{end}, or \code{stop} are floating-point, the        \code{dtype} is inferred to be the default dtype, see        \code{~torch.get_default_dtype}. Otherwise, the \code{dtype} is inferred to        be \code{torch.int64}.}
 
 \item{layout}{(\code{torch.layout}, optional) the desired layout of returned Tensor.        Default: \code{torch_strided}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{\link{torch_set_default_tensor_type}}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
@@ -27,7 +27,7 @@ Arange
 \section{arange(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
 
 
-Returns a 1-D tensor of size \eqn{\left\lceil \frac{\text{end} - \text{start}}{\text{step}} \right\rceil}
+Returns a 1-D tensor of size \eqn{\left\lceil \frac{\mbox{end} - \mbox{start}}{\mbox{step}} \right\rceil}
 with values from the interval \verb{[start, end)} taken with common difference
 \code{step} beginning from \code{start}.
 
@@ -36,13 +36,15 @@ comparing against \code{end}; to avoid inconsistency, we advise adding a small e
 in such cases.
 
 \deqn{
-    \text{out}_{{i+1}} = \text{out}_{i} + \text{step}
+    \mbox{out}_{{i+1}} = \mbox{out}_{i} + \mbox{step}
 }
 }
 
 \examples{
+\dontrun{
 
 torch_arange(start = 0, end = 5)
 torch_arange(1, 4)
 torch_arange(1, 2.5, 0.5)
+}
 }

@@ -10,7 +10,7 @@ nnf_threshold(input, threshold, value, inplace = FALSE)
 nnf_threshold_(input, threshold, value)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{threshold}{The value to threshold at}

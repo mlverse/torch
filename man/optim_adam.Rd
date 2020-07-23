@@ -19,7 +19,7 @@ parameter groups}
 
 \item{lr}{(float, optional): learning rate (default: 1e-3)}
 
-\item{betas}{(Tuple\link{float, float}, optional): coefficients used for computing
+\item{betas}{(\code{Tuple[float, float]}, optional): coefficients used for computing
 running averages of gradient and its square (default: (0.9, 0.999))}
 
 \item{eps}{(float, optional): term added to the denominator to improve
@@ -36,10 +36,12 @@ It has been proposed in \href{https://arxiv.org/abs/1412.6980}{Adam: A Method fo
 }
 \examples{
 \dontrun{
+\dontrun{
 optimizer <- optim_adam(model$parameters(), lr=0.1)
 optimizer$zero_grad()
 loss_fn(model(input), target)$backward()
 optimizer$step()
 }
 
+}
 }

@@ -4,11 +4,11 @@
 \alias{nn_softmax2d}
 \title{Softmax2d module}
 \usage{
-nn_softmax2d(...)
+nn_softmax2d()
 }
 \value{
 a Tensor of the same dimension and shape as the input with
-values in the range \link{0, 1}
+values in the range \verb{[0, 1]}
 }
 \description{
 Applies SoftMax over features to each spatial location.
@@ -24,8 +24,10 @@ apply \code{Softmax} to each location \eqn{(Channels, h_i, w_j)}
 }
 
 \examples{
+\dontrun{
 m <- nn_softmax2d()
 input <- torch_randn(2, 3, 12, 13)
 output <- m(input)
 
+}
 }

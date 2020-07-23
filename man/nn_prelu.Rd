@@ -4,7 +4,7 @@
 \alias{nn_prelu}
 \title{PReLU module}
 \usage{
-nn_prelu(...)
+nn_prelu(num_parameters = 1, init = 0.25)
 }
 \arguments{
 \item{num_parameters}{(int): number of \eqn{a} to learn.
@@ -16,15 +16,16 @@ Although it takes an int as input, there is only two values are legitimate:
 \description{
 Applies the element-wise function:
 \deqn{
-  \text{PReLU}(x) = \max(0,x) + a * \min(0,x)
+  \mbox{PReLU}(x) = \max(0,x) + a * \min(0,x)
 }
 or
 \deqn{
-  \text{PReLU}(x) =
-  \begin{cases}
-x, & \text{ if } x \geq 0 \\
-ax, & \text{ otherwise }
-\end{cases}
+  \mbox{PReLU}(x) =
+  \left\{ \begin{array}{ll}
+x, & \mbox{ if } x \geq 0 \\
+ax, & \mbox{ otherwise }
+\end{array}
+\right.
 }
 }
 \details{
@@ -55,8 +56,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_prelu()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

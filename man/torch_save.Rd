@@ -10,6 +10,8 @@ torch_save(obj, path, ...)
 \item{obj}{the saved object}
 
 \item{path}{a connection or the name of the file to save.}
+
+\item{...}{not currently used.}
 }
 \description{
 This function is experimental, don't use for long

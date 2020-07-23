@@ -24,14 +24,12 @@ If \code{upper} is \code{True}, the returned matrix \code{U} is upper-triangular
 the decomposition has the form:
 
 \deqn{
-
   A = U^TU
 }
 If \code{upper} is \code{False}, the returned matrix \code{L} is lower-triangular, and
 the decomposition has the form:
 
 \deqn{
-
     A = LL^T
 }
 If \code{upper} is \code{True}, and \eqn{A} is a batch of symmetric positive-definite
@@ -42,6 +40,7 @@ matrices.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(3, 3))
 a = torch_mm(a, a$t()) # make symmetric positive-definite
@@ -55,5 +54,6 @@ a = torch_matmul(a, a$transpose(-1, -2)) + 1e-03 # make symmetric positive-defin
 l = torch_cholesky(a)
 z = torch_matmul(l, l$transpose(-1, -2))
 torch_max(torch_abs(z - a)) # Max non-zero
+}
 }
 }

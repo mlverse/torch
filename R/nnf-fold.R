@@ -14,9 +14,9 @@
 #'
 #' @export
 nnf_fold <- function(input, output_size, kernel_size, dilation=1, padding=0, stride=1) {
-  torch_col2im(self = input, output_size = nnf_util_pair(output_size), 
-               kernel_size = nnf_util_pair(kernel_size), dilation = nnf_util_pair(dilation), 
-               padding = nnf_util_pair(padding), stride = nnf_util_pair(stride))
+  torch_col2im(self = input, output_size = nn_util_pair(output_size), 
+               kernel_size = nn_util_pair(kernel_size), dilation = nn_util_pair(dilation), 
+               padding = nn_util_pair(padding), stride = nn_util_pair(stride))
 }
 
 #' Unfold

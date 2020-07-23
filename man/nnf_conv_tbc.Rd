@@ -7,13 +7,13 @@
 nnf_conv_tbc(input, weight, bias, pad = 0)
 }
 \arguments{
-\item{input}{input tensor of shape \eqn{(\text{sequence length} \times 
-batch \times \text{in\_channels})}}
+\item{input}{input tensor of shape \eqn{(\mbox{sequence length} \times 
+batch \times \mbox{in\_channels})}}
 
-\item{weight}{filter of shape (\eqn{\text{kernel width} \times \text{in\_channels} 
-\times \text{out\_channels}})}
+\item{weight}{filter of shape (\eqn{\mbox{kernel width} \times \mbox{in\_channels} 
+\times \mbox{out\_channels}})}
 
-\item{bias}{bias of shape (\eqn{\text{out\_channels}})}
+\item{bias}{bias of shape (\eqn{\mbox{out\_channels}})}
 
 \item{pad}{number of timesteps to pad. Default: 0}
 }

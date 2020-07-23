@@ -25,29 +25,28 @@ Computes the solution to the least squares and least norm problems for a full
 rank matrix \eqn{A} of size \eqn{(m \times n)} and a matrix \eqn{B} of
 size \eqn{(m \times k)}.
 
-If \eqn{m \geq n}, \code{\link{lstsq}} solves the least-squares problem:
+If \eqn{m \geq n}, \code{\link[=torch_lstsq]{torch_lstsq()}} solves the least-squares problem:
 
 \deqn{
-
    \begin{array}{ll}
    \min_X & \|AX-B\|_2.
    \end{array}
 }
-If \eqn{m < n}, \code{\link{lstsq}} solves the least-norm problem:
+If \eqn{m < n}, \code{\link[=torch_lstsq]{torch_lstsq()}} solves the least-norm problem:
 
 \deqn{
-
-   \begin{array}{ll}
-   \min_X & \|X\|_2 & \text{subject to} & AX = B.
+   \begin{array}{llll}
+   \min_X & \|X\|_2 & \mbox{subject to} & AX = B.
    \end{array}
 }
-Returned tensor \eqn{X} has shape \eqn{(\max(m, n) \times k)}. The first \eqn{n}
+Returned tensor \eqn{X} has shape \eqn{(\mbox{max}(m, n) \times k)}. The first \eqn{n}
 rows of \eqn{X} contains the solution. If \eqn{m \geq n}, the residual sum of squares
 for the solution in each column is given by the sum of squares of elements in the
 remaining \eqn{m - n} rows of that column.
 }
 
 \examples{
+\dontrun{
 
 A = torch_tensor(rbind(
  c(1,1,1),
@@ -65,4 +64,5 @@ B = torch_tensor(rbind(
 ))
 out = torch_lstsq(B, A)
 out[[1]]
+}
 }

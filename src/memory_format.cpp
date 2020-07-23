@@ -1,5 +1,5 @@
 #include "torch_types.h"
-#include "utils.hpp"
+#include "utils.h"
 
 // [[Rcpp::export]]
 std::string cpp_memory_format_to_string(Rcpp::XPtr<XPtrTorchMemoryFormat> x) {

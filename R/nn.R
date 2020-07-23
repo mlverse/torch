@@ -286,10 +286,12 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
     )
   )
   
+  init <- get_init(Module)
+  
   fun <- rlang::new_function(
-    args = rlang::fn_fmls(Module$new), 
+    args = rlang::fn_fmls(init), 
     body = rlang::expr({
-      instance <- Module$new(!!!rlang::fn_fmls_syms(Module$new))
+      instance <- Module$new(!!!rlang::fn_fmls_syms(init))
       create_nn_module_callable(instance)
     })
   )

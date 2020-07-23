@@ -22,7 +22,3 @@ This directly calls the underlying LAPACK function \code{?orgqr}.
 See \verb{LAPACK documentation for orgqr}_ for further details.
 }
 
-\examples{
-
-
-}

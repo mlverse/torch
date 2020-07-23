@@ -26,7 +26,7 @@ nnf_triplet_margin_loss(
 
 \item{p}{The norm degree for pairwise distance. Default: 2.}
 
-\item{eps}{}
+\item{eps}{(float, optional) Small value to avoid division by zero.}
 
 \item{swap}{The distance swap is described in detail in the paper Learning shallow
 convolutional feature descriptors with triplet losses by V. Balntas, E. Riba et al.

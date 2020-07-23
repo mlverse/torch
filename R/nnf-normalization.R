@@ -6,7 +6,7 @@
 #' \eqn{n_{dim}} -element vector \eqn{v} along dimension `dim` is transformed as
 #' 
 #' \deqn{
-#'         v = \frac{v}{\max(\lVert v \rVert_p, \epsilon)}.
+#'         v = \frac{v}{\max(\Vert v \Vert_p, \epsilon)}.
 #' }
 #' 
 #' With the default arguments it uses the Euclidean norm over vectors along 

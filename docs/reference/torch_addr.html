@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -185,7 +185,7 @@
     </tr>
     <tr>
       <th>alpha</th>
-      <td><p>(Number, optional) multiplier for \(\text{vec1} \otimes \text{vec2}\) (\(\alpha\))</p></td>
+      <td><p>(Number, optional) multiplier for \(\mbox{vec1} \otimes \mbox{vec2}\) (\(\alpha\))</p></td>
     </tr>
     <tr>
       <th>out</th>
@@ -204,7 +204,7 @@ and adds it to the matrix <code>input</code>.</p>
 outer product between <code>vec1</code> and <code>vec2</code> and the added matrix
 <code>input</code> respectively.</p>
 <p>$$
-    \text{out} = \beta\ \text{input} + \alpha\ (\text{vec1} \otimes \text{vec2})
+    \mbox{out} = \beta\ \mbox{input} + \alpha\ (\mbox{vec1} \otimes \mbox{vec2})
 $$
 If <code>vec1</code> is a vector of size <code>n</code> and <code>vec2</code> is a vector
 of size <code>m</code>, then <code>input</code> must be
@@ -215,7 +215,8 @@ broadcastable  with a matrix of size
 <code>alpha</code> must be real numbers, otherwise they should be integers</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>vec1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>4.</span>)
 <span class='no'>vec2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>3.</span>)
 <span class='no'>M</span> <span class='kw'>=</span> <span class='fu'><a href='torch_zeros.html'>torch_zeros</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>))
@@ -223,7 +224,8 @@ broadcastable  with a matrix of size
 #&gt;  1  2
 #&gt;  2  4
 #&gt;  3  6
-#&gt; [ CPUFloatType{3,2} ]</div></pre>
+#&gt; [ CPUFloatType{3,2} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

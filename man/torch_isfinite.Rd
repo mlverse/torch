@@ -17,6 +17,8 @@ Returns a new tensor with boolean elements representing if each element is \code
 }
 
 \examples{
+\dontrun{
 
 torch_isfinite(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
+}
 }

@@ -15,11 +15,11 @@
 
 \item{out}{(Tensor, optional) the output tensor.}
 
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see \code{\link{torch_set_default_tensor_type}}).}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see \code{torch_set_default_tensor_type}).}
 
 \item{layout}{(\code{torch.layout}, optional) the desired layout of returned Tensor.        Default: \code{torch_strided}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{\link{torch_set_default_tensor_type}}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
@@ -42,8 +42,10 @@ a tensor with dtype \code{torch_int64}.
 }
 
 \examples{
+\dontrun{
 
 torch_randint(3, 5, list(3))
 torch_randint(0, 10, size = list(2, 2))
 torch_randint(3, 10, list(2, 2))
+}
 }

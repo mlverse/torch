@@ -18,13 +18,15 @@ Cos
 Returns a new tensor with the cosine  of the elements of \code{input}.
 
 \deqn{
-    \text{out}_{i} = \cos(\text{input}_{i})
+    \mbox{out}_{i} = \cos(\mbox{input}_{i})
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_cos(a)
+}
 }

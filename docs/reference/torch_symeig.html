@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -203,7 +203,7 @@ Otherwise, <code>NaN</code> can appear as the gradients are not properly defined
 of a real symmetric matrix <code>input</code> or a batch of real symmetric matrices,
 represented by a namedtuple (eigenvalues, eigenvectors).</p>
 <p>This function calculates all eigenvalues (and vectors) of <code>input</code>
-such that \(\text{input} = V \text{diag}(e) V^T\).</p>
+such that \(\mbox{input} = V \mbox{diag}(e) V^T\).</p>
 <p>The boolean argument <code>eigenvectors</code> defines computation of
 both eigenvectors and eigenvalues or eigenvalues only.</p>
 <p>If it is <code>False</code>, only eigenvalues are computed. If it is <code>True</code>,
@@ -213,8 +213,37 @@ only the upper triangular portion is used by default.</p>
 <p>If <code>upper</code> is <code>False</code>, then lower triangular portion is used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
 
+<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
+<span class='no'>a</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()  <span class='co'># To make a symmetric</span>
+<span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt;  2.1703 -0.5663 -0.5122 -0.2134 -0.0549
+#&gt; -0.5663  0.9832 -0.9685  0.1017  0.9142
+#&gt; -0.5122 -0.9685 -0.8703  0.7874 -0.6067
+#&gt; -0.2134  0.1017  0.7874  2.8112 -0.1549
+#&gt; -0.0549  0.9142 -0.6067 -0.1549 -0.4494
+#&gt; [ CPUFloatType{5,5} ]</div><div class='input'><span class='no'>o</span> <span class='kw'>=</span> <span class='fu'>torch_symeig</span>(<span class='no'>a</span>, <span class='kw'>eigenvectors</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>e</span> <span class='kw'>=</span> <span class='no'>o</span><span class='kw'>[[</span><span class='fl'>1</span>]]
+<span class='no'>v</span> <span class='kw'>=</span> <span class='no'>o</span><span class='kw'>[[</span><span class='fl'>2</span>]]
+<span class='no'>e</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt; -1.5747
+#&gt; -0.9141
+#&gt;  1.6122
+#&gt;  2.4168
+#&gt;  3.1047
+#&gt; [ CPUFloatType{5} ]</div><div class='input'><span class='no'>v</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.1632 -0.0736  0.4932  0.7860 -0.3270
+#&gt;  0.3015 -0.4689  0.6486 -0.5181 -0.0109
+#&gt;  0.8988 -0.0414 -0.3445  0.1244  0.2372
+#&gt; -0.1524  0.0538  0.3046  0.2248  0.9114
+#&gt;  0.2266  0.8776  0.3530 -0.2188 -0.0780
+#&gt; [ CPUFloatType{5,5} ]</div><div class='input'><span class='no'>a_big</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
+<span class='no'>a_big</span> <span class='kw'>=</span> <span class='no'>a_big</span> + <span class='no'>a_big</span>$<span class='fu'>transpose</span>(-<span class='fl'>2</span>, -<span class='fl'>1</span>)  <span class='co'># To make a_big symmetric</span>
+<span class='no'>o</span> <span class='kw'>=</span> <span class='no'>a_big</span>$<span class='fu'>symeig</span>(<span class='kw'>eigenvectors</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>e</span> <span class='kw'>=</span> <span class='no'>o</span><span class='kw'>[[</span><span class='fl'>1</span>]]
+<span class='no'>v</span> <span class='kw'>=</span> <span class='no'>o</span><span class='kw'>[[</span><span class='fl'>2</span>]]
+<span class='fu'><a href='torch_allclose.html'>torch_allclose</a></span>(<span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>v</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>e</span>$<span class='fu'>diag_embed</span>(), <span class='no'>v</span>$<span class='fu'>transpose</span>(-<span class='fl'>2</span>, -<span class='fl'>1</span>))), <span class='no'>a_big</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

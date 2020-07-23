@@ -4,7 +4,7 @@
 \alias{nn_bilinear}
 \title{Bilinear module}
 \usage{
-nn_bilinear(...)
+nn_bilinear(in1_features, in2_features, out_features, bias = TRUE)
 }
 \arguments{
 \item{in1_features}{size of each first input sample}
@@ -23,11 +23,11 @@ Applies a bilinear transformation to the incoming data
 \section{Shape}{
 
 \itemize{
-\item Input1: \eqn{(N, *, H_{in1})} \eqn{H_{in1}=\text{in1_features}} and
+\item Input1: \eqn{(N, *, H_{in1})} \eqn{H_{in1}=\mbox{in1\_features}} and
 \eqn{*} means any number of additional dimensions. All but the last
 dimension of the inputs should be the same.
-\item Input2: \eqn{(N, *, H_{in2})} where \eqn{H_{in2}=\text{in2_features}}.
-\item Output: \eqn{(N, *, H_{out})} where \eqn{H_{out}=\text{out_features}}
+\item Input2: \eqn{(N, *, H_{in2})} where \eqn{H_{in2}=\mbox{in2\_features}}.
+\item Output: \eqn{(N, *, H_{out})} where \eqn{H_{out}=\mbox{out\_features}}
 and all but the last dimension are the same shape as the input.
 }
 }
@@ -36,21 +36,23 @@ and all but the last dimension are the same shape as the input.
 
 \itemize{
 \item weight: the learnable weights of the module of shape
-\eqn{(\text{out_features}, \text{in1_features}, \text{in2_features})}.
+\eqn{(\mbox{out\_features}, \mbox{in1\_features}, \mbox{in2\_features})}.
 The values are initialized from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}, where
-\eqn{k = \frac{1}{\text{in1_features}}}
-\item bias: the learnable bias of the module of shape \eqn{(\text{out_features})}.
+\eqn{k = \frac{1}{\mbox{in1\_features}}}
+\item bias: the learnable bias of the module of shape \eqn{(\mbox{out\_features})}.
 If \code{bias} is \code{TRUE}, the values are initialized from
 \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}, where
-\eqn{k = \frac{1}{\text{in1_features}}}
+\eqn{k = \frac{1}{\mbox{in1\_features}}}
 }
 }
 
 \examples{
+\dontrun{
 m <- nn_bilinear(20, 30, 50)
 input1 <- torch_randn(128, 20)
 input2 <- torch_randn(128, 30)
 output = m(input1, input2)
 print(output$size()) 
 
+}
 }

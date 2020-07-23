@@ -4,7 +4,7 @@
 \alias{nn_rrelu}
 \title{RReLU module}
 \usage{
-nn_rrelu(...)
+nn_rrelu(lower = 1/8, upper = 1/3, inplace = FALSE)
 }
 \arguments{
 \item{lower}{lower bound of the uniform distribution. Default: \eqn{\frac{1}{8}}}
@@ -23,17 +23,16 @@ as described in the paper:
 The function is defined as:
 
 \deqn{
-
-\text{RReLU}(x) =
-\begin{cases}
-x & \text{if } x \geq 0 \\
-ax & \text{ otherwise }
-\end{cases}
-
+\mbox{RReLU}(x) =
+\left\{ \begin{array}{ll}
+x & \mbox{if } x \geq 0 \\
+ax & \mbox{ otherwise }
+\end{array}
+\right.
 }
 
 where \eqn{a} is randomly sampled from uniform distribution
-\eqn{\mathcal{U}(\text{lower}, \text{upper})}.
+\eqn{\mathcal{U}(\mbox{lower}, \mbox{upper})}.
 See: https://arxiv.org/pdf/1505.00853.pdf
 }
 \section{Shape}{
@@ -46,8 +45,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_rrelu(0.1, 0.3)
 input <- torch_randn(2)
 m(input)
 
+}
 }

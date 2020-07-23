@@ -24,7 +24,7 @@ Each element of the tensor \code{input} is divided by each element of the tensor
 \code{other}. The resulting tensor is returned.
 
 \deqn{
-    \text{out}_i = \frac{\text{input}_i}{\text{other}_i}
+    \mbox{out}_i = \frac{\mbox{input}_i}{\mbox{other}_i}
 }
 The shapes of \code{input} and \code{other} must be broadcastable
 . If the \code{torch_dtype} of \code{input} and
@@ -43,7 +43,7 @@ Use \code{\link{torch_floor_divide}} (// in Python) to perform integer division,
 instead.
 
 \deqn{
-    \text{out}_i = \frac{\text{input}_i}{\text{other}}
+    \mbox{out}_i = \frac{\mbox{input}_i}{\mbox{other}}
 }
 If the \code{torch_dtype} of \code{input} and \code{other} differ, the
 \code{torch_dtype} of the result tensor is determined following rules
@@ -54,6 +54,7 @@ by zero leads to undefined behavior.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(5))
 a
@@ -65,4 +66,5 @@ a
 b = torch_randn(c(4))
 b
 torch_div(a, b)
+}
 }

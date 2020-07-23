@@ -4,12 +4,12 @@
 \alias{nn_log_sigmoid}
 \title{LogSigmoid module}
 \usage{
-nn_log_sigmoid(...)
+nn_log_sigmoid()
 }
 \description{
 Applies the element-wise function:
 \deqn{
-  \text{LogSigmoid}(x) = \log\left(\frac{ 1 }{ 1 + \exp(-x)}\right)
+  \mbox{LogSigmoid}(x) = \log\left(\frac{ 1 }{ 1 + \exp(-x)}\right)
  }
 }
 \section{Shape}{
@@ -22,8 +22,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_log_sigmoid()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

@@ -11,7 +11,7 @@
 
 \item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
 
-\item{onesided}{(bool, optional) controls whether \code{input} was halfed to avoid        redundancy, e.g., by \code{\link{rfft}}. Default: \code{True}}
+\item{onesided}{(bool, optional) controls whether \code{input} was halfed to avoid        redundancy, e.g., by \code{\link[=torch_rfft]{torch_rfft()}}. Default: \code{True}}
 
 \item{signal_sizes}{(list or \code{torch.Size}, optional) the size of the original        signal (without batch dimension). Default: \code{None}}
 }
@@ -28,15 +28,15 @@ information can sometimes be lost, optionally set `signal_sizes` to be
 the size of the original signal (without the batch dimensions if in batched
 mode) to recover it with correct shape.
 
-Therefore, to invert an [`~torch.rfft`], the `normalized` and
-`onesided` arguments should be set identically for [`~torch.irfft`],
+Therefore, to invert an [torch_rfft()], the `normalized` and
+`onesided` arguments should be set identically for [torch_irfft()],
 and preferably a `signal_sizes` is given to avoid size mismatch. See the
 example below for a case of size mismatch.
 
-See [`~torch.rfft`] for details on conjugate symmetry.
+See [torch_rfft()] for details on conjugate symmetry.
 }
 
-The inverse of this function is \code{\link{~torch.rfft}}.
+The inverse of this function is \code{\link[=torch_rfft]{torch_rfft()}}.
 
 \preformatted{For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
 repeatedly running FFT methods on tensors of same geometry with same
@@ -50,11 +50,11 @@ monitor and control the cache.
 Complex-to-real Inverse Discrete Fourier Transform
 
 This method computes the complex-to-real inverse discrete Fourier transform.
-It is mathematically equivalent with \code{\link{ifft}} with differences only in
+It is mathematically equivalent with \code{\link{torch_ifft}} with differences only in
 formats of the input and output.
 
-The argument specifications are almost identical with \code{\link{~torch.ifft}}.
-Similar to \code{\link{~torch.ifft}}, if \code{normalized} is set to \code{True},
+The argument specifications are almost identical with \code{\link{torch_ifft}}.
+Similar to \code{\link{torch_ifft}}, if \code{normalized} is set to \code{True},
 this normalizes the result by multiplying it with
 \eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is unitary, where
 \eqn{N_i} is the size of signal dimension \eqn{i}.
@@ -65,17 +65,18 @@ this normalizes the result by multiplying it with
 Generally speaking, input to this function should contain values
 following conjugate symmetry. Note that even if \code{onesided} is
 \code{True}, often symmetry on some part is still needed. When this
-requirement is not satisfied, the behavior of \code{\link{~torch.irfft}} is
-undefined. Since \code{\link{torch_autograd.gradcheck}} estimates numerical
-Jacobian with point perturbations, \code{\link{~torch.irfft}} will almost
+requirement is not satisfied, the behavior of \code{\link{torch_irfft}} is
+undefined. Since \code{torch_autograd.gradcheck} estimates numerical
+Jacobian with point perturbations, \code{\link{torch_irfft}} will almost
 certainly fail the check.
 
 
 For CPU tensors, this method is currently only available with MKL. Use
-\code{\link{torch_backends.mkl.is_available}} to check if MKL is installed.
+\code{torch_backends.mkl.is_available} to check if MKL is installed.
 }
 
 \examples{
+\dontrun{
 
 x = torch_randn(c(4, 4))
 torch_rfft(x, 2, onesided=TRUE)
@@ -83,4 +84,5 @@ x = torch_randn(c(4, 5))
 torch_rfft(x, 2, onesided=TRUE)
 y = torch_rfft(x, 2, onesided=TRUE)
 torch_irfft(y, 2, onesided=TRUE, signal_sizes=c(4,5))  # recover x
+}
 }

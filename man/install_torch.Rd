@@ -20,6 +20,8 @@ install_torch(
 \item{reinstall}{Re-install Torch even if its already installed?}
 
 \item{path}{Optional path to install or check for an already existing installation.}
+
+\item{...}{other optional arguments (like \code{load} for manual installation.)}
 }
 \description{
 Installs Torch and its dependencies.

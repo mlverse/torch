@@ -27,7 +27,7 @@ Multiplies each element of the input \code{input} with the scalar
 \code{other} and returns a new resulting tensor.
 
 \deqn{
-    \text{out}_i = \text{other} \times \text{input}_i
+    \mbox{out}_i = \mbox{other} \times \mbox{input}_i
 }
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{other}
 should be a real number, otherwise it should be an integer
@@ -41,11 +41,12 @@ The shapes of \code{input} and \code{other} must be
 broadcastable .
 
 \deqn{
-    \text{out}_i = \text{input}_i \times \text{other}_i
+    \mbox{out}_i = \mbox{input}_i \times \mbox{other}_i
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(3))
 a
@@ -57,4 +58,5 @@ a
 b = torch_randn(c(1, 4))
 b
 torch_mul(a, b)
+}
 }

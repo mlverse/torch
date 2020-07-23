@@ -38,16 +38,18 @@ broadcastable  with a \eqn{(n \times p)} tensor
 and \code{out} will be a \eqn{(n \times p)} tensor.
 
 \deqn{
-    out = \beta\ \text{input} + \alpha\ (\sum_{i=0}^{b-1} \text{batch1}_i \mathbin{@} \text{batch2}_i)
+    out = \beta\ \mbox{input} + \alpha\ (\sum_{i=0}^{b-1} \mbox{batch1}_i \mathbin{@} \mbox{batch2}_i)
 }
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and \code{alpha}
 must be real numbers, otherwise they should be integers.
 }
 
 \examples{
+\dontrun{
 
 M = torch_randn(c(3, 5))
 batch1 = torch_randn(c(10, 3, 4))
 batch2 = torch_randn(c(10, 4, 5))
 torch_addbmm(M, batch1, batch2)
+}
 }

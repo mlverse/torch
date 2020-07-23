@@ -14,9 +14,9 @@ nnf_multi_margin_loss(
 )
 }
 \arguments{
-\item{input}{tensor (N,∗) where *∗ means, any number of additional dimensions}
+\item{input}{tensor (N,*) where ** means, any number of additional dimensions}
 
-\item{target}{tensor (N,∗) , same shape as the input}
+\item{target}{tensor (N,*) , same shape as the input}
 
 \item{p}{Has a default value of 1. 1 and 2 are the only supported values.}
 
@@ -33,5 +33,5 @@ the sum of the output will be divided by the number of elements in the output,
 \description{
 Creates a criterion that optimizes a multi-class classification hinge loss
 (margin-based loss) between input x (a 2D mini-batch Tensor) and output y
-(which is a 1D tensor of target class indices, \verb{0 ≤ y ≤x$size(2)−1} ).
+(which is a 1D tensor of target class indices, \verb{0 <= y <= x$size(2) - 1} ).
 }

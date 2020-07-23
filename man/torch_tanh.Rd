@@ -19,13 +19,15 @@ Returns a new tensor with the hyperbolic tangent of the elements
 of \code{input}.
 
 \deqn{
-    \text{out}_{i} = \tanh(\text{input}_{i})
+    \mbox{out}_{i} = \tanh(\mbox{input}_{i})
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_tanh(a)
+}
 }

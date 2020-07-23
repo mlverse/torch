@@ -4,7 +4,7 @@
 #' tuple containing the LU factorization and pivots of A. Pivoting is done if pivot 
 #' is set to True.
 #' 
-#' @param A (Tensor) the tensor to factor of size (*, m, n)(∗,m,n)
+#' @param A (Tensor) the tensor to factor of size (*, m, n)(*,m,n)
 #' @param pivot (bool, optional) – controls whether pivoting is done. Default: TRUE
 #' @param get_infos (bool, optional) – if set to True, returns an info IntTensor. Default: FALSE
 #' @param out (tuple, optional) – optional output tuple. If get_infos is True, then the elements 

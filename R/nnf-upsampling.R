@@ -73,9 +73,9 @@ interp_output_size <- function(input, size, scale_factor, recompute_scale_factor
 #' `bilinear`, `bicubic` (4D-only), `trilinear` (5D-only), `area`
 #'
 #' @param input (Tensor) the input tensor
-#' @param size (int or Tuple[int] or Tuple[int, int] or Tuple[int, int, int]) 
+#' @param size (int or `Tuple[int]` or `Tuple[int, int]` or `Tuple[int, int, int]`) 
 #'   output spatial size.
-#' @param scale_factor (float or Tuple[float]) multiplier for spatial size. 
+#' @param scale_factor (float or `Tuple[float]`) multiplier for spatial size. 
 #'   Has to match input size if it is a tuple.
 #' @param mode (str) algorithm used for upsampling: 'nearest' | 'linear' | 'bilinear' 
 #'  | 'bicubic' | 'trilinear' | 'area' Default: 'nearest'
@@ -173,7 +173,7 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
     not_implemented_error("Got 5D input, but bilinear mode needs 4D input")
   }
   
-  if (inpt$dim() == 5 && mode == "trilinear") {
+  if (input$dim() == 5 && mode == "trilinear") {
     return(torch_upsample_trilinear3d(input, sze, align_corners, sfl[[1]], sfl[[2]], 
                                       sfl[[3]]))
   }

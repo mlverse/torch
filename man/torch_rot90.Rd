@@ -22,6 +22,7 @@ Rotation direction is from the first towards the second axis if k > 0, and from 
 }
 
 \examples{
+\dontrun{
 
 x = torch_arange(0, 4)$view(c(2, 2))
 x
@@ -29,4 +30,5 @@ torch_rot90(x, 1, c(1, 2))
 x = torch_arange(0, 8)$view(c(2, 2, 2))
 x
 torch_rot90(x, 1, c(1, 2))
+}
 }

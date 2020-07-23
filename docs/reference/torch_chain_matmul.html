@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -185,16 +185,18 @@ needs to be greater than or equal to 2; if equal to 2 then a trivial matrix-matr
 If \(N\) is 1, then this is a no-op - the original matrix is returned as is.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='no'>c</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>6</span>))
 <span class='no'>d</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>7</span>))
 <span class='fu'>torch_chain_matmul</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt; torch_tensor 
-#&gt;   5.6439  -0.1779  -5.9123  -3.4097  -2.0155  -4.0229  -1.3628
-#&gt;   7.2858  -2.7516   6.9377   7.9371  21.8088   2.3520 -10.6818
-#&gt;   9.5587  -4.6262 -15.8297   0.8866  -2.2961  -2.1549   0.6902
-#&gt; [ CPUFloatType{3,7} ]</div></pre>
+#&gt;   2.2025   6.9263 -12.0433  -1.8318   6.1157  -1.9091  -2.5474
+#&gt;  -9.2675   3.6580 -10.9555   3.7499  -0.9984  -2.1468  18.3629
+#&gt;  -4.3318 -10.0159  20.3315   2.5116  -9.5372   3.4920   7.3516
+#&gt; [ CPUFloatType{3,7} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

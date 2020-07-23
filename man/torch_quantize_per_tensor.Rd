@@ -23,6 +23,8 @@ Converts a float tensor to quantized tensor with given scale and zero point.
 }
 
 \examples{
+\dontrun{
 torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8())
 torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8())$int_repr()
+}
 }

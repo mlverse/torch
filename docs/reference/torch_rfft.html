@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -201,7 +201,7 @@ monitor and control the cache.
 
 <p>Real-to-complex Discrete Fourier Transform</p>
 <p>This method computes the real-to-complex discrete Fourier transform. It is
-mathematically equivalent with <code>~torch.fft</code> with differences only in
+mathematically equivalent with <code><a href='torch_fft.html'>torch_fft</a></code> with differences only in
 formats of the input and output.</p>
 <p>This method supports 1D, 2D and 3D real-to-complex transforms, indicated
 by <code>signal_ndim</code>. <code>input</code> must be a tensor with at least
@@ -220,7 +220,7 @@ redundancy in the output results. If set to <code>True</code> (default), the out
 not be full complex result of shape \((*, 2)\), where \(*\) is the shape
 of <code>input</code>, but instead the last dimension will be halfed as of size
 \(\lfloor \frac{N_d}{2} \rfloor + 1\).</p>
-<p>The inverse of this function is <code>~torch.irfft</code>.</p>
+<p>The inverse of this function is <code><a href='torch_irfft.html'>torch_irfft</a></code>.</p>
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     
@@ -229,69 +229,71 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   3.5070  0.0000
-#&gt;  -6.3379  0.2220
-#&gt;   4.9062 -2.4598
+#&gt;   4.9202  0.0000
+#&gt;   2.9093  2.7036
+#&gt;   1.8227 -4.8232
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.7748  0.5208
-#&gt;   3.2574 -5.6462
-#&gt;   0.6710 -1.1890
+#&gt;  -2.0160  4.4730
+#&gt;   1.8297 -3.0301
+#&gt;   0.4639  0.6830
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -4.9145  3.8910
-#&gt;  -4.9101  5.5667
-#&gt;   3.5799 -2.7796
+#&gt;  -6.8659  1.3907
+#&gt;  -5.6917 -4.3527
+#&gt;   2.7115  0.4562
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -4.9145 -3.8910
-#&gt;   4.5738  4.3227
-#&gt;  -2.6069  0.7337
+#&gt;  -6.8659 -1.3907
+#&gt;  -3.4394 -1.4155
+#&gt;   4.7454 -1.6532
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   0.7748 -0.5208
-#&gt;   0.8272  0.1695
-#&gt;  -1.2826 -5.7721
+#&gt;  -2.0160 -4.4730
+#&gt;  -1.0448  5.6595
+#&gt;   5.7855 -3.2515
 #&gt; [ CPUFloatType{5,3,2} ]</div><div class='input'><span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   3.5070  0.0000
-#&gt;  -6.3379  0.2220
-#&gt;   4.9062 -2.4598
-#&gt;   4.9062  2.4598
-#&gt;  -6.3379 -0.2220
+#&gt;   4.9202  0.0000
+#&gt;   2.9093  2.7036
+#&gt;   1.8227 -4.8232
+#&gt;   1.8227  4.8232
+#&gt;   2.9093 -2.7036
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.7748  0.5208
-#&gt;   3.2574 -5.6462
-#&gt;   0.6710 -1.1890
-#&gt;  -1.2826  5.7721
-#&gt;   0.8272 -0.1695
+#&gt;  -2.0160  4.4730
+#&gt;   1.8297 -3.0301
+#&gt;   0.4639  0.6830
+#&gt;   5.7855  3.2515
+#&gt;  -1.0448 -5.6595
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -4.9145  3.8910
-#&gt;  -4.9101  5.5667
-#&gt;   3.5799 -2.7796
-#&gt;  -2.6069 -0.7337
-#&gt;   4.5738 -4.3227
+#&gt;  -6.8659  1.3907
+#&gt;  -5.6917 -4.3527
+#&gt;   2.7115  0.4562
+#&gt;   4.7454  1.6532
+#&gt;  -3.4394  1.4155
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -4.9145 -3.8910
-#&gt;   4.5738  4.3227
-#&gt;  -2.6069  0.7337
-#&gt;   3.5799  2.7796
-#&gt;  -4.9101 -5.5667
+#&gt;  -6.8659 -1.3907
+#&gt;  -3.4394 -1.4155
+#&gt;   4.7454 -1.6532
+#&gt;   2.7115 -0.4562
+#&gt;  -5.6917  4.3527
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   0.7748 -0.5208
-#&gt;   0.8272  0.1695
-#&gt;  -1.2826 -5.7721
-#&gt;   0.6710  1.1890
-#&gt;   3.2574  5.6462
-#&gt; [ CPUFloatType{5,5,2} ]</div></pre>
+#&gt;  -2.0160 -4.4730
+#&gt;  -1.0448  5.6595
+#&gt;   5.7855 -3.2515
+#&gt;   0.4639 -0.6830
+#&gt;   1.8297  3.0301
+#&gt; [ CPUFloatType{5,5,2} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

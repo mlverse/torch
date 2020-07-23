@@ -22,14 +22,16 @@ Cosine_similarity
 Returns cosine similarity between x1 and x2, computed along dim.
 
 \deqn{
-    \text{similarity} = \dfrac{x_1 \cdot x_2}{\max(\Vert x_1 \Vert _2 \cdot \Vert x_2 \Vert _2, \epsilon)}
+    \mbox{similarity} = \frac{x_1 \cdot x_2}{\max(\Vert x_1 \Vert _2 \cdot \Vert x_2 \Vert _2, \epsilon)}
 }
 }
 
 \examples{
+\dontrun{
 
 input1 = torch_randn(c(100, 128))
 input2 = torch_randn(c(100, 128))
 output = torch_cosine_similarity(input1, input2)
 output
+}
 }

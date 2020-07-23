@@ -74,7 +74,7 @@ distribution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -184,12 +184,14 @@ distribution.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
 <span class='fu'>nn_init_xavier_normal_</span>(<span class='no'>w</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.2843 -1.5138 -1.4775  2.0179 -3.6371
-#&gt; -1.8362  0.5337  1.7215 -0.0508  1.6074
-#&gt; -0.4646 -3.0213 -0.5919 -0.7111  0.5664
+#&gt;  1.2535 -0.2197  0.5425 -3.0052 -4.2446
+#&gt; -0.3570 -1.6970 -2.0154 -0.5348  2.7582
+#&gt;  0.8714 -0.8924  0.7675  3.2553 -1.4333
 #&gt; [ CPUFloatType{3,5} ]</div><div class='input'>
+# }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

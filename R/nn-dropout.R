@@ -55,7 +55,7 @@ nn_dropout <- nn_module(
 #' 
 #' Randomly zero out entire channels (a channel is a 2D feature map,
 #' e.g., the \eqn{j}-th channel of the \eqn{i}-th sample in the
-#' batched input is a 2D tensor \eqn{\text{input}[i, j]}).
+#' batched input is a 2D tensor \eqn{\mbox{input}[i, j]}).
 #' 
 #' Each channel will be zeroed out independently on every forward call with
 #' probability `p` using samples from a Bernoulli distribution.
@@ -97,7 +97,7 @@ nn_dropout2d <- nn_module(
 #' 
 #' Randomly zero out entire channels (a channel is a 3D feature map,
 #' e.g., the \eqn{j}-th channel of the \eqn{i}-th sample in the
-#' batched input is a 3D tensor \eqn{\text{input}[i, j]}).
+#' batched input is a 3D tensor \eqn{\mbox{input}[i, j]}).
 #' 
 #' Each channel will be zeroed out independently on every forward call with
 #' probability `p` using samples from a Bernoulli distribution.

@@ -23,12 +23,14 @@ Returns the imaginary part of the \code{input} tensor.
 Not yet implemented.
 
 \deqn{
-    \text{out}_{i} = imag(\text{input}_{i})
+    \mbox{out}_{i} = imag(\mbox{input}_{i})
 }
 }
 
 \examples{
 \dontrun{
+\dontrun{
 torch_imag(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+}
 }
 }

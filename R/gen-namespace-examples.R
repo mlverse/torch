@@ -71,19 +71,16 @@ NULL
 #'
 #' @name torch_avg_pool1d
 #'
-#' @examples
 #'
 #' 
 NULL
 # -> avg_pool1d <-
 
-# -> adaptive_avg_pool1d: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> adaptive_avg_pool1d: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_adaptive_avg_pool1d
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> adaptive_avg_pool1d <-
 
@@ -245,13 +242,11 @@ NULL
 NULL
 # -> baddbmm <-
 
-# -> bartlett_window: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> bartlett_window: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_bartlett_window
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> bartlett_window <-
 
@@ -286,13 +281,11 @@ NULL
 NULL
 # -> bincount <-
 
-# -> bitwise_not: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> bitwise_not: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_bitwise_not
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> bitwise_not <-
 
@@ -323,13 +316,11 @@ NULL
 NULL
 # -> logical_xor <-
 
-# -> blackman_window: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> blackman_window: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_blackman_window
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> blackman_window <-
 
@@ -398,13 +389,11 @@ NULL
 NULL
 # -> chain_matmul <-
 
-# -> chunk: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> chunk: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_chunk
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> chunk <-
 
@@ -430,73 +419,86 @@ NULL
 NULL
 # -> clamp <-
 
-# -> conv1d: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> conv1d: 3a9090d974ee61599fba1c1c9f3e1d14 <-
 #'
 #' @name torch_conv1d
 #'
 #' @examples
 #'
-#' 
+#' filters = torch_randn(c(33, 16, 3))
+#' inputs = torch_randn(c(20, 16, 50))
+#' nnf_conv1d(inputs, filters)
 NULL
 # -> conv1d <-
 
-# -> conv2d: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> conv2d: 73bd1e08715f8f25547a70fb821a6eea <-
 #'
 #' @name torch_conv2d
 #'
 #' @examples
 #'
-#' 
+#' # With square kernels and equal stride
+#' filters = torch_randn(c(8,4,3,3))
+#' inputs = torch_randn(c(1,4,5,5))
+#' nnf_conv2d(inputs, filters, padding=1)
 NULL
 # -> conv2d <-
 
-# -> conv3d: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> conv3d: f644490bb91b9559df9913760cd99203 <-
 #'
 #' @name torch_conv3d
 #'
 #' @examples
 #'
-#' 
+#' # filters = torch_randn(c(33, 16, 3, 3, 3))
+#' # inputs = torch_randn(c(20, 16, 50, 10, 20))
+#' # nnf_conv3d(inputs, filters)
 NULL
 # -> conv3d <-
 
-# -> conv_tbc: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> conv_tbc: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_conv_tbc
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> conv_tbc <-
 
-# -> conv_transpose1d: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> conv_transpose1d: 69815461ca09463f23c426d0529d9611 <-
 #'
 #' @name torch_conv_transpose1d
 #'
 #' @examples
 #'
-#' 
+#' inputs = torch_randn(c(20, 16, 50))
+#' weights = torch_randn(c(16, 33, 5))
+#' nnf_conv_transpose1d(inputs, weights)
 NULL
 # -> conv_transpose1d <-
 
-# -> conv_transpose2d: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> conv_transpose2d: 599038ae972c64325923c50172c1c083 <-
 #'
 #' @name torch_conv_transpose2d
 #'
 #' @examples
 #'
-#' 
+#' # With square kernels and equal stride
+#' inputs = torch_randn(c(1, 4, 5, 5))
+#' weights = torch_randn(c(4, 8, 3, 3))
+#' nnf_conv_transpose2d(inputs, weights, padding=1)
 NULL
 # -> conv_transpose2d <-
 
-# -> conv_transpose3d: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> conv_transpose3d: 4699ff7e852ff50d9a34e456612f461d <-
 #'
 #' @name torch_conv_transpose3d
 #'
 #' @examples
-#'
-#' 
+#' \dontrun{
+#' inputs = torch_randn(c(20, 16, 50, 10, 20))
+#' weights = torch_randn(c(16, 33, 3, 3, 3))
+#' nnf_conv_transpose3d(inputs, weights)
+#' }
 NULL
 # -> conv_transpose3d <-
 
@@ -574,23 +576,34 @@ NULL
 NULL
 # -> diag_embed <-
 
-# -> diagflat: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> diagflat: 643fc76e4753dba5e752cb32f1fbc1ef <-
 #'
 #' @name torch_diagflat
 #'
 #' @examples
 #'
-#' 
+#' a = torch_randn(c(3))
+#' a
+#' torch_diagflat(a)
+#' torch_diagflat(a, 1)
+#' a = torch_randn(c(2, 2))
+#' a
+#' torch_diagflat(a)
 NULL
 # -> diagflat <-
 
-# -> diagonal: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> diagonal: c9dbc6ad1a03702b45963f0e23f93db3 <-
 #'
 #' @name torch_diagonal
 #'
 #' @examples
 #'
-#' 
+#' a = torch_randn(c(3, 3))
+#' a
+#' torch_diagonal(a, offset = 0)
+#' torch_diagonal(a, offset = 1)
+#' x = torch_randn(c(2, 5, 4, 2))
+#' torch_diagonal(x, offset=-1, dim1=1, dim2=2)
 NULL
 # -> diagonal <-
 
@@ -623,13 +636,28 @@ NULL
 NULL
 # -> dot <-
 
-# -> einsum: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> einsum: 26243b32dac1513907e66bad26c21399 <-
 #'
 #' @name torch_einsum
 #'
 #' @examples
 #'
-#' 
+#' x = torch_randn(c(5))
+#' y = torch_randn(c(4))
+#' torch_einsum('i,j->ij', list(x, y))  # outer product
+#' A = torch_randn(c(3,5,4))
+#' l = torch_randn(c(2,5))
+#' r = torch_randn(c(2,4))
+#' torch_einsum('bn,anm,bm->ba', list(l, A, r)) # compare torch_nn$functional$bilinear
+#' As = torch_randn(c(3,2,5))
+#' Bs = torch_randn(c(3,5,4))
+#' torch_einsum('bij,bjk->bik', list(As, Bs)) # batch matrix multiplication
+#' A = torch_randn(c(3, 3))
+#' torch_einsum('ii->i', list(A)) # diagonal
+#' A = torch_randn(c(4, 3, 3))
+#' torch_einsum('...ii->...i', list(A)) # batch diagonal
+#' A = torch_randn(c(2, 3, 4, 5))
+#' torch_einsum('...ij->...ji', list(A))$shape # batch permute
 NULL
 # -> einsum <-
 
@@ -760,33 +788,27 @@ NULL
 NULL
 # -> full <-
 
-# -> full_like: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> full_like: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_full_like
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> full_like <-
 
-# -> hann_window: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> hann_window: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_hann_window
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> hann_window <-
 
-# -> hamming_window: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> hamming_window: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_hamming_window
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> hamming_window <-
 
@@ -890,13 +912,11 @@ NULL
 NULL
 # -> isnan <-
 
-# -> is_floating_point: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> is_floating_point: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_is_floating_point
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> is_floating_point <-
 
@@ -1251,23 +1271,19 @@ NULL
 NULL
 # -> ones_like <-
 
-# -> cdist: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> cdist: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_cdist
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> cdist <-
 
-# -> pdist: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> pdist: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_pdist
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> pdist <-
 
@@ -1284,13 +1300,15 @@ NULL
 NULL
 # -> cosine_similarity <-
 
-# -> pixel_shuffle: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> pixel_shuffle: a768693934e6bd930deee49f0153701d <-
 #'
 #' @name torch_pixel_shuffle
 #'
 #' @examples
 #'
-#' 
+#' input = torch_randn(c(1, 9, 4, 4))
+#' output = nnf_pixel_shuffle(input, 3)
+#' print(output$size())
 NULL
 # -> pixel_shuffle <-
 
@@ -1321,13 +1339,11 @@ NULL
 NULL
 # -> rand <-
 
-# -> rand_like: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> rand_like: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_rand_like
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> rand_like <-
 
@@ -1343,13 +1359,11 @@ NULL
 NULL
 # -> randint <-
 
-# -> randint_like: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> randint_like: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_randint_like
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> randint_like <-
 
@@ -1364,13 +1378,11 @@ NULL
 NULL
 # -> randn <-
 
-# -> randn_like: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> randn_like: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_randn_like
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> randn_like <-
 
@@ -1460,23 +1472,19 @@ NULL
 NULL
 # -> round <-
 
-# -> rrelu_: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> rrelu_: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_rrelu_
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> rrelu_ <-
 
-# -> relu_: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> relu_: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_relu_
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> relu_ <-
 
@@ -1492,23 +1500,19 @@ NULL
 NULL
 # -> rsqrt <-
 
-# -> selu_: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> selu_: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_selu_
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> selu_ <-
 
-# -> celu_: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> celu_: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_celu_
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> celu_ <-
 
@@ -1562,13 +1566,11 @@ NULL
 NULL
 # -> slogdet <-
 
-# -> split: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> split: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_split
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> split <-
 
@@ -1589,23 +1591,19 @@ NULL
 NULL
 # -> squeeze <-
 
-# -> stack: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> stack: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_stack
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> stack <-
 
-# -> stft: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> stft: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_stft
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> stft <-
 
@@ -1733,23 +1731,28 @@ NULL
 NULL
 # -> tanh <-
 
-# -> tensordot: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> tensordot: bba1483fe9598180ce5434984285115b <-
 #'
 #' @name torch_tensordot
 #'
 #' @examples
 #'
-#' 
+#' a = torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
+#' b = torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
+#' torch_tensordot(a, b, dims_self=c(1, 0), dims_other = c(0, 1))
+#' \dontrun{
+#' a = torch_randn(3, 4, 5, device='cuda')
+#' b = torch_randn(4, 5, 6, device='cuda')
+#' c = torch_tensordot(a, b, dims=2)$cpu()
+#' }
 NULL
 # -> tensordot <-
 
-# -> threshold_: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> threshold_: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_threshold_
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> threshold_ <-
 
@@ -2033,8 +2036,10 @@ NULL
 #'
 #' @examples
 #' x = torch_tensor(matrix(c(-1.0, 0.0, 1.0, 2.0), ncol = 2, byrow = TRUE))
-#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10L, 0L)), 0, torch_quint8())
-#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), torch_tensor(c(10L, 0L)), 0, torch_quint8())$int_repr()
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
+#'                            torch_tensor(c(10L, 0L)), 0, torch_quint8())
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
+#'                            torch_tensor(c(10L, 0L)), 0, torch_quint8())$int_repr()
 NULL
 # -> quantize_per_channel <-
 
@@ -2112,13 +2117,11 @@ NULL
 NULL
 # -> promote_types <-
 
-# -> bitwise_xor: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> bitwise_xor: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_bitwise_xor
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> bitwise_xor <-
 
@@ -2135,13 +2138,11 @@ NULL
 NULL
 # -> addbmm <-
 
-# -> diag: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> diag: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_diag
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> diag <-
 
@@ -2244,7 +2245,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_ne(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(rep(c(1,4), each = 2), ncol = 2, byrow=TRUE)))
+#' torch_ne(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(rep(c(1,4), each = 2), ncol = 2, byrow=TRUE)))
 NULL
 # -> ne <-
 
@@ -2264,7 +2266,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_ge(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' torch_ge(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 NULL
 # -> ge <-
 
@@ -2274,7 +2277,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_le(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' torch_le(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 NULL
 # -> le <-
 
@@ -2284,7 +2288,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_gt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' torch_gt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 NULL
 # -> gt <-
 
@@ -2294,7 +2299,8 @@ NULL
 #'
 #' @examples
 #'
-#' torch_lt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' torch_lt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 NULL
 # -> lt <-
 
@@ -2409,33 +2415,48 @@ NULL
 NULL
 # -> lstsq <-
 
-# -> triangular_solve: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> triangular_solve: 3a6185e8a4281e12dc6c7873a1484b31 <-
 #'
 #' @name torch_triangular_solve
 #'
 #' @examples
 #'
-#' 
+#' A = torch_randn(c(2, 2))$triu()
+#' A
+#' b = torch_randn(c(2, 3))
+#' b
+#' torch_triangular_solve(b, A)
 NULL
 # -> triangular_solve <-
 
-# -> symeig: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> symeig: 27bc25d51797de06954ef84fde11f765 <-
 #'
 #' @name torch_symeig
 #'
 #' @examples
 #'
-#' 
+#' a = torch_randn(c(5, 5))
+#' a = a + a$t()  # To make a symmetric
+#' a
+#' o = torch_symeig(a, eigenvectors=TRUE)
+#' e = o[[1]]
+#' v = o[[2]]
+#' e
+#' v
+#' a_big = torch_randn(c(5, 2, 2))
+#' a_big = a_big + a_big$transpose(-2, -1)  # To make a_big symmetric
+#' o = a_big$symeig(eigenvectors=TRUE)
+#' e = o[[1]]
+#' v = o[[2]]
+#' torch_allclose(torch_matmul(v, torch_matmul(e$diag_embed(), v$transpose(-2, -1))), a_big)
 NULL
 # -> symeig <-
 
-# -> eig: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> eig: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_eig
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> eig <-
 
@@ -2560,33 +2581,27 @@ NULL
 NULL
 # -> qr <-
 
-# -> geqrf: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> geqrf: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_geqrf
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> geqrf <-
 
-# -> orgqr: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> orgqr: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_orgqr
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> orgqr <-
 
-# -> ormqr: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> ormqr: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_ormqr
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> ormqr <-
 
@@ -2910,13 +2925,11 @@ NULL
 NULL
 # -> floor_divide <-
 
-# -> is_complex: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> is_complex: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_is_complex
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> is_complex <-
 
@@ -2956,23 +2969,19 @@ NULL
 NULL
 # -> poisson <-
 
-# -> bitwise_and: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> bitwise_and: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_bitwise_and
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> bitwise_and <-
 
-# -> bitwise_or: 943a6632ffecbe645a7a4a43192ee185 <-
+# -> bitwise_or: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_bitwise_or
 #'
-#' @examples
 #'
-#' 
 NULL
 # -> bitwise_or <-
 

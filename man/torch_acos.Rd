@@ -18,13 +18,15 @@ Acos
 Returns a new tensor with the arccosine  of the elements of \code{input}.
 
 \deqn{
-    \text{out}_{i} = \cos^{-1}(\text{input}_{i})
+    \mbox{out}_{i} = \cos^{-1}(\mbox{input}_{i})
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_acos(a)
+}
 }

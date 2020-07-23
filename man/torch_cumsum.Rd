@@ -31,8 +31,10 @@ a vector of size N, with elements.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(10))
 a
 torch_cumsum(a, dim=1)
+}
 }

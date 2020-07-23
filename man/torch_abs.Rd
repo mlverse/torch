@@ -18,11 +18,13 @@ Abs
 Computes the element-wise absolute value of the given \code{input} tensor.
 
 \deqn{
-    \text{out}_{i} = |\text{input}_{i}|
+    \mbox{out}_{i} = |\mbox{input}_{i}|
 }
 }
 
 \examples{
+\dontrun{
 
 torch_abs(torch_tensor(c(-1, -2, 3)))
+}
 }

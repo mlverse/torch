@@ -4,7 +4,7 @@
 \alias{nn_cross_entropy_loss}
 \title{CrossEntropyLoss module}
 \usage{
-nn_cross_entropy_loss(...)
+nn_cross_entropy_loss(weight = NULL, ignore_index = -100, reduction = "mean")
 }
 \arguments{
 \item{weight}{(Tensor, optional): a manual rescaling weight given to each class.
@@ -22,7 +22,7 @@ and \code{reduce} are in the process of being deprecated, and in the meantime,
 specifying either of those two args will override \code{reduction}. Default: \code{'mean'}}
 }
 \description{
-This criterion combines \link{nn_log_softmax} and \link{nn_nll_loss} in one single class.
+This criterion combines \code{\link[=nn_log_softmax]{nn_log_softmax()}} and \code{nn_nll_loss()} in one single class.
 It is useful when training a classification problem with \code{C} classes.
 }
 \details{
@@ -42,12 +42,12 @@ necessarily be in the class range).
 
 The loss can be described as:
 \deqn{
-  \text{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
+  \mbox{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
 = -x[class] + \log\left(\sum_j \exp(x[j])\right)
 }
 or in the case of the \code{weight} argument being specified:
 \deqn{
-  \text{loss}(x, class) = weight[class] \left(-x[class] + \log\left(\sum_j \exp(x[j])\right)\right)
+  \mbox{loss}(x, class) = weight[class] \left(-x[class] + \log\left(\sum_j \exp(x[j])\right)\right)
 }
 
 The losses are averaged across observations for each minibatch.
@@ -62,7 +62,7 @@ where \eqn{K} is the number of dimensions, and a target of appropriate shape
 \item Input: \eqn{(N, C)} where \verb{C = number of classes}, or
 \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
 in the case of \code{K}-dimensional loss.
-\item Target: \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1}, or
+\item Target: \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, or
 \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
 K-dimensional loss.
 \item Output: scalar.
@@ -74,10 +74,12 @@ of K-dimensional loss.
 }
 
 \examples{
+\dontrun{
 loss <- nn_cross_entropy_loss()
 input <- torch_randn(3, 5, requires_grad=TRUE)
 target <- torch_randint(low = 1, high = 5, size = 3, dtype = torch_long())
 output <- loss(input, target)
 output$backward()
 
+}
 }

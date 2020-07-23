@@ -4,7 +4,7 @@
 \alias{nn_dropout3d}
 \title{Dropout3D module}
 \usage{
-nn_dropout3d(...)
+nn_dropout3d(p = 0.5, inplace = FALSE)
 }
 \arguments{
 \item{p}{(float, optional): probability of an element to be zeroed.}
@@ -15,7 +15,7 @@ in-place}
 \description{
 Randomly zero out entire channels (a channel is a 3D feature map,
 e.g., the \eqn{j}-th channel of the \eqn{i}-th sample in the
-batched input is a 3D tensor \eqn{\text{input}[i, j]}).
+batched input is a 3D tensor \eqn{\mbox{input}[i, j]}).
 }
 \details{
 Each channel will be zeroed out independently on every forward call with
@@ -41,8 +41,10 @@ feature maps and should be used instead.
 }
 
 \examples{
+\dontrun{
 m <- nn_dropout3d(p = 0.2)
 input <- torch_randn(20, 16, 4, 32, 32)
 output <- m(input)
 
+}
 }

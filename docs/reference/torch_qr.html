@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -194,15 +194,16 @@ LAPACK implementation.</p>
 
 
 <p>Computes the QR decomposition of a matrix or a batch of matrices <code>input</code>,
-and returns a namedtuple (Q, R) of tensors such that \(\text{input} = Q R\)
+and returns a namedtuple (Q, R) of tensors such that \(\mbox{input} = Q R\)
 with \(Q\) being an orthogonal matrix or batch of orthogonal matrices and
 \(R\) being an upper triangular matrix or batch of upper triangular matrices.</p>
 <p>If <code>some</code> is <code>True</code>, then this function returns the thin (reduced) QR factorization.
 Otherwise, if <code>some</code> is <code>False</code>, this function returns the complete QR factorization.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>12.</span>, -<span class='fl'>51</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>167</span>, -<span class='fl'>68</span>, -<span class='fl'>4</span>, <span class='fl'>24</span>, -<span class='fl'>41</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
+<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>12.</span>, -<span class='fl'>51</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>167</span>, -<span class='fl'>68</span>, -<span class='fl'>4</span>, <span class='fl'>24</span>, -<span class='fl'>41</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
 <span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_qr</span>(<span class='no'>a</span>)
 <span class='no'>q</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
 <span class='no'>r</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]]
@@ -214,7 +215,8 @@ Otherwise, if <code>some</code> is <code>False</code>, this function returns the
 #&gt;  1  0  0
 #&gt;  0  1 -0
 #&gt;  0 -0  1
-#&gt; [ CPUFloatType{3,3} ]</div></pre>
+#&gt; [ CPUFloatType{3,3} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

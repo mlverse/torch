@@ -42,7 +42,7 @@
 <meta property="og:title" content="Multi_margin_loss — nnf_multi_margin_loss" />
 <meta property="og:description" content="Creates a criterion that optimizes a multi-class classification hinge loss
 (margin-based loss) between input x (a 2D mini-batch Tensor) and output y
-(which is a 1D tensor of target class indices, 0 ≤ y ≤x$size(1)−1 )." />
+(which is a 1D tensor of target class indices, 0 &amp;lt;= y &amp;lt;= x$size(2) - 1 )." />
 
 
 
@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -164,7 +164,7 @@
     <div class="ref-description">
     <p>Creates a criterion that optimizes a multi-class classification hinge loss
 (margin-based loss) between input x (a 2D mini-batch Tensor) and output y
-(which is a 1D tensor of target class indices, <code>0 ≤ y ≤x$size(1)−1</code> ).</p>
+(which is a 1D tensor of target class indices, <code>0 &lt;= y &lt;= x$size(2) - 1</code> ).</p>
     </div>
 
     <pre class="usage"><span class='fu'>nnf_multi_margin_loss</span>(
@@ -181,11 +181,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>tensor (N,∗) where *∗ means, any number of additional dimensions</p></td>
+      <td><p>tensor (N,*) where ** means, any number of additional dimensions</p></td>
     </tr>
     <tr>
       <th>target</th>
-      <td><p>tensor (N,∗) , same shape as the input</p></td>
+      <td><p>tensor (N,*) , same shape as the input</p></td>
     </tr>
     <tr>
       <th>p</th>

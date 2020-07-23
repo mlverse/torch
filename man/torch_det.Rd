@@ -24,10 +24,12 @@ Calculates determinant of a square matrix or batches of square matrices.
 }
 
 \examples{
+\dontrun{
 
 A = torch_randn(c(3, 3))
 torch_det(A)
 A = torch_randn(c(3, 2, 2))
 A
 A$det()
+}
 }

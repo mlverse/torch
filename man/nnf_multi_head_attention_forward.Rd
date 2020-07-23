@@ -31,8 +31,14 @@ nnf_multi_head_attention_forward(
 )
 }
 \arguments{
-\item{query}{map a query and a set of key-value pairs to an output.
-See "Attention Is All You Need" for more details.}
+\item{query}{\eqn{(L, N, E)} where L is the target sequence length, N is the batch size, E is
+the embedding dimension.}
+
+\item{key}{\eqn{(S, N, E)}, where S is the source sequence length, N is the batch size, E is
+the embedding dimension.}
+
+\item{value}{\eqn{(S, N, E)} where S is the source sequence length, N is the batch size, E is
+the embedding dimension.}
 
 \item{embed_dim_to_check}{total dimension of the model.}
 
@@ -40,7 +46,11 @@ See "Attention Is All You Need" for more details.}
 
 \item{in_proj_weight}{input projection weight and bias.}
 
+\item{in_proj_bias}{currently undocumented.}
+
 \item{bias_k}{bias of the key and value sequences to be added at dim=0.}
+
+\item{bias_v}{currently undocumented.}
 
 \item{add_zero_attn}{add a new batch of zeros to the key and
 value sequences at dim=1.}
@@ -49,18 +59,24 @@ value sequences at dim=1.}
 
 \item{out_proj_weight}{the output projection weight and bias.}
 
+\item{out_proj_bias}{currently undocumented.}
+
 \item{training}{apply dropout if is \code{TRUE}.}
 
-\item{key_padding_mask}{if provided, specified padding elements in the key will
-be ignored by the attention. This is an binary mask. When the value is True
-the corresponding value on the attention layer will be filled with -inf.}
+\item{key_padding_mask}{\eqn{(N, S)} where N is the batch size, S is the source sequence length.
+If a ByteTensor is provided, the non-zero positions will be ignored while the position
+with the zero positions will be unchanged. If a BoolTensor is provided, the positions with the
+value of \code{True} will be ignored while the position with the value of \code{False} will be unchanged.}
 
 \item{need_weights}{output attn_output_weights.}
 
-\item{attn_mask}{2D or 3D mask that prevents attention to certain positions.
-This is an additive mask (i.e. the values will be added to the attention layer).
-A 2D mask will be broadcasted for all the batches while a 3D mask allows to
-specify a different mask for the entries of each batch.}
+\item{attn_mask}{2D mask \eqn{(L, S)} where L is the target sequence length, S is the source sequence length.
+3D mask \eqn{(N*num_heads, L, S)} where N is the batch size, L is the target sequence length,
+S is the source sequence length. attn_mask ensure that position i is allowed to attend the unmasked
+positions. If a ByteTensor is provided, the non-zero positions are not allowed to attend
+while the zero positions will be unchanged. If a BoolTensor is provided, positions with \code{True}
+is not allowed to attend while \code{False} values will be unchanged. If a FloatTensor
+is provided, it will be added to the attention weight.}
 
 \item{use_separate_proj_weight}{the function accept the proj. weights for
 query, key, and value in different forms. If false, in_proj_weight will be used,
@@ -68,7 +84,13 @@ which is a combination of q_proj_weight, k_proj_weight, v_proj_weight.}
 
 \item{q_proj_weight}{input projection weight and bias.}
 
+\item{k_proj_weight}{currently undocumented.}
+
+\item{v_proj_weight}{currently undocumented.}
+
 \item{static_k}{static key and value used for attention operators.}
+
+\item{static_v}{currently undocumented.}
 }
 \description{
 Allows the model to jointly attend to information from different representation

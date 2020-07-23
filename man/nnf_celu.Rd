@@ -10,7 +10,7 @@ nnf_celu(input, alpha = 1, inplace = FALSE)
 nnf_celu_(input, alpha = 1)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{alpha}{the alpha value for the CELU formulation. Default: 1.0}

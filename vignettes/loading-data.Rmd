@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = 0), 1)
 )
 ```
 
@@ -103,9 +104,9 @@ penguins_dataset <- dataset(
     
     input <- na.omit(penguins) 
     # conveniently, the categorical data are already factors
-    input$species <- as.numeric(input$species) - 1
-    input$island <- as.numeric(input$island) - 1
-    input$sex <- as.numeric(input$sex) - 1
+    input$species <- as.numeric(input$species)
+    input$island <- as.numeric(input$island)
+    input$sex <- as.numeric(input$sex)
     
     input <- as.matrix(input)
     torch_tensor(input)

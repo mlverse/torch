@@ -73,7 +73,7 @@ planes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -165,7 +165,17 @@ planes." />
 planes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_conv2d</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_conv2d</span>(
+  <span class='no'>in_channels</span>,
+  <span class='no'>out_channels</span>,
+  <span class='no'>kernel_size</span>,
+  <span class='kw'>stride</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>dilation</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>groups</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>padding_mode</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,14 +194,12 @@ planes.</p>
     </tr>
     <tr>
       <th>stride</th>
-      <td><p>(int or tuple, optional): Stride of the convolution. Default: 1
-padding (int or tuple, optional): Zero-padding added to both sides of
-the input. Default: 0</p></td>
+      <td><p>(int or tuple, optional): Stride of the convolution. Default: 1</p></td>
     </tr>
     <tr>
-      <th>padding_mode</th>
-      <td><p>(string, optional): <code>'zeros'</code>, <code>'reflect'</code>,
-<code>'replicate'</code> or <code>'circular'</code>. Default: <code>'zeros'</code></p></td>
+      <th>padding</th>
+      <td><p>(int or tuple, optional): Zero-padding added to both sides of
+the input. Default: 0</p></td>
     </tr>
     <tr>
       <th>dilation</th>
@@ -203,20 +211,25 @@ the input. Default: 0</p></td>
 channels to output channels. Default: 1</p></td>
     </tr>
     <tr>
-      <th>sbias</th>
+      <th>bias</th>
       <td><p>(bool, optional): If <code>TRUE</code>, adds a learnable bias to the
 output. Default: <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>padding_mode</th>
+      <td><p>(string, optional): <code>'zeros'</code>, <code>'reflect'</code>,
+<code>'replicate'</code> or <code>'circular'</code>. Default: <code>'zeros'</code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>In the simplest case, the output value of the layer with input size
-\((N, C_{\text{in}}, H, W)\) and output \((N, C_{\text{out}}, H_{\text{out}}, W_{\text{out}})\)
+\((N, C_{\mbox{in}}, H, W)\) and output \((N, C_{\mbox{out}}, H_{\mbox{out}}, W_{\mbox{out}})\)
 can be precisely described as:</p>
 <p>$$
-\text{out}(N_i, C_{\text{out}_j}) = \text{bias}(C_{\text{out}_j}) +
-  \sum_{k = 0}^{C_{\text{in}} - 1} \text{weight}(C_{\text{out}_j}, k) \star \text{input}(N_i, k)
+\mbox{out}(N_i, C_{\mbox{out}_j}) = \mbox{bias}(C_{\mbox{out}_j}) +
+  \sum_{k = 0}^{C_{\mbox{in}} - 1} \mbox{weight}(C_{\mbox{out}_j}, k) \star \mbox{input}(N_i, k)
 $$</p>
 <p>where \(\star\) is the valid 2D cross-correlation operator,
 \(N\) is a batch size, \(C\) denotes a number of channels,
@@ -277,12 +290,12 @@ a performance cost) by setting <code>backends_cudnn_deterministic = TRUE</code>.
 <li><p>Input: \((N, C_{in}, H_{in}, W_{in})\)</p></li>
 <li><p>Output: \((N, C_{out}, H_{out}, W_{out})\) where
 $$
-  H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \text{padding}[0] - \text{dilation}[0]
-    \times (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \mbox{padding}[0] - \mbox{dilation}[0]
+    \times (\mbox{kernel\_size}[0] - 1) - 1}{\mbox{stride}[0]} + 1\right\rfloor
 $$
 $$
-  W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \text{padding}[1] - \text{dilation}[1]
-    \times (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \mbox{padding}[1] - \mbox{dilation}[1]
+    \times (\mbox{kernel\_size}[1] - 1) - 1}{\mbox{stride}[1]} + 1\right\rfloor
 $$</p></li>
 </ul>
 
@@ -292,21 +305,22 @@ $$</p></li>
 
 <ul>
 <li><p>weight (Tensor): the learnable weights of the module of shape
-\((\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}}\),
-\(\text{kernel\_size[0]}, \text{kernel\_size[1]})\).
+\((\mbox{out\_channels}, \frac{\mbox{in\_channels}}{\mbox{groups}}\),
+\(\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]})\).
 The values of these weights are sampled from
 \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
-\(k = \frac{groups}{C_\text{in} * \prod_{i=0}^{1}\text{kernel\_size}[i]}\)</p></li>
+\(k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}\)</p></li>
 <li><p>bias (Tensor): the learnable bias of the module of shape
 (out_channels). If <code>bias</code> is <code>TRUE</code>,
 then the values of these weights are
 sampled from \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
-\(k = \frac{groups}{C_\text{in} * \prod_{i=0}^{1}\text{kernel\_size}[i]}\)</p></li>
+\(k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}\)</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='co'># With square kernels and equal stride</span>
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_conv2d</span>(<span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fl'>3</span>, <span class='kw'>stride</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='co'># non-square kernels and unequal stride and with padding</span>
@@ -314,7 +328,9 @@ sampled from \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
 <span class='co'># non-square kernels and unequal stride and with padding and dilation</span>
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_conv2d</span>(<span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>), <span class='kw'>stride</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>), <span class='kw'>padding</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>2</span>), <span class='kw'>dilation</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>1</span>))
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span>, <span class='fl'>100</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)</div></pre>
+<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
+
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

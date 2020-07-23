@@ -36,6 +36,7 @@ output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(1, 3))
 a
@@ -47,4 +48,5 @@ a
 torch_sum(a, 1)
 b = torch_arange(0, 4 * 5 * 6)$view(c(4, 5, 6))
 torch_sum(b, list(2, 1))
+}
 }

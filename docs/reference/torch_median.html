@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -206,36 +206,40 @@ Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>
 the outputs tensor having 1 fewer dimension than <code>input</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3581  1.1848  2.2818
+#&gt; -1.1294  0.8996  0.0937
 #&gt; [ CPUFloatType{1,3} ]</div><div class='input'><span class='fu'>torch_median</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; 1.18478
+#&gt; 0.0937234
 #&gt; [ CPUFloatType{} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.2988  0.0616  0.2548 -0.5133 -0.6921
-#&gt; -1.0381  0.4532 -0.2606  0.5322  0.8825
-#&gt;  0.1833  0.1687 -0.8359 -0.3276 -0.0179
-#&gt;  2.9911  0.9765  0.3413  0.3459  0.9845
+#&gt;  0.2865 -0.8226  0.6805  0.3636 -0.6890
+#&gt;  0.8853  0.3427  0.8220 -2.2562 -1.8976
+#&gt; -1.3180  0.3580  1.1346 -0.5496 -0.2493
+#&gt; -1.1359  0.0354 -0.3702 -0.0126  1.0450
 #&gt; [ CPUFloatType{4,5} ]</div><div class='input'><span class='fu'>torch_median</span>(<span class='no'>a</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt;  0.0616
-#&gt;  0.4532
-#&gt; -0.0179
-#&gt;  0.9765
-#&gt; [ CPUFloatType{4} ]
+#&gt; -1.1359
+#&gt;  0.0354
+#&gt;  0.6805
+#&gt; -0.5496
+#&gt; -0.6890
+#&gt; [ CPUFloatType{5} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  1
-#&gt;  1
-#&gt;  4
-#&gt;  1
-#&gt; [ CPULongType{4} ]
-#&gt; </div></pre>
+#&gt;  3
+#&gt;  3
+#&gt;  0
+#&gt;  2
+#&gt;  0
+#&gt; [ CPULongType{5} ]
+#&gt; </div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

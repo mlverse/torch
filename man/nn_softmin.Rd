@@ -4,7 +4,7 @@
 \alias{nn_softmin}
 \title{Softmin}
 \usage{
-nn_softmin(...)
+nn_softmin(dim)
 }
 \arguments{
 \item{dim}{(int): A dimension along which Softmin will be computed (so every slice
@@ -12,7 +12,7 @@ along dim will sum to 1).}
 }
 \value{
 a Tensor of the same dimension and shape as the input, with
-values in the range \link{0, 1}
+values in the range \verb{[0, 1]}.
 }
 \description{
 Applies the Softmin function to an n-dimensional input Tensor
@@ -22,7 +22,7 @@ Softmin is defined as:
 }
 \details{
 \deqn{
-  \text{Softmin}(x_{i}) = \frac{\exp(-x_i)}{\sum_j \exp(-x_j)}
+  \mbox{Softmin}(x_{i}) = \frac{\exp(-x_i)}{\sum_j \exp(-x_j)}
 }
 }
 \section{Shape}{
@@ -35,8 +35,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_softmin(dim = 1)
 input <- torch_randn(2, 2)
 output <- m(input)
 
+}
 }

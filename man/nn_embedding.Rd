@@ -4,7 +4,16 @@
 \alias{nn_embedding}
 \title{Embedding module}
 \usage{
-nn_embedding(...)
+nn_embedding(
+  num_embeddings,
+  embedding_dim,
+  padding_idx = NULL,
+  max_norm = NULL,
+  norm_type = 2,
+  scale_grad_by_freq = FALSE,
+  sparse = FALSE,
+  .weight = NULL
+)
 }
 \arguments{
 \item{num_embeddings}{(int): size of the dictionary of embeddings}
@@ -58,11 +67,12 @@ initialized from \eqn{\mathcal{N}(0, 1)}
 
 \itemize{
 \item Input: \eqn{(*)}, LongTensor of arbitrary shape containing the indices to extract
-\item Output: \eqn{(*, H)}, where \code{*} is the input shape and \eqn{H=\text{embedding\_dim}}
+\item Output: \eqn{(*, H)}, where \code{*} is the input shape and \eqn{H=\mbox{embedding\_dim}}
 }
 }
 
 \examples{
+\dontrun{
 # an Embedding module containing 10 tensors of size 3
 embedding <- nn_embedding(10, 3)
 # a batch of 2 samples of 4 indices each
@@ -73,4 +83,5 @@ embedding <- nn_embedding(10, 3, padding_idx=1)
 input <- torch_tensor(matrix(c(1,3,1,6), nrow = 1), dtype = torch_long())
 embedding(input)
 
+}
 }

@@ -24,6 +24,8 @@ of the input tensor \code{input}.
 }
 
 \examples{
+\dontrun{
 
 torch_exp(torch_tensor(c(0, log(2))))
+}
 }

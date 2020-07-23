@@ -29,7 +29,3 @@ random numbers from a normal distribution with mean 0 and variance 1.
 \code{torch_randn(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)}.
 }
 
-\examples{
-
-
-}

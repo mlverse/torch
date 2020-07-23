@@ -29,15 +29,18 @@ nnf_linear <- function(input, weight, bias = NULL) {
 #' \eqn{y = x_1 A x_2 + b}
 #' 
 #' 
-#' @param input1 \eqn{(N, *, H_{in1})} where \eqn{H_{in1}=\text{in1\_features}}
+#' @param input1 \eqn{(N, *, H_{in1})} where \eqn{H_{in1}=\mbox{in1\_features}}
 #'  and \eqn{*} means any number of additional dimensions.
 #'  All but the last dimension of the inputs should be the same.
-#' @param input2 \eqn{(N, *, H_{in2})} where \eqn{H_{in2}=\text{in2\_features}}
-#' @param weight \eqn{(\text{out\_features}, \text{in1\_features},
-#'  \text{in2\_features})}
-#' @param bias \eqn{(\text{out\_features})}
-#' @param output: \eqn{(N, *, H_{out})} where \eqn{H_{out}=\text{out\_features}}
-#'  and all but the last dimension are the same shape as the input.
+#' @param input2 \eqn{(N, *, H_{in2})} where \eqn{H_{in2}=\mbox{in2\_features}}
+#' @param weight \eqn{(\mbox{out\_features}, \mbox{in1\_features},
+#'  \mbox{in2\_features})}
+#' @param bias \eqn{(\mbox{out\_features})}
+#' 
+#' @return  
+#' 
+#' output \eqn{(N, *, H_{out})} where \eqn{H_{out}=\mbox{out\_features}}
+#' and all but the last dimension are the same shape as the input.
 #'
 #' @export
 nnf_bilinear <- function(input1, input2, weight, bias = NULL) {

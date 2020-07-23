@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -186,8 +186,49 @@
 Einstein summation convention.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
 
+<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>))
+<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='fu'>torch_einsum</span>(<span class='st'>'i,j-&gt;ij'</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>x</span>, <span class='no'>y</span>))  <span class='co'># outer product</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.6481 -0.3038  0.7547  0.3279
+#&gt; -0.7964  0.3732 -0.9273 -0.4029
+#&gt;  0.2729 -0.1279  0.3178  0.1381
+#&gt; -0.4882  0.2288 -0.5684 -0.2470
+#&gt;  2.6219 -1.2288  3.0530  1.3266
+#&gt; [ CPUFloatType{5,4} ]</div><div class='input'><span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>4</span>))
+<span class='no'>l</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>5</span>))
+<span class='no'>r</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>4</span>))
+<span class='fu'>torch_einsum</span>(<span class='st'>'bn,anm,bm-&gt;ba'</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>l</span>, <span class='no'>A</span>, <span class='no'>r</span>)) <span class='co'># compare torch_nn$functional$bilinear</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt;  4.7791 -6.3600  2.0599
+#&gt;  1.2294  0.6515 -3.1033
+#&gt; [ CPUFloatType{2,3} ]</div><div class='input'><span class='no'>As</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>2</span>,<span class='fl'>5</span>))
+<span class='no'>Bs</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>4</span>))
+<span class='fu'>torch_einsum</span>(<span class='st'>'bij,bjk-&gt;bik'</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>As</span>, <span class='no'>Bs</span>)) <span class='co'># batch matrix multiplication</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;   0.7724  0.1715  0.3778  0.5154
+#&gt;  -0.7152  3.1174  0.5206 -3.0151
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;  -2.1745  4.5514  0.2279  2.8187
+#&gt;  -0.4776  1.4331 -1.1076  0.3273
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;   1.0775  0.4867 -2.7086 -0.8871
+#&gt;  -1.4834 -2.0710 -1.2663  0.2878
+#&gt; [ CPUFloatType{3,2,4} ]</div><div class='input'><span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='fu'>torch_einsum</span>(<span class='st'>'ii-&gt;i'</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>A</span>)) <span class='co'># diagonal</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.7209
+#&gt;  0.7370
+#&gt;  0.0642
+#&gt; [ CPUFloatType{3} ]</div><div class='input'><span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='fu'>torch_einsum</span>(<span class='st'>'...ii-&gt;...i'</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>A</span>)) <span class='co'># batch diagonal</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt; -1.1323  2.2000 -0.2178
+#&gt;  1.1550 -0.8415 -1.0067
+#&gt;  2.1543 -0.0441 -1.3181
+#&gt; -0.0296 -2.3285  0.7952
+#&gt; [ CPUFloatType{4,3} ]</div><div class='input'><span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'>torch_einsum</span>(<span class='st'>'...ij-&gt;...ji'</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>A</span>))$<span class='no'>shape</span> <span class='co'># batch permute</span></div><div class='output co'>#&gt; [1] 2 3 5 4</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

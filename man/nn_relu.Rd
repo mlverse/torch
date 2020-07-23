@@ -4,14 +4,14 @@
 \alias{nn_relu}
 \title{ReLU module}
 \usage{
-nn_relu(...)
+nn_relu(inplace = FALSE)
 }
 \arguments{
 \item{inplace}{can optionally do the operation in-place. Default: \code{FALSE}}
 }
 \description{
 Applies the rectified linear unit function element-wise
-\deqn{\text{ReLU}(x) = (x)^+ = \max(0, x)}
+\deqn{\mbox{ReLU}(x) = (x)^+ = \max(0, x)}
 }
 \section{Shape}{
 
@@ -23,8 +23,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_relu()
 input <- torch_randn(2)
 m(input)
 
+}
 }

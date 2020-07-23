@@ -27,10 +27,12 @@ Calculates the sign and log absolute value of the determinant(s) of a square mat
 }
 
 \examples{
+\dontrun{
 
 A = torch_randn(c(3, 3))
 A
 torch_det(A)
 torch_logdet(A)
 torch_slogdet(A)
+}
 }

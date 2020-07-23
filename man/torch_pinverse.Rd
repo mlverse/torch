@@ -31,6 +31,7 @@ Please look at \verb{Moore-Penrose inverse}_ for more details
 }
 
 \examples{
+\dontrun{
 
 input = torch_randn(c(3, 5))
 input
@@ -39,4 +40,5 @@ torch_pinverse(input)
 a = torch_randn(c(2,6,3))
 b = torch_pinverse(a)
 torch_matmul(b, a)
+}
 }

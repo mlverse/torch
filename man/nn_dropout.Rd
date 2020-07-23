@@ -4,7 +4,7 @@
 \alias{nn_dropout}
 \title{Dropout module}
 \usage{
-nn_dropout(...)
+nn_dropout(p = 0.5, inplace = FALSE)
 }
 \arguments{
 \item{p}{probability of an element to be zeroed. Default: 0.5}
@@ -35,8 +35,10 @@ identity function.
 }
 
 \examples{
+\dontrun{
 m <- nn_dropout(p = 0.2)
 input <- torch_randn(20, 16)
 output <- m(input)
 
+}
 }

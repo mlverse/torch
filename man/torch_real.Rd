@@ -25,12 +25,14 @@ returns it.
 Not yet implemented for complex tensors.
 
 \deqn{
-    \text{out}_{i} = real(\text{input}_{i})
+    \mbox{out}_{i} = real(\mbox{input}_{i})
 }
 }
 
 \examples{
 \dontrun{
+\dontrun{
 torch_real(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+}
 }
 }

@@ -10,10 +10,6 @@ Celu_
 \section{celu_(input, alpha=1.) -> Tensor }{
 
 
-In-place version of \code{\link{~celu}}.
+In-place version of \code{torch_celu}.
 }
 
-\examples{
-
-
-}

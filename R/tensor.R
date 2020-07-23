@@ -122,15 +122,36 @@ Tensor <- R7Class(
   )
 )
 
+#' Converts R objects to a torch tensor
+#' 
+#' @param data an R atomic vector, matrix or array
+#' @param dtype a [torch_dtype] instance
+#' @param device a device creted with [torch_device()]
+#' @param requires_grad if autograd should record operations on the returned tensor.
+#' @param pin_memory If set, returned tensor would be allocated in the pinned memory.
+#' 
+#' @examples 
+#' torch_tensor(c(1,2,3,4))
+#' torch_tensor(c(1,2,3,4), dtype = torch_int())
+#' 
 #' @export
 torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALSE, 
                          pin_memory = FALSE) {
   Tensor$new(data, dtype, device, requires_grad, pin_memory)
 }
 
+#' Converts to array
+#' 
+#' @param x object to be converted into an array
+#' 
 #' @export
 as_array <- function(x) {
   UseMethod("as_array", x)
+}
+
+#' @export
+as.array.torch_tensor <- function(x, ...) {
+  as_array(x)
 }
 
 #' @export

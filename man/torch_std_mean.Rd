@@ -42,6 +42,7 @@ via the biased estimator. Otherwise, Bessel's correction will be used.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(1, 3))
 a
@@ -51,4 +52,5 @@ torch_std_mean(a)
 a = torch_randn(c(4, 4))
 a
 torch_std_mean(a, 1)
+}
 }

@@ -1,4 +1,4 @@
-variable_list <- R6:::R6Class(
+variable_list <- R6::R6Class(
   classname = "torch_variable_list",
   public = list(
     ptr = NULL,

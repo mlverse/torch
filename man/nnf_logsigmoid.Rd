@@ -7,7 +7,7 @@
 nnf_logsigmoid(input)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 }
 \description{

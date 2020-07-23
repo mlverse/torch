@@ -4,7 +4,13 @@
 \alias{nn_batch_norm1d}
 \title{BatchNorm1D module}
 \usage{
-nn_batch_norm1d(...)
+nn_batch_norm1d(
+  num_features,
+  eps = 1e-05,
+  momentum = 0.1,
+  affine = TRUE,
+  track_running_stats = TRUE
+)
 }
 \arguments{
 \item{num_features}{\eqn{C} from an expected input of size
@@ -54,7 +60,7 @@ evaluation time as well.
 This \code{momentum} argument is different from one used in optimizer
 classes and the conventional notion of momentum. Mathematically, the
 update rule for running statistics here is
-\eqn{\hat{x}_\text{new} = (1 - \text{momentum}) \times \hat{x} + \text{momentum} \times x_t},
+\eqn{\hat{x}_{\mbox{new}} = (1 - \mbox{momentum}) \times \hat{x} + \mbox{momentum} \times x_t},
 where \eqn{\hat{x}} is the estimated statistic and \eqn{x_t} is the
 new observed value.
 
@@ -71,6 +77,7 @@ on \verb{(N, L)} slices, it's common terminology to call this Temporal Batch Nor
 }
 
 \examples{
+\dontrun{
 # With Learnable Parameters
 m <- nn_batch_norm1d(100)
 # Without Learnable Parameters
@@ -78,4 +85,5 @@ m <- nn_batch_norm1d(100, affine = FALSE)
 input <- torch_randn(20, 100)
 output <- m(input) 
 
+}
 }

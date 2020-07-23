@@ -18,13 +18,15 @@ Reciprocal
 Returns a new tensor with the reciprocal of the elements of \code{input}
 
 \deqn{
-    \text{out}_{i} = \frac{1}{\text{input}_{i}}
+    \mbox{out}_{i} = \frac{1}{\mbox{input}_{i}}
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_reciprocal(a)
+}
 }

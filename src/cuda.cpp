@@ -1,5 +1,5 @@
 #include "torch_types.h"
-#include "utils.hpp"
+#include "utils.h"
 
 // [[Rcpp::export]]
 bool cpp_cuda_is_available () {

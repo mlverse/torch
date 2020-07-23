@@ -23,6 +23,8 @@ Computes the error function of each element. The error function is defined as fo
 }
 
 \examples{
+\dontrun{
 
 torch_erf(torch_tensor(c(0, -1., 10.)))
+}
 }

@@ -95,7 +95,7 @@ nn_utils_rnn_pack_padded_sequence <- function(input, lengths, batch_first=FALSE,
 #' 
 #' p <- nn_utils_rnn_pack_sequence(list(x, y, z))
 #' 
-#' @param sequences (list[Tensor]): A list of sequences of decreasing length.
+#' @param sequences `(list[Tensor])`: A list of sequences of decreasing length.
 #' @param enforce_sorted (bool, optional): if `TRUE`, checks that the input
 #'   contains sequences sorted by length in a decreasing order. If
 #'   `FALSE`, this condition is not checked. Default: `TRUE`.
@@ -117,7 +117,7 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 
 #' Pads a packed batch of variable length sequences.
 #' 
-#' It is an inverse operation to [pack_padded_sequence].
+#' It is an inverse operation to [nn_utils_rnn_pack_padded_sequence()].
 #' 
 #' The returned Tensor's data will be of size `T x B x *`, where `T` is the length
 #' of the longest sequence and `B` is the batch size. If `batch_first` is `TRUE`,
@@ -140,7 +140,7 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 #' @param batch_first (bool, optional): if ``True``, the output will be in ``B x T x *`
 #'    format.
 #' @param padding_value (float, optional): values for padded elements.
-#' @param total_length (int, optional): if not ``None``, the output will be padded to
+#' @param total_length (int, optional): if not `NULL`, the output will be padded to
 #'    have length `total_length`. This method will throw `ValueError`
 #'    if `total_length` is less than the max sequence length in
 #'    `sequence`.
@@ -149,13 +149,14 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 #' Tuple of Tensor containing the padded sequence, and a Tensor
 #' containing the list of lengths of each sequence in the batch.
 #' Batch elements will be re-ordered as they were ordered originally when
-#' the batch was passed to `pack_padded_sequence` or `pack_sequence`.
+#' the batch was passed to [nn_utils_rnn_pack_padded_sequence()] or 
+#' [nn_utils_rnn_pack_sequence()].
 #' 
 #' @export
 nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE, 
-                                             padding_value = 0, total_lenght = NULL) {
+                                             padding_value = 0, total_length = NULL) {
   o <- cpp_nn_utils_pad_packed_sequence(sequence$ptr, batch_first, padding_value, 
-                                        cpp_optional_int64_t(total_lenght))
+                                        cpp_optional_int64_t(total_length))
   TensorList$new(ptr = o)$to_r()
 }
 
@@ -182,7 +183,7 @@ nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE,
 #' where `T` is the length of the longest sequence. This function assumes
 #' trailing dimensions and type of all the Tensors in sequences are same.
 #' 
-#' @param sequences (list[Tensor]): list of variable length sequences.
+#' @param sequences `(list[Tensor])`: list of variable length sequences.
 #' @param batch_first (bool, optional): output will be in `B x T x *` if `TRUE`, 
 #' or in `T x B x *` otherwise
 #' @param padding_value (float, optional): value for padded elements. Default: 0.
@@ -192,14 +193,14 @@ nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE,
 #' Tensor of size `B x T x *` otherwise
 #' 
 #' @export
-nn_utils_rnn_pad_sequence <- function(sequence, batch_first = FALSE, padding_value = 0) {
+nn_utils_rnn_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0) {
   
-  if (is_torch_tensor(sequence))
-    sequence <- list(sequence)
+  if (is_torch_tensor(sequences))
+    sequences <- list(sequences)
   
-  sequence <- TensorList$new(x = sequence)
+  sequences <- TensorList$new(x = sequences)
   
-  o <- cpp_nn_utils_pad_sequence(sequence$ptr, batch_first, padding_value)
+  o <- cpp_nn_utils_pad_sequence(sequences$ptr, batch_first, padding_value)
   Tensor$new(ptr = o)
 }
 

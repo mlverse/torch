@@ -4,7 +4,7 @@
 \alias{nn_softshrink}
 \title{Softshrink module}
 \usage{
-nn_softshrink(...)
+nn_softshrink(lambd = 0.5)
 }
 \arguments{
 \item{lambd}{the \eqn{\lambda} (must be no less than zero) value for the Softshrink formulation. Default: 0.5}
@@ -14,13 +14,13 @@ Applies the soft shrinkage function elementwise:
 }
 \details{
 \deqn{
-  \text{SoftShrinkage}(x) =
-  \begin{cases}
-x - \lambda, & \text{ if } x > \lambda \\
-x + \lambda, & \text{ if } x < -\lambda \\
-0, & \text{ otherwise }
-\end{cases}
-
+  \mbox{SoftShrinkage}(x) =
+  \left\{ \begin{array}{ll}
+x - \lambda, & \mbox{ if } x > \lambda \\
+x + \lambda, & \mbox{ if } x < -\lambda \\
+0, & \mbox{ otherwise }
+\end{array}
+\right.
 }
 }
 \section{Shape}{
@@ -33,8 +33,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_softshrink()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

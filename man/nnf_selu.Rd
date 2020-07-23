@@ -10,7 +10,7 @@ nnf_selu(input, inplace = FALSE)
 nnf_selu_(input)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{inplace}{can optionally do the operation in-place. Default: FALSE}
@@ -22,9 +22,11 @@ with \eqn{\alpha=1.6732632423543772848170429916717} and
 \eqn{scale=1.0507009873554804934193349852946}.
 }
 \examples{
+\dontrun{
 x <- torch_randn(2, 2)
 y <- nnf_selu(x)
 nnf_selu_(x)
 torch_equal(x, y)
 
+}
 }

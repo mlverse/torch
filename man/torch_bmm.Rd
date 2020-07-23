@@ -32,14 +32,16 @@ If \code{input} is a \eqn{(b \times n \times m)} tensor, \code{mat2} is a
 \eqn{(b \times n \times p)} tensor.
 
 \deqn{
-    \text{out}_i = \text{input}_i \mathbin{@} \text{mat2}_i
+    \mbox{out}_i = \mbox{input}_i \mathbin{@} \mbox{mat2}_i
 }
 }
 
 \examples{
+\dontrun{
 
 input = torch_randn(c(10, 3, 4))
 mat2 = torch_randn(c(10, 4, 5))
 res = torch_bmm(input, mat2)
 res
+}
 }

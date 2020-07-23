@@ -29,10 +29,11 @@ Return a tensor of elements selected from either \code{x} or \code{y}, depending
 The operation is defined as:
 
 \deqn{
-    \text{out}_i = \begin{cases}
-        \text{x}_i & \text{if } \text{condition}_i \\
-        \text{y}_i & \text{otherwise} \\
-    \end{cases}
+    \mbox{out}_i = \left\{ \begin{array}{ll}
+        \mbox{x}_i & \mbox{if } \mbox{condition}_i \\
+        \mbox{y}_i & \mbox{otherwise} \\
+    \end{array}
+    \right.
 }
 }
 
@@ -44,6 +45,7 @@ The operation is defined as:
 }
 
 \examples{
+\dontrun{
 
 \dontrun{
 x = torch_randn(c(3, 2))
@@ -54,4 +56,5 @@ torch_where(x > 0, x, y)
 
 
 
+}
 }

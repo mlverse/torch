@@ -13,9 +13,11 @@ nn_identity(...)
 A placeholder identity operator that is argument-insensitive.
 }
 \examples{
+\dontrun{
 m <- nn_identity(54, unused_argument1 = 0.1, unused_argument2 = FALSE)
 input <- torch_randn(128, 20)
 output <- m(input)
 print(output$size())
 
+}
 }

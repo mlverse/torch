@@ -1,4 +1,4 @@
-TensorList <- R6:::R6Class(
+TensorList <- R6::R6Class(
   classname = "torch_tensor_list",
   public = list(
     ptr = NULL,

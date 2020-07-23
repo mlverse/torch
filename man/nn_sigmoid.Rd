@@ -4,14 +4,14 @@
 \alias{nn_sigmoid}
 \title{Sigmoid module}
 \usage{
-nn_sigmoid(...)
+nn_sigmoid()
 }
 \description{
 Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{Sigmoid}(x) = \sigma(x) = \frac{1}{1 + \exp(-x)}
+  \mbox{Sigmoid}(x) = \sigma(x) = \frac{1}{1 + \exp(-x)}
 }
 }
 \section{Shape}{
@@ -24,8 +24,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_sigmoid()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

@@ -24,6 +24,8 @@ of \code{input}.
 }
 
 \examples{
+\dontrun{
 
 torch_expm1(torch_tensor(c(0, log(2))))
+}
 }

@@ -18,12 +18,14 @@ Lgamma
 Computes the logarithm of the gamma function on \code{input}.
 
 \deqn{
-    \text{out}_{i} = \log \Gamma(\text{input}_{i})
+    \mbox{out}_{i} = \log \Gamma(\mbox{input}_{i})
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_arange(0.5, 2, 0.5)
 torch_lgamma(a)
+}
 }

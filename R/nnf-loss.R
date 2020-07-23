@@ -2,8 +2,8 @@
 #'
 #' Function that takes the mean element-wise absolute value difference.
 #' 
-#' @param input tensor (N,∗) where *∗ means, any number of additional dimensions
-#' @param target tensor (N,∗) , same shape as the input
+#' @param input tensor (N,*) where ** means, any number of additional dimensions
+#' @param target tensor (N,*) , same shape as the input
 #' @param reduction (string, optional) – Specifies the reduction to apply to the 
 #'   output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean': 
 #'   the sum of the output will be divided by the number of elements in the output, 
@@ -23,7 +23,7 @@ nnf_l1_loss <- function(input, target, reduction = "mean") {
       
     }
   } else {
-    expanded <- torch_broadcast_tensors(input, target)
+    expanded <- torch_broadcast_tensors(list(input, target))
     ret <- torch_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
   }
   
@@ -92,6 +92,7 @@ nnf_mse_loss <- function(input, target, reduction = "mean") {
 #' Function that measures the Binary Cross Entropy
 #' between the target and the output.
 #'
+#' @param weight (tensor) weight for each value.
 #' @inheritParams nnf_l1_loss
 #' 
 #' @export
@@ -121,7 +122,7 @@ nnf_hinge_embedding_loss <- function(input, target, margin = 1, reduction = "mea
 #' 
 #' Creates a criterion that optimizes a multi-class classification hinge loss 
 #' (margin-based loss) between input x (a 2D mini-batch Tensor) and output y 
-#' (which is a 1D tensor of target class indices, `0 ≤ y ≤x$size(2)−1` ).
+#' (which is a 1D tensor of target class indices, `0 <= y <= x$size(2) - 1` ).
 #' 
 #' @inheritParams nnf_l1_loss
 #' @param p Has a default value of 1. 1 and 2 are the only supported values.
@@ -213,6 +214,7 @@ nnf_soft_margin_loss <- function(input, target, reduction = "mean") {
 #' max-entropy, between input x and target y of size (N, C).
 #' 
 #' @inheritParams nnf_l1_loss
+#' @param weight weight tensor to apply on the loss.
 #'
 #' @export
 nnf_multilabel_soft_margin_loss <- function(input, target, weight, reduction = "mean") {
@@ -249,7 +251,7 @@ nnf_multilabel_soft_margin_loss <- function(input, target, weight, reduction = "
 #' @param negative the negative input tensor
 #' @param margin Default: 1.
 #' @param p The norm degree for pairwise distance. Default: 2.
-#' @param eps 
+#' @param eps (float, optional) Small value to avoid division by zero.
 #' @param swap The distance swap is described in detail in the paper Learning shallow 
 #'   convolutional feature descriptors with triplet losses by V. Balntas, E. Riba et al. 
 #'   Default: `FALSE`.
@@ -291,8 +293,8 @@ nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blan
 #' Poisson negative log likelihood loss.
 #'
 #' @inheritParams nnf_l1_loss
-#' @param log_input if `TRUE` the loss is computed as \eqn{\exp(\text{input}) - \text{target} * \text{input}}, 
-#'   if `FALSE` then loss is \eqn{\text{input} - \text{target} * \log(\text{input}+\text{eps})}. 
+#' @param log_input if `TRUE` the loss is computed as \eqn{\exp(\mbox{input}) - \mbox{target} * \mbox{input}}, 
+#'   if `FALSE` then loss is \eqn{\mbox{input} - \mbox{target} * \log(\mbox{input}+\mbox{eps})}. 
 #'   Default: `TRUE`.
 #' @param full whether to compute full loss, i. e. to add the Stirling approximation
 #'  term. Default: `FALSE`.
@@ -332,7 +334,7 @@ nnf_margin_ranking_loss <- function(input1, input2, target, margin = 0,
 #' @param input \eqn{(N, C)} where `C = number of classes` or \eqn{(N, C, H, W)} in 
 #'   case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} in 
 #'   the case of K-dimensional loss.
-#' @param target \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1}, 
+#' @param target \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, 
 #'   or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for K-dimensional loss.
 #' @param weight (Tensor, optional) a manual rescaling weight given to each class. 
 #'   If given, has to be a Tensor of size `C`
@@ -394,7 +396,7 @@ nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
 #' @param input (Tensor) \eqn{(N, C)} where `C = number of classes` or \eqn{(N, C, H, W)} 
 #'   in case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} 
 #'   in the case of K-dimensional loss.
-#' @param target (Tensor) \eqn{(N)} where each value is \eqn{0 \leq \text{targets}[i] \leq C-1}, 
+#' @param target (Tensor) \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, 
 #'   or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for K-dimensional loss.
 #' @param weight (Tensor, optional) a manual rescaling weight given to each class. If 
 #'   given, has to be a Tensor of size `C`
@@ -423,9 +425,8 @@ nnf_cross_entropy <- function(input, target, weight=NULL, ignore_index=-100,
 #'
 #' @export
 nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL, 
-                                                 size_average = NULL, 
                                                  reduction = c("mean", "sum", "none"), 
                                                  pos_weight = NULL) {
-  torch_binary_cross_entropy_with_logits(input, target, weigth, pos_weight, 
+  torch_binary_cross_entropy_with_logits(input, target, weight, pos_weight, 
                                          reduction_enum(reduction))
 }

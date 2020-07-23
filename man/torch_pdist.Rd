@@ -29,7 +29,3 @@ When \eqn{p = \infty}, the closest scipy function is
 \verb{scipy.spatial.distance.pdist(xn, lambda x, y: np.abs(x - y).max())}.
 }
 
-\examples{
-
-
-}

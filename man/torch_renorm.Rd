@@ -30,9 +30,11 @@ than the value \code{maxnorm}
 }
 
 \examples{
+\dontrun{
 x = torch_ones(c(3, 3))
 x[2,]$fill_(2)
 x[3,]$fill_(3)
 x
 torch_renorm(x, 1, 1, 5)
+}
 }

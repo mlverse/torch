@@ -7,7 +7,7 @@
 nnf_hardshrink(input, lambd = 0.5)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{lambd}{the lambda value for the Hardshrink formulation. Default: 0.5}

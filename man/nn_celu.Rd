@@ -4,7 +4,7 @@
 \alias{nn_celu}
 \title{CELU module}
 \usage{
-nn_celu(...)
+nn_celu(alpha = 1, inplace = FALSE)
 }
 \arguments{
 \item{alpha}{the \eqn{\alpha} value for the CELU formulation. Default: 1.0}
@@ -16,7 +16,7 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{CELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x/\alpha) - 1))
+  \mbox{CELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x/\alpha) - 1))
 }
 
 More details can be found in the paper
@@ -32,8 +32,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_celu()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

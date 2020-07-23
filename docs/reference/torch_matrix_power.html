@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -190,25 +190,28 @@ raised to the power <code>n</code>.  For a batch of matrices, the batched invers
 is returned.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -1.1720 -0.5900
-#&gt;   0.4700 -1.8772
+#&gt;   0.0871  0.0197
+#&gt;   0.3185  0.4297
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.4840 -0.0442
-#&gt;   2.1904 -0.5338
+#&gt;  -0.7818 -0.6402
+#&gt;   0.2400 -0.4367
 #&gt; [ CPUFloatType{2,2,2} ]</div><div class='input'><span class='fu'>torch_matrix_power</span>(<span class='no'>a</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.4391 -4.0242
-#&gt;   3.2056 -5.2488
+#&gt;  0.01 *
+#&gt;   0.4446  0.4644
+#&gt;    7.5134  8.5264
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0714 -0.0072
-#&gt;   0.3596 -0.0957
-#&gt; [ CPUFloatType{2,2,2} ]</div></pre>
+#&gt;  -0.1705 -0.6335
+#&gt;   0.2375  0.1711
+#&gt; [ CPUFloatType{2,2,2} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

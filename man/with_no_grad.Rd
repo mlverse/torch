@@ -13,6 +13,7 @@ with_no_grad(code)
 Temporarily modify gradient recording.
 }
 \examples{
+\dontrun{
 x <- torch_tensor(runif(5), requires_grad = TRUE)
 with_no_grad({
   x$sub_(torch_tensor(as.numeric(1:5)))
@@ -20,4 +21,5 @@ with_no_grad({
 x
 x$grad
 
+}
 }

@@ -29,7 +29,7 @@ with_no_grad <- function(code) {
 #' Enable grad
 #' 
 #' Context-manager that enables gradient calculation.
-#' Enables gradient calculation, if it has been disabled via [with_no_grad] or [set_grad_enabled].
+#' Enables gradient calculation, if it has been disabled via [with_no_grad].
 #' 
 #' This context manager is thread local; it will not affect computation in 
 #' other threads.

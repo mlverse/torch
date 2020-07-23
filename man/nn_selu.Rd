@@ -4,7 +4,7 @@
 \alias{nn_selu}
 \title{SELU module}
 \usage{
-nn_selu(...)
+nn_selu(inplace = FALSE)
 }
 \arguments{
 \item{inplace}{(bool, optional): can optionally do the operation in-place. Default: \code{FALSE}}
@@ -14,11 +14,11 @@ Applied element-wise, as:
 }
 \details{
 \deqn{
-  \text{SELU}(x) = \text{scale} * (\max(0,x) + \min(0, \alpha * (\exp(x) - 1)))
+  \mbox{SELU}(x) = \mbox{scale} * (\max(0,x) + \min(0, \alpha * (\exp(x) - 1)))
 }
 
 with \eqn{\alpha = 1.6732632423543772848170429916717} and
-\eqn{\text{scale} = 1.0507009873554804934193349852946}.
+\eqn{\mbox{scale} = 1.0507009873554804934193349852946}.
 
 More details can be found in the paper
 \href{https://arxiv.org/abs/1706.02515}{Self-Normalizing Neural Networks}.
@@ -33,8 +33,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_selu()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

@@ -4,7 +4,14 @@
 \alias{nn_max_pool1d}
 \title{MaxPool1D module}
 \usage{
-nn_max_pool1d(...)
+nn_max_pool1d(
+  kernel_size,
+  stride = NULL,
+  padding = 0,
+  dilation = 1,
+  return_indices = FALSE,
+  ceil_mode = FALSE
+)
 }
 \arguments{
 \item{kernel_size}{the size of the window to take a max over}
@@ -16,30 +23,20 @@ nn_max_pool1d(...)
 \item{dilation}{a parameter that controls the stride of elements in the window}
 
 \item{return_indices}{if \code{TRUE}, will return the max indices along with the outputs.
-Useful for \link{nn_max_unpool1d} later.}
+Useful for  \code{nn_max_unpool1d()} later.}
 
 \item{ceil_mode}{when \code{TRUE}, will use \code{ceil} instead of \code{floor} to compute the output shape}
-
-\item{Shape:}{\itemize{
-\item Input: \eqn{(N, C, L_{in})}
-\item Output: \eqn{(N, C, L_{out})}, where
-}
-
-\deqn{
-  L_{out} = \left\lfloor \frac{L_{in} + 2 \times \text{padding} - \text{dilation}
-    \times (\text{kernel\_size} - 1) - 1}{\text{stride}} + 1\right\rfloor
-}}
 }
 \description{
 Applies a 1D max pooling over an input signal composed of several input
 planes.
 }
 \details{
-In the simplest case, the output value of the layer with input size :math:\verb{(N, C, L)}
+In the simplest case, the output value of the layer with input size \eqn{(N, C, L)}
 and output \eqn{(N, C, L_{out})} can be precisely described as:
 
 \deqn{
-  out(N_i, C_j, k) = \max_{m=0, \ldots, \text{kernel\_size} - 1}
+  out(N_i, C_j, k) = \max_{m=0, \ldots, \mbox{kernel\_size} - 1}
 input(N_i, C_j, stride \times k + m)
 }
 
@@ -48,10 +45,25 @@ for \code{padding} number of points. \code{dilation} controls the spacing betwee
 It is harder to describe, but this \href{https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md}{link}
 has a nice visualization of what \code{dilation} does.
 }
+\section{Shape}{
+
+\itemize{
+\item Input: \eqn{(N, C, L_{in})}
+\item Output: \eqn{(N, C, L_{out})}, where
+}
+
+\deqn{
+  L_{out} = \left\lfloor \frac{L_{in} + 2 \times \mbox{padding} - \mbox{dilation}
+    \times (\mbox{kernel\_size} - 1) - 1}{\mbox{stride}} + 1\right\rfloor
+}
+}
+
 \examples{
+\dontrun{
 # pool of size=3, stride=2
 m <- nn_max_pool1d(3, stride=2)
 input <- torch_randn(20, 16, 50)
 output <- m(input)
 
+}
 }

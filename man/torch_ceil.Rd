@@ -19,13 +19,15 @@ Returns a new tensor with the ceil of the elements of \code{input},
 the smallest integer greater than or equal to each element.
 
 \deqn{
-    \text{out}_{i} = \left\lceil \text{input}_{i} \right\rceil = \left\lfloor \text{input}_{i} \right\rfloor + 1
+    \mbox{out}_{i} = \left\lceil \mbox{input}_{i} \right\rceil = \left\lfloor \mbox{input}_{i} \right\rfloor + 1
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_ceil(a)
+}
 }

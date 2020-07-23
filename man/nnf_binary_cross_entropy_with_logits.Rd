@@ -8,7 +8,6 @@ nnf_binary_cross_entropy_with_logits(
   input,
   target,
   weight = NULL,
-  size_average = NULL,
   reduction = c("mean", "sum", "none"),
   pos_weight = NULL
 )

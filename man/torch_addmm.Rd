@@ -35,16 +35,18 @@ and \code{out} will be a \eqn{(n \times p)} tensor.
 \code{mat1} and \code{mat2} and the added matrix \code{input} respectively.
 
 \deqn{
-    \text{out} = \beta\ \text{input} + \alpha\ (\text{mat1}_i \mathbin{@} \text{mat2}_i)
+    \mbox{out} = \beta\ \mbox{input} + \alpha\ (\mbox{mat1}_i \mathbin{@} \mbox{mat2}_i)
 }
 For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{beta} and
 \code{alpha} must be real numbers, otherwise they should be integers.
 }
 
 \examples{
+\dontrun{
 
 M = torch_randn(c(2, 3))
 mat1 = torch_randn(c(2, 3))
 mat2 = torch_randn(c(3, 3))
 torch_addmm(M, mat1, mat2)
+}
 }

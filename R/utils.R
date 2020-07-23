@@ -8,7 +8,7 @@ nullptr <- function() {
 is_null_external_pointer <- function(pointer) {
   a <- attributes(pointer)
   attributes(pointer) <- NULL
-  out <- identical(pointer, new("externalptr"))
+  out <- identical(pointer, methods::new("externalptr"))
   attributes(pointer) <- a
   out
 }

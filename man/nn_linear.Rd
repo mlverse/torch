@@ -4,7 +4,7 @@
 \alias{nn_linear}
 \title{Linear module}
 \usage{
-nn_linear(...)
+nn_linear(in_features, out_features, bias = TRUE)
 }
 \arguments{
 \item{in_features}{size of each input sample}
@@ -33,18 +33,20 @@ are the same shape as the input and :math:\code{H_out = out_features}.
 \item weight: the learnable weights of the module of shape
 \verb{(out_features, in_features)}. The values are
 initialized from \eqn{U(-\sqrt{k}, \sqrt{k})}s, where
-\eqn{k = \frac{1}{\text{in\_features}}}
-\item bias: the learnable bias of the module of shape :math:\eqn{(\text{out_features})}.
+\eqn{k = \frac{1}{\mbox{in\_features}}}
+\item bias: the learnable bias of the module of shape \eqn{(\mbox{out\_features})}.
 If \code{bias} is \code{TRUE}, the values are initialized from
 \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{1}{\text{in_features}}}
+\eqn{k = \frac{1}{\mbox{in\_features}}}
 }
 }
 
 \examples{
+\dontrun{
 m <- nn_linear(20, 30)
 input <- torch_randn(128, 20)
 output <- m(input)
 print(output$size())
 
+}
 }

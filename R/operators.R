@@ -142,7 +142,7 @@ floor.torch_tensor <- function(x) {
 }
 
 #' @export
-trunc.torch_tensor <- function(x) {
+trunc.torch_tensor <- function(x, ...) {
   torch_trunc(x)
 }
 
@@ -160,11 +160,13 @@ log.torch_tensor <- function(x, base) {
   }
 }
 
+#' @method log10 torch_tensor
 #' @export
 log10.torch_tensor <- function(x) {
   torch_log10(x)
 }
 
+#' @method log2 torch_tensor
 #' @export
 log2.torch_tensor <- function(x) {
   torch_log2(x)

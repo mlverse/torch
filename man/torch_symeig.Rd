@@ -35,7 +35,7 @@ of a real symmetric matrix \code{input} or a batch of real symmetric matrices,
 represented by a namedtuple (eigenvalues, eigenvectors).
 
 This function calculates all eigenvalues (and vectors) of \code{input}
-such that \eqn{\text{input} = V \text{diag}(e) V^T}.
+such that \eqn{\mbox{input} = V \mbox{diag}(e) V^T}.
 
 The boolean argument \code{eigenvectors} defines computation of
 both eigenvectors and eigenvalues or eigenvalues only.
@@ -50,6 +50,21 @@ If \code{upper} is \code{False}, then lower triangular portion is used.
 }
 
 \examples{
+\dontrun{
 
-
+a = torch_randn(c(5, 5))
+a = a + a$t()  # To make a symmetric
+a
+o = torch_symeig(a, eigenvectors=TRUE)
+e = o[[1]]
+v = o[[2]]
+e
+v
+a_big = torch_randn(c(5, 2, 2))
+a_big = a_big + a_big$transpose(-2, -1)  # To make a_big symmetric
+o = a_big$symeig(eigenvectors=TRUE)
+e = o[[1]]
+v = o[[2]]
+torch_allclose(torch_matmul(v, torch_matmul(e$diag_embed(), v$transpose(-2, -1))), a_big)
+}
 }

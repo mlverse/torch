@@ -14,6 +14,8 @@ Equal
 }
 
 \examples{
+\dontrun{
 
 torch_equal(torch_tensor(c(1, 2)), torch_tensor(c(1, 2)))
+}
 }

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -197,11 +197,12 @@
 <p>Clamp all elements in <code>input</code> into the range <code>[</code> <code>min</code>, <code>max</code> <code>]</code> and return
 a resulting tensor:</p>
 <p>$$
-    y_i = \begin{cases}
-        \text{min} &amp; \text{if } x_i &lt; \text{min} \\
-        x_i &amp; \text{if } \text{min} \leq x_i \leq \text{max} \\
-        \text{max} &amp; \text{if } x_i &gt; \text{max}
-    \end{cases}
+    y_i = \left\{ \begin{array}{ll}
+        \mbox{min} &amp; \mbox{if } x_i &lt; \mbox{min} \\
+        x_i &amp; \mbox{if } \mbox{min} \leq x_i \leq \mbox{max} \\
+        \mbox{max} &amp; \mbox{if } x_i &gt; \mbox{max}
+    \end{array}
+    \right.
 $$
 If <code>input</code> is of type <code>FloatTensor</code> or <code>DoubleTensor</code>, args <code>min</code>
 and <code>max</code> must be real numbers, otherwise they should be integers.</p>
@@ -223,45 +224,47 @@ should be a real number, otherwise it should be an integer.</p>
 should be a real number, otherwise it should be an integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5990
-#&gt;  0.4641
-#&gt;  0.3477
-#&gt; -0.5304
+#&gt; -0.9506
+#&gt;  2.2284
+#&gt; -0.7040
+#&gt; -0.4355
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>min</span><span class='kw'>=</span>-<span class='fl'>0.5</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.5000
-#&gt;  0.4641
-#&gt;  0.3477
 #&gt; -0.5000
+#&gt;  0.5000
+#&gt; -0.5000
+#&gt; -0.4355
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7567
-#&gt; -0.1293
-#&gt;  0.9389
-#&gt;  1.6217
+#&gt;  0.9982
+#&gt; -1.4524
+#&gt; -1.4201
+#&gt;  0.5077
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>min</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7567
+#&gt;  0.9982
 #&gt;  0.5000
-#&gt;  0.9389
-#&gt;  1.6217
+#&gt;  0.5000
+#&gt;  0.5077
 #&gt; [ CPUFloatType{4} ]</div><div class='input'>
 
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.7500
-#&gt;  0.5333
-#&gt;  0.4102
-#&gt;  0.0912
+#&gt;  1.9805
+#&gt; -1.3783
+#&gt;  0.7469
+#&gt; -0.5865
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.7500
 #&gt;  0.5000
-#&gt;  0.4102
-#&gt;  0.0912
-#&gt; [ CPUFloatType{4} ]</div></pre>
+#&gt; -1.3783
+#&gt;  0.5000
+#&gt; -0.5865
+#&gt; [ CPUFloatType{4} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

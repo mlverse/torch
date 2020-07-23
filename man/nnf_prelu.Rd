@@ -7,7 +7,7 @@
 nnf_prelu(input, weight)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{weight}{(Tensor) the learnable weights}

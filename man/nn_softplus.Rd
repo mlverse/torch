@@ -4,7 +4,7 @@
 \alias{nn_softplus}
 \title{Softplus module}
 \usage{
-nn_softplus(...)
+nn_softplus(beta = 1, threshold = 20)
 }
 \arguments{
 \item{beta}{the \eqn{\beta} value for the Softplus formulation. Default: 1}
@@ -14,7 +14,7 @@ nn_softplus(...)
 \description{
 Applies the element-wise function:
 \deqn{
-  \text{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))
+  \mbox{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))
 }
 }
 \details{
@@ -33,8 +33,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_softplus()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

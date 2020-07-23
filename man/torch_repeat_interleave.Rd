@@ -35,11 +35,13 @@ If the \code{repeats} is \verb{tensor([n1, n2, n3, ...])}, then the output will 
 
 \examples{
 \dontrun{
+\dontrun{
 x = torch_tensor(c(1, 2, 3))
 x$repeat_interleave(2)
 y = torch_tensor(matrix(c(1, 2, 3, 4), ncol = 2, byrow=TRUE))
 torch_repeat_interleave(y, 2)
 torch_repeat_interleave(y, 3, dim=1)
 torch_repeat_interleave(y, torch_tensor(c(1, 2)), dim=1)
+}
 }
 }

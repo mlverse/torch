@@ -8,10 +8,11 @@ NULL
 #' Threshold is defined as:
 #' \deqn{
 #'   y = 
-#'   \begin{cases}
-#'   x, &\text{ if } x > \text{threshold} \\
-#'   \text{value}, &\text{ otherwise }
-#'   \end{cases}
+#'   \left\{ \begin{array}{ll}
+#'   x, &\mbox{ if } x > \mbox{threshold} \\
+#'   \mbox{value}, &\mbox{ otherwise }
+#'   \end{array}
+#'   \right.
 #' }
 #' 
 #' @param threshold The value to threshold at
@@ -44,7 +45,7 @@ nn_threshold <- nn_module(
 #' ReLU module
 #' 
 #' Applies the rectified linear unit function element-wise
-#' \deqn{\text{ReLU}(x) = (x)^+ = \max(0, x)}
+#' \deqn{\mbox{ReLU}(x) = (x)^+ = \max(0, x)}
 #' 
 #' @param inplace can optionally do the operation in-place. Default: `FALSE`
 #' 
@@ -80,17 +81,16 @@ nn_relu <- nn_module(
 #' The function is defined as:
 #' 
 #' \deqn{
-#' 
-#' \text{RReLU}(x) =
-#' \begin{cases}
-#' x & \text{if } x \geq 0 \\
-#' ax & \text{ otherwise }
-#' \end{cases}
-#' 
+#' \mbox{RReLU}(x) =
+#' \left\{ \begin{array}{ll}
+#' x & \mbox{if } x \geq 0 \\
+#' ax & \mbox{ otherwise }
+#' \end{array}
+#' \right.
 #' }
 #' 
 #' where \eqn{a} is randomly sampled from uniform distribution
-#' \eqn{\mathcal{U}(\text{lower}, \text{upper})}.
+#' \eqn{\mathcal{U}(\mbox{lower}, \mbox{upper})}.
 #' See: https://arxiv.org/pdf/1505.00853.pdf
 #' 
 #' @param lower lower bound of the uniform distribution. Default: \eqn{\frac{1}{8}}
@@ -127,11 +127,12 @@ nn_rrelu <- nn_module(
 #' HardTanh is defined as:
 #' 
 #' \deqn{
-#' \text{HardTanh}(x) = \begin{cases}
-#'   1 & \text{ if } x > 1 \\
-#'   -1 & \text{ if } x < -1 \\
-#'   x & \text{ otherwise } \\
-#' \end{cases}
+#' \mbox{HardTanh}(x) = \left\{ \begin{array}{ll}
+#'   1 & \mbox{ if } x > 1 \\
+#'   -1 & \mbox{ if } x < -1 \\
+#'   x & \mbox{ otherwise } \\
+#' \end{array}
+#' \right.
 #' }
 #' 
 #' The range of the linear region :math:`[-1, 1]` can be adjusted using
@@ -170,7 +171,7 @@ nn_hardtanh <- nn_module(
 #' Applies the element-wise function:
 #'
 #' \deqn{
-#'   \text{ReLU6}(x) = \min(\max(0,x), 6)
+#'   \mbox{ReLU6}(x) = \min(\max(0,x), 6)
 #' }
 #' 
 #' @param inplace can optionally do the operation in-place. Default: `FALSE`
@@ -201,7 +202,7 @@ nn_relu6 <- nn_module(
 #' Applies the element-wise function:
 #'
 #' \deqn{
-#'   \text{Sigmoid}(x) = \sigma(x) = \frac{1}{1 + \exp(-x)}
+#'   \mbox{Sigmoid}(x) = \sigma(x) = \frac{1}{1 + \exp(-x)}
 #' }
 #' 
 #' @section Shape:
@@ -229,11 +230,12 @@ nn_sigmoid <- nn_module(
 #' Applies the element-wise function:
 #'
 #' \deqn{
-#' \text{Hardsigmoid}(x) = \begin{cases}
-#'   0 & \text{if~} x \le -3, \\
-#'   1 & \text{if~} x \ge +3, \\
-#'   x / 6 + 1 / 2 & \text{otherwise}
-#' \end{cases}
+#' \mbox{Hardsigmoid}(x) = \left\{ \begin{array}{ll}
+#'   0 & \mbox{if~} x \le -3, \\
+#'   1 & \mbox{if~} x \ge +3, \\
+#'   x / 6 + 1 / 2 & \mbox{otherwise}
+#' \end{array}
+#' \right.
 #' }
 #' 
 #' @section Shape:
@@ -260,7 +262,7 @@ nn_hardsigmoid <- nn_module(
 #' Applies the element-wise function:
 #' 
 #' \deqn{
-#'   \text{Tanh}(x) = \tanh(x) = \frac{\exp(x) - \exp(-x)} {\exp(x) + \exp(-x)}
+#'   \mbox{Tanh}(x) = \tanh(x) = \frac{\exp(x) - \exp(-x)} {\exp(x) + \exp(-x)}
 #' }
 #' 
 #' @section Shape:
@@ -286,13 +288,15 @@ nn_tanh <- nn_module(
 #' 
 #' Applies the hardswish function, element-wise, as described in the paper:
 #' [Searching for MobileNetV3](https://arxiv.org/abs/1905.02244)
-#' \deqn{
-#'   \text{Hardswish}(x) = \begin{cases}
-#' 0 & \text{if~} x \le -3, \\
-#' x & \text{if~} x \ge +3, \\
-#' x \cdot (x + 3) /6 & \text{otherwise}
-#' \end{cases}
-#' }
+#' 
+#' 
+#' \deqn{ \mbox{Hardswish}(x) = \left\{
+#'   \begin{array}{ll}
+#'   0 & \mbox{if } x \le -3, \\
+#'   x & \mbox{if } x \ge +3, \\
+#'   x \cdot (x + 3)/6 & \mbox{otherwise}
+#'   \end{array}
+#'   \right. }
 #' 
 #' @section Shape:
 #' 
@@ -321,7 +325,7 @@ nn_hardswish <- nn_module(
 #' Applies the element-wise function:
 #'
 #' \deqn{
-#'   \text{ELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x) - 1))
+#'   \mbox{ELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x) - 1))
 #' }
 #' 
 #' @param alpha the \eqn{\alpha} value for the ELU formulation. Default: 1.0
@@ -355,7 +359,7 @@ nn_elu <- nn_module(
 #' Applies the element-wise function:
 #' 
 #' \deqn{
-#'   \text{CELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x/\alpha) - 1))
+#'   \mbox{CELU}(x) = \max(0,x) + \min(0, \alpha * (\exp(x/\alpha) - 1))
 #' } 
 #' 
 #' More details can be found in the paper 
@@ -392,11 +396,11 @@ nn_celu <- nn_module(
 #' Applied element-wise, as:
 #' 
 #' \deqn{
-#'   \text{SELU}(x) = \text{scale} * (\max(0,x) + \min(0, \alpha * (\exp(x) - 1)))
+#'   \mbox{SELU}(x) = \mbox{scale} * (\max(0,x) + \min(0, \alpha * (\exp(x) - 1)))
 #' }
 #' 
 #' with \eqn{\alpha = 1.6732632423543772848170429916717} and
-#' \eqn{\text{scale} = 1.0507009873554804934193349852946}.
+#' \eqn{\mbox{scale} = 1.0507009873554804934193349852946}.
 #' 
 #' More details can be found in the paper 
 #' [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515).
@@ -458,7 +462,7 @@ nn_glu <- nn_module(
 #' GELU module
 #' 
 #' Applies the Gaussian Error Linear Units function:
-#'   \deqn{\text{GELU}(x) = x * \Phi(x)}
+#'   \deqn{\mbox{GELU}(x) = x * \Phi(x)}
 #' 
 #' where \eqn{\Phi(x)} is the Cumulative Distribution Function for Gaussian Distribution.
 #' 
@@ -486,12 +490,13 @@ nn_gelu <- nn_module(
 #' Applies the hard shrinkage function element-wise:
 #' 
 #' \deqn{
-#'   \text{HardShrink}(x) =
-#'   \begin{cases}
-#' x, & \text{ if } x > \lambda \\
-#' x, & \text{ if } x < -\lambda \\
-#' 0, & \text{ otherwise }
-#' \end{cases}
+#'   \mbox{HardShrink}(x) =
+#'   \left\{ \begin{array}{ll}
+#' x, & \mbox{ if } x > \lambda \\
+#' x, & \mbox{ if } x < -\lambda \\
+#' 0, & \mbox{ otherwise }
+#' \end{array}
+#' \right.
 #' }
 #' 
 #' @param lambd the \eqn{\lambda} value for the Hardshrink formulation. Default: 0.5
@@ -523,16 +528,17 @@ nn_hardshrink <- nn_module(
 #' Applies the element-wise function:
 #'
 #' \deqn{
-#'   \text{LeakyReLU}(x) = \max(0, x) + \text{negative\_slope} * \min(0, x)
+#'   \mbox{LeakyReLU}(x) = \max(0, x) + \mbox{negative\_slope} * \min(0, x)
 #' }
 #' or
 #' 
 #' \deqn{
-#'   \text{LeakyRELU}(x) =
-#'   \begin{cases}
-#' x, & \text{ if } x \geq 0 \\
-#' \text{negative\_slope} \times x, & \text{ otherwise }
-#' \end{cases}
+#'   \mbox{LeakyRELU}(x) =
+#'   \left\{ \begin{array}{ll}
+#' x, & \mbox{ if } x \geq 0 \\
+#' \mbox{negative\_slope} \times x, & \mbox{ otherwise }
+#' \end{array}
+#' \right.
 #' }
 #' 
 #' @param negative_slope Controls the angle of the negative slope. Default: 1e-2
@@ -565,7 +571,7 @@ nn_leaky_relu <- nn_module(
 #' 
 #' Applies the element-wise function:
 #' \deqn{
-#'   \text{LogSigmoid}(x) = \log\left(\frac{ 1 }{ 1 + \exp(-x)}\right)
+#'   \mbox{LogSigmoid}(x) = \log\left(\frac{ 1 }{ 1 + \exp(-x)}\right)
 #'  }
 #'
 #' @section Shape:
@@ -592,7 +598,7 @@ nn_log_sigmoid <- nn_module(
 #' 
 #' Applies the element-wise function:
 #' \deqn{
-#'   \text{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))
+#'   \mbox{Softplus}(x) = \frac{1}{\beta} * \log(1 + \exp(\beta * x))
 #' }
 #' 
 #' SoftPlus is a smooth approximation to the ReLU function and can be used
@@ -631,13 +637,13 @@ nn_softplus <- nn_module(
 #' Applies the soft shrinkage function elementwise:
 #' 
 #' \deqn{
-#'   \text{SoftShrinkage}(x) =
-#'   \begin{cases}
-#' x - \lambda, & \text{ if } x > \lambda \\
-#' x + \lambda, & \text{ if } x < -\lambda \\
-#' 0, & \text{ otherwise }
-#' \end{cases}
-#' 
+#'   \mbox{SoftShrinkage}(x) =
+#'   \left\{ \begin{array}{ll}
+#' x - \lambda, & \mbox{ if } x > \lambda \\
+#' x + \lambda, & \mbox{ if } x < -\lambda \\
+#' 0, & \mbox{ otherwise }
+#' \end{array}
+#' \right.
 #' }
 #' 
 #' @param lambd the \eqn{\lambda} (must be no less than zero) value for the Softshrink formulation. Default: 0.5
@@ -670,8 +676,8 @@ nn_softshrink <- nn_module(
 #' See reference: Attention Is All You Need
 #' 
 #' \deqn{
-#'   \text{MultiHead}(Q, K, V) = \text{Concat}(head_1,\dots,head_h)W^O
-#' \text{where} head_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)
+#'   \mbox{MultiHead}(Q, K, V) = \mbox{Concat}(head_1,\dots,head_h)W^O
+#' \mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V)
 #' }
 #' 
 #' @param embed_dim total dimension of the model.
@@ -832,15 +838,16 @@ nn_multihead_attention <- nn_module(
 #' 
 #' Applies the element-wise function:
 #' \deqn{
-#'   \text{PReLU}(x) = \max(0,x) + a * \min(0,x)
+#'   \mbox{PReLU}(x) = \max(0,x) + a * \min(0,x)
 #' }
 #' or
 #' \deqn{
-#'   \text{PReLU}(x) =
-#'   \begin{cases}
-#' x, & \text{ if } x \geq 0 \\
-#' ax, & \text{ otherwise }
-#' \end{cases}
+#'   \mbox{PReLU}(x) =
+#'   \left\{ \begin{array}{ll}
+#' x, & \mbox{ if } x \geq 0 \\
+#' ax, & \mbox{ otherwise }
+#' \end{array}
+#' \right.
 #' }
 #' 
 #' Here \eqn{a} is a learnable parameter. When called without arguments, `nn.prelu()` uses a single
@@ -888,7 +895,7 @@ nn_prelu <- nn_module(
 #' 
 #' Applies the element-wise function:
 #' \deqn{
-#'   \text{SoftSign}(x) = \frac{x}{ 1 + |x|}
+#'   \mbox{SoftSign}(x) = \frac{x}{ 1 + |x|}
 #' }
 #' 
 #' @section Shape:
@@ -916,7 +923,7 @@ nn_softsign <- nn_module(
 #' Applies the element-wise function:
 #'
 #' \deqn{
-#'   \text{Tanhshrink}(x) = x - \tanh(x)
+#'   \mbox{Tanhshrink}(x) = x - \tanh(x)
 #' }
 #' 
 #' @section Shape:
@@ -946,7 +953,7 @@ nn_tanhshrink <- nn_module(
 #' Softmin is defined as:
 #' 
 #' \deqn{
-#'   \text{Softmin}(x_{i}) = \frac{\exp(-x_i)}{\sum_j \exp(-x_j)}
+#'   \mbox{Softmin}(x_{i}) = \frac{\exp(-x_i)}{\sum_j \exp(-x_j)}
 #' }
 #' 
 #' @section Shape:
@@ -960,7 +967,7 @@ nn_tanhshrink <- nn_module(
 #'    
 #' @return     
 #' a Tensor of the same dimension and shape as the input, with
-#' values in the range [0, 1]
+#' values in the range `[0, 1]`.
 #' 
 #' @examples
 #' m <- nn_softmin(dim = 1)
@@ -982,11 +989,11 @@ nn_softmin <- nn_module(
 #' 
 #' Applies the Softmax function to an n-dimensional input Tensor
 #' rescaling them so that the elements of the n-dimensional output Tensor
-#' lie in the range [0,1] and sum to 1.
+#' lie in the range `[0,1]` and sum to 1.
 #' Softmax is defined as:
 #'
 #' \deqn{
-#'   \text{Softmax}(x_{i}) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}
+#'   \mbox{Softmax}(x_{i}) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}
 #' }
 #' 
 #' When the input Tensor is a sparse tensor then the unspecifed
@@ -1000,7 +1007,7 @@ nn_softmin <- nn_module(
 #' 
 #' @return:
 #' a Tensor of the same dimension and shape as the input with
-#' values in the range [0, 1]
+#' values in the range `[0, 1]`
 #' 
 #' @param dim (int): A dimension along which Softmax will be computed (so every slice
 #'                                                                along dim will sum to 1).
@@ -1037,7 +1044,7 @@ nn_softmax <- nn_module(
 #' 
 #' @return 
 #' a Tensor of the same dimension and shape as the input with
-#' values in the range [0, 1]
+#' values in the range `[0, 1]`
 #' 
 #' @examples
 #' m <- nn_softmax2d()
@@ -1055,11 +1062,11 @@ nn_softmax2d <- nn_module(
 
 #' LogSoftmax module
 #' 
-#' Applies the \eqn{\log(\text{Softmax}(x))} function to an n-dimensional
+#' Applies the \eqn{\log(\mbox{Softmax}(x))} function to an n-dimensional
 #' input Tensor. The LogSoftmax formulation can be simplified as:
 #' 
 #' \deqn{
-#'   \text{LogSoftmax}(x_{i}) = \log\left(\frac{\exp(x_i) }{ \sum_j \exp(x_j)} \right)
+#'   \mbox{LogSoftmax}(x_{i}) = \log\left(\frac{\exp(x_i) }{ \sum_j \exp(x_j)} \right)
 #' }
 #' 
 #' @section Shape:

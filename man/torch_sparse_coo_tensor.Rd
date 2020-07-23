@@ -13,7 +13,7 @@
 
 \item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if None, infers data type from \code{values}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see \code{\link{torch_set_default_tensor_type}}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
 }
@@ -30,6 +30,7 @@ coordinates in the indices, and the value at that index is the sum of all duplic
 }
 
 \examples{
+\dontrun{
 
 i = torch_tensor(matrix(c(1, 2, 2, 3, 1, 3), ncol = 3, byrow = TRUE), dtype=torch_int64())
 v = torch_tensor(c(3, 4, 5), dtype=torch_float32())
@@ -47,4 +48,5 @@ S = torch_sparse_coo_tensor(
   torch_empty(c(0, 2)), 
   c(1, 2)
 )
+}
 }

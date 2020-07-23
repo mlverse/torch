@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -206,14 +206,14 @@ expression:</p>
 $$
 where \(d\) = <code>signal_ndim</code> is number of dimensions for the
 signal, and \(N_i\) is the size of signal dimension \(i\).</p>
-<p>The argument specifications are almost identical with <code>~torch.fft</code>.
+<p>The argument specifications are almost identical with <code><a href='torch_fft.html'>torch_fft</a></code>.
 However, if <code>normalized</code> is set to <code>True</code>, this instead returns the
 results multiplied by \(\sqrt{\prod_{i=1}^d N_i}\), to become a unitary
-operator. Therefore, to invert a <code>~torch.fft</code>, the <code>normalized</code>
-argument should be set identically for <code>~torch.fft</code>.</p>
+operator. Therefore, to invert a <code><a href='torch_fft.html'>torch_fft</a></code>, the <code>normalized</code>
+argument should be set identically for <code><a href='torch_fft.html'>torch_fft</a></code>.</p>
 <p>Returns the real and the imaginary parts together as one tensor of the same
 shape of <code>input</code>.</p>
-<p>The inverse of this function is <code>~torch.fft</code>.</p>
+<p>The inverse of this function is <code><a href='torch_fft.html'>torch_fft</a></code>.</p>
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     
@@ -222,40 +222,42 @@ shape of <code>input</code>.</p>
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.4062 -0.2354
-#&gt;  -1.2707 -0.3361
-#&gt;   0.2922 -0.0773
+#&gt;  -0.4097 -0.4074
+#&gt;   0.4656  0.3306
+#&gt;  -0.5886 -2.1190
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.1522 -0.0668
-#&gt;   0.0305 -2.4557
-#&gt;  -0.1068 -1.2970
+#&gt;   0.3168 -1.2703
+#&gt;  -0.7706 -0.4545
+#&gt;   0.5461  1.3650
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.4609  0.7996
-#&gt;   1.3249 -0.5632
-#&gt;   0.8546 -0.2419
+#&gt;  -0.0778 -0.2976
+#&gt;  -0.1324  0.2705
+#&gt;   1.3860 -0.0941
 #&gt; [ CPUFloatType{3,3,2} ]</div><div class='input'><span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_fft.html'>torch_fft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>)
 <span class='fu'>torch_ifft</span>(<span class='no'>y</span>, <span class='fl'>2</span>)  <span class='co'># recover x</span></div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.4062 -0.2354
-#&gt;  -1.2707 -0.3361
-#&gt;   0.2922 -0.0773
+#&gt;  -0.4097 -0.4074
+#&gt;   0.4656  0.3306
+#&gt;  -0.5886 -2.1190
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.1522 -0.0668
-#&gt;   0.0305 -2.4557
-#&gt;  -0.1068 -1.2970
+#&gt;   0.3168 -1.2703
+#&gt;  -0.7706 -0.4545
+#&gt;   0.5461  1.3650
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.4609  0.7996
-#&gt;   1.3249 -0.5632
-#&gt;   0.8546 -0.2419
-#&gt; [ CPUFloatType{3,3,2} ]</div></pre>
+#&gt;  -0.0778 -0.2976
+#&gt;  -0.1324  0.2705
+#&gt;   1.3860 -0.0941
+#&gt; [ CPUFloatType{3,3,2} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

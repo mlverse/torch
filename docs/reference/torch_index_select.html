@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -203,21 +203,23 @@ storage if necessary.</p>
 of <code>index</code>; other dimensions have the same size as in the original tensor.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>x</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4119 -0.9084 -0.2058  0.6623
-#&gt; -0.7713  1.2502 -1.3211 -0.3917
-#&gt; -0.7180  1.0813 -0.4049  0.6989
-#&gt; [ CPUFloatType{3,4} ]</div><div class='input'><span class='no'>indices</span> <span class='kw'>=</span> <span class='fu'>torch_tensor</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'>torch_int64</span>())
-<span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>0</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4119 -0.9084 -0.2058  0.6623
-#&gt; -0.7180  1.0813 -0.4049  0.6989
-#&gt; [ CPUFloatType{2,4} ]</div><div class='input'><span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.4119 -0.2058
-#&gt; -0.7713 -1.3211
-#&gt; -0.7180 -0.4049
-#&gt; [ CPUFloatType{3,2} ]</div></pre>
+#&gt; -0.6090  0.2050 -0.2528  0.6190
+#&gt;  0.3118  1.3114 -1.0626 -1.2048
+#&gt;  0.3125 -0.2527  0.4871 -0.3394
+#&gt; [ CPUFloatType{3,4} ]</div><div class='input'><span class='no'>indices</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>())
+<span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt; -0.6090  0.2050 -0.2528  0.6190
+#&gt;  0.3125 -0.2527  0.4871 -0.3394
+#&gt; [ CPUFloatType{2,4} ]</div><div class='input'><span class='fu'>torch_index_select</span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='no'>indices</span>)</div><div class='output co'>#&gt; torch_tensor 
+#&gt; -0.6090 -0.2528
+#&gt;  0.3118 -1.0626
+#&gt;  0.3125  0.4871
+#&gt; [ CPUFloatType{3,2} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

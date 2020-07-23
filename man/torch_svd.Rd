@@ -57,6 +57,7 @@ of shape \eqn{(m \times m)} and \eqn{(n \times n)} respectively. \code{some} wil
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(5, 3))
 a
@@ -71,4 +72,5 @@ u = out[[1]]
 s = out[[2]]
 v = out[[3]]
 torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v$transpose(-2, -1)))
+}
 }

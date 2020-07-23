@@ -17,13 +17,16 @@ Lt
 \section{lt(input, other, out=None) -> Tensor }{
 
 
-Computes \eqn{\text{input} < \text{other}} element-wise.
+Computes \eqn{\mbox{input} < \mbox{other}} element-wise.
 
 The second argument can be a number or a tensor whose shape is
 broadcastable  with the first argument.
 }
 
 \examples{
+\dontrun{
 
-torch_lt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+torch_lt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+         torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+}
 }

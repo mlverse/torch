@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -184,23 +184,25 @@
 
 <p>Returns a new tensor with the sigmoid of the elements of <code>input</code>.</p>
 <p>$$
-    \text{out}_{i} = \frac{1}{1 + e^{-\text{input}_{i}}}
+    \mbox{out}_{i} = \frac{1}{1 + e^{-\mbox{input}_{i}}}
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
 <span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6076
-#&gt;  0.6178
-#&gt;  0.7173
-#&gt; -0.6411
+#&gt;  2.1600
+#&gt; -1.3253
+#&gt; -0.1559
+#&gt;  0.1856
 #&gt; [ CPUFloatType{4} ]</div><div class='input'><span class='fu'>torch_sigmoid</span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6474
-#&gt;  0.6497
-#&gt;  0.6720
-#&gt;  0.3450
-#&gt; [ CPUFloatType{4} ]</div></pre>
+#&gt;  0.8966
+#&gt;  0.2099
+#&gt;  0.4611
+#&gt;  0.5463
+#&gt; [ CPUFloatType{4} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

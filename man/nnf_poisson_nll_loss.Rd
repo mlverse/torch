@@ -14,12 +14,12 @@ nnf_poisson_nll_loss(
 )
 }
 \arguments{
-\item{input}{tensor (N,∗) where *∗ means, any number of additional dimensions}
+\item{input}{tensor (N,*) where ** means, any number of additional dimensions}
 
-\item{target}{tensor (N,∗) , same shape as the input}
+\item{target}{tensor (N,*) , same shape as the input}
 
-\item{log_input}{if \code{TRUE} the loss is computed as \eqn{\exp(\text{input}) - \text{target} * \text{input}},
-if \code{FALSE} then loss is \eqn{\text{input} - \text{target} * \log(\text{input}+\text{eps})}.
+\item{log_input}{if \code{TRUE} the loss is computed as \eqn{\exp(\mbox{input}) - \mbox{target} * \mbox{input}},
+if \code{FALSE} then loss is \eqn{\mbox{input} - \mbox{target} * \log(\mbox{input}+\mbox{eps})}.
 Default: \code{TRUE}.}
 
 \item{full}{whether to compute full loss, i. e. to add the Stirling approximation

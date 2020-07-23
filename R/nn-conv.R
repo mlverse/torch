@@ -69,13 +69,13 @@ nn_conv_nd <- nn_module(
 #' Applies a 1D convolution over an input signal composed of several input
 #' planes.
 #' In the simplest case, the output value of the layer with input size
-#' \eqn{(N, C_{\text{in}}, L)} and output \eqn{(N, C_{\text{out}}, L_{\text{out}})} can be
+#' \eqn{(N, C_{\mbox{in}}, L)} and output \eqn{(N, C_{\mbox{out}}, L_{\mbox{out}})} can be
 #' precisely described as:
 #' 
 #' \deqn{
-#' \text{out}(N_i, C_{\text{out}_j}) = \text{bias}(C_{\text{out}_j}) +
-#'   \sum_{k = 0}^{C_{in} - 1} \text{weight}(C_{\text{out}_j}, k)
-#' \star \text{input}(N_i, k)
+#' \mbox{out}(N_i, C_{\mbox{out}_j}) = \mbox{bias}(C_{\mbox{out}_j}) +
+#'   \sum_{k = 0}^{C_{in} - 1} \mbox{weight}(C_{\mbox{out}_j}, k)
+#' \star \mbox{input}(N_i, k)
 #' }
 #' 
 #' where \eqn{\star} is the valid 
@@ -115,7 +115,7 @@ nn_conv_nd <- nn_module(
 #' literature as depthwise convolution.
 #' In other words, for an input of size \eqn{(N, C_{in}, L_{in})},
 #' a depthwise convolution with a depthwise multiplier `K`, can be constructed by arguments
-#' \eqn{(C_\text{in}=C_{in}, C_\text{out}=C_{in} \times K, ..., \text{groups}=C_{in})}.
+#' \eqn{(C_{\mbox{in}}=C_{in}, C_{\mbox{out}}=C_{in} \times K, ..., \mbox{groups}=C_{in})}.
 #' 
 #' @param in_channels (int): Number of channels in the input image
 #' @param out_channels (int): Number of channels produced by the convolution
@@ -138,23 +138,21 @@ nn_conv_nd <- nn_module(
 #' - Output: \eqn{(N, C_{out}, L_{out})} where
 #' 
 #' \deqn{
-#'
-#'   L_{out} = \left\lfloor\frac{L_{in} + 2 \times \text{padding} - \text{dilation}
-#'     \times (\text{kernel\_size} - 1) - 1}{\text{stride}} + 1\right\rfloor
-#'     
+#'   L_{out} = \left\lfloor\frac{L_{in} + 2 \times \mbox{padding} - \mbox{dilation}
+#'     \times (\mbox{kernel\_size} - 1) - 1}{\mbox{stride}} + 1\right\rfloor
 #' }
 #' 
 #' @section Attributes:
 #'   
 #' - weight (Tensor): the learnable weights of the module of shape
-#' \eqn{(\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}}, \text{kernel\_size})}.
+#' \eqn{(\mbox{out\_channels}, \frac{\mbox{in\_channels}}{\mbox{groups}}, \mbox{kernel\_size})}.
 #' The values of these weights are sampled from
 #' \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#' \eqn{k = \frac{groups}{C_\text{in} * \text{kernel\_size}}}
+#' \eqn{k = \frac{groups}{C_{\mbox{in}} * \mbox{kernel\_size}}}
 #' - bias (Tensor): the learnable bias of the module of shape
 #' (out_channels). If `bias` is `TRUE`, then the values of these weights are
 #' sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#' \eqn{k = \frac{groups}{C_\text{in} * \text{kernel\_size}}}
+#' \eqn{k = \frac{groups}{C_{\mbox{in}} * \mbox{kernel\_size}}}
 #' 
 #' @examples 
 #' m <- nn_conv1d(16, 33, 3, stride=2)
@@ -195,12 +193,12 @@ nn_conv1d <- nn_module(
 #' planes.
 #' 
 #' In the simplest case, the output value of the layer with input size
-#' \eqn{(N, C_{\text{in}}, H, W)} and output \eqn{(N, C_{\text{out}}, H_{\text{out}}, W_{\text{out}})}
+#' \eqn{(N, C_{\mbox{in}}, H, W)} and output \eqn{(N, C_{\mbox{out}}, H_{\mbox{out}}, W_{\mbox{out}})}
 #' can be precisely described as:
 #' 
 #' \deqn{
-#' \text{out}(N_i, C_{\text{out}_j}) = \text{bias}(C_{\text{out}_j}) +
-#'   \sum_{k = 0}^{C_{\text{in}} - 1} \text{weight}(C_{\text{out}_j}, k) \star \text{input}(N_i, k)
+#' \mbox{out}(N_i, C_{\mbox{out}_j}) = \mbox{bias}(C_{\mbox{out}_j}) +
+#'   \sum_{k = 0}^{C_{\mbox{in}} - 1} \mbox{weight}(C_{\mbox{out}_j}, k) \star \mbox{input}(N_i, k)
 #' }
 #' 
 #' where \eqn{\star} is the valid 2D cross-correlation operator,
@@ -257,41 +255,41 @@ nn_conv1d <- nn_module(
 #' @param out_channels (int): Number of channels produced by the convolution
 #' @param kernel_size (int or tuple): Size of the convolving kernel
 #' @param stride (int or tuple, optional): Stride of the convolution. Default: 1
-#'   padding (int or tuple, optional): Zero-padding added to both sides of
+#' @param padding (int or tuple, optional): Zero-padding added to both sides of
 #'   the input. Default: 0
 #' @param padding_mode (string, optional): `'zeros'`, `'reflect'`,
 #'   `'replicate'` or `'circular'`. Default: `'zeros'`
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
 #' @param groups (int, optional): Number of blocked connections from input
 #'   channels to output channels. Default: 1
-#' @param sbias (bool, optional): If `TRUE`, adds a learnable bias to the
+#' @param bias (bool, optional): If `TRUE`, adds a learnable bias to the
 #'   output. Default: `TRUE`
 #'   
 #' @section Shape:
 #' - Input: \eqn{(N, C_{in}, H_{in}, W_{in})}
 #' - Output: \eqn{(N, C_{out}, H_{out}, W_{out})} where
 #' \deqn{
-#'   H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \text{padding}[0] - \text{dilation}[0]
-#'     \times (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+#'   H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \mbox{padding}[0] - \mbox{dilation}[0]
+#'     \times (\mbox{kernel\_size}[0] - 1) - 1}{\mbox{stride}[0]} + 1\right\rfloor
 #' }
 #' \deqn{
-#'   W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \text{padding}[1] - \text{dilation}[1]
-#'     \times (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+#'   W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \mbox{padding}[1] - \mbox{dilation}[1]
+#'     \times (\mbox{kernel\_size}[1] - 1) - 1}{\mbox{stride}[1]} + 1\right\rfloor
 #' }
 #' 
 #' @section Attributes:
 #' 
 #' - weight (Tensor): the learnable weights of the module of shape
-#'   \eqn{(\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}}},
-#'   \eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]})}.
+#'   \eqn{(\mbox{out\_channels}, \frac{\mbox{in\_channels}}{\mbox{groups}}},
+#'   \eqn{\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]})}.
 #'   The values of these weights are sampled from
 #'   \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#'   \eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{1}\text{kernel\_size}[i]}}
+#'   \eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}}
 #' - bias (Tensor): the learnable bias of the module of shape
 #'   (out_channels). If `bias` is `TRUE`,
 #'   then the values of these weights are
 #'   sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#'   \eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{1}\text{kernel\_size}[i]}}
+#'   \eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}}
 #'   
 #' @examples 
 #' 
@@ -406,30 +404,30 @@ nn_conv2d <- nn_module(
 #' - Input: \eqn{(N, C_{in}, D_{in}, H_{in}, W_{in})}
 #' - Output: \eqn{(N, C_{out}, D_{out}, H_{out}, W_{out})} where
 #'  \deqn{
-#'   D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] - \text{dilation}[0]
-#'     \times (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+#'   D_{out} = \left\lfloor\frac{D_{in} + 2 \times \mbox{padding}[0] - \mbox{dilation}[0]
+#'     \times (\mbox{kernel\_size}[0] - 1) - 1}{\mbox{stride}[0]} + 1\right\rfloor
 #'  }
 #'  \deqn{
-#'   H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] - \text{dilation}[1]
-#'     \times (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+#'   H_{out} = \left\lfloor\frac{H_{in} + 2 \times \mbox{padding}[1] - \mbox{dilation}[1]
+#'     \times (\mbox{kernel\_size}[1] - 1) - 1}{\mbox{stride}[1]} + 1\right\rfloor
 #'  }
 #'  \deqn{
-#'   W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] - \text{dilation}[2]
-#'     \times (\text{kernel\_size}[2] - 1) - 1}{\text{stride}[2]} + 1\right\rfloor
+#'   W_{out} = \left\lfloor\frac{W_{in} + 2 \times \mbox{padding}[2] - \mbox{dilation}[2]
+#'     \times (\mbox{kernel\_size}[2] - 1) - 1}{\mbox{stride}[2]} + 1\right\rfloor
 #'  }
 #' 
 #' @section Attributes:
 #' 
 #' - weight (Tensor): the learnable weights of the module of shape
-#' \eqn{(\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}},}
-#' \eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]}, \text{kernel\_size[2]})}.
+#' \eqn{(\mbox{out\_channels}, \frac{\mbox{in\_channels}}{\mbox{groups}},}
+#' \eqn{\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]}, \mbox{kernel\_size[2]})}.
 #' The values of these weights are sampled from
 #' \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#' \eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+#' \eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 #' - bias (Tensor):   the learnable bias of the module of shape (out_channels). If `bias` is ``True``,
 #' then the values of these weights are
 #' sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#' \eqn{k = \frac{groups}{C_\text{in} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+#' \eqn{k = \frac{groups}{C_{\mbox{in}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 #' 
 #' @examples
 #' # With square kernels and equal stride
@@ -597,27 +595,28 @@ nn_conv_transpose_nd <- nn_module(
 #' @param groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
 #' @param bias (bool, optional): If `True`, adds a learnable bias to the output. Default: `TRUE`
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#' @inheritParams nn_conv1d
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, C_{in}, L_{in})}
 #' - Output: \eqn{(N, C_{out}, L_{out})} where
 #' \deqn{
-#'   L_{out} = (L_{in} - 1) \times \text{stride} - 2 \times \text{padding} + \text{dilation}
-#' \times (\text{kernel\_size} - 1) + \text{output\_padding} + 1
+#'   L_{out} = (L_{in} - 1) \times \mbox{stride} - 2 \times \mbox{padding} + \mbox{dilation}
+#' \times (\mbox{kernel\_size} - 1) + \mbox{output\_padding} + 1
 #' }
 #' 
 #' @section Attributes:
 #' - weight (Tensor): the learnable weights of the module of shape
-#' \eqn{(\text{in\_channels}, \frac{\text{out\_channels}}{\text{groups}},}
-#' \eqn{\text{kernel\_size})}.
+#' \eqn{(\mbox{in\_channels}, \frac{\mbox{out\_channels}}{\mbox{groups}},}
+#' \eqn{\mbox{kernel\_size})}.
 #' The values of these weights are sampled from
 #' \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#' \eqn{k = \frac{groups}{C_\text{out} * \text{kernel\_size}}}
+#' \eqn{k = \frac{groups}{C_{\mbox{out}} * \mbox{kernel\_size}}}
 #' 
 #' - bias (Tensor):   the learnable bias of the module of shape (out_channels).
 #' If `bias` is `TRUE`, then the values of these weights are
 #' sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#' \eqn{k = \frac{groups}{C_\text{out} * \text{kernel\_size}}}
+#' \eqn{k = \frac{groups}{C_{\mbox{out}} * \mbox{kernel\_size}}}
 #' 
 #' @examples
 #' m <- nn_conv_transpose1d(32, 16, 2)
@@ -726,30 +725,31 @@ nn_conv_transpose1d <- nn_module(
 #' @param groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
 #' @param bias (bool, optional): If ``True``, adds a learnable bias to the output. Default: ``True``
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#' @inheritParams nn_conv2d
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, C_{in}, H_{in}, W_{in})}
 #' - Output: \eqn{(N, C_{out}, H_{out}, W_{out})} where
 #' \deqn{
-#'   H_{out} = (H_{in} - 1) \times \text{stride}[0] - 2 \times \text{padding}[0] + \text{dilation}[0]
-#' \times (\text{kernel\_size}[0] - 1) + \text{output\_padding}[0] + 1
+#'   H_{out} = (H_{in} - 1) \times \mbox{stride}[0] - 2 \times \mbox{padding}[0] + \mbox{dilation}[0]
+#' \times (\mbox{kernel\_size}[0] - 1) + \mbox{output\_padding}[0] + 1
 #' }
 #' \deqn{
-#'   W_{out} = (W_{in} - 1) \times \text{stride}[1] - 2 \times \text{padding}[1] + \text{dilation}[1]
-#' \times (\text{kernel\_size}[1] - 1) + \text{output\_padding}[1] + 1
+#'   W_{out} = (W_{in} - 1) \times \mbox{stride}[1] - 2 \times \mbox{padding}[1] + \mbox{dilation}[1]
+#' \times (\mbox{kernel\_size}[1] - 1) + \mbox{output\_padding}[1] + 1
 #' }
 #' 
 #' @section Attributes:
 #' - weight (Tensor): the learnable weights of the module of shape
-#'   \eqn{(\text{in\_channels}, \frac{\text{out\_channels}}{\text{groups}},}
-#'   \eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]})}.
+#'   \eqn{(\mbox{in\_channels}, \frac{\mbox{out\_channels}}{\mbox{groups}},}
+#'   \eqn{\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]})}.
 #'   The values of these weights are sampled from
 #'   \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#'   \eqn{k = \frac{groups}{C_\text{out} * \prod_{i=0}^{1}\text{kernel\_size}[i]}}
+#'   \eqn{k = \frac{groups}{C_{\mbox{out}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}}
 #' - bias (Tensor):   the learnable bias of the module of shape (out_channels)
 #'   If `bias` is ``True``, then the values of these weights are
 #'   sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#'   \eqn{k = \frac{groups}{C_\text{out} * \prod_{i=0}^{1}\text{kernel\_size}[i]}}
+#'   \eqn{k = \frac{groups}{C_{\mbox{out}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}}
 #' 
 #' @examples
 #' # With square kernels and equal stride
@@ -882,43 +882,46 @@ nn_conv_transpose2d <- nn_module(
 #' @param groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
 #' @param bias (bool, optional): If ``True``, adds a learnable bias to the output. Default: ``True``
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
+#' @inheritParams nn_conv3d
+#' @inheritParams nn_conv_transpose2d
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, C_{in}, D_{in}, H_{in}, W_{in})}
 #' - Output: \eqn{(N, C_{out}, D_{out}, H_{out}, W_{out})} where
 #' \deqn{
-#'   D_{out} = (D_{in} - 1) \times \text{stride}[0] - 2 \times \text{padding}[0] + \text{dilation}[0]
-#' \times (\text{kernel\_size}[0] - 1) + \text{output\_padding}[0] + 1
+#'   D_{out} = (D_{in} - 1) \times \mbox{stride}[0] - 2 \times \mbox{padding}[0] + \mbox{dilation}[0]
+#' \times (\mbox{kernel\_size}[0] - 1) + \mbox{output\_padding}[0] + 1
 #' }
 #' \deqn{
-#'   H_{out} = (H_{in} - 1) \times \text{stride}[1] - 2 \times \text{padding}[1] + \text{dilation}[1]
-#' \times (\text{kernel\_size}[1] - 1) + \text{output\_padding}[1] + 1
+#'   H_{out} = (H_{in} - 1) \times \mbox{stride}[1] - 2 \times \mbox{padding}[1] + \mbox{dilation}[1]
+#' \times (\mbox{kernel\_size}[1] - 1) + \mbox{output\_padding}[1] + 1
 #' }
 #' \deqn{
-#'   W_{out} = (W_{in} - 1) \times \text{stride}[2] - 2 \times \text{padding}[2] + \text{dilation}[2]
-#' \times (\text{kernel\_size}[2] - 1) + \text{output\_padding}[2] + 1
+#'   W_{out} = (W_{in} - 1) \times \mbox{stride}[2] - 2 \times \mbox{padding}[2] + \mbox{dilation}[2]
+#' \times (\mbox{kernel\_size}[2] - 1) + \mbox{output\_padding}[2] + 1
 #' }
 #' 
 #' @section Attributes:
 #' - weight (Tensor): the learnable weights of the module of shape
-#'   \eqn{(\text{in\_channels}, \frac{\text{out\_channels}}{\text{groups}},}
-#'   \eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]}, \text{kernel\_size[2]})}.
+#'   \eqn{(\mbox{in\_channels}, \frac{\mbox{out\_channels}}{\mbox{groups}},}
+#'   \eqn{\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]}, \mbox{kernel\_size[2]})}.
 #'   The values of these weights are sampled from
 #'   \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#'   \eqn{k = \frac{groups}{C_\text{out} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+#'   \eqn{k = \frac{groups}{C_{\mbox{out}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 #' - bias (Tensor):   the learnable bias of the module of shape (out_channels)
 #'   If `bias` is ``True``, then the values of these weights are
 #'   sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-#'   \eqn{k = \frac{groups}{C_\text{out} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+#'   \eqn{k = \frac{groups}{C_{\mbox{out}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 #' 
 #' @examples
+#' \dontrun{
 #' # With square kernels and equal stride
 #' m <- nn_conv_transpose3d(16, 33, 3, stride=2)
 #' # non-square kernels and unequal stride and with padding
 #' m <- nn_conv_transpose3d(16, 33, c(3, 5, 2), stride=c(2, 1, 1), padding=c(0, 4, 2))
 #' input <- torch_randn(20, 16, 10, 50, 100)
 #' output <- m(input)
-#' 
+#' }
 #' @export
 nn_conv_transpose3d <- nn_module(
   "nn_conv_transpose3d",

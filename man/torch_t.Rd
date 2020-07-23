@@ -21,6 +21,7 @@ is equivalent to \code{transpose(input, 0, 1)}.
 }
 
 \examples{
+\dontrun{
 
 x = torch_randn(c(2,3))
 x
@@ -31,4 +32,5 @@ torch_t(x)
 x = torch_randn(c(2, 3))
 x
 torch_t(x)
+}
 }

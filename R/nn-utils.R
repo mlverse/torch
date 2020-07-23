@@ -6,7 +6,7 @@ list_with_default <- function(out_size, defaults) {
   if (length(defaults) >= length(out_size))
     value_error("Input dimension should be at least {lenght(out_size) + 1}.")
   
-  defaults <- tail(defaults, length(out_size))
+  defaults <- utils::tail(defaults, length(out_size))
     
   sapply(
     seq_along(out_size),

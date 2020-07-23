@@ -74,7 +74,7 @@ is set to True." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -174,7 +174,7 @@ is set to True.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>A</th>
-      <td><p>(Tensor) the tensor to factor of size (*, m, n)(∗,m,n)</p></td>
+      <td><p>(Tensor) the tensor to factor of size (<em>, m, n)(</em>,m,n)</p></td>
     </tr>
     <tr>
       <th>pivot</th>
@@ -194,27 +194,29 @@ elements in the tuple are Tensor, IntTensor. Default: NULL</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
 <span class='fu'>torch_lu</span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.5305 -0.3348 -0.7597
-#&gt;   0.0268 -1.0705  0.0767
-#&gt;   0.1101  0.1310  1.3839
+#&gt;   1.5274 -0.8578 -1.5278
+#&gt;  -0.5446  0.3682 -0.1468
+#&gt;   0.6892  0.4103  1.5956
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.8160  1.3587  0.1823
-#&gt;  -0.4780  0.1452  0.8229
-#&gt;   0.0003 -0.7425 -0.3819
+#&gt;  -1.3121 -0.1896 -2.3469
+#&gt;  -0.7969  1.0315 -0.9561
+#&gt;   0.7149 -0.0635  1.4525
 #&gt; [ CPUFloatType{2,3,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  2  2  3
-#&gt;  2  2  3
+#&gt;  3  2  3
+#&gt;  3  2  3
 #&gt; [ CPUIntType{2,3} ]
 #&gt; </div><div class='input'>
+# }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

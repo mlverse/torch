@@ -4,7 +4,17 @@
 \alias{nn_rnn}
 \title{RNN module}
 \usage{
-nn_rnn(...)
+nn_rnn(
+  input_size,
+  hidden_size,
+  num_layers = 1,
+  nonlinearity = NULL,
+  bias = TRUE,
+  batch_first = FALSE,
+  dropout = 0,
+  bidirectional = FALSE,
+  ...
+)
 }
 \arguments{
 \item{input_size}{The number of expected features in the input \code{x}}
@@ -29,10 +39,12 @@ as \verb{(batch, seq, feature)}. Default: \code{FALSE}}
 RNN layer except the last layer, with dropout probability equal to
 \code{dropout}. Default: 0}
 
-\item{bidirectional:}{If \code{TRUE}, becomes a bidirectional RNN. Default: \code{FALSE}}
+\item{bidirectional}{If \code{TRUE}, becomes a bidirectional RNN. Default: \code{FALSE}}
+
+\item{...}{other arguments that can be passed to the super class.}
 }
 \description{
-Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\text{ReLU}} non-linearity
+Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\mbox{ReLU}} non-linearity
 to an input sequence.
 }
 \details{
@@ -46,7 +58,7 @@ h_t = \tanh(W_{ih} x_t + b_{ih} + W_{hh} h_{(t-1)} + b_{hh})
 where \eqn{h_t} is the hidden state at time \code{t}, \eqn{x_t} is
 the input at time \code{t}, and \eqn{h_{(t-1)}} is the hidden state of the
 previous layer at time \code{t-1} or the initial hidden state at time \code{0}.
-If \code{nonlinearity} is \code{'relu'}, then \eqn{\text{ReLU}} is used instead of
+If \code{nonlinearity} is \code{'relu'}, then \eqn{\mbox{ReLU}} is used instead of
 \eqn{\tanh}.
 }
 \section{Inputs}{
@@ -84,13 +96,13 @@ Like \emph{output}, the layers can be separated using
 
 \itemize{
 \item Input1: \eqn{(L, N, H_{in})} tensor containing input features where
-\eqn{H_{in}=\text{input_size}} and \code{L} represents a sequence length.
+\eqn{H_{in}=\mbox{input\_size}} and \code{L} represents a sequence length.
 \item Input2: \eqn{(S, N, H_{out})} tensor
 containing the initial hidden state for each element in the batch.
-\eqn{H_{out}=\text{hidden_size}}
-Defaults to zero if not provided. where \eqn{S=\text{num_layers} * \text{num_directions}}
+\eqn{H_{out}=\mbox{hidden\_size}}
+Defaults to zero if not provided. where \eqn{S=\mbox{num\_layers} * \mbox{num\_directions}}
 If the RNN is bidirectional, num_directions should be 2, else it should be 1.
-\item Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\text{num_directions} * \text{hidden_size}}
+\item Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\mbox{num\_directions} * \mbox{hidden\_size}}
 \item Output2: \eqn{(S, N, H_{out})} tensor containing the next hidden state
 for each element in the batch
 }
@@ -99,14 +111,14 @@ for each element in the batch
 \section{Attributes}{
 
 \itemize{
-\item weight_ih_l\link{k}: the learnable input-hidden weights of the k-th layer,
+\item \code{weight_ih_l[k]}: the learnable input-hidden weights of the k-th layer,
 of shape \verb{(hidden_size, input_size)} for \code{k = 0}. Otherwise, the shape is
 \verb{(hidden_size, num_directions * hidden_size)}
-\item weight_hh_l\link{k}: the learnable hidden-hidden weights of the k-th layer,
+\item \code{weight_hh_l[k]}: the learnable hidden-hidden weights of the k-th layer,
 of shape \verb{(hidden_size, hidden_size)}
-\item bias_ih_l\link{k}: the learnable input-hidden bias of the k-th layer,
+\item \code{bias_ih_l[k]}: the learnable input-hidden bias of the k-th layer,
 of shape \code{(hidden_size)}
-\item bias_hh_l\link{k}: the learnable hidden-hidden bias of the k-th layer,
+\item \code{bias_hh_l[k]}: the learnable hidden-hidden bias of the k-th layer,
 of shape \code{(hidden_size)}
 }
 }
@@ -115,13 +127,15 @@ of shape \code{(hidden_size)}
 
 
 All the weights and biases are initialized from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}
-where \eqn{k = \frac{1}{\text{hidden\_size}}}
+where \eqn{k = \frac{1}{\mbox{hidden\_size}}}
 }
 
 \examples{
+\dontrun{
 rnn <- nn_rnn(10, 20, 2)
 input <- torch_randn(5, 3, 10)
 h0 <- torch_randn(2, 3, 20)
 rnn(input, h0)
 
+}
 }

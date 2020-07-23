@@ -24,7 +24,3 @@ This directly calls the underlying LAPACK function \code{?ormqr}.
 See \verb{LAPACK documentation for ormqr}_ for further details.
 }
 
-\examples{
-
-
-}

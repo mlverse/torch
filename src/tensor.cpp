@@ -1,6 +1,6 @@
 
 #include "torch_types.h"
-#include "utils.hpp"
+#include "utils.h"
 
 // [[Rcpp::export]]
 void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x) {

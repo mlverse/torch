@@ -4,14 +4,14 @@
 \alias{nn_tanhshrink}
 \title{Tanhshrink module}
 \usage{
-nn_tanhshrink(...)
+nn_tanhshrink()
 }
 \description{
 Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{Tanhshrink}(x) = x - \tanh(x)
+  \mbox{Tanhshrink}(x) = x - \tanh(x)
 }
 }
 \section{Shape}{
@@ -24,8 +24,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_tanhshrink()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

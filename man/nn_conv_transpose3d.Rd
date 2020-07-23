@@ -4,7 +4,18 @@
 \alias{nn_conv_transpose3d}
 \title{ConvTranpose3D module}
 \usage{
-nn_conv_transpose3d(...)
+nn_conv_transpose3d(
+  in_channels,
+  out_channels,
+  kernel_size,
+  stride = 1,
+  padding = 0,
+  output_padding = 0,
+  groups = 1,
+  bias = TRUE,
+  dilation = 1,
+  padding_mode = "zeros"
+)
 }
 \arguments{
 \item{in_channels}{(int): Number of channels in the input image}
@@ -20,11 +31,16 @@ will be added to both sides of each dimension in the input. Default: 0
 output_padding (int or tuple, optional): Additional size added to one side
 of each dimension in the output shape. Default: 0}
 
+\item{output_padding}{(int or tuple, optional): Additional size added to one side
+of each dimension in the output shape. Default: 0}
+
 \item{groups}{(int, optional): Number of blocked connections from input channels to output channels. Default: 1}
 
 \item{bias}{(bool, optional): If \code{True}, adds a learnable bias to the output. Default: \code{True}}
 
 \item{dilation}{(int or tuple, optional): Spacing between kernel elements. Default: 1}
+
+\item{padding_mode}{(string, optional): \code{'zeros'}, \code{'reflect'}, \code{'replicate'} or \code{'circular'}. Default: \code{'zeros'}}
 }
 \description{
 Applies a 3D transposed convolution operator over an input image composed of several input
@@ -97,16 +113,16 @@ a performance cost) by setting \code{torch.backends.cudnn.deterministic = TRUE}.
 \item Input: \eqn{(N, C_{in}, D_{in}, H_{in}, W_{in})}
 \item Output: \eqn{(N, C_{out}, D_{out}, H_{out}, W_{out})} where
 \deqn{
-  D_{out} = (D_{in} - 1) \times \text{stride}[0] - 2 \times \text{padding}[0] + \text{dilation}[0]
-\times (\text{kernel\_size}[0] - 1) + \text{output\_padding}[0] + 1
+  D_{out} = (D_{in} - 1) \times \mbox{stride}[0] - 2 \times \mbox{padding}[0] + \mbox{dilation}[0]
+\times (\mbox{kernel\_size}[0] - 1) + \mbox{output\_padding}[0] + 1
 }
 \deqn{
-  H_{out} = (H_{in} - 1) \times \text{stride}[1] - 2 \times \text{padding}[1] + \text{dilation}[1]
-\times (\text{kernel\_size}[1] - 1) + \text{output\_padding}[1] + 1
+  H_{out} = (H_{in} - 1) \times \mbox{stride}[1] - 2 \times \mbox{padding}[1] + \mbox{dilation}[1]
+\times (\mbox{kernel\_size}[1] - 1) + \mbox{output\_padding}[1] + 1
 }
 \deqn{
-  W_{out} = (W_{in} - 1) \times \text{stride}[2] - 2 \times \text{padding}[2] + \text{dilation}[2]
-\times (\text{kernel\_size}[2] - 1) + \text{output\_padding}[2] + 1
+  W_{out} = (W_{in} - 1) \times \mbox{stride}[2] - 2 \times \mbox{padding}[2] + \mbox{dilation}[2]
+\times (\mbox{kernel\_size}[2] - 1) + \mbox{output\_padding}[2] + 1
 }
 }
 }
@@ -115,24 +131,27 @@ a performance cost) by setting \code{torch.backends.cudnn.deterministic = TRUE}.
 
 \itemize{
 \item weight (Tensor): the learnable weights of the module of shape
-\eqn{(\text{in\_channels}, \frac{\text{out\_channels}}{\text{groups}},}
-\eqn{\text{kernel\_size[0]}, \text{kernel\_size[1]}, \text{kernel\_size[2]})}.
+\eqn{(\mbox{in\_channels}, \frac{\mbox{out\_channels}}{\mbox{groups}},}
+\eqn{\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]}, \mbox{kernel\_size[2]})}.
 The values of these weights are sampled from
 \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{out} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+\eqn{k = \frac{groups}{C_{\mbox{out}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 \item bias (Tensor):   the learnable bias of the module of shape (out_channels)
 If \code{bias} is \code{True}, then the values of these weights are
 sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
-\eqn{k = \frac{groups}{C_\text{out} * \prod_{i=0}^{2}\text{kernel\_size}[i]}}
+\eqn{k = \frac{groups}{C_{\mbox{out}} * \prod_{i=0}^{2}\mbox{kernel\_size}[i]}}
 }
 }
 
 \examples{
+\dontrun{
+\dontrun{
 # With square kernels and equal stride
 m <- nn_conv_transpose3d(16, 33, 3, stride=2)
 # non-square kernels and unequal stride and with padding
 m <- nn_conv_transpose3d(16, 33, c(3, 5, 2), stride=c(2, 1, 1), padding=c(0, 4, 2))
 input <- torch_randn(20, 16, 10, 50, 100)
 output <- m(input)
-
+}
+}
 }

@@ -25,11 +25,12 @@ Clamp all elements in \code{input} into the range \code{[} \code{min}, \code{max
 a resulting tensor:
 
 \deqn{
-    y_i = \begin{cases}
-        \text{min} & \text{if } x_i < \text{min} \\
-        x_i & \text{if } \text{min} \leq x_i \leq \text{max} \\
-        \text{max} & \text{if } x_i > \text{max}
-    \end{cases}
+    y_i = \left\{ \begin{array}{ll}
+        \mbox{min} & \mbox{if } x_i < \mbox{min} \\
+        x_i & \mbox{if } \mbox{min} \leq x_i \leq \mbox{max} \\
+        \mbox{max} & \mbox{if } x_i > \mbox{max}
+    \end{array}
+    \right.
 }
 If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, args \code{min}
 and \code{max} must be real numbers, otherwise they should be integers.
@@ -54,6 +55,7 @@ should be a real number, otherwise it should be an integer.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
@@ -68,4 +70,5 @@ torch_clamp(a, min=0.5)
 a = torch_randn(c(4))
 a
 torch_clamp(a, max=0.5)
+}
 }

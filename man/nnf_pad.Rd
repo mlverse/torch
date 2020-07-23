@@ -24,18 +24,18 @@ Pads tensor.
 
 The padding size by which to pad some dimensions of \code{input}
 are described starting from the last dimension and moving forward.
-\eqn{\left\lfloor\frac{\text{len(pad)}}{2}\right\rfloor} dimensions
+\eqn{\left\lfloor\frac{\mbox{len(pad)}}{2}\right\rfloor} dimensions
 of \code{input} will be padded.
 For example, to pad only the last dimension of the input tensor, then
 \code{pad} has the form
-\eqn{(\text{padding\_left}, \text{padding\_right})};
+\eqn{(\mbox{padding\_left}, \mbox{padding\_right})};
 to pad the last 2 dimensions of the input tensor, then use
-\eqn{(\text{padding\_left}, \text{padding\_right},}
-\eqn{\text{padding\_top}, \text{padding\_bottom})};
+\eqn{(\mbox{padding\_left}, \mbox{padding\_right},}
+\eqn{\mbox{padding\_top}, \mbox{padding\_bottom})};
 to pad the last 3 dimensions, use
-\eqn{(\text{padding\_left}, \text{padding\_right},}
-\eqn{\text{padding\_top}, \text{padding\_bottom}}
-\eqn{\text{padding\_front}, \text{padding\_back})}.
+\eqn{(\mbox{padding\_left}, \mbox{padding\_right},}
+\eqn{\mbox{padding\_top}, \mbox{padding\_bottom}}
+\eqn{\mbox{padding\_front}, \mbox{padding\_back})}.
 }
 
 \section{Padding mode}{

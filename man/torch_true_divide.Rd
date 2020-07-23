@@ -21,14 +21,16 @@ in floating point. Analogous to division in Python 3 and equivalent to
 in which case they are cast to the default (floating) scalar type before the division.
 
 \deqn{
-    \text{out}_i = \frac{\text{dividend}_i}{\text{divisor}}
+    \mbox{out}_i = \frac{\mbox{dividend}_i}{\mbox{divisor}}
 }
 }
 
 \examples{
+\dontrun{
 
 dividend = torch_tensor(c(5, 3), dtype=torch_int())
 divisor = torch_tensor(c(3, 2), dtype=torch_int())
 torch_true_divide(dividend, divisor)
 torch_true_divide(dividend, 2)
+}
 }

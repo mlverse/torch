@@ -4,7 +4,7 @@
 \alias{nn_hardtanh}
 \title{Hardtanh module}
 \usage{
-nn_hardtanh(...)
+nn_hardtanh(min_val = -1, max_val = 1, inplace = FALSE)
 }
 \arguments{
 \item{min_val}{minimum value of the linear region range. Default: -1}
@@ -19,11 +19,12 @@ HardTanh is defined as:
 }
 \details{
 \deqn{
-\text{HardTanh}(x) = \begin{cases}
-  1 & \text{ if } x > 1 \\
-  -1 & \text{ if } x < -1 \\
-  x & \text{ otherwise } \\
-\end{cases}
+\mbox{HardTanh}(x) = \left\{ \begin{array}{ll}
+  1 & \mbox{ if } x > 1 \\
+  -1 & \mbox{ if } x < -1 \\
+  x & \mbox{ otherwise } \\
+\end{array}
+\right.
 }
 
 The range of the linear region :math:\verb{[-1, 1]} can be adjusted using
@@ -39,8 +40,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_hardtanh(-2, 2)
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

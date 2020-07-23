@@ -23,7 +23,7 @@ Adds the scalar \code{other} to each element of the input \code{input}
 and returns a new resulting tensor.
 
 \deqn{
-    \text{out} = \text{input} + \text{other}
+    \mbox{out} = \mbox{input} + \mbox{other}
 }
 If \code{input} is of type FloatTensor or DoubleTensor, \code{other} must be
 a real number, otherwise it should be an integer.
@@ -40,13 +40,14 @@ The shapes of \code{input} and \code{other} must be
 broadcastable .
 
 \deqn{
-    \text{out} = \text{input} + \text{alpha} \times \text{other}
+    \mbox{out} = \mbox{input} + \mbox{alpha} \times \mbox{other}
 }
 If \code{other} is of type FloatTensor or DoubleTensor, \code{alpha} must be
 a real number, otherwise it should be an integer.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
@@ -58,4 +59,5 @@ a
 b = torch_randn(c(4, 1))
 b
 torch_add(a, b)
+}
 }

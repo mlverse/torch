@@ -4,12 +4,12 @@
 \alias{nn_softsign}
 \title{Softsign module}
 \usage{
-nn_softsign(...)
+nn_softsign()
 }
 \description{
 Applies the element-wise function:
 \deqn{
-  \text{SoftSign}(x) = \frac{x}{ 1 + |x|}
+  \mbox{SoftSign}(x) = \frac{x}{ 1 + |x|}
 }
 }
 \section{Shape}{
@@ -22,8 +22,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_softsign()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

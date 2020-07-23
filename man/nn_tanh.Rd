@@ -4,14 +4,14 @@
 \alias{nn_tanh}
 \title{Tanh module}
 \usage{
-nn_tanh(...)
+nn_tanh()
 }
 \description{
 Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{Tanh}(x) = \tanh(x) = \frac{\exp(x) - \exp(-x)} {\exp(x) + \exp(-x)}
+  \mbox{Tanh}(x) = \tanh(x) = \frac{\exp(x) - \exp(-x)} {\exp(x) + \exp(-x)}
 }
 }
 \section{Shape}{
@@ -24,8 +24,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_tanh()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

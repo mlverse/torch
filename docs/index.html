@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -128,10 +128,10 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>Currently this package is only a prrof of concept and you can only create a Torch Tensor from an R object. And then convert back from a torch Tensor to an R object.</p>
+<p>Currently this package is only a proof of concept and you can only create a Torch Tensor from an R object. And then convert back from a torch Tensor to an R object.</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">torch</span>)
 <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">8</span>), <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>))
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu">torch_tensor</span>(<span class="no">x</span>, <span class="kw">dtype</span> <span class="kw">=</span> <span class="fu">torch_float64</span>())
+<span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/torch_tensor.html">torch_tensor</a></span>(<span class="no">x</span>, <span class="kw">dtype</span> <span class="kw">=</span> <span class="fu"><a href="reference/torch_dtype.html">torch_float64</a></span>())
 <span class="no">y</span>
 <span class="co">#&gt; torch_tensor </span>
 <span class="co">#&gt; (1,.,.) = </span>
@@ -142,15 +142,15 @@
 <span class="co">#&gt;   0.4021  0.5509</span>
 <span class="co">#&gt;   0.3374  0.9034</span>
 <span class="co">#&gt; [ CPUDoubleType{2,2,2} ]</span>
-<span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">x</span>, <span class="fu">as_array</span>(<span class="no">y</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">x</span>, <span class="fu"><a href="reference/as_array.html">as_array</a></span>(<span class="no">y</span>))
 <span class="co">#&gt; [1] TRUE</span></pre></div>
 <div id="simple-autograd-example" class="section level3">
 <h3 class="hasAnchor">
 <a href="#simple-autograd-example" class="anchor"></a>Simple Autograd Example</h3>
 <p>In the following snippet we let torch, using the autograd feature, calculate the derivatives:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu">torch_tensor</span>(<span class="fl">1</span>, <span class="kw">requires_grad</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="no">w</span> <span class="kw">&lt;-</span> <span class="fu">torch_tensor</span>(<span class="fl">2</span>, <span class="kw">requires_grad</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="no">b</span> <span class="kw">&lt;-</span> <span class="fu">torch_tensor</span>(<span class="fl">3</span>, <span class="kw">requires_grad</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">1</span>, <span class="kw">requires_grad</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="no">w</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">2</span>, <span class="kw">requires_grad</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="no">b</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">3</span>, <span class="kw">requires_grad</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="no">w</span> * <span class="no">x</span> + <span class="no">b</span>
 <span class="no">y</span>$<span class="fu">backward</span>()
 <span class="no">x</span>$<span class="no">grad</span>

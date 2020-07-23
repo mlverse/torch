@@ -4,7 +4,13 @@
 \alias{nn_batch_norm2d}
 \title{BatchNorm2D}
 \usage{
-nn_batch_norm2d(...)
+nn_batch_norm2d(
+  num_features,
+  eps = 1e-05,
+  momentum = 0.1,
+  affine = TRUE,
+  track_running_stats = TRUE
+)
 }
 \arguments{
 \item{num_features}{\eqn{C} from an expected input of size
@@ -54,7 +60,7 @@ evaluation time as well.
 This \code{momentum} argument is different from one used in optimizer
 classes and the conventional notion of momentum. Mathematically, the
 update rule for running statistics here is
-\eqn{\hat{x}_\text{new} = (1 - \text{momentum}) \times \hat{x} + \text{momentum} \times x_t},
+\eqn{\hat{x}_{\mbox{new}} = (1 - \mbox{momentum}) \times \hat{x} + \mbox{momentum} \times x_t},
 where \eqn{\hat{x}} is the estimated statistic and \eqn{x_t} is the
 new observed value.
 Because the Batch Normalization is done over the \code{C} dimension, computing statistics
@@ -69,6 +75,7 @@ on \verb{(N, H, W)} slices, it's common terminology to call this Spatial Batch N
 }
 
 \examples{
+\dontrun{
 # With Learnable Parameters
 m <- nn_batch_norm2d(100)
 # Without Learnable Parameters
@@ -76,4 +83,5 @@ m <- nn_batch_norm2d(100, affine=FALSE)
 input <- torch_randn(20, 100, 35, 45)
 output <- m(input)
 
+}
 }

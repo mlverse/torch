@@ -7,11 +7,11 @@
 nnf_hardsigmoid(input, inplace = FALSE)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{inplace}{NA If set to \code{True}, will do this operation in-place. Default: \code{False}}
 }
 \description{
-Applies the element-wise function \eqn{\text{Hardsigmoid}(x) = \frac{ReLU6(x + 3)}{6}}
+Applies the element-wise function \eqn{\mbox{Hardsigmoid}(x) = \frac{ReLU6(x + 3)}{6}}
 }

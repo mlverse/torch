@@ -182,7 +182,7 @@ nn_rnn_base <- nn_module(
 
 #' RNN module
 #' 
-#' Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\text{ReLU}} non-linearity
+#' Applies a multi-layer Elman RNN with \eqn{\tanh} or \eqn{\mbox{ReLU}} non-linearity
 #' to an input sequence.
 #' 
 #' For each element in the input sequence, each layer computes the following
@@ -195,7 +195,7 @@ nn_rnn_base <- nn_module(
 #' where \eqn{h_t} is the hidden state at time `t`, \eqn{x_t} is
 #' the input at time `t`, and \eqn{h_{(t-1)}} is the hidden state of the
 #' previous layer at time `t-1` or the initial hidden state at time `0`.
-#' If `nonlinearity` is `'relu'`, then \eqn{\text{ReLU}} is used instead of 
+#' If `nonlinearity` is `'relu'`, then \eqn{\mbox{ReLU}} is used instead of 
 #' \eqn{\tanh}.
 #' 
 #' @param input_size The number of expected features in the input `x`
@@ -213,7 +213,8 @@ nn_rnn_base <- nn_module(
 #' @param dropout If non-zero, introduces a `Dropout` layer on the outputs of each
 #'   RNN layer except the last layer, with dropout probability equal to
 #'   `dropout`. Default: 0
-#' @param bidirectional: If `TRUE`, becomes a bidirectional RNN. Default: `FALSE`
+#' @param bidirectional If `TRUE`, becomes a bidirectional RNN. Default: `FALSE`
+#' @param ... other arguments that can be passed to the super class.
 #' 
 #' @section Inputs: 
 #' 
@@ -246,31 +247,31 @@ nn_rnn_base <- nn_module(
 #' @section Shape:
 #' 
 #' - Input1: \eqn{(L, N, H_{in})} tensor containing input features where
-#'  \eqn{H_{in}=\text{input_size}} and `L` represents a sequence length.
+#'  \eqn{H_{in}=\mbox{input\_size}} and `L` represents a sequence length.
 #' - Input2: \eqn{(S, N, H_{out})} tensor
 #'   containing the initial hidden state for each element in the batch.
-#'   \eqn{H_{out}=\text{hidden_size}}
-#'   Defaults to zero if not provided. where \eqn{S=\text{num_layers} * \text{num_directions}}
+#'   \eqn{H_{out}=\mbox{hidden\_size}}
+#'   Defaults to zero if not provided. where \eqn{S=\mbox{num\_layers} * \mbox{num\_directions}}
 #'   If the RNN is bidirectional, num_directions should be 2, else it should be 1.
-#' - Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\text{num_directions} * \text{hidden_size}}
+#' - Output1: \eqn{(L, N, H_{all})} where \eqn{H_{all}=\mbox{num\_directions} * \mbox{hidden\_size}}
 #' - Output2: \eqn{(S, N, H_{out})} tensor containing the next hidden state
 #'   for each element in the batch
 #'   
 #' @section Attributes:
-#' - weight_ih_l[k]: the learnable input-hidden weights of the k-th layer,
+#' - `weight_ih_l[k]`: the learnable input-hidden weights of the k-th layer,
 #'   of shape `(hidden_size, input_size)` for `k = 0`. Otherwise, the shape is
 #'   `(hidden_size, num_directions * hidden_size)`
-#' - weight_hh_l[k]: the learnable hidden-hidden weights of the k-th layer,
+#' - `weight_hh_l[k]`: the learnable hidden-hidden weights of the k-th layer,
 #'   of shape `(hidden_size, hidden_size)`
-#' - bias_ih_l[k]: the learnable input-hidden bias of the k-th layer,
+#' - `bias_ih_l[k]`: the learnable input-hidden bias of the k-th layer,
 #'   of shape `(hidden_size)`
-#' - bias_hh_l[k]: the learnable hidden-hidden bias of the k-th layer,
+#' - `bias_hh_l[k]`: the learnable hidden-hidden bias of the k-th layer,
 #'   of shape `(hidden_size)`
 #'   
 #' @section Note:
 #' 
 #' All the weights and biases are initialized from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}
-#' where \eqn{k = \frac{1}{\text{hidden\_size}}}
+#' where \eqn{k = \frac{1}{\mbox{hidden\_size}}}
 #' 
 #' @examples
 #' rnn <- nn_rnn(10, 20, 2)
@@ -282,16 +283,16 @@ nn_rnn_base <- nn_module(
 nn_rnn <- nn_module(
   "nn_rnn",
   inherit = nn_rnn_base,
-  initialize = function(...) {
+  initialize = function(input_size, hidden_size, num_layers = 1, nonlinearity = NULL,
+                        bias = TRUE, batch_first = FALSE, dropout = 0., 
+                        bidirectional = FALSE, ...) {
     
     args <- list(...)
     
-    if (is.null(args$nonlinearity))
+    if (is.null(nonlinearity))
       self$nonlinearity <- "tanh"
     else
-      self$nonlinearity <- args$nonlinearity  
-    
-    args$nonlinearity <- NULL
+      self$nonlinearity <- nonlinearity  
     
     if (self$nonlinearity == "tanh")
       mode <- "RNN_TANH"
@@ -300,8 +301,9 @@ nn_rnn <- nn_module(
     else
       value_error("Unknown nonlinearity '{self$nonlinearity}'")
     
-    args$mode <- mode
-    
-    do.call(super$initialize, args)
+    super$initialize(mode, input_size = input_size, hidden_size = hidden_size,
+                     num_layers = num_layers, bias = bias,
+                     batch_first = batch_first, dropout = dropout, 
+                     bidirectional = bidirectional, ...)
   }
 )

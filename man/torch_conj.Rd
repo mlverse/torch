@@ -18,12 +18,14 @@ Conj
 Computes the element-wise conjugate of the given \code{input} tensor.
 
 \deqn{
-    \text{out}_{i} = conj(\text{input}_{i})
+    \mbox{out}_{i} = conj(\mbox{input}_{i})
 }
 }
 
 \examples{
 \dontrun{
+\dontrun{
 torch_conj(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+}
 }
 }

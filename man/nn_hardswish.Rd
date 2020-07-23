@@ -4,18 +4,20 @@
 \alias{nn_hardswish}
 \title{Hardswish module}
 \usage{
-nn_hardswish(...)
+nn_hardswish()
 }
 \description{
 Applies the hardswish function, element-wise, as described in the paper:
 \href{https://arxiv.org/abs/1905.02244}{Searching for MobileNetV3}
-\deqn{
-  \text{Hardswish}(x) = \begin{cases}
-0 & \text{if~} x \le -3, \\
-x & \text{if~} x \ge +3, \\
-x \cdot (x + 3) /6 & \text{otherwise}
-\end{cases}
 }
+\details{
+\deqn{ \mbox{Hardswish}(x) = \left\{
+  \begin{array}{ll}
+  0 & \mbox{if } x \le -3, \\
+  x & \mbox{if } x \ge +3, \\
+  x \cdot (x + 3)/6 & \mbox{otherwise}
+  \end{array}
+  \right. }
 }
 \section{Shape}{
 
@@ -28,9 +30,11 @@ dimensions
 
 \examples{
 \dontrun{
+\dontrun{
 m <- nn_hardswish()
 input <- torch_randn(2)
 output <- m(input)
 }
 
+}
 }

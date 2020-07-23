@@ -26,7 +26,7 @@ stabilized.
 For summation index \eqn{j} given by \code{dim} and other indices \eqn{i}, the result is
 
 \deqn{
-        \text{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
+        \mbox{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
 }
 
 If \code{keepdim} is \code{True}, the output tensor is of the same size
@@ -36,7 +36,9 @@ output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(3, 3))
 torch_logsumexp(a, 1)
+}
 }

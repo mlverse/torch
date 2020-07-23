@@ -4,7 +4,7 @@
 \alias{nn_leaky_relu}
 \title{LeakyReLU module}
 \usage{
-nn_leaky_relu(...)
+nn_leaky_relu(negative_slope = 0.01, inplace = FALSE)
 }
 \arguments{
 \item{negative_slope}{Controls the angle of the negative slope. Default: 1e-2}
@@ -16,16 +16,17 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{LeakyReLU}(x) = \max(0, x) + \text{negative\_slope} * \min(0, x)
+  \mbox{LeakyReLU}(x) = \max(0, x) + \mbox{negative\_slope} * \min(0, x)
 }
 or
 
 \deqn{
-  \text{LeakyRELU}(x) =
-  \begin{cases}
-x, & \text{ if } x \geq 0 \\
-\text{negative\_slope} \times x, & \text{ otherwise }
-\end{cases}
+  \mbox{LeakyRELU}(x) =
+  \left\{ \begin{array}{ll}
+x, & \mbox{ if } x \geq 0 \\
+\mbox{negative\_slope} \times x, & \mbox{ otherwise }
+\end{array}
+\right.
 }
 }
 \section{Shape}{
@@ -38,8 +39,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_leaky_relu(0.1)
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

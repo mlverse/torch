@@ -15,7 +15,9 @@ Preserves the identity of the inputs in \code{Linear} layers, where as
 many inputs are preserved as possible.
 }
 \examples{
+\dontrun{
 w <- torch_empty(3, 5)
 nn_init_eye_(w)
 
+}
 }

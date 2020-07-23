@@ -12,9 +12,11 @@ nnf_binary_cross_entropy(
 )
 }
 \arguments{
-\item{input}{tensor (N,∗) where *∗ means, any number of additional dimensions}
+\item{input}{tensor (N,*) where ** means, any number of additional dimensions}
 
-\item{target}{tensor (N,∗) , same shape as the input}
+\item{target}{tensor (N,*) , same shape as the input}
+
+\item{weight}{(tensor) weight for each value.}
 
 \item{reduction}{(string, optional) – Specifies the reduction to apply to the
 output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean':

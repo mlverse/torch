@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -210,21 +210,23 @@ same number of matrices.</p>
 broadcastable  with a \((n \times p)\) tensor
 and <code>out</code> will be a \((n \times p)\) tensor.</p>
 <p>$$
-    out = \beta\ \text{input} + \alpha\ (\sum_{i=0}^{b-1} \text{batch1}_i \mathbin{@} \text{batch2}_i)
+    out = \beta\ \mbox{input} + \alpha\ (\sum_{i=0}^{b-1} \mbox{batch1}_i \mathbin{@} \mbox{batch2}_i)
 $$
 For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, arguments <code>beta</code> and <code>alpha</code>
 must be real numbers, otherwise they should be integers.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+
 <span class='no'>M</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>))
 <span class='no'>batch1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>batch2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_addbmm</span>(<span class='no'>M</span>, <span class='no'>batch1</span>, <span class='no'>batch2</span>)</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  3.1245  1.9331  0.7134 -0.8380  4.3891
-#&gt; -6.1471 -0.1589  0.3122 -3.0785  6.7309
-#&gt;  7.4066 -4.8559 -5.3762  5.1940 -7.0750
-#&gt; [ CPUFloatType{3,5} ]</div></pre>
+#&gt;   5.7025   7.7808   5.3946   0.1290   2.4487
+#&gt;  -1.9730  -3.0379  -5.4090   0.6009  -3.1469
+#&gt;   4.6785   6.4997 -11.4732   6.3957  10.2272
+#&gt; [ CPUFloatType{3,5} ]</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

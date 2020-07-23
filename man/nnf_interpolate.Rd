@@ -16,10 +16,10 @@ nnf_interpolate(
 \arguments{
 \item{input}{(Tensor) the input tensor}
 
-\item{size}{(int or Tuple\link{int} or Tuple\link{int, int} or Tuple\link{int, int, int})
+\item{size}{(int or \code{Tuple[int]} or \code{Tuple[int, int]} or \code{Tuple[int, int, int]})
 output spatial size.}
 
-\item{scale_factor}{(float or Tuple\link{float}) multiplier for spatial size.
+\item{scale_factor}{(float or \code{Tuple[float]}) multiplier for spatial size.
 Has to match input size if it is a tuple.}
 
 \item{mode}{(str) algorithm used for upsampling: 'nearest' | 'linear' | 'bilinear'

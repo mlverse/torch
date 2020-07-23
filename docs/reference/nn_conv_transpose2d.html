@@ -73,7 +73,7 @@ composed of several input planes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -165,7 +165,18 @@ composed of several input planes." />
 composed of several input planes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_conv_transpose2d</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_conv_transpose2d</span>(
+  <span class='no'>in_channels</span>,
+  <span class='no'>out_channels</span>,
+  <span class='no'>kernel_size</span>,
+  <span class='kw'>stride</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>output_padding</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>groups</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dilation</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>padding_mode</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,6 +218,11 @@ of each dimension in the output shape. Default: 0</p></td>
     <tr>
       <th>dilation</th>
       <td><p>(int or tuple, optional): Spacing between kernel elements. Default: 1</p></td>
+    </tr>
+    <tr>
+      <th>padding_mode</th>
+      <td><p>(string, optional): <code>'zeros'</code>, <code>'reflect'</code>,
+<code>'replicate'</code> or <code>'circular'</code>. Default: <code>'zeros'</code></p></td>
     </tr>
     </table>
 
@@ -271,12 +287,12 @@ a performance cost) by setting <code>torch.backends.cudnn.deterministic = TRUE</
 <li><p>Input: \((N, C_{in}, H_{in}, W_{in})\)</p></li>
 <li><p>Output: \((N, C_{out}, H_{out}, W_{out})\) where
 $$
-  H_{out} = (H_{in} - 1) \times \text{stride}[0] - 2 \times \text{padding}[0] + \text{dilation}[0]
-\times (\text{kernel\_size}[0] - 1) + \text{output\_padding}[0] + 1
+  H_{out} = (H_{in} - 1) \times \mbox{stride}[0] - 2 \times \mbox{padding}[0] + \mbox{dilation}[0]
+\times (\mbox{kernel\_size}[0] - 1) + \mbox{output\_padding}[0] + 1
 $$
 $$
-  W_{out} = (W_{in} - 1) \times \text{stride}[1] - 2 \times \text{padding}[1] + \text{dilation}[1]
-\times (\text{kernel\_size}[1] - 1) + \text{output\_padding}[1] + 1
+  W_{out} = (W_{in} - 1) \times \mbox{stride}[1] - 2 \times \mbox{padding}[1] + \mbox{dilation}[1]
+\times (\mbox{kernel\_size}[1] - 1) + \mbox{output\_padding}[1] + 1
 $$</p></li>
 </ul>
 
@@ -286,20 +302,21 @@ $$</p></li>
 
 <ul>
 <li><p>weight (Tensor): the learnable weights of the module of shape
-\((\text{in\_channels}, \frac{\text{out\_channels}}{\text{groups}},\)
-\(\text{kernel\_size[0]}, \text{kernel\_size[1]})\).
+\((\mbox{in\_channels}, \frac{\mbox{out\_channels}}{\mbox{groups}},\)
+\(\mbox{kernel\_size[0]}, \mbox{kernel\_size[1]})\).
 The values of these weights are sampled from
 \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
-\(k = \frac{groups}{C_\text{out} * \prod_{i=0}^{1}\text{kernel\_size}[i]}\)</p></li>
+\(k = \frac{groups}{C_{\mbox{out}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}\)</p></li>
 <li><p>bias (Tensor):   the learnable bias of the module of shape (out_channels)
 If <code>bias</code> is <code>True</code>, then the values of these weights are
 sampled from \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
-\(k = \frac{groups}{C_\text{out} * \prod_{i=0}^{1}\text{kernel\_size}[i]}\)</p></li>
+\(k = \frac{groups}{C_{\mbox{out}} * \prod_{i=0}^{1}\mbox{kernel\_size}[i]}\)</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># With square kernels and equal stride</span>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='co'># With square kernels and equal stride</span>
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_conv_transpose2d</span>(<span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fl'>3</span>, <span class='kw'>stride</span><span class='kw'>=</span><span class='fl'>2</span>)
 <span class='co'># non-square kernels and unequal stride and with padding</span>
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_conv_transpose2d</span>(<span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>), <span class='kw'>stride</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>), <span class='kw'>padding</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>2</span>))
@@ -312,6 +329,7 @@ sampled from \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
 <span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'>downsample</span>(<span class='no'>input</span>)
 <span class='no'>h</span>$<span class='fu'>size</span>()</div><div class='output co'>#&gt; [1]  1 16  6  6</div><div class='input'><span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>upsample</span>(<span class='no'>h</span>, <span class='kw'>output_size</span><span class='kw'>=</span><span class='no'>input</span>$<span class='fu'>size</span>())
 <span class='no'>output</span>$<span class='fu'>size</span>()</div><div class='output co'>#&gt; [1]  1 16 12 12</div><div class='input'>
+# }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

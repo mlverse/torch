@@ -20,8 +20,10 @@ to the closest integer.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_round(a)
+}
 }

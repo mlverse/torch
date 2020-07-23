@@ -10,6 +10,8 @@
 \item{x}{the generator to enumerate.}
 
 \item{max_len}{maximum number of iterations.}
+
+\item{...}{passed to specific methods.}
 }
 \description{
 Enumerate an iterator

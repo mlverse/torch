@@ -28,12 +28,12 @@ with the same number of elements as \code{input}.
 When \code{exponent} is a scalar value, the operation applied is:
 
 \deqn{
-    \text{out}_i = x_i ^ \text{exponent}
+    \mbox{out}_i = x_i^{\mbox{exponent}}
 }
 When \code{exponent} is a tensor, the operation applied is:
 
 \deqn{
-    \text{out}_i = x_i ^ {\text{exponent}_i}
+    \mbox{out}_i = x_i^{\mbox{exponent}_i}
 }
 When \code{exponent} is a tensor, the shapes of \code{input}
 and \code{exponent} must be broadcastable .
@@ -48,11 +48,12 @@ The returned tensor \code{out} is of the same shape as \code{exponent}
 The operation applied is:
 
 \deqn{
-    \text{out}_i = \text{self} ^ {\text{exponent}_i}
+    \mbox{out}_i = \mbox{self} ^ {\mbox{exponent}_i}
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
@@ -67,4 +68,5 @@ torch_pow(a, exp)
 exp = torch_arange(1., 5.)
 base = 2
 torch_pow(base, exp)
+}
 }

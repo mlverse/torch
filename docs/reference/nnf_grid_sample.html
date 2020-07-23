@@ -73,7 +73,7 @@ output using input values and pixel locations from grid." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -178,11 +178,11 @@ output using input values and pixel locations from grid." />
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>(Tensor) input of shape \((N, C, H_\text{in}, W_\text{in})\) (4-D case)                    or \((N, C, D_\text{in}, H_\text{in}, W_\text{in})\) (5-D case)</p></td>
+      <td><p>(Tensor) input of shape \((N, C, H_{\mbox{in}}, W_{\mbox{in}})\) (4-D case)                    or \((N, C, D_{\mbox{in}}, H_{\mbox{in}}, W_{\mbox{in}})\) (5-D case)</p></td>
     </tr>
     <tr>
       <th>grid</th>
-      <td><p>(Tensor) flow-field of shape \((N, H_\text{out}, W_\text{out}, 2)\) (4-D case)                   or \((N, D_\text{out}, H_\text{out}, W_\text{out}, 3)\) (5-D case)</p></td>
+      <td><p>(Tensor) flow-field of shape \((N, H_{\mbox{out}}, W_{\mbox{out}}, 2)\) (4-D case)                   or \((N, D_{\mbox{out}}, H_{\mbox{out}}, W_{\mbox{out}}, 3)\) (5-D case)</p></td>
     </tr>
     <tr>
       <th>mode</th>
@@ -201,7 +201,7 @@ input  as squares rather than points. If set to <code>True</code>, the extrema (
 <code>1</code>) are considered as referring to the center points of the input's corner pixels.
 If set to <code>False</code>, they are instead considered as referring to the corner
 points of the input's corner pixels, making the sampling more resolution
-agnostic. This option parallels the <code>align_corners</code> option in  <code>interpolate</code>, and
+agnostic. This option parallels the <code>align_corners</code> option in  <code><a href='nnf_interpolate.html'>nnf_interpolate()</a></code>, and
 so whichever option is used here should also be used there to resize the input
 image before grid sampling. Default: <code>False</code></p></td>
     </tr>
@@ -212,9 +212,9 @@ image before grid sampling. Default: <code>False</code></p></td>
     <p>Currently, only spatial (4-D) and volumetric (5-D) <code>input</code> are
 supported.</p>
 <p>In the spatial (4-D) case, for <code>input</code> with shape
-\((N, C, H_\text{in}, W_\text{in})\) and <code>grid</code> with shape
-\((N, H_\text{out}, W_\text{out}, 2)\), the output will have shape
-\((N, C, H_\text{out}, W_\text{out})\).</p>
+\((N, C, H_{\mbox{in}}, W_{\mbox{in}})\) and <code>grid</code> with shape
+\((N, H_{\mbox{out}}, W_{\mbox{out}}, 2)\), the output will have shape
+\((N, C, H_{\mbox{out}}, W_{\mbox{out}})\).</p>
 <p>For each output location <code>output[n, :, h, w]</code>, the size-2 vector
 <code>grid[n, h, w]</code> specifies <code>input</code> pixel locations <code>x</code> and <code>y</code>,
 which are used to interpolate the output value <code>output[n, :, h, w]</code>.
@@ -244,7 +244,7 @@ and becomes <code>x' = 1.5</code>, then reflects by border <code>1</code> and be
     
 
 
-<p>This function is often used in conjunction with <code>affine_grid</code>
+<p>This function is often used in conjunction with <code><a href='nnf_affine_grid.html'>nnf_affine_grid()</a></code>
 to build <code>Spatial Transformer Networks</code>_ .</p>
 
   </div>

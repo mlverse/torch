@@ -4,7 +4,16 @@
 \alias{nn_multihead_attention}
 \title{MultiHead attention}
 \usage{
-nn_multihead_attention(...)
+nn_multihead_attention(
+  embed_dim,
+  num_heads,
+  dropout = 0,
+  bias = TRUE,
+  add_bias_kv = FALSE,
+  add_zero_attn = FALSE,
+  kdim = NULL,
+  vdim = NULL
+)
 }
 \arguments{
 \item{embed_dim}{total dimension of the model.}
@@ -33,8 +42,8 @@ See reference: Attention Is All You Need
 }
 \details{
 \deqn{
-  \text{MultiHead}(Q, K, V) = \text{Concat}(head_1,\dots,head_h)W^O
-\text{where} head_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)
+  \mbox{MultiHead}(Q, K, V) = \mbox{Concat}(head_1,\dots,head_h)W^O
+\mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V)
 }
 }
 \section{Shape}{
@@ -72,10 +81,12 @@ L is the target sequence length, S is the source sequence length.
 
 \examples{
 \dontrun{
+\dontrun{
 multihead_attn = nn_multihead_attention(embed_dim, num_heads)
 out <- multihead_attn(query, key, value)
 attn_output <- out[[1]]
 attn_output_weights <- out[[2]]
 }
 
+}
 }

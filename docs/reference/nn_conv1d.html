@@ -43,7 +43,7 @@
 <meta property="og:description" content="Applies a 1D convolution over an input signal composed of several input
 planes.
 In the simplest case, the output value of the layer with input size
-\((N, C_{\text{in}}, L)\) and output \((N, C_{\text{out}}, L_{\text{out}})\) can be
+\((N, C_{\mbox{in}}, L)\) and output \((N, C_{\mbox{out}}, L_{\mbox{out}})\) can be
 precisely described as:" />
 
 
@@ -76,7 +76,7 @@ precisely described as:" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -167,11 +167,21 @@ precisely described as:" />
     <p>Applies a 1D convolution over an input signal composed of several input
 planes.
 In the simplest case, the output value of the layer with input size
-\((N, C_{\text{in}}, L)\) and output \((N, C_{\text{out}}, L_{\text{out}})\) can be
+\((N, C_{\mbox{in}}, L)\) and output \((N, C_{\mbox{out}}, L_{\mbox{out}})\) can be
 precisely described as:</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_conv1d</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_conv1d</span>(
+  <span class='no'>in_channels</span>,
+  <span class='no'>out_channels</span>,
+  <span class='no'>kernel_size</span>,
+  <span class='kw'>stride</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>dilation</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>groups</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>padding_mode</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,11 +208,6 @@ precisely described as:</p>
 the input. Default: 0</p></td>
     </tr>
     <tr>
-      <th>padding_mode</th>
-      <td><p>(string, optional): <code>'zeros'</code>, <code>'reflect'</code>,
-<code>'replicate'</code> or <code>'circular'</code>. Default: <code>'zeros'</code></p></td>
-    </tr>
-    <tr>
       <th>dilation</th>
       <td><p>(int or tuple, optional): Spacing between kernel
 elements. Default: 1</p></td>
@@ -217,14 +222,19 @@ channels to output channels. Default: 1</p></td>
       <td><p>(bool, optional): If <code>TRUE</code>, adds a learnable bias to the
 output. Default: <code>TRUE</code></p></td>
     </tr>
+    <tr>
+      <th>padding_mode</th>
+      <td><p>(string, optional): <code>'zeros'</code>, <code>'reflect'</code>,
+<code>'replicate'</code> or <code>'circular'</code>. Default: <code>'zeros'</code></p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>$$
-\text{out}(N_i, C_{\text{out}_j}) = \text{bias}(C_{\text{out}_j}) +
-  \sum_{k = 0}^{C_{in} - 1} \text{weight}(C_{\text{out}_j}, k)
-\star \text{input}(N_i, k)
+\mbox{out}(N_i, C_{\mbox{out}_j}) = \mbox{bias}(C_{\mbox{out}_j}) +
+  \sum_{k = 0}^{C_{in} - 1} \mbox{weight}(C_{\mbox{out}_j}, k)
+\star \mbox{input}(N_i, k)
 $$</p>
 <p>where \(\star\) is the valid
 <a href='https://en.wikipedia.org/wiki/Cross-correlation'>cross-correlation</a> operator,
@@ -266,7 +276,7 @@ where <code>K</code> is a positive integer, this operation is also termed in
 literature as depthwise convolution.
 In other words, for an input of size \((N, C_{in}, L_{in})\),
 a depthwise convolution with a depthwise multiplier <code>K</code>, can be constructed by arguments
-\((C_\text{in}=C_{in}, C_\text{out}=C_{in} \times K, ..., \text{groups}=C_{in})\).</p>
+\((C_{\mbox{in}}=C_{in}, C_{\mbox{out}}=C_{in} \times K, ..., \mbox{groups}=C_{in})\).</p>
     <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
 
     
@@ -276,29 +286,34 @@ a depthwise convolution with a depthwise multiplier <code>K</code>, can be const
 <li><p>Output: \((N, C_{out}, L_{out})\) where</p></li>
 </ul>
 
-<p>$$  L_{out} = \left\lfloor\frac{L_{in} + 2 \times \text{padding} - \text{dilation}
-    \times (\text{kernel\_size} - 1) - 1}{\text{stride}} + 1\right\rfloor$$</p>
+<p>$$
+  L_{out} = \left\lfloor\frac{L_{in} + 2 \times \mbox{padding} - \mbox{dilation}
+    \times (\mbox{kernel\_size} - 1) - 1}{\mbox{stride}} + 1\right\rfloor
+$$</p>
     <h2 class="hasAnchor" id="attributes"><a class="anchor" href="#attributes"></a>Attributes</h2>
 
     
 
 <ul>
 <li><p>weight (Tensor): the learnable weights of the module of shape
-\((\text{out\_channels}, \frac{\text{in\_channels}}{\text{groups}}, \text{kernel\_size})\).
+\((\mbox{out\_channels}, \frac{\mbox{in\_channels}}{\mbox{groups}}, \mbox{kernel\_size})\).
 The values of these weights are sampled from
 \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
-\(k = \frac{groups}{C_\text{in} * \text{kernel\_size}}\)</p></li>
+\(k = \frac{groups}{C_{\mbox{in}} * \mbox{kernel\_size}}\)</p></li>
 <li><p>bias (Tensor): the learnable bias of the module of shape
 (out_channels). If <code>bias</code> is <code>TRUE</code>, then the values of these weights are
 sampled from \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
-\(k = \frac{groups}{C_\text{in} * \text{kernel\_size}}\)</p></li>
+\(k = \frac{groups}{C_{\mbox{in}} * \mbox{kernel\_size}}\)</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_conv1d</span>(<span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fl'>3</span>, <span class='kw'>stride</span><span class='kw'>=</span><span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_conv1d</span>(<span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fl'>3</span>, <span class='kw'>stride</span><span class='kw'>=</span><span class='fl'>2</span>)
 <span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)</div></pre>
+<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
+
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

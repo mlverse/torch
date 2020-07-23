@@ -2,6 +2,8 @@
 #' @importFrom Rcpp sourceCpp
 NULL
 
+globalVariables(c("..", "self", "private", "N"))
+
 .generator_null <- NULL
 
 .onAttach <- function(libname, pkgname) {
@@ -9,7 +11,8 @@ NULL
 
 .onLoad <- function(libname, pkgname){
   install_success <- TRUE
-  if (!install_exists() && Sys.getenv("TORCH_INSTALL", unset = 1) != 0) {
+  if (!install_exists() && Sys.getenv("TORCH_INSTALL", unset = 2) != 0 && 
+      (interactive() || Sys.getenv("TORCH_INSTALL", unset = 2) == "1")) {
     install_success <- tryCatch({
       install_torch()
       TRUE

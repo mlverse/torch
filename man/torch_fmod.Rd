@@ -27,7 +27,9 @@ When \code{other} is a tensor, the shapes of \code{input} and
 }
 
 \examples{
+\dontrun{
 
 torch_fmod(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
 torch_fmod(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
+}
 }

@@ -26,7 +26,7 @@ by \code{tensor2}, multiply the result by the scalar \code{value}
 and add it to \code{input}.
 
 \deqn{
-    \text{out}_i = \text{input}_i + \text{value} \times \text{tensor1}_i \times \text{tensor2}_i
+    \mbox{out}_i = \mbox{input}_i + \mbox{value} \times \mbox{tensor1}_i \times \mbox{tensor2}_i
 }
 The shapes of \code{tensor}, \code{tensor1}, and \code{tensor2} must be
 broadcastable .
@@ -36,9 +36,11 @@ a real number, otherwise an integer.
 }
 
 \examples{
+\dontrun{
 
 t = torch_randn(c(1, 3))
 t1 = torch_randn(c(3, 1))
 t2 = torch_randn(c(1, 3))
 torch_addcmul(t, t1, t2, 0.1)
+}
 }

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -131,7 +131,7 @@
   <span class="no">dir</span>,
   <span class="kw">download</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
   <span class="kw">transform</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>) {
-    <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">x</span>$<span class="fu">to</span>(<span class="kw">dtype</span> <span class="kw">=</span> <span class="fu">torch_float</span>())/<span class="fl">256</span>
+    <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">x</span>$<span class="fu">to</span>(<span class="kw">dtype</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_float</a></span>())/<span class="fl">256</span>
     <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">2</span>*(<span class="no">x</span> - <span class="fl">0.5</span>)
     <span class="no">x</span>[<span class="no">newaxis</span>,<span class="no">..</span>]
   }
@@ -169,22 +169,22 @@
   <span class="kw">initialize</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">in_channels</span>) {
     <span class="no">self</span>$<span class="no">main</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/nn_sequential.html">nn_sequential</a></span>(
       <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span>(<span class="no">in_channels</span>, <span class="fl">16</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">stride</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">padding</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">bias</span> <span class="kw">=</span> <span class="fl">FALSE</span>),
-      <span class="fu"><a href="../../reference/nn_relu.html">nn_relu</a></span>(),
+      <span class="fu"><a href="../../reference/nn_leaky_relu.html">nn_leaky_relu</a></span>(<span class="fl">0.2</span>, <span class="kw">inplace</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
       <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span>(<span class="fl">16</span>, <span class="fl">32</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">stride</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">padding</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">bias</span> <span class="kw">=</span> <span class="fl">FALSE</span>),
       <span class="fu"><a href="../../reference/nn_batch_norm2d.html">nn_batch_norm2d</a></span>(<span class="fl">32</span>),
-      <span class="fu"><a href="../../reference/nn_relu.html">nn_relu</a></span>(),
+      <span class="fu"><a href="../../reference/nn_leaky_relu.html">nn_leaky_relu</a></span>(<span class="fl">0.2</span>, <span class="kw">inplace</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
       <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span>(<span class="fl">32</span>, <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">stride</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">padding</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">bias</span> <span class="kw">=</span> <span class="fl">FALSE</span>),
       <span class="fu"><a href="../../reference/nn_batch_norm2d.html">nn_batch_norm2d</a></span>(<span class="fl">64</span>),
-      <span class="fu"><a href="../../reference/nn_relu.html">nn_relu</a></span>(),
+      <span class="fu"><a href="../../reference/nn_leaky_relu.html">nn_leaky_relu</a></span>(<span class="fl">0.2</span>, <span class="kw">inplace</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
       <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span>(<span class="fl">64</span>, <span class="fl">128</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">stride</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">padding</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">bias</span> <span class="kw">=</span> <span class="fl">FALSE</span>),
-      <span class="fu"><a href="../../reference/nn_relu.html">nn_relu</a></span>()
+      <span class="fu"><a href="../../reference/nn_leaky_relu.html">nn_leaky_relu</a></span>(<span class="fl">0.2</span>, <span class="kw">inplace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
     )
     <span class="no">self</span>$<span class="no">linear</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="fl">128</span>, <span class="fl">1</span>)
     <span class="no">self</span>$<span class="no">sigmoid</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/nn_sigmoid.html">nn_sigmoid</a></span>()
   },
   <span class="kw">forward</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">input</span>) {
     <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">main</span>(<span class="no">input</span>)
-    <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_flatten.html">torch_flatten</a></span>(<span class="no">x</span>, <span class="kw">start_dim</span> <span class="kw">=</span> <span class="fl">1</span>)
+    <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_flatten.html">torch_flatten</a></span>(<span class="no">x</span>, <span class="kw">start_dim</span> <span class="kw">=</span> <span class="fl">2</span>)
     <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">linear</span>(<span class="no">x</span>)
     <span class="no">self</span>$<span class="fu">sigmoid</span>(<span class="no">x</span>)
   }
@@ -195,7 +195,7 @@
   <span class="no">img</span> <span class="kw">&lt;-</span> <span class="no">img</span>$<span class="fu">cpu</span>()
   <span class="no">img</span> <span class="kw">&lt;-</span> <span class="no">img</span>[<span class="fl">1</span>,<span class="fl">1</span>,,,<span class="no">newaxis</span>]/<span class="fl">2</span> + <span class="fl">0.5</span>
   <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_stack.html">torch_stack</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">img</span>, <span class="no">img</span>, <span class="no">img</span>), <span class="kw">dim</span> <span class="kw">=</span> <span class="fl">2</span>)[<span class="no">..</span>,<span class="fl">1</span>]
-  <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="fu">as_array</span>(<span class="no">img</span>))
+  <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="fu"><a href="../../reference/as_array.html">as_array</a></span>(<span class="no">img</span>))
   <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">img</span>)
 }
 
@@ -203,6 +203,18 @@
 
 <span class="no">G</span> <span class="kw">&lt;-</span> <span class="fu">generator</span>(<span class="kw">latent_dim</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">out_channels</span> <span class="kw">=</span> <span class="fl">1</span>)
 <span class="no">D</span> <span class="kw">&lt;-</span> <span class="fu">discriminator</span>(<span class="kw">in_channels</span> <span class="kw">=</span> <span class="fl">1</span>)
+
+<span class="no">init_weights</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">m</span>) {
+  <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"conv"</span>, <span class="no">m</span>$<span class="no">.classes</span><span class="kw">[[</span><span class="fl">1</span>]])) {
+    <span class="fu"><a href="../../reference/nn_init_normal_.html">nn_init_normal_</a></span>(<span class="no">m</span>$<span class="no">weight</span>$<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(), <span class="fl">0.0</span>, <span class="fl">0.02</span>)
+  } <span class="kw">else</span> <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"batch_norm"</span>, <span class="no">m</span>$<span class="no">.classes</span><span class="kw">[[</span><span class="fl">1</span>]])) {
+    <span class="fu"><a href="../../reference/nn_init_normal_.html">nn_init_normal_</a></span>(<span class="no">m</span>$<span class="no">weight</span>$<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(), <span class="fl">1.0</span>, <span class="fl">0.02</span>)
+    <span class="fu"><a href="../../reference/nn_init_constant_.html">nn_init_constant_</a></span>(<span class="no">m</span>$<span class="no">bias</span>$<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(), <span class="fl">0</span>)
+  }
+}
+
+<span class="no">G</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="no">init_weights</span>)
+<span class="no">D</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="no">init_weights</span>)
 
 <span class="no">G</span>$<span class="fu">to</span>(<span class="kw">device</span> <span class="kw">=</span> <span class="no">device</span>)
 <span class="no">D</span>$<span class="fu">to</span>(<span class="kw">device</span> <span class="kw">=</span> <span class="no">device</span>)

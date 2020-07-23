@@ -7,7 +7,7 @@
 nnf_softshrink(input, lambd = 0.5)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{lambd}{the lambda (must be no less than zero) value for the Softshrink

@@ -7,7 +7,7 @@
 nn_utils_rnn_pack_sequence(sequences, enforce_sorted = TRUE)
 }
 \arguments{
-\item{sequences}{(list\link{Tensor}): A list of sequences of decreasing length.}
+\item{sequences}{\code{(list[Tensor])}: A list of sequences of decreasing length.}
 
 \item{enforce_sorted}{(bool, optional): if \code{TRUE}, checks that the input
 contains sequences sorted by length in a decreasing order. If
@@ -27,10 +27,12 @@ is \code{TRUE}, the sequences should be sorted in the order of decreasing length
 \code{enforce_sorted = TRUE} is only necessary for ONNX export.
 }
 \examples{
+\dontrun{
 x <- torch_tensor(c(1,2,3), dtype = torch_long())
 y <- torch_tensor(c(4, 5), dtype = torch_long())
 z <- torch_tensor(c(6), dtype = torch_long())
 
 p <- nn_utils_rnn_pack_sequence(list(x, y, z))
 
+}
 }

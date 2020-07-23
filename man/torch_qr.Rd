@@ -26,7 +26,7 @@ LAPACK implementation.
 
 
 Computes the QR decomposition of a matrix or a batch of matrices \code{input},
-and returns a namedtuple (Q, R) of tensors such that \eqn{\text{input} = Q R}
+and returns a namedtuple (Q, R) of tensors such that \eqn{\mbox{input} = Q R}
 with \eqn{Q} being an orthogonal matrix or batch of orthogonal matrices and
 \eqn{R} being an upper triangular matrix or batch of upper triangular matrices.
 
@@ -35,6 +35,7 @@ Otherwise, if \code{some} is \code{False}, this function returns the complete QR
 }
 
 \examples{
+\dontrun{
 
 a = torch_tensor(matrix(c(12., -51, 4, 6, 167, -68, -4, 24, -41), ncol = 3, byrow = TRUE))
 out = torch_qr(a)
@@ -42,4 +43,5 @@ q = out[[1]]
 r = out[[2]]
 torch_mm(q, r)$round()
 torch_mm(q$t(), q)$round()
+}
 }

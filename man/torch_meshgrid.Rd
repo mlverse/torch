@@ -21,9 +21,11 @@ expanding the \eqn{i} \code{th} input over dimensions defined by other inputs.
 }
 
 \examples{
+\dontrun{
 
 x = torch_tensor(c(1, 2, 3))
 y = torch_tensor(c(4, 5, 6))
 out = torch_meshgrid(list(x, y))
 out
+}
 }

@@ -1,9 +1,9 @@
 Package: torch
 Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
-Version: 0.0.1.9000
+Version: 0.0.1
 Authors@R: c(
-    person("Daniel", "Falbel", email = "dfalbel@gmail.com", role = c("aut", "cre")),
+    person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre")),
     person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut")),
     person("Dmitriy", "Selivanov", role = c("ctb")),
     person("Athos", "Damiani", role = c("ctb")),
@@ -16,7 +16,7 @@ URL: http://mlverse.github.io/torch, https://github.com/mlverse/torch
 BugReports: https://github.com/mlverse/torch/issues
 Encoding: UTF-8
 LazyData: true
-SystemRequirements: C++11
+SystemRequirements: C++11, LibTorch (https://pytorch.org/)
 LinkingTo:
     Rcpp
 Imports:
@@ -24,7 +24,9 @@ Imports:
     R6,
     withr,
     rlang,
-    lazyeval
+    methods,
+    utils,
+    stats
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
@@ -34,9 +36,9 @@ Suggests:
     rmarkdown,
     bit64,
     fs,
-    palmerpenguins
-Remotes:
-    allisonhorst/palmerpenguins
+    magrittr,
+    glue,
+    magick
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
@@ -120,4 +122,3 @@ Collate:
     'vision_utils.R'
     'with-indices.R'
     'wrapers.R'
-StagedInstall: no

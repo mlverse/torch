@@ -3,7 +3,7 @@
 #' Applies element-wise,
 #' \deqn{ELU(x) = max(0,x) + min(0, \alpha * (exp(x) - 1))}.
 #'
-#' @param input (N,∗) tensor, where * means, any number of additional 
+#' @param input (N,*) tensor, where * means, any number of additional 
 #'   dimensions
 #' @param alpha the alpha value for the ELU formulation. Default: 1.0
 #' @param inplace can optionally do the operation in-place. Default: FALSE
@@ -66,13 +66,13 @@ nnf_hardswish <- function(input, inplaxce = FALSE) {
 #' Applies the hardswish function, element-wise, as described in the paper:
 #' Searching for MobileNetV3.
 #' 
-#' \deqn{
-#'   \text{Hardswish}(x) = \begin{cases}
-#' 0 & \text{if~} x \le -3, \\
-#' x & \text{if~} x \ge +3, \\
-#' x \cdot (x + 3) /6 & \text{otherwise}
-#' \end{cases}
-#' }
+#' \deqn{ \mbox{Hardswish}(x) = \left\{
+#'   \begin{array}{ll}
+#'   0 & \mbox{if } x \le -3, \\
+#'   x & \mbox{if } x \ge +3, \\
+#'   x \cdot (x + 3)/6 & \mbox{otherwise}
+#'   \end{array}
+#'   \right. }
 #' 
 #' @inheritParams nnf_elu
 #' 
@@ -117,7 +117,7 @@ nnf_hardtanh_ <- function(input, min_val = -1, max_val = 1) {
 
 #' Hardsigmoid
 #'
-#' Applies the element-wise function \eqn{\text{Hardsigmoid}(x) = \frac{ReLU6(x + 3)}{6}}
+#' Applies the element-wise function \eqn{\mbox{Hardsigmoid}(x) = \frac{ReLU6(x + 3)}{6}}
 #' 
 #' @inheritParams nnf_elu
 #' @param inplace NA If set to ``True``, will do this operation in-place. Default: ``False``
@@ -255,7 +255,7 @@ nnf_softmin <- function(input, dim, dtype = NULL) {
 #'   Default: `NULL`.
 #'
 #' @export
-nnf_log_softmax <- function(input, dim = NULL, dtype = NULL, ...) {
+nnf_log_softmax <- function(input, dim = NULL, dtype = NULL) {
   
   if (is.null(dtype))
     ret <- input$log_softmax(dim)
@@ -497,7 +497,30 @@ nnf_threshold_ <- function(input, threshold, value) {
 #'   which is a combination of q_proj_weight, k_proj_weight, v_proj_weight.
 #' @param q_proj_weight input projection weight and bias.
 #' @param static_k static key and value used for attention operators.
-#'
+#' @param query \eqn{(L, N, E)} where L is the target sequence length, N is the batch size, E is
+#'   the embedding dimension.
+#' @param key \eqn{(S, N, E)}, where S is the source sequence length, N is the batch size, E is
+#'   the embedding dimension.
+#' @param value \eqn{(S, N, E)} where S is the source sequence length, N is the batch size, E is
+#'   the embedding dimension.
+#' @param key_padding_mask \eqn{(N, S)} where N is the batch size, S is the source sequence length.
+#'   If a ByteTensor is provided, the non-zero positions will be ignored while the position
+#'   with the zero positions will be unchanged. If a BoolTensor is provided, the positions with the
+#'   value of ``True`` will be ignored while the position with the value of ``False`` will be unchanged.
+#' @param attn_mask 2D mask \eqn{(L, S)} where L is the target sequence length, S is the source sequence length.
+#'   3D mask \eqn{(N*num_heads, L, S)} where N is the batch size, L is the target sequence length,
+#'   S is the source sequence length. attn_mask ensure that position i is allowed to attend the unmasked
+#'   positions. If a ByteTensor is provided, the non-zero positions are not allowed to attend
+#'   while the zero positions will be unchanged. If a BoolTensor is provided, positions with ``True``
+#'   is not allowed to attend while ``False`` values will be unchanged. If a FloatTensor
+#'   is provided, it will be added to the attention weight.
+#' @param in_proj_bias currently undocumented.
+#' @param bias_v currently undocumented.
+#' @param out_proj_bias currently undocumented.
+#' @param k_proj_weight currently undocumented.
+#' @param v_proj_weight currently undocumented.
+#' @param static_v currently undocumented.
+#' 
 #' @export
 nnf_multi_head_attention_forward <- function(
   query,                           # type: Tensor
@@ -654,7 +677,7 @@ nnf_multi_head_attention_forward <- function(
     k_size <- k$size()
     k <- torch_cat(list(k, torch_zeros(append(list(k_size[1], 1), k_size[3:length(k_size)]),
                                        dtype = k$dtype, device = k$device)), dim = 1)
-    v_size
+    v_size <- v$size()
     k <- torch_cat(list(k, torch_zeros(append(list(v_size[1], 1), v_size[3:length(v_size)]),
                                        dtype = v$dtype, device = v$device)), dim = 1)
     
@@ -679,7 +702,7 @@ nnf_multi_head_attention_forward <- function(
   }
   
   if (!is.null(key_padding_mask)) {
-    attn_output_weights <- attn_output_weights$view(vsz, num_heads, tgt_len, src_len)
+    attn_output_weights <- attn_output_weights$view(bsz, num_heads, tgt_len, src_len)
     attn_output_weights <- attn_output_weights$masked_fill(
       key_padding_mask$unsqueeze(1)$unsqueeze(2),
       -Inf

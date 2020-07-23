@@ -4,7 +4,7 @@
 \alias{nn_threshold}
 \title{Threshoold module}
 \usage{
-nn_threshold(...)
+nn_threshold(threshold, value, inplace = FALSE)
 }
 \arguments{
 \item{threshold}{The value to threshold at}
@@ -20,10 +20,11 @@ Thresholds each element of the input Tensor.
 Threshold is defined as:
 \deqn{
   y = 
-  \begin{cases}
-  x, &\text{ if } x > \text{threshold} \\
-  \text{value}, &\text{ otherwise }
-  \end{cases}
+  \left\{ \begin{array}{ll}
+  x, &\mbox{ if } x > \mbox{threshold} \\
+  \mbox{value}, &\mbox{ otherwise }
+  \end{array}
+  \right.
 }
 }
 \section{Shape}{
@@ -36,8 +37,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_threshold(0.1, 20)
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

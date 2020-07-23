@@ -19,13 +19,15 @@ Returns a new tensor with the hyperbolic cosine  of the elements of
 \code{input}.
 
 \deqn{
-    \text{out}_{i} = \cosh(\text{input}_{i})
+    \mbox{out}_{i} = \cosh(\mbox{input}_{i})
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4))
 a
 torch_cosh(a)
+}
 }

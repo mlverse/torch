@@ -19,14 +19,16 @@ Return the division of the inputs rounded down to the nearest integer. See \code
 for type promotion and broadcasting rules.
 
 \deqn{
-    \text{{out}}_i = \left\lfloor \frac{{\text{{input}}_i}}{{\text{{other}}_i}} \right\rfloor
+    \mbox{{out}}_i = \left\lfloor \frac{{\mbox{{input}}_i}}{{\mbox{{other}}_i}} \right\rfloor
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_tensor(c(4.0, 3.0))
 b = torch_tensor(c(2.0, 2.0))
 torch_floor_divide(a, b)
 torch_floor_divide(a, 1.4)
+}
 }

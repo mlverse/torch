@@ -40,10 +40,10 @@ Sutskever et. al. and implementations in some other frameworks.
 
 Considering the specific case of Momentum, the update can be written as
 \deqn{
-  \begin{aligned}
+  \begin{array}{ll}
 v_{t+1} & = \mu * v_{t} + g_{t+1}, \\
-p_{t+1} & = p_{t} - \text{lr} * v_{t+1},
-\end{aligned}
+p_{t+1} & = p_{t} - \mbox{lr} * v_{t+1},
+\end{array}
 }
 
 where \eqn{p}, \eqn{g}, \eqn{v} and \eqn{\mu} denote the
@@ -53,15 +53,16 @@ This is in contrast to Sutskever et. al. and
 other frameworks which employ an update of the form
 
 \deqn{
-  \begin{aligned}
-v_{t+1} & = \mu * v_{t} + \text{lr} * g_{t+1}, \\
+  \begin{array}{ll}
+v_{t+1} & = \mu * v_{t} + \mbox{lr} * g_{t+1}, \\
 p_{t+1} & = p_{t} - v_{t+1}.
-\end{aligned}
+\end{array}
 }
 The Nesterov version is analogously modified.
 }
 
 \examples{
+\dontrun{
 \dontrun{
 optimizer <- optim_sgd(model$parameters(), lr=0.1, momentum=0.9)
 optimizer$zero_grad()
@@ -69,4 +70,5 @@ loss_fn(model(input), target)$backward()
 optimizer$step()
 }
 
+}
 }

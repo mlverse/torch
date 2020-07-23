@@ -20,12 +20,14 @@ sampled from a Poisson distribution with rate parameter given by the correspondi
 element in \code{input} i.e.,
 
 \deqn{
-    \text{out}_i \sim \text{Poisson}(\text{input}_i)
+    \mbox{out}_i \sim \mbox{Poisson}(\mbox{input}_i)
 }
 }
 
 \examples{
+\dontrun{
 
 rates = torch_rand(c(4, 4)) * 5  # rate parameter between 0 and 5
 torch_poisson(rates)
+}
 }

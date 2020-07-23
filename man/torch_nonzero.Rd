@@ -23,6 +23,9 @@ contains nonzero indices for a certain dimension.
 
 See below for more details on the two behaviors.
 }
+}
+\section{nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensors }{
+
 
 \strong{When} \code{as_tuple} \strong{is \code{False} (default)}:
 
@@ -48,11 +51,10 @@ non-zero elements in the \code{input} tensor.
 As a special case, when \code{input} has zero dimensions and a nonzero scalar
 value, it is treated as a one-dimensional tensor with one element.
 }
-\section{nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensors }{
-
-}
 
 \examples{
+\dontrun{
 
 torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)))
+}
 }

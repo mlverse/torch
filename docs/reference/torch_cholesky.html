@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -190,11 +190,13 @@
 matrix \(A\) or for batches of symmetric positive-definite matrices.</p>
 <p>If <code>upper</code> is <code>True</code>, the returned matrix <code>U</code> is upper-triangular, and
 the decomposition has the form:</p>
-<p>$$  A = U^TU
+<p>$$
+  A = U^TU
 $$
 If <code>upper</code> is <code>False</code>, the returned matrix <code>L</code> is lower-triangular, and
 the decomposition has the form:</p>
-<p>$$    A = LL^T
+<p>$$
+    A = LL^T
 $$
 If <code>upper</code> is <code>True</code>, and \(A\) is a batch of symmetric positive-definite
 matrices, then the returned tensor will be composed of upper-triangular Cholesky factors
@@ -203,29 +205,7 @@ tensor will be composed of lower-triangular Cholesky factors of each of the indi
 matrices.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive-definite</span>
-<span class='no'>l</span> <span class='kw'>=</span> <span class='fu'>torch_cholesky</span>(<span class='no'>a</span>)
-<span class='no'>a</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  4.6723  3.0541  0.2622
-#&gt;  3.0541  5.7308  0.7565
-#&gt;  0.2622  0.7565  7.9381
-#&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>l</span></div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.1615  0.0000  0.0000
-#&gt;  1.4129  1.9324  0.0000
-#&gt;  0.1213  0.3028  2.7985
-#&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>l</span>, <span class='no'>l</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>())</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  4.6723  3.0541  0.2622
-#&gt;  3.0541  5.7308  0.7565
-#&gt;  0.2622  0.7565  7.9380
-#&gt; [ CPUFloatType{3,3} ]</div><div class='input'><span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'>transpose</span>(-<span class='fl'>1</span>, -<span class='fl'>2</span>)) + <span class='fl'>1e-03</span> <span class='co'># make symmetric positive-definite</span>
-<span class='no'>l</span> <span class='kw'>=</span> <span class='fu'>torch_cholesky</span>(<span class='no'>a</span>)
-<span class='no'>z</span> <span class='kw'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>l</span>, <span class='no'>l</span>$<span class='fu'>transpose</span>(-<span class='fl'>1</span>, -<span class='fl'>2</span>))
-<span class='fu'><a href='torch_max.html'>torch_max</a></span>(<span class='fu'><a href='torch_abs.html'>torch_abs</a></span>(<span class='no'>z</span> - <span class='no'>a</span>)) <span class='co'># Max non-zero</span>
-}</div></pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

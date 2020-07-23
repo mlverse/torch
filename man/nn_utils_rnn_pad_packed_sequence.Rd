@@ -8,7 +8,7 @@ nn_utils_rnn_pad_packed_sequence(
   sequence,
   batch_first = FALSE,
   padding_value = 0,
-  total_lenght = NULL
+  total_length = NULL
 )
 }
 \arguments{
@@ -19,7 +19,7 @@ format.}
 
 \item{padding_value}{(float, optional): values for padded elements.}
 
-\item{total_length}{(int, optional): if not \code{None}, the output will be padded to
+\item{total_length}{(int, optional): if not \code{NULL}, the output will be padded to
 have length \code{total_length}. This method will throw \code{ValueError}
 if \code{total_length} is less than the max sequence length in
 \code{sequence}.}
@@ -28,10 +28,11 @@ if \code{total_length} is less than the max sequence length in
 Tuple of Tensor containing the padded sequence, and a Tensor
 containing the list of lengths of each sequence in the batch.
 Batch elements will be re-ordered as they were ordered originally when
-the batch was passed to \code{pack_padded_sequence} or \code{pack_sequence}.
+the batch was passed to \code{\link[=nn_utils_rnn_pack_padded_sequence]{nn_utils_rnn_pack_padded_sequence()}} or
+\code{\link[=nn_utils_rnn_pack_sequence]{nn_utils_rnn_pack_sequence()}}.
 }
 \description{
-It is an inverse operation to \link{pack_padded_sequence}.
+It is an inverse operation to \code{\link[=nn_utils_rnn_pack_padded_sequence]{nn_utils_rnn_pack_padded_sequence()}}.
 }
 \details{
 The returned Tensor's data will be of size \verb{T x B x *}, where \code{T} is the length
@@ -44,6 +45,7 @@ the data will be transposed into \verb{B x T x *} format.
 \code{nn_module} wrapped in \code{~torch.nn.DataParallel}.
 }
 \examples{
+\dontrun{
 seq <- torch_tensor(rbind(c(1,2,0), c(3,0,0), c(4,5,6)))        
 lens <- c(2,1,3)
 packed <- nn_utils_rnn_pack_padded_sequence(seq, lens, batch_first = TRUE,
@@ -51,4 +53,5 @@ packed <- nn_utils_rnn_pack_padded_sequence(seq, lens, batch_first = TRUE,
 packed
 nn_utils_rnn_pad_packed_sequence(packed, batch_first=TRUE)
 
+}
 }

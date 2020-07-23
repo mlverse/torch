@@ -5,6 +5,7 @@
 #' 
 #' @param obj the saved object
 #' @param path a connection or the name of the file to save.
+#' @param ... not currently used.
 #'
 #' @family torch_save
 #'

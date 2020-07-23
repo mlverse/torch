@@ -5,6 +5,7 @@
 \title{Fractional_max_pool3d}
 \usage{
 nnf_fractional_max_pool3d(
+  input,
   kernel_size,
   output_size = NULL,
   output_ratio = NULL,
@@ -13,6 +14,8 @@ nnf_fractional_max_pool3d(
 )
 }
 \arguments{
+\item{input}{the input tensor}
+
 \item{kernel_size}{the size of the window to take a max over. Can be a single number \eqn{k}
 (for a square kernel of \eqn{k * k * k}) or a tuple \verb{(kT, kH, kW)}}
 
@@ -26,7 +29,7 @@ range (0, 1)}
 
 \item{return_indices}{if \code{True}, will return the indices along with the outputs.}
 
-\item{input}{the input tensor}
+\item{random_samples}{undocumented argument.}
 }
 \description{
 Applies 3D fractional max pooling over an input signal composed of several input planes.

@@ -4,7 +4,7 @@
 \alias{nn_relu6}
 \title{ReLu6 module}
 \usage{
-nn_relu6(...)
+nn_relu6(inplace = FALSE)
 }
 \arguments{
 \item{inplace}{can optionally do the operation in-place. Default: \code{FALSE}}
@@ -14,7 +14,7 @@ Applies the element-wise function:
 }
 \details{
 \deqn{
-  \text{ReLU6}(x) = \min(\max(0,x), 6)
+  \mbox{ReLU6}(x) = \min(\max(0,x), 6)
 }
 }
 \section{Shape}{
@@ -27,8 +27,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_relu6()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

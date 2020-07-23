@@ -13,7 +13,7 @@
 
 \item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, \code{torch_long}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{\link{torch_set_default_tensor_type}}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
 \item{layout}{(\code{torch.layout}, optional) currently only support \code{torch_strided}.}
 }
@@ -47,11 +47,13 @@ where \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 
 \examples{
 \dontrun{
+\dontrun{
 a = torch_triu_indices(3, 3)
 a
 a = torch_triu_indices(4, 3, -1)
 a
 a = torch_triu_indices(4, 3, 1)
 a
+}
 }
 }

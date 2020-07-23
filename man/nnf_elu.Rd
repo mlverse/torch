@@ -10,7 +10,7 @@ nnf_elu(input, alpha = 1, inplace = FALSE)
 nnf_elu_(input, alpha = 1)
 }
 \arguments{
-\item{input}{(N,∗) tensor, where * means, any number of additional
+\item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
 
 \item{alpha}{the alpha value for the ELU formulation. Default: 1.0}
@@ -22,9 +22,11 @@ Applies element-wise,
 \deqn{ELU(x) = max(0,x) + min(0, \alpha * (exp(x) - 1))}.
 }
 \examples{
+\dontrun{
 x <- torch_randn(2, 2)
 y <- nnf_elu(x, alpha = 1)
 nnf_elu_(x, alpha = 1)
 torch_equal(x, y)
 
+}
 }

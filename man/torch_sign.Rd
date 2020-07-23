@@ -18,13 +18,15 @@ Sign
 Returns a new tensor with the signs of the elements of \code{input}.
 
 \deqn{
-    \text{out}_{i} = \operatorname{sgn}(\text{input}_{i})
+    \mbox{out}_{i} = \mbox{sgn}(\mbox{input}_{i})
 }
 }
 
 \examples{
+\dontrun{
 
 a = torch_tensor(c(0.7, -1.2, 0., 2.3))
 a
 torch_sign(a)
+}
 }

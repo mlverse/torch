@@ -25,8 +25,10 @@ for the exact semantics of this method.
 }
 
 \examples{
+\dontrun{
 
 a = torch_randn(c(4, 4))
 a
 torch_argsort(a, dim=1)
+}
 }

@@ -35,7 +35,7 @@
 #'   to the last, third cluster.
 #' * `div_value` is used to compute the size of each additional cluster,
 #'   which is given as
-#'   \eqn{\left\lfloor\frac{\texttt{in\_features}}{\texttt{div\_value}^{idx}}\right\rfloor},
+#'   \eqn{\left\lfloor\frac{\mbox{in\_features}}{\mbox{div\_value}^{idx}}\right\rfloor},
 #'   where \eqn{idx} is the cluster index (with clusters
 #'   for less frequent words having larger indices,
 #'   and indices starting from \eqn{1}).
@@ -59,7 +59,7 @@
 #' 
 #' 
 #' @param in_features (int): Number of features in the input tensor
-#'   n_classes (int): Number of classes in the dataset
+#' @param n_classes (int): Number of classes in the dataset
 #' @param cutoffs (Sequence): Cutoffs used to assign targets to their buckets
 #' @param div_value (float, optional): value used as an exponent to compute sizes
 #'   of the clusters. Default: 4.0
@@ -77,8 +77,8 @@
 #' 
 #' @section Shape:
 #' 
-#' - input: \eqn{(N, \texttt{in\_features})}
-#' - target: \eqn{(N)} where each value satisfies \eqn{0 <= \texttt{target[i]} <= \texttt{n\_classes}}
+#' - input: \eqn{(N, \mbox{in\_features})}
+#' - target: \eqn{(N)} where each value satisfies \eqn{0 <= \mbox{target[i]} <= \mbox{n\_classes}}
 #' - output1: \eqn{(N)}
 #' - output2: `Scalar`
 #' 

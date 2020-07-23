@@ -8,6 +8,8 @@ enumerate(x, ...)
 }
 \arguments{
 \item{x}{the generator to enumerate.}
+
+\item{...}{passed to specific methods.}
 }
 \description{
 Enumerate an iterator

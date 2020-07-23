@@ -11,13 +11,14 @@ with_enable_grad(code)
 }
 \description{
 Context-manager that enables gradient calculation.
-Enables gradient calculation, if it has been disabled via \link{with_no_grad} or \link{set_grad_enabled}.
+Enables gradient calculation, if it has been disabled via \link{with_no_grad}.
 }
 \details{
 This context manager is thread local; it will not affect computation in
 other threads.
 }
 \examples{
+\dontrun{
 
 x <- torch_tensor(1, requires_grad=TRUE)
 with_no_grad({
@@ -28,4 +29,5 @@ with_no_grad({
 y$backward()
 x$grad
 
+}
 }

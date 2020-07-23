@@ -4,7 +4,7 @@
 \alias{nn_softmax}
 \title{Softmax module}
 \usage{
-nn_softmax(...)
+nn_softmax(dim)
 }
 \arguments{
 \item{dim}{(int): A dimension along which Softmax will be computed (so every slice
@@ -13,17 +13,17 @@ along dim will sum to 1).}
 \value{
 :
 a Tensor of the same dimension and shape as the input with
-values in the range \link{0, 1}
+values in the range \verb{[0, 1]}
 }
 \description{
 Applies the Softmax function to an n-dimensional input Tensor
 rescaling them so that the elements of the n-dimensional output Tensor
-lie in the range \link{0,1} and sum to 1.
+lie in the range \verb{[0,1]} and sum to 1.
 Softmax is defined as:
 }
 \details{
 \deqn{
-  \text{Softmax}(x_{i}) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}
+  \mbox{Softmax}(x_{i}) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}
 }
 
 When the input Tensor is a sparse tensor then the unspecifed
@@ -44,8 +44,10 @@ dimensions
 }
 
 \examples{
+\dontrun{
 m <- nn_softmax(1)
 input <- torch_randn(2, 3)
 output <- m(input)
 
+}
 }

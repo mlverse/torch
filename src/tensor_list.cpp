@@ -1,5 +1,5 @@
 #include "torch_types.h"
-#include "utils.hpp"
+#include "utils.h"
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchTensorList> cpp_torch_tensor_list(const Rcpp::List &x)

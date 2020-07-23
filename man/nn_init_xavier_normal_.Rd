@@ -17,7 +17,9 @@ described in \verb{Understanding the difficulty of training deep feedforward neu
 distribution.
 }
 \examples{
+\dontrun{
 w <- torch_empty(3, 5)
 nn_init_xavier_normal_(w)
 
+}
 }
