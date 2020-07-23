@@ -273,7 +273,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "add", function(other, alpha = 1) {  args <- mget(x = c("other", "alpha"))
+Tensor$set("public", "add", function(other, alpha = 1L) {  args <- mget(x = c("other", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"), alpha = "Scalar")
 nd_args <- c("self", "other")
@@ -286,7 +286,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "add_", function(other, alpha = 1) {  args <- mget(x = c("other", "alpha"))
+Tensor$set("public", "add_", function(other, alpha = 1L) {  args <- mget(x = c("other", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"), alpha = "Scalar")
 nd_args <- c("self", "other")
@@ -299,7 +299,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addbmm", function(batch1, batch2, beta = 1, alpha = 1) {  args <- mget(x = c("batch1", "batch2", "beta", "alpha"))
+Tensor$set("public", "addbmm", function(batch1, batch2, beta = 1L, alpha = 1L) {  args <- mget(x = c("batch1", "batch2", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", batch1 = "Tensor", batch2 = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -313,7 +313,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addbmm_", function(batch1, batch2, beta = 1, alpha = 1) {  args <- mget(x = c("batch1", "batch2", "beta", "alpha"))
+Tensor$set("public", "addbmm_", function(batch1, batch2, beta = 1L, alpha = 1L) {  args <- mget(x = c("batch1", "batch2", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", batch1 = "Tensor", batch2 = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -327,7 +327,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addcdiv", function(tensor1, tensor2, value = 1) {  args <- mget(x = c("tensor1", "tensor2", "value"))
+Tensor$set("public", "addcdiv", function(tensor1, tensor2, value = 1L) {  args <- mget(x = c("tensor1", "tensor2", "value"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", tensor1 = "Tensor", tensor2 = "Tensor", 
     value = "Scalar")
@@ -341,7 +341,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addcdiv_", function(tensor1, tensor2, value = 1) {  args <- mget(x = c("tensor1", "tensor2", "value"))
+Tensor$set("public", "addcdiv_", function(tensor1, tensor2, value = 1L) {  args <- mget(x = c("tensor1", "tensor2", "value"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", tensor1 = "Tensor", tensor2 = "Tensor", 
     value = "Scalar")
@@ -355,7 +355,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addcmul", function(tensor1, tensor2, value = 1) {  args <- mget(x = c("tensor1", "tensor2", "value"))
+Tensor$set("public", "addcmul", function(tensor1, tensor2, value = 1L) {  args <- mget(x = c("tensor1", "tensor2", "value"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", tensor1 = "Tensor", tensor2 = "Tensor", 
     value = "Scalar")
@@ -369,7 +369,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addcmul_", function(tensor1, tensor2, value = 1) {  args <- mget(x = c("tensor1", "tensor2", "value"))
+Tensor$set("public", "addcmul_", function(tensor1, tensor2, value = 1L) {  args <- mget(x = c("tensor1", "tensor2", "value"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", tensor1 = "Tensor", tensor2 = "Tensor", 
     value = "Scalar")
@@ -383,7 +383,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addmm", function(mat1, mat2, beta = 1, alpha = 1) {  args <- mget(x = c("mat1", "mat2", "beta", "alpha"))
+Tensor$set("public", "addmm", function(mat1, mat2, beta = 1L, alpha = 1L) {  args <- mget(x = c("mat1", "mat2", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", mat1 = "Tensor", mat2 = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -397,7 +397,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addmm_", function(mat1, mat2, beta = 1, alpha = 1) {  args <- mget(x = c("mat1", "mat2", "beta", "alpha"))
+Tensor$set("public", "addmm_", function(mat1, mat2, beta = 1L, alpha = 1L) {  args <- mget(x = c("mat1", "mat2", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", mat1 = "Tensor", mat2 = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -411,7 +411,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addmv", function(mat, vec, beta = 1, alpha = 1) {  args <- mget(x = c("mat", "vec", "beta", "alpha"))
+Tensor$set("public", "addmv", function(mat, vec, beta = 1L, alpha = 1L) {  args <- mget(x = c("mat", "vec", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", mat = "Tensor", vec = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -425,7 +425,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addmv_", function(mat, vec, beta = 1, alpha = 1) {  args <- mget(x = c("mat", "vec", "beta", "alpha"))
+Tensor$set("public", "addmv_", function(mat, vec, beta = 1L, alpha = 1L) {  args <- mget(x = c("mat", "vec", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", mat = "Tensor", vec = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -439,7 +439,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addr", function(vec1, vec2, beta = 1, alpha = 1) {  args <- mget(x = c("vec1", "vec2", "beta", "alpha"))
+Tensor$set("public", "addr", function(vec1, vec2, beta = 1L, alpha = 1L) {  args <- mget(x = c("vec1", "vec2", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", vec1 = "Tensor", vec2 = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -453,7 +453,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "addr_", function(vec1, vec2, beta = 1, alpha = 1) {  args <- mget(x = c("vec1", "vec2", "beta", "alpha"))
+Tensor$set("public", "addr_", function(vec1, vec2, beta = 1L, alpha = 1L) {  args <- mget(x = c("vec1", "vec2", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", vec1 = "Tensor", vec2 = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -586,7 +586,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "argsort", function(dim = -1, descending = FALSE) {  args <- mget(x = c("dim", "descending"))
+Tensor$set("public", "argsort", function(dim = -1L, descending = FALSE) {  args <- mget(x = c("dim", "descending"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), descending = "bool")
 nd_args <- "self"
@@ -719,7 +719,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "baddbmm", function(batch1, batch2, beta = 1, alpha = 1) {  args <- mget(x = c("batch1", "batch2", "beta", "alpha"))
+Tensor$set("public", "baddbmm", function(batch1, batch2, beta = 1L, alpha = 1L) {  args <- mget(x = c("batch1", "batch2", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", batch1 = "Tensor", batch2 = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -733,7 +733,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "baddbmm_", function(batch1, batch2, beta = 1, alpha = 1) {  args <- mget(x = c("batch1", "batch2", "beta", "alpha"))
+Tensor$set("public", "baddbmm_", function(batch1, batch2, beta = 1L, alpha = 1L) {  args <- mget(x = c("batch1", "batch2", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", batch1 = "Tensor", batch2 = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -773,7 +773,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "bincount", function(weights = list(), minlength = 0) {  args <- mget(x = c("weights", "minlength"))
+Tensor$set("public", "bincount", function(weights = list(), minlength = 0L) {  args <- mget(x = c("weights", "minlength"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", weights = "Tensor", minlength = "int64_t")
 nd_args <- "self"
@@ -903,7 +903,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "cauchy_", function(median = 0, sigma = 1, generator = NULL) {  args <- mget(x = c("median", "sigma", "generator"))
+Tensor$set("public", "cauchy_", function(median = 0L, sigma = 1L, generator = NULL) {  args <- mget(x = c("median", "sigma", "generator"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", median = "double", sigma = "double", generator = "Generator *")
 nd_args <- "self"
@@ -981,7 +981,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "chunk", function(chunks, dim = 1) {  args <- mget(x = c("chunks", "dim"))
+Tensor$set("public", "chunk", function(chunks, dim = 1L) {  args <- mget(x = c("chunks", "dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", chunks = "int64_t", dim = "int64_t")
 nd_args <- c("self", "chunks")
@@ -1332,7 +1332,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "diag", function(diagonal = 0) {  args <- mget(x = c("diagonal"))
+Tensor$set("public", "diag", function(diagonal = 0L) {  args <- mget(x = c("diagonal"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", diagonal = "int64_t")
 nd_args <- "self"
@@ -1345,7 +1345,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "diag_embed", function(offset = 0, dim1 = -2, dim2 = -1) {  args <- mget(x = c("offset", "dim1", "dim2"))
+Tensor$set("public", "diag_embed", function(offset = 0L, dim1 = -2L, dim2 = -1L) {  args <- mget(x = c("offset", "dim1", "dim2"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", offset = "int64_t", dim1 = "int64_t", dim2 = "int64_t")
 nd_args <- "self"
@@ -1358,7 +1358,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "diagflat", function(offset = 0) {  args <- mget(x = c("offset"))
+Tensor$set("public", "diagflat", function(offset = 0L) {  args <- mget(x = c("offset"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", offset = "int64_t")
 nd_args <- "self"
@@ -1371,7 +1371,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "diagonal", function(outdim, dim1 = 1, dim2 = 2, offset = 0) {  args <- mget(x = c("outdim", "dim1", "dim2", "offset"))
+Tensor$set("public", "diagonal", function(outdim, dim1 = 1L, dim2 = 2L, offset = 0L) {  args <- mget(x = c("outdim", "dim1", "dim2", "offset"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", outdim = "Dimname", dim1 = c("int64_t", 
 "Dimname"), dim2 = c("int64_t", "Dimname"), offset = "int64_t")
@@ -1411,7 +1411,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "dist", function(other, p = 2) {  args <- mget(x = c("other", "p"))
+Tensor$set("public", "dist", function(other, p = 2L) {  args <- mget(x = c("other", "p"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", other = "Tensor", p = "Scalar")
 nd_args <- c("self", "other")
@@ -1671,7 +1671,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "exponential_", function(lambd = 1, generator = NULL) {  args <- mget(x = c("lambd", "generator"))
+Tensor$set("public", "exponential_", function(lambd = 1L, generator = NULL) {  args <- mget(x = c("lambd", "generator"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", lambd = "double", generator = "Generator *")
 nd_args <- "self"
@@ -1723,7 +1723,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "flatten", function(dims, start_dim = 1, end_dim = -1, out_dim) {  args <- mget(x = c("dims", "start_dim", "end_dim", "out_dim"))
+Tensor$set("public", "flatten", function(dims, start_dim = 1L, end_dim = -1L, out_dim) {  args <- mget(x = c("dims", "start_dim", "end_dim", "out_dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dims = "DimnameList", start_dim = c("int64_t", 
 "Dimname"), end_dim = c("int64_t", "Dimname"), out_dim = "Dimname")
@@ -1985,7 +1985,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "histc", function(bins = 100, min = 0, max = 0) {  args <- mget(x = c("bins", "min", "max"))
+Tensor$set("public", "histc", function(bins = 100L, min = 0L, max = 0L) {  args <- mget(x = c("bins", "min", "max"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", bins = "int64_t", min = "Scalar", max = "Scalar")
 nd_args <- "self"
@@ -2358,7 +2358,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "kthvalue", function(k, dim = -1, keepdim = FALSE) {  args <- mget(x = c("k", "dim", "keepdim"))
+Tensor$set("public", "kthvalue", function(k, dim = -1L, keepdim = FALSE) {  args <- mget(x = c("k", "dim", "keepdim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", k = "int64_t", dim = c("int64_t", "Dimname"
 ), keepdim = "bool")
@@ -2478,7 +2478,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "log_normal_", function(mean = 1, std = 2, generator = NULL) {  args <- mget(x = c("mean", "std", "generator"))
+Tensor$set("public", "log_normal_", function(mean = 1L, std = 2L, generator = NULL) {  args <- mget(x = c("mean", "std", "generator"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", mean = "double", std = "double", generator = "Generator *")
 nd_args <- "self"
@@ -2954,7 +2954,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "mode", function(dim = -1, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
+Tensor$set("public", "mode", function(dim = -1L, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), keepdim = "bool")
 nd_args <- "self"
@@ -3191,7 +3191,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "norm", function(p = 2, dim, keepdim = FALSE, dtype) {  args <- mget(x = c("p", "dim", "keepdim", "dtype"))
+Tensor$set("public", "norm", function(p = 2L, dim, keepdim = FALSE, dtype) {  args <- mget(x = c("p", "dim", "keepdim", "dtype"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", p = "Scalar", dim = c("IntArrayRef", "DimnameList"
 ), keepdim = "bool", dtype = "ScalarType")
@@ -3205,7 +3205,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "normal_", function(mean = 0, std = 1, generator = NULL) {  args <- mget(x = c("mean", "std", "generator"))
+Tensor$set("public", "normal_", function(mean = 0L, std = 1L, generator = NULL) {  args <- mget(x = c("mean", "std", "generator"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", mean = "double", std = "double", generator = "Generator *")
 nd_args <- "self"
@@ -3793,7 +3793,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "rot90", function(k = 1, dims = c(0,1)) {  args <- mget(x = c("k", "dims"))
+Tensor$set("public", "rot90", function(k = 1L, dims = c(0,1)) {  args <- mget(x = c("k", "dims"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", k = "int64_t", dims = "IntArrayRef")
 nd_args <- "self"
@@ -4083,7 +4083,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "slice", function(dim = 1, start = 0, end = 9223372036854775807, step = 1) {  args <- mget(x = c("dim", "start", "end", "step"))
+Tensor$set("public", "slice", function(dim = 1L, start = 0L, end = 9223372036854775807, step = 1L) {  args <- mget(x = c("dim", "start", "end", "step"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = "int64_t", start = "int64_t", end = "int64_t", 
     step = "int64_t")
@@ -4149,7 +4149,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "sort", function(dim = -1, descending = FALSE) {  args <- mget(x = c("dim", "descending"))
+Tensor$set("public", "sort", function(dim = -1L, descending = FALSE) {  args <- mget(x = c("dim", "descending"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), descending = "bool")
 nd_args <- "self"
@@ -4216,7 +4216,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "split", function(split_size, dim = 1) {  args <- mget(x = c("split_size", "dim"))
+Tensor$set("public", "split", function(split_size, dim = 1L) {  args <- mget(x = c("split_size", "dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", split_size = "int64_t", dim = "int64_t")
 nd_args <- c("self", "split_size")
@@ -4229,7 +4229,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "split_with_sizes", function(split_sizes, dim = 1) {  args <- mget(x = c("split_sizes", "dim"))
+Tensor$set("public", "split_with_sizes", function(split_sizes, dim = 1L) {  args <- mget(x = c("split_sizes", "dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", split_sizes = "IntArrayRef", dim = "int64_t")
 nd_args <- c("self", "split_sizes")
@@ -4320,7 +4320,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "sspaddmm", function(mat1, mat2, beta = 1, alpha = 1) {  args <- mget(x = c("mat1", "mat2", "beta", "alpha"))
+Tensor$set("public", "sspaddmm", function(mat1, mat2, beta = 1L, alpha = 1L) {  args <- mget(x = c("mat1", "mat2", "beta", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", mat1 = "Tensor", mat2 = "Tensor", beta = "Scalar", 
     alpha = "Scalar")
@@ -4376,7 +4376,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "sub", function(other, alpha = 1) {  args <- mget(x = c("other", "alpha"))
+Tensor$set("public", "sub", function(other, alpha = 1L) {  args <- mget(x = c("other", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"), alpha = "Scalar")
 nd_args <- c("self", "other")
@@ -4389,7 +4389,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "sub_", function(other, alpha = 1) {  args <- mget(x = c("other", "alpha"))
+Tensor$set("public", "sub_", function(other, alpha = 1L) {  args <- mget(x = c("other", "alpha"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"), alpha = "Scalar")
 nd_args <- c("self", "other")
@@ -4600,7 +4600,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "topk", function(k, dim = -1, largest = TRUE, sorted = TRUE) {  args <- mget(x = c("k", "dim", "largest", "sorted"))
+Tensor$set("public", "topk", function(k, dim = -1L, largest = TRUE, sorted = TRUE) {  args <- mget(x = c("k", "dim", "largest", "sorted"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", k = "int64_t", dim = "int64_t", largest = "bool", 
     sorted = "bool")
@@ -4668,7 +4668,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "tril", function(diagonal = 0) {  args <- mget(x = c("diagonal"))
+Tensor$set("public", "tril", function(diagonal = 0L) {  args <- mget(x = c("diagonal"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", diagonal = "int64_t")
 nd_args <- "self"
@@ -4681,7 +4681,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "tril_", function(diagonal = 0) {  args <- mget(x = c("diagonal"))
+Tensor$set("public", "tril_", function(diagonal = 0L) {  args <- mget(x = c("diagonal"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", diagonal = "int64_t")
 nd_args <- "self"
@@ -4694,7 +4694,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "triu", function(diagonal = 0) {  args <- mget(x = c("diagonal"))
+Tensor$set("public", "triu", function(diagonal = 0L) {  args <- mget(x = c("diagonal"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", diagonal = "int64_t")
 nd_args <- "self"
@@ -4707,7 +4707,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "triu_", function(diagonal = 0) {  args <- mget(x = c("diagonal"))
+Tensor$set("public", "triu_", function(diagonal = 0L) {  args <- mget(x = c("diagonal"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", diagonal = "int64_t")
 nd_args <- "self"
@@ -4785,7 +4785,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "unbind", function(dim = 1) {  args <- mget(x = c("dim"))
+Tensor$set("public", "unbind", function(dim = 1L) {  args <- mget(x = c("dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"))
 nd_args <- "self"
@@ -4826,7 +4826,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "uniform_", function(from = 0, to = 1, generator = NULL) {  args <- mget(x = c("from", "to", "generator"))
+Tensor$set("public", "uniform_", function(from = 0L, to = 1L, generator = NULL) {  args <- mget(x = c("from", "to", "generator"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", from = "double", to = "double", generator = "Generator *")
 nd_args <- "self"

@@ -102,6 +102,37 @@ std::string translate_target_index_msg (std::string msg)
   return msg;
 }
 
+std::string translate_contract_error_msg (std::string msg)
+{
+  auto regex = std::regex("(?:.|\\r?\\n)*contracted dimensions need to match, but first has size [0-9]+ in dim ([0-9]+) and second has size [0-9]+ in dim ([0-9]+)(?:.|\\r?\\n)*");
+  std::smatch m;
+  
+  if (std::regex_match(msg, m, regex))
+  {
+    auto l = msg.length();
+    msg.replace(m.position(1), m.length(1), std::to_string(std::stoi(m[1].str()) + 1));
+    
+    // treat the case when we get 9 and we increased the lenght of 
+    // the string by 1.
+    int d = 0;
+    if (l < msg.length())
+    {
+      d = msg.length() - l;
+    }
+    
+    auto i = std::stoi(msg.substr(m.position(2) + d, m.length(2)));
+    
+    if (i >= 0)
+    {
+      i  = i + 1;
+    }
+    
+    msg.replace(m.position(2) + d, m.length(2), std::to_string(i));
+  }
+  
+  return msg;
+}
+
 // translate error messages
 std::string translate_error_message (std::string msg)
 {
@@ -111,5 +142,6 @@ std::string translate_error_message (std::string msg)
   out = translate_max_index_msg(out);
   out = translate_index_out_of_range_msg(out);
   out = translate_target_index_msg(out);
+  out = translate_contract_error_msg(out);
   return out;
 }

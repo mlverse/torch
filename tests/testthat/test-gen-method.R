@@ -12,6 +12,16 @@ test_that("__and__", {
   expect_equal_to_tensor(y, x)
 })
 
+test_that("add", {
+  
+  x <- torch_tensor(1L, dtype = torch_long())
+  expect_equal_to_r(x$add(1L)$to(dtype = torch_int()), 2L)
+  
+  x <- torch_tensor(1)
+  expect_equal_to_r(x$add(1), 2)
+  
+})
+
 test_that("clone", {
   
   x <- torch_randn(10, 10)

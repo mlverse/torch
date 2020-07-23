@@ -159,3 +159,16 @@ test_that("torch_nll_loss out of bound", {
   )
   
 })
+
+test_that("tensordot error message", {
+  
+  a <- torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
+  b <- torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
+  
+  expect_error(
+    torch_tensordot(a, b, dims_self=c(2, 1), dims_other = c(1, 3)),
+    regex = "contracted dimensions need to match, but first has size 3 in dim 1 and second has size 2 in dim 3",
+    fixed = TRUE
+  )
+  
+})
