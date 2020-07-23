@@ -13,9 +13,10 @@ tools/torchgen/.Rbuildignore
 .*\.tmp
 ^vignettes/examples/.*
 ^deps/.*
-^inst/deps/.*
 ^bench/.*
 ^docker/.*
 ^test.html
 ^LICENSE\.md$
 ^.*torchpkg.dll$
+# uncomment below for CRAN submission
+# ^inst/deps/.*
