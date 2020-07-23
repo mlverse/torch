@@ -95,3 +95,43 @@ test_that("save more complicated module", {
   expect_equal_to_tensor(net(x), reloaded_net(x))
   
 })
+
+test_that("save alexnet like model", {
+  
+  net <- nn_module(
+    "Net",
+    initialize = function() {
+      self$features <- nn_sequential(
+        nn_conv2d(3, 5, kernel_size = 11, stride = 4, padding = 2),
+        nn_relu()
+      )
+      self$avgpool <- nn_max_pool2d(c(6,6))
+      self$classifier <- nn_sequential(
+        nn_dropout(),
+        nn_linear(10, 10),
+        nn_relu(),
+        nn_dropout()
+      )
+    },
+    forward = function(x) {
+      x <- self$features(x)
+      x <- self$avgpool(x)
+      x <- torch_flatten(x, start_dim = 2)
+      x <- self$classifier(x)
+    }
+  )
+  
+  model <- net()
+  
+  fname <- tempfile(fileext = ".pt")
+  torch_save(model, fname)
+  m <- torch_load(fname)
+  
+  pars <- model$parameters
+  r_pars <- m$parameters
+  
+  for (i in seq_along(pars))
+    expect_equal_to_tensor(pars[[i]], r_pars[[i]])
+  
+})
+

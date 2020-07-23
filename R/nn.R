@@ -9,6 +9,10 @@ nn_Module <- R6::R6Class(
     },
     
     add_module = function(name, module) {
+      
+      if (is.numeric(name))
+        name <- paste0("m", name)
+      
       private$modules_[[name]] <- module
     },
     
@@ -171,7 +175,7 @@ nn_Module <- R6::R6Class(
       
       load <- function(module, state_dict, prefix="") {
         module$.load_from_state_dict(state_dict, prefix)
-        for (nm in names(private$modules_)) {
+        for (nm in names(module$.__enclos_env__$private$modules_)) {
          child <- module$.__enclos_env__$private$modules_[[nm]]
          if (!is.null(child)) {
            load(child, state_dict, prefix = paste0(prefix, nm, "."))
