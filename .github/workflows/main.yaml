@@ -38,7 +38,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
-      - uses: r-lib/actions/setup-tinytex@v1
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
@@ -55,8 +54,7 @@ jobs:
           Rscript tools/buildlantern.R
       - name: Check
         run:  |
-          print(Sys.info())
-          rcmdcheck::rcmdcheck(args = c("--no-multiarch"), error_on = "warning", check_dir = "check")
+          rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
       - name: Install
         run: |
