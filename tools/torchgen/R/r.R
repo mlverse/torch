@@ -132,10 +132,14 @@ r_argument_default <- function(default) {
   if (default == "TRUE")
     return("TRUE")
 
-  if (default %in% c("1", "0", "-1", "2", "0.000010", "0.000000",
-                     "1.000000", "-2", "0.500000", "100", "0.010000",
-                     "10.000000", "-100", "0.000001", "0.125000",
-                     "0.333333", "9223372036854775807", "20"))
+  if (default %in% c("1", "0", "-1", "2", "-2", "100", "-100",
+                     "20"))
+    return(paste0(default, "L"))
+
+  if (default %in% c("0.000010", "0.000000",
+                     "1.000000", "0.500000", "0.010000",
+                     "10.000000", "0.000001", "0.125000",
+                     "0.333333", "9223372036854775807"))
     return(default)
 
   if (default == "{}")
@@ -179,11 +183,17 @@ r_argument <- function(name, decls) {
 
 
 can_be_numeric <- function(x) {
+
+  x <- stringr::str_replace_all(x, "L", "")
+
   suppressWarnings(x <- as.numeric(x))
   !is.na(x)
 }
 
 to_1_based <- function(x) {
+
+  is_int <- stringr::str_detect(x, "L$")
+  x <- stringr::str_replace_all(x, "L", "")
 
   x <- as.numeric(x)
 
@@ -192,7 +202,12 @@ to_1_based <- function(x) {
   else
     out <- x
 
-  as.character(out)
+  out <- as.character(out)
+
+  if (is_int)
+    out <- paste0(out, "L")
+
+  out
 }
 
 r_argument_with_default <- function(name, decls) {

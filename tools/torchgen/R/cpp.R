@@ -455,7 +455,7 @@ cpp <- function(path) {
   writeLines(
     c(
       '// This file is auto generated. Dont modify it by hand.',
-      '#include "utils.hpp"',
+      '#include "utils.h"',
       '',
       methods_code,
       namespace_code
