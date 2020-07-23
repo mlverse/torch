@@ -9,6 +9,10 @@ nn_Module <- R6::R6Class(
     },
     
     add_module = function(name, module) {
+      
+      if (is.numeric(name))
+        name <- paste0("m", name)
+      
       private$modules_[[name]] <- module
     },
     
