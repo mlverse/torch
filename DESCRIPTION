@@ -35,10 +35,8 @@ Suggests:
     knitr,
     rmarkdown,
     bit64,
-    fs,
     magrittr,
-    glue,
-    magick
+    glue
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
@@ -50,12 +48,9 @@ Collate:
     'conditions.R'
     'creation-ops.R'
     'cuda.R'
-    'utils-data.R'
-    'dataset-mnist.R'
     'device.R'
     'dimname_list.R'
     'dtype.R'
-    'folder-dataset.R'
     'gen-method.R'
     'gen-namespace-docs.R'
     'gen-namespace-examples.R'
@@ -68,6 +63,7 @@ Collate:
     'lantern_sync.R'
     'layout.R'
     'memory_format.R'
+    'utils-data.R'
     'nn.R'
     'nn-activation.R'
     'nn-batchnorm.R'
@@ -111,7 +107,6 @@ Collate:
     'storage.R'
     'tensor_list.R'
     'tensor_options.R'
-    'tiny-imagenet-dataset.R'
     'utils-data-collate.R'
     'utils-data-dataloader.R'
     'utils-data-enum.R'
@@ -119,6 +114,5 @@ Collate:
     'utils-data-sampler.R'
     'utils.R'
     'variable_list.R'
-    'vision_utils.R'
     'with-indices.R'
     'wrapers.R'

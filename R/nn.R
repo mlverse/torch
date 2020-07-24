@@ -1,3 +1,6 @@
+#' @include utils-data.R
+NULL
+
 nn_Module <- R6::R6Class(
   classname = "nn_Module",
   lock_objects = FALSE,
