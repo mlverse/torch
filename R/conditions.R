@@ -2,6 +2,10 @@ value_error <- function(..., env = rlang::caller_env()) {
   rlang::abort(glue::glue(..., .envir = env), class = "value_error")
 }
 
+type_error <- function(..., env = rlang::caller_env()) {
+  rlang::abort(glue::glue(..., .envir = env), class = "type_error")
+}
+
 runtime_error <- function(..., env = rlang::caller_env()) {
   rlang::abort(glue::glue(..., .envir = env), class = "runtime_error")
 }
