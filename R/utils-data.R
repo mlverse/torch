@@ -43,9 +43,11 @@ get_init <- function(x) {
 #' @param inherit you can optionally inherit from a dataset when creating a 
 #'   new dataset.
 #' @param ... public methods for the dataset class
+#' @param parent_env An environment to use as the parent of newly-created 
+#'   objects.
 #' 
 #' @export
-dataset <- function(name = NULL, inherit = Dataset, ...) {
+dataset <- function(name = NULL, inherit = Dataset, ..., parent_env = parent.frame()) {
   
   args <- list(...)
   
@@ -55,13 +57,17 @@ dataset <- function(name = NULL, inherit = Dataset, ...) {
   
   if (!is.null(attr(inherit, "Dataset")))
     inherit <- attr(inherit, "Dataset")
+  
+  e <- new.env(parent = parent_env)
+  e$inherit <- inherit
     
   d <- R6::R6Class(
     classname = name,
     lock_objects = FALSE,
     inherit = inherit,
     public = args,
-    active = active
+    active = active,
+    parent_env = e
   )
   
   init <- get_init(d)
