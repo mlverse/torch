@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^deps.*
 ^.github.*
 ^.vscode.*
 tools/torchgen/.Rbuildignore
@@ -20,3 +19,4 @@ tools/torchgen/.Rbuildignore
 ^.*torchpkg.dll$
 # uncomment below for CRAN submission
 # ^inst/deps/.*
+# ^deps.*
