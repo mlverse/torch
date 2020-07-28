@@ -107,12 +107,20 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
                             recompute_scale_factor = NULL) {
   
   scale_factor_len <- input$dim() - 2
-  if (length(scale_factor) == 1)
-    scale_factor_repeated <- rep(scale_factor, scale_factor_len)
-  else
-    scale_factor_repeated <- scale_factor
+  scale_factor_list <- scale_factor
   
-  sfl <- scale_factor_repeated
+  if (!is.null(scale_factor) && (
+    is.null(recompute_scale_factor) || !recompute_scale_factor)) {
+    
+    if (length(scale_factor) == 1)
+      scale_factor_repeated <- rep(scale_factor, scale_factor_len)
+    else
+      scale_factor_repeated <- scale_factor
+    
+    scale_factor_list <- scale_factor_repeated
+  }
+    
+  sfl <- scale_factor_list
   sze <- interp_output_size(input, size = size, scale_factor = scale_factor, 
                             recompute_scale_factor = recompute_scale_factor)
   
