@@ -11,7 +11,6 @@ tools/torchgen/.Rbuildignore
 ^lantern$
 .*\.tmp
 ^vignettes/examples/.*
-^deps/.*
 ^bench/.*
 ^docker/.*
 ^test.html
