@@ -142,7 +142,11 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         std::string call = node[idx]["name"].as<std::string>();
         if ((dtype.find("c10::optional") != std::string::npos) & (type != "std::vector<torch::Dimname>"))
         {
-            call = "optional<" + addNamespace(type) + ">(" + call + ")";
+            if (type != "double")
+            {
+                call = "optional<" + addNamespace(type) + ">(" + call + ")";
+            }
+            
             type = "c10::optional<" + type + ">";
         }
 
