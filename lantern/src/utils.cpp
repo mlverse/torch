@@ -50,7 +50,7 @@ void *_lantern_optional_double(double x, bool is_null)
   LANTERN_FUNCTION_START
   c10::optional<double> out;
   if (is_null)
-    out = NULL;
+    out = c10::nullopt;
   else
     out = x;
 

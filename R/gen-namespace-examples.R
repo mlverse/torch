@@ -2091,7 +2091,6 @@ NULL
 #' @examples
 #'
 #' torch_result_type(tensor = torch_tensor(c(1, 2), dtype=torch_int()), 1.0)
-#' # torch_result_type(tensor = torch_tensor(c(1, 2), dtype=torch_uint8()), torch_tensor(1))
 NULL
 # -> result_type <-
 
