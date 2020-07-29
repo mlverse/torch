@@ -7,6 +7,6 @@ test_that("interpolate", {
   img <- torch_rand(1, 3, 32, 32)
   o <- nnf_interpolate(img, size = c(40, 40), mode = "bilinear")
   expect_tensor_shape(o, c(1, 3, 40, 40))
-  expect_true(!as_array(torch_any(torch_isnan(o)))) # no nans
+  expect_true(!any(as_array(torch_isnan(o)))) # no nans
   
 })
