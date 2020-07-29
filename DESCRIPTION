@@ -3,14 +3,16 @@ Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
 Version: 0.0.1
 Authors@R: c(
-    person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre")),
-    person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut")),
+    person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre", "cph")),
+    person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut", "cph")),
     person("Dmitriy", "Selivanov", role = c("ctb")),
     person("Athos", "Damiani", role = c("ctb")),
     person(family = "RStudio", role = c("cph"))
     )
-Description: Provides functionality similar to 'PyTorch' but written entirely in R and
-    the 'libtorch' library. Also supports low-level tensor operations and 'GPU' acceleration.
+Description: Provides functionality to define and train neural networks similar to 
+    'PyTorch' by Paszke et al (2019) <arXiv:1912.01703> but written entirely in R 
+    using the 'libtorch' library. Also supports low-level tensor operations and 
+    'GPU' acceleration.
 License: MIT + file LICENSE
 URL: http://mlverse.github.io/torch, https://github.com/mlverse/torch
 BugReports: https://github.com/mlverse/torch/issues
