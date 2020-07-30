@@ -50,7 +50,7 @@ If \code{upper} is \code{False}, then lower triangular portion is used.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(5, 5))
 a = a + a$t()  # To make a symmetric

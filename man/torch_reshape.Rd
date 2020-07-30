@@ -28,7 +28,7 @@ dimensions and the number of elements in \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_arange(0, 4)
 torch_reshape(a, list(2, 2))

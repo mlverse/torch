@@ -8,7 +8,7 @@ install_torch(
   version = "1.5.0",
   type = install_type(version = version),
   reinstall = FALSE,
-  path = install_path(),
+  path = NULL,
   ...
 )
 }

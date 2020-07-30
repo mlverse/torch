@@ -42,7 +42,7 @@ This function accumulates gradients in the leaves - you might need to zero
 them before calling it.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 x <- torch_tensor(1, requires_grad = TRUE)
 y <- 2 * x
 

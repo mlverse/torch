@@ -17,7 +17,7 @@ nn_init_uniform_(tensor, a = 0, b = 1)
 Fills the input Tensor with values drawn from the uniform distribution
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_uniform_(w)
 

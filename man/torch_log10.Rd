@@ -24,7 +24,7 @@ of \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_rand(5)
 a

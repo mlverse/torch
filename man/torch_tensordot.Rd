@@ -22,7 +22,7 @@ Returns a contraction of a and b over multiple dimensions.\preformatted{`tensord
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
 b = torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))

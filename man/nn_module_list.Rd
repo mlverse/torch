@@ -15,7 +15,7 @@ modules it contains are properly registered, and will be visible by all
 \code{nn_module} methods.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 my_module <- nn_module(
  initialize = function() {

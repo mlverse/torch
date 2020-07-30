@@ -20,7 +20,7 @@ dtype. If the input tensor is not a bool tensor, zeros are treated as \code{Fals
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_logical_not(torch_tensor(c(TRUE, FALSE)))
 torch_logical_not(torch_tensor(c(0, 1, -10), dtype=torch_int8()))

@@ -28,7 +28,7 @@ and \code{\link{torch_chunk}}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_randn(c(2, 3))
 x

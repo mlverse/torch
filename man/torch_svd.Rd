@@ -57,7 +57,7 @@ of shape \eqn{(m \times m)} and \eqn{(n \times n)} respectively. \code{some} wil
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(5, 3))
 a

@@ -24,7 +24,7 @@ for type promotion and broadcasting rules.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_tensor(c(4.0, 3.0))
 b = torch_tensor(c(2.0, 2.0))

@@ -34,7 +34,7 @@ will squeeze the tensor to the shape \eqn{(A \times B)}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_zeros(c(2, 1, 2, 1, 2))
 x

@@ -42,7 +42,7 @@ This function is deprecated in favor of \code{\link{torch_arange}}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_range(1, 4)
 torch_range(1, 4, 0.5)

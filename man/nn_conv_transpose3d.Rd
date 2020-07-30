@@ -144,7 +144,7 @@ sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 \dontrun{
 # With square kernels and equal stride
 m <- nn_conv_transpose3d(16, 33, 3, stride=2)

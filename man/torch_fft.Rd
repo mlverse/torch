@@ -58,7 +58,7 @@ For CPU tensors, this method is currently only available with MKL. Use
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 # unbatched 2D FFT
 x = torch_randn(c(4, 3, 2))

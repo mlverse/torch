@@ -36,7 +36,7 @@ See \code{~torch.nn.ConvTranspose2d} for details and output shape.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 # With square kernels and equal stride
 inputs = torch_randn(c(1, 4, 5, 5))

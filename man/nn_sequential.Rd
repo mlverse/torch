@@ -17,7 +17,7 @@ Modules will be added to it in the order they are passed in the constructor.
 See examples.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 model <- nn_sequential(
   nn_conv2d(1, 20, 5),

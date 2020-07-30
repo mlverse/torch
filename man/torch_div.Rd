@@ -54,7 +54,7 @@ by zero leads to undefined behavior.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(5))
 a

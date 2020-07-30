@@ -42,7 +42,7 @@ For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{be
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 M = torch_randn(c(2, 3))
 mat1 = torch_randn(c(2, 3))

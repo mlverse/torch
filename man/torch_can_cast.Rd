@@ -20,7 +20,7 @@ described in the type promotion documentation .
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_can_cast(torch_double(), torch_float())
 torch_can_cast(torch_float(), torch_int())

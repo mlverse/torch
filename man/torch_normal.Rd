@@ -60,7 +60,7 @@ among all drawn elements. The resulting tensor has size given by \code{size}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 \dontrun{
 torch_normal(mean=0, std=torch_arange(1, 0, -0.1))

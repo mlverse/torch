@@ -25,7 +25,7 @@ is returned.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(2, 2, 2))
 a

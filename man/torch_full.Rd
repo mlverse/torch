@@ -38,7 +38,7 @@ and an integral \code{fill_value} will return a tensor of torch.long dtype.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_full(list(2, 3), 3.141592)
 }

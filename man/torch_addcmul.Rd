@@ -36,7 +36,7 @@ a real number, otherwise an integer.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 t = torch_randn(c(1, 3))
 t1 = torch_randn(c(3, 1))

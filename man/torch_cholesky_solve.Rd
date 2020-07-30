@@ -40,7 +40,7 @@ batched outputs \code{c}
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(3, 3))
 a = torch_mm(a, a$t()) # make symmetric positive definite

@@ -35,7 +35,7 @@ they are of size 1. Otherwise, \code{dim} is squeezed
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_arange(1., 6.)
 x

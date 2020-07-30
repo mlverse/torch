@@ -25,7 +25,7 @@ for the exact semantics of this method.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(4, 4))
 a

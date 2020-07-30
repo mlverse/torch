@@ -22,7 +22,7 @@ A \code{torch_device}  is an object representing the device on which a \code{tor
 is or will be allocated.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 # Via string
 torch_device("cuda:1")

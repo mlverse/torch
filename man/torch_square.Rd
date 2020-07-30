@@ -19,7 +19,7 @@ Returns a new tensor with the square of the elements of \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(4))
 a

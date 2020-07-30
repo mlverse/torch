@@ -17,7 +17,7 @@ Broadcasts the given tensors according to broadcasting-semantics.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_arange(0, 3)$view(c(1, 3))
 y = torch_arange(0, 2)$view(c(2, 1))

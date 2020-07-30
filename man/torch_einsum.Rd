@@ -20,7 +20,7 @@ Einstein summation convention.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_randn(c(5))
 y = torch_randn(c(4))

@@ -33,7 +33,7 @@ the main diagonal. The main diagonal are the set of indices
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(3, 3))
 a

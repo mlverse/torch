@@ -30,7 +30,7 @@ The argument \code{offset} controls which diagonal to consider:
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(3))
 a

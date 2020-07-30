@@ -44,7 +44,7 @@ via the biased estimator. Otherwise, Bessel's correction will be used.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(1, 3))
 a

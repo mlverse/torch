@@ -28,7 +28,7 @@ If \code{input} is a \eqn{(n \times m)} tensor, \code{mat2} is a
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 mat1 = torch_randn(c(2, 3))
 mat2 = torch_randn(c(3, 3))

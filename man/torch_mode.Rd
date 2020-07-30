@@ -36,7 +36,7 @@ in the output tensors having 1 fewer dimension than \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randint(0, 50, size = list(5))
 a

@@ -44,7 +44,7 @@ need to be explicitly specified.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(2, 3))
 torch_diag_embed(a)

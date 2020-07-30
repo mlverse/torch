@@ -23,7 +23,7 @@ Returns a new tensor with the sine of the elements of \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(4))
 a
