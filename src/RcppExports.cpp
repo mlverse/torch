@@ -22980,7 +22980,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_generator_current_seed
-Rcpp::NumericVector cpp_generator_current_seed(Rcpp::XPtr<XPtrTorchGenerator> generator);
+std::string cpp_generator_current_seed(Rcpp::XPtr<XPtrTorchGenerator> generator);
 RcppExport SEXP _torch_cpp_generator_current_seed(SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -22991,12 +22991,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_generator_set_current_seed
-void cpp_generator_set_current_seed(Rcpp::XPtr<XPtrTorchGenerator> generator, std::uint64_t seed);
+void cpp_generator_set_current_seed(Rcpp::XPtr<XPtrTorchGenerator> generator, std::string seed);
 RcppExport SEXP _torch_cpp_generator_set_current_seed(SEXP generatorSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchGenerator> >::type generator(generatorSEXP);
-    Rcpp::traits::input_parameter< std::uint64_t >::type seed(seedSEXP);
+    Rcpp::traits::input_parameter< std::string >::type seed(seedSEXP);
     cpp_generator_set_current_seed(generator, seed);
     return R_NilValue;
 END_RCPP
