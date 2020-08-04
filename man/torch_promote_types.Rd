@@ -22,7 +22,7 @@ promotion logic.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_promote_types(torch_int32(), torch_float32())
 torch_promote_types(torch_uint8(), torch_long())

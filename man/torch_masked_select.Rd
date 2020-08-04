@@ -29,7 +29,7 @@ to match, but they must be broadcastable .
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_randn(c(3, 4))
 x

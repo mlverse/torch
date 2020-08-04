@@ -29,7 +29,7 @@ maximum values of the data are used.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_histc(torch_tensor(c(1., 2, 1)), bins=4, min=0, max=3)
 }

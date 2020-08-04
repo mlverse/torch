@@ -14,7 +14,7 @@ Returns the sum of the elements of the diagonal of the input 2-D matrix.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_arange(1., 10.)$view(c(3, 3))
 x

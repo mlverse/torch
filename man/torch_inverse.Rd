@@ -26,7 +26,7 @@ individual inverses.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 \dontrun{
 x = torch_rand(c(4, 4))
 y = torch_inverse(x)

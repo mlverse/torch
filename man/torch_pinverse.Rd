@@ -31,7 +31,7 @@ Please look at \verb{Moore-Penrose inverse}_ for more details
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 input = torch_randn(c(3, 5))
 input

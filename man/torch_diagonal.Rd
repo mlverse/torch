@@ -37,7 +37,7 @@ dimensions, so those need to be explicitly specified.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(3, 3))
 a

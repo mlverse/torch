@@ -29,7 +29,7 @@ As above, but the sample points are spaced uniformly at a distance of \code{dx}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 y = torch_randn(list(2, 3))
 y

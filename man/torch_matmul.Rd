@@ -45,7 +45,7 @@ tensor, \code{out} will be an \eqn{(j \times k \times n \times p)} tensor.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 # vector x vector
 tensor1 = torch_randn(c(3))

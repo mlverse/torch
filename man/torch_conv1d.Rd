@@ -34,7 +34,7 @@ See \code{~torch.nn.Conv1d} for details and output shape.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 filters = torch_randn(c(33, 16, 3))
 inputs = torch_randn(c(20, 16, 50))

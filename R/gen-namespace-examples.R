@@ -641,6 +641,8 @@ NULL
 #' @name torch_einsum
 #'
 #' @examples
+#' 
+#' if (FALSE) {
 #'
 #' x = torch_randn(c(5))
 #' y = torch_randn(c(4))
@@ -658,6 +660,8 @@ NULL
 #' torch_einsum('...ii->...i', list(A)) # batch diagonal
 #' A = torch_randn(c(2, 3, 4, 5))
 #' torch_einsum('...ij->...ji', list(A))$shape # batch permute
+#' 
+#' }
 NULL
 # -> einsum <-
 
@@ -1739,7 +1743,7 @@ NULL
 #'
 #' a = torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
 #' b = torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
-#' torch_tensordot(a, b, dims_self=c(1, 0), dims_other = c(0, 1))
+#' torch_tensordot(a, b, dims_self=c(2, 1), dims_other = c(1, 2))
 #' \dontrun{
 #' a = torch_randn(3, 4, 5, device='cuda')
 #' b = torch_randn(4, 5, 6, device='cuda')

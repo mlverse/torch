@@ -33,7 +33,7 @@ batched outputs \code{X}
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 A = torch_randn(c(2, 2))$triu()
 A

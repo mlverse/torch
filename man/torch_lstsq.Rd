@@ -46,7 +46,7 @@ remaining \eqn{m - n} rows of that column.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 A = torch_tensor(rbind(
  c(1,1,1),

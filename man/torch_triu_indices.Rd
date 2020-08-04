@@ -46,7 +46,7 @@ where \eqn{d_{1}, d_{2}} are the dimensions of the matrix.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 \dontrun{
 a = torch_triu_indices(3, 3)
 a

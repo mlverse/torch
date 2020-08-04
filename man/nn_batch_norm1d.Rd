@@ -77,7 +77,7 @@ on \verb{(N, L)} slices, it's common terminology to call this Temporal Batch Nor
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 # With Learnable Parameters
 m <- nn_batch_norm1d(100)
 # Without Learnable Parameters

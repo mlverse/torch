@@ -72,7 +72,7 @@ initialized from \eqn{\mathcal{N}(0, 1)}
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 # an Embedding module containing 10 tensors of size 3
 embedding <- nn_embedding(10, 3)
 # a batch of 2 samples of 4 indices each

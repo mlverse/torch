@@ -23,7 +23,7 @@ python's \code{itertools.combinations} when \code{with_replacement} is set to \c
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = c(1, 2, 3)
 tensor_a = torch_tensor(a)

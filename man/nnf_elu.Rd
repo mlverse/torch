@@ -22,7 +22,7 @@ Applies element-wise,
 \deqn{ELU(x) = max(0,x) + min(0, \alpha * (exp(x) - 1))}.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 x <- torch_randn(2, 2)
 y <- nnf_elu(x, alpha = 1)
 nnf_elu_(x, alpha = 1)

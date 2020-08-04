@@ -22,7 +22,7 @@ treated as \code{True}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_logical_or(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
 a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())

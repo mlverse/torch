@@ -51,7 +51,7 @@ of tensor \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 weights = torch_tensor(c(0, 10, 3, 0), dtype=torch_float()) # create a tensor of weights
 torch_multinomial(weights, 2)

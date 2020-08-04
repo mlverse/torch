@@ -28,7 +28,7 @@ size \eqn{m}, \code{out} will be 1-D of size \eqn{n}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 mat = torch_randn(c(2, 3))
 vec = torch_randn(c(3))

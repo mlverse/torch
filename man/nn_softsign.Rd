@@ -22,7 +22,7 @@ dimensions
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 m <- nn_softsign()
 input <- torch_randn(2)
 output <- m(input)

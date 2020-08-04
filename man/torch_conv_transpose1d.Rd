@@ -36,7 +36,7 @@ See \code{~torch.nn.ConvTranspose1d} for details and output shape.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 inputs = torch_randn(c(20, 16, 50))
 weights = torch_randn(c(16, 33, 5))

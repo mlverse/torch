@@ -74,7 +74,7 @@ and the second \code{int} for the width dimension
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 # pool of square window of size=3, stride=2
 m <- nn_max_pool2d(3, stride=2)
 # pool of non-square window

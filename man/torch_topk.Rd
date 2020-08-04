@@ -38,7 +38,7 @@ The boolean option \code{sorted} if \code{True}, will make sure that the returne
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_arange(1., 6.)
 x

@@ -18,7 +18,7 @@ python's \code{itertools.product}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = c(1, 2, 3)
 b = c(4, 5)
