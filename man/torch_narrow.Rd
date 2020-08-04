@@ -25,7 +25,7 @@ returned tensor and \code{input} tensor share the same underlying storage.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_tensor(matrix(c(1:9), ncol = 3, byrow= TRUE))
 torch_narrow(x, 1, torch_tensor(0L)$sum(dim = 1), 2)

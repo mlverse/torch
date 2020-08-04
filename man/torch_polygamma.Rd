@@ -30,7 +30,7 @@ Computes the \eqn{n^{th}} derivative of the digamma function on \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 \dontrun{
 a = torch_tensor(c(1, 0.5))
 torch_polygamma(1, a)

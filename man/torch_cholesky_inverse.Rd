@@ -36,7 +36,7 @@ triangular such that the returned tensor is
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 \dontrun{
 a = torch_randn(c(3, 3))

@@ -21,7 +21,7 @@ If \eqn{N} is 1, then this is a no-op - the original matrix is returned as is.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(3, 4))
 b = torch_randn(c(4, 5))

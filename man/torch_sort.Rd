@@ -33,7 +33,7 @@ sorted values and \code{indices} are the indices of the elements in the original
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_randn(c(3, 4))
 out = torch_sort(x)

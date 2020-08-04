@@ -34,7 +34,7 @@ If the \code{repeats} is \verb{tensor([n1, n2, n3, ...])}, then the output will 
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 \dontrun{
 x = torch_tensor(c(1, 2, 3))
 x$repeat_interleave(2)

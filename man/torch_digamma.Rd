@@ -21,7 +21,7 @@ Computes the logarithmic derivative of the gamma function on \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_tensor(c(1, 0.5))
 torch_digamma(a)

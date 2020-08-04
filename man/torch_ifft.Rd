@@ -57,7 +57,7 @@ For CPU tensors, this method is currently only available with MKL. Use
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_randn(c(3, 3, 2))
 x

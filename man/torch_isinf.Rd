@@ -17,7 +17,7 @@ Returns a new tensor with boolean elements representing if each element is \verb
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_isinf(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
 }

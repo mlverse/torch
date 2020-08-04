@@ -21,7 +21,7 @@ for more information on the type promotion logic.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_result_type(tensor = torch_tensor(c(1, 2), dtype=torch_int()), 1.0)
 }

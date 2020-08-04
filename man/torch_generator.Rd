@@ -12,7 +12,7 @@ that produces pseudo random numbers. Used as a keyword argument in many
 In-place random sampling functions.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 # Via string
 generator <- torch_generator()

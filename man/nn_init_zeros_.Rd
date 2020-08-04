@@ -13,7 +13,7 @@ nn_init_zeros_(tensor)
 Fills the input Tensor with the scalar value \code{0}
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_zeros_(w)
 

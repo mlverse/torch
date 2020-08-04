@@ -24,7 +24,7 @@ LU factorization of A from \code{torch_lu}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 A = torch_randn(c(2, 3, 3))
 b = torch_randn(c(2, 3, 1))
 out = torch_lu(A)

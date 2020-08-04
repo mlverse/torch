@@ -28,7 +28,7 @@ Calculates log determinant of a square matrix or batches of square matrices.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 A = torch_randn(c(3, 3))
 torch_det(A)

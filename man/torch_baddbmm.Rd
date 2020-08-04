@@ -45,7 +45,7 @@ For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{be
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 M = torch_randn(c(10, 3, 5))
 batch1 = torch_randn(c(10, 3, 4))

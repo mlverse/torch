@@ -74,7 +74,7 @@ of K-dimensional loss.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 loss <- nn_cross_entropy_loss()
 input <- torch_randn(3, 5, requires_grad=TRUE)
 target <- torch_randint(low = 1, high = 5, size = 3, dtype = torch_long())

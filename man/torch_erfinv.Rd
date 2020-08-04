@@ -24,7 +24,7 @@ The inverse error function is defined in the range \eqn{(-1, 1)} as:
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_erfinv(torch_tensor(c(0, 0.5, -1.)))
 }

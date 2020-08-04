@@ -27,7 +27,7 @@ location of each maximum value found in the dimension \code{dim}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(10))
 a

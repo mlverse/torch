@@ -15,7 +15,7 @@ nn_init_constant_(tensor, val)
 Fills the input Tensor with the value \code{val}.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_constant_(w, 0.3)
 

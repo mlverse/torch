@@ -53,7 +53,7 @@ The operation applied is:
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(4))
 a

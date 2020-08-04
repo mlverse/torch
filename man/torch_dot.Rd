@@ -17,7 +17,7 @@ Computes the dot product (inner product) of two tensors.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_dot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
 }

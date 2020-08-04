@@ -37,7 +37,7 @@ dimensions
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 m <- nn_threshold(0.1, 20)
 input <- torch_randn(2)
 output <- m(input)

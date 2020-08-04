@@ -18,7 +18,7 @@ Computes the fractional portion of each element in \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_frac(torch_tensor(c(1, 2.5, -3.2)))
 }

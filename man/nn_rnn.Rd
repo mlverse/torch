@@ -131,7 +131,7 @@ where \eqn{k = \frac{1}{\mbox{hidden\_size}}}
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 rnn <- nn_rnn(10, 20, 2)
 input <- torch_randn(5, 3, 10)
 h0 <- torch_randn(2, 3, 20)

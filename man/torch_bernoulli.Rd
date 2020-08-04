@@ -39,7 +39,7 @@ point \code{dtype}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_empty(c(3, 3))$uniform_(0, 1)  # generate a uniform random matrix with range c(0, 1)
 a

@@ -47,7 +47,7 @@ If \code{bias} is \code{TRUE}, the values are initialized from
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 m <- nn_bilinear(20, 30, 50)
 input1 <- torch_randn(128, 20)
 input2 <- torch_randn(128, 30)

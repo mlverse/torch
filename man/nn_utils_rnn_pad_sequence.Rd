@@ -36,7 +36,7 @@ where \code{T} is the length of the longest sequence. This function assumes
 trailing dimensions and type of all the Tensors in sequences are same.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 a <- torch_ones(25, 300)
 b <- torch_ones(22, 300)
 c <- torch_ones(15, 300)

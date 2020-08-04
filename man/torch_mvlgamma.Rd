@@ -27,7 +27,7 @@ All elements must be greater than \eqn{\frac{p - 1}{2}}, otherwise an error woul
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_empty(c(2, 3))$uniform_(1, 2)
 a

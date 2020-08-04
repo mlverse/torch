@@ -24,7 +24,7 @@ to the original shape.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 x = torch_tensor(c(1, 2, 3, 4, 5, 6, 7, 8))$view(c(4, 2))
 x

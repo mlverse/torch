@@ -11,7 +11,7 @@ library(roxygen2)
 .S3method("format", "rd_section_examples", function (x, ...) {
   value <- paste0(x$value, collapse = "\n")
   roxygen2:::rd_macro("examples",
-    roxygen2:::rd_macro("dontrun", value, space = TRUE),
+    c("if (torch_is_installed()) {", value, "}"),
     space = TRUE
   )
 })

@@ -30,7 +30,7 @@ The shape of the tensor is defined by the variable argument \code{size}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_rand(4)
 torch_rand(c(2, 3))

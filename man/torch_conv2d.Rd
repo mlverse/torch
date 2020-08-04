@@ -34,7 +34,7 @@ See \code{~torch.nn.Conv2d} for details and output shape.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 # With square kernels and equal stride
 filters = torch_randn(c(8,4,3,3))

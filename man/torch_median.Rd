@@ -38,7 +38,7 @@ the outputs tensor having 1 fewer dimension than \code{input}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(1, 3))
 a

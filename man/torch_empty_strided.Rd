@@ -40,7 +40,7 @@ the tensors, please clone them first.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_empty_strided(list(2, 3), list(1, 2))
 a

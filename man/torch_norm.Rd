@@ -27,7 +27,7 @@ Returns the matrix norm or vector norm of a given tensor.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_arange(0, 9, dtype = torch_float())
 b = a$reshape(list(3, 3))
