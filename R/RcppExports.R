@@ -6885,6 +6885,10 @@ cpp_generator_set_current_seed <- function(generator, seed) {
     invisible(.Call('_torch_cpp_generator_set_current_seed', PACKAGE = 'torchpkg', generator, seed))
 }
 
+cpp_torch_manual_seed <- function(seed) {
+    invisible(.Call('_torch_cpp_torch_manual_seed', PACKAGE = 'torchpkg', seed))
+}
+
 enquos0 <- function(env) {
     .Call('_torch_enquos0', PACKAGE = 'torchpkg', env)
 }
