@@ -23001,6 +23001,16 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_torch_manual_seed
+void cpp_torch_manual_seed(std::string seed);
+RcppExport SEXP _torch_cpp_torch_manual_seed(SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type seed(seedSEXP);
+    cpp_torch_manual_seed(seed);
+    return R_NilValue;
+END_RCPP
+}
 // enquos0
 std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env);
 RcppExport SEXP _torch_enquos0(SEXP envSEXP) {
@@ -25488,6 +25498,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_generator", (DL_FUNC) &_torch_cpp_torch_generator, 0},
     {"_torch_cpp_generator_current_seed", (DL_FUNC) &_torch_cpp_generator_current_seed, 1},
     {"_torch_cpp_generator_set_current_seed", (DL_FUNC) &_torch_cpp_generator_set_current_seed, 2},
+    {"_torch_cpp_torch_manual_seed", (DL_FUNC) &_torch_cpp_torch_manual_seed, 1},
     {"_torch_enquos0", (DL_FUNC) &_torch_enquos0, 1},
     {"_torch_evaluate_slices", (DL_FUNC) &_torch_evaluate_slices, 2},
     {"_torch_Tensor_slice", (DL_FUNC) &_torch_Tensor_slice, 4},

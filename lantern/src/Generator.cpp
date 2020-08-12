@@ -29,3 +29,8 @@ void _lantern_Generator_set_current_seed(void *generator, uint64_t seed)
   reinterpret_cast<LanternObject<std::shared_ptr<torch::Generator>> *>(generator)->get()->set_current_seed(seed);
   LANTERN_FUNCTION_END_VOID
 }
+
+void _lantern_manual_seed (int64_t seed)
+{
+  torch::manual_seed(seed);
+}

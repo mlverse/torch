@@ -57,3 +57,12 @@ is_torch_generator <- function(x) {
   inherits(x, "torch_generator")
 }
 
+#' Sets the seed for generating random numbers.
+#' 
+#' @param seed integer seed.
+#' 
+#' @export
+torch_manual_seed <- function(seed) {
+  cpp_torch_manual_seed(as.character(seed))
+}
+
