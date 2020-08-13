@@ -192,7 +192,7 @@ nn_max_pool2d <- nn_module(
 #' # pool of square window of size=3, stride=2
 #' m <- nn_max_pool3d(3, stride=2)
 #' # pool of non-square window
-#' m <- nn_max_pool3d((3, 2, 2), stride=(2, 1, 2))
+#' m <- nn_max_pool3d(c(3, 2, 2), stride=c(2, 1, 2))
 #' input <- torch_randn(20, 16, 50,44, 31)
 #' output <- m(input)
 #' 
@@ -243,12 +243,12 @@ nn_max_pool3d <- nn_module(
 #' pool <- nn_max_pool1d(2, stride=2, return_indices=TRUE)
 #' unpool <- nn_max_unpool1d(2, stride=2)
 #' 
-#' input <- torch_tensor(matrix(1:8/1, nrow = 1))
+#' input <- torch_tensor(array(1:8/1, dim = c(1,1,8)))
 #' out <- pool(input)
 #' unpool(out[[1]], out[[2]])
 #' 
 #' # Example showcasing the use of output_size
-#' input <- torch_tensor(matrix(1:8/1, nrow = 1))
+#' input <- torch_tensor(array(1:8/1, dim = c(1,1,8)))
 #' out <- pool(input)
 #' unpool(out[[1]], out[[2]], output_size=input$size())
 #' unpool(out[[1]], out[[2]])

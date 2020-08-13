@@ -256,8 +256,8 @@ unpool_output_size <- function(input, kernel_size, stride, padding, output_size)
     }
     
     for (d in seq_along(kernel_size)) {
-      min_size <- default_size[d] - stride[d]
-      max_size <- default_size[d] + stride[d]
+      min_size <- default_size[[d]] - stride[d]
+      max_size <- default_size[[d]] + stride[d]
     }
     
     ret <- output_size
