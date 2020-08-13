@@ -139,3 +139,71 @@ nn_max_pool2d <- nn_module(
   }
 )
 
+#' Applies a 3D max pooling over an input signal composed of several input
+#' planes.
+#' 
+#' In the simplest case, the output value of the layer with input size \eqn{(N, C, D, H, W)},
+#' output \eqn{(N, C, D_{out}, H_{out}, W_{out})} and `kernel_size` \eqn{(kD, kH, kW)}
+#' can be precisely described as:
+#' 
+#' \deqn{
+#'   \begin{aligned}
+#' \text{out}(N_i, C_j, d, h, w) ={} & \max_{k=0, \ldots, kD-1} \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
+#' & \text{input}(N_i, C_j, \text{stride[0]} \times d + k,
+#'                \text{stride[1]} \times h + m, \text{stride[2]} \times w + n)
+#' \end{aligned}
+#' }
+#' 
+#' If `padding` is non-zero, then the input is implicitly zero-padded on both sides
+#' for `padding` number of points. `dilation` controls the spacing between the kernel points.
+#' It is harder to describe, but this `link`_ has a nice visualization of what `dilation` does.
+#' The parameters `kernel_size`, `stride`, `padding`, `dilation` can either be:
+#'  - a single `int` -- in which case the same value is used for the depth, height and width dimension
+#'  - a `tuple` of three ints -- in which case, the first `int` is used for the depth dimension,
+#'    the second `int` for the height dimension and the third `int` for the width dimension
+#' 
+#' @param kernel_size the size of the window to take a max over
+#' @param stride the stride of the window. Default value is `kernel_size`
+#' @param padding implicit zero padding to be added on all three sides
+#' @param dilation a parameter that controls the stride of elements in the window
+#' @param return_indices if `TRUE`, will return the max indices along with the outputs.
+#'   Useful for `torch_nn.MaxUnpool3d` later
+#' @param ceil_mode: when TRUE, will use `ceil` instead of `floor` to compute the output shape
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C, D_{in}, H_{in}, W_{in})}
+#' - Output: \eqn{(N, C, D_{out}, H_{out}, W_{out})}, where
+#' \deqn{
+#'   D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] - \text{dilation}[0] \times
+#'     (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+#' }
+#' 
+#' \deqn{
+#'   H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] - \text{dilation}[1] \times
+#'     (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+#' }
+#' 
+#' \deqn{
+#'   W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] - \text{dilation}[2] \times
+#'     (\text{kernel\_size}[2] - 1) - 1}{\text{stride}[2]} + 1\right\rfloor
+#' }
+#' 
+#' @examples
+#' # pool of square window of size=3, stride=2
+#' m <- nn_max_pool3d(3, stride=2)
+#' # pool of non-square window
+#' m <- nn_max_pool3d((3, 2, 2), stride=(2, 1, 2))
+#' input <- torch_randn(20, 16, 50,44, 31)
+#' output <- m(input)
+#' 
+#' @export
+nn_max_pool3d <- nn_module(
+  "nn_max_pool3d",
+  inherit = nn_max_pool_nd,
+  forward = function(input) {
+    nnf_max_pool3d(input, self$kernel_size, self$stride,
+                 self$padding, self$dilation, self$ceil_mode,
+                 self$return_indices)
+  }
+)
+
