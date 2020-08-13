@@ -22,7 +22,7 @@ nn_avg_pool1d(
 
 \item{ceil_mode}{when TRUE, will use \code{ceil} instead of \code{floor} to compute the output shape}
 
-\item{count_include_pad:}{when TRUE, will include the zero-padding in the averaging calculation}
+\item{count_include_pad}{when TRUE, will include the zero-padding in the averaging calculation}
 }
 \description{
 In the simplest case, the output value of the layer with input size \eqn{(N, C, L)},

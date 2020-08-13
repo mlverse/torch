@@ -26,7 +26,7 @@ nn_max_pool3d(
 \item{return_indices}{if \code{TRUE}, will return the max indices along with the outputs.
 Useful for \code{torch_nn.MaxUnpool3d} later}
 
-\item{ceil_mode:}{when TRUE, will use \code{ceil} instead of \code{floor} to compute the output shape}
+\item{ceil_mode}{when TRUE, will use \code{ceil} instead of \code{floor} to compute the output shape}
 }
 \description{
 In the simplest case, the output value of the layer with input size \eqn{(N, C, D, H, W)},

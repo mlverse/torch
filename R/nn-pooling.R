@@ -168,7 +168,7 @@ nn_max_pool2d <- nn_module(
 #' @param dilation a parameter that controls the stride of elements in the window
 #' @param return_indices if `TRUE`, will return the max indices along with the outputs.
 #'   Useful for `torch_nn.MaxUnpool3d` later
-#' @param ceil_mode: when TRUE, will use `ceil` instead of `floor` to compute the output shape
+#' @param ceil_mode when TRUE, will use `ceil` instead of `floor` to compute the output shape
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, C, D_{in}, H_{in}, W_{in})}
@@ -352,7 +352,7 @@ nn_max_unpool2d <- nn_module(
 #' @param kernel_size (int or tuple): Size of the max pooling window.
 #' @param stride (int or tuple): Stride of the max pooling window.
 #'   It is set to `kernel_size` by default.
-#'   padding (int or tuple): Padding that was added to the input
+#' @param padding (int or tuple): Padding that was added to the input
 #' 
 #' @section Inputs:
 #' - `input`: the input Tensor to invert
@@ -424,7 +424,7 @@ nn_max_unpool3d <- nn_module(
 #' @param stride the stride of the window. Default value is `kernel_size`
 #' @param padding implicit zero padding to be added on both sides
 #' @param ceil_mode when TRUE, will use `ceil` instead of `floor` to compute the output shape
-#' @param count_include_pad: when TRUE, will include the zero-padding in the averaging calculation
+#' @param count_include_pad when TRUE, will include the zero-padding in the averaging calculation
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, C, L_{in})}

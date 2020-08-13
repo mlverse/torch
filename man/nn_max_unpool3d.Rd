@@ -10,8 +10,9 @@ nn_max_unpool3d(kernel_size, stride = NULL, padding = 0)
 \item{kernel_size}{(int or tuple): Size of the max pooling window.}
 
 \item{stride}{(int or tuple): Stride of the max pooling window.
-It is set to \code{kernel_size} by default.
-padding (int or tuple): Padding that was added to the input}
+It is set to \code{kernel_size} by default.}
+
+\item{padding}{(int or tuple): Padding that was added to the input}
 }
 \description{
 \code{MaxPool3d} is not fully invertible, since the non-maximal values are lost.
