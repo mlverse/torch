@@ -402,4 +402,227 @@ nn_max_unpool3d <- nn_module(
   }
 )
 
+#' Applies a 1D average pooling over an input signal composed of several
+#' input planes.
+#' 
+#' In the simplest case, the output value of the layer with input size \eqn{(N, C, L)},
+#' output \eqn{(N, C, L_{out})} and `kernel_size` \eqn{k}
+#' can be precisely described as:
+#'   
+#' \deqn{
+#'   \text{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
+#' \text{input}(N_i, C_j, \text{stride} \times l + m)
+#' }
+#' 
+#' If `padding` is non-zero, then the input is implicitly zero-padded on both sides
+#' for `padding` number of points.
+#' 
+#' The parameters `kernel_size`, `stride`, `padding` can each be
+#' an `int` or a one-element tuple.
+#' 
+#' @param kernel_size the size of the window
+#' @param stride the stride of the window. Default value is `kernel_size`
+#' @param padding implicit zero padding to be added on both sides
+#' @param ceil_mode when TRUE, will use `ceil` instead of `floor` to compute the output shape
+#' @param count_include_pad: when TRUE, will include the zero-padding in the averaging calculation
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C, L_{in})}
+#' - Output: \eqn{(N, C, L_{out})}, where
+#' 
+#' \deqn{
+#'   L_{out} = \left\lfloor \frac{L_{in} +
+#'       2 \times \text{padding} - \text{kernel\_size}}{\text{stride}} + 1\right\rfloor
+#' }
+#' 
+#' @examples
+#'   
+#' # pool with window of size=3, stride=2
+#' m <- nn_avg_pool1d(3, stride=2)
+#' m(torch_randn(1, 1, 8))
+#' 
+#' @export
+nn_avg_pool1d <- nn_module(
+  "nn_avg_pool1d", 
+  initialize = function(kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE,
+                        count_include_pad= TRUE) {
+    
+    self$kernel_size <- nn_util_single(kernel_size)
+    
+    if (is.null(stride))
+      stride <- kernel_size
+    
+    self$stride <- nn_util_single(stride)
+    
+    self$padding <- nn_util_single(padding)
+    self$ceil_mode <- ceil_mode
+    self$count_include_pad <- count_include_pad
+    
+  },
+  forward = function(input) {
+    nnf_avg_pool1d(
+      input, self$kernel_size, self$stride, self$padding, self$ceil_mode,
+      self$count_include_pad)
+  }
+)
 
+#' Applies a 2D average pooling over an input signal composed of several input
+#' planes.
+#' 
+#' In the simplest case, the output value of the layer with input size \eqn{(N, C, H, W)},
+#' output \eqn{(N, C, H_{out}, W_{out})} and `kernel_size` \eqn{(kH, kW)}
+#' can be precisely described as:
+#'   
+#' \deqn{
+#'   out(N_i, C_j, h, w)  = \frac{1}{kH * kW} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1}
+#' input(N_i, C_j, stride[0] \times h + m, stride[1] \times w + n)
+#' }
+#' 
+#' If `padding` is non-zero, then the input is implicitly zero-padded on both sides
+#' for `padding` number of points.
+#' 
+#' The parameters `kernel_size`, `stride`, `padding` can either be:
+#'   
+#' - a single `int` -- in which case the same value is used for the height and width dimension
+#' - a `tuple` of two ints -- in which case, the first `int` is used for the height dimension,
+#' and the second `int` for the width dimension
+#' 
+#' 
+#' @param kernel_size the size of the window
+#' @param stride the stride of the window. Default value is `kernel_size`
+#' @param padding implicit zero padding to be added on both sides
+#' @param ceil_mode when TRUE, will use `ceil` instead of `floor` to compute the output shape
+#' @param count_include_pad when TRUE, will include the zero-padding in the averaging calculation
+#' @param divisor_override if specified, it will be used as divisor, otherwise `kernel_size` will be used
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C, H_{in}, W_{in})}
+#' - Output: \eqn{(N, C, H_{out}, W_{out})}, where
+#' 
+#' \deqn{
+#'   H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \text{padding}[0] -
+#'       \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+#' }
+#' \deqn{
+#'   W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \text{padding}[1] -
+#'       \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+#' }
+#' 
+#' @examples
+#'   
+#' # pool of square window of size=3, stride=2
+#' m <- nn_avg_pool2d(3, stride=2)
+#' # pool of non-square window
+#' m <- nn_avg_pool2d(c(3, 2), stride=c(2, 1))
+#' input <- torch_randn(20, 16, 50, 32)
+#' output <- m(input)
+#' 
+#' @export
+nn_avg_pool2d <- nn_module(
+  "nn_avg_pool2d",
+  initialize = function(kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE,
+                        count_include_pad= TRUE, divisor_override = NULL) {
+    
+    self$kernel_size <- kernel_size
+    
+    if (is.null(stride))
+      stride <- kernel_size
+    
+    self$stride <- stride
+    
+    self$padding <- padding
+    self$ceil_mode <- ceil_mode
+    self$count_include_pad <- count_include_pad
+    self$divisor_override <- divisor_override
+    
+  },
+  forward = function(input) {
+    nnf_avg_pool2d(
+      input, self$kernel_size, self$stride, self$padding, self$ceil_mode,
+      self$count_include_pad, self$divisor_override)
+  }
+)
+
+#' Applies a 3D average pooling over an input signal composed of several input
+#' planes.
+#' 
+#' In the simplest case, the output value of the layer with input size \eqn{(N, C, D, H, W)},
+#' output \eqn{(N, C, D_{out}, H_{out}, W_{out})} and `kernel_size` \eqn{(kD, kH, kW)}
+#' can be precisely described as:
+#'   
+#' \deqn{
+#'   \begin{aligned}
+#' \text{out}(N_i, C_j, d, h, w) ={} & \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
+#' & \frac{\text{input}(N_i, C_j, \text{stride}[0] \times d + k,
+#'                      \text{stride}[1] \times h + m, \text{stride}[2] \times w + n)}
+#' {kD \times kH \times kW}
+#' \end{aligned}
+#' }
+#' 
+#' If `padding` is non-zero, then the input is implicitly zero-padded on all three sides
+#' for `padding` number of points.
+#' 
+#' The parameters `kernel_size`, `stride` can either be:
+#'   
+#' - a single `int` -- in which case the same value is used for the depth, height and width dimension
+#' - a `tuple` of three ints -- in which case, the first `int` is used for the depth dimension,
+#' the second `int` for the height dimension and the third `int` for the width dimension
+#' 
+#' @param kernel_size the size of the window
+#' @param stride the stride of the window. Default value is `kernel_size`
+#' @param padding implicit zero padding to be added on all three sides
+#' @param ceil_mode when TRUE, will use `ceil` instead of `floor` to compute the output shape
+#' @param count_include_pad when TRUE, will include the zero-padding in the averaging calculation
+#' @param divisor_override if specified, it will be used as divisor, otherwise `kernel_size` will be used
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C, D_{in}, H_{in}, W_{in})}
+#' - Output: \eqn{(N, C, D_{out}, H_{out}, W_{out})}, where
+#' 
+#' \deqn{
+#'   D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] -
+#'       \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+#' }
+#' \deqn{
+#'   H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] -
+#'       \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+#' }
+#' \deqn{
+#'   W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] -
+#'       \text{kernel\_size}[2]}{\text{stride}[2]} + 1\right\rfloor
+#' }
+#' 
+#' @examples
+#'   
+#' # pool of square window of size=3, stride=2
+#' m = nn_avg_pool3d(3, stride=2)
+#' # pool of non-square window
+#' m = nn_avg_pool3d(c(3, 2, 2), stride=c(2, 1, 2))
+#' input = torch_randn(20, 16, 50,44, 31)
+#' output = m(input)
+#' 
+#' @export
+nn_avg_pool3d <- nn_module(
+  "nn_avg_pool3d",
+  initialize = function(kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE,
+                        count_include_pad= TRUE, divisor_override = NULL) {
+    
+    self$kernel_size <- kernel_size
+    
+    if (is.null(stride))
+      stride <- kernel_size
+    
+    self$stride <- stride
+    
+    self$padding <- padding
+    self$ceil_mode <- ceil_mode
+    self$count_include_pad <- count_include_pad
+    self$divisor_override <- divisor_override
+    
+  },
+  forward = function(input) {
+    nnf_avg_pool3d(
+      input, self$kernel_size, self$stride, self$padding, self$ceil_mode,
+      self$count_include_pad, self$divisor_override)
+  }
+)
