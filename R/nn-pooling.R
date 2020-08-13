@@ -336,4 +336,70 @@ nn_max_unpool2d <- nn_module(
 )
 
 
+#' Computes a partial inverse of `MaxPool3d`.
+#' 
+#' `MaxPool3d` is not fully invertible, since the non-maximal values are lost.
+#' `MaxUnpool3d` takes in as input the output of `MaxPool3d`
+#' including the indices of the maximal values and computes a partial inverse
+#' in which all non-maximal values are set to zero.
+#' 
+#' @note `MaxPool3d` can map several input sizes to the same output
+#' sizes. Hence, the inversion process can get ambiguous.
+#' To accommodate this, you can provide the needed output size
+#' as an additional argument `output_size` in the forward call.
+#' See the Inputs section below.
+#' 
+#' @param kernel_size (int or tuple): Size of the max pooling window.
+#' @param stride (int or tuple): Stride of the max pooling window.
+#'   It is set to `kernel_size` by default.
+#'   padding (int or tuple): Padding that was added to the input
+#' 
+#' @section Inputs:
+#' - `input`: the input Tensor to invert
+#' - `indices`: the indices given out by [nn_max_pool3d()]
+#' - `output_size` (optional): the targeted output size
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C, D_{in}, H_{in}, W_{in})}
+#' - Output: \eqn{(N, C, D_{out}, H_{out}, W_{out})}, where
+#' 
+#' \deqn{
+#'   D_{out} = (D_{in} - 1) \times \text{stride[0]} - 2 \times \text{padding[0]} + \text{kernel\_size[0]}
+#' }
+#' \deqn{
+#'   H_{out} = (H_{in} - 1) \times \text{stride[1]} - 2 \times \text{padding[1]} + \text{kernel\_size[1]}
+#' }
+#' \deqn{
+#'   W_{out} = (W_{in} - 1) \times \text{stride[2]} - 2 \times \text{padding[2]} + \text{kernel\_size[2]}
+#' }
+#' 
+#' or as given by `output_size` in the call operator
+#' 
+#' @examples
+#'   
+#' # pool of square window of size=3, stride=2
+#' pool <- nn_max_pool3d(3, stride=2, return_indices=TRUE)
+#' unpool <- nn_max_unpool3d(3, stride=2)
+#' out <- pool(torch_randn(20, 16, 51, 33, 15))
+#' unpooled_output <- unpool(out[[1]], out[[2]])
+#' unpooled_output$size()
+#' 
+#' @export
+nn_max_unpool3d <- nn_module(
+  "nn_max_unpool3d", 
+  initialize = function(kernel_size, stride = NULL, padding = 0) {
+    self$kernel_size = nn_util_triple(kernel_size)
+    
+    if (is.null(stride))
+      stride <- kernel_size
+    
+    self$stride = nn_util_triple(stride)
+    self$padding = nn_util_triple(padding)    
+  },
+  forward = function(input, indices, output_size = NULL) {
+    nnf_max_unpool3d(input, indices, self$kernel_size, self$stride,
+                     self$padding, output_size)
+  }
+)
+
 
