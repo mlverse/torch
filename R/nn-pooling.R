@@ -626,3 +626,139 @@ nn_avg_pool3d <- nn_module(
       self$count_include_pad, self$divisor_override)
   }
 )
+
+#' Applies a 2D fractional max pooling over an input signal composed of several input planes.
+#' 
+#' Fractional MaxPooling is described in detail in the paper 
+#' [Fractional MaxPooling](https://arxiv.org/abs/1412.6071) by Ben Graham
+#' 
+#' The max-pooling operation is applied in \eqn{kH \times kW} regions by a stochastic
+#' step size determined by the target output size.
+#' The number of output features is equal to the number of input planes.
+#' 
+#' @param kernel_size the size of the window to take a max over.
+#'   Can be a single number k (for a square kernel of k x k) or a tuple `(kh, kw)`
+#' @param output_size the target output size of the image of the form `oH x oW`.
+#'   Can be a tuple `(oH, oW)` or a single number oH for a square image `oH x oH`
+#' @param output_ratio If one wants to have an output size as a ratio of the input size, this option can be given.
+#'   This has to be a number or tuple in the range (0, 1)
+#' @param return_indices if `TRUE`, will return the indices along with the outputs.
+#'   Useful to pass to [nn_max_unpool2d()]. Default: `FALSE`
+#' 
+#' @examples
+#' # pool of square window of size=3, and target output size 13x12
+#' m = nn_fractional_max_pool2d(3, output_size=c(13, 12))
+#' # pool of square window and target output size being half of input image size
+#' m = nn_fractional_max_pool2d(3, output_ratio=c(0.5, 0.5))
+#' input = torch_randn(20, 16, 50, 32)
+#' output = m(input)
+#' 
+#' @export
+nn_fractional_max_pool2d <- nn_module(
+  "nn_fractional_max_pool2d",
+  initialize = function(kernel_size, output_size = NULL,
+                        output_ratio = NULL,
+                        return_indices = FALSE) {
+    
+    random_samples <- NULL
+    
+    self$kernel_size <- nn_util_pair(kernel_size)
+    self$return_indices <- return_indices
+    self$register_buffer('random_samples', random_samples)
+    
+    if (!is.null(output_size))
+      output_size <- nn_util_pair(output_size)
+    
+    self$output_size <- output_size
+    
+    if (!is.null(output_ratio))
+      output_ratio <- nn_util_pair(output_ratio)
+    
+    self$output_ratio <- output_ratio
+    
+    
+    if (is.null(output_ratio) && is.null(output_size))
+      value_error("both output_size and output_ratio are NULL")
+    
+    if (!is.null(output_ratio) && !is.null(output_size))
+      value_error("both output_size and oytput_ratio are not NULL")
+    
+    if (!is.null(output_ratio) && (output_ratio > 1 || output_ratio < 0))
+      value_error("output_ratio must be between 0 and 1.")
+    
+  },
+  forward = function(input) {
+    nnf_fractional_max_pool2d(
+      input, self$kernel_size, self$output_size, self$output_ratio,
+      self$return_indices,
+      random_samples=self$random_samples)
+  }
+)
+
+#' Applies a 3D fractional max pooling over an input signal composed of several input planes.
+#' 
+#' Fractional MaxPooling is described in detail in the paper 
+#' [Fractional MaxPooling](https://arxiv.org/abs/1412.6071) by Ben Graham
+#' 
+#' The max-pooling operation is applied in \eqn{kTxkHxkW} regions by a stochastic
+#' step size determined by the target output size.
+#' The number of output features is equal to the number of input planes.
+#' 
+#' @param kernel_size the size of the window to take a max over.
+#'   Can be a single number k (for a square kernel of k x k x k) or a tuple `(kt x kh x kw)`
+#' @param output_size the target output size of the image of the form `oT x oH x oW`.
+#'   Can be a tuple `(oT, oH, oW)` or a single number oH for a square image `oH x oH x oH`
+#' @param output_ratio If one wants to have an output size as a ratio of the input size, this option can be given.
+#'   This has to be a number or tuple in the range (0, 1)
+#' @param return_indices if `TRUE`, will return the indices along with the outputs.
+#'   Useful to pass to [nn_max_unpool3d()]. Default: `FALSE`
+#' 
+#' @examples
+#' # pool of cubic window of size=3, and target output size 13x12x11
+#' m = nn_fractional_max_pool3d(3, output_size=c(13, 12, 11))
+#' # pool of cubic window and target output size being half of input size
+#' m = nn_fractional_max_pool3d(3, output_ratio=c(0.5, 0.5, 0.5))
+#' input = torch_randn(20, 16, 50, 32, 16)
+#' output = m(input)
+#' 
+#' @export  
+nn_fractional_max_pool3d <- nn_module(
+  "nn_fractional_max_pool3d",
+  initialize = function(kernel_size, output_size = NULL,
+                        output_ratio = NULL,
+                        return_indices = FALSE) {
+    
+    random_samples <- NULL
+    
+    self$kernel_size <- nn_util_triple(kernel_size)
+    self$return_indices <- return_indices
+    self$register_buffer('random_samples', random_samples)
+    
+    if (!is.null(output_size))
+      output_size <- nn_util_triple(output_size)
+    
+    self$output_size <- output_size
+    
+    if (!is.null(output_ratio))
+      output_ratio <- nn_util_triple(output_ratio)
+    
+    self$output_ratio <- output_ratio
+    
+    
+    if (is.null(output_ratio) && is.null(output_size))
+      value_error("both output_size and output_ratio are NULL")
+    
+    if (!is.null(output_ratio) && !is.null(output_size))
+      value_error("both output_size and oytput_ratio are not NULL")
+    
+    if (!is.null(output_ratio) && (output_ratio > 1 || output_ratio < 0))
+      value_error("output_ratio must be between 0 and 1.")
+    
+  },
+  forward = function(input) {
+    nnf_fractional_max_pool3d(
+      input, self$kernel_size, self$output_size, self$output_ratio,
+      self$return_indices,
+      random_samples=self$random_samples)
+  }
+)
