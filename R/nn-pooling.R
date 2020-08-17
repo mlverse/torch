@@ -762,3 +762,211 @@ nn_fractional_max_pool3d <- nn_module(
       random_samples=self$random_samples)
   }
 )
+
+lp_pool_nd <- nn_module(
+  "lp_pool_nd",
+  initialize = function(norm_type, kernel_size, stride = NULL,
+                        ceil_mode = FALSE) {
+    
+    self$norm_type <- norm_type
+    self$kernel_size <- kernel_size
+    self$stride <- stride
+    self$ceil_mode <- ceil_mode
+    
+  }
+)
+
+#' Applies a 1D power-average pooling over an input signal composed of several input
+#' planes.
+#' 
+#' On each window, the function computed is:
+#'   
+#' \deqn{
+#'   f(X) = \sqrt[p]{\sum_{x \in X} x^{p}}
+#' }
+#' 
+#' - At p = \eqn{\infty}, one gets Max Pooling
+#' - At p = 1, one gets Sum Pooling (which is proportional to Average Pooling)
+#' 
+#' @note If the sum to the power of `p` is zero, the gradient of this function is
+#' not defined. This implementation will set the gradient to zero in this case.
+#' 
+#' @param kernel_size a single int, the size of the window
+#' @param stride a single int, the stride of the window. Default value is `kernel_size`
+#' @param ceil_mode when TRUE, will use `ceil` instead of `floor` to compute the output shape
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C, L_{in})}
+#' - Output: \eqn{(N, C, L_{out})}, where
+#' 
+#' \deqn{
+#'   L_{out} = \left\lfloor\frac{L_{in} - \text{kernel\_size}}{\text{stride}} + 1\right\rfloor
+#' }
+#' 
+#' @examples
+#' # power-2 pool of window of length 3, with stride 2.
+#' m <- nn_lp_pool1d(2, 3, stride=2)
+#' input <- torch_randn(20, 16, 50)
+#' output <- m(input)
+#' 
+#' @export
+nn_lp_pool1d <- nn_module(
+  "nn_lp_pool1d",
+  inherit = lp_pool_nd,
+  forward = function(input) {
+    nnf_lp_pool1d(input, self$norm_type, self$kernel_size,
+                self$stride, self$ceil_mode)
+  }
+)
+
+#' Applies a 2D power-average pooling over an input signal composed of several input
+#' planes.
+#' 
+#' On each window, the function computed is:
+#'   
+#' \deqn{
+#'   f(X) = \sqrt[p]{\sum_{x \in X} x^{p}}
+#' }
+#' 
+#' - At p = \eqn{\infty}, one gets Max Pooling
+#' - At p = 1, one gets Sum Pooling (which is proportional to average pooling)
+#' 
+#' The parameters `kernel_size`, `stride` can either be:
+#'   
+#' - a single `int` -- in which case the same value is used for the height and width dimension
+#' - a `tuple` of two ints -- in which case, the first `int` is used for the height dimension,
+#' and the second `int` for the width dimension
+#' 
+#' @note If the sum to the power of `p` is zero, the gradient of this function is
+#' not defined. This implementation will set the gradient to zero in this case.
+#' 
+#' @param kernel_size the size of the window
+#' @param stride the stride of the window. Default value is `kernel_size`
+#' @param ceil_mode when TRUE, will use `ceil` instead of `floor` to compute the output shape
+#' 
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, C, H_{in}, W_{in})}
+#' - Output: \eqn{(N, C, H_{out}, W_{out})}, where
+#' 
+#' \deqn{
+#'   H_{out} = \left\lfloor\frac{H_{in} - \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+#' }
+#' \deqn{
+#'   W_{out} = \left\lfloor\frac{W_{in} - \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+#' }
+#' 
+#' @examples
+#'   
+#' # power-2 pool of square window of size=3, stride=2
+#' m <- nn_lp_pool2d(2, 3, stride=2)
+#' # pool of non-square window of power 1.2
+#' m <- nn_lp_pool2d(1.2, c(3, 2), stride=c(2, 1))
+#' input <- torch_randn(20, 16, 50, 32)
+#' output <- m(input)
+#' 
+#' @export
+nn_lp_pool2d <- nn_module(
+  "nn_lp_pool2d",
+  inherit = lp_pool_nd,
+  forward = function(input) {
+    nnf_lp_pool2d(input, self$norm_type, self$kernel_size,
+                self$stride, self$ceil_mode)
+  }
+)
+
+#' Applies a 1D adaptive max pooling over an input signal composed of several input planes.
+#' 
+#' The output size is H, for any input size.
+#' The number of output features is equal to the number of input planes.
+#' 
+#' @param output_size the target output size H
+#' @param return_indices if `TRUE`, will return the indices along with the outputs.
+#'   Useful to pass to [nn_max_unpool1d()]. Default: `FALSE`
+#' 
+#' @examples
+#' # target output size of 5
+#' m <- nn_adaptive_max_pool1d(5)
+#' input <- torch_randn(1, 64, 8)
+#' output <- m(input)
+#' 
+#' @export
+nn_adaptive_max_pool1d <- nn_module(
+  "nn_adaptive_max_pool1d",
+  initialize = function(output_size, return_indices = FALSE) {
+    self$output_size <- output_size
+    self$return_indices <- return_indices
+  },
+  forward = function(input) {
+    nnf_adaptive_max_pool1d(input, self$output_size, self$return_indices)
+  }
+)
+
+#' Applies a 2D adaptive max pooling over an input signal composed of several input planes.
+#' 
+#' The output is of size H x W, for any input size.
+#' The number of output features is equal to the number of input planes.
+#' 
+#' @param output_size the target output size of the image of the form H x W.
+#'   Can be a tuple `(H, W)` or a single H for a square image H x H.
+#'   H and W can be either a `int`, or `None` which means the size will
+#'   be the same as that of the input.
+#' @param return_indices if `TRUE`, will return the indices along with the outputs.
+#'   Useful to pass to [nn_max_unpool2d()]. Default: `FALSE`
+#' 
+#' @examples 
+#' # target output size of 5x7
+#' m <- nn_adaptive_max_pool2d(c(5,7))
+#' input <- torch_randn(1, 64, 8, 9)
+#' output <- m(input)
+#' # target output size of 7x7 (square)
+#' m <- nn_adaptive_max_pool2d(7)
+#' input <- torch_randn(1, 64, 10, 9)
+#' output <- m(input)
+#' 
+#' @export
+nn_adaptive_max_pool2d <- nn_module(
+  "nn_adaptive_max_pool2d",
+  initialize = function(output_size, return_indices = FALSE) {
+    self$output_size <- nn_util_pair(output_size)
+    self$return_indices <- return_indices
+  },
+  forward = function(input) {
+    nnf_adaptive_max_pool2d(input, self$output_size, self$return_indices)
+  }
+)
+
+#' Applies a 3D adaptive max pooling over an input signal composed of several input planes.
+#' 
+#' The output is of size D x H x W, for any input size.
+#' The number of output features is equal to the number of input planes.
+#' 
+#' 
+#' @param output_size the target output size of the image of the form D x H x W.
+#'   Can be a tuple (D, H, W) or a single D for a cube D x D x D.
+#'   D, H and W can be either a `int`, or `None` which means the size will
+#'   be the same as that of the input.
+#' @param return_indices if `TRUE`, will return the indices along with the outputs.
+#'   Useful to pass to [nn_max_unpool3d()]. Default: `FALSE`
+#' 
+#' @examples
+#' # target output size of 5x7x9
+#' m <- nn_adaptive_max_pool3d(c(5,7,9))
+#' input <- torch_randn(1, 64, 8, 9, 10)
+#' output <- m(input)
+#' # target output size of 7x7x7 (cube)
+#' m <- nn_adaptive_max_pool3d(7)
+#' input <- torch_randn(1, 64, 10, 9, 8)
+#' output <- m(input)
+#' 
+#' @export
+nn_adaptive_max_pool3d <- nn_module(
+  "nn_adaptive_max_pool3d",
+  initialize = function(output_size, return_indices = FALSE) {
+    self$output_size <- nn_util_triple(output_size)
+    self$return_indices <- return_indices
+  },
+  forward = function(input) {
+    nnf_adaptive_max_pool3d(input, self$output_size, self$return_indices)
+  }
+)
