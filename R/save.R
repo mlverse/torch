@@ -71,6 +71,6 @@ load_state_dict <- function(path) {
   o <- cpp_load_state_dict(path)
   
   values <- TensorList$new(ptr = o$values)$to_r()
-  values <- setNames(values, o$keys)
+  names(values) <- o$keys
   values
 }
