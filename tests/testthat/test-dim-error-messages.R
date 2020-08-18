@@ -172,3 +172,16 @@ test_that("tensordot error message", {
   )
   
 })
+
+test_that("embedding returns a better error message", {
+  
+  e <- nn_embedding(10, 3)
+  x <- torch_tensor(c(0, 1, 2, 3), dtype = torch_long())
+  
+  expect_error(
+    e(x),
+    regex = "Indices/Index start at 1 and got a 0.",
+    class = "runtime_error"
+  )
+  
+})

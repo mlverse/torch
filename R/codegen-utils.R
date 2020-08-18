@@ -16,8 +16,16 @@ as_1_based_dim <- function(x) {
 
 as_1_based_tensor_list <- function(x) {
   tensors <- x$to_r()
-  tensors <- lapply(tensors, function(x) x$sub(1L, 0L))
+  tensors <- lapply(tensors, as_1_based_tensor)
   torch_tensor_list(tensors)
+}
+
+as_1_based_tensor <- function(x) {
+  e <- torch_min(torch_abs(x))$to(dtype = torch_int())
+  if (as.numeric(e) == 0)
+    runtime_error("Indices/Index start at 1 and got a 0.")
+  
+  x - (x > 0)$to(dtype = x$dtype())
 }
 
 argument_to_torch_type <- function(obj, expected_types, arg_name) {
@@ -26,7 +34,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(NULL)
   
   if (any(arg_name == c("index", "indices", "dims")) && any("Tensor" == expected_types) && is_torch_tensor(obj))
-    return(list(get("ptr", obj$sub(1L, alpha = 1L), inherits = FALSE), "Tensor"))
+    return(list(get("ptr", as_1_based_tensor(obj), inherits = FALSE), "Tensor"))
   
   if (any("Tensor" == expected_types) && is_torch_tensor(obj))
     return(list(get("ptr", obj, inherits = FALSE), "Tensor"))
