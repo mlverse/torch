@@ -8,6 +8,9 @@ planes.}
 nn_lp_pool1d(norm_type, kernel_size, stride = NULL, ceil_mode = FALSE)
 }
 \arguments{
+\item{norm_type}{if inf than one gets max pooling if 0 you get sum pooling (
+proportional to the avg pooling)}
+
 \item{kernel_size}{a single int, the size of the window}
 
 \item{stride}{a single int, the stride of the window. Default value is \code{kernel_size}}

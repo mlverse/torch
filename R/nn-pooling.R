@@ -791,6 +791,8 @@ lp_pool_nd <- nn_module(
 #' @note If the sum to the power of `p` is zero, the gradient of this function is
 #' not defined. This implementation will set the gradient to zero in this case.
 #' 
+#' @param norm_type if inf than one gets max pooling if 0 you get sum pooling (
+#'   proportional to the avg pooling)
 #' @param kernel_size a single int, the size of the window
 #' @param stride a single int, the stride of the window. Default value is `kernel_size`
 #' @param ceil_mode when TRUE, will use `ceil` instead of `floor` to compute the output shape
@@ -840,6 +842,8 @@ nn_lp_pool1d <- nn_module(
 #' @note If the sum to the power of `p` is zero, the gradient of this function is
 #' not defined. This implementation will set the gradient to zero in this case.
 #' 
+#' @param norm_type if inf than one gets max pooling if 0 you get sum pooling (
+#'   proportional to the avg pooling)
 #' @param kernel_size the size of the window
 #' @param stride the stride of the window. Default value is `kernel_size`
 #' @param ceil_mode when TRUE, will use `ceil` instead of `floor` to compute the output shape
