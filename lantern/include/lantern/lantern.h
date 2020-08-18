@@ -470,6 +470,28 @@ extern "C"
   HOST_API void lantern_Tensor_index_put_scalar_ (void* self, void* index, void* rhs) { _lantern_Tensor_index_put_scalar_(self, index, rhs); LANTERN_HOST_HANDLER}
   LANTERN_API void (LANTERN_PTR _lantern_manual_seed) (int64_t seed);
   HOST_API void lantern_manual_seed (int64_t seed) {_lantern_manual_seed(seed); LANTERN_HOST_HANDLER}
+
+  LANTERN_API void* (LANTERN_PTR _lantern_load_state_dict) (const char * path);
+  HOST_API void * lantern_load_state_dict (const char * path)
+  {
+    void * ret = _lantern_load_state_dict(path);
+    LANTERN_HOST_HANDLER return ret;
+  }
+
+  LANTERN_API void* (LANTERN_PTR _lantern_get_state_dict_keys) (void * ivalue);
+  HOST_API void* lantern_get_state_dict_keys (void* ivalue)
+  {
+    void * ret = _lantern_get_state_dict_keys(ivalue);
+    LANTERN_HOST_HANDLER return ret;
+  }
+
+  LANTERN_API void* (LANTERN_PTR _lantern_get_state_dict_values) (void * ivalue);
+  HOST_API void* lantern_get_state_dict_values (void* ivalue)
+  {
+    void * ret = _lantern_get_state_dict_values(ivalue);
+    LANTERN_HOST_HANDLER return ret;
+  }
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -4178,6 +4200,9 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Tensor_index_put_tensor_);
   LOAD_SYMBOL(_lantern_Tensor_index_put_scalar_);
   LOAD_SYMBOL(_lantern_manual_seed);
+  LOAD_SYMBOL(_lantern_load_state_dict);
+  LOAD_SYMBOL(_lantern_get_state_dict_keys);
+  LOAD_SYMBOL(_lantern_get_state_dict_values);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

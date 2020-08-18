@@ -65,3 +65,12 @@ torch_load_module <- function(obj) {
   obj$module$load_state_dict(obj$state_dict)
   obj$module
 }
+
+load_state_dict <- function(path) {
+  path <- normalizePath(path)
+  o <- cpp_load_state_dict(path)
+  
+  values <- TensorList$new(ptr = o$values)$to_r()
+  values <- setNames(values, o$keys)
+  values
+}

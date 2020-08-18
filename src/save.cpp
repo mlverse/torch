@@ -16,3 +16,27 @@ Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_load (std::string s)
   XPtrTorchTensor t = lantern_tensor_load(s.c_str());
   return make_xptr<XPtrTorchTensor>(t);
 }
+
+// [[Rcpp::export]]
+Rcpp::List cpp_load_state_dict (std::string path)
+{
+  XPtrTorch v = lantern_load_state_dict(path.c_str());
+  
+  XPtrTorchTensorList values = lantern_get_state_dict_values(v.get());
+  
+  XPtrTorch s = lantern_get_state_dict_keys(v.get());
+  int size = lantern_vector_string_size(s.get());
+  
+  std::vector<std::string> keys;
+  for (int i = 0; i < size; i++)
+  {
+    keys.push_back(std::string(lantern_vector_string_at(s.get(), i)));
+  }
+  
+  Rcpp::List L = Rcpp::List::create(
+    Rcpp::Named("keys") = keys, 
+    Rcpp::Named("values") = make_xptr<XPtrTorchTensorList>(values)
+  );
+  
+  return L;
+}
