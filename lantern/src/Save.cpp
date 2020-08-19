@@ -71,7 +71,7 @@ void _lantern_test_print (void * x)
 void* _lantern_load_state_dict (const char * path)
 {
     LANTERN_FUNCTION_START
-    std::ifstream file(path);
+    std::ifstream file(path, std::ios::binary);
     std::vector<char> data((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
     torch::IValue ivalue = torch::pickle_load(data);   
     return (void*) new LanternObject<torch::IValue>(ivalue);
