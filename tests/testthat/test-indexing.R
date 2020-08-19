@@ -8,9 +8,9 @@ test_that("[ works", {
   expect_equal(as_array(x[1:10:2,,]), as_array(x)[seq(1,10, by = 2),,])
   
   x <- torch_tensor(0:9)
-  expect_equal(as_array(x[-1]), 9)
-  expect_equal(as_array(x[-2:10]), c(8,9))
-  expect_equal(as_array(x[2:N]), c(1:9))
+  expect_equal(as_array(x[-1]$to(dtype = torch_int())), 9)
+  expect_equal(as_array(x[-2:10]$to(dtype = torch_int())), c(8,9))
+  expect_equal(as_array(x[2:N]$to(dtype = torch_int())), c(1:9))
   
   x <- torch_randn(c(10,10,10,10))
   expect_equal(as_array(x[1,..]), as_array(x)[1,,,])
@@ -26,10 +26,10 @@ test_that("[ works", {
   
   x <- torch_tensor(1:10)
   y <- 1:10
-  expect_equal_to_r(x[c(1,3,2,5)], y[c(1,3,2,5)])
+  expect_equal_to_r(x[c(1,3,2,5)]$to(dtype = torch_int()), y[c(1,3,2,5)])
   
   index <- 1:3
-  expect_equal_to_r(x[index], y[index])
+  expect_equal_to_r(x[index]$to(dtype = torch_int()), y[index])
   
   x <- torch_randn(10, 10)
   x[c(2,3,1), c(3,2,1)]
