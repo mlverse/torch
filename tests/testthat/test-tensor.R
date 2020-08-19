@@ -39,13 +39,13 @@ test_that("Numeric tensors", {
 test_that("Integer tensors", {
   
   x <- 1:4
-  expect_equal_to_r(torch_tensor(x), x)
+  expect_equal_to_r(torch_tensor(x)$to(dtype = torch_int()), x)
   
   x <- matrix(c(1:4), ncol = 2)
-  expect_equal_to_r(torch_tensor(x), x)
+  expect_equal_to_r(torch_tensor(x)$to(dtype = torch_int()), x)
   
   x <- array(c(1:8), dim = c(2,2,2))
-  expect_equal_to_r(torch_tensor(x), x)
+  expect_equal_to_r(torch_tensor(x)$to(dtype = torch_int()), x)
   
 })
 
