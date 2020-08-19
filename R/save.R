@@ -65,3 +65,27 @@ torch_load_module <- function(obj) {
   obj$module$load_state_dict(obj$state_dict)
   obj$module
 }
+
+#' Load a state dict file
+#' 
+#' This function should only be used to load models saved in python.
+#' For it to work correctly you need to use `torch.save` with the flag:
+#' `_use_new_zipfile_serialization=True` and also remove all `nn.Parameter`
+#' classes from the tensors in the dict. 
+#' 
+#' The above might change with development of [this](https://github.com/pytorch/pytorch/issues/37213) 
+#' in pytorch's C++ api.
+#' 
+#' @param path to the state dict file
+#' 
+#' @return a named list of tensors.
+#'
+#' @export
+load_state_dict <- function(path) {
+  path <- normalizePath(path)
+  o <- cpp_load_state_dict(path)
+  
+  values <- TensorList$new(ptr = o$values)$to_r()
+  names(values) <- o$keys
+  values
+}

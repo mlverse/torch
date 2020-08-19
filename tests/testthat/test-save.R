@@ -135,3 +135,18 @@ test_that("save alexnet like model", {
   
 })
 
+test_that("load a state dict created in python", {
+
+  # the state dict was create in python with  
+  # ones = torch.ones(3, 5)
+  # twos = torch.ones(3, 5) * 2
+  # value = {'ones': ones, 'twos': twos}
+  # torch.save(value, "assets/state_dict.pth", _use_new_zipfile_serialization=True)
+  
+  dict <- load_state_dict("assets/state_dict.pth")
+  expect_equal(names(dict), c("ones", "twos"))
+  expect_equal_to_tensor(dict$ones, torch_ones(3, 5))
+  expect_equal_to_tensor(dict$twos, torch_ones(3, 5) * 2)
+  
+})
+

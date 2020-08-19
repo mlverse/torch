@@ -194,6 +194,20 @@ public:
   }
 };
 
+class XPtrTorchIValue : public XPtrTorch {
+public:
+  XPtrTorchIValue (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_IValue_delete));
+  }
+};
+
+class XPtrTorchvector_string : public XPtrTorch {
+public:
+  XPtrTorchvector_string (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_vector_string_delete));
+  }
+};
+
 template<class T>
 class nullable {
 public:

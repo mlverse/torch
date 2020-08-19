@@ -7041,6 +7041,10 @@ cpp_tensor_load <- function(s) {
     .Call('_torch_cpp_tensor_load', PACKAGE = 'torchpkg', s)
 }
 
+cpp_load_state_dict <- function(path) {
+    .Call('_torch_cpp_load_state_dict', PACKAGE = 'torchpkg', path)
+}
+
 cpp_torch_scalar <- function(x) {
     .Call('_torch_cpp_torch_scalar', PACKAGE = 'torchpkg', x)
 }
