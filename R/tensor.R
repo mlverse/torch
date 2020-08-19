@@ -15,7 +15,7 @@ Tensor <- R7Class(
       if (is.null(dtype)) {
         
         if (is.integer(data)) {
-          dtype <- torch_int()
+          dtype <- torch_long()
         } else if (is.double(data)) {
           dtype <- torch_float() # default to float
         } else if (is.logical(data)) {
