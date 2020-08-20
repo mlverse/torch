@@ -58,7 +58,7 @@ Optimizer <- R6::R6Class(
         
         if (is_optim_required(self$defaults[[nm]]) && !nm %in% names(param_group)) {
           value_error("parameter group didn't specify a value of required ",
-                      "optimization parameter {name}")
+                      "optimization parameter {nm}")
         } else if (!nm %in% names(param_group)) {
           param_group[[nm]] <- self$defaults[[nm]]
         }
