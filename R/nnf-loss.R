@@ -67,6 +67,16 @@ nnf_kl_div <- function(input, target, reduction = "mean") {
 #' @export
 nnf_mse_loss <- function(input, target, reduction = "mean") {
   
+  if (!all(target$shape == input$shape)) {
+    
+    target_shape <- paste0("(", paste(target$shape, collapse = ","), ")")
+    input_shape <- paste0("(", paste(input$shape, collapse = ","), ")")
+    
+    warn("Using a target size {target_shape} that is different to the input size {input_shape}. ",
+         "This will likely lead to incorrect results due to broadcasting. ",
+         "Please ensure they have the same size.")
+  }
+  
   if (target$requires_grad) {
     ret <- (input - target) ^ 2
     if (!is.null(reduction)) {
