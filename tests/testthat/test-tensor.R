@@ -63,6 +63,22 @@ test_that("Integer tensors", {
   
   expect_equal_to_r(torch_tensor(x), e)
   
+  x <- 1:5
+  expect_equal_to_r(torch_tensor(bit64::as.integer64(x)), bit64::as.integer64(x))
+  
+  x <- matrix(c(1:4), ncol = 2)
+  e <- bit64::as.integer64(x)
+  e <- matrix(e, ncol = 2)
+  class(e) <- c(class(e), "integer64")
+  expect_equal_to_r(torch_tensor(e), e)
+  
+  x <- array(c(1:8), dim = c(2,2,2))
+  e <- bit64::as.integer64(x)
+  e <- array(e, dim = dim(x))
+  class(e) <- c(class(e), "integer64")
+  
+  expect_equal_to_r(torch_tensor(e), e)
+  
 })
 
 test_that("Logical tensors", {

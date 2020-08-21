@@ -29,10 +29,17 @@ XPtrTorchTensor tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std
 
   XPtrTorchTensorOptions options = lantern_TensorOptions();
   
-  if (dtype == "double") {
+  if (dtype == "double") 
+  {
     options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_float64()).get());
-  } else if (dtype == "int") {
+  } 
+  else if (dtype == "int") 
+  {
     options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int32()).get());
+  } 
+  else if (dtype == "int64")
+  {
+    options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
   }
 
   options = lantern_TensorOptions_device(options.get(), XPtrTorchDevice(lantern_Device("cpu", 0, false)).get());
@@ -55,17 +62,28 @@ XPtrTorchTensor tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
                                             Rcpp::XPtr<XPtrTorchTensorOptions> options,
-                                            bool requires_grad) {
+                                            bool requires_grad, bool is_integer64) {
 
   XPtrTorchTensor tensor(nullptr);
 
-  if (TYPEOF(x) == INTSXP) {
+  if (TYPEOF(x) == INTSXP) 
+  {
     tensor = tensor_from_r_array<INTSXP>(x, dim, "int");
-  } else if (TYPEOF(x) == REALSXP) {
+  } 
+  else if (TYPEOF(x) == REALSXP && !is_integer64) 
+  {
     tensor = tensor_from_r_array<REALSXP>(x, dim, "double");
-  } else if (TYPEOF(x) == LGLSXP) {
+  } 
+  else if (TYPEOF(x) == REALSXP && is_integer64)
+  {
+    tensor = tensor_from_r_array<REALSXP>(x, dim, "int64");
+  }
+  else if (TYPEOF(x) == LGLSXP) 
+  {
     tensor = tensor_from_r_array<LGLSXP>(x, dim, "int");
-  } else {
+  } 
+  else 
+  {
     Rcpp::stop("R type not handled");
   };
   
