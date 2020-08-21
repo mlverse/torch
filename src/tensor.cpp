@@ -105,6 +105,22 @@ Rcpp::List tensor_to_r_array_int32_t (XPtrTorchTensor x) {
   return Rcpp::List::create(Rcpp::Named("vec") = vec, Rcpp::Named("dim") = tensor_dimensions(x));
 }
 
+Rcpp::List tensor_to_r_array_int64_t (XPtrTorchTensor x)
+{
+  XPtrTorchTensor ten = lantern_Tensor_contiguous(x.get());
+  auto d_ptr = lantern_Tensor_data_ptr_int64_t(ten.get());
+  
+  int64_t len = lantern_Tensor_numel(ten.get());
+  Rcpp::NumericVector vec(len);         // storage vehicle we return them in
+  
+  // transfers values 'keeping bits' but changing type
+  // using reinterpret_cast would get us a warning
+  std::memcpy(&(vec[0]), d_ptr, len * sizeof(double));
+  
+  vec.attr("class") = "integer64"; 
+  return Rcpp::List::create(Rcpp::Named("vec") = vec, Rcpp::Named("dim") = tensor_dimensions(x));
+}
+
 Rcpp::List tensor_to_r_array_bool (XPtrTorchTensor x) {
   XPtrTorchTensor ten = lantern_Tensor_contiguous(x.get());
   auto d_ptr = lantern_Tensor_data_ptr_bool(ten.get());
@@ -142,7 +158,7 @@ Rcpp::List cpp_as_array (Rcpp::XPtr<XPtrTorchTensor> x) {
   }
   
   if (dtype == "Long") {
-    return tensor_to_r_array_int32_t(*x.get());
+    return tensor_to_r_array_int64_t(*x.get());
   }
   
   Rcpp::stop("dtype not handled");

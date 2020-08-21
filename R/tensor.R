@@ -174,6 +174,9 @@ as_array.torch_tensor <- function(x) {
     out <- aperm(array(a$vec, dim = rev(a$dim)), seq(length(a$dim), 1))
   }
   
+  if (x$dtype() == torch_long() && !inherits(out, "integer64"))
+    class(out) <- c(class(out), "integer64")
+  
   out
 }
 
