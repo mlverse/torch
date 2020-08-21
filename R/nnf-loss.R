@@ -438,6 +438,7 @@ nnf_cross_entropy <- function(input, target, weight=NULL, ignore_index=-100,
 nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL, 
                                                  reduction = c("mean", "sum", "none"), 
                                                  pos_weight = NULL) {
+  reduction <- match.arg(reduction)
   torch_binary_cross_entropy_with_logits(input, target, weight, pos_weight, 
                                          reduction_enum(reduction))
 }
