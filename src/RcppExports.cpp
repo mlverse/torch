@@ -23558,8 +23558,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_tensor
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<XPtrTorchTensorOptions> options, bool requires_grad);
-RcppExport SEXP _torch_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP, SEXP requires_gradSEXP) {
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<XPtrTorchTensorOptions> options, bool requires_grad, bool is_integer64);
+RcppExport SEXP _torch_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP, SEXP requires_gradSEXP, SEXP is_integer64SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -23567,7 +23567,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::vector<std::int64_t> >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorOptions> >::type options(optionsSEXP);
     Rcpp::traits::input_parameter< bool >::type requires_grad(requires_gradSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor(x, dim, options, requires_grad));
+    Rcpp::traits::input_parameter< bool >::type is_integer64(is_integer64SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor(x, dim, options, requires_grad, is_integer64));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -25560,7 +25561,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_Storage_data_ptr", (DL_FUNC) &_torch_cpp_Storage_data_ptr, 1},
     {"_torch_cpp_torch_tensor_print", (DL_FUNC) &_torch_cpp_torch_tensor_print, 1},
     {"_torch_cpp_torch_tensor_dtype", (DL_FUNC) &_torch_cpp_torch_tensor_dtype, 1},
-    {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},
+    {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 5},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
     {"_torch_cpp_tensor_dim", (DL_FUNC) &_torch_cpp_tensor_dim, 1},
     {"_torch_cpp_tensor_numel", (DL_FUNC) &_torch_cpp_tensor_numel, 1},

@@ -7089,8 +7089,8 @@ cpp_torch_tensor_dtype <- function(x) {
     .Call('_torch_cpp_torch_tensor_dtype', PACKAGE = 'torchpkg', x)
 }
 
-cpp_torch_tensor <- function(x, dim, options, requires_grad) {
-    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torchpkg', x, dim, options, requires_grad)
+cpp_torch_tensor <- function(x, dim, options, requires_grad, is_integer64) {
+    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torchpkg', x, dim, options, requires_grad, is_integer64)
 }
 
 cpp_as_array <- function(x) {

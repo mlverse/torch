@@ -16,11 +16,13 @@ Tensor <- R7Class(
         
         if (is.integer(data)) {
           dtype <- torch_long()
+        } else if (bit64::is.integer64(data)) {
+          dtype <- torch_long()
         } else if (is.double(data)) {
           dtype <- torch_float() # default to float
         } else if (is.logical(data)) {
           dtype <- torch_bool()
-        }
+        } 
         
       }
       
@@ -36,7 +38,7 @@ Tensor <- R7Class(
       
       
       self$ptr <- cpp_torch_tensor(data, rev(dimension), options$ptr, 
-                                   requires_grad)
+                                   requires_grad, inherits(data, "integer64"))
     },
     print = function() {
       cat(sprintf("torch_tensor \n"))
@@ -173,6 +175,9 @@ as_array.torch_tensor <- function(x) {
   } else {
     out <- aperm(array(a$vec, dim = rev(a$dim)), seq(length(a$dim), 1))
   }
+  
+  if (x$dtype() == torch_long() && !inherits(out, "integer64"))
+    class(out) <- c(class(out), "integer64")
   
   out
 }

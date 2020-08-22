@@ -98,6 +98,14 @@ uint8_t *_lantern_Tensor_data_ptr_uint8_t(void *self)
   LANTERN_FUNCTION_END
 }
 
+int64_t *_lantern_Tensor_data_ptr_int64_t(void *self)
+{
+  LANTERN_FUNCTION_START
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  return x.data_ptr<int64_t>();
+  LANTERN_FUNCTION_END
+}
+
 int32_t *_lantern_Tensor_data_ptr_int32_t(void *self)
 {
   LANTERN_FUNCTION_START
