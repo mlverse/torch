@@ -14,7 +14,7 @@ nn_Module <- R6::R6Class(
     add_module = function(name, module) {
       
       if (is.numeric(name))
-        name <- paste0("m", name)
+        name <- as.character(name)
       
       private$modules_[[name]] <- module
     },
@@ -422,7 +422,7 @@ nn_sequential <- function(... , name = NULL) {
     initialize = function(...) {
       modules <- list(...)
       for (i in seq_along(modules)) {
-        self$add_module(name = i, module = modules[[i]])  
+        self$add_module(name = i - 1, module = modules[[i]])  
       }
     },
     forward = function(input) {
