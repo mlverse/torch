@@ -191,7 +191,7 @@ test_that("state_dict for modules", {
   expect_equal_to_tensor(s[[6]], net$norm$running_var)
   
   
-  s <- s[-7]
+  s <- s[-6]
   expect_error(net2$load_state_dict(s), class = "value_error")
   
 })
