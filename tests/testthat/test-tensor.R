@@ -48,36 +48,22 @@ test_that("Integer tensors", {
   expect_equal_to_r(torch_tensor(x)$to(dtype = torch_int()), x)
   
   x <- 1:5
-  expect_equal_to_r(torch_tensor(1:5), bit64::as.integer64(x))
+  expect_equal_to_r(torch_tensor(1:5), x)
   
   x <- matrix(c(1:4), ncol = 2)
-  e <- bit64::as.integer64(x)
-  e <- matrix(e, ncol = 2)
-  class(e) <- c(class(e), "integer64")
-  expect_equal_to_r(torch_tensor(x), e)
+  expect_equal_to_r(torch_tensor(x), x)
   
   x <- array(c(1:8), dim = c(2,2,2))
-  e <- bit64::as.integer64(x)
-  e <- array(e, dim = dim(x))
-  class(e) <- c(class(e), "integer64")
-  
-  expect_equal_to_r(torch_tensor(x), e)
+  expect_equal_to_r(torch_tensor(x), x)
   
   x <- 1:5
-  expect_equal_to_r(torch_tensor(bit64::as.integer64(x)), bit64::as.integer64(x))
-  
-  x <- matrix(c(1:4), ncol = 2)
-  e <- bit64::as.integer64(x)
-  e <- matrix(e, ncol = 2)
-  class(e) <- c(class(e), "integer64")
-  expect_equal_to_r(torch_tensor(e), e)
+  expect_equal_to_r(torch_tensor(bit64::as.integer64(x)), x)
   
   x <- array(c(1:8), dim = c(2,2,2))
-  e <- bit64::as.integer64(x)
-  e <- array(e, dim = dim(x))
-  class(e) <- c(class(e), "integer64")
-  
-  expect_equal_to_r(torch_tensor(e), e)
+  o <- as.integer64(torch_tensor(x))
+  expect_s3_class(o, "integer64")
+  expect_s3_class(o, "array")
+  expect_equal(dim(o), dim(x))
   
 })
 

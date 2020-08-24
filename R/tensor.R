@@ -156,16 +156,7 @@ as.array.torch_tensor <- function(x, ...) {
   as_array(x)
 }
 
-#' @export
-as_array.torch_tensor <- function(x) {
-  
-  if (x$device()$type == "cuda")
-    runtime_error("Can't convert cuda tensor to R. Convert to cpu tensor before.")
-  
-  # dequantize before converting
-  if (x$is_quantized())
-    x <- x$dequantize()
-  
+as_array_impl <- function(x) {
   a <- cpp_as_array(x$ptr)
   
   if (length(a$dim) <= 1L) {
@@ -182,6 +173,25 @@ as_array.torch_tensor <- function(x) {
   out
 }
 
+#' @export
+as_array.torch_tensor <- function(x) {
+  
+  if (x$device()$type == "cuda")
+    runtime_error("Can't convert cuda tensor to R. Convert to cpu tensor before.")
+  
+  # dequantize before converting
+  if (x$is_quantized())
+    x <- x$dequantize()
+  
+  # auto convert to int32 if long.
+  if (x$dtype() == torch_long())
+    x <- x$to(dtype = torch_int32())
+  
+  out <- as_array_impl(x)
+  
+  out
+}
+
 is_torch_tensor <- function(x) {
   inherits(x, "torch_tensor")
 }
@@ -190,3 +200,9 @@ is_undefined_tensor <- function(x) {
   cpp_tensor_is_undefined(x$ptr)
 }
 
+#' @importFrom bit64 as.integer64
+#' @export
+as.integer64.torch_tensor <- function(x, keep.names = FALSE, ...) {
+  x <- x$to(dtype = torch_long())
+  as_array_impl(x)
+}
