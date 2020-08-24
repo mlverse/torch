@@ -65,6 +65,12 @@ test_that("Integer tensors", {
   expect_s3_class(o, "array")
   expect_equal(dim(o), dim(x))
   
+  x <- as.integer64(.Machine$integer)*2
+  y <- torch_tensor(x)
+  z <- as.integer64(y)
+  
+  expect_equal(as.integer64(z), x)
+  
 })
 
 test_that("Logical tensors", {
