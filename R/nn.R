@@ -276,10 +276,14 @@ is_nn_module <- function(x) {
 #' )
 #' 
 #' @export
-nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
+nn_module <- function(classname = NULL, inherit = nn_Module, ..., 
+                      parent_env = parent.frame()) {
   
   if (inherits(inherit, "nn_module"))
     inherit <- attr(inherit, "module")
+  
+  e <- new.env(parent = parent_env)
+  e$inherit <- inherit
     
   classes <- c(classname, "nn_module")
   
@@ -290,7 +294,8 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
     public = list(
       .classes = classes,
       ...
-    )
+    ),
+    parent_env = e
   )
   
   init <- get_init(Module)
