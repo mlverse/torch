@@ -28,7 +28,8 @@ Imports:
     rlang,
     methods,
     utils,
-    stats
+    stats,
+    bit64
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
@@ -36,7 +37,6 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    bit64,
     magrittr,
     glue
 VignetteBuilder: knitr
