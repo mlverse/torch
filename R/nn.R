@@ -246,7 +246,7 @@ is_nn_buffer <- function(x) {
 }
 
 is_nn_module <- function(x) {
-  inherits(x, "nn_module")
+  inherits(x, "nn_module") && !inherits(x, "nn_module_generator")
 }
 
 #' Base class for all neural network modules.
@@ -302,7 +302,7 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
       create_nn_module_callable(instance)
     })
   )
-  attr(fun, "class") <- classes
+  attr(fun, "class") <- c(classes, "nn_module_generator")
   attr(fun, "module") <- Module
   fun
 }
@@ -420,7 +420,7 @@ nn_sequential <- function(... , name = NULL) {
   module <- nn_module(
     classname = ifelse(is.null(name), "nn_sequential", name),
     initialize = function(...) {
-      modules <- list(...)
+      modules <- rlang::list2(...)
       for (i in seq_along(modules)) {
         self$add_module(name = i - 1, module = modules[[i]])  
       }
