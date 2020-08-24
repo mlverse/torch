@@ -48,6 +48,14 @@ nn_norm_base_ <- nn_module(
       nn_init_ones_(self$weight)
       nn_init_zeros_(self$bias)
     }
+  },
+  .load_from_state_dict = function(state_dict, prefix) {
+    
+    num_batches_tracked_key <- paste0(prefix, "num_batches_tracked")
+    if (!num_batches_tracked_key %in% names(state_dict))
+      state_dict[[num_batches_tracked_key]] <- torch_tensor(0, dtype = torch_long())
+    
+    super$.load_from_state_dict(state_dict, prefix)
   }
 )
 
