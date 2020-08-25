@@ -2,6 +2,9 @@ destination: docs
 template:
   params:
     bootswatch: united
+    
+development:
+  mode: auto
 
 navbar:
  structure:
