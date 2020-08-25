@@ -10,7 +10,6 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://github.com/mlverse/torch/workflows/Test/badge.svg)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/torch)](https://CRAN.R-project.org/package=torch)
-
 [![](https://cranlogs.r-pkg.org/badges/torch)](https://cran.r-project.org/package=torch)
 
 Installation
@@ -35,12 +34,12 @@ torch Tensor to an R object.
     y
     #> torch_tensor 
     #> (1,.,.) = 
-    #>   0.1292  0.9074
-    #>   0.8109  0.5279
+    #>   0.8270  0.1017
+    #>   0.1992  0.7632
     #> 
     #> (2,.,.) = 
-    #>   0.0765  0.7386
-    #>   0.0176  0.6603
+    #>   0.2694  0.9735
+    #>   0.1965  0.7447
     #> [ CPUDoubleType{2,2,2} ]
     identical(x, as_array(y))
     #> [1] TRUE
@@ -99,14 +98,14 @@ tensors in place.
     }
     print(w)
     #> torch_tensor 
-    #> 1e-10 *
-    #> -2.6495
-    #>  -9.1423
+    #> 1e-09 *
+    #>  7.8984
+    #>   8.7077
     #> [ CPUFloatType{2,1} ]
     print(b) 
     #> torch_tensor 
     #> 0.01 *
-    #>  4.2967
+    #>  9.9867
     #> [ CPUFloatType{1} ]
 
 Contributing
