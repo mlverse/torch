@@ -17,6 +17,9 @@ knitr::opts_chunk$set(
 
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 ![R build status](https://github.com/mlverse/torch/workflows/Test/badge.svg)
+[![CRAN status](https://www.r-pkg.org/badges/version/torch)](https://CRAN.R-project.org/package=torch)
+
+[![](https://cranlogs.r-pkg.org/badges/torch)](https://cran.r-project.org/package=torch)
 
 ## Installation
 
