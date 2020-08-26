@@ -3,13 +3,12 @@ libs_path <- getwd()
 # wait, because of it's built in parallel this script might run before
 # finishing.
 start <- Sys.time()
-timeout <- 180
+timeout <- 15*60
 
 while(length(dir(libs_path, pattern = "torch\\.")) == 0) {
   Sys.sleep(4)
-  cat("Waiting for compilation...\n")
   if (as.numeric(Sys.time() - start) > timeout)
-    break
+    break 
 }
 
 for (lib in dir(libs_path, pattern = "torch\\.")) {
