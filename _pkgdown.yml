@@ -8,9 +8,14 @@ development:
 
 navbar:
  structure:
-  left:  [home, articles, examples, reference, news]
+  left:  [home, getting-started, articles, examples, reference, news]
   right: [github]
  components:
+  getting-started:
+    text: Getting started
+    menu:
+      - text: What's torch?
+        href: articles/getting-started/what-is-torch.html
   articles:
     text: Articles
     menu:
