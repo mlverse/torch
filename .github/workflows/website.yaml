@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - blogdown
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["pkgdown"]
+    branches: ["master"]
+    types: 
+      - completed
+
+name: Merge websites
+
+jobs:
+  pkgdown:
+    runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      TORCH_TEST: 1
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: 'blogdown'
+      - name: Deploy package
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          mkdir static/docs
+          cd static/docs
+          git clone -b gh-pages https://github.com/mlverse/torch.git .
+          rm -r .git/
+          cd ../..
+          git add -A
+          git commit -m "Update site"
+          git push --force origin HEAD:website
