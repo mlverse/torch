@@ -7,10 +7,11 @@ articles:
   mnist-mlp: examples/mnist-mlp.html
   extending-autograd: extending-autograd.html
   autograd: getting-started/autograd.html
+  neural-networks: getting-started/neural-networks.html
   what-is-torch: getting-started/what-is-torch.html
   indexing: indexing.html
   loading-data: loading-data.html
   tensor-creation: tensor-creation.html
   using-autograd: using-autograd.html
-last_built: 2020-08-27T20:57Z
+last_built: 2020-08-27T22:13Z
 
