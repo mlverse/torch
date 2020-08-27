@@ -18,6 +18,8 @@ navbar:
         href: articles/getting-started/what-is-torch.html
       - text: 'Autograd: automatic differentiation'
         href: articles/getting-started/autograd.html
+      - text: Neural networks
+        href: articles/getting-started/neural-networks.html
   articles:
     text: Articles
     menu:

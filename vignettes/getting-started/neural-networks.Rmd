@@ -1,0 +1,216 @@
+---
+title: Neural networks
+type: docs
+---
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = 0), 1)
+)
+```
+
+> Note: This is an R port of the official tutorial available [here](https://pytorch.org/tutorials/beginner/blitz/tensor_tutorial.html#sphx-glr-beginner-blitz-tensor-tutorial-py). All credits goes to [Soumith Chintala](http://soumith.ch/).
+
+```{r setup}
+library(torch)
+```
+
+Neural networks can be constructed using the `nn` functionality.
+
+Now that you had a glimpse of `autograd`, `nn` depends on `autograd` to define models and differentiate them. An nn.Module contains layers, and a method `forward(input)` that returns the output.
+
+For example, look at this network that classifies digit images:
+
+![Convnet for mnist classification](assets/mnist.png)
+
+It is a simple feed-forward network. It takes the input, feeds it through several layers one after the other, and then finally gives the output.
+
+A typical training procedure for a neural network is as follows:
+
+- Define the neural network that has some learnable parameters (or weights)
+- Iterate over a dataset of inputs
+- Process input through the network
+- Compute the loss (how far is the output from being correct)
+- Propagate gradients back into the network’s parameters
+- Update the weights of the network, typically using a simple update rule: `weight = weight - learning_rate * gradient`.
+
+## Define the network
+
+Let's define this network:
+
+```{r}
+Net <- nn_module(
+  initialize = function() {
+    self$conv1 = nn_conv2d(1, 6, 3)
+    self$conv2 = nn_conv2d(6, 16, 3)
+    # an affine operation: y = Wx + b
+    self$fc1 = nn_linear(16 * 6 * 6, 120)  # 6*6 from image dimension
+    self$fc2 = nn_linear(120, 84)
+    self$fc3 = nn_linear(84, 10)
+  },
+  forward = function(x) {
+    x %>% 
+      
+      self$conv1() %>% 
+      nnf_relu() %>% 
+      nnf_max_pool2d(c(2,2)) %>% 
+      
+      self$conv2() %>% 
+      nnf_relu() %>% 
+      nnf_max_pool2d(c(2,2)) %>% 
+      
+      torch_flatten(start_dim = 2) %>% 
+      
+      self$fc1() %>% 
+      nnf_relu() %>% 
+      
+      self$fc2() %>% 
+      nnf_relu() %>% 
+      
+      self$fc3()
+  }
+)
+
+net <- Net()
+```
+
+You just have to define the `forward` function, and the `backward` function (where gradients are computed) is automatically defined for you using `autograd.` You can use any of the Tensor operations in the `forward` function.
+
+The learnable parameters of a model are returned by `net$parameters`.
+
+```{r}
+str(net$parameters)
+```
+
+Let’s try a random 32x32 input. Note: expected input size of this net (LeNet) is 32x32. To use this net on the MNIST dataset, please resize the images from the dataset to 32x32.
+
+```{r}
+input <- torch_randn(1, 1, 32, 32)
+out <- net(input)
+out
+```
+
+Zero the gradient buffers of all parameters and backprops with random gradients:
+
+```{r}
+net$zero_grad()
+out$backward(torch_randn(1, 10))
+```
+
+> **Note**: `nn` only supports mini-batches. The entire torch.nn package only supports inputs that are a mini-batch of samples, and not a single sample. For example, `nn_conv2d` will take in a 4D Tensor of nSamples x nChannels x Height x Width.
+If you have a single sample, just use `input$unsqueeze(1)` to add a fake batch dimension.
+
+Before proceeding further, let’s recap all the classes you’ve seen so far.
+
+### Recap
+
+- `torch_tensor` - A multi-dimensional array with support for autograd operations like `backward()`. Also holds the gradient w.r.t. the tensor.
+
+- `nn_module` - Neural network module. Convenient way of encapsulating parameters, with helpers for moving them to GPU, exporting, loading, etc.
+
+- `nn_parameter` - A kind of Tensor, that is automatically registered as a parameter when assigned as an attribute to a Module.
+
+- `autograd_function` - Implements forward and backward definitions of an autograd operation. Every Tensor operation creates at least a single Function node that connects to functions that created a Tensor and encodes its history.
+
+### At this point, we covered
+
+- Defining a neural network
+- Processing inputs and calling backward
+
+### Still left
+
+- Computing the loss
+- Updating the weights of the network
+
+## Loss function
+
+A loss function takes the (output, target) pair of inputs, and computes a value that estimates how far away the output is from the target.
+
+There are several different loss functions under the nn package . A simple loss is: `nnf_mse_loss` which computes the mean-squared error between the input and the target.
+
+For example:
+
+```{r}
+output <- net(input)
+target <- torch_randn(10)  # a dummy target, for example
+target <- target$view(c(1, -1))  # make it the same shape as output
+
+loss <- nnf_mse_loss(output, target)
+loss
+```
+
+Now, if you follow loss in the backward direction, using its `$grad_fn` attribute, you will see a graph of computations that looks like this:
+
+```
+input -> conv2d -> relu -> maxpool2d -> conv2d -> relu -> maxpool2d
+      -> view -> linear -> relu -> linear -> relu -> linear
+      -> MSELoss
+      -> loss
+```
+
+So, when we call `loss$backward()`, the whole graph is differentiated w.r.t. the loss, and all Tensors in the graph that has requires_grad=True will have their `#grad` Tensor accumulated with the gradient.
+
+For illustration, let us follow a few steps backward:
+
+```{r}
+loss$grad_fn
+loss$grad_fn$next_functions[[1]]
+loss$grad_fn$next_functions[[1]]$next_functions[[1]]
+```
+
+## Backprop
+
+To backpropagate the error all we have to do is to `loss$backward()`. You need to clear the existing gradients though, else gradients will be accumulated to existing gradients.
+
+Now we shall call `loss$backward()`, and have a look at conv1’s bias gradients before and after the backward.
+
+```{r}
+net$zero_grad()     # zeroes the gradient buffers of all parameters
+
+# conv1.bias.grad before backward
+net$conv1$bias$grad
+
+loss$backward()
+
+# conv1.bias.grad after backward
+net$conv1$bias$grad
+```
+
+Now, we have seen how to use loss functions.
+
+## Update the weights
+
+The simplest update rule used in practice is the Stochastic Gradient Descent (SGD):
+
+$$weight = weight - learning_rate * gradient$$ 
+
+We can implement this using simple R code:
+
+```{r}
+learning_rate <- 0.01
+for (f in net$parameters) {
+  with_no_grad({
+    f$sub_(f$grad * learning_rate)
+  })
+}
+```
+
+> **Note:** Weight updates here is wraped around `with_no_grad` as we don't the updates to be tracked by the autograd engine. 
+
+However, as you use neural networks, you want to use various different update rules such as SGD, Nesterov-SGD, Adam, RMSProp, etc. 
+
+```{r}
+# create your optimizer
+optimizer <- optim_sgd(net$parameters, lr = 0.01)
+
+# in your training loop:
+optimizer$zero_grad()   # zero the gradient buffers
+output <- net(input)
+loss <- nnf_mse_loss(output, target)
+loss$backward()
+optimizer$step()    # Does the update
+```
+
+> **Note:** Observe how gradient buffers had to be manually set to zero using `optimizer$zero_grad()`. This is because gradients are accumulated as explained in the Backprop section.
+
