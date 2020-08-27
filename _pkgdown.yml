@@ -16,6 +16,8 @@ navbar:
     menu:
       - text: What's torch?
         href: articles/getting-started/what-is-torch.html
+      - text: 'Autograd: automatic differentiation'
+        href: articles/getting-started/autograd.html
   articles:
     text: Articles
     menu:
