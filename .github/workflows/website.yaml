@@ -1,10 +1,13 @@
 on:
   push:
-    branches: 
-      - gh-pages
+    branches:
       - blogdown
-  page_build:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["pkgdown"]
+    branches: ["master"]
+    types: 
+      - completed
 
 name: Merge websites
 
