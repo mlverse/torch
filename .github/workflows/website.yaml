@@ -3,8 +3,8 @@ on:
     branches: 
       - gh-pages
       - blogdown
-    page_build:
-    workflow_dispatch:
+  page_build:
+  workflow_dispatch:
 
 name: Merge websites
 
