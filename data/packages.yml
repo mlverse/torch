@@ -1,0 +1,18 @@
+torch:
+  weight: 1
+  desc: 'torch is the core package in the ecosystem. It provides a GPU accelerated array computation library, a collection of general neural network layers and abstractions for efficiently loading data for deep learning models.' 
+  url_git: https://github.com/mlverse/torch
+  url_docs: https://torch.mlverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/torch/index.html
+  name: torch
+torchvision:
+  weight: 10
+  desc: 'torchvision is an extension providing image loading and transformation tooling, the most common architectures for computer vision as well as their pre-trained weights and easy loading and preprocessing of commonly used datasets.'
+  url_git: https://github.com/mlverse/torchvision
+  url_docs: https://torchvision.mlverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/torchvision/index.html
+  name: torchvision
+you:
+  weight: 100
+  desc: 'If you are developping a torch extension contact us to feature it in this website. We welcome any kind extension be it for dataset loading, a frontend API for writing models or pre-trained models!'
+  name: More

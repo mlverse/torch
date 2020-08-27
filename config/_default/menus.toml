@@ -1,0 +1,9 @@
+# Navigation Bar Links
+#   The weight parameter defines the order that the links will appear in.
+
+[[main]]
+    name = "Packages"
+    url = "/packages/"
+    weight = 1
+
+

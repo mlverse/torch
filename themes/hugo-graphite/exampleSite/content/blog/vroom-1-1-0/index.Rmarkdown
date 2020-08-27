@@ -1,0 +1,131 @@
+---
+title: vroom 1.1.0
+author: Jim Hester
+date: '2020-01-15'
+slug: vroom-1-1-0
+description: vroom 1.1.0 is now on CRAN!
+categories:
+  - package
+tags: [package, r-lib, vroom]
+photo:
+  url: https://www.pexels.com/photo/12801/
+  author: Chris Peeters
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+I'm excited to announce that [vroom 1.1.0](http://vroom.r-lib.org) is now
+available on CRAN!
+
+vroom reads rectangular data, such as comma separated (csv), tab separated (tsv) or fixed width files (fwf) into R.
+It performs similar roles to functions like [`readr::read_csv()`](http://readr.r-lib.org), [`data.table::fread()`](http://r-datatable.com) or `read.csv()`.
+But for many datasets `vroom::vroom()` can read them much, much faster (hence the name).
+Get the latest version with:
+
+```{r, eval = FALSE}
+install.packages("vroom")
+```
+
+And attach the package by running
+
+```{r}
+library(vroom)
+```
+
+Improvements in this release include: a hex logo, support for big integer data, improved delimiter guessing, including delimiters in specifications, and streamlined reading from standard input.
+
+See the [change log](https://vroom.r-lib.org/news/index.html) for a full list of changes and bug fixes in this version.
+
+## Hex logo
+
+Thanks to [Allison Horst](https://github.com/allisonhorst/stats-illustrations) we now have an awesome hex logo for vroom!
+
+![](logo.png)
+
+## Big integer support
+
+R's standard integers are stored in 32 bits of binary data, which means that the largest value they can store is 2,147,483,647 (`2^31 - 1`).
+R implicitly converts integers for most operations with doubles to 64-bit floating point values, which is why you may not have noticed this limitation before.
+
+```{r}
+options(digits = 22)
+x <- 2147483647L
+str(x)
+str(x + 1L)
+str(x + 1)
+x + 1
+```
+
+However, even 64-bit floating point values can only store consecutive integers up to 9,007,199,254,740,992 (`2^53`) without losing precision.
+You can observe this because if you try adding 1 to this number you will get the same number.
+
+```{r}
+y <- 9007199254740992
+z <- y + 1
+z
+y == z
+```
+
+To store consecutive integers bigger than this you need to use a 64-bit integer type.
+R does not have native support for 64-bit integers, however the [bit64](https://cran.r-project.org/package=bit64) package provides support for them.
+Because these integers are so large, they rarely occur in real world data, however they can often be obtained from generated data, such as database identifiers.
+
+vroom 1.1.0 now supports reading these big integers into the `integer64` type provided by bit64 with a new `col_big_integer()` column type (shortcut 'I').
+
+```{r}
+x <- vroom("id\n9007199254740993\n", col_type = "I", delim = ",")
+x
+
+x$id + 1
+```
+
+## Improved delimiter guessing
+
+The code to guess delimiters has been rewritten, which should make it more robust to most inputs.
+Previous versions of vroom would fall back to using a newline delimiter if a delimiter could not be guessed.
+vroom 1.1.0 instead throws an error.
+
+```{r, error = TRUE}
+vroom("x\n1\n")
+vroom("x\n1\n", delim = ",")
+```
+
+## Delimiters in the specification
+
+vroom now includes the delimiter in the specification object, which means you no longer have to separately provide the delimiter if you are using an existing specification.
+
+```{r}
+# read a csv file, the delimiter is provided as ','
+x <- vroom(vroom_example("mtcars.csv"), delim = ',')
+mtcars_spec <- spec(x)
+
+# If the file is read again with the spec, no need to provide the delimiter
+y <- vroom(vroom_example("mtcars.csv"), col_types = mtcars_spec)
+```
+
+## Reading from standard input
+
+vroom makes it straightforward to read from the C standard input, like you would do when calling R from the terminal command line.
+Simply use `stdin()` as your input. Let's say you want to take the first few lines the mtcars file and find the average horsepower.
+
+```{r, echo = FALSE}
+vroom_write(mtcars, "mtcars.tsv", delim = "\t")
+```
+
+```{bash}
+head mtcars.tsv | Rscript -e 'hp <- vroom::vroom(stdin(), col_types = list())$hp; mean(hp)'
+```
+
+```{r, echo = FALSE}
+unlink("mtcars.tsv")
+```
+
+## Acknowledgements
+
+This release also contains a number of bug fixes and improvements which should make it more robust than previous releases. See the [change log](https://vroom.r-lib.org/news/index.html) for full details.
+
+A big thanks to all contributors of code, issues and documentation to this release, including many who helped out at the tidyverse developer day in Toulouse, France!
+
+[&#x0040;2005m](https://github.com/2005m), [&#x0040;atomman](https://github.com/atomman), [&#x0040;batpigandme](https://github.com/batpigandme), [&#x0040;blairj09](https://github.com/blairj09), [&#x0040;Chris-M-P](https://github.com/Chris-M-P), [&#x0040;chsafouane](https://github.com/chsafouane), [&#x0040;CriscelyLP](https://github.com/CriscelyLP), [&#x0040;DyfanJones](https://github.com/DyfanJones), [&#x0040;ecoquant](https://github.com/ecoquant), [&#x0040;edzer](https://github.com/edzer), [&#x0040;ericbrownaustin](https://github.com/ericbrownaustin), [&#x0040;estroger34](https://github.com/estroger34), [&#x0040;frm1789](https://github.com/frm1789), [&#x0040;georgevbsantiago](https://github.com/georgevbsantiago), [&#x0040;guiastrennec](https://github.com/guiastrennec), [&#x0040;hadley](https://github.com/hadley), [&#x0040;HenrikBengtsson](https://github.com/HenrikBengtsson), [&#x0040;henry090](https://github.com/henry090), [&#x0040;jaapwalhout](https://github.com/jaapwalhout), [&#x0040;jimhester](https://github.com/jimhester), [&#x0040;jonaszierer](https://github.com/jonaszierer), [&#x0040;kiernann](https://github.com/kiernann), [&#x0040;martindut](https://github.com/martindut), [&#x0040;meta00](https://github.com/meta00), [&#x0040;mgirlich](https://github.com/mgirlich), [&#x0040;mllg](https://github.com/mllg), [&#x0040;osiris08](https://github.com/osiris08), [&#x0040;Plebejer](https://github.com/Plebejer), [&#x0040;R3myG](https://github.com/R3myG), [&#x0040;randomgambit](https://github.com/randomgambit), [&#x0040;sanromd](https://github.com/sanromd), [&#x0040;Shians](https://github.com/Shians), [&#x0040;stephen-hayne](https://github.com/stephen-hayne), [&#x0040;vjcitn](https://github.com/vjcitn), [&#x0040;wlattner](https://github.com/wlattner), and [&#x0040;xiaodaigh](https://github.com/xiaodaigh).

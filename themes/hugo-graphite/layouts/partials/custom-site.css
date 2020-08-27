@@ -1,0 +1,519 @@
+/* Google Fonts */
+{{ with .Param "headers.import" }} {{ . }} {{end}}
+
+body {
+	background-color: {{ .Param "colors.background" }};
+	color: {{ .Param "colors.text" }};
+}
+
+/* Links */
+
+a {
+  color: {{ .Param "colors.link" }};
+}
+
+a:hover {
+  color: {{ .Param "colors.link_hover" }};
+}
+
+a:focus {
+  outline-color: {{ .Param "colors.link_hover" }};
+}
+
+.column25-left .sectionTitle a:hover:not(.current),
+.column16-left .sectionTitle a:hover:not(.current) { /* Tutorial left sidebar */
+  color: {{ .Param "colors.text" }};
+}
+
+.icon-attribution, 
+.icon-attribution a {
+  color: {{ .Param "colors.text" }};
+  opacity: 75%;
+}
+
+
+/* Landing page content bands */
+
+#homeContent .band.first {
+  background-color: {{ .Param "colors.home_section_odd" }};
+}
+
+#homeContent .band.second {
+  background-color: {{ .Param "colors.home_section_even" }};
+}
+
+#homeContent .band.third {
+  background-color: {{ .Param "colors.home_section_odd" }};
+}
+
+/* Top navigation bar menu */
+
+#rStudioHeader {
+  background-color: {{ .Param "colors.menu_primary" }};
+  color: {{ .Param "colors.menu_text" }};
+}
+
+#rStudioHeader .productName {
+  color: {{ .Param "colors.menu_title" }};
+}
+
+#rStudioHeader .productName:hover,
+#rStudioHeader .productName:focus {
+  color: {{ .Param "colors.menu_title_active" }};
+}
+
+#rStudioHeader #menu .menuItem.a {
+  background-color: #75aadb;
+  color: {{ .Param "colors.menu_text" }};
+}
+
+#rStudioHeader #menu .menuItem:hover {
+  background-color: {{ .Param "colors.menu_box_hover" }};
+  color: {{ .Param "colors.menu_text_active" }};
+}
+
+#rStudioHeader #menu .menuItem.current {
+  background-color: {{ .Param "colors.menu_box_active" }};
+  color: {{ .Param "colors.menu_text_current" }};
+  text-decoration: {{ .Param "colors.menu_decorate_current" }};
+}
+
+/* Footer */
+
+#rStudioFooter.band {
+  background-color: {{ .Param "colors.footer_primary" }};
+}
+
+#rStudioFooter .bandContent #copyright {
+  color: {{ .Param "colors.footer_text" }};
+}
+
+/* Tables */
+
+table tbody tr:nth-child(even){
+  background-color: {{ .Param "colors.table_row_even" }};
+}
+
+table tbody tr:nth-child(odd){
+  background-color: {{ .Param "colors.table_row_odd" }};
+}
+
+.latest {
+  border-top: .5em solid {{ .Param "colors.latest_border" }};
+}
+
+
+/* ------Accent Font------- */
+
+{{with .Param "headers.font-family"}}
+
+  h1, h2, 
+  .article-title:not(a), /* Title on single pages, but not the Learn list article links*/
+  div.tagline, /* homepage bands */
+  #TableOfContents a, /* Sidebar on regular pages*/
+  .articleCategory a, /* Sidebar on Blog & Learn list pages */
+  .column75 .sectionTitle:not(.back-to), /* e.g. Blog list title, NOT "back to learn" */
+  .column25-left .section:nth-child(n+2) .sectionTitle, /* Tutorial sidebar, all but 1st child */
+  .column16-left .section:nth-child(n+2) .sectionTitle,
+  a.learn-top-nav-item,  /* Bulleted toc items on Learn list page */
+  .itemTitle, /* Blog list page titles & Learn List page subsection Titles */
+  .tags-list a    /* taxonomy tags on Tutorial page, e.g. packages */                
+                            { 
+    font-family: '{{ . }}' ;
+  }
+
+{{end}}
+
+{{if .Param "headers.emphasis"}}
+
+  /* weight & sizing */
+  
+  h1, .article-title {
+    font-weight: bold;
+    font-size: 2em;
+  }
+  
+  h2 {
+    font-weight: bold;
+    font-size: 1.25em;
+  }
+  
+
+{{end}}
+
+/* ----Accent color for headers, toc, etc.----- */
+
+{{if .Param "accent_color.color_primary"}}
+
+  h1,
+  div.sectionTitle {
+    color: {{ .Param "accent_color.color_primary" }};
+  }
+  
+  /* Sidebar links */
+  
+  a.learn-top-nav-item, /* Learn list page bulleted toc */
+  #TableOfContents a,
+  .articleCategory a,
+  .column25-left .section:nth-child(n+2) a.sectionTitle,
+  .column16-left .section:nth-child(n+2) a.sectionTitle { 
+    color: {{ .Param "colors.link_hover" }};
+    opacity: .8;
+  }
+  
+  .column25-left .section:nth-child(n+2) a.sectionTitle.current,
+  .column16-left .section:nth-child(n+2) a.sectionTitle.current { 
+    color: {{ .Param "accent_color.color_primary" }};
+  }
+  
+  a.learn-top-nav-item:hover,
+  #TableOfContents a:hover,
+  .articleCategory a:hover,
+  .column25-left .section:nth-child(n+2) a.sectionTitle:hover,
+  .column16-left .section:nth-child(n+2) a.sectionTitle:hover {
+    color: {{ .Param "accent_color.color_secondary" }}; 
+    opacity: 95%;
+    text-decoration: none;
+  }
+  
+  .column25-left .sectionTitle.start:first-of-type a,
+  .column16-left .sectionTitle.start:first-of-type a {
+    color: {{ .Param "accent_color.color_primary" }};
+  }
+  
+  .column25-left .sectionTitle.current,
+  .column16-left .sectionTitle.current {
+    color: {{ .Param "accent_color.color_primary" }};
+  }
+  
+  /* headers and accent colors */
+  
+  .article-title,             /* Most page titles */
+  .column75 div.sectionTitle {  /* Learn page section title */
+    color: {{ .Param "accent_color.color_primary" }};
+  }
+  
+  h2 {
+    color: {{ .Param "accent_color.color_secondary" }};
+  }
+  
+  .itemTitle a { /* For Learn Page headers */
+    color: {{ .Param "accent_color.color_secondary" }};
+  }
+  
+  .itemTitle a:hover { /* For Learn List Page headers */
+    color: {{ .Param "accent_color.color_secondary" }};
+    opacity: 80%;
+    text-decoration: none;
+  }
+  
+  h3 {
+    color: {{ .Param "accent_color.color_secondary" }};
+    opacity: 95%;
+  }
+  
+  h3 a {
+    color: {{ .Param "accent_color.color_primary" }};
+    /*text-transform: none;
+    font-size: 1.5em;
+    letter-spacing: normal; */ /* was in tm, but check if i need here? */
+  }
+  
+  h4 {
+    color: {{ .Param "accent_color.color_secondary" }};
+    opacity: 90%;
+  }
+  
+  /* taxonomy tags, e.g. tutorial package links*/
+  
+  .tags-list .learning-objective {
+    color: {{ .Param "accent_color.color_secondary" }};
+    opacity: 85%;
+  }
+  
+  .tags-list a {
+    color: {{ .Param "accent_color.color_secondary" }};
+    opacity: 56%;
+  }
+  
+  .tags-list a:hover {
+    opacity: 95%;
+  }
+
+{{end}}
+
+/* Custom colored bullets */
+
+{{with .Param "bullets.color"}}
+
+  /*.article-content ul{
+    list-style: none;
+  } */
+
+  .article-content ul li::before {
+  	content: "\2022";
+  	color: {{ . }} ;
+  	display: inline-block;
+  	width: 1.5em;
+  	margin-left: -1.7em;
+  }
+  	
+  .article-content ul > li > p {
+    display: inline;
+  }
+
+  .article-content ul > li { /*to add back in space between bullet items that I took away by making p display inline */
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  
+  .learn-top-nav ul li::before, /* For learn list page */
+  .tutorial #TableOfContents ul li::before { /* For tutorials toc bullets */
+  	content: "\2022";
+  	color: {{ . }} ;
+  	display: inline-block;
+  	width: 1.5em;
+  	margin-left: -1.8em; 
+  }
+
+.article-content ul, /* Regular lists */
+.learn-top-nav ul,
+.tutorial #TableOfContents ul {
+  	list-style: none;
+  	line-height: 1.6em;
+  	padding-left: 2.5em;
+  	/* margin-bottom: 0; */
+  }
+  
+/* But also give div tip outline the same color as bullets*/
+
+div.note, 
+div.rstudio-tip, 
+div.warning {
+  border-color: {{ . }} ;
+}
+    
+
+{{end}}
+
+/* ------Capitalization of Headers------- */
+
+{{with .Param "capitalization.text_transform"}}
+  
+  div.tagline {
+    font-size: 1.2rem !important;
+    text-transform: {{ . }};
+    font-weight: bold;
+    letter-spacing: 2pt;
+  }
+  
+  #menu {
+    text-transform: {{ . }};
+    letter-spacing: 2pt;
+    font-size: 0.9rem !important;
+  }
+  
+  .column25 .sectionTitle,
+  .column25 .sectionTitle a,
+  .column16 .sectionTitle,
+  .column16 .sectionTitle a {
+    text-transform: {{ . }};
+    letter-spacing: 2pt;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .icon-attribution, 
+  .icon-attribution a {
+    text-transform: {{ . }};
+  }
+  
+  /* Getting Started / Tutorial sidebar title */
+  .column25-left .sectionTitle.start:first-of-type a,
+  .column16-left .sectionTitle.start:first-of-type a {
+    text-transform: {{ . }};
+    letter-spacing: 2pt;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+  
+  /*.e.g "Back to Learn" link */
+  .column75 .section .sectionTitle a {
+    text-transform: {{ . }};
+    letter-spacing: 2pt;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+  
+  /*  */
+  
+
+{{end}}  
+
+/* -----Hexes------*/
+{{if .Param "hexes.thin_hex"}}
+
+  #homeContent .band.first .bandContent {
+    background-image: url(../css/images/tidy-back-01-thin.svg);
+  }
+  
+  #homeContent .band.second .bandContent {
+    background-image: url(../css/images/tidy-back-02-thin.svg);
+  }
+  
+  #homeContent .band.third .bandContent {
+    background-image: url(../css/images/tidy-back-03-thin.svg);
+  }
+  
+  .package-section .packages .package {
+    background-image: url(../css/images/tidy-packages-back-01-thin.svg); 
+  }
+
+  .package-section .packages .package:first-of-type {
+      background-image: url(../css/images/tidy-packages-back-02-thin.svg); 
+  }
+
+  .package-section .packages .package:last-of-type {
+      background-image: url(../css/images/tidy-packages-back-03-thin.svg); 
+  } 
+
+{{end}}
+
+/*----- Borders------ */
+
+{{with .Param "borders.thin_lines"}}
+
+  #rStudioHeader {
+    box-shadow: 0 {{ . }} 0px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 {{ . }} 0px 0px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 {{ . }} 0px 0px rgba(0, 0, 0, 0.15);
+  }
+  
+  #homeContent .band.second {
+    border-bottom: solid {{ . }} #d9d9d9;
+    border-top: solid {{ . }} #d9d9d9;
+  }
+  
+  .column25,
+  .column16 {
+    border-left: solid #d9d9d9 {{ . }};
+  }
+  
+  .column25-left {
+    padding-right: 3em;
+    border-right: solid #d9d9d9 {{ . }};
+}
+
+  .column16-left {
+    padding-right: 1.5em;
+    border-right: solid #d9d9d9 {{ . }};
+}
+
+  .article-content.learn-list ul {
+      border-left: {{ . }} solid #d9d9d9;
+  }
+
+{{end}}
+
+/*--- Event Stickies ---*/
+
+{{with .Param "event_stickies.background"}}
+  .event {
+    -moz-box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.1);
+  }
+{{end}}
+
+
+{{if .Param "event_stickies.straight"}}
+  .event:nth-child(2) {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); 
+  }
+  .event:nth-child(3) {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); 
+  }
+{{end}}
+
+
+{{with .Param "event_stickies.background"}}
+  .section .event {
+    background-color: {{ . }};
+  }
+{{end}}
+
+
+{{with .Param "event_stickies.border_color"}}
+  .section .event {
+    border-top: 7pt solid {{ . }};
+  }
+{{end}}
+
+
+{{with .Param "event_stickies.links"}}
+  .section .event a{
+      color: {{ . }};
+  }
+{{end}}
+
+
+{{with .Param "event_stickies.text_color"}}
+  .section .event {
+      color: {{ . }};
+  }
+{{end}}
+
+/* ------Test Drive Button-------*/
+
+{{ with .Param "test_drive.text" }}
+
+  .test-drive-btn {
+    color: {{ . }};
+  }
+
+{{ end }}
+
+
+{{ with .Param "test_drive.button" }}
+
+  .test-drive-btn {
+    background-color: {{ . }};
+  }
+
+{{ end }}
+
+
+{{ with .Param "test_drive.outline" }}
+
+  .test-drive-btn {
+    border: 1pt solid {{ . }};
+  }
+
+{{ end }}
+
+
+{{ with .Param "test_drive.hover_outline" }}
+
+  .test-drive-btn:hover {
+    border: 1pt solid {{ . }};
+  }
+
+{{ end }}
+
+{{ with .Param "test_drive.hover_text" }}
+
+  .test-drive-btn:hover {
+    color: {{ . }};
+  }
+
+{{ end }}
+
+{{ with .Param "test_drive.hover_button" }}
+
+  .test-drive-btn:hover {
+    background-color: {{ . }};
+  }
+
+{{ end }} 

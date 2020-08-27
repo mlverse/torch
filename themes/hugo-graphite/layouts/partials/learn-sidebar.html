@@ -1,0 +1,10 @@
+      <div class="column25">
+        <div class="section">
+          <div class="sectionTitle">Filter by package</div>
+          {{ range $key, $value := $.Site.Taxonomies.tags }}
+          <div class="articleCategory {{ replace (lower $key) " " "" }}">
+            <a href="{{ (print "/tags/" $key | urlize) | relURL }}">{{ $key }} ({{ .Count }})</a>
+          </div>
+          {{ end }}
+        </div>
+      </div>

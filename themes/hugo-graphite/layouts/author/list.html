@@ -1,0 +1,48 @@
+{{ define "main" }}
+
+
+
+<div class="band padForHeader pushFooter">
+  <div class="bandContent">
+    <div class="full splitColumns withMobileMargins">
+      <div class="column75">
+          <div class="listItem">
+            <a class="itemImage project" href="{{ .RelPermalink }}" style="background-image: url({{ .Param "photo"}}); border-radius: 50%; background-size: cover; background-position: center center;"></a>
+            <div class="itemDetails">
+              <div class="itemHeader">
+                <div class="itemTitle"><a href="{{ .RelPermalink }}">{{ .Params.name }}</a></div>
+              </div>
+              <div class="itemMeta">
+                  <div class="itemDescription">{{ default .Description | markdownify }}</div>
+                  {{ with .Params.social.twitter }}<a href="https://twitter.com/{{ . }}" target="_blank"><i class="fab fa-twitter fa-2x" aria-hidden="true"></i></a>{{ end }}  {{ with .Params.social.github }}<a href="https://github.com/{{ . }}" target="_blank"><i class="fab fa-github fa-2x" aria-hidden="true"></i></a>{{ end }}  {{ with .Params.social.website }}<a href="{{ . }}" target="_blank"><i class="fas fa-link fa-2x" aria-hidden="true"></i></a>{{  end }}
+                  
+              </div>
+            </div>
+          </div>
+          <p>{{ .Content | markdownify | emojify }}</p>
+
+{{ $show_articles := $.Site.Params.authors.show_latest | default true }}
+{{ if $show_articles }}
+{{ $query := where .Pages ".IsNode" false }}
+{{ $count := len $query }}
+{{ if $count }}
+    <div class="latest">
+      <h3>{{ $.Site.Params.authors.label_latest | default "Latest" }}</h3>
+      <ul>
+        {{ range $query }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+{{ end }}
+{{ end }}
+
+
+      </div>
+    </div>
+  </div>  <!-- bandContent -->
+</div> <!-- band -->
+
+{{ end }}

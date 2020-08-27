@@ -1,0 +1,9 @@
+<div class="section hideOnMobile">
+  <div class="sectionTitle">Explore topics</div>
+    {{ range $index, $element := .FirstSection.Sections }}
+      <div class="articleCategory">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </div>
+    {{ end }}
+</div>
+

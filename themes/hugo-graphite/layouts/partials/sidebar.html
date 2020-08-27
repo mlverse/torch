@@ -1,0 +1,15 @@
+      <div class="column25">
+
+        <div class="section">
+          <div class="sectionTitle">Categories</div>
+          {{ range $key, $value := $.Site.Taxonomies.categories }}
+          <div class="articleCategory {{ replace (lower $key) " " "" }}">
+            <a href="{{ (print "/categories/" $key | urlize) | relURL }}">{{ $key }}</a>
+          </div>
+          {{ end }}
+        </div>
+
+        <div class="section">
+          {{ partial "events_sticky" . }}
+        </div>
+      </div>

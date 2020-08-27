@@ -1,0 +1,14 @@
+{{ define "main" }}
+
+<div class="band padForHeader pushFooter">
+  <center>
+  <h1>{{ .Title | markdownify }}</h1>
+    {{ partial "calendar.html" . }}
+    {{ $show_archive := $.Site.Params.events.link_archive | default true }}
+    {{ if $show_archive }}
+      <div><a href="{{ "/events/archive" | relURL }}">View past events here</a></div>
+    {{ end }}
+  </center>
+</div> <!-- band -->
+
+{{ end }}

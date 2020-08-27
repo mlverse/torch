@@ -1,0 +1,14 @@
+bandtwo:
+- url: /start/
+  title: Get started
+  icon: fa-meteor
+  icon_pack: fas
+  what: |
+    Start with the basics in our quick tour of R Markdown. Learn how to knit together text, code, and its output into a polished report. 
+
+- url: /explore/
+  title: Explore
+  icon: fa-search-plus
+  icon_pack: fas
+  what: |
+    Find out what you can create with R Markdown, from a single [document](/explore/doc/) to [dashboards](/explore/interactive-doc/), [books](/explore/websites), [websites](/explore/websites), and [more](/explore/). 

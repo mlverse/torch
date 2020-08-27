@@ -1,0 +1,119 @@
+# Description for social sharing and search engines.
+description = "The torch ecosystem is a collection of packages for deep learning in R."
+
+# Enable copy-to-clipboard for all code?
+# Can also enable by content section in _index.md file
+copy_clipboard = true 
+
+# Link custom CSS and JS assets
+#   (relative to /static/css and /static/js respectively)
+custom_css = [""]
+
+# Define base hex url for index page (where the stickers link out to)
+hex_base_url = ".tidyverse.org"
+
+# Define "news" as both articles and events
+mainSections = ["articles", "events"]
+
+# options for highlight.js (version, additional languages, and theme)
+disable_highlightjs = "true"
+highlightjsVersion = "9.11.0"
+highlightjsCDN = "//cdn.bootcss.com"
+highlightjsLang = ["r", "yaml"]
+highlightjsTheme = "github"
+
+MathJaxCDN = "//cdn.bootcss.com"
+MathJaxVersion = "2.7.1"
+
+# Logo file relative to static/images/
+# to appear in upper navbar
+# [logo]
+#    image = "torch.png"
+#    width = 220.85
+#    height = 100
+#    alt = "Torch for R"
+
+[footer]
+    github_url = "https://github.com/mlverse/torch"
+    twitter_url = "https://twitter.com/hashtag/rstats"
+    # Enter a copyright notice to display in the site footer.
+    # To display a copyright symbol, type `&copy;`. For current year, type `{year}`.
+    copyright = "&copy; [RStudio PBC.](https://www.rstudio.com/), {year}"
+    support = "Proudly supported by " # leave empty to remove support statement + RStudio logo
+
+# leave blank in quotes for the default = true
+# to turn off, set = false (no quotes)
+[authors]
+    show_list = "" # on list page, default is true
+    show_single = "" # on single pages, default is true
+    show_latest = "" # on bio, default is true
+    label_latest = "" # on bio, default is "Latest"
+
+# leave blank in quotes for the default = true
+# to turn off, set = false (no quotes)
+[events]
+    link_archive = "" # default is true
+
+# customize your site colors
+# these colors get applied by layouts/partials/custom-site.css
+# then, the layouts/partials/head_includes.html uses that partial
+# the partial head_includes.html is called in the partial header.html everywhere!
+[colors]
+    text = "#404040" # black
+    # Links
+    link = "#4254A7"
+    link_hover = "#4254A7"
+    # Footer
+    footer_primary = "#7e1f77"
+    footer_text = "#ffffff"
+    # Backgrounds
+    background = "white"
+    home_section_odd = "white"
+    home_section_even = "#fcfcfc"
+    # Menu
+    menu_primary = "#7e1f77"
+    menu_text = "#ffffff"
+    menu_text_active = "#a953a2"
+    menu_text_current = "#ffffff"
+    menu_decorate_current = "none"
+    menu_title = "#ffffff" # product name
+    menu_title_active = "#ffffff" # hover product name
+    menu_box_hover = "#ffffff"
+    menu_box_active = "#a953a2"
+    # Tables
+    header_background = "#1a162d80"
+    table_row_even = "#fcfcfc"
+    table_row_odd = "#1a162d10"
+    # Author taxo- latest border
+    latest_border = "#dae8f6"
+    
+# Choose an accent font (article headers, h1, h2, table of contents etc.) with Google Fonts
+[headers]
+    # Import a Google font and styles, e.g. "@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');"
+    # import = "@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');" 
+    # font-family = "Lato"
+    import = "@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');"
+    font-family = "Source Code Pro"
+
+[capitalization]
+# Make particular headers "uppercase" or "lowercase"
+# set = false (no quotes) for normal text
+    text_transform = "uppercase"
+
+[accent_color]
+    # Used for headers, so should be accessibility-friendly
+    color_primary = "#262626"
+    color_secondary = "#EE4C2C"
+    
+[bullets]
+    color = "#E32D5B"
+    
+[hexes]
+    thin_hex = true
+
+[borders]
+# For thin lines on Navbar, Table of contents divider, band borders, etc.
+# To turn on, set = "1px"
+# To turn off (default), set = false (no quotes)
+    thin_lines = "1px"
+

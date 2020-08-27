@@ -1,0 +1,49 @@
+# Title of your site
+title = "Education"
+
+# The URL of your site.
+# End your URL with a `/` trailing slash, e.g. `https://example.com/`.
+baseurl = "/"
+
+# Name the theme folder in `themes/`.
+theme = "hugo-graphite"
+
+# Enable analytics by entering your Google Analytics tracking ID
+googleAnalytics = ""
+
+relativeurls = false
+languageCode = "en-us"
+description = "An opinionated collection of R packages designed for data science."
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+# below is critical for non-authors to show up in article listing
+preserveTaxonomyNames = true
+# uncomment the next line to disable listing authors
+# disableKinds = ["taxonomyTerm"]
+
+[permalinks]
+  blog = "blog/:year/:month/:slug/"
+
+[taxonomies]
+  author = "author"
+  category = "categories"
+  tag = "tags"
+
+# Configure BlackFriday Markdown rendering.
+#   See: https://gohugo.io/getting-started/configuration/#configure-blackfriday
+[blackfriday]
+  hrefTargetBlank = true  # `true` opens external links in a new tab. See https://github.com/gohugoio/hugo/issues/2424
+	angledQuotes = false
+	latexDashes = true
+  extensions = ["backslashLineBreak"]
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.tableOfContents]
+    endLevel = 2
+    ordered = false
+    startLevel = 2
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    style = "pygments"

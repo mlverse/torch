@@ -1,0 +1,56 @@
+ggplot2:
+  weight: 1
+  desc: 'ggplot2 is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.' 
+  url_git: https://github.com/tidyverse/ggplot2
+  url_docs: https://ggplot2.tidyverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/ggplot2/index.html
+  name: ggplot2
+dplyr:
+  weight: 10
+  desc: 'dplyr provides a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.'
+  url_git: https://github.com/tidyverse/dplyr
+  url_docs: https://dplyr.tidyverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/dplyr/index.html
+  name: dplyr
+tidyr:
+  weight: 20
+  desc: 'tidyr provides a set of functions that help you get to tidy data. Tidy data is data with a consistent form: in brief, every variable goes in a column, and every column is a variable.' 
+  url_git: https://github.com/tidyverse/tidyr
+  url_docs: https://tidyr.tidyverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/tidyr/index.html
+  name: tidyr
+readr:
+  weight: 30
+  desc: "readr provides a fast and friendly way to read rectangular data (like csv, tsv, and fwf). It is designed to flexibly parse many types of data found in the wild, while still cleanly failing when data unexpectedly changes. "
+  url_git: https://github.com/tidyverse/readr
+  url_docs: https://readr.tidyverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/readr/index.html
+  name: readr
+purrr:
+  weight: 40
+  desc: "purrr enhances R’s functional programming (FP) toolkit by providing a complete and consistent set of tools for working with functions and vectors. Once you master the basic concepts, purrr allows you to replace many for loops with code that is easier to write and more expressive." 
+  url_git: https://github.com/tidyverse/purrr
+  url_docs: https://purrr.tidyverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/purrr/index.html
+  name: purrr
+tibble:
+  weight: 50
+  desc: "tibble is a modern re-imagining of the data frame, keeping what time has proven to be effective, and throwing out what it has not. Tibbles are data.frames that are lazy and surly: they do less and complain more forcing you to confront problems earlier, typically leading to cleaner, more expressive code."
+  url_git: https://github.com/tidyverse/tibble
+  url_docs: https://tibble.tidyverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/tibble/index.html
+  name: tibble
+stringr:
+  weight: 60
+  desc: "stringr provides a cohesive set of functions designed to make working with strings as easy as possible. It is built on top of stringi, which uses the ICU C library to provide fast, correct implementations of common string manipulations."
+  url_git: https://github.com/r-lib/stringr
+  url_docs: https://stringr.tidyverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/stringr/index.html
+  name: stringr
+forcats:
+  weight: 70
+  desc: "forcats provides a suite of useful tools that solve common problems with factors. R uses factors to handle categorical variables, variables that have a fixed and known set of possible values."
+  url_git: https://github.com/tidyverse/forcats
+  url_docs: https://forcats.tidyverse.org/
+  url_cran: https://cloud.r-project.org/web/packages/forcats/index.html
+  name: forcats

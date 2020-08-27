@@ -1,0 +1,137 @@
+---
+title: rules 0.0.1
+slug: rules-0-0-1
+description: >
+    The rules package is on CRAN and enables rule-based models for tidymodels.
+date: 2020-05-21
+author: Max Kuhn
+photo:
+  url: https://unsplash.com/photos/lu15z1m_KfM
+  author: Lili Popper
+categories:
+  - package
+tags:
+  - tidymodels
+  - rules
+---  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, comment = "#>", 
+  fig.width = 7, 
+  fig.align = 'center',
+  fig.asp = 0.618, # 1 / phi
+  out.width = "700px"
+)
+library(doMC)
+registerDoMC(cores = parallel::detectCores())
+```
+
+We are happy to announce the release of the [rules package](https://rules.tidymodels.org) on [CRAN](https://cran.r-project.org/package=rules). rules is another "parsnip-adjacent" package that enables a specific class of models within the tidymodels infrastructure.  rules currently contains three models:
+
+ * `C5_rules()`: classification rule sets based on the C5.0 model.
+ 
+ * `cubist_rules()`: regression rules using Cubist.
+ 
+ * `rule_fit()`: classification or regression rules using the RuleFit model. 
+ 
+If you aren't familiar with rule-based models, there is a [companion blog post](https://rviews.rstudio.com/2020/05/21/modern-rule-based-models/) that summarizes how they work.
+
+Install rules from CRAN like so: 
+  
+```{r eval = FALSE} 
+install.packages("rules") 
+``` 
+  
+ Then attach it for use via:
+  
+```{r, eval = FALSE} 
+library(rules)
+``` 
+
+Here's an example of creating Cubist regression rules via the [parsnip package](https://tune.tidymodels.org/): 
+
+```{r cb-rules, warning = FALSE}
+library(tidymodels)
+library(rules)
+
+data(car_prices, package = "modeldata")
+
+set.seed(9932)
+car_split <- initial_split(car_prices)
+car_tr <- training(car_split)
+car_te <-  testing(car_split)
+
+# A single rule set:
+cubist_mod <- 
+  cubist_rules(neighbors = 7) %>% 
+  set_engine("Cubist")
+
+cubist_fit <- 
+  cubist_mod %>% 
+  fit(log10(Price) ~ ., data = car_tr)
+
+summary(cubist_fit$fit)
+
+predict(cubist_fit, car_te %>% select(-Price))
+```
+```{r theme, include = FALSE}
+theme_set(theme_bw())
+```
+
+The functions also work with the [tune package](https://tune.tidymodels.org/). To optimize our model, the number of committees (similar to boosting iterations) and the number of nearest-neighbors are the primary parameters for tuning.
+
+```{r cb-tune}
+cb_grid <- expand.grid(committees = 1:30, neighbors = c(1, 3, 5, 7, 9))
+
+set.seed(8226)
+car_folds <- vfold_cv(car_tr)
+
+cubist_mod <- 
+  cubist_rules(neighbors = tune(), committees = tune()) %>% 
+  set_engine("Cubist")
+
+car_tune_res <- 
+  cubist_mod %>% 
+  tune_grid(log10(Price) ~ ., resamples = car_folds, grid = cb_grid)
+
+car_tune_res %>% 
+  collect_metrics() %>% 
+  filter(.metric == "rmse") %>% 
+  mutate(neighbors = factor(neighbors)) %>% 
+  ggplot(aes(x = committees, y = mean, col = neighbors)) + 
+  geom_point() + 
+  geom_line() + 
+  scale_color_brewer(palette = "Dark2") + 
+  theme(legend.position = "top")
+
+show_best(car_tune_res, metric = "rmse")
+
+smallest_rmse <- select_best(car_tune_res, metric = "rmse")
+smallest_rmse
+
+final_cb_mod <- 
+  cubist_mod %>% 
+  finalize_model(smallest_rmse) %>% 
+  fit(log10(Price) ~ ., data = car_tr)
+```
+
+It appears that the benefit of using committees occurs in the first 10 iterations. The nearest-neighbor adjustment was important to obtaining good performance.
+
+The test set results look good and are consistent with the resampling estimate of RMSE:
+
+```{r cb-test}
+test_pred <- 
+  predict(final_cb_mod, car_te) %>% 
+  bind_cols(car_te %>% select(Price)) %>% 
+  mutate(Price = log10(Price))
+
+test_pred %>% rmse(Price, .pred)
+
+ggplot(test_pred, aes(x = .pred, y = Price)) + 
+  geom_abline(col = "green", lty = 2) + 
+  geom_point(alpha = 0.5) + 
+  coord_fixed(ratio = 1)
+```
+
+I'd like to thank [Karl Holub](https://github.com/holub008) for making the [xrf package](https://github.com/holub008/xrf) and accepting my PRs and changes. 

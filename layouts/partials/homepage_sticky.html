@@ -1,0 +1,11 @@
+{{ range  $i, $element := $.Site.Data.homepage.bandtwo }}
+
+{{ $pack := .icon_pack }}
+{{ $icon := .icon }}
+
+<div class="event">
+  <div class="eventTitle"><a href="{{ .url }}">{{ with .icon }}<i class="{{ $pack }} {{ . }}"></i>{{ end }}&nbsp;&nbsp;{{ .title }}</a></div>
+  <div class="eventDetails">{{ .what | markdownify }}</div>
+</div>
+
+{{ end }}

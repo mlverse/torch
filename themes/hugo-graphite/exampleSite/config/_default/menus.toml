@@ -1,0 +1,24 @@
+# Navigation Bar Links
+#   The weight parameter defines the order that the links will appear in.
+
+[[main]]
+    name = "Packages"
+    url = "/packages/"
+    weight = 1
+[[main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 2
+[[main]]
+    name = "Tutorials"
+    url = "/start/"
+    weight = 3
+[[main]]
+    name = "Learn"
+    url = "/learn/"
+    weight = 4
+[[main]]
+    name = "Help"
+    url = "/help/"
+    weight = 5
+

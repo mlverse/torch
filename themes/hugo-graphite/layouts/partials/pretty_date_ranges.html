@@ -1,0 +1,14 @@
+{{ $date := .Date }}
+{{ $single_format := "January 2, 2006" }}
+{{ $range_start_format := "January 2" }}
+{{ $range_end_format := "2, 2006" }}
+
+{{ with .Params.date_end }}
+  {{ if eq (time $date).Month (time .).Month }}
+      {{ (time $date).Format $range_start_format }} &ndash; {{ (time .).Format $range_end_format }}
+  {{ else }}
+      {{ (time $date).Format $range_start_format }} &ndash; {{ (time .).Format $single_format }}
+  {{ end }}
+{{ else }}
+  {{ (time $date).Format $single_format }}
+{{ end }}

@@ -1,0 +1,14 @@
+{{ range  $i, $element := $.Site.Data.resources.resources }}
+
+{{ $pack := .icon_pack }}
+{{ $icon := .icon }}
+
+<div class="event">
+  
+  <div class="eventTitle">
+    <a href="{{ .url | safeURL }}"{{ if strings.HasPrefix .url "http" }} target="_blank"{{ end }}>{{ with .icon }}<i class="{{ $pack }} {{ . }} fa-xs"></i>{{ end }}&nbsp;&nbsp;{{ .title }}</a>
+  </div>
+  <div class="eventDetails">{{ .what | markdownify }}</div>
+</div>
+
+{{ end }}

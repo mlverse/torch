@@ -1,0 +1,12 @@
+<div id="menu">
+  <div id="menuToggler"></div>
+  <div id="menuItems" class="">
+    {{ $page := . }}
+    {{ range .Site.Menus.main }}
+      {{ $active := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
+      {{ $active = or $active (eq $page.Section (trim .URL "/")) }}
+      {{ $active = or $active (eq $page.RelPermalink .URL ) }}
+    <a class="menuItem {{ if $active }}current{{ end }}" href="{{ .URL }}">{{- .Pre -}}{{ .Name | safeHTML }}{{- .Post -}}</a>
+    {{ end }}
+  </div>
+</div>

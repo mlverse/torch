@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   sodipodi:docname="tidy-back-01-thin.svg"
+   xml:space="preserve"
+   style="enable-background:new 0 0 570 690;"
+   viewBox="0 0 570 690"
+   y="0px"
+   x="0px"
+   id="Layer_1"
+   version="1.1"><metadata
+   id="metadata41"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title>tidy-back</dc:title></cc:Work></rdf:RDF></metadata><defs
+   id="defs39" /><sodipodi:namedview
+   inkscape:current-layer="Layer_1"
+   inkscape:window-maximized="0"
+   inkscape:window-y="0"
+   inkscape:window-x="0"
+   inkscape:cy="345"
+   inkscape:cx="68.672638"
+   inkscape:zoom="0.88985507"
+   showgrid="false"
+   id="namedview37"
+   inkscape:window-height="900"
+   inkscape:window-width="1440"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0"
+   guidetolerance="10"
+   gridtolerance="10"
+   objecttolerance="10"
+   borderopacity="1"
+   bordercolor="#666666"
+   pagecolor="#ffffff" />
+	 
+<style
+   id="style10"
+   type="text/css">
+	.st0{fill:#EE4C2C;stroke:#FFFFFF;stroke-width:4;}
+	.st1{fill:#EE4C2C;stroke:#FFFFFF;stroke-width:3;} /*solid shape at bottom */
+</style>
+
+
+<title
+   id="title12">tidy-back</title>
+<path
+   id="path14"
+   d="M185,90l-60,34.8v69.5l60,34.8l60-34.8v-69.5L185,90z M240,191.4l-55,31.8l-55-31.8v-63.7l55-31.9l55,31.9  V191.4z"
+   class="st0" />
+<path
+   id="path16"
+   d="M60,305L0,339.8v69.5L60,444l60-34.8v-69.5L60,305z M115,406.4l-55,31.8L5,406.4v-63.7l55-31.9l55,31.9V406.4z"
+   class="st0" />
+<path
+   id="path18"
+   d="M185,305l-60,34.8v69.5l60,34.8l60-34.8v-69.5L185,305z M240,406.4l-55,31.8l-55-31.8v-63.7l55-31.9l55,31.9  V406.4z"
+   class="st0" />
+<path
+   id="path20"
+   d="M310,520l-60,34.8v69.5l60,34.8l60-34.8v-69.5L310,520z M365,621.4l-55,31.8l-55-31.8v-63.7l55-31.9l55,31.9  V621.4z"
+   class="st0" />
+<path
+   id="path22"
+   d="M435,520l-60,34.8v69.5l60,34.8l60-34.8v-69.5L435,520z M490,621.4l-55,31.8l-55-31.8v-63.7l55-31.9l55,31.9  V621.4z"
+   class="st0" />
+<polygon
+   style="fill:#ee4c2c;fill-opacity:1"
+   id="polygon24"
+   points="182,301.8 182,232.2 122,197.5 62,232.2 62,301.8 122,336.5 "
+   class="st1" />
+<path
+   id="path26"
+   d="M247,197.5l-60,34.8v69.5l60,34.8l60-34.8v-69.5L247,197.5z M302,298.9l-55,31.8l-55-31.8v-63.7l55-31.9  l55,31.9V298.9z"
+   class="st0" />
+<path
+   id="path28"
+   d="M247,412.5l-60,34.8v69.5l60,34.8l60-34.8v-69.5L247,412.5z M302,513.9l-55,31.8l-55-31.8v-63.7l55-31.9  l55,31.9V513.9z"
+   class="st0" />
+<polygon
+   style="fill:#ee4c2c;fill-opacity:1"
+   id="polygon30"
+   points="432,516.8 432,447.2 372,412.5 312,447.2 312,516.8 372,551.5 "
+   class="st1" />
+<polygon
+   style="fill:#ee4c2c;fill-opacity:1"
+   id="polygon32"
+   points="182,86.8 182,17.2 122,-17.5 62,17.2 62,86.8 122,121.5 "
+   class="st1" />
+<polygon
+   style="fill:#ee4c2c;fill-opacity:1"
+   id="polygon34"
+   points="432,662.2 372,627.5 312,662.2 312,690 432,690 "
+   class="st1" />
+</svg>

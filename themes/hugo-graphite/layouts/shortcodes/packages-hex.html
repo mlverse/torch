@@ -1,0 +1,23 @@
+{{ $pkgs := index .Site.Data.packages }}
+
+<div class="package-section">
+  <div class="packages">
+  {{ range sort $pkgs "weight" }}
+  <div class="package">
+    {{ if (fileExists (printf ("static/css/images/hex/%s.%s") .name "png")) -}}
+    <a href="{{ .url_docs }}" target="_blank">
+    <img class="package-image" src="{{ printf ("/css/images/hex/%s.%s") .name "png" }}" alt="" aria-hidden="true"></img>
+    </a>
+    {{ end }}
+    <div class="package-info">
+      <h3><a href="{{ .url_docs }}" target="_blank">{{ .name }}</a></h3>
+      <p>{{ .desc }}&nbsp;
+      {{ if (isset .Params "url_docs") }}
+      <a href="{{ .url_docs }}" aria-hidden="true"  target="_blank">Go to docs...</a></p>
+      {{ end }}
+    </div> <!--package-info-->
+  </div> <!--package-->
+  {{ end }}
+  
+  </div> <!--packages-->
+</div> <!--package-section-->

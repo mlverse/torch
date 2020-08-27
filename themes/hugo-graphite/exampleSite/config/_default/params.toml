@@ -1,0 +1,139 @@
+# Description for social sharing and search engines.
+description = "The tidyverse is an integrated collection of R packages designed to make data science fast, fluid, and fun."
+
+# Enable copy-to-clipboard for all code?
+# Can also enable by content section in _index.md file
+copy_clipboard = true
+
+# Default image for social sharing and search engines. Place image in `static/images/` folder and specify image name here.
+sharing_image = "tidyverse-default.png"
+twitter_image = "hex-tidyverse.png"
+
+# Link custom CSS and JS assets
+#   (relative to /static/css and /static/js respectively)
+custom_css = [""]
+
+# Define base hex url for index page (where the stickers link out to)
+hex_base_url = ".tidyverse.org"
+
+# Define "news" as both articles and events
+mainSections = ["articles", "events"]
+
+# options for highlight.js (version, additional languages, and theme)
+disable_highlightjs = "true"
+highlightjsVersion = "9.11.0"
+highlightjsCDN = "//cdn.bootcss.com"
+highlightjsLang = ["r", "yaml"]
+highlightjsTheme = "github"
+
+MathJaxCDN = "//cdn.bootcss.com"
+MathJaxVersion = "2.7.1"
+
+# Logo file relative to static/images/
+# to appear in upper navbar
+[logo]
+    image = "Color/RStudio-Education.png"
+    width = 220.85
+    height = 40
+    alt = "RStudio Education"
+
+[footer]
+    github_url = "https://github.com/rstudio-education"
+    twitter_url = "https://twitter.com/hashtag/rstats"
+    # Enter a copyright notice to display in the site footer.
+    # To display a copyright symbol, type `&copy;`. For current year, type `{year}`.
+    copyright = "&copy; [RStudio Inc.](https://www.rstudio.com/), {year}"
+    support = "Proudly supported by " # leave empty to remove support statement + RStudio logo
+
+# leave blank in quotes for the default = true
+# to turn off, set = false (no quotes)
+[authors]
+    show_list = "" # on list page, default is true
+    show_single = "" # on single pages, default is true
+    show_latest = "" # on bio, default is true
+    label_latest = "" # on bio, default is "Latest"
+
+# leave blank in quotes for the default = true
+# to turn off, set = false (no quotes)
+[events]
+    link_archive = "" # default is true
+
+# customize your site colors
+# these colors get applied by layouts/partials/custom-site.css
+# then, the layouts/partials/head_includes.html uses that partial
+# the partial head_includes.html is called in the partial header.html everywhere!
+[colors]
+    text = "#404040" # black
+    # Links
+    link = "#4254A7"
+    link_hover = "#4254A7"
+    # Footer
+    footer_primary = "#4254a730"
+    footer_text = "#4254A7"
+    # Backgrounds
+    background = "white"
+    home_section_odd = "white"
+    home_section_even = "#fcfcfc"
+    # Menu
+    menu_primary = "white"
+    menu_text = "black"
+    menu_text_active = "#4254A7"
+    menu_text_current = "#4254A7"
+    menu_decorate_current = "none"
+    menu_title = "#4254A7" # product name
+    menu_title_active = "00000075" # hover product name
+    menu_box_hover = "white"
+    menu_box_active = "#fcfcfc"
+    # Tables
+    header_background = "#1a162d80"
+    table_row_even = "#fcfcfc"
+    table_row_odd = "#1a162d10"
+    # Author taxo- latest border
+    latest_border = "#dae8f6"
+    
+# Choose an accent font (article headers, h1, h2, table of contents etc.) with Google Fonts
+[headers]
+    # Import a Google font and styles, e.g. "@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');"
+    # import = "@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');" 
+    # font-family = "Lato"
+    import = "@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');"
+    font-family = "Libre Baskerville"
+
+[capitalization]
+# Make particular headers "uppercase" or "lowercase"
+# set = false (no quotes) for normal text
+    text_transform = "uppercase"
+
+[accent_color]
+    # Used for headers, so should be accessibility-friendly
+    color_primary = "#4254A7"
+    color_secondary = "#333850eb"
+    
+[bullets]
+    color = "#f6b73c"
+    
+[hexes]
+    thin_hex = true
+
+[borders]
+# For thin lines on Navbar, Table of contents divider, band borders, etc.
+# To turn on, set = "1px"
+# To turn off (default), set = false (no quotes)
+    thin_lines = "1px"
+    
+[event_stickies]
+    straight = true
+    text_color = "#404040"  # same as body text
+    links = "#1a162d"
+    border_color = "#a19ea936"
+    background = "#eab0c41a"
+    
+[test_drive]
+# For test drive button colors
+    text = ""
+    button = ""
+    outline = ""
+    hover_text = ""
+    hover_button = ""
+    hover_outline = ""  
+

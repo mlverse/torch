@@ -1,0 +1,62 @@
+<!--meta tags-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+{{ hugo.Generator }}
+<title>{{ .Site.Title }}</title>
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+{{ $og_image := "" }}
+{{ $card_image := "" }}
+{{ $twitter_card := "summary_large_image" }}
+<meta property="twitter:card" content="{{ $twitter_card }}">
+
+<!--all posts-->
+
+{{ if and (eq .Section "blog") (.IsPage) }}
+
+    <meta property="og:title" content="{{ .Title }} - {{ .Site.Title }}">
+    <meta property="description" content="{{ .Params.description }}">
+    <meta property="og:description" content="{{ .Params.description }}">
+
+    <!--use images from post bundle-->
+    <!--find image with thumbnail or -sq in filename-->
+    {{/* Get page thumbnail image for sharing. */}}
+    {{ $thumbnail := (.Resources.ByType "image").GetMatch "*thumbnail*" }}
+    {{ $sq := (.Resources.ByType "image").GetMatch "*-sq*" | default $thumbnail }}
+    {{ with $sq }}
+        <meta property="og:image" content="{{ .Permalink }}" >
+    {{ end }}
+
+    <!--find image with -wd in filename-->
+    {{/* Get page wide image for sharing. */}}
+    {{ $card_image := (.Resources.ByType "image").GetMatch "*-wd*" }}
+    {{ with $card_image }}
+        <meta name="twitter:image" content="{{ .Permalink }}" >
+    {{ end }}
+
+<!--home page-->
+{{ else if .IsHome }}
+
+  <meta property="og:title" content="{{ .Site.Title }}">
+  <meta property="description" content="{{ .Site.Params.description }}">
+  <meta property="og:description" content="{{ .Site.Params.description }}">
+
+  <!--use image from site config param-->
+  {{ $og_image = printf "images/%s" .Site.Params.sharing_image | absURL }}
+  {{- with $og_image -}}
+      <meta property="og:image" content="{{ . }}" >
+  {{- end -}}
+
+  {{ $card_image = printf "images/%s" .Site.Params.twitter_image | absURL }}
+  {{- with $card_image -}}
+      <meta name="twitter:image" content="{{ . }}" >
+  {{- end -}}
+
+<!--all content that is not a post-->
+{{- else -}}
+  {{ template "_internal/opengraph.html" . }}
+  {{ template "_internal/twitter_cards.html" . }}
+{{- end -}}

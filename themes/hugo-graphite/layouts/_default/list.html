@@ -1,0 +1,60 @@
+{{ define "main" }}
+
+
+<div class="band padForHeader pushFooter">
+  <div class="bandContent">
+    <div class="full splitColumns withMobileMargins">
+      <div class="column75">
+        <div class="sectionTitle">{{ .Title | title }}</div>
+
+        {{ $paginator := .Paginate .Pages }}
+        <div>{{ range where $paginator.Pages ".Params.announce" "!=" false }}
+              {{ $post := . }}
+          <div class="listItem">
+
+             {{ $thumbnail := (.Resources.ByType "image").GetMatch "*thumbnail*" }}
+             {{ $sq := (.Resources.ByType "image").GetMatch "*-sq*" | default $thumbnail }}
+             {{ with $sq }}
+              <a class="itemImage project" href="{{ $post.RelPermalink }}" aria-hidden="true">
+                <img src="{{ .RelPermalink }}">
+              </a>
+              {{ end }}
+             
+            <div class="itemDetails">
+              <div class="itemHeader">
+
+                <div class="itemTitle"><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></div>
+                <div class="itemTag">
+                  {{- range .Params.categories -}}
+                  <a href="{{ relURL (print "/categories/" . | urlize) }}">{{ . }}</a>
+                  {{ end -}}
+                </div>
+              </div>
+              <div class="itemMeta">
+                <div class="author">
+                <!-- based on author field being used in YAML frontmatter -->
+                {{ $show_authors := $.Site.Params.authors.show_list | default true }}
+                {{ if $show_authors }}
+                {{ partial "pretty_author_names" . }}
+                {{ end }}
+                </div>
+                <div class="itemDescription">{{ default .Description | markdownify }}
+                  <a class="readMore mobile-only" href="{{ .RelPermalink }}">Read more ...</a>
+                </div>
+                <div class="itemDate">
+                  <div class="created">{{ .Date.Format "2006/01/02" }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{ end }}</div>
+      {{ template "_internal/pagination.html" . }}
+      </div>
+
+{{ partial "sidebar.html" . }}
+
+    </div>
+  </div>  <!-- bandContent -->
+</div> <!-- band -->
+
+{{ end }}

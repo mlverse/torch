@@ -1,0 +1,67 @@
+{{ define "main" }}
+
+{{ $page := . }}
+{{ $banner := ($page.Resources.ByType "image").GetMatch "*-wd*" }}
+
+<div class="band padForHeader pushFooter">
+  <div class="bandContent">
+    <div class="full splitColumns withMobileMargins">
+
+      {{ partial "start-sidebar.html" . }}
+      
+      <div class="column75">
+
+      <h1 class="article-title">{{ .Weight }}&nbsp;&nbsp;&nbsp;{{ .Title | markdownify }}</h1>
+      
+      <div class="tags-list">
+      <i class="fas fa-box-open" style="color:#1a162dde;"></i>&nbsp;
+      <h1 class="learning-objective">Tidymodels packages: </h1>
+      {{ range $i, $tags := (.GetTerms "tags") }}
+        {{- if $i -}}, {{ end -}}
+        {{ with $tags }}
+        <a href="{{ .Permalink }}">{{- .LinkTitle -}}</a>
+        {{- end -}}
+      {{- end -}}
+      </div>
+        
+      <div class="section">
+        <div class="listItem learn-top-nav">
+          <div class="tutorial">{{ .TableOfContents }}</div>
+        </div>
+      </div>
+      
+      <div class="article-content">
+      {{ .Content }}
+      </div>
+
+    <div class="article-footer">
+      <!--previous article-->
+      <div style="float:left">
+      {{ with .NextInSection }}
+        <div class='itemTitle' align="left" style='font-size:.8em; line-height:2em'>Previous</div>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ end }}
+      </div>
+      
+      <!--next article-->
+      <div style="float:right">
+      {{ with .PrevInSection }}
+      <div class='itemTitle' align="right" style='font-size:.8em; line-height:2em;'>Next</div>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ end }}
+      {{ if not .PrevInSection }}
+        <a href="https://tinystats.github.io/teacups-giraffes-and-statistics/" target="_blank">
+        <div class="giraffe"></div>
+        </a>
+      {{ end }}
+      </div>
+     </div> 
+      
+
+      </div>
+
+    </div>
+  </div>  <!-- bandContent -->
+</div> <!-- band -->
+
+{{ end }}

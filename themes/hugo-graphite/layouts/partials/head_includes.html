@@ -1,0 +1,65 @@
+<!--stylesheets-->
+<link rel="stylesheet" href="{{ "css/fonts.css" | relLangURL }}">
+<link rel="stylesheet" href="{{ "css/main-site.css" | relLangURL }}">
+<link rel="stylesheet" href="{{ "css/fa5-all.css" | relLangURL }}">
+<style type="text/css">
+    {{ partial "custom-site.css" . | safeCSS }}
+</style>
+{{ range .Site.Params.custom_css }}
+  <link rel="stylesheet" href="{{ "/css/" | relURL }}{{ . }}">
+{{ end }}
+
+<!--meta tags-->
+{{ partial "meta.html" . }}
+
+<!--favicons-->
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "images/favicons/apple-touch-icon.png" | relURL }}" />
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "images/favicons/favicon-32x32.png" | relURL }}" />
+<link rel="icon" type="image/png" sizes="16x16" href="{{ "images/favicons/favicon-16x16.png" | relURL }}" />
+<link rel="manifest" href="{{ "images/favicons/site.webmanifest" | relURL }}" />
+<link rel="mask-icon" href="{{ "images/favicons/safari-pinned-tab.svg" | relURL }}" />
+<link rel="shortcut icon" href="{{ "images/favicons/favicon.ico" | relURL }}" />
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" href="{{ "images/favicons/browserconfig.xml" | relURL }}" >
+
+
+<!--jquery-->
+<script type="text/javascript" src="{{ "js/jquery-3.5.1.min.js" | relURL }}"></script>
+<script type="text/javascript" src="{{ "js/site.js" | relURL }}"></script>
+{{ if .IsHome -}}
+<script type="text/javascript" src="{{ "js/home.js" | relURL }}"></script>
+{{- end }}
+{{- partial "head_highlightjs" . -}}
+
+{{ range .Site.Params.custom_js }}
+  <script type="text/javascript" src="{{ "/js/" | relURL }}{{ . }}"></script>
+{{ end }}
+
+<link rel="icon" href="{{ "images/favicon.ico" | relURL }}" />
+
+
+  {{ with .OutputFormats.Get "rss" -}}
+      {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+  {{ end -}}
+
+<!--COPY TO CLIPBOARD BUTTON-->
+<script type="text/javascript" src="{{ "js/clipboard.js" | relURL }}"></script>
+{{ $clipboard_site :=  $.Site.Params.copy_clipboard }}
+{{ $page := . }}
+
+<!--only show copy to clipboard button if section-level parameter is true-->
+<!--or site parameter is true-->
+{{ with $page.FirstSection }}
+  {{ if or (.Params.Copy_clipboard) ($clipboard_site) }}
+
+<!--Bootstrap-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!--Clipboard JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+
+  {{ end }}
+{{ end }}
+<!--END COPY TO CLIPBOARD BUTTON-->
+
+{{ partial "head_custom" . }}

@@ -1,0 +1,14 @@
+bandtwo:
+- url: /start/
+  title: Get started
+  icon: fa-meteor
+  icon_pack: fas
+  what: |
+    Start with the basics in our quick tour of torch. Learn how to create tensors, use the autograd feature and build your first deep learning model. 
+
+- url: /explore/
+  title: Explore
+  icon: fa-search-plus
+  icon_pack: fas
+  what: |
+    Explore our torch gallery, including examples from [computer vision](), [natural language processing](), and [more]().

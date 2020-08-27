@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+<div class="band padForHeader pushFooter">
+  <div class="bandContent">
+    <div class="full splitColumns withMobileMargins">
+      <div class="column75">
+
+<h2>{{ .Title }}</h2>
+
+<ul class="terms">
+  {{ range .Data.Terms }}
+  <li>
+    <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a> ({{ .Count }})
+  </li>
+  {{ end }}
+</ul>
+
+      </div> <!-- column75-->
+
+    </div> <!-- full splitColumns -->
+  </div>  <!-- bandContent -->
+</div> <!-- band -->
+
+
+{{ end }}

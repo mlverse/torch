@@ -1,0 +1,90 @@
+---
+title: pkgdown 1.5.0
+author: Hadley Wickham
+date: '2020-03-25'
+slug: pkgdown-1-5-0
+photo:
+  url: https://unsplash.com/photos/5R5Trsu1aIM
+  author: Kelly Sikkema
+categories:
+- package
+tags:
+  - pkgdown
+  - web
+---
+
+We're well chuffed to announce that [pkgdown](https://pkgdown.r-lib.org/) 1.5.0 is now available on CRAN. pkgdown is designed to make it quick and easy to build a website for your package. Install it with:
+
+
+```r
+install.packages("pkgdown")
+```
+
+The most important changes are highlighted below and you can see a full list of changes in the [changelog](https://pkgdown.r-lib.org/news/).
+
+## Articles
+
+For packages with many vignettes/articles, we've provided much greater control over the [articles index](https://pkgdown.r-lib.org/articles) and navbar. There are two major new features in this release:
+  
+* The articles index page now displays article `description`s, taken from 
+  YAML metadata in the header of each article. This lets you provide 
+  more context for each article.
+  
+* The articles navbar is now controlled by the `articles` section in
+  `_pkgdown.yml`. The ordering of the sections, and articles within
+  them, control the order of the articles in the navbar, and you can
+  use the new `navbar` field to control whether or not each section
+  appears in the navbar.
+
+Learn more about both of these features in [?`build_articles`](https://pkgdown.r-lib.org/reference/build_articles.html#index-and-navbar).
+
+Thanks to [Garrick Aden-Buie](https://github.com/gadenbuie), you also get much richer control over Open Graph and Twitter metadata for individual articles. See new [`vignette("metadata")`](https://pkgdown.r-lib.org/articles/metadata.html) for details.
+
+## Reference index
+
+For packages with many documentation topics, you can add an additional layer of hierarchy to the reference index, using the new `subtitle` field. To give you some sense for what that might look like, here's an example for a partial (and imaginary) dplyr reference index:
+
+```yaml
+references:
+- title: Data manipulation
+- subtitle: One table
+- contents:
+  - arrange
+  - filter
+  - mutate
+- subtitle: two table
+- contents:
+  - ends_with("_join")
+
+- title: Datasets
+- contents: 
+  - has_keyword("datasets")
+```
+
+## Tables of contents
+
+Sidebar tables of contents now use [bootstrap-toc](https://afeld.github.io/bootstrap-toc/), which considerably improves navigation for long articles and reference pages.
+
+## Other source repositories
+
+You can now control the links to source files (in reference pages and articles) and issues and users (in the NEWS) with new the `repo$url` config parameter. This makes it easier to use pkgdown with GitHub enterprise, packages in subdirectories, and other source hosts (like bitbucket). 
+
+The YAML looks something like this:
+  
+```yaml
+repo:
+  url:
+    home: https://github.com/r-lib/pkgdown/
+    source: https://github.com/r-lib/pkgdown/blob/master/
+    issue: https://github.com/r-lib/pkgdown/issues/
+    user: https://github.com/
+```
+
+The individual components (e.g. path, issue number, username) are pasted on the end of these urls so they should have trailing `/`s.
+
+pkgdown now detects GitLab urls automatically (since they use the same structure as GitHub), so you don't need to set these links if you package is hosted on GitLab, and you've included a link to your source repo in the `URL` or `BugReports` `DESCRIPTION` fields.
+
+## Acknowledgements
+
+A big thank you goes to [&#x0040;jayhesselberth](https://github.com/jayhesselberth) (the co-maintainer of pkgdown), and to to the 61 other people who helped make this release possible: 
+[&#x0040;AshesITR](https://github.com/AshesITR),  [&#x0040;baptiste](https://github.com/baptiste), [&#x0040;Bisaloo](https://github.com/Bisaloo), [&#x0040;carloscinelli](https://github.com/carloscinelli), [&#x0040;cboettig](https://github.com/cboettig), [&#x0040;coatless](https://github.com/coatless), [&#x0040;coolbutuseless](https://github.com/coolbutuseless), [&#x0040;DanielEWeeks](https://github.com/DanielEWeeks), [&#x0040;davidchall](https://github.com/davidchall), [&#x0040;DavorJ](https://github.com/DavorJ), [&#x0040;dimagor](https://github.com/dimagor), [&#x0040;erikcs](https://github.com/erikcs), [&#x0040;ferroao](https://github.com/ferroao), [&#x0040;floriandeboissieu](https://github.com/floriandeboissieu), [&#x0040;flying-sheep](https://github.com/flying-sheep), [&#x0040;fmichonneau](https://github.com/fmichonneau), [&#x0040;fmmattioni](https://github.com/fmmattioni), [&#x0040;gaborcsardi](https://github.com/gaborcsardi), [&#x0040;genomaths](https://github.com/genomaths), [&#x0040;gustavdelius](https://github.com/gustavdelius), [&#x0040;hadley](https://github.com/hadley), [&#x0040;hbaniecki](https://github.com/hbaniecki), [&#x0040;ijlyttle](https://github.com/ijlyttle), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;jangorecki](https://github.com/jangorecki), [&#x0040;jayhesselberth](https://github.com/jayhesselberth), [&#x0040;jeffwong-nflx](https://github.com/jeffwong-nflx), [&#x0040;jennybc](https://github.com/jennybc), [&#x0040;jeroen](https://github.com/jeroen), [&#x0040;jimhester](https://github.com/jimhester), [&#x0040;JoshuaSturm](https://github.com/JoshuaSturm), [&#x0040;jranke](https://github.com/jranke), [&#x0040;kevinushey](https://github.com/kevinushey), [&#x0040;kevinwang09](https://github.com/kevinwang09), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lbusett](https://github.com/lbusett), [&#x0040;lcolladotor](https://github.com/lcolladotor), [&#x0040;lgatto](https://github.com/lgatto), [&#x0040;lindeloev](https://github.com/lindeloev), [&#x0040;lionel-](https://github.com/lionel-), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;m-l-1](https://github.com/m-l-1), [&#x0040;maelle](https://github.com/maelle), [&#x0040;mattmalin](https://github.com/mattmalin), [&#x0040;meghapsimatrix](https://github.com/meghapsimatrix), [&#x0040;mikldk](https://github.com/mikldk), [&#x0040;mllg](https://github.com/mllg), [&#x0040;ms609](https://github.com/ms609), [&#x0040;nealrichardson](https://github.com/nealrichardson), [&#x0040;nschiett](https://github.com/nschiett), [&#x0040;nteetor](https://github.com/nteetor), [&#x0040;pat-s](https://github.com/pat-s), [&#x0040;peterdesmet](https://github.com/peterdesmet), [&#x0040;rupertoverall](https://github.com/rupertoverall), [&#x0040;schloerke](https://github.com/schloerke), [&#x0040;slowkow](https://github.com/slowkow), [&#x0040;t-kalinowski](https://github.com/t-kalinowski), [&#x0040;wendtke](https://github.com/wendtke), [&#x0040;ycphs](https://github.com/ycphs), [&#x0040;yiluheihei](https://github.com/yiluheihei), and [&#x0040;yonicd](https://github.com/yonicd).

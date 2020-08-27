@@ -1,0 +1,16 @@
+{{ $pages := first 2 (where (where (where $.Site.RegularPages "Section" "events") "Type" "!=" "event-archive") "Date" "ge" now).ByDate }}
+
+{{ if gt (len $pages) 0 }}
+<div class="sectionTitle"><a href="{{ "/events/" | relURL }}">Upcoming events</a></div>
+{{ end }}
+
+{{ range $pages }}
+
+<div class="event">
+  <div class="eventTitle"><a href="{{ .Params.event_url }}">{{ .Title }}</a></div>
+  <div class="eventLocation">{{ with .Params.location }}{{ . | markdownify }}{{ end }}</div>
+  <div class="eventDate">{{ partial "pretty_date_ranges" . }}</div>
+  <div class="eventDetails">{{ with .Params.description }}{{ . | markdownify | truncate 200 }}{{ end }}</div>
+</div>
+
+{{ end }}

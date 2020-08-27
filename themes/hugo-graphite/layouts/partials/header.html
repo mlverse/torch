@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+<!--this loads all stylesheets, metadata tags, favicons, and jquery -->
+{{ partial "head_includes.html" . }}
+
+  <body>
+    <div id="appTidyverseSite" {{ if not .IsHome }}class="shrinkHeader alwaysShrinkHeader"{{ end }}>
+      <div id="main">
+        <!-- rstudio header -->
+        <div id="rStudioHeader">
+          <div class="band">
+            <div class="innards bandContent">
+              <div>
+                {{ if .Site.Params.logo.image }}
+                    <a href="{{ "/" | relURL }}" class="nav-logo">
+                      <img src="{{ print "images/" .Site.Params.logo.image | relURL }}" width="{{ .Site.Params.logo.width }}" height="{{ .Site.Params.logo.height }}" alt="{{ .Site.Params.logo.alt }}">
+                    </a>
+                {{- else -}}
+                <a class="productName" href="{{ "/" | relLangURL }}">{{- .Site.Title -}}</a>
+                {{ end }}
+              </div>
+              {{ partial "nav.html" . }}
+            </div>
+          </div>
+        </div>

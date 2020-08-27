@@ -1,0 +1,32 @@
+<table>
+    <thead>
+    <tr>
+    <th>Event</th>
+    <th>Date(s)</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Team Member(s)</th>
+    </tr>
+    </thead>
+    <tbody>
+      {{ $taxo := "author" }}
+      {{ range sort (where $.Site.RegularPages "Section" "events") ".Date" }}
+      {{ if ge (time .Date).Unix now.Unix }}
+      <tr>
+        <td><a href="{{ .Params.event_url }}">{{ .Title | markdownify }}</a></td>
+        <td>{{ partial "pretty_date_ranges" . }}</td>
+        <td>{{ with .Params.description }}{{ . | markdownify }}{{ end }}</td>
+        <td>{{ with .Params.location }}{{ . | markdownify }}{{ end }}</td>
+        <td>{{- range .Params.educators }}
+            {{- with $.Site.GetPage "taxonomyTerm" (printf "%s/%s" $taxo (urlize .)) }}
+              <a href="{{ .Permalink }}">
+                {{ with .Params.name }}{{ index (split . " ") 0 }}{{ end }}
+              </a>
+            {{ end }}
+            {{ end }}
+        </td>
+      </tr>
+        {{ end }}
+      {{ end }}
+    </tbody>
+  </table>

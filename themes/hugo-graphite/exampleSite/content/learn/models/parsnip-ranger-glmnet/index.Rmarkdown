@@ -1,0 +1,228 @@
+---
+title: "Regression models two ways"
+tags: [rsample, parsnip]
+categories: [model fitting]
+type: learn-subsection
+weight: 1
+description: | 
+  Create and train different kinds of regression models with different computational engines.
+---
+
+```{r setup, include = FALSE, message = FALSE, warning = FALSE}
+source(here::here("content/learn/common.R"))
+
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+```{r load, include=FALSE}
+library(tidymodels)
+library(AmesHousing)
+library(ranger)
+library(randomForest)
+library(glmnet)
+
+preds <- c("Longitude", "Latitude", "Lot_Area", "Neighborhood", "Year_Sold")
+pred_names <- paste0("`", preds, "`")
+
+pkgs <- c("tidymodels", "AmesHousing", "ranger", "randomForest", "glmnet")
+
+theme_set(theme_bw() + theme(legend.position = "top"))
+```
+
+
+## Introduction
+
+<!-- `r --> ` req_pkgs(pkgs)`
+
+We can create regression models with the tidymodels package [parsnip](https://tidymodels.github.io/parsnip/) to predict continuous or numeric quantities. Here, let's first fit a random forest model, which does _not_ require all numeric input (see discussion [here](https://bookdown.org/max/FES/categorical-trees.html)) and discuss how to use `fit()` and `fit_xy()`, as well as _data descriptors_. 
+
+Second, let's fit a regularized linear regression model to demonstrate how to move between different types of models using parsnip. 
+
+## The Ames housing data
+
+We'll use the Ames housing data set to demonstrate how to create regression models using parsnip. First, set up the data set and create a simple training/test set split:
+
+```{r ames-split}
+library(AmesHousing)
+ames <- make_ames()
+
+library(tidymodels)
+
+set.seed(4595)
+data_split <- initial_split(ames, strata = "Sale_Price", p = 0.75)
+
+ames_train <- training(data_split)
+ames_test  <- testing(data_split)
+```
+
+The use of the test set here is _only for illustration_; normally in a data analysis these data would be saved to the very end after many models have been evaluated. 
+
+## Random forest
+
+We'll start by fitting a random forest model to a small set of parameters. Let's create a model with the predictors <!-- `r --> ` knitr::combine_words(pred_names)`. A simple random forest model can be specified via:
+
+```{r rf-basic}
+rf_defaults <- rand_forest(mode = "regression")
+rf_defaults
+```
+
+The model will be fit with the ranger package by default. Since we didn't add any extra arguments to `fit`, _many_ of the arguments will be set to their defaults from the function  <!-- `r --> `anger::ranger()`. The help pages for the model function describe the default parameters and you can also use the `translate()` function to check out such details. 
+
+The parsnip package provides two different interfaces to fit a model: 
+
+- the formula interface (`fit()`), and
+- the non-formula interface (`fit_xy()`).
+
+Let's start with the non-formula interface:
+
+
+```{r rf-basic-xy}
+preds <- c("Longitude", "Latitude", "Lot_Area", "Neighborhood", "Year_Sold")
+
+rf_xy_fit <- 
+  rf_defaults %>%
+  set_engine("ranger") %>%
+  fit_xy(
+    x = ames_train[, preds],
+    y = log10(ames_train$Sale_Price)
+  )
+
+rf_xy_fit
+```
+
+The non-formula interface doesn't do anything to the predictors before passing them to the underlying model function. This particular model does _not_ require indicator variables (sometimes called "dummy variables") to be created prior to fitting the model. Note that the output shows "Number of independent variables:  5".
+
+For regression models, we can use the basic `predict()` method, which returns a tibble with a column named `.pred`:
+
+```{r rf-basic-xy-pred}
+test_results <- 
+  ames_test %>%
+  select(Sale_Price) %>%
+  mutate(Sale_Price = log10(Sale_Price)) %>%
+  bind_cols(
+    predict(rf_xy_fit, new_data = ames_test[, preds])
+  )
+test_results %>% slice(1:5)
+
+# summarize performance
+test_results %>% metrics(truth = Sale_Price, estimate = .pred) 
+```
+
+Note that: 
+
+ * If the model required indicator variables, we would have to create them manually prior to using `fit()` (perhaps using the recipes package).
+ * We had to manually log the outcome prior to modeling. 
+
+Now, for illustration, let's use the formula method using some new parameter values:
+
+```{r rf-basic-form}
+rand_forest(mode = "regression", mtry = 3, trees = 1000) %>%
+  set_engine("ranger") %>%
+  fit(
+    log10(Sale_Price) ~ Longitude + Latitude + Lot_Area + Neighborhood + Year_Sold,
+    data = ames_train
+  )
+```
+ 
+Suppose that we would like to use the randomForest package instead of ranger. To do so, the only part of the syntax that needs to change is the `set_engine()` argument:
+
+
+```{r rf-rf}
+rand_forest(mode = "regression", mtry = 3, trees = 1000) %>%
+  set_engine("randomForest") %>%
+  fit(
+    log10(Sale_Price) ~ Longitude + Latitude + Lot_Area + Neighborhood + Year_Sold,
+    data = ames_train
+  )
+```
+
+Look at the formula code that was printed out; one function uses the argument name `ntree` and the other uses `num.trees`. The parsnip models don't require you to know the specific names of the main arguments. 
+
+Now suppose that we want to modify the value of `mtry` based on the number of predictors in the data. Usually, a good default value is `floor(sqrt(num_predictors))` but a pure bagging model requires an `mtry` value equal to the total number of parameters. There may be cases where you may not know how many predictors are going to be present when the model will be fit (perhaps due to the generation of indicator variables or a variable filter) so this might be difficult to know exactly ahead of time when you write your code. 
+
+When the model it being fit by parsnip, [_data descriptors_](https://tidymodels.github.io/parsnip/reference/descriptors.html) are made available. These attempt to let you know what you will have available when the model is fit. When a model object is created (say using <!-- `r --> `and_forest()`), the values of the arguments that you give it are _immediately evaluated_ unless you delay them. To delay the evaluation of any argument, you can used <!-- `r --> `lang::expr()` to make an expression. 
+
+Two relevant data descriptors for our example model are:
+
+ * `.preds()`: the number of predictor _variables_ in the data set that are associated with the predictors **prior to dummy variable creation**.
+ * `.cols()`: the number of predictor _columns_ after dummy variables (or other encodings) are created.
+
+Since ranger won't create indicator values, `.preds()` would be appropriate for `mtry` for a bagging model. 
+
+For example, let's use an expression with the `.preds()` descriptor to fit a bagging model: 
+
+```{r bagged}
+rand_forest(mode = "regression", mtry = .preds(), trees = 1000) %>%
+  set_engine("ranger") %>%
+  fit(
+    log10(Sale_Price) ~ Longitude + Latitude + Lot_Area + Neighborhood + Year_Sold,
+    data = ames_train
+  )
+```
+
+
+## Regularized regression
+
+A linear model might work for this data set as well. We can use the `linear_reg()` parsnip model. There are two engines that can perform regularization/penalization, the glmnet and sparklyr packages. Let's use the former here. The glmnet package only implements a non-formula method, but parsnip will allow either one to be used. 
+
+When regularization is used, the predictors should first be centered and scaled before being passed to the model. The formula method won't do that automatically so we will need to do this ourselves. We'll use the [recipes](https://tidymodels.github.io/recipes/) package for these steps. 
+
+```{r glmn-form}
+norm_recipe <- 
+  recipe(
+    Sale_Price ~ Longitude + Latitude + Lot_Area + Neighborhood + Year_Sold, 
+    data = ames_train
+  ) %>%
+  step_other(Neighborhood) %>% 
+  step_dummy(all_nominal()) %>%
+  step_center(all_predictors()) %>%
+  step_scale(all_predictors()) %>%
+  step_log(Sale_Price, base = 10) %>% 
+  # estimate the means and standard deviations
+  prep(training = ames_train, retain = TRUE)
+
+# Now let's fit the model using the processed version of the data
+
+glmn_fit <- 
+  linear_reg(penalty = 0.001, mixture = 0.5) %>% 
+  set_engine("glmnet") %>%
+  fit(Sale_Price ~ ., data = juice(norm_recipe))
+glmn_fit
+```
+
+If `penalty` were not specified, all of the `lambda` values would be computed. 
+
+To get the predictions for this specific value of `lambda` (aka `penalty`):
+
+```{r glmn-pred}
+# First, get the processed version of the test set predictors:
+test_normalized <- bake(norm_recipe, new_data = ames_test, all_predictors())
+
+test_results <- 
+  test_results %>%
+  rename(`random forest` = .pred) %>%
+  bind_cols(
+    predict(glmn_fit, new_data = test_normalized) %>%
+      rename(glmnet = .pred)
+  )
+test_results
+
+test_results %>% metrics(truth = Sale_Price, estimate = glmnet) 
+
+test_results %>% 
+  gather(model, prediction, -Sale_Price) %>% 
+  ggplot(aes(x = prediction, y = Sale_Price)) + 
+  geom_abline(col = "green", lty = 2) + 
+  geom_point(alpha = .4) + 
+  facet_wrap(~model) + 
+  coord_fixed()
+```
+
+This final plot compares the performance of the random forest and regularized regression models.
+
+## Session information
+
+```{r si, echo = FALSE}
+small_session(pkgs)
+```
+ 

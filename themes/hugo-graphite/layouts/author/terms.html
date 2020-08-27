@@ -1,0 +1,41 @@
+{{ define "main" }}
+
+
+
+<div class="band padForHeader pushFooter">
+  <div class="bandContent">
+    <div class="full splitColumns withMobileMargins">
+      <div class="column75">
+        <h1 class="article-title">{{ .Title }}</h1>
+
+        <div>{{ range .Pages }}
+        {{ if .Params.team }}
+          <div class="listItem">
+            <a class="itemImage project" href="{{ .RelPermalink }}" style="background-image: url({{ .Param "photo"}}); border-radius: 50%; background-size: cover; background-position: center center;"></a>
+            <div class="itemDetails">
+              <div class="itemHeader">
+                <div class="itemTitle"><a href="{{ .RelPermalink }}">{{ .Params.name }}</a></div>
+                <div class="itemTag">
+                  {{- range .Params.categories -}}
+                  <a href="{{ relURL (print "/categories/" . | urlize) }}">{{ . }}</a>
+                  {{ end -}}
+                </div>
+              </div>
+              <div class="itemMeta">
+                  <div class="itemDescription">{{ default .Description | markdownify }}</div>
+                  {{ with .Params.social.twitter }}<a href="https://twitter.com/{{ . }}" target="_blank"><i class="fab fa-twitter fa-2x" aria-hidden="true"></i></a>{{ end }}  {{ with .Params.social.github }}<a href="https://github.com/{{ . }}" target="_blank"><i class="fab fa-github fa-2x" aria-hidden="true"></i></a>{{ end }}  {{ with .Params.social.website }}<a href="{{ . }}" target="_blank"><i class="fas fa-link fa-2x" aria-hidden="true"></i></a>{{  end }}
+                <div>
+                  <a class="readMore" href="{{ .RelPermalink }}">Read more about {{ with .Params.name }}{{ index (split . " ") 0 }}{{ end }}...</a>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        {{ end }}{{ end }}</div>
+      </div>
+    </div>
+  </div>  <!-- bandContent -->
+</div> <!-- band -->
+
+
+{{ end }}

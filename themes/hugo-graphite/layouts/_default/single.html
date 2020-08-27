@@ -1,0 +1,64 @@
+{{ define "main" }}
+
+{{ $page := . }}
+{{ $banner := ($page.Resources.ByType "image").GetMatch "*-wd*" }}
+
+<div class="band padForHeader pushFooter">
+  <div class="bandContent">
+    <div class="full splitColumns withMobileMargins">
+      <div class="column75">
+
+      <h1 class="article-title">{{ .Title | markdownify }}</h1>
+
+      {{ $slug := .Param "slug" }}
+      <div class="article-header" aria-hidden="true">
+          {{ with $banner }}
+          <div class="photo">
+          <img src='{{ .RelPermalink }}'>
+          </div>
+          {{ end }}
+        {{ with $.Params.photo }}
+        <div class="photoCredit">Photo by <a href="{{ .url }}">{{ .author }}</a>
+        </div>
+        {{ end }}
+      </div>
+
+      {{ if or (eq .Section "articles") (eq .Section "blog") }}
+      <span class="article-date"><i class="fas fa-calendar-day fa-fw"></i>&nbsp;&nbsp;{{ .Date.Format "2006/01/02" }}</span>
+      {{ end }}
+      
+      {{ $show_authors := $.Site.Params.authors.show_single | default true }}
+      {{ if and $show_authors (or (eq .Section "articles") (eq .Section "blog")) }}
+        <p>
+        <i class="fas fa-user-circle fa-fw"></i>
+        {{ partial "pretty_author_names" . }}
+      {{ end }}
+        </p>
+
+      <div class="article-content">
+      {{ .Content }}
+      </div>
+
+
+      {{ partial "disqus.html" .}}
+
+      </div> <!-- column75-->
+      
+      <div class="column25">
+        <div class="section hideOnMobile">
+          {{ if ge (len .TableOfContents) 40 }}
+          <div class="sectionTitle">Contents</div>
+            {{ .TableOfContents }}
+          {{ end }}
+        </div>
+        <div class="section">
+          {{ partial "events_sticky.html" . }}
+        </div>
+      </div> <!-- column25-->
+
+    </div> <!-- full splitColumns -->
+  </div>  <!-- bandContent -->
+</div> <!-- band -->
+
+
+{{ end }}

@@ -1,0 +1,26 @@
+name = "graphite"
+license = "MIT"
+licenselink = "https://github.com/rstudio/hugo-graphite/blob/master/LICENSE.md"
+description = "A simple responsive blog theme for Hugo forked from versions by Jonathan Rutheiser and Yihui Xie, with modifications to make it work better for teams."
+homepage = ""
+min_version = "0.71.1"
+tags = ["teams",
+        "responsive",
+        "blog",
+        "minimal"
+        ]
+features = ["blog",
+            "events",
+            "authors"
+            ]
+
+authors = [
+  {name = "Alison Hill", homepage = "https://alison.rbind.io/"},
+  {name = "Desirée De Leon", homepage = "https://desiree.rbind.io"}
+]
+
+# If porting an existing theme
+[original]
+  name = ""
+  homepage = ""
+  repo = ""

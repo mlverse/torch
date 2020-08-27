@@ -1,0 +1,76 @@
+{{ define "main" }}
+
+
+<div class="band padForHeader pushFooter">
+  <div class="bandContent">
+    <div class="full splitColumns withMobileMargins">
+      <div class="column75">
+        <div class="section">
+          <div class="sectionTitle back-to">
+            
+            {{ if eq .Section "tags" }}
+            <a href="{{ (print "/learn/" | urlize) | relURL }}">
+              <i class="fas fa-chevron-left"></i>&nbsp;Back to Learn
+            </a>
+            {{ end }}
+            
+            {{ if ne .Section "tags" }}
+            <a href="{{ .FirstSection.RelPermalink }}">
+              <i class="fas fa-chevron-left"></i>&nbsp;Back to {{ .Section | title }}
+            </a>
+            {{ end }}
+          </div>
+        </div>
+        
+        <div class="sectionTitle">{{ .Title }}</div>
+
+        <div>{{ range .Pages }}
+              {{ $post := . }}
+          <div class="listItem">
+            <div class="itemDetails">
+              <div class="itemHeader">
+
+                <div class="itemTitle"><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+                </div>
+                
+              </div>
+              <div class="itemMeta">
+                <div class="itemDescription learning-objective-text"><em>{{ default .Description | markdownify }}</em>
+                  <a class="readMore" href="{{ .RelPermalink }}">Read article &#187;</a>
+                </div>
+                <div class="itemDate">
+                  <div class="created">
+                  <i class="fas fa-box-open"></i>&nbsp;
+                  {{ range $i, $tags := (.GetTerms "tags") }}
+                      {{- if $i -}}, {{ end -}}
+                      {{ with $tags }}
+                      <a href="{{ .Permalink }}">{{- .LinkTitle -}}</a>
+                      {{- end -}}
+                  {{- end -}} 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{ end }}</div>
+      {{ template "_internal/pagination.html" . }}
+      </div>
+
+      <div class="column25">
+        {{ if ne .Section "tags" }}
+          {{ partial "topics-sidebar.html" . }}
+        {{ end }}
+        
+        <div class="section">
+          <div class="sectionTitle">Resources</div>
+          {{ partial "resources_sticky.html" .}}
+        </div>
+      </div>
+          
+
+
+    </div>
+  </div>  <!-- bandContent -->
+</div> <!-- band -->
+
+{{ end }}
