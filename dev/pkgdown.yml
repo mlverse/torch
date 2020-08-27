@@ -6,10 +6,11 @@ articles:
   mnist-dcgan: examples/mnist-dcgan.html
   mnist-mlp: examples/mnist-mlp.html
   extending-autograd: extending-autograd.html
+  autograd: getting-started/autograd.html
   what-is-torch: getting-started/what-is-torch.html
   indexing: indexing.html
   loading-data: loading-data.html
   tensor-creation: tensor-creation.html
   using-autograd: using-autograd.html
-last_built: 2020-08-27T14:46Z
+last_built: 2020-08-27T20:57Z
 
