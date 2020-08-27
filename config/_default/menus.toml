@@ -5,5 +5,10 @@
     name = "Packages"
     url = "/packages/"
     weight = 1
+    
+[[main]]
+    name = "Docs"
+    url = "/docs/"
+    weight = 2
 
 
