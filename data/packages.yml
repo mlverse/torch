@@ -7,7 +7,7 @@ torch:
   name: torch
 torchvision:
   weight: 10
-  desc: 'torchvision is an extension providing image loading and transformation tooling, the most common architectures for computer vision as well as their pre-trained weights and easy loading and preprocessing of commonly used datasets.'
+  desc: 'torchvision is an extension providing image loading, transformations, common architectures for computer vision, pre-trained weights and access to commonly used datasets.'
   url_git: https://github.com/mlverse/torchvision
   url_docs: https://torchvision.mlverse.org/
   url_cran: https://cloud.r-project.org/web/packages/torchvision/index.html
@@ -15,4 +15,5 @@ torchvision:
 you:
   weight: 100
   desc: 'If you are developping a torch extension contact us to feature it in this website. We welcome any kind extension be it for dataset loading, a frontend API for writing models or pre-trained models!'
+  desc: 'If you are developing a torch extension, contact us in GitHub to feature it. We welcome all extensions: datasets, transformations, models, pre-trained models and so on!'
   name: More
