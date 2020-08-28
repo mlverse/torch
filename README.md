@@ -1,8 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-torch <a href='https://mlverse.github.io/torch'><img src='man/figures/torch.png' align="right" height="139" /></a>
-==================================================================================================================
+torch <a href='https://torch.mlverse.org'><img src='man/figures/torch.png' align="right" height="139" /></a>
+============================================================================================================
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -34,12 +34,12 @@ torch Tensor to an R object.
     y
     #> torch_tensor 
     #> (1,.,.) = 
-    #>   0.8270  0.1017
-    #>   0.1992  0.7632
+    #>   0.5406  0.8648
+    #>   0.3097  0.9715
     #> 
     #> (2,.,.) = 
-    #>   0.2694  0.9735
-    #>   0.1965  0.7447
+    #>   0.1309  0.8992
+    #>   0.4849  0.1902
     #> [ CPUDoubleType{2,2,2} ]
     identical(x, as_array(y))
     #> [1] TRUE
@@ -99,13 +99,13 @@ tensors in place.
     print(w)
     #> torch_tensor 
     #> 1e-09 *
-    #>  7.8984
-    #>   8.7077
+    #>  5.2672
+    #>  -6.7969
     #> [ CPUFloatType{2,1} ]
     print(b) 
     #> torch_tensor 
     #> 0.01 *
-    #>  9.9867
+    #> -9.6802
     #> [ CPUFloatType{1} ]
 
 Contributing
