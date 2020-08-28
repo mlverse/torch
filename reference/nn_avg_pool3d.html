@@ -46,12 +46,10 @@ planes. — nn_avg_pool3d" />
 output \((N, C, D_{out}, H_{out}, W_{out})\) and kernel_size \((kD, kH, kW)\)
 can be precisely described as:
 $$
-  \begin{aligned}
-\text{out}(N_i, C_j, d, h, w) ={} &amp;amp; \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
-&amp;amp; \frac{\text{input}(N_i, C_j, \text{stride}[0] \times d + k,
-                     \text{stride}[1] \times h + m, \text{stride}[2] \times w + n)}
-{kD \times kH \times kW}
-\end{aligned}
+\begin{array}{ll}
+\mbox{out}(N_i, C_j, d, h, w) = &amp;amp; \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
+&amp;amp; \frac{\mbox{input}(N_i, C_j, \mbox{stride}[0] \times d + k, \mbox{stride}[1] \times h + m, \mbox{stride}[2] \times w + n)}{kD \times kH \times kW}
+\end{array}
 $$" />
 
 
@@ -84,7 +82,7 @@ $$" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -95,6 +93,50 @@ $$" />
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Getting started
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Beginers guide</li>
+    <li>
+      <a href="../articles/getting-started/warmup.html">Warm-up</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/tensors.html">Tensors</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
+    </li>
+    <li class="dropdown-header">Torch Mechanics</li>
+    <li>
+      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -177,12 +219,10 @@ planes.</h1>
 output \((N, C, D_{out}, H_{out}, W_{out})\) and <code>kernel_size</code> \((kD, kH, kW)\)
 can be precisely described as:</p>
 <p>$$
-  \begin{aligned}
-\text{out}(N_i, C_j, d, h, w) ={} &amp; \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
-&amp; \frac{\text{input}(N_i, C_j, \text{stride}[0] \times d + k,
-                     \text{stride}[1] \times h + m, \text{stride}[2] \times w + n)}
-{kD \times kH \times kW}
-\end{aligned}
+\begin{array}{ll}
+\mbox{out}(N_i, C_j, d, h, w) = &amp; \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
+&amp; \frac{\mbox{input}(N_i, C_j, \mbox{stride}[0] \times d + k, \mbox{stride}[1] \times h + m, \mbox{stride}[2] \times w + n)}{kD \times kH \times kW}
+\end{array}
 $$</p>
     </div>
 
@@ -244,16 +284,16 @@ the second <code>int</code> for the height dimension and the third <code>int</co
 </ul>
 
 <p>$$
-  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] -
-      \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \mbox{padding}[0] -
+      \mbox{kernel\_size}[0]}{\mbox{stride}[0]} + 1\right\rfloor
 $$
 $$
-  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] -
-      \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \mbox{padding}[1] -
+      \mbox{kernel\_size}[1]}{\mbox{stride}[1]} + 1\right\rfloor
 $$
 $$
-  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] -
-      \text{kernel\_size}[2]}{\text{stride}[2]} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \mbox{padding}[2] -
+      \mbox{kernel\_size}[2]}{\mbox{stride}[2]} + 1\right\rfloor
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

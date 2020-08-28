@@ -46,8 +46,8 @@ input planes. — nn_avg_pool1d" />
 output \((N, C, L_{out})\) and kernel_size \(k\)
 can be precisely described as:
 $$
-  \text{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
-\text{input}(N_i, C_j, \text{stride} \times l + m)
+  \mbox{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
+\mbox{input}(N_i, C_j, \mbox{stride} \times l + m)
 $$" />
 
 
@@ -80,7 +80,7 @@ $$" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -91,6 +91,50 @@ $$" />
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Getting started
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Beginers guide</li>
+    <li>
+      <a href="../articles/getting-started/warmup.html">Warm-up</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/tensors.html">Tensors</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
+    </li>
+    <li class="dropdown-header">Torch Mechanics</li>
+    <li>
+      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
+    </li>
+    <li>
+      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -173,8 +217,8 @@ input planes.</h1>
 output \((N, C, L_{out})\) and <code>kernel_size</code> \(k\)
 can be precisely described as:</p>
 <p>$$
-  \text{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
-\text{input}(N_i, C_j, \text{stride} \times l + m)
+  \mbox{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
+\mbox{input}(N_i, C_j, \mbox{stride} \times l + m)
 $$</p>
     </div>
 
@@ -228,7 +272,7 @@ an <code>int</code> or a one-element tuple.</p>
 
 <p>$$
   L_{out} = \left\lfloor \frac{L_{in} +
-      2 \times \text{padding} - \text{kernel\_size}}{\text{stride}} + 1\right\rfloor
+      2 \times \mbox{padding} - \mbox{kernel\_size}}{\mbox{stride}} + 1\right\rfloor
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
