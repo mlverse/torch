@@ -14,7 +14,7 @@ Description: Provides functionality to define and train neural networks similar 
     using the 'libtorch' library. Also supports low-level tensor operations and 
     'GPU' acceleration.
 License: MIT + file LICENSE
-URL: http://mlverse.github.io/torch, https://github.com/mlverse/torch
+URL: https://torch.mlverse.org/docs, https://github.com/mlverse/torch
 BugReports: https://github.com/mlverse/torch/issues
 Encoding: UTF-8
 LazyData: true

@@ -42,7 +42,7 @@ not defined. This implementation will set the gradient to zero in this case.
 }
 
 \deqn{
-  L_{out} = \left\lfloor\frac{L_{in} - \text{kernel\_size}}{\text{stride}} + 1\right\rfloor
+  L_{out} = \left\lfloor\frac{L_{in} - \mbox{kernel\_size}}{\mbox{stride}} + 1\right\rfloor
 }
 }
 

@@ -33,12 +33,10 @@ output \eqn{(N, C, D_{out}, H_{out}, W_{out})} and \code{kernel_size} \eqn{(kD, 
 can be precisely described as:
 
 \deqn{
-  \begin{aligned}
-\text{out}(N_i, C_j, d, h, w) ={} & \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
-& \frac{\text{input}(N_i, C_j, \text{stride}[0] \times d + k,
-                     \text{stride}[1] \times h + m, \text{stride}[2] \times w + n)}
-{kD \times kH \times kW}
-\end{aligned}
+\begin{array}{ll}
+\mbox{out}(N_i, C_j, d, h, w) = & \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
+& \frac{\mbox{input}(N_i, C_j, \mbox{stride}[0] \times d + k, \mbox{stride}[1] \times h + m, \mbox{stride}[2] \times w + n)}{kD \times kH \times kW}
+\end{array}
 }
 }
 \details{
@@ -60,16 +58,16 @@ the second \code{int} for the height dimension and the third \code{int} for the 
 }
 
 \deqn{
-  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] -
-      \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \mbox{padding}[0] -
+      \mbox{kernel\_size}[0]}{\mbox{stride}[0]} + 1\right\rfloor
 }
 \deqn{
-  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] -
-      \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \mbox{padding}[1] -
+      \mbox{kernel\_size}[1]}{\mbox{stride}[1]} + 1\right\rfloor
 }
 \deqn{
-  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] -
-      \text{kernel\_size}[2]}{\text{stride}[2]} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \mbox{padding}[2] -
+      \mbox{kernel\_size}[2]}{\mbox{stride}[2]} + 1\right\rfloor
 }
 }
 

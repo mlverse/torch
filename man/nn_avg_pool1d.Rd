@@ -30,8 +30,8 @@ output \eqn{(N, C, L_{out})} and \code{kernel_size} \eqn{k}
 can be precisely described as:
 
 \deqn{
-  \text{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
-\text{input}(N_i, C_j, \text{stride} \times l + m)
+  \mbox{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
+\mbox{input}(N_i, C_j, \mbox{stride} \times l + m)
 }
 }
 \details{
@@ -50,7 +50,7 @@ an \code{int} or a one-element tuple.
 
 \deqn{
   L_{out} = \left\lfloor \frac{L_{in} +
-      2 \times \text{padding} - \text{kernel\_size}}{\text{stride}} + 1\right\rfloor
+      2 \times \mbox{padding} - \mbox{kernel\_size}}{\mbox{stride}} + 1\right\rfloor
 }
 }
 

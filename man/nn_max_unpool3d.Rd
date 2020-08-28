@@ -44,13 +44,13 @@ See the Inputs section below.
 }
 
 \deqn{
-  D_{out} = (D_{in} - 1) \times \text{stride[0]} - 2 \times \text{padding[0]} + \text{kernel\_size[0]}
+  D_{out} = (D_{in} - 1) \times \mbox{stride[0]} - 2 \times \mbox{padding[0]} + \mbox{kernel\_size[0]}
 }
 \deqn{
-  H_{out} = (H_{in} - 1) \times \text{stride[1]} - 2 \times \text{padding[1]} + \text{kernel\_size[1]}
+  H_{out} = (H_{in} - 1) \times \mbox{stride[1]} - 2 \times \mbox{padding[1]} + \mbox{kernel\_size[1]}
 }
 \deqn{
-  W_{out} = (W_{in} - 1) \times \text{stride[2]} - 2 \times \text{padding[2]} + \text{kernel\_size[2]}
+  W_{out} = (W_{in} - 1) \times \mbox{stride[2]} - 2 \times \mbox{padding[2]} + \mbox{kernel\_size[2]}
 }
 
 or as given by \code{output_size} in the call operator

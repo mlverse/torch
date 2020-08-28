@@ -42,7 +42,7 @@ See the Inputs and Example below.
 \item Input: \eqn{(N, C, H_{in})}
 \item Output: \eqn{(N, C, H_{out})}, where
 \deqn{
-  H_{out} = (H_{in} - 1) \times \text{stride}[0] - 2 \times \text{padding}[0] + \text{kernel\_size}[0]
+  H_{out} = (H_{in} - 1) \times \mbox{stride}[0] - 2 \times \mbox{padding}[0] + \mbox{kernel\_size}[0]
 }
 or as given by \code{output_size} in the call operator
 }

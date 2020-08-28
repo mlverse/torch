@@ -4,7 +4,12 @@
 \alias{nn_module}
 \title{Base class for all neural network modules.}
 \usage{
-nn_module(classname = NULL, inherit = nn_Module, ...)
+nn_module(
+  classname = NULL,
+  inherit = nn_Module,
+  ...,
+  parent_env = parent.frame()
+)
 }
 \arguments{
 \item{classname}{an optional name for the module}
@@ -12,6 +17,8 @@ nn_module(classname = NULL, inherit = nn_Module, ...)
 \item{inherit}{an optional module to inherit from}
 
 \item{...}{methods implementation}
+
+\item{parent_env}{passed to \code{\link[R6:R6Class]{R6::R6Class()}}.}
 }
 \description{
 Your models should also subclass this class.

@@ -81,7 +81,7 @@ nn_max_pool1d <- nn_module(
 #' can be precisely described as:
 #'
 #' \deqn{
-#'   \begin{array}{ll}
+#' \begin{array}{ll}
 #' out(N_i, C_j, h, w) ={} & \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
 #' & \mbox{input}(N_i, C_j, \mbox{stride[0]} \times h + m,
 #'                \mbox{stride[1]} \times w + n)
@@ -147,11 +147,10 @@ nn_max_pool2d <- nn_module(
 #' can be precisely described as:
 #' 
 #' \deqn{
-#'   \begin{aligned}
-#' \text{out}(N_i, C_j, d, h, w) ={} & \max_{k=0, \ldots, kD-1} \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
-#' & \text{input}(N_i, C_j, \text{stride[0]} \times d + k,
-#'                \text{stride[1]} \times h + m, \text{stride[2]} \times w + n)
-#' \end{aligned}
+#' \begin{array}{ll}
+#' \mbox{out}(N_i, C_j, d, h, w) = & \max_{k=0, \ldots, kD-1} \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
+#'  & \mbox{input}(N_i, C_j, \mbox{stride[0]} \times d + k, \mbox{stride[1]} \times h + m, \mbox{stride[2]} \times w + n)
+#' \end{array}
 #' }
 #' 
 #' If `padding` is non-zero, then the input is implicitly zero-padded on both sides
@@ -174,18 +173,18 @@ nn_max_pool2d <- nn_module(
 #' - Input: \eqn{(N, C, D_{in}, H_{in}, W_{in})}
 #' - Output: \eqn{(N, C, D_{out}, H_{out}, W_{out})}, where
 #' \deqn{
-#'   D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] - \text{dilation}[0] \times
-#'     (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+#'   D_{out} = \left\lfloor\frac{D_{in} + 2 \times \mbox{padding}[0] - \mbox{dilation}[0] \times
+#'     (\mbox{kernel\_size}[0] - 1) - 1}{\mbox{stride}[0]} + 1\right\rfloor
 #' }
 #' 
 #' \deqn{
-#'   H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] - \text{dilation}[1] \times
-#'     (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+#'   H_{out} = \left\lfloor\frac{H_{in} + 2 \times \mbox{padding}[1] - \mbox{dilation}[1] \times
+#'     (\mbox{kernel\_size}[1] - 1) - 1}{\mbox{stride}[1]} + 1\right\rfloor
 #' }
 #' 
 #' \deqn{
-#'   W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] - \text{dilation}[2] \times
-#'     (\text{kernel\_size}[2] - 1) - 1}{\text{stride}[2]} + 1\right\rfloor
+#'   W_{out} = \left\lfloor\frac{W_{in} + 2 \times \mbox{padding}[2] - \mbox{dilation}[2] \times
+#'     (\mbox{kernel\_size}[2] - 1) - 1}{\mbox{stride}[2]} + 1\right\rfloor
 #' }
 #' 
 #' @examples
@@ -235,7 +234,7 @@ nn_max_pool3d <- nn_module(
 #' - Input: \eqn{(N, C, H_{in})}
 #' - Output: \eqn{(N, C, H_{out})}, where
 #' \deqn{
-#'   H_{out} = (H_{in} - 1) \times \text{stride}[0] - 2 \times \text{padding}[0] + \text{kernel\_size}[0]
+#'   H_{out} = (H_{in} - 1) \times \mbox{stride}[0] - 2 \times \mbox{padding}[0] + \mbox{kernel\_size}[0]
 #' }
 #' or as given by `output_size` in the call operator
 #' 
@@ -299,10 +298,10 @@ nn_max_unpool1d <- nn_module(
 #' - Input: \eqn{(N, C, H_{in}, W_{in})}
 #' - Output: \eqn{(N, C, H_{out}, W_{out})}, where
 #' \deqn{
-#'   H_{out} = (H_{in} - 1) \times \text{stride[0]} - 2 \times \text{padding[0]} + \text{kernel\_size[0]}
+#'   H_{out} = (H_{in} - 1) \times \mbox{stride[0]} - 2 \times \mbox{padding[0]} + \mbox{kernel\_size[0]}
 #' }
 #' \deqn{
-#'   W_{out} = (W_{in} - 1) \times \text{stride[1]} - 2 \times \text{padding[1]} + \text{kernel\_size[1]}
+#'   W_{out} = (W_{in} - 1) \times \mbox{stride[1]} - 2 \times \mbox{padding[1]} + \mbox{kernel\_size[1]}
 #' }
 #' or as given by `output_size` in the call operator
 #' 
@@ -364,13 +363,13 @@ nn_max_unpool2d <- nn_module(
 #' - Output: \eqn{(N, C, D_{out}, H_{out}, W_{out})}, where
 #' 
 #' \deqn{
-#'   D_{out} = (D_{in} - 1) \times \text{stride[0]} - 2 \times \text{padding[0]} + \text{kernel\_size[0]}
+#'   D_{out} = (D_{in} - 1) \times \mbox{stride[0]} - 2 \times \mbox{padding[0]} + \mbox{kernel\_size[0]}
 #' }
 #' \deqn{
-#'   H_{out} = (H_{in} - 1) \times \text{stride[1]} - 2 \times \text{padding[1]} + \text{kernel\_size[1]}
+#'   H_{out} = (H_{in} - 1) \times \mbox{stride[1]} - 2 \times \mbox{padding[1]} + \mbox{kernel\_size[1]}
 #' }
 #' \deqn{
-#'   W_{out} = (W_{in} - 1) \times \text{stride[2]} - 2 \times \text{padding[2]} + \text{kernel\_size[2]}
+#'   W_{out} = (W_{in} - 1) \times \mbox{stride[2]} - 2 \times \mbox{padding[2]} + \mbox{kernel\_size[2]}
 #' }
 #' 
 #' or as given by `output_size` in the call operator
@@ -410,8 +409,8 @@ nn_max_unpool3d <- nn_module(
 #' can be precisely described as:
 #'   
 #' \deqn{
-#'   \text{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
-#' \text{input}(N_i, C_j, \text{stride} \times l + m)
+#'   \mbox{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
+#' \mbox{input}(N_i, C_j, \mbox{stride} \times l + m)
 #' }
 #' 
 #' If `padding` is non-zero, then the input is implicitly zero-padded on both sides
@@ -432,7 +431,7 @@ nn_max_unpool3d <- nn_module(
 #' 
 #' \deqn{
 #'   L_{out} = \left\lfloor \frac{L_{in} +
-#'       2 \times \text{padding} - \text{kernel\_size}}{\text{stride}} + 1\right\rfloor
+#'       2 \times \mbox{padding} - \mbox{kernel\_size}}{\mbox{stride}} + 1\right\rfloor
 #' }
 #' 
 #' @examples
@@ -500,12 +499,12 @@ nn_avg_pool1d <- nn_module(
 #' - Output: \eqn{(N, C, H_{out}, W_{out})}, where
 #' 
 #' \deqn{
-#'   H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \text{padding}[0] -
-#'       \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+#'   H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \mbox{padding}[0] -
+#'       \mbox{kernel\_size}[0]}{\mbox{stride}[0]} + 1\right\rfloor
 #' }
 #' \deqn{
-#'   W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \text{padding}[1] -
-#'       \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+#'   W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \mbox{padding}[1] -
+#'       \mbox{kernel\_size}[1]}{\mbox{stride}[1]} + 1\right\rfloor
 #' }
 #' 
 #' @examples
@@ -551,12 +550,10 @@ nn_avg_pool2d <- nn_module(
 #' can be precisely described as:
 #'   
 #' \deqn{
-#'   \begin{aligned}
-#' \text{out}(N_i, C_j, d, h, w) ={} & \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
-#' & \frac{\text{input}(N_i, C_j, \text{stride}[0] \times d + k,
-#'                      \text{stride}[1] \times h + m, \text{stride}[2] \times w + n)}
-#' {kD \times kH \times kW}
-#' \end{aligned}
+#' \begin{array}{ll}
+#' \mbox{out}(N_i, C_j, d, h, w) = & \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
+#' & \frac{\mbox{input}(N_i, C_j, \mbox{stride}[0] \times d + k, \mbox{stride}[1] \times h + m, \mbox{stride}[2] \times w + n)}{kD \times kH \times kW}
+#' \end{array}
 #' }
 #' 
 #' If `padding` is non-zero, then the input is implicitly zero-padded on all three sides
@@ -580,16 +577,16 @@ nn_avg_pool2d <- nn_module(
 #' - Output: \eqn{(N, C, D_{out}, H_{out}, W_{out})}, where
 #' 
 #' \deqn{
-#'   D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] -
-#'       \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+#'   D_{out} = \left\lfloor\frac{D_{in} + 2 \times \mbox{padding}[0] -
+#'       \mbox{kernel\_size}[0]}{\mbox{stride}[0]} + 1\right\rfloor
 #' }
 #' \deqn{
-#'   H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] -
-#'       \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+#'   H_{out} = \left\lfloor\frac{H_{in} + 2 \times \mbox{padding}[1] -
+#'       \mbox{kernel\_size}[1]}{\mbox{stride}[1]} + 1\right\rfloor
 #' }
 #' \deqn{
-#'   W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] -
-#'       \text{kernel\_size}[2]}{\text{stride}[2]} + 1\right\rfloor
+#'   W_{out} = \left\lfloor\frac{W_{in} + 2 \times \mbox{padding}[2] -
+#'       \mbox{kernel\_size}[2]}{\mbox{stride}[2]} + 1\right\rfloor
 #' }
 #' 
 #' @examples
@@ -802,7 +799,7 @@ lp_pool_nd <- nn_module(
 #' - Output: \eqn{(N, C, L_{out})}, where
 #' 
 #' \deqn{
-#'   L_{out} = \left\lfloor\frac{L_{in} - \text{kernel\_size}}{\text{stride}} + 1\right\rfloor
+#'   L_{out} = \left\lfloor\frac{L_{in} - \mbox{kernel\_size}}{\mbox{stride}} + 1\right\rfloor
 #' }
 #' 
 #' @examples
@@ -854,10 +851,10 @@ nn_lp_pool1d <- nn_module(
 #' - Output: \eqn{(N, C, H_{out}, W_{out})}, where
 #' 
 #' \deqn{
-#'   H_{out} = \left\lfloor\frac{H_{in} - \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+#'   H_{out} = \left\lfloor\frac{H_{in} - \mbox{kernel\_size}[0]}{\mbox{stride}[0]} + 1\right\rfloor
 #' }
 #' \deqn{
-#'   W_{out} = \left\lfloor\frac{W_{in} - \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+#'   W_{out} = \left\lfloor\frac{W_{in} - \mbox{kernel\_size}[1]}{\mbox{stride}[1]} + 1\right\rfloor
 #' }
 #' 
 #' @examples

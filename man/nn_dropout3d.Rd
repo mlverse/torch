@@ -23,7 +23,7 @@ probability \code{p} using samples from a Bernoulli distribution.
 Usually the input comes from \link{nn_conv2d} modules.
 
 As described in the paper
-\href{http://arxiv.org/abs/1411.4280}{Efficient Object Localization Using Convolutional Networks} ,
+\href{https://arxiv.org/abs/1411.4280}{Efficient Object Localization Using Convolutional Networks} ,
 if adjacent pixels within feature maps are strongly correlated
 (as is normally the case in early convolution layers) then i.i.d. dropout
 will not regularize the activations and will otherwise just result

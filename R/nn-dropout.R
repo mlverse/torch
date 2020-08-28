@@ -62,7 +62,7 @@ nn_dropout <- nn_module(
 #' Usually the input comes from [nn_conv2d] modules.
 #' 
 #' As described in the paper
-#' [Efficient Object Localization Using Convolutional Networks](http://arxiv.org/abs/1411.4280) ,
+#' [Efficient Object Localization Using Convolutional Networks](https://arxiv.org/abs/1411.4280) ,
 #' if adjacent pixels within feature maps are strongly correlated
 #' (as is normally the case in early convolution layers) then i.i.d. dropout
 #' will not regularize the activations and will otherwise just result
@@ -104,7 +104,7 @@ nn_dropout2d <- nn_module(
 #' Usually the input comes from [nn_conv2d] modules.
 #' 
 #' As described in the paper
-#' [Efficient Object Localization Using Convolutional Networks](http://arxiv.org/abs/1411.4280) ,
+#' [Efficient Object Localization Using Convolutional Networks](https://arxiv.org/abs/1411.4280) ,
 #' if adjacent pixels within feature maps are strongly correlated
 #' (as is normally the case in early convolution layers) then i.i.d. dropout
 #' will not regularize the activations and will otherwise just result

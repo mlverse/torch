@@ -17,5 +17,6 @@ tools/torchgen/.Rbuildignore
 ^LICENSE\.md$
 ^.*torchpkg.dll$
 ^deps.*
+^public/.*
 # uncomment below for CRAN submission
-# ^inst/deps/.*
+^inst/deps/.*

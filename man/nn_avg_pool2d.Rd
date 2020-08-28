@@ -56,12 +56,12 @@ and the second \code{int} for the width dimension
 }
 
 \deqn{
-  H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \text{padding}[0] -
-      \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \mbox{padding}[0] -
+      \mbox{kernel\_size}[0]}{\mbox{stride}[0]} + 1\right\rfloor
 }
 \deqn{
-  W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \text{padding}[1] -
-      \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \mbox{padding}[1] -
+      \mbox{kernel\_size}[1]}{\mbox{stride}[1]} + 1\right\rfloor
 }
 }
 

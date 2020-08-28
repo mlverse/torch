@@ -37,7 +37,7 @@ output \eqn{(N, C, H_{out}, W_{out})} and \code{kernel_size} \eqn{(kH, kW)}
 can be precisely described as:
 
 \deqn{
-  \begin{array}{ll}
+\begin{array}{ll}
 out(N_i, C_j, h, w) ={} & \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
 & \mbox{input}(N_i, C_j, \mbox{stride[0]} \times h + m,
                \mbox{stride[1]} \times w + n)

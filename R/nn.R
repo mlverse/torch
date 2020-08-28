@@ -259,6 +259,7 @@ is_nn_module <- function(x) {
 #' @param classname an optional name for the module
 #' @param inherit an optional module to inherit from
 #' @param ... methods implementation 
+#' @param parent_env passed to [R6::R6Class()].
 #' 
 #' @examples 
 #' model <- nn_module(

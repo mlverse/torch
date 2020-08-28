@@ -42,10 +42,10 @@ See the Inputs and Example below.
 \item Input: \eqn{(N, C, H_{in}, W_{in})}
 \item Output: \eqn{(N, C, H_{out}, W_{out})}, where
 \deqn{
-  H_{out} = (H_{in} - 1) \times \text{stride[0]} - 2 \times \text{padding[0]} + \text{kernel\_size[0]}
+  H_{out} = (H_{in} - 1) \times \mbox{stride[0]} - 2 \times \mbox{padding[0]} + \mbox{kernel\_size[0]}
 }
 \deqn{
-  W_{out} = (W_{in} - 1) \times \text{stride[1]} - 2 \times \text{padding[1]} + \text{kernel\_size[1]}
+  W_{out} = (W_{in} - 1) \times \mbox{stride[1]} - 2 \times \mbox{padding[1]} + \mbox{kernel\_size[1]}
 }
 or as given by \code{output_size} in the call operator
 }
