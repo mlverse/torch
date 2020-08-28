@@ -1,0 +1,76 @@
+---
+title: 'torch Tensors'
+type: docs
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = 0), 1)
+)
+```
+
+> Note: This is an R port of the official tutorial available [here](https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py). All credits goes to [Justin Johnson](https://github.com/jcjohnson/pytorch-examples).
+
+```{r setup}
+library(torch)
+```
+
+R arrays are great, but they cannot utilize GPUs to accelerate its numerical computations. For modern deep neural networks, GPUs often provide speedups of 50x or greater, so unfortunately pure R won’t be enough for modern deep learning.
+
+Here we introduce the most fundamental torch concept: the Tensor. A torch Tensor is conceptually similar to an R array: a Tensor is an n-dimensional array, and torch provides many functions for operating on these Tensors. Behind the scenes, Tensors can keep track of a computational graph and gradients, but they’re also useful as a generic tool for scientific computing.
+
+Also unlike R, torch Tensors can utilize GPUs to accelerate their numeric computations. To run a torch Tensor on GPU, you simply need to cast it to a new datatype.
+
+Here we use torch Tensors to fit a two-layer network to random data. Like the R before we need to manually implement the forward and backward passes through the network:
+
+```{r}
+if (cuda_is_available()) {
+   device <- torch_device("cuda")
+} else {
+   device <- torch_device("cpu")
+}
+   
+# N is batch size; D_in is input dimension;
+# H is hidden dimension; D_out is output dimension.
+N <- 64
+D_in <- 1000
+H <- 100
+D_out <- 10
+
+# Create random input and output data
+x <- torch_randn(N, D_in, device=device)
+y <- torch_randn(N, D_out, device=device)
+
+# Randomly initialize weights
+w1 <- torch_randn(D_in, H, device=device)
+w2 <- torch_randn(H, D_out, device=device)
+
+learning_rate <- 1e-6
+for (t in seq_len(500)) {
+   # Forward pass: compute predicted y
+   h <- x$mm(w1)
+   h_relu <- h$clamp(min=0)
+   y_pred <- h_relu$mm(w2)
+   
+   # Compute and print loss
+   loss <- as.numeric((y_pred - y)$pow(2)$sum())
+   if (t %% 100 == 0 || t == 1)
+      cat("Step:", t, ":", loss, "\n")
+   
+   # Backprop to compute gradients of w1 and w2 with respect to loss
+   grad_y_pred <- 2.0 * (y_pred - y)
+   grad_w2 <- h_relu$t()$mm(grad_y_pred)
+   grad_h_relu <- grad_y_pred$mm(w2$t())
+   grad_h <- grad_h_relu$clone()
+   grad_h[h < 0] <- 0
+   grad_w1 <- x$t()$mm(grad_h)
+   
+   # Update weights using gradient descent
+   w1 <- w1 - learning_rate * grad_w1
+   w2 <- w2 - learning_rate * grad_w2
+}
+```
+
+In the [next example](tensors-and-autograd.html) we will use autograd instead of computing the gradients manually.

@@ -1,0 +1,97 @@
+---
+title: 'optim: optimizers in torch'
+type: docs
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = 0), 1)
+)
+```
+
+> Note: This is an R port of the official tutorial available [here](https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py). All credits goes to [Justin Johnson](https://github.com/jcjohnson/pytorch-examples).
+
+```{r setup}
+library(torch)
+```
+
+Up to this point we have updated the weights of our models by manually mutating the Tensors holding learnable parameters (with `with_no_grad` to avoid tracking history in autograd). This is not a huge burden for simple optimization algorithms like stochastic gradient descent, but in practice we often train neural networks using more sophisticated optimizers like AdaGrad, RMSProp, Adam, etc.
+
+The optim package in torch abstracts the idea of an optimization algorithm and provides implementations of commonly used optimization algorithms.
+
+In this example we will use the nn package to define our model as before, but we will optimize the model using the Adam algorithm provided by `optim`:
+
+```{r}
+if (cuda_is_available()) {
+   device <- torch_device("cuda")
+} else {
+   device <- torch_device("cpu")
+}
+   
+# N is batch size; D_in is input dimension;
+# H is hidden dimension; D_out is output dimension.
+N <- 64
+D_in <- 1000
+H <- 100
+D_out <- 10
+
+# Create random input and output data
+# Setting requires_grad=FALSE (the default) indicates that we do not need to 
+# compute gradients with respect to these Tensors during the backward pass.
+x <- torch_randn(N, D_in, device=device)
+y <- torch_randn(N, D_out, device=device)
+
+# Use the nn package to define our model as a sequence of layers. nn_sequential
+# is a Module which contains other Modules, and applies them in sequence to
+# produce its output. Each Linear Module computes output from input using a
+# linear function, and holds internal Tensors for its weight and bias.
+model <- nn_sequential(
+    nn_linear(D_in, H),
+    nn_relu(),
+    nn_linear(H, D_out)
+)
+
+# The nn package also contains definitions of popular loss functions; in this
+# case we will use Mean Squared Error (MSE) as our loss function.
+loss_fn <- nnf_mse_loss
+
+# Use the optim package to define an Optimizer that will update the weights of
+# the model for us. Here we will use Adam; the optim package contains many other
+# optimization algorithms. The first argument to the Adam constructor tells the
+# optimizer which Tensors it should update.
+learning_rate <- 1e-4
+optimizer <- optim_adam(model$parameters, lr=learning_rate)
+
+for (t in seq_len(500)) {
+   # Forward pass: compute predicted y by passing x to the model. Module objects
+   # can be called like functions. When doing so you pass a Tensor of input
+   # data to the Module and it produces a Tensor of output data.
+   y_pred <- model(x)
+   
+   # Compute and print loss. We pass Tensors containing the predicted and true
+   # values of y, and the loss function returns a Tensor containing the
+   # loss.
+   loss <- loss_fn(y_pred, y)
+   if (t %% 100 == 0 || t == 1)
+      cat("Step:", t, ":", as.numeric(loss), "\n")
+   
+   # Before the backward pass, use the optimizer object to zero all of the
+   # gradients for the variables it will update (which are the learnable
+   # weights of the model). This is because by default, gradients are
+   # accumulated in buffers( i.e, not overwritten) whenever $backward()
+   # is called. Checkout docs of `autograd_backward` for more details.
+   optimizer$zero_grad()
+
+   # Backward pass: compute gradient of the loss with respect to model
+   # parameters
+   loss$backward()
+
+   # Calling the step function on an Optimizer makes an update to its
+   # parameters
+   optimizer$step()
+}
+```
+
+In the [next example](custom-nn.html) we will learn how to create custom `nn_modules`.
