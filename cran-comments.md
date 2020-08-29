@@ -19,3 +19,4 @@ sub-directories of 1Mb or more:
 
 * This is a new release.
 * Fixed issue with parallel make on Fedora.
+* Fixed README.md URL redirect.
