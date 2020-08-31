@@ -45,12 +45,6 @@ Tensor <- R7Class(
       cpp_torch_tensor_print(self$ptr)
       invisible(self)
     },
-    dtype = function() {
-      torch_dtype$new(ptr = cpp_torch_tensor_dtype(self$ptr))
-    },
-    device = function() {
-      Device$new(ptr = cpp_tensor_device(self$ptr))
-    },
     dim = function() {
       length(self$size())
     },
@@ -120,6 +114,12 @@ Tensor <- R7Class(
   active = list(
     shape = function() {
       self$size()
+    },
+    dtype = function() {
+      torch_dtype$new(ptr = cpp_torch_tensor_dtype(self$ptr))
+    },
+    device = function() {
+      Device$new(ptr = cpp_tensor_device(self$ptr))
     }
   )
 )
