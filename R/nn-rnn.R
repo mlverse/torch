@@ -145,7 +145,7 @@ nn_rnn_base <- nn_module(
       num_directions <- ifelse(self$bidirectional, 2, 1)
       hx <- torch_zeros(self$num_layers * num_directions,
                         max_batch_size, self$hidden_size,
-                        dtype=input$dtype, device=input$device())
+                        dtype=input$dtype, device=input$device)
       
     } else {
       hx <- self$permute_hidden(hx, sorted_indices)  

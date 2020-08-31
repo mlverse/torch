@@ -148,12 +148,12 @@ test_that("to", {
   
   skip_if_cuda_not_available()
   net$cuda()
-  expect_equal(net$linear$weight$device()$type, "cuda")
-  expect_equal(net$linear$bias$device()$type, "cuda")
+  expect_equal(net$linear$weight$device$type, "cuda")
+  expect_equal(net$linear$bias$device$type, "cuda")
   
   net$cpu()
-  expect_equal(net$linear$weight$device()$type, "cpu")
-  expect_equal(net$linear$bias$device()$type,"cpu")
+  expect_equal(net$linear$weight$device$type, "cpu")
+  expect_equal(net$linear$bias$device$type,"cpu")
   
 })
 

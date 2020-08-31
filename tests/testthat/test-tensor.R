@@ -16,7 +16,7 @@ test_that("Can create a tensor", {
   x <- torch_tensor(1, dtype = torch_double())
   expect_true(x$dtype == torch_double())
   
-  device <- x$device()
+  device <- x$device
   expect_equal(device$type, "cpu")
 })
 
@@ -113,15 +113,15 @@ test_that("cuda and cpu methods", {
   x <- torch_tensor(1)
   y <- x$cuda()
   
-  expect_true(y$device()$type == "cuda")
+  expect_true(y$device$type == "cuda")
   
   # calling twice dont error
   y$cuda()
-  expect_true(y$device()$type == "cuda")
+  expect_true(y$device$type == "cuda")
   
   k <- y$cpu()
   
-  expect_true(k$device()$type == "cpu")
+  expect_true(k$device$type == "cpu")
   
 })
 
