@@ -11,10 +11,10 @@ test_that("Can create a tensor", {
   expect_equal(dim(x), 0)
   
   x <- torch_tensor(1)
-  expect_true(x$dtype() == torch_float32())
+  expect_true(x$dtype == torch_float32())
   
   x <- torch_tensor(1, dtype = torch_double())
-  expect_true(x$dtype() == torch_double())
+  expect_true(x$dtype == torch_double())
   
   device <- x$device()
   expect_equal(device$type, "cpu")
@@ -104,7 +104,7 @@ test_that("Pass only device argument to `to`", {
   
   y <- torch_tensor(1, dtype = torch_long())
   k <- x$to(other = y)
-  expect_true(k$dtype() == torch_long())
+  expect_true(k$dtype == torch_long())
 })
 
 test_that("cuda and cpu methods", {
