@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hardtanh module — nn_hardtanh • torch</title>
+<title>Changelog • torch</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,7 @@
 
 
 
-<meta property="og:title" content="Hardtanh module — nn_hardtanh" />
-<meta property="og:description" content="Applies the HardTanh function element-wise
-HardTanh is defined as:" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -60,7 +58,7 @@ HardTanh is defined as:" />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -184,71 +182,27 @@ HardTanh is defined as:" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Hardtanh module</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-activation.R'><code>R/nn-activation.R</code></a></small>
-    <div class="hidden name"><code>nn_hardtanh.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/mlverse/torch/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Applies the HardTanh function element-wise
-HardTanh is defined as:</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>nn_hardtanh</span>(<span class='kw'>min_val</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>max_val</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>inplace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>min_val</th>
-      <td><p>minimum value of the linear region range. Default: -1</p></td>
-    </tr>
-    <tr>
-      <th>max_val</th>
-      <td><p>maximum value of the linear region range. Default: 1</p></td>
-    </tr>
-    <tr>
-      <th>inplace</th>
-      <td><p>can optionally do the operation in-place. Default: <code>FALSE</code></p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>$$
-\mbox{HardTanh}(x) = \left\{ \begin{array}{ll}
-  1 &amp; \mbox{ if } x &gt; 1 \\
-  -1 &amp; \mbox{ if } x &lt; -1 \\
-  x &amp; \mbox{ otherwise } \\
-\end{array}
-\right.
-$$</p>
-<p>The range of the linear region :math:<code>[-1, 1]</code> can be adjusted using
-<code>min_val</code> and <code>max_val</code>.</p>
-    <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
-
-    
-
+    <div id="torch-002" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.2">
+<a href="#torch-002" class="anchor"></a>torch 0.0.2<small> 2020-08-31 </small>
+</h1>
 <ul>
-<li><p>Input: \((N, *)\) where <code>*</code> means, any number of additional
-dimensions</p></li>
-<li><p>Output: \((N, *)\), same shape as the input</p></li>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li>Auto install when loading the package for the first time.</li>
 </ul>
-
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_hardtanh</span>(-<span class='fl'>2</span>, <span class='fl'>2</span>)
-<span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
-
-}</div></pre>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
