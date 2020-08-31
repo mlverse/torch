@@ -140,3 +140,20 @@ test_that("is_contiguous", {
   expect_true(!x$is_contiguous())
   
 })
+
+test_that("is_cuda", {
+  x <- torch_randn(10, 10)
+  expect_true(!x$is_cuda)
+  
+  skip_if_cuda_not_available()
+  
+  x <- torch_randn(10, 10, device = torch_device("cuda"))
+  expect_true(X$is_cuda)
+})
+
+test_that("ndim", {
+  
+  x <- torch_randn(10, 10)
+  expect_equal(x$ndim, 2)
+  
+})

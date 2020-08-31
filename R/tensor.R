@@ -120,6 +120,12 @@ Tensor <- R7Class(
     },
     device = function() {
       Device$new(ptr = cpp_tensor_device(self$ptr))
+    },
+    is_cuda = function() {
+      self$device$type == "cuda"
+    },
+    ndim = function() {
+      self$dim()
     }
   )
 )
