@@ -46,8 +46,8 @@ input planes. — nn_avg_pool1d" />
 output \((N, C, L_{out})\) and kernel_size \(k\)
 can be precisely described as:
 $$
-  \text{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
-\text{input}(N_i, C_j, \text{stride} \times l + m)
+  \mbox{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
+\mbox{input}(N_i, C_j, \mbox{stride} \times l + m)
 $$" />
 
 
@@ -80,7 +80,7 @@ $$" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.2.9000</span>
       </span>
     </div>
 
@@ -163,27 +163,12 @@ $$" />
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Examples
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Vision</li>
-    <li>
-      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
-    </li>
-    <li>
-      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
-    </li>
-    <li>
-      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
-    </li>
-  </ul>
-</li>
+<li class="dropdown-header">Examples</li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -217,8 +202,8 @@ input planes.</h1>
 output \((N, C, L_{out})\) and <code>kernel_size</code> \(k\)
 can be precisely described as:</p>
 <p>$$
-  \text{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
-\text{input}(N_i, C_j, \text{stride} \times l + m)
+  \mbox{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
+\mbox{input}(N_i, C_j, \mbox{stride} \times l + m)
 $$</p>
     </div>
 
@@ -272,7 +257,7 @@ an <code>int</code> or a one-element tuple.</p>
 
 <p>$$
   L_{out} = \left\lfloor \frac{L_{in} +
-      2 \times \text{padding} - \text{kernel\_size}}{\text{stride}} + 1\right\rfloor
+      2 \times \mbox{padding} - \mbox{kernel\_size}}{\mbox{stride}} + 1\right\rfloor
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

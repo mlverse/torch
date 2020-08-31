@@ -46,12 +46,10 @@ planes. — nn_avg_pool3d" />
 output \((N, C, D_{out}, H_{out}, W_{out})\) and kernel_size \((kD, kH, kW)\)
 can be precisely described as:
 $$
-  \begin{aligned}
-\text{out}(N_i, C_j, d, h, w) ={} &amp;amp; \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
-&amp;amp; \frac{\text{input}(N_i, C_j, \text{stride}[0] \times d + k,
-                     \text{stride}[1] \times h + m, \text{stride}[2] \times w + n)}
-{kD \times kH \times kW}
-\end{aligned}
+\begin{array}{ll}
+\mbox{out}(N_i, C_j, d, h, w) = &amp;amp; \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
+&amp;amp; \frac{\mbox{input}(N_i, C_j, \mbox{stride}[0] \times d + k, \mbox{stride}[1] \times h + m, \mbox{stride}[2] \times w + n)}{kD \times kH \times kW}
+\end{array}
 $$" />
 
 
@@ -84,7 +82,7 @@ $$" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.2.9000</span>
       </span>
     </div>
 
@@ -167,27 +165,12 @@ $$" />
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Examples
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Vision</li>
-    <li>
-      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
-    </li>
-    <li>
-      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
-    </li>
-    <li>
-      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
-    </li>
-  </ul>
-</li>
+<li class="dropdown-header">Examples</li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -221,12 +204,10 @@ planes.</h1>
 output \((N, C, D_{out}, H_{out}, W_{out})\) and <code>kernel_size</code> \((kD, kH, kW)\)
 can be precisely described as:</p>
 <p>$$
-  \begin{aligned}
-\text{out}(N_i, C_j, d, h, w) ={} &amp; \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
-&amp; \frac{\text{input}(N_i, C_j, \text{stride}[0] \times d + k,
-                     \text{stride}[1] \times h + m, \text{stride}[2] \times w + n)}
-{kD \times kH \times kW}
-\end{aligned}
+\begin{array}{ll}
+\mbox{out}(N_i, C_j, d, h, w) = &amp; \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
+&amp; \frac{\mbox{input}(N_i, C_j, \mbox{stride}[0] \times d + k, \mbox{stride}[1] \times h + m, \mbox{stride}[2] \times w + n)}{kD \times kH \times kW}
+\end{array}
 $$</p>
     </div>
 
@@ -288,16 +269,16 @@ the second <code>int</code> for the height dimension and the third <code>int</co
 </ul>
 
 <p>$$
-  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] -
-      \text{kernel\_size}[0]}{\text{stride}[0]} + 1\right\rfloor
+  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \mbox{padding}[0] -
+      \mbox{kernel\_size}[0]}{\mbox{stride}[0]} + 1\right\rfloor
 $$
 $$
-  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] -
-      \text{kernel\_size}[1]}{\text{stride}[1]} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \mbox{padding}[1] -
+      \mbox{kernel\_size}[1]}{\mbox{stride}[1]} + 1\right\rfloor
 $$
 $$
-  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] -
-      \text{kernel\_size}[2]}{\text{stride}[2]} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \mbox{padding}[2] -
+      \mbox{kernel\_size}[2]}{\mbox{stride}[2]} + 1\right\rfloor
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

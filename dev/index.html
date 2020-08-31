@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.2.9000</span>
       </span>
     </div>
 
@@ -118,27 +118,12 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Examples
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Vision</li>
-    <li>
-      <a href="articles/examples/mnist-mlp.html">mnist-mlp</a>
-    </li>
-    <li>
-      <a href="articles/examples/mnist-cnn.html">mnist-cnn</a>
-    </li>
-    <li>
-      <a href="articles/examples/mnist-dcgan.html">mnist-dcgan</a>
-    </li>
-  </ul>
-</li>
+<li class="dropdown-header">Examples</li>
 <li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -162,7 +147,7 @@
   <div class="contents col-md-9">
 <div id="torch-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#torch-" class="anchor"></a>torch <a href="https://mlverse.github.io/torch"><img src="reference/figures/torch.png" align="right" height="139"></a>
+<a href="#torch-" class="anchor"></a>torch <a href="https://torch.mlverse.org"><img src="reference/figures/torch.png" align="right" height="139"></a>
 </h1></div>
 
 <div id="installation" class="section level2">
@@ -182,12 +167,12 @@
 <span id="cb2-4"><a href="#cb2-4"></a>y</span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; torch_tensor </span></span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; (1,.,.) = </span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;   0.8270  0.1017</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   0.1992  0.7632</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;   0.5406  0.8648</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   0.3097  0.9715</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; </span></span>
 <span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; (2,.,.) = </span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt;   0.2694  0.9735</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;   0.1965  0.7447</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt;   0.1309  0.8992</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;   0.4849  0.1902</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; [ CPUDoubleType{2,2,2} ]</span></span>
 <span id="cb2-14"><a href="#cb2-14"></a><span class="kw">identical</span>(x, <span class="kw">as_array</span>(y))</span>
 <span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
@@ -242,13 +227,13 @@
 <span id="cb4-22"><a href="#cb4-22"></a><span class="kw">print</span>(w)</span>
 <span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; torch_tensor </span></span>
 <span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; 1e-09 *</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt;  7.8984</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt;   8.7077</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt;  5.2672</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt;  -6.7969</span></span>
 <span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt; [ CPUFloatType{2,1} ]</span></span>
 <span id="cb4-28"><a href="#cb4-28"></a><span class="kw">print</span>(b) </span>
 <span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; torch_tensor </span></span>
 <span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt; 0.01 *</span></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt;  9.9867</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt; -9.6802</span></span>
 <span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt; [ CPUFloatType{1} ]</span></span></code></pre></div>
 </div>
 </div>

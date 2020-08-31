@@ -75,7 +75,7 @@ in which all non-maximal values are set to zero." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.2.9000</span>
       </span>
     </div>
 
@@ -158,27 +158,12 @@ in which all non-maximal values are set to zero." />
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Examples
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Vision</li>
-    <li>
-      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
-    </li>
-    <li>
-      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
-    </li>
-    <li>
-      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
-    </li>
-  </ul>
-</li>
+<li class="dropdown-header">Examples</li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -258,7 +243,7 @@ See the Inputs and Example below.</p>
 <li><p>Input: \((N, C, H_{in})\)</p></li>
 <li><p>Output: \((N, C, H_{out})\), where
 $$
-  H_{out} = (H_{in} - 1) \times \text{stride}[0] - 2 \times \text{padding}[0] + \text{kernel\_size}[0]
+  H_{out} = (H_{in} - 1) \times \mbox{stride}[0] - 2 \times \mbox{padding}[0] + \mbox{kernel\_size}[0]
 $$
 or as given by <code>output_size</code> in the call operator</p></li>
 </ul>

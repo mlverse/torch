@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Addmm — torch_addmm • torch</title>
+<title>Changelog • torch</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,7 @@
 
 
 
-<meta property="og:title" content="Addmm — torch_addmm" />
-<meta property="og:description" content="Addmm" />
+<meta property="og:title" content="Changelog" />
 
 
 <meta name="robots" content="noindex">
@@ -59,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -183,78 +182,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Addmm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
-    <div class="hidden name"><code>torch_addmm.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/mlverse/torch/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Addmm</p>
-    </div>
-
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>input</th>
-      <td><p>(Tensor) matrix to be added</p></td>
-    </tr>
-    <tr>
-      <th>mat1</th>
-      <td><p>(Tensor) the first matrix to be multiplied</p></td>
-    </tr>
-    <tr>
-      <th>mat2</th>
-      <td><p>(Tensor) the second matrix to be multiplied</p></td>
-    </tr>
-    <tr>
-      <th>beta</th>
-      <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>(Number, optional) multiplier for \(mat1 @ mat2\) (\(\alpha\))</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="addmm-input-mat-mat-beta-alpha-out-none-gt-tensor-"><a class="anchor" href="#addmm-input-mat-mat-beta-alpha-out-none-gt-tensor-"></a>addmm(input, mat1, mat2, *, beta=1, alpha=1, out=None) -&gt; Tensor </h2>
-
-    
-
-
-<p>Performs a matrix multiplication of the matrices <code>mat1</code> and <code>mat2</code>.
-The matrix <code>input</code> is added to the final result.</p>
-<p>If <code>mat1</code> is a \((n \times m)\) tensor, <code>mat2</code> is a
-\((m \times p)\) tensor, then <code>input</code> must be
-broadcastable  with a \((n \times p)\) tensor
-and <code>out</code> will be a \((n \times p)\) tensor.</p>
-<p><code>alpha</code> and <code>beta</code> are scaling factors on matrix-vector product between
-<code>mat1</code> and <code>mat2</code> and the added matrix <code>input</code> respectively.</p>
-<p>$$
-    \mbox{out} = \beta\ \mbox{input} + \alpha\ (\mbox{mat1}_i \mathbin{@} \mbox{mat2}_i)
-$$
-For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, arguments <code>beta</code> and
-<code>alpha</code> must be real numbers, otherwise they should be integers.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-
-<span class='no'>M</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='no'>mat1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='no'>mat2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='fu'>torch_addmm</span>(<span class='no'>M</span>, <span class='no'>mat1</span>, <span class='no'>mat2</span>)
-}</div></pre>
+    <div id="torch-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#torch-development-version" class="anchor"></a>torch (development version)<small> Unreleased </small>
+</h1>
+</div>
+    <div id="torch-002" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.2">
+<a href="#torch-002" class="anchor"></a>torch 0.0.2<small> 2020-08-31 </small>
+</h1>
+<ul>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li>Auto install when loading the package for the first time.</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 

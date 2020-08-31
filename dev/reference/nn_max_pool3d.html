@@ -76,7 +76,7 @@ can be precisely described as:" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.2.9000</span>
       </span>
     </div>
 
@@ -159,27 +159,12 @@ can be precisely described as:" />
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Examples
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Vision</li>
-    <li>
-      <a href="../articles/examples/mnist-mlp.html">mnist-mlp</a>
-    </li>
-    <li>
-      <a href="../articles/examples/mnist-cnn.html">mnist-cnn</a>
-    </li>
-    <li>
-      <a href="../articles/examples/mnist-dcgan.html">mnist-dcgan</a>
-    </li>
-  </ul>
-</li>
+<li class="dropdown-header">Examples</li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -256,11 +241,10 @@ Useful for <code>torch_nn.MaxUnpool3d</code> later</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>$$
-  \begin{aligned}
-\text{out}(N_i, C_j, d, h, w) ={} &amp; \max_{k=0, \ldots, kD-1} \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
-&amp; \text{input}(N_i, C_j, \text{stride[0]} \times d + k,
-               \text{stride[1]} \times h + m, \text{stride[2]} \times w + n)
-\end{aligned}
+\begin{array}{ll}
+\mbox{out}(N_i, C_j, d, h, w) = &amp; \max_{k=0, \ldots, kD-1} \max_{m=0, \ldots, kH-1} \max_{n=0, \ldots, kW-1} \\
+ &amp; \mbox{input}(N_i, C_j, \mbox{stride[0]} \times d + k, \mbox{stride[1]} \times h + m, \mbox{stride[2]} \times w + n)
+\end{array}
 $$</p>
 <p>If <code>padding</code> is non-zero, then the input is implicitly zero-padded on both sides
 for <code>padding</code> number of points. <code>dilation</code> controls the spacing between the kernel points.
@@ -279,18 +263,18 @@ the second <code>int</code> for the height dimension and the third <code>int</co
 <li><p>Input: \((N, C, D_{in}, H_{in}, W_{in})\)</p></li>
 <li><p>Output: \((N, C, D_{out}, H_{out}, W_{out})\), where
 $$
-  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \text{padding}[0] - \text{dilation}[0] \times
-    (\text{kernel\_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+  D_{out} = \left\lfloor\frac{D_{in} + 2 \times \mbox{padding}[0] - \mbox{dilation}[0] \times
+    (\mbox{kernel\_size}[0] - 1) - 1}{\mbox{stride}[0]} + 1\right\rfloor
 $$</p></li>
 </ul>
 
 <p>$$
-  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \text{padding}[1] - \text{dilation}[1] \times
-    (\text{kernel\_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+  H_{out} = \left\lfloor\frac{H_{in} + 2 \times \mbox{padding}[1] - \mbox{dilation}[1] \times
+    (\mbox{kernel\_size}[1] - 1) - 1}{\mbox{stride}[1]} + 1\right\rfloor
 $$</p>
 <p>$$
-  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \text{padding}[2] - \text{dilation}[2] \times
-    (\text{kernel\_size}[2] - 1) - 1}{\text{stride}[2]} + 1\right\rfloor
+  W_{out} = \left\lfloor\frac{W_{in} + 2 \times \mbox{padding}[2] - \mbox{dilation}[2] \times
+    (\mbox{kernel\_size}[2] - 1) - 1}{\mbox{stride}[2]} + 1\right\rfloor
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
