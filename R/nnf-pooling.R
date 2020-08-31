@@ -375,7 +375,7 @@ nnf_fractional_max_pool2d <- function(input, kernel_size, output_size=NULL,
   
   if (is.null(random_samples)) {
     random_samples <- torch_rand(input$size(1), input$size(2), 2, 
-                                 dtype = input$dtype(), device = input$device())
+                                 dtype = input$dtype, device = input$device)
   }
   
   res <- torch_fractional_max_pool2d(self = input, kernel_size = kernel_size, 
@@ -428,8 +428,8 @@ nnf_fractional_max_pool3d <- function(input, kernel_size, output_size = NULL, ou
   }
   
   if (is.null(random_samples)) {
-    random_samples <- torch_rand(input$size(1), input$size(2), 3, dtype = input$dtype(), 
-                                 device = input$device())
+    random_samples <- torch_rand(input$size(1), input$size(2), 3, dtype = input$dtype, 
+                                 device = input$device)
   }
   
   res <- torch_fractional_max_pool3d(

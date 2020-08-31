@@ -28,7 +28,7 @@ as_1_based_tensor <- function(x) {
       runtime_error("Indices/Index start at 1 and got a 0.")  
   }
   
-  x - (x > 0)$to(dtype = x$dtype())
+  x - (x > 0)$to(dtype = x$dtype)
 }
 
 argument_to_torch_type <- function(obj, expected_types, arg_name) {

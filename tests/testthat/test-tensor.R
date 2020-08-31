@@ -11,12 +11,12 @@ test_that("Can create a tensor", {
   expect_equal(dim(x), 0)
   
   x <- torch_tensor(1)
-  expect_true(x$dtype() == torch_float32())
+  expect_true(x$dtype == torch_float32())
   
   x <- torch_tensor(1, dtype = torch_double())
-  expect_true(x$dtype() == torch_double())
+  expect_true(x$dtype == torch_double())
   
-  device <- x$device()
+  device <- x$device
   expect_equal(device$type, "cpu")
 })
 
@@ -104,7 +104,7 @@ test_that("Pass only device argument to `to`", {
   
   y <- torch_tensor(1, dtype = torch_long())
   k <- x$to(other = y)
-  expect_true(k$dtype() == torch_long())
+  expect_true(k$dtype == torch_long())
 })
 
 test_that("cuda and cpu methods", {
@@ -113,15 +113,15 @@ test_that("cuda and cpu methods", {
   x <- torch_tensor(1)
   y <- x$cuda()
   
-  expect_true(y$device()$type == "cuda")
+  expect_true(y$device$type == "cuda")
   
   # calling twice dont error
   y$cuda()
-  expect_true(y$device()$type == "cuda")
+  expect_true(y$device$type == "cuda")
   
   k <- y$cpu()
   
-  expect_true(k$device()$type == "cpu")
+  expect_true(k$device$type == "cpu")
   
 })
 
@@ -138,5 +138,22 @@ test_that("is_contiguous", {
   expect_true(x$is_contiguous())
   x$t_()
   expect_true(!x$is_contiguous())
+  
+})
+
+test_that("is_cuda", {
+  x <- torch_randn(10, 10)
+  expect_true(!x$is_cuda)
+  
+  skip_if_cuda_not_available()
+  
+  x <- torch_randn(10, 10, device = torch_device("cuda"))
+  expect_true(X$is_cuda)
+})
+
+test_that("ndim", {
+  
+  x <- torch_randn(10, 10)
+  expect_equal(x$ndim, 2)
   
 })

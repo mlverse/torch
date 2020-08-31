@@ -117,8 +117,8 @@ test_that("to", {
   net <- nn_linear(10, 10)
   net$to(dtype = torch_double())
   
-  expect_true(net$weight$dtype() == torch_double())
-  expect_true(net$bias$dtype() == torch_double())
+  expect_true(net$weight$dtype == torch_double())
+  expect_true(net$bias$dtype == torch_double())
   
   
   Net <- nn_module(
@@ -140,20 +140,20 @@ test_that("to", {
   
   net$to(dtype = torch_double())
   
-  expect_true(net$linear$weight$dtype() == torch_double())
-  expect_true(net$linear$bias$dtype() == torch_double())
-  expect_true(net$norm$running_mean$dtype() == torch_double())
-  expect_true(net$norm$running_var$dtype() == torch_double())
-  expect_true(net$linear$weight$grad$dtype() == torch_double())
+  expect_true(net$linear$weight$dtype == torch_double())
+  expect_true(net$linear$bias$dtype == torch_double())
+  expect_true(net$norm$running_mean$dtype == torch_double())
+  expect_true(net$norm$running_var$dtype == torch_double())
+  expect_true(net$linear$weight$grad$dtype == torch_double())
   
   skip_if_cuda_not_available()
   net$cuda()
-  expect_equal(net$linear$weight$device()$type, "cuda")
-  expect_equal(net$linear$bias$device()$type, "cuda")
+  expect_equal(net$linear$weight$device$type, "cuda")
+  expect_equal(net$linear$bias$device$type, "cuda")
   
   net$cpu()
-  expect_equal(net$linear$weight$device()$type, "cpu")
-  expect_equal(net$linear$bias$device()$type,"cpu")
+  expect_equal(net$linear$weight$device$type, "cpu")
+  expect_equal(net$linear$bias$device$type,"cpu")
   
 })
 

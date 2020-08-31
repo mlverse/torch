@@ -45,12 +45,6 @@ Tensor <- R7Class(
       cpp_torch_tensor_print(self$ptr)
       invisible(self)
     },
-    dtype = function() {
-      torch_dtype$new(ptr = cpp_torch_tensor_dtype(self$ptr))
-    },
-    device = function() {
-      Device$new(ptr = cpp_tensor_device(self$ptr))
-    },
     dim = function() {
       length(self$size())
     },
@@ -81,7 +75,7 @@ Tensor <- R7Class(
       args$memory_format <- memory_format
       
       if (is.null(args$dtype) && is.null(args$other))
-        args$dtype <- self$dtype()
+        args$dtype <- self$dtype
       
       do.call(private$`_to`, args)
     },
@@ -120,6 +114,18 @@ Tensor <- R7Class(
   active = list(
     shape = function() {
       self$size()
+    },
+    dtype = function() {
+      torch_dtype$new(ptr = cpp_torch_tensor_dtype(self$ptr))
+    },
+    device = function() {
+      Device$new(ptr = cpp_tensor_device(self$ptr))
+    },
+    is_cuda = function() {
+      self$device$type == "cuda"
+    },
+    ndim = function() {
+      self$dim()
     }
   )
 )
@@ -167,7 +173,7 @@ as_array_impl <- function(x) {
     out <- aperm(array(a$vec, dim = rev(a$dim)), seq(length(a$dim), 1))
   }
   
-  if (x$dtype() == torch_long() && !inherits(out, "integer64"))
+  if (x$dtype == torch_long() && !inherits(out, "integer64"))
     class(out) <- c(class(out), "integer64")
   
   out
@@ -176,7 +182,7 @@ as_array_impl <- function(x) {
 #' @export
 as_array.torch_tensor <- function(x) {
   
-  if (x$device()$type == "cuda")
+  if (x$device$type == "cuda")
     runtime_error("Can't convert cuda tensor to R. Convert to cpu tensor before.")
   
   # dequantize before converting
@@ -184,7 +190,7 @@ as_array.torch_tensor <- function(x) {
     x <- x$dequantize()
   
   # auto convert to int32 if long.
-  if (x$dtype() == torch_long())
+  if (x$dtype == torch_long())
     x <- x$to(dtype = torch_int32())
   
   out <- as_array_impl(x)
