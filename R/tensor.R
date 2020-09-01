@@ -202,6 +202,11 @@ is_torch_tensor <- function(x) {
   inherits(x, "torch_tensor")
 }
 
+#' Checks if a tensor is undefined
+#'
+#' @param x tensor to check
+#'
+#' @export
 is_undefined_tensor <- function(x) {
   cpp_tensor_is_undefined(x$ptr)
 }
