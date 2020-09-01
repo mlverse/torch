@@ -257,7 +257,22 @@ shape of <code>input</code>.</p>
 <span class='no'>x</span>
 <span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_fft.html'>torch_fft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>)
 <span class='fu'>torch_ifft</span>(<span class='no'>y</span>, <span class='fl'>2</span>)  <span class='co'># recover x</span>
-}</div></pre>
+}</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;   0.9331  0.5891
+#&gt;   0.6086 -1.6698
+#&gt;  -1.2684  1.0240
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;  -0.8979 -0.7811
+#&gt;  -1.1726 -0.7401
+#&gt;   0.1478  0.9583
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;   1.6601  1.2058
+#&gt;  -1.7745 -0.0707
+#&gt;   0.3211 -0.4748
+#&gt; [ CPUFloatType{3,3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

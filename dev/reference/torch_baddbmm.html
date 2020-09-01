@@ -251,7 +251,57 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class='no'>batch1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>batch2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_baddbmm</span>(<span class='no'>M</span>, <span class='no'>batch1</span>, <span class='no'>batch2</span>)
-}</div></pre>
+}</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;   0.4936  5.7331  0.2792  0.2996  1.7529
+#&gt;  -2.1640 -2.8366 -1.5866  1.6360 -0.5766
+#&gt;  -0.9277 -0.6397  0.6144  0.1375  1.3980
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;  -0.6549 -0.9158 -0.2428 -0.6863  2.5032
+#&gt;   0.4931 -1.9276 -0.8737  1.3213 -1.8617
+#&gt;  -2.0386 -4.7900  1.6636  4.1649 -3.6708
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;  -0.6159  1.6466  2.1632  2.9452  1.5656
+#&gt;   0.6057 -1.5575  0.2876  0.1318 -1.4846
+#&gt;   1.6587  0.2937 -3.1471  1.4667  2.8727
+#&gt; 
+#&gt; (4,.,.) = 
+#&gt;  -2.7359 -1.0347  1.8548 -0.6919 -2.6480
+#&gt;   0.2042  3.0603 -2.4980 -2.5055 -0.0954
+#&gt;  -1.7278 -4.5374 -0.0072  0.8098 -0.6080
+#&gt; 
+#&gt; (5,.,.) = 
+#&gt;  -3.9531  0.2953 -3.5704  3.0607 -1.0993
+#&gt;  -1.5523 -2.9456  1.4905  2.3900 -2.0959
+#&gt;  -0.0887  0.9870  1.8140 -0.2470 -0.4289
+#&gt; 
+#&gt; (6,.,.) = 
+#&gt;   6.0397 -3.0257  2.8960  1.2332  4.1310
+#&gt;   0.5139  0.3988  2.8631 -1.5738  0.7079
+#&gt;  -3.3883  2.1424  0.0888 -0.0421 -2.5786
+#&gt; 
+#&gt; (7,.,.) = 
+#&gt;   1.1566  1.8208 -2.4772 -2.4829  1.5032
+#&gt;   1.2878 -2.1598 -0.2827 -1.6662 -1.7843
+#&gt;   0.3906 -0.3488 -1.9173 -2.1121  0.0807
+#&gt; 
+#&gt; (8,.,.) = 
+#&gt;   3.3461 -0.0969  1.8230  0.9376 -0.0816
+#&gt;  -6.3525 -3.1190 -5.8405  3.1255 -3.6314
+#&gt;  -3.0273 -0.7662 -2.3617  1.6616  0.4746
+#&gt; 
+#&gt; (9,.,.) = 
+#&gt;  -5.5424  3.2792  3.7693 -1.3173 -0.5206
+#&gt;   2.4894 -3.9377 -4.9396  2.0646  1.6545
+#&gt;   2.6506 -5.2284  0.3212  3.8270 -1.0334
+#&gt; 
+#&gt; (10,.,.) = 
+#&gt;  -2.0278  3.8657  0.7672 -0.1427  0.1048
+#&gt;   2.4105 -1.9900  0.3204  0.7434 -1.9972
+#&gt;  -3.3675  2.0450  0.3392 -0.4370  3.2115
+#&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

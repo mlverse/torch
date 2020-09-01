@@ -216,7 +216,10 @@
 <span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>)$<span class='fu'>view</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>))
 <span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_broadcast_tensors</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>x</span>, <span class='no'>y</span>))
 <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
-}</div></pre>
+}</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0  1  2
+#&gt;  0  1  2
+#&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

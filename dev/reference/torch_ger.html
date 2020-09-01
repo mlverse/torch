@@ -228,7 +228,12 @@ size \(m\), then <code>out</code> must be a matrix of size \((n \times m)\).</p>
 <span class='no'>v1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
 <span class='no'>v2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>4.</span>)
 <span class='fu'>torch_ger</span>(<span class='no'>v1</span>, <span class='no'>v2</span>)
-}</div></pre>
+}</div><div class='output co'>#&gt; torch_tensor 
+#&gt;   1   2   3
+#&gt;   2   4   6
+#&gt;   3   6   9
+#&gt;   4   8  12
+#&gt; [ CPUFloatType{4,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

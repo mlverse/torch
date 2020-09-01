@@ -265,7 +265,57 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 <span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
 <span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
-}</div></pre>
+}</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;  -0.7699  0.6280  0.6858  0.1436  0.1553
+#&gt;  -1.4957  1.0994 -0.3625 -1.1187  2.1342
+#&gt;  -1.5247  1.6681  1.4816 -0.6689  4.6678
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;  -0.5949  0.2808  0.4002 -0.1900  1.4406
+#&gt;   0.6694 -0.0497  0.0597  0.6980 -2.7762
+#&gt;   1.4086 -0.9624 -1.1486  0.1811 -2.3332
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;  -1.2169  0.0611 -0.9144 -1.1126  1.9634
+#&gt;  -3.8656  2.0717 -1.7679 -2.5491  2.4366
+#&gt;  -3.2681  2.0747 -1.3631 -1.7828  0.2492
+#&gt; 
+#&gt; (4,.,.) = 
+#&gt;  -0.9335  2.9422  3.1290  0.3028  3.5022
+#&gt;   0.4765 -0.3376  0.2368  0.6385 -1.6853
+#&gt;  -1.2463  0.0426 -1.8895 -1.3327  0.1495
+#&gt; 
+#&gt; (5,.,.) = 
+#&gt;   1.6867  0.0672  0.9235  0.5734  0.6898
+#&gt;   0.3497 -0.3152 -0.1233  0.8205 -3.7042
+#&gt;  -3.0613  1.0855 -1.5805 -2.0781  2.4053
+#&gt; 
+#&gt; (6,.,.) = 
+#&gt;   1.9247 -1.2037  0.2734  1.4132 -3.4648
+#&gt;   1.3064  0.0784  3.0686  1.0953  4.3295
+#&gt;   3.8619 -2.1719 -0.9861  1.3845 -4.8677
+#&gt; 
+#&gt; (7,.,.) = 
+#&gt;   2.4832 -2.0033 -0.6130  1.4391 -4.8961
+#&gt;  -1.1401  1.6919  2.0599  0.5386  0.7592
+#&gt;   0.5927 -1.0640 -0.6244  0.7034 -3.5316
+#&gt; 
+#&gt; (8,.,.) = 
+#&gt;   2.6919 -1.2762  0.4120  1.0797 -1.0095
+#&gt;  -4.8550  2.4958 -1.5283 -2.8167  3.4025
+#&gt;  -3.2323  2.2523 -0.1204 -1.2336  1.0765
+#&gt; 
+#&gt; (9,.,.) = 
+#&gt;   3.6751 -1.0975  0.9560  1.5345 -1.3478
+#&gt;   1.1335 -0.0151  0.7891 -0.3179  4.3954
+#&gt;  -5.1619  2.3411 -0.9196 -2.8655  5.4871
+#&gt; 
+#&gt; (10,.,.) = 
+#&gt;   0.2443  0.3175 -0.2897  0.3713 -2.9255
+#&gt;  -3.3559  2.2517  0.1637 -1.9289  5.1754
+#&gt;   0.3493 -0.8613 -1.8537 -0.4759 -1.9056
+#&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

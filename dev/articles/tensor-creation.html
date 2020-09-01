@@ -161,17 +161,41 @@
 <p>You can create tensors from R objects using the <code>torch_tensor</code> function. The <code>torch_tensor</code> function takes an R vector, matrix or array and creates an equivalent <code>torch_tensor</code>.</p>
 <p>You can see a few examples below:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>))
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  1</span>
+<span class="co">#&gt;  2</span>
+<span class="co">#&gt;  3</span>
+<span class="co">#&gt; [ CPUFloatType{3} ]</span>
 
 <span class="co"># conform to row-major indexing used in torch</span>
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fl">1</span>:<span class="fl">10</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">byrow</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
-<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">12</span>), <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>)))</pre></body></html></div>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;   1   2   3   4   5</span>
+<span class="co">#&gt;   6   7   8   9  10</span>
+<span class="co">#&gt; [ CPULongType{2,5} ]</span>
+<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">12</span>), <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>)))
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; (1,.,.) = </span>
+<span class="co">#&gt;   0.1801  0.0736  0.6987</span>
+<span class="co">#&gt;   0.7582  0.5323  0.0939</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; (2,.,.) = </span>
+<span class="co">#&gt;   0.6326  0.8620  0.9756</span>
+<span class="co">#&gt;   0.5310  0.4343  0.2143</span>
+<span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></pre></body></html></div>
 <p>By default, we will create tensors in the <code>cpu</code> device, converting their R datatype to the corresponding torch <code>dtype</code>.</p>
 <blockquote>
 <p><strong>Note</strong> currently, only numeric and boolean types are supported.</p>
 </blockquote>
 <p>You can always modify <code>dtype</code> and <code>device</code> when converting an R object to a torch tensor. For example:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">1</span>, <span class="kw">dtype</span> <span class="kw">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span>())
-<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">1</span>, <span class="kw">device</span> <span class="kw">=</span> <span class="st">"cpu"</span>, <span class="kw">dtype</span> <span class="kw">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_float64</a></span>())</pre></body></html></div>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  1</span>
+<span class="co">#&gt; [ CPULongType{1} ]</span>
+<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">1</span>, <span class="kw">device</span> <span class="kw">=</span> <span class="st">"cpu"</span>, <span class="kw">dtype</span> <span class="kw">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_float64</a></span>())
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  1</span>
+<span class="co">#&gt; [ CPUDoubleType{1} ]</span></pre></body></html></div>
 <p>Other options available when creating a tensor are:</p>
 <ul>
 <li>
@@ -187,10 +211,21 @@
 <p>You can also use the <code>torch_*</code> functions listed below to create torch tensors using some algorithm.</p>
 <p>For example, the <code>torch_randn</code> function will create tensors using the normal distribution with mean 0 and standard deviation 1. You can use the <code>...</code> argument to pass the size of the dimensions. For example, the code below will create a normally distributed tensor with shape 5x3.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">5</span>, <span class="fl">3</span>)
-<span class="no">x</span></pre></body></html></div>
+<span class="no">x</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; -1.8786 -1.3763  1.4193</span>
+<span class="co">#&gt;  1.5578 -1.9810  0.2619</span>
+<span class="co">#&gt; -0.7286 -0.7204  1.3131</span>
+<span class="co">#&gt;  0.9968  0.9606 -0.8168</span>
+<span class="co">#&gt; -0.8481 -2.5408  0.1228</span>
+<span class="co">#&gt; [ CPUFloatType{5,3} ]</span></pre></body></html></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor filled with ones.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span>(<span class="fl">2</span>, <span class="fl">4</span>, <span class="kw">dtype</span> <span class="kw">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_int64</a></span>(), <span class="kw">device</span> <span class="kw">=</span> <span class="st">"cpu"</span>)
-<span class="no">x</span></pre></body></html></div>
+<span class="no">x</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  1  1  1  1</span>
+<span class="co">#&gt;  1  1  1  1</span>
+<span class="co">#&gt; [ CPULongType{2,4} ]</span></pre></body></html></div>
 <p>Here is the full list of functions that can be used to bulk-create tensors in torch:</p>
 <ul>
 <li>
@@ -226,7 +261,13 @@
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">1</span>)
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="no">x</span>$<span class="fu">to</span>(<span class="kw">dtype</span> <span class="kw">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_int32</a></span>())
 <span class="no">x</span>
-<span class="no">y</span></pre></body></html></div>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  1</span>
+<span class="co">#&gt; [ CPUFloatType{1} ]</span>
+<span class="no">y</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  1</span>
+<span class="co">#&gt; [ CPUIntType{1} ]</span></pre></body></html></div>
 <p>You can also copy a tensor to the GPU using:</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r">x &lt;- torch_tensor(1)
 y &lt;- x$cuda())</pre></body></html></div>

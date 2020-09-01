@@ -263,7 +263,42 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
 <span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)
 <span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-}</div></pre>
+}</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;  -2.6469  0.0000
+#&gt;  -11.1093  0.3536
+#&gt;   1.8056 -4.3933
+#&gt;   1.8056  4.3933
+#&gt;  -11.1093 -0.3536
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;  -3.5969  2.8082
+#&gt;  -2.0295 -1.4774
+#&gt;   0.8877  3.3879
+#&gt;  -2.0009 -2.4438
+#&gt;   8.4841  1.0627
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;   2.8664 -6.4610
+#&gt;  -0.3128 -1.9888
+#&gt;  -4.7966 -8.1040
+#&gt;   3.6388  1.7205
+#&gt;   5.7337  3.8018
+#&gt; 
+#&gt; (4,.,.) = 
+#&gt;   2.8664  6.4610
+#&gt;   5.7337 -3.8018
+#&gt;   3.6388 -1.7205
+#&gt;  -4.7966  8.1040
+#&gt;  -0.3128  1.9888
+#&gt; 
+#&gt; (5,.,.) = 
+#&gt;  -3.5969 -2.8082
+#&gt;   8.4841 -1.0627
+#&gt;  -2.0009  2.4438
+#&gt;   0.8877 -3.3879
+#&gt;  -2.0295  1.4774
+#&gt; [ CPUFloatType{5,5,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

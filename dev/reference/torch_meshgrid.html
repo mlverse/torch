@@ -222,7 +222,20 @@ expanding the \(i\) <code>th</code> input over dimensions defined by other input
 <span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>))
 <span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_meshgrid</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>x</span>, <span class='no'>y</span>))
 <span class='no'>out</span>
-}</div></pre>
+}</div><div class='output co'>#&gt; [[1]]
+#&gt; torch_tensor 
+#&gt;  1  1  1
+#&gt;  2  2  2
+#&gt;  3  3  3
+#&gt; [ CPUFloatType{3,3} ]
+#&gt; 
+#&gt; [[2]]
+#&gt; torch_tensor 
+#&gt;  4  5  6
+#&gt;  4  5  6
+#&gt;  4  5  6
+#&gt; [ CPUFloatType{3,3} ]
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

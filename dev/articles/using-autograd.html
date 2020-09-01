@@ -165,11 +165,16 @@
 <p>To be clear, this is a tensor <em>with respect to which</em> gradients have to be calculated – normally, a tensor representing a weight or a bias, not the input data <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. If we now perform some operation on that tensor, assigning the result to <code>y</code></p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">y</span> <span class="kw">&lt;-</span> <span class="no">x</span>$<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>()</pre></body></html></div>
 <p>we find that <code>y</code> now has a non-empty <code>grad_fn</code> that tells torch how to compute the gradient of <code>y</code> with respect to <code>x</code>:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">y</span>$<span class="no">grad_fn</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">y</span>$<span class="no">grad_fn</span>
+<span class="co">#&gt; MeanBackward0</span></pre></body></html></div>
 <p>Actual computation of gradients is triggered by calling <code>backward()</code> on the output tensor.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">y</span>$<span class="fu">backward</span>()</pre></body></html></div>
 <p>That executed, <code>x</code> now has a non-empty field <code>grad</code> that stores the gradient of <code>y</code> with respect to <code>x</code>:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">x</span>$<span class="no">grad</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">x</span>$<span class="no">grad</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  0.2500  0.2500</span>
+<span class="co">#&gt;  0.2500  0.2500</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></body></html></div>
 <p>With a longer chain of computations, we can peek at how torch builds up a graph of backward operations.</p>
 <p>Here is a slightly more complex example. We call <code>retain_grad()</code> on <code>y</code> and <code>z</code> just for demonstration purposes; by default, intermediate gradients – while of course they have to be computed – aren’t stored, in order to save memory.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">x1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span>(<span class="fl">2</span>,<span class="fl">2</span>, <span class="kw">requires_grad</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
@@ -182,23 +187,51 @@
 <p>Starting from <code>out$grad_fn</code>, we can follow the graph all back to the leaf nodes:</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># how to compute the gradient for mean, the last operation executed</span>
 <span class="no">out</span>$<span class="no">grad_fn</span>
+<span class="co">#&gt; MeanBackward0</span>
 <span class="co"># how to compute the gradient for the multiplication by 3 in z = y$pow(2) * 3</span>
 <span class="no">out</span>$<span class="no">grad_fn</span>$<span class="no">next_functions</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; MulBackward1</span>
 <span class="co"># how to compute the gradient for pow in z = y.pow(2) * 3</span>
 <span class="no">out</span>$<span class="no">grad_fn</span>$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; PowBackward0</span>
 <span class="co"># how to compute the gradient for the multiplication in y = x * (x + 2)</span>
 <span class="no">out</span>$<span class="no">grad_fn</span>$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; MulBackward0</span>
 <span class="co"># how to compute the gradient for the two branches of y = x * (x + 2),</span>
 <span class="co"># where the left branch is a leaf node (AccumulateGrad for x1)</span>
 <span class="no">out</span>$<span class="no">grad_fn</span>$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; torch::autograd::AccumulateGrad</span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; AddBackward1</span>
 <span class="co"># here we arrive at the other leaf node (AccumulateGrad for x2)</span>
-<span class="no">out</span>$<span class="no">grad_fn</span>$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">2</span>]]$<span class="no">next_functions</span></pre></body></html></div>
+<span class="no">out</span>$<span class="no">grad_fn</span>$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">2</span>]]$<span class="no">next_functions</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; torch::autograd::AccumulateGrad</span></pre></body></html></div>
 <p>After calling <code>out$backward()</code>, all tensors in the graph will have their respective gradients created. Without our calls to <code>retain_grad</code> above, <code>z$grad</code> and <code>y$grad</code> would be empty:</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">out</span>$<span class="fu">backward</span>()
 <span class="no">z</span>$<span class="no">grad</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  0.2500  0.2500</span>
+<span class="co">#&gt;  0.2500  0.2500</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="no">y</span>$<span class="no">grad</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  4.6500  4.6500</span>
+<span class="co">#&gt;  4.6500  4.6500</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="no">x2</span>$<span class="no">grad</span>
-<span class="no">x1</span>$<span class="no">grad</span></pre></body></html></div>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  18.6000</span>
+<span class="co">#&gt; [ CPUFloatType{1} ]</span>
+<span class="no">x1</span>$<span class="no">grad</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  14.4150  14.4150</span>
+<span class="co">#&gt;  14.4150  14.4150</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></body></html></div>
 <p>Thus acquainted with autograd, we’re ready to modify our example.</p>
 </div>
 <div id="the-simple-network-now-using-autograd" class="section level2">
@@ -259,7 +292,27 @@
 
     })
 
-}</pre></body></html></div>
+}
+<span class="co">#&gt; 10 20.39932 </span>
+<span class="co">#&gt; 20 19.13074 </span>
+<span class="co">#&gt; 30 17.98216 </span>
+<span class="co">#&gt; 40 16.94426 </span>
+<span class="co">#&gt; 50 16.005 </span>
+<span class="co">#&gt; 60 15.1534 </span>
+<span class="co">#&gt; 70 14.3809 </span>
+<span class="co">#&gt; 80 13.67931 </span>
+<span class="co">#&gt; 90 13.0413 </span>
+<span class="co">#&gt; 100 12.46074 </span>
+<span class="co">#&gt; 110 11.93142 </span>
+<span class="co">#&gt; 120 11.44816 </span>
+<span class="co">#&gt; 130 11.00632 </span>
+<span class="co">#&gt; 140 10.60187 </span>
+<span class="co">#&gt; 150 10.23124 </span>
+<span class="co">#&gt; 160 9.891109 </span>
+<span class="co">#&gt; 170 9.578554 </span>
+<span class="co">#&gt; 180 9.290908 </span>
+<span class="co">#&gt; 190 9.025745 </span>
+<span class="co">#&gt; 200 8.780991</span></pre></body></html></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">

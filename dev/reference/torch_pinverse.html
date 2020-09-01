@@ -237,7 +237,17 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
 <span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>6</span>,<span class='fl'>3</span>))
 <span class='no'>b</span> <span class='kw'>=</span> <span class='fu'>torch_pinverse</span>(<span class='no'>a</span>)
 <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>b</span>, <span class='no'>a</span>)
-}</div></pre>
+}</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;   1.0000e+00 -9.4995e-08  3.3528e-08
+#&gt;  -1.8440e-07  1.0000e+00 -7.9162e-09
+#&gt;  -2.2538e-07 -1.3411e-07  1.0000e+00
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;   1.0000e+00 -2.6822e-07 -6.7055e-08
+#&gt;   9.3132e-10  1.0000e+00  1.1921e-07
+#&gt;  -4.3772e-08  1.9372e-07  1.0000e+00
+#&gt; [ CPUFloatType{2,3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

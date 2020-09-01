@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Histc — torch_histc • torch</title>
+<title>Pipe operator — %&gt;% • torch</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Histc — torch_histc" />
-<meta property="og:description" content="Histc" />
+<meta property="og:title" content="Pipe operator — %&gt;%" />
+<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
 
 
 <meta name="robots" content="noindex">
@@ -183,61 +183,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Histc</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
-    <div class="hidden name"><code>torch_histc.Rd</code></div>
+    <h1>Pipe operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
+    <div class="hidden name"><code>pipe.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Histc</p>
+    <p>See <code>magrittr::%&gt;%</code> for details.</p>
     </div>
 
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>input</th>
-      <td><p>(Tensor) the input tensor.</p></td>
-    </tr>
-    <tr>
-      <th>bins</th>
-      <td><p>(int) number of histogram bins</p></td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td><p>(int) lower end of the range (inclusive)</p></td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td><p>(int) upper end of the range (inclusive)</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="histc-input-bins-min-max-out-none-gt-tensor-"><a class="anchor" href="#histc-input-bins-min-max-out-none-gt-tensor-"></a>histc(input, bins=100, min=0, max=0, out=None) -&gt; Tensor </h2>
-
-    
+    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
 
 
-<p>Computes the histogram of a tensor.</p>
-<p>The elements are sorted into equal width bins between <code>min</code> and
-<code>max</code>. If <code>min</code> and <code>max</code> are both zero, the minimum and
-maximum values of the data are used.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-
-<span class='fu'>torch_histc</span>(<span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1.</span>, <span class='fl'>2</span>, <span class='fl'>1</span>)), <span class='kw'>bins</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>min</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>3</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0
-#&gt;  2
-#&gt;  1
-#&gt;  0
-#&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

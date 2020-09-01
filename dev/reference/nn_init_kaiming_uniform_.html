@@ -234,7 +234,11 @@ or 'leaky_relu' (default).</p></td>
 <span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
 <span class='fu'>nn_init_kaiming_uniform_</span>(<span class='no'>w</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"fan_in"</span>, <span class='kw'>nonlinearity</span> <span class='kw'>=</span> <span class='st'>"leaky_relu"</span>)
 
-}</div></pre>
+}</div><div class='output co'>#&gt; torch_tensor 
+#&gt; -0.7460  0.2070 -0.1066 -0.4344 -0.4666
+#&gt; -0.5351 -0.4524  0.0950 -1.0077 -0.2169
+#&gt; -0.9525  0.8753  0.0070 -0.4553 -0.3445
+#&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
