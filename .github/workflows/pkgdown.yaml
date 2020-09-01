@@ -31,4 +31,4 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+          Rscript -e 'Sys.setenv(TORCH_TEST = 1);pkgdown::deploy_to_branch(new_process = FALSE)'
