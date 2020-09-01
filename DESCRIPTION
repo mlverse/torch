@@ -38,7 +38,8 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    glue
+    glue,
+    palmerpenguins
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
