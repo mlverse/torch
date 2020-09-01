@@ -60,9 +60,6 @@ x
 or create a tensor based on an existing tensor. These methods will reuse properties of the input tensor, e.g. dtype, unless new values are provided by user
 
 ```{r}
-x <- x$new_ones(5, 3, dtype = torch_double())   # new_* methods take in sizes
-x
-
 x <- torch_randn_like(x, dtype = torch_float()) # override dtype!
 x                                               # result has the same size
 ```
