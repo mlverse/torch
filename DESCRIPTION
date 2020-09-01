@@ -29,7 +29,8 @@ Imports:
     methods,
     utils,
     stats,
-    bit64
+    bit64,
+    magrittr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
@@ -37,7 +38,6 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    magrittr,
     glue
 VignetteBuilder: knitr
 Collate: 
@@ -115,6 +115,7 @@ Collate:
     'utils-data-enum.R'
     'utils-data-fetcher.R'
     'utils-data-sampler.R'
+    'utils-pipe.R'
     'utils.R'
     'variable_list.R'
     'with-indices.R'

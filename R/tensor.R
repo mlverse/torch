@@ -217,3 +217,15 @@ as.integer64.torch_tensor <- function(x, keep.names = FALSE, ...) {
   x <- x$to(dtype = torch_long())
   as_array_impl(x)
 }
+
+#' @export
+str.torch_tensor <- function(object, ...) {
+  dtype <- object$dtype$.type()
+  
+  dims <- dim(object)
+  dims <- paste(paste0("1:", dims), collapse = ", ")
+  
+  out <- paste0(dtype, " [", dims, "]")
+  cat(out)
+  cat("\n")
+}
