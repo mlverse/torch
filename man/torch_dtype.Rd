@@ -61,3 +61,4 @@ torch_qint32()
 \description{
 Returns the correspondent data type.
 }
+\concept{tensor-attributes}

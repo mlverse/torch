@@ -13,3 +13,4 @@ torch_finfo(dtype)
 A list that represents the numerical properties of a
 floating point torch.dtype
 }
+\concept{tensor-attributes}

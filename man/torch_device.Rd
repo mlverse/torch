@@ -35,3 +35,4 @@ torch_device("cpu", 0)
 
 }
 }
+\concept{tensor-attributtes}

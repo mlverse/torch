@@ -16,4 +16,5 @@ Loads a saved object
 Other torch_save: 
 \code{\link{torch_save}()}
 }
+\concept{serialization}
 \concept{torch_save}

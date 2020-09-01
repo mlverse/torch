@@ -12,3 +12,4 @@ is_torch_dtype(x)
 \description{
 Check if object is a torch data type
 }
+\concept{tensor-attributes}

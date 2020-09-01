@@ -19,3 +19,4 @@ torch_per_tensor_symmetric()
 \description{
 Creates the corresponding Scheme object
 }
+\concept{tensor-attributes}

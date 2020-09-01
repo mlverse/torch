@@ -13,3 +13,4 @@ torch_iinfo(dtype)
 A list that represents the numerical properties of a integer
 type.
 }
+\concept{tensor-attributes}

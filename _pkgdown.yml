@@ -56,4 +56,78 @@ navbar:
        href: articles/extending-autograd.html
   examples:
     text: Examples
-  
+    
+   
+reference:  
+  - title: Tensor creation utilities
+    contents: 
+      - torch_empty
+      - torch_arange
+      - torch_eye
+      - torch_full
+      - torch_linspace
+      - torch_logspace
+      - torch_ones
+      - torch_rand
+      - torch_randint
+      - torch_randn
+      - torch_randperm
+      - torch_zeros
+      - matches("torch_.*_like")
+      - as_array
+  - title: Tensor attributes
+    contents:
+      - has_concept("tensor-attributes")
+      - is_torch_layout
+      - is_torch_memory_format
+      - is_torch_qscheme
+      - is_undefined_tensor
+  - title: Serialization
+    contents:
+      - has_concept("serialization")
+  - title: Mathematical operations on tensors
+    contents:
+      - starts_with("torch_")
+      - -torch_empty
+      - -torch_arange
+      - -torch_eye
+      - -torch_full
+      - -torch_linspace
+      - -torch_logspace
+      - -torch_ones
+      - -torch_rand
+      - -torch_randint
+      - -torch_randn
+      - -torch_randperm
+      - -torch_zeros
+      - -matches("torch_.*_like")
+      - -has_concept("tensor-attributes")
+      - -has_concept("serialization")
+  - title: Neural network modules
+    contents:
+      - starts_with("nn_")
+  - title: Neural networks functional module
+    contents:
+      - starts_with("nnf_")
+  - title: Optimizers
+    contents:
+      - starts_with("optim_")
+  - title: Datasets
+    contents: 
+      - starts_with("dataset")
+      - starts_with("dataloader")
+      - starts_with("enumerate")
+      - tensor_dataset
+      - is_dataloader
+  - title: Autograd
+    contents:
+      - starts_with("autograd_")
+      - with_no_grad
+      - with_enable_grad
+      - AutogradContext
+  - title: Cuda utilities
+    contents:
+      - starts_with("cuda_")
+  - title: Installation
+    contents:
+      - install_torch

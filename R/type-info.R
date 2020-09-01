@@ -4,7 +4,8 @@
 #' type.
 #' 
 #' @param dtype dtype to get information from.
-#'
+#' @concept tensor-attributes
+#' 
 #' @export
 torch_iinfo <- function(dtype) {
   
@@ -44,6 +45,7 @@ torch_iinfo <- function(dtype) {
 #' floating point torch.dtype
 #' 
 #' @param dtype dtype to check information
+#' @concept tensor-attributes
 #'
 #' @export
 torch_finfo <- function(dtype) {

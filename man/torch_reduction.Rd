@@ -16,3 +16,4 @@ torch_reduction_none()
 \description{
 Creates the reduction objet
 }
+\concept{tensor-attributes}

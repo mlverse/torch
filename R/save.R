@@ -8,12 +8,14 @@
 #' @param ... not currently used.
 #'
 #' @family torch_save
+#' @concept serialization
 #'
 #' @export
 torch_save <- function(obj, path, ...) {
   UseMethod("torch_save")
 }
 
+#' @concept serialization
 #' @export
 torch_save.torch_tensor <- function(obj, path, ...) {
   values <- cpp_tensor_save(obj$ptr)
@@ -29,6 +31,7 @@ tensor_to_raw_vector <- function(x) {
   r
 }
 
+#' @concept serialization
 #' @export
 torch_save.nn_module <- function(obj, path, ...) {
  state_dict <- obj$state_dict()
@@ -43,6 +46,7 @@ torch_save.nn_module <- function(obj, path, ...) {
 #' @family torch_save
 #' 
 #' @export
+#' @concept serialization
 torch_load <- function(path) {
   r <- readRDS(path)
   if (r$type == "tensor")
@@ -81,6 +85,7 @@ torch_load_module <- function(obj) {
 #' @return a named list of tensors.
 #'
 #' @export
+#' @concept serialization
 load_state_dict <- function(path) {
   path <- normalizePath(path)
   o <- cpp_load_state_dict(path)
