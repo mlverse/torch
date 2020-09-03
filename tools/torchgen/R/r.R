@@ -81,6 +81,7 @@ r_namespace <- function(decls) {
 
   glue::glue("
 
+#' @rdname {r_namespace_name(decls)}
 {r_namespace_name(decls)} <- function({r_namespace_signature(decls)}) {{
   {r_namespace_body(decls)}
 }}
