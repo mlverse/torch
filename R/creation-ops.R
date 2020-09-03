@@ -18,6 +18,7 @@ resolve_size <- function(...) {
   size
 }
 
+#' @rdname torch_ones
 torch_ones <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
   device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -33,6 +34,7 @@ torch_ones <- function(..., names = NULL, dtype = NULL, layout = torch_strided()
   do.call(.torch_ones, args)
 }
 
+#' @rdname torch_ones_like
 torch_ones_like <- function(input, dtype = NULL, layout = torch_strided(), 
                             device=NULL, requires_grad = FALSE, 
                             memory_format = torch_preserve_format()) {
@@ -49,6 +51,7 @@ torch_ones_like <- function(input, dtype = NULL, layout = torch_strided(),
   do.call(.torch_ones_like, args)
 }
 
+#' @rdname torch_rand
 torch_rand <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
                        device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -64,6 +67,7 @@ torch_rand <- function(..., names = NULL, dtype = NULL, layout = torch_strided()
   do.call(.torch_rand, args)
 }
 
+#' @rdname torch_rand_like
 torch_rand_like <- function(input, dtype = NULL, layout = torch_strided(), 
                             device=NULL, requires_grad = FALSE, 
                             memory_format = torch_preserve_format()) {
@@ -80,6 +84,7 @@ torch_rand_like <- function(input, dtype = NULL, layout = torch_strided(),
   do.call(.torch_rand_like, args)
 }
 
+#' @rdname torch_randint
 torch_randint <- function(low, high, size, generator = NULL, dtype = NULL, layout = torch_strided(), 
                           device=NULL, requires_grad = FALSE, 
                           memory_format = torch_preserve_format()) {
@@ -100,6 +105,7 @@ torch_randint <- function(low, high, size, generator = NULL, dtype = NULL, layou
   do.call(.torch_randint, args)
 }
 
+#' @rdname torch_randint_like
 torch_randint_like <- function(input, low, high, dtype = NULL, 
                                layout = torch_strided(), 
                                device=NULL, requires_grad = FALSE) {
@@ -118,6 +124,7 @@ torch_randint_like <- function(input, low, high, dtype = NULL,
   do.call(.torch_randint_like, args)
 }
 
+#' @rdname torch_randn
 torch_randn <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
                        device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -133,6 +140,7 @@ torch_randn <- function(..., names = NULL, dtype = NULL, layout = torch_strided(
   do.call(.torch_randn, args)
 }
 
+#' @rdname torch_rand_like
 torch_randn_like <- function(input, dtype = NULL, layout = torch_strided(), 
                             device=NULL, requires_grad = FALSE, 
                             memory_format = torch_preserve_format()) {
@@ -149,6 +157,7 @@ torch_randn_like <- function(input, dtype = NULL, layout = torch_strided(),
   do.call(.torch_randn_like, args)
 }
 
+#' @rdname torch_randperm
 torch_randperm <- function(n, dtype = torch_int64(), layout = torch_strided(), 
                            device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -163,6 +172,7 @@ torch_randperm <- function(n, dtype = torch_int64(), layout = torch_strided(),
   do.call(.torch_randperm, args)
 }
 
+#' @rdname torch_zeros
 torch_zeros <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
                        device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -178,6 +188,7 @@ torch_zeros <- function(..., names = NULL, dtype = NULL, layout = torch_strided(
   do.call(.torch_zeros, args)
 }
 
+#' @rdname torch_zeros_like
 torch_zeros_like <- function(input, dtype = NULL, layout = torch_strided(), 
                             device=NULL, requires_grad = FALSE, 
                             memory_format = torch_preserve_format()) {
@@ -194,6 +205,7 @@ torch_zeros_like <- function(input, dtype = NULL, layout = torch_strided(),
   do.call(.torch_zeros_like, args)
 }
 
+#' @rdname torch_empty
 torch_empty <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
                         device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -209,6 +221,7 @@ torch_empty <- function(..., names = NULL, dtype = NULL, layout = torch_strided(
   do.call(.torch_empty, args)
 }
 
+#' @rdname torch_empty_like
 torch_empty_like <- function(input, dtype = NULL, layout = torch_strided(), 
                              device=NULL, requires_grad = FALSE, 
                              memory_format = torch_preserve_format()) {
@@ -225,6 +238,7 @@ torch_empty_like <- function(input, dtype = NULL, layout = torch_strided(),
   do.call(.torch_empty_like, args)
 }
 
+#' @rdname torch_arange
 torch_arange <- function(start, end, step = 1, dtype = NULL, layout = torch_strided(), 
                          device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -241,6 +255,7 @@ torch_arange <- function(start, end, step = 1, dtype = NULL, layout = torch_stri
   do.call(.torch_arange, args)
 }
 
+#' @rdname torch_range
 torch_range <- function(start, end, step = 1, dtype = NULL, layout = torch_strided(), 
                         device=NULL, requires_grad = FALSE) {
   warning("This function is deprecated in favor of torch_arange.")
@@ -248,6 +263,7 @@ torch_range <- function(start, end, step = 1, dtype = NULL, layout = torch_strid
                device=device, requires_grad = requires_grad)
 }
 
+#' @rdname torch_linspace
 torch_linspace <- function(start, end, steps=100, dtype = NULL, layout = torch_strided(), 
                            device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -264,6 +280,7 @@ torch_linspace <- function(start, end, steps=100, dtype = NULL, layout = torch_s
   do.call(.torch_linspace, args)
 }
 
+#' @rdname torch_linspace
 torch_logspace <- function(start, end, steps=100, base=10, dtype = NULL, layout = torch_strided(), 
                            device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -281,6 +298,7 @@ torch_logspace <- function(start, end, steps=100, base=10, dtype = NULL, layout 
   do.call(.torch_logspace, args)
 }
 
+#' @rdname torch_eye
 torch_eye <- function(n, m=n, dtype = NULL, layout = torch_strided(), 
                       device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -296,6 +314,7 @@ torch_eye <- function(n, m=n, dtype = NULL, layout = torch_strided(),
   do.call(.torch_eye, args)
 }
 
+#' @rdname torch_empty_strided
 torch_empty_strided <- function(size, stride, dtype = NULL, layout = torch_strided(), 
                                 device=NULL, requires_grad = FALSE, pin_memory = FALSE) {
   args <- list(
@@ -312,6 +331,7 @@ torch_empty_strided <- function(size, stride, dtype = NULL, layout = torch_strid
   do.call(.torch_empty_strided, args)
 }
 
+#' @rdname torch_full
 torch_full <- function(size, fill_value, names = NULL, dtype = NULL, layout = torch_strided(), 
                        device=NULL, requires_grad = FALSE) {
   args <- list(
@@ -328,6 +348,7 @@ torch_full <- function(size, fill_value, names = NULL, dtype = NULL, layout = to
   do.call(.torch_full, args)
 }
 
+#' @rdname torch_full_like
 torch_full_like <- function(input, fill_value, dtype = NULL, layout = torch_strided(), 
                              device=NULL, requires_grad = FALSE, 
                              memory_format = torch_preserve_format()) {
