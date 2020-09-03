@@ -5,7 +5,7 @@
 \alias{torch_randn_like}
 \title{Randn_like}
 \arguments{
-\item{input}{(Tensor) the size of \code{input} will determine size of the output tensor.}
+\item{self}{(Tensor) the size of \code{input} will determine size of the output tensor.}
 
 \item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned Tensor.        Default: if \code{None}, defaults to the dtype of \code{input}.}
 

@@ -5,7 +5,7 @@
 \alias{torch_logical_not}
 \title{Logical_not}
 \arguments{
-\item{input}{(Tensor) the input tensor.}
+\item{self}{(Tensor) the input tensor.}
 
 \item{out}{(Tensor, optional) the output tensor.}
 }

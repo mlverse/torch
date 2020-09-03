@@ -5,7 +5,7 @@
 \alias{torch_max}
 \title{Max}
 \arguments{
-\item{input}{(Tensor) the input tensor.}
+\item{self}{(Tensor) the input tensor.}
 
 \item{dim}{(int) the dimension to reduce.}
 
