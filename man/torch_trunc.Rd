@@ -9,13 +9,11 @@ torch_trunc(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Trunc
 }
-\section{trunc(input, out=None) -> Tensor }{
+\section{trunc(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the truncated integer values of

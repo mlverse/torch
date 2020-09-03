@@ -10,15 +10,14 @@ torch_norm(self, p = 2L, dim, keepdim = FALSE, dtype)
 \arguments{
 \item{self}{(Tensor) the input tensor}
 
-\item{p}{(int, float, inf, -inf, 'fro', 'nuc', optional) the order of norm. Default: \code{'fro'}        The following norms can be calculated:        =====  ============================  ==========================        ord    matrix norm                   vector norm        =====  ============================  ==========================        None   Frobenius norm                2-norm        'fro'  Frobenius norm                --        'nuc'  nuclear norm                  --        Other  as vec norm when dim is None  sum(abs(x)\strong{ord)}(1./ord)        =====  ============================  ==========================}
+\item{p}{(int, float, inf, -inf, 'fro', 'nuc', optional) the order of norm. Default: \code{'fro'}        The following norms can be calculated:        =====  ============================  ==========================        ord    matrix norm                   vector norm        =====  ============================  ==========================        NULL   Frobenius norm                2-norm        'fro'  Frobenius norm                --        'nuc'  nuclear norm                  --        Other  as vec norm when dim is NULL  sum(abs(x)\strong{ord)}(1./ord)        =====  ============================  ==========================}
 
-\item{dim}{(int, 2-tuple of ints, 2-list of ints, optional) If it is an int,        vector norm will be calculated, if it is 2-tuple of ints, matrix norm        will be calculated. If the value is None, matrix norm will be calculated        when the input tensor only has two dimensions, vector norm will be        calculated when the input tensor only has one dimension. If the input        tensor has more than two dimensions, the vector norm will be applied to        last dimension.}
+\item{dim}{(int, 2-tuple of ints, 2-list of ints, optional) If it is an int,        vector norm will be calculated, if it is 2-tuple of ints, matrix norm        will be calculated. If the value is NULL, matrix norm will be calculated        when the input tensor only has two dimensions, vector norm will be        calculated when the input tensor only has one dimension. If the input        tensor has more than two dimensions, the vector norm will be applied to        last dimension.}
 
-\item{keepdim}{(bool, optional) whether the output tensors have \code{dim}        retained or not. Ignored if \code{dim} = \code{None} and        \code{out} = \code{None}. Default: \code{False}}
+\item{keepdim}{(bool, optional) whether the output tensors have \code{dim}        retained or not. Ignored if \code{dim} = \code{NULL} and        \code{out} = \code{NULL}. Default: \code{FALSE}
+Ignored if        \code{dim} = \code{NULL} and \code{out} = \code{NULL}.}
 
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        'dtype' while performing the operation. Default: None.}
-
-\item{out}{(Tensor, optional) the output tensor. Ignored if        \code{dim} = \code{None} and \code{out} = \code{None}.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        'dtype' while performing the operation. Default: NULL.}
 }
 \description{
 Norm

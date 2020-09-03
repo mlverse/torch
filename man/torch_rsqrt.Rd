@@ -9,13 +9,11 @@ torch_rsqrt(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Rsqrt
 }
-\section{rsqrt(input, out=None) -> Tensor }{
+\section{rsqrt(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the reciprocal of the square-root of each of

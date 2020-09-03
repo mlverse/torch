@@ -13,13 +13,11 @@ torch_cross(self, other, dim = NULL)
 \item{other}{(Tensor) the second input tensor}
 
 \item{dim}{(int, optional) the dimension to take the cross-product in.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Cross
 }
-\section{cross(input, other, dim=-1, out=None) -> Tensor }{
+\section{cross(input, other, dim=-1, out=NULL) -> Tensor }{
 
 
 Returns the cross product of vectors in dimension \code{dim} of \code{input}

@@ -17,7 +17,7 @@ torch_roll(self, shifts, dims = list())
 \description{
 Roll
 }
-\section{roll(input, shifts, dims=None) -> Tensor }{
+\section{roll(input, shifts, dims=NULL) -> Tensor }{
 
 
 Roll the tensor along the given dimension(s). Elements that are shifted beyond the

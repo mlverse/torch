@@ -9,13 +9,11 @@ torch_imag(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Imag
 }
-\section{imag(input, out=None) -> Tensor }{
+\section{imag(input) -> Tensor }{
 
 
 Returns the imaginary part of the \code{input} tensor.

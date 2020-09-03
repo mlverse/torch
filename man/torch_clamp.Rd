@@ -13,15 +13,11 @@ torch_clamp(self, min = NULL, max = NULL)
 \item{min}{(Number) lower-bound of the range to be clamped to}
 
 \item{max}{(Number) upper-bound of the range to be clamped to}
-
-\item{out}{(Tensor, optional) the output tensor.}
-
-\item{value}{(Number) minimal value of each element in the output}
 }
 \description{
 Clamp
 }
-\section{clamp(input, min, max, out=None) -> Tensor }{
+\section{clamp(input, min, max, out=NULL) -> Tensor }{
 
 
 Clamp all elements in \code{input} into the range \code{[} \code{min}, \code{max} \verb{]} and return
@@ -39,7 +35,7 @@ If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, args \code
 and \code{max} must be real numbers, otherwise they should be integers.
 }
 
-\section{clamp(input, *, min, out=None) -> Tensor }{
+\section{clamp(input, *, min, out=NULL) -> Tensor }{
 
 
 Clamps all elements in \code{input} to be larger or equal \code{min}.
@@ -48,7 +44,7 @@ If \code{input} is of type \code{FloatTensor} or \code{DoubleTensor}, \code{valu
 should be a real number, otherwise it should be an integer.
 }
 
-\section{clamp(input, *, max, out=None) -> Tensor }{
+\section{clamp(input, *, max, out=NULL) -> Tensor }{
 
 
 Clamps all elements in \code{input} to be smaller or equal \code{max}.

@@ -13,13 +13,11 @@ torch_logsumexp(self, dim, keepdim = FALSE)
 \item{dim}{(int or tuple of ints) the dimension or dimensions to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Logsumexp
 }
-\section{logsumexp(input, dim, keepdim=False, out=None) }{
+\section{logsumexp(input, dim, keepdim=False, out=NULL) }{
 
 
 Returns the log of summed exponentials of each row of the \code{input}
@@ -32,7 +30,7 @@ For summation index \eqn{j} given by \code{dim} and other indices \eqn{i}, the r
         \mbox{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
 }
 
-If \code{keepdim} is \code{True}, the output tensor is of the same size
+If \code{keepdim} is \code{TRUE}, the output tensor is of the same size
 as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in the
 output tensor having 1 (or \code{len(dim)}) fewer dimension(s).

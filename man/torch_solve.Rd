@@ -24,7 +24,7 @@ Solve
 `A.contiguous().transpose(-1, -2).stride()` respectively.
 }
 }
-\section{torch.solve(input, A, out=None) -> (Tensor, Tensor) }{
+\section{torch.solve(input, A, out=NULL) -> (Tensor, Tensor) }{
 
 
 This function returns the solution to the system of linear

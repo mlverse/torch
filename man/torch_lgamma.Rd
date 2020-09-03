@@ -9,13 +9,11 @@ torch_lgamma(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Lgamma
 }
-\section{lgamma(input, out=None) -> Tensor }{
+\section{lgamma(input, out=NULL) -> Tensor }{
 
 
 Computes the logarithm of the gamma function on \code{input}.

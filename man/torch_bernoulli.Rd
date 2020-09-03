@@ -8,16 +8,18 @@
 torch_bernoulli(self, p, generator = NULL)
 }
 \arguments{
-\item{self}{(Tensor) the input tensor of probability values for the Bernoulli distribution}
+\item{self}{(Tensor) the input tensor of probability values for the Bernoulli
+distribution}
+
+\item{p}{(Number) a probability value. If \code{p} is passed than it's used instead of
+the values in \code{self} tensor.}
 
 \item{generator}{(\code{torch.Generator}, optional) a pseudorandom number generator for sampling}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Bernoulli
 }
-\section{bernoulli(input, *, generator=None, out=None) -> Tensor }{
+\section{bernoulli(input, *, generator=NULL, out=NULL) -> Tensor }{
 
 
 Draws binary random numbers (0 or 1) from a Bernoulli distribution.

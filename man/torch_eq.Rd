@@ -10,14 +10,13 @@ torch_eq(self, other)
 \arguments{
 \item{self}{(Tensor) the tensor to compare}
 
-\item{other}{(Tensor or float) the tensor or value to compare}
-
-\item{out}{(Tensor, optional) the output tensor. Must be a \code{ByteTensor}}
+\item{other}{(Tensor or float) the tensor or value to compare
+Must be a \code{ByteTensor}}
 }
 \description{
 Eq
 }
-\section{eq(input, other, out=None) -> Tensor }{
+\section{eq(input, other, out=NULL) -> Tensor }{
 
 
 Computes element-wise equality

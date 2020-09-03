@@ -11,13 +11,11 @@ torch_cummin(self, dim)
 \item{self}{(Tensor) the input tensor.}
 
 \item{dim}{(int) the dimension to do the operation over}
-
-\item{out}{(tuple, optional) the result tuple of two output tensors (values, indices)}
 }
 \description{
 Cummin
 }
-\section{cummin(input, dim, out=None) -> (Tensor, LongTensor) }{
+\section{cummin(input, dim) -> (Tensor, LongTensor) }{
 
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the cumulative minimum of

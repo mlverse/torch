@@ -14,14 +14,12 @@ torch_gather(self, dim, index, sparse_grad = FALSE)
 
 \item{index}{(LongTensor) the indices of elements to gather}
 
-\item{sparse_grad}{(bool,optional) If \code{True}, gradient w.r.t. \code{input} will be a sparse tensor.}
-
-\item{out}{(Tensor, optional) the destination tensor}
+\item{sparse_grad}{(bool,optional) If \code{TRUE}, gradient w.r.t. \code{input} will be a sparse tensor.}
 }
 \description{
 Gather
 }
-\section{gather(input, dim, index, out=None, sparse_grad=False) -> Tensor }{
+\section{gather(input, dim, index, sparse_grad=FALSE) -> Tensor }{
 
 
 Gathers values along an axis specified by \code{dim}.

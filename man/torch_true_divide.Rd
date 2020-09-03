@@ -3,7 +3,7 @@
 %   R/gen-namespace-examples.R, R/gen-namespace.R
 \name{torch_true_divide}
 \alias{torch_true_divide}
-\title{True_divide}
+\title{TRUE_divide}
 \usage{
 torch_true_divide(self, other)
 }
@@ -13,7 +13,7 @@ torch_true_divide(self, other)
 \item{divisor}{(Tensor or Scalar) the divisor}
 }
 \description{
-True_divide
+TRUE_divide
 }
 \section{true_divide(dividend, divisor) -> Tensor }{
 

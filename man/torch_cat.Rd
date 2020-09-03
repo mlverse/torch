@@ -11,13 +11,11 @@ torch_cat(tensors, dim = 1L)
 \item{tensors}{(sequence of Tensors) any python sequence of tensors of the same type.        Non-empty tensors provided must have the same shape, except in the        cat dimension.}
 
 \item{dim}{(int, optional) the dimension over which the tensors are concatenated}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Cat
 }
-\section{cat(tensors, dim=0, out=None) -> Tensor }{
+\section{cat(tensors, dim=0, out=NULL) -> Tensor }{
 
 
 Concatenates the given sequence of \code{seq} tensors in the given dimension.

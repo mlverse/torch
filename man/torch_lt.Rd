@@ -11,13 +11,11 @@ torch_lt(self, other)
 \item{self}{(Tensor) the tensor to compare}
 
 \item{other}{(Tensor or float) the tensor or value to compare}
-
-\item{out}{(Tensor, optional) the output tensor that must be a \code{BoolTensor}}
 }
 \description{
 Lt
 }
-\section{lt(input, other, out=None) -> Tensor }{
+\section{lt(input, other, out=NULL) -> Tensor }{
 
 
 Computes \eqn{\mbox{input} < \mbox{other}} element-wise.

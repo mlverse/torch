@@ -11,8 +11,6 @@ torch_matmul(self, other)
 \item{self}{(Tensor) the first tensor to be multiplied}
 
 \item{other}{(Tensor) the second tensor to be multiplied}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Matmul
@@ -21,7 +19,7 @@ Matmul
 \preformatted{The 1-dimensional dot product version of this function does not support an `out` parameter.
 }
 }
-\section{matmul(input, other, out=None) -> Tensor }{
+\section{matmul(input, other, out=NULL) -> Tensor }{
 
 
 Matrix product of two tensors.

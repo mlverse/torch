@@ -8,7 +8,7 @@
 torch_isinf(self)
 }
 \arguments{
-\item{tensor}{(Tensor) A tensor to check}
+\item{self}{(Tensor) A tensor to check}
 }
 \description{
 Isinf

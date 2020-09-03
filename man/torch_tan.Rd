@@ -9,13 +9,11 @@ torch_tan(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Tan
 }
-\section{tan(input, out=None) -> Tensor }{
+\section{tan(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the tangent of the elements of \code{input}.

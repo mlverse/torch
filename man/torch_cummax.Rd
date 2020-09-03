@@ -11,13 +11,11 @@ torch_cummax(self, dim)
 \item{self}{(Tensor) the input tensor.}
 
 \item{dim}{(int) the dimension to do the operation over}
-
-\item{out}{(tuple, optional) the result tuple of two output tensors (values, indices)}
 }
 \description{
 Cummax
 }
-\section{cummax(input, dim, out=None) -> (Tensor, LongTensor) }{
+\section{cummax(input, dim) -> (Tensor, LongTensor) }{
 
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the cumulative maximum of

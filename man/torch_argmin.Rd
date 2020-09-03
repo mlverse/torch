@@ -10,9 +10,9 @@ torch_argmin(self, dim = NULL, keepdim = FALSE)
 \arguments{
 \item{self}{(Tensor) the input tensor.}
 
-\item{dim}{(int) the dimension to reduce. If \code{None}, the argmin of the flattened input is returned.}
+\item{dim}{(int) the dimension to reduce. If \code{NULL}, the argmin of the flattened input is returned.}
 
-\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not. Ignored if \code{dim=None}.}
+\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not. Ignored if \code{dim=NULL}.}
 }
 \description{
 Argmin
@@ -26,7 +26,7 @@ This is the second value returned by \code{torch_min}. See its
 documentation for the exact semantics of this method.
 }
 
-\section{argmin(input, dim, keepdim=False, out=None) -> LongTensor }{
+\section{argmin(input, dim, keepdim=False, out=NULL) -> LongTensor }{
 
 
 Returns the indices of the minimum values of a tensor across a dimension.

@@ -9,13 +9,11 @@ torch_erfinv(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Erfinv
 }
-\section{erfinv(input, out=None) -> Tensor }{
+\section{erfinv(input, out=NULL) -> Tensor }{
 
 
 Computes the inverse error function of each element of \code{input}.

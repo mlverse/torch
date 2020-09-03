@@ -15,34 +15,32 @@ torch_std(self, dim, unbiased = TRUE, keepdim = FALSE)
 \item{unbiased}{(bool) whether to use the unbiased estimation or not}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Std
 }
-\section{std(input, unbiased=True) -> Tensor }{
+\section{std(input, unbiased=TRUE) -> Tensor }{
 
 
 Returns the standard-deviation of all elements in the \code{input} tensor.
 
-If \code{unbiased} is \code{False}, then the standard-deviation will be calculated
+If \code{unbiased} is \code{FALSE}, then the standard-deviation will be calculated
 via the biased estimator. Otherwise, Bessel's correction will be used.
 }
 
-\section{std(input, dim, unbiased=True, keepdim=False, out=None) -> Tensor }{
+\section{std(input, dim, unbiased=TRUE, keepdim=False, out=NULL) -> Tensor }{
 
 
 Returns the standard-deviation of each row of the \code{input} tensor in the
 dimension \code{dim}. If \code{dim} is a list of dimensions,
 reduce over all of them.
 
-If \code{keepdim} is \code{True}, the output tensor is of the same size
+If \code{keepdim} is \code{TRUE}, the output tensor is of the same size
 as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in the
 output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 
-If \code{unbiased} is \code{False}, then the standard-deviation will be calculated
+If \code{unbiased} is \code{FALSE}, then the standard-deviation will be calculated
 via the biased estimator. Otherwise, Bessel's correction will be used.
 }
 

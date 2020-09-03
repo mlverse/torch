@@ -9,13 +9,11 @@ torch_angle(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Angle
 }
-\section{angle(input, out=None) -> Tensor }{
+\section{angle(input) -> Tensor }{
 
 
 Computes the element-wise angle (in radians) of the given \code{input} tensor.

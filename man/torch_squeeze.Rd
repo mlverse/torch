@@ -11,8 +11,6 @@ torch_squeeze(self, dim)
 \item{self}{(Tensor) the input tensor.}
 
 \item{dim}{(int, optional) if given, the input will be squeezed only in           this dimension}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Squeeze
@@ -21,7 +19,7 @@ Squeeze
 The returned tensor shares the storage with the input tensor,
 so changing the contents of one will change the contents of the other.
 }
-\section{squeeze(input, dim=None, out=None) -> Tensor }{
+\section{squeeze(input, dim=NULL, out=NULL) -> Tensor }{
 
 
 Returns a tensor with all the dimensions of \code{input} of size \code{1} removed.

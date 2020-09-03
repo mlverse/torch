@@ -7,6 +7,11 @@
 \usage{
 torch_dot(self, tensor)
 }
+\arguments{
+\item{self}{the input tensor}
+
+\item{tensor}{the other input tensor}
+}
 \description{
 Dot
 }

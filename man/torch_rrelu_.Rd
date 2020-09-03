@@ -13,6 +13,17 @@ torch_rrelu_(
   generator = NULL
 )
 }
+\arguments{
+\item{self}{the input tensor}
+
+\item{lower}{lower bound of the uniform distribution. Default: 1/8}
+
+\item{upper}{upper bound of the uniform distribution. Default: 1/3}
+
+\item{training}{bool wether it's a training pass. DEfault: FALSE}
+
+\item{generator}{random number generator}
+}
 \description{
 Rrelu_
 }

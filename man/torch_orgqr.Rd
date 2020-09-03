@@ -10,7 +10,7 @@ torch_orgqr(self, input2)
 \arguments{
 \item{self}{(Tensor) the \code{a} from \code{\link{torch_geqrf}}.}
 
-\item{self2}{(Tensor) the \code{tau} from \code{\link{torch_geqrf}}.}
+\item{input2}{(Tensor) the \code{tau} from \code{\link{torch_geqrf}}.}
 }
 \description{
 Orgqr

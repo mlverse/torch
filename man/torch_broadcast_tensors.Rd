@@ -8,12 +8,12 @@
 torch_broadcast_tensors(tensors)
 }
 \arguments{
-\item{*tensors}{NA any number of tensors of the same type}
+\item{tensors}{a list containing any number of tensors of the same type}
 }
 \description{
 Broadcast_tensors
 }
-\section{broadcast_tensors(*tensors) -> List of Tensors }{
+\section{broadcast_tensors(tensors) -> List of Tensors }{
 
 
 Broadcasts the given tensors according to broadcasting-semantics.

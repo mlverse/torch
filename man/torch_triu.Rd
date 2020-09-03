@@ -11,13 +11,11 @@ torch_triu(self, diagonal = 0L)
 \item{self}{(Tensor) the input tensor.}
 
 \item{diagonal}{(int, optional) the diagonal to consider}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Triu
 }
-\section{triu(input, diagonal=0, out=None) -> Tensor }{
+\section{triu(input, diagonal=0, out=NULL) -> Tensor }{
 
 
 Returns the upper triangular part of a matrix (2-D tensor) or batch of matrices

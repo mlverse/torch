@@ -12,14 +12,12 @@ torch_cumprod(self, dim, dtype = NULL)
 
 \item{dim}{(int) the dimension to do the operation over}
 
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to \code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
-
-\item{out}{(Tensor, optional) the output tensor.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to \code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: NULL.}
 }
 \description{
 Cumprod
 }
-\section{cumprod(input, dim, out=None, dtype=None) -> Tensor }{
+\section{cumprod(input, dim, out=NULL, dtype=NULL) -> Tensor }{
 
 
 Returns the cumulative product of elements of \code{input} in the dimension

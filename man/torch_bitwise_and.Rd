@@ -11,13 +11,11 @@ torch_bitwise_and(self, other)
 \item{self}{NA the first input tensor}
 
 \item{other}{NA the second input tensor}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Bitwise_and
 }
-\section{bitwise_and(input, other, out=None) -> Tensor }{
+\section{bitwise_and(input, other, out=NULL) -> Tensor }{
 
 
 Computes the bitwise AND of \code{input} and \code{other}. The input tensor must be of

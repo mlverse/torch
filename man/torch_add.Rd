@@ -10,16 +10,14 @@ torch_add(self, other, alpha = 1L)
 \arguments{
 \item{self}{(Tensor) the input tensor.}
 
-\item{other}{(Tensor) the second input tensor}
+\item{other}{(Tensor/Number) the second input tensor/number.}
 
 \item{alpha}{(Number) the scalar multiplier for \code{other}}
-
-\item{value}{(Number) the number to be added to each element of \code{input}}
 }
 \description{
 Add
 }
-\section{add(input, other, out=None) }{
+\section{add(input, other, out=NULL) }{
 
 
 Adds the scalar \code{other} to each element of the input \code{input}
@@ -32,7 +30,7 @@ If \code{input} is of type FloatTensor or DoubleTensor, \code{other} must be
 a real number, otherwise it should be an integer.
 }
 
-\section{add(input, other, *, alpha=1, out=None) }{
+\section{add(input, other, *, alpha=1, out=NULL) }{
 
 
 Each element of the tensor \code{other} is multiplied by the scalar

@@ -9,13 +9,11 @@ torch_log2(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Log2
 }
-\section{log2(input, out=None) -> Tensor }{
+\section{log2(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the logarithm to the base 2 of the elements

@@ -13,7 +13,7 @@ torch_digamma(self)
 \description{
 Digamma
 }
-\section{digamma(input, out=None) -> Tensor }{
+\section{digamma(input, out=NULL) -> Tensor }{
 
 
 Computes the logarithmic derivative of the gamma function on \code{input}.

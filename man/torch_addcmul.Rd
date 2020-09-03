@@ -15,13 +15,11 @@ torch_addcmul(self, tensor1, tensor2, value = 1L)
 \item{tensor2}{(Tensor) the tensor to be multiplied}
 
 \item{value}{(Number, optional) multiplier for \eqn{tensor1 .* tensor2}}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addcmul
 }
-\section{addcmul(input, tensor1, tensor2, *, value=1, out=None) -> Tensor }{
+\section{addcmul(input, tensor1, tensor2, *, value=1, out=NULL) -> Tensor }{
 
 
 Performs the element-wise multiplication of \code{tensor1}

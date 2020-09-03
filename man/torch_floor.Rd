@@ -9,13 +9,11 @@ torch_floor(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Floor
 }
-\section{floor(input, out=None) -> Tensor }{
+\section{floor(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the floor of the elements of \code{input},

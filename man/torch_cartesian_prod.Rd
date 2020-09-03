@@ -8,18 +8,11 @@
 torch_cartesian_prod(tensors)
 }
 \arguments{
-\item{*tensors}{NA any number of 1 dimensional tensors.}
+\item{tensors}{a list containing any number of 1 dimensional tensors.}
 }
 \description{
-Cartesian_prod
+Do cartesian product of the given sequence of tensors.
 }
-\section{TEST }{
-
-
-Do cartesian product of the given sequence of tensors. The behavior is similar to
-python's \code{itertools.product}.
-}
-
 \examples{
 if (torch_is_installed()) {
 

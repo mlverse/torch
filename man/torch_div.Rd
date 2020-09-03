@@ -15,7 +15,7 @@ torch_div(self, other)
 \description{
 Div
 }
-\section{div(input, other, out=None) -> Tensor }{
+\section{div(input, other, out=NULL) -> Tensor }{
 
 
 Divides each element of the input \code{input} with the scalar \code{other} and

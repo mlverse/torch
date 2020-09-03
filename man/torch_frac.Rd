@@ -7,10 +7,13 @@
 \usage{
 torch_frac(self)
 }
+\arguments{
+\item{self}{the input tensor.}
+}
 \description{
 Frac
 }
-\section{frac(input, out=None) -> Tensor }{
+\section{frac(input, out=NULL) -> Tensor }{
 
 
 Computes the fractional portion of each element in \code{input}.

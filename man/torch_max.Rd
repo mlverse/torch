@@ -9,7 +9,7 @@
 
 \item{dim}{(int) the dimension to reduce.}
 
-\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not. Default: \code{False}.}
+\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not. Default: \code{FALSE}.}
 
 \item{out}{(tuple, optional) the result tuple of two output tensors (max, max_indices)}
 
@@ -28,7 +28,7 @@ follows the broadcasting rules .
 Returns the maximum value of all elements in the \code{input} tensor.
 }
 
-\section{max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor) }{
+\section{max(input, dim, keepdim=False, out=NULL) -> (Tensor, LongTensor) }{
 
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the maximum
@@ -44,13 +44,13 @@ maximal value found, unless it is unique.
 The exact implementation details are device-specific.
 Do not expect the same result when run on CPU and GPU in general.
 
-If \code{keepdim} is \code{True}, the output tensors are of the same size
+If \code{keepdim} is \code{TRUE}, the output tensors are of the same size
 as \code{input} except in the dimension \code{dim} where they are of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting
 in the output tensors having 1 fewer dimension than \code{input}.
 }
 
-\section{max(input, other, out=None) -> Tensor }{
+\section{max(input, other, out=NULL) -> Tensor }{
 
 
 Each element of the tensor \code{input} is compared with the corresponding

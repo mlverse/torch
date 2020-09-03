@@ -15,8 +15,6 @@ torch_normal(mean, std = 1L, size, generator = NULL, options = list())
 \item{size}{(int...) a sequence of integers defining the shape of the output tensor.}
 
 \item{generator}{(\code{torch.Generator}, optional) a pseudorandom number generator for sampling}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Normal
@@ -25,7 +23,7 @@ Normal
 When the shapes do not match, the shape of \code{mean}
 is used as the shape for the returned output tensor
 }
-\section{normal(mean, std, *, generator=None, out=None) -> Tensor }{
+\section{normal(mean, std, *, generator=NULL, out=NULL) -> Tensor }{
 
 
 Returns a tensor of random numbers drawn from separate normal distributions
@@ -41,21 +39,21 @@ The shapes of \code{mean} and \code{std} don't need to match, but the
 total number of elements in each tensor need to be the same.
 }
 
-\section{normal(mean=0.0, std, out=None) -> Tensor }{
+\section{normal(mean=0.0, std, out=NULL) -> Tensor }{
 
 
 Similar to the function above, but the means are shared among all drawn
 elements.
 }
 
-\section{normal(mean, std=1.0, out=None) -> Tensor }{
+\section{normal(mean, std=1.0, out=NULL) -> Tensor }{
 
 
 Similar to the function above, but the standard-deviations are shared among
 all drawn elements.
 }
 
-\section{normal(mean, std, size, *, out=None) -> Tensor }{
+\section{normal(mean, std, size, *, out=NULL) -> Tensor }{
 
 
 Similar to the function above, but the means and standard deviations are shared

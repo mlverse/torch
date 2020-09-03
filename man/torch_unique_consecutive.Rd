@@ -19,7 +19,7 @@ torch_unique_consecutive(
 
 \item{return_counts}{(bool) Whether to also return the counts for each unique        element.}
 
-\item{dim}{(int) the dimension to apply unique. If \code{None}, the unique of the        flattened input is returned. default: \code{None}}
+\item{dim}{(int) the dimension to apply unique. If \code{NULL}, the unique of the        flattened input is returned. default: \code{NULL}}
 }
 \description{
 Unique_consecutive

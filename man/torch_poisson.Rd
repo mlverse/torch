@@ -15,7 +15,7 @@ torch_poisson(self, generator = NULL)
 \description{
 Poisson
 }
-\section{poisson(input *, generator=None) -> Tensor }{
+\section{poisson(input *, generator=NULL) -> Tensor }{
 
 
 Returns a tensor of the same size as \code{input} with each element

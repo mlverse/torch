@@ -11,8 +11,6 @@ torch_bmm(self, mat2)
 \item{self}{(Tensor) the first batch of matrices to be multiplied}
 
 \item{mat2}{(Tensor) the second batch of matrices to be multiplied}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Bmm
@@ -21,7 +19,7 @@ Bmm
 This function does not broadcast .
 For broadcasting matrix products, see \code{\link{torch_matmul}}.
 }
-\section{bmm(input, mat2, out=None) -> Tensor }{
+\section{bmm(input, mat2, out=NULL) -> Tensor }{
 
 
 Performs a batch matrix-matrix product of matrices stored in \code{input}

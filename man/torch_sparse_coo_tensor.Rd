@@ -14,16 +14,16 @@ torch_sparse_coo_tensor(indices, values, size, options = list())
 
 \item{size}{(list, tuple, or \code{torch.Size}, optional) Size of the sparse tensor. If not        provided the size will be inferred as the minimum size big enough to hold all non-zero        elements.}
 
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if None, infers data type from \code{values}.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if NULL, infers data type from \code{values}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if NULL, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
-\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
+\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{FALSE}.}
 }
 \description{
 Sparse_coo_tensor
 }
-\section{sparse_coo_tensor(indices, values, size=None, dtype=None, device=None, requires_grad=False) -> Tensor }{
+\section{sparse_coo_tensor(indices, values, size=NULL, dtype=NULL, device=NULL, requires_grad=False) -> Tensor }{
 
 
 Constructs a sparse tensors in COO(rdinate) format with non-zero elements at the given \code{indices}

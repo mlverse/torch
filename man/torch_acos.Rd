@@ -9,13 +9,11 @@ torch_acos(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Acos
 }
-\section{acos(input, out=None) -> Tensor }{
+\section{acos(input) -> Tensor }{
 
 
 Returns a new tensor with the arccosine  of the elements of \code{input}.

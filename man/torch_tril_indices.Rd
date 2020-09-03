@@ -14,9 +14,9 @@ torch_tril_indices(row, col, offset = 0L, options = torch_long())
 
 \item{offset}{(\code{int}) diagonal offset from the main diagonal.        Default: if not provided, 0.}
 
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, \code{torch_long}.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{NULL}, \code{torch_long}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{NULL}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
 \item{layout}{(\code{torch.layout}, optional) currently only support \code{torch_strided}.}
 }
@@ -24,7 +24,7 @@ torch_tril_indices(row, col, offset = 0L, options = torch_long())
 Tril_indices
 }
 \note{
-\preformatted{When running on CUDA, ``row * col`` must be less than \eqn{2^{59}} to
+\preformatted{When running on CUDA, `row * col` must be less than \eqn{2^{59}} to
 prevent overflow during calculation.
 }
 }

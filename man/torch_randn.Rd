@@ -15,22 +15,22 @@ torch_randn(
 )
 }
 \arguments{
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see \code{torch_set_default_tensor_type}).}
+\item{...}{(int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.}
+
+\item{names}{optional names for the dimensions}
+
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{NULL}, uses a global default (see \code{torch_set_default_tensor_type}).}
 
 \item{layout}{(\code{torch.layout}, optional) the desired layout of returned Tensor.        Default: \code{torch_strided}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{NULL}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
-\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
-
-\item{size}{(int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.}
-
-\item{out}{(Tensor, optional) the output tensor.}
+\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{FALSE}.}
 }
 \description{
 Randn
 }
-\section{randn(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+\section{randn(*size, out=NULL, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False) -> Tensor }{
 
 
 Returns a tensor filled with random numbers from a normal distribution

@@ -15,8 +15,6 @@ torch_renorm(self, p, dim, maxnorm)
 \item{dim}{(int) the dimension to slice over to get the sub-tensors}
 
 \item{maxnorm}{(float) the maximum norm to keep each sub-tensor under}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Renorm
@@ -24,7 +22,7 @@ Renorm
 \note{
 If the norm of a row is lower than \code{maxnorm}, the row is unchanged
 }
-\section{renorm(input, p, dim, maxnorm, out=None) -> Tensor }{
+\section{renorm(input, p, dim, maxnorm, out=NULL) -> Tensor }{
 
 
 Returns a tensor where each sub-tensor of \code{input} along dimension

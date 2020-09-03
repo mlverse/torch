@@ -15,8 +15,6 @@ torch_multinomial(self, num_samples, replacement = FALSE, generator = NULL)
 \item{replacement}{(bool, optional) whether to draw with replacement or not}
 
 \item{generator}{(\code{torch.Generator}, optional) a pseudorandom number generator for sampling}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Multinomial
@@ -35,7 +33,7 @@ If \code{input} is a vector, \code{out} is a vector of size \code{num_samples}.
 If \code{input} is a matrix with \code{m} rows, \code{out} is an matrix of shape
 \eqn{(m \times \mbox{num\_samples})}.
 
-If replacement is \code{True}, samples are drawn with replacement.
+If replacement is \code{TRUE}, samples are drawn with replacement.
 
 If not, they are drawn without replacement, which means that when a
 sample index is drawn for a row, it cannot be drawn again for that row.
@@ -45,7 +43,7 @@ number of non-zero elements in `input` (or the min number of non-zero
 elements in each row of `input` if it is a matrix).
 }
 }
-\section{multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -> LongTensor }{
+\section{multinomial(input, num_samples, replacement=False, *, generator=NULL, out=NULL) -> LongTensor }{
 
 
 Returns a tensor where each row contains \code{num_samples} indices sampled

@@ -7,12 +7,15 @@
 \usage{
 torch_relu_(self)
 }
+\arguments{
+\item{self}{the input tensor}
+}
 \description{
 Relu_
 }
 \section{relu_(input) -> Tensor }{
 
 
-In-place version of \code{torch_relu}.
+In-place version of \code{\link[=torch_relu]{torch_relu()}}.
 }
 

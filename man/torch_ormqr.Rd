@@ -10,14 +10,14 @@ torch_ormqr(self, input2, input3, left = TRUE, transpose = FALSE)
 \arguments{
 \item{self}{(Tensor) the \code{a} from \code{\link{torch_geqrf}}.}
 
-\item{self2}{(Tensor) the \code{tau} from \code{\link{torch_geqrf}}.}
+\item{input2}{(Tensor) the \code{tau} from \code{\link{torch_geqrf}}.}
 
-\item{self3}{(Tensor) the matrix to be multiplied.}
+\item{input3}{(Tensor) the matrix to be multiplied.}
 }
 \description{
 Ormqr
 }
-\section{ormqr(input, input2, input3, left=True, transpose=False) -> Tensor }{
+\section{ormqr(input, input2, input3, left=TRUE, transpose=False) -> Tensor }{
 
 
 Multiplies \code{mat} (given by \code{input3}) by the orthogonal \code{Q} matrix of the QR factorization

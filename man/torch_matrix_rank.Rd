@@ -10,25 +10,25 @@ torch_matrix_rank(self, tol, symmetric = FALSE)
 \arguments{
 \item{self}{(Tensor) the input 2-D tensor}
 
-\item{tol}{(float, optional) the tolerance value. Default: \code{None}}
+\item{tol}{(float, optional) the tolerance value. Default: \code{NULL}}
 
-\item{symmetric}{(bool, optional) indicates whether \code{input} is symmetric.                               Default: \code{False}}
+\item{symmetric}{(bool, optional) indicates whether \code{input} is symmetric.                               Default: \code{FALSE}}
 }
 \description{
 Matrix_rank
 }
-\section{matrix_rank(input, tol=None, symmetric=False) -> Tensor }{
+\section{matrix_rank(input, tol=NULL, symmetric=False) -> Tensor }{
 
 
 Returns the numerical rank of a 2-D tensor. The method to compute the
-matrix rank is done using SVD by default. If \code{symmetric} is \code{True},
+matrix rank is done using SVD by default. If \code{symmetric} is \code{TRUE},
 then \code{input} is assumed to be symmetric, and the computation of the
 rank is done by obtaining the eigenvalues.
 
 \code{tol} is the threshold below which the singular values (or the eigenvalues
-when \code{symmetric} is \code{True}) are considered to be 0. If \code{tol} is not
+when \code{symmetric} is \code{TRUE}) are considered to be 0. If \code{tol} is not
 specified, \code{tol} is set to \code{S.max() * max(S.size()) * eps} where \code{S} is the
-singular values (or the eigenvalues when \code{symmetric} is \code{True}), and \code{eps}
+singular values (or the eigenvalues when \code{symmetric} is \code{TRUE}), and \code{eps}
 is the epsilon value for the datatype of \code{input}.
 }
 

@@ -17,13 +17,11 @@ torch_addmm(self, mat1, mat2, beta = 1L, alpha = 1L)
 \item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
 \item{alpha}{(Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addmm
 }
-\section{addmm(input, mat1, mat2, *, beta=1, alpha=1, out=None) -> Tensor }{
+\section{addmm(input, mat1, mat2, *, beta=1, alpha=1, out=NULL) -> Tensor }{
 
 
 Performs a matrix multiplication of the matrices \code{mat1} and \code{mat2}.

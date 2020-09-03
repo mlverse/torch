@@ -15,7 +15,7 @@ torch_floor_divide(self, other)
 \description{
 Floor_divide
 }
-\section{floor_divide(input, other, out=None) -> Tensor }{
+\section{floor_divide(input, other, out=NULL) -> Tensor }{
 
 
 Return the division of the inputs rounded down to the nearest integer. See \code{\link{torch_div}}

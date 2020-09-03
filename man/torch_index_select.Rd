@@ -13,8 +13,6 @@ torch_index_select(self, dim, index)
 \item{dim}{(int) the dimension in which we index}
 
 \item{index}{(LongTensor) the 1-D tensor containing the indices to index}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Index_select
@@ -25,7 +23,7 @@ tensor.  If \code{out} has a different shape than expected, we
 silently change it to the correct shape, reallocating the underlying
 storage if necessary.
 }
-\section{index_select(input, dim, index, out=None) -> Tensor }{
+\section{index_select(input, dim, index, out=NULL) -> Tensor }{
 
 
 Returns a new tensor which indexes the \code{input} tensor along dimension

@@ -14,24 +14,24 @@ torch_prod(self, dim, keepdim = FALSE, dtype = NULL)
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
 
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to \code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: None.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to \code{dtype} before the operation        is performed. This is useful for preventing data type overflows. Default: NULL.}
 }
 \description{
 Prod
 }
-\section{prod(input, dtype=None) -> Tensor }{
+\section{prod(input, dtype=NULL) -> Tensor }{
 
 
 Returns the product of all elements in the \code{input} tensor.
 }
 
-\section{prod(input, dim, keepdim=False, dtype=None) -> Tensor }{
+\section{prod(input, dim, keepdim=False, dtype=NULL) -> Tensor }{
 
 
 Returns the product of each row of the \code{input} tensor in the given
 dimension \code{dim}.
 
-If \code{keepdim} is \code{True}, the output tensor is of the same size
+If \code{keepdim} is \code{TRUE}, the output tensor is of the same size
 as \code{input} except in the dimension \code{dim} where it is of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in
 the output tensor having 1 fewer dimension than \code{input}.

@@ -17,13 +17,11 @@ torch_addbmm(self, batch1, batch2, beta = 1L, alpha = 1L)
 \item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
 \item{alpha}{(Number, optional) multiplier for \code{batch1 @ batch2} (\eqn{\alpha})}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addbmm
 }
-\section{addbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -> Tensor }{
+\section{addbmm(input, batch1, batch2, *, beta=1, alpha=1, out=NULL) -> Tensor }{
 
 
 Performs a batch matrix-matrix product of matrices stored

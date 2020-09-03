@@ -15,26 +15,22 @@ torch_empty(
 )
 }
 \arguments{
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see \code{torch_set_default_tensor_type}).}
+\item{...}{a sequence of integers defining the shape of the output tensor.}
+
+\item{names}{optional character vector naming each dimension.}
+
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{NULL}, uses a global default (see \code{torch_set_default_tensor_type}).}
 
 \item{layout}{(\code{torch.layout}, optional) the desired layout of returned Tensor.        Default: \code{torch_strided}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{NULL}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
-\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
-
-\item{size}{(int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.}
-
-\item{out}{(Tensor, optional) the output tensor.}
-
-\item{pin_memory}{(bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: \code{False}.}
-
-\item{memory_format}{(\code{torch.memory_format}, optional) the desired memory format of        returned Tensor. Default: \code{torch_contiguous_format}.}
+\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{FALSE}.}
 }
 \description{
 Empty
 }
-\section{empty(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False, pin_memory=False) -> Tensor }{
+\section{empty(*size, out=NULL, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False, pin_memory=False) -> Tensor }{
 
 
 Returns a tensor filled with uninitialized data. The shape of the tensor is

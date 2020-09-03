@@ -17,14 +17,14 @@ torch_repeat_interleave(self, repeats, dim = NULL)
 \description{
 Repeat_interleave
 }
-\section{repeat_interleave(input, repeats, dim=None) -> Tensor }{
+\section{repeat_interleave(input, repeats, dim=NULL) -> Tensor }{
 
 
 Repeat elements of a tensor.
 }
 
 \section{Warning}{
-\preformatted{This is different from `torch_Tensor.repeat` but similar to ``numpy.repeat``.
+\preformatted{This is different from `torch_Tensor.repeat` but similar to `numpy.repeat`.
 }
 }
 

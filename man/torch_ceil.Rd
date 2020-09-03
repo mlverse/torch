@@ -9,13 +9,11 @@ torch_ceil(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Ceil
 }
-\section{ceil(input, out=None) -> Tensor }{
+\section{ceil(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the ceil of the elements of \code{input},

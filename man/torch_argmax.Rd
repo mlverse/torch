@@ -10,9 +10,9 @@ torch_argmax(self, dim = NULL, keepdim = FALSE)
 \arguments{
 \item{self}{(Tensor) the input tensor.}
 
-\item{dim}{(int) the dimension to reduce. If \code{None}, the argmax of the flattened input is returned.}
+\item{dim}{(int) the dimension to reduce. If \code{NULL}, the argmax of the flattened input is returned.}
 
-\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not. Ignored if \code{dim=None}.}
+\item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not. Ignored if \code{dim=NULL}.}
 }
 \description{
 Argmax

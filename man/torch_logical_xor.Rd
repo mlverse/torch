@@ -11,17 +11,15 @@ torch_logical_xor(self, other)
 \item{self}{(Tensor) the input tensor.}
 
 \item{other}{(Tensor) the tensor to compute XOR with}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Logical_xor
 }
-\section{logical_xor(input, other, out=None) -> Tensor }{
+\section{logical_xor(input, other, out=NULL) -> Tensor }{
 
 
-Computes the element-wise logical XOR of the given input tensors. Zeros are treated as \code{False} and nonzeros are
-treated as \code{True}.
+Computes the element-wise logical XOR of the given input tensors. Zeros are treated as \code{FALSE} and nonzeros are
+treated as \code{TRUE}.
 }
 
 \examples{

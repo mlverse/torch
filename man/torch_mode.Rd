@@ -13,8 +13,6 @@ torch_mode(self, dim = -1L, keepdim = FALSE)
 \item{dim}{(int) the dimension to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{out}{(tuple, optional) the result tuple of two output tensors (values, indices)}
 }
 \description{
 Mode
@@ -22,7 +20,7 @@ Mode
 \note{
 This function is not defined for \code{torch_cuda.Tensor} yet.
 }
-\section{mode(input, dim=-1, keepdim=False, out=None) -> (Tensor, LongTensor) }{
+\section{mode(input, dim=-1, keepdim=False, out=NULL) -> (Tensor, LongTensor) }{
 
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the mode
@@ -32,7 +30,7 @@ in that row, and \code{indices} is the index location of each mode value found.
 
 By default, \code{dim} is the last dimension of the \code{input} tensor.
 
-If \code{keepdim} is \code{True}, the output tensors are of the same size as
+If \code{keepdim} is \code{TRUE}, the output tensors are of the same size as
 \code{input} except in the dimension \code{dim} where they are of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting
 in the output tensors having 1 fewer dimension than \code{input}.

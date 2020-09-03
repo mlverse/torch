@@ -9,13 +9,11 @@ torch_tanh(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Tanh
 }
-\section{tanh(input, out=None) -> Tensor }{
+\section{tanh(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the hyperbolic tangent of the elements

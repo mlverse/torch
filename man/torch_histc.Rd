@@ -15,13 +15,11 @@ torch_histc(self, bins = 100L, min = 0L, max = 0L)
 \item{min}{(int) lower end of the range (inclusive)}
 
 \item{max}{(int) upper end of the range (inclusive)}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Histc
 }
-\section{histc(input, bins=100, min=0, max=0, out=None) -> Tensor }{
+\section{histc(input, bins=100, min=0, max=0, out=NULL) -> Tensor }{
 
 
 Computes the histogram of a tensor.

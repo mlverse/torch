@@ -8,36 +8,36 @@
 torch_cholesky(self, upper = FALSE)
 }
 \arguments{
-\item{self}{(Tensor) the input tensor \eqn{A} of size \eqn{(*, n, n)} where \code{*} is zero or more                batch dimensions consisting of symmetric positive-definite matrices.}
+\item{self}{(Tensor) the input tensor \eqn{A} of size \eqn{(*, n, n)} where \code{*} is zero or more
+batch dimensions consisting of symmetric positive-definite matrices.}
 
-\item{upper}{(bool, optional) flag that indicates whether to return a                            upper or lower triangular matrix. Default: \code{False}}
-
-\item{out}{(Tensor, optional) the output matrix}
+\item{upper}{(bool, optional) flag that indicates whether to return a
+upper or lower triangular matrix. Default: \code{FALSE}}
 }
 \description{
 Cholesky
 }
-\section{cholesky(input, upper=False, out=None) -> Tensor }{
+\section{cholesky(input, upper=False, out=NULL) -> Tensor }{
 
 
 Computes the Cholesky decomposition of a symmetric positive-definite
 matrix \eqn{A} or for batches of symmetric positive-definite matrices.
 
-If \code{upper} is \code{True}, the returned matrix \code{U} is upper-triangular, and
+If \code{upper} is \code{TRUE}, the returned matrix \code{U} is upper-triangular, and
 the decomposition has the form:
 
 \deqn{
   A = U^TU
 }
-If \code{upper} is \code{False}, the returned matrix \code{L} is lower-triangular, and
+If \code{upper} is \code{FALSE}, the returned matrix \code{L} is lower-triangular, and
 the decomposition has the form:
 
 \deqn{
     A = LL^T
 }
-If \code{upper} is \code{True}, and \eqn{A} is a batch of symmetric positive-definite
+If \code{upper} is \code{TRUE}, and \eqn{A} is a batch of symmetric positive-definite
 matrices, then the returned tensor will be composed of upper-triangular Cholesky factors
-of each of the individual matrices. Similarly, when \code{upper} is \code{False}, the returned
+of each of the individual matrices. Similarly, when \code{upper} is \code{FALSE}, the returned
 tensor will be composed of lower-triangular Cholesky factors of each of the individual
 matrices.
 }

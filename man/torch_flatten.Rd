@@ -10,9 +10,14 @@ torch_flatten(self, dims, start_dim = 1L, end_dim = -1L, out_dim)
 \arguments{
 \item{self}{(Tensor) the input tensor.}
 
+\item{dims}{if tensor is named you can pass the name of the dimensions to
+flatten}
+
 \item{start_dim}{(int) the first dim to flatten}
 
 \item{end_dim}{(int) the last dim to flatten}
+
+\item{out_dim}{the name of the resulting dimension if a named tensor.}
 }
 \description{
 Flatten

@@ -20,7 +20,7 @@ Pdist
 
 Computes the p-norm distance between every pair of row vectors in the input.
 This is identical to the upper triangular portion, excluding the diagonal, of
-\verb{torch_norm(input[:, None] - input, dim=2, p=p)}. This function will be faster
+\verb{torch_norm(input[:, NULL] - input, dim=2, p=p)}. This function will be faster
 if the rows are contiguous.
 
 If input has shape \eqn{N \times M} then the output will have shape

@@ -10,15 +10,15 @@ torch_blackman_window(window_length, periodic, options = list())
 \arguments{
 \item{window_length}{(int) the size of returned window}
 
-\item{periodic}{(bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.}
+\item{periodic}{(bool, optional) If TRUE, returns a window to be used as periodic        function. If False, return a symmetric window.}
 
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{None}, uses a global default (see \code{torch_set_default_tensor_type}). Only floating point types are supported.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{NULL}, uses a global default (see \code{torch_set_default_tensor_type}). Only floating point types are supported.}
 
 \item{layout}{(\code{torch.layout}, optional) the desired layout of returned window tensor. Only          \code{torch_strided} (dense layout) is supported.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{NULL}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
 
-\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
+\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{FALSE}.}
 }
 \description{
 Blackman_window
@@ -27,7 +27,7 @@ Blackman_window
 \preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
 }
 }
-\section{blackman_window(window_length, periodic=True, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor }{
+\section{blackman_window(window_length, periodic=TRUE, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False) -> Tensor }{
 
 
 Blackman window function.
@@ -43,7 +43,7 @@ window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
 \code{torch_stft}. Therefore, if \code{periodic} is true, the \eqn{N} in
 above formula is in fact \eqn{\mbox{window\_length} + 1}. Also, we always have
-\code{torch_blackman_window(L, periodic=True)} equal to
+\code{torch_blackman_window(L, periodic=TRUE)} equal to
 \verb{torch_blackman_window(L + 1, periodic=False)[:-1])}.
 }
 

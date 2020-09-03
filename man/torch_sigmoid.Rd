@@ -9,13 +9,11 @@ torch_sigmoid(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Sigmoid
 }
-\section{sigmoid(input, out=None) -> Tensor }{
+\section{sigmoid(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the sigmoid of the elements of \code{input}.

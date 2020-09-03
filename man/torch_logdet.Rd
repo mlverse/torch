@@ -14,7 +14,7 @@ torch_logdet(self)
 Logdet
 }
 \note{
-\preformatted{Result is ``-inf`` if `input` has zero log determinant, and is ``nan`` if
+\preformatted{Result is `-inf` if `input` has zero log determinant, and is `NaN` if
 `input` has negative determinant.
 }
 

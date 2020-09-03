@@ -9,8 +9,6 @@ torch_inverse(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor of size \eqn{(*, n, n)} where \code{*} is zero or more                    batch dimensions}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Inverse
@@ -20,7 +18,7 @@ Inverse
 transposed, i.e. with strides like `input.contiguous().transpose(-2, -1).stride()`
 }
 }
-\section{inverse(input, out=None) -> Tensor }{
+\section{inverse(input, out=NULL) -> Tensor }{
 
 
 Takes the inverse of the square matrix \code{input}. \code{input} can be batches

@@ -9,13 +9,11 @@ torch_sqrt(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Sqrt
 }
-\section{sqrt(input, out=None) -> Tensor }{
+\section{sqrt(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the square-root of the elements of \code{input}.

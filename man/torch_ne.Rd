@@ -11,13 +11,11 @@ torch_ne(self, other)
 \item{self}{(Tensor) the tensor to compare}
 
 \item{other}{(Tensor or float) the tensor or value to compare}
-
-\item{out}{(Tensor, optional) the output tensor that must be a \code{BoolTensor}}
 }
 \description{
 Ne
 }
-\section{ne(input, other, out=None) -> Tensor }{
+\section{ne(input, other, out=NULL) -> Tensor }{
 
 
 Computes \eqn{input \neq other} element-wise.

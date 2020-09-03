@@ -16,7 +16,7 @@ Is_complex
 \section{is_complex(input) -> (bool) }{
 
 
-Returns True if the data type of \code{input} is a complex data type i.e.,
+Returns TRUE if the data type of \code{input} is a complex data type i.e.,
 one of \code{torch_complex64}, and \code{torch.complex128}.
 }
 

@@ -17,7 +17,7 @@ torch_bincount(self, weights = list(), minlength = 0L)
 \description{
 Bincount
 }
-\section{bincount(input, weights=None, minlength=0) -> Tensor }{
+\section{bincount(input, weights=NULL, minlength=0) -> Tensor }{
 
 
 Count the frequency of each value in an array of non-negative ints.

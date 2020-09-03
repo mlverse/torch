@@ -19,7 +19,7 @@ torch_sort(self, dim = -1L, descending = FALSE)
 \description{
 Sort
 }
-\section{sort(input, dim=-1, descending=False, out=None) -> (Tensor, LongTensor) }{
+\section{sort(input, dim=-1, descending=False, out=NULL) -> (Tensor, LongTensor) }{
 
 
 Sorts the elements of the \code{input} tensor along a given dimension
@@ -27,7 +27,7 @@ in ascending order by value.
 
 If \code{dim} is not given, the last dimension of the \code{input} is chosen.
 
-If \code{descending} is \code{True} then the elements are sorted in descending
+If \code{descending} is \code{TRUE} then the elements are sorted in descending
 order by value.
 
 A namedtuple of (values, indices) is returned, where the \code{values} are the

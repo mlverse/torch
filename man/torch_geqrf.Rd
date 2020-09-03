@@ -9,13 +9,11 @@ torch_geqrf(self)
 }
 \arguments{
 \item{self}{(Tensor) the input matrix}
-
-\item{out}{(tuple, optional) the output tuple of (Tensor, Tensor)}
 }
 \description{
 Geqrf
 }
-\section{geqrf(input, out=None) -> (Tensor, Tensor) }{
+\section{geqrf(input, out=NULL) -> (Tensor, Tensor) }{
 
 
 This is a low-level function for calling LAPACK directly. This function

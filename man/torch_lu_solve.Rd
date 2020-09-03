@@ -8,18 +8,16 @@
 torch_lu_solve(self, LU_data, LU_pivots)
 }
 \arguments{
+\item{self}{(Tensor) the RHS tensor of size \eqn{(*, m, k)}, where \eqn{*}                is zero or more batch dimensions.}
+
 \item{LU_data}{(Tensor) the pivoted LU factorization of A from \code{torch_lu} of size \eqn{(*, m, m)},                       where \eqn{*} is zero or more batch dimensions.}
 
 \item{LU_pivots}{(IntTensor) the pivots of the LU factorization from \code{torch_lu} of size \eqn{(*, m)},                           where \eqn{*} is zero or more batch dimensions.                           The batch dimensions of \code{LU_pivots} must be equal to the batch dimensions of                           \code{LU_data}.}
-
-\item{b}{(Tensor) the RHS tensor of size \eqn{(*, m, k)}, where \eqn{*}                is zero or more batch dimensions.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Lu_solve
 }
-\section{lu_solve(input, LU_data, LU_pivots, out=None) -> Tensor }{
+\section{lu_solve(input, LU_data, LU_pivots, out=NULL) -> Tensor }{
 
 
 Returns the LU solve of the linear system \eqn{Ax = b} using the partially pivoted

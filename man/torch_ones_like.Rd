@@ -15,22 +15,22 @@ torch_ones_like(
 )
 }
 \arguments{
-\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned Tensor.        Default: if \code{None}, defaults to the dtype of \code{input}.}
+\item{input}{(Tensor) the size of \code{input} will determine size of the output tensor.}
 
-\item{layout}{(\code{torch.layout}, optional) the desired layout of returned tensor.        Default: if \code{None}, defaults to the layout of \code{input}.}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned Tensor.        Default: if \code{NULL}, defaults to the dtype of \code{input}.}
 
-\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{None}, defaults to the device of \code{input}.}
+\item{layout}{(\code{torch.layout}, optional) the desired layout of returned tensor.        Default: if \code{NULL}, defaults to the layout of \code{input}.}
 
-\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{False}.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{NULL}, defaults to the device of \code{input}.}
+
+\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{FALSE}.}
 
 \item{memory_format}{(\code{torch.memory_format}, optional) the desired memory format of        returned Tensor. Default: \code{torch_preserve_format}.}
-
-\item{self}{(Tensor) the size of \code{input} will determine size of the output tensor.}
 }
 \description{
 Ones_like
 }
-\section{ones_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -> Tensor }{
+\section{ones_like(input, dtype=NULL, layout=NULL, device=NULL, requires_grad=False, memory_format=torch.preserve_format) -> Tensor }{
 
 
 Returns a tensor filled with the scalar value \code{1}, with the same size as

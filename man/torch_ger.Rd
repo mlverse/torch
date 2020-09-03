@@ -11,8 +11,6 @@ torch_ger(self, vec2)
 \item{self}{(Tensor) 1-D input vector}
 
 \item{vec2}{(Tensor) 1-D input vector}
-
-\item{out}{(Tensor, optional) optional output matrix}
 }
 \description{
 Ger
@@ -20,7 +18,7 @@ Ger
 \note{
 This function does not broadcast .
 }
-\section{ger(input, vec2, out=None) -> Tensor }{
+\section{ger(input, vec2, out=NULL) -> Tensor }{
 
 
 Outer product of \code{input} and \code{vec2}.

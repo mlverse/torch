@@ -9,13 +9,11 @@ torch_bitwise_not(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Bitwise_not
 }
-\section{bitwise_not(input, out=None) -> Tensor }{
+\section{bitwise_not(input, out=NULL) -> Tensor }{
 
 
 Computes the bitwise NOT of the given input tensor. The input tensor must be of

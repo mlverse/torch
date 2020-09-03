@@ -11,8 +11,6 @@ torch_lstsq(self, A)
 \item{self}{(Tensor) the matrix \eqn{B}}
 
 \item{A}{(Tensor) the \eqn{m} by \eqn{n} matrix \eqn{A}}
-
-\item{out}{(tuple, optional) the optional destination tensor}
 }
 \description{
 Lstsq
@@ -21,7 +19,7 @@ Lstsq
 \preformatted{The case when \eqn{m < n} is not supported on the GPU.
 }
 }
-\section{lstsq(input, A, out=None) -> Tensor }{
+\section{lstsq(input, A, out=NULL) -> Tensor }{
 
 
 Computes the solution to the least squares and least norm problems for a full

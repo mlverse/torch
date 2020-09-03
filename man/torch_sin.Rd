@@ -9,13 +9,11 @@ torch_sin(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Sin
 }
-\section{sin(input, out=None) -> Tensor }{
+\section{sin(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the sine of the elements of \code{input}.

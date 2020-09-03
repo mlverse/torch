@@ -12,7 +12,7 @@ torch_ifft(self, signal_ndim, normalized = FALSE)
 
 \item{signal_ndim}{(int) the number of dimensions in each signal.        \code{signal_ndim} can only be 1, 2 or 3}
 
-\item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
+\item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{FALSE}}
 }
 \description{
 Ifft
@@ -42,7 +42,7 @@ where \eqn{d} = \code{signal_ndim} is number of dimensions for the
 signal, and \eqn{N_i} is the size of signal dimension \eqn{i}.
 
 The argument specifications are almost identical with \code{\link{torch_fft}}.
-However, if \code{normalized} is set to \code{True}, this instead returns the
+However, if \code{normalized} is set to \code{TRUE}, this instead returns the
 results multiplied by \eqn{\sqrt{\prod_{i=1}^d N_i}}, to become a unitary
 operator. Therefore, to invert a \code{\link{torch_fft}}, the \code{normalized}
 argument should be set identically for \code{\link{torch_fft}}.

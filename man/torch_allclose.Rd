@@ -16,7 +16,7 @@ torch_allclose(self, other, rtol = 1e-05, atol = 0, equal_nan = FALSE)
 
 \item{atol}{(float, optional) absolute tolerance. Default: 1e-08}
 
-\item{equal_nan}{(bool, optional) if \code{True}, then two \code{NaN} s will be compared as equal. Default: \code{False}}
+\item{equal_nan}{(bool, optional) if \code{TRUE}, then two \code{NaN} s will be compared as equal. Default: \code{FALSE}}
 }
 \description{
 Allclose

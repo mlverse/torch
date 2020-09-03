@@ -11,13 +11,11 @@ torch_remainder(self, other)
 \item{self}{(Tensor) the dividend}
 
 \item{other}{(Tensor or float) the divisor that may be either a number or a                               Tensor of the same shape as the dividend}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Remainder
 }
-\section{remainder(input, other, out=None) -> Tensor }{
+\section{remainder(input, other, out=NULL) -> Tensor }{
 
 
 Computes the element-wise remainder of division.

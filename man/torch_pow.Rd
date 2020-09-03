@@ -11,13 +11,11 @@ torch_pow(self, exponent)
 \item{self}{(float) the scalar base value for the power operation}
 
 \item{exponent}{(float or tensor) the exponent value}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Pow
 }
-\section{pow(input, exponent, out=None) -> Tensor }{
+\section{pow(input, exponent, out=NULL) -> Tensor }{
 
 
 Takes the power of each element in \code{input} with \code{exponent} and
@@ -40,7 +38,7 @@ When \code{exponent} is a tensor, the shapes of \code{input}
 and \code{exponent} must be broadcastable .
 }
 
-\section{pow(self, exponent, out=None) -> Tensor }{
+\section{pow(self, exponent, out=NULL) -> Tensor }{
 
 
 \code{self} is a scalar \code{float} value, and \code{exponent} is a tensor.

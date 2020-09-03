@@ -9,13 +9,11 @@ torch_cos(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Cos
 }
-\section{cos(input, out=None) -> Tensor }{
+\section{cos(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the cosine  of the elements of \code{input}.

@@ -15,33 +15,31 @@ torch_var(self, dim, unbiased = TRUE, keepdim = FALSE)
 \item{unbiased}{(bool) whether to use the unbiased estimation or not}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Var
 }
-\section{var(input, unbiased=True) -> Tensor }{
+\section{var(input, unbiased=TRUE) -> Tensor }{
 
 
 Returns the variance of all elements in the \code{input} tensor.
 
-If \code{unbiased} is \code{False}, then the variance will be calculated via the
+If \code{unbiased} is \code{FALSE}, then the variance will be calculated via the
 biased estimator. Otherwise, Bessel's correction will be used.
 }
 
-\section{var(input, dim, keepdim=False, unbiased=True, out=None) -> Tensor }{
+\section{var(input, dim, keepdim=False, unbiased=TRUE, out=NULL) -> Tensor }{
 
 
 Returns the variance of each row of the \code{input} tensor in the given
 dimension \code{dim}.
 
-If \code{keepdim} is \code{True}, the output tensor is of the same size
+If \code{keepdim} is \code{TRUE}, the output tensor is of the same size
 as \code{input} except in the dimension(s) \code{dim} where it is of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in the
 output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 
-If \code{unbiased} is \code{False}, then the variance will be calculated via the
+If \code{unbiased} is \code{FALSE}, then the variance will be calculated via the
 biased estimator. Otherwise, Bessel's correction will be used.
 }
 

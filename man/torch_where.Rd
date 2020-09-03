@@ -8,11 +8,11 @@
 torch_where(condition, self, other)
 }
 \arguments{
-\item{condition}{(BoolTensor) When True (nonzero), yield x, otherwise yield y}
+\item{condition}{(BoolTensor) When TRUE (nonzero), yield x, otherwise yield y}
 
-\item{x}{(Tensor) values selected at indices where \code{condition} is \code{True}}
+\item{x}{(Tensor) values selected at indices where \code{condition} is \code{TRUE}}
 
-\item{y}{(Tensor) values selected at indices where \code{condition} is \code{False}}
+\item{y}{(Tensor) values selected at indices where \code{condition} is \code{FALSE}}
 }
 \description{
 Where
@@ -44,7 +44,7 @@ The operation is defined as:
 
 
 \code{torch_where(condition)} is identical to
-\code{torch_nonzero(condition, as_tuple=True)}.
+\code{torch_nonzero(condition, as_tuple=TRUE)}.
 }
 
 \examples{

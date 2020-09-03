@@ -9,13 +9,11 @@ torch_erfc(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Erfc
 }
-\section{erfc(input, out=None) -> Tensor }{
+\section{erfc(input, out=NULL) -> Tensor }{
 
 
 Computes the complementary error function of each element of \code{input}.

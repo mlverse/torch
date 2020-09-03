@@ -17,13 +17,11 @@ torch_addmv(self, mat, vec, beta = 1L, alpha = 1L)
 \item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
 \item{alpha}{(Number, optional) multiplier for \eqn{mat @ vec} (\eqn{\alpha})}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addmv
 }
-\section{addmv(input, mat, vec, *, beta=1, alpha=1, out=None) -> Tensor }{
+\section{addmv(input, mat, vec, *, beta=1, alpha=1, out=NULL) -> Tensor }{
 
 
 Performs a matrix-vector product of the matrix \code{mat} and

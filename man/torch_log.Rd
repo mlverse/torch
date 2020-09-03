@@ -9,13 +9,11 @@ torch_log(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Log
 }
-\section{log(input, out=None) -> Tensor }{
+\section{log(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the natural logarithm of the elements

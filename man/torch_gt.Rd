@@ -11,13 +11,11 @@ torch_gt(self, other)
 \item{self}{(Tensor) the tensor to compare}
 
 \item{other}{(Tensor or float) the tensor or value to compare}
-
-\item{out}{(Tensor, optional) the output tensor that must be a \code{BoolTensor}}
 }
 \description{
 Gt
 }
-\section{gt(input, other, out=None) -> Tensor }{
+\section{gt(input, other, out=NULL) -> Tensor }{
 
 
 Computes \eqn{\mbox{input} > \mbox{other}} element-wise.

@@ -17,13 +17,11 @@ torch_baddbmm(self, batch1, batch2, beta = 1L, alpha = 1L)
 \item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
 \item{alpha}{(Number, optional) multiplier for \eqn{\mbox{batch1} \mathbin{@} \mbox{batch2}} (\eqn{\alpha})}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Baddbmm
 }
-\section{baddbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -> Tensor }{
+\section{baddbmm(input, batch1, batch2, *, beta=1, alpha=1, out=NULL) -> Tensor }{
 
 
 Performs a batch matrix-matrix product of matrices in \code{batch1}

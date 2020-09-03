@@ -18,16 +18,16 @@ torch_triangular_solve(
 
 \item{A}{(Tensor) the input triangular coefficient matrix of size \eqn{(*, m, m)}                where \eqn{*} is zero or more batch dimensions}
 
-\item{upper}{(bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: \code{True}.}
+\item{upper}{(bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: \code{TRUE}.}
 
-\item{transpose}{(bool, optional) whether \eqn{A} should be transposed before        being sent into the solver. Default: \code{False}.}
+\item{transpose}{(bool, optional) whether \eqn{A} should be transposed before        being sent into the solver. Default: \code{FALSE}.}
 
-\item{unitriangular}{(bool, optional) whether \eqn{A} is unit triangular.        If True, the diagonal elements of \eqn{A} are assumed to be        1 and not referenced from \eqn{A}. Default: \code{False}.}
+\item{unitriangular}{(bool, optional) whether \eqn{A} is unit triangular.        If TRUE, the diagonal elements of \eqn{A} are assumed to be        1 and not referenced from \eqn{A}. Default: \code{FALSE}.}
 }
 \description{
 Triangular_solve
 }
-\section{triangular_solve(input, A, upper=True, transpose=False, unitriangular=False) -> (Tensor, Tensor) }{
+\section{triangular_solve(input, A, upper=TRUE, transpose=False, unitriangular=False) -> (Tensor, Tensor) }{
 
 
 Solves a system of equations with a triangular coefficient matrix \eqn{A}

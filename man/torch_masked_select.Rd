@@ -11,8 +11,6 @@ torch_masked_select(self, mask)
 \item{self}{(Tensor) the input tensor.}
 
 \item{mask}{(BoolTensor) the tensor containing the binary mask to index with}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Masked_select
@@ -21,7 +19,7 @@ Masked_select
 The returned tensor does \strong{not} use the same storage
 as the original tensor
 }
-\section{masked_select(input, mask, out=None) -> Tensor }{
+\section{masked_select(input, mask, out=NULL) -> Tensor }{
 
 
 Returns a new 1-D tensor which indexes the \code{input} tensor according to

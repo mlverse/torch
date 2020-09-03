@@ -9,13 +9,11 @@ torch_conj(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Conj
 }
-\section{conj(input, out=None) -> Tensor }{
+\section{conj(input) -> Tensor }{
 
 
 Computes the element-wise conjugate of the given \code{input} tensor.

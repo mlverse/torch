@@ -11,8 +11,6 @@ torch_polygamma(n, self)
 \item{n}{(int) the order of the polygamma function}
 
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Polygamma
@@ -21,7 +19,7 @@ Polygamma
 \preformatted{This function is not implemented for \eqn{n \geq 2}.
 }
 }
-\section{polygamma(n, input, out=None) -> Tensor }{
+\section{polygamma(n, input, out=NULL) -> Tensor }{
 
 
 Computes the \eqn{n^{th}} derivative of the digamma function on \code{input}.

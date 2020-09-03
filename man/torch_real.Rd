@@ -9,13 +9,11 @@ torch_real(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Real
 }
-\section{real(input, out=None) -> Tensor }{
+\section{real(input) -> Tensor }{
 
 
 Returns the real part of the \code{input} tensor. If

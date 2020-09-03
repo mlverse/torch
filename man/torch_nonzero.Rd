@@ -9,8 +9,6 @@ torch_nonzero(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(LongTensor, optional) the output tensor containing indices}
 }
 \description{
 Nonzero
@@ -19,18 +17,18 @@ Nonzero
 \preformatted{[`torch_nonzero(..., as_tuple=False) <torch.nonzero>`] (default) returns a
 2-D tensor where each row is the index for a nonzero value.
 
-[`torch_nonzero(..., as_tuple=True) <torch.nonzero>`] returns a tuple of 1-D
-index tensors, allowing for advanced indexing, so ``x[x.nonzero(as_tuple=True)]``
-gives all nonzero values of tensor ``x``. Of the returned tuple, each index tensor
+[`torch_nonzero(..., as_tuple=TRUE) <torch.nonzero>`] returns a tuple of 1-D
+index tensors, allowing for advanced indexing, so `x[x.nonzero(as_tuple=TRUE)]`
+gives all nonzero values of tensor `x`. Of the returned tuple, each index tensor
 contains nonzero indices for a certain dimension.
 
 See below for more details on the two behaviors.
 }
 }
-\section{nonzero(input, *, out=None, as_tuple=False) -> LongTensor or tuple of LongTensors }{
+\section{nonzero(input, *, out=NULL, as_tuple=False) -> LongTensor or tuple of LongTensors }{
 
 
-\strong{When} \code{as_tuple} \strong{is \code{False} (default)}:
+\strong{When} \code{as_tuple} \strong{is \code{FALSE} (default)}:
 
 Returns a tensor containing the indices of all non-zero elements of
 \code{input}.  Each row in the result contains the indices of a non-zero
@@ -41,7 +39,7 @@ If \code{input} has \eqn{n} dimensions, then the resulting indices tensor
 \code{out} is of size \eqn{(z \times n)}, where \eqn{z} is the total number of
 non-zero elements in the \code{input} tensor.
 
-\strong{When} \code{as_tuple} \strong{is \code{True}}:
+\strong{When} \code{as_tuple} \strong{is \code{TRUE}}:
 
 Returns a tuple of 1-D tensors, one for each dimension in \code{input},
 each containing the indices (in that dimension) of all non-zero elements of

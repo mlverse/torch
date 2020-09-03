@@ -8,9 +8,8 @@
 torch_meshgrid(tensors)
 }
 \arguments{
-\item{tensors}{(list of Tensor) list of scalars or 1 dimensional tensors. Scalars will be}
-
-\item{treated}{(1,)}
+\item{tensors}{(list of Tensor) list of scalars or 1 dimensional tensors. Scalars will be
+treated (1,).}
 }
 \description{
 Meshgrid

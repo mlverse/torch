@@ -13,13 +13,11 @@ torch_lerp(self, end, weight)
 \item{end}{(Tensor) the tensor with the ending points}
 
 \item{weight}{(float or tensor) the weight for the interpolation formula}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Lerp
 }
-\section{lerp(input, end, weight, out=None) }{
+\section{lerp(input, end, weight, out=NULL) }{
 
 
 Does a linear interpolation of two tensors \code{start} (given by \code{input}) and \code{end} based

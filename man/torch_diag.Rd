@@ -11,13 +11,11 @@ torch_diag(self, diagonal = 0L)
 \item{self}{(Tensor) the input tensor.}
 
 \item{diagonal}{(int, optional) the diagonal to consider}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Diag
 }
-\section{diag(input, diagonal=0, out=None) -> Tensor }{
+\section{diag(input, diagonal=0, out=NULL) -> Tensor }{
 
 \itemize{
 \item If \code{input} is a vector (1-D tensor), then returns a 2-D square tensor

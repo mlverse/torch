@@ -9,13 +9,11 @@ torch_sinh(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Sinh
 }
-\section{sinh(input, out=None) -> Tensor }{
+\section{sinh(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the hyperbolic sine of the elements of

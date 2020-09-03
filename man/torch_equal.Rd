@@ -7,13 +7,18 @@
 \usage{
 torch_equal(self, other)
 }
+\arguments{
+\item{self}{the input tensor}
+
+\item{other}{the other input tensor}
+}
 \description{
 Equal
 }
 \section{equal(input, other) -> bool }{
 
 
-\code{True} if two tensors have the same size and elements, \code{False} otherwise.
+\code{TRUE} if two tensors have the same size and elements, \code{FALSE} otherwise.
 }
 
 \examples{

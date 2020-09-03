@@ -9,8 +9,6 @@ torch_log1p(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Log1p
@@ -19,7 +17,7 @@ Log1p
 This function is more accurate than \code{\link{torch_log}} for small
 values of \code{input}
 }
-\section{log1p(input, out=None) -> Tensor }{
+\section{log1p(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the natural logarithm of (1 + \code{input}).

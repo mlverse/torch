@@ -280,7 +280,7 @@ torch_linspace <- function(start, end, steps=100, dtype = NULL, layout = torch_s
   do.call(.torch_linspace, args)
 }
 
-#' @rdname torch_linspace
+#' @rdname torch_logspace
 torch_logspace <- function(start, end, steps=100, base=10, dtype = NULL, layout = torch_strided(), 
                            device=NULL, requires_grad = FALSE) {
   args <- list(

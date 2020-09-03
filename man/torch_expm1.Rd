@@ -9,13 +9,11 @@ torch_expm1(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Expm1
 }
-\section{expm1(input, out=None) -> Tensor }{
+\section{expm1(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the exponential of the elements minus 1

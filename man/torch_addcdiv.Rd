@@ -15,13 +15,11 @@ torch_addcdiv(self, tensor1, tensor2, value = 1L)
 \item{tensor2}{(Tensor) the denominator tensor}
 
 \item{value}{(Number, optional) multiplier for \eqn{\mbox{tensor1} / \mbox{tensor2}}}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Addcdiv
 }
-\section{addcdiv(input, tensor1, tensor2, *, value=1, out=None) -> Tensor }{
+\section{addcdiv(input, tensor1, tensor2, *, value=1, out=NULL) -> Tensor }{
 
 
 Performs the element-wise division of \code{tensor1} by \code{tensor2},

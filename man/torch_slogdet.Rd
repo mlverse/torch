@@ -14,7 +14,7 @@ torch_slogdet(self)
 Slogdet
 }
 \note{
-\preformatted{If ``input`` has zero determinant, this returns ``(0, -inf)``.
+\preformatted{If `input` has zero determinant, this returns `(0, -inf)`.
 }
 
 \preformatted{Backward through `slogdet` internally uses SVD results when `input`

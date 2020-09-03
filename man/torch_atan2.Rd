@@ -11,13 +11,11 @@ torch_atan2(self, other)
 \item{self}{(Tensor) the first input tensor}
 
 \item{other}{(Tensor) the second input tensor}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Atan2
 }
-\section{atan2(input, other, out=None) -> Tensor }{
+\section{atan2(input, other, out=NULL) -> Tensor }{
 
 
 Element-wise arctangent of \eqn{\mbox{input}_{i} / \mbox{other}_{i}}

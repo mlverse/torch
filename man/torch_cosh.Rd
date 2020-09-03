@@ -9,13 +9,11 @@ torch_cosh(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Cosh
 }
-\section{cosh(input, out=None) -> Tensor }{
+\section{cosh(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the hyperbolic cosine  of the elements of

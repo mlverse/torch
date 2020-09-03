@@ -12,9 +12,9 @@ torch_rfft(self, signal_ndim, normalized = FALSE, onesided = TRUE)
 
 \item{signal_ndim}{(int) the number of dimensions in each signal.        \code{signal_ndim} can only be 1, 2 or 3}
 
-\item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{False}}
+\item{normalized}{(bool, optional) controls whether to return normalized results.        Default: \code{FALSE}}
 
-\item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy. Default: \code{True}}
+\item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy. Default: \code{TRUE}}
 }
 \description{
 Rfft
@@ -26,7 +26,7 @@ configuration. See cufft-plan-cache for more details on how to
 monitor and control the cache.
 }
 }
-\section{rfft(input, signal_ndim, normalized=False, onesided=True) -> Tensor }{
+\section{rfft(input, signal_ndim, normalized=False, onesided=TRUE) -> Tensor }{
 
 
 Real-to-complex Discrete Fourier Transform
@@ -38,7 +38,7 @@ formats of the input and output.
 This method supports 1D, 2D and 3D real-to-complex transforms, indicated
 by \code{signal_ndim}. \code{input} must be a tensor with at least
 \code{signal_ndim} dimensions with optionally arbitrary number of leading batch
-dimensions. If \code{normalized} is set to \code{True}, this normalizes the result
+dimensions. If \code{normalized} is set to \code{TRUE}, this normalizes the result
 by dividing it with \eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is
 unitary, where \eqn{N_i} is the size of signal dimension \eqn{i}.
 
@@ -50,7 +50,7 @@ The real-to-complex Fourier transform results follow conjugate symmetry:
 where the index arithmetic is computed modulus the size of the corresponding
 dimension, \eqn{\ ^*} is the conjugate operator, and
 \eqn{d} = \code{signal_ndim}. \code{onesided} flag controls whether to avoid
-redundancy in the output results. If set to \code{True} (default), the output will
+redundancy in the output results. If set to \code{TRUE} (default), the output will
 not be full complex result of shape \eqn{(*, 2)}, where \eqn{*} is the shape
 of \code{input}, but instead the last dimension will be halfed as of size
 \eqn{\lfloor \frac{N_d}{2} \rfloor + 1}.

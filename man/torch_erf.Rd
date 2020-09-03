@@ -9,13 +9,11 @@ torch_erf(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Erf
 }
-\section{erf(input, out=None) -> Tensor }{
+\section{erf(input, out=NULL) -> Tensor }{
 
 
 Computes the error function of each element. The error function is defined as follows:

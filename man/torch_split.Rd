@@ -26,7 +26,7 @@ the tensor size along the given dimension `dim` is not divisible by
 `split_size`.
 
 If `split_size_or_sections` is a list, then `tensor` will be split
-into ``len(split_size_or_sections)`` chunks with sizes in `dim` according
+into `len(split_size_or_sections)` chunks with sizes in `dim` according
 to `split_size_or_sections`.
 }
 }

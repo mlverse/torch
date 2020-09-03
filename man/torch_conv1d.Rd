@@ -16,32 +16,30 @@ torch_conv1d(
 )
 }
 \arguments{
-\item{weight}{NA filters of shape \eqn{(\mbox{out\_channels} , \frac{\mbox{in\_channels}}{\mbox{groups}} , kW)}}
+\item{input}{input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iW)}}
 
-\item{bias}{NA optional bias of shape \eqn{(\mbox{out\_channels})}. Default: \code{None}}
+\item{weight}{filters of shape \eqn{(\mbox{out\_channels} , \frac{\mbox{in\_channels}}{\mbox{groups}} , kW)}}
 
-\item{stride}{NA the stride of the convolving kernel. Can be a single number or      a one-element tuple \verb{(sW,)}. Default: 1}
+\item{bias}{optional bias of shape \eqn{(\mbox{out\_channels})}. Default: \code{NULL}}
 
-\item{padding}{NA implicit paddings on both sides of the input. Can be a      single number or a one-element tuple \verb{(padW,)}. Default: 0}
+\item{stride}{the stride of the convolving kernel. Can be a single number or      a one-element tuple \verb{(sW,)}. Default: 1}
 
-\item{dilation}{NA the spacing between kernel elements. Can be a single number or      a one-element tuple \verb{(dW,)}. Default: 1}
+\item{padding}{implicit paddings on both sides of the input. Can be a      single number or a one-element tuple \verb{(padW,)}. Default: 0}
 
-\item{groups}{NA split input into groups, \eqn{\mbox{in\_channels}} should be divisible by      the number of groups. Default: 1}
+\item{dilation}{the spacing between kernel elements. Can be a single number or      a one-element tuple \verb{(dW,)}. Default: 1}
 
-\item{self}{NA input tensor of shape \eqn{(\mbox{minibatch} , \mbox{in\_channels} , iW)}}
+\item{groups}{split input into groups, \eqn{\mbox{in\_channels}} should be divisible by      the number of groups. Default: 1}
 }
 \description{
 Conv1d
 }
-\section{conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) -> Tensor }{
+\section{conv1d(input, weight, bias=NULL, stride=1, padding=0, dilation=1, groups=1) -> Tensor }{
 
 
 Applies a 1D convolution over an input signal composed of several input
 planes.
 
-See \code{~torch.nn.Conv1d} for details and output shape.
-
-.. include:: cudnn_deterministic.rst
+See \code{\link[=nn_conv1d]{nn_conv1d()}} for details and output shape.
 }
 
 \examples{

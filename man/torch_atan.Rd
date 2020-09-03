@@ -9,13 +9,11 @@ torch_atan(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Atan
 }
-\section{atan(input, out=None) -> Tensor }{
+\section{atan(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the arctangent  of the elements of \code{input}.

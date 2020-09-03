@@ -20,19 +20,19 @@ torch_stft(
 
 \item{n_fft}{(int) size of Fourier transform}
 
-\item{hop_length}{(int, optional) the distance between neighboring sliding window        frames. Default: \code{None} (treated as equal to \code{floor(n_fft / 4)})}
+\item{hop_length}{(int, optional) the distance between neighboring sliding window        frames. Default: \code{NULL} (treated as equal to \code{floor(n_fft / 4)})}
 
-\item{win_length}{(int, optional) the size of window frame and STFT filter.        Default: \code{None}  (treated as equal to \code{n_fft})}
+\item{win_length}{(int, optional) the size of window frame and STFT filter.        Default: \code{NULL}  (treated as equal to \code{n_fft})}
 
-\item{window}{(Tensor, optional) the optional window function.        Default: \code{None} (treated as window of all \eqn{1} s)}
+\item{window}{(Tensor, optional) the optional window function.        Default: \code{NULL} (treated as window of all \eqn{1} s)}
 
-\item{normalized}{(bool, optional) controls whether to return the normalized STFT results         Default: \code{False}}
+\item{normalized}{(bool, optional) controls whether to return the normalized STFT results         Default: \code{FALSE}}
 
-\item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy Default: \code{True}}
+\item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy Default: \code{TRUE}}
 
-\item{center}{(bool, optional) whether to pad \code{input} on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.        Default: \code{True}}
+\item{center}{(bool, optional) whether to pad \code{input} on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.        Default: \code{TRUE}}
 
-\item{pad_mode}{(string, optional) controls the padding method used when        \code{center} is \code{True}. Default: \code{"reflect"}}
+\item{pad_mode}{(string, optional) controls the padding method used when        \code{center} is \code{TRUE}. Default: \code{"reflect"}}
 }
 \description{
 Stft
@@ -51,36 +51,36 @@ expression:
 }
 where \eqn{m} is the index of the sliding window, and \eqn{\omega} is
 the frequency that \eqn{0 \leq \omega < \mbox{n\_fft}}. When
-\code{onesided} is the default value \code{True},\preformatted{* `input` must be either a 1-D time sequence or a 2-D batch of time
+\code{onesided} is the default value \code{TRUE},\preformatted{* `input` must be either a 1-D time sequence or a 2-D batch of time
   sequences.
 
-* If `hop_length` is ``None`` (default), it is treated as equal to
-  ``floor(n_fft / 4)``.
+* If `hop_length` is `NULL` (default), it is treated as equal to
+  `floor(n_fft / 4)`.
 
-* If `win_length` is ``None`` (default), it is treated as equal to
+* If `win_length` is `NULL` (default), it is treated as equal to
   `n_fft`.
 
 * `window` can be a 1-D tensor of size `win_length`, e.g., from
-  `torch_hann_window`. If `window` is ``None`` (default), it is
+  `torch_hann_window`. If `window` is `NULL` (default), it is
   treated as if having \eqn{1} everywhere in the window. If
   \eqn{\mbox{win\_length} < \mbox{n\_fft}}, `window` will be padded on
   both sides to length `n_fft` before being applied.
 
-* If `center` is ``True`` (default), `input` will be padded on
+* If `center` is `TRUE` (default), `input` will be padded on
   both sides so that the \eqn{t}-th frame is centered at time
   \eqn{t \times \mbox{hop\_length}}. Otherwise, the \eqn{t}-th frame
   begins at time  \eqn{t \times \mbox{hop\_length}}.
 
 * `pad_mode` determines the padding method used on `input` when
-  `center` is ``True``. See `torch_nn.functional.pad` for
-  all available options. Default is ``"reflect"``.
+  `center` is `TRUE`. See `torch_nn.functional.pad` for
+  all available options. Default is `"reflect"`.
 
-* If `onesided` is ``True`` (default), only values for \eqn{\omega}
+* If `onesided` is `TRUE` (default), only values for \eqn{\omega}
   in \eqn{\left[0, 1, 2, \dots, \left\lfloor \frac{\mbox{n\_fft}}{2} \right\rfloor + 1\right]}
   are returned because the real-to-complex Fourier transform satisfies the
   conjugate symmetry, i.e., \eqn{X[m, \omega] = X[m, \mbox{n\_fft} - \omega]^*}.
 
-* If `normalized` is ``True`` (default is ``False``), the function
+* If `normalized` is `TRUE` (default is `FALSE`), the function
   returns the normalized STFT results, i.e., multiplied by \eqn{(\mbox{frame\_length})^{-0.5}}.
 
 Returns the real and the imaginary parts together as one tensor of size

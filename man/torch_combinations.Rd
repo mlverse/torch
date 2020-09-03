@@ -22,7 +22,7 @@ Combinations
 
 Compute combinations of length \eqn{r} of the given tensor. The behavior is similar to
 python's \code{itertools.combinations} when \code{with_replacement} is set to \code{False}, and
-\code{itertools.combinations_with_replacement} when \code{with_replacement} is set to \code{True}.
+\code{itertools.combinations_with_replacement} when \code{with_replacement} is set to \code{TRUE}.
 }
 
 \examples{

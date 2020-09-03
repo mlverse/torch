@@ -11,13 +11,11 @@ torch_ge(self, other)
 \item{self}{(Tensor) the tensor to compare}
 
 \item{other}{(Tensor or float) the tensor or value to compare}
-
-\item{out}{(Tensor, optional) the output tensor that must be a \code{BoolTensor}}
 }
 \description{
 Ge
 }
-\section{ge(input, other, out=None) -> Tensor }{
+\section{ge(input, other, out=NULL) -> Tensor }{
 
 
 Computes \eqn{\mbox{input} \geq \mbox{other}} element-wise.

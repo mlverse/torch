@@ -9,13 +9,11 @@ torch_reciprocal(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Reciprocal
 }
-\section{reciprocal(input, out=None) -> Tensor }{
+\section{reciprocal(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the reciprocal of the elements of \code{input}

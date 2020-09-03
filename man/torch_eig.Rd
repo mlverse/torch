@@ -10,9 +10,7 @@ torch_eig(self, eigenvectors = FALSE)
 \arguments{
 \item{self}{(Tensor) the square matrix of shape \eqn{(n \times n)} for which the eigenvalues and eigenvectors        will be computed}
 
-\item{eigenvectors}{(bool) \code{True} to compute both eigenvalues and eigenvectors;        otherwise, only eigenvalues will be computed}
-
-\item{out}{(tuple, optional) the output tensors}
+\item{eigenvectors}{(bool) \code{TRUE} to compute both eigenvalues and eigenvectors;        otherwise, only eigenvalues will be computed}
 }
 \description{
 Eig
@@ -22,7 +20,7 @@ Eig
 for [`torch_symeig`]
 }
 }
-\section{eig(input, eigenvectors=False, out=None) -> (Tensor, Tensor) }{
+\section{eig(input, eigenvectors=False, out=NULL) -> (Tensor, Tensor) }{
 
 
 Computes the eigenvalues and eigenvectors of a real square matrix.

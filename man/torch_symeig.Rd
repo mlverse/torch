@@ -30,7 +30,7 @@ Extra care needs to be taken when backward through outputs. Such
 operation is really only stable when all eigenvalues are distinct.
 Otherwise, \code{NaN} can appear as the gradients are not properly defined.
 }
-\section{symeig(input, eigenvectors=False, upper=True, out=None) -> (Tensor, Tensor) }{
+\section{symeig(input, eigenvectors=False, upper=TRUE, out=NULL) -> (Tensor, Tensor) }{
 
 
 This function returns eigenvalues and eigenvectors
@@ -43,13 +43,13 @@ such that \eqn{\mbox{input} = V \mbox{diag}(e) V^T}.
 The boolean argument \code{eigenvectors} defines computation of
 both eigenvectors and eigenvalues or eigenvalues only.
 
-If it is \code{False}, only eigenvalues are computed. If it is \code{True},
+If it is \code{FALSE}, only eigenvalues are computed. If it is \code{TRUE},
 both eigenvalues and eigenvectors are computed.
 
 Since the input matrix \code{input} is supposed to be symmetric,
 only the upper triangular portion is used by default.
 
-If \code{upper} is \code{False}, then lower triangular portion is used.
+If \code{upper} is \code{FALSE}, then lower triangular portion is used.
 }
 
 \examples{

@@ -9,13 +9,11 @@ torch_round(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Round
 }
-\section{round(input, out=None) -> Tensor }{
+\section{round(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with each of the elements of \code{input} rounded

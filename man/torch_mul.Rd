@@ -11,19 +11,11 @@ torch_mul(self, other)
 \item{self}{(Tensor) the first multiplicand tensor}
 
 \item{other}{(Tensor) the second multiplicand tensor}
-
-\item{{input}}{NA}
-
-\item{value}{(Number) the number to be multiplied to each element of \code{input}}
-
-\item{{out}}{NA}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Mul
 }
-\section{mul(input, other, out=None) }{
+\section{mul(input, other, out=NULL) }{
 
 
 Multiplies each element of the input \code{input} with the scalar

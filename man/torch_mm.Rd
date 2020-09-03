@@ -11,8 +11,6 @@ torch_mm(self, mat2)
 \item{self}{(Tensor) the first matrix to be multiplied}
 
 \item{mat2}{(Tensor) the second matrix to be multiplied}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Mm
@@ -21,7 +19,7 @@ Mm
 This function does not broadcast .
 For broadcasting matrix products, see \code{\link{torch_matmul}}.
 }
-\section{mm(input, mat2, out=None) -> Tensor }{
+\section{mm(input, mat2, out=NULL) -> Tensor }{
 
 
 Performs a matrix multiplication of the matrices \code{input} and \code{mat2}.

@@ -7,12 +7,17 @@
 \usage{
 torch_celu_(self, alpha = 1)
 }
+\arguments{
+\item{self}{the input tensor}
+
+\item{alpha}{the alpha value for the CELU formulation. Default: 1.0}
+}
 \description{
 Celu_
 }
 \section{celu_(input, alpha=1.) -> Tensor }{
 
 
-In-place version of \code{torch_celu}.
+In-place version of \code{\link[=torch_celu]{torch_celu()}}.
 }
 

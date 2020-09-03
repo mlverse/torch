@@ -11,13 +11,11 @@ torch_tril(self, diagonal = 0L)
 \item{self}{(Tensor) the input tensor.}
 
 \item{diagonal}{(int, optional) the diagonal to consider}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Tril
 }
-\section{tril(input, diagonal=0, out=None) -> Tensor }{
+\section{tril(input, diagonal=0, out=NULL) -> Tensor }{
 
 
 Returns the lower triangular part of the matrix (2-D tensor) or batch of matrices

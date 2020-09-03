@@ -9,13 +9,11 @@ torch_neg(self)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Neg
 }
-\section{neg(input, out=None) -> Tensor }{
+\section{neg(input, out=NULL) -> Tensor }{
 
 
 Returns a new tensor with the negative of the elements of \code{input}.

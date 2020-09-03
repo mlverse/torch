@@ -11,17 +11,15 @@ torch_logical_or(self, other)
 \item{self}{(Tensor) the input tensor.}
 
 \item{other}{(Tensor) the tensor to compute OR with}
-
-\item{out}{(Tensor, optional) the output tensor.}
 }
 \description{
 Logical_or
 }
-\section{logical_or(input, other, out=None) -> Tensor }{
+\section{logical_or(input, other, out=NULL) -> Tensor }{
 
 
-Computes the element-wise logical OR of the given input tensors. Zeros are treated as \code{False} and nonzeros are
-treated as \code{True}.
+Computes the element-wise logical OR of the given input tensors. Zeros are treated as \code{FALSE} and nonzeros are
+treated as \code{TRUE}.
 }
 
 \examples{

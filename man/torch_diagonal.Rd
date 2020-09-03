@@ -10,6 +10,8 @@ torch_diagonal(self, outdim, dim1 = 1L, dim2 = 2L, offset = 0L)
 \arguments{
 \item{self}{(Tensor) the input tensor. Must be at least 2-dimensional.}
 
+\item{outdim}{dimension name if \code{self} is a named tensor.}
+
 \item{dim1}{(int, optional) first dimension with respect to which to        take diagonal. Default: 0.}
 
 \item{dim2}{(int, optional) second dimension with respect to which to        take diagonal. Default: 1.}

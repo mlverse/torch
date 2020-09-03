@@ -10,28 +10,26 @@ torch_cholesky_solve(self, input2, upper = FALSE)
 \arguments{
 \item{self}{(Tensor) input matrix \eqn{b} of size \eqn{(*, m, k)},                where \eqn{*} is zero or more batch dimensions}
 
-\item{upper}{(bool, optional) whether to consider the Cholesky factor as a                            lower or upper triangular matrix. Default: \code{False}.}
+\item{input2}{(Tensor) input matrix \eqn{u} of size \eqn{(*, m, m)},                where \eqn{*} is zero of more batch dimensions composed of                upper or lower triangular Cholesky factor}
 
-\item{self2}{(Tensor) input matrix \eqn{u} of size \eqn{(*, m, m)},                where \eqn{*} is zero of more batch dimensions composed of                upper or lower triangular Cholesky factor}
-
-\item{out}{(Tensor, optional) the output tensor for \code{c}}
+\item{upper}{(bool, optional) whether to consider the Cholesky factor as a                            lower or upper triangular matrix. Default: \code{FALSE}.}
 }
 \description{
 Cholesky_solve
 }
-\section{cholesky_solve(input, input2, upper=False, out=None) -> Tensor }{
+\section{cholesky_solve(input, input2, upper=False, out=NULL) -> Tensor }{
 
 
 Solves a linear system of equations with a positive semidefinite
 matrix to be inverted given its Cholesky factor matrix \eqn{u}.
 
-If \code{upper} is \code{False}, \eqn{u} is and lower triangular and \code{c} is
+If \code{upper} is \code{FALSE}, \eqn{u} is and lower triangular and \code{c} is
 returned such that:
 
 \deqn{
     c = (u u^T)^{{-1}} b
 }
-If \code{upper} is \code{True} or not provided, \eqn{u} is upper triangular
+If \code{upper} is \code{TRUE} or not provided, \eqn{u} is upper triangular
 and \code{c} is returned such that:
 
 \deqn{
