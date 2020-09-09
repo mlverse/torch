@@ -11,8 +11,6 @@ torch_solve(self, A)
 \item{self}{(Tensor) input matrix \eqn{B} of size \eqn{(*, m, k)} , where \eqn{*}                is zero or more batch dimensions.}
 
 \item{A}{(Tensor) input square matrix of size \eqn{(*, m, m)}, where                \eqn{*} is zero or more batch dimensions.}
-
-\item{out}{((Tensor, Tensor) optional output tuple.}
 }
 \description{
 Solve
@@ -20,11 +18,11 @@ Solve
 \note{
 \preformatted{Irrespective of the original strides, the returned matrices
 `solution` and `LU` will be transposed, i.e. with strides like
-`B.contiguous().transpose(-1, -2).stride()` and
-`A.contiguous().transpose(-1, -2).stride()` respectively.
+`B$contiguous()$transpose(-1, -2)$stride()` and
+`A$contiguous()$transpose(-1, -2)$stride()` respectively.
 }
 }
-\section{torch.solve(input, A, out=NULL) -> (Tensor, Tensor) }{
+\section{solve(input, A) -> (Tensor, Tensor) }{
 
 
 This function returns the solution to the system of linear

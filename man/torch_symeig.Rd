@@ -13,8 +13,6 @@ torch_symeig(self, eigenvectors = FALSE, upper = TRUE)
 \item{eigenvectors}{(boolean, optional) controls whether eigenvectors have to be computed}
 
 \item{upper}{(boolean, optional) controls whether to consider upper-triangular or lower-triangular region}
-
-\item{out}{(tuple, optional) the output tuple of (Tensor, Tensor)}
 }
 \description{
 Symeig
@@ -30,7 +28,7 @@ Extra care needs to be taken when backward through outputs. Such
 operation is really only stable when all eigenvalues are distinct.
 Otherwise, \code{NaN} can appear as the gradients are not properly defined.
 }
-\section{symeig(input, eigenvectors=False, upper=TRUE, out=NULL) -> (Tensor, Tensor) }{
+\section{symeig(input, eigenvectors=False, upper=TRUE) -> (Tensor, Tensor) }{
 
 
 This function returns eigenvalues and eigenvectors

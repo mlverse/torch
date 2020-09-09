@@ -1323,8 +1323,8 @@ NULL
 #' 
 #' @section Warning:
 #'     Integer division using div is deprecated, and in a future release div will
-#'     perform true division like [`torch_true_divide`].
-#'     Use [`torch_floor_divide`] (// in Python) to perform integer division,
+#'     perform true division like [torch_true_divide()].
+#'     Use [torch_floor_divide()] to perform integer division,
 #'     instead.
 #' 
 #' \deqn{
@@ -3274,14 +3274,25 @@ NULL
 #' @export
 NULL
 
+#' Selu
+#'
+#' @section selu(input) -> Tensor :
+#'
+#' @param self the input tensor
+#'
+#' @name torch_selu
+#'
+#' @export
+NULL
+
 
 #' Selu_
 #'
 #' @section selu_(input) -> Tensor :
 #'
-#' In-place version of `toch_selu`.
-#'
-#'
+#' In-place version of [toch_selu()].
+#' 
+#' @param self the input tensor
 #'
 #'
 #' @name torch_selu_
@@ -3420,8 +3431,8 @@ NULL
 #'     to `split_size_or_sections`.
 #'
 #'
-#' @param tensor (Tensor) tensor to split.
-#' @param split_size_or_sections (int) size of a single chunk or        list of sizes for each chunk
+#' @param self (Tensor) tensor to split.
+#' @param split_size (int) size of a single chunk or        list of sizes for each chunk
 #' @param dim (int) dimension along which to split the tensor.
 #'
 #' @name torch_split
@@ -3535,9 +3546,9 @@ NULL
 #'     in the last dimension represents a complex number as the real part and the
 #'     imaginary part.
 #' 
-#'     .. warning::
-#'       This function changed signature at version 0.4.1. Calling with the
-#'       previous signature may cause error or return incorrect result.
+#' @section Warning:
+#' This function changed signature at version 0.4.1. Calling with the
+#' previous signature may cause error or return incorrect result.
 #'
 #'
 #' @param self (Tensor) the input tensor
@@ -3787,11 +3798,8 @@ NULL
 
 #' Tensordot
 #'
-#' @section TEST :
-#'
 #' Returns a contraction of a and b over multiple dimensions.
-#' 
-#'     `tensordot` implements a generalized matrix product.
+#' `tensordot` implements a generalized matrix product.
 #'
 #'
 #' @param a (Tensor) Left tensor to contract
@@ -3810,8 +3818,9 @@ NULL
 #'
 #' In-place version of `torch_threshold`.
 #'
-#'
-#'
+#' @param self input tensor
+#' @param threshold The value to threshold at
+#' @param value The value to replace with
 #'
 #' @name torch_threshold_
 #'
@@ -3931,8 +3940,8 @@ NULL
 #' }
 #'
 #'
-#' @param dividend (Tensor) the dividend
-#' @param divisor (Tensor or Scalar) the divisor
+#' @param self (Tensor) the dividend
+#' @param other (Tensor or Scalar) the divisor
 #'
 #' @name torch_true_divide
 #'
@@ -4099,12 +4108,12 @@ NULL
 #' `torch_nonzero(condition, as_tuple=TRUE)`.
 #' 
 #' @note
-#'     See also [`torch_nonzero`].
+#' See also [torch_nonzero()].
 #'
 #'
 #' @param condition (BoolTensor) When TRUE (nonzero), yield x, otherwise yield y
-#' @param x (Tensor) values selected at indices where `condition` is `TRUE`
-#' @param y (Tensor) values selected at indices where `condition` is `FALSE`
+#' @param self (Tensor) values selected at indices where `condition` is `TRUE`
+#' @param other (Tensor) values selected at indices where `condition` is `FALSE`
 #'
 #' @name torch_where
 #'
@@ -4120,13 +4129,14 @@ NULL
 #' by the variable argument `size`.
 #'
 #'
-#' @param size (int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
+#' @param ... a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.
 #' 
 #' @param dtype (`torch.dtype`, optional) the desired data type of returned tensor.        Default: if `NULL`, uses a global default (see `torch_set_default_tensor_type`).
 #' @param layout (`torch.layout`, optional) the desired layout of returned Tensor.        Default: `torch_strided`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if `NULL`, uses the current device for the default tensor type        (see `torch_set_default_tensor_type`). `device` will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.
 #' @param requires_grad (bool, optional) If autograd should record operations on the        returned tensor. Default: `FALSE`.
-#'
+#' @param names optional dimension names
+#' 
 #' @name torch_zeros
 #'
 #' @export
@@ -4147,7 +4157,7 @@ NULL
 #'     `torch_zeros(input.size(), out=output)`.
 #'
 #'
-#' @param self (Tensor) the size of `input` will determine size of the output tensor.
+#' @param input (Tensor) the size of `input` will determine size of the output tensor.
 #' @param dtype (`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if `NULL`, defaults to the dtype of `input`.
 #' @param layout (`torch.layout`, optional) the desired layout of returned tensor.        Default: if `NULL`, defaults to the layout of `input`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if `NULL`, defaults to the device of `input`.
@@ -4418,9 +4428,9 @@ NULL
 #' operation on the provided input tensors. See type promotion documentation 
 #' for more information on the type promotion logic.
 #'
-#'
 #' @param tensor1 (Tensor or Number) an input tensor or number
 #' @param tensor2 (Tensor or Number) an input tensor or number
+#' 
 #'
 #' @name torch_result_type
 #'
@@ -4747,8 +4757,7 @@ NULL
 #'
 #' Returns the sum of the elements of the diagonal of the input 2-D matrix.
 #'
-#'
-#'
+#' @param self the input tensor
 #'
 #' @name torch_trace
 #'
@@ -4881,7 +4890,7 @@ NULL
 #'
 #'
 #' @param self (Tensor) the input tensor.
-#' @param indices (LongTensor) the indices into tensor
+#' @param index (LongTensor) the indices into tensor
 #'
 #' @name torch_take
 #'
@@ -5160,7 +5169,7 @@ NULL
 
 #' Symeig
 #'
-#' @section symeig(input, eigenvectors=False, upper=TRUE, out=NULL) -> (Tensor, Tensor) :
+#' @section symeig(input, eigenvectors=False, upper=TRUE) -> (Tensor, Tensor) :
 #'
 #' This function returns eigenvalues and eigenvectors
 #' of a real symmetric matrix `input` or a batch of real symmetric matrices,
@@ -5194,7 +5203,6 @@ NULL
 #' @param self (Tensor) the input tensor of size \eqn{(*, n, n)} where `*` is zero or more                    batch dimensions consisting of symmetric matrices.
 #' @param eigenvectors (boolean, optional) controls whether eigenvectors have to be computed
 #' @param upper (boolean, optional) controls whether to consider upper-triangular or lower-triangular region
-#' @param out (tuple, optional) the output tuple of (Tensor, Tensor)
 #'
 #' @name torch_symeig
 #'
@@ -5224,7 +5232,7 @@ NULL
 
 #' Svd
 #'
-#' @section svd(input, some=TRUE, compute_uv=TRUE, out=NULL) -> (Tensor, Tensor, Tensor) :
+#' @section svd(input, some=TRUE, compute_uv=TRUE) -> (Tensor, Tensor, Tensor) :
 #'
 #' This function returns a namedtuple `(U, S, V)` which is the singular value
 #' decomposition of a input real matrix or batches of real matrices `input` such that
@@ -5265,7 +5273,6 @@ NULL
 #' @param self (Tensor) the input tensor of size \eqn{(*, m, n)} where `*` is zero or more                    batch dimensions consisting of \eqn{m \times n} matrices.
 #' @param some (bool, optional) controls the shape of returned `U` and `V`
 #' @param compute_uv (bool, optional) option whether to compute `U` and `V` or not
-#' @param out (tuple, optional) the output tuple of tensors
 #'
 #' @name torch_svd
 #'
@@ -5346,7 +5353,7 @@ NULL
 
 #' Solve
 #'
-#' @section torch.solve(input, A, out=NULL) -> (Tensor, Tensor) :
+#' @section solve(input, A) -> (Tensor, Tensor) :
 #'
 #' This function returns the solution to the system of linear
 #' equations represented by \eqn{AX = B} and the LU factorization of
@@ -5362,13 +5369,12 @@ NULL
 #' 
 #'     Irrespective of the original strides, the returned matrices
 #'     `solution` and `LU` will be transposed, i.e. with strides like
-#'     `B.contiguous().transpose(-1, -2).stride()` and
-#'     `A.contiguous().transpose(-1, -2).stride()` respectively.
+#'     `B$contiguous()$transpose(-1, -2)$stride()` and
+#'     `A$contiguous()$transpose(-1, -2)$stride()` respectively.
 #'
 #'
 #' @param self (Tensor) input matrix \eqn{B} of size \eqn{(*, m, k)} , where \eqn{*}                is zero or more batch dimensions.
 #' @param A (Tensor) input square matrix of size \eqn{(*, m, m)}, where                \eqn{*} is zero or more batch dimensions.
-#' @param out ((Tensor, Tensor) optional output tuple.
 #'
 #' @name torch_solve
 #'
@@ -5487,15 +5493,17 @@ NULL
 #' @section ormqr(input, input2, input3, left=TRUE, transpose=False) -> Tensor :
 #'
 #' Multiplies `mat` (given by `input3`) by the orthogonal `Q` matrix of the QR factorization
-#' formed by [`torch_geqrf`] that is represented by `(a, tau)` (given by (`input`, `input2`)).
+#' formed by [torch_geqrf()] that is represented by `(a, tau)` (given by (`input`, `input2`)).
 #' 
 #' This directly calls the underlying LAPACK function `?ormqr`.
-#' See `LAPACK documentation for ormqr`_ for further details.
+#' See [LAPACK documentation for ormqr](https://software.intel.com/content/www/us/en/develop/documentation/mkl-developer-reference-c/top/scalapack-routines/scalapack-computational-routines/orthogonal-factorizations-scalapack-computational-routines/p-ormqr.html) for further details.
 #'
 #'
 #' @param self (Tensor) the `a` from [`torch_geqrf`].
 #' @param input2 (Tensor) the `tau` from [`torch_geqrf`].
 #' @param input3 (Tensor) the matrix to be multiplied.
+#' @param left see LAPACK documentation
+#' @param transpose see LAPACK documentation
 #'
 #' @name torch_ormqr
 #'
@@ -5812,7 +5820,7 @@ NULL
 
 #' Sort
 #'
-#' @section sort(input, dim=-1, descending=False, out=NULL) -> (Tensor, LongTensor) :
+#' @section sort(input, dim=-1, descending=FALSE) -> (Tensor, LongTensor) :
 #'
 #' Sorts the elements of the `input` tensor along a given dimension
 #' in ascending order by value.
@@ -5830,7 +5838,6 @@ NULL
 #' @param self (Tensor) the input tensor.
 #' @param dim (int, optional) the dimension to sort along
 #' @param descending (bool, optional) controls the sorting order (ascending or descending)
-#' @param out (tuple, optional) the output tuple of (`Tensor`, `LongTensor`) that can        be optionally given to be used as output buffers
 #'
 #' @name torch_sort
 #'
@@ -5861,7 +5868,7 @@ NULL
 
 #' Topk
 #'
-#' @section topk(input, k, dim=NULL, largest=TRUE, sorted=TRUE, out=NULL) -> (Tensor, LongTensor) :
+#' @section topk(input, k, dim=NULL, largest=TRUE, sorted=TRUE) -> (Tensor, LongTensor) :
 #'
 #' Returns the `k` largest elements of the given `input` tensor along
 #' a given dimension.
@@ -5882,7 +5889,6 @@ NULL
 #' @param dim (int, optional) the dimension to sort along
 #' @param largest (bool, optional) controls whether to return largest or           smallest elements
 #' @param sorted (bool, optional) controls whether to return the elements           in sorted order
-#' @param out (tuple, optional) the output tuple of (Tensor, LongTensor) that can be        optionally given to be used as output buffers
 #'
 #' @name torch_topk
 #'

@@ -10,9 +10,9 @@ torch_where(condition, self, other)
 \arguments{
 \item{condition}{(BoolTensor) When TRUE (nonzero), yield x, otherwise yield y}
 
-\item{x}{(Tensor) values selected at indices where \code{condition} is \code{TRUE}}
+\item{self}{(Tensor) values selected at indices where \code{condition} is \code{TRUE}}
 
-\item{y}{(Tensor) values selected at indices where \code{condition} is \code{FALSE}}
+\item{other}{(Tensor) values selected at indices where \code{condition} is \code{FALSE}}
 }
 \description{
 Where
@@ -21,8 +21,7 @@ Where
 \preformatted{The tensors `condition`, `x`, `y` must be broadcastable .
 }
 
-\preformatted{See also [`torch_nonzero`].
-}
+See also \code{\link[=torch_nonzero]{torch_nonzero()}}.
 }
 \section{where(condition, x, y) -> Tensor }{
 

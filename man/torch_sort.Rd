@@ -13,13 +13,11 @@ torch_sort(self, dim = -1L, descending = FALSE)
 \item{dim}{(int, optional) the dimension to sort along}
 
 \item{descending}{(bool, optional) controls the sorting order (ascending or descending)}
-
-\item{out}{(tuple, optional) the output tuple of (\code{Tensor}, \code{LongTensor}) that can        be optionally given to be used as output buffers}
 }
 \description{
 Sort
 }
-\section{sort(input, dim=-1, descending=False, out=NULL) -> (Tensor, LongTensor) }{
+\section{sort(input, dim=-1, descending=FALSE) -> (Tensor, LongTensor) }{
 
 
 Sorts the elements of the \code{input} tensor along a given dimension

@@ -7,6 +7,9 @@
 \usage{
 torch_trace(self)
 }
+\arguments{
+\item{self}{the input tensor}
+}
 \description{
 Trace
 }

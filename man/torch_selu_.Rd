@@ -7,12 +7,15 @@
 \usage{
 torch_selu_(self)
 }
+\arguments{
+\item{self}{the input tensor}
+}
 \description{
 Selu_
 }
 \section{selu_(input) -> Tensor }{
 
 
-In-place version of \code{toch_selu}.
+In-place version of \code{\link[=toch_selu]{toch_selu()}}.
 }
 

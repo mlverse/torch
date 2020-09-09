@@ -8,9 +8,9 @@
 torch_true_divide(self, other)
 }
 \arguments{
-\item{dividend}{(Tensor) the dividend}
+\item{self}{(Tensor) the dividend}
 
-\item{divisor}{(Tensor or Scalar) the divisor}
+\item{other}{(Tensor or Scalar) the divisor}
 }
 \description{
 TRUE_divide

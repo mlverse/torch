@@ -13,8 +13,6 @@ torch_svd(self, some = TRUE, compute_uv = TRUE)
 \item{some}{(bool, optional) controls the shape of returned \code{U} and \code{V}}
 
 \item{compute_uv}{(bool, optional) option whether to compute \code{U} and \code{V} or not}
-
-\item{out}{(tuple, optional) the output tuple of tensors}
 }
 \description{
 Svd
@@ -44,7 +42,7 @@ can be arbitrary bases of the subspaces.
 When \code{compute_uv} = \code{FALSE}, backward cannot be performed since \code{U} and \code{V}
 from the forward pass is required for the backward operation.
 }
-\section{svd(input, some=TRUE, compute_uv=TRUE, out=NULL) -> (Tensor, Tensor, Tensor) }{
+\section{svd(input, some=TRUE, compute_uv=TRUE) -> (Tensor, Tensor, Tensor) }{
 
 
 This function returns a namedtuple \verb{(U, S, V)} which is the singular value

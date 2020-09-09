@@ -15,15 +15,9 @@ torch_tensordot(self, other, dims_self, dims_other)
 \item{dims}{(int or tuple of two lists of integers) number of dimensions to     contract or explicit lists of dimensions for \code{a} and     \code{b} respectively}
 }
 \description{
-Tensordot
+Returns a contraction of a and b over multiple dimensions.
+\code{tensordot} implements a generalized matrix product.
 }
-\section{TEST }{
-
-
-Returns a contraction of a and b over multiple dimensions.\preformatted{`tensordot` implements a generalized matrix product.
-}
-}
-
 \examples{
 if (torch_is_installed()) {
 

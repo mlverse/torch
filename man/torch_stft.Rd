@@ -89,10 +89,12 @@ batch size of `input`, \eqn{N} is the number of frequencies where
 STFT is applied, \eqn{T} is the total number of frames used, and each pair
 in the last dimension represents a complex number as the real part and the
 imaginary part.
-
-.. warning::
-  This function changed signature at version 0.4.1. Calling with the
-  previous signature may cause error or return incorrect result.
 }
+}
+
+\section{Warning}{
+
+This function changed signature at version 0.4.1. Calling with the
+previous signature may cause error or return incorrect result.
 }
 

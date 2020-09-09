@@ -10,7 +10,7 @@ torch_take(self, index)
 \arguments{
 \item{self}{(Tensor) the input tensor.}
 
-\item{indices}{(LongTensor) the indices into tensor}
+\item{index}{(LongTensor) the indices into tensor}
 }
 \description{
 Take

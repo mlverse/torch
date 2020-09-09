@@ -7,6 +7,13 @@
 \usage{
 torch_threshold_(self, threshold, value)
 }
+\arguments{
+\item{self}{input tensor}
+
+\item{threshold}{The value to threshold at}
+
+\item{value}{The value to replace with}
+}
 \description{
 Threshold_
 }

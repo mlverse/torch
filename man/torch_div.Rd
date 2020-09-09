@@ -41,8 +41,8 @@ specified output tensor. Integral division by zero leads to undefined behavior.
 \section{Warning}{
 
 Integer division using div is deprecated, and in a future release div will
-perform true division like \code{\link{torch_true_divide}}.
-Use \code{\link{torch_floor_divide}} (// in Python) to perform integer division,
+perform true division like \code{\link[=torch_true_divide]{torch_true_divide()}}.
+Use \code{\link[=torch_floor_divide]{torch_floor_divide()}} to perform integer division,
 instead.
 
 \deqn{

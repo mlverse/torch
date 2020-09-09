@@ -15,6 +15,8 @@ torch_zeros_like(
 )
 }
 \arguments{
+\item{input}{(Tensor) the size of \code{input} will determine size of the output tensor.}
+
 \item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned Tensor.        Default: if \code{NULL}, defaults to the dtype of \code{input}.}
 
 \item{layout}{(\code{torch.layout}, optional) the desired layout of returned tensor.        Default: if \code{NULL}, defaults to the layout of \code{input}.}
@@ -24,8 +26,6 @@ torch_zeros_like(
 \item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{FALSE}.}
 
 \item{memory_format}{(\code{torch.memory_format}, optional) the desired memory format of        returned Tensor. Default: \code{torch_preserve_format}.}
-
-\item{self}{(Tensor) the size of \code{input} will determine size of the output tensor.}
 }
 \description{
 Zeros_like

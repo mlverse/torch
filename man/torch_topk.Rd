@@ -17,13 +17,11 @@ torch_topk(self, k, dim = -1L, largest = TRUE, sorted = TRUE)
 \item{largest}{(bool, optional) controls whether to return largest or           smallest elements}
 
 \item{sorted}{(bool, optional) controls whether to return the elements           in sorted order}
-
-\item{out}{(tuple, optional) the output tuple of (Tensor, LongTensor) that can be        optionally given to be used as output buffers}
 }
 \description{
 Topk
 }
-\section{topk(input, k, dim=NULL, largest=TRUE, sorted=TRUE, out=NULL) -> (Tensor, LongTensor) }{
+\section{topk(input, k, dim=NULL, largest=TRUE, sorted=TRUE) -> (Tensor, LongTensor) }{
 
 
 Returns the \code{k} largest elements of the given \code{input} tensor along
