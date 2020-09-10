@@ -230,17 +230,18 @@ triangular such that the returned tensor is</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) + <span class='fl'>1e-05</span> * <span class='fu'><a href='torch_eye.html'>torch_eye</a></span>(<span class='fl'>3</span>) <span class='co'># make symmetric positive definite</span>
-<span class='no'>u</span> <span class='kw'>=</span> <span class='fu'><a href='torch_cholesky.html'>torch_cholesky</a></span>(<span class='no'>a</span>)
-<span class='no'>a</span>
-<span class='fu'>torch_cholesky_inverse</span>(<span class='no'>u</span>)
-<span class='no'>a</span>$<span class='fu'>inverse</span>()
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='kw'>a</span>, <span class='kw'>a</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='op'>+</span> <span class='fl'>1e-05</span> <span class='op'>*</span> <span class='fu'><a href='torch_eye.html'>torch_eye</a></span>(<span class='fl'>3</span>) <span class='co'># make symmetric positive definite</span>
+<span class='kw'>u</span> <span class='op'>=</span> <span class='fu'><a href='torch_cholesky.html'>torch_cholesky</a></span>(<span class='kw'>a</span>)
+<span class='kw'>a</span>
+<span class='fu'>torch_cholesky_inverse</span>(<span class='kw'>u</span>)
+<span class='kw'>a</span><span class='op'>$</span><span class='fu'>inverse</span>()
 }
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -256,7 +257,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

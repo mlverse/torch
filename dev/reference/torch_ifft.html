@@ -251,27 +251,28 @@ shape of <code>input</code>.</p>
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
-<span class='no'>x</span>
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_fft.html'>torch_fft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>)
-<span class='fu'>torch_ifft</span>(<span class='no'>y</span>, <span class='fl'>2</span>)  <span class='co'># recover x</span>
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
+<span class='kw'>x</span>
+<span class='kw'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_fft.html'>torch_fft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>)
+<span class='fu'>torch_ifft</span>(<span class='kw'>y</span>, <span class='fl'>2</span>)  <span class='co'># recover x</span>
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.9331  0.5891
-#&gt;   0.6086 -1.6698
-#&gt;  -1.2684  1.0240
+#&gt;   1.7807 -3.0166
+#&gt;  -0.0180 -0.2902
+#&gt;  -0.9219 -1.4169
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.8979 -0.7811
-#&gt;  -1.1726 -0.7401
-#&gt;   0.1478  0.9583
+#&gt;  -1.6203 -2.3800
+#&gt;   0.6503 -1.9604
+#&gt;  -0.4098  0.9305
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   1.6601  1.2058
-#&gt;  -1.7745 -0.0707
-#&gt;   0.3211 -0.4748
+#&gt;  -2.1143  0.6126
+#&gt;  -0.3554  0.3078
+#&gt;  -0.8924  0.4325
 #&gt; [ CPUFloatType{3,3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -288,7 +289,7 @@ shape of <code>input</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

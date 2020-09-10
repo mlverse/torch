@@ -234,19 +234,20 @@ Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>
 output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_sum</span>(<span class='no'>a</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_sum</span>(<span class='kw'>a</span>)
 
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_sum</span>(<span class='no'>a</span>, <span class='fl'>1</span>)
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>0</span>, <span class='fl'>4</span> * <span class='fl'>5</span> * <span class='fl'>6</span>)$<span class='fu'>view</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>))
-<span class='fu'>torch_sum</span>(<span class='no'>b</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>))
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_sum</span>(<span class='kw'>a</span>, <span class='fl'>1</span>)
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>0</span>, <span class='fl'>4</span> <span class='op'>*</span> <span class='fl'>5</span> <span class='op'>*</span> <span class='fl'>6</span>)<span class='op'>$</span><span class='fu'>view</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>))
+<span class='fu'>torch_sum</span>(<span class='kw'>b</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>))
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt;   435
 #&gt;  1335
 #&gt;  2235
@@ -267,7 +268,7 @@ output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

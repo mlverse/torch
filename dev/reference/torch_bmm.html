@@ -231,62 +231,63 @@ the same number of matrices.</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>input</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>mat2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='no'>res</span> <span class='kw'>=</span> <span class='fu'>torch_bmm</span>(<span class='no'>input</span>, <span class='no'>mat2</span>)
-<span class='no'>res</span>
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>mat2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='kw'>res</span> <span class='op'>=</span> <span class='fu'>torch_bmm</span>(<span class='kw'>input</span>, <span class='kw'>mat2</span>)
+<span class='kw'>res</span>
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.5639  0.5015 -0.5818  0.8383  0.6676
-#&gt;  -0.4115 -0.5998 -0.6197  2.6019 -0.2467
-#&gt;   1.0459 -3.0578  1.6647 -2.4079  3.0693
+#&gt;  -2.2771 -0.9093 -0.2084  0.4555  0.8387
+#&gt;  -3.2459  1.1252 -1.5490  0.3240  1.3147
+#&gt;   0.4230 -8.9337  1.5958  0.2379  3.1184
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   2.5536 -1.9991  0.0017  0.7706  0.4351
-#&gt;   0.0624 -1.8196 -0.1237  0.0729  0.6850
-#&gt;  -4.5205  3.0285 -1.4495 -2.3703 -1.5575
+#&gt;  -2.1891 -2.1335  1.1166  0.1508  0.7253
+#&gt;   2.4373  0.6946  0.6922 -0.5193 -0.5941
+#&gt;   0.1446  0.4340 -0.0772  0.0870 -0.0670
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -2.1962 -0.1065 -2.0160  1.7929 -0.7546
-#&gt;  -1.0096 -1.5000 -1.2280 -0.0057 -0.0922
-#&gt;   1.2981  2.8129  2.3544  1.6807 -0.3341
+#&gt;  -1.8826  4.8220 -0.3342  1.0659  0.2668
+#&gt;   1.8659  0.4047  0.9092 -0.2925  0.6834
+#&gt;   1.2092  0.0082  0.4118 -1.3635  2.2281
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   0.4509 -0.5853 -1.3673 -1.8135  1.7574
-#&gt;   1.6672  1.3572 -1.2012 -0.7890  1.9513
-#&gt;   1.4903 -1.1885 -2.4833 -1.3062  0.8271
+#&gt;  -1.5438  2.0759 -0.5856  3.4518  4.2184
+#&gt;   0.5688 -2.3319  2.8710 -1.8290 -0.6351
+#&gt;  -0.9847  0.4921 -0.2628  1.2463  2.0243
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -2.0464  1.3020 -1.1384  0.3837  0.5573
-#&gt;  -0.9016  1.3830 -2.2158  0.3986 -0.3286
-#&gt;   3.4732 -3.4086  6.3977 -1.6900  0.0444
+#&gt;  -3.7328 -1.9587  2.0068  0.9411  0.0130
+#&gt;  -3.3558 -2.1387  3.5200 -0.7432 -0.6564
+#&gt;  -2.2410 -1.7455  3.9811 -0.7573  1.2758
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;  -1.6648 -0.8168 -0.0108  0.5173 -0.5825
-#&gt;   2.4615  1.9033  0.0247 -1.6076 -0.0021
-#&gt;  -3.8505 -1.0360  0.0754  0.2369 -1.4946
+#&gt;   0.1908 -1.4856 -0.8809  2.2963 -1.2178
+#&gt;   1.9483 -1.2065 -1.5980  2.9723 -2.9774
+#&gt;  -0.7287  0.5292  1.0572 -0.7761  0.0438
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;   3.2437 -3.7193  1.5687 -1.3478 -2.3966
-#&gt;  -1.0571  1.2457 -0.0815  1.5276  2.0666
-#&gt;  -6.1090  6.9734 -5.4398 -0.6387  2.5682
+#&gt;  -0.6187  0.9263 -0.1478 -1.1205  0.6868
+#&gt;  -0.1907 -0.1589  0.2744  2.1122 -0.7219
+#&gt;   3.9720 -0.0103 -1.1561  4.5769 -3.2399
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;  -0.2282 -0.9140  5.8808  3.3669 -1.0483
-#&gt;   1.5274  2.2634 -1.9888  2.0791 -2.9797
-#&gt;   1.0180  0.9727 -7.6982 -2.7270 -1.2560
+#&gt;  -0.1231  1.4416 -1.2322  2.3795 -1.1783
+#&gt;   1.1306  0.7667  0.4817 -0.6974  0.6749
+#&gt;  -1.2890  2.3087 -2.2267  1.7866 -1.9033
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;   1.2113  0.0039  2.4015  1.5693 -4.8668
-#&gt;   2.2198 -1.2306  1.3529 -0.2021 -0.2865
-#&gt;  -2.9722  1.9178 -2.9283 -0.1921  3.7759
+#&gt;   0.6682 -2.6641 -0.3882  0.1270  0.5253
+#&gt;  -0.1547 -1.9189  1.1093 -0.0977 -0.3841
+#&gt;   0.4640  1.6084 -3.1401  2.6759 -0.4273
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;   1.1024  0.7076 -2.0377  1.5775 -3.8108
-#&gt;  -0.7841 -1.5683  4.1401  2.7093  5.3792
-#&gt;   0.5468  0.3027  0.1840  2.8024 -1.4140
+#&gt;   0.7711 -0.0400 -0.6204  0.0351 -2.1407
+#&gt;   0.5006  1.1768  0.7673  0.3148 -0.8755
+#&gt;   0.5819  0.7507  1.0334  0.6318 -0.7103
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -303,7 +304,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

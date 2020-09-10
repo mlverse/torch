@@ -229,25 +229,26 @@ sorted values and <code>indices</code> are the indices of the elements in the or
 <code>input</code> tensor.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_sort</span>(<span class='no'>x</span>)
-<span class='no'>out</span>
-<span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_sort</span>(<span class='no'>x</span>, <span class='fl'>1</span>)
-<span class='no'>out</span>
-}</div><div class='output co'>#&gt; [[1]]
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>out</span> <span class='op'>=</span> <span class='fu'>torch_sort</span>(<span class='kw'>x</span>)
+<span class='kw'>out</span>
+<span class='kw'>out</span> <span class='op'>=</span> <span class='fu'>torch_sort</span>(<span class='kw'>x</span>, <span class='fl'>1</span>)
+<span class='kw'>out</span>
+}
+</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -0.8963 -1.1968 -0.0819 -0.9958
-#&gt; -0.0223 -0.4715  0.5819 -0.6021
-#&gt;  0.3608  1.7683  0.6994  0.2634
+#&gt; -1.2688 -0.8877 -0.9812 -1.9686
+#&gt; -0.1888 -0.5498  0.3137 -0.7877
+#&gt;  2.1991  0.1596  1.2797  0.0328
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  2  2  0  0
-#&gt;  0  1  1  2
-#&gt;  1  0  2  1
+#&gt;  2  1  1  2
+#&gt;  1  0  0  1
+#&gt;  0  2  2  0
 #&gt; [ CPULongType{3,4} ]
 #&gt; </div></pre>
   </div>
@@ -265,7 +266,7 @@ sorted values and <code>indices</code> are the indices of the elements in the or
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

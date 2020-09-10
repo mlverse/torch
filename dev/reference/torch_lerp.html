@@ -229,15 +229,16 @@ broadcastable . If <code>weight</code> is a tensor, then
 the shapes of <code>weight</code>, <code>start</code>, and <code>end</code> must be broadcastable .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>start</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
-<span class='no'>end</span> <span class='kw'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>4</span>)$<span class='fu'>fill_</span>(<span class='fl'>10</span>)
-<span class='no'>start</span>
-<span class='no'>end</span>
-<span class='fu'>torch_lerp</span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='fl'>0.5</span>)
-<span class='fu'>torch_lerp</span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='fu'><a href='torch_full_like.html'>torch_full_like</a></span>(<span class='no'>start</span>, <span class='fl'>0.5</span>))
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>start</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
+<span class='kw'>end</span> <span class='op'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>4</span>)<span class='op'>$</span><span class='fu'>fill_</span>(<span class='fl'>10</span>)
+<span class='kw'>start</span>
+<span class='kw'>end</span>
+<span class='fu'>torch_lerp</span>(<span class='kw'>start</span>, <span class='kw'>end</span>, <span class='fl'>0.5</span>)
+<span class='fu'>torch_lerp</span>(<span class='kw'>start</span>, <span class='kw'>end</span>, <span class='fu'><a href='torch_full_like.html'>torch_full_like</a></span>(<span class='kw'>start</span>, <span class='fl'>0.5</span>))
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  5.5000
 #&gt;  6.0000
 #&gt;  6.5000
@@ -258,7 +259,7 @@ the shapes of <code>weight</code>, <code>start</code>, and <code>end</code> must
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

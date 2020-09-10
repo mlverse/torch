@@ -233,25 +233,26 @@ coordinates in the indices, and the value at that index is the sum of all duplic
 <code>torch_sparse</code>_.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>i</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>3</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='kw'>dtype</span><span class='kw'>=</span><span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>())
-<span class='no'>v</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>), <span class='kw'>dtype</span><span class='kw'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float32</a></span>())
-<span class='fu'>torch_sparse_coo_tensor</span>(<span class='no'>i</span>, <span class='no'>v</span>)
-<span class='fu'>torch_sparse_coo_tensor</span>(<span class='no'>i</span>, <span class='no'>v</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>4</span>))
+<span class='kw'>i</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>3</span>), ncol = <span class='fl'>3</span>, byrow = <span class='fl'>TRUE</span>), dtype=<span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>())
+<span class='kw'>v</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>), dtype=<span class='fu'><a href='torch_dtype.html'>torch_float32</a></span>())
+<span class='fu'>torch_sparse_coo_tensor</span>(<span class='kw'>i</span>, <span class='kw'>v</span>)
+<span class='fu'>torch_sparse_coo_tensor</span>(<span class='kw'>i</span>, <span class='kw'>v</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>4</span>))
 
 <span class='co'># create empty sparse tensors</span>
-<span class='no'>S</span> <span class='kw'>=</span> <span class='fu'>torch_sparse_coo_tensor</span>(
-  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>()),
-  <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span>(), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_float32</a></span>()),
+<span class='kw'>S</span> <span class='op'>=</span> <span class='fu'>torch_sparse_coo_tensor</span>(
+  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>), dtype = <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>()), 
+  <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span>(), dtype = <span class='fu'><a href='torch_dtype.html'>torch_float32</a></span>()), 
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>)
 )
-<span class='no'>S</span> <span class='kw'>=</span> <span class='fu'>torch_sparse_coo_tensor</span>(
-  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>()),
-  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>)),
+<span class='kw'>S</span> <span class='op'>=</span> <span class='fu'>torch_sparse_coo_tensor</span>(
+  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>), dtype = <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>()), 
+  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>)), 
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
 )
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -267,7 +268,7 @@ coordinates in the indices, and the value at that index is the sum of all duplic
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

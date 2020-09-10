@@ -258,46 +258,47 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
-<span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)
-<span class='fu'>torch_rfft</span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
+<span class='fu'>torch_rfft</span>(<span class='kw'>x</span>, <span class='fl'>2</span>)
+<span class='fu'>torch_rfft</span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>FALSE</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -2.6469  0.0000
-#&gt;  -11.1093  0.3536
-#&gt;   1.8056 -4.3933
-#&gt;   1.8056  4.3933
-#&gt;  -11.1093 -0.3536
+#&gt;   1.7940  0.0000
+#&gt;   0.1913  2.1054
+#&gt;   0.9332 -2.0831
+#&gt;   0.9332  2.0831
+#&gt;   0.1913 -2.1054
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -3.5969  2.8082
-#&gt;  -2.0295 -1.4774
-#&gt;   0.8877  3.3879
-#&gt;  -2.0009 -2.4438
-#&gt;   8.4841  1.0627
+#&gt;   4.0376 -4.3444
+#&gt;  -1.2276  7.9085
+#&gt;   1.6303  0.4219
+#&gt;   0.8130 -1.9922
+#&gt;  -1.1740 -0.0170
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   2.8664 -6.4610
-#&gt;  -0.3128 -1.9888
-#&gt;  -4.7966 -8.1040
-#&gt;   3.6388  1.7205
-#&gt;   5.7337  3.8018
+#&gt;  -0.5914 -2.4993
+#&gt;   0.7003 -3.8804
+#&gt;   0.7687 -6.1813
+#&gt;  -2.1171 -2.2787
+#&gt;  -7.6852  0.9165
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   2.8664  6.4610
-#&gt;   5.7337 -3.8018
-#&gt;   3.6388 -1.7205
-#&gt;  -4.7966  8.1040
-#&gt;  -0.3128  1.9888
+#&gt;  -0.5914  2.4993
+#&gt;  -7.6852 -0.9165
+#&gt;  -2.1171  2.2787
+#&gt;   0.7687  6.1813
+#&gt;   0.7003  3.8804
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -3.5969 -2.8082
-#&gt;   8.4841 -1.0627
-#&gt;  -2.0009  2.4438
-#&gt;   0.8877 -3.3879
-#&gt;  -2.0295  1.4774
+#&gt;   4.0376  4.3444
+#&gt;  -1.1740  0.0170
+#&gt;   0.8130  1.9922
+#&gt;   1.6303 -0.4219
+#&gt;  -1.2276 -7.9085
 #&gt; [ CPUFloatType{5,5,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -314,7 +315,7 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

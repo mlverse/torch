@@ -194,9 +194,9 @@ $$ELU(x) = max(0,x) + min(0, \alpha * (exp(x) - 1))$$." />
 $$ELU(x) = max(0,x) + min(0, \alpha * (exp(x) - 1))$$.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_elu</span>(<span class='no'>input</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>inplace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>nnf_elu</span>(<span class='kw'>input</span>, alpha = <span class='fl'>1</span>, inplace = <span class='fl'>FALSE</span>)
 
-<span class='fu'>nnf_elu_</span>(<span class='no'>input</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+<span class='fu'>nnf_elu_</span>(<span class='kw'>input</span>, alpha = <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,13 +218,14 @@ dimensions</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>)
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>nnf_elu</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='fu'>nnf_elu_</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='fu'><a href='torch_equal.html'>torch_equal</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>)
+<span class='kw'>y</span> <span class='op'>&lt;-</span> <span class='fu'>nnf_elu</span>(<span class='kw'>x</span>, alpha = <span class='fl'>1</span>)
+<span class='fu'>nnf_elu_</span>(<span class='kw'>x</span>, alpha = <span class='fl'>1</span>)
+<span class='fu'><a href='torch_equal.html'>torch_equal</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>)
 
-}</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+}
+</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -240,7 +241,7 @@ dimensions</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

@@ -223,7 +223,7 @@
     
 
 
-<p>Clamp all elements in <code>input</code> into the range <code>[</code> <code>min</code>, <code>max</code> <code>]</code> and return
+<p>Clamp all elements in <code>input</code> into the range <code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> <code>min</code>, <code>max</code> <code>]</code> and return
 a resulting tensor:</p>
 <p>$$
     y_i = \left\{ \begin{array}{ll}
@@ -253,26 +253,27 @@ should be a real number, otherwise it should be an integer.</p>
 should be a real number, otherwise it should be an integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>min</span><span class='kw'>=</span>-<span class='fl'>0.5</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>0.5</span>)
-
-
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>min</span><span class='kw'>=</span><span class='fl'>0.5</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_clamp</span>(<span class='kw'>a</span>, min=<span class='op'>-</span><span class='fl'>0.5</span>, max=<span class='fl'>0.5</span>)
 
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_clamp</span>(<span class='no'>a</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>0.5</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3182
-#&gt; -0.7905
-#&gt; -1.0434
-#&gt; -0.9904
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_clamp</span>(<span class='kw'>a</span>, min=<span class='fl'>0.5</span>)
+
+
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_clamp</span>(<span class='kw'>a</span>, max=<span class='fl'>0.5</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.5000
+#&gt; -0.4174
+#&gt; -0.1663
+#&gt;  0.5000
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -289,7 +290,7 @@ should be a real number, otherwise it should be an integer.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

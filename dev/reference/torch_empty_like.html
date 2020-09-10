@@ -232,12 +232,13 @@
 <code><a href='torch_empty.html'>torch_empty(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>())
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -6.9175e+18  2.3059e+18  1.4035e+14
-#&gt;  1.4035e+14  0.0000e+00  0.0000e+00
+<span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>), dtype = <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>())
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.0000e+00  0.0000e+00  1.2885e+10
+#&gt;  0.0000e+00  0.0000e+00  0.0000e+00
 #&gt; [ CPULongType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -254,7 +255,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

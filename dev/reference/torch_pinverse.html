@@ -228,25 +228,26 @@ See `~torch.svd` for more details.
 Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>input</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>))
-<span class='no'>input</span>
-<span class='fu'>torch_pinverse</span>(<span class='no'>input</span>)
+<span class='kw'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>))
+<span class='kw'>input</span>
+<span class='fu'>torch_pinverse</span>(<span class='kw'>input</span>)
 <span class='co'># Batched pinverse example</span>
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>6</span>,<span class='fl'>3</span>))
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'>torch_pinverse</span>(<span class='no'>a</span>)
-<span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>b</span>, <span class='no'>a</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>6</span>,<span class='fl'>3</span>))
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'>torch_pinverse</span>(<span class='kw'>a</span>)
+<span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>b</span>, <span class='kw'>a</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.0000e+00 -9.4995e-08  3.3528e-08
-#&gt;  -1.8440e-07  1.0000e+00 -7.9162e-09
-#&gt;  -2.2538e-07 -1.3411e-07  1.0000e+00
+#&gt;   1.0000e+00 -5.2154e-08  2.2352e-08
+#&gt;   5.5879e-09  1.0000e+00 -7.4506e-08
+#&gt;  -6.5193e-08 -4.6566e-10  1.0000e+00
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.0000e+00 -2.6822e-07 -6.7055e-08
-#&gt;   9.3132e-10  1.0000e+00  1.1921e-07
-#&gt;  -4.3772e-08  1.9372e-07  1.0000e+00
+#&gt;   1.0000e+00 -8.9407e-08  5.9605e-08
+#&gt;   1.7509e-07  1.0000e+00  2.9802e-07
+#&gt;   1.4901e-07  1.1921e-07  1.0000e+00
 #&gt; [ CPUFloatType{2,3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -263,7 +264,7 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

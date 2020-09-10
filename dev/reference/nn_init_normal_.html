@@ -192,7 +192,7 @@
     <p>Fills the input Tensor with values drawn from the normal distribution</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_normal_</span>(<span class='no'>tensor</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>std</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_init_normal_</span>(<span class='kw'>tensor</span>, mean = <span class='fl'>0</span>, std = <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,11 +213,12 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>nn_init_normal_</span>(<span class='no'>w</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
+<span class='fu'>nn_init_normal_</span>(<span class='kw'>w</span>)
 
-}</div><div class='output co'>#&gt; torch_tensor 
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; -1.0569 -1.0900  1.2740 -1.7728  0.0593
 #&gt; -1.7131 -0.1353  0.8191  0.1481 -0.9940
 #&gt; -0.7544 -1.0298  0.4237  1.4650  0.0575
@@ -237,7 +238,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

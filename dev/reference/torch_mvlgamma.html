@@ -220,14 +220,15 @@ where \(C = \log(\pi) \times \frac{p (p - 1)}{4}\) and \(\Gamma(\cdot)\) is the 
 <p>All elements must be greater than \(\frac{p - 1}{2}\), otherwise an error would be thrown.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))$<span class='fu'>uniform_</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
-<span class='no'>a</span>
-<span class='fu'>torch_mvlgamma</span>(<span class='no'>a</span>, <span class='fl'>2</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8720  0.4162  0.4065
-#&gt;  0.4292  1.0191  0.4336
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))<span class='op'>$</span><span class='fu'>uniform_</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
+<span class='kw'>a</span>
+<span class='fu'>torch_mvlgamma</span>(<span class='kw'>a</span>, <span class='fl'>2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.7450  0.3997  0.8720
+#&gt;  0.4162  0.4065  0.4292
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -244,7 +245,7 @@ where \(C = \log(\pi) \times \frac{p (p - 1)}{4}\) and \(\Gamma(\cdot)\) is the 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

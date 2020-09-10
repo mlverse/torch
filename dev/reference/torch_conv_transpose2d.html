@@ -241,68 +241,69 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 <p>.. include:: cudnn_deterministic.rst</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
 <span class='co'># With square kernels and equal stride</span>
-<span class='no'>inputs</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>5</span>))
-<span class='no'>weights</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='fu'><a href='nnf_conv_transpose2d.html'>nnf_conv_transpose2d</a></span>(<span class='no'>inputs</span>, <span class='no'>weights</span>, <span class='kw'>padding</span><span class='kw'>=</span><span class='fl'>1</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>5</span>))
+<span class='kw'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='fu'><a href='nnf_conv_transpose2d.html'>nnf_conv_transpose2d</a></span>(<span class='kw'>inputs</span>, <span class='kw'>weights</span>, padding=<span class='fl'>1</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,1,.,.) = 
-#&gt;  -7.5962 -3.3326  6.7831 -2.6847 -3.8770
-#&gt;  -3.7980 -14.6025  5.4740  7.9556  2.2569
-#&gt;   1.0895 -3.0573 -4.4158 -2.3707  6.6306
-#&gt;  -4.1577  8.8056  8.9085 -7.4639 -3.1753
-#&gt;  -4.5997 -5.8294  7.1765  4.1298  1.2998
+#&gt;   -1.0514   4.0431   5.3680   0.4996   0.6807
+#&gt;   -2.2791   3.4717  -9.2100   2.1827  -0.9895
+#&gt;   -8.7717  -1.1484   0.2236  10.5655  -7.9790
+#&gt;    3.4481   4.1267   1.9447  -3.6601  -2.1014
+#&gt;    3.1070  -0.9492  -1.0022   4.1038   3.1708
 #&gt; 
 #&gt; (1,2,.,.) = 
-#&gt;  -1.2496  1.3804  0.3830  2.8516  1.8649
-#&gt;  -0.9480  9.5710  3.6643  5.1610 -2.5484
-#&gt;   1.5285  2.5909 -4.4857 -1.0627  5.6590
-#&gt;   2.2464  6.2198  0.5224  1.8569 -7.0381
-#&gt;  -2.6082 -0.3835 -8.3964  1.6590  1.8936
+#&gt;   3.8769  1.0065 -1.7453  7.8551  1.1373
+#&gt;   1.5910 -0.6408  0.0578  0.3598  2.9826
+#&gt;  -2.4286 -6.3642  8.1915  3.7459 -6.1005
+#&gt;  -0.9822  3.3808 -9.7499 -1.4318 -1.9887
+#&gt;  -1.2174 -7.7774 -4.6879  4.6992 -0.3623
 #&gt; 
 #&gt; (1,3,.,.) = 
-#&gt;   -5.4240  -1.8959   2.0982 -11.0572  -7.1129
-#&gt;   -5.7286   8.2632  -1.4871  -9.0047 -12.1764
-#&gt;    0.1466  -8.4095   1.8028  10.7652   7.6637
-#&gt;   12.9905   2.8676  -1.1665  -6.1606  -7.3444
-#&gt;    5.2231  -2.5144  -5.5655  -5.1334  -1.7502
+#&gt;   -0.9979  -3.4498  -3.6999   2.2445   2.7840
+#&gt;    2.1584  -2.2082  -1.5000   1.7348  -4.5991
+#&gt;   14.2319  -0.5299   8.7039  -6.1999   3.8417
+#&gt;   -4.0469   1.8079  -6.1525   5.3468   3.7647
+#&gt;   -2.3751  -4.6096   6.3424  -1.9923  -5.4673
 #&gt; 
 #&gt; (1,4,.,.) = 
-#&gt;  -3.1346  9.0839  4.9047 -5.5578 -1.4678
-#&gt;  -2.2756  0.3479  8.9028  4.4772 -3.2621
-#&gt;  -5.0682  1.0232  3.3966  2.8198  1.8310
-#&gt;  -7.1607  5.5815 -6.9231 -7.6175  1.6746
-#&gt;  -11.2850  2.7781  2.8169  7.0857 -6.2299
+#&gt;    1.6146   2.2870  -7.7727  -0.5212   1.2332
+#&gt;    3.8877 -11.1170  -2.1337  18.7782  -2.8248
+#&gt;    7.9747  -6.2239   6.6249  -8.7275  12.3155
+#&gt;    2.1709   2.9160  -1.5355   1.4338   1.7243
+#&gt;   -1.2307   2.9260   6.1498  -3.0348  -5.3836
 #&gt; 
 #&gt; (1,5,.,.) = 
-#&gt;   -6.6460  -4.2459   1.5838   2.3837  -0.8733
-#&gt;    2.7812  -9.1419  12.0371   9.8969  -0.8947
-#&gt;    0.7636  -5.1756   5.2435  16.0599   2.2810
-#&gt;   -0.8439  -2.0671  -7.5943  -0.5896  -6.8856
-#&gt;    2.4704  -8.5656   4.3656   0.3382   0.3326
+#&gt;   2.8414 -5.4122 -1.7579  3.6993  3.3308
+#&gt;  -3.7484  5.5068 -3.1213 -5.1444 -4.9850
+#&gt;   2.1524 -7.8374 -4.9869  9.7475  4.5635
+#&gt;  -2.7844 -1.6397 -5.1861 -3.9104  6.2100
+#&gt;  -7.9028  2.6999 -4.1059  8.2526 -2.6561
 #&gt; 
 #&gt; (1,6,.,.) = 
-#&gt;    4.7029  -3.6134   1.1732   5.8723  -0.2575
-#&gt;    3.7304   1.1764  -1.7565   8.2722  -2.0145
-#&gt;   -5.3253  -3.6576 -12.0914   3.9391  -0.8159
-#&gt;    5.3560   2.9393  11.4436  -3.2281  -9.4492
-#&gt;    0.9640  -6.3274  -7.7627   5.7794   4.3723
+#&gt;   -6.3073  13.8461  -1.2210  -4.8289   1.8385
+#&gt;   -6.8310  13.7232   9.1193  -3.5035  -3.3996
+#&gt;    7.6498   2.7539   0.1421  -8.5598   4.6140
+#&gt;   -7.7794  -3.5150  -3.2721   6.2342  -5.6870
+#&gt;    0.7614   6.2618  -8.7980  -8.8184  -0.8238
 #&gt; 
 #&gt; (1,7,.,.) = 
-#&gt;    1.0651   5.3157  -2.6739  -2.2390   3.0830
-#&gt;    3.6786  13.4648   6.7157  -5.3990   0.1457
-#&gt;    4.9947  -4.2912  -6.5892  -1.3185  13.0362
-#&gt;   -4.1518   3.5200   5.8145   7.6304   4.5048
-#&gt;   -3.7006  -5.7260   4.4005  -6.7617   5.6349
+#&gt;    6.6540  -5.3689  -2.0845  -3.5825  -0.2029
+#&gt;   -0.8108  -9.5855   3.2040   9.2180  -0.0728
+#&gt;   -5.6512   0.8883   8.3345   2.0343  -0.5770
+#&gt;    7.8277  -0.2300  -8.6879  -8.4446  10.1034
+#&gt;    2.0860  -6.7967  -8.8847   9.0482  -3.5302
 #&gt; 
 #&gt; (1,8,.,.) = 
-#&gt;    0.2253   4.1118   3.4038   0.7874  -1.8600
-#&gt;    1.7147 -10.3997  -5.7130  -5.1718  -0.9915
-#&gt;    2.5338  -7.5954  -9.8617  -5.6232  -4.2832
-#&gt;   -6.7388  -1.7717   0.5150   2.3745   0.4394
-#&gt;   -4.0281   2.9175  11.6638   6.1722  -0.0937
+#&gt;  -2.8995  7.8823  5.0617  0.5166 -2.8131
+#&gt;   3.7143  1.5723 -0.0380  2.8057  1.6559
+#&gt;   1.1504 -5.3717  7.8838  7.3967 -8.2488
+#&gt;   7.2704  7.1180 -2.2714 -6.7369 -1.3559
+#&gt;   8.4336 -1.3131  6.6604 -13.5235 -0.8044
 #&gt; [ CPUFloatType{1,8,5,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -319,7 +320,7 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

@@ -156,62 +156,66 @@
 <blockquote>
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py">here</a>. All credits goes to <a href="https://github.com/jcjohnson/pytorch-examples">Justin Johnson</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">torch</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
+</pre></div>
 <p>R arrays are great, but they cannot utilize GPUs to accelerate its numerical computations. For modern deep neural networks, GPUs often provide speedups of 50x or greater, so unfortunately pure R won’t be enough for modern deep learning.</p>
 <p>Here we introduce the most fundamental torch concept: the Tensor. A torch Tensor is conceptually similar to an R array: a Tensor is an n-dimensional array, and torch provides many functions for operating on these Tensors. Behind the scenes, Tensors can keep track of a computational graph and gradients, but they’re also useful as a generic tool for scientific computing.</p>
 <p>Also unlike R, torch Tensors can utilize GPUs to accelerate their numeric computations. To run a torch Tensor on GPU, you simply need to cast it to a new datatype.</p>
 <p>Here we use torch Tensors to fit a two-layer network to random data. Like the R before we need to manually implement the forward and backward passes through the network:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="kw">if</span> (<span class="fu"><a href="../../reference/cuda_is_available.html">cuda_is_available</a></span>()) {
-   <span class="no">device</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span>(<span class="st">"cuda"</span>)
-} <span class="kw">else</span> {
-   <span class="no">device</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span>(<span class="st">"cpu"</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co">if</span> (<span class="fu"><a href="../../reference/cuda_is_available.html">cuda_is_available</a></span>()) {
+   <span class="kw">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span>(<span class="st">"cuda"</span>)
+} <span class="co">else</span> {
+   <span class="kw">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span>(<span class="st">"cpu"</span>)
 }
-
+   
 <span class="co"># N is batch size; D_in is input dimension;</span>
 <span class="co"># H is hidden dimension; D_out is output dimension.</span>
-<span class="no">N</span> <span class="kw">&lt;-</span> <span class="fl">64</span>
-<span class="no">D_in</span> <span class="kw">&lt;-</span> <span class="fl">1000</span>
-<span class="no">H</span> <span class="kw">&lt;-</span> <span class="fl">100</span>
-<span class="no">D_out</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
+<span class="kw">N</span> <span class="op">&lt;-</span> <span class="fl">64</span>
+<span class="kw">D_in</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
+<span class="kw">H</span> <span class="op">&lt;-</span> <span class="fl">100</span>
+<span class="kw">D_out</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 
 <span class="co"># Create random input and output data</span>
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="no">N</span>, <span class="no">D_in</span>, <span class="kw">device</span><span class="kw">=</span><span class="no">device</span>)
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="no">N</span>, <span class="no">D_out</span>, <span class="kw">device</span><span class="kw">=</span><span class="no">device</span>)
+<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="kw">N</span>, <span class="kw">D_in</span>, device=<span class="kw">device</span>)
+<span class="kw">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="kw">N</span>, <span class="kw">D_out</span>, device=<span class="kw">device</span>)
 
 <span class="co"># Randomly initialize weights</span>
-<span class="no">w1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="no">D_in</span>, <span class="no">H</span>, <span class="kw">device</span><span class="kw">=</span><span class="no">device</span>)
-<span class="no">w2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="no">H</span>, <span class="no">D_out</span>, <span class="kw">device</span><span class="kw">=</span><span class="no">device</span>)
+<span class="kw">w1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="kw">D_in</span>, <span class="kw">H</span>, device=<span class="kw">device</span>)
+<span class="kw">w2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="kw">H</span>, <span class="kw">D_out</span>, device=<span class="kw">device</span>)
 
-<span class="no">learning_rate</span> <span class="kw">&lt;-</span> <span class="fl">1e-6</span>
-<span class="kw">for</span> (<span class="no">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fl">500</span>)) {
+<span class="kw">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">1e-6</span>
+<span class="co">for</span> (<span class="kw">t</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fl">500</span>)) {
    <span class="co"># Forward pass: compute predicted y</span>
-   <span class="no">h</span> <span class="kw">&lt;-</span> <span class="no">x</span>$<span class="fu">mm</span>(<span class="no">w1</span>)
-   <span class="no">h_relu</span> <span class="kw">&lt;-</span> <span class="no">h</span>$<span class="fu">clamp</span>(<span class="kw">min</span><span class="kw">=</span><span class="fl">0</span>)
-   <span class="no">y_pred</span> <span class="kw">&lt;-</span> <span class="no">h_relu</span>$<span class="fu">mm</span>(<span class="no">w2</span>)
-
+   <span class="kw">h</span> <span class="op">&lt;-</span> <span class="kw">x</span><span class="op">$</span><span class="fu">mm</span>(<span class="kw">w1</span>)
+   <span class="kw">h_relu</span> <span class="op">&lt;-</span> <span class="kw">h</span><span class="op">$</span><span class="fu">clamp</span>(min=<span class="fl">0</span>)
+   <span class="kw">y_pred</span> <span class="op">&lt;-</span> <span class="kw">h_relu</span><span class="op">$</span><span class="fu">mm</span>(<span class="kw">w2</span>)
+   
    <span class="co"># Compute and print loss</span>
-   <span class="no">loss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>((<span class="no">y_pred</span> - <span class="no">y</span>)$<span class="fu">pow</span>(<span class="fl">2</span>)$<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>())
-   <span class="kw">if</span> (<span class="no">t</span> <span class="kw">%%</span> <span class="fl">100</span> <span class="kw">==</span> <span class="fl">0</span> <span class="kw">||</span> <span class="no">t</span> <span class="kw">==</span> <span class="fl">1</span>)
-      <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Step:"</span>, <span class="no">t</span>, <span class="st">":"</span>, <span class="no">loss</span>, <span class="st">"\n"</span>)
-
+   <span class="kw">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>((<span class="kw">y_pred</span> <span class="op">-</span> <span class="kw">y</span>)<span class="op">$</span><span class="fu">pow</span>(<span class="fl">2</span>)<span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>())
+   <span class="co">if</span> (<span class="kw">t</span> <span class="op">%%</span> <span class="fl">100</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">||</span> <span class="kw">t</span> <span class="op">==</span> <span class="fl">1</span>)
+      <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Step:"</span>, <span class="kw">t</span>, <span class="st">":"</span>, <span class="kw">loss</span>, <span class="st">"\n"</span>)
+   
    <span class="co"># Backprop to compute gradients of w1 and w2 with respect to loss</span>
-   <span class="no">grad_y_pred</span> <span class="kw">&lt;-</span> <span class="fl">2.0</span> * (<span class="no">y_pred</span> - <span class="no">y</span>)
-   <span class="no">grad_w2</span> <span class="kw">&lt;-</span> <span class="no">h_relu</span>$<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>()$<span class="fu">mm</span>(<span class="no">grad_y_pred</span>)
-   <span class="no">grad_h_relu</span> <span class="kw">&lt;-</span> <span class="no">grad_y_pred</span>$<span class="fu">mm</span>(<span class="no">w2</span>$<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>())
-   <span class="no">grad_h</span> <span class="kw">&lt;-</span> <span class="no">grad_h_relu</span>$<span class="fu">clone</span>()
-   <span class="no">grad_h</span>[<span class="no">h</span> <span class="kw">&lt;</span> <span class="fl">0</span>] <span class="kw">&lt;-</span> <span class="fl">0</span>
-   <span class="no">grad_w1</span> <span class="kw">&lt;-</span> <span class="no">x</span>$<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>()$<span class="fu">mm</span>(<span class="no">grad_h</span>)
-
+   <span class="kw">grad_y_pred</span> <span class="op">&lt;-</span> <span class="fl">2.0</span> <span class="op">*</span> (<span class="kw">y_pred</span> <span class="op">-</span> <span class="kw">y</span>)
+   <span class="kw">grad_w2</span> <span class="op">&lt;-</span> <span class="kw">h_relu</span><span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>()<span class="op">$</span><span class="fu">mm</span>(<span class="kw">grad_y_pred</span>)
+   <span class="kw">grad_h_relu</span> <span class="op">&lt;-</span> <span class="kw">grad_y_pred</span><span class="op">$</span><span class="fu">mm</span>(<span class="kw">w2</span><span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>())
+   <span class="kw">grad_h</span> <span class="op">&lt;-</span> <span class="kw">grad_h_relu</span><span class="op">$</span><span class="fu">clone</span>()
+   <span class="kw">grad_h</span>[<span class="kw">h</span> <span class="op">&lt;</span> <span class="fl">0</span>] <span class="op">&lt;-</span> <span class="fl">0</span>
+   <span class="kw">grad_w1</span> <span class="op">&lt;-</span> <span class="kw">x</span><span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>()<span class="op">$</span><span class="fu">mm</span>(<span class="kw">grad_h</span>)
+   
    <span class="co"># Update weights using gradient descent</span>
-   <span class="no">w1</span> <span class="kw">&lt;-</span> <span class="no">w1</span> - <span class="no">learning_rate</span> * <span class="no">grad_w1</span>
-   <span class="no">w2</span> <span class="kw">&lt;-</span> <span class="no">w2</span> - <span class="no">learning_rate</span> * <span class="no">grad_w2</span>
+   <span class="kw">w1</span> <span class="op">&lt;-</span> <span class="kw">w1</span> <span class="op">-</span> <span class="kw">learning_rate</span> <span class="op">*</span> <span class="kw">grad_w1</span>
+   <span class="kw">w2</span> <span class="op">&lt;-</span> <span class="kw">w2</span> <span class="op">-</span> <span class="kw">learning_rate</span> <span class="op">*</span> <span class="kw">grad_w2</span>
 }
-<span class="co">#&gt; Step: 1 : 27800224 </span>
-<span class="co">#&gt; Step: 100 : 643.2441 </span>
-<span class="co">#&gt; Step: 200 : 6.138849 </span>
-<span class="co">#&gt; Step: 300 : 0.0891137 </span>
-<span class="co">#&gt; Step: 400 : 0.001766914 </span>
-<span class="co">#&gt; Step: 500 : 0.0001415811</span></pre></body></html></div>
+<span class="co">#&gt; Step: 1 : 40928072 </span>
+<span class="co">#&gt; Step: 100 : 660.8608 </span>
+<span class="co">#&gt; Step: 200 : 4.977708 </span>
+<span class="co">#&gt; Step: 300 : 0.06839331 </span>
+<span class="co">#&gt; Step: 400 : 0.001484144 </span>
+<span class="co">#&gt; Step: 500 : 0.000126573</span>
+</pre></div>
 <p>In the <a href="tensors-and-autograd.html">next example</a> we will use autograd instead of computing the gradients manually.</p>
   </div>
 
@@ -228,7 +232,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

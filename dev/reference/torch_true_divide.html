@@ -220,13 +220,14 @@ in which case they are cast to the default (floating) scalar type before the div
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>dividend</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>3</span>), <span class='kw'>dtype</span><span class='kw'>=</span><span class='fu'><a href='torch_dtype.html'>torch_int</a></span>())
-<span class='no'>divisor</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>), <span class='kw'>dtype</span><span class='kw'>=</span><span class='fu'><a href='torch_dtype.html'>torch_int</a></span>())
-<span class='fu'>torch_true_divide</span>(<span class='no'>dividend</span>, <span class='no'>divisor</span>)
-<span class='fu'>torch_true_divide</span>(<span class='no'>dividend</span>, <span class='fl'>2</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>dividend</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>3</span>), dtype=<span class='fu'><a href='torch_dtype.html'>torch_int</a></span>())
+<span class='kw'>divisor</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>), dtype=<span class='fu'><a href='torch_dtype.html'>torch_int</a></span>())
+<span class='fu'>torch_true_divide</span>(<span class='kw'>dividend</span>, <span class='kw'>divisor</span>)
+<span class='fu'>torch_true_divide</span>(<span class='kw'>dividend</span>, <span class='fl'>2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  2.5000
 #&gt;  1.5000
 #&gt; [ CPUFloatType{2} ]</div></pre>
@@ -245,7 +246,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

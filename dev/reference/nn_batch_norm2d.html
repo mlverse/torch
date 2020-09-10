@@ -197,11 +197,11 @@ additional channel dimension) as described in the paper
     </div>
 
     <pre class="usage"><span class='fu'>nn_batch_norm2d</span>(
-  <span class='no'>num_features</span>,
-  <span class='kw'>eps</span> <span class='kw'>=</span> <span class='fl'>1e-05</span>,
-  <span class='kw'>momentum</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
-  <span class='kw'>affine</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>track_running_stats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>num_features</span>,
+  eps = <span class='fl'>1e-05</span>,
+  momentum = <span class='fl'>0.1</span>,
+  affine = <span class='fl'>TRUE</span>,
+  track_running_stats = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -276,15 +276,16 @@ on <code>(N, H, W)</code> slices, it's common terminology to call this Spatial B
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 <span class='co'># With Learnable Parameters</span>
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_batch_norm2d</span>(<span class='fl'>100</span>)
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_batch_norm2d</span>(<span class='fl'>100</span>)
 <span class='co'># Without Learnable Parameters</span>
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_batch_norm2d</span>(<span class='fl'>100</span>, <span class='kw'>affine</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>100</span>, <span class='fl'>35</span>, <span class='fl'>45</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_batch_norm2d</span>(<span class='fl'>100</span>, affine=<span class='fl'>FALSE</span>)
+<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>100</span>, <span class='fl'>35</span>, <span class='fl'>45</span>)
+<span class='kw'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
 
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -300,7 +301,7 @@ on <code>(N, H, W)</code> slices, it's common terminology to call this Spatial B
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

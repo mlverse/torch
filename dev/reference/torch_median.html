@@ -235,32 +235,33 @@ Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>
 the outputs tensor having 1 fewer dimension than <code>input</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_median</span>(<span class='no'>a</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_median</span>(<span class='kw'>a</span>)
 
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_median</span>(<span class='no'>a</span>, <span class='fl'>1</span>)
-}</div><div class='output co'>#&gt; [[1]]
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_median</span>(<span class='kw'>a</span>, <span class='fl'>1</span>)
+}
+</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -0.7690
-#&gt; -1.2567
-#&gt; -0.0361
-#&gt;  0.3832
-#&gt; -1.3976
+#&gt;  0.1207
+#&gt; -0.3262
+#&gt; -1.3346
+#&gt;  0.3094
+#&gt; -0.8494
 #&gt; [ CPUFloatType{5} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  2
-#&gt;  2
-#&gt;  2
-#&gt;  1
+#&gt;  3
 #&gt;  0
+#&gt;  2
+#&gt;  3
+#&gt;  2
 #&gt; [ CPULongType{5} ]
 #&gt; </div></pre>
   </div>
@@ -278,7 +279,7 @@ the outputs tensor having 1 fewer dimension than <code>input</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

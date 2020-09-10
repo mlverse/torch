@@ -220,17 +220,18 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>60.</span>)$<span class='fu'><a href='https://rdrr.io/r/stats/reshape.html'>reshape</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>24.</span>)$<span class='fu'><a href='https://rdrr.io/r/stats/reshape.html'>reshape</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
-<span class='fu'>torch_tensordot</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>dims_self</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>), <span class='kw'>dims_other</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='kw'>device</span><span class='kw'>=</span><span class='st'>'cuda'</span>)
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='kw'>device</span><span class='kw'>=</span><span class='st'>'cuda'</span>)
-<span class='no'>c</span> <span class='kw'>=</span> <span class='fu'>torch_tensordot</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>dims</span><span class='kw'>=</span><span class='fl'>2</span>)$<span class='fu'>cpu</span>()
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(start = <span class='fl'>0</span>, end = <span class='fl'>60.</span>)<span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/reshape.html'>reshape</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(start = <span class='fl'>0</span>, end = <span class='fl'>24.</span>)<span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/reshape.html'>reshape</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
+<span class='fu'>torch_tensordot</span>(<span class='kw'>a</span>, <span class='kw'>b</span>, dims_self=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>), dims_other = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, device=<span class='st'>'cuda'</span>)
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, device=<span class='st'>'cuda'</span>)
+<span class='kw'>c</span> <span class='op'>=</span> <span class='fu'>torch_tensordot</span>(<span class='kw'>a</span>, <span class='kw'>b</span>, dims=<span class='fl'>2</span>)<span class='op'>$</span><span class='fu'>cpu</span>()
 }
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -246,7 +247,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

@@ -275,19 +275,20 @@ certainly fail the check.</p>
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'>torch_irfft</span>(<span class='no'>y</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>signal_sizes</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span>
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.5670 -1.5959  0.0309 -0.5392 -0.7641
-#&gt;  0.7746  0.5604  0.4978  0.0541 -1.4379
-#&gt;  0.2937  1.2180 -1.5565 -1.1046  1.0573
-#&gt;  0.0674  1.1995  0.3558  0.5256  0.6170
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
+<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
+<span class='kw'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
+<span class='fu'>torch_irfft</span>(<span class='kw'>y</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>, signal_sizes=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span>
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1.1653  0.3220 -1.0045  1.5067  0.5450
+#&gt; -1.6322  1.5536  0.3510  0.4985  1.2590
+#&gt;  0.5954  0.8097 -1.4763  1.0665  0.3471
+#&gt;  0.9332  0.8023 -0.2526 -1.1283 -0.8533
 #&gt; [ CPUFloatType{4,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -304,7 +305,7 @@ certainly fail the check.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

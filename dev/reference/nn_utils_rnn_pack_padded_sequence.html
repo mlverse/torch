@@ -194,15 +194,15 @@ TRUE, B x T x * input is expected." />
     <div class="ref-description">
     <p><code>input</code> can be of size <code>T x B x *</code> where <code>T</code> is the length of the
 longest sequence (equal to <code>lengths[1]</code>), <code>B</code> is the batch size, and
-<code>*</code> is any number of dimensions (including 0). If <code>batch_first</code> is
+<code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is any number of dimensions (including 0). If <code>batch_first</code> is
 <code>TRUE</code>, <code>B x T x *</code> <code>input</code> is expected.</p>
     </div>
 
     <pre class="usage"><span class='fu'>nn_utils_rnn_pack_padded_sequence</span>(
-  <span class='no'>input</span>,
-  <span class='no'>lengths</span>,
-  <span class='kw'>batch_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>enforce_sorted</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>input</span>,
+  <span class='kw'>lengths</span>,
+  batch_first = <span class='fl'>FALSE</span>,
+  enforce_sorted = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -260,7 +260,7 @@ a <code>PackedSequence</code> object by accessing its <code>.data</code> attribu
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

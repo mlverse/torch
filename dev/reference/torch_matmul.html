@@ -243,78 +243,79 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
 <span class='co'># vector x vector</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
 <span class='co'># matrix x vector</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
 <span class='co'># batched matrix x broadcasted vector</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
 <span class='co'># batched matrix x batched matrix</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
 <span class='co'># batched matrix x broadcasted matrix</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.7699  0.6280  0.6858  0.1436  0.1553
-#&gt;  -1.4957  1.0994 -0.3625 -1.1187  2.1342
-#&gt;  -1.5247  1.6681  1.4816 -0.6689  4.6678
+#&gt;  -2.6809 -0.4946 -10.5166  4.8508 -0.9662
+#&gt;   0.2991 -1.0008 -2.9917 -3.6978 -3.4106
+#&gt;   1.1409  0.2604  2.9629 -3.1385 -1.4678
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.5949  0.2808  0.4002 -0.1900  1.4406
-#&gt;   0.6694 -0.0497  0.0597  0.6980 -2.7762
-#&gt;   1.4086 -0.9624 -1.1486  0.1811 -2.3332
+#&gt;   0.8839 -1.4735  0.0652  0.7135  0.8053
+#&gt;  -0.8732  0.0161 -1.2564 -1.8175 -0.2341
+#&gt;  -0.5970 -3.7456 -4.1767 -0.8696  2.6182
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -1.2169  0.0611 -0.9144 -1.1126  1.9634
-#&gt;  -3.8656  2.0717 -1.7679 -2.5491  2.4366
-#&gt;  -3.2681  2.0747 -1.3631 -1.7828  0.2492
+#&gt;   0.1990  2.0418 -1.1464  5.1929 -2.0088
+#&gt;  -0.3292  0.0830  0.3383  1.6647  1.5766
+#&gt;   0.2309 -1.2398 -1.2352 -1.9865 -0.6188
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -0.9335  2.9422  3.1290  0.3028  3.5022
-#&gt;   0.4765 -0.3376  0.2368  0.6385 -1.6853
-#&gt;  -1.2463  0.0426 -1.8895 -1.3327  0.1495
+#&gt;   -0.0906  -0.9770  -4.1810  -0.3416  -2.1877
+#&gt;    3.6772   0.1005  12.2702  -2.9408   1.9869
+#&gt;    0.9927   1.5519   1.8898   4.2136  -0.6510
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   1.6867  0.0672  0.9235  0.5734  0.6898
-#&gt;   0.3497 -0.3152 -0.1233  0.8205 -3.7042
-#&gt;  -3.0613  1.0855 -1.5805 -2.0781  2.4053
+#&gt;  -1.6850  0.7892 -0.7554 -2.1070  0.5298
+#&gt;  -0.7920 -3.8116 -3.9629 -5.6347  1.1118
+#&gt;  -2.1208  1.5032 -4.8464  4.3452 -0.2817
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;   1.9247 -1.2037  0.2734  1.4132 -3.4648
-#&gt;   1.3064  0.0784  3.0686  1.0953  4.3295
-#&gt;   3.8619 -2.1719 -0.9861  1.3845 -4.8677
+#&gt;   0.5870 -1.1692 -1.5098  2.6025  0.4319
+#&gt;  -1.8684  1.0197 -3.8004  2.1111 -0.1764
+#&gt;  -0.5343  0.2543 -5.2417  5.1757 -1.5291
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;   2.4832 -2.0033 -0.6130  1.4391 -4.8961
-#&gt;  -1.1401  1.6919  2.0599  0.5386  0.7592
-#&gt;   0.5927 -1.0640 -0.6244  0.7034 -3.5316
+#&gt;   0.2717  0.9324  3.0536 -2.0161 -0.1574
+#&gt;   0.5406 -0.0661 -0.9495  2.3033 -0.7396
+#&gt;   1.4107  0.3536  2.9462  2.5392  0.4394
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;   2.6919 -1.2762  0.4120  1.0797 -1.0095
-#&gt;  -4.8550  2.4958 -1.5283 -2.8167  3.4025
-#&gt;  -3.2323  2.2523 -0.1204 -1.2336  1.0765
+#&gt;  -1.7402  2.0616 -3.0313  1.0960 -1.7451
+#&gt;  -0.6110 -2.9992 -7.7965  5.3914  1.2558
+#&gt;   1.5597  0.2508  4.2138 -3.1801 -1.2046
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;   3.6751 -1.0975  0.9560  1.5345 -1.3478
-#&gt;   1.1335 -0.0151  0.7891 -0.3179  4.3954
-#&gt;  -5.1619  2.3411 -0.9196 -2.8655  5.4871
+#&gt;  -0.0096  1.2711  0.1790  0.4257 -1.4911
+#&gt;   0.3910  0.7790  0.8669  1.2045 -0.6025
+#&gt;   0.6989  1.7260  2.6494  1.0718 -1.1003
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;   0.2443  0.3175 -0.2897  0.3713 -2.9255
-#&gt;  -3.3559  2.2517  0.1637 -1.9289  5.1754
-#&gt;   0.3493 -0.8613 -1.8537 -0.4759 -1.9056
+#&gt;  -0.2817 -2.0163 -4.4983  5.0457  1.8857
+#&gt;  -0.3029  0.9321  1.4816  3.8409  2.2694
+#&gt;   0.6240 -1.3195 -1.5015  0.9746 -0.1551
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -331,7 +332,7 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

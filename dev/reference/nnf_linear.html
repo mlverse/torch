@@ -192,14 +192,14 @@
     <p>Applies a linear transformation to the incoming data: \(y = xA^T + b\).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_linear</span>(<span class='no'>input</span>, <span class='no'>weight</span>, <span class='kw'>bias</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>nnf_linear</span>(<span class='kw'>input</span>, <span class='kw'>weight</span>, bias = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>\((N, *, in\_features)\) where <code>*</code> means any number of
+      <td><p>\((N, *, in\_features)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> means any number of
 additional dimensions</p></td>
     </tr>
     <tr>
@@ -228,7 +228,7 @@ additional dimensions</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

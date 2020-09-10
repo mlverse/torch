@@ -198,7 +198,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>(Tensor) the input tensor \(A\) of size \((*, n, n)\) where <code>*</code> is zero or more                batch dimensions consisting of symmetric positive-definite matrices.</p></td>
+      <td><p>(Tensor) the input tensor \(A\) of size \((*, n, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                batch dimensions consisting of symmetric positive-definite matrices.</p></td>
     </tr>
     <tr>
       <th>upper</th>
@@ -234,22 +234,23 @@ tensor will be composed of lower-triangular Cholesky factors of each of the indi
 matrices.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive-definite</span>
-<span class='no'>l</span> <span class='kw'>=</span> <span class='fu'>torch_cholesky</span>(<span class='no'>a</span>)
-<span class='no'>a</span>
-<span class='no'>l</span>
-<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>l</span>, <span class='no'>l</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>())
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'>transpose</span>(-<span class='fl'>1</span>, -<span class='fl'>2</span>)) + <span class='fl'>1e-03</span> <span class='co'># make symmetric positive-definite</span>
-<span class='no'>l</span> <span class='kw'>=</span> <span class='fu'>torch_cholesky</span>(<span class='no'>a</span>)
-<span class='no'>z</span> <span class='kw'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>l</span>, <span class='no'>l</span>$<span class='fu'>transpose</span>(-<span class='fl'>1</span>, -<span class='fl'>2</span>))
-<span class='fu'><a href='torch_max.html'>torch_max</a></span>(<span class='fu'><a href='torch_abs.html'>torch_abs</a></span>(<span class='no'>z</span> - <span class='no'>a</span>)) <span class='co'># Max non-zero</span>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='kw'>a</span>, <span class='kw'>a</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive-definite</span>
+<span class='kw'>l</span> <span class='op'>=</span> <span class='fu'>torch_cholesky</span>(<span class='kw'>a</span>)
+<span class='kw'>a</span>
+<span class='kw'>l</span>
+<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='kw'>l</span>, <span class='kw'>l</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>())
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>a</span>, <span class='kw'>a</span><span class='op'>$</span><span class='fu'>transpose</span>(<span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>2</span>)) <span class='op'>+</span> <span class='fl'>1e-03</span> <span class='co'># make symmetric positive-definite</span>
+<span class='kw'>l</span> <span class='op'>=</span> <span class='fu'>torch_cholesky</span>(<span class='kw'>a</span>)
+<span class='kw'>z</span> <span class='op'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>l</span>, <span class='kw'>l</span><span class='op'>$</span><span class='fu'>transpose</span>(<span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>2</span>))
+<span class='fu'><a href='torch_max.html'>torch_max</a></span>(<span class='fu'><a href='torch_abs.html'>torch_abs</a></span>(<span class='kw'>z</span> <span class='op'>-</span> <span class='kw'>a</span>)) <span class='co'># Max non-zero</span>
 }
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -265,7 +266,7 @@ matrices.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

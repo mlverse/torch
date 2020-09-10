@@ -227,19 +227,20 @@ and <code>other</code>.</p>
 size 3.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
-<span class='no'>a</span>
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
-<span class='no'>b</span>
-<span class='fu'>torch_cross</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='fu'>torch_cross</span>(<span class='no'>a</span>, <span class='no'>b</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.6756  1.3894  0.5103
-#&gt;  0.0167  0.1912  0.2317
-#&gt;  0.2123  1.5819  0.2454
-#&gt; -0.1473 -0.2034 -1.0105
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span>
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
+<span class='kw'>b</span>
+<span class='fu'>torch_cross</span>(<span class='kw'>a</span>, <span class='kw'>b</span>, dim=<span class='fl'>2</span>)
+<span class='fu'>torch_cross</span>(<span class='kw'>a</span>, <span class='kw'>b</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1.1528  2.3643 -2.2017
+#&gt;  0.0165 -0.7990  0.9309
+#&gt;  0.9502  0.1917 -1.4913
+#&gt;  0.3974  0.2900 -0.5408
 #&gt; [ CPUFloatType{4,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -256,7 +257,7 @@ size 3.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

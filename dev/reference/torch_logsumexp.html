@@ -232,14 +232,15 @@ Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>
 output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='fu'>torch_logsumexp</span>(<span class='no'>a</span>, <span class='fl'>1</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8247
-#&gt;  2.4201
-#&gt;  1.0116
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='fu'>torch_logsumexp</span>(<span class='kw'>a</span>, <span class='fl'>1</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  2.7841
+#&gt;  1.4926
+#&gt;  1.4368
 #&gt; [ CPUFloatType{3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -256,7 +257,7 @@ output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

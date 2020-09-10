@@ -196,7 +196,7 @@ described in <code>Understanding the difficulty of training deep feedforward neu
 distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_xavier_normal_</span>(<span class='no'>tensor</span>, <span class='kw'>gain</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_init_xavier_normal_</span>(<span class='kw'>tensor</span>, gain = <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,11 +213,12 @@ distribution.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>nn_init_xavier_normal_</span>(<span class='no'>w</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
+<span class='fu'>nn_init_xavier_normal_</span>(<span class='kw'>w</span>)
 
-}</div><div class='output co'>#&gt; torch_tensor 
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  1.2535 -0.2197  0.5425 -3.0052 -4.2446
 #&gt; -0.3570 -1.6970 -2.0154 -0.5348  2.7582
 #&gt;  0.8714 -0.8924  0.7675  3.2553 -1.4333
@@ -237,7 +238,7 @@ distribution.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

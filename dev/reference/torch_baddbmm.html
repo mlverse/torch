@@ -245,62 +245,63 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <code>alpha</code> must be real numbers, otherwise they should be integers.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>M</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>5</span>))
-<span class='no'>batch1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>batch2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'>torch_baddbmm</span>(<span class='no'>M</span>, <span class='no'>batch1</span>, <span class='no'>batch2</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>M</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>5</span>))
+<span class='kw'>batch1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>batch2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'>torch_baddbmm</span>(<span class='kw'>M</span>, <span class='kw'>batch1</span>, <span class='kw'>batch2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.4936  5.7331  0.2792  0.2996  1.7529
-#&gt;  -2.1640 -2.8366 -1.5866  1.6360 -0.5766
-#&gt;  -0.9277 -0.6397  0.6144  0.1375  1.3980
+#&gt;  -1.6660 -1.9874  0.1684 -5.1349  3.2289
+#&gt;  -0.3873 -2.1010 -2.0058 -3.7590  2.9277
+#&gt;  -0.4183 -0.1244  1.7032 -0.1674  1.2793
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.6549 -0.9158 -0.2428 -0.6863  2.5032
-#&gt;   0.4931 -1.9276 -0.8737  1.3213 -1.8617
-#&gt;  -2.0386 -4.7900  1.6636  4.1649 -3.6708
+#&gt;   2.4160 -1.7049 -2.0380  1.5352 -1.7621
+#&gt;  -0.6423  5.3671  2.1339  2.2485 -1.8399
+#&gt;  -2.6579 -1.7570  1.0444 -3.2916  4.4326
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -0.6159  1.6466  2.1632  2.9452  1.5656
-#&gt;   0.6057 -1.5575  0.2876  0.1318 -1.4846
-#&gt;   1.6587  0.2937 -3.1471  1.4667  2.8727
+#&gt;   3.2888  0.7132 -0.2670  2.2647 -0.1056
+#&gt;   1.8620 -0.3272  1.9910 -0.8757  0.5451
+#&gt;  -2.1243  3.4113 -1.4780 -2.7157  2.4721
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -2.7359 -1.0347  1.8548 -0.6919 -2.6480
-#&gt;   0.2042  3.0603 -2.4980 -2.5055 -0.0954
-#&gt;  -1.7278 -4.5374 -0.0072  0.8098 -0.6080
+#&gt;   0.2236  1.1570  0.6408 -3.5124  0.6317
+#&gt;   0.5412  1.7689 -0.8499 -4.8249  2.2609
+#&gt;   2.6366 -0.3469 -1.0133 -3.1340 -2.4568
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -3.9531  0.2953 -3.5704  3.0607 -1.0993
-#&gt;  -1.5523 -2.9456  1.4905  2.3900 -2.0959
-#&gt;  -0.0887  0.9870  1.8140 -0.2470 -0.4289
+#&gt;  -2.6580 -0.4861  0.0813 -1.1757 -0.6086
+#&gt;  -0.2734  2.1006 -0.0939  3.7702 -2.6705
+#&gt;   1.1037  0.0427  0.6724 -1.5665  0.0743
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;   6.0397 -3.0257  2.8960  1.2332  4.1310
-#&gt;   0.5139  0.3988  2.8631 -1.5738  0.7079
-#&gt;  -3.3883  2.1424  0.0888 -0.0421 -2.5786
+#&gt;   6.0018 -2.3447 -2.7835  3.0577  0.4055
+#&gt;  -0.8201  0.2678  0.5680 -0.4266 -0.8917
+#&gt;   3.5491 -5.1259  1.3207 -0.4593 -5.1556
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;   1.1566  1.8208 -2.4772 -2.4829  1.5032
-#&gt;   1.2878 -2.1598 -0.2827 -1.6662 -1.7843
-#&gt;   0.3906 -0.3488 -1.9173 -2.1121  0.0807
+#&gt;  -0.2160  0.5195 -2.4134 -0.7317 -0.7580
+#&gt;   5.2866 -0.1859 -1.1812  1.2885 -0.6293
+#&gt;  -0.6193 -0.1090  2.2436  0.3074 -0.0904
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;   3.3461 -0.0969  1.8230  0.9376 -0.0816
-#&gt;  -6.3525 -3.1190 -5.8405  3.1255 -3.6314
-#&gt;  -3.0273 -0.7662 -2.3617  1.6616  0.4746
+#&gt;   0.3406  0.6585 -2.6733 -2.1149  0.3096
+#&gt;  -1.1196  1.6420 -0.4116 -1.6481  0.7376
+#&gt;   2.0215  0.1826 -0.6991  1.3858  2.8209
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;  -5.5424  3.2792  3.7693 -1.3173 -0.5206
-#&gt;   2.4894 -3.9377 -4.9396  2.0646  1.6545
-#&gt;   2.6506 -5.2284  0.3212  3.8270 -1.0334
+#&gt;   0.1734  1.4423  0.6263  2.6779  4.5951
+#&gt;  -3.1765 -1.8261  1.2703 -0.2847  0.2687
+#&gt;   0.2444 -1.0408 -1.4224 -1.6525  0.1853
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;  -2.0278  3.8657  0.7672 -0.1427  0.1048
-#&gt;   2.4105 -1.9900  0.3204  0.7434 -1.9972
-#&gt;  -3.3675  2.0450  0.3392 -0.4370  3.2115
+#&gt;   0.2356 -7.6101  1.8235  0.2733  0.2258
+#&gt;   2.1826 -0.3982  0.5349 -0.3892  0.9684
+#&gt;   1.0076  2.6629  0.8983  2.0601 -0.4149
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -317,7 +318,7 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

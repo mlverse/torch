@@ -1,22 +1,6 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1
+pkgdown: 1.6.0
 pkgdown_sha: ~
-articles:
-  extending-autograd: extending-autograd.html
-  autograd: getting-started/autograd.html
-  control-flow-and-weight-sharing: getting-started/control-flow-and-weight-sharing.html
-  custom-nn: getting-started/custom-nn.html
-  neural-networks: getting-started/neural-networks.html
-  new-autograd-functions: getting-started/new-autograd-functions.html
-  nn: getting-started/nn.html
-  optim: getting-started/optim.html
-  tensors-and-autograd: getting-started/tensors-and-autograd.html
-  tensors: getting-started/tensors.html
-  warmup: getting-started/warmup.html
-  what-is-torch: getting-started/what-is-torch.html
-  indexing: indexing.html
-  loading-data: loading-data.html
-  tensor-creation: tensor-creation.html
-  using-autograd: using-autograd.html
-last_built: 2020-09-01T22:24Z
+articles: []
+last_built: 2020-09-10T19:01Z
 

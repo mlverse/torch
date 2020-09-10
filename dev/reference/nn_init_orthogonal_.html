@@ -198,7 +198,7 @@ at least 2 dimensions, and for tensors with more than 2 dimensions the
 trailing dimensions are flattened.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_orthogonal_</span>(<span class='no'>tensor</span>, <span class='kw'>gain</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_init_orthogonal_</span>(<span class='kw'>tensor</span>, gain = <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,14 +215,15 @@ trailing dimensions are flattened.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>,<span class='fl'>5</span>)
-<span class='fu'>nn_init_orthogonal_</span>(<span class='no'>w</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>,<span class='fl'>5</span>)
+<span class='fu'>nn_init_orthogonal_</span>(<span class='kw'>w</span>)
 
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0665 -0.2470  0.5228  0.5653 -0.5845
-#&gt; -0.9014 -0.0482 -0.0226 -0.2532 -0.3472
-#&gt;  0.0963  0.9239  0.0281 -0.0151 -0.3690
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; -0.8382 -0.2157 -0.0303  0.1280 -0.4834
+#&gt;  0.1400 -0.7069 -0.6767  0.0702  0.1337
+#&gt; -0.5226  0.1849 -0.1821 -0.2933  0.7574
 #&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -239,7 +240,7 @@ trailing dimensions are flattened.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

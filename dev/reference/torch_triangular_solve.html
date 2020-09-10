@@ -232,23 +232,24 @@ batches of 2D matrices. If the inputs are batches, then returns
 batched outputs <code>X</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))$<span class='fu'>triu</span>()
-<span class='no'>A</span>
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='no'>b</span>
-<span class='fu'>torch_triangular_solve</span>(<span class='no'>b</span>, <span class='no'>A</span>)
-}</div><div class='output co'>#&gt; [[1]]
+<span class='kw'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))<span class='op'>$</span><span class='fu'>triu</span>()
+<span class='kw'>A</span>
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
+<span class='kw'>b</span>
+<span class='fu'>torch_triangular_solve</span>(<span class='kw'>b</span>, <span class='kw'>A</span>)
+}
+</div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt;  61.4063  46.5242 -67.0744
-#&gt;  32.9723  20.2735 -34.9361
+#&gt; -2.1054  0.2666  2.1790
+#&gt; -1.9310 -0.7136  2.2100
 #&gt; [ CPUFloatType{2,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; -0.3416  0.6736
-#&gt;  0.0000  0.0359
+#&gt; -0.6558  0.4718
+#&gt;  0.0000 -1.0224
 #&gt; [ CPUFloatType{2,2} ]
 #&gt; </div></pre>
   </div>
@@ -266,7 +267,7 @@ batched outputs <code>X</code></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

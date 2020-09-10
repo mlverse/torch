@@ -246,23 +246,24 @@ to the <code>torch_dtype</code> of the specified output tensor. Integral divisio
 by zero leads to undefined behavior.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_div</span>(<span class='no'>a</span>, <span class='fl'>0.5</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_div</span>(<span class='kw'>a</span>, <span class='fl'>0.5</span>)
 
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='no'>b</span>
-<span class='fu'>torch_div</span>(<span class='no'>a</span>, <span class='no'>b</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -2.5848  0.8173  0.4548 -1.2679
-#&gt;  1.5859  0.5453  1.3421  0.0878
-#&gt;  2.0674  0.6821 -0.6594 -0.6530
-#&gt;  0.3551  0.3078  0.6883  0.3357
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='kw'>b</span>
+<span class='fu'>torch_div</span>(<span class='kw'>a</span>, <span class='kw'>b</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;   -0.2191   34.2464   -0.9341    2.1873
+#&gt;   -0.5134  241.4640   -0.9683    2.4227
+#&gt;    0.8740   46.2003    1.0168   -5.9727
+#&gt;    1.5334   33.9902    0.2817    4.0475
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -279,7 +280,7 @@ by zero leads to undefined behavior.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

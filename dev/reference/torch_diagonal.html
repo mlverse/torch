@@ -234,30 +234,31 @@ of the input. However, <code>torch_diag_embed</code> has different default
 dimensions, so those need to be explicitly specified.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_diagonal</span>(<span class='no'>a</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-<span class='fu'>torch_diagonal</span>(<span class='no'>a</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>2</span>))
-<span class='fu'>torch_diagonal</span>(<span class='no'>x</span>, <span class='kw'>offset</span><span class='kw'>=</span>-<span class='fl'>1</span>, <span class='kw'>dim1</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>dim2</span><span class='kw'>=</span><span class='fl'>2</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_diagonal</span>(<span class='kw'>a</span>, offset = <span class='fl'>0</span>)
+<span class='fu'>torch_diagonal</span>(<span class='kw'>a</span>, offset = <span class='fl'>1</span>)
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>2</span>))
+<span class='fu'>torch_diagonal</span>(<span class='kw'>x</span>, offset=<span class='op'>-</span><span class='fl'>1</span>, dim1=<span class='fl'>1</span>, dim2=<span class='fl'>2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.8983
-#&gt;   0.3959
+#&gt;  -1.0648
+#&gt;  -0.7373
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -0.3980
-#&gt;   0.5123
+#&gt;   1.7636
+#&gt;  -0.5107
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.4652
-#&gt;  -1.2116
+#&gt;   0.6239
+#&gt;  -0.5245
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   0.1357
-#&gt;   0.1514
+#&gt;   0.4272
+#&gt;  -0.5435
 #&gt; [ CPUFloatType{4,2,1} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -274,7 +275,7 @@ dimensions, so those need to be explicitly specified.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

@@ -228,20 +228,21 @@ the main diagonal. The main diagonal are the set of indices
 \(d_{1}, d_{2}\) are the dimensions of the matrix.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_tril</span>(<span class='no'>a</span>)
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
-<span class='no'>b</span>
-<span class='fu'>torch_tril</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='fu'>torch_tril</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_tril</span>(<span class='kw'>a</span>)
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
+<span class='kw'>b</span>
+<span class='fu'>torch_tril</span>(<span class='kw'>b</span>, diagonal=<span class='fl'>1</span>)
+<span class='fu'>torch_tril</span>(<span class='kw'>b</span>, diagonal=<span class='op'>-</span><span class='fl'>1</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt;  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
-#&gt;  0.3137  0.0000  0.0000  0.0000  0.0000  0.0000
-#&gt; -0.3619 -0.4987  0.0000  0.0000  0.0000  0.0000
-#&gt;  0.4245 -1.9699  1.7720  0.0000  0.0000  0.0000
+#&gt; -1.0130  0.0000  0.0000  0.0000  0.0000  0.0000
+#&gt;  0.8063  0.8140  0.0000  0.0000  0.0000  0.0000
+#&gt;  1.3819  0.7392 -0.9628  0.0000  0.0000  0.0000
 #&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -258,7 +259,7 @@ the main diagonal. The main diagonal are the set of indices
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

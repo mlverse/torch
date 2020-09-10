@@ -201,15 +201,15 @@ precisely described as:</p>
     </div>
 
     <pre class="usage"><span class='fu'>nn_conv1d</span>(
-  <span class='no'>in_channels</span>,
-  <span class='no'>out_channels</span>,
-  <span class='no'>kernel_size</span>,
-  <span class='kw'>stride</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>dilation</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>groups</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>padding_mode</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>
+  <span class='kw'>in_channels</span>,
+  <span class='kw'>out_channels</span>,
+  <span class='kw'>kernel_size</span>,
+  stride = <span class='fl'>1</span>,
+  padding = <span class='fl'>0</span>,
+  dilation = <span class='fl'>1</span>,
+  groups = <span class='fl'>1</span>,
+  bias = <span class='fl'>TRUE</span>,
+  padding_mode = <span class='st'>"zeros"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -337,12 +337,13 @@ sampled from \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_conv1d</span>(<span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fl'>3</span>, <span class='kw'>stride</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_conv1d</span>(<span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fl'>3</span>, stride=<span class='fl'>2</span>)
+<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span>)
+<span class='kw'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
 
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -358,7 +359,7 @@ sampled from \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\) where
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

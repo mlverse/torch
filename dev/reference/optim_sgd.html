@@ -197,12 +197,12 @@ On the importance of initialization and momentum in deep learning.</p>
     </div>
 
     <pre class="usage"><span class='fu'>optim_sgd</span>(
-  <span class='no'>params</span>,
-  <span class='kw'>lr</span> <span class='kw'>=</span> <span class='fu'><a href='optim_required.html'>optim_required</a></span>(),
-  <span class='kw'>momentum</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>dampening</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>weight_decay</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>nesterov</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>params</span>,
+  lr = <span class='fu'><a href='optim_required.html'>optim_required</a></span>(),
+  momentum = <span class='fl'>0</span>,
+  dampening = <span class='fl'>0</span>,
+  weight_decay = <span class='fl'>0</span>,
+  nesterov = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -262,15 +262,16 @@ $$
 The Nesterov version is analogously modified.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>optimizer</span> <span class='kw'>&lt;-</span> <span class='fu'>optim_sgd</span>(<span class='no'>model</span>$<span class='fu'>parameters</span>(), <span class='kw'>lr</span><span class='kw'>=</span><span class='fl'>0.1</span>, <span class='kw'>momentum</span><span class='kw'>=</span><span class='fl'>0.9</span>)
-<span class='no'>optimizer</span>$<span class='fu'>zero_grad</span>()
-<span class='fu'>loss_fn</span>(<span class='fu'>model</span>(<span class='no'>input</span>), <span class='no'>target</span>)$<span class='fu'>backward</span>()
-<span class='no'>optimizer</span>$<span class='fu'><a href='https://rdrr.io/r/stats/step.html'>step</a></span>()
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>optimizer</span> <span class='op'>&lt;-</span> <span class='fu'>optim_sgd</span>(<span class='kw'>model</span><span class='op'>$</span><span class='fu'>parameters</span>(), lr=<span class='fl'>0.1</span>, momentum=<span class='fl'>0.9</span>)
+<span class='kw'>optimizer</span><span class='op'>$</span><span class='fu'>zero_grad</span>()
+<span class='fu'>loss_fn</span>(<span class='fu'>model</span>(<span class='kw'>input</span>), <span class='kw'>target</span>)<span class='op'>$</span><span class='fu'>backward</span>()
+<span class='kw'>optimizer</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/step.html'>step</a></span>()
 }
 
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -286,7 +287,7 @@ The Nesterov version is analogously modified.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

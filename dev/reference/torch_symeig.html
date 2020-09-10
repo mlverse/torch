@@ -198,7 +198,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>(Tensor) the input tensor of size \((*, n, n)\) where <code>*</code> is zero or more                    batch dimensions consisting of symmetric matrices.</p></td>
+      <td><p>(Tensor) the input tensor of size \((*, n, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                    batch dimensions consisting of symmetric matrices.</p></td>
     </tr>
     <tr>
       <th>eigenvectors</th>
@@ -242,23 +242,24 @@ only the upper triangular portion is used by default.</p>
 <p>If <code>upper</code> is <code>False</code>, then lower triangular portion is used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
-<span class='no'>a</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()  <span class='co'># To make a symmetric</span>
-<span class='no'>a</span>
-<span class='no'>o</span> <span class='kw'>=</span> <span class='fu'>torch_symeig</span>(<span class='no'>a</span>, <span class='kw'>eigenvectors</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>e</span> <span class='kw'>=</span> <span class='no'>o</span><span class='kw'>[[</span><span class='fl'>1</span>]]
-<span class='no'>v</span> <span class='kw'>=</span> <span class='no'>o</span><span class='kw'>[[</span><span class='fl'>2</span>]]
-<span class='no'>e</span>
-<span class='no'>v</span>
-<span class='no'>a_big</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
-<span class='no'>a_big</span> <span class='kw'>=</span> <span class='no'>a_big</span> + <span class='no'>a_big</span>$<span class='fu'>transpose</span>(-<span class='fl'>2</span>, -<span class='fl'>1</span>)  <span class='co'># To make a_big symmetric</span>
-<span class='no'>o</span> <span class='kw'>=</span> <span class='no'>a_big</span>$<span class='fu'>symeig</span>(<span class='kw'>eigenvectors</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>e</span> <span class='kw'>=</span> <span class='no'>o</span><span class='kw'>[[</span><span class='fl'>1</span>]]
-<span class='no'>v</span> <span class='kw'>=</span> <span class='no'>o</span><span class='kw'>[[</span><span class='fl'>2</span>]]
-<span class='fu'><a href='torch_allclose.html'>torch_allclose</a></span>(<span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>v</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>e</span>$<span class='fu'>diag_embed</span>(), <span class='no'>v</span>$<span class='fu'>transpose</span>(-<span class='fl'>2</span>, -<span class='fl'>1</span>))), <span class='no'>a_big</span>)
-}</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
+<span class='kw'>a</span> <span class='op'>=</span> <span class='kw'>a</span> <span class='op'>+</span> <span class='kw'>a</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()  <span class='co'># To make a symmetric</span>
+<span class='kw'>a</span>
+<span class='kw'>o</span> <span class='op'>=</span> <span class='fu'>torch_symeig</span>(<span class='kw'>a</span>, eigenvectors=<span class='fl'>TRUE</span>)
+<span class='kw'>e</span> <span class='op'>=</span> <span class='kw'>o</span>[[<span class='fl'>1</span>]]
+<span class='kw'>v</span> <span class='op'>=</span> <span class='kw'>o</span>[[<span class='fl'>2</span>]]
+<span class='kw'>e</span>
+<span class='kw'>v</span>
+<span class='kw'>a_big</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
+<span class='kw'>a_big</span> <span class='op'>=</span> <span class='kw'>a_big</span> <span class='op'>+</span> <span class='kw'>a_big</span><span class='op'>$</span><span class='fu'>transpose</span>(<span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>)  <span class='co'># To make a_big symmetric</span>
+<span class='kw'>o</span> <span class='op'>=</span> <span class='kw'>a_big</span><span class='op'>$</span><span class='fu'>symeig</span>(eigenvectors=<span class='fl'>TRUE</span>)
+<span class='kw'>e</span> <span class='op'>=</span> <span class='kw'>o</span>[[<span class='fl'>1</span>]]
+<span class='kw'>v</span> <span class='op'>=</span> <span class='kw'>o</span>[[<span class='fl'>2</span>]]
+<span class='fu'><a href='torch_allclose.html'>torch_allclose</a></span>(<span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>v</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>e</span><span class='op'>$</span><span class='fu'>diag_embed</span>(), <span class='kw'>v</span><span class='op'>$</span><span class='fu'>transpose</span>(<span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>))), <span class='kw'>a_big</span>)
+}
+</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -274,7 +275,7 @@ only the upper triangular portion is used by default.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

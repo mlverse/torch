@@ -228,22 +228,23 @@ a vector of size N, with elements.</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_cumprod</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.3905
-#&gt; -0.4286
-#&gt; -0.1503
-#&gt; -0.1327
-#&gt; -0.1285
-#&gt;  0.0419
-#&gt;  0.0229
-#&gt;  0.0154
-#&gt; -0.0034
-#&gt;  0.0022
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_cumprod</span>(<span class='kw'>a</span>, dim=<span class='fl'>1</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1.2462
+#&gt;  1.2468
+#&gt; -0.4955
+#&gt;  0.2186
+#&gt; -0.1655
+#&gt; -0.3158
+#&gt;  0.2732
+#&gt; -0.2560
+#&gt;  0.1221
+#&gt;  0.1921
 #&gt; [ CPUFloatType{10} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -260,7 +261,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

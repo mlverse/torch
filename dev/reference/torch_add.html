@@ -243,23 +243,24 @@ If <code>other</code> is of type FloatTensor or DoubleTensor, <code>alpha</code>
 a real number, otherwise it should be an integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='fl'>20</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_add</span>(<span class='kw'>a</span>, <span class='fl'>20</span>)
 
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
-<span class='no'>b</span>
-<span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='no'>b</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.6282 -2.2988 -0.5619 -1.5140
-#&gt; -2.0753 -2.7458 -1.0089 -1.9611
-#&gt;  0.6659 -0.0046  1.7323  0.7801
-#&gt;  0.8684  0.1978  1.9348  0.9826
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
+<span class='kw'>b</span>
+<span class='fu'>torch_add</span>(<span class='kw'>a</span>, <span class='kw'>b</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1.7857  1.7343  1.6094 -0.2044
+#&gt;  0.0063 -0.0451 -0.1700 -1.9838
+#&gt;  0.9206  0.8692  0.7442 -1.0696
+#&gt;  1.3082  1.2568  1.1318 -0.6820
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -276,7 +277,7 @@ a real number, otherwise it should be an integer.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

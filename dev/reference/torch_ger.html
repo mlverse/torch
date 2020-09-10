@@ -223,12 +223,13 @@ If <code>input</code> is a vector of size \(n\) and <code>vec2</code> is a vecto
 size \(m\), then <code>out</code> must be a matrix of size \((n \times m)\).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>v1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
-<span class='no'>v2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>4.</span>)
-<span class='fu'>torch_ger</span>(<span class='no'>v1</span>, <span class='no'>v2</span>)
-}</div><div class='output co'>#&gt; torch_tensor 
+<span class='kw'>v1</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
+<span class='kw'>v2</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>4.</span>)
+<span class='fu'>torch_ger</span>(<span class='kw'>v1</span>, <span class='kw'>v2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt;   1   2   3
 #&gt;   2   4   6
 #&gt;   3   6   9
@@ -249,7 +250,7 @@ size \(m\), then <code>out</code> must be a matrix of size \((n \times m)\).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

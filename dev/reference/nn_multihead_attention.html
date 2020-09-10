@@ -197,14 +197,14 @@ See reference: Attention Is All You Need</p>
     </div>
 
     <pre class="usage"><span class='fu'>nn_multihead_attention</span>(
-  <span class='no'>embed_dim</span>,
-  <span class='no'>num_heads</span>,
-  <span class='kw'>dropout</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>add_bias_kv</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>add_zero_attn</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>kdim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vdim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>embed_dim</span>,
+  <span class='kw'>num_heads</span>,
+  dropout = <span class='fl'>0</span>,
+  bias = <span class='fl'>TRUE</span>,
+  add_bias_kv = <span class='fl'>FALSE</span>,
+  add_zero_attn = <span class='fl'>FALSE</span>,
+  kdim = <span class='kw'>NULL</span>,
+  vdim = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -287,15 +287,16 @@ L is the target sequence length, S is the source sequence length.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>multihead_attn</span> <span class='kw'>=</span> <span class='fu'>nn_multihead_attention</span>(<span class='no'>embed_dim</span>, <span class='no'>num_heads</span>)
-<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>multihead_attn</span>(<span class='no'>query</span>, <span class='no'>key</span>, <span class='no'>value</span>)
-<span class='no'>attn_output</span> <span class='kw'>&lt;-</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
-<span class='no'>attn_output_weights</span> <span class='kw'>&lt;-</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]]
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>multihead_attn</span> <span class='op'>=</span> <span class='fu'>nn_multihead_attention</span>(<span class='kw'>embed_dim</span>, <span class='kw'>num_heads</span>)
+<span class='kw'>out</span> <span class='op'>&lt;-</span> <span class='fu'>multihead_attn</span>(<span class='kw'>query</span>, <span class='kw'>key</span>, <span class='kw'>value</span>)
+<span class='kw'>attn_output</span> <span class='op'>&lt;-</span> <span class='kw'>out</span>[[<span class='fl'>1</span>]]
+<span class='kw'>attn_output_weights</span> <span class='op'>&lt;-</span> <span class='kw'>out</span>[[<span class='fl'>2</span>]]
 }
 
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -311,7 +312,7 @@ L is the target sequence length, S is the source sequence length.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

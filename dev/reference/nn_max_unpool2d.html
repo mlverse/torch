@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Computes a partial inverse of <code>MaxPool2d</code>. — nn_max_unpool2d • torch</title>
+<title>Computes a partial inverse of MaxPool2d. — nn_max_unpool2d • torch</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Computes a partial inverse of <code>MaxPool2d</code>. — nn_max_unpool2d" />
+<meta property="og:title" content="Computes a partial inverse of MaxPool2d. — nn_max_unpool2d" />
 <meta property="og:description" content="MaxPool2d is not fully invertible, since the non-maximal values are lost.
 MaxUnpool2d takes in as input the output of MaxPool2d
 including the indices of the maximal values and computes a partial inverse
@@ -198,7 +198,7 @@ including the indices of the maximal values and computes a partial inverse
 in which all non-maximal values are set to zero.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_max_unpool2d</span>(<span class='no'>kernel_size</span>, <span class='kw'>stride</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_max_unpool2d</span>(<span class='kw'>kernel_size</span>, stride = <span class='kw'>NULL</span>, padding = <span class='fl'>0</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -253,22 +253,23 @@ or as given by <code>output_size</code> in the call operator</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>pool</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='nn_max_pool2d.html'>nn_max_pool2d</a></span>(<span class='fl'>2</span>, <span class='kw'>stride</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>return_indices</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>unpool</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_max_unpool2d</span>(<span class='fl'>2</span>, <span class='kw'>stride</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>4</span>,<span class='fl'>4</span>)
-<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>pool</span>(<span class='no'>input</span>)
-<span class='fu'>unpool</span>(<span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]], <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]])
+<span class='kw'>pool</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_max_pool2d.html'>nn_max_pool2d</a></span>(<span class='fl'>2</span>, stride=<span class='fl'>2</span>, return_indices=<span class='fl'>TRUE</span>)
+<span class='kw'>unpool</span> <span class='op'>&lt;-</span> <span class='fu'>nn_max_unpool2d</span>(<span class='fl'>2</span>, stride=<span class='fl'>2</span>)
+<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>4</span>,<span class='fl'>4</span>)
+<span class='kw'>out</span> <span class='op'>&lt;-</span> <span class='fu'>pool</span>(<span class='kw'>input</span>)
+<span class='fu'>unpool</span>(<span class='kw'>out</span>[[<span class='fl'>1</span>]], <span class='kw'>out</span>[[<span class='fl'>2</span>]])
 
 <span class='co'># specify a different output size than input size</span>
-<span class='fu'>unpool</span>(<span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]], <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]], <span class='kw'>output_size</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>5</span>))
+<span class='fu'>unpool</span>(<span class='kw'>out</span>[[<span class='fl'>1</span>]], <span class='kw'>out</span>[[<span class='fl'>2</span>]], output_size=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>5</span>))
 
-}</div><div class='output co'>#&gt; torch_tensor 
+}
+</div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,1,.,.) = 
-#&gt;  -0.0165  0.0000  0.0000  1.2364  0.0000
-#&gt;   0.0000  0.0000  0.0000  0.5768  0.0000
-#&gt;   0.0000  1.3762  0.0000  0.0000  0.0000
+#&gt;   0.0000  0.0000  0.0000  0.5466  1.2147
+#&gt;   0.0000  0.0000  0.0000  0.0000  0.0000
+#&gt;   0.0000  0.0000  2.0992  0.0000  0.6233
 #&gt;   0.0000  0.0000  0.0000  0.0000  0.0000
 #&gt;   0.0000  0.0000  0.0000  0.0000  0.0000
 #&gt; [ CPUFloatType{1,1,5,5} ]</div></pre>
@@ -287,7 +288,7 @@ or as given by <code>output_size</code> in the call operator</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
