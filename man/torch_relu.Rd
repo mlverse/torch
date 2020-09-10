@@ -14,5 +14,7 @@ Relu
 }
 \section{relu(input) -> Tensor }{
 
+
+Computes the relu tranformation.
 }
 

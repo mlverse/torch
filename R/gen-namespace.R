@@ -3804,8 +3804,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_bartlett_window
-torch_bartlett_window <- function(window_length, periodic, options = list()) {
+#' @rdname .torch_bartlett_window
+.torch_bartlett_window <- function(window_length, periodic, options = list()) {
   args <- mget(x = c("window_length", "periodic", "options"))
 expected_types <- list(window_length = "int64_t", periodic = "bool", options = "TensorOptions")
 nd_args <- c("window_length", "periodic")
@@ -4307,8 +4307,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_blackman_window
-torch_blackman_window <- function(window_length, periodic, options = list()) {
+#' @rdname .torch_blackman_window
+.torch_blackman_window <- function(window_length, periodic, options = list()) {
   args <- mget(x = c("window_length", "periodic", "options"))
 expected_types <- list(window_length = "int64_t", periodic = "bool", options = "TensorOptions")
 nd_args <- c("window_length", "periodic")
@@ -7992,8 +7992,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_hamming_window
-torch_hamming_window <- function(window_length, periodic, alpha, beta, options = list()) {
+#' @rdname .torch_hamming_window
+.torch_hamming_window <- function(window_length, periodic, alpha, beta, options = list()) {
   args <- mget(x = c("window_length", "periodic", "alpha", "beta", "options"))
 expected_types <- list(window_length = "int64_t", periodic = "bool", alpha = "double", 
     beta = "double", options = "TensorOptions")
@@ -8010,8 +8010,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_hann_window
-torch_hann_window <- function(window_length, periodic, options = list()) {
+#' @rdname .torch_hann_window
+.torch_hann_window <- function(window_length, periodic, options = list()) {
   args <- mget(x = c("window_length", "periodic", "options"))
 expected_types <- list(window_length = "int64_t", periodic = "bool", options = "TensorOptions")
 nd_args <- c("window_length", "periodic")
@@ -12106,8 +12106,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_normal
-torch_normal <- function(mean, std = 1L, size, generator = NULL, options = list()) {
+#' @rdname .torch_normal
+.torch_normal <- function(mean, std = 1L, size, generator = NULL, options = list()) {
   args <- mget(x = c("mean", "std", "size", "generator", "options"))
 expected_types <- list(mean = c("Tensor", "double"), std = c("double", "Tensor"
 ), size = "IntArrayRef", generator = "Generator *", options = "TensorOptions")
@@ -13695,8 +13695,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_result_type
-torch_result_type <- function(scalar, scalar1, other, scalar2, tensor) {
+#' @rdname .torch_result_type
+.torch_result_type <- function(scalar, scalar1, other, scalar2, tensor) {
   args <- mget(x = c("scalar", "scalar1", "other", "scalar2", "tensor"))
 expected_types <- list(scalar = "Scalar", scalar1 = "Scalar", other = c("Tensor", 
 "Scalar"), scalar2 = "Scalar", tensor = "Tensor")
@@ -15194,8 +15194,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_sparse_coo_tensor
-torch_sparse_coo_tensor <- function(indices, values, size, options = list()) {
+#' @rdname .torch_sparse_coo_tensor
+.torch_sparse_coo_tensor <- function(indices, values, size, options = list()) {
   args <- mget(x = c("indices", "values", "size", "options"))
 expected_types <- list(indices = "Tensor", values = "Tensor", size = "IntArrayRef", 
     options = "TensorOptions")
@@ -15472,8 +15472,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_stft
-torch_stft <- function(self, n_fft, hop_length = NULL, win_length = NULL, window = list(), normalized = FALSE, onesided = TRUE) {
+#' @rdname .torch_stft
+.torch_stft <- function(self, n_fft, hop_length = NULL, win_length = NULL, window = list(), normalized = FALSE, onesided = TRUE) {
   args <- mget(x = c("self", "n_fft", "hop_length", "win_length", "window", "normalized", "onesided"))
 expected_types <- list(self = "Tensor", n_fft = "int64_t", hop_length = "int64_t", 
     win_length = "int64_t", window = "Tensor", normalized = "bool", 
@@ -15835,8 +15835,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_tensordot
-torch_tensordot <- function(self, other, dims_self, dims_other) {
+#' @rdname .torch_tensordot
+.torch_tensordot <- function(self, other, dims_self, dims_other) {
   args <- mget(x = c("self", "other", "dims_self", "dims_other"))
 expected_types <- list(self = "Tensor", other = "Tensor", dims_self = "IntArrayRef", 
     dims_other = "IntArrayRef")
@@ -16331,8 +16331,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_tril_indices
-torch_tril_indices <- function(row, col, offset = 0L, options = torch_long()) {
+#' @rdname .torch_tril_indices
+.torch_tril_indices <- function(row, col, offset = 0L, options = torch_long()) {
   args <- mget(x = c("row", "col", "offset", "options"))
 expected_types <- list(row = "int64_t", col = "int64_t", offset = "int64_t", options = "TensorOptions")
 nd_args <- c("row", "col")
@@ -16401,8 +16401,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_triu_indices
-torch_triu_indices <- function(row, col, offset = 0L, options = torch_long()) {
+#' @rdname .torch_triu_indices
+.torch_triu_indices <- function(row, col, offset = 0L, options = torch_long()) {
   args <- mget(x = c("row", "col", "offset", "options"))
 expected_types <- list(row = "int64_t", col = "int64_t", offset = "int64_t", options = "TensorOptions")
 nd_args <- c("row", "col")

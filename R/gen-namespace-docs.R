@@ -3039,7 +3039,7 @@ NULL
 #' `torch_randn(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)`.
 #'
 #'
-#' @param self (Tensor) the size of `input` will determine size of the output tensor.
+#' @param input (Tensor) the size of `input` will determine size of the output tensor.
 #' @param dtype (`torch.dtype`, optional) the desired data type of returned Tensor.        Default: if `NULL`, defaults to the dtype of `input`.
 #' @param layout (`torch.layout`, optional) the desired layout of returned tensor.        Default: if `NULL`, defaults to the layout of `input`.
 #' @param device (`torch.device`, optional) the desired device of returned tensor.        Default: if `NULL`, defaults to the device of `input`.
@@ -3233,6 +3233,8 @@ NULL
 #'
 #' @section relu(input) -> Tensor :
 #' 
+#' Computes the relu tranformation.
+#' 
 #' @param self the input tensor
 #'
 #' @name torch_relu
@@ -3277,12 +3279,15 @@ NULL
 #' Selu
 #'
 #' @section selu(input) -> Tensor :
+#' 
+#' Computes the selu transformation.
 #'
 #' @param self the input tensor
 #'
 #' @name torch_selu
 #'
 #' @export
+#' 
 NULL
 
 
@@ -3290,7 +3295,7 @@ NULL
 #'
 #' @section selu_(input) -> Tensor :
 #'
-#' In-place version of [toch_selu()].
+#' In-place version of [torch_selu()].
 #' 
 #' @param self the input tensor
 #'
@@ -3551,7 +3556,7 @@ NULL
 #' previous signature may cause error or return incorrect result.
 #'
 #'
-#' @param self (Tensor) the input tensor
+#' @param input (Tensor) the input tensor
 #' @param n_fft (int) size of Fourier transform
 #' @param hop_length (int, optional) the distance between neighboring sliding window        frames. Default: `NULL` (treated as equal to `floor(n_fft / 4)`)
 #' @param win_length (int, optional) the size of window frame and STFT filter.        Default: `NULL`  (treated as equal to `n_fft`)

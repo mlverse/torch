@@ -3,19 +3,9 @@
 %   R/gen-namespace-examples.R
 \name{torch_rand_like}
 \alias{torch_rand_like}
-\alias{torch_randn_like}
 \title{Rand_like}
 \usage{
 torch_rand_like(
-  input,
-  dtype = NULL,
-  layout = torch_strided(),
-  device = NULL,
-  requires_grad = FALSE,
-  memory_format = torch_preserve_format()
-)
-
-torch_randn_like(
   input,
   dtype = NULL,
   layout = torch_strided(),

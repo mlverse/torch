@@ -14,5 +14,7 @@ Selu
 }
 \section{selu(input) -> Tensor }{
 
+
+Computes the selu transformation.
 }
 

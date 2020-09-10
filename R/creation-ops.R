@@ -140,7 +140,7 @@ torch_randn <- function(..., names = NULL, dtype = NULL, layout = torch_strided(
   do.call(.torch_randn, args)
 }
 
-#' @rdname torch_rand_like
+#' @rdname torch_randn_like
 torch_randn_like <- function(input, dtype = NULL, layout = torch_strided(), 
                             device=NULL, requires_grad = FALSE, 
                             memory_format = torch_preserve_format()) {

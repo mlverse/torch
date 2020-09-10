@@ -16,6 +16,6 @@ Selu_
 \section{selu_(input) -> Tensor }{
 
 
-In-place version of \code{\link[=toch_selu]{toch_selu()}}.
+In-place version of \code{\link[=torch_selu]{torch_selu()}}.
 }
 
