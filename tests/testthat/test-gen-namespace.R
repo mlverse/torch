@@ -165,7 +165,7 @@ test_that("tensordot", {
   
   a <- torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
   b <- torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
-  out <- torch_tensordot(a, b, dims_self=c(2, 1), dims_other = c(1, 2))
+  out <- torch_tensordot(a, b, list(c(2, 1), c(1, 2)))
   
   expect_tensor_shape(out, c(5,2))
   
