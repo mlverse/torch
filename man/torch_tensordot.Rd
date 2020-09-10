@@ -23,7 +23,7 @@ if (torch_is_installed()) {
 
 a = torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
 b = torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
-torch_tensordot(a, b, dims_self=c(2, 1), dims_other = c(1, 2))
+torch_tensordot(a, b, dims = list(c(2, 1), c(1, 2)))
 \dontrun{
 a = torch_randn(3, 4, 5, device='cuda')
 b = torch_randn(4, 5, 6, device='cuda')

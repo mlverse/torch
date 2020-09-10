@@ -126,7 +126,11 @@ torch_sparse_coo_tensor <- function(indices, values, size=NULL, dtype=NULL,
                                     device=NULL, requires_grad=FALSE) {
   opt <- torch_tensor_options(dtype = dtype, device = device, 
                               requires_grad = requires_grad)
-  .torch_sparse_coo_tensor(indices, values, size, options = opt)
+  
+  if (is.null(size))
+    .torch_sparse_coo_tensor(indices, values, options = opt)
+  else
+    .torch_sparse_coo_tensor(indices, values, size = size, options = opt)
 }
 
 #' @rdname torch_stft
