@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Matmul</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_matmul.Rd</code></div>
     </div>
 
@@ -192,21 +192,18 @@
     <p>Matmul</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_matmul</span>(<span class='kw'>self</span>, <span class='kw'>other</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the first tensor to be multiplied</p></td>
     </tr>
     <tr>
       <th>other</th>
       <td><p>(Tensor) the second tensor to be multiplied</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -216,7 +213,7 @@
 <pre>The 1-dimensional dot product version of this function does not support an `out` parameter.
 </pre>
 
-    <h2 class="hasAnchor" id="matmul-input-other-out-none-gt-tensor-"><a class="anchor" href="#matmul-input-other-out-none-gt-tensor-"></a>matmul(input, other, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="matmul-input-other-out-null-gt-tensor-"><a class="anchor" href="#matmul-input-other-out-null-gt-tensor-"></a>matmul(input, other, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -268,54 +265,54 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 }
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -2.6809 -0.4946 -10.5166  4.8508 -0.9662
-#&gt;   0.2991 -1.0008 -2.9917 -3.6978 -3.4106
-#&gt;   1.1409  0.2604  2.9629 -3.1385 -1.4678
+#&gt;  -2.0271 -0.2149 -1.2504  3.9989 -0.0802
+#&gt;   0.3190  0.7490 -0.1358 -1.9446 -0.6521
+#&gt;  -3.3108  1.3626 -2.8875  2.5360 -1.8795
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.8839 -1.4735  0.0652  0.7135  0.8053
-#&gt;  -0.8732  0.0161 -1.2564 -1.8175 -0.2341
-#&gt;  -0.5970 -3.7456 -4.1767 -0.8696  2.6182
+#&gt;   0.6201 -1.3175  1.7261 -0.8218  0.5984
+#&gt;   2.2821  0.5118  1.5446 -5.4812 -0.3612
+#&gt;  -0.2414 -1.9516  2.2920  2.8496  0.9449
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.1990  2.0418 -1.1464  5.1929 -2.0088
-#&gt;  -0.3292  0.0830  0.3383  1.6647  1.5766
-#&gt;   0.2309 -1.2398 -1.2352 -1.9865 -0.6188
+#&gt;   1.1220 -0.2664  0.6737 -1.5554  0.4681
+#&gt;   1.4242  4.0481 -3.3609 -5.3369 -1.6740
+#&gt;  -0.0081  0.8187 -0.7010 -1.2736 -0.5960
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   -0.0906  -0.9770  -4.1810  -0.3416  -2.1877
-#&gt;    3.6772   0.1005  12.2702  -2.9408   1.9869
-#&gt;    0.9927   1.5519   1.8898   4.2136  -0.6510
+#&gt;   0.8125  0.7127 -1.5754  0.2994  0.7674
+#&gt;   0.0241  0.9930 -0.5457 -0.5774 -0.6143
+#&gt;  -0.6889  1.4725 -3.4230 -0.2011 -0.3222
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -1.6850  0.7892 -0.7554 -2.1070  0.5298
-#&gt;  -0.7920 -3.8116 -3.9629 -5.6347  1.1118
-#&gt;  -2.1208  1.5032 -4.8464  4.3452 -0.2817
+#&gt;   1.2930  1.6542 -1.3498 -3.9091 -0.5087
+#&gt;   0.0798 -0.9176  2.1683  0.7020  0.0403
+#&gt;   1.9470  1.3370 -0.8122 -2.9661  0.2085
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;   0.5870 -1.1692 -1.5098  2.6025  0.4319
-#&gt;  -1.8684  1.0197 -3.8004  2.1111 -0.1764
-#&gt;  -0.5343  0.2543 -5.2417  5.1757 -1.5291
+#&gt;  -0.8085 -2.3857  2.8500  5.6781  1.1990
+#&gt;  -0.9125 -0.1630 -0.1490  1.8634 -0.1339
+#&gt;  -0.6582  1.3443 -3.2837  0.4293 -0.1289
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;   0.2717  0.9324  3.0536 -2.0161 -0.1574
-#&gt;   0.5406 -0.0661 -0.9495  2.3033 -0.7396
-#&gt;   1.4107  0.3536  2.9462  2.5392  0.4394
+#&gt;   1.7552 -0.5171  2.2508 -4.5786 -0.0982
+#&gt;  -3.3325  0.6284 -2.7909  5.0056 -0.8882
+#&gt;  -0.1452 -0.7941  2.4504  0.4801 -0.3753
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;  -1.7402  2.0616 -3.0313  1.0960 -1.7451
-#&gt;  -0.6110 -2.9992 -7.7965  5.3914  1.2558
-#&gt;   1.5597  0.2508  4.2138 -3.1801 -1.2046
+#&gt;  -2.5582 -0.3313 -1.5335  4.6340 -0.1597
+#&gt;   2.9672 -1.1270  4.2703 -3.4697  0.7215
+#&gt;  -0.5372  0.7684 -1.3629  0.0805 -0.4280
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;  -0.0096  1.2711  0.1790  0.4257 -1.4911
-#&gt;   0.3910  0.7790  0.8669  1.2045 -0.6025
-#&gt;   0.6989  1.7260  2.6494  1.0718 -1.1003
+#&gt;  -1.6370  0.5824 -1.4596  2.6769 -0.5566
+#&gt;   2.3690 -1.3776  3.3677 -3.1114  0.8697
+#&gt;   0.7242 -1.8432  2.2567  2.2833  1.4978
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;  -0.2817 -2.0163 -4.4983  5.0457  1.8857
-#&gt;  -0.3029  0.9321  1.4816  3.8409  2.2694
-#&gt;   0.6240 -1.3195 -1.5015  0.9746 -0.1551
+#&gt;   0.4091  0.0563  0.2539  0.0895  0.1914
+#&gt;   0.9589  1.8700 -2.2453 -5.5285 -0.9104
+#&gt;  -1.5421 -0.5838 -0.3939  2.5293 -0.0751
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

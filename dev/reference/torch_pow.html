@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Pow</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_pow.Rd</code></div>
     </div>
 
@@ -192,29 +192,22 @@
     <p>Pow</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_pow</span>(<span class='kw'>self</span>, <span class='kw'>exponent</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) the input tensor.</p></td>
+      <th>self</th>
+      <td><p>(float) the scalar base value for the power operation</p></td>
     </tr>
     <tr>
       <th>exponent</th>
       <td><p>(float or tensor) the exponent value</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
-    <tr>
-      <th>self</th>
-      <td><p>(float) the scalar base value for the power operation</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="pow-input-exponent-out-none-gt-tensor-"><a class="anchor" href="#pow-input-exponent-out-none-gt-tensor-"></a>pow(input, exponent, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="pow-input-exponent-out-null-gt-tensor-"><a class="anchor" href="#pow-input-exponent-out-null-gt-tensor-"></a>pow(input, exponent, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -233,7 +226,7 @@ When <code>exponent</code> is a tensor, the operation applied is:</p>
 $$
 When <code>exponent</code> is a tensor, the shapes of <code>input</code>
 and <code>exponent</code> must be broadcastable .</p>
-    <h2 class="hasAnchor" id="pow-self-exponent-out-none-gt-tensor-"><a class="anchor" href="#pow-self-exponent-out-none-gt-tensor-"></a>pow(self, exponent, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="pow-self-exponent-out-null-gt-tensor-"><a class="anchor" href="#pow-self-exponent-out-null-gt-tensor-"></a>pow(self, exponent, out=NULL) -&gt; Tensor </h2>
 
     
 

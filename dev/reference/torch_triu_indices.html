@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Triu_indices</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/wrapers.R'><code>R/wrapers.R</code></a></small>
     <div class="hidden name"><code>torch_triu_indices.Rd</code></div>
     </div>
 
@@ -192,6 +192,14 @@
     <p>Triu_indices</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_triu_indices</span>(
+  <span class='kw'>row</span>,
+  <span class='kw'>col</span>,
+  offset = <span class='fl'>0</span>,
+  dtype = <span class='fu'><a href='torch_dtype.html'>torch_long</a></span>(),
+  device = <span class='st'>"cpu"</span>,
+  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,11 +218,11 @@
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>None</code>, <code>torch_long</code>.</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>NULL</code>, <code>torch_long</code>.</p></td>
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>None</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
     </tr>
     <tr>
       <th>layout</th>
@@ -225,7 +233,7 @@
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     
-<pre>When running on CUDA, ``row * col`` must be less than \eqn{2^{59}} to
+<pre>When running on CUDA, `row * col` must be less than \eqn{2^{59}} to
 prevent overflow during calculation.
 </pre>
 

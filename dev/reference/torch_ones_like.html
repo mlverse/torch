@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Ones_like</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/creation-ops.R'><code>R/creation-ops.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_ones_like.Rd</code></div>
     </div>
 
@@ -192,6 +192,14 @@
     <p>Ones_like</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_ones_like</span>(
+  <span class='kw'>input</span>,
+  dtype = <span class='kw'>NULL</span>,
+  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
+  device = <span class='kw'>NULL</span>,
+  requires_grad = <span class='fl'>FALSE</span>,
+  memory_format = <span class='fu'><a href='torch_memory_format.html'>torch_preserve_format</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,19 +210,19 @@
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned Tensor.        Default: if <code>None</code>, defaults to the dtype of <code>input</code>.</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned Tensor.        Default: if <code>NULL</code>, defaults to the dtype of <code>input</code>.</p></td>
     </tr>
     <tr>
       <th>layout</th>
-      <td><p>(<code>torch.layout</code>, optional) the desired layout of returned tensor.        Default: if <code>None</code>, defaults to the layout of <code>input</code>.</p></td>
+      <td><p>(<code>torch.layout</code>, optional) the desired layout of returned tensor.        Default: if <code>NULL</code>, defaults to the layout of <code>input</code>.</p></td>
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>None</code>, defaults to the device of <code>input</code>.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, defaults to the device of <code>input</code>.</p></td>
     </tr>
     <tr>
       <th>requires_grad</th>
-      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>memory_format</th>
@@ -222,7 +230,7 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="ones-like-input-dtype-none-layout-none-device-none-requires-grad-false-memory-format-torch-preserve-format-gt-tensor-"><a class="anchor" href="#ones-like-input-dtype-none-layout-none-device-none-requires-grad-false-memory-format-torch-preserve-format-gt-tensor-"></a>ones_like(input, dtype=None, layout=None, device=None, requires_grad=False, memory_format=torch.preserve_format) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="ones-like-input-dtype-null-layout-null-device-null-requires-grad-false-memory-format-torch-preserve-format-gt-tensor-"><a class="anchor" href="#ones-like-input-dtype-null-layout-null-device-null-requires-grad-false-memory-format-torch-preserve-format-gt-tensor-"></a>ones_like(input, dtype=NULL, layout=NULL, device=NULL, requires_grad=False, memory_format=torch.preserve_format) -&gt; Tensor </h2>
 
     
 

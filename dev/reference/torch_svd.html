@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Svd</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_svd.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Svd</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_svd</span>(<span class='kw'>self</span>, some = <span class='fl'>TRUE</span>, compute_uv = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor of size \((*, m, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                    batch dimensions consisting of \(m \times n\) matrices.</p></td>
     </tr>
     <tr>
@@ -207,10 +208,6 @@
     <tr>
       <th>compute_uv</th>
       <td><p>(bool, optional) option whether to compute <code>U</code> and <code>V</code> or not</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(tuple, optional) the output tuple of tensors</p></td>
     </tr>
     </table>
 
@@ -229,12 +226,12 @@ full rank with all distinct singular values. Otherwise, <code>NaN</code> can
 appear as the gradients are not properly defined. Also, notice that
 double backward will usually do an additional backward through <code>U</code> and
 <code>V</code> even if the original backward is only on <code>S</code>.</p>
-<p>When <code>some</code> = <code>False</code>, the gradients on <code>U[..., :, min(m, n):]</code>
+<p>When <code>some</code> = <code>FALSE</code>, the gradients on <code>U[..., :, min(m, n):]</code>
 and <code>V[..., :, min(m, n):]</code> will be ignored in backward as those vectors
 can be arbitrary bases of the subspaces.</p>
-<p>When <code>compute_uv</code> = <code>False</code>, backward cannot be performed since <code>U</code> and <code>V</code>
+<p>When <code>compute_uv</code> = <code>FALSE</code>, backward cannot be performed since <code>U</code> and <code>V</code>
 from the forward pass is required for the backward operation.</p>
-    <h2 class="hasAnchor" id="svd-input-some-true-compute-uv-true-out-none-gt-tensor-tensor-tensor-"><a class="anchor" href="#svd-input-some-true-compute-uv-true-out-none-gt-tensor-tensor-tensor-"></a>svd(input, some=True, compute_uv=True, out=None) -&gt; (Tensor, Tensor, Tensor) </h2>
+    <h2 class="hasAnchor" id="svd-input-some-true-compute-uv-true-gt-tensor-tensor-tensor-"><a class="anchor" href="#svd-input-some-true-compute-uv-true-gt-tensor-tensor-tensor-"></a>svd(input, some=TRUE, compute_uv=TRUE) -&gt; (Tensor, Tensor, Tensor) </h2>
 
     
 
@@ -242,10 +239,10 @@ from the forward pass is required for the backward operation.</p>
 <p>This function returns a namedtuple <code>(U, S, V)</code> which is the singular value
 decomposition of a input real matrix or batches of real matrices <code>input</code> such that
 \(input = U \times diag(S) \times V^T\).</p>
-<p>If <code>some</code> is <code>True</code> (default), the method returns the reduced singular value decomposition
+<p>If <code>some</code> is <code>TRUE</code> (default), the method returns the reduced singular value decomposition
 i.e., if the last two dimensions of <code>input</code> are <code>m</code> and <code>n</code>, then the returned
 <code>U</code> and <code>V</code> matrices will contain only \(min(n, m)\) orthonormal columns.</p>
-<p>If <code>compute_uv</code> is <code>False</code>, the returned <code>U</code> and <code>V</code> matrices will be zero matrices
+<p>If <code>compute_uv</code> is <code>FALSE</code>, the returned <code>U</code> and <code>V</code> matrices will be zero matrices
 of shape \((m \times m)\) and \((n \times n)\) respectively. <code>some</code> will be ignored here.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -266,7 +263,7 @@ of shape \((m \times m)\) and \((n \times n)\) respectively. <code>some</code> w
 <span class='fu'><a href='torch_dist.html'>torch_dist</a></span>(<span class='kw'>a_big</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>u</span>, <span class='fu'><a href='torch_diag_embed.html'>torch_diag_embed</a></span>(<span class='kw'>s</span>)), <span class='kw'>v</span><span class='op'>$</span><span class='fu'>transpose</span>(<span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>)))
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; 3.72648e-06
+#&gt; 2.75824e-06
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

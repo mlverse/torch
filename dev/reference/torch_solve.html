@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Solve</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_solve.Rd</code></div>
     </div>
 
@@ -192,21 +192,18 @@
     <p>Solve</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_solve</span>(<span class='kw'>self</span>, <span class='kw'>A</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) input matrix \(B\) of size \((*, m, k)\) , where \(*\)                is zero or more batch dimensions.</p></td>
     </tr>
     <tr>
       <th>A</th>
       <td><p>(Tensor) input square matrix of size \((*, m, m)\), where                \(*\) is zero or more batch dimensions.</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>((Tensor, Tensor) optional output tuple.</p></td>
     </tr>
     </table>
 
@@ -215,11 +212,11 @@
     
 <pre>Irrespective of the original strides, the returned matrices
 `solution` and `LU` will be transposed, i.e. with strides like
-`B.contiguous().transpose(-1, -2).stride()` and
-`A.contiguous().transpose(-1, -2).stride()` respectively.
+`B$contiguous()$transpose(-1, -2)$stride()` and
+`A$contiguous()$transpose(-1, -2)$stride()` respectively.
 </pre>
 
-    <h2 class="hasAnchor" id="torch-solve-input-a-out-none-gt-tensor-tensor-"><a class="anchor" href="#torch-solve-input-a-out-none-gt-tensor-tensor-"></a>torch.solve(input, A, out=None) -&gt; (Tensor, Tensor) </h2>
+    <h2 class="hasAnchor" id="solve-input-a-gt-tensor-tensor-"><a class="anchor" href="#solve-input-a-gt-tensor-tensor-"></a>solve(input, A) -&gt; (Tensor, Tensor) </h2>
 
     
 
@@ -256,7 +253,7 @@ batched outputs <code>solution, LU</code>.</p>
 <span class='fu'><a href='torch_dist.html'>torch_dist</a></span>(<span class='kw'>B</span>, <span class='kw'>A</span><span class='op'>$</span><span class='fu'>matmul</span>(<span class='kw'>X</span>))
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; 1.47388e-05
+#&gt; 5.0642e-06
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

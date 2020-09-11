@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Ifft</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_ifft.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Ifft</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_ifft</span>(<span class='kw'>self</span>, <span class='kw'>signal_ndim</span>, normalized = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor of at least <code>signal_ndim</code> <code>+ 1</code>        dimensions</p></td>
     </tr>
     <tr>
@@ -206,7 +207,7 @@
     </tr>
     <tr>
       <th>normalized</th>
-      <td><p>(bool, optional) controls whether to return normalized results.        Default: <code>False</code></p></td>
+      <td><p>(bool, optional) controls whether to return normalized results.        Default: <code>FALSE</code></p></td>
     </tr>
     </table>
 
@@ -236,7 +237,7 @@ $$
 where \(d\) = <code>signal_ndim</code> is number of dimensions for the
 signal, and \(N_i\) is the size of signal dimension \(i\).</p>
 <p>The argument specifications are almost identical with <code><a href='torch_fft.html'>torch_fft</a></code>.
-However, if <code>normalized</code> is set to <code>True</code>, this instead returns the
+However, if <code>normalized</code> is set to <code>TRUE</code>, this instead returns the
 results multiplied by \(\sqrt{\prod_{i=1}^d N_i}\), to become a unitary
 operator. Therefore, to invert a <code><a href='torch_fft.html'>torch_fft</a></code>, the <code>normalized</code>
 argument should be set identically for <code><a href='torch_fft.html'>torch_fft</a></code>.</p>
@@ -260,19 +261,19 @@ shape of <code>input</code>.</p>
 }
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.7807 -3.0166
-#&gt;  -0.0180 -0.2902
-#&gt;  -0.9219 -1.4169
+#&gt;   0.2724 -0.8715
+#&gt;   0.5763  0.4934
+#&gt;   1.0039 -1.0608
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -1.6203 -2.3800
-#&gt;   0.6503 -1.9604
-#&gt;  -0.4098  0.9305
+#&gt;  -0.0647  0.2337
+#&gt;   0.6254  1.7216
+#&gt;  -0.8137  0.4654
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -2.1143  0.6126
-#&gt;  -0.3554  0.3078
-#&gt;  -0.8924  0.4325
+#&gt;   0.0076  1.2632
+#&gt;   2.3910 -1.5063
+#&gt;   0.1907 -0.1122
 #&gt; [ CPUFloatType{3,3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

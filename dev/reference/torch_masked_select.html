@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Masked_select</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_masked_select.Rd</code></div>
     </div>
 
@@ -192,21 +192,18 @@
     <p>Masked_select</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_masked_select</span>(<span class='kw'>self</span>, <span class='kw'>mask</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
       <th>mask</th>
       <td><p>(BoolTensor) the tensor containing the binary mask to index with</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -214,7 +211,7 @@
 
     <p>The returned tensor does <strong>not</strong> use the same storage
 as the original tensor</p>
-    <h2 class="hasAnchor" id="masked-select-input-mask-out-none-gt-tensor-"><a class="anchor" href="#masked-select-input-mask-out-none-gt-tensor-"></a>masked_select(input, mask, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="masked-select-input-mask-out-null-gt-tensor-"><a class="anchor" href="#masked-select-input-mask-out-null-gt-tensor-"></a>masked_select(input, mask, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -234,11 +231,15 @@ to match, but they must be broadcastable .</p>
 <span class='fu'>torch_masked_select</span>(<span class='kw'>x</span>, <span class='kw'>mask</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.7681
-#&gt;  0.5620
-#&gt;  0.7320
-#&gt;  0.8464
-#&gt; [ CPUFloatType{4} ]</div></pre>
+#&gt;  0.8970
+#&gt;  1.6161
+#&gt;  1.3735
+#&gt;  1.0228
+#&gt;  1.8032
+#&gt;  1.8431
+#&gt;  0.9683
+#&gt;  1.0650
+#&gt; [ CPUFloatType{8} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

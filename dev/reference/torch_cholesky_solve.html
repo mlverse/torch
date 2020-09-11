@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cholesky_solve</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_cholesky_solve.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Cholesky_solve</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_cholesky_solve</span>(<span class='kw'>self</span>, <span class='kw'>input2</span>, upper = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) input matrix \(b\) of size \((*, m, k)\),                where \(*\) is zero or more batch dimensions</p></td>
     </tr>
     <tr>
@@ -206,27 +207,23 @@
     </tr>
     <tr>
       <th>upper</th>
-      <td><p>(bool, optional) whether to consider the Cholesky factor as a                            lower or upper triangular matrix. Default: <code>False</code>.</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor for <code>c</code></p></td>
+      <td><p>(bool, optional) whether to consider the Cholesky factor as a                            lower or upper triangular matrix. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="cholesky-solve-input-input-upper-false-out-none-gt-tensor-"><a class="anchor" href="#cholesky-solve-input-input-upper-false-out-none-gt-tensor-"></a>cholesky_solve(input, input2, upper=False, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="cholesky-solve-input-input-upper-false-out-null-gt-tensor-"><a class="anchor" href="#cholesky-solve-input-input-upper-false-out-null-gt-tensor-"></a>cholesky_solve(input, input2, upper=False, out=NULL) -&gt; Tensor </h2>
 
     
 
 
 <p>Solves a linear system of equations with a positive semidefinite
 matrix to be inverted given its Cholesky factor matrix \(u\).</p>
-<p>If <code>upper</code> is <code>False</code>, \(u\) is and lower triangular and <code>c</code> is
+<p>If <code>upper</code> is <code>FALSE</code>, \(u\) is and lower triangular and <code>c</code> is
 returned such that:</p>
 <p>$$
     c = (u u^T)^{{-1}} b
 $$
-If <code>upper</code> is <code>True</code> or not provided, \(u\) is upper triangular
+If <code>upper</code> is <code>TRUE</code> or not provided, \(u\) is upper triangular
 and <code>c</code> is returned such that:</p>
 <p>$$
     c = (u^T u)^{{-1}} b
@@ -248,10 +245,9 @@ batched outputs <code>c</code></p>
 <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='kw'>a</span><span class='op'>$</span><span class='fu'>inverse</span>(), <span class='kw'>b</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; 0.01 *
-#&gt; -5.4166 -78.6268
-#&gt;  -101.4083 -630.4459
-#&gt;  -63.5285 -1259.9064
+#&gt; -1.2251 -0.4381
+#&gt;  2.2600  0.6661
+#&gt;  0.1666  0.4445
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

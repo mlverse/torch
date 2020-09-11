@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cholesky</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_cholesky.Rd</code></div>
     </div>
 
@@ -192,44 +192,43 @@
     <p>Cholesky</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_cholesky</span>(<span class='kw'>self</span>, upper = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) the input tensor \(A\) of size \((*, n, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                batch dimensions consisting of symmetric positive-definite matrices.</p></td>
+      <th>self</th>
+      <td><p>(Tensor) the input tensor \(A\) of size \((*, n, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more
+batch dimensions consisting of symmetric positive-definite matrices.</p></td>
     </tr>
     <tr>
       <th>upper</th>
-      <td><p>(bool, optional) flag that indicates whether to return a                            upper or lower triangular matrix. Default: <code>False</code></p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output matrix</p></td>
+      <td><p>(bool, optional) flag that indicates whether to return a
+upper or lower triangular matrix. Default: <code>FALSE</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="cholesky-input-upper-false-out-none-gt-tensor-"><a class="anchor" href="#cholesky-input-upper-false-out-none-gt-tensor-"></a>cholesky(input, upper=False, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="cholesky-input-upper-false-out-null-gt-tensor-"><a class="anchor" href="#cholesky-input-upper-false-out-null-gt-tensor-"></a>cholesky(input, upper=False, out=NULL) -&gt; Tensor </h2>
 
     
 
 
 <p>Computes the Cholesky decomposition of a symmetric positive-definite
 matrix \(A\) or for batches of symmetric positive-definite matrices.</p>
-<p>If <code>upper</code> is <code>True</code>, the returned matrix <code>U</code> is upper-triangular, and
+<p>If <code>upper</code> is <code>TRUE</code>, the returned matrix <code>U</code> is upper-triangular, and
 the decomposition has the form:</p>
 <p>$$
   A = U^TU
 $$
-If <code>upper</code> is <code>False</code>, the returned matrix <code>L</code> is lower-triangular, and
+If <code>upper</code> is <code>FALSE</code>, the returned matrix <code>L</code> is lower-triangular, and
 the decomposition has the form:</p>
 <p>$$
     A = LL^T
 $$
-If <code>upper</code> is <code>True</code>, and \(A\) is a batch of symmetric positive-definite
+If <code>upper</code> is <code>TRUE</code>, and \(A\) is a batch of symmetric positive-definite
 matrices, then the returned tensor will be composed of upper-triangular Cholesky factors
-of each of the individual matrices. Similarly, when <code>upper</code> is <code>False</code>, the returned
+of each of the individual matrices. Similarly, when <code>upper</code> is <code>FALSE</code>, the returned
 tensor will be composed of lower-triangular Cholesky factors of each of the individual
 matrices.</p>
 

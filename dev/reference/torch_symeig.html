@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Symeig</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_symeig.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Symeig</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_symeig</span>(<span class='kw'>self</span>, eigenvectors = <span class='fl'>FALSE</span>, upper = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor of size \((*, n, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                    batch dimensions consisting of symmetric matrices.</p></td>
     </tr>
     <tr>
@@ -207,10 +208,6 @@
     <tr>
       <th>upper</th>
       <td><p>(boolean, optional) controls whether to consider upper-triangular or lower-triangular region</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(tuple, optional) the output tuple of (Tensor, Tensor)</p></td>
     </tr>
     </table>
 
@@ -223,7 +220,7 @@ be transposed, i.e. with strides <code>V.contiguous().transpose(-1, -2).stride()
 <p>Extra care needs to be taken when backward through outputs. Such
 operation is really only stable when all eigenvalues are distinct.
 Otherwise, <code>NaN</code> can appear as the gradients are not properly defined.</p>
-    <h2 class="hasAnchor" id="symeig-input-eigenvectors-false-upper-true-out-none-gt-tensor-tensor-"><a class="anchor" href="#symeig-input-eigenvectors-false-upper-true-out-none-gt-tensor-tensor-"></a>symeig(input, eigenvectors=False, upper=True, out=None) -&gt; (Tensor, Tensor) </h2>
+    <h2 class="hasAnchor" id="symeig-input-eigenvectors-false-upper-true-gt-tensor-tensor-"><a class="anchor" href="#symeig-input-eigenvectors-false-upper-true-gt-tensor-tensor-"></a>symeig(input, eigenvectors=False, upper=TRUE) -&gt; (Tensor, Tensor) </h2>
 
     
 
@@ -235,11 +232,11 @@ represented by a namedtuple (eigenvalues, eigenvectors).</p>
 such that \(\mbox{input} = V \mbox{diag}(e) V^T\).</p>
 <p>The boolean argument <code>eigenvectors</code> defines computation of
 both eigenvectors and eigenvalues or eigenvalues only.</p>
-<p>If it is <code>False</code>, only eigenvalues are computed. If it is <code>True</code>,
+<p>If it is <code>FALSE</code>, only eigenvalues are computed. If it is <code>TRUE</code>,
 both eigenvalues and eigenvectors are computed.</p>
 <p>Since the input matrix <code>input</code> is supposed to be symmetric,
 only the upper triangular portion is used by default.</p>
-<p>If <code>upper</code> is <code>False</code>, then lower triangular portion is used.</p>
+<p>If <code>upper</code> is <code>FALSE</code>, then lower triangular portion is used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {

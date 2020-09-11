@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cholesky_inverse</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_cholesky_inverse.Rd</code></div>
     </div>
 
@@ -192,25 +192,22 @@
     <p>Cholesky_inverse</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_cholesky_inverse</span>(<span class='kw'>self</span>, upper = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input 2-D tensor \(u\), a upper or lower triangular           Cholesky factor</p></td>
     </tr>
     <tr>
       <th>upper</th>
       <td><p>(bool, optional) whether to return a lower (default) or upper triangular matrix</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor for <code>inv</code></p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="cholesky-inverse-input-upper-false-out-none-gt-tensor-"><a class="anchor" href="#cholesky-inverse-input-upper-false-out-none-gt-tensor-"></a>cholesky_inverse(input, upper=False, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="cholesky-inverse-input-upper-false-out-null-gt-tensor-"><a class="anchor" href="#cholesky-inverse-input-upper-false-out-null-gt-tensor-"></a>cholesky_inverse(input, upper=False, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -218,12 +215,12 @@
 <p>Computes the inverse of a symmetric positive-definite matrix \(A\) using its
 Cholesky factor \(u\): returns matrix <code>inv</code>. The inverse is computed using
 LAPACK routines <code>dpotri</code> and <code>spotri</code> (and the corresponding MAGMA routines).</p>
-<p>If <code>upper</code> is <code>False</code>, \(u\) is lower triangular
+<p>If <code>upper</code> is <code>FALSE</code>, \(u\) is lower triangular
 such that the returned tensor is</p>
 <p>$$
     inv = (uu^{{T}})^{{-1}}
 $$
-If <code>upper</code> is <code>True</code> or not provided, \(u\) is upper
+If <code>upper</code> is <code>TRUE</code> or not provided, \(u\) is upper
 triangular such that the returned tensor is</p>
 <p>$$
     inv = (u^T u)^{{-1}}

@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bernoulli</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_bernoulli.Rd</code></div>
     </div>
 
@@ -192,25 +192,28 @@
     <p>Bernoulli</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_bernoulli</span>(<span class='kw'>self</span>, <span class='kw'>p</span>, generator = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) the input tensor of probability values for the Bernoulli distribution</p></td>
+      <th>self</th>
+      <td><p>(Tensor) the input tensor of probability values for the Bernoulli
+distribution</p></td>
+    </tr>
+    <tr>
+      <th>p</th>
+      <td><p>(Number) a probability value. If <code>p</code> is passed than it's used instead of
+the values in <code>self</code> tensor.</p></td>
     </tr>
     <tr>
       <th>generator</th>
       <td><p>(<code>torch.Generator</code>, optional) a pseudorandom number generator for sampling</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="bernoulli-input-generator-none-out-none-gt-tensor-"><a class="anchor" href="#bernoulli-input-generator-none-out-none-gt-tensor-"></a>bernoulli(input, *, generator=None, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="bernoulli-input-generator-null-out-null-gt-tensor-"><a class="anchor" href="#bernoulli-input-generator-null-out-null-gt-tensor-"></a>bernoulli(input, *, generator=NULL, out=NULL) -&gt; Tensor </h2>
 
     
 

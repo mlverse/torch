@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cummax</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_cummax.Rd</code></div>
     </div>
 
@@ -192,25 +192,22 @@
     <p>Cummax</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_cummax</span>(<span class='kw'>self</span>, <span class='kw'>dim</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
       <th>dim</th>
       <td><p>(int) the dimension to do the operation over</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(tuple, optional) the result tuple of two output tensors (values, indices)</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="cummax-input-dim-out-none-gt-tensor-longtensor-"><a class="anchor" href="#cummax-input-dim-out-none-gt-tensor-longtensor-"></a>cummax(input, dim, out=None) -&gt; (Tensor, LongTensor) </h2>
+    <h2 class="hasAnchor" id="cummax-input-dim-gt-tensor-longtensor-"><a class="anchor" href="#cummax-input-dim-gt-tensor-longtensor-"></a>cummax(input, dim) -&gt; (Tensor, LongTensor) </h2>
 
     
 
@@ -231,30 +228,30 @@ $$</p>
 }
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -0.8823
-#&gt;  0.3047
-#&gt;  0.3047
-#&gt;  0.7297
-#&gt;  2.7412
-#&gt;  2.7412
-#&gt;  2.7412
-#&gt;  2.7412
-#&gt;  2.7412
-#&gt;  2.7412
+#&gt;  0.8762
+#&gt;  0.8762
+#&gt;  0.8762
+#&gt;  0.8762
+#&gt;  0.8762
+#&gt;  0.8762
+#&gt;  0.8762
+#&gt;  1.6606
+#&gt;  1.6606
+#&gt;  1.6606
 #&gt; [ CPUFloatType{10} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
 #&gt;  0
-#&gt;  1
-#&gt;  1
-#&gt;  3
-#&gt;  4
-#&gt;  4
-#&gt;  4
-#&gt;  4
-#&gt;  4
-#&gt;  4
+#&gt;  0
+#&gt;  0
+#&gt;  0
+#&gt;  0
+#&gt;  0
+#&gt;  0
+#&gt;  7
+#&gt;  7
+#&gt;  7
 #&gt; [ CPULongType{10} ]
 #&gt; </div></pre>
   </div>

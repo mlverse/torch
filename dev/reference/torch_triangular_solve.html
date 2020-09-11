@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Triangular_solve</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_triangular_solve.Rd</code></div>
     </div>
 
@@ -192,12 +192,19 @@
     <p>Triangular_solve</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_triangular_solve</span>(
+  <span class='kw'>self</span>,
+  <span class='kw'>A</span>,
+  upper = <span class='fl'>TRUE</span>,
+  transpose = <span class='fl'>FALSE</span>,
+  unitriangular = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) multiple right-hand sides of size \((*, m, k)\) where                \(*\) is zero of more batch dimensions (\(b\))</p></td>
     </tr>
     <tr>
@@ -206,19 +213,19 @@
     </tr>
     <tr>
       <th>upper</th>
-      <td><p>(bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: <code>True</code>.</p></td>
+      <td><p>(bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>transpose</th>
-      <td><p>(bool, optional) whether \(A\) should be transposed before        being sent into the solver. Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) whether \(A\) should be transposed before        being sent into the solver. Default: <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>unitriangular</th>
-      <td><p>(bool, optional) whether \(A\) is unit triangular.        If True, the diagonal elements of \(A\) are assumed to be        1 and not referenced from \(A\). Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) whether \(A\) is unit triangular.        If TRUE, the diagonal elements of \(A\) are assumed to be        1 and not referenced from \(A\). Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="triangular-solve-input-a-upper-true-transpose-false-unitriangular-false-gt-tensor-tensor-"><a class="anchor" href="#triangular-solve-input-a-upper-true-transpose-false-unitriangular-false-gt-tensor-tensor-"></a>triangular_solve(input, A, upper=True, transpose=False, unitriangular=False) -&gt; (Tensor, Tensor) </h2>
+    <h2 class="hasAnchor" id="triangular-solve-input-a-upper-true-transpose-false-unitriangular-false-gt-tensor-tensor-"><a class="anchor" href="#triangular-solve-input-a-upper-true-transpose-false-unitriangular-false-gt-tensor-tensor-"></a>triangular_solve(input, A, upper=TRUE, transpose=False, unitriangular=False) -&gt; (Tensor, Tensor) </h2>
 
     
 
@@ -242,14 +249,14 @@ batched outputs <code>X</code></p>
 }
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -2.1054  0.2666  2.1790
-#&gt; -1.9310 -0.7136  2.2100
+#&gt;  0.7709 -2.7294 -1.7899
+#&gt; -0.3899  1.0197 -0.0606
 #&gt; [ CPUFloatType{2,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; -0.6558  0.4718
-#&gt;  0.0000 -1.0224
+#&gt;  1.0416  2.6610
+#&gt;  0.0000 -1.6066
 #&gt; [ CPUFloatType{2,2} ]
 #&gt; </div></pre>
   </div>

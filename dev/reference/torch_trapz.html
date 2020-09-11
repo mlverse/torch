@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Trapz</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_trapz.Rd</code></div>
     </div>
 
@@ -192,6 +192,7 @@
     <p>Trapz</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_trapz</span>(<span class='kw'>y</span>, dx = <span class='fl'>1L</span>, <span class='kw'>x</span>, dim = <span class='op'>-</span><span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,16 +202,16 @@
       <td><p>(Tensor) The values of the function to integrate</p></td>
     </tr>
     <tr>
+      <th>dx</th>
+      <td><p>(float) The distance between points at which <code>y</code> is sampled.</p></td>
+    </tr>
+    <tr>
       <th>x</th>
       <td><p>(Tensor) The points at which the function <code>y</code> is sampled.        If <code>x</code> is not in ascending order, intervals on which it is decreasing        contribute negatively to the estimated integral (i.e., the convention        \(\int_a^b f = -\int_b^a f\) is followed).</p></td>
     </tr>
     <tr>
       <th>dim</th>
       <td><p>(int) The dimension along which to integrate.        By default, use the last dimension.</p></td>
-    </tr>
-    <tr>
-      <th>dx</th>
-      <td><p>(float) The distance between points at which <code>y</code> is sampled.</p></td>
     </tr>
     </table>
 
@@ -237,8 +238,8 @@
 
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2.3681
-#&gt; -0.0440
+#&gt; -3.0142
+#&gt; -4.2373
 #&gt; [ CPUFloatType{2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

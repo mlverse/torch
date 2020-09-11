@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Mm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_mm.Rd</code></div>
     </div>
 
@@ -192,21 +192,18 @@
     <p>Mm</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_mm</span>(<span class='kw'>self</span>, <span class='kw'>mat2</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the first matrix to be multiplied</p></td>
     </tr>
     <tr>
       <th>mat2</th>
       <td><p>(Tensor) the second matrix to be multiplied</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -214,7 +211,7 @@
 
     <p>This function does not broadcast .
 For broadcasting matrix products, see <code><a href='torch_matmul.html'>torch_matmul</a></code>.</p>
-    <h2 class="hasAnchor" id="mm-input-mat-out-none-gt-tensor-"><a class="anchor" href="#mm-input-mat-out-none-gt-tensor-"></a>mm(input, mat2, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="mm-input-mat-out-null-gt-tensor-"><a class="anchor" href="#mm-input-mat-out-null-gt-tensor-"></a>mm(input, mat2, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -231,8 +228,8 @@ For broadcasting matrix products, see <code><a href='torch_matmul.html'>torch_ma
 <span class='fu'>torch_mm</span>(<span class='kw'>mat1</span>, <span class='kw'>mat2</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0096  0.9337 -0.2750
-#&gt;  0.0476 -0.5409  1.0598
+#&gt; -0.8319 -1.0186 -0.5458
+#&gt;  0.4505  1.3956 -0.2616
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

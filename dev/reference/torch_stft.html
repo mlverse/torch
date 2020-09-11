@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Stft</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/wrapers.R'><code>R/wrapers.R</code></a></small>
     <div class="hidden name"><code>torch_stft.Rd</code></div>
     </div>
 
@@ -192,6 +192,17 @@
     <p>Stft</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_stft</span>(
+  <span class='kw'>input</span>,
+  <span class='kw'>n_fft</span>,
+  hop_length = <span class='kw'>NULL</span>,
+  win_length = <span class='kw'>NULL</span>,
+  window = <span class='kw'>NULL</span>,
+  center = <span class='fl'>TRUE</span>,
+  pad_mode = <span class='st'>"reflect"</span>,
+  normalized = <span class='fl'>FALSE</span>,
+  onesided = <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,31 +217,31 @@
     </tr>
     <tr>
       <th>hop_length</th>
-      <td><p>(int, optional) the distance between neighboring sliding window        frames. Default: <code>None</code> (treated as equal to <code><a href='https://rdrr.io/r/base/Round.html'>floor(n_fft / 4)</a></code>)</p></td>
+      <td><p>(int, optional) the distance between neighboring sliding window        frames. Default: <code>NULL</code> (treated as equal to <code><a href='https://rdrr.io/r/base/Round.html'>floor(n_fft / 4)</a></code>)</p></td>
     </tr>
     <tr>
       <th>win_length</th>
-      <td><p>(int, optional) the size of window frame and STFT filter.        Default: <code>None</code>  (treated as equal to <code>n_fft</code>)</p></td>
+      <td><p>(int, optional) the size of window frame and STFT filter.        Default: <code>NULL</code>  (treated as equal to <code>n_fft</code>)</p></td>
     </tr>
     <tr>
       <th>window</th>
-      <td><p>(Tensor, optional) the optional window function.        Default: <code>None</code> (treated as window of all \(1\) s)</p></td>
+      <td><p>(Tensor, optional) the optional window function.        Default: <code>NULL</code> (treated as window of all \(1\) s)</p></td>
     </tr>
     <tr>
       <th>center</th>
-      <td><p>(bool, optional) whether to pad <code>input</code> on both sides so        that the \(t\)-th frame is centered at time \(t \times \mbox{hop\_length}\).        Default: <code>True</code></p></td>
+      <td><p>(bool, optional) whether to pad <code>input</code> on both sides so        that the \(t\)-th frame is centered at time \(t \times \mbox{hop\_length}\).        Default: <code>TRUE</code></p></td>
     </tr>
     <tr>
       <th>pad_mode</th>
-      <td><p>(string, optional) controls the padding method used when        <code>center</code> is <code>True</code>. Default: <code>"reflect"</code></p></td>
+      <td><p>(string, optional) controls the padding method used when        <code>center</code> is <code>TRUE</code>. Default: <code>"reflect"</code></p></td>
     </tr>
     <tr>
       <th>normalized</th>
-      <td><p>(bool, optional) controls whether to return the normalized STFT results         Default: <code>False</code></p></td>
+      <td><p>(bool, optional) controls whether to return the normalized STFT results         Default: <code>FALSE</code></p></td>
     </tr>
     <tr>
       <th>onesided</th>
-      <td><p>(bool, optional) controls whether to return half of results to        avoid redundancy Default: <code>True</code></p></td>
+      <td><p>(bool, optional) controls whether to return half of results to        avoid redundancy Default: <code>TRUE</code></p></td>
     </tr>
     </table>
 
@@ -250,36 +261,36 @@ expression:
 $$
 where \(m\) is the index of the sliding window, and \(\omega\) is
 the frequency that \(0 \leq \omega &lt; \mbox{n\_fft}\). When
-<code>onesided</code> is the default value <code>True</code>,</p><pre>* `input` must be either a 1-D time sequence or a 2-D batch of time
+<code>onesided</code> is the default value <code>TRUE</code>,</p><pre>* `input` must be either a 1-D time sequence or a 2-D batch of time
   sequences.
 
-* If `hop_length` is ``None`` (default), it is treated as equal to
-  ``floor(n_fft / 4)``.
+* If `hop_length` is `NULL` (default), it is treated as equal to
+  `floor(n_fft / 4)`.
 
-* If `win_length` is ``None`` (default), it is treated as equal to
+* If `win_length` is `NULL` (default), it is treated as equal to
   `n_fft`.
 
 * `window` can be a 1-D tensor of size `win_length`, e.g., from
-  `torch_hann_window`. If `window` is ``None`` (default), it is
+  `torch_hann_window`. If `window` is `NULL` (default), it is
   treated as if having \eqn{1} everywhere in the window. If
   \eqn{\mbox{win\_length} &lt; \mbox{n\_fft}}, `window` will be padded on
   both sides to length `n_fft` before being applied.
 
-* If `center` is ``True`` (default), `input` will be padded on
+* If `center` is `TRUE` (default), `input` will be padded on
   both sides so that the \eqn{t}-th frame is centered at time
   \eqn{t \times \mbox{hop\_length}}. Otherwise, the \eqn{t}-th frame
   begins at time  \eqn{t \times \mbox{hop\_length}}.
 
 * `pad_mode` determines the padding method used on `input` when
-  `center` is ``True``. See `torch_nn.functional.pad` for
-  all available options. Default is ``"reflect"``.
+  `center` is `TRUE`. See `torch_nn.functional.pad` for
+  all available options. Default is `"reflect"`.
 
-* If `onesided` is ``True`` (default), only values for \eqn{\omega}
+* If `onesided` is `TRUE` (default), only values for \eqn{\omega}
   in \eqn{\left[0, 1, 2, \dots, \left\lfloor \frac{\mbox{n\_fft}}{2} \right\rfloor + 1\right]}
   are returned because the real-to-complex Fourier transform satisfies the
   conjugate symmetry, i.e., \eqn{X[m, \omega] = X[m, \mbox{n\_fft} - \omega]^*}.
 
-* If `normalized` is ``True`` (default is ``False``), the function
+* If `normalized` is `TRUE` (default is `FALSE`), the function
   returns the normalized STFT results, i.e., multiplied by \eqn{(\mbox{frame\_length})^{-0.5}}.
 
 Returns the real and the imaginary parts together as one tensor of size
@@ -288,12 +299,14 @@ batch size of `input`, \eqn{N} is the number of frequencies where
 STFT is applied, \eqn{T} is the total number of frames used, and each pair
 in the last dimension represents a complex number as the real part and the
 imaginary part.
-
-.. warning::
-  This function changed signature at version 0.4.1. Calling with the
-  previous signature may cause error or return incorrect result.
 </pre>
 
+    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
+
+    
+
+<p>This function changed signature at version 0.4.1. Calling with the
+previous signature may cause error or return incorrect result.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Pinverse</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_pinverse.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Pinverse</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_pinverse</span>(<span class='kw'>self</span>, rcond = <span class='fl'>0</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) The input tensor of size \((*, m, n)\) where \(*\) is zero or more batch dimensions</p></td>
     </tr>
     <tr>
@@ -240,14 +241,14 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
 }
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.0000e+00 -5.2154e-08  2.2352e-08
-#&gt;   5.5879e-09  1.0000e+00 -7.4506e-08
-#&gt;  -6.5193e-08 -4.6566e-10  1.0000e+00
+#&gt;   1.0000e+00 -2.4028e-07 -1.0431e-07
+#&gt;   1.4901e-07  1.0000e+00 -2.0862e-07
+#&gt;   8.9407e-08  1.1176e-08  1.0000e+00
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.0000e+00 -8.9407e-08  5.9605e-08
-#&gt;   1.7509e-07  1.0000e+00  2.9802e-07
-#&gt;   1.4901e-07  1.1921e-07  1.0000e+00
+#&gt;   1.0000e+00  1.2666e-07 -4.4703e-08
+#&gt;   1.0431e-07  1.0000e+00  2.3842e-07
+#&gt;   7.3574e-08  3.7253e-08  1.0000e+00
 #&gt; [ CPUFloatType{2,3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

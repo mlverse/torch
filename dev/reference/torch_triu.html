@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Triu</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_triu.Rd</code></div>
     </div>
 
@@ -192,25 +192,22 @@
     <p>Triu</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_triu</span>(<span class='kw'>self</span>, diagonal = <span class='fl'>0L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
       <th>diagonal</th>
       <td><p>(int, optional) the diagonal to consider</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="triu-input-diagonal-out-none-gt-tensor-"><a class="anchor" href="#triu-input-diagonal-out-none-gt-tensor-"></a>triu(input, diagonal=0, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="triu-input-diagonal-out-null-gt-tensor-"><a class="anchor" href="#triu-input-diagonal-out-null-gt-tensor-"></a>triu(input, diagonal=0, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -241,10 +238,10 @@ the main diagonal. The main diagonal are the set of indices
 <span class='fu'>torch_triu</span>(<span class='kw'>b</span>, diagonal=<span class='op'>-</span><span class='fl'>1</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0605 -0.1199  0.5804  0.8276  0.4814  0.2340
-#&gt; -1.1065 -1.9097 -1.1875 -0.5631  1.1594 -0.2513
-#&gt;  0.0000  0.0839 -0.5394  0.6767  0.8198 -0.9308
-#&gt;  0.0000  0.0000 -0.1997  0.9985 -0.7811  1.3638
+#&gt;  0.5121 -0.0099  0.4925  0.3930  1.4534  0.4400
+#&gt;  0.0538 -0.3965  0.7089 -0.4930  0.8328 -1.0323
+#&gt;  0.0000  0.0072 -0.4728 -1.6175 -0.3384 -0.0182
+#&gt;  0.0000  0.0000 -0.4067  0.5747  2.0814  0.7183
 #&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

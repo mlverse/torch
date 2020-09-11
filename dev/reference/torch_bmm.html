@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bmm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_bmm.Rd</code></div>
     </div>
 
@@ -192,21 +192,18 @@
     <p>Bmm</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_bmm</span>(<span class='kw'>self</span>, <span class='kw'>mat2</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the first batch of matrices to be multiplied</p></td>
     </tr>
     <tr>
       <th>mat2</th>
       <td><p>(Tensor) the second batch of matrices to be multiplied</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -214,7 +211,7 @@
 
     <p>This function does not broadcast .
 For broadcasting matrix products, see <code><a href='torch_matmul.html'>torch_matmul</a></code>.</p>
-    <h2 class="hasAnchor" id="bmm-input-mat-out-none-gt-tensor-"><a class="anchor" href="#bmm-input-mat-out-none-gt-tensor-"></a>bmm(input, mat2, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="bmm-input-mat-out-null-gt-tensor-"><a class="anchor" href="#bmm-input-mat-out-null-gt-tensor-"></a>bmm(input, mat2, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -240,54 +237,54 @@ $$</p>
 }
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -2.2771 -0.9093 -0.2084  0.4555  0.8387
-#&gt;  -3.2459  1.1252 -1.5490  0.3240  1.3147
-#&gt;   0.4230 -8.9337  1.5958  0.2379  3.1184
+#&gt;  -1.1413  0.4992 -3.5139  2.9201  3.5532
+#&gt;   1.1861 -0.5659  0.7090 -1.4745 -1.9898
+#&gt;   1.1336  0.2465  4.2410  0.4402 -0.5788
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -2.1891 -2.1335  1.1166  0.1508  0.7253
-#&gt;   2.4373  0.6946  0.6922 -0.5193 -0.5941
-#&gt;   0.1446  0.4340 -0.0772  0.0870 -0.0670
+#&gt;   0.7690 -2.1188 -0.4334 -1.3014 -1.5282
+#&gt;  -0.2100 -0.7784 -0.1433  0.4407  0.4876
+#&gt;  -1.6836  2.1565 -0.8292  1.6752  1.7284
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -1.8826  4.8220 -0.3342  1.0659  0.2668
-#&gt;   1.8659  0.4047  0.9092 -0.2925  0.6834
-#&gt;   1.2092  0.0082  0.4118 -1.3635  2.2281
+#&gt;   0.6848  0.0461 -1.4828  2.1194  4.1744
+#&gt;  -0.1468  0.2541 -0.0059  0.4291 -3.3795
+#&gt;   0.2636  0.5319 -0.5968  2.4930 -0.7923
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -1.5438  2.0759 -0.5856  3.4518  4.2184
-#&gt;   0.5688 -2.3319  2.8710 -1.8290 -0.6351
-#&gt;  -0.9847  0.4921 -0.2628  1.2463  2.0243
+#&gt;  -2.1809 -2.4835  0.1113 -2.3054  1.2067
+#&gt;   4.0800 -1.4698  1.8720  0.5898 -0.7435
+#&gt;  -0.4750 -2.6937  1.0010 -1.9002  0.6791
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -3.7328 -1.9587  2.0068  0.9411  0.0130
-#&gt;  -3.3558 -2.1387  3.5200 -0.7432 -0.6564
-#&gt;  -2.2410 -1.7455  3.9811 -0.7573  1.2758
+#&gt;   3.2331  1.2936  0.4399 -1.2649 -4.9156
+#&gt;  -0.0246 -0.8732  0.9213  1.2670 -1.2459
+#&gt;   0.9224 -2.6912  2.3530  2.0530 -3.8624
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;   0.1908 -1.4856 -0.8809  2.2963 -1.2178
-#&gt;   1.9483 -1.2065 -1.5980  2.9723 -2.9774
-#&gt;  -0.7287  0.5292  1.0572 -0.7761  0.0438
+#&gt;   2.3326 -3.3687 -0.0732  3.2665 -3.8096
+#&gt;   1.9655 -0.7515 -0.8815  0.1545  3.3609
+#&gt;   1.5662 -0.9389 -0.8378  3.3606 -3.6444
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;  -0.6187  0.9263 -0.1478 -1.1205  0.6868
-#&gt;  -0.1907 -0.1589  0.2744  2.1122 -0.7219
-#&gt;   3.9720 -0.0103 -1.1561  4.5769 -3.2399
+#&gt;   0.7538  1.4490 -3.0992 -1.9544  0.2726
+#&gt;  -0.5773  0.3992 -0.4966 -1.5560  0.3153
+#&gt;   0.7691  0.4461  0.9229  1.2113  0.4423
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;  -0.1231  1.4416 -1.2322  2.3795 -1.1783
-#&gt;   1.1306  0.7667  0.4817 -0.6974  0.6749
-#&gt;  -1.2890  2.3087 -2.2267  1.7866 -1.9033
+#&gt;   0.7353 -1.2713  0.2715  0.1055  0.2852
+#&gt;  -2.2119  1.3157 -0.1687  0.5293 -3.1710
+#&gt;   1.0479 -1.4234  1.5627 -1.2330 -0.1371
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;   0.6682 -2.6641 -0.3882  0.1270  0.5253
-#&gt;  -0.1547 -1.9189  1.1093 -0.0977 -0.3841
-#&gt;   0.4640  1.6084 -3.1401  2.6759 -0.4273
+#&gt;   0.3682  0.5033  1.3915 -0.3777  0.5239
+#&gt;  -1.5785  1.0739 -3.3671 -1.1768  1.8570
+#&gt;  -1.1876  0.3003  0.3967  1.3183 -0.1122
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;   0.7711 -0.0400 -0.6204  0.0351 -2.1407
-#&gt;   0.5006  1.1768  0.7673  0.3148 -0.8755
-#&gt;   0.5819  0.7507  1.0334  0.6318 -0.7103
+#&gt;   0.5326 -0.2765 -0.4957 -0.9363  0.4547
+#&gt;   0.5229 -0.2968  2.3786  2.2444 -0.9541
+#&gt;   0.1987  0.0588 -0.1395 -0.5615  0.0112
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

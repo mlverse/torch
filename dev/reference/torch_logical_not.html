@@ -197,22 +197,18 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="logical-not-input-out-none-gt-tensor-"><a class="anchor" href="#logical-not-input-out-none-gt-tensor-"></a>logical_not(input, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="logical-not-input-out-null-gt-tensor-"><a class="anchor" href="#logical-not-input-out-null-gt-tensor-"></a>logical_not(input, out=NULL) -&gt; Tensor </h2>
 
     
 
 
 <p>Computes the element-wise logical NOT of the given input tensor. If not specified, the output tensor will have the bool
-dtype. If the input tensor is not a bool tensor, zeros are treated as <code>False</code> and non-zeros are treated as <code>True</code>.</p>
+dtype. If the input tensor is not a bool tensor, zeros are treated as <code>FALSE</code> and non-zeros are treated as <code>TRUE</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {

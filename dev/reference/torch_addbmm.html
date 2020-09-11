@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Addbmm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_addbmm.Rd</code></div>
     </div>
 
@@ -192,10 +192,15 @@
     <p>Addbmm</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_addbmm</span>(<span class='kw'>self</span>, <span class='kw'>batch1</span>, <span class='kw'>batch2</span>, beta = <span class='fl'>1L</span>, alpha = <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>self</th>
+      <td><p>(Tensor) matrix to be added</p></td>
+    </tr>
     <tr>
       <th>batch1</th>
       <td><p>(Tensor) the first batch of matrices to be multiplied</p></td>
@@ -209,20 +214,12 @@
       <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
     </tr>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) matrix to be added</p></td>
-    </tr>
-    <tr>
       <th>alpha</th>
       <td><p>(Number, optional) multiplier for <code>batch1 @ batch2</code> (\(\alpha\))</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addbmm-input-batch-batch-beta-alpha-out-none-gt-tensor-"><a class="anchor" href="#addbmm-input-batch-batch-beta-alpha-out-none-gt-tensor-"></a>addbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="addbmm-input-batch-batch-beta-alpha-out-null-gt-tensor-"><a class="anchor" href="#addbmm-input-batch-batch-beta-alpha-out-null-gt-tensor-"></a>addbmm(input, batch1, batch2, *, beta=1, alpha=1, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -253,9 +250,9 @@ must be real numbers, otherwise they should be integers.</p>
 <span class='fu'>torch_addbmm</span>(<span class='kw'>M</span>, <span class='kw'>batch1</span>, <span class='kw'>batch2</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  4.7802  0.3185  4.1125 -2.0246 -2.2788
-#&gt; -6.0177 -13.2169 -4.3467 -4.2467  4.4592
-#&gt; -4.5607  0.7227  3.3383  0.7213 -9.6535
+#&gt; -0.2303  3.2472  2.6145  5.7936 -0.5136
+#&gt; -9.5741  0.1365  5.4011  4.0303 -1.5599
+#&gt;  4.8798  0.6049 -3.5083  1.2779  7.4312
 #&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

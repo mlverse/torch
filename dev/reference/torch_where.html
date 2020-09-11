@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Where</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_where.Rd</code></div>
     </div>
 
@@ -192,21 +192,22 @@
     <p>Where</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_where</span>(<span class='kw'>condition</span>, <span class='kw'>self</span>, <span class='kw'>other</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>condition</th>
-      <td><p>(BoolTensor) When True (nonzero), yield x, otherwise yield y</p></td>
+      <td><p>(BoolTensor) When TRUE (nonzero), yield x, otherwise yield y</p></td>
     </tr>
     <tr>
-      <th>x</th>
-      <td><p>(Tensor) values selected at indices where <code>condition</code> is <code>True</code></p></td>
+      <th>self</th>
+      <td><p>(Tensor) values selected at indices where <code>condition</code> is <code>TRUE</code></p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>(Tensor) values selected at indices where <code>condition</code> is <code>False</code></p></td>
+      <th>other</th>
+      <td><p>(Tensor) values selected at indices where <code>condition</code> is <code>FALSE</code></p></td>
     </tr>
     </table>
 
@@ -216,9 +217,7 @@
 <pre>The tensors `condition`, `x`, `y` must be broadcastable .
 </pre>
 
-<pre>See also [`torch_nonzero`].
-</pre>
-
+<p>See also <code><a href='torch_nonzero.html'>torch_nonzero()</a></code>.</p>
     <h2 class="hasAnchor" id="where-condition-x-y-gt-tensor-"><a class="anchor" href="#where-condition-x-y-gt-tensor-"></a>where(condition, x, y) -&gt; Tensor </h2>
 
     
@@ -239,7 +238,7 @@ $$</p>
 
 
 <p><code>torch_where(condition)</code> is identical to
-<code><a href='torch_nonzero.html'>torch_nonzero(condition, as_tuple=True)</a></code>.</p>
+<code><a href='torch_nonzero.html'>torch_nonzero(condition, as_tuple=TRUE)</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {

@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Eig</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_eig.Rd</code></div>
     </div>
 
@@ -192,21 +192,18 @@
     <p>Eig</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_eig</span>(<span class='kw'>self</span>, eigenvectors = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the square matrix of shape \((n \times n)\) for which the eigenvalues and eigenvectors        will be computed</p></td>
     </tr>
     <tr>
       <th>eigenvectors</th>
-      <td><p>(bool) <code>True</code> to compute both eigenvalues and eigenvectors;        otherwise, only eigenvalues will be computed</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(tuple, optional) the output tensors</p></td>
+      <td><p>(bool) <code>TRUE</code> to compute both eigenvalues and eigenvectors;        otherwise, only eigenvalues will be computed</p></td>
     </tr>
     </table>
 
@@ -217,7 +214,7 @@
 for [`torch_symeig`]
 </pre>
 
-    <h2 class="hasAnchor" id="eig-input-eigenvectors-false-out-none-gt-tensor-tensor-"><a class="anchor" href="#eig-input-eigenvectors-false-out-none-gt-tensor-tensor-"></a>eig(input, eigenvectors=False, out=None) -&gt; (Tensor, Tensor) </h2>
+    <h2 class="hasAnchor" id="eig-input-eigenvectors-false-out-null-gt-tensor-tensor-"><a class="anchor" href="#eig-input-eigenvectors-false-out-null-gt-tensor-tensor-"></a>eig(input, eigenvectors=False, out=NULL) -&gt; (Tensor, Tensor) </h2>
 
     
 

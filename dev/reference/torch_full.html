@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Full</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/creation-ops.R'><code>R/creation-ops.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_full.Rd</code></div>
     </div>
 
@@ -192,6 +192,15 @@
     <p>Full</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_full</span>(
+  <span class='kw'>size</span>,
+  <span class='kw'>fill_value</span>,
+  names = <span class='kw'>NULL</span>,
+  dtype = <span class='kw'>NULL</span>,
+  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
+  device = <span class='kw'>NULL</span>,
+  requires_grad = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,12 +214,12 @@
       <td><p>NA the number to fill the output tensor with.</p></td>
     </tr>
     <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
+      <th>names</th>
+      <td><p>optional names of the dimensions</p></td>
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>None</code>, uses a global default (see <code>torch_set_default_tensor_type</code>).</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>NULL</code>, uses a global default (see <code>torch_set_default_tensor_type</code>).</p></td>
     </tr>
     <tr>
       <th>layout</th>
@@ -218,15 +227,15 @@
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>None</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
     </tr>
     <tr>
       <th>requires_grad</th>
-      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="full-size-fill-value-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"><a class="anchor" href="#full-size-fill-value-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"></a>full(size, fill_value, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="full-size-fill-value-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-"><a class="anchor" href="#full-size-fill-value-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-"></a>full(size, fill_value, out=NULL, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False) -&gt; Tensor </h2>
 
     
 

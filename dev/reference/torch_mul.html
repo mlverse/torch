@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Mul</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_mul.Rd</code></div>
     </div>
 
@@ -192,37 +192,22 @@
     <p>Mul</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_mul</span>(<span class='kw'>self</span>, <span class='kw'>other</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>NA</p></td>
-    </tr>
-    <tr>
-      <th>value</th>
-      <td><p>(Number) the number to be multiplied to each element of <code>input</code></p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>NA</p></td>
-    </tr>
-    <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the first multiplicand tensor</p></td>
     </tr>
     <tr>
       <th>other</th>
       <td><p>(Tensor) the second multiplicand tensor</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="mul-input-other-out-none-"><a class="anchor" href="#mul-input-other-out-none-"></a>mul(input, other, out=None) </h2>
+    <h2 class="hasAnchor" id="mul-input-other-out-null-"><a class="anchor" href="#mul-input-other-out-null-"></a>mul(input, other, out=NULL) </h2>
 
     
 
@@ -259,10 +244,10 @@ $$</p>
 <span class='fu'>torch_mul</span>(<span class='kw'>a</span>, <span class='kw'>b</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.0021 -0.0000 -0.0006  0.0087
-#&gt;  0.1838 -0.0019 -0.0573  0.7645
-#&gt; -0.0408  0.0004  0.0127 -0.1696
-#&gt;  0.1116 -0.0012 -0.0347  0.4639
+#&gt; -0.1478  0.2171 -0.5093  0.2276
+#&gt; -0.8753  1.2859 -3.0167  1.3479
+#&gt;  0.2378 -0.3494  0.8196 -0.3662
+#&gt; -0.6813  1.0009 -2.3480  1.0492
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

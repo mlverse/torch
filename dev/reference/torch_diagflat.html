@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Diagflat</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_diagflat.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Diagflat</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_diagflat</span>(<span class='kw'>self</span>, offset = <span class='fl'>0L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
@@ -236,10 +237,10 @@ with the elements of <code>input</code> as the diagonal.</p></li>
 <span class='fu'>torch_diagflat</span>(<span class='kw'>a</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1455  0.0000  0.0000  0.0000
-#&gt;  0.0000  0.7104  0.0000  0.0000
-#&gt;  0.0000  0.0000 -0.0542  0.0000
-#&gt;  0.0000  0.0000  0.0000 -1.0355
+#&gt;  1.7407  0.0000  0.0000  0.0000
+#&gt;  0.0000 -1.1277  0.0000  0.0000
+#&gt;  0.0000  0.0000 -0.5332  0.0000
+#&gt;  0.0000  0.0000  0.0000  0.5292
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

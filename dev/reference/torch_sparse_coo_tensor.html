@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sparse_coo_tensor</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/wrapers.R'><code>R/wrapers.R</code></a></small>
     <div class="hidden name"><code>torch_sparse_coo_tensor.Rd</code></div>
     </div>
 
@@ -192,6 +192,14 @@
     <p>Sparse_coo_tensor</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_sparse_coo_tensor</span>(
+  <span class='kw'>indices</span>,
+  <span class='kw'>values</span>,
+  size = <span class='kw'>NULL</span>,
+  dtype = <span class='kw'>NULL</span>,
+  device = <span class='kw'>NULL</span>,
+  requires_grad = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,19 +218,19 @@
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if None, infers data type from <code>values</code>.</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if NULL, infers data type from <code>values</code>.</p></td>
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if None, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if NULL, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
     </tr>
     <tr>
       <th>requires_grad</th>
-      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="sparse-coo-tensor-indices-values-size-none-dtype-none-device-none-requires-grad-false-gt-tensor-"><a class="anchor" href="#sparse-coo-tensor-indices-values-size-none-dtype-none-device-none-requires-grad-false-gt-tensor-"></a>sparse_coo_tensor(indices, values, size=None, dtype=None, device=None, requires_grad=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="sparse-coo-tensor-indices-values-size-null-dtype-null-device-null-requires-grad-false-gt-tensor-"><a class="anchor" href="#sparse-coo-tensor-indices-values-size-null-dtype-null-device-null-requires-grad-false-gt-tensor-"></a>sparse_coo_tensor(indices, values, size=NULL, dtype=NULL, device=NULL, requires_grad=False) -&gt; Tensor </h2>
 
     
 

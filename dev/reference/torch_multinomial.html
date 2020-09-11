@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Multinomial</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_multinomial.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Multinomial</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_multinomial</span>(<span class='kw'>self</span>, <span class='kw'>num_samples</span>, replacement = <span class='fl'>FALSE</span>, generator = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor containing probabilities</p></td>
     </tr>
     <tr>
@@ -211,10 +212,6 @@
     <tr>
       <th>generator</th>
       <td><p>(<code>torch.Generator</code>, optional) a pseudorandom number generator for sampling</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -231,7 +228,7 @@ a non-zero sum.
 <p>If <code>input</code> is a vector, <code>out</code> is a vector of size <code>num_samples</code>.</p>
 <p>If <code>input</code> is a matrix with <code>m</code> rows, <code>out</code> is an matrix of shape
 \((m \times \mbox{num\_samples})\).</p>
-<p>If replacement is <code>True</code>, samples are drawn with replacement.</p>
+<p>If replacement is <code>TRUE</code>, samples are drawn with replacement.</p>
 <p>If not, they are drawn without replacement, which means that when a
 sample index is drawn for a row, it cannot be drawn again for that row.</p>
 <pre>When drawn without replacement, `num_samples` must be lower than
@@ -239,7 +236,7 @@ number of non-zero elements in `input` (or the min number of non-zero
 elements in each row of `input` if it is a matrix).
 </pre>
 
-    <h2 class="hasAnchor" id="multinomial-input-num-samples-replacement-false-generator-none-out-none-gt-longtensor-"><a class="anchor" href="#multinomial-input-num-samples-replacement-false-generator-none-out-none-gt-longtensor-"></a>multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -&gt; LongTensor </h2>
+    <h2 class="hasAnchor" id="multinomial-input-num-samples-replacement-false-generator-null-out-null-gt-longtensor-"><a class="anchor" href="#multinomial-input-num-samples-replacement-false-generator-null-out-null-gt-longtensor-"></a>multinomial(input, num_samples, replacement=False, *, generator=NULL, out=NULL) -&gt; LongTensor </h2>
 
     
 

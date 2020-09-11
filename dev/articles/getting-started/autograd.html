@@ -216,8 +216,8 @@
 <span class="co">#&gt; [1] FALSE</span>
 <span class="kw">a</span><span class="op">$</span><span class="fu">requires_grad_</span>(<span class="fl">TRUE</span>)
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  2.0811  7.6934</span>
-<span class="co">#&gt; -1.0031  1.6955</span>
+<span class="co">#&gt;  12.1823 -29.5128</span>
+<span class="co">#&gt;  43.6238  -2.5205</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="kw">a</span><span class="op">$</span><span class="kw">requires_grad</span>
 <span class="co">#&gt; [1] TRUE</span>
@@ -275,9 +275,9 @@
 <span class="kw">y</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="kw">x</span>
 <span class="kw">y</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -123.5142</span>
-<span class="co">#&gt;  180.1416</span>
-<span class="co">#&gt;  -20.7333</span>
+<span class="co">#&gt;  107.0964</span>
+<span class="co">#&gt;  152.6837</span>
+<span class="co">#&gt;   51.1541</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span>
 </pre></div>
 <p>Now in this case y is no longer a scalar. <code>autograd</code> could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:</p>

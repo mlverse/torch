@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Index_select</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_index_select.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Index_select</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_index_select</span>(<span class='kw'>self</span>, <span class='kw'>dim</span>, <span class='kw'>index</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
@@ -208,10 +209,6 @@
       <th>index</th>
       <td><p>(LongTensor) the 1-D tensor containing the indices to index</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -220,7 +217,7 @@
 tensor.  If <code>out</code> has a different shape than expected, we
 silently change it to the correct shape, reallocating the underlying
 storage if necessary.</p>
-    <h2 class="hasAnchor" id="index-select-input-dim-index-out-none-gt-tensor-"><a class="anchor" href="#index-select-input-dim-index-out-none-gt-tensor-"></a>index_select(input, dim, index, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="index-select-input-dim-index-out-null-gt-tensor-"><a class="anchor" href="#index-select-input-dim-index-out-null-gt-tensor-"></a>index_select(input, dim, index, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -241,9 +238,9 @@ of <code>index</code>; other dimensions have the same size as in the original te
 <span class='fu'>torch_index_select</span>(<span class='kw'>x</span>, <span class='fl'>2</span>, <span class='kw'>indices</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.3454  0.1262
-#&gt;  1.0177  0.4184
-#&gt; -0.0085  2.0937
+#&gt;  0.7915  0.5342
+#&gt; -0.1400  0.1285
+#&gt;  0.2495  2.2256
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

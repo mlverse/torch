@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Addcdiv</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_addcdiv.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Addcdiv</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_addcdiv</span>(<span class='kw'>self</span>, <span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>, value = <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the tensor to be added</p></td>
     </tr>
     <tr>
@@ -212,13 +213,9 @@
       <th>value</th>
       <td><p>(Number, optional) multiplier for \(\mbox{tensor1} / \mbox{tensor2}\)</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addcdiv-input-tensor-tensor-value-out-none-gt-tensor-"><a class="anchor" href="#addcdiv-input-tensor-tensor-value-out-none-gt-tensor-"></a>addcdiv(input, tensor1, tensor2, *, value=1, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="addcdiv-input-tensor-tensor-value-out-null-gt-tensor-"><a class="anchor" href="#addcdiv-input-tensor-tensor-value-out-null-gt-tensor-"></a>addcdiv(input, tensor1, tensor2, *, value=1, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -256,9 +253,9 @@ a real number, otherwise an integer.</p>
 <span class='fu'>torch_addcdiv</span>(<span class='kw'>t</span>, <span class='kw'>t1</span>, <span class='kw'>t2</span>, <span class='fl'>0.1</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2134  0.3366  1.0280
-#&gt; -0.3621  0.4381  0.8232
-#&gt; -0.0569  0.2298  1.2437
+#&gt;  0.3588 -0.6170  0.5677
+#&gt;  0.2298 -0.8078  0.6499
+#&gt;  0.3105 -0.6885  0.5985
 #&gt; [ CPUFloatType{3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

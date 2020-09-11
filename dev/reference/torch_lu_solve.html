@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Lu_solve</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_lu_solve.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Lu_solve</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_lu_solve</span>(<span class='kw'>self</span>, <span class='kw'>LU_data</span>, <span class='kw'>LU_pivots</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>b</th>
+      <th>self</th>
       <td><p>(Tensor) the RHS tensor of size \((*, m, k)\), where \(*\)                is zero or more batch dimensions.</p></td>
     </tr>
     <tr>
@@ -208,13 +209,9 @@
       <th>LU_pivots</th>
       <td><p>(IntTensor) the pivots of the LU factorization from <code>torch_lu</code> of size \((*, m)\),                           where \(*\) is zero or more batch dimensions.                           The batch dimensions of <code>LU_pivots</code> must be equal to the batch dimensions of                           <code>LU_data</code>.</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="lu-solve-input-lu-data-lu-pivots-out-none-gt-tensor-"><a class="anchor" href="#lu-solve-input-lu-data-lu-pivots-out-none-gt-tensor-"></a>lu_solve(input, LU_data, LU_pivots, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="lu-solve-input-lu-data-lu-pivots-out-null-gt-tensor-"><a class="anchor" href="#lu-solve-input-lu-data-lu-pivots-out-null-gt-tensor-"></a>lu_solve(input, LU_data, LU_pivots, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -231,7 +228,7 @@ LU factorization of A from <code>torch_lu</code>.</p>
 <span class='fu'><a href='torch_norm.html'>torch_norm</a></span>(<span class='fu'><a href='torch_bmm.html'>torch_bmm</a></span>(<span class='kw'>A</span>, <span class='kw'>x</span>) <span class='op'>-</span> <span class='kw'>b</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; 2.8273e-07
+#&gt; 1.24436e-06
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

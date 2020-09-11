@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Nonzero</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_nonzero.Rd</code></div>
     </div>
 
@@ -192,17 +192,14 @@
     <p>Nonzero</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_nonzero</span>(<span class='kw'>self</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(LongTensor, optional) the output tensor containing indices</p></td>
     </tr>
     </table>
 
@@ -212,20 +209,20 @@
 <pre>[`torch_nonzero(..., as_tuple=False) &lt;torch.nonzero&gt;`] (default) returns a
 2-D tensor where each row is the index for a nonzero value.
 
-[`torch_nonzero(..., as_tuple=True) &lt;torch.nonzero&gt;`] returns a tuple of 1-D
-index tensors, allowing for advanced indexing, so ``x[x.nonzero(as_tuple=True)]``
-gives all nonzero values of tensor ``x``. Of the returned tuple, each index tensor
+[`torch_nonzero(..., as_tuple=TRUE) &lt;torch.nonzero&gt;`] returns a tuple of 1-D
+index tensors, allowing for advanced indexing, so `x[x.nonzero(as_tuple=TRUE)]`
+gives all nonzero values of tensor `x`. Of the returned tuple, each index tensor
 contains nonzero indices for a certain dimension.
 
 See below for more details on the two behaviors.
 </pre>
 
-    <h2 class="hasAnchor" id="nonzero-input-out-none-as-tuple-false-gt-longtensor-or-tuple-of-longtensors-"><a class="anchor" href="#nonzero-input-out-none-as-tuple-false-gt-longtensor-or-tuple-of-longtensors-"></a>nonzero(input, *, out=None, as_tuple=False) -&gt; LongTensor or tuple of LongTensors </h2>
+    <h2 class="hasAnchor" id="nonzero-input-out-null-as-tuple-false-gt-longtensor-or-tuple-of-longtensors-"><a class="anchor" href="#nonzero-input-out-null-as-tuple-false-gt-longtensor-or-tuple-of-longtensors-"></a>nonzero(input, *, out=NULL, as_tuple=False) -&gt; LongTensor or tuple of LongTensors </h2>
 
     
 
 
-<p><strong>When</strong> <code>as_tuple</code> <strong>is <code>False</code> (default)</strong>:</p>
+<p><strong>When</strong> <code>as_tuple</code> <strong>is <code>FALSE</code> (default)</strong>:</p>
 <p>Returns a tensor containing the indices of all non-zero elements of
 <code>input</code>.  Each row in the result contains the indices of a non-zero
 element in <code>input</code>. The result is sorted lexicographically, with
@@ -233,7 +230,7 @@ the last index changing the fastest (C-style).</p>
 <p>If <code>input</code> has \(n\) dimensions, then the resulting indices tensor
 <code>out</code> is of size \((z \times n)\), where \(z\) is the total number of
 non-zero elements in the <code>input</code> tensor.</p>
-<p><strong>When</strong> <code>as_tuple</code> <strong>is <code>True</code></strong>:</p>
+<p><strong>When</strong> <code>as_tuple</code> <strong>is <code>TRUE</code></strong>:</p>
 <p>Returns a tuple of 1-D tensors, one for each dimension in <code>input</code>,
 each containing the indices (in that dimension) of all non-zero elements of
 <code>input</code> .</p>

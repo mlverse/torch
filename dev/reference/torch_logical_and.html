@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Logical_and</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_logical_and.Rd</code></div>
     </div>
 
@@ -192,31 +192,28 @@
     <p>Logical_and</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_logical_and</span>(<span class='kw'>self</span>, <span class='kw'>other</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
       <th>other</th>
       <td><p>(Tensor) the tensor to compute AND with</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="logical-and-input-other-out-none-gt-tensor-"><a class="anchor" href="#logical-and-input-other-out-none-gt-tensor-"></a>logical_and(input, other, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="logical-and-input-other-out-null-gt-tensor-"><a class="anchor" href="#logical-and-input-other-out-null-gt-tensor-"></a>logical_and(input, other, out=NULL) -&gt; Tensor </h2>
 
     
 
 
-<p>Computes the element-wise logical AND of the given input tensors. Zeros are treated as <code>False</code> and nonzeros are
-treated as <code>True</code>.</p>
+<p>Computes the element-wise logical AND of the given input tensors. Zeros are treated as <code>FALSE</code> and nonzeros are
+treated as <code>TRUE</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {

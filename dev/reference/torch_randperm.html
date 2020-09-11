@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Randperm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/creation-ops.R'><code>R/creation-ops.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_randperm.Rd</code></div>
     </div>
 
@@ -192,6 +192,13 @@
     <p>Randperm</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_randperm</span>(
+  <span class='kw'>n</span>,
+  dtype = <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span>(),
+  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
+  device = <span class='kw'>NULL</span>,
+  requires_grad = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,10 +206,6 @@
     <tr>
       <th>n</th>
       <td><p>(int) the upper bound (exclusive)</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     <tr>
       <th>dtype</th>
@@ -214,15 +217,15 @@
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>None</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
     </tr>
     <tr>
       <th>requires_grad</th>
-      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="randperm-n-out-none-dtype-torch-int-layout-torch-strided-device-none-requires-grad-false-gt-longtensor-"><a class="anchor" href="#randperm-n-out-none-dtype-torch-int-layout-torch-strided-device-none-requires-grad-false-gt-longtensor-"></a>randperm(n, out=None, dtype=torch.int64, layout=torch.strided, device=None, requires_grad=False) -&gt; LongTensor </h2>
+    <h2 class="hasAnchor" id="randperm-n-out-null-dtype-torch-int-layout-torch-strided-device-null-requires-grad-false-gt-longtensor-"><a class="anchor" href="#randperm-n-out-null-dtype-torch-int-layout-torch-strided-device-null-requires-grad-false-gt-longtensor-"></a>randperm(n, out=NULL, dtype=torch.int64, layout=torch.strided, device=NULL, requires_grad=False) -&gt; LongTensor </h2>
 
     
 
@@ -235,10 +238,10 @@
 <span class='fu'>torch_randperm</span>(<span class='fl'>4</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1
 #&gt;  0
 #&gt;  3
 #&gt;  2
+#&gt;  1
 #&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

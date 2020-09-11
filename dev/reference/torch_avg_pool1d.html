@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Avg_pool1d</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_avg_pool1d.Rd</code></div>
     </div>
 
@@ -192,44 +192,52 @@
     <p>Avg_pool1d</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_avg_pool1d</span>(
+  <span class='kw'>self</span>,
+  <span class='kw'>kernel_size</span>,
+  stride = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  padding = <span class='fl'>0L</span>,
+  ceil_mode = <span class='fl'>FALSE</span>,
+  count_include_pad = <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>NA input tensor of shape \((\mbox{minibatch} , \mbox{in\_channels} , iW)\)</p></td>
+      <th>self</th>
+      <td><p>input tensor of shape \((\mbox{minibatch} , \mbox{in\_channels} , iW)\)</p></td>
     </tr>
     <tr>
       <th>kernel_size</th>
-      <td><p>NA the size of the window. Can be a single number or a      tuple <code>(kW,)</code></p></td>
+      <td><p>the size of the window. Can be a single number or a tuple <code>(kW,)</code></p></td>
     </tr>
     <tr>
       <th>stride</th>
-      <td><p>NA the stride of the window. Can be a single number or a tuple      <code>(sW,)</code>. Default: <code>kernel_size</code></p></td>
+      <td><p>the stride of the window. Can be a single number or a tuple <code>(sW,)</code>. Default: <code>kernel_size</code></p></td>
     </tr>
     <tr>
       <th>padding</th>
-      <td><p>NA implicit zero paddings on both sides of the input. Can be a      single number or a tuple <code>(padW,)</code>. Default: 0</p></td>
+      <td><p>implicit zero paddings on both sides of the input. Can be a single number or a tuple <code>(padW,)</code>. Default: 0</p></td>
     </tr>
     <tr>
       <th>ceil_mode</th>
-      <td><p>NA when True, will use <code>ceil</code> instead of <code>floor</code> to compute the        output shape. Default: <code>False</code></p></td>
+      <td><p>when <code>TRUE</code>, will use <code>ceil</code> instead of <code>floor</code> to compute the output shape. Default: <code>FALSE</code></p></td>
     </tr>
     <tr>
       <th>count_include_pad</th>
-      <td><p>NA when True, will include the zero-padding in the        averaging calculation. Default: <code>True</code></p></td>
+      <td><p>when <code>TRUE</code>, will include the zero-padding in the averaging calculation. Default: <code>TRUE</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="avg-pool-d-input-kernel-size-stride-none-padding-ceil-mode-false-count-include-pad-true-gt-tensor-"><a class="anchor" href="#avg-pool-d-input-kernel-size-stride-none-padding-ceil-mode-false-count-include-pad-true-gt-tensor-"></a>avg_pool1d(input, kernel_size, stride=None, padding=0, ceil_mode=False, count_include_pad=True) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="avg-pool-d-input-kernel-size-stride-null-padding-ceil-mode-false-count-include-pad-true-gt-tensor-"><a class="anchor" href="#avg-pool-d-input-kernel-size-stride-null-padding-ceil-mode-false-count-include-pad-true-gt-tensor-"></a>avg_pool1d(input, kernel_size, stride=NULL, padding=0, ceil_mode=FALSE, count_include_pad=TRUE) -&gt; Tensor </h2>
 
     
 
 
 <p>Applies a 1D average pooling over an input signal composed of several
 input planes.</p>
-<p>See <code>~torch.nn.AvgPool1d</code> for details and output shape.</p>
+<p>See <code><a href='nn_avg_pool1d.html'>nn_avg_pool1d()</a></code> for details and output shape.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

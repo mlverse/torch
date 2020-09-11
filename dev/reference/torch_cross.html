@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cross</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_cross.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Cross</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_cross</span>(<span class='kw'>self</span>, <span class='kw'>other</span>, dim = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
@@ -208,13 +209,9 @@
       <th>dim</th>
       <td><p>(int, optional) the dimension to take the cross-product in.</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="cross-input-other-dim-out-none-gt-tensor-"><a class="anchor" href="#cross-input-other-dim-out-none-gt-tensor-"></a>cross(input, other, dim=-1, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="cross-input-other-dim-out-null-gt-tensor-"><a class="anchor" href="#cross-input-other-dim-out-null-gt-tensor-"></a>cross(input, other, dim=-1, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -237,10 +234,10 @@ size 3.</p>
 <span class='fu'>torch_cross</span>(<span class='kw'>a</span>, <span class='kw'>b</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.1528  2.3643 -2.2017
-#&gt;  0.0165 -0.7990  0.9309
-#&gt;  0.9502  0.1917 -1.4913
-#&gt;  0.3974  0.2900 -0.5408
+#&gt; -0.2856 -0.1150 -0.0244
+#&gt; -0.5368 -2.0039  0.3529
+#&gt;  1.6232  0.7729  3.4555
+#&gt;  0.4580 -0.9672 -0.1287
 #&gt; [ CPUFloatType{4,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

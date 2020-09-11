@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Inverse</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_inverse.Rd</code></div>
     </div>
 
@@ -192,17 +192,14 @@
     <p>Inverse</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_inverse</span>(<span class='kw'>self</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor of size \((*, n, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                    batch dimensions</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -213,7 +210,7 @@
 transposed, i.e. with strides like `input.contiguous().transpose(-2, -1).stride()`
 </pre>
 
-    <h2 class="hasAnchor" id="inverse-input-out-none-gt-tensor-"><a class="anchor" href="#inverse-input-out-none-gt-tensor-"></a>inverse(input, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="inverse-input-out-null-gt-tensor-"><a class="anchor" href="#inverse-input-out-null-gt-tensor-"></a>inverse(input, out=NULL) -&gt; Tensor </h2>
 
     
 

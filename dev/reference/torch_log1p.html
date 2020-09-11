@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Log1p</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_log1p.Rd</code></div>
     </div>
 
@@ -192,17 +192,14 @@
     <p>Log1p</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_log1p</span>(<span class='kw'>self</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -210,7 +207,7 @@
 
     <p>This function is more accurate than <code><a href='torch_log.html'>torch_log</a></code> for small
 values of <code>input</code></p>
-    <h2 class="hasAnchor" id="log-p-input-out-none-gt-tensor-"><a class="anchor" href="#log-p-input-out-none-gt-tensor-"></a>log1p(input, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="log-p-input-out-null-gt-tensor-"><a class="anchor" href="#log-p-input-out-null-gt-tensor-"></a>log1p(input, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -228,11 +225,11 @@ $$</p>
 <span class='fu'>torch_log1p</span>(<span class='kw'>a</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2992
-#&gt;  0.7697
-#&gt;  0.7360
-#&gt; -1.9515
-#&gt;  0.4073
+#&gt;  0.5231
+#&gt;  0.3201
+#&gt;     nan
+#&gt;  0.9176
+#&gt; -0.2516
 #&gt; [ CPUFloatType{5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

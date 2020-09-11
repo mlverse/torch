@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Poisson</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_poisson.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Poisson</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_poisson</span>(<span class='kw'>self</span>, generator = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor containing the rates of the Poisson distribution</p></td>
     </tr>
     <tr>
@@ -206,7 +207,7 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="poisson-input-generator-none-gt-tensor-"><a class="anchor" href="#poisson-input-generator-none-gt-tensor-"></a>poisson(input *, generator=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="poisson-input-generator-null-gt-tensor-"><a class="anchor" href="#poisson-input-generator-null-gt-tensor-"></a>poisson(input *, generator=NULL) -&gt; Tensor </h2>
 
     
 
@@ -225,10 +226,10 @@ $$</p>
 <span class='fu'>torch_poisson</span>(<span class='kw'>rates</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;   1   3   1   5
-#&gt;   0   4   3   1
-#&gt;   2   1   1   0
-#&gt;   3   0   4  10
+#&gt;  0  0  0  2
+#&gt;  4  8  2  1
+#&gt;  4  1  1  3
+#&gt;  5  4  1  5
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

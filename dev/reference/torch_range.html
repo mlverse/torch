@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Range</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/creation-ops.R'><code>R/creation-ops.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_range.Rd</code></div>
     </div>
 
@@ -192,6 +192,15 @@
     <p>Range</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_range</span>(
+  <span class='kw'>start</span>,
+  <span class='kw'>end</span>,
+  step = <span class='fl'>1</span>,
+  dtype = <span class='kw'>NULL</span>,
+  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
+  device = <span class='kw'>NULL</span>,
+  requires_grad = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,12 +218,8 @@
       <td><p>(float) the gap between each pair of adjacent points. Default: <code>1</code>.</p></td>
     </tr>
     <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
-    <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>None</code>, uses a global default (see <code>torch_set_default_tensor_type</code>). If <code>dtype</code> is not given, infer the data type from the other input        arguments. If any of <code>start</code>, <code>end</code>, or <code>stop</code> are floating-point, the        <code>dtype</code> is inferred to be the default dtype, see        <code>~torch.get_default_dtype</code>. Otherwise, the <code>dtype</code> is inferred to        be <code>torch.int64</code>.</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>NULL</code>, uses a global default (see <code>torch_set_default_tensor_type</code>). If <code>dtype</code> is not given, infer the data type from the other input        arguments. If any of <code>start</code>, <code>end</code>, or <code>stop</code> are floating-point, the        <code>dtype</code> is inferred to be the default dtype, see        <code>~torch.get_default_dtype</code>. Otherwise, the <code>dtype</code> is inferred to        be <code>torch.int64</code>.</p></td>
     </tr>
     <tr>
       <th>layout</th>
@@ -222,15 +227,15 @@
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>None</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
     </tr>
     <tr>
       <th>requires_grad</th>
-      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="range-start-end-step-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"><a class="anchor" href="#range-start-end-step-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"></a>range(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="range-start-end-step-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-"><a class="anchor" href="#range-start-end-step-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-"></a>range(start=0, end, step=1, out=NULL, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False) -&gt; Tensor </h2>
 
     
 

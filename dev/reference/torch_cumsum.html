@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cumsum</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_cumsum.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Cumsum</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_cumsum</span>(<span class='kw'>self</span>, <span class='kw'>dim</span>, dtype = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
@@ -206,15 +207,11 @@
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to <code>dtype</code> before the operation        is performed. This is useful for preventing data type overflows. Default: None.</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to <code>dtype</code> before the operation        is performed. This is useful for preventing data type overflows. Default: NULL.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="cumsum-input-dim-out-none-dtype-none-gt-tensor-"><a class="anchor" href="#cumsum-input-dim-out-none-dtype-none-gt-tensor-"></a>cumsum(input, dim, out=None, dtype=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="cumsum-input-dim-out-null-dtype-null-gt-tensor-"><a class="anchor" href="#cumsum-input-dim-out-null-dtype-null-gt-tensor-"></a>cumsum(input, dim, out=NULL, dtype=NULL) -&gt; Tensor </h2>
 
     
 
@@ -235,16 +232,16 @@ $$</p>
 <span class='fu'>torch_cumsum</span>(<span class='kw'>a</span>, dim=<span class='fl'>1</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  1.1589
-#&gt;  1.2567
-#&gt;  2.2335
-#&gt;  1.0357
-#&gt;  2.9474
-#&gt;  1.4046
-#&gt;  2.6337
-#&gt;  2.9156
-#&gt;  2.5217
-#&gt;  3.4352
+#&gt;  0.2251
+#&gt; -1.0512
+#&gt; -0.8917
+#&gt; -1.7403
+#&gt; -0.7528
+#&gt; -0.5554
+#&gt; -0.3135
+#&gt; -1.7873
+#&gt; -2.4391
+#&gt; -2.5360
 #&gt; [ CPUFloatType{10} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

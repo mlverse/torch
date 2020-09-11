@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cat</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_cat.Rd</code></div>
     </div>
 
@@ -192,6 +192,7 @@
     <p>Cat</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_cat</span>(<span class='kw'>tensors</span>, dim = <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,13 +205,9 @@
       <th>dim</th>
       <td><p>(int, optional) the dimension over which the tensors are concatenated</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="cat-tensors-dim-out-none-gt-tensor-"><a class="anchor" href="#cat-tensors-dim-out-none-gt-tensor-"></a>cat(tensors, dim=0, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="cat-tensors-dim-out-null-gt-tensor-"><a class="anchor" href="#cat-tensors-dim-out-null-gt-tensor-"></a>cat(tensors, dim=0, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -231,8 +228,8 @@ and <code><a href='torch_chunk.html'>torch_chunk</a></code>.</p>
 <span class='fu'>torch_cat</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span>, <span class='kw'>x</span>, <span class='kw'>x</span>), <span class='fl'>2</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2286 -1.3960 -0.2102 -0.2286 -1.3960 -0.2102 -0.2286 -1.3960 -0.2102
-#&gt; -2.9433 -0.9458 -0.5855 -2.9433 -0.9458 -0.5855 -2.9433 -0.9458 -0.5855
+#&gt; -0.7520 -0.7045  0.1139 -0.7520 -0.7045  0.1139 -0.7520 -0.7045  0.1139
+#&gt; -0.4175  0.1703 -0.4149 -0.4175  0.1703 -0.4149 -0.4175  0.1703 -0.4149
 #&gt; [ CPUFloatType{2,9} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sort</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_sort.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Sort</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_sort</span>(<span class='kw'>self</span>, dim = <span class='op'>-</span><span class='fl'>1L</span>, descending = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
@@ -208,13 +209,9 @@
       <th>descending</th>
       <td><p>(bool, optional) controls the sorting order (ascending or descending)</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(tuple, optional) the output tuple of (<code>Tensor</code>, <code>LongTensor</code>) that can        be optionally given to be used as output buffers</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="sort-input-dim-descending-false-out-none-gt-tensor-longtensor-"><a class="anchor" href="#sort-input-dim-descending-false-out-none-gt-tensor-longtensor-"></a>sort(input, dim=-1, descending=False, out=None) -&gt; (Tensor, LongTensor) </h2>
+    <h2 class="hasAnchor" id="sort-input-dim-descending-false-gt-tensor-longtensor-"><a class="anchor" href="#sort-input-dim-descending-false-gt-tensor-longtensor-"></a>sort(input, dim=-1, descending=FALSE) -&gt; (Tensor, LongTensor) </h2>
 
     
 
@@ -222,7 +219,7 @@
 <p>Sorts the elements of the <code>input</code> tensor along a given dimension
 in ascending order by value.</p>
 <p>If <code>dim</code> is not given, the last dimension of the <code>input</code> is chosen.</p>
-<p>If <code>descending</code> is <code>True</code> then the elements are sorted in descending
+<p>If <code>descending</code> is <code>TRUE</code> then the elements are sorted in descending
 order by value.</p>
 <p>A namedtuple of (values, indices) is returned, where the <code>values</code> are the
 sorted values and <code>indices</code> are the indices of the elements in the original
@@ -239,16 +236,16 @@ sorted values and <code>indices</code> are the indices of the elements in the or
 }
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -1.2688 -0.8877 -0.9812 -1.9686
-#&gt; -0.1888 -0.5498  0.3137 -0.7877
-#&gt;  2.1991  0.1596  1.2797  0.0328
+#&gt; -0.6016 -1.1982 -1.0866 -1.2784
+#&gt; -0.1323 -0.1098 -0.6647  0.1832
+#&gt;  0.0485  0.4644 -0.6623  0.2925
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  2  1  1  2
-#&gt;  1  0  0  1
-#&gt;  0  2  2  0
+#&gt;  0  1  2  0
+#&gt;  1  2  0  1
+#&gt;  2  0  1  2
 #&gt; [ CPULongType{3,4} ]
 #&gt; </div></pre>
   </div>

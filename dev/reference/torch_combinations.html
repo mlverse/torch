@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Combinations</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_combinations.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Combinations</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_combinations</span>(<span class='kw'>self</span>, r = <span class='fl'>2L</span>, with_replacement = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) 1D vector.</p></td>
     </tr>
     <tr>
@@ -217,7 +218,7 @@
 
 <p>Compute combinations of length \(r\) of the given tensor. The behavior is similar to
 python's <code>itertools.combinations</code> when <code>with_replacement</code> is set to <code>False</code>, and
-<code>itertools.combinations_with_replacement</code> when <code>with_replacement</code> is set to <code>True</code>.</p>
+<code>itertools.combinations_with_replacement</code> when <code>with_replacement</code> is set to <code>TRUE</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {

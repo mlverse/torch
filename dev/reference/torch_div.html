@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Div</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_div.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Div</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_div</span>(<span class='kw'>self</span>, <span class='kw'>other</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
@@ -206,7 +207,7 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="div-input-other-out-none-gt-tensor-"><a class="anchor" href="#div-input-other-out-none-gt-tensor-"></a>div(input, other, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="div-input-other-out-null-gt-tensor-"><a class="anchor" href="#div-input-other-out-null-gt-tensor-"></a>div(input, other, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -232,8 +233,8 @@ specified output tensor. Integral division by zero leads to undefined behavior.<
     
 
 <p>Integer division using div is deprecated, and in a future release div will
-perform true division like <code><a href='torch_true_divide.html'>torch_true_divide</a></code>.
-Use <code><a href='torch_floor_divide.html'>torch_floor_divide</a></code> (// in Python) to perform integer division,
+perform true division like <code><a href='torch_true_divide.html'>torch_true_divide()</a></code>.
+Use <code><a href='torch_floor_divide.html'>torch_floor_divide()</a></code> to perform integer division,
 instead.</p>
 <p>$$
     \mbox{out}_i = \frac{\mbox{input}_i}{\mbox{other}}
@@ -260,10 +261,10 @@ by zero leads to undefined behavior.</p>
 <span class='fu'>torch_div</span>(<span class='kw'>a</span>, <span class='kw'>b</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;   -0.2191   34.2464   -0.9341    2.1873
-#&gt;   -0.5134  241.4640   -0.9683    2.4227
-#&gt;    0.8740   46.2003    1.0168   -5.9727
-#&gt;    1.5334   33.9902    0.2817    4.0475
+#&gt;  2.7361e+01 -1.1061e+00  1.2889e+00 -3.3842e-01
+#&gt; -8.7866e+00 -1.6224e+00  9.9292e-01  3.9255e-01
+#&gt;  3.0094e+01  3.7040e-01 -8.4586e-01  7.6823e-04
+#&gt;  2.2406e+01  1.7346e-01 -1.7901e+00 -7.1168e-03
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

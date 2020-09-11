@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Equal</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_equal.Rd</code></div>
     </div>
 
@@ -192,14 +192,27 @@
     <p>Equal</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_equal</span>(<span class='kw'>self</span>, <span class='kw'>other</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>self</th>
+      <td><p>the input tensor</p></td>
+    </tr>
+    <tr>
+      <th>other</th>
+      <td><p>the other input tensor</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="equal-input-other-gt-bool-"><a class="anchor" href="#equal-input-other-gt-bool-"></a>equal(input, other) -&gt; bool </h2>
 
     
 
 
-<p><code>True</code> if two tensors have the same size and elements, <code>False</code> otherwise.</p>
+<p><code>TRUE</code> if two tensors have the same size and elements, <code>FALSE</code> otherwise.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {

@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Flatten</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_flatten.Rd</code></div>
     </div>
 
@@ -192,13 +192,19 @@
     <p>Flatten</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_flatten</span>(<span class='kw'>self</span>, <span class='kw'>dims</span>, start_dim = <span class='fl'>1L</span>, end_dim = <span class='op'>-</span><span class='fl'>1L</span>, <span class='kw'>out_dim</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
+    </tr>
+    <tr>
+      <th>dims</th>
+      <td><p>if tensor is named you can pass the name of the dimensions to
+flatten</p></td>
     </tr>
     <tr>
       <th>start_dim</th>
@@ -207,6 +213,10 @@
     <tr>
       <th>end_dim</th>
       <td><p>(int) the last dim to flatten</p></td>
+    </tr>
+    <tr>
+      <th>out_dim</th>
+      <td><p>the name of the resulting dimension if a named tensor.</p></td>
     </tr>
     </table>
 

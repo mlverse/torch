@@ -184,7 +184,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Addmm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_addmm.Rd</code></div>
     </div>
 
@@ -192,12 +192,13 @@
     <p>Addmm</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_addmm</span>(<span class='kw'>self</span>, <span class='kw'>mat1</span>, <span class='kw'>mat2</span>, beta = <span class='fl'>1L</span>, alpha = <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) matrix to be added</p></td>
     </tr>
     <tr>
@@ -216,13 +217,9 @@
       <th>alpha</th>
       <td><p>(Number, optional) multiplier for \(mat1 @ mat2\) (\(\alpha\))</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addmm-input-mat-mat-beta-alpha-out-none-gt-tensor-"><a class="anchor" href="#addmm-input-mat-mat-beta-alpha-out-none-gt-tensor-"></a>addmm(input, mat1, mat2, *, beta=1, alpha=1, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="addmm-input-mat-mat-beta-alpha-out-null-gt-tensor-"><a class="anchor" href="#addmm-input-mat-mat-beta-alpha-out-null-gt-tensor-"></a>addmm(input, mat1, mat2, *, beta=1, alpha=1, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -250,8 +247,8 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class='fu'>torch_addmm</span>(<span class='kw'>M</span>, <span class='kw'>mat1</span>, <span class='kw'>mat2</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0446  1.2050  0.7633
-#&gt;  1.2773  0.7387  1.5956
+#&gt;  2.0697 -6.0022 -0.1049
+#&gt;  0.5002  1.3777 -1.9836
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
