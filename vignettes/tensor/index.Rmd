@@ -497,8 +497,8 @@ In-place version of `$baddbmm`
 
 bernoulli(*, generator=NULL) -> Tensor
 
-Returns a result tensor where each `\texttt{result[i]}` is independently
-sampled from `\text{Bernoulli}(\texttt{self[i]})`. `self` must have
+Returns a result tensor where each $\texttt{result[i]}$ is independently
+sampled from $\text{Bernoulli}(\texttt{self[i]})$. `self` must have
 floating point `dtype`, and the result will have the same `dtype`.
 
 See ?torch_bernoulli()
@@ -508,7 +508,7 @@ See ?torch_bernoulli()
 bernoulli_(p=0.5, *, generator=NULL) -> Tensor
 
 Fills each location of `self` with an independent sample from
-`\text{Bernoulli}(\texttt{p})`. `self` can have integral
+$\text{Bernoulli}(\texttt{p})$. `self` can have integral
 `dtype`.
 
 bernoulli_(p_tensor, *, generator=NULL) -> Tensor
@@ -516,8 +516,8 @@ bernoulli_(p_tensor, *, generator=NULL) -> Tensor
 `p_tensor` should be a tensor containing probabilities to be used for
 drawing the binary random number.
 
-The `\text{i}^{th}` element of `self` tensor will be set to a
-value sampled from `\text{Bernoulli}(\texttt{p\_tensor[i]})`.
+The $\text{i}^{th}$ element of `self` tensor will be set to a
+value sampled from $\text{Bernoulli}(\texttt{p\_tensor[i]})$.
 
 `self` can have integral `dtype`, but `p_tensor` must have
 floating point `dtype`.
