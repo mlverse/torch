@@ -11,7 +11,8 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1")
+  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1"),
+  results = "hide"
 )
 ```
 
@@ -195,7 +196,7 @@ To align a tensor to a specific order, use `$align_to`.
 
 ### Examples:
 
-```{r echo=FALSE}
+```{r eval=FALSE}
 # Example 1: Applying a mask
 mask <- torch_randint(low = 0, high = 2, size = c(127, 128), dtype=torch_bool())$refine_names(c('W', 'H'))
 imgs <- torch_randn(32, 128, 127, 3, names=c('N', 'H', 'W', 'C'))
@@ -290,7 +291,7 @@ in the output tensor having 1 fewer dimension than `input`.
 #### Examples: 
 
 ```{r}
-a <- torch_rand(4, 2)to(dtype = torch_bool())
+a <- torch_rand(4, 2)$to(dtype = torch_bool())
 a
 a$all(dim=2)
 a$all(dim=1)
@@ -1442,7 +1443,7 @@ match `self`, or an error will be raised.
 
 #### Examples: 
 
-```{r}
+```{r, eval = FALSE}
 x <- torch_zeros(5, 3)
 t <- torch_tensor(matrix(1:9, ncol = 3), dtype=torch_float())
 index <- torch_tensor(c(1, 5, 3))
@@ -2770,7 +2771,7 @@ change the size in-place with custom strides, see `$set_()`.
 
 ```{r}
 x <- torch_tensor(matrix(1:6, ncol = 2))
-x$resize_(2, 2)
+x$resize_(c(2, 2))
 ```
     
 ## resize_as_
@@ -2880,7 +2881,7 @@ along the specified dimension `dim` must be unique.
 
 #### Examples: 
 
-```{r}
+```{r, eval = FALSE}
 x <- torch_rand(2, 5)
 x
 torch_zeros(3, 5)$scatter_(
@@ -2942,7 +2943,7 @@ a performance cost) by setting `torch_backends.cudnn.deterministic = TRUE`.
 
 #### Examples: 
 
-```{r}
+```{r, eval = FALSE}
 x <- torch_rand(2, 5)
 x
 torch_ones(3, 5)$scatter_add_(1, torch_tensor(rbind(c(0, 1, 2, 0, 0), c(2, 0, 0, 1, 2))), x)
@@ -3164,7 +3165,7 @@ number of storage elements (not bytes).
 
 #### Examples: 
 
-```{r}
+```{r, eval = FALSE}
 x <- torch_tensor(c(1, 2, 3, 4, 5))
 x$storage_offset()
 x[3:N]$storage_offset()
@@ -3196,7 +3197,7 @@ the particular dimension `dim`.
 ```{r}
 x <- torch_tensor(matrix(1:10, nrow = 2))
 x$stride()
-x$stride(0)
+x$stride(1)
 x$stride(-1)
 ```
     
