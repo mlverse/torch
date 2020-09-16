@@ -39,7 +39,7 @@ If `n` is the number of dimensions in `x`,
 
 abs() -> Tensor
 
-See ?torch_abs()
+See `?torch_abs()`
 
 ## abs_
 
@@ -64,7 +64,7 @@ Alias for [$abs_()]
 
 acos() -> Tensor
 
-See ?torch_acos()
+See `?torch_acos()`
 
 ## acos_
 
@@ -76,7 +76,7 @@ In-place version of `$acos`
 
 acosh() -> Tensor
 
-See ?torch_acosh()
+See `?torch_acosh()`
 
 ## acosh_
 
@@ -96,7 +96,7 @@ When `other` is a tensor, the shape of `other` must be
 broadcastable with the shape of the underlying
 tensor
 
-See ?torch_add()
+See `?torch_add()`
 
 ## add_
 
@@ -108,7 +108,7 @@ In-place version of `$add`
 
 addbmm(batch1, batch2, *, beta=1, alpha=1) -> Tensor
 
-See ?torch_addbmm()
+See `?torch_addbmm()`
 
 ## addbmm_
 
@@ -120,7 +120,7 @@ In-place version of `$addbmm`
 
 addcdiv(tensor1, tensor2, *, value=1) -> Tensor
 
-See ?torch_addcdiv()
+See `?torch_addcdiv()`
 
 ## addcdiv_
 
@@ -132,7 +132,7 @@ In-place version of `$addcdiv`
 
 addcmul(tensor1, tensor2, *, value=1) -> Tensor
 
-See ?torch_addcmul()
+See `?torch_addcmul()`
 
 ## addcmul_
 
@@ -144,7 +144,7 @@ In-place version of `$addcmul`
 
 addmm(mat1, mat2, *, beta=1, alpha=1) -> Tensor
 
-See ?torch_addmm()
+See `?torch_addmm()`
 
 ## addmm_
 
@@ -156,7 +156,7 @@ In-place version of `$addmm`
 
 addmv(mat, vec, *, beta=1, alpha=1) -> Tensor
 
-See ?torch_addmv()
+See `?torch_addmv()`
 
 ## addmv_
 
@@ -168,7 +168,7 @@ In-place version of `$addmv`
 
 addr(vec1, vec2, *, beta=1, alpha=1) -> Tensor
 
-See ?torch_addr()
+See `?torch_addr()`
 
 ## addr_
 
@@ -279,7 +279,7 @@ dimension `dim` are TRUE, FALSE otherwise.
 
 If `keepdim` is `TRUE`, the output tensor is of the same size as
 `input` except in the dimension `dim` where it is of size 1.
-Otherwise, `dim` is squeezed (see ?torch_squeeze()), resulting
+Otherwise, `dim` is squeezed (see `?torch_squeeze()),` resulting
 in the output tensor having 1 fewer dimension than `input`.
 
 #### Arguments: 
@@ -301,13 +301,13 @@ a$all(dim=1)
 
 allclose(other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -> Tensor
 
-See ?torch_allclose()
+See `?torch_allclose()`
 
 ## angle
 
 angle() -> Tensor
 
-See ?torch_angle()
+See `?torch_angle()`
 
 ## any
 
@@ -330,7 +330,7 @@ dimension `dim` are TRUE, FALSE otherwise.
 
 If `keepdim` is `TRUE`, the output tensor is of the same size as
 `input` except in the dimension `dim` where it is of size 1.
-Otherwise, `dim` is squeezed (see ?torch_squeeze()), resulting
+Otherwise, `dim` is squeezed (see `?torch_squeeze()),` resulting
 in the output tensor having 1 fewer dimension than `input`.
 
 #### Arguments: 
@@ -364,19 +364,19 @@ sections that require high performance.
 
 argmax(dim=NULL, keepdim=FALSE) -> LongTensor
 
-See ?torch_argmax()
+See `?torch_argmax()`
 
 ## argmin
 
 argmin(dim=NULL, keepdim=FALSE) -> LongTensor
 
-See ?torch_argmin()
+See `?torch_argmin()`
 
 ## argsort
 
 argsort(dim=-1, descending=FALSE) -> LongTensor
 
-See ?torch_argsort()
+See `?torch_argsort()`
 
 ## as_strided
 
@@ -396,7 +396,7 @@ to the autograd graph. `cls` must be a subclass of `Tensor`.
 
 asin() -> Tensor
 
-See ?torch_asin()
+See `?torch_asin()`
 
 ## asin_
 
@@ -408,7 +408,7 @@ In-place version of `$asin`
 
 asinh() -> Tensor
 
-See ?torch_asinh()
+See `?torch_asinh()`
 
 ## asinh_
 
@@ -420,7 +420,7 @@ In-place version of `$asinh`
 
 atan() -> Tensor
 
-See ?torch_atan()
+See `?torch_atan()`
 
 ## atan2
 
@@ -444,7 +444,7 @@ In-place version of `$atan`
 
 atanh() -> Tensor
 
-See ?torch_atanh()
+See `?torch_atanh()`
 
 ## atanh_
 
@@ -485,7 +485,7 @@ for details on the memory layout of accumulated gradients.
 
 baddbmm(batch1, batch2, *, beta=1, alpha=1) -> Tensor
 
-See ?torch_baddbmm()
+See `?torch_baddbmm()`
 
 ## baddbmm_
 
@@ -501,7 +501,7 @@ Returns a result tensor where each $\texttt{result[i]}$ is independently
 sampled from $\text{Bernoulli}(\texttt{self[i]})$. `self` must have
 floating point `dtype`, and the result will have the same `dtype`.
 
-See ?torch_bernoulli()
+See `?torch_bernoulli()`
 
 ## bernoulli_
 
@@ -522,7 +522,7 @@ value sampled from $\text{Bernoulli}(\texttt{p\_tensor[i]})$.
 `self` can have integral `dtype`, but `p_tensor` must have
 floating point `dtype`.
 
-See also `$bernoulli` and ?torch_bernoulli()
+See also `$bernoulli` and `?torch_bernoulli()`
 
 ## bfloat16
 
@@ -538,7 +538,7 @@ bfloat16(memory_format=torch_preserve_format) -> Tensor
 
 bincount(weights=NULL, minlength=0) -> Tensor
 
-See ?torch_bincount()
+See `?torch_bincount()`
 
 ## bitwise_and
 
@@ -592,7 +592,7 @@ In-place version of `$bitwise_xor`
 
 bmm(batch2) -> Tensor
 
-See ?torch_bmm()
+See `?torch_bmm()`
 
 ## bool
 
@@ -630,7 +630,7 @@ $$
 
 ceil() -> Tensor
 
-See ?torch_ceil()
+See `?torch_ceil()`
 
 ## ceil_
 
@@ -653,7 +653,7 @@ char(memory_format=torch_preserve_format) -> Tensor
 
 cholesky(upper=FALSE) -> Tensor
 
-See ?torch_cholesky()
+See `?torch_cholesky()`
 
 ## cholesky_inverse
 
@@ -671,13 +671,13 @@ See [torch_cholesky_solve()]
 
 chunk(chunks, dim=0) -> List of Tensors
 
-See ?torch_chunk()
+See `?torch_chunk()`
 
 ## clamp
 
 clamp(min, max) -> Tensor
 
-See ?torch_clamp()
+See `?torch_clamp()`
 
 ## clamp_
 
@@ -706,7 +706,7 @@ propagating to the cloned tensor will propagate to the original tensor.
 
 conj() -> Tensor
 
-See ?torch_conj()
+See `?torch_conj()`
 
 ## contiguous
 
@@ -743,7 +743,7 @@ different device.
 
 cos() -> Tensor
 
-See ?torch_cos()
+See `?torch_cos()`
 
 ## cos_
 
@@ -755,7 +755,7 @@ In-place version of `$cos`
 
 cosh() -> Tensor
 
-See ?torch_cosh()
+See `?torch_cosh()`
 
 ## cosh_
 
@@ -781,7 +781,7 @@ then no copy is performed and the original object is returned.
 
 cross(other, dim=-1) -> Tensor
 
-See ?torch_cross()
+See `?torch_cross()`
 
 ## cuda
 
@@ -806,25 +806,25 @@ then no copy is performed and the original object is returned.
 
 cummax(dim) -> (Tensor, Tensor)
 
-See ?torch_cummax()
+See `?torch_cummax()`
 
 ## cummin
 
 cummin(dim) -> (Tensor, Tensor)
 
-See ?torch_cummin()
+See `?torch_cummin()`
 
 ## cumprod
 
 cumprod(dim, dtype=NULL) -> Tensor
 
-See ?torch_cumprod()
+See `?torch_cumprod()`
 
 ## cumsum
 
 cumsum(dim, dtype=NULL) -> Tensor
 
-See ?torch_cumsum()
+See `?torch_cumsum()`
 
 ## data_ptr
 
@@ -863,7 +863,7 @@ Given a quantized Tensor, dequantize it and return the dequantized float Tensor.
 
 det() -> Tensor
 
-See ?torch_det()
+See `?torch_det()`
 
 ## detach
 
@@ -898,7 +898,7 @@ Is the `torch_device` where this Tensor is.
 
 diag(diagonal=0) -> Tensor
 
-See ?torch_diag()
+See `?torch_diag()`
 
 ## diag_embed
 
@@ -910,19 +910,19 @@ See [torch_diag_embed()]
 
 diagflat(offset=0) -> Tensor
 
-See ?torch_diagflat()
+See `?torch_diagflat()`
 
 ## diagonal
 
 diagonal(offset=0, dim1=0, dim2=1) -> Tensor
 
-See ?torch_diagonal()
+See `?torch_diagonal()`
 
 ## digamma
 
 digamma() -> Tensor
 
-See ?torch_digamma()
+See `?torch_digamma()`
 
 ## digamma_
 
@@ -940,13 +940,13 @@ Returns the number of dimensions of `self` tensor.
 
 dist(other, p=2) -> Tensor
 
-See ?torch_dist()
+See `?torch_dist()`
 
 ## div
 
 div(value) -> Tensor
 
-See ?torch_div()
+See `?torch_div()`
 
 ## div_
 
@@ -958,7 +958,7 @@ In-place version of `$div`
 
 dot(tensor2) -> Tensor
 
-See ?torch_dot()
+See `?torch_dot()`
 
 ## double
 
@@ -975,7 +975,7 @@ double(memory_format=torch_preserve_format) -> Tensor
 
 eig(eigenvectors=FALSE) -> (Tensor, Tensor)
 
-See ?torch_eig()
+See `?torch_eig()`
 
 ## element_size
 
@@ -993,7 +993,7 @@ torch_tensor(c(1))$element_size()
 
 eq(other) -> Tensor
 
-See ?torch_eq()
+See `?torch_eq()`
 
 ## eq_
 
@@ -1005,13 +1005,13 @@ In-place version of `$eq`
 
 equal(other) -> bool
 
-See ?torch_equal()
+See `?torch_equal()`
 
 ## erf
 
 erf() -> Tensor
 
-See ?torch_erf()
+See `?torch_erf()`
 
 ## erf_
 
@@ -1023,7 +1023,7 @@ In-place version of `$erf`
 
 erfc() -> Tensor
 
-See ?torch_erfc()
+See `?torch_erfc()`
 
 ## erfc_
 
@@ -1035,7 +1035,7 @@ In-place version of `$erfc`
 
 erfinv() -> Tensor
 
-See ?torch_erfinv()
+See `?torch_erfinv()`
 
 ## erfinv_
 
@@ -1047,7 +1047,7 @@ In-place version of `$erfinv`
 
 exp() -> Tensor
 
-See ?torch_exp()
+See `?torch_exp()`
 
 ## exp_
 
@@ -1135,7 +1135,7 @@ $$
 
 fft(signal_ndim, normalized=FALSE) -> Tensor
 
-See ?torch_fft()
+See `?torch_fft()`
 
 ## fill_
 
@@ -1171,25 +1171,25 @@ c$fill_diagonal_(5, wrap=TRUE)
 
 flatten(input, start_dim=0, end_dim=-1) -> Tensor
 
-see ?torch_flatten()
+see `?torch_flatten()`
 
 ## flip
 
 flip(dims) -> Tensor
 
-See ?torch_flip()
+See `?torch_flip()`
 
 ## fliplr
 
 fliplr() -> Tensor
 
-See ?torch_fliplr()
+See `?torch_fliplr()`
 
 ## flipud
 
 flipud() -> Tensor
 
-See ?torch_flipud()
+See `?torch_flipud()`
 
 ## float
 
@@ -1206,7 +1206,7 @@ float(memory_format=torch_preserve_format) -> Tensor
 
 floor() -> Tensor
 
-See ?torch_floor()
+See `?torch_floor()`
 
 ## floor_
 
@@ -1230,7 +1230,7 @@ In-place version of `$floor_divide`
 
 fmod(divisor) -> Tensor
 
-See ?torch_fmod()
+See `?torch_fmod()`
 
 ## fmod_
 
@@ -1242,7 +1242,7 @@ In-place version of `$fmod`
 
 frac() -> Tensor
 
-See ?torch_frac()
+See `?torch_frac()`
 
 ## frac_
 
@@ -1254,13 +1254,13 @@ In-place version of `$frac`
 
 gather(dim, index) -> Tensor
 
-See ?torch_gather()
+See `?torch_gather()`
 
 ## ge
 
 ge(other) -> Tensor
 
-See ?torch_ge()
+See `?torch_ge()`
 
 ## ge_
 
@@ -1282,13 +1282,13 @@ $$
 
 geqrf() -> (Tensor, Tensor)
 
-See ?torch_geqrf()
+See `?torch_geqrf()`
 
 ## ger
 
 ger(vec2) -> Tensor
 
-See ?torch_ger()
+See `?torch_ger()`
 
 ## get_device
 
@@ -1315,7 +1315,7 @@ The attribute will then contain the gradients computed and future calls to
 
 gt(other) -> Tensor
 
-See ?torch_gt()
+See `?torch_gt()`
 
 ## gt_
 
@@ -1348,13 +1348,13 @@ Is `TRUE` if any of this tensor's dimensions are named. Otherwise, is `FALSE`.
 
 histc(bins=100, min=0, max=0) -> Tensor
 
-See ?torch_histc()
+See `?torch_histc()`
 
 ## ifft
 
 ifft(signal_ndim, normalized=FALSE) -> Tensor
 
-See ?torch_ifft()
+See `?torch_ifft()`
 
 ## imag
 
@@ -1549,13 +1549,13 @@ underlying uint8_t values of the given Tensor.
 
 inverse() -> Tensor
 
-See ?torch_inverse()
+See `?torch_inverse()`
 
 ## irfft
 
 irfft(signal_ndim, normalized=FALSE, onesided=TRUE, signal_sizes=NULL) -> Tensor
 
-See ?torch_irfft()
+See `?torch_irfft()`
 
 ## is_complex
 
@@ -1663,28 +1663,28 @@ Returns TRUE if the data type of `self` is a signed data type.
 
 isclose(other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -> Tensor
 
-See ?torch_isclose()
+See `?torch_isclose()`
 
 ## isfinite
 
 isfinite() -> Tensor
 
-See ?torch_isfinite()
+See `?torch_isfinite()`
 
 ## isinf
 
 isinf() -> Tensor
 
-See ?torch_isinf()
+See `?torch_isinf()`
 
 ## isnan
 
 isnan() -> Tensor
 
-See ?torch_isnan()
+See `?torch_isnan()`
 
 ## istft
-See ?torch_istft()
+See `?torch_istft()`
 ## item
 
 item() -> number
@@ -1705,13 +1705,13 @@ x$item()
 
 kthvalue(k, dim=NULL, keepdim=FALSE) -> (Tensor, LongTensor)
 
-See ?torch_kthvalue()
+See `?torch_kthvalue()`
 
 ## le
 
 le(other) -> Tensor
 
-See ?torch_le()
+See `?torch_le()`
 
 ## le_
 
@@ -1723,7 +1723,7 @@ In-place version of `$le`
 
 lerp(end, weight) -> Tensor
 
-See ?torch_lerp()
+See `?torch_lerp()`
 
 ## lerp_
 
@@ -1735,7 +1735,7 @@ In-place version of `$lerp`
 
 lgamma() -> Tensor
 
-See ?torch_lgamma()
+See `?torch_lgamma()`
 
 ## lgamma_
 
@@ -1747,7 +1747,7 @@ In-place version of `$lgamma`
 
 log() -> Tensor
 
-See ?torch_log()
+See `?torch_log()`
 
 ## log10
 
@@ -1809,7 +1809,7 @@ $$
 
 logaddexp(other) -> Tensor
 
-See ?torch_logaddexp()
+See `?torch_logaddexp()`
 
 ## logaddexp2
 
@@ -1821,13 +1821,13 @@ See [torch_logaddexp2()]
 
 logcumsumexp(dim) -> Tensor
 
-See ?torch_logcumsumexp()
+See `?torch_logcumsumexp()`
 
 ## logdet
 
 logdet() -> Tensor
 
-See ?torch_logdet()
+See `?torch_logdet()`
 
 ## logical_and
 
@@ -1881,7 +1881,7 @@ In-place version of `$logical_xor`
 
 logsumexp(dim, keepdim=FALSE) -> Tensor
 
-See ?torch_logsumexp()
+See `?torch_logsumexp()`
 
 ## long
 
@@ -1898,13 +1898,13 @@ long(memory_format=torch_preserve_format) -> Tensor
 
 lstsq(A) -> (Tensor, Tensor)
 
-See ?torch_lstsq()
+See `?torch_lstsq()`
 
 ## lt
 
 lt(other) -> Tensor
 
-See ?torch_lt()
+See `?torch_lt()`
 
 ## lt_
 
@@ -1913,7 +1913,7 @@ lt_(other) -> Tensor
 In-place version of `$lt`
 
 ## lu
-See ?torch_lu()
+See `?torch_lu()`
 ## lu_solve
 
 lu_solve(LU_data, LU_pivots) -> Tensor
@@ -1988,7 +1988,7 @@ See [torch_masked_select()]
 
 matmul(tensor2) -> Tensor
 
-See ?torch_matmul()
+See `?torch_matmul()`
 
 ## matrix_power
 
@@ -2000,43 +2000,43 @@ See [torch_matrix_power()]
 
 max(dim=NULL, keepdim=FALSE) -> Tensor or (Tensor, Tensor)
 
-See ?torch_max()
+See `?torch_max()`
 
 ## mean
 
 mean(dim=NULL, keepdim=FALSE) -> Tensor or (Tensor, Tensor)
 
-See ?torch_mean()
+See `?torch_mean()`
 
 ## median
 
 median(dim=NULL, keepdim=FALSE) -> (Tensor, LongTensor)
 
-See ?torch_median()
+See `?torch_median()`
 
 ## min
 
 min(dim=NULL, keepdim=FALSE) -> Tensor or (Tensor, Tensor)
 
-See ?torch_min()
+See `?torch_min()`
 
 ## mm
 
 mm(mat2) -> Tensor
 
-See ?torch_mm()
+See `?torch_mm()`
 
 ## mode
 
 mode(dim=NULL, keepdim=FALSE) -> (Tensor, LongTensor)
 
-See ?torch_mode()
+See `?torch_mode()`
 
 ## mul
 
 mul(value) -> Tensor
 
-See ?torch_mul()
+See `?torch_mul()`
 
 ## mul_
 
@@ -2048,19 +2048,19 @@ In-place version of `$mul`
 
 multinomial(num_samples, replacement=FALSE, *, generator=NULL) -> Tensor
 
-See ?torch_multinomial()
+See `?torch_multinomial()`
 
 ## mv
 
 mv(vec) -> Tensor
 
-See ?torch_mv()
+See `?torch_mv()`
 
 ## mvlgamma
 
 mvlgamma(p) -> Tensor
 
-See ?torch_mvlgamma()
+See `?torch_mvlgamma()`
 
 ## mvlgamma_
 
@@ -2090,7 +2090,7 @@ The named tensor API is experimental and subject to change.
 
 narrow(dimension, start, length) -> Tensor
 
-See ?torch_narrow()
+See `?torch_narrow()`
 
 #### Examples: 
 
@@ -2124,7 +2124,7 @@ Alias for `$dim()`
 
 ne(other) -> Tensor
 
-See ?torch_ne()
+See `?torch_ne()`
 
 ## ne_
 
@@ -2136,7 +2136,7 @@ In-place version of `$ne`
 
 neg() -> Tensor
 
-See ?torch_neg()
+See `?torch_neg()`
 
 ## neg_
 
@@ -2293,10 +2293,10 @@ tensor$new_zeros(c(2, 3))
 
 nonzero() -> LongTensor
 
-See ?torch_nonzero()
+See `?torch_nonzero()`
 
 ## norm
-See ?torch_norm()
+See `?torch_norm()`
 ## normal_
 
 normal_(mean=0, std=1, *, generator=NULL) -> Tensor
@@ -2308,7 +2308,7 @@ parameterized by `mean` and `std`.
 
 numel() -> int
 
-See ?torch_numel()
+See `?torch_numel()`
 
 ## numpy
 
@@ -2322,13 +2322,13 @@ returned `ndarray` share the same underlying storage. Changes to
 
 orgqr(input2) -> Tensor
 
-See ?torch_orgqr()
+See `?torch_orgqr()`
 
 ## ormqr
 
 ormqr(input2, input3, left=TRUE, transpose=FALSE) -> Tensor
 
-See ?torch_ormqr()
+See `?torch_ormqr()`
 
 ## permute
 
@@ -2358,13 +2358,13 @@ Copies the tensor to pinned memory, if it's not already pinned.
 
 pinverse() -> Tensor
 
-See ?torch_pinverse()
+See `?torch_pinverse()`
 
 ## polygamma
 
 polygamma(n) -> Tensor
 
-See ?torch_polygamma()
+See `?torch_polygamma()`
 
 ## polygamma_
 
@@ -2376,7 +2376,7 @@ In-place version of `$polygamma`
 
 pow(exponent) -> Tensor
 
-See ?torch_pow()
+See `?torch_pow()`
 
 ## pow_
 
@@ -2388,7 +2388,7 @@ In-place version of `$pow`
 
 prod(dim=NULL, keepdim=FALSE, dtype=NULL) -> Tensor
 
-See ?torch_prod()
+See `?torch_prod()`
 
 ## put_
 
@@ -2458,7 +2458,7 @@ returns the zero_point of the underlying quantizer().
 
 qr(some=TRUE) -> (Tensor, Tensor)
 
-See ?torch_qr()
+See `?torch_qr()`
 
 ## qscheme
 
@@ -2510,7 +2510,7 @@ x$real
 
 reciprocal() -> Tensor
 
-See ?torch_reciprocal()
+See `?torch_reciprocal()`
 
 ## reciprocal_
 
@@ -2592,7 +2592,7 @@ h$remove()
 
 remainder(divisor) -> Tensor
 
-See ?torch_remainder()
+See `?torch_remainder()`
 
 ## remainder_
 
@@ -2631,7 +2631,7 @@ In-place version of `$rename`.
 
 renorm(p, dim, maxnorm) -> Tensor
 
-See ?torch_renorm()
+See `?torch_renorm()`
 
 ## renorm_
 
@@ -2719,7 +2719,7 @@ but with the specified shape. This method returns a view if `shape` is
 compatible with the current shape. See `$view` on when it is
 possible to return a view.
 
-See ?torch_reshape()
+See `?torch_reshape()`
 
 #### Arguments: 
 
@@ -2796,13 +2796,13 @@ Enables `$grad` attribute for non-leaf Tensors.
 
 rfft(signal_ndim, normalized=FALSE, onesided=TRUE) -> Tensor
 
-See ?torch_rfft()
+See `?torch_rfft()`
 
 ## roll
 
 roll(shifts, dims) -> Tensor
 
-See ?torch_roll()
+See `?torch_roll()`
 
 ## rot90
 
@@ -2814,7 +2814,7 @@ See [torch_rot90()]
 
 round() -> Tensor
 
-See ?torch_round()
+See `?torch_round()`
 
 ## round_
 
@@ -2826,7 +2826,7 @@ In-place version of `$round`
 
 rsqrt() -> Tensor
 
-See ?torch_rsqrt()
+See `?torch_rsqrt()`
 
 ## rsqrt_
 
@@ -3005,7 +3005,7 @@ short(memory_format=torch_preserve_format) -> Tensor
 
 sigmoid() -> Tensor
 
-See ?torch_sigmoid()
+See `?torch_sigmoid()`
 
 ## sigmoid_
 
@@ -3017,7 +3017,7 @@ In-place version of `$sigmoid`
 
 sign() -> Tensor
 
-See ?torch_sign()
+See `?torch_sign()`
 
 ## sign_
 
@@ -3029,7 +3029,7 @@ In-place version of `$sign`
 
 sin() -> Tensor
 
-See ?torch_sin()
+See `?torch_sin()`
 
 ## sin_
 
@@ -3041,7 +3041,7 @@ In-place version of `$sin`
 
 sinh() -> Tensor
 
-See ?torch_sinh()
+See `?torch_sinh()`
 
 ## sinh_
 
@@ -3066,19 +3066,19 @@ torch_empty(3, 4, 5)$size()
 
 slogdet() -> (Tensor, Tensor)
 
-See ?torch_slogdet()
+See `?torch_slogdet()`
 
 ## solve
 
 solve(A) -> Tensor, Tensor
 
-See ?torch_solve()
+See `?torch_solve()`
 
 ## sort
 
 sort(dim=-1, descending=FALSE) -> (Tensor, LongTensor)
 
-See ?torch_sort()
+See `?torch_sort()`
 
 ## sparse_dim
 
@@ -3103,13 +3103,13 @@ must have the same shape.
 * mask (SparseTensor): a SparseTensor which we filter `input` based on its indices
 
 ## split
-See ?torch_split()
+See `?torch_split()`
         
 ## sqrt
 
 sqrt() -> Tensor
 
-See ?torch_sqrt()
+See `?torch_sqrt()`
 
 ## sqrt_
 
@@ -3121,7 +3121,7 @@ In-place version of `$sqrt`
 
 square() -> Tensor
 
-See ?torch_square()
+See `?torch_square()`
 
 ## square_
 
@@ -3133,7 +3133,7 @@ In-place version of `$square`
 
 squeeze(dim=NULL) -> Tensor
 
-See ?torch_squeeze()
+See `?torch_squeeze()`
 
 ## squeeze_
 
@@ -3145,10 +3145,10 @@ In-place version of `$squeeze`
 
 std(dim=NULL, unbiased=TRUE, keepdim=FALSE) -> Tensor
 
-See ?torch_std()
+See `?torch_std()`
 
 ## stft
-See ?torch_stft()
+See `?torch_stft()`
         
 ## storage
 
@@ -3224,7 +3224,7 @@ In-place version of `$sub`
 
 sum(dim=NULL, keepdim=FALSE, dtype=NULL) -> Tensor
 
-See ?torch_sum()
+See `?torch_sum()`
 
 ## sum_to_size
 
@@ -3241,19 +3241,19 @@ Sum `this` tensor to `size`.
 
 svd(some=TRUE, compute_uv=TRUE) -> (Tensor, Tensor, Tensor)
 
-See ?torch_svd()
+See `?torch_svd()`
 
 ## symeig
 
 symeig(eigenvectors=FALSE, upper=TRUE) -> (Tensor, Tensor)
 
-See ?torch_symeig()
+See `?torch_symeig()`
 
 ## t
 
 t() -> Tensor
 
-See ?torch_t()
+See `?torch_t()`
 
 ## t_
 
@@ -3265,13 +3265,13 @@ In-place version of `$t`
 
 take(indices) -> Tensor
 
-See ?torch_take()
+See `?torch_take()`
 
 ## tan
 
 tan() -> Tensor
 
-See ?torch_tan()
+See `?torch_tan()`
 
 ## tan_
 
@@ -3283,7 +3283,7 @@ In-place version of `$tan`
 
 tanh() -> Tensor
 
-See ?torch_tanh()
+See `?torch_tanh()`
 
 ## tanh_
 
@@ -3382,19 +3382,19 @@ This operation is not differentiable.
 
 topk(k, dim=NULL, largest=TRUE, sorted=TRUE) -> (Tensor, LongTensor)
 
-See ?torch_topk()
+See `?torch_topk()`
 
 ## trace
 
 trace() -> Tensor
 
-See ?torch_trace()
+See `?torch_trace()`
 
 ## transpose
 
 transpose(dim0, dim1) -> Tensor
 
-See ?torch_transpose()
+See `?torch_transpose()`
 
 ## transpose_
 
@@ -3412,7 +3412,7 @@ See [torch_triangular_solve()]
 
 tril(k=0) -> Tensor
 
-See ?torch_tril()
+See `?torch_tril()`
 
 ## tril_
 
@@ -3424,7 +3424,7 @@ In-place version of `$tril`
 
 triu(k=0) -> Tensor
 
-See ?torch_triu()
+See `?torch_triu()`
 
 ## triu_
 
@@ -3448,7 +3448,7 @@ In-place version of `$true_divide_`
 
 trunc() -> Tensor
 
-See ?torch_trunc()
+See `?torch_trunc()`
 
 ## trunc_
 
@@ -3492,7 +3492,7 @@ equivalent to `self$type(tensor.type())`
 
 unbind(dim=0) -> seq
 
-See ?torch_unbind()
+See `?torch_unbind()`
 
 ## unflatten
 
@@ -3539,7 +3539,7 @@ $$
 
 Returns the unique elements of the input tensor.
 
-See ?torch_unique()
+See `?torch_unique()`
         
 ## unique_consecutive
 
@@ -3551,7 +3551,7 @@ See [torch_unique_consecutive()]
 
 unsqueeze(dim) -> Tensor
 
-See ?torch_unsqueeze()
+See `?torch_unsqueeze()`
 
 ## unsqueeze_
 
@@ -3577,7 +3577,7 @@ This method can only be called on a coalesced sparse tensor. See
 
 var(dim=NULL, unbiased=TRUE, keepdim=FALSE) -> Tensor
 
-See ?torch_var()
+See `?torch_var()`
 
 ## view
 
@@ -3626,7 +3626,7 @@ Please see `$view` for more information about `view`.
 where(condition, y) -> Tensor
 
 `self$where(condition, y)` is equivalent to `torch_where(condition, self, y)`.
-See ?torch_where()
+See `?torch_where()`
 
 ## zero_
 
