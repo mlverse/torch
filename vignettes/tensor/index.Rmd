@@ -252,10 +252,9 @@ named_tensor <- tensor$refine_names(names = c('A', 'B', 'C', 'D', 'E', 'F'))
 named_tensor$align_to(c("A", "B", "F", "C", "E", "D"))
 ```
 
-
-
-        .. warning::
-            The named tensor API is experimental and subject to change.
+#### Warning:
+            
+The named tensor API is experimental and subject to change.
 
         
 ## all
@@ -329,7 +328,7 @@ Returns TRUE if any elements in each row of the tensor in the given
 dimension `dim` are TRUE, FALSE otherwise.
 
 If `keepdim` is `TRUE`, the output tensor is of the same size as
-`input` except in the dimension :attr:`dim` where it is of size 1.
+`input` except in the dimension `dim` where it is of size 1.
 Otherwise, `dim` is squeezed (see [torch_squeeze()]), resulting
 in the output tensor having 1 fewer dimension than `input`.
 
@@ -498,7 +497,7 @@ In-place version of `$baddbmm`
 bernoulli(*, generator=NULL) -> Tensor
 
 Returns a result tensor where each `\texttt{result[i]}` is independently
-sampled from `\text{Bernoulli}(\texttt{self[i]})`. :attr:`self` must have
+sampled from `\text{Bernoulli}(\texttt{self[i]})`. `self` must have
 floating point `dtype`, and the result will have the same `dtype`.
 
 See [torch_bernoulli()]
@@ -508,7 +507,7 @@ See [torch_bernoulli()]
 bernoulli_(p=0.5, *, generator=NULL) -> Tensor
 
 Fills each location of `self` with an independent sample from
-`\text{Bernoulli}(\texttt{p})`. :attr:`self` can have integral
+`\text{Bernoulli}(\texttt{p})`. `self` can have integral
 `dtype`.
 
 bernoulli_(p_tensor, *, generator=NULL) -> Tensor
@@ -516,10 +515,10 @@ bernoulli_(p_tensor, *, generator=NULL) -> Tensor
 `p_tensor` should be a tensor containing probabilities to be used for
 drawing the binary random number.
 
-The `\text{i}^{th}` element of :attr:`self` tensor will be set to a
+The `\text{i}^{th}` element of `self` tensor will be set to a
 value sampled from `\text{Bernoulli}(\texttt{p\_tensor[i]})`.
 
-`self` can have integral `dtype`, but :attr:`p_tensor` must have
+`self` can have integral `dtype`, but `p_tensor` must have
 floating point `dtype`.
 
 See also `$bernoulli` and [torch_bernoulli()]
@@ -725,7 +724,7 @@ Returns a contiguous in memory tensor containing the same data as `self` tensor.
 
 copy_(src, non_blocking=FALSE) -> Tensor
 
-Copies the elements from `src` into :attr:`self` tensor and returns
+Copies the elements from `src` into `self` tensor and returns
 `self`.
 
 The `src` tensor must be :ref:`broadcastable <broadcasting-semantics>`
@@ -1383,12 +1382,12 @@ Out-of-place version of `$index_add_`.
 
 index_add_(dim, index, tensor) -> Tensor
 
-Accumulate the elements of `tensor` into the :attr:`self` tensor by adding
+Accumulate the elements of `tensor` into the `self` tensor by adding
 to the indices in the order given in `index`. For example, if `dim == 0`
 and `index[i] == j`, then the `i`\ th row of `tensor` is added to the
 `j`\ th row of `self`.
 
-The `dim`\ th dimension of :attr:`tensor` must have the same size as the
+The `dim`\ th dimension of `tensor` must have the same size as the
 length of `index` (which must be a vector), and all other dimensions must
 match `self`, or an error will be raised.
 
@@ -1426,12 +1425,12 @@ Out-of-place version of `$index_copy_`.
 
 index_copy_(dim, index, tensor) -> Tensor
 
-Copies the elements of `tensor` into the :attr:`self` tensor by selecting
+Copies the elements of `tensor` into the `self` tensor by selecting
 the indices in the order given in `index`. For example, if `dim == 0`
 and `index[i] == j`, then the `i`\ th row of `tensor` is copied to the
 `j`\ th row of `self`.
 
-The `dim`\ th dimension of :attr:`tensor` must have the same size as the
+The `dim`\ th dimension of `tensor` must have the same size as the
 length of `index` (which must be a vector), and all other dimensions must
 match `self`, or an error will be raised.
 
@@ -1462,7 +1461,7 @@ Out-of-place version of `$index_fill_`.
 
 index_fill_(dim, index, val) -> Tensor
 
-Fills the elements of the `self` tensor with value :attr:`val` by
+Fills the elements of the `self` tensor with value `val` by
 selecting the indices in the order given in `index`.
 
 #### Arguments: 
@@ -1489,12 +1488,12 @@ Out-place version of `$index_put_`.
 
 index_put_(indices, value, accumulate=FALSE) -> Tensor
 
-Puts values from the tensor `value` into the tensor :attr:`self` using
+Puts values from the tensor `value` into the tensor `self` using
 the indices specified in `indices` (which is a tuple of Tensors). The
 expression `tensor.index_put_(indices, value)` is equivalent to
 `tensor[indices] = value`. Returns `self`.
 
-If `accumulate` is `TRUE`, the elements in :attr:`value` are added to
+If `accumulate` is `TRUE`, the elements in `value` are added to
 `self`. If accumulate is `FALSE`, the behavior is undefined if indices
 contain duplicate elements.
 
@@ -1797,7 +1796,7 @@ log_normal_(mean=1, std=2, *, generator=NULL)
 
 Fills `self` tensor with numbers samples from the log-normal distribution
 parameterized by the given mean `\mu` and standard deviation
-`\sigma`. Note that :attr:`mean` and :attr:`std` are the mean and
+`\sigma`. Note that `mean` and `std` are the mean and
 standard deviation of the underlying normal distribution, and not of the
 returned distribution:
 
@@ -1942,7 +1941,7 @@ Out-of-place version of `$masked_fill_`
 
 masked_fill_(mask, value)
 
-Fills elements of `self` tensor with :attr:`value` where :attr:`mask` is
+Fills elements of `self` tensor with `value` where `mask` is
 TRUE. The shape of `mask` must be
 `broadcastable <broadcasting-semantics>` with the shape of the underlying
 tensor.
@@ -1962,7 +1961,7 @@ Out-of-place version of `$masked_scatter_`
 
 masked_scatter_(mask, source)
 
-Copies elements from `source` into :attr:`self` tensor at positions where
+Copies elements from `source` into `self` tensor at positions where
 the `mask` is TRUE.
 The shape of `mask` must be :ref:`broadcastable <broadcasting-semantics>`
 with the shape of the underlying tensor. The `source` should have at least
@@ -1975,7 +1974,7 @@ as many elements as the number of ones in `mask`
 
 #### Note: 
 
-The `mask` operates on the :attr:`self` tensor, not on the given
+The `mask` operates on the `self` tensor, not on the given
 `source` tensor.
 
 ## masked_select
@@ -2178,7 +2177,7 @@ tensor$new_empty(c(2, 3))
 
 new_full(size, fill_value, dtype=NULL, device=NULL, requires_grad=FALSE) -> Tensor
 
-Returns a Tensor of size `size` filled with :attr:`fill_value`.
+Returns a Tensor of size `size` filled with `fill_value`.
 By default, the returned Tensor has the same `torch_dtype` and
 `torch_device` as this tensor.
 
@@ -2302,7 +2301,7 @@ See [torch_norm()]
 normal_(mean=0, std=1, *, generator=NULL) -> Tensor
 
 Fills `self` tensor with elements samples from the normal distribution
-parameterized by `mean` and :attr:`std`.
+parameterized by `mean` and `std`.
 
 ## numel
 
@@ -2398,7 +2397,7 @@ Copies the elements from `tensor` into the positions specified by
 indices. For the purpose of indexing, the `self` tensor is treated as if
 it were a 1-D tensor.
 
-If `accumulate` is `TRUE`, the elements in :attr:`tensor` are added to
+If `accumulate` is `TRUE`, the elements in `tensor` are added to
 `self`. If accumulate is `FALSE`, the behavior is undefined if indices
 contain duplicate elements.
 
@@ -2537,7 +2536,7 @@ have used the tensor.
 
 ## refine_names
 
-Refines the dimension names of `self` according to :attr:`names`.
+Refines the dimension names of `self` according to `names`.
 
 Refining is a special case of renaming that "lifts" unnamed dimensions.
 A `NULL` dim can be refined to have any name; a named dim can only be
@@ -2844,8 +2843,8 @@ Out-of-place version of `$scatter_`
 
 scatter_(dim, index, src) -> Tensor
 
-Writes all values from the tensor `src` into :attr:`self` at the indices
-specified in the `index` tensor. For each value in :attr:`src`, its output
+Writes all values from the tensor `src` into `self` at the indices
+specified in the `index` tensor. For each value in `src`, its output
 index is specified by its index in `src` for `dimension != dim` and by
 the corresponding value in `index` for `dimension = dim`.
 
@@ -2906,10 +2905,10 @@ Out-of-place version of `$scatter_add_`
 
 scatter_add_(dim, index, src) -> Tensor
 
-Adds all values from the tensor `other` into :attr:`self` at the indices
+Adds all values from the tensor `other` into `self` at the indices
 specified in the `index` tensor in a similar fashion as
-`~$scatter_`. For each value in :attr:`src`, it is added to
-an index in `self` which is specified by its index in :attr:`src`
+`~$scatter_`. For each value in `src`, it is added to
+an index in `self` which is specified by its index in `src`
 for `dimension != dim` and by the corresponding value in `index` for
 `dimension = dim`.
 
@@ -2921,7 +2920,7 @@ self[i][index[i][j][k]][k] += src[i][j][k]  # if dim == 1
 self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2
 ```
 
-`self`, :attr:`index` and :attr:`src` should have same number of
+`self`, `index` and `src` should have same number of
 dimensions. It is also required that `index.size(d) <= src.size(d)` for all
 dimensions `d`, and that `index.size(d) <= self$size(d)` for all dimensions
 `d != dim`.
@@ -3094,7 +3093,7 @@ See also `Tensor.dense_dim`.
 sparse_mask(input, mask) -> Tensor
 
 Returns a new SparseTensor with values from Tensor `input` filtered
-by indices of `mask` and values are ignored. :attr:`input` and :attr:`mask`
+by indices of `mask` and values are ignored. `input` and `mask`
 must have the same shape.
 
 #### Arguments: 
@@ -3149,10 +3148,6 @@ See [torch_std()]
 
 ## stft
 See [torch_stft()]
-
-        .. warning::
-          This function changed signature at version 0.4.1. Calling with
-          the previous signature may cause error or return incorrect result.
         
 ## storage
 
@@ -3209,11 +3204,11 @@ x$stride(-1)
 
 sub(other, *, alpha=1) -> Tensor
 
-Subtracts a scalar or tensor from `self` tensor. If both :attr:`alpha`
-and `other` are specified, each element of :attr:`other` is scaled by
+Subtracts a scalar or tensor from `self` tensor. If both `alpha`
+and `other` are specified, each element of `other` is scaled by
 `alpha` before being used.
 
-When `other` is a tensor, the shape of :attr:`other` must be
+When `other` is a tensor, the shape of `other` must be
 `broadcastable <broadcasting-semantics>` with the shape of the underlying
 tensor.
 
@@ -3323,7 +3318,7 @@ Returns a Tensor with the specified `dtype`
 to(device=NULL, dtype=NULL, non_blocking=FALSE, copy=FALSE, memory_format=torch_preserve_format) -> Tensor
 
 Returns a Tensor with the specified `device` and (optional)
-`dtype`. If :attr:`dtype` is `NULL` it is inferred to be `self$dtype`.
+`dtype`. If `dtype` is `NULL` it is inferred to be `self$dtype`.
 When `non_blocking`, tries to convert asynchronously with respect to
 the host if possible, e.g., converting a CPU Tensor with pinned memory to a
 CUDA Tensor.
@@ -3339,7 +3334,7 @@ already matches the desired conversion.
 function:: to(other, non_blocking=FALSE, copy=FALSE) -> Tensor
 
 Returns a Tensor with same `torch_dtype` and :class:`torch_device` as
-the Tensor `other`. When :attr:`non_blocking`, tries to convert
+the Tensor `other`. When `non_blocking`, tries to convert
 asynchronously with respect to the host if possible, e.g., converting a CPU
 Tensor with pinned memory to a CUDA Tensor.
 
@@ -3512,11 +3507,11 @@ specified by `namedshape`.
 unfold(dimension, size, step) -> Tensor
 
 Returns a view of the original tensor which contains all slices of size `size` from
-`self` tensor in the dimension :attr:`dimension`.
+`self` tensor in the dimension `dimension`.
 
 Step between two slices is given by `step`.
 
-If `sizedim` is the size of dimension `dimension` for :attr:`self`, the size of
+If `sizedim` is the size of dimension `dimension` for `self`, the size of
 dimension `dimension` in the returned tensor will be
 `(sizedim - size) / step + 1`.
 
@@ -3601,7 +3596,7 @@ $$
 \text{stride}[i] = \text{stride}[i+1] \times \text{size}[i+1]
 $$
 
-Otherwise, it will not be possible to view `self` tensor as :attr:`shape`
+Otherwise, it will not be possible to view `self` tensor as `shape`
 without copying it (e.g., via `contiguous`). When it is unclear whether a
 `view` can be performed, it is advisable to use :meth:`reshape`, which
 returns a view if the shapes are compatible, and copies (equivalent to calling
