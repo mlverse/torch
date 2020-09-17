@@ -102,6 +102,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -267,25 +270,25 @@
 <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">2</span>, <span class="fl">3</span>)
 <span class="kw">x</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  1.7212  1.1270 -0.3562</span>
-<span class="co">#&gt;  1.2737 -0.4208 -1.4081</span>
+<span class="co">#&gt; -0.2826  0.4459  0.9421</span>
+<span class="co">#&gt; -1.3374 -1.7745  0.5938</span>
 <span class="co">#&gt; [ CPUFloatType{2,3} ]</span>
 </pre></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">x</span>[<span class="fl">1</span>,]
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  1.7212</span>
-<span class="co">#&gt;  1.1270</span>
-<span class="co">#&gt; -0.3562</span>
+<span class="co">#&gt; -0.2826</span>
+<span class="co">#&gt;  0.4459</span>
+<span class="co">#&gt;  0.9421</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span>
 </pre></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="kw">x</span>[,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>]
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  1.7212  1.1270</span>
-<span class="co">#&gt;  1.2737 -0.4208</span>
+<span class="co">#&gt; -0.2826  0.4459</span>
+<span class="co">#&gt; -1.3374 -1.7745</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 </pre></div>
 </div>
@@ -364,7 +367,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

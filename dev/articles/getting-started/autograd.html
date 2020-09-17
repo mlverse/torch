@@ -102,6 +102,9 @@
     <li>
       <a href="../../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../../articles/loading-data.html">Loading Data</a>
@@ -216,8 +219,8 @@
 <span class="co">#&gt; [1] FALSE</span>
 <span class="kw">a</span><span class="op">$</span><span class="fu">requires_grad_</span>(<span class="fl">TRUE</span>)
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  12.1823 -29.5128</span>
-<span class="co">#&gt;  43.6238  -2.5205</span>
+<span class="co">#&gt;   9.7071   1.0698</span>
+<span class="co">#&gt;  -3.3677  10.5167</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="kw">a</span><span class="op">$</span><span class="kw">requires_grad</span>
 <span class="co">#&gt; [1] TRUE</span>
@@ -275,9 +278,9 @@
 <span class="kw">y</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="kw">x</span>
 <span class="kw">y</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  107.0964</span>
-<span class="co">#&gt;  152.6837</span>
-<span class="co">#&gt;   51.1541</span>
+<span class="co">#&gt;  22.6973</span>
+<span class="co">#&gt; -41.2841</span>
+<span class="co">#&gt; -22.9687</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span>
 </pre></div>
 <p>Now in this case y is no longer a scalar. <code>autograd</code> could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:</p>
@@ -335,7 +338,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
