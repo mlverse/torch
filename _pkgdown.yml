@@ -46,6 +46,8 @@ navbar:
        href: articles/tensor-creation.html
      - text: Indexing
        href: articles/indexing.html
+     - text: Tensor class
+       href: articles/tensor/index.html
      - text: Datasets
      - text: Loading Data
        href: articles/loading-data.html
