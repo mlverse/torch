@@ -75,7 +75,7 @@ for learning nonlinear embeddings or semi-supervised learning." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -145,6 +145,9 @@ for learning nonlinear embeddings or semi-supervised learning." />
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -199,11 +202,11 @@ for learning nonlinear embeddings or semi-supervised learning.</p>
     </div>
 
     <pre class="usage"><span class='fu'>nnf_cosine_embedding_loss</span>(
-  <span class='no'>input1</span>,
-  <span class='no'>input2</span>,
-  <span class='no'>target</span>,
-  <span class='kw'>margin</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>reduction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mean"</span>, <span class='st'>"sum"</span>, <span class='st'>"none"</span>)
+  <span class='kw'>input1</span>,
+  <span class='kw'>input2</span>,
+  <span class='kw'>target</span>,
+  margin = <span class='fl'>0</span>,
+  reduction = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mean"</span>, <span class='st'>"sum"</span>, <span class='st'>"none"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -251,7 +254,7 @@ the sum of the output will be divided by the number of elements in the output,
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

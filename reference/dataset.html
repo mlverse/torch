@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>An abstract class representing a <code>Dataset</code>. — dataset • torch</title>
+<title>An abstract class representing a Dataset. — dataset • torch</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="An abstract class representing a <code>Dataset</code>. — dataset" />
+<meta property="og:title" content="An abstract class representing a Dataset. — dataset" />
 <meta property="og:description" content="All datasets that represent a map from keys to data samples should subclass
 it. All subclasses should overwrite get_item, supporting fetching a
 data sample for a given key. Subclasses could also optionally overwrite
@@ -77,7 +77,7 @@ of ~torch.utils.data.DataLoader." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -147,6 +147,9 @@ of ~torch.utils.data.DataLoader." />
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -202,7 +205,7 @@ data sample for a given key. Subclasses could also optionally overwrite
 of <code>~torch.utils.data.DataLoader</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dataset</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>inherit</span> <span class='kw'>=</span> <span class='no'>Dataset</span>, <span class='no'>...</span>, <span class='kw'>parent_env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'>dataset</span>(name = <span class='kw'>NULL</span>, inherit = <span class='kw'>Dataset</span>, <span class='kw'>...</span>, parent_env = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -249,7 +252,7 @@ dataset with non-integral indices/keys, a custom sampler must be provided.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -192,14 +195,14 @@
     <p>Applies a linear transformation to the incoming data: \(y = xA^T + b\).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_linear</span>(<span class='no'>input</span>, <span class='no'>weight</span>, <span class='kw'>bias</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>nnf_linear</span>(<span class='kw'>input</span>, <span class='kw'>weight</span>, bias = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>\((N, *, in\_features)\) where <code>*</code> means any number of
+      <td><p>\((N, *, in\_features)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> means any number of
 additional dimensions</p></td>
     </tr>
     <tr>
@@ -228,7 +231,7 @@ additional dimensions</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

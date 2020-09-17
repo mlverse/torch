@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Triangular_solve</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_triangular_solve.Rd</code></div>
     </div>
 
@@ -192,12 +195,19 @@
     <p>Triangular_solve</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_triangular_solve</span>(
+  <span class='kw'>self</span>,
+  <span class='kw'>A</span>,
+  upper = <span class='fl'>TRUE</span>,
+  transpose = <span class='fl'>FALSE</span>,
+  unitriangular = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) multiple right-hand sides of size \((*, m, k)\) where                \(*\) is zero of more batch dimensions (\(b\))</p></td>
     </tr>
     <tr>
@@ -206,19 +216,19 @@
     </tr>
     <tr>
       <th>upper</th>
-      <td><p>(bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: <code>True</code>.</p></td>
+      <td><p>(bool, optional) whether to solve the upper-triangular system        of equations (default) or the lower-triangular system of equations. Default: <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>transpose</th>
-      <td><p>(bool, optional) whether \(A\) should be transposed before        being sent into the solver. Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) whether \(A\) should be transposed before        being sent into the solver. Default: <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>unitriangular</th>
-      <td><p>(bool, optional) whether \(A\) is unit triangular.        If True, the diagonal elements of \(A\) are assumed to be        1 and not referenced from \(A\). Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) whether \(A\) is unit triangular.        If TRUE, the diagonal elements of \(A\) are assumed to be        1 and not referenced from \(A\). Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="triangular-solve-input-a-upper-true-transpose-false-unitriangular-false-gt-tensor-tensor-"><a class="anchor" href="#triangular-solve-input-a-upper-true-transpose-false-unitriangular-false-gt-tensor-tensor-"></a>triangular_solve(input, A, upper=True, transpose=False, unitriangular=False) -&gt; (Tensor, Tensor) </h2>
+    <h2 class="hasAnchor" id="triangular-solve-input-a-upper-true-transpose-false-unitriangular-false-gt-tensor-tensor-"><a class="anchor" href="#triangular-solve-input-a-upper-true-transpose-false-unitriangular-false-gt-tensor-tensor-"></a>triangular_solve(input, A, upper=TRUE, transpose=False, unitriangular=False) -&gt; (Tensor, Tensor) </h2>
 
     
 
@@ -232,14 +242,26 @@ batches of 2D matrices. If the inputs are batches, then returns
 batched outputs <code>X</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>A</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))$<span class='fu'>triu</span>()
-<span class='no'>A</span>
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='no'>b</span>
-<span class='fu'>torch_triangular_solve</span>(<span class='no'>b</span>, <span class='no'>A</span>)
-}</div></pre>
+<span class='kw'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))<span class='op'>$</span><span class='fu'>triu</span>()
+<span class='kw'>A</span>
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
+<span class='kw'>b</span>
+<span class='fu'>torch_triangular_solve</span>(<span class='kw'>b</span>, <span class='kw'>A</span>)
+}
+</div><div class='output co'>#&gt; [[1]]
+#&gt; torch_tensor 
+#&gt;  0.4109  0.9677 -1.1349
+#&gt;  0.3379 -1.1479  0.8117
+#&gt; [ CPUFloatType{2,3} ]
+#&gt; 
+#&gt; [[2]]
+#&gt; torch_tensor 
+#&gt; -1.2309 -0.1501
+#&gt;  0.0000  1.1900
+#&gt; [ CPUFloatType{2,2} ]
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -255,7 +277,7 @@ batched outputs <code>X</code></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

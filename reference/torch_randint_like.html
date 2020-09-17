@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Randint_like</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/creation-ops.R'><code>R/creation-ops.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_randint_like.Rd</code></div>
     </div>
 
@@ -192,6 +195,15 @@
     <p>Randint_like</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_randint_like</span>(
+  <span class='kw'>input</span>,
+  <span class='kw'>low</span>,
+  <span class='kw'>high</span>,
+  dtype = <span class='kw'>NULL</span>,
+  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
+  device = <span class='kw'>NULL</span>,
+  requires_grad = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,27 +222,23 @@
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned Tensor.        Default: if <code>None</code>, defaults to the dtype of <code>input</code>.</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned Tensor.        Default: if <code>NULL</code>, defaults to the dtype of <code>input</code>.</p></td>
     </tr>
     <tr>
       <th>layout</th>
-      <td><p>(<code>torch.layout</code>, optional) the desired layout of returned tensor.        Default: if <code>None</code>, defaults to the layout of <code>input</code>.</p></td>
+      <td><p>(<code>torch.layout</code>, optional) the desired layout of returned tensor.        Default: if <code>NULL</code>, defaults to the layout of <code>input</code>.</p></td>
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>None</code>, defaults to the device of <code>input</code>.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, defaults to the device of <code>input</code>.</p></td>
     </tr>
     <tr>
       <th>requires_grad</th>
-      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
-    </tr>
-    <tr>
-      <th>memory_format</th>
-      <td><p>(<code>torch.memory_format</code>, optional) the desired memory format of        returned Tensor. Default: <code>torch_preserve_format</code>.</p></td>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="randint-like-input-low-high-dtype-none-layout-torch-strided-device-none-requires-grad-false-"><a class="anchor" href="#randint-like-input-low-high-dtype-none-layout-torch-strided-device-none-requires-grad-false-"></a>randint_like(input, low=0, high, dtype=None, layout=torch.strided, device=None, requires_grad=False, </h2>
+    <h2 class="hasAnchor" id="randint-like-input-low-high-dtype-null-layout-torch-strided-device-null-requires-grad-false-"><a class="anchor" href="#randint-like-input-low-high-dtype-null-layout-torch-strided-device-null-requires-grad-false-"></a>randint_like(input, low=0, high, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False, </h2>
 
     
 
@@ -258,7 +266,7 @@ a tensor with dtype <code>torch_int64</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

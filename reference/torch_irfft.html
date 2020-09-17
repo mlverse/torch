@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Irfft</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_irfft.Rd</code></div>
     </div>
 
@@ -192,12 +195,19 @@
     <p>Irfft</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_irfft</span>(
+  <span class='kw'>self</span>,
+  <span class='kw'>signal_ndim</span>,
+  normalized = <span class='fl'>FALSE</span>,
+  onesided = <span class='fl'>TRUE</span>,
+  signal_sizes = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor of at least <code>signal_ndim</code> <code>+ 1</code>        dimensions</p></td>
     </tr>
     <tr>
@@ -206,15 +216,15 @@
     </tr>
     <tr>
       <th>normalized</th>
-      <td><p>(bool, optional) controls whether to return normalized results.        Default: <code>False</code></p></td>
+      <td><p>(bool, optional) controls whether to return normalized results.        Default: <code>FALSE</code></p></td>
     </tr>
     <tr>
       <th>onesided</th>
-      <td><p>(bool, optional) controls whether <code>input</code> was halfed to avoid        redundancy, e.g., by <code><a href='torch_rfft.html'>torch_rfft()</a></code>. Default: <code>True</code></p></td>
+      <td><p>(bool, optional) controls whether <code>input</code> was halfed to avoid        redundancy, e.g., by <code><a href='torch_rfft.html'>torch_rfft()</a></code>. Default: <code>TRUE</code></p></td>
     </tr>
     <tr>
       <th>signal_sizes</th>
-      <td><p>(list or <code>torch.Size</code>, optional) the size of the original        signal (without batch dimension). Default: <code>None</code></p></td>
+      <td><p>(list or <code>torch.Size</code>, optional) the size of the original        signal (without batch dimension). Default: <code>NULL</code></p></td>
     </tr>
     </table>
 
@@ -224,8 +234,8 @@
 <pre>Due to the conjugate symmetry, `input` do not need to contain the full
 complex frequency values. Roughly half of the values will be sufficient, as
 is the case when `input` is given by [`~torch.rfft`] with
-``rfft(signal, onesided=True)``. In such case, set the `onesided`
-argument of this method to ``True``. Moreover, the original signal shape
+`rfft(signal, onesided=TRUE)`. In such case, set the `onesided`
+argument of this method to `TRUE`. Moreover, the original signal shape
 information can sometimes be lost, optionally set `signal_sizes` to be
 the size of the original signal (without the batch dimensions if in batched
 mode) to recover it with correct shape.
@@ -245,7 +255,7 @@ configuration. See cufft-plan-cache for more details on how to
 monitor and control the cache.
 </pre>
 
-    <h2 class="hasAnchor" id="irfft-input-signal-ndim-normalized-false-onesided-true-signal-sizes-none-gt-tensor-"><a class="anchor" href="#irfft-input-signal-ndim-normalized-false-onesided-true-signal-sizes-none-gt-tensor-"></a>irfft(input, signal_ndim, normalized=False, onesided=True, signal_sizes=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="irfft-input-signal-ndim-normalized-false-onesided-true-signal-sizes-null-gt-tensor-"><a class="anchor" href="#irfft-input-signal-ndim-normalized-false-onesided-true-signal-sizes-null-gt-tensor-"></a>irfft(input, signal_ndim, normalized=False, onesided=TRUE, signal_sizes=NULL) -&gt; Tensor </h2>
 
     
 
@@ -255,7 +265,7 @@ monitor and control the cache.
 It is mathematically equivalent with <code><a href='torch_ifft.html'>torch_ifft</a></code> with differences only in
 formats of the input and output.</p>
 <p>The argument specifications are almost identical with <code><a href='torch_ifft.html'>torch_ifft</a></code>.
-Similar to <code><a href='torch_ifft.html'>torch_ifft</a></code>, if <code>normalized</code> is set to <code>True</code>,
+Similar to <code><a href='torch_ifft.html'>torch_ifft</a></code>, if <code>normalized</code> is set to <code>TRUE</code>,
 this normalizes the result by multiplying it with
 \(\sqrt{\prod_{i=1}^K N_i}\) so that the operator is unitary, where
 \(N_i\) is the size of signal dimension \(i\).</p>
@@ -265,7 +275,7 @@ this normalizes the result by multiplying it with
 
 <p>Generally speaking, input to this function should contain values
 following conjugate symmetry. Note that even if <code>onesided</code> is
-<code>True</code>, often symmetry on some part is still needed. When this
+<code>TRUE</code>, often symmetry on some part is still needed. When this
 requirement is not satisfied, the behavior of <code>torch_irfft</code> is
 undefined. Since <code>torch_autograd.gradcheck</code> estimates numerical
 Jacobian with point perturbations, <code>torch_irfft</code> will almost
@@ -275,15 +285,21 @@ certainly fail the check.</p>
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'>torch_irfft</span>(<span class='no'>y</span>, <span class='fl'>2</span>, <span class='kw'>onesided</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>signal_sizes</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span>
-}</div></pre>
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
+<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
+<span class='kw'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
+<span class='fu'>torch_irfft</span>(<span class='kw'>y</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>, signal_sizes=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span>
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1.7386  0.5846 -0.6663  0.3008 -0.1810
+#&gt;  0.0814  2.4900  1.2272 -0.2319  0.5622
+#&gt; -0.8749 -1.5165 -0.6694 -0.5210  0.5308
+#&gt; -0.0270 -0.4637 -1.4373  0.0673  1.4982
+#&gt; [ CPUFloatType{4,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -299,7 +315,7 @@ certainly fail the check.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

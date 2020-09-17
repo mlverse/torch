@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -205,19 +208,20 @@ $$</p>
     
 
 <ul>
-<li><p>Input: \((N, *)\) where <code>*</code> means, any number of additional
+<li><p>Input: \((N, *)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> means, any number of additional
 dimensions</p></li>
 <li><p>Output: \((N, *)\), same shape as the input</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_tanhshrink</span>()
-<span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_tanhshrink</span>()
+<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>)
+<span class='kw'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
 
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -233,7 +237,7 @@ dimensions</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

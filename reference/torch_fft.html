@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Fft</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_fft.Rd</code></div>
     </div>
 
@@ -192,12 +195,13 @@
     <p>Fft</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_fft</span>(<span class='kw'>self</span>, <span class='kw'>signal_ndim</span>, normalized = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor of at least <code>signal_ndim</code> <code>+ 1</code>        dimensions</p></td>
     </tr>
     <tr>
@@ -206,7 +210,7 @@
     </tr>
     <tr>
       <th>normalized</th>
-      <td><p>(bool, optional) controls whether to return normalized results.        Default: <code>False</code></p></td>
+      <td><p>(bool, optional) controls whether to return normalized results.        Default: <code>FALSE</code></p></td>
     </tr>
     </table>
 
@@ -239,7 +243,7 @@ by <code>signal_ndim</code>. <code>input</code> must be a tensor with last dimen
 of size 2, representing the real and imaginary components of complex
 numbers, and should have at least <code>signal_ndim + 1</code> dimensions with optionally
 arbitrary number of leading batch dimensions. If <code>normalized</code> is set to
-<code>True</code>, this normalizes the result by dividing it with
+<code>TRUE</code>, this normalizes the result by dividing it with
 \(\sqrt{\prod_{i=1}^K N_i}\) so that the operator is unitary.</p>
 <p>Returns the real and the imaginary parts together as one tensor of the same
 shape of <code>input</code>.</p>
@@ -252,18 +256,334 @@ shape of <code>input</code>.</p>
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
 <span class='co'># unbatched 2D FFT</span>
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
-<span class='fu'>torch_fft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
+<span class='fu'>torch_fft</span>(<span class='kw'>x</span>, <span class='fl'>2</span>)
 <span class='co'># batched 1D FFT</span>
-<span class='fu'>torch_fft</span>(<span class='no'>x</span>, <span class='fl'>1</span>)
+<span class='fu'>torch_fft</span>(<span class='kw'>x</span>, <span class='fl'>1</span>)
 <span class='co'># arbitrary number of batch dimensions, 2D FFT</span>
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>2</span>))
-<span class='fu'>torch_fft</span>(<span class='no'>x</span>, <span class='fl'>2</span>)
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>2</span>))
+<span class='fu'>torch_fft</span>(<span class='kw'>x</span>, <span class='fl'>2</span>)
 
-}</div></pre>
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,1,1,.,.) = 
+#&gt;   -3.5686  -0.7575
+#&gt;   -0.9110   3.0255
+#&gt;   11.9251   0.8822
+#&gt;   11.8014   5.3858
+#&gt;    5.8462 -12.1556
+#&gt; 
+#&gt; (2,1,1,.,.) = 
+#&gt;   4.7089 -3.9589
+#&gt;  -8.4639 -3.9255
+#&gt;  -0.4952 -11.0552
+#&gt;  -0.1713 -5.6661
+#&gt;  -5.7493 -1.4321
+#&gt; 
+#&gt; (3,1,1,.,.) = 
+#&gt;  -7.2831  0.6017
+#&gt;   0.8504 -3.4139
+#&gt;   0.0712  7.0966
+#&gt;   3.9787 -0.9188
+#&gt;   7.0125 -6.0596
+#&gt; 
+#&gt; (1,2,1,.,.) = 
+#&gt;   1.7555  1.8364
+#&gt;   3.2766  1.2616
+#&gt;   2.3623  8.5845
+#&gt;   3.9022  7.0934
+#&gt;   2.8848  1.5320
+#&gt; 
+#&gt; (2,2,1,.,.) = 
+#&gt;   6.4026  9.1591
+#&gt;  -0.3073 -5.6671
+#&gt;   3.6115 -0.4895
+#&gt;  -10.6002 -2.3799
+#&gt;  -8.2712 -6.7868
+#&gt; 
+#&gt; (3,2,1,.,.) = 
+#&gt;  -5.7464  6.6129
+#&gt;  -0.5858  1.9289
+#&gt;   9.6124  5.2303
+#&gt;   2.7807 -2.0940
+#&gt;   2.7963 -4.3982
+#&gt; 
+#&gt; (1,3,1,.,.) = 
+#&gt;   1.3732 -4.0567
+#&gt;   1.6165 -8.0190
+#&gt;  -2.8664  3.5672
+#&gt;   5.9506 -0.5644
+#&gt;  -7.0809  1.9352
+#&gt; 
+#&gt; (2,3,1,.,.) = 
+#&gt;   8.8405  5.2406
+#&gt;  -1.4716 -5.5854
+#&gt;   8.5659  0.9253
+#&gt;   3.2954 -1.5305
+#&gt;   3.8698 -10.1214
+#&gt; 
+#&gt; (3,3,1,.,.) = 
+#&gt;  -2.9906  3.1035
+#&gt;  -2.4267  0.8469
+#&gt;   0.4349 -2.6360
+#&gt;   5.0007  1.6405
+#&gt;  -8.2372 -2.8690
+#&gt; 
+#&gt; (1,1,2,.,.) = 
+#&gt;   1.6505 -2.8279
+#&gt;  -3.1168 -5.8456
+#&gt;  -4.9219 -3.6338
+#&gt;   0.7485  4.2856
+#&gt;   0.3340 -1.0839
+#&gt; 
+#&gt; (2,1,2,.,.) = 
+#&gt;  -4.5411 -1.3995
+#&gt;   0.6041  0.6591
+#&gt;   2.6971  0.0667
+#&gt;   0.1509 -3.2606
+#&gt;  -1.6997 -5.7515
+#&gt; 
+#&gt; (3,1,2,.,.) = 
+#&gt;  -0.9648  2.3399
+#&gt;   3.2859  2.6885
+#&gt;   3.5364 -9.5266
+#&gt;  -6.3387  4.7638
+#&gt;  -0.9046  2.6541
+#&gt; 
+#&gt; (1,2,2,.,.) = 
+#&gt;   0.8476  0.1293
+#&gt;   2.4993 -11.7474
+#&gt;  -8.2536 -1.7945
+#&gt;   1.4565 -1.7748
+#&gt;   1.6302 -5.9520
+#&gt; 
+#&gt; (2,2,2,.,.) = 
+#&gt;   8.4007 -0.6091
+#&gt;  -7.3150  6.7983
+#&gt;  -2.7567  5.7257
+#&gt;   0.0162 -4.8731
+#&gt;   5.6091 -0.1334
+#&gt; 
+#&gt; (3,2,2,.,.) = 
+#&gt;   3.8595 -6.5510
+#&gt;  -7.0130  1.7539
+#&gt;   5.8311 -5.2801
+#&gt;  -0.3624  3.3297
+#&gt;  -1.0575  8.0131
+#&gt; 
+#&gt; (1,3,2,.,.) = 
+#&gt;   2.8984 -1.4383
+#&gt;  -2.3224  0.3968
+#&gt;  -4.7943  9.7074
+#&gt;  -0.7067 -0.1323
+#&gt;   4.0373 -4.3214
+#&gt; 
+#&gt; (2,3,2,.,.) = 
+#&gt;   4.1119 -5.5099
+#&gt;   5.7705  0.1910
+#&gt;  -1.1444  1.3298
+#&gt;   0.5945  1.7006
+#&gt;  -7.2836  2.9919
+#&gt; 
+#&gt; (3,3,2,.,.) = 
+#&gt;   -3.8975   4.4903
+#&gt;   -6.4195   4.3905
+#&gt;   -7.2374  11.6386
+#&gt;   -2.9600  -0.9243
+#&gt;    1.8684   2.2974
+#&gt; 
+#&gt; (1,1,3,.,.) = 
+#&gt;   4.5520 -4.3530
+#&gt;  -5.8284 -2.1102
+#&gt;  -3.6668 -7.7019
+#&gt;   8.1796 -19.0700
+#&gt;   9.5884  4.8352
+#&gt; 
+#&gt; (2,1,3,.,.) = 
+#&gt;   13.9761   3.4310
+#&gt;    0.4168  -6.5841
+#&gt;   -0.8708   7.1304
+#&gt;   -6.1184   3.3108
+#&gt;   10.5837  -8.0658
+#&gt; 
+#&gt; (3,1,3,.,.) = 
+#&gt;   7.0383  4.9793
+#&gt;   6.1311  0.5772
+#&gt;   0.5536 -10.8963
+#&gt;  -8.7085  4.4828
+#&gt;   2.9431 -2.5743
+#&gt; 
+#&gt; (1,2,3,.,.) = 
+#&gt;    4.1403   1.8223
+#&gt;    0.7537   0.8800
+#&gt;   -3.9671  -2.6145
+#&gt;   14.4936  -0.9029
+#&gt;    1.6383  10.4394
+#&gt; 
+#&gt; (2,2,3,.,.) = 
+#&gt;   4.4319  0.7040
+#&gt;   0.3135  5.0567
+#&gt;   1.3790  2.3072
+#&gt;  -1.2037 -2.0628
+#&gt;  -0.8419  3.1004
+#&gt; 
+#&gt; (3,2,3,.,.) = 
+#&gt;   -5.0752  -7.0265
+#&gt;    2.7095  11.5003
+#&gt;    4.8393  -5.2051
+#&gt;    1.2874  -6.7991
+#&gt;   -0.0882   1.2251
+#&gt; 
+#&gt; (1,3,3,.,.) = 
+#&gt;   5.1311 -0.5998
+#&gt;  -0.1163  0.8143
+#&gt;  -5.7811  0.3771
+#&gt;   7.0823 -1.5296
+#&gt;  -6.8239  3.0566
+#&gt; 
+#&gt; (2,3,3,.,.) = 
+#&gt;  -3.9121  4.2962
+#&gt;   7.0786  0.5725
+#&gt;   3.3395 -4.7522
+#&gt;  -1.2299  3.4169
+#&gt;  -2.0444 -7.8404
+#&gt; 
+#&gt; (3,3,3,.,.) = 
+#&gt;   0.3150 -0.1373
+#&gt;   4.7729  3.5093
+#&gt;   4.5809  0.5698
+#&gt;  -0.8044 -12.8542
+#&gt;   0.8985  7.5519
+#&gt; 
+#&gt; (1,1,4,.,.) = 
+#&gt;  -4.0290  1.0845
+#&gt;  -0.0392 -5.5119
+#&gt;   7.0016 -1.1269
+#&gt;  -11.4933  0.8587
+#&gt;   0.2535 -3.7267
+#&gt; 
+#&gt; (2,1,4,.,.) = 
+#&gt;    3.0707  -0.5112
+#&gt;    3.6116  10.5010
+#&gt;   -6.0431   6.8904
+#&gt;    6.3959   0.7005
+#&gt;   -5.3762  -4.8846
+#&gt; 
+#&gt; (3,1,4,.,.) = 
+#&gt;   1.0899 -3.3002
+#&gt;  -1.8715 -5.4116
+#&gt;   1.1477  1.5257
+#&gt;   3.4016 -5.9017
+#&gt;  -7.3450 -2.7497
+#&gt; 
+#&gt; (1,2,4,.,.) = 
+#&gt;   -4.4946  -0.0431
+#&gt;   -1.6383  -4.3185
+#&gt;    2.9340  -5.2805
+#&gt;   -9.9854   5.2759
+#&gt;   11.8919  -3.9943
+#&gt; 
+#&gt; (2,2,4,.,.) = 
+#&gt;   -4.7635   1.2913
+#&gt;    5.9620  -5.5513
+#&gt;   -8.0413  -8.4340
+#&gt;   11.9817   1.7833
+#&gt;   -1.7789  -1.3288
+#&gt; 
+#&gt; (3,2,4,.,.) = 
+#&gt;  -4.7120 -6.4397
+#&gt;   7.8180 -0.4252
+#&gt;   1.5676  3.6812
+#&gt;   7.2914 -0.5529
+#&gt;   3.5581 -2.2597
+#&gt; 
+#&gt; (1,3,4,.,.) = 
+#&gt;   8.5806  0.0611
+#&gt;  -0.4777  7.7718
+#&gt;  -4.0794 -6.1907
+#&gt;  -1.4671  5.2149
+#&gt;   1.0252 -8.5149
+#&gt; 
+#&gt; (2,3,4,.,.) = 
+#&gt;   -9.8472   5.6967
+#&gt;   -1.6947   9.5993
+#&gt;   -1.4956   4.0334
+#&gt;   -1.3865  11.1374
+#&gt;    9.8793   4.2991
+#&gt; 
+#&gt; (3,3,4,.,.) = 
+#&gt;   1.8941 -3.0498
+#&gt;  -0.5273  5.9420
+#&gt;  -8.1000  0.7917
+#&gt;  -4.0924  6.8378
+#&gt;  -3.5923 -4.5370
+#&gt; 
+#&gt; (1,1,5,.,.) = 
+#&gt;  -1.7056  9.2700
+#&gt;   2.1274  1.8812
+#&gt;   4.0498 -11.0172
+#&gt;   2.9746 -0.4427
+#&gt;   7.6162  9.7190
+#&gt; 
+#&gt; (2,1,5,.,.) = 
+#&gt;  -1.6148  9.8823
+#&gt;  -2.2223 -5.7224
+#&gt;  -9.0196 -1.7276
+#&gt;   4.7798  0.5862
+#&gt;   1.3281  0.8029
+#&gt; 
+#&gt; (3,1,5,.,.) = 
+#&gt;   -5.5273   7.8603
+#&gt;   -0.1868  -1.6501
+#&gt;   -2.8454   3.7523
+#&gt;   10.0059  -4.9990
+#&gt;    4.3484  -6.8718
+#&gt; 
+#&gt; (1,2,5,.,.) = 
+#&gt;  -2.2279 -3.9872
+#&gt;  -3.4575 -4.0907
+#&gt;   3.4209 -8.6413
+#&gt;   5.5585  3.9019
+#&gt;   1.2711 -2.7452
+#&gt; 
+#&gt; (2,2,5,.,.) = 
+#&gt;   1.7661 -6.5353
+#&gt;  -0.8081 -6.9792
+#&gt;  -5.1229  5.2656
+#&gt;   7.4427  5.2206
+#&gt;   4.4274  7.1338
+#&gt; 
+#&gt; (3,2,5,.,.) = 
+#&gt;   -9.5314   1.8814
+#&gt;   -1.1682  -6.7481
+#&gt;    6.2892  -5.7666
+#&gt;   -1.1676   3.0302
+#&gt;    8.6887  16.3532
+#&gt; 
+#&gt; (1,3,5,.,.) = 
+#&gt;  -5.6137  2.0296
+#&gt;   4.6979 -3.9769
+#&gt;  -0.7540 -5.3442
+#&gt;  -3.3033  1.3738
+#&gt;   3.3125 -4.9288
+#&gt; 
+#&gt; (2,3,5,.,.) = 
+#&gt;   7.8575 -5.3907
+#&gt;   4.6923 -0.7001
+#&gt;  -0.7059  2.9104
+#&gt;  -6.5708  5.6068
+#&gt;  -3.4356  5.0028
+#&gt; 
+#&gt; (3,3,5,.,.) = 
+#&gt;  -9.7962 -4.0961
+#&gt;   2.9536 -3.6162
+#&gt;  -1.1836  0.3741
+#&gt;  -3.6544 -5.1600
+#&gt;  -1.5882  2.3636
+#&gt; [ CPUFloatType{3,3,5,5,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -279,7 +599,7 @@ shape of <code>input</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

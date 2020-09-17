@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Ormqr</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_ormqr.Rd</code></div>
     </div>
 
@@ -192,12 +195,13 @@
     <p>Ormqr</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_ormqr</span>(<span class='kw'>self</span>, <span class='kw'>input2</span>, <span class='kw'>input3</span>, left = <span class='fl'>TRUE</span>, transpose = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the <code>a</code> from <code><a href='torch_geqrf.html'>torch_geqrf</a></code>.</p></td>
     </tr>
     <tr>
@@ -208,17 +212,25 @@
       <th>input3</th>
       <td><p>(Tensor) the matrix to be multiplied.</p></td>
     </tr>
+    <tr>
+      <th>left</th>
+      <td><p>see LAPACK documentation</p></td>
+    </tr>
+    <tr>
+      <th>transpose</th>
+      <td><p>see LAPACK documentation</p></td>
+    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="ormqr-input-input-input-left-true-transpose-false-gt-tensor-"><a class="anchor" href="#ormqr-input-input-input-left-true-transpose-false-gt-tensor-"></a>ormqr(input, input2, input3, left=True, transpose=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="ormqr-input-input-input-left-true-transpose-false-gt-tensor-"><a class="anchor" href="#ormqr-input-input-input-left-true-transpose-false-gt-tensor-"></a>ormqr(input, input2, input3, left=TRUE, transpose=False) -&gt; Tensor </h2>
 
     
 
 
 <p>Multiplies <code>mat</code> (given by <code>input3</code>) by the orthogonal <code>Q</code> matrix of the QR factorization
-formed by <code><a href='torch_geqrf.html'>torch_geqrf</a></code> that is represented by <code>(a, tau)</code> (given by (<code>input</code>, <code>input2</code>)).</p>
+formed by <code><a href='torch_geqrf.html'>torch_geqrf()</a></code> that is represented by <code>(a, tau)</code> (given by (<code>input</code>, <code>input2</code>)).</p>
 <p>This directly calls the underlying LAPACK function <code>?ormqr</code>.
-See <code>LAPACK documentation for ormqr</code>_ for further details.</p>
+See <a href='https://software.intel.com/content/www/us/en/develop/documentation/mkl-developer-reference-c/top/scalapack-routines/scalapack-computational-routines/orthogonal-factorizations-scalapack-computational-routines/p-ormqr.html'>LAPACK documentation for ormqr</a> for further details.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -235,7 +247,7 @@ See <code>LAPACK documentation for ormqr</code>_ for further details.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

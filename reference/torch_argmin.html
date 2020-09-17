@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Argmin</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_argmin.Rd</code></div>
     </div>
 
@@ -192,21 +195,22 @@
     <p>Argmin</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_argmin</span>(<span class='kw'>self</span>, dim = <span class='kw'>NULL</span>, keepdim = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
       <th>dim</th>
-      <td><p>(int) the dimension to reduce. If <code>None</code>, the argmin of the flattened input is returned.</p></td>
+      <td><p>(int) the dimension to reduce. If <code>NULL</code>, the argmin of the flattened input is returned.</p></td>
     </tr>
     <tr>
       <th>keepdim</th>
-      <td><p>(bool) whether the output tensor has <code>dim</code> retained or not. Ignored if <code>dim=None</code>.</p></td>
+      <td><p>(bool) whether the output tensor has <code>dim</code> retained or not. Ignored if <code>dim=NULL</code>.</p></td>
     </tr>
     </table>
 
@@ -218,7 +222,7 @@
 <p>Returns the indices of the minimum value of all elements in the <code>input</code> tensor.</p>
 <p>This is the second value returned by <code>torch_min</code>. See its
 documentation for the exact semantics of this method.</p>
-    <h2 class="hasAnchor" id="argmin-input-dim-keepdim-false-out-none-gt-longtensor-"><a class="anchor" href="#argmin-input-dim-keepdim-false-out-none-gt-longtensor-"></a>argmin(input, dim, keepdim=False, out=None) -&gt; LongTensor </h2>
+    <h2 class="hasAnchor" id="argmin-input-dim-keepdim-false-out-null-gt-longtensor-"><a class="anchor" href="#argmin-input-dim-keepdim-false-out-null-gt-longtensor-"></a>argmin(input, dim, keepdim=False, out=NULL) -&gt; LongTensor </h2>
 
     
 
@@ -228,17 +232,23 @@ documentation for the exact semantics of this method.</p>
 documentation for the exact semantics of this method.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_argmin</span>(<span class='no'>a</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_argmin</span>(<span class='kw'>a</span>)
 
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_argmin</span>(<span class='no'>a</span>, <span class='kw'>dim</span><span class='kw'>=</span><span class='fl'>1</span>)
-}</div></pre>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_argmin</span>(<span class='kw'>a</span>, dim=<span class='fl'>1</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0
+#&gt;  3
+#&gt;  0
+#&gt;  0
+#&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -254,7 +264,7 @@ documentation for the exact semantics of this method.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

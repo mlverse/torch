@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Addbmm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_addbmm.Rd</code></div>
     </div>
 
@@ -192,10 +195,15 @@
     <p>Addbmm</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_addbmm</span>(<span class='kw'>self</span>, <span class='kw'>batch1</span>, <span class='kw'>batch2</span>, beta = <span class='fl'>1L</span>, alpha = <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>self</th>
+      <td><p>(Tensor) matrix to be added</p></td>
+    </tr>
     <tr>
       <th>batch1</th>
       <td><p>(Tensor) the first batch of matrices to be multiplied</p></td>
@@ -209,20 +217,12 @@
       <td><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></td>
     </tr>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) matrix to be added</p></td>
-    </tr>
-    <tr>
       <th>alpha</th>
       <td><p>(Number, optional) multiplier for <code>batch1 @ batch2</code> (\(\alpha\))</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addbmm-input-batch-batch-beta-alpha-out-none-gt-tensor-"><a class="anchor" href="#addbmm-input-batch-batch-beta-alpha-out-none-gt-tensor-"></a>addbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="addbmm-input-batch-batch-beta-alpha-out-null-gt-tensor-"><a class="anchor" href="#addbmm-input-batch-batch-beta-alpha-out-null-gt-tensor-"></a>addbmm(input, batch1, batch2, *, beta=1, alpha=1, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -245,13 +245,18 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 must be real numbers, otherwise they should be integers.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>M</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>))
-<span class='no'>batch1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>batch2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'>torch_addbmm</span>(<span class='no'>M</span>, <span class='no'>batch1</span>, <span class='no'>batch2</span>)
-}</div></pre>
+<span class='kw'>M</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>))
+<span class='kw'>batch1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>batch2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'>torch_addbmm</span>(<span class='kw'>M</span>, <span class='kw'>batch1</span>, <span class='kw'>batch2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;   4.0929  12.1396  -0.7699  -8.6491   2.2231
+#&gt;  -7.4857  -3.2881   4.0521 -22.8832   2.6408
+#&gt;   7.3042   8.9041  -5.6550   4.6919  -3.0729
+#&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -267,7 +272,7 @@ must be real numbers, otherwise they should be integers.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

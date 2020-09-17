@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Prod</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_prod.Rd</code></div>
     </div>
 
@@ -192,17 +195,14 @@
     <p>Prod</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_prod</span>(<span class='kw'>self</span>, <span class='kw'>dim</span>, keepdim = <span class='fl'>FALSE</span>, dtype = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
-    </tr>
-    <tr>
-      <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to <code>dtype</code> before the operation        is performed. This is useful for preventing data type overflows. Default: None.</p></td>
     </tr>
     <tr>
       <th>dim</th>
@@ -212,38 +212,46 @@
       <th>keepdim</th>
       <td><p>(bool) whether the output tensor has <code>dim</code> retained or not.</p></td>
     </tr>
+    <tr>
+      <th>dtype</th>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to <code>dtype</code> before the operation        is performed. This is useful for preventing data type overflows. Default: NULL.</p></td>
+    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="prod-input-dtype-none-gt-tensor-"><a class="anchor" href="#prod-input-dtype-none-gt-tensor-"></a>prod(input, dtype=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="prod-input-dtype-null-gt-tensor-"><a class="anchor" href="#prod-input-dtype-null-gt-tensor-"></a>prod(input, dtype=NULL) -&gt; Tensor </h2>
 
     
 
 
 <p>Returns the product of all elements in the <code>input</code> tensor.</p>
-    <h2 class="hasAnchor" id="prod-input-dim-keepdim-false-dtype-none-gt-tensor-"><a class="anchor" href="#prod-input-dim-keepdim-false-dtype-none-gt-tensor-"></a>prod(input, dim, keepdim=False, dtype=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="prod-input-dim-keepdim-false-dtype-null-gt-tensor-"><a class="anchor" href="#prod-input-dim-keepdim-false-dtype-null-gt-tensor-"></a>prod(input, dim, keepdim=False, dtype=NULL) -&gt; Tensor </h2>
 
     
 
 
 <p>Returns the product of each row of the <code>input</code> tensor in the given
 dimension <code>dim</code>.</p>
-<p>If <code>keepdim</code> is <code>True</code>, the output tensor is of the same size
+<p>If <code>keepdim</code> is <code>TRUE</code>, the output tensor is of the same size
 as <code>input</code> except in the dimension <code>dim</code> where it is of size 1.
 Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>torch_squeeze</a></code>), resulting in
 the output tensor having 1 fewer dimension than <code>input</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_prod</span>(<span class='no'>a</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_prod</span>(<span class='kw'>a</span>)
 
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>2</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_prod</span>(<span class='no'>a</span>, <span class='fl'>1</span>)
-}</div></pre>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>2</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_prod</span>(<span class='kw'>a</span>, <span class='fl'>1</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.8498
+#&gt; -0.0946
+#&gt; [ CPUFloatType{2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -259,7 +267,7 @@ the output tensor having 1 fewer dimension than <code>input</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

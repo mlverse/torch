@@ -74,7 +74,7 @@ In-place random sampling functions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -144,6 +144,9 @@ In-place random sampling functions." />
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -201,16 +204,18 @@ In-place random sampling functions.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
 <span class='co'># Via string</span>
-<span class='no'>generator</span> <span class='kw'>&lt;-</span> <span class='fu'>torch_generator</span>()
-<span class='no'>generator</span>$<span class='fu'>current_seed</span>()
-<span class='no'>generator</span>$<span class='fu'>set_current_seed</span>(<span class='fl'>1234567L</span>)
-<span class='no'>generator</span>$<span class='fu'>current_seed</span>()
+<span class='kw'>generator</span> <span class='op'>&lt;-</span> <span class='fu'>torch_generator</span>()
+<span class='kw'>generator</span><span class='op'>$</span><span class='fu'>current_seed</span>()
+<span class='kw'>generator</span><span class='op'>$</span><span class='fu'>set_current_seed</span>(<span class='fl'>1234567L</span>)
+<span class='kw'>generator</span><span class='op'>$</span><span class='fu'>current_seed</span>()
 
 
-}</div></pre>
+}
+</div><div class='output co'>#&gt; integer64
+#&gt; [1] 1234567</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -226,7 +231,7 @@ In-place random sampling functions.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

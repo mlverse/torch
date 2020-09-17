@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Norm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_norm.Rd</code></div>
     </div>
 
@@ -192,33 +195,31 @@
     <p>Norm</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_norm</span>(<span class='kw'>self</span>, p = <span class='fl'>2L</span>, <span class='kw'>dim</span>, keepdim = <span class='fl'>FALSE</span>, <span class='kw'>dtype</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor</p></td>
     </tr>
     <tr>
       <th>p</th>
-      <td><p>(int, float, inf, -inf, 'fro', 'nuc', optional) the order of norm. Default: <code>'fro'</code>        The following norms can be calculated:        =====  ============================  ==========================        ord    matrix norm                   vector norm        =====  ============================  ==========================        None   Frobenius norm                2-norm        'fro'  Frobenius norm                --        'nuc'  nuclear norm                  --        Other  as vec norm when dim is None  sum(abs(x)<strong>ord)</strong>(1./ord)        =====  ============================  ==========================</p></td>
+      <td><p>(int, float, inf, -inf, 'fro', 'nuc', optional) the order of norm. Default: <code>'fro'</code>        The following norms can be calculated:        =====  ============================  ==========================        ord    matrix norm                   vector norm        =====  ============================  ==========================        NULL   Frobenius norm                2-norm        'fro'  Frobenius norm                --        'nuc'  nuclear norm                  --        Other  as vec norm when dim is NULL  sum(abs(x)<strong>ord)</strong>(1./ord)        =====  ============================  ==========================</p></td>
     </tr>
     <tr>
       <th>dim</th>
-      <td><p>(int, 2-tuple of ints, 2-list of ints, optional) If it is an int,        vector norm will be calculated, if it is 2-tuple of ints, matrix norm        will be calculated. If the value is None, matrix norm will be calculated        when the input tensor only has two dimensions, vector norm will be        calculated when the input tensor only has one dimension. If the input        tensor has more than two dimensions, the vector norm will be applied to        last dimension.</p></td>
+      <td><p>(int, 2-tuple of ints, 2-list of ints, optional) If it is an int,        vector norm will be calculated, if it is 2-tuple of ints, matrix norm        will be calculated. If the value is NULL, matrix norm will be calculated        when the input tensor only has two dimensions, vector norm will be        calculated when the input tensor only has one dimension. If the input        tensor has more than two dimensions, the vector norm will be applied to        last dimension.</p></td>
     </tr>
     <tr>
       <th>keepdim</th>
-      <td><p>(bool, optional) whether the output tensors have <code>dim</code>        retained or not. Ignored if <code>dim</code> = <code>None</code> and        <code>out</code> = <code>None</code>. Default: <code>False</code></p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor. Ignored if        <code>dim</code> = <code>None</code> and <code>out</code> = <code>None</code>.</p></td>
+      <td><p>(bool, optional) whether the output tensors have <code>dim</code>        retained or not. Ignored if <code>dim</code> = <code>NULL</code> and        <code>out</code> = <code>NULL</code>. Default: <code>FALSE</code>
+Ignored if        <code>dim</code> = <code>NULL</code> and <code>out</code> = <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        'dtype' while performing the operation. Default: None.</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of        returned tensor. If specified, the input tensor is casted to        'dtype' while performing the operation. Default: NULL.</p></td>
     </tr>
     </table>
 
@@ -230,16 +231,19 @@
 <p>Returns the matrix norm or vector norm of a given tensor.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>0</span>, <span class='fl'>9</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_float</a></span>())
-<span class='no'>b</span> <span class='kw'>=</span> <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/stats/reshape.html'>reshape</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='fu'>torch_norm</span>(<span class='no'>a</span>)
-<span class='fu'>torch_norm</span>(<span class='no'>b</span>)
-<span class='fu'>torch_norm</span>(<span class='no'>a</span>, <span class='fl'>Inf</span>)
-<span class='fu'>torch_norm</span>(<span class='no'>b</span>, <span class='fl'>Inf</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>0</span>, <span class='fl'>9</span>, dtype = <span class='fu'><a href='torch_dtype.html'>torch_float</a></span>())
+<span class='kw'>b</span> <span class='op'>=</span> <span class='kw'>a</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/reshape.html'>reshape</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='fu'>torch_norm</span>(<span class='kw'>a</span>)
+<span class='fu'>torch_norm</span>(<span class='kw'>b</span>)
+<span class='fu'>torch_norm</span>(<span class='kw'>a</span>, <span class='fl'>Inf</span>)
+<span class='fu'>torch_norm</span>(<span class='kw'>b</span>, <span class='fl'>Inf</span>)
 
-}</div></pre>
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; 8
+#&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -255,7 +259,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

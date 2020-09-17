@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Baddbmm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_baddbmm.Rd</code></div>
     </div>
 
@@ -192,12 +195,13 @@
     <p>Baddbmm</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_baddbmm</span>(<span class='kw'>self</span>, <span class='kw'>batch1</span>, <span class='kw'>batch2</span>, beta = <span class='fl'>1L</span>, alpha = <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the tensor to be added</p></td>
     </tr>
     <tr>
@@ -216,13 +220,9 @@
       <th>alpha</th>
       <td><p>(Number, optional) multiplier for \(\mbox{batch1} \mathbin{@} \mbox{batch2}\) (\(\alpha\))</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="baddbmm-input-batch-batch-beta-alpha-out-none-gt-tensor-"><a class="anchor" href="#baddbmm-input-batch-batch-beta-alpha-out-none-gt-tensor-"></a>baddbmm(input, batch1, batch2, *, beta=1, alpha=1, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="baddbmm-input-batch-batch-beta-alpha-out-null-gt-tensor-"><a class="anchor" href="#baddbmm-input-batch-batch-beta-alpha-out-null-gt-tensor-"></a>baddbmm(input, batch1, batch2, *, beta=1, alpha=1, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -245,13 +245,64 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <code>alpha</code> must be real numbers, otherwise they should be integers.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>M</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>5</span>))
-<span class='no'>batch1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>batch2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'>torch_baddbmm</span>(<span class='no'>M</span>, <span class='no'>batch1</span>, <span class='no'>batch2</span>)
-}</div></pre>
+<span class='kw'>M</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>5</span>))
+<span class='kw'>batch1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>batch2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'>torch_baddbmm</span>(<span class='kw'>M</span>, <span class='kw'>batch1</span>, <span class='kw'>batch2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;   0.5169  1.2158 -4.8993 -2.0292  0.6039
+#&gt;   1.2161  0.2999 -1.1733 -0.1719 -1.8826
+#&gt;  -0.4125 -0.6188 -3.3763  1.6622 -0.0456
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;   2.8689 -4.6468  3.7274 -0.5421  1.2492
+#&gt;  -1.1236 -0.6624  2.0800 -0.0419  1.4445
+#&gt;   0.5999  2.1430  4.9233  2.0641  2.4058
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;  -1.0297 -3.0274 -5.5092 -3.1945 -1.4879
+#&gt;   0.5131 -0.4182  4.8456  3.8959 -0.1259
+#&gt;  -2.9485  5.2669 -0.3328  0.1787 -5.9946
+#&gt; 
+#&gt; (4,.,.) = 
+#&gt;  -0.4835  0.6089 -1.6201  0.2732  1.2634
+#&gt;   0.4599  1.7002 -0.0190 -1.2423 -0.7464
+#&gt;  -1.7837 -1.7135  2.3487 -1.3036 -2.0105
+#&gt; 
+#&gt; (5,.,.) = 
+#&gt;  -0.3693  1.6100 -1.5697  2.9564 -3.8602
+#&gt;  -3.2887 -3.8601  2.6928  3.4204 -4.1379
+#&gt;  -0.3324  4.1735 -1.0796  4.3123 -9.4041
+#&gt; 
+#&gt; (6,.,.) = 
+#&gt;   1.5179 -0.5436  0.4625 -0.8897 -1.8116
+#&gt;   1.0544 -1.4436 -0.8356  0.9885 -1.5152
+#&gt;  -2.2213  3.6502  1.6549 -0.7142  3.2995
+#&gt; 
+#&gt; (7,.,.) = 
+#&gt;   1.9440  0.7379 -0.1470  4.6160  0.8429
+#&gt;  -1.2323 -0.4719  1.5976 -2.2132  0.9501
+#&gt;   2.5150  1.7516 -1.6953  5.7926  0.1494
+#&gt; 
+#&gt; (8,.,.) = 
+#&gt;  -3.4315 -0.2282 -0.3529  2.4515 -0.5569
+#&gt;  -1.0715  0.6197  2.4314  1.7860  0.4920
+#&gt;   3.7235 -0.7600 -1.8398 -0.2097 -1.3856
+#&gt; 
+#&gt; (9,.,.) = 
+#&gt;   0.1970 -0.7515  0.0259  4.3855 -2.8053
+#&gt;   1.4381  2.2698 -2.0939  3.1673 -3.9858
+#&gt;   3.2559  2.3923  0.5728  1.3242 -2.9212
+#&gt; 
+#&gt; (10,.,.) = 
+#&gt;  -1.7762 -0.9753 -0.2682  3.0233  0.5828
+#&gt;  -4.9916 -2.8937 -1.9722  1.6210  2.3037
+#&gt;   3.1418  3.0826 -0.6769  1.5705 -3.1048
+#&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -267,7 +318,7 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

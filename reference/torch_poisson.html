@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Poisson</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_poisson.Rd</code></div>
     </div>
 
@@ -192,12 +195,13 @@
     <p>Poisson</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_poisson</span>(<span class='kw'>self</span>, generator = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor containing the rates of the Poisson distribution</p></td>
     </tr>
     <tr>
@@ -206,7 +210,7 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="poisson-input-generator-none-gt-tensor-"><a class="anchor" href="#poisson-input-generator-none-gt-tensor-"></a>poisson(input *, generator=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="poisson-input-generator-null-gt-tensor-"><a class="anchor" href="#poisson-input-generator-null-gt-tensor-"></a>poisson(input *, generator=NULL) -&gt; Tensor </h2>
 
     
 
@@ -219,11 +223,17 @@ element in <code>input</code> i.e.,</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>rates</span> <span class='kw'>=</span> <span class='fu'><a href='torch_rand.html'>torch_rand</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>)) * <span class='fl'>5</span>  <span class='co'># rate parameter between 0 and 5</span>
-<span class='fu'>torch_poisson</span>(<span class='no'>rates</span>)
-}</div></pre>
+<span class='kw'>rates</span> <span class='op'>=</span> <span class='fu'><a href='torch_rand.html'>torch_rand</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>)) <span class='op'>*</span> <span class='fl'>5</span>  <span class='co'># rate parameter between 0 and 5</span>
+<span class='fu'>torch_poisson</span>(<span class='kw'>rates</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  2  3  0  1
+#&gt;  0  8  2  0
+#&gt;  1  4  4  1
+#&gt;  4  6  6  2
+#&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,7 +249,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

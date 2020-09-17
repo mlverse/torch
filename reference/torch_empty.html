@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Empty</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/creation-ops.R'><code>R/creation-ops.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_empty.Rd</code></div>
     </div>
 
@@ -192,21 +195,29 @@
     <p>Empty</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_empty</span>(
+  <span class='kw'>...</span>,
+  names = <span class='kw'>NULL</span>,
+  dtype = <span class='kw'>NULL</span>,
+  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
+  device = <span class='kw'>NULL</span>,
+  requires_grad = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>size</th>
-      <td><p>(int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.</p></td>
+      <th>...</th>
+      <td><p>a sequence of integers defining the shape of the output tensor.</p></td>
     </tr>
     <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
+      <th>names</th>
+      <td><p>optional character vector naming each dimension.</p></td>
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>None</code>, uses a global default (see <code>torch_set_default_tensor_type</code>).</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>NULL</code>, uses a global default (see <code>torch_set_default_tensor_type</code>).</p></td>
     </tr>
     <tr>
       <th>layout</th>
@@ -214,23 +225,15 @@
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>None</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
     </tr>
     <tr>
       <th>requires_grad</th>
-      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
-    </tr>
-    <tr>
-      <th>pin_memory</th>
-      <td><p>(bool, optional) If set, returned tensor would be allocated in        the pinned memory. Works only for CPU tensors. Default: <code>False</code>.</p></td>
-    </tr>
-    <tr>
-      <th>memory_format</th>
-      <td><p>(<code>torch.memory_format</code>, optional) the desired memory format of        returned Tensor. Default: <code>torch_contiguous_format</code>.</p></td>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="empty-size-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-pin-memory-false-gt-tensor-"><a class="anchor" href="#empty-size-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-pin-memory-false-gt-tensor-"></a>empty(*size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False, pin_memory=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="empty-size-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-pin-memory-false-gt-tensor-"><a class="anchor" href="#empty-size-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-pin-memory-false-gt-tensor-"></a>empty(*size, out=NULL, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False, pin_memory=False) -&gt; Tensor </h2>
 
     
 
@@ -239,10 +242,14 @@
 defined by the variable argument <code>size</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
 <span class='fu'>torch_empty</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-}</div></pre>
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  2.2101e-10  4.5592e+30  4.6533e+33
+#&gt;  2.1414e-10  1.9205e+31  1.8891e+31
+#&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -258,7 +265,7 @@ defined by the variable argument <code>size</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

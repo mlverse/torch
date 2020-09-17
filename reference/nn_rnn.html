@@ -73,7 +73,7 @@ to an input sequence." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -143,6 +143,9 @@ to an input sequence." />
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -195,15 +198,15 @@ to an input sequence.</p>
     </div>
 
     <pre class="usage"><span class='fu'>nn_rnn</span>(
-  <span class='no'>input_size</span>,
-  <span class='no'>hidden_size</span>,
-  <span class='kw'>num_layers</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>nonlinearity</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>batch_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>dropout</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>bidirectional</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>input_size</span>,
+  <span class='kw'>hidden_size</span>,
+  num_layers = <span class='fl'>1</span>,
+  nonlinearity = <span class='kw'>NULL</span>,
+  bias = <span class='fl'>TRUE</span>,
+  batch_first = <span class='fl'>FALSE</span>,
+  dropout = <span class='fl'>0</span>,
+  bidirectional = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -342,13 +345,110 @@ of shape <code>(hidden_size)</code></p></li>
 where \(k = \frac{1}{\mbox{hidden\_size}}\)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>rnn</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_rnn</span>(<span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>2</span>)
-<span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>10</span>)
-<span class='no'>h0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>20</span>)
-<span class='fu'>rnn</span>(<span class='no'>input</span>, <span class='no'>h0</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>rnn</span> <span class='op'>&lt;-</span> <span class='fu'>nn_rnn</span>(<span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>2</span>)
+<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>10</span>)
+<span class='kw'>h0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>20</span>)
+<span class='fu'>rnn</span>(<span class='kw'>input</span>, <span class='kw'>h0</span>)
 
-}</div></pre>
+}
+</div><div class='output co'>#&gt; [[1]]
+#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;  Columns 1 to 9 -0.7434  0.2844  0.0016  0.8185  0.6531  0.4408  0.2513  0.4043  0.1344
+#&gt;  -0.4084 -0.0432  0.0035 -0.0020  0.3743 -0.1715 -0.0055 -0.1983  0.3436
+#&gt;  -0.7834  0.3324  0.1143 -0.8157 -0.1834 -0.5303 -0.1466 -0.3705  0.5860
+#&gt; 
+#&gt; Columns 10 to 18 -0.2941 -0.0811 -0.0655 -0.0560 -0.0679 -0.5190  0.4709  0.8197 -0.3277
+#&gt;   0.1659 -0.2903 -0.3240  0.2294  0.8071  0.6459 -0.6420  0.1741 -0.1008
+#&gt;   0.7103  0.2403 -0.2498  0.5758  0.9233 -0.2942 -0.9029  0.7517  0.3229
+#&gt; 
+#&gt; Columns 19 to 20 -0.5622  0.1777
+#&gt;  -0.4280  0.4360
+#&gt;   0.3474  0.4417
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;  Columns 1 to 9  0.3215  0.5515  0.3459  0.2112  0.1356 -0.1766  0.1357  0.1387  0.4026
+#&gt;  -0.1416  0.3790  0.1404  0.2297 -0.6452  0.1865 -0.4193 -0.0407 -0.3230
+#&gt;   0.2298  0.0540 -0.0554  0.0693 -0.2164 -0.0604 -0.1563  0.3245 -0.3044
+#&gt; 
+#&gt; Columns 10 to 18  0.6690  0.2629  0.4034 -0.2537  0.4071 -0.0820 -0.0872 -0.0918 -0.0751
+#&gt;   0.4012  0.0271 -0.0440 -0.2764  0.4863 -0.0607  0.0546  0.1313  0.1613
+#&gt;   0.5691  0.5713 -0.4025 -0.3613  0.3051  0.2366  0.2158  0.4308 -0.3279
+#&gt; 
+#&gt; Columns 19 to 20 -0.0694  0.2273
+#&gt;  -0.3657 -0.0064
+#&gt;   0.4104  0.4091
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;  Columns 1 to 9 -0.3717  0.1676  0.0138  0.5411 -0.4264  0.0728  0.2278  0.0721 -0.0395
+#&gt;  -0.2702  0.0194  0.3398  0.2389 -0.5255 -0.3706 -0.0438  0.2220 -0.1981
+#&gt;  -0.4718  0.1189 -0.1507  0.6715 -0.0228  0.3978  0.0105  0.2033 -0.5316
+#&gt; 
+#&gt; Columns 10 to 18  0.6726  0.0628 -0.3861 -0.5772  0.5141 -0.0998 -0.3381  0.3791  0.0948
+#&gt;   0.4351 -0.1256 -0.1891 -0.3737 -0.1287  0.2312  0.1125 -0.0475  0.6847
+#&gt;   0.1752 -0.0895 -0.2410 -0.6497  0.4282  0.1321  0.1799  0.3171  0.7603
+#&gt; 
+#&gt; Columns 19 to 20 -0.0338  0.0285
+#&gt;  -0.0107 -0.0276
+#&gt;  -0.0632  0.2465
+#&gt; 
+#&gt; (4,.,.) = 
+#&gt;  Columns 1 to 9 -0.4956  0.2495  0.1938  0.6142 -0.7948  0.2498 -0.2469 -0.3769  0.1721
+#&gt;  -0.0427 -0.0137  0.4365  0.4746 -0.4662 -0.2331 -0.4956  0.2313  0.0292
+#&gt;  -0.6142  0.3817  0.4657  0.3337 -0.7294  0.2089 -0.3426 -0.3479 -0.1028
+#&gt; 
+#&gt; Columns 10 to 18  0.2498 -0.2332 -0.2562 -0.4496  0.2118 -0.3066 -0.3265  0.5211  0.2567
+#&gt;   0.6424 -0.2713 -0.3379 -0.2258 -0.2887 -0.0166 -0.3823  0.0039  0.7031
+#&gt;   0.4339 -0.5604 -0.1774  0.2026  0.0930 -0.3116 -0.1249  0.4010  0.2518
+#&gt; 
+#&gt; Columns 19 to 20 -0.0292 -0.0534
+#&gt;  -0.1144 -0.1243
+#&gt;  -0.1189 -0.0810
+#&gt; 
+#&gt; (5,.,.) = 
+#&gt;  Columns 1 to 9 -0.0346  0.2016  0.3038 -0.2053 -0.6229 -0.1266 -0.5756 -0.0109  0.0019
+#&gt;   0.0295 -0.0835  0.3223  0.3028 -0.4772 -0.3311 -0.6521 -0.0252 -0.2980
+#&gt;  -0.0244  0.0057  0.2770 -0.0663 -0.2242 -0.3654 -0.6100  0.1517 -0.1629
+#&gt; 
+#&gt; Columns 10 to 18  0.6330  0.0211 -0.0987 -0.1026  0.1900 -0.0459 -0.1214  0.3469  0.4157
+#&gt;   0.6977 -0.1733 -0.2939 -0.4534  0.1784  0.1775 -0.5701 -0.0754  0.6362
+#&gt;   0.6684  0.0042 -0.0156 -0.1654  0.1346  0.4302  0.0809 -0.2777  0.6461
+#&gt; 
+#&gt; Columns 19 to 20  0.1809 -0.1792
+#&gt;  -0.2223  0.1212
+#&gt;   0.1024  0.1324
+#&gt; [ CPUFloatType{5,3,20} ]
+#&gt; 
+#&gt; [[2]]
+#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;  Columns 1 to 9  0.2880  0.2445  0.1000 -0.0137 -0.2287  0.2212 -0.4598 -0.1706 -0.4999
+#&gt;   0.2428 -0.0218 -0.7798  0.3126 -0.5297 -0.1007 -0.6938 -0.3113 -0.7709
+#&gt;   0.4633  0.0818 -0.6957 -0.5623 -0.5963  0.3772 -0.9365 -0.0530 -0.4626
+#&gt; 
+#&gt; Columns 10 to 18 -0.5619 -0.1573  0.0434  0.5007  0.2885 -0.3552  0.7300 -0.3641  0.0935
+#&gt;  -0.1233  0.0221  0.6379 -0.4574  0.4790  0.3875 -0.3689 -0.6219  0.0886
+#&gt;  -0.6095 -0.6709  0.0117 -0.1393  0.7393  0.6836  0.4758 -0.2844 -0.0577
+#&gt; 
+#&gt; Columns 19 to 20  0.1469  0.5601
+#&gt;   0.0360 -0.6894
+#&gt;  -0.1248  0.4876
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;  Columns 1 to 9 -0.0346  0.2016  0.3038 -0.2053 -0.6229 -0.1266 -0.5756 -0.0109  0.0019
+#&gt;   0.0295 -0.0835  0.3223  0.3028 -0.4772 -0.3311 -0.6521 -0.0252 -0.2980
+#&gt;  -0.0244  0.0057  0.2770 -0.0663 -0.2242 -0.3654 -0.6100  0.1517 -0.1629
+#&gt; 
+#&gt; Columns 10 to 18  0.6330  0.0211 -0.0987 -0.1026  0.1900 -0.0459 -0.1214  0.3469  0.4157
+#&gt;   0.6977 -0.1733 -0.2939 -0.4534  0.1784  0.1775 -0.5701 -0.0754  0.6362
+#&gt;   0.6684  0.0042 -0.0156 -0.1654  0.1346  0.4302  0.0809 -0.2777  0.6461
+#&gt; 
+#&gt; Columns 19 to 20  0.1809 -0.1792
+#&gt;  -0.2223  0.1212
+#&gt;   0.1024  0.1324
+#&gt; [ CPUFloatType{2,3,20} ]
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -364,7 +464,7 @@ where \(k = \frac{1}{\mbox{hidden\_size}}\)</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

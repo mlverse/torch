@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Range</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/creation-ops.R'><code>R/creation-ops.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
     <div class="hidden name"><code>torch_range.Rd</code></div>
     </div>
 
@@ -192,6 +195,15 @@
     <p>Range</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_range</span>(
+  <span class='kw'>start</span>,
+  <span class='kw'>end</span>,
+  step = <span class='fl'>1</span>,
+  dtype = <span class='kw'>NULL</span>,
+  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
+  device = <span class='kw'>NULL</span>,
+  requires_grad = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,12 +221,8 @@
       <td><p>(float) the gap between each pair of adjacent points. Default: <code>1</code>.</p></td>
     </tr>
     <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
-    <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>None</code>, uses a global default (see <code>torch_set_default_tensor_type</code>). If <code>dtype</code> is not given, infer the data type from the other input        arguments. If any of <code>start</code>, <code>end</code>, or <code>stop</code> are floating-point, the        <code>dtype</code> is inferred to be the default dtype, see        <code>~torch.get_default_dtype</code>. Otherwise, the <code>dtype</code> is inferred to        be <code>torch.int64</code>.</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>NULL</code>, uses a global default (see <code>torch_set_default_tensor_type</code>). If <code>dtype</code> is not given, infer the data type from the other input        arguments. If any of <code>start</code>, <code>end</code>, or <code>stop</code> are floating-point, the        <code>dtype</code> is inferred to be the default dtype, see        <code>~torch.get_default_dtype</code>. Otherwise, the <code>dtype</code> is inferred to        be <code>torch.int64</code>.</p></td>
     </tr>
     <tr>
       <th>layout</th>
@@ -222,15 +230,15 @@
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>None</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
     </tr>
     <tr>
       <th>requires_grad</th>
-      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="range-start-end-step-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"><a class="anchor" href="#range-start-end-step-out-none-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"></a>range(start=0, end, step=1, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="range-start-end-step-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-"><a class="anchor" href="#range-start-end-step-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-"></a>range(start=0, end, step=1, out=NULL, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False) -&gt; Tensor </h2>
 
     
 
@@ -248,11 +256,19 @@ $$</p>
 <p>This function is deprecated in favor of <code><a href='torch_arange.html'>torch_arange</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
 <span class='fu'>torch_range</span>(<span class='fl'>1</span>, <span class='fl'>4</span>)
 <span class='fu'>torch_range</span>(<span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>0.5</span>)
-}</div></pre>
+}
+</div><div class='output co'>#&gt; <span class='warning'>Warning: This function is deprecated in favor of torch_arange.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: This function is deprecated in favor of torch_arange.</span></div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1.0000
+#&gt;  1.5000
+#&gt;  2.0000
+#&gt;  2.5000
+#&gt;  3.0000
+#&gt;  3.5000
+#&gt; [ CPUFloatType{6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -268,7 +284,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

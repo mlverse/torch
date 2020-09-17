@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -101,6 +101,9 @@
     <li>
       <a href="../../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../../articles/loading-data.html">Loading Data</a>
@@ -155,7 +158,9 @@
 <blockquote>
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/blitz/tensor_tutorial.html#sphx-glr-beginner-blitz-tensor-tutorial-py">here</a>. All credits goes to <a href="http://soumith.ch/">Soumith Chintala</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">torch</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
+</pre></div>
 <p>Neural networks can be constructed using the <code>nn</code> functionality.</p>
 <p>Now that you had a glimpse of <code>autograd</code>, <code>nn</code> depends on <code>autograd</code> to define models and differentiate them. An nn.Module contains layers, and a method <code>forward(input)</code> that returns the output.</p>
 <p>For example, look at this network that classifies digit images:</p>
@@ -176,49 +181,71 @@
 <h2 class="hasAnchor">
 <a href="#define-the-network" class="anchor"></a>Define the network</h2>
 <p>Let’s define this network:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">Net</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span>(
-  <span class="kw">initialize</span> <span class="kw">=</span> <span class="kw">function</span>() {
-    <span class="no">self</span>$<span class="no">conv1</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span>(<span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">3</span>)
-    <span class="no">self</span>$<span class="no">conv2</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span>(<span class="fl">6</span>, <span class="fl">16</span>, <span class="fl">3</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">Net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span>(
+  initialize = <span class="fu">function</span>() {
+    <span class="kw">self</span><span class="op">$</span><span class="kw">conv1</span> <span class="op">=</span> <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span>(<span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">3</span>)
+    <span class="kw">self</span><span class="op">$</span><span class="kw">conv2</span> <span class="op">=</span> <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span>(<span class="fl">6</span>, <span class="fl">16</span>, <span class="fl">3</span>)
     <span class="co"># an affine operation: y = Wx + b</span>
-    <span class="no">self</span>$<span class="no">fc1</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="fl">16</span> * <span class="fl">6</span> * <span class="fl">6</span>, <span class="fl">120</span>)  <span class="co"># 6*6 from image dimension</span>
-    <span class="no">self</span>$<span class="no">fc2</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="fl">120</span>, <span class="fl">84</span>)
-    <span class="no">self</span>$<span class="no">fc3</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="fl">84</span>, <span class="fl">10</span>)
+    <span class="kw">self</span><span class="op">$</span><span class="kw">fc1</span> <span class="op">=</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="fl">16</span> <span class="op">*</span> <span class="fl">6</span> <span class="op">*</span> <span class="fl">6</span>, <span class="fl">120</span>)  <span class="co"># 6*6 from image dimension</span>
+    <span class="kw">self</span><span class="op">$</span><span class="kw">fc2</span> <span class="op">=</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="fl">120</span>, <span class="fl">84</span>)
+    <span class="kw">self</span><span class="op">$</span><span class="kw">fc3</span> <span class="op">=</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="fl">84</span>, <span class="fl">10</span>)
   },
-  <span class="kw">forward</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>) {
-    <span class="no">x</span> <span class="kw">%&gt;%</span>
-
-      <span class="no">self</span>$<span class="fu">conv1</span>() <span class="kw">%&gt;%</span>
-      <span class="fu"><a href="../../reference/nnf_relu.html">nnf_relu</a></span>() <span class="kw">%&gt;%</span>
-      <span class="fu"><a href="../../reference/nnf_max_pool2d.html">nnf_max_pool2d</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>,<span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-
-      <span class="no">self</span>$<span class="fu">conv2</span>() <span class="kw">%&gt;%</span>
-      <span class="fu"><a href="../../reference/nnf_relu.html">nnf_relu</a></span>() <span class="kw">%&gt;%</span>
-      <span class="fu"><a href="../../reference/nnf_max_pool2d.html">nnf_max_pool2d</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>,<span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-
-      <span class="fu"><a href="../../reference/torch_flatten.html">torch_flatten</a></span>(<span class="kw">start_dim</span> <span class="kw">=</span> <span class="fl">2</span>) <span class="kw">%&gt;%</span>
-
-      <span class="no">self</span>$<span class="fu">fc1</span>() <span class="kw">%&gt;%</span>
-      <span class="fu"><a href="../../reference/nnf_relu.html">nnf_relu</a></span>() <span class="kw">%&gt;%</span>
-
-      <span class="no">self</span>$<span class="fu">fc2</span>() <span class="kw">%&gt;%</span>
-      <span class="fu"><a href="../../reference/nnf_relu.html">nnf_relu</a></span>() <span class="kw">%&gt;%</span>
-
-      <span class="no">self</span>$<span class="fu">fc3</span>()
+  forward = <span class="fu">function</span>(<span class="kw">x</span>) {
+    <span class="kw">x</span> <span class="op">%&gt;%</span> 
+      
+      <span class="kw">self</span><span class="op">$</span><span class="fu">conv1</span>() <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="../../reference/nnf_relu.html">nnf_relu</a></span>() <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="../../reference/nnf_max_pool2d.html">nnf_max_pool2d</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>,<span class="fl">2</span>)) <span class="op">%&gt;%</span> 
+      
+      <span class="kw">self</span><span class="op">$</span><span class="fu">conv2</span>() <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="../../reference/nnf_relu.html">nnf_relu</a></span>() <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="../../reference/nnf_max_pool2d.html">nnf_max_pool2d</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>,<span class="fl">2</span>)) <span class="op">%&gt;%</span> 
+      
+      <span class="fu"><a href="../../reference/torch_flatten.html">torch_flatten</a></span>(start_dim = <span class="fl">2</span>) <span class="op">%&gt;%</span> 
+      
+      <span class="kw">self</span><span class="op">$</span><span class="fu">fc1</span>() <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="../../reference/nnf_relu.html">nnf_relu</a></span>() <span class="op">%&gt;%</span> 
+      
+      <span class="kw">self</span><span class="op">$</span><span class="fu">fc2</span>() <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="../../reference/nnf_relu.html">nnf_relu</a></span>() <span class="op">%&gt;%</span> 
+      
+      <span class="kw">self</span><span class="op">$</span><span class="fu">fc3</span>()
   }
 )
 
-<span class="no">net</span> <span class="kw">&lt;-</span> <span class="fu">Net</span>()</pre></body></html></div>
+<span class="kw">net</span> <span class="op">&lt;-</span> <span class="fu">Net</span>()
+</pre></div>
 <p>You just have to define the <code>forward</code> function, and the <code>backward</code> function (where gradients are computed) is automatically defined for you using <code>autograd.</code> You can use any of the Tensor operations in the <code>forward</code> function.</p>
 <p>The learnable parameters of a model are returned by <code>net$parameters</code>.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">net</span>$<span class="no">parameters</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw">net</span><span class="op">$</span><span class="kw">parameters</span>)
+<span class="co">#&gt; List of 10</span>
+<span class="co">#&gt;  $ conv1.weight:Float [1:6, 1:1, 1:3, 1:3]</span>
+<span class="co">#&gt;  $ conv1.bias  :Float [1:6]</span>
+<span class="co">#&gt;  $ conv2.weight:Float [1:16, 1:6, 1:3, 1:3]</span>
+<span class="co">#&gt;  $ conv2.bias  :Float [1:16]</span>
+<span class="co">#&gt;  $ fc1.weight  :Float [1:120, 1:576]</span>
+<span class="co">#&gt;  $ fc1.bias    :Float [1:120]</span>
+<span class="co">#&gt;  $ fc2.weight  :Float [1:84, 1:120]</span>
+<span class="co">#&gt;  $ fc2.bias    :Float [1:84]</span>
+<span class="co">#&gt;  $ fc3.weight  :Float [1:10, 1:84]</span>
+<span class="co">#&gt;  $ fc3.bias    :Float [1:10]</span>
+</pre></div>
 <p>Let’s try a random 32x32 input. Note: expected input size of this net (LeNet) is 32x32. To use this net on the MNIST dataset, please resize the images from the dataset to 32x32.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">input</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">32</span>, <span class="fl">32</span>)
-<span class="no">out</span> <span class="kw">&lt;-</span> <span class="fu">net</span>(<span class="no">input</span>)
-<span class="no">out</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">32</span>, <span class="fl">32</span>)
+<span class="kw">out</span> <span class="op">&lt;-</span> <span class="fu">net</span>(<span class="kw">input</span>)
+<span class="kw">out</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; -0.0586  0.0926  0.0214 -0.1204 -0.0226 -0.0651  0.1127 -0.0595  0.0188 -0.0046</span>
+<span class="co">#&gt; [ CPUFloatType{1,10} ]</span>
+</pre></div>
 <p>Zero the gradient buffers of all parameters and backprops with random gradients:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">net</span>$<span class="fu">zero_grad</span>()
-<span class="no">out</span>$<span class="fu">backward</span>(<span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">1</span>, <span class="fl">10</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">net</span><span class="op">$</span><span class="fu">zero_grad</span>()
+<span class="kw">out</span><span class="op">$</span><span class="fu">backward</span>(<span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">1</span>, <span class="fl">10</span>))
+</pre></div>
 <blockquote>
 <p><strong>Note</strong>: <code>nn</code> only supports mini-batches. The entire torch.nn package only supports inputs that are a mini-batch of samples, and not a single sample. For example, <code>nn_conv2d</code> will take in a 4D Tensor of nSamples x nChannels x Height x Width. If you have a single sample, just use <code>input$unsqueeze(1)</code> to add a fake batch dimension.</p>
 </blockquote>
@@ -256,12 +283,17 @@
 <p>A loss function takes the (output, target) pair of inputs, and computes a value that estimates how far away the output is from the target.</p>
 <p>There are several different loss functions under the nn package . A simple loss is: <code>nnf_mse_loss</code> which computes the mean-squared error between the input and the target.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">output</span> <span class="kw">&lt;-</span> <span class="fu">net</span>(<span class="no">input</span>)
-<span class="no">target</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">10</span>)  <span class="co"># a dummy target, for example</span>
-<span class="no">target</span> <span class="kw">&lt;-</span> <span class="no">target</span>$<span class="fu">view</span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, -<span class="fl">1</span>))  <span class="co"># make it the same shape as output</span>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">output</span> <span class="op">&lt;-</span> <span class="fu">net</span>(<span class="kw">input</span>)
+<span class="kw">target</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">10</span>)  <span class="co"># a dummy target, for example</span>
+<span class="kw">target</span> <span class="op">&lt;-</span> <span class="kw">target</span><span class="op">$</span><span class="fu">view</span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>))  <span class="co"># make it the same shape as output</span>
 
-<span class="no">loss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span>(<span class="no">output</span>, <span class="no">target</span>)
-<span class="no">loss</span></pre></body></html></div>
+<span class="kw">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span>(<span class="kw">output</span>, <span class="kw">target</span>)
+<span class="kw">loss</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; 1.25555</span>
+<span class="co">#&gt; [ CPUFloatType{} ]</span>
+</pre></div>
 <p>Now, if you follow loss in the backward direction, using its <code>$grad_fn</code> attribute, you will see a graph of computations that looks like this:</p>
 <pre><code>input -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d
       -&gt; view -&gt; linear -&gt; relu -&gt; linear -&gt; relu -&gt; linear
@@ -269,24 +301,48 @@
       -&gt; loss</code></pre>
 <p>So, when we call <code>loss$backward()</code>, the whole graph is differentiated w.r.t. the loss, and all Tensors in the graph that has requires_grad=True will have their <code>#grad</code> Tensor accumulated with the gradient.</p>
 <p>For illustration, let us follow a few steps backward:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">loss</span>$<span class="no">grad_fn</span>
-<span class="no">loss</span>$<span class="no">grad_fn</span>$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]
-<span class="no">loss</span>$<span class="no">grad_fn</span>$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">next_functions</span><span class="kw">[[</span><span class="fl">1</span>]]</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">loss</span><span class="op">$</span><span class="kw">grad_fn</span>
+<span class="co">#&gt; MseLossBackward</span>
+<span class="kw">loss</span><span class="op">$</span><span class="kw">grad_fn</span><span class="op">$</span><span class="kw">next_functions</span>[[<span class="fl">1</span>]]
+<span class="co">#&gt; AddmmBackward</span>
+<span class="kw">loss</span><span class="op">$</span><span class="kw">grad_fn</span><span class="op">$</span><span class="kw">next_functions</span>[[<span class="fl">1</span>]]<span class="op">$</span><span class="kw">next_functions</span>[[<span class="fl">1</span>]]
+<span class="co">#&gt; torch::autograd::AccumulateGrad</span>
+</pre></div>
 </div>
 <div id="backprop" class="section level2">
 <h2 class="hasAnchor">
 <a href="#backprop" class="anchor"></a>Backprop</h2>
 <p>To backpropagate the error all we have to do is to <code>loss$backward()</code>. You need to clear the existing gradients though, else gradients will be accumulated to existing gradients.</p>
 <p>Now we shall call <code>loss$backward()</code>, and have a look at conv1’s bias gradients before and after the backward.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">net</span>$<span class="fu">zero_grad</span>()     <span class="co"># zeroes the gradient buffers of all parameters</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="kw">net</span><span class="op">$</span><span class="fu">zero_grad</span>()     <span class="co"># zeroes the gradient buffers of all parameters</span>
 
 <span class="co"># conv1.bias.grad before backward</span>
-<span class="no">net</span>$<span class="no">conv1</span>$<span class="no">bias</span>$<span class="no">grad</span>
+<span class="kw">net</span><span class="op">$</span><span class="kw">conv1</span><span class="op">$</span><span class="kw">bias</span><span class="op">$</span><span class="kw">grad</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt; [ CPUFloatType{6} ]</span>
 
-<span class="no">loss</span>$<span class="fu">backward</span>()
+<span class="kw">loss</span><span class="op">$</span><span class="fu">backward</span>()
 
 <span class="co"># conv1.bias.grad after backward</span>
-<span class="no">net</span>$<span class="no">conv1</span>$<span class="no">bias</span>$<span class="no">grad</span></pre></body></html></div>
+<span class="kw">net</span><span class="op">$</span><span class="kw">conv1</span><span class="op">$</span><span class="kw">bias</span><span class="op">$</span><span class="kw">grad</span>
+<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; 0.001 *</span>
+<span class="co">#&gt; -6.5399</span>
+<span class="co">#&gt;  7.6973</span>
+<span class="co">#&gt; -11.5043</span>
+<span class="co">#&gt; -0.8407</span>
+<span class="co">#&gt; -5.6808</span>
+<span class="co">#&gt;  1.1224</span>
+<span class="co">#&gt; [ CPUFloatType{6} ]</span>
+</pre></div>
 <p>Now, we have seen how to use loss functions.</p>
 </div>
 <div id="update-the-weights" class="section level2">
@@ -295,25 +351,30 @@
 <p>The simplest update rule used in practice is the Stochastic Gradient Descent (SGD):</p>
 <p><span class="math display">\[weight = weight - learning_rate * gradient\]</span></p>
 <p>We can implement this using simple R code:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">learning_rate</span> <span class="kw">&lt;-</span> <span class="fl">0.01</span>
-<span class="kw">for</span> (<span class="no">f</span> <span class="kw">in</span> <span class="no">net</span>$<span class="no">parameters</span>) {
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">0.01</span>
+<span class="co">for</span> (<span class="kw">f</span> <span class="co">in</span> <span class="kw">net</span><span class="op">$</span><span class="kw">parameters</span>) {
   <span class="fu"><a href="../../reference/with_no_grad.html">with_no_grad</a></span>({
-    <span class="no">f</span>$<span class="fu">sub_</span>(<span class="no">f</span>$<span class="no">grad</span> * <span class="no">learning_rate</span>)
+    <span class="kw">f</span><span class="op">$</span><span class="fu">sub_</span>(<span class="kw">f</span><span class="op">$</span><span class="kw">grad</span> <span class="op">*</span> <span class="kw">learning_rate</span>)
   })
-}</pre></body></html></div>
+}
+</pre></div>
 <blockquote>
 <p><strong>Note:</strong> Weight updates here is wraped around <code>with_no_grad</code> as we don’t the updates to be tracked by the autograd engine.</p>
 </blockquote>
 <p>However, as you use neural networks, you want to use various different update rules such as SGD, Nesterov-SGD, Adam, RMSProp, etc.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="co"># create your optimizer</span>
-<span class="no">optimizer</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/optim_sgd.html">optim_sgd</a></span>(<span class="no">net</span>$<span class="no">parameters</span>, <span class="kw">lr</span> <span class="kw">=</span> <span class="fl">0.01</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="co"># create your optimizer</span>
+<span class="kw">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/optim_sgd.html">optim_sgd</a></span>(<span class="kw">net</span><span class="op">$</span><span class="kw">parameters</span>, lr = <span class="fl">0.01</span>)
 
 <span class="co"># in your training loop:</span>
-<span class="no">optimizer</span>$<span class="fu">zero_grad</span>()   <span class="co"># zero the gradient buffers</span>
-<span class="no">output</span> <span class="kw">&lt;-</span> <span class="fu">net</span>(<span class="no">input</span>)
-<span class="no">loss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span>(<span class="no">output</span>, <span class="no">target</span>)
-<span class="no">loss</span>$<span class="fu">backward</span>()
-<span class="no">optimizer</span>$<span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span>()    <span class="co"># Does the update</span></pre></body></html></div>
+<span class="kw">optimizer</span><span class="op">$</span><span class="fu">zero_grad</span>()   <span class="co"># zero the gradient buffers</span>
+<span class="kw">output</span> <span class="op">&lt;-</span> <span class="fu">net</span>(<span class="kw">input</span>)
+<span class="kw">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span>(<span class="kw">output</span>, <span class="kw">target</span>)
+<span class="kw">loss</span><span class="op">$</span><span class="fu">backward</span>()
+<span class="kw">optimizer</span><span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span>()    <span class="co"># Does the update</span>
+<span class="co">#&gt; NULL</span>
+</pre></div>
 <blockquote>
 <p><strong>Note:</strong> Observe how gradient buffers had to be manually set to zero using <code>optimizer$zero_grad()</code>. This is because gradients are accumulated as explained in the Backprop section.</p>
 </blockquote>
@@ -335,7 +396,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

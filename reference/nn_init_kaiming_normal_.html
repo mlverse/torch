@@ -74,7 +74,7 @@ normal distribution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -144,6 +144,9 @@ normal distribution." />
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -197,10 +200,10 @@ normal distribution.</p>
     </div>
 
     <pre class="usage"><span class='fu'>nn_init_kaiming_normal_</span>(
-  <span class='no'>tensor</span>,
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"fan_in"</span>,
-  <span class='kw'>nonlinearity</span> <span class='kw'>=</span> <span class='st'>"leaky_relu"</span>
+  <span class='kw'>tensor</span>,
+  a = <span class='fl'>0</span>,
+  mode = <span class='st'>"fan_in"</span>,
+  nonlinearity = <span class='st'>"leaky_relu"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -230,11 +233,16 @@ or 'leaky_relu' (default).</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>nn_init_kaiming_normal_</span>(<span class='no'>w</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"fan_in"</span>, <span class='kw'>nonlinearity</span> <span class='kw'>=</span> <span class='st'>"leaky_relu"</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
+<span class='fu'>nn_init_kaiming_normal_</span>(<span class='kw'>w</span>, mode = <span class='st'>"fan_in"</span>, nonlinearity = <span class='st'>"leaky_relu"</span>)
 
-}</div></pre>
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; -0.5594  0.2408  0.3946  0.5860 -0.4834
+#&gt; -0.0442  0.7170 -0.3028  0.4015 -0.8906
+#&gt; -0.5157 -0.1763  0.9366  0.4640 -0.5356
+#&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -250,7 +258,7 @@ or 'leaky_relu' (default).</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

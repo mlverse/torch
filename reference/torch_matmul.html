@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Matmul</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_matmul.Rd</code></div>
     </div>
 
@@ -192,21 +195,18 @@
     <p>Matmul</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_matmul</span>(<span class='kw'>self</span>, <span class='kw'>other</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the first tensor to be multiplied</p></td>
     </tr>
     <tr>
       <th>other</th>
       <td><p>(Tensor) the second tensor to be multiplied</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -216,7 +216,7 @@
 <pre>The 1-dimensional dot product version of this function does not support an `out` parameter.
 </pre>
 
-    <h2 class="hasAnchor" id="matmul-input-other-out-none-gt-tensor-"><a class="anchor" href="#matmul-input-other-out-none-gt-tensor-"></a>matmul(input, other, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="matmul-input-other-out-null-gt-tensor-"><a class="anchor" href="#matmul-input-other-out-null-gt-tensor-"></a>matmul(input, other, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -243,29 +243,80 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
 <span class='co'># vector x vector</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
 <span class='co'># matrix x vector</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
 <span class='co'># batched matrix x broadcasted vector</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
 <span class='co'># batched matrix x batched matrix</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
 <span class='co'># batched matrix x broadcasted matrix</span>
-<span class='no'>tensor1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>tensor2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'>torch_matmul</span>(<span class='no'>tensor1</span>, <span class='no'>tensor2</span>)
-}</div></pre>
+<span class='kw'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='fu'>torch_matmul</span>(<span class='kw'>tensor1</span>, <span class='kw'>tensor2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;   1.4141  1.4001 -1.1872  4.4812 -4.5123
+#&gt;  -0.6182 -0.5955  0.2930  0.0105 -0.2454
+#&gt;  -1.1772 -1.2618 -2.2089 -0.6403 -3.9477
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;  -0.3450  0.8121  0.6671  1.2723 -1.1277
+#&gt;  -0.2272 -1.9456 -0.3421 -3.2339  3.1313
+#&gt;  -1.4981 -1.3352  1.3184 -0.3911  0.6659
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;  -0.1647  0.0008  0.4195  0.6568 -0.2479
+#&gt;   0.2833 -0.3681 -2.1422 -0.1373 -2.4804
+#&gt;  -1.0905  0.9223  0.9962 -1.8491  1.1189
+#&gt; 
+#&gt; (4,.,.) = 
+#&gt;   0.1371  0.4425  0.9952  1.8871 -0.2902
+#&gt;  -1.2767 -0.4945  0.1557  1.8520 -3.2727
+#&gt;   0.3469  0.0902 -0.1055 -1.3771  1.6447
+#&gt; 
+#&gt; (5,.,.) = 
+#&gt;  -0.6114  0.1862 -2.2116 -0.2221 -4.1611
+#&gt;  -0.0989 -0.1072 -0.8892 -0.1625 -1.2879
+#&gt;   1.2899 -0.6198 -0.7682 -1.6970  2.7560
+#&gt; 
+#&gt; (6,.,.) = 
+#&gt;  -0.9002 -0.6686  0.7476 -0.4892  0.5102
+#&gt;   1.2072 -0.2425 -1.8316 -2.6264  1.7271
+#&gt;   1.3181 -0.9016  0.5380  0.7148  2.6132
+#&gt; 
+#&gt; (7,.,.) = 
+#&gt;  -1.3253 -2.3322 -0.1508 -3.8124  2.4456
+#&gt;  -1.7344  0.4342  1.2367 -0.7748 -0.3066
+#&gt;  -0.1834 -0.1359 -0.4975  1.1753 -2.0854
+#&gt; 
+#&gt; (8,.,.) = 
+#&gt;  -3.7992 -2.2777 -0.6481  1.6047 -7.3195
+#&gt;   0.1569  0.5818 -0.8449  3.0991 -4.2488
+#&gt;   0.3792  0.0464  0.5434  1.5578 -0.0924
+#&gt; 
+#&gt; (9,.,.) = 
+#&gt;  -1.7851 -1.7766  0.4640 -3.3044  1.9087
+#&gt;  -1.8305 -1.3658  0.0552 -3.1704  0.8987
+#&gt;  -1.4499 -1.3060  0.4094  0.2355 -1.2374
+#&gt; 
+#&gt; (10,.,.) = 
+#&gt;  -0.7771 -0.4226 -0.4226 -2.4339  0.6671
+#&gt;  -0.0736  0.0043  1.4790  1.5012  0.6867
+#&gt;  -1.5934 -0.1540  0.9720  0.5761 -1.4871
+#&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -281,7 +332,7 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

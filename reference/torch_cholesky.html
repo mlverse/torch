@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cholesky</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_cholesky.Rd</code></div>
     </div>
 
@@ -192,64 +195,64 @@
     <p>Cholesky</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_cholesky</span>(<span class='kw'>self</span>, upper = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) the input tensor \(A\) of size \((*, n, n)\) where <code>*</code> is zero or more                batch dimensions consisting of symmetric positive-definite matrices.</p></td>
+      <th>self</th>
+      <td><p>(Tensor) the input tensor \(A\) of size \((*, n, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more
+batch dimensions consisting of symmetric positive-definite matrices.</p></td>
     </tr>
     <tr>
       <th>upper</th>
-      <td><p>(bool, optional) flag that indicates whether to return a                            upper or lower triangular matrix. Default: <code>False</code></p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output matrix</p></td>
+      <td><p>(bool, optional) flag that indicates whether to return a
+upper or lower triangular matrix. Default: <code>FALSE</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="cholesky-input-upper-false-out-none-gt-tensor-"><a class="anchor" href="#cholesky-input-upper-false-out-none-gt-tensor-"></a>cholesky(input, upper=False, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="cholesky-input-upper-false-out-null-gt-tensor-"><a class="anchor" href="#cholesky-input-upper-false-out-null-gt-tensor-"></a>cholesky(input, upper=False, out=NULL) -&gt; Tensor </h2>
 
     
 
 
 <p>Computes the Cholesky decomposition of a symmetric positive-definite
 matrix \(A\) or for batches of symmetric positive-definite matrices.</p>
-<p>If <code>upper</code> is <code>True</code>, the returned matrix <code>U</code> is upper-triangular, and
+<p>If <code>upper</code> is <code>TRUE</code>, the returned matrix <code>U</code> is upper-triangular, and
 the decomposition has the form:</p>
 <p>$$
   A = U^TU
 $$
-If <code>upper</code> is <code>False</code>, the returned matrix <code>L</code> is lower-triangular, and
+If <code>upper</code> is <code>FALSE</code>, the returned matrix <code>L</code> is lower-triangular, and
 the decomposition has the form:</p>
 <p>$$
     A = LL^T
 $$
-If <code>upper</code> is <code>True</code>, and \(A\) is a batch of symmetric positive-definite
+If <code>upper</code> is <code>TRUE</code>, and \(A\) is a batch of symmetric positive-definite
 matrices, then the returned tensor will be composed of upper-triangular Cholesky factors
-of each of the individual matrices. Similarly, when <code>upper</code> is <code>False</code>, the returned
+of each of the individual matrices. Similarly, when <code>upper</code> is <code>FALSE</code>, the returned
 tensor will be composed of lower-triangular Cholesky factors of each of the individual
 matrices.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive-definite</span>
-<span class='no'>l</span> <span class='kw'>=</span> <span class='fu'>torch_cholesky</span>(<span class='no'>a</span>)
-<span class='no'>a</span>
-<span class='no'>l</span>
-<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>l</span>, <span class='no'>l</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>())
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>a</span>, <span class='no'>a</span>$<span class='fu'>transpose</span>(-<span class='fl'>1</span>, -<span class='fl'>2</span>)) + <span class='fl'>1e-03</span> <span class='co'># make symmetric positive-definite</span>
-<span class='no'>l</span> <span class='kw'>=</span> <span class='fu'>torch_cholesky</span>(<span class='no'>a</span>)
-<span class='no'>z</span> <span class='kw'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='no'>l</span>, <span class='no'>l</span>$<span class='fu'>transpose</span>(-<span class='fl'>1</span>, -<span class='fl'>2</span>))
-<span class='fu'><a href='torch_max.html'>torch_max</a></span>(<span class='fu'><a href='torch_abs.html'>torch_abs</a></span>(<span class='no'>z</span> - <span class='no'>a</span>)) <span class='co'># Max non-zero</span>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='kw'>a</span>, <span class='kw'>a</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()) <span class='co'># make symmetric positive-definite</span>
+<span class='kw'>l</span> <span class='op'>=</span> <span class='fu'>torch_cholesky</span>(<span class='kw'>a</span>)
+<span class='kw'>a</span>
+<span class='kw'>l</span>
+<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='kw'>l</span>, <span class='kw'>l</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>())
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>a</span>, <span class='kw'>a</span><span class='op'>$</span><span class='fu'>transpose</span>(<span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>2</span>)) <span class='op'>+</span> <span class='fl'>1e-03</span> <span class='co'># make symmetric positive-definite</span>
+<span class='kw'>l</span> <span class='op'>=</span> <span class='fu'>torch_cholesky</span>(<span class='kw'>a</span>)
+<span class='kw'>z</span> <span class='op'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>l</span>, <span class='kw'>l</span><span class='op'>$</span><span class='fu'>transpose</span>(<span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>2</span>))
+<span class='fu'><a href='torch_max.html'>torch_max</a></span>(<span class='fu'><a href='torch_abs.html'>torch_abs</a></span>(<span class='kw'>z</span> <span class='op'>-</span> <span class='kw'>a</span>)) <span class='co'># Max non-zero</span>
 }
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -265,7 +268,7 @@ matrices.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

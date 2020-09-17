@@ -73,7 +73,7 @@ Class representing the context." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -143,6 +143,9 @@ Class representing the context." />
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -198,13 +201,13 @@ Class representing the context." />
 
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
-    <p><div class="r6-fields"></p><dl'>
+    <p><div class="r6-fields"></p><dl>
 <dt><code>ptr</code></dt><dd><p>(Dev related) pointer to the context c++ object.</p></dd>
 
 </dl><p></div></p>
     <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
 
-    <p><div class="r6-active-bindings"></p><dl'>
+    <p><div class="r6-active-bindings"></p><dl>
 <dt><code>needs_input_grad</code></dt><dd><p>boolean listing arguments of <code>forward</code> and whether they require_grad.</p></dd>
 
 <dt><code>saved_variables</code></dt><dd><p>list of objects that were saved for backward via <code>save_for_backward</code>.</p></dd>
@@ -213,7 +216,7 @@ Class representing the context." />
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-<h3>Public methods</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Public methods</h3>
 
 <ul>
 <li><p><a href='#method-new'><code>AutogradContext$new()</code></a></p></li>
@@ -223,17 +226,17 @@ Class representing the context." />
 <li><p><a href='#method-clone'><code>AutogradContext$clone()</code></a></p></li>
 </ul>
 <p><hr>
-<a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>(Dev related) Initializes the context. Not user related.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>AutogradContext</span>$<span class='fu'>new</span>(
-  <span class='no'>ptr</span>,
-  <span class='no'>env</span>,
-  <span class='kw'>argument_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>argument_needs_grad</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+<a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
+<p>(Dev related) Initializes the context. Not user related.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>new</span>(
+  <span class='kw'>ptr</span>,
+  <span class='kw'>env</span>,
+  argument_names = <span class='kw'>NULL</span>,
+  argument_needs_grad = <span class='kw'>NULL</span>
 )</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>ptr</code></dt><dd><p>pointer to the c++ object</p></dd>
 
 <dt><code>env</code></dt><dd><p>environment that encloses both forward and backward</p></dd>
@@ -244,24 +247,24 @@ Class representing the context." />
 
 </dl><p></div></p>
 <p><hr>
-<a id="method-save_for_backward"></a></p><h3>Method <code>save_for_backward()</code></h3>
+<a id="method-save_for_backward"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>save_for_backward()</code></h3>
 <p>Saves given objects for a future call to backward().</p>
 <p>This should be called at most once, and only from inside the <code>forward()</code>
 method.</p>
 <p>Later, saved objects can be accessed through the <code>saved_variables</code> attribute.
 Before returning them to the user, a check is made to ensure they weren’t used
 in any in-place operation that modified their content.</p>
-<p>Arguments can also be any kind of R object.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>AutogradContext</span>$<span class='fu'>save_for_backward</span>(<span class='no'>...</span>)</pre><p></div></p>
+<p>Arguments can also be any kind of R object.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>save_for_backward</span>(<span class='kw'>...</span>)</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>...</code></dt><dd><p>any kind of R object that will be saved for the backward pass.
 It's common to pass named arguments.</p></dd>
 
 </dl><p></div></p>
 <p><hr>
-<a id="method-mark_non_differentiable"></a></p><h3>Method <code>mark_non_differentiable()</code></h3>
+<a id="method-mark_non_differentiable"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>mark_non_differentiable()</code></h3>
 <p>Marks outputs as non-differentiable.</p>
 <p>This should be called at most once, only from inside the <code>forward()</code> method,
 and all arguments should be outputs.</p>
@@ -269,36 +272,36 @@ and all arguments should be outputs.</p>
 of backward computation. You still need to accept a gradient for each output
 in <code>backward()</code>, but it’s always going to be a zero tensor with the same
 shape as the shape of a corresponding output.</p>
-<p>This is used e.g. for indices returned from a max Function.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>AutogradContext</span>$<span class='fu'>mark_non_differentiable</span>(<span class='no'>...</span>)</pre><p></div></p>
+<p>This is used e.g. for indices returned from a max Function.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>mark_non_differentiable</span>(<span class='kw'>...</span>)</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>...</code></dt><dd><p>non-differentiable outputs.</p></dd>
 
 </dl><p></div></p>
 <p><hr>
-<a id="method-mark_dirty"></a></p><h3>Method <code>mark_dirty()</code></h3>
+<a id="method-mark_dirty"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>mark_dirty()</code></h3>
 <p>Marks given tensors as modified in an in-place operation.</p>
 <p>This should be called at most once, only from inside the <code>forward()</code> method,
 and all arguments should be inputs.</p>
 <p>Every tensor that’s been modified in-place in a call to <code>forward()</code> should
 be given to this function, to ensure correctness of our checks. It doesn’t
-matter whether the function is called before or after modification.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>AutogradContext</span>$<span class='fu'>mark_dirty</span>(<span class='no'>...</span>)</pre><p></div></p>
+matter whether the function is called before or after modification.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>mark_dirty</span>(<span class='kw'>...</span>)</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>...</code></dt><dd><p>tensors that are modified in-place.</p></dd>
 
 </dl><p></div></p>
 <p><hr>
-<a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>AutogradContext</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+<a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>clone</span>(deep = <span class='fl'>FALSE</span>)</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></div></p>
@@ -320,7 +323,7 @@ matter whether the function is called before or after modification.</p><h3>Usage
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

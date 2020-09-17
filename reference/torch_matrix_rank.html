@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Matrix_rank</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_matrix_rank.Rd</code></div>
     </div>
 
@@ -192,45 +195,49 @@
     <p>Matrix_rank</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_matrix_rank</span>(<span class='kw'>self</span>, <span class='kw'>tol</span>, symmetric = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input 2-D tensor</p></td>
     </tr>
     <tr>
       <th>tol</th>
-      <td><p>(float, optional) the tolerance value. Default: <code>None</code></p></td>
+      <td><p>(float, optional) the tolerance value. Default: <code>NULL</code></p></td>
     </tr>
     <tr>
       <th>symmetric</th>
-      <td><p>(bool, optional) indicates whether <code>input</code> is symmetric.                               Default: <code>False</code></p></td>
+      <td><p>(bool, optional) indicates whether <code>input</code> is symmetric.                               Default: <code>FALSE</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="matrix-rank-input-tol-none-symmetric-false-gt-tensor-"><a class="anchor" href="#matrix-rank-input-tol-none-symmetric-false-gt-tensor-"></a>matrix_rank(input, tol=None, symmetric=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="matrix-rank-input-tol-null-symmetric-false-gt-tensor-"><a class="anchor" href="#matrix-rank-input-tol-null-symmetric-false-gt-tensor-"></a>matrix_rank(input, tol=NULL, symmetric=False) -&gt; Tensor </h2>
 
     
 
 
 <p>Returns the numerical rank of a 2-D tensor. The method to compute the
-matrix rank is done using SVD by default. If <code>symmetric</code> is <code>True</code>,
+matrix rank is done using SVD by default. If <code>symmetric</code> is <code>TRUE</code>,
 then <code>input</code> is assumed to be symmetric, and the computation of the
 rank is done by obtaining the eigenvalues.</p>
 <p><code>tol</code> is the threshold below which the singular values (or the eigenvalues
-when <code>symmetric</code> is <code>True</code>) are considered to be 0. If <code>tol</code> is not
+when <code>symmetric</code> is <code>TRUE</code>) are considered to be 0. If <code>tol</code> is not
 specified, <code>tol</code> is set to <code>S.max() * max(S.size()) * eps</code> where <code>S</code> is the
-singular values (or the eigenvalues when <code>symmetric</code> is <code>True</code>), and <code>eps</code>
+singular values (or the eigenvalues when <code>symmetric</code> is <code>TRUE</code>), and <code>eps</code>
 is the epsilon value for the datatype of <code>input</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_eye.html'>torch_eye</a></span>(<span class='fl'>10</span>)
-<span class='fu'>torch_matrix_rank</span>(<span class='no'>a</span>)
-}</div></pre>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_eye.html'>torch_eye</a></span>(<span class='fl'>10</span>)
+<span class='fu'>torch_matrix_rank</span>(<span class='kw'>a</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; 10
+#&gt; [ CPULongType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -246,7 +253,7 @@ is the epsilon value for the datatype of <code>input</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

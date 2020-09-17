@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -192,7 +195,7 @@
     <p>Applies a linear transformation to the incoming data: <code>y = xA^T + b</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_linear</span>(<span class='no'>in_features</span>, <span class='no'>out_features</span>, <span class='kw'>bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_linear</span>(<span class='kw'>in_features</span>, <span class='kw'>out_features</span>, bias = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,7 +220,7 @@ Default: <code>TRUE</code></p></td>
     
 
 <ul>
-<li><p>Input: <code>(N, *, H_in)</code> where <code>*</code> means any number of
+<li><p>Input: <code>(N, *, H_in)</code> where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> means any number of
 additional dimensions and <code>H_in = in_features</code>.</p></li>
 <li><p>Output: <code>(N, *, H_out)</code> where all but the last dimension
 are the same shape as the input and :math:<code>H_out = out_features</code>.</p></li>
@@ -240,13 +243,14 @@ If <code>bias</code> is <code>TRUE</code>, the values are initialized from
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>nn_linear</span>(<span class='fl'>20</span>, <span class='fl'>30</span>)
-<span class='no'>input</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>128</span>, <span class='fl'>20</span>)
-<span class='no'>output</span> <span class='kw'>&lt;-</span> <span class='fu'>m</span>(<span class='no'>input</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>output</span>$<span class='fu'>size</span>())
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_linear</span>(<span class='fl'>20</span>, <span class='fl'>30</span>)
+<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>128</span>, <span class='fl'>20</span>)
+<span class='kw'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>output</span><span class='op'>$</span><span class='fu'>size</span>())
 
-}</div></pre>
+}
+</div><div class='output co'>#&gt; [1] 128  30</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -262,7 +266,7 @@ If <code>bias</code> is <code>TRUE</code>, the values are initialized from
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

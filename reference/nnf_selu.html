@@ -75,7 +75,7 @@ with \(\alpha=1.6732632423543772848170429916717\) and
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -145,6 +145,9 @@ with \(\alpha=1.6732632423543772848170429916717\) and
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -198,9 +201,9 @@ with \(\alpha=1.6732632423543772848170429916717\) and
 \(scale=1.0507009873554804934193349852946\).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_selu</span>(<span class='no'>input</span>, <span class='kw'>inplace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>nnf_selu</span>(<span class='kw'>input</span>, inplace = <span class='fl'>FALSE</span>)
 
-<span class='fu'>nnf_selu_</span>(<span class='no'>input</span>)</pre>
+<span class='fu'>nnf_selu_</span>(<span class='kw'>input</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,13 +221,14 @@ dimensions</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>)
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>nnf_selu</span>(<span class='no'>x</span>)
-<span class='fu'>nnf_selu_</span>(<span class='no'>x</span>)
-<span class='fu'><a href='torch_equal.html'>torch_equal</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>)
+<span class='kw'>y</span> <span class='op'>&lt;-</span> <span class='fu'>nnf_selu</span>(<span class='kw'>x</span>)
+<span class='fu'>nnf_selu_</span>(<span class='kw'>x</span>)
+<span class='fu'><a href='torch_equal.html'>torch_equal</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>)
 
-}</div></pre>
+}
+</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -240,7 +244,7 @@ dimensions</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

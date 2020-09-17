@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -141,6 +141,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -196,7 +199,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-tensor-creation-utilities" class="hasAnchor"><a href="#section-tensor-creation-utilities" class="anchor"></a>Tensor creation utilities</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -208,83 +211,137 @@
       <tr>
         
         <td>
-          <p><code><a href="AutogradContext.html">AutogradContext</a></code> </p>
+          <p><code><a href="torch_empty.html">torch_empty()</a></code> </p>
         </td>
-        <td><p>Class representing the context.</p></td>
+        <td><p>Empty</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_arange.html">torch_arange()</a></code> </p>
+        </td>
+        <td><p>Arange</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_eye.html">torch_eye()</a></code> </p>
+        </td>
+        <td><p>Eye</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_full.html">torch_full()</a></code> </p>
+        </td>
+        <td><p>Full</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_linspace.html">torch_linspace()</a></code> </p>
+        </td>
+        <td><p>Linspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_logspace.html">torch_logspace()</a></code> </p>
+        </td>
+        <td><p>Logspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_ones.html">torch_ones()</a></code> </p>
+        </td>
+        <td><p>Ones</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_rand.html">torch_rand()</a></code> </p>
+        </td>
+        <td><p>Rand</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_randint.html">torch_randint()</a></code> </p>
+        </td>
+        <td><p>Randint</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_randn.html">torch_randn()</a></code> </p>
+        </td>
+        <td><p>Randn</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_randperm.html">torch_randperm()</a></code> </p>
+        </td>
+        <td><p>Randperm</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_zeros.html">torch_zeros()</a></code> </p>
+        </td>
+        <td><p>Zeros</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_empty_like.html">torch_empty_like()</a></code> </p>
+        </td>
+        <td><p>Empty_like</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_full_like.html">torch_full_like()</a></code> </p>
+        </td>
+        <td><p>Full_like</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_ones_like.html">torch_ones_like()</a></code> </p>
+        </td>
+        <td><p>Ones_like</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_rand_like.html">torch_rand_like()</a></code> </p>
+        </td>
+        <td><p>Rand_like</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_randint_like.html">torch_randint_like()</a></code> </p>
+        </td>
+        <td><p>Randint_like</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_randn_like.html">torch_randn_like()</a></code> </p>
+        </td>
+        <td><p>Randn_like</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_zeros_like.html">torch_zeros_like()</a></code> </p>
+        </td>
+        <td><p>Zeros_like</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="as_array.html">as_array()</a></code> </p>
         </td>
         <td><p>Converts to array</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autograd_backward.html">autograd_backward()</a></code> </p>
-        </td>
-        <td><p>Computes the sum of gradients of given tensors w.r.t. graph leaves.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autograd_function.html">autograd_function()</a></code> </p>
-        </td>
-        <td><p>Records operation history and defines formulas for differentiating ops.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autograd_grad.html">autograd_grad()</a></code> </p>
-        </td>
-        <td><p>Computes and returns the sum of gradients of outputs w.r.t. the inputs.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autograd_set_grad_mode.html">autograd_set_grad_mode()</a></code> </p>
-        </td>
-        <td><p>Set grad mode</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="cuda_current_device.html">cuda_current_device()</a></code> </p>
-        </td>
-        <td><p>Returns the index of a currently selected device.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="cuda_device_count.html">cuda_device_count()</a></code> </p>
-        </td>
-        <td><p>Returns the number of GPUs available.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="cuda_is_available.html">cuda_is_available()</a></code> </p>
-        </td>
-        <td><p>Returns a bool indicating if CUDA is currently available.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dataloader.html">dataloader()</a></code> </p>
-        </td>
-        <td><p>Data loader. Combines a dataset and a sampler, and provides
-single- or multi-process iterators over the dataset.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dataloader_make_iter.html">dataloader_make_iter()</a></code> </p>
-        </td>
-        <td><p>Creates an iterator from a DataLoader</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dataloader_next.html">dataloader_next()</a></code> </p>
-        </td>
-        <td><p>Get the next element of a dataloader iterator</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dataset.html">dataset()</a></code> </p>
-        </td>
-        <td><p>An abstract class representing a <code>Dataset</code>.</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-tensor-attributes" class="hasAnchor"><a href="#section-tensor-attributes" class="anchor"></a>Tensor attributes</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="default_dtype.html">torch_set_default_dtype()</a></code> <code><a href="default_dtype.html">torch_get_default_dtype()</a></code> </p>
@@ -293,33 +350,45 @@ single- or multi-process iterators over the dataset.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="enumerate.html">enumerate()</a></code> </p>
+          <p><code><a href="is_torch_device.html">is_torch_device()</a></code> </p>
         </td>
-        <td><p>Enumerate an iterator</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="enumerate.dataloader.html">enumerate(<i>&lt;dataloader&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Enumerate an iterator</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="install_torch.html">install_torch()</a></code> </p>
-        </td>
-        <td><p>Install Torch</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_dataloader.html">is_dataloader()</a></code> </p>
-        </td>
-        <td><p>Checks if the object is a dataloader</p></td>
+        <td><p>Checks if object is a device</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="is_torch_dtype.html">is_torch_dtype()</a></code> </p>
         </td>
         <td><p>Check if object is a torch data type</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_dtype.html">torch_float32()</a></code> <code><a href="torch_dtype.html">torch_float()</a></code> <code><a href="torch_dtype.html">torch_float64()</a></code> <code><a href="torch_dtype.html">torch_double()</a></code> <code><a href="torch_dtype.html">torch_float16()</a></code> <code><a href="torch_dtype.html">torch_half()</a></code> <code><a href="torch_dtype.html">torch_uint8()</a></code> <code><a href="torch_dtype.html">torch_int8()</a></code> <code><a href="torch_dtype.html">torch_int16()</a></code> <code><a href="torch_dtype.html">torch_short()</a></code> <code><a href="torch_dtype.html">torch_int32()</a></code> <code><a href="torch_dtype.html">torch_int()</a></code> <code><a href="torch_dtype.html">torch_int64()</a></code> <code><a href="torch_dtype.html">torch_long()</a></code> <code><a href="torch_dtype.html">torch_bool()</a></code> <code><a href="torch_dtype.html">torch_quint8()</a></code> <code><a href="torch_dtype.html">torch_qint8()</a></code> <code><a href="torch_dtype.html">torch_qint32()</a></code> </p>
+        </td>
+        <td><p>Torch data types</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_finfo.html">torch_finfo()</a></code> </p>
+        </td>
+        <td><p>Floating point type info</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_iinfo.html">torch_iinfo()</a></code> </p>
+        </td>
+        <td><p>Integer type info</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_qscheme.html">torch_per_channel_affine()</a></code> <code><a href="torch_qscheme.html">torch_per_tensor_affine()</a></code> <code><a href="torch_qscheme.html">torch_per_channel_symmetric()</a></code> <code><a href="torch_qscheme.html">torch_per_tensor_symmetric()</a></code> </p>
+        </td>
+        <td><p>Creates the corresponding Scheme object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_reduction.html">torch_reduction_sum()</a></code> <code><a href="torch_reduction.html">torch_reduction_mean()</a></code> <code><a href="torch_reduction.html">torch_reduction_none()</a></code> </p>
+        </td>
+        <td><p>Creates the reduction objet</p></td>
       </tr><tr>
         
         <td>
@@ -341,10 +410,1411 @@ single- or multi-process iterators over the dataset.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="is_undefined_tensor.html">is_undefined_tensor()</a></code> </p>
+        </td>
+        <td><p>Checks if a tensor is undefined</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-serialization" class="hasAnchor"><a href="#section-serialization" class="anchor"></a>Serialization</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
           <p><code><a href="load_state_dict.html">load_state_dict()</a></code> </p>
         </td>
         <td><p>Load a state dict file</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_load.html">torch_load()</a></code> </p>
+        </td>
+        <td><p>Loads a saved object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_save.html">torch_save()</a></code> </p>
+        </td>
+        <td><p>Saves an object to a disk file.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-mathematical-operations-on-tensors" class="hasAnchor"><a href="#section-mathematical-operations-on-tensors" class="anchor"></a>Mathematical operations on tensors</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="torch_abs.html">torch_abs()</a></code> </p>
+        </td>
+        <td><p>Abs</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_acos.html">torch_acos()</a></code> </p>
+        </td>
+        <td><p>Acos</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_adaptive_avg_pool1d.html">torch_adaptive_avg_pool1d()</a></code> </p>
+        </td>
+        <td><p>Adaptive_avg_pool1d</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_add.html">torch_add()</a></code> </p>
+        </td>
+        <td><p>Add</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_addbmm.html">torch_addbmm()</a></code> </p>
+        </td>
+        <td><p>Addbmm</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_addcdiv.html">torch_addcdiv()</a></code> </p>
+        </td>
+        <td><p>Addcdiv</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_addcmul.html">torch_addcmul()</a></code> </p>
+        </td>
+        <td><p>Addcmul</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_addmm.html">torch_addmm()</a></code> </p>
+        </td>
+        <td><p>Addmm</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_addmv.html">torch_addmv()</a></code> </p>
+        </td>
+        <td><p>Addmv</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_addr.html">torch_addr()</a></code> </p>
+        </td>
+        <td><p>Addr</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_allclose.html">torch_allclose()</a></code> </p>
+        </td>
+        <td><p>Allclose</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_angle.html">torch_angle()</a></code> </p>
+        </td>
+        <td><p>Angle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_argmax.html">torch_argmax()</a></code> </p>
+        </td>
+        <td><p>Argmax</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_argmin.html">torch_argmin()</a></code> </p>
+        </td>
+        <td><p>Argmin</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_argsort.html">torch_argsort()</a></code> </p>
+        </td>
+        <td><p>Argsort</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_as_strided.html">torch_as_strided()</a></code> </p>
+        </td>
+        <td><p>As_strided</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_asin.html">torch_asin()</a></code> </p>
+        </td>
+        <td><p>Asin</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_atan.html">torch_atan()</a></code> </p>
+        </td>
+        <td><p>Atan</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_atan2.html">torch_atan2()</a></code> </p>
+        </td>
+        <td><p>Atan2</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_avg_pool1d.html">torch_avg_pool1d()</a></code> </p>
+        </td>
+        <td><p>Avg_pool1d</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_baddbmm.html">torch_baddbmm()</a></code> </p>
+        </td>
+        <td><p>Baddbmm</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_bartlett_window.html">torch_bartlett_window()</a></code> </p>
+        </td>
+        <td><p>Bartlett_window</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_bernoulli.html">torch_bernoulli()</a></code> </p>
+        </td>
+        <td><p>Bernoulli</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_bincount.html">torch_bincount()</a></code> </p>
+        </td>
+        <td><p>Bincount</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_bitwise_and.html">torch_bitwise_and()</a></code> </p>
+        </td>
+        <td><p>Bitwise_and</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_bitwise_not.html">torch_bitwise_not()</a></code> </p>
+        </td>
+        <td><p>Bitwise_not</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_bitwise_or.html">torch_bitwise_or()</a></code> </p>
+        </td>
+        <td><p>Bitwise_or</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_bitwise_xor.html">torch_bitwise_xor()</a></code> </p>
+        </td>
+        <td><p>Bitwise_xor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_blackman_window.html">torch_blackman_window()</a></code> </p>
+        </td>
+        <td><p>Blackman_window</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_bmm.html">torch_bmm()</a></code> </p>
+        </td>
+        <td><p>Bmm</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_broadcast_tensors.html">torch_broadcast_tensors()</a></code> </p>
+        </td>
+        <td><p>Broadcast_tensors</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_can_cast.html">torch_can_cast()</a></code> </p>
+        </td>
+        <td><p>Can_cast</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cartesian_prod.html">torch_cartesian_prod()</a></code> </p>
+        </td>
+        <td><p>Cartesian_prod</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cat.html">torch_cat()</a></code> </p>
+        </td>
+        <td><p>Cat</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cdist.html">torch_cdist()</a></code> </p>
+        </td>
+        <td><p>Cdist</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_ceil.html">torch_ceil()</a></code> </p>
+        </td>
+        <td><p>Ceil</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_celu.html">torch_celu()</a></code> </p>
+        </td>
+        <td><p>Celu</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_celu_.html">torch_celu_()</a></code> </p>
+        </td>
+        <td><p>Celu_</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_chain_matmul.html">torch_chain_matmul()</a></code> </p>
+        </td>
+        <td><p>Chain_matmul</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cholesky.html">torch_cholesky()</a></code> </p>
+        </td>
+        <td><p>Cholesky</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cholesky_inverse.html">torch_cholesky_inverse()</a></code> </p>
+        </td>
+        <td><p>Cholesky_inverse</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cholesky_solve.html">torch_cholesky_solve()</a></code> </p>
+        </td>
+        <td><p>Cholesky_solve</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_chunk.html">torch_chunk()</a></code> </p>
+        </td>
+        <td><p>Chunk</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_clamp.html">torch_clamp()</a></code> </p>
+        </td>
+        <td><p>Clamp</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_combinations.html">torch_combinations()</a></code> </p>
+        </td>
+        <td><p>Combinations</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_conj.html">torch_conj()</a></code> </p>
+        </td>
+        <td><p>Conj</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_conv1d.html">torch_conv1d()</a></code> </p>
+        </td>
+        <td><p>Conv1d</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_conv2d.html">torch_conv2d()</a></code> </p>
+        </td>
+        <td><p>Conv2d</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_conv3d.html">torch_conv3d()</a></code> </p>
+        </td>
+        <td><p>Conv3d</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_conv_tbc.html">torch_conv_tbc()</a></code> </p>
+        </td>
+        <td><p>Conv_tbc</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_conv_transpose1d.html">torch_conv_transpose1d()</a></code> </p>
+        </td>
+        <td><p>Conv_transpose1d</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_conv_transpose2d.html">torch_conv_transpose2d()</a></code> </p>
+        </td>
+        <td><p>Conv_transpose2d</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_conv_transpose3d.html">torch_conv_transpose3d()</a></code> </p>
+        </td>
+        <td><p>Conv_transpose3d</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cos.html">torch_cos()</a></code> </p>
+        </td>
+        <td><p>Cos</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cosh.html">torch_cosh()</a></code> </p>
+        </td>
+        <td><p>Cosh</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cosine_similarity.html">torch_cosine_similarity()</a></code> </p>
+        </td>
+        <td><p>Cosine_similarity</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cross.html">torch_cross()</a></code> </p>
+        </td>
+        <td><p>Cross</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cummax.html">torch_cummax()</a></code> </p>
+        </td>
+        <td><p>Cummax</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cummin.html">torch_cummin()</a></code> </p>
+        </td>
+        <td><p>Cummin</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cumprod.html">torch_cumprod()</a></code> </p>
+        </td>
+        <td><p>Cumprod</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_cumsum.html">torch_cumsum()</a></code> </p>
+        </td>
+        <td><p>Cumsum</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_det.html">torch_det()</a></code> </p>
+        </td>
+        <td><p>Det</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_device.html">torch_device()</a></code> </p>
+        </td>
+        <td><p>Create a Device object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_diag.html">torch_diag()</a></code> </p>
+        </td>
+        <td><p>Diag</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_diag_embed.html">torch_diag_embed()</a></code> </p>
+        </td>
+        <td><p>Diag_embed</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_diagflat.html">torch_diagflat()</a></code> </p>
+        </td>
+        <td><p>Diagflat</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_diagonal.html">torch_diagonal()</a></code> </p>
+        </td>
+        <td><p>Diagonal</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_digamma.html">torch_digamma()</a></code> </p>
+        </td>
+        <td><p>Digamma</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_dist.html">torch_dist()</a></code> </p>
+        </td>
+        <td><p>Dist</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_div.html">torch_div()</a></code> </p>
+        </td>
+        <td><p>Div</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_dot.html">torch_dot()</a></code> </p>
+        </td>
+        <td><p>Dot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_eig.html">torch_eig()</a></code> </p>
+        </td>
+        <td><p>Eig</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_einsum.html">torch_einsum()</a></code> </p>
+        </td>
+        <td><p>Einsum</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_empty_strided.html">torch_empty_strided()</a></code> </p>
+        </td>
+        <td><p>Empty_strided</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_eq.html">torch_eq()</a></code> </p>
+        </td>
+        <td><p>Eq</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_equal.html">torch_equal()</a></code> </p>
+        </td>
+        <td><p>Equal</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_erf.html">torch_erf()</a></code> </p>
+        </td>
+        <td><p>Erf</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_erfc.html">torch_erfc()</a></code> </p>
+        </td>
+        <td><p>Erfc</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_erfinv.html">torch_erfinv()</a></code> </p>
+        </td>
+        <td><p>Erfinv</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_exp.html">torch_exp()</a></code> </p>
+        </td>
+        <td><p>Exp</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_expm1.html">torch_expm1()</a></code> </p>
+        </td>
+        <td><p>Expm1</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_fft.html">torch_fft()</a></code> </p>
+        </td>
+        <td><p>Fft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_flatten.html">torch_flatten()</a></code> </p>
+        </td>
+        <td><p>Flatten</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_flip.html">torch_flip()</a></code> </p>
+        </td>
+        <td><p>Flip</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_floor.html">torch_floor()</a></code> </p>
+        </td>
+        <td><p>Floor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_floor_divide.html">torch_floor_divide()</a></code> </p>
+        </td>
+        <td><p>Floor_divide</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_fmod.html">torch_fmod()</a></code> </p>
+        </td>
+        <td><p>Fmod</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_frac.html">torch_frac()</a></code> </p>
+        </td>
+        <td><p>Frac</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_gather.html">torch_gather()</a></code> </p>
+        </td>
+        <td><p>Gather</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_ge.html">torch_ge()</a></code> </p>
+        </td>
+        <td><p>Ge</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_generator.html">torch_generator()</a></code> </p>
+        </td>
+        <td><p>Create a Generator object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_geqrf.html">torch_geqrf()</a></code> </p>
+        </td>
+        <td><p>Geqrf</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_ger.html">torch_ger()</a></code> </p>
+        </td>
+        <td><p>Ger</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_gt.html">torch_gt()</a></code> </p>
+        </td>
+        <td><p>Gt</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_hamming_window.html">torch_hamming_window()</a></code> </p>
+        </td>
+        <td><p>Hamming_window</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_hann_window.html">torch_hann_window()</a></code> </p>
+        </td>
+        <td><p>Hann_window</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_histc.html">torch_histc()</a></code> </p>
+        </td>
+        <td><p>Histc</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_ifft.html">torch_ifft()</a></code> </p>
+        </td>
+        <td><p>Ifft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_imag.html">torch_imag()</a></code> </p>
+        </td>
+        <td><p>Imag</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_index_select.html">torch_index_select()</a></code> </p>
+        </td>
+        <td><p>Index_select</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_inverse.html">torch_inverse()</a></code> </p>
+        </td>
+        <td><p>Inverse</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_irfft.html">torch_irfft()</a></code> </p>
+        </td>
+        <td><p>Irfft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_is_complex.html">torch_is_complex()</a></code> </p>
+        </td>
+        <td><p>Is_complex</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_is_floating_point.html">torch_is_floating_point()</a></code> </p>
+        </td>
+        <td><p>Is_floating_point</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_is_installed.html">torch_is_installed()</a></code> </p>
+        </td>
+        <td><p>Verifies if torch is installed</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_isfinite.html">torch_isfinite()</a></code> </p>
+        </td>
+        <td><p>Isfinite</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_isinf.html">torch_isinf()</a></code> </p>
+        </td>
+        <td><p>Isinf</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_isnan.html">torch_isnan()</a></code> </p>
+        </td>
+        <td><p>Isnan</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_kthvalue.html">torch_kthvalue()</a></code> </p>
+        </td>
+        <td><p>Kthvalue</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_layout.html">torch_strided()</a></code> <code><a href="torch_layout.html">torch_sparse_coo()</a></code> </p>
+        </td>
+        <td><p>Creates the corresponding layout</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_le.html">torch_le()</a></code> </p>
+        </td>
+        <td><p>Le</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_lerp.html">torch_lerp()</a></code> </p>
+        </td>
+        <td><p>Lerp</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_lgamma.html">torch_lgamma()</a></code> </p>
+        </td>
+        <td><p>Lgamma</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_log.html">torch_log()</a></code> </p>
+        </td>
+        <td><p>Log</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_log10.html">torch_log10()</a></code> </p>
+        </td>
+        <td><p>Log10</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_log1p.html">torch_log1p()</a></code> </p>
+        </td>
+        <td><p>Log1p</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_log2.html">torch_log2()</a></code> </p>
+        </td>
+        <td><p>Log2</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_logdet.html">torch_logdet()</a></code> </p>
+        </td>
+        <td><p>Logdet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_logical_and.html">torch_logical_and()</a></code> </p>
+        </td>
+        <td><p>Logical_and</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_logical_not.html">torch_logical_not</a></code> </p>
+        </td>
+        <td><p>Logical_not</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_logical_or.html">torch_logical_or()</a></code> </p>
+        </td>
+        <td><p>Logical_or</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_logical_xor.html">torch_logical_xor()</a></code> </p>
+        </td>
+        <td><p>Logical_xor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_logsumexp.html">torch_logsumexp()</a></code> </p>
+        </td>
+        <td><p>Logsumexp</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_lstsq.html">torch_lstsq()</a></code> </p>
+        </td>
+        <td><p>Lstsq</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_lt.html">torch_lt()</a></code> </p>
+        </td>
+        <td><p>Lt</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_lu.html">torch_lu()</a></code> </p>
+        </td>
+        <td><p>LU</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_lu_solve.html">torch_lu_solve()</a></code> </p>
+        </td>
+        <td><p>Lu_solve</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_manual_seed.html">torch_manual_seed()</a></code> </p>
+        </td>
+        <td><p>Sets the seed for generating random numbers.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_masked_select.html">torch_masked_select()</a></code> </p>
+        </td>
+        <td><p>Masked_select</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_matmul.html">torch_matmul()</a></code> </p>
+        </td>
+        <td><p>Matmul</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_matrix_power.html">torch_matrix_power()</a></code> </p>
+        </td>
+        <td><p>Matrix_power</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_matrix_rank.html">torch_matrix_rank()</a></code> </p>
+        </td>
+        <td><p>Matrix_rank</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_max.html">torch_max</a></code> </p>
+        </td>
+        <td><p>Max</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_mean.html">torch_mean()</a></code> </p>
+        </td>
+        <td><p>Mean</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_median.html">torch_median()</a></code> </p>
+        </td>
+        <td><p>Median</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_memory_format.html">torch_contiguous_format()</a></code> <code><a href="torch_memory_format.html">torch_preserve_format()</a></code> <code><a href="torch_memory_format.html">torch_channels_last_format()</a></code> </p>
+        </td>
+        <td><p>Memory format</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_meshgrid.html">torch_meshgrid()</a></code> </p>
+        </td>
+        <td><p>Meshgrid</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_min.html">torch_min</a></code> </p>
+        </td>
+        <td><p>Min</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_mm.html">torch_mm()</a></code> </p>
+        </td>
+        <td><p>Mm</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_mode.html">torch_mode()</a></code> </p>
+        </td>
+        <td><p>Mode</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_mul.html">torch_mul()</a></code> </p>
+        </td>
+        <td><p>Mul</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_multinomial.html">torch_multinomial()</a></code> </p>
+        </td>
+        <td><p>Multinomial</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_mv.html">torch_mv()</a></code> </p>
+        </td>
+        <td><p>Mv</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_mvlgamma.html">torch_mvlgamma()</a></code> </p>
+        </td>
+        <td><p>Mvlgamma</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_narrow.html">torch_narrow()</a></code> </p>
+        </td>
+        <td><p>Narrow</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_ne.html">torch_ne()</a></code> </p>
+        </td>
+        <td><p>Ne</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_neg.html">torch_neg()</a></code> </p>
+        </td>
+        <td><p>Neg</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_nonzero.html">torch_nonzero()</a></code> </p>
+        </td>
+        <td><p>Nonzero</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_norm.html">torch_norm()</a></code> </p>
+        </td>
+        <td><p>Norm</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_normal.html">torch_normal()</a></code> </p>
+        </td>
+        <td><p>Normal</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_orgqr.html">torch_orgqr()</a></code> </p>
+        </td>
+        <td><p>Orgqr</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_ormqr.html">torch_ormqr()</a></code> </p>
+        </td>
+        <td><p>Ormqr</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_pdist.html">torch_pdist()</a></code> </p>
+        </td>
+        <td><p>Pdist</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_pinverse.html">torch_pinverse()</a></code> </p>
+        </td>
+        <td><p>Pinverse</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_pixel_shuffle.html">torch_pixel_shuffle()</a></code> </p>
+        </td>
+        <td><p>Pixel_shuffle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_poisson.html">torch_poisson()</a></code> </p>
+        </td>
+        <td><p>Poisson</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_polygamma.html">torch_polygamma()</a></code> </p>
+        </td>
+        <td><p>Polygamma</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_pow.html">torch_pow()</a></code> </p>
+        </td>
+        <td><p>Pow</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_prod.html">torch_prod()</a></code> </p>
+        </td>
+        <td><p>Prod</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_promote_types.html">torch_promote_types()</a></code> </p>
+        </td>
+        <td><p>Promote_types</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_qr.html">torch_qr()</a></code> </p>
+        </td>
+        <td><p>Qr</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_quantize_per_channel.html">torch_quantize_per_channel()</a></code> </p>
+        </td>
+        <td><p>Quantize_per_channel</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_quantize_per_tensor.html">torch_quantize_per_tensor()</a></code> </p>
+        </td>
+        <td><p>Quantize_per_tensor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_range.html">torch_range()</a></code> </p>
+        </td>
+        <td><p>Range</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_real.html">torch_real()</a></code> </p>
+        </td>
+        <td><p>Real</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_reciprocal.html">torch_reciprocal()</a></code> </p>
+        </td>
+        <td><p>Reciprocal</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_relu.html">torch_relu()</a></code> </p>
+        </td>
+        <td><p>Relu</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_relu_.html">torch_relu_()</a></code> </p>
+        </td>
+        <td><p>Relu_</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_remainder.html">torch_remainder()</a></code> </p>
+        </td>
+        <td><p>Remainder</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_renorm.html">torch_renorm()</a></code> </p>
+        </td>
+        <td><p>Renorm</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_repeat_interleave.html">torch_repeat_interleave()</a></code> </p>
+        </td>
+        <td><p>Repeat_interleave</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_reshape.html">torch_reshape()</a></code> </p>
+        </td>
+        <td><p>Reshape</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_result_type.html">torch_result_type()</a></code> </p>
+        </td>
+        <td><p>Result_type</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_rfft.html">torch_rfft()</a></code> </p>
+        </td>
+        <td><p>Rfft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_roll.html">torch_roll()</a></code> </p>
+        </td>
+        <td><p>Roll</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_rot90.html">torch_rot90()</a></code> </p>
+        </td>
+        <td><p>Rot90</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_round.html">torch_round()</a></code> </p>
+        </td>
+        <td><p>Round</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_rrelu_.html">torch_rrelu_()</a></code> </p>
+        </td>
+        <td><p>Rrelu_</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_rsqrt.html">torch_rsqrt()</a></code> </p>
+        </td>
+        <td><p>Rsqrt</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_selu.html">torch_selu()</a></code> </p>
+        </td>
+        <td><p>Selu</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_selu_.html">torch_selu_()</a></code> </p>
+        </td>
+        <td><p>Selu_</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_sigmoid.html">torch_sigmoid()</a></code> </p>
+        </td>
+        <td><p>Sigmoid</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_sign.html">torch_sign()</a></code> </p>
+        </td>
+        <td><p>Sign</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_sin.html">torch_sin()</a></code> </p>
+        </td>
+        <td><p>Sin</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_sinh.html">torch_sinh()</a></code> </p>
+        </td>
+        <td><p>Sinh</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_slogdet.html">torch_slogdet()</a></code> </p>
+        </td>
+        <td><p>Slogdet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_solve.html">torch_solve()</a></code> </p>
+        </td>
+        <td><p>Solve</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_sort.html">torch_sort()</a></code> </p>
+        </td>
+        <td><p>Sort</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_sparse_coo_tensor.html">torch_sparse_coo_tensor()</a></code> </p>
+        </td>
+        <td><p>Sparse_coo_tensor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_split.html">torch_split()</a></code> </p>
+        </td>
+        <td><p>Split</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_sqrt.html">torch_sqrt()</a></code> </p>
+        </td>
+        <td><p>Sqrt</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_square.html">torch_square()</a></code> </p>
+        </td>
+        <td><p>Square</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_squeeze.html">torch_squeeze()</a></code> </p>
+        </td>
+        <td><p>Squeeze</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_stack.html">torch_stack()</a></code> </p>
+        </td>
+        <td><p>Stack</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_std.html">torch_std()</a></code> </p>
+        </td>
+        <td><p>Std</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_std_mean.html">torch_std_mean()</a></code> </p>
+        </td>
+        <td><p>Std_mean</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_stft.html">torch_stft()</a></code> </p>
+        </td>
+        <td><p>Stft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_sum.html">torch_sum()</a></code> </p>
+        </td>
+        <td><p>Sum</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_svd.html">torch_svd()</a></code> </p>
+        </td>
+        <td><p>Svd</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_symeig.html">torch_symeig()</a></code> </p>
+        </td>
+        <td><p>Symeig</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_t.html">torch_t()</a></code> </p>
+        </td>
+        <td><p>T</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_take.html">torch_take()</a></code> </p>
+        </td>
+        <td><p>Take</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_tan.html">torch_tan()</a></code> </p>
+        </td>
+        <td><p>Tan</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_tanh.html">torch_tanh()</a></code> </p>
+        </td>
+        <td><p>Tanh</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_tensor.html">torch_tensor()</a></code> </p>
+        </td>
+        <td><p>Converts R objects to a torch tensor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_tensordot.html">torch_tensordot()</a></code> </p>
+        </td>
+        <td><p>Tensordot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_threshold_.html">torch_threshold_()</a></code> </p>
+        </td>
+        <td><p>Threshold_</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_topk.html">torch_topk()</a></code> </p>
+        </td>
+        <td><p>Topk</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_trace.html">torch_trace()</a></code> </p>
+        </td>
+        <td><p>Trace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_transpose.html">torch_transpose()</a></code> </p>
+        </td>
+        <td><p>Transpose</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_trapz.html">torch_trapz()</a></code> </p>
+        </td>
+        <td><p>Trapz</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_triangular_solve.html">torch_triangular_solve()</a></code> </p>
+        </td>
+        <td><p>Triangular_solve</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_tril.html">torch_tril()</a></code> </p>
+        </td>
+        <td><p>Tril</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_tril_indices.html">torch_tril_indices()</a></code> </p>
+        </td>
+        <td><p>Tril_indices</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_triu.html">torch_triu()</a></code> </p>
+        </td>
+        <td><p>Triu</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_triu_indices.html">torch_triu_indices()</a></code> </p>
+        </td>
+        <td><p>Triu_indices</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_true_divide.html">torch_true_divide()</a></code> </p>
+        </td>
+        <td><p>TRUE_divide</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_trunc.html">torch_trunc()</a></code> </p>
+        </td>
+        <td><p>Trunc</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_unbind.html">torch_unbind()</a></code> </p>
+        </td>
+        <td><p>Unbind</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_unique_consecutive.html">torch_unique_consecutive()</a></code> </p>
+        </td>
+        <td><p>Unique_consecutive</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_unsqueeze.html">torch_unsqueeze()</a></code> </p>
+        </td>
+        <td><p>Unsqueeze</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_var.html">torch_var()</a></code> </p>
+        </td>
+        <td><p>Var</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_var_mean.html">torch_var_mean()</a></code> </p>
+        </td>
+        <td><p>Var_mean</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_where.html">torch_where()</a></code> </p>
+        </td>
+        <td><p>Where</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-neural-network-modules" class="hasAnchor"><a href="#section-neural-network-modules" class="anchor"></a>Neural network modules</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="nn_adaptive_avg_pool1d.html">nn_adaptive_avg_pool1d()</a></code> </p>
@@ -872,7 +2342,20 @@ planes.</p></td>
           <p><code><a href="nn_utils_rnn_pad_sequence.html">nn_utils_rnn_pad_sequence()</a></code> </p>
         </td>
         <td><p>Pad a list of variable length Tensors with <code>padding_value</code></p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-neural-networks-functional-module" class="hasAnchor"><a href="#section-neural-networks-functional-module" class="anchor"></a>Neural networks functional module</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="nnf_adaptive_avg_pool1d.html">nnf_adaptive_avg_pool1d()</a></code> </p>
@@ -1442,7 +2925,20 @@ planes.</p></td>
           <p><code><a href="nnf_unfold.html">nnf_unfold()</a></code> </p>
         </td>
         <td><p>Unfold</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-optimizers" class="hasAnchor"><a href="#section-optimizers" class="anchor"></a>Optimizers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="optim_adam.html">optim_adam()</a></code> </p>
@@ -1460,6 +2956,56 @@ planes.</p></td>
           <p><code><a href="optim_sgd.html">optim_sgd()</a></code> </p>
         </td>
         <td><p>SGD optimizer</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="dataset.html">dataset()</a></code> </p>
+        </td>
+        <td><p>An abstract class representing a <code>Dataset</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataloader.html">dataloader()</a></code> </p>
+        </td>
+        <td><p>Data loader. Combines a dataset and a sampler, and provides
+single- or multi-process iterators over the dataset.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataloader_make_iter.html">dataloader_make_iter()</a></code> </p>
+        </td>
+        <td><p>Creates an iterator from a DataLoader</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataloader_next.html">dataloader_next()</a></code> </p>
+        </td>
+        <td><p>Get the next element of a dataloader iterator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="enumerate.html">enumerate()</a></code> </p>
+        </td>
+        <td><p>Enumerate an iterator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="enumerate.dataloader.html">enumerate(<i>&lt;dataloader&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Enumerate an iterator</p></td>
       </tr><tr>
         
         <td>
@@ -1469,1485 +3015,52 @@ planes.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="torch_abs.html">torch_abs</a></code> </p>
+          <p><code><a href="is_dataloader.html">is_dataloader()</a></code> </p>
         </td>
-        <td><p>Abs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_acos.html">torch_acos</a></code> </p>
-        </td>
-        <td><p>Acos</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_adaptive_avg_pool1d.html">torch_adaptive_avg_pool1d</a></code> </p>
-        </td>
-        <td><p>Adaptive_avg_pool1d</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_add.html">torch_add</a></code> </p>
-        </td>
-        <td><p>Add</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_addbmm.html">torch_addbmm</a></code> </p>
-        </td>
-        <td><p>Addbmm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_addcdiv.html">torch_addcdiv</a></code> </p>
-        </td>
-        <td><p>Addcdiv</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_addcmul.html">torch_addcmul</a></code> </p>
-        </td>
-        <td><p>Addcmul</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_addmm.html">torch_addmm</a></code> </p>
-        </td>
-        <td><p>Addmm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_addmv.html">torch_addmv</a></code> </p>
-        </td>
-        <td><p>Addmv</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_addr.html">torch_addr</a></code> </p>
-        </td>
-        <td><p>Addr</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_allclose.html">torch_allclose</a></code> </p>
-        </td>
-        <td><p>Allclose</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_angle.html">torch_angle</a></code> </p>
-        </td>
-        <td><p>Angle</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_arange.html">torch_arange</a></code> </p>
-        </td>
-        <td><p>Arange</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_argmax.html">torch_argmax</a></code> </p>
-        </td>
-        <td><p>Argmax</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_argmin.html">torch_argmin</a></code> </p>
-        </td>
-        <td><p>Argmin</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_argsort.html">torch_argsort</a></code> </p>
-        </td>
-        <td><p>Argsort</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_as_strided.html">torch_as_strided</a></code> </p>
-        </td>
-        <td><p>As_strided</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_asin.html">torch_asin</a></code> </p>
-        </td>
-        <td><p>Asin</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_atan.html">torch_atan</a></code> </p>
-        </td>
-        <td><p>Atan</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_atan2.html">torch_atan2</a></code> </p>
-        </td>
-        <td><p>Atan2</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_avg_pool1d.html">torch_avg_pool1d</a></code> </p>
-        </td>
-        <td><p>Avg_pool1d</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_baddbmm.html">torch_baddbmm</a></code> </p>
-        </td>
-        <td><p>Baddbmm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_bartlett_window.html">torch_bartlett_window</a></code> </p>
-        </td>
-        <td><p>Bartlett_window</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_bernoulli.html">torch_bernoulli</a></code> </p>
-        </td>
-        <td><p>Bernoulli</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_bincount.html">torch_bincount</a></code> </p>
-        </td>
-        <td><p>Bincount</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_bitwise_and.html">torch_bitwise_and</a></code> </p>
-        </td>
-        <td><p>Bitwise_and</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_bitwise_not.html">torch_bitwise_not</a></code> </p>
-        </td>
-        <td><p>Bitwise_not</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_bitwise_or.html">torch_bitwise_or</a></code> </p>
-        </td>
-        <td><p>Bitwise_or</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_bitwise_xor.html">torch_bitwise_xor</a></code> </p>
-        </td>
-        <td><p>Bitwise_xor</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_blackman_window.html">torch_blackman_window</a></code> </p>
-        </td>
-        <td><p>Blackman_window</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_bmm.html">torch_bmm</a></code> </p>
-        </td>
-        <td><p>Bmm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_broadcast_tensors.html">torch_broadcast_tensors</a></code> </p>
-        </td>
-        <td><p>Broadcast_tensors</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_can_cast.html">torch_can_cast</a></code> </p>
-        </td>
-        <td><p>Can_cast</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cartesian_prod.html">torch_cartesian_prod</a></code> </p>
-        </td>
-        <td><p>Cartesian_prod</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cat.html">torch_cat</a></code> </p>
-        </td>
-        <td><p>Cat</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cdist.html">torch_cdist</a></code> </p>
-        </td>
-        <td><p>Cdist</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_ceil.html">torch_ceil</a></code> </p>
-        </td>
-        <td><p>Ceil</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_celu_.html">torch_celu_</a></code> </p>
-        </td>
-        <td><p>Celu_</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_chain_matmul.html">torch_chain_matmul</a></code> </p>
-        </td>
-        <td><p>Chain_matmul</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cholesky.html">torch_cholesky</a></code> </p>
-        </td>
-        <td><p>Cholesky</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cholesky_inverse.html">torch_cholesky_inverse</a></code> </p>
-        </td>
-        <td><p>Cholesky_inverse</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cholesky_solve.html">torch_cholesky_solve</a></code> </p>
-        </td>
-        <td><p>Cholesky_solve</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_chunk.html">torch_chunk</a></code> </p>
-        </td>
-        <td><p>Chunk</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_clamp.html">torch_clamp</a></code> </p>
-        </td>
-        <td><p>Clamp</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_combinations.html">torch_combinations</a></code> </p>
-        </td>
-        <td><p>Combinations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_conj.html">torch_conj</a></code> </p>
-        </td>
-        <td><p>Conj</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_conv1d.html">torch_conv1d</a></code> </p>
-        </td>
-        <td><p>Conv1d</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_conv2d.html">torch_conv2d</a></code> </p>
-        </td>
-        <td><p>Conv2d</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_conv3d.html">torch_conv3d</a></code> </p>
-        </td>
-        <td><p>Conv3d</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_conv_tbc.html">torch_conv_tbc</a></code> </p>
-        </td>
-        <td><p>Conv_tbc</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_conv_transpose1d.html">torch_conv_transpose1d</a></code> </p>
-        </td>
-        <td><p>Conv_transpose1d</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_conv_transpose2d.html">torch_conv_transpose2d</a></code> </p>
-        </td>
-        <td><p>Conv_transpose2d</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_conv_transpose3d.html">torch_conv_transpose3d</a></code> </p>
-        </td>
-        <td><p>Conv_transpose3d</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cos.html">torch_cos</a></code> </p>
-        </td>
-        <td><p>Cos</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cosh.html">torch_cosh</a></code> </p>
-        </td>
-        <td><p>Cosh</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cosine_similarity.html">torch_cosine_similarity</a></code> </p>
-        </td>
-        <td><p>Cosine_similarity</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cross.html">torch_cross</a></code> </p>
-        </td>
-        <td><p>Cross</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cummax.html">torch_cummax</a></code> </p>
-        </td>
-        <td><p>Cummax</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cummin.html">torch_cummin</a></code> </p>
-        </td>
-        <td><p>Cummin</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cumprod.html">torch_cumprod</a></code> </p>
-        </td>
-        <td><p>Cumprod</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_cumsum.html">torch_cumsum</a></code> </p>
-        </td>
-        <td><p>Cumsum</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_det.html">torch_det</a></code> </p>
-        </td>
-        <td><p>Det</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_device.html">torch_device()</a></code> </p>
-        </td>
-        <td><p>Create a Device object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_diag.html">torch_diag</a></code> </p>
-        </td>
-        <td><p>Diag</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_diag_embed.html">torch_diag_embed</a></code> </p>
-        </td>
-        <td><p>Diag_embed</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_diagflat.html">torch_diagflat</a></code> </p>
-        </td>
-        <td><p>Diagflat</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_diagonal.html">torch_diagonal</a></code> </p>
-        </td>
-        <td><p>Diagonal</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_digamma.html">torch_digamma</a></code> </p>
-        </td>
-        <td><p>Digamma</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_dist.html">torch_dist</a></code> </p>
-        </td>
-        <td><p>Dist</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_div.html">torch_div</a></code> </p>
-        </td>
-        <td><p>Div</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_dot.html">torch_dot</a></code> </p>
-        </td>
-        <td><p>Dot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_dtype.html">torch_float32()</a></code> <code><a href="torch_dtype.html">torch_float()</a></code> <code><a href="torch_dtype.html">torch_float64()</a></code> <code><a href="torch_dtype.html">torch_double()</a></code> <code><a href="torch_dtype.html">torch_float16()</a></code> <code><a href="torch_dtype.html">torch_half()</a></code> <code><a href="torch_dtype.html">torch_uint8()</a></code> <code><a href="torch_dtype.html">torch_int8()</a></code> <code><a href="torch_dtype.html">torch_int16()</a></code> <code><a href="torch_dtype.html">torch_short()</a></code> <code><a href="torch_dtype.html">torch_int32()</a></code> <code><a href="torch_dtype.html">torch_int()</a></code> <code><a href="torch_dtype.html">torch_int64()</a></code> <code><a href="torch_dtype.html">torch_long()</a></code> <code><a href="torch_dtype.html">torch_bool()</a></code> <code><a href="torch_dtype.html">torch_quint8()</a></code> <code><a href="torch_dtype.html">torch_qint8()</a></code> <code><a href="torch_dtype.html">torch_qint32()</a></code> </p>
-        </td>
-        <td><p>Torch data types</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_eig.html">torch_eig</a></code> </p>
-        </td>
-        <td><p>Eig</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_einsum.html">torch_einsum</a></code> </p>
-        </td>
-        <td><p>Einsum</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_empty.html">torch_empty</a></code> </p>
-        </td>
-        <td><p>Empty</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_empty_like.html">torch_empty_like</a></code> </p>
-        </td>
-        <td><p>Empty_like</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_empty_strided.html">torch_empty_strided</a></code> </p>
-        </td>
-        <td><p>Empty_strided</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_eq.html">torch_eq</a></code> </p>
-        </td>
-        <td><p>Eq</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_equal.html">torch_equal</a></code> </p>
-        </td>
-        <td><p>Equal</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_erf.html">torch_erf</a></code> </p>
-        </td>
-        <td><p>Erf</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_erfc.html">torch_erfc</a></code> </p>
-        </td>
-        <td><p>Erfc</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_erfinv.html">torch_erfinv</a></code> </p>
-        </td>
-        <td><p>Erfinv</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_exp.html">torch_exp</a></code> </p>
-        </td>
-        <td><p>Exp</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_expm1.html">torch_expm1</a></code> </p>
-        </td>
-        <td><p>Expm1</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_eye.html">torch_eye</a></code> </p>
-        </td>
-        <td><p>Eye</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_fft.html">torch_fft</a></code> </p>
-        </td>
-        <td><p>Fft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_finfo.html">torch_finfo()</a></code> </p>
-        </td>
-        <td><p>Floating point type info</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_flatten.html">torch_flatten</a></code> </p>
-        </td>
-        <td><p>Flatten</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_flip.html">torch_flip</a></code> </p>
-        </td>
-        <td><p>Flip</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_floor.html">torch_floor</a></code> </p>
-        </td>
-        <td><p>Floor</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_floor_divide.html">torch_floor_divide</a></code> </p>
-        </td>
-        <td><p>Floor_divide</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_fmod.html">torch_fmod</a></code> </p>
-        </td>
-        <td><p>Fmod</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_frac.html">torch_frac</a></code> </p>
-        </td>
-        <td><p>Frac</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_full.html">torch_full</a></code> </p>
-        </td>
-        <td><p>Full</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_full_like.html">torch_full_like</a></code> </p>
-        </td>
-        <td><p>Full_like</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_gather.html">torch_gather</a></code> </p>
-        </td>
-        <td><p>Gather</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_ge.html">torch_ge</a></code> </p>
-        </td>
-        <td><p>Ge</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_generator.html">torch_generator()</a></code> </p>
-        </td>
-        <td><p>Create a Generator object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_geqrf.html">torch_geqrf</a></code> </p>
-        </td>
-        <td><p>Geqrf</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_ger.html">torch_ger</a></code> </p>
-        </td>
-        <td><p>Ger</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_gt.html">torch_gt</a></code> </p>
-        </td>
-        <td><p>Gt</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_hamming_window.html">torch_hamming_window</a></code> </p>
-        </td>
-        <td><p>Hamming_window</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_hann_window.html">torch_hann_window</a></code> </p>
-        </td>
-        <td><p>Hann_window</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_histc.html">torch_histc</a></code> </p>
-        </td>
-        <td><p>Histc</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_ifft.html">torch_ifft</a></code> </p>
-        </td>
-        <td><p>Ifft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_iinfo.html">torch_iinfo()</a></code> </p>
-        </td>
-        <td><p>Integer type info</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_imag.html">torch_imag</a></code> </p>
-        </td>
-        <td><p>Imag</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_index_select.html">torch_index_select</a></code> </p>
-        </td>
-        <td><p>Index_select</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_inverse.html">torch_inverse</a></code> </p>
-        </td>
-        <td><p>Inverse</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_irfft.html">torch_irfft</a></code> </p>
-        </td>
-        <td><p>Irfft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_is_complex.html">torch_is_complex</a></code> </p>
-        </td>
-        <td><p>Is_complex</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_is_floating_point.html">torch_is_floating_point</a></code> </p>
-        </td>
-        <td><p>Is_floating_point</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_is_installed.html">torch_is_installed()</a></code> </p>
-        </td>
-        <td><p>Verifies if torch is installed</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_isfinite.html">torch_isfinite</a></code> </p>
-        </td>
-        <td><p>Isfinite</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_isinf.html">torch_isinf</a></code> </p>
-        </td>
-        <td><p>Isinf</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_isnan.html">torch_isnan</a></code> </p>
-        </td>
-        <td><p>Isnan</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_kthvalue.html">torch_kthvalue</a></code> </p>
-        </td>
-        <td><p>Kthvalue</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_layout.html">torch_strided()</a></code> <code><a href="torch_layout.html">torch_sparse_coo()</a></code> </p>
-        </td>
-        <td><p>Creates the corresponding layout</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_le.html">torch_le</a></code> </p>
-        </td>
-        <td><p>Le</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_lerp.html">torch_lerp</a></code> </p>
-        </td>
-        <td><p>Lerp</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_lgamma.html">torch_lgamma</a></code> </p>
-        </td>
-        <td><p>Lgamma</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_linspace.html">torch_linspace</a></code> </p>
-        </td>
-        <td><p>Linspace</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_load.html">torch_load()</a></code> </p>
-        </td>
-        <td><p>Loads a saved object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_log.html">torch_log</a></code> </p>
-        </td>
-        <td><p>Log</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_log10.html">torch_log10</a></code> </p>
-        </td>
-        <td><p>Log10</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_log1p.html">torch_log1p</a></code> </p>
-        </td>
-        <td><p>Log1p</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_log2.html">torch_log2</a></code> </p>
-        </td>
-        <td><p>Log2</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_logdet.html">torch_logdet</a></code> </p>
-        </td>
-        <td><p>Logdet</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_logical_and.html">torch_logical_and</a></code> </p>
-        </td>
-        <td><p>Logical_and</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_logical_not.html">torch_logical_not</a></code> </p>
-        </td>
-        <td><p>Logical_not</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_logical_or.html">torch_logical_or</a></code> </p>
-        </td>
-        <td><p>Logical_or</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_logical_xor.html">torch_logical_xor</a></code> </p>
-        </td>
-        <td><p>Logical_xor</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_logspace.html">torch_logspace</a></code> </p>
-        </td>
-        <td><p>Logspace</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_logsumexp.html">torch_logsumexp</a></code> </p>
-        </td>
-        <td><p>Logsumexp</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_lstsq.html">torch_lstsq</a></code> </p>
-        </td>
-        <td><p>Lstsq</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_lt.html">torch_lt</a></code> </p>
-        </td>
-        <td><p>Lt</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_lu.html">torch_lu()</a></code> </p>
-        </td>
-        <td><p>LU</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_lu_solve.html">torch_lu_solve</a></code> </p>
-        </td>
-        <td><p>Lu_solve</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_manual_seed.html">torch_manual_seed()</a></code> </p>
-        </td>
-        <td><p>Sets the seed for generating random numbers.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_masked_select.html">torch_masked_select</a></code> </p>
-        </td>
-        <td><p>Masked_select</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_matmul.html">torch_matmul</a></code> </p>
-        </td>
-        <td><p>Matmul</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_matrix_power.html">torch_matrix_power</a></code> </p>
-        </td>
-        <td><p>Matrix_power</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_matrix_rank.html">torch_matrix_rank</a></code> </p>
-        </td>
-        <td><p>Matrix_rank</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_max.html">torch_max</a></code> </p>
-        </td>
-        <td><p>Max</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_mean.html">torch_mean</a></code> </p>
-        </td>
-        <td><p>Mean</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_median.html">torch_median</a></code> </p>
-        </td>
-        <td><p>Median</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_memory_format.html">torch_contiguous_format()</a></code> <code><a href="torch_memory_format.html">torch_preserve_format()</a></code> <code><a href="torch_memory_format.html">torch_channels_last_format()</a></code> </p>
-        </td>
-        <td><p>Memory format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_meshgrid.html">torch_meshgrid</a></code> </p>
-        </td>
-        <td><p>Meshgrid</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_min.html">torch_min</a></code> </p>
-        </td>
-        <td><p>Min</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_mm.html">torch_mm</a></code> </p>
-        </td>
-        <td><p>Mm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_mode.html">torch_mode</a></code> </p>
-        </td>
-        <td><p>Mode</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_mul.html">torch_mul</a></code> </p>
-        </td>
-        <td><p>Mul</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_multinomial.html">torch_multinomial</a></code> </p>
-        </td>
-        <td><p>Multinomial</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_mv.html">torch_mv</a></code> </p>
-        </td>
-        <td><p>Mv</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_mvlgamma.html">torch_mvlgamma</a></code> </p>
-        </td>
-        <td><p>Mvlgamma</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_narrow.html">torch_narrow</a></code> </p>
-        </td>
-        <td><p>Narrow</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_ne.html">torch_ne</a></code> </p>
-        </td>
-        <td><p>Ne</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_neg.html">torch_neg</a></code> </p>
-        </td>
-        <td><p>Neg</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_nonzero.html">torch_nonzero</a></code> </p>
-        </td>
-        <td><p>Nonzero</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_norm.html">torch_norm</a></code> </p>
-        </td>
-        <td><p>Norm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_normal.html">torch_normal</a></code> </p>
-        </td>
-        <td><p>Normal</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_ones.html">torch_ones</a></code> </p>
-        </td>
-        <td><p>Ones</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_ones_like.html">torch_ones_like</a></code> </p>
-        </td>
-        <td><p>Ones_like</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_orgqr.html">torch_orgqr</a></code> </p>
-        </td>
-        <td><p>Orgqr</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_ormqr.html">torch_ormqr</a></code> </p>
-        </td>
-        <td><p>Ormqr</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_pdist.html">torch_pdist</a></code> </p>
-        </td>
-        <td><p>Pdist</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_pinverse.html">torch_pinverse</a></code> </p>
-        </td>
-        <td><p>Pinverse</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_pixel_shuffle.html">torch_pixel_shuffle</a></code> </p>
-        </td>
-        <td><p>Pixel_shuffle</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_poisson.html">torch_poisson</a></code> </p>
-        </td>
-        <td><p>Poisson</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_polygamma.html">torch_polygamma</a></code> </p>
-        </td>
-        <td><p>Polygamma</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_pow.html">torch_pow</a></code> </p>
-        </td>
-        <td><p>Pow</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_prod.html">torch_prod</a></code> </p>
-        </td>
-        <td><p>Prod</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_promote_types.html">torch_promote_types</a></code> </p>
-        </td>
-        <td><p>Promote_types</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_qr.html">torch_qr</a></code> </p>
-        </td>
-        <td><p>Qr</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_qscheme.html">torch_per_channel_affine()</a></code> <code><a href="torch_qscheme.html">torch_per_tensor_affine()</a></code> <code><a href="torch_qscheme.html">torch_per_channel_symmetric()</a></code> <code><a href="torch_qscheme.html">torch_per_tensor_symmetric()</a></code> </p>
-        </td>
-        <td><p>Creates the corresponding Scheme object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_quantize_per_channel.html">torch_quantize_per_channel</a></code> </p>
-        </td>
-        <td><p>Quantize_per_channel</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_quantize_per_tensor.html">torch_quantize_per_tensor</a></code> </p>
-        </td>
-        <td><p>Quantize_per_tensor</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_rand.html">torch_rand</a></code> </p>
-        </td>
-        <td><p>Rand</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_rand_like.html">torch_rand_like</a></code> </p>
-        </td>
-        <td><p>Rand_like</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_randint.html">torch_randint</a></code> </p>
-        </td>
-        <td><p>Randint</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_randint_like.html">torch_randint_like</a></code> </p>
-        </td>
-        <td><p>Randint_like</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_randn.html">torch_randn</a></code> </p>
-        </td>
-        <td><p>Randn</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_randn_like.html">torch_randn_like</a></code> </p>
-        </td>
-        <td><p>Randn_like</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_randperm.html">torch_randperm</a></code> </p>
-        </td>
-        <td><p>Randperm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_range.html">torch_range</a></code> </p>
-        </td>
-        <td><p>Range</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_real.html">torch_real</a></code> </p>
-        </td>
-        <td><p>Real</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_reciprocal.html">torch_reciprocal</a></code> </p>
-        </td>
-        <td><p>Reciprocal</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_reduction.html">torch_reduction_sum()</a></code> <code><a href="torch_reduction.html">torch_reduction_mean()</a></code> <code><a href="torch_reduction.html">torch_reduction_none()</a></code> </p>
-        </td>
-        <td><p>Creates the reduction objet</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_relu_.html">torch_relu_</a></code> </p>
-        </td>
-        <td><p>Relu_</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_remainder.html">torch_remainder</a></code> </p>
-        </td>
-        <td><p>Remainder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_renorm.html">torch_renorm</a></code> </p>
-        </td>
-        <td><p>Renorm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_repeat_interleave.html">torch_repeat_interleave</a></code> </p>
-        </td>
-        <td><p>Repeat_interleave</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_reshape.html">torch_reshape</a></code> </p>
-        </td>
-        <td><p>Reshape</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_result_type.html">torch_result_type</a></code> </p>
-        </td>
-        <td><p>Result_type</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_rfft.html">torch_rfft</a></code> </p>
-        </td>
-        <td><p>Rfft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_roll.html">torch_roll</a></code> </p>
-        </td>
-        <td><p>Roll</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_rot90.html">torch_rot90</a></code> </p>
-        </td>
-        <td><p>Rot90</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_round.html">torch_round</a></code> </p>
-        </td>
-        <td><p>Round</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_rrelu_.html">torch_rrelu_</a></code> </p>
-        </td>
-        <td><p>Rrelu_</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_rsqrt.html">torch_rsqrt</a></code> </p>
-        </td>
-        <td><p>Rsqrt</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_save.html">torch_save()</a></code> </p>
-        </td>
-        <td><p>Saves an object to a disk file.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_selu_.html">torch_selu_</a></code> </p>
-        </td>
-        <td><p>Selu_</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_sigmoid.html">torch_sigmoid</a></code> </p>
-        </td>
-        <td><p>Sigmoid</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_sign.html">torch_sign</a></code> </p>
-        </td>
-        <td><p>Sign</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_sin.html">torch_sin</a></code> </p>
-        </td>
-        <td><p>Sin</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_sinh.html">torch_sinh</a></code> </p>
-        </td>
-        <td><p>Sinh</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_slogdet.html">torch_slogdet</a></code> </p>
-        </td>
-        <td><p>Slogdet</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_solve.html">torch_solve</a></code> </p>
-        </td>
-        <td><p>Solve</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_sort.html">torch_sort</a></code> </p>
-        </td>
-        <td><p>Sort</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_sparse_coo_tensor.html">torch_sparse_coo_tensor</a></code> </p>
-        </td>
-        <td><p>Sparse_coo_tensor</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_split.html">torch_split</a></code> </p>
-        </td>
-        <td><p>Split</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_sqrt.html">torch_sqrt</a></code> </p>
-        </td>
-        <td><p>Sqrt</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_square.html">torch_square</a></code> </p>
-        </td>
-        <td><p>Square</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_squeeze.html">torch_squeeze</a></code> </p>
-        </td>
-        <td><p>Squeeze</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_stack.html">torch_stack</a></code> </p>
-        </td>
-        <td><p>Stack</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_std.html">torch_std</a></code> </p>
-        </td>
-        <td><p>Std</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_std_mean.html">torch_std_mean</a></code> </p>
-        </td>
-        <td><p>Std_mean</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_stft.html">torch_stft</a></code> </p>
-        </td>
-        <td><p>Stft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_sum.html">torch_sum</a></code> </p>
-        </td>
-        <td><p>Sum</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_svd.html">torch_svd</a></code> </p>
-        </td>
-        <td><p>Svd</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_symeig.html">torch_symeig</a></code> </p>
-        </td>
-        <td><p>Symeig</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_t.html">torch_t</a></code> </p>
-        </td>
-        <td><p>T</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_take.html">torch_take</a></code> </p>
-        </td>
-        <td><p>Take</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_tan.html">torch_tan</a></code> </p>
-        </td>
-        <td><p>Tan</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_tanh.html">torch_tanh</a></code> </p>
-        </td>
-        <td><p>Tanh</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_tensor.html">torch_tensor()</a></code> </p>
-        </td>
-        <td><p>Converts R objects to a torch tensor</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_tensordot.html">torch_tensordot</a></code> </p>
-        </td>
-        <td><p>Tensordot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_threshold_.html">torch_threshold_</a></code> </p>
-        </td>
-        <td><p>Threshold_</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_topk.html">torch_topk</a></code> </p>
-        </td>
-        <td><p>Topk</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_trace.html">torch_trace</a></code> </p>
-        </td>
-        <td><p>Trace</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_transpose.html">torch_transpose</a></code> </p>
-        </td>
-        <td><p>Transpose</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_trapz.html">torch_trapz</a></code> </p>
-        </td>
-        <td><p>Trapz</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_triangular_solve.html">torch_triangular_solve</a></code> </p>
-        </td>
-        <td><p>Triangular_solve</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_tril.html">torch_tril</a></code> </p>
-        </td>
-        <td><p>Tril</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_tril_indices.html">torch_tril_indices</a></code> </p>
-        </td>
-        <td><p>Tril_indices</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_triu.html">torch_triu</a></code> </p>
-        </td>
-        <td><p>Triu</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_triu_indices.html">torch_triu_indices</a></code> </p>
-        </td>
-        <td><p>Triu_indices</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_true_divide.html">torch_true_divide</a></code> </p>
-        </td>
-        <td><p>True_divide</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_trunc.html">torch_trunc</a></code> </p>
-        </td>
-        <td><p>Trunc</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_unbind.html">torch_unbind</a></code> </p>
-        </td>
-        <td><p>Unbind</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_unique_consecutive.html">torch_unique_consecutive</a></code> </p>
-        </td>
-        <td><p>Unique_consecutive</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_unsqueeze.html">torch_unsqueeze</a></code> </p>
-        </td>
-        <td><p>Unsqueeze</p></td>
-      </tr><tr>
+        <td><p>Checks if the object is a dataloader</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-autograd" class="hasAnchor"><a href="#section-autograd" class="anchor"></a>Autograd</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
-          <p><code><a href="torch_var.html">torch_var</a></code> </p>
+          <p><code><a href="autograd_backward.html">autograd_backward()</a></code> </p>
         </td>
-        <td><p>Var</p></td>
+        <td><p>Computes the sum of gradients of given tensors w.r.t. graph leaves.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="torch_var_mean.html">torch_var_mean</a></code> </p>
+          <p><code><a href="autograd_function.html">autograd_function()</a></code> </p>
         </td>
-        <td><p>Var_mean</p></td>
+        <td><p>Records operation history and defines formulas for differentiating ops.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="torch_where.html">torch_where</a></code> </p>
+          <p><code><a href="autograd_grad.html">autograd_grad()</a></code> </p>
         </td>
-        <td><p>Where</p></td>
+        <td><p>Computes and returns the sum of gradients of outputs w.r.t. the inputs.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="torch_zeros.html">torch_zeros</a></code> </p>
+          <p><code><a href="autograd_set_grad_mode.html">autograd_set_grad_mode()</a></code> </p>
         </td>
-        <td><p>Zeros</p></td>
+        <td><p>Set grad mode</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="torch_zeros_like.html">torch_zeros_like</a></code> </p>
+          <p><code><a href="with_no_grad.html">with_no_grad()</a></code> </p>
         </td>
-        <td><p>Zeros_like</p></td>
+        <td><p>Temporarily modify gradient recording.</p></td>
       </tr><tr>
         
         <td>
@@ -2957,9 +3070,59 @@ planes.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="with_no_grad.html">with_no_grad()</a></code> </p>
+          <p><code><a href="AutogradContext.html">AutogradContext</a></code> </p>
         </td>
-        <td><p>Temporarily modify gradient recording.</p></td>
+        <td><p>Class representing the context.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-cuda-utilities" class="hasAnchor"><a href="#section-cuda-utilities" class="anchor"></a>Cuda utilities</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="cuda_current_device.html">cuda_current_device()</a></code> </p>
+        </td>
+        <td><p>Returns the index of a currently selected device.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cuda_device_count.html">cuda_device_count()</a></code> </p>
+        </td>
+        <td><p>Returns the number of GPUs available.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cuda_is_available.html">cuda_is_available()</a></code> </p>
+        </td>
+        <td><p>Returns a bool indicating if CUDA is currently available.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-installation" class="hasAnchor"><a href="#section-installation" class="anchor"></a>Installation</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="install_torch.html">install_torch()</a></code> </p>
+        </td>
+        <td><p>Install Torch</p></td>
       </tr>
     </tbody>
     </table>
@@ -2979,7 +3142,7 @@ planes.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

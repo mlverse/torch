@@ -77,7 +77,7 @@ Function object, and passing returned gradients on to next Function's." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -147,6 +147,9 @@ Function object, and passing returned gradients on to next Function's." />
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -202,7 +205,7 @@ processed in the topological ordering, by calling <code>backward()</code> method
 Function object, and passing returned gradients on to next Function's.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>autograd_function</span>(<span class='no'>forward</span>, <span class='no'>backward</span>)</pre>
+    <pre class="usage"><span class='fu'>autograd_function</span>(<span class='kw'>forward</span>, <span class='kw'>backward</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -231,20 +234,21 @@ See <a href='AutogradContext.html'>AutogradContext</a> for more information abou
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>exp2</span> <span class='kw'>&lt;-</span> <span class='fu'>autograd_function</span>(
-  <span class='kw'>forward</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>ctx</span>, <span class='no'>i</span>) {
-    <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='no'>i</span>$<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>()
-    <span class='no'>ctx</span>$<span class='fu'>save_for_backward</span>(<span class='kw'>result</span> <span class='kw'>=</span> <span class='no'>result</span>)
-    <span class='no'>result</span>
+<span class='kw'>exp2</span> <span class='op'>&lt;-</span> <span class='fu'>autograd_function</span>(
+  forward = <span class='fu'>function</span>(<span class='kw'>ctx</span>, <span class='kw'>i</span>) {
+    <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='kw'>i</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>()
+    <span class='kw'>ctx</span><span class='op'>$</span><span class='fu'>save_for_backward</span>(result = <span class='kw'>result</span>)
+    <span class='kw'>result</span>
   },
-  <span class='kw'>backward</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>ctx</span>, <span class='no'>grad_output</span>) {
-    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>i</span> <span class='kw'>=</span> <span class='no'>grad_output</span> * <span class='no'>ctx</span>$<span class='no'>saved_variable</span>$<span class='no'>result</span>)
+  backward = <span class='fu'>function</span>(<span class='kw'>ctx</span>, <span class='kw'>grad_output</span>) {
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(i = <span class='kw'>grad_output</span> <span class='op'>*</span> <span class='kw'>ctx</span><span class='op'>$</span><span class='kw'>saved_variable</span><span class='op'>$</span><span class='kw'>result</span>)
   }
 )
 
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -260,7 +264,7 @@ See <a href='AutogradContext.html'>AutogradContext</a> for more information abou
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Diagonal</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_diagonal.Rd</code></div>
     </div>
 
@@ -192,17 +195,18 @@
     <p>Diagonal</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_diagonal</span>(<span class='kw'>self</span>, <span class='kw'>outdim</span>, dim1 = <span class='fl'>1L</span>, dim2 = <span class='fl'>2L</span>, offset = <span class='fl'>0L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor. Must be at least 2-dimensional.</p></td>
     </tr>
     <tr>
-      <th>offset</th>
-      <td><p>(int, optional) which diagonal to consider. Default: 0        (main diagonal).</p></td>
+      <th>outdim</th>
+      <td><p>dimension name if <code>self</code> is a named tensor.</p></td>
     </tr>
     <tr>
       <th>dim1</th>
@@ -211,6 +215,10 @@
     <tr>
       <th>dim2</th>
       <td><p>(int, optional) second dimension with respect to which to        take diagonal. Default: 1.</p></td>
+    </tr>
+    <tr>
+      <th>offset</th>
+      <td><p>(int, optional) which diagonal to consider. Default: 0        (main diagonal).</p></td>
     </tr>
     </table>
 
@@ -234,15 +242,32 @@ of the input. However, <code>torch_diag_embed</code> has different default
 dimensions, so those need to be explicitly specified.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_diagonal</span>(<span class='no'>a</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-<span class='fu'>torch_diagonal</span>(<span class='no'>a</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>2</span>))
-<span class='fu'>torch_diagonal</span>(<span class='no'>x</span>, <span class='kw'>offset</span><span class='kw'>=</span>-<span class='fl'>1</span>, <span class='kw'>dim1</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>dim2</span><span class='kw'>=</span><span class='fl'>2</span>)
-}</div></pre>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_diagonal</span>(<span class='kw'>a</span>, offset = <span class='fl'>0</span>)
+<span class='fu'>torch_diagonal</span>(<span class='kw'>a</span>, offset = <span class='fl'>1</span>)
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>2</span>))
+<span class='fu'>torch_diagonal</span>(<span class='kw'>x</span>, offset=<span class='op'>-</span><span class='fl'>1</span>, dim1=<span class='fl'>1</span>, dim2=<span class='fl'>2</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;   0.3028
+#&gt;   0.4758
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;   0.0082
+#&gt;   0.8835
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;  -0.3967
+#&gt;  -0.6735
+#&gt; 
+#&gt; (4,.,.) = 
+#&gt;  -0.7101
+#&gt;  -0.5805
+#&gt; [ CPUFloatType{4,2,1} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -258,7 +283,7 @@ dimensions, so those need to be explicitly specified.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

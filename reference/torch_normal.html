@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Normal</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/wrapers.R'><code>R/wrapers.R</code></a></small>
     <div class="hidden name"><code>torch_normal.Rd</code></div>
     </div>
 
@@ -192,6 +195,7 @@
     <p>Normal</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_normal</span>(<span class='kw'>mean</span>, std = <span class='fl'>1L</span>, <span class='kw'>size</span>, generator = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,16 +209,12 @@
       <td><p>(Tensor) the tensor of per-element standard deviations</p></td>
     </tr>
     <tr>
-      <th>generator</th>
-      <td><p>(<code>torch.Generator</code>, optional) a pseudorandom number generator for sampling</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
-    <tr>
       <th>size</th>
       <td><p>(int...) a sequence of integers defining the shape of the output tensor.</p></td>
+    </tr>
+    <tr>
+      <th>generator</th>
+      <td><p>(<code>torch.Generator</code>, optional) a pseudorandom number generator for sampling</p></td>
     </tr>
     </table>
 
@@ -222,7 +222,7 @@
 
     <p>When the shapes do not match, the shape of <code>mean</code>
 is used as the shape for the returned output tensor</p>
-    <h2 class="hasAnchor" id="normal-mean-std-generator-none-out-none-gt-tensor-"><a class="anchor" href="#normal-mean-std-generator-none-out-none-gt-tensor-"></a>normal(mean, std, *, generator=None, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="normal-mean-std-generator-null-out-null-gt-tensor-"><a class="anchor" href="#normal-mean-std-generator-null-out-null-gt-tensor-"></a>normal(mean, std, *, generator=NULL, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -235,21 +235,21 @@ each output element's normal distribution</p>
 each output element's normal distribution</p>
 <p>The shapes of <code>mean</code> and <code>std</code> don't need to match, but the
 total number of elements in each tensor need to be the same.</p>
-    <h2 class="hasAnchor" id="normal-mean-std-out-none-gt-tensor-"><a class="anchor" href="#normal-mean-std-out-none-gt-tensor-"></a>normal(mean=0.0, std, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="normal-mean-std-out-null-gt-tensor-"><a class="anchor" href="#normal-mean-std-out-null-gt-tensor-"></a>normal(mean=0.0, std, out=NULL) -&gt; Tensor </h2>
 
     
 
 
 <p>Similar to the function above, but the means are shared among all drawn
 elements.</p>
-    <h2 class="hasAnchor" id="normal-mean-std-out-none-gt-tensor-"><a class="anchor" href="#normal-mean-std-out-none-gt-tensor-"></a>normal(mean, std=1.0, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="normal-mean-std-out-null-gt-tensor-"><a class="anchor" href="#normal-mean-std-out-null-gt-tensor-"></a>normal(mean, std=1.0, out=NULL) -&gt; Tensor </h2>
 
     
 
 
 <p>Similar to the function above, but the standard-deviations are shared among
 all drawn elements.</p>
-    <h2 class="hasAnchor" id="normal-mean-std-size-out-none-gt-tensor-"><a class="anchor" href="#normal-mean-std-size-out-none-gt-tensor-"></a>normal(mean, std, size, *, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="normal-mean-std-size-out-null-gt-tensor-"><a class="anchor" href="#normal-mean-std-size-out-null-gt-tensor-"></a>normal(mean, std, size, *, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -258,21 +258,22 @@ all drawn elements.</p>
 among all drawn elements. The resulting tensor has size given by <code>size</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>torch_normal</span>(<span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>std</span><span class='kw'>=</span><span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, -<span class='fl'>0.1</span>))
-
-
-<span class='fu'>torch_normal</span>(<span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0.5</span>, <span class='kw'>std</span><span class='kw'>=</span><span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>6.</span>))
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>torch_normal</span>(mean=<span class='fl'>0</span>, std=<span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>0.1</span>))
 
 
-<span class='fu'>torch_normal</span>(<span class='kw'>mean</span><span class='kw'>=</span><span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>6.</span>))
+<span class='fu'>torch_normal</span>(mean=<span class='fl'>0.5</span>, std=<span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>6.</span>))
 
 
-<span class='fu'>torch_normal</span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>))
+<span class='fu'>torch_normal</span>(mean=<span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>6.</span>))
+
+
+<span class='fu'>torch_normal</span>(<span class='fl'>2</span>, <span class='fl'>3</span>, size=<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>))
 }
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -288,7 +289,7 @@ among all drawn elements. The resulting tensor has size given by <code>size</cod
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

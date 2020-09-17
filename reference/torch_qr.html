@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Qr</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_qr.Rd</code></div>
     </div>
 
@@ -192,21 +195,18 @@
     <p>Qr</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_qr</span>(<span class='kw'>self</span>, some = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) the input tensor of size \((*, m, n)\) where <code>*</code> is zero or more                batch dimensions consisting of matrices of dimension \(m \times n\).</p></td>
+      <th>self</th>
+      <td><p>(Tensor) the input tensor of size \((*, m, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                batch dimensions consisting of matrices of dimension \(m \times n\).</p></td>
     </tr>
     <tr>
       <th>some</th>
-      <td><p>(bool, optional) Set to <code>True</code> for reduced QR decomposition and <code>False</code> for                complete QR decomposition.</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(tuple, optional) tuple of <code>Q</code> and <code>R</code> tensors                satisfying <code>input = torch.matmul(Q, R)</code>.                The dimensions of <code>Q</code> and <code>R</code> are \((*, m, k)\) and \((*, k, n)\)                respectively, where \(k = \min(m, n)\) if <code>some:</code> is <code>True</code> and                \(k = m\) otherwise.</p></td>
+      <td><p>(bool, optional) Set to <code>TRUE</code> for reduced QR decomposition and <code>FALSE</code> for                complete QR decomposition.</p></td>
     </tr>
     </table>
 
@@ -217,7 +217,7 @@ are large</p>
 <p>While it should always give you a valid decomposition, it may not
 give you the same one across platforms - it will depend on your
 LAPACK implementation.</p>
-    <h2 class="hasAnchor" id="qr-input-some-true-out-none-gt-tensor-tensor-"><a class="anchor" href="#qr-input-some-true-out-none-gt-tensor-tensor-"></a>qr(input, some=True, out=None) -&gt; (Tensor, Tensor) </h2>
+    <h2 class="hasAnchor" id="qr-input-some-true-out-null-gt-tensor-tensor-"><a class="anchor" href="#qr-input-some-true-out-null-gt-tensor-tensor-"></a>qr(input, some=TRUE, out=NULL) -&gt; (Tensor, Tensor) </h2>
 
     
 
@@ -226,19 +226,24 @@ LAPACK implementation.</p>
 and returns a namedtuple (Q, R) of tensors such that \(\mbox{input} = Q R\)
 with \(Q\) being an orthogonal matrix or batch of orthogonal matrices and
 \(R\) being an upper triangular matrix or batch of upper triangular matrices.</p>
-<p>If <code>some</code> is <code>True</code>, then this function returns the thin (reduced) QR factorization.
-Otherwise, if <code>some</code> is <code>False</code>, this function returns the complete QR factorization.</p>
+<p>If <code>some</code> is <code>TRUE</code>, then this function returns the thin (reduced) QR factorization.
+Otherwise, if <code>some</code> is <code>FALSE</code>, this function returns the complete QR factorization.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>12.</span>, -<span class='fl'>51</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>167</span>, -<span class='fl'>68</span>, -<span class='fl'>4</span>, <span class='fl'>24</span>, -<span class='fl'>41</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
-<span class='no'>out</span> <span class='kw'>=</span> <span class='fu'>torch_qr</span>(<span class='no'>a</span>)
-<span class='no'>q</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>1</span>]]
-<span class='no'>r</span> <span class='kw'>=</span> <span class='no'>out</span><span class='kw'>[[</span><span class='fl'>2</span>]]
-<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>q</span>, <span class='no'>r</span>)$<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>()
-<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='no'>q</span>$<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(), <span class='no'>q</span>)$<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>()
-}</div></pre>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>12.</span>, <span class='op'>-</span><span class='fl'>51</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>167</span>, <span class='op'>-</span><span class='fl'>68</span>, <span class='op'>-</span><span class='fl'>4</span>, <span class='fl'>24</span>, <span class='op'>-</span><span class='fl'>41</span>), ncol = <span class='fl'>3</span>, byrow = <span class='fl'>TRUE</span>))
+<span class='kw'>out</span> <span class='op'>=</span> <span class='fu'>torch_qr</span>(<span class='kw'>a</span>)
+<span class='kw'>q</span> <span class='op'>=</span> <span class='kw'>out</span>[[<span class='fl'>1</span>]]
+<span class='kw'>r</span> <span class='op'>=</span> <span class='kw'>out</span>[[<span class='fl'>2</span>]]
+<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='kw'>q</span>, <span class='kw'>r</span>)<span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>()
+<span class='fu'><a href='torch_mm.html'>torch_mm</a></span>(<span class='kw'>q</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(), <span class='kw'>q</span>)<span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>()
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1  0  0
+#&gt;  0  1  0
+#&gt;  0  0  1
+#&gt; [ CPUFloatType{3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -254,7 +259,7 @@ Otherwise, if <code>some</code> is <code>False</code>, this function returns the
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

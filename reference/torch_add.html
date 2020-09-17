@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_add.Rd</code></div>
     </div>
 
@@ -192,21 +195,18 @@
     <p>Add</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_add</span>(<span class='kw'>self</span>, <span class='kw'>other</span>, alpha = <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>(Number) the number to be added to each element of <code>input</code></p></td>
-    </tr>
-    <tr>
       <th>other</th>
-      <td><p>(Tensor) the second input tensor</p></td>
+      <td><p>(Tensor/Number) the second input tensor/number.</p></td>
     </tr>
     <tr>
       <th>alpha</th>
@@ -214,7 +214,7 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="add-input-other-out-none-"><a class="anchor" href="#add-input-other-out-none-"></a>add(input, other, out=None) </h2>
+    <h2 class="hasAnchor" id="add-input-other-out-null-"><a class="anchor" href="#add-input-other-out-null-"></a>add(input, other, out=NULL) </h2>
 
     
 
@@ -226,7 +226,7 @@ and returns a new resulting tensor.</p>
 $$
 If <code>input</code> is of type FloatTensor or DoubleTensor, <code>other</code> must be
 a real number, otherwise it should be an integer.</p>
-    <h2 class="hasAnchor" id="add-input-other-alpha-out-none-"><a class="anchor" href="#add-input-other-alpha-out-none-"></a>add(input, other, *, alpha=1, out=None) </h2>
+    <h2 class="hasAnchor" id="add-input-other-alpha-out-null-"><a class="anchor" href="#add-input-other-alpha-out-null-"></a>add(input, other, *, alpha=1, out=NULL) </h2>
 
     
 
@@ -243,19 +243,25 @@ If <code>other</code> is of type FloatTensor or DoubleTensor, <code>alpha</code>
 a real number, otherwise it should be an integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='fl'>20</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_add</span>(<span class='kw'>a</span>, <span class='fl'>20</span>)
 
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
-<span class='no'>b</span>
-<span class='fu'>torch_add</span>(<span class='no'>a</span>, <span class='no'>b</span>)
-}</div></pre>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
+<span class='kw'>b</span>
+<span class='fu'>torch_add</span>(<span class='kw'>a</span>, <span class='kw'>b</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.4928 -0.6410 -1.7665  0.5256
+#&gt;  0.0727 -1.0610 -2.1866  0.1055
+#&gt;  1.8224  0.6886 -0.4369  1.8552
+#&gt;  0.1784 -0.9554 -2.0809  0.2112
+#&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -271,7 +277,7 @@ a real number, otherwise it should be an integer.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

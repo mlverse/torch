@@ -74,7 +74,7 @@ as described in Deep learning via Hessian-free optimization - Martens, J. (2010)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -144,6 +144,9 @@ as described in Deep learning via Hessian-free optimization - Martens, J. (2010)
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -196,7 +199,7 @@ non-zero elements will be drawn from the normal distribution
 as described in <code>Deep learning via Hessian-free optimization</code> - Martens, J. (2010).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_sparse_</span>(<span class='no'>tensor</span>, <span class='no'>sparsity</span>, <span class='kw'>std</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_init_sparse_</span>(<span class='kw'>tensor</span>, <span class='kw'>sparsity</span>, std = <span class='fl'>0.01</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,12 +221,13 @@ the non-zero values</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>nn_init_sparse_</span>(<span class='no'>w</span>, <span class='kw'>sparsity</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
+<span class='fu'>nn_init_sparse_</span>(<span class='kw'>w</span>, sparsity = <span class='fl'>0.1</span>)
 }
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,7 +243,7 @@ the non-zero values</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

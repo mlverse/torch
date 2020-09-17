@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bmm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_bmm.Rd</code></div>
     </div>
 
@@ -192,21 +195,18 @@
     <p>Bmm</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_bmm</span>(<span class='kw'>self</span>, <span class='kw'>mat2</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the first batch of matrices to be multiplied</p></td>
     </tr>
     <tr>
       <th>mat2</th>
       <td><p>(Tensor) the second batch of matrices to be multiplied</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -214,7 +214,7 @@
 
     <p>This function does not broadcast .
 For broadcasting matrix products, see <code><a href='torch_matmul.html'>torch_matmul</a></code>.</p>
-    <h2 class="hasAnchor" id="bmm-input-mat-out-none-gt-tensor-"><a class="anchor" href="#bmm-input-mat-out-none-gt-tensor-"></a>bmm(input, mat2, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="bmm-input-mat-out-null-gt-tensor-"><a class="anchor" href="#bmm-input-mat-out-null-gt-tensor-"></a>bmm(input, mat2, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -231,13 +231,64 @@ the same number of matrices.</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>input</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='no'>mat2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='no'>res</span> <span class='kw'>=</span> <span class='fu'>torch_bmm</span>(<span class='no'>input</span>, <span class='no'>mat2</span>)
-<span class='no'>res</span>
-}</div></pre>
+<span class='kw'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='kw'>mat2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
+<span class='kw'>res</span> <span class='op'>=</span> <span class='fu'>torch_bmm</span>(<span class='kw'>input</span>, <span class='kw'>mat2</span>)
+<span class='kw'>res</span>
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,.,.) = 
+#&gt;  -2.6492  0.7203  0.6470  1.0748  0.8508
+#&gt;   0.0058 -2.0582 -0.3531  0.1756  0.8454
+#&gt;  -1.3357 -2.4554 -1.7316 -1.8185  0.0013
+#&gt; 
+#&gt; (2,.,.) = 
+#&gt;  -2.7654 -1.7565  1.0467 -0.9021 -0.2101
+#&gt;   2.9694  2.6698 -1.5012 -0.1578 -2.3553
+#&gt;   0.0521 -0.5841  0.8336 -1.0225  0.9534
+#&gt; 
+#&gt; (3,.,.) = 
+#&gt;  -3.0198 -2.6526 -0.6884  2.7970  1.8561
+#&gt;   1.3988  1.6196  0.8264 -1.6880 -0.5836
+#&gt;  -1.8361 -1.6435 -2.5033  2.5535  1.9679
+#&gt; 
+#&gt; (4,.,.) = 
+#&gt;   0.1864 -0.7930 -0.9378 -0.4791 -0.9357
+#&gt;  -0.8391 -0.1271 -0.2845 -0.1921  0.2707
+#&gt;   1.0138  0.6315 -0.6457 -3.1668  0.2965
+#&gt; 
+#&gt; (5,.,.) = 
+#&gt;  -3.1936 -0.0065 -1.4337 -5.8173 -3.8842
+#&gt;   1.6228 -2.4077 -2.8693  2.7452  2.5736
+#&gt;   2.7376 -1.3444 -2.8333 -0.6168 -1.9218
+#&gt; 
+#&gt; (6,.,.) = 
+#&gt;   2.4491  1.3780  2.5484 -4.9873 -1.3377
+#&gt;   0.9654  0.1103  0.5957 -0.8606 -0.6628
+#&gt;   1.0585 -0.1270  0.3515 -0.7803 -1.9257
+#&gt; 
+#&gt; (7,.,.) = 
+#&gt;   1.2230 -0.9206 -0.4467 -4.8658  1.2931
+#&gt;   0.0427 -0.3020  0.3428 -2.8634  0.2969
+#&gt;  -1.4106  1.3028  0.5776  4.2019 -1.9976
+#&gt; 
+#&gt; (8,.,.) = 
+#&gt;  -3.3022  1.9207 -1.7976 -1.0289 -0.2126
+#&gt;  -0.1250 -2.7791  0.7749  0.8356  5.0383
+#&gt;   3.4486 -1.9389  5.0328 -0.6195  1.6185
+#&gt; 
+#&gt; (9,.,.) = 
+#&gt;   4.4574  2.1288 -3.2226  2.0862 -1.9960
+#&gt;   1.9326  2.3443 -0.1818 -0.1431  0.2726
+#&gt;   0.8138  1.2044  0.2947  0.2196  1.1001
+#&gt; 
+#&gt; (10,.,.) = 
+#&gt;  -0.3073 -2.6836  0.3500 -0.0734  1.5967
+#&gt;   0.9689  2.5241  1.7220 -0.3316  0.0733
+#&gt;   0.2914 -0.7167  6.0589  0.7247  3.6571
+#&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -253,7 +304,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

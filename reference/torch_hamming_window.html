@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Hamming_window</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/wrapers.R'><code>R/wrapers.R</code></a></small>
     <div class="hidden name"><code>torch_hamming_window.Rd</code></div>
     </div>
 
@@ -192,6 +195,16 @@
     <p>Hamming_window</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_hamming_window</span>(
+  <span class='kw'>window_length</span>,
+  periodic = <span class='fl'>TRUE</span>,
+  alpha = <span class='fl'>0.54</span>,
+  beta = <span class='fl'>0.46</span>,
+  dtype = <span class='kw'>NULL</span>,
+  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
+  device = <span class='kw'>NULL</span>,
+  requires_grad = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,7 +215,7 @@
     </tr>
     <tr>
       <th>periodic</th>
-      <td><p>(bool, optional) If True, returns a window to be used as periodic        function. If False, return a symmetric window.</p></td>
+      <td><p>(bool, optional) If TRUE, returns a window to be used as periodic        function. If False, return a symmetric window.</p></td>
     </tr>
     <tr>
       <th>alpha</th>
@@ -214,7 +227,7 @@
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>None</code>, uses a global default (see <code>torch_set_default_tensor_type</code>). Only floating point types are supported.</p></td>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>NULL</code>, uses a global default (see <code>torch_set_default_tensor_type</code>). Only floating point types are supported.</p></td>
     </tr>
     <tr>
       <th>layout</th>
@@ -222,11 +235,11 @@
     </tr>
     <tr>
       <th>device</th>
-      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>None</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
     </tr>
     <tr>
       <th>requires_grad</th>
-      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>False</code>.</p></td>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
@@ -239,7 +252,7 @@
 <pre>This is a generalized version of `torch_hann_window`.
 </pre>
 
-    <h2 class="hasAnchor" id="hamming-window-window-length-periodic-true-alpha-beta-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"><a class="anchor" href="#hamming-window-window-length-periodic-true-alpha-beta-dtype-none-layout-torch-strided-device-none-requires-grad-false-gt-tensor-"></a>hamming_window(window_length, periodic=True, alpha=0.54, beta=0.46, dtype=None, layout=torch.strided, device=None, requires_grad=False) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="hamming-window-window-length-periodic-true-alpha-beta-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-"><a class="anchor" href="#hamming-window-window-length-periodic-true-alpha-beta-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-"></a>hamming_window(window_length, periodic=TRUE, alpha=0.54, beta=0.46, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False) -&gt; Tensor </h2>
 
     
 
@@ -255,7 +268,7 @@ window trims off the last duplicate value from the symmetric window and is
 ready to be used as a periodic window with functions like
 <code>torch_stft</code>. Therefore, if <code>periodic</code> is true, the \(N\) in
 above formula is in fact \(\mbox{window\_length} + 1\). Also, we always have
-<code>torch_hamming_window(L, periodic=True)</code> equal to
+<code>torch_hamming_window(L, periodic=TRUE)</code> equal to
 <code>torch_hamming_window(L + 1, periodic=False)[:-1])</code>.</p>
 
   </div>
@@ -273,7 +286,7 @@ above formula is in fact \(\mbox{window\_length} + 1\). Also, we always have
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

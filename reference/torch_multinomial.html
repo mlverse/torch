@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Multinomial</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_multinomial.Rd</code></div>
     </div>
 
@@ -192,12 +195,13 @@
     <p>Multinomial</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_multinomial</span>(<span class='kw'>self</span>, <span class='kw'>num_samples</span>, replacement = <span class='fl'>FALSE</span>, generator = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor containing probabilities</p></td>
     </tr>
     <tr>
@@ -211,10 +215,6 @@
     <tr>
       <th>generator</th>
       <td><p>(<code>torch.Generator</code>, optional) a pseudorandom number generator for sampling</p></td>
-    </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
     </tr>
     </table>
 
@@ -231,7 +231,7 @@ a non-zero sum.
 <p>If <code>input</code> is a vector, <code>out</code> is a vector of size <code>num_samples</code>.</p>
 <p>If <code>input</code> is a matrix with <code>m</code> rows, <code>out</code> is an matrix of shape
 \((m \times \mbox{num\_samples})\).</p>
-<p>If replacement is <code>True</code>, samples are drawn with replacement.</p>
+<p>If replacement is <code>TRUE</code>, samples are drawn with replacement.</p>
 <p>If not, they are drawn without replacement, which means that when a
 sample index is drawn for a row, it cannot be drawn again for that row.</p>
 <pre>When drawn without replacement, `num_samples` must be lower than
@@ -239,7 +239,7 @@ number of non-zero elements in `input` (or the min number of non-zero
 elements in each row of `input` if it is a matrix).
 </pre>
 
-    <h2 class="hasAnchor" id="multinomial-input-num-samples-replacement-false-generator-none-out-none-gt-longtensor-"><a class="anchor" href="#multinomial-input-num-samples-replacement-false-generator-none-out-none-gt-longtensor-"></a>multinomial(input, num_samples, replacement=False, *, generator=None, out=None) -&gt; LongTensor </h2>
+    <h2 class="hasAnchor" id="multinomial-input-num-samples-replacement-false-generator-null-out-null-gt-longtensor-"><a class="anchor" href="#multinomial-input-num-samples-replacement-false-generator-null-out-null-gt-longtensor-"></a>multinomial(input, num_samples, replacement=False, *, generator=NULL, out=NULL) -&gt; LongTensor </h2>
 
     
 
@@ -249,12 +249,18 @@ from the multinomial probability distribution located in the corresponding row
 of tensor <code>input</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>weights</span> <span class='kw'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>0</span>), <span class='kw'>dtype</span><span class='kw'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float</a></span>()) <span class='co'># create a tensor of weights</span>
-<span class='fu'>torch_multinomial</span>(<span class='no'>weights</span>, <span class='fl'>2</span>)
-<span class='fu'>torch_multinomial</span>(<span class='no'>weights</span>, <span class='fl'>4</span>, <span class='kw'>replacement</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div></pre>
+<span class='kw'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>0</span>), dtype=<span class='fu'><a href='torch_dtype.html'>torch_float</a></span>()) <span class='co'># create a tensor of weights</span>
+<span class='fu'>torch_multinomial</span>(<span class='kw'>weights</span>, <span class='fl'>2</span>)
+<span class='fu'>torch_multinomial</span>(<span class='kw'>weights</span>, <span class='fl'>4</span>, replacement=<span class='fl'>TRUE</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  1
+#&gt;  2
+#&gt;  1
+#&gt;  2
+#&gt; [ CPULongType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -270,7 +276,7 @@ of tensor <code>input</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

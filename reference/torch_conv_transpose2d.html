@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Conv_transpose2d</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_conv_transpose2d.Rd</code></div>
     </div>
 
@@ -192,62 +195,128 @@
     <p>Conv_transpose2d</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_conv_transpose2d</span>(
+  <span class='kw'>input</span>,
+  <span class='kw'>weight</span>,
+  bias = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  stride = <span class='fl'>1L</span>,
+  padding = <span class='fl'>0L</span>,
+  output_padding = <span class='fl'>0L</span>,
+  groups = <span class='fl'>1L</span>,
+  dilation = <span class='fl'>1L</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>NA input tensor of shape \((\mbox{minibatch} , \mbox{in\_channels} , iH , iW)\)</p></td>
+      <td><p>input tensor of shape \((\mbox{minibatch} , \mbox{in\_channels} , iH , iW)\)</p></td>
     </tr>
     <tr>
       <th>weight</th>
-      <td><p>NA filters of shape \((\mbox{in\_channels} , \frac{\mbox{out\_channels}}{\mbox{groups}} , kH , kW)\)</p></td>
+      <td><p>filters of shape \((\mbox{in\_channels} , \frac{\mbox{out\_channels}}{\mbox{groups}} , kH , kW)\)</p></td>
     </tr>
     <tr>
       <th>bias</th>
-      <td><p>NA optional bias of shape \((\mbox{out\_channels})\). Default: None</p></td>
+      <td><p>optional bias of shape \((\mbox{out\_channels})\). Default: NULL</p></td>
     </tr>
     <tr>
       <th>stride</th>
-      <td><p>NA the stride of the convolving kernel. Can be a single number or a      tuple <code>(sH, sW)</code>. Default: 1</p></td>
+      <td><p>the stride of the convolving kernel. Can be a single number or a      tuple <code>(sH, sW)</code>. Default: 1</p></td>
     </tr>
     <tr>
       <th>padding</th>
-      <td><p>NA <code>dilation * (kernel_size - 1) - padding</code> zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      <code>(padH, padW)</code>. Default: 0</p></td>
+      <td><p><code>dilation * (kernel_size - 1) - padding</code> zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      <code>(padH, padW)</code>. Default: 0</p></td>
     </tr>
     <tr>
       <th>output_padding</th>
-      <td><p>NA additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple <code>(out_padH, out_padW)</code>.      Default: 0</p></td>
+      <td><p>additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple <code>(out_padH, out_padW)</code>.      Default: 0</p></td>
     </tr>
     <tr>
       <th>groups</th>
-      <td><p>NA split input into groups, \(\mbox{in\_channels}\) should be divisible by the      number of groups. Default: 1</p></td>
+      <td><p>split input into groups, \(\mbox{in\_channels}\) should be divisible by the      number of groups. Default: 1</p></td>
     </tr>
     <tr>
       <th>dilation</th>
-      <td><p>NA the spacing between kernel elements. Can be a single number or      a tuple <code>(dH, dW)</code>. Default: 1</p></td>
+      <td><p>the spacing between kernel elements. Can be a single number or      a tuple <code>(dH, dW)</code>. Default: 1</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="conv-transpose-d-input-weight-bias-none-stride-padding-output-padding-groups-dilation-gt-tensor-"><a class="anchor" href="#conv-transpose-d-input-weight-bias-none-stride-padding-output-padding-groups-dilation-gt-tensor-"></a>conv_transpose2d(input, weight, bias=None, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="conv-transpose-d-input-weight-bias-null-stride-padding-output-padding-groups-dilation-gt-tensor-"><a class="anchor" href="#conv-transpose-d-input-weight-bias-null-stride-padding-output-padding-groups-dilation-gt-tensor-"></a>conv_transpose2d(input, weight, bias=NULL, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -&gt; Tensor </h2>
 
     
 
 
 <p>Applies a 2D transposed convolution operator over an input image
 composed of several input planes, sometimes also called "deconvolution".</p>
-<p>See <code>~torch.nn.ConvTranspose2d</code> for details and output shape.</p>
-<p>.. include:: cudnn_deterministic.rst</p>
+<p>See <code><a href='nn_conv_transpose2d.html'>nn_conv_transpose2d()</a></code> for details and output shape.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
 <span class='co'># With square kernels and equal stride</span>
-<span class='no'>inputs</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>5</span>))
-<span class='no'>weights</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='fu'><a href='nnf_conv_transpose2d.html'>nnf_conv_transpose2d</a></span>(<span class='no'>inputs</span>, <span class='no'>weights</span>, <span class='kw'>padding</span><span class='kw'>=</span><span class='fl'>1</span>)
-}</div></pre>
+<span class='kw'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>5</span>))
+<span class='kw'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='fu'><a href='nnf_conv_transpose2d.html'>nnf_conv_transpose2d</a></span>(<span class='kw'>inputs</span>, <span class='kw'>weights</span>, padding=<span class='fl'>1</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; (1,1,.,.) = 
+#&gt;  -0.8538  3.7414  3.5332 -2.9328  2.1515
+#&gt;   2.2632  3.5724 -3.3145 -1.7725  4.8423
+#&gt;   4.7347  1.4873 -1.3766  1.3687 -1.6326
+#&gt;  -2.3290 -3.1808  9.6094  2.9294 -3.8241
+#&gt;   0.4746  6.8709  5.9462  9.8163 -0.9700
+#&gt; 
+#&gt; (1,2,.,.) = 
+#&gt;   2.1581 -2.9982  0.3221  1.9249 -1.0838
+#&gt;   1.3087  6.8211 -2.2007 -2.4093  0.2833
+#&gt;   9.5148  1.7559 -0.6216 -1.7809  1.0024
+#&gt;   3.7436 -5.1147  7.2877  4.5028 -1.1264
+#&gt;   0.3746  6.7303  1.1461 -2.2281 -0.3031
+#&gt; 
+#&gt; (1,3,.,.) = 
+#&gt;    1.5281  -3.3700  -3.6244   3.3441   3.6080
+#&gt;   -7.1669   5.8868   4.8094  -1.5218  -0.6287
+#&gt;    1.7669   4.1594   6.9190 -14.0507  -2.9022
+#&gt;   10.3544  -7.1211  -0.5756   3.1895   1.5517
+#&gt;   -0.4052  -3.7498   8.7138  -2.0279  -1.1154
+#&gt; 
+#&gt; (1,4,.,.) = 
+#&gt;   0.1905  0.3571 -6.2082  2.9589 -1.0372
+#&gt;  -3.7305  7.3769  3.5422  2.0008 -4.2623
+#&gt;  -5.6070 -2.5181 -1.0765  0.0161  0.1126
+#&gt;   2.8082  6.4789 -3.6215  2.6241  2.1958
+#&gt;   1.5325 -6.5701  0.0287 -2.1016  1.8735
+#&gt; 
+#&gt; (1,5,.,.) = 
+#&gt;  -4.0822  1.9857  2.3317 -2.7236 -0.4473
+#&gt;  -0.1901  5.3316  0.3288 -3.4030 -4.8119
+#&gt;   3.6620 -2.7736 -1.4003  2.9507 -0.4975
+#&gt;   4.4438  1.5119 -1.9685 -1.7508 -4.0314
+#&gt;   0.9647 -0.8674 -5.0017 -3.8060 -5.8403
+#&gt; 
+#&gt; (1,6,.,.) = 
+#&gt;  -3.8189  2.3054  1.4199  5.4591 -1.0336
+#&gt;   3.3250  1.9516 -7.8348 -7.3111 -0.7413
+#&gt;  -3.0961 -4.7019  9.1205  9.3715 -3.2874
+#&gt;  -0.0749  2.1643 -2.7975 -0.7393  3.2122
+#&gt;   1.0401 -4.0131  0.0216 -3.7277 -1.9028
+#&gt; 
+#&gt; (1,7,.,.) = 
+#&gt;   -0.7516  -5.6381   3.7772   2.2334   1.9075
+#&gt;   -3.9085   7.4768  -1.8531   1.4972  -1.7912
+#&gt;    8.6908  -9.5525 -10.1153   5.9635   4.0037
+#&gt;    3.1381  -2.4838  11.4102   2.5205  -4.8662
+#&gt;   -0.8622  -0.9530   0.3595  -3.5274   0.1391
+#&gt; 
+#&gt; (1,8,.,.) = 
+#&gt;   -0.1224  -4.5458  11.8157   5.7696  -2.7919
+#&gt;    8.9622  -2.4798 -11.6338  -1.5878   6.4664
+#&gt;    4.1569   1.0449   1.9667   0.7428  -2.1160
+#&gt;    6.9810  13.2036  -6.6915  -3.6760  -0.6329
+#&gt;   -0.1250   1.0187  11.3486   0.7393  -5.7996
+#&gt; [ CPUFloatType{1,8,5,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -263,7 +332,7 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cosine_similarity</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_cosine_similarity.Rd</code></div>
     </div>
 
@@ -192,6 +195,7 @@
     <p>Cosine_similarity</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_cosine_similarity</span>(<span class='kw'>x1</span>, <span class='kw'>x2</span>, dim = <span class='fl'>2L</span>, eps = <span class='fl'>0</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,13 +229,115 @@
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>input1</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>128</span>))
-<span class='no'>input2</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>128</span>))
-<span class='no'>output</span> <span class='kw'>=</span> <span class='fu'>torch_cosine_similarity</span>(<span class='no'>input1</span>, <span class='no'>input2</span>)
-<span class='no'>output</span>
-}</div></pre>
+<span class='kw'>input1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>128</span>))
+<span class='kw'>input2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>128</span>))
+<span class='kw'>output</span> <span class='op'>=</span> <span class='fu'>torch_cosine_similarity</span>(<span class='kw'>input1</span>, <span class='kw'>input2</span>)
+<span class='kw'>output</span>
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;  0.0448
+#&gt; -0.1153
+#&gt;  0.0058
+#&gt;  0.1284
+#&gt;  0.0282
+#&gt; -0.0328
+#&gt;  0.1704
+#&gt; -0.0296
+#&gt; -0.1015
+#&gt;  0.0891
+#&gt; -0.0593
+#&gt;  0.0849
+#&gt; -0.1575
+#&gt;  0.0084
+#&gt;  0.0360
+#&gt; -0.0349
+#&gt; -0.1266
+#&gt;  0.0454
+#&gt;  0.1316
+#&gt; -0.1349
+#&gt;  0.0777
+#&gt;  0.0020
+#&gt;  0.0122
+#&gt; -0.0727
+#&gt;  0.0086
+#&gt;  0.0673
+#&gt;  0.0881
+#&gt;  0.0650
+#&gt; -0.0078
+#&gt;  0.0370
+#&gt;  0.0311
+#&gt;  0.0116
+#&gt; -0.2119
+#&gt; -0.1185
+#&gt;  0.0299
+#&gt; -0.0704
+#&gt;  0.0681
+#&gt;  0.0127
+#&gt;  0.1371
+#&gt; -0.0210
+#&gt;  0.0293
+#&gt; -0.0641
+#&gt; -0.0380
+#&gt; -0.1394
+#&gt; -0.0599
+#&gt; -0.0381
+#&gt; -0.0453
+#&gt;  0.0336
+#&gt; -0.0083
+#&gt; -0.0918
+#&gt; -0.1575
+#&gt; -0.0516
+#&gt;  0.0249
+#&gt;  0.0139
+#&gt;  0.0394
+#&gt;  0.0736
+#&gt; -0.1284
+#&gt; -0.1745
+#&gt;  0.0337
+#&gt; -0.0603
+#&gt;  0.0996
+#&gt;  0.0808
+#&gt;  0.0946
+#&gt; -0.0573
+#&gt;  0.1105
+#&gt;  0.0800
+#&gt; -0.0260
+#&gt; -0.1310
+#&gt; -0.0906
+#&gt;  0.0638
+#&gt; -0.0577
+#&gt;  0.1068
+#&gt;  0.1028
+#&gt;  0.1259
+#&gt; -0.0947
+#&gt; -0.0488
+#&gt;  0.0047
+#&gt;  0.0954
+#&gt;  0.0779
+#&gt; -0.1816
+#&gt;  0.0583
+#&gt;  0.1152
+#&gt; -0.1195
+#&gt;  0.0521
+#&gt;  0.0119
+#&gt;  0.0779
+#&gt;  0.0185
+#&gt; -0.0757
+#&gt;  0.0698
+#&gt; -0.0797
+#&gt; -0.0457
+#&gt; -0.0611
+#&gt;  0.0838
+#&gt; -0.0981
+#&gt; -0.0436
+#&gt;  0.0292
+#&gt;  0.1500
+#&gt;  0.1093
+#&gt;  0.1366
+#&gt; -0.0983
+#&gt; [ CPUFloatType{100} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -247,7 +353,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

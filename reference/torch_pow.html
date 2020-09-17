@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Pow</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_pow.Rd</code></div>
     </div>
 
@@ -192,29 +195,22 @@
     <p>Pow</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_pow</span>(<span class='kw'>self</span>, <span class='kw'>exponent</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>(Tensor) the input tensor.</p></td>
+      <th>self</th>
+      <td><p>(float) the scalar base value for the power operation</p></td>
     </tr>
     <tr>
       <th>exponent</th>
       <td><p>(float or tensor) the exponent value</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
-    <tr>
-      <th>self</th>
-      <td><p>(float) the scalar base value for the power operation</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="pow-input-exponent-out-none-gt-tensor-"><a class="anchor" href="#pow-input-exponent-out-none-gt-tensor-"></a>pow(input, exponent, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="pow-input-exponent-out-null-gt-tensor-"><a class="anchor" href="#pow-input-exponent-out-null-gt-tensor-"></a>pow(input, exponent, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -233,7 +229,7 @@ When <code>exponent</code> is a tensor, the operation applied is:</p>
 $$
 When <code>exponent</code> is a tensor, the shapes of <code>input</code>
 and <code>exponent</code> must be broadcastable .</p>
-    <h2 class="hasAnchor" id="pow-self-exponent-out-none-gt-tensor-"><a class="anchor" href="#pow-self-exponent-out-none-gt-tensor-"></a>pow(self, exponent, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="pow-self-exponent-out-null-gt-tensor-"><a class="anchor" href="#pow-self-exponent-out-null-gt-tensor-"></a>pow(self, exponent, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -246,22 +242,28 @@ The returned tensor <code>out</code> is of the same shape as <code>exponent</cod
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_pow</span>(<span class='no'>a</span>, <span class='fl'>2</span>)
-<span class='no'>exp</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
-<span class='no'>a</span>
-<span class='no'>exp</span>
-<span class='fu'>torch_pow</span>(<span class='no'>a</span>, <span class='no'>exp</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_pow</span>(<span class='kw'>a</span>, <span class='fl'>2</span>)
+<span class='kw'>exp</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
+<span class='kw'>a</span>
+<span class='kw'>exp</span>
+<span class='fu'>torch_pow</span>(<span class='kw'>a</span>, <span class='kw'>exp</span>)
 
 
-<span class='no'>exp</span> <span class='kw'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
-<span class='no'>base</span> <span class='kw'>=</span> <span class='fl'>2</span>
-<span class='fu'>torch_pow</span>(<span class='no'>base</span>, <span class='no'>exp</span>)
-}</div></pre>
+<span class='kw'>exp</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
+<span class='kw'>base</span> <span class='op'>=</span> <span class='fl'>2</span>
+<span class='fu'>torch_pow</span>(<span class='kw'>base</span>, <span class='kw'>exp</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt;   2
+#&gt;   4
+#&gt;   8
+#&gt;  16
+#&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -277,7 +279,7 @@ $$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

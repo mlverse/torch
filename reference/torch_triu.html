@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@
     <li>
       <a href="../articles/indexing.html">Indexing</a>
     </li>
+    <li>
+      <a href="../articles/tensor/index.html">Tensor class</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -184,7 +187,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Triu</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
     <div class="hidden name"><code>torch_triu.Rd</code></div>
     </div>
 
@@ -192,25 +195,22 @@
     <p>Triu</p>
     </div>
 
+    <pre class="usage"><span class='fu'>torch_triu</span>(<span class='kw'>self</span>, diagonal = <span class='fl'>0L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     <tr>
       <th>diagonal</th>
       <td><p>(int, optional) the diagonal to consider</p></td>
     </tr>
-    <tr>
-      <th>out</th>
-      <td><p>(Tensor, optional) the output tensor.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="triu-input-diagonal-out-none-gt-tensor-"><a class="anchor" href="#triu-input-diagonal-out-none-gt-tensor-"></a>triu(input, diagonal=0, out=None) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="triu-input-diagonal-out-null-gt-tensor-"><a class="anchor" href="#triu-input-diagonal-out-null-gt-tensor-"></a>triu(input, diagonal=0, out=NULL) -&gt; Tensor </h2>
 
     
 
@@ -228,18 +228,24 @@ the main diagonal. The main diagonal are the set of indices
 \(d_{1}, d_{2}\) are the dimensions of the matrix.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
 
-<span class='no'>a</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='no'>a</span>
-<span class='fu'>torch_triu</span>(<span class='no'>a</span>)
-<span class='fu'>torch_triu</span>(<span class='no'>a</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='fu'>torch_triu</span>(<span class='no'>a</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)
-<span class='no'>b</span> <span class='kw'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
-<span class='no'>b</span>
-<span class='fu'>torch_triu</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='fu'>torch_triu</span>(<span class='no'>b</span>, <span class='kw'>diagonal</span><span class='kw'>=</span>-<span class='fl'>1</span>)
-}</div></pre>
+<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
+<span class='kw'>a</span>
+<span class='fu'>torch_triu</span>(<span class='kw'>a</span>)
+<span class='fu'>torch_triu</span>(<span class='kw'>a</span>, diagonal=<span class='fl'>1</span>)
+<span class='fu'>torch_triu</span>(<span class='kw'>a</span>, diagonal=<span class='op'>-</span><span class='fl'>1</span>)
+<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
+<span class='kw'>b</span>
+<span class='fu'>torch_triu</span>(<span class='kw'>b</span>, diagonal=<span class='fl'>1</span>)
+<span class='fu'>torch_triu</span>(<span class='kw'>b</span>, diagonal=<span class='op'>-</span><span class='fl'>1</span>)
+}
+</div><div class='output co'>#&gt; torch_tensor 
+#&gt; -0.9720  1.1390 -0.2941 -0.4895 -0.1846 -0.0182
+#&gt; -0.4223 -0.0555  0.0807 -1.3255 -0.9773 -0.4205
+#&gt;  0.0000  0.7544  0.0322  0.6214  0.5214 -0.7340
+#&gt;  0.0000  0.0000  1.0268  0.2335  0.0060  0.1418
+#&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -255,7 +261,7 @@ the main diagonal. The main diagonal are the set of indices
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
