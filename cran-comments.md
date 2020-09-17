@@ -1,3 +1,9 @@
+
+We found a bug in the `Makevars` that could explain the errors with parallel
+make that motivated removing this package from CRAN.
+This release hopefully fixes the issue, however we are not able to reproduce
+this outside of CRAN so we can further debug.
+
 ## Test environments
 
 * local R installation, R 4.0.2
@@ -17,6 +23,3 @@ sub-directories of 1Mb or more:
     help   2.6Mb
     libs  17.2Mb
 
-* This is a new release.
-* Fixed issue with parallel make on Fedora.
-* Fixed README.md URL redirect.
