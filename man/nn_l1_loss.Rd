@@ -32,10 +32,10 @@ where \eqn{N} is the batch size. If \code{reduction} is not \code{'none'}
 
 \deqn{
 \ell(x, y) =
-\begin{cases}
+\begin{array}{ll}
 \operatorname{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
 \operatorname{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
-\end{cases}
+\end{array}
 }
 
 \eqn{x} and \eqn{y} are tensors of arbitrary shapes with a total

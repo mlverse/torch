@@ -35,10 +35,10 @@ nn_weighted_loss <- nn_module(
 #' 
 #' \deqn{
 #' \ell(x, y) =
-#' \begin{cases}
+#' \begin{array}{ll}
 #' \operatorname{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
 #' \operatorname{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
-#' \end{cases}
+#' \end{array}
 #' }
 #' 
 #' \eqn{x} and \eqn{y} are tensors of arbitrary shapes with a total
