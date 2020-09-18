@@ -17,6 +17,68 @@ nn_weighted_loss <- nn_module(
   }
 )
 
+#' L1 loss
+#' 
+#' Creates a criterion that measures the mean absolute error (MAE) between each 
+#' element in the input \eqn{x} and target \eqn{y}.
+#' 
+#' The unreduced (i.e. with `reduction` set to `'none'`) loss can be described 
+#' as:
+#' 
+#' \deqn{
+#' \ell(x, y) = L = \{l_1,\dots,l_N\}^\top, \quad
+#' l_n = \left| x_n - y_n \right|,
+#' }
+#' 
+#' where \eqn{N} is the batch size. If `reduction` is not `'none'`
+#' (default `'mean'`), then:
+#' 
+#' \deqn{
+#' \ell(x, y) =
+#' \begin{cases}
+#' \operatorname{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
+#' \operatorname{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
+#' \end{cases}
+#' }
+#' 
+#' \eqn{x} and \eqn{y} are tensors of arbitrary shapes with a total
+#' of \eqn{n} elements each.
+#' 
+#' The sum operation still operates over all the elements, and divides by \eqn{n}.
+#' The division by \eqn{n} can be avoided if one sets `reduction = 'sum'`.
+#' 
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in the meantime,
+#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
+#'   dimensions
+#' - Target: \eqn{(N, *)}, same shape as the input
+#' - Output: scalar. If `reduction` is `'none'`, then
+#'   \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' loss <- nn_l1_loss()
+#' input <- torch_randn(3, 5, requires_grad=TRUE)
+#' target <- torch_randn(3, 5)
+#' output <- loss(input, target)
+#' output$backward()
+#' 
+#' @export
+nn_l1_loss <- nn_module(
+  "nn_l1_loss",
+  inherit = nn_loss,
+  forward = function(input, target) {
+    nnf_l1_loss(input, target, reduction = self$reduction)
+  }
+)
+
+
+
 #' Binary cross entropy loss
 #' 
 #' Creates a criterion that measures the Binary Cross Entropy
@@ -27,7 +89,7 @@ nn_weighted_loss <- nn_module(
 #'   \ell(x, y) = L = \{l_1,\dots,l_N\}^\top, \quad
 #' l_n = - w_n \left[ y_n \cdot \log x_n + (1 - y_n) \cdot \log (1 - x_n) \right]
 #' }
-#' where \eqn{N} is the batch size. If `reduction` is not ``'none'``
+#' where \eqn{N} is the batch size. If `reduction` is not `'none'`
 #' (default `'mean'`), then
 #' 
 #' \deqn{
@@ -62,17 +124,17 @@ nn_weighted_loss <- nn_module(
 #' @param weight (Tensor, optional): a manual rescaling weight given to the loss
 #'    of each batch element. If given, has to be a Tensor of size `nbatch`.
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
-#'    ``'none'`` | ``'mean'`` | ``'sum'``. ``'none'``: no reduction will be applied,
-#'    ``'mean'``: the sum of the output will be divided by the number of
-#'    elements in the output, ``'sum'``: the output will be summed. Note: `size_average`
+#'    `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'    `'mean'`: the sum of the output will be divided by the number of
+#'    elements in the output, `'sum'`: the output will be summed. Note: `size_average`
 #'    and `reduce` are in the process of being deprecated, and in the meantime,
-#'    specifying either of those two args will override `reduction`. Default: ``'mean'``
+#'    specifying either of those two args will override `reduction`. Default: `'mean'`
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
 #'   dimensions
 #' - Target: \eqn{(N, *)}, same shape as the input
-#' - Output: scalar. If `reduction` is ``'none'``, then \eqn{(N, *)}, same
+#' - Output: scalar. If `reduction` is `'none'`, then \eqn{(N, *)}, same
 #'   shape as input.
 #' 
 #' @examples
