@@ -36,8 +36,8 @@ nn_weighted_loss <- nn_module(
 #' \deqn{
 #' \ell(x, y) =
 #' \begin{array}{ll}
-#' \operatorname{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
-#' \operatorname{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
+#' \mbox{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
+#' \mbox{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
 #' \end{array}
 #' }
 #' 
@@ -77,6 +77,117 @@ nn_l1_loss <- nn_module(
   }
 )
 
+#' Nll loss
+#' 
+#' The negative log likelihood loss. It is useful to train a classification
+#' problem with `C` classes.
+#' 
+#' If provided, the optional argument `weight` should be a 1D Tensor assigning
+#' weight to each of the classes. This is particularly useful when you have an
+#' unbalanced training set.
+#' 
+#' The `input` given through a forward call is expected to contain
+#' log-probabilities of each class. `input` has to be a Tensor of size either
+#' \eqn{(minibatch, C)} or \eqn{(minibatch, C, d_1, d_2, ..., d_K)}
+#' with \eqn{K \geq 1} for the `K`-dimensional case (described later).
+#' 
+#' Obtaining log-probabilities in a neural network is easily achieved by
+#' adding a  `LogSoftmax`  layer in the last layer of your network.
+#' 
+#' You may use `CrossEntropyLoss` instead, if you prefer not to add an extra
+#' layer.
+#' 
+#' The `target` that this loss expects should be a class index in the range \eqn{[0, C-1]}
+#' where `C = number of classes`; if `ignore_index` is specified, this loss also accepts
+#' this class index (this index may not necessarily be in the class range).
+#' 
+#' The unreduced (i.e. with `reduction` set to `'none'`) loss can be described as:
+#' 
+#' \deqn{
+#' \ell(x, y) = L = \{l_1,\dots,l_N\}^\top, \quad
+#' l_n = - w_{y_n} x_{n,y_n}, \quad
+#' w_{c} = \mbox{weight}[c] \cdot \mathbb{1}\{c \not= \mbox{ignore\_index}\},
+#' }
+#' 
+#' where \eqn{x} is the input, \eqn{y} is the target, \eqn{w} is the weight, and
+#' \eqn{N} is the batch size. If `reduction` is not `'none'`
+#' (default `'mean'`), then
+#' 
+#' \deqn{
+#' \ell(x, y) = \begin{array}{ll}
+#' \sum_{n=1}^N \frac{1}{\sum_{n=1}^N w_{y_n}} l_n, &
+#'   \mbox{if reduction} = \mbox{'mean';}\\
+#' \sum_{n=1}^N l_n,  &
+#'   \mbox{if reduction} = \mbox{'sum'.}
+#' \end{cases}
+#' }
+#' 
+#' Can also be used for higher dimension inputs, such as 2D images, by providing
+#' an input of size \eqn{(minibatch, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1},
+#' where \eqn{K} is the number of dimensions, and a target of appropriate shape
+#' (see below). In the case of images, it computes NLL loss per-pixel.
+#' 
+#' 
+#' @param weight (Tensor, optional): a manual rescaling weight given to each
+#'   class. If given, it has to be a Tensor of size `C`. Otherwise, it is
+#'   treated as if having all ones.
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will
+#'   be applied, `'mean'`: the weighted mean of the output is taken,
+#'   `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in
+#'   the meantime, specifying either of those two args will override
+#'   `reduction`. Default: `'mean'`
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, C)} where `C = number of classes`, or
+#'   \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
+#'   in the case of `K`-dimensional loss.
+#' - Target: \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, or
+#'   \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
+#'   K-dimensional loss.
+#' - Output: scalar.
+#' 
+#' If `reduction` is `'none'`, then the same size as the target: \eqn{(N)}, or
+#' \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case
+#' of K-dimensional loss.
+#' 
+#' @examples
+#' m <- nn_log_softmax(dim=2)
+#' loss <- nn_nll_loss()
+#' # input is of size N x C = 3 x 5
+#' input <- torch_randn(3, 5, requires_grad=TRUE)
+#' # each element in target has to have 0 <= value < C
+#' target <- torch_tensor(c(2, 1, 5))
+#' output <- loss(m(input), target)
+#' output$backward()
+#' 
+#' # 2D loss example (used, for example, with image inputs)
+#' N <- 5
+#' C <- 4
+#' loss <- nn_nll_loss()
+#' # input is of size N x C x height x width
+#' data <- torch_randn(N, 16, 10, 10)
+#' conv <- nn_conv2d(16, C, c(3, 3))
+#' m <- nn_log_softmax(dim=1)
+#' # each element in target has to have 0 <= value < C
+#' target <- torch_empty(N, 8, 8, dtype=torch_long())$random_(0, C)
+#' output <- loss(m(conv(data)), target)
+#' output$backward()
+#' 
+#' @export
+nn_nll_loss <- nn_module(
+  "nn_nll_loss",
+  inherit = nn_weighted_loss,
+  initialize = function(weight = NULL, ignore_index = -100, reduction = "mean") {
+    super$initialize(weight, reduction)
+    self$ignore_index <- ignore_index
+  },
+  forward = function(input, target) {
+    nnf_nll_loss(input, target, weight = self$weight, 
+                 ignore_index = self$ignore_index, reduction = self$reduction)
+  }
+)
 
 
 #' Binary cross entropy loss
