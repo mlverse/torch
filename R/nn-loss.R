@@ -138,6 +138,8 @@ nn_l1_loss <- nn_module(
 #'   and `reduce` are in the process of being deprecated, and in
 #'   the meantime, specifying either of those two args will override
 #'   `reduction`. Default: `'mean'`
+#' @param ignore_index (int, optional): Specifies a target value that is ignored
+#'   and does not contribute to the input gradient.
 #' 
 #' @section Shape:
 #' - Input: \eqn{(N, C)} where `C = number of classes`, or

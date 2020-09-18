@@ -11,6 +11,9 @@ nn_nll_loss(weight = NULL, ignore_index = -100, reduction = "mean")
 class. If given, it has to be a Tensor of size \code{C}. Otherwise, it is
 treated as if having all ones.}
 
+\item{ignore_index}{(int, optional): Specifies a target value that is ignored
+and does not contribute to the input gradient.}
+
 \item{reduction}{(string, optional): Specifies the reduction to apply to the output:
 \code{'none'} | \code{'mean'} | \code{'sum'}. \code{'none'}: no reduction will
 be applied, \code{'mean'}: the weighted mean of the output is taken,
