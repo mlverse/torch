@@ -106,7 +106,7 @@ nn_l1_loss <- nn_module(
 #' \deqn{
 #' \ell(x, y) = L = \{l_1,\dots,l_N\}^\top, \quad
 #' l_n = - w_{y_n} x_{n,y_n}, \quad
-#' w_{c} = \mbox{weight}[c] \cdot \mathbb{1}\{c \not= \mbox{ignore\_index}\},
+#' w_{c} = \mbox{weight}[c] \cdot \mbox{1}\{c \not= \mbox{ignore\_index}\},
 #' }
 #' 
 #' where \eqn{x} is the input, \eqn{y} is the target, \eqn{w} is the weight, and
@@ -119,7 +119,7 @@ nn_l1_loss <- nn_module(
 #'   \mbox{if reduction} = \mbox{'mean';}\\
 #' \sum_{n=1}^N l_n,  &
 #'   \mbox{if reduction} = \mbox{'sum'.}
-#' \end{cases}
+#' \end{array}
 #' }
 #' 
 #' Can also be used for higher dimension inputs, such as 2D images, by providing
@@ -160,7 +160,7 @@ nn_l1_loss <- nn_module(
 #' # input is of size N x C = 3 x 5
 #' input <- torch_randn(3, 5, requires_grad=TRUE)
 #' # each element in target has to have 0 <= value < C
-#' target <- torch_tensor(c(2, 1, 5))
+#' target <- torch_tensor(c(2, 1, 5), dtype = torch_long())
 #' output <- loss(m(input), target)
 #' output$backward()
 #' 
@@ -173,7 +173,7 @@ nn_l1_loss <- nn_module(
 #' conv <- nn_conv2d(16, C, c(3, 3))
 #' m <- nn_log_softmax(dim=1)
 #' # each element in target has to have 0 <= value < C
-#' target <- torch_empty(N, 8, 8, dtype=torch_long())$random_(0, C)
+#' target <- torch_empty(N, 8, 8, dtype=torch_long())$random_(1, C)
 #' output <- loss(m(conv(data)), target)
 #' output$backward()
 #' 
