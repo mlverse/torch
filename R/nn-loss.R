@@ -191,6 +191,67 @@ nn_nll_loss <- nn_module(
   }
 )
 
+#' Poisson NLL loss
+#' 
+#' Negative log likelihood loss with Poisson distribution of target.
+#' The loss can be described as:
+#'
+#' \deqn{
+#' \mbox{target} \sim \mathrm{Poisson}(\mbox{input})
+#' \mbox{loss}(\mbox{input}, \mbox{target}) = \mbox{input} - \mbox{target} * \log(\mbox{input})
+#' + \log(\mbox{target!})
+#' }
+#' 
+#' The last term can be omitted or approximated with Stirling formula. The
+#' approximation is used for target values more than 1. For targets less or
+#' equal to 1 zeros are added to the loss.
+#' 
+#' @param log_input (bool, optional): if `TRUE` the loss is computed as
+#'   \eqn{\exp(\mbox{input}) - \mbox{target}*\mbox{input}}, if `FALSE` the loss is
+#'   \eqn{\mbox{input} - \mbox{target}*\log(\mbox{input}+\mbox{eps})}.
+#' @param full (bool, optional): whether to compute full loss, i. e. to add the
+#'   Stirling approximation term 
+#'   \eqn{\mbox{target}*\log(\mbox{target}) - \mbox{target} + 0.5 * \log(2\pi\mbox{target})}.
+#' @param eps (float, optional): Small value to avoid evaluation of \eqn{\log(0)} when
+#'   `log_input = FALSE`. Default: 1e-8
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in the meantime,
+#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#' 
+#' @examples
+#' loss <- nn_poisson_nll_loss()
+#' log_input <- torch_randn(5, 2, requires_grad=TRUE)
+#' target <- torch_randn(5, 2)
+#' output <- loss(log_input, target)
+#' output$backward()
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
+#'   dimensions
+#' - Target: \eqn{(N, *)}, same shape as the input
+#' - Output: scalar by default. If `reduction` is `'none'`, then \eqn{(N, *)},
+#'   the same shape as the input
+#'   
+#' @export
+nn_poisson_nll_loss <- nn_module(
+  "nn_poisson_nll_loss",
+  inherit = nn_loss,
+  initialize = function(log_input = TRUE, full = FALSE, eps = 1e-8, 
+                        reduction = 'mean') {
+    super$initialize(reduction = reduction)
+    self$log_input <- log_input
+    self$full <- full
+    self$eps <- eps
+  },
+  forward = function(log_input, target) {
+    nnf_poisson_nll_loss(log_input, target, log_input = self$log_input,
+                         full = self$full, eps = self$eps, 
+                         reduction = self$reduction)
+  }
+)
 
 #' Binary cross entropy loss
 #' 
