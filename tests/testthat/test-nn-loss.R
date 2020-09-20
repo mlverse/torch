@@ -19,3 +19,18 @@ test_that("nn_cross_entropy_loss", {
   
   expect_tensor(output)
 })
+
+test_that("nn_kl_div_loss", {
+  
+  loss <- nn_kl_div_loss()
+  input <- torch_randn(3, 5, requires_grad=TRUE)
+  target <- torch_randn(3, 5, requires_grad = TRUE)
+  
+  expect_warning(
+    output <- loss(input, target)  
+  )
+  
+  output$backward()
+  
+  expect_tensor(output)
+})
