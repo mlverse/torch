@@ -328,6 +328,66 @@ nn_kl_div_loss <- nn_module(
   }
 )
 
+#' MSE loss
+#' 
+#' Creates a criterion that measures the mean squared error (squared L2 norm) between
+#' each element in the input \eqn{x} and target \eqn{y}.
+#' The unreduced (i.e. with `reduction` set to `'none'`) loss can be described 
+#' as:
+#'
+#' \deqn{
+#'   \ell(x, y) = L = \{l_1,\dots,l_N\}^\top, \quad
+#' l_n = \left( x_n - y_n \right)^2,
+#' }
+#' 
+#' where \eqn{N} is the batch size. If `reduction` is not `'none'`
+#' (default `'mean'`), then:
+#' 
+#' \deqn{
+#'   \ell(x, y) =
+#'   \begin{array}{ll}
+#' \mbox{mean}(L), &  \mbox{if reduction} = \mbox{'mean';}\\
+#' \mbox{sum}(L),  &  \mbox{if reduction} = \mbox{'sum'.}
+#' \end{array}
+#' }
+#' 
+#' \eqn{x} and \eqn{y} are tensors of arbitrary shapes with a total
+#' of \eqn{n} elements each.
+#' 
+#' The mean operation still operates over all the elements, and divides by \eqn{n}.
+#' The division by \eqn{n} can be avoided if one sets `reduction = 'sum'`.
+#' 
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'  `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'  `'mean'`: the sum of the output will be divided by the number of
+#'  elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'  and `reduce` are in the process of being deprecated, and in the meantime,
+#'  specifying either of those two args will override `reduction`. Default: `'mean'`
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
+#'   dimensions
+#' - Target: \eqn{(N, *)}, same shape as the input
+#' 
+#' @examples
+#' loss <- nn_mse_loss()
+#' input <- torch_randn(3, 5, requires_grad=TRUE)
+#' target <- torch_randn(3, 5)
+#' output <- loss(input, target)
+#' output$backward()
+#' 
+#' @export
+nn_mse_loss <- nn_module(
+  "nn_mse_loss",
+  inherit = nn_loss,
+  initialize = function(reduction = 'mean') {
+    super$initialize(reduction = reduction)
+  },
+  forward = function(input, target) {
+    nnf_mse_loss(input, target, reduction=self$reduction)
+  }
+)
+
 #' Binary cross entropy loss
 #' 
 #' Creates a criterion that measures the Binary Cross Entropy
