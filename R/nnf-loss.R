@@ -177,20 +177,8 @@ nnf_cosine_embedding_loss <- function(input1, input2, target, margin=0,
 #'
 #' @export
 nnf_smooth_l1_loss <- function(input, target, reduction = "mean") {
-  if (target$requires_grad) {
-    ret <- nnf_smooth_l1_loss(input, target)
-    if (reduction != "none") {
-      if (reduction == "mean")
-        ret <- torch_mean(ret)
-      else
-        ret <- torch_sum(ret)
-    }
-  } else {
-    expanded <- torch_broadcast_tensors(list(input, target))
-    ret <- torch_smooth_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
-  }
-  
-  ret
+  expanded <- torch_broadcast_tensors(list(input, target))
+  torch_smooth_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
 }
 
 #' Multilabel_margin_loss
