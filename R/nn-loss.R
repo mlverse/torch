@@ -560,6 +560,62 @@ nn_bce_with_logits_loss <- nn_module(
   }
 )
 
+#' Hinge embedding loss
+#' 
+#' Measures the loss given an input tensor \eqn{x} and a labels tensor \eqn{y}
+#' (containing 1 or -1).
+#' 
+#' This is usually used for measuring whether two inputs are similar or
+#' dissimilar, e.g. using the L1 pairwise distance as \eqn{x}, and is typically
+#' used for learning nonlinear embeddings or semi-supervised learning.
+#' The loss function for \eqn{n}-th sample in the mini-batch is
+#' 
+#' \deqn{
+#'   l_n = \begin{array}{ll}
+#' x_n, & \mbox{if}\; y_n = 1,\\
+#' \max \{0, \Delta - x_n\}, & \mbox{if}\; y_n = -1,
+#' \end{array}
+#' }
+#' 
+#' and the total loss functions is
+#' 
+#' \deqn{
+#'   \ell(x, y) = \begin{array}{ll}
+#' \mbox{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
+#' \mbox{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
+#' \end{array}
+#' }
+#' 
+#' where \eqn{L = \{l_1,\dots,l_N\}^\top}.
+#' 
+#' @param margin (float, optional): Has a default value of `1`.
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'  `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'  `'mean'`: the sum of the output will be divided by the number of
+#'  elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'  and `reduce` are in the process of being deprecated, and in the meantime,
+#'  specifying either of those two args will override `reduction`. Default: `'mean'`
+#' 
+#' @section Shape:
+#' - Input: \eqn{(*)} where \eqn{*} means, any number of dimensions. The sum operation
+#'   operates over all the elements.
+#' - Target: \eqn{(*)}, same shape as the input
+#' - Output: scalar. If `reduction` is `'none'`, then same shape as the input
+#' 
+#' @export
+nn_hinge_embedding_loss <- nn_module(
+  "nn_hinge_embedding_loss",
+  inherit = nn_loss,
+  initialize = function(margin = 1.0, reduction = 'mean') {
+    super$initialize(reduction = reduction)
+    self$margin <- margin
+  },
+  forward = function(input, target) {
+    nnf_hinge_embedding_loss(input, target, margin=self$margin, 
+                             reduction=self$reduction)
+  }
+)
+
 #' CrossEntropyLoss module
 #' 
 #' This criterion combines [nn_log_softmax()] and `nn_nll_loss()` in one single class.

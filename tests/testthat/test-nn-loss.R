@@ -34,3 +34,16 @@ test_that("nn_kl_div_loss", {
   
   expect_tensor(output)
 })
+
+test_that("nn_hinge_embedding_loss", {
+  
+  loss <- nn_hinge_embedding_loss()
+  input <- torch_randn(3, 5, requires_grad=TRUE)
+  target <- torch_randn(3, 5, requires_grad = TRUE)
+  
+  out <- loss(input, target)
+  out$backward()
+  
+  expect_length(out$shape, 0)
+  
+})
