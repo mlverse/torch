@@ -294,3 +294,52 @@ test_that("moodule$apply", {
   expect_equal_to_tensor(net$norm$weight, torch_zeros_like(net$norm$weight))
   
 })
+
+test_that("$<-  works for instances", {
+  
+  m <- nn_module(
+    initialize = function() {
+      self$mymodule <- nn_linear(10, 10)
+      self$n <- nn_linear(15, 15)
+    }
+  )
+  
+  model <- m()
+  expect_s3_class(model, "nn_module")
+  model$mymodule <- nn_linear(2,2)
+  expect_s3_class(model, "nn_module")
+  expect_equal(model$mymodule$out_feature, 2)
+  model$new_module <- nn_linear(5,5)
+  expect_s3_class(model, "nn_module")
+  
+  pars <- model$parameters
+  expect_length(pars, 6)
+  expect_tensor_shape(pars$mymodule.weight, c(2,2))
+  expect_tensor_shape(pars$new_module.weight, c(5,5))
+
+})
+
+test_that("[[<- works for instances", {
+  
+  m <- nn_module(
+    initialize = function() {
+      self$mymodule <- nn_linear(10, 10)
+      self$n <- nn_linear(15, 15)
+    }
+  )
+  
+  model <- m()
+  expect_s3_class(model, "nn_module")
+  model[["mymodule"]] <- nn_linear(2,2)
+  expect_s3_class(model, "nn_module")
+  expect_equal(model$mymodule$out_feature, 2)
+  model[["new_module"]] <- nn_linear(5,5)
+  expect_s3_class(model, "nn_module")
+  
+  pars <- model$parameters
+  expect_length(pars, 6)
+  expect_tensor_shape(pars$mymodule.weight, c(2,2))
+  expect_tensor_shape(pars$new_module.weight, c(5,5))
+  
+  
+})

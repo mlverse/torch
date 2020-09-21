@@ -370,6 +370,7 @@ create_nn_module_callable <- function(instance) {
 
 #' @export
 `[[<-.nn_Module` <- function(x, name, value) {
+
   if (inherits(value, "nn_parameter")) {
     x$register_parameter(name, value)
   } else if (inherits(value, "nn_buffer")) {
@@ -388,6 +389,15 @@ create_nn_module_callable <- function(instance) {
   x[[name]] <- value
   invisible(x)
 }
+
+#' @export
+`$<-.nn_module` <- function(x, name, value) {
+  attr(x, "module")[[name]] <- value
+  invisible(x)
+}
+
+#' @export
+`[[<-.nn_module` <- `$<-.nn_module`
 
 #' @export
 names.nn_module <- function(x, ...) {
