@@ -616,6 +616,59 @@ nn_hinge_embedding_loss <- nn_module(
   }
 )
 
+#' Multilabel margin loss
+#' 
+#' Creates a criterion that optimizes a multi-class multi-classification
+#' hinge loss (margin-based loss) between input \eqn{x} (a 2D mini-batch `Tensor`)
+#' and output \eqn{y} (which is a 2D `Tensor` of target class indices).
+#' For each sample in the mini-batch:
+#'
+#' \deqn{
+#'   \mbox{loss}(x, y) = \sum_{ij}\frac{\max(0, 1 - (x[y[j]] - x[i]))}{\mbox{x.size}(0)}
+#' }
+#' 
+#' where \eqn{x \in \left\{0, \; \cdots , \; \mbox{x.size}(0) - 1\right\}}, \
+#' \eqn{y \in \left\{0, \; \cdots , \; \mbox{y.size}(0) - 1\right\}}, \
+#' \eqn{0 \leq y[j] \leq \mbox{x.size}(0)-1}, \
+#' and \eqn{i \neq y[j]} for all \eqn{i} and \eqn{j}.
+#' \eqn{y} and \eqn{x} must have the same size.
+#' 
+#' The criterion only considers a contiguous block of non-negative targets that
+#' starts at the front.
+#' This allows for different samples to have variable amounts of target classes.
+#' 
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'  `'mean'`: the sum of the output will be divided by the number of
+#'  elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'  and `reduce` are in the process of being deprecated, and in the meantime,
+#'  specifying either of those two args will override `reduction`. Default: `'mean'`
+#' 
+#' @section Shape:
+#' - Input: \eqn{(C)} or \eqn{(N, C)} where `N` is the batch size and `C`
+#'   is the number of classes.
+#' - Target: \eqn{(C)} or \eqn{(N, C)}, label targets padded by -1 ensuring same shape as the input.
+#' - Output: scalar. If `reduction` is `'none'`, then \eqn{(N)}.
+#' 
+#' @examples
+#' loss <- nn_multilabel_margin_loss()
+#' x <- torch_tensor(c(0.1, 0.2, 0.4, 0.8))$view(c(1,4))
+#' # for target y, only consider labels 4 and 1, not after label -1
+#' y <- torch_tensor(c(4, 1, -1, 2), dtype = torch_long())$view(c(1,4))
+#' loss(x, y)
+#' 
+#' @export
+nn_multilabel_margin_loss <- nn_module(
+  "nn_multilabel_margin_loss",
+  inherit = nn_loss,
+  initialize = function(reduction = "mean") {
+    super$initialize(reduction = reduction)
+  },
+  forward = function(input, target) {
+    nnf_multilabel_margin_loss(input, target, reduction = self$reduction)
+  }
+)
+
 #' CrossEntropyLoss module
 #' 
 #' This criterion combines [nn_log_softmax()] and `nn_nll_loss()` in one single class.

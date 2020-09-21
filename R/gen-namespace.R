@@ -11361,8 +11361,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_multilabel_margin_loss
-torch_multilabel_margin_loss <- function(self, target, reduction = torch_reduction_mean()) {
+#' @rdname .torch_multilabel_margin_loss
+.torch_multilabel_margin_loss <- function(self, target, reduction = torch_reduction_mean()) {
   args <- mget(x = c("self", "target", "reduction"))
 expected_types <- list(self = "Tensor", target = "Tensor", reduction = "int64_t")
 nd_args <- c("self", "target")

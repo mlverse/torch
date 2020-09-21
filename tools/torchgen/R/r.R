@@ -103,7 +103,8 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "nll_loss", "nll_loss2d", "bartlett_window", "blackman_window",
                    "hamming_window", "hann_window", "normal",
                    "result_type", "sparse_coo_tensor", "stft",
-                   "tensordot", "tril_indices", "triu_indices")
+                   "tensordot", "tril_indices", "triu_indices",
+                   "multilabel_margin_loss")
 internal_funs <- c(internal_funs, creation_ops)
 
 

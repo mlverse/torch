@@ -47,3 +47,18 @@ test_that("nn_hinge_embedding_loss", {
   expect_length(out$shape, 0)
   
 })
+
+test_that("multilabel margin loss", {
+  
+  loss <- nn_multilabel_margin_loss()
+  x <- torch_tensor(c(0.1, 0.2, 0.4, 0.8))$view(c(1,4))
+  # for target y, only consider labels 4 and 1, not after label -1
+  y <- torch_tensor(c(4, 1, -1, 2), dtype = torch_long())$view(c(1,4))
+  o <- loss(x, y)
+  expect_equal(as.numeric(o), 0.85, tol = 1e-5)
+  
+  expect_length(o$shape, 0)
+  y <- torch_tensor(c(4, 0, -1, 2), dtype = torch_long())$view(c(1,4))
+  expect_error(o <- loss(x, y))
+  
+})
