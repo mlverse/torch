@@ -1,4 +1,4 @@
-#' @include nn.R
+#' #' @include nn.R
 NULL
 
 nn_loss <- nn_module(
@@ -666,6 +666,58 @@ nn_multilabel_margin_loss <- nn_module(
   },
   forward = function(input, target) {
     nnf_multilabel_margin_loss(input, target, reduction = self$reduction)
+  }
+)
+
+#' Smooth L1 loss
+#' 
+#' Creates a criterion that uses a squared term if the absolute
+#' element-wise error falls below 1 and an L1 term otherwise.
+#' It is less sensitive to outliers than the `MSELoss` and in some cases
+#' prevents exploding gradients (e.g. see `Fast R-CNN` paper by Ross Girshick).
+#' Also known as the Huber loss:
+#' 
+#' \deqn{
+#'   \mbox{loss}(x, y) = \frac{1}{n} \sum_{i} z_{i}
+#' }
+#' 
+#' where \eqn{z_{i}} is given by:
+#' 
+#' \deqn{
+#'   z_{i} =
+#'   \begin{array}{ll}
+#' 0.5 (x_i - y_i)^2, & \mbox{if } |x_i - y_i| < 1 \\
+#' |x_i - y_i| - 0.5, & \mbox{otherwise }
+#' \end{array}
+#' }
+#' 
+#' \eqn{x} and \eqn{y} arbitrary shapes with a total of \eqn{n} elements each
+#' the sum operation still operates over all the elements, and divides by \eqn{n}.
+#' The division by \eqn{n} can be avoided if sets `reduction = 'sum'`.
+#' 
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'  `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'  `'mean'`: the sum of the output will be divided by the number of
+#'  elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'  and `reduce` are in the process of being deprecated, and in the meantime,
+#'  specifying either of those two args will override `reduction`. Default: `'mean'`
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
+#'   dimensions
+#' - Target: \eqn{(N, *)}, same shape as the input
+#' - Output: scalar. If `reduction` is `'none'`, then
+#'   \eqn{(N, *)}, same shape as the input
+#'   
+#' @export
+nn_smooth_l1_loss <- nn_module(
+  "nn_smooth_l1_loss",
+  inherit = nn_loss,
+  initialize = function(reduction = "mean") {
+    super$initialize(reduction = reduction)
+  },
+  forward = function(input, target) {
+    nnf_smooth_l1_loss(input, target, reduction=self$reduction)
   }
 )
 

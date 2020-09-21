@@ -62,3 +62,14 @@ test_that("multilabel margin loss", {
   expect_error(o <- loss(x, y))
   
 })
+
+test_that("smooth_l1_loss", {
+  
+  loss <- nn_smooth_l1_loss()
+  input <- torch_randn(3, 5, requires_grad=TRUE)
+  target <- torch_randn(3, 5, requires_grad = TRUE)
+  o <- loss(x, y)
+  
+  expect_length(o$shape, 0)
+  
+})
