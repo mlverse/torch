@@ -466,6 +466,100 @@ nn_bce_loss <- nn_module(
   }
 )
 
+#' BCE with logits loss
+#' 
+#' This loss combines a `Sigmoid` layer and the `BCELoss` in one single
+#' class. This version is more numerically stable than using a plain `Sigmoid`
+#' followed by a `BCELoss` as, by combining the operations into one layer,
+#' we take advantage of the log-sum-exp trick for numerical stability.
+#' 
+#' The unreduced (i.e. with `reduction` set to `'none'`) loss can be described as:
+#' 
+#' \deqn{
+#'   \ell(x, y) = L = \{l_1,\dots,l_N\}^\top, \quad
+#' l_n = - w_n \left[ y_n \cdot \log \sigma(x_n)
+#'                    + (1 - y_n) \cdot \log (1 - \sigma(x_n)) \right],
+#' }
+#' 
+#' where \eqn{N} is the batch size. If `reduction` is not `'none'`
+#' (default `'mean'`), then
+#' 
+#' \deqn{
+#'   \ell(x, y) = \begin{array}{ll}
+#' \mbox{mean}(L), & \mbox{if reduction} = \mbox{'mean';}\\
+#' \mbox{sum}(L),  & \mbox{if reduction} = \mbox{'sum'.}
+#' \end{array}
+#' }
+#' 
+#' This is used for measuring the error of a reconstruction in for example
+#' an auto-encoder. Note that the targets `t[i]` should be numbers
+#' between 0 and 1.
+#' It's possible to trade off recall and precision by adding weights to positive examples.
+#' In the case of multi-label classification the loss can be described as:
+#'
+#' \deqn{
+#' \ell_c(x, y) = L_c = \{l_{1,c},\dots,l_{N,c}\}^\top, \quad
+#' l_{n,c} = - w_{n,c} \left[ p_c y_{n,c} \cdot \log \sigma(x_{n,c})
+#' + (1 - y_{n,c}) \cdot \log (1 - \sigma(x_{n,c})) \right],
+#' }
+#' where \eqn{c} is the class number (\eqn{c > 1} for multi-label binary 
+#' classification,
+#' 
+#' \eqn{c = 1} for single-label binary classification),
+#' \eqn{n} is the number of the sample in the batch and
+#' \eqn{p_c} is the weight of the positive answer for the class \eqn{c}.
+#' \eqn{p_c > 1} increases the recall, \eqn{p_c < 1} increases the precision.
+#' For example, if a dataset contains 100 positive and 300 negative examples of a single class,
+#' then `pos_weight` for the class should be equal to \eqn{\frac{300}{100}=3}.
+#' The loss would act as if the dataset contains \eqn{3\times 100=300} positive examples.
+#' 
+#' @param weight (Tensor, optional): a manual rescaling weight given to the loss
+#'   of each batch element. If given, has to be a Tensor of size `nbatch`.
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in the meantime,
+#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#' @param pos_weight (Tensor, optional): a weight of positive examples.
+#'   Must be a vector with length equal to the number of classes.
+#'     
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional dimensions
+#' - Target: \eqn{(N, *)}, same shape as the input
+#' - Output: scalar. If `reduction` is `'none'`, then \eqn{(N, *)}, same
+#'   shape as input.
+#' 
+#' @examples
+#' loss <- nn_bce_with_logits_loss()
+#' input <- torch_randn(3, requires_grad=TRUE)
+#' target <- torch_empty(3)$random_(1, 2)
+#' output <- loss(input, target)
+#' output$backward()
+#' 
+#' target <- torch_ones(10, 64, dtype=torch_float32())  # 64 classes, batch size = 10
+#' output <- torch_full(c(10, 64), 1.5)  # A prediction (logit)
+#' pos_weight <- torch_ones(64)  # All weights are equal to 1
+#' criterion <- nn_bce_with_logits_loss(pos_weight=pos_weight)
+#' criterion(output, target)  # -log(sigmoid(1.5))
+#'
+#' @export
+nn_bce_with_logits_loss <- nn_module(
+  "nn_bce_with_logits_loss",
+  inherit = nn_loss,
+  initialize = function(weight = NULL, reduction = 'mean', pos_weight = NULL) {
+    super$initialize(reduction = reduction)
+    self$register_buffer('weight', weight)
+    self$register_buffer('pos_weight', pos_weight)
+  },
+  forward = function(input, target) {
+    nnf_binary_cross_entropy_with_logits(
+      input, target, self$weight, 
+      pos_weight=self$pos_weight,
+      reduction=self$reduction)
+  }
+)
+
 #' CrossEntropyLoss module
 #' 
 #' This criterion combines [nn_log_softmax()] and `nn_nll_loss()` in one single class.
