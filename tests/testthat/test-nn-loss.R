@@ -84,3 +84,14 @@ test_that("soft_margin loss", {
   expect_length(o$shape, 0)
   
 })
+
+test_that("multilabel_soft_margin loss", {
+  
+  loss <- nn_multilabel_soft_margin_loss()
+  input <- torch_randn(3, 5, requires_grad=TRUE)
+  target <- torch_randn(3, 5)
+  o <- loss(input, target)
+  
+  expect_length(o$shape, 0)
+  
+})

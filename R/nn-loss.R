@@ -836,3 +836,47 @@ nn_cross_entropy_loss <- nn_module(
                       ignore_index = self$ignore_index, reduction = self$reduction)
   }
 )
+
+#' Multi label soft margin loss 
+#' 
+#' Creates a criterion that optimizes a multi-label one-versus-all
+#' loss based on max-entropy, between input \eqn{x} and target \eqn{y} of size
+#' \eqn{(N, C)}.
+#' 
+#' For each sample in the minibatch:
+#' 
+#' \deqn{
+#'   loss(x, y) = - \frac{1}{C} * \sum_i y[i] * \log((1 + \exp(-x[i]))^{-1})
+#' + (1-y[i]) * \log\left(\frac{\exp(-x[i])}{(1 + \exp(-x[i]))}\right)
+#' }
+#' 
+#' where \eqn{i \in \left\{0, \; \cdots , \; \mbox{x.nElement}() - 1\right\}},
+#' \eqn{y[i] \in \left\{0, \; 1\right\}}.
+#' 
+#' @param weight (Tensor, optional): a manual rescaling weight given to each
+#'   class. If given, it has to be a Tensor of size `C`. Otherwise, it is
+#'   treated as if having all ones.
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in the meantime,
+#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   
+#' @section Shape:
+#' - Input: \eqn{(N, C)} where `N` is the batch size and `C` is the number of classes.
+#' - Target: \eqn{(N, C)}, label targets padded by -1 ensuring same shape as the input.
+#' - Output: scalar. If `reduction` is `'none'`, then \eqn{(N)}.
+#' 
+#' @export
+nn_multilabel_soft_margin_loss <- nn_module(
+  "nn_multilabel_soft_margin_loss",
+  inherit = nn_weighted_loss,
+  initialize = function(weight = NULL, reduction = "mean") {
+    super$initialize(weight = weight, reduction = reduction)
+  },
+  forward = function(input, target) {
+    nnf_multilabel_soft_margin_loss(input, target, weight=self$weight, 
+                                    reduction=self$reduction)
+  }
+)
