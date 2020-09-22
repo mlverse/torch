@@ -921,3 +921,54 @@ nn_cosine_embedding_loss <- nn_module(
                               reduction = self$reduction)
   }
 )
+
+#' Margin ranking loss
+#' 
+#' Creates a criterion that measures the loss given
+#' inputs \eqn{x1}, \eqn{x2}, two 1D mini-batch `Tensors`,
+#' and a label 1D mini-batch tensor \eqn{y} (containing 1 or -1).
+#' If \eqn{y = 1} then it assumed the first input should be ranked higher
+#' (have a larger value) than the second input, and vice-versa for \eqn{y = -1}.
+#' 
+#' The loss function for each pair of samples in the mini-batch is:
+#' 
+#' \deqn{
+#'   \mbox{loss}(x1, x2, y) = \max(0, -y * (x1 - x2) + \mbox{margin})
+#' }
+#' 
+#' 
+#' @param margin (float, optional): Has a default value of \eqn{0}.
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in the meantime,
+#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#' 
+#' @section Shape:
+#' - Input1: \eqn{(N)} where `N` is the batch size.
+#' - Input2: \eqn{(N)}, same shape as the Input1.
+#' - Target: \eqn{(N)}, same shape as the inputs.
+#' - Output: scalar. If `reduction` is `'none'`, then \eqn{(N)}.
+#' 
+#' @examples
+#' loss <- nn_margin_ranking_loss()
+#' input1 <- torch_randn(3, requires_grad=TRUE)
+#' input2 <- torch_randn(3, requires_grad=TRUE)
+#' target <- torch_randn(3)$sign()
+#' output <- loss(input1, input2, target)
+#' output$backward()
+#' 
+#' @export
+nn_margin_ranking_loss <- nn_module(
+  "nn_margin_ranking_loss",
+  inherit = nn_loss,
+  initialize = function(margin = 0, reduction = "mean") {
+    super$initialize(reduction = reduction)
+    self$margin <- margin
+  },
+  forward = function(input1, input2, target){
+    nnf_margin_ranking_loss(input1, input2, target, margin = self$margin,
+                            reduction = self$reduction)
+  }
+)
