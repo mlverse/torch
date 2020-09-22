@@ -1,4 +1,4 @@
-#' #' @include nn.R
+#' @include nn.R
 NULL
 
 nn_loss <- nn_module(
@@ -878,5 +878,46 @@ nn_multilabel_soft_margin_loss <- nn_module(
   forward = function(input, target) {
     nnf_multilabel_soft_margin_loss(input, target, weight=self$weight, 
                                     reduction=self$reduction)
+  }
+)
+
+#' Cosine embedding loss
+#' 
+#' Creates a criterion that measures the loss given input tensors
+#' \eqn{x_1}, \eqn{x_2} and a `Tensor` label \eqn{y} with values 1 or -1.
+#' This is used for measuring whether two inputs are similar or dissimilar,
+#' using the cosine distance, and is typically used for learning nonlinear
+#' embeddings or semi-supervised learning.
+#' The loss function for each sample is:
+#'
+#' \deqn{
+#'   \mbox{loss}(x, y) =
+#'   \begin{array}{ll}
+#' 1 - \cos(x_1, x_2), & \mbox{if } y = 1 \\
+#' \max(0, \cos(x_1, x_2) - \mbox{margin}), & \mbox{if } y = -1
+#' \end{array}
+#' }
+#' 
+#' @param margin (float, optional): Should be a number from \eqn{-1} to \eqn{1},
+#'   \eqn{0} to \eqn{0.5} is suggested. If `margin` is missing, the
+#'   default value is \eqn{0}.
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in the meantime,
+#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   
+#' @export
+nn_cosine_embedding_loss <- nn_module(
+  "nn_cosine_embedding_loss",
+  inherit = nn_loss,
+  initialize = function(margin = 0, reduction = "mean") {
+    super$initialize(reduction = reduction)
+    self$margin <- margin
+  },
+  forward = function(input1, input2, target) {
+    nnf_cosine_embedding_loss(input1, input2, target, margin = self$margin,
+                              reduction = self$reduction)
   }
 )

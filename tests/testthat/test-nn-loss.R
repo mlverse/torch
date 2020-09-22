@@ -95,3 +95,15 @@ test_that("multilabel_soft_margin loss", {
   expect_length(o$shape, 0)
   
 })
+
+test_that("cosine_embedding loss", {
+  
+  loss <- nn_cosine_embedding_loss()
+  input1 <- torch_randn(5, 5, requires_grad=TRUE)
+  input2 <- torch_randn(5, 5, requires_grad=TRUE)
+  target <- torch_randn(5, 5)
+  o <- loss(input1, input2, target)
+  
+  expect_length(o$shape, 0)
+  
+})
