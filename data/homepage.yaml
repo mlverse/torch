@@ -1,14 +1,21 @@
 bandtwo:
-- url: /start/
+- url: /docs/articles/getting-started/warmup.html
   title: Get started
   icon: fa-meteor
   icon_pack: fas
   what: |
     Start with the basics in our quick tour of torch. Learn how to create tensors, use the autograd feature and build your first deep learning model. 
 
-- url: /explore/
+- url: /docs/articles/examples/index.html
   title: Explore
   icon: fa-search-plus
   icon_pack: fas
   what: |
-    Explore our torch gallery, including examples from [computer vision](), [natural language processing](), and [more]().
+    Explore our torch gallery, including examples from computer vision, natural language processing and more.
+    
+- url: https://blogs.rstudio.com/ai/
+  title: Keep posted
+  icon: fa-rss
+  icon_pack: fas
+  what: |
+    The RStudio AI blog is the go-to page for news about the 'torch for R' project as well as application examples.
