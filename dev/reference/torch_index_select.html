@@ -57,6 +57,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -243,9 +253,9 @@ of <code>index</code>; other dimensions have the same size as in the original te
 <span class='fu'>torch_index_select</span>(<span class='kw'>x</span>, <span class='fl'>2</span>, <span class='kw'>indices</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.3852 -0.6353
-#&gt;  0.1270 -1.7199
-#&gt; -0.8510  0.3289
+#&gt;  0.3490 -0.0261
+#&gt;  0.3391  0.0661
+#&gt;  0.2738  0.9882
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

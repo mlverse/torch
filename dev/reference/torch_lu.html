@@ -59,6 +59,16 @@ is set to True." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -237,20 +247,20 @@ elements in the tuple are Tensor, IntTensor. Default: NULL</p></td>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.5867  0.2541  1.1710
-#&gt;  -0.0439 -1.7139 -0.3574
-#&gt;   0.0419 -0.1563  0.0602
+#&gt;  -1.7315 -0.7809 -0.2172
+#&gt;   0.4092  1.8151 -0.5657
+#&gt;   0.1032  0.1998  1.0285
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.3032 -1.0227 -1.2581
-#&gt;  -0.8268  1.3182 -1.3519
-#&gt;   0.4372  0.3663  2.0414
+#&gt;  -1.2526 -0.8256 -1.5664
+#&gt;  -0.0394  1.0388 -1.2330
+#&gt;   0.0554 -0.3628 -1.8250
 #&gt; [ CPUFloatType{2,3,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
+#&gt;  2  3  3
 #&gt;  2  2  3
-#&gt;  3  2  3
 #&gt; [ CPUIntType{2,3} ]
 #&gt; </div></pre>
   </div>

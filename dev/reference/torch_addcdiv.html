@@ -57,6 +57,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -258,9 +268,9 @@ a real number, otherwise an integer.</p>
 <span class='fu'>torch_addcdiv</span>(<span class='kw'>t</span>, <span class='kw'>t1</span>, <span class='kw'>t2</span>, <span class='fl'>0.1</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.8137  0.5739  0.3826
-#&gt; -0.7566  0.4210 -1.6926
-#&gt; -0.7264  0.3401 -2.7911
+#&gt;  0.0406  0.1199  1.6580
+#&gt; -0.0072  0.0840  1.6199
+#&gt;  0.0947  0.1606  1.7012
 #&gt; [ CPUFloatType{3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -57,6 +57,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -255,8 +265,8 @@ The shape of the tensor is defined by the variable argument <code>size</code>.</
 <span class='fu'>torch_randn</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6775 -0.3723 -0.1228
-#&gt; -2.1087 -0.6557  0.3178
+#&gt; -1.1322 -1.0091 -0.8598
+#&gt;  1.8086  0.5110 -0.7305
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

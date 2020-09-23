@@ -57,6 +57,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -229,9 +239,9 @@ If \(N\) is 1, then this is a no-op - the original matrix is returned as is.</p>
 <span class='fu'>torch_chain_matmul</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span>, <span class='kw'>b</span>, <span class='kw'>c</span>, <span class='kw'>d</span>))
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  5.2226 -7.9655  7.9982 -3.2927  5.8935 -5.8455  4.3416
-#&gt; -5.9398  5.1888 -8.8250  4.0416 -4.0651  4.1677 -4.4707
-#&gt; -16.2833 -4.2840 -2.5420  3.9481 -10.5644 -13.8150 -5.8871
+#&gt;   8.2876  -9.5432   3.4824   1.0901   4.1346   6.3065  11.0722
+#&gt; -10.3389  31.4560   4.0719  10.8759   0.7723  -9.2192 -34.0005
+#&gt;  -8.9028  16.2147  -1.8877   1.0682  -3.6794  -8.8466 -18.5578
 #&gt; [ CPUFloatType{3,7} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

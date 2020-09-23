@@ -57,6 +57,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -243,10 +253,10 @@ the main diagonal. The main diagonal are the set of indices
 <span class='fu'>torch_triu</span>(<span class='kw'>b</span>, diagonal=<span class='op'>-</span><span class='fl'>1</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6400 -0.3760  0.4597  0.1725  0.4431 -1.1600
-#&gt; -0.9875 -0.3058 -0.5701  1.3807 -0.7065 -0.9431
-#&gt;  0.0000 -0.3519 -0.9127 -0.2747  0.3518  0.1992
-#&gt;  0.0000  0.0000 -1.5199 -1.0622  0.0701 -0.5271
+#&gt;  0.3880 -0.5148 -1.1294  0.7879  0.0947 -1.6295
+#&gt;  1.4587 -1.0658  1.5468  1.2954 -0.8343  0.5148
+#&gt;  0.0000 -0.1140 -1.6222  0.7178 -0.5105 -0.5453
+#&gt;  0.0000  0.0000 -0.5591  1.1878 -0.1956 -1.7039
 #&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

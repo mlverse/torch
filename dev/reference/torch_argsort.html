@@ -57,6 +57,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -234,10 +244,10 @@ for the exact semantics of this method.</p>
 <span class='fu'>torch_argsort</span>(<span class='kw'>a</span>, dim=<span class='fl'>1</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  2  3  3  1
-#&gt;  3  1  1  3
-#&gt;  0  0  2  0
-#&gt;  1  2  0  2
+#&gt;  3  3  1  0
+#&gt;  0  2  3  2
+#&gt;  2  1  2  1
+#&gt;  1  0  0  3
 #&gt; [ CPULongType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

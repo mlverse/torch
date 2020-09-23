@@ -57,6 +57,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -253,7 +263,7 @@ output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
 <span class='fu'>torch_mean</span>(<span class='kw'>a</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.2586 -0.4784  0.0733 -0.1591
+#&gt; -0.3448 -0.2889 -0.7870 -0.1091
 #&gt; [ CPUFloatType{1,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -57,6 +57,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -297,10 +307,10 @@ certainly fail the check.</p>
 <span class='fu'>torch_irfft</span>(<span class='kw'>y</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>, signal_sizes=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span>
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4418  0.3288 -1.6559  0.6395  2.2209
-#&gt;  1.0963 -1.1321 -0.3235 -1.0637 -1.2837
-#&gt;  0.3315 -1.8872  0.1140  0.4491 -0.0388
-#&gt;  0.6673  0.2094 -1.6308  0.1029  1.2334
+#&gt; -0.5069  0.7027 -1.1419  0.8837  0.2603
+#&gt;  0.6924 -1.5226 -0.3961 -0.5595 -0.3604
+#&gt; -2.2883  0.1773  0.3524 -0.0082  0.6221
+#&gt;  0.3391  1.9332 -0.3377 -0.5037 -0.7271
 #&gt; [ CPUFloatType{4,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
