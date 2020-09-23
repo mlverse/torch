@@ -31,5 +31,5 @@ jobs:
           rm -r .git/
           cd ../..
           git add -A
-          git commit -m "Update site"
+          git commit --allow-empty -m "Update site"
           git push --force origin HEAD:website
