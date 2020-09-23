@@ -191,4 +191,16 @@ torch_triu_indices <- function(row, col, offset=0, dtype=torch_long(),
   .torch_triu_indices(row, col, offset, options = opt)
 }
 
+#' @rdname torch_multilabel_margin_loss
+torch_multilabel_margin_loss <- function(self, target, reduction = torch_reduction_mean()) {
+  .torch_multilabel_margin_loss(self, as_1_based_tensor(target), reduction)
+}
+
+#' @rdname torch_multi_margin_loss
+torch_multi_margin_loss <- function(self, target, p = 1L, margin = 1L, weight = list(), 
+                                    reduction = torch_reduction_mean()) {
+  .torch_multi_margin_loss(self, as_1_based_tensor(target), p, margin, weight,
+                           reduction)
+}
+
 
