@@ -972,3 +972,61 @@ nn_margin_ranking_loss <- nn_module(
                             reduction = self$reduction)
   }
 )
+
+#' Multi margin loss
+#' 
+#' Creates a criterion that optimizes a multi-class classification hinge
+#' loss (margin-based loss) between input \eqn{x} (a 2D mini-batch `Tensor`) and
+#' output \eqn{y} (which is a 1D tensor of target class indices,
+#' \eqn{0 \leq y \leq \mbox{x.size}(1)-1}):
+#' 
+#' For each mini-batch sample, the loss in terms of the 1D input \eqn{x} and scalar
+#' output \eqn{y} is:
+#' \deqn{
+#'   \mbox{loss}(x, y) = \frac{\sum_i \max(0, \mbox{margin} - x[y] + x[i]))^p}{\mbox{x.size}(0)}
+#' }
+#' 
+#' where \eqn{x \in \left\{0, \; \cdots , \; \mbox{x.size}(0) - 1\right\}}
+#' and \eqn{i \neq y}.
+#' 
+#' Optionally, you can give non-equal weighting on the classes by passing
+#' a 1D `weight` tensor into the constructor.
+#' The loss function then becomes:
+#'
+#' \deqn{
+#'   \mbox{loss}(x, y) = \frac{\sum_i \max(0, w[y] * (\mbox{margin} - x[y] + x[i]))^p)}{\mbox{x.size}(0)}
+#' } 
+#' 
+#' @param p (int, optional): Has a default value of \eqn{1}. \eqn{1} and \eqn{2}
+#'   are the only supported values.
+#' @param margin (float, optional): Has a default value of \eqn{1}.
+#' @param weight (Tensor, optional): a manual rescaling weight given to each
+#'   class. If given, it has to be a Tensor of size `C`. Otherwise, it is
+#'   treated as if having all ones.
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in the meantime,
+#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   
+#' @export
+nn_multi_margin_loss <- nn_module(
+  "nn_multi_margin_loss",
+  inherit = nn_weighted_loss,
+  initialize = function(p = 1, margin = 1, weight = NULL, reduction = "mean") {
+    super$initialize(weight = weight, reduction = reduction)
+    if (p != 1 && p != 2) {
+      value_error("only p == 1 or p == 2 are supported.")
+    }
+    if (!is.null(weight) && weight$dim() != 1) {
+      value_error("weight must be NULL or 1-dimensional")
+    }
+    self$p <- p
+    self$margin <- margin
+  },
+  forward = function(input, target) {
+    nnf_multi_margin_loss(input, target, p = self$p, margin = self$margin,
+                          weight = self$weight, reduction = self$reduction)
+  }
+)

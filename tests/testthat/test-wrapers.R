@@ -29,3 +29,18 @@ test_that("result_type", {
   expect_true(x == torch_float())
   
 })
+
+test_that("torch_multi_margin_loss", {
+  
+  x <- torch_randn(3, 2)
+  y <- torch_tensor(c(1, 2, 3), dtype = torch_long())
+  
+  expect_error(torch_multi_margin_loss(x, y))
+  
+  x <- torch_randn(3, 3)
+  expect_tensor(torch_multi_margin_loss(x, y))
+  
+  y <- torch_tensor(c(0, 1, 2))
+  expect_error(torch_multi_margin_loss(x, y))
+  
+})

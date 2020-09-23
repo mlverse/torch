@@ -107,3 +107,13 @@ test_that("cosine_embedding loss", {
   expect_length(o$shape, 0)
   
 })
+
+test_that("nn_multi_margin_loss", {
+  
+  loss <- nn_multi_margin_loss()
+  input <- torch_randn(100, 5, requires_grad=TRUE)
+  target <- torch_randint(low = 1, high = 5, size = c(100), dtype = torch_long())
+  o <- loss(input, target)
+
+  expect_length(o$shape, 0)  
+})
