@@ -1,3 +1,6 @@
 public/
 src/
 deps/
+docs
+lantern
+vignettes
