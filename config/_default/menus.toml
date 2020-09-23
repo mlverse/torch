@@ -11,4 +11,9 @@
     url = "/docs/"
     weight = 2
 
+[[main]]
+    name = "Blog"
+    url = "https://blogs.rstudio.com/ai/"
+    weight = 3
+
 

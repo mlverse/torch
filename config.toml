@@ -13,7 +13,7 @@ googleAnalytics = ""
 
 relativeurls = false
 languageCode = "en-us"
-description = "An opinionated collection of R packages designed for data science."
+description = "The torch for R project."
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 # below is critical for non-authors to show up in article listing
