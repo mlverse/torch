@@ -10,7 +10,7 @@ copy_clipboard = true
 custom_css = [""]
 
 # Define base hex url for index page (where the stickers link out to)
-hex_base_url = ".tidyverse.org"
+hex_base_url = ".mlverse.org"
 
 # Define "news" as both articles and events
 mainSections = ["articles", "events"]
