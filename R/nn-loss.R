@@ -1030,3 +1030,194 @@ nn_multi_margin_loss <- nn_module(
                           weight = self$weight, reduction = self$reduction)
   }
 )
+
+#' Triplet margin loss
+#' 
+#' Creates a criterion that measures the triplet loss given an input
+#' tensors \eqn{x1}, \eqn{x2}, \eqn{x3} and a margin with a value greater than \eqn{0}.
+#' This is used for measuring a relative similarity between samples. A triplet
+#' is composed by `a`, `p` and `n` (i.e., `anchor`, `positive examples` and `negative
+#' examples` respectively). The shapes of all input tensors should be
+#' \eqn{(N, D)}.
+#' 
+#' The distance swap is described in detail in the paper 
+#' [Learning shallow convolutional feature descriptors with triplet losses](http://www.bmva.org/bmvc/2016/papers/paper119/index.html) by
+#' V. Balntas, E. Riba et al.
+#' 
+#' The loss function for each sample in the mini-batch is:
+#' 
+#' \deqn{
+#'   L(a, p, n) = \max \{d(a_i, p_i) - d(a_i, n_i) + {\rm margin}, 0\}
+#' }
+#' 
+#' where
+#' 
+#' \deqn{
+#'   d(x_i, y_i) = | {\bf x}_i - {\bf y}_i |_p
+#' }
+#' 
+#' See also [nn_triplet_margin_with_distance_loss()], which computes the
+#' triplet margin loss for input tensors using a custom distance function.
+#' 
+#' @param margin (float, optional): Default: \eqn{1}.
+#' @param p (int, optional): The norm degree for pairwise distance. Default: \eqn{2}.
+#' @param swap (bool, optional): The distance swap is described in detail in the paper
+#'   [Learning shallow convolutional feature descriptors with triplet losses](http://www.bmva.org/bmvc/2016/papers/paper119/index.html) by
+#'   V. Balntas, E. Riba et al. Default: `FALSE`.
+#' @param eps constant to avoid NaN's
+#' @param reduction (string, optional): Specifies the reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
+#'   and `reduce` are in the process of being deprecated, and in the meantime,
+#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, D)} where \eqn{D} is the vector dimension.
+#' - Output: A Tensor of shape \eqn{(N)} if `reduction` is `'none'`, or a scalar
+#'   otherwise.
+#'   
+#' @examples
+#' triplet_loss <- nn_triplet_margin_loss(margin = 1, p = 2)
+#' anchor <- torch_randn(100, 128, requires_grad=TRUE)
+#' positive <- torch_randn(100, 128, requires_grad=TRUE)
+#' negative <- torch_randn(100, 128, requires_grad=TRUE)
+#' output <- triplet_loss(anchor, positive, negative)
+#' output$backward()
+#' 
+#' @export
+nn_triplet_margin_loss <- nn_module(
+  "nn_triplet_margin_loss",
+  inherit = nn_loss,
+  initialize = function(margin = 1, p = 2, eps = 1e-6, swap = FALSE, 
+                        reduction = "mean") {
+    super$initialize(reduction = reduction)
+    self$margin <- margin
+    self$p <- p
+    self$eps <- eps
+    self$swap <- swap
+  },
+  forward = function(anchor, positive, negative) {
+    nnf_triplet_margin_loss(anchor, positive, negative, margin = self$margin,
+                            p = self$p, eps = self$eps, swap = self$swap)
+  }
+)
+
+#' Triplet margin with distance loss
+#' 
+#' Creates a criterion that measures the triplet loss given input
+#' tensors \eqn{a}, \eqn{p}, and \eqn{n} (representing anchor,
+#' positive, and negative examples, respectively), and a nonnegative,
+#' real-valued function ("distance function") used to compute the relationship
+#' between the anchor and positive example ("positive distance") and the
+#' anchor and negative example ("negative distance").
+#' 
+#' The unreduced loss (i.e., with `reduction` set to `'none'`)
+#' can be described as:
+#' 
+#' \deqn{
+#'   \ell(a, p, n) = L = \{l_1,\dots,l_N\}^\top, \quad
+#' l_i = \max \{d(a_i, p_i) - d(a_i, n_i) + {\rm margin}, 0\}
+#' }
+#' 
+#' where \eqn{N} is the batch size; \eqn{d} is a nonnegative, real-valued function
+#' quantifying the closeness of two tensors, referred to as the `distance_function`;
+#' and \eqn{margin} is a non-negative margin representing the minimum difference
+#' between the positive and negative distances that is required for the loss to
+#' be 0.  The input tensors have \eqn{N} elements each and can be of any shape
+#' that the distance function can handle.
+#' If `reduction` is not `'none'`
+#' (default `'mean'`), then:
+#' 
+#' \deqn{
+#' \ell(x, y) =
+#' \begin{array}{ll}
+#' \mbox{mean}(L), &  \mbox{if reduction} = \mbox{`mean';}\\
+#'             \mbox{sum}(L),  &  \mbox{if reduction} = \mbox{`sum'.}
+#' \end{array}
+#' }
+#' 
+#' See also [nn_triplet_margin_loss()], which computes the triplet
+#' loss for input tensors using the \eqn{l_p} distance as the distance function.
+#' 
+#' @param distance_function (callable, optional): A nonnegative, real-valued function that
+#'   quantifies the closeness of two tensors. If not specified,
+#'   [nn_pairwise_distance()] will be used.  Default: `None`
+#' @param margin (float, optional): A non-negative margin representing the minimum difference
+#'   between the positive and negative distances required for the loss to be 0. Larger
+#'   margins penalize cases where the negative examples are not distant enough from the
+#'   anchors, relative to the positives. Default: \eqn{1}.
+#' @param swap (bool, optional): Whether to use the distance swap described in the paper
+#'   [Learning shallow convolutional feature descriptors with triplet losses](http://www.bmva.org/bmvc/2016/papers/paper119/index.html) by
+#'   V. Balntas, E. Riba et al. If TRUE, and if the positive example is closer to the
+#'   negative example than the anchor is, swaps the positive example and the anchor in
+#'   the loss computation. Default: `FALSE`.
+#' @param reduction (string, optional): Specifies the (optional) reduction to apply to the output:
+#'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
+#'   `'mean'`: the sum of the output will be divided by the number of
+#'   elements in the output, `'sum'`: the output will be summed. Default: `'mean'`
+#' 
+#' @section Shape:
+#' - Input: \eqn{(N, *)} where \eqn{*} represents any number of additional dimensions
+#'   as supported by the distance function.
+#' - Output: A Tensor of shape \eqn{(N)} if `reduction` is `'none'`, or a scalar
+#'   otherwise.
+#' 
+#' @examples
+#' # Initialize embeddings
+#' embedding <- nn_embedding(1000, 128)
+#' anchor_ids <- torch_randint(0, 1000, 1, dtype = torch_long())
+#' positive_ids <- torch_randint(0, 1000, 1, dtype = torch_long())
+#' negative_ids <- torch_randint(0, 1000, 1, dtype = torch_long())
+#' anchor <- embedding(anchor_ids)
+#' positive <- embedding(positive_ids)
+#' negative <- embedding(negative_ids)
+#' 
+#' # Built-in Distance Function
+#' triplet_loss <- nn_triplet_margin_with_distance_loss(
+#'   distance_function=nn_pairwise_distance()
+#' )
+#' output <- triplet_loss(anchor, positive, negative)
+#' 
+#' # Custom Distance Function
+#' l_infinity <- function(x1, x2) {
+#'   torch_max(torch_abs(x1 - x2), dim = 1)[[1]]
+#' }
+#' 
+#' triplet_loss <- nn_triplet_margin_with_distance_loss(
+#'   distance_function=l_infinity, margin=1.5
+#' )
+#' output <- triplet_loss(anchor, positive, negative)
+#' 
+#' # Custom Distance Function (Lambda)
+#' triplet_loss <- nn_triplet_margin_with_distance_loss(
+#'   distance_function = function(x, y) {
+#'     1 - nnf_cosine_similarity(x, y)
+#'   }
+#' )
+#' 
+#' output <- triplet_loss(anchor, positive, negative)
+#' 
+#' @export
+nn_triplet_margin_with_distance_loss <- nn_module(
+  "nn_triplet_margin_with_distance_loss",
+  inherit = nn_loss,
+  initialize = function(distance_function = NULL, margin = 1, swap = FALSE, 
+                        reduction = "mean") {
+    super$initialize(reduction = reduction)
+    if (is.null(distance_function)) {
+      self$distance_function <- nn_pairwise_distance()
+    } else {
+      self$distance_function <- distance_function
+    }
+    self$margin <- margin
+    self$swap <- swap
+  },
+  forward = function(anchor, positive, negative) {
+    nnf_triplet_margin_with_distance_loss(
+      anchor, positive, negative,
+      distance_function=self$distance_function,
+      margin=self$margin, swap=self$swap, reduction=self$reduction
+    )
+  }
+)

@@ -261,6 +261,41 @@ nnf_triplet_margin_loss <- function(anchor, positive, negative, margin = 1, p = 
                             reduction_enum(reduction))
 }
 
+#' Triplet margin with distance loss
+#' 
+#' See [nn_triplet_margin_with_distance_loss()]
+#' 
+#' @inheritParams nnf_triplet_margin_loss
+#' @inheritParams nn_triplet_margin_with_distance_loss
+#'
+#' @export
+nnf_triplet_margin_with_distance_loss <- function(anchor, positive, negative, 
+                                                  distance_function=NULL,
+                                                  margin=1.0, swap=FALSE, 
+                                                  reduction="mean") {
+  if (is.null(distance_function))
+    distance_function <- nnf_pairwise_distance
+  
+  positive_dist <- distance_function(anchor, positive)
+  negative_dist <- distance_function(anchor, negative)
+  
+  if (swap) {
+    swap_dist <- distance_function(positive, negative)
+    negative_dist <- torch_min(negative_dist, swap_dist)
+  }
+  
+  output <- torch_clamp(positive_dist - negative_dist + margin, min=0.0)
+  
+  reduction_enum <- reduction_enum(reduction)
+  
+  if (reduction_enum == 1)
+    return(output$mean())
+  else if (reduction_enum == 2)
+    return(output$sum())
+  else
+    return(output)
+}
+
 #' Ctc_loss
 #'
 #' The Connectionist Temporal Classification loss.
