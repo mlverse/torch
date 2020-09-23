@@ -14,6 +14,5 @@ torchvision:
   name: torchvision
 you:
   weight: 100
-  desc: 'If you are developping a torch extension contact us to feature it in this website. We welcome any kind extension be it for dataset loading, a frontend API for writing models or pre-trained models!'
   desc: 'If you are developing a torch extension, contact us in GitHub to feature it. We welcome all extensions: datasets, transformations, models, pre-trained models and so on!'
   name: More
