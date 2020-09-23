@@ -11,7 +11,8 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Creating tensors">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Creating tensors">
 <meta property="og:description" content="torch">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -182,12 +183,12 @@
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">12</span>), dim = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>)))
 <span class="co">#&gt; torch_tensor </span>
 <span class="co">#&gt; (1,.,.) = </span>
-<span class="co">#&gt;   0.9969  0.6882  0.9370</span>
-<span class="co">#&gt;   0.7960  0.4598  0.6469</span>
+<span class="co">#&gt;   0.9730  0.5109  0.5540</span>
+<span class="co">#&gt;   0.0781  0.2357  0.0298</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (2,.,.) = </span>
-<span class="co">#&gt;   0.0230  0.0411  0.9175</span>
-<span class="co">#&gt;   0.9241  0.2878  0.7066</span>
+<span class="co">#&gt;   0.3062  0.4600  0.9295</span>
+<span class="co">#&gt;   0.6030  0.1965  0.4783</span>
 <span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span>
 </pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device, converting their R datatype to the corresponding torch <code>dtype</code>.</p>
@@ -223,11 +224,11 @@
 <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">5</span>, <span class="fl">3</span>)
 <span class="kw">x</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.7888  1.5144 -0.9823</span>
-<span class="co">#&gt; -0.2109  0.2109  0.2339</span>
-<span class="co">#&gt; -0.7904 -1.5545  0.4899</span>
-<span class="co">#&gt;  0.3880  0.0466  0.6225</span>
-<span class="co">#&gt;  0.3918  1.1310 -0.3374</span>
+<span class="co">#&gt; -0.9137 -1.0849  1.5787</span>
+<span class="co">#&gt;  0.3194 -0.2066 -0.0613</span>
+<span class="co">#&gt; -1.9285  0.6087 -1.2193</span>
+<span class="co">#&gt; -0.2980 -0.6955  0.6579</span>
+<span class="co">#&gt; -1.5247  0.1730  0.3459</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span>
 </pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor filled with ones.</p>
