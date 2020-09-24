@@ -77,3 +77,4 @@ void *_lantern_Scalar_nullopt()
   return (void *)new LanternObject<c10::optional<torch::Scalar>>(c10::nullopt);
   LANTERN_FUNCTION_END
 }
+

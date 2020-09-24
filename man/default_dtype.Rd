@@ -16,3 +16,4 @@ torch_get_default_dtype()
 \description{
 Gets and sets the default floating point dtype.
 }
+\concept{tensor-attributes}

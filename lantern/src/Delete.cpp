@@ -181,3 +181,17 @@ void _lantern_const_char_delete (const char * x)
   delete []x;
   LANTERN_FUNCTION_END_VOID
 }
+
+void _lantern_IValue_delete (void * x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<LanternObject<torch::IValue>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_vector_string_delete (void * x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<std::string>>(x);
+  LANTERN_FUNCTION_END_VOID
+}

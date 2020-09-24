@@ -1,0 +1,3636 @@
+---
+title: "Tensor objects"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tensor objects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1"),
+  results = "hide"
+)
+```
+
+```{r setup}
+library(torch)
+```
+
+Central to torch is the `torch_tensor` objects. `torch_tensor`'s are R objects
+very similar to R6 instances. Tensors have a large amount of methods that can
+be called using the `$` operator.
+
+Following is a list of all methods that can be called by tensor objects and their
+documentation. You can also look at [PyTorch's documentation](https://pytorch.org/docs/stable/tensors.html) for additional details. 
+
+
+## T
+
+Is this Tensor with its dimensions reversed.
+
+If `n` is the number of dimensions in `x`,
+`x$T` is equivalent to `x$permute(n-1, n-2, ..., 0)`.
+
+## abs
+
+abs() -> Tensor
+
+See `?torch_abs`
+
+## abs_
+
+abs_() -> Tensor
+
+In-place version of `$abs`
+
+## absolute
+
+absolute() -> Tensor
+
+Alias for [$abs()]
+
+## absolute_
+
+absolute_() -> Tensor
+
+In-place version of `$absolute`
+Alias for [$abs_()]
+
+## acos
+
+acos() -> Tensor
+
+See `?torch_acos`
+
+## acos_
+
+acos_() -> Tensor
+
+In-place version of `$acos`
+
+## acosh
+
+acosh() -> Tensor
+
+See `?torch_acosh`
+
+## acosh_
+
+acosh_() -> Tensor
+
+In-place version of `$acosh`
+
+## add
+
+add(other, *, alpha=1) -> Tensor
+
+Add a scalar or tensor to `self` tensor. If both `alpha`
+and `other` are specified, each element of `other` is scaled by
+`alpha` before being used.
+
+When `other` is a tensor, the shape of `other` must be
+broadcastable with the shape of the underlying
+tensor
+
+See `?torch_add`
+
+## add_
+
+add_(other, *, alpha=1) -> Tensor
+
+In-place version of `$add`
+
+## addbmm
+
+addbmm(batch1, batch2, *, beta=1, alpha=1) -> Tensor
+
+See `?torch_addbmm`
+
+## addbmm_
+
+addbmm_(batch1, batch2, *, beta=1, alpha=1) -> Tensor
+
+In-place version of `$addbmm`
+
+## addcdiv
+
+addcdiv(tensor1, tensor2, *, value=1) -> Tensor
+
+See `?torch_addcdiv`
+
+## addcdiv_
+
+addcdiv_(tensor1, tensor2, *, value=1) -> Tensor
+
+In-place version of `$addcdiv`
+
+## addcmul
+
+addcmul(tensor1, tensor2, *, value=1) -> Tensor
+
+See `?torch_addcmul`
+
+## addcmul_
+
+addcmul_(tensor1, tensor2, *, value=1) -> Tensor
+
+In-place version of `$addcmul`
+
+## addmm
+
+addmm(mat1, mat2, *, beta=1, alpha=1) -> Tensor
+
+See `?torch_addmm`
+
+## addmm_
+
+addmm_(mat1, mat2, *, beta=1, alpha=1) -> Tensor
+
+In-place version of `$addmm`
+
+## addmv
+
+addmv(mat, vec, *, beta=1, alpha=1) -> Tensor
+
+See `?torch_addmv`
+
+## addmv_
+
+addmv_(mat, vec, *, beta=1, alpha=1) -> Tensor
+
+In-place version of `$addmv`
+
+## addr
+
+addr(vec1, vec2, *, beta=1, alpha=1) -> Tensor
+
+See `?torch_addr`
+
+## addr_
+
+addr_(vec1, vec2, *, beta=1, alpha=1) -> Tensor
+
+In-place version of `$addr`
+
+## align_as
+
+align_as(other) -> Tensor
+
+Permutes the dimensions of the `self` tensor to match the dimension order
+in the `other` tensor, adding size-one dims for any new names.
+
+This operation is useful for explicit broadcasting by names (see examples).
+
+All of the dims of `self` must be named in order to use this method.
+The resulting tensor is a view on the original tensor.
+
+All dimension names of `self` must be present in `other$names`.
+`other` may contain named dimensions that are not in `self$names`;
+the output tensor has a size-one dimension for each of those new names.
+
+To align a tensor to a specific order, use `$align_to`.
+
+### Examples:
+
+```{r eval=FALSE}
+# Example 1: Applying a mask
+mask <- torch_randint(low = 0, high = 2, size = c(127, 128), dtype=torch_bool())$refine_names(c('W', 'H'))
+imgs <- torch_randn(32, 128, 127, 3, names=c('N', 'H', 'W', 'C'))
+imgs$masked_fill_(mask$align_as(imgs), 0)
+
+# Example 2: Applying a per-channel-scale
+scale_channels <- function(input, scale) {
+  scale <- scale$refine_names("C")
+  input * scale$align_as(input)
+}
+
+num_channels <- 3
+scale <- torch_randn(num_channels, names='C')
+imgs <- torch_rand(32, 128, 128, num_channels, names=c('N', 'H', 'W', 'C'))
+more_imgs = torch_rand(32, num_channels, 128, 128, names=c('N', 'C', 'H', 'W'))
+videos = torch_randn(3, num_channels, 128, 128, 128, names=c('N', 'C', 'H', 'W', 'D'))
+
+# scale_channels is agnostic to the dimension order of the input
+scale_channels(imgs, scale)
+scale_channels(more_imgs, scale)
+scale_channels(videos, scale)
+```
+
+### Warning:
+    
+The named tensor API is experimental and subject to change.
+
+
+## align_to
+
+Permutes the dimensions of the `self` tensor to match the order
+specified in `names`, adding size-one dims for any new names.
+
+All of the dims of `self` must be named in order to use this method.
+The resulting tensor is a view on the original tensor.
+
+All dimension names of `self` must be present in `names`.
+`names` may contain additional names that are not in `self$names`;
+the output tensor has a size-one dimension for each of those new names.
+
+### Arguments:
+
+* names (iterable of str): The desired dimension ordering of the
+  output tensor. May contain up to one Ellipsis that is expanded
+  to all unmentioned dim names of `self`.
+
+### Examples:
+
+```{r echo = FALSE}
+tensor <- torch_randn(2, 2, 2, 2, 2, 2)
+named_tensor <- tensor$refine_names(names = c('A', 'B', 'C', 'D', 'E', 'F'))
+
+# Move the F and E dims to the front while keeping the rest in order
+named_tensor$align_to(c("A", "B", "F", "C", "E", "D"))
+```
+
+#### Warning:
+            
+The named tensor API is experimental and subject to change.
+
+        
+## all
+
+all() -> bool
+
+Returns TRUE if all elements in the tensor are TRUE, FALSE otherwise.
+
+#### Examples: 
+
+```{r}
+a <- torch_rand(1, 2)$to(dtype = torch_bool())
+a
+a$all()
+```
+
+all(dim, keepdim=FALSE, out=NULL) -> Tensor
+
+Returns TRUE if all elements in each row of the tensor in the given
+dimension `dim` are TRUE, FALSE otherwise.
+
+If `keepdim` is `TRUE`, the output tensor is of the same size as
+`input` except in the dimension `dim` where it is of size 1.
+Otherwise, `dim` is squeezed (see `?torch_squeeze()),` resulting
+in the output tensor having 1 fewer dimension than `input`.
+
+#### Arguments: 
+
+* dim (int): the dimension to reduce
+* keepdim (bool): whether the output tensor has `dim` retained or not
+* out (Tensor, optional): the output tensor
+
+#### Examples: 
+
+```{r}
+a <- torch_rand(4, 2)$to(dtype = torch_bool())
+a
+a$all(dim=2)
+a$all(dim=1)
+```
+    
+## allclose
+
+allclose(other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -> Tensor
+
+See `?torch_allclose`
+
+## angle
+
+angle() -> Tensor
+
+See `?torch_angle`
+
+## any
+
+any() -> bool
+
+Returns TRUE if any elements in the tensor are TRUE, FALSE otherwise.
+
+#### Examples: 
+
+```{r}
+a <- torch_rand(1, 2)$to(dtype = torch_bool())
+a
+a$any()
+```
+
+any(dim, keepdim=FALSE, out=NULL) -> Tensor
+
+Returns TRUE if any elements in each row of the tensor in the given
+dimension `dim` are TRUE, FALSE otherwise.
+
+If `keepdim` is `TRUE`, the output tensor is of the same size as
+`input` except in the dimension `dim` where it is of size 1.
+Otherwise, `dim` is squeezed (see `?torch_squeeze()),` resulting
+in the output tensor having 1 fewer dimension than `input`.
+
+#### Arguments: 
+
+* dim (int): the dimension to reduce
+* keepdim (bool): whether the output tensor has `dim` retained or not
+* out (Tensor, optional): the output tensor
+
+#### Examples: 
+
+```{r}
+a <- torch_randn(4, 2) < 0
+a
+a$any(2)
+a$any(1)
+```
+
+## apply_
+
+apply_(callable) -> Tensor
+
+Applies the function `callable` to each element in the tensor, replacing
+each element with the value returned by `callable`.
+
+#### Note: 
+
+This function only works with CPU tensors and should not be used in code
+sections that require high performance.
+
+## argmax
+
+argmax(dim=NULL, keepdim=FALSE) -> LongTensor
+
+See `?torch_argmax`
+
+## argmin
+
+argmin(dim=NULL, keepdim=FALSE) -> LongTensor
+
+See `?torch_argmin`
+
+## argsort
+
+argsort(dim=-1, descending=FALSE) -> LongTensor
+
+See `?torch_argsort`
+
+## as_strided
+
+as_strided(size, stride, storage_offset=0) -> Tensor
+
+See [torch_as_strided()]
+
+## as_subclass
+
+as_subclass(cls) -> Tensor
+
+Makes a `cls` instance with the same data pointer as `self`. Changes
+in the output mirror changes in `self`, and the output stays attached
+to the autograd graph. `cls` must be a subclass of `Tensor`.
+
+## asin
+
+asin() -> Tensor
+
+See `?torch_asin`
+
+## asin_
+
+asin_() -> Tensor
+
+In-place version of `$asin`
+
+## asinh
+
+asinh() -> Tensor
+
+See `?torch_asinh`
+
+## asinh_
+
+asinh_() -> Tensor
+
+In-place version of `$asinh`
+
+## atan
+
+atan() -> Tensor
+
+See `?torch_atan`
+
+## atan2
+
+atan2(other) -> Tensor
+
+See [torch_atan2()]
+
+## atan2_
+
+atan2_(other) -> Tensor
+
+In-place version of `$atan2`
+
+## atan_
+
+atan_() -> Tensor
+
+In-place version of `$atan`
+
+## atanh
+
+atanh() -> Tensor
+
+See `?torch_atanh`
+
+## atanh_
+
+In-place version of `$atanh`
+
+## backward
+Computes the gradient of current tensor w.r.t. graph leaves.
+
+The graph is differentiated using the chain rule. If the tensor is
+non-scalar (i.e. its data has more than one element) and requires
+gradient, the function additionally requires specifying `gradient`.
+It should be a tensor of matching type and location, that contains
+the gradient of the differentiated function w.r.t. `self`.
+
+This function accumulates gradients in the leaves - you might need to zero
+`$grad` attributes or set them to `NULL` before calling it.
+See `Default gradient layouts<default-grad-layouts>`
+for details on the memory layout of accumulated gradients.
+
+#### Arguments:
+
+* gradient (Tensor or NULL): Gradient w.r.t. the
+    tensor. If it is a tensor, it will be automatically converted
+    to a Tensor that does not require grad unless `create_graph` is TRUE.
+    NULL values can be specified for scalar Tensors or ones that
+    don't require grad. If a NULL value would be acceptable then
+    this argument is optional.
+* retain_graph (bool, optional): If `FALSE`, the graph used to compute
+    the grads will be freed. Note that in nearly all cases setting
+    this option to TRUE is not needed and often can be worked around
+    in a much more efficient way. Defaults to the value of
+    `create_graph`.
+* create_graph (bool, optional): If `TRUE`, graph of the derivative will
+    be constructed, allowing to compute higher order derivative
+    products. Defaults to `FALSE`.
+        
+## baddbmm
+
+baddbmm(batch1, batch2, *, beta=1, alpha=1) -> Tensor
+
+See `?torch_baddbmm`
+
+## baddbmm_
+
+baddbmm_(batch1, batch2, *, beta=1, alpha=1) -> Tensor
+
+In-place version of `$baddbmm`
+
+## bernoulli
+
+bernoulli(*, generator=NULL) -> Tensor
+
+Returns a result tensor where each $\texttt{result[i]}$ is independently
+sampled from $\text{Bernoulli}(\texttt{self[i]})$. `self` must have
+floating point `dtype`, and the result will have the same `dtype`.
+
+See `?torch_bernoulli`
+
+## bernoulli_
+
+bernoulli_(p=0.5, *, generator=NULL) -> Tensor
+
+Fills each location of `self` with an independent sample from
+$\text{Bernoulli}(\texttt{p})$. `self` can have integral
+`dtype`.
+
+bernoulli_(p_tensor, *, generator=NULL) -> Tensor
+
+`p_tensor` should be a tensor containing probabilities to be used for
+drawing the binary random number.
+
+The $\text{i}^{th}$ element of `self` tensor will be set to a
+value sampled from $\text{Bernoulli}(\texttt{p\_tensor[i]})$.
+
+`self` can have integral `dtype`, but `p_tensor` must have
+floating point `dtype`.
+
+See also `$bernoulli` and `?torch_bernoulli`
+
+## bfloat16
+
+bfloat16(memory_format=torch_preserve_format) -> Tensor
+`self$bfloat16()` is equivalent to `self$to(torch_bfloat16)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## bincount
+
+bincount(weights=NULL, minlength=0) -> Tensor
+
+See `?torch_bincount`
+
+## bitwise_and
+
+bitwise_and() -> Tensor
+
+See [torch_bitwise_and()]
+
+## bitwise_and_
+
+bitwise_and_() -> Tensor
+
+In-place version of `$bitwise_and`
+
+## bitwise_not
+
+bitwise_not() -> Tensor
+
+See [torch_bitwise_not()]
+
+## bitwise_not_
+
+bitwise_not_() -> Tensor
+
+In-place version of `$bitwise_not`
+
+## bitwise_or
+
+bitwise_or() -> Tensor
+
+See [torch_bitwise_or()]
+
+## bitwise_or_
+
+bitwise_or_() -> Tensor
+
+In-place version of `$bitwise_or`
+
+## bitwise_xor
+
+bitwise_xor() -> Tensor
+
+See [torch_bitwise_xor()]
+
+## bitwise_xor_
+
+bitwise_xor_() -> Tensor
+
+In-place version of `$bitwise_xor`
+
+## bmm
+
+bmm(batch2) -> Tensor
+
+See `?torch_bmm`
+
+## bool
+
+bool(memory_format=torch_preserve_format) -> Tensor
+
+`self$bool()` is equivalent to `self$to(torch_bool)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## byte
+
+byte(memory_format=torch_preserve_format) -> Tensor
+
+`self$byte()` is equivalent to `self$to(torch_uint8)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## cauchy_
+
+cauchy_(median=0, sigma=1, *, generator=NULL) -> Tensor
+
+Fills the tensor with numbers drawn from the Cauchy distribution:
+
+$$
+f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
+$$
+
+## ceil
+
+ceil() -> Tensor
+
+See `?torch_ceil`
+
+## ceil_
+
+ceil_() -> Tensor
+
+In-place version of `$ceil`
+
+## char
+
+char(memory_format=torch_preserve_format) -> Tensor
+
+`self$char()` is equivalent to `self$to(torch_int8)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## cholesky
+
+cholesky(upper=FALSE) -> Tensor
+
+See `?torch_cholesky`
+
+## cholesky_inverse
+
+cholesky_inverse(upper=FALSE) -> Tensor
+
+See [torch_cholesky_inverse()]
+
+## cholesky_solve
+
+cholesky_solve(input2, upper=FALSE) -> Tensor
+
+See [torch_cholesky_solve()]
+
+## chunk
+
+chunk(chunks, dim=0) -> List of Tensors
+
+See `?torch_chunk`
+
+## clamp
+
+clamp(min, max) -> Tensor
+
+See `?torch_clamp`
+
+## clamp_
+
+clamp_(min, max) -> Tensor
+
+In-place version of `$clamp`
+
+## clone
+
+clone(memory_format=torch_preserve_format) -> Tensor
+
+Returns a copy of the `self` tensor. The copy has the same size and data
+type as `self`.
+
+#### Note: 
+
+Unlike `copy_()`, this function is recorded in the computation graph. Gradients
+propagating to the cloned tensor will propagate to the original tensor.
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## conj
+
+conj() -> Tensor
+
+See `?torch_conj`
+
+## contiguous
+
+contiguous(memory_format=torch_contiguous_format) -> Tensor
+
+Returns a contiguous in memory tensor containing the same data as `self` tensor. If
+`self` tensor is already in the specified memory format, this function returns the
+`self` tensor.
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_contiguous_format`.
+
+## copy_
+
+copy_(src, non_blocking=FALSE) -> Tensor
+
+Copies the elements from `src` into `self` tensor and returns
+`self`.
+
+The `src` tensor must be :ref:`broadcastable <broadcasting-semantics>`
+with the `self` tensor. It may be of a different data type or reside on a
+different device.
+
+#### Arguments: 
+
+* src (Tensor): the source tensor to copy from
+* non_blocking (bool): if `TRUE` and this copy is between CPU and GPU,
+* the copy may occur asynchronously with respect to the host. For other
+* cases, this argument has no effect.
+
+## cos
+
+cos() -> Tensor
+
+See `?torch_cos`
+
+## cos_
+
+cos_() -> Tensor
+
+In-place version of `$cos`
+
+## cosh
+
+cosh() -> Tensor
+
+See `?torch_cosh`
+
+## cosh_
+
+cosh_() -> Tensor
+
+In-place version of `$cosh`
+
+## cpu
+
+cpu(memory_format=torch_preserve_format) -> Tensor
+
+Returns a copy of this object in CPU memory.
+
+If this object is already in CPU memory and on the correct device,
+then no copy is performed and the original object is returned.
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## cross
+
+cross(other, dim=-1) -> Tensor
+
+See `?torch_cross`
+
+## cuda
+
+cuda(device=NULL, non_blocking=FALSE, memory_format=torch_preserve_format) -> Tensor
+
+Returns a copy of this object in CUDA memory.
+
+If this object is already in CUDA memory and on the correct device,
+then no copy is performed and the original object is returned.
+
+#### Arguments: 
+
+* device (`torch_device`): The destination GPU device.
+  Defaults to the current CUDA device.
+* non_blocking (bool): If `TRUE` and the source is in pinned memory,
+  the copy will be asynchronous with respect to the host.
+  Otherwise, the argument has no effect. Default: `FALSE`.
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## cummax
+
+cummax(dim) -> (Tensor, Tensor)
+
+See `?torch_cummax`
+
+## cummin
+
+cummin(dim) -> (Tensor, Tensor)
+
+See `?torch_cummin`
+
+## cumprod
+
+cumprod(dim, dtype=NULL) -> Tensor
+
+See `?torch_cumprod`
+
+## cumsum
+
+cumsum(dim, dtype=NULL) -> Tensor
+
+See `?torch_cumsum`
+
+## data_ptr
+
+data_ptr() -> int
+
+Returns the address of the first element of `self` tensor.
+
+## deg2rad
+
+deg2rad() -> Tensor
+
+See [torch_deg2rad()]
+
+## deg2rad_
+
+deg2rad_() -> Tensor
+
+In-place version of `$deg2rad`
+
+## dense_dim
+
+dense_dim() -> int
+
+If `self` is a sparse COO tensor (i.e., with `torch_sparse_coo` layout),
+this returns the number of dense dimensions. Otherwise, this throws an error.
+
+See also `$sparse_dim`.
+
+## dequantize
+
+dequantize() -> Tensor
+
+Given a quantized Tensor, dequantize it and return the dequantized float Tensor.
+
+## det
+
+det() -> Tensor
+
+See `?torch_det`
+
+## detach
+
+Returns a new Tensor, detached from the current graph.
+
+The result will never require gradient.
+
+#### Note:
+
+Returned Tensor shares the same storage with the original one.
+In-place modifications on either of them will be seen, and may trigger
+errors in correctness checks.
+IMPORTANT NOTE: Previously, in-place size / stride / storage changes
+(such as `resize_` / `resize_as_` / `set_` / `transpose_`) to the returned tensor
+also update the original tensor. Now, these in-place changes will not update the
+original tensor anymore, and will instead trigger an error.
+For sparse tensors:
+In-place indices / values changes (such as `zero_` / `copy_` / `add_`) to the
+returned tensor will not update the original tensor anymore, and will instead
+trigger an error.
+  
+## detach_
+
+Detaches the Tensor from the graph that created it, making it a leaf.
+Views cannot be detached in-place.
+    
+## device
+
+Is the `torch_device` where this Tensor is.
+
+## diag
+
+diag(diagonal=0) -> Tensor
+
+See `?torch_diag`
+
+## diag_embed
+
+diag_embed(offset=0, dim1=-2, dim2=-1) -> Tensor
+
+See [torch_diag_embed()]
+
+## diagflat
+
+diagflat(offset=0) -> Tensor
+
+See `?torch_diagflat`
+
+## diagonal
+
+diagonal(offset=0, dim1=0, dim2=1) -> Tensor
+
+See `?torch_diagonal`
+
+## digamma
+
+digamma() -> Tensor
+
+See `?torch_digamma`
+
+## digamma_
+
+digamma_() -> Tensor
+
+In-place version of `$digamma`
+
+## dim
+
+dim() -> int
+
+Returns the number of dimensions of `self` tensor.
+
+## dist
+
+dist(other, p=2) -> Tensor
+
+See `?torch_dist`
+
+## div
+
+div(value) -> Tensor
+
+See `?torch_div`
+
+## div_
+
+div_(value) -> Tensor
+
+In-place version of `$div`
+
+## dot
+
+dot(tensor2) -> Tensor
+
+See `?torch_dot`
+
+## double
+
+double(memory_format=torch_preserve_format) -> Tensor
+
+`self$double()` is equivalent to `self$to(torch_float64)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## eig
+
+eig(eigenvectors=FALSE) -> (Tensor, Tensor)
+
+See `?torch_eig`
+
+## element_size
+
+element_size() -> int
+
+Returns the size in bytes of an individual element.
+
+#### Examples: 
+
+```{r, eval = FALSE}
+torch_tensor(c(1))$element_size()
+```
+
+## eq
+
+eq(other) -> Tensor
+
+See `?torch_eq`
+
+## eq_
+
+eq_(other) -> Tensor
+
+In-place version of `$eq`
+
+## equal
+
+equal(other) -> bool
+
+See `?torch_equal`
+
+## erf
+
+erf() -> Tensor
+
+See `?torch_erf`
+
+## erf_
+
+erf_() -> Tensor
+
+In-place version of `$erf`
+
+## erfc
+
+erfc() -> Tensor
+
+See `?torch_erfc`
+
+## erfc_
+
+erfc_() -> Tensor
+
+In-place version of `$erfc`
+
+## erfinv
+
+erfinv() -> Tensor
+
+See `?torch_erfinv`
+
+## erfinv_
+
+erfinv_() -> Tensor
+
+In-place version of `$erfinv`
+
+## exp
+
+exp() -> Tensor
+
+See `?torch_exp`
+
+## exp_
+
+exp_() -> Tensor
+
+In-place version of `$exp`
+
+## expand
+
+expand(*sizes) -> Tensor
+
+Returns a new view of the `self` tensor with singleton dimensions expanded
+to a larger size.
+
+Passing -1 as the size for a dimension means not changing the size of
+that dimension.
+
+Tensor can be also expanded to a larger number of dimensions, and the
+new ones will be appended at the front. For the new dimensions, the
+size cannot be set to -1.
+
+Expanding a tensor does not allocate new memory, but only creates a
+new view on the existing tensor where a dimension of size one is
+expanded to a larger size by setting the `stride` to 0. Any dimension
+of size 1 can be expanded to an arbitrary value without allocating new
+memory.
+
+#### Arguments: 
+
+* sizes (torch_Size or int...): the desired expanded size
+
+#### Warning:
+
+More than one element of an expanded tensor may refer to a single
+memory location. As a result, in-place operations (especially ones that
+are vectorized) may result in incorrect behavior. If you need to write
+to the tensors, please clone them first.
+
+#### Examples: 
+
+```{r}
+x <- torch_tensor(matrix(c(1,2,3), ncol = 1))
+x$size()
+x$expand(c(3, 4))
+x$expand(c(-1, 4))  # -1 means not changing the size of that dimension
+```
+
+## expand_as
+
+expand_as(other) -> Tensor
+
+Expand this tensor to the same size as `other`.
+`self$expand_as(other)` is equivalent to `self$expand(other.size())`.
+
+Please see `$expand` for more information about `expand`.
+
+#### Arguments: 
+
+* other (`$): The result tensor has the same size
+* as `other`.
+
+## expm1
+
+expm1() -> Tensor
+
+See [torch_expm1()]
+
+## expm1_
+
+expm1_() -> Tensor
+
+In-place version of `$expm1`
+
+## exponential_
+
+exponential_(lambd=1, *, generator=NULL) -> Tensor
+
+Fills `self` tensor with elements drawn from the exponential distribution:
+
+$$
+f(x) = \lambda e^{-\lambda x}
+$$
+
+## fft
+
+fft(signal_ndim, normalized=FALSE) -> Tensor
+
+See `?torch_fft`
+
+## fill_
+
+fill_(value) -> Tensor
+
+Fills `self` tensor with the specified value.
+
+## fill_diagonal_
+
+fill_diagonal_(fill_value, wrap=FALSE) -> Tensor
+
+Fill the main diagonal of a tensor that has at least 2-dimensions.
+When dims>2, all dimensions of input must be of equal length.
+This function modifies the input tensor in-place, and returns the input tensor.
+
+#### Arguments:
+    
+* fill_value (Scalar): the fill value
+* wrap (bool): the diagonal 'wrapped' after N columns for tall matrices.
+
+#### Examples: 
+
+```{r}
+a <- torch_zeros(3, 3)
+a$fill_diagonal_(5)
+b <- torch_zeros(7, 3)
+b$fill_diagonal_(5)
+c <- torch_zeros(7, 3)
+c$fill_diagonal_(5, wrap=TRUE)
+```
+    
+## flatten
+
+flatten(input, start_dim=0, end_dim=-1) -> Tensor
+
+see `?torch_flatten`
+
+## flip
+
+flip(dims) -> Tensor
+
+See `?torch_flip`
+
+## fliplr
+
+fliplr() -> Tensor
+
+See `?torch_fliplr`
+
+## flipud
+
+flipud() -> Tensor
+
+See `?torch_flipud`
+
+## float
+
+float(memory_format=torch_preserve_format) -> Tensor
+
+`self$float()` is equivalent to `self$to(torch_float32)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## floor
+
+floor() -> Tensor
+
+See `?torch_floor`
+
+## floor_
+
+floor_() -> Tensor
+
+In-place version of `$floor`
+
+## floor_divide
+
+floor_divide(value) -> Tensor
+
+See [torch_floor_divide()]
+
+## floor_divide_
+
+floor_divide_(value) -> Tensor
+
+In-place version of `$floor_divide`
+
+## fmod
+
+fmod(divisor) -> Tensor
+
+See `?torch_fmod`
+
+## fmod_
+
+fmod_(divisor) -> Tensor
+
+In-place version of `$fmod`
+
+## frac
+
+frac() -> Tensor
+
+See `?torch_frac`
+
+## frac_
+
+frac_() -> Tensor
+
+In-place version of `$frac`
+
+## gather
+
+gather(dim, index) -> Tensor
+
+See `?torch_gather`
+
+## ge
+
+ge(other) -> Tensor
+
+See `?torch_ge`
+
+## ge_
+
+ge_(other) -> Tensor
+
+In-place version of `$ge`
+
+## geometric_
+
+geometric_(p, *, generator=NULL) -> Tensor
+
+Fills `self` tensor with elements drawn from the geometric distribution:
+
+$$
+f(X=k) = p^{k - 1} (1 - p)
+$$
+
+## geqrf
+
+geqrf() -> (Tensor, Tensor)
+
+See `?torch_geqrf`
+
+## ger
+
+ger(vec2) -> Tensor
+
+See `?torch_ger`
+
+## get_device
+
+get_device() -> Device ordinal (Integer)
+
+For CUDA tensors, this function returns the device ordinal of the GPU on which the tensor resides.
+For CPU tensors, an error is thrown.
+
+#### Examples: 
+
+```{r, eval = FALSE}
+x <- torch_randn(3, 4, 5, device='cuda:0')
+x$get_device()
+x$cpu()$get_device()  # RuntimeError: get_device is not implemented for type torch_FloatTensor
+```
+## grad
+
+This attribute is `NULL` by default and becomes a Tensor the first time a call to
+`backward` computes gradients for `self`.
+The attribute will then contain the gradients computed and future calls to
+[backward()] will accumulate (add) gradients into it.
+        
+## gt
+
+gt(other) -> Tensor
+
+See `?torch_gt`
+
+## gt_
+
+gt_(other) -> Tensor
+
+In-place version of `$gt`
+
+## half
+
+half(memory_format=torch_preserve_format) -> Tensor
+
+`self$half()` is equivalent to `self$to(torch_float16)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## hardshrink
+
+hardshrink(lambd=0.5) -> Tensor
+
+See [torch_nn.functional.hardshrink()]
+
+## has_names
+
+Is `TRUE` if any of this tensor's dimensions are named. Otherwise, is `FALSE`.
+
+## histc
+
+histc(bins=100, min=0, max=0) -> Tensor
+
+See `?torch_histc`
+
+## ifft
+
+ifft(signal_ndim, normalized=FALSE) -> Tensor
+
+See `?torch_ifft`
+
+## imag
+
+Returns a new tensor containing imaginary values of the `self` tensor.
+The returned tensor and `self` share the same underlying storage.
+
+#### Warning:
+
+[imag()] is only supported for tensors with complex dtypes.
+
+#### Examples: 
+
+```{r, eval = FALSE}
+x <- torch_randn(4, dtype=torch_cfloat())
+x
+x$imag
+```
+## index_add
+
+index_add(tensor1, dim, index, tensor2) -> Tensor
+
+Out-of-place version of `$index_add_`.
+`tensor1` corresponds to `self` in `$index_add_`.
+
+## index_add_
+
+index_add_(dim, index, tensor) -> Tensor
+
+Accumulate the elements of `tensor` into the `self` tensor by adding
+to the indices in the order given in `index`. For example, if `dim == 0`
+and `index[i] == j`, then the `i`\ th row of `tensor` is added to the
+`j`\ th row of `self`.
+
+The `dim`\ th dimension of `tensor` must have the same size as the
+length of `index` (which must be a vector), and all other dimensions must
+match `self`, or an error will be raised.
+
+#### Note:
+
+In some circumstances when using the CUDA backend with CuDNN, this operator
+may select a nondeterministic algorithm to increase performance. If this is
+undesirable, you can try to make the operation deterministic (potentially at
+a performance cost) by setting `torch_backends.cudnn.deterministic =
+TRUE`.
+
+#### Arguments: 
+
+* dim (int): dimension along which to index
+* index (LongTensor): indices of `tensor` to select from
+* tensor (Tensor): the tensor containing values to add
+
+#### Examples: 
+
+```{r}
+x <- torch_ones(5, 3)
+t <- torch_tensor(matrix(1:9, ncol = 3), dtype=torch_float())
+index <- torch_tensor(c(1L, 4L, 3L))
+x$index_add_(1, index, t)
+```
+
+## index_copy
+
+index_copy(tensor1, dim, index, tensor2) -> Tensor
+
+Out-of-place version of `$index_copy_`.
+`tensor1` corresponds to `self` in `$index_copy_`.
+
+## index_copy_
+
+index_copy_(dim, index, tensor) -> Tensor
+
+Copies the elements of `tensor` into the `self` tensor by selecting
+the indices in the order given in `index`. For example, if `dim == 0`
+and `index[i] == j`, then the `i`\ th row of `tensor` is copied to the
+`j`\ th row of `self`.
+
+The `dim`\ th dimension of `tensor` must have the same size as the
+length of `index` (which must be a vector), and all other dimensions must
+match `self`, or an error will be raised.
+
+#### Arguments: 
+
+* dim (int): dimension along which to index
+* index (LongTensor): indices of `tensor` to select from
+* tensor (Tensor): the tensor containing values to copy
+
+#### Examples: 
+
+```{r, eval = FALSE}
+x <- torch_zeros(5, 3)
+t <- torch_tensor(matrix(1:9, ncol = 3), dtype=torch_float())
+index <- torch_tensor(c(1, 5, 3))
+x$index_copy_(1, index, t)
+```
+    
+
+## index_fill
+
+index_fill(tensor1, dim, index, value) -> Tensor
+
+Out-of-place version of `$index_fill_`.
+`tensor1` corresponds to `self` in `$index_fill_`.
+
+## index_fill_
+
+index_fill_(dim, index, val) -> Tensor
+
+Fills the elements of the `self` tensor with value `val` by
+selecting the indices in the order given in `index`.
+
+#### Arguments: 
+
+* dim (int): dimension along which to index
+* index (LongTensor): indices of `self` tensor to fill in
+* val (float): the value to fill with
+
+#### Examples: 
+
+```{r}
+x <- torch_tensor(matrix(1:9, ncol = 3), dtype=torch_float())
+index <- torch_tensor(c(1, 3), dtype = torch_long())
+x$index_fill_(1, index, -1)
+```
+## index_put
+
+index_put(tensor1, indices, value, accumulate=FALSE) -> Tensor
+
+Out-place version of `$index_put_`.
+`tensor1` corresponds to `self` in `$index_put_`.
+
+## index_put_
+
+index_put_(indices, value, accumulate=FALSE) -> Tensor
+
+Puts values from the tensor `value` into the tensor `self` using
+the indices specified in `indices` (which is a tuple of Tensors). The
+expression `tensor.index_put_(indices, value)` is equivalent to
+`tensor[indices] = value`. Returns `self`.
+
+If `accumulate` is `TRUE`, the elements in `value` are added to
+`self`. If accumulate is `FALSE`, the behavior is undefined if indices
+contain duplicate elements.
+
+#### Arguments: 
+
+* indices (tuple of LongTensor): tensors used to index into `self`.
+* value (Tensor): tensor of same dtype as `self`.
+* accumulate (bool): whether to accumulate into self
+
+## index_select
+
+index_select(dim, index) -> Tensor
+
+See [torch_index_select()]
+
+## indices
+
+indices() -> Tensor
+
+If `self` is a sparse COO tensor (i.e., with `torch_sparse_coo` layout),
+this returns a view of the contained indices tensor. Otherwise, this throws an
+error.
+
+See also `Tensor.values`.
+
+#### Note: 
+
+
+This method can only be called on a coalesced sparse tensor. See
+`Tensor.coalesce` for details.
+
+## int
+
+int(memory_format=torch_preserve_format) -> Tensor
+
+`self$int()` is equivalent to `self$to(torch_int32)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## int_repr
+
+int_repr() -> Tensor
+
+Given a quantized Tensor,
+`self$int_repr()` returns a CPU Tensor with uint8_t as data type that stores the
+underlying uint8_t values of the given Tensor.
+
+## inverse
+
+inverse() -> Tensor
+
+See `?torch_inverse`
+
+## irfft
+
+irfft(signal_ndim, normalized=FALSE, onesided=TRUE, signal_sizes=NULL) -> Tensor
+
+See `?torch_irfft`
+
+## is_complex
+
+is_complex() -> bool
+
+Returns TRUE if the data type of `self` is a complex data type.
+
+## is_contiguous
+
+is_contiguous(memory_format=torch_contiguous_format) -> bool
+
+Returns TRUE if `self` tensor is contiguous in memory in the order specified
+by memory format.
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): Specifies memory allocation
+* order. Default: `torch_contiguous_format`.
+
+## is_cuda
+
+Is `TRUE` if the Tensor is stored on the GPU, `FALSE` otherwise.
+
+## is_floating_point
+
+is_floating_point() -> bool
+
+Returns TRUE if the data type of `self` is a floating point data type.
+
+## is_leaf
+
+All Tensors that have `requires_grad` which is `FALSE` will be leaf Tensors by convention.
+
+For Tensors that have `requires_grad` which is `TRUE`, they will be leaf Tensors if they were
+created by the user. This means that they are not the result of an operation and so
+`grad_fn` is NULL.
+
+Only leaf Tensors will have their `grad` populated during a call to [backward()].
+To get `grad` populated for non-leaf Tensors, you can use [retain_grad()].
+
+#### Examples: 
+
+```{r}
+a <- torch_rand(10, requires_grad=TRUE)
+a$is_leaf()
+
+# b <- torch_rand(10, requires_grad=TRUE)$cuda()
+# b$is_leaf()
+# FALSE
+# b was created by the operation that cast a cpu Tensor into a cuda Tensor
+
+c <- torch_rand(10, requires_grad=TRUE) + 2
+c$is_leaf()
+# c was created by the addition operation
+
+# d <- torch_rand(10)$cuda()
+# d$is_leaf()
+# TRUE
+# d does not require gradients and so has no operation creating it (that is tracked by the autograd engine)
+
+# e <- torch_rand(10)$cuda()$requires_grad_()
+# e$is_leaf()
+# TRUE
+# e requires gradients and has no operations creating it
+
+# f <- torch_rand(10, requires_grad=TRUE, device="cuda")
+# f$is_leaf
+# TRUE
+# f requires grad, has no operation creating it
+```
+
+## is_meta
+
+Is `TRUE` if the Tensor is a meta tensor, `FALSE` otherwise.  Meta tensors
+are like normal tensors, but they carry no data.
+
+## is_pinned
+
+Returns true if this tensor resides in pinned memory.
+
+## is_quantized
+
+Is `TRUE` if the Tensor is quantized, `FALSE` otherwise.
+
+## is_set_to
+
+is_set_to(tensor) -> bool
+
+Returns TRUE if this object refers to the same `THTensor` object from the
+Torch C API as the given tensor.
+
+## is_shared
+
+Checks if tensor is in shared memory.
+
+This is always `TRUE` for CUDA tensors.
+        
+## is_signed
+
+is_signed() -> bool
+
+Returns TRUE if the data type of `self` is a signed data type.
+
+## isclose
+
+isclose(other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -> Tensor
+
+See `?torch_isclose`
+
+## isfinite
+
+isfinite() -> Tensor
+
+See `?torch_isfinite`
+
+## isinf
+
+isinf() -> Tensor
+
+See `?torch_isinf`
+
+## isnan
+
+isnan() -> Tensor
+
+See `?torch_isnan`
+
+## istft
+See `?torch_istft`
+## item
+
+item() -> number
+
+Returns the value of this tensor as a standard Python number. This only works
+for tensors with one element. For other cases, see `$tolist`.
+
+This operation is not differentiable.
+
+#### Examples: 
+
+```{r}
+x <- torch_tensor(1.0)
+x$item()
+```
+    
+## kthvalue
+
+kthvalue(k, dim=NULL, keepdim=FALSE) -> (Tensor, LongTensor)
+
+See `?torch_kthvalue`
+
+## le
+
+le(other) -> Tensor
+
+See `?torch_le`
+
+## le_
+
+le_(other) -> Tensor
+
+In-place version of `$le`
+
+## lerp
+
+lerp(end, weight) -> Tensor
+
+See `?torch_lerp`
+
+## lerp_
+
+lerp_(end, weight) -> Tensor
+
+In-place version of `$lerp`
+
+## lgamma
+
+lgamma() -> Tensor
+
+See `?torch_lgamma`
+
+## lgamma_
+
+lgamma_() -> Tensor
+
+In-place version of `$lgamma`
+
+## log
+
+log() -> Tensor
+
+See `?torch_log`
+
+## log10
+
+log10() -> Tensor
+
+See [torch_log10()]
+
+## log10_
+
+log10_() -> Tensor
+
+In-place version of `$log10`
+
+## log1p
+
+log1p() -> Tensor
+
+See [torch_log1p()]
+
+## log1p_
+
+log1p_() -> Tensor
+
+In-place version of `$log1p`
+
+## log2
+
+log2() -> Tensor
+
+See [torch_log2()]
+
+## log2_
+
+log2_() -> Tensor
+
+In-place version of `$log2`
+
+## log_
+
+log_() -> Tensor
+
+In-place version of `$log`
+
+## log_normal_
+
+log_normal_(mean=1, std=2, *, generator=NULL)
+
+Fills `self` tensor with numbers samples from the log-normal distribution
+parameterized by the given mean `\mu` and standard deviation
+`\sigma`. Note that `mean` and `std` are the mean and
+standard deviation of the underlying normal distribution, and not of the
+returned distribution:
+
+$$
+f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
+$$
+
+## logaddexp
+
+logaddexp(other) -> Tensor
+
+See `?torch_logaddexp`
+
+## logaddexp2
+
+logaddexp2(other) -> Tensor
+
+See [torch_logaddexp2()]
+
+## logcumsumexp
+
+logcumsumexp(dim) -> Tensor
+
+See `?torch_logcumsumexp`
+
+## logdet
+
+logdet() -> Tensor
+
+See `?torch_logdet`
+
+## logical_and
+
+logical_and() -> Tensor
+
+See [torch_logical_and()]
+
+## logical_and_
+
+logical_and_() -> Tensor
+
+In-place version of `$logical_and`
+
+## logical_not
+
+logical_not() -> Tensor
+
+See [torch_logical_not()]
+
+## logical_not_
+
+logical_not_() -> Tensor
+
+In-place version of `$logical_not`
+
+## logical_or
+
+logical_or() -> Tensor
+
+See [torch_logical_or()]
+
+## logical_or_
+
+logical_or_() -> Tensor
+
+In-place version of `$logical_or`
+
+## logical_xor
+
+logical_xor() -> Tensor
+
+See [torch_logical_xor()]
+
+## logical_xor_
+
+logical_xor_() -> Tensor
+
+In-place version of `$logical_xor`
+
+## logsumexp
+
+logsumexp(dim, keepdim=FALSE) -> Tensor
+
+See `?torch_logsumexp`
+
+## long
+
+long(memory_format=torch_preserve_format) -> Tensor
+
+`self$long()` is equivalent to `self$to(torch_int64)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## lstsq
+
+lstsq(A) -> (Tensor, Tensor)
+
+See `?torch_lstsq`
+
+## lt
+
+lt(other) -> Tensor
+
+See `?torch_lt`
+
+## lt_
+
+lt_(other) -> Tensor
+
+In-place version of `$lt`
+
+## lu
+See `?torch_lu`
+## lu_solve
+
+lu_solve(LU_data, LU_pivots) -> Tensor
+
+See [torch_lu_solve()]
+
+## map_
+
+map_(tensor, callable)
+
+Applies `callable` for each element in `self` tensor and the given
+`tensor` and stores the results in `self` tensor. `self` tensor and
+the given `tensor` must be broadcastable.
+
+The `callable` should have the signature:
+
+`callable(a, b) -> number`
+
+## masked_fill
+
+masked_fill(mask, value) -> Tensor
+
+Out-of-place version of `$masked_fill_`
+
+## masked_fill_
+
+masked_fill_(mask, value)
+
+Fills elements of `self` tensor with `value` where `mask` is
+TRUE. The shape of `mask` must be
+`broadcastable <broadcasting-semantics>` with the shape of the underlying
+tensor.
+
+#### Arguments: 
+
+* mask (BoolTensor): the boolean mask
+* value (float): the value to fill in with
+
+## masked_scatter
+
+masked_scatter(mask, tensor) -> Tensor
+
+Out-of-place version of `$masked_scatter_`
+
+## masked_scatter_
+
+masked_scatter_(mask, source)
+
+Copies elements from `source` into `self` tensor at positions where
+the `mask` is TRUE.
+The shape of `mask` must be :ref:`broadcastable <broadcasting-semantics>`
+with the shape of the underlying tensor. The `source` should have at least
+as many elements as the number of ones in `mask`
+
+#### Arguments: 
+
+* mask (BoolTensor): the boolean mask
+* source (Tensor): the tensor to copy from
+
+#### Note: 
+
+The `mask` operates on the `self` tensor, not on the given
+`source` tensor.
+
+## masked_select
+
+masked_select(mask) -> Tensor
+
+See [torch_masked_select()]
+
+## matmul
+
+matmul(tensor2) -> Tensor
+
+See `?torch_matmul`
+
+## matrix_power
+
+matrix_power(n) -> Tensor
+
+See [torch_matrix_power()]
+
+## max
+
+max(dim=NULL, keepdim=FALSE) -> Tensor or (Tensor, Tensor)
+
+See `?torch_max`
+
+## mean
+
+mean(dim=NULL, keepdim=FALSE) -> Tensor or (Tensor, Tensor)
+
+See `?torch_mean`
+
+## median
+
+median(dim=NULL, keepdim=FALSE) -> (Tensor, LongTensor)
+
+See `?torch_median`
+
+## min
+
+min(dim=NULL, keepdim=FALSE) -> Tensor or (Tensor, Tensor)
+
+See `?torch_min`
+
+## mm
+
+mm(mat2) -> Tensor
+
+See `?torch_mm`
+
+## mode
+
+mode(dim=NULL, keepdim=FALSE) -> (Tensor, LongTensor)
+
+See `?torch_mode`
+
+## mul
+
+mul(value) -> Tensor
+
+See `?torch_mul`
+
+## mul_
+
+mul_(value)
+
+In-place version of `$mul`
+
+## multinomial
+
+multinomial(num_samples, replacement=FALSE, *, generator=NULL) -> Tensor
+
+See `?torch_multinomial`
+
+## mv
+
+mv(vec) -> Tensor
+
+See `?torch_mv`
+
+## mvlgamma
+
+mvlgamma(p) -> Tensor
+
+See `?torch_mvlgamma`
+
+## mvlgamma_
+
+mvlgamma_(p) -> Tensor
+
+In-place version of `$mvlgamma`
+
+## names
+
+Stores names for each of this tensor's dimensions.
+
+`names[idx]` corresponds to the name of tensor dimension `idx`.
+Names are either a string if the dimension is named or `NULL` if the
+dimension is unnamed.
+
+Dimension names may contain characters or underscore. Furthermore, a dimension
+name must be a valid Python variable name (i.e., does not start with underscore).
+
+Tensors may not have two named dimensions with the same name.
+
+#### Warning:
+
+The named tensor API is experimental and subject to change.
+
+
+## narrow
+
+narrow(dimension, start, length) -> Tensor
+
+See `?torch_narrow`
+
+#### Examples: 
+
+```{r, eval = FALSE}
+x <- torch_tensor(matrix(1:9, ncol = 3))
+x$narrow(1, 1, 3)
+x$narrow(1, 1, 2)
+```
+
+## narrow_copy
+
+narrow_copy(dimension, start, length) -> Tensor
+
+Same as `Tensor.narrow` except returning a copy rather
+than shared storage.  This is primarily for sparse tensors, which
+do not have a shared-storage narrow method.  Calling ``narrow_copy`
+with ``dimemsion > self$sparse_dim()`` will return a copy with the
+relevant dense dimension narrowed, and ``self$shape`` updated accordingly.
+
+## ndim
+
+Alias for `$dim()`
+
+## ndimension
+
+ndimension() -> int
+
+Alias for `$dim()`
+
+## ne
+
+ne(other) -> Tensor
+
+See `?torch_ne`
+
+## ne_
+
+ne_(other) -> Tensor
+
+In-place version of `$ne`
+
+## neg
+
+neg() -> Tensor
+
+See `?torch_neg`
+
+## neg_
+
+neg_() -> Tensor
+
+In-place version of `$neg`
+
+## nelement
+
+nelement() -> int
+
+Alias for `$numel`
+
+## new_empty
+
+new_empty(size, dtype=NULL, device=NULL, requires_grad=FALSE) -> Tensor
+
+Returns a Tensor of size `size` filled with uninitialized data.
+By default, the returned Tensor has the same `torch_dtype` and
+`torch_device` as this tensor.
+
+#### Arguments: 
+
+* dtype (`torch_dtype`, optional): the desired type of returned tensor.
+        Default: if NULL, same `torch_dtype` as this tensor.
+* device (`torch_device`, optional): the desired device of returned tensor.
+        Default: if NULL, same `torch_device` as this tensor.
+* requires_grad (bool, optional): If autograd should record operations on the
+* returned tensor. Default: `FALSE`.
+
+#### Examples: 
+
+```{r}
+tensor <- torch_ones(5)
+tensor$new_empty(c(2, 3))
+```
+
+## new_full
+
+new_full(size, fill_value, dtype=NULL, device=NULL, requires_grad=FALSE) -> Tensor
+
+Returns a Tensor of size `size` filled with `fill_value`.
+By default, the returned Tensor has the same `torch_dtype` and
+`torch_device` as this tensor.
+
+#### Arguments: 
+
+* fill_value (scalar): the number to fill the output tensor with.
+* dtype (`torch_dtype`, optional): the desired type of returned tensor.
+        Default: if NULL, same `torch_dtype` as this tensor.
+* device (`torch_device`, optional): the desired device of returned tensor.
+        Default: if NULL, same `torch_device` as this tensor.
+* requires_grad (bool, optional): If autograd should record operations on the
+* returned tensor. Default: `FALSE`.
+
+#### Examples: 
+
+```{r}
+tensor <- torch_ones(c(2), dtype=torch_float64())
+tensor$new_full(c(3, 4), 3.141592)
+```
+## new_ones
+
+new_ones(size, dtype=NULL, device=NULL, requires_grad=FALSE) -> Tensor
+
+Returns a Tensor of size `size` filled with `1`.
+By default, the returned Tensor has the same `torch_dtype` and
+`torch_device` as this tensor.
+
+#### Arguments: 
+
+* size (int...): a list, tuple, or `torch_Size` of integers defining the
+* shape of the output tensor.
+* dtype (`torch_dtype`, optional): the desired type of returned tensor.
+        Default: if NULL, same `torch_dtype` as this tensor.
+* device (`torch_device`, optional): the desired device of returned tensor.
+        Default: if NULL, same `torch_device` as this tensor.
+* requires_grad (bool, optional): If autograd should record operations on the
+* returned tensor. Default: `FALSE`.
+
+#### Examples: 
+
+```{r, eval = FALSE}
+tensor <- torch_tensor(c(2), dtype=torch_int32())
+tensor$new_ones(c(2, 3))
+```
+
+## new_tensor
+
+new_tensor(data, dtype=NULL, device=NULL, requires_grad=FALSE) -> Tensor
+
+Returns a new Tensor with `data` as the tensor data.
+By default, the returned Tensor has the same `torch_dtype` and
+`torch_device` as this tensor.
+
+#### Warning: 
+
+`new_tensor` always copies `data(). If you have a Tensor
+`data` and want to avoid a copy, use [$requires_grad_()]
+or [$detach()].
+If you have a numpy array and want to avoid a copy, use
+[torch_from_numpy()].
+
+
+When data is a tensor `x`, [new_tensor()()] reads out 'the data' from whatever it is passed,
+and constructs a leaf variable. Therefore `tensor$new_tensor(x)` is equivalent to `x$clone()$detach()`
+and `tensor$new_tensor(x, requires_grad=TRUE)` is equivalent to `x$clone()$detach()$requires_grad_(TRUE)`.
+The equivalents using `clone()` and `detach()` are recommended.
+
+#### Arguments: 
+
+* data (array_like): The returned Tensor copies `data`.
+* dtype (`torch_dtype`, optional): the desired type of returned tensor.
+        Default: if NULL, same `torch_dtype` as this tensor.
+* device (`torch_device`, optional): the desired device of returned tensor.
+        Default: if NULL, same `torch_device` as this tensor.
+* requires_grad (bool, optional): If autograd should record operations on the
+* returned tensor. Default: `FALSE`.
+
+#### Examples: 
+
+```{r, eval = FALSE}
+tensor <- torch_ones(c(2), dtype=torch_int8)
+data <- matrix(1:4, ncol = 2)
+tensor$new_tensor(data)
+```
+## new_zeros
+
+new_zeros(size, dtype=NULL, device=NULL, requires_grad=FALSE) -> Tensor
+
+Returns a Tensor of size `size` filled with `0`.
+By default, the returned Tensor has the same `torch_dtype` and
+`torch_device` as this tensor.
+
+#### Arguments: 
+
+* size (int...): a list, tuple, or `torch_Size` of integers defining the
+* shape of the output tensor.
+* dtype (`torch_dtype`, optional): the desired type of returned tensor.
+        Default: if NULL, same `torch_dtype` as this tensor.
+* device (`torch_device`, optional): the desired device of returned tensor.
+        Default: if NULL, same `torch_device` as this tensor.
+* requires_grad (bool, optional): If autograd should record operations on the
+* returned tensor. Default: `FALSE`.
+
+#### Examples: 
+
+```{r}
+tensor <- torch_tensor(c(1), dtype=torch_float64())
+tensor$new_zeros(c(2, 3))
+```
+
+## nonzero
+
+nonzero() -> LongTensor
+
+See `?torch_nonzero`
+
+## norm
+See `?torch_norm`
+## normal_
+
+normal_(mean=0, std=1, *, generator=NULL) -> Tensor
+
+Fills `self` tensor with elements samples from the normal distribution
+parameterized by `mean` and `std`.
+
+## numel
+
+numel() -> int
+
+See `?torch_numel`
+
+## numpy
+
+numpy() -> numpy.ndarray
+
+Returns `self` tensor as a NumPy :class:`ndarray`. This tensor and the
+returned `ndarray` share the same underlying storage. Changes to
+`self` tensor will be reflected in the :class:`ndarray` and vice versa.
+
+## orgqr
+
+orgqr(input2) -> Tensor
+
+See `?torch_orgqr`
+
+## ormqr
+
+ormqr(input2, input3, left=TRUE, transpose=FALSE) -> Tensor
+
+See `?torch_ormqr`
+
+## permute
+
+permute(*dims) -> Tensor
+
+Returns a view of the original tensor with its dimensions permuted.
+
+#### Arguments: 
+
+* dims (int...): The desired ordering of dimensions
+
+#### Examples:
+
+```{r}
+x <- torch_randn(2, 3, 5)
+x$size()
+x$permute(c(3, 1, 2))$size()
+```
+
+## pin_memory
+
+pin_memory() -> Tensor
+
+Copies the tensor to pinned memory, if it's not already pinned.
+
+## pinverse
+
+pinverse() -> Tensor
+
+See `?torch_pinverse`
+
+## polygamma
+
+polygamma(n) -> Tensor
+
+See `?torch_polygamma`
+
+## polygamma_
+
+polygamma_(n) -> Tensor
+
+In-place version of `$polygamma`
+
+## pow
+
+pow(exponent) -> Tensor
+
+See `?torch_pow`
+
+## pow_
+
+pow_(exponent) -> Tensor
+
+In-place version of `$pow`
+
+## prod
+
+prod(dim=NULL, keepdim=FALSE, dtype=NULL) -> Tensor
+
+See `?torch_prod`
+
+## put_
+
+put_(indices, tensor, accumulate=FALSE) -> Tensor
+
+Copies the elements from `tensor` into the positions specified by
+indices. For the purpose of indexing, the `self` tensor is treated as if
+it were a 1-D tensor.
+
+If `accumulate` is `TRUE`, the elements in `tensor` are added to
+`self`. If accumulate is `FALSE`, the behavior is undefined if indices
+contain duplicate elements.
+
+#### Arguments: 
+
+* indices (LongTensor): the indices into self
+* tensor (Tensor): the tensor containing values to copy from
+* accumulate (bool): whether to accumulate into self
+
+#### Examples: 
+
+```{r}
+src <- torch_tensor(matrix(3:8, ncol = 3))
+src$put_(torch_tensor(1:2), torch_tensor(9:10))
+```
+   
+## q_per_channel_axis
+
+q_per_channel_axis() -> int
+
+Given a Tensor quantized by linear (affine) per-channel quantization,
+returns the index of dimension on which per-channel quantization is applied.
+
+## q_per_channel_scales
+
+q_per_channel_scales() -> Tensor
+
+Given a Tensor quantized by linear (affine) per-channel quantization,
+returns a Tensor of scales of the underlying quantizer. It has the number of
+elements that matches the corresponding dimensions (from q_per_channel_axis) of
+the tensor.
+
+## q_per_channel_zero_points
+
+q_per_channel_zero_points() -> Tensor
+
+Given a Tensor quantized by linear (affine) per-channel quantization,
+returns a tensor of zero_points of the underlying quantizer. It has the number of
+elements that matches the corresponding dimensions (from q_per_channel_axis) of
+the tensor.
+
+## q_scale
+
+q_scale() -> float
+
+Given a Tensor quantized by linear(affine) quantization,
+returns the scale of the underlying quantizer().
+
+## q_zero_point
+
+q_zero_point() -> int
+
+Given a Tensor quantized by linear(affine) quantization,
+returns the zero_point of the underlying quantizer().
+
+## qr
+
+qr(some=TRUE) -> (Tensor, Tensor)
+
+See `?torch_qr`
+
+## qscheme
+
+qscheme() -> torch_qscheme
+
+Returns the quantization scheme of a given QTensor.
+
+## rad2deg
+
+rad2deg() -> Tensor
+
+See [torch_rad2deg()]
+
+## rad2deg_
+
+rad2deg_() -> Tensor
+
+In-place version of `$rad2deg`
+
+## random_
+
+random_(from=0, to=NULL, *, generator=NULL) -> Tensor
+
+Fills `self` tensor with numbers sampled from the discrete uniform
+distribution over `[from, to - 1]`. If not specified, the values are usually
+only bounded by `self` tensor's data type. However, for floating point
+types, if unspecified, range will be `[0, 2^mantissa]` to ensure that every
+value is representable. For example, `torch_tensor(1, dtype=torch_double).random_()`
+will be uniform in `[0, 2^53]`.
+
+## real
+
+Returns a new tensor containing real values of the `self` tensor.
+The returned tensor and `self` share the same underlying storage.
+
+#### Warning:
+
+[real()] is only supported for tensors with complex dtypes.
+
+#### Examples: 
+
+```{r, eval = FALSE}
+x <- torch_randn(4, dtype=torch_cfloat())
+x
+x$real
+```
+
+## reciprocal
+
+reciprocal() -> Tensor
+
+See `?torch_reciprocal`
+
+## reciprocal_
+
+reciprocal_() -> Tensor
+
+In-place version of `$reciprocal`
+
+## record_stream
+
+record_stream(stream)
+
+Ensures that the tensor memory is not reused for another tensor until all
+current work queued on `stream` are complete.
+
+#### Note: 
+
+The caching allocator is aware of only the stream where a tensor was
+allocated. Due to the awareness, it already correctly manages the life
+cycle of tensors on only one stream. But if a tensor is used on a stream
+different from the stream of origin, the allocator might reuse the memory
+unexpectedly. Calling this method lets the allocator know which streams
+have used the tensor.
+
+
+## refine_names
+
+Refines the dimension names of `self` according to `names`.
+
+Refining is a special case of renaming that "lifts" unnamed dimensions.
+A `NULL` dim can be refined to have any name; a named dim can only be
+refined to have the same name.
+
+Because named tensors can coexist with unnamed tensors, refining names
+gives a nice way to write named-tensor-aware code that works with both
+named and unnamed tensors.
+
+`names` may contain up to one Ellipsis (`...`).
+The Ellipsis is expanded greedily; it is expanded in-place to fill
+`names` to the same length as `self$dim()` using names from the
+corresponding indices of `self$names`.
+
+#### Arguments:
+* names (iterable of str): The desired names of the output tensor. May
+  contain up to one Ellipsis.
+
+#### Examples:
+
+```{r, eval = FALSE}
+imgs <- torch_randn(32, 3, 128, 128)
+named_imgs <- imgs$refine_names(c('N', 'C', 'H', 'W'))
+named_imgs$names
+```
+        
+## register_hook
+Registers a backward hook.
+
+The hook will be called every time a gradient with respect to the
+Tensor is computed. The hook should have the following signature::
+
+hook(grad) -> Tensor or NULL
+
+The hook should not modify its argument, but it can optionally return
+a new gradient which will be used in place of `grad`.
+
+This function returns a handle with a method `handle$remove()`
+that removes the hook from the module.
+
+#### Example
+
+```{r}
+v <- torch_tensor(c(0., 0., 0.), requires_grad=TRUE)
+h <- v$register_hook(function(grad) grad * 2)  # double the gradient
+v$backward(torch_tensor(c(1., 2., 3.)))
+v$grad
+h$remove()
+```
+        
+## remainder
+
+remainder(divisor) -> Tensor
+
+See `?torch_remainder`
+
+## remainder_
+
+remainder_(divisor) -> Tensor
+
+In-place version of `$remainder`
+
+## rename
+
+Renames dimension names of `self`.
+
+There are two main usages:
+
+`self$rename(**rename_map)` returns a view on tensor that has dims
+renamed as specified in the mapping `rename_map`.
+
+`self$rename(*names)` returns a view on tensor, renaming all
+dimensions positionally using `names`.
+Use `self$rename(NULL)` to drop names on a tensor.
+
+One cannot specify both positional args `names` and keyword args
+`rename_map`.
+
+#### Examples:
+
+```{r}
+imgs <- torch_rand(2, 3, 5, 7, names=c('N', 'C', 'H', 'W'))
+renamed_imgs <- imgs$rename(c("Batch", "Channels", "Height", "Width"))
+```
+        
+## rename_
+
+In-place version of `$rename`.
+
+## renorm
+
+renorm(p, dim, maxnorm) -> Tensor
+
+See `?torch_renorm`
+
+## renorm_
+
+renorm_(p, dim, maxnorm) -> Tensor
+
+In-place version of `$renorm`
+
+## repeat
+
+repeat(*sizes) -> Tensor
+
+Repeats this tensor along the specified dimensions.
+
+Unlike `$expand`, this function copies the tensor's data.
+
+#### Arguments: 
+
+* sizes (torch_Size or int...): The number of times to repeat this tensor along each
+* dimension
+
+#### Examples: 
+
+```{r}
+x <- torch_tensor(c(1, 2, 3))
+x$`repeat`(c(4, 2))
+x$`repeat`(c(4, 2, 1))$size()
+```
+
+## repeat_interleave
+
+repeat_interleave(repeats, dim=NULL) -> Tensor
+
+See [torch_repeat_interleave()].
+
+## requires_grad
+
+Is `TRUE` if gradients need to be computed for this Tensor, `FALSE` otherwise.
+
+#### Note: 
+
+The fact that gradients need to be computed for a Tensor do not mean that the `grad`
+attribute will be populated, see `is_leaf` for more details.
+
+## requires_grad_
+
+requires_grad_(requires_grad=TRUE) -> Tensor
+
+Change if autograd should record operations on this tensor: sets this tensor's
+`requires_grad` attribute in-place. Returns this tensor.
+
+[requires_grad_()]'s main use case is to tell autograd to begin recording
+operations on a Tensor `tensor`. If `tensor` has `requires_grad=FALSE`
+(because it was obtained through a DataLoader, or required preprocessing or
+initialization), `tensor.requires_grad_()` makes it so that autograd will
+begin to record operations on `tensor`.
+
+#### Arguments: 
+
+* requires_grad (bool): If autograd should record operations on this tensor.
+        Default: `TRUE`.
+
+#### Examples: 
+
+```{r, eval = FALSE}
+# Let's say we want to preprocess some saved weights and use
+# the result as new weights.
+saved_weights <- c(0.1, 0.2, 0.3, 0.25)
+loaded_weights <- torch_tensor(saved_weights)
+weights <- preprocess(loaded_weights)  # some function
+weights
+
+# Now, start to record operations done to weights
+weights$requires_grad_()
+out <- weights$pow(2)$sum()
+out$backward()
+weights$grad
+```
+    
+## reshape
+
+reshape(*shape) -> Tensor
+
+Returns a tensor with the same data and number of elements as `self`
+but with the specified shape. This method returns a view if `shape` is
+compatible with the current shape. See `$view` on when it is
+possible to return a view.
+
+See `?torch_reshape`
+
+#### Arguments: 
+
+* shape (tuple of ints or int...): the desired shape
+ 
+## reshape_as
+
+reshape_as(other) -> Tensor
+
+Returns this tensor as the same shape as `other`.
+`self$reshape_as(other)` is equivalent to `self$reshape(other.sizes())`.
+This method returns a view if `other.sizes()` is compatible with the current
+shape. See `$view` on when it is possible to return a view.
+
+Please see `reshape` for more information about `reshape`.
+
+#### Arguments: 
+
+* other (`$): The result tensor has the same shape
+* as `other`.
+
+## resize_
+
+resize_(*sizes, memory_format=torch_contiguous_format) -> Tensor
+
+Resizes `self` tensor to the specified size. If the number of elements is
+larger than the current storage size, then the underlying storage is resized
+to fit the new number of elements. If the number of elements is smaller, the
+underlying storage is not changed. Existing elements are preserved but any new
+memory is uninitialized.
+
+#### Warning:
+
+This is a low-level method. The storage is reinterpreted as C-contiguous,
+ignoring the current strides (unless the target size equals the current
+size, in which case the tensor is left unchanged). For most purposes, you
+will instead want to use `$view()`, which checks for
+contiguity, or `$reshape()`, which copies data if needed. To
+change the size in-place with custom strides, see `$set_()`.
+
+#### Arguments: 
+
+* sizes (torch_Size or int...): the desired size
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+  Tensor. Default: `torch_contiguous_format`. Note that memory format of
+  `self` is going to be unaffected if `self$size()` matches `sizes`.
+
+#### Examples: 
+
+```{r}
+x <- torch_tensor(matrix(1:6, ncol = 2))
+x$resize_(c(2, 2))
+```
+    
+## resize_as_
+
+resize_as_(tensor, memory_format=torch_contiguous_format) -> Tensor
+
+Resizes the `self` tensor to be the same size as the specified
+`tensor`. This is equivalent to `self$resize_(tensor.size())`.
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+    Tensor. Default: `torch_contiguous_format`. Note that memory format of
+    `self` is going to be unaffected if `self$size()` matches `tensor.size()`.
+
+
+## retain_grad
+
+Enables `$grad` attribute for non-leaf Tensors.
+
+## rfft
+
+rfft(signal_ndim, normalized=FALSE, onesided=TRUE) -> Tensor
+
+See `?torch_rfft`
+
+## roll
+
+roll(shifts, dims) -> Tensor
+
+See `?torch_roll`
+
+## rot90
+
+rot90(k, dims) -> Tensor
+
+See [torch_rot90()]
+
+## round
+
+round() -> Tensor
+
+See `?torch_round`
+
+## round_
+
+round_() -> Tensor
+
+In-place version of `$round`
+
+## rsqrt
+
+rsqrt() -> Tensor
+
+See `?torch_rsqrt`
+
+## rsqrt_
+
+rsqrt_() -> Tensor
+
+In-place version of `$rsqrt`
+
+## scatter
+
+scatter(dim, index, src) -> Tensor
+
+Out-of-place version of `$scatter_`
+
+## scatter_
+
+scatter_(dim, index, src) -> Tensor
+
+Writes all values from the tensor `src` into `self` at the indices
+specified in the `index` tensor. For each value in `src`, its output
+index is specified by its index in `src` for `dimension != dim` and by
+the corresponding value in `index` for `dimension = dim`.
+
+For a 3-D tensor, `self` is updated as:
+
+```
+self[index[i][j][k]][j][k] = src[i][j][k]  # if dim == 0
+self[i][index[i][j][k]][k] = src[i][j][k]  # if dim == 1
+self[i][j][index[i][j][k]] = src[i][j][k]  # if dim == 2
+```
+
+This is the reverse operation of the manner described in `$gather`.
+
+`self`, `index` and `src` (if it is a Tensor) should have same
+number of dimensions. It is also required that `index.size(d) <= src.size(d)`
+for all dimensions `d`, and that `index.size(d) <= self$size(d)` for all
+dimensions `d != dim`.
+
+Moreover, as for `$gather`, the values of `index` must be
+between `0` and `self$size(dim) - 1` inclusive, and all values in a row
+along the specified dimension `dim` must be unique.
+
+#### Arguments: 
+
+* dim (int): the axis along which to index
+* index (LongTensor): the indices of elements to scatter,
+* can be either empty or the same size of src.
+      When empty, the operation returns identity
+* src (Tensor): the source element(s) to scatter,
+* incase `value` is not specified
+* value (float): the source element(s) to scatter,
+* incase `src` is not specified
+
+#### Examples: 
+
+```{r, eval = FALSE}
+x <- torch_rand(2, 5)
+x
+torch_zeros(3, 5)$scatter_(
+        1, 
+        torch_tensor(rbind(c(2, 3, 3, 1, 1), c(3, 1, 1, 2, 3)), x)
+)
+
+z <- torch_zeros(2, 4)$scatter_(
+        2, 
+        torch_tensor(matrix(3:4, ncol = 1)), 1.23
+)
+```
+    
+
+## scatter_add
+
+scatter_add(dim, index, src) -> Tensor
+
+Out-of-place version of `$scatter_add_`
+
+## scatter_add_
+
+scatter_add_(dim, index, src) -> Tensor
+
+Adds all values from the tensor `other` into `self` at the indices
+specified in the `index` tensor in a similar fashion as
+`~$scatter_`. For each value in `src`, it is added to
+an index in `self` which is specified by its index in `src`
+for `dimension != dim` and by the corresponding value in `index` for
+`dimension = dim`.
+
+For a 3-D tensor, `self` is updated as::
+
+```
+self[index[i][j][k]][j][k] += src[i][j][k]  # if dim == 0
+self[i][index[i][j][k]][k] += src[i][j][k]  # if dim == 1
+self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2
+```
+
+`self`, `index` and `src` should have same number of
+dimensions. It is also required that `index.size(d) <= src.size(d)` for all
+dimensions `d`, and that `index.size(d) <= self$size(d)` for all dimensions
+`d != dim`.
+
+#### Note:
+    
+In some circumstances when using the CUDA backend with CuDNN, this operator
+may select a nondeterministic algorithm to increase performance. If this is
+undesirable, you can try to make the operation deterministic (potentially at
+a performance cost) by setting `torch_backends.cudnn.deterministic = TRUE`.
+    
+#### Arguments: 
+
+* dim (int): the axis along which to index
+* index (LongTensor): the indices of elements to scatter and add,
+* can be either empty or the same size of src.
+      When empty, the operation returns identity.
+* src (Tensor): the source elements to scatter and add
+
+#### Examples: 
+
+```{r, eval = FALSE}
+x <- torch_rand(2, 5)
+x
+torch_ones(3, 5)$scatter_add_(1, torch_tensor(rbind(c(0, 1, 2, 0, 0), c(2, 0, 0, 1, 2))), x)
+```
+    
+## select
+
+select(dim, index) -> Tensor
+
+Slices the `self` tensor along the selected dimension at the given index.
+This function returns a view of the original tensor with the given dimension removed.
+
+#### Arguments: 
+
+* dim (int): the dimension to slice
+* index (int): the index to select with
+
+#### Note: 
+
+`select` is equivalent to slicing. For example,
+`tensor$select(0, index)` is equivalent to `tensor[index]` and
+`tensor$select(2, index)` is equivalent to `tensor[:,:,index]`.
+
+## set_
+
+set_(source=NULL, storage_offset=0, size=NULL, stride=NULL) -> Tensor
+
+Sets the underlying storage, size, and strides. If `source` is a tensor,
+`self` tensor will share the same storage and have the same size and
+strides as `source`. Changes to elements in one tensor will be reflected
+in the other.
+
+#### Arguments: 
+
+* source (Tensor or Storage): the tensor or storage to use
+* storage_offset (int, optional): the offset in the storage
+* size (torch_Size, optional): the desired size. Defaults to the size of the source.
+* stride (tuple, optional): the desired stride. Defaults to C-contiguous strides.
+
+## share_memory_
+
+Moves the underlying storage to shared memory.
+
+This is a no-op if the underlying storage is already in shared memory
+and for CUDA tensors. Tensors in shared memory cannot be resized.
+        
+## short
+
+short(memory_format=torch_preserve_format) -> Tensor
+
+`self$short()` is equivalent to `self$to(torch_int16)`. See [to()].
+
+#### Arguments: 
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+* returned Tensor. Default: `torch_preserve_format`.
+
+## sigmoid
+
+sigmoid() -> Tensor
+
+See `?torch_sigmoid`
+
+## sigmoid_
+
+sigmoid_() -> Tensor
+
+In-place version of `$sigmoid`
+
+## sign
+
+sign() -> Tensor
+
+See `?torch_sign`
+
+## sign_
+
+sign_() -> Tensor
+
+In-place version of `$sign`
+
+## sin
+
+sin() -> Tensor
+
+See `?torch_sin`
+
+## sin_
+
+sin_() -> Tensor
+
+In-place version of `$sin`
+
+## sinh
+
+sinh() -> Tensor
+
+See `?torch_sinh`
+
+## sinh_
+
+sinh_() -> Tensor
+
+In-place version of `$sinh`
+
+## size
+
+size() -> torch_Size
+
+Returns the size of the `self` tensor. The returned value is a subclass of
+`tuple`.
+
+#### Examples: 
+
+```{r}
+torch_empty(3, 4, 5)$size()
+```
+    
+## slogdet
+
+slogdet() -> (Tensor, Tensor)
+
+See `?torch_slogdet`
+
+## solve
+
+solve(A) -> Tensor, Tensor
+
+See `?torch_solve`
+
+## sort
+
+sort(dim=-1, descending=FALSE) -> (Tensor, LongTensor)
+
+See `?torch_sort`
+
+## sparse_dim
+
+sparse_dim() -> int
+
+If `self` is a sparse COO tensor (i.e., with `torch_sparse_coo` layout),
+this returns the number of sparse dimensions. Otherwise, this throws an error.
+
+See also `Tensor.dense_dim`.
+
+## sparse_mask
+
+sparse_mask(input, mask) -> Tensor
+
+Returns a new SparseTensor with values from Tensor `input` filtered
+by indices of `mask` and values are ignored. `input` and `mask`
+must have the same shape.
+
+#### Arguments: 
+
+* input (Tensor): an input Tensor
+* mask (SparseTensor): a SparseTensor which we filter `input` based on its indices
+
+## split
+See `?torch_split`
+        
+## sqrt
+
+sqrt() -> Tensor
+
+See `?torch_sqrt`
+
+## sqrt_
+
+sqrt_() -> Tensor
+
+In-place version of `$sqrt`
+
+## square
+
+square() -> Tensor
+
+See `?torch_square`
+
+## square_
+
+square_() -> Tensor
+
+In-place version of `$square`
+
+## squeeze
+
+squeeze(dim=NULL) -> Tensor
+
+See `?torch_squeeze`
+
+## squeeze_
+
+squeeze_(dim=NULL) -> Tensor
+
+In-place version of `$squeeze`
+
+## std
+
+std(dim=NULL, unbiased=TRUE, keepdim=FALSE) -> Tensor
+
+See `?torch_std`
+
+## stft
+See `?torch_stft`
+        
+## storage
+
+storage() -> torch_Storage
+
+Returns the underlying storage.
+
+## storage_offset
+
+storage_offset() -> int
+
+Returns `self` tensor's offset in the underlying storage in terms of
+number of storage elements (not bytes).
+
+#### Examples: 
+
+```{r, eval = FALSE}
+x <- torch_tensor(c(1, 2, 3, 4, 5))
+x$storage_offset()
+x[3:N]$storage_offset()
+```
+
+## storage_type
+
+storage_type() -> type
+
+Returns the type of the underlying storage.
+
+## stride
+
+stride(dim) -> tuple or int
+
+Returns the stride of `self` tensor.
+
+Stride is the jump necessary to go from one element to the next one in the
+specified dimension `dim`. A tuple of all strides is returned when no
+argument is passed in. Otherwise, an integer value is returned as the stride in
+the particular dimension `dim`.
+
+#### Arguments: 
+
+* dim (int, optional): the desired dimension in which stride is required
+
+#### Examples: 
+
+```{r}
+x <- torch_tensor(matrix(1:10, nrow = 2))
+x$stride()
+x$stride(1)
+x$stride(-1)
+```
+    
+## sub
+
+sub(other, *, alpha=1) -> Tensor
+
+Subtracts a scalar or tensor from `self` tensor. If both `alpha`
+and `other` are specified, each element of `other` is scaled by
+`alpha` before being used.
+
+When `other` is a tensor, the shape of `other` must be
+`broadcastable <broadcasting-semantics>` with the shape of the underlying
+tensor.
+
+
+## sub_
+
+sub_(other, *, alpha=1) -> Tensor
+
+In-place version of `$sub`
+
+## sum
+
+sum(dim=NULL, keepdim=FALSE, dtype=NULL) -> Tensor
+
+See `?torch_sum`
+
+## sum_to_size
+
+sum_to_size(*size) -> Tensor
+
+Sum `this` tensor to `size`.
+`size` must be broadcastable to `this` tensor size.
+
+#### Arguments: 
+
+* size (int...): a sequence of integers defining the shape of the output tensor.
+
+## svd
+
+svd(some=TRUE, compute_uv=TRUE) -> (Tensor, Tensor, Tensor)
+
+See `?torch_svd`
+
+## symeig
+
+symeig(eigenvectors=FALSE, upper=TRUE) -> (Tensor, Tensor)
+
+See `?torch_symeig`
+
+## t
+
+t() -> Tensor
+
+See `?torch_t`
+
+## t_
+
+t_() -> Tensor
+
+In-place version of `$t`
+
+## take
+
+take(indices) -> Tensor
+
+See `?torch_take`
+
+## tan
+
+tan() -> Tensor
+
+See `?torch_tan`
+
+## tan_
+
+tan_() -> Tensor
+
+In-place version of `$tan`
+
+## tanh
+
+tanh() -> Tensor
+
+See `?torch_tanh`
+
+## tanh_
+
+tanh_() -> Tensor
+
+In-place version of `$tanh`
+
+## to
+
+to(*args, **kwargs) -> Tensor
+
+Performs Tensor dtype and/or device conversion. A `torch_dtype` and :class:`torch_device` are
+inferred from the arguments of `self$to(*args, **kwargs)`.
+
+#### Note: 
+
+If the `self` Tensor already
+has the correct `torch_dtype` and :class:`torch_device`, then `self` is returned.
+Otherwise, the returned tensor is a copy of `self` with the desired
+`torch_dtype` and :class:`torch_device`.
+
+Here are the ways to call `to`:
+
+to(dtype, non_blocking=FALSE, copy=FALSE, memory_format=torch_preserve_format) -> Tensor
+
+Returns a Tensor with the specified `dtype`
+
+#### Arguments:
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+  returned Tensor. Default: `torch_preserve_format`.
+
+to(device=NULL, dtype=NULL, non_blocking=FALSE, copy=FALSE, memory_format=torch_preserve_format) -> Tensor
+
+Returns a Tensor with the specified `device` and (optional)
+`dtype`. If `dtype` is `NULL` it is inferred to be `self$dtype`.
+When `non_blocking`, tries to convert asynchronously with respect to
+the host if possible, e.g., converting a CPU Tensor with pinned memory to a
+CUDA Tensor.
+
+When `copy` is set, a new Tensor is created even when the Tensor
+already matches the desired conversion.
+
+#### Arguments:
+
+* memory_format (`torch_memory_format`, optional): the desired memory format of
+  returned Tensor. Default: `torch_preserve_format`.
+
+function:: to(other, non_blocking=FALSE, copy=FALSE) -> Tensor
+
+Returns a Tensor with same `torch_dtype` and :class:`torch_device` as
+the Tensor `other`. When `non_blocking`, tries to convert
+asynchronously with respect to the host if possible, e.g., converting a CPU
+Tensor with pinned memory to a CUDA Tensor.
+
+When `copy` is set, a new Tensor is created even when the Tensor
+already matches the desired conversion.
+
+#### Examples: 
+
+```{r}
+tensor <- torch_randn(2, 2)  # Initially dtype=float32, device=cpu
+tensor$to(dtype = torch_float64())
+
+other <- torch_randn(1, dtype=torch_float64())
+tensor$to(other = other, non_blocking=TRUE)
+```
+    
+## to_mkldnn
+
+to_mkldnn() -> Tensor
+Returns a copy of the tensor in `torch_mkldnn` layout.
+
+
+## to_sparse
+
+to_sparse(sparseDims) -> Tensor
+Returns a sparse copy of the tensor.  PyTorch supports sparse tensors in
+`coordinate format <sparse-docs>`.
+
+#### Arguments: 
+
+* sparseDims (int, optional): the number of sparse dimensions to include in the new sparse tensor
+
+## tolist
+
+tolist() -> list or number
+
+Returns the tensor as a (nested) list. For scalars, a standard
+Python number is returned, just like with `$item`.
+Tensors are automatically moved to the CPU first if necessary.
+
+This operation is not differentiable.
+
+## topk
+
+topk(k, dim=NULL, largest=TRUE, sorted=TRUE) -> (Tensor, LongTensor)
+
+See `?torch_topk`
+
+## trace
+
+trace() -> Tensor
+
+See `?torch_trace`
+
+## transpose
+
+transpose(dim0, dim1) -> Tensor
+
+See `?torch_transpose`
+
+## transpose_
+
+transpose_(dim0, dim1) -> Tensor
+
+In-place version of `$transpose`
+
+## triangular_solve
+
+triangular_solve(A, upper=TRUE, transpose=FALSE, unitriangular=FALSE) -> (Tensor, Tensor)
+
+See [torch_triangular_solve()]
+
+## tril
+
+tril(k=0) -> Tensor
+
+See `?torch_tril`
+
+## tril_
+
+tril_(k=0) -> Tensor
+
+In-place version of `$tril`
+
+## triu
+
+triu(k=0) -> Tensor
+
+See `?torch_triu`
+
+## triu_
+
+triu_(k=0) -> Tensor
+
+In-place version of `$triu`
+
+## true_divide
+
+true_divide(value) -> Tensor
+
+See [torch_true_divide()]
+
+## true_divide_
+
+true_divide_(value) -> Tensor
+
+In-place version of `$true_divide_`
+
+## trunc
+
+trunc() -> Tensor
+
+See `?torch_trunc`
+
+## trunc_
+
+trunc_() -> Tensor
+
+In-place version of `$trunc`
+
+## type
+
+type(dtype=NULL, non_blocking=FALSE, **kwargs) -> str or Tensor
+Returns the type if `dtype` is not provided, else casts this object to
+the specified type.
+
+If this is already of the correct type, no copy is performed and the
+original object is returned.
+
+#### Arguments: 
+
+* dtype (type or string): The desired type
+* non_blocking (bool): If `TRUE`, and the source is in pinned memory
+* and destination is on the GPU or vice versa, the copy is performed
+* asynchronously with respect to the host. Otherwise, the argument
+* has no effect.
+    **kwargs: For compatibility, may contain the key `async` in place of
+* the `non_blocking` argument. The `async` arg is deprecated.
+
+## type_as
+
+type_as(tensor) -> Tensor
+
+Returns this tensor cast to the type of the given tensor.
+
+This is a no-op if the tensor is already of the correct type. This is
+equivalent to `self$type(tensor.type())`
+
+#### Arguments: 
+
+* tensor (Tensor): the tensor which has the desired type
+
+## unbind
+
+unbind(dim=0) -> seq
+
+See `?torch_unbind`
+
+## unflatten
+
+Unflattens the named dimension `dim`, viewing it in the shape
+specified by `namedshape`.
+
+#### Arguments:
+
+* namedshape: (iterable of `(name, size)` tuples).
+        
+## unfold
+
+unfold(dimension, size, step) -> Tensor
+
+Returns a view of the original tensor which contains all slices of size `size` from
+`self` tensor in the dimension `dimension`.
+
+Step between two slices is given by `step`.
+
+If `sizedim` is the size of dimension `dimension` for `self`, the size of
+dimension `dimension` in the returned tensor will be
+`(sizedim - size) / step + 1`.
+
+An additional dimension of size `size` is appended in the returned tensor.
+
+#### Arguments: 
+
+* dimension (int): dimension in which unfolding happens
+* size (int): the size of each slice that is unfolded
+* step (int): the step between each slice
+
+## uniform_
+
+uniform_(from=0, to=1) -> Tensor
+
+Fills `self` tensor with numbers sampled from the continuous uniform
+distribution:
+
+$$
+P(x) = \dfrac{1}{\text{to} - \text{from}}
+$$
+
+## unique
+
+Returns the unique elements of the input tensor.
+
+See `?torch_unique`
+        
+## unique_consecutive
+
+Eliminates all but the first element from every consecutive group of equivalent elements.
+
+See [torch_unique_consecutive()]
+        
+## unsqueeze
+
+unsqueeze(dim) -> Tensor
+
+See `?torch_unsqueeze`
+
+## unsqueeze_
+
+unsqueeze_(dim) -> Tensor
+
+In-place version of `$unsqueeze`
+
+## values
+
+values() -> Tensor
+
+If `self` is a sparse COO tensor (i.e., with `torch_sparse_coo` layout),
+this returns a view of the contained values tensor. Otherwise, this throws an
+error.
+
+
+#### Note: 
+
+This method can only be called on a coalesced sparse tensor. See
+`Tensor$coalesce` for details.
+
+## var
+
+var(dim=NULL, unbiased=TRUE, keepdim=FALSE) -> Tensor
+
+See `?torch_var`
+
+## view
+
+view(*shape) -> Tensor
+
+Returns a new tensor with the same data as the `self` tensor but of a
+different `shape`.
+
+The returned tensor shares the same data and must have the same number
+of elements, but may have a different size. For a tensor to be viewed, the new
+view size must be compatible with its original size and stride, i.e., each new
+view dimension must either be a subspace of an original dimension, or only span
+across original dimensions `d, d+1, \dots, d+k` that satisfy the following
+contiguity-like condition that `\forall i = d, \dots, d+k-1`,
+
+$$
+\text{stride}[i] = \text{stride}[i+1] \times \text{size}[i+1]
+$$
+
+Otherwise, it will not be possible to view `self` tensor as `shape`
+without copying it (e.g., via `contiguous`). When it is unclear whether a
+`view` can be performed, it is advisable to use :meth:`reshape`, which
+returns a view if the shapes are compatible, and copies (equivalent to calling
+`contiguous`) otherwise.
+
+#### Arguments: 
+
+* shape (torch_Size or int...): the desired size
+
+## view_as
+
+view_as(other) -> Tensor
+
+View this tensor as the same size as `other`.
+`self$view_as(other)` is equivalent to `self$view(other.size())`.
+
+Please see `$view` for more information about `view`.
+
+#### Arguments: 
+
+* other (`$): The result tensor has the same size
+* as `other`.
+
+## where
+
+where(condition, y) -> Tensor
+
+`self$where(condition, y)` is equivalent to `torch_where(condition, self, y)`.
+See `?torch_where`
+
+## zero_
+
+zero_() -> Tensor
+
+Fills `self` tensor with zeros.
+

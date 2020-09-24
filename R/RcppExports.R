@@ -6885,6 +6885,10 @@ cpp_generator_set_current_seed <- function(generator, seed) {
     invisible(.Call('_torch_cpp_generator_set_current_seed', PACKAGE = 'torchpkg', generator, seed))
 }
 
+cpp_torch_manual_seed <- function(seed) {
+    invisible(.Call('_torch_cpp_torch_manual_seed', PACKAGE = 'torchpkg', seed))
+}
+
 enquos0 <- function(env) {
     .Call('_torch_enquos0', PACKAGE = 'torchpkg', env)
 }
@@ -7037,6 +7041,10 @@ cpp_tensor_load <- function(s) {
     .Call('_torch_cpp_tensor_load', PACKAGE = 'torchpkg', s)
 }
 
+cpp_load_state_dict <- function(path) {
+    .Call('_torch_cpp_load_state_dict', PACKAGE = 'torchpkg', path)
+}
+
 cpp_torch_scalar <- function(x) {
     .Call('_torch_cpp_torch_scalar', PACKAGE = 'torchpkg', x)
 }
@@ -7081,8 +7089,8 @@ cpp_torch_tensor_dtype <- function(x) {
     .Call('_torch_cpp_torch_tensor_dtype', PACKAGE = 'torchpkg', x)
 }
 
-cpp_torch_tensor <- function(x, dim, options, requires_grad) {
-    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torchpkg', x, dim, options, requires_grad)
+cpp_torch_tensor <- function(x, dim, options, requires_grad, is_integer64) {
+    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torchpkg', x, dim, options, requires_grad, is_integer64)
 }
 
 cpp_as_array <- function(x) {

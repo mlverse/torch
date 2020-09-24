@@ -19,15 +19,14 @@ Generator <- R6::R6Class(
       if (!requireNamespace("bit64"))
         warning("bit64 is required to correctly show the seed.")
       
-      cpp_generator_current_seed(self$ptr)
+      bit64::as.integer64(cpp_generator_current_seed(self$ptr))
     },
     set_current_seed = function(seed) {
      
       if ((!is.integer(seed)) && (!inherits(seed, "integer64")))
         stop("Seed must an integer or integer64.")
       
-      if (is.integer(seed))
-        seed <- as.numeric(seed)
+      seed <- as.character(seed)
       
       cpp_generator_set_current_seed(self$ptr, seed)
     }
@@ -56,5 +55,14 @@ torch_generator <- function() {
 
 is_torch_generator <- function(x) {
   inherits(x, "torch_generator")
+}
+
+#' Sets the seed for generating random numbers.
+#' 
+#' @param seed integer seed.
+#' 
+#' @export
+torch_manual_seed <- function(seed) {
+  cpp_torch_manual_seed(as.character(seed))
 }
 

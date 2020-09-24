@@ -5,7 +5,7 @@
 \alias{torch_min}
 \title{Min}
 \arguments{
-\item{input}{(Tensor) the input tensor.}
+\item{self}{(Tensor) the input tensor.}
 
 \item{dim}{(int) the dimension to reduce.}
 
@@ -28,7 +28,7 @@ follows the broadcasting rules .
 Returns the minimum value of all elements in the \code{input} tensor.
 }
 
-\section{min(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor) }{
+\section{min(input, dim, keepdim=False, out=NULL) -> (Tensor, LongTensor) }{
 
 
 Returns a namedtuple \verb{(values, indices)} where \code{values} is the minimum
@@ -44,13 +44,13 @@ minimal value found, unless it is unique.
 The exact implementation details are device-specific.
 Do not expect the same result when run on CPU and GPU in general.
 
-If \code{keepdim} is \code{True}, the output tensors are of the same size as
+If \code{keepdim} is \code{TRUE}, the output tensors are of the same size as
 \code{input} except in the dimension \code{dim} where they are of size 1.
 Otherwise, \code{dim} is squeezed (see \code{\link{torch_squeeze}}), resulting in
 the output tensors having 1 fewer dimension than \code{input}.
 }
 
-\section{min(input, other, out=None) -> Tensor }{
+\section{min(input, other, out=NULL) -> Tensor }{
 
 
 Each element of the tensor \code{input} is compared with the corresponding
@@ -66,7 +66,7 @@ but they must be broadcastable .
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 a = torch_randn(c(1, 3))
 a

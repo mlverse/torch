@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - 'cran/**'
 
 jobs:
   build:

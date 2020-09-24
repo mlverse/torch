@@ -62,7 +62,7 @@ The Nesterov version is analogously modified.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 \dontrun{
 optimizer <- optim_sgd(model$parameters(), lr=0.1, momentum=0.9)
 optimizer$zero_grad()

@@ -13,7 +13,7 @@ nn_init_ones_(tensor)
 Fills the input Tensor with the scalar value \code{1}
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_ones_(w)
 

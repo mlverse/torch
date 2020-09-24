@@ -5,22 +5,20 @@
 \alias{torch_logical_not}
 \title{Logical_not}
 \arguments{
-\item{input}{(Tensor) the input tensor.}
-
-\item{out}{(Tensor, optional) the output tensor.}
+\item{self}{(Tensor) the input tensor.}
 }
 \description{
 Logical_not
 }
-\section{logical_not(input, out=None) -> Tensor }{
+\section{logical_not(input, out=NULL) -> Tensor }{
 
 
 Computes the element-wise logical NOT of the given input tensor. If not specified, the output tensor will have the bool
-dtype. If the input tensor is not a bool tensor, zeros are treated as \code{False} and non-zeros are treated as \code{True}.
+dtype. If the input tensor is not a bool tensor, zeros are treated as \code{FALSE} and non-zeros are treated as \code{TRUE}.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 
 torch_logical_not(torch_tensor(c(TRUE, FALSE)))
 torch_logical_not(torch_tensor(c(0, 1, -10), dtype=torch_int8()))

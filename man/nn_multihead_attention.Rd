@@ -80,7 +80,7 @@ L is the target sequence length, S is the source sequence length.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 \dontrun{
 multihead_attn = nn_multihead_attention(embed_dim, num_heads)
 out <- multihead_attn(query, key, value)

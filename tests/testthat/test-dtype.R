@@ -26,13 +26,13 @@ test_that("Can compare dtypes", {
 test_that("Default dtype", {
   
   x <- torch_randn(10)
-  expect_true(x$dtype() == torch_float())
+  expect_true(x$dtype == torch_float())
   expect_true(torch_get_default_dtype() == torch_float())
   
   torch_set_default_dtype(torch_float64())
   expect_true(torch_get_default_dtype() == torch_float64())
   x <- torch_randn(10)
-  expect_true(x$dtype() == torch_float64())
+  expect_true(x$dtype == torch_float64())
   
   torch_set_default_dtype(torch_float())
   

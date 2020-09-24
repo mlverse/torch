@@ -1,0 +1,169 @@
+---
+title: What is torch?
+type: docs
+---
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1")
+)
+```
+
+> Note: This is an R port of the official tutorial available [here](https://pytorch.org/tutorials/beginner/blitz/tensor_tutorial.html#sphx-glr-beginner-blitz-tensor-tutorial-py). All credits goes to [Soumith Chintala](http://soumith.ch/).
+
+```{r setup}
+library(torch)
+```
+
+It’s a scientific computing package targeted at two sets of audiences:
+
+- An array library to use the power of GPUs
+- a deep learning research platform that provides maximum flexibility and speed
+
+## Getting started
+
+### Tensors
+
+Tensors are similar to R arrays, with the addition being that Tensors can also be used on a GPU to accelerate computing.
+
+> Note: An uninitialized matrix is declared, but does not contain definite known values before it is used. When an uninitialized matrix is created, whatever values were in the allocated memory at the time will appear as the initial values.
+
+Construct a 5x3 matrix, uninitialized:
+
+```{r}
+x <- torch_empty(5, 3)
+x
+```
+
+Construct a randomly initialized matrix:
+
+```{r}
+x <- torch_rand(5, 3)
+x
+```
+
+Construct a matrix filled zeros and of dtype long:
+
+```{r}
+x <- torch_zeros(5, 3, dtype = torch_long())
+x
+```
+
+Construct a tensor directly from data:
+
+```{r}
+x <- torch_tensor(c(5.5, 3))
+x
+```
+
+or create a tensor based on an existing tensor. These methods will reuse properties of the input tensor, e.g. dtype, unless new values are provided by user
+
+```{r}
+x <- torch_randn_like(x, dtype = torch_float()) # override dtype!
+x                                               # result has the same size
+```
+
+Get its size:
+
+```{r}
+x$size()
+```
+
+### Operations
+
+There are multiple syntaxes for operations. In the following example, we will take a look at the addition operation.
+
+Addition: syntax 1
+
+```{r}
+x <- torch_rand(5, 3)
+y <- torch_rand(5, 3)
+x + y
+```
+
+Addition: syntax 2
+
+```{r}
+torch_add(x, y)
+```
+
+Addition: in-place
+
+```{r}
+y$add_(x)
+y
+```
+
+> Note: Any operation that mutates a tensor in-place is post-fixed with an `_`. For example: `x$copy_(y)`, `x$t_()`, will change x.
+
+You can use standard R-like indexing with all bells and whistles! See more about indexing with `vignette("indexing")`.
+
+```{r}
+x[, 1]
+```
+
+Resizing: If you want to resize/reshape tensor, you can use `torch_view`:
+
+```{r}
+x <- torch_randn(4, 4)
+y <- x$view(16)
+z <- x$view(size = c(-1, 8))  # the size -1 is inferred from other dimensions
+x$size()
+y$size()
+z$size()
+```
+If you have a one element tensor, use `$item()` to get the value as an R number
+
+```{r}
+x <- torch_randn(1)
+x
+x$item()
+```
+
+You can find a complete list of operations in the reference page.
+
+
+## R bridge
+
+Converting a Torch Tensor to an R array and vice versa is a breeze.
+
+### Converting a torch tensor into an R array
+
+```{r}
+a <- torch_ones(5)
+a
+```
+
+```{r}
+b <- as_array(a)
+b
+```
+
+### Converting R arrays to torch tensors
+
+```{r}
+a <- rep(1, 5)
+a
+b <- torch_tensor(a)
+b
+```
+
+Currently supported types are numerics and boolean types.
+
+## CUDA tensors
+
+Tensors can be moved onto any device using the `$to` method.
+
+```{r}
+if (cuda_is_available()) {
+  device <- torch_device("cuda")
+  y <- torch_ones_like(x, device = device)  # directly create a tensor on GPU
+  x <- x$to(device)                       # or just use strings ``.to("cuda")``
+  z <- x + y
+  print(z)
+  print(z$to(device = "cpu", torch_double())) # `$to` can also change dtype together!
+}
+```
+
+

@@ -11,15 +11,30 @@ Rcpp::XPtr<XPtrTorchGenerator> cpp_torch_generator () {
 }
 
 // [[Rcpp::export]]
-Rcpp::NumericVector cpp_generator_current_seed (Rcpp::XPtr<XPtrTorchGenerator> generator) {
-  Rcpp::NumericVector out(1);
+std::string cpp_generator_current_seed (Rcpp::XPtr<XPtrTorchGenerator> generator) {
   uint64_t seed = lantern_Generator_current_seed(generator->get());
-  std::memcpy(&(out[0]), &(seed), sizeof(double));
-  out.attr("class") = "integer64";
-  return out;
+  auto seed_str = std::to_string(seed);
+  return seed_str;
 }
 
 // [[Rcpp::export]]
-void cpp_generator_set_current_seed (Rcpp::XPtr<XPtrTorchGenerator> generator, std::uint64_t seed) {
-  lantern_Generator_set_current_seed(generator->get(), seed);
+void cpp_generator_set_current_seed (Rcpp::XPtr<XPtrTorchGenerator> generator, std::string seed) {
+  
+  uint64_t value;
+  std::istringstream iss(seed);
+  iss >> value;
+  
+  lantern_Generator_set_current_seed(generator->get(), value);
+}
+
+// [[Rcpp::export]]
+void cpp_torch_manual_seed (std::string seed)
+{
+ 
+  int64_t value;
+  std::istringstream iss(seed);
+  iss >> value;
+  
+  lantern_manual_seed(value);
+  
 }

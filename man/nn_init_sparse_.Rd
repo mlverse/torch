@@ -20,7 +20,7 @@ non-zero elements will be drawn from the normal distribution
 as described in \verb{Deep learning via Hessian-free optimization} - Martens, J. (2010).
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 \dontrun{
 w <- torch_empty(3, 5)
 nn_init_sparse_(w, sparsity = 0.1)

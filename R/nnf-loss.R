@@ -67,6 +67,16 @@ nnf_kl_div <- function(input, target, reduction = "mean") {
 #' @export
 nnf_mse_loss <- function(input, target, reduction = "mean") {
   
+  if (!all(target$shape == input$shape)) {
+    
+    target_shape <- paste0("(", paste(target$shape, collapse = ","), ")")
+    input_shape <- paste0("(", paste(input$shape, collapse = ","), ")")
+    
+    warn("Using a target size {target_shape} that is different to the input size {input_shape}. ",
+         "This will likely lead to incorrect results due to broadcasting. ",
+         "Please ensure they have the same size.")
+  }
+  
   if (target$requires_grad) {
     ret <- (input - target) ^ 2
     if (!is.null(reduction)) {
@@ -167,20 +177,8 @@ nnf_cosine_embedding_loss <- function(input1, input2, target, margin=0,
 #'
 #' @export
 nnf_smooth_l1_loss <- function(input, target, reduction = "mean") {
-  if (target$requires_grad) {
-    ret <- nnf_smooth_l1_loss(input, target)
-    if (reduction != "none") {
-      if (reduction == "mean")
-        ret <- torch_mean(ret)
-      else
-        ret <- torch_sum(ret)
-    }
-  } else {
-    expanded <- torch_broadcast_tensors(list(input, target))
-    ret <- torch_smooth_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
-  }
-  
-  ret
+  expanded <- torch_broadcast_tensors(list(input, target))
+  torch_smooth_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
 }
 
 #' Multilabel_margin_loss
@@ -261,6 +259,41 @@ nnf_triplet_margin_loss <- function(anchor, positive, negative, margin = 1, p = 
                                     eps = 1e-6, swap = FALSE, reduction = "mean") {
   torch_triplet_margin_loss(anchor, positive, negative, margin, p, eps, swap,
                             reduction_enum(reduction))
+}
+
+#' Triplet margin with distance loss
+#' 
+#' See [nn_triplet_margin_with_distance_loss()]
+#' 
+#' @inheritParams nnf_triplet_margin_loss
+#' @inheritParams nn_triplet_margin_with_distance_loss
+#'
+#' @export
+nnf_triplet_margin_with_distance_loss <- function(anchor, positive, negative, 
+                                                  distance_function=NULL,
+                                                  margin=1.0, swap=FALSE, 
+                                                  reduction="mean") {
+  if (is.null(distance_function))
+    distance_function <- nnf_pairwise_distance
+  
+  positive_dist <- distance_function(anchor, positive)
+  negative_dist <- distance_function(anchor, negative)
+  
+  if (swap) {
+    swap_dist <- distance_function(positive, negative)
+    negative_dist <- torch_min(negative_dist, swap_dist)
+  }
+  
+  output <- torch_clamp(positive_dist - negative_dist + margin, min=0.0)
+  
+  reduction_enum <- reduction_enum(reduction)
+  
+  if (reduction_enum == 1)
+    return(output$mean())
+  else if (reduction_enum == 2)
+    return(output$sum())
+  else
+    return(output)
 }
 
 #' Ctc_loss
@@ -406,6 +439,7 @@ nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
 #' @export
 nnf_cross_entropy <- function(input, target, weight=NULL, ignore_index=-100, 
                               reduction=c("mean", "sum", "none")) {
+  reduction <- match.arg(reduction)
   torch_nll_loss(self = torch_log_softmax(input, 1), target = target, weight = weight, 
                  reduction = reduction_enum(reduction), ignore_index = ignore_index)
 }
@@ -427,6 +461,7 @@ nnf_cross_entropy <- function(input, target, weight=NULL, ignore_index=-100,
 nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL, 
                                                  reduction = c("mean", "sum", "none"), 
                                                  pos_weight = NULL) {
+  reduction <- match.arg(reduction)
   torch_binary_cross_entropy_with_logits(input, target, weight, pos_weight, 
                                          reduction_enum(reduction))
 }

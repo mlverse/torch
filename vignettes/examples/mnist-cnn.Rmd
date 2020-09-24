@@ -1,9 +1,0 @@
----
-title: mnist-cnn
-type: docs
----
-
-```{r, echo = FALSE}
-knitr::opts_chunk$set(eval = FALSE)
-knitr::spin_child(paste0(rmarkdown::metadata$title, ".R"))
-```

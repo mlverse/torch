@@ -17,7 +17,7 @@ described in \verb{Understanding the difficulty of training deep feedforward neu
 distribution.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_xavier_uniform_(w)
 

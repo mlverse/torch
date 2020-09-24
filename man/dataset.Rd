@@ -4,7 +4,7 @@
 \alias{dataset}
 \title{An abstract class representing a \code{Dataset}.}
 \usage{
-dataset(name = NULL, inherit = Dataset, ...)
+dataset(name = NULL, inherit = Dataset, ..., parent_env = parent.frame())
 }
 \arguments{
 \item{name}{a name for the dataset. It it's also used as the class
@@ -14,6 +14,9 @@ for it.}
 new dataset.}
 
 \item{...}{public methods for the dataset class}
+
+\item{parent_env}{An environment to use as the parent of newly-created
+objects.}
 }
 \description{
 All datasets that represent a map from keys to data samples should subclass

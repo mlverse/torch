@@ -23,7 +23,7 @@ probability \code{p} using samples from a Bernoulli distribution.
 Usually the input comes from \link{nn_conv2d} modules.
 
 As described in the paper
-\href{http://arxiv.org/abs/1411.4280}{Efficient Object Localization Using Convolutional Networks} ,
+\href{https://arxiv.org/abs/1411.4280}{Efficient Object Localization Using Convolutional Networks} ,
 if adjacent pixels within feature maps are strongly correlated
 (as is normally the case in early convolution layers) then i.i.d. dropout
 will not regularize the activations and will otherwise just result
@@ -40,7 +40,7 @@ feature maps and should be used instead.
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 m <- nn_dropout2d(p = 0.2)
 input <- torch_randn(20, 16, 32, 32)
 output <- m(input)

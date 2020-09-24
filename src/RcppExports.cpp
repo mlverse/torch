@@ -22980,7 +22980,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_generator_current_seed
-Rcpp::NumericVector cpp_generator_current_seed(Rcpp::XPtr<XPtrTorchGenerator> generator);
+std::string cpp_generator_current_seed(Rcpp::XPtr<XPtrTorchGenerator> generator);
 RcppExport SEXP _torch_cpp_generator_current_seed(SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -22991,13 +22991,23 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_generator_set_current_seed
-void cpp_generator_set_current_seed(Rcpp::XPtr<XPtrTorchGenerator> generator, std::uint64_t seed);
+void cpp_generator_set_current_seed(Rcpp::XPtr<XPtrTorchGenerator> generator, std::string seed);
 RcppExport SEXP _torch_cpp_generator_set_current_seed(SEXP generatorSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchGenerator> >::type generator(generatorSEXP);
-    Rcpp::traits::input_parameter< std::uint64_t >::type seed(seedSEXP);
+    Rcpp::traits::input_parameter< std::string >::type seed(seedSEXP);
     cpp_generator_set_current_seed(generator, seed);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_manual_seed
+void cpp_torch_manual_seed(std::string seed);
+RcppExport SEXP _torch_cpp_torch_manual_seed(SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type seed(seedSEXP);
+    cpp_torch_manual_seed(seed);
     return R_NilValue;
 END_RCPP
 }
@@ -23416,6 +23426,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_load_state_dict
+Rcpp::List cpp_load_state_dict(std::string path);
+RcppExport SEXP _torch_cpp_load_state_dict(SEXP pathSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type path(pathSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_load_state_dict(path));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_scalar
 Rcpp::XPtr<XPtrTorchScalar> cpp_torch_scalar(SEXP x);
 RcppExport SEXP _torch_cpp_torch_scalar(SEXP xSEXP) {
@@ -23537,8 +23558,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_tensor
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<XPtrTorchTensorOptions> options, bool requires_grad);
-RcppExport SEXP _torch_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP, SEXP requires_gradSEXP) {
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, Rcpp::XPtr<XPtrTorchTensorOptions> options, bool requires_grad, bool is_integer64);
+RcppExport SEXP _torch_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP, SEXP requires_gradSEXP, SEXP is_integer64SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -23546,7 +23567,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::vector<std::int64_t> >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorOptions> >::type options(optionsSEXP);
     Rcpp::traits::input_parameter< bool >::type requires_grad(requires_gradSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor(x, dim, options, requires_grad));
+    Rcpp::traits::input_parameter< bool >::type is_integer64(is_integer64SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor(x, dim, options, requires_grad, is_integer64));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -25488,6 +25510,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_generator", (DL_FUNC) &_torch_cpp_torch_generator, 0},
     {"_torch_cpp_generator_current_seed", (DL_FUNC) &_torch_cpp_generator_current_seed, 1},
     {"_torch_cpp_generator_set_current_seed", (DL_FUNC) &_torch_cpp_generator_set_current_seed, 2},
+    {"_torch_cpp_torch_manual_seed", (DL_FUNC) &_torch_cpp_torch_manual_seed, 1},
     {"_torch_enquos0", (DL_FUNC) &_torch_enquos0, 1},
     {"_torch_evaluate_slices", (DL_FUNC) &_torch_evaluate_slices, 2},
     {"_torch_Tensor_slice", (DL_FUNC) &_torch_Tensor_slice, 4},
@@ -25526,6 +25549,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_reduction_sum", (DL_FUNC) &_torch_cpp_torch_reduction_sum, 0},
     {"_torch_cpp_tensor_save", (DL_FUNC) &_torch_cpp_tensor_save, 1},
     {"_torch_cpp_tensor_load", (DL_FUNC) &_torch_cpp_tensor_load, 1},
+    {"_torch_cpp_load_state_dict", (DL_FUNC) &_torch_cpp_load_state_dict, 1},
     {"_torch_cpp_torch_scalar", (DL_FUNC) &_torch_cpp_torch_scalar, 1},
     {"_torch_cpp_torch_scalar_dtype", (DL_FUNC) &_torch_cpp_torch_scalar_dtype, 1},
     {"_torch_cpp_torch_scalar_to_int", (DL_FUNC) &_torch_cpp_torch_scalar_to_int, 1},
@@ -25537,7 +25561,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_Storage_data_ptr", (DL_FUNC) &_torch_cpp_Storage_data_ptr, 1},
     {"_torch_cpp_torch_tensor_print", (DL_FUNC) &_torch_cpp_torch_tensor_print, 1},
     {"_torch_cpp_torch_tensor_dtype", (DL_FUNC) &_torch_cpp_torch_tensor_dtype, 1},
-    {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 4},
+    {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 5},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
     {"_torch_cpp_tensor_dim", (DL_FUNC) &_torch_cpp_tensor_dim, 1},
     {"_torch_cpp_tensor_numel", (DL_FUNC) &_torch_cpp_tensor_numel, 1},

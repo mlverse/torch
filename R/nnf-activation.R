@@ -727,3 +727,15 @@ nnf_multi_head_attention_forward <- function(
     return(list(attn_output, NULL))
   }
 }
+
+#' Sigmoid
+#'
+#' Applies element-wise \eqn{Sigmoid(x_i) = \frac{1}{1 + exp(-x_i)}}
+#' 
+#' @inheritParams nnf_elu
+#'
+#' @export
+nnf_sigmoid <- function(input) {
+  torch_sigmoid(input)
+}
+

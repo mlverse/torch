@@ -1,5 +1,6 @@
 branch <- "master"
 
+
 install_config <- list(
   "1.5.0" = list(
     "cpu" = list(
@@ -86,6 +87,13 @@ install_path <- function(version = "1.5.0") {
 
 install_exists <- function() {
   dir.exists(install_path())
+}
+
+#' Verifies if torch is installed
+#'
+#' @export
+torch_is_installed <- function() {
+  install_exists()
 }
 
 lib_installed <- function(library_name, install_path) {
@@ -216,6 +224,7 @@ install_type <- function(version) {
 #' @export
 install_torch <- function(version = "1.5.0", type = install_type(version = version), reinstall = FALSE,
                           path = install_path(), ...) {
+  
   if (reinstall) {
     unlink(path, recursive = TRUE)
   }

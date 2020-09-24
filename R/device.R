@@ -62,6 +62,8 @@ Device <- R6::R6Class(
 #' 
 #' A `torch_device` can be constructed via a string or via a string and device ordinal
 #' 
+#' @concept tensor-attributtes
+#' 
 #' @examples
 #' 
 #' # Via string
@@ -78,6 +80,12 @@ torch_device <- function(type, index = NULL) {
   Device$new(type, index)
 }
 
+#' Checks if object is a device
+#' 
+#' @param x object to check
+#' @concept tensor-attributes
+#'
+#' @export
 is_torch_device <- function(x) {
   inherits(x, "torch_device")
 }

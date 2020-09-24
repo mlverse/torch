@@ -13,6 +13,6 @@ test_that("cuda tensors", {
   
   x <- torch_randn(10, 10, device = torch_device("cuda"))
   
-  expect_equal(x$device()$type, "cuda")
-  expect_equal(x$device()$index, 0)
+  expect_equal(x$device$type, "cuda")
+  expect_equal(x$device$index, 0)
 })

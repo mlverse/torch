@@ -641,6 +641,8 @@ NULL
 #' @name torch_einsum
 #'
 #' @examples
+#' 
+#' if (FALSE) {
 #'
 #' x = torch_randn(c(5))
 #' y = torch_randn(c(4))
@@ -658,6 +660,8 @@ NULL
 #' torch_einsum('...ii->...i', list(A)) # batch diagonal
 #' A = torch_randn(c(2, 3, 4, 5))
 #' torch_einsum('...ij->...ji', list(A))$shape # batch permute
+#' 
+#' }
 NULL
 # -> einsum <-
 
@@ -1739,7 +1743,7 @@ NULL
 #'
 #' a = torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
 #' b = torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
-#' torch_tensordot(a, b, dims_self=c(1, 0), dims_other = c(0, 1))
+#' torch_tensordot(a, b, dims = list(c(2, 1), c(1, 2)))
 #' \dontrun{
 #' a = torch_randn(3, 4, 5, device='cuda')
 #' b = torch_randn(4, 5, 6, device='cuda')
@@ -2090,8 +2094,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_result_type(tensor = torch_tensor(c(1, 2), dtype=torch_int()), 1.0)
-#' # torch_result_type(tensor = torch_tensor(c(1, 2), dtype=torch_uint8()), torch_tensor(1))
+#' torch_result_type(tensor1 = torch_tensor(c(1, 2), dtype=torch_int()), tensor2 = 1)
 NULL
 # -> result_type <-
 
@@ -2311,7 +2314,7 @@ NULL
 #' @examples
 #'
 #' src = torch_tensor(matrix(c(4,3,5,6,7,8), ncol = 3, byrow = TRUE))
-#' torch_take(src, torch_tensor(c(0, 2, 5), dtype = torch_int64()))
+#' torch_take(src, torch_tensor(c(1, 2, 5), dtype = torch_int64()))
 NULL
 # -> take <-
 

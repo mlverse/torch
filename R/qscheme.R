@@ -15,7 +15,7 @@ QScheme <- R6::R6Class(
 #' 
 #' @rdname torch_qscheme
 #' @name torch_qscheme
-#' 
+#' @concept tensor-attributes
 NULL
 
 #' @rdname torch_qscheme

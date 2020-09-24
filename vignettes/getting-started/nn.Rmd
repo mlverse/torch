@@ -1,0 +1,97 @@
+---
+title: 'nn: neural networks with torch'
+type: docs
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1")
+)
+```
+
+> Note: This is an R port of the official tutorial available [here](https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py). All credits goes to [Justin Johnson](https://github.com/jcjohnson/pytorch-examples).
+
+```{r setup}
+library(torch)
+```
+
+Computational graphs and autograd are a very powerful paradigm for defining complex operators and automatically taking derivatives; however for large neural networks raw autograd can be a bit too low-level.
+
+When building neural networks we frequently think of arranging the computation into layers, some of which have learnable parameters which will be optimized during learning.
+
+In TensorFlow, packages like Keras, TensorFlow-Slim, and TFLearn provide higher-level abstractions over raw computational graphs that are useful for building neural networks.
+
+In torch, the nn functionality serves this same purpose. The nn feature defines a set of Modules, which are roughly equivalent to neural network layers. A Module receives input Tensors and computes output Tensors, but may also hold internal state such as Tensors containing learnable parameters. The nn collection also defines a set of useful loss functions that are commonly used when training neural networks.
+
+In this example we use nn to implement our two-layer network:
+
+```{r}
+if (cuda_is_available()) {
+   device <- torch_device("cuda")
+} else {
+   device <- torch_device("cpu")
+}
+   
+# N is batch size; D_in is input dimension;
+# H is hidden dimension; D_out is output dimension.
+N <- 64
+D_in <- 1000
+H <- 100
+D_out <- 10
+
+# Create random input and output data
+# Setting requires_grad=FALSE (the default) indicates that we do not need to 
+# compute gradients with respect to these Tensors during the backward pass.
+x <- torch_randn(N, D_in, device=device)
+y <- torch_randn(N, D_out, device=device)
+
+# Use the nn package to define our model as a sequence of layers. nn_sequential
+# is a Module which contains other Modules, and applies them in sequence to
+# produce its output. Each Linear Module computes output from input using a
+# linear function, and holds internal Tensors for its weight and bias.
+model <- nn_sequential(
+    nn_linear(D_in, H),
+    nn_relu(),
+    nn_linear(H, D_out)
+)
+
+# The nn package also contains definitions of popular loss functions; in this
+# case we will use Mean Squared Error (MSE) as our loss function.
+loss_fn <- nnf_mse_loss
+
+learning_rate <- 1e-6
+for (t in seq_len(500)) {
+   # Forward pass: compute predicted y by passing x to the model. Module objects
+   # can be called like functions. When doing so you pass a Tensor of input
+   # data to the Module and it produces a Tensor of output data.
+   y_pred <- model(x)
+   
+   # Compute and print loss. We pass Tensors containing the predicted and true
+   # values of y, and the loss function returns a Tensor containing the
+   # loss.
+   loss <- loss_fn(y_pred, y)
+   if (t %% 100 == 0 || t == 1)
+      cat("Step:", t, ":", as.numeric(loss), "\n")
+   
+   # Zero the gradients before running the backward pass.
+   model$zero_grad()
+
+   # Backward pass: compute gradient of the loss with respect to all the learnable
+   # parameters of the model. Internally, the parameters of each Module are stored
+   # in Tensors with requires_grad=TRUE, so this call will compute gradients for
+   # all learnable parameters in the model.
+   loss$backward()
+   
+   # Update the weights using gradient descent. Each parameter is a Tensor, so
+   # we can access its gradients like we did before.
+   with_no_grad({
+      for (param in model$parameters) {
+         param$sub_(learning_rate * param$grad)
+      }
+   })
+}
+```
+
+In the [next example](optim.html) we will learn how to use optimizers implemented in torch.

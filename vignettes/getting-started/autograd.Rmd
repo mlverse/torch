@@ -1,0 +1,181 @@
+---
+title: 'Autograd: automatic differentiation'
+type: docs
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1")
+)
+```
+
+> Note: This is an R port of the official tutorial available [here](https://pytorch.org/tutorials/beginner/blitz/tensor_tutorial.html#sphx-glr-beginner-blitz-tensor-tutorial-py). All credits goes to [Soumith Chintala](http://soumith.ch/).
+
+```{r setup}
+library(torch)
+```
+
+Central to all neural networks in torch is the autograd functionality. Let's first briefly visit this, and we will then go to training our first neural network.
+
+Autograd provides automatic differentiation for all operations on Tensors. It is a define-by-run framework, which means that your backprop is defined by how your code is run, and that every single iteration can be different.
+
+Let us see this in more simple terms with some examples.
+
+## Tensor
+
+`torch_tensor` is the central class of the package. If you set its attribute `$requires_grad` as `TRUE`, it starts to track all operations on it. When you finish your computation you can call `$backward()` and have all the gradients computed automatically. The gradient for this tensor will be accumulated into `$grad` attribute.
+
+To stop a tensor from tracking history, you can call `$detach()` to detach it from the computation history, and to prevent future computation from being tracked.
+
+To prevent tracking history (and using memory), you can also wrap the code block in `with_no_grad({<code>})`. This can be particularly helpful when evaluating a model because the model may have trainable parameters with `requires_grad=TRUE`, but for which we don't need the gradients.
+
+There's one more class which is very important for autograd implementation - a `autograd_function`.
+
+Tensor and Function are interconnected and build up an acyclic graph, that encodes a complete history of computation. Each tensor has a `$grad_fn` attribute that references an `autograd_function` that has created the Tensor (except for Tensors created by the user - their `grad_fn` is `NULL`).
+
+If you want to compute the derivatives, you can call `$backward()` on a Tensor. If Tensor is a scalar (i.e. it holds a one element data), you don't need to specify any arguments to `backward()`, however if it has more elements, you need to specify a gradient argument that is a tensor of matching shape.
+
+Create a tensor and set `requires_grad=TRUE` to track computation with it:
+
+```{r}
+x <- torch_ones(2, 2, requires_grad = TRUE)
+x
+```
+
+Do a tensor operation:
+
+```{r}
+y <- x + 2
+y
+```
+
+`y` was created as a result of an operation, so it has a `grad_fn`.
+
+```{r}
+y$grad_fn
+```
+
+Do more operations on `y`
+
+```{r}
+z <- y * y * 3
+z
+out <- z$mean()
+out
+```
+
+`$requires_grad_( ... )` changes an existing Tensor's `requires_grad` flag in-place. The input flag defaults to `FALSE` if not given.
+
+```{r}
+a <- torch_randn(2, 2)
+a <- (a * 3) / (a - 1)
+a$requires_grad
+a$requires_grad_(TRUE)
+a$requires_grad
+b <- (a * a)$sum()
+b$grad_fn
+```
+
+## Gradients
+
+Let's backprop now. Because out contains a single scalar, `out$backward()` is equivalent to `out$backward(torch.tensor(1.))`.
+
+```{r}
+out$backward()
+```
+
+Print gradients d(out)/dx
+
+```{r}
+x$grad
+```
+
+You should have got a matrix of `4.5`. Let's call the `out` *Tensor* $o$.
+
+We have that $o = \frac{1}{4}\sum_i z_i$, $z_i = 3(x_i+2)^2$ and $z_i\bigr\rvert_{x_i=1} = 27$. Therefore, $\frac{\partial o}{\partial x_i} = \frac{3}{2}(x_i+2)$, hence $\frac{\partial o}{\partial x_i}\bigr\rvert_{x_i=1} = \frac{9}{2} = 4.5$.
+
+Mathematically, if you have a vector valued function $\vec{y}=f(\vec{x})$,
+then the gradient of $\vec{y}$ with respect to $\vec{x}$
+is a Jacobian matrix:
+
+$$
+  J=\left(\begin{array}{ccc}
+   \frac{\partial y_{1}}{\partial x_{1}} & \cdots & \frac{\partial y_{1}}{\partial x_{n}}\\
+   \vdots & \ddots & \vdots\\
+   \frac{\partial y_{m}}{\partial x_{1}} & \cdots & \frac{\partial y_{m}}{\partial x_{n}}
+   \end{array}\right)
+$$
+
+Generally speaking, `autograd` is an engine for computing
+vector-Jacobian product. That is, given any vector
+$v=\left(\begin{array}{cccc} v_{1} & v_{2} & \cdots & v_{m}\end{array}\right)^{T}$,
+compute the product $v^{T}\cdot J$. If $v$ happens to be
+the gradient of a scalar function $l=g\left(\vec{y}\right)$,
+that is,
+$v=\left(\begin{array}{ccc}\frac{\partial l}{\partial y_{1}} & \cdots & \frac{\partial l}{\partial y_{m}}\end{array}\right)^{T}$,
+then by the chain rule, the vector-Jacobian product would be the
+gradient of $l$ with respect to $\vec{x}$:
+
+$$
+  J^{T}\cdot v=\left(\begin{array}{ccc}
+   \frac{\partial y_{1}}{\partial x_{1}} & \cdots & \frac{\partial y_{m}}{\partial x_{1}}\\
+   \vdots & \ddots & \vdots\\
+   \frac{\partial y_{1}}{\partial x_{n}} & \cdots & \frac{\partial y_{m}}{\partial x_{n}}
+   \end{array}\right)\left(\begin{array}{c}
+   \frac{\partial l}{\partial y_{1}}\\
+   \vdots\\
+   \frac{\partial l}{\partial y_{m}}
+   \end{array}\right)=\left(\begin{array}{c}
+   \frac{\partial l}{\partial x_{1}}\\
+   \vdots\\
+   \frac{\partial l}{\partial x_{n}}
+   \end{array}\right)
+$$
+
+(Note that $v^{T}\cdot J$ gives a row vector which can be
+treated as a column vector by taking $J^{T}\cdot v$.)
+
+This characteristic of vector-Jacobian product makes it very
+convenient to feed external gradients into a model that has
+non-scalar output.
+
+Now let's take a look at an example of vector-Jacobian product:
+
+```{r}
+x <- torch_randn(3, requires_grad=TRUE)
+y <- 100 * x
+y
+```
+
+Now in this case y is no longer a scalar. `autograd` could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:
+
+```{r}
+v <- torch_tensor(c(0.1, 1.0, 0.0001))
+y$backward(v)
+
+x$grad
+```
+
+You can also stop autograd from tracking history on Tensors with `$requires_grad=TRUE` either by wrapping the code block in with `with_no_grad()`:
+
+```{r}
+x$requires_grad
+(x ** 2)$requires_grad
+
+with_no_grad({
+  print((x ** 2)$requires_grad)
+})
+```
+
+```{r}
+x$requires_grad
+y <- x$detach()
+y$requires_grad
+x$eq(y)$all()
+```
+
+Read Later:
+
+Document about `help(autograd_function)`, `vignette("using-autograd")`, `vignette("extending-autograd")`.

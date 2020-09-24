@@ -18,7 +18,7 @@ layers, where as many input channels are preserved as possible. In case
 of groups>1, each group of channels preserves identity.
 }
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 \dontrun{
 w <- torch_empty(3, 16, 5, 5)
 nn_init_dirac_(w)

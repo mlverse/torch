@@ -11,8 +11,12 @@ globalVariables(c("..", "self", "private", "N"))
 
 .onLoad <- function(libname, pkgname){
   install_success <- TRUE
+  autoinstall <- interactive() ||
+                 "JPY_PARENT_PID" %in% names(Sys.getenv()) ||
+                 identical(getOption("jupyter.in_kernel"), TRUE)
+  
   if (!install_exists() && Sys.getenv("TORCH_INSTALL", unset = 2) != 0 && 
-      (interactive() || Sys.getenv("TORCH_INSTALL", unset = 2) == "1")) {
+      (autoinstall || Sys.getenv("TORCH_INSTALL", unset = 2) == "1")) {
     install_success <- tryCatch({
       install_torch()
       TRUE
@@ -38,6 +42,4 @@ globalVariables(c("..", "self", "private", "N"))
 .onUnload <- function(libpath) {
   
 }
-
-
 

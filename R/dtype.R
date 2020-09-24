@@ -6,7 +6,10 @@ torch_dtype <- R6::R6Class(
       self$ptr <- ptr
     },
     print = function() {
-      cat("torch_", cpp_dtype_to_string(self$ptr), sep = "")
+      cat("torch_", self$.type(), "\n", sep = "")
+    },
+    .type = function() {
+      cpp_dtype_to_string(self$ptr)
     }
   ),
   active = list(
@@ -54,6 +57,7 @@ dtype_from_string <- function(str) {
 #' 
 #' @name torch_dtype
 #' @rdname torch_dtype
+#' @concept tensor-attributes
 #'
 NULL
 
@@ -130,6 +134,7 @@ torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
 #' Check if object is a torch data type
 #' 
 #' @param x object to check.
+#' @concept tensor-attributes
 #' 
 #' @export
 is_torch_dtype <- function(x) {
@@ -142,6 +147,7 @@ is_torch_dtype <- function(x) {
 #'   `torch_float()`.
 #' 
 #' @rdname default_dtype
+#' @concept tensor-attributes
 #'
 #' @export
 torch_set_default_dtype <- function(d) {
@@ -149,6 +155,7 @@ torch_set_default_dtype <- function(d) {
 }
 
 #' @rdname default_dtype
+#' @concept tensor-attributes
 #' @export
 torch_get_default_dtype <- function() {
   torch_dtype$new(cpp_get_default_dtype())

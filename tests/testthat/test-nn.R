@@ -117,8 +117,8 @@ test_that("to", {
   net <- nn_linear(10, 10)
   net$to(dtype = torch_double())
   
-  expect_true(net$weight$dtype() == torch_double())
-  expect_true(net$bias$dtype() == torch_double())
+  expect_true(net$weight$dtype == torch_double())
+  expect_true(net$bias$dtype == torch_double())
   
   
   Net <- nn_module(
@@ -140,20 +140,20 @@ test_that("to", {
   
   net$to(dtype = torch_double())
   
-  expect_true(net$linear$weight$dtype() == torch_double())
-  expect_true(net$linear$bias$dtype() == torch_double())
-  expect_true(net$norm$running_mean$dtype() == torch_double())
-  expect_true(net$norm$running_var$dtype() == torch_double())
-  expect_true(net$linear$weight$grad$dtype() == torch_double())
+  expect_true(net$linear$weight$dtype == torch_double())
+  expect_true(net$linear$bias$dtype == torch_double())
+  expect_true(net$norm$running_mean$dtype == torch_double())
+  expect_true(net$norm$running_var$dtype == torch_double())
+  expect_true(net$linear$weight$grad$dtype == torch_double())
   
   skip_if_cuda_not_available()
   net$cuda()
-  expect_equal(net$linear$weight$device()$type, "cuda")
-  expect_equal(net$linear$bias$device()$type, "cuda")
+  expect_equal(net$linear$weight$device$type, "cuda")
+  expect_equal(net$linear$bias$device$type, "cuda")
   
   net$cpu()
-  expect_equal(net$linear$weight$device()$type, "cpu")
-  expect_equal(net$linear$bias$device()$type,"cpu")
+  expect_equal(net$linear$weight$device$type, "cpu")
+  expect_equal(net$linear$bias$device$type,"cpu")
   
 })
 
@@ -191,7 +191,7 @@ test_that("state_dict for modules", {
   expect_equal_to_tensor(s[[6]], net$norm$running_var)
   
   
-  s <- s[-7]
+  s <- s[-6]
   expect_error(net2$load_state_dict(s), class = "value_error")
   
 })
@@ -292,5 +292,54 @@ test_that("moodule$apply", {
   
   expect_equal_to_tensor(net$linear$weight, torch_zeros_like(net$linear$weight))
   expect_equal_to_tensor(net$norm$weight, torch_zeros_like(net$norm$weight))
+  
+})
+
+test_that("$<-  works for instances", {
+  
+  m <- nn_module(
+    initialize = function() {
+      self$mymodule <- nn_linear(10, 10)
+      self$n <- nn_linear(15, 15)
+    }
+  )
+  
+  model <- m()
+  expect_s3_class(model, "nn_module")
+  model$mymodule <- nn_linear(2,2)
+  expect_s3_class(model, "nn_module")
+  expect_equal(model$mymodule$out_feature, 2)
+  model$new_module <- nn_linear(5,5)
+  expect_s3_class(model, "nn_module")
+  
+  pars <- model$parameters
+  expect_length(pars, 6)
+  expect_tensor_shape(pars$mymodule.weight, c(2,2))
+  expect_tensor_shape(pars$new_module.weight, c(5,5))
+
+})
+
+test_that("[[<- works for instances", {
+  
+  m <- nn_module(
+    initialize = function() {
+      self$mymodule <- nn_linear(10, 10)
+      self$n <- nn_linear(15, 15)
+    }
+  )
+  
+  model <- m()
+  expect_s3_class(model, "nn_module")
+  model[["mymodule"]] <- nn_linear(2,2)
+  expect_s3_class(model, "nn_module")
+  expect_equal(model$mymodule$out_feature, 2)
+  model[["new_module"]] <- nn_linear(5,5)
+  expect_s3_class(model, "nn_module")
+  
+  pars <- model$parameters
+  expect_length(pars, 6)
+  expect_tensor_shape(pars$mymodule.weight, c(2,2))
+  expect_tensor_shape(pars$new_module.weight, c(5,5))
+  
   
 })

@@ -14,7 +14,7 @@ nn_Module <- R6::R6Class(
     add_module = function(name, module) {
       
       if (is.numeric(name))
-        name <- paste0("m", name)
+        name <- as.character(name)
       
       private$modules_[[name]] <- module
     },
@@ -223,6 +223,15 @@ nn_Module <- R6::R6Class(
   )
 )
 
+#' Creates an `nn_parameter`
+#' 
+#' Indicates to nn_module that `x` is a parameter
+#' 
+#' @param x the tensor that you want to indicate as parameter
+#' @param requires_grad whether this parameter should  have 
+#'   `requires_grad = TRUE`
+#' 
+#' @export
 nn_parameter <- function(x, requires_grad = TRUE) {
   if (!is_torch_tensor(x))
     stop("`x` must be a tensor.")
@@ -231,22 +240,45 @@ nn_parameter <- function(x, requires_grad = TRUE) {
   x
 }
 
+#' Checks if an object is a nn_parameter
+#' 
+#' @param x the object to check
+#'
+#' @export
 is_nn_parameter <- function(x) {
   inherits(x, "nn_parameter")
 }
 
+#' Creates a nn_buffer
+#' 
+#' Indicates that a tensor is a buffer in a nn_module
+#'
+#' @param x the tensor that will be converted to nn_buffer
+#' @param persistent whether the buffer should be persistent or not.
+#' 
+#' @export
 nn_buffer <- function(x, persistent = TRUE) {
   class(x) <- c(class(x), "nn_buffer")
   attr(x, "persistent") <- persistent
   x
 }
 
+#' Checks if the object is a nn_buffer
+#' 
+#' @param x object to check
+#'
+#' @export
 is_nn_buffer <- function(x) {
   inherits(x, "nn_buffer")
 }
 
+#' Checks if the object is an nn_module
+#'
+#' @param x object to check
+#'
+#' @export
 is_nn_module <- function(x) {
-  inherits(x, "nn_module")
+  inherits(x, "nn_module") && !inherits(x, "nn_module_generator")
 }
 
 #' Base class for all neural network modules.
@@ -259,6 +291,7 @@ is_nn_module <- function(x) {
 #' @param classname an optional name for the module
 #' @param inherit an optional module to inherit from
 #' @param ... methods implementation 
+#' @param parent_env passed to [R6::R6Class()].
 #' 
 #' @examples 
 #' model <- nn_module(
@@ -276,10 +309,14 @@ is_nn_module <- function(x) {
 #' )
 #' 
 #' @export
-nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
+nn_module <- function(classname = NULL, inherit = nn_Module, ..., 
+                      parent_env = parent.frame()) {
   
   if (inherits(inherit, "nn_module"))
     inherit <- attr(inherit, "module")
+  
+  e <- new.env(parent = parent_env)
+  e$inherit <- inherit
     
   classes <- c(classname, "nn_module")
   
@@ -290,7 +327,8 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
     public = list(
       .classes = classes,
       ...
-    )
+    ),
+    parent_env = e
   )
   
   init <- get_init(Module)
@@ -302,7 +340,7 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...) {
       create_nn_module_callable(instance)
     })
   )
-  attr(fun, "class") <- classes
+  attr(fun, "class") <- c(classes, "nn_module_generator")
   attr(fun, "module") <- Module
   fun
 }
@@ -364,6 +402,7 @@ create_nn_module_callable <- function(instance) {
 
 #' @export
 `[[<-.nn_Module` <- function(x, name, value) {
+
   if (inherits(value, "nn_parameter")) {
     x$register_parameter(name, value)
   } else if (inherits(value, "nn_buffer")) {
@@ -382,6 +421,15 @@ create_nn_module_callable <- function(instance) {
   x[[name]] <- value
   invisible(x)
 }
+
+#' @export
+`$<-.nn_module` <- function(x, name, value) {
+  attr(x, "module")[[name]] <- value
+  invisible(x)
+}
+
+#' @export
+`[[<-.nn_module` <- `$<-.nn_module`
 
 #' @export
 names.nn_module <- function(x, ...) {
@@ -420,9 +468,9 @@ nn_sequential <- function(... , name = NULL) {
   module <- nn_module(
     classname = ifelse(is.null(name), "nn_sequential", name),
     initialize = function(...) {
-      modules <- list(...)
+      modules <- rlang::list2(...)
       for (i in seq_along(modules)) {
-        self$add_module(name = i, module = modules[[i]])  
+        self$add_module(name = i - 1, module = modules[[i]])  
       }
     },
     forward = function(input) {

@@ -21,4 +21,5 @@ term storage.
 Other torch_save: 
 \code{\link{torch_load}()}
 }
+\concept{serialization}
 \concept{torch_save}

@@ -75,7 +75,7 @@ on \verb{(N, H, W)} slices, it's common terminology to call this Spatial Batch N
 }
 
 \examples{
-\dontrun{
+if (torch_is_installed()) {
 # With Learnable Parameters
 m <- nn_batch_norm2d(100)
 # Without Learnable Parameters

@@ -17,3 +17,5 @@ test.html
 lantern/.idea*
 lantern/cmake-build*
 check/
+docs/
+public
