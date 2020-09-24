@@ -59,6 +59,11 @@ navbar:
        href: articles/extending-autograd.html
   examples:
     text: Examples
+    menu:
+      - text: basic-autograd
+        href: articles/examples/basic-autograd.html
+      - text: basic-nn-module
+        href: articles/examples/basic-nn-module.html
     
    
 reference:  
@@ -109,6 +114,9 @@ reference:
   - title: Neural network modules
     contents:
       - starts_with("nn_")
+      - is_nn_module
+      - is_nn_parameter
+      - is_nn_buffer
   - title: Neural networks functional module
     contents:
       - starts_with("nnf_")

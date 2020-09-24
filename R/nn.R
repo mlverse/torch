@@ -223,6 +223,15 @@ nn_Module <- R6::R6Class(
   )
 )
 
+#' Creates an `nn_parameter`
+#' 
+#' Indicates to nn_module that `x` is a parameter
+#' 
+#' @param x the tensor that you want to indicate as parameter
+#' @param requires_grad whether this parameter should  have 
+#'   `requires_grad = TRUE`
+#' 
+#' @export
 nn_parameter <- function(x, requires_grad = TRUE) {
   if (!is_torch_tensor(x))
     stop("`x` must be a tensor.")
@@ -231,20 +240,43 @@ nn_parameter <- function(x, requires_grad = TRUE) {
   x
 }
 
+#' Checks if an object is a nn_parameter
+#' 
+#' @param x the object to check
+#'
+#' @export
 is_nn_parameter <- function(x) {
   inherits(x, "nn_parameter")
 }
 
+#' Creates a nn_buffer
+#' 
+#' Indicates that a tensor is a buffer in a nn_module
+#'
+#' @param x the tensor that will be converted to nn_buffer
+#' @param persistent whether the buffer should be persistent or not.
+#' 
+#' @export
 nn_buffer <- function(x, persistent = TRUE) {
   class(x) <- c(class(x), "nn_buffer")
   attr(x, "persistent") <- persistent
   x
 }
 
+#' Checks if the object is a nn_buffer
+#' 
+#' @param x object to check
+#'
+#' @export
 is_nn_buffer <- function(x) {
   inherits(x, "nn_buffer")
 }
 
+#' Checks if the object is an nn_module
+#'
+#' @param x object to check
+#'
+#' @export
 is_nn_module <- function(x) {
   inherits(x, "nn_module") && !inherits(x, "nn_module_generator")
 }
