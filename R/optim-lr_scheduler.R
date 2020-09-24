@@ -162,9 +162,8 @@ lr_scheduler <- function(classname = NULL, inherit = LRScheduler, ...,
 #' # Assuming optimizer has two groups.
 #' lambda1 <- function(epoch) epoch %/% 30
 #' lambda2 <- function(epoch) 0.95^epoch
-#' scheduler <- lr_lambda(optimizer, lr_lambda = list(lambda1, lambda2))
-#' 
 #' \dontrun{
+#' scheduler <- lr_lambda(optimizer, lr_lambda = list(lambda1, lambda2))
 #' for (epoch in 1:100) {
 #'   train(...)
 #'   validate(...)
@@ -208,3 +207,65 @@ lr_lambda <- lr_scheduler(
     lrs
   }
 )
+
+#' Multiply the learning rate of each parameter group by the factor given
+#' in the specified function. When last_epoch=-1, sets initial lr as lr.
+#' 
+#' @param optimizer (Optimizer): Wrapped optimizer.
+#' @param lr_lambda (function or list): A function which computes a multiplicative
+#'   factor given an integer parameter epoch, or a list of such
+#'   functions, one for each group in optimizer.param_groups.
+#' @param last_epoch (int): The index of last epoch. Default: -1.
+#' @param verbose (bool): If `TRUE`, prints a message to stdout for
+#'   each update. Default: `FALSE`.
+#' 
+#' @examples
+#' \dontrun{
+#' lmbda <- function(epoch) 0.95
+#' scheduler <- lr_multiplicative(optimizer, lr_lambda=lmbda)
+#' for (epoch in 1:100) {
+#'   train(...)
+#'   validate(...)
+#'   scheduler$step()
+#' }
+#' }
+#' 
+#' @export
+lr_multiplicative <- lr_scheduler(
+  "lr_multiplicative",
+  initialize = function(optimizer, lr_lambda, last_epoch=-1, verbose=FALSE) {
+    self$optimizer <- optimizer
+    
+    if (!is.list(lr_lambda)) {
+      self$lr_lambdas <- lapply(
+        seq_along(optimizer$param_groups), 
+        function(i) lr_lambda
+      )
+    } else {
+      
+      if (length(lr_lambda) != length(optimizer$param_groups)) {
+        i <- length(lr_lambda)
+        j <- length(optimizer$param_groups)
+        value_error("lr_lambda length ({i}) is different from the number of",
+                    "optimizer$param_grpups ({j})")
+      }
+      
+      self$lr_lambdas <- lr_lambda
+    }
+    
+    super$initialize(optimizer, last_epoch, verbose)
+  },
+  
+  get_lr = function() {
+    if (self$last_epoch > 0) {
+      lrs <- numeric(length = length(self$optimizer$param_groups))
+      for (i in seq_along(self$optimizer$param_groups)) {
+        lrs[i] <- self$optimizer$param_groups[[i]]$lr * self$lr_lambdas[[i]](self$last_epoch)
+      }
+    } else {
+      lrs <- as.numeric(self$base_lrs)
+    }
+    lrs
+  }
+)
+
