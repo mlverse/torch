@@ -1,0 +1,17 @@
+---
+title: Examples
+type: docs
+---
+
+Gallery of scripts demonstrating `torch` functionality.
+
+```{r, results='asis', echo=FALSE}
+files <- list.files(pattern = "*.R$")
+files <- gsub("\\.R$", "", files)
+
+o <- data.frame(
+  `Examples` = paste0("[", files, "]", "(../../articles/examples/", files, ".html)")
+)
+knitr::kable(o)
+```
+
