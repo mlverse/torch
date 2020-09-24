@@ -49,6 +49,8 @@ navbar:
        href: articles/indexing.html
      - text: Tensor class
        href: articles/tensor/index.html
+     - text: Serialization
+       href: articles/serialization.html
      - text: Datasets
      - text: Loading Data
        href: articles/loading-data.html
