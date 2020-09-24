@@ -172,7 +172,21 @@ is set to True." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -247,20 +261,20 @@ elements in the tuple are Tensor, IntTensor. Default: NULL</p></td>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.1255  0.3696 -1.2496
-#&gt;  -0.3466  0.6368 -1.1585
-#&gt;  -0.8185 -0.7691 -0.6777
+#&gt;  -1.0415  0.5657 -1.3341
+#&gt;  -0.7839 -0.6255 -1.5650
+#&gt;  -0.4778 -0.9782 -2.5533
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   2.0056  0.7354  1.8474
-#&gt;  -0.7516  1.0749 -0.2449
-#&gt;   0.1240  0.3646  0.0197
+#&gt;  -1.1037  2.4055  1.4069
+#&gt;   0.5848 -1.4941 -0.4386
+#&gt;  -0.3931 -0.2834 -0.2516
 #&gt; [ CPUFloatType{2,3,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
+#&gt;  3  2  3
 #&gt;  1  2  3
-#&gt;  2  3  3
 #&gt; [ CPUIntType{2,3} ]
 #&gt; </div></pre>
   </div>

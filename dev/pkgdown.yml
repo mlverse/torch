@@ -2,6 +2,9 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  examples/basic-autograd: basic-autograd.html
+  examples/basic-nn-module: basic-nn-module.html
+  examples/index: index.html
   extending-autograd: extending-autograd.html
   getting-started/autograd: autograd.html
   getting-started/control-flow-and-weight-sharing: control-flow-and-weight-sharing.html
@@ -19,5 +22,5 @@ articles:
   tensor/index: index.html
   tensor-creation: tensor-creation.html
   using-autograd: using-autograd.html
-last_built: 2020-09-23T22:05Z
+last_built: 2020-09-24T03:26Z
 

@@ -170,7 +170,21 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -307,10 +321,10 @@ certainly fail the check.</p>
 <span class='fu'>torch_irfft</span>(<span class='kw'>y</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>, signal_sizes=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span>
 }
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4427  0.5148 -0.2419  0.3184  0.2944
-#&gt;  0.4814 -0.5671  0.0285  0.8929 -1.5100
-#&gt; -1.3605  1.4895 -0.0685 -0.3001  1.0605
-#&gt; -0.5427 -0.3705  0.0252  2.8527  0.9130
+#&gt; -1.5021  0.8507  0.7746  1.7480  0.9348
+#&gt; -0.5051  0.6296 -0.0140 -0.7513  1.5027
+#&gt;  0.5290 -1.4090  0.1505  0.3519 -0.3070
+#&gt;  0.7162 -1.5112 -1.3159 -0.5325  1.2648
 #&gt; [ CPUFloatType{4,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

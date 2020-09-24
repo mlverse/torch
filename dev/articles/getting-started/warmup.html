@@ -125,7 +125,21 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../../reference/index.html">Reference</a>
 </li>
@@ -212,12 +226,12 @@
    <span class="kw">w1</span> <span class="op">&lt;-</span> <span class="kw">w1</span> <span class="op">-</span> <span class="kw">learning_rate</span> <span class="op">*</span> <span class="kw">grad_w1</span>
    <span class="kw">w2</span> <span class="op">&lt;-</span> <span class="kw">w2</span> <span class="op">-</span> <span class="kw">learning_rate</span> <span class="op">*</span> <span class="kw">grad_w2</span>
 }
-<span class="co">#&gt; Step: 1 : 30199005 </span>
-<span class="co">#&gt; Step: 100 : 571.4024 </span>
-<span class="co">#&gt; Step: 200 : 2.310761 </span>
-<span class="co">#&gt; Step: 300 : 0.01526588 </span>
-<span class="co">#&gt; Step: 400 : 0.0001221218 </span>
-<span class="co">#&gt; Step: 500 : 1.081552e-06</span>
+<span class="co">#&gt; Step: 1 : 25691444 </span>
+<span class="co">#&gt; Step: 100 : 552.6609 </span>
+<span class="co">#&gt; Step: 200 : 3.047923 </span>
+<span class="co">#&gt; Step: 300 : 0.02882251 </span>
+<span class="co">#&gt; Step: 400 : 0.00031811 </span>
+<span class="co">#&gt; Step: 500 : 3.73379e-06</span>
 </pre></div>
 <p>In the <a href="tensors.html">next example</a> we will replace the R array for a torch Tensor.</p>
   </div>

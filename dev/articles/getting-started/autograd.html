@@ -125,7 +125,21 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../../reference/index.html">Reference</a>
 </li>
@@ -226,8 +240,8 @@
 <span class="co">#&gt; [1] FALSE</span>
 <span class="kw">a</span><span class="op">$</span><span class="fu">requires_grad_</span>(<span class="fl">TRUE</span>)
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.1950 -5.1116</span>
-<span class="co">#&gt;  1.8140 -4.0800</span>
+<span class="co">#&gt;  -4.0095  -2.1961</span>
+<span class="co">#&gt;  10.4135   1.6437</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="kw">a</span><span class="op">$</span><span class="kw">requires_grad</span>
 <span class="co">#&gt; [1] TRUE</span>
@@ -285,9 +299,9 @@
 <span class="kw">y</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="kw">x</span>
 <span class="kw">y</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;   91.9819</span>
-<span class="co">#&gt;  139.0082</span>
-<span class="co">#&gt;   14.6078</span>
+<span class="co">#&gt;  -30.5589</span>
+<span class="co">#&gt;  -19.9600</span>
+<span class="co">#&gt;  137.5936</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span>
 </pre></div>
 <p>Now in this case y is no longer a scalar. <code>autograd</code> could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:</p>
