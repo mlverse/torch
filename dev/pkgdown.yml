@@ -4,6 +4,7 @@ pkgdown_sha: ~
 articles:
   examples/basic-autograd: basic-autograd.html
   examples/basic-nn-module: basic-nn-module.html
+  examples/dataset: dataset.html
   examples/index: index.html
   extending-autograd: extending-autograd.html
   getting-started/autograd: autograd.html
@@ -23,5 +24,5 @@ articles:
   tensor/index: index.html
   tensor-creation: tensor-creation.html
   using-autograd: using-autograd.html
-last_built: 2020-09-24T19:24Z
+last_built: 2020-09-24T20:17Z
 

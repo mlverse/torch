@@ -141,6 +141,9 @@
     <li>
       <a href="../../articles/examples/basic-nn-module.html">basic-nn-module</a>
     </li>
+    <li>
+      <a href="../../articles/examples/dataset.html">dataset</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -243,8 +246,8 @@
 <span class="co">#&gt; [1] FALSE</span>
 <span class="kw">a</span><span class="op">$</span><span class="fu">requires_grad_</span>(<span class="fl">TRUE</span>)
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;   6.8630  -0.5176</span>
-<span class="co">#&gt;  36.0913   0.6835</span>
+<span class="co">#&gt; -1.5742  1.2706</span>
+<span class="co">#&gt; -8.5013  1.5199</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="kw">a</span><span class="op">$</span><span class="kw">requires_grad</span>
 <span class="co">#&gt; [1] TRUE</span>
@@ -302,9 +305,9 @@
 <span class="kw">y</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="kw">x</span>
 <span class="kw">y</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -157.5482</span>
-<span class="co">#&gt;   97.0496</span>
-<span class="co">#&gt;   61.6614</span>
+<span class="co">#&gt; -41.0022</span>
+<span class="co">#&gt; -80.3582</span>
+<span class="co">#&gt; -81.3425</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span>
 </pre></div>
 <p>Now in this case y is no longer a scalar. <code>autograd</code> could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:</p>
