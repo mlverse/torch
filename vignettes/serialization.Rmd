@@ -75,7 +75,7 @@ Currently the only way to load models from python is to rewrite the model archit
 
 You can then save the PyTorch model state_dict using:
 
-```{python eval = FALSE}
+```
 torch.save(model, fpath, _use_new_zipfile_serialization=True)
 ```
 
