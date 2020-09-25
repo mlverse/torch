@@ -126,6 +126,10 @@ reference:
   - title: Optimizers
     contents:
       - starts_with("optim_")
+      - is_optimizer
+  - title: Learning rate schedulers
+    contents:
+      - starts_with("lr_")
   - title: Datasets
     contents: 
       - starts_with("dataset")
