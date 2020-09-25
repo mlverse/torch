@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>basic-nn-module • torch</title>
+<title>dataset • torch</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../../bootstrap-toc.css">
 <script src="../../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
-<meta property="og:title" content="basic-nn-module">
+<meta property="og:title" content="dataset">
 <meta property="og:description" content="torch">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -173,7 +173,7 @@
       </header><script src="dataset_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>basic-nn-module</h1>
+      <h1 data-toc-skip>dataset</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/examples/dataset.Rmd"><code>vignettes/examples/dataset.Rmd</code></a></small>
@@ -186,83 +186,100 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
 
-<span class="co"># creates example tensors. x requires_grad = TRUE tells that </span>
-<span class="co"># we are going to take derivatives over it.</span>
-<span class="kw">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span>(
-  clasname = <span class="st">"dense"</span>,
-  <span class="co"># the initialize function tuns whenever we instantiate the model</span>
-  initialize = <span class="fu">function</span>(<span class="kw">in_features</span>, <span class="kw">out_features</span>) {
-    
-    <span class="co"># just for you to see when this function is called</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Calling initialize!"</span>) 
-    
-    <span class="co"># we use nn_parameter to indicate that those tensors are special</span>
-    <span class="co"># and should be treated as parameters by `nn_module`.</span>
-    <span class="kw">self</span><span class="op">$</span><span class="kw">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span>(<span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="kw">in_features</span>, <span class="kw">out_features</span>))
-    <span class="kw">self</span><span class="op">$</span><span class="kw">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span>(<span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span>(<span class="kw">out_features</span>))
-    
+<span class="co"># In deep learning models you don't usually have all your data in RAM</span>
+<span class="co"># because you are usually training using mini-batch gradient descent</span>
+<span class="co"># thus only needing a mini-batch on RAM each time.</span>
+
+<span class="co"># In torch we use the `datasets` abstraction to define the process of</span>
+<span class="co"># loading data. Once you have defined your dataset you can use torch</span>
+<span class="co"># dataloaders that allows you to iterate over this dataset in batches.</span>
+
+<span class="co"># Note that datasets are optional in torch. They are jut there as a</span>
+<span class="co"># recommended way to load data.</span>
+
+<span class="co"># Below you will see an example of how to create a simple torch dataset</span>
+<span class="co"># that pre-process a data.frame into tensors so you can feed them to</span>
+<span class="co"># a model.</span>
+
+<span class="kw">df_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset.html">dataset</a></span>(
+  <span class="st">"mydataset"</span>,
+  
+  <span class="co"># the input data to your dataset goes in the initialize function.</span>
+  <span class="co"># our dataset will take a dataframe and the name of the response</span>
+  <span class="co"># variable.</span>
+  initialize = <span class="fu">function</span>(<span class="kw">df</span>, <span class="kw">response_variable</span>) {
+    <span class="kw">self</span><span class="op">$</span><span class="kw">df</span> <span class="op">&lt;-</span> <span class="kw">df</span>[,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw">df</span>) <span class="op">==</span> <span class="kw">response_variable</span>)]
+    <span class="kw">self</span><span class="op">$</span><span class="kw">response_variable</span> <span class="op">&lt;-</span> <span class="kw">df</span>[[<span class="kw">response_variable</span>]]
   },
-  <span class="co"># this function is called whenever we call our model on input.</span>
-  forward = <span class="fu">function</span>(<span class="kw">x</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Calling forward!"</span>)
-    <span class="fu"><a href="../../reference/torch_mm.html">torch_mm</a></span>(<span class="kw">x</span>, <span class="kw">self</span><span class="op">$</span><span class="kw">w</span>) <span class="op">+</span> <span class="kw">self</span><span class="op">$</span><span class="kw">b</span>
+  
+  <span class="co"># the .getitem method takes an index as input and returns the</span>
+  <span class="co"># corresponding item from the dataset.</span>
+  <span class="co"># the index could be anything. the dataframe could have many</span>
+  <span class="co"># rows for each index and the .getitem method would do some</span>
+  <span class="co"># kind of aggregation before returning the element.</span>
+  <span class="co"># in our case the index will be a row of the data.frame,</span>
+  .getitem = <span class="fu">function</span>(<span class="kw">index</span>) {
+    <span class="kw">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span>(<span class="kw">self</span><span class="op">$</span><span class="kw">response_variable</span>[<span class="kw">index</span>])
+    <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw">self</span><span class="op">$</span><span class="kw">df</span>[<span class="kw">index</span>,]))
+    
+    <span class="co"># note that the dataloaders will automatically stack tensors</span>
+    <span class="co"># creating a new dimension</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(x = <span class="kw">x</span>, y = <span class="kw">response</span>)
+  },
+  
+  <span class="co"># It's optional, but helpful to define the .length method returning </span>
+  <span class="co"># the number of elements in the dataset. This is needed if you want </span>
+  <span class="co"># to shuffle your dataset.</span>
+  .length = <span class="fu">function</span>() {
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">self</span><span class="op">$</span><span class="kw">response_variable</span>)
   }
+  
 )
 
-<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu">dense</span>(<span class="fl">3</span>, <span class="fl">1</span>)
+
+<span class="co"># we can now initialize an instance of our dataset.</span>
+<span class="co"># for example</span>
+<span class="kw">mtcars_dataset</span> <span class="op">&lt;-</span> <span class="fu">df_dataset</span>(<span class="kw">mtcars</span>, <span class="st">"mpg"</span>)
+
+<span class="co"># now we can get an item with</span>
+<span class="kw">mtcars_dataset</span><span class="op">$</span><span class="fu">.getitem</span>(<span class="fl">1</span>)
 </pre></div>
-<pre><code>## Calling initialize!</code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co"># you can get all parameters </span>
-<span class="kw">model</span><span class="op">$</span><span class="kw">parameters</span>
-</pre></div>
-<pre><code>## $w
+<pre><code>## $x
 ## torch_tensor 
-## -0.8023
-## -1.2376
-## -0.1507
-## [ CPUFloatType{3,1} ]
+##    6.0000
+##  160.0000
+##  110.0000
+##    3.9000
+##    2.6200
+##   16.4600
+##    0.0000
+##    1.0000
+##    4.0000
+##    4.0000
+## [ CPUFloatType{10} ]
 ## 
-## $b
+## $y
 ## torch_tensor 
-##  0
+##  21
 ## [ CPUFloatType{1} ]</code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># or individually</span>
-<span class="kw">model</span><span class="op">$</span><span class="kw">w</span>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="co"># Given a dataset you can create a dataloader with</span>
+<span class="kw">dl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataloader.html">dataloader</a></span>(<span class="kw">mtcars_dataset</span>, batch_size = <span class="fl">15</span>, shuffle = <span class="fl">TRUE</span>)
+
+<span class="co"># we can then loop trough the elements of the dataloader with</span>
+<span class="co">for</span>(<span class="kw">batch</span> <span class="co">in</span> <span class="fu"><a href="../../reference/enumerate.html">enumerate</a></span>(<span class="kw">dl</span>)) {
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"X size:  "</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">batch</span>[[<span class="fl">1</span>]]<span class="op">$</span><span class="fu">size</span>())
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Y size:  "</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">batch</span>[[<span class="fl">2</span>]]<span class="op">$</span><span class="fu">size</span>())
+}
 </pre></div>
-<pre><code>## torch_tensor 
-## -0.8023
-## -1.2376
-## -0.1507
-## [ CPUFloatType{3,1} ]</code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">model</span><span class="op">$</span><span class="kw">b</span>
-</pre></div>
-<pre><code>## torch_tensor 
-##  0
-## [ CPUFloatType{1} ]</code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co"># create an input tensor</span>
-<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">10</span>, <span class="fl">3</span>)
-<span class="kw">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span>(<span class="kw">x</span>)
-</pre></div>
-<pre><code>## Calling forward!</code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="kw">y_pred</span>
-</pre></div>
-<pre><code>## torch_tensor 
-## -0.1894
-##  0.5883
-## -1.1056
-##  1.4542
-## -0.8092
-##  0.3196
-## -0.6953
-##  2.1684
-##  2.2690
-##  0.9576
-## [ CPUFloatType{10,1} ]</code></pre>
+<pre><code>## X size:  [1] 15 10
+## Y size:  [1] 15  1
+## X size:  [1] 15 10
+## Y size:  [1] 15  1
+## X size:  [1]  2 10
+## Y size:  [1] 2 1</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

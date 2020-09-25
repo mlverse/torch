@@ -266,7 +266,7 @@
 <span class="kw">out</span> <span class="op">&lt;-</span> <span class="fu">net</span>(<span class="kw">input</span>)
 <span class="kw">out</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.0503  0.0945  0.0204 -0.1146 -0.0229 -0.0555  0.1158 -0.0597  0.0173  0.0056</span>
+<span class="co">#&gt; -0.0595  0.1053  0.0324 -0.1175 -0.0374 -0.0678  0.1312 -0.0626  0.0109  0.0005</span>
 <span class="co">#&gt; [ CPUFloatType{1,10} ]</span>
 </pre></div>
 <p>Zero the gradient buffers of all parameters and backprops with random gradients:</p>
@@ -319,7 +319,7 @@
 <span class="kw">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span>(<span class="kw">output</span>, <span class="kw">target</span>)
 <span class="kw">loss</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; 2.12488</span>
+<span class="co">#&gt; 1.91928</span>
 <span class="co">#&gt; [ CPUFloatType{} ]</span>
 </pre></div>
 <p>Now, if you follow loss in the backward direction, using its <code>$grad_fn</code> attribute, you will see a graph of computations that looks like this:</p>
@@ -363,12 +363,12 @@
 <span class="kw">net</span><span class="op">$</span><span class="kw">conv1</span><span class="op">$</span><span class="kw">bias</span><span class="op">$</span><span class="kw">grad</span>
 <span class="co">#&gt; torch_tensor </span>
 <span class="co">#&gt; 0.01 *</span>
-<span class="co">#&gt; -1.2259</span>
-<span class="co">#&gt;  1.1363</span>
-<span class="co">#&gt;  0.1153</span>
-<span class="co">#&gt; -1.4923</span>
-<span class="co">#&gt;  0.6252</span>
-<span class="co">#&gt;  0.7546</span>
+<span class="co">#&gt; -2.0271</span>
+<span class="co">#&gt;  1.6445</span>
+<span class="co">#&gt; -1.0255</span>
+<span class="co">#&gt; -1.6825</span>
+<span class="co">#&gt;  0.5340</span>
+<span class="co">#&gt; -0.1487</span>
 <span class="co">#&gt; [ CPUFloatType{6} ]</span>
 </pre></div>
 <p>Now, we have seen how to use loss functions.</p>
