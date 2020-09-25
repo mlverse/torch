@@ -101,6 +101,7 @@ Collate:
     'operators.R'
     'optim.R'
     'optim-adam.R'
+    'optim-lr_scheduler.R'
     'optim-sgd.R'
     'package.R'
     'qscheme.R'

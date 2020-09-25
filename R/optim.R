@@ -9,6 +9,14 @@ is_optim_required <- function(x) {
   inherits(x, "optim_required")
 }
 
+#' Checks if the object is a torch optimizer
+#'
+#' @param x object to check
+#' 
+#' @export
+is_optimizer <- function(x) {
+  inherits(x, "torch_Optimizer")
+}
 
 Optimizer <- R6::R6Class(
   "torch_Optimizer",
