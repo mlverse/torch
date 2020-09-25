@@ -184,7 +184,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
 
 <span class="co"># In deep learning models you don't usually have all your data in RAM</span>
 <span class="co"># because you are usually training using mini-batch gradient descent</span>
@@ -201,16 +201,16 @@
 <span class="co"># that pre-process a data.frame into tensors so you can feed them to</span>
 <span class="co"># a model.</span>
 
-<span class="kw">df_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset.html">dataset</a></span>(
+<span class="va">df_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset.html">dataset</a></span><span class="op">(</span>
   <span class="st">"mydataset"</span>,
   
   <span class="co"># the input data to your dataset goes in the initialize function.</span>
   <span class="co"># our dataset will take a dataframe and the name of the response</span>
   <span class="co"># variable.</span>
-  initialize = <span class="fu">function</span>(<span class="kw">df</span>, <span class="kw">response_variable</span>) {
-    <span class="kw">self</span><span class="op">$</span><span class="kw">df</span> <span class="op">&lt;-</span> <span class="kw">df</span>[,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw">df</span>) <span class="op">==</span> <span class="kw">response_variable</span>)]
-    <span class="kw">self</span><span class="op">$</span><span class="kw">response_variable</span> <span class="op">&lt;-</span> <span class="kw">df</span>[[<span class="kw">response_variable</span>]]
-  },
+  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">response_variable</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">==</span> <span class="va">response_variable</span><span class="op">)</span><span class="op">]</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">response_variable</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[[</span><span class="va">response_variable</span><span class="op">]</span><span class="op">]</span>
+  <span class="op">}</span>,
   
   <span class="co"># the .getitem method takes an index as input and returns the</span>
   <span class="co"># corresponding item from the dataset.</span>
@@ -218,32 +218,31 @@
   <span class="co"># rows for each index and the .getitem method would do some</span>
   <span class="co"># kind of aggregation before returning the element.</span>
   <span class="co"># in our case the index will be a row of the data.frame,</span>
-  .getitem = <span class="fu">function</span>(<span class="kw">index</span>) {
-    <span class="kw">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span>(<span class="kw">self</span><span class="op">$</span><span class="kw">response_variable</span>[<span class="kw">index</span>])
-    <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw">self</span><span class="op">$</span><span class="kw">df</span>[<span class="kw">index</span>,]))
+  .getitem <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">index</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">response_variable</span><span class="op">[</span><span class="va">index</span><span class="op">]</span><span class="op">)</span>
+    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">df</span><span class="op">[</span><span class="va">index</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span>
     
     <span class="co"># note that the dataloaders will automatically stack tensors</span>
     <span class="co"># creating a new dimension</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(x = <span class="kw">x</span>, y = <span class="kw">response</span>)
-  },
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">response</span><span class="op">)</span>
+  <span class="op">}</span>,
   
   <span class="co"># It's optional, but helpful to define the .length method returning </span>
   <span class="co"># the number of elements in the dataset. This is needed if you want </span>
   <span class="co"># to shuffle your dataset.</span>
-  .length = <span class="fu">function</span>() {
-    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">self</span><span class="op">$</span><span class="kw">response_variable</span>)
-  }
+  .length <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">response_variable</span><span class="op">)</span>
+  <span class="op">}</span>
   
-)
+<span class="op">)</span>
 
 
 <span class="co"># we can now initialize an instance of our dataset.</span>
 <span class="co"># for example</span>
-<span class="kw">mtcars_dataset</span> <span class="op">&lt;-</span> <span class="fu">df_dataset</span>(<span class="kw">mtcars</span>, <span class="st">"mpg"</span>)
+<span class="va">mtcars_dataset</span> <span class="op">&lt;-</span> <span class="fu">df_dataset</span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mpg"</span><span class="op">)</span>
 
 <span class="co"># now we can get an item with</span>
-<span class="kw">mtcars_dataset</span><span class="op">$</span><span class="fu">.getitem</span>(<span class="fl">1</span>)
-</pre></div>
+<span class="va">mtcars_dataset</span><span class="op">$</span><span class="fu">.getitem</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></pre></div>
 <pre><code>## $x
 ## torch_tensor 
 ##    6.0000
@@ -264,16 +263,15 @@
 ## [ CPUFloatType{1} ]</code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="co"># Given a dataset you can create a dataloader with</span>
-<span class="kw">dl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataloader.html">dataloader</a></span>(<span class="kw">mtcars_dataset</span>, batch_size = <span class="fl">15</span>, shuffle = <span class="fl">TRUE</span>)
+<span class="va">dl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataloader.html">dataloader</a></span><span class="op">(</span><span class="va">mtcars_dataset</span>, batch_size <span class="op">=</span> <span class="fl">15</span>, shuffle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># we can then loop trough the elements of the dataloader with</span>
-<span class="co">for</span>(<span class="kw">batch</span> <span class="co">in</span> <span class="fu"><a href="../../reference/enumerate.html">enumerate</a></span>(<span class="kw">dl</span>)) {
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"X size:  "</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">batch</span>[[<span class="fl">1</span>]]<span class="op">$</span><span class="fu">size</span>())
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Y size:  "</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">batch</span>[[<span class="fl">2</span>]]<span class="op">$</span><span class="fu">size</span>())
-}
-</pre></div>
+<span class="kw">for</span><span class="op">(</span><span class="va">batch</span> <span class="kw">in</span> <span class="fu"><a href="../../reference/enumerate.html">enumerate</a></span><span class="op">(</span><span class="va">dl</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"X size:  "</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">batch</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Y size:  "</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">batch</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <pre><code>## X size:  [1] 15 10
 ## Y size:  [1] 15  1
 ## X size:  [1] 15 10

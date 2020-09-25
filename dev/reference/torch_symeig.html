@@ -227,7 +227,7 @@
     <p>Symeig</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_symeig</span>(<span class='kw'>self</span>, eigenvectors = <span class='fl'>FALSE</span>, upper = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_symeig</span><span class='op'>(</span><span class='va'>self</span>, eigenvectors <span class='op'>=</span> <span class='cn'>FALSE</span>, upper <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -274,23 +274,23 @@ only the upper triangular portion is used by default.</p>
 <p>If <code>upper</code> is <code>FALSE</code>, then lower triangular portion is used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
-<span class='kw'>a</span> <span class='op'>=</span> <span class='kw'>a</span> <span class='op'>+</span> <span class='kw'>a</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>()  <span class='co'># To make a symmetric</span>
-<span class='kw'>a</span>
-<span class='kw'>o</span> <span class='op'>=</span> <span class='fu'>torch_symeig</span>(<span class='kw'>a</span>, eigenvectors=<span class='fl'>TRUE</span>)
-<span class='kw'>e</span> <span class='op'>=</span> <span class='kw'>o</span>[[<span class='fl'>1</span>]]
-<span class='kw'>v</span> <span class='op'>=</span> <span class='kw'>o</span>[[<span class='fl'>2</span>]]
-<span class='kw'>e</span>
-<span class='kw'>v</span>
-<span class='kw'>a_big</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
-<span class='kw'>a_big</span> <span class='op'>=</span> <span class='kw'>a_big</span> <span class='op'>+</span> <span class='kw'>a_big</span><span class='op'>$</span><span class='fu'>transpose</span>(<span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>)  <span class='co'># To make a_big symmetric</span>
-<span class='kw'>o</span> <span class='op'>=</span> <span class='kw'>a_big</span><span class='op'>$</span><span class='fu'>symeig</span>(eigenvectors=<span class='fl'>TRUE</span>)
-<span class='kw'>e</span> <span class='op'>=</span> <span class='kw'>o</span>[[<span class='fl'>1</span>]]
-<span class='kw'>v</span> <span class='op'>=</span> <span class='kw'>o</span>[[<span class='fl'>2</span>]]
-<span class='fu'><a href='torch_allclose.html'>torch_allclose</a></span>(<span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>v</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span>(<span class='kw'>e</span><span class='op'>$</span><span class='fu'>diag_embed</span>(), <span class='kw'>v</span><span class='op'>$</span><span class='fu'>transpose</span>(<span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>))), <span class='kw'>a_big</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span> <span class='op'>=</span> <span class='va'>a</span> <span class='op'>+</span> <span class='va'>a</span><span class='op'>$</span><span class='fu'>t</span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># To make a symmetric</span>
+<span class='va'>a</span>
+<span class='va'>o</span> <span class='op'>=</span> <span class='fu'>torch_symeig</span><span class='op'>(</span><span class='va'>a</span>, eigenvectors<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>e</span> <span class='op'>=</span> <span class='va'>o</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>v</span> <span class='op'>=</span> <span class='va'>o</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>e</span>
+<span class='va'>v</span>
+<span class='va'>a_big</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a_big</span> <span class='op'>=</span> <span class='va'>a_big</span> <span class='op'>+</span> <span class='va'>a_big</span><span class='op'>$</span><span class='fu'>transpose</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>  <span class='co'># To make a_big symmetric</span>
+<span class='va'>o</span> <span class='op'>=</span> <span class='va'>a_big</span><span class='op'>$</span><span class='fu'>symeig</span><span class='op'>(</span>eigenvectors<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>e</span> <span class='op'>=</span> <span class='va'>o</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>v</span> <span class='op'>=</span> <span class='va'>o</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>
+<span class='fu'><a href='torch_allclose.html'>torch_allclose</a></span><span class='op'>(</span><span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='va'>v</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>$</span><span class='fu'>diag_embed</span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>v</span><span class='op'>$</span><span class='fu'>transpose</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>a_big</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -229,7 +229,7 @@ $$\mbox{ReLU}(x) = (x)^+ = \max(0, x)$$" />
 $$\mbox{ReLU}(x) = (x)^+ = \max(0, x)$$</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_relu</span>(inplace = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_relu</span><span class='op'>(</span>inplace <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -252,15 +252,15 @@ dimensions</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_relu</span>()
-<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>2</span>)
-<span class='fu'>m</span>(<span class='kw'>input</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_relu</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.9506
-#&gt;  0.0000
+#&gt;  0.7391
+#&gt;  0.0659
 #&gt; [ CPUFloatType{2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

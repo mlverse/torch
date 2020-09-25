@@ -227,7 +227,7 @@
     <p>Mm</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_mm</span>(<span class='kw'>self</span>, <span class='kw'>mat2</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_mm</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>mat2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -256,15 +256,15 @@ For broadcasting matrix products, see <code><a href='torch_matmul.html'>torch_ma
 \((m \times p)\) tensor, <code>out</code> will be a \((n \times p)\) tensor.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>mat1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='kw'>mat2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='fu'>torch_mm</span>(<span class='kw'>mat1</span>, <span class='kw'>mat2</span>)
-}
+<span class='va'>mat1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>mat2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>torch_mm</span><span class='op'>(</span><span class='va'>mat1</span>, <span class='va'>mat2</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.1903 -0.1328 -1.4402
-#&gt;  1.1205  0.4914  0.3667
+#&gt; -1.1058  0.7906 -0.6688
+#&gt;  1.0755 -0.2746 -0.1003
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

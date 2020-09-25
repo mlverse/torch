@@ -227,13 +227,13 @@
     <p>Triangular_solve</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_triangular_solve</span>(
-  <span class='kw'>self</span>,
-  <span class='kw'>A</span>,
-  upper = <span class='fl'>TRUE</span>,
-  transpose = <span class='fl'>FALSE</span>,
-  unitriangular = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>torch_triangular_solve</span><span class='op'>(</span>
+  <span class='va'>self</span>,
+  <span class='va'>A</span>,
+  upper <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  transpose <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  unitriangular <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -274,24 +274,24 @@ batches of 2D matrices. If the inputs are batches, then returns
 batched outputs <code>X</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>))<span class='op'>$</span><span class='fu'>triu</span>()
-<span class='kw'>A</span>
-<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='kw'>b</span>
-<span class='fu'>torch_triangular_solve</span>(<span class='kw'>b</span>, <span class='kw'>A</span>)
-}
+<span class='va'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>triu</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>A</span>
+<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>b</span>
+<span class='fu'>torch_triangular_solve</span><span class='op'>(</span><span class='va'>b</span>, <span class='va'>A</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -14.3218 -13.7726 -14.1421
-#&gt;  -0.5490  -1.5423   0.0345
+#&gt; -0.9938  0.3928 -0.3430
+#&gt;  0.2406 -0.5995 -0.7068
 #&gt; [ CPUFloatType{2,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  0.0494  0.1397
-#&gt;  0.0000  1.0095
+#&gt; -1.6591  0.9491
+#&gt;  0.0000  1.2120
 #&gt; [ CPUFloatType{2,2} ]
 #&gt; </div></pre>
   </div>

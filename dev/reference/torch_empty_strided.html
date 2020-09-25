@@ -227,15 +227,15 @@
     <p>Empty_strided</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_empty_strided</span>(
-  <span class='kw'>size</span>,
-  <span class='kw'>stride</span>,
-  dtype = <span class='kw'>NULL</span>,
-  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
-  device = <span class='kw'>NULL</span>,
-  requires_grad = <span class='fl'>FALSE</span>,
-  pin_memory = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>torch_empty_strided</span><span class='op'>(</span>
+  <span class='va'>size</span>,
+  <span class='va'>stride</span>,
+  dtype <span class='op'>=</span> <span class='cn'>NULL</span>,
+  layout <span class='op'>=</span> <span class='fu'><a href='torch_layout.html'>torch_strided</a></span><span class='op'>(</span><span class='op'>)</span>,
+  device <span class='op'>=</span> <span class='cn'>NULL</span>,
+  requires_grad <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  pin_memory <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -289,13 +289,13 @@ vectorized) may result in incorrect behavior. If you need to write to
 the tensors, please clone them first.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'>torch_empty_strided</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
-<span class='kw'>a</span>
-<span class='kw'>a</span><span class='op'>$</span><span class='fu'>stride</span>(<span class='fl'>1</span>)
-<span class='kw'>a</span><span class='op'>$</span><span class='fu'>size</span>(<span class='fl'>1</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'>torch_empty_strided</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='va'>a</span><span class='op'>$</span><span class='fu'>stride</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>a</span><span class='op'>$</span><span class='fu'>size</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [1] 2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

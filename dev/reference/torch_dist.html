@@ -227,7 +227,7 @@
     <p>Dist</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_dist</span>(<span class='kw'>self</span>, <span class='kw'>other</span>, p = <span class='fl'>2L</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>other</span>, p <span class='op'>=</span> <span class='fl'>2L</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -256,19 +256,19 @@
 broadcastable .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='kw'>x</span>
-<span class='kw'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='kw'>y</span>
-<span class='fu'>torch_dist</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='fl'>3.5</span>)
-<span class='fu'>torch_dist</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='fl'>3</span>)
-<span class='fu'>torch_dist</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='fl'>0</span>)
-<span class='fu'>torch_dist</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='fl'>1</span>)
-}
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>x</span>
+<span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>y</span>
+<span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fl'>3.5</span><span class='op'>)</span>
+<span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fl'>0</span><span class='op'>)</span>
+<span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; 4.59576
+#&gt; 4.25942
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

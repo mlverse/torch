@@ -184,43 +184,41 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
 
 <span class="co"># creates example tensors. x requires_grad = TRUE tells that </span>
 <span class="co"># we are going to take derivatives over it.</span>
-<span class="kw">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span>(
-  clasname = <span class="st">"dense"</span>,
+<span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
+  clasname <span class="op">=</span> <span class="st">"dense"</span>,
   <span class="co"># the initialize function tuns whenever we instantiate the model</span>
-  initialize = <span class="fu">function</span>(<span class="kw">in_features</span>, <span class="kw">out_features</span>) {
+  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">in_features</span>, <span class="va">out_features</span><span class="op">)</span> <span class="op">{</span>
     
     <span class="co"># just for you to see when this function is called</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Calling initialize!"</span>) 
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Calling initialize!"</span><span class="op">)</span> 
     
     <span class="co"># we use nn_parameter to indicate that those tensors are special</span>
     <span class="co"># and should be treated as parameters by `nn_module`.</span>
-    <span class="kw">self</span><span class="op">$</span><span class="kw">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span>(<span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="kw">in_features</span>, <span class="kw">out_features</span>))
-    <span class="kw">self</span><span class="op">$</span><span class="kw">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span>(<span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span>(<span class="kw">out_features</span>))
+    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="va">in_features</span>, <span class="va">out_features</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="va">out_features</span><span class="op">)</span><span class="op">)</span>
     
-  },
+  <span class="op">}</span>,
   <span class="co"># this function is called whenever we call our model on input.</span>
-  forward = <span class="fu">function</span>(<span class="kw">x</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Calling forward!"</span>)
-    <span class="fu"><a href="../../reference/torch_mm.html">torch_mm</a></span>(<span class="kw">x</span>, <span class="kw">self</span><span class="op">$</span><span class="kw">w</span>) <span class="op">+</span> <span class="kw">self</span><span class="op">$</span><span class="kw">b</span>
-  }
-)
+  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Calling forward!"</span><span class="op">)</span>
+    <span class="fu"><a href="../../reference/torch_mm.html">torch_mm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span>
+  <span class="op">}</span>
+<span class="op">)</span>
 
-<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu">dense</span>(<span class="fl">3</span>, <span class="fl">1</span>)
-</pre></div>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">dense</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span></pre></div>
 <pre><code>## Calling initialize!</code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="co"># you can get all parameters </span>
-<span class="kw">model</span><span class="op">$</span><span class="kw">parameters</span>
-</pre></div>
+<span class="va">model</span><span class="op">$</span><span class="va">parameters</span></pre></div>
 <pre><code>## $w
 ## torch_tensor 
-## -0.4618
-##  0.1507
-##  0.3773
+## -1.0709
+##  1.2284
+##  0.6612
 ## [ CPUFloatType{3,1} ]
 ## 
 ## $b
@@ -229,39 +227,35 @@
 ## [ CPUFloatType{1} ]</code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="co"># or individually</span>
-<span class="kw">model</span><span class="op">$</span><span class="kw">w</span>
-</pre></div>
+<span class="va">model</span><span class="op">$</span><span class="va">w</span></pre></div>
 <pre><code>## torch_tensor 
-## -0.4618
-##  0.1507
-##  0.3773
+## -1.0709
+##  1.2284
+##  0.6612
 ## [ CPUFloatType{3,1} ]</code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">model</span><span class="op">$</span><span class="kw">b</span>
-</pre></div>
+<span class="va">model</span><span class="op">$</span><span class="va">b</span></pre></div>
 <pre><code>## torch_tensor 
 ##  0
 ## [ CPUFloatType{1} ]</code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="co"># create an input tensor</span>
-<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="fl">10</span>, <span class="fl">3</span>)
-<span class="kw">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span>(<span class="kw">x</span>)
-</pre></div>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span>
+<span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></pre></div>
 <pre><code>## Calling forward!</code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="kw">y_pred</span>
-</pre></div>
+<span class="va">y_pred</span></pre></div>
 <pre><code>## torch_tensor 
-## -0.4168
-##  0.6601
-## -1.1206
-##  0.4376
-## -0.6211
-## -0.0411
-##  0.1834
-##  0.6893
-## -0.3755
-##  0.2244
+## -0.3726
+##  0.8708
+## -0.2430
+## -0.3910
+##  3.5954
+##  0.1099
+##  0.0152
+## -0.7634
+## -0.7464
+##  1.7072
 ## [ CPUFloatType{10,1} ]</code></pre>
   </div>
 

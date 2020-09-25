@@ -227,7 +227,7 @@
     <p>Matrix_power</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_matrix_power</span>(<span class='kw'>self</span>, <span class='kw'>n</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_matrix_power</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>n</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -255,20 +255,20 @@ raised to the power <code>n</code>.  For a batch of matrices, the batched invers
 is returned.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_matrix_power</span>(<span class='kw'>a</span>, <span class='fl'>3</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_matrix_power</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>3</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.4493 -0.8922
-#&gt;   0.9480  1.8174
+#&gt;  -1.2380 -0.5459
+#&gt;   0.4950  1.4094
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   9.4956  2.8886
-#&gt;   2.0132  0.5723
+#&gt;   0.0124 -6.4546
+#&gt;  -1.2751  7.7087
 #&gt; [ CPUFloatType{2,2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

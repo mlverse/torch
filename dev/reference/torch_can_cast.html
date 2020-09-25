@@ -227,7 +227,7 @@
     <p>Can_cast</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_can_cast</span>(<span class='kw'>from</span>, <span class='kw'>to</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_can_cast</span><span class='op'>(</span><span class='va'>from</span>, <span class='va'>to</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -251,11 +251,11 @@
 described in the type promotion documentation .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='fu'>torch_can_cast</span>(<span class='fu'><a href='torch_dtype.html'>torch_double</a></span>(), <span class='fu'><a href='torch_dtype.html'>torch_float</a></span>())
-<span class='fu'>torch_can_cast</span>(<span class='fu'><a href='torch_dtype.html'>torch_float</a></span>(), <span class='fu'><a href='torch_dtype.html'>torch_int</a></span>())
-}
+<span class='fu'>torch_can_cast</span><span class='op'>(</span><span class='fu'><a href='torch_dtype.html'>torch_double</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='torch_dtype.html'>torch_float</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>torch_can_cast</span><span class='op'>(</span><span class='fu'><a href='torch_dtype.html'>torch_float</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='torch_dtype.html'>torch_int</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [1] FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

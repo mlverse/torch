@@ -187,21 +187,20 @@
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py">here</a>. All credits goes to <a href="https://github.com/jcjohnson/pytorch-examples">Justin Johnson</a>.</p>
 </blockquote>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
 <p>As an example of dynamic graphs and weight sharing, we implement a very strange model: a fully-connected ReLU network that on each forward pass chooses a random number between 1 and 4 and uses that many hidden layers, reusing the same weights multiple times to compute the innermost hidden layers.</p>
 <p>For this model we can use normal R flow control to implement the loop, and we can implement weight sharing among the innermost layers by simply reusing the same Module multiple times when defining the forward pass.</p>
 <p>We can easily implement this model using <code>nn_module</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">dynamic_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span>(
+<span class="va">dynamic_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
    <span class="st">"dynamic_net"</span>,
    <span class="co"># In the constructor we construct three nn_linear instances that we will use</span>
    <span class="co"># in the forward pass.</span>
-   initialize = <span class="fu">function</span>(<span class="kw">D_in</span>, <span class="kw">H</span>, <span class="kw">D_out</span>) {
-      <span class="kw">self</span><span class="op">$</span><span class="kw">input_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="kw">D_in</span>, <span class="kw">H</span>)
-      <span class="kw">self</span><span class="op">$</span><span class="kw">middle_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="kw">H</span>, <span class="kw">H</span>)
-      <span class="kw">self</span><span class="op">$</span><span class="kw">output_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span>(<span class="kw">H</span>, <span class="kw">D_out</span>)
-   },
+   initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">D_in</span>, <span class="va">H</span>, <span class="va">D_out</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">input_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="va">D_in</span>, <span class="va">H</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">middle_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="va">H</span>, <span class="va">H</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">output_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="va">H</span>, <span class="va">D_out</span><span class="op">)</span>
+   <span class="op">}</span>,
    <span class="co"># For the forward pass of the model, we randomly choose either 0, 1, 2, or 3</span>
    <span class="co"># and reuse the middle_linear Module that many times to compute hidden layer</span>
    <span class="co"># representations.</span>
@@ -213,85 +212,84 @@
    <span class="co"># Here we also see that it is perfectly safe to reuse the same Module many</span>
    <span class="co"># times when defining a computational graph. This is a big improvement from Lua</span>
    <span class="co"># Torch, where each Module could be used only once.</span>
-   forward = <span class="fu">function</span>(<span class="kw">x</span>) {
-      <span class="kw">h_relu</span> <span class="op">&lt;-</span> <span class="kw">self</span><span class="op">$</span><span class="fu">input_linear</span>(<span class="kw">x</span>)<span class="op">$</span><span class="fu">clamp</span>(min = <span class="fl">0</span>)
-      <span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span>(<span class="fl">4</span>, size = <span class="fl">1</span>))) {
-         <span class="kw">h_relu</span> <span class="op">&lt;-</span> <span class="kw">self</span><span class="op">$</span><span class="fu">middle_linear</span>(<span class="kw">h_relu</span>)<span class="op">$</span><span class="fu">clamp</span>(min=<span class="fl">0</span>)
-      }
-      <span class="kw">y_pred</span> <span class="op">&lt;-</span> <span class="kw">self</span><span class="op">$</span><span class="fu">output_linear</span>(<span class="kw">h_relu</span>)
-      <span class="kw">y_pred</span>
-   }
-)
+   forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">h_relu</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">input_linear</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">$</span><span class="fu">clamp</span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+      <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span><span class="op">(</span><span class="fl">4</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+         <span class="va">h_relu</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">middle_linear</span><span class="op">(</span><span class="va">h_relu</span><span class="op">)</span><span class="op">$</span><span class="fu">clamp</span><span class="op">(</span>min<span class="op">=</span><span class="fl">0</span><span class="op">)</span>
+      <span class="op">}</span>
+      <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">output_linear</span><span class="op">(</span><span class="va">h_relu</span><span class="op">)</span>
+      <span class="va">y_pred</span>
+   <span class="op">}</span>
+<span class="op">)</span>
 
 
-<span class="co">if</span> (<span class="fu"><a href="../../reference/cuda_is_available.html">cuda_is_available</a></span>()) {
-   <span class="kw">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span>(<span class="st">"cuda"</span>)
-} <span class="co">else</span> {
-   <span class="kw">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span>(<span class="st">"cpu"</span>)
-}
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../../reference/cuda_is_available.html">cuda_is_available</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+   <span class="va">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span><span class="op">(</span><span class="st">"cuda"</span><span class="op">)</span>
+<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+   <span class="va">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span><span class="op">(</span><span class="st">"cpu"</span><span class="op">)</span>
+<span class="op">}</span>
    
 <span class="co"># N is batch size; D_in is input dimension;</span>
 <span class="co"># H is hidden dimension; D_out is output dimension.</span>
-<span class="kw">N</span> <span class="op">&lt;-</span> <span class="fl">64</span>
-<span class="kw">D_in</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
-<span class="kw">H</span> <span class="op">&lt;-</span> <span class="fl">100</span>
-<span class="kw">D_out</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+<span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">64</span>
+<span class="va">D_in</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
+<span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">100</span>
+<span class="va">D_out</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 
 <span class="co"># Create random input and output data</span>
 <span class="co"># Setting requires_grad=FALSE (the default) indicates that we do not need to </span>
 <span class="co"># compute gradients with respect to these Tensors during the backward pass.</span>
-<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="kw">N</span>, <span class="kw">D_in</span>, device=<span class="kw">device</span>)
-<span class="kw">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span>(<span class="kw">N</span>, <span class="kw">D_out</span>, device=<span class="kw">device</span>)
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="va">N</span>, <span class="va">D_in</span>, device<span class="op">=</span><span class="va">device</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="va">N</span>, <span class="va">D_out</span>, device<span class="op">=</span><span class="va">device</span><span class="op">)</span>
 
 <span class="co"># Construct our model by instantiating the class defined above</span>
-<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu">dynamic_net</span>(<span class="kw">D_in</span>, <span class="kw">H</span>, <span class="kw">D_out</span>)
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">dynamic_net</span><span class="op">(</span><span class="va">D_in</span>, <span class="va">H</span>, <span class="va">D_out</span><span class="op">)</span>
 
 <span class="co"># The nn package also contains definitions of popular loss functions; in this</span>
 <span class="co"># case we will use Mean Squared Error (MSE) as our loss function.</span>
-<span class="kw">loss_fn</span> <span class="op">&lt;-</span> <span class="kw">nnf_mse_loss</span>
+<span class="va">loss_fn</span> <span class="op">&lt;-</span> <span class="va">nnf_mse_loss</span>
 
 <span class="co"># Use the optim package to define an Optimizer that will update the weights of</span>
 <span class="co"># the model for us. Here we will use Adam; the optim package contains many other</span>
 <span class="co"># optimization algorithms. The first argument to the Adam constructor tells the</span>
 <span class="co"># optimizer which Tensors it should update.</span>
-<span class="kw">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">1e-4</span>
-<span class="kw">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/optim_sgd.html">optim_sgd</a></span>(<span class="kw">model</span><span class="op">$</span><span class="kw">parameters</span>, lr=<span class="kw">learning_rate</span>, momentum = <span class="fl">0.9</span>)
+<span class="va">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">1e-4</span>
+<span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr<span class="op">=</span><span class="va">learning_rate</span>, momentum <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>
 
-<span class="co">for</span> (<span class="kw">t</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fl">500</span>)) {
+<span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
    <span class="co"># Forward pass: compute predicted y by passing x to the model. Module objects</span>
    <span class="co"># can be called like functions. When doing so you pass a Tensor of input</span>
    <span class="co"># data to the Module and it produces a Tensor of output data.</span>
-   <span class="kw">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span>(<span class="kw">x</span>)
+   <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
    
    <span class="co"># Compute and print loss. We pass Tensors containing the predicted and true</span>
    <span class="co"># values of y, and the loss function returns a Tensor containing the</span>
    <span class="co"># loss.</span>
-   <span class="kw">loss</span> <span class="op">&lt;-</span> <span class="fu">loss_fn</span>(<span class="kw">y_pred</span>, <span class="kw">y</span>)
-   <span class="co">if</span> (<span class="kw">t</span> <span class="op">%%</span> <span class="fl">100</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">||</span> <span class="kw">t</span> <span class="op">==</span> <span class="fl">1</span>)
-      <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Step:"</span>, <span class="kw">t</span>, <span class="st">":"</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw">loss</span>), <span class="st">"\n"</span>)
+   <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu">loss_fn</span><span class="op">(</span><span class="va">y_pred</span>, <span class="va">y</span><span class="op">)</span>
+   <span class="kw">if</span> <span class="op">(</span><span class="va">t</span> <span class="op">%%</span> <span class="fl">100</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">||</span> <span class="va">t</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Step:"</span>, <span class="va">t</span>, <span class="st">":"</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
    
    <span class="co"># Before the backward pass, use the optimizer object to zero all of the</span>
    <span class="co"># gradients for the variables it will update (which are the learnable</span>
    <span class="co"># weights of the model). This is because by default, gradients are</span>
    <span class="co"># accumulated in buffers( i.e, not overwritten) whenever $backward()</span>
    <span class="co"># is called. Checkout docs of `autograd_backward` for more details.</span>
-   <span class="kw">optimizer</span><span class="op">$</span><span class="fu">zero_grad</span>()
+   <span class="va">optimizer</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>
 
    <span class="co"># Backward pass: compute gradient of the loss with respect to model</span>
    <span class="co"># parameters</span>
-   <span class="kw">loss</span><span class="op">$</span><span class="fu">backward</span>()
+   <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
 
    <span class="co"># Calling the step function on an Optimizer makes an update to its</span>
    <span class="co"># parameters</span>
-   <span class="kw">optimizer</span><span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span>()
-}
-<span class="co">#&gt; Step: 1 : 1.007763 </span>
-<span class="co">#&gt; Step: 100 : 1.000446 </span>
-<span class="co">#&gt; Step: 200 : 0.9994552 </span>
-<span class="co">#&gt; Step: 300 : 0.9991578 </span>
-<span class="co">#&gt; Step: 400 : 0.988417 </span>
-<span class="co">#&gt; Step: 500 : 0.9980448</span>
-</pre></div>
+   <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="co">#&gt; Step: 1 : 1.029366 </span>
+<span class="co">#&gt; Step: 100 : 1.025477 </span>
+<span class="co">#&gt; Step: 200 : 1.027217 </span>
+<span class="co">#&gt; Step: 300 : 1.026187 </span>
+<span class="co">#&gt; Step: 400 : 1.016082 </span>
+<span class="co">#&gt; Step: 500 : 1.017831</span></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

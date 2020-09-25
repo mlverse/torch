@@ -227,7 +227,7 @@
     <p>Add</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_add</span>(<span class='kw'>self</span>, <span class='kw'>other</span>, alpha = <span class='fl'>1L</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_add</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>other</span>, alpha <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -275,24 +275,24 @@ If <code>other</code> is of type FloatTensor or DoubleTensor, <code>alpha</code>
 a real number, otherwise it should be an integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_add</span>(<span class='kw'>a</span>, <span class='fl'>20</span>)
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_add</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>20</span><span class='op'>)</span>
 
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='kw'>a</span>
-<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))
-<span class='kw'>b</span>
-<span class='fu'>torch_add</span>(<span class='kw'>a</span>, <span class='kw'>b</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>b</span>
+<span class='fu'>torch_add</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.8222 -1.4176  0.6709 -0.3569
-#&gt; -1.2026 -3.4424 -1.3539 -2.3816
-#&gt;  1.7574 -0.4824  1.6061  0.5783
-#&gt;  0.7789 -1.4609  0.6276 -0.4001
+#&gt; -0.7093 -0.3648 -0.0872 -0.0052
+#&gt; -1.8882 -1.5437 -1.2661 -1.1841
+#&gt; -1.1929 -0.8484 -0.5709 -0.4888
+#&gt; -0.7319 -0.3874 -0.1099 -0.0278
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

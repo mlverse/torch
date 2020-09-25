@@ -227,7 +227,7 @@
     <p>Cosine_similarity</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_cosine_similarity</span>(<span class='kw'>x1</span>, <span class='kw'>x2</span>, dim = <span class='fl'>2L</span>, eps = <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_cosine_similarity</span><span class='op'>(</span><span class='va'>x1</span>, <span class='va'>x2</span>, dim <span class='op'>=</span> <span class='fl'>2L</span>, eps <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -261,114 +261,114 @@
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>input1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>128</span>))
-<span class='kw'>input2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>128</span>))
-<span class='kw'>output</span> <span class='op'>=</span> <span class='fu'>torch_cosine_similarity</span>(<span class='kw'>input1</span>, <span class='kw'>input2</span>)
-<span class='kw'>output</span>
-}
+<span class='va'>input1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>128</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>input2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>128</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>=</span> <span class='fu'>torch_cosine_similarity</span><span class='op'>(</span><span class='va'>input1</span>, <span class='va'>input2</span><span class='op'>)</span>
+<span class='va'>output</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0863
-#&gt;  0.0260
-#&gt; -0.0256
-#&gt;  0.1951
-#&gt;  0.1578
-#&gt;  0.0339
-#&gt; -0.0420
-#&gt; -0.0587
-#&gt; -0.1199
-#&gt;  0.0133
-#&gt;  0.0232
-#&gt;  0.0866
-#&gt;  0.0886
-#&gt; -0.0298
-#&gt;  0.0851
-#&gt;  0.0087
-#&gt;  0.0950
-#&gt;  0.0188
-#&gt; -0.0150
-#&gt; -0.0415
-#&gt; -0.1284
-#&gt;  0.0684
-#&gt; -0.1377
-#&gt;  0.1180
-#&gt;  0.1157
-#&gt;  0.2627
-#&gt; -0.0205
-#&gt; -0.0348
-#&gt;  0.1516
-#&gt;  0.0467
-#&gt; -0.0743
-#&gt; -0.0804
-#&gt; -0.1231
-#&gt; -0.0303
-#&gt; -0.0841
-#&gt; -0.0511
-#&gt;  0.1338
-#&gt;  0.0691
-#&gt;  0.1532
-#&gt;  0.0963
-#&gt; -0.1034
-#&gt; -0.0165
-#&gt;  0.0593
-#&gt; -0.0768
-#&gt; -0.0359
-#&gt; -0.0206
-#&gt; -0.0163
-#&gt; -0.0412
-#&gt;  0.0516
-#&gt; -0.0557
-#&gt; -0.0057
-#&gt;  0.0484
-#&gt; -0.1151
-#&gt;  0.2293
-#&gt;  0.0761
-#&gt;  0.0110
-#&gt;  0.0452
-#&gt;  0.0216
-#&gt; -0.1804
-#&gt;  0.0210
-#&gt; -0.1104
-#&gt;  0.0002
-#&gt; -0.1410
-#&gt;  0.0219
-#&gt; -0.0342
-#&gt; -0.0976
-#&gt; -0.1690
-#&gt; -0.0368
-#&gt; -0.0122
-#&gt;  0.0209
+#&gt;  0.2211
+#&gt;  0.0381
+#&gt;  0.0479
+#&gt;  0.0289
+#&gt; -0.1224
+#&gt; -0.0496
+#&gt;  0.1235
+#&gt; -0.0979
+#&gt;  0.0636
+#&gt; -0.0227
+#&gt;  0.0066
+#&gt;  0.0782
+#&gt; -0.0868
+#&gt;  0.1208
+#&gt; -0.0404
+#&gt;  0.0407
+#&gt;  0.0350
+#&gt; -0.0542
+#&gt; -0.0028
+#&gt; -0.0151
+#&gt;  0.1094
+#&gt;  0.0380
+#&gt; -0.0002
+#&gt;  0.0227
+#&gt; -0.0436
+#&gt;  0.0095
+#&gt; -0.0299
+#&gt;  0.0284
+#&gt; -0.0015
+#&gt;  0.0105
+#&gt; -0.0770
+#&gt;  0.0347
+#&gt;  0.0058
+#&gt;  0.0680
+#&gt; -0.1439
+#&gt; -0.0631
+#&gt; -0.0859
+#&gt; -0.0209
+#&gt;  0.0663
+#&gt; -0.1036
+#&gt; -0.0117
+#&gt; -0.0113
+#&gt;  0.0271
+#&gt; -0.0154
+#&gt; -0.0555
+#&gt;  0.1195
+#&gt; -0.0024
+#&gt; -0.0621
 #&gt;  0.0969
-#&gt;  0.0955
-#&gt;  0.1811
-#&gt;  0.0872
-#&gt; -0.1375
-#&gt;  0.0328
-#&gt; -0.1523
-#&gt;  0.1378
-#&gt; -0.0962
-#&gt;  0.0333
-#&gt; -0.0132
-#&gt;  0.0328
-#&gt;  0.0587
-#&gt;  0.0643
-#&gt;  0.0008
-#&gt;  0.0756
-#&gt; -0.1852
-#&gt; -0.0198
-#&gt;  0.1126
-#&gt; -0.0948
+#&gt; -0.0630
+#&gt;  0.0037
+#&gt;  0.0167
+#&gt; -0.0053
+#&gt;  0.1449
+#&gt;  0.0785
+#&gt;  0.0603
+#&gt;  0.0161
+#&gt; -0.0547
+#&gt; -0.0507
+#&gt;  0.1015
+#&gt; -0.0154
+#&gt; -0.0371
+#&gt; -0.0812
+#&gt; -0.0483
+#&gt;  0.0459
+#&gt; -0.0424
+#&gt; -0.0987
 #&gt;  0.1207
-#&gt;  0.1495
-#&gt;  0.0759
-#&gt; -0.0983
-#&gt;  0.1740
-#&gt;  0.0653
-#&gt; -0.0327
-#&gt; -0.0488
-#&gt;  0.0816
-#&gt; -0.0823
+#&gt; -0.0583
+#&gt; -0.0359
+#&gt; -0.0141
+#&gt; -0.0538
+#&gt; -0.0493
+#&gt;  0.0559
+#&gt; -0.1479
+#&gt; -0.0921
+#&gt;  0.0077
+#&gt; -0.0026
+#&gt; -0.0460
+#&gt; -0.0648
+#&gt; -0.0509
+#&gt; -0.0108
+#&gt; -0.1138
+#&gt;  0.0257
+#&gt; -0.0577
+#&gt;  0.1281
+#&gt;  0.0832
+#&gt; -0.0164
+#&gt;  0.1158
+#&gt;  0.0149
+#&gt; -0.0617
+#&gt; -0.0072
+#&gt;  0.0241
+#&gt;  0.2224
+#&gt; -0.0435
+#&gt; -0.0060
+#&gt;  0.1039
+#&gt; -0.0755
+#&gt;  0.1946
+#&gt; -0.0230
 #&gt; [ CPUFloatType{100} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -229,12 +229,12 @@ Fractional MaxPooling by Ben Graham" />
 <a href='https://arxiv.org/abs/1412.6071'>Fractional MaxPooling</a> by Ben Graham</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_fractional_max_pool3d</span>(
-  <span class='kw'>kernel_size</span>,
-  output_size = <span class='kw'>NULL</span>,
-  output_ratio = <span class='kw'>NULL</span>,
-  return_indices = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>nn_fractional_max_pool3d</span><span class='op'>(</span>
+  <span class='va'>kernel_size</span>,
+  output_size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  output_ratio <span class='op'>=</span> <span class='cn'>NULL</span>,
+  return_indices <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -268,15 +268,15 @@ step size determined by the target output size.
 The number of output features is equal to the number of input planes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># pool of cubic window of size=3, and target output size 13x12x11</span>
-<span class='kw'>m</span> <span class='op'>=</span> <span class='fu'>nn_fractional_max_pool3d</span>(<span class='fl'>3</span>, output_size=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13</span>, <span class='fl'>12</span>, <span class='fl'>11</span>))
+<span class='va'>m</span> <span class='op'>=</span> <span class='fu'>nn_fractional_max_pool3d</span><span class='op'>(</span><span class='fl'>3</span>, output_size<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>13</span>, <span class='fl'>12</span>, <span class='fl'>11</span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'># pool of cubic window and target output size being half of input size</span>
-<span class='kw'>m</span> <span class='op'>=</span> <span class='fu'>nn_fractional_max_pool3d</span>(<span class='fl'>3</span>, output_ratio=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span>))
-<span class='kw'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span>, <span class='fl'>32</span>, <span class='fl'>16</span>)
-<span class='kw'>output</span> <span class='op'>=</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
+<span class='va'>m</span> <span class='op'>=</span> <span class='fu'>nn_fractional_max_pool3d</span><span class='op'>(</span><span class='fl'>3</span>, output_ratio<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span>, <span class='fl'>32</span>, <span class='fl'>16</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>=</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

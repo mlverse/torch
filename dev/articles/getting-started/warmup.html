@@ -187,58 +187,56 @@
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py">here</a>. All credits goes to <a href="https://github.com/jcjohnson/pytorch-examples">Justin Johnson</a>.</p>
 </blockquote>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
 <p>A fully-connected ReLU network with one hidden layer and no biases, trained to predict y from x using Euclidean error.</p>
 <p>This implementation uses pure R to manually compute the forward pass, loss, and backward pass.</p>
 <p>An R array is a generic n-dimensional array; it does not know anything about deep learning or gradients or computational graphs, and is just a way to perform generic numeric computations.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># N is batch size; D_in is input dimension;</span>
 <span class="co"># H is hidden dimension; D_out is output dimension.</span>
-<span class="kw">N</span> <span class="op">&lt;-</span> <span class="fl">64</span>
-<span class="kw">D_in</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
-<span class="kw">H</span> <span class="op">&lt;-</span> <span class="fl">100</span>
-<span class="kw">D_out</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+<span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">64</span>
+<span class="va">D_in</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
+<span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">100</span>
+<span class="va">D_out</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 
 <span class="co"># Create random input and output data</span>
-<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">N</span><span class="op">*</span><span class="kw">D_in</span>), dim = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">N</span>, <span class="kw">D_in</span>))
-<span class="kw">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">N</span><span class="op">*</span><span class="kw">D_out</span>), dim = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">N</span>, <span class="kw">D_out</span>))
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">*</span><span class="va">D_in</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">N</span>, <span class="va">D_in</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">*</span><span class="va">D_out</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">N</span>, <span class="va">D_out</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Randomly initialize weights</span>
-<span class="kw">w1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">D_in</span><span class="op">*</span><span class="kw">H</span>), dim = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">D_in</span>, <span class="kw">H</span>))
-<span class="kw">w2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">H</span><span class="op">*</span><span class="kw">D_out</span>), dim = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">H</span>, <span class="kw">D_out</span>))
+<span class="va">w1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">D_in</span><span class="op">*</span><span class="va">H</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">D_in</span>, <span class="va">H</span><span class="op">)</span><span class="op">)</span>
+<span class="va">w2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">H</span><span class="op">*</span><span class="va">D_out</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">H</span>, <span class="va">D_out</span><span class="op">)</span><span class="op">)</span>
 
-<span class="kw">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">1e-6</span>
-<span class="co">for</span> (<span class="kw">t</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fl">500</span>)) {
+<span class="va">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">1e-6</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
    <span class="co"># Forward pass: compute predicted y</span>
-   <span class="kw">h</span> <span class="op">&lt;-</span> <span class="kw">x</span> <span class="op">%*%</span> <span class="kw">w1</span>
-   <span class="kw">h_relu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">h</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="kw">h</span>)
-   <span class="kw">y_pred</span> <span class="op">&lt;-</span> <span class="kw">h_relu</span> <span class="op">%*%</span> <span class="kw">w2</span>
+   <span class="va">h</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%*%</span> <span class="va">w1</span>
+   <span class="va">h_relu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">h</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">h</span><span class="op">)</span>
+   <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="va">h_relu</span> <span class="op">%*%</span> <span class="va">w2</span>
    
    <span class="co"># Compute and print loss</span>
-   <span class="kw">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>((<span class="kw">y_pred</span> <span class="op">-</span> <span class="kw">y</span>)<span class="op">^</span><span class="fl">2</span>)
-   <span class="co">if</span> (<span class="kw">t</span> <span class="op">%%</span> <span class="fl">100</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">||</span> <span class="kw">t</span> <span class="op">==</span> <span class="fl">1</span>)
-      <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Step:"</span>, <span class="kw">t</span>, <span class="st">":"</span>, <span class="kw">loss</span>, <span class="st">"\n"</span>)
+   <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_pred</span> <span class="op">-</span> <span class="va">y</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
+   <span class="kw">if</span> <span class="op">(</span><span class="va">t</span> <span class="op">%%</span> <span class="fl">100</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">||</span> <span class="va">t</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Step:"</span>, <span class="va">t</span>, <span class="st">":"</span>, <span class="va">loss</span>, <span class="st">"\n"</span><span class="op">)</span>
    
    <span class="co"># Backprop to compute gradients of w1 and w2 with respect to loss</span>
-   <span class="kw">grad_y_pred</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> (<span class="kw">y_pred</span> <span class="op">-</span> <span class="kw">y</span>)
-   <span class="kw">grad_w2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="kw">h_relu</span>) <span class="op">%*%</span> <span class="kw">grad_y_pred</span>
-   <span class="kw">grad_h_relu</span> <span class="op">&lt;-</span> <span class="kw">grad_y_pred</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="kw">w2</span>)
-   <span class="kw">grad_h</span> <span class="op">&lt;-</span> <span class="kw">grad_h_relu</span>
-   <span class="kw">grad_h</span>[<span class="kw">h</span> <span class="op">&lt;</span> <span class="fl">0</span>] <span class="op">&lt;-</span> <span class="fl">0</span>
-   <span class="kw">grad_w1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="kw">x</span>) <span class="op">%*%</span> <span class="kw">grad_h</span>
+   <span class="va">grad_y_pred</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">y_pred</span> <span class="op">-</span> <span class="va">y</span><span class="op">)</span>
+   <span class="va">grad_w2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">h_relu</span><span class="op">)</span> <span class="op">%*%</span> <span class="va">grad_y_pred</span>
+   <span class="va">grad_h_relu</span> <span class="op">&lt;-</span> <span class="va">grad_y_pred</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">w2</span><span class="op">)</span>
+   <span class="va">grad_h</span> <span class="op">&lt;-</span> <span class="va">grad_h_relu</span>
+   <span class="va">grad_h</span><span class="op">[</span><span class="va">h</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+   <span class="va">grad_w1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">%*%</span> <span class="va">grad_h</span>
    
    <span class="co"># Update weights</span>
-   <span class="kw">w1</span> <span class="op">&lt;-</span> <span class="kw">w1</span> <span class="op">-</span> <span class="kw">learning_rate</span> <span class="op">*</span> <span class="kw">grad_w1</span>
-   <span class="kw">w2</span> <span class="op">&lt;-</span> <span class="kw">w2</span> <span class="op">-</span> <span class="kw">learning_rate</span> <span class="op">*</span> <span class="kw">grad_w2</span>
-}
-<span class="co">#&gt; Step: 1 : 29778160 </span>
-<span class="co">#&gt; Step: 100 : 837.1692 </span>
-<span class="co">#&gt; Step: 200 : 5.795111 </span>
-<span class="co">#&gt; Step: 300 : 0.05651237 </span>
-<span class="co">#&gt; Step: 400 : 0.0006288624 </span>
-<span class="co">#&gt; Step: 500 : 7.642546e-06</span>
-</pre></div>
+   <span class="va">w1</span> <span class="op">&lt;-</span> <span class="va">w1</span> <span class="op">-</span> <span class="va">learning_rate</span> <span class="op">*</span> <span class="va">grad_w1</span>
+   <span class="va">w2</span> <span class="op">&lt;-</span> <span class="va">w2</span> <span class="op">-</span> <span class="va">learning_rate</span> <span class="op">*</span> <span class="va">grad_w2</span>
+<span class="op">}</span>
+<span class="co">#&gt; Step: 1 : 37092320 </span>
+<span class="co">#&gt; Step: 100 : 603.0762 </span>
+<span class="co">#&gt; Step: 200 : 3.673185 </span>
+<span class="co">#&gt; Step: 300 : 0.04313373 </span>
+<span class="co">#&gt; Step: 400 : 0.0006175827 </span>
+<span class="co">#&gt; Step: 500 : 9.87336e-06</span></pre></div>
 <p>In the <a href="tensors.html">next example</a> we will replace the R array for a torch Tensor.</p>
   </div>
 

@@ -227,7 +227,7 @@
     <p>Ger</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_ger</span>(<span class='kw'>self</span>, <span class='kw'>vec2</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_ger</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>vec2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -255,12 +255,12 @@ If <code>input</code> is a vector of size \(n\) and <code>vec2</code> is a vecto
 size \(m\), then <code>out</code> must be a matrix of size \((n \times m)\).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>v1</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>5.</span>)
-<span class='kw'>v2</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span>(<span class='fl'>1.</span>, <span class='fl'>4.</span>)
-<span class='fu'>torch_ger</span>(<span class='kw'>v1</span>, <span class='kw'>v2</span>)
-}
+<span class='va'>v1</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>1.</span>, <span class='fl'>5.</span><span class='op'>)</span>
+<span class='va'>v2</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>1.</span>, <span class='fl'>4.</span><span class='op'>)</span>
+<span class='fu'>torch_ger</span><span class='op'>(</span><span class='va'>v1</span>, <span class='va'>v2</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt;   1   2   3
 #&gt;   2   4   6

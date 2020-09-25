@@ -227,7 +227,7 @@
     <p>Sort</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_sort</span>(<span class='kw'>self</span>, dim = <span class='op'>-</span><span class='fl'>1L</span>, descending = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_sort</span><span class='op'>(</span><span class='va'>self</span>, dim <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1L</span>, descending <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -261,26 +261,26 @@ sorted values and <code>indices</code> are the indices of the elements in the or
 <code>input</code> tensor.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='kw'>out</span> <span class='op'>=</span> <span class='fu'>torch_sort</span>(<span class='kw'>x</span>)
-<span class='kw'>out</span>
-<span class='kw'>out</span> <span class='op'>=</span> <span class='fu'>torch_sort</span>(<span class='kw'>x</span>, <span class='fl'>1</span>)
-<span class='kw'>out</span>
-}
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>out</span> <span class='op'>=</span> <span class='fu'>torch_sort</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='va'>out</span>
+<span class='va'>out</span> <span class='op'>=</span> <span class='fu'>torch_sort</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>out</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; -0.2923 -0.6998  0.1877 -1.0755
-#&gt;  0.3780 -0.5518  0.2236 -0.8815
-#&gt;  0.6531  0.2709  0.7840 -0.6893
+#&gt; -0.6469 -0.7860 -1.4482 -0.1050
+#&gt; -0.1733 -0.5435 -0.1407  1.5303
+#&gt;  0.0008 -0.2447  1.7621  1.8494
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
+#&gt;  2  0  2  0
+#&gt;  0  1  0  2
 #&gt;  1  2  1  1
-#&gt;  2  1  2  0
-#&gt;  0  0  0  2
 #&gt; [ CPULongType{3,4} ]
 #&gt; </div></pre>
   </div>

@@ -227,12 +227,12 @@
     <p>Your models should also subclass this class.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_module</span>(
-  classname = <span class='kw'>NULL</span>,
-  inherit = <span class='kw'>nn_Module</span>,
-  <span class='kw'>...</span>,
-  parent_env = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
-)</pre>
+    <pre class="usage"><span class='fu'>nn_module</span><span class='op'>(</span>
+  classname <span class='op'>=</span> <span class='cn'>NULL</span>,
+  inherit <span class='op'>=</span> <span class='va'>nn_Module</span>,
+  <span class='va'>...</span>,
+  parent_env <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -251,7 +251,7 @@
     </tr>
     <tr>
       <th>parent_env</th>
-      <td><p>passed to <code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code>.</p></td>
+      <td><p>passed to <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6Class()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -261,22 +261,22 @@
 structure. You can assign the submodules as regular attributes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'>nn_module</span>(
- initialize = <span class='fu'>function</span>() {
-   <span class='kw'>self</span><span class='op'>$</span><span class='kw'>conv1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_conv2d.html'>nn_conv2d</a></span>(<span class='fl'>1</span>, <span class='fl'>20</span>, <span class='fl'>5</span>)
-   <span class='kw'>self</span><span class='op'>$</span><span class='kw'>conv2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_conv2d.html'>nn_conv2d</a></span>(<span class='fl'>20</span>, <span class='fl'>20</span>, <span class='fl'>5</span>)
- },
- forward = <span class='fu'>function</span>(<span class='kw'>input</span>) {
-   <span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='kw'>self</span><span class='op'>$</span><span class='fu'>conv1</span>(<span class='kw'>input</span>)
-   <span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nnf_relu.html'>nnf_relu</a></span>(<span class='kw'>input</span>)
-   <span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='kw'>self</span><span class='op'>$</span><span class='fu'>conv2</span>(<span class='kw'>input</span>)
-   <span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nnf_relu.html'>nnf_relu</a></span>(<span class='kw'>input</span>)
-   <span class='kw'>input</span>
- }
-)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>nn_module</span><span class='op'>(</span>
+ initialize <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='va'>self</span><span class='op'>$</span><span class='va'>conv1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_conv2d.html'>nn_conv2d</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>20</span>, <span class='fl'>5</span><span class='op'>)</span>
+   <span class='va'>self</span><span class='op'>$</span><span class='va'>conv2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_conv2d.html'>nn_conv2d</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>20</span>, <span class='fl'>5</span><span class='op'>)</span>
+ <span class='op'>}</span>,
+ forward <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='va'>self</span><span class='op'>$</span><span class='fu'>conv1</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
+   <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nnf_relu.html'>nnf_relu</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
+   <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='va'>self</span><span class='op'>$</span><span class='fu'>conv2</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
+   <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nnf_relu.html'>nnf_relu</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
+   <span class='va'>input</span>
+ <span class='op'>}</span>
+<span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

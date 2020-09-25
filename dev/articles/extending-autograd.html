@@ -184,8 +184,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
 <p>Adding operations to autograd requires implementing a new <code>autograd_function</code> for each operation. Recall that <code>autograd_functions</code>s are what <code>autograd</code> uses to compute the results and gradients, and encode the operation history. Every new function requires you to implement 2 methods:</p>
 <ul>
 <li><p><code>forward()</code> - the code that performs the operation. It can take as many arguments as you want, with some of them being optional, if you specify the default values. All kinds of R objects are accepted here. Tensor arguments that track history (i.e., with <code>requires_grad=TRUE</code>) will be converted to ones that don’t track history before the call, and their use will be registered in the graph. Note that this logic won’t traverse lists or any other data structures and will only consider Tensor’s that are direct arguments to the call. You can return either a single Tensor output, or a list of <code>Tensor</code>s if there are multiple outputs. Also, please refer to the docs of <code>autograd_function</code> to find descriptions of useful methods that can be called only from <code>forward()</code>.</p></li>
@@ -206,62 +205,59 @@
 <a href="#examples" class="anchor"></a>Examples</h2>
 <p>Below you can find code for a linear function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autograd_function.html">autograd_function</a></span>(
-  forward = <span class="fu">function</span>(<span class="kw">ctx</span>, <span class="kw">input</span>, <span class="kw">weight</span>, <span class="kw">bias</span> = <span class="kw">NULL</span>) {
-    <span class="kw">ctx</span><span class="op">$</span><span class="fu">save_for_backward</span>(input = <span class="kw">input</span>, weight = <span class="kw">weight</span>, bias = <span class="kw">bias</span>)
-    <span class="kw">output</span> <span class="op">&lt;-</span> <span class="kw">input</span><span class="op">$</span><span class="fu">mm</span>(<span class="kw">weight</span><span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>())
-    <span class="co">if</span> (<span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(<span class="kw">bias</span>))
-      <span class="kw">output</span> <span class="op">&lt;-</span> <span class="kw">output</span> <span class="op">+</span> <span class="kw">bias</span><span class="op">$</span><span class="fu">unsqueeze</span>(<span class="fl">0</span>)<span class="op">$</span><span class="fu">expand_as</span>(<span class="kw">output</span>)
+<span class="va">linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autograd_function.html">autograd_function</a></span><span class="op">(</span>
+  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">ctx</span>, <span class="va">input</span>, <span class="va">weight</span>, <span class="va">bias</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">ctx</span><span class="op">$</span><span class="fu">save_for_backward</span><span class="op">(</span>input <span class="op">=</span> <span class="va">input</span>, weight <span class="op">=</span> <span class="va">weight</span>, bias <span class="op">=</span> <span class="va">bias</span><span class="op">)</span>
+    <span class="va">output</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">$</span><span class="fu">mm</span><span class="op">(</span><span class="va">weight</span><span class="op">$</span><span class="fu">t</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">bias</span><span class="op">)</span><span class="op">)</span>
+      <span class="va">output</span> <span class="op">&lt;-</span> <span class="va">output</span> <span class="op">+</span> <span class="va">bias</span><span class="op">$</span><span class="fu">unsqueeze</span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">$</span><span class="fu">expand_as</span><span class="op">(</span><span class="va">output</span><span class="op">)</span>
     
-    <span class="kw">output</span>
-  },
-  backward = <span class="fu">function</span>(<span class="kw">ctx</span>, <span class="kw">grad_output</span>) {
+    <span class="va">output</span>
+  <span class="op">}</span>,
+  backward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">ctx</span>, <span class="va">grad_output</span><span class="op">)</span> <span class="op">{</span>
     
-    <span class="kw">s</span> <span class="op">&lt;-</span> <span class="kw">ctx</span><span class="op">$</span><span class="kw">saved_variables</span>
+    <span class="va">s</span> <span class="op">&lt;-</span> <span class="va">ctx</span><span class="op">$</span><span class="va">saved_variables</span>
     
-    <span class="kw">grads</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-      input = <span class="kw">NULL</span>,
-      weight = <span class="kw">NULL</span>,
-      bias = <span class="kw">NULL</span>
-    )
+    <span class="va">grads</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+      input <span class="op">=</span> <span class="cn">NULL</span>,
+      weight <span class="op">=</span> <span class="cn">NULL</span>,
+      bias <span class="op">=</span> <span class="cn">NULL</span>
+    <span class="op">)</span>
     
-    <span class="co">if</span> (<span class="kw">ctx</span><span class="op">$</span><span class="kw">needs_input_grad</span><span class="op">$</span><span class="kw">input</span>)
-      <span class="kw">grads</span><span class="op">$</span><span class="kw">input</span> <span class="op">&lt;-</span> <span class="kw">grad_output</span><span class="op">$</span><span class="fu">mm</span>(<span class="kw">s</span><span class="op">$</span><span class="kw">weight</span>)
+    <span class="kw">if</span> <span class="op">(</span><span class="va">ctx</span><span class="op">$</span><span class="va">needs_input_grad</span><span class="op">$</span><span class="va">input</span><span class="op">)</span>
+      <span class="va">grads</span><span class="op">$</span><span class="va">input</span> <span class="op">&lt;-</span> <span class="va">grad_output</span><span class="op">$</span><span class="fu">mm</span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span>
     
-    <span class="co">if</span> (<span class="kw">ctx</span><span class="op">$</span><span class="kw">needs_input_grad</span><span class="op">$</span><span class="kw">weight</span>)
-      <span class="kw">grads</span><span class="op">$</span><span class="kw">weight</span> <span class="op">&lt;-</span> <span class="kw">grad_output</span><span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>()<span class="op">$</span><span class="fu">mm</span>(<span class="kw">s</span><span class="op">$</span><span class="kw">input</span>)
+    <span class="kw">if</span> <span class="op">(</span><span class="va">ctx</span><span class="op">$</span><span class="va">needs_input_grad</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span>
+      <span class="va">grads</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="va">grad_output</span><span class="op">$</span><span class="fu">t</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">mm</span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">input</span><span class="op">)</span>
     
-    <span class="co">if</span> (<span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(<span class="kw">s</span><span class="op">$</span><span class="kw">bias</span>) <span class="op">&amp;&amp;</span> <span class="kw">ctx</span><span class="op">$</span><span class="kw">needs_input_grad</span><span class="op">$</span><span class="kw">bias</span>)
-      <span class="kw">grads</span><span class="op">$</span><span class="kw">bias</span> <span class="op">&lt;-</span> <span class="kw">grad_output</span><span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(dim = <span class="fl">0</span>)
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">bias</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">ctx</span><span class="op">$</span><span class="va">needs_input_grad</span><span class="op">$</span><span class="va">bias</span><span class="op">)</span>
+      <span class="va">grads</span><span class="op">$</span><span class="va">bias</span> <span class="op">&lt;-</span> <span class="va">grad_output</span><span class="op">$</span><span class="fu">sum</span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
     
-    <span class="kw">grads</span>
-  }
-)
-</pre></div>
+    <span class="va">grads</span>
+  <span class="op">}</span>
+<span class="op">)</span></pre></div>
 <p>Here, we give an additional example of a function that is parametrized by non-Tensor arguments:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">mul_constant</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autograd_function.html">autograd_function</a></span>(
-  forward = <span class="fu">function</span>(<span class="kw">ctx</span>, <span class="kw">tensor</span>, <span class="kw">constant</span>) {
-    <span class="kw">ctx</span><span class="op">$</span><span class="fu">save_for_backward</span>(constant = <span class="kw">constant</span>)
-    <span class="kw">tensor</span> <span class="op">*</span> <span class="kw">constant</span>
-  },
-  backward = <span class="fu">function</span>(<span class="kw">ctx</span>, <span class="kw">grad_output</span>) {
-    <span class="kw">v</span> <span class="op">&lt;-</span> <span class="kw">ctx</span><span class="op">$</span><span class="kw">saved_variables</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-      tensor = <span class="kw">grad_output</span> <span class="op">*</span> <span class="kw">v</span><span class="op">$</span><span class="kw">constant</span>
-    )
-  }
-)
-</pre></div>
+<span class="va">mul_constant</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autograd_function.html">autograd_function</a></span><span class="op">(</span>
+  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">ctx</span>, <span class="va">tensor</span>, <span class="va">constant</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">ctx</span><span class="op">$</span><span class="fu">save_for_backward</span><span class="op">(</span>constant <span class="op">=</span> <span class="va">constant</span><span class="op">)</span>
+    <span class="va">tensor</span> <span class="op">*</span> <span class="va">constant</span>
+  <span class="op">}</span>,
+  backward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">ctx</span>, <span class="va">grad_output</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">v</span> <span class="op">&lt;-</span> <span class="va">ctx</span><span class="op">$</span><span class="va">saved_variables</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+      tensor <span class="op">=</span> <span class="va">grad_output</span> <span class="op">*</span> <span class="va">v</span><span class="op">$</span><span class="va">constant</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">1</span>, requires_grad = <span class="fl">TRUE</span>)
-<span class="kw">o</span> <span class="op">&lt;-</span> <span class="fu">mul_constant</span>(<span class="kw">x</span>, <span class="fl">2</span>)
-<span class="kw">o</span><span class="op">$</span><span class="fu">backward</span>()
-<span class="kw">x</span><span class="op">$</span><span class="kw">grad</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">o</span> <span class="op">&lt;-</span> <span class="fu">mul_constant</span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="va">o</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
+<span class="va">x</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor </span>
 <span class="co">#&gt;  2</span>
-<span class="co">#&gt; [ CPUFloatType{1} ]</span>
-</pre></div>
+<span class="co">#&gt; [ CPUFloatType{1} ]</span></pre></div>
 </div>
   </div>
 

@@ -227,7 +227,7 @@
     <p>Mean</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_mean</span>(<span class='kw'>self</span>, <span class='kw'>dim</span>, keepdim = <span class='fl'>FALSE</span>, dtype = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_mean</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>dim</span>, keepdim <span class='op'>=</span> <span class='cn'>FALSE</span>, dtype <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -270,20 +270,20 @@ Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>
 output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_mean</span>(<span class='kw'>a</span>)
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_mean</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
 
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_mean</span>(<span class='kw'>a</span>, <span class='fl'>1</span>)
-<span class='fu'>torch_mean</span>(<span class='kw'>a</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_mean</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='fu'>torch_mean</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>1</span>, <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4882 -0.1777 -0.2454  0.1152
+#&gt; -0.0850 -1.0062  0.6430 -0.0652
 #&gt; [ CPUFloatType{1,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

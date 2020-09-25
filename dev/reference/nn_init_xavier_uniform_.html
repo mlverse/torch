@@ -231,7 +231,7 @@ described in <code>Understanding the difficulty of training deep feedforward neu
 distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_xavier_uniform_</span>(<span class='kw'>tensor</span>, gain = <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_init_xavier_uniform_</span><span class='op'>(</span><span class='va'>tensor</span>, gain <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -248,11 +248,11 @@ distribution.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>nn_init_xavier_uniform_</span>(<span class='kw'>w</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>nn_init_xavier_uniform_</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; -1.7935  0.9545 -0.0194 -2.4483  2.9345
 #&gt;  2.2750 -2.4048 -0.4406 -2.2409  0.4155

@@ -227,13 +227,13 @@
     <p>Irfft</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_irfft</span>(
-  <span class='kw'>self</span>,
-  <span class='kw'>signal_ndim</span>,
-  normalized = <span class='fl'>FALSE</span>,
-  onesided = <span class='fl'>TRUE</span>,
-  signal_sizes = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
-)</pre>
+    <pre class="usage"><span class='fu'>torch_irfft</span><span class='op'>(</span>
+  <span class='va'>self</span>,
+  <span class='va'>signal_ndim</span>,
+  normalized <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  onesided <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  signal_sizes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -317,20 +317,20 @@ certainly fail the check.</p>
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
-<span class='kw'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
-<span class='fu'>torch_irfft</span>(<span class='kw'>y</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>, signal_sizes=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span>
-}
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>torch_irfft</span><span class='op'>(</span><span class='va'>y</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>TRUE</span>, signal_sizes<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>,<span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># recover x</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5686  3.8014  0.3574 -1.0996 -1.3855
-#&gt; -1.1381 -0.3768  0.3348 -0.3409 -0.5111
-#&gt; -0.1556 -0.7232  0.1089  1.6228  0.3948
-#&gt; -0.0624  0.0896  1.7939 -0.5093 -0.3448
+#&gt;  0.1553 -0.7659 -0.7525 -0.6398  0.1127
+#&gt;  2.3030 -0.2962  0.1160 -0.5139 -1.2658
+#&gt; -1.3739 -1.2836  0.0011  0.1625  0.3626
+#&gt; -2.4789  0.7775  0.7135  0.2365  1.0249
 #&gt; [ CPUFloatType{4,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

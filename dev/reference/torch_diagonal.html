@@ -227,7 +227,7 @@
     <p>Diagonal</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_diagonal</span>(<span class='kw'>self</span>, <span class='kw'>outdim</span>, dim1 = <span class='fl'>1L</span>, dim2 = <span class='fl'>2L</span>, offset = <span class='fl'>0L</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_diagonal</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>outdim</span>, dim1 <span class='op'>=</span> <span class='fl'>1L</span>, dim2 <span class='op'>=</span> <span class='fl'>2L</span>, offset <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -274,32 +274,31 @@ of the input. However, <code>torch_diag_embed</code> has different default
 dimensions, so those need to be explicitly specified.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_diagonal</span>(<span class='kw'>a</span>, offset = <span class='fl'>0</span>)
-<span class='fu'>torch_diagonal</span>(<span class='kw'>a</span>, offset = <span class='fl'>1</span>)
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>2</span>))
-<span class='fu'>torch_diagonal</span>(<span class='kw'>x</span>, offset=<span class='op'>-</span><span class='fl'>1</span>, dim1=<span class='fl'>1</span>, dim2=<span class='fl'>2</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_diagonal</span><span class='op'>(</span><span class='va'>a</span>, offset <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+<span class='fu'>torch_diagonal</span><span class='op'>(</span><span class='va'>a</span>, offset <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>torch_diagonal</span><span class='op'>(</span><span class='va'>x</span>, offset<span class='op'>=</span><span class='op'>-</span><span class='fl'>1</span>, dim1<span class='op'>=</span><span class='fl'>1</span>, dim2<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  0.01 *
-#&gt;   9.2235
-#&gt;   -59.6080
+#&gt;   1.1730
+#&gt;   1.6315
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.1521
-#&gt;   0.2517
+#&gt;  -0.4452
+#&gt;   2.0812
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -0.3227
-#&gt;  -0.8649
+#&gt;   1.1981
+#&gt;  -1.0686
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -0.6815
-#&gt;  -1.3403
+#&gt;   0.9468
+#&gt;  -0.6987
 #&gt; [ CPUFloatType{4,2,1} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

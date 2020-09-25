@@ -229,7 +229,7 @@ The number of output features is equal to the number of input planes." />
 The number of output features is equal to the number of input planes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_adaptive_avg_pool2d</span>(<span class='kw'>output_size</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_adaptive_avg_pool2d</span><span class='op'>(</span><span class='va'>output_size</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -245,17 +245,17 @@ be the same as that of the input.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># target output size of 5x7</span>
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_adaptive_avg_pool2d</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>7</span>))
-<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>1</span>, <span class='fl'>64</span>, <span class='fl'>8</span>, <span class='fl'>9</span>)
-<span class='kw'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_adaptive_avg_pool2d</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>,<span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>64</span>, <span class='fl'>8</span>, <span class='fl'>9</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
 <span class='co'># target output size of 7x7 (square)</span>
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_adaptive_avg_pool2d</span>(<span class='fl'>7</span>)
-<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>1</span>, <span class='fl'>64</span>, <span class='fl'>10</span>, <span class='fl'>9</span>)
-<span class='kw'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_adaptive_avg_pool2d</span><span class='op'>(</span><span class='fl'>7</span><span class='op'>)</span>
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>64</span>, <span class='fl'>10</span>, <span class='fl'>9</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

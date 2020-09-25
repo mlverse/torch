@@ -227,7 +227,7 @@
     <p>Div</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_div</span>(<span class='kw'>self</span>, <span class='kw'>other</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_div</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>other</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -282,24 +282,24 @@ to the <code>torch_dtype</code> of the specified output tensor. Integral divisio
 by zero leads to undefined behavior.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_div</span>(<span class='kw'>a</span>, <span class='fl'>0.5</span>)
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_div</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>0.5</span><span class='op'>)</span>
 
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='kw'>a</span>
-<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='kw'>b</span>
-<span class='fu'>torch_div</span>(<span class='kw'>a</span>, <span class='kw'>b</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>b</span>
+<span class='fu'>torch_div</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0114 -0.2917 -3.6157  0.1733
-#&gt; -3.5062  0.0142 -4.7248  2.1322
-#&gt;  2.7414 -1.0492 -2.7113  0.2074
-#&gt;  0.8683  0.0078 -3.3643  0.4430
+#&gt;  20.3486  -1.0204  -0.4843  -0.8118
+#&gt; -21.6234  -0.9172  -0.5121   2.4088
+#&gt;  -0.4354   1.6232   0.2899  -1.4600
+#&gt;  10.2969  -0.5998   0.1900  -1.4300
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -227,7 +227,7 @@
     <p>Clamp</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_clamp</span>(<span class='kw'>self</span>, min = <span class='kw'>NULL</span>, max = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>self</span>, min <span class='op'>=</span> <span class='cn'>NULL</span>, max <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -281,27 +281,27 @@ should be a real number, otherwise it should be an integer.</p>
 should be a real number, otherwise it should be an integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_clamp</span>(<span class='kw'>a</span>, min=<span class='op'>-</span><span class='fl'>0.5</span>, max=<span class='fl'>0.5</span>)
-
-
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_clamp</span>(<span class='kw'>a</span>, min=<span class='fl'>0.5</span>)
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>a</span>, min<span class='op'>=</span><span class='op'>-</span><span class='fl'>0.5</span>, max<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
 
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_clamp</span>(<span class='kw'>a</span>, max=<span class='fl'>0.5</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>a</span>, min<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
+
+
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>a</span>, max<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.0415
-#&gt;  0.2026
-#&gt;  0.0666
-#&gt;  0.3481
+#&gt;  0.5000
+#&gt; -0.9445
+#&gt;  0.5000
+#&gt; -1.7827
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

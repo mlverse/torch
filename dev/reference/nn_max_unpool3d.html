@@ -233,7 +233,7 @@ including the indices of the maximal values and computes a partial inverse
 in which all non-maximal values are set to zero.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_max_unpool3d</span>(<span class='kw'>kernel_size</span>, stride = <span class='kw'>NULL</span>, padding = <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_max_unpool3d</span><span class='op'>(</span><span class='va'>kernel_size</span>, stride <span class='op'>=</span> <span class='cn'>NULL</span>, padding <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -291,16 +291,16 @@ $$</p>
 <p>or as given by <code>output_size</code> in the call operator</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   
 <span class='co'># pool of square window of size=3, stride=2</span>
-<span class='kw'>pool</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_max_pool3d.html'>nn_max_pool3d</a></span>(<span class='fl'>3</span>, stride=<span class='fl'>2</span>, return_indices=<span class='fl'>TRUE</span>)
-<span class='kw'>unpool</span> <span class='op'>&lt;-</span> <span class='fu'>nn_max_unpool3d</span>(<span class='fl'>3</span>, stride=<span class='fl'>2</span>)
-<span class='kw'>out</span> <span class='op'>&lt;-</span> <span class='fu'>pool</span>(<span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>51</span>, <span class='fl'>33</span>, <span class='fl'>15</span>))
-<span class='kw'>unpooled_output</span> <span class='op'>&lt;-</span> <span class='fu'>unpool</span>(<span class='kw'>out</span>[[<span class='fl'>1</span>]], <span class='kw'>out</span>[[<span class='fl'>2</span>]])
-<span class='kw'>unpooled_output</span><span class='op'>$</span><span class='fu'>size</span>()
+<span class='va'>pool</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_max_pool3d.html'>nn_max_pool3d</a></span><span class='op'>(</span><span class='fl'>3</span>, stride<span class='op'>=</span><span class='fl'>2</span>, return_indices<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>unpool</span> <span class='op'>&lt;-</span> <span class='fu'>nn_max_unpool3d</span><span class='op'>(</span><span class='fl'>3</span>, stride<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'>pool</span><span class='op'>(</span><span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>51</span>, <span class='fl'>33</span>, <span class='fl'>15</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>unpooled_output</span> <span class='op'>&lt;-</span> <span class='fu'>unpool</span><span class='op'>(</span><span class='va'>out</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, <span class='va'>out</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+<span class='va'>unpooled_output</span><span class='op'>$</span><span class='fu'>size</span><span class='op'>(</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [1] 20 16 51 33 15</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

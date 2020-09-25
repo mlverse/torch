@@ -227,7 +227,7 @@
     <p>Cumsum</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_cumsum</span>(<span class='kw'>self</span>, <span class='kw'>dim</span>, dtype = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_cumsum</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>dim</span>, dtype <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -260,23 +260,23 @@ a vector of size N, with elements.</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_cumsum</span>(<span class='kw'>a</span>, dim=<span class='fl'>1</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_cumsum</span><span class='op'>(</span><span class='va'>a</span>, dim<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5989
-#&gt; -0.5838
-#&gt; -1.4845
-#&gt; -1.0745
-#&gt; -2.6199
-#&gt; -3.4967
-#&gt; -4.2049
-#&gt; -4.4606
-#&gt; -6.7535
-#&gt; -7.8576
+#&gt; -0.6732
+#&gt;  0.8588
+#&gt; -0.3930
+#&gt; -1.4635
+#&gt; -0.4812
+#&gt; -1.8530
+#&gt; -1.9837
+#&gt; -2.2898
+#&gt; -2.0312
+#&gt; -1.7255
 #&gt; [ CPUFloatType{10} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

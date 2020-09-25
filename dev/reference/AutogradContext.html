@@ -260,12 +260,12 @@ Class representing the context." />
 <p><hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
 <p>(Dev related) Initializes the context. Not user related.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>new</span>(
-  <span class='kw'>ptr</span>,
-  <span class='kw'>env</span>,
-  argument_names = <span class='kw'>NULL</span>,
-  argument_needs_grad = <span class='kw'>NULL</span>
-)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>AutogradContext</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
+  <span class='va'>ptr</span>,
+  <span class='va'>env</span>,
+  argument_names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  argument_needs_grad <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -287,7 +287,7 @@ method.</p>
 Before returning them to the user, a check is made to ensure they weren’t used
 in any in-place operation that modified their content.</p>
 <p>Arguments can also be any kind of R object.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>save_for_backward</span>(<span class='kw'>...</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>AutogradContext</span><span class='op'>$</span><span class='fu'>save_for_backward</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -305,7 +305,7 @@ of backward computation. You still need to accept a gradient for each output
 in <code>backward()</code>, but it’s always going to be a zero tensor with the same
 shape as the shape of a corresponding output.</p>
 <p>This is used e.g. for indices returned from a max Function.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>mark_non_differentiable</span>(<span class='kw'>...</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>AutogradContext</span><span class='op'>$</span><span class='fu'>mark_non_differentiable</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -320,7 +320,7 @@ and all arguments should be inputs.</p>
 <p>Every tensor that’s been modified in-place in a call to <code>forward()</code> should
 be given to this function, to ensure correctness of our checks. It doesn’t
 matter whether the function is called before or after modification.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>mark_dirty</span>(<span class='kw'>...</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>AutogradContext</span><span class='op'>$</span><span class='fu'>mark_dirty</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -330,7 +330,7 @@ matter whether the function is called before or after modification.</p><h4 class
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>AutogradContext</span><span class='op'>$</span><span class='fu'>clone</span>(deep = <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>AutogradContext</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>

@@ -227,7 +227,7 @@
     <p>Transpose</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_transpose</span>(<span class='kw'>self</span>, <span class='kw'>dim0</span>, <span class='kw'>dim1</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_transpose</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>dim0</span>, <span class='va'>dim1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -258,16 +258,16 @@ The given dimensions <code>dim0</code> and <code>dim1</code> are swapped.</p>
 of the other.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='kw'>x</span>
-<span class='fu'>torch_transpose</span>(<span class='kw'>x</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)
-}
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>x</span>
+<span class='fu'>torch_transpose</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5248 -0.8171
-#&gt;  0.5811  0.5528
-#&gt;  0.8467  0.0692
+#&gt; -1.1506  1.2548
+#&gt;  0.1529  0.8343
+#&gt; -0.0381 -0.2695
 #&gt; [ CPUFloatType{3,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -227,7 +227,7 @@
     <p>Slogdet</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_slogdet</span>(<span class='kw'>self</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_slogdet</span><span class='op'>(</span><span class='va'>self</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -258,22 +258,22 @@ See `~torch.svd` for details.
 <p>Calculates the sign and log absolute value of the determinant(s) of a square matrix or batches of square matrices.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='kw'>A</span>
-<span class='fu'><a href='torch_det.html'>torch_det</a></span>(<span class='kw'>A</span>)
-<span class='fu'><a href='torch_logdet.html'>torch_logdet</a></span>(<span class='kw'>A</span>)
-<span class='fu'>torch_slogdet</span>(<span class='kw'>A</span>)
-}
+<span class='va'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>A</span>
+<span class='fu'><a href='torch_det.html'>torch_det</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+<span class='fu'><a href='torch_logdet.html'>torch_logdet</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+<span class='fu'>torch_slogdet</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
-#&gt; 1
+#&gt; -1
 #&gt; [ CPUFloatType{} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt; -0.422878
+#&gt; 0.274398
 #&gt; [ CPUFloatType{} ]
 #&gt; </div></pre>
   </div>

@@ -227,7 +227,7 @@
     <p>Diag_embed</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_diag_embed</span>(<span class='kw'>self</span>, offset = <span class='fl'>0L</span>, dim1 = <span class='op'>-</span><span class='fl'>2L</span>, dim2 = <span class='op'>-</span><span class='fl'>1L</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_diag_embed</span><span class='op'>(</span><span class='va'>self</span>, offset <span class='op'>=</span> <span class='fl'>0L</span>, dim1 <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2L</span>, dim2 <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1L</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -276,24 +276,24 @@ the same arguments yields a matrix identical to input. However,
 need to be explicitly specified.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='fu'>torch_diag_embed</span>(<span class='kw'>a</span>)
-<span class='fu'>torch_diag_embed</span>(<span class='kw'>a</span>, offset=<span class='fl'>1</span>, dim1=<span class='fl'>1</span>, dim2=<span class='fl'>3</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>torch_diag_embed</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
+<span class='fu'>torch_diag_embed</span><span class='op'>(</span><span class='va'>a</span>, offset<span class='op'>=</span><span class='fl'>1</span>, dim1<span class='op'>=</span><span class='fl'>1</span>, dim2<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.0000  0.2623  0.0000  0.0000
-#&gt;   0.0000 -0.4714  0.0000  0.0000
+#&gt;   0.0000  0.2895  0.0000  0.0000
+#&gt;   0.0000  0.0754  0.0000  0.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   0.0000  0.0000  1.2590  0.0000
-#&gt;   0.0000  0.0000 -2.0729  0.0000
+#&gt;   0.0000  0.0000  2.3971  0.0000
+#&gt;   0.0000  0.0000 -0.5953  0.0000
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.0000  0.0000  0.0000  1.9740
-#&gt;   0.0000  0.0000  0.0000  0.6940
+#&gt;   0.0000  0.0000  0.0000 -0.0886
+#&gt;   0.0000  0.0000  0.0000  0.5253
 #&gt; 
 #&gt; (4,.,.) = 
 #&gt;   0  0  0  0

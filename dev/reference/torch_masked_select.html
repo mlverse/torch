@@ -227,7 +227,7 @@
     <p>Masked_select</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_masked_select</span>(<span class='kw'>self</span>, <span class='kw'>mask</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_masked_select</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>mask</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -257,21 +257,20 @@ the boolean mask <code>mask</code> which is a <code>BoolTensor</code>.</p>
 to match, but they must be broadcastable .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='kw'>x</span>
-<span class='kw'>mask</span> <span class='op'>=</span> <span class='kw'>x</span><span class='op'>$</span><span class='fu'>ge</span>(<span class='fl'>0.5</span>)
-<span class='kw'>mask</span>
-<span class='fu'>torch_masked_select</span>(<span class='kw'>x</span>, <span class='kw'>mask</span>)
-}
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>x</span>
+<span class='va'>mask</span> <span class='op'>=</span> <span class='va'>x</span><span class='op'>$</span><span class='fu'>ge</span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>)</span>
+<span class='va'>mask</span>
+<span class='fu'>torch_masked_select</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>mask</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6499
-#&gt;  0.6752
-#&gt;  1.3339
-#&gt;  1.7655
-#&gt;  0.6456
-#&gt; [ CPUFloatType{5} ]</div></pre>
+#&gt;  0.7937
+#&gt;  0.8369
+#&gt;  1.0728
+#&gt;  1.1520
+#&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

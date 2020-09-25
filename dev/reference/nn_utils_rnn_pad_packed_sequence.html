@@ -227,12 +227,12 @@
     <p>It is an inverse operation to <code><a href='nn_utils_rnn_pack_padded_sequence.html'>nn_utils_rnn_pack_padded_sequence()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_utils_rnn_pad_packed_sequence</span>(
-  <span class='kw'>sequence</span>,
-  batch_first = <span class='fl'>FALSE</span>,
-  padding_value = <span class='fl'>0</span>,
-  total_length = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>nn_utils_rnn_pad_packed_sequence</span><span class='op'>(</span>
+  <span class='va'>sequence</span>,
+  batch_first <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  padding_value <span class='op'>=</span> <span class='fl'>0</span>,
+  total_length <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -278,15 +278,15 @@ the data will be transposed into <code>B x T x *</code> format.</p>
 <code>nn_module</code> wrapped in <code>~torch.nn.DataParallel</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>seq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>0</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>0</span>,<span class='fl'>0</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>)))        
-<span class='kw'>lens</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>1</span>,<span class='fl'>3</span>)
-<span class='kw'>packed</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_utils_rnn_pack_padded_sequence.html'>nn_utils_rnn_pack_padded_sequence</a></span>(<span class='kw'>seq</span>, <span class='kw'>lens</span>, batch_first = <span class='fl'>TRUE</span>,
-                                            enforce_sorted = <span class='fl'>FALSE</span>)
-<span class='kw'>packed</span>
-<span class='fu'>nn_utils_rnn_pad_packed_sequence</span>(<span class='kw'>packed</span>, batch_first=<span class='fl'>TRUE</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>seq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>        
+<span class='va'>lens</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>packed</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_utils_rnn_pack_padded_sequence.html'>nn_utils_rnn_pack_padded_sequence</a></span><span class='op'>(</span><span class='va'>seq</span>, <span class='va'>lens</span>, batch_first <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                                            enforce_sorted <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>packed</span>
+<span class='fu'>nn_utils_rnn_pad_packed_sequence</span><span class='op'>(</span><span class='va'>packed</span>, batch_first<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt;  1  2  0

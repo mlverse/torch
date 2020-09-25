@@ -237,7 +237,7 @@ processed in the topological ordering, by calling <code>backward()</code> method
 Function object, and passing returned gradients on to next Function's.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>autograd_function</span>(<span class='kw'>forward</span>, <span class='kw'>backward</span>)</pre>
+    <pre class="usage"><span class='fu'>autograd_function</span><span class='op'>(</span><span class='va'>forward</span>, <span class='va'>backward</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -266,20 +266,20 @@ See <a href='AutogradContext.html'>AutogradContext</a> for more information abou
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>exp2</span> <span class='op'>&lt;-</span> <span class='fu'>autograd_function</span>(
-  forward = <span class='fu'>function</span>(<span class='kw'>ctx</span>, <span class='kw'>i</span>) {
-    <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='kw'>i</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>()
-    <span class='kw'>ctx</span><span class='op'>$</span><span class='fu'>save_for_backward</span>(result = <span class='kw'>result</span>)
-    <span class='kw'>result</span>
-  },
-  backward = <span class='fu'>function</span>(<span class='kw'>ctx</span>, <span class='kw'>grad_output</span>) {
-    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(i = <span class='kw'>grad_output</span> <span class='op'>*</span> <span class='kw'>ctx</span><span class='op'>$</span><span class='kw'>saved_variable</span><span class='op'>$</span><span class='kw'>result</span>)
-  }
-)
+<span class='va'>exp2</span> <span class='op'>&lt;-</span> <span class='fu'>autograd_function</span><span class='op'>(</span>
+  forward <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>ctx</span>, <span class='va'>i</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='va'>result</span> <span class='op'>&lt;-</span> <span class='va'>i</span><span class='op'>$</span><span class='fu'>exp</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='va'>ctx</span><span class='op'>$</span><span class='fu'>save_for_backward</span><span class='op'>(</span>result <span class='op'>=</span> <span class='va'>result</span><span class='op'>)</span>
+    <span class='va'>result</span>
+  <span class='op'>}</span>,
+  backward <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>ctx</span>, <span class='va'>grad_output</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>i <span class='op'>=</span> <span class='va'>grad_output</span> <span class='op'>*</span> <span class='va'>ctx</span><span class='op'>$</span><span class='va'>saved_variable</span><span class='op'>$</span><span class='va'>result</span><span class='op'>)</span>
+  <span class='op'>}</span>
+<span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

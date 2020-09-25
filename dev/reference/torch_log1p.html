@@ -227,7 +227,7 @@
     <p>Log1p</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_log1p</span>(<span class='kw'>self</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_log1p</span><span class='op'>(</span><span class='va'>self</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -253,18 +253,18 @@ values of <code>input</code></p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_log1p</span>(<span class='kw'>a</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_log1p</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.6162
-#&gt; -0.0699
-#&gt;  0.8486
-#&gt;  0.1701
-#&gt; -0.4177
+#&gt;  1.2001
+#&gt; -1.9839
+#&gt; -2.3174
+#&gt;     nan
+#&gt;  1.0252
 #&gt; [ CPUFloatType{5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

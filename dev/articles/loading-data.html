@@ -184,8 +184,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
 <div id="datasets-and-data-loaders" class="section level2">
 <h2 class="hasAnchor">
 <a href="#datasets-and-data-loaders" class="anchor"></a>Datasets and data loaders</h2>
@@ -214,10 +213,10 @@
 <h2 class="hasAnchor">
 <a href="#a-custom-dataset" class="anchor"></a>A custom dataset</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://allisonhorst.github.io/palmerpenguins">palmerpenguins</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">magrittr</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">magrittr</span><span class="op">)</span>
 
-<span class="kw">penguins</span>
+<span class="va">penguins</span>
 <span class="co">#&gt; # A tibble: 344 x 8</span>
 <span class="co">#&gt;    species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g</span>
 <span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;</span>
@@ -231,52 +230,50 @@
 <span class="co">#&gt;  8 Adelie  Torge…           39.2          19.6              195        4675</span>
 <span class="co">#&gt;  9 Adelie  Torge…           34.1          18.1              193        3475</span>
 <span class="co">#&gt; 10 Adelie  Torge…           42            20.2              190        4250</span>
-<span class="co">#&gt; # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span>
-</pre></div>
+<span class="co">#&gt; # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></pre></div>
 <p><code>Dataset</code>s are R6 classes created using the <code><a href="../reference/dataset.html">dataset()</a></code> constructor. You can pass a <code>name</code> and various member functions. Among those should be <code>initialize()</code>, to create instance variables, <code>.getitem()</code>, to indicate how the data should be returned, and <code>.length()</code>, to say how many items we have.</p>
 <p>In addition, any number of helper functions can be defined.</p>
 <p>Here, we assume the <code>penguins</code> have already been loaded, and all preprocessing consists in removing lines with <code>NA</code> values, transforming <code>factor</code>s to numbers starting from 0, and converting from R data types to <code>torch</code> tensors.</p>
 <p>In <code>.getitem</code>, we essentially decide how this data is going to be used: All variables besides <code>species</code> go into <code>x</code>, the predictor, and <code>species</code> will constitute <code>y</code>, the target. Predictor and target are returned in a list, to be accessed as <code>batch[[1]]</code> and <code>batch[[2]]</code> during training.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">penguins_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataset.html">dataset</a></span>(
+<span class="va">penguins_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataset.html">dataset</a></span><span class="op">(</span>
   
-  name = <span class="st">"penguins_dataset"</span>,
+  name <span class="op">=</span> <span class="st">"penguins_dataset"</span>,
   
-  initialize = <span class="fu">function</span>() {
-    <span class="kw">self</span><span class="op">$</span><span class="kw">data</span> <span class="op">&lt;-</span> <span class="kw">self</span><span class="op">$</span><span class="fu">prepare_penguin_data</span>()
-  },
+  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">prepare_penguin_data</span><span class="op">(</span><span class="op">)</span>
+  <span class="op">}</span>,
   
-  .getitem = <span class="fu">function</span>(<span class="kw">index</span>) {
+  .getitem <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">index</span><span class="op">)</span> <span class="op">{</span>
     
-    <span class="kw">x</span> <span class="op">&lt;-</span> <span class="kw">self</span><span class="op">$</span><span class="kw">data</span>[<span class="kw">index</span>, <span class="fl">2</span><span class="op">:</span><span class="op">-</span><span class="fl">1</span>]
-    <span class="kw">y</span> <span class="op">&lt;-</span> <span class="kw">self</span><span class="op">$</span><span class="kw">data</span>[<span class="kw">index</span>, <span class="fl">1</span>]<span class="op">$</span><span class="fu">to</span>(<span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span>())
+    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">data</span><span class="op">[</span><span class="va">index</span>, <span class="fl">2</span><span class="op">:</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+    <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">data</span><span class="op">[</span><span class="va">index</span>, <span class="fl">1</span><span class="op">]</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span><span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
     
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">x</span>, <span class="kw">y</span>)
-  },
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
+  <span class="op">}</span>,
   
-  .length = <span class="fu">function</span>() {
-    <span class="kw">self</span><span class="op">$</span><span class="kw">data</span><span class="op">$</span><span class="fu">size</span>()[[<span class="fl">1</span>]]
-  },
+  .length <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+  <span class="op">}</span>,
   
-  prepare_penguin_data = <span class="fu">function</span>() {
+  prepare_penguin_data <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
     
-    <span class="kw">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(<span class="kw">penguins</span>) 
+    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span> 
     <span class="co"># conveniently, the categorical data are already factors</span>
-    <span class="kw">input</span><span class="op">$</span><span class="kw">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw">input</span><span class="op">$</span><span class="kw">species</span>)
-    <span class="kw">input</span><span class="op">$</span><span class="kw">island</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw">input</span><span class="op">$</span><span class="kw">island</span>)
-    <span class="kw">input</span><span class="op">$</span><span class="kw">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw">input</span><span class="op">$</span><span class="kw">sex</span>)
+    <span class="va">input</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>
+    <span class="va">input</span><span class="op">$</span><span class="va">island</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">island</span><span class="op">)</span>
+    <span class="va">input</span><span class="op">$</span><span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span>
     
-    <span class="kw">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="kw">input</span>)
-    <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span>(<span class="kw">input</span>)
-  }
-)
-</pre></div>
+    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
+    <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">)</span></pre></div>
 <p>Let’s create the dataset , query for it’s length, and look at its first item:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">tuxes</span> <span class="op">&lt;-</span> <span class="fu">penguins_dataset</span>()
-<span class="kw">tuxes</span><span class="op">$</span><span class="fu">.length</span>()
+<span class="va">tuxes</span> <span class="op">&lt;-</span> <span class="fu">penguins_dataset</span><span class="op">(</span><span class="op">)</span>
+<span class="va">tuxes</span><span class="op">$</span><span class="fu">.length</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] 333</span>
-<span class="kw">tuxes</span><span class="op">$</span><span class="fu">.getitem</span>(<span class="fl">1</span>)
+<span class="va">tuxes</span><span class="op">$</span><span class="fu">.getitem</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; torch_tensor </span>
 <span class="co">#&gt;     3.0000</span>
@@ -291,22 +288,19 @@
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; torch_tensor </span>
 <span class="co">#&gt; 1</span>
-<span class="co">#&gt; [ CPULongType{} ]</span>
-</pre></div>
+<span class="co">#&gt; [ CPULongType{} ]</span></pre></div>
 <p>To be able to iterate over <code>tuxes</code>, we need a data loader (we override the default batch size of <code>1</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">dl</span> <span class="op">&lt;-</span><span class="kw">tuxes</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span>(batch_size = <span class="fl">8</span>)
-</pre></div>
+<span class="va">dl</span> <span class="op">&lt;-</span><span class="va">tuxes</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span><span class="op">(</span>batch_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></pre></div>
 <p>Calling <code>.length()</code> on a data loader (as opposed to a dataset) will return the number of <code>batches</code> we have:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">dl</span><span class="op">$</span><span class="fu">.length</span>()
-<span class="co">#&gt; [1] 42</span>
-</pre></div>
+<span class="va">dl</span><span class="op">$</span><span class="fu">.length</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 42</span></pre></div>
 <p>And we can create an iterator to inspect the first batch:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">iter</span> <span class="op">&lt;-</span> <span class="kw">dl</span><span class="op">$</span><span class="fu">.iter</span>()
-<span class="kw">b</span> <span class="op">&lt;-</span> <span class="kw">iter</span><span class="op">$</span><span class="fu">.next</span>()
-<span class="kw">b</span>
+<span class="va">iter</span> <span class="op">&lt;-</span> <span class="va">dl</span><span class="op">$</span><span class="fu">.iter</span><span class="op">(</span><span class="op">)</span>
+<span class="va">b</span> <span class="op">&lt;-</span> <span class="va">iter</span><span class="op">$</span><span class="fu">.next</span><span class="op">(</span><span class="op">)</span>
+<span class="va">b</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; torch_tensor </span>
 <span class="co">#&gt;     3.0000    39.1000    18.7000   181.0000  3750.0000     2.0000  2007.0000</span>
@@ -329,8 +323,7 @@
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  1</span>
-<span class="co">#&gt; [ CPULongType{8} ]</span>
-</pre></div>
+<span class="co">#&gt; [ CPULongType{8} ]</span></pre></div>
 <p>To train a network, we can use <code>enumerate</code> to iterate over batches.</p>
 </div>
 <div id="training-with-data-loaders" class="section level2">
@@ -338,44 +331,42 @@
 <a href="#training-with-data-loaders" class="anchor"></a>Training with data loaders</h2>
 <p>Our example network is very simple. (In reality, we would want to treat <code>island</code> as the categorical variable it is, and either one-hot-encode or embed it.)</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="kw">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span>(
+<span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
   <span class="st">"PenguinNet"</span>,
-  initialize = <span class="fu">function</span>() {
-    <span class="kw">self</span><span class="op">$</span><span class="kw">fc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span>(<span class="fl">7</span>, <span class="fl">32</span>)
-    <span class="kw">self</span><span class="op">$</span><span class="kw">fc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span>(<span class="fl">32</span>, <span class="fl">3</span>)
-  },
-  forward = <span class="fu">function</span>(<span class="kw">x</span>) {
-    <span class="kw">x</span> <span class="op">%&gt;%</span> 
-      <span class="kw">self</span><span class="op">$</span><span class="fu">fc1</span>() <span class="op">%&gt;%</span> 
-      <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span>() <span class="op">%&gt;%</span> 
-      <span class="kw">self</span><span class="op">$</span><span class="fu">fc2</span>() <span class="op">%&gt;%</span> 
-      <span class="fu"><a href="../reference/nnf_log_softmax.html">nnf_log_softmax</a></span>(dim = <span class="fl">1</span>)
-  }
-)
+  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">fc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">32</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">fc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span>
+  <span class="op">}</span>,
+  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">x</span> <span class="op">%&gt;%</span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">fc1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">fc2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="../reference/nnf_log_softmax.html">nnf_log_softmax</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">)</span>
 
-<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu">net</span>()
-</pre></div>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>We still need an optimizer:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="kw">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_sgd.html">optim_sgd</a></span>(<span class="kw">model</span><span class="op">$</span><span class="kw">parameters</span>, lr = <span class="fl">0.01</span>)
-</pre></div>
+<span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></pre></div>
 <p>And we’re ready to train:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="co">for</span> (<span class="kw">epoch</span> <span class="co">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>) {
+<span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
   
-  <span class="kw">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>()
+  <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
   
-  <span class="co">for</span> (<span class="kw">b</span> <span class="co">in</span> <span class="fu"><a href="../reference/enumerate.html">enumerate</a></span>(<span class="kw">dl</span>)) {
-    <span class="kw">optimizer</span><span class="op">$</span><span class="fu">zero_grad</span>()
-    <span class="kw">output</span> <span class="op">&lt;-</span> <span class="fu">model</span>(<span class="kw">b</span>[[<span class="fl">1</span>]])
-    <span class="kw">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_nll_loss.html">nnf_nll_loss</a></span>(<span class="kw">output</span>, <span class="kw">b</span>[[<span class="fl">2</span>]])
-    <span class="kw">loss</span><span class="op">$</span><span class="fu">backward</span>()
-    <span class="kw">optimizer</span><span class="op">$</span><span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span>()
-    <span class="kw">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">l</span>, <span class="kw">loss</span><span class="op">$</span><span class="fu">item</span>())
-  }
+  <span class="kw">for</span> <span class="op">(</span><span class="va">b</span> <span class="kw">in</span> <span class="fu"><a href="../reference/enumerate.html">enumerate</a></span><span class="op">(</span><span class="va">dl</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">optimizer</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>
+    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+    <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_nll_loss.html">nnf_nll_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+    <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
+    <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
+    <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">l</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">}</span>
   
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="kw">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">l</span>)))
-}
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 <span class="co">#&gt; Loss at epoch 1: 51.747068</span>
 <span class="co">#&gt; Loss at epoch 2: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 3: 2.068251</span>
@@ -385,8 +376,7 @@
 <span class="co">#&gt; Loss at epoch 7: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 8: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 9: 2.068251</span>
-<span class="co">#&gt; Loss at epoch 10: 2.068251</span>
-</pre></div>
+<span class="co">#&gt; Loss at epoch 10: 2.068251</span></pre></div>
 </div>
   </div>
 

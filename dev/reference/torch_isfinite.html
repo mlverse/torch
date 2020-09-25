@@ -227,7 +227,7 @@
     <p>Isfinite</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_isfinite</span>(<span class='kw'>self</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_isfinite</span><span class='op'>(</span><span class='va'>self</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -246,10 +246,10 @@
 <p>Returns a new tensor with boolean elements representing if each element is <code>Finite</code> or not.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='fu'>torch_isfinite</span>(<span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>Inf</span>, <span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>Inf</span>, <span class='fl'>NaN</span>)))
-}
+<span class='fu'>torch_isfinite</span><span class='op'>(</span><span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='cn'>Inf</span>, <span class='fl'>2</span>, <span class='op'>-</span><span class='cn'>Inf</span>, <span class='cn'>NaN</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt;  1
 #&gt;  0

@@ -229,7 +229,7 @@
 \(y = x_1^T A x_2 + b\)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_bilinear</span>(<span class='kw'>in1_features</span>, <span class='kw'>in2_features</span>, <span class='kw'>out_features</span>, bias = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_bilinear</span><span class='op'>(</span><span class='va'>in1_features</span>, <span class='va'>in2_features</span>, <span class='va'>out_features</span>, bias <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -283,14 +283,14 @@ If <code>bias</code> is <code>TRUE</code>, the values are initialized from
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_bilinear</span>(<span class='fl'>20</span>, <span class='fl'>30</span>, <span class='fl'>50</span>)
-<span class='kw'>input1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>128</span>, <span class='fl'>20</span>)
-<span class='kw'>input2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>128</span>, <span class='fl'>30</span>)
-<span class='kw'>output</span> <span class='op'>=</span> <span class='fu'>m</span>(<span class='kw'>input1</span>, <span class='kw'>input2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>output</span><span class='op'>$</span><span class='fu'>size</span>()) 
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_bilinear</span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>30</span>, <span class='fl'>50</span><span class='op'>)</span>
+<span class='va'>input1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>128</span>, <span class='fl'>20</span><span class='op'>)</span>
+<span class='va'>input2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>128</span>, <span class='fl'>30</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>=</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input1</span>, <span class='va'>input2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>output</span><span class='op'>$</span><span class='fu'>size</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> 
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [1] 128  50</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

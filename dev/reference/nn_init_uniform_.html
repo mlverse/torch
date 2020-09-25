@@ -227,7 +227,7 @@
     <p>Fills the input Tensor with values drawn from the uniform distribution</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_uniform_</span>(<span class='kw'>tensor</span>, a = <span class='fl'>0</span>, b = <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_init_uniform_</span><span class='op'>(</span><span class='va'>tensor</span>, a <span class='op'>=</span> <span class='fl'>0</span>, b <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -248,11 +248,11 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>nn_init_uniform_</span>(<span class='kw'>w</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>nn_init_uniform_</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt;  0.8071  0.4948  0.6075  0.9042  0.7181
 #&gt;  0.7329  0.7563  0.2584  0.5293  0.9757

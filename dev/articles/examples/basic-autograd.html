@@ -184,23 +184,22 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://torch.mlverse.org/docs">torch</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
 
 <span class="co"># creates example tensors. x requires_grad = TRUE tells that </span>
 <span class="co"># we are going to take derivatives over it.</span>
-<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">3</span>, requires_grad = <span class="fl">TRUE</span>)
-<span class="kw">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span>(<span class="fl">2</span>)
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">3</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>
 
 <span class="co"># executes the forward operation x^2</span>
-<span class="kw">o</span> <span class="op">&lt;-</span> <span class="kw">x</span><span class="op">^</span><span class="fl">2</span>
+<span class="va">o</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span>
 
 <span class="co"># computes the backward operation for each tensor that is marked with</span>
 <span class="co"># requires_grad = TRUE</span>
-<span class="kw">o</span><span class="op">$</span><span class="fu">backward</span>()
+<span class="va">o</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># get do/dx = 2 * x (at x = 3)</span>
-<span class="kw">x</span><span class="op">$</span><span class="kw">grad</span>
-</pre></div>
+<span class="va">x</span><span class="op">$</span><span class="va">grad</span></pre></div>
 <pre><code>## torch_tensor 
 ##  6
 ## [ CPUFloatType{1} ]</code></pre>

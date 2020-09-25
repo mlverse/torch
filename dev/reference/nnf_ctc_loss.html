@@ -227,15 +227,15 @@
     <p>The Connectionist Temporal Classification loss.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_ctc_loss</span>(
-  <span class='kw'>log_probs</span>,
-  <span class='kw'>targets</span>,
-  <span class='kw'>input_lengths</span>,
-  <span class='kw'>target_lengths</span>,
-  blank = <span class='fl'>0</span>,
-  reduction = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mean"</span>, <span class='st'>"sum"</span>, <span class='st'>"none"</span>),
-  zero_infinity = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>nnf_ctc_loss</span><span class='op'>(</span>
+  <span class='va'>log_probs</span>,
+  <span class='va'>targets</span>,
+  <span class='va'>input_lengths</span>,
+  <span class='va'>target_lengths</span>,
+  blank <span class='op'>=</span> <span class='fl'>0</span>,
+  reduction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mean"</span>, <span class='st'>"sum"</span>, <span class='st'>"none"</span><span class='op'>)</span>,
+  zero_infinity <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

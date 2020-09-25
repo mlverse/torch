@@ -229,7 +229,7 @@ normal distribution." />
 normal distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_trunc_normal_</span>(<span class='kw'>tensor</span>, mean = <span class='fl'>0</span>, std = <span class='fl'>1</span>, a = <span class='op'>-</span><span class='fl'>2</span>, b = <span class='op'>-</span><span class='fl'>2</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_init_trunc_normal_</span><span class='op'>(</span><span class='va'>tensor</span>, mean <span class='op'>=</span> <span class='fl'>0</span>, std <span class='op'>=</span> <span class='fl'>1</span>, a <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -258,11 +258,11 @@ normal distribution.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>nn_init_trunc_normal_</span>(<span class='kw'>w</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>nn_init_trunc_normal_</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; -2 -2 -2 -2 -2
 #&gt; -2 -2 -2 -2 -2

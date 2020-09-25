@@ -227,7 +227,7 @@
     <p>Triu</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_triu</span>(<span class='kw'>self</span>, diagonal = <span class='fl'>0L</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>self</span>, diagonal <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -260,23 +260,23 @@ the main diagonal. The main diagonal are the set of indices
 \(d_{1}, d_{2}\) are the dimensions of the matrix.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='kw'>a</span>
-<span class='fu'>torch_triu</span>(<span class='kw'>a</span>)
-<span class='fu'>torch_triu</span>(<span class='kw'>a</span>, diagonal=<span class='fl'>1</span>)
-<span class='fu'>torch_triu</span>(<span class='kw'>a</span>, diagonal=<span class='op'>-</span><span class='fl'>1</span>)
-<span class='kw'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>6</span>))
-<span class='kw'>b</span>
-<span class='fu'>torch_triu</span>(<span class='kw'>b</span>, diagonal=<span class='fl'>1</span>)
-<span class='fu'>torch_triu</span>(<span class='kw'>b</span>, diagonal=<span class='op'>-</span><span class='fl'>1</span>)
-}
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span>
+<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
+<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>a</span>, diagonal<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>a</span>, diagonal<span class='op'>=</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>b</span>
+<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>b</span>, diagonal<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>b</span>, diagonal<span class='op'>=</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.1013 -1.6624  0.7179 -1.7002 -0.0544  0.6280
-#&gt; -0.5268 -1.0431  0.5744  0.5268  0.1257 -0.6157
-#&gt;  0.0000 -0.2085  0.1171 -0.1624  0.4922 -0.7208
-#&gt;  0.0000  0.0000  1.6246 -0.2650  1.1329  1.6183
+#&gt; -0.7671  1.2460 -1.3339 -0.9049 -0.6673 -0.2806
+#&gt;  0.5228 -0.6543  0.5448  0.2329  0.5381 -1.1685
+#&gt;  0.0000  0.1254 -0.9810 -0.5173  0.4073  0.5317
+#&gt;  0.0000  0.0000  0.1217 -0.3661  0.7727  0.2177
 #&gt; [ CPUFloatType{4,6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

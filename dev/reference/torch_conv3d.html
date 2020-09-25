@@ -227,15 +227,15 @@
     <p>Conv3d</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_conv3d</span>(
-  <span class='kw'>input</span>,
-  <span class='kw'>weight</span>,
-  bias = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  stride = <span class='fl'>1L</span>,
-  padding = <span class='fl'>0L</span>,
-  dilation = <span class='fl'>1L</span>,
-  groups = <span class='fl'>1L</span>
-)</pre>
+    <pre class="usage"><span class='fu'>torch_conv3d</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  <span class='va'>weight</span>,
+  bias <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  stride <span class='op'>=</span> <span class='fl'>1L</span>,
+  padding <span class='op'>=</span> <span class='fl'>0L</span>,
+  dilation <span class='op'>=</span> <span class='fl'>1L</span>,
+  groups <span class='op'>=</span> <span class='fl'>1L</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -280,12 +280,12 @@ planes.</p>
 <p>See <code><a href='nn_conv3d.html'>nn_conv3d()</a></code> for details and output shape.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
 <span class='co'># filters = torch_randn(c(33, 16, 3, 3, 3))</span>
 <span class='co'># inputs = torch_randn(c(20, 16, 50, 10, 20))</span>
 <span class='co'># nnf_conv3d(inputs, filters)</span>
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; NULL</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
