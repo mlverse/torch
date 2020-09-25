@@ -29,5 +29,25 @@ test_that("lr_multiplicative", {
   
 })
 
+test_that("lr_one_cycle", {
+  
+  m <- nn_linear(10, 10)
+  o <- optim_adam(params = m$parameters, lr = 1)
+  
+  expect_message({
+    scheduler <- lr_one_cycle(optimizer = o, max_lr=1, steps_per_epoch=2, epochs=3, 
+                              verbose = TRUE, cycle_momentum = TRUE, 
+                              div_factor = 1)
+    
+    for (i in 1:6) {
+      scheduler$step()  
+    }  
+  })
+  
+  expect_equal(o$param_groups[[1]]$lr, 0.1335607, tol = 1e-6)
+  expect_error(scheduler$step())
+  
+})
+
 
 
