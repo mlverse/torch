@@ -49,5 +49,18 @@ test_that("lr_one_cycle", {
   
 })
 
+test_that("lr_step", {
+  
+  m <- nn_linear(10, 10)
+  o <- optim_adam(params = m$parameters, lr = 1)
+  scheduler <- lr_step(o, 1, gamma = 2)
+  
+  expect_equal(o$param_groups[[1]]$lr, 1)
+  scheduler$step()
+  expect_equal(o$param_groups[[1]]$lr, 2)
+  scheduler$step()
+  expect_equal(o$param_groups[[1]]$lr, 4)
+})
+
 
 

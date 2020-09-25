@@ -263,6 +263,51 @@ lr_multiplicative <- lr_scheduler(
   }
 )
 
+#' Step learning rate decay
+#' 
+#' Decays the learning rate of each parameter group by gamma every
+#' step_size epochs. Notice that such decay can happen simultaneously with
+#' other changes to the learning rate from outside this scheduler. When
+#' last_epoch=-1, sets initial lr as lr.
+#' 
+#' 
+#' @param optimizer (Optimizer): Wrapped optimizer.
+#' @param step_size (int): Period of learning rate decay.
+#' @param gamma (float): Multiplicative factor of learning rate decay.
+#'   Default: 0.1.
+#' @param last_epoch (int): The index of last epoch. Default: -1.
+#' 
+#' @examples
+#' \dontrun{
+#' # Assuming optimizer uses lr = 0.05 for all groups
+#' # lr = 0.05     if epoch < 30
+#' # lr = 0.005    if 30 <= epoch < 60
+#' # lr = 0.0005   if 60 <= epoch < 90
+#' # ...
+#' scheduler <- lr_step(optimizer, step_size=30, gamma=0.1)
+#' for (epoch in 1:100) {
+#'   train(...)
+#'   validate(...)
+#'   scheduler$step()
+#' }
+#' }
+#' 
+#' @export
+lr_step <- lr_scheduler(
+  "lr_step", 
+  initialize = function(optimizer, step_size, gamma=0.1, last_epoch=-1) {
+    self$step_size <- step_size
+    self$gamma <- gamma
+    super$initialize(optimizer, last_epoch)
+  },
+  get_lr = function() {
+    if ((self$last_epoch == 0) || (self$last_epoch %% self$step_size != 0))
+      return(sapply(self$optimizer$param_groups, function(x) x$lr)) 
+    
+    sapply(self$optimizer$param_groups, function(x) x$lr * self$gamma)
+  }
+)
+
 #' Once cycle learning rate
 #' 
 #' Sets the learning rate of each parameter group according to the
