@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Function reference" />
 
@@ -53,6 +55,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
 
 
   </head>
@@ -71,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -144,6 +156,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -157,7 +172,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -1898,9 +1930,21 @@ planes.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="nn_bce_with_logits_loss.html">nn_bce_with_logits_loss()</a></code> </p>
+        </td>
+        <td><p>BCE with logits loss</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="nn_bilinear.html">nn_bilinear()</a></code> </p>
         </td>
         <td><p>Bilinear module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_buffer.html">nn_buffer()</a></code> </p>
+        </td>
+        <td><p>Creates a nn_buffer</p></td>
       </tr><tr>
         
         <td>
@@ -1946,9 +1990,21 @@ planes.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="nn_cosine_embedding_loss.html">nn_cosine_embedding_loss()</a></code> </p>
+        </td>
+        <td><p>Cosine embedding loss</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="nn_cross_entropy_loss.html">nn_cross_entropy_loss()</a></code> </p>
         </td>
         <td><p>CrossEntropyLoss module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_ctc_loss.html">nn_ctc_loss()</a></code> </p>
+        </td>
+        <td><p>The Connectionist Temporal Classification loss.</p></td>
       </tr><tr>
         
         <td>
@@ -2027,6 +2083,12 @@ planes.</p></td>
           <p><code><a href="nn_hardtanh.html">nn_hardtanh()</a></code> </p>
         </td>
         <td><p>Hardtanh module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_hinge_embedding_loss.html">nn_hinge_embedding_loss()</a></code> </p>
+        </td>
+        <td><p>Hinge embedding loss</p></td>
       </tr><tr>
         
         <td>
@@ -2126,6 +2188,18 @@ planes.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="nn_kl_div_loss.html">nn_kl_div_loss()</a></code> </p>
+        </td>
+        <td><p>Kullback-Leibler divergence loss</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_l1_loss.html">nn_l1_loss()</a></code> </p>
+        </td>
+        <td><p>L1 loss</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="nn_leaky_relu.html">nn_leaky_relu()</a></code> </p>
         </td>
         <td><p>LeakyReLU module</p></td>
@@ -2161,6 +2235,12 @@ planes.</p></td>
         </td>
         <td><p>Applies a 2D power-average pooling over an input signal composed of several input
 planes.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_margin_ranking_loss.html">nn_margin_ranking_loss()</a></code> </p>
+        </td>
+        <td><p>Margin ranking loss</p></td>
       </tr><tr>
         
         <td>
@@ -2213,9 +2293,57 @@ planes.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="nn_mse_loss.html">nn_mse_loss()</a></code> </p>
+        </td>
+        <td><p>MSE loss</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_multi_margin_loss.html">nn_multi_margin_loss()</a></code> </p>
+        </td>
+        <td><p>Multi margin loss</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="nn_multihead_attention.html">nn_multihead_attention()</a></code> </p>
         </td>
         <td><p>MultiHead attention</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_multilabel_margin_loss.html">nn_multilabel_margin_loss()</a></code> </p>
+        </td>
+        <td><p>Multilabel margin loss</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_multilabel_soft_margin_loss.html">nn_multilabel_soft_margin_loss()</a></code> </p>
+        </td>
+        <td><p>Multi label soft margin loss</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_nll_loss.html">nn_nll_loss()</a></code> </p>
+        </td>
+        <td><p>Nll loss</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_pairwise_distance.html">nn_pairwise_distance()</a></code> </p>
+        </td>
+        <td><p>Pairwise distance</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_parameter.html">nn_parameter()</a></code> </p>
+        </td>
+        <td><p>Creates an <code>nn_parameter</code></p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_poisson_nll_loss.html">nn_poisson_nll_loss()</a></code> </p>
+        </td>
+        <td><p>Poisson NLL loss</p></td>
       </tr><tr>
         
         <td>
@@ -2264,6 +2392,18 @@ planes.</p></td>
           <p><code><a href="nn_sigmoid.html">nn_sigmoid()</a></code> </p>
         </td>
         <td><p>Sigmoid module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_smooth_l1_loss.html">nn_smooth_l1_loss()</a></code> </p>
+        </td>
+        <td><p>Smooth L1 loss</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_soft_margin_loss.html">nn_soft_margin_loss()</a></code> </p>
+        </td>
+        <td><p>Soft margin loss</p></td>
       </tr><tr>
         
         <td>
@@ -2321,6 +2461,18 @@ planes.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="nn_triplet_margin_loss.html">nn_triplet_margin_loss()</a></code> </p>
+        </td>
+        <td><p>Triplet margin loss</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_triplet_margin_with_distance_loss.html">nn_triplet_margin_with_distance_loss()</a></code> </p>
+        </td>
+        <td><p>Triplet margin with distance loss</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="nn_utils_rnn_pack_padded_sequence.html">nn_utils_rnn_pack_padded_sequence()</a></code> </p>
         </td>
         <td><p>Packs a Tensor containing padded sequences of variable length.</p></td>
@@ -2342,6 +2494,24 @@ planes.</p></td>
           <p><code><a href="nn_utils_rnn_pad_sequence.html">nn_utils_rnn_pad_sequence()</a></code> </p>
         </td>
         <td><p>Pad a list of variable length Tensors with <code>padding_value</code></p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_nn_module.html">is_nn_module()</a></code> </p>
+        </td>
+        <td><p>Checks if the object is an nn_module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_nn_parameter.html">is_nn_parameter()</a></code> </p>
+        </td>
+        <td><p>Checks if an object is a nn_parameter</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_nn_buffer.html">is_nn_buffer()</a></code> </p>
+        </td>
+        <td><p>Checks if the object is a nn_buffer</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -2922,6 +3092,12 @@ planes.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="nnf_triplet_margin_with_distance_loss.html">nnf_triplet_margin_with_distance_loss()</a></code> </p>
+        </td>
+        <td><p>Triplet margin with distance loss</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="nnf_unfold.html">nnf_unfold()</a></code> </p>
         </td>
         <td><p>Unfold</p></td>
@@ -2956,6 +3132,57 @@ planes.</p></td>
           <p><code><a href="optim_sgd.html">optim_sgd()</a></code> </p>
         </td>
         <td><p>SGD optimizer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_optimizer.html">is_optimizer()</a></code> </p>
+        </td>
+        <td><p>Checks if the object is a torch optimizer</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-learning-rate-schedulers" class="hasAnchor"><a href="#section-learning-rate-schedulers" class="anchor"></a>Learning rate schedulers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="lr_lambda.html">lr_lambda()</a></code> </p>
+        </td>
+        <td><p>Sets the learning rate of each parameter group to the initial lr
+times a given function. When last_epoch=-1, sets initial lr as lr.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="lr_multiplicative.html">lr_multiplicative()</a></code> </p>
+        </td>
+        <td><p>Multiply the learning rate of each parameter group by the factor given
+in the specified function. When last_epoch=-1, sets initial lr as lr.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="lr_one_cycle.html">lr_one_cycle()</a></code> </p>
+        </td>
+        <td><p>Once cycle learning rate</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="lr_scheduler.html">lr_scheduler()</a></code> </p>
+        </td>
+        <td><p>Creates learning rate schedulers</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="lr_step.html">lr_step()</a></code> </p>
+        </td>
+        <td><p>Step learning rate decay</p></td>
       </tr>
     </tbody><tbody>
       <tr>

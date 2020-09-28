@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Bmm — torch_bmm" />
 <meta property="og:description" content="Bmm" />
@@ -54,6 +56,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
 
 
   </head>
@@ -72,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -145,6 +157,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -158,7 +173,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -195,7 +227,7 @@
     <p>Bmm</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_bmm</span>(<span class='kw'>self</span>, <span class='kw'>mat2</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_bmm</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>mat2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -231,63 +263,63 @@ the same number of matrices.</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
-<span class='kw'>mat2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='kw'>res</span> <span class='op'>=</span> <span class='fu'>torch_bmm</span>(<span class='kw'>input</span>, <span class='kw'>mat2</span>)
-<span class='kw'>res</span>
-}
+<span class='va'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>mat2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>res</span> <span class='op'>=</span> <span class='fu'>torch_bmm</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>mat2</span><span class='op'>)</span>
+<span class='va'>res</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   1.0892  1.3748  0.8459 -2.0545 -1.4386
-#&gt;   0.3660 -0.1655  0.0205 -0.7982 -1.6220
-#&gt;   0.4613  0.7003  0.2010  1.5919  1.4269
+#&gt;  -0.9037 -0.1973 -1.1341 -0.9858  0.3039
+#&gt;   0.2868  0.2786  0.3566 -0.7423 -2.7733
+#&gt;   5.4676 -3.4729  3.8975 -1.7444  0.4233
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  -2.2132 -1.0830  0.8680 -0.3013  0.5952
-#&gt;  -1.7194  1.7257 -1.8858  0.5295  0.0113
-#&gt;  -1.9067 -3.6883  3.4484 -0.6959  1.6596
+#&gt;  -3.1970 -1.4906 -0.8008 -2.1444 -1.2875
+#&gt;  -0.9690 -1.4588 -0.1471 -1.2726 -0.6858
+#&gt;  -0.3189  0.5680 -0.3345 -0.9867 -0.8067
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.4246 -0.4291  0.5495  0.0139 -2.8828
-#&gt;   0.8869 -1.7168  0.9370  2.8693 -0.8925
-#&gt;  -0.1330 -0.6530  0.2961 -0.4661  0.2099
+#&gt;   0.3459  0.5981 -1.5873  0.8666 -0.4362
+#&gt;   0.2688 -1.3614  0.0694  1.3043  1.0296
+#&gt;   1.8249  1.2295 -0.2098 -0.7566  0.0848
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   3.2950  1.2318 -0.2358  3.7370  7.2076
-#&gt;   0.5021 -7.1274 -0.6974  2.2166 -1.0051
-#&gt;   0.5575 -0.9316 -0.4947  1.2719 -0.3476
+#&gt;  -0.6213  1.2877 -0.9306 -0.4368  2.4335
+#&gt;   3.6945  0.7509  2.2091  4.8111  8.8770
+#&gt;  -1.6086  1.6030 -0.6769 -3.3762 -0.2409
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;  -0.7364 -1.5675  1.2250  0.6341  2.4889
-#&gt;  -3.3237  2.9684  3.2533  0.5785 -1.9284
-#&gt;  -3.7940  1.4235  3.7042 -0.9522 -1.3960
+#&gt;   2.7608 -0.6829  3.4384 -3.7808 -0.0867
+#&gt;  -0.0835 -0.5113 -0.2495  0.1662 -0.8862
+#&gt;   0.1986 -0.7221 -1.9765 -0.4381  1.4731
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;  -3.5668 -1.3443  5.1221 -1.1451  0.9565
-#&gt;  -1.3876  1.5025 -3.9358  1.3078  0.9739
-#&gt;  -1.9256 -2.0872  7.0016 -1.1434  0.6967
+#&gt;   1.3646  1.3529  1.7244 -0.7949 -2.1482
+#&gt;   0.6172  0.6641 -0.1706 -1.2928  2.1358
+#&gt;  -0.5524  0.0898 -1.1729  2.1522 -1.7189
 #&gt; 
 #&gt; (7,.,.) = 
-#&gt;  -0.2430 -1.1612  0.2267 -0.4137  0.3275
-#&gt;  -1.0699  1.5163  1.1168  0.4205  1.8671
-#&gt;  -1.1855  5.5310  1.8558  4.2721  1.0853
+#&gt;   1.3161 -1.3085 -0.4967  2.2483  0.0628
+#&gt;  -2.1286  2.2143  1.0357 -2.5808  0.1258
+#&gt;  -0.2157  1.8414  0.0169 -2.9079 -0.6500
 #&gt; 
 #&gt; (8,.,.) = 
-#&gt;  -1.0895 -2.0372 -2.1277  0.7614 -1.5783
-#&gt;  -0.6140  0.0763  1.5264 -0.7559 -0.3574
-#&gt;   0.2487 -1.0749  0.2471  1.2148  0.5383
+#&gt;  -1.4650  1.0743 -4.3104 -2.9395  1.6595
+#&gt;   2.2130 -0.8981 -1.0598 -1.1889 -6.1445
+#&gt;  -1.5164  0.6151 -3.6034 -1.3640  0.3356
 #&gt; 
 #&gt; (9,.,.) = 
-#&gt;  -0.7402  0.6009  1.3001  0.8246 -0.4576
-#&gt;  -0.1567 -0.6394  0.0932 -0.1400 -0.7153
-#&gt;  -0.5724 -0.2588 -1.4616 -1.0371 -0.5793
+#&gt;   0.9710 -1.1168  0.7513 -1.7730  1.5852
+#&gt;   0.1585 -2.1137 -1.4338  0.9732 -0.3186
+#&gt;   0.9655 -2.5352 -5.2346  3.6612 -2.9682
 #&gt; 
 #&gt; (10,.,.) = 
-#&gt;   7.8231  2.6005 -0.8253 -0.6163 -4.4321
-#&gt;   3.5758  0.7528  0.7691  3.3599 -1.3278
-#&gt;  -3.2284 -0.5208 -1.5541 -2.5006  2.0721
+#&gt;   2.1552  6.8907  4.4197 -0.9053 -1.2060
+#&gt;  -0.7011 -3.1555 -4.6818 -0.2381 -1.1970
+#&gt;  -1.1343 -4.0314 -3.4194  0.7506 -1.1217
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

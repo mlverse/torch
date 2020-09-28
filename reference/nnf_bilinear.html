@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Bilinear — nnf_bilinear" />
 <meta property="og:description" content="Applies a bilinear transformation to the incoming data:
@@ -56,6 +58,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -73,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -146,6 +158,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -159,7 +174,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -197,7 +229,7 @@
 \(y = x_1 A x_2 + b\)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_bilinear</span>(<span class='kw'>input1</span>, <span class='kw'>input2</span>, <span class='kw'>weight</span>, bias = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>nnf_bilinear</span><span class='op'>(</span><span class='va'>input1</span>, <span class='va'>input2</span>, <span class='va'>weight</span>, bias <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

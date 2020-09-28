@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="MultiHead attention — nn_multihead_attention" />
 <meta property="og:description" content="Allows the model to jointly attend to information
@@ -57,6 +59,16 @@ See reference: Attention Is All You Need" />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -74,7 +86,7 @@ See reference: Attention Is All You Need" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -147,6 +159,9 @@ See reference: Attention Is All You Need" />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -160,7 +175,24 @@ See reference: Attention Is All You Need" />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -199,16 +231,16 @@ from different representation subspaces.
 See reference: Attention Is All You Need</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_multihead_attention</span>(
-  <span class='kw'>embed_dim</span>,
-  <span class='kw'>num_heads</span>,
-  dropout = <span class='fl'>0</span>,
-  bias = <span class='fl'>TRUE</span>,
-  add_bias_kv = <span class='fl'>FALSE</span>,
-  add_zero_attn = <span class='fl'>FALSE</span>,
-  kdim = <span class='kw'>NULL</span>,
-  vdim = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>nn_multihead_attention</span><span class='op'>(</span>
+  <span class='va'>embed_dim</span>,
+  <span class='va'>num_heads</span>,
+  dropout <span class='op'>=</span> <span class='fl'>0</span>,
+  bias <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  add_bias_kv <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  add_zero_attn <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  kdim <span class='op'>=</span> <span class='cn'>NULL</span>,
+  vdim <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -290,15 +322,15 @@ L is the target sequence length, S is the source sequence length.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>multihead_attn</span> <span class='op'>=</span> <span class='fu'>nn_multihead_attention</span>(<span class='kw'>embed_dim</span>, <span class='kw'>num_heads</span>)
-<span class='kw'>out</span> <span class='op'>&lt;-</span> <span class='fu'>multihead_attn</span>(<span class='kw'>query</span>, <span class='kw'>key</span>, <span class='kw'>value</span>)
-<span class='kw'>attn_output</span> <span class='op'>&lt;-</span> <span class='kw'>out</span>[[<span class='fl'>1</span>]]
-<span class='kw'>attn_output_weights</span> <span class='op'>&lt;-</span> <span class='kw'>out</span>[[<span class='fl'>2</span>]]
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>multihead_attn</span> <span class='op'>=</span> <span class='fu'>nn_multihead_attention</span><span class='op'>(</span><span class='va'>embed_dim</span>, <span class='va'>num_heads</span><span class='op'>)</span>
+<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'>multihead_attn</span><span class='op'>(</span><span class='va'>query</span>, <span class='va'>key</span>, <span class='va'>value</span><span class='op'>)</span>
+<span class='va'>attn_output</span> <span class='op'>&lt;-</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>attn_output_weights</span> <span class='op'>&lt;-</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>
+<span class='op'>}</span>
 
-}
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

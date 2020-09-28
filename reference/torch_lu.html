@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="LU — torch_lu" />
 <meta property="og:description" content="Computes the LU factorization of a matrix or batches of matrices A. Returns a
@@ -57,6 +59,16 @@ is set to True." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -74,7 +86,7 @@ is set to True." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -147,6 +159,9 @@ is set to True." />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -160,7 +175,24 @@ is set to True." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -199,7 +231,7 @@ tuple containing the LU factorization and pivots of A. Pivoting is done if pivot
 is set to True.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_lu</span>(<span class='kw'>A</span>, pivot = <span class='fl'>TRUE</span>, get_infos = <span class='fl'>FALSE</span>, out = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_lu</span><span class='op'>(</span><span class='va'>A</span>, pivot <span class='op'>=</span> <span class='cn'>TRUE</span>, get_infos <span class='op'>=</span> <span class='cn'>FALSE</span>, out <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,29 +258,29 @@ elements in the tuple are Tensor, IntTensor. Default: NULL</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='fu'>torch_lu</span>(<span class='kw'>A</span>)
+<span class='va'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>torch_lu</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;   0.3564  0.0937 -0.2445
-#&gt;   0.3677  1.8428 -0.7129
-#&gt;  -0.8647  0.0045  0.4332
+#&gt;   1.2816 -0.2739  1.3627
+#&gt;   0.6032  0.2360 -0.9924
+#&gt;   0.5229 -0.2575 -0.0504
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.5740 -0.5029 -0.3207
-#&gt;   0.2765 -0.6417  0.4304
-#&gt;   0.1308  0.1404  0.1848
+#&gt;   2.2965  1.0492 -2.6765
+#&gt;  -0.3373  2.0281 -1.0654
+#&gt;  -0.1761  0.7415  1.4537
 #&gt; [ CPUFloatType{2,3,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor 
-#&gt;  3  3  3
-#&gt;  3  2  3
+#&gt;  1  2  3
+#&gt;  2  2  3
 #&gt; [ CPUIntType{2,3} ]
 #&gt; </div></pre>
   </div>

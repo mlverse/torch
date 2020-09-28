@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Conv2d — torch_conv2d" />
 <meta property="og:description" content="Conv2d" />
@@ -54,6 +56,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
 
 
   </head>
@@ -72,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -145,6 +157,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -158,7 +173,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -195,15 +227,15 @@
     <p>Conv2d</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_conv2d</span>(
-  <span class='kw'>input</span>,
-  <span class='kw'>weight</span>,
-  bias = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  stride = <span class='fl'>1L</span>,
-  padding = <span class='fl'>0L</span>,
-  dilation = <span class='fl'>1L</span>,
-  groups = <span class='fl'>1L</span>
-)</pre>
+    <pre class="usage"><span class='fu'>torch_conv2d</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  <span class='va'>weight</span>,
+  bias <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  stride <span class='op'>=</span> <span class='fl'>1L</span>,
+  padding <span class='op'>=</span> <span class='fl'>0L</span>,
+  dilation <span class='op'>=</span> <span class='fl'>1L</span>,
+  groups <span class='op'>=</span> <span class='fl'>1L</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -248,69 +280,69 @@ planes.</p>
 <p>See <code><a href='nn_conv2d.html'>nn_conv2d()</a></code> for details and output shape.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
 <span class='co'># With square kernels and equal stride</span>
-<span class='kw'>filters</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>8</span>,<span class='fl'>4</span>,<span class='fl'>3</span>,<span class='fl'>3</span>))
-<span class='kw'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>5</span>))
-<span class='fu'><a href='nnf_conv2d.html'>nnf_conv2d</a></span>(<span class='kw'>inputs</span>, <span class='kw'>filters</span>, padding=<span class='fl'>1</span>)
-}
+<span class='va'>filters</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>8</span>,<span class='fl'>4</span>,<span class='fl'>3</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='nnf_conv2d.html'>nnf_conv2d</a></span><span class='op'>(</span><span class='va'>inputs</span>, <span class='va'>filters</span>, padding<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,1,.,.) = 
-#&gt;   -3.5486  -7.1217  -3.2540  -5.9799   1.1629
-#&gt;   -4.3378   2.2990 -16.4566   9.0228  -5.5777
-#&gt;   -2.6722  -9.2867   4.0511  -4.4372  10.4134
-#&gt;   -4.7778  -0.7326  -1.6019  12.0401  -3.1893
-#&gt;    0.2123  -0.5914   1.1211   3.0260   6.8859
+#&gt;  -1.2037  2.8533  3.0966  2.7602  7.2992
+#&gt;   6.6099  0.8040  2.1820 -2.2556  1.7042
+#&gt;   8.9937 -2.8627  7.9067  2.2703 -0.2219
+#&gt;  -1.0960 -2.0544  9.6476 -4.1084 -1.7429
+#&gt;   2.2151 -0.6322 -10.7968 -2.1303  0.9502
 #&gt; 
 #&gt; (1,2,.,.) = 
-#&gt;   -3.5645  -0.6611   1.0267   0.0105  -2.2313
-#&gt;   -4.8099  10.2621   0.1669   0.9807  -2.2823
-#&gt;    0.7857   0.4305   0.4022   7.5398   0.2195
-#&gt;   -1.5292   7.5032  10.2237  -4.5421  -3.0606
-#&gt;    4.4675   1.8375   9.2117  -1.7632  -6.9053
+#&gt;   -0.5524 -10.7146  11.9610  -1.8760   2.8073
+#&gt;   -1.4550   5.9693   1.4488   0.5483   0.5193
+#&gt;    4.7319  14.7168  -1.9500   3.4680  -3.1870
+#&gt;    2.3077  -8.0817   5.5639   2.1393  -4.4990
+#&gt;   -0.0674  -0.8898  -4.0815  -8.3260   0.0084
 #&gt; 
 #&gt; (1,3,.,.) = 
-#&gt;   -4.0560  -3.3721  -3.9417   1.2809   1.6676
-#&gt;    3.7261   1.6556  -7.7465  -0.6448   3.6757
-#&gt;   -1.8130  -5.0859  -3.2322   4.3222   5.7618
-#&gt;   -2.3173  -7.4043   2.5139  15.0216   0.5374
-#&gt;   -1.4209  -1.0366   0.8718   4.0616   3.1472
+#&gt;  -6.0152 -1.1616  6.4675 -10.9283 -1.7122
+#&gt;   2.0931 -3.9504 -5.1826 -5.1925 -2.1788
+#&gt;  -1.9279 -5.6841  3.6513 -4.5984  1.9415
+#&gt;  -2.6984  2.3140  5.6889  3.2366 -1.6959
+#&gt;  -1.2875 -5.5225  2.4667  1.2794  0.6366
 #&gt; 
 #&gt; (1,4,.,.) = 
-#&gt;  -9.5668  3.2701  6.5622  9.6684  2.5335
-#&gt;  -4.4349  3.4779 -1.2737  2.9751  1.7985
-#&gt;   2.6595  7.2363  4.4882  0.3747  1.3252
-#&gt;   5.3966 -4.0692 -2.2576  9.7051 -0.5021
-#&gt;  -0.2109  4.6618  0.3269 -6.7229 -2.3171
+#&gt;   -1.3725 -11.9432   6.6814  -2.0626 -12.8413
+#&gt;    2.7790  10.4186  16.5919   3.1043   1.6991
+#&gt;   -2.1525  -0.6591  -7.1645  -2.4902  -2.3716
+#&gt;    4.5753  -0.9017  -5.4827   3.2854   1.9315
+#&gt;    0.5009   4.8452   3.5895  -1.3763  -5.0205
 #&gt; 
 #&gt; (1,5,.,.) = 
-#&gt;  -6.8665 -0.7471  3.0223  5.9422  0.0773
-#&gt;   0.1951  6.6746  4.5183  0.2309 -3.8129
-#&gt;   4.9832  2.5449 -5.4966  3.8797  3.9093
-#&gt;  -1.2040 -1.1130  7.1904  3.6236  3.7172
-#&gt;  -1.3379 -5.7016  6.7872  7.4608  4.0352
+#&gt;   -2.4641  -4.1384   0.0252   5.7390  -3.1903
+#&gt;  -11.9943  -5.2914   1.6707  -5.6204  -5.7324
+#&gt;   11.1295   6.3085  -4.1165   0.6665   6.0104
+#&gt;   -2.1664  -4.9256  -2.1528   6.1870   8.8261
+#&gt;   -2.8591  -4.4202   0.0518   1.5891   0.1274
 #&gt; 
 #&gt; (1,6,.,.) = 
-#&gt;   -3.9338   0.3756  -3.0094  -0.7198   3.5040
-#&gt;    0.3583  -1.8715  -4.4996  11.1578  11.3811
-#&gt;   -7.6832  -2.1231  13.6712   7.9567   4.1675
-#&gt;    7.7207   2.5612   9.3426   5.4903  -9.0039
-#&gt;   -1.2806   1.9558   6.0637  -3.7703   2.7139
+#&gt;    7.7084   7.0540  -6.6758   6.2570   1.1702
+#&gt;    6.1343  11.9692  -0.8624   0.9134   7.8712
+#&gt;   -4.3698 -10.2884  -2.7717  -5.6516   0.0050
+#&gt;    4.3435   2.9247   0.0498 -12.5641  -1.2759
+#&gt;    3.1506   7.0418  11.2416   3.0961   1.4600
 #&gt; 
 #&gt; (1,7,.,.) = 
-#&gt;   -3.5015  -2.8558  -3.0872   2.0101   8.1843
-#&gt;   -2.7114  -4.0357   0.2954   1.3045   2.9680
-#&gt;   -0.0320   0.3198  -2.8986  -0.1796  -4.9480
-#&gt;    6.8524  -9.7840  11.4722   0.6094  -8.8633
-#&gt;   -2.3049  -2.9029  -4.5625  -5.2812  -1.8420
+#&gt;    8.8728 -10.0021  -1.0044   7.5667   2.3943
+#&gt;   -5.8614   9.1914 -11.8036   1.8316   7.5042
+#&gt;   -6.9303  11.0166  -4.5717   3.7854   4.8000
+#&gt;    5.1606  -8.6169   1.7790  10.5232  -1.9409
+#&gt;   -0.5102  -2.8458   3.5851  -7.8170  -1.8686
 #&gt; 
 #&gt; (1,8,.,.) = 
-#&gt;    4.1203  -6.8209  -7.9792   0.5355  -6.1896
-#&gt;    8.1814 -14.2806   2.7375 -18.4326  10.9079
-#&gt;   -0.8891  -8.0756   0.7869  10.5435   0.2842
-#&gt;  -11.1754   5.4648   9.2422   8.0793  -3.8445
-#&gt;    3.1076   1.0749  -4.5827   4.5922  -1.6976
+#&gt;  -1.2384  1.3963 -4.1241  7.3818 -3.9786
+#&gt;  -1.8505  1.5575 -2.4711  1.1911 -7.8127
+#&gt;  -4.5371  2.7213 -7.5125 -5.1210 -6.9012
+#&gt;   3.0100 -9.5409 -0.6372 -9.0458  0.6989
+#&gt;  -9.1543  4.1365 -7.5186  2.5672  7.7889
 #&gt; [ CPUFloatType{1,8,5,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

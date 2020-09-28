@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Holds submodules in a list. — nn_module_list" />
 <meta property="og:description" content="nn_module_list can be indexed like a regular R list, but
@@ -57,6 +59,16 @@ nn_module methods." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -74,7 +86,7 @@ nn_module methods." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -147,6 +159,9 @@ nn_module methods." />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -160,7 +175,24 @@ nn_module methods." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -199,7 +231,7 @@ modules it contains are properly registered, and will be visible by all
 <code>nn_module</code> methods.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_module_list</span>(modules = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
+    <pre class="usage"><span class='fu'>nn_module_list</span><span class='op'>(</span>modules <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -212,20 +244,20 @@ modules it contains are properly registered, and will be visible by all
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>my_module</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_module.html'>nn_module</a></span>(
- initialize = <span class='fu'>function</span>() {
-   <span class='kw'>self</span><span class='op'>$</span><span class='kw'>linears</span> <span class='op'>&lt;-</span> <span class='fu'>nn_module_list</span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='nn_linear.html'>nn_linear</a></span>(<span class='fl'>10</span>, <span class='fl'>10</span>)))
- },
- forward = <span class='fu'>function</span>(<span class='kw'>x</span>) {
-  <span class='co'>for</span> (<span class='kw'>i</span> <span class='co'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='kw'>self</span><span class='op'>$</span><span class='kw'>linears</span>))
-    <span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>self</span><span class='op'>$</span><span class='kw'>linears</span>[[<span class='kw'>i</span>]](<span class='kw'>x</span>)
-  <span class='kw'>x</span>
- }
-)
+<span class='va'>my_module</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_module.html'>nn_module</a></span><span class='op'>(</span>
+ initialize <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='va'>self</span><span class='op'>$</span><span class='va'>linears</span> <span class='op'>&lt;-</span> <span class='fu'>nn_module_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='nn_linear.html'>nn_linear</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='op'>}</span>,
+ forward <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>self</span><span class='op'>$</span><span class='va'>linears</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>self</span><span class='op'>$</span><span class='va'>linears</span><span class='op'>[[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>]</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+  <span class='va'>x</span>
+ <span class='op'>}</span>
+<span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

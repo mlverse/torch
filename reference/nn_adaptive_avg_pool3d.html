@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Applies a 3D adaptive average pooling over an input signal composed of several input planes. — nn_adaptive_avg_pool3d" />
 <meta property="og:description" content="The output is of size D x H x W, for any input size.
@@ -56,6 +58,16 @@ The number of output features is equal to the number of input planes." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -73,7 +85,7 @@ The number of output features is equal to the number of input planes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -146,6 +158,9 @@ The number of output features is equal to the number of input planes." />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -159,7 +174,24 @@ The number of output features is equal to the number of input planes." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -197,7 +229,7 @@ The number of output features is equal to the number of input planes." />
 The number of output features is equal to the number of input planes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_adaptive_avg_pool3d</span>(<span class='kw'>output_size</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_adaptive_avg_pool3d</span><span class='op'>(</span><span class='va'>output_size</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,17 +245,17 @@ be the same as that of the input.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># target output size of 5x7x9</span>
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_adaptive_avg_pool3d</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>7</span>,<span class='fl'>9</span>))
-<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>1</span>, <span class='fl'>64</span>, <span class='fl'>8</span>, <span class='fl'>9</span>, <span class='fl'>10</span>)
-<span class='kw'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_adaptive_avg_pool3d</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>,<span class='fl'>7</span>,<span class='fl'>9</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>64</span>, <span class='fl'>8</span>, <span class='fl'>9</span>, <span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
 <span class='co'># target output size of 7x7x7 (cube)</span>
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_adaptive_avg_pool3d</span>(<span class='fl'>7</span>)
-<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>1</span>, <span class='fl'>64</span>, <span class='fl'>10</span>, <span class='fl'>9</span>, <span class='fl'>8</span>)
-<span class='kw'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_adaptive_avg_pool3d</span><span class='op'>(</span><span class='fl'>7</span><span class='op'>)</span>
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>64</span>, <span class='fl'>10</span>, <span class='fl'>9</span>, <span class='fl'>8</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

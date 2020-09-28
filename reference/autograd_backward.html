@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Computes the sum of gradients of given tensors w.r.t. graph leaves. — autograd_backward" />
 <meta property="og:description" content="The graph is differentiated using the chain rule. If any of tensors are
@@ -62,6 +64,16 @@ tensors)." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -79,7 +91,7 @@ tensors)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -152,6 +164,9 @@ tensors)." />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -165,7 +180,24 @@ tensors)." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -209,12 +241,12 @@ tensors (None is an acceptable value for all tensors that don’t need gradient
 tensors).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>autograd_backward</span>(
-  <span class='kw'>tensors</span>,
-  grad_tensors = <span class='kw'>NULL</span>,
-  retain_graph = <span class='kw'>create_graph</span>,
-  create_graph = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>autograd_backward</span><span class='op'>(</span>
+  <span class='va'>tensors</span>,
+  grad_tensors <span class='op'>=</span> <span class='cn'>NULL</span>,
+  retain_graph <span class='op'>=</span> <span class='va'>create_graph</span>,
+  create_graph <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -250,16 +282,16 @@ Defaults to <code>FALSE</code>.</p></td>
 them before calling it.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fl'>1</span>, requires_grad = <span class='fl'>TRUE</span>)
-<span class='kw'>y</span> <span class='op'>&lt;-</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='kw'>x</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fl'>1</span>, requires_grad <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='va'>x</span>
 
-<span class='kw'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span>(<span class='fl'>1</span>, requires_grad = <span class='fl'>TRUE</span>)
-<span class='kw'>b</span> <span class='op'>&lt;-</span> <span class='fl'>3</span> <span class='op'>*</span> <span class='kw'>a</span>
+<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fl'>1</span>, requires_grad <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fl'>3</span> <span class='op'>*</span> <span class='va'>a</span>
 
-<span class='fu'>autograd_backward</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>y</span>, <span class='kw'>b</span>))
+<span class='fu'>autograd_backward</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>y</span>, <span class='va'>b</span><span class='op'>)</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

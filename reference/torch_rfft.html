@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Rfft — torch_rfft" />
 <meta property="og:description" content="Rfft" />
@@ -54,6 +56,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
 
 
   </head>
@@ -72,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -145,6 +157,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -158,7 +173,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -195,7 +227,7 @@
     <p>Rfft</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_rfft</span>(<span class='kw'>self</span>, <span class='kw'>signal_ndim</span>, normalized = <span class='fl'>FALSE</span>, onesided = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_rfft</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>signal_ndim</span>, normalized <span class='op'>=</span> <span class='cn'>FALSE</span>, onesided <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -262,47 +294,47 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>5</span>))
-<span class='fu'>torch_rfft</span>(<span class='kw'>x</span>, <span class='fl'>2</span>)
-<span class='fu'>torch_rfft</span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>FALSE</span>)
-}
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>torch_rfft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'>torch_rfft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,.,.) = 
-#&gt;  -0.4625  0.0000
-#&gt;  -5.1624  3.2586
-#&gt;  -6.0212  1.9752
-#&gt;  -6.0212 -1.9752
-#&gt;  -5.1624 -3.2586
+#&gt;  -2.6885  0.0000
+#&gt;   2.2970 -3.1304
+#&gt;  -3.3626  5.1310
+#&gt;  -3.3626 -5.1310
+#&gt;   2.2970  3.1304
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.6002 -2.9581
-#&gt;   2.1200  0.1343
-#&gt;   3.0293 -7.1277
-#&gt;   3.5287  3.5903
-#&gt;  -0.8434 -0.1112
+#&gt;   3.5981 -1.6740
+#&gt;   6.2369  6.0703
+#&gt;  -3.2006  4.7044
+#&gt;  -1.0957 -2.3358
+#&gt;  -5.0663 -1.6792
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  -3.0107 -2.3239
-#&gt;   0.9071  0.0358
-#&gt;  -0.0607 -0.0974
-#&gt;  -2.2262  2.3303
-#&gt;   1.6252  1.9184
+#&gt;  -1.1132  0.0063
+#&gt;  -6.2288  2.1029
+#&gt;   3.1367  4.8644
+#&gt;   1.5096 -1.7360
+#&gt;   3.2987  2.3868
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -3.0107  2.3239
-#&gt;   1.6252 -1.9184
-#&gt;  -2.2262 -2.3303
-#&gt;  -0.0607  0.0974
-#&gt;   0.9071 -0.0358
+#&gt;  -1.1132 -0.0063
+#&gt;   3.2987 -2.3868
+#&gt;   1.5096  1.7360
+#&gt;   3.1367 -4.8644
+#&gt;  -6.2288 -2.1029
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   1.6002  2.9581
-#&gt;  -0.8434  0.1112
-#&gt;   3.5287 -3.5903
-#&gt;   3.0293  7.1277
-#&gt;   2.1200 -0.1343
+#&gt;   3.5981  1.6740
+#&gt;  -5.0663  1.6792
+#&gt;  -1.0957  2.3358
+#&gt;  -3.2006 -4.7044
+#&gt;   6.2369 -6.0703
 #&gt; [ CPUFloatType{5,5,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

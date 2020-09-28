@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Hinge_embedding_loss — nnf_hinge_embedding_loss" />
 <meta property="og:description" content="Measures the loss given an input tensor xx and a labels tensor yy (containing 1 or -1).
@@ -58,6 +60,16 @@ embeddings or semi-supervised learning." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -75,7 +87,7 @@ embeddings or semi-supervised learning." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -148,6 +160,9 @@ embeddings or semi-supervised learning." />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -161,7 +176,24 @@ embeddings or semi-supervised learning." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -201,7 +233,7 @@ using the L1 pairwise distance as xx , and is typically used for learning nonlin
 embeddings or semi-supervised learning.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_hinge_embedding_loss</span>(<span class='kw'>input</span>, <span class='kw'>target</span>, margin = <span class='fl'>1</span>, reduction = <span class='st'>"mean"</span>)</pre>
+    <pre class="usage"><span class='fu'>nnf_hinge_embedding_loss</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>target</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, reduction <span class='op'>=</span> <span class='st'>"mean"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

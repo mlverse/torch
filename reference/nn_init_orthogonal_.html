@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Orthogonal initialization — nn_init_orthogonal_" />
 <meta property="og:description" content="Fills the input Tensor with a (semi) orthogonal matrix, as
@@ -58,6 +60,16 @@ trailing dimensions are flattened." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -75,7 +87,7 @@ trailing dimensions are flattened." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -148,6 +160,9 @@ trailing dimensions are flattened." />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -161,7 +176,24 @@ trailing dimensions are flattened." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -201,7 +233,7 @@ at least 2 dimensions, and for tensors with more than 2 dimensions the
 trailing dimensions are flattened.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_orthogonal_</span>(<span class='kw'>tensor</span>, gain = <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_init_orthogonal_</span><span class='op'>(</span><span class='va'>tensor</span>, gain <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,15 +250,15 @@ trailing dimensions are flattened.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>,<span class='fl'>5</span>)
-<span class='fu'>nn_init_orthogonal_</span>(<span class='kw'>w</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>nn_init_orthogonal_</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0261 -0.1169  0.8583  0.1248 -0.4831
-#&gt; -0.1584 -0.1637  0.4579 -0.4078  0.7564
-#&gt;  0.4959 -0.5308  0.0252  0.6151  0.3053
+#&gt;  0.4375 -0.0544  0.1218 -0.7055 -0.5414
+#&gt; -0.5530 -0.7542  0.2625 -0.2375 -0.0026
+#&gt;  0.3739 -0.2071 -0.1548 -0.3925  0.7996
 #&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

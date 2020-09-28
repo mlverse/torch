@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="MaxPool2D module — nn_max_pool2d" />
 <meta property="og:description" content="Applies a 2D max pooling over an input signal composed of several input
@@ -56,6 +58,16 @@ planes." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -73,7 +85,7 @@ planes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -146,6 +158,9 @@ planes." />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -159,7 +174,24 @@ planes." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -197,14 +229,14 @@ planes." />
 planes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_max_pool2d</span>(
-  <span class='kw'>kernel_size</span>,
-  stride = <span class='kw'>NULL</span>,
-  padding = <span class='fl'>0</span>,
-  dilation = <span class='fl'>1</span>,
-  return_indices = <span class='fl'>FALSE</span>,
-  ceil_mode = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>nn_max_pool2d</span><span class='op'>(</span>
+  <span class='va'>kernel_size</span>,
+  stride <span class='op'>=</span> <span class='cn'>NULL</span>,
+  padding <span class='op'>=</span> <span class='fl'>0</span>,
+  dilation <span class='op'>=</span> <span class='fl'>1</span>,
+  return_indices <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ceil_mode <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -276,15 +308,15 @@ $$</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># pool of square window of size=3, stride=2</span>
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_max_pool2d</span>(<span class='fl'>3</span>, stride=<span class='fl'>2</span>)
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_max_pool2d</span><span class='op'>(</span><span class='fl'>3</span>, stride<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
 <span class='co'># pool of non-square window</span>
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_max_pool2d</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>), stride=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>))
-<span class='kw'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span>, <span class='fl'>32</span>)
-<span class='kw'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span>(<span class='kw'>input</span>)
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_max_pool2d</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>2</span><span class='op'>)</span>, stride<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span>, <span class='fl'>32</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

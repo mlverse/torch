@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Changelog" />
 
@@ -53,6 +55,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
 
 
   </head>
@@ -71,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -144,6 +156,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -157,7 +172,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -189,10 +221,17 @@
       <small>Source: <a href='https://github.com/mlverse/torch/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="torch-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#torch-development-version" class="anchor"></a>torch (development version)<small> Unreleased </small>
+    <div id="torch-010" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0">
+<a href="#torch-010" class="anchor"></a>torch 0.1.0<small> Unreleased </small>
 </h1>
+<ul>
+<li>Added many missing losses (<a href='https://github.com/mlverse/torch/issues/252'>#252</a>)</li>
+<li>Implemented the <code>$&lt;-</code> and <code>[[&lt;-</code> operators for the <code>nn_module</code> class. (<a href='https://github.com/mlverse/torch/issues/253'>#253</a>)</li>
+<li>Export <code>nn_parameter</code>, <code>nn_buffer</code>, and <code>is_*</code> auxiliary functions.</li>
+<li>Added a new serialization vignette.</li>
+<li>Added a few learning rate schedulers (<a href='https://github.com/mlverse/torch/issues/258'>#258</a>)</li>
+</ul>
 </div>
     <div id="torch-002" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.2">

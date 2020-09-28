@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Conv_transpose2d — torch_conv_transpose2d" />
 <meta property="og:description" content="Conv_transpose2d" />
@@ -54,6 +56,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
 
 
   </head>
@@ -72,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -145,6 +157,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -158,7 +173,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -195,16 +227,16 @@
     <p>Conv_transpose2d</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_conv_transpose2d</span>(
-  <span class='kw'>input</span>,
-  <span class='kw'>weight</span>,
-  bias = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  stride = <span class='fl'>1L</span>,
-  padding = <span class='fl'>0L</span>,
-  output_padding = <span class='fl'>0L</span>,
-  groups = <span class='fl'>1L</span>,
-  dilation = <span class='fl'>1L</span>
-)</pre>
+    <pre class="usage"><span class='fu'>torch_conv_transpose2d</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  <span class='va'>weight</span>,
+  bias <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  stride <span class='op'>=</span> <span class='fl'>1L</span>,
+  padding <span class='op'>=</span> <span class='fl'>0L</span>,
+  output_padding <span class='op'>=</span> <span class='fl'>0L</span>,
+  groups <span class='op'>=</span> <span class='fl'>1L</span>,
+  dilation <span class='op'>=</span> <span class='fl'>1L</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -253,69 +285,69 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 <p>See <code><a href='nn_conv_transpose2d.html'>nn_conv_transpose2d()</a></code> for details and output shape.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
 <span class='co'># With square kernels and equal stride</span>
-<span class='kw'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>5</span>))
-<span class='kw'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='fu'><a href='nnf_conv_transpose2d.html'>nnf_conv_transpose2d</a></span>(<span class='kw'>inputs</span>, <span class='kw'>weights</span>, padding=<span class='fl'>1</span>)
-}
+<span class='va'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='nnf_conv_transpose2d.html'>nnf_conv_transpose2d</a></span><span class='op'>(</span><span class='va'>inputs</span>, <span class='va'>weights</span>, padding<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
 #&gt; (1,1,.,.) = 
-#&gt;   -3.6222  -7.9970   2.8105   3.1026   1.7725
-#&gt;   -4.7404  12.8775   1.0415  -0.8881   4.1451
-#&gt;   -2.2161  -0.0100  -7.8568   2.5352   7.7713
-#&gt;    1.3625  -3.1941  -6.9461   6.7935   2.9976
-#&gt;   -3.9660   0.9707  12.1132  -7.1898  -5.3734
+#&gt;  -4.1597 -0.1576  1.4483 -2.0094  2.9097
+#&gt;  -1.8583  9.8337 -0.7585 -8.0211  1.4750
+#&gt;  -0.1620  5.7865 -2.7381 -1.5447  2.8569
+#&gt;   6.2899 -0.6621 -10.8934 -0.5446 -3.5256
+#&gt;   3.3105 -1.7729  1.7700 -2.0344 -2.9281
 #&gt; 
 #&gt; (1,2,.,.) = 
-#&gt;   5.5750  4.9565 -1.2831 -9.3766  2.7933
-#&gt;   0.3677 -1.5841 -1.1948  2.0401  1.6757
-#&gt;  -1.1554 -7.9480  2.0611  3.8100 -2.3715
-#&gt;   3.6882  5.7345  7.8422 -10.5027  4.2258
-#&gt;   6.4450 -2.5137 -14.2397  6.3799  2.2110
+#&gt;    5.2262  11.0420  -9.6969  -4.1312   6.6328
+#&gt;    8.9018   5.9441 -12.9078  -6.6986  -3.9976
+#&gt;   -5.8637  -7.4986  -5.0125   3.2821  -1.8264
+#&gt;   -1.0976   3.5361   6.9400   1.0611   0.6038
+#&gt;    3.1511   7.2763  -6.7689   4.3118  -1.2124
 #&gt; 
 #&gt; (1,3,.,.) = 
-#&gt;   2.3055  1.7193  1.5106  5.7209 -0.4044
-#&gt;   5.4206 -5.3050 -1.7869  8.7362  4.7972
-#&gt;  -1.1797 -8.2598  0.6797 -5.7008  2.3267
-#&gt;   8.3444 -1.9313 -3.6077  1.1224  0.3162
-#&gt;  -0.1740 -4.8076 -2.2376 -3.3701 -7.0435
+#&gt;   2.7638 -6.3663 -1.5166  0.0480  3.5406
+#&gt;  -5.4546 -11.2902 -1.3522 -2.4067  9.6663
+#&gt;  -3.4808  1.0996  0.8911  1.4416  0.6622
+#&gt;  -1.1227  6.4158 -2.2347  2.0933 -6.1268
+#&gt;   0.1290 -3.2629  4.0837 -6.5931  3.2663
 #&gt; 
 #&gt; (1,4,.,.) = 
-#&gt;  -2.1321 -0.6399 -0.5702  6.2185 -6.6191
-#&gt;  -6.7085 -1.7849  0.0567  0.2547  4.4343
-#&gt;  -0.1791 -13.0960 -1.1711 -11.7881  7.9123
-#&gt;   1.6398 -8.7353  5.6190  2.7717  2.2932
-#&gt;   6.8436  5.9709  0.8596 -5.4111 -4.1101
+#&gt;  -0.3616 -1.2966  2.9143 -3.9220  4.6383
+#&gt;   0.5495  4.0566 -3.7807 -2.0309 -8.2831
+#&gt;  -1.4155  0.3986 -5.6448  3.5119 -1.9671
+#&gt;   6.8860  1.2865  4.3564 -4.5815  4.5818
+#&gt;   2.6446 -5.4075  1.3979 -6.4102 -0.1252
 #&gt; 
 #&gt; (1,5,.,.) = 
-#&gt;    6.3795  12.9273   3.7923  -2.6331  -6.7760
-#&gt;   12.3485  -7.3105   3.6371  -0.5407  -1.6971
-#&gt;   -6.8453   8.1406   8.8767  -0.0699 -10.0042
-#&gt;    0.8129  -1.6930   3.5113  -0.9711   2.3083
-#&gt;   -1.1577  -2.1860  -1.9327   3.4738  -2.3536
+#&gt;   2.6558 -0.9246 -3.8111  1.1757  3.2649
+#&gt;   7.2648  4.3120 -5.3182 -12.6696 -3.2790
+#&gt;  -3.4242 -5.5040 -0.7625  3.8862  9.9976
+#&gt;   2.8658 -2.9160  1.8878  4.9650 -2.0246
+#&gt;  -0.8867 -1.9310  4.2303 -5.3019  0.0027
 #&gt; 
 #&gt; (1,6,.,.) = 
-#&gt;    2.8265  -4.2878 -10.9216  -1.4770  -3.4568
-#&gt;   -8.9188  -7.0011  -0.9053  -2.3985  -0.2689
-#&gt;   -0.8018  12.4512   0.5999  -5.5394   1.6234
-#&gt;    4.3200 -10.4630  -4.2572   7.0144  -0.1696
-#&gt;   -4.6365  -0.5886   7.6997  -3.6797   2.4974
+#&gt;    3.0233  -6.9291  15.0609  -3.6230  -5.5245
+#&gt;   -2.9845   3.6031   0.4262 -11.7900  -5.2817
+#&gt;   -0.7342   9.5789  -1.9073   2.4465  -0.7759
+#&gt;    2.6915   4.0482  -4.1381  -3.2260  -7.9044
+#&gt;    7.0667  -0.0559   4.4528  -2.3568   5.1196
 #&gt; 
 #&gt; (1,7,.,.) = 
-#&gt;  -2.3134  1.9207  6.9010 -2.2058  2.9683
-#&gt;  -2.6449  5.9937 -0.7752 -2.3005 -1.7128
-#&gt;   3.1190 -11.4434  2.3856  3.4017 -0.6764
-#&gt;  -2.5913  6.5472 -0.4979  2.9762 -7.4267
-#&gt;   1.9456  3.5234 -6.3143 -3.6686 -0.6943
+#&gt;    0.3640  -3.3696  -4.5873   8.1249   0.1399
+#&gt;    3.5094 -10.6056  11.0451   8.7865  -9.4152
+#&gt;    2.7518  -0.7870  14.8498   0.1078   4.9419
+#&gt;    1.5540   2.8918   4.9318 -20.0163   0.5801
+#&gt;   -0.1355   1.0936  -6.8449   0.3927   1.4653
 #&gt; 
 #&gt; (1,8,.,.) = 
-#&gt;   -0.3478   4.7669   7.3665   6.3556  -2.5469
-#&gt;   14.4336   2.1104   2.8604   0.8508   7.2790
-#&gt;   -9.4439  -5.6837  -8.8314  10.9166   0.5517
-#&gt;   -8.0535   6.8200   4.4783  13.7326   3.1114
-#&gt;   -0.0064   8.4882  -0.5751   1.8667  -4.2371
+#&gt;    4.1818   9.4601   4.7066   1.2210 -11.6650
+#&gt;    8.3462  10.2608 -10.2658  -6.3403  -2.5061
+#&gt;    5.7553  -3.7399  -6.0003  -1.9122  -7.3839
+#&gt;    5.2740  -4.6355  -7.1101   5.5363   1.2041
+#&gt;    3.0118   3.4482   4.6497   2.5063  -3.3164
 #&gt; [ CPUFloatType{1,8,5,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

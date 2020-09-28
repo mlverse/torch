@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Cosine_similarity — torch_cosine_similarity" />
 <meta property="og:description" content="Cosine_similarity" />
@@ -54,6 +56,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
 
 
   </head>
@@ -72,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -145,6 +157,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -158,7 +173,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -195,7 +227,7 @@
     <p>Cosine_similarity</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_cosine_similarity</span>(<span class='kw'>x1</span>, <span class='kw'>x2</span>, dim = <span class='fl'>2L</span>, eps = <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_cosine_similarity</span><span class='op'>(</span><span class='va'>x1</span>, <span class='va'>x2</span>, dim <span class='op'>=</span> <span class='fl'>2L</span>, eps <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,114 +261,114 @@
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>input1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>128</span>))
-<span class='kw'>input2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>128</span>))
-<span class='kw'>output</span> <span class='op'>=</span> <span class='fu'>torch_cosine_similarity</span>(<span class='kw'>input1</span>, <span class='kw'>input2</span>)
-<span class='kw'>output</span>
-}
+<span class='va'>input1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>128</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>input2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>128</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>=</span> <span class='fu'>torch_cosine_similarity</span><span class='op'>(</span><span class='va'>input1</span>, <span class='va'>input2</span><span class='op'>)</span>
+<span class='va'>output</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.0839
-#&gt; -0.0532
-#&gt; -0.0722
-#&gt;  0.0385
-#&gt; -0.0419
-#&gt;  0.0142
-#&gt; -0.1544
-#&gt;  0.0472
-#&gt;  0.0008
-#&gt; -0.0617
-#&gt;  0.0141
-#&gt; -0.1420
-#&gt;  0.0335
-#&gt;  0.0430
-#&gt;  0.0615
-#&gt;  0.0353
-#&gt;  0.1243
-#&gt;  0.0716
-#&gt;  0.0977
-#&gt; -0.0064
-#&gt;  0.0749
-#&gt; -0.0833
-#&gt;  0.1121
-#&gt;  0.0322
-#&gt;  0.0634
-#&gt; -0.0648
-#&gt;  0.0626
-#&gt; -0.0684
-#&gt;  0.0730
-#&gt; -0.0172
-#&gt;  0.0471
-#&gt;  0.1222
-#&gt;  0.0414
-#&gt;  0.0982
-#&gt; -0.0227
-#&gt; -0.0359
-#&gt;  0.1331
-#&gt;  0.0087
-#&gt; -0.0901
-#&gt; -0.0007
-#&gt;  0.0342
-#&gt; -0.0128
-#&gt; -0.0778
-#&gt;  0.0089
-#&gt;  0.0861
-#&gt;  0.0460
-#&gt;  0.2530
-#&gt; -0.0914
-#&gt; -0.0440
-#&gt; -0.0222
-#&gt; -0.0150
-#&gt;  0.0758
-#&gt;  0.0366
-#&gt;  0.0954
-#&gt; -0.1439
-#&gt; -0.0192
-#&gt; -0.0154
-#&gt; -0.2044
-#&gt; -0.0923
-#&gt;  0.0788
-#&gt;  0.0914
-#&gt;  0.1129
-#&gt; -0.1281
-#&gt; -0.0538
-#&gt;  0.0407
-#&gt; -0.0087
-#&gt; -0.0040
-#&gt;  0.0872
-#&gt;  0.0249
-#&gt; -0.0875
-#&gt; -0.0190
-#&gt; -0.0206
-#&gt;  0.0033
-#&gt; -0.2125
-#&gt; -0.2117
-#&gt;  0.0331
-#&gt;  0.1047
-#&gt; -0.0187
-#&gt; -0.0631
-#&gt; -0.0723
-#&gt;  0.0119
-#&gt; -0.0522
-#&gt; -0.0242
-#&gt;  0.1630
-#&gt;  0.2203
-#&gt; -0.0939
-#&gt; -0.0853
-#&gt; -0.0385
-#&gt;  0.0749
-#&gt; -0.0212
-#&gt; -0.1387
-#&gt; -0.1505
-#&gt; -0.1320
-#&gt;  0.0642
-#&gt;  0.0524
-#&gt; -0.0435
-#&gt; -0.0708
-#&gt;  0.0286
-#&gt;  0.0018
+#&gt; -0.0524
+#&gt; -0.0031
+#&gt;  0.0624
+#&gt; -0.0047
+#&gt;  0.0654
+#&gt; -0.0487
+#&gt;  0.0383
+#&gt;  0.0094
+#&gt; -0.0003
+#&gt;  0.0799
+#&gt;  0.0575
+#&gt; -0.2452
+#&gt;  0.0222
+#&gt; -0.1215
+#&gt; -0.0114
+#&gt;  0.0025
+#&gt; -0.0643
+#&gt;  0.0510
+#&gt;  0.0154
+#&gt;  0.0035
+#&gt; -0.1361
+#&gt;  0.0832
 #&gt;  0.0362
+#&gt; -0.1286
+#&gt;  0.0707
+#&gt;  0.2782
+#&gt;  0.0233
+#&gt;  0.1162
+#&gt;  0.1480
+#&gt;  0.1364
+#&gt;  0.0900
+#&gt; -0.0424
+#&gt;  0.0016
+#&gt; -0.0590
+#&gt; -0.0151
+#&gt; -0.0540
+#&gt;  0.0001
+#&gt;  0.0757
+#&gt; -0.1474
+#&gt; -0.0219
+#&gt; -0.0619
+#&gt; -0.0699
+#&gt; -0.0355
+#&gt;  0.0544
+#&gt; -0.0972
+#&gt; -0.0169
+#&gt; -0.0430
+#&gt; -0.0224
+#&gt;  0.0027
+#&gt; -0.0083
+#&gt;  0.1242
+#&gt;  0.0050
+#&gt; -0.1446
+#&gt;  0.0612
+#&gt; -0.1662
+#&gt;  0.0265
+#&gt; -0.1349
+#&gt; -0.0373
+#&gt;  0.1385
+#&gt; -0.0781
+#&gt;  0.0478
+#&gt; -0.0592
+#&gt; -0.0434
+#&gt; -0.0869
+#&gt; -0.0025
+#&gt; -0.0563
+#&gt;  0.0269
+#&gt;  0.2477
+#&gt; -0.0614
+#&gt; -0.0770
+#&gt; -0.0660
+#&gt;  0.1701
+#&gt; -0.0977
+#&gt; -0.1226
+#&gt; -0.0282
+#&gt;  0.0571
+#&gt; -0.0036
+#&gt; -0.0479
+#&gt;  0.0554
+#&gt;  0.0151
+#&gt; -0.0387
+#&gt;  0.1160
+#&gt;  0.0803
+#&gt;  0.1881
+#&gt; -0.0753
+#&gt;  0.1063
+#&gt; -0.1912
+#&gt;  0.0516
+#&gt; -0.1088
+#&gt; -0.0408
+#&gt; -0.1378
+#&gt; -0.0315
+#&gt; -0.0505
+#&gt;  0.0735
+#&gt; -0.1867
+#&gt; -0.0145
+#&gt; -0.0203
+#&gt;  0.1713
+#&gt; -0.0131
+#&gt;  0.0257
 #&gt; [ CPUFloatType{100} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

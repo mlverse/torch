@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Create a Device object — torch_device" />
 <meta property="og:description" content="A torch_device  is an object representing the device on which a torch_tensor
@@ -56,6 +58,16 @@ is or will be allocated." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -73,7 +85,7 @@ is or will be allocated." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -146,6 +158,9 @@ is or will be allocated." />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -159,7 +174,24 @@ is or will be allocated." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -197,7 +229,7 @@ is or will be allocated." />
 is or will be allocated.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_device</span>(<span class='kw'>type</span>, index = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>torch_device</span><span class='op'>(</span><span class='va'>type</span>, index <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -219,18 +251,18 @@ with device <code>'cuda'</code> is equivalent to <code>'cuda:X'</code> where X i
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
 <span class='co'># Via string</span>
-<span class='fu'>torch_device</span>(<span class='st'>"cuda:1"</span>)
-<span class='fu'>torch_device</span>(<span class='st'>"cpu"</span>)
-<span class='fu'>torch_device</span>(<span class='st'>"cuda"</span>) <span class='co'># current cuda device</span>
+<span class='fu'>torch_device</span><span class='op'>(</span><span class='st'>"cuda:1"</span><span class='op'>)</span>
+<span class='fu'>torch_device</span><span class='op'>(</span><span class='st'>"cpu"</span><span class='op'>)</span>
+<span class='fu'>torch_device</span><span class='op'>(</span><span class='st'>"cuda"</span><span class='op'>)</span> <span class='co'># current cuda device</span>
 
 <span class='co'># Via string and device ordinal</span>
-<span class='fu'>torch_device</span>(<span class='st'>"cuda"</span>, <span class='fl'>0</span>)
-<span class='fu'>torch_device</span>(<span class='st'>"cpu"</span>, <span class='fl'>0</span>)
+<span class='fu'>torch_device</span><span class='op'>(</span><span class='st'>"cuda"</span>, <span class='fl'>0</span><span class='op'>)</span>
+<span class='fu'>torch_device</span><span class='op'>(</span><span class='st'>"cpu"</span>, <span class='fl'>0</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_device(type='cpu', index=0)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

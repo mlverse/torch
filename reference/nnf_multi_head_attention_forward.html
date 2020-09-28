@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Multi head attention forward — nnf_multi_head_attention_forward" />
 <meta property="og:description" content="Allows the model to jointly attend to information from different representation
@@ -56,6 +58,16 @@ subspaces. See reference: Attention Is All You Need" />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -73,7 +85,7 @@ subspaces. See reference: Attention Is All You Need" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -146,6 +158,9 @@ subspaces. See reference: Attention Is All You Need" />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -159,7 +174,24 @@ subspaces. See reference: Attention Is All You Need" />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -197,31 +229,31 @@ subspaces. See reference: Attention Is All You Need" />
 subspaces. See reference: Attention Is All You Need</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nnf_multi_head_attention_forward</span>(
-  <span class='kw'>query</span>,
-  <span class='kw'>key</span>,
-  <span class='kw'>value</span>,
-  <span class='kw'>embed_dim_to_check</span>,
-  <span class='kw'>num_heads</span>,
-  <span class='kw'>in_proj_weight</span>,
-  <span class='kw'>in_proj_bias</span>,
-  <span class='kw'>bias_k</span>,
-  <span class='kw'>bias_v</span>,
-  <span class='kw'>add_zero_attn</span>,
-  <span class='kw'>dropout_p</span>,
-  <span class='kw'>out_proj_weight</span>,
-  <span class='kw'>out_proj_bias</span>,
-  training = <span class='fl'>TRUE</span>,
-  key_padding_mask = <span class='kw'>NULL</span>,
-  need_weights = <span class='fl'>TRUE</span>,
-  attn_mask = <span class='kw'>NULL</span>,
-  use_separate_proj_weight = <span class='fl'>FALSE</span>,
-  q_proj_weight = <span class='kw'>NULL</span>,
-  k_proj_weight = <span class='kw'>NULL</span>,
-  v_proj_weight = <span class='kw'>NULL</span>,
-  static_k = <span class='kw'>NULL</span>,
-  static_v = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>nnf_multi_head_attention_forward</span><span class='op'>(</span>
+  <span class='va'>query</span>,
+  <span class='va'>key</span>,
+  <span class='va'>value</span>,
+  <span class='va'>embed_dim_to_check</span>,
+  <span class='va'>num_heads</span>,
+  <span class='va'>in_proj_weight</span>,
+  <span class='va'>in_proj_bias</span>,
+  <span class='va'>bias_k</span>,
+  <span class='va'>bias_v</span>,
+  <span class='va'>add_zero_attn</span>,
+  <span class='va'>dropout_p</span>,
+  <span class='va'>out_proj_weight</span>,
+  <span class='va'>out_proj_bias</span>,
+  training <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  key_padding_mask <span class='op'>=</span> <span class='cn'>NULL</span>,
+  need_weights <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  attn_mask <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use_separate_proj_weight <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  q_proj_weight <span class='op'>=</span> <span class='cn'>NULL</span>,
+  k_proj_weight <span class='op'>=</span> <span class='cn'>NULL</span>,
+  v_proj_weight <span class='op'>=</span> <span class='cn'>NULL</span>,
+  static_k <span class='op'>=</span> <span class='cn'>NULL</span>,
+  static_v <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Kaiming normal initialization — nn_init_kaiming_normal_" />
 <meta property="og:description" content="Fills the input Tensor with values according to the method
@@ -57,6 +59,16 @@ normal distribution." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -74,7 +86,7 @@ normal distribution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -147,6 +159,9 @@ normal distribution." />
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -160,7 +175,24 @@ normal distribution." />
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -199,12 +231,12 @@ described in <code>Delving deep into rectifiers: Surpassing human-level performa
 normal distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_kaiming_normal_</span>(
-  <span class='kw'>tensor</span>,
-  a = <span class='fl'>0</span>,
-  mode = <span class='st'>"fan_in"</span>,
-  nonlinearity = <span class='st'>"leaky_relu"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>nn_init_kaiming_normal_</span><span class='op'>(</span>
+  <span class='va'>tensor</span>,
+  a <span class='op'>=</span> <span class='fl'>0</span>,
+  mode <span class='op'>=</span> <span class='st'>"fan_in"</span>,
+  nonlinearity <span class='op'>=</span> <span class='st'>"leaky_relu"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -233,15 +265,15 @@ or 'leaky_relu' (default).</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>nn_init_kaiming_normal_</span>(<span class='kw'>w</span>, mode = <span class='st'>"fan_in"</span>, nonlinearity = <span class='st'>"leaky_relu"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>nn_init_kaiming_normal_</span><span class='op'>(</span><span class='va'>w</span>, mode <span class='op'>=</span> <span class='st'>"fan_in"</span>, nonlinearity <span class='op'>=</span> <span class='st'>"leaky_relu"</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -0.5594  0.2408  0.3946  0.5860 -0.4834
-#&gt; -0.0442  0.7170 -0.3028  0.4015 -0.8906
-#&gt; -0.5157 -0.1763  0.9366  0.4640 -0.5356
+#&gt;  0.2008  0.1724  0.3809 -0.3675  1.1300
+#&gt; -0.4793 -1.0204  0.2167 -0.0427 -0.3795
+#&gt;  0.9913 -0.4316 -0.0365 -0.8236  0.5538
 #&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

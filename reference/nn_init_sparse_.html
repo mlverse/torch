@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Sparse initialization — nn_init_sparse_" />
 <meta property="og:description" content="Fills the 2D input Tensor as a sparse matrix, where the
@@ -57,6 +59,16 @@ as described in Deep learning via Hessian-free optimization - Martens, J. (2010)
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
+
 
   </head>
 
@@ -74,7 +86,7 @@ as described in Deep learning via Hessian-free optimization - Martens, J. (2010)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -147,6 +159,9 @@ as described in Deep learning via Hessian-free optimization - Martens, J. (2010)
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -160,7 +175,24 @@ as described in Deep learning via Hessian-free optimization - Martens, J. (2010)
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -199,7 +231,7 @@ non-zero elements will be drawn from the normal distribution
 as described in <code>Deep learning via Hessian-free optimization</code> - Martens, J. (2010).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_sparse_</span>(<span class='kw'>tensor</span>, <span class='kw'>sparsity</span>, std = <span class='fl'>0.01</span>)</pre>
+    <pre class="usage"><span class='fu'>nn_init_sparse_</span><span class='op'>(</span><span class='va'>tensor</span>, <span class='va'>sparsity</span>, std <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -221,12 +253,12 @@ the non-zero values</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>nn_init_sparse_</span>(<span class='kw'>w</span>, sparsity = <span class='fl'>0.1</span>)
-}
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>nn_init_sparse_</span><span class='op'>(</span><span class='va'>w</span>, sparsity <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

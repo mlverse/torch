@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Rand — torch_rand" />
 <meta property="og:description" content="Rand" />
@@ -54,6 +56,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
 
 
   </head>
@@ -72,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -145,6 +157,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -158,7 +173,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -195,14 +227,14 @@
     <p>Rand</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_rand</span>(
-  <span class='kw'>...</span>,
-  names = <span class='kw'>NULL</span>,
-  dtype = <span class='kw'>NULL</span>,
-  layout = <span class='fu'><a href='torch_layout.html'>torch_strided</a></span>(),
-  device = <span class='kw'>NULL</span>,
-  requires_grad = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>torch_rand</span><span class='op'>(</span>
+  <span class='va'>...</span>,
+  names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dtype <span class='op'>=</span> <span class='cn'>NULL</span>,
+  layout <span class='op'>=</span> <span class='fu'><a href='torch_layout.html'>torch_strided</a></span><span class='op'>(</span><span class='op'>)</span>,
+  device <span class='op'>=</span> <span class='cn'>NULL</span>,
+  requires_grad <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,14 +275,14 @@ on the interval \([0, 1)\)</p>
 <p>The shape of the tensor is defined by the variable argument <code>size</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='fu'>torch_rand</span>(<span class='fl'>4</span>)
-<span class='fu'>torch_rand</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>))
-}
+<span class='fu'>torch_rand</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>
+<span class='fu'>torch_rand</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt;  0.4034  0.1802  0.2925
-#&gt;  0.6916  0.6648  0.9430
+#&gt;  0.7836  0.4775  0.1233
+#&gt;  0.0427  0.2741  0.4000
 #&gt; [ CPUFloatType{2,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -38,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Irfft — torch_irfft" />
 <meta property="og:description" content="Irfft" />
@@ -54,6 +56,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178883486-1');
+</script>
 
 
   </head>
@@ -72,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -145,6 +157,9 @@
     <li>
       <a href="../articles/tensor/index.html">Tensor class</a>
     </li>
+    <li>
+      <a href="../articles/serialization.html">Serialization</a>
+    </li>
     <li class="dropdown-header">Datasets</li>
     <li>
       <a href="../articles/loading-data.html">Loading Data</a>
@@ -158,7 +173,24 @@
     </li>
   </ul>
 </li>
-<li class="dropdown-header">Examples</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    </li>
+    <li>
+      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    </li>
+    <li>
+      <a href="../articles/examples/dataset.html">dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -195,13 +227,13 @@
     <p>Irfft</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_irfft</span>(
-  <span class='kw'>self</span>,
-  <span class='kw'>signal_ndim</span>,
-  normalized = <span class='fl'>FALSE</span>,
-  onesided = <span class='fl'>TRUE</span>,
-  signal_sizes = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
-)</pre>
+    <pre class="usage"><span class='fu'>torch_irfft</span><span class='op'>(</span>
+  <span class='va'>self</span>,
+  <span class='va'>signal_ndim</span>,
+  normalized <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  onesided <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  signal_sizes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -285,20 +317,20 @@ certainly fail the check.</p>
 <code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
-<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))
-<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
-<span class='kw'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>)
-<span class='fu'>torch_irfft</span>(<span class='kw'>y</span>, <span class='fl'>2</span>, onesided=<span class='fl'>TRUE</span>, signal_sizes=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>))  <span class='co'># recover x</span>
-}
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_rfft.html'>torch_rfft</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>torch_irfft</span><span class='op'>(</span><span class='va'>y</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>TRUE</span>, signal_sizes<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>,<span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># recover x</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor 
-#&gt; -1.2099  1.7469 -1.3247  0.0171  0.0024
-#&gt;  0.4107  0.2902 -2.0005 -0.8215 -1.4046
-#&gt; -1.2626  0.0016  2.6169 -1.2084 -0.1029
-#&gt;  0.0418  1.5131  0.9458 -0.2751 -0.5556
+#&gt; -0.8984 -0.0241  0.5814  0.0022 -1.5341
+#&gt;  0.3579 -0.1102 -0.1934  1.5845 -1.6773
+#&gt;  0.4437 -0.5878  0.5142  1.8715  1.0713
+#&gt;  0.1601 -0.3049 -3.2821 -0.5589  0.7651
 #&gt; [ CPUFloatType{4,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
