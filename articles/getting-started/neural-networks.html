@@ -262,7 +262,7 @@
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
 <span class="va">out</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.0417  0.0845  0.0490 -0.0918 -0.0495 -0.0496  0.1334 -0.0540  0.0141  0.0121</span>
+<span class="co">#&gt; -0.0495  0.0967  0.0382 -0.0957 -0.0358 -0.0441  0.1267 -0.0511  0.0029  0.0212</span>
 <span class="co">#&gt; [ CPUFloatType{1,10} ]</span></pre></div>
 <p>Zero the gradient buffers of all parameters and backprops with random gradients:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
@@ -313,7 +313,7 @@
 <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">target</span><span class="op">)</span>
 <span class="va">loss</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; 1.83784</span>
+<span class="co">#&gt; 1.23316</span>
 <span class="co">#&gt; [ CPUFloatType{} ]</span></pre></div>
 <p>Now, if you follow loss in the backward direction, using its <code>$grad_fn</code> attribute, you will see a graph of computations that looks like this:</p>
 <pre><code>input -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d
@@ -355,12 +355,12 @@
 <span class="va">net</span><span class="op">$</span><span class="va">conv1</span><span class="op">$</span><span class="va">bias</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor </span>
 <span class="co">#&gt; 0.01 *</span>
-<span class="co">#&gt; -2.0062</span>
-<span class="co">#&gt;  0.9085</span>
-<span class="co">#&gt; -0.2479</span>
-<span class="co">#&gt; -1.8640</span>
-<span class="co">#&gt;  0.5936</span>
-<span class="co">#&gt;  0.5216</span>
+<span class="co">#&gt; -1.0297</span>
+<span class="co">#&gt;  0.6895</span>
+<span class="co">#&gt; -1.1447</span>
+<span class="co">#&gt; -1.2682</span>
+<span class="co">#&gt; -0.5240</span>
+<span class="co">#&gt;  0.2695</span>
 <span class="co">#&gt; [ CPUFloatType{6} ]</span></pre></div>
 <p>Now, we have seen how to use loss functions.</p>
 </div>
