@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.3.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -263,7 +263,7 @@
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
 <span class="va">out</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.0351  0.0962  0.0333 -0.1099 -0.0305 -0.0617  0.1196 -0.0423  0.0136  0.0299</span>
+<span class="co">#&gt; -0.0514  0.0984  0.0448 -0.1029 -0.0234 -0.0553  0.1328 -0.0587  0.0111  0.0190</span>
 <span class="co">#&gt; [ CPUFloatType{1,10} ]</span></pre></div>
 <p>Zero the gradient buffers of all parameters and backprops with random gradients:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
@@ -314,7 +314,7 @@
 <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">target</span><span class="op">)</span>
 <span class="va">loss</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; 1.25753</span>
+<span class="co">#&gt; 0.693028</span>
 <span class="co">#&gt; [ CPUFloatType{} ]</span></pre></div>
 <p>Now, if you follow loss in the backward direction, using its <code>$grad_fn</code> attribute, you will see a graph of computations that looks like this:</p>
 <pre><code>input -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d
@@ -356,12 +356,12 @@
 <span class="va">net</span><span class="op">$</span><span class="va">conv1</span><span class="op">$</span><span class="va">bias</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor </span>
 <span class="co">#&gt; 0.01 *</span>
-<span class="co">#&gt;  0.4456</span>
-<span class="co">#&gt;  0.5107</span>
-<span class="co">#&gt;  0.6638</span>
-<span class="co">#&gt;  0.4171</span>
-<span class="co">#&gt;  0.5869</span>
-<span class="co">#&gt;  1.5340</span>
+<span class="co">#&gt; -1.0615</span>
+<span class="co">#&gt;  0.3628</span>
+<span class="co">#&gt; -0.1273</span>
+<span class="co">#&gt; -0.4135</span>
+<span class="co">#&gt;  0.0653</span>
+<span class="co">#&gt;  0.3584</span>
 <span class="co">#&gt; [ CPUFloatType{6} ]</span></pre></div>
 <p>Now, we have seen how to use loss functions.</p>
 </div>
