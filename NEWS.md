@@ -1,5 +1,8 @@
 # torch (development version)
 
+- Expanded the `utils_data_default_collate` to support converting R objects to
+  torch tensors when needed. (#269) 
+
 # torch 0.1.0
 
 - Added many missing losses (#252)
