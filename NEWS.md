@@ -2,6 +2,8 @@
 
 - Expanded the `utils_data_default_collate` to support converting R objects to
   torch tensors when needed. (#269) 
+- Fixed bug that made `RandomSampler(replacement = TRUE)` to never take the last
+  element in the dataset. (84861fa)
 
 # torch 0.1.0
 
