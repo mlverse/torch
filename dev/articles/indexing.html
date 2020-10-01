@@ -290,23 +290,24 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.4204 -0.1728  0.5214</span>
-<span class="co">#&gt; -0.8161  1.2180 -1.2895</span>
+<span class="co">#&gt;  0.0432 -0.2121  1.1990</span>
+<span class="co">#&gt; -0.6337 -1.0688  1.7261</span>
 <span class="co">#&gt; [ CPUFloatType{2,3} ]</span></pre></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.4204</span>
-<span class="co">#&gt; -0.1728</span>
-<span class="co">#&gt;  0.5214</span>
+<span class="co">#&gt;  0.0432</span>
+<span class="co">#&gt; -0.2121</span>
+<span class="co">#&gt;  1.1990</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></pre></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -0.4204 -0.1728</span>
-<span class="co">#&gt; -0.8161  1.2180</span>
+<span class="co">#&gt; 0.01 *</span>
+<span class="co">#&gt;  4.3188 -21.2093</span>
+<span class="co">#&gt;  -63.3747 -106.8827</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
 </div>
 <div id="dropping-dimensions" class="section level2">
