@@ -76,3 +76,15 @@ test_that("can have datasets that don't return tensors", {
   
 })
 
+test_that("dataloader that shuffles", {
+  
+  x <- torch_randn(100, 100)
+  y <- torch_randn(100, 1)
+  d <- tensor_dataset(x, y)
+  dl <- dataloader(dataset = d, batch_size = 50, shuffle = TRUE)
+  
+  for(i in enumerate(dl))
+    expect_tensor_shape(i[[1]], c(50, 100))
+
+})
+

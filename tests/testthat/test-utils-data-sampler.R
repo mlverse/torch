@@ -8,6 +8,9 @@ test_that("sampler's lenght", {
   sampler <- SequentialSampler$new(data)
   expect_length(sampler, 1000)
   
+  sampler <- RandomSampler$new(data, num_samples = 10)
+  expect_length(sampler, 10)
+  
   sampler <- RandomSampler$new(data)
   expect_length(sampler, 1000)
   
@@ -47,5 +50,4 @@ test_that("Random sampler, replacement = TRUE", {
   expect_error(it(), class = "stop_iteration_error")
   
 })
-
 
