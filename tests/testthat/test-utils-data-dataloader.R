@@ -85,6 +85,16 @@ test_that("dataloader that shuffles", {
   
   for(i in enumerate(dl))
     expect_tensor_shape(i[[1]], c(50, 100))
+  
+  dl <- dataloader(dataset = d, batch_size = 30, shuffle = TRUE)
+  j <- 0
+  for (i in enumerate(dl)) {
+    j <- j + 1
+    if (j == 4)
+      expect_tensor_shape(i[[1]], c(10, 100))
+    else
+      expect_tensor_shape(i[[1]], c(30, 100))
+  }
 
 })
 
