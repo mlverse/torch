@@ -46,7 +46,7 @@ enumerate.dataloader <- function(x, max_len = 1e6, ...) {
   
   # parent environment that only contains the initialized iterator.
   # and will keep the last runned batch.
-  p <- rlang::env(.iter = x$.iter())
+  p <- rlang::new_environment(list(.iter = x$.iter()))
   
   # we return a list of environments that have `p` (containing the iterator)
   # as a pointer. All starting with `run = FALSE`. The first time we get an
