@@ -83,7 +83,7 @@ RandomSampler <- R6::R6Class(
   ),
   active = list(
     num_samples = function() {
-      if (is.null(self$num_samples_))
+      if (is.null(self$.num_samples))
         length(self$data_source)
       else
         self$.num_samples
