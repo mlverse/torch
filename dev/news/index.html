@@ -227,6 +227,7 @@
 </h1>
 <ul>
 <li>Expanded the <code>utils_data_default_collate</code> to support converting R objects to torch tensors when needed. (<a href='https://github.com/mlverse/torch/issues/269'>#269</a>)</li>
+<li>Fixed bug that made <code>RandomSampler(replacement = TRUE)</code> to never take the last element in the dataset. (84861fa)</li>
 </ul>
 </div>
     <div id="torch-010" class="section level1">
