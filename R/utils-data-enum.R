@@ -38,15 +38,20 @@ enumerate <- function(x, ...) {
 #' 
 #' @export
 enumerate.dataloader <- function(x, max_len = 1e6, ...) {
-  iter <- x$.iter()
-  
+
   if (is.na(length(x)))
     len <- max_len
   else
     len <- length(x)
   
+  # parent environment that only contains the initialized iterator.
+  # and will keep the last runned batch.
   p <- rlang::env(.iter = x$.iter())
   
+  # we return a list of environments that have `p` (containing the iterator)
+  # as a pointer. All starting with `run = FALSE`. The first time we get an
+  # element from this environment `run` will become FALSE and we will no
+  # longer need to run the iterator.
   v <- vector(mode = "list", length = len)
   for (i in seq_along(v)) 
     v[[i]] <- new_enum_env(list(run = FALSE), parent = p)
