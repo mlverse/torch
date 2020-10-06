@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - 'cran/**'
+      - gpu-windows
 
 jobs:
   build:
