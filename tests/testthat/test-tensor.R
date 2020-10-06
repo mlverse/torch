@@ -171,3 +171,11 @@ test_that("as.matrix", {
   expect_equal(dim(r), c(8,1))
   
 })
+
+test_that("print tensor is truncated", {
+  
+  expect_known_value(torch_arange(0, 100), file = "assets/print1")
+  expect_known_value(torch_arange(0, 25), file = "assets/print2")
+  expect_known_value(print(torch_arange(0, 100), n = 50), file = "assets/print3")
+  
+})

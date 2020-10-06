@@ -84,5 +84,5 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
 
 #' @export
 print.R7 <- function(x, ...) {
-  x$print()
+  x$print(...)
 }
