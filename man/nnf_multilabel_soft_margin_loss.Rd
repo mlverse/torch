@@ -4,7 +4,12 @@
 \alias{nnf_multilabel_soft_margin_loss}
 \title{Multilabel_soft_margin_loss}
 \usage{
-nnf_multilabel_soft_margin_loss(input, target, weight, reduction = "mean")
+nnf_multilabel_soft_margin_loss(
+  input,
+  target,
+  weight = NULL,
+  reduction = "mean"
+)
 }
 \arguments{
 \item{input}{tensor (N,*) where ** means, any number of additional dimensions}

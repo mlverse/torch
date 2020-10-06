@@ -215,7 +215,7 @@ nnf_soft_margin_loss <- function(input, target, reduction = "mean") {
 #' @param weight weight tensor to apply on the loss.
 #'
 #' @export
-nnf_multilabel_soft_margin_loss <- function(input, target, weight, reduction = "mean") {
+nnf_multilabel_soft_margin_loss <- function(input, target, weight = NULL, reduction = "mean") {
   loss <- -(target * nnf_logsigmoid(input) + (1 - target) * nnf_logsigmoid(-input))
   
   if (!is.null(weight))
