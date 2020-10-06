@@ -3,6 +3,9 @@
   if (missing(e2))
     e2 <- torch_zeros_like(e1)
   
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_add(e1, e2)
 }
 
@@ -13,71 +16,126 @@
     e1 <- torch_zeros_like(e1)
   }
   
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_sub(e1, e2)
 }
 
 #' @export
 `*.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_mul(e1, e2)
 }
 
 #' @export
 `/.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_div(e1, e2)
 }
 
 #' @export
 `^.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_pow(e1, e2)
 }
 
 #' @export
 `%%.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_fmod(e1, e2)
 }
 
 #' @export
 `%/%.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_floor_divide(e1, e2)
 }
 
 #' @export
 `>=.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_ge(e1, e2)
 }
 
 #' @export
 `>.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_gt(e1, e2)
 }
 
 #' @export
 `<=.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_le(e1, e2)
 }
 
 #' @export
 `<.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_lt(e1, e2)
 }
 
 #' @export
 `==.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_eq(e1, e2)
 }
 
 #' @export
 `!=.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_ne(e1, e2)
 }
 
 #' @export
 `&.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_logical_and(e1, e2)
 }
 
 #' @export
 `|.torch_tensor` <- function(e1, e2) {
+  
+  if (!is_torch_tensor(e1))
+    e1 <- torch_tensor(e1, device = e2$device)
+  
   torch_logical_or(e1, e2)
 }
 
