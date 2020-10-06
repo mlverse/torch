@@ -109,6 +109,11 @@ Tensor <- R7Class(
         self$ptr <- torch_empty_like(src)$ptr
       
       private$`_copy_`(src, non_blocking)
+    },
+    topk = function(k, dim = -1L, largest = TRUE, sorted = TRUE) {
+      o <- private$`_topk`(k, dim, largest, sorted)
+      o[[2]]$add_(1L)
+      o
     }
   ),
   active = list(
