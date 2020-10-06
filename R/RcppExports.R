@@ -7081,8 +7081,8 @@ cpp_Storage_data_ptr <- function(self) {
     .Call('_torch_cpp_Storage_data_ptr', PACKAGE = 'torchpkg', self)
 }
 
-cpp_torch_tensor_print <- function(x) {
-    invisible(.Call('_torch_cpp_torch_tensor_print', PACKAGE = 'torchpkg', x))
+cpp_torch_tensor_print <- function(x, n) {
+    invisible(.Call('_torch_cpp_torch_tensor_print', PACKAGE = 'torchpkg', x, n))
 }
 
 cpp_torch_tensor_dtype <- function(x) {

@@ -3,9 +3,36 @@
 #include "utils.h"
 
 // [[Rcpp::export]]
-void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x) {
+void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
   const char* s = lantern_Tensor_StreamInsertion(x->get());
-  Rcpp::Rcout << std::string(s) << std::endl;
+  
+  auto ss = std::stringstream(std::string(s));
+  std::string token;
+  std::vector<std::string> cont;
+  while (std::getline(ss, token)) {
+    cont.push_back(token);
+  }
+  
+  bool truncated = false;
+  if (cont.size() > n && n > 1)
+  {
+    cont.erase(cont.begin() + n, cont.end() - 1);
+    truncated = true;
+  }
+  
+  std::string result;
+  for (int i = 0; i < cont.size(); i ++)
+  {
+    result += cont.at(i);
+    
+    if (i != (cont.size() - 1))
+      result += "\n";
+    
+    if (i == (cont.size() - 2) && truncated)
+      result += "... [the output was truncated (use n=-1 to disable)]\n";
+  }
+  
+  Rcpp::Rcout << result << std::endl;
 };
 
 // [[Rcpp::export]]
