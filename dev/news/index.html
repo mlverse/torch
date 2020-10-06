@@ -228,6 +228,8 @@
 <ul>
 <li>Expanded the <code>utils_data_default_collate</code> to support converting R objects to torch tensors when needed. (<a href='https://github.com/mlverse/torch/issues/269'>#269</a>)</li>
 <li>Fixed bug that made <code>RandomSampler(replacement = TRUE)</code> to never take the last element in the dataset. (84861fa)</li>
+<li>Fixed <code>torch_topk</code> and <code>x$topk</code> so the returned indexes are 1-based (<a href='https://github.com/mlverse/torch/issues/280'>#280</a>)</li>
+<li>Fixed a bug (<a href='https://github.com/mlverse/torch/issues/275'>#275</a>) that would cause <code>1 - torch_tensor(1, device = "cuda")</code> to fail because <code>1</code> was created in the CPU. (<a href='https://github.com/mlverse/torch/issues/279'>#279</a>)</li>
 </ul>
 </div>
     <div id="torch-010" class="section level1">
