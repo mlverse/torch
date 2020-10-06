@@ -132,6 +132,8 @@ jobs:
       - name: Run cmake
         working-directory: ${{runner.workspace}}/build
         run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{github.workspace}}/lantern
+        env:
+          CUDA: ${{ matrix.cuda }}
       - name: Run make
         working-directory: ${{runner.workspace}}/build
         run: ${{matrix.make}}
