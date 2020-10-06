@@ -7,7 +7,10 @@ optim_Adadelta <- R6::R6Class(
   inherit = Optimizer,
   
   public = list(
+    
     initialize = function(params, lr=1.0, rho=0.9, eps=1e-6, weight_decay=0){
+      
+      browser()
       
       if (lr < 0)
         value_error("Invalid learning rate: {lr}")
@@ -23,7 +26,8 @@ optim_Adadelta <- R6::R6Class(
       
       defaults <- list(lr = lr, rho = rho, eps = eps,
                        weight_decay = weight_decay)
-      super$initalize(params, defaults)
+      
+      super$initialize(params, defaults)
     },
     
     step = function(closure = NULL){
@@ -48,7 +52,6 @@ optim_Adadelta <- R6::R6Class(
               next
             
             grad <- param$grad
-            
             
             # if (grad$is_sparse) {
             #   runtime_error("Adadelta does not support sparse gradients")
@@ -101,6 +104,27 @@ optim_Adadelta <- R6::R6Class(
 #'   numerical stability (default: 1e-6)
 #' @param weight_decay (float, optional): weight decay (L2 penalty) (default: 0)
 #' 
+#' @note 
+#' 
+#' According to the original paper, decaying average of the squared gradients
+#' is computed as follows:
+#' \deqn{
+#' E[g^2]_{t} = \rho E[g^2]_{t- 1} + (1 - \rho){g_{t}}^2
+#' }
+#' 
+#' RMS of previous squared gradients up to time t:
+#' \deqn{
+#' RMS[g_{t}] = \sqrt{E[g^2]_{t} + \epsilon }
+#' }
+#' 
+#' Adadelta update rule:
+#' \deqn{
+#'  \begin{array}{ll}
+#'  \Delta \theta_{t} = - \frac{RMS [\Delta \theta]_{t - 1} }{RMS[g]_{t}}
+#'  \theta_{t+1} = \theta_{t} + \Delta \theta_{t}
+#' \end{array}
+#' }
+#' 
 #' @examples
 #' \dontrun{
 #' optimizer <- optim_adadelta(model$parameters, lr = 0.1)
@@ -111,6 +135,5 @@ optim_Adadelta <- R6::R6Class(
 #' 
 #' @export
 optim_adadelta <- function(params, lr=1.0, rho=0.9, eps=1e-6, weight_decay=0){
-  optim_Adadelta$new(params = params, lr = lr, rho = rho, 
-                     eps = eps, weight_decay = weight_decay)
+  optim_Adadelta$new(params, lr, rho, eps, weight_decay)
 }
