@@ -193,7 +193,7 @@
 <p>You can see a few examples below:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  2</span>
 <span class="co">#&gt;  3</span>
@@ -201,19 +201,19 @@
 
 <span class="co"># conform to row-major indexing used in torch</span>
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">5</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;   1   2   3   4   5</span>
 <span class="co">#&gt;   6   7   8   9  10</span>
 <span class="co">#&gt; [ CPULongType{2,5} ]</span>
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; (1,.,.) = </span>
-<span class="co">#&gt;   0.3379  0.6363  0.6559</span>
-<span class="co">#&gt;   0.6639  0.4251  0.4171</span>
+<span class="co">#&gt;   0.9098  0.4820  0.3739</span>
+<span class="co">#&gt;   0.3180  0.3513  0.5834</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (2,.,.) = </span>
-<span class="co">#&gt;   0.8178  0.9243  0.6609</span>
-<span class="co">#&gt;   0.8134  0.1847  0.2663</span>
+<span class="co">#&gt;   0.0743  0.9078  0.7589</span>
+<span class="co">#&gt;   0.7107  0.0508  0.0921</span>
 <span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device, converting their R datatype to the corresponding torch <code>dtype</code>.</p>
 <blockquote>
@@ -222,11 +222,11 @@
 <p>You can always modify <code>dtype</code> and <code>device</code> when converting an R object to a torch tensor. For example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt; [ CPULongType{1} ]</span>
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, device <span class="op">=</span> <span class="st">"cpu"</span>, dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt; [ CPUDoubleType{1} ]</span></pre></div>
 <p>Other options available when creating a tensor are:</p>
@@ -246,18 +246,18 @@
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  0.0785  1.8014 -0.6246</span>
-<span class="co">#&gt; -2.0410 -0.4407  2.6253</span>
-<span class="co">#&gt;  1.7015  1.4759 -0.5281</span>
-<span class="co">#&gt; -0.4720 -1.5317  0.2387</span>
-<span class="co">#&gt; -1.0454 -1.0749  0.2070</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt; -0.4165  1.6416  0.3617</span>
+<span class="co">#&gt; -0.1204  2.6418 -2.0466</span>
+<span class="co">#&gt; -0.0332 -0.3225 -0.1850</span>
+<span class="co">#&gt; -0.2230  1.5084 -0.9863</span>
+<span class="co">#&gt; -0.0682 -0.4117 -0.1442</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor filled with ones.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_int64</a></span><span class="op">(</span><span class="op">)</span>, device <span class="op">=</span> <span class="st">"cpu"</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1  1  1  1</span>
 <span class="co">#&gt;  1  1  1  1</span>
 <span class="co">#&gt; [ CPULongType{2,4} ]</span></pre></div>
@@ -297,11 +297,11 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_int32</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span>
 <span class="va">y</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt; [ CPUIntType{1} ]</span></pre></div>
 <p>You can also copy a tensor to the GPU using:</p>

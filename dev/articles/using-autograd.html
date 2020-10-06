@@ -207,7 +207,7 @@
 <p>That executed, <code>x</code> now has a non-empty field <code>grad</code> that stores the gradient of <code>y</code> with respect to <code>x</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="va">x</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
@@ -253,21 +253,21 @@
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="va">out</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
 <span class="va">z</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">y</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  4.6500  4.6500</span>
 <span class="co">#&gt;  4.6500  4.6500</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">x2</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  18.6000</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span>
 <span class="va">x1</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  14.4150  14.4150</span>
 <span class="co">#&gt;  14.4150  14.4150</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
@@ -333,26 +333,26 @@
     <span class="op">}</span><span class="op">)</span>
     
 <span class="op">}</span>
-<span class="co">#&gt; 10 10.91855 </span>
-<span class="co">#&gt; 20 10.64458 </span>
-<span class="co">#&gt; 30 10.38447 </span>
-<span class="co">#&gt; 40 10.13627 </span>
-<span class="co">#&gt; 50 9.899339 </span>
-<span class="co">#&gt; 60 9.673017 </span>
-<span class="co">#&gt; 70 9.4567 </span>
-<span class="co">#&gt; 80 9.249807 </span>
-<span class="co">#&gt; 90 9.051824 </span>
-<span class="co">#&gt; 100 8.862264 </span>
-<span class="co">#&gt; 110 8.680662 </span>
-<span class="co">#&gt; 120 8.506632 </span>
-<span class="co">#&gt; 130 8.339937 </span>
-<span class="co">#&gt; 140 8.180573 </span>
-<span class="co">#&gt; 150 8.0284 </span>
-<span class="co">#&gt; 160 7.882186 </span>
-<span class="co">#&gt; 170 7.741637 </span>
-<span class="co">#&gt; 180 7.606471 </span>
-<span class="co">#&gt; 190 7.476423 </span>
-<span class="co">#&gt; 200 7.351239</span></pre></div>
+<span class="co">#&gt; 10 36.40186 </span>
+<span class="co">#&gt; 20 34.26531 </span>
+<span class="co">#&gt; 30 32.29175 </span>
+<span class="co">#&gt; 40 30.46707 </span>
+<span class="co">#&gt; 50 28.78107 </span>
+<span class="co">#&gt; 60 27.21935 </span>
+<span class="co">#&gt; 70 25.7715 </span>
+<span class="co">#&gt; 80 24.42924 </span>
+<span class="co">#&gt; 90 23.18367 </span>
+<span class="co">#&gt; 100 22.02513 </span>
+<span class="co">#&gt; 110 20.9468 </span>
+<span class="co">#&gt; 120 19.94195 </span>
+<span class="co">#&gt; 130 19.00328 </span>
+<span class="co">#&gt; 140 18.12696 </span>
+<span class="co">#&gt; 150 17.30868 </span>
+<span class="co">#&gt; 160 16.5435 </span>
+<span class="co">#&gt; 170 15.82796 </span>
+<span class="co">#&gt; 180 15.15828 </span>
+<span class="co">#&gt; 190 14.53137 </span>
+<span class="co">#&gt; 200 13.94417</span></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">
