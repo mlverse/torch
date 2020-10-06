@@ -7,6 +7,7 @@
 - Fixed `torch_topk` and `x$topk` so the returned indexes are 1-based (#280)
 - Fixed a bug (#275) that would cause `1 - torch_tensor(1, device = "cuda")` to 
   fail because `1` was created in the CPU. (#279)
+- Added an `as.matrix` method for torch Tensors. (#282)
 
 # torch 0.1.0
 
