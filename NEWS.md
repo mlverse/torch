@@ -5,6 +5,8 @@
 - Fixed bug that made `RandomSampler(replacement = TRUE)` to never take the last
   element in the dataset. (84861fa)
 - Fixed `torch_topk` and `x$topk` so the returned indexes are 1-based (#280)
+- Fixed a bug (#275) that would cause `1 - torch_tensor(1, device = "cuda")` to 
+  fail because `1` was created in the CPU. (#279)
 
 # torch 0.1.0
 
