@@ -167,6 +167,11 @@ as.array.torch_tensor <- function(x, ...) {
   as_array(x)
 }
 
+#' @export
+as.matrix.torch_tensor <- function(x, ...) {
+  as.matrix(as_array(x))
+}
+
 as_array_impl <- function(x) {
   a <- cpp_as_array(x$ptr)
   

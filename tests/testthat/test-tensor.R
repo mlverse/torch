@@ -157,3 +157,17 @@ test_that("ndim", {
   expect_equal(x$ndim, 2)
   
 })
+
+test_that("as.matrix", {
+  
+  x <- torch_randn(2,2)
+  r <- as.matrix(x)
+  expect_equal(class(r), c("matrix", "array"))
+  expect_equal(dim(r), c(2,2))
+  
+  x <- torch_randn(2,2,2)
+  r <- as.matrix(x)
+  expect_equal(class(r), c("matrix", "array"))
+  expect_equal(dim(r), c(8,1))
+  
+})
