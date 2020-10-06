@@ -4600,7 +4600,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "topk", function(k, dim = -1L, largest = TRUE, sorted = TRUE) {  args <- mget(x = c("k", "dim", "largest", "sorted"))
+Tensor$set("private", "_topk", function(k, dim = -1L, largest = TRUE, sorted = TRUE) {  args <- mget(x = c("k", "dim", "largest", "sorted"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", k = "int64_t", dim = "int64_t", largest = "bool", 
     sorted = "bool")

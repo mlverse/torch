@@ -203,4 +203,10 @@ torch_multi_margin_loss <- function(self, target, p = 1L, margin = 1L, weight = 
                            reduction)
 }
 
+#' @rdname torch_topk
+torch_topk <- function(self, k, dim = -1L, largest = TRUE, sorted = TRUE) {
+  o <- .torch_topk(self, k, dim, largest, sorted)
+  o[[2]]$add_(1L)
+  o
+}
 
