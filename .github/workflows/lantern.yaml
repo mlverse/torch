@@ -126,7 +126,7 @@ jobs:
       - name: Prep cuda 10.1 (windows)
         if: ${{ matrix.cuda == 10.1 && matrix.os == 'windows-2019'}}
         run: |
-          wget https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.96_win10.exe
+          curl https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.96_win10.exe -O cuda_10.1.105_418.96_win10.exe
           cuda_10.1.105_418.96_win10.exe -s
           echo ::set-env name=CUDA::${{matrix.cuda}} 
       - name: Run cmake
