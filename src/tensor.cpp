@@ -14,10 +14,9 @@ void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
   }
   
   bool truncated = false;
-  int hlf = n/2;
   if (cont.size() > n && n > 1)
   {
-    cont.erase(cont.begin() + (hlf + 1), cont.end() - hlf);
+    cont.erase(cont.begin() + n, cont.end() - 1);
     truncated = true;
   }
   
@@ -29,8 +28,8 @@ void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
     if (i != (cont.size() - 1))
       result += "\n";
     
-    if (i == (hlf) && truncated)
-      result += "...\n";
+    if (i == (cont.size() - 2) && truncated)
+      result += "... [the output was truncated (use n=-1 to disable)]\n";
   }
   
   Rcpp::Rcout << result << std::endl;

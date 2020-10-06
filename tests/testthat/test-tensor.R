@@ -177,5 +177,6 @@ test_that("print tensor is truncated", {
   expect_known_value(torch_arange(0, 100), file = "assets/print1")
   expect_known_value(torch_arange(0, 25), file = "assets/print2")
   expect_known_value(print(torch_arange(0, 100), n = 50), file = "assets/print3")
+  expect_known_value(print(torch_arange(0, 100), n = -1), file = "assets/print4")
   
 })
