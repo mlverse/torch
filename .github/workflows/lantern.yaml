@@ -74,12 +74,24 @@ jobs:
             flavor: Release
             artifacts: liblantern.so
             upload: Linux-Cuda-102
+          - os: windows-2019
+            cuda: 10.1
+            library: lantern.dll
+            test: "& './lanterntest.exe' "
+            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
+            build: build/Release
+            libext: .dll
+            exeext: .exe
+            fixlib:
+            flavor: Release
+            artifacts: lantern.dll
+            upload: Windows-Cuda-101
     steps:
       - uses: actions/checkout@v2
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/build
       - name: Prep cmake cuda 10.1
-        if: ${{ matrix.cuda == 10.1 }}
+        if: ${{ matrix.cuda == 10.1 && matrix.os == ubuntu-18.04 }}
         run: |
           wget --quiet https://storage.googleapis.com/torch-lantern-builds/cuda/cuda_10.1.105_418.39_linux.run
           chmod +x cuda_10.1.105_418.39_linux.run
@@ -95,7 +107,7 @@ jobs:
           echo ::set-env name=CUDNN_LIBRARY_PATH::/usr/local/cuda/lib64
           echo ::set-env name=CUDNN_INCLUDE_PATH::/usr/local/cuda/include
       - name: Prep cmake cuda 10.2
-        if: ${{ matrix.cuda == 10.2 }}
+        if: ${{ matrix.cuda == 10.2 && matrix.os == ubuntu-18.04}}
         run: |
           wget --quiet http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
           chmod +x cuda_10.2.89_440.33.01_linux.run
@@ -110,6 +122,12 @@ jobs:
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
           echo ::set-env name=CUDNN_LIBRARY_PATH::/usr/local/cuda/lib64
           echo ::set-env name=CUDNN_INCLUDE_PATH::/usr/local/cuda/include
+      - name: Prep cuda 10.1 (windows)
+        if: ${{ matrix.cuda == 10.1 && matrix.os == windows-2019}}
+        run: |
+          wget https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.96_win10.exe
+          cuda_10.1.105_418.96_win10.exe -s
+          echo ::set-env name=CUDA::${{matrix.cuda}}
       - name: Run cmake
         working-directory: ${{runner.workspace}}/build
         run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{github.workspace}}/lantern
