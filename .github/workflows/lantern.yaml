@@ -139,7 +139,6 @@ jobs:
           Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\lib\x64"
           echo "CUDNN_INCLUDE_PATH=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           echo "CUDNN_LIBRARY_PATH=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          echo "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
           Get-Content -Path $env:GITHUB_ENV -TotalCount 5
           
       - name: Run cmake
