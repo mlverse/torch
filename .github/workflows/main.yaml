@@ -109,5 +109,5 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
       - name: Cleanup
-        if: ${{ always() }}
+        if: ${{ always() }} 
         run: Remove-Item 'C:\packages' -Recurse
