@@ -107,7 +107,7 @@ jobs:
             fixlib:
             flavor: Release
             artifacts: lantern.dll
-            upload: Windows-Cuda-101
+            upload: Windows-Cuda-102
             cudatoolkit: 'http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_441.22_win10.exe'
             cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-windows10-x64-v7.6.5.32.zip'
     steps:
