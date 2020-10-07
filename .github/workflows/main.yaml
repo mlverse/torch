@@ -88,3 +88,26 @@ jobs:
         run: docker build -f $DOCKER_FILE -t $DOCKER_TAG .
       - name: Run checks
         run: docker run --rm --gpus all $DOCKER_TAG sh torch/tools/check.sh
+  windows-gpu:
+    strategy:
+      fail-fast: false
+    runs-on: windows-gpu
+    env:
+      TORCH_TEST: 1
+      TORCH_INSTALL: 1
+      CUDA: 10.1
+      R_LIBS_USER: C:/packages
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
+      - name: Run checks
+        run: |
+          rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "error", check_dir = "check")
+        shell: Rscript {0}
+      - name: Cleanup
+        if: ${{ always() }}
+        run: Remove-Item 'C:\packages' -Recurse
