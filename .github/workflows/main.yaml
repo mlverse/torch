@@ -110,7 +110,7 @@ jobs:
         shell: Rscript {0}
       - name: Run checks
         run: |
-          rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "error", check_dir = "check")
+          rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual", "--no-build-vignettes"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
       - name: Cleanup
         if: ${{ always() }} 
