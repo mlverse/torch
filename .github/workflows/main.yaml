@@ -99,6 +99,7 @@ jobs:
       R_LIBS_SITE: 'C:\site'
       R_LIBS_USER: 'C:\packages'
       R_LIBS: 'C:\libs'
+      CRAN: http://cran.rstudio.com/
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
