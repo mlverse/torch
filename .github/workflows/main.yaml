@@ -104,6 +104,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
+          options(repos=structure(c(CRAN=Sys.getenv("CRAN"))))
           dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)
           .libPaths(Sys.getenv("R_LIBS_USER"))
           install.packages(c("remotes", "rcmdcheck"))
