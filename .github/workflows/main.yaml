@@ -74,7 +74,7 @@ jobs:
       fail-fast: false
       matrix: 
         cuda: ["101", "102"]
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux]
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: https://demo.rstudiopm.com/all/__linux__/bionic/latest
@@ -91,7 +91,7 @@ jobs:
   windows-gpu:
     strategy:
       fail-fast: false
-    runs-on: windows-gpu
+    runs-on: [self-hosted, windows]
     env:
       TORCH_TEST: 1
       TORCH_INSTALL: 1
