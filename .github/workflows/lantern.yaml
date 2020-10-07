@@ -21,6 +21,7 @@ jobs:
             test: "& './lanterntest.exe' "
             make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
             build: build/Release
+            cmakevars:
             libext: .dll
             exeext: .exe
             fixlib:
@@ -33,6 +34,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
+            cmakevars:
             libext:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
@@ -45,6 +47,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
+            cmakevars:
             libext: .dylib
             exeext:
             fixlib: install_name_tool -add_rpath @loader_path/. liblantern.dylib
@@ -57,6 +60,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
+            cmakevars:
             libext:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
@@ -69,6 +73,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
+            cmakevars:
             libext:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
@@ -81,6 +86,7 @@ jobs:
             test: "& './lanterntest.exe' "
             make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
             build: build/Release
+            cmakevars: '-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.1"'
             libext: .dll
             exeext: .exe
             fixlib:
@@ -142,20 +148,17 @@ jobs:
           Get-Content -Path $env:GITHUB_ENV -TotalCount 5
           
       - name: Run cmake
-        if: ${{ matrix.cuda == 10.1 && matrix.os == 'windows-2019'}}
         working-directory: ${{runner.workspace}}/build
-        run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.1" ${{github.workspace}}/lantern
-    
-      - name: Run cmake
-        working-directory: ${{runner.workspace}}/build
-        run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{github.workspace}}/lantern
+        run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{ matrix.cmakevars }} ${{github.workspace}}/lantern
           
       - name: Run make
         working-directory: ${{runner.workspace}}/build
         run: ${{matrix.make}}
+        
       - name: Fix library
         working-directory: ${{runner.workspace}}/build
         run: ${{matrix.fixlib}}
+        
       - name: Install libs
         working-directory: ${{runner.workspace}}
         run: |
@@ -166,21 +169,18 @@ jobs:
           mkdir artifacts
           cp -R ${{matrix.build}}/${{matrix.artifacts}} artifacts
           rm -r build
+
       - name: Test library
         if: ${{ matrix.cuda == 0 }}
         working-directory: ${{runner.workspace}}/install
         run: ${{matrix.test}} ${{runner.workspace}}/install
+        
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
           name: ${{matrix.upload}}
           path: ${{runner.workspace}}/artifacts
-      - name: Upload logs
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v1
-        with:
-          name: Logs
-          path: /var/log/nvidia-installer.log
+
   upload:
     needs: build
     runs-on: ubuntu-18.04
