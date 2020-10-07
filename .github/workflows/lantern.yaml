@@ -144,7 +144,7 @@ jobs:
       - name: Run cmake
         if: ${{ matrix.cuda == 10.1 && matrix.os == 'windows-2019'}}
         working-directory: ${{runner.workspace}}/build
-        run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} -DCUDA_TOOLKIT_ROOT_DIR="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1" ${{github.workspace}}/lantern
+        run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} -DCUDA_TOOLKIT_ROOT_DIR='"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1"' ${{github.workspace}}/lantern
     
       - name: Run cmake
         working-directory: ${{runner.workspace}}/build
