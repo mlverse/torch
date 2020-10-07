@@ -103,15 +103,13 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          print(Sys.getenv("R_LIBS_SITE"))
-          print(Sys.getenv("R_LIBS_USER"))
-          print(Sys.getenv("R_LIBS"))
-          print(.libPaths())
+          .libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Run checks
         run: |
+          .libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
       - name: Cleanup

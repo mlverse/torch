@@ -1,4 +1,4 @@
-branch <- "master"
+branch <- "gpu-windows"
 
 
 install_config <- list(
