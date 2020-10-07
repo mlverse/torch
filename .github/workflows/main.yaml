@@ -97,10 +97,14 @@ jobs:
       TORCH_INSTALL: 1
       CUDA: 10.1
       R_LIBS_USER: 'C:\packages'
+      R_LIBS: 'C:\libs'
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
+          print(Sys.getenv("R_LIBS_USER"))
+          print(Sys.getenv("R_LIBS"))
+          print(.libPaths())
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
