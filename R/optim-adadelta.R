@@ -10,8 +10,6 @@ optim_Adadelta <- R6::R6Class(
     
     initialize = function(params, lr=1.0, rho=0.9, eps=1e-6, weight_decay=0){
       
-      browser()
-      
       if (lr < 0)
         value_error("Invalid learning rate: {lr}")
       
@@ -47,6 +45,8 @@ optim_Adadelta <- R6::R6Class(
           group <- self$param_groups[[g]]
           
           for (p in seq_along(group$params)) {
+            
+            param <- group$params[[p]]
             
             if (is.null(param$grad))
               next
