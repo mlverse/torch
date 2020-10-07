@@ -130,7 +130,7 @@ jobs:
           Start-Process ./cuda.exe -argumentlist "-s" -wait
           echo "CUDA=10.1" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
           echo "CUDA_TOOLKIT_ROOT_DIR=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          curl https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.1-linux-x64-v7.6.5.32.tgz --output cudnn.zip --silent --location 
+          curl https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.1-windows10-x64-v7.6.5.32.zip --output cudnn.zip --silent --location 
           Expand-Archive -Path cudnn.zip -DestinationPath "C:\cudnn"
           Get-ChildItem -Path "C:\cudnn"
           Get-ChildItem -Path "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1"
