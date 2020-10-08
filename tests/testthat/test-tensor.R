@@ -180,3 +180,16 @@ test_that("print tensor is truncated", {
   expect_known_value(print(torch_arange(0, 100), n = -1), file = "assets/print4")
   
 })
+
+test_that("scatter works", {
+  
+  index <- torch_tensor(matrix(c(1, 2), ncol = 1), dtype = torch_long())
+  
+  z <- torch_zeros(3, 5)
+  expected_out <- torch_zeros(3, 5)
+  expected_out[1:2, 1] <- 1L
+  
+  expect_equal_to_tensor(z$scatter(1, index, 1), expected_out)
+  expect_equal_to_tensor(z$scatter_(1, index, 1), expected_out)
+  
+})

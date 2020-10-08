@@ -3858,7 +3858,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "scatter", function(dim, index, src, value) {  args <- mget(x = c("dim", "index", "src", "value"))
+Tensor$set("private", "_scatter", function(dim, index, src, value) {  args <- mget(x = c("dim", "index", "src", "value"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), index = "Tensor", 
     src = "Tensor", value = "Scalar")
@@ -3872,7 +3872,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "scatter_", function(dim, index, src, value) {  args <- mget(x = c("dim", "index", "src", "value"))
+Tensor$set("private", "_scatter_", function(dim, index, src, value) {  args <- mget(x = c("dim", "index", "src", "value"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = "int64_t", index = "Tensor", src = "Tensor", 
     value = "Scalar")

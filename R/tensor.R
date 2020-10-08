@@ -114,6 +114,18 @@ Tensor <- R7Class(
       o <- private$`_topk`(k, dim, largest, sorted)
       o[[2]]$add_(1L)
       o
+    },
+    scatter = function(dim, index, src) {
+      if (is_torch_tensor(src))
+        private$`_scatter`(dim, index, src = src)
+      else
+        private$`_scatter`(dim, index, value = src)
+    },
+    scatter_ = function(dim, index, src) {
+      if (is_torch_tensor(src))
+        private$`_scatter_`(dim, index, src = src)
+      else
+        private$`_scatter_`(dim, index, value = src)
     }
   ),
   active = list(
