@@ -126,6 +126,9 @@ Tensor <- R7Class(
         private$`_scatter_`(dim, index, src = src)
       else
         private$`_scatter_`(dim, index, value = src)
+    },
+    has_names = function() {
+      cpp_tensor_has_names(self$ptr)
     }
   ),
   active = list(
@@ -143,6 +146,14 @@ Tensor <- R7Class(
     },
     ndim = function() {
       self$dim()
+    },
+    names = function() {
+      
+      if (!self$has_names())
+        return(NULL)
+      
+      p <- cpp_tensor_names(self$ptr)
+      DimnameList$new(ptr = p)$to_r()
     }
   )
 )

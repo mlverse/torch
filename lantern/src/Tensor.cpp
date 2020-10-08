@@ -187,3 +187,20 @@ bool _lantern_Tensor_is_contiguous(void *self)
   return x.is_contiguous();
   LANTERN_FUNCTION_END_RET(false)
 }
+
+bool _lantern_Tensor_has_names (void * self)
+{
+  LANTERN_FUNCTION_START
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  return x.has_names();
+  LANTERN_FUNCTION_END_RET(false)
+}
+
+void* _lantern_Tensor_names (void* self)
+{
+  LANTERN_FUNCTION_START
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  std::vector<torch::Dimname> nms = x.names().vec();
+  return (void *)new LanternPtr<std::vector<torch::Dimname>>(nms);
+  LANTERN_FUNCTION_END
+}

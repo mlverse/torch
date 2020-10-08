@@ -7117,6 +7117,14 @@ cpp_tensor_is_contiguous <- function(self) {
     .Call('_torch_cpp_tensor_is_contiguous', PACKAGE = 'torchpkg', self)
 }
 
+cpp_tensor_has_names <- function(self) {
+    .Call('_torch_cpp_tensor_has_names', PACKAGE = 'torchpkg', self)
+}
+
+cpp_tensor_names <- function(self) {
+    .Call('_torch_cpp_tensor_names', PACKAGE = 'torchpkg', self)
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torchpkg', x)
 }
