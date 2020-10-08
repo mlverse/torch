@@ -12,6 +12,7 @@
   spans for more than 30 lines. This is useful for not spamming the console or
   taking very long to print when you print a very large tensor. (#283)
 - Added the Adadelta optimizer (@krzjoa #284)
+- Added support for GPU's on Windows (#281)
 
 # torch 0.1.0
 
