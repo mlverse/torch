@@ -28,7 +28,11 @@ utils_data_default_collate <- function(batch) {
     
   } else if (is.list(elem)) {
     
-    lapply(seq_along(elem), function(i) {
+    # preserves the element names
+    named_seq <- seq_along(elem)
+    names(named_seq) <- names(elem)
+    
+    lapply(named_seq, function(i) {
       utils_data_default_collate(lapply(batch, function(x) x[[i]]))
     })
     
