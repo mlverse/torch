@@ -55,7 +55,7 @@ install_config <- list(
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu102.zip",
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.5.0.zip",
           path = "libtorch/lib",
           filter = ".dll"
         ),
