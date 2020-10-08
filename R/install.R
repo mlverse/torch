@@ -1,4 +1,4 @@
-branch <- "master"
+branch <- "gpu-windows"
 
 
 install_config <- list(
@@ -35,6 +35,14 @@ install_config <- list(
           path = "libtorch/lib"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-101.zip", branch)
+      ),
+      "windows" = list(
+        "libtorch" = list(
+          url = "https://download.pytorch.org/libtorch/cu101/libtorch-win-shared-with-deps-1.5.0%2Bcu101.zip",
+          path = "libtorch/lib",
+          filter = ".dll"
+        ),
+        "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-gpu-101.zip", branch)
       )
     ),
     "10.2" = list(
@@ -44,6 +52,14 @@ install_config <- list(
           path = "libtorch/lib"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-102.zip", branch)
+      ),
+      "windows" = list(
+        "libtorch" = list(
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.5.0.zip",
+          path = "libtorch/lib",
+          filter = ".dll"
+        ),
+        "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-gpu-102.zip", branch)
       )
     ),
     "9.2" = list(
@@ -162,10 +178,38 @@ lantern_install_libs <- function(version, type, install_path) {
   invisible(install_path)
 }
 
+install_type_windows <- function(version) {
+  
+  cuda_version <- NULL
+  cuda_path <- Sys.getenv("CUDA_PATH")
+  
+  if (nchar(cuda_path) > 0) {
+    versions_file <- file.path(cuda_path, "version.txt")
+    if (file.exists(versions_file)) {
+      cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
+    }
+  }
+  
+  if (is.null(cuda_version)) return("cpu")
+  
+  versions_available <- names(install_config[[version]])
+  
+  if (!cuda_version %in% versions_available) {
+    message("Cuda ", cuda_version, " detected but torch only supports: ", paste(versions_available, collapse = ", "))
+    return("cpu")
+  }
+  
+  cuda_version
+}
+
 #' @keywords internal
 install_type <- function(version) {
   if (nchar(Sys.getenv("CUDA")) > 0) return(Sys.getenv("CUDA"))
-  if (install_os() != "linux") return("cpu")
+  if (install_os() == "windows") return(install_type_windows(version))
+  
+  if (install_os() != "linux") return("cpu") # macOS
+  
+  # Detect cuda version on Linux
   
   cuda_version <- NULL
   cuda_home <- Sys.getenv("CUDA_HOME")

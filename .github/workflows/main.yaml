@@ -74,7 +74,7 @@ jobs:
       fail-fast: false
       matrix: 
         cuda: ["101", "102"]
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux]
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: https://demo.rstudiopm.com/all/__linux__/bionic/latest
@@ -88,3 +88,42 @@ jobs:
         run: docker build -f $DOCKER_FILE -t $DOCKER_TAG .
       - name: Run checks
         run: docker run --rm --gpus all $DOCKER_TAG sh torch/tools/check.sh
+  windows-gpu:
+    strategy:
+      fail-fast: false
+      matrix: 
+        cuda: ["10.1", "10.2"]
+    runs-on: [self-hosted, windows]
+    env:
+      TORCH_TEST: 1
+      TORCH_INSTALL: 1
+      CUDA: ${{ matrix.cuda}}
+      R_LIBS_USER: 'C:\packages'
+      CRAN: http://cran.rstudio.com/
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          options(repos=structure(c(CRAN=Sys.getenv("CRAN"))))
+          dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)
+          .libPaths(Sys.getenv("R_LIBS_USER"))
+          install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
+      - name: Run checks
+        run: |
+          Sys.setenv(
+            CUDA_PATH = Sys.getenv(
+              paste0("CUDA_PATH_V", sub(".", "_", Sys.getenv("CUDA"), fixed = TRUE))
+            )
+          )
+          rcmdcheck::rcmdcheck(
+            args = c("--no-multiarch", "--no-manual"), 
+            build_args = c("--no-build-vignettes"), 
+            error_on = "error", 
+            check_dir = "check"
+          )
+        shell: Rscript {0}
+      - name: Cleanup
+        if: ${{ always() }} 
+        run: Remove-Item 'C:\packages' -Recurse

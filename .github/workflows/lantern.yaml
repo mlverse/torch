@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - 'cran/**'
+      - gpu-windows
 
 jobs:
   build:
@@ -20,6 +21,7 @@ jobs:
             test: "& './lanterntest.exe' "
             make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
             build: build/Release
+            cmakevars:
             libext: .dll
             exeext: .exe
             fixlib:
@@ -32,6 +34,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
+            cmakevars:
             libext:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
@@ -44,6 +47,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
+            cmakevars:
             libext: .dylib
             exeext:
             fixlib: install_name_tool -add_rpath @loader_path/. liblantern.dylib
@@ -56,6 +60,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
+            cmakevars:
             libext:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
@@ -68,18 +73,49 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
+            cmakevars:
             libext:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
             flavor: Release
             artifacts: liblantern.so
             upload: Linux-Cuda-102
+          - os: windows-2019
+            cuda: 10.1
+            library: lantern.dll
+            test: "& './lanterntest.exe' "
+            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
+            build: build/Release
+            cmakevars: '-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.1"'
+            libext: .dll
+            exeext: .exe
+            fixlib:
+            flavor: Release
+            artifacts: lantern.dll
+            upload: Windows-Cuda-101
+            cudatoolkit: 'https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.96_win10.exe'
+            cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.1-windows10-x64-v7.6.5.32.zip'
+          - os: windows-2019
+            cuda: 10.2
+            library: lantern.dll
+            test: "& './lanterntest.exe' "
+            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
+            build: build/Release
+            cmakevars: '-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.2"'
+            libext: .dll
+            exeext: .exe
+            fixlib:
+            flavor: Release
+            artifacts: lantern.dll
+            upload: Windows-Cuda-102
+            cudatoolkit: 'http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_441.22_win10.exe'
+            cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-windows10-x64-v7.6.5.32.zip'
     steps:
       - uses: actions/checkout@v2
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/build
       - name: Prep cmake cuda 10.1
-        if: ${{ matrix.cuda == 10.1 }}
+        if: ${{ matrix.cuda == 10.1 && matrix.os == 'ubuntu-18.04' }}
         run: |
           wget --quiet https://storage.googleapis.com/torch-lantern-builds/cuda/cuda_10.1.105_418.39_linux.run
           chmod +x cuda_10.1.105_418.39_linux.run
@@ -95,7 +131,7 @@ jobs:
           echo ::set-env name=CUDNN_LIBRARY_PATH::/usr/local/cuda/lib64
           echo ::set-env name=CUDNN_INCLUDE_PATH::/usr/local/cuda/include
       - name: Prep cmake cuda 10.2
-        if: ${{ matrix.cuda == 10.2 }}
+        if: ${{ matrix.cuda == 10.2 && matrix.os == 'ubuntu-18.04'}}
         run: |
           wget --quiet http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
           chmod +x cuda_10.2.89_440.33.01_linux.run
@@ -110,15 +146,36 @@ jobs:
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
           echo ::set-env name=CUDNN_LIBRARY_PATH::/usr/local/cuda/lib64
           echo ::set-env name=CUDNN_INCLUDE_PATH::/usr/local/cuda/include
+      - name: Prep cuda (windows)
+        if: ${{ (matrix.cuda == 10.1 || matrix.cuda == 10.2 ) && matrix.os == 'windows-2019'}}
+        run: |
+          curl ${{ matrix.cudatoolkit }} --output cuda.exe --silent --location
+          Start-Process ./cuda.exe -argumentlist "-s" -wait
+          echo "CUDA=${{ matrix.cuda }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
+          echo "CUDA_TOOLKIT_ROOT_DIR=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          curl ${{ matrix.cudnn }} --output cudnn.zip --silent --location 
+          Expand-Archive -Path cudnn.zip -DestinationPath "C:\cudnn"
+          Get-ChildItem -Path "C:\cudnn"
+          Get-ChildItem -Path "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}"
+          Move-Item -Path "C:\cudnn\cuda\bin\cudnn*.dll" -Destination "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\bin"
+          Move-Item -Path "C:\cudnn\cuda\include\cudnn*.h" -Destination "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\include"
+          Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\lib\x64"
+          echo "CUDNN_INCLUDE_PATH=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          echo "CUDNN_LIBRARY_PATH=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Get-Content -Path $env:GITHUB_ENV -TotalCount 5
+          
       - name: Run cmake
         working-directory: ${{runner.workspace}}/build
-        run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{github.workspace}}/lantern
+        run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{ matrix.cmakevars }} ${{github.workspace}}/lantern
+          
       - name: Run make
         working-directory: ${{runner.workspace}}/build
         run: ${{matrix.make}}
+        
       - name: Fix library
         working-directory: ${{runner.workspace}}/build
         run: ${{matrix.fixlib}}
+        
       - name: Install libs
         working-directory: ${{runner.workspace}}
         run: |
@@ -129,27 +186,24 @@ jobs:
           mkdir artifacts
           cp -R ${{matrix.build}}/${{matrix.artifacts}} artifacts
           rm -r build
+
       - name: Test library
         if: ${{ matrix.cuda == 0 }}
         working-directory: ${{runner.workspace}}/install
         run: ${{matrix.test}} ${{runner.workspace}}/install
+        
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
           name: ${{matrix.upload}}
           path: ${{runner.workspace}}/artifacts
-      - name: Upload logs
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v1
-        with:
-          name: Logs
-          path: /var/log/nvidia-installer.log
+
   upload:
     needs: build
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        name: [macOS, Linux, Windows, Cuda101, Cuda102]
+        name: [macOS, Linux, Windows, Cuda101, Cuda102, WindowsCuda101, WindowsCuda102]
         include:
           - name: macOS
             artifact: macOS
@@ -171,6 +225,16 @@ jobs:
           - name: Cuda102
             artifact: Linux-Cuda-102
             upload: Linux
+            hw: gpu
+            version: -102
+          - name: WindowsCuda101
+            artifact: Windows-Cuda-101
+            upload: Windows
+            hw: gpu
+            version: -101
+          - name: WindowsCuda102
+            artifact: Windows-Cuda-102
+            upload: Windows
             hw: gpu
             version: -102
     steps:
