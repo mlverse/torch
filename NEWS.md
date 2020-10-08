@@ -10,7 +10,8 @@
 - Added an `as.matrix` method for torch Tensors. (#282)
 - By default we now truncate the output of `print(totrch_tensor(1:40))` if it
   spans for more than 30 lines. This is useful for not spamming the console or
-  taking very long to print when you print a very large tensor. (#284)
+  taking very long to print when you print a very large tensor. (#283)
+- Added the Adadelta optimizer (@krzjoa #284)
 
 # torch 0.1.0
 
