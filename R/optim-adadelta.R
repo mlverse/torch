@@ -61,11 +61,11 @@ optim_Adadelta <- R6::R6Class(
             if (length(param$state) == 0) {
               param$state <- list()
               param$state[["step"]]       <- 0
-              param$state[["sqaure_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+              param$state[["square_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
               param$state[["acc_delta"]]  <- torch_zeros_like(param, memory_format=torch_preserve_format())
             }
            
-            square_avg <- param$state[["sqaure_avg"]]
+            square_avg <- param$state[["square_avg"]]
             acc_delta  <- param$state[["acc_delta"]]
             
             rho <- group[["rho"]]
