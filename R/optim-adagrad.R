@@ -63,35 +63,46 @@ optim_Adagrad <- R6::R6Class(
         
         for (group in self$param_groups){
           
-          params_with_grad <- list()
-          grads <- list()
-          state_sums  <- list()
-          state_steps <- list()
-          
           for (p in seq_along(group$params)) {
             param <- group$params[[p]]
             
-            if (!is.null(param$grad)) {
-              params_with_grad[[p]] <- p
-              grads[[p]] <- p$grad
-              state_sums[[p]] <- param$state[['sum']]
-              param$state[['step']] <- param$state[['step']] + 1
-              state_steps[[p]] <- param$state[['step']]
+            if (is.null(param$grad))
+              next
+            
+            param$state[['step']] <- param$state[['step']] + 1
+            
+            grad       <- param$grad
+            state_sum  <- param$state[['sum']]
+            state_step <- param$state[['step']]
+            
+           if (weight_decay != 0) {
+              # if (grad$is_sparse) {
+              #   runtime_error("weight_decay option is not compatible with sparse gradients")
+              # }
+              grad <- grad$add(param, alpha = weight_decay)
             }
+            
+            clr <-  lr / (1 + (step - 1) * lr_decay)
+            
+            if (grad$is_sparse) {
+              grad <- grad$coalesce()
+              grad_indices <- grad$`_indices`()
+              grad_values <-  grad$`_values`()
+              size <- grad$size()
+              
+              state_sum$add_(_make_sparse(grad, grad_indices, grad_values.pow(2)))
+              std = state_sum.sparse_mask(grad)
+              std_values = std._values().sqrt_().add_(eps)
+              param.add_(_make_sparse(grad, grad_indices, grad_values / std_values), alpha=-clr)
+            } else {
+              state_sum.addcmul_(grad, grad, value=1)
+              std = state_sum.sqrt().add_(eps)
+              param.addcdiv_(grad, std, value=-clr)
+            }
+            
           }
         }
-        
-       nnf_adagrad(
-         params_with_grad,
-         grads,
-         state_sums,
-         state_steps,
-         group['lr'],
-         group['weight_decay'],
-         group['lr_decay'],
-         group['eps']
-       )
-        })
+      })
       loss
     }
   )
