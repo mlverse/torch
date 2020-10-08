@@ -3610,7 +3610,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "rename", function(names) {  args <- mget(x = c("names"))
+Tensor$set("private", "_rename", function(names) {  args <- mget(x = c("names"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", names = "DimnameList")
 nd_args <- c("self", "names")
@@ -3623,7 +3623,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "rename_", function(names) {  args <- mget(x = c("names"))
+Tensor$set("private", "_rename_", function(names) {  args <- mget(x = c("names"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", names = "DimnameList")
 nd_args <- c("self", "names")
