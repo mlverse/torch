@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fft — torch_fft • torch</title>
+<title>Adadelta optimizer — optim_adadelta • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Fft — torch_fft" />
-<meta property="og:description" content="Fft" />
+<meta property="og:title" content="Adadelta optimizer — optim_adadelta" />
+<meta property="og:description" content="It has been proposed in ADADELTA: An Adaptive Learning Rate Method" />
 
 
 <meta name="robots" content="noindex">
@@ -218,121 +218,73 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fft</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_fft.Rd</code></div>
+    <h1>Adadelta optimizer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/optim-adadelta.R'><code>R/optim-adadelta.R</code></a></small>
+    <div class="hidden name"><code>optim_adadelta.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fft</p>
+    <p>It has been proposed in <a href='https://arxiv.org/pdf/1212.5701.pdf'>ADADELTA: An Adaptive Learning Rate Method</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_fft</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>signal_ndim</span>, normalized <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>optim_adadelta</span><span class='op'>(</span><span class='va'>params</span>, lr <span class='op'>=</span> <span class='fl'>1</span>, rho <span class='op'>=</span> <span class='fl'>0.9</span>, eps <span class='op'>=</span> <span class='fl'>1e-06</span>, weight_decay <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor of at least <code>signal_ndim</code> <code>+ 1</code>        dimensions</p></td>
+      <th>params</th>
+      <td><p>(iterable): list of parameters to optimize or list defining
+parameter groups</p></td>
     </tr>
     <tr>
-      <th>signal_ndim</th>
-      <td><p>(int) the number of dimensions in each signal.        <code>signal_ndim</code> can only be 1, 2 or 3</p></td>
+      <th>lr</th>
+      <td><p>(float, optional): learning rate (default: 1e-3)</p></td>
     </tr>
     <tr>
-      <th>normalized</th>
-      <td><p>(bool, optional) controls whether to return normalized results.        Default: <code>FALSE</code></p></td>
+      <th>rho</th>
+      <td><p>(float, optional): coefficient used for computing a running average
+of squared gradients (default: 0.9)</p></td>
+    </tr>
+    <tr>
+      <th>eps</th>
+      <td><p>(float, optional): term added to the denominator to improve
+numerical stability (default: 1e-6)</p></td>
+    </tr>
+    <tr>
+      <th>weight_decay</th>
+      <td><p>(float, optional): weight decay (L2 penalty) (default: 0)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    
-<pre>For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
-repeatedly running FFT methods on tensors of same geometry with same
-configuration. See cufft-plan-cache for more details on how to
-monitor and control the cache.
-</pre>
-
-    <h2 class="hasAnchor" id="fft-input-signal-ndim-normalized-false-gt-tensor-"><a class="anchor" href="#fft-input-signal-ndim-normalized-false-gt-tensor-"></a>fft(input, signal_ndim, normalized=False) -&gt; Tensor </h2>
-
-    
-
-
-<p>Complex-to-complex Discrete Fourier Transform</p>
-<p>This method computes the complex-to-complex discrete Fourier transform.
-Ignoring the batch dimensions, it computes the following expression:</p>
-<p>$$
-    X[\omega_1, \dots, \omega_d] =
-        \sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x[n_1, \dots, n_d]
-         e^{-j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
+    <p>According to the original paper, decaying average of the squared gradients
+is computed as follows:
 $$
-where \(d\) = <code>signal_ndim</code> is number of dimensions for the
-signal, and \(N_i\) is the size of signal dimension \(i\).</p>
-<p>This method supports 1D, 2D and 3D complex-to-complex transforms, indicated
-by <code>signal_ndim</code>. <code>input</code> must be a tensor with last dimension
-of size 2, representing the real and imaginary components of complex
-numbers, and should have at least <code>signal_ndim + 1</code> dimensions with optionally
-arbitrary number of leading batch dimensions. If <code>normalized</code> is set to
-<code>TRUE</code>, this normalizes the result by dividing it with
-\(\sqrt{\prod_{i=1}^K N_i}\) so that the operator is unitary.</p>
-<p>Returns the real and the imaginary parts together as one tensor of the same
-shape of <code>input</code>.</p>
-<p>The inverse of this function is <code><a href='torch_ifft.html'>torch_ifft</a></code>.</p>
-    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
-
-    
-
-<p>For CPU tensors, this method is currently only available with MKL. Use
-<code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
+E[g^2]_{t} = \rho E[g^2]_{t- 1} + (1 - \rho){g_{t}}^2
+$$</p>
+<p>RMS of previous squared gradients up to time t:
+$$
+RMS[g_{t}] = \sqrt{E[g^2]_{t} + \epsilon }
+$$</p>
+<p>Adadelta update rule:
+$$
+ \begin{array}{ll}
+ \Delta \theta_{t} = - \frac{RMS [\Delta \theta]_{t - 1} }{RMS[g]_{t}}
+ \theta_{t+1} = \theta_{t} + \Delta \theta_{t}
+\end{array}
+$$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='co'># unbatched 2D FFT</span>
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_fft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span><span class='op'>)</span>
-<span class='co'># batched 1D FFT</span>
-<span class='fu'>torch_fft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='co'># arbitrary number of batch dimensions, 2D FFT</span>
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_fft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span><span class='op'>)</span>
-
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>optimizer</span> <span class='op'>&lt;-</span> <span class='fu'>optim_adadelta</span><span class='op'>(</span><span class='va'>model</span><span class='op'>$</span><span class='va'>parameters</span>, lr <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
+<span class='va'>optimizer</span><span class='op'>$</span><span class='fu'>zero_grad</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>loss_fn</span><span class='op'>(</span><span class='fu'>model</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>, <span class='va'>target</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>backward</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>optimizer</span><span class='op'>$</span><span class='fu'>step</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; (1,1,1,.,.) = 
-#&gt;    7.3310  -4.8690
-#&gt;   13.3910  -6.7542
-#&gt;   10.6021  -1.6338
-#&gt;   -3.3610  -1.6645
-#&gt;   -3.4859  -2.5484
-#&gt; 
-#&gt; (2,1,1,.,.) = 
-#&gt;   0.1003 -1.0836
-#&gt;  -1.9237 -0.6994
-#&gt;   1.0034 -1.5733
-#&gt;   5.1687 -0.7825
-#&gt;  -6.8634  2.4342
-#&gt; 
-#&gt; (3,1,1,.,.) = 
-#&gt;   12.4304   0.2419
-#&gt;    8.4033  -9.4372
-#&gt;   -2.2314  -0.3867
-#&gt;    3.6120  -6.1759
-#&gt;    2.3335   6.3026
-#&gt; 
-#&gt; (1,2,1,.,.) = 
-#&gt;   4.9020  9.3391
-#&gt;  -3.9597  9.2740
-#&gt;  -1.4009 -5.5838
-#&gt;  -0.8366 -5.6010
-#&gt;   2.1707  5.1414
-#&gt; 
-#&gt; (2,2,1,.,.) = 
-#&gt;  -2.4007 -7.6213
-#&gt; ... [the output was truncated (use n=-1 to disable)]
-#&gt; [ CPUFloatType{3,3,5,5,2} ]</div></pre>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

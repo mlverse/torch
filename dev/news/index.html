@@ -231,7 +231,8 @@
 <li>Fixed <code>torch_topk</code> and <code>x$topk</code> so the returned indexes are 1-based (<a href='https://github.com/mlverse/torch/issues/280'>#280</a>)</li>
 <li>Fixed a bug (<a href='https://github.com/mlverse/torch/issues/275'>#275</a>) that would cause <code>1 - torch_tensor(1, device = "cuda")</code> to fail because <code>1</code> was created in the CPU. (<a href='https://github.com/mlverse/torch/issues/279'>#279</a>)</li>
 <li>Added an <code>as.matrix</code> method for torch Tensors. (<a href='https://github.com/mlverse/torch/issues/282'>#282</a>)</li>
-<li>By default we now truncate the output of <code><a href="https://rdrr.io/r/base/print.html">print(totrch_tensor(1:40))</a></code> if it spans for more than 30 lines. This is useful for not spamming the console or taking very long to print when you print a very large tensor. (<a href='https://github.com/mlverse/torch/issues/284'>#284</a>)</li>
+<li>By default we now truncate the output of <code><a href="https://rdrr.io/r/base/print.html">print(totrch_tensor(1:40))</a></code> if it spans for more than 30 lines. This is useful for not spamming the console or taking very long to print when you print a very large tensor. (<a href='https://github.com/mlverse/torch/issues/283'>#283</a>)</li>
+<li>Added the Adadelta optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/284'>#284</a>)</li>
 </ul>
 </div>
     <div id="torch-010" class="section level1">
