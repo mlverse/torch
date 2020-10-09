@@ -13,6 +13,7 @@
   taking very long to print when you print a very large tensor. (#283)
 - Added the Adadelta optimizer (@krzjoa #284)
 - Added support for GPU's on Windows (#281)
+- Added the Adagrad optimizer (@krzjoa)
 
 # torch 0.1.0
 
