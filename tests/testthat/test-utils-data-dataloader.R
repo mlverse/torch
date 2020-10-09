@@ -98,3 +98,26 @@ test_that("dataloader that shuffles", {
 
 })
 
+
+test_that("named outputs", {
+  
+  ds <- dataset(
+    initialize = function() {
+      
+    },
+    .getitem = function(i) {
+      list(x = i, y = 2 * i)
+    },
+    .length = function() {
+      1000
+    }
+  )()
+  
+  expect_named(ds[1], c("x", "y"))
+  
+  dl <- dataloader(ds, batch_size = 4)
+  iter <- dataloader_make_iter(dl)
+  
+  expect_named(dataloader_next(iter), c("x", "y"))
+  
+})

@@ -514,6 +514,21 @@ extern "C"
     return ret;
   }
 
+  LANTERN_API bool  (LANTERN_PTR _lantern_Tensor_has_names) (void* self);
+  HOST_API bool lantern_Tensor_has_names (void* self)
+  {
+    bool ret = _lantern_Tensor_has_names(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_names) (void * self);
+  HOST_API void* lantern_Tensor_names (void* self)
+  {
+    void* ret = _lantern_Tensor_names(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
 
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -4229,6 +4244,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_IValue_delete);
   LOAD_SYMBOL(_lantern_vector_string_delete);
   LOAD_SYMBOL(_lantern_Tensor_data_ptr_int64_t);
+  LOAD_SYMBOL(_lantern_Tensor_has_names);
+  LOAD_SYMBOL(_lantern_Tensor_names);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

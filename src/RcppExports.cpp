@@ -23639,6 +23639,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_tensor_has_names
+bool cpp_tensor_has_names(Rcpp::XPtr<XPtrTorchTensor> self);
+RcppExport SEXP _torch_cpp_tensor_has_names(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_has_names(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_tensor_names
+Rcpp::XPtr<XPtrTorchDimnameList> cpp_tensor_names(Rcpp::XPtr<XPtrTorchTensor> self);
+RcppExport SEXP _torch_cpp_tensor_names(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_names(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor_list
 Rcpp::XPtr<XPtrTorchTensorList> cpp_torch_tensor_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
@@ -25569,6 +25591,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_tensor_device", (DL_FUNC) &_torch_cpp_tensor_device, 1},
     {"_torch_cpp_tensor_is_undefined", (DL_FUNC) &_torch_cpp_tensor_is_undefined, 1},
     {"_torch_cpp_tensor_is_contiguous", (DL_FUNC) &_torch_cpp_tensor_is_contiguous, 1},
+    {"_torch_cpp_tensor_has_names", (DL_FUNC) &_torch_cpp_tensor_has_names, 1},
+    {"_torch_cpp_tensor_names", (DL_FUNC) &_torch_cpp_tensor_names, 1},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},

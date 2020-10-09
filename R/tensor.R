@@ -126,6 +126,17 @@ Tensor <- R7Class(
         private$`_scatter_`(dim, index, src = src)
       else
         private$`_scatter_`(dim, index, value = src)
+    },
+    has_names = function() {
+      cpp_tensor_has_names(self$ptr)
+    },
+    rename = function(...) {
+      nms <- prep_names(..., self = self)
+      private$`_rename`(nms) 
+    },
+    rename_ = function(...) {
+      nms <- prep_names(..., self = self)
+      private$`_rename_`(nms) 
     }
   ),
   active = list(
@@ -143,9 +154,33 @@ Tensor <- R7Class(
     },
     ndim = function() {
       self$dim()
+    },
+    names = function() {
+      
+      if (!self$has_names())
+        return(NULL)
+      
+      p <- cpp_tensor_names(self$ptr)
+      DimnameList$new(ptr = p)$to_r()
     }
   )
 )
+
+prep_names <- function(..., self) {
+  new_nms <- unlist(rlang::list2(...))
+  
+  if (rlang::is_named(new_nms)) {
+    
+    if (!self$has_names())
+      runtime_error("The tensor doesn't have names so you can't rename a dimension.")
+    
+    nms <- self$names
+    nms[which(nms == names(new_nms))] <- new_nms
+  } else {
+    nms <- new_nms
+  }
+  nms
+}
 
 #' Converts R objects to a torch tensor
 #' 

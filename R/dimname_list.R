@@ -39,6 +39,7 @@ DimnameList <- R6::R6Class(
       
       if (!is.null(ptr)) {
         self$ptr <- ptr
+        return()
       }
       
       ptrs <- lapply(lapply(names, torch_dimname), function(self) self$ptr)
@@ -47,7 +48,11 @@ DimnameList <- R6::R6Class(
     },
     
     print = function() {
-      print(cpp_dimname_list_to_string(self$ptr))
+      print(self$to_r())
+    },
+    
+    to_r = function() {
+      cpp_dimname_list_to_string(self$ptr)
     }
     
   )

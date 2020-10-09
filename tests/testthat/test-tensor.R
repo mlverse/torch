@@ -193,3 +193,31 @@ test_that("scatter works", {
   expect_equal_to_tensor(z$scatter_(1, index, 1), expected_out)
   
 })
+
+test_that("names and has_names", {
+  
+  x <- torch_randn(2,2)
+  expect_equal(x$has_names(), FALSE)
+  expect_null(x$names)
+  
+  x <- torch_randn(2,2, names = c("W", "H"))
+  expect_equal(x$has_names(), TRUE)
+  expect_equal(x$names, c("W", "H"))
+  
+})
+
+test_that("rename works", {
+  
+  x <- torch_randn(2,2, names = c("W", "H"))
+  
+  expect_equal(x$rename(W = "a")$names, c("a", "H"))
+  expect_equal(x$rename(W = "a", H = "b")$names, c("a", "b"))
+  expect_equal(x$rename("a", "b")$names, c("a", "b"))
+  x$rename_(W = "a")
+  expect_equal(x$names, c("a", "H"))
+  
+  x <- torch_randn(2,2)
+  expect_error(x$rename(W = "a"), class = "runtime_error")
+  expect_equal(x$rename("a", "b")$names, c("a", "b"))
+  
+})

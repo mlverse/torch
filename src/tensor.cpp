@@ -243,3 +243,14 @@ bool cpp_tensor_is_contiguous (Rcpp::XPtr<XPtrTorchTensor> self)
   return lantern_Tensor_is_contiguous(self->get());
 }
 
+// [[Rcpp::export]]
+bool cpp_tensor_has_names (Rcpp::XPtr<XPtrTorchTensor> self)
+{
+  return lantern_Tensor_has_names(self->get());
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchDimnameList> cpp_tensor_names (Rcpp::XPtr<XPtrTorchTensor> self)
+{
+  return make_xptr<XPtrTorchDimnameList>(lantern_Tensor_names(self->get()));
+}
