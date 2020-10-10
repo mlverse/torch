@@ -104,7 +104,7 @@ Collate:
     'optim-adam.R'
     'optim-lr_scheduler.R'
     'optim-sgd.R'
-    'optim_rmsprop.R'
+    'optim-rmsprop.R'
     'package.R'
     'qscheme.R'
     'quantization.R'
