@@ -101,55 +101,42 @@ Distribution <- R6::R6Class(
     #' @param     value (Tensor): the tensor whose log probability is to be
     #' computed by the `log_prob` method.
     .validate_sample = function(value){
+      if (!inherits(value, "torch_Tensor"))
+        value_error('The value argument to log_prob must be a Tensor')
       
-    }
-  
-
-    def _validate_sample(self, value):
-      """
+      event_dim_start = len(value.size()) - len(self._event_shape)
+      if value.size()[event_dim_start:] != self._event_shape:
+        value_error('The right-most size of value must match event_shape: {} vs {}.'.
+                         format(value.size(), self._event_shape))
+      
+      actual_shape = value.size()
+      expected_shape = self._batch_shape + self._event_shape
+      for i, j in zip(reversed(actual_shape), reversed(expected_shape)):
+        if i != 1 and j != 1 and i != j:
+        raise ValueError('Value is not broadcastable with batch_shape+event_shape: {} vs {}.'.
+                         format(actual_shape, expected_shape))
+      
+      if not self.support.check(value).all():
+        raise ValueError('The value argument must be within the support')
+    },
     
-        Args:
-        
-        Raises
-            ValueError: when the rightmost dimensions of `value` do not match the
-                distribution's batch and event shapes.
-        """
-    if not isinstance(value, torch.Tensor):
-      raise ValueError('The value argument to log_prob must be a Tensor')
     
-    event_dim_start = len(value.size()) - len(self._event_shape)
-    if value.size()[event_dim_start:] != self._event_shape:
-      raise ValueError('The right-most size of value must match event_shape: {} vs {}.'.
-                       format(value.size(), self._event_shape))
+    .get_checked_instance = function(cls, .instance = NULL){
+      if (is.null(.instance) is None and type(self).__init__ != cls.__init__:
+        raise NotImplementedError("Subclass {} of {} that defines a custom __init__ method "
+                                  "must also define a custom .expand() method.".
+                                  format(self.__class__.__name__, cls.__name__))
+      return self.__new__(type(self)) if _instance is None else _instance
+    },
     
-    actual_shape = value.size()
-    expected_shape = self._batch_shape + self._event_shape
-    for i, j in zip(reversed(actual_shape), reversed(expected_shape)):
-      if i != 1 and j != 1 and i != j:
-      raise ValueError('Value is not broadcastable with batch_shape+event_shape: {} vs {}.'.
-                       format(actual_shape, expected_shape))
-    
-    if not self.support.check(value).all():
-      raise ValueError('The value argument must be within the support')
-    
-    def _get_checked_instance(self, cls, _instance=None):
-      if _instance is None and type(self).__init__ != cls.__init__:
-      raise NotImplementedError("Subclass {} of {} that defines a custom __init__ method "
-                                "must also define a custom .expand() method.".
-                                format(self.__class__.__name__, cls.__name__))
-    return self.__new__(type(self)) if _instance is None else _instance
-    
-    def __repr__(self):
+    print = function(){
       param_names = [k for k, _ in self.arg_constraints.items() if k in self.__dict__]
-    args_string = ', '.join(['{}: {}'.format(p, self.__dict__[p]
-                                             if self.__dict__[p].numel() == 1
-                                             else self.__dict__[p].size()) for p in param_names])
-    return self.__class__.__name__ + '(' + args_string + ')'
-    
-    
-    
+      args_string = ', '.join(['{}: {}'.format(p, self.__dict__[p]
+                                               if self.__dict__[p].numel() == 1
+                                               else self.__dict__[p].size()) for p in param_names])
+      return self.__class__.__name__ + '(' + args_string + ')'
+    }
   ),
-  
   
   active = list(
     
