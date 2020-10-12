@@ -129,7 +129,7 @@ optim_RMSprop <- R6::R6Class(
 #' 
 #' Update rule:
 #' 
-#' deqn{
+#' \deqn{
 #' \theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{{E[g^2]}_{t} + \epsilon}} * g_{t} 
 #' }
 #' 

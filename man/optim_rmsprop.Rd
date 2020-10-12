@@ -45,7 +45,7 @@ of the squared gradient.
 
 Update rule:
 
-deqn{
-\theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{{E\link{g^2}}\emph{{t} + \epsilon}} * g}{t}
+\deqn{
+\theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{{E[g^2]}_{t} + \epsilon}} * g_{t} 
 }
 }
