@@ -62,6 +62,15 @@ install_config <- list(
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-gpu-102.zip", branch)
       )
     ),
+    "11.0" = list(
+      "linux" = list(
+        "libtorch" = list(
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu102.zip",
+          path = "libtorch/lib"
+        ),
+        "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-102.zip", branch)
+      )
+    ),
     "9.2" = list(
       "linux" = list(
         "libtorch" = list(

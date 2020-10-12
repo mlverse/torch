@@ -14,6 +14,8 @@
 - Added the Adadelta optimizer (@krzjoa #284)
 - Added support for GPU's on Windows (#281)
 - We now preserve names in the `dataloader` output (#286)
+- Added the Adagrad optimizer (@krzjoa #289)
+- Added CUDA 11 support for Linux (@skeydan #291)
 
 # torch 0.1.0
 
