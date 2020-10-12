@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dist — torch_dist • torch</title>
+<title>Adagrad optimizer — optim_adagrad • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Dist — torch_dist" />
-<meta property="og:description" content="Dist" />
+<meta property="og:title" content="Adagrad optimizer — optim_adagrad" />
+<meta property="og:description" content="Proposed in Adaptive Subgradient Methods for Online Learning and Stochastic Optimization" />
 
 
 <meta name="robots" content="noindex">
@@ -218,58 +218,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Dist</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_dist.Rd</code></div>
+    <h1>Adagrad optimizer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/optim-adagrad.R'><code>R/optim-adagrad.R</code></a></small>
+    <div class="hidden name"><code>optim_adagrad.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Dist</p>
+    <p>Proposed in <a href='http://jmlr.org/papers/v12/duchi11a.html'>Adaptive Subgradient Methods for Online Learning and Stochastic Optimization</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>other</span>, p <span class='op'>=</span> <span class='fl'>2L</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>optim_adagrad</span><span class='op'>(</span>
+  <span class='va'>params</span>,
+  lr <span class='op'>=</span> <span class='fl'>0.01</span>,
+  lr_decay <span class='op'>=</span> <span class='fl'>0</span>,
+  weight_decay <span class='op'>=</span> <span class='fl'>0</span>,
+  initial_accumulator_value <span class='op'>=</span> <span class='fl'>0</span>,
+  eps <span class='op'>=</span> <span class='fl'>1e-10</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor.</p></td>
+      <th>params</th>
+      <td><p>(iterable): list of parameters to optimize or list parameter groups</p></td>
     </tr>
     <tr>
-      <th>other</th>
-      <td><p>(Tensor) the Right-hand-side input tensor</p></td>
+      <th>lr</th>
+      <td><p>(float, optional): learning rate (default: 1e-2)</p></td>
     </tr>
     <tr>
-      <th>p</th>
-      <td><p>(float, optional) the norm to be computed</p></td>
+      <th>lr_decay</th>
+      <td><p>(float, optional): learning rate decay (default: 0)</p></td>
+    </tr>
+    <tr>
+      <th>weight_decay</th>
+      <td><p>(float, optional): weight decay (L2 penalty) (default: 0)</p></td>
+    </tr>
+    <tr>
+      <th>eps</th>
+      <td><p>(float, optional): term added to the denominator to improve
+numerical stability (default: 1e-10)</p>
+<p>Adagrad is an especially good optimizer for sparse data.
+It individually modifies learning rate for every single parameter,
+dividing the original learning rate value by sum of the squares of the gradients.
+It causes that the rarely occurring features get greater learning rates.
+The main downside of this method is the fact that learning rate may be
+getting small too fast, so that at some point a model cannot learn anymore.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="dist-input-other-p-gt-tensor-"><a class="anchor" href="#dist-input-other-p-gt-tensor-"></a>dist(input, other, p=2) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    
+    <p>Update rule:
+deqn
+_t+1 = _t -  G_t +   g_t
 
+The equation above and some remarks quoted
+after <a href='https://ruder.io/optimizing-gradient-descent/index.html#adagrad'><em>An overview of gradient descent optimization algorithms</em></a>
+by Sebastian Ruder.</p>
 
-<p>Returns the p-norm of (<code>input</code> - <code>other</code>)</p>
-<p>The shapes of <code>input</code> and <code>other</code> must be
-broadcastable .</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>x</span>
-<span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>y</span>
-<span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fl'>3.5</span><span class='op'>)</span>
-<span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fl'>3</span><span class='op'>)</span>
-<span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fl'>0</span><span class='op'>)</span>
-<span class='fu'>torch_dist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; 3.596
-#&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
