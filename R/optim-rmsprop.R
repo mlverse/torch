@@ -119,18 +119,18 @@ optim_RMSprop <- R6::R6Class(
 #' weight_decay (float, optional): weight decay (L2 penalty) (default: 0)
 #' 
 #' @note 
-#' The centered version first appears in `Generating Sequences
-#' With Recurrent Neural Networks <https://arxiv.org/pdf/1308.0850v5.pdf>`_.
+#' The centered version first appears in 
+#' [Generating Sequences With Recurrent Neural Networks](https://arxiv.org/pdf/1308.0850v5.pdf).
 #' The implementation here takes the square root of the gradient average before
 #' adding epsilon (note that TensorFlow interchanges these two operations). The effective
-#' learning rate is thus :math:`\alpha/(\sqrt{v} + \epsilon)` where :math:`\alpha`
-#' is the scheduled learning rate and :math:`v` is the weighted moving average
+#' learning rate is thus \eqn{\alpha/(\sqrt{v} + \epsilon)} where \eqn{\alpha}
+#' is the scheduled learning rate and \eqn{v} is the weighted moving average
 #' of the squared gradient.
 #' 
 #' Update rule:
 #' 
 #' deqn{
-#'\theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{{E[g^2]}_{t} + \epsilon}} * g_{t} 
+#' \theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{{E[g^2]}_{t} + \epsilon}} * g_{t} 
 #' }
 #' 
 #' @export
