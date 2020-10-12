@@ -138,3 +138,22 @@ test_that("full_like", {
   expect_equal(dim(as_array(x)), dim(as_array(y)))
 })
 
+test_that("scalar_tensor", {
+  
+  x <- torch_scalar_tensor(1)
+  expect_equal(length(x$shape), 0)
+  expect_true(x$dtype == torch_float())
+  
+  x <- torch_scalar_tensor(1L)
+  expect_equal(length(x$shape), 0)
+  expect_true(x$dtype == torch_int64())
+  
+  x <- torch_tensor(1)
+  x <- torch_scalar_tensor(x)
+  expect_equal(length(x$shape), 0)
+  expect_true(x$dtype == torch_float())
+  
+  
+  
+})
+

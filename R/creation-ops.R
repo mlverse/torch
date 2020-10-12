@@ -365,3 +365,25 @@ torch_full_like <- function(input, fill_value, dtype = NULL, layout = torch_stri
   args$fill_value <- fill_value
   do.call(.torch_full_like, args)
 }
+
+#' Scalar tensor
+#' 
+#' Creates a singleton dimension tensor.
+#' 
+#' @param value the value you want to use
+#' @inheritParams torch_ones
+#' 
+#' @export
+torch_scalar_tensor <- function(value, dtype = NULL,  device=NULL, requires_grad = FALSE) {
+  
+  if (is_torch_tensor(value) && !is.null(value$shape) && sum(value$shape) > 1)
+    value_error("values must be lenght 1")
+    
+  if (!is_torch_tensor(value) && length(value) > 1)
+    value_error("value must be a lenght 1 vector")
+
+  if (is_torch_tensor(value))
+    value$squeeze()$to(device = device, dtype = dtype)$requires_grad_(requires_grad)
+  else
+    torch_tensor(value, dtype = dtype, device = device, requires_grad = requires_grad)$squeeze()
+}
