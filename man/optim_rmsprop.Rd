@@ -32,7 +32,7 @@ weight_decay (float, optional): weight decay (L2 penalty) (default: 0)}
 }
 \description{
 Proposed by G. Hinton in his
-\link[=**course**]{\strong{course}} (https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
+\href{https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}{course}
 }
 \note{
 The centered version first appears in
