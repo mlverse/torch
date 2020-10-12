@@ -65,7 +65,7 @@ Distribution <- R6::R6Class(
     #'  of the result will be `(cardinality,) + batch_shape + event_shape
     #'  (where `event_shape = ()` for univariate distributions).
     #'  Note that this enumerates over all batched tensors in lock-step
-    #'  `[[0, 0], [1, 1], ...]`. With `expand=False`, enumeration happens
+    #'  `[[0, 0], [1, 1], ...]`. With `expand=FALSE`, enumeration happens
     #'  along dim 0, but with the remaining batch dimensions being
     #'  singleton dimensions, `[[0], [1], ..`.
     #'  To iterate over the full Cartesian product use
@@ -104,8 +104,8 @@ Distribution <- R6::R6Class(
       if (!inherits(value, "torch_Tensor"))
         value_error('The value argument to log_prob must be a Tensor')
       
-      event_dim_start = len(value.size()) - len(self._event_shape)
-      if value.size()[event_dim_start:] != self._event_shape:
+      event_dim_start <-length(value.size()) - len(self._event_shape)
+      if (value$size()[event_dim_start, ] != self$.event_shape)
         value_error('The right-most size of value must match event_shape: {} vs {}.'.
                          format(value.size(), self._event_shape))
       
@@ -113,11 +113,10 @@ Distribution <- R6::R6Class(
       expected_shape = self._batch_shape + self._event_shape
       for i, j in zip(reversed(actual_shape), reversed(expected_shape)):
         if i != 1 and j != 1 and i != j:
-        raise ValueError('Value is not broadcastable with batch_shape+event_shape: {} vs {}.'.
-                         format(actual_shape, expected_shape))
+        value_error('Value is not broadcastable with batch_shape+event_shape: {actual_shape} vs {expected_shape}.')
       
       if not self.support.check(value).all():
-        raise ValueError('The value argument must be within the support')
+        value_error('The value argument must be within the support')
     },
     
     
@@ -140,7 +139,7 @@ Distribution <- R6::R6Class(
   
   active = list(
     
-    #' Returns a :class:`dist_constraint` object
+    #' Returns a `dist_constraint` object
     #' representing this distribution's support.
     support = function() NULL,
     
