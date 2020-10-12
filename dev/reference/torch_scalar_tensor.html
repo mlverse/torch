@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cross — torch_cross • torch</title>
+<title>Scalar tensor — torch_scalar_tensor • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Cross — torch_cross" />
-<meta property="og:description" content="Cross" />
+<meta property="og:title" content="Scalar tensor — torch_scalar_tensor" />
+<meta property="og:description" content="Creates a singleton dimension tensor." />
 
 
 <meta name="robots" content="noindex">
@@ -218,62 +218,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Cross</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_cross.Rd</code></div>
+    <h1>Scalar tensor</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/creation-ops.R'><code>R/creation-ops.R</code></a></small>
+    <div class="hidden name"><code>torch_scalar_tensor.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Cross</p>
+    <p>Creates a singleton dimension tensor.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_cross</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>other</span>, dim <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_scalar_tensor</span><span class='op'>(</span><span class='va'>value</span>, dtype <span class='op'>=</span> <span class='cn'>NULL</span>, device <span class='op'>=</span> <span class='cn'>NULL</span>, requires_grad <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor.</p></td>
+      <th>value</th>
+      <td><p>the value you want to use</p></td>
     </tr>
     <tr>
-      <th>other</th>
-      <td><p>(Tensor) the second input tensor</p></td>
+      <th>dtype</th>
+      <td><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>NULL</code>, uses a global default (see <code>torch_set_default_tensor_type</code>).</p></td>
     </tr>
     <tr>
-      <th>dim</th>
-      <td><p>(int, optional) the dimension to take the cross-product in.</p></td>
+      <th>device</th>
+      <td><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></td>
+    </tr>
+    <tr>
+      <th>requires_grad</th>
+      <td><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="cross-input-other-dim-out-null-gt-tensor-"><a class="anchor" href="#cross-input-other-dim-out-null-gt-tensor-"></a>cross(input, other, dim=-1, out=NULL) -&gt; Tensor </h2>
 
-    
-
-
-<p>Returns the cross product of vectors in dimension <code>dim</code> of <code>input</code>
-and <code>other</code>.</p>
-<p><code>input</code> and <code>other</code> must have the same size, and the size of their
-<code>dim</code> dimension should be 3.</p>
-<p>If <code>dim</code> is not given, it defaults to the first dimension found with the
-size 3.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>b</span>
-<span class='fu'>torch_cross</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span>, dim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='fu'>torch_cross</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  1.1454  0.8421 -0.3010
-#&gt;  1.4038 -1.0304  0.1586
-#&gt; -1.1544 -0.8061 -0.5781
-#&gt; -0.3315  0.0501 -0.1954
-#&gt; [ CPUFloatType{4,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
