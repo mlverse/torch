@@ -14073,8 +14073,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_scalar_tensor
-torch_scalar_tensor <- function(s, options = list()) {
+#' @rdname .torch_scalar_tensor
+.torch_scalar_tensor <- function(s, options = list()) {
   args <- mget(x = c("s", "options"))
 expected_types <- list(s = "Scalar", options = "TensorOptions")
 nd_args <- "s"

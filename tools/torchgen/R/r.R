@@ -105,7 +105,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "result_type", "sparse_coo_tensor", "stft",
                    "tensordot", "tril_indices", "triu_indices",
                    "multilabel_margin_loss", "multi_margin_loss",
-                   "topk")
+                   "topk", "scalar_tensor")
 
 internal_funs <- c(internal_funs, creation_ops)
 
