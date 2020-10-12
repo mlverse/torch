@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Round — torch_round • torch</title>
+<title>RMSprop optimizer — optim_rmsprop • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Round — torch_round" />
-<meta property="og:description" content="Round" />
+<meta property="og:title" content="RMSprop optimizer — optim_rmsprop" />
+<meta property="og:description" content="Proposed by G. Hinton in his
+course" />
 
 
 <meta name="robots" content="noindex">
@@ -218,47 +219,72 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Round</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_round.Rd</code></div>
+    <h1>RMSprop optimizer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/optim-rmsprop.R'><code>R/optim-rmsprop.R</code></a></small>
+    <div class="hidden name"><code>optim_rmsprop.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Round</p>
+    <p>Proposed by G. Hinton in his
+<a href='https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf'>course</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_round</span><span class='op'>(</span><span class='va'>self</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>optim_rmsprop</span><span class='op'>(</span>
+  <span class='va'>params</span>,
+  lr <span class='op'>=</span> <span class='fl'>0.01</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.99</span>,
+  eps <span class='op'>=</span> <span class='fl'>1e-08</span>,
+  weight_decay <span class='op'>=</span> <span class='fl'>0</span>,
+  momentum <span class='op'>=</span> <span class='fl'>0</span>,
+  centered <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor.</p></td>
+      <th>params</th>
+      <td><p>(iterable): iterable of parameters to optimize or list defining parameter groups</p></td>
+    </tr>
+    <tr>
+      <th>lr</th>
+      <td><p>(float, optional): learning rate (default: 1e-2)</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>(float, optional): smoothing constant (default: 0.99)</p></td>
+    </tr>
+    <tr>
+      <th>eps</th>
+      <td><p>(float, optional): term added to the denominator to improve
+numerical stability (default: 1e-8)</p></td>
+    </tr>
+    <tr>
+      <th>momentum</th>
+      <td><p>(float, optional): momentum factor (default: 0)</p></td>
+    </tr>
+    <tr>
+      <th>centered</th>
+      <td><p>(bool, optional) : if <code>TRUE</code>, compute the centered RMSProp,
+the gradient is normalized by an estimation of its variance
+weight_decay (float, optional): weight decay (L2 penalty) (default: 0)</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="round-input-out-null-gt-tensor-"><a class="anchor" href="#round-input-out-null-gt-tensor-"></a>round(input, out=NULL) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    
+    <p>The centered version first appears in
+<a href='https://arxiv.org/pdf/1308.0850v5.pdf'>Generating Sequences With Recurrent Neural Networks</a>.
+The implementation here takes the square root of the gradient average before
+adding epsilon (note that TensorFlow interchanges these two operations). The effective
+learning rate is thus \(\alpha/(\sqrt{v} + \epsilon)\) where \(\alpha\)
+is the scheduled learning rate and \(v\) is the weighted moving average
+of the squared gradient.</p>
+<p>Update rule:</p>
+<p>$$
+\theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{{E[g^2]}_{t} + \epsilon}} * g_{t} 
+$$</p>
 
-
-<p>Returns a new tensor with each of the elements of <code>input</code> rounded
-to the closest integer.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_round</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -1
-#&gt;  1
-#&gt;  0
-#&gt;  1
-#&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
