@@ -1600,7 +1600,7 @@ To get `grad` populated for non-leaf Tensors, you can use [retain_grad()].
 
 ```{r}
 a <- torch_rand(10, requires_grad=TRUE)
-a$is_leaf()
+a$is_leaf
 
 # b <- torch_rand(10, requires_grad=TRUE)$cuda()
 # b$is_leaf()
@@ -1608,7 +1608,7 @@ a$is_leaf()
 # b was created by the operation that cast a cpu Tensor into a cuda Tensor
 
 c <- torch_rand(10, requires_grad=TRUE) + 2
-c$is_leaf()
+c$is_leaf
 # c was created by the addition operation
 
 # d <- torch_rand(10)$cuda()
