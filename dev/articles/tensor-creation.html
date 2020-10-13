@@ -208,12 +208,12 @@
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; (1,.,.) = </span>
-<span class="co">#&gt;   0.0924  0.3461  0.4158</span>
-<span class="co">#&gt;   0.1344  0.7031  0.2410</span>
+<span class="co">#&gt;   0.0310  0.2468  0.1232</span>
+<span class="co">#&gt;   0.2035  0.0610  0.4899</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (2,.,.) = </span>
-<span class="co">#&gt;   0.9761  0.2373  0.7400</span>
-<span class="co">#&gt;   0.7403  0.4721  0.5589</span>
+<span class="co">#&gt;   0.2447  0.1580  0.0495</span>
+<span class="co">#&gt;   0.9713  0.4020  0.2905</span>
 <span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device, converting their R datatype to the corresponding torch <code>dtype</code>.</p>
 <blockquote>
@@ -247,11 +247,11 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.5467  0.3030  1.3659</span>
-<span class="co">#&gt; -0.6640  0.6179 -0.6487</span>
-<span class="co">#&gt; -0.4840 -0.2068 -0.8271</span>
-<span class="co">#&gt; -0.0935 -0.5565 -0.3056</span>
-<span class="co">#&gt;  0.9957  0.9799 -0.0304</span>
+<span class="co">#&gt; -0.8801 -0.2331 -1.7034</span>
+<span class="co">#&gt; -0.6241  0.4907 -1.7253</span>
+<span class="co">#&gt; -1.0132 -0.6982 -0.8598</span>
+<span class="co">#&gt;  1.2622  0.3795  1.9678</span>
+<span class="co">#&gt;  1.1681  0.1712 -0.1987</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor filled with ones.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">

@@ -271,9 +271,9 @@ getting small too fast, so that at some point a model cannot learn anymore.</p><
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Update rule:
-deqn
-_t+1 = _t -  G_t +   g_t
-
+$$
+\theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{G_{t} + \epsilon}} \odot g_{t} 
+$$
 The equation above and some remarks quoted
 after <a href='https://ruder.io/optimizing-gradient-descent/index.html#adagrad'><em>An overview of gradient descent optimization algorithms</em></a>
 by Sebastian Ruder.</p>
