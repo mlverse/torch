@@ -2253,7 +2253,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "is_leaf", function() {  args <- list()
+Tensor$set("private", "_is_leaf", function() {  args <- list()
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor")
 nd_args <- "self"

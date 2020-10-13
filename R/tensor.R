@@ -175,6 +175,9 @@ Tensor <- R7Class(
       
       p <- cpp_tensor_names(self$ptr)
       DimnameList$new(ptr = p)$to_r()
+    },
+    is_leaf = function() {
+      private$`_is_leaf`()
     }
   )
 )

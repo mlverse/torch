@@ -221,3 +221,14 @@ test_that("rename works", {
   expect_equal(x$rename("a", "b")$names, c("a", "b"))
   
 })
+
+test_that("is_leaf", {
+  
+  a <- torch_rand(10, requires_grad=TRUE)
+  expect_true(a$is_leaf)
+  
+  skip_if_cuda_not_available()
+  a <- torch_rand(10)$to(device = "cuda")
+  expect_true(!a$is_leaf)
+  
+})
