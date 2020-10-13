@@ -132,8 +132,8 @@ optim_Adagrad <- R6::R6Class(
 #' 
 #' @note 
 #' Update rule: 
-#' deqn{
-#'\theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{G_{t} + \epsilon}} \odot g_{t} 
+#' \deqn{
+#' \theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{G_{t} + \epsilon}} \odot g_{t} 
 #' }
 #' The equation above and some remarks quoted 
 #' after [*An overview of gradient descent optimization algorithms*](https://ruder.io/optimizing-gradient-descent/index.html#adagrad)
