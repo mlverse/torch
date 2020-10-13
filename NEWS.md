@@ -17,6 +17,7 @@
 - Added the Adagrad optimizer (@krzjoa #289)
 - Added CUDA 11 support for Linux (@skeydan #291)
 - Added RMSprop optimizer (@krzjoa #290)
+- `torch_narrow`, `Tensor$narrow()` and `Tensor$narrow_copy` are now indexed starting at 1. (#294)
 
 # torch 0.1.0
 
