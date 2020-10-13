@@ -208,6 +208,13 @@ public:
   }
 };
 
+class XPtrTorchstring : public XPtrTorch {
+public:
+  XPtrTorchstring (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_string_delete));
+  }
+};
+
 template<class T>
 class nullable {
 public:
