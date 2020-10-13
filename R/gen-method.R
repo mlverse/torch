@@ -3046,7 +3046,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "narrow", function(dim, start, length) {  args <- mget(x = c("dim", "start", "length"))
+Tensor$set("private", "_narrow", function(dim, start, length) {  args <- mget(x = c("dim", "start", "length"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = "int64_t", start = c("int64_t", "Tensor"
 ), length = "int64_t")
@@ -3060,7 +3060,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "narrow_copy", function(dim, start, length) {  args <- mget(x = c("dim", "start", "length"))
+Tensor$set("private", "_narrow_copy", function(dim, start, length) {  args <- mget(x = c("dim", "start", "length"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = "int64_t", start = "int64_t", length = "int64_t")
 nd_args <- c("self", "dim", "start", "length")

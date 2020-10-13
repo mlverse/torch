@@ -55,3 +55,12 @@ test_that("torch_topk", {
                     matrix(c(3, 2), nrow = 5, ncol = 2, byrow = TRUE))
   
 })
+
+test_that("torch_narrow", {
+  
+  x <- torch_tensor(matrix(1:9, ncol = 3, byrow = TRUE))
+  expect_equal_to_tensor(torch_narrow(x, 1, 1, 2), x[1:2,])
+  expect_equal_to_tensor(x$narrow(1, 1, 2), x[1:2,])
+  expect_equal_to_tensor(x$narrow_copy(1, 1, 2), x[1:2,])
+  
+})

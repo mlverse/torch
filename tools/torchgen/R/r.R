@@ -105,7 +105,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "result_type", "sparse_coo_tensor", "stft",
                    "tensordot", "tril_indices", "triu_indices",
                    "multilabel_margin_loss", "multi_margin_loss",
-                   "topk", "scalar_tensor")
+                   "topk", "scalar_tensor", "narrow")
 
 internal_funs <- c(internal_funs, creation_ops)
 
@@ -349,7 +349,7 @@ r_method <- function(decls) {
 
 internal_methods <- c("backward", "retain_grad", "size", "to", "stride",
                       "copy_", "topk", "scatter_", "scatter", "rename",
-                      "rename_")
+                      "rename_", "narrow", "narrow_copy")
 
 r_method_env <- function(decls) {
   if (decls[[1]]$name %in% internal_methods)
