@@ -1679,7 +1679,7 @@ f(X=k) = p^{k - 1} (1 - p)
 <a href="#examples-14" class="anchor"></a>Examples:</h4>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">10</span>, requires_grad<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">a</span><span class="op">$</span><span class="fu">is_leaf</span><span class="op">(</span><span class="op">)</span>
+<span class="va">a</span><span class="op">$</span><span class="va">is_leaf</span>
 
 <span class="co"># b &lt;- torch_rand(10, requires_grad=TRUE)$cuda()</span>
 <span class="co"># b$is_leaf()</span>
@@ -1687,7 +1687,7 @@ f(X=k) = p^{k - 1} (1 - p)
 <span class="co"># b was created by the operation that cast a cpu Tensor into a cuda Tensor</span>
 
 <span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">10</span>, requires_grad<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="fl">2</span>
-<span class="va">c</span><span class="op">$</span><span class="fu">is_leaf</span><span class="op">(</span><span class="op">)</span>
+<span class="va">c</span><span class="op">$</span><span class="va">is_leaf</span>
 <span class="co"># c was created by the addition operation</span>
 
 <span class="co"># d &lt;- torch_rand(10)$cuda()</span>
