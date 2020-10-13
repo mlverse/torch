@@ -161,6 +161,13 @@ test_that("_cholesky_solve_helper", {
   expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
 })
 
+test_that("einsum", {
+  x <- torch_tensor(c(1,2,3))
+  y <- torch_tensor(c(1,2))
+  out <- torch_einsum('i,j->ij', list(x, y))
+  expect_equal_to_r(out, matrix(c(1,2,3,2,4,6), ncol = 2))
+})
+
 test_that("tensordot", {
   
   a <- torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))

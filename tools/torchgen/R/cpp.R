@@ -271,7 +271,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "std::string") {
-    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
+    result <- glue::glue("XPtrTorchstring(lantern_string_new({argument$name}.c_str())).get()")
   }
 
   if (argument$dynamic_type == "Dimname") {

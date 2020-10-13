@@ -641,8 +641,6 @@ NULL
 #' @name torch_einsum
 #'
 #' @examples
-#' 
-#' if (FALSE) {
 #'
 #' x = torch_randn(c(5))
 #' y = torch_randn(c(4))
@@ -661,7 +659,6 @@ NULL
 #' A = torch_randn(c(2, 3, 4, 5))
 #' torch_einsum('...ij->...ji', list(A))$shape # batch permute
 #' 
-#' }
 NULL
 # -> einsum <-
 

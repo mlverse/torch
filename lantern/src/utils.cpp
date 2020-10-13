@@ -149,3 +149,10 @@ bool _lantern_vector_bool_at(void *self, int64_t i)
   return reinterpret_cast<std::vector<bool> *>(self)->at(i);
   LANTERN_FUNCTION_END_RET(false)
 }
+
+void * _lantern_string_new (const char * value)
+{
+  LANTERN_FUNCTION_START
+  return (void *)new LanternObject<std::string>(std::string(value));
+  LANTERN_FUNCTION_END
+}

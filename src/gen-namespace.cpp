@@ -4283,7 +4283,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_einsum_equation_stdstring_tensors_TensorList (std::string equation, Rcpp::XPtr<XPtrTorchTensorList> tensors) {
-  auto r_out = lantern_einsum_stdstring_tensorlist(reinterpret_cast<void*>(&equation), tensors->get());
+  auto r_out = lantern_einsum_stdstring_tensorlist(XPtrTorchstring(lantern_string_new(equation.c_str())).get(), tensors->get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
@@ -4607,7 +4607,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_from_file_filename_stdstring (std::string filename, bool shared, nullable<int64_t> size, Rcpp::XPtr<XPtrTorchTensorOptions> options) {
-  auto r_out = lantern_from_file_stdstring_bool_intt_tensoroptions(reinterpret_cast<void*>(&filename), reinterpret_cast<void*>(&shared), size.get(), options->get());
+  auto r_out = lantern_from_file_stdstring_bool_intt_tensoroptions(XPtrTorchstring(lantern_string_new(filename.c_str())).get(), reinterpret_cast<void*>(&shared), size.get(), options->get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
