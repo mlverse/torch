@@ -56,7 +56,7 @@ Optimizer <- R6::R6Class(
           value_error("optimizer can only optimize Tensors, ",
                       "but one of the params is {class(param)}")
         
-        if (!param$is_leaf())
+        if (!param$is_leaf)
           value_error("can't optimize a non-leaf Tensor")
         
       }
