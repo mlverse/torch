@@ -18,7 +18,8 @@
 - Added CUDA 11 support for Linux (@skeydan #291)
 - Added RMSprop optimizer (@krzjoa #290)
 - `torch_narrow`, `Tensor$narrow()` and `Tensor$narrow_copy` are now indexed starting at 1. (#294)
-- `Tensor$is_leaf` is now an active method.
+- `Tensor$is_leaf` is now an active method. (#295)
+- Fixed bug when passing equations to `torch_einsum`. (#296)
 
 # torch 0.1.0
 
