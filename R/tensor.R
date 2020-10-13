@@ -137,6 +137,19 @@ Tensor <- R7Class(
     rename_ = function(...) {
       nms <- prep_names(..., self = self)
       private$`_rename_`(nms) 
+    },
+    narrow = function(dim, start, length) {
+      start <- torch_scalar_tensor(start, dtype = torch_int64())
+      if (start$item() == 0)
+        value_error("start indexing starts at 1")
+      start <- start - 1L
+      private$`_narrow`(dim, start, length)
+    },
+    narrow_copy = function(dim, start, length) {
+      if (start == 0)
+        value_error("start indexing starts at 1")
+      start <- start - 1L
+      private$`_narrow_copy`(dim, start, length)
     }
   ),
   active = list(

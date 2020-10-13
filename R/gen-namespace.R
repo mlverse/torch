@@ -11554,8 +11554,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_narrow
-torch_narrow <- function(self, dim, start, length) {
+#' @rdname .torch_narrow
+.torch_narrow <- function(self, dim, start, length) {
   args <- mget(x = c("self", "dim", "start", "length"))
 expected_types <- list(self = "Tensor", dim = "int64_t", start = c("int64_t", "Tensor"
 ), length = "int64_t")
