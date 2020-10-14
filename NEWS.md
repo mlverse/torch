@@ -20,6 +20,7 @@
 - `torch_narrow`, `Tensor$narrow()` and `Tensor$narrow_copy` are now indexed starting at 1. (#294)
 - `Tensor$is_leaf` is now an active method. (#295)
 - Fixed bug when passing equations to `torch_einsum`. (#296)
+- Added the Rprop optimizer (@krzjoa #297)
 
 # torch 0.1.0
 
