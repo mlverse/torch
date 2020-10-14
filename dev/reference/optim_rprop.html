@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Addcdiv — torch_addcdiv • torch</title>
+<title>Implements the resilient backpropagation algorithm. — optim_rprop • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Addcdiv — torch_addcdiv" />
-<meta property="og:description" content="Addcdiv" />
+<meta property="og:title" content="Implements the resilient backpropagation algorithm. — optim_rprop" />
+<meta property="og:description" content="Proposed first in RPROP - A Fast Adaptive Learning Algorithm" />
 
 
 <meta name="robots" content="noindex">
@@ -218,80 +218,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Addcdiv</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_addcdiv.Rd</code></div>
+    <h1>Implements the resilient backpropagation algorithm.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/optim-rprop.R'><code>R/optim-rprop.R</code></a></small>
+    <div class="hidden name"><code>optim_rprop.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Addcdiv</p>
+    <p>Proposed first in <a href='http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.52.4576'>RPROP - A Fast Adaptive Learning Algorithm</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_addcdiv</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>tensor1</span>, <span class='va'>tensor2</span>, value <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>optim_rprop</span><span class='op'>(</span><span class='va'>params</span>, lr <span class='op'>=</span> <span class='fl'>0.01</span>, etas <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>1.2</span><span class='op'>)</span>, step_sizes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1e-06</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the tensor to be added</p></td>
+      <th>params</th>
+      <td><p>(iterable): iterable of parameters to optimize or lists defining
+parameter groups</p></td>
     </tr>
     <tr>
-      <th>tensor1</th>
-      <td><p>(Tensor) the numerator tensor</p></td>
+      <th>lr</th>
+      <td><p>(float, optional): learning rate (default: 1e-2)</p></td>
     </tr>
     <tr>
-      <th>tensor2</th>
-      <td><p>(Tensor) the denominator tensor</p></td>
+      <th>etas</th>
+      <td><p>(Tuplefloat, float, optional): pair of (etaminus, etaplis), that
+are multiplicative increase and decrease factors
+(default: (0.5, 1.2))</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>(Number, optional) multiplier for \(\mbox{tensor1} / \mbox{tensor2}\)</p></td>
+      <th>step_sizes</th>
+      <td><p>(vectorfloat, float, optional): a pair of minimal and
+maximal allowed step sizes (default: (1e-6, 50))</p>
+<p>#' @examples</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="addcdiv-input-tensor-tensor-value-out-null-gt-tensor-"><a class="anchor" href="#addcdiv-input-tensor-tensor-value-out-null-gt-tensor-"></a>addcdiv(input, tensor1, tensor2, *, value=1, out=NULL) -&gt; Tensor </h2>
 
-    
-
-
-<p>Performs the element-wise division of <code>tensor1</code> by <code>tensor2</code>,
-multiply the result by the scalar <code>value</code> and add it to <code>input</code>.</p>
-    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
-
-    
-
-<p>Integer division with addcdiv is deprecated, and in a future release
-addcdiv will perform a true division of <code>tensor1</code> and <code>tensor2</code>.
-The current addcdiv behavior can be replicated using <code><a href='torch_floor_divide.html'>torch_floor_divide()</a></code>
-for integral inputs
-(<code>input</code> + <code>value</code> * <code>tensor1</code> // <code>tensor2</code>)
-and <code><a href='torch_div.html'>torch_div()</a></code> for float inputs
-(<code>input</code> + <code>value</code> * <code>tensor1</code> / <code>tensor2</code>).
-The new addcdiv behavior can be implemented with <code><a href='torch_true_divide.html'>torch_true_divide()</a></code>
-(<code>input</code> + <code>value</code> * torch.true_divide(<code>tensor1</code>,
-<code>tensor2</code>).</p>
-<p>$$
-    \mbox{out}_i = \mbox{input}_i + \mbox{value} \times \frac{\mbox{tensor1}_i}{\mbox{tensor2}_i}
-$$</p>
-<p>The shapes of <code>input</code>, <code>tensor1</code>, and <code>tensor2</code> must be
-broadcastable .</p>
-<p>For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, <code>value</code> must be
-a real number, otherwise an integer.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>t</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>t1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>t2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_addcdiv</span><span class='op'>(</span><span class='va'>t</span>, <span class='va'>t1</span>, <span class='va'>t2</span>, <span class='fl'>0.1</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -1.4635 -0.0682 -1.5051
-#&gt; -1.3849  0.0082 -1.6231
-#&gt; -1.3629  0.0295 -1.6560
-#&gt; [ CPUFloatType{3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
