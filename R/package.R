@@ -31,7 +31,7 @@ globalVariables(c("..", "self", "private", "N"))
     tryCatch({
       lantern_start() 
       .generator_null <<- torch_generator()
-      .generator_null$set_current_seed(seed = abs(.Random.seed[1]))
+      .generator_null$set_current_seed(seed = sample(1e5, 1))
     }, error = function(e) {
       warning("Torch failed to start, restart your R session to try again. ", e$message, call. = FALSE)
       FALSE
