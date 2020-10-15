@@ -67,7 +67,7 @@ optim_Adagrad <- R6::R6Class(
           for (p in seq_along(group$params)) {
             param <- group$params[[p]]
             
-            if (is.null(param$grad))
+            if (is.null(param$grad) || is_undefined_tensor(param$grad))
               next
             
             param$state[['step']] <- param$state[['step']] + 1

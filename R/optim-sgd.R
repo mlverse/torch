@@ -51,7 +51,7 @@ optim_SGD <- R6::R6Class(
             
             param <- group$params[[p]]
             
-            if (is.null(param$grad))
+            if (is.null(param$grad) || is_undefined_tensor(param$grad))
               next
             
             d_p <- param$grad

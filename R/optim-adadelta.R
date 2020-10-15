@@ -48,7 +48,7 @@ optim_Adadelta <- R6::R6Class(
             
             param <- group$params[[p]]
             
-            if (is.null(param$grad))
+            if (is.null(param$grad) || is_undefined_tensor(param$grad))
               next
             
             grad <- param$grad
