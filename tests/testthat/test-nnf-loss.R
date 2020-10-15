@@ -15,3 +15,11 @@ test_that("nnf_mse_loss", {
   )
   
 })
+
+test_that("nnf_binary_cross_entropy", {
+  
+  x <- torch_tensor(c(0, 1))$view(c(-1, 1))
+  y <- torch_tensor(c(0, 1))$view(c(-1, 1))
+  
+  expect_equal_to_r(nnf_binary_cross_entropy(x, y), 0)
+})
