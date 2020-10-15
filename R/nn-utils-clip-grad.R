@@ -18,7 +18,7 @@ nn_utils_clip_grad_norm_ <- function(parameters, max_norm, norm_type = 2) {
   if (is_torch_tensor(parameters))
     parameters <- list(parameters)
   
-  parameters <- Filter(function(x) !is.null(x$grad), parameters)
+  parameters <- Filter(function(x) !is_undefined_tensor(x$grad), parameters)
   
   if (length(parameters) == 0)
     return(torch_tensor(0))
@@ -63,7 +63,7 @@ nn_utils_clip_grad_value_ <- function(parameters, clip_value) {
   if (is_torch_tensor(parameters))
     parameters <- list(parameters)
   
-  parameters <- Filter(function(x) !is.null(x$grad), parameters)
+  parameters <- Filter(function(x) !is_undefined_tensor(x$grad), parameters)
   
   for (p in parameters) {
     p$grad$data()$clamp_(min = -clip_value, max = clip_value)
