@@ -509,16 +509,23 @@ nn_module_list <- nn_module(
   "nn_module_list",
   initialize = function(modules = list()) {
     for (i in seq_along(modules))
-      self$add_module(i, modules[[i]])
+      self$add_module(i - 1, modules[[i]])
   },
   insert = function(index, module) {
-    private$modules_ <- append(private$modules_, list(module), after = index - 1)
+    modules <- append(private$modules_, list(module), after = index - 1)
+    private$modules_ <- NULL
+    for (i in seq_along(modules)) {
+      self$add_module(i - 1, modules[[i]])
+    }
   },
   append = function(module) {
-    private$modules_ <- append(private$modules_, list(module))
+    i <- length(private$modules_)
+    self$add_module(i, module)
   },
   extend  = function(modules) {
-    private$modules_ <- append(private$modules_, modules)
+    for (j in seq_along(modules)) {
+      self$append(modules[[j]])
+    }
   }
 )
 
