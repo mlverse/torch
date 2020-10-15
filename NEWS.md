@@ -21,6 +21,9 @@
 - `Tensor$is_leaf` is now an active method. (#295)
 - Fixed bug when passing equations to `torch_einsum`. (#296)
 - Added the Rprop optimizer (@krzjoa #297)
+- Added gradient clipping utilities (#299)
+- Fixed `nn_module_list()` to correctly name added modules, otherwise they are not
+  returned when doing `state_dict()` on it. (#300)
 
 # torch 0.1.0
 
