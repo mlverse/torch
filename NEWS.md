@@ -24,6 +24,7 @@
 - Added gradient clipping utilities (#299)
 - Fixed `nn_module_list()` to correctly name added modules, otherwise they are not
   returned when doing `state_dict()` on it. (#300)
+- Fixed `nn_batchnorm*` so it returns the same results as PyTorch (#301)
 
 # torch 0.1.0
 
