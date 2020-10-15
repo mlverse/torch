@@ -72,7 +72,7 @@ nn_batch_norm_ <- nn_module(
     
     self$check_input_dim(input)
   
-    if (!is.null(self$momentum)) {
+    if (is.null(self$momentum)) {
       exponential_average_factor <- 0
     } else {
       exponential_average_factor <- self$momentum
@@ -83,15 +83,32 @@ nn_batch_norm_ <- nn_module(
         self$num_batches_tracked$add_(1L, 1L)
         if (is.null(self$momentum)) {
           exponential_average_factor <- 1/self$num_batches_tracked
-        } else{
+        } else {
           exponential_average_factor <- self$momentum
         }
       }
     }
     
-    nnf_batch_norm(input, self$running_mean, self$running_var, self$weight, 
-                   self$bias, self$training || self$track_running_stats,
-                   exponential_average_factor, self$eps)
+    if (self$training) {
+      bn_training <- TRUE
+    } else {
+      bn_training <- is.null(self$running_mean) && is.null(self$running_var)
+    }
+    
+    if (!self$training || is.null(self$track_running_stats)) {
+      running_mean <- self$running_mean
+      running_var <- self$running_var
+    } else {
+      running_mean <- NULL
+      running_var <- NULL
+    }
+      
+    nnf_batch_norm(
+      input, 
+      running_mean, 
+      running_var, 
+      self$weight, self$bias, bn_training, exponential_average_factor, self$eps
+    )
   }
 )
 
