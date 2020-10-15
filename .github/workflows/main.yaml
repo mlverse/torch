@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - master
-      - 3.6
   pull_request:
   schedule:
     - cron: "0 1 * * *"
