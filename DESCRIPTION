@@ -79,6 +79,7 @@ Collate:
     'nn-pooling.R'
     'nn-rnn.R'
     'nn-sparse.R'
+    'nn-utils-clip-grad.R'
     'nn-utils-rnn.R'
     'nn-utils.R'
     'nn_adaptive.R'
