@@ -343,3 +343,20 @@ test_that("[[<- works for instances", {
   
   
 })
+
+test_that("nn_module_list names", {
+ 
+  mod <- nn_module(
+    initialize = function() {
+      self$k <- nn_module_list()
+      self$k$append(nn_linear(10, 10))
+      self$k$extend(list(nn_linear(10, 10)))
+    }
+  )
+  m <- mod()
+  expect_equal(
+    names(m$state_dict()), 
+    c("k.0.weight", "k.0.bias", "k.1.weight", "k.1.bias")
+  )
+   
+})
