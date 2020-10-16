@@ -248,6 +248,7 @@
 <li>Fixed <code><a href="../reference/nn_module_list.html">nn_module_list()</a></code> to correctly name added modules, otherwise they are not returned when doing <code>state_dict()</code> on it. (<a href='https://github.com/mlverse/torch/issues/300'>#300</a>)</li>
 <li>Fixed bug related to random number seeds when using in-place methods. (<a href='https://github.com/mlverse/torch/issues/303'>#303</a>)</li>
 <li>Fixed <code>nn_batchnorm*</code> so it returns the same results as PyTorch (<a href='https://github.com/mlverse/torch/issues/302'>#302</a>)</li>
+<li>Fixed a bug that made <code>nn_module$parameter</code> when there were shared parameters between layers. (<a href='https://github.com/mlverse/torch/issues/306'>#306</a>)</li>
 </ul>
 </div>
     <div id="torch-010" class="section level1">
