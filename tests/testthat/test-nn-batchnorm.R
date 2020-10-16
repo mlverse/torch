@@ -14,6 +14,16 @@ test_that("nn_batch_norm1d", {
   m <- nn_batch_norm1d(10)
   m$eval()
   expect_equal_to_tensor(m(x), torch_ones(1,10), tolerance = 1e-5)
+  
+  x <- torch_ones(2, 1)
+  m <- nn_batch_norm1d(1)
+  for (i in 1:10)  {
+    y <- m(x)
+  }
+  expect_equal_to_tensor(m$running_mean, torch_tensor(0.6513), tolerance = 1e-4)
+  expect_equal_to_tensor(m$running_var, torch_tensor(0.3487), tolerance  = 1e-4)
+  m$eval()
+  expect_equal_to_tensor(m(x), torch_empty(2, 1)$fill_(0.5905), tolerance = 1e-4)
 })
 
 test_that("nn_batch_norm2d", {

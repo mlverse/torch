@@ -95,7 +95,7 @@ nn_batch_norm_ <- nn_module(
       bn_training <- is.null(self$running_mean) && is.null(self$running_var)
     }
     
-    if (!self$training || is.null(self$track_running_stats)) {
+    if (!self$training || self$track_running_stats) {
       running_mean <- self$running_mean
       running_var <- self$running_var
     } else {
