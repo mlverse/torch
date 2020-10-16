@@ -26,6 +26,8 @@
   returned when doing `state_dict()` on it. (#300)
 - Fixed bug related to random number seeds when using in-place methods. (#303)
 - Fixed `nn_batchnorm*` so it returns the same results as PyTorch (#302)
+- Fixed a bug that made `nn_module$parameter` when there were shared parameters
+  between layers. (#306)
 
 # torch 0.1.0
 

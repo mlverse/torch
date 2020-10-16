@@ -218,7 +218,17 @@ nn_Module <- R6::R6Class(
     parameters = function() {
       pars <- lapply(private$modules_, function(x) x$parameters)
       pars <- append(pars, private$parameters_)
-      unlist(pars, recursive = TRUE, use.names = TRUE)
+      pars <- unlist(pars, recursive = TRUE, use.names = TRUE)
+      
+      # deduplicate the parameters based on the storage location
+      # see (#305)
+      # in python a `set` is used to do this. but there's no straightforward
+      # way to do this in R because the R objects could be possibly different
+      # and still point to the same parameter in memory.
+      addresses <- sapply(pars, function(x) x$storage()$data_ptr())
+      pars <- pars[!duplicated(addresses)]
+      
+      pars
     }
   )
 )
