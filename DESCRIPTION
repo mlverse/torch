@@ -104,6 +104,7 @@ Collate:
     'optim-adadelta.R'
     'optim-adagrad.R'
     'optim-adam.R'
+    'optim-asgd.R'
     'optim-lr_scheduler.R'
     'optim-rmsprop.R'
     'optim-rprop.R'
