@@ -7129,6 +7129,22 @@ cpp_tensor_names <- function(self) {
     .Call('_torch_cpp_tensor_names', PACKAGE = 'torchpkg', self)
 }
 
+cpp_set_num_threads <- function(n) {
+    invisible(.Call('_torch_cpp_set_num_threads', PACKAGE = 'torchpkg', n))
+}
+
+cpp_set_num_interop_threads <- function(n) {
+    invisible(.Call('_torch_cpp_set_num_interop_threads', PACKAGE = 'torchpkg', n))
+}
+
+cpp_get_num_threads <- function() {
+    .Call('_torch_cpp_get_num_threads', PACKAGE = 'torchpkg')
+}
+
+cpp_get_num_interop_threads <- function() {
+    .Call('_torch_cpp_get_num_interop_threads', PACKAGE = 'torchpkg')
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torchpkg', x)
 }

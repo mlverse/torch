@@ -254,3 +254,27 @@ Rcpp::XPtr<XPtrTorchDimnameList> cpp_tensor_names (Rcpp::XPtr<XPtrTorchTensor> s
 {
   return make_xptr<XPtrTorchDimnameList>(lantern_Tensor_names(self->get()));
 }
+
+// [[Rcpp::export]]
+void cpp_set_num_threads (int n)
+{
+  lantern_set_num_threads(n);
+}
+
+// [[Rcpp::export]]
+void cpp_set_num_interop_threads (int n)
+{
+  lantern_set_num_interop_threads(n);
+}
+
+// [[Rcpp::export]]
+int cpp_get_num_threads ()
+{
+  return lantern_get_num_threads();
+}
+
+// [[Rcpp::export]]
+int cpp_get_num_interop_threads ()
+{
+  return lantern_get_num_interop_threads();
+}
