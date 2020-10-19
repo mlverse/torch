@@ -97,6 +97,10 @@ cpp_autograd_grad <- function(outputs, inputs, grad_outputs, retain_graph, creat
     .Call('_torch_cpp_autograd_grad', PACKAGE = 'torchpkg', outputs, inputs, grad_outputs, retain_graph, create_graph, allow_unused)
 }
 
+cpp_contrib_torch_sparsemax <- function(input, dim) {
+    .Call('_torch_cpp_contrib_torch_sparsemax', PACKAGE = 'torchpkg', input, dim)
+}
+
 cpp_cuda_is_available <- function() {
     .Call('_torch_cpp_cuda_is_available', PACKAGE = 'torchpkg')
 }

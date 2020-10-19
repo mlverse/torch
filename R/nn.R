@@ -389,22 +389,25 @@ create_nn_module_callable <- function(instance) {
   if (is.numeric(y))
     return(x[[".__enclos_env__"]][["private"]][["modules_"]][[y]])
   
-  if (!is.null(x[[".__enclos_env__"]][["private"]][["parameters_"]])) {
-    pars <- x[[".__enclos_env__"]][["private"]][["parameters_"]]
-    if (y %in% names(pars))
-      return(pars[[y]])
+  pars <- x[[".__enclos_env__"]][["private"]][["parameters_"]]
+  if (!is.null(pars)) {
+    o <- pars[[y]]
+    if (!is.null(o))
+      return(o)
   }
   
-  if (!is.null(x[[".__enclos_env__"]][["private"]][["buffers_"]])) {
-    bufs <- x[[".__enclos_env__"]][["private"]][["buffers_"]]
-    if (y %in% names(bufs))
-      return(bufs[[y]])
+  bufs <- x[[".__enclos_env__"]][["private"]][["buffers_"]]
+  if (!is.null(bufs)) {
+    o <- bufs[[y]]
+    if (!is.null(o))
+      return(o)
   }
   
-  if (!is.null(x[[".__enclos_env__"]][["private"]][["modules_"]])) {
-    mods <- x[[".__enclos_env__"]][["private"]][["modules_"]]
-    if (y %in% names(mods))
-      return(mods[[y]])
+  mods <- x[[".__enclos_env__"]][["private"]][["modules_"]]
+  if (!is.null(mods)) {
+    o <- mods[[y]]
+    if (!is.null(o))
+      return(o)
   }
   
   NextMethod("[[", x)

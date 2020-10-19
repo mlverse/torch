@@ -1096,3 +1096,25 @@ nn_log_softmax <- nn_module(
     nnf_log_softmax(input, self$dim)
   }
 )
+
+#' Sparsemax activation
+#'
+#' Sparsemax activation module.
+#' 
+#' @details 
+#' The SparseMax activation is described in
+#' ['From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification'](https://arxiv.org/abs/1602.02068)
+#' The implementation is based on [aced125/sparsemax](https://github.com/aced125/sparsemax/tree/master/sparsemax)
+#' 
+#' @param dim The dimension over which to apply the sparsemax function. (-1)
+#'
+#' @export
+nn_contrib_sparsemax <- nn_module(
+  "nn_contrib_sparsemax",
+  initialize = function(dim = -1) {
+    self$dim = dim
+  },
+  forward = function(input) {
+    nnf_contrib_sparsemax(input, self$dim)
+  }
+)
