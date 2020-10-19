@@ -22,12 +22,12 @@ int _lantern_get_num_threads ()
 {
     LANTERN_FUNCTION_START
     return at::get_num_threads();
-    LANTERN_FUNCTION_END
+    LANTERN_FUNCTION_END_RET(0)
 }
 
 int _lantern_get_num_interop_threads ()
 {
     LANTERN_FUNCTION_START
     return at::get_num_interop_threads();
-    LANTERN_FUNCTION_END
+    LANTERN_FUNCTION_END_RET(0)
 }
