@@ -7,7 +7,7 @@
 nn_utils_clip_grad_norm_(parameters, max_norm, norm_type = 2)
 }
 \arguments{
-\item{parameters}{(Iterable\link{Tensor} or Tensor): an iterable of Tensors or a
+\item{parameters}{(IterableTensor or Tensor): an iterable of Tensors or a
 single Tensor that will have gradients normalized}
 
 \item{max_norm}{(float or int): max norm of the gradients}

@@ -22,8 +22,7 @@ optim_adagrad(
 
 \item{weight_decay}{(float, optional): weight decay (L2 penalty) (default: 0)}
 
-\item{eps}{(float, optional): term added to the denominator to improve
-numerical stability (default: 1e-10)
+\item{initial_accumulator_value}{the initial value for the accumulator. (default: 0)
 
 Adagrad is an especially good optimizer for sparse data.
 It individually modifies learning rate for every single parameter,
@@ -31,6 +30,9 @@ dividing the original learning rate value by sum of the squares of the gradients
 It causes that the rarely occurring features get greater learning rates.
 The main downside of this method is the fact that learning rate may be
 getting small too fast, so that at some point a model cannot learn anymore.}
+
+\item{eps}{(float, optional): term added to the denominator to improve
+numerical stability (default: 1e-10)}
 }
 \description{
 Proposed in \href{http://jmlr.org/papers/v12/duchi11a.html}{Adaptive Subgradient Methods for Online Learning and Stochastic Optimization}
