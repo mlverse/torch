@@ -26,3 +26,6 @@ Get and set the numbers used by torch computations.
 For details see the \href{https://pytorch.org/docs/stable/notes/cpu_threading_torchscript_inference.html?highlight=set_num_threads}{CPU threading article}
 in the PyTorch documentation.
 }
+\note{
+torch_set_threads do not work on macOS system as it must be 1.
+}
