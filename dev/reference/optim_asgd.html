@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Xavier normal initialization — nn_init_xavier_normal_ • torch</title>
+<title>Averaged Stochastic Gradient Descent optimizer — optim_asgd • torch</title>
 
 
 <!-- jquery -->
@@ -41,10 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Xavier normal initialization — nn_init_xavier_normal_" />
-<meta property="og:description" content="Fills the input Tensor with values according to the method
-described in Understanding the difficulty of training deep feedforward neural networks - Glorot, X. &amp;amp; Bengio, Y. (2010), using a normal
-distribution." />
+<meta property="og:title" content="Averaged Stochastic Gradient Descent optimizer — optim_asgd" />
+<meta property="og:description" content="Proposed in Acceleration of stochastic approximation by averaging" />
 
 
 <meta name="robots" content="noindex">
@@ -220,44 +218,64 @@ distribution." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Xavier normal initialization</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-init.R'><code>R/nn-init.R</code></a></small>
-    <div class="hidden name"><code>nn_init_xavier_normal_.Rd</code></div>
+    <h1>Averaged Stochastic Gradient Descent optimizer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/optim-asgd.R'><code>R/optim-asgd.R</code></a></small>
+    <div class="hidden name"><code>optim_asgd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fills the input <code>Tensor</code> with values according to the method
-described in <code>Understanding the difficulty of training deep feedforward neural networks</code> - Glorot, X. &amp; Bengio, Y. (2010), using a normal
-distribution.</p>
+    <p>Proposed in <a href='http://dl.acm.org/citation.cfm?id=131098'>Acceleration of stochastic approximation by averaging</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_xavier_normal_</span><span class='op'>(</span><span class='va'>tensor</span>, gain <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>optim_asgd</span><span class='op'>(</span>
+  <span class='va'>params</span>,
+  lr <span class='op'>=</span> <span class='fl'>0.01</span>,
+  lambda <span class='op'>=</span> <span class='fl'>1e-04</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.75</span>,
+  t0 <span class='op'>=</span> <span class='fl'>1e+06</span>,
+  weight_decay <span class='op'>=</span> <span class='fl'>0</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>tensor</th>
-      <td><p>an n-dimensional <code>Tensor</code></p></td>
+      <th>params</th>
+      <td><p>(iterable): iterable of parameters to optimize or lists defining
+parameter groups</p></td>
     </tr>
     <tr>
-      <th>gain</th>
-      <td><p>an optional scaling factor</p></td>
+      <th>lr</th>
+      <td><p>(float): learning rate</p></td>
+    </tr>
+    <tr>
+      <th>lambda</th>
+      <td><p>(float, optional): decay term (default: 1e-4)</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>(float, optional): power for eta update (default: 0.75)</p></td>
+    </tr>
+    <tr>
+      <th>t0</th>
+      <td><p>(float, optional): point at which to start averaging (default: 1e6)</p></td>
+    </tr>
+    <tr>
+      <th>weight_decay</th>
+      <td><p>(float, optional): weight decay (L2 penalty) (default: 0)</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'>nn_init_xavier_normal_</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span>
-
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>optimizer</span> <span class='op'>&lt;-</span> <span class='fu'>optim_asgd</span><span class='op'>(</span><span class='va'>model</span><span class='op'>$</span><span class='fu'>parameters</span><span class='op'>(</span><span class='op'>)</span>, lr<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>
+<span class='va'>optimizer</span><span class='op'>$</span><span class='fu'>zero_grad</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>loss_fn</span><span class='op'>(</span><span class='fu'>model</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>, <span class='va'>target</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>backward</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>optimizer</span><span class='op'>$</span><span class='fu'>step</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -4.1255 -0.2486 -0.8178 -3.2542 -2.1922
-#&gt; -0.8971 -2.8429  2.4300 -0.3434 -0.7273
-#&gt;  0.3646  1.5422  0.7686 -1.3545 -2.0137
-#&gt; [ CPUFloatType{3,5} ]</div></pre>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
