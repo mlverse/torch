@@ -28,7 +28,7 @@ a new one.
 ## Examples
 
 We welcome contributed examples. feel free to open a PR with new examples.
-The should be placed in the `vignettes/examples` folder.
+The examples should be placed in the `vignettes/examples` folder.
 
 The examples should be an .R file and a .Rmd file with the same name that
 just renders the code.
