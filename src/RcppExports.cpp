@@ -282,6 +282,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_contrib_torch_sparsemax
+Rcpp::XPtr<XPtrTorchTensor> cpp_contrib_torch_sparsemax(Rcpp::XPtr<XPtrTorchTensor> input, int dim);
+RcppExport SEXP _torch_cpp_contrib_torch_sparsemax(SEXP inputSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< int >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_contrib_torch_sparsemax(input, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_cuda_is_available
 bool cpp_cuda_is_available();
 RcppExport SEXP _torch_cpp_cuda_is_available() {
@@ -23836,6 +23848,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_autograd_node_next_edges", (DL_FUNC) &_torch_cpp_autograd_node_next_edges, 1},
     {"_torch_cpp_autograd_edge_function", (DL_FUNC) &_torch_cpp_autograd_edge_function, 1},
     {"_torch_cpp_autograd_grad", (DL_FUNC) &_torch_cpp_autograd_grad, 6},
+    {"_torch_cpp_contrib_torch_sparsemax", (DL_FUNC) &_torch_cpp_contrib_torch_sparsemax, 2},
     {"_torch_cpp_cuda_is_available", (DL_FUNC) &_torch_cpp_cuda_is_available, 0},
     {"_torch_cpp_cuda_device_count", (DL_FUNC) &_torch_cpp_cuda_device_count, 0},
     {"_torch_cpp_cuda_current_device", (DL_FUNC) &_torch_cpp_cuda_current_device, 0},

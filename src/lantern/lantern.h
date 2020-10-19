@@ -37,6 +37,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <string>
 
 extern int lanternLogEnabled;
 #define LLOG(...) if ((lanternLogEnabled & 1) == 1) {              \
@@ -543,6 +544,14 @@ extern "C"
   {
     _lantern_string_delete(x);
     LANTERN_HOST_HANDLER;
+  }
+
+  LANTERN_API void * (LANTERN_PTR _lantern_contrib_torch_sparsemax) (void * input, int dim);
+  HOST_API void * lantern_contrib_torch_sparsemax (void* input, int dim)
+  {
+    void * ret = _lantern_contrib_torch_sparsemax(input, dim);
+    LANTERN_HOST_HANDLER;
+    return ret;
   }
 
   /* Autogen Headers -- Start */
@@ -4263,6 +4272,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Tensor_names);
   LOAD_SYMBOL(_lantern_string_new);
   LOAD_SYMBOL(_lantern_string_delete);
+  LOAD_SYMBOL(_lantern_contrib_torch_sparsemax);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

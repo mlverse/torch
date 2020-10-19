@@ -94,6 +94,7 @@ add_library(lantern SHARED
     src/NNUtilsRnn.cpp
     src/Storage.cpp
     src/Save.cpp
+    src/Contrib/Sparsemax.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
