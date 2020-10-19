@@ -28,6 +28,7 @@
 - Fixed `nn_batchnorm*` so it returns the same results as PyTorch (#302)
 - Fixed a bug that made `nn_module$parameter` when there were shared parameters
   between layers. (#306)
+- Added ASGD optimizer (@krzjoa #307)
 
 # torch 0.1.0
 
