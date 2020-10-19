@@ -1,3 +1,5 @@
+# theses tests must run the before any torch op.
+
 test_that("can set threads", {
   
   skip_on_os("windows")
