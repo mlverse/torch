@@ -24,11 +24,12 @@ Proposed first in \href{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.
 }
 \examples{
 if (torch_is_installed()) {
-
+\dontrun{
 optimizer <- optim_rprop(model$parameters(), lr=0.1)
 optimizer$zero_grad()
 loss_fn(model(input), target)$backward()
 optimizer$step()
+}
 
 }
 }

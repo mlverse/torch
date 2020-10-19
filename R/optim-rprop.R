@@ -95,11 +95,12 @@ optim_Rprop <- R6::R6Class(
 #' maximal allowed step sizes (default: (1e-6, 50))
 #' 
 #' @examples
-#' 
+#' \dontrun{
 #' optimizer <- optim_rprop(model$parameters(), lr=0.1)
 #' optimizer$zero_grad()
 #' loss_fn(model(input), target)$backward()
 #' optimizer$step()
+#' }
 #' 
 #' @export
 optim_rprop <- function(params, lr=1e-2, etas=c(0.5, 1.2), step_sizes=c(1e-6, 50)){
