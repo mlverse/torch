@@ -232,3 +232,35 @@ test_that("is_leaf", {
   expect_true(!a$is_leaf)
   
 })
+
+test_that("max and min", {
+  
+  x <- torch_tensor(1:10)
+  
+  expect_equal_to_r(x$min(), 1L)
+  expect_equal_to_r(x$max(), 10L)
+  
+  expect_equal_to_r(x$min(other = 9L)[10], 9L)
+  expect_equal_to_r(x$max(other = 2L)[1], 2L)
+  
+  x <- torch_tensor(
+    rbind(
+      c(1, 5, 0),
+      c(2, 7, 9),
+      c(5, 1, 4)
+    )
+  )
+  expect_equal_to_r(x$min(dim = 2)[[1]], c(0, 2, 1))
+  expect_equal_to_r(x$min(dim = 2)[[2]], c(3L, 1L, 2L))
+  expect_tensor_shape(x$min(dim = 2, keepdim = TRUE)[[2]], c(3L, 1L))
+
+  expect_equal_to_r(x$max(dim = 2)[[1]], c(5, 9, 5))
+  expect_equal_to_r(x$max(dim = 2)[[2]], c(2L, 3L, 1L))
+  expect_tensor_shape(x$min(dim = 2, keepdim = TRUE)[[2]], c(3L, 1L))  
+  
+  expect_error(
+    x$min(dim = 1, other = 2),
+    class = "value_error"
+  )
+  
+}) 
