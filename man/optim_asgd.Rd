@@ -28,7 +28,7 @@ parameter groups}
 \item{weight_decay}{(float, optional): weight decay (L2 penalty) (default: 0)}
 }
 \description{
-Proposed in \href{https://dl.acm.org/citation.cfm?id=131098}{Acceleration of stochastic approximation by averaging}
+Proposed in \href{https://dl.acm.org/doi/10.1137/0330046}{Acceleration of stochastic approximation by averaging}
 }
 \examples{
 if (torch_is_installed()) {
