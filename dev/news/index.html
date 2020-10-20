@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.1.9000</span>
       </span>
     </div>
 
@@ -225,31 +225,50 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#torch-development-version" class="anchor"></a>torch (development version)<small> Unreleased </small>
 </h1>
+</div>
+    <div id="torch-011" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.1">
+<a href="#torch-011" class="anchor"></a>torch 0.1.1<small> Unreleased </small>
+</h1>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Expanded the <code>utils_data_default_collate</code> to support converting R objects to torch tensors when needed. (<a href='https://github.com/mlverse/torch/issues/269'>#269</a>)</li>
 <li>Fixed bug that made <code>RandomSampler(replacement = TRUE)</code> to never take the last element in the dataset. (84861fa)</li>
 <li>Fixed <code>torch_topk</code> and <code>x$topk</code> so the returned indexes are 1-based (<a href='https://github.com/mlverse/torch/issues/280'>#280</a>)</li>
 <li>Fixed a bug (<a href='https://github.com/mlverse/torch/issues/275'>#275</a>) that would cause <code>1 - torch_tensor(1, device = "cuda")</code> to fail because <code>1</code> was created in the CPU. (<a href='https://github.com/mlverse/torch/issues/279'>#279</a>)</li>
-<li>Added an <code>as.matrix</code> method for torch Tensors. (<a href='https://github.com/mlverse/torch/issues/282'>#282</a>)</li>
-<li>By default we now truncate the output of <code><a href="https://rdrr.io/r/base/print.html">print(totrch_tensor(1:40))</a></code> if it spans for more than 30 lines. This is useful for not spamming the console or taking very long to print when you print a very large tensor. (<a href='https://github.com/mlverse/torch/issues/283'>#283</a>)</li>
-<li>Added the Adadelta optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/284'>#284</a>)</li>
-<li>Added support for GPU’s on Windows (<a href='https://github.com/mlverse/torch/issues/281'>#281</a>)</li>
 <li>We now preserve names in the <code>dataloader</code> output (<a href='https://github.com/mlverse/torch/issues/286'>#286</a>)</li>
-<li>Added the Adagrad optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/289'>#289</a>)</li>
-<li>Added CUDA 11 support for Linux (<a href='https://github.com/skeydan'>@skeydan</a> <a href='https://github.com/mlverse/torch/issues/291'>#291</a>)</li>
-<li>Added RMSprop optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/290'>#290</a>)</li>
 <li>
 <code>torch_narrow</code>, <code>Tensor$narrow()</code> and <code>Tensor$narrow_copy</code> are now indexed starting at 1. (<a href='https://github.com/mlverse/torch/issues/294'>#294</a>)</li>
 <li>
 <code>Tensor$is_leaf</code> is now an active method. (<a href='https://github.com/mlverse/torch/issues/295'>#295</a>)</li>
-<li>Fixed bug when passing equations to <code>torch_einsum</code>. (<a href='https://github.com/mlverse/torch/issues/296'>#296</a>)</li>
-<li>Added the Rprop optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/297'>#297</a>)</li>
-<li>Added gradient clipping utilities (<a href='https://github.com/mlverse/torch/issues/299'>#299</a>)</li>
+<li>Fixed bug when passing equations to <code>torch_einsum</code>. (<a href='https://github.com/mlverse/torch/issues/296'>#296</a>)<br>
+</li>
 <li>Fixed <code><a href="../reference/nn_module_list.html">nn_module_list()</a></code> to correctly name added modules, otherwise they are not returned when doing <code>state_dict()</code> on it. (<a href='https://github.com/mlverse/torch/issues/300'>#300</a>)</li>
 <li>Fixed bug related to random number seeds when using in-place methods. (<a href='https://github.com/mlverse/torch/issues/303'>#303</a>)</li>
 <li>Fixed <code>nn_batchnorm*</code> so it returns the same results as PyTorch (<a href='https://github.com/mlverse/torch/issues/302'>#302</a>)</li>
 <li>Fixed a bug that made <code>nn_module$parameter</code> when there were shared parameters between layers. (<a href='https://github.com/mlverse/torch/issues/306'>#306</a>)</li>
+<li>Fixed <code>$max</code> and <code>$min</code> to return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/315'>#315</a>)</li>
 </ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>Expanded the <code>utils_data_default_collate</code> to support converting R objects to torch tensors when needed. (<a href='https://github.com/mlverse/torch/issues/269'>#269</a>)</li>
+<li>Added an <code>as.matrix</code> method for torch Tensors. (<a href='https://github.com/mlverse/torch/issues/282'>#282</a>)</li>
+<li>By default we now truncate the output of <code><a href="https://rdrr.io/r/base/print.html">print(totrch_tensor(1:40))</a></code> if it spans for more than 30 lines. This is useful for not spamming the console or taking very long to print when you print a very large tensor. (<a href='https://github.com/mlverse/torch/issues/283'>#283</a>)</li>
+<li>Added the Adadelta optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/284'>#284</a>)</li>
+<li>Added support for GPU’s on Windows (<a href='https://github.com/mlverse/torch/issues/281'>#281</a>)</li>
+<li>Added the Adagrad optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/289'>#289</a>)</li>
+<li>Added RMSprop optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/290'>#290</a>)</li>
+<li>Added the Rprop optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/297'>#297</a>)</li>
+<li>Added gradient clipping utilities (<a href='https://github.com/mlverse/torch/issues/299'>#299</a>)</li>
+<li>Added <code>nnf_contrib_sparsemax</code> and <code>nn_contrib_sparsemax</code>. (<a href='https://github.com/mlverse/torch/issues/309'>#309</a>)</li>
+<li>Added ASGD optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/307'>#307</a>)</li>
+<li>Getters and setters for the number of threads used by torch (<a href='https://github.com/mlverse/torch/issues/311'>#311</a>)</li>
+</ul>
+</div>
 </div>
     <div id="torch-010" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">

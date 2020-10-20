@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.1.9000</span>
       </span>
     </div>
 
@@ -241,8 +241,8 @@
 <span class="co">#&gt; [1] FALSE</span>
 <span class="va">a</span><span class="op">$</span><span class="fu">requires_grad_</span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.0091 -3.6972</span>
-<span class="co">#&gt;  6.4048  0.1431</span>
+<span class="co">#&gt;  1.3886  0.2780</span>
+<span class="co">#&gt;  1.5362  1.5670</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">a</span><span class="op">$</span><span class="va">requires_grad</span>
 <span class="co">#&gt; [1] TRUE</span>
@@ -297,9 +297,9 @@
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">x</span>
 <span class="va">y</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  88.5080</span>
-<span class="co">#&gt;  30.9981</span>
-<span class="co">#&gt; -50.7014</span>
+<span class="co">#&gt;  4.8650</span>
+<span class="co">#&gt; -326.4572</span>
+<span class="co">#&gt; -97.1528</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></pre></div>
 <p>Now in this case y is no longer a scalar. <code>autograd</code> could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
