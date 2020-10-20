@@ -35,7 +35,7 @@ getting small too fast, so that at some point a model cannot learn anymore.}
 numerical stability (default: 1e-10)}
 }
 \description{
-Proposed in \href{http://jmlr.org/papers/v12/duchi11a.html}{Adaptive Subgradient Methods for Online Learning and Stochastic Optimization}
+Proposed in \href{https://jmlr.org/papers/v12/duchi11a.html}{Adaptive Subgradient Methods for Online Learning and Stochastic Optimization}
 }
 \note{
 Update rule:

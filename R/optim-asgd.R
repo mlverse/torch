@@ -84,7 +84,7 @@ optim_ASGD <- R6::R6Class(
 
 #' Averaged Stochastic Gradient Descent optimizer
 #' 
-#' Proposed in [Acceleration of stochastic approximation by averaging](http://dl.acm.org/citation.cfm?id=131098)
+#' Proposed in [Acceleration of stochastic approximation by averaging](https://dl.acm.org/citation.cfm?id=131098)
 #' 
 #' @param params (iterable): iterable of parameters to optimize or lists defining
 #'   parameter groups

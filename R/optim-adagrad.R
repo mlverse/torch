@@ -114,7 +114,7 @@ optim_Adagrad <- R6::R6Class(
 
 #' Adagrad optimizer
 #' 
-#' Proposed in [Adaptive Subgradient Methods for Online Learning and Stochastic Optimization](http://jmlr.org/papers/v12/duchi11a.html)
+#' Proposed in [Adaptive Subgradient Methods for Online Learning and Stochastic Optimization](https://jmlr.org/papers/v12/duchi11a.html)
 #' 
 #' @param params (iterable): list of parameters to optimize or list parameter groups
 #' @param lr (float, optional): learning rate (default: 1e-2)
