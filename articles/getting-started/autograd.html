@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -203,7 +203,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1  1</span>
 <span class="co">#&gt;  1  1</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
@@ -211,7 +211,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">2</span>
 <span class="va">y</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  3  3</span>
 <span class="co">#&gt;  3  3</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
@@ -223,13 +223,13 @@
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="va">z</span> <span class="op">&lt;-</span> <span class="va">y</span> <span class="op">*</span> <span class="va">y</span> <span class="op">*</span> <span class="fl">3</span>
 <span class="va">z</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  27  27</span>
 <span class="co">#&gt;  27  27</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">$</span><span class="fu">mean</span><span class="op">(</span><span class="op">)</span>
 <span class="va">out</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 27</span>
 <span class="co">#&gt; [ CPUFloatType{} ]</span></pre></div>
 <p><code>$requires_grad_( ... )</code> changes an existing Tensor’s <code>requires_grad</code> flag in-place. The input flag defaults to <code>FALSE</code> if not given.</p>
@@ -239,9 +239,9 @@
 <span class="va">a</span><span class="op">$</span><span class="va">requires_grad</span>
 <span class="co">#&gt; [1] FALSE</span>
 <span class="va">a</span><span class="op">$</span><span class="fu">requires_grad_</span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt; -4.4822  2.0999</span>
-<span class="co">#&gt; -1.7990  1.3245</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt; -4.0709 -0.4071</span>
+<span class="co">#&gt;  0.5453  1.3405</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">a</span><span class="op">$</span><span class="va">requires_grad</span>
 <span class="co">#&gt; [1] TRUE</span>
@@ -258,7 +258,7 @@
 <p>Print gradients d(out)/dx</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="va">x</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  4.5000  4.5000</span>
 <span class="co">#&gt;  4.5000  4.5000</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
@@ -295,10 +295,10 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">3</span>, requires_grad<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">x</span>
 <span class="va">y</span>
-<span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  12.2239</span>
-<span class="co">#&gt;  11.7097</span>
-<span class="co">#&gt;  66.0981</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt; -102.1670</span>
+<span class="co">#&gt;   51.5547</span>
+<span class="co">#&gt;  193.1159</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></pre></div>
 <p>Now in this case y is no longer a scalar. <code>autograd</code> could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
@@ -306,7 +306,7 @@
 <span class="va">y</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="va">v</span><span class="op">)</span>
 
 <span class="va">x</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1.0000e+01</span>
 <span class="co">#&gt;  1.0000e+02</span>
 <span class="co">#&gt;  1.0000e-02</span>
@@ -329,7 +329,7 @@
 <span class="va">y</span><span class="op">$</span><span class="va">requires_grad</span>
 <span class="co">#&gt; [1] FALSE</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">eq</span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">all</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 1</span>
 <span class="co">#&gt; [ CPUBoolType{} ]</span></pre></div>
 <p>Read Later:</p>

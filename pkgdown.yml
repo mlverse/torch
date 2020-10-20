@@ -19,10 +19,11 @@ articles:
   getting-started/warmup: warmup.html
   getting-started/what-is-torch: what-is-torch.html
   indexing: indexing.html
+  installation: installation.html
   loading-data: loading-data.html
   serialization: serialization.html
   tensor/index: index.html
   tensor-creation: tensor-creation.html
   using-autograd: using-autograd.html
-last_built: 2020-09-28T14:17Z
+last_built: 2020-10-20T16:57Z
 

@@ -87,7 +87,7 @@ in which all non-maximal values are set to zero." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -300,12 +300,12 @@ or as given by <code>output_size</code> in the call operator</p></li>
 <span class='fu'>unpool</span><span class='op'>(</span><span class='va'>out</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, <span class='va'>out</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>, output_size<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor 
+</div><div class='output co'>#&gt; torch_tensor
 #&gt; (1,1,.,.) = 
-#&gt;   1.1335  0.0000  0.0000  0.0000  0.0000
-#&gt;   0.0000  0.0000  1.0280  1.9005  0.0000
-#&gt;   0.0000  0.8607  0.0000  0.0000  0.0000
+#&gt;   0.0000  0.0000  0.1664  0.0000  2.5329
 #&gt;   0.0000  0.0000  0.0000  0.0000  0.0000
+#&gt;   0.0000  0.0000  0.0000  1.3535  0.0000
+#&gt;   0.8777  0.0000  0.0000  0.0000  0.0000
 #&gt;   0.0000  0.0000  0.0000  0.0000  0.0000
 #&gt; [ CPUFloatType{1,1,5,5} ]</div></pre>
   </div>

@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -300,41 +300,38 @@ of <code>input</code>, but instead the last dimension will be halfed as of size
 <span class='fu'>torch_rfft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span><span class='op'>)</span>
 <span class='fu'>torch_rfft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span>, onesided<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor 
+</div><div class='output co'>#&gt; torch_tensor
 #&gt; (1,.,.) = 
-#&gt;  -4.6777  0.0000
-#&gt;   4.6752  8.3458
-#&gt;   5.0079  6.3926
-#&gt;   5.0079 -6.3926
-#&gt;   4.6752 -8.3458
+#&gt;  -1.3493  0.0000
+#&gt;   1.9434  1.0050
+#&gt;  -0.7711  1.5355
+#&gt;  -0.7711 -1.5355
+#&gt;   1.9434 -1.0050
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.3540  3.9678
-#&gt;  -3.3707 -4.3498
-#&gt;  -1.9707  0.7208
-#&gt;  -5.8934 -0.4795
-#&gt;  -3.7748 -4.8852
+#&gt;  -0.4893 -0.6571
+#&gt;  -0.2201  4.8594
+#&gt;  -1.7579 -0.6866
+#&gt;  -5.2053  6.4105
+#&gt;   9.3379  4.5812
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   0.2501  3.8857
-#&gt;   2.1472  9.0980
-#&gt;   0.5791  6.7482
-#&gt;  -6.7837  4.3953
-#&gt;   0.1095  7.1246
+#&gt;   3.9498 -1.0887
+#&gt;   1.9429  2.9128
+#&gt;   5.4304  4.9389
+#&gt;   4.5145 -3.8287
+#&gt;  -4.5782  1.1079
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;   0.2501 -3.8857
-#&gt;   0.1095 -7.1246
-#&gt;  -6.7837 -4.3953
-#&gt;   0.5791 -6.7482
-#&gt;   2.1472 -9.0980
+#&gt;   3.9498  1.0887
+#&gt;  -4.5782 -1.1079
+#&gt;   4.5145  3.8287
+#&gt;   5.4304 -4.9389
+#&gt;   1.9429 -2.9128
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   1.3540 -3.9678
-#&gt;  -3.7748  4.8852
-#&gt;  -5.8934  0.4795
-#&gt;  -1.9707 -0.7208
-#&gt;  -3.3707  4.3498
+#&gt;  -0.4893  0.6571
+#&gt; ... [the output was truncated (use n=-1 to disable)]
 #&gt; [ CPUFloatType{5,5,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

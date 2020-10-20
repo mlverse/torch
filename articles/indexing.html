@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -193,33 +193,33 @@
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 1</span>
 <span class="co">#&gt; [ CPULongType{} ]</span>
 <span class="va">x</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 10</span>
 <span class="co">#&gt; [ CPULongType{} ]</span></pre></div>
 <p>You can also subset matrices and higher dimensions arrays using the same syntax:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="fu">reshape</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;   1   2   3   4   5</span>
 <span class="co">#&gt;   6   7   8   9  10</span>
 <span class="co">#&gt; [ CPULongType{2,5} ]</span>
 <span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 3</span>
 <span class="co">#&gt; [ CPULongType{} ]</span>
 <span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 5</span>
 <span class="co">#&gt; [ CPULongType{} ]</span></pre></div>
 <p>Note that if one indexes a multidimensional tensor with fewer indices than dimensions, one gets an error, unlike in R that would flatten the array. For example:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  2</span>
 <span class="co">#&gt;  3</span>
@@ -234,7 +234,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;   1</span>
 <span class="co">#&gt;   2</span>
 <span class="co">#&gt;   3</span>
@@ -247,14 +247,14 @@
 <span class="co">#&gt;  10</span>
 <span class="co">#&gt; [ CPULongType{10} ]</span>
 <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  2</span>
 <span class="co">#&gt;  3</span>
 <span class="co">#&gt;  4</span>
 <span class="co">#&gt;  5</span>
 <span class="co">#&gt; [ CPULongType{4} ]</span>
 <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  2</span>
 <span class="co">#&gt;  3</span>
@@ -263,7 +263,7 @@
 <p>You can also use the <code>1:10:2</code> syntax which means: In the range from 1 to 10, take every second item. For example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  3</span>
 <span class="co">#&gt;  5</span>
@@ -271,7 +271,7 @@
 <p>Another special syntax is the <code>N</code>, meaning the size of the specified dimension.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="va">x</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="va">N</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;   5</span>
 <span class="co">#&gt;   6</span>
 <span class="co">#&gt;   7</span>
@@ -288,24 +288,24 @@
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  1.6142  1.4493  0.1237</span>
-<span class="co">#&gt; -0.3567 -2.3203 -0.1629</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  2.1682  0.5433 -0.9061</span>
+<span class="co">#&gt;  0.4669 -1.0491  0.7183</span>
 <span class="co">#&gt; [ CPUFloatType{2,3} ]</span></pre></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  1.6142</span>
-<span class="co">#&gt;  1.4493</span>
-<span class="co">#&gt;  0.1237</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  2.1682</span>
+<span class="co">#&gt;  0.5433</span>
+<span class="co">#&gt; -0.9061</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></pre></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
-<span class="co">#&gt;  1.6142  1.4493</span>
-<span class="co">#&gt; -0.3567 -2.3203</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  2.1682  0.5433</span>
+<span class="co">#&gt;  0.4669 -1.0491</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
 </div>
 <div id="dropping-dimensions" class="section level2">
@@ -345,7 +345,7 @@
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">125</span><span class="op">)</span><span class="op">$</span><span class="fu">reshape</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
 <span class="va">z</span><span class="op">[</span><span class="fl">1</span>,<span class="va">..</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;   1   2   3   4   5</span>
 <span class="co">#&gt;   6   7   8   9  10</span>
 <span class="co">#&gt;  11  12  13  14  15</span>
@@ -353,7 +353,7 @@
 <span class="co">#&gt;  21  22  23  24  25</span>
 <span class="co">#&gt; [ CPULongType{5,5} ]</span>
 <span class="va">z</span><span class="op">[</span><span class="va">..</span>,<span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;    1    6   11   16   21</span>
 <span class="co">#&gt;   26   31   36   41   46</span>
 <span class="co">#&gt;   51   56   61   66   71</span>

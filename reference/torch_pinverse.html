@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -274,16 +274,16 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
 <span class='va'>b</span> <span class='op'>=</span> <span class='fu'>torch_pinverse</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
 <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='va'>b</span>, <span class='va'>a</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor 
+</div><div class='output co'>#&gt; torch_tensor
 #&gt; (1,.,.) = 
-#&gt;   1.0000e+00 -6.6659e-07  1.4901e-07
-#&gt;  -6.7055e-08  1.0000e+00 -2.9802e-08
-#&gt;  -4.4703e-08 -4.2841e-08  1.0000e+00
+#&gt;   1.0000  0.0000  0.0000
+#&gt;  -0.0000  1.0000  0.0000
+#&gt;   0.0000 -0.0000  1.0000
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   1.0000  0.0000  0.0000
-#&gt;   0.0000  1.0000 -0.0000
-#&gt;  -0.0000 -0.0000  1.0000
+#&gt;   1.0000e+00  5.0664e-07 -4.3213e-07
+#&gt;   7.4506e-09  1.0000e+00  8.9407e-08
+#&gt;   5.4017e-08  7.4506e-08  1.0000e+00
 #&gt; [ CPUFloatType{2,3,3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

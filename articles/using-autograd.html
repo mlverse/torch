@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -206,7 +206,7 @@
 <p>That executed, <code>x</code> now has a non-empty field <code>grad</code> that stores the gradient of <code>y</code> with respect to <code>x</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="va">x</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
@@ -252,21 +252,21 @@
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="va">out</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
 <span class="va">z</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">y</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  4.6500  4.6500</span>
 <span class="co">#&gt;  4.6500  4.6500</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">x2</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  18.6000</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span>
 <span class="va">x1</span><span class="op">$</span><span class="va">grad</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  14.4150  14.4150</span>
 <span class="co">#&gt;  14.4150  14.4150</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
@@ -332,26 +332,26 @@
     <span class="op">}</span><span class="op">)</span>
     
 <span class="op">}</span>
-<span class="co">#&gt; 10 37.57006 </span>
-<span class="co">#&gt; 20 34.24908 </span>
-<span class="co">#&gt; 30 31.35886 </span>
-<span class="co">#&gt; 40 28.8469 </span>
-<span class="co">#&gt; 50 26.65266 </span>
-<span class="co">#&gt; 60 24.74089 </span>
-<span class="co">#&gt; 70 23.06804 </span>
-<span class="co">#&gt; 80 21.60056 </span>
-<span class="co">#&gt; 90 20.30699 </span>
-<span class="co">#&gt; 100 19.16634 </span>
-<span class="co">#&gt; 110 18.15841 </span>
-<span class="co">#&gt; 120 17.26147 </span>
-<span class="co">#&gt; 130 16.45725 </span>
-<span class="co">#&gt; 140 15.74061 </span>
-<span class="co">#&gt; 150 15.10149 </span>
-<span class="co">#&gt; 160 14.52978 </span>
-<span class="co">#&gt; 170 14.01668 </span>
-<span class="co">#&gt; 180 13.55646 </span>
-<span class="co">#&gt; 190 13.14018 </span>
-<span class="co">#&gt; 200 12.76236</span></pre></div>
+<span class="co">#&gt; 10 29.38995 </span>
+<span class="co">#&gt; 20 27.82898 </span>
+<span class="co">#&gt; 30 26.40866 </span>
+<span class="co">#&gt; 40 25.11044 </span>
+<span class="co">#&gt; 50 23.92046 </span>
+<span class="co">#&gt; 60 22.8301 </span>
+<span class="co">#&gt; 70 21.82474 </span>
+<span class="co">#&gt; 80 20.8944 </span>
+<span class="co">#&gt; 90 20.02901 </span>
+<span class="co">#&gt; 100 19.22548 </span>
+<span class="co">#&gt; 110 18.47772 </span>
+<span class="co">#&gt; 120 17.78036 </span>
+<span class="co">#&gt; 130 17.12883 </span>
+<span class="co">#&gt; 140 16.51761 </span>
+<span class="co">#&gt; 150 15.94286 </span>
+<span class="co">#&gt; 160 15.40301 </span>
+<span class="co">#&gt; 170 14.89526 </span>
+<span class="co">#&gt; 180 14.41715 </span>
+<span class="co">#&gt; 190 13.96636 </span>
+<span class="co">#&gt; 200 13.54035</span></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">

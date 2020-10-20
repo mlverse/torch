@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -274,7 +274,7 @@
 <span class="co">#&gt; [1] 333</span>
 <span class="va">tuxes</span><span class="op">$</span><span class="fu">.getitem</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;     3.0000</span>
 <span class="co">#&gt;    39.1000</span>
 <span class="co">#&gt;    18.7000</span>
@@ -285,7 +285,7 @@
 <span class="co">#&gt; [ CPUFloatType{7} ]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 1</span>
 <span class="co">#&gt; [ CPULongType{} ]</span></pre></div>
 <p>To be able to iterate over <code>tuxes</code>, we need a data loader (we override the default batch size of <code>1</code>):</p>
@@ -301,7 +301,7 @@
 <span class="va">b</span> <span class="op">&lt;-</span> <span class="va">iter</span><span class="op">$</span><span class="fu">.next</span><span class="op">(</span><span class="op">)</span>
 <span class="va">b</span>
 <span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;     3.0000    39.1000    18.7000   181.0000  3750.0000     2.0000  2007.0000</span>
 <span class="co">#&gt;     3.0000    39.5000    17.4000   186.0000  3800.0000     1.0000  2007.0000</span>
 <span class="co">#&gt;     3.0000    40.3000    18.0000   195.0000  3250.0000     1.0000  2007.0000</span>
@@ -313,7 +313,7 @@
 <span class="co">#&gt; [ CPUFloatType{8,7} ]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; torch_tensor </span>
+<span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  1</span>
@@ -366,7 +366,7 @@
   
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Loss at epoch 1: 51.747068</span>
+<span class="co">#&gt; Loss at epoch 1: 68.325852</span>
 <span class="co">#&gt; Loss at epoch 2: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 3: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 4: 2.068251</span>
