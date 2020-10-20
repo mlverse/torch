@@ -349,7 +349,8 @@ r_method <- function(decls) {
 
 internal_methods <- c("backward", "retain_grad", "size", "to", "stride",
                       "copy_", "topk", "scatter_", "scatter", "rename",
-                      "rename_", "narrow", "narrow_copy", "is_leaf")
+                      "rename_", "narrow", "narrow_copy", "is_leaf", "max",
+                      "min")
 
 r_method_env <- function(decls) {
   if (decls[[1]]$name %in% internal_methods)

@@ -150,6 +150,37 @@ Tensor <- R7Class(
         value_error("start indexing starts at 1")
       start <- start - 1L
       private$`_narrow_copy`(dim, start, length)
+    },
+    max = function(dim, other, keepdim = FALSE) {
+      
+      if (missing(dim) && missing(other))
+        return(private$`_max`())
+      
+      if (!missing(dim) && !missing(other))
+        value_error("Can't set other and dim argumments.")
+      
+      if (missing(dim))
+        return(private$`_max`(other = other))
+        
+      # dim is not missing
+      o <- private$`_max`(dim = dim, keepdim = keepdim)
+      o[[2]] <- o[[2]] + 1L # make 1 based
+      o
+    },
+    min = function(dim, other, keepdim = FALSE) {
+      if (missing(dim) && missing(other))
+        return(private$`_min`())
+      
+      if (!missing(dim) && !missing(other))
+        value_error("Can't set other and dim argumments.")
+      
+      if (missing(dim))
+        return(private$`_min`(other = other))
+      
+      # dim is not missing
+      o <- private$`_min`(dim = dim, keepdim = keepdim)
+      o[[2]] <- o[[2]] + 1L # make 1 based
+      o
     }
   ),
   active = list(
