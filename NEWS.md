@@ -18,6 +18,7 @@
 - Fixed `nn_batchnorm*` so it returns the same results as PyTorch (#302)
 - Fixed a bug that made `nn_module$parameter` when there were shared parameters
   between layers. (#306)
+- Fixed `$max` and `$min` to return 1-based indexes. (#315)
 
 ## New features
 
@@ -35,6 +36,7 @@
 - Added gradient clipping utilities (#299)
 - Added `nnf_contrib_sparsemax` and `nn_contrib_sparsemax`. (#309)
 - Added ASGD optimizer (@krzjoa #307)
+- Getters and setters for the number of threads used by torch (#311)
 
 # torch 0.1.0
 
