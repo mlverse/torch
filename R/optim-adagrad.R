@@ -121,7 +121,8 @@ optim_Adagrad <- R6::R6Class(
 #' @param lr_decay (float, optional): learning rate decay (default: 0)
 #' @param weight_decay (float, optional): weight decay (L2 penalty) (default: 0)
 #' @param eps (float, optional): term added to the denominator to improve
-#' numerical stability (default: 1e-10)
+#'   numerical stability (default: 1e-10)
+#' @param initial_accumulator_value the initial value for the accumulator. (default: 0)
 #' 
 #' Adagrad is an especially good optimizer for sparse data.
 #' It individually modifies learning rate for every single parameter,
@@ -138,6 +139,7 @@ optim_Adagrad <- R6::R6Class(
 #' The equation above and some remarks quoted 
 #' after [*An overview of gradient descent optimization algorithms*](https://ruder.io/optimizing-gradient-descent/index.html#adagrad)
 #' by Sebastian Ruder.
+#' 
 #' @export
 optim_adagrad <- function(params, lr=1e-2, lr_decay=0, weight_decay=0, 
                           initial_accumulator_value=0, eps=1e-10){

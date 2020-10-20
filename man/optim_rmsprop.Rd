@@ -24,6 +24,8 @@ optim_rmsprop(
 \item{eps}{(float, optional): term added to the denominator to improve
 numerical stability (default: 1e-8)}
 
+\item{weight_decay}{optional weight decay penalty. (default: 0)}
+
 \item{momentum}{(float, optional): momentum factor (default: 0)}
 
 \item{centered}{(bool, optional) : if \code{TRUE}, compute the centered RMSProp,

@@ -554,6 +554,36 @@ extern "C"
     return ret;
   }
 
+LANTERN_API void (LANTERN_PTR _lantern_set_num_threads) (int n);
+HOST_API void lantern_set_num_threads (int n)
+{
+  _lantern_set_num_threads(n);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_set_num_interop_threads) (int n);
+HOST_API void lantern_set_num_interop_threads (int n)
+{
+  _lantern_set_num_interop_threads(n);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API int (LANTERN_PTR _lantern_get_num_threads) ();
+HOST_API int lantern_get_num_threads ()
+{
+  int ret = _lantern_get_num_threads();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int (LANTERN_PTR _lantern_get_num_interop_threads) ();
+HOST_API int lantern_get_num_interop_threads ()
+{
+  int ret = _lantern_get_num_interop_threads();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -4273,6 +4303,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_string_new);
   LOAD_SYMBOL(_lantern_string_delete);
   LOAD_SYMBOL(_lantern_contrib_torch_sparsemax);
+  LOAD_SYMBOL(_lantern_set_num_threads);
+  LOAD_SYMBOL(_lantern_set_num_interop_threads);
+  LOAD_SYMBOL(_lantern_get_num_threads);
+  LOAD_SYMBOL(_lantern_get_num_interop_threads);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

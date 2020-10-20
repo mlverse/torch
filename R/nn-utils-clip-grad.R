@@ -3,7 +3,7 @@
 #' The norm is computed over all gradients together, as if they were
 #' concatenated into a single vector. Gradients are modified in-place.
 #' 
-#' @param parameters (Iterable[Tensor] or Tensor): an iterable of Tensors or a
+#' @param parameters (IterableTensor or Tensor): an iterable of Tensors or a
 #'   single Tensor that will have gradients normalized
 #' @param max_norm (float or int): max norm of the gradients
 #' @param norm_type (float or int): type of the used p-norm. Can be `Inf` for
@@ -49,7 +49,7 @@ nn_utils_clip_grad_norm_ <- function(parameters, max_norm, norm_type = 2) {
 #' 
 #' Gradients are modified in-place.
 #' 
-#' @param parameters (Iterable[Tensor] or Tensor): an iterable of Tensors or a
+#' @param parameters (Iterable(Tensor) or Tensor): an iterable of Tensors or a
 #'   single Tensor that will have gradients normalized
 #' @param clip_value (float or int): maximum allowed value of the gradients.
 #' 

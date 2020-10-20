@@ -88,19 +88,20 @@ optim_Rprop <- R6::R6Class(
 #' @param params (iterable): iterable of parameters to optimize or lists defining
 #' parameter groups
 #' @param lr (float, optional): learning rate (default: 1e-2)
-#' @param etas (Tuple[float, float], optional): pair of (etaminus, etaplis), that
+#' @param etas (Tuple(float, float), optional): pair of (etaminus, etaplis), that
 #' are multiplicative increase and decrease factors
 #' (default: (0.5, 1.2))
-#' @param step_sizes (vector[float, float], optional): a pair of minimal and
+#' @param step_sizes (vector(float, float), optional): a pair of minimal and
 #' maximal allowed step sizes (default: (1e-6, 50))
 #' 
-#' #' @examples
+#' @examples
 #' \dontrun{
 #' optimizer <- optim_rprop(model$parameters(), lr=0.1)
 #' optimizer$zero_grad()
 #' loss_fn(model(input), target)$backward()
 #' optimizer$step()
 #' }
+#' 
 #' @export
 optim_rprop <- function(params, lr=1e-2, etas=c(0.5, 1.2), step_sizes=c(1e-6, 50)){
   optim_Rprop$new(params, lr, etas, step_sizes)

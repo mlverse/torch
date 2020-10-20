@@ -7,7 +7,7 @@
 nn_utils_clip_grad_value_(parameters, clip_value)
 }
 \arguments{
-\item{parameters}{(Iterable\link{Tensor} or Tensor): an iterable of Tensors or a
+\item{parameters}{(Iterable(Tensor) or Tensor): an iterable of Tensors or a
 single Tensor that will have gradients normalized}
 
 \item{clip_value}{(float or int): maximum allowed value of the gradients.}

@@ -117,6 +117,7 @@ optim_RMSprop <- R6::R6Class(
 #' @param centered (bool, optional) : if `TRUE`, compute the centered RMSProp,
 #' the gradient is normalized by an estimation of its variance
 #' weight_decay (float, optional): weight decay (L2 penalty) (default: 0)
+#' @param weight_decay optional weight decay penalty. (default: 0)
 #' 
 #' @note 
 #' The centered version first appears in 

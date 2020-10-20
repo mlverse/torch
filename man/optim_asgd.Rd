@@ -31,6 +31,7 @@ parameter groups}
 Proposed in \href{http://dl.acm.org/citation.cfm?id=131098}{Acceleration of stochastic approximation by averaging}
 }
 \examples{
+if (torch_is_installed()) {
 \dontrun{
 optimizer <- optim_asgd(model$parameters(), lr=0.1)
 optimizer$zero_grad()
@@ -38,4 +39,5 @@ loss_fn(model(input), target)$backward()
 optimizer$step()
 }
 
+}
 }

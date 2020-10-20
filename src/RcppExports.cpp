@@ -23673,6 +23673,46 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_set_num_threads
+void cpp_set_num_threads(int n);
+RcppExport SEXP _torch_cpp_set_num_threads(SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    cpp_set_num_threads(n);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_set_num_interop_threads
+void cpp_set_num_interop_threads(int n);
+RcppExport SEXP _torch_cpp_set_num_interop_threads(SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    cpp_set_num_interop_threads(n);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_get_num_threads
+int cpp_get_num_threads();
+RcppExport SEXP _torch_cpp_get_num_threads() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_get_num_threads());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_get_num_interop_threads
+int cpp_get_num_interop_threads();
+RcppExport SEXP _torch_cpp_get_num_interop_threads() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_get_num_interop_threads());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor_list
 Rcpp::XPtr<XPtrTorchTensorList> cpp_torch_tensor_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
@@ -25606,6 +25646,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_tensor_is_contiguous", (DL_FUNC) &_torch_cpp_tensor_is_contiguous, 1},
     {"_torch_cpp_tensor_has_names", (DL_FUNC) &_torch_cpp_tensor_has_names, 1},
     {"_torch_cpp_tensor_names", (DL_FUNC) &_torch_cpp_tensor_names, 1},
+    {"_torch_cpp_set_num_threads", (DL_FUNC) &_torch_cpp_set_num_threads, 1},
+    {"_torch_cpp_set_num_interop_threads", (DL_FUNC) &_torch_cpp_set_num_interop_threads, 1},
+    {"_torch_cpp_get_num_threads", (DL_FUNC) &_torch_cpp_get_num_threads, 0},
+    {"_torch_cpp_get_num_interop_threads", (DL_FUNC) &_torch_cpp_get_num_interop_threads, 0},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
