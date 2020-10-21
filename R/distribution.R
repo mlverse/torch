@@ -7,24 +7,28 @@ Distribution <- R6::R6Class(
     
     has_rsample           = FALSE,
     has_enumerate_support = FALSE,
-    .validate_args        = FALSE,
+    `_validate_args`      = FALSE,
     support               = NULL,
     
     # Choose different structure?
     arg_constraints       = list(),
     
     initialize = function(batch_shape, event_shape, validate_args = NULL){
-      self$batch_shape <-  batch_shape
+      
+      self$batch_shape <- batch_shape
       self$event_shape <- event_shape
       
       if (!is.null(validate_args))
         self$validate_args <- validate_args
       
         for (p in seq_along(self$arg_constraints)) {
+          
           constraint <- arg_constraints[[p]]$constraint
+          param      <- arg_constraints[[p]]$param
+          
           if (constr_is_dependent(constraint))
             next
-          if (!(param %in% self$.) & inherits(getattr(type(self), param), "lazy_property"))
+          if (!(param %in% names(self)) && inherits(getattr(type(self), param), "lazy_property"))
             next # skip checking lazily-constructed args
           if (all(constr_check(getattr(self, param))))
             value_error("The parameter {param} has invalid values")
@@ -46,19 +50,29 @@ Distribution <- R6::R6Class(
     #' Generates a sample_shape shaped reparameterized sample or sample_shape
     #' shaped batch of reparameterized samples if the distribution parameters
     #' are batched.
-    rsample = function(sample_shape=torch.Size()) NULL,
+    #' TODO: torch_Size class?
+    #' In PyTorch: sample_shape=torch.Size()
+    rsample = function(sample_shape = NULL) {
+       not_implemented_error()
+    },
     
     #' Returns the log of the probability density/mass function evaluated at
     #' `value`.
-    log_prob = function(value) NULL,
+    log_prob = function(value) {
+      not_implemented_error()
+    },
     
     #'  Returns the cumulative density/mass function evaluated at
     #' `value`.
-    cdf = function(value) NULL,
+    cdf = function(value) {
+      not_implemented_error()
+    },
     
     #'  Returns the inverse cumulative density/mass function evaluated at
     #' `value`.
-    icdf = function(value) NULL,
+    icdf = function(value) {
+      not_implemented_error()
+    },
     
     #'  Returns tensor containing all values supported by a discrete
     #'  distribution. The result will enumerate over dimension 0, so the shape
@@ -68,29 +82,33 @@ Distribution <- R6::R6Class(
     #'  `[[0, 0], [1, 1], ...]`. With `expand=FALSE`, enumeration happens
     #'  along dim 0, but with the remaining batch dimensions being
     #'  singleton dimensions, `[[0], [1], ..`.
-    #'  To iterate over the full Cartesian product use
-    #'  `itertools.product(m.enumerate_support())`.
     #'  @param expand (bool): whether to expand the support over the
     #'  batch dims to match the distribution's `batch_shape`.
     #'  @return Tensor iterating over dimension 0.
-    enumerate_support = function(expand = TRUE) NULL,
+    enumerate_support = function(expand = TRUE) {
+      not_implemented_error()
+    },
     
     #'  Returns entropy of distribution, batched over batch_shape.
     #'  @return Tensor of shape batch_shape.
-    entropy = function() NULL,
+    entropy = function() {
+      not_implemented_error()
+    },
     
     #'  Returns perplexity of distribution, batched over batch_shape.
     #'  @param Tensor of shape batch_shape.
-    perplexity = function() NULL,
+    perplexity = function() {
+      not_implemented_error()
+    },
     
     #' Returns the size of the sample returned by the distribution, given
     #' a `sample_shape`. Note, that the batch and event shapes of a distribution
     #' instance are fixed at the time of construction. If this is empty, the
     #' returned shape is upcast to (1,).
-    #' @param sample_shape (torch.Size): the size of the sample to be drawn.
-    .extended_shape = function(sample_shape=torch.Size()){
-     if (!inherits(sample_shape, "torch_size"))
-       sample_shape <- torch_size(sample_shape) #!
+    #' @param sample_shape (torch_Size): the size of the sample to be drawn.
+    `_extended_shape` = function(sample_shape = NULL){
+     # if (!inherits(sample_shape, "torch_size"))
+     #   sample_shape <- torch_size(sample_shape) #!
      sample_shape + self$batch_shape + self$event_shape
     },
     
@@ -98,42 +116,68 @@ Distribution <- R6::R6Class(
     #' `cdf` and `icdf`. The rightmost dimensions of a value to be
     #' scored via these methods must agree with the distribution's batch
     #' and event shapes.
-    #' @param     value (Tensor): the tensor whose log probability is to be
+    #' @param value (Tensor): the tensor whose log probability is to be
     #' computed by the `log_prob` method.
-    .validate_sample = function(value){
+    `_validate_sample` = function(value){
+      
       if (!inherits(value, "torch_Tensor"))
         value_error('The value argument to log_prob must be a Tensor')
       
-      event_dim_start <-length(value.size()) - len(self._event_shape)
-      if (value$size()[event_dim_start, ] != self$.event_shape)
-        value_error('The right-most size of value must match event_shape: {} vs {}.'.
-                         format(value.size(), self._event_shape))
+      event_dim_start <-length(value$size()) - length(self$`_event_shape`)
       
-      actual_shape = value.size()
-      expected_shape = self._batch_shape + self._event_shape
-      for i, j in zip(reversed(actual_shape), reversed(expected_shape)):
-        if i != 1 and j != 1 and i != j:
-        value_error('Value is not broadcastable with batch_shape+event_shape: {actual_shape} vs {expected_shape}.')
+      if (value$size()[event_dim_start, ] != self$`_event_shape`)
+        value_error('The right-most size of value must match event_shape: 
+                    {value$size()} vs {self$`_event_shape`}.')
       
-      if not self.support.check(value).all():
+      actual_shape <- value$size()
+      expected_shape <- self$`_batch_shape` + self$`_event_shape`
+      
+      shape_length <- length(actual_shape)
+      
+      for (idx in shape_length:1) {
+        i <- actual_shape[idx]
+        j <- expected_shape[idx]
+        
+        if (i != 1 && j != 1 && i != j)
+          value_error('Value is not broadcastable with 
+                      batch_shape+event_shape: {actual_shape} vs {expected_shape}.')
+      }
+      
+      if (!self$support$check(value)$all())
         value_error('The value argument must be within the support')
     },
     
-    
-    .get_checked_instance = function(cls, .instance = NULL){
-      if (is.null(.instance) is None and type(self).__init__ != cls.__init__:
-        raise NotImplementedError("Subclass {} of {} that defines a custom __init__ method "
-                                  "must also define a custom .expand() method.".
-                                  format(self.__class__.__name__, cls.__name__))
-      return self.__new__(type(self)) if _instance is None else _instance
+    `_get_checked_instance` = function(cls, .instance = NULL){
+      if (is.null(.instance) && self$initialize == cls$initialize)
+        not_implemented_error("Subclass {class(self)} of {class(.instance)} ",
+                              "that defines a custom __init__ method ",
+                              "must also define a custom `_expand()` method.")
+      
+      # TODO: netter mechanism to get own instance's class
+      if (is.null(.instance))
+        return(eval(parse(text = glue("torch:::{class(self)}")))$new())
+      else
+        return(.instance)
     },
     
     print = function(){
-      param_names = [k for k, _ in self.arg_constraints.items() if k in self.__dict__]
-      args_string = ', '.join(['{}: {}'.format(p, self.__dict__[p]
-                                               if self.__dict__[p].numel() == 1
-                                               else self.__dict__[p].size()) for p in param_names])
-      return self.__class__.__name__ + '(' + args_string + ')'
+      
+      .fun <- 
+      
+      param_names <- Map(function (x) {
+        if (x %in% as.list(self))
+          x$print()
+        else 
+          NULL
+        }, self$arg_constraints)
+        
+      args_string <- ""
+      
+      # param_names = [k for k, _ in self.arg_constraints.items() if k in self.__dict__]
+      # args_string = ', '.join(['{}: {}'.format(p, self.__dict__[p]
+      #                                          if self.__dict__[p].numel() == 1
+      #                                          else self.__dict__[p].size()) for p in param_names])
+      glue("{class(self)} ({args_string})")
     }
   ),
   
@@ -141,13 +185,19 @@ Distribution <- R6::R6Class(
     
     #' Returns a `dist_constraint` object
     #' representing this distribution's support.
-    support = function() NULL,
+    support = function() {
+      not_implemented_error()
+    },
     
     #' Returns the mean on of the distribution
-    mean = function() NULL,
+    mean = function() {
+      not_implemented_error()
+    },
     
     #' Returns the variance of the distribution
-    variance = function() NULL,
+    variance = function() {
+      not_implemented_error()
+    },
     
     #' Returns the standard deviation of the distribution
     stddev = function() self$variance$sqrt()
