@@ -170,7 +170,8 @@
 
       
 
-      </header><script src="neural-networks_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="neural-networks_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="neural-networks_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="neural-networks_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Neural networks</h1>
@@ -263,8 +264,7 @@
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
 <span class="va">out</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; 0.01 *</span>
-<span class="co">#&gt;  1.3176 -10.2708 -7.8888 -0.9137  0.6734 -8.0962 -5.2187  4.6590 -7.5052  4.7372</span>
+<span class="co">#&gt; -0.1341 -0.0537  0.0563 -0.0661  0.1056  0.0392  0.0155 -0.0769  0.0881  0.0302</span>
 <span class="co">#&gt; [ CPUFloatType{1,10} ]</span></pre></div>
 <p>Zero the gradient buffers of all parameters and backprops with random gradients:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
@@ -315,7 +315,7 @@
 <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">target</span><span class="op">)</span>
 <span class="va">loss</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; 1.04295</span>
+<span class="co">#&gt; 0.781873</span>
 <span class="co">#&gt; [ CPUFloatType{} ]</span></pre></div>
 <p>Now, if you follow loss in the backward direction, using its <code>$grad_fn</code> attribute, you will see a graph of computations that looks like this:</p>
 <pre><code>input -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d
@@ -357,12 +357,12 @@
 <span class="va">net</span><span class="op">$</span><span class="va">conv1</span><span class="op">$</span><span class="va">bias</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 0.01 *</span>
-<span class="co">#&gt; -0.6551</span>
-<span class="co">#&gt;  1.4262</span>
-<span class="co">#&gt; -1.2642</span>
-<span class="co">#&gt;  0.4119</span>
-<span class="co">#&gt; -0.5109</span>
-<span class="co">#&gt; -1.0911</span>
+<span class="co">#&gt; -0.3140</span>
+<span class="co">#&gt;  1.7955</span>
+<span class="co">#&gt;  0.4806</span>
+<span class="co">#&gt;  0.9603</span>
+<span class="co">#&gt; -0.3889</span>
+<span class="co">#&gt;  1.5418</span>
 <span class="co">#&gt; [ CPUFloatType{6} ]</span></pre></div>
 <p>Now, we have seen how to use loss functions.</p>
 </div>
