@@ -1,5 +1,8 @@
 # torch (development version)
 
+- Fixed bug that would happen with functions that need to transform tensors from
+  0-based to 1-based in the GPU. (#317)
+
 # torch 0.1.1
 
 ## Bug fixes
