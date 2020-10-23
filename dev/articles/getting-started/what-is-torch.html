@@ -209,22 +209,22 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_empty.html">torch_empty</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.2612e-44  0.0000e+00  1.2951e+27</span>
-<span class="co">#&gt;  4.5916e-41  0.0000e+00  0.0000e+00</span>
-<span class="co">#&gt;  0.0000e+00  1.4013e-45  1.2952e+27</span>
-<span class="co">#&gt;  4.5916e-41  0.0000e+00  0.0000e+00</span>
-<span class="co">#&gt;  9.8091e-45  0.0000e+00  0.0000e+00</span>
+<span class="co">#&gt;  7.5425e+31  1.9411e+20  1.2689e+31</span>
+<span class="co">#&gt;  3.2745e-12  1.3563e-19  1.3563e-19</span>
+<span class="co">#&gt;  1.3563e-19  1.3563e-19  1.3563e-19</span>
+<span class="co">#&gt;  1.3563e-19  1.3563e-19  1.3563e-19</span>
+<span class="co">#&gt;  1.3563e-19  1.3563e-19  1.3563e-19</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></pre></div>
 <p>Construct a randomly initialized matrix:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.1367  0.8966  0.9654</span>
-<span class="co">#&gt;  0.2454  0.7640  0.7866</span>
-<span class="co">#&gt;  0.2340  0.3766  0.1270</span>
-<span class="co">#&gt;  0.0155  0.2290  0.4163</span>
-<span class="co">#&gt;  0.5382  0.0806  0.0776</span>
+<span class="co">#&gt;  0.7754  0.3337  0.6403</span>
+<span class="co">#&gt;  0.8670  0.7785  0.6032</span>
+<span class="co">#&gt;  0.5811  0.4720  0.3240</span>
+<span class="co">#&gt;  0.4408  0.9222  0.8820</span>
+<span class="co">#&gt;  0.5685  0.0706  0.5366</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></pre></div>
 <p>Construct a matrix filled zeros and of dtype long:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
@@ -250,8 +250,8 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn_like.html">torch_randn_like</a></span><span class="op">(</span><span class="va">x</span>, dtype <span class="op">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_float</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># override dtype!</span>
 <span class="va">x</span>                                               <span class="co"># result has the same size</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.5476</span>
-<span class="co">#&gt; -0.8187</span>
+<span class="co">#&gt;  0.9883</span>
+<span class="co">#&gt;  0.2076</span>
 <span class="co">#&gt; [ CPUFloatType{2} ]</span></pre></div>
 <p>Get its size:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
@@ -268,39 +268,39 @@
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span> <span class="op">+</span> <span class="va">y</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.1943  0.8394  1.0426</span>
-<span class="co">#&gt;  1.0570  1.1186  1.0292</span>
-<span class="co">#&gt;  0.0419  1.5101  1.6505</span>
-<span class="co">#&gt;  0.4703  0.4764  0.8347</span>
-<span class="co">#&gt;  1.1367  1.5152  0.9593</span>
+<span class="co">#&gt;  1.4513  0.6833  0.2435</span>
+<span class="co">#&gt;  1.6764  1.2090  0.6620</span>
+<span class="co">#&gt;  0.9940  1.0202  0.4381</span>
+<span class="co">#&gt;  1.0533  0.5381  0.7935</span>
+<span class="co">#&gt;  0.4977  1.1387  1.2543</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></pre></div>
 <p>Addition: syntax 2</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="fu"><a href="../../reference/torch_add.html">torch_add</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.1943  0.8394  1.0426</span>
-<span class="co">#&gt;  1.0570  1.1186  1.0292</span>
-<span class="co">#&gt;  0.0419  1.5101  1.6505</span>
-<span class="co">#&gt;  0.4703  0.4764  0.8347</span>
-<span class="co">#&gt;  1.1367  1.5152  0.9593</span>
+<span class="co">#&gt;  1.4513  0.6833  0.2435</span>
+<span class="co">#&gt;  1.6764  1.2090  0.6620</span>
+<span class="co">#&gt;  0.9940  1.0202  0.4381</span>
+<span class="co">#&gt;  1.0533  0.5381  0.7935</span>
+<span class="co">#&gt;  0.4977  1.1387  1.2543</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></pre></div>
 <p>Addition: in-place</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="va">y</span><span class="op">$</span><span class="fu">add_</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.1943  0.8394  1.0426</span>
-<span class="co">#&gt;  1.0570  1.1186  1.0292</span>
-<span class="co">#&gt;  0.0419  1.5101  1.6505</span>
-<span class="co">#&gt;  0.4703  0.4764  0.8347</span>
-<span class="co">#&gt;  1.1367  1.5152  0.9593</span>
+<span class="co">#&gt;  1.4513  0.6833  0.2435</span>
+<span class="co">#&gt;  1.6764  1.2090  0.6620</span>
+<span class="co">#&gt;  0.9940  1.0202  0.4381</span>
+<span class="co">#&gt;  1.0533  0.5381  0.7935</span>
+<span class="co">#&gt;  0.4977  1.1387  1.2543</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span>
 <span class="va">y</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.1943  0.8394  1.0426</span>
-<span class="co">#&gt;  1.0570  1.1186  1.0292</span>
-<span class="co">#&gt;  0.0419  1.5101  1.6505</span>
-<span class="co">#&gt;  0.4703  0.4764  0.8347</span>
-<span class="co">#&gt;  1.1367  1.5152  0.9593</span>
+<span class="co">#&gt;  1.4513  0.6833  0.2435</span>
+<span class="co">#&gt;  1.6764  1.2090  0.6620</span>
+<span class="co">#&gt;  0.9940  1.0202  0.4381</span>
+<span class="co">#&gt;  1.0533  0.5381  0.7935</span>
+<span class="co">#&gt;  0.4977  1.1387  1.2543</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></pre></div>
 <blockquote>
 <p>Note: Any operation that mutates a tensor in-place is post-fixed with an <code>_</code>. For example: <code>x$copy_(y)</code>, <code>x$t_()</code>, will change x.</p>
@@ -309,11 +309,11 @@
 <div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="va">x</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.4911</span>
-<span class="co">#&gt;  0.7957</span>
-<span class="co">#&gt;  0.0318</span>
-<span class="co">#&gt;  0.0268</span>
-<span class="co">#&gt;  0.2875</span>
+<span class="co">#&gt;  0.7035</span>
+<span class="co">#&gt;  0.7990</span>
+<span class="co">#&gt;  0.0076</span>
+<span class="co">#&gt;  0.4879</span>
+<span class="co">#&gt;  0.2675</span>
 <span class="co">#&gt; [ CPUFloatType{5} ]</span></pre></div>
 <p>Resizing: If you want to resize/reshape tensor, you can use <code>torch_view</code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
@@ -331,10 +331,10 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -1.0752</span>
+<span class="co">#&gt; -1.2004</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] -1.075205</span></pre></div>
+<span class="co">#&gt; [1] -1.20042</span></pre></div>
 <p>You can find a complete list of operations in the reference page.</p>
 </div>
 </div>
