@@ -2,6 +2,8 @@
 
 - Fixed bug that would happen with functions that need to transform tensors from
   0-based to 1-based in the GPU. (#317)
+- Fixed bug when trying to print the `grad_fn` of a Tensor that doesn't have one.
+  See (#321)
 
 # torch 0.1.1
 
