@@ -434,6 +434,16 @@ Rcpp::XPtr<XPtrTorch> cpp_tensor_grad_fn (Rcpp::XPtr<XPtrTorchTensor> self)
 }
 
 // [[Rcpp::export]]
+bool cpp_pointer_is_null (Rcpp::XPtr<XPtrTorchTensor> x)
+{
+  if (x->get() == NULL) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// [[Rcpp::export]]
 std::string cpp_autograd_node_name (Rcpp::XPtr<XPtrTorch> self)
 {
   return std::string(lantern_Node_name(self->get()));
