@@ -81,6 +81,10 @@ cpp_tensor_grad_fn <- function(self) {
     .Call('_torch_cpp_tensor_grad_fn', PACKAGE = 'torchpkg', self)
 }
 
+cpp_pointer_is_null <- function(x) {
+    .Call('_torch_cpp_pointer_is_null', PACKAGE = 'torchpkg', x)
+}
+
 cpp_autograd_node_name <- function(self) {
     .Call('_torch_cpp_autograd_node_name', PACKAGE = 'torchpkg', self)
 }

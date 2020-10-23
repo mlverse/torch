@@ -431,7 +431,12 @@ Node <- R6::R6Class(
 )
 
 Tensor$set("active", "grad_fn", function() {
-  Node$new(cpp_tensor_grad_fn(self$ptr))
+  o <- cpp_tensor_grad_fn(self$ptr)
+  
+  if (cpp_pointer_is_null(o))
+    return(NULL)
+  
+  Node$new(o)
 })
 
 #' Computes the sum of gradients of given tensors w.r.t. graph leaves.

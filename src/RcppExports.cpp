@@ -233,6 +233,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_pointer_is_null
+bool cpp_pointer_is_null(Rcpp::XPtr<XPtrTorchTensor> x);
+RcppExport SEXP _torch_cpp_pointer_is_null(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_pointer_is_null(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_autograd_node_name
 std::string cpp_autograd_node_name(Rcpp::XPtr<XPtrTorch> self);
 RcppExport SEXP _torch_cpp_autograd_node_name(SEXP selfSEXP) {
@@ -23884,6 +23895,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_autograd_context_mark_dirty", (DL_FUNC) &_torch_cpp_autograd_context_mark_dirty, 2},
     {"_torch_cpp_autograd_context_mark_non_differentiable", (DL_FUNC) &_torch_cpp_autograd_context_mark_non_differentiable, 2},
     {"_torch_cpp_tensor_grad_fn", (DL_FUNC) &_torch_cpp_tensor_grad_fn, 1},
+    {"_torch_cpp_pointer_is_null", (DL_FUNC) &_torch_cpp_pointer_is_null, 1},
     {"_torch_cpp_autograd_node_name", (DL_FUNC) &_torch_cpp_autograd_node_name, 1},
     {"_torch_cpp_autograd_node_next_edges", (DL_FUNC) &_torch_cpp_autograd_node_next_edges, 1},
     {"_torch_cpp_autograd_edge_function", (DL_FUNC) &_torch_cpp_autograd_edge_function, 1},
