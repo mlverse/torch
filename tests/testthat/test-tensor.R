@@ -309,10 +309,10 @@ test_that("tensor$bool works", {
   x <- torch_tensor(c(1,0,1))
   result <- x$bool()
   expected <- x$to(torch_bool())
-  expect_equal(result, expected)
+  expect_equal_to_tensor(result, expected)
 
   expect_silent(
     result <- x$bool(memory_format = torch_contiguous_format())
   )
-  expect_equal(result, expected)
+  expect_equal_to_tensor(result, expected)
 })
