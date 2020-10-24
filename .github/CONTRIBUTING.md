@@ -45,6 +45,43 @@ We have many open issues in the [github repo](https://github.com/mlverse/torch/i
 if there's one item that you want to work on, you can comment on it an ask for
 directions.
 
+### Requirements
+
+- R installation
+- R Tools for compilation (only on Windows)
+- The `devtools` package
+- CMake to compile lantern binaries 
+
+### Workflow
+
+We use `devtools` as the toolchain for development, but a few steps must be done before setiing up.
+
+The first time you clone the repository, you must run:
+
+```r
+source("tools/buildlantern.R")
+```
+
+This will compile Lantern binaries and download LibTorch and copy the binaries to `deps` folder
+in the working directory.
+
+This command must be run everytime you modify 
+lantern code. ie. code that lives in `lantern/src`.
+
+You can the run
+
+```r
+devtools::load_all()
+```
+
+To load torch and test interactively. Or 
+
+```r
+devtools::test()
+```
+
+To run the test suite.
+
 ## Documentation
 
 We use roxygen2 to generate the documentation. IN order to update the docs, edit
