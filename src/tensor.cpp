@@ -209,6 +209,10 @@ Rcpp::List cpp_as_array (Rcpp::XPtr<XPtrTorchTensor> x) {
   Rcpp::stop("dtype not handled");
 };
 
+// [[Rcpp::export]]
+int cpp_tensor_element_size (Rcpp::XPtr<XPtrTorchTensor> x) {
+  return lantern_Tensor_element_size(x->get());
+}
 
 // [[Rcpp::export]]
 std::vector<int> cpp_tensor_dim (Rcpp::XPtr<XPtrTorchTensor> x) {

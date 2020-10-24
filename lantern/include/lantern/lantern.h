@@ -173,6 +173,8 @@ extern "C"
   HOST_API bool * lantern_Tensor_data_ptr_bool(void *self) { bool * ret = _lantern_Tensor_data_ptr_bool(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API int64_t(LANTERN_PTR _lantern_Tensor_numel)(void *self);
   HOST_API int64_t lantern_Tensor_numel(void *self) { int64_t ret = _lantern_Tensor_numel(self); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API int64_t(LANTERN_PTR _lantern_Tensor_element_size)(void *self);
+  HOST_API int64_t lantern_Tensor_element_size(void *self) { int64_t ret = _lantern_Tensor_element_size(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API int64_t(LANTERN_PTR _lantern_Tensor_size)(void *self, int64_t i);
   HOST_API int64_t lantern_Tensor_size(void *self, int64_t i) { int64_t ret = _lantern_Tensor_size(self, i); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API int64_t(LANTERN_PTR _lantern_Tensor_ndimension)(void *self);
@@ -4143,6 +4145,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Tensor_data_ptr_int16_t);
   LOAD_SYMBOL(_lantern_Tensor_data_ptr_bool);
   LOAD_SYMBOL(_lantern_Tensor_numel);
+  LOAD_SYMBOL(_lantern_Tensor_element_size);
   LOAD_SYMBOL(_lantern_Tensor_ndimension);
   LOAD_SYMBOL(_lantern_Tensor_size);
   LOAD_SYMBOL(_lantern_Tensor_dtype);
