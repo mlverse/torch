@@ -5,6 +5,7 @@
 - Fixed bug when trying to print the `grad_fn` of a Tensor that doesn't have one.
   See (#321)
 - Added `$element_size()` method (@dirkschumacher #322)
+- Added `$bool()` method (@dirkschumacher #323)
 
 # torch 0.1.1
 
