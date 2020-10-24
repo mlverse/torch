@@ -82,6 +82,9 @@ Tensor <- R7Class(
       
       do.call(private$`_to`, args)
     },
+    bool = function(memory_format = torch_preserve_format()) {
+      self$to(torch_bool(), memory_format = memory_format)
+    },
     cuda = function(device=NULL, non_blocking=FALSE, memory_format=torch_preserve_format()) {
       
       if (is.null(device))
