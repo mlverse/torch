@@ -290,7 +290,14 @@ test_that("element_size works", {
     torch_qint32()
   )
   for (type in types) {
-    x <- torch_tensor(1, dtype = type)
+    
+    if (type == torch_quint8() || type == torch_qint8() || type == torch_qint32()) {
+      x <- torch_tensor(1, dtype = torch_float())
+      x <- torch_quantize_per_tensor(x, scale = 0.1, zero_point = 10, dtype = type)
+    } else {
+      x <- torch_tensor(1, dtype = type)  
+    }
+  
     result <- x$element_size()
     expect_true(is.integer(result))
     expect_true(result > 0L)
