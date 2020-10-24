@@ -263,4 +263,44 @@ test_that("max and min", {
     class = "value_error"
   )
   
-}) 
+})
+
+test_that("element_size works", {
+  x <- torch_tensor(1, dtype = torch_int8())
+  result <- x$element_size()
+  expect_equal(result, 1L)
+  types <- list(
+    torch_float32(),
+    torch_float(),
+    torch_float64(),
+    torch_double(),
+    torch_float16(),
+    torch_half(),
+    torch_uint8(),
+    torch_int8(),
+    torch_int16(),
+    torch_short(),
+    torch_int32(),
+    torch_int(),
+    torch_int64(),
+    torch_long(),
+    torch_bool(),
+    torch_quint8(),
+    torch_qint8(),
+    torch_qint32()
+  )
+  for (type in types) {
+    
+    if (type == torch_quint8() || type == torch_qint8() || type == torch_qint32()) {
+      x <- torch_tensor(1, dtype = torch_float())
+      x <- torch_quantize_per_tensor(x, scale = 0.1, zero_point = 10, dtype = type)
+    } else {
+      x <- torch_tensor(1, dtype = type)  
+    }
+  
+    result <- x$element_size()
+    expect_true(is.integer(result))
+    expect_true(result > 0L)
+    expect_true(length(result) == 1)
+  }
+})

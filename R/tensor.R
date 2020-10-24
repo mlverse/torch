@@ -56,6 +56,9 @@ Tensor <- R7Class(
       
       x[dim]
     },
+    element_size = function() {
+      cpp_tensor_element_size(self$ptr)
+    },
     numel = function() {
       cpp_tensor_numel(self$ptr)
     },

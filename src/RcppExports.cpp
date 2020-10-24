@@ -23607,6 +23607,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_tensor_element_size
+int cpp_tensor_element_size(Rcpp::XPtr<XPtrTorchTensor> x);
+RcppExport SEXP _torch_cpp_tensor_element_size(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_element_size(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_tensor_dim
 std::vector<int> cpp_tensor_dim(Rcpp::XPtr<XPtrTorchTensor> x);
 RcppExport SEXP _torch_cpp_tensor_dim(SEXP xSEXP) {
@@ -25651,6 +25662,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_tensor_dtype", (DL_FUNC) &_torch_cpp_torch_tensor_dtype, 1},
     {"_torch_cpp_torch_tensor", (DL_FUNC) &_torch_cpp_torch_tensor, 5},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
+    {"_torch_cpp_tensor_element_size", (DL_FUNC) &_torch_cpp_tensor_element_size, 1},
     {"_torch_cpp_tensor_dim", (DL_FUNC) &_torch_cpp_tensor_dim, 1},
     {"_torch_cpp_tensor_numel", (DL_FUNC) &_torch_cpp_tensor_numel, 1},
     {"_torch_cpp_tensor_device", (DL_FUNC) &_torch_cpp_tensor_device, 1},
