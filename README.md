@@ -78,4 +78,6 @@ b$grad
 ## Contributing
 
 No matter your current skills it’s possible to contribute to `torch`
-development. See the contributing guide for more information.
+development. See the [contributing
+guide](https://github.com/mlverse/torch/blob/master/.github/CONTRIBUTING.md)
+for more information.
