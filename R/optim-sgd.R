@@ -29,58 +29,36 @@ optim_SGD <- R6::R6Class(
     },
     
     step = function(closure = NULL) {
-      with_no_grad({
+      private$step_helper(closure, function(group, param, g, p) {
+        weight_decay <- group$weight_decay
+        momentum <- group$momentum
+        dampening <- group$dampening
+        nesterov <- group$nesterov
         
-        loss <- NULL
-        if (!is.null(closure)) {
-          with_enable_grad({
-            loss <- closure()
-          })
+        d_p <- param$grad
+        
+        if (weight_decay != 0) {
+          d_p <- d_p$add(p, alpha = weight_decay)
         }
-        
-        for (g in seq_along(self$param_groups)) {
-          
-          group <- self$param_groups[[g]]
-          
-          weight_decay <- group$weight_decay
-          momentum <- group$momentum
-          dampening <- group$dampening
-          nesterov <- group$nesterov
-          
-          for (p in seq_along(group$params)) {
-            
-            param <- group$params[[p]]
-            
-            if (is.null(param$grad) || is_undefined_tensor(param$grad))
-              next
-            
-            d_p <- param$grad
-            
-            if (weight_decay != 0) {
-              d_p <- d_p$add(p, alpha = weight_decay)
-            }
-            if (momentum != 0) {
-              param_state <- attr(param, "state")
-              if (is.null(param_state) || !"momentum_buffer" %in% names(param_state)) {
-                buf <- torch_clone(d_p)$detach()
-                attr(self$param_groups[[g]]$params[[p]], "state") <- list(momentum_buffer = buf)
-              } else {
-                buf <- param_state$momentum_buffer
-                buf$mul_(momentum)$add_(d_p, alpha=1 - dampening)
-              }
-              if (nesterov) {
-                d_p <- d_p$add(buf, alpha = momentum)
-              }
-              else {
-                d_p <- buf
-              }
-            }
-            
-            param$add_(d_p, alpha = -group$lr)
+        if (momentum != 0) {
+          param_state <- attr(param, "state")
+          if (is.null(param_state) || !"momentum_buffer" %in% names(param_state)) {
+            buf <- torch_clone(d_p)$detach()
+            attr(self$param_groups[[g]]$params[[p]], "state") <- list(momentum_buffer = buf)
+          } else {
+            buf <- param_state$momentum_buffer
+            buf$mul_(momentum)$add_(d_p, alpha=1 - dampening)
+          }
+          if (nesterov) {
+            d_p <- d_p$add(buf, alpha = momentum)
+          }
+          else {
+            d_p <- buf
           }
         }
+        
+        param$add_(d_p, alpha = -group$lr)
       })
-      loss
     }
   )
 )

@@ -16,67 +16,46 @@ optim_Rprop <- R6::R6Class(
     }, 
     
     step = function(closure = NULL) {
-      with_no_grad({
+      private$step_helper(closure, function(group, param, g, p) {
         
-        loss <- NULL
-        if (!is.null(closure)) {
-          with_enable_grad({
-            loss <- closure()
-          })
+        grad  <- param$grad
+        
+        if (length(param$state) == 0) {
+          param$state <- list()
+          param$state[["step"]] <- 0
+          param$state[["prev"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+          new_tensor <- torch_zeros_like(grad, memory_format=torch_preserve_format())
+          param$state[["step_size"]] <-  new_tensor$resize_as_(grad)$fill_(group[["lr"]])
         }
         
-        for (g in seq_along(self$param_groups)) {
-          
-          group <- self$param_groups[[g]]
-          
-          for (p in seq_along(group$params)) {
-            
-            param <- group$params[[p]]
-            
-            if (is.null(param$grad) || is_undefined_tensor(param$grad))
-              next
-            
-            grad  <- param$grad
-
-            if (length(param$state) == 0) {
-              param$state <- list()
-              param$state[["step"]] <- 0
-              param$state[["prev"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-              new_tensor <- torch_zeros_like(grad, memory_format=torch_preserve_format())
-              param$state[["step_size"]] <-  new_tensor$resize_as_(grad)$fill_(group[["lr"]])
-            }
-            
-            etaminus <-  group[["etas"]][[1]]
-            etaplus  <-  group[["etas"]][[2]]
-
-            step_size_min <- group[["step_sizes"]][[1]]
-            step_size_max <- group[["step_sizes"]][[2]]
-
-            step_size <- param$state[["step_size"]]
-            
-            param$state[['step']] <- param$state[['step']] + 1
-
-            sign <- grad$mul(param$state[["prev"]])$sign()
-            sign[sign$gt(0)] <- etaplus
-            sign[sign$lt(0)] <- etaminus
-            sign[sign$eq(0)] <- 1
-            
-            # update stepsizes with step size updates
-            step_size$mul_(sign)$clamp_(step_size_min, step_size_max)
-            
-            # for dir<0, dfdx=0
-            # for dir>=0 dfdx=dfdx
-            grad <- grad$clone(memory_format=torch_preserve_format())
-            grad[sign$eq(etaminus)] <- 0
-            
-            # update parameters
-            param$addcmul_(grad$sign(), step_size, value=-1)
-            
-            param$state[["prev"]]$copy_(grad)
-          }
-        }
+        etaminus <-  group[["etas"]][[1]]
+        etaplus  <-  group[["etas"]][[2]]
+        
+        step_size_min <- group[["step_sizes"]][[1]]
+        step_size_max <- group[["step_sizes"]][[2]]
+        
+        step_size <- param$state[["step_size"]]
+        
+        param$state[['step']] <- param$state[['step']] + 1
+        
+        sign <- grad$mul(param$state[["prev"]])$sign()
+        sign[sign$gt(0)] <- etaplus
+        sign[sign$lt(0)] <- etaminus
+        sign[sign$eq(0)] <- 1
+        
+        # update stepsizes with step size updates
+        step_size$mul_(sign)$clamp_(step_size_min, step_size_max)
+        
+        # for dir<0, dfdx=0
+        # for dir>=0 dfdx=dfdx
+        grad <- grad$clone(memory_format=torch_preserve_format())
+        grad[sign$eq(etaminus)] <- 0
+        
+        # update parameters
+        param$addcmul_(grad$sign(), step_size, value=-1)
+        
+        param$state[["prev"]]$copy_(grad)
       })
-      loss
     }
   )
 )

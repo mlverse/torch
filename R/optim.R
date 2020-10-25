@@ -87,5 +87,32 @@ Optimizer <- R6::R6Class(
         }
       }
     }
+  ),
+  private = list(
+    step_helper = function(closure, loop_fun) {
+      # a general template for most of the optimizer step function
+      with_no_grad({
+        
+        loss <- NULL
+        if (!is.null(closure)) {
+          with_enable_grad({
+            loss <- closure()
+          })
+        }
+        
+        for (g in seq_along(self$param_groups)) {
+          group <- self$param_groups[[g]]
+          for (p in seq_along(group$params)) {
+            param <- group$params[[p]]
+            
+            if (is.null(param$grad) || is_undefined_tensor(param$grad))
+              next
+            
+            loop_fun(group, param, g, p)
+          }
+        }
+        loss
+      })
+    }
   )
 )

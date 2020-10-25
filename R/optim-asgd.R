@@ -23,61 +23,38 @@ optim_ASGD <- R6::R6Class(
     },
     
     step = function(closure = NULL) {
-      with_no_grad({
+      private$step_helper(closure, function(group, param, g, p) {
+        grad <- param$grad
         
-        loss <- NULL
-        if (!is.null(closure)) {
-          with_enable_grad({
-            loss <- closure()
-          })
+        if (length(param$state) == 0) {
+          param$state[["step"]] <- 0
+          param$state[["eta"]] <- group[["lr"]]
+          param$state[["mu"]] <- 1
+          param$state[["ax"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
         }
         
-        for (g in seq_along(self$param_groups)) {
-          
-          group <- self$param_groups[[g]]
-          weight_decay <- group$weight_decay
-
-          for (p in seq_along(group$params)) {
-            
-            param <- group$params[[p]]
-            
-            if (is.null(param$grad) || is_undefined_tensor(param$grad))
-              next
-            
-            grad <- param$grad
-            
-            if (length(param$state) == 0) {
-              param$state[["step"]] <- 0
-              param$state[["eta"]] <- group[["lr"]]
-              param$state[["mu"]] <- 1
-              param$state[["ax"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-            }
-            
-            param$state[["step"]] <- param$state[["step"]] + 1
-            
-            if (group[["weight_decay"]] != 0)
-              grad <- grad$add(param, alpha=group$weight_decay)
-            
-            # decay term
-            param$mul_(1 - group$lambda * param$state$eta)
-            
-            # update parameter
-            param$add_(grad, alpha=-param$state$eta)
-            
-            # averaging
-            if (param$state[["mu"]] != 1)
-              param$state[["mu"]]$add_(param$sub(param$state[["ax"]])$mul(param$state[["mu"]]))
-            else
-              param$state[["ax"]]$copy_(param)
-            
-            # update eta and mu
-            denominator <- (1 + group[["lambda"]] * group[["lr"]] * param$state[["step"]]) ^ group[["alpha"]]
-            param$state[["eta"]] <- group[["lr"]] / denominator
-            param$state[["mu"]] <- 1 / max(1, param$state[["step"]]- group[["t0"]])
-          }
-        }
+        param$state[["step"]] <- param$state[["step"]] + 1
+        
+        if (group[["weight_decay"]] != 0)
+          grad <- grad$add(param, alpha=group$weight_decay)
+        
+        # decay term
+        param$mul_(1 - group$lambda * param$state$eta)
+        
+        # update parameter
+        param$add_(grad, alpha=-param$state$eta)
+        
+        # averaging
+        if (param$state[["mu"]] != 1)
+          param$state[["mu"]]$add_(param$sub(param$state[["ax"]])$mul(param$state[["mu"]]))
+        else
+          param$state[["ax"]]$copy_(param)
+        
+        # update eta and mu
+        denominator <- (1 + group[["lambda"]] * group[["lr"]] * param$state[["step"]]) ^ group[["alpha"]]
+        param$state[["eta"]] <- group[["lr"]] / denominator
+        param$state[["mu"]] <- 1 / max(1, param$state[["step"]]- group[["t0"]])
       })
-      loss
     }
   )
 )
