@@ -30,7 +30,8 @@ Imports:
     utils,
     stats,
     bit64,
-    magrittr
+    magrittr,
+    tools
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
