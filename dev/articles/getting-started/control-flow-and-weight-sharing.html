@@ -255,7 +255,7 @@
 <span class="co"># optimization algorithms. The first argument to the Adam constructor tells the</span>
 <span class="co"># optimizer which Tensors it should update.</span>
 <span class="va">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">1e-4</span>
-<span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr<span class="op">=</span><span class="va">learning_rate</span>, momentum <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>
+<span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/optim_adam.html">optim_adam</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr<span class="op">=</span><span class="va">learning_rate</span><span class="op">)</span>
 
 <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
    <span class="co"># Forward pass: compute predicted y by passing x to the model. Module objects</span>
@@ -285,12 +285,12 @@
    <span class="co"># parameters</span>
    <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Step: 1 : 1.120834 </span>
-<span class="co">#&gt; Step: 100 : 1.109175 </span>
-<span class="co">#&gt; Step: 200 : 1.108846 </span>
-<span class="co">#&gt; Step: 300 : 1.107185 </span>
-<span class="co">#&gt; Step: 400 : 1.101382 </span>
-<span class="co">#&gt; Step: 500 : 1.098824</span></pre></div>
+<span class="co">#&gt; Step: 1 : 1.0217 </span>
+<span class="co">#&gt; Step: 100 : 0.9522803 </span>
+<span class="co">#&gt; Step: 200 : 0.6496362 </span>
+<span class="co">#&gt; Step: 300 : 0.344487 </span>
+<span class="co">#&gt; Step: 400 : 0.1696536 </span>
+<span class="co">#&gt; Step: 500 : 0.03185715</span></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
