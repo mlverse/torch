@@ -29,76 +29,54 @@ optim_RMSprop <- R6::R6Class(
     },
     
     step = function(closure = NULL){
-      with_no_grad({
+      private$step_helper(closure, function(group, param, g, p) {
+        grad <- param$grad
         
-        loss <- NULL
-        if (!is.null(closure)) {
-          with_enable_grad({
-            loss <- closure()
-          })
+        # if (grad$is_sparse) {
+        #   runtime_error("RMSprop does not support sparse gradients")
+        # }
+        
+        # state initialization
+        if (length(param$state) == 0) {
+          param$state <- list()
+          param$state[["step"]] <- 0
+          param$state[["square_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+          
+          if (group$momentum > 0)
+            param$state[["momentum_buffer"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+          
+          if (group$centered > 0)
+            param$state[["grad_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+          
         }
         
-        for (g in seq_along(self$param_groups)) {
-          
-          group <- self$param_groups[[g]]
-          
-          for (p in seq_along(group$params)) {
-            
-            param <- group$params[[p]]
-            
-            if (is.null(param$grad) || is_undefined_tensor(param$grad))
-              next
-            
-            grad <- param$grad
-            
-            # if (grad$is_sparse) {
-            #   runtime_error("RMSprop does not support sparse gradients")
-            # }
-            
-            # state initialization
-            if (length(param$state) == 0) {
-              param$state <- list()
-              param$state[["step"]] <- 0
-              param$state[["square_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-              
-              if (group$momentum > 0)
-                param$state[["momentum_buffer"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-              
-              if (group$centered > 0)
-                param$state[["grad_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-            
-            }
-            
-            square_avg <- param$state[["square_avg"]]
-            alpha <- group[["alpha"]]
-            
-            param$state[["step"]] <- param$state[["step"]] + 1
-            
-            
-            if (group[["weight_decay"]] != 0)
-              grad <- grad$add(p, alpha=group[["weight_decay"]])
-            
-            square_avg$mul_(alpha)$addcmul_(grad, grad, value=1 - alpha)
-            
-            if (group[["centered"]]) {
-              grad_avg <- param$state[["grad_avg"]]
-              grad_avg$mul_(alpha)$add_(grad, alpha=1 - alpha)
-              avg <- square_avg$addcmul(grad_avg, grad_avg, value=-1)$sqrt_()$add_(group[["eps"]])
-            } else {
-              avg <-  square_avg$sqrt()$add_(group[["eps"]])
-            }
-            
-            if (group[["momentum"]] > 0) {
-              buf <- param$state[["momentum_buffer"]]
-              buf$mul_(group[["momentum"]])$addcdiv_(grad, avg)
-              param$add_(buf, alpha=-group[["lr"]])
-            } else {
-              param$addcdiv_(grad, avg, value=-group[["lr"]])
-            }
-          }
+        square_avg <- param$state[["square_avg"]]
+        alpha <- group[["alpha"]]
+        
+        param$state[["step"]] <- param$state[["step"]] + 1
+        
+        
+        if (group[["weight_decay"]] != 0)
+          grad <- grad$add(p, alpha=group[["weight_decay"]])
+        
+        square_avg$mul_(alpha)$addcmul_(grad, grad, value=1 - alpha)
+        
+        if (group[["centered"]]) {
+          grad_avg <- param$state[["grad_avg"]]
+          grad_avg$mul_(alpha)$add_(grad, alpha=1 - alpha)
+          avg <- square_avg$addcmul(grad_avg, grad_avg, value=-1)$sqrt_()$add_(group[["eps"]])
+        } else {
+          avg <-  square_avg$sqrt()$add_(group[["eps"]])
+        }
+        
+        if (group[["momentum"]] > 0) {
+          buf <- param$state[["momentum_buffer"]]
+          buf$mul_(group[["momentum"]])$addcdiv_(grad, avg)
+          param$add_(buf, alpha=-group[["lr"]])
+        } else {
+          param$addcdiv_(grad, avg, value=-group[["lr"]])
         }
       })
-      loss
     }
   )
 )
