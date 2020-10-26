@@ -6,6 +6,7 @@
   See (#321)
 - Added `$element_size()` method (@dirkschumacher #322)
 - Added `$bool()` method (@dirkschumacher #323)
+- We now check the MD5 hashes of downloaded LibTorch binaries. (@dirkschumacher #325)
 
 # torch 0.1.1
 
