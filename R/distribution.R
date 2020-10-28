@@ -28,9 +28,9 @@ Distribution <- R6::R6Class(
           
           if (constr_is_dependent(constraint))
             next
-          if (!(param %in% names(self)) && inherits(getattr(type(self), param), "lazy_property"))
+          if (!(param %in% as.list(self)) && inherits(param, "lazy_property"))
             next # skip checking lazily-constructed args
-          if (all(constr_check(getattr(self, param))))
+          if (all(constr_check(param)))
             value_error("The parameter {param} has invalid values")
         }
     },
@@ -153,7 +153,7 @@ Distribution <- R6::R6Class(
                               "that defines a custom __init__ method ",
                               "must also define a custom `_expand()` method.")
       
-      # TODO: netter mechanism to get own instance's class
+      # TODO: better mechanism to get own instance's class
       if (is.null(.instance))
         return(eval(parse(text = glue("torch:::{class(self)}")))$new())
       else
@@ -162,21 +162,17 @@ Distribution <- R6::R6Class(
     
     print = function(){
       
-      .fun <- 
-      
       param_names <- Map(function (x) {
         if (x %in% as.list(self))
-          x$print()
+          as.character(x)
         else 
           NULL
         }, self$arg_constraints)
         
-      args_string <- ""
+      args_string <- paste0(
+        param_names, collapse = ","
+      )
       
-      # param_names = [k for k, _ in self.arg_constraints.items() if k in self.__dict__]
-      # args_string = ', '.join(['{}: {}'.format(p, self.__dict__[p]
-      #                                          if self.__dict__[p].numel() == 1
-      #                                          else self.__dict__[p].size()) for p in param_names])
       glue("{class(self)} ({args_string})")
     }
   ),
@@ -200,6 +196,8 @@ Distribution <- R6::R6Class(
     },
     
     #' Returns the standard deviation of the distribution
-    stddev = function() self$variance$sqrt()
+    stddev = function() {
+      self$variance$sqrt()
+    }
   )
 )
