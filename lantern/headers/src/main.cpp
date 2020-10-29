@@ -84,6 +84,7 @@ std::string addNamespace(std::string name)
     objects.push_back("Storage");
     objects.push_back("Device");
     objects.push_back("QScheme");
+    objects.push_back("ArrayRef");
 
     for (auto iter = objects.begin(); iter != objects.end(); iter++)
     {
@@ -124,6 +125,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             type = "std::vector<int64_t>";
         }
+        else if (type == "ArrayRef<double>")
+        {
+          type = "std::vector<double>";
+        }
         else if (type == "TensorList")
         {
             type = "std::vector<torch::Tensor>";
@@ -140,7 +145,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         // add optional call if required
         std::string dtype = node[idx]["type"].as<std::string>();
         std::string call = node[idx]["name"].as<std::string>();
-        if ((dtype.find("c10::optional") != std::string::npos) & (type != "std::vector<torch::Dimname>"))
+        if ((dtype.find("c10::optional") != std::string::npos) & 
+            (type != "std::vector<torch::Dimname>") &
+            (type != "std::vector<int64_t>") &
+            (type != "std::vector<double>"))
         {
             if (type != "double")
             {
