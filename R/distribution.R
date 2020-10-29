@@ -7,7 +7,7 @@ Distribution <- R6::R6Class(
     
     has_rsample           = FALSE,
     has_enumerate_support = FALSE,
-    `_validate_args`      = FALSE,
+    .validate_args      = FALSE,
     support               = NULL,
     
     # Choose different structure?
@@ -15,11 +15,11 @@ Distribution <- R6::R6Class(
     
     initialize = function(batch_shape, event_shape, validate_args = NULL){
       
-      self$batch_shape <- batch_shape
-      self$event_shape <- event_shape
+      self$.batch_shape <- batch_shape
+      self$.event_shape <- event_shape
       
       if (!is.null(validate_args))
-        self$validate_args <- validate_args
+        self$.validate_args <- validate_args
       
         for (p in seq_along(self$arg_constraints)) {
           
@@ -106,7 +106,7 @@ Distribution <- R6::R6Class(
     #' instance are fixed at the time of construction. If this is empty, the
     #' returned shape is upcast to (1,).
     #' @param sample_shape (torch_Size): the size of the sample to be drawn.
-    `_extended_shape` = function(sample_shape = NULL){
+    .extended_shape = function(sample_shape = NULL){
      # if (!inherits(sample_shape, "torch_size"))
      #   sample_shape <- torch_size(sample_shape) #!
      sample_shape + self$batch_shape + self$event_shape
@@ -118,19 +118,19 @@ Distribution <- R6::R6Class(
     #' and event shapes.
     #' @param value (Tensor): the tensor whose log probability is to be
     #' computed by the `log_prob` method.
-    `_validate_sample` = function(value){
+    .validate_sample = function(value){
       
       if (!inherits(value, "torch_Tensor"))
         value_error('The value argument to log_prob must be a Tensor')
       
-      event_dim_start <-length(value$size()) - length(self$`_event_shape`)
+      event_dim_start <-length(value$size()) - length(self$.event_shape)
       
-      if (value$size()[event_dim_start, ] != self$`_event_shape`)
+      if (value$size()[event_dim_start, ] != self$.event_shape)
         value_error('The right-most size of value must match event_shape: 
-                    {value$size()} vs {self$`_event_shape`}.')
+                    {value$size()} vs {self$.event_shape}.')
       
       actual_shape <- value$size()
-      expected_shape <- self$`_batch_shape` + self$`_event_shape`
+      expected_shape <- self$.batch_shape + self$.event_shape
       
       shape_length <- length(actual_shape)
       
@@ -147,10 +147,10 @@ Distribution <- R6::R6Class(
         value_error('The value argument must be within the support')
     },
     
-    `_get_checked_instance` = function(cls, .instance = NULL){
+    .get_checked_instance = function(cls, .instance = NULL){
       if (is.null(.instance) && self$initialize == cls$initialize)
         not_implemented_error("Subclass {class(self)} of {class(.instance)} ",
-                              "that defines a custom __init__ method ",
+                              "that defines a custom initialize() method ",
                               "must also define a custom `_expand()` method.")
       
       # TODO: better mechanism to get own instance's class
