@@ -41,7 +41,7 @@ Distribution <- R6::R6Class(
     
     #' Generates a sample_shape shaped sample or sample_shape shaped batch of
     #' samples if the distribution parameters are batched.
-    sample = function(sample_shape=torch.Size()){
+    sample = function(sample_shape=NULL){
       with_no_grad({
         self$rsample(sample_shape)
       })
@@ -50,7 +50,6 @@ Distribution <- R6::R6Class(
     #' Generates a sample_shape shaped reparameterized sample or sample_shape
     #' shaped batch of reparameterized samples if the distribution parameters
     #' are batched.
-    #' TODO: torch_Size class?
     #' In PyTorch: sample_shape=torch.Size()
     rsample = function(sample_shape = NULL) {
        not_implemented_error()
