@@ -26,17 +26,17 @@ Distribution <- R6::R6Class(
           constraint <- arg_constraints[[p]]$constraint
           param      <- arg_constraints[[p]]$param
           
-          if (constr_is_dependent(constraint))
+          if (constraints_is_dependent(constraint))
             next
           if (!(param %in% as.list(self)) && inherits(param, "lazy_property"))
             next # skip checking lazily-constructed args
-          if (all(constr_check(param)))
+          if (all(constraints_check(param)))
             value_error("The parameter {param} has invalid values")
         }
     },
     
     expand = function(batch_shape, .instance = NULL){
-      stop("torch_Distribution is an abstract class.")
+      not_implemented_error()
     },
     
     #' Generates a sample_shape shaped sample or sample_shape shaped batch of
