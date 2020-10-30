@@ -11,7 +11,7 @@
 void *_lantern_Generator()
 {
   LANTERN_FUNCTION_START
-  std::shared_ptr<torch::Generator> out = std::make_shared<at::CPUGenerator>();
+  std::shared_ptr<torch::Generator> out = std::make_shared<torch::Generator>();
   return (void *)new LanternObject<std::shared_ptr<torch::Generator>>(out);
   LANTERN_FUNCTION_END
 }
