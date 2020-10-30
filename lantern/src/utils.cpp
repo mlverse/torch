@@ -16,6 +16,14 @@ void *_lantern_vector_int64_t(int64_t *x, size_t x_size)
   LANTERN_FUNCTION_END
 }
 
+void *_lantern_vector_double(double *x, size_t x_size)
+{
+  LANTERN_FUNCTION_START
+  auto out = std::vector<double>(x, x + x_size);
+  return (void *)new LanternObject<std::vector<double>>(out);
+  LANTERN_FUNCTION_END
+}
+
 void *_lantern_IntArrayRef(int64_t *x, size_t x_size)
 {
   LANTERN_FUNCTION_START
@@ -156,3 +164,4 @@ void * _lantern_string_new (const char * value)
   return (void *)new LanternObject<std::string>(std::string(value));
   LANTERN_FUNCTION_END
 }
+

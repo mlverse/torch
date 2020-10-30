@@ -141,6 +141,8 @@ extern "C"
   HOST_API const char * lantern_Dtype_type(void *dtype) { const char * ret = _lantern_Dtype_type(dtype); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_vector_int64_t)(int64_t *x, size_t x_size);
   HOST_API void * lantern_vector_int64_t(int64_t *x, size_t x_size) { void * ret = _lantern_vector_int64_t(x, x_size); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_vector_double)(double *x, size_t x_size);
+  HOST_API void * lantern_vector_double(double *x, size_t x_size) { void * ret = _lantern_vector_double(x, x_size); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_IntArrayRef)(int64_t *x, size_t x_size);
   HOST_API void * lantern_IntArrayRef(int64_t *x, size_t x_size) { void * ret = _lantern_IntArrayRef(x, x_size); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_MemoryFormat_Contiguous)();
@@ -4961,6 +4963,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Dtype_bool);
   LOAD_SYMBOL(_lantern_Dtype_type);
   LOAD_SYMBOL(_lantern_vector_int64_t);
+  LOAD_SYMBOL(_lantern_vector_double);
   LOAD_SYMBOL(_lantern_IntArrayRef);
   LOAD_SYMBOL(_lantern_MemoryFormat_Contiguous);
   LOAD_SYMBOL(_lantern_MemoryFormat_Preserve);
