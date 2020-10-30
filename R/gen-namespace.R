@@ -16357,8 +16357,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_quantize_per_tensor
-torch_quantize_per_tensor <- function(self, tensors, scale, scales, zero_point, zero_points, dtype) {
+#' @rdname .torch_quantize_per_tensor
+.torch_quantize_per_tensor <- function(self, tensors, scale, scales, zero_point, zero_points, dtype) {
   args <- mget(x = c("self", "tensors", "scale", "scales", "zero_point", "zero_points", "dtype"))
 expected_types <- list(self = "Tensor", tensors = "TensorList", scale = "double", 
     scales = "Tensor", zero_point = "int64_t", zero_points = "Tensor", 

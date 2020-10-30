@@ -223,3 +223,27 @@ torch_narrow <- function(self, dim, start, length) {
   .torch_narrow(self, dim, start, length)
 }
 
+#' @rdname torch_quantize_per_tensor
+torch_quantize_per_tensor <- function(self, scale, zero_point, dtype) {
+  args <- list()
+  
+  if (is.list(self))
+    args$tensors <- self
+  else
+    args$self <- self
+  
+  if (is.list(scale))
+    args$scales <- scale
+  else
+    args$scale <- scale
+  
+  if (is.list(zero_point))
+    args$zero_points <- zero_point
+  else
+    args$zero_point <- zero_point
+  
+  args$dtype <- dtype
+  
+  do.call(.torch_quantize_per_tensor, args)
+}
+
