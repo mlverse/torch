@@ -7,6 +7,8 @@
 - Added `$element_size()` method (@dirkschumacher #322)
 - Added `$bool()` method (@dirkschumacher #323)
 - `torch__addr` and `torch__addr_` have been removed.
+- We now check the MD5 hashes of downloaded LibTorch binaries. (@dirkschumacher #325)
+- Refactored the optimizers code to avoid duplication of parameter checks, etc. (@dirkschumacher #328)
 
 # torch 0.1.1
 

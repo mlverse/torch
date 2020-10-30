@@ -86,7 +86,7 @@ loss_fn <- nnf_mse_loss
 # optimization algorithms. The first argument to the Adam constructor tells the
 # optimizer which Tensors it should update.
 learning_rate <- 1e-4
-optimizer <- optim_sgd(model$parameters, lr=learning_rate, momentum = 0.9)
+optimizer <- optim_adam(model$parameters, lr=learning_rate)
 
 for (t in seq_len(500)) {
    # Forward pass: compute predicted y by passing x to the model. Module objects
