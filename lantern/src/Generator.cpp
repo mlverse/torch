@@ -12,7 +12,6 @@ void *_lantern_Generator()
 {
   LANTERN_FUNCTION_START
   torch::Generator out = torch::make_generator<torch::CPUGeneratorImpl>(c10::detail::getNonDeterministicRandom());
-  std::cout << out.current_seed() << std::endl;
   return (void *)new LanternObject<torch::Generator>(out);
   LANTERN_FUNCTION_END
 }
