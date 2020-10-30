@@ -30,7 +30,7 @@ void _lantern_Tensor_set_grad_(void* self, void * new_grad)
     LANTERN_FUNCTION_START
     auto t =  reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
     auto g = reinterpret_cast<LanternObject<torch::Tensor> *>(new_grad)->get();
-    t.grad() = g;
+    t.mutable_grad() = g;
     LANTERN_FUNCTION_END_VOID
 }
 
