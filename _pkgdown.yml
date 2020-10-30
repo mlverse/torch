@@ -42,6 +42,8 @@ navbar:
   articles:
     text: Articles
     menu:
+     - text: Installation
+       href: articles/installation.html
      - text: Tensors
      - text: Creating tensors
        href: articles/tensor-creation.html
