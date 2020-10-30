@@ -4,6 +4,10 @@
   0-based to 1-based in the GPU. (#317)
 - Fixed bug when trying to print the `grad_fn` of a Tensor that doesn't have one.
   See (#321)
+- Added `$element_size()` method (@dirkschumacher #322)
+- Added `$bool()` method (@dirkschumacher #323)
+- We now check the MD5 hashes of downloaded LibTorch binaries. (@dirkschumacher #325)
+- Refactored the optimizers code to avoid duplication of parameter checks, etc. (@dirkschumacher #328)
 
 # torch 0.1.1
 

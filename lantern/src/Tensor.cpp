@@ -138,6 +138,14 @@ int64_t _lantern_Tensor_numel(void *self)
   LANTERN_FUNCTION_END_RET(0)
 }
 
+int64_t _lantern_Tensor_element_size(void *self)
+{
+  LANTERN_FUNCTION_START
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  return x.element_size();
+  LANTERN_FUNCTION_END_RET(0)
+}
+
 int64_t _lantern_Tensor_ndimension(void *self)
 {
   LANTERN_FUNCTION_START

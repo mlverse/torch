@@ -24,7 +24,7 @@ get_init <- function(x) {
   
 }
 
-#' An abstract class representing a `Dataset`.
+#' Helper function to create an R6 class that inherits from the abstract `Dataset` class
 #' 
 #' All datasets that represent a map from keys to data samples should subclass
 #' it. All subclasses should overwrite `get_item`, supporting fetching a

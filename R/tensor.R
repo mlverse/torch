@@ -56,6 +56,9 @@ Tensor <- R7Class(
       
       x[dim]
     },
+    element_size = function() {
+      cpp_tensor_element_size(self$ptr)
+    },
     numel = function() {
       cpp_tensor_numel(self$ptr)
     },
@@ -78,6 +81,9 @@ Tensor <- R7Class(
         args$dtype <- self$dtype
       
       do.call(private$`_to`, args)
+    },
+    bool = function(memory_format = torch_preserve_format()) {
+      self$to(torch_bool(), memory_format = memory_format)
     },
     cuda = function(device=NULL, non_blocking=FALSE, memory_format=torch_preserve_format()) {
       

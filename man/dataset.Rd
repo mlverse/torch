@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-data.R
 \name{dataset}
 \alias{dataset}
-\title{An abstract class representing a \code{Dataset}.}
+\title{Helper function to create an R6 class that inherits from the abstract \code{Dataset} class}
 \usage{
 dataset(name = NULL, inherit = Dataset, ..., parent_env = parent.frame())
 }

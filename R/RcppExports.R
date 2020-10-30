@@ -7105,6 +7105,10 @@ cpp_as_array <- function(x) {
     .Call('_torch_cpp_as_array', PACKAGE = 'torchpkg', x)
 }
 
+cpp_tensor_element_size <- function(x) {
+    .Call('_torch_cpp_tensor_element_size', PACKAGE = 'torchpkg', x)
+}
+
 cpp_tensor_dim <- function(x) {
     .Call('_torch_cpp_tensor_dim', PACKAGE = 'torchpkg', x)
 }

@@ -41,7 +41,7 @@ optim_Adagrad <- R6::R6Class(
         }
       }
     },
-    
+
     # It's implemeneted in PyTorch, but it's not necessary at the moment
     # share_memory = function(){
     #   for (group in self$param_groups){
@@ -52,62 +52,41 @@ optim_Adagrad <- R6::R6Class(
     #   }
     # },
     
-    step = function(closure = NULL){
-      with_no_grad({
+    step = function(closure = NULL) {
+      private$step_helper(closure, function(group, param, g, p) {
+        param$state[['step']] <- param$state[['step']] + 1
         
-        loss <- NULL
-        if (!is.null(closure)) {
-          with_enable_grad({
-            loss <- closure()
-          })
+        grad       <- param$grad
+        state_sum  <- param$state[['sum']]
+        state_step <- param$state[['step']]
+        
+        if (group$weight_decay  != 0) {
+          # if (grad$is_sparse) {
+          #   runtime_error("weight_decay option is not compatible with sparse gradients")
+          # }
+          grad <- grad$add(param, alpha = group$weight_decay)
         }
         
-        for (group in self$param_groups){
-          
-          for (p in seq_along(group$params)) {
-            param <- group$params[[p]]
-            
-            if (is.null(param$grad) || is_undefined_tensor(param$grad))
-              next
-            
-            param$state[['step']] <- param$state[['step']] + 1
-            
-            grad       <- param$grad
-            state_sum  <- param$state[['sum']]
-            state_step <- param$state[['step']]
-            
-           if (group$weight_decay  != 0) {
-              # if (grad$is_sparse) {
-              #   runtime_error("weight_decay option is not compatible with sparse gradients")
-              # }
-              grad <- grad$add(param, alpha = group$weight_decay)
-            }
-            
-            clr <-  group$lr / (1 + (param$state[['step']] - 1) * group$lr_decay)
-            
-            # Sparse tensors handling will be added in future
-            # if (grad$is_sparse) {
-            #   grad <- grad$coalesce()
-            #   grad_indices <- grad$`_indices`()
-            #   grad_values <-  grad$`_values`()
-            #   size <- grad$size()
-              
-              # state_sum$add_(`_make_sparse`(grad, grad_indices, grad_values.pow(2)))
-              # std <- param$state[['sum']]$sparse_mask(grad)
-              # std_values <- std$`_values()`$sqrt_()$add_(group$eps)
-              # param$add_(_make_sparse(grad, grad_indices, grad_values / std_values), alpha=-clr)
-            #} else {
-            
-            param$state[['sum']]$addcmul_(grad, grad, value = 1)
-            std <- param$state[['sum']]$sqrt()$add_(group$eps)
-            param$addcdiv_(grad, std, value =-clr)
-            
-            #}
-            
-          }
-        }
+        clr <-  group$lr / (1 + (param$state[['step']] - 1) * group$lr_decay)
+        
+        # Sparse tensors handling will be added in future
+        # if (grad$is_sparse) {
+        #   grad <- grad$coalesce()
+        #   grad_indices <- grad$`_indices`()
+        #   grad_values <-  grad$`_values`()
+        #   size <- grad$size()
+        
+        # state_sum$add_(`_make_sparse`(grad, grad_indices, grad_values.pow(2)))
+        # std <- param$state[['sum']]$sparse_mask(grad)
+        # std_values <- std$`_values()`$sqrt_()$add_(group$eps)
+        # param$add_(_make_sparse(grad, grad_indices, grad_values / std_values), alpha=-clr)
+        #} else {
+        
+        param$state[['sum']]$addcmul_(grad, grad, value = 1)
+        std <- param$state[['sum']]$sqrt()$add_(group$eps)
+        param$addcdiv_(grad, std, value =-clr)
+        
       })
-      loss
     }
   )
 )
