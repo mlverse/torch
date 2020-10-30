@@ -20860,8 +20860,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_upsample_nearest1d
-torch_upsample_nearest1d <- function(input, self, output_size, scale_factors, scales = NULL) {
+#' @rdname .torch_upsample_nearest1d
+.torch_upsample_nearest1d <- function(input, self, output_size, scale_factors, scales = NULL) {
   args <- mget(x = c("input", "self", "output_size", "scale_factors", "scales"))
 expected_types <- list(input = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
     scale_factors = "ArrayRef<double>", scales = "double")
@@ -20933,8 +20933,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_upsample_nearest2d
-torch_upsample_nearest2d <- function(input, self, output_size, scale_factors, scales_h = NULL, scales_w = NULL) {
+#' @rdname .torch_upsample_nearest2d
+.torch_upsample_nearest2d <- function(input, self, output_size, scale_factors, scales_h = NULL, scales_w = NULL) {
   args <- mget(x = c("input", "self", "output_size", "scale_factors", "scales_h", "scales_w"))
 expected_types <- list(input = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
     scale_factors = "ArrayRef<double>", scales_h = "double", 
@@ -21008,8 +21008,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_upsample_nearest3d
-torch_upsample_nearest3d <- function(input, self, output_size, scale_factors, scales_d = NULL, scales_h = NULL, scales_w = NULL) {
+#' @rdname .torch_upsample_nearest3d
+.torch_upsample_nearest3d <- function(input, self, output_size, scale_factors, scales_d = NULL, scales_h = NULL, scales_w = NULL) {
   args <- mget(x = c("input", "self", "output_size", "scale_factors", "scales_d", "scales_h", "scales_w"))
 expected_types <- list(input = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
     scale_factors = "ArrayRef<double>", scales_d = "double", 
@@ -21084,8 +21084,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_upsample_trilinear3d
-torch_upsample_trilinear3d <- function(input, self, output_size, align_corners, scale_factors, scales_d = NULL, scales_h = NULL, scales_w = NULL) {
+#' @rdname .torch_upsample_trilinear3d
+.torch_upsample_trilinear3d <- function(input, self, output_size, align_corners, scale_factors, scales_d = NULL, scales_h = NULL, scales_w = NULL) {
   args <- mget(x = c("input", "self", "output_size", "align_corners", "scale_factors", "scales_d", "scales_h", "scales_w"))
 expected_types <- list(input = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
     align_corners = "bool", scale_factors = "ArrayRef<double>", 

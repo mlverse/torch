@@ -93,6 +93,12 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   if (any("ArrayRef<double>" == expected_types) && is.numeric(obj))
     return(list(obj, "ArrayRef<double>"))
   
+  if (any("IntArrayRef" == expected_types) && is.null(obj))
+    return(list(NULL, "IntArrayRef"))
+  
+  if (any("ArrayRef<double>" == expected_types) && is.null(obj))
+    return(list(NULL, "ArrayRef<double>"))
+  
   if (any("int64_t" == expected_types) && is.numeric(obj) && length(obj) == 1 && any(arg_name == c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim", "index")))
     return(list(as_1_based_dim(obj), "int64_t"))
   

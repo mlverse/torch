@@ -11768,86 +11768,86 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_linear1d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, std::vector<int64_t> output_size, bool align_corners, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_linear1d_tensor_intarrayref_bool_arrayrefdouble(input->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), reinterpret_cast<void*>(&align_corners), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_linear1d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, nullableVector<std::vector<int64_t>> output_size, bool align_corners, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_linear1d_tensor_intarrayref_bool_arrayrefdouble(input->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), reinterpret_cast<void*>(&align_corners), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_linear1d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, std::vector<int64_t> output_size, std::vector<int64_t> input_size, bool align_corners, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble(grad_output->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_int64_t(&input_size[0], input_size.size()), reinterpret_cast<void*>(&align_corners), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_linear1d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, nullableVector<std::vector<int64_t>> output_size, std::vector<int64_t> input_size, bool align_corners, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble(grad_output->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_vector_int64_t(&input_size[0], input_size.size()), reinterpret_cast<void*>(&align_corners), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_bilinear2d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, std::vector<int64_t> output_size, bool align_corners, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_bilinear2d_tensor_intarrayref_bool_arrayrefdouble(input->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), reinterpret_cast<void*>(&align_corners), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_bilinear2d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, nullableVector<std::vector<int64_t>> output_size, bool align_corners, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_bilinear2d_tensor_intarrayref_bool_arrayrefdouble(input->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), reinterpret_cast<void*>(&align_corners), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_bilinear2d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, std::vector<int64_t> output_size, std::vector<int64_t> input_size, bool align_corners, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble(grad_output->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_int64_t(&input_size[0], input_size.size()), reinterpret_cast<void*>(&align_corners), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_bilinear2d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, nullableVector<std::vector<int64_t>> output_size, std::vector<int64_t> input_size, bool align_corners, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble(grad_output->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_vector_int64_t(&input_size[0], input_size.size()), reinterpret_cast<void*>(&align_corners), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_trilinear3d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, std::vector<int64_t> output_size, bool align_corners, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_trilinear3d_tensor_intarrayref_bool_arrayrefdouble(input->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), reinterpret_cast<void*>(&align_corners), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_trilinear3d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, nullableVector<std::vector<int64_t>> output_size, bool align_corners, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_trilinear3d_tensor_intarrayref_bool_arrayrefdouble(input->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), reinterpret_cast<void*>(&align_corners), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_trilinear3d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, std::vector<int64_t> output_size, std::vector<int64_t> input_size, bool align_corners, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble(grad_output->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_int64_t(&input_size[0], input_size.size()), reinterpret_cast<void*>(&align_corners), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_trilinear3d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, nullableVector<std::vector<int64_t>> output_size, std::vector<int64_t> input_size, bool align_corners, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble(grad_output->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_vector_int64_t(&input_size[0], input_size.size()), reinterpret_cast<void*>(&align_corners), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_bicubic2d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, std::vector<int64_t> output_size, bool align_corners, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_bicubic2d_tensor_intarrayref_bool_arrayrefdouble(input->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), reinterpret_cast<void*>(&align_corners), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_bicubic2d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, nullableVector<std::vector<int64_t>> output_size, bool align_corners, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_bicubic2d_tensor_intarrayref_bool_arrayrefdouble(input->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), reinterpret_cast<void*>(&align_corners), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_bicubic2d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, std::vector<int64_t> output_size, std::vector<int64_t> input_size, bool align_corners, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble(grad_output->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_int64_t(&input_size[0], input_size.size()), reinterpret_cast<void*>(&align_corners), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_bicubic2d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, nullableVector<std::vector<int64_t>> output_size, std::vector<int64_t> input_size, bool align_corners, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble(grad_output->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_vector_int64_t(&input_size[0], input_size.size()), reinterpret_cast<void*>(&align_corners), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest1d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, std::vector<int64_t> output_size, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_nearest1d_tensor_intarrayref_arrayrefdouble(input->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest1d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, nullableVector<std::vector<int64_t>> output_size, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_nearest1d_tensor_intarrayref_arrayrefdouble(input->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest1d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, std::vector<int64_t> output_size, std::vector<int64_t> input_size, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref_arrayrefdouble(grad_output->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_int64_t(&input_size[0], input_size.size()), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest1d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, nullableVector<std::vector<int64_t>> output_size, std::vector<int64_t> input_size, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref_arrayrefdouble(grad_output->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_vector_int64_t(&input_size[0], input_size.size()), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest2d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, std::vector<int64_t> output_size, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_nearest2d_tensor_intarrayref_arrayrefdouble(input->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest2d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, nullableVector<std::vector<int64_t>> output_size, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_nearest2d_tensor_intarrayref_arrayrefdouble(input->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest2d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, std::vector<int64_t> output_size, std::vector<int64_t> input_size, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref_arrayrefdouble(grad_output->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_int64_t(&input_size[0], input_size.size()), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest2d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, nullableVector<std::vector<int64_t>> output_size, std::vector<int64_t> input_size, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref_arrayrefdouble(grad_output->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_vector_int64_t(&input_size[0], input_size.size()), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest3d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, std::vector<int64_t> output_size, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_nearest3d_tensor_intarrayref_arrayrefdouble(input->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest3d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> input, nullableVector<std::vector<int64_t>> output_size, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_nearest3d_tensor_intarrayref_arrayrefdouble(input->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest3d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, std::vector<int64_t> output_size, std::vector<int64_t> input_size, std::vector<double> scale_factors) {
-  auto r_out = lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref_arrayrefdouble(grad_output->get(), lantern_vector_int64_t(&output_size[0], output_size.size()), lantern_vector_int64_t(&input_size[0], input_size.size()), lantern_vector_double(&scale_factors[0], scale_factors.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_upsample_nearest3d_backward_grad_output_Tensor_output_size_IntArrayRef_input_size_IntArrayRef_scale_factors_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> grad_output, nullableVector<std::vector<int64_t>> output_size, std::vector<int64_t> input_size, nullableVector<std::vector<double>> scale_factors) {
+  auto r_out = lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref_arrayrefdouble(grad_output->get(), lantern_optional_vector_int64_t(&output_size.x[0], output_size.x.size(), output_size.is_null), lantern_vector_int64_t(&input_size[0], input_size.size()), lantern_optional_vector_double(&scale_factors.x[0], scale_factors.x.size(), scale_factors.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
@@ -12368,26 +12368,26 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_fft_fftn_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, std::vector<int64_t> s, std::vector<int64_t> dim, std::string norm) {
-  auto r_out = lantern_fft_fftn_tensor_intarrayref_intarrayref_stdstring(self->get(), lantern_vector_int64_t(&s[0], s.size()), lantern_vector_int64_t(&dim[0], dim.size()), XPtrTorchstring(lantern_string_new(norm.c_str())).get());
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_fft_fftn_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, nullableVector<std::vector<int64_t>> s, nullableVector<std::vector<int64_t>> dim, std::string norm) {
+  auto r_out = lantern_fft_fftn_tensor_intarrayref_intarrayref_stdstring(self->get(), lantern_optional_vector_int64_t(&s.x[0], s.x.size(), s.is_null), lantern_optional_vector_int64_t(&dim.x[0], dim.x.size(), dim.is_null), XPtrTorchstring(lantern_string_new(norm.c_str())).get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_fft_ifftn_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, std::vector<int64_t> s, std::vector<int64_t> dim, std::string norm) {
-  auto r_out = lantern_fft_ifftn_tensor_intarrayref_intarrayref_stdstring(self->get(), lantern_vector_int64_t(&s[0], s.size()), lantern_vector_int64_t(&dim[0], dim.size()), XPtrTorchstring(lantern_string_new(norm.c_str())).get());
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_fft_ifftn_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, nullableVector<std::vector<int64_t>> s, nullableVector<std::vector<int64_t>> dim, std::string norm) {
+  auto r_out = lantern_fft_ifftn_tensor_intarrayref_intarrayref_stdstring(self->get(), lantern_optional_vector_int64_t(&s.x[0], s.x.size(), s.is_null), lantern_optional_vector_int64_t(&dim.x[0], dim.x.size(), dim.is_null), XPtrTorchstring(lantern_string_new(norm.c_str())).get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_fft_rfftn_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, std::vector<int64_t> s, std::vector<int64_t> dim, std::string norm) {
-  auto r_out = lantern_fft_rfftn_tensor_intarrayref_intarrayref_stdstring(self->get(), lantern_vector_int64_t(&s[0], s.size()), lantern_vector_int64_t(&dim[0], dim.size()), XPtrTorchstring(lantern_string_new(norm.c_str())).get());
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_fft_rfftn_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, nullableVector<std::vector<int64_t>> s, nullableVector<std::vector<int64_t>> dim, std::string norm) {
+  auto r_out = lantern_fft_rfftn_tensor_intarrayref_intarrayref_stdstring(self->get(), lantern_optional_vector_int64_t(&s.x[0], s.x.size(), s.is_null), lantern_optional_vector_int64_t(&dim.x[0], dim.x.size(), dim.is_null), XPtrTorchstring(lantern_string_new(norm.c_str())).get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_fft_irfftn_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, std::vector<int64_t> s, std::vector<int64_t> dim, std::string norm) {
-  auto r_out = lantern_fft_irfftn_tensor_intarrayref_intarrayref_stdstring(self->get(), lantern_vector_int64_t(&s[0], s.size()), lantern_vector_int64_t(&dim[0], dim.size()), XPtrTorchstring(lantern_string_new(norm.c_str())).get());
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_fft_irfftn_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, nullableVector<std::vector<int64_t>> s, nullableVector<std::vector<int64_t>> dim, std::string norm) {
+  auto r_out = lantern_fft_irfftn_tensor_intarrayref_intarrayref_stdstring(self->get(), lantern_optional_vector_int64_t(&s.x[0], s.x.size(), s.is_null), lantern_optional_vector_int64_t(&dim.x[0], dim.x.size(), dim.is_null), XPtrTorchstring(lantern_string_new(norm.c_str())).get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
@@ -12434,26 +12434,26 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_linalg_norm_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchScalar> ord, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_linalg_norm_tensor_scalar_intarrayref_bool_scalartype(self->get(), ord->get(), lantern_vector_int64_t(&dim[0], dim.size()), reinterpret_cast<void*>(&keepdim), dtype->get());
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_linalg_norm_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchScalar> ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
+  auto r_out = lantern_linalg_norm_tensor_scalar_intarrayref_bool_scalartype(self->get(), ord->get(), lantern_optional_vector_int64_t(&dim.x[0], dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype->get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_linalg_norm_self_Tensor_ord_stdstring (Rcpp::XPtr<XPtrTorchTensor> self, std::string ord, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_linalg_norm_tensor_stdstring_intarrayref_bool_scalartype(self->get(), XPtrTorchstring(lantern_string_new(ord.c_str())).get(), lantern_vector_int64_t(&dim[0], dim.size()), reinterpret_cast<void*>(&keepdim), dtype->get());
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_linalg_norm_self_Tensor_ord_stdstring (Rcpp::XPtr<XPtrTorchTensor> self, std::string ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
+  auto r_out = lantern_linalg_norm_tensor_stdstring_intarrayref_bool_scalartype(self->get(), XPtrTorchstring(lantern_string_new(ord.c_str())).get(), lantern_optional_vector_int64_t(&dim.x[0], dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype->get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> out, Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchScalar> ord, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_linalg_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype(out->get(), self->get(), ord->get(), lantern_vector_int64_t(&dim[0], dim.size()), reinterpret_cast<void*>(&keepdim), dtype->get());
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> out, Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchScalar> ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
+  auto r_out = lantern_linalg_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype(out->get(), self->get(), ord->get(), lantern_optional_vector_int64_t(&dim.x[0], dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype->get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring (Rcpp::XPtr<XPtrTorchTensor> out, Rcpp::XPtr<XPtrTorchTensor> self, std::string ord, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_linalg_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype(out->get(), self->get(), XPtrTorchstring(lantern_string_new(ord.c_str())).get(), lantern_vector_int64_t(&dim[0], dim.size()), reinterpret_cast<void*>(&keepdim), dtype->get());
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring (Rcpp::XPtr<XPtrTorchTensor> out, Rcpp::XPtr<XPtrTorchTensor> self, std::string ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
+  auto r_out = lantern_linalg_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype(out->get(), self->get(), XPtrTorchstring(lantern_string_new(ord.c_str())).get(), lantern_optional_vector_int64_t(&dim.x[0], dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype->get());
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
@@ -12464,20 +12464,20 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace__test_optional_intlist_values_Tensor_addends_IntArrayRef (Rcpp::XPtr<XPtrTorchTensor> values, std::vector<int64_t> addends) {
-  auto r_out = lantern__test_optional_intlist_tensor_intarrayref(values->get(), lantern_vector_int64_t(&addends[0], addends.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace__test_optional_intlist_values_Tensor_addends_IntArrayRef (Rcpp::XPtr<XPtrTorchTensor> values, nullableVector<std::vector<int64_t>> addends) {
+  auto r_out = lantern__test_optional_intlist_tensor_intarrayref(values->get(), lantern_optional_vector_int64_t(&addends.x[0], addends.x.size(), addends.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace__test_optional_filled_intlist_values_Tensor_addends_IntArrayRef (Rcpp::XPtr<XPtrTorchTensor> values, std::vector<int64_t> addends) {
-  auto r_out = lantern__test_optional_filled_intlist_tensor_intarrayref(values->get(), lantern_vector_int64_t(&addends[0], addends.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace__test_optional_filled_intlist_values_Tensor_addends_IntArrayRef (Rcpp::XPtr<XPtrTorchTensor> values, nullableVector<std::vector<int64_t>> addends) {
+  auto r_out = lantern__test_optional_filled_intlist_tensor_intarrayref(values->get(), lantern_optional_vector_int64_t(&addends.x[0], addends.x.size(), addends.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace__test_optional_floatlist_values_Tensor_addends_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> values, std::vector<double> addends) {
-  auto r_out = lantern__test_optional_floatlist_tensor_arrayrefdouble(values->get(), lantern_vector_double(&addends[0], addends.size()));
+Rcpp::XPtr<XPtrTorchTensor> cpp_torch_namespace__test_optional_floatlist_values_Tensor_addends_ArrayRefdouble (Rcpp::XPtr<XPtrTorchTensor> values, nullableVector<std::vector<double>> addends) {
+  auto r_out = lantern__test_optional_floatlist_tensor_arrayrefdouble(values->get(), lantern_optional_vector_double(&addends.x[0], addends.x.size(), addends.is_null));
 return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 }
 

@@ -120,12 +120,13 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         }
 
         std::string type = node[idx]["dynamic_type"].as<std::string>();
+        std::string dtype = node[idx]["type"].as<std::string>();
 
-        if (type == "IntArrayRef")
+        if (type == "IntArrayRef" & dtype != "c10::optional<IntArrayRef>")
         {
             type = "std::vector<int64_t>";
         }
-        else if (type == "ArrayRef<double>")
+        else if (type == "ArrayRef<double>" & dtype != "c10::optional<ArrayRef<double>>")
         {
           type = "std::vector<double>";
         }
@@ -143,14 +144,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         }
 
         // add optional call if required
-        std::string dtype = node[idx]["type"].as<std::string>();
         std::string call = node[idx]["name"].as<std::string>();
         if ((dtype.find("c10::optional") != std::string::npos) & 
-            (type != "std::vector<torch::Dimname>") &
-            (type != "std::vector<int64_t>") &
-            (type != "std::vector<double>"))
+            (type != "std::vector<torch::Dimname>")
+            )
         {
-            if (type != "double")
+            if ((type != "double") & 
+                (type != "IntArrayRef") &
+                (type != "ArrayRef<double>"))
             {
                 call = "optional<" + addNamespace(type) + ">(" + call + ")";
             }

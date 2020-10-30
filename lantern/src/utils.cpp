@@ -24,6 +24,34 @@ void *_lantern_vector_double(double *x, size_t x_size)
   LANTERN_FUNCTION_END
 }
 
+void * _lantern_optional_vector_double(double * x, size_t x_size, bool is_null)
+{
+  LANTERN_FUNCTION_START
+  c10::optional<torch::ArrayRef<double>> out;
+  
+  if (is_null)
+    out = c10::nullopt;
+  else 
+    out = torch::ArrayRef<double>(x, x + x_size);;
+  
+  return (void *)new LanternObject<c10::optional<torch::ArrayRef<double>>>(out);
+  LANTERN_FUNCTION_END
+}
+
+void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null)
+{
+  LANTERN_FUNCTION_START
+  c10::optional<torch::ArrayRef<int64_t>> out;
+
+  if (is_null)
+    out = c10::nullopt;
+  else 
+    out = torch::ArrayRef<int64_t>(x, x + x_size);
+
+  return (void *)new LanternObject<c10::optional<torch::ArrayRef<int64_t>>>(out);
+  LANTERN_FUNCTION_END
+}
+
 void *_lantern_IntArrayRef(int64_t *x, size_t x_size)
 {
   LANTERN_FUNCTION_START
@@ -164,4 +192,5 @@ void * _lantern_string_new (const char * value)
   return (void *)new LanternObject<std::string>(std::string(value));
   LANTERN_FUNCTION_END
 }
+
 

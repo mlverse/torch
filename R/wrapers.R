@@ -247,3 +247,22 @@ torch_quantize_per_tensor <- function(self, scale, zero_point, dtype) {
   do.call(.torch_quantize_per_tensor, args)
 }
 
+#' @rdname torch_upsample_nearest1d
+torch_upsample_nearest1d <- function(input, self, output_size = NULL, 
+                                     scale_factors = NULL, 
+                                     scales = NULL) {
+  
+  if (is.null(output_size) && is.null(scale_factors))
+    value_error("Please specify one of output_size and scale_factors")
+  
+  args <- list(input = input, output_size = output_size, 
+               scale_factors = scale_factors, scales = scales)
+  
+  if (!missing(self))
+    args$self <- self
+  
+  do.call(.torch_upsample_nearest1d, args)
+} 
+
+# "upsample_nearest1d", "upsample_nearest2d", "upsample_nearest3d", "upsample_trilinear3d"
+

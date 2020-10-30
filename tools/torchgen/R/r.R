@@ -106,7 +106,8 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "tensordot", "tril_indices", "triu_indices",
                    "multilabel_margin_loss", "multi_margin_loss",
                    "topk", "scalar_tensor", "narrow",
-                   "quantize_per_tensor")
+                   "quantize_per_tensor",
+                   "upsample_nearest1d", "upsample_nearest2d", "upsample_nearest3d", "upsample_trilinear3d")
 
 internal_funs <- c(internal_funs, creation_ops)
 
