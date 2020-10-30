@@ -6,6 +6,7 @@
   See (#321)
 - Added `$element_size()` method (@dirkschumacher #322)
 - Added `$bool()` method (@dirkschumacher #323)
+- `torch__addr` and `torch__addr_` have been removed.
 
 # torch 0.1.1
 
