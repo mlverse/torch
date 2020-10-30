@@ -17,8 +17,8 @@ cpp_tensor_requires_grad <- function(self) {
     .Call('_torch_cpp_tensor_requires_grad', PACKAGE = 'torchpkg', self)
 }
 
-cpp_torch_method_backward_self_Tensor <- function(self, gradient, keep_graph, create_graph) {
-    invisible(.Call('_torch_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torchpkg', self, gradient, keep_graph, create_graph))
+cpp_torch_method_backward_self_Tensor <- function(self, gradient, retain_graph, create_graph) {
+    invisible(.Call('_torch_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torchpkg', self, gradient, retain_graph, create_graph))
 }
 
 cpp_autograd_backward <- function(tensors, grad_tensors, retain_graph, create_graph) {
