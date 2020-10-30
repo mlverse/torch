@@ -291,7 +291,7 @@ install_type <- function(version) {
 #' cases and troubleshootinng only.
 #' 
 #' @export
-install_torch <- function(version = "1.5.0", type = install_type(version = version), reinstall = FALSE,
+install_torch <- function(version = "1.7.0", type = install_type(version = version), reinstall = FALSE,
                           path = install_path(), ...) {
   
   if (reinstall) {
