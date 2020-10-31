@@ -252,9 +252,6 @@ torch_upsample_nearest1d <- function(input, self, output_size = NULL,
                                      scale_factors = NULL, 
                                      scales = NULL) {
   
-  if (is.null(output_size) && is.null(scale_factors))
-    value_error("Please specify one of output_size and scale_factors")
-  
   args <- list(input = input, output_size = output_size, 
                scale_factors = scale_factors, scales = scales)
   
@@ -264,5 +261,52 @@ torch_upsample_nearest1d <- function(input, self, output_size = NULL,
   do.call(.torch_upsample_nearest1d, args)
 } 
 
-# "upsample_nearest1d", "upsample_nearest2d", "upsample_nearest3d", "upsample_trilinear3d"
+#' @rdname torch_upsample_nearest2d
+torch_upsample_nearest2d <- function(input, self, output_size = NULL, 
+                                     scale_factors = NULL, 
+                                     scales_h = NULL, scales_w = NULL) {
+  
+  args <- list(input = input, output_size = output_size, 
+               scale_factors = scale_factors,
+               scales_h = scales_h, scales_w = scales_w)
+  
+  if (!missing(self))
+    args$self <- self
+  
+  do.call(.torch_upsample_nearest2d, args)
+} 
+
+#' @rdname torch_upsample_nearest3d
+torch_upsample_nearest3d <- function(input, self, output_size = NULL, 
+                                     scale_factors = NULL, scales_d = NULL,
+                                     scales_h = NULL, scales_w = NULL) {
+  
+  args <- list(input = input, output_size = output_size, 
+               scale_factors = scale_factors, scales_d = scales_d,
+               scales_h = scales_h, scales_w = scales_w)
+  
+  if (!missing(self))
+    args$self <- self
+  
+  do.call(.torch_upsample_nearest3d, args)
+}
+
+#' @rdname torch_upsample_nearest3d
+torch_upsample_trilinear3d <- function(input, self, output_size = NULL, align_corners, 
+                                       scale_factors = NULL, scales_d = NULL, scales_h = NULL, 
+                                       scales_w = NULL) {
+  
+  args <- list(input = input, output_size = output_size, 
+               scale_factors = scale_factors, scales_d = scales_d,
+               scales_h = scales_h, scales_w = scales_w)
+  
+  if (!missing(self))
+    args$self <- self
+  
+  if (!missing(align_corners))
+    args$align_corners <- align_corners
+  
+  do.call(.torch_upsample_trilinear3d, args)
+}
+
 

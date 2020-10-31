@@ -166,7 +166,9 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   }
   
   if (input$dim() == 4 && mode == "bilinear") {
-    return(torch_upsample_bilinear2d(input, sze, align_corners, sfl[[1]], sfl[[2]]))
+    return(torch_upsample_bilinear2d(input, output_size = sze, align_corners = align_corners, 
+                                     scales_h = sfl[[1]], scales_w = sfl[[2]],
+                                     scale_factors = NULL))
   }
   
   if (input$dim() == 4 && mode == "trilinear") {
