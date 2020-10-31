@@ -307,7 +307,8 @@ NULL
 #' imaginary part equal to `imag`.
 #'
 #' @param real (Tensor) The real part of the complex tensor. Must be float or double.
-#' @param imag (Tensor) The imaginary part of the complex tensor. Must be same dtype        as `real`.
+#' @param imag (Tensor) The imaginary part of the complex tensor. Must be same dtype 
+#'   as `real`.
 #'
 #' @name torch_complex
 #'
@@ -448,12 +449,12 @@ NULL
 
 #' Kaiser_window
 #'
-#' @section kaiser_window(window_length, periodic=TRUE, beta=12.0, *, dtype=None, layout=torch.strided, device=None, requires_grad=False) -> Tensor :
+#' @section kaiser_window(window_length, periodic=TRUE, beta=12.0, *, dtype=None, layout=torch.strided, device=None, requires_grad=FALSE) -> Tensor :
 #'
 #' Computes the Kaiser window with window length `window_length` and shape parameter `beta`.
 #' 
 #' Let I_0 be the zeroth order modified Bessel function of the first kind (see [torch_i0()]) and
-#' `N = L - 1` if `periodic` is False and `L` if `periodic` is TRUE,
+#' `N = L - 1` if `periodic` is FALSE and `L` if `periodic` is TRUE,
 #' where `L` is the `window_length`. This function computes:
 #' 
 #' \deqn{
@@ -470,7 +471,7 @@ NULL
 #' tensor containing a one.
 #'
 #' @param window_length (int) length of the window.
-#' @param periodic (bool, optional) If TRUE, returns a periodic window suitable for use in spectral analysis.        If False, returns a symmetric window suitable for use in filter design.
+#' @param periodic (bool, optional) If TRUE, returns a periodic window suitable for use in spectral analysis.        If FALSE, returns a symmetric window suitable for use in filter design.
 #' @param beta (float, optional) shape parameter for the window.
 #'
 #' @name torch_kaiser_window
@@ -481,7 +482,7 @@ NULL
 
 #' Isclose
 #'
-#' @section isclose(input, other, rtol=1e-05, atol=1e-08, equal_nan=False) -> Tensor :
+#' @section isclose(input, other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -> Tensor :
 #'
 #' Returns a new tensor with boolean elements representing if each element of
 #' `input` is "close" to the corresponding element of `other`.
@@ -501,7 +502,8 @@ NULL
 #' @param other (Tensor) second tensor to compare
 #' @param atol (float, optional) absolute tolerance. Default: 1e-08
 #' @param rtol (float, optional) relative tolerance. Default: 1e-05
-#' @param equal_nan (bool, optional) if `TRUE`, then two `NaN` s will be considered equal. Default: `False`
+#' @param equal_nan (bool, optional) if `TRUE`, then two `NaN` s will be 
+#'   considered equal. Default: `FALSE`
 #'
 #' @name torch_isclose
 #'
@@ -531,11 +533,10 @@ NULL
 #'
 #' Returns TRUE if the `input` is a single element tensor which is not equal to zero
 #' after type conversions.
-#' i.e. not equal to `torch_tensor([0.])` or `torch.tensor([0])` or
-#' `torch_tensor([False])`.
+#' i.e. not equal to `torch_tensor(c(0.))` or `torch.tensor(c(0))` or
+#' `torch_tensor(c(FALSE))`.
 #' Throws a `RuntimeError` if `torch_numel() != 1` (even in case
 #' of sparse tensors).
-#'
 #'
 #' @param input (Tensor) the input tensor.
 #'
@@ -557,7 +558,7 @@ NULL
 #' of the calculated probability is stored. This function allows adding
 #' probabilities stored in such a fashion.
 #' 
-#' This op should be disambiguated with [`torch_logsumexp`] which performs a
+#' This op should be disambiguated with [torch_logsumexp()] which performs a
 #' reduction on a single tensor.
 #'
 #'
@@ -577,7 +578,7 @@ NULL
 #' Logarithm of the sum of exponentiations of the inputs in base-2.
 #' 
 #' Calculates pointwise \eqn{\log_2\left(2^x + 2^y\right)}. See
-#' [`torch_logaddexp`] for more details.
+#' [torch_logaddexp()] for more details.
 #'
 #'
 #' @param input (Tensor) the input tensor.
@@ -639,22 +640,22 @@ NULL
 
 #' Amax
 #'
-#' @section amax(input, dim, keepdim=False, *, out=None) -> Tensor :
+#' @section amax(input, dim, keepdim=FALSE, *, out=None) -> Tensor :
 #'
 #' Returns the maximum value of each slice of the `input` tensor in the given
 #' dimension(s) `dim`.
 #' 
 #' @note
-#'     The difference between `max`/`min` and `amax`/`amin` is:
-#'         - `amax`/`amin` supports reducing on multiple dimensions,
-#'         - `amax`/`amin` does not return indices,
-#'         - `amax`/`amin` evenly distributes gradient between equal values,
-#'           while `max(dim)`/`min(dim)` propagates gradient only to a single
-#'           index in the source tensor.
+#' The difference between `max`/`min` and `amax`/`amin` is:
+#' - `amax`/`amin` supports reducing on multiple dimensions,
+#' - `amax`/`amin` does not return indices,
+#' - `amax`/`amin` evenly distributes gradient between equal values,
+#'    while `max(dim)`/`min(dim)` propagates gradient only to a single
+#'    index in the source tensor.
 #' 
 #' If `keepdim is `TRUE`, the output tensors are of the same size
 #' as `input` except in the dimension(s) `dim` where they are of size 1.
-#' Otherwise, `dim`s are squeezed (see [`torch_squeeze`]), resulting
+#' Otherwise, `dim`s are squeezed (see [torch_squeeze()]), resulting
 #' in the output tensors having fewer dimension than `input`.
 #'
 #'
@@ -670,22 +671,22 @@ NULL
 
 #' Amin
 #'
-#' @section amin(input, dim, keepdim=False, *, out=None) -> Tensor :
+#' @section amin(input, dim, keepdim=FALSE, *, out=None) -> Tensor :
 #'
 #' Returns the minimum value of each slice of the `input` tensor in the given
 #' dimension(s) `dim`.
 #' 
 #' @note
-#'     The difference between `max`/`min` and `amax`/`amin` is:
-#'         - `amax`/`amin` supports reducing on multiple dimensions,
-#'         - `amax`/`amin` does not return indices,
-#'         - `amax`/`amin` evenly distributes gradient between equal values,
-#'           while `max(dim)`/`min(dim)` propagates gradient only to a single
-#'           index in the source tensor.
+#' The difference between `max`/`min` and `amax`/`amin` is:
+#' - `amax`/`amin` supports reducing on multiple dimensions,
+#' - `amax`/`amin` does not return indices,
+#' - `amax`/`amin` evenly distributes gradient between equal values,
+#'    while `max(dim)`/`min(dim)` propagates gradient only to a single
+#'    index in the source tensor.
 #' 
 #' If `keepdim` is `TRUE`, the output tensors are of the same size as
 #' `input` except in the dimension(s) `dim` where they are of size 1.
-#' Otherwise, `dim`s are squeezed (see [`torch_squeeze`]), resulting in
+#' Otherwise, `dim`s are squeezed (see [torch_squeeze()]), resulting in
 #' the output tensors having fewer dimensions than `input`.
 #'
 #'
@@ -703,11 +704,9 @@ NULL
 #'
 #' @section multiply(input, other, *, out=None) :
 #'
-#' Alias for [`torch_mul`].
+#' Alias for [torch_mul()].
 #'
-#'
-#'
-#'
+#' @inheritParams torch_mul
 #' @name torch_multiply
 #'
 #' @export
@@ -723,7 +722,6 @@ NULL
 #' 
 #' Other dimensions of `input` that are not explicitly moved remain in
 #' their original order and appear at the positions not specified in `destination`.
-#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param source (int or tuple of ints) Original positions of the dims to move. These must be unique.
@@ -742,9 +740,6 @@ NULL
 #' Divide the channels in a tensor of shape \eqn{(*, C , H, W)}
 #' into g groups and rearrange them as \eqn{(*, C \frac g, g, H, W)},
 #' while keeping the original tensor shape.
-#' 
-#' See `~torch.nn.ChannelShuffle` for details.
-#'
 #'
 #' @param input (Tensor) the input tensor
 #' @param groups (int) number of groups to divide channels in and rearrange.
@@ -791,10 +786,7 @@ NULL
 #'
 #' @section negative(input, *, out=None) -> Tensor :
 #'
-#' Alias for [`torch_neg`]
-#'
-#'
-#'
+#' Alias for [torch_neg()]
 #'
 #' @name torch_negative
 #'
@@ -807,7 +799,7 @@ NULL
 #' @section logit(input, eps=None, *, out=None) -> Tensor :
 #'
 #' Returns a new tensor with the logit of the elements of `input`.
-#' `input` is clamped to [eps, 1 - eps] when eps is not None.
+#' `input` is clamped to `[eps, 1 - eps]` when eps is not None.
 #' When eps is None and `input` < 0 or `input` > 1, the function will yields NaN.
 #' 
 #' \deqn{
@@ -838,14 +830,11 @@ NULL
 #' on inplace modification of the outputs.
 #' 
 #' @section Warning:
-#'     This function is safe to use as long as only the input, or only the outputs
-#'     are modified inplace after calling this function. It is user's
-#'     responsibility to ensure that is the case. If both the input and one or more
-#'     of the outputs are modified inplace, gradients computed by autograd will be
-#'     silently incorrect.
-#'
-#'
-#'
+#' This function is safe to use as long as only the input, or only the outputs
+#' are modified inplace after calling this function. It is user's
+#' responsibility to ensure that is the case. If both the input and one or more
+#' of the outputs are modified inplace, gradients computed by autograd will be
+#' silently incorrect.
 #'
 #' @name torch_unsafe_split
 #'
@@ -859,8 +848,8 @@ NULL
 #'
 #' Stack tensors in sequence horizontally (column wise).
 #' 
-#' This is equivalent to concatenation along the first axis for 1-D tensors, and along the second axis for all other tensors.
-#'
+#' This is equivalent to concatenation along the first axis for 1-D tensors, and 
+#' along the second axis for all other tensors.
 #'
 #' @param tensors (sequence of Tensors) sequence of tensors to concatenate
 #'
@@ -876,8 +865,8 @@ NULL
 #'
 #' Stack tensors in sequence vertically (row wise).
 #' 
-#' This is equivalent to concatenation along the first axis after all 1-D tensors have been reshaped by [`torch_atleast_2d`].
-#'
+#' This is equivalent to concatenation along the first axis after all 1-D tensors 
+#' have been reshaped by [torch_atleast_2d()].
 #'
 #' @param tensors (sequence of Tensors) sequence of tensors to concatenate
 #'
@@ -893,8 +882,8 @@ NULL
 #'
 #' Stack tensors in sequence depthwise (along third axis).
 #' 
-#' This is equivalent to concatenation along the third axis after 1-D and 2-D tensors have been reshaped by [`torch_atleast_3d`].
-#'
+#' This is equivalent to concatenation along the third axis after 1-D and 2-D 
+#' tensors have been reshaped by [torch_atleast_3d()].
 #'
 #' @param tensors (sequence of Tensors) sequence of tensors to concatenate
 #'
@@ -906,44 +895,57 @@ NULL
 
 #' Istft
 #'
-#' Inverse short time Fourier Transform. This is expected to be the inverse of [`~torch.stft`].
-#'     It has the same parameters (+ additional optional parameter of `length`) and it should return the
-#'     least squares estimation of the original signal. The algorithm will check using the NOLA condition (
-#'     nonzero overlap).
+#' Inverse short time Fourier Transform. This is expected to be the inverse of [torch_stft()].
 #' 
-#'     Important consideration in the parameters `window` and `center` so that the envelop
-#'     created by the summation of all the windows is never zero at certain point in time. Specifically,
-#'     \eqn{\sum_{t=-\infty}^{\infty} |w|^2[n-t\times hop\_length] \cancel{=} 0}.
+#' It has the same parameters (+ additional optional parameter of `length`) and it should return the
+#' least squares estimation of the original signal. The algorithm will check using the NOLA 
+#' condition (nonzero overlap).
 #' 
-#'     Since [`~torch.stft`] discards elements at the end of the signal if they do not fit in a frame,
-#'     `istft` may return a shorter signal than the original signal (can occur if `center` is False
-#'     since the signal isn't padded).
+#' Important consideration in the parameters `window` and `center` so that the envelop
+#' created by the summation of all the windows is never zero at certain point in time. Specifically,
+#' \eqn{\sum_{t=-\infty}^{\infty} |w|^2[n-t\times hop\_length] \cancel{=} 0}.
 #' 
-#'     If `center` is `TRUE`, then there will be padding e.g. `'constant'`, `'reflect'`, etc.
-#'     Left padding can be trimmed off exactly because they can be calculated but right padding cannot be
-#'     calculated without additional information.
+#' Since [torch_stft()] discards elements at the end of the signal if they do not fit in a frame,
+#' `istft` may return a shorter signal than the original signal (can occur if `center` is FALSE
+#' since the signal isn't padded).
 #' 
-#'     Example: Suppose the last window is:
-#'     `[17, 18, 0, 0, 0]` vs `[18, 0, 0, 0, 0]`
+#' If `center` is `TRUE`, then there will be padding e.g. `'constant'`, `'reflect'`, etc.
+#' Left padding can be trimmed off exactly because they can be calculated but right 
+#' padding cannot be calculated without additional information.
 #' 
-#'     The `n_fft`, `hop_length`, `win_length` are all the same which prevents the calculation
-#'     of right padding. These additional values could be zeros or a reflection of the signal so providing
-#'     `length` could be useful. If `length` is `None` then padding will be aggressively removed
-#'     (some loss of signal).
+#' Example: Suppose the last window is:
+#' `[c(17, 18, 0, 0, 0)` vs `c(18, 0, 0, 0, 0)`
 #' 
-#'     [1] D. W. Griffin and J. S. Lim, "Signal estimation from modified short-time Fourier transform,"
-#'     IEEE Trans. ASSP, vol.32, no.2, pp.236-243, Apr. 1984.
+#' The `n_fft`, `hop_length`, `win_length` are all the same which prevents the calculation
+#' of right padding. These additional values could be zeros or a reflection of the signal so providing
+#' `length` could be useful. If `length` is `None` then padding will be aggressively removed
+#' (some loss of signal).
+#' 
+#' D. W. Griffin and J. S. Lim, "Signal estimation from modified short-time Fourier transform,"
+#' IEEE Trans. ASSP, vol.32, no.2, pp.236-243, Apr. 1984.
 #'
-#' @param input (Tensor) The input tensor. Expected to be output of [`~torch.stft`],        can either be complex (`channel`, `fft_size`, `n_frame`), or real        (`channel`, `fft_size`, `n_frame`, 2) where the `channel`        dimension is optional.
+#' @param input (Tensor) The input tensor. Expected to be output of [torch_stft()], 
+#'   can either be complex (`channel`, `fft_size`, `n_frame`), or real 
+#'   (`channel`, `fft_size`, `n_frame`, 2) where the `channel` dimension is 
+#'   optional.
 #' @param n_fft (int) Size of Fourier transform
-#' @param hop_length (Optional[int]) The distance between neighboring sliding window frames.        (Default: `n_fft // 4`)
-#' @param win_length (Optional[int]) The size of window frame and STFT filter. (Default: `n_fft`)
-#' @param window (Optional[torch.Tensor]) The optional window function.        (Default: `torch_ones(win_length)`)
-#' @param center (bool) Whether `input` was padded on both sides so that the \eqn{t}-th frame is        centered at time \eqn{t \times \mbox{hop\_length}}.        (Default: `TRUE`)
-#' @param normalized (bool) Whether the STFT was normalized. (Default: `False`)
-#' @param onesided (Optional[bool]) Whether the STFT was onesided.        (Default: `TRUE` if `n_fft != fft_size` in the input size)
-#' @param length (Optional[int]) The amount to trim the signal by (i.e. the        original signal length). (Default: whole signal)
-#' @param return_complex (Optional[bool]) Whether the output should be complex, or if the input should be        assumed to derive from a real signal and window.        Note that this is incompatible with `onesided=TRUE`.        (Default: `False`)
+#' @param hop_length (Optional[int]) The distance between neighboring sliding window frames.
+#'   (Default: `n_fft %% 4`)
+#' @param win_length (Optional[int]) The size of window frame and STFT filter. 
+#'   (Default: `n_fft`)
+#' @param window (Optional[torch.Tensor]) The optional window function.
+#'   (Default: `torch_ones(win_length)`)
+#' @param center (bool) Whether `input` was padded on both sides so that the 
+#'   \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.
+#'   (Default: `TRUE`)
+#' @param normalized (bool) Whether the STFT was normalized. (Default: `FALSE`)
+#' @param onesided (Optional[bool]) Whether the STFT was onesided. 
+#'   (Default: `TRUE` if `n_fft != fft_size` in the input size)
+#' @param length (Optional[int]) The amount to trim the signal by (i.e. the 
+#'   original signal length). (Default: whole signal)
+#' @param return_complex (Optional[bool]) Whether the output should be complex, 
+#'   or if the input should be assumed to derive from a real signal and window. 
+#'   Note that this is incompatible with `onesided=TRUE`. (Default: `FALSE`)
 #'
 #' @name torch_istft
 #'
@@ -957,18 +959,16 @@ NULL
 #'
 #' Returns the sum of all elements, treating Not a Numbers (NaNs) as zero.
 #'
-#' @section nansum(input, dim, keepdim=False, *, dtype=None) -> Tensor :
+#' @section nansum(input, dim, keepdim=FALSE, *, dtype=None) -> Tensor :
 #'
 #' Returns the sum of each row of the `input` tensor in the given
 #' dimension `dim`, treating Not a Numbers (NaNs) as zero.
 #' If `dim` is a list of dimensions, reduce over all of them.
 #' 
-#' 
 #' If `keepdim` is `TRUE`, the output tensor is of the same size
 #' as `input` except in the dimension(s) `dim` where it is of size 1.
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or `len(dim)`) fewer dimension(s).
-#'
 #'
 #' @param input (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
@@ -979,7 +979,6 @@ NULL
 #' @export
 NULL
 
-
 #' Fliplr
 #'
 #' @section fliplr(input) -> Tensor :
@@ -989,8 +988,8 @@ NULL
 #' Flip the entries in each row in the left/right direction.
 #' Columns are preserved, but appear in a different order than before.
 #' 
-#' Note:
-#'     Equivalent to input[:,::-1]. Requires the array to be at least 2-D.
+#' @note
+#' Equivalent to `input[,-1]`. Requires the array to be at least 2-D.
 #'
 #'
 #' @param input (Tensor) Must be at least 2-dimensional.
@@ -1010,8 +1009,8 @@ NULL
 #' Flip the entries in each column in the up/down direction.
 #' Rows are preserved, but appear in a different order than before.
 #' 
-#' Note:
-#'     Equivalent to input[::-1,...]. Requires the array to be at least 1-D.
+#' @note
+#' Equivalent to `input[-1,]`. Requires the array to be at least 1-D.
 #'
 #'
 #' @param input (Tensor) Must be at least 1-dimensional.
@@ -1026,11 +1025,9 @@ NULL
 #'
 #' @section fix(input, *, out=None) -> Tensor :
 #'
-#' Alias for [`torch_trunc`]
+#' Alias for [torch_trunc()]
 #'
-#'
-#'
-#'
+#' @inheritParams torch_trunc
 #' @name torch_fix
 #'
 #' @export
@@ -1039,18 +1036,23 @@ NULL
 
 #' Vander
 #'
-#' @section vander(x, N=None, increasing=False) -> Tensor :
+#' @section vander(x, N=None, increasing=FALSE) -> Tensor :
 #'
 #' Generates a Vandermonde matrix.
 #' 
-#' The columns of the output matrix are elementwise powers of the input vector \eqn{x^{(N-1)}, x^{(N-2)}, ..., x^0}.
-#' If increasing is TRUE, the order of the columns is reversed \eqn{x^0, x^1, ..., x^{(N-1)}}. Such a
-#' matrix with a geometric progression in each row is named for Alexandre-Theophile Vandermonde.
+#' The columns of the output matrix are elementwise powers of the input vector 
+#' \eqn{x^{(N-1)}, x^{(N-2)}, ..., x^0}.
+#' If increasing is TRUE, the order of the columns is reversed 
+#' \eqn{x^0, x^1, ..., x^{(N-1)}}. Such a
+#' matrix with a geometric progression in each row is 
+#' named for Alexandre-Theophile Vandermonde.
 #'
 #'
 #' @param x (Tensor) 1-D input tensor.
-#' @param N (int, optional) Number of columns in the output. If N is not specified,        a square array is returned \eqn{(N = len(x))}.
-#' @param increasing (bool, optional) Order of the powers of the columns. If TRUE,        the powers increase from left to right, if False (the default) they are reversed.
+#' @param N (int, optional) Number of columns in the output. If N is not specified,        
+#'   a square array is returned \eqn{(N = len(x))}.
+#' @param increasing (bool, optional) Order of the powers of the columns. If TRUE,        
+#'   the powers increase from left to right, if FALSE (the default) they are reversed.
 #'
 #' @name torch_vander
 #'
@@ -1066,10 +1068,9 @@ NULL
 #' 
 #' @note
 #' 
-#'     This function is differentiable, so gradients will flow back from the
-#'     result of this operation to `input`. To create a tensor without an
-#'     autograd relationship to `input` see `~Tensor.detach`.
-#'
+#' This function is differentiable, so gradients will flow back from the
+#' result of this operation to `input`. To create a tensor without an
+#' autograd relationship to `input` see `Tensor$detach`.
 #'
 #' @param input (Tensor) the input tensor.
 #'
@@ -1092,7 +1093,6 @@ NULL
 #' Supports broadcasting to a common shape ,
 #' type promotion , and integer, float, and complex inputs.
 #'
-#'
 #' @param input (Tensor) the input tensor.
 #' @param other (Tensor or Scalar) the tensor or scalar to subtract from `input`
 #'
@@ -1106,11 +1106,9 @@ NULL
 #'
 #' @section subtract(input, other, *, alpha=1, out=None) -> Tensor :
 #'
-#' Alias for [`torch_sub`].
+#' Alias for [torch_sub()].
 #'
-#'
-#'
-#'
+#' @inheritParams torch_sub
 #' @name torch_subtract
 #'
 #' @export
@@ -1125,11 +1123,11 @@ NULL
 #' The Heaviside step function is defined as:
 #' 
 #' \deqn{
-#'     \mbox{{heaviside}}(input, values) = \begin{cases}
-#'         0, & \mbox{if input < 0}\\
-#'         values, & \mbox{if input == 0}\\
-#'         1, & \mbox{if input > 0}
-#'     \end{cases}
+#' \mbox{{heaviside}}(input, values) = \begin{cases}
+#'  0, & \mbox{if input < 0}\\
+#'  values, & \mbox{if input == 0}\\
+#'  1, & \mbox{if input > 0}
+#'  \end{cases}
 #' }
 #'
 #'
@@ -1152,7 +1150,6 @@ NULL
 #'
 #' Given a list of quantized Tensors, dequantize them and return a list of fp32 Tensors
 #'
-#'
 #' @param tensor (Tensor) A quantized Tensor
 #' @param tensors (sequence of Tensors) A list of quantized Tensors
 #'
@@ -1166,11 +1163,9 @@ NULL
 #'
 #' @section not_equal(input, other, *, out=None) -> Tensor :
 #'
-#' Alias for [`torch_ne`].
+#' Alias for [torch_ne()].
 #'
-#'
-#'
-#'
+#' @inheritParams torch_ne
 #' @name torch_not_equal
 #'
 #' @export
@@ -1181,11 +1176,9 @@ NULL
 #'
 #' @section greater_equal(input, other, *, out=None) -> Tensor :
 #'
-#' Alias for [`torch_ge`].
+#' Alias for [torch_ge()].
 #'
-#'
-#'
-#'
+#' @inheritParams torch_ge
 #' @name torch_greater_equal
 #'
 #' @export
@@ -1196,11 +1189,9 @@ NULL
 #'
 #' @section less_equal(input, other, *, out=None) -> Tensor :
 #'
-#' Alias for [`torch_le`].
+#' Alias for [torch_le()].
 #'
-#'
-#'
-#'
+#' @inheritParams torch_le
 #' @name torch_less_equal
 #'
 #' @export
@@ -1211,11 +1202,9 @@ NULL
 #'
 #' @section greater(input, other, *, out=None) -> Tensor :
 #'
-#' Alias for [`torch_gt`].
+#' Alias for [torch_gt()].
 #'
-#'
-#'
-#'
+#' @inheritParams torch_gt
 #' @name torch_greater
 #'
 #' @export
@@ -1226,11 +1215,9 @@ NULL
 #'
 #' @section less(input, other, *, out=None) -> Tensor :
 #'
-#' Alias for [`torch_lt`].
+#' Alias for [torch_lt()].
 #'
-#'
-#'
-#'
+#' @inheritParams torch_lt
 #' @name torch_less
 #'
 #' @export
@@ -1244,9 +1231,8 @@ NULL
 #' Computes the zeroth order modified Bessel function of the first kind for each element of `input`.
 #' 
 #' \deqn{
-#'     \mbox{out}_{i} = I_0(\mbox{input}_{i}) = \sum_{k=0}^{\infty} \frac{(\mbox{input}_{i}^2/4)^k}{(k!)^2}
+#' \mbox{out}_{i} = I_0(\mbox{input}_{i}) = \sum_{k=0}^{\infty} \frac{(\mbox{input}_{i}^2/4)^k}{(k!)^2}
 #' }
-#'
 #'
 #' @param input (Tensor) the input tensor
 #'
@@ -1261,7 +1247,6 @@ NULL
 #' @section signbit(input, *, out=None) -> Tensor :
 #'
 #' Tests if each element of `input` has its sign bit set (is less than zero) or not.
-#'
 #'
 #' @param input (Tensor) the input tensor.
 #'
@@ -1278,8 +1263,9 @@ NULL
 #' Given the legs of a right triangle, return its hypotenuse.
 #' 
 #' \deqn{
-#'     \mbox{out}_{i} = \sqrt{\mbox{input}_{i}^{2} + \mbox{other}_{i}^{2}}
+#' \mbox{out}_{i} = \sqrt{\mbox{input}_{i}^{2} + \mbox{other}_{i}^{2}}
 #' }
+#' 
 #' The shapes of `input` and `other` must be
 #' broadcastable .
 #'
@@ -1319,8 +1305,8 @@ NULL
 #' Computes the element-wise maximum of `input` and `other`.
 #' 
 #' @note
-#'     If one of the elements being compared is a NaN, then that element is returned.
-#'     [`maximum`] is not supported for tensors with complex dtypes.
+#' If one of the elements being compared is a NaN, then that element is returned.
+#' [torch_maximum()] is not supported for tensors with complex dtypes.
 #'
 #'
 #' @param input (Tensor) the input tensor.
@@ -1339,8 +1325,8 @@ NULL
 #' Computes the element-wise minimum of `input` and `other`.
 #' 
 #' @note
-#'     If one of the elements being compared is a NaN, then that element is returned.
-#'     [`minimum`] is not supported for tensors with complex dtypes.
+#' If one of the elements being compared is a NaN, then that element is returned.
+#' [torch_minimum()] is not supported for tensors with complex dtypes.
 #'
 #'
 #' @param input (Tensor) the input tensor.
@@ -1359,7 +1345,7 @@ NULL
 #' Returns the q-th quantiles of all elements in the `input` tensor, doing a linear
 #' interpolation when the q-th quantile lies between two data points.
 #'
-#' @section quantile(input, q, dim=None, keepdim=False, *, out=None) -> Tensor :
+#' @section quantile(input, q, dim=None, keepdim=FALSE, *, out=None) -> Tensor :
 #'
 #' Returns the q-th quantiles of each row of the `input` tensor along the dimension
 #' `dim`, doing a linear interpolation when the q-th quantile lies between two
@@ -1386,12 +1372,12 @@ NULL
 
 #' Nanquantile
 #'
-#' @section nanquantile(input, q, dim=None, keepdim=False, *, out=None) -> Tensor :
+#' @section nanquantile(input, q, dim=None, keepdim=FALSE, *, out=None) -> Tensor :
 #'
-#' This is a variant of [`torch_quantile`] that "ignores" `NaN` values,
+#' This is a variant of [torch_quantile()] that "ignores" `NaN` values,
 #' computing the quantiles `q` as if `NaN` values in `input` did
 #' not exist. If all values in a reduced row are `NaN` then the quantiles for
-#' that reduction will be `NaN`. See the documentation for [`torch_quantile`].
+#' that reduction will be `NaN`. See the documentation for [torch_quantile()].
 #'
 #'
 #' @param input (Tensor) the input tensor.
@@ -1407,24 +1393,11 @@ NULL
 
 #' Bucketize
 #'
-#' @section bucketize(input, boundaries, *, out_int32=False, right=False, out=None) -> Tensor :
+#' @section bucketize(input, boundaries, *, out_int32=FALSE, right=FALSE, out=None) -> Tensor :
 #'
 #' Returns the indices of the buckets to which each value in the `input` belongs, where the
 #' boundaries of the buckets are set by `boundaries`. Return a new tensor with the same size
-#' as `input`. If `right` is False (default), then the left boundary is closed. More
-#' formally, the returned index satisfies the following rules:
-#' 
-#' .. list-table::
-#'    :widths: 15 85
-#'    :header-rows: 1
-#' 
-#'    * - `right`
-#'      - *returned index satisfies*
-#'    * - False
-#'      - `boundaries[i-1] <= input[m][n]...[l][x] < boundaries[i]`
-#'    * - TRUE
-#'      - `boundaries[i-1] < input[m][n]...[l][x] <= boundaries[i]`
-#'
+#' as `input`. If `right` is FALSE (default), then the left boundary is closed. 
 #'
 #' @param input (Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).
 #' @param boundaries (Tensor) 1-D tensor, must contain a monotonically increasing sequence.
@@ -1437,37 +1410,16 @@ NULL
 
 #' Searchsorted
 #'
-#' @section searchsorted(sorted_sequence, values, *, out_int32=False, right=False, out=None) -> Tensor :
+#' @section searchsorted(sorted_sequence, values, *, out_int32=FALSE, right=FALSE, out=None) -> Tensor :
 #'
 #' Find the indices from the *innermost* dimension of `sorted_sequence` such that, if the
 #' corresponding values in `values` were inserted before the indices, the order of the
 #' corresponding *innermost* dimension within `sorted_sequence` would be preserved.
-#' Return a new tensor with the same size as `values`. If `right` is False (default),
-#' then the left boundary of `sorted_sequence` is closed. More formally, the returned index
-#' satisfies the following rules:
-#' 
-#' .. list-table::
-#'    :widths: 12 10 78
-#'    :header-rows: 1
-#' 
-#'    * - `sorted_sequence`
-#'      - `right`
-#'      - *returned index satisfies*
-#'    * - 1-D
-#'      - False
-#'      - `sorted_sequence[i-1] <= values[m][n]...[l][x] < sorted_sequence[i]`
-#'    * - 1-D
-#'      - TRUE
-#'      - `sorted_sequence[i-1] < values[m][n]...[l][x] <= sorted_sequence[i]`
-#'    * - N-D
-#'      - False
-#'      - `sorted_sequence[m][n]...[l][i-1] <= values[m][n]...[l][x] < sorted_sequence[m][n]...[l][i]`
-#'    * - N-D
-#'      - TRUE
-#'      - `sorted_sequence[m][n]...[l][i-1] < values[m][n]...[l][x] <= sorted_sequence[m][n]...[l][i]`
+#' Return a new tensor with the same size as `values`. If `right` is FALSE (default),
+#' then the left boundary of `sorted_sequence` is closed.
 #'
-#'
-#' @param sorted_sequence (Tensor) N-D or 1-D tensor, containing monotonically increasing sequence on the *innermost*                              dimension.
+#' @param sorted_sequence (Tensor) N-D or 1-D tensor, containing monotonically increasing 
+#'   sequence on the *innermost* dimension.
 #' @param values (Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).
 #'
 #' @name torch_searchsorted
@@ -1482,7 +1434,6 @@ NULL
 #'
 #' Tests if each element of `input` is positive infinity or not.
 #'
-#'
 #' @param input (Tensor) the input tensor.
 #'
 #' @name torch_isposinf
@@ -1496,7 +1447,6 @@ NULL
 #' @section isneginf(input, *, out=None) -> Tensor :
 #'
 #' Tests if each element of `input` is negative infinity or not.
-#'
 #'
 #' @param input (Tensor) the input tensor.
 #'
@@ -1514,8 +1464,7 @@ NULL
 #' If `input` is a vector of size \eqn{n} and `vec2` is a vector of
 #' size \eqn{m}, then `out` must be a matrix of size \eqn{(n \times m)}.
 #' 
-#' @note This function does not broadcast .
-#'
+#' @note This function does not broadcast.
 #'
 #' @param input (Tensor) 1-D input vector
 #' @param vec2 (Tensor) 1-D input vector
