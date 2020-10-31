@@ -804,12 +804,12 @@ NULL
 #' 
 #' \deqn{
 #'     y_{i} = \ln(\frac{z_{i}}{1 - z_{i}}) \\
-#'     z_{i} = \begin{cases}
+#'     z_{i} = \begin{array}{ll}
 #'         x_{i} & \mbox{if eps is None} \\
 #'         \mbox{eps} & \mbox{if } x_{i} < \mbox{eps} \\
 #'         x_{i} & \mbox{if } \mbox{eps} \leq x_{i} \leq 1 - \mbox{eps} \\
 #'         1 - \mbox{eps} & \mbox{if } x_{i} > 1 - \mbox{eps}
-#'     \end{cases}
+#'     \end{array}
 #' }
 #'
 #'
@@ -1123,11 +1123,11 @@ NULL
 #' The Heaviside step function is defined as:
 #' 
 #' \deqn{
-#' \mbox{{heaviside}}(input, values) = \begin{cases}
+#' \mbox{{heaviside}}(input, values) = \begin{array}{ll}
 #'  0, & \mbox{if input < 0}\\
 #'  values, & \mbox{if input == 0}\\
 #'  1, & \mbox{if input > 0}
-#'  \end{cases}
+#'  \end{array}
 #' }
 #'
 #'

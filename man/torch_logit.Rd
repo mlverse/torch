@@ -23,12 +23,12 @@ When eps is None and \code{input} < 0 or \code{input} > 1, the function will yie
 
 \deqn{
     y_{i} = \ln(\frac{z_{i}}{1 - z_{i}}) \\
-    z_{i} = \begin{cases}
+    z_{i} = \begin{array}{ll}
         x_{i} & \mbox{if eps is None} \\
         \mbox{eps} & \mbox{if } x_{i} < \mbox{eps} \\
         x_{i} & \mbox{if } \mbox{eps} \leq x_{i} \leq 1 - \mbox{eps} \\
         1 - \mbox{eps} & \mbox{if } x_{i} > 1 - \mbox{eps}
-    \end{cases}
+    \end{array}
 }
 }
 

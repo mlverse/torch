@@ -21,11 +21,11 @@ Computes the Heaviside step function for each element in \code{input}.
 The Heaviside step function is defined as:
 
 \deqn{
-\mbox{{heaviside}}(input, values) = \begin{cases}
+\mbox{{heaviside}}(input, values) = \begin{array}{ll}
  0, & \mbox{if input < 0}\\
  values, & \mbox{if input == 0}\\
  1, & \mbox{if input > 0}
- \end{cases}
+ \end{array}
 }
 }
 
