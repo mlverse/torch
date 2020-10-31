@@ -7,8 +7,8 @@ Distribution <- R6::R6Class(
     
     has_rsample           = FALSE,
     has_enumerate_support = FALSE,
-    .validate_args      = FALSE,
-    support               = NULL,
+    .validate_args        = FALSE,
+    .support              = NULL,
     
     # Choose different structure?
     arg_constraints       = list(),
