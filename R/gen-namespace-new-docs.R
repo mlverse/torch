@@ -1,6 +1,6 @@
 #' Absolute
 #'
-#' @section absolute(input, *, out=None) -> Tensor
+#' @section absolute(input, *, out=None) -> Tensor:
 #'
 #' Alias for [torch_abs()]
 #' @inheritParams torch_abs
