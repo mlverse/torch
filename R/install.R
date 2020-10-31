@@ -9,7 +9,7 @@ install_config <- list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.0.zip",
           path = "libtorch/lib",
           filter = ".dylib",
-          md5hash = "e7700c8fb430e18da5d42b4e9e7bb334"
+          md5hash = "4c5a79e919a63419ba7258b867c170ff"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)
       ),
