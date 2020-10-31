@@ -9,7 +9,7 @@ install_config <- list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.0.zip",
           path = "libtorch/lib",
           filter = ".dylib",
-          md5hash = "3f6a0e66d0129e9b50d21230e7661912"
+          md5hash = "e7700c8fb430e18da5d42b4e9e7bb334"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)
       ),
@@ -26,7 +26,7 @@ install_config <- list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcpu.zip",
           path = "libtorch/lib",
-          md5hash = "551a84a6803815e7eac05aa1258965ee"
+          md5hash = "e7700c8fb430e18da5d42b4e9e7bb334"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-cpu.zip", branch)
       )
