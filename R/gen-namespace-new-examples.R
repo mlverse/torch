@@ -33,7 +33,7 @@ NULL
 #'
 #' @examples
 #' if (FALSE) {
-#' x <- torch_tensor(c(3+4j, 7-24j, 0, 1+2j))
+#' x <- torch_tensor(c(3+4i, 7-24i, 0, 1+2i))
 #' x$sgn()
 #' torch_sgn(x)
 #' }
@@ -256,8 +256,8 @@ NULL
 #'
 #' torch_vdot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
 #' if (FALSE) {
-#' a <- torch_tensor(list(1 +2j, 3 - 1i))
-#' b <- torch_tensor(list(2 +1j, 4 - 0i))
+#' a <- torch_tensor(list(1 +2i, 3 - 1i))
+#' b <- torch_tensor(list(2 +1i, 4 - 0i))
 #' torch_vdot(a, b)
 #' torch_vdot(b, a)
 #' }
@@ -331,7 +331,7 @@ NULL
 #'
 #' @examples
 #' if (FALSE) {
-#' torch_isreal(torch_tensor(c(1, 1+1j, 2+0j)))
+#' torch_isreal(torch_tensor(c(1, 1+1i, 2+0i)))
 #' }
 NULL
 # -> isreal <-
@@ -454,9 +454,9 @@ NULL
 #'
 #' @examples
 #'
-#' input = torch_randn(c(1, 4, 2, 2))
+#' input <- torch_randn(c(1, 4, 2, 2))
 #' print(input)
-#' output = torch_nn$functional$channel_shuffle(input, 2)
+#' output <- torch_channel_shuffle(input, 2)
 #' print(output)
 NULL
 # -> channel_shuffle <-
@@ -467,7 +467,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c([3.142, -3.142], [6.283, -6.283], [1.570, -1.570]))
+#' a <- torch_tensor(rbind(c(3.142, -3.142), c(6.283, -6.283), c(1.570, -1.570)))
 #' torch_rad2deg(a)
 NULL
 # -> rad2deg <-
@@ -478,7 +478,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c([180.0, -180.0], [360.0, -360.0], [90.0, -90.0]))
+#' a <- torch_tensor(rbind(c(180.0, -180.0), c(360.0, -360.0), c(90.0, -90.0)))
 #' torch_deg2rad(a)
 NULL
 # -> deg2rad <-
@@ -497,7 +497,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_rand(5)
+#' a <- torch_rand(5)
 #' a
 #' torch_logit(a, eps=1e-6)
 NULL
@@ -517,11 +517,11 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c(1, 2, 3))
-#' b = torch_tensor(c(4, 5, 6))
+#' a <- torch_tensor(c(1, 2, 3))
+#' b <- torch_tensor(c(4, 5, 6))
 #' torch_hstack(list(a,b))
-#' a = torch_tensor(c([1],[2],[3]))
-#' b = torch_tensor(c([4],[5],[6]))
+#' a <- torch_tensor(rbind(1,2,3))
+#' b <- torch_tensor(rbind(4,5,6))
 #' torch_hstack(list(a,b))
 NULL
 # -> hstack <-
@@ -532,11 +532,11 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c(1, 2, 3))
-#' b = torch_tensor(c(4, 5, 6))
+#' a <- torch_tensor(c(1, 2, 3))
+#' b <- torch_tensor(c(4, 5, 6))
 #' torch_vstack(list(a,b))
-#' a = torch_tensor(c([1],[2],[3]))
-#' b = torch_tensor(c([4],[5],[6]))
+#' a <- torch_tensor(rbind(1,2,3))
+#' b <- torch_tensor(rbind(4,5,6))
 #' torch_vstack(list(a,b))
 NULL
 # -> vstack <-
@@ -547,11 +547,11 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c(1, 2, 3))
-#' b = torch_tensor(c(4, 5, 6))
+#' a <- torch_tensor(c(1, 2, 3))
+#' b <- torch_tensor(c(4, 5, 6))
 #' torch_dstack(list(a,b))
-#' a = torch_tensor(c([1],[2],[3]))
-#' b = torch_tensor(c([4],[5],[6]))
+#' a <- torch_tensor(rbind(1,2,3))
+#' b <- torch_tensor(rbind(4,5,6))
 #' torch_dstack(list(a,b))
 NULL
 # -> dstack <-
@@ -570,12 +570,12 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c(1., 2., NaN, 4.))
+#' a <- torch_tensor(c(1., 2., NaN, 4.))
 #' torch_nansum(a)
 #'
 #'
-#' torch_nansum(torch_tensor([1., float("nan")]))
-#' a = torch_tensor(c([1, 2), [3., float("nan")]])
+#' torch_nansum(torch_tensor(c(1., NaN)))
+#' a <- torch_tensor(rbind(c(1, 2), c(3., NaN)))
 #' torch_nansum(a)
 #' torch_nansum(a, dim=0)
 #' torch_nansum(a, dim=1)
@@ -588,7 +588,7 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(4)$view(2, 2)
+#' x <- torch_arange(start = 0, end = 4)$view(c(2, 2))
 #' x
 #' torch_fliplr(x)
 NULL
@@ -600,7 +600,7 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(4)$view(2, 2)
+#' x <- torch_arange(start = 0, end = 4)$view(c(2, 2))
 #' x
 #' torch_flipud(x)
 NULL
@@ -620,7 +620,7 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_tensor(c(1, 2, 3, 5))
+#' x <- torch_tensor(c(1, 2, 3, 5))
 #' torch_vander(x)
 #' torch_vander(x, N=3)
 #' torch_vander(x, N=3, increasing=TRUE)
@@ -641,8 +641,8 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(list(1, 2))
-#' b = torch_tensor(list(0, 1))
+#' a <- torch_tensor(c(1, 2))
+#' b <- torch_tensor(c(0, 1))
 #' torch_sub(a, b, alpha=2)
 NULL
 # -> sub <-
@@ -661,10 +661,10 @@ NULL
 #'
 #' @examples
 #'
-#' input = torch_tensor(c(-1.5, 0, 2.0))
-#' values = torch_tensor(c(0.5))
+#' input <- torch_tensor(c(-1.5, 0, 2.0))
+#' values <- torch_tensor(c(0.5))
 #' torch_heaviside(input, values)
-#' values = torch_tensor(c(1.2, -2.0, 3.5))
+#' values <- torch_tensor(c(1.2, -2.0, 3.5))
 #' torch_heaviside(input, values)
 NULL
 # -> heaviside <-
@@ -723,7 +723,7 @@ NULL
 #'
 #' @examples
 #'
-#' torch_i0list(torch_arange(5, dtype=torch_float32()))
+#' torch_i0(torch_arange(start = 0, end = 5, dtype=torch_float32()))
 NULL
 # -> i0 <-
 
@@ -733,7 +733,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c(0.7, -1.2, 0., 2.3))
+#' a <- torch_tensor(c(0.7, -1.2, 0., 2.3))
 #' torch_signbit(a)
 NULL
 # -> signbit <-
@@ -744,7 +744,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_hypot(torch_tensor(c(4.0)), torch_tensor(c(3.0, 4.0, 5.0)))
+#' torch_hypot(torch_tensor(c(4.0)), torch_tensor(c(3.0, 4.0, 5.0)))
 NULL
 # -> hypot <-
 
@@ -754,8 +754,8 @@ NULL
 #'
 #' @examples
 #'
-#' eps = torch_finfo(torch_float32)$eps
-#' torch_nextafter(torch_Tensor(c(1, 2)), torch_Tensor(c(2, 1))) == torch_Tensor([eps + 1, 2 - eps])
+#' eps <- torch_finfo(torch_float32())$eps
+#' torch_nextafter(torch_tensor(c(1, 2)), torch_tensor(c(2, 1))) == torch_tensor(c(eps + 1, 2 - eps))
 NULL
 # -> nextafter <-
 
@@ -765,8 +765,8 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(list(1, 2, -1))
-#' b = torch_tensor(list(3, 0, 4))
+#' a <- torch_tensor(c(1, 2, -1))
+#' b <- torch_tensor(c(3, 0, 4))
 #' torch_maximum(a, b)
 NULL
 # -> maximum <-
@@ -777,8 +777,8 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(list(1, 2, -1))
-#' b = torch_tensor(list(3, 0, 4))
+#' a <- torch_tensor(c(1, 2, -1))
+#' b <- torch_tensor(c(3, 0, 4))
 #' torch_minimum(a, b)
 NULL
 # -> minimum <-
@@ -789,15 +789,15 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_randn(c(1, 3))
+#' a <- torch_randn(c(1, 3))
 #' a
-#' q = torch_tensor(c(0, 0.5, 1))
+#' q <- torch_tensor(c(0, 0.5, 1))
 #' torch_quantile(a, q)
 #'
 #'
-#' a = torch_randn(c(2, 3))
+#' a <- torch_randn(c(2, 3))
 #' a
-#' q = torch_tensor(c(0.25, 0.5, 0.75))
+#' q <- torch_tensor(c(0.25, 0.5, 0.75))
 #' torch_quantile(a, q, dim=1, keepdim=TRUE)
 #' torch_quantile(a, q, dim=1, keepdim=TRUE)$shape
 NULL
@@ -809,13 +809,15 @@ NULL
 #'
 #' @examples
 #'
-#' t = torch_tensor(c(NaN, 1, 2))
+#' t <- torch_tensor(c(NaN, 1, 2))
 #' t$quantile(0.5)
 #' t$nanquantile(0.5)
-#' t = torch_tensor(c([NaN, NaN], [1, 2]))
+#' t <- torch_tensor(rbind(c(NaN, NaN), c(1, 2)))
 #' t
-#' t$nanquantile(0.5, dim=0)
 #' t$nanquantile(0.5, dim=1)
+#' t$nanquantile(0.5, dim=2)
+#' torch_nanquantile(t, 0.5, dim = 1)
+#' torch_nanquantile(t, 0.5, dim = 2)
 NULL
 # -> nanquantile <-
 
@@ -825,9 +827,9 @@ NULL
 #'
 #' @examples
 #'
-#' boundaries = torch_tensor(c(1, 3, 5, 7, 9))
+#' boundaries <- torch_tensor(c(1, 3, 5, 7, 9))
 #' boundaries
-#' v = torch_tensor(c([3, 6, 9], [3, 6, 9]))
+#' v <- torch_tensor(rbind(c(3, 6, 9), c(3, 6, 9)))
 #' v
 #' torch_bucketize(v, boundaries)
 #' torch_bucketize(v, boundaries, right=TRUE)
@@ -840,13 +842,13 @@ NULL
 #'
 #' @examples
 #'
-#' sorted_sequence = torch_tensor(c([1, 3, 5, 7, 9], [2, 4, 6, 8, 10]))
+#' sorted_sequence <- torch_tensor(rbind(c(1, 3, 5, 7, 9), c(2, 4, 6, 8, 10)))
 #' sorted_sequence
-#' values = torch_tensor(c([3, 6, 9], [3, 6, 9]))
+#' values <- torch_tensor(rbind(c(3, 6, 9), c(3, 6, 9)))
 #' values
 #' torch_searchsorted(sorted_sequence, values)
 #' torch_searchsorted(sorted_sequence, values, right=TRUE)
-#' sorted_sequence_1d = torch_tensor(c(1, 3, 5, 7, 9))
+#' sorted_sequence_1d <- torch_tensor(c(1, 3, 5, 7, 9))
 #' sorted_sequence_1d
 #' torch_searchsorted(sorted_sequence_1d, values)
 NULL
@@ -858,7 +860,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c(-Inf, Inf, 1.2))
+#' a <- torch_tensor(c(-Inf, Inf, 1.2))
 #' torch_isposinf(a)
 NULL
 # -> isposinf <-
@@ -869,7 +871,7 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_tensor(c(-Inf, Inf, 1.2))
+#' a <- torch_tensor(c(-Inf, Inf, 1.2))
 #' torch_isneginf(a)
 NULL
 # -> isneginf <-
@@ -880,8 +882,8 @@ NULL
 #'
 #' @examples
 #'
-#' v1 = torch_arange(1., 5.)
-#' v2 = torch_arange(1., 4.)
+#' v1 <- torch_arange(1., 5.)
+#' v2 <- torch_arange(1., 4.)
 #' torch_outer(v1, v2)
 NULL
 # -> outer <-
