@@ -54,6 +54,7 @@ Collate:
     'cuda.R'
     'device.R'
     'dimname_list.R'
+    'distribution.R'
     'dtype.R'
     'gen-method.R'
     'gen-namespace-docs.R'
