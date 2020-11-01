@@ -361,3 +361,7 @@ torch_vander <- function(x, N = NULL, increasing = FALSE) {
   .torch_vander(x, N, increasing)
 }
 
+#' @rdname torch_movedim
+torch_movedim <- function(self, source, destination) {
+  .torch_movedim(self, as_1_based_dim(source), as_1_based_dim(destination))
+}

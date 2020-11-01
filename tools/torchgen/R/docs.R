@@ -452,7 +452,7 @@ docum <- function(path, overwrite = "ask") {
 
   # rewrite examples
   iwalk(d, ~create_examples(.y, .x,
-                            path = str_c(path, "/R/gen-namespace-examples.R"),
+                            path = str_c(path, "/R/gen-namespace-new-examples.R"),
                             overwrite = overwrite))
 
   #readr::write_file(out, str_c(path, "/R/gen-namespace-docs.R"))

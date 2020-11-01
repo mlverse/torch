@@ -136,3 +136,9 @@ test_that("vander", {
   expect_equal_to_r(y[4,3], 25)
   
 })
+
+test_that("movedim", {
+  x <- torch_randn(3, 2, 1)
+  expect_tensor_shape(torch_movedim(x, 1, 2), c(2,3,1))
+  expect_tensor_shape(torch_movedim(x, c(1, 2), c(2, 3)), c(1,3,2))
+})

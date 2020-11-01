@@ -185,3 +185,21 @@ test_that("embedding returns a better error message", {
   )
   
 })
+
+test_that("movedim", {
+  
+  x <- torch_randn(3, 2, 1)
+  
+  expect_error(
+    torch_movedim(x, 0, 1),
+    regex = "Dimension is 1-based, but found 0.",
+    class = "value_error"
+  )
+  
+  expect_error(
+    torch_movedim(x, 4, 3),
+    regexp = "Dimension out of range (expected to be in range of [-3, 3], but got 4)", 
+    fixed = TRUE
+  )
+  
+})

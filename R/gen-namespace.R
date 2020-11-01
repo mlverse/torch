@@ -14440,8 +14440,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_movedim
-torch_movedim <- function(self, source, destination) {
+#' @rdname .torch_movedim
+.torch_movedim <- function(self, source, destination) {
   args <- mget(x = c("self", "source", "destination"))
 expected_types <- list(self = "Tensor", source = c("IntArrayRef", "int64_t"), destination = c("IntArrayRef", 
 "int64_t"))
