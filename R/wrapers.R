@@ -309,4 +309,28 @@ torch_upsample_trilinear3d <- function(input, self, output_size = NULL, align_co
   do.call(.torch_upsample_trilinear3d, args)
 }
 
+#' @rdname torch_atleast_1d
+torch_atleast_1d <- function(self) {
+  if (is_torch_tensor(self))
+    .torch_atleast_1d(self = self)
+  else
+    .torch_atleast_1d(tensors = self)
+}
+
+#' @rdname torch_atleast_1d
+torch_atleast_2d <- function(self) {
+  if (is_torch_tensor(self))
+    .torch_atleast_2d(self = self)
+  else
+    .torch_atleast_2d(tensors = self)
+}
+
+#' @rdname torch_atleast_1d
+torch_atleast_3d <- function(self) {
+  if (is_torch_tensor(self))
+    .torch_atleast_3d(self = self)
+  else
+    .torch_atleast_3d(tensors = self)
+}
+
 

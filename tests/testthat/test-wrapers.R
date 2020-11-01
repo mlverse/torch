@@ -64,3 +64,42 @@ test_that("torch_narrow", {
   expect_equal_to_tensor(x$narrow_copy(1, 1, 2), x[1:2,])
   
 })
+
+test_that("atleast_1d", {
+  x <- torch_randn(2)
+  expect_equal(torch_atleast_1d(x)$ndim, 1)
+  y <- torch_scalar_tensor(1)
+  expect_equal(y$ndim, 0)
+  expect_equal(torch_atleast_1d(y)$ndim, 1)
+  
+  z <- torch_atleast_1d(list(x, y, torch_randn(2,2)))
+  expect_equal(z[[1]]$ndim, 1)
+  expect_equal(z[[2]]$ndim, 1)
+  expect_equal(z[[3]]$ndim, 2)
+})
+
+test_that("atleast_2d", {
+  x <- torch_randn(2)
+  expect_equal(torch_atleast_2d(x)$ndim, 2)
+  y <- torch_scalar_tensor(1)
+  expect_equal(y$ndim, 0)
+  expect_equal(torch_atleast_2d(y)$ndim, 2)
+  
+  z <- torch_atleast_2d(list(x, y, torch_randn(2,2, 2)))
+  expect_equal(z[[1]]$ndim, 2)
+  expect_equal(z[[2]]$ndim, 2)
+  expect_equal(z[[3]]$ndim, 3)
+})
+
+test_that("atleast_3d", {
+  x <- torch_randn(2)
+  expect_equal(torch_atleast_3d(x)$ndim, 3)
+  y <- torch_scalar_tensor(1)
+  expect_equal(y$ndim, 0)
+  expect_equal(torch_atleast_3d(y)$ndim, 3)
+  
+  z <- torch_atleast_3d(list(x, y, torch_randn(2,2,2,2)))
+  expect_equal(z[[1]]$ndim, 3)
+  expect_equal(z[[2]]$ndim, 3)
+  expect_equal(z[[3]]$ndim, 4)
+})

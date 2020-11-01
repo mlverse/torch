@@ -5031,8 +5031,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_atleast_1d
-torch_atleast_1d <- function(self, tensors) {
+#' @rdname .torch_atleast_1d
+.torch_atleast_1d <- function(self, tensors) {
   args <- mget(x = c("self", "tensors"))
 expected_types <- list(self = "Tensor", tensors = "TensorList")
 nd_args <- c("self", "tensors")
@@ -5048,8 +5048,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_atleast_2d
-torch_atleast_2d <- function(self, tensors) {
+#' @rdname .torch_atleast_2d
+.torch_atleast_2d <- function(self, tensors) {
   args <- mget(x = c("self", "tensors"))
 expected_types <- list(self = "Tensor", tensors = "TensorList")
 nd_args <- c("self", "tensors")
@@ -5065,8 +5065,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_atleast_3d
-torch_atleast_3d <- function(self, tensors) {
+#' @rdname .torch_atleast_3d
+.torch_atleast_3d <- function(self, tensors) {
   args <- mget(x = c("self", "tensors"))
 expected_types <- list(self = "Tensor", tensors = "TensorList")
 nd_args <- c("self", "tensors")
