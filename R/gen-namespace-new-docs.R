@@ -1073,7 +1073,8 @@ NULL
 #' autograd relationship to `input` see `Tensor$detach`.
 #'
 #' @param self (Tensor) the input tensor.
-#'
+#' @param memory_format a torch memory format. see [torch_preserve_format()].
+#' 
 #' @name torch_clone
 #'
 #' @export
@@ -1401,6 +1402,15 @@ NULL
 #'
 #' @param self (Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).
 #' @param boundaries (Tensor) 1-D tensor, must contain a monotonically increasing sequence.
+#' @param out_int32 (bool, optional) – indicate the output data type. [torch_int32()] 
+#'  if True, [torch_int64()] otherwise. Default value is FALSE, i.e. default output 
+#'  data type is [torch_int64()].
+#' @param right (bool, optional) – if False, return the first suitable location 
+#'  that is found. If True, return the last such index. If no suitable index found, 
+#'  return 0 for non-numerical value (eg. nan, inf) or the size of boundaries 
+#'  (one pass the last index). In other words, if False, gets the lower bound index 
+#'  for each value in input from boundaries. If True, gets the upper bound index 
+#'  instead. Default value is False.
 #'
 #' @name torch_bucketize
 #'
