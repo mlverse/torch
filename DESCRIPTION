@@ -58,7 +58,6 @@ Collate:
     'gen-method.R'
     'gen-namespace-docs.R'
     'gen-namespace-examples.R'
-    'gen-namespace-new-examples.R'
     'gen-namespace.R'
     'generator.R'
     'help.R'
