@@ -8,6 +8,8 @@ torch_clone(self, memory_format = NULL)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
+
+\item{memory_format}{a torch memory format. see \code{\link[=torch_preserve_format]{torch_preserve_format()}}.}
 }
 \description{
 Clone

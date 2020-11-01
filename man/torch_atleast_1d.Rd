@@ -2,15 +2,9 @@
 % Please edit documentation in R/gen-namespace-new-docs.R, R/wrapers.R
 \name{torch_atleast_1d}
 \alias{torch_atleast_1d}
-\alias{torch_atleast_2d}
-\alias{torch_atleast_3d}
 \title{Atleast_1d}
 \usage{
 torch_atleast_1d(self)
-
-torch_atleast_2d(self)
-
-torch_atleast_3d(self)
 }
 \arguments{
 \item{self}{(Tensor or list of Tensors)}

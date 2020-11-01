@@ -317,7 +317,7 @@ torch_atleast_1d <- function(self) {
     .torch_atleast_1d(tensors = self)
 }
 
-#' @rdname torch_atleast_1d
+#' @rdname torch_atleast_2d
 torch_atleast_2d <- function(self) {
   if (is_torch_tensor(self))
     .torch_atleast_2d(self = self)
@@ -325,7 +325,7 @@ torch_atleast_2d <- function(self) {
     .torch_atleast_2d(tensors = self)
 }
 
-#' @rdname torch_atleast_1d
+#' @rdname torch_atleast_3d
 torch_atleast_3d <- function(self) {
   if (is_torch_tensor(self))
     .torch_atleast_3d(self = self)
