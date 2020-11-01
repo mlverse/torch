@@ -473,7 +473,7 @@ NULL
 #' @param window_length (int) length of the window.
 #' @param periodic (bool, optional) If TRUE, returns a periodic window suitable for use in spectral analysis.        If FALSE, returns a symmetric window suitable for use in filter design.
 #' @param beta (float, optional) shape parameter for the window.
-#' @inheritParams torch_tensor
+#' @inheritParams torch_arange
 #'
 #' @name torch_kaiser_window
 #'
@@ -906,7 +906,7 @@ NULL
 #' 
 #' Important consideration in the parameters `window` and `center` so that the envelop
 #' created by the summation of all the windows is never zero at certain point in time. Specifically,
-#' \eqn{\sum_{t=-\infty}^{\infty} |w|^2\[n-t\times hop_length\] \neq 0}.
+#' \eqn{\sum_{t=-\infty}^{\infty} |w|^2(n-t\times hop_length) \neq 0}.
 #' 
 #' Since [torch_stft()] discards elements at the end of the signal if they do not fit in a frame,
 #' `istft` may return a shorter signal than the original signal (can occur if `center` is FALSE
@@ -932,9 +932,9 @@ NULL
 #'   (`channel`, `fft_size`, `n_frame`, 2) where the `channel` dimension is 
 #'   optional.
 #' @param n_fft (int) Size of Fourier transform
-#' @param hop_length (Optional[int]) The distance between neighboring sliding window frames.
+#' @param hop_length (Optional`[int]`) The distance between neighboring sliding window frames.
 #'   (Default: `n_fft %% 4`)
-#' @param win_length (Optional[int]) The size of window frame and STFT filter. 
+#' @param win_length (Optional`[int]`) The size of window frame and STFT filter. 
 #'   (Default: `n_fft`)
 #' @param window (Optional(torch.Tensor)) The optional window function.
 #'   (Default: `torch_ones(win_length)`)
@@ -942,9 +942,9 @@ NULL
 #'   \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.
 #'   (Default: `TRUE`)
 #' @param normalized (bool) Whether the STFT was normalized. (Default: `FALSE`)
-#' @param onesided (Optional[bool]) Whether the STFT was onesided. 
+#' @param onesided (Optional(bool)) Whether the STFT was onesided. 
 #'   (Default: `TRUE` if `n_fft != fft_size` in the input size)
-#' @param length (Optional[int]) The amount to trim the signal by (i.e. the 
+#' @param length (Optional(int)]) The amount to trim the signal by (i.e. the 
 #'   original signal length). (Default: whole signal)
 #' @param return_complex (Optional(bool)) Whether the output should be complex, 
 #'   or if the input should be assumed to derive from a real signal and window. 
@@ -1436,8 +1436,8 @@ NULL
 #'
 #' @param sorted_sequence (Tensor) N-D or 1-D tensor, containing monotonically increasing 
 #'   sequence on the *innermost* dimension.
-#' @param values (Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).
-#' 
+#' @param self (Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).
+#'
 #' @inheritParams torch_bucketize
 #' @name torch_searchsorted
 #'

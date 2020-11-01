@@ -25,10 +25,10 @@ optional.}
 
 \item{n_fft}{(int) Size of Fourier transform}
 
-\item{hop_length}{(Optional\link{int}) The distance between neighboring sliding window frames.
+\item{hop_length}{(Optional\verb{[int]}) The distance between neighboring sliding window frames.
 (Default: \code{n_fft \%\% 4})}
 
-\item{win_length}{(Optional\link{int}) The size of window frame and STFT filter.
+\item{win_length}{(Optional\verb{[int]}) The size of window frame and STFT filter.
 (Default: \code{n_fft})}
 
 \item{window}{(Optional(torch.Tensor)) The optional window function.
@@ -40,10 +40,10 @@ optional.}
 
 \item{normalized}{(bool) Whether the STFT was normalized. (Default: \code{FALSE})}
 
-\item{onesided}{(Optional\link{bool}) Whether the STFT was onesided.
+\item{onesided}{(Optional(bool)) Whether the STFT was onesided.
 (Default: \code{TRUE} if \code{n_fft != fft_size} in the input size)}
 
-\item{length}{(Optional\link{int}) The amount to trim the signal by (i.e. the
+\item{length}{(Optional(int)]) The amount to trim the signal by (i.e. the
 original signal length). (Default: whole signal)}
 
 \item{return_complex}{(Optional(bool)) Whether the output should be complex,
@@ -60,7 +60,7 @@ condition (nonzero overlap).
 
 Important consideration in the parameters \code{window} and \code{center} so that the envelop
 created by the summation of all the windows is never zero at certain point in time. Specifically,
-\eqn{\sum_{t=-\infty}^{\infty} |w|^2\[n-t\times hop_length\] \neq 0}.
+\eqn{\sum_{t=-\infty}^{\infty} |w|^2(n-t\times hop_length) \neq 0}.
 
 Since \code{\link[=torch_stft]{torch_stft()}} discards elements at the end of the signal if they do not fit in a frame,
 \code{istft} may return a shorter signal than the original signal (can occur if \code{center} is FALSE

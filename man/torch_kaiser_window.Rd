@@ -21,11 +21,13 @@ torch_kaiser_window(
 
 \item{beta}{(float, optional) shape parameter for the window.}
 
-\item{dtype}{a \link{torch_dtype} instance}
+\item{dtype}{(\code{torch.dtype}, optional) the desired data type of returned tensor.        Default: if \code{NULL}, uses a global default (see \code{torch_set_default_tensor_type}). If \code{dtype} is not given, infer the data type from the other input        arguments. If any of \code{start}, \code{end}, or \code{stop} are floating-point, the        \code{dtype} is inferred to be the default dtype, see        \code{~torch.get_default_dtype}. Otherwise, the \code{dtype} is inferred to        be \code{torch.int64}.}
 
-\item{device}{a device creted with \code{\link[=torch_device]{torch_device()}}}
+\item{layout}{(\code{torch.layout}, optional) the desired layout of returned Tensor.        Default: \code{torch_strided}.}
 
-\item{requires_grad}{if autograd should record operations on the returned tensor.}
+\item{device}{(\code{torch.device}, optional) the desired device of returned tensor.        Default: if \code{NULL}, uses the current device for the default tensor type        (see \code{torch_set_default_tensor_type}). \code{device} will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.}
+
+\item{requires_grad}{(bool, optional) If autograd should record operations on the        returned tensor. Default: \code{FALSE}.}
 }
 \description{
 Kaiser_window

@@ -22,8 +22,6 @@ return 0 for non-numerical value (eg. nan, inf) or the size of boundaries
 (one pass the last index). In other words, if False, gets the lower bound index
 for each value in input from boundaries. If True, gets the upper bound index
 instead. Default value is False.}
-
-\item{values}{(Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).}
 }
 \description{
 Searchsorted
