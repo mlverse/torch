@@ -7,7 +7,7 @@
 torch_fliplr(self)
 }
 \arguments{
-\item{input}{(Tensor) Must be at least 2-dimensional.}
+\item{self}{(Tensor) Must be at least 2-dimensional.}
 }
 \description{
 Fliplr

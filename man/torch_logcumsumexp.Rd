@@ -7,9 +7,9 @@
 torch_logcumsumexp(self, dim)
 }
 \arguments{
-\item{dim}{(int) the dimension to do the operation over}
+\item{self}{(Tensor) the input tensor.}
 
-\item{input}{(Tensor) the input tensor.}
+\item{dim}{(int) the dimension to do the operation over}
 }
 \description{
 Logcumsumexp

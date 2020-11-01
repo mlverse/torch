@@ -7,11 +7,11 @@
 torch_amin(self, dim = list(), keepdim = FALSE)
 }
 \arguments{
+\item{self}{(Tensor) the input tensor.}
+
 \item{dim}{(int or tuple of ints) the dimension or dimensions to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{input}{(Tensor) the input tensor.}
 }
 \description{
 Amin

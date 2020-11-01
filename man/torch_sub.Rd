@@ -7,9 +7,9 @@
 torch_sub(self, other, alpha = 1L)
 }
 \arguments{
-\item{other}{(Tensor or Scalar) the tensor or scalar to subtract from \code{input}}
+\item{self}{(Tensor) the input tensor.}
 
-\item{input}{(Tensor) the input tensor.}
+\item{other}{(Tensor or Scalar) the tensor or scalar to subtract from \code{input}}
 }
 \description{
 Sub

@@ -7,10 +7,10 @@
 torch_vdot(self, other)
 }
 \arguments{
-\item{other}{(Tensor) second tensor in the dot product.}
-
-\item{input}{(Tensor) first tensor in the dot product. Its conjugate is used
+\item{self}{(Tensor) first tensor in the dot product. Its conjugate is used
 if it's complex.}
+
+\item{other}{(Tensor) second tensor in the dot product.}
 }
 \description{
 Vdot

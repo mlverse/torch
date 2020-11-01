@@ -7,9 +7,9 @@
 torch_outer(self, vec2)
 }
 \arguments{
-\item{vec2}{(Tensor) 1-D input vector}
+\item{self}{(Tensor) 1-D input vector}
 
-\item{input}{(Tensor) 1-D input vector}
+\item{vec2}{(Tensor) 1-D input vector}
 }
 \description{
 Outer

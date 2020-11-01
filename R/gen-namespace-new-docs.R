@@ -23,7 +23,7 @@ NULL
 #' @section Warning:
 #' [torch_view_as_real()] is only supported for tensors with `complex dtypes`.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_view_as_real
 #'
@@ -47,7 +47,7 @@ NULL
 #' tensor must have a `stride` of 1 for its last dimension. The strides of all
 #' other dimensions must be even numbers.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_view_as_complex
 #'
@@ -66,7 +66,7 @@ NULL
 #' \eqn{\mbox{out}_{i} = 0}, if \eqn{|{\mbox{{input}}_i}| == 0}
 #' \eqn{\mbox{out}_{i} = \frac{{\mbox{{input}}_i}}{|{\mbox{{input}}_i}|}}, otherwise
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_sgn
 #'
@@ -102,7 +102,7 @@ NULL
 #' }
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_acosh
 #'
@@ -116,7 +116,7 @@ NULL
 #'
 #' Alias for [torch_acosh()].
 #'
-#' @inheritParams torch_acosh
+#' @inheritParams torch_amax
 #' @name torch_arccosh
 #'
 #' @export
@@ -133,7 +133,7 @@ NULL
 #'     \mbox{out}_{i} = \sinh^{-1}(\mbox{input}_{i})
 #' }
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_asinh
 #'
@@ -168,7 +168,7 @@ NULL
 #'     \mbox{out}_{i} = \tanh^{-1}(\mbox{input}_{i})
 #' }
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_atanh
 #'
@@ -218,7 +218,7 @@ NULL
 #' Returns a 1-dimensional view of each input tensor with zero dimensions.
 #' Input tensors with one or more dimensions are returned as-is.
 #'
-#' @param input (Tensor or list of Tensors) 
+#' @param self (Tensor or list of Tensors) 
 #'
 #' @name torch_atleast_1d
 #'
@@ -231,7 +231,7 @@ NULL
 #' Returns a 2-dimensional view of each each input tensor with zero dimensions.
 #' Input tensors with two or more dimensions are returned as-is.
 #'
-#' @param input (Tensor or list of Tensors) 
+#' @param self (Tensor or list of Tensors) 
 #'
 #' @name torch_atleast_2d
 #'
@@ -244,7 +244,7 @@ NULL
 #' Returns a 3-dimensional view of each each input tensor with zero dimensions.
 #' Input tensors with three or more dimensions are returned as-is.
 #'
-#' @param input (Tensor or list of Tensors) 
+#' @param self (Tensor or list of Tensors) 
 #'
 #' @name torch_atleast_3d
 #'
@@ -346,7 +346,7 @@ NULL
 #' Counts the number of non-zero values in the tensor `input` along the given `dim`.
 #' If no dim is specified then all non-zeros in the tensor are counted.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param dim (int or tuple of ints, optional) Dim or tuple of dims along which 
 #'   to count non-zeros.
 #'
@@ -379,7 +379,7 @@ NULL
 #' 
 #' @note This function does not broadcast .
 #'
-#' @param input (Tensor) first tensor in the dot product. Its conjugate is used 
+#' @param self (Tensor) first tensor in the dot product. Its conjugate is used 
 #'   if it's complex.
 #' @param other (Tensor) second tensor in the dot product.
 #'
@@ -400,7 +400,7 @@ NULL
 #' }
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_exp2
 #'
@@ -419,7 +419,7 @@ NULL
 #' @note This defines \eqn{gcd(0, 0) = 0}.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_gcd
@@ -438,7 +438,7 @@ NULL
 #' 
 #' @note This defines \eqn{lcm(0, 0) = 0} and \eqn{lcm(0, a) = 0}.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_lcm
@@ -498,7 +498,7 @@ NULL
 #' `equal_nan` is TRUE.
 #'
 #'
-#' @param input (Tensor) first tensor to compare
+#' @param self (Tensor) first tensor to compare
 #' @param other (Tensor) second tensor to compare
 #' @param atol (float, optional) absolute tolerance. Default: 1e-08
 #' @param rtol (float, optional) relative tolerance. Default: 1e-05
@@ -519,7 +519,7 @@ NULL
 #' All real-valued types are considered real. Complex values are considered real when their imaginary part is 0.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_isreal
 #'
@@ -533,12 +533,12 @@ NULL
 #'
 #' Returns TRUE if the `input` is a single element tensor which is not equal to zero
 #' after type conversions.
-#' i.e. not equal to `torch_tensor(c(0.))` or `torch.tensor(c(0))` or
+#' i.e. not equal to `torch_tensor(c(0))` or `torch_tensor(c(0))` or
 #' `torch_tensor(c(FALSE))`.
 #' Throws a `RuntimeError` if `torch_numel() != 1` (even in case
 #' of sparse tensors).
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_is_nonzero
 #'
@@ -562,7 +562,7 @@ NULL
 #' reduction on a single tensor.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_logaddexp
@@ -581,7 +581,7 @@ NULL
 #' [torch_logaddexp()] for more details.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_logaddexp2
@@ -604,7 +604,7 @@ NULL
 #' }
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param dim (int) the dimension to do the operation over
 #'
 #' @name torch_logcumsumexp
@@ -630,7 +630,7 @@ NULL
 #' Mathematics 2019, 7, 1174.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_matrix_exp
 #'
@@ -659,7 +659,7 @@ NULL
 #' in the output tensors having fewer dimension than `input`.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
 #'
@@ -690,7 +690,7 @@ NULL
 #' the output tensors having fewer dimensions than `input`.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
 #'
@@ -723,7 +723,7 @@ NULL
 #' Other dimensions of `input` that are not explicitly moved remain in
 #' their original order and appear at the positions not specified in `destination`.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param source (int or tuple of ints) Original positions of the dims to move. These must be unique.
 #' @param destination (int or tuple of ints) Destination positions for each of the original dims. These must also be unique.
 #'
@@ -741,7 +741,7 @@ NULL
 #' into g groups and rearrange them as \eqn{(*, C \frac g, g, H, W)},
 #' while keeping the original tensor shape.
 #'
-#' @param input (Tensor) the input tensor
+#' @param self (Tensor) the input tensor
 #' @param groups (int) number of groups to divide channels in and rearrange.
 #'
 #' @name torch_channel_shuffle
@@ -758,7 +758,7 @@ NULL
 #' converted from angles in radians to degrees.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_rad2deg
 #'
@@ -774,7 +774,7 @@ NULL
 #' converted from angles in degrees to radians.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_deg2rad
 #'
@@ -813,7 +813,7 @@ NULL
 #' }
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param eps (float, optional) the epsilon for input clamp bound. Default: `None`
 #'
 #' @name torch_logit
@@ -924,7 +924,7 @@ NULL
 #' D. W. Griffin and J. S. Lim, "Signal estimation from modified short-time Fourier transform,"
 #' IEEE Trans. ASSP, vol.32, no.2, pp.236-243, Apr. 1984.
 #'
-#' @param input (Tensor) The input tensor. Expected to be output of [torch_stft()], 
+#' @param self (Tensor) The input tensor. Expected to be output of [torch_stft()], 
 #'   can either be complex (`channel`, `fft_size`, `n_frame`), or real 
 #'   (`channel`, `fft_size`, `n_frame`, 2) where the `channel` dimension is 
 #'   optional.
@@ -933,7 +933,7 @@ NULL
 #'   (Default: `n_fft %% 4`)
 #' @param win_length (Optional[int]) The size of window frame and STFT filter. 
 #'   (Default: `n_fft`)
-#' @param window (Optional[torch.Tensor]) The optional window function.
+#' @param window (Optional(torch.Tensor)) The optional window function.
 #'   (Default: `torch_ones(win_length)`)
 #' @param center (bool) Whether `input` was padded on both sides so that the 
 #'   \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.
@@ -970,7 +970,7 @@ NULL
 #' Otherwise, `dim` is squeezed (see [`torch_squeeze`]), resulting in the
 #' output tensor having 1 (or `len(dim)`) fewer dimension(s).
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
 #'
@@ -992,7 +992,7 @@ NULL
 #' Equivalent to `input[,-1]`. Requires the array to be at least 2-D.
 #'
 #'
-#' @param input (Tensor) Must be at least 2-dimensional.
+#' @param self (Tensor) Must be at least 2-dimensional.
 #'
 #' @name torch_fliplr
 #'
@@ -1013,7 +1013,7 @@ NULL
 #' Equivalent to `input[-1,]`. Requires the array to be at least 1-D.
 #'
 #'
-#' @param input (Tensor) Must be at least 1-dimensional.
+#' @param self (Tensor) Must be at least 1-dimensional.
 #'
 #' @name torch_flipud
 #'
@@ -1072,7 +1072,7 @@ NULL
 #' result of this operation to `input`. To create a tensor without an
 #' autograd relationship to `input` see `Tensor$detach`.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_clone
 #'
@@ -1093,7 +1093,7 @@ NULL
 #' Supports broadcasting to a common shape ,
 #' type promotion , and integer, float, and complex inputs.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param other (Tensor or Scalar) the tensor or scalar to subtract from `input`
 #'
 #' @name torch_sub
@@ -1131,7 +1131,7 @@ NULL
 #' }
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param values (Tensor) The values to use where `input` is zero.
 #'
 #' @name torch_heaviside
@@ -1234,7 +1234,7 @@ NULL
 #' \mbox{out}_{i} = I_0(\mbox{input}_{i}) = \sum_{k=0}^{\infty} \frac{(\mbox{input}_{i}^2/4)^k}{(k!)^2}
 #' }
 #'
-#' @param input (Tensor) the input tensor
+#' @param self (Tensor) the input tensor
 #'
 #' @name torch_i0
 #'
@@ -1248,7 +1248,7 @@ NULL
 #'
 #' Tests if each element of `input` has its sign bit set (is less than zero) or not.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_signbit
 #'
@@ -1270,7 +1270,7 @@ NULL
 #' broadcastable .
 #'
 #'
-#' @param input (Tensor) the first input tensor
+#' @param self (Tensor) the first input tensor
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_hypot
@@ -1289,7 +1289,7 @@ NULL
 #' broadcastable .
 #'
 #'
-#' @param input (Tensor) the first input tensor
+#' @param self (Tensor) the first input tensor
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_nextafter
@@ -1309,7 +1309,7 @@ NULL
 #' [torch_maximum()] is not supported for tensors with complex dtypes.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_maximum
@@ -1329,7 +1329,7 @@ NULL
 #' [torch_minimum()] is not supported for tensors with complex dtypes.
 #'
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #' @param other (Tensor) the second input tensor
 #'
 #' @name torch_minimum
@@ -1353,14 +1353,14 @@ NULL
 #' being flattened before computation.
 #' 
 #' If `keepdim` is `TRUE`, the output dimensions are of the same size as `input`
-#' except in the dimensions being reduced (`dim` or all if `dim` is `None`) where they
+#' except in the dimensions being reduced (`dim` or all if `dim` is `NULL`) where they
 #' have size 1. Otherwise, the dimensions being reduced are squeezed (see [`torch_squeeze`]).
 #' If `q` is a 1D tensor, an extra dimension is prepended to the output tensor with the same
 #' size as `q` which represents the quantiles.
 #'
 #'
-#' @param input (Tensor) the input tensor.
-#' @param q (float or Tensor) a scalar or 1D tensor of quantile values in the range [0, 1]
+#' @param self (Tensor) the input tensor.
+#' @param q (float or Tensor) a scalar or 1D tensor of quantile values in the range `[0, 1]`
 #' @param dim (int) the dimension to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
 #'
@@ -1380,8 +1380,8 @@ NULL
 #' that reduction will be `NaN`. See the documentation for [torch_quantile()].
 #'
 #'
-#' @param input (Tensor) the input tensor.
-#' @param q (float or Tensor) a scalar or 1D tensor of quantile values in the range [0, 1]
+#' @param self (Tensor) the input tensor.
+#' @param q (float or Tensor) a scalar or 1D tensor of quantile values in the range `[0, 1]`
 #' @param dim (int) the dimension to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
 #'
@@ -1399,7 +1399,7 @@ NULL
 #' boundaries of the buckets are set by `boundaries`. Return a new tensor with the same size
 #' as `input`. If `right` is FALSE (default), then the left boundary is closed. 
 #'
-#' @param input (Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).
+#' @param self (Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).
 #' @param boundaries (Tensor) 1-D tensor, must contain a monotonically increasing sequence.
 #'
 #' @name torch_bucketize
@@ -1434,7 +1434,7 @@ NULL
 #'
 #' Tests if each element of `input` is positive infinity or not.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_isposinf
 #'
@@ -1448,7 +1448,7 @@ NULL
 #'
 #' Tests if each element of `input` is negative infinity or not.
 #'
-#' @param input (Tensor) the input tensor.
+#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_isneginf
 #'
@@ -1466,7 +1466,7 @@ NULL
 #' 
 #' @note This function does not broadcast.
 #'
-#' @param input (Tensor) 1-D input vector
+#' @param self (Tensor) 1-D input vector
 #' @param vec2 (Tensor) 1-D input vector
 #'
 #' @name torch_outer

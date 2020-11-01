@@ -7,9 +7,9 @@
 torch_nextafter(self, other)
 }
 \arguments{
-\item{other}{(Tensor) the second input tensor}
+\item{self}{(Tensor) the first input tensor}
 
-\item{input}{(Tensor) the first input tensor}
+\item{other}{(Tensor) the second input tensor}
 }
 \description{
 Nextafter

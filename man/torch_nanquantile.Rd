@@ -7,13 +7,13 @@
 torch_nanquantile(self, q, dim = NULL, keepdim = FALSE)
 }
 \arguments{
-\item{q}{(float or Tensor) a scalar or 1D tensor of quantile values in the range \link{0, 1}}
+\item{self}{(Tensor) the input tensor.}
+
+\item{q}{(float or Tensor) a scalar or 1D tensor of quantile values in the range \verb{[0, 1]}}
 
 \item{dim}{(int) the dimension to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{input}{(Tensor) the input tensor.}
 }
 \description{
 Nanquantile

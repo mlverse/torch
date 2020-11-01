@@ -7,7 +7,7 @@
 torch_atleast_3d(self, tensors)
 }
 \arguments{
-\item{input}{(Tensor or list of Tensors)}
+\item{self}{(Tensor or list of Tensors)}
 }
 \description{
 Returns a 3-dimensional view of each each input tensor with zero dimensions.

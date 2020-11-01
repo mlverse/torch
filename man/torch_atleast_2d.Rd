@@ -7,7 +7,7 @@
 torch_atleast_2d(self, tensors)
 }
 \arguments{
-\item{input}{(Tensor or list of Tensors)}
+\item{self}{(Tensor or list of Tensors)}
 }
 \description{
 Returns a 2-dimensional view of each each input tensor with zero dimensions.

@@ -7,9 +7,9 @@
 torch_gcd(self, other)
 }
 \arguments{
-\item{other}{(Tensor) the second input tensor}
+\item{self}{(Tensor) the input tensor.}
 
-\item{input}{(Tensor) the input tensor.}
+\item{other}{(Tensor) the second input tensor}
 }
 \description{
 Gcd

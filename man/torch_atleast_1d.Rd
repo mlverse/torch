@@ -7,7 +7,7 @@
 torch_atleast_1d(self, tensors)
 }
 \arguments{
-\item{input}{(Tensor or list of Tensors)}
+\item{self}{(Tensor or list of Tensors)}
 }
 \description{
 Returns a 1-dimensional view of each input tensor with zero dimensions.

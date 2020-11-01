@@ -7,9 +7,9 @@
 torch_heaviside(self, values)
 }
 \arguments{
-\item{values}{(Tensor) The values to use where \code{input} is zero.}
+\item{self}{(Tensor) the input tensor.}
 
-\item{input}{(Tensor) the input tensor.}
+\item{values}{(Tensor) The values to use where \code{input} is zero.}
 }
 \description{
 Heaviside

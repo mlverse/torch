@@ -7,9 +7,9 @@
 torch_bucketize(self, boundaries, out_int32 = FALSE, right = FALSE)
 }
 \arguments{
-\item{boundaries}{(Tensor) 1-D tensor, must contain a monotonically increasing sequence.}
+\item{self}{(Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).}
 
-\item{input}{(Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).}
+\item{boundaries}{(Tensor) 1-D tensor, must contain a monotonically increasing sequence.}
 }
 \description{
 Bucketize

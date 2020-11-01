@@ -7,7 +7,7 @@
 torch_clone(self, memory_format = NULL)
 }
 \arguments{
-\item{input}{(Tensor) the input tensor.}
+\item{self}{(Tensor) the input tensor.}
 }
 \description{
 Clone

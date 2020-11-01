@@ -6,6 +6,9 @@
 \usage{
 torch_arctanh(self)
 }
+\arguments{
+\item{self}{(Tensor) the input tensor.}
+}
 \description{
 Arctanh
 }

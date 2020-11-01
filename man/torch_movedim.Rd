@@ -7,11 +7,11 @@
 torch_movedim(self, source, destination)
 }
 \arguments{
+\item{self}{(Tensor) the input tensor.}
+
 \item{source}{(int or tuple of ints) Original positions of the dims to move. These must be unique.}
 
 \item{destination}{(int or tuple of ints) Destination positions for each of the original dims. These must also be unique.}
-
-\item{input}{(Tensor) the input tensor.}
 }
 \description{
 Movedim

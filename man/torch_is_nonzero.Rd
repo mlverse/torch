@@ -7,7 +7,7 @@
 torch_is_nonzero(self)
 }
 \arguments{
-\item{input}{(Tensor) the input tensor.}
+\item{self}{(Tensor) the input tensor.}
 }
 \description{
 Is_nonzero
@@ -17,7 +17,7 @@ Is_nonzero
 
 Returns TRUE if the \code{input} is a single element tensor which is not equal to zero
 after type conversions.
-i.e. not equal to \code{torch_tensor(c(0.))} or \code{torch.tensor(c(0))} or
+i.e. not equal to \code{torch_tensor(c(0))} or \code{torch_tensor(c(0))} or
 \code{torch_tensor(c(FALSE))}.
 Throws a \code{RuntimeError} if \code{torch_numel() != 1} (even in case
 of sparse tensors).

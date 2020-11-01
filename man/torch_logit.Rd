@@ -7,9 +7,9 @@
 torch_logit(self, eps = NULL)
 }
 \arguments{
-\item{eps}{(float, optional) the epsilon for input clamp bound. Default: \code{None}}
+\item{self}{(Tensor) the input tensor.}
 
-\item{input}{(Tensor) the input tensor.}
+\item{eps}{(float, optional) the epsilon for input clamp bound. Default: \code{None}}
 }
 \description{
 Logit

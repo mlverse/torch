@@ -6,6 +6,9 @@
 \usage{
 torch_arcsinh(self)
 }
+\arguments{
+\item{self}{(Tensor) the input tensor.}
+}
 \description{
 Arcsinh
 }

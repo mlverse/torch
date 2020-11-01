@@ -6,6 +6,9 @@
 \usage{
 torch_arccosh(self)
 }
+\arguments{
+\item{self}{(Tensor) the input tensor.}
+}
 \description{
 Arccosh
 }

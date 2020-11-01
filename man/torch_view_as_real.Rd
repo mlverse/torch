@@ -7,7 +7,7 @@
 torch_view_as_real(self)
 }
 \arguments{
-\item{input}{(Tensor) the input tensor.}
+\item{self}{(Tensor) the input tensor.}
 }
 \description{
 View_as_real

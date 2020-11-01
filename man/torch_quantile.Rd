@@ -7,13 +7,13 @@
 torch_quantile(self, q, dim = NULL, keepdim = FALSE)
 }
 \arguments{
-\item{q}{(float or Tensor) a scalar or 1D tensor of quantile values in the range \link{0, 1}}
+\item{self}{(Tensor) the input tensor.}
+
+\item{q}{(float or Tensor) a scalar or 1D tensor of quantile values in the range \verb{[0, 1]}}
 
 \item{dim}{(int) the dimension to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{input}{(Tensor) the input tensor.}
 }
 \description{
 Quantile
@@ -34,7 +34,7 @@ data points. By default, \code{dim} is \code{None} resulting in the \code{input}
 being flattened before computation.
 
 If \code{keepdim} is \code{TRUE}, the output dimensions are of the same size as \code{input}
-except in the dimensions being reduced (\code{dim} or all if \code{dim} is \code{None}) where they
+except in the dimensions being reduced (\code{dim} or all if \code{dim} is \code{NULL}) where they
 have size 1. Otherwise, the dimensions being reduced are squeezed (see \code{\link{torch_squeeze}}).
 If \code{q} is a 1D tensor, an extra dimension is prepended to the output tensor with the same
 size as \code{q} which represents the quantiles.

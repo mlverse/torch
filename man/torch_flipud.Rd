@@ -7,7 +7,7 @@
 torch_flipud(self)
 }
 \arguments{
-\item{input}{(Tensor) Must be at least 1-dimensional.}
+\item{self}{(Tensor) Must be at least 1-dimensional.}
 }
 \description{
 Flipud

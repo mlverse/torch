@@ -7,9 +7,9 @@
 torch_channel_shuffle(self, groups)
 }
 \arguments{
-\item{groups}{(int) number of groups to divide channels in and rearrange.}
+\item{self}{(Tensor) the input tensor}
 
-\item{input}{(Tensor) the input tensor}
+\item{groups}{(int) number of groups to divide channels in and rearrange.}
 }
 \description{
 Channel_shuffle

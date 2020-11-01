@@ -18,6 +18,11 @@ torch_istft(
 )
 }
 \arguments{
+\item{self}{(Tensor) The input tensor. Expected to be output of \code{\link[=torch_stft]{torch_stft()}},
+can either be complex (\code{channel}, \code{fft_size}, \code{n_frame}), or real
+(\code{channel}, \code{fft_size}, \code{n_frame}, 2) where the \code{channel} dimension is
+optional.}
+
 \item{n_fft}{(int) Size of Fourier transform}
 
 \item{hop_length}{(Optional\link{int}) The distance between neighboring sliding window frames.
@@ -26,7 +31,7 @@ torch_istft(
 \item{win_length}{(Optional\link{int}) The size of window frame and STFT filter.
 (Default: \code{n_fft})}
 
-\item{window}{(Optional\link{torch.Tensor}) The optional window function.
+\item{window}{(Optional(torch.Tensor)) The optional window function.
 (Default: \code{torch_ones(win_length)})}
 
 \item{center}{(bool) Whether \code{input} was padded on both sides so that the
@@ -44,11 +49,6 @@ original signal length). (Default: whole signal)}
 \item{return_complex}{(Optional\link{bool}) Whether the output should be complex,
 or if the input should be assumed to derive from a real signal and window.
 Note that this is incompatible with \code{onesided=TRUE}. (Default: \code{FALSE})}
-
-\item{input}{(Tensor) The input tensor. Expected to be output of \code{\link[=torch_stft]{torch_stft()}},
-can either be complex (\code{channel}, \code{fft_size}, \code{n_frame}), or real
-(\code{channel}, \code{fft_size}, \code{n_frame}, 2) where the \code{channel} dimension is
-optional.}
 }
 \description{
 Inverse short time Fourier Transform. This is expected to be the inverse of \code{\link[=torch_stft]{torch_stft()}}.

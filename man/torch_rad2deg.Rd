@@ -7,7 +7,7 @@
 torch_rad2deg(self)
 }
 \arguments{
-\item{input}{(Tensor) the input tensor.}
+\item{self}{(Tensor) the input tensor.}
 }
 \description{
 Rad2deg

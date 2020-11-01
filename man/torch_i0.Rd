@@ -7,7 +7,7 @@
 torch_i0(self)
 }
 \arguments{
-\item{input}{(Tensor) the input tensor}
+\item{self}{(Tensor) the input tensor}
 }
 \description{
 I0

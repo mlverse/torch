@@ -7,6 +7,8 @@
 torch_isclose(self, other, rtol = 1e-05, atol = 0, equal_nan = FALSE)
 }
 \arguments{
+\item{self}{(Tensor) first tensor to compare}
+
 \item{other}{(Tensor) second tensor to compare}
 
 \item{rtol}{(float, optional) relative tolerance. Default: 1e-05}
@@ -15,8 +17,6 @@ torch_isclose(self, other, rtol = 1e-05, atol = 0, equal_nan = FALSE)
 
 \item{equal_nan}{(bool, optional) if \code{TRUE}, then two \code{NaN} s will be
 considered equal. Default: \code{FALSE}}
-
-\item{input}{(Tensor) first tensor to compare}
 }
 \description{
 Isclose

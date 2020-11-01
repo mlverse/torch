@@ -7,10 +7,10 @@
 torch_count_nonzero(self, dim = NULL)
 }
 \arguments{
+\item{self}{(Tensor) the input tensor.}
+
 \item{dim}{(int or tuple of ints, optional) Dim or tuple of dims along which
 to count non-zeros.}
-
-\item{input}{(Tensor) the input tensor.}
 }
 \description{
 Count_nonzero
