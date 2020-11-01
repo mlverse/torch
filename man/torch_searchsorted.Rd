@@ -10,6 +10,19 @@ torch_searchsorted(sorted_sequence, self, out_int32 = FALSE, right = FALSE)
 \item{sorted_sequence}{(Tensor) N-D or 1-D tensor, containing monotonically increasing
 sequence on the \emph{innermost} dimension.}
 
+\item{self}{(Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).}
+
+\item{out_int32}{(bool, optional) – indicate the output data type. \code{\link[=torch_int32]{torch_int32()}}
+if True, \code{\link[=torch_int64]{torch_int64()}} otherwise. Default value is FALSE, i.e. default output
+data type is \code{\link[=torch_int64]{torch_int64()}}.}
+
+\item{right}{(bool, optional) – if False, return the first suitable location
+that is found. If True, return the last such index. If no suitable index found,
+return 0 for non-numerical value (eg. nan, inf) or the size of boundaries
+(one pass the last index). In other words, if False, gets the lower bound index
+for each value in input from boundaries. If True, gets the upper bound index
+instead. Default value is False.}
+
 \item{values}{(Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).}
 }
 \description{

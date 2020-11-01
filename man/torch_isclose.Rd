@@ -29,7 +29,7 @@ Returns a new tensor with boolean elements representing if each element of
 Closeness is defined as:
 
 \deqn{
-    \lvert \mbox{input} - \mbox{other} \rvert \leq \mboxtt{atol} + \mboxtt{rtol} \times \lvert \mbox{other} \rvert
+    \vert \mbox{input} - \mbox{other} \vert \leq \mbox{atol} + \mbox{rtol} \times \vert \mbox{other} \vert
 }
 
 where \code{input} and \code{other} are finite. Where \code{input}

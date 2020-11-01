@@ -333,4 +333,31 @@ torch_atleast_3d <- function(self) {
     .torch_atleast_3d(tensors = self)
 }
 
+#' @rdname torch_dequantize
+torch_dequantize <- function(tensor) {
+  if (is_torch_tensor(tensor))
+    .torch_dequantize(self = tensor)
+  else
+    .torch_dequantize(tensors = tensor)
+}
+
+#' @rdname torch_kaiser_window
+torch_kaiser_window <- function(window_length, periodic, beta, dtype = torch_float(), 
+                                layout = NULL, device = NULL, requires_grad = NULL) {
+  
+  options <- torch_tensor_options(dtype = dtype, layout = layout, device = device, 
+                                  requires_grad = requires_grad)
+  args <- list(window_length = window_length, periodic = periodic,
+               options = options)
+  
+  if (!missing(beta))
+    args$beta <- beta
+  
+  do.call(.torch_kaiser_window, args)
+}
+
+#' @rdname torch_vander
+torch_vander <- function(x, N = NULL, increasing = FALSE) {
+  .torch_vander(x, N, increasing)
+}
 

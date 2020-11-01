@@ -6,13 +6,20 @@
 \usage{
 torch_unsafe_split(self, split_size, dim = 1L)
 }
+\arguments{
+\item{self}{(Tensor) tensor to split.}
+
+\item{split_size}{(int) size of a single chunk or        list of sizes for each chunk}
+
+\item{dim}{(int) dimension along which to split the tensor.}
+}
 \description{
 Unsafe_split
 }
 \section{unsafe_split(tensor, split_size_or_sections, dim=0) -> List of Tensors }{
 
 
-Works like \code{\link{torch_split}} but without enforcing the autograd restrictions
+Works like \code{\link[=torch_split]{torch_split()}} but without enforcing the autograd restrictions
 on inplace modification of the outputs.
 }
 

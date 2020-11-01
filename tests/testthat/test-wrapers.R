@@ -103,3 +103,36 @@ test_that("atleast_3d", {
   expect_equal(z[[2]]$ndim, 3)
   expect_equal(z[[3]]$ndim, 4)
 })
+
+test_that("kaiser_window", {
+  
+  expect_tensor(torch_kaiser_window(10, TRUE, beta = 12))
+  expect_tensor(torch_kaiser_window(10, TRUE))
+  expect_tensor(torch_kaiser_window(10, FALSE))
+  
+  expect_tensor(torch_kaiser_window(10, TRUE, dtype = torch_float64()))
+  
+  x <- torch_kaiser_window(10, TRUE, dtype = torch_float64())
+  expect_true(x$dtype == torch_float64())
+  
+  x <- torch_kaiser_window(10, TRUE, layout = torch_strided())
+  expect_tensor(x)
+  
+  x <- torch_kaiser_window(10, TRUE, requires_grad = TRUE)
+  expect_true(x$requires_grad)
+  
+})
+
+test_that("vander", {
+  
+  x <- torch_tensor(c(1, 2, 3, 5))
+  expect_tensor(torch_vander(x))
+  
+  y <- torch_vander(x, N=3)
+  expect_tensor(y)
+  expect_equal(y$size(2), 3)
+  
+  y <- torch_vander(x, N=3, increasing=TRUE)
+  expect_equal_to_r(y[4,3], 25)
+  
+})

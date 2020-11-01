@@ -10,6 +10,8 @@ torch_subtract(self, other, alpha = 1L)
 \item{self}{(Tensor) the input tensor.}
 
 \item{other}{(Tensor or Scalar) the tensor or scalar to subtract from \code{input}}
+
+\item{alpha}{the scalar multiplier for other}
 }
 \description{
 Subtract

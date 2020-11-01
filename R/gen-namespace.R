@@ -7633,8 +7633,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_dequantize
-torch_dequantize <- function(self, tensors) {
+#' @rdname .torch_dequantize
+.torch_dequantize <- function(self, tensors) {
   args <- mget(x = c("self", "tensors"))
 expected_types <- list(self = "Tensor", tensors = "TensorList")
 nd_args <- c("self", "tensors")
@@ -11570,8 +11570,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_kaiser_window
-torch_kaiser_window <- function(window_length, periodic, beta, options = list()) {
+#' @rdname .torch_kaiser_window
+.torch_kaiser_window <- function(window_length, periodic, beta, options = list()) {
   args <- mget(x = c("window_length", "periodic", "beta", "options"))
 expected_types <- list(window_length = "int64_t", periodic = "bool", beta = "double", 
     options = "TensorOptions")
@@ -21181,8 +21181,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_vander
-torch_vander <- function(x, False = NULL, increasing = FALSE) {
+#' @rdname .torch_vander
+.torch_vander <- function(x, False = NULL, increasing = FALSE) {
   args <- mget(x = c("x", "False", "increasing"))
 expected_types <- list(x = "Tensor", False = "int64_t", increasing = "bool")
 nd_args <- "x"

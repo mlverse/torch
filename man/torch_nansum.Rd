@@ -12,6 +12,10 @@ torch_nansum(self, dim, keepdim = FALSE, dtype = NULL)
 \item{dim}{(int or tuple of ints) the dimension or dimensions to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
+
+\item{dtype}{the desired data type of returned tensor. If specified, the
+input tensor is casted to dtype before the operation is performed. This is
+useful for preventing data type overflows. Default: \code{NULL}.}
 }
 \description{
 Nansum

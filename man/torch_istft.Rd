@@ -46,7 +46,7 @@ optional.}
 \item{length}{(Optional\link{int}) The amount to trim the signal by (i.e. the
 original signal length). (Default: whole signal)}
 
-\item{return_complex}{(Optional\link{bool}) Whether the output should be complex,
+\item{return_complex}{(Optional(bool)) Whether the output should be complex,
 or if the input should be assumed to derive from a real signal and window.
 Note that this is incompatible with \code{onesided=TRUE}. (Default: \code{FALSE})}
 }
@@ -60,7 +60,7 @@ condition (nonzero overlap).
 
 Important consideration in the parameters \code{window} and \code{center} so that the envelop
 created by the summation of all the windows is never zero at certain point in time. Specifically,
-\eqn{\sum_{t=-\infty}^{\infty} |w|^2[n-t\times hop\_length] \cancel{=} 0}.
+\eqn{\sum_{t=-\infty}^{\infty} |w|^2\[n-t\times hop_length\] \neq 0}.
 
 Since \code{\link[=torch_stft]{torch_stft()}} discards elements at the end of the signal if they do not fit in a frame,
 \code{istft} may return a shorter signal than the original signal (can occur if \code{center} is FALSE

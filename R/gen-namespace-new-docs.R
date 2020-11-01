@@ -473,6 +473,7 @@ NULL
 #' @param window_length (int) length of the window.
 #' @param periodic (bool, optional) If TRUE, returns a periodic window suitable for use in spectral analysis.        If FALSE, returns a symmetric window suitable for use in filter design.
 #' @param beta (float, optional) shape parameter for the window.
+#' @inheritParams torch_tensor
 #'
 #' @name torch_kaiser_window
 #'
@@ -489,7 +490,7 @@ NULL
 #' Closeness is defined as:
 #' 
 #' \deqn{
-#'     \lvert \mbox{input} - \mbox{other} \rvert \leq \mboxtt{atol} + \mboxtt{rtol} \times \lvert \mbox{other} \rvert
+#'     \vert \mbox{input} - \mbox{other} \vert \leq \mbox{atol} + \mbox{rtol} \times \vert \mbox{other} \vert
 #' }
 #' 
 #' where `input` and `other` are finite. Where `input`
@@ -787,7 +788,8 @@ NULL
 #' @section negative(input, *, out=None) -> Tensor :
 #'
 #' Alias for [torch_neg()]
-#'
+#' 
+#' @inheritParams torch_neg
 #' @name torch_negative
 #'
 #' @export
@@ -826,7 +828,7 @@ NULL
 #'
 #' @section unsafe_split(tensor, split_size_or_sections, dim=0) -> List of Tensors :
 #'
-#' Works like [`torch_split`] but without enforcing the autograd restrictions
+#' Works like [torch_split()] but without enforcing the autograd restrictions
 #' on inplace modification of the outputs.
 #' 
 #' @section Warning:
@@ -835,7 +837,8 @@ NULL
 #' responsibility to ensure that is the case. If both the input and one or more
 #' of the outputs are modified inplace, gradients computed by autograd will be
 #' silently incorrect.
-#'
+#' 
+#' @inheritParams torch_split
 #' @name torch_unsafe_split
 #'
 #' @export
@@ -903,7 +906,7 @@ NULL
 #' 
 #' Important consideration in the parameters `window` and `center` so that the envelop
 #' created by the summation of all the windows is never zero at certain point in time. Specifically,
-#' \eqn{\sum_{t=-\infty}^{\infty} |w|^2[n-t\times hop\_length] \cancel{=} 0}.
+#' \eqn{\sum_{t=-\infty}^{\infty} |w|^2\[n-t\times hop_length\] \neq 0}.
 #' 
 #' Since [torch_stft()] discards elements at the end of the signal if they do not fit in a frame,
 #' `istft` may return a shorter signal than the original signal (can occur if `center` is FALSE
@@ -943,7 +946,7 @@ NULL
 #'   (Default: `TRUE` if `n_fft != fft_size` in the input size)
 #' @param length (Optional[int]) The amount to trim the signal by (i.e. the 
 #'   original signal length). (Default: whole signal)
-#' @param return_complex (Optional[bool]) Whether the output should be complex, 
+#' @param return_complex (Optional(bool)) Whether the output should be complex, 
 #'   or if the input should be assumed to derive from a real signal and window. 
 #'   Note that this is incompatible with `onesided=TRUE`. (Default: `FALSE`)
 #'
@@ -973,6 +976,9 @@ NULL
 #' @param self (Tensor) the input tensor.
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
+#' @param dtype the desired data type of returned tensor. If specified, the 
+#'   input tensor is casted to dtype before the operation is performed. This is 
+#'   useful for preventing data type overflows. Default: `NULL`.
 #'
 #' @name torch_nansum
 #'
@@ -1096,7 +1102,8 @@ NULL
 #'
 #' @param self (Tensor) the input tensor.
 #' @param other (Tensor or Scalar) the tensor or scalar to subtract from `input`
-#'
+#' @param alpha the scalar multiplier for other
+#' 
 #' @name torch_sub
 #'
 #' @export
@@ -1151,8 +1158,7 @@ NULL
 #'
 #' Given a list of quantized Tensors, dequantize them and return a list of fp32 Tensors
 #'
-#' @param tensor (Tensor) A quantized Tensor
-#' @param tensors (sequence of Tensors) A list of quantized Tensors
+#' @param tensor (Tensor) A quantized Tensor or a list oof quantized tensors
 #'
 #' @name torch_dequantize
 #'
@@ -1431,7 +1437,8 @@ NULL
 #' @param sorted_sequence (Tensor) N-D or 1-D tensor, containing monotonically increasing 
 #'   sequence on the *innermost* dimension.
 #' @param values (Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).
-#'
+#' 
+#' @inheritParams torch_bucketize
 #' @name torch_searchsorted
 #'
 #' @export
