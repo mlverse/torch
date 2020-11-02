@@ -10,6 +10,7 @@
 - We now check the MD5 hashes of downloaded LibTorch binaries. (@dirkschumacher #325)
 - Refactored the optimizers code to avoid duplication of parameter checks, etc. (@dirkschumacher #328)
 - Added a Distribution abstract class (@krzjoa #333)
+- Updated to LibTorch 1.7 (#337)
 
 # torch 0.1.1
 
