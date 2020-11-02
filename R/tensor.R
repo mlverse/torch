@@ -187,6 +187,9 @@ Tensor <- R7Class(
       o <- private$`_min`(dim = dim, keepdim = keepdim)
       o[[2]] <- o[[2]] + 1L # make 1 based
       o
+    },
+    argsort = function(dim = -1L, descending = FALSE) {
+      private$`_argsort`(dim = dim, descending = descending)$add_(1L, 1L)
     }
   ),
   active = list(

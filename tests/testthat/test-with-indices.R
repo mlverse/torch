@@ -11,3 +11,22 @@ test_that("min with indices", {
   
   expect_equal_to_r(m[[2]]$to(dtype = torch_int()), 1)
 })
+
+test_that("argsort", {
+  
+  x <- torch_tensor(c(3,2,1))
+  expect_equal_to_r(torch_argsort(x), c(3, 2, 1))
+  expect_equal_to_r(x$argsort(), c(3, 2, 1))
+  
+  x <- torch_tensor(c(1,2,3))
+  expect_equal_to_r(torch_argsort(x, descending = TRUE), c(3, 2, 1))
+  expect_equal_to_r(x$argsort(descending = TRUE), c(3, 2, 1))
+  
+  x <- torch_tensor(1:10)$view(c(5,2))
+  expect_equal_to_r(torch_argsort(x, dim = 1)[,1], 1:5)
+  expect_equal_to_r(x$argsort(dim = 1)[,1], 1:5)
+  
+  expect_equal_to_r(torch_argsort(x, dim = 2)[,1], rep(1, 5))
+  expect_equal_to_r(x$argsort(dim = 2)[,1], rep(1, 5))
+  
+})
