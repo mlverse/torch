@@ -142,3 +142,25 @@ test_that("movedim", {
   expect_tensor_shape(torch_movedim(x, 1, 2), c(2,3,1))
   expect_tensor_shape(torch_movedim(x, c(1, 2), c(2, 3)), c(1,3,2))
 })
+
+test_that("norm", {
+  
+  x <- torch_rand(2, 3)
+  expect_tensor(torch_norm(x))
+  expect_tensor(torch_norm(x, p = 2))
+  expect_tensor(torch_norm(x, p = 2, dtype = torch_float64()))
+  expect_tensor_shape(torch_norm(x, dim = 1), 3)
+  expect_tensor_shape(torch_norm(x, dim = 2), 2)
+  expect_tensor_shape(torch_norm(x, dim = 2, dtype = torch_float64()), 2)
+  
+  x <- torch_rand(2, 3, names = c("W", "H"))
+  expect_error(
+    torch_norm(x, dim = "W"),
+    regexp = "not yet supported with named tensors"
+  )
+  expect_error(
+    torch_norm(x, dim = "H"), 
+    regexp = "not yet supported with named tensors"
+  )
+  
+})

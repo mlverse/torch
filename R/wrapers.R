@@ -365,3 +365,38 @@ torch_vander <- function(x, N = NULL, increasing = FALSE) {
 torch_movedim <- function(self, source, destination) {
   .torch_movedim(self, as_1_based_dim(source), as_1_based_dim(destination))
 }
+
+#' @rdname torch_norm
+torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
+  
+  if (missing(dim) && missing(dtype))
+    return(.torch_norm(self = self, p = p))
+  
+  p <- Scalar$new(p)
+  if (missing(dim) && !missing(dtype)) {
+    
+    o <- cpp_torch_namespace_norm_self_Tensor_p_Scalar_dtype_ScalarType(
+      self = self$ptr, 
+      p = p$ptr, 
+      dtype = dtype$ptr
+    )
+    
+    return(Tensor$new(ptr = o))
+  }
+  
+  if (missing(dtype)) {
+    dtype <- self$dtype
+  }
+  
+  if (is.numeric(unlist(dim))) {
+    o <- cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType(
+      self = self$ptr, p = p$ptr, dim = as_1_based_dim(unlist(dim)), keepdim = keepdim, dtype = dtype$ptr
+    )
+  } else if (is.character(unlist(dim))){
+    o <- cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType(
+      self = self$ptr, p = p$ptr, dim = DimnameList$new(unlist(dim))$ptr, keepdim = keepdim, dtype = dtype$ptr
+    )
+  }
+  
+  Tensor$new(ptr = o)
+}

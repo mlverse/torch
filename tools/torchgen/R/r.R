@@ -110,7 +110,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "upsample_nearest1d", "upsample_nearest2d", "upsample_nearest3d", "upsample_trilinear3d",
                    "atleast_1d", "atleast_2d", "atleast_3d",
                    "dequantize", "kaiser_window", "vander",
-                   "movedim", "argsort")
+                   "movedim", "argsort", "norm")
 
 internal_funs <- c(internal_funs, creation_ops)
 
