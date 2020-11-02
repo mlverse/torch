@@ -12,6 +12,7 @@
 - Added a Distribution abstract class (@krzjoa #333)
 - Updated to LibTorch 1.7 (#337)
 - Fixed `torch_argsort` and `x$argsort` to return 1-based indexes (#342)
+- Fixed `torch_norm` so it can be called with a `dim` argument. (#345)
 
 # torch 0.1.1
 
