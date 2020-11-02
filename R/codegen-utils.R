@@ -90,6 +90,15 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   if (any("IntArrayRef" == expected_types) && is.list(obj))
     return(list(as.integer(obj), "IntArrayRef"))
   
+  if (any("ArrayRef<double>" == expected_types) && is.numeric(obj))
+    return(list(obj, "ArrayRef<double>"))
+  
+  if (any("IntArrayRef" == expected_types) && is.null(obj))
+    return(list(NULL, "IntArrayRef"))
+  
+  if (any("ArrayRef<double>" == expected_types) && is.null(obj))
+    return(list(NULL, "ArrayRef<double>"))
+  
   if (any("int64_t" == expected_types) && is.numeric(obj) && length(obj) == 1 && any(arg_name == c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim", "index")))
     return(list(as_1_based_dim(obj), "int64_t"))
   
@@ -120,11 +129,11 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   if (any("MemoryFormat" == expected_types) && is.null(obj))
     return(list(cpp_nullopt(), "MemoryFormat"))
   
-  if (any("Generator *" == expected_types) && is_torch_generator(obj))
-    return(list(obj$ptr, "Generator *"))
+  if (any("Generator" == expected_types) && is_torch_generator(obj))
+    return(list(obj$ptr, "Generator"))
   
-  if (any("Generator *" == expected_types) && is.null(obj))
-    return(list(.generator_null$ptr, "Generator *"))
+  if (any("Generator" == expected_types) && is.null(obj))
+    return(list(.generator_null$ptr, "Generator"))
   
   if (any("Scalar" == expected_types) && is.null(obj))
     return(list(cpp_nullopt(), "Scalar"))
@@ -146,6 +155,9 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   
   if (any("Device" == expected_types) && is.character(obj))
     return(list(torch_device(obj)$ptr, "Device"))
+  
+  if (any("TensorList" == expected_types) && is.numeric(obj))
+    return(list(torch_tensor_list(list(torch_tensor(obj)))$ptr, "TensorList"))
   
   stop("Can't convert argument", call.=FALSE)
 }

@@ -1,6 +1,31 @@
 library(stringr)
 library(purrr)
 
+get_new_funs <- function() {
+  funs <- getNamespaceExports("torch")
+  funs <- funs[stringr::str_detect(funs, "^torch_")]
+  funs <- stringr::str_replace_all(funs, "torch_", "")
+
+  all_funs <- declarations() %>%
+    keep(~"namespace" %in% .x$method_of) %>%
+    map_chr(~.x$name) %>%
+    unique()
+
+  is_exported <- function(nm) {
+    is_exported <- tryCatch({torch[[nm]]; TRUE}, error = function(e) FALSE)
+    has_docs <- tryCatch({torch[[nm]][["__doc__"]]; TRUE}, error = function(e) FALSE)
+    is_exported && has_docs
+  }
+
+  torch <- reticulate::import("torch")
+
+  exported_funs <- all_funs[map_lgl(all_funs, is_exported)]
+  exported_funs <- exported_funs[!str_detect(exported_funs, "^_")]
+
+  new_funs <- exported_funs[!exported_funs %in% funs]
+  new_funs
+}
+
 #
 #
 # doc <- torch[["mean"]][["__doc__"]]
@@ -402,13 +427,14 @@ create_roxygen_full_examples <- function(m) {
 
 docum <- function(path, overwrite = "ask") {
 
-  funs <- declarations() %>%
-    keep(~"namespace" %in% .x$method_of) %>%
-    map_chr(~.x$name) %>%
-    unique() %>%
-    set_names()
+  # funs <- declarations() %>%
+  #   keep(~"namespace" %in% .x$method_of) %>%
+  #   map_chr(~.x$name) %>%
+  #   unique() %>%
+  #   set_names()
 
   torch <- reticulate::import("torch")
+  funs <- get_new_funs() %>% set_names()
 
   docs <- map(funs, ~get_doc(.x, torch)) %>% discard(is.null)
   docs <- map(docs, get_signatures)
@@ -426,7 +452,7 @@ docum <- function(path, overwrite = "ask") {
 
   # rewrite examples
   iwalk(d, ~create_examples(.y, .x,
-                            path = str_c(path, "/R/gen-namespace-examples.R"),
+                            path = str_c(path, "/R/gen-namespace-new-examples.R"),
                             overwrite = overwrite))
 
   #readr::write_file(out, str_c(path, "/R/gen-namespace-docs.R"))

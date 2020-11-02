@@ -86,6 +86,9 @@ cpp_function_name <- function(method, type) {
       purrr::pluck("dynamic_type")
   }
 
+  if (is.null(arg_types))
+    return(method$name)
+
   make_cpp_function_name(method$name, arg_types, type)
 }
 
@@ -107,8 +110,20 @@ cpp_parameter_type <- function(argument) {
     declaration <- "Rcpp::XPtr<XPtrTorchTensorList>"
   }
 
-  if (argument$dynamic_type == "IntArrayRef") {
+  if (argument$dynamic_type == "IntArrayRef" && argument$type == "c10::optional<IntArrayRef>") {
+    declaration <- "nullableVector<std::vector<int64_t>>"
+  }
+
+  if (argument$dynamic_type == "IntArrayRef" && argument$type != "c10::optional<IntArrayRef>") {
     declaration <- "std::vector<int64_t>"
+  }
+
+  if (argument$dynamic_type == "ArrayRef<double>"&& argument$type == "c10::optional<ArrayRef<double>>") {
+    declaration <- "nullableVector<std::vector<double>>"
+  }
+
+  if (argument$dynamic_type == "ArrayRef<double>"&& argument$type != "c10::optional<ArrayRef<double>>") {
+    declaration <- "std::vector<double>"
   }
 
   if (argument$dynamic_type == "int64_t") {
@@ -132,6 +147,10 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Generator *") {
+    declaration <- "Rcpp::XPtr<XPtrTorch>"
+  }
+
+  if (argument$dynamic_type == "Generator") {
     declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
@@ -222,8 +241,20 @@ cpp_argument_transform <- function(argument) {
     result <- glue::glue("{argument$name}->get()")
   }
 
-  if (argument$dynamic_type == "IntArrayRef") {
+  if (argument$dynamic_type == "IntArrayRef" && argument$type != "c10::optional<IntArrayRef>") {
     result <- glue::glue("lantern_vector_int64_t(&{argument$name}[0], {argument$name}.size())")
+  }
+
+  if (argument$dynamic_type == "IntArrayRef" && argument$type == "c10::optional<IntArrayRef>") {
+    result <- glue::glue("lantern_optional_vector_int64_t(&{argument$name}.x[0], {argument$name}.x.size(), {argument$name}.is_null)")
+  }
+
+  if (argument$dynamic_type == "ArrayRef<double>" && argument$type != "c10::optional<ArrayRef<double>>") {
+    result <- glue::glue("lantern_vector_double(&{argument$name}[0], {argument$name}.size())")
+  }
+
+  if (argument$dynamic_type == "ArrayRef<double>" && argument$type == "c10::optional<ArrayRef<double>>") {
+    result <- glue::glue("lantern_optional_vector_double(&{argument$name}.x[0], {argument$name}.x.size(), {argument$name}.is_null)")
   }
 
   if (argument$dynamic_type == "int64_t") {
@@ -247,6 +278,10 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "Generator *") {
+    result <- glue::glue("{argument$name}->get()")
+  }
+
+  if (argument$dynamic_type == "Generator") {
     result <- glue::glue("{argument$name}->get()")
   }
 
@@ -435,7 +470,8 @@ SKIP_R_BINDIND <- c(
   "polygamma",
   "_nnpack_available",
   "backward",
-  "_use_cudnn_rnn_flatten_weight"
+  "_use_cudnn_rnn_flatten_weight",
+  "is_vulkan_available"
 )
 
 cpp <- function(path) {

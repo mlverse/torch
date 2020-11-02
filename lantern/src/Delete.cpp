@@ -108,7 +108,7 @@ void _lantern_Layout_delete(void *x)
 void _lantern_Generator_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<std::shared_ptr<torch::Generator>>>(x);
+  lantern_delete<LanternObject<torch::Generator>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 

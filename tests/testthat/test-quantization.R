@@ -17,6 +17,14 @@ test_that("dequantize quantized tensors", {
   y <- x$dequantize()
   expect_true(!y$is_quantized())
   expect_true(x$is_quantized())
+  
+  y <- torch_dequantize(x)
+  expect_true(!y$is_quantized())
+  
+  z <- torch_dequantize(list(x, x))
+  expect_true(!z[[1]]$is_quantized())
+  expect_true(!z[[2]]$is_quantized())
+  
 })
 
 test_that("copy works", {

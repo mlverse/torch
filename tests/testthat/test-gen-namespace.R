@@ -41,21 +41,6 @@ test_that("_adaptive_avg_pool2d_backward", {
   expect_tensor(torch__adaptive_avg_pool2d_backward(b, x))
 })
 
-test_that("_addr", {
-  x <- torch_rand(c(2))
-  y <- torch_rand(c(2))
-  z <- torch_rand(c(2))
-  expect_tensor(torch__addr(x, y, z))
-})
-
-test_that("_addr_", {
-  x <- torch_rand(c(2,2))
-  y <- torch_rand(c(2))
-  z <- torch_rand(c(2))
-  k <- torch__addr_(x, y, z)
-  expect_equal_to_tensor(x, k)
-})
-
 test_that("_addr_out", {
   out <- torch_zeros(c(2,2))
   x <- torch_rand(c(2,2))

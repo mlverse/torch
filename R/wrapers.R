@@ -223,3 +223,145 @@ torch_narrow <- function(self, dim, start, length) {
   .torch_narrow(self, dim, start, length)
 }
 
+#' @rdname torch_quantize_per_tensor
+torch_quantize_per_tensor <- function(self, scale, zero_point, dtype) {
+  args <- list()
+  
+  if (is.list(self))
+    args$tensors <- self
+  else
+    args$self <- self
+  
+  if (is.list(scale))
+    args$scales <- scale
+  else
+    args$scale <- scale
+  
+  if (is.list(zero_point))
+    args$zero_points <- zero_point
+  else
+    args$zero_point <- zero_point
+  
+  args$dtype <- dtype
+  
+  do.call(.torch_quantize_per_tensor, args)
+}
+
+#' @rdname torch_upsample_nearest1d
+torch_upsample_nearest1d <- function(input, self, output_size = NULL, 
+                                     scale_factors = NULL, 
+                                     scales = NULL) {
+  
+  args <- list(input = input, output_size = output_size, 
+               scale_factors = scale_factors, scales = scales)
+  
+  if (!missing(self))
+    args$self <- self
+  
+  do.call(.torch_upsample_nearest1d, args)
+} 
+
+#' @rdname torch_upsample_nearest2d
+torch_upsample_nearest2d <- function(input, self, output_size = NULL, 
+                                     scale_factors = NULL, 
+                                     scales_h = NULL, scales_w = NULL) {
+  
+  args <- list(input = input, output_size = output_size, 
+               scale_factors = scale_factors,
+               scales_h = scales_h, scales_w = scales_w)
+  
+  if (!missing(self))
+    args$self <- self
+  
+  do.call(.torch_upsample_nearest2d, args)
+} 
+
+#' @rdname torch_upsample_nearest3d
+torch_upsample_nearest3d <- function(input, self, output_size = NULL, 
+                                     scale_factors = NULL, scales_d = NULL,
+                                     scales_h = NULL, scales_w = NULL) {
+  
+  args <- list(input = input, output_size = output_size, 
+               scale_factors = scale_factors, scales_d = scales_d,
+               scales_h = scales_h, scales_w = scales_w)
+  
+  if (!missing(self))
+    args$self <- self
+  
+  do.call(.torch_upsample_nearest3d, args)
+}
+
+#' @rdname torch_upsample_nearest3d
+torch_upsample_trilinear3d <- function(input, self, output_size = NULL, align_corners, 
+                                       scale_factors = NULL, scales_d = NULL, scales_h = NULL, 
+                                       scales_w = NULL) {
+  
+  args <- list(input = input, output_size = output_size, 
+               scale_factors = scale_factors, scales_d = scales_d,
+               scales_h = scales_h, scales_w = scales_w)
+  
+  if (!missing(self))
+    args$self <- self
+  
+  if (!missing(align_corners))
+    args$align_corners <- align_corners
+  
+  do.call(.torch_upsample_trilinear3d, args)
+}
+
+#' @rdname torch_atleast_1d
+torch_atleast_1d <- function(self) {
+  if (is_torch_tensor(self))
+    .torch_atleast_1d(self = self)
+  else
+    .torch_atleast_1d(tensors = self)
+}
+
+#' @rdname torch_atleast_2d
+torch_atleast_2d <- function(self) {
+  if (is_torch_tensor(self))
+    .torch_atleast_2d(self = self)
+  else
+    .torch_atleast_2d(tensors = self)
+}
+
+#' @rdname torch_atleast_3d
+torch_atleast_3d <- function(self) {
+  if (is_torch_tensor(self))
+    .torch_atleast_3d(self = self)
+  else
+    .torch_atleast_3d(tensors = self)
+}
+
+#' @rdname torch_dequantize
+torch_dequantize <- function(tensor) {
+  if (is_torch_tensor(tensor))
+    .torch_dequantize(self = tensor)
+  else
+    .torch_dequantize(tensors = tensor)
+}
+
+#' @rdname torch_kaiser_window
+torch_kaiser_window <- function(window_length, periodic, beta, dtype = torch_float(), 
+                                layout = NULL, device = NULL, requires_grad = NULL) {
+  
+  options <- torch_tensor_options(dtype = dtype, layout = layout, device = device, 
+                                  requires_grad = requires_grad)
+  args <- list(window_length = window_length, periodic = periodic,
+               options = options)
+  
+  if (!missing(beta))
+    args$beta <- beta
+  
+  do.call(.torch_kaiser_window, args)
+}
+
+#' @rdname torch_vander
+torch_vander <- function(x, N = NULL, increasing = FALSE) {
+  .torch_vander(x, N, increasing)
+}
+
+#' @rdname torch_movedim
+torch_movedim <- function(self, source, destination) {
+  .torch_movedim(self, as_1_based_dim(source), as_1_based_dim(destination))
+}
