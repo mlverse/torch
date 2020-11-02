@@ -11,6 +11,7 @@
 - Refactored the optimizers code to avoid duplication of parameter checks, etc. (@dirkschumacher #328)
 - Added a Distribution abstract class (@krzjoa #333)
 - Updated to LibTorch 1.7 (#337)
+- Fixed `torch_argsort` and `x$argsort` to return 1-based indexes (#342)
 
 # torch 0.1.1
 
