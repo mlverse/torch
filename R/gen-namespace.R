@@ -15559,8 +15559,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_norm
-torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
+#' @rdname .torch_norm
+.torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
   args <- mget(x = c("self", "p", "dim", "keepdim", "dtype"))
 expected_types <- list(self = "Tensor", p = "Scalar", dim = c("IntArrayRef", "DimnameList"
 ), keepdim = "bool", dtype = "ScalarType")
