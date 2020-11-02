@@ -820,7 +820,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "argsort", function(dim = -1L, descending = FALSE) {  args <- mget(x = c("dim", "descending"))
+Tensor$set("private", "_argsort", function(dim = -1L, descending = FALSE) {  args <- mget(x = c("dim", "descending"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), descending = "bool")
 nd_args <- "self"
