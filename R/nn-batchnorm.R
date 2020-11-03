@@ -257,5 +257,81 @@ nn_batch_norm2d <- nn_module(
   }
 )
 
-
-
+#' BatchNorm3D
+#' 
+#' @description
+#' Applies Batch Normalization over a 5D input (a mini-batch of 3D inputs
+#'   with additional channel dimension) as described in the paper
+#'   [Batch Normalization: Accelerating Deep Network Training by Reducing
+#'   Internal Covariate Shift](https://arxiv.org/abs/1502.03167).
+#' 
+#' @details 
+#' \deqn{
+#'   y = \frac{x - \mathrm{E}[x]}{ \sqrt{\mathrm{Var}[x] + \epsilon}} * \gamma + \beta
+#' }
+#' 
+#' The mean and standard-deviation are calculated per-dimension over the 
+#'   mini-batches and \eqn{\gamma} and \eqn{\beta} are learnable parameter
+#'   vectors of size `C` (where `C` is the input size). By default, the elements
+#'   of \eqn{\gamma} are set to 1 and the elements of \eqn{\beta} are set to 
+#'   0. The standard-deviation is calculated via the biased estimator, 
+#'   equivalent to `torch_var(input, unbiased = FALSE)`.
+#' 
+#' Also by default, during training this layer keeps running estimates of its
+#'   computed mean and variance, which are then used for normalization during
+#'   evaluation. The running estimates are kept with a default `momentum`
+#'   of 0.1.
+#' 
+#' If `track_running_stats` is set to `FALSE`, this layer then does not
+#'   keep running estimates, and batch statistics are instead used during
+#'   evaluation time as well.
+#' 
+#' @note
+#' This `momentum` argument is different from one used in optimizer
+#'   classes and the conventional notion of momentum. Mathematically, the
+#'   update rule for running statistics here is:
+#'   \eqn{\hat{x}_{\mbox{new}} = (1 - \mbox{momentum}) \times \hat{x} + \mbox{momentum} \times x_t},
+#'   where \eqn{\hat{x}} is the estimated statistic and \eqn{x_t} is the
+#'   new observed value.
+#' 
+#' Because the Batch Normalization is done over the `C` dimension, computing
+#'   statistics on `(N, D, H, W)` slices, it's common terminology to call this
+#'   Volumetric Batch Normalization or Spatio-temporal Batch Normalization.
+#' 
+#' @param num_features \eqn{C} from an expected input of size
+#'  \eqn{(N, C, D, H, W)}
+#' @param eps a value added to the denominator for numerical stability.
+#'  Default: 1e-5
+#' @param momentum the value used for the running_mean and running_var
+#'  computation. Can be set to `None` for cumulative moving average
+#'  (i.e. simple average). Default: 0.1
+#' @param affine a boolean value that when set to `TRUE`, this module has
+#'  learnable affine parameters. Default: `TRUE`
+#' @param track_running_stats a boolean value that when set to `TRUE`, this
+#'  module tracks the running mean and variance, and when set to `FALSE`,
+#'  this module does not track such statistics and uses batch statistics instead
+#'  in both training and eval modes if the running mean and variance are `None`.
+#'  Default: `TRUE`
+#'     
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, C, D, H, W)}
+#' - Output: \eqn{(N, C, D, H, W)} (same shape as input)
+#' 
+#' @examples
+#' # With Learnable Parameters
+#' m <- nn_batch_norm3d(100)
+#' # Without Learnable Parameters
+#' m <- nn_batch_norm3d(100, affine=FALSE)
+#' input <- torch_randn(20, 100, 35, 45, 55)
+#' output <- m(input)
+#' 
+#' @export
+nn_batch_norm3d <- nn_module(
+  "nn_batch_norm3d",
+  inherit = nn_batch_norm_,
+  check_input_dim = function(input) {
+    if (input$dim() != 5)
+      value_error('expected 5D input (got {input$dim()}D input)')
+  }
+)
