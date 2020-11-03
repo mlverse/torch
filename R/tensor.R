@@ -303,8 +303,14 @@ as_array.torch_tensor <- function(x) {
     x <- x$dequantize()
   
   # auto convert to int32 if long.
-  if (x$dtype == torch_long())
+  if (x$dtype == torch_long()) {
+    
+    if ((x > .Machine$integer.max)$any()$item())
+      warn("Converting integers > .Machine$integer.max is undefined and returns wrong results. Use as.integer64(x)")
+    
     x <- x$to(dtype = torch_int32())
+  }
+    
   
   out <- as_array_impl(x)
   
