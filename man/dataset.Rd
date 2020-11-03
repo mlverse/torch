@@ -30,15 +30,15 @@ new dataset.}
 objects.}
 }
 \description{
-All datasets that represent a map from keys to data samples should subclass
-it. All subclasses should overwrite \code{get_item}, supporting fetching a
-data sample for a given key. Subclasses could also optionally overwrite
-\code{lenght}, which is expected to return the size of the dataset by many
-\code{~torch.utils.data.Sampler} implementations and the default options
-of \code{~torch.utils.data.DataLoader}.
+All datasets that represent a map from keys to data samples should subclass this
+class. All subclasses should overwrite the .getitem() method, which supports
+fetching a data sample for a given key. Subclasses could also optionally
+overwrite .length(), which is expected to return the size of the dataset
+(e.g. number of samples) by many ~torch.utils.data.Sampler implementations
+and the default options of \code{\link[=dataloader]{dataloader()}}.
 }
 \note{
-\code{~torch.utils.data.DataLoader} by default constructs a index
+\code{\link[=dataloader]{dataloader()}}  by default constructs a index
 sampler that yields integral indices.  To make it work with a map-style
 dataset with non-integral indices/keys, a custom sampler must be provided.
 }

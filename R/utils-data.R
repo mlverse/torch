@@ -23,15 +23,15 @@ get_init <- function(x) {
 
 #' Helper function to create an R6 class that inherits from the abstract `Dataset` class
 #' 
-#' All datasets that represent a map from keys to data samples should subclass
-#' it. All subclasses should overwrite `get_item`, supporting fetching a
-#' data sample for a given key. Subclasses could also optionally overwrite
-#' `lenght`, which is expected to return the size of the dataset by many
-#' `~torch.utils.data.Sampler` implementations and the default options
-#' of `~torch.utils.data.DataLoader`.
+#' All datasets that represent a map from keys to data samples should subclass this 
+#' class. All subclasses should overwrite the .getitem() method, which supports 
+#' fetching a data sample for a given key. Subclasses could also optionally 
+#' overwrite .length(), which is expected to return the size of the dataset 
+#' (e.g. number of samples) by many ~torch.utils.data.Sampler implementations 
+#' and the default options of [dataloader()].
 #' 
 #' @note 
-#' `~torch.utils.data.DataLoader` by default constructs a index
+#' [dataloader()]  by default constructs a index
 #' sampler that yields integral indices.  To make it work with a map-style
 #' dataset with non-integral indices/keys, a custom sampler must be provided.
 #' 
