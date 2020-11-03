@@ -82,8 +82,16 @@ torch_hamming_window <- function(window_length, periodic=TRUE, alpha=0.54,
 torch_hann_window <- function(window_length, periodic=TRUE, dtype=NULL, 
                               layout=torch_strided(), device=NULL, 
                               requires_grad=FALSE) {
+  
+  if (is.null(dtype))
+    dtype <- torch_float()
+  
   opt <- torch_tensor_options(dtype = dtype, layout = layout, device = device,
                               requires_grad = requires_grad)
+  
+  if (is.null(window_length))
+    value_error("argument 'window_length' must be int, not NULL")
+  
   .torch_hann_window(window_length = window_length, periodic = periodic, 
                      options = opt)
 }
