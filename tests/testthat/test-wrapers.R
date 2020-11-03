@@ -164,3 +164,14 @@ test_that("norm", {
   )
   
 })
+
+test_that("hann_window", {
+  
+  expect_error(
+    torch_hann_window(NULL),
+    class = "value_error"
+  )
+  
+  expect_tensor_shape(torch_hann_window(window_length = 10), 10)
+  
+})
