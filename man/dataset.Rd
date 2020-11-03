@@ -4,7 +4,14 @@
 \alias{dataset}
 \title{Helper function to create an R6 class that inherits from the abstract \code{Dataset} class}
 \usage{
-dataset(name = NULL, inherit = Dataset, ..., parent_env = parent.frame())
+dataset(
+  name = NULL,
+  inherit = Dataset,
+  ...,
+  private = NULL,
+  active = NULL,
+  parent_env = parent.frame()
+)
 }
 \arguments{
 \item{name}{a name for the dataset. It it's also used as the class
@@ -14,6 +21,10 @@ for it.}
 new dataset.}
 
 \item{...}{public methods for the dataset class}
+
+\item{private}{passed to \code{\link[R6:R6Class]{R6::R6Class()}}.}
+
+\item{active}{passed to \code{\link[R6:R6Class]{R6::R6Class()}}.}
 
 \item{parent_env}{An environment to use as the parent of newly-created
 objects.}
