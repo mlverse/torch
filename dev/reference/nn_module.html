@@ -234,6 +234,8 @@
   classname <span class='op'>=</span> <span class='cn'>NULL</span>,
   inherit <span class='op'>=</span> <span class='va'>nn_Module</span>,
   <span class='va'>...</span>,
+  private <span class='op'>=</span> <span class='cn'>NULL</span>,
+  active <span class='op'>=</span> <span class='cn'>NULL</span>,
   parent_env <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
@@ -251,6 +253,14 @@
     <tr>
       <th>...</th>
       <td><p>methods implementation</p></td>
+    </tr>
+    <tr>
+      <th>private</th>
+      <td><p>passed to <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6Class()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>active</th>
+      <td><p>passed to <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6Class()</a></code>.</p></td>
     </tr>
     <tr>
       <th>parent_env</th>
