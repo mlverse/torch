@@ -301,6 +301,8 @@ is_nn_module <- function(x) {
 #' @param classname an optional name for the module
 #' @param inherit an optional module to inherit from
 #' @param ... methods implementation 
+#' @param private passed to [R6::R6Class()].
+#' @param active passed to [R6::R6Class()].
 #' @param parent_env passed to [R6::R6Class()].
 #' 
 #' @examples 
@@ -320,6 +322,7 @@ is_nn_module <- function(x) {
 #' 
 #' @export
 nn_module <- function(classname = NULL, inherit = nn_Module, ..., 
+                      private = NULL, active = NULL,
                       parent_env = parent.frame()) {
   
   if (inherits(inherit, "nn_module"))
@@ -338,6 +341,8 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...,
       .classes = classes,
       ...
     ),
+    private = private,
+    active = active,
     parent_env = e
   )
   

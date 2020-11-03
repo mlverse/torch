@@ -45,15 +45,14 @@ get_init <- function(x) {
 #' @param ... public methods for the dataset class
 #' @param parent_env An environment to use as the parent of newly-created 
 #'   objects.
+#' @inheritParams nn_module
 #' 
 #' @export
-dataset <- function(name = NULL, inherit = Dataset, ..., parent_env = parent.frame()) {
+dataset <- function(name = NULL, inherit = Dataset, ..., 
+                    private = NULL, active = NULL,
+                    parent_env = parent.frame()) {
   
   args <- list(...)
-  
-  active <- args$active
-  if (!is.null(active))
-    args <- args[-which(names(args) == "active")]
   
   if (!is.null(attr(inherit, "Dataset")))
     inherit <- attr(inherit, "Dataset")
@@ -66,6 +65,7 @@ dataset <- function(name = NULL, inherit = Dataset, ..., parent_env = parent.fra
     lock_objects = FALSE,
     inherit = inherit,
     public = args,
+    private = private,
     active = active,
     parent_env = e
   )
