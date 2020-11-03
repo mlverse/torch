@@ -2,10 +2,7 @@ Dataset <- R6::R6Class(
   classname = "dataset", 
   lock_objects = FALSE,
   public = list(
-    get_item = function(index) {
-      not_implemented_error()
-    },
-    add = function(other) {
+    .getitem = function(index) {
       not_implemented_error()
     }
   )
