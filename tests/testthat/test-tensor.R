@@ -71,6 +71,11 @@ test_that("Integer tensors", {
   
   expect_equal(as.integer64(z), x)
   
+  x <- torch_tensor(.Machine$integer.max)
+  expect_equal(as.integer(x), .Machine$integer.max)
+  expect_warning(as_array(2L*x))
+  expect_warning(as.integer(2L*x))
+  
 })
 
 test_that("Logical tensors", {
