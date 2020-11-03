@@ -4,7 +4,14 @@
 \alias{dataset}
 \title{Helper function to create an R6 class that inherits from the abstract \code{Dataset} class}
 \usage{
-dataset(name = NULL, inherit = Dataset, ..., parent_env = parent.frame())
+dataset(
+  name = NULL,
+  inherit = Dataset,
+  ...,
+  private = NULL,
+  active = NULL,
+  parent_env = parent.frame()
+)
 }
 \arguments{
 \item{name}{a name for the dataset. It it's also used as the class
@@ -15,19 +22,23 @@ new dataset.}
 
 \item{...}{public methods for the dataset class}
 
+\item{private}{passed to \code{\link[R6:R6Class]{R6::R6Class()}}.}
+
+\item{active}{passed to \code{\link[R6:R6Class]{R6::R6Class()}}.}
+
 \item{parent_env}{An environment to use as the parent of newly-created
 objects.}
 }
 \description{
-All datasets that represent a map from keys to data samples should subclass
-it. All subclasses should overwrite \code{get_item}, supporting fetching a
-data sample for a given key. Subclasses could also optionally overwrite
-\code{lenght}, which is expected to return the size of the dataset by many
-\code{~torch.utils.data.Sampler} implementations and the default options
-of \code{~torch.utils.data.DataLoader}.
+All datasets that represent a map from keys to data samples should subclass this
+class. All subclasses should overwrite the .getitem() method, which supports
+fetching a data sample for a given key. Subclasses could also optionally
+overwrite .length(), which is expected to return the size of the dataset
+(e.g. number of samples) by many ~torch.utils.data.Sampler implementations
+and the default options of \code{\link[=dataloader]{dataloader()}}.
 }
 \note{
-\code{~torch.utils.data.DataLoader} by default constructs a index
+\code{\link[=dataloader]{dataloader()}}  by default constructs a index
 sampler that yields integral indices.  To make it work with a map-style
 dataset with non-integral indices/keys, a custom sampler must be provided.
 }

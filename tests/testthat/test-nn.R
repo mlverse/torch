@@ -372,3 +372,42 @@ test_that("deduplicate duplicated parameters", {
   expect_length(m()$parameters, 2)
   expect_named(m()$parameters, c("x.weight", "x.bias"))
 })
+
+test_that("allow nn_modules with private and active methods", {
+  
+  
+  x <- nn_module(
+    "my_module",
+    initialize = function() {
+      self$dense <- nn_linear(10, 1)
+      private$dense2 <- nn_linear(10, 1)
+    },
+    forward = function(input) {
+      list(
+        self$dense(input) + private$constant(),
+        private$dense2(input) + self$constant2
+      )
+    },
+    private = list(
+      constant = function() {
+        torch_tensor(10)
+      }
+    ),
+    active = list(
+      constant2 = function() {
+        torch_tensor(5)
+      }
+    )
+  )
+  
+  m <- x()
+  
+  expect_error(
+    o <- m(torch_randn(100, 10)),
+    regexp = NA
+  )
+  
+  expect_tensor_shape(o[[1]], c(100, 1))
+  expect_tensor_shape(o[[2]], c(100, 1))
+  
+})
