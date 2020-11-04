@@ -16,6 +16,7 @@
 - We now warn when converting `long` tensors to R and there's a chance of an integer overflow. (#347)
 - Allow `private` and `active` methods in `nn_module`'s and `dataset`'s. (#349)
 - Fixed crash when calling `torch_hann_window` with an invalid `NULL` `window_length`. (#351)
+- Added `nn_batch_norm3d` (@mattwarkentin #354)
 
 # torch 0.1.1
 
