@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Conv_transpose2d — torch_conv_transpose2d • torch</title>
+<title>BatchNorm3D — nn_batch_norm3d • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,10 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Conv_transpose2d — torch_conv_transpose2d" />
-<meta property="og:description" content="Conv_transpose2d" />
+<meta property="og:title" content="BatchNorm3D — nn_batch_norm3d" />
+<meta property="og:description" content="Applies Batch Normalization over a 5D input (a mini-batch of 3D inputs
+with additional channel dimension) as described in the paper
+Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift." />
 
 
 <meta name="robots" content="noindex">
@@ -221,113 +223,109 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Conv_transpose2d</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_conv_transpose2d.Rd</code></div>
+    <h1>BatchNorm3D</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-batchnorm.R'><code>R/nn-batchnorm.R</code></a></small>
+    <div class="hidden name"><code>nn_batch_norm3d.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Conv_transpose2d</p>
+    <p>Applies Batch Normalization over a 5D input (a mini-batch of 3D inputs
+with additional channel dimension) as described in the paper
+<a href='https://arxiv.org/abs/1502.03167'>Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_conv_transpose2d</span><span class='op'>(</span>
-  <span class='va'>input</span>,
-  <span class='va'>weight</span>,
-  bias <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
-  stride <span class='op'>=</span> <span class='fl'>1L</span>,
-  padding <span class='op'>=</span> <span class='fl'>0L</span>,
-  output_padding <span class='op'>=</span> <span class='fl'>0L</span>,
-  groups <span class='op'>=</span> <span class='fl'>1L</span>,
-  dilation <span class='op'>=</span> <span class='fl'>1L</span>
+    <pre class="usage"><span class='fu'>nn_batch_norm3d</span><span class='op'>(</span>
+  <span class='va'>num_features</span>,
+  eps <span class='op'>=</span> <span class='fl'>1e-05</span>,
+  momentum <span class='op'>=</span> <span class='fl'>0.1</span>,
+  affine <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  track_running_stats <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>input tensor of shape \((\mbox{minibatch} , \mbox{in\_channels} , iH , iW)\)</p></td>
+      <th>num_features</th>
+      <td><p>\(C\) from an expected input of size
+\((N, C, D, H, W)\)</p></td>
     </tr>
     <tr>
-      <th>weight</th>
-      <td><p>filters of shape \((\mbox{in\_channels} , \frac{\mbox{out\_channels}}{\mbox{groups}} , kH , kW)\)</p></td>
+      <th>eps</th>
+      <td><p>a value added to the denominator for numerical stability.
+Default: 1e-5</p></td>
     </tr>
     <tr>
-      <th>bias</th>
-      <td><p>optional bias of shape \((\mbox{out\_channels})\). Default: NULL</p></td>
+      <th>momentum</th>
+      <td><p>the value used for the running_mean and running_var
+computation. Can be set to <code>None</code> for cumulative moving average
+(i.e. simple average). Default: 0.1</p></td>
     </tr>
     <tr>
-      <th>stride</th>
-      <td><p>the stride of the convolving kernel. Can be a single number or a      tuple <code>(sH, sW)</code>. Default: 1</p></td>
+      <th>affine</th>
+      <td><p>a boolean value that when set to <code>TRUE</code>, this module has
+learnable affine parameters. Default: <code>TRUE</code></p></td>
     </tr>
     <tr>
-      <th>padding</th>
-      <td><p><code>dilation * (kernel_size - 1) - padding</code> zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      <code>(padH, padW)</code>. Default: 0</p></td>
-    </tr>
-    <tr>
-      <th>output_padding</th>
-      <td><p>additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple <code>(out_padH, out_padW)</code>.      Default: 0</p></td>
-    </tr>
-    <tr>
-      <th>groups</th>
-      <td><p>split input into groups, \(\mbox{in\_channels}\) should be divisible by the      number of groups. Default: 1</p></td>
-    </tr>
-    <tr>
-      <th>dilation</th>
-      <td><p>the spacing between kernel elements. Can be a single number or      a tuple <code>(dH, dW)</code>. Default: 1</p></td>
+      <th>track_running_stats</th>
+      <td><p>a boolean value that when set to <code>TRUE</code>, this
+module tracks the running mean and variance, and when set to <code>FALSE</code>,
+this module does not track such statistics and uses batch statistics instead
+in both training and eval modes if the running mean and variance are <code>None</code>.
+Default: <code>TRUE</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="conv-transpose-d-input-weight-bias-null-stride-padding-output-padding-groups-dilation-gt-tensor-"><a class="anchor" href="#conv-transpose-d-input-weight-bias-null-stride-padding-output-padding-groups-dilation-gt-tensor-"></a>conv_transpose2d(input, weight, bias=NULL, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>$$
+  y = \frac{x - \mathrm{E}[x]}{ \sqrt{\mathrm{Var}[x] + \epsilon}} * \gamma + \beta
+$$</p>
+<p>The mean and standard-deviation are calculated per-dimension over the
+mini-batches and \(\gamma\) and \(\beta\) are learnable parameter
+vectors of size <code>C</code> (where <code>C</code> is the input size). By default, the elements
+of \(\gamma\) are set to 1 and the elements of \(\beta\) are set to
+0. The standard-deviation is calculated via the biased estimator,
+equivalent to <code><a href='torch_var.html'>torch_var(input, unbiased = FALSE)</a></code>.</p>
+<p>Also by default, during training this layer keeps running estimates of its
+computed mean and variance, which are then used for normalization during
+evaluation. The running estimates are kept with a default <code>momentum</code>
+of 0.1.</p>
+<p>If <code>track_running_stats</code> is set to <code>FALSE</code>, this layer then does not
+keep running estimates, and batch statistics are instead used during
+evaluation time as well.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This <code>momentum</code> argument is different from one used in optimizer
+classes and the conventional notion of momentum. Mathematically, the
+update rule for running statistics here is:
+\(\hat{x}_{\mbox{new}} = (1 - \mbox{momentum}) \times \hat{x} + \mbox{momentum} \times x_t\),
+where \(\hat{x}\) is the estimated statistic and \(x_t\) is the
+new observed value.</p>
+<p>Because the Batch Normalization is done over the <code>C</code> dimension, computing
+statistics on <code>(N, D, H, W)</code> slices, it's common terminology to call this
+Volumetric Batch Normalization or Spatio-temporal Batch Normalization.</p>
+    <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
 
     
 
+<ul>
+<li><p>Input: \((N, C, D, H, W)\)</p></li>
+<li><p>Output: \((N, C, D, H, W)\) (same shape as input)</p></li>
+</ul>
 
-<p>Applies a 2D transposed convolution operator over an input image
-composed of several input planes, sometimes also called "deconvolution".</p>
-<p>See <code><a href='nn_conv_transpose2d.html'>nn_conv_transpose2d()</a></code> for details and output shape.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># With Learnable Parameters</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_batch_norm3d</span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='co'># Without Learnable Parameters</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_batch_norm3d</span><span class='op'>(</span><span class='fl'>100</span>, affine<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>100</span>, <span class='fl'>35</span>, <span class='fl'>45</span>, <span class='fl'>55</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
 
-<span class='co'># With square kernels and equal stride</span>
-<span class='va'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='nnf_conv_transpose2d.html'>nnf_conv_transpose2d</a></span><span class='op'>(</span><span class='va'>inputs</span>, <span class='va'>weights</span>, padding<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; (1,1,.,.) = 
-#&gt;   -8.5956   5.2899  11.4994  -6.1252  -7.2715
-#&gt;   -3.4258   2.5466   0.2987   7.2500  -1.2084
-#&gt;    5.3111  -4.3637   7.1295  -4.1793   5.7049
-#&gt;   -6.7078   7.1790  -2.5049  13.2961  -4.5456
-#&gt;   -5.8912  -6.7956  11.3323 -11.3501   2.7867
-#&gt; 
-#&gt; (1,2,.,.) = 
-#&gt;   1.1653 -7.0530  1.1712  2.2491 -0.1538
-#&gt;  -1.7844  5.3738 -3.1834  7.3197  4.8396
-#&gt;   5.4372  1.1836 -6.5817 -3.7865 -2.2801
-#&gt;  -1.5649  4.6645 -7.3610  2.9251  4.7961
-#&gt;   1.3225  7.3473  2.0742 -4.0046  0.4335
-#&gt; 
-#&gt; (1,3,.,.) = 
-#&gt;  -1.5362  3.9692  1.7994  2.2746 -10.5501
-#&gt;  -10.1320 -6.6657 -2.4080 -4.6818 -4.7388
-#&gt;  -2.7234 -12.6979  2.4962 -0.8433  2.0578
-#&gt;   5.6457 -4.3174  6.0773 -6.9292  2.5635
-#&gt;  -6.3219 -0.8699 -3.3483  3.6382  3.2782
-#&gt; 
-#&gt; (1,4,.,.) = 
-#&gt;    3.4424 -12.1190  -6.1312  -2.5773   4.2203
-#&gt;   -3.7103   3.1223   8.0443  -7.8928   0.4390
-#&gt;    4.8893   1.5606  -6.9054   1.5655  -4.9943
-#&gt;   -1.8594  -6.8815  -5.4860   3.1056   6.7501
-#&gt;   -0.2323  12.3977  -1.9367   0.9490  -3.0460
-#&gt; 
-#&gt; (1,5,.,.) = 
-#&gt;  -4.7036  4.3976 -7.8547 -0.0569  5.6664
-#&gt; ... [the output was truncated (use n=-1 to disable)]
-#&gt; [ CPUFloatType{1,8,5,5} ]</div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
