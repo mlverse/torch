@@ -187,19 +187,19 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>torch can be installed from CRAN with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 <p>You can also install the development version with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlverse/torch"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlverse/torch"</span><span class="op">)</span></code></pre></div>
 <p>At the first package load additional software will be installed.</p>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
 <p>You can create torch tensors from R objects with the <code>torch_tensor</code> function and convert them back to R objects with <code>as_array</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="va">x</span>, dtype <span class="op">=</span> <span class="fu"><a href="reference/torch_dtype.html">torch_float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">y</span>
@@ -213,13 +213,13 @@
 <span class="co">#&gt;   0.1343  0.4721</span>
 <span class="co">#&gt; [ CPUDoubleType{2,2,2} ]</span>
 <span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="reference/as_array.html">as_array</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></pre></div>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <div id="simple-autograd-example" class="section level3">
 <h3 class="hasAnchor">
 <a href="#simple-autograd-example" class="anchor"></a>Simple Autograd Example</h3>
 <p>In the following snippet we let torch, using the autograd feature, calculate the derivatives:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">2</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">3</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">w</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="va">b</span>
@@ -235,7 +235,7 @@
 <span class="va">b</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
-<span class="co">#&gt; [ CPUFloatType{1} ]</span></pre></div>
+<span class="co">#&gt; [ CPUFloatType{1} ]</span></code></pre></div>
 </div>
 </div>
 <div id="contributing" class="section level2">

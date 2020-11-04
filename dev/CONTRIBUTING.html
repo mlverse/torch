@@ -269,16 +269,16 @@
 <a href="#workflow" class="anchor"></a>Workflow</h3>
 <p>We use <code>devtools</code> as the toolchain for development, but a few steps must be done before setiing up.</p>
 <p>The first time you clone the repository, you must run:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"tools/buildlantern.R"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"tools/buildlantern.R"</span><span class="op">)</span></code></pre></div>
 <p>This will compile Lantern binaries and download LibTorch and copy the binaries to <code>deps</code> folder in the working directory.</p>
 <p>This command must be run everytime you modify lantern code. ie. code that lives in <code>lantern/src</code>.</p>
 <p>You can the run</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">load_all</span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">load_all</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>To load torch and test interactively. Or</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">test</span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">test</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>To run the test suite.</p>
 </div>
 </div>

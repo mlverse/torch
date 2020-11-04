@@ -190,14 +190,14 @@
 <blockquote>
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py">here</a>. All credits goes to <a href="https://github.com/jcjohnson/pytorch-examples">Justin Johnson</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>In the previous examples, we had to manually implement both the forward and backward passes of our neural network. Manually implementing the backward pass is not a big deal for a small two-layer network, but can quickly get very hairy for large complex networks.</p>
 <p>Thankfully, we can use automatic differentiation to automate the computation of backward passes in neural networks. The autograd feature in torch provides exactly this functionality. When using autograd, the forward pass of your network will define a computational graph; nodes in the graph will be Tensors, and edges will be functions that produce output Tensors from input Tensors. Backpropagating through this graph then allows you to easily compute gradients.</p>
 <p>This sounds complicated, it’s pretty simple to use in practice. Each Tensor represents a node in a computational graph. If x is a Tensor that has <code>x$requires_grad=TRUE</code> then <code>x$grad</code> is another Tensor holding the gradient of x with respect to some scalar value.</p>
 <p>Here we use torch Tensors and autograd to implement our two-layer network; now we no longer need to manually implement the backward pass through the network:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../../reference/cuda_is_available.html">cuda_is_available</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../../reference/cuda_is_available.html">cuda_is_available</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
    <span class="va">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span><span class="op">(</span><span class="st">"cuda"</span><span class="op">)</span>
 <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
    <span class="va">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span><span class="op">(</span><span class="st">"cpu"</span><span class="op">)</span>
@@ -257,12 +257,12 @@
       <span class="va">w2</span><span class="op">$</span><span class="va">grad</span><span class="op">$</span><span class="fu">zero_</span><span class="op">(</span><span class="op">)</span>
    <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Step: 1 : 36828732 </span>
-<span class="co">#&gt; Step: 100 : 968.7177 </span>
-<span class="co">#&gt; Step: 200 : 10.89571 </span>
-<span class="co">#&gt; Step: 300 : 0.2165193 </span>
-<span class="co">#&gt; Step: 400 : 0.005886803 </span>
-<span class="co">#&gt; Step: 500 : 0.0003723945</span></pre></div>
+<span class="co">#&gt; Step: 1 : 30361260 </span>
+<span class="co">#&gt; Step: 100 : 415.7028 </span>
+<span class="co">#&gt; Step: 200 : 1.496791 </span>
+<span class="co">#&gt; Step: 300 : 0.009365758 </span>
+<span class="co">#&gt; Step: 400 : 0.0002317031 </span>
+<span class="co">#&gt; Step: 500 : 4.002573e-05</span></code></pre></div>
 <p>In the <a href="new-autograd-functions.html">next example</a> we will learn how to create new autograd functions.</p>
   </div>
 

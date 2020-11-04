@@ -187,8 +187,8 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>So far, all we’ve been using from torch is <em>tensors</em>, but we’ve been performing all calculations ourselves – the computing the predictions, the loss, the gradients (and thus, the necessary updates to the weights), and the new weight values. In this chapter, we’ll make a significant change: Namely, we spare ourselves the cumbersome calculation of gradients, and have torch do it for us.</p>
 <p>Before we see that in action, let’s get some more background.</p>
 <div id="automatic-differentiation-with-autograd" class="section level2">
@@ -196,38 +196,38 @@
 <a href="#automatic-differentiation-with-autograd" class="anchor"></a>Automatic differentiation with autograd</h2>
 <p>Torch uses a module called <em>autograd</em> to record operations performed on tensors, and store what has to be done to obtain the respective gradients. These actions are stored as functions, and those functions are applied in order when the gradient of the output (normally, the loss) with respect to those tensors is calculated: starting from the output node and <em>propagating</em> gradients <em>back</em> through the network. This is a form of <em>reverse mode automatic differentiation</em>.</p>
 <p>As users, we can see a bit of this implementation. As a prerequisite for this “recording” to happen, tensors have to be created with <code>requires_grad = TRUE</code>. E.g.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>To be clear, this is a tensor <em>with respect to which</em> gradients have to be calculated – normally, a tensor representing a weight or a bias, not the input data <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. If we now perform some operation on that tensor, assigning the result to <code>y</code></p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="fu">mean</span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="fu">mean</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>we find that <code>y</code> now has a non-empty <code>grad_fn</code> that tells torch how to compute the gradient of <code>y</code> with respect to <code>x</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">y</span><span class="op">$</span><span class="va">grad_fn</span>
-<span class="co">#&gt; MeanBackward0</span></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">y</span><span class="op">$</span><span class="va">grad_fn</span>
+<span class="co">#&gt; MeanBackward0</span></code></pre></div>
 <p>Actual computation of gradients is triggered by calling <code>backward()</code> on the output tensor.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">y</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">y</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>That executed, <code>x</code> now has a non-empty field <code>grad</code> that stores the gradient of <code>y</code> with respect to <code>x</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">x</span><span class="op">$</span><span class="va">grad</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
-<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 <p>With a longer chain of computations, we can peek at how torch builds up a graph of backward operations.</p>
 <p>Here is a slightly more complex example. We call <code>retain_grad()</code> on <code>y</code> and <code>z</code> just for demonstration purposes; by default, intermediate gradients – while of course they have to be computed – aren’t stored, in order to save memory.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1.1</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x1</span> <span class="op">*</span> <span class="op">(</span><span class="va">x2</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span>
 <span class="va">y</span><span class="op">$</span><span class="fu">retain_grad</span><span class="op">(</span><span class="op">)</span>
 <span class="va">z</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">$</span><span class="fu">pow</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">*</span> <span class="fl">3</span>
 <span class="va">z</span><span class="op">$</span><span class="fu">retain_grad</span><span class="op">(</span><span class="op">)</span>
-<span class="va">out</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">$</span><span class="fu">mean</span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="va">out</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">$</span><span class="fu">mean</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Starting from <code>out$grad_fn</code>, we can follow the graph all back to the leaf nodes:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="co"># how to compute the gradient for mean, the last operation executed</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># how to compute the gradient for mean, the last operation executed</span>
 <span class="va">out</span><span class="op">$</span><span class="va">grad_fn</span>
 <span class="co">#&gt; MeanBackward0</span>
 <span class="co"># how to compute the gradient for the multiplication by 3 in z = y$pow(2) * 3</span>
@@ -252,10 +252,10 @@
 <span class="co"># here we arrive at the other leaf node (AccumulateGrad for x2)</span>
 <span class="va">out</span><span class="op">$</span><span class="va">grad_fn</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">next_functions</span>
 <span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; torch::autograd::AccumulateGrad</span></pre></div>
+<span class="co">#&gt; torch::autograd::AccumulateGrad</span></code></pre></div>
 <p>After calling <code>out$backward()</code>, all tensors in the graph will have their respective gradients created. Without our calls to <code>retain_grad</code> above, <code>z$grad</code> and <code>y$grad</code> would be empty:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="va">out</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">out</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
 <span class="va">z</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
@@ -274,15 +274,15 @@
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  14.4150  14.4150</span>
 <span class="co">#&gt;  14.4150  14.4150</span>
-<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></pre></div>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 <p>Thus acquainted with autograd, we’re ready to modify our example.</p>
 </div>
 <div id="the-simple-network-now-using-autograd" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-simple-network-now-using-autograd" class="anchor"></a>The simple network, now using autograd</h2>
 <p>For a single new line calling <code>loss$backward()</code>, now a number of lines (that did manual backprop) are gone:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="co">### generate training data -----------------------------------------------------</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">### generate training data -----------------------------------------------------</span>
 <span class="co"># input dimensionality (number of input features)</span>
 <span class="va">d_in</span> <span class="op">&lt;-</span> <span class="fl">3</span>
 <span class="co"># output dimensionality (number of predicted features)</span>
@@ -337,26 +337,26 @@
     <span class="op">}</span><span class="op">)</span>
     
 <span class="op">}</span>
-<span class="co">#&gt; 10 46.77518 </span>
-<span class="co">#&gt; 20 43.22645 </span>
-<span class="co">#&gt; 30 40.05108 </span>
-<span class="co">#&gt; 40 37.21298 </span>
-<span class="co">#&gt; 50 34.64606 </span>
-<span class="co">#&gt; 60 32.32104 </span>
-<span class="co">#&gt; 70 30.22123 </span>
-<span class="co">#&gt; 80 28.32321 </span>
-<span class="co">#&gt; 90 26.59704 </span>
-<span class="co">#&gt; 100 25.02844 </span>
-<span class="co">#&gt; 110 23.60509 </span>
-<span class="co">#&gt; 120 22.31814 </span>
-<span class="co">#&gt; 130 21.14128 </span>
-<span class="co">#&gt; 140 20.06397 </span>
-<span class="co">#&gt; 150 19.07606 </span>
-<span class="co">#&gt; 160 18.16801 </span>
-<span class="co">#&gt; 170 17.33234 </span>
-<span class="co">#&gt; 180 16.55926 </span>
-<span class="co">#&gt; 190 15.8459 </span>
-<span class="co">#&gt; 200 15.18909</span></pre></div>
+<span class="co">#&gt; 10 34.64365 </span>
+<span class="co">#&gt; 20 32.40493 </span>
+<span class="co">#&gt; 30 30.35487 </span>
+<span class="co">#&gt; 40 28.47887 </span>
+<span class="co">#&gt; 50 26.74352 </span>
+<span class="co">#&gt; 60 25.14495 </span>
+<span class="co">#&gt; 70 23.6745 </span>
+<span class="co">#&gt; 80 22.31925 </span>
+<span class="co">#&gt; 90 21.07247 </span>
+<span class="co">#&gt; 100 19.92303 </span>
+<span class="co">#&gt; 110 18.86008 </span>
+<span class="co">#&gt; 120 17.87607 </span>
+<span class="co">#&gt; 130 16.96555 </span>
+<span class="co">#&gt; 140 16.1214 </span>
+<span class="co">#&gt; 150 15.33822 </span>
+<span class="co">#&gt; 160 14.61114 </span>
+<span class="co">#&gt; 170 13.93565 </span>
+<span class="co">#&gt; 180 13.3077 </span>
+<span class="co">#&gt; 190 12.72339 </span>
+<span class="co">#&gt; 200 12.17884</span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">

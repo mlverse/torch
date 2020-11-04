@@ -190,13 +190,13 @@
 <blockquote>
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py">here</a>. All credits goes to <a href="https://github.com/jcjohnson/pytorch-examples">Justin Johnson</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>As an example of dynamic graphs and weight sharing, we implement a very strange model: a fully-connected ReLU network that on each forward pass chooses a random number between 1 and 4 and uses that many hidden layers, reusing the same weights multiple times to compute the innermost hidden layers.</p>
 <p>For this model we can use normal R flow control to implement the loop, and we can implement weight sharing among the innermost layers by simply reusing the same Module multiple times when defining the forward pass.</p>
 <p>We can easily implement this model using <code>nn_module</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">dynamic_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dynamic_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
    <span class="st">"dynamic_net"</span>,
    <span class="co"># In the constructor we construct three nn_linear instances that we will use</span>
    <span class="co"># in the forward pass.</span>
@@ -288,12 +288,12 @@
    <span class="co"># parameters</span>
    <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Step: 1 : 0.9397134 </span>
-<span class="co">#&gt; Step: 100 : 0.5767933 </span>
-<span class="co">#&gt; Step: 200 : 0.4186811 </span>
-<span class="co">#&gt; Step: 300 : 0.1274526 </span>
-<span class="co">#&gt; Step: 400 : 0.08632178 </span>
-<span class="co">#&gt; Step: 500 : 0.01913847</span></pre></div>
+<span class="co">#&gt; Step: 1 : 1.018544 </span>
+<span class="co">#&gt; Step: 100 : 0.9488394 </span>
+<span class="co">#&gt; Step: 200 : 0.4274808 </span>
+<span class="co">#&gt; Step: 300 : 0.2469263 </span>
+<span class="co">#&gt; Step: 400 : 0.1011155 </span>
+<span class="co">#&gt; Step: 500 : 0.0133655</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

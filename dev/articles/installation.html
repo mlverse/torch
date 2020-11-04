@@ -196,8 +196,8 @@
 <h3 class="hasAnchor">
 <a href="#cpu" class="anchor"></a>CPU</h3>
 <p>If you don’t have a GPU or want to install the CPU version of <code>torch</code>, you can install with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 <p>Some Windows distributions don’t have the Visual Studio runtime pre-installed and you will observe an error like:</p>
 <pre><code>Error in cpp_lantern_init(normalizePath(install_path())): C:\Users\User\Documents\R\R-4.0.2\library\torch\deps\lantern.dll - The specified module could not be found.</code></pre>
 <p>See <a href="https://github.com/mlverse/torch/issues/246#issuecomment-695097121">here</a> for instructions on how to install it.</p>
@@ -212,8 +212,8 @@
 <li><p>Have installed cuDNN version 7.6 (for the correct CUDA version). Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn_765/cudnn-install/index.html">here</a>. <strong>Note:</strong> latest cuDNN version 8 is not yet supported.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install <code>torch</code> with:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 <p>If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the <code>CUDA</code> env var with something like <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv(CUDA="10.1")</a></code> if you want to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
@@ -224,8 +224,8 @@
 <h3 class="hasAnchor">
 <a href="#cpu-1" class="anchor"></a>CPU</h3>
 <p>We only support CPU builds of torch on MacOS. On MacOS you can install torch with:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="linux" class="section level2">
@@ -235,8 +235,8 @@
 <h3 class="hasAnchor">
 <a href="#cpu-2" class="anchor"></a>CPU</h3>
 <p>To install the cpu version of <code>torch</code> you can run:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="gpu-1" class="section level3">
 <h3 class="hasAnchor">
@@ -248,8 +248,8 @@
 <li><p>You have installed cuDNN version 7.6 (for the correct CUDA version). Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn_765/cudnn-install/index.html#install-linux">here</a>. <strong>Note:</strong> latest cuDNN version 8 is not yet supported.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install <code>torch</code> with:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 <p>If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the <code>CUDA</code> env var with something like <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv(CUDA="10.1")</a></code> if you want to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
