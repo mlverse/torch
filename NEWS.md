@@ -17,6 +17,7 @@
 - Allow `private` and `active` methods in `nn_module`'s and `dataset`'s. (#349)
 - Fixed crash when calling `torch_hann_window` with an invalid `NULL` `window_length`. (#351)
 - Added `nn_batch_norm3d` (@mattwarkentin #354)
+- Fixed `torch_stft` calls for LibTorch 1.7 (added the `return_complex` argument) (#355)
 
 # torch 0.1.1
 
