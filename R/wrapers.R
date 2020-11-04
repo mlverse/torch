@@ -144,21 +144,27 @@ torch_sparse_coo_tensor <- function(indices, values, size=NULL, dtype=NULL,
 #' @rdname torch_stft
 torch_stft <- function(input, n_fft, hop_length=NULL, win_length=NULL, 
                        window=NULL, center=TRUE, pad_mode='reflect', 
-                       normalized=FALSE, onesided=TRUE) {
+                       normalized=FALSE, onesided=TRUE, return_complex = NULL) {
+  
   if (center) {
     signal_dim <- input$dim()
     extended_shape <- c(
-      rep(2, 3 - signal_dim),
+      rep(1, 3 - signal_dim),
       input$size()
     )
     pad <- as.integer(n_fft %/% 2)
-    input <- nnf_pad(input$view(extended_shape), c(pad, pad), pad_mode)
-    input <- input$view(utils::tail(input$shape(), signal_dim))
+    input <- nnf_pad(input = input$view(extended_shape), pad = c(pad, pad), 
+                     mode = pad_mode)
+    input <- input$view(utils::tail(input$shape, signal_dim))
   }
+  
+  if (is.null(return_complex))
+    return_complex <- FALSE
   
   .torch_stft(self = input, n_fft = n_fft, hop_length = hop_length, 
               win_length = win_length, window = window, 
-              normalized = normalized, onesided = onesided)
+              normalized = normalized, onesided = onesided, 
+              return_complex = return_complex)
 }
 
 #' @rdname torch_tensordot

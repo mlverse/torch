@@ -175,3 +175,27 @@ test_that("hann_window", {
   expect_tensor_shape(torch_hann_window(window_length = 10), 10)
   
 })
+
+test_that("stft", {
+  
+  x <- torch_stft(
+    input = torch::torch_ones(3000),
+    n_fft = 400,
+    center = FALSE
+  )
+  
+  expect_tensor_shape(x, c(201, 27, 2))
+  expect_equal_to_r(x[1,,], cbind(rep(400, 27), rep(0, 27)))
+  expect_equal_to_r(x[51,,], cbind(rep(0, 27), rep(0, 27)))
+  
+  x <- torch::torch_stft(
+    input = torch::torch_ones(3000),
+    n_fft = 400,
+    center = TRUE
+  )
+  
+  expect_tensor_shape(x, c(201, 31, 2))
+  expect_equal_to_r(x[1,,], cbind(rep(400, 31), rep(0, 31)))
+  expect_equal_to_r(x[51,,], cbind(rep(0, 31), rep(0, 31)))
+  
+})
