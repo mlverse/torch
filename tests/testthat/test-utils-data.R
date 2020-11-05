@@ -45,3 +45,14 @@ test_that("create a dataset with private and active methods", {
   expect_equal(length(d), 10)
   
 })
+
+test_that("dataset_subset works", {
+  x <- torch_randn(50, 10)
+  y <- torch_randn(50)
+  
+  data <- tensor_dataset(x, y)
+  data_subset <- dataset_subset(data, 1:14)
+  expect_equal(length(data_subset), 14)
+  expect_tensor(data_subset[1:4][[1]])
+  expect_equal(nrow(data_subset[1:4][[1]]), 4)
+})
