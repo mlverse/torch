@@ -123,6 +123,28 @@ tensor_dataset <- dataset(
   }
 )
 
+#' Dataset Subset
+#'
+#' Subset of a dataset at specified indices.
+#'
+#' @param dataset  (Dataset): The whole Dataset
+#' @param indices  (sequence): Indices in the whole set selected for subset
+#'
+#' @export
+dataset_subset <- dataset(
+  initialize = function(dataset, indices) {
+    self$dataset = dataset
+    self$indices = indices
+  },
+  
+  .getitem = function(idx) {
+    return(self$dataset[self$indices[idx]])
+  },
+  
+  .length = function() {
+    return(length(self$indices))
+  }
+)
 
 
 
