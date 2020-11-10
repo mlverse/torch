@@ -8,7 +8,7 @@ nnf_max_unpool3d(
   input,
   indices,
   kernel_size,
-  stride = NULL,
+  stride = list(),
   padding = 0,
   output_size = NULL
 )

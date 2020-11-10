@@ -4,7 +4,13 @@
 \alias{nnf_lp_pool1d}
 \title{Lp_pool1d}
 \usage{
-nnf_lp_pool1d(input, norm_type, kernel_size, stride = NULL, ceil_mode = FALSE)
+nnf_lp_pool1d(
+  input,
+  norm_type,
+  kernel_size,
+  stride = list(),
+  ceil_mode = FALSE
+)
 }
 \arguments{
 \item{input}{the input tensor}

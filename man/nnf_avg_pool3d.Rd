@@ -7,7 +7,7 @@
 nnf_avg_pool3d(
   input,
   kernel_size,
-  stride = NULL,
+  stride = list(),
   padding = 0,
   ceil_mode = FALSE,
   count_include_pad = TRUE,

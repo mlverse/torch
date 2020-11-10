@@ -281,7 +281,7 @@ unpool_output_size <- function(input, kernel_size, stride, padding, output_size)
 #' @export
 nnf_max_unpool1d <- function(input, indices, kernel_size, stride = list(),
                              padding = 0, output_size = NULL) {
-  if (is.null(stride))
+  if (is.null(stride) || length(stride) == 0)
     stride <- kernel_size
   
   output_size <- unpool_output_size(input, kernel_size, stride, padding,
@@ -303,7 +303,7 @@ nnf_max_unpool2d <- function(input, indices, kernel_size, stride = list(),
                              padding = 0, output_size = NULL) {
   
   kernel_size <- nn_util_pair(kernel_size)
-  if(is.null(stride))
+  if(is.null(stride) || length(stride) == 0)
     stride <- kernel_size
   else
     stride <- nn_util_pair(stride)
@@ -328,7 +328,7 @@ nnf_max_unpool3d <- function(input, indices, kernel_size, stride = list(),
   
   kernel_size <- nn_util_triple(kernel_size)
   padding <- nn_util_triple(padding)
-  if (is.null(stride))
+  if (is.null(stride) || length(stride) == 0)
     stride <- kernel_size
   else
     stride <- nn_util_triple(stride)
@@ -487,7 +487,7 @@ nnf_lp_pool2d <- function(input, norm_type, kernel_size, stride = list(),
                           ceil_mode = FALSE) {
   
   k <- nn_util_pair(kernel_size)
-  if (!is.null(stride)) {
+  if (!length(stride) == 0) {
     out <- nnf_avg_pool2d(input$pow(norm_type), kernel_size, stride, 0, ceil_mode)
   } else {
     out <- nnf_avg_pool2d(input$pow(norm_type), kernel_size, padding = 0, 
