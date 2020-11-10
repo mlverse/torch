@@ -17,7 +17,7 @@
 #'   averaging calculation. Default: `TRUE`
 #'
 #' @export
-nnf_avg_pool1d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
+nnf_avg_pool1d <- function(input, kernel_size, stride = list(), padding = 0, ceil_mode = FALSE, 
                            count_include_pad = TRUE) {
   torch_avg_pool1d(input, kernel_size, stride, padding, ceil_mode, count_include_pad)
 }
@@ -44,7 +44,7 @@ nnf_avg_pool1d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 #'   size of the pooling region will be used. Default: `NULL`
 #'
 #' @export
-nnf_avg_pool2d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
+nnf_avg_pool2d <- function(input, kernel_size, stride = list(), padding = 0, ceil_mode = FALSE, 
                            count_include_pad = TRUE, divisor_override = NULL) {
   torch_avg_pool2d(input, kernel_size, stride, padding, ceil_mode, count_include_pad,
                    divisor_override)
@@ -71,7 +71,7 @@ nnf_avg_pool2d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 #'   size of the pooling region will be used. Default: `NULL`
 #'
 #' @export
-nnf_avg_pool3d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
+nnf_avg_pool3d <- function(input, kernel_size, stride = list(), padding = 0, ceil_mode = FALSE, 
                            count_include_pad = TRUE, divisor_override = NULL) {
   torch_avg_pool3d(input, kernel_size, stride, padding, ceil_mode, count_include_pad,
                    divisor_override)
@@ -88,7 +88,7 @@ nnf_avg_pool3d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 #' @param return_indices whether to return the indices where the max occurs.
 #'
 #' @export
-nnf_max_pool1d <- function(input, kernel_size, stride=NULL, padding=0, dilation=1,
+nnf_max_pool1d <- function(input, kernel_size, stride=list(), padding=0, dilation=1,
                            ceil_mode=FALSE, return_indices=FALSE) {
   
   if (return_indices)
@@ -279,7 +279,7 @@ unpool_output_size <- function(input, kernel_size, stride, padding, output_size)
 #' @param output_size the targeted output size
 #'
 #' @export
-nnf_max_unpool1d <- function(input, indices, kernel_size, stride = NULL,
+nnf_max_unpool1d <- function(input, indices, kernel_size, stride = list(),
                              padding = 0, output_size = NULL) {
   if (is.null(stride))
     stride <- kernel_size
@@ -299,7 +299,7 @@ nnf_max_unpool1d <- function(input, indices, kernel_size, stride = NULL,
 #' @inheritParams nnf_max_unpool1d
 #'
 #' @export
-nnf_max_unpool2d <- function(input, indices, kernel_size, stride = NULL,
+nnf_max_unpool2d <- function(input, indices, kernel_size, stride = list(),
                              padding = 0, output_size = NULL) {
   
   kernel_size <- nn_util_pair(kernel_size)
@@ -323,7 +323,7 @@ nnf_max_unpool2d <- function(input, indices, kernel_size, stride = NULL,
 #' @inheritParams nnf_max_unpool1d
 #'
 #' @export
-nnf_max_unpool3d <- function(input, indices, kernel_size, stride = NULL,
+nnf_max_unpool3d <- function(input, indices, kernel_size, stride = list(),
                              padding = 0, output_size = NULL){
   
   kernel_size <- nn_util_triple(kernel_size)
@@ -460,10 +460,10 @@ nnf_fractional_max_pool3d <- function(input, kernel_size, output_size = NULL, ou
 #' @param ceil_mode when True, will use ceil instead of floor to compute the output shape
 #'
 #' @export
-nnf_lp_pool1d <- function(input, norm_type, kernel_size, stride = NULL, 
+nnf_lp_pool1d <- function(input, norm_type, kernel_size, stride = list(), 
                           ceil_mode = FALSE) {
   
-  if (!is.null(stride)) {
+  if (!is.null(stride) || length(stride) == 0) {
     out <- nnf_avg_pool1d(input$pow(norm_type), kernel_size, stride, 0, ceil_mode)
   } else {
     out <- nnf_avg_pool1d(input$pow(norm_type), kernel_size, padding = 0, 
@@ -483,7 +483,7 @@ nnf_lp_pool1d <- function(input, norm_type, kernel_size, stride = NULL,
 #' @inheritParams nnf_lp_pool1d
 #'
 #' @export
-nnf_lp_pool2d <- function(input, norm_type, kernel_size, stride = NULL, 
+nnf_lp_pool2d <- function(input, norm_type, kernel_size, stride = list(), 
                           ceil_mode = FALSE) {
   
   k <- nn_util_pair(kernel_size)
