@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Atan — torch_atan • torch</title>
+<title>Applies a multi-layer gated recurrent unit (GRU) RNN to an input sequence. — nn_gru • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Atan — torch_atan" />
-<meta property="og:description" content="Atan" />
+<meta property="og:title" content="Applies a multi-layer gated recurrent unit (GRU) RNN to an input sequence. — nn_gru" />
+<meta property="og:description" content="For each element in the input sequence, each layer computes the following
+function:" />
 
 
 <meta name="robots" content="noindex">
@@ -221,49 +222,147 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Atan</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_atan.Rd</code></div>
+    <h1>Applies a multi-layer gated recurrent unit (GRU) RNN to an input sequence.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-rnn.R'><code>R/nn-rnn.R</code></a></small>
+    <div class="hidden name"><code>nn_gru.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Atan</p>
+    <p>For each element in the input sequence, each layer computes the following
+function:</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_atan</span><span class='op'>(</span><span class='va'>self</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>nn_gru</span><span class='op'>(</span>
+  <span class='va'>input_size</span>,
+  <span class='va'>hidden_size</span>,
+  num_layers <span class='op'>=</span> <span class='fl'>1</span>,
+  bias <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  batch_first <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dropout <span class='op'>=</span> <span class='fl'>0</span>,
+  bidirectional <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor.</p></td>
+      <th>input_size</th>
+      <td><p>The number of expected features in the input <code>x</code></p></td>
+    </tr>
+    <tr>
+      <th>hidden_size</th>
+      <td><p>The number of features in the hidden state <code>h</code></p></td>
+    </tr>
+    <tr>
+      <th>num_layers</th>
+      <td><p>Number of recurrent layers. E.g., setting <code>num_layers=2</code>
+would mean stacking two GRUs together to form a <code>stacked GRU</code>,
+with the second GRU taking in outputs of the first GRU and
+computing the final results. Default: 1</p></td>
+    </tr>
+    <tr>
+      <th>bias</th>
+      <td><p>If <code>FALSE</code>, then the layer does not use bias weights <code>b_ih</code> and <code>b_hh</code>.
+Default: <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>batch_first</th>
+      <td><p>If <code>TRUE</code>, then the input and output tensors are provided
+as (batch, seq, feature). Default: <code>FALSE</code></p></td>
+    </tr>
+    <tr>
+      <th>dropout</th>
+      <td><p>If non-zero, introduces a <code>Dropout</code> layer on the outputs of each
+GRU layer except the last layer, with dropout probability equal to
+<code>dropout</code>. Default: 0</p></td>
+    </tr>
+    <tr>
+      <th>bidirectional</th>
+      <td><p>If <code>TRUE</code>, becomes a bidirectional GRU. Default: <code>FALSE</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="atan-input-out-null-gt-tensor-"><a class="anchor" href="#atan-input-out-null-gt-tensor-"></a>atan(input, out=NULL) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>$$
+\begin{array}{ll}
+r_t = \sigma(W_{ir} x_t + b_{ir} + W_{hr} h_{(t-1)} + b_{hr}) \\
+z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz} h_{(t-1)} + b_{hz}) \\
+n_t = \tanh(W_{in} x_t + b_{in} + r_t (W_{hn} h_{(t-1)}+ b_{hn})) \\
+h_t = (1 - z_t) n_t + z_t h_{(t-1)}
+\end{array}
+$$</p>
+<p>where \(h_t\) is the hidden state at time <code>t</code>, \(x_t\) is the input
+at time <code>t</code>, \(h_{(t-1)}\) is the hidden state of the previous layer
+at time <code>t-1</code> or the initial hidden state at time <code>0</code>, and \(r_t\),
+\(z_t\), \(n_t\) are the reset, update, and new gates, respectively.
+\(\sigma\) is the sigmoid function.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>All the weights and biases are initialized from \(\mathcal{U}(-\sqrt{k}, \sqrt{k})\)
+where \(k = \frac{1}{\mbox{hidden\_size}}\)</p>
+    <h2 class="hasAnchor" id="inputs"><a class="anchor" href="#inputs"></a>Inputs</h2>
 
     
 
 
-<p>Returns a new tensor with the arctangent  of the elements of <code>input</code>.</p>
-<p>$$
-    \mbox{out}_{i} = \tan^{-1}(\mbox{input}_{i})
-$$</p>
+<p>Inputs: input, h_0</p><ul>
+<li><p><strong>input</strong> of shape <code>(seq_len, batch, input_size)</code>: tensor containing the features
+of the input sequence. The input can also be a packed variable length
+sequence. See <code>nn_util_rnn_pack_padded_sequence()</code>
+for details.</p></li>
+<li><p><strong>h_0</strong> of shape <code>(num_layers * num_directions, batch, hidden_size)</code>: tensor
+containing the initial hidden state for each element in the batch.
+Defaults to zero if not provided.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="outputs"><a class="anchor" href="#outputs"></a>Outputs</h2>
+
+    
+
+
+<p>Outputs: output, h_n</p><ul>
+<li><p><strong>output</strong> of shape <code>(seq_len, batch, num_directions * hidden_size)</code>: tensor
+containing the output features h_t from the last layer of the GRU,
+for each t. If a <code>PackedSequence</code> has been
+given as the input, the output will also be a packed sequence.
+For the unpacked case, the directions can be separated
+using <code>output$view(c(seq_len, batch, num_directions, hidden_size))</code>,
+with forward and backward being direction <code>0</code> and <code>1</code> respectively.
+Similarly, the directions can be separated in the packed case.</p></li>
+<li><p><strong>h_n</strong> of shape <code>(num_layers * num_directions, batch, hidden_size)</code>: tensor
+containing the hidden state for <code>t = seq_len</code>
+Like <em>output</em>, the layers can be separated using
+<code>h_n$view(num_layers, num_directions, batch, hidden_size)</code>.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="attributes"><a class="anchor" href="#attributes"></a>Attributes</h2>
+
+    
+
+<ul>
+<li><p>weight_ih_lk : the learnable input-hidden weights of the \(\mbox{k}^{th}\) layer
+(W_ir|W_iz|W_in), of shape <code>(3*hidden_size x input_size)</code></p></li>
+<li><p>weight_hh_lk : the learnable hidden-hidden weights of the \(\mbox{k}^{th}\) layer
+(W_hr|W_hz|W_hn), of shape <code>(3*hidden_size x hidden_size)</code></p></li>
+<li><p>bias_ih_lk : the learnable input-hidden bias of the \(\mbox{k}^{th}\) layer
+(b_ir|b_iz|b_in), of shape <code>(3*hidden_size)</code></p></li>
+<li><p>bias_hh_lk : the learnable hidden-hidden bias of the \(\mbox{k}^{th}\) layer
+(b_hr|b_hz|b_hn), of shape <code>(3*hidden_size)</code></p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_atan</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
+<span class='va'>rnn</span> <span class='op'>&lt;-</span> <span class='fu'>nn_gru</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>h0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>20</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>rnn</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>h0</span><span class='op'>)</span>
+
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  0.7989
-#&gt; -0.9162
-#&gt; -0.1009
-#&gt; -0.1172
-#&gt; [ CPUFloatType{4} ]</div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
