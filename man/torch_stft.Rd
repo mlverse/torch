@@ -14,7 +14,8 @@ torch_stft(
   center = TRUE,
   pad_mode = "reflect",
   normalized = FALSE,
-  onesided = TRUE
+  onesided = TRUE,
+  return_complex = NULL
 )
 }
 \arguments{
