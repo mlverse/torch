@@ -6229,8 +6229,8 @@ cpp_torch_namespace_lstm_data_Tensor_batch_sizes_Tensor_hx_TensorList_params_Ten
     .Call('_torch_cpp_torch_namespace_lstm_data_Tensor_batch_sizes_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool', PACKAGE = 'torchpkg', data, batch_sizes, hx, params, has_biases, num_layers, dropout, train, bidirectional)
 }
 
-cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool <- function(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
-    .Call('_torch_cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool', PACKAGE = 'torchpkg', input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first)
+cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool <- function(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
+    .Call('_torch_cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool', PACKAGE = 'torchpkg', input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first)
 }
 
 cpp_torch_namespace_gru_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool <- function(data, batch_sizes, hx, params, has_biases, num_layers, dropout, train, bidirectional) {

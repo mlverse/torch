@@ -158,3 +158,70 @@ test_that("lstm", {
   expect_equal_to_tensor(z[[2]][[2]][3,,], torch_ones(1,5) * 0.9969, tolerance = 1e-4)
   
 })
+
+test_that("gru", {
+  
+  gru <- nn_gru(10, 5)
+  expect_equal(gru$mode, "GRU")
+  
+  input <- torch_ones(1, 1, 10)
+  o <- gru(input)
+  expect_length(o, 2)
+  
+  expect_tensor_shape(o[[1]], c(1,1,5))
+  expect_tensor_shape(o[[2]], c(1,1,5))
+  
+  expect_tensor_shape(gru$weight_ih_l1, c(15, 10))
+  expect_tensor_shape(gru$weight_hh_l1, c(15, 5))
+  expect_tensor_shape(gru$bias_ih_l1, c(15))
+  expect_tensor_shape(gru$bias_hh_l1, c(15))
+  
+  expect_length(gru$parameters, 4)
+  
+  with_no_grad({
+    gru$weight_ih_l1$fill_(1)
+    gru$weight_hh_l1$fill_(1)
+    gru$bias_ih_l1$fill_(1)
+    gru$bias_hh_l1$fill_(1)
+  })
+  
+  z <- gru(input)
+  
+  expect_equal_to_tensor(z[[1]], torch_ones(1,1,5) * 6.1989e-06, tolerance = 1e-5)
+  expect_equal_to_tensor(z[[2]], torch_ones(1,1,5) * 6.1989e-06, tolerance = 1e-5)
+  
+  gru <- nn_gru(10, 5, bias = FALSE)
+  
+  expect_tensor_shape(gru$weight_ih_l1, c(15, 10))
+  expect_tensor_shape(gru$weight_hh_l1, c(15, 5))
+  expect_null(gru$bias_ih_l1)
+  expect_null(gru$bias_hh_l1, NULL)
+  
+  with_no_grad({
+    gru$weight_ih_l1$fill_(1)
+    gru$weight_hh_l1$fill_(1)
+  })
+  
+  z <- gru(input)
+  
+  expect_equal_to_tensor(z[[1]], torch_ones(1,1,5) * 4.5419e-05, tolerance = 1e-5)
+  expect_equal_to_tensor(z[[2]], torch_ones(1,1,5) * 4.5419e-05, tolerance = 1e-4)
+  
+  gru <- nn_gru(10, 5, num_layers = 2)
+  expect_length(gru$parameters, 8)
+  gru <- nn_gru(10, 5, num_layers = 3)
+  expect_length(gru$parameters, 12)
+  
+  with_no_grad({
+    for (p in gru$parameters)
+      p$fill_(1)
+  })
+  
+  z <- gru(input)
+  expect_equal_to_tensor(z[[1]], torch_ones(1,1,5) * 0.0702, tolerance = 1e-4)
+  
+  expect_equal_to_tensor(z[[2]][1,,], torch_ones(1,5) * 6.1989e-06, tolerance = 1e-4)
+  expect_equal_to_tensor(z[[2]][2,,], torch_ones(1,5) * 1.1378e-01, tolerance = 1e-4)
+  expect_equal_to_tensor(z[[2]][3,,], torch_ones(1,5) * 7.0209e-02, tolerance = 1e-4)
+  
+})

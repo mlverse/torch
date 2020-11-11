@@ -8,7 +8,8 @@ nn_apply_permutation <- function(tensor, permutation, dim = 2) {
 rnn_impls_ <- list(
   RNN_RELU = torch_rnn_relu,
   RNN_TANH = torch_rnn_tanh,
-  LSTM = torch_lstm
+  LSTM = torch_lstm,
+  GRU = torch_gru
 )
 
 nn_rnn_base <- nn_module(
@@ -324,6 +325,21 @@ nn_lstm <- nn_module(
                         bidirectional = FALSE, ...) {
     super$initialize(
       "LSTM", input_size = input_size, hidden_size = hidden_size,
+      num_layers = num_layers, bias = bias,
+      batch_first = batch_first, dropout = dropout, 
+      bidirectional = bidirectional, ...
+    )
+  }
+)
+
+nn_gru <- nn_module(
+  "nn_gru",
+  inherit = nn_rnn_base,
+  initialize = function(input_size, hidden_size, num_layers = 1,
+                        bias = TRUE, batch_first = FALSE, dropout = 0., 
+                        bidirectional = FALSE, ...) {
+    super$initialize(
+      "GRU", input_size = input_size, hidden_size = hidden_size,
       num_layers = num_layers, bias = bias,
       batch_first = batch_first, dropout = dropout, 
       bidirectional = bidirectional, ...
