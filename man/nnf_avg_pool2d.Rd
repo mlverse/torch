@@ -7,7 +7,7 @@
 nnf_avg_pool2d(
   input,
   kernel_size,
-  stride = list(),
+  stride = NULL,
   padding = 0,
   ceil_mode = FALSE,
   count_include_pad = TRUE,

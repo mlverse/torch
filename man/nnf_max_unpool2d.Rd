@@ -8,7 +8,7 @@ nnf_max_unpool2d(
   input,
   indices,
   kernel_size,
-  stride = list(),
+  stride = NULL,
   padding = 0,
   output_size = NULL
 )
