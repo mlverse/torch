@@ -18,6 +18,7 @@
 - Fixed crash when calling `torch_hann_window` with an invalid `NULL` `window_length`. (#351)
 - Added `nn_batch_norm3d` (@mattwarkentin #354)
 - Fixed `torch_stft` calls for LibTorch 1.7 (added the `return_complex` argument) (#355)
+- Fixed bug when strides were NULL in some pooling operations. (#361)
 
 # torch 0.1.1
 
