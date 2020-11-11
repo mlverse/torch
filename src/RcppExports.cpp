@@ -20081,9 +20081,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool
-Rcpp::List cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool(Rcpp::XPtr<XPtrTorchTensor> input, Rcpp::XPtr<XPtrTorchTensorList> hx, Rcpp::XPtr<XPtrTorchTensorList> params, bool has_biases, nullable<int64_t> num_layers, double dropout, bool train, bool bidirectional, bool batch_first);
-RcppExport SEXP _torch_cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool(SEXP inputSEXP, SEXP hxSEXP, SEXP paramsSEXP, SEXP has_biasesSEXP, SEXP num_layersSEXP, SEXP dropoutSEXP, SEXP trainSEXP, SEXP bidirectionalSEXP, SEXP batch_firstSEXP) {
+// cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool
+Rcpp::List cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(Rcpp::XPtr<XPtrTorchTensor> input, Rcpp::XPtr<XPtrTorchTensorList> hx, Rcpp::XPtr<XPtrTorchTensorList> params, bool has_biases, nullable<int64_t> num_layers, double dropout, bool train, bool bidirectional, bool batch_first);
+RcppExport SEXP _torch_cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(SEXP inputSEXP, SEXP hxSEXP, SEXP paramsSEXP, SEXP has_biasesSEXP, SEXP num_layersSEXP, SEXP dropoutSEXP, SEXP trainSEXP, SEXP bidirectionalSEXP, SEXP batch_firstSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20096,7 +20096,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type train(trainSEXP);
     Rcpp::traits::input_parameter< bool >::type bidirectional(bidirectionalSEXP);
     Rcpp::traits::input_parameter< bool >::type batch_first(batch_firstSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -20119,9 +20119,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool
-Rcpp::List cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool(Rcpp::XPtr<XPtrTorchTensor> input, Rcpp::XPtr<XPtrTorchTensor> hx, Rcpp::XPtr<XPtrTorchTensorList> params, bool has_biases, nullable<int64_t> num_layers, double dropout, bool train, bool bidirectional, bool batch_first);
-RcppExport SEXP _torch_cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool(SEXP inputSEXP, SEXP hxSEXP, SEXP paramsSEXP, SEXP has_biasesSEXP, SEXP num_layersSEXP, SEXP dropoutSEXP, SEXP trainSEXP, SEXP bidirectionalSEXP, SEXP batch_firstSEXP) {
+// cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool
+Rcpp::List cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(Rcpp::XPtr<XPtrTorchTensor> input, Rcpp::XPtr<XPtrTorchTensor> hx, Rcpp::XPtr<XPtrTorchTensorList> params, bool has_biases, nullable<int64_t> num_layers, double dropout, bool train, bool bidirectional, bool batch_first);
+RcppExport SEXP _torch_cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(SEXP inputSEXP, SEXP hxSEXP, SEXP paramsSEXP, SEXP has_biasesSEXP, SEXP num_layersSEXP, SEXP dropoutSEXP, SEXP trainSEXP, SEXP bidirectionalSEXP, SEXP batch_firstSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20134,7 +20134,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type train(trainSEXP);
     Rcpp::traits::input_parameter< bool >::type bidirectional(bidirectionalSEXP);
     Rcpp::traits::input_parameter< bool >::type batch_first(batch_firstSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -30621,9 +30621,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace__thnn_fused_gru_cell_input_gates_Tensor_hidden_gates_Tensor_hx_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__thnn_fused_gru_cell_input_gates_Tensor_hidden_gates_Tensor_hx_Tensor, 5},
     {"_torch_cpp_torch_namespace__thnn_fused_gru_cell_backward_grad_hy_Tensor_workspace_Tensor_has_bias_bool", (DL_FUNC) &_torch_cpp_torch_namespace__thnn_fused_gru_cell_backward_grad_hy_Tensor_workspace_Tensor_has_bias_bool, 3},
     {"_torch_cpp_torch_namespace__thnn_differentiable_gru_cell_backward_grad_hy_Tensor_input_gates_Tensor_hidden_gates_Tensor_hx_Tensor_input_bias_Tensor_hidden_bias_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__thnn_differentiable_gru_cell_backward_grad_hy_Tensor_input_gates_Tensor_hidden_gates_Tensor_hx_Tensor_input_bias_Tensor_hidden_bias_Tensor, 6},
-    {"_torch_cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool", (DL_FUNC) &_torch_cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool, 9},
+    {"_torch_cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool", (DL_FUNC) &_torch_cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool, 9},
     {"_torch_cpp_torch_namespace_lstm_data_Tensor_batch_sizes_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool", (DL_FUNC) &_torch_cpp_torch_namespace_lstm_data_Tensor_batch_sizes_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool, 9},
-    {"_torch_cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool", (DL_FUNC) &_torch_cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool_batch_first_bool, 9},
+    {"_torch_cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool", (DL_FUNC) &_torch_cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool, 9},
     {"_torch_cpp_torch_namespace_gru_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool", (DL_FUNC) &_torch_cpp_torch_namespace_gru_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool, 9},
     {"_torch_cpp_torch_namespace_rnn_tanh_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool", (DL_FUNC) &_torch_cpp_torch_namespace_rnn_tanh_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool, 9},
     {"_torch_cpp_torch_namespace_rnn_tanh_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool", (DL_FUNC) &_torch_cpp_torch_namespace_rnn_tanh_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool, 9},

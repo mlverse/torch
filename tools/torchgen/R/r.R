@@ -25,7 +25,7 @@ get_arguments_order <- function(methods) {
     dplyr::summarise(id_max = max(.data$id))
 
   # both have the same id_max but bidirectional should be last.
-  if (methods[[1]]$name %in% c("rnn_tanh", "rnn_relu"))
+  if (methods[[1]]$name %in% c("rnn_tanh", "rnn_relu", "lstm", "gru"))
     order$id_max[order$name == "bidirectional"] <- order$id_max[order$name == "bidirectional"] + 1
 
   order %>%
