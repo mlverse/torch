@@ -159,6 +159,9 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   if (any("TensorList" == expected_types) && is.numeric(obj))
     return(list(torch_tensor_list(list(torch_tensor(obj)))$ptr, "TensorList"))
   
+  if (any("TensorList" == expected_types) && is_torch_tensor(obj))
+    return(list(torch_tensor_list(list(obj))$ptr, "TensorList"))
+  
   stop("Can't convert argument", call.=FALSE)
 }
 

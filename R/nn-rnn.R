@@ -7,7 +7,8 @@ nn_apply_permutation <- function(tensor, permutation, dim = 2) {
 
 rnn_impls_ <- list(
   RNN_RELU = torch_rnn_relu,
-  RNN_TANH = torch_rnn_tanh
+  RNN_TANH = torch_rnn_tanh,
+  LSTM = torch_lstm
 )
 
 nn_rnn_base <- nn_module(
@@ -142,10 +143,14 @@ nn_rnn_base <- nn_module(
     
     
     if (is.null(hx)) {
+      
       num_directions <- ifelse(self$bidirectional, 2, 1)
       hx <- torch_zeros(self$num_layers * num_directions,
                         max_batch_size, self$hidden_size,
                         dtype=input$dtype, device=input$device)
+      
+      if (self$mode == "LSTM")
+        hx <- list(hx, hx)
       
     } else {
       hx <- self$permute_hidden(hx, sorted_indices)  
@@ -170,7 +175,10 @@ nn_rnn_base <- nn_module(
     }
         
     output <- result[[1]]
-    hidden <- result[[2]]
+    hidden <- result[-1]
+    
+    if (length(hidden) == 1)
+      hidden <- hidden[[1]]
     
     if (is_packed)
       output <- new_packed_sequence(output, batch_sizes, sorted_indices,
@@ -305,5 +313,20 @@ nn_rnn <- nn_module(
                      num_layers = num_layers, bias = bias,
                      batch_first = batch_first, dropout = dropout, 
                      bidirectional = bidirectional, ...)
+  }
+)
+
+nn_lstm <- nn_module(
+  "nn_lstm",
+  inherit = nn_rnn_base,
+  initialize = function(input_size, hidden_size, num_layers = 1,
+                        bias = TRUE, batch_first = FALSE, dropout = 0., 
+                        bidirectional = FALSE, ...) {
+    super$initialize(
+      "LSTM", input_size = input_size, hidden_size = hidden_size,
+      num_layers = num_layers, bias = bias,
+      batch_first = batch_first, dropout = dropout, 
+      bidirectional = bidirectional, ...
+    )
   }
 )
