@@ -12,3 +12,17 @@ is_null_external_pointer <- function(pointer) {
   attributes(pointer) <- a
   out
 }
+
+add_class_definition <- function(r6_class_generator){
+  .new <- r6_class_generator$new
+  .class_def <- r6_class_generator
+  .wrapped_new <- function(...){
+    .object <- .new(...)
+    .object$.__enclos_env__$class_def <- .class_def
+    .object
+  }
+  r6_class_generator$unlock()
+  r6_class_generator$new <- .wrapped_new
+  r6_class_generator$lock()
+  r6_class_generator
+}
