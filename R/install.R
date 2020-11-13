@@ -254,9 +254,9 @@ install_type <- function(version) {
   }
   
   if (is.null(cuda_version)) {
-    smi <- tryCatch(system2("nvidia-smi", stdout = TRUE, stderr = TRUE), error = function(e) NULL)
-    if (!is.null(smi)) {
-      cuda_version <- gsub(".*CUDA Version: | +\\|", "", smi[grepl("CUDA", smi)])
+    nvcc <- tryCatch(system2("nvcc", "--version", stdout = TRUE, stderr = TRUE), error = function(e) NULL)
+    if (!is.null(nvcc)) {
+      cuda_version <- gsub(".*release |, V.*", "", nvcc[grepl("release", nvcc)])
     }
   }
   
