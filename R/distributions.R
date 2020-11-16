@@ -1,3 +1,5 @@
+#' @include utils.R
+
 #' Distribution is the abstract base class for probability distributions.
 Distribution <- R6::R6Class(
   "torch_Distribution",
