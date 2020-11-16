@@ -2,6 +2,7 @@
 #' 
 #' A constraint object represents a region over which a variable is valid,
 #' e.g. within which a variable can be optimized.
+#' 
 Constraint <- R6::R6Class(
   "torch_Constraint",
   lock_objects = FALSE,
@@ -22,6 +23,8 @@ Constraint <- R6::R6Class(
 
 #' Placeholder for variables whose support depends on other variables.
 #' These variables obey no simple coordinate-wise constraints.
+#' 
+#' @noRd
 .Dependent <- R6::R6Class(
   "torch_Dependent",
   lock_objects = FALSE,
@@ -39,6 +42,7 @@ is_dependent <- function(object){
 }
 
 #' Constrain to the two values `{0, 1}`.
+#' @noRd
 .Boolean <- R6::R6Class(
   "torch_Boolean",
   lock_objects = FALSE,
@@ -52,6 +56,7 @@ is_dependent <- function(object){
 )
 
 #' Constrain to an integer interval `[lower_bound, upper_bound]`.
+#' @noRd
 .IntegerInterval <- R6::R6Class(
   "torch_IntegerInterval",
   lock_objects = FALSE,
@@ -84,6 +89,7 @@ is_dependent <- function(object){
 )
 
 #' Constrain to an integer interval `(-inf, upper_bound]`.
+#' @noRd
 .IntegerLessThan <- R6::R6Class(
   "torch_IntegerLessThan",
   lock_objects = FALSE,
@@ -111,6 +117,7 @@ is_dependent <- function(object){
 
 
 #' Constrain to an integer interval `[lower_bound, inf)`.
+#' @noRd
 .IntegerGreaterThan <- R6::R6Class(
   "torch_IntegerGreaterThan",
   lock_objects = FALSE,
@@ -137,6 +144,7 @@ is_dependent <- function(object){
 )
 
 #' Trivially constrain to the extended real line `[-inf, inf]`.
+#' @noRd
 .Real <- R6::R6Class(
   "torch_Real",
   lock_objects = FALSE,
@@ -150,6 +158,7 @@ is_dependent <- function(object){
 )
 
 #' Constrain to a real half line `(lower_bound, inf]`.
+#' @noRd
 .GreaterThan <- R6::R6Class(
   "torch_GreaterThan",
   lock_objects = FALSE,
@@ -176,6 +185,7 @@ is_dependent <- function(object){
 )
 
 #' Constrain to a real half line `[lower_bound, inf)`.
+#' @noRd
 .GreaterThanEq <- R6::R6Class(
   "torch_GreaterThanEq",
   lock_objects = FALSE,
@@ -202,6 +212,7 @@ is_dependent <- function(object){
 )
 
 #' Constrain to a real half line `[lower_bound, inf)`.
+#' @noRd
 .LessThan <- R6::R6Class(
   "torch_LessThan",
   lock_objects = FALSE,
@@ -228,6 +239,7 @@ is_dependent <- function(object){
 )
 
 #' Constrain to a real interval `[lower_bound, upper_bound]`.
+#' @noRd
 .Interval <- R6::R6Class(
   "torch_Interval",
   lock_objects = FALSE,
@@ -257,6 +269,7 @@ is_dependent <- function(object){
 )
 
 #' Constrain to a real interval `[lower_bound, upper_bound)`.
+#' @noRd
 .HalfOpenInterval <- R6::R6Class(
   "torch_HalfOpenInterval",
   lock_objects = FALSE,
@@ -309,7 +322,7 @@ positive <- .GreaterThan$new(0.)
 greater_than <- .GreaterThan
 
 #' @export
-greater_than_eq <- 
+greater_than_eq <- .GreaterThanEq
 
 #' @export
 less_than <- .LessThan
