@@ -22,6 +22,7 @@
 - Added `nn_lstm` and `nn_gru` modules. (#362)
 - Use `nvcc --version` instead of `nvidia-smi` to find the CUDA version as `nvidia-smi` reports the latest
   supported version and not the installed one. (#363)
+- Added distribution constraints (@krzjoa #364)
 
 # torch 0.1.1
 
