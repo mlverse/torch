@@ -6,7 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>As_strided — torch_as_strided • torch</title>
+<title>Public interface
+TODO: check .GreaterThan and other classes,
+which are not instanced — dependent • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +43,12 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="As_strided — torch_as_strided" />
-<meta property="og:description" content="As_strided" />
+<meta property="og:title" content="Public interface
+TODO: check .GreaterThan and other classes,
+which are not instanced — dependent" />
+<meta property="og:description" content="Public interface
+TODO: check .GreaterThan and other classes,
+which are not instanced" />
 
 
 <meta name="robots" content="noindex">
@@ -221,73 +227,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>As_strided</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_as_strided.Rd</code></div>
+    <h1>Public interface
+TODO: check .GreaterThan and other classes,
+which are not instanced</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/distributions-constraints.R'><code>R/distributions-constraints.R</code></a></small>
+    <div class="hidden name"><code>dependent.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>As_strided</p>
+    <p>Public interface
+TODO: check .GreaterThan and other classes,
+which are not instanced</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_as_strided</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>size</span>, <span class='va'>stride</span>, storage_offset <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor.</p></td>
-    </tr>
-    <tr>
-      <th>size</th>
-      <td><p>(tuple or ints) the shape of the output tensor</p></td>
-    </tr>
-    <tr>
-      <th>stride</th>
-      <td><p>(tuple or ints) the stride of the output tensor</p></td>
-    </tr>
-    <tr>
-      <th>storage_offset</th>
-      <td><p>(int, optional) the offset in the underlying storage of the output tensor</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="as-strided-input-size-stride-storage-offset-gt-tensor-"><a class="anchor" href="#as-strided-input-size-stride-storage-offset-gt-tensor-"></a>as_strided(input, size, stride, storage_offset=0) -&gt; Tensor </h2>
-
-    
+    <pre class="usage"><span class='va'>dependent</span></pre>
 
 
-<p>Create a view of an existing <code>torch_Tensor</code> <code>input</code> with specified
-<code>size</code>, <code>stride</code> and <code>storage_offset</code>.</p>
-    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    
+    <p>An object of class <code>torch_Dependent</code> (inherits from <code>torch_Constraint</code>, <code>R6</code>) of length 4.</p>
 
-<p>More than one element of a created tensor may refer to a single memory
-location. As a result, in-place operations (especially ones that are
-vectorized) may result in incorrect behavior. If you need to write to
-the tensors, please clone them first.</p><pre>Many PyTorch functions, which return a view of a tensor, are internally
-implemented with this function. Those functions, like
-`torch_Tensor.expand`, are easier to read and are therefore more
-advisable to use.
-</pre>
-
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>x</span>
-<span class='va'>t</span> <span class='op'>=</span> <span class='fu'>torch_as_strided</span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>t</span>
-<span class='va'>t</span> <span class='op'>=</span> <span class='fu'>torch_as_strided</span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>t</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  0.0261 -0.0494
-#&gt; -0.3277  1.2642
-#&gt; [ CPUFloatType{2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
