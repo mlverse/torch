@@ -23,6 +23,11 @@ e.g. within which a variable can be optimized.
 \if{html}{\out{<div class="r">}}\preformatted{Constraint$check(value)}\if{html}{\out{</div>}}
 }
 
+\subsection{Details}{
+Returns a byte tensor of \code{sample_shape + batch_shape} indicating
+whether each event in value satisfies this constraint.
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
