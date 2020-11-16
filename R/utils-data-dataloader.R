@@ -26,11 +26,11 @@ is_dataloader <- function(x) {
 #' @param iter a DataLoader iter created with [dataloader_make_iter].
 #'
 #' @export
-dataloader_next <- function(iter) {
+dataloader_next <- function(iter, completed = NULL) {
   tryCatch(
     expr = iter$.next(),
     stop_iteration_error = function(e) {
-      NULL
+      completed
     }
   )
 }
@@ -241,3 +241,23 @@ SingleProcessDataLoaderIter <- R6::R6Class(
     }
   )
 )
+
+#' Re-exporting the as_iterator function.
+#' @importFrom coro as_iterator
+#' @export
+coro::as_iterator
+
+#' Re-exporting the iterate function.
+#' @importFrom coro iterate
+#' @export
+coro::iterate
+
+#' @importFrom coro as_iterator
+#' @export
+#' @method as_iterator dataloader
+as_iterator.dataloader <- function(x) {
+  iter <- dataloader_make_iter(x)
+  coro::as_iterator(function() {
+    dataloader_next(iter, coro::exhausted())
+  })
+}

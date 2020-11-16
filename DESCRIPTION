@@ -40,7 +40,8 @@ Suggests:
     knitr,
     rmarkdown,
     glue,
-    palmerpenguins
+    palmerpenguins,
+    coro
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
@@ -133,3 +134,5 @@ Collate:
     'variable_list.R'
     'with-indices.R'
     'wrapers.R'
+Remotes:
+    r-lib/coro

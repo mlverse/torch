@@ -1,4 +1,4 @@
-as_iterator <- function(x) {
+as_iterator2 <- function(x) {
   i <- 0
   n <- length(x)
   function() {
@@ -75,7 +75,7 @@ RandomSampler <- R6::R6Class(
         rand_tensor <- torch_randperm(n)$add(1L, 1L)#, generator = self$generator)
       }
       rand_tensor <- as_array(rand_tensor$to(dtype = torch_int()))
-      as_iterator(rand_tensor)
+      as_iterator2(rand_tensor)
     },
     .length = function() {
       self$num_samples
