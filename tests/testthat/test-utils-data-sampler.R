@@ -47,7 +47,7 @@ test_that("Random sampler, replacement = TRUE", {
     expect_true(k <= 2 && k >= 1)
   }
   
-  expect_error(it(), class = "stop_iteration_error")
+  expect_equal(it(), coro::exhausted())
   
 })
 

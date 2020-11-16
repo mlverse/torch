@@ -1,15 +1,3 @@
-as_iterator2 <- function(x) {
-  i <- 0
-  n <- length(x)
-  function() {
-    i <<- i + 1
-    
-    if (i > n)
-      stop_iteration_error()
-    
-    x[[i]]
-  }
-}
 
 #' @export
 length.utils_sampler <- function(x) {
@@ -68,6 +56,7 @@ RandomSampler <- R6::R6Class(
     },
     .iter = function() {
       n <- length(self$data_source)
+      
       if (self$replacement) {
         rand_tensor <- torch_randint(low = 1, high = n + 1, size = self$num_samples,
                                      dtype = torch_long(), generator = self$generator)
@@ -75,7 +64,7 @@ RandomSampler <- R6::R6Class(
         rand_tensor <- torch_randperm(n)$add(1L, 1L)#, generator = self$generator)
       }
       rand_tensor <- as_array(rand_tensor$to(dtype = torch_int()))
-      as_iterator2(rand_tensor)
+      as_iterator(rand_tensor)
     },
     .length = function() {
       self$num_samples
@@ -117,6 +106,9 @@ BatchSampler <- R6::R6Class(
           )
           
           if (er)
+            break
+          
+          if (obs == coro::exhausted())
             break
           
           batch <- append(batch, obs)
