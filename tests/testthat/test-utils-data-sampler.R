@@ -51,3 +51,20 @@ test_that("Random sampler, replacement = TRUE", {
   
 })
 
+test_that("Batch sampler", {
+  
+  x <- torch_randn(100, 10)
+  y <- torch_randn(2)
+  data <- tensor_dataset(x, y)
+  
+  r <- RandomSampler$new(data, replacement = FALSE)
+  x <- BatchSampler$new(r, 32, TRUE)
+  it <- x$.iter()
+  
+  expect_length(it(), 32)
+  expect_length(it(), 32)
+  expect_length(it(), 32)
+  expect_equal(it(), coro::exhausted())
+  
+})
+
