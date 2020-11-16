@@ -28,14 +28,7 @@ SequentialSampler <- R6::R6Class(
     .iter = function() {
       i <- 0
       n <- length(self$data_source)
-      function() {
-        i <<- i + 1
-        
-        if (i > n)
-          stop_iteration_error()
-        
-        i
-      }
+      coro::as_iterator(seq_len(n))
     },
     .length = function() {
       length(self$data_source)
@@ -91,37 +84,23 @@ BatchSampler <- R6::R6Class(
       self$drop_last <- drop_last
     },
     .iter = function() {
-      s <- self$sampler$.iter()
-      function() {
+      coro::generator(function() {
         batch <- list()
-        for (i in seq_len(self$batch_size)) {
-          
-          er <- FALSE
-          
-          tryCatch(
-            obs <- s(),
-            stop_iteration_error = function(err) {
-              er <<- TRUE
-            }
-          )
-          
-          if (er)
-            break
-          
-          if (obs == coro::exhausted())
-            break
-          
-          batch <- append(batch, obs)
+        sampler <- as_iterator(self$sampler)
+        
+        # TODO: use coro::iterate see https://github.com/r-lib/coro/issues/31
+        while(!is_exhausted(idx <- sampler())) {
+          batch[[length(batch) + 1]] <- idx
+          if (length(batch) == self$batch_size) {
+            yield(batch)
+            batch <- list()
+          }
         }
         
-        if (length(batch) == self$batch_size)
-          return(batch)
-        
         if (length(batch) > 0 && !self$drop_last)
-          return(batch)
-          
-        stop_iteration_error()
-      }
+          yield(batch)
+        
+      })()
     },
     .length = function() {
       if (self$drop_last) {
@@ -132,3 +111,11 @@ BatchSampler <- R6::R6Class(
     }
   )
 )
+
+#' @export
+as_iterator.utils_sampler <- function(x) {
+  it <- x$.iter()
+  function() {
+    it()
+  }
+}

@@ -20,7 +20,7 @@ test_that("dataloader works", {
   for(i in 1:32)
     k <- iter$.next()
   
-  expect_error(iter$.next(), class = "stop_iteration_error")
+  expect_equal(iter$.next(), coro::exhausted())
 })
 
 test_that("dataloader iteration", {

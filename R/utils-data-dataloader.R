@@ -27,12 +27,11 @@ is_dataloader <- function(x) {
 #'
 #' @export
 dataloader_next <- function(iter, completed = NULL) {
-  tryCatch(
-    expr = iter$.next(),
-    stop_iteration_error = function(e) {
-      completed
-    }
-  )
+  res <- iter$.next()
+  if (coro::is_exhausted(res))
+    completed
+  else
+    res
 }
 
 #' Data loader. Combines a dataset and a sampler, and provides
@@ -233,6 +232,10 @@ SingleProcessDataLoaderIter <- R6::R6Class(
     },
     .next_data = function() {
       index <- self$.next_index()
+      
+      if (coro::is_exhausted(index))
+        return(coro::exhausted())
+      
       data <- self$.dataset_fetcher$fetch(index)
       if (self$.pin_memory) {
         # TODO
@@ -251,6 +254,11 @@ coro::as_iterator
 #' @importFrom coro iterate
 #' @export
 coro::iterate
+
+#' Re-exporting the iterate function.
+#' @importFrom coro yield
+#' @export
+coro::yield
 
 #' @importFrom coro as_iterator
 #' @export

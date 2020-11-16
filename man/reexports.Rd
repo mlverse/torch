@@ -5,6 +5,7 @@
 \alias{reexports}
 \alias{as_iterator}
 \alias{iterate}
+\alias{yield}
 \title{Re-exporting the as_iterator function.}
 \keyword{internal}
 \description{
@@ -12,6 +13,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{coro}{\code{\link[coro]{as_iterator}}, \code{\link[coro:collect]{iterate}}}
+  \item{coro}{\code{\link[coro]{as_iterator}}, \code{\link[coro:collect]{iterate}}, \code{\link[coro]{yield}}}
 }}
 
