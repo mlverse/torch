@@ -135,4 +135,5 @@ Collate:
     'with-indices.R'
     'wrapers.R'
 Remotes:
-    r-lib/coro
+    r-lib/coro,
+    r-lib/rlang
