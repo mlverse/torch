@@ -20,6 +20,8 @@
 - Fixed `torch_stft` calls for LibTorch 1.7 (added the `return_complex` argument) (#355)
 - Fixed bug when strides were NULL in some pooling operations. (#361)
 - Added `nn_lstm` and `nn_gru` modules. (#362)
+- Use `nvcc --version` instead of `nvidia-smi` to find the CUDA version as `nvidia-smi` reports the latest
+  supported version and not the installed one. (#363)
 
 # torch 0.1.1
 
