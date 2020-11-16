@@ -1,3 +1,5 @@
+#' @include utils.R
+
 #' Distribution is the abstract base class for probability distributions.
 Distribution <- R6::R6Class(
   "torch_Distribution",
@@ -9,6 +11,8 @@ Distribution <- R6::R6Class(
     has_enumerate_support = FALSE,
     .validate_args        = FALSE,
     .support              = NULL,
+    .batch_shape          = NULL,
+    .event_shape          = NULL,
     
     # Choose different structure?
     arg_constraints       = list(),
@@ -26,7 +30,7 @@ Distribution <- R6::R6Class(
           constraint <- arg_constraints[[p]]$constraint
           param      <- arg_constraints[[p]]$param
           
-          if (constraints_is_dependent(constraint))
+          if (is_dependent(constraint))
             next
           if (!(param %in% as.list(self)) && inherits(param, "lazy_property"))
             next # skip checking lazily-constructed args
@@ -106,9 +110,7 @@ Distribution <- R6::R6Class(
     #' returned shape is upcast to (1,).
     #' @param sample_shape (torch_Size): the size of the sample to be drawn.
     .extended_shape = function(sample_shape = NULL){
-     # if (!inherits(sample_shape, "torch_size"))
-     #   sample_shape <- torch_size(sample_shape) #!
-     sample_shape + self$batch_shape + self$event_shape
+      sample_shape + self$batch_shape + self$event_shape
     },
     
     #' Argument validation for distribution methods such as `log_prob`,
@@ -138,8 +140,10 @@ Distribution <- R6::R6Class(
         j <- expected_shape[idx]
         
         if (i != 1 && j != 1 && i != j)
-          value_error('Value is not broadcastable with 
-                      batch_shape+event_shape: {actual_shape} vs {expected_shape}.')
+          value_error(
+            'Value is not broadcastable with 
+             batch_shape+event_shape: {actual_shape} vs {expected_shape}.'
+          )
       }
       
       if (!self$support$check(value)$all())
@@ -148,13 +152,14 @@ Distribution <- R6::R6Class(
     
     .get_checked_instance = function(cls, .instance = NULL){
       if (is.null(.instance) && self$initialize == cls$initialize)
-        not_implemented_error("Subclass {class(self)} of {class(.instance)} ",
-                              "that defines a custom initialize() method ",
-                              "must also define a custom `_expand()` method.")
+        not_implemented_error(
+          "Subclass {class(self)} of {class(.instance)} ",
+          "that defines a custom initialize() method ",
+          "must also define a custom `_expand()` method."
+        )
       
-      # TODO: better mechanism to get own instance's class
       if (is.null(.instance))
-        return(eval(parse(text = glue("torch:::{class(self)}")))$new())
+        return(self$class_def$new())
       else
         return(.instance)
     },
@@ -200,3 +205,5 @@ Distribution <- R6::R6Class(
     }
   )
 )
+
+Distribution <- add_class_definition(Distribution)
