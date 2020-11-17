@@ -23,6 +23,7 @@
 - Use `nvcc --version` instead of `nvidia-smi` to find the CUDA version as `nvidia-smi` reports the latest
   supported version and not the installed one. (#363)
 - Added distribution constraints (@krzjoa #364)
+- Corrected URL to download LibTorch under Linux with CUDA 10.2 (#367)
 
 # torch 0.1.1
 
