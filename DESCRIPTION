@@ -31,7 +31,8 @@ Imports:
     stats,
     bit64,
     magrittr,
-    tools
+    tools,
+    coro
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
@@ -40,8 +41,7 @@ Suggests:
     knitr,
     rmarkdown,
     glue,
-    palmerpenguins,
-    coro
+    palmerpenguins
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
