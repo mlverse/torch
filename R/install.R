@@ -53,7 +53,7 @@ install_config <- list(
     "10.2" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcu102.zip",
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.0.zip",
           path = "libtorch/lib",
           md5hash = "300c826e0f4620008dda7abbb09a8d5e"
         ),
