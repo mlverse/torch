@@ -89,7 +89,7 @@ BatchSampler <- R6::R6Class(
         sampler <- as_iterator(self$sampler)
         
         # TODO: use coro::iterate see https://github.com/r-lib/coro/issues/31
-        while(!is_exhausted(idx <- sampler())) {
+        while(!coro::is_exhausted(idx <- sampler())) {
           batch[[length(batch) + 1]] <- idx
           if (length(batch) == self$batch_size) {
             yield(batch)
