@@ -143,7 +143,11 @@ DataLoader <- R6::R6Class(
     .iter = function() {
       
       if (self$.dataset_kind == "map") {
-        return(SingleProcessDataLoaderIter$new(self))
+        
+        if (self$num_workers == 0)
+          return(SingleProcessDataLoaderIter$new(self))
+        
+        MultiProcessingDataLoaderIter$new(self)
       } else {
         not_implemented_error()
       }
@@ -231,12 +235,79 @@ SingleProcessDataLoaderIter <- R6::R6Class(
       
     },
     .next_data = function() {
+      
       index <- self$.next_index()
       
       if (coro::is_exhausted(index))
         return(coro::exhausted())
       
       data <- self$.dataset_fetcher$fetch(index)
+      if (self$.pin_memory) {
+        # TODO
+      }
+      data
+    }
+  )
+)
+
+MultiProcessingDataLoaderIter <- R6::R6Class(
+  classname = "SingleProcessDataLoaderIter",
+  inherit = BaseDataLoaderIter,
+  lock_objects = FALSE,
+  public = list(
+    initialize = function(loader) {
+      
+      super$initialize(loader)
+      
+      if (self$.dataset_kind == "map") {
+        self$.dataset_fetcher <- MapDatasetFetcher$new(
+          self$.dataset, 
+          self$.auto_collation, 
+          self$.collate_fn, 
+          self$.drop_last
+        ) 
+      } else {
+        not_implemented_error()
+      }
+      
+      self$num_workers <- loader$num_workers
+      
+    },
+    .start = TRUE,
+    .data_futures = list(),
+    .add_future = function() {
+      index <- self$.next_index()
+      fetcher <- self$.dataset_fetcher$fetch
+      n_futures <- length(self$.data_futures)
+      
+      if (coro::is_exhausted(index))
+        self$.data_futures[[n_futures]] <- future::future(coro::exhausted())
+      else
+        self$.data_futures[[n_futures + 1]] <- future::future(
+          torch:::to_exportable_tensor(fetcher(index)), 
+          globals = c("index", "fetcher", "to_exportable_tensor")
+        )
+    },
+    .pop_future = function() {
+      data <- future::value(self$.data_futures[[1]])
+      self$.data_future <- self$.data_future[-1]
+      from_exportable_tensor(data)
+    },
+    .next_data = function() {
+      
+      workers <- self$.num_workers
+      
+      if (self$.start) {
+        start_n <- workers
+        self$.start <- FALSE
+      } else {
+        start_n <- 1
+      }
+        
+      for (i in seq_len(start_n))
+        self$.add_future()
+      
+      data <- self$.pop_future()
       if (self$.pin_memory) {
         # TODO
       }
@@ -268,4 +339,32 @@ as_iterator.dataloader <- function(x) {
   coro::as_iterator(function() {
     dataloader_next(iter, coro::exhausted())
   })
+}
+
+# takes a tensor and saves it's state in a field so we can
+# reconstruct it after transfering via futures
+to_exportable_tensor <- function(x) {
+  if (is.list(x))
+    return(lapply(x, to_exportable_tensor))
+  
+  if (!is_torch_tensor(x))
+    return(x)
+  
+  raw <- tensor_to_raw_vector(x)
+  class(raw) <- "exportable_tensor"
+  raw
+}
+
+from_exportable_tensor <- function(x) {
+  
+  if (is.list(x))
+    return(lapply(x, from_exportable_tensor))
+  
+  if (!inherits(x, "exportable_tensor"))
+    return(x)
+  
+  con <- rawConnection(x)
+  r <- readRDS(con)
+  close(con)
+  torch_load_tensor(r)
 }
