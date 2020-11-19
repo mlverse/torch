@@ -32,7 +32,8 @@ Imports:
     bit64,
     magrittr,
     tools,
-    coro
+    coro,
+    callr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
