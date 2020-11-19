@@ -62,7 +62,7 @@ dataloader_next <- function(iter, completed = NULL) {
 #' @param timeout (numeric, optional): if positive, the timeout value for collecting a batch
 #'   from workers. -1 means no timeout. (default: `-1`)
 #' @param worker_init_fn (callable, optional): If not `NULL`, this will be called on each
-#'   worker subprocess with the worker id (an int in `[0, num_workers - 1]`) as
+#'   worker subprocess with the worker id (an int in `[1, num_workers]`) as
 #'   input, after seeding and before data loading. (default: `NULL`)
 #'
 #' @export
@@ -189,6 +189,7 @@ BaseDataLoaderIter <- R6::R6Class(
       self$.pin_memory <- loader$pin_memory #TODO && torch.cuda.is_available()
       self$.timeout <- loader$timeout
       self$.collate_fn <- loader$collate_fn
+      self$.worker_init_fn <- loader$worker_init_fn
       self$.sampler_iter <- self$.index_sampler$.iter()
       #self$.base_seed = torch.empty((), dtype=torch.int64).random_(generator=loader.generator).item()
       self$.num_yielded <- 0
@@ -277,19 +278,42 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         private$workers[[i]] <- callr::r_session$new()
       }
       
+      worker_config <- function(id, num_workers, seed, init_fn) {
+        
+        .worker_info <<- list(id = id, 
+                              workers = num_workers,
+                              seed = seed)
+        
+        torch::torch_set_num_threads(1)
+        set.seed(seed)
+        torch::torch_manual_seed(seed)
+        
+        if (!is.null(init_fn))
+          init_fn()
+      }
+      
       fetcher <- self$.dataset_fetcher$fetch
       # initialize the workers!
       for (i in seq_len(self$.num_workers)) {
-        # run the worker_init_fn setting seed, etc.
-        # TODO
+        worker <- private$workers[[i]]
+        
+        # Creates initial worker configuration
+        worker$run(
+          worker_config, 
+          args = list(
+            id = i, 
+            num_workers = self$.num_workers, 
+            seed = sample.int(1e6, 1),
+            init_fn = self$.worker_init_fn
+          )
+        )
         
         # move fetcher to each session
-        private$workers[[i]]$run(function(fetcher) {fetcher <<- fetcher}, 
-                                 list(fetcher = fetcher))
+        worker$run(function(fetcher) {fetcher <<- fetcher}, 
+                   list(fetcher = fetcher))
       }
       
     },
-    .start = TRUE,
     .add_task = function() {
       index <- self$.next_index()
       
@@ -338,12 +362,10 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       
       # the first time we call .next_data
       # we want to start num_worker tasks
-      if (self$.start) {
+      if (self$.num_yielded == 0)
         start_n <- workers
-        self$.start <- FALSE
-      } else {
+      else
         start_n <- 1
-      }
         
       for (i in seq_len(start_n))
         self$.add_task()
