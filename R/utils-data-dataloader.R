@@ -60,7 +60,7 @@ dataloader_next <- function(iter, completed = NULL) {
 #'   the size of dataset is not divisible by the batch size, then the last batch
 #'   will be smaller. (default: `FALSE`)
 #' @param timeout (numeric, optional): if positive, the timeout value for collecting a batch
-#'   from workers. Should always be non-negative. (default: `0`)
+#'   from workers. -1 means no timeout. (default: `-1`)
 #' @param worker_init_fn (callable, optional): If not `NULL`, this will be called on each
 #'   worker subprocess with the worker id (an int in `[0, num_workers - 1]`) as
 #'   input, after seeding and before data loading. (default: `NULL`)
@@ -69,7 +69,7 @@ dataloader_next <- function(iter, completed = NULL) {
 dataloader <- function(dataset, batch_size = 1, shuffle = FALSE, 
                        sampler=NULL,
                        batch_sampler=NULL, num_workers=0, collate_fn=NULL,
-                       pin_memory=FALSE, drop_last=FALSE, timeout=0,
+                       pin_memory=FALSE, drop_last=FALSE, timeout=-1,
                        worker_init_fn=NULL) {
   
   multiprocessing_context <- NULL
@@ -320,12 +320,14 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       
       # wait for the process to be ready
       # TODO deal with timeout here
-      task$poll_process(timeout = -1)
+      task$poll_process(timeout = self$.timeout)
       
       # read results
       result <- task$read()
       
-      # TODO deal with errors in the process
+      # Raise error that might have hapened in the subprocess.
+      if (!is.null(res$error))
+        runtime_error(result$error)
       
       data <- result$result
       from_exportable_tensor(data)
