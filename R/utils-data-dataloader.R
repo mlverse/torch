@@ -279,7 +279,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       }
       
       worker_config <- function(id, num_workers, seed, init_fn) {
-        
+        library(torch)
         .worker_info <<- list(id = id, 
                               workers = num_workers,
                               seed = seed)
@@ -343,15 +343,16 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       private$tasks <- private$tasks[-1]
       
       # wait for the process to be ready
-      # TODO deal with timeout here
-      task$poll_process(timeout = self$.timeout)
+      p <- task$poll_process(timeout = self$.timeout)
+      if (p == "timeout")
+        runtime_error("dataloader worker timed out.")
       
       # read results
       result <- task$read()
       
       # Raise error that might have hapened in the subprocess.
-      if (!is.null(res$error))
-        runtime_error(result$error)
+      if (!is.null(result$error))
+        runtime_error(result$error$message)
       
       data <- result$result
       from_exportable_tensor(data)
