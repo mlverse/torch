@@ -289,7 +289,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         torch::torch_manual_seed(seed)
         
         if (!is.null(init_fn))
-          init_fn()
+          init_fn(id)
       }
       
       fetcher <- self$.dataset_fetcher$fetch
