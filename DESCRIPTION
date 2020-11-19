@@ -127,7 +127,6 @@ Collate:
     'threads.R'
     'type-info.R'
     'utils-data-collate.R'
-    'utils-data-dataloader-queue.R'
     'utils-data-dataloader.R'
     'utils-data-enum.R'
     'utils-data-fetcher.R'
