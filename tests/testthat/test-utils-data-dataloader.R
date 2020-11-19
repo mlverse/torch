@@ -147,3 +147,147 @@ test_that("can use a dataloader with coro", {
   })
   
 })
+
+test_that("dataloader works with num_workers", {
+  
+  ds <- dataset(
+    .length = function() {
+      20
+    },
+    initialize = function() {},
+    .getitem = function(id) {
+      list(x = .worker_info$id)
+    }
+  )
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
+  
+  i <- 1
+  for (batch in enumerate(dl)) {
+    expect_equal_to_tensor(batch$x, i*torch_ones(10))
+    i <- i + 1
+  }
+
+})
+
+test_that("dataloader catches errors on workers", {
+  
+  ds <- dataset(
+    .length = function() {
+      20
+    },
+    initialize = function() {},
+    .getitem = function(id) {
+      stop("the error id is 5567")
+      list(x = .worker_info$id)
+    }
+  )
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
+  iter <- dataloader_make_iter(dl)
+  
+  expect_error(
+    dataloader_next(iter),
+    class = "runtime_error",
+    regexp = "5567"
+  )
+  
+})
+
+test_that("woprker init function is respected", {
+  
+  ds <- dataset(
+    .length = function() {
+      20
+    },
+    initialize = function() {},
+    .getitem = function(id) {
+      list(x = theid)
+    }
+  )
+  
+  worker_init_fn <- function(id) {
+    theid <<- id * 2
+  }
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2, 
+                   worker_init_fn = worker_init_fn)
+  
+  i <- 1
+  for (batch in enumerate(dl)) {
+    expect_equal_to_tensor(batch$x, i*2*torch_ones(10))
+    i <- i + 1
+  }
+  
+})
+
+test_that("dataloader timeout is respected", {
+  
+  ds <- dataset(
+    .length = function() {
+      20
+    },
+    initialize = function() {},
+    .getitem = function(id) {
+      Sys.sleep(10)
+      list(x = 1)
+    }
+  )
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2, 
+                   timeout = 5) # (timeout is in miliseconds)
+  
+  iter <- dataloader_make_iter(dl)
+  expect_error(
+    dataloader_next(iter),
+    class = "runtime_error",
+    regexp = "timed out"
+  )
+  
+})
+
+test_that("can return tensors in multiworker dataloaders", {
+  
+  ds <- dataset(
+    .length = function() {
+      20
+    },
+    initialize = function() {},
+    .getitem = function(id) {
+      list(x = torch_scalar_tensor(1))
+    }
+  )
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
+  
+  for (batch in enumerate(dl)) {
+    expect_equal_to_tensor(batch$x, torch_ones(10))
+  }
+  
+})
+
+test_that("can make reproducible runs", {
+  
+  ds <- dataset(
+    .length = function() {
+      20
+    },
+    initialize = function() {},
+    .getitem = function(id) {
+      list(x = runif(1), y = torch_randn(1))
+    }
+  )
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
+  
+  set.seed(1)
+  iter <- dataloader_make_iter(dl)
+  b1 <- dataloader_next(iter)
+  
+  set.seed(1)
+  iter <- dataloader_make_iter(dl)
+  b2 <- dataloader_next(iter)
+  
+  expect_equal(b1$x, b2$x)
+  expect_equal_to_tensor(b1$y, b2$y)
+})
