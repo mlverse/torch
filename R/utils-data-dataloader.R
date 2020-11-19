@@ -270,33 +270,71 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         not_implemented_error()
       }
       
-      self$num_workers <- loader$num_workers
+      # initialize all the worker sections
+      # using callr
+      private$workers <- list()
+      for (i in seq_len(self$.num_workers)) {
+        private$workers[[i]] <- callr::r_session$new()
+      }
+      
+      fetcher <- self$.dataset_fetcher$fetch
+      # initialize the workers!
+      for (i in seq_len(self$.num_workers)) {
+        # run the worker_init_fn setting seed, etc.
+        # TODO
+        
+        # move fetcher to each session
+        private$workers[[i]]$run(function(fetcher) {fetcher <<- fetcher}, 
+                                 list(fetcher = fetcher))
+      }
       
     },
     .start = TRUE,
-    .data_futures = list(),
-    .add_future = function() {
+    .add_task = function() {
       index <- self$.next_index()
-      fetcher <- self$.dataset_fetcher$fetch
-      n_futures <- length(self$.data_futures)
       
+      # find first idle worker
+      for (worker_id in seq_len(self$.num_workers)) {
+        worker <- private$workers[[worker_id]]
+        if (worker$get_state() == "idle")
+          break
+      }
+      
+      # send task to the worker
       if (coro::is_exhausted(index))
-        self$.data_futures[[n_futures]] <- future::future(coro::exhausted())
+        worker$call(function() coro::exhausted())
       else
-        self$.data_futures[[n_futures + 1]] <- future::future(
-          torch:::to_exportable_tensor(fetcher(index)), 
-          globals = c("index", "fetcher", "to_exportable_tensor")
-        )
+        worker$call(function() {
+          torch:::to_exportable_tensor(fetcher(index))
+        })
+      
+      # adds a reference of that worker to the task list
+      private$tasks[[length(private$tasks) + 1]] <- worker
     },
-    .pop_future = function() {
-      data <- future::value(self$.data_futures[[1]])
-      self$.data_future <- self$.data_future[-1]
+    .pop_task = function() {
+      
+      # get task and remove from the list
+      task <- private$tasks[[1]]
+      private$tasks <- private$tasks[-1]
+      
+      # wait for the process to be ready
+      # TODO deal with timeout here
+      task$poll_process(timeout = -1)
+      
+      # read results
+      result <- task$read()
+      
+      # TODO deal with errors in the process
+      
+      data <- result$result
       from_exportable_tensor(data)
     },
     .next_data = function() {
       
       workers <- self$.num_workers
       
+      # the first time we call .next_data
+      # we want to start num_worker tasks
       if (self$.start) {
         start_n <- workers
         self$.start <- FALSE
@@ -305,14 +343,17 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       }
         
       for (i in seq_len(start_n))
-        self$.add_future()
+        self$.add_task()
       
-      data <- self$.pop_future()
+      data <- self$.pop_task()
       if (self$.pin_memory) {
         # TODO
       }
       data
     }
+  ),
+  private = list(
+    tasks = list()
   )
 )
 
