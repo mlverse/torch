@@ -304,9 +304,10 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       if (coro::is_exhausted(index))
         worker$call(function() coro::exhausted())
       else
-        worker$call(function() {
-          torch:::to_exportable_tensor(fetcher(index))
-        })
+        worker$call(
+          function(index) torch:::to_exportable_tensor(fetcher(index)), 
+          list(index = index)
+        )
       
       # adds a reference of that worker to the task list
       private$tasks[[length(private$tasks) + 1]] <- worker
