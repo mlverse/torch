@@ -58,7 +58,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -197,7 +197,7 @@
 <p>In this example we define our own custom autograd function for performing the ReLU nonlinearity, and use it to implement our two-layer network:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># We can implement our own custom autograd Functions by subclassing</span>
-<span class="co"># autograd_functioon and implementing the forward and backward passes</span>
+<span class="co"># autograd_function and implementing the forward and backward passes</span>
 <span class="co"># which operate on Tensors.</span>
 <span class="va">my_relu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/autograd_function.html">autograd_function</a></span><span class="op">(</span>
    <span class="co"># In the forward pass we receive a Tensor containing the input and return</span>
@@ -279,12 +279,12 @@
       <span class="va">w2</span><span class="op">$</span><span class="va">grad</span><span class="op">$</span><span class="fu">zero_</span><span class="op">(</span><span class="op">)</span>
    <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Step: 1 : 27277796 </span>
-<span class="co">#&gt; Step: 100 : 501.0054 </span>
-<span class="co">#&gt; Step: 200 : 2.613708 </span>
-<span class="co">#&gt; Step: 300 : 0.02225145 </span>
-<span class="co">#&gt; Step: 400 : 0.0004565628 </span>
-<span class="co">#&gt; Step: 500 : 5.746812e-05</span></code></pre></div>
+<span class="co">#&gt; Step: 1 : 23867586 </span>
+<span class="co">#&gt; Step: 100 : 313.132 </span>
+<span class="co">#&gt; Step: 200 : 0.8468544 </span>
+<span class="co">#&gt; Step: 300 : 0.003881598 </span>
+<span class="co">#&gt; Step: 400 : 0.0001230063 </span>
+<span class="co">#&gt; Step: 500 : 2.695481e-05</span></code></pre></div>
 <p>In the <a href="nn.html">next example</a> we will learn how to use the neural networks abstractions in torch.</p>
   </div>
 
