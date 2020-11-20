@@ -15,7 +15,7 @@ navbar:
   getting-started:
     text: Getting started
     menu:
-      - text: Beginers guide
+      - text: Beginners guide
       - text: Warm-up
         href: articles/getting-started/warmup.html
       - text: Tensors
