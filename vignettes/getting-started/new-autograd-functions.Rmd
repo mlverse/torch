@@ -25,7 +25,7 @@ In this example we define our own custom autograd function for performing the Re
 
 ```{r}
 # We can implement our own custom autograd Functions by subclassing
-# autograd_functioon and implementing the forward and backward passes
+# autograd_function and implementing the forward and backward passes
 # which operate on Tensors.
 my_relu <- autograd_function(
    # In the forward pass we receive a Tensor containing the input and return
