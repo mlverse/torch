@@ -150,6 +150,9 @@ test_that("can use a dataloader with coro", {
 
 test_that("dataloader works with num_workers", {
   
+  if (cuda_is_available())
+    skip_on_os("windows")
+  
   ds <- dataset(
     .length = function() {
       20
@@ -171,6 +174,9 @@ test_that("dataloader works with num_workers", {
 })
 
 test_that("dataloader catches errors on workers", {
+  
+  if (cuda_is_available())
+    skip_on_os("windows")
   
   ds <- dataset(
     .length = function() {
@@ -195,6 +201,9 @@ test_that("dataloader catches errors on workers", {
 })
 
 test_that("woprker init function is respected", {
+  
+  if (cuda_is_available())
+    skip_on_os("windows")
   
   ds <- dataset(
     .length = function() {
@@ -223,6 +232,9 @@ test_that("woprker init function is respected", {
 
 test_that("dataloader timeout is respected", {
   
+  if (cuda_is_available())
+    skip_on_os("windows")
+  
   ds <- dataset(
     .length = function() {
       20
@@ -248,6 +260,9 @@ test_that("dataloader timeout is respected", {
 
 test_that("can return tensors in multiworker dataloaders", {
   
+  if (cuda_is_available())
+    skip_on_os("windows")
+  
   ds <- dataset(
     .length = function() {
       20
@@ -267,6 +282,9 @@ test_that("can return tensors in multiworker dataloaders", {
 })
 
 test_that("can make reproducible runs", {
+  
+  if (cuda_is_available())
+    skip_on_os("windows")
   
   ds <- dataset(
     .length = function() {
