@@ -26,8 +26,9 @@ ExponentialFamily <- R6::R6Class(
     #' Method to compute the entropy using Bregman divergence of the log normalizer.
     entropy = function(){
       result <- -self$.mean_carrier_measure
-      nparams <- purrr::map(
-        self$.natural_params, ~ .x$detach()$.requires_grad_()
+      nparams <- Map(
+        function(x) x$detach()$.requires_grad_(), 
+        self$.natural_params,
       )
       lg_normal <- self$.log_normalizer(nparams)
       gradients <- autograd_grad(lg_normal$sum(), nparams, create_graph = TRUE)
