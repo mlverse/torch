@@ -1,3 +1,5 @@
+#' @include utils.R
+
 #' ExponentialFamily is the abstract base class for probability distributions belonging to an
 #' exponential family, whose probability mass/density function has the form is defined below
 #' 
@@ -64,3 +66,4 @@ ExponentialFamily <- R6::R6Class(
   )
 )
 
+ExponentialFamily <- add_class_definition(ExponentialFamily)
