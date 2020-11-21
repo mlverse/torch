@@ -27,7 +27,7 @@ ExponentialFamily <- R6::R6Class(
     entropy = function(){
       result <- -self$.mean_carrier_measure
       nparams <- Map(
-        function(x) x$detach()$.requires_grad_(), 
+        function(x) x$detach()$requires_grad_(), 
         self$.natural_params,
       )
       lg_normal <- self$.log_normalizer(nparams)
