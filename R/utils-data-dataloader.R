@@ -251,6 +251,7 @@ SingleProcessDataLoaderIter <- R6::R6Class(
   )
 )
 
+#' @importFrom callr r_session
 MultiProcessingDataLoaderIter <- R6::R6Class(
   classname = "SingleProcessDataLoaderIter",
   inherit = BaseDataLoaderIter,
