@@ -15,7 +15,7 @@ dataloader(
   collate_fn = NULL,
   pin_memory = FALSE,
   drop_last = FALSE,
-  timeout = 0,
+  timeout = -1,
   worker_init_fn = NULL
 )
 }
@@ -52,10 +52,10 @@ the size of dataset is not divisible by the batch size, then the last batch
 will be smaller. (default: \code{FALSE})}
 
 \item{timeout}{(numeric, optional): if positive, the timeout value for collecting a batch
-from workers. Should always be non-negative. (default: \code{0})}
+from workers. -1 means no timeout. (default: \code{-1})}
 
 \item{worker_init_fn}{(callable, optional): If not \code{NULL}, this will be called on each
-worker subprocess with the worker id (an int in \verb{[0, num_workers - 1]}) as
+worker subprocess with the worker id (an int in \verb{[1, num_workers]}) as
 input, after seeding and before data loading. (default: \code{NULL})}
 }
 \description{

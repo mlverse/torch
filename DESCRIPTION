@@ -31,7 +31,9 @@ Imports:
     stats,
     bit64,
     magrittr,
-    tools
+    tools,
+    coro,
+    callr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
@@ -133,3 +135,6 @@ Collate:
     'variable_list.R'
     'with-indices.R'
     'wrapers.R'
+Remotes:
+    r-lib/coro,
+    r-lib/rlang

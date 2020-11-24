@@ -26,13 +26,12 @@ is_dataloader <- function(x) {
 #' @param iter a DataLoader iter created with [dataloader_make_iter].
 #'
 #' @export
-dataloader_next <- function(iter) {
-  tryCatch(
-    expr = iter$.next(),
-    stop_iteration_error = function(e) {
-      NULL
-    }
-  )
+dataloader_next <- function(iter, completed = NULL) {
+  res <- iter$.next()
+  if (coro::is_exhausted(res))
+    completed
+  else
+    res
 }
 
 #' Data loader. Combines a dataset and a sampler, and provides
@@ -61,16 +60,16 @@ dataloader_next <- function(iter) {
 #'   the size of dataset is not divisible by the batch size, then the last batch
 #'   will be smaller. (default: `FALSE`)
 #' @param timeout (numeric, optional): if positive, the timeout value for collecting a batch
-#'   from workers. Should always be non-negative. (default: `0`)
+#'   from workers. -1 means no timeout. (default: `-1`)
 #' @param worker_init_fn (callable, optional): If not `NULL`, this will be called on each
-#'   worker subprocess with the worker id (an int in `[0, num_workers - 1]`) as
+#'   worker subprocess with the worker id (an int in `[1, num_workers]`) as
 #'   input, after seeding and before data loading. (default: `NULL`)
 #'
 #' @export
 dataloader <- function(dataset, batch_size = 1, shuffle = FALSE, 
                        sampler=NULL,
                        batch_sampler=NULL, num_workers=0, collate_fn=NULL,
-                       pin_memory=FALSE, drop_last=FALSE, timeout=0,
+                       pin_memory=FALSE, drop_last=FALSE, timeout=-1,
                        worker_init_fn=NULL) {
   
   multiprocessing_context <- NULL
@@ -144,7 +143,11 @@ DataLoader <- R6::R6Class(
     .iter = function() {
       
       if (self$.dataset_kind == "map") {
-        return(SingleProcessDataLoaderIter$new(self))
+        
+        if (self$num_workers == 0)
+          return(SingleProcessDataLoaderIter$new(self))
+        
+        MultiProcessingDataLoaderIter$new(self)
       } else {
         not_implemented_error()
       }
@@ -186,6 +189,7 @@ BaseDataLoaderIter <- R6::R6Class(
       self$.pin_memory <- loader$pin_memory #TODO && torch.cuda.is_available()
       self$.timeout <- loader$timeout
       self$.collate_fn <- loader$collate_fn
+      self$.worker_init_fn <- loader$worker_init_fn
       self$.sampler_iter <- self$.index_sampler$.iter()
       #self$.base_seed = torch.empty((), dtype=torch.int64).random_(generator=loader.generator).item()
       self$.num_yielded <- 0
@@ -232,7 +236,12 @@ SingleProcessDataLoaderIter <- R6::R6Class(
       
     },
     .next_data = function() {
+      
       index <- self$.next_index()
+      
+      if (coro::is_exhausted(index))
+        return(coro::exhausted())
+      
       data <- self$.dataset_fetcher$fetch(index)
       if (self$.pin_memory) {
         # TODO
@@ -241,3 +250,189 @@ SingleProcessDataLoaderIter <- R6::R6Class(
     }
   )
 )
+
+#' @importFrom callr r_session
+MultiProcessingDataLoaderIter <- R6::R6Class(
+  classname = "SingleProcessDataLoaderIter",
+  inherit = BaseDataLoaderIter,
+  lock_objects = FALSE,
+  public = list(
+    initialize = function(loader) {
+      
+      super$initialize(loader)
+      
+      if (self$.dataset_kind == "map") {
+        self$.dataset_fetcher <- MapDatasetFetcher$new(
+          self$.dataset, 
+          self$.auto_collation, 
+          self$.collate_fn, 
+          self$.drop_last
+        ) 
+      } else {
+        not_implemented_error()
+      }
+      
+      # initialize all the worker sections
+      # using callr
+      private$workers <- list()
+      for (i in seq_len(self$.num_workers)) {
+        private$workers[[i]] <- callr::r_session$new()
+      }
+      
+      worker_config <- function(id, num_workers, seed, init_fn) {
+        library(torch)
+        .worker_info <<- list(id = id, 
+                              workers = num_workers,
+                              seed = seed)
+        
+        torch::torch_set_num_threads(1)
+        set.seed(seed)
+        torch::torch_manual_seed(seed)
+        
+        if (!is.null(init_fn))
+          init_fn(id)
+      }
+      
+      fetcher <- self$.dataset_fetcher$fetch
+      # initialize the workers!
+      for (i in seq_len(self$.num_workers)) {
+        worker <- private$workers[[i]]
+        
+        # Creates initial worker configuration
+        worker$run(
+          worker_config, 
+          args = list(
+            id = i, 
+            num_workers = self$.num_workers, 
+            seed = sample.int(1e6, 1),
+            init_fn = self$.worker_init_fn
+          )
+        )
+        
+        # move fetcher to each session
+        worker$run(function(fetcher) {fetcher <<- fetcher}, 
+                   list(fetcher = fetcher))
+      }
+      
+    },
+    .add_task = function() {
+      index <- self$.next_index()
+      
+      # find first idle worker
+      for (worker_id in seq_len(self$.num_workers)) {
+        worker <- private$workers[[worker_id]]
+        if (worker$get_state() == "idle")
+          break
+      }
+      
+      # send task to the worker
+      if (coro::is_exhausted(index))
+        worker$call(function() coro::exhausted())
+      else
+        worker$call(
+          function(index) torch:::to_exportable_tensor(fetcher(index)), 
+          list(index = index)
+        )
+      
+      # adds a reference of that worker to the task list
+      private$tasks[[length(private$tasks) + 1]] <- worker
+    },
+    .pop_task = function() {
+      
+      # get task and remove from the list
+      task <- private$tasks[[1]]
+      private$tasks <- private$tasks[-1]
+      
+      # wait for the process to be ready
+      p <- task$poll_process(timeout = self$.timeout)
+      if (p == "timeout")
+        runtime_error("dataloader worker timed out.")
+      
+      # read results
+      result <- task$read()
+      
+      # Raise error that might have hapened in the subprocess.
+      if (!is.null(result$error))
+        runtime_error(result$error$message)
+      
+      data <- result$result
+      from_exportable_tensor(data)
+    },
+    .next_data = function() {
+      
+      workers <- self$.num_workers
+      
+      # the first time we call .next_data
+      # we want to start num_worker tasks
+      if (self$.num_yielded == 0)
+        start_n <- workers
+      else
+        start_n <- 1
+        
+      for (i in seq_len(start_n))
+        self$.add_task()
+      
+      data <- self$.pop_task()
+      if (self$.pin_memory) {
+        # TODO
+      }
+      data
+    }
+  ),
+  private = list(
+    tasks = list()
+  )
+)
+
+#' Re-exporting the as_iterator function.
+#' @importFrom coro as_iterator
+#' @export
+coro::as_iterator
+
+#' Re-exporting the iterate function.
+#' @importFrom coro iterate
+#' @export
+coro::iterate
+
+#' Re-exporting the iterate function.
+#' @importFrom coro yield
+#' @export
+coro::yield
+
+#' @importFrom coro as_iterator
+#' @export
+#' @method as_iterator dataloader
+as_iterator.dataloader <- function(x) {
+  iter <- dataloader_make_iter(x)
+  coro::as_iterator(function() {
+    dataloader_next(iter, coro::exhausted())
+  })
+}
+
+# takes a tensor and saves it's state in a field so we can
+# reconstruct it after transfering via futures
+to_exportable_tensor <- function(x) {
+  if (is.list(x))
+    return(lapply(x, to_exportable_tensor))
+  
+  if (!is_torch_tensor(x))
+    return(x)
+  
+  raw <- tensor_to_raw_vector(x)
+  class(raw) <- "exportable_tensor"
+  raw
+}
+
+from_exportable_tensor <- function(x) {
+  
+  if (is.list(x))
+    return(lapply(x, from_exportable_tensor))
+  
+  if (!inherits(x, "exportable_tensor"))
+    return(x)
+  
+  con <- rawConnection(x)
+  r <- readRDS(con)
+  close(con)
+  torch_load_tensor(r)
+}
