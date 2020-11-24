@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mul — torch_mul • torch</title>
+<title>Re-exporting the as_iterator function. — reexports • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,13 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Mul — torch_mul" />
-<meta property="og:description" content="Mul" />
+<meta property="og:title" content="Re-exporting the as_iterator function. — reexports" />
+<meta property="og:description" content="These objects are imported from other packages. Follow the links
+below to see their documentation.
+
+  coroas_iterator, iterate, yield
+
+" />
 
 
 <meta name="robots" content="noindex">
@@ -221,72 +226,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Mul</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_mul.Rd</code></div>
+    <h1>Re-exporting the as_iterator function.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/utils-data-dataloader.R'><code>R/utils-data-dataloader.R</code></a></small>
+    <div class="hidden name"><code>reexports.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Mul</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p>
+<dl>
+  <dt>coro</dt><dd><p><code><a href='https://rdrr.io/pkg/coro/man/as_iterator.html'>as_iterator</a></code>, <code><a href='https://rdrr.io/pkg/coro/man/collect.html'>iterate</a></code>, <code><a href='https://rdrr.io/pkg/coro/man/yield.html'>yield</a></code></p></dd>
+
+</dl>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_mul</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>other</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>self</th>
-      <td><p>(Tensor) the first multiplicand tensor</p></td>
-    </tr>
-    <tr>
-      <th>other</th>
-      <td><p>(Tensor) the second multiplicand tensor</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="mul-input-other-out-null-"><a class="anchor" href="#mul-input-other-out-null-"></a>mul(input, other, out=NULL) </h2>
-
-    
 
 
-<p>Multiplies each element of the input <code>input</code> with the scalar
-<code>other</code> and returns a new resulting tensor.</p>
-<p>$$
-    \mbox{out}_i = \mbox{other} \times \mbox{input}_i
-$$
-If <code>input</code> is of type <code>FloatTensor</code> or <code>DoubleTensor</code>, <code>other</code>
-should be a real number, otherwise it should be an integer</p>
 
-
-<p>Each element of the tensor <code>input</code> is multiplied by the corresponding
-element of the Tensor <code>other</code>. The resulting tensor is returned.</p>
-<p>The shapes of <code>input</code> and <code>other</code> must be
-broadcastable .</p>
-<p>$$
-    \mbox{out}_i = \mbox{input}_i \times \mbox{other}_i
-$$</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_mul</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>100</span><span class='op'>)</span>
-
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>b</span>
-<span class='fu'>torch_mul</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  0.0385 -0.3167  0.2589 -0.1585
-#&gt;  0.0539 -0.4430  0.3621 -0.2217
-#&gt; -0.0396  0.3250 -0.2657  0.1627
-#&gt; -0.0041  0.0333 -0.0272  0.0167
-#&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

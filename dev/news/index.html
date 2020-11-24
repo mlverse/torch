@@ -276,6 +276,8 @@
 <li>Fixed <code>nn_batchnorm*</code> so it returns the same results as PyTorch (<a href='https://github.com/mlverse/torch/issues/302'>#302</a>)</li>
 <li>Fixed a bug that made <code>nn_module$parameter</code> when there were shared parameters between layers. (<a href='https://github.com/mlverse/torch/issues/306'>#306</a>)</li>
 <li>Fixed <code>$max</code> and <code>$min</code> to return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/315'>#315</a>)</li>
+<li>Dataloaders now returns a <code><a href="https://rdrr.io/pkg/coro/man/iterator.html">coro::exhausted</a></code> intead of raising <code>stop_iteration_error</code> when the dataloader exceeds. (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
+<li>Dataloaders now use the num_workers argument to load data in parallel (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
 </ul>
 </div>
 <div id="new-features" class="section level2">
