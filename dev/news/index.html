@@ -251,6 +251,8 @@
 <li>Use <code>nvcc --version</code> instead of <code>nvidia-smi</code> to find the CUDA version as <code>nvidia-smi</code> reports the latest supported version and not the installed one. (<a href='https://github.com/mlverse/torch/issues/363'>#363</a>)</li>
 <li>Added distribution constraints (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/364'>#364</a>)</li>
 <li>Corrected URL to download LibTorch under Linux with CUDA 10.2 (<a href='https://github.com/mlverse/torch/issues/367'>#367</a>)</li>
+<li>Dataloaders now returns a <code><a href="https://rdrr.io/pkg/coro/man/iterator.html">coro::exhausted</a></code> intead of raising <code>stop_iteration_error</code> when the dataloader exceeds. (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
+<li>Dataloaders now use the num_workers argument to load data in parallel (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
 </ul>
 </div>
     <div id="torch-011" class="section level1">
@@ -276,8 +278,6 @@
 <li>Fixed <code>nn_batchnorm*</code> so it returns the same results as PyTorch (<a href='https://github.com/mlverse/torch/issues/302'>#302</a>)</li>
 <li>Fixed a bug that made <code>nn_module$parameter</code> when there were shared parameters between layers. (<a href='https://github.com/mlverse/torch/issues/306'>#306</a>)</li>
 <li>Fixed <code>$max</code> and <code>$min</code> to return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/315'>#315</a>)</li>
-<li>Dataloaders now returns a <code><a href="https://rdrr.io/pkg/coro/man/iterator.html">coro::exhausted</a></code> intead of raising <code>stop_iteration_error</code> when the dataloader exceeds. (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
-<li>Dataloaders now use the num_workers argument to load data in parallel (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
 </ul>
 </div>
 <div id="new-features" class="section level2">
