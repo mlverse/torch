@@ -46,6 +46,8 @@
 - Fixed a bug that made `nn_module$parameter` when there were shared parameters
   between layers. (#306)
 - Fixed `$max` and `$min` to return 1-based indexes. (#315)
+- Dataloaders now returns a `coro::exhausted` intead of raising `stop_iteration_error` when the dataloader exceeds. (#366)
+- Dataloaders now use the num_workers argument to load data in parallel (#366)
 
 ## New features
 
