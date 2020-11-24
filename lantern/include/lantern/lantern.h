@@ -604,6 +604,13 @@ HOST_API void* lantern_optional_vector_double (double * x, size_t x_size, bool i
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _trace_r_nn_module) ();
+HOST_API void trace_r_nn_module ()
+{
+  _trace_r_nn_module();
+  LANTERN_HOST_HANDLER;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5163,6 +5170,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_get_num_interop_threads);
   LOAD_SYMBOL(_lantern_optional_vector_int64_t);
   LOAD_SYMBOL(_lantern_optional_vector_double);
+  LOAD_SYMBOL(_trace_r_nn_module);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
