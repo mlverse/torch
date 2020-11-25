@@ -202,3 +202,10 @@ void _lantern_string_delete (void * x)
   lantern_delete<LanternObject<std::string>>(x);
   LANTERN_FUNCTION_END_VOID
 }
+
+void _lantern_Stack_delete (void * x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<LanternObject<torch::jit::Stack>>(x);
+  LANTERN_FUNCTION_END_VOID;
+}

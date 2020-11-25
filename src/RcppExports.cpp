@@ -28706,6 +28706,49 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_stack_new
+Rcpp::XPtr<XPtrTorchStack> cpp_stack_new();
+RcppExport SEXP _torch_cpp_stack_new() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_stack_new());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_stack_push_back_Tensor
+void cpp_stack_push_back_Tensor(Rcpp::XPtr<XPtrTorchStack> self, Rcpp::XPtr<XPtrTorchTensor> x);
+RcppExport SEXP _torch_cpp_stack_push_back_Tensor(SEXP selfSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
+    cpp_stack_push_back_Tensor(self, x);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_stack_push_back_int64_t
+void cpp_stack_push_back_int64_t(Rcpp::XPtr<XPtrTorchStack> self, int64_t x);
+RcppExport SEXP _torch_cpp_stack_push_back_int64_t(SEXP selfSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< int64_t >::type x(xSEXP);
+    cpp_stack_push_back_int64_t(self, x);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_stack_to_r
+Rcpp::List cpp_stack_to_r(Rcpp::XPtr<XPtrTorchStack> self);
+RcppExport SEXP _torch_cpp_stack_to_r(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_stack_to_r(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_Tensor_storage
 Rcpp::XPtr<XPtrTorchStorage> cpp_Tensor_storage(Rcpp::XPtr<XPtrTorchTensor> self);
 RcppExport SEXP _torch_cpp_Tensor_storage(SEXP selfSEXP) {
@@ -31250,6 +31293,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_scalar_to_double", (DL_FUNC) &_torch_cpp_torch_scalar_to_double, 1},
     {"_torch_cpp_torch_scalar_to_float", (DL_FUNC) &_torch_cpp_torch_scalar_to_float, 1},
     {"_torch_cpp_torch_scalar_to_bool", (DL_FUNC) &_torch_cpp_torch_scalar_to_bool, 1},
+    {"_torch_cpp_stack_new", (DL_FUNC) &_torch_cpp_stack_new, 0},
+    {"_torch_cpp_stack_push_back_Tensor", (DL_FUNC) &_torch_cpp_stack_push_back_Tensor, 2},
+    {"_torch_cpp_stack_push_back_int64_t", (DL_FUNC) &_torch_cpp_stack_push_back_int64_t, 2},
+    {"_torch_cpp_stack_to_r", (DL_FUNC) &_torch_cpp_stack_to_r, 1},
     {"_torch_cpp_Tensor_storage", (DL_FUNC) &_torch_cpp_Tensor_storage, 1},
     {"_torch_cpp_Tensor_has_storage", (DL_FUNC) &_torch_cpp_Tensor_has_storage, 1},
     {"_torch_cpp_Storage_data_ptr", (DL_FUNC) &_torch_cpp_Storage_data_ptr, 1},

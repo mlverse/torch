@@ -7,17 +7,6 @@
 using namespace torch::jit::tracer;
 using namespace torch::jit;
 
-void * lantern_Stack_new ()
-{
-    return (void*) new LanternObject<torch::jit::Stack>();
-}
-
-void lantern_Stack_push_back_Tensor (void* self, void * x)
-{
-    auto t = reinterpret_cast<LanternObject<torch::Tensor>*>(x);
-    reinterpret_cast<LanternObject<torch::jit::Stack> *>(self)->get().push_back(t);
-}
-
 void _trace_r_nn_module ()
 {
     LANTERN_FUNCTION_START;

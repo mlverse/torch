@@ -215,6 +215,13 @@ public:
   }
 };
 
+class XPtrTorchStack : public XPtrTorch {
+public:
+  XPtrTorchStack (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_Stack_delete));
+  }
+};
+
 template<class T>
 class nullable {
 public:

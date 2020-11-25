@@ -604,6 +604,74 @@ HOST_API void* lantern_optional_vector_double (double * x, size_t x_size, bool i
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _trace_r_nn_module) ();
+HOST_API void trace_r_nn_module ()
+{
+  _trace_r_nn_module();
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void * (LANTERN_PTR _lantern_Stack_new) ();
+HOST_API void * lantern_Stack_new ()
+{
+  void* ret = _lantern_Stack_new();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_Stack_delete) (void * x);
+HOST_API void lantern_Stack_delete (void * x)
+{
+  _lantern_Stack_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_Stack_push_back_Tensor) (void* self, void* x);
+HOST_API void lantern_Stack_push_back_Tensor (void* self, void* x)
+{
+  _lantern_Stack_push_back_Tensor(self, x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_Stack_at_Tensor) (void*self, int64_t i);
+HOST_API void * lantern_Stack_at_Tensor (void* self, int64_t i)
+{
+  void* ret = _lantern_Stack_at_Tensor(self, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_Stack_push_back_int64_t) (void* self, int64_t x);
+HOST_API void lantern_Stack_push_back_int64_t (void* self, int64_t x)
+{
+  _lantern_Stack_push_back_int64_t(self, x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API int64_t (LANTERN_PTR _lantern_Stack_at_int64_t) (void*self, int64_t i);
+HOST_API int64_t lantern_Stack_at_int64_t (void* self, int64_t i)
+{
+  int64_t ret = _lantern_Stack_at_int64_t(self, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int64_t (LANTERN_PTR _lantern_Stack_size) (void* self);
+HOST_API int64_t lantern_Stack_size (void* self)
+{
+  int64_t ret = _lantern_Stack_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_Stack_at_is) (void* self, int64_t i, const char * type);
+HOST_API bool lantern_Stack_at_is (void* self, int64_t i, const char * type)
+{
+  bool ret = _lantern_Stack_at_is(self, i, type);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5163,6 +5231,15 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_get_num_interop_threads);
   LOAD_SYMBOL(_lantern_optional_vector_int64_t);
   LOAD_SYMBOL(_lantern_optional_vector_double);
+  LOAD_SYMBOL(_trace_r_nn_module);
+  LOAD_SYMBOL(_lantern_Stack_delete);
+  LOAD_SYMBOL(_lantern_Stack_new);
+  LOAD_SYMBOL(_lantern_Stack_push_back_Tensor);
+  LOAD_SYMBOL(_lantern_Stack_at_Tensor);
+  LOAD_SYMBOL(_lantern_Stack_push_back_int64_t);
+  LOAD_SYMBOL(_lantern_Stack_at_int64_t);
+  LOAD_SYMBOL(_lantern_Stack_size);
+  LOAD_SYMBOL(_lantern_Stack_at_is);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

@@ -97,6 +97,7 @@ add_library(lantern SHARED
     src/Contrib/Sparsemax.cpp
     src/Threads.cpp
     src/Trace.cpp
+    src/Stack.cpp
 )
 add_library(lantern::library ALIAS lantern)
 
