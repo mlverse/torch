@@ -680,10 +680,10 @@ HOST_API void* lantern_create_traceable_fun (void* fn)
   return ret;
 }
 
-LANTERN_API int (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs);
-HOST_API int lantern_trace_fn (void* fn, void* inputs)
+LANTERN_API int (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs, void* compilation_unit);
+HOST_API int lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
 {
-  int ret = _lantern_trace_fn(fn, inputs);
+  int ret = _lantern_trace_fn(fn, inputs, compilation_unit);
   LANTERN_HOST_HANDLER;
   return ret;
 }

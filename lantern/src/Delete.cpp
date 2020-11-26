@@ -213,6 +213,6 @@ void _lantern_Stack_delete (void * x)
 void _lantern_CompilationUnit_delete (void* x)
 {
   LANTERN_FUNCTION_START;
-  lantern_delete<LanternObject<torch::jit::CompilationUnit>>(x);
+  lantern_delete<torch::jit::CompilationUnit>(x);
   LANTERN_FUNCTION_END_VOID;
 }

@@ -126,6 +126,7 @@ Collate:
     'tensor_list.R'
     'tensor_options.R'
     'threads.R'
+    'trace.R'
     'type-info.R'
     'utils-data-collate.R'
     'utils-data-dataloader.R'

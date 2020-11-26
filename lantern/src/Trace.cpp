@@ -10,7 +10,7 @@ using namespace torch::jit;
 void * _lantern_CompilationUnit_new ()
 {
     LANTERN_FUNCTION_START;
-    return (void*) new LanternObject<torch::jit::CompilationUnit>();
+    return (void*) new torch::jit::CompilationUnit();
     LANTERN_FUNCTION_END;
 }
 
@@ -29,11 +29,12 @@ void* _lantern_create_traceable_fun (void* fn)
     LANTERN_FUNCTION_END;
 }
 
-int _lantern_trace_fn (void* fn, void* inputs)
+int _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
 {
     LANTERN_FUNCTION_START;
     std::function<Stack(Stack)> fn_ = reinterpret_cast<LanternObject<std::function<Stack(Stack)>>*>(fn)->get();
     Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
+    torch::jit::CompilationUnit* cu = reinterpret_cast<CompilationUnit*>(compilation_unit);
 
     std::function<std::string(const torch::autograd::Variable&)> var_fn = [](const torch::autograd::Variable& x) {
         return "";
@@ -48,9 +49,7 @@ int _lantern_trace_fn (void* fn, void* inputs)
     );
 
     std::cout << "Tracing worked!" << std::endl;
-
-    auto cu = torch::jit::CompilationUnit();
-    auto z = cu.create_function("name", std::get<0>(traced)->graph, true);
+    auto z = cu->create_function("name", std::get<0>(traced)->graph, true);
 
     std::cout << (*z)(inputs_).toTensor() << std::endl;
 
@@ -93,8 +92,6 @@ void _trace_r_nn_module ()
     std::cout << t->graph->toString() << std::endl;
     auto node = t->graph->param_node();
     std::cout << node->attributeNames() << std::endl;
-
-
 
     std::cout << "calling JIT" << std::endl;
     std::cout << (*z)(inputs).toTensor() << std::endl;
