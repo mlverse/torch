@@ -1,0 +1,16 @@
+#include "torch_types.h"
+#include "utils.h"
+
+// [[Rcpp::export]]
+int cpp_trace_function (Rcpp::Function fn, Rcpp::XPtr<XPtrTorchStack> inputs)
+{
+  
+  std::function<void*(void*)> r_fn = [&fn](void* inputs) {
+    auto inputs_ = make_xptr<XPtrTorchStack>(inputs);
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchStack>>(fn(inputs_));
+    return out->get();
+  };
+  
+  XPtrTorch tr_fn = lantern_create_traceable_fun((void*) &r_fn);
+  return lantern_trace_fn(tr_fn.get(), inputs->get());
+}
