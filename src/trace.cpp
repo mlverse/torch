@@ -14,3 +14,9 @@ int cpp_trace_function (Rcpp::Function fn, Rcpp::XPtr<XPtrTorchStack> inputs)
   XPtrTorch tr_fn = lantern_create_traceable_fun((void*) &r_fn);
   return lantern_trace_fn(tr_fn.get(), inputs->get());
 }
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compilation_unit ()
+{
+  return make_xptr<XPtrTorchCompilationUnit>(lantern_CompilationUnit_new());
+}

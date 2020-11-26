@@ -7,6 +7,13 @@
 using namespace torch::jit::tracer;
 using namespace torch::jit;
 
+void * _lantern_CompilationUnit_new ()
+{
+    LANTERN_FUNCTION_START;
+    return (void*) new LanternObject<torch::jit::CompilationUnit>();
+    LANTERN_FUNCTION_END;
+}
+
 void* _lantern_create_traceable_fun (void* fn)
 {
     LANTERN_FUNCTION_START;

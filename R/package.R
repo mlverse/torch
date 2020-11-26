@@ -5,6 +5,7 @@ NULL
 globalVariables(c("..", "self", "private", "N"))
 
 .generator_null <- NULL
+.compilation_unit <- NULL
 
 .onAttach <- function(libname, pkgname) {
 }
@@ -30,8 +31,12 @@ globalVariables(c("..", "self", "private", "N"))
     # in case init fails aallow user to restart session rather than blocking install
     tryCatch({
       lantern_start() 
+      
       .generator_null <<- torch_generator()
       .generator_null$set_current_seed(seed = sample(1e5, 1))
+      
+      .compilation_unit <<- cpp_jit_compilation_unit()
+      
     }, error = function(e) {
       warning("Torch failed to start, restart your R session to try again. ", e$message, call. = FALSE)
       FALSE
