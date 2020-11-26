@@ -8853,6 +8853,10 @@ cpp_jit_compilation_unit <- function() {
     .Call('_torch_cpp_jit_compilation_unit', PACKAGE = 'torchpkg')
 }
 
+cpp_call_traced_fn <- function(fn, inputs) {
+    .Call('_torch_cpp_call_traced_fn', PACKAGE = 'torchpkg', fn, inputs)
+}
+
 cpp_nullptr <- function() {
     .Call('_torch_cpp_nullptr', PACKAGE = 'torchpkg')
 }

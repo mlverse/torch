@@ -2,7 +2,7 @@
 #include "utils.h"
 
 // [[Rcpp::export]]
-int cpp_trace_function (Rcpp::Function fn, Rcpp::XPtr<XPtrTorchStack> inputs,
+Rcpp::XPtr<XPtrTorch> cpp_trace_function (Rcpp::Function fn, Rcpp::XPtr<XPtrTorchStack> inputs,
                         Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit)
 {
   
@@ -13,11 +13,19 @@ int cpp_trace_function (Rcpp::Function fn, Rcpp::XPtr<XPtrTorchStack> inputs,
   };
   
   XPtrTorch tr_fn = lantern_create_traceable_fun((void*) &r_fn);
-  return lantern_trace_fn(tr_fn.get(), inputs->get(), compilation_unit->get());
+  return make_xptr<XPtrTorch>(tr_fn);
 }
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compilation_unit ()
 {
   return make_xptr<XPtrTorchCompilationUnit>(lantern_CompilationUnit_new());
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchStack> cpp_call_traced_fn (Rcpp::XPtr<XPtrTorch> fn, 
+                                               Rcpp::XPtr<XPtrTorchStack> inputs)
+{
+  XPtrTorchStack out = lantern_call_traced_fn(fn->get(), inputs->get());
+  return make_xptr<XPtrTorchStack>(out);
 }

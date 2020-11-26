@@ -29,12 +29,12 @@ void* _lantern_create_traceable_fun (void* fn)
     LANTERN_FUNCTION_END;
 }
 
-int _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
+void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
 {
     LANTERN_FUNCTION_START;
     std::function<Stack(Stack)> fn_ = reinterpret_cast<LanternObject<std::function<Stack(Stack)>>*>(fn)->get();
     Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
-    torch::jit::CompilationUnit* cu = reinterpret_cast<CompilationUnit*>(compilation_unit);
+    CompilationUnit* cu = reinterpret_cast<CompilationUnit*>(compilation_unit);
 
     std::function<std::string(const torch::autograd::Variable&)> var_fn = [](const torch::autograd::Variable& x) {
         return "";
@@ -48,13 +48,33 @@ int _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
         var_fn
     );
 
-    std::cout << "Tracing worked!" << std::endl;
-    auto z = cu->create_function("name", std::get<0>(traced)->graph, true);
+    std::cout << "Tracing worked!" << std::endl; 
+    auto tr_fn = cu->create_function("name", std::get<0>(traced)->graph, true);
+    auto cu_ = std::shared_ptr<torch::CompilationUnit>(cu);
+    auto s_tr_fn = new StrongFunctionPtr(cu_, tr_fn);
 
-    std::cout << (*z)(inputs_).toTensor() << std::endl;
-
-    return 0;
+    std::cout << (*tr_fn)(inputs_).toTensor() << std::endl;
+    
+    return (void*) s_tr_fn;
     LANTERN_FUNCTION_END;
+}
+
+void* _lantern_call_traced_fn (void* fn, void* inputs)
+{
+  std::cout << "starting the call" << std::endl;
+  StrongFunctionPtr* fn_ = reinterpret_cast<StrongFunctionPtr *>(fn);
+  std::cout << fn_->cu_->get_type("name") << std::endl;
+  Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
+  std::cout << "Got funs" << std::endl;
+  std::cout << inputs << std::endl;
+  std::cout << fn_ << std::endl;
+  Stack outputs;
+  auto out = (*(fn_->function_))(inputs_);
+  std::cout << "called!" << std::endl;
+  outputs.push_back(out);  
+  std::cout << "Successfully called the traced fn!" << std::endl;
+  std::cout << out.toTensor() << std::endl;
+  return (void*) new LanternObject<Stack>(outputs);
 }
 
 void _trace_r_nn_module ()
@@ -85,6 +105,7 @@ void _trace_r_nn_module ()
 
     auto cu = torch::jit::CompilationUnit();
     auto z = cu.create_function("name", std::get<0>(traced)->graph, true);
+    
     
     std::cout << "calling JIT" << std::endl;
 
