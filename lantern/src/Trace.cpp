@@ -48,12 +48,7 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
         var_fn
     );
 
-    std::cout << "Tracing worked!" << std::endl; 
     auto tr_fn = cu->create_function("name", std::get<0>(traced)->graph, true);
-
-    std::cout << "Calling function" << std::endl;
-    torch::Tensor t = (*tr_fn)(inputs_).toTensor();
-    std::cout << t << std::endl;
     
     return (void*) tr_fn;
     LANTERN_FUNCTION_END;
@@ -61,20 +56,13 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
 
 void* _lantern_call_traced_fn (void* fn, void* inputs)
 {
-  std::cout << "starting the call" << std::endl;
   Function* fn_ = reinterpret_cast<Function *>(fn);
-  //std::cout << fn_->cu_->get_type("name") << std::endl;
   Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
-  std::cout << "Got funs" << std::endl;
-  std::cout << inputs << std::endl;
-  std::cout << fn_ << std::endl;
-  std::cout << (*fn_).name() << std::endl;
+
   auto outputs = new LanternObject<torch::jit::Stack>();
   auto out = (*fn_)(inputs_);
-  std::cout << "called!" << std::endl;
   outputs->get().push_back(out);  
-  std::cout << "Successfully called the traced fn!" << std::endl;
-  std::cout << out.toTensor() << std::endl;
+  
   return (void*) outputs;
 }
 
