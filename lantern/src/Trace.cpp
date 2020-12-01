@@ -20,8 +20,8 @@ void* _lantern_create_traceable_fun (void* fn)
     auto r_fn = *reinterpret_cast<std::function<void*(void*)>*>(fn);
     std::function<Stack(Stack)> tr_fn = [r_fn](Stack x)
     {
-        auto tmp = LanternObject<Stack>(x);
-        void* out = r_fn((void*) &x);
+        auto tmp = new LanternObject<Stack>(x);
+        void* out = r_fn((void*) tmp);
         return reinterpret_cast<LanternObject<Stack>*>(out)->get();
     };
 
@@ -50,31 +50,32 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
 
     std::cout << "Tracing worked!" << std::endl; 
     auto tr_fn = cu->create_function("name", std::get<0>(traced)->graph, true);
-    auto cu_ = std::shared_ptr<torch::CompilationUnit>(cu);
-    auto s_tr_fn = new StrongFunctionPtr(cu_, tr_fn);
 
-    std::cout << (*tr_fn)(inputs_).toTensor() << std::endl;
+    std::cout << "Calling function" << std::endl;
+    torch::Tensor t = (*tr_fn)(inputs_).toTensor();
+    std::cout << t << std::endl;
     
-    return (void*) s_tr_fn;
+    return (void*) tr_fn;
     LANTERN_FUNCTION_END;
 }
 
 void* _lantern_call_traced_fn (void* fn, void* inputs)
 {
   std::cout << "starting the call" << std::endl;
-  StrongFunctionPtr* fn_ = reinterpret_cast<StrongFunctionPtr *>(fn);
-  std::cout << fn_->cu_->get_type("name") << std::endl;
+  Function* fn_ = reinterpret_cast<Function *>(fn);
+  //std::cout << fn_->cu_->get_type("name") << std::endl;
   Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
   std::cout << "Got funs" << std::endl;
   std::cout << inputs << std::endl;
   std::cout << fn_ << std::endl;
-  Stack outputs;
-  auto out = (*(fn_->function_))(inputs_);
+  std::cout << (*fn_).name() << std::endl;
+  auto outputs = new LanternObject<torch::jit::Stack>();
+  auto out = (*fn_)(inputs_);
   std::cout << "called!" << std::endl;
-  outputs.push_back(out);  
+  outputs->get().push_back(out);  
   std::cout << "Successfully called the traced fn!" << std::endl;
   std::cout << out.toTensor() << std::endl;
-  return (void*) new LanternObject<Stack>(outputs);
+  return (void*) outputs;
 }
 
 void _trace_r_nn_module ()
