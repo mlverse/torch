@@ -36,3 +36,15 @@ Stack <- R6::R6Class(
     }
   )
 )
+
+torch_stack <- function(x) {
+  
+  if (!is.list(x))
+    x <- list(x)
+  
+  out <- Stack$new()  
+  for (el in x)
+    out$push_back(el)
+  
+  out
+}
