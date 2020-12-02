@@ -711,6 +711,13 @@ HOST_API void lantern_CompilationUnit_delete (void* x)
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_traced_fn_save) (void* fn, const char * filename);
+HOST_API void lantern_traced_fn_save (void* fn, const char * filename)
+{
+  _lantern_traced_fn_save(fn, filename);
+  LANTERN_HOST_HANDLER;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5284,6 +5291,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_CompilationUnit_new);
   LOAD_SYMBOL(_lantern_CompilationUnit_delete);
   LOAD_SYMBOL(_lantern_call_traced_fn);
+  LOAD_SYMBOL(_lantern_traced_fn_save);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

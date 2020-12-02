@@ -17,9 +17,9 @@ void * _lantern_CompilationUnit_new ()
 void* _lantern_create_traceable_fun (void* fn)
 {
     LANTERN_FUNCTION_START;
-    auto r_fn = *reinterpret_cast<std::function<void*(void*)>*>(fn);
-    std::function<Stack(Stack)> tr_fn = [r_fn](Stack x)
+    std::function<Stack(Stack)> tr_fn = [fn](Stack x)
     {
+        auto r_fn = *reinterpret_cast<std::function<void*(void*)>*>(fn);
         auto tmp = new LanternObject<Stack>(x);
         void* out = r_fn((void*) tmp);
         return reinterpret_cast<LanternObject<Stack>*>(out)->get();
@@ -39,8 +39,6 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
     std::function<std::string(const torch::autograd::Variable&)> var_fn = [](const torch::autograd::Variable& x) {
         return "";
     };
-
-    std::cout << "Start tracing!" << std::endl;
 
     auto traced = torch::jit::tracer::trace(
         inputs_,
@@ -64,6 +62,31 @@ void* _lantern_call_traced_fn (void* fn, void* inputs)
   outputs->get().push_back(out);  
   
   return (void*) outputs;
+}
+
+void addFunctionToModule(Module& module, const Function* func) {
+  // Make a graph with a fake self argument
+  auto graph = func->graph()->copy();
+  auto v = graph->insertInput(0, "self");
+  v->setType(module._ivalue()->type());
+  const auto name = QualifiedName(*module.type()->name(), "forward");
+  auto method =
+      module._ivalue()->compilation_unit()->create_function(name, graph);
+  module.type()->addMethod(method);
+}
+
+void _lantern_traced_fn_save (void* fn, const char* filename)
+{
+    LANTERN_FUNCTION_START;
+    Function* fn_ = reinterpret_cast<Function *>(fn);
+    auto filename_ = std::string(filename);
+    
+    Module module("__torch__.PlaceholderModule");
+    
+    module.register_attribute("training", BoolType::get(), true);
+    addFunctionToModule(module, fn_);
+    module.save(filename_);
+    LANTERN_FUNCTION_END_VOID;
 }
 
 void _trace_r_nn_module ()

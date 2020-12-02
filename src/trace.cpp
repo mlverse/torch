@@ -19,6 +19,12 @@ Rcpp::XPtr<XPtrTorch> cpp_trace_function (Rcpp::Function fn, Rcpp::XPtr<XPtrTorc
 }
 
 // [[Rcpp::export]]
+void cpp_save_traced_fn (Rcpp::XPtr<XPtrTorch> fn, std::string filename)
+{
+  lantern_traced_fn_save(fn->get(), filename.c_str());
+}
+
+// [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compilation_unit ()
 {
   return make_xptr<XPtrTorchCompilationUnit>(lantern_CompilationUnit_new());

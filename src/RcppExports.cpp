@@ -29018,6 +29018,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_save_traced_fn
+void cpp_save_traced_fn(Rcpp::XPtr<XPtrTorch> fn, std::string filename);
+RcppExport SEXP _torch_cpp_save_traced_fn(SEXP fnSEXP, SEXP filenameSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type fn(fnSEXP);
+    Rcpp::traits::input_parameter< std::string >::type filename(filenameSEXP);
+    cpp_save_traced_fn(fn, filename);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_jit_compilation_unit
 Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compilation_unit();
 RcppExport SEXP _torch_cpp_jit_compilation_unit() {
@@ -31356,6 +31367,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {"_torch_cpp_torch_tensor_options_print", (DL_FUNC) &_torch_cpp_torch_tensor_options_print, 1},
     {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 3},
+    {"_torch_cpp_save_traced_fn", (DL_FUNC) &_torch_cpp_save_traced_fn, 2},
     {"_torch_cpp_jit_compilation_unit", (DL_FUNC) &_torch_cpp_jit_compilation_unit, 0},
     {"_torch_cpp_call_traced_fn", (DL_FUNC) &_torch_cpp_call_traced_fn, 2},
     {"_torch_cpp_nullptr", (DL_FUNC) &_torch_cpp_nullptr, 0},

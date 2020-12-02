@@ -8849,6 +8849,10 @@ cpp_trace_function <- function(fn, inputs, compilation_unit) {
     .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit)
 }
 
+cpp_save_traced_fn <- function(fn, filename) {
+    invisible(.Call('_torch_cpp_save_traced_fn', PACKAGE = 'torchpkg', fn, filename))
+}
+
 cpp_jit_compilation_unit <- function() {
     .Call('_torch_cpp_jit_compilation_unit', PACKAGE = 'torchpkg')
 }
