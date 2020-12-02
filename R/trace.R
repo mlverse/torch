@@ -18,6 +18,24 @@ ScriptFunction <- R6::R6Class(
       cpp_save_traced_fn(self$ptr, path)
       invisible(self)
     }
+  ),
+  active = list(
+    graph = function() {
+      GraphFunction$new(ptr = self$ptr)
+    }
+  )
+)
+
+GraphFunction <- R6::R6Class(
+  classname = "graph_function",
+  public = list(
+    ptr = NULL,
+    initialize = function(ptr) {
+      self$ptr <- ptr
+    },
+    print = function() {
+      cat(cpp_traced_fn_graph_print(self$ptr))
+    }
   )
 )
 

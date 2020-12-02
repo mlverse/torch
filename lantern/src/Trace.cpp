@@ -89,6 +89,17 @@ void _lantern_traced_fn_save (void* fn, const char* filename)
     LANTERN_FUNCTION_END_VOID;
 }
 
+const char * _lantern_traced_fn_graph_print (void * fn)
+{
+  LANTERN_FUNCTION_START
+  Function* fn_ = reinterpret_cast<Function *>(fn);
+  std::string str = fn_->graph()->toString();
+  char *cstr = new char[str.length() + 1];
+  strcpy(cstr, str.c_str());
+  return cstr;
+  LANTERN_FUNCTION_END
+}
+
 void _trace_r_nn_module ()
 {
     LANTERN_FUNCTION_START;

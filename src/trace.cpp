@@ -37,3 +37,12 @@ Rcpp::XPtr<XPtrTorchStack> cpp_call_traced_fn (Rcpp::XPtr<XPtrTorch> fn,
   XPtrTorchStack out = lantern_call_traced_fn(fn->get(), inputs->get());
   return make_xptr<XPtrTorchStack>(out);
 }
+
+// [[Rcpp::export]]
+std::string cpp_traced_fn_graph_print (Rcpp::XPtr<XPtrTorch> fn)
+{
+  const char * s = lantern_traced_fn_graph_print(fn->get());
+  auto out = std::string(s);
+  lantern_const_char_delete(s);
+  return out;
+}
