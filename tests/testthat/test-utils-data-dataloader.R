@@ -140,7 +140,7 @@ test_that("can use a dataloader with coro", {
   
   dl <- dataloader(ds, batch_size = 5)
   j <- 1
-  iterate(for (batch in dl) {
+  loop(for (batch in dl) {
     expect_named(batch, c("x", "y"))
     expect_tensor_shape(batch$x, 5)
     expect_tensor_shape(batch$y, 5)

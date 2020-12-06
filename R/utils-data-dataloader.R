@@ -389,10 +389,10 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
 #' @export
 coro::as_iterator
 
-#' Re-exporting the iterate function.
-#' @importFrom coro iterate
+#' Re-exporting the loop function.
+#' @importFrom coro loop
 #' @export
-coro::iterate
+coro::loop
 
 #' Re-exporting the iterate function.
 #' @importFrom coro yield
