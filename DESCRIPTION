@@ -58,6 +58,7 @@ Collate:
     'dimname_list.R'
     'distributions-constraints.R'
     'utils.R'
+    'distributions-exp-family.R'
     'distributions.R'
     'dtype.R'
     'gen-method.R'
