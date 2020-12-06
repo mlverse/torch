@@ -24,6 +24,8 @@
   supported version and not the installed one. (#363)
 - Added distribution constraints (@krzjoa #364)
 - Corrected URL to download LibTorch under Linux with CUDA 10.2 (#367)
+- Dataloaders now returns a `coro::exhausted` intead of raising `stop_iteration_error` when the dataloader exceeds. (#366)
+- Dataloaders now use the num_workers argument to load data in parallel (#366)
 
 # torch 0.1.1
 

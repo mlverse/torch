@@ -4,7 +4,7 @@
 \alias{dataloader_next}
 \title{Get the next element of a dataloader iterator}
 \usage{
-dataloader_next(iter)
+dataloader_next(iter, completed = NULL)
 }
 \arguments{
 \item{iter}{a DataLoader iter created with \link{dataloader_make_iter}.}
