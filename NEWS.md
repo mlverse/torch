@@ -27,6 +27,7 @@
 - Dataloaders now returns a `coro::exhausted` intead of raising `stop_iteration_error` when the dataloader exceeds. (#366)
 - Dataloaders now use the num_workers argument to load data in parallel (#366)
 - Added Exponential Family classs to distributions (#373)
+- Added Dockerfile and docker compose file with GPU support. (#380)
 
 # torch 0.1.1
 
