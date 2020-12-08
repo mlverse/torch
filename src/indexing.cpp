@@ -123,7 +123,7 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       {
         Rcpp::stop("Indexing in R is 1-based and found a 0.");
       }
-    
+      
       lantern_TensorIndex_append_int64(index.get(), s);
       
       if (!drop)
@@ -186,7 +186,7 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
           Rcpp::stop("Indexing in R is 1-based and found a 0.");
         }
       }
-    
+      
       // Create the integer Tensor
       XPtrTorchTensorOptions options = lantern_TensorOptions();
       options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
@@ -230,7 +230,7 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       // integer tensor: we need to make it zero based
       else if (type == "Long")
       {
-        Rcpp::Rcout << "hello" << std::endl;
+        
         // check that there's no zeros
         bool zeros = lantern_Tensor_has_any_zeros(t->get());
         if (zeros)
@@ -238,25 +238,17 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
           Rcpp::stop("Indexing starts at 1 but found a 0.");
         }
         
-        Rcpp::Rcout << "hello" << std::endl;
-        
         XPtrTorchTensor sign = lantern_Tensor_signbit_tensor(t->get());
         sign = lantern_logical_not_tensor(sign.get());
-        Rcpp::Rcout << "hello" << std::endl;
         
         // cast from bool to int
-        XPtrTorchTensor options = lantern_TensorOptions();
+        XPtrTorchTensorOptions options = lantern_TensorOptions();
         options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
         sign = lantern_Tensor_to(sign.get(), options.get());
         
-        Rcpp::Rcout << "hello" << std::endl;
-        
         // create a 1 scalar
         int al = 1;
-        std::string tp = "int";
-        XPtrTorchScalar alpha = lantern_Scalar((void*) (&al), tp.c_str());
-        
-        Rcpp::Rcout << "bye" << std::endl;
+        XPtrTorchScalar alpha = lantern_Scalar((void*) &al, std::string("int").c_str());
         
         XPtrTorchTensor zero_index = lantern_Tensor_sub_tensor_tensor_scalar(t->get(), sign.get(), alpha.get());
         
