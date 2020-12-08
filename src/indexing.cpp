@@ -219,7 +219,36 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
     {
       Rcpp::Environment e = slice;
       Rcpp::XPtr<XPtrTorchTensor> t = e["ptr"];
-      lantern_TensorIndex_append_tensor(index.get(), t->get());
+      
+      auto type = std::string(lantern_Dtype_type(lantern_Tensor_dtype(t->get())));
+      
+      // is boolean tensor
+      if (type == "Bool")
+      {
+        lantern_TensorIndex_append_tensor(index.get(), t->get());
+      } 
+      // integer tensor: we need to make it zero based
+      else if (type == "Long")
+      {
+        XPtrTorchTensor sign = lantern_Tensor_signbit_tensor(t->get());
+        sign = lantern_logical_not_tensor(sign.get());
+        
+        // cast from bool to int
+        XPtrTorchTensor options = lantern_TensorOptions();
+        options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
+        sign = lantern_Tensor_to(sign.get(), options.get());
+        
+        // create a 1 scalar
+        int al = 1;
+        XPtrTorchScalar alpha = lantern_Scalar((void*) &al, "int");
+        
+        XPtrTorchTensor zero_index = lantern_Tensor_sub_tensor_tensor_scalar(t->get(), sign.get(), alpha.get());
+        
+        lantern_TensorIndex_append_tensor(index.get(), zero_index.get());
+      } else {
+        Rcpp::stop("Only long and boolean tensors are supported.");  
+      }
+      continue;
     }
     
   }
