@@ -212,3 +212,12 @@ void* _lantern_Tensor_names (void* self)
   return (void *)new LanternPtr<std::vector<torch::Dimname>>(nms);
   LANTERN_FUNCTION_END
 }
+
+// an utility function to quickly check if a tensor has any zeros
+bool _lantern_Tensor_has_any_zeros (void * self)
+{
+  LANTERN_FUNCTION_START
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  return (x == 0).any().item().toBool();
+  LANTERN_FUNCTION_END
+}

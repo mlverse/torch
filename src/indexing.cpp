@@ -230,6 +230,14 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       // integer tensor: we need to make it zero based
       else if (type == "Long")
       {
+        
+        // check that there's no zeros
+        bool zeros = lantern_Tensor_has_any_zeros(t->get());
+        if (zeros)
+        {
+          Rcpp::stop("Indexing starts at 1 but found a 0.");
+        }
+        
         XPtrTorchTensor sign = lantern_Tensor_signbit_tensor(t->get());
         sign = lantern_logical_not_tensor(sign.get());
         
