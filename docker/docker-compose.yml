@@ -11,5 +11,5 @@ services:
         ports:
             - 8787:8787
         volumes:
-            - ../rstudio_home:/home/rstudio
+            - ../../rstudio_home:/home/rstudio
         restart: always
