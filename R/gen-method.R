@@ -794,7 +794,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "argmax", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
+Tensor$set("private", "_argmax", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = "int64_t", keepdim = "bool")
 nd_args <- "self"
@@ -807,7 +807,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "argmin", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
+Tensor$set("private", "_argmin", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = "int64_t", keepdim = "bool")
 nd_args <- "self"
