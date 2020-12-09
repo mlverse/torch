@@ -267,7 +267,7 @@
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
 <span class="va">out</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.0948  0.0055  0.0448  0.0308  0.1035 -0.0321 -0.0448 -0.1217  0.0805 -0.1374</span></code></pre></div>
+<span class="co">#&gt; -0.0705 -0.0092 -0.0289 -0.0481  0.0748 -0.0345 -0.0332  0.0503 -0.1246  0.1262</span></code></pre></div>
 <p>Zero the gradient buffers of all parameters and backprops with random gradients:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>
@@ -317,7 +317,7 @@
 <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">target</span><span class="op">)</span>
 <span class="va">loss</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; 0.533678</span></code></pre></div>
+<span class="co">#&gt; 0.49508</span></code></pre></div>
 <p>Now, if you follow loss in the backward direction, using its <code>$grad_fn</code> attribute, you will see a graph of computations that looks like this:</p>
 <pre><code>input -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d
       -&gt; view -&gt; linear -&gt; relu -&gt; linear -&gt; relu -&gt; linear
@@ -357,12 +357,12 @@
 <span class="va">net</span><span class="op">$</span><span class="va">conv1</span><span class="op">$</span><span class="va">bias</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 0.001 *</span>
-<span class="co">#&gt;  1.1498</span>
-<span class="co">#&gt;  6.3359</span>
-<span class="co">#&gt; -12.2254</span>
-<span class="co">#&gt; -3.7633</span>
-<span class="co">#&gt; -14.8263</span>
-<span class="co">#&gt;  3.6089</span></code></pre></div>
+<span class="co">#&gt; -7.1831</span>
+<span class="co">#&gt;  2.1482</span>
+<span class="co">#&gt;  7.4519</span>
+<span class="co">#&gt; -3.7071</span>
+<span class="co">#&gt;  1.0970</span>
+<span class="co">#&gt;  8.0963</span></code></pre></div>
 <p>Now, we have seen how to use loss functions.</p>
 </div>
 <div id="update-the-weights" class="section level2">
