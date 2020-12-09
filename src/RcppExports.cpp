@@ -29063,7 +29063,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_jit_load
-Rcpp::XPtr<XPtrTorch> cpp_jit_load(std::string path);
+Rcpp::XPtr<XPtrTorchJITModule> cpp_jit_load(std::string path);
 RcppExport SEXP _torch_cpp_jit_load(SEXP pathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -29074,12 +29074,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_call_jit_script
-Rcpp::XPtr<XPtrTorchStack> cpp_call_jit_script(Rcpp::XPtr<XPtrTorch> module, Rcpp::XPtr<XPtrTorchStack> inputs);
+Rcpp::XPtr<XPtrTorchStack> cpp_call_jit_script(Rcpp::XPtr<XPtrTorchJITModule> module, Rcpp::XPtr<XPtrTorchStack> inputs);
 RcppExport SEXP _torch_cpp_call_jit_script(SEXP moduleSEXP, SEXP inputsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type module(moduleSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchJITModule> >::type module(moduleSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type inputs(inputsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_call_jit_script(module, inputs));
     return rcpp_result_gen;

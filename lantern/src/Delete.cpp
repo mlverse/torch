@@ -216,3 +216,10 @@ void _lantern_CompilationUnit_delete (void* x)
   lantern_delete<torch::jit::CompilationUnit>(x);
   LANTERN_FUNCTION_END_VOID;
 }
+
+void _lantern_JITModule_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<torch::jit::script::Module>(x);
+  LANTERN_FUNCTION_END_VOID;
+}

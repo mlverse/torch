@@ -229,6 +229,13 @@ public:
   }
 };
 
+class XPtrTorchJITModule : public XPtrTorch {
+public:
+  XPtrTorchJITModule (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_JITModule_delete));
+  }
+};
+
 template<class T>
 class nullable {
 public:
