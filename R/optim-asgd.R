@@ -27,6 +27,7 @@ optim_ASGD <- R6::R6Class(
         grad <- param$grad
         
         if (length(param$state) == 0) {
+          param$state <- list()
           param$state[["step"]] <- 0
           param$state[["eta"]] <- group[["lr"]]
           param$state[["mu"]] <- 1
