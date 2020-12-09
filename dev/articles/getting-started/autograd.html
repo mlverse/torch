@@ -241,8 +241,8 @@
 <span class="co">#&gt; [1] FALSE</span>
 <span class="va">a</span><span class="op">$</span><span class="fu">requires_grad_</span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  10.8792  -1.3260</span>
-<span class="co">#&gt;  -2.0884   0.6639</span>
+<span class="co">#&gt;   6.1138  10.7414</span>
+<span class="co">#&gt; -99.4531   1.3935</span>
 <span class="va">a</span><span class="op">$</span><span class="va">requires_grad</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="va">b</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">a</span> <span class="op">*</span> <span class="va">a</span><span class="op">)</span><span class="op">$</span><span class="fu">sum</span><span class="op">(</span><span class="op">)</span>
@@ -295,9 +295,9 @@
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">x</span>
 <span class="va">y</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;   79.9688</span>
-<span class="co">#&gt;   98.8827</span>
-<span class="co">#&gt;  126.3755</span></code></pre></div>
+<span class="co">#&gt; -132.5678</span>
+<span class="co">#&gt;  -67.3097</span>
+<span class="co">#&gt;   78.2511</span></code></pre></div>
 <p>Now in this case y is no longer a scalar. <code>autograd</code> could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">0.0001</span><span class="op">)</span><span class="op">)</span>
