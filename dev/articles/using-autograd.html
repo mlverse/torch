@@ -213,8 +213,7 @@
 <code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
-<span class="co">#&gt;  0.2500  0.2500</span>
-<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
+<span class="co">#&gt;  0.2500  0.2500</span></code></pre></div>
 <p>With a longer chain of computations, we can peek at how torch builds up a graph of backward operations.</p>
 <p>Here is a slightly more complex example. We call <code>retain_grad()</code> on <code>y</code> and <code>z</code> just for demonstration purposes; by default, intermediate gradients – while of course they have to be computed – aren’t stored, in order to save memory.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -260,21 +259,17 @@
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
 <span class="co">#&gt;  0.2500  0.2500</span>
-<span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">y</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  4.6500  4.6500</span>
 <span class="co">#&gt;  4.6500  4.6500</span>
-<span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">x2</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  18.6000</span>
-<span class="co">#&gt; [ CPUFloatType{1} ]</span>
 <span class="va">x1</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  14.4150  14.4150</span>
-<span class="co">#&gt;  14.4150  14.4150</span>
-<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
+<span class="co">#&gt;  14.4150  14.4150</span></code></pre></div>
 <p>Thus acquainted with autograd, we’re ready to modify our example.</p>
 </div>
 <div id="the-simple-network-now-using-autograd" class="section level2">
@@ -337,26 +332,26 @@
     <span class="op">}</span><span class="op">)</span>
     
 <span class="op">}</span>
-<span class="co">#&gt; 10 13.5239 </span>
-<span class="co">#&gt; 20 12.96979 </span>
-<span class="co">#&gt; 30 12.46537 </span>
-<span class="co">#&gt; 40 12.00557 </span>
-<span class="co">#&gt; 50 11.58645 </span>
-<span class="co">#&gt; 60 11.20355 </span>
-<span class="co">#&gt; 70 10.85269 </span>
-<span class="co">#&gt; 80 10.5305 </span>
-<span class="co">#&gt; 90 10.23416 </span>
-<span class="co">#&gt; 100 9.960528 </span>
-<span class="co">#&gt; 110 9.706806 </span>
-<span class="co">#&gt; 120 9.471946 </span>
-<span class="co">#&gt; 130 9.253857 </span>
-<span class="co">#&gt; 140 9.050601 </span>
-<span class="co">#&gt; 150 8.86114 </span>
-<span class="co">#&gt; 160 8.684248 </span>
-<span class="co">#&gt; 170 8.518731 </span>
-<span class="co">#&gt; 180 8.363432 </span>
-<span class="co">#&gt; 190 8.217437 </span>
-<span class="co">#&gt; 200 8.080058</span></code></pre></div>
+<span class="co">#&gt; 10 193.7691 </span>
+<span class="co">#&gt; 20 165.1519 </span>
+<span class="co">#&gt; 30 142.0941 </span>
+<span class="co">#&gt; 40 123.359 </span>
+<span class="co">#&gt; 50 108.0115 </span>
+<span class="co">#&gt; 60 95.22306 </span>
+<span class="co">#&gt; 70 84.49968 </span>
+<span class="co">#&gt; 80 75.45549 </span>
+<span class="co">#&gt; 90 67.78256 </span>
+<span class="co">#&gt; 100 61.30513 </span>
+<span class="co">#&gt; 110 55.75785 </span>
+<span class="co">#&gt; 120 50.97165 </span>
+<span class="co">#&gt; 130 46.82297 </span>
+<span class="co">#&gt; 140 43.21663 </span>
+<span class="co">#&gt; 150 40.06676 </span>
+<span class="co">#&gt; 160 37.31249 </span>
+<span class="co">#&gt; 170 34.86409 </span>
+<span class="co">#&gt; 180 32.68892 </span>
+<span class="co">#&gt; 190 30.74379 </span>
+<span class="co">#&gt; 200 29.0092</span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">
