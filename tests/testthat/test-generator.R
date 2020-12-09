@@ -18,4 +18,12 @@ test_that("manual_seed works", {
   
   expect_equal_to_tensor(a, b)
   
+  torch_manual_seed(1L)
+  a <- nn_linear(2, 2)
+  torch_manual_seed(1L)
+  b <- nn_linear(2, 2)
+  
+  expect_equal_to_tensor(a$weight, b$weight)
+  expect_equal_to_tensor(a$bias, b$bias)
+  
 })

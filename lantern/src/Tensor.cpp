@@ -138,6 +138,14 @@ int64_t _lantern_Tensor_numel(void *self)
   LANTERN_FUNCTION_END_RET(0)
 }
 
+int64_t _lantern_Tensor_element_size(void *self)
+{
+  LANTERN_FUNCTION_START
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  return x.element_size();
+  LANTERN_FUNCTION_END_RET(0)
+}
+
 int64_t _lantern_Tensor_ndimension(void *self)
 {
   LANTERN_FUNCTION_START
@@ -202,5 +210,14 @@ void* _lantern_Tensor_names (void* self)
   torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
   std::vector<torch::Dimname> nms = x.names().vec();
   return (void *)new LanternPtr<std::vector<torch::Dimname>>(nms);
+  LANTERN_FUNCTION_END
+}
+
+// an utility function to quickly check if a tensor has any zeros
+bool _lantern_Tensor_has_any_zeros (void * self)
+{
+  LANTERN_FUNCTION_START
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  return (x == 0).any().item().toBool();
   LANTERN_FUNCTION_END
 }

@@ -739,3 +739,30 @@ nnf_sigmoid <- function(input) {
   torch_sigmoid(input)
 }
 
+#' Sparsemax
+#'
+#' Applies the SparseMax activation. 
+#' 
+#' @details 
+#' The SparseMax activation is described in
+#' ['From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification'](https://arxiv.org/abs/1602.02068)
+#' The implementation is based on [aced125/sparsemax](https://github.com/aced125/sparsemax/tree/master/sparsemax)
+#' 
+#' @param input the input tensor
+#' @param dim The dimension over which to apply the sparsemax function. (-1)
+#'
+#' @export
+nnf_contrib_sparsemax <- function(input, dim = -1) {
+  if (!is_torch_tensor(input))
+    value_error("Input should be a tensor and got '{class(input)}.")
+  
+  dim <- as_1_based_dim(dim)
+  
+  ptr <- cpp_contrib_torch_sparsemax(input$ptr, dim)
+  
+  Tensor$new(ptr = ptr)
+}
+
+
+
+

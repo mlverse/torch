@@ -7,7 +7,7 @@
 #' @export
 declarations <- function() {
 
-  version <- getOption("torchgen.version", default = "1.5.0")
+  version <- getOption("torchgen.version", default = "1.7.0")
   path <- getOption("torchgen.path")
 
   if (is.null(path)) {
@@ -45,5 +45,9 @@ namespace_methods <- memoise::memoise(function() {
 clean_names <- torch:::clean_names
 
 make_cpp_function_name <- function(method_name, arg_types, type) {
+
+  if (length(arg_types) == 0)
+    return(method_name)
+
   torch:::make_cpp_function_name(method_name, unlist(arg_types), type)
 }

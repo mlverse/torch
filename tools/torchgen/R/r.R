@@ -25,7 +25,7 @@ get_arguments_order <- function(methods) {
     dplyr::summarise(id_max = max(.data$id))
 
   # both have the same id_max but bidirectional should be last.
-  if (methods[[1]]$name %in% c("rnn_tanh", "rnn_relu"))
+  if (methods[[1]]$name %in% c("rnn_tanh", "rnn_relu", "lstm", "gru"))
     order$id_max[order$name == "bidirectional"] <- order$id_max[order$name == "bidirectional"] + 1
 
   order %>%
@@ -105,10 +105,14 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "result_type", "sparse_coo_tensor", "stft",
                    "tensordot", "tril_indices", "triu_indices",
                    "multilabel_margin_loss", "multi_margin_loss",
-                   "topk", "scalar_tensor", "narrow")
+                   "topk", "scalar_tensor", "narrow",
+                   "quantize_per_tensor",
+                   "upsample_nearest1d", "upsample_nearest2d", "upsample_nearest3d", "upsample_trilinear3d",
+                   "atleast_1d", "atleast_2d", "atleast_3d",
+                   "dequantize", "kaiser_window", "vander",
+                   "movedim", "argsort", "norm")
 
 internal_funs <- c(internal_funs, creation_ops)
-
 
 r_namespace_name <- function(decls) {
   if (decls[[1]]$name %in% internal_funs) {
@@ -349,7 +353,8 @@ r_method <- function(decls) {
 
 internal_methods <- c("backward", "retain_grad", "size", "to", "stride",
                       "copy_", "topk", "scatter_", "scatter", "rename",
-                      "rename_", "narrow", "narrow_copy", "is_leaf")
+                      "rename_", "narrow", "narrow_copy", "is_leaf", "max",
+                      "min", "argsort")
 
 r_method_env <- function(decls) {
   if (decls[[1]]$name %in% internal_methods)

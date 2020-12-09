@@ -532,6 +532,9 @@ test_that("grad_fn works", {
   expect_length(k, 1)
   l <- k$next_functions
   expect_length(l, 0)
+  
+  x <- torch_tensor(1)
+  expect_true(is.null(x$grad_fn))
 })
 
 test_that("autograd_backward", {

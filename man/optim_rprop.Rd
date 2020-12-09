@@ -12,21 +12,24 @@ parameter groups}
 
 \item{lr}{(float, optional): learning rate (default: 1e-2)}
 
-\item{etas}{(Tuple\link{float, float}, optional): pair of (etaminus, etaplis), that
+\item{etas}{(Tuple(float, float), optional): pair of (etaminus, etaplis), that
 are multiplicative increase and decrease factors
 (default: (0.5, 1.2))}
 
-\item{step_sizes}{(vector\link{float, float}, optional): a pair of minimal and
-maximal allowed step sizes (default: (1e-6, 50))
-
-#' @examples
+\item{step_sizes}{(vector(float, float), optional): a pair of minimal and
+maximal allowed step sizes (default: (1e-6, 50))}
+}
+\description{
+Proposed first in \href{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.52.4576}{RPROP - A Fast Adaptive Learning Algorithm}
+}
+\examples{
+if (torch_is_installed()) {
 \dontrun{
 optimizer <- optim_rprop(model$parameters(), lr=0.1)
 optimizer$zero_grad()
 loss_fn(model(input), target)$backward()
 optimizer$step()
-}}
 }
-\description{
-Proposed first in \href{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.52.4576}{RPROP - A Fast Adaptive Learning Algorithm}
+
+}
 }

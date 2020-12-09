@@ -241,3 +241,31 @@ public:
   }
 };
 
+template<class T>
+class nullableVector {
+public:
+  T x = {0};
+  bool is_null = false;
+  nullableVector (Rcpp::Nullable<T> x) {
+    if (x.isNotNull()) {
+      this->x = Rcpp::as<T>(x);
+    } else {
+      this->is_null = true;
+    }
+  };
+  void* get () {
+    if (this->is_null)
+      return nullptr;
+    else
+      return &(this->x);
+  }
+  T get_value () {
+    if (this->is_null)
+      return NULL;
+    else
+      return this->x;
+  }
+};
+
+
+

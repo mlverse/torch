@@ -56,6 +56,9 @@ Tensor <- R7Class(
       
       x[dim]
     },
+    element_size = function() {
+      cpp_tensor_element_size(self$ptr)
+    },
     numel = function() {
       cpp_tensor_numel(self$ptr)
     },
@@ -78,6 +81,9 @@ Tensor <- R7Class(
         args$dtype <- self$dtype
       
       do.call(private$`_to`, args)
+    },
+    bool = function(memory_format = torch_preserve_format()) {
+      self$to(torch_bool(), memory_format = memory_format)
     },
     cuda = function(device=NULL, non_blocking=FALSE, memory_format=torch_preserve_format()) {
       
@@ -150,6 +156,40 @@ Tensor <- R7Class(
         value_error("start indexing starts at 1")
       start <- start - 1L
       private$`_narrow_copy`(dim, start, length)
+    },
+    max = function(dim, other, keepdim = FALSE) {
+      
+      if (missing(dim) && missing(other))
+        return(private$`_max`())
+      
+      if (!missing(dim) && !missing(other))
+        value_error("Can't set other and dim argumments.")
+      
+      if (missing(dim))
+        return(private$`_max`(other = other))
+        
+      # dim is not missing
+      o <- private$`_max`(dim = dim, keepdim = keepdim)
+      o[[2]] <- o[[2]] + 1L # make 1 based
+      o
+    },
+    min = function(dim, other, keepdim = FALSE) {
+      if (missing(dim) && missing(other))
+        return(private$`_min`())
+      
+      if (!missing(dim) && !missing(other))
+        value_error("Can't set other and dim argumments.")
+      
+      if (missing(dim))
+        return(private$`_min`(other = other))
+      
+      # dim is not missing
+      o <- private$`_min`(dim = dim, keepdim = keepdim)
+      o[[2]] <- o[[2]] + 1L # make 1 based
+      o
+    },
+    argsort = function(dim = -1L, descending = FALSE) {
+      private$`_argsort`(dim = dim, descending = descending)$add_(1L, 1L)
     }
   ),
   active = list(
@@ -263,8 +303,14 @@ as_array.torch_tensor <- function(x) {
     x <- x$dequantize()
   
   # auto convert to int32 if long.
-  if (x$dtype == torch_long())
+  if (x$dtype == torch_long()) {
+    
+    if ((x > .Machine$integer.max)$any()$item())
+      warn("Converting integers > .Machine$integer.max is undefined and returns wrong results. Use as.integer64(x)")
+    
     x <- x$to(dtype = torch_int32())
+  }
+    
   
   out <- as_array_impl(x)
   

@@ -27,6 +27,11 @@ remotes::install_github("mlverse/torch")
 
 At the first package load additional software will be installed.
 
+## Installation with Docker
+If you would like to install with Docker, please read following document.
+
+* [The way of installation with Docker](./docker/build_env_guide.md)
+
 ## Examples
 
 You can create torch tensors from R objects with the `torch_tensor`
@@ -78,4 +83,6 @@ b$grad
 ## Contributing
 
 No matter your current skills it’s possible to contribute to `torch`
-development. See the contributing guide for more information.
+development. See the [contributing
+guide](https://github.com/mlverse/torch/blob/master/.github/CONTRIBUTING.md)
+for more information.

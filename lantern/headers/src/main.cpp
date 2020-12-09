@@ -84,6 +84,7 @@ std::string addNamespace(std::string name)
     objects.push_back("Storage");
     objects.push_back("Device");
     objects.push_back("QScheme");
+    objects.push_back("ArrayRef");
 
     for (auto iter = objects.begin(); iter != objects.end(); iter++)
     {
@@ -119,10 +120,15 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         }
 
         std::string type = node[idx]["dynamic_type"].as<std::string>();
+        std::string dtype = node[idx]["type"].as<std::string>();
 
-        if (type == "IntArrayRef")
+        if (type == "IntArrayRef" & dtype != "c10::optional<IntArrayRef>")
         {
             type = "std::vector<int64_t>";
+        }
+        else if (type == "ArrayRef<double>" & dtype != "c10::optional<ArrayRef<double>>")
+        {
+          type = "std::vector<double>";
         }
         else if (type == "TensorList")
         {
@@ -138,11 +144,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         }
 
         // add optional call if required
-        std::string dtype = node[idx]["type"].as<std::string>();
         std::string call = node[idx]["name"].as<std::string>();
-        if ((dtype.find("c10::optional") != std::string::npos) & (type != "std::vector<torch::Dimname>"))
+        if ((dtype.find("c10::optional") != std::string::npos) & 
+            (type != "std::vector<torch::Dimname>")
+            )
         {
-            if (type != "double")
+            if ((type != "double") & 
+                (type != "IntArrayRef") &
+                (type != "ArrayRef<double>"))
             {
                 call = "optional<" + addNamespace(type) + ">(" + call + ")";
             }

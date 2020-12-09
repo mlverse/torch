@@ -32,3 +32,15 @@ expect_optim_works <- function(optim, defaults) {
   
   expect_true(as_array(fn()) <= as_array(initial_value)/2)
 }
+
+expect_state_is_updated <- function(opt_fn) {
+  x <- torch_tensor(1, requires_grad = TRUE)
+  opt <- opt_fn(x)
+  opt$zero_grad()
+  y <- 2 * x
+  y$backward()
+  opt$step()
+  expect_equal(opt$param_groups[[1]]$params[[1]]$state$step, 1)
+  opt$step()
+  expect_equal(opt$param_groups[[1]]$params[[1]]$state$step, 2)
+}

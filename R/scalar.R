@@ -1,4 +1,4 @@
-Scalar <- R6::R6Class(
+Scalar <- R7Class(
   classname = "torch_scalar", 
   
   public = list(

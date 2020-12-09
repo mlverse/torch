@@ -64,3 +64,157 @@ test_that("torch_narrow", {
   expect_equal_to_tensor(x$narrow_copy(1, 1, 2), x[1:2,])
   
 })
+
+test_that("atleast_1d", {
+  x <- torch_randn(2)
+  expect_equal(torch_atleast_1d(x)$ndim, 1)
+  y <- torch_scalar_tensor(1)
+  expect_equal(y$ndim, 0)
+  expect_equal(torch_atleast_1d(y)$ndim, 1)
+  
+  z <- torch_atleast_1d(list(x, y, torch_randn(2,2)))
+  expect_equal(z[[1]]$ndim, 1)
+  expect_equal(z[[2]]$ndim, 1)
+  expect_equal(z[[3]]$ndim, 2)
+})
+
+test_that("atleast_2d", {
+  x <- torch_randn(2)
+  expect_equal(torch_atleast_2d(x)$ndim, 2)
+  y <- torch_scalar_tensor(1)
+  expect_equal(y$ndim, 0)
+  expect_equal(torch_atleast_2d(y)$ndim, 2)
+  
+  z <- torch_atleast_2d(list(x, y, torch_randn(2,2, 2)))
+  expect_equal(z[[1]]$ndim, 2)
+  expect_equal(z[[2]]$ndim, 2)
+  expect_equal(z[[3]]$ndim, 3)
+})
+
+test_that("atleast_3d", {
+  x <- torch_randn(2)
+  expect_equal(torch_atleast_3d(x)$ndim, 3)
+  y <- torch_scalar_tensor(1)
+  expect_equal(y$ndim, 0)
+  expect_equal(torch_atleast_3d(y)$ndim, 3)
+  
+  z <- torch_atleast_3d(list(x, y, torch_randn(2,2,2,2)))
+  expect_equal(z[[1]]$ndim, 3)
+  expect_equal(z[[2]]$ndim, 3)
+  expect_equal(z[[3]]$ndim, 4)
+})
+
+test_that("kaiser_window", {
+  
+  expect_tensor(torch_kaiser_window(10, TRUE, beta = 12))
+  expect_tensor(torch_kaiser_window(10, TRUE))
+  expect_tensor(torch_kaiser_window(10, FALSE))
+  
+  expect_tensor(torch_kaiser_window(10, TRUE, dtype = torch_float64()))
+  
+  x <- torch_kaiser_window(10, TRUE, dtype = torch_float64())
+  expect_true(x$dtype == torch_float64())
+  
+  x <- torch_kaiser_window(10, TRUE, layout = torch_strided())
+  expect_tensor(x)
+  
+  x <- torch_kaiser_window(10, TRUE, requires_grad = TRUE)
+  expect_true(x$requires_grad)
+  
+})
+
+test_that("vander", {
+  
+  x <- torch_tensor(c(1, 2, 3, 5))
+  expect_tensor(torch_vander(x))
+  
+  y <- torch_vander(x, N=3)
+  expect_tensor(y)
+  expect_equal(y$size(2), 3)
+  
+  y <- torch_vander(x, N=3, increasing=TRUE)
+  expect_equal_to_r(y[4,3], 25)
+  
+})
+
+test_that("movedim", {
+  x <- torch_randn(3, 2, 1)
+  expect_tensor_shape(torch_movedim(x, 1, 2), c(2,3,1))
+  expect_tensor_shape(torch_movedim(x, c(1, 2), c(2, 3)), c(1,3,2))
+})
+
+test_that("norm", {
+  
+  x <- torch_rand(2, 3)
+  expect_tensor(torch_norm(x))
+  expect_tensor(torch_norm(x, p = 2))
+  expect_tensor(torch_norm(x, p = 2, dtype = torch_float64()))
+  expect_tensor_shape(torch_norm(x, dim = 1), 3)
+  expect_tensor_shape(torch_norm(x, dim = 2), 2)
+  expect_tensor_shape(torch_norm(x, dim = 2, dtype = torch_float64()), 2)
+  
+  x <- torch_rand(2, 3, names = c("W", "H"))
+  expect_error(
+    torch_norm(x, dim = "W"),
+    regexp = "not yet supported with named tensors"
+  )
+  expect_error(
+    torch_norm(x, dim = "H"), 
+    regexp = "not yet supported with named tensors"
+  )
+  
+})
+
+test_that("hann_window", {
+  
+  expect_error(
+    torch_hann_window(NULL),
+    class = "value_error"
+  )
+  
+  expect_tensor_shape(torch_hann_window(window_length = 10), 10)
+  
+})
+
+test_that("stft", {
+  
+  x <- torch_stft(
+    input = torch::torch_ones(3000),
+    n_fft = 400,
+    center = FALSE
+  )
+  
+  expect_tensor_shape(x, c(201, 27, 2))
+  expect_equal_to_r(x[1,,], cbind(rep(400, 27), rep(0, 27)))
+  expect_equal_to_r(x[51,,], cbind(rep(0, 27), rep(0, 27)))
+  
+  x <- torch::torch_stft(
+    input = torch::torch_ones(3000),
+    n_fft = 400,
+    center = TRUE
+  )
+  
+  expect_tensor_shape(x, c(201, 31, 2))
+  expect_equal_to_r(x[1,,], cbind(rep(400, 31), rep(0, 31)))
+  expect_equal_to_r(x[51,,], cbind(rep(0, 31), rep(0, 31)))
+  
+  x <- torch::torch_stft(
+    input = torch::torch_ones(3000),
+    n_fft = 400,
+    center = TRUE,
+    return_complex = TRUE
+  )
+  expect_equal(x$shape, c(201, 31))
+  expect_true(x$dtype == torch_complex(real = 1, imag = 1)$dtype)
+
+  x <- torch_stft(
+    input = torch::torch_ones(3000),
+    n_fft = 400,
+    window = torch_ones(400),
+    center = FALSE
+  )
+  
+  expect_tensor_shape(x, c(201, 27, 2))
+  expect_equal_to_r(x[1,,], cbind(rep(400, 27), rep(0, 27)))
+  expect_equal_to_r(x[51,,], cbind(rep(0, 27), rep(0, 27)))
+})

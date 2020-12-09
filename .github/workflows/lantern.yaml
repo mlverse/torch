@@ -120,32 +120,32 @@ jobs:
           wget --quiet https://storage.googleapis.com/torch-lantern-builds/cuda/cuda_10.1.105_418.39_linux.run
           chmod +x cuda_10.1.105_418.39_linux.run
           sudo ./cuda_10.1.105_418.39_linux.run --silent --toolkit
-          echo ::set-env name=CUDA::${{matrix.cuda}}
-          echo ::set-env name=CUDA_TOOLKIT_ROOT_DIR::/usr/local/cuda
+          echo "CUDA=${{matrix.cuda}}" >> $GITHUB_ENV
+          echo "CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda" >> $GITHUB_ENV
           dir /usr/local
           wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.1-linux-x64-v7.6.5.32.tgz
           tar -xzvf cudnn-10.1-linux-x64-v7.6.5.32.tgz
           sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
           sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-          echo ::set-env name=CUDNN_LIBRARY_PATH::/usr/local/cuda/lib64
-          echo ::set-env name=CUDNN_INCLUDE_PATH::/usr/local/cuda/include
+          echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
+          echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
       - name: Prep cmake cuda 10.2
         if: ${{ matrix.cuda == 10.2 && matrix.os == 'ubuntu-18.04'}}
         run: |
           wget --quiet http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
           chmod +x cuda_10.2.89_440.33.01_linux.run
           sudo ./cuda_10.2.89_440.33.01_linux.run --silent --toolkit
-          echo ::set-env name=CUDA::${{matrix.cuda}}
-          echo ::set-env name=CUDA_TOOLKIT_ROOT_DIR::/usr/local/cuda
+          echo "CUDA=${{matrix.cuda}}" >> $GITHUB_ENV
+          echo "CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda" >> $GITHUB_ENV
           dir /usr/local
           wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz
           tar -xzvf cudnn-10.2-linux-x64-v7.6.5.32.tgz
           sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
           sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-          echo ::set-env name=CUDNN_LIBRARY_PATH::/usr/local/cuda/lib64
-          echo ::set-env name=CUDNN_INCLUDE_PATH::/usr/local/cuda/include
+          echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
+          echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
       - name: Prep cuda (windows)
         if: ${{ (matrix.cuda == 10.1 || matrix.cuda == 10.2 ) && matrix.os == 'windows-2019'}}
         run: |

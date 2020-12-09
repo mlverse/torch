@@ -15,7 +15,7 @@ navbar:
   getting-started:
     text: Getting started
     menu:
-      - text: Beginers guide
+      - text: Beginners guide
       - text: Warm-up
         href: articles/getting-started/warmup.html
       - text: Tensors
@@ -42,6 +42,8 @@ navbar:
   articles:
     text: Articles
     menu:
+     - text: Installation
+       href: articles/installation.html
      - text: Tensors
      - text: Creating tensors
        href: articles/tensor-creation.html

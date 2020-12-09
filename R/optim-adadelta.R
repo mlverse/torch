@@ -29,63 +29,38 @@ optim_Adadelta <- R6::R6Class(
     },
     
     step = function(closure = NULL){
-      
-      with_no_grad({
-        
-        loss <- NULL
-        
-        if (!is.null(closure)) {
-          with_enable_grad({
-            loss <- closure()
-          })
+      private$step_helper(closure, function(group, param, g, p) {
+        grad <- param$grad
+
+        # if (grad$is_sparse) {
+        #   runtime_error("Adadelta does not support sparse gradients")
+        # }
+
+        # state initialization
+        if (length(param$state) == 0) {
+          param$state <- list()
+          param$state[["step"]]       <- 0
+          param$state[["square_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+          param$state[["acc_delta"]]  <- torch_zeros_like(param, memory_format=torch_preserve_format())
         }
-        
-        for (g in seq_along(self$param_groups)) {
-          
-          group <- self$param_groups[[g]]
-          
-          for (p in seq_along(group$params)) {
-            
-            param <- group$params[[p]]
-            
-            if (is.null(param$grad) || is_undefined_tensor(param$grad))
-              next
-            
-            grad <- param$grad
-            
-            # if (grad$is_sparse) {
-            #   runtime_error("Adadelta does not support sparse gradients")
-            # }
-            
-            # state initialization
-            if (length(param$state) == 0) {
-              param$state <- list()
-              param$state[["step"]]       <- 0
-              param$state[["square_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-              param$state[["acc_delta"]]  <- torch_zeros_like(param, memory_format=torch_preserve_format())
-            }
-           
-            square_avg <- param$state[["square_avg"]]
-            acc_delta  <- param$state[["acc_delta"]]
-            
-            rho <- group[["rho"]]
-            eps <- group[["eps"]]
-            
-            param$state[["step"]] <- param$state[["step"]] + 1
-            
-            if (group[["weight_decay"]] != 0)
-              grad <- grad$add(param, alpha=group[["weight_decay"]])
-            
-            square_avg$mul_(rho)$addcmul_(grad, grad, value=1 - rho)
-            std   <- square_avg$add(eps)$sqrt_()
-            delta <- acc_delta$add(eps)$sqrt_()$div_(std)$mul_(grad)
-            param$add_(delta, alpha=-group[["lr"]])
-            acc_delta$mul_(rho)$addcmul_(delta, delta, value=1 - rho)
-             
-          }
-        }
+
+        square_avg <- param$state[["square_avg"]]
+        acc_delta  <- param$state[["acc_delta"]]
+
+        rho <- group[["rho"]]
+        eps <- group[["eps"]]
+
+        param$state[["step"]] <- param$state[["step"]] + 1
+
+        if (group[["weight_decay"]] != 0)
+          grad <- grad$add(param, alpha=group[["weight_decay"]])
+
+        square_avg$mul_(rho)$addcmul_(grad, grad, value=1 - rho)
+        std   <- square_avg$add(eps)$sqrt_()
+        delta <- acc_delta$add(eps)$sqrt_()$div_(std)$mul_(grad)
+        param$add_(delta, alpha=-group[["lr"]])
+        acc_delta$mul_(rho)$addcmul_(delta, delta, value=1 - rho)
       })
-      loss
     }
   )
 )

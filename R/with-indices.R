@@ -61,3 +61,8 @@ torch_nll_loss2d <- function(self, target, weight = list(), reduction = torch_re
   target <- target$sub(1L, 1L)
   .torch_nll_loss2d(self, target, weight, reduction, ignore_index)
 }
+
+#' @rdname torch_argsort
+torch_argsort <- function(self, dim = -1L, descending = FALSE) {
+  .torch_argsort(self = self, dim = dim, descending = descending)$add_(1L, 1L)
+}

@@ -2,28 +2,31 @@ branch <- "master"
 
 
 install_config <- list(
-  "1.5.0" = list(
+  "1.7.0" = list(
     "cpu" = list(
       "darwin" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.5.0.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.0.zip",
           path = "libtorch/lib",
-          filter = ".dylib"
+          filter = ".dylib",
+          md5hash = "4c5a79e919a63419ba7258b867c170ff"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.5.0.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.7.0%2Bcpu.zip",
           path = "libtorch/lib",
-          filter = ".dll"
+          filter = ".dll",
+          md5hash = "269d81cf177740315982e31827e55e5a"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-cpu.zip", branch)
       ),
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcpu.zip",
-          path = "libtorch/lib"
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcpu.zip",
+          path = "libtorch/lib",
+          md5hash = "e7700c8fb430e18da5d42b4e9e7bb334"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-cpu.zip", branch)
       )
@@ -31,16 +34,18 @@ install_config <- list(
     "10.1" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu101.zip",
-          path = "libtorch/lib"
+          url = "https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcu101.zip",
+          path = "libtorch/lib",
+          md5hash = "6ab62c904c9942152c5757f480d4b746"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-101.zip", branch)
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu101/libtorch-win-shared-with-deps-1.5.0%2Bcu101.zip",
+          url = "https://download.pytorch.org/libtorch/cu101/libtorch-win-shared-with-deps-1.7.0%2Bcu101.zip",
           path = "libtorch/lib",
-          filter = ".dll"
+          filter = ".dll",
+          md5hash = "b6bcced0253c0c3beab10eae9c672087"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-gpu-101.zip", branch)
       )
@@ -48,16 +53,18 @@ install_config <- list(
     "10.2" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu102.zip",
-          path = "libtorch/lib"
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.0.zip",
+          path = "libtorch/lib",
+          md5hash = "300c826e0f4620008dda7abbb09a8d5e"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-102.zip", branch)
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.5.0.zip",
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.7.0.zip",
           path = "libtorch/lib",
-          filter = ".dll"
+          filter = ".dll",
+          md5hash = "5fefffe62185f3970cf67f31a6c75a12"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-gpu-102.zip", branch)
       )
@@ -65,8 +72,9 @@ install_config <- list(
     "9.2" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-with-deps-1.5.0%2Bcu92.zip",
-          path = "libtorch/lib"
+          url = "https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcu92.zip",
+          path = "libtorch/lib",
+          md5hash = "bd2cca6179e9f136c736feb9f5cd5f73"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu.zip", branch)
       )
@@ -75,7 +83,7 @@ install_config <- list(
 )
 
 #' @keywords internal
-install_path <- function(version = "1.5.0") {
+install_path <- function(version = "1.7.0") {
   path <- Sys.getenv("TORCH_HOME")
   if (nchar(path) > 0) {
     if (!dir.exists(path)) {
@@ -121,12 +129,26 @@ lib_installed <- function(library_name, install_path) {
     any(grepl("torch", x))
 }
 
-lantern_install_lib <- function(library_name, library_url, install_path, source_path, filter) {
+lantern_install_lib <- function(library_name, library_url, 
+                                install_path, source_path, filter, md5hash) {
   library_extension <- paste0(".", tools::file_ext(library_url))
   temp_file <- tempfile(fileext = library_extension)
   temp_path <- tempfile()
   
   utils::download.file(library_url, temp_file)
+  on.exit(try(unlink(temp_file)))
+
+  if (!is.null(md5hash) && is.character(md5hash) && length(md5hash) == 1) {
+    hash <- tools::md5sum(temp_file)
+    if (hash != md5hash) {
+      stop(
+        "The file downloaded from '", library_url,
+        "' does not match the expected md5 hash '",
+        md5hash, "'. The observed hash is '", hash,
+        "'. Due to security reasons the installation is stopped."
+      )
+    }
+  }
   
   uncompress <- if (identical(library_extension, "tgz")) utils::untar else utils::unzip
   
@@ -168,11 +190,14 @@ lantern_install_libs <- function(version, type, install_path) {
     if (!is.list(library_info)) library_info <- list(url = library_info, filter = "", path = "")
     if (is.null(library_info$filter)) library_info$filter <- ""
     
-    lantern_install_lib(library_name = library_name,
-                        library_url = library_info$url,
-                        install_path = install_path,
-                        source_path = library_info$path,
-                        filter = function(e) grepl(library_info$filter, e))
+    lantern_install_lib(
+      library_name = library_name,
+      library_url = library_info$url,
+      install_path = install_path,
+      source_path = library_info$path,
+      filter = function(e) grepl(library_info$filter, e),
+      md5hash = library_info$md5hash
+    )
   }
   
   invisible(install_path)
@@ -229,9 +254,9 @@ install_type <- function(version) {
   }
   
   if (is.null(cuda_version)) {
-    smi <- tryCatch(system2("nvidia-smi", stdout = TRUE, stderr = TRUE), error = function(e) NULL)
-    if (!is.null(smi)) {
-      cuda_version <- gsub(".*CUDA Version: | +\\|", "", smi[grepl("CUDA", smi)])
+    nvcc <- tryCatch(system2("nvcc", "--version", stdout = TRUE, stderr = TRUE), error = function(e) NULL)
+    if (!is.null(nvcc)) {
+      cuda_version <- gsub(".*release |, V.*", "", nvcc[grepl("release", nvcc)])
     }
   }
   
@@ -266,7 +291,7 @@ install_type <- function(version) {
 #' cases and troubleshootinng only.
 #' 
 #' @export
-install_torch <- function(version = "1.5.0", type = install_type(version = version), reinstall = FALSE,
+install_torch <- function(version = "1.7.0", type = install_type(version = version), reinstall = FALSE,
                           path = install_path(), ...) {
   
   if (reinstall) {

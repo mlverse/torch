@@ -7,7 +7,9 @@ nn_apply_permutation <- function(tensor, permutation, dim = 2) {
 
 rnn_impls_ <- list(
   RNN_RELU = torch_rnn_relu,
-  RNN_TANH = torch_rnn_tanh
+  RNN_TANH = torch_rnn_tanh,
+  LSTM = torch_lstm,
+  GRU = torch_gru
 )
 
 nn_rnn_base <- nn_module(
@@ -142,10 +144,14 @@ nn_rnn_base <- nn_module(
     
     
     if (is.null(hx)) {
+      
       num_directions <- ifelse(self$bidirectional, 2, 1)
       hx <- torch_zeros(self$num_layers * num_directions,
                         max_batch_size, self$hidden_size,
                         dtype=input$dtype, device=input$device)
+      
+      if (self$mode == "LSTM")
+        hx <- list(hx, hx)
       
     } else {
       hx <- self$permute_hidden(hx, sorted_indices)  
@@ -170,7 +176,10 @@ nn_rnn_base <- nn_module(
     }
         
     output <- result[[1]]
-    hidden <- result[[2]]
+    hidden <- result[-1]
+    
+    if (length(hidden) == 1)
+      hidden <- hidden[[1]]
     
     if (is_packed)
       output <- new_packed_sequence(output, batch_sizes, sorted_indices,
@@ -305,5 +314,221 @@ nn_rnn <- nn_module(
                      num_layers = num_layers, bias = bias,
                      batch_first = batch_first, dropout = dropout, 
                      bidirectional = bidirectional, ...)
+  }
+)
+
+#' Applies a multi-layer long short-term memory (LSTM) RNN to an input
+#' sequence.
+#' 
+#' For each element in the input sequence, each layer computes the following
+#' function:
+#' 
+#' \deqn{
+#' \begin{array}{ll} \\
+#' i_t = \sigma(W_{ii} x_t + b_{ii} + W_{hi} h_{(t-1)} + b_{hi}) \\
+#' f_t = \sigma(W_{if} x_t + b_{if} + W_{hf} h_{(t-1)} + b_{hf}) \\
+#' g_t = \tanh(W_{ig} x_t + b_{ig} + W_{hg} h_{(t-1)} + b_{hg}) \\
+#' o_t = \sigma(W_{io} x_t + b_{io} + W_{ho} h_{(t-1)} + b_{ho}) \\
+#' c_t = f_t c_{(t-1)} + i_t g_t \\
+#' h_t = o_t \tanh(c_t) \\
+#' \end{array}
+#' }
+#' 
+#' where \eqn{h_t} is the hidden state at time `t`, \eqn{c_t} is the cell
+#' state at time `t`, \eqn{x_t} is the input at time `t`, \eqn{h_{(t-1)}}
+#' is the hidden state of the previous layer at time `t-1` or the initial hidden
+#' state at time `0`, and \eqn{i_t}, \eqn{f_t}, \eqn{g_t},
+#' \eqn{o_t} are the input, forget, cell, and output gates, respectively.
+#' \eqn{\sigma} is the sigmoid function.
+#' 
+#' @param input_size The number of expected features in the input `x`
+#' @param hidden_size The number of features in the hidden state `h`
+#' @param num_layers Number of recurrent layers. E.g., setting `num_layers=2`
+#'   would mean stacking two LSTMs together to form a `stacked LSTM`,
+#'   with the second LSTM taking in outputs of the first LSTM and
+#'   computing the final results. Default: 1
+#' @param bias If `FALSE`, then the layer does not use bias weights `b_ih` and `b_hh`.
+#'   Default: `TRUE`
+#' @param batch_first If `TRUE`, then the input and output tensors are provided
+#'   as (batch, seq, feature). Default: `FALSE`
+#' @param dropout If non-zero, introduces a `Dropout` layer on the outputs of each
+#'   LSTM layer except the last layer, with dropout probability equal to
+#'   `dropout`. Default: 0
+#' @param bidirectional If `TRUE`, becomes a bidirectional LSTM. Default: `FALSE`
+#' 
+#' @section Inputs:
+#'
+#' Inputs: input, (h_0, c_0)
+#' 
+#' - **input** of shape `(seq_len, batch, input_size)`: tensor containing the features
+#'   of the input sequence.
+#'   The input can also be a packed variable length sequence.
+#'   See [nn_util_rnn_pack_padded_sequence()] or
+#'   [nn_util_rnn_pack_sequence()] for details.
+#'   
+#' - **h_0** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
+#'   containing the initial hidden state for each element in the batch.
+#' - **c_0** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
+#'   containing the initial cell state for each element in the batch.
+#'
+#' If `(h_0, c_0)` is not provided, both **h_0** and **c_0** default to zero.
+#' 
+#' @section Outputs:
+#' 
+#' Outputs: output, (h_n, c_n)
+#' 
+#' - **output** of shape `(seq_len, batch, num_directions * hidden_size)`: tensor
+#'   containing the output features `(h_t)` from the last layer of the LSTM,
+#'   for each t. If a `torch_nn.utils.rnn.PackedSequence` has been
+#'   given as the input, the output will also be a packed sequence.
+#'   For the unpacked case, the directions can be separated
+#'   using `output$view(c(seq_len, batch, num_directions, hidden_size))`,
+#'   with forward and backward being direction `0` and `1` respectively.
+#'   Similarly, the directions can be separated in the packed case.
+#' - **h_n** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
+#'   containing the hidden state for `t = seq_len`.
+#'   Like *output*, the layers can be separated using
+#'   `h_n$view(c(num_layers, num_directions, batch, hidden_size))` and similarly for *c_n*.
+#' - **c_n** (num_layers * num_directions, batch, hidden_size): tensor
+#'   containing the cell state for `t = seq_len`
+#' 
+#' @section Attributes:
+#' 
+#' * weight_ih_l[k] : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
+#'   `(W_ii|W_if|W_ig|W_io)`, of shape `(4*hidden_size x input_size)`
+#' * weight_hh_l[k] : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
+#'   `(W_hi|W_hf|W_hg|W_ho)`, of shape `(4*hidden_size x hidden_size)`
+#' * bias_ih_l[k] : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
+#'   `(b_ii|b_if|b_ig|b_io)`, of shape `(4*hidden_size)`
+#' * bias_hh_l[k] : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
+#'   `(b_hi|b_hf|b_hg|b_ho)`, of shape `(4*hidden_size)`
+#' 
+#' @note
+#' All the weights and biases are initialized from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}
+#' where \eqn{k = \frac{1}{\mbox{hidden\_size}}}
+#' 
+#' @examples
+#' rnn <- nn_lstm(10, 20, 2)
+#' input <- torch_randn(5, 3, 10)
+#' h0 <- torch_randn(2, 3, 20)
+#' c0 <- torch_randn(2, 3, 20)
+#' output <- rnn(input, list(h0, c0))
+#' 
+#' @export
+nn_lstm <- nn_module(
+  "nn_lstm",
+  inherit = nn_rnn_base,
+  initialize = function(input_size, hidden_size, num_layers = 1,
+                        bias = TRUE, batch_first = FALSE, dropout = 0., 
+                        bidirectional = FALSE, ...) {
+    super$initialize(
+      "LSTM", input_size = input_size, hidden_size = hidden_size,
+      num_layers = num_layers, bias = bias,
+      batch_first = batch_first, dropout = dropout, 
+      bidirectional = bidirectional, ...
+    )
+  }
+)
+
+#' Applies a multi-layer gated recurrent unit (GRU) RNN to an input sequence.
+#' 
+#' For each element in the input sequence, each layer computes the following
+#' function:
+#' 
+#' \deqn{
+#' \begin{array}{ll}
+#' r_t = \sigma(W_{ir} x_t + b_{ir} + W_{hr} h_{(t-1)} + b_{hr}) \\
+#' z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz} h_{(t-1)} + b_{hz}) \\
+#' n_t = \tanh(W_{in} x_t + b_{in} + r_t (W_{hn} h_{(t-1)}+ b_{hn})) \\
+#' h_t = (1 - z_t) n_t + z_t h_{(t-1)}
+#' \end{array}
+#' }
+#' 
+#' where \eqn{h_t} is the hidden state at time `t`, \eqn{x_t} is the input
+#' at time `t`, \eqn{h_{(t-1)}} is the hidden state of the previous layer
+#' at time `t-1` or the initial hidden state at time `0`, and \eqn{r_t},
+#' \eqn{z_t}, \eqn{n_t} are the reset, update, and new gates, respectively.
+#' \eqn{\sigma} is the sigmoid function.
+#' 
+#' 
+#' @param input_size The number of expected features in the input `x`
+#' @param hidden_size The number of features in the hidden state `h`
+#' @param num_layers Number of recurrent layers. E.g., setting `num_layers=2`
+#'   would mean stacking two GRUs together to form a `stacked GRU`,
+#'   with the second GRU taking in outputs of the first GRU and
+#'   computing the final results. Default: 1
+#' @param bias If `FALSE`, then the layer does not use bias weights `b_ih` and `b_hh`.
+#'   Default: `TRUE`
+#' @param batch_first If `TRUE`, then the input and output tensors are provided
+#'   as (batch, seq, feature). Default: `FALSE`
+#' @param dropout If non-zero, introduces a `Dropout` layer on the outputs of each
+#'   GRU layer except the last layer, with dropout probability equal to
+#'   `dropout`. Default: 0
+#' @param bidirectional If `TRUE`, becomes a bidirectional GRU. Default: `FALSE`
+#' 
+#' @section Inputs:
+#' 
+#' Inputs: input, h_0
+#' 
+#' - **input** of shape `(seq_len, batch, input_size)`: tensor containing the features
+#'   of the input sequence. The input can also be a packed variable length
+#'   sequence. See [nn_util_rnn_pack_padded_sequence()]
+#'   for details.
+#' - **h_0** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
+#'   containing the initial hidden state for each element in the batch.
+#'   Defaults to zero if not provided.
+#' 
+#' @section Outputs:
+#' 
+#' Outputs: output, h_n
+#' 
+#' - **output** of shape `(seq_len, batch, num_directions * hidden_size)`: tensor
+#'   containing the output features h_t from the last layer of the GRU,
+#'   for each t. If a `PackedSequence` has been
+#'   given as the input, the output will also be a packed sequence.
+#'   For the unpacked case, the directions can be separated
+#'   using `output$view(c(seq_len, batch, num_directions, hidden_size))`,
+#'   with forward and backward being direction `0` and `1` respectively.
+#'   Similarly, the directions can be separated in the packed case.
+#' - **h_n** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
+#'   containing the hidden state for `t = seq_len`
+#'   Like *output*, the layers can be separated using
+#'   `h_n$view(num_layers, num_directions, batch, hidden_size)`.
+#' 
+#' @section Attributes:
+#' - weight_ih_l[k] : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
+#'   (W_ir|W_iz|W_in), of shape `(3*hidden_size x input_size)`
+#' - weight_hh_l[k] : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
+#'   (W_hr|W_hz|W_hn), of shape `(3*hidden_size x hidden_size)`
+#' - bias_ih_l[k] : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
+#'   (b_ir|b_iz|b_in), of shape `(3*hidden_size)`
+#' - bias_hh_l[k] : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
+#'   (b_hr|b_hz|b_hn), of shape `(3*hidden_size)`
+#' 
+#' @note
+#' 
+#' All the weights and biases are initialized from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})}
+#' where \eqn{k = \frac{1}{\mbox{hidden\_size}}}
+#' 
+#' @examples
+#' 
+#' rnn <- nn_gru(10, 20, 2)
+#' input <- torch_randn(5, 3, 10)
+#' h0 <- torch_randn(2, 3, 20)
+#' output <- rnn(input, h0)
+#' 
+#' @export
+nn_gru <- nn_module(
+  "nn_gru",
+  inherit = nn_rnn_base,
+  initialize = function(input_size, hidden_size, num_layers = 1,
+                        bias = TRUE, batch_first = FALSE, dropout = 0., 
+                        bidirectional = FALSE, ...) {
+    super$initialize(
+      "GRU", input_size = input_size, hidden_size = hidden_size,
+      num_layers = num_layers, bias = bias,
+      batch_first = batch_first, dropout = dropout, 
+      bidirectional = bidirectional, ...
+    )
   }
 )

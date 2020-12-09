@@ -2,10 +2,7 @@ Dataset <- R6::R6Class(
   classname = "dataset", 
   lock_objects = FALSE,
   public = list(
-    get_item = function(index) {
-      not_implemented_error()
-    },
-    add = function(other) {
+    .getitem = function(index) {
       not_implemented_error()
     }
   )
@@ -24,17 +21,17 @@ get_init <- function(x) {
   
 }
 
-#' An abstract class representing a `Dataset`.
+#' Helper function to create an R6 class that inherits from the abstract `Dataset` class
 #' 
-#' All datasets that represent a map from keys to data samples should subclass
-#' it. All subclasses should overwrite `get_item`, supporting fetching a
-#' data sample for a given key. Subclasses could also optionally overwrite
-#' `lenght`, which is expected to return the size of the dataset by many
-#' `~torch.utils.data.Sampler` implementations and the default options
-#' of `~torch.utils.data.DataLoader`.
+#' All datasets that represent a map from keys to data samples should subclass this 
+#' class. All subclasses should overwrite the .getitem() method, which supports 
+#' fetching a data sample for a given key. Subclasses could also optionally 
+#' overwrite .length(), which is expected to return the size of the dataset 
+#' (e.g. number of samples) by many ~torch.utils.data.Sampler implementations 
+#' and the default options of [dataloader()].
 #' 
 #' @note 
-#' `~torch.utils.data.DataLoader` by default constructs a index
+#' [dataloader()]  by default constructs a index
 #' sampler that yields integral indices.  To make it work with a map-style
 #' dataset with non-integral indices/keys, a custom sampler must be provided.
 #' 
@@ -45,15 +42,14 @@ get_init <- function(x) {
 #' @param ... public methods for the dataset class
 #' @param parent_env An environment to use as the parent of newly-created 
 #'   objects.
+#' @inheritParams nn_module
 #' 
 #' @export
-dataset <- function(name = NULL, inherit = Dataset, ..., parent_env = parent.frame()) {
+dataset <- function(name = NULL, inherit = Dataset, ..., 
+                    private = NULL, active = NULL,
+                    parent_env = parent.frame()) {
   
   args <- list(...)
-  
-  active <- args$active
-  if (!is.null(active))
-    args <- args[-which(names(args) == "active")]
   
   if (!is.null(attr(inherit, "Dataset")))
     inherit <- attr(inherit, "Dataset")
@@ -66,6 +62,7 @@ dataset <- function(name = NULL, inherit = Dataset, ..., parent_env = parent.fra
     lock_objects = FALSE,
     inherit = inherit,
     public = args,
+    private = private,
     active = active,
     parent_env = e
   )
@@ -126,6 +123,28 @@ tensor_dataset <- dataset(
   }
 )
 
+#' Dataset Subset
+#'
+#' Subset of a dataset at specified indices.
+#'
+#' @param dataset  (Dataset): The whole Dataset
+#' @param indices  (sequence): Indices in the whole set selected for subset
+#'
+#' @export
+dataset_subset <- dataset(
+  initialize = function(dataset, indices) {
+    self$dataset = dataset
+    self$indices = indices
+  },
+  
+  .getitem = function(idx) {
+    return(self$dataset[self$indices[idx]])
+  },
+  
+  .length = function() {
+    return(length(self$indices))
+  }
+)
 
 
 

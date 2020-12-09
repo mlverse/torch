@@ -1,10 +1,10 @@
 Package: torch
 Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
-Version: 0.1.0.9000
+Version: 0.1.1.9000
 Authors@R: c(
     person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre", "cph")),
-    person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut", "cph")),
+    person("Javier", "Luraschi", email = "jluraschi@gmail.com", role = c("aut")),
     person("Dmitriy", "Selivanov", role = c("ctb")),
     person("Athos", "Damiani", role = c("ctb")),
     person(family = "RStudio", role = c("cph"))
@@ -30,7 +30,10 @@ Imports:
     utils,
     stats,
     bit64,
-    magrittr
+    magrittr,
+    tools,
+    coro,
+    callr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
@@ -53,6 +56,10 @@ Collate:
     'cuda.R'
     'device.R'
     'dimname_list.R'
+    'distributions-constraints.R'
+    'utils.R'
+    'distributions-exp-family.R'
+    'distributions.R'
     'dtype.R'
     'gen-method.R'
     'gen-namespace-docs.R'
@@ -104,6 +111,7 @@ Collate:
     'optim-adadelta.R'
     'optim-adagrad.R'
     'optim-adam.R'
+    'optim-asgd.R'
     'optim-lr_scheduler.R'
     'optim-rmsprop.R'
     'optim-rprop.R'
@@ -117,6 +125,7 @@ Collate:
     'storage.R'
     'tensor_list.R'
     'tensor_options.R'
+    'threads.R'
     'type-info.R'
     'utils-data-collate.R'
     'utils-data-dataloader.R'
@@ -124,7 +133,9 @@ Collate:
     'utils-data-fetcher.R'
     'utils-data-sampler.R'
     'utils-pipe.R'
-    'utils.R'
     'variable_list.R'
     'with-indices.R'
     'wrapers.R'
+Remotes:
+    r-lib/coro,
+    r-lib/rlang

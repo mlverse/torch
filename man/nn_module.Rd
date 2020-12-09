@@ -8,6 +8,8 @@ nn_module(
   classname = NULL,
   inherit = nn_Module,
   ...,
+  private = NULL,
+  active = NULL,
   parent_env = parent.frame()
 )
 }
@@ -17,6 +19,10 @@ nn_module(
 \item{inherit}{an optional module to inherit from}
 
 \item{...}{methods implementation}
+
+\item{private}{passed to \code{\link[R6:R6Class]{R6::R6Class()}}.}
+
+\item{active}{passed to \code{\link[R6:R6Class]{R6::R6Class()}}.}
 
 \item{parent_env}{passed to \code{\link[R6:R6Class]{R6::R6Class()}}.}
 }

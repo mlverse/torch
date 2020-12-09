@@ -5,12 +5,27 @@
 // [[Rcpp::export]]
 void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
   const char* s = lantern_Tensor_StreamInsertion(x->get());
+  auto s_string = std::string(s);
   
-  auto ss = std::stringstream(std::string(s));
-  std::string token;
+  // https://stackoverflow.com/a/55742744/3297472
+  // split string into lines without using streams as they are 
+  // not supported in older gcc versions
   std::vector<std::string> cont;
-  while (std::getline(ss, token)) {
+  size_t start = 0;
+  size_t end;
+  while (1) {
+    std::string token;
+    if ((end = s_string.find("\n", start)) == std::string::npos) {
+      if (!(token = s_string.substr(start)).empty()) {
+         printf("%s\n", token.c_str());
+      }
+       
+      break;
+    }
+     
+    token = s_string.substr(start, end - start);
     cont.push_back(token);
+    start = end + 1;
   }
   
   bool truncated = false;
@@ -209,6 +224,10 @@ Rcpp::List cpp_as_array (Rcpp::XPtr<XPtrTorchTensor> x) {
   Rcpp::stop("dtype not handled");
 };
 
+// [[Rcpp::export]]
+int cpp_tensor_element_size (Rcpp::XPtr<XPtrTorchTensor> x) {
+  return lantern_Tensor_element_size(x->get());
+}
 
 // [[Rcpp::export]]
 std::vector<int> cpp_tensor_dim (Rcpp::XPtr<XPtrTorchTensor> x) {
@@ -253,4 +272,28 @@ bool cpp_tensor_has_names (Rcpp::XPtr<XPtrTorchTensor> self)
 Rcpp::XPtr<XPtrTorchDimnameList> cpp_tensor_names (Rcpp::XPtr<XPtrTorchTensor> self)
 {
   return make_xptr<XPtrTorchDimnameList>(lantern_Tensor_names(self->get()));
+}
+
+// [[Rcpp::export]]
+void cpp_set_num_threads (int n)
+{
+  lantern_set_num_threads(n);
+}
+
+// [[Rcpp::export]]
+void cpp_set_num_interop_threads (int n)
+{
+  lantern_set_num_interop_threads(n);
+}
+
+// [[Rcpp::export]]
+int cpp_get_num_threads ()
+{
+  return lantern_get_num_threads();
+}
+
+// [[Rcpp::export]]
+int cpp_get_num_interop_threads ()
+{
+  return lantern_get_num_interop_threads();
 }

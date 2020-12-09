@@ -64,5 +64,9 @@ is_torch_generator <- function(x) {
 #' @export
 torch_manual_seed <- function(seed) {
   cpp_torch_manual_seed(as.character(seed))
+  # update the null generator
+  .generator_null$set_current_seed(
+    seed = as.integer(torch::torch_randint(low = 1, high = 1e6, size = 1)$item())
+  )
 }
 
