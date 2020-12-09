@@ -87,3 +87,41 @@ test_that("can save and reload", {
   expect_equal_to_tensor(f(input), fn(input))
   
 })
+
+test_that("errors gracefully when passing unsupported inputs", {
+  
+  fn <- function(x) {
+    torch_relu(x)
+  }
+  
+  expect_error(
+    jit_trace(fn, "a"),
+    class = "runtime_error",
+    regexp = "Unsupported"
+  )
+  
+})
+
+test_that("can take lists of tensors as input", {
+  
+  fn <- function(x) {
+    torch_stack(x)
+  }
+  x <- list(torch_tensor(1), torch_tensor(2))
+  
+  tr_fn <- jit_trace(fn, x)
+  expect_equal_to_tensor(fn(x), tr_fn(x))
+  
+})
+
+test_that("can output a list of tensors", {
+  
+  fn <- function(x) {
+    list(x, x + 1)
+  }
+  x <- torch_tensor(1)
+  tr_fn <- jit_trace(fn, x)  
+  expect_equal_to_tensor(fn(x)[[1]], tr_fn(x)[[1]])
+  expect_equal_to_tensor(fn(x)[[2]], tr_fn(x)[[2]])
+  
+})

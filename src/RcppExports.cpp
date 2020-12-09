@@ -28738,6 +28738,17 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_stack_push_back_TensorList
+void cpp_stack_push_back_TensorList(Rcpp::XPtr<XPtrTorchStack> self, Rcpp::XPtr<XPtrTorchTensorList> x);
+RcppExport SEXP _torch_cpp_stack_push_back_TensorList(SEXP selfSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorList> >::type x(xSEXP);
+    cpp_stack_push_back_TensorList(self, x);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_stack_to_r
 Rcpp::List cpp_stack_to_r(Rcpp::XPtr<XPtrTorchStack> self);
 RcppExport SEXP _torch_cpp_stack_to_r(SEXP selfSEXP) {
@@ -31376,6 +31387,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_stack_new", (DL_FUNC) &_torch_cpp_stack_new, 0},
     {"_torch_cpp_stack_push_back_Tensor", (DL_FUNC) &_torch_cpp_stack_push_back_Tensor, 2},
     {"_torch_cpp_stack_push_back_int64_t", (DL_FUNC) &_torch_cpp_stack_push_back_int64_t, 2},
+    {"_torch_cpp_stack_push_back_TensorList", (DL_FUNC) &_torch_cpp_stack_push_back_TensorList, 2},
     {"_torch_cpp_stack_to_r", (DL_FUNC) &_torch_cpp_stack_to_r, 1},
     {"_torch_cpp_Tensor_storage", (DL_FUNC) &_torch_cpp_Tensor_storage, 1},
     {"_torch_cpp_Tensor_has_storage", (DL_FUNC) &_torch_cpp_Tensor_has_storage, 1},

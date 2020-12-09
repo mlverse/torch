@@ -15,6 +15,10 @@ Stack <- R6::R6Class(
         cpp_stack_push_back_Tensor(self$ptr, x$ptr)
       else if (is.integer(x) && length(x) == 1)
         cpp_stack_push_back_int64_t(self$ptr, x)
+      else if (is.list(x) && all(sapply(x, function(i) is_torch_tensor(i))))
+        cpp_stack_push_back_TensorList(self$ptr, torch_tensor_list(x)$ptr)
+      else
+        runtime_error("Unsupported input type: ", class(x))
       
       self
     },
@@ -26,6 +30,8 @@ Stack <- R6::R6Class(
           out[[i]] <- Tensor$new(ptr = r[[i]][[1]])
         else if (r[[i]][[2]] == "Int")
           out[[i]] <- r[[i]][[1]]
+        else if (r[[i]][[2]] == "TensorList")
+          out[[i]] <- TensorList$new(ptr = r[[i]][[1]])$to_r()
         else
           runtime_error("Stack contains unsupported types.")
       }
@@ -37,10 +43,9 @@ Stack <- R6::R6Class(
   )
 )
 
-torch_jit_stack <- function(x) {
+torch_jit_stack <- function(...) {
   
-  if (!is.list(x))
-    x <- list(x)
+  x <- rlang::list2(...)
   
   out <- Stack$new()  
   for (el in x)

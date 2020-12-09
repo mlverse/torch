@@ -143,8 +143,7 @@ GraphFunction <- R6::R6Class(
 
 convert_inputs_to_jit_stack <- function(...) {
   # inputs to the traced function must be a stack
-  inputs <- rlang::list2(...)
-  inputs <- torch_jit_stack(inputs)
+  inputs <- torch_jit_stack(...)
   inputs
 }
 
