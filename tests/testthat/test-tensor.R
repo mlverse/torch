@@ -167,12 +167,12 @@ test_that("as.matrix", {
   
   x <- torch_randn(2,2)
   r <- as.matrix(x)
-  expect_equal(class(r), c("matrix", "array"))
+  expect_true("matrix" %in% class(r))
   expect_equal(dim(r), c(2,2))
   
   x <- torch_randn(2,2,2)
   r <- as.matrix(x)
-  expect_equal(class(r), c("matrix", "array"))
+  expect_true("matrix" %in% class(r))
   expect_equal(dim(r), c(8,1))
   
 })

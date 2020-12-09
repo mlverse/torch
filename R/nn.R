@@ -531,7 +531,7 @@ nn_module_list <- nn_module(
   },
   insert = function(index, module) {
     modules <- append(private$modules_, list(module), after = index - 1)
-    private$modules_ <- NULL
+    private$modules_ <- list()
     for (i in seq_along(modules)) {
       self$add_module(i - 1, modules[[i]])
     }

@@ -23,6 +23,15 @@
 - Use `nvcc --version` instead of `nvidia-smi` to find the CUDA version as `nvidia-smi` reports the latest
   supported version and not the installed one. (#363)
 - Added distribution constraints (@krzjoa #364)
+- Corrected URL to download LibTorch under Linux with CUDA 10.2 (#367)
+- Dataloaders now returns a `coro::exhausted` intead of raising `stop_iteration_error` when the dataloader exceeds. (#366)
+- Dataloaders now use the num_workers argument to load data in parallel (#366)
+- Added Exponential Family classs to distributions (#373)
+- Added Dockerfile and docker compose file with GPU support, with a how-to guide. (#380 #386)
+- Fixed handling of integer tensors when indexing tensors (#385)
+- Added R 3.6 to the CI system and fixed compilation from source with it on Windows (#387)
+- Fixed bug when passing length zero vectors to lantern/libtorch. (#388)
+- Fixed `torch_argmax`, `torch_argmin`, `x$argmax()` and `x$argmin()` return 1-based indexes. (#389)
 
 # torch 0.1.1
 

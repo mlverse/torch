@@ -5,12 +5,27 @@
 // [[Rcpp::export]]
 void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
   const char* s = lantern_Tensor_StreamInsertion(x->get());
+  auto s_string = std::string(s);
   
-  auto ss = std::stringstream(std::string(s));
-  std::string token;
+  // https://stackoverflow.com/a/55742744/3297472
+  // split string into lines without using streams as they are 
+  // not supported in older gcc versions
   std::vector<std::string> cont;
-  while (std::getline(ss, token)) {
+  size_t start = 0;
+  size_t end;
+  while (1) {
+    std::string token;
+    if ((end = s_string.find("\n", start)) == std::string::npos) {
+      if (!(token = s_string.substr(start)).empty()) {
+         printf("%s\n", token.c_str());
+      }
+       
+      break;
+    }
+     
+    token = s_string.substr(start, end - start);
     cont.push_back(token);
+    start = end + 1;
   }
   
   bool truncated = false;

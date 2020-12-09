@@ -1,0 +1,15 @@
+version: "2.4"
+services:
+    rstudio_docker:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        runtime: nvidia
+        environment:
+            - NVIDIA_VISIBLE_DEVICES=all
+            - NVIDIA_DRIVER_CAPABILITIES=all
+        ports:
+            - 8787:8787
+        volumes:
+            - ../../rstudio_home:/home/rstudio
+        restart: always

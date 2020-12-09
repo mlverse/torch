@@ -190,6 +190,16 @@ Tensor <- R7Class(
     },
     argsort = function(dim = -1L, descending = FALSE) {
       private$`_argsort`(dim = dim, descending = descending)$add_(1L, 1L)
+    },
+    argmax = function(dim = NULL, keepdim = FALSE) {
+      o <- private$`_argmax`(dim = dim, keepdim = keepdim)
+      o <- o$add_(1L, 1L)
+      o
+    },
+    argmin = function(dim = NULL, keepdim = FALSE) {
+      o <- private$`_argmin`(dim = dim, keepdim = keepdim)
+      o <- o$add_(1L, 1L)
+      o
     }
   ),
   active = list(

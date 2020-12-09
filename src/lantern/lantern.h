@@ -726,6 +726,14 @@ HOST_API const char * lantern_traced_fn_graph_print (void* fn)
   return ret;
 }
 
+LANTERN_API bool (LANTERN_PTR _lantern_Tensor_has_any_zeros) (void * self);
+HOST_API bool lantern_Tensor_has_any_zeros (void* self)
+{
+  bool ret = _lantern_Tensor_has_any_zeros(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5301,6 +5309,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_call_traced_fn);
   LOAD_SYMBOL(_lantern_traced_fn_save);
   LOAD_SYMBOL(_lantern_traced_fn_graph_print);
+  LOAD_SYMBOL(_lantern_Tensor_has_any_zeros);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

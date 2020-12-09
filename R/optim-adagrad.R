@@ -32,6 +32,7 @@ optim_Adagrad <- R6::R6Class(
       for (group in self$param_groups){
         for (p in seq_along(group$params)) {
           param <- group$params[[p]]
+          param$state <- list()
           param$state[['step']] <- 0
           param$state[['sum']]  <- torch_full_like(
             param, 

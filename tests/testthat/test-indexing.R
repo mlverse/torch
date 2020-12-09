@@ -128,3 +128,19 @@ test_that("indexing with R boolean vectors", {
   expect_equal_to_r(x[c(TRUE, FALSE)], 1)
   
 })
+
+test_that("indexing with long tensors", {
+  
+  x <- torch_randn(4,4)
+  index <- torch_tensor(1, dtype = torch_long())
+  expect_equal_to_tensor(x[index, index], x[1,1])
+  
+  index <- torch_tensor(-1, dtype = torch_long())
+  expect_equal_to_tensor(x[index, index], x[-1,-1])
+  
+  index <- torch_tensor(c(-1,1), dtype = torch_long())
+  expect_equal_to_tensor(x[index, index], x[c(-1,1),c(-1, 1)])
+  
+  index <- torch_tensor(c(-1, 0, 1), dtype = torch_long())
+  expect_error(x[index, ], regexp = "Indexing starts at 1")
+})

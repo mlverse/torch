@@ -4706,8 +4706,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_argmax
-torch_argmax <- function(self, dim = NULL, keepdim = FALSE) {
+#' @rdname .torch_argmax
+.torch_argmax <- function(self, dim = NULL, keepdim = FALSE) {
   args <- mget(x = c("self", "dim", "keepdim"))
 expected_types <- list(self = "Tensor", dim = "int64_t", keepdim = "bool")
 nd_args <- "self"
@@ -4723,8 +4723,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_argmin
-torch_argmin <- function(self, dim = NULL, keepdim = FALSE) {
+#' @rdname .torch_argmin
+.torch_argmin <- function(self, dim = NULL, keepdim = FALSE) {
   args <- mget(x = c("self", "dim", "keepdim"))
 expected_types <- list(self = "Tensor", dim = "int64_t", keepdim = "bool")
 nd_args <- "self"

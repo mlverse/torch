@@ -123,7 +123,7 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       {
         Rcpp::stop("Indexing in R is 1-based and found a 0.");
       }
-    
+      
       lantern_TensorIndex_append_int64(index.get(), s);
       
       if (!drop)
@@ -186,7 +186,7 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
           Rcpp::stop("Indexing in R is 1-based and found a 0.");
         }
       }
-    
+      
       // Create the integer Tensor
       XPtrTorchTensorOptions options = lantern_TensorOptions();
       options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
@@ -219,7 +219,44 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
     {
       Rcpp::Environment e = slice;
       Rcpp::XPtr<XPtrTorchTensor> t = e["ptr"];
-      lantern_TensorIndex_append_tensor(index.get(), t->get());
+      
+      auto type = std::string(lantern_Dtype_type(lantern_Tensor_dtype(t->get())));
+      
+      // is boolean tensor
+      if (type == "Bool")
+      {
+        lantern_TensorIndex_append_tensor(index.get(), t->get());
+      } 
+      // integer tensor: we need to make it zero based
+      else if (type == "Long")
+      {
+        
+        // check that there's no zeros
+        bool zeros = lantern_Tensor_has_any_zeros(t->get());
+        if (zeros)
+        {
+          Rcpp::stop("Indexing starts at 1 but found a 0.");
+        }
+        
+        XPtrTorchTensor sign = lantern_Tensor_signbit_tensor(t->get());
+        sign = lantern_logical_not_tensor(sign.get());
+        
+        // cast from bool to int
+        XPtrTorchTensorOptions options = lantern_TensorOptions();
+        options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
+        sign = lantern_Tensor_to(sign.get(), options.get());
+        
+        // create a 1 scalar
+        int al = 1;
+        XPtrTorchScalar alpha = lantern_Scalar((void*) &al, std::string("int").c_str());
+        
+        XPtrTorchTensor zero_index = lantern_Tensor_sub_tensor_tensor_scalar(t->get(), sign.get(), alpha.get());
+        
+        lantern_TensorIndex_append_tensor(index.get(), zero_index.get());
+      } else {
+        Rcpp::stop("Only long and boolean tensors are supported.");  
+      }
+      continue;
     }
     
   }
