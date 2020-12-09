@@ -30,6 +30,7 @@
 - Added Dockerfile and docker compose file with GPU support, with a how-to guide. (#380 #386)
 - Fixed handling of integer tensors when indexing tensors (#385)
 - Added R 3.6 to the CI system and fixed compilation from source with it on Windows (#387)
+- Fixed bug when passing length zero vectors to lantern/libtorch. (#388)
 
 # torch 0.1.1
 
