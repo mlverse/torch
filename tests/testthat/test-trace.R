@@ -70,3 +70,20 @@ test_that("modules are equivalent", {
   tr_fn <- jit_trace(fn, input)
   expect_equal_to_tensor(fn(input), tr_fn(input), tolerance = 1e-6)
 })
+
+test_that("can save and reload", {
+  
+  fn <- function(x) {
+    torch_relu(x)
+  }
+  
+  input <- torch_tensor(c(-1, 0, 1))
+  tr_fn <- jit_trace(fn, input)
+  
+  tmp <- tempfile("tst", fileext = "pt")
+  tr_fn$save(tmp)
+  
+  f <- jit_load(tmp)
+  expect_equal_to_tensor(f(input), fn(input))
+  
+})

@@ -8865,6 +8865,14 @@ cpp_traced_fn_graph_print <- function(fn) {
     .Call('_torch_cpp_traced_fn_graph_print', PACKAGE = 'torchpkg', fn)
 }
 
+cpp_jit_load <- function(path) {
+    .Call('_torch_cpp_jit_load', PACKAGE = 'torchpkg', path)
+}
+
+cpp_call_jit_script <- function(module, inputs) {
+    .Call('_torch_cpp_call_jit_script', PACKAGE = 'torchpkg', module, inputs)
+}
+
 cpp_nullptr <- function() {
     .Call('_torch_cpp_nullptr', PACKAGE = 'torchpkg')
 }

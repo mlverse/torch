@@ -37,7 +37,7 @@ Stack <- R6::R6Class(
   )
 )
 
-torch_stack <- function(x) {
+torch_jit_stack <- function(x) {
   
   if (!is.list(x))
     x <- list(x)

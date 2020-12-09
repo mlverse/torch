@@ -734,6 +734,22 @@ HOST_API bool lantern_Tensor_has_any_zeros (void* self)
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_jit_load) (const char * path);
+HOST_API void* lantern_jit_load (const char * path)
+{
+  void* ret = _lantern_jit_load(path);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_call_jit_script) (void* module, void* inputs);
+HOST_API void* lantern_call_jit_script (void* module, void* inputs)
+{
+  void* ret = _lantern_call_jit_script(module, inputs);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5310,6 +5326,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_traced_fn_save);
   LOAD_SYMBOL(_lantern_traced_fn_graph_print);
   LOAD_SYMBOL(_lantern_Tensor_has_any_zeros);
+  LOAD_SYMBOL(_lantern_jit_load);
+  LOAD_SYMBOL(_lantern_call_jit_script);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

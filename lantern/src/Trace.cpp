@@ -2,6 +2,7 @@
 #include "lantern/lantern.h"
 #include <torch/torch.h>
 #include <torch/csrc/jit/frontend/tracer.h>
+#include <torch/script.h> // One-stop header.
 #include "utils.hpp"
 
 using namespace torch::jit::tracer;
@@ -98,6 +99,25 @@ const char * _lantern_traced_fn_graph_print (void * fn)
   strcpy(cstr, str.c_str());
   return cstr;
   LANTERN_FUNCTION_END
+}
+
+void * _lantern_jit_load(const char * path)
+{
+    auto module = new torch::jit::script::Module();
+    *module = torch::jit::load(std::string(path));
+    return (void*) module;
+}
+
+void* _lantern_call_jit_script (void* module, void* inputs)
+{
+    Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
+    auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
+
+    auto outputs = new LanternObject<torch::jit::Stack>();
+    auto out = module_->forward(inputs_);
+    outputs->get().push_back(out);  
+
+    return (void*) outputs;
 }
 
 void _trace_r_nn_module ()

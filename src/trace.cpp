@@ -46,3 +46,18 @@ std::string cpp_traced_fn_graph_print (Rcpp::XPtr<XPtrTorch> fn)
   lantern_const_char_delete(s);
   return out;
 }
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorch> cpp_jit_load (std::string path)
+{
+  XPtrTorch out = lantern_jit_load(path.c_str());
+  return make_xptr<XPtrTorch>(out);
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchStack> cpp_call_jit_script (Rcpp::XPtr<XPtrTorch> module, 
+                                                Rcpp::XPtr<XPtrTorchStack> inputs)
+{
+  XPtrTorchStack out = lantern_call_jit_script(module->get(), inputs->get());
+  return make_xptr<XPtrTorchStack>(out);
+}
