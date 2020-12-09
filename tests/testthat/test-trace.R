@@ -81,7 +81,7 @@ test_that("can save and reload", {
   tr_fn <- jit_trace(fn, input)
   
   tmp <- tempfile("tst", fileext = "pt")
-  tr_fn$save(tmp)
+  jit_save(tr_fn, tmp)
   
   f <- jit_load(tmp)
   expect_equal_to_tensor(f(input), fn(input))

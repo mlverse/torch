@@ -5,7 +5,7 @@
 \alias{torch_stack}
 \title{Stack}
 \usage{
-torch_stack(x)
+torch_stack(tensors, dim = 1L)
 }
 \arguments{
 \item{tensors}{(sequence of Tensors) sequence of tensors to concatenate}
