@@ -32,6 +32,7 @@
 - Added R 3.6 to the CI system and fixed compilation from source with it on Windows (#387)
 - Fixed bug when passing length zero vectors to lantern/libtorch. (#388)
 - Fixed `torch_argmax`, `torch_argmin`, `x$argmax()` and `x$argmin()` return 1-based indexes. (#389)
+- Initial support for JIT tracing (#377)
 
 # torch 0.1.1
 
