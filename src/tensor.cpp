@@ -16,8 +16,9 @@ void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
   while (1) {
     std::string token;
     if ((end = s_string.find("\n", start)) == std::string::npos) {
+      
       if (!(token = s_string.substr(start)).empty()) {
-         printf("%s\n", token.c_str());
+        cont.push_back(token);
       }
        
       break;
