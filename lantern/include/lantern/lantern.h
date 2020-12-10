@@ -771,6 +771,13 @@ HOST_API void*lantern_Stack_at_TensorList (void* self, int64_t i)
   LANTERN_HOST_HANDLER;
   return ret;
 }
+
+LANTERN_API void (LANTERN_PTR _lantern_TraceableFunction_delete) (void* x);
+HOST_API void lantern_TraceableFunction_delete (void* x)
+{
+  _lantern_TraceableFunction_delete(x);
+  LANTERN_HOST_HANDLER;
+}
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5352,6 +5359,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_JITModule_delete);
   LOAD_SYMBOL(_lantern_Stack_push_back_TensorList);
   LOAD_SYMBOL(_lantern_Stack_at_TensorList);
+  LOAD_SYMBOL(_lantern_TraceableFunction_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

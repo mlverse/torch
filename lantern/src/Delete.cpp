@@ -223,3 +223,10 @@ void _lantern_JITModule_delete (void* x)
   lantern_delete<torch::jit::script::Module>(x);
   LANTERN_FUNCTION_END_VOID;
 }
+
+void _lantern_TraceableFunction_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<LanternObject<std::function<torch::jit::Stack(torch::jit::Stack)>>>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
