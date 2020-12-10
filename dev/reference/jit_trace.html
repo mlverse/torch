@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sort — torch_sort • torch</title>
+<title>Trace a function and return an executable script_function. — jit_trace • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,10 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Sort — torch_sort" />
-<meta property="og:description" content="Sort" />
+<meta property="og:title" content="Trace a function and return an executable script_function. — jit_trace" />
+<meta property="og:description" content="Using jit_trace, you can turn an existing R function into a TorchScript
+script_function. You must provide example inputs, and we run the function,
+recording the operations performed on all the tensors." />
 
 
 <meta name="robots" content="noindex">
@@ -221,71 +223,94 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sort</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_sort.Rd</code></div>
+    <h1>Trace a function and return an executable <code>script_function</code>.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/trace.R'><code>R/trace.R</code></a></small>
+    <div class="hidden name"><code>jit_trace.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Sort</p>
+    <p>Using <code>jit_trace</code>, you can turn an existing R function into a TorchScript
+<code>script_function</code>. You must provide example inputs, and we run the function,
+recording the operations performed on all the tensors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_sort</span><span class='op'>(</span><span class='va'>self</span>, dim <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1L</span>, descending <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>jit_trace</span><span class='op'>(</span><span class='va'>func</span>, <span class='va'>example_inputs</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor.</p></td>
+      <th>func</th>
+      <td><p>An R function that will be run with <code>example_inputs</code>. func arguments
+and return values must be tensors or (possibly nested) lists that contain tensors.</p></td>
     </tr>
     <tr>
-      <th>dim</th>
-      <td><p>(int, optional) the dimension to sort along</p></td>
+      <th>example_inputs</th>
+      <td><p>example inputs that will be passed to the function while
+tracing. The resulting trace can be run with inputs of different types and
+shapes assuming the traced operations support those types and shapes.
+<code>example_inputs</code> may also be a single Tensor in which case it is automatically
+wrapped in a list.</p></td>
     </tr>
     <tr>
-      <th>descending</th>
-      <td><p>(bool, optional) controls the sorting order (ascending or descending)</p></td>
+      <th>...</th>
+      <td><p>currently unused.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="sort-input-dim-descending-false-gt-tensor-longtensor-"><a class="anchor" href="#sort-input-dim-descending-false-gt-tensor-longtensor-"></a>sort(input, dim=-1, descending=FALSE) -&gt; (Tensor, LongTensor) </h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An <code>script_function</code></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The resulting recording of a standalone function produces a <code>script_function</code>.
+In the future we will also support tracing <code>nn_modules</code>.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Scripting is not yet supported in R.</p>
+    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     
 
 
-<p>Sorts the elements of the <code>input</code> tensor along a given dimension
-in ascending order by value.</p>
-<p>If <code>dim</code> is not given, the last dimension of the <code>input</code> is chosen.</p>
-<p>If <code>descending</code> is <code>TRUE</code> then the elements are sorted in descending
-order by value.</p>
-<p>A namedtuple of (values, indices) is returned, where the <code>values</code> are the
-sorted values and <code>indices</code> are the indices of the elements in the original
-<code>input</code> tensor.</p>
+<p>Tracing only correctly records functions and modules which are not data dependent
+(e.g., do not have conditionals on data in tensors) and do not have any untracked
+external dependencies (e.g., perform input/output or access global variables).
+Tracing only records operations done when the given function is run on the given
+tensors. Therefore, the returned <code>script_function</code> will always run the same traced
+graph on any input. This has some important implications when your module is
+expected to run different sets of operations, depending on the input and/or the
+module state. For example,</p><ul>
+<li><p>Tracing will not record any control-flow like if-statements or loops. When
+this control-flow is constant across your module, this is fine and it often
+inlines the control-flow decisions. But sometimes the control-flow is actually
+part of the model itself. For instance, a recurrent network is a loop over
+the (possibly dynamic) length of an input sequence.</p></li>
+<li><p>In the returned <code>script_function</code>, operations that have different behaviors
+in training and eval modes will always behave as if it is in the mode it was
+in during tracing, no matter which mode the <code>script_function</code> is in.</p></li>
+</ul>
+
+<p>In cases like these, tracing would not be appropriate and scripting is a better
+choice. If you trace such models, you may silently get incorrect results on
+subsequent invocations of the model. The tracer will try to emit warnings when
+doing something that may cause an incorrect trace to be produced.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>out</span> <span class='op'>=</span> <span class='fu'>torch_sort</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-<span class='va'>out</span>
-<span class='va'>out</span> <span class='op'>=</span> <span class='fu'>torch_sort</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>out</span>
+<span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+ <span class='fu'><a href='torch_relu.html'>torch_relu</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; [[1]]
-#&gt; torch_tensor
-#&gt; -0.8929  0.1165 -0.5141 -0.7859
-#&gt;  0.2361  0.5150 -0.1768  0.9071
-#&gt;  0.5300  1.6778  0.4451  0.9529
-#&gt; [ CPUFloatType{3,4} ]
-#&gt; 
-#&gt; [[2]]
-#&gt; torch_tensor
-#&gt;  2  0  1  2
-#&gt;  1  2  0  0
-#&gt;  0  1  2  1
-#&gt; [ CPULongType{3,4} ]
-#&gt; </div></pre>
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>tr_fn</span> <span class='op'>&lt;-</span> <span class='fu'>jit_trace</span><span class='op'>(</span><span class='va'>fn</span>, <span class='va'>input</span><span class='op'>)</span>
+<span class='fu'>tr_fn</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; torch_tensor
+#&gt;  0
+#&gt;  0
+#&gt;  1
+#&gt; [ CPUFloatType{3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

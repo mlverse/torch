@@ -210,14 +210,16 @@
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1  1</span>
-<span class="co">#&gt;  1  1</span></code></pre></div>
+<span class="co">#&gt;  1  1</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 <p>Do a tensor operation:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">2</span>
 <span class="va">y</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  3  3</span>
-<span class="co">#&gt;  3  3</span></code></pre></div>
+<span class="co">#&gt;  3  3</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 <p><code>y</code> was created as a result of an operation, so it has a <code>grad_fn</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y</span><span class="op">$</span><span class="va">grad_fn</span>
@@ -229,10 +231,12 @@
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  27  27</span>
 <span class="co">#&gt;  27  27</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">$</span><span class="fu">mean</span><span class="op">(</span><span class="op">)</span>
 <span class="va">out</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; 27</span></code></pre></div>
+<span class="co">#&gt; 27</span>
+<span class="co">#&gt; [ CPUFloatType{} ]</span></code></pre></div>
 <p><code>$requires_grad_( ... )</code> changes an existing Tensor’s <code>requires_grad</code> flag in-place. The input flag defaults to <code>FALSE</code> if not given.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
@@ -241,8 +245,9 @@
 <span class="co">#&gt; [1] FALSE</span>
 <span class="va">a</span><span class="op">$</span><span class="fu">requires_grad_</span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;   6.1138  10.7414</span>
-<span class="co">#&gt; -99.4531   1.3935</span>
+<span class="co">#&gt; -2.5285  1.7572</span>
+<span class="co">#&gt; -1.9775  2.0375</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">a</span><span class="op">$</span><span class="va">requires_grad</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="va">b</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">a</span> <span class="op">*</span> <span class="va">a</span><span class="op">)</span><span class="op">$</span><span class="fu">sum</span><span class="op">(</span><span class="op">)</span>
@@ -260,7 +265,8 @@
 <code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  4.5000  4.5000</span>
-<span class="co">#&gt;  4.5000  4.5000</span></code></pre></div>
+<span class="co">#&gt;  4.5000  4.5000</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 <p>You should have got a matrix of <code>4.5</code>. Let’s call the <code>out</code> <em>Tensor</em> <span class="math inline">\(o\)</span>.</p>
 <p>We have that <span class="math inline">\(o = \frac{1}{4}\sum_i z_i\)</span>, <span class="math inline">\(z_i = 3(x_i+2)^2\)</span> and <span class="math inline">\(z_i\bigr\rvert_{x_i=1} = 27\)</span>. Therefore, <span class="math inline">\(\frac{\partial o}{\partial x_i} = \frac{3}{2}(x_i+2)\)</span>, hence <span class="math inline">\(\frac{\partial o}{\partial x_i}\bigr\rvert_{x_i=1} = \frac{9}{2} = 4.5\)</span>.</p>
 <p>Mathematically, if you have a vector valued function <span class="math inline">\(\vec{y}=f(\vec{x})\)</span>, then the gradient of <span class="math inline">\(\vec{y}\)</span> with respect to <span class="math inline">\(\vec{x}\)</span> is a Jacobian matrix:</p>
@@ -295,9 +301,10 @@
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">x</span>
 <span class="va">y</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -132.5678</span>
-<span class="co">#&gt;  -67.3097</span>
-<span class="co">#&gt;   78.2511</span></code></pre></div>
+<span class="co">#&gt;   15.3864</span>
+<span class="co">#&gt;  -73.3909</span>
+<span class="co">#&gt;  102.9350</span>
+<span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 <p>Now in this case y is no longer a scalar. <code>autograd</code> could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">0.0001</span><span class="op">)</span><span class="op">)</span>
@@ -307,7 +314,8 @@
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1.0000e+01</span>
 <span class="co">#&gt;  1.0000e+02</span>
-<span class="co">#&gt;  1.0000e-02</span></code></pre></div>
+<span class="co">#&gt;  1.0000e-02</span>
+<span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 <p>You can also stop autograd from tracking history on Tensors with <code>$requires_grad=TRUE</code> either by wrapping the code block in with <code><a href="../../reference/with_no_grad.html">with_no_grad()</a></code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">requires_grad</span>
@@ -327,7 +335,8 @@
 <span class="co">#&gt; [1] FALSE</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">eq</span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">all</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; 1</span></code></pre></div>
+<span class="co">#&gt; 1</span>
+<span class="co">#&gt; [ CPUBoolType{} ]</span></code></pre></div>
 <p>Read Later:</p>
 <p>Document about <code><a href="../../reference/autograd_function.html">help(autograd_function)</a></code>, <code><a href="../../articles/using-autograd.html">vignette("using-autograd")</a></code>, <code><a href="../../articles/extending-autograd.html">vignette("extending-autograd")</a></code>.</p>
 </div>

@@ -220,24 +220,28 @@
 <span class="va">model</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
 <pre><code>## $w
 ## torch_tensor
-## -0.6183
-##  0.8028
-##  0.0118
+##  0.6269
+##  0.1988
+##  0.5474
+## [ CPUFloatType{3,1} ]
 ## 
 ## $b
 ## torch_tensor
-##  0</code></pre>
+##  0
+## [ CPUFloatType{1} ]</code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># or individually</span>
 <span class="va">model</span><span class="op">$</span><span class="va">w</span></code></pre></div>
 <pre><code>## torch_tensor
-## -0.6183
-##  0.8028
-##  0.0118</code></pre>
+##  0.6269
+##  0.1988
+##  0.5474
+## [ CPUFloatType{3,1} ]</code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">b</span></code></pre></div>
 <pre><code>## torch_tensor
-##  0</code></pre>
+##  0
+## [ CPUFloatType{1} ]</code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create an input tensor</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span>
@@ -246,16 +250,17 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y_pred</span></code></pre></div>
 <pre><code>## torch_tensor
-##  0.2514
-##  0.6165
-##  0.0842
-## -0.5203
-## -1.0471
-## -0.3027
-##  0.4863
-## -0.6106
-## -2.2943
-## -0.5755</code></pre>
+## -0.2054
+## -0.7363
+## -0.0384
+##  0.6159
+## -0.0123
+##  0.8006
+## -0.0698
+##  0.8607
+## -0.8477
+## -0.5345
+## [ CPUFloatType{10,1} ]</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
