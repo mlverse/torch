@@ -672,10 +672,10 @@ HOST_API bool lantern_Stack_at_is (void* self, int64_t i, const char * type)
   return ret;
 }
 
-LANTERN_API void* (LANTERN_PTR _lantern_create_traceable_fun) (void* fn);
-HOST_API void* lantern_create_traceable_fun (void* fn)
+LANTERN_API void* (LANTERN_PTR _lantern_create_traceable_fun) (void *(*r_caller)(void *, void *), void* fn);
+HOST_API void* lantern_create_traceable_fun (void *(*r_caller)(void *, void *), void* fn)
 {
-  void* ret = _lantern_create_traceable_fun(fn);
+  void* ret = _lantern_create_traceable_fun(r_caller, fn);
   LANTERN_HOST_HANDLER;
   return ret;
 }

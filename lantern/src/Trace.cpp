@@ -15,14 +15,14 @@ void * _lantern_CompilationUnit_new ()
     LANTERN_FUNCTION_END;
 }
 
-void* _lantern_create_traceable_fun (void* fn)
+void* _lantern_create_traceable_fun (void *(*r_caller)(void *, void *), void* fn)
 {
     LANTERN_FUNCTION_START;
-    std::function<Stack(Stack)> tr_fn = [fn](Stack x)
+    std::function<Stack(Stack)> tr_fn = [r_caller, fn](Stack x)
     {
-        auto r_fn = *reinterpret_cast<std::function<void*(void*)>*>(fn);
+        //auto r_fn = *reinterpret_cast<std::function<void*(void*)>*>(fn);
         auto tmp = new LanternObject<Stack>(x);
-        void* out = r_fn((void*) tmp);
+        void* out = (*r_caller)((void *)tmp, fn);
         return reinterpret_cast<LanternObject<Stack>*>(out)->get();
     };
 

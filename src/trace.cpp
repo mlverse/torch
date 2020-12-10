@@ -1,6 +1,8 @@
 #include "torch_types.h"
 #include "utils.h"
 
+void* rcpp_call_hook (void* x, void* hook);
+
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorch> cpp_trace_function (Rcpp::Function fn, Rcpp::XPtr<XPtrTorchStack> inputs,
                         Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit)
@@ -12,7 +14,7 @@ Rcpp::XPtr<XPtrTorch> cpp_trace_function (Rcpp::Function fn, Rcpp::XPtr<XPtrTorc
     return out->get();
   };
   
-  XPtrTorch traceable_fn = lantern_create_traceable_fun((void*) &r_fn);
+  XPtrTorch traceable_fn = lantern_create_traceable_fun(&rcpp_call_hook, (void*) &r_fn);
   XPtrTorch tr_fn = lantern_trace_fn(traceable_fn.get(), inputs->get(), compilation_unit->get());
   
   return make_xptr<XPtrTorch>(tr_fn);
