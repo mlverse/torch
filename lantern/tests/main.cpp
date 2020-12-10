@@ -64,6 +64,8 @@ int main(int argc, char *argv[])
     void*  reloaded_tensor = lantern_tensor_load(saved_tensor);
     lantern_test_print(reloaded_tensor);
 
+    trace_r_nn_module();
+
 
     std::cout << "Success!!" << std::endl;
     return 0;

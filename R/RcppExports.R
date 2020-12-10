@@ -8737,6 +8737,26 @@ cpp_torch_scalar_to_bool <- function(self) {
     .Call('_torch_cpp_torch_scalar_to_bool', PACKAGE = 'torchpkg', self)
 }
 
+cpp_stack_new <- function() {
+    .Call('_torch_cpp_stack_new', PACKAGE = 'torchpkg')
+}
+
+cpp_stack_push_back_Tensor <- function(self, x) {
+    invisible(.Call('_torch_cpp_stack_push_back_Tensor', PACKAGE = 'torchpkg', self, x))
+}
+
+cpp_stack_push_back_int64_t <- function(self, x) {
+    invisible(.Call('_torch_cpp_stack_push_back_int64_t', PACKAGE = 'torchpkg', self, x))
+}
+
+cpp_stack_push_back_TensorList <- function(self, x) {
+    invisible(.Call('_torch_cpp_stack_push_back_TensorList', PACKAGE = 'torchpkg', self, x))
+}
+
+cpp_stack_to_r <- function(self) {
+    .Call('_torch_cpp_stack_to_r', PACKAGE = 'torchpkg', self)
+}
+
 cpp_Tensor_storage <- function(self) {
     .Call('_torch_cpp_Tensor_storage', PACKAGE = 'torchpkg', self)
 }
@@ -8827,6 +8847,34 @@ cpp_torch_tensor_options <- function(dtype_ptr, layout_ptr, device_ptr, requires
 
 cpp_torch_tensor_options_print <- function(x) {
     invisible(.Call('_torch_cpp_torch_tensor_options_print', PACKAGE = 'torchpkg', x))
+}
+
+cpp_trace_function <- function(fn, inputs, compilation_unit) {
+    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit)
+}
+
+cpp_save_traced_fn <- function(fn, filename) {
+    invisible(.Call('_torch_cpp_save_traced_fn', PACKAGE = 'torchpkg', fn, filename))
+}
+
+cpp_jit_compilation_unit <- function() {
+    .Call('_torch_cpp_jit_compilation_unit', PACKAGE = 'torchpkg')
+}
+
+cpp_call_traced_fn <- function(fn, inputs) {
+    .Call('_torch_cpp_call_traced_fn', PACKAGE = 'torchpkg', fn, inputs)
+}
+
+cpp_traced_fn_graph_print <- function(fn) {
+    .Call('_torch_cpp_traced_fn_graph_print', PACKAGE = 'torchpkg', fn)
+}
+
+cpp_jit_load <- function(path) {
+    .Call('_torch_cpp_jit_load', PACKAGE = 'torchpkg', path)
+}
+
+cpp_call_jit_script <- function(module, inputs) {
+    .Call('_torch_cpp_call_jit_script', PACKAGE = 'torchpkg', module, inputs)
 }
 
 cpp_nullptr <- function() {

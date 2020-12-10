@@ -215,6 +215,34 @@ public:
   }
 };
 
+class XPtrTorchStack : public XPtrTorch {
+public:
+  XPtrTorchStack (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_Stack_delete));
+  }
+};
+
+class XPtrTorchCompilationUnit : public XPtrTorch {
+public:
+  XPtrTorchCompilationUnit (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_CompilationUnit_delete));
+  }
+};
+
+class XPtrTorchJITModule : public XPtrTorch {
+public:
+  XPtrTorchJITModule (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_JITModule_delete));
+  }
+};
+
+class XPtrTorchTraceableFunction : public XPtrTorch {
+public:
+  XPtrTorchTraceableFunction (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_TraceableFunction_delete));
+  }
+};
+
 template<class T>
 class nullable {
 public:
