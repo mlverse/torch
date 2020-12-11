@@ -492,9 +492,9 @@ autograd_backward <- function(tensors, grad_tensors = NULL, retain_graph = creat
     grad_tensors <- list(grad_tensors)
   
   null <- sapply(grad_tensors, is.null)
-  if (length(null) > 0) {
+  if (sum(null) > 0) {
     grad_tensors[null] <- lapply(
-      seq_along(null), 
+      seq_len(sum(null)), 
       function(x) Tensor$new(ptr = cpp_tensor_undefined())
     )  
   }
