@@ -355,6 +355,7 @@ nn_rnn <- nn_module(
 #'   LSTM layer except the last layer, with dropout probability equal to
 #'   `dropout`. Default: 0
 #' @param bidirectional If `TRUE`, becomes a bidirectional LSTM. Default: `FALSE`
+#' @param ... currently unused.
 #' 
 #' @section Inputs:
 #'
@@ -363,8 +364,8 @@ nn_rnn <- nn_module(
 #' - **input** of shape `(seq_len, batch, input_size)`: tensor containing the features
 #'   of the input sequence.
 #'   The input can also be a packed variable length sequence.
-#'   See [nn_util_rnn_pack_padded_sequence()] or
-#'   [nn_util_rnn_pack_sequence()] for details.
+#'   See [nn_utils_rnn_pack_padded_sequence()] or
+#'   [nn_utils_rnn_pack_sequence()] for details.
 #'   
 #' - **h_0** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
 #'   containing the initial hidden state for each element in the batch.
@@ -394,13 +395,13 @@ nn_rnn <- nn_module(
 #' 
 #' @section Attributes:
 #' 
-#' * weight_ih_l[k] : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
+#' * `weight_ih_l[k]` : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
 #'   `(W_ii|W_if|W_ig|W_io)`, of shape `(4*hidden_size x input_size)`
-#' * weight_hh_l[k] : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
+#' * `weight_hh_l[k]` : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
 #'   `(W_hi|W_hf|W_hg|W_ho)`, of shape `(4*hidden_size x hidden_size)`
-#' * bias_ih_l[k] : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
+#' * `bias_ih_l[k]` : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
 #'   `(b_ii|b_if|b_ig|b_io)`, of shape `(4*hidden_size)`
-#' * bias_hh_l[k] : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
+#' * `bias_hh_l[k]` : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
 #'   `(b_hi|b_hf|b_hg|b_ho)`, of shape `(4*hidden_size)`
 #' 
 #' @note
@@ -465,6 +466,7 @@ nn_lstm <- nn_module(
 #'   GRU layer except the last layer, with dropout probability equal to
 #'   `dropout`. Default: 0
 #' @param bidirectional If `TRUE`, becomes a bidirectional GRU. Default: `FALSE`
+#' @param ... currently unused.
 #' 
 #' @section Inputs:
 #' 
@@ -472,7 +474,7 @@ nn_lstm <- nn_module(
 #' 
 #' - **input** of shape `(seq_len, batch, input_size)`: tensor containing the features
 #'   of the input sequence. The input can also be a packed variable length
-#'   sequence. See [nn_util_rnn_pack_padded_sequence()]
+#'   sequence. See [nn_utils_rnn_pack_padded_sequence()]
 #'   for details.
 #' - **h_0** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
 #'   containing the initial hidden state for each element in the batch.
@@ -496,13 +498,13 @@ nn_lstm <- nn_module(
 #'   `h_n$view(num_layers, num_directions, batch, hidden_size)`.
 #' 
 #' @section Attributes:
-#' - weight_ih_l[k] : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
+#' - `weight_ih_l[k]` : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
 #'   (W_ir|W_iz|W_in), of shape `(3*hidden_size x input_size)`
-#' - weight_hh_l[k] : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
+#' - `weight_hh_l[k]` : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
 #'   (W_hr|W_hz|W_hn), of shape `(3*hidden_size x hidden_size)`
-#' - bias_ih_l[k] : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
+#' - `bias_ih_l[k]` : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
 #'   (b_ir|b_iz|b_in), of shape `(3*hidden_size)`
-#' - bias_hh_l[k] : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
+#' - `bias_hh_l[k]` : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
 #'   (b_hr|b_hz|b_hn), of shape `(3*hidden_size)`
 #' 
 #' @note

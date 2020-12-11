@@ -3558,14 +3558,23 @@ NULL
 #'
 #' @param input (Tensor) the input tensor
 #' @param n_fft (int) size of Fourier transform
-#' @param hop_length (int, optional) the distance between neighboring sliding window        frames. Default: `NULL` (treated as equal to `floor(n_fft / 4)`)
-#' @param win_length (int, optional) the size of window frame and STFT filter.        Default: `NULL`  (treated as equal to `n_fft`)
-#' @param window (Tensor, optional) the optional window function.        Default: `NULL` (treated as window of all \eqn{1} s)
-#' @param center (bool, optional) whether to pad `input` on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.        Default: `TRUE`
-#' @param pad_mode (string, optional) controls the padding method used when        `center` is `TRUE`. Default: `"reflect"`
-#' @param normalized (bool, optional) controls whether to return the normalized STFT results         Default: `FALSE`
-#' @param onesided (bool, optional) controls whether to return half of results to        avoid redundancy Default: `TRUE`
-#'
+#' @param hop_length (int, optional) the distance between neighboring sliding window        
+#'   frames. Default: `NULL` (treated as equal to `floor(n_fft / 4)`)
+#' @param win_length (int, optional) the size of window frame and STFT filter.
+#'   Default: `NULL`  (treated as equal to `n_fft`)
+#' @param window (Tensor, optional) the optional window function.        
+#'   Default: `NULL` (treated as window of all \eqn{1} s)
+#' @param center (bool, optional) whether to pad `input` on both sides so        
+#'   that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.      
+#'   Default: `TRUE`
+#' @param pad_mode (string, optional) controls the padding method used when       
+#'  `center` is `TRUE`. Default: `"reflect"`
+#' @param normalized (bool, optional) controls whether to return the normalized 
+#'   STFT results Default: `FALSE`
+#' @param onesided (bool, optional) controls whether to return half of results to       
+#'   avoid redundancy Default: `TRUE`
+#' @param return_complex (bool, optional) controls whether to return complex tensors
+#'   or not.
 #' @name torch_stft
 #'
 #' @export

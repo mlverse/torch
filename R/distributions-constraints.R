@@ -297,41 +297,30 @@ is_dependent <- function(object){
   )
 )
 
-#' Public interface
-#' TODO: check .GreaterThan and other classes, 
-#' which are not instanced
-#' @export
+# Public interface
+# TODO: check .GreaterThan and other classes,
+# which are not instanced
+
 dependent <- .Dependent$new()
 
-#' @export
 boolean <- .Boolean$new()
 
-#' @export
 nonnegative_integer <- .IntegerGreaterThan$new(0)
 
-#' @export
 positive_integer <- .IntegerGreaterThan$new(1)
 
-#' @export
 real <- .Real$new()
 
-#' @export
 positive <- .GreaterThan$new(0.)
 
-#' @export
 greater_than <- .GreaterThan
 
-#' @export
 greater_than_eq <- .GreaterThanEq
 
-#' @export
 less_than <- .LessThan
 
-#' @export
 unit_interval <- .Interval$new(0., 1.)
 
-#' @export
 interval <- .Interval
 
-#' @export
 half_open_interval <- .HalfOpenInterval

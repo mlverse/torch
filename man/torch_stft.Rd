@@ -23,19 +23,30 @@ torch_stft(
 
 \item{n_fft}{(int) size of Fourier transform}
 
-\item{hop_length}{(int, optional) the distance between neighboring sliding window        frames. Default: \code{NULL} (treated as equal to \code{floor(n_fft / 4)})}
+\item{hop_length}{(int, optional) the distance between neighboring sliding window
+frames. Default: \code{NULL} (treated as equal to \code{floor(n_fft / 4)})}
 
-\item{win_length}{(int, optional) the size of window frame and STFT filter.        Default: \code{NULL}  (treated as equal to \code{n_fft})}
+\item{win_length}{(int, optional) the size of window frame and STFT filter.
+Default: \code{NULL}  (treated as equal to \code{n_fft})}
 
-\item{window}{(Tensor, optional) the optional window function.        Default: \code{NULL} (treated as window of all \eqn{1} s)}
+\item{window}{(Tensor, optional) the optional window function.
+Default: \code{NULL} (treated as window of all \eqn{1} s)}
 
-\item{center}{(bool, optional) whether to pad \code{input} on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.        Default: \code{TRUE}}
+\item{center}{(bool, optional) whether to pad \code{input} on both sides so
+that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.
+Default: \code{TRUE}}
 
-\item{pad_mode}{(string, optional) controls the padding method used when        \code{center} is \code{TRUE}. Default: \code{"reflect"}}
+\item{pad_mode}{(string, optional) controls the padding method used when
+\code{center} is \code{TRUE}. Default: \code{"reflect"}}
 
-\item{normalized}{(bool, optional) controls whether to return the normalized STFT results         Default: \code{FALSE}}
+\item{normalized}{(bool, optional) controls whether to return the normalized
+STFT results Default: \code{FALSE}}
 
-\item{onesided}{(bool, optional) controls whether to return half of results to        avoid redundancy Default: \code{TRUE}}
+\item{onesided}{(bool, optional) controls whether to return half of results to
+avoid redundancy Default: \code{TRUE}}
+
+\item{return_complex}{(bool, optional) controls whether to return complex tensors
+or not.}
 }
 \description{
 Stft

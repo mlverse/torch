@@ -24,6 +24,7 @@ is_dataloader <- function(x) {
 #' Get the next element of a dataloader iterator
 #' 
 #' @param iter a DataLoader iter created with [dataloader_make_iter].
+#' @param completed the returned value when the iterator is exhausted.
 #'
 #' @export
 dataloader_next <- function(iter, completed = NULL) {

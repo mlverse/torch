@@ -37,6 +37,8 @@ LSTM layer except the last layer, with dropout probability equal to
 \code{dropout}. Default: 0}
 
 \item{bidirectional}{If \code{TRUE}, becomes a bidirectional LSTM. Default: \code{FALSE}}
+
+\item{...}{currently unused.}
 }
 \description{
 For each element in the input sequence, each layer computes the following
@@ -73,8 +75,8 @@ Inputs: input, (h_0, c_0)
 \item \strong{input} of shape \verb{(seq_len, batch, input_size)}: tensor containing the features
 of the input sequence.
 The input can also be a packed variable length sequence.
-See \code{\link[=nn_util_rnn_pack_padded_sequence]{nn_util_rnn_pack_padded_sequence()}} or
-\code{\link[=nn_util_rnn_pack_sequence]{nn_util_rnn_pack_sequence()}} for details.
+See \code{\link[=nn_utils_rnn_pack_padded_sequence]{nn_utils_rnn_pack_padded_sequence()}} or
+\code{\link[=nn_utils_rnn_pack_sequence]{nn_utils_rnn_pack_sequence()}} for details.
 \item \strong{h_0} of shape \verb{(num_layers * num_directions, batch, hidden_size)}: tensor
 containing the initial hidden state for each element in the batch.
 \item \strong{c_0} of shape \verb{(num_layers * num_directions, batch, hidden_size)}: tensor
@@ -109,13 +111,13 @@ containing the cell state for \code{t = seq_len}
 \section{Attributes}{
 
 \itemize{
-\item weight_ih_l\link{k} : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
+\item \code{weight_ih_l[k]} : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
 \code{(W_ii|W_if|W_ig|W_io)}, of shape \verb{(4*hidden_size x input_size)}
-\item weight_hh_l\link{k} : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
+\item \code{weight_hh_l[k]} : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
 \code{(W_hi|W_hf|W_hg|W_ho)}, of shape \verb{(4*hidden_size x hidden_size)}
-\item bias_ih_l\link{k} : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
+\item \code{bias_ih_l[k]} : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
 \code{(b_ii|b_if|b_ig|b_io)}, of shape \code{(4*hidden_size)}
-\item bias_hh_l\link{k} : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
+\item \code{bias_hh_l[k]} : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
 \code{(b_hi|b_hf|b_hg|b_ho)}, of shape \code{(4*hidden_size)}
 }
 }

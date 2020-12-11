@@ -36,6 +36,8 @@ GRU layer except the last layer, with dropout probability equal to
 \code{dropout}. Default: 0}
 
 \item{bidirectional}{If \code{TRUE}, becomes a bidirectional GRU. Default: \code{FALSE}}
+
+\item{...}{currently unused.}
 }
 \description{
 For each element in the input sequence, each layer computes the following
@@ -68,7 +70,7 @@ Inputs: input, h_0
 \itemize{
 \item \strong{input} of shape \verb{(seq_len, batch, input_size)}: tensor containing the features
 of the input sequence. The input can also be a packed variable length
-sequence. See \code{\link[=nn_util_rnn_pack_padded_sequence]{nn_util_rnn_pack_padded_sequence()}}
+sequence. See \code{\link[=nn_utils_rnn_pack_padded_sequence]{nn_utils_rnn_pack_padded_sequence()}}
 for details.
 \item \strong{h_0} of shape \verb{(num_layers * num_directions, batch, hidden_size)}: tensor
 containing the initial hidden state for each element in the batch.
@@ -99,13 +101,13 @@ Like \emph{output}, the layers can be separated using
 \section{Attributes}{
 
 \itemize{
-\item weight_ih_l\link{k} : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
+\item \code{weight_ih_l[k]} : the learnable input-hidden weights of the \eqn{\mbox{k}^{th}} layer
 (W_ir|W_iz|W_in), of shape \verb{(3*hidden_size x input_size)}
-\item weight_hh_l\link{k} : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
+\item \code{weight_hh_l[k]} : the learnable hidden-hidden weights of the \eqn{\mbox{k}^{th}} layer
 (W_hr|W_hz|W_hn), of shape \verb{(3*hidden_size x hidden_size)}
-\item bias_ih_l\link{k} : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
+\item \code{bias_ih_l[k]} : the learnable input-hidden bias of the \eqn{\mbox{k}^{th}} layer
 (b_ir|b_iz|b_in), of shape \code{(3*hidden_size)}
-\item bias_hh_l\link{k} : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
+\item \code{bias_hh_l[k]} : the learnable hidden-hidden bias of the \eqn{\mbox{k}^{th}} layer
 (b_hr|b_hz|b_hn), of shape \code{(3*hidden_size)}
 }
 }
