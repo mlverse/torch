@@ -431,7 +431,8 @@ test_that("print method works", {
     }
   )
   
-  expect_snapshot_output(my_module())
+  withr::with_options(new = c(cli.width = 50), 
+                      expect_snapshot_output(my_module()))
 })
 
 test_that("error when trying to modify the parameter list", {
