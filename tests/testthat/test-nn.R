@@ -411,3 +411,22 @@ test_that("allow nn_modules with private and active methods", {
   expect_tensor_shape(o[[2]], c(100, 1))
   
 })
+
+test_that("print method works", {
+  local_edition(3)
+  my_module <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 10)
+      self$linear2 <- nn_linear(10, 1)
+      self$x <- nn_parameter(torch_randn(10, 10))
+      self$k <- nn_buffer(torch_randn(5,5))
+    },
+    forward = function(x) {
+      x %>% 
+        self$linear() %>% 
+        self$linear2()
+    }
+  )
+  
+  expect_snapshot_output(my_module())
+})

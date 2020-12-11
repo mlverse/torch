@@ -111,6 +111,10 @@ nn_Module <- R6::R6Class(
       })
     },
     
+    print = function() {
+      print_nn_module(self, private)
+    },
+    
     .save_to_state_dict = function(prefix, keepvars) {
       
       out <- list()
@@ -559,3 +563,63 @@ nn_module_list <- nn_module(
 length.nn_module_list <- function(x, ...) {
   length(x$.__enclos_env__$private$modules_)
 }
+
+print_nn_module <- function(self, private) {
+  
+  cli::cat_line(
+    "An `nn_module` containing ", 
+    scales::comma(get_parameter_count(self)),
+    " parameters."
+  )
+  
+  if (length(private$modules_) > 0) {
+    cli::cat_line()
+    cli::cat_rule("Modules")
+    sapply(names(private$modules_), function(x) {
+      cli_module_item(x, private$modules_[[x]])
+    })
+  }
+  
+  if (length(private$parameters_) > 0) {
+    cli::cat_line()
+    cli::cat_rule("Parameters")
+    sapply(names(private$parameters_), function(x) {
+      cli_tensor_item(x, private$parameters_[[x]])
+    })
+  }
+  
+  if (length(private$buffers_) > 0) {
+    cli::cat_line()
+    cli::cat_rule("Buffers")
+    sapply(names(private$buffers_), function(x) {
+      cli_tensor_item(x, private$buffers_[[x]])
+    })
+  }
+}
+
+cli_module_item <- function(name, module) {
+  cli::cat_bullet(paste0(
+    name, 
+    ": <", class(module)[1], "> #", 
+    scales::comma(get_parameter_count(module)), 
+    " parameters"
+  ))
+}
+
+cli_tensor_item <- function(name, tensor) {
+  cli::cat_bullet(paste0(
+   name, 
+   ": ",
+   make_str_torch_tensor(tensor)
+  ))
+}
+
+get_parameter_count <- function(self) {
+  
+  if (length(self$parameters) == 0)
+    return(0)
+  
+  pars <- sapply(self$parameters, function(x) prod(x$shape))
+  sum(pars)
+}
+
