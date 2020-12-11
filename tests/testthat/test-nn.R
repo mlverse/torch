@@ -414,6 +414,9 @@ test_that("allow nn_modules with private and active methods", {
 
 test_that("print method works", {
   local_edition(3)
+  skip_on_os("windows")
+  skip_on_os("linux")
+  
   my_module <- nn_module(
     initialize = function() {
       self$linear <- nn_linear(10, 10)
