@@ -572,11 +572,15 @@ length.nn_module_list <- function(x, ...) {
   length(x$.__enclos_env__$private$modules_)
 }
 
+comma <- function(x) {
+  format(x, nsmall=0, big.mark=",", scientific = FALSE)
+}
+
 print_nn_module <- function(self, private) {
   
   cli::cat_line(
     "An `nn_module` containing ", 
-    scales::comma(get_parameter_count(self)),
+    comma(get_parameter_count(self)),
     " parameters."
   )
   
@@ -609,7 +613,7 @@ cli_module_item <- function(name, module) {
   cli::cat_bullet(paste0(
     name, 
     ": <", class(module)[1], "> #", 
-    scales::comma(get_parameter_count(module)), 
+    comma(get_parameter_count(module)), 
     " parameters"
   ))
 }
