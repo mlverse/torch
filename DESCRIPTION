@@ -33,11 +33,12 @@ Imports:
     magrittr,
     tools,
     coro,
-    callr
+    callr,
+    cli
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:
-    testthat (>= 2.1.0),
+    testthat (>= 3.0.0),
     covr,
     knitr,
     rmarkdown,

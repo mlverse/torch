@@ -411,3 +411,43 @@ test_that("allow nn_modules with private and active methods", {
   expect_tensor_shape(o[[2]], c(100, 1))
   
 })
+
+test_that("print method works", {
+  local_edition(3)
+  skip_on_os("windows")
+  skip_on_os("linux")
+  
+  my_module <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 10)
+      self$linear2 <- nn_linear(10, 1)
+      self$x <- nn_parameter(torch_randn(10, 10))
+      self$k <- nn_buffer(torch_randn(5,5))
+    },
+    forward = function(x) {
+      x %>% 
+        self$linear() %>% 
+        self$linear2()
+    }
+  )
+  
+  withr::with_options(new = c(cli.width = 50), 
+                      expect_snapshot_output(my_module()))
+})
+
+test_that("error when trying to modify the parameter list", {
+  
+  x <- nn_linear(10, 10)
+  
+  expect_error(
+    x$parameters <- list(1),
+    class = "runtime_error",
+    regexp = "It's not possible"
+  )
+  
+  expect_error(
+    x$parameters$weight <- torch_tensor(1),
+    class = "runtime_error",
+    regexp = "It's not possible"
+  )
+})
