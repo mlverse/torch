@@ -281,6 +281,10 @@ GRU layer except the last layer, with dropout probability equal to
       <th>bidirectional</th>
       <td><p>If <code>TRUE</code>, becomes a bidirectional GRU. Default: <code>FALSE</code></p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>currently unused.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -310,7 +314,7 @@ where \(k = \frac{1}{\mbox{hidden\_size}}\)</p>
 <p>Inputs: input, h_0</p><ul>
 <li><p><strong>input</strong> of shape <code>(seq_len, batch, input_size)</code>: tensor containing the features
 of the input sequence. The input can also be a packed variable length
-sequence. See <code>nn_util_rnn_pack_padded_sequence()</code>
+sequence. See <code><a href='nn_utils_rnn_pack_padded_sequence.html'>nn_utils_rnn_pack_padded_sequence()</a></code>
 for details.</p></li>
 <li><p><strong>h_0</strong> of shape <code>(num_layers * num_directions, batch, hidden_size)</code>: tensor
 containing the initial hidden state for each element in the batch.
@@ -342,13 +346,13 @@ Like <em>output</em>, the layers can be separated using
     
 
 <ul>
-<li><p>weight_ih_lk : the learnable input-hidden weights of the \(\mbox{k}^{th}\) layer
+<li><p><code>weight_ih_l[k]</code> : the learnable input-hidden weights of the \(\mbox{k}^{th}\) layer
 (W_ir|W_iz|W_in), of shape <code>(3*hidden_size x input_size)</code></p></li>
-<li><p>weight_hh_lk : the learnable hidden-hidden weights of the \(\mbox{k}^{th}\) layer
+<li><p><code>weight_hh_l[k]</code> : the learnable hidden-hidden weights of the \(\mbox{k}^{th}\) layer
 (W_hr|W_hz|W_hn), of shape <code>(3*hidden_size x hidden_size)</code></p></li>
-<li><p>bias_ih_lk : the learnable input-hidden bias of the \(\mbox{k}^{th}\) layer
+<li><p><code>bias_ih_l[k]</code> : the learnable input-hidden bias of the \(\mbox{k}^{th}\) layer
 (b_ir|b_iz|b_in), of shape <code>(3*hidden_size)</code></p></li>
-<li><p>bias_hh_lk : the learnable hidden-hidden bias of the \(\mbox{k}^{th}\) layer
+<li><p><code>bias_hh_l[k]</code> : the learnable hidden-hidden bias of the \(\mbox{k}^{th}\) layer
 (b_hr|b_hz|b_hn), of shape <code>(3*hidden_size)</code></p></li>
 </ul>
 
