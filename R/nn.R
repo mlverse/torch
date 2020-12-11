@@ -219,7 +219,15 @@ nn_Module <- R6::R6Class(
     non_persistent_buffers_ = character()
   ),
   active = list(
-    parameters = function() {
+    parameters = function(value) {
+      
+      if (!missing(value))
+        runtime_error(
+          "It's not possible to modify the parameters list.\n",
+          " You can modify the parameter in-place or use",
+          " `module$parameter_name <- new_value`"
+          )
+      
       pars <- lapply(private$modules_, function(x) x$parameters)
       pars <- append(pars, private$parameters_)
       pars <- unlist(pars, recursive = TRUE, use.names = TRUE)

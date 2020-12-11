@@ -430,3 +430,20 @@ test_that("print method works", {
   
   expect_snapshot_output(my_module())
 })
+
+test_that("error when trying to modify the parameter list", {
+  
+  x <- nn_linear(10, 10)
+  
+  expect_error(
+    x$parameters <- list(1),
+    class = "runtime_error",
+    regexp = "It's not possible"
+  )
+  
+  expect_error(
+    x$parameters$weight <- torch_tensor(1),
+    class = "runtime_error",
+    regexp = "It's not possible"
+  )
+})
