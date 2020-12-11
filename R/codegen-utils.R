@@ -162,6 +162,9 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   if (any("TensorList" == expected_types) && is_torch_tensor(obj))
     return(list(torch_tensor_list(list(obj))$ptr, "TensorList"))
   
+  if (any("Scalar" == expected_types) && is_torch_tensor(obj))
+    return(list(torch_scalar(obj$item())$ptr, "Scalar"))
+  
   stop("Can't convert argument", call.=FALSE)
 }
 
