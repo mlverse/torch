@@ -34,6 +34,7 @@
 - Fixed `torch_argmax`, `torch_argmin`, `x$argmax()` and `x$argmin()` return 1-based indexes. (#389)
 - Initial support for JIT tracing (#377)
 - Added LBFGS optimizer (#392)
+- Improved the `nn_module` UI by improving autocomplete support and adding a print method (#391)
 
 # torch 0.1.1
 
