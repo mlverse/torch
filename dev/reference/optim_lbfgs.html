@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Logsumexp — torch_logsumexp • torch</title>
+<title>LBFGS optimizer — optim_lbfgs • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Logsumexp — torch_logsumexp" />
-<meta property="og:description" content="Logsumexp" />
+<meta property="og:title" content="LBFGS optimizer — optim_lbfgs" />
+<meta property="og:description" content="Implements L-BFGS algorithm, heavily inspired by
+minFunc" />
 
 
 <meta name="robots" content="noindex">
@@ -221,62 +222,81 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Logsumexp</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_logsumexp.Rd</code></div>
+    <h1>LBFGS optimizer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/optim-lbfgs.R'><code>R/optim-lbfgs.R</code></a></small>
+    <div class="hidden name"><code>optim_lbfgs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Logsumexp</p>
+    <p>Implements L-BFGS algorithm, heavily inspired by
+<a href='https://www.cs.ubc.ca/~schmidtm/Software/minFunc.html'>minFunc</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_logsumexp</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>dim</span>, keepdim <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>optim_lbfgs</span><span class='op'>(</span>
+  <span class='va'>params</span>,
+  lr <span class='op'>=</span> <span class='fl'>1</span>,
+  max_iter <span class='op'>=</span> <span class='fl'>20</span>,
+  max_eval <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tolerance_grad <span class='op'>=</span> <span class='fl'>1e-07</span>,
+  tolerance_change <span class='op'>=</span> <span class='fl'>1e-09</span>,
+  history_size <span class='op'>=</span> <span class='fl'>100</span>,
+  line_search_fn <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor.</p></td>
+      <th>params</th>
+      <td><p>(iterable): iterable of parameters to optimize or dicts defining
+parameter groups</p></td>
     </tr>
     <tr>
-      <th>dim</th>
-      <td><p>(int or tuple of ints) the dimension or dimensions to reduce.</p></td>
+      <th>lr</th>
+      <td><p>(float): learning rate (default: 1)</p></td>
     </tr>
     <tr>
-      <th>keepdim</th>
-      <td><p>(bool) whether the output tensor has <code>dim</code> retained or not.</p></td>
+      <th>max_iter</th>
+      <td><p>(int): maximal number of iterations per optimization step
+(default: 20)</p></td>
+    </tr>
+    <tr>
+      <th>max_eval</th>
+      <td><p>(int): maximal number of function evaluations per optimization
+step (default: max_iter * 1.25).</p></td>
+    </tr>
+    <tr>
+      <th>tolerance_grad</th>
+      <td><p>(float): termination tolerance on first order optimality
+(default: 1e-5).</p></td>
+    </tr>
+    <tr>
+      <th>tolerance_change</th>
+      <td><p>(float): termination tolerance on function
+value/parameter changes (default: 1e-9).</p></td>
+    </tr>
+    <tr>
+      <th>history_size</th>
+      <td><p>(int): update history size (default: 100).
+line_search_fn (str): either 'strong_wolfe' or None (default: None).</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="logsumexp-input-dim-keepdim-false-out-null-"><a class="anchor" href="#logsumexp-input-dim-keepdim-false-out-null-"></a>logsumexp(input, dim, keepdim=False, out=NULL) </h2>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This is a very memory intensive optimizer (it requires additional
+<code>param_bytes * (history_size + 1)</code> bytes). If it doesn't fit in memory
+try reducing the history size, or use a different algorithm.</p>
+    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     
 
 
-<p>Returns the log of summed exponentials of each row of the <code>input</code>
-tensor in the given dimension <code>dim</code>. The computation is numerically
-stabilized.</p>
-<p>For summation index \(j\) given by <code>dim</code> and other indices \(i\), the result is</p>
-<p>$$
-        \mbox{logsumexp}(x)_{i} = \log \sum_j \exp(x_{ij})
-$$</p>
-<p>If <code>keepdim</code> is <code>TRUE</code>, the output tensor is of the same size
-as <code>input</code> except in the dimension(s) <code>dim</code> where it is of size 1.
-Otherwise, <code>dim</code> is squeezed (see <code><a href='torch_squeeze.html'>torch_squeeze</a></code>), resulting in the
-output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
+<p>This optimizer doesn't support per-parameter options and parameter
+groups (there can be only one).</p>
+<p>Right now all parameters have to be on a single device. This will be
+improved in the future.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_logsumexp</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  1.6330
-#&gt;  2.1584
-#&gt;  1.4396
-#&gt; [ CPUFloatType{3} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
