@@ -33,8 +33,9 @@ step (default: max_iter * 1.25).}
 \item{tolerance_change}{(float): termination tolerance on function
 value/parameter changes (default: 1e-9).}
 
-\item{history_size}{(int): update history size (default: 100).
-line_search_fn (str): either 'strong_wolfe' or None (default: None).}
+\item{history_size}{(int): update history size (default: 100).}
+
+\item{line_search_fn}{(str): either 'strong_wolfe' or None (default: None).}
 }
 \description{
 Implements L-BFGS algorithm, heavily inspired by

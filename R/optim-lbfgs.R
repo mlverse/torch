@@ -323,7 +323,7 @@ optim_LBFGS <- R6::R6Class(
 #' @param tolerance_change (float): termination tolerance on function
 #'   value/parameter changes (default: 1e-9).
 #' @param history_size (int): update history size (default: 100).
-#'   line_search_fn (str): either 'strong_wolfe' or None (default: None).
+#' @param line_search_fn (str): either 'strong_wolfe' or None (default: None).
 #' @inheritParams optim_sgd
 #' 
 #' 

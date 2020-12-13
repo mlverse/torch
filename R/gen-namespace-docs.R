@@ -5510,7 +5510,7 @@ NULL
 #' formed by [torch_geqrf()] that is represented by `(a, tau)` (given by (`input`, `input2`)).
 #' 
 #' This directly calls the underlying LAPACK function `?ormqr`.
-#' See [LAPACK documentation for ormqr](https://software.intel.com/content/www/us/en/develop/documentation/mkl-developer-reference-c/top/scalapack-routines/scalapack-computational-routines/orthogonal-factorizations-scalapack-computational-routines/p-ormqr.html) for further details.
+#' See [LAPACK documentation for ormqr](https://software.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top.html) for further details.
 #'
 #'
 #' @param self (Tensor) the `a` from [`torch_geqrf`].

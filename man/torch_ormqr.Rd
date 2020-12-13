@@ -28,6 +28,6 @@ Multiplies \code{mat} (given by \code{input3}) by the orthogonal \code{Q} matrix
 formed by \code{\link[=torch_geqrf]{torch_geqrf()}} that is represented by \verb{(a, tau)} (given by (\code{input}, \code{input2})).
 
 This directly calls the underlying LAPACK function \code{?ormqr}.
-See \href{https://software.intel.com/content/www/us/en/develop/documentation/mkl-developer-reference-c/top/scalapack-routines/scalapack-computational-routines/orthogonal-factorizations-scalapack-computational-routines/p-ormqr.html}{LAPACK documentation for ormqr} for further details.
+See \href{https://software.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top.html}{LAPACK documentation for ormqr} for further details.
 }
 
