@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -102,7 +102,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginers guide</li>
+    <li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -146,6 +146,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="articles/installation.html">Installation</a>
+    </li>
     <li class="dropdown-header">Tensors</li>
     <li>
       <a href="articles/tensor-creation.html">Creating tensors</a>
@@ -250,7 +253,34 @@
 <div id="code-contributions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#code-contributions" class="anchor"></a>Code contributions</h2>
-<p>We have many open issues in the <a href="https://github.com/mlverse/torch/issues">github repo</a> if there’s one item that you want to work on, you can comment on it an ask for directions.</p>
+<p>We have many open issues in the <a href="https://github.com/mlverse/torch/issues">github repo</a> if there’s one item that you want to work on, you can comment on it and ask for directions.</p>
+<div id="requirements" class="section level3">
+<h3 class="hasAnchor">
+<a href="#requirements" class="anchor"></a>Requirements</h3>
+<ul>
+<li>R installation</li>
+<li>R Tools for compilation (only on Windows)</li>
+<li>The <code>devtools</code> package</li>
+<li>CMake to compile lantern binaries</li>
+</ul>
+</div>
+<div id="workflow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#workflow" class="anchor"></a>Workflow</h3>
+<p>We use <code>devtools</code> as the toolchain for development, but a few steps must be done before setiing up.</p>
+<p>The first time you clone the repository, you must run:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"tools/buildlantern.R"</span><span class="op">)</span></code></pre></div>
+<p>This will compile Lantern binaries and download LibTorch and copy the binaries to <code>deps</code> folder in the working directory.</p>
+<p>This command must be run everytime you modify lantern code. ie. code that lives in <code>lantern/src</code>.</p>
+<p>You can the run</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">load_all</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>To load torch and test interactively. Or</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">test</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>To run the test suite.</p>
+</div>
 </div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">

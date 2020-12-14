@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginers guide</li>
+    <li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -147,6 +147,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/installation.html">Installation</a>
+    </li>
     <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
@@ -236,7 +239,8 @@
   center <span class='op'>=</span> <span class='cn'>TRUE</span>,
   pad_mode <span class='op'>=</span> <span class='st'>"reflect"</span>,
   normalized <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  onesided <span class='op'>=</span> <span class='cn'>TRUE</span>
+  onesided <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  return_complex <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -252,31 +256,44 @@
     </tr>
     <tr>
       <th>hop_length</th>
-      <td><p>(int, optional) the distance between neighboring sliding window        frames. Default: <code>NULL</code> (treated as equal to <code><a href='https://rdrr.io/r/base/Round.html'>floor(n_fft / 4)</a></code>)</p></td>
+      <td><p>(int, optional) the distance between neighboring sliding window
+frames. Default: <code>NULL</code> (treated as equal to <code><a href='https://rdrr.io/r/base/Round.html'>floor(n_fft / 4)</a></code>)</p></td>
     </tr>
     <tr>
       <th>win_length</th>
-      <td><p>(int, optional) the size of window frame and STFT filter.        Default: <code>NULL</code>  (treated as equal to <code>n_fft</code>)</p></td>
+      <td><p>(int, optional) the size of window frame and STFT filter.
+Default: <code>NULL</code>  (treated as equal to <code>n_fft</code>)</p></td>
     </tr>
     <tr>
       <th>window</th>
-      <td><p>(Tensor, optional) the optional window function.        Default: <code>NULL</code> (treated as window of all \(1\) s)</p></td>
+      <td><p>(Tensor, optional) the optional window function.
+Default: <code>NULL</code> (treated as window of all \(1\) s)</p></td>
     </tr>
     <tr>
       <th>center</th>
-      <td><p>(bool, optional) whether to pad <code>input</code> on both sides so        that the \(t\)-th frame is centered at time \(t \times \mbox{hop\_length}\).        Default: <code>TRUE</code></p></td>
+      <td><p>(bool, optional) whether to pad <code>input</code> on both sides so
+that the \(t\)-th frame is centered at time \(t \times \mbox{hop\_length}\).
+Default: <code>TRUE</code></p></td>
     </tr>
     <tr>
       <th>pad_mode</th>
-      <td><p>(string, optional) controls the padding method used when        <code>center</code> is <code>TRUE</code>. Default: <code>"reflect"</code></p></td>
+      <td><p>(string, optional) controls the padding method used when
+<code>center</code> is <code>TRUE</code>. Default: <code>"reflect"</code></p></td>
     </tr>
     <tr>
       <th>normalized</th>
-      <td><p>(bool, optional) controls whether to return the normalized STFT results         Default: <code>FALSE</code></p></td>
+      <td><p>(bool, optional) controls whether to return the normalized
+STFT results Default: <code>FALSE</code></p></td>
     </tr>
     <tr>
       <th>onesided</th>
-      <td><p>(bool, optional) controls whether to return half of results to        avoid redundancy Default: <code>TRUE</code></p></td>
+      <td><p>(bool, optional) controls whether to return half of results to
+avoid redundancy Default: <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>return_complex</th>
+      <td><p>(bool, optional) controls whether to return complex tensors
+or not.</p></td>
     </tr>
     </table>
 

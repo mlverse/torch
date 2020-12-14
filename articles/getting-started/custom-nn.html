@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -101,7 +101,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tensors</li>
+<li>
+      <a href="../../articles/installation.html">Installation</a>
+    </li>
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../../articles/tensor-creation.html">Creating tensors</a>
     </li>
@@ -169,7 +172,8 @@
 
       
 
-      </header><script src="custom-nn_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="custom-nn_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="custom-nn_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="custom-nn_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Custom nn modules</h1>
@@ -185,12 +189,12 @@
 <blockquote>
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py">here</a>. All credits goes to <a href="https://github.com/jcjohnson/pytorch-examples">Justin Johnson</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>Sometimes you will want to specify models that are more complex than a sequence of existing Modules; for these cases you can define your own Modules by using <code>nn_module</code> function and defining a forward which receives input Tensors and produces output Tensors using other modules or other autograd operations on Tensors.</p>
 <p>In this example we implement our two-layer network as a custom Module subclass:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">two_layer_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">two_layer_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
    <span class="st">"two_layer_net"</span>,
    initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">D_in</span>, <span class="va">H</span>, <span class="va">D_out</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">self</span><span class="op">$</span><span class="va">linear1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="va">D_in</span>, <span class="va">H</span><span class="op">)</span>
@@ -266,12 +270,12 @@
    <span class="co"># parameters</span>
    <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Step: 1 : 1.057115 </span>
-<span class="co">#&gt; Step: 100 : 1.045371 </span>
-<span class="co">#&gt; Step: 200 : 1.03376 </span>
-<span class="co">#&gt; Step: 300 : 1.022367 </span>
-<span class="co">#&gt; Step: 400 : 1.011174 </span>
-<span class="co">#&gt; Step: 500 : 1.000201</span></pre></div>
+<span class="co">#&gt; Step: 1 : 1.04628 </span>
+<span class="co">#&gt; Step: 100 : 1.033974 </span>
+<span class="co">#&gt; Step: 200 : 1.021832 </span>
+<span class="co">#&gt; Step: 300 : 1.009992 </span>
+<span class="co">#&gt; Step: 400 : 0.9984027 </span>
+<span class="co">#&gt; Step: 500 : 0.9870082</span></code></pre></div>
 <p>In the <a href="control-flow-and-weight-sharing.html">next example</a> we will about dynamic graphs in torch.</p>
   </div>
 

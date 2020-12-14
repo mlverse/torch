@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -101,7 +101,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tensors</li>
+<li>
+      <a href="../../articles/installation.html">Installation</a>
+    </li>
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../../articles/tensor-creation.html">Creating tensors</a>
     </li>
@@ -169,7 +172,8 @@
 
       
 
-      </header><script src="control-flow-and-weight-sharing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="control-flow-and-weight-sharing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="control-flow-and-weight-sharing_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="control-flow-and-weight-sharing_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Control flow &amp; Weight sharing</h1>
@@ -185,13 +189,13 @@
 <blockquote>
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py">here</a>. All credits goes to <a href="https://github.com/jcjohnson/pytorch-examples">Justin Johnson</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>As an example of dynamic graphs and weight sharing, we implement a very strange model: a fully-connected ReLU network that on each forward pass chooses a random number between 1 and 4 and uses that many hidden layers, reusing the same weights multiple times to compute the innermost hidden layers.</p>
 <p>For this model we can use normal R flow control to implement the loop, and we can implement weight sharing among the innermost layers by simply reusing the same Module multiple times when defining the forward pass.</p>
 <p>We can easily implement this model using <code>nn_module</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">dynamic_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dynamic_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
    <span class="st">"dynamic_net"</span>,
    <span class="co"># In the constructor we construct three nn_linear instances that we will use</span>
    <span class="co"># in the forward pass.</span>
@@ -253,7 +257,7 @@
 <span class="co"># optimization algorithms. The first argument to the Adam constructor tells the</span>
 <span class="co"># optimizer which Tensors it should update.</span>
 <span class="va">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">1e-4</span>
-<span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr<span class="op">=</span><span class="va">learning_rate</span>, momentum <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>
+<span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/optim_adam.html">optim_adam</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr<span class="op">=</span><span class="va">learning_rate</span><span class="op">)</span>
 
 <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
    <span class="co"># Forward pass: compute predicted y by passing x to the model. Module objects</span>
@@ -283,12 +287,12 @@
    <span class="co"># parameters</span>
    <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Step: 1 : 0.984449 </span>
-<span class="co">#&gt; Step: 100 : 0.9808377 </span>
-<span class="co">#&gt; Step: 200 : 0.9813455 </span>
-<span class="co">#&gt; Step: 300 : 0.9803184 </span>
-<span class="co">#&gt; Step: 400 : 0.9797473 </span>
-<span class="co">#&gt; Step: 500 : 0.9786749</span></pre></div>
+<span class="co">#&gt; Step: 1 : 1.013146 </span>
+<span class="co">#&gt; Step: 100 : 0.9793269 </span>
+<span class="co">#&gt; Step: 200 : 0.4408751 </span>
+<span class="co">#&gt; Step: 300 : 0.1257476 </span>
+<span class="co">#&gt; Step: 400 : 0.05437518 </span>
+<span class="co">#&gt; Step: 500 : 0.01907376</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

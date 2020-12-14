@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -101,7 +101,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tensors</li>
+<li>
+      <a href="../../articles/installation.html">Installation</a>
+    </li>
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../../articles/tensor-creation.html">Creating tensors</a>
     </li>
@@ -169,7 +172,8 @@
 
       
 
-      </header><script src="index_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="index_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="index_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="index_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Tensor objects</h1>
@@ -182,8 +186,8 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>Central to torch is the <code>torch_tensor</code> objects. <code>torch_tensor</code>’s are R objects very similar to R6 instances. Tensors have a large amount of methods that can be called using the <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> operator.</p>
 <p>Following is a list of all methods that can be called by tensor objects and their documentation. You can also look at <a href="https://pytorch.org/docs/stable/tensors.html">PyTorch’s documentation</a> for additional details.</p>
 <div id="t" class="section level2">
@@ -232,7 +236,7 @@
 <h2 class="hasAnchor">
 <a href="#acosh" class="anchor"></a>acosh</h2>
 <p>acosh() -&gt; Tensor</p>
-<p>See <code>?torch_acosh</code></p>
+<p>See <code><a href="../../reference/torch_acosh.html">?torch_acosh</a></code></p>
 </div>
 <div id="acosh_" class="section level2">
 <h2 class="hasAnchor">
@@ -338,8 +342,8 @@
 <div id="examples" class="section level3">
 <h3 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples:</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># Example 1: Applying a mask</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Example 1: Applying a mask</span>
 <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randint.html">torch_randint</a></span><span class="op">(</span>low <span class="op">=</span> <span class="fl">0</span>, high <span class="op">=</span> <span class="fl">2</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">127</span>, <span class="fl">128</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_bool</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">refine_names</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'W'</span>, <span class="st">'H'</span><span class="op">)</span><span class="op">)</span>
 <span class="va">imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">128</span>, <span class="fl">127</span>, <span class="fl">3</span>, names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'N'</span>, <span class="st">'H'</span>, <span class="st">'W'</span>, <span class="st">'C'</span><span class="op">)</span><span class="op">)</span>
 <span class="va">imgs</span><span class="op">$</span><span class="fu">masked_fill_</span><span class="op">(</span><span class="va">mask</span><span class="op">$</span><span class="fu">align_as</span><span class="op">(</span><span class="va">imgs</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span>
@@ -359,7 +363,7 @@
 <span class="co"># scale_channels is agnostic to the dimension order of the input</span>
 <span class="fu">scale_channels</span><span class="op">(</span><span class="va">imgs</span>, <span class="va">scale</span><span class="op">)</span>
 <span class="fu">scale_channels</span><span class="op">(</span><span class="va">more_imgs</span>, <span class="va">scale</span><span class="op">)</span>
-<span class="fu">scale_channels</span><span class="op">(</span><span class="va">videos</span>, <span class="va">scale</span><span class="op">)</span></pre></div>
+<span class="fu">scale_channels</span><span class="op">(</span><span class="va">videos</span>, <span class="va">scale</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="warning" class="section level3">
 <h3 class="hasAnchor">
@@ -398,10 +402,10 @@
 <div id="examples-2" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-2" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>dtype <span class="op">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_bool</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>dtype <span class="op">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_bool</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">a</span>
-<span class="va">a</span><span class="op">$</span><span class="fu">all</span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="va">a</span><span class="op">$</span><span class="fu">all</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>all(dim, keepdim=FALSE, out=NULL) -&gt; Tensor</p>
 <p>Returns TRUE if all elements in each row of the tensor in the given dimension <code>dim</code> are TRUE, FALSE otherwise.</p>
 <p>If <code>keepdim</code> is <code>TRUE</code>, the output tensor is of the same size as <code>input</code> except in the dimension <code>dim</code> where it is of size 1. Otherwise, <code>dim</code> is squeezed (see <code>?torch_squeeze()),</code> resulting in the output tensor having 1 fewer dimension than <code>input</code>.</p>
@@ -418,11 +422,11 @@
 <div id="examples-3" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-3" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>dtype <span class="op">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_bool</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>dtype <span class="op">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_bool</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">a</span>
 <span class="va">a</span><span class="op">$</span><span class="fu">all</span><span class="op">(</span>dim<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">a</span><span class="op">$</span><span class="fu">all</span><span class="op">(</span>dim<span class="op">=</span><span class="fl">1</span><span class="op">)</span></pre></div>
+<span class="va">a</span><span class="op">$</span><span class="fu">all</span><span class="op">(</span>dim<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="allclose" class="section level2">
@@ -445,10 +449,10 @@
 <div id="examples-4" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-4" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>dtype <span class="op">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_bool</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>dtype <span class="op">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_bool</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">a</span>
-<span class="va">a</span><span class="op">$</span><span class="fu">any</span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="va">a</span><span class="op">$</span><span class="fu">any</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>any(dim, keepdim=FALSE, out=NULL) -&gt; Tensor</p>
 <p>Returns TRUE if any elements in each row of the tensor in the given dimension <code>dim</code> are TRUE, FALSE otherwise.</p>
 <p>If <code>keepdim</code> is <code>TRUE</code>, the output tensor is of the same size as <code>input</code> except in the dimension <code>dim</code> where it is of size 1. Otherwise, <code>dim</code> is squeezed (see <code>?torch_squeeze()),</code> resulting in the output tensor having 1 fewer dimension than <code>input</code>.</p>
@@ -465,11 +469,11 @@
 <div id="examples-5" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-5" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0</span>
 <span class="va">a</span>
 <span class="va">a</span><span class="op">$</span><span class="fu">any</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">a</span><span class="op">$</span><span class="fu">any</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></pre></div>
+<span class="va">a</span><span class="op">$</span><span class="fu">any</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="apply_" class="section level2">
@@ -529,7 +533,7 @@
 <h2 class="hasAnchor">
 <a href="#asinh" class="anchor"></a>asinh</h2>
 <p>asinh() -&gt; Tensor</p>
-<p>See <code>?torch_asinh</code></p>
+<p>See <code><a href="../../reference/torch_asinh.html">?torch_asinh</a></code></p>
 </div>
 <div id="asinh_" class="section level2">
 <h2 class="hasAnchor">
@@ -565,7 +569,7 @@
 <h2 class="hasAnchor">
 <a href="#atanh" class="anchor"></a>atanh</h2>
 <p>atanh() -&gt; Tensor</p>
-<p>See <code>?torch_atanh</code></p>
+<p>See <code><a href="../../reference/torch_atanh.html">?torch_atanh</a></code></p>
 </div>
 <div id="atanh_" class="section level2">
 <h2 class="hasAnchor">
@@ -1084,8 +1088,8 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <div id="examples-6" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-6" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">element_size</span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">element_size</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="eq" class="section level2">
@@ -1177,11 +1181,11 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <div id="examples-7" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-7" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">expand</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">expand</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># -1 means not changing the size of that dimension</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="fu">expand</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># -1 means not changing the size of that dimension</span></code></pre></div>
 </div>
 </div>
 <div id="expand_as" class="section level2">
@@ -1248,13 +1252,13 @@ f(x) = \lambda e^{-\lambda x}
 <div id="examples-8" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-8" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">a</span><span class="op">$</span><span class="fu">fill_diagonal_</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
 <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">b</span><span class="op">$</span><span class="fu">fill_diagonal_</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
 <span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">3</span><span class="op">)</span>
-<span class="va">c</span><span class="op">$</span><span class="fu">fill_diagonal_</span><span class="op">(</span><span class="fl">5</span>, wrap<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<span class="va">c</span><span class="op">$</span><span class="fu">fill_diagonal_</span><span class="op">(</span><span class="fl">5</span>, wrap<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="flatten" class="section level2">
@@ -1273,13 +1277,13 @@ f(x) = \lambda e^{-\lambda x}
 <h2 class="hasAnchor">
 <a href="#fliplr" class="anchor"></a>fliplr</h2>
 <p>fliplr() -&gt; Tensor</p>
-<p>See <code>?torch_fliplr</code></p>
+<p>See <code><a href="../../reference/torch_fliplr.html">?torch_fliplr</a></code></p>
 </div>
 <div id="flipud" class="section level2">
 <h2 class="hasAnchor">
 <a href="#flipud" class="anchor"></a>flipud</h2>
 <p>flipud() -&gt; Tensor</p>
-<p>See <code>?torch_flipud</code></p>
+<p>See <code><a href="../../reference/torch_flipud.html">?torch_flipud</a></code></p>
 </div>
 <div id="float" class="section level2">
 <h2 class="hasAnchor">
@@ -1390,10 +1394,10 @@ f(X=k) = p^{k - 1} (1 - p)
 <div id="examples-9" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-9" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, device<span class="op">=</span><span class="st">'cuda:0'</span><span class="op">)</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, device<span class="op">=</span><span class="st">'cuda:0'</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">get_device</span><span class="op">(</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">cpu</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">get_device</span><span class="op">(</span><span class="op">)</span>  <span class="co"># RuntimeError: get_device is not implemented for type torch_FloatTensor</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="fu">cpu</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">get_device</span><span class="op">(</span><span class="op">)</span>  <span class="co"># RuntimeError: get_device is not implemented for type torch_FloatTensor</span></code></pre></div>
 </div>
 </div>
 <div id="grad" class="section level2">
@@ -1462,10 +1466,10 @@ f(X=k) = p^{k - 1} (1 - p)
 <div id="examples-10" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-10" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, dtype<span class="op">=</span><span class="fu">torch_cfloat</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, dtype<span class="op">=</span><span class="fu">torch_cfloat</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="va">x</span><span class="op">$</span><span class="va">imag</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="va">imag</span></code></pre></div>
 </div>
 </div>
 <div id="index_add" class="section level2">
@@ -1497,11 +1501,11 @@ f(X=k) = p^{k - 1} (1 - p)
 <div id="examples-11" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-11" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_float</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">index</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">4L</span>, <span class="fl">3L</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">index_add_</span><span class="op">(</span><span class="fl">1</span>, <span class="va">index</span>, <span class="va">t</span><span class="op">)</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="fu">index_add_</span><span class="op">(</span><span class="fl">1</span>, <span class="va">index</span>, <span class="va">t</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="index_copy" class="section level2">
@@ -1528,11 +1532,11 @@ f(X=k) = p^{k - 1} (1 - p)
 <div id="examples-12" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-12" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_float</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">index</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">index_copy_</span><span class="op">(</span><span class="fl">1</span>, <span class="va">index</span>, <span class="va">t</span><span class="op">)</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="fu">index_copy_</span><span class="op">(</span><span class="fl">1</span>, <span class="va">index</span>, <span class="va">t</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="index_fill" class="section level2">
@@ -1558,10 +1562,10 @@ f(X=k) = p^{k - 1} (1 - p)
 <div id="examples-13" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-13" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_float</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_float</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">index</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">index_fill_</span><span class="op">(</span><span class="fl">1</span>, <span class="va">index</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="fu">index_fill_</span><span class="op">(</span><span class="fl">1</span>, <span class="va">index</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="index_put" class="section level2">
@@ -1676,8 +1680,8 @@ f(X=k) = p^{k - 1} (1 - p)
 <div id="examples-14" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-14" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">10</span>, requires_grad<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">10</span>, requires_grad<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">a</span><span class="op">$</span><span class="va">is_leaf</span>
 
 <span class="co"># b &lt;- torch_rand(10, requires_grad=TRUE)$cuda()</span>
@@ -1702,7 +1706,7 @@ f(X=k) = p^{k - 1} (1 - p)
 <span class="co"># f &lt;- torch_rand(10, requires_grad=TRUE, device="cuda")</span>
 <span class="co"># f$is_leaf</span>
 <span class="co"># TRUE</span>
-<span class="co"># f requires grad, has no operation creating it</span></pre></div>
+<span class="co"># f requires grad, has no operation creating it</span></code></pre></div>
 </div>
 </div>
 <div id="is_meta" class="section level2">
@@ -1742,7 +1746,7 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 class="hasAnchor">
 <a href="#isclose" class="anchor"></a>isclose</h2>
 <p>isclose(other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -&gt; Tensor</p>
-<p>See <code>?torch_isclose</code></p>
+<p>See <code><a href="../../reference/torch_isclose.html">?torch_isclose</a></code></p>
 </div>
 <div id="isfinite" class="section level2">
 <h2 class="hasAnchor">
@@ -1765,16 +1769,16 @@ f(X=k) = p^{k - 1} (1 - p)
 <div id="istft" class="section level2">
 <h2 class="hasAnchor">
 <a href="#istft" class="anchor"></a>istft</h2>
-<p>See <code>?torch_istft</code> ## item</p>
+<p>See <code><a href="../../reference/torch_istft.html">?torch_istft</a></code> ## item</p>
 <p>item() -&gt; number</p>
 <p>Returns the value of this tensor as a standard Python number. This only works for tensors with one element. For other cases, see <code>$tolist</code>.</p>
 <p>This operation is not differentiable.</p>
 <div id="examples-15" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-15" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1.0</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1.0</span><span class="op">)</span>
+<span class="va">x</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="kthvalue" class="section level2">
@@ -1880,7 +1884,7 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 class="hasAnchor">
 <a href="#logaddexp" class="anchor"></a>logaddexp</h2>
 <p>logaddexp(other) -&gt; Tensor</p>
-<p>See <code>?torch_logaddexp</code></p>
+<p>See <code><a href="../../reference/torch_logaddexp.html">?torch_logaddexp</a></code></p>
 </div>
 <div id="logaddexp2" class="section level2">
 <h2 class="hasAnchor">
@@ -1892,7 +1896,7 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 class="hasAnchor">
 <a href="#logcumsumexp" class="anchor"></a>logcumsumexp</h2>
 <p>logcumsumexp(dim) -&gt; Tensor</p>
-<p>See <code>?torch_logcumsumexp</code></p>
+<p>See <code><a href="../../reference/torch_logcumsumexp.html">?torch_logcumsumexp</a></code></p>
 </div>
 <div id="logdet" class="section level2">
 <h2 class="hasAnchor">
@@ -2157,10 +2161,10 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-16" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-16" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">narrow</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">narrow</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="fu">narrow</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="narrow_copy" class="section level2">
@@ -2228,9 +2232,9 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-17" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-17" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb18"><pre class="downlit">
-<span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
-<span class="va">tensor</span><span class="op">$</span><span class="fu">new_empty</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
+<span class="va">tensor</span><span class="op">$</span><span class="fu">new_empty</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="new_full" class="section level2">
@@ -2252,9 +2256,9 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-18" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-18" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb19"><pre class="downlit">
-<span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="va">tensor</span><span class="op">$</span><span class="fu">new_full</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fl">3.141592</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="va">tensor</span><span class="op">$</span><span class="fu">new_full</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fl">3.141592</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="new_ones" class="section level2">
@@ -2277,9 +2281,9 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-19" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-19" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb20"><pre class="downlit">
-<span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_int32</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="va">tensor</span><span class="op">$</span><span class="fu">new_ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_int32</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="va">tensor</span><span class="op">$</span><span class="fu">new_ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="new_tensor" class="section level2">
@@ -2307,10 +2311,10 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-20" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-20" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb21"><pre class="downlit">
-<span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, dtype<span class="op">=</span><span class="va">torch_int8</span><span class="op">)</span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, dtype<span class="op">=</span><span class="va">torch_int8</span><span class="op">)</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="va">tensor</span><span class="op">$</span><span class="fu">new_tensor</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></pre></div>
+<span class="va">tensor</span><span class="op">$</span><span class="fu">new_tensor</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="new_zeros" class="section level2">
@@ -2333,9 +2337,9 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-21" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-21" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb22"><pre class="downlit">
-<span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="va">tensor</span><span class="op">$</span><span class="fu">new_zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="va">tensor</span><span class="op">$</span><span class="fu">new_zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="nonzero" class="section level2">
@@ -2390,10 +2394,10 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-22" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-22" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb23"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">permute</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="fu">permute</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="pin_memory" class="section level2">
@@ -2456,9 +2460,9 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-23" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-23" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb24"><pre class="downlit">
-<span class="va">src</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">8</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">src</span><span class="op">$</span><span class="fu">put_</span><span class="op">(</span><span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">src</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">8</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="va">src</span><span class="op">$</span><span class="fu">put_</span><span class="op">(</span><span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="q_per_channel_axis" class="section level2">
@@ -2533,10 +2537,10 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-24" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-24" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb25"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, dtype<span class="op">=</span><span class="fu">torch_cfloat</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, dtype<span class="op">=</span><span class="fu">torch_cfloat</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="va">x</span><span class="op">$</span><span class="va">real</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="va">real</span></code></pre></div>
 </div>
 </div>
 <div id="reciprocal" class="section level2">
@@ -2579,10 +2583,10 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-25" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-25" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb26"><pre class="downlit">
-<span class="va">imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, <span class="fl">128</span>, <span class="fl">128</span><span class="op">)</span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, <span class="fl">128</span>, <span class="fl">128</span><span class="op">)</span>
 <span class="va">named_imgs</span> <span class="op">&lt;-</span> <span class="va">imgs</span><span class="op">$</span><span class="fu">refine_names</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'N'</span>, <span class="st">'C'</span>, <span class="st">'H'</span>, <span class="st">'W'</span><span class="op">)</span><span class="op">)</span>
-<span class="va">named_imgs</span><span class="op">$</span><span class="va">names</span></pre></div>
+<span class="va">named_imgs</span><span class="op">$</span><span class="va">names</span></code></pre></div>
 </div>
 </div>
 <div id="register_hook" class="section level2">
@@ -2596,12 +2600,12 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="example" class="section level4">
 <h4 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h4>
-<div class="sourceCode" id="cb27"><pre class="downlit">
-<span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.</span>, <span class="fl">0.</span>, <span class="fl">0.</span><span class="op">)</span>, requires_grad<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.</span>, <span class="fl">0.</span>, <span class="fl">0.</span><span class="op">)</span>, requires_grad<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">h</span> <span class="op">&lt;-</span> <span class="va">v</span><span class="op">$</span><span class="fu">register_hook</span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">grad</span><span class="op">)</span> <span class="va">grad</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span>  <span class="co"># double the gradient</span>
 <span class="va">v</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.</span>, <span class="fl">2.</span>, <span class="fl">3.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="va">v</span><span class="op">$</span><span class="va">grad</span>
-<span class="va">h</span><span class="op">$</span><span class="fu">remove</span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="va">h</span><span class="op">$</span><span class="fu">remove</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="remainder" class="section level2">
@@ -2627,9 +2631,9 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-26" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-26" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb28"><pre class="downlit">
-<span class="va">imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">7</span>, names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'N'</span>, <span class="st">'C'</span>, <span class="st">'H'</span>, <span class="st">'W'</span><span class="op">)</span><span class="op">)</span>
-<span class="va">renamed_imgs</span> <span class="op">&lt;-</span> <span class="va">imgs</span><span class="op">$</span><span class="fu">rename</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Batch"</span>, <span class="st">"Channels"</span>, <span class="st">"Height"</span>, <span class="st">"Width"</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">7</span>, names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'N'</span>, <span class="st">'C'</span>, <span class="st">'H'</span>, <span class="st">'W'</span><span class="op">)</span><span class="op">)</span>
+<span class="va">renamed_imgs</span> <span class="op">&lt;-</span> <span class="va">imgs</span><span class="op">$</span><span class="fu">rename</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Batch"</span>, <span class="st">"Channels"</span>, <span class="st">"Height"</span>, <span class="st">"Width"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="rename_" class="section level2">
@@ -2666,10 +2670,10 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-27" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-27" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb29"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">`repeat`</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">`repeat`</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="fu">`repeat`</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="repeat_interleave" class="section level2">
@@ -2704,8 +2708,8 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-28" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-28" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb30"><pre class="downlit">
-<span class="co"># Let's say we want to preprocess some saved weights and use</span>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Let's say we want to preprocess some saved weights and use</span>
 <span class="co"># the result as new weights.</span>
 <span class="va">saved_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.25</span><span class="op">)</span>
 <span class="va">loaded_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="va">saved_weights</span><span class="op">)</span>
@@ -2716,7 +2720,7 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <span class="va">weights</span><span class="op">$</span><span class="fu">requires_grad_</span><span class="op">(</span><span class="op">)</span>
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="va">weights</span><span class="op">$</span><span class="fu">pow</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="fu">sum</span><span class="op">(</span><span class="op">)</span>
 <span class="va">out</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
-<span class="va">weights</span><span class="op">$</span><span class="va">grad</span></pre></div>
+<span class="va">weights</span><span class="op">$</span><span class="va">grad</span></code></pre></div>
 </div>
 </div>
 <div id="reshape" class="section level2">
@@ -2769,9 +2773,9 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div id="examples-29" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-29" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb31"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">resize_</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span><span class="op">$</span><span class="fu">resize_</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="resize_as_" class="section level2">
@@ -2868,8 +2872,8 @@ self[i][j][index[i][j][k]] = src[i][j][k]  # if dim == 2</code></pre>
 <div id="examples-30" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-30" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb33"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">$</span><span class="fu">scatter_</span><span class="op">(</span>
         <span class="fl">1</span>, 
@@ -2879,7 +2883,7 @@ self[i][j][index[i][j][k]] = src[i][j][k]  # if dim == 2</code></pre>
 <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">$</span><span class="fu">scatter_</span><span class="op">(</span>
         <span class="fl">2</span>, 
         <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1.23</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="scatter_add" class="section level2">
@@ -2916,10 +2920,10 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div id="examples-31" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-31" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb35"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_rand.html">torch_rand</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>
 <span class="va">x</span>
-<span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">$</span><span class="fu">scatter_add_</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="va">x</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">$</span><span class="fu">scatter_add_</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="va">x</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="select" class="section level2">
@@ -3033,8 +3037,8 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div id="examples-32" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-32" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb36"><pre class="downlit">
-<span class="fu"><a href="../../reference/torch_empty.html">torch_empty</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/torch_empty.html">torch_empty</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="slogdet" class="section level2">
@@ -3142,10 +3146,10 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div id="examples-33" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-33" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb37"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">storage_offset</span><span class="op">(</span><span class="op">)</span>
-<span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="va">N</span><span class="op">]</span><span class="op">$</span><span class="fu">storage_offset</span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="va">N</span><span class="op">]</span><span class="op">$</span><span class="fu">storage_offset</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="storage_type" class="section level2">
@@ -3170,11 +3174,11 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div id="examples-34" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-34" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb38"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">stride</span><span class="op">(</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="fu">stride</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
-<span class="va">x</span><span class="op">$</span><span class="fu">stride</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></pre></div>
+<span class="va">x</span><span class="op">$</span><span class="fu">stride</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="sub" class="section level2">
@@ -3299,12 +3303,12 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div id="examples-35" class="section level4">
 <h4 class="hasAnchor">
 <a href="#examples-35" class="anchor"></a>Examples:</h4>
-<div class="sourceCode" id="cb39"><pre class="downlit">
-<span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>  <span class="co"># Initially dtype=float32, device=cpu</span>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>  <span class="co"># Initially dtype=float32, device=cpu</span>
 <span class="va">tensor</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>dtype <span class="op">=</span> <span class="fu"><a href="../../reference/torch_dtype.html">torch_float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">other</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">1</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="va">tensor</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>other <span class="op">=</span> <span class="va">other</span>, non_blocking<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<span class="va">tensor</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>other <span class="op">=</span> <span class="va">other</span>, non_blocking<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="to_mkldnn" class="section level2">

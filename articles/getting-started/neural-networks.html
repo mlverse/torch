@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -101,7 +101,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tensors</li>
+<li>
+      <a href="../../articles/installation.html">Installation</a>
+    </li>
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../../articles/tensor-creation.html">Creating tensors</a>
     </li>
@@ -169,7 +172,8 @@
 
       
 
-      </header><script src="neural-networks_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="neural-networks_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="neural-networks_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="neural-networks_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Neural networks</h1>
@@ -185,8 +189,8 @@
 <blockquote>
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/blitz/tensor_tutorial.html#sphx-glr-beginner-blitz-tensor-tutorial-py">here</a>. All credits goes to <a href="http://soumith.ch/">Soumith Chintala</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>Neural networks can be constructed using the <code>nn</code> functionality.</p>
 <p>Now that you had a glimpse of <code>autograd</code>, <code>nn</code> depends on <code>autograd</code> to define models and differentiate them. An nn.Module contains layers, and a method <code>forward(input)</code> that returns the output.</p>
 <p>For example, look at this network that classifies digit images:</p>
@@ -207,8 +211,8 @@
 <h2 class="hasAnchor">
 <a href="#define-the-network" class="anchor"></a>Define the network</h2>
 <p>Let’s define this network:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">Net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
   initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">conv1</span> <span class="op">=</span> <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">3</span><span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">conv2</span> <span class="op">=</span> <span class="fu"><a href="../../reference/nn_conv2d.html">nn_conv2d</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">16</span>, <span class="fl">3</span><span class="op">)</span>
@@ -240,11 +244,11 @@
   <span class="op">}</span>
 <span class="op">)</span>
 
-<span class="va">net</span> <span class="op">&lt;-</span> <span class="fu">Net</span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="va">net</span> <span class="op">&lt;-</span> <span class="fu">Net</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>You just have to define the <code>forward</code> function, and the <code>backward</code> function (where gradients are computed) is automatically defined for you using <code>autograd.</code> You can use any of the Tensor operations in the <code>forward</code> function.</p>
 <p>The learnable parameters of a model are returned by <code>net$parameters</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">net</span><span class="op">$</span><span class="va">parameters</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">net</span><span class="op">$</span><span class="va">parameters</span><span class="op">)</span>
 <span class="co">#&gt; List of 10</span>
 <span class="co">#&gt;  $ conv1.weight:Float [1:6, 1:1, 1:3, 1:3]</span>
 <span class="co">#&gt;  $ conv1.bias  :Float [1:6]</span>
@@ -255,19 +259,19 @@
 <span class="co">#&gt;  $ fc2.weight  :Float [1:84, 1:120]</span>
 <span class="co">#&gt;  $ fc2.bias    :Float [1:84]</span>
 <span class="co">#&gt;  $ fc3.weight  :Float [1:10, 1:84]</span>
-<span class="co">#&gt;  $ fc3.bias    :Float [1:10]</span></pre></div>
+<span class="co">#&gt;  $ fc3.bias    :Float [1:10]</span></code></pre></div>
 <p>Let’s try a random 32x32 input. Note: expected input size of this net (LeNet) is 32x32. To use this net on the MNIST dataset, please resize the images from the dataset to 32x32.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">32</span>, <span class="fl">32</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">32</span>, <span class="fl">32</span><span class="op">)</span>
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
 <span class="va">out</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.1401  0.0395 -0.0822 -0.1264 -0.0146 -0.0360  0.0296  0.0146  0.0830 -0.0447</span>
-<span class="co">#&gt; [ CPUFloatType{1,10} ]</span></pre></div>
+<span class="co">#&gt;  0.0673 -0.0700  0.0210  0.1113  0.1069  0.0171  0.0774  0.0898 -0.0002  0.0961</span>
+<span class="co">#&gt; [ CPUFloatType{1,10} ]</span></code></pre></div>
 <p>Zero the gradient buffers of all parameters and backprops with random gradients:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">net</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>
-<span class="va">out</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>
+<span class="va">out</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <blockquote>
 <p><strong>Note</strong>: <code>nn</code> only supports mini-batches. The entire torch.nn package only supports inputs that are a mini-batch of samples, and not a single sample. For example, <code>nn_conv2d</code> will take in a 4D Tensor of nSamples x nChannels x Height x Width. If you have a single sample, just use <code>input$unsqueeze(1)</code> to add a fake batch dimension.</p>
 </blockquote>
@@ -305,16 +309,16 @@
 <p>A loss function takes the (output, target) pair of inputs, and computes a value that estimates how far away the output is from the target.</p>
 <p>There are several different loss functions under the nn package . A simple loss is: <code>nnf_mse_loss</code> which computes the mean-squared error between the input and the target.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
 <span class="va">target</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>  <span class="co"># a dummy target, for example</span>
 <span class="va">target</span> <span class="op">&lt;-</span> <span class="va">target</span><span class="op">$</span><span class="fu">view</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>  <span class="co"># make it the same shape as output</span>
 
 <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">target</span><span class="op">)</span>
 <span class="va">loss</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; 1.29631</span>
-<span class="co">#&gt; [ CPUFloatType{} ]</span></pre></div>
+<span class="co">#&gt; 1.33572</span>
+<span class="co">#&gt; [ CPUFloatType{} ]</span></code></pre></div>
 <p>Now, if you follow loss in the backward direction, using its <code>$grad_fn</code> attribute, you will see a graph of computations that looks like this:</p>
 <pre><code>input -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d
       -&gt; view -&gt; linear -&gt; relu -&gt; linear -&gt; relu -&gt; linear
@@ -322,21 +326,21 @@
       -&gt; loss</code></pre>
 <p>So, when we call <code>loss$backward()</code>, the whole graph is differentiated w.r.t. the loss, and all Tensors in the graph that has requires_grad=True will have their <code>#grad</code> Tensor accumulated with the gradient.</p>
 <p>For illustration, let us follow a few steps backward:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">loss</span><span class="op">$</span><span class="va">grad_fn</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">loss</span><span class="op">$</span><span class="va">grad_fn</span>
 <span class="co">#&gt; MseLossBackward</span>
 <span class="va">loss</span><span class="op">$</span><span class="va">grad_fn</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt; AddmmBackward</span>
 <span class="va">loss</span><span class="op">$</span><span class="va">grad_fn</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; torch::autograd::AccumulateGrad</span></pre></div>
+<span class="co">#&gt; torch::autograd::AccumulateGrad</span></code></pre></div>
 </div>
 <div id="backprop" class="section level2">
 <h2 class="hasAnchor">
 <a href="#backprop" class="anchor"></a>Backprop</h2>
 <p>To backpropagate the error all we have to do is to <code>loss$backward()</code>. You need to clear the existing gradients though, else gradients will be accumulated to existing gradients.</p>
 <p>Now we shall call <code>loss$backward()</code>, and have a look at conv1’s bias gradients before and after the backward.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="va">net</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>     <span class="co"># zeroes the gradient buffers of all parameters</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>     <span class="co"># zeroes the gradient buffers of all parameters</span>
 
 <span class="co"># conv1.bias.grad before backward</span>
 <span class="va">net</span><span class="op">$</span><span class="va">conv1</span><span class="op">$</span><span class="va">bias</span><span class="op">$</span><span class="va">grad</span>
@@ -355,13 +359,13 @@
 <span class="va">net</span><span class="op">$</span><span class="va">conv1</span><span class="op">$</span><span class="va">bias</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 0.01 *</span>
-<span class="co">#&gt;  0.6251</span>
-<span class="co">#&gt;  0.1677</span>
-<span class="co">#&gt;  0.7964</span>
-<span class="co">#&gt;  1.0600</span>
-<span class="co">#&gt;  0.3815</span>
-<span class="co">#&gt; -0.2729</span>
-<span class="co">#&gt; [ CPUFloatType{6} ]</span></pre></div>
+<span class="co">#&gt; -0.4329</span>
+<span class="co">#&gt; -1.0576</span>
+<span class="co">#&gt;  0.9670</span>
+<span class="co">#&gt;  0.7630</span>
+<span class="co">#&gt; -0.6947</span>
+<span class="co">#&gt;  2.2084</span>
+<span class="co">#&gt; [ CPUFloatType{6} ]</span></code></pre></div>
 <p>Now, we have seen how to use loss functions.</p>
 </div>
 <div id="update-the-weights" class="section level2">
@@ -370,19 +374,19 @@
 <p>The simplest update rule used in practice is the Stochastic Gradient Descent (SGD):</p>
 <p><span class="math display">\[weight = weight - learning_rate * gradient\]</span></p>
 <p>We can implement this using simple R code:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="va">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">0.01</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">learning_rate</span> <span class="op">&lt;-</span> <span class="fl">0.01</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">f</span> <span class="kw">in</span> <span class="va">net</span><span class="op">$</span><span class="va">parameters</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../../reference/with_no_grad.html">with_no_grad</a></span><span class="op">(</span><span class="op">{</span>
     <span class="va">f</span><span class="op">$</span><span class="fu">sub_</span><span class="op">(</span><span class="va">f</span><span class="op">$</span><span class="va">grad</span> <span class="op">*</span> <span class="va">learning_rate</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 <blockquote>
 <p><strong>Note:</strong> Weight updates here is wraped around <code>with_no_grad</code> as we don’t the updates to be tracked by the autograd engine.</p>
 </blockquote>
 <p>However, as you use neural networks, you want to use various different update rules such as SGD, Nesterov-SGD, Adam, RMSProp, etc.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="co"># create your optimizer</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create your optimizer</span>
 <span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">net</span><span class="op">$</span><span class="va">parameters</span>, lr <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
 
 <span class="co"># in your training loop:</span>
@@ -391,7 +395,7 @@
 <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">target</span><span class="op">)</span>
 <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
 <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>    <span class="co"># Does the update</span>
-<span class="co">#&gt; NULL</span></pre></div>
+<span class="co">#&gt; NULL</span></code></pre></div>
 <blockquote>
 <p><strong>Note:</strong> Observe how gradient buffers had to be manually set to zero using <code>optimizer$zero_grad()</code>. This is because gradients are accumulated as explained in the Backprop section.</p>
 </blockquote>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>An abstract class representing a Dataset. — dataset • torch</title>
+<title>Helper function to create an R6 class that inherits from the abstract Dataset class — dataset • torch</title>
 
 
 <!-- jquery -->
@@ -41,13 +41,13 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="An abstract class representing a Dataset. — dataset" />
-<meta property="og:description" content="All datasets that represent a map from keys to data samples should subclass
-it. All subclasses should overwrite get_item, supporting fetching a
-data sample for a given key. Subclasses could also optionally overwrite
-lenght, which is expected to return the size of the dataset by many
-~torch.utils.data.Sampler implementations and the default options
-of ~torch.utils.data.DataLoader." />
+<meta property="og:title" content="Helper function to create an R6 class that inherits from the abstract Dataset class — dataset" />
+<meta property="og:description" content="All datasets that represent a map from keys to data samples should subclass this
+class. All subclasses should overwrite the .getitem() method, which supports
+fetching a data sample for a given key. Subclasses could also optionally
+overwrite .length(), which is expected to return the size of the dataset
+(e.g. number of samples) by many ~torch.utils.data.Sampler implementations
+and the default options of dataloader()." />
 
 
 
@@ -89,7 +89,7 @@ of ~torch.utils.data.DataLoader." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@ of ~torch.utils.data.DataLoader." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginers guide</li>
+    <li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -152,6 +152,9 @@ of ~torch.utils.data.DataLoader." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/installation.html">Installation</a>
+    </li>
     <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
@@ -223,21 +226,28 @@ of ~torch.utils.data.DataLoader." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>An abstract class representing a <code>Dataset</code>.</h1>
+    <h1>Helper function to create an R6 class that inherits from the abstract <code>Dataset</code> class</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/utils-data.R'><code>R/utils-data.R</code></a></small>
     <div class="hidden name"><code>dataset.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>All datasets that represent a map from keys to data samples should subclass
-it. All subclasses should overwrite <code>get_item</code>, supporting fetching a
-data sample for a given key. Subclasses could also optionally overwrite
-<code>lenght</code>, which is expected to return the size of the dataset by many
-<code>~torch.utils.data.Sampler</code> implementations and the default options
-of <code>~torch.utils.data.DataLoader</code>.</p>
+    <p>All datasets that represent a map from keys to data samples should subclass this
+class. All subclasses should overwrite the .getitem() method, which supports
+fetching a data sample for a given key. Subclasses could also optionally
+overwrite .length(), which is expected to return the size of the dataset
+(e.g. number of samples) by many ~torch.utils.data.Sampler implementations
+and the default options of <code><a href='dataloader.html'>dataloader()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dataset</span><span class='op'>(</span>name <span class='op'>=</span> <span class='cn'>NULL</span>, inherit <span class='op'>=</span> <span class='va'>Dataset</span>, <span class='va'>...</span>, parent_env <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>dataset</span><span class='op'>(</span>
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  inherit <span class='op'>=</span> <span class='va'>Dataset</span>,
+  <span class='va'>...</span>,
+  private <span class='op'>=</span> <span class='cn'>NULL</span>,
+  active <span class='op'>=</span> <span class='cn'>NULL</span>,
+  parent_env <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -257,6 +267,14 @@ new dataset.</p></td>
       <td><p>public methods for the dataset class</p></td>
     </tr>
     <tr>
+      <th>private</th>
+      <td><p>passed to <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6Class()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>active</th>
+      <td><p>passed to <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6Class()</a></code>.</p></td>
+    </tr>
+    <tr>
       <th>parent_env</th>
       <td><p>An environment to use as the parent of newly-created
 objects.</p></td>
@@ -265,7 +283,7 @@ objects.</p></td>
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p><code>~torch.utils.data.DataLoader</code> by default constructs a index
+    <p><code><a href='dataloader.html'>dataloader()</a></code>  by default constructs a index
 sampler that yields integral indices.  To make it work with a map-style
 dataset with non-integral indices/keys, a custom sampler must be provided.</p>
 

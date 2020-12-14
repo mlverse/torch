@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginers guide</li>
+    <li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -147,6 +147,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/installation.html">Installation</a>
+    </li>
     <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
@@ -294,35 +297,35 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
 #&gt; (1,1,.,.) = 
-#&gt;    2.3808  -0.3692   3.2762  -0.0997  -0.8082
-#&gt;   11.3168   8.9798   6.5866  -0.7923   7.2353
-#&gt;    1.5321  -6.1342   2.4218  -0.9709   6.5189
-#&gt;   -2.6318  -5.5214  -4.7111  -1.6878   5.8918
-#&gt;    3.6484  -0.4689   3.7725  -0.6490   1.3164
+#&gt;   4.3807  0.1545 -2.3633 -2.0428  3.2387
+#&gt;  -3.5878 -7.9410  7.9644  0.8316 -0.6723
+#&gt;   0.5208  3.6871  2.9217 -1.3793  1.5135
+#&gt;   5.2598 -5.9211 -11.4232 -5.5278  0.4951
+#&gt;  -5.0268  4.1750  4.0880 -0.4454  5.8629
 #&gt; 
 #&gt; (1,2,.,.) = 
-#&gt;  -8.6319 -15.0703 -3.5818 -0.4834  2.4037
-#&gt;  -2.7863 -2.7393 -5.8732  4.6641  4.0348
-#&gt;   5.3494 -0.0598  0.8360 -6.5839 -1.9142
-#&gt;  -0.5008 -2.5357  0.4867  5.8404  2.2566
-#&gt;   4.6870  3.2914  0.6505 -3.7013 -0.0792
+#&gt;   5.2180 -1.8567 -2.8230  2.9504 -2.1924
+#&gt;  -6.2405 -2.1944  1.0696 -12.4121  1.3133
+#&gt;  -1.0146  2.5523 -0.8463 -0.7711 -4.2315
+#&gt;   0.6463 -10.0537  0.9930  2.5827 -0.1823
+#&gt;  -0.7384  0.4944 -1.9321 -3.8661 -2.0280
 #&gt; 
 #&gt; (1,3,.,.) = 
-#&gt;   -6.8192  -6.8367 -10.9761   0.5924   5.3415
-#&gt;   -0.6425  10.6302  10.2220  -3.2570  -6.9617
-#&gt;    1.8380   0.1092  14.7061   8.6777  -2.0742
-#&gt;    6.2213  -3.6649   5.3370   2.0375  10.9798
-#&gt;    4.5793   2.5892   2.7428  -5.6284   2.3604
+#&gt;    2.7374  -1.5802  -7.0392  -5.4199  13.1508
+#&gt;    8.5469 -15.4595   0.7043  10.1862   0.1914
+#&gt;   -1.3107   4.4794   3.6708  -3.0912  -7.5269
+#&gt;    2.7281 -11.5537   6.3066  -1.5357   3.5954
+#&gt;   -4.3711   1.9756  -5.6116  -3.4106   4.4427
 #&gt; 
 #&gt; (1,4,.,.) = 
-#&gt;    0.4859  -8.7997  -6.9224  -9.0924   0.3105
-#&gt;    2.9305   4.5641   2.6930   4.8924   1.6480
-#&gt;   -0.2092   1.1561  -6.4260  -8.5865  -1.7230
-#&gt;    1.9154   3.9195   3.3507  -2.7814  -5.9314
-#&gt;    1.1314   8.2299  -7.2505  12.4834  -9.4821
+#&gt;    2.5412  -5.9126  -4.7023   3.0569  15.3684
+#&gt;    3.4706 -15.0461   2.0775  13.1573   1.1625
+#&gt;    4.9675   2.1643  18.5968   2.1471   4.0785
+#&gt;    2.4112   8.7945   1.8886   2.8922   2.1347
+#&gt;    4.4506   2.2122  -6.1231   2.8190   3.4004
 #&gt; 
 #&gt; (1,5,.,.) = 
-#&gt;   2.2059  8.2809  7.9065 -3.1821 -5.9653
+#&gt;  -8.7050  6.7813 -2.4110  2.6711  1.4852
 #&gt; ... [the output was truncated (use n=-1 to disable)]
 #&gt; [ CPUFloatType{1,8,5,5} ]</div></pre>
   </div>

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -101,7 +101,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tensors</li>
+<li>
+      <a href="../articles/installation.html">Installation</a>
+    </li>
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
     </li>
@@ -169,7 +172,8 @@
 
       
 
-      </header><script src="tensor-creation_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="tensor-creation_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="tensor-creation_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="tensor-creation_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Creating tensors</h1>
@@ -182,16 +186,16 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>In this article we describe various ways of creating <code>torch</code> tensors in R.</p>
 <div id="from-r-objects" class="section level2">
 <h2 class="hasAnchor">
 <a href="#from-r-objects" class="anchor"></a>From R objects</h2>
 <p>You can create tensors from R objects using the <code>torch_tensor</code> function. The <code>torch_tensor</code> function takes an R vector, matrix or array and creates an equivalent <code>torch_tensor</code>.</p>
 <p>You can see a few examples below:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  2</span>
@@ -207,27 +211,27 @@
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; (1,.,.) = </span>
-<span class="co">#&gt;   0.3382  0.9695  0.0518</span>
-<span class="co">#&gt;   0.7613  0.7260  0.6157</span>
+<span class="co">#&gt;   0.8204  0.5995  0.2875</span>
+<span class="co">#&gt;   0.0089  0.0487  0.1700</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (2,.,.) = </span>
-<span class="co">#&gt;   0.2518  0.2327  0.3273</span>
-<span class="co">#&gt;   0.3088  0.7537  0.4304</span>
-<span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></pre></div>
+<span class="co">#&gt;   0.7982  0.1425  0.3113</span>
+<span class="co">#&gt;   0.8569  0.2707  0.1252</span>
+<span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></code></pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device, converting their R datatype to the corresponding torch <code>dtype</code>.</p>
 <blockquote>
 <p><strong>Note</strong> currently, only numeric and boolean types are supported.</p>
 </blockquote>
 <p>You can always modify <code>dtype</code> and <code>device</code> when converting an R object to a torch tensor. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt; [ CPULongType{1} ]</span>
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, device <span class="op">=</span> <span class="st">"cpu"</span>, dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
-<span class="co">#&gt; [ CPUDoubleType{1} ]</span></pre></div>
+<span class="co">#&gt; [ CPUDoubleType{1} ]</span></code></pre></div>
 <p>Other options available when creating a tensor are:</p>
 <ul>
 <li>
@@ -242,24 +246,24 @@
 <a href="#using-creation-functions" class="anchor"></a>Using creation functions</h2>
 <p>You can also use the <code>torch_*</code> functions listed below to create torch tensors using some algorithm.</p>
 <p>For example, the <code>torch_randn</code> function will create tensors using the normal distribution with mean 0 and standard deviation 1. You can use the <code>...</code> argument to pass the size of the dimensions. For example, the code below will create a normally distributed tensor with shape 5x3.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.2751  1.2633 -0.2262</span>
-<span class="co">#&gt;  0.2684  0.0220  0.5975</span>
-<span class="co">#&gt;  1.2743 -0.7125  0.1595</span>
-<span class="co">#&gt; -1.0278  1.1318 -0.1661</span>
-<span class="co">#&gt;  1.5955 -0.1290 -0.1814</span>
-<span class="co">#&gt; [ CPUFloatType{5,3} ]</span></pre></div>
+<span class="co">#&gt;  0.7352 -0.2601 -1.2960</span>
+<span class="co">#&gt; -0.1933 -0.1667 -0.4875</span>
+<span class="co">#&gt; -2.0145 -0.7756  0.6350</span>
+<span class="co">#&gt; -0.4759 -0.3948  0.4529</span>
+<span class="co">#&gt;  1.0300 -1.4791  0.0177</span>
+<span class="co">#&gt; [ CPUFloatType{5,3} ]</span></code></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor filled with ones.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_int64</a></span><span class="op">(</span><span class="op">)</span>, device <span class="op">=</span> <span class="st">"cpu"</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_int64</a></span><span class="op">(</span><span class="op">)</span>, device <span class="op">=</span> <span class="st">"cpu"</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1  1  1  1</span>
 <span class="co">#&gt;  1  1  1  1</span>
-<span class="co">#&gt; [ CPULongType{2,4} ]</span></pre></div>
+<span class="co">#&gt; [ CPULongType{2,4} ]</span></code></pre></div>
 <p>Here is the full list of functions that can be used to bulk-create tensors in torch:</p>
 <ul>
 <li>
@@ -292,8 +296,8 @@
 <h2 class="hasAnchor">
 <a href="#conversion" class="anchor"></a>Conversion</h2>
 <p>Once a tensor exists you can convert between <code>dtype</code>s and move to a different device with <code>to</code> method. For example:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span>dtype <span class="op">=</span> <span class="fu"><a href="../reference/torch_dtype.html">torch_int32</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
@@ -302,7 +306,7 @@
 <span class="va">y</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
-<span class="co">#&gt; [ CPUIntType{1} ]</span></pre></div>
+<span class="co">#&gt; [ CPUIntType{1} ]</span></code></pre></div>
 <p>You can also copy a tensor to the GPU using:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>x &lt;-<span class="st"> </span><span class="kw">torch_tensor</span>(<span class="dv">1</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a>y &lt;-<span class="st"> </span>x<span class="op">$</span><span class="kw">cuda</span>()<span class="er">)</span></span></code></pre></div>

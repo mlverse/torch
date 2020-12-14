@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -102,7 +102,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginers guide</li>
+    <li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -146,6 +146,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/installation.html">Installation</a>
+    </li>
     <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
@@ -221,13 +224,69 @@
       <small>Source: <a href='https://github.com/mlverse/torch/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="torch-011" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.1">
-<a href="#torch-011" class="anchor"></a>torch 0.1.1<small> Unreleased </small>
+    <div id="torch-020" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#torch-020" class="anchor"></a>torch 0.2.0<small> Unreleased </small>
 </h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>Dataloaders now returns a <code><a href="https://rdrr.io/pkg/coro/man/iterator.html">coro::exhausted</a></code> intead of raising <code>stop_iteration_error</code> when the dataloader exceeds. (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
+<li>Fixed bug that would happen with functions that need to transform tensors from 0-based to 1-based in the GPU. (<a href='https://github.com/mlverse/torch/issues/317'>#317</a>)</li>
+<li>Fixed <code>torch_argsort</code> and <code>x$argsort</code> to return 1-based indexes (<a href='https://github.com/mlverse/torch/issues/342'>#342</a>)</li>
+<li>Fixed <code>torch_argmax</code>, <code>torch_argmin</code>, <code>x$argmax()</code> and <code>x$argmin()</code> return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/389'>#389</a>)</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>Added <code>$element_size()</code> method (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/322'>#322</a>)</li>
+<li>Added <code>$bool()</code> method (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/323'>#323</a>)</li>
+<li>
+<code>torch__addr</code> and <code>torch__addr_</code> have been removed as they are no longer available in LibTorch 1.7.</li>
+<li>We now check the MD5 hashes of downloaded LibTorch binaries. (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/325'>#325</a>)</li>
+<li>Added a Distribution abstract class (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/333'>#333</a>)</li>
+<li>Updated to LibTorch 1.7 (<a href='https://github.com/mlverse/torch/issues/337'>#337</a>)</li>
+<li>We now warn when converting <code>long</code> tensors to R and there’s a chance of an integer overflow. (<a href='https://github.com/mlverse/torch/issues/347'>#347</a>)</li>
+<li>Allow <code>private</code> and <code>active</code> methods in <code>nn_module</code>’s and <code>dataset</code>’s. (<a href='https://github.com/mlverse/torch/issues/349'>#349</a>)</li>
+<li>Added <code>nn_batch_norm3d</code> (<a href='https://github.com/mattwarkentin'>@mattwarkentin</a> <a href='https://github.com/mlverse/torch/issues/354'>#354</a>)</li>
+<li>Added <code>nn_lstm</code> and <code>nn_gru</code> modules. (<a href='https://github.com/mlverse/torch/issues/362'>#362</a>)</li>
+<li>Added distribution constraints (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/364'>#364</a>)</li>
+<li>Dataloaders now use the num_workers argument to load data in parallel (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
+<li>Added Exponential Family classs to distributions (<a href='https://github.com/mlverse/torch/issues/373'>#373</a>)</li>
+<li>Added Dockerfile and docker compose file with GPU support, with a how-to guide. (<a href='https://github.com/mlverse/torch/issues/380'>#380</a> <a href='https://github.com/mlverse/torch/issues/386'>#386</a>)</li>
+<li>Added R 3.6 to the CI system and fixed compilation from source with it on Windows (<a href='https://github.com/mlverse/torch/issues/387'>#387</a>)</li>
+<li>Initial support for JIT tracing (<a href='https://github.com/mlverse/torch/issues/377'>#377</a>)</li>
+<li>Added LBFGS optimizer (<a href='https://github.com/mlverse/torch/issues/392'>#392</a>)</li>
+<li>Improved the <code>nn_module</code> UI by improving autocomplete support and adding a print method (<a href='https://github.com/mlverse/torch/issues/391'>#391</a>)</li>
+</ul>
+</div>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Fixed bug when trying to print the <code>grad_fn</code> of a Tensor that doesn’t have one. See (<a href='https://github.com/mlverse/torch/issues/321'>#321</a>)</li>
+<li>Refactored the optimizers code to avoid duplication of parameter checks, etc. (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/328'>#328</a>)</li>
+<li>Fixed <code>torch_norm</code> so it can be called with a <code>dim</code> argument. (<a href='https://github.com/mlverse/torch/issues/345'>#345</a>)</li>
+<li>Fixed crash when calling <code>torch_hann_window</code> with an invalid <code>NULL</code> <code>window_length</code>. (<a href='https://github.com/mlverse/torch/issues/351'>#351</a>)</li>
+<li>Fixed <code>torch_stft</code> calls for LibTorch 1.7 (added the <code>return_complex</code> argument) (<a href='https://github.com/mlverse/torch/issues/355'>#355</a>)</li>
+<li>Fixed bug when strides were NULL in some pooling operations. (<a href='https://github.com/mlverse/torch/issues/361'>#361</a>)</li>
+<li>Use <code>nvcc --version</code> instead of <code>nvidia-smi</code> to find the CUDA version as <code>nvidia-smi</code> reports the latest supported version and not the installed one. (<a href='https://github.com/mlverse/torch/issues/363'>#363</a>)</li>
+<li>Corrected URL to download LibTorch under Linux with CUDA 10.2 (<a href='https://github.com/mlverse/torch/issues/367'>#367</a>)</li>
+<li>Fixed handling of integer tensors when indexing tensors (<a href='https://github.com/mlverse/torch/issues/385'>#385</a>)</li>
+<li>Fixed bug when passing length zero vectors to lantern/libtorch. (<a href='https://github.com/mlverse/torch/issues/388'>#388</a>)</li>
+</ul>
+</div>
+</div>
+    <div id="torch-011" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.1">
+<a href="#torch-011" class="anchor"></a>torch 0.1.1<small> 2020-10-20 </small>
+</h1>
+<div id="bug-fixes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed bug that made <code>RandomSampler(replacement = TRUE)</code> to never take the last element in the dataset. (84861fa)</li>
 <li>Fixed <code>torch_topk</code> and <code>x$topk</code> so the returned indexes are 1-based (<a href='https://github.com/mlverse/torch/issues/280'>#280</a>)</li>
@@ -246,9 +305,9 @@
 <li>Fixed <code>$max</code> and <code>$min</code> to return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/315'>#315</a>)</li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Expanded the <code>utils_data_default_collate</code> to support converting R objects to torch tensors when needed. (<a href='https://github.com/mlverse/torch/issues/269'>#269</a>)</li>
 <li>Added an <code>as.matrix</code> method for torch Tensors. (<a href='https://github.com/mlverse/torch/issues/282'>#282</a>)</li>

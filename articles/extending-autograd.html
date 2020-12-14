@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -101,7 +101,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tensors</li>
+<li>
+      <a href="../articles/installation.html">Installation</a>
+    </li>
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
     </li>
@@ -169,7 +172,8 @@
 
       
 
-      </header><script src="extending-autograd_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="extending-autograd_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="extending-autograd_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="extending-autograd_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Extending Autograd</h1>
@@ -182,8 +186,8 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>Adding operations to autograd requires implementing a new <code>autograd_function</code> for each operation. Recall that <code>autograd_functions</code>s are what <code>autograd</code> uses to compute the results and gradients, and encode the operation history. Every new function requires you to implement 2 methods:</p>
 <ul>
 <li><p><code>forward()</code> - the code that performs the operation. It can take as many arguments as you want, with some of them being optional, if you specify the default values. All kinds of R objects are accepted here. Tensor arguments that track history (i.e., with <code>requires_grad=TRUE</code>) will be converted to ones that don’t track history before the call, and their use will be registered in the graph. Note that this logic won’t traverse lists or any other data structures and will only consider Tensor’s that are direct arguments to the call. You can return either a single Tensor output, or a list of <code>Tensor</code>s if there are multiple outputs. Also, please refer to the docs of <code>autograd_function</code> to find descriptions of useful methods that can be called only from <code>forward()</code>.</p></li>
@@ -203,8 +207,8 @@
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
 <p>Below you can find code for a linear function:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autograd_function.html">autograd_function</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autograd_function.html">autograd_function</a></span><span class="op">(</span>
   forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">ctx</span>, <span class="va">input</span>, <span class="va">weight</span>, <span class="va">bias</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">ctx</span><span class="op">$</span><span class="fu">save_for_backward</span><span class="op">(</span>input <span class="op">=</span> <span class="va">input</span>, weight <span class="op">=</span> <span class="va">weight</span>, bias <span class="op">=</span> <span class="va">bias</span><span class="op">)</span>
     <span class="va">output</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">$</span><span class="fu">mm</span><span class="op">(</span><span class="va">weight</span><span class="op">$</span><span class="fu">t</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
@@ -234,10 +238,10 @@
     
     <span class="va">grads</span>
   <span class="op">}</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p>Here, we give an additional example of a function that is parametrized by non-Tensor arguments:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">mul_constant</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autograd_function.html">autograd_function</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mul_constant</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autograd_function.html">autograd_function</a></span><span class="op">(</span>
   forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">ctx</span>, <span class="va">tensor</span>, <span class="va">constant</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">ctx</span><span class="op">$</span><span class="fu">save_for_backward</span><span class="op">(</span>constant <span class="op">=</span> <span class="va">constant</span><span class="op">)</span>
     <span class="va">tensor</span> <span class="op">*</span> <span class="va">constant</span>
@@ -248,15 +252,15 @@
       tensor <span class="op">=</span> <span class="va">grad_output</span> <span class="op">*</span> <span class="va">v</span><span class="op">$</span><span class="va">constant</span>
     <span class="op">)</span>
   <span class="op">}</span>
-<span class="op">)</span></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">o</span> <span class="op">&lt;-</span> <span class="fu">mul_constant</span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="va">o</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  2</span>
-<span class="co">#&gt; [ CPUFloatType{1} ]</span></pre></div>
+<span class="co">#&gt; [ CPUFloatType{1} ]</span></code></pre></div>
 </div>
   </div>
 

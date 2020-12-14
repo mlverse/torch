@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -101,7 +101,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tensors</li>
+<li>
+      <a href="../../articles/installation.html">Installation</a>
+    </li>
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../../articles/tensor-creation.html">Creating tensors</a>
     </li>
@@ -169,7 +172,8 @@
 
       
 
-      </header><script src="nn_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="nn_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="nn_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="nn_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>nn: neural networks with torch</h1>
@@ -185,15 +189,15 @@
 <blockquote>
 <p>Note: This is an R port of the official tutorial available <a href="https://pytorch.org/tutorials/beginner/examples_tensor/two_layer_net_numpy.html#sphx-glr-beginner-examples-tensor-two-layer-net-numpy-py">here</a>. All credits goes to <a href="https://github.com/jcjohnson/pytorch-examples">Justin Johnson</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>Computational graphs and autograd are a very powerful paradigm for defining complex operators and automatically taking derivatives; however for large neural networks raw autograd can be a bit too low-level.</p>
 <p>When building neural networks we frequently think of arranging the computation into layers, some of which have learnable parameters which will be optimized during learning.</p>
 <p>In TensorFlow, packages like Keras, TensorFlow-Slim, and TFLearn provide higher-level abstractions over raw computational graphs that are useful for building neural networks.</p>
 <p>In torch, the nn functionality serves this same purpose. The nn feature defines a set of Modules, which are roughly equivalent to neural network layers. A Module receives input Tensors and computes output Tensors, but may also hold internal state such as Tensors containing learnable parameters. The nn collection also defines a set of useful loss functions that are commonly used when training neural networks.</p>
 <p>In this example we use nn to implement our two-layer network:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../../reference/cuda_is_available.html">cuda_is_available</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../../reference/cuda_is_available.html">cuda_is_available</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
    <span class="va">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span><span class="op">(</span><span class="st">"cuda"</span><span class="op">)</span>
 <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
    <span class="va">device</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_device.html">torch_device</a></span><span class="op">(</span><span class="st">"cpu"</span><span class="op">)</span>
@@ -257,12 +261,12 @@
       <span class="op">}</span>
    <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Step: 1 : 1.150195 </span>
-<span class="co">#&gt; Step: 100 : 1.15005 </span>
-<span class="co">#&gt; Step: 200 : 1.149904 </span>
-<span class="co">#&gt; Step: 300 : 1.149758 </span>
-<span class="co">#&gt; Step: 400 : 1.149611 </span>
-<span class="co">#&gt; Step: 500 : 1.149465</span></pre></div>
+<span class="co">#&gt; Step: 1 : 1.018742 </span>
+<span class="co">#&gt; Step: 100 : 1.018609 </span>
+<span class="co">#&gt; Step: 200 : 1.018475 </span>
+<span class="co">#&gt; Step: 300 : 1.018341 </span>
+<span class="co">#&gt; Step: 400 : 1.018206 </span>
+<span class="co">#&gt; Step: 500 : 1.018072</span></code></pre></div>
 <p>In the <a href="optim.html">next example</a> we will learn how to use optimizers implemented in torch.</p>
   </div>
 

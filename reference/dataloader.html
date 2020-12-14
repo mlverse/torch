@@ -87,7 +87,7 @@ single- or multi-process iterators over the dataset." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -106,7 +106,7 @@ single- or multi-process iterators over the dataset." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginers guide</li>
+    <li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -150,6 +150,9 @@ single- or multi-process iterators over the dataset." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/installation.html">Installation</a>
+    </li>
     <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
@@ -242,7 +245,7 @@ single- or multi-process iterators over the dataset.</p>
   collate_fn <span class='op'>=</span> <span class='cn'>NULL</span>,
   pin_memory <span class='op'>=</span> <span class='cn'>FALSE</span>,
   drop_last <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  timeout <span class='op'>=</span> <span class='fl'>0</span>,
+  timeout <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>,
   worker_init_fn <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
@@ -301,12 +304,12 @@ will be smaller. (default: <code>FALSE</code>)</p></td>
     <tr>
       <th>timeout</th>
       <td><p>(numeric, optional): if positive, the timeout value for collecting a batch
-from workers. Should always be non-negative. (default: <code>0</code>)</p></td>
+from workers. -1 means no timeout. (default: <code>-1</code>)</p></td>
     </tr>
     <tr>
       <th>worker_init_fn</th>
       <td><p>(callable, optional): If not <code>NULL</code>, this will be called on each
-worker subprocess with the worker id (an int in <code>[0, num_workers - 1]</code>) as
+worker subprocess with the worker id (an int in <code>[1, num_workers]</code>) as
 input, after seeding and before data loading. (default: <code>NULL</code>)</p></td>
     </tr>
     </table>

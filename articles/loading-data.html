@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -101,7 +101,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tensors</li>
+<li>
+      <a href="../articles/installation.html">Installation</a>
+    </li>
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../articles/tensor-creation.html">Creating tensors</a>
     </li>
@@ -169,7 +172,8 @@
 
       
 
-      </header><script src="loading-data_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="loading-data_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="loading-data_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="loading-data_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Loading data</h1>
@@ -182,8 +186,8 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <div id="datasets-and-data-loaders" class="section level2">
 <h2 class="hasAnchor">
 <a href="#datasets-and-data-loaders" class="anchor"></a>Datasets and data loaders</h2>
@@ -211,9 +215,9 @@
 <div id="a-custom-dataset" class="section level2">
 <h2 class="hasAnchor">
 <a href="#a-custom-dataset" class="anchor"></a>A custom dataset</h2>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">magrittr</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 
 <span class="va">penguins</span>
 <span class="co">#&gt; # A tibble: 344 x 8</span>
@@ -229,13 +233,13 @@
 <span class="co">#&gt;  8 Adelie  Torge…           39.2          19.6              195        4675</span>
 <span class="co">#&gt;  9 Adelie  Torge…           34.1          18.1              193        3475</span>
 <span class="co">#&gt; 10 Adelie  Torge…           42            20.2              190        4250</span>
-<span class="co">#&gt; # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></pre></div>
+<span class="co">#&gt; # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></code></pre></div>
 <p><code>Dataset</code>s are R6 classes created using the <code><a href="../reference/dataset.html">dataset()</a></code> constructor. You can pass a <code>name</code> and various member functions. Among those should be <code>initialize()</code>, to create instance variables, <code>.getitem()</code>, to indicate how the data should be returned, and <code>.length()</code>, to say how many items we have.</p>
 <p>In addition, any number of helper functions can be defined.</p>
 <p>Here, we assume the <code>penguins</code> have already been loaded, and all preprocessing consists in removing lines with <code>NA</code> values, transforming <code>factor</code>s to numbers starting from 0, and converting from R data types to <code>torch</code> tensors.</p>
 <p>In <code>.getitem</code>, we essentially decide how this data is going to be used: All variables besides <code>species</code> go into <code>x</code>, the predictor, and <code>species</code> will constitute <code>y</code>, the target. Predictor and target are returned in a list, to be accessed as <code>batch[[1]]</code> and <code>batch[[2]]</code> during training.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">penguins_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataset.html">dataset</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataset.html">dataset</a></span><span class="op">(</span>
   
   name <span class="op">=</span> <span class="st">"penguins_dataset"</span>,
   
@@ -266,10 +270,10 @@
     <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
     <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
   <span class="op">}</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p>Let’s create the dataset , query for it’s length, and look at its first item:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">tuxes</span> <span class="op">&lt;-</span> <span class="fu">penguins_dataset</span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tuxes</span> <span class="op">&lt;-</span> <span class="fu">penguins_dataset</span><span class="op">(</span><span class="op">)</span>
 <span class="va">tuxes</span><span class="op">$</span><span class="fu">.length</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] 333</span>
 <span class="va">tuxes</span><span class="op">$</span><span class="fu">.getitem</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
@@ -287,17 +291,17 @@
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 1</span>
-<span class="co">#&gt; [ CPULongType{} ]</span></pre></div>
+<span class="co">#&gt; [ CPULongType{} ]</span></code></pre></div>
 <p>To be able to iterate over <code>tuxes</code>, we need a data loader (we override the default batch size of <code>1</code>):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">dl</span> <span class="op">&lt;-</span><span class="va">tuxes</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span><span class="op">(</span>batch_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dl</span> <span class="op">&lt;-</span><span class="va">tuxes</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span><span class="op">(</span>batch_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
 <p>Calling <code>.length()</code> on a data loader (as opposed to a dataset) will return the number of <code>batches</code> we have:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">dl</span><span class="op">$</span><span class="fu">.length</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] 42</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dl</span><span class="op">$</span><span class="fu">.length</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 42</span></code></pre></div>
 <p>And we can create an iterator to inspect the first batch:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">iter</span> <span class="op">&lt;-</span> <span class="va">dl</span><span class="op">$</span><span class="fu">.iter</span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iter</span> <span class="op">&lt;-</span> <span class="va">dl</span><span class="op">$</span><span class="fu">.iter</span><span class="op">(</span><span class="op">)</span>
 <span class="va">b</span> <span class="op">&lt;-</span> <span class="va">iter</span><span class="op">$</span><span class="fu">.next</span><span class="op">(</span><span class="op">)</span>
 <span class="va">b</span>
 <span class="co">#&gt; [[1]]</span>
@@ -322,15 +326,15 @@
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  1</span>
-<span class="co">#&gt; [ CPULongType{8} ]</span></pre></div>
+<span class="co">#&gt; [ CPULongType{8} ]</span></code></pre></div>
 <p>To train a network, we can use <code>enumerate</code> to iterate over batches.</p>
 </div>
 <div id="training-with-data-loaders" class="section level2">
 <h2 class="hasAnchor">
 <a href="#training-with-data-loaders" class="anchor"></a>Training with data loaders</h2>
 <p>Our example network is very simple. (In reality, we would want to treat <code>island</code> as the categorical variable it is, and either one-hot-encode or embed it.)</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
   <span class="st">"PenguinNet"</span>,
   initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">fc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">32</span><span class="op">)</span>
@@ -345,13 +349,13 @@
   <span class="op">}</span>
 <span class="op">)</span>
 
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>We still need an optimizer:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></code></pre></div>
 <p>And we’re ready to train:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
   
@@ -366,7 +370,7 @@
   
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Loss at epoch 1: 335.176875</span>
+<span class="co">#&gt; Loss at epoch 1: 263.653120</span>
 <span class="co">#&gt; Loss at epoch 2: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 3: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 4: 2.068251</span>
@@ -375,7 +379,7 @@
 <span class="co">#&gt; Loss at epoch 7: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 8: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 9: 2.068251</span>
-<span class="co">#&gt; Loss at epoch 10: 2.068251</span></pre></div>
+<span class="co">#&gt; Loss at epoch 10: 2.068251</span></code></pre></div>
 </div>
   </div>
 

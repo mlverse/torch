@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginers guide</li>
+<li class="dropdown-header">Beginners guide</li>
     <li>
       <a href="../../articles/getting-started/warmup.html">Warm-up</a>
     </li>
@@ -101,7 +101,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tensors</li>
+<li>
+      <a href="../../articles/installation.html">Installation</a>
+    </li>
+    <li class="dropdown-header">Tensors</li>
     <li>
       <a href="../../articles/tensor-creation.html">Creating tensors</a>
     </li>
@@ -169,7 +172,8 @@
 
       
 
-      </header><script src="basic-nn-module_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="basic-nn-module_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="basic-nn-module_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="basic-nn-module_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>basic-nn-module</h1>
@@ -182,8 +186,8 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
 
 <span class="co"># creates example tensors. x requires_grad = TRUE tells that </span>
 <span class="co"># we are going to take derivatives over it.</span>
@@ -208,53 +212,53 @@
   <span class="op">}</span>
 <span class="op">)</span>
 
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">dense</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span></pre></div>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">dense</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>## Calling initialize!</code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co"># you can get all parameters </span>
-<span class="va">model</span><span class="op">$</span><span class="va">parameters</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># you can get all parameters </span>
+<span class="va">model</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
 <pre><code>## $w
 ## torch_tensor
-## -0.3989
-##  0.0424
-##  0.4114
+## -0.6958
+##  0.7727
+##  0.7933
 ## [ CPUFloatType{3,1} ]
 ## 
 ## $b
 ## torch_tensor
 ##  0
 ## [ CPUFloatType{1} ]</code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># or individually</span>
-<span class="va">model</span><span class="op">$</span><span class="va">w</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># or individually</span>
+<span class="va">model</span><span class="op">$</span><span class="va">w</span></code></pre></div>
 <pre><code>## torch_tensor
-## -0.3989
-##  0.0424
-##  0.4114
+## -0.6958
+##  0.7727
+##  0.7933
 ## [ CPUFloatType{3,1} ]</code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">model</span><span class="op">$</span><span class="va">b</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">b</span></code></pre></div>
 <pre><code>## torch_tensor
 ##  0
 ## [ CPUFloatType{1} ]</code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co"># create an input tensor</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create an input tensor</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span>
-<span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></pre></div>
+<span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
 <pre><code>## Calling forward!</code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="va">y_pred</span></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">y_pred</span></code></pre></div>
 <pre><code>## torch_tensor
-##  0.1396
-## -0.3354
-## -0.4986
-##  0.0209
-## -0.0628
-##  0.9144
-##  0.0077
-##  0.4432
-## -0.1731
-##  0.3317
+##  1.1376
+## -0.6409
+##  0.9128
+## -0.4984
+##  0.7279
+## -1.0391
+##  0.4919
+##  1.9787
+## -1.5241
+##  0.3017
 ## [ CPUFloatType{10,1} ]</code></pre>
   </div>
 
