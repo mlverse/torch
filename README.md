@@ -28,9 +28,12 @@ remotes::install_github("mlverse/torch")
 At the first package load additional software will be installed.
 
 ## Installation with Docker
-If you would like to install with Docker, please read following document.
 
-* [The way of installation with Docker](./docker/build_env_guide.md)
+If you would like to install with Docker, please read following
+document.
+
+  - [The way of installation with
+    Docker](https://github.com/mlverse/torch/blob/master/docker/build_env_guide.md)
 
 ## Examples
 
@@ -44,12 +47,12 @@ y <- torch_tensor(x, dtype = torch_float64())
 y
 #> torch_tensor
 #> (1,.,.) = 
-#>   0.1512  0.8540
-#>   0.3250  0.3191
+#>   0.9192  0.4962
+#>   0.3191  0.3114
 #> 
 #> (2,.,.) = 
-#>   0.8256  0.1999
-#>   0.1343  0.4721
+#>   0.7482  0.7318
+#>   0.6661  0.8189
 #> [ CPUDoubleType{2,2,2} ]
 identical(x, as_array(y))
 #> [1] TRUE

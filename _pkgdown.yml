@@ -148,6 +148,9 @@ reference:
   - title: Cuda utilities
     contents:
       - starts_with("cuda_")
+  - title: JIT
+    contents: 
+      - starts_with("jit")
   - title: Installation
     contents:
       - install_torch

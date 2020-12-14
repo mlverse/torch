@@ -40,7 +40,7 @@ installed.
 ## Installation with Docker
 If you would like to install with Docker, please read following document.
 
-* [The way of installation with Docker](./docker/build_env_guide.md)
+* [The way of installation with Docker](https://github.com/mlverse/torch/blob/master/docker/build_env_guide.md)
 
 ## Examples
 

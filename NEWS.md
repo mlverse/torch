@@ -1,40 +1,47 @@
-# torch (development version)
+# torch 0.2.0
 
+## Breaking changes
+
+- Dataloaders now returns a `coro::exhausted` intead of raising `stop_iteration_error` when the dataloader exceeds. (#366)
 - Fixed bug that would happen with functions that need to transform tensors from
   0-based to 1-based in the GPU. (#317)
-- Fixed bug when trying to print the `grad_fn` of a Tensor that doesn't have one.
-  See (#321)
+- Fixed `torch_argsort` and `x$argsort` to return 1-based indexes (#342)
+- Fixed `torch_argmax`, `torch_argmin`, `x$argmax()` and `x$argmin()` return 1-based indexes. (#389)
+
+## New features
+
 - Added `$element_size()` method (@dirkschumacher #322)
 - Added `$bool()` method (@dirkschumacher #323)
-- `torch__addr` and `torch__addr_` have been removed.
+- `torch__addr` and `torch__addr_` have been removed as they are no longer available in LibTorch 1.7.
 - We now check the MD5 hashes of downloaded LibTorch binaries. (@dirkschumacher #325)
-- Refactored the optimizers code to avoid duplication of parameter checks, etc. (@dirkschumacher #328)
 - Added a Distribution abstract class (@krzjoa #333)
 - Updated to LibTorch 1.7 (#337)
-- Fixed `torch_argsort` and `x$argsort` to return 1-based indexes (#342)
-- Fixed `torch_norm` so it can be called with a `dim` argument. (#345)
 - We now warn when converting `long` tensors to R and there's a chance of an integer overflow. (#347)
 - Allow `private` and `active` methods in `nn_module`'s and `dataset`'s. (#349)
-- Fixed crash when calling `torch_hann_window` with an invalid `NULL` `window_length`. (#351)
 - Added `nn_batch_norm3d` (@mattwarkentin #354)
-- Fixed `torch_stft` calls for LibTorch 1.7 (added the `return_complex` argument) (#355)
-- Fixed bug when strides were NULL in some pooling operations. (#361)
 - Added `nn_lstm` and `nn_gru` modules. (#362)
-- Use `nvcc --version` instead of `nvidia-smi` to find the CUDA version as `nvidia-smi` reports the latest
-  supported version and not the installed one. (#363)
 - Added distribution constraints (@krzjoa #364)
-- Corrected URL to download LibTorch under Linux with CUDA 10.2 (#367)
-- Dataloaders now returns a `coro::exhausted` intead of raising `stop_iteration_error` when the dataloader exceeds. (#366)
 - Dataloaders now use the num_workers argument to load data in parallel (#366)
 - Added Exponential Family classs to distributions (#373)
 - Added Dockerfile and docker compose file with GPU support, with a how-to guide. (#380 #386)
-- Fixed handling of integer tensors when indexing tensors (#385)
 - Added R 3.6 to the CI system and fixed compilation from source with it on Windows (#387)
-- Fixed bug when passing length zero vectors to lantern/libtorch. (#388)
-- Fixed `torch_argmax`, `torch_argmin`, `x$argmax()` and `x$argmin()` return 1-based indexes. (#389)
 - Initial support for JIT tracing (#377)
 - Added LBFGS optimizer (#392)
 - Improved the `nn_module` UI by improving autocomplete support and adding a print method (#391)
+
+## Bug fixes
+
+- Fixed bug when trying to print the `grad_fn` of a Tensor that doesn't have one.
+  See (#321)
+- Refactored the optimizers code to avoid duplication of parameter checks, etc. (@dirkschumacher #328)
+- Fixed `torch_norm` so it can be called with a `dim` argument. (#345)
+- Fixed crash when calling `torch_hann_window` with an invalid `NULL` `window_length`. (#351)
+- Fixed `torch_stft` calls for LibTorch 1.7 (added the `return_complex` argument) (#355)
+- Fixed bug when strides were NULL in some pooling operations. (#361)
+- Use `nvcc --version` instead of `nvidia-smi` to find the CUDA version as `nvidia-smi` reports the latest supported version and not the installed one. (#363)
+- Corrected URL to download LibTorch under Linux with CUDA 10.2 (#367)
+- Fixed handling of integer tensors when indexing tensors (#385)
+- Fixed bug when passing length zero vectors to lantern/libtorch. (#388)
 
 # torch 0.1.1
 
