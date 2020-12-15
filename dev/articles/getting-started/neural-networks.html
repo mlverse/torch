@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -47,7 +47,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -159,7 +159,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -173,8 +173,7 @@
 
       
 
-      </header><script src="neural-networks_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="neural-networks_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="neural-networks_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="neural-networks_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Neural networks</h1>
@@ -267,7 +266,7 @@
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">net</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
 <span class="va">out</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.1054  0.1725  0.0117 -0.0224 -0.0309  0.0476 -0.0399  0.0857  0.0753 -0.0431</span>
+<span class="co">#&gt; -0.0076  0.0172  0.0451  0.0797 -0.0786  0.0032 -0.0181 -0.1235  0.1540  0.0877</span>
 <span class="co">#&gt; [ CPUFloatType{1,10} ]</span></code></pre></div>
 <p>Zero the gradient buffers of all parameters and backprops with random gradients:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -318,7 +317,7 @@
 <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">target</span><span class="op">)</span>
 <span class="va">loss</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; 1.01067</span>
+<span class="co">#&gt; 1.1127</span>
 <span class="co">#&gt; [ CPUFloatType{} ]</span></code></pre></div>
 <p>Now, if you follow loss in the backward direction, using its <code>$grad_fn</code> attribute, you will see a graph of computations that looks like this:</p>
 <pre><code>input -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d
@@ -360,12 +359,12 @@
 <span class="va">net</span><span class="op">$</span><span class="va">conv1</span><span class="op">$</span><span class="va">bias</span><span class="op">$</span><span class="va">grad</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; 0.01 *</span>
-<span class="co">#&gt; -0.1429</span>
-<span class="co">#&gt;  0.1907</span>
-<span class="co">#&gt;  0.1319</span>
-<span class="co">#&gt;  0.8924</span>
-<span class="co">#&gt;  1.9036</span>
-<span class="co">#&gt; -0.6527</span>
+<span class="co">#&gt;  1.7607</span>
+<span class="co">#&gt;  0.1018</span>
+<span class="co">#&gt;  2.7392</span>
+<span class="co">#&gt; -0.1137</span>
+<span class="co">#&gt; -1.1287</span>
+<span class="co">#&gt;  0.6777</span>
 <span class="co">#&gt; [ CPUFloatType{6} ]</span></code></pre></div>
 <p>Now, we have seen how to use loss functions.</p>
 </div>

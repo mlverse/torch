@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -47,7 +47,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -159,7 +159,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -173,8 +173,7 @@
 
       
 
-      </header><script src="autograd_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="autograd_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="autograd_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="autograd_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Autograd: automatic differentiation</h1>
@@ -245,8 +244,8 @@
 <span class="co">#&gt; [1] FALSE</span>
 <span class="va">a</span><span class="op">$</span><span class="fu">requires_grad_</span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -16.0596  -0.6366</span>
-<span class="co">#&gt;  -5.5014  -0.0686</span>
+<span class="co">#&gt; -28.2474  -0.2560</span>
+<span class="co">#&gt;  -3.1849   1.1034</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span>
 <span class="va">a</span><span class="op">$</span><span class="va">requires_grad</span>
 <span class="co">#&gt; [1] TRUE</span>
@@ -301,9 +300,9 @@
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">x</span>
 <span class="va">y</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  117.3685</span>
-<span class="co">#&gt;  -14.7680</span>
-<span class="co">#&gt;   88.7502</span>
+<span class="co">#&gt;   74.3592</span>
+<span class="co">#&gt;   73.0466</span>
+<span class="co">#&gt;  169.5543</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 <p>Now in this case y is no longer a scalar. <code>autograd</code> could not compute the full Jacobian directly, but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
