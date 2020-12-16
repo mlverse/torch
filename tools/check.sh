@@ -11,3 +11,5 @@ Rscript -e 'torch_package <- dir("check", full.names = TRUE, pattern = "torch_")
 
 # run tests -------
 Rscript -e 'setwd("tests"); source("testthat.R")'
+
+echo "Done"
