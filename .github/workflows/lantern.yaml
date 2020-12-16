@@ -131,8 +131,8 @@ jobs:
         if: ${{ matrix.cuda == 9.2 && matrix.os == 'ubuntu-18.04' }}
         run: |
           wget --quiet https://developer.nvidia.com/compute/cuda/9.2/Prod2/local_installers/cuda_9.2.148_396.37_linux
-          chmod +x cuda_9.2.148_396.37_linux.run
-          sudo ./cuda_9.2.148_396.37_linux.run --silent --toolkit
+          chmod +x cuda_9.2.148_396.37_linux
+          sudo ./cuda_9.2.148_396.37_linux --silent --toolkit
           echo "CUDA=${{matrix.cuda}}" >> $GITHUB_ENV
           echo "CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda" >> $GITHUB_ENV
           dir /usr/local
