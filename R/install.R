@@ -76,7 +76,7 @@ install_config <- list(
           path = "libtorch/lib",
           md5hash = "b27db365dbd422a6af024127bfb0bb9b"
         ),
-        "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-101.zip", branch)
+        "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-902.zip", branch)
       )
     )
   )
