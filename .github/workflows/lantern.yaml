@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - 'cran/**'
-      - gpu-windows
+      - cuda9.2-md5hash
 
 jobs:
   build:
