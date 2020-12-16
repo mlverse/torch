@@ -1,4 +1,4 @@
-branch <- "master" 
+branch <- "cuda9.2-md5hash" 
 
 
 install_config <- list(
