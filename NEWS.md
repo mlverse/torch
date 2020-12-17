@@ -1,6 +1,8 @@
 # torch (development version)
 
 - Small improvement to `nn_module` documentation (#399).
+- Fix support for cuda 9.2 (#398)
+- Fixed GPU CI that was skipping tests. (#398)
 
 # torch 0.2.0
 
