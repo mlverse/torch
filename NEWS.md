@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Small improvement to `nn_module` documentation (#399).
+
 # torch 0.2.0
 
 ## Breaking changes
