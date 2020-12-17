@@ -153,7 +153,7 @@ test_that("is_cuda", {
   skip_if_cuda_not_available()
   
   x <- torch_randn(10, 10, device = torch_device("cuda"))
-  expect_true(X$is_cuda)
+  expect_true(x$is_cuda)
 })
 
 test_that("ndim", {
@@ -233,7 +233,7 @@ test_that("is_leaf", {
   expect_true(a$is_leaf)
   
   skip_if_cuda_not_available()
-  a <- torch_rand(10)$to(device = "cuda")
+  a <- 2*torch_rand(10, requires_grad = TRUE)$to(device = "cuda")
   expect_true(!a$is_leaf)
   
 })

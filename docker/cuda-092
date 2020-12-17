@@ -21,7 +21,7 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
                          --slave /usr/bin/g++ g++ /usr/bin/g++-7  && \
     update-alternatives --config gcc
     
-RUN apt-get install -y locales && \
+RUN apt-get install -y locales pandoc && \
     locale-gen en_US.UTF-8 && \
     update-locale 
 

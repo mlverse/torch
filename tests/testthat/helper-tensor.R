@@ -29,7 +29,7 @@ expect_tensor <- function(object) {
 }
 
 expect_equal_to_r <- function(object, expected) {
-  expect_equal(as_array(object), expected)
+  expect_equal(as_array(object$cpu()), expected)
 } 
 
 expect_tensor_shape <- function(object, expected) {
