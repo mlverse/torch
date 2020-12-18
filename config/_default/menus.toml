@@ -17,18 +17,13 @@
     weight = 3
     
 [[main]]
-    name = "getting technical"
-    url = "/technical/"
-    weight = 4
-    
-[[main]]
     name = "docs"
     url = "/docs/"
-    weight = 5
+    weight = 4
 
 [[main]]
     name = "blog"
     url = "https://blogs.rstudio.com/ai/"
-    weight = 6
+    weight = 5
 
 
