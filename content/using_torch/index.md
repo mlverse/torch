@@ -22,4 +22,4 @@ Once you've learned [the basics](/getting_started), you're ready to dive into ap
 
 -   [Convolutional LSTM for spatial forecasting](https://blogs.rstudio.com/ai/posts/2020-12-17-torch-convlstm/) is an intermediate-level example that shows how to build a convolutional LSTM from scratch.
 
-## 
+
