@@ -3,3 +3,4 @@ src/
 deps/
 lantern
 vignettes
+.Rproj.user

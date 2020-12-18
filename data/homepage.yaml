@@ -1,20 +1,20 @@
 bandtwo:
-- url: /docs/articles/getting-started/warmup.html
-  title: Get started
+- url: /getting_started
+  title: get started
   icon: fa-meteor
   icon_pack: fas
   what: |
     Start with the basics in our quick tour of torch. Learn how to create tensors, use the autograd feature and build your first deep learning model. 
 
-- url: /docs/articles/examples/index.html
-  title: Explore
+- url: /using_torch
+  title: apply
   icon: fa-search-plus
   icon_pack: fas
   what: |
-    Explore our torch gallery, including examples from computer vision, natural language processing and more.
+    Check out applied examples in the areas of image processing, time series forecasting, natural language processing, and more.
     
 - url: https://blogs.rstudio.com/ai/
-  title: Keep posted
+  title: keep posted
   icon: fa-rss
   icon_pack: fas
   what: |
