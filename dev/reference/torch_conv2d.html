@@ -98,50 +98,6 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting started
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginners guide</li>
-    <li>
-      <a href="../articles/getting-started/warmup.html">Warm-up</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors.html">Tensors</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
-    </li>
-    <li class="dropdown-header">Torch Mechanics</li>
-    <li>
-      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -292,35 +248,35 @@ planes.</p>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
 #&gt; (1,1,.,.) = 
-#&gt;   -3.4755   1.2823  -9.4837  -5.7829   2.1359
-#&gt;    2.4876   4.4947 -20.6693  -3.8276  -4.7555
-#&gt;   -2.9029   4.3228 -14.6508   1.6259   5.5996
-#&gt;   -5.3312   1.1688 -11.8558  14.5602  -5.1366
-#&gt;    0.4098   3.8236  -9.5649   8.8461   6.2170
+#&gt;   -3.2294   1.2245   3.7117  -4.3091  12.8467
+#&gt;   -1.6868  -7.5453   4.2765 -15.8925  10.1039
+#&gt;    3.4160  -2.5152  -2.2091  11.6097  -6.5608
+#&gt;    4.6820  -7.3868  -6.8263  -1.8742   0.8774
+#&gt;    0.0799   4.6672   5.1130   2.2297   1.9175
 #&gt; 
 #&gt; (1,2,.,.) = 
-#&gt;    7.6920   3.3795  -2.0907  14.7173  -7.3814
-#&gt;   -2.3466   3.3175   3.6276   7.6451  -6.1365
-#&gt;  -10.8039  14.9751   6.0832  -4.6216   7.7249
-#&gt;    0.6278  -7.9159   4.6498  -4.3864   7.5516
-#&gt;    5.8406  -5.7934   0.7098   2.0372  -4.8405
+#&gt;   0.0959  4.2490 -9.2540 -7.9603 -4.0394
+#&gt;   1.8103 -0.1586  7.1665  2.1025 -2.7358
+#&gt;  -1.5819  0.8696  1.4147 -1.9477  7.9142
+#&gt;   5.9704 -0.8235 -6.8327  3.5075  1.2978
+#&gt;  -2.8690 -5.8962  7.0312 -0.6068 -1.0304
 #&gt; 
 #&gt; (1,3,.,.) = 
-#&gt;   4.1534 -8.4143  3.3657 -6.8613 -3.5409
-#&gt;   4.7874 -2.5384  6.1498 -9.9062  2.8752
-#&gt;   9.2092 -4.9094  3.7880 -19.7244  6.0042
-#&gt;   4.7916 -4.9612  2.7093 -4.6277  3.1383
-#&gt;   4.2539 -3.4158  6.3289 -3.3657 -2.7542
+#&gt;   1.6250 -0.1258  2.0963 -8.1975  6.5780
+#&gt;   2.4822 -2.8932  4.9978 -11.3437 -2.7228
+#&gt;  -0.7060  3.9736  9.0570  7.6220 -0.0686
+#&gt;  -2.5811 -5.2061 -3.0782 -1.9825  4.1252
+#&gt;  -2.1179 -2.5295  1.4120  6.3224  2.8137
 #&gt; 
 #&gt; (1,4,.,.) = 
-#&gt;    2.3892   0.5371  -6.3642   2.4342  12.4778
-#&gt;   -1.6234   7.9408 -10.6468  -2.5910  14.6414
-#&gt;    1.1922  -5.1741  -0.9496   4.3166   2.0983
-#&gt;    7.7181   1.3980   0.1010   7.2426  -6.8647
-#&gt;   -0.0796   9.7378 -10.2039   4.3638   1.4223
+#&gt;   1.4361 -0.0863 -6.0800 -0.6440 -1.2910
+#&gt;  -1.3559  2.2193 -0.8169  1.5368 -5.8796
+#&gt;  -0.7106 -2.9204  8.8206 -4.1041  5.4432
+#&gt;   1.0569 -0.6137  2.0404  5.8646 -0.7612
+#&gt;  -6.7120 -0.1281 -4.5986  0.3961  1.1229
 #&gt; 
 #&gt; (1,5,.,.) = 
-#&gt;   -1.0385  -3.0455   5.5193  10.0094  -0.5951
+#&gt;   -4.8105   4.5478  -0.0628  16.6969   0.9907
 #&gt; ... [the output was truncated (use n=-1 to disable)]
 #&gt; [ CPUFloatType{1,8,5,5} ]</div></pre>
   </div>
