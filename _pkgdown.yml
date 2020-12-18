@@ -9,36 +9,9 @@ development:
 
 navbar:
  structure:
-  left:  [home, getting-started, articles, examples, reference, news]
+  left:  [home, articles, examples, reference, news]
   right: [github]
  components:
-  getting-started:
-    text: Getting started
-    menu:
-      - text: Beginners guide
-      - text: Warm-up
-        href: articles/getting-started/warmup.html
-      - text: Tensors
-        href: articles/getting-started/tensors.html  
-      - text: Tensors and autograd
-        href: articles/getting-started/tensors-and-autograd.html
-      - text: Defining new autograd functions
-        href: articles/getting-started/new-autograd-functions.html
-      - text: 'nn: neural networks with torch'
-        href: articles/getting-started/nn.html
-      - text: 'optim: optimizers in torch'
-        href: articles/getting-started/optim.html
-      - text: Custom nn modules
-        href: articles/getting-started/custom-nn.html
-      - text: Control flow & Weight sharing
-        href: articles/getting-started/control-flow-and-weight-sharing.html
-      - text: Torch Mechanics
-      - text: What's torch?
-        href: articles/getting-started/what-is-torch.html
-      - text: 'Autograd: automatic differentiation'
-        href: articles/getting-started/autograd.html
-      - text: Neural networks
-        href: articles/getting-started/neural-networks.html
   articles:
     text: Articles
     menu:
