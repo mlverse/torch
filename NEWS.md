@@ -3,6 +3,7 @@
 - Small improvement to `nn_module` documentation (#399).
 - Fix support for cuda 9.2 (#398)
 - Fixed GPU CI that was skipping tests. (#398)
+- The getting started section has been removed from the pkgdown website in favor of the new guide in the landing page (#401)
 
 # torch 0.2.0
 
