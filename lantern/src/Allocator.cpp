@@ -14,13 +14,35 @@ struct LanternCPUAllocator final : at::Allocator {
   LanternCPUAllocator() {}
   ~LanternCPUAllocator() override {}
   at::DataPtr allocate(size_t nbytes) const override {
-    if (std::this_thread::get_id() != MAIN_THREAD_ID) 
-    {
-        std::cout << "allocating " << nbytes << "bytes in the theread id " << 
-            std::this_thread::get_id() << std::endl;
-    }
     
-    void* data = alloc_cpu(nbytes);
+    void* data;
+    if (std::this_thread::get_id() == MAIN_THREAD_ID) 
+    {
+        try
+        {
+            // try first allocation
+            data = alloc_cpu(nbytes);
+        }
+        catch(...)
+        {
+            // we are going to call R gc here!
+            std::cout << "allocating " << nbytes << "bytes in the theread id " << 
+            std::this_thread::get_id() << std::endl;
+            std::cout << "we are going to call the R garbage collector now!" << std::endl;
+            
+            // then try allocating again!
+            data = alloc_cpu(nbytes);
+        }
+                
+    }
+    else
+    {
+        // if not on main thread we don't have any custom behavior
+        // because we won't be able to call the R garbage collector
+        // anyway.
+        data = alloc_cpu(nbytes);
+    }
+
     profiledCPUMemoryReporter().New(data, nbytes);
     return {data, data, &ReportAndDelete, at::Device(at::DeviceType::CPU)};
   }
