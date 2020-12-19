@@ -101,6 +101,7 @@ add_library(lantern SHARED
     src/Threads.cpp
     src/Trace.cpp
     src/Stack.cpp
+    src/Allocator.cpp
 )
 add_library(lantern::library ALIAS lantern)
 

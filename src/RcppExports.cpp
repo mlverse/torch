@@ -28969,6 +28969,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_set_lantern_allocator
+void cpp_set_lantern_allocator();
+RcppExport SEXP _torch_cpp_set_lantern_allocator() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    cpp_set_lantern_allocator();
+    return R_NilValue;
+END_RCPP
+}
 // cpp_torch_tensor_list
 Rcpp::XPtr<XPtrTorchTensorList> cpp_torch_tensor_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
@@ -31408,6 +31417,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_set_num_interop_threads", (DL_FUNC) &_torch_cpp_set_num_interop_threads, 1},
     {"_torch_cpp_get_num_threads", (DL_FUNC) &_torch_cpp_get_num_threads, 0},
     {"_torch_cpp_get_num_interop_threads", (DL_FUNC) &_torch_cpp_get_num_interop_threads, 0},
+    {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 0},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},

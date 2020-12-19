@@ -8833,6 +8833,10 @@ cpp_get_num_interop_threads <- function() {
     .Call('_torch_cpp_get_num_interop_threads', PACKAGE = 'torchpkg')
 }
 
+cpp_set_lantern_allocator <- function() {
+    invisible(.Call('_torch_cpp_set_lantern_allocator', PACKAGE = 'torchpkg'))
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torchpkg', x)
 }
