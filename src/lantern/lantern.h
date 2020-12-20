@@ -779,10 +779,10 @@ HOST_API void lantern_TraceableFunction_delete (void* x)
   LANTERN_HOST_HANDLER;
 }
 
-LANTERN_API void (LANTERN_PTR _set_lantern_allocator) ();
-HOST_API void set_lantern_allocator ()
+LANTERN_API void (LANTERN_PTR _set_lantern_allocator) (void (*r_gc) ());
+HOST_API void set_lantern_allocator (void (*r_gc) ())
 {
-  _set_lantern_allocator();
+  _set_lantern_allocator(r_gc);
   LANTERN_HOST_HANDLER;
 }
   /* Autogen Headers -- Start */

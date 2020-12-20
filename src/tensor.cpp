@@ -298,9 +298,3 @@ int cpp_get_num_interop_threads ()
 {
   return lantern_get_num_interop_threads();
 }
-
-// [[Rcpp::export]]
-void cpp_set_lantern_allocator ()
-{
-  set_lantern_allocator();
-}

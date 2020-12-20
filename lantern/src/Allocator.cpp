@@ -7,6 +7,15 @@
 #include "utils.hpp"
 
 const std::thread::id MAIN_THREAD_ID = std::this_thread::get_id();
+uint64_t allocated_memory;
+std::mutex mtx_allocated; 
+void (*call_r_gc) () = nullptr;
+
+// the R gc must be set whenever liblantern is loaded.
+void _lantern_set_call_r_gc(void (*fn) ())
+{
+    call_r_gc = fn;
+}
 
 namespace c10 
 {
@@ -16,8 +25,33 @@ struct LanternCPUAllocator final : at::Allocator {
   at::DataPtr allocate(size_t nbytes) const override {
     
     void* data;
+
+    {
+        // we register every memory allocation 
+        const std::lock_guard<std::mutex> lock(mtx_allocated);
+        allocated_memory += nbytes;
+    }
+
     if (std::this_thread::get_id() == MAIN_THREAD_ID) 
     {
+
+        // if o the main thread we check if we have allocated 4GB of memory
+        // and in this case we call the R garbage collector.
+        bool call_gc = false;
+        {
+            const std::lock_guard<std::mutex> lock(mtx_allocated); 
+            if (allocated_memory > 4e9)
+            {
+                call_gc = true;
+                allocated_memory = 0;
+            }
+        }
+        
+        if (call_gc) 
+        {
+            (*call_r_gc)();
+        }
+        
         try
         {
             // try first allocation
@@ -25,10 +59,9 @@ struct LanternCPUAllocator final : at::Allocator {
         }
         catch(...)
         {
-            // we are going to call R gc here!
-            std::cout << "allocating " << nbytes << "bytes in the theread id " << 
-            std::this_thread::get_id() << std::endl;
-            std::cout << "we are going to call the R garbage collector now!" << std::endl;
+            // Use R garbage collector and see if we can
+            // allocate more memory.
+            (*call_r_gc)();
             
             // then try allocating again!
             data = alloc_cpu(nbytes);
@@ -64,7 +97,8 @@ struct LanternCPUAllocator final : at::Allocator {
 
 auto lantern_allocator = at::LanternCPUAllocator();
 
-void _set_lantern_allocator ()
+void _set_lantern_allocator (void (*r_gc) ())
 {
+    _lantern_set_call_r_gc(r_gc);
     c10::SetCPUAllocator(&lantern_allocator, 1);
 }

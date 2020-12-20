@@ -30,7 +30,8 @@ globalVariables(c("..", "self", "private", "N"))
   if (install_exists() && install_success && Sys.getenv("TORCH_LOAD", unset = 1) != 0) {
     # in case init fails aallow user to restart session rather than blocking install
     tryCatch({
-      lantern_start() 
+      lantern_start()
+      cpp_set_lantern_allocator()
       
       .generator_null <<- torch_generator()
       .generator_null$set_current_seed(seed = sample(1e5, 1))
