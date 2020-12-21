@@ -2,18 +2,28 @@
 #   The weight parameter defines the order that the links will appear in.
 
 [[main]]
-    name = "Packages"
+    name = "ecosystem"
     url = "/packages/"
     weight = 1
     
 [[main]]
-    name = "Docs"
-    url = "/docs/"
+    name = "getting started"
+    url = "/start/"
     weight = 2
 
 [[main]]
-    name = "Blog"
-    url = "https://blogs.rstudio.com/ai/"
+    name = "using torch"
+    url = "/using_torch/"
     weight = 3
+    
+[[main]]
+    name = "docs"
+    url = "/docs/"
+    weight = 4
+
+[[main]]
+    name = "blog"
+    url = "https://blogs.rstudio.com/ai/"
+    weight = 5
 
 
