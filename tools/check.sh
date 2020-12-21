@@ -9,6 +9,8 @@ Rscript -e "remotes::install_deps(dependencies = TRUE)"
 if ["$BUILD_LANTERN" == "true"]
 then
   Rscript tools/buildlantern.R
+else
+  echo "BUILD_LANTERN = $BUILD_LANTERN"
 fi
 
 # check -----------
