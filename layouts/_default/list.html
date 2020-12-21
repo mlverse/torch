@@ -1,0 +1,91 @@
+{{ define "main" }}
+
+
+<div class="band padForHeader pushFooter">
+  <div class="bandContent">
+    <div class="full splitColumns withMobileMargins">
+      <div class="column75">
+        <div class="section">
+          <div class="sectionTitle">
+            
+            {{ if eq .Section "tags" }}
+            <a href="{{ (print "/learn/" | urlize) | relURL }}">
+              <i class="fas fa-chevron-left"></i>&nbsp;Back to Learn
+            </a>
+            {{ end }}
+            
+            {{ if not (eq .Section "tags" "books") }}
+            <a href="{{ .FirstSection.RelPermalink }}">
+              <i class="fas fa-chevron-left"></i>&nbsp;Back to {{ .Section | title }}
+            </a>
+            {{ end }}
+          </div>
+        </div>
+        
+        <div class="sectionTitle">{{ .Title }}</div>
+
+        <div>{{ range .Pages }}
+              {{ $post := . }}
+          <div class="listItem">
+            
+            
+              <!--thumbnail images-->
+              <div class="listItem">
+                {{ $cover := (.Resources.ByType "image").GetMatch "*cover*" }}
+                {{ with $cover }}
+                  {{ $fit_thumb := .Fill "500x500 Top" }}
+                <a class="itemImage project" href="{{ $post.RelPermalink }}" style="background-image: url('{{ $fit_thumb.RelPermalink }}');"></a>
+                {{ end }} 
+              </div>
+              
+            <div class="itemDetails">
+              <div class="itemHeader">
+
+                <div class="itemTitle"><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+                </div>
+                
+              </div>
+              <div class="itemMeta">
+                <div class="itemDescription learning-objective-text"><em>{{ default .Description | markdownify }}</em>
+                  <a class="readMore" href="{{ .RelPermalink }}">Read more &#187;</a>
+                </div>
+              
+                {{ if .Params.tags }}
+                <div class="itemDate"> 
+                <div class="created">
+                <i class="fas fa-box-open"></i>&nbsp;
+                  {{ range $i, $tags := (.GetTerms "tags") }}
+                      {{- if $i -}}, {{ end -}}
+                      {{ with $tags }}
+                      <a href="{{ .Permalink }}">{{- .LinkTitle -}}</a>
+                      {{- end -}}
+                  {{- end -}}
+                </div>
+                </div> 
+                {{ end }}
+                
+              </div>
+            </div>
+          </div>
+        {{ end }}</div>
+      {{ template "_internal/pagination.html" . }}
+      </div>
+
+      <div class="column25">
+        {{ if not (eq .Section "tags" "books") }}
+          {{ partial "topics-sidebar.html" . }}
+        {{ end }}
+        
+        <div class="section">
+          <div class="sectionTitle">Resources</div>
+          {{ partial "resources_sticky.html" .}}
+        </div>
+      </div>
+          
+
+
+    </div>
+  </div>  <!-- bandContent -->
+</div> <!-- band -->
+
+{{ end }}
