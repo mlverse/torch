@@ -92,9 +92,10 @@ jobs:
       DOCKER_TAG: ${{ format('torch{0}', matrix.cuda) }}
       TORCH_TEST: 1
       TORCH_INSTALL: 1
+      BUILD_LANTERN: ${{ contains( github.event.pull_request.labels.*.name, 'lantern') }}
     steps:
       - uses: actions/checkout@v2
       - name: Build image
         run: docker build -f $DOCKER_FILE -t $DOCKER_TAG .
       - name: Run checks
-        run: docker run --rm --gpus all $DOCKER_TAG sh torch/tools/check.sh
+        run: docker run --rm --gpus all -e BUILD_LANTERN $DOCKER_TAG sh torch/tools/check.sh
