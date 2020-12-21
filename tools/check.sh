@@ -6,11 +6,8 @@ export TORCH_INSTALL=1
 Rscript -e "install.packages(c('remotes', 'rcmdcheck'))"
 Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
-if [["$BUILD_LANTERN" = "true"]]
-then
+if "$BUILD_LANTERN" = "true"; then
   Rscript tools/buildlantern.R
-else
-  echo "BUILD_LANTERN = $BUILD_LANTERN"
 fi
 
 # check -----------
