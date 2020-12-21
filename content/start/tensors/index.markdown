@@ -21,8 +21,7 @@ By the way, this first tutorial is the longest (by far). With tensors, there is 
 
 Once we've cleared that agenda, we code the aforementioned little network, seeing all those aspects in action.
 
-
-## Creating tensors
+# Creating tensors
 
 Tensors may be created by specifying individual values. Here we create two one-dimensional tensors (vectors), of types `float` and `bool`, respectively:
 
@@ -96,9 +95,9 @@ t
 
 ```
 ## torch_tensor
-##  0.4248 -0.9601  0.0418
-## -0.0076  0.7109 -0.9355
-##  0.7956 -0.0028  1.1213
+##  1.1533  0.8571  1.3481
+## -0.2113 -0.6174  0.5821
+##  1.9993  0.1421  1.1064
 ## [ CPUFloatType{3,3} ]
 ```
 
@@ -190,7 +189,7 @@ We'll talk more about devices below.
 
 There is another very important parameter to the tensor-creation functions: `requires_grad`. Here though, I need to ask for your patience: This one will prominently figure in the next section.
 
-## Conversion to built-in R data types
+# Conversion to built-in R data types
 
 To convert `torch` tensors to R, use `as_array()`:
 
@@ -251,7 +250,7 @@ as.integer(t$cpu())
 ## [1] 2
 ```
 
-## Indexing and slicing tensors
+# Indexing and slicing tensors
 
 Often, we want to retrieve not a complete tensor, but only some of the values it holds, or even just a single value. In these cases, we talk about *slicing* and *indexing*, respectively.
 
@@ -259,7 +258,7 @@ In R, these operations are 1-based, meaning that when we specify offsets, we ass
 
 The way I'm organizing this section is the following. We'll inspect the intuitive parts first, where by intuitive I mean: intuitive to the R user who has not yet worked with Python's [NumPy](https://numpy.org/). Then come things which, to this user, may look more surprising, but will turn out to be pretty useful.
 
-#### Indexing and slicing: the R-like part
+## Indexing and slicing: the R-like part
 
 None of these should be overly surprising:
 
@@ -363,7 +362,7 @@ t[1, 1, drop = FALSE]$size()
 ## [1] 1 1
 ```
 
-#### Indexing and slicing: What to look out for
+## Indexing and slicing: What to look out for
 
 Whereas R uses negative numbers to remove elements at specified positions, in `torch` negative values indicate that we start counting from the end of a tensor -- with `-1` pointing to its last element:
 
@@ -422,12 +421,12 @@ t
 ```
 ## torch_tensor
 ## (1,.,.) = 
-##   2 -1
-##  -2  5
+##  -1 -5
+##  -1 -7
 ## 
 ## (2,.,.) = 
-##   6 -2
-##   6 -3
+##  -3 -1
+##   1  4
 ## [ CPUFloatType{2,2,2} ]
 ```
 
@@ -437,8 +436,8 @@ t[.., 1]
 
 ```
 ## torch_tensor
-##  2 -2
-##  6  6
+## -1 -1
+## -3  1
 ## [ CPUFloatType{2,2} ]
 ```
 
@@ -448,14 +447,14 @@ t[2, ..]
 
 ```
 ## torch_tensor
-##  6 -2
-##  6 -3
+## -3 -1
+##  1  4
 ## [ CPUFloatType{2,2} ]
 ```
 
 Now we move on to a topic that, in practice, is just as indispensable as slicing: changing tensor *shapes*.
 
-## Reshaping tensors
+# Reshaping tensors
 
 Changes in shape can occur in two fundamentally different ways. Seeing how "reshape" really means: *keep the values but modify their layout*, we could either alter how they're arranged physically, or keep the physical structure as-is and just change the "mapping" (a semantic change, as it were).
 
@@ -463,7 +462,7 @@ In the first case, storage will have to be allocated for two tensors, source and
 
 Not surprisingly, for performance reasons, the second operation is preferred.
 
-#### Zero-copy reshaping
+## Zero-copy reshaping
 
 We start with zero-copy methods, as we'll want to use them whenever we can.
 
@@ -576,7 +575,7 @@ t1$storage()$data_ptr()
 ```
 
 ```
-## [1] "0x55f0ae5023c0"
+## [1] "0x55d7dd0a8f00"
 ```
 
 ```r
@@ -584,7 +583,7 @@ t2$storage()$data_ptr()
 ```
 
 ```
-## [1] "0x55f0ae5023c0"
+## [1] "0x55d7dd0a8f00"
 ```
 
 What's different is the storage *metadata* `torch` keeps about both tensors. Here, the relevant information is the *stride*:
@@ -661,7 +660,7 @@ In `torch` lingo, tensors -- like `t2` -- that re-use existing storage (and just
 
 [^1]: Although the assumption may be tempting, "contiguous" does not correspond to what we'd call "contiguous in memory" in casual language.
 
-#### Reshape with copy
+## Reshape with copy
 
 In the following snippet, trying to reshape `t2` using `view()` fails, as it already carries information indicating that the underlying data should not be read in physical order.
 
@@ -704,7 +703,7 @@ t2$storage()$data_ptr()
 ```
 
 ```
-## [1] "0x55f0b1001600"
+## [1] "0x55d82d321500"
 ```
 
 ```r
@@ -714,10 +713,10 @@ t4$storage()$data_ptr()
 ```
 
 ```
-## [1] "0x55f0af223a00"
+## [1] "0x55d7debe9180"
 ```
 
-### Operations on tensors
+# Operations on tensors
 
 Unsurprisingly, `torch` provides a bunch of mathematical operations on tensors; we'll see some of them in the network code below, and you'll encounter lots more when you continue your `torch` journey. Here, we quickly take a look at the overall tensor method semantics.
 
@@ -801,7 +800,7 @@ t3
 
 There is one thing we need to discuss before we wrap up our introduction to tensors: How can we have all those operations executed on the GPU?
 
-## Running on GPU
+# Running on GPU
 
 To check if your GPU(s) is/are visible to torch, run
 
@@ -852,9 +851,10 @@ t3$device
 ```
 ## torch_device(type='cpu')
 ```
+
 That's it for our discussion on tensors --- almost. There is one `torch` feature that, although related to tensor operations, deserves special mention. It is called broadcasting, and "bilingual" (R + Python) users will know it from NumPy.
 
-## Broadcasting
+# Broadcasting
 
 We often have to perform operations on tensors with shapes that don't match exactly.
 
@@ -869,9 +869,9 @@ t1 + 22
 
 ```
 ## torch_tensor
-##  23.0652  20.7402  21.9982  22.1459  20.0667
-##  20.9173  22.4653  21.6331  22.4323  21.5598
-##  21.2086  22.4145  21.2985  21.0062  20.0852
+##  21.5009  21.0671  20.3662  20.0958  21.0332
+##  23.5385  20.4018  22.0118  22.1513  23.1538
+##  21.0380  21.2937  22.0023  21.1927  21.8457
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -886,9 +886,9 @@ t1 + torch_tensor(c(22))
 
 ```
 ## torch_tensor
-##  22.7806  21.7579  22.0709  20.8752  22.4177
-##  21.3081  23.0588  20.8655  22.8869  20.8867
-##  22.3446  24.5046  22.7115  20.3133  22.3307
+##  24.3857  22.5784  22.9302  23.3058  20.9695
+##  22.3111  21.3965  22.0230  20.5258  21.0804
+##  21.2813  21.9429  22.2958  21.9863  23.3732
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -917,7 +917,7 @@ The rules are:
     # t1, shape:     8  1  6  1
     # t2, shape:        7  1  5
 
-2.  *Starting to look from the right*, the sizes along aligned axes either have to match exactly, or one of them has to be equal to `1`: in which case the latter is *broadcast* to the larger one.
+1.  *Starting to look from the right*, the sizes along aligned axes either have to match exactly, or one of them has to be equal to `1`: in which case the latter is *broadcast* to the larger one.
 
     In the above example, this is the case for the second-from-last dimension. This now gives
 
@@ -928,7 +928,7 @@ The rules are:
 
 , with broadcasting happening in `t2`.
 
-3.  If on the left, one of the arrays has an additional axis (or more than one), the other is virtually expanded to have a size of `1` in that place, in which case broadcasting will happen as stated in (2).
+1.  If on the left, one of the arrays has an additional axis (or more than one), the other is virtually expanded to have a size of `1` in that place, in which case broadcasting will happen as stated in (2).
 
     This is the case with `t1`'s leftmost dimension. First, there is a virtual expansion
 
@@ -966,9 +966,9 @@ t1$add(t2)
 
 ```
 ## torch_tensor
-## -1.7320  0.7010 -2.8744 -0.1333 -0.1440
-## -1.6643 -0.1786 -1.5516 -1.8370  3.7767
-## -1.9468  0.4774 -1.2803 -1.5678  2.9463
+## -0.4626 -2.2652  0.6126  1.8086 -0.8001
+##  0.1231 -0.1751  0.3695  0.2293  1.8247
+## -0.8873 -0.6179 -0.3723 -1.2463  0.4463
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -984,9 +984,9 @@ t1$add(t2)
 
 ```
 ## torch_tensor
-## -0.6188  1.2370  0.7629  2.2586 -0.1529
-##  0.0576  0.0786 -0.2185  0.7421  0.0332
-## -1.1387 -0.5294  0.3427 -0.0486  0.2753
+##  0.6726  3.7429 -0.1292  1.9041 -0.6457
+##  0.8139  3.0394 -2.8289  3.6824 -0.0144
+## -0.9379  0.4483 -0.9782  3.2740  0.3641
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -1002,9 +1002,9 @@ t1$add(t2)
 
 ```
 ## torch_tensor
-## -2.7804 -1.1802  0.4298 -3.2086 -3.7209
-##  1.5893  3.1895  4.7996  1.1611  0.6488
-## -1.4389  0.1613  1.7713 -1.8671 -2.3794
+##  0.8803 -0.4944 -0.3554  0.7771 -0.2957
+##  2.8900  1.5153  1.6543  2.7868  1.7139
+##  1.0562 -0.3185 -0.1795  0.9530 -0.1198
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -1030,11 +1030,11 @@ t1$view(c(4,1)) * t2
 
 And now, we really get to implementing that neural network!
 
-## Simple neural network using `torch` tensors
+# Simple neural network using `torch` tensors
 
 We now use `torch` to simulate some data.
 
-#### Toy data
+## Toy data
 
 
 ```r
@@ -1060,7 +1060,7 @@ y <- x[, 1, drop = FALSE] * 0.2 -
 
 The same goes for network initialization: We now make use of `torch_zeros()` and `torch_randn()`.
 
-#### Initialize weights
+## Initialize weights
 
 
 ```r
@@ -1078,7 +1078,7 @@ b1 <- torch_zeros(1, d_hidden)
 b2 <- torch_zeros(1, d_out)
 ```
 
-#### Training loop
+## Training loop
 
 Here are the four phases of the training loop -- forward pass, determination of the loss, backward pass, and weight updates --, now with all operations being `torch` tensor methods. Firstly, the forward pass:
 
@@ -1141,7 +1141,7 @@ And weight updates:
 
 Finally, let's put the pieces together.
 
-#### Complete network using `torch` tensors
+## Complete network using `torch` tensors
 
 
 ```r
@@ -1233,26 +1233,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  243.2848 
-## Epoch:  20    Loss:  165.1026 
-## Epoch:  30    Loss:  132.8416 
-## Epoch:  40    Loss:  117.24 
-## Epoch:  50    Loss:  108.3817 
-## Epoch:  60    Loss:  102.719 
-## Epoch:  70    Loss:  98.77706 
-## Epoch:  80    Loss:  95.62022 
-## Epoch:  90    Loss:  93.07752 
-## Epoch:  100    Loss:  91.00729 
-## Epoch:  110    Loss:  89.21071 
-## Epoch:  120    Loss:  87.6646 
-## Epoch:  130    Loss:  86.31 
-## Epoch:  140    Loss:  85.14186 
-## Epoch:  150    Loss:  84.13068 
-## Epoch:  160    Loss:  83.22889 
-## Epoch:  170    Loss:  82.50626 
-## Epoch:  180    Loss:  81.87419 
-## Epoch:  190    Loss:  81.33308 
-## Epoch:  200    Loss:  80.83426
+## Epoch:  10    Loss:  250.8332 
+## Epoch:  20    Loss:  157.8856 
+## Epoch:  30    Loss:  127.3842 
+## Epoch:  40    Loss:  112.4352 
+## Epoch:  50    Loss:  104.1926 
+## Epoch:  60    Loss:  99.00272 
+## Epoch:  70    Loss:  95.513 
+## Epoch:  80    Loss:  92.91859 
+## Epoch:  90    Loss:  90.78481 
+## Epoch:  100    Loss:  88.95575 
+## Epoch:  110    Loss:  87.4034 
+## Epoch:  120    Loss:  86.18372 
+## Epoch:  130    Loss:  85.04802 
+## Epoch:  140    Loss:  84.0229 
+## Epoch:  150    Loss:  83.13453 
+## Epoch:  160    Loss:  82.32983 
+## Epoch:  170    Loss:  81.57518 
+## Epoch:  180    Loss:  80.87898 
+## Epoch:  190    Loss:  80.26715 
+## Epoch:  200    Loss:  79.74549
 ```
 
 In the next tutorial, we'll make an important change, freeing us from having to think in detail about the backward pass.

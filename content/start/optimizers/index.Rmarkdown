@@ -7,7 +7,7 @@ description: |
 
 Based on where we ended up in the last tutorial, there are just two more things to do. For one, we still compute the loss by hand. And secondly, even though we get the gradients all nicely computed from *autograd*, we still loop over the model's parameters, updating them all ourselves. You won't be surprised to hear that none of this is necessary.
 
-## Losses and loss functions
+# Losses and loss functions
 
 `torch` comes with all the usual loss functions, such as mean squared error, cross entropy, Kullback-Leibler divergence, and the like. In general, there are two usage modes.
 
@@ -37,7 +37,7 @@ loss(x, y)
 
 This method may be preferable when one and the same algorithm should be applied to more than one pair of tensors.
 
-## Optimizers
+# Optimizers
 
 So far, we've been updating model parameters following a simple strategy: The gradients told us which direction on the loss curve was downward; the learning rate told us how big of a step to take. What we did was a straightforward implementation of *gradient descent*.
 
@@ -86,7 +86,7 @@ model$parameters
 
 If we perform optimization in a loop, we need to make sure to call `optimizer$zero_grad()` on every step, as otherwise gradients would be accumulated. You can see this in our final version of the network.
 
-## Simple network: final version
+# Simple network: final version
 
 ```{r}
 library(torch)

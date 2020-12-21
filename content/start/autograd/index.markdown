@@ -15,7 +15,7 @@ it for us.
 
 Prior to that though, let's get some background.
 
-## Automatic differentiation with *autograd*
+# Automatic differentiation with *autograd*
 
 `torch` uses a module called *autograd* to
 
@@ -31,7 +31,7 @@ are successively *propagated* *back* through the network. This is a form
 of *reverse mode automatic differentiation*.
 
 
-#### *Autograd* basics
+## *Autograd* basics
 
 As users, we can see a bit of the implementation. As a prerequisite for
 this "recording" to happen, tensors have to be created with
@@ -98,7 +98,7 @@ builds up a graph of backward operations. Here is a slightly more
 complex example -- feel free to skip if you're not the type who just
 *has* to peek into things for them to make sense.
 
-#### Digging deeper
+## Digging deeper
 
 We build up a simple graph of tensors, with inputs `x1` and `x2` being
 connected to output `out` by intermediaries `y` and `z`.
@@ -256,7 +256,7 @@ x1$grad
 After this nerdy excursion, let's see how *autograd* makes our network
 simpler.
 
-## The simple network, now using *autograd*
+# The simple network, now using *autograd*
 
 Thanks to *autograd*, we say good-bye to the tedious, error-prone
 process of coding backpropagation ourselves. A single method call does
@@ -355,26 +355,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  463.8376 
-## Epoch:  20    Loss:  181.419 
-## Epoch:  30    Loss:  109.7933 
-## Epoch:  40    Loss:  87.78796 
-## Epoch:  50    Loss:  81.06984 
-## Epoch:  60    Loss:  78.26762 
-## Epoch:  70    Loss:  76.6433 
-## Epoch:  80    Loss:  75.41228 
-## Epoch:  90    Loss:  74.38911 
-## Epoch:  100    Loss:  73.46175 
-## Epoch:  110    Loss:  72.63838 
-## Epoch:  120    Loss:  71.83791 
-## Epoch:  130    Loss:  71.05929 
-## Epoch:  140    Loss:  70.35287 
-## Epoch:  150    Loss:  69.69209 
-## Epoch:  160    Loss:  69.13846 
-## Epoch:  170    Loss:  68.64397 
-## Epoch:  180    Loss:  68.16409 
-## Epoch:  190    Loss:  67.7586 
-## Epoch:  200    Loss:  67.39085
+## Epoch:  10    Loss:  181.6566 
+## Epoch:  20    Loss:  140.5912 
+## Epoch:  30    Loss:  123.9891 
+## Epoch:  40    Loss:  113.9412 
+## Epoch:  50    Loss:  106.4017 
+## Epoch:  60    Loss:  100.5255 
+## Epoch:  70    Loss:  95.92051 
+## Epoch:  80    Loss:  91.98795 
+## Epoch:  90    Loss:  87.82715 
+## Epoch:  100    Loss:  84.58553 
+## Epoch:  110    Loss:  81.90162 
+## Epoch:  120    Loss:  79.73075 
+## Epoch:  130    Loss:  77.95315 
+## Epoch:  140    Loss:  76.42787 
+## Epoch:  150    Loss:  75.14869 
+## Epoch:  160    Loss:  74.05347 
+## Epoch:  170    Loss:  73.06866 
+## Epoch:  180    Loss:  72.21603 
+## Epoch:  190    Loss:  71.43427 
+## Epoch:  200    Loss:  70.70985
 ```
 
 As explained above, after `some_tensor$backward()`, all tensors

@@ -7,7 +7,7 @@ description: |
 
 Based on where we ended up in the last tutorial, there are just two more things to do. For one, we still compute the loss by hand. And secondly, even though we get the gradients all nicely computed from *autograd*, we still loop over the model's parameters, updating them all ourselves. You won't be surprised to hear that none of this is necessary.
 
-## Losses and loss functions
+# Losses and loss functions
 
 `torch` comes with all the usual loss functions, such as mean squared error, cross entropy, Kullback-Leibler divergence, and the like. In general, there are two usage modes.
 
@@ -24,7 +24,7 @@ nnf_mse_loss(x, y)
 
 ```
 ## torch_tensor
-## 1.44778
+## 1.26594
 ## [ CPUFloatType{} ]
 ```
 
@@ -45,13 +45,13 @@ loss(x, y)
 
 ```
 ## torch_tensor
-## 1.44778
+## 1.26594
 ## [ CPUFloatType{} ]
 ```
 
 This method may be preferable when one and the same algorithm should be applied to more than one pair of tensors.
 
-## Optimizers
+# Optimizers
 
 So far, we've been updating model parameters following a simple strategy: The gradients told us which direction on the loss curve was downward; the learning rate told us how big of a step to take. What we did was a straightforward implementation of *gradient descent*.
 
@@ -70,12 +70,12 @@ model$parameters
 ```
 ## $weight
 ## torch_tensor
-##  0.4810  0.0537  0.3706
+##  0.2798  0.1138 -0.0671
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-##  0.5010
+##  0.3115
 ## [ CPUFloatType{1} ]
 ```
 
@@ -113,12 +113,12 @@ optimizer$param_groups[[1]]$params
 ```
 ## $weight
 ## torch_tensor
-##  0.4810  0.0537  0.3706
+##  0.2798  0.1138 -0.0671
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-##  0.5010
+##  0.3115
 ## [ CPUFloatType{1} ]
 ```
 
@@ -135,12 +135,12 @@ optimizer$param_groups[[1]]$params
 ```
 ## $weight
 ## torch_tensor
-##  0.4810  0.0537  0.3706
+##  0.2798  0.1138 -0.0671
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-##  0.5010
+##  0.3115
 ## [ CPUFloatType{1} ]
 ```
 
@@ -151,12 +151,12 @@ model$parameters
 ```
 ## $weight
 ## torch_tensor
-##  0.4810  0.0537  0.3706
+##  0.2798  0.1138 -0.0671
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-##  0.5010
+##  0.3115
 ## [ CPUFloatType{1} ]
 ```
 
@@ -178,12 +178,12 @@ optimizer$param_groups[[1]]$params
 ```
 ## $weight
 ## torch_tensor
-##  0.4710  0.0437  0.3606
+##  0.2698  0.1238 -0.0771
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-##  0.4910
+##  0.3015
 ## [ CPUFloatType{1} ]
 ```
 
@@ -194,18 +194,18 @@ model$parameters
 ```
 ## $weight
 ## torch_tensor
-##  0.4710  0.0437  0.3606
+##  0.2698  0.1238 -0.0771
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-##  0.4910
+##  0.3015
 ## [ CPUFloatType{1} ]
 ```
 
 If we perform optimization in a loop, we need to make sure to call `optimizer$zero_grad()` on every step, as otherwise gradients would be accumulated. You can see this in our final version of the network.
 
-## Simple network: final version
+# Simple network: final version
 
 
 ```r
@@ -275,26 +275,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  104.3464 
-## Epoch:  20    Loss:  78.9312 
-## Epoch:  30    Loss:  67.82462 
-## Epoch:  40    Loss:  57.83981 
-## Epoch:  50    Loss:  51.19023 
-## Epoch:  60    Loss:  46.76926 
-## Epoch:  70    Loss:  45.48217 
-## Epoch:  80    Loss:  42.31411 
-## Epoch:  90    Loss:  38.56913 
-## Epoch:  100    Loss:  40.29342 
-## Epoch:  110    Loss:  36.1455 
-## Epoch:  120    Loss:  33.27116 
-## Epoch:  130    Loss:  32.20532 
-## Epoch:  140    Loss:  36.06836 
-## Epoch:  150    Loss:  31.89418 
-## Epoch:  160    Loss:  30.56725 
-## Epoch:  170    Loss:  29.33465 
-## Epoch:  180    Loss:  28.96456 
-## Epoch:  190    Loss:  27.41838 
-## Epoch:  200    Loss:  29.80311
+## Epoch:  10    Loss:  105.3483 
+## Epoch:  20    Loss:  83.9459 
+## Epoch:  30    Loss:  77.63327 
+## Epoch:  40    Loss:  71.54975 
+## Epoch:  50    Loss:  65.93527 
+## Epoch:  60    Loss:  60.56174 
+## Epoch:  70    Loss:  55.87633 
+## Epoch:  80    Loss:  52.25386 
+## Epoch:  90    Loss:  46.61177 
+## Epoch:  100    Loss:  43.61697 
+## Epoch:  110    Loss:  41.34267 
+## Epoch:  120    Loss:  41.16927 
+## Epoch:  130    Loss:  37.98167 
+## Epoch:  140    Loss:  36.49454 
+## Epoch:  150    Loss:  35.84614 
+## Epoch:  160    Loss:  34.40098 
+## Epoch:  170    Loss:  33.3596 
+## Epoch:  180    Loss:  33.20941 
+## Epoch:  190    Loss:  32.49561 
+## Epoch:  200    Loss:  31.01777
 ```
 
 And that's it! We've seen all the major actors on stage: tensors, *autograd*, modules, loss functions, and optimizers. You're now more than ready to go on and explore some of the [applied examples](/using_torch)!

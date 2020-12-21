@@ -12,7 +12,7 @@ manual backpropagation with *autograd*. In this section, we *modularize*
 the network - in both the habitual and a very literal sense: Low-level
 matrix operations are swapped out for `torch` `module`s.
 
-## Modules
+# Modules
 
 From other frameworks (Keras, say), you may be used to distinguishing
 between *models* and *layers*. In `torch`, both are instances of
@@ -22,7 +22,7 @@ section into two parts. In reality though, there is no dichotomy: New
 modules may be composed of existing ones up to arbitrary levels of
 recursion.
 
-#### Base modules ("layers")
+## Base modules ("layers")
 
 Instead of writing out an affine operation by hand -- `x$mm(w1) + b1`,
 say --, as we've been doing so far, we can create a linear module. The
@@ -46,13 +46,12 @@ l$parameters
 ```
 ## $weight
 ## torch_tensor
-## -0.4244  0.1499  0.4805
+## -0.1019 -0.0990  0.1464
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-## 0.01 *
-##  1.6601
+##  0.3637
 ## [ CPUFloatType{1} ]
 ```
 
@@ -77,16 +76,16 @@ out$data()
 
 ```
 ## torch_tensor
-##  1.7770
-##  0.6039
-##  0.7412
-## -0.3740
-##  1.5227
-## -0.1166
-##  0.3251
-## -0.6749
-## -0.1598
-##  0.8503
+## -0.0244
+##  0.3721
+##  0.5740
+##  0.3929
+##  0.4518
+##  0.7229
+##  0.4145
+##  0.5695
+##  0.4755
+##  0.2048
 ## [ CPUFloatType{10,1} ]
 ```
 
@@ -173,7 +172,7 @@ l$weight$grad
 
 ```
 ## torch_tensor
-##   3.7412  37.1724  81.7988
+## -1.7888 -55.8351 -3.7148
 ## [ CPUFloatType{1,3} ]
 ```
 
@@ -192,7 +191,7 @@ common layers you might hope for. But few tasks are solved by a single
 layer. How do you combine them? Or, in the usual lingo: How do you build
 *models*?
 
-#### Container modules ("models")
+## Container modules ("models")
 
 Now, *models* are just modules that contain other modules. For example,
 if all inputs are supposed to flow through the same nodes and along the
@@ -220,55 +219,55 @@ model$parameters
 ```
 ## $`0.weight`
 ## torch_tensor
-##  0.0796 -0.1433  0.4188
-##  0.1805 -0.2711  0.2769
-## -0.1158  0.5639 -0.3620
-## -0.4147 -0.0566 -0.4255
-##  0.2575  0.2169  0.4878
-##  0.4275  0.5577 -0.2251
-## -0.0853  0.3706  0.3121
-## -0.0927  0.2561 -0.2062
-##  0.1545 -0.5552 -0.2774
-##  0.3296 -0.4009  0.2086
-##  0.4065  0.3580  0.2244
-## -0.0229  0.0824  0.0176
-## -0.0046  0.0795  0.2848
-## -0.3591 -0.5654 -0.1917
-## -0.2336 -0.4256 -0.5334
-## -0.1276  0.4190 -0.4651
+## -0.0362 -0.5047  0.0259
+## -0.4210 -0.3794 -0.0850
+## -0.5299 -0.0852  0.2957
+##  0.1644  0.1044  0.3209
+##  0.0185 -0.1925 -0.1361
+## -0.1010  0.2942 -0.2920
+##  0.2254  0.1517  0.4821
+## -0.3828 -0.4848 -0.0008
+##  0.2328 -0.5295  0.0869
+##  0.0426  0.5333  0.2192
+## -0.5353 -0.5647  0.5426
+## -0.5480 -0.5726  0.4348
+##  0.5555 -0.0041 -0.2384
+##  0.1794  0.5171  0.3888
+## -0.0657 -0.1766  0.1058
+##  0.0159  0.4440  0.3025
 ## [ CPUFloatType{16,3} ]
 ## 
 ## $`0.bias`
 ## torch_tensor
-## -0.2169
-## -0.1783
-##  0.3893
-## -0.3595
-##  0.2069
-##  0.4184
-## -0.4101
-## -0.0554
-##  0.3975
-## -0.0123
-## -0.1127
-## -0.1022
-##  0.1546
-##  0.0893
-## -0.2340
-##  0.5517
+## -0.3873
+## -0.3990
+##  0.5748
+##  0.1864
+## -0.3110
+## -0.3023
+## -0.3704
+##  0.2794
+##  0.5069
+## -0.5375
+##  0.1427
+##  0.5329
+##  0.4056
+##  0.1006
+##  0.1963
+##  0.2450
 ## [ CPUFloatType{16} ]
 ## 
 ## $`2.weight`
 ## torch_tensor
-## Columns 1 to 10-0.1046 -0.0773  0.1901  0.1578 -0.0164  0.2003  0.0496  0.1752 -0.1802 -0.1733
+## Columns 1 to 10-0.0345 -0.1588  0.0619 -0.0172 -0.1766  0.0332 -0.0634 -0.0022  0.0906  0.0684
 ## 
-## Columns 11 to 16-0.2302 -0.0761 -0.0676 -0.0405  0.2189  0.1496
+## Columns 11 to 16 0.1383  0.1413  0.2446 -0.0516 -0.2007 -0.1296
 ## [ CPUFloatType{1,16} ]
 ## 
 ## $`2.bias`
 ## torch_tensor
 ## 0.01 *
-##  6.8527
+## -2.7460
 ## [ CPUFloatType{1} ]
 ```
 
@@ -282,22 +281,22 @@ model[[1]]$bias
 
 ```
 ## torch_tensor
-## -0.2169
-## -0.1783
-##  0.3893
-## -0.3595
-##  0.2069
-##  0.4184
-## -0.4101
-## -0.0554
-##  0.3975
-## -0.0123
-## -0.1127
-## -0.1022
-##  0.1546
-##  0.0893
-## -0.2340
-##  0.5517
+## -0.3873
+## -0.3990
+##  0.5748
+##  0.1864
+## -0.3110
+## -0.3023
+## -0.3704
+##  0.2794
+##  0.5069
+## -0.5375
+##  0.1427
+##  0.5329
+##  0.4056
+##  0.1006
+##  0.1963
+##  0.2450
 ## [ CPUFloatType{16} ]
 ```
 
@@ -322,22 +321,22 @@ model[[1]]$bias$grad
 
 ```
 ## torch_tensor
-##  -6.2734
-##  -3.0937
-##  13.3040
-##   0.0000
-##  -1.6402
-##  16.0200
-##   1.4880
-##   5.2569
-## -10.8122
-## -10.3979
-## -13.8123
-##  -1.5222
-##  -6.7553
-##  -1.6214
-##   2.1892
-##  11.9643
+##  -1.7237
+##  -6.3515
+##   5.5712
+##  -1.0348
+##  -5.2977
+##   0.6642
+##  -1.9010
+##  -0.1569
+##   7.2498
+##   1.3682
+##   9.6816
+##  12.7196
+##  17.1230
+##  -2.0634
+## -18.0636
+##  -5.1826
 ## [ CPUFloatType{16} ]
 ```
 
@@ -351,29 +350,29 @@ model[[1]]$bias$grad
 
 ```
 ## torch_tensor
-##  -6.2734
-##  -3.0937
-##  13.3040
-##   0.0000
-##  -1.6402
-##  16.0200
-##   1.4880
-##   5.2569
-## -10.8122
-## -10.3979
-## -13.8123
-##  -1.5222
-##  -6.7553
-##  -1.6214
-##   2.1892
-##  11.9643
+##  -1.7237
+##  -6.3515
+##   5.5712
+##  -1.0348
+##  -5.2977
+##   0.6642
+##  -1.9010
+##  -0.1569
+##   7.2498
+##   1.3682
+##   9.6816
+##  12.7196
+##  17.1230
+##  -2.0634
+## -18.0636
+##  -5.1826
 ## [ CUDAFloatType{16} ]
 ```
 
 Now let's see how using `nn_sequential()` can simplify our example
 network.
 
-## Simple network using modules
+# Simple network using modules
 
 
 ```r
@@ -442,26 +441,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  229.4971 
-## Epoch:  20    Loss:  180.9762 
-## Epoch:  30    Loss:  147.2483 
-## Epoch:  40    Loss:  124.2533 
-## Epoch:  50    Loss:  109.2876 
-## Epoch:  60    Loss:  100.0198 
-## Epoch:  70    Loss:  94.53094 
-## Epoch:  80    Loss:  91.27599 
-## Epoch:  90    Loss:  89.28571 
-## Epoch:  100    Loss:  87.99605 
-## Epoch:  110    Loss:  87.11208 
-## Epoch:  120    Loss:  86.47411 
-## Epoch:  130    Loss:  85.99896 
-## Epoch:  140    Loss:  85.62224 
-## Epoch:  150    Loss:  85.30872 
-## Epoch:  160    Loss:  85.05437 
-## Epoch:  170    Loss:  84.83028 
-## Epoch:  180    Loss:  84.63102 
-## Epoch:  190    Loss:  84.4514 
-## Epoch:  200    Loss:  84.28427
+## Epoch:  10    Loss:  281.9471 
+## Epoch:  20    Loss:  202.0964 
+## Epoch:  30    Loss:  153.0894 
+## Epoch:  40    Loss:  123.8677 
+## Epoch:  50    Loss:  107.3094 
+## Epoch:  60    Loss:  98.17577 
+## Epoch:  70    Loss:  93.17717 
+## Epoch:  80    Loss:  90.32096 
+## Epoch:  90    Loss:  88.56997 
+## Epoch:  100    Loss:  87.34862 
+## Epoch:  110    Loss:  86.46484 
+## Epoch:  120    Loss:  85.77603 
+## Epoch:  130    Loss:  85.2014 
+## Epoch:  140    Loss:  84.701 
+## Epoch:  150    Loss:  84.25502 
+## Epoch:  160    Loss:  83.84596 
+## Epoch:  170    Loss:  83.46891 
+## Epoch:  180    Loss:  83.11785 
+## Epoch:  190    Loss:  82.79836 
+## Epoch:  200    Loss:  82.49139
 ```
 
 The forward pass looks a lot better now; however, we still loop through

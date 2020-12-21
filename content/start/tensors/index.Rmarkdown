@@ -21,8 +21,7 @@ By the way, this first tutorial is the longest (by far). With tensors, there is 
 
 Once we've cleared that agenda, we code the aforementioned little network, seeing all those aspects in action.
 
-
-## Creating tensors
+# Creating tensors
 
 Tensors may be created by specifying individual values. Here we create two one-dimensional tensors (vectors), of types `float` and `bool`, respectively:
 
@@ -99,7 +98,7 @@ We'll talk more about devices below.
 
 There is another very important parameter to the tensor-creation functions: `requires_grad`. Here though, I need to ask for your patience: This one will prominently figure in the next section.
 
-## Conversion to built-in R data types
+# Conversion to built-in R data types
 
 To convert `torch` tensors to R, use `as_array()`:
 
@@ -130,7 +129,7 @@ t <- torch_tensor(2, device = "cuda")
 as.integer(t$cpu())
 ```
 
-## Indexing and slicing tensors
+# Indexing and slicing tensors
 
 Often, we want to retrieve not a complete tensor, but only some of the values it holds, or even just a single value. In these cases, we talk about *slicing* and *indexing*, respectively.
 
@@ -138,7 +137,7 @@ In R, these operations are 1-based, meaning that when we specify offsets, we ass
 
 The way I'm organizing this section is the following. We'll inspect the intuitive parts first, where by intuitive I mean: intuitive to the R user who has not yet worked with Python's [NumPy](https://numpy.org/). Then come things which, to this user, may look more surprising, but will turn out to be pretty useful.
 
-#### Indexing and slicing: the R-like part
+## Indexing and slicing: the R-like part
 
 None of these should be overly surprising:
 
@@ -179,7 +178,7 @@ t[1, 1:2, drop = FALSE]$size()
 t[1, 1, drop = FALSE]$size()
 ```
 
-#### Indexing and slicing: What to look out for
+## Indexing and slicing: What to look out for
 
 Whereas R uses negative numbers to remove elements at specified positions, in `torch` negative values indicate that we start counting from the end of a tensor -- with `-1` pointing to its last element:
 
@@ -213,7 +212,7 @@ t[2, ..]
 
 Now we move on to a topic that, in practice, is just as indispensable as slicing: changing tensor *shapes*.
 
-## Reshaping tensors
+# Reshaping tensors
 
 Changes in shape can occur in two fundamentally different ways. Seeing how "reshape" really means: *keep the values but modify their layout*, we could either alter how they're arranged physically, or keep the physical structure as-is and just change the "mapping" (a semantic change, as it were).
 
@@ -221,7 +220,7 @@ In the first case, storage will have to be allocated for two tensors, source and
 
 Not surprisingly, for performance reasons, the second operation is preferred.
 
-#### Zero-copy reshaping
+## Zero-copy reshaping
 
 We start with zero-copy methods, as we'll want to use them whenever we can.
 
@@ -313,7 +312,7 @@ In `torch` lingo, tensors -- like `t2` -- that re-use existing storage (and just
 
 [^1]: Although the assumption may be tempting, "contiguous" does not correspond to what we'd call "contiguous in memory" in casual language.
 
-#### Reshape with copy
+## Reshape with copy
 
 In the following snippet, trying to reshape `t2` using `view()` fails, as it already carries information indicating that the underlying data should not be read in physical order.
 
@@ -345,7 +344,7 @@ t4 <- t2$reshape(6)
 t4$storage()$data_ptr()
 ```
 
-### Operations on tensors
+# Operations on tensors
 
 Unsurprisingly, `torch` provides a bunch of mathematical operations on tensors; we'll see some of them in the network code below, and you'll encounter lots more when you continue your `torch` journey. Here, we quickly take a look at the overall tensor method semantics.
 
@@ -383,7 +382,7 @@ t3
 
 There is one thing we need to discuss before we wrap up our introduction to tensors: How can we have all those operations executed on the GPU?
 
-## Running on GPU
+# Running on GPU
 
 To check if your GPU(s) is/are visible to torch, run
 
@@ -412,9 +411,10 @@ t2$device
 t3 <- t2$cpu()
 t3$device
 ```
+
 That's it for our discussion on tensors --- almost. There is one `torch` feature that, although related to tensor operations, deserves special mention. It is called broadcasting, and "bilingual" (R + Python) users will know it from NumPy.
 
-## Broadcasting
+# Broadcasting
 
 We often have to perform operations on tensors with shapes that don't match exactly.
 
@@ -458,7 +458,7 @@ The rules are:
     # t1, shape:     8  1  6  1
     # t2, shape:        7  1  5
 
-2.  *Starting to look from the right*, the sizes along aligned axes either have to match exactly, or one of them has to be equal to `1`: in which case the latter is *broadcast* to the larger one.
+1.  *Starting to look from the right*, the sizes along aligned axes either have to match exactly, or one of them has to be equal to `1`: in which case the latter is *broadcast* to the larger one.
 
     In the above example, this is the case for the second-from-last dimension. This now gives
 
@@ -469,7 +469,7 @@ The rules are:
 
 , with broadcasting happening in `t2`.
 
-3.  If on the left, one of the arrays has an additional axis (or more than one), the other is virtually expanded to have a size of `1` in that place, in which case broadcasting will happen as stated in (2).
+1.  If on the left, one of the arrays has an additional axis (or more than one), the other is virtually expanded to have a size of `1` in that place, in which case broadcasting will happen as stated in (2).
 
     This is the case with `t1`'s leftmost dimension. First, there is a virtual expansion
 
@@ -533,11 +533,11 @@ t1$view(c(4,1)) * t2
 
 And now, we really get to implementing that neural network!
 
-## Simple neural network using `torch` tensors
+# Simple neural network using `torch` tensors
 
 We now use `torch` to simulate some data.
 
-#### Toy data
+## Toy data
 
 ```{r}
 library(torch)
@@ -562,7 +562,7 @@ y <- x[, 1, drop = FALSE] * 0.2 -
 
 The same goes for network initialization: We now make use of `torch_zeros()` and `torch_randn()`.
 
-#### Initialize weights
+## Initialize weights
 
 ```{r}
 # dimensionality of hidden layer
@@ -579,7 +579,7 @@ b1 <- torch_zeros(1, d_hidden)
 b2 <- torch_zeros(1, d_out)
 ```
 
-#### Training loop
+## Training loop
 
 Here are the four phases of the training loop -- forward pass, determination of the loss, backward pass, and weight updates --, now with all operations being `torch` tensor methods. Firstly, the forward pass:
 
@@ -638,7 +638,7 @@ And weight updates:
 
 Finally, let's put the pieces together.
 
-#### Complete network using `torch` tensors
+## Complete network using `torch` tensors
 
 ```{r}
 library(torch)

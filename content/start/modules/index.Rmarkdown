@@ -12,7 +12,7 @@ manual backpropagation with *autograd*. In this section, we *modularize*
 the network - in both the habitual and a very literal sense: Low-level
 matrix operations are swapped out for `torch` `module`s.
 
-## Modules
+# Modules
 
 From other frameworks (Keras, say), you may be used to distinguishing
 between *models* and *layers*. In `torch`, both are instances of
@@ -22,7 +22,7 @@ section into two parts. In reality though, there is no dichotomy: New
 modules may be composed of existing ones up to arbitrary levels of
 recursion.
 
-#### Base modules ("layers")
+## Base modules ("layers")
 
 Instead of writing out an affine operation by hand -- `x$mm(w1) + b1`,
 say --, as we've been doing so far, we can create a linear module. The
@@ -123,7 +123,7 @@ common layers you might hope for. But few tasks are solved by a single
 layer. How do you combine them? Or, in the usual lingo: How do you build
 *models*?
 
-#### Container modules ("models")
+## Container modules ("models")
 
 Now, *models* are just modules that contain other modules. For example,
 if all inputs are supposed to flow through the same nodes and along the
@@ -180,7 +180,7 @@ model[[1]]$bias$grad
 Now let's see how using `nn_sequential()` can simplify our example
 network.
 
-## Simple network using modules
+# Simple network using modules
 
 ```{r}
 

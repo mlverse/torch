@@ -15,7 +15,7 @@ it for us.
 
 Prior to that though, let's get some background.
 
-## Automatic differentiation with *autograd*
+# Automatic differentiation with *autograd*
 
 `torch` uses a module called *autograd* to
 
@@ -31,7 +31,7 @@ are successively *propagated* *back* through the network. This is a form
 of *reverse mode automatic differentiation*.
 
 
-#### *Autograd* basics
+## *Autograd* basics
 
 As users, we can see a bit of the implementation. As a prerequisite for
 this "recording" to happen, tensors have to be created with
@@ -82,7 +82,7 @@ builds up a graph of backward operations. Here is a slightly more
 complex example -- feel free to skip if you're not the type who just
 *has* to peek into things for them to make sense.
 
-#### Digging deeper
+## Digging deeper
 
 We build up a simple graph of tensors, with inputs `x1` and `x2` being
 connected to output `out` by intermediaries `y` and `z`.
@@ -168,7 +168,7 @@ x1$grad
 After this nerdy excursion, let's see how *autograd* makes our network
 simpler.
 
-## The simple network, now using *autograd*
+# The simple network, now using *autograd*
 
 Thanks to *autograd*, we say good-bye to the tedious, error-prone
 process of coding backpropagation ourselves. A single method call does
