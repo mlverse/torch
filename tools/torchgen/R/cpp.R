@@ -242,7 +242,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "IntArrayRef" && argument$type != "c10::optional<IntArrayRef>") {
-    result <- glue::glue("lantern_vector_int64_t({argument$name}.data(), {argument$name}.size())")
+    result <- glue::glue("XPtrTorchvector_int64_t(lantern_vector_int64_t({argument$name}.data(), {argument$name}.size())).get()")
   }
 
   if (argument$dynamic_type == "IntArrayRef" && argument$type == "c10::optional<IntArrayRef>") {
