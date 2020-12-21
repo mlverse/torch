@@ -21,77 +21,169 @@ By the way, this first tutorial is the longest (by far). With tensors, there is 
 
 Once we've cleared that agenda, we code the aforementioned little network, seeing all those aspects in action.
 
+
 ## Creating tensors
 
 Tensors may be created by specifying individual values. Here we create two one-dimensional tensors (vectors), of types `float` and `bool`, respectively:
 
-```{r}
+
+```r
 library(torch)
 # a 1d vector of length 2
 t <- torch_tensor(c(1, 2))
 t
+```
 
+```
+## torch_tensor
+##  1
+##  2
+## [ CPUFloatType{2} ]
+```
+
+```r
 # also 1d, but of type boolean
 t <- torch_tensor(c(TRUE, FALSE))
 t
 ```
 
+```
+## torch_tensor
+##  1
+##  0
+## [ CPUBoolType{2} ]
+```
+
 And here are two ways to create two-dimensional tensors (matrices). Note how in the second approach, you need to specify `byrow = TRUE` in the call to `matrix()` to get values arranged in row-major order.
 
-```{r}
+
+```r
 # a 3x3 tensor (matrix)
 t <- torch_tensor(rbind(c(1,2,0), c(3,0,0), c(4,5,6)))
 t
+```
 
+```
+## torch_tensor
+##  1  2  0
+##  3  0  0
+##  4  5  6
+## [ CPUFloatType{3,3} ]
+```
+
+```r
 # also 3x3
 t <- torch_tensor(matrix(1:9, ncol = 3, byrow = TRUE))
 t
+```
 
+```
+## torch_tensor
+##  1  2  3
+##  4  5  6
+##  7  8  9
+## [ CPULongType{3,3} ]
 ```
 
 In higher dimensions especially, it can be easier to specify the type of tensor abstractly, as in: "give me a tensor of \<...\> of shape n1 x n2", where \<...\> could be "zeros"; or "ones"; or, say, "values drawn from a standard normal distribution":
 
-```{r}
+
+```r
 # a 3x3 tensor of standard-normally distributed values
 t <- torch_randn(3, 3)
 t
+```
 
+```
+## torch_tensor
+## -0.6921 -0.2300 -0.8145
+## -1.7673  1.1277  0.1835
+##  0.4478  1.8712 -0.3063
+## [ CPUFloatType{3,3} ]
+```
+
+```r
 # a 4x2x2 (3d) tensor of zeroes
 t <- torch_zeros(4, 2, 2)
 t
+```
 
+```
+## torch_tensor
+## (1,.,.) = 
+##   0  0
+##   0  0
+## 
+## (2,.,.) = 
+##   0  0
+##   0  0
+## 
+## (3,.,.) = 
+##   0  0
+##   0  0
+## 
+## (4,.,.) = 
+##   0  0
+##   0  0
+## [ CPUFloatType{4,2,2} ]
 ```
 
 Many similar functions exist, including, e.g., `torch_arange()` to create a tensor holding a sequence of evenly spaced values, `torch_eye()` which returns an identity matrix, and `torch_logspace()` which fills a specified range with a list of values spaced logarithmically.
 
 If no `dtype` argument is specified, `torch` will infer the data type from the passed-in value(s). For example:
 
-```{r}
+
+```r
 t <- torch_tensor(c(3, 5, 7))
 t$dtype
+```
 
+```
+## torch_Float
+```
+
+```r
 t <- torch_tensor(1L)
 t$dtype
 ```
 
+```
+## torch_Long
+```
+
 But we can explicitly request a different `dtype` if we want:
 
-```{r}
+
+```r
 t <- torch_tensor(2, dtype = torch_double())
 t$dtype
 ```
 
+```
+## torch_Double
+```
+
 `torch` tensors live on a *device*. By default, this will be the CPU:
 
-```{r}
+
+```r
 t$device
+```
+
+```
+## torch_device(type='cpu')
 ```
 
 But we could also define a tensor to live on the GPU:
 
-```{r}
+
+```r
 t <- torch_tensor(2, device = "cuda")
 t$device
+```
+
+```
+## torch_device(type='cuda', index=0)
 ```
 
 We'll talk more about devices below.
@@ -102,31 +194,61 @@ There is another very important parameter to the tensor-creation functions: `req
 
 To convert `torch` tensors to R, use `as_array()`:
 
-```{r}
+
+```r
 t <- torch_tensor(matrix(1:9, ncol = 3, byrow = TRUE))
 as_array(t)
 ```
 
+```
+##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9
+```
+
 Depending on whether the tensor is one-, two-, or three-dimensional, the resulting R object will be a vector, a matrix, or an array:
 
-```{r}
+
+```r
 t <- torch_tensor(c(1, 2, 3))
 as_array(t) %>% class()
+```
 
+```
+## [1] "numeric"
+```
+
+```r
 t <- torch_ones(c(2, 2))
 as_array(t) %>% class()
+```
 
+```
+## [1] "matrix" "array"
+```
+
+```r
 t <- torch_ones(c(2, 2, 2))
 as_array(t) %>% class()
+```
+
+```
+## [1] "array"
 ```
 
 For one-dimensional and two-dimensional tensors, it is also possible to use `as.integer()` / `as.matrix()`. (One reason you might want to do this is to have more self-documenting code.)
 
 If a tensor currently lives on the GPU, you need to move it to the CPU first:
 
-```{r}
+
+```r
 t <- torch_tensor(2, device = "cuda")
 as.integer(t$cpu())
+```
+
+```
+## [1] 2
 ```
 
 ## Indexing and slicing tensors
@@ -141,78 +263,199 @@ The way I'm organizing this section is the following. We'll inspect the intuitiv
 
 None of these should be overly surprising:
 
-```{r}
+
+```r
 t <- torch_tensor(rbind(c(1,2,3), c(4,5,6)))
 t
+```
 
+```
+## torch_tensor
+##  1  2  3
+##  4  5  6
+## [ CPUFloatType{2,3} ]
+```
+
+```r
 # a single value
 t[1, 1]
+```
 
+```
+## torch_tensor
+## 1
+## [ CPUFloatType{} ]
+```
+
+```r
 # first row, all columns
 t[1, ]
+```
 
+```
+## torch_tensor
+##  1
+##  2
+##  3
+## [ CPUFloatType{3} ]
+```
+
+```r
 # first row, a subset of columns
 t[1, 1:2]
 ```
 
+```
+## torch_tensor
+##  1
+##  2
+## [ CPUFloatType{2} ]
+```
+
 Note how, just as in R, singleton dimensions are dropped:
 
-```{r}
+
+```r
 t <- torch_tensor(rbind(c(1,2,3), c(4,5,6)))
 
 # 2x3
 t$size() 
+```
 
+```
+## [1] 2 3
+```
+
+```r
 # just a single row: will be returned as a vector
 t[1, 1:2]$size() 
+```
 
+```
+## [1] 2
+```
+
+```r
 # a single element
 t[1, 1]$size()
 ```
 
+```
+## integer(0)
+```
+
 And just like in R, you can specify `drop = FALSE` to keep those dimensions:
 
-```{r}
-t[1, 1:2, drop = FALSE]$size()
 
+```r
+t[1, 1:2, drop = FALSE]$size()
+```
+
+```
+## [1] 1 2
+```
+
+```r
 t[1, 1, drop = FALSE]$size()
+```
+
+```
+## [1] 1 1
 ```
 
 #### Indexing and slicing: What to look out for
 
 Whereas R uses negative numbers to remove elements at specified positions, in `torch` negative values indicate that we start counting from the end of a tensor -- with `-1` pointing to its last element:
 
-```{r}
+
+```r
 t <- torch_tensor(rbind(c(1,2,3), c(4,5,6)))
 
 t[1, -1]
+```
 
+```
+## torch_tensor
+## 3
+## [ CPUFloatType{} ]
+```
+
+```r
 t[ , -2:-1] 
+```
+
+```
+## torch_tensor
+##  2  3
+##  5  6
+## [ CPUFloatType{2,2} ]
 ```
 
 This is a feature you might know from NumPy. Same with the following.
 
 When the slicing expression `m:n` is augmented by another colon and a third number -- `m:n:o` --, we will take every `o`th item from the range specified by `m` and `n`:
 
-```{r}
+
+```r
 t <- torch_tensor(1:10)
 t[2:10:2]
 ```
 
+```
+## torch_tensor
+##   2
+##   4
+##   6
+##   8
+##  10
+## [ CPULongType{5} ]
+```
+
 Sometimes we don't know how many dimensions a tensor has, but we do know what to do with the final dimension, or the first one. To subsume all others, we can use `..`:
 
-```{r}
+
+```r
 t <- torch_randint(-7, 7, size = c(2, 2, 2))
 t
+```
 
+```
+## torch_tensor
+## (1,.,.) = 
+##  -4  1
+##  -6  4
+## 
+## (2,.,.) = 
+##  -4  6
+##  -3 -2
+## [ CPUFloatType{2,2,2} ]
+```
+
+```r
 t[.., 1]
+```
 
+```
+## torch_tensor
+## -4 -6
+## -4 -3
+## [ CPUFloatType{2,2} ]
+```
+
+```r
 t[2, ..]
+```
+
+```
+## torch_tensor
+## -4  6
+## -3 -2
+## [ CPUFloatType{2,2} ]
 ```
 
 Now we move on to a topic that, in practice, is just as indispensable as slicing: changing tensor *shapes*.
 
-### Reshaping tensors
+## Reshaping tensors
 
 Changes in shape can occur in two fundamentally different ways. Seeing how "reshape" really means: *keep the values but modify their layout*, we could either alter how they're arranged physically, or keep the physical structure as-is and just change the "mapping" (a semantic change, as it were).
 
@@ -228,84 +471,190 @@ A special case often seen in practice is adding or removing a singleton dimensio
 
 `unsqueeze()` adds a dimension of size `1` at a position specified by `dim`:
 
-```{r}
+
+```r
 t1 <- torch_randint(low = 3, high = 7, size = c(3, 3, 3))
 t1$size()
+```
 
+```
+## [1] 3 3 3
+```
+
+```r
 t2 <- t1$unsqueeze(dim = 1)
 t2$size()
+```
 
+```
+## [1] 1 3 3 3
+```
+
+```r
 t3 <- t1$unsqueeze(dim = 2)
 t3$size()
 ```
 
+```
+## [1] 3 1 3 3
+```
+
 Conversely, `squeeze()` removes singleton dimensions:
 
-```{r}
+
+```r
 t4 <- t3$squeeze()
 t4$size()
+```
+
+```
+## [1] 3 3 3
 ```
 
 The same could be accomplished with `view()`. `view()`, however, is much more general, in that it allows you to reshape the data to any valid dimensionality. (Valid meaning: The number of elements stays the same.)
 
 Here we have a `3x2` tensor that is reshaped to size `2x3`:
 
-```{r}
+
+```r
 t1 <- torch_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
 t1
+```
 
+```
+## torch_tensor
+##  1  2
+##  3  4
+##  5  6
+## [ CPUFloatType{3,2} ]
+```
+
+```r
 t2 <- t1$view(c(2, 3))
 t2
+```
+
+```
+## torch_tensor
+##  1  2  3
+##  4  5  6
+## [ CPUFloatType{2,3} ]
 ```
 
 (Note how this is different from matrix transposition.)
 
 Instead of going from two to three dimensions, we can flatten the matrix to a vector.
 
-```{r}
+
+```r
 t4 <- t1$view(c(-1, 6))
 
 t4$size()
+```
 
+```
+## [1] 1 6
+```
+
+```r
 t4
+```
+
+```
+## torch_tensor
+##  1  2  3  4  5  6
+## [ CPUFloatType{1,6} ]
 ```
 
 In contrast to indexing operations, this does not drop dimensions.
 
 Like we said above, operations like `squeeze()` or `view()` do not make copies. Or, put differently: The output tensor shares storage with the input tensor. We can in fact verify this ourselves:
 
-```{r}
-t1$storage()$data_ptr()
 
+```r
+t1$storage()$data_ptr()
+```
+
+```
+## [1] "0x56545710bf80"
+```
+
+```r
 t2$storage()$data_ptr()
+```
+
+```
+## [1] "0x56545710bf80"
 ```
 
 What's different is the storage *metadata* `torch` keeps about both tensors. Here, the relevant information is the *stride*:
 
 A tensor's `stride()` method tracks, *for every dimension*, how many elements have to be traversed to arrive at its next element (row or column, in two dimensions). For `t1` above, of shape `3x2`, we have to skip over 2 items to arrive at the next row. To arrive at the next column though, in every row we just have to skip a single entry:
 
-```{r}
+
+```r
 t1$stride()
+```
+
+```
+## [1] 2 1
 ```
 
 For `t2`, of shape `3x2`, the distance between column elements is the same, but the distance between rows is now 3:
 
-```{r}
+
+```r
 t2$stride()
+```
+
+```
+## [1] 3 1
 ```
 
 While zero-copy operations are optimal, there are cases where they won't work.
 
 With `view()`, this can happen when a tensor was obtained via an operation -- other than `view()` itself -- that itself has already modified the *stride*. One example would be `transpose()`:
 
-```{r}
+
+```r
 t1 <- torch_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
 t1
-t1$stride()
+```
 
+```
+## torch_tensor
+##  1  2
+##  3  4
+##  5  6
+## [ CPUFloatType{3,2} ]
+```
+
+```r
+t1$stride()
+```
+
+```
+## [1] 2 1
+```
+
+```r
 t2 <- t1$t()
 t2
+```
+
+```
+## torch_tensor
+##  1  3  5
+##  2  4  6
+## [ CPUFloatType{2,3} ]
+```
+
+```r
 t2$stride()
+```
+
+```
+## [1] 1 2
 ```
 
 In `torch` lingo, tensors -- like `t2` -- that re-use existing storage (and just read it differently), are said not to be "contiguous"[^1]. One way to reshape them is to use `contiguous()` on them before. We'll see this in the next subsection.
@@ -316,7 +665,8 @@ In `torch` lingo, tensors -- like `t2` -- that re-use existing storage (and just
 
 In the following snippet, trying to reshape `t2` using `view()` fails, as it already carries information indicating that the underlying data should not be read in physical order.
 
-```{r, error = TRUE}
+
+```r
 t1 <- torch_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
 
 t2 <- t1$t()
@@ -328,20 +678,43 @@ However, if we first call `contiguous()` on it, a *new tensor* is created, which
 
 [^2]: For correctness' sake, `contiguous()` will only make a copy if the tensor it is called on is *not contiguous already.*
 
-```{r}
+
+```r
 t3 <- t2$contiguous()
 
 t3$view(6)
 ```
 
+```
+## torch_tensor
+##  1
+##  3
+##  5
+##  2
+##  4
+##  6
+## [ CPUFloatType{6} ]
+```
+
 Alternatively, we can use `reshape()`. `reshape()` defaults to `view()`-like behavior if possible; otherwise it will create a physical copy.
 
-```{r}
-t2$storage()$data_ptr()
 
+```r
+t2$storage()$data_ptr()
+```
+
+```
+## [1] "0x5654a7da9140"
+```
+
+```r
 t4 <- t2$reshape(6)
 
 t4$storage()$data_ptr()
+```
+
+```
+## [1] "0x565455bde680"
 ```
 
 ### Operations on tensors
@@ -350,34 +723,80 @@ Unsurprisingly, `torch` provides a bunch of mathematical operations on tensors; 
 
 Tensor methods normally return references to new objects. Here, we add to `t1` a clone of itself:
 
-```{r}
+
+```r
 t1 <- torch_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
 t2 <- t1$clone()
 
 t1$add(t2)
 ```
 
+```
+## torch_tensor
+##   2   4
+##   6   8
+##  10  12
+## [ CPUFloatType{3,2} ]
+```
+
 In this process, `t1` has not been modified:
 
-```{r}
+
+```r
 t1
+```
+
+```
+## torch_tensor
+##  1  2
+##  3  4
+##  5  6
+## [ CPUFloatType{3,2} ]
 ```
 
 Many tensor methods have variants for mutating operations. These all carry a trailing underscore:
 
-```{r}
-t1$add_(t1)
 
+```r
+t1$add_(t1)
+```
+
+```
+## torch_tensor
+##   2   4
+##   6   8
+##  10  12
+## [ CPUFloatType{3,2} ]
+```
+
+```r
 # now t1 has been modified
 t1
 ```
 
+```
+## torch_tensor
+##   2   4
+##   6   8
+##  10  12
+## [ CPUFloatType{3,2} ]
+```
+
 Alternatively, you can of course assign the new object to a new reference variable:
 
-```{r}
+
+```r
 t3 <- t1$add(t1)
 
 t3
+```
+
+```
+## torch_tensor
+##   4   8
+##  12  16
+##  20  24
+## [ CPUFloatType{3,2} ]
 ```
 
 There is one thing we need to discuss before we wrap up our introduction to tensors: How can we have all those operations executed on the GPU?
@@ -386,15 +805,27 @@ There is one thing we need to discuss before we wrap up our introduction to tens
 
 To check if your GPU(s) is/are visible to torch, run
 
-```{r}
-cuda_is_available()
 
+```r
+cuda_is_available()
+```
+
+```
+## [1] TRUE
+```
+
+```r
 cuda_device_count()
+```
+
+```
+## [1] 1
 ```
 
 Tensors may be requested to live on the GPU right at creation:
 
-```{r}
+
+```r
 device <- torch_device("cuda")
 
 t <- torch_ones(c(2, 2), device = device) 
@@ -402,14 +833,24 @@ t <- torch_ones(c(2, 2), device = device)
 
 Alternatively, they can be moved between devices at any time:
 
-```{r}
+
+```r
 t2 <- t$cuda()
 t2$device
 ```
 
-```{r}
+```
+## torch_device(type='cuda', index=0)
+```
+
+
+```r
 t3 <- t2$cpu()
 t3$device
+```
+
+```
+## torch_device(type='cpu')
 ```
 That's it for our discussion on tensors --- almost. There is one `torch` feature that, although related to tensor operations, deserves special mention. It is called broadcasting, and "bilingual" (R + Python) users will know it from NumPy.
 
@@ -419,23 +860,42 @@ We often have to perform operations on tensors with shapes that don't match exac
 
 Unsurprisingly, we can add a scalar to a tensor:
 
-```{r}
+
+```r
 t1 <- torch_randn(c(3,5))
 
 t1 + 22
 ```
 
+```
+## torch_tensor
+##  20.7332  21.2712  22.1226  21.6487  20.8593
+##  21.8822  21.4252  21.5155  22.7361  22.5801
+##  21.8940  23.4532  23.0990  23.2652  21.7989
+## [ CPUFloatType{3,5} ]
+```
+
 The same will work if we add tensor of size `1`:
 
-```{r}
+
+```r
 t1 <- torch_randn(c(3,5))
 
 t1 + torch_tensor(c(22))
 ```
 
+```
+## torch_tensor
+##  22.6120  23.0283  20.5192  22.6414  19.8797
+##  21.2628  23.6390  20.2303  23.1931  21.0996
+##  22.1963  22.3955  22.0302  22.0486  21.4948
+## [ CPUFloatType{3,5} ]
+```
+
 Adding tensors of different sizes normally won't work:
 
-```{r, error = TRUE}
+
+```r
 t1 <- torch_randn(c(3,5))
 t2 <- torch_randn(c(5,5))
 
@@ -484,7 +944,8 @@ and then, broadcasting happens:
 
 According to these rules, our above example
 
-```{r, error = TRUE}
+
+```r
 t1 <- torch_randn(c(3,5))
 t2 <- torch_randn(c(5,5))
 
@@ -495,39 +956,76 @@ could be modified in various ways that would allow for adding two tensors.
 
 For example, if `t2` were `1x5`, it would only need to get broadcast to size `3x5` before the addition operation:
 
-```{r}
+
+```r
 t1 <- torch_randn(c(3,5))
 t2 <- torch_randn(c(1,5))
 
 t1$add(t2)
 ```
 
+```
+## torch_tensor
+##  0.1757  0.6637  2.1283  0.3964  0.7907
+## -0.5895 -2.5478  0.5962 -2.5492  0.7258
+## -1.3931 -1.8520  0.4954 -1.4591  0.6467
+## [ CPUFloatType{3,5} ]
+```
+
 If it were of size `5`, a virtual leading dimension would be added, and then, the same broadcasting would take place as in the previous case.
 
-```{r}
+
+```r
 t1 <- torch_randn(c(3,5))
 t2 <- torch_randn(c(5))
 
 t1$add(t2)
 ```
 
+```
+## torch_tensor
+##  1.9910 -0.5545 -1.1568 -0.4488  0.1106
+##  3.2367 -1.6067 -1.6907  1.6820  2.8246
+##  2.1940 -0.4306 -0.2705 -1.0939  1.8641
+## [ CPUFloatType{3,5} ]
+```
+
 Here is a more complex example. Broadcasting how happens both in `t1` and in `t2`:
 
-```{r}
+
+```r
 t1 <- torch_randn(c(1,5))
 t2 <- torch_randn(c(3,1))
 
 t1$add(t2)
 ```
 
+```
+## torch_tensor
+## -0.6077  0.3986  2.2146 -0.0167 -0.8835
+## -0.4768  0.5294  2.3455  0.1142 -0.7526
+## -0.3440  0.6623  2.4784  0.2470 -0.6198
+## [ CPUFloatType{3,5} ]
+```
+
 As a nice concluding example, through broadcasting an outer product can be computed like so:
 
-```{r}
+
+```r
 t1 <- torch_tensor(c(0, 10, 20, 30))
 
 t2 <- torch_tensor(c(1, 2, 3))
 
 t1$view(c(4,1)) * t2
+```
+
+```
+## torch_tensor
+##   0   0   0
+##  10  20  30
+##  20  40  60
+##  30  60  90
+## [ CPUFloatType{4,3} ]
 ```
 
 And now, we really get to implementing that neural network!
@@ -538,7 +1036,8 @@ We now use `torch` to simulate some data.
 
 #### Toy data
 
-```{r}
+
+```r
 library(torch)
 
 # input dimensionality (number of input features)
@@ -563,7 +1062,8 @@ The same goes for network initialization: We now make use of `torch_zeros()` and
 
 #### Initialize weights
 
-```{r}
+
+```r
 # dimensionality of hidden layer
 d_hidden <- 32
 
@@ -582,7 +1082,8 @@ b2 <- torch_zeros(1, d_out)
 
 Here are the four phases of the training loop -- forward pass, determination of the loss, backward pass, and weight updates --, now with all operations being `torch` tensor methods. Firstly, the forward pass:
 
-```{r}
+
+```r
   # compute pre-activations of hidden layers (dim: 100 x 32)
   # torch_mm does matrix multiplication
   h <- x$mm(w1) + b1
@@ -597,13 +1098,15 @@ Here are the four phases of the training loop -- forward pass, determination of 
 
 Loss computation:
 
-```{r}
+
+```r
   loss <- as.numeric((y_pred - y)$pow(2)$sum())
 ```
 
 Backprop:
 
-```{r}
+
+```r
   # gradient of loss w.r.t. prediction (dim: 100 x 1)
   grad_y_pred <- 2 * (y_pred - y)
   # gradient of loss w.r.t. w2 (dim: 32 x 1)
@@ -626,7 +1129,8 @@ Backprop:
 
 And weight updates:
 
-```{r}
+
+```r
   learning_rate <- 1e-4
   
   w2 <- w2 - learning_rate * grad_w2
@@ -639,7 +1143,8 @@ Finally, let's put the pieces together.
 
 #### Complete network using `torch` tensors
 
-```{r}
+
+```r
 library(torch)
 
 ### generate training data -----------------------------------------------------
@@ -725,6 +1230,29 @@ for (t in 1:200) {
   b1 <- b1 - learning_rate * grad_b1
   
 }
+```
+
+```
+## Epoch:  10    Loss:  175.6583 
+## Epoch:  20    Loss:  113.599 
+## Epoch:  30    Loss:  96.78314 
+## Epoch:  40    Loss:  89.8282 
+## Epoch:  50    Loss:  85.58155 
+## Epoch:  60    Loss:  82.74744 
+## Epoch:  70    Loss:  80.57932 
+## Epoch:  80    Loss:  78.85551 
+## Epoch:  90    Loss:  77.25724 
+## Epoch:  100    Loss:  75.91738 
+## Epoch:  110    Loss:  74.70736 
+## Epoch:  120    Loss:  73.68015 
+## Epoch:  130    Loss:  72.77254 
+## Epoch:  140    Loss:  71.94991 
+## Epoch:  150    Loss:  71.14813 
+## Epoch:  160    Loss:  70.43021 
+## Epoch:  170    Loss:  69.82365 
+## Epoch:  180    Loss:  69.29024 
+## Epoch:  190    Loss:  68.81057 
+## Epoch:  200    Loss:  68.35934
 ```
 
 In the next tutorial, we'll make an important change, freeing us from having to think in detail about the backward pass.
