@@ -8,6 +8,7 @@
 
 const std::thread::id MAIN_THREAD_ID = std::this_thread::get_id();
 uint64_t allocated_memory;
+uint64_t threshold_call_gc;
 std::mutex mtx_allocated; 
 void (*call_r_gc) () = nullptr;
 
@@ -40,7 +41,7 @@ struct LanternCPUAllocator final : at::Allocator {
         bool call_gc = false;
         {
             const std::lock_guard<std::mutex> lock(mtx_allocated); 
-            if (allocated_memory > 4e9)
+            if (allocated_memory > threshold_call_gc)
             {
                 call_gc = true;
                 allocated_memory = 0;
@@ -97,8 +98,9 @@ struct LanternCPUAllocator final : at::Allocator {
 
 auto lantern_allocator = at::LanternCPUAllocator();
 
-void _set_lantern_allocator (void (*r_gc) ())
+void _set_lantern_allocator (void (*r_gc) (), uint64_t threshold_mb)
 {
     _lantern_set_call_r_gc(r_gc);
+    threshold_call_gc = threshold_mb * 1e6;
     c10::SetCPUAllocator(&lantern_allocator, 1);
 }

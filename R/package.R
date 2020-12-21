@@ -31,7 +31,7 @@ globalVariables(c("..", "self", "private", "N"))
     # in case init fails aallow user to restart session rather than blocking install
     tryCatch({
       lantern_start()
-      cpp_set_lantern_allocator()
+      cpp_set_lantern_allocator(getOption("torch.threshold_call_gc", 4000L))
       
       .generator_null <<- torch_generator()
       .generator_null$set_current_seed(seed = sample(1e5, 1))
