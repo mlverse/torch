@@ -243,6 +243,13 @@ public:
   }
 };
 
+class XPtrTorchvector_bool : public XPtrTorch {
+public:
+  XPtrTorchvector_bool (void * x) : XPtrTorch {NULL} {
+    this->set(std::shared_ptr<void>(x, lantern_vector_bool_delete));
+  }
+};
+
 template<class T>
 class nullable {
 public:

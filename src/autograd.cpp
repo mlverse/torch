@@ -362,6 +362,9 @@ void cpp_autograd_context_set_arguments (Rcpp::XPtr<XPtrTorch> self, std::vector
   }
   
   lantern_AutogradContext_set_arguments(self->get(), names_, needs_grad_);
+  
+  lantern_vector_string_delete(names_);
+  lantern_vector_bool_delete(needs_grad_);
 }
 
 // [[Rcpp::export]]
@@ -380,12 +383,12 @@ std::vector<std::string> cpp_autograd_context_get_argument_names (Rcpp::XPtr<XPt
 // [[Rcpp::export]]
 std::vector<bool> cpp_autograd_context_get_argument_needs_grad (Rcpp::XPtr<XPtrTorch> self)
 {
-  auto v = lantern_AutogradContext_get_argument_needs_grad(self->get());
-  auto size = lantern_vector_bool_size(v);
+  XPtrTorchvector_bool v = lantern_AutogradContext_get_argument_needs_grad(self->get());
+  auto size = lantern_vector_bool_size(v.get());
   std::vector<bool> out;
   for (int i = 0; i < size; i++)
   {
-    out.push_back(lantern_vector_bool_at(v, i));
+    out.push_back(lantern_vector_bool_at(v.get(), i));
   }
   return out;
 }
