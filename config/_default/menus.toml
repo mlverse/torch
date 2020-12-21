@@ -8,7 +8,7 @@
     
 [[main]]
     name = "getting started"
-    url = "/getting_started/"
+    url = "/start/"
     weight = 2
 
 [[main]]

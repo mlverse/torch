@@ -355,26 +355,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  157.2608 
-## Epoch:  20    Loss:  125.1983 
-## Epoch:  30    Loss:  113.7266 
-## Epoch:  40    Loss:  107.6805 
-## Epoch:  50    Loss:  103.9607 
-## Epoch:  60    Loss:  101.0043 
-## Epoch:  70    Loss:  98.62959 
-## Epoch:  80    Loss:  96.72858 
-## Epoch:  90    Loss:  95.07885 
-## Epoch:  100    Loss:  93.49748 
-## Epoch:  110    Loss:  92.33741 
-## Epoch:  120    Loss:  91.2662 
-## Epoch:  130    Loss:  90.25466 
-## Epoch:  140    Loss:  89.29737 
-## Epoch:  150    Loss:  88.37238 
-## Epoch:  160    Loss:  87.49561 
-## Epoch:  170    Loss:  86.66479 
-## Epoch:  180    Loss:  85.85966 
-## Epoch:  190    Loss:  85.08545 
-## Epoch:  200    Loss:  84.35525
+## Epoch:  10    Loss:  463.8376 
+## Epoch:  20    Loss:  181.419 
+## Epoch:  30    Loss:  109.7933 
+## Epoch:  40    Loss:  87.78796 
+## Epoch:  50    Loss:  81.06984 
+## Epoch:  60    Loss:  78.26762 
+## Epoch:  70    Loss:  76.6433 
+## Epoch:  80    Loss:  75.41228 
+## Epoch:  90    Loss:  74.38911 
+## Epoch:  100    Loss:  73.46175 
+## Epoch:  110    Loss:  72.63838 
+## Epoch:  120    Loss:  71.83791 
+## Epoch:  130    Loss:  71.05929 
+## Epoch:  140    Loss:  70.35287 
+## Epoch:  150    Loss:  69.69209 
+## Epoch:  160    Loss:  69.13846 
+## Epoch:  170    Loss:  68.64397 
+## Epoch:  180    Loss:  68.16409 
+## Epoch:  190    Loss:  67.7586 
+## Epoch:  200    Loss:  67.39085
 ```
 
 As explained above, after `some_tensor$backward()`, all tensors

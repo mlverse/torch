@@ -24,7 +24,7 @@ nnf_mse_loss(x, y)
 
 ```
 ## torch_tensor
-## 0.806475
+## 1.44778
 ## [ CPUFloatType{} ]
 ```
 
@@ -45,7 +45,7 @@ loss(x, y)
 
 ```
 ## torch_tensor
-## 0.806475
+## 1.44778
 ## [ CPUFloatType{} ]
 ```
 
@@ -70,12 +70,12 @@ model$parameters
 ```
 ## $weight
 ## torch_tensor
-## -0.2608 -0.5487  0.2985
+##  0.4810  0.0537  0.3706
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-## -0.2667
+##  0.5010
 ## [ CPUFloatType{1} ]
 ```
 
@@ -113,12 +113,12 @@ optimizer$param_groups[[1]]$params
 ```
 ## $weight
 ## torch_tensor
-## -0.2608 -0.5487  0.2985
+##  0.4810  0.0537  0.3706
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-## -0.2667
+##  0.5010
 ## [ CPUFloatType{1} ]
 ```
 
@@ -135,12 +135,12 @@ optimizer$param_groups[[1]]$params
 ```
 ## $weight
 ## torch_tensor
-## -0.2608 -0.5487  0.2985
+##  0.4810  0.0537  0.3706
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-## -0.2667
+##  0.5010
 ## [ CPUFloatType{1} ]
 ```
 
@@ -151,12 +151,12 @@ model$parameters
 ```
 ## $weight
 ## torch_tensor
-## -0.2608 -0.5487  0.2985
+##  0.4810  0.0537  0.3706
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-## -0.2667
+##  0.5010
 ## [ CPUFloatType{1} ]
 ```
 
@@ -178,12 +178,12 @@ optimizer$param_groups[[1]]$params
 ```
 ## $weight
 ## torch_tensor
-## -0.2508 -0.5587  0.3085
+##  0.4710  0.0437  0.3606
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-## -0.2767
+##  0.4910
 ## [ CPUFloatType{1} ]
 ```
 
@@ -194,12 +194,12 @@ model$parameters
 ```
 ## $weight
 ## torch_tensor
-## -0.2508 -0.5587  0.3085
+##  0.4710  0.0437  0.3606
 ## [ CPUFloatType{1,3} ]
 ## 
 ## $bias
 ## torch_tensor
-## -0.2767
+##  0.4910
 ## [ CPUFloatType{1} ]
 ```
 
@@ -275,26 +275,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  83.68217 
-## Epoch:  20    Loss:  79.00122 
-## Epoch:  30    Loss:  69.66662 
-## Epoch:  40    Loss:  63.01423 
-## Epoch:  50    Loss:  56.16702 
-## Epoch:  60    Loss:  50.33242 
-## Epoch:  70    Loss:  44.52416 
-## Epoch:  80    Loss:  41.4685 
-## Epoch:  90    Loss:  38.57421 
-## Epoch:  100    Loss:  35.84343 
-## Epoch:  110    Loss:  34.91686 
-## Epoch:  120    Loss:  34.01439 
-## Epoch:  130    Loss:  33.78834 
-## Epoch:  140    Loss:  32.54122 
-## Epoch:  150    Loss:  30.20144 
-## Epoch:  160    Loss:  33.18657 
-## Epoch:  170    Loss:  28.97248 
-## Epoch:  180    Loss:  26.66467 
-## Epoch:  190    Loss:  25.53116 
-## Epoch:  200    Loss:  26.15399
+## Epoch:  10    Loss:  104.3464 
+## Epoch:  20    Loss:  78.9312 
+## Epoch:  30    Loss:  67.82462 
+## Epoch:  40    Loss:  57.83981 
+## Epoch:  50    Loss:  51.19023 
+## Epoch:  60    Loss:  46.76926 
+## Epoch:  70    Loss:  45.48217 
+## Epoch:  80    Loss:  42.31411 
+## Epoch:  90    Loss:  38.56913 
+## Epoch:  100    Loss:  40.29342 
+## Epoch:  110    Loss:  36.1455 
+## Epoch:  120    Loss:  33.27116 
+## Epoch:  130    Loss:  32.20532 
+## Epoch:  140    Loss:  36.06836 
+## Epoch:  150    Loss:  31.89418 
+## Epoch:  160    Loss:  30.56725 
+## Epoch:  170    Loss:  29.33465 
+## Epoch:  180    Loss:  28.96456 
+## Epoch:  190    Loss:  27.41838 
+## Epoch:  200    Loss:  29.80311
 ```
 
 And that's it! We've seen all the major actors on stage: tensors, *autograd*, modules, loss functions, and optimizers. You're now more than ready to go on and explore some of the [applied examples](/using_torch)!
