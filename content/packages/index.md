@@ -14,12 +14,10 @@ There are a few extensions to the core torch package that are useful depending o
 
 {{< packages-hex >}}
 
-## 
-
 ## torch as a backend
 
 torch can be used as a backend in various high-level modeling frameworks such as [tidymodels](http://tidymodels.org) and [fable](https://fable.tidyverts.org/). Here are some torch models and the contexts and frameworks in which they can be used:
 
-| Model                                       | Framework  | Context        |
-|---------------------------------------------|------------|----------------|
-| [tabnet](https://github.com/mlverse/tabnet) | tidymodels | classification |
+| Package                                     | Framework  | Context                   |
+|---------------------------------------------|------------|---------------------------|
+| [tabnet](https://github.com/mlverse/tabnet) | tidymodels | classification/regression |
