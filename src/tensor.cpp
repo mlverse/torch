@@ -6,7 +6,7 @@
 void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
   const char* s = lantern_Tensor_StreamInsertion(x->get());
   auto s_string = std::string(s);
-  delete[] s; // above statement has deep copied the s string.
+  lantern_const_char_delete(s); // above statement has deep copied the s string.
   
   // https://stackoverflow.com/a/55742744/3297472
   // split string into lines without using streams as they are 
