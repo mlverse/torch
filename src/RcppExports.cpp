@@ -6,6 +6,16 @@
 
 using namespace Rcpp;
 
+// cpp_set_lantern_allocator
+void cpp_set_lantern_allocator(uint64_t threshold_call_gc);
+RcppExport SEXP _torch_cpp_set_lantern_allocator(SEXP threshold_call_gcSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< uint64_t >::type threshold_call_gc(threshold_call_gcSEXP);
+    cpp_set_lantern_allocator(threshold_call_gc);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_autograd_set_grad_mode
 void cpp_autograd_set_grad_mode(bool enabled);
 RcppExport SEXP _torch_cpp_autograd_set_grad_mode(SEXP enabledSEXP) {
@@ -29200,6 +29210,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 1},
     {"_torch_cpp_autograd_set_grad_mode", (DL_FUNC) &_torch_cpp_autograd_set_grad_mode, 1},
     {"_torch_cpp_tensor_grad", (DL_FUNC) &_torch_cpp_tensor_grad, 1},
     {"_torch_cpp_tensor_set_grad_", (DL_FUNC) &_torch_cpp_tensor_set_grad_, 2},
