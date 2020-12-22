@@ -230,3 +230,10 @@ void _lantern_TraceableFunction_delete (void* x)
   lantern_delete<LanternObject<std::function<torch::jit::Stack(torch::jit::Stack)>>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
+
+void _lantern_vector_bool_delete(void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<std::vector<bool>>(x);
+  LANTERN_FUNCTION_END_VOID;
+}

@@ -20,3 +20,12 @@ std::array<type, n> std_vector_to_std_array (std::vector<type> x) {
   std::copy_n(x.begin(), n, out.begin());
   return out;
 }
+
+template <class type, void (*deleter)(void*)>
+type reinterpret_and_clean (void * x)
+{
+  type o;
+  memcpy(&o, x, sizeof(type));
+  deleter(x);
+  return o;
+}

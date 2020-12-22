@@ -66,13 +66,14 @@ std::vector<void *> to_vector(std::tuple<T...> x)
 }
 
 template <class T>
-void *optional(void *x)
+auto optional(void *x)
 {
+
   if (x == nullptr)
   {
-    return (void *)new LanternObject<c10::optional<T>>(c10::nullopt);
-  }
+    return std::make_shared<LanternObject<c10::optional<T>>>(c10::nullopt);
+  } 
 
   auto z = ((LanternObject<T> *)x)->get();
-  return (void *)new LanternObject<c10::optional<T>>(z);
+  return std::make_shared<LanternObject<c10::optional<T>>>(z);
 }

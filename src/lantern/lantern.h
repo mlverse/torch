@@ -451,8 +451,8 @@ extern "C"
   HOST_API void * lantern_Tensor_storage(void *self) { void * ret = _lantern_Tensor_storage(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API bool(LANTERN_PTR _lantern_Tensor_has_storage)(void *self);
   HOST_API bool lantern_Tensor_has_storage(void *self) { bool ret = _lantern_Tensor_has_storage(self); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API const char *(LANTERN_PTR _lantern_Storage_data_ptr)(void *self);
-  HOST_API const char * lantern_Storage_data_ptr(void *self) { const char * ret = _lantern_Storage_data_ptr(self); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Storage_data_ptr)(void *self);
+  HOST_API void * lantern_Storage_data_ptr(void *self) { void * ret = _lantern_Storage_data_ptr(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void(LANTERN_PTR _lantern_Storage_delete)(void *x);
   HOST_API void lantern_Storage_delete(void *x) { _lantern_Storage_delete(x); LANTERN_HOST_HANDLER }
   LANTERN_API bool(LANTERN_PTR _lantern_Tensor_is_contiguous)(void *self);
@@ -785,6 +785,14 @@ HOST_API void set_lantern_allocator (void (*r_gc) (), uint64_t threshold_mb)
   _set_lantern_allocator(r_gc, threshold_mb);
   LANTERN_HOST_HANDLER;
 }
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_bool_delete) (void* x);
+HOST_API void lantern_vector_bool_delete (void* x)
+{
+  _lantern_vector_bool_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5368,6 +5376,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Stack_at_TensorList);
   LOAD_SYMBOL(_lantern_TraceableFunction_delete);
   LOAD_SYMBOL(_set_lantern_allocator);
+  LOAD_SYMBOL(_lantern_vector_bool_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

@@ -17,5 +17,9 @@ bool cpp_Tensor_has_storage (Rcpp::XPtr<XPtrTorchTensor> self)
 // [[Rcpp::export]]
 std::string cpp_Storage_data_ptr (Rcpp::XPtr<XPtrTorchStorage> self)
 {
-  return lantern_Storage_data_ptr(self->get());
+  void* x = lantern_Storage_data_ptr(self->get());
+  std::stringstream ss;
+  ss << x;
+  std::string str = ss.str();
+  return str;
 }

@@ -15,19 +15,19 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_method_is_leaf_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_is_leaf_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_method_output_nr_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_output_nr_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_method__version_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor__version_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -212,7 +212,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_method_allclose_self_Tensor_other_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> other, double rtol, double atol, bool equal_nan) {
   auto r_out = lantern_Tensor_allclose_tensor_tensor_double_double_bool(self->get(), other->get(), XPtrTorch(lantern_double(rtol)).get(), XPtrTorch(lantern_double(atol)).get(), reinterpret_cast<void*>(&equal_nan));
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -1058,19 +1058,19 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_method_is_distributed_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_is_distributed_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 bool cpp_torch_method_is_floating_point_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_is_floating_point_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 bool cpp_torch_method_is_complex_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_is_complex_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -1082,19 +1082,19 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_method_is_nonzero_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_is_nonzero_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 bool cpp_torch_method_is_same_size_self_Tensor_other_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> other) {
   auto r_out = lantern_Tensor_is_same_size_tensor_tensor(self->get(), other->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 bool cpp_torch_method_is_signed_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_is_signed_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -1424,7 +1424,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_method_is_pinned_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_is_pinned_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -1664,13 +1664,13 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 int64_t cpp_torch_method_size_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorchTensor> self, nullable<int64_t> dim) {
   auto r_out = lantern_Tensor_size_tensor_intt(self->get(), dim.get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_method_size_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchDimname> dim) {
   auto r_out = lantern_Tensor_size_tensor_dimname(self->get(), dim->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -1784,13 +1784,13 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 int64_t cpp_torch_method_stride_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorchTensor> self, nullable<int64_t> dim) {
   auto r_out = lantern_Tensor_stride_tensor_intt(self->get(), dim.get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_method_stride_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchDimname> dim) {
   auto r_out = lantern_Tensor_stride_tensor_dimname(self->get(), dim->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -2198,31 +2198,31 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 int64_t cpp_torch_method_sparse_dim_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_sparse_dim_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_method__dimI_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor__dimi_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_method_dense_dim_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_dense_dim_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_method__dimV_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor__dimv_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_method__nnz_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor__nnz_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -2234,7 +2234,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_method_is_coalesced_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_is_coalesced_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -2306,13 +2306,13 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 double cpp_torch_method_q_scale_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_q_scale_tensor(self->get());
-return *reinterpret_cast<double *>(r_out);
+return reinterpret_and_clean<double, lantern_double_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_method_q_zero_point_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_q_zero_point_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -2330,7 +2330,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 int64_t cpp_torch_method_q_per_channel_axis_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_q_per_channel_axis_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -2402,7 +2402,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_method_is_set_to_self_Tensor_tensor_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> tensor) {
   auto r_out = lantern_Tensor_is_set_to_tensor_tensor(self->get(), tensor->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -3638,7 +3638,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_method_equal_self_Tensor_other_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> other) {
   auto r_out = lantern_Tensor_equal_tensor_tensor(self->get(), other->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -3770,7 +3770,7 @@ return make_xptr<XPtrTorchTensorList>(r_out, "TensorList");
 // [[Rcpp::export]]
 bool cpp_torch_namespace__use_cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t (Rcpp::XPtr<XPtrTorchTensor> log_probs, Rcpp::XPtr<XPtrTorchTensor> targets, std::vector<int64_t> input_lengths, std::vector<int64_t> target_lengths, nullable<int64_t> blank) {
   auto r_out = lantern__use_cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt(log_probs->get(), targets->get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(input_lengths.data(), input_lengths.size())).get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(target_lengths.data(), target_lengths.size())).get(), blank.get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -3806,7 +3806,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 int64_t cpp_torch_namespace__debug_has_internal_overlap_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern__debug_has_internal_overlap_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -4166,7 +4166,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_namespace_allclose_self_Tensor_other_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> other, double rtol, double atol, bool equal_nan) {
   auto r_out = lantern_allclose_tensor_tensor_double_double_bool(self->get(), other->get(), XPtrTorch(lantern_double(rtol)).get(), XPtrTorch(lantern_double(atol)).get(), reinterpret_cast<void*>(&equal_nan));
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -4514,7 +4514,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace__batch_norm_impl_index_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double_cudnn_enabled_bool (Rcpp::XPtr<XPtrTorchTensor> input, Rcpp::XPtr<XPtrTorchTensor> weight, Rcpp::XPtr<XPtrTorchTensor> bias, Rcpp::XPtr<XPtrTorchTensor> running_mean, Rcpp::XPtr<XPtrTorchTensor> running_var, bool training, double momentum, double eps, bool cudnn_enabled) {
   auto r_out = lantern__batch_norm_impl_index_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool(input->get(), weight->get(), bias->get(), running_mean->get(), running_var->get(), reinterpret_cast<void*>(&training), XPtrTorch(lantern_double(momentum)).get(), XPtrTorch(lantern_double(eps)).get(), reinterpret_cast<void*>(&cudnn_enabled));
-return Rcpp::List::create(make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 3), "Tensor"),*reinterpret_cast<int64_t *>(lantern_vector_get(r_out, 4)));
+return Rcpp::List::create(make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 1), "Tensor"),make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 2), "Tensor"),make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 3), "Tensor"),reinterpret_and_clean<int64_t, lantern_int64_t_delete>(lantern_vector_get(r_out, 4)));
 }
 
 // [[Rcpp::export]]
@@ -4832,7 +4832,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_namespace_cudnn_is_acceptable_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_cudnn_is_acceptable_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -5928,13 +5928,13 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 int64_t cpp_torch_namespace__cufft_get_plan_cache_size_device_index_int64_t (nullable<int64_t> device_index) {
   auto r_out = lantern__cufft_get_plan_cache_size_intt(device_index.get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_namespace__cufft_get_plan_cache_max_size_device_index_int64_t (nullable<int64_t> device_index) {
   auto r_out = lantern__cufft_get_plan_cache_max_size_intt(device_index.get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -6022,19 +6022,19 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_namespace_is_distributed_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_is_distributed_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 bool cpp_torch_namespace_is_floating_point_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_is_floating_point_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 bool cpp_torch_namespace_is_complex_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_is_complex_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -6046,19 +6046,19 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_namespace_is_nonzero_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_is_nonzero_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 bool cpp_torch_namespace_is_same_size_self_Tensor_other_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> other) {
   auto r_out = lantern_is_same_size_tensor_tensor(self->get(), other->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 bool cpp_torch_namespace_is_signed_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_is_signed_tensor(self->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -6142,7 +6142,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace_fbgemm_linear_quantize_weight_input_Tensor (Rcpp::XPtr<XPtrTorchTensor> input) {
   auto r_out = lantern_fbgemm_linear_quantize_weight_tensor(input->get());
-return Rcpp::List::create(make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 1), "Tensor"),*reinterpret_cast<double *>(lantern_vector_get(r_out, 2)),*reinterpret_cast<int64_t *>(lantern_vector_get(r_out, 3)));
+return Rcpp::List::create(make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 0), "Tensor"),make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 1), "Tensor"),reinterpret_and_clean<double, lantern_double_delete>(lantern_vector_get(r_out, 2)),reinterpret_and_clean<int64_t, lantern_int64_t_delete>(lantern_vector_get(r_out, 3)));
 }
 
 // [[Rcpp::export]]
@@ -7636,13 +7636,13 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 int64_t cpp_torch_namespace_size_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorchTensor> self, nullable<int64_t> dim) {
   auto r_out = lantern_size_tensor_intt(self->get(), dim.get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_namespace_size_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchDimname> dim) {
   auto r_out = lantern_size_tensor_dimname(self->get(), dim->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -7810,13 +7810,13 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 int64_t cpp_torch_namespace_stride_self_Tensor_dim_int64_t (Rcpp::XPtr<XPtrTorchTensor> self, nullable<int64_t> dim) {
   auto r_out = lantern_stride_tensor_intt(self->get(), dim.get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_namespace_stride_self_Tensor_dim_Dimname (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchDimname> dim) {
   auto r_out = lantern_stride_tensor_dimname(self->get(), dim->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -8170,7 +8170,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_namespace__has_compatible_shallow_copy_type_self_Tensor_from_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> from) {
   auto r_out = lantern__has_compatible_shallow_copy_type_tensor_tensor(self->get(), from->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -8811,13 +8811,13 @@ return make_xptr<XPtrTorchTensorList>(r_out, "TensorList");
 // [[Rcpp::export]]
 double cpp_torch_namespace_q_scale_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_q_scale_tensor(self->get());
-return *reinterpret_cast<double *>(r_out);
+return reinterpret_and_clean<double, lantern_double_delete>(r_out);
 }
 
 // [[Rcpp::export]]
 int64_t cpp_torch_namespace_q_zero_point_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_q_zero_point_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -8835,7 +8835,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 int64_t cpp_torch_namespace_q_per_channel_axis_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_q_per_channel_axis_tensor(self->get());
-return *reinterpret_cast<int64_t *>(r_out);
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -8907,7 +8907,7 @@ return Rcpp::List::create(make_xptr<XPtrTorchTensor>(lantern_vector_get(r_out, 0
 // [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace__choose_qparams_per_tensor_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, bool reduce_range) {
   auto r_out = lantern__choose_qparams_per_tensor_tensor_bool(self->get(), reinterpret_cast<void*>(&reduce_range));
-return Rcpp::List::create(*reinterpret_cast<double *>(lantern_vector_get(r_out, 0)),*reinterpret_cast<int64_t *>(lantern_vector_get(r_out, 1)));
+return Rcpp::List::create(reinterpret_and_clean<double, lantern_double_delete>(lantern_vector_get(r_out, 0)),reinterpret_and_clean<int64_t, lantern_int64_t_delete>(lantern_vector_get(r_out, 1)));
 }
 
 // [[Rcpp::export]]
@@ -8919,7 +8919,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace_choose_qparams_optimized_input_Tensor_numel_int64_t_n_bins_int64_t_ratio_double_bit_width_int64_t (Rcpp::XPtr<XPtrTorchTensor> input, nullable<int64_t> numel, nullable<int64_t> n_bins, double ratio, nullable<int64_t> bit_width) {
   auto r_out = lantern_choose_qparams_optimized_tensor_intt_intt_double_intt(input->get(), numel.get(), n_bins.get(), XPtrTorch(lantern_double(ratio)).get(), bit_width.get());
-return Rcpp::List::create(*reinterpret_cast<double *>(lantern_vector_get(r_out, 0)),*reinterpret_cast<double *>(lantern_vector_get(r_out, 1)));
+return Rcpp::List::create(reinterpret_and_clean<double, lantern_double_delete>(lantern_vector_get(r_out, 0)),reinterpret_and_clean<double, lantern_double_delete>(lantern_vector_get(r_out, 1)));
 }
 
 // [[Rcpp::export]]
@@ -8967,7 +8967,7 @@ return make_xptr<XPtrTorchScalarType>(r_out, "ScalarType");
 // [[Rcpp::export]]
 bool cpp_torch_namespace_can_cast_from_ScalarType_to_ScalarType (Rcpp::XPtr<XPtrTorch> from, Rcpp::XPtr<XPtrTorch> to) {
   auto r_out = lantern_can_cast_scalartype_scalartype(from->get(), to->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
@@ -10503,7 +10503,7 @@ return make_xptr<XPtrTorchTensor>(r_out, "Tensor");
 // [[Rcpp::export]]
 bool cpp_torch_namespace_equal_self_Tensor_other_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> other) {
   auto r_out = lantern_equal_tensor_tensor(self->get(), other->get());
-return *reinterpret_cast<bool *>(r_out);
+return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
