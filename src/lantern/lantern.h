@@ -451,8 +451,8 @@ extern "C"
   HOST_API void * lantern_Tensor_storage(void *self) { void * ret = _lantern_Tensor_storage(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API bool(LANTERN_PTR _lantern_Tensor_has_storage)(void *self);
   HOST_API bool lantern_Tensor_has_storage(void *self) { bool ret = _lantern_Tensor_has_storage(self); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API const char *(LANTERN_PTR _lantern_Storage_data_ptr)(void *self);
-  HOST_API const char * lantern_Storage_data_ptr(void *self) { const char * ret = _lantern_Storage_data_ptr(self); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Storage_data_ptr)(void *self);
+  HOST_API void * lantern_Storage_data_ptr(void *self) { void * ret = _lantern_Storage_data_ptr(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void(LANTERN_PTR _lantern_Storage_delete)(void *x);
   HOST_API void lantern_Storage_delete(void *x) { _lantern_Storage_delete(x); LANTERN_HOST_HANDLER }
   LANTERN_API bool(LANTERN_PTR _lantern_Tensor_is_contiguous)(void *self);
