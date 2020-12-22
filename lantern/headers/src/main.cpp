@@ -153,7 +153,7 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
                 (type != "IntArrayRef") &
                 (type != "ArrayRef<double>"))
             {
-                call = "optional<" + addNamespace(type) + ">(" + call + ")";
+                call = "optional<" + addNamespace(type) + ">(" + call + ").get()";
             }
             
             type = "c10::optional<" + type + ">";
