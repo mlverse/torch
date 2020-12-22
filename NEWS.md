@@ -8,6 +8,7 @@
 - Added a custom CPU allocator to call `gc` when torch might need more memory (#402)
 - Fixed a memory leak when printing tensors (#402)
 - Fixed a memory leak when passing integer vectors to lantern. (#402)
+- Fixed a few more memory leaks related to autograd context (#405)
 
 # torch 0.2.0
 
