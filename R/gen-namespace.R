@@ -15717,8 +15717,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_one_hot
-torch_one_hot <- function(self, num_classes = -1L) {
+#' @rdname .torch_one_hot
+.torch_one_hot <- function(self, num_classes = -1L) {
   args <- mget(x = c("self", "num_classes"))
 expected_types <- list(self = "Tensor", num_classes = "int64_t")
 nd_args <- "self"

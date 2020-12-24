@@ -111,7 +111,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "atleast_1d", "atleast_2d", "atleast_3d",
                    "dequantize", "kaiser_window", "vander",
                    "movedim", "argsort", "norm",
-                   "argmax", "argmin")
+                   "argmax", "argmin", "one_hot")
 
 internal_funs <- c(internal_funs, creation_ops)
 
