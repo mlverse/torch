@@ -226,3 +226,9 @@ test_that("stft", {
   expect_equal_to_r(x[1,,], cbind(rep(400, 27), rep(0, 27)))
   expect_equal_to_r(x[51,,], cbind(rep(0, 27), rep(0, 27)))
 })
+
+test_that("torch_one_hot", {
+  expect_tensor_shape(torch_one_hot(torch_tensor(1L)), c(1,1))
+  expect_tensor_shape(torch_one_hot(torch_tensor(c(1L, 2L))), c(2,2))
+  expect_error(torch_one_hot(torch_tensor(0L)))
+})
