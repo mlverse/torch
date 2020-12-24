@@ -9,6 +9,7 @@
 - Fixed a memory leak when printing tensors (#402)
 - Fixed a memory leak when passing integer vectors to lantern. (#402)
 - Fixed a few more memory leaks related to autograd context (#405)
+- Fixed `nnf_normalize` and `x$norm()` as they were not able to be called (#407)
 
 # torch 0.2.0
 
