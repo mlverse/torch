@@ -163,6 +163,14 @@ test_that("norm", {
     regexp = "not yet supported with named tensors"
   )
   
+  x <- torch_rand(2, 3)
+  expect_tensor(x$norm())
+  expect_tensor(x$norm(p = 2))
+  expect_tensor(x$norm(p = 2, dtype = torch_float64()))
+  expect_tensor_shape(torch_norm(x, dim = 1), 3)
+  expect_tensor_shape(torch_norm(x, dim = 2), 2)
+  expect_tensor_shape(torch_norm(x, dim = 2, dtype = torch_float64()), 2)
+  
 })
 
 test_that("hann_window", {

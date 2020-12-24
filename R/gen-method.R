@@ -4170,7 +4170,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "norm", function(p = 2L, dim, keepdim = FALSE, dtype) {  args <- mget(x = c("p", "dim", "keepdim", "dtype"))
+Tensor$set("private", "_norm", function(p = 2L, dim, keepdim = FALSE, dtype) {  args <- mget(x = c("p", "dim", "keepdim", "dtype"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", p = "Scalar", dim = c("IntArrayRef", "DimnameList"
 ), keepdim = "bool", dtype = "ScalarType")
