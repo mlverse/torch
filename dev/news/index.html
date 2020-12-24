@@ -193,6 +193,8 @@
 <li>Added a custom CPU allocator to call <code>gc</code> when torch might need more memory (<a href='https://github.com/mlverse/torch/issues/402'>#402</a>)</li>
 <li>Fixed a memory leak when printing tensors (<a href='https://github.com/mlverse/torch/issues/402'>#402</a>)</li>
 <li>Fixed a memory leak when passing integer vectors to lantern. (<a href='https://github.com/mlverse/torch/issues/402'>#402</a>)</li>
+<li>Fixed a few more memory leaks related to autograd context (<a href='https://github.com/mlverse/torch/issues/405'>#405</a>)</li>
+<li>Fixed <code>nnf_normalize</code> and <code>x$norm()</code> as they were not able to be called (<a href='https://github.com/mlverse/torch/issues/407'>#407</a>)</li>
 </ul>
 </div>
     <div id="torch-020" class="section level1">
