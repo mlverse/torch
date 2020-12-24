@@ -20,13 +20,13 @@
 #'
 #'
 #' @export
-nnf_normalize <- function(input, p = 2, dim = 1, eps = 1e-12, out = NULL) {
+nnf_normalize <- function(input, p = 2, dim = 2, eps = 1e-12, out = NULL) {
   if (is.null(out)) {
     denom <- input$norm(p, dim, keepdim = TRUE)$clamp_min(eps)$expand_as(input)
     return(input/denom)
   } else {
     denom <- input$norm(p, dim, keepdim=TRUE)$clamp_min_(eps)$expand_as(input)
-    return(torch_div_out(input, denom, out))
+    return(torch_div_out(out, input, denom))
   }
 }
 

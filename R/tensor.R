@@ -200,6 +200,9 @@ Tensor <- R7Class(
       o <- private$`_argmin`(dim = dim, keepdim = keepdim)
       o <- o$add_(1L, 1L)
       o
+    },
+    norm = function(p = 2, dim, keepdim = FALSE, dtype) {
+      torch_norm(self, p, dim, keepdim, dtype)
     }
   ),
   active = list(
