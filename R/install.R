@@ -2,7 +2,7 @@ branch <- "master"
 
 
 install_config <- list(
-  "1.7.0" = list(
+  "1.7.1" = list(
     "cpu" = list(
       "darwin" = list(
         "libtorch" = list(
@@ -83,7 +83,7 @@ install_config <- list(
 )
 
 #' @keywords internal
-install_path <- function(version = "1.7.0") {
+install_path <- function(version = "1.7.1") {
   path <- Sys.getenv("TORCH_HOME")
   if (nchar(path) > 0) {
     if (!dir.exists(path)) {
@@ -291,7 +291,7 @@ install_type <- function(version) {
 #' cases and troubleshootinng only.
 #' 
 #' @export
-install_torch <- function(version = "1.7.0", type = install_type(version = version), reinstall = FALSE,
+install_torch <- function(version = "1.7.1", type = install_type(version = version), reinstall = FALSE,
                           path = install_path(), ...) {
   
   if (reinstall) {
