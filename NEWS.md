@@ -11,6 +11,7 @@
 - Fixed a few more memory leaks related to autograd context (#405)
 - Fixed `nnf_normalize` and `x$norm()` as they were not able to be called (#409)
 - Made `torch_one_hot` and `nnf_one_hot` use 1-based indexing. (#410)
+- Updated to LibTorch 1.7.1 (#412)
 
 # torch 0.2.0
 
