@@ -193,4 +193,6 @@ void * _lantern_string_new (const char * value)
   LANTERN_FUNCTION_END
 }
 
+void lantern_host_handler() {}
+
 
