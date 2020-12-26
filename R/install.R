@@ -85,7 +85,7 @@ install_config <- list(
 #' @keywords internal
 install_path <- function(version = "1.7.0") {
   path <- Sys.getenv("TORCH_HOME")
-  if (nchar(path) > 0) {
+  if (nzchar(path)) {
     if (!dir.exists(path)) {
       warning("The TORCH_HOME path does not exists.")
       path <- ""
@@ -101,7 +101,7 @@ install_path <- function(version = "1.7.0") {
     }
   }
   
-  if (nchar(path) > 0) {
+  if (nzchar(path)) {
     path
   }
   else {
@@ -208,7 +208,7 @@ install_type_windows <- function(version) {
   cuda_version <- NULL
   cuda_path <- Sys.getenv("CUDA_PATH")
   
-  if (nchar(cuda_path) > 0) {
+  if (nzchar(cuda_path)) {
     versions_file <- file.path(cuda_path, "version.txt")
     if (file.exists(versions_file)) {
       cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
@@ -229,7 +229,7 @@ install_type_windows <- function(version) {
 
 #' @keywords internal
 install_type <- function(version) {
-  if (nchar(Sys.getenv("CUDA")) > 0) return(Sys.getenv("CUDA"))
+  if (nzchar(Sys.getenv("CUDA"))) return(Sys.getenv("CUDA"))
   if (install_os() == "windows") return(install_type_windows(version))
   
   if (install_os() != "linux") return("cpu") # macOS
@@ -239,7 +239,7 @@ install_type <- function(version) {
   cuda_version <- NULL
   cuda_home <- Sys.getenv("CUDA_HOME")
   
-  if (nchar(cuda_home) > 0) {
+  if (nzchar(cuda_home)) {
     versions_file <- file.path(cuda_home, "version.txt")
     if (file.exists(versions_file)) {
       cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
