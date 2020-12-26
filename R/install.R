@@ -6,7 +6,7 @@ install_config <- list(
     "cpu" = list(
       "darwin" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.0.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.1.zip",
           path = "libtorch/lib",
           filter = ".dylib",
           md5hash = "4c5a79e919a63419ba7258b867c170ff"
@@ -15,7 +15,7 @@ install_config <- list(
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.7.0%2Bcpu.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.7.1%2Bcpu.zip",
           path = "libtorch/lib",
           filter = ".dll",
           md5hash = "269d81cf177740315982e31827e55e5a"
@@ -24,7 +24,7 @@ install_config <- list(
       ),
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcpu.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcpu.zip",
           path = "libtorch/lib",
           md5hash = "e7700c8fb430e18da5d42b4e9e7bb334"
         ),
@@ -34,7 +34,7 @@ install_config <- list(
     "10.1" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcu101.zip",
+          url = "https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu101.zip",
           path = "libtorch/lib",
           md5hash = "6ab62c904c9942152c5757f480d4b746"
         ),
@@ -42,7 +42,7 @@ install_config <- list(
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu101/libtorch-win-shared-with-deps-1.7.0%2Bcu101.zip",
+          url = "https://download.pytorch.org/libtorch/cu101/libtorch-win-shared-with-deps-1.7.1%2Bcu101.zip",
           path = "libtorch/lib",
           filter = ".dll",
           md5hash = "b6bcced0253c0c3beab10eae9c672087"
@@ -53,7 +53,7 @@ install_config <- list(
     "10.2" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.0.zip",
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.1.zip",
           path = "libtorch/lib",
           md5hash = "300c826e0f4620008dda7abbb09a8d5e"
         ),
@@ -61,7 +61,7 @@ install_config <- list(
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.7.0.zip",
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.7.1.zip",
           path = "libtorch/lib",
           filter = ".dll",
           md5hash = "5fefffe62185f3970cf67f31a6c75a12"
@@ -72,7 +72,7 @@ install_config <- list(
     "9.2" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcu92.zip",
+          url = "https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu92.zip",
           path = "libtorch/lib",
           md5hash = "b27db365dbd422a6af024127bfb0bb9b"
         ),
