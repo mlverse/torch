@@ -7,6 +7,10 @@
 
 #include "init.h"
 
+void lantern_host_handler() {
+    
+}
+
 int main(int argc, char *argv[])
 {
     if (argc <= 1)
