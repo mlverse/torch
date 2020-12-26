@@ -3,9 +3,6 @@
 #include <string>
 #include <memory>
 
-void lantern_host_handler();
-#define LANTERN_HOST_HANDLER lantern_host_handler();
-
 #include "lantern/lantern.h"
 
 #include <Rcpp.h>

@@ -32,7 +32,8 @@
 #endif
 
 #ifndef LANTERN_HOST_HANDLER
-#define LANTERN_HOST_HANDLER
+void lantern_host_handler();
+#define LANTERN_HOST_HANDLER lantern_host_handler();
 #endif
 
 #include <stdint.h>
