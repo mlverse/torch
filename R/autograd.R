@@ -63,8 +63,11 @@ Tensor$set("active", "grad", function() {
   Tensor$new(ptr = cpp_tensor_grad(self$ptr))
 })
 
-Tensor$set("active", "requires_grad", function() {
-  cpp_tensor_requires_grad(self$ptr)
+Tensor$set("active", "requires_grad", function(requires_grad) {
+  if (missing(requires_grad))
+    return(cpp_tensor_requires_grad(self$ptr))
+  else
+    self$requires_grad_(requires_grad)
 })
 
 Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE, 

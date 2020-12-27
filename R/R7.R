@@ -53,10 +53,7 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   generator
 }
 
-#' @importFrom rlang env_get
-#' @export
-`$.R7` <- function(x, name) {
-  #o <- env_get(x, name, default = NULL, inherit = TRUE)
+extract_method <- function(x, name, call = TRUE) {
   o <- mget(name, envir = x, inherits = TRUE, ifnotfound = list(NULL))[[1]]
   
   if (name == "private")
@@ -68,16 +65,37 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   if (!is.null(attr(x, "self"))) {
     x <- attr(x, "self")
   }
-    
+  
   f <- function(...) {
     o(x, x$private, ...)
   }
+  attr(f, "active") <- attr(o, "active")
   
-  if (isTRUE(attr(o, "active")))
+  if (call && isTRUE(attr(o, "active")))
     f()
   else
     f
 }
+
+#' @export
+`$.R7` <- function(x, name) {
+  extract_method(x, name)
+}
+
+#' @export
+`$<-.R7` <- function(x, name, value) {
+  f <- extract_method(x, name, call = FALSE)
+  if (isTRUE(attr(f, "active"))) {
+    f(value)
+    invisible(x)
+  } else {
+    NextMethod("$<-", x)
+  }
+}
+
+#' @export
+`[[<-.R7` <- `$<-.R7`
+
 
 #' @export
 `[[.R7` <- `$.R7`
