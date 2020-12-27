@@ -77,5 +77,3 @@ auto optional(void *x)
   auto z = ((LanternObject<T> *)x)->get();
   return std::make_shared<LanternObject<c10::optional<T>>>(z);
 }
-
-void lantern_host_handler();
