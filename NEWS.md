@@ -13,6 +13,7 @@
 - Made `torch_one_hot` and `nnf_one_hot` use 1-based indexing. (#410)
 - Updated to LibTorch 1.7.1 (#412)
 - Allow listing all nested modules in a `nn_module` (#417)
+- Allow modifying the `requires_grad` attribute using the `$<-` operator (#419)
 
 # torch 0.2.0
 
