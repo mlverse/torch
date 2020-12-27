@@ -451,3 +451,35 @@ test_that("error when trying to modify the parameter list", {
     regexp = "It's not possible"
   )
 })
+
+test_that("modules method", {
+  
+  custom1 <- nn_module(
+    "myname",
+    initialize = function() {
+      self$x <- nn_linear(10, 10)
+      self$y <- self$x
+    }
+  )
+  
+  mod <- nn_module(
+    initialize = function() {
+      self$c1 <- custom1()
+      self$fc <- nn_linear(5,5)
+    }
+  )
+  
+  model <- mod()
+  
+  expect_length(model$modules, 4)
+  expect_identical_modules(model$modules[[1]], model)
+  expect_identical_modules(model$modules[[2]], model$c1)
+  expect_identical_modules(model$modules[[3]], model$c1$x)
+  expect_identical_modules(model$modules[[4]], model$fc)
+  
+  expect_error(
+    model$modules <- list(nn_linear(10, 10)),
+    class = "runtime_error"
+  )
+  
+})

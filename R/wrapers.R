@@ -415,7 +415,6 @@ torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
   Tensor$new(ptr = o)
 }
 
-#' @export
 torch_one_hot <- function(self, num_classes = -1L) {
   .torch_one_hot(as_1_based_tensor(self), num_classes)
 }

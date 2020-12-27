@@ -241,6 +241,26 @@ nn_Module <- R6::R6Class(
       pars <- pars[!duplicated(addresses)]
       
       pars
+    },
+    modules = function(value) {
+      
+      if (!missing(value))
+        runtime_error(
+          "It's not possible to modify the modules list.\n",
+          " You can modify the modules in-place"
+        )
+      
+      modules <- lapply(private$modules_, function(x) x$modules)
+      # the self instance is an nn_Module, not nn_module
+      modules <- append(create_nn_module_callable(self), modules)
+      modules <- unlist(modules)
+      
+      # to check if modules are iddentical we need to compare the
+      # R6 instances.
+      module_instances <- lapply(modules, function(x) attr(x, "module"))
+      modules <- modules[!duplicated(module_instances)]
+      
+      modules
     }
   )
 )

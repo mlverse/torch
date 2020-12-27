@@ -40,3 +40,12 @@ expect_tensor_shape <- function(object, expected) {
 expect_undefined_tensor <- function(object) {
   # TODO
 }
+
+expect_identical_modules <- function(object, expected) {
+  
+  expect_identical(
+    attr(object, "module"),
+    attr(expected, "module")  
+  )
+
+}

@@ -4,7 +4,7 @@
 \alias{nnf_normalize}
 \title{Normalize}
 \usage{
-nnf_normalize(input, p = 2, dim = 1, eps = 1e-12, out = NULL)
+nnf_normalize(input, p = 2, dim = 2, eps = 1e-12, out = NULL)
 }
 \arguments{
 \item{input}{input tensor of any shape}
