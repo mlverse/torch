@@ -483,3 +483,22 @@ test_that("modules method", {
   )
   
 })
+
+test_that("lenght for sequential modules", {
+  
+  m <- nn_sequential(
+    nn_conv2d(10, 10, c(5,5)),
+    nn_conv2d(10, 10, c(5,5))
+  )
+  
+  expect_length(m, 2)
+  
+  z <- nn_sequential(
+    m,
+    nn_conv2d(2, 2, c(5,5)),
+    nn_conv2d(2, 2, c(5,5))
+  )
+  
+  expect_length(z, 3)
+  
+})
