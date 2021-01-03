@@ -579,6 +579,11 @@ nn_sequential <- function(... , name = NULL) {
   module(...)
 }
 
+#' @export
+length.nn_sequential <- function(x) {
+  length(x$.__enclos_env__$private$modules_)
+}
+
 #' Holds submodules in a list.
 #' 
 #' [nn_module_list] can be indexed like a regular R list, but
