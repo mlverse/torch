@@ -14,6 +14,7 @@
 - Updated to LibTorch 1.7.1 (#412)
 - Allow listing all nested modules in a `nn_module` (#417)
 - Allow modifying the `requires_grad` attribute using the `$<-` operator (#419)
+- Added `length` method for the `nn_sequential` container. (#423)
 
 # torch 0.2.0
 
