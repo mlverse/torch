@@ -95,7 +95,7 @@ jobs:
             artifacts: liblantern.so
             upload: Linux-Cuda-902
           - os: ubuntu-18.04
-            cuda: 11.0
+            cuda: '11.0'
             library: liblantern.so
             test: ./lanterntest
             make: make
