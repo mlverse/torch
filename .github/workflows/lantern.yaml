@@ -95,7 +95,7 @@ jobs:
             artifacts: liblantern.so
             upload: Linux-Cuda-902
           - os: ubuntu-18.04
-            cuda: 11.2
+            cuda: 11.0
             library: liblantern.so
             test: ./lanterntest
             make: make
@@ -173,17 +173,17 @@ jobs:
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
           echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
           echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
-      - name: Prep cmake cuda 11.2
-        if: ${{ matrix.cuda == 11.2 && matrix.os == 'ubuntu-18.04' }}
+      - name: Prep cmake cuda 11.0
+        if: ${{ matrix.cuda == 11.0 && matrix.os == 'ubuntu-18.04' }}
         run: |
-          wget --quiet https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
-          chmod +x cuda_11.2.0_460.27.04_linux.run
-          sudo ./cuda_11.2.0_460.27.04_linux.run --silent --toolkit
+          wget --quiet http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda_11.0.2_450.51.05_linux.run
+          chmod +x cuda_11.0.2_450.51.05_linux.run
+          sudo ./cuda_11.0.2_450.51.05_linux.run --silent --toolkit
           echo "CUDA=${{matrix.cuda}}" >> $GITHUB_ENV
           echo "CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda" >> $GITHUB_ENV
           dir /usr/local
-          wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.1-linux-x64-v7.6.5.32.tgz
-          tar -xzvf cudnn-10.1-linux-x64-v7.6.5.32.tgz
+          wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.0-linux-x64-v8.0.4.30.tgz
+          tar -xzvf cudnn-11.0-linux-x64-v8.0.4.30.tgz
           sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
           sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
