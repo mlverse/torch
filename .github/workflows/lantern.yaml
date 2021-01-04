@@ -106,7 +106,7 @@ jobs:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
             flavor: Release
             artifacts: liblantern.so
-            upload: Linux-Cuda-112
+            upload: Linux-Cuda-110
           - os: windows-2019
             cuda: 10.1
             library: lantern.dll
