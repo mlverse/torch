@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -91,53 +91,9 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting started
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginners guide</li>
-    <li>
-      <a href="../articles/getting-started/warmup.html">Warm-up</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors.html">Tensors</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
-    </li>
-    <li class="dropdown-header">Torch Mechanics</li>
-    <li>
-      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
-    </li>
-  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -203,7 +159,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -224,13 +180,60 @@
       <small>Source: <a href='https://github.com/mlverse/torch/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="torch-020" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0">
-<a href="#torch-020" class="anchor"></a>torch 0.2.0<small> Unreleased </small>
+    <div id="torch-021" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.1">
+<a href="#torch-021" class="anchor"></a>torch 0.2.1<small> Unreleased </small>
 </h1>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>Made <code>torch_one_hot</code> and <code>nnf_one_hot</code> use 1-based indexing. (<a href='https://github.com/mlverse/torch/issues/410'>#410</a>)</li>
+<li>
+<code>nn_module$eval()</code> and <code>nn_module$train()</code> now return a callable <code>nn_module</code> instead of a <code>nn_Module</code>. (<a href='https://github.com/mlverse/torch/issues/425'>#425</a>)</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>Added a custom CPU allocator to call <code>gc</code> when torch might need more memory (<a href='https://github.com/mlverse/torch/issues/402'>#402</a>)</li>
+<li>Updated to LibTorch 1.7.1 (<a href='https://github.com/mlverse/torch/issues/412'>#412</a>)</li>
+<li>Allow listing all nested modules in a <code>nn_module</code> (<a href='https://github.com/mlverse/torch/issues/417'>#417</a>)</li>
+<li>Allow modifying the <code>requires_grad</code> attribute using the <code>$&lt;-</code> operator (<a href='https://github.com/mlverse/torch/issues/419'>#419</a>)</li>
+<li>Added <code>length</code> method for the <code>nn_sequential</code> container. (<a href='https://github.com/mlverse/torch/issues/423'>#423</a>)</li>
+<li>Added support for CUDA 11 on linux (<a href='https://github.com/mlverse/torch/issues/424'>#424</a>)</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Fix support for cuda 9.2 (<a href='https://github.com/mlverse/torch/issues/398'>#398</a>)</li>
+<li>Fixed GPU CI that was skipping tests. (<a href='https://github.com/mlverse/torch/issues/398'>#398</a>)</li>
+<li>Fixed a memory leak when printing tensors (<a href='https://github.com/mlverse/torch/issues/402'>#402</a>)</li>
+<li>Fixed a memory leak when passing integer vectors to lantern. (<a href='https://github.com/mlverse/torch/issues/402'>#402</a>)</li>
+<li>Fixed a few more memory leaks related to autograd context (<a href='https://github.com/mlverse/torch/issues/405'>#405</a>)</li>
+<li>Fixed <code>nnf_normalize</code> and <code>x$norm()</code> as they were not able to be called (<a href='https://github.com/mlverse/torch/issues/409'>#409</a>)</li>
+</ul>
+</div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h2>
+<ul>
+<li>Small improvement to <code>nn_module</code> documentation (<a href='https://github.com/mlverse/torch/issues/399'>#399</a>).</li>
+<li>The getting started section has been removed from the pkgdown website in favor of the new guide in the landing page (<a href='https://github.com/mlverse/torch/issues/401'>#401</a>)</li>
+<li>Updated the landing page to include a getting started tutorial (<a href='https://github.com/mlverse/torch/issues/400'>#400</a>)</li>
+</ul>
+</div>
+</div>
+    <div id="torch-020" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#torch-020" class="anchor"></a>torch 0.2.0<small> 2020-12-15 </small>
+</h1>
+<div id="breaking-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Dataloaders now returns a <code><a href="https://rdrr.io/pkg/coro/man/iterator.html">coro::exhausted</a></code> intead of raising <code>stop_iteration_error</code> when the dataloader exceeds. (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
 <li>Fixed bug that would happen with functions that need to transform tensors from 0-based to 1-based in the GPU. (<a href='https://github.com/mlverse/torch/issues/317'>#317</a>)</li>
@@ -238,9 +241,9 @@
 <li>Fixed <code>torch_argmax</code>, <code>torch_argmin</code>, <code>x$argmax()</code> and <code>x$argmin()</code> return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/389'>#389</a>)</li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Added <code>$element_size()</code> method (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/322'>#322</a>)</li>
 <li>Added <code>$bool()</code> method (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/323'>#323</a>)</li>
@@ -263,9 +266,9 @@
 <li>Improved the <code>nn_module</code> UI by improving autocomplete support and adding a print method (<a href='https://github.com/mlverse/torch/issues/391'>#391</a>)</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed bug when trying to print the <code>grad_fn</code> of a Tensor that doesn’t have one. See (<a href='https://github.com/mlverse/torch/issues/321'>#321</a>)</li>
 <li>Refactored the optimizers code to avoid duplication of parameter checks, etc. (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/328'>#328</a>)</li>
@@ -284,9 +287,9 @@
 <h1 class="page-header" data-toc-text="0.1.1">
 <a href="#torch-011" class="anchor"></a>torch 0.1.1<small> 2020-10-20 </small>
 </h1>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed bug that made <code>RandomSampler(replacement = TRUE)</code> to never take the last element in the dataset. (84861fa)</li>
 <li>Fixed <code>torch_topk</code> and <code>x$topk</code> so the returned indexes are 1-based (<a href='https://github.com/mlverse/torch/issues/280'>#280</a>)</li>
@@ -305,9 +308,9 @@
 <li>Fixed <code>$max</code> and <code>$min</code> to return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/315'>#315</a>)</li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>Expanded the <code>utils_data_default_collate</code> to support converting R objects to torch tensors when needed. (<a href='https://github.com/mlverse/torch/issues/269'>#269</a>)</li>
 <li>Added an <code>as.matrix</code> method for torch Tensors. (<a href='https://github.com/mlverse/torch/issues/282'>#282</a>)</li>

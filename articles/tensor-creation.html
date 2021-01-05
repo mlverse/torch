@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -46,53 +46,9 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting started
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Beginners guide</li>
-    <li>
-      <a href="../articles/getting-started/warmup.html">Warm-up</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors.html">Tensors</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
-    </li>
-    <li class="dropdown-header">Torch Mechanics</li>
-    <li>
-      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
-    </li>
-  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -158,7 +114,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -172,8 +128,7 @@
 
       
 
-      </header><script src="tensor-creation_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="tensor-creation_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="tensor-creation_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="tensor-creation_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Creating tensors</h1>
@@ -211,12 +166,12 @@
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; (1,.,.) = </span>
-<span class="co">#&gt;   0.8204  0.5995  0.2875</span>
-<span class="co">#&gt;   0.0089  0.0487  0.1700</span>
+<span class="co">#&gt;   0.4483  0.2420  0.8939</span>
+<span class="co">#&gt;   0.4426  0.8369  0.8371</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (2,.,.) = </span>
-<span class="co">#&gt;   0.7982  0.1425  0.3113</span>
-<span class="co">#&gt;   0.8569  0.2707  0.1252</span>
+<span class="co">#&gt;   0.6643  0.3823  0.1032</span>
+<span class="co">#&gt;   0.4277  0.3013  0.2559</span>
 <span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></code></pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device, converting their R datatype to the corresponding torch <code>dtype</code>.</p>
 <blockquote>
@@ -250,11 +205,11 @@
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.7352 -0.2601 -1.2960</span>
-<span class="co">#&gt; -0.1933 -0.1667 -0.4875</span>
-<span class="co">#&gt; -2.0145 -0.7756  0.6350</span>
-<span class="co">#&gt; -0.4759 -0.3948  0.4529</span>
-<span class="co">#&gt;  1.0300 -1.4791  0.0177</span>
+<span class="co">#&gt; -0.0623  0.5413  1.0993</span>
+<span class="co">#&gt;  0.2817  0.1089 -1.5626</span>
+<span class="co">#&gt; -0.2948 -0.4497  0.6960</span>
+<span class="co">#&gt;  0.1037  0.0306 -0.0148</span>
+<span class="co">#&gt;  1.5000 -0.4974 -0.5012</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></code></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor filled with ones.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">

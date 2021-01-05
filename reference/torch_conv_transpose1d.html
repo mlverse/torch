@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -92,53 +92,9 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting started
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginners guide</li>
-    <li>
-      <a href="../articles/getting-started/warmup.html">Warm-up</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors.html">Tensors</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
-    </li>
-    <li class="dropdown-header">Torch Mechanics</li>
-    <li>
-      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
-    </li>
-  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -204,7 +160,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -296,35 +252,35 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
 #&gt; (1,.,.) = 
-#&gt;  Columns 1 to 8   3.8308  -6.3955   5.2306  -3.2833  -6.6411  -0.3573  -8.0694  -2.9305
-#&gt;    4.3831  -5.5681   1.7187  12.8080   4.7056  -4.7151  18.0986  -4.4075
-#&gt;    8.4424   3.1957   1.5913 -12.5117   3.4321   3.3238  12.7277 -10.4031
-#&gt;   -0.4442  -5.1953   9.7377 -11.4245  -3.8977   1.6733   0.2445  -6.0568
-#&gt;   13.1379  14.0881 -13.6817  13.7449  12.2518   7.2010  19.0655   0.5370
-#&gt;   -5.7658   1.1302   6.4924   4.8661  13.2448  23.6401 -14.4389   6.6485
-#&gt;   -5.9113   1.7592  12.6699   2.1303   8.7393   2.2839  -4.1279  -1.9399
-#&gt;    1.2884   7.4567   2.7563   0.3666  -7.5620   3.4011   6.0272   0.5101
-#&gt;    2.2089  -7.6015  -0.5015  -2.7806 -16.0505  12.5940   9.4860  -7.4753
-#&gt;   -0.6220   9.4047  -3.1724  17.3560  13.7204   5.4274 -13.3513  14.2916
-#&gt;   -1.3035  -3.5716  22.1038   3.7513 -14.4116  -5.6337  -7.8527  -6.0463
-#&gt;    9.7960   2.9040   1.0416  -5.9612  16.6282  -9.3591  -4.6564  -1.2448
-#&gt;   -3.8701  -5.2524   7.4280   2.5846  -9.4459  -8.2586   9.6812   5.3286
-#&gt;    2.4764  -0.5858  -7.8516   0.3647   2.4530  29.6826   8.6991  -1.1407
-#&gt;    9.2938   5.9732  -2.6255   2.7612  -5.5303   5.8777   6.7586  10.2884
-#&gt;   -1.7310   9.5054 -18.1512  -9.1872  11.6857  11.1371  -1.5081   1.2402
-#&gt;    3.3571  -5.4254  -1.8523   5.2894  -5.4338  -7.5513   7.6492   5.0221
-#&gt;    3.1889   7.2298  -9.5049  11.4072   8.3108  -1.9175   7.3308  -4.1825
-#&gt;   -4.2742 -16.5679   0.9181  15.9307  14.2398  14.0169 -11.9570  -7.7918
-#&gt;   -2.6042  11.8571  -7.8159   7.2703  -9.1024  12.3101  -4.9255  -0.1127
-#&gt;    8.1727  -9.2728  -3.7509 -11.4498  19.5286  14.0060  -1.5843 -12.0478
-#&gt;   11.2030  -9.9668 -15.3645  -3.1676   0.4477   0.8577  14.4209   5.9550
-#&gt;   -4.8428  -3.5444  13.7712  -3.9883  -3.6272  -4.6103 -11.1632   7.5163
-#&gt;   -2.6318  -1.8517  -5.9832  -4.2043  -8.6386   8.9081 -11.6017   5.5028
-#&gt;   -7.9695   1.1148   5.8575 -19.8438  -8.8753   8.2195 -13.8496  -1.7425
-#&gt;   -7.1294  -0.8212   1.7956   5.1679 -10.9385  -4.0638   2.2980   4.7989
-#&gt;   18.8447  -1.8777   3.0676 -10.6042  -3.9478  15.0084   0.9576   9.6767
-#&gt;    1.8429   3.4556  -5.8065   1.0721  -6.5602  17.0868  -3.2106  -3.8284
-#&gt;   -2.3781  -0.9807  -4.3341  -3.0685  -7.9337  -1.1491  13.3449  -6.9589
+#&gt;  Columns 1 to 8  -2.1243 -10.4702   7.1645   5.4194 -11.4100   5.5997   1.6044   5.5043
+#&gt;    2.3217  -1.3913  -0.7479   5.9554  -7.5108  -7.9729  -2.7127   2.7380
+#&gt;    3.4229   4.0261 -10.3680  13.8545   0.9224   3.8379  -7.0816  11.0700
+#&gt;    2.1411  -5.7497  -3.3206  -2.8833  11.3721  -8.6199  -8.3983   1.7161
+#&gt;    0.7052  -4.6434  -7.5157  16.4955  -6.5977  -7.6725  -2.3853   9.6340
+#&gt;    4.2799   5.2793   2.9992   5.3400 -11.1450   2.1490  -3.1709  -2.6385
+#&gt;    1.8472  -1.5853  -8.0398   9.2620  -0.7444  -7.3234  -6.1687   0.1404
+#&gt;   -6.2514  -5.0189  -3.0672   9.7603   0.0807  -4.6463  -8.5118   5.2171
+#&gt;   -3.7857   8.5379   4.0395   0.1687  -8.3244  15.6910   1.7469   7.3035
+#&gt;   -1.1072   3.3054  -1.9930   5.3165  -9.8696  -0.8829   2.8713  -2.3113
+#&gt;    1.4376  -5.2954  -4.6733   3.8019  -7.2646  -0.6061   7.6615  11.2718
+#&gt;    0.9289   3.0411   3.9524   3.4592  -3.1191  15.4325 -11.8247   7.1360
+#&gt;   -0.0893   6.1291   2.4322   3.7096 -11.5151  -4.8903   4.4077  11.3847
+#&gt;   -3.0244   4.7557   2.1432  -2.0113 -12.1114  -2.1148   4.3232  -0.7462
+#&gt;    6.1943   6.9965  -1.0899   1.3629   9.9475   4.9312  -3.5786 -12.9880
+#&gt;   -2.4694   1.7180   3.3870   1.3654 -12.8696  -7.6668   1.9845   1.8126
+#&gt;   -1.9244  -0.9945   7.2161  -4.1275  11.3279   2.0236  -3.9502  -5.3279
+#&gt;    1.8048   5.0983  11.6876  -2.0661 -10.2505  -1.7289  15.6876 -10.7781
+#&gt;   -1.5248  -1.3990  -5.7942  -7.8453  -4.6525   5.9652   4.1192  -4.0536
+#&gt;   -4.6737  -1.9771   0.3786   0.5530 -11.9058   1.1303   1.8854 -13.0677
+#&gt;    5.6751  -8.9527 -10.1781  -0.1958   7.6193  -4.9544  -9.4099   3.0271
+#&gt;    5.1242   8.1845   6.6283  -1.3543   5.6334  -8.6170   7.7419 -25.3799
+#&gt;    2.2513   5.1417 -12.2568   4.2110 -11.5358  -0.1464 -17.3780   7.8934
+#&gt;   -1.0105  -3.5404  -6.7672  -8.3014 -13.2473  -6.6486  -2.0334   9.4555
+#&gt;   -2.8885   1.4203  -9.9772  11.1957 -19.9212   6.9356  -7.8244 -12.1150
+#&gt;    4.3043  -7.8357   2.1798  -0.5082   6.3957 -19.6113  -6.4479  16.0318
+#&gt;    5.2217  -1.1777   0.8803   9.9495   1.4773   3.7163  -7.5767  -0.6555
+#&gt;   -1.4870   5.9133  -3.9451   5.0777  -2.1800  17.0793  -1.2000  -2.4694
+#&gt;    3.1090   4.8174  -3.3435  -0.3982  -3.4317  -4.2070   2.5509 -35.9639
 #&gt; ... [the output was truncated (use n=-1 to disable)]
 #&gt; [ CPUFloatType{20,33,54} ]</div></pre>
   </div>

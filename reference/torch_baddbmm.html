@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -92,53 +92,9 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting started
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginners guide</li>
-    <li>
-      <a href="../articles/getting-started/warmup.html">Warm-up</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors.html">Tensors</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
-    </li>
-    <li class="dropdown-header">Torch Mechanics</li>
-    <li>
-      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
-    </li>
-  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -204,7 +160,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -289,34 +245,34 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
 #&gt; (1,.,.) = 
-#&gt;   1.1841  0.2788 -2.6132  0.4693  0.2665
-#&gt;   0.8668 -1.4222 -1.7714 -3.2336 -1.7505
-#&gt;   2.5907 -0.7427  3.2498 -0.3923 -4.0551
+#&gt;  -1.5122  4.2251  0.5203  2.4052  4.8059
+#&gt;   0.8261 -2.8407 -2.0065  2.6822 -0.7324
+#&gt;  -3.0095  2.9538  0.1221  0.9228  1.3283
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;   2.8462 -1.7345  3.0294  0.4307 -0.4195
-#&gt;   0.0531  4.6240  0.6399  2.0852  0.4322
-#&gt;  -2.2990  1.3054  1.6321  0.5148 -0.7541
+#&gt;   0.9381  3.6707  2.8715  2.2879  0.3548
+#&gt;   1.2640  1.1557 -0.4653 -2.1393 -0.3254
+#&gt;   0.4267 -0.8459  1.0701  0.5781  0.6730
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;   1.6085 -1.3420  0.3828  1.0041 -1.2975
-#&gt;   3.7292 -2.5518  1.6750 -1.4923  2.0400
-#&gt;  -2.6808  2.2639 -2.0316 -1.8831  2.3908
+#&gt;  -2.9492 -2.1989  6.0539 -1.0021  1.7967
+#&gt;  -4.2477  2.8122  1.5912 -0.8243  1.4753
+#&gt;   2.7063  2.2311 -2.9224 -1.6989 -0.0373
 #&gt; 
 #&gt; (4,.,.) = 
-#&gt;  -1.4505  1.7981 -1.3173  4.5259  2.0448
-#&gt;   0.2231 -2.2209 -5.0551  0.3972  0.0636
-#&gt;   2.4098  3.7519  5.5351 -1.5024  0.6415
+#&gt;  -7.5088 -0.3704  2.4042 -2.1130 -0.9685
+#&gt;  -0.2369 -0.1751  0.0399 -1.9412 -0.4064
+#&gt;  -2.3930 -0.1952 -1.3409 -0.3782 -3.3750
 #&gt; 
 #&gt; (5,.,.) = 
-#&gt;   1.1980  1.0188  0.2965  1.5962  1.2377
-#&gt;   0.4549 -0.3595  1.5234 -0.4072  2.9566
-#&gt;  -0.1416 -0.9011 -1.9831  1.9498 -0.7749
+#&gt;   0.2059 -0.8979 -0.0649  6.9031  2.7587
+#&gt;  -1.0036  0.9701 -1.8946 -1.0074 -3.7651
+#&gt;  -1.3721  0.3586  1.8479 -3.2774 -0.4969
 #&gt; 
 #&gt; (6,.,.) = 
-#&gt;  -0.0239 -2.6071  0.7907  0.3162  0.6641
-#&gt;  -1.4216 -1.9449 -1.3654 -0.5872  1.0812
-#&gt;  -1.4994  1.3175 -2.5904  1.8522 -0.5038
+#&gt;  -0.2702  0.4079  0.4958  0.3481 -1.6196
+#&gt;  -1.9616 -1.2169  2.6996 -0.8060  5.1247
+#&gt;   2.0402  0.3541 -0.3666  0.6866  0.1258
 #&gt; 
 #&gt; ... [the output was truncated (use n=-1 to disable)]
 #&gt; [ CPUFloatType{10,3,5} ]</div></pre>

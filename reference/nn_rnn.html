@@ -85,7 +85,7 @@ to an input sequence." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -93,53 +93,9 @@ to an input sequence." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting started
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginners guide</li>
-    <li>
-      <a href="../articles/getting-started/warmup.html">Warm-up</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors.html">Tensors</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
-    </li>
-    <li class="dropdown-header">Torch Mechanics</li>
-    <li>
-      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
-    </li>
-  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -205,7 +161,7 @@ to an input sequence." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -390,65 +346,65 @@ where \(k = \frac{1}{\mbox{hidden\_size}}\)</p>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor
 #&gt; (1,.,.) = 
-#&gt;  Columns 1 to 9 -0.9071  0.6026  0.2784  0.2329 -0.1999  0.9813  0.0457 -0.7215 -0.6252
-#&gt;   0.6313 -0.5922 -0.8362  0.6870 -0.1103 -0.3664 -0.3085 -0.0700 -0.0155
-#&gt;  -0.7347  0.1716  0.4776  0.2904  0.4526 -0.2547 -0.2326  0.3158 -0.0614
+#&gt;  Columns 1 to 9 -0.7906  0.2249 -0.8426 -0.7160 -0.7386  0.7983  0.4408  0.0015 -0.5688
+#&gt;  -0.4493 -0.5164 -0.4026  0.2788 -0.4450 -0.2320  0.8700  0.2869  0.4042
+#&gt;   0.2119  0.1610  0.6481  0.0168 -0.8928  0.5725 -0.0312 -0.5945 -0.6688
 #&gt; 
-#&gt; Columns 10 to 18 -0.3365  0.3862  0.4831  0.5914  0.7074  0.5403 -0.1762 -0.6750  0.5775
-#&gt;   0.3046 -0.2737 -0.7824  0.1625  0.3736 -0.5457 -0.1051  0.6444  0.8264
-#&gt;  -0.6215 -0.7849 -0.6882 -0.3372  0.9066  0.2052 -0.5423 -0.1188  0.5109
+#&gt; Columns 10 to 18 -0.0979 -0.7868 -0.1409 -0.1790 -0.4841  0.1987  0.7721 -0.0971  0.7096
+#&gt;   0.2235 -0.4963  0.4060 -0.7695 -0.9206 -0.6521 -0.3601  0.2041  0.5958
+#&gt;  -0.1337 -0.5294  0.1876 -0.8031 -0.8194  0.5931  0.7121 -0.7618  0.0617
 #&gt; 
-#&gt; Columns 19 to 20 -0.8027  0.4664
-#&gt;  -0.3107  0.5803
-#&gt;   0.7725 -0.6981
+#&gt; Columns 19 to 20  0.2498 -0.0630
+#&gt;   0.6132 -0.5758
+#&gt;   0.9244 -0.2878
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  Columns 1 to 9  0.3827 -0.0938 -0.5338  0.2050 -0.1668  0.0938  0.1848 -0.1909 -0.3386
-#&gt;   0.3225  0.1368 -0.4954 -0.3504  0.3935  0.5243  0.0637  0.1644  0.4680
-#&gt;   0.8092 -0.1987 -0.0514 -0.5483  0.1259  0.2827  0.3969 -0.1690  0.4819
+#&gt;  Columns 1 to 9 -0.1374 -0.0330 -0.0394  0.4134 -0.4424 -0.3837 -0.1947  0.4484 -0.1512
+#&gt;  -0.1742 -0.0874 -0.2208  0.2694 -0.0926 -0.2543  0.2860  0.6750  0.3693
+#&gt;  -0.2418  0.2224  0.4062  0.1372  0.6000 -0.3901 -0.4593  0.4469  0.2195
 #&gt; 
-#&gt; Columns 10 to 18  0.1151  0.5686  0.2264  0.3457  0.0086 -0.1598  0.0065  0.4950 -0.5230
-#&gt;   0.5326 -0.0010  0.5358  0.3317 -0.2354  0.3700 -0.1223 -0.3146 -0.1434
-#&gt;   0.7379  0.1318 -0.4639  0.0503 -0.1251 -0.4590  0.1181  0.7005  0.8359
+#&gt; Columns 10 to 18  0.2341  0.3614  0.2871 -0.8058  0.1467 -0.1229 -0.2737 -0.1675  0.1473
+#&gt;   0.8171 -0.0884 -0.1058 -0.4716 -0.2308  0.0813 -0.0364 -0.5916 -0.3359
+#&gt;   0.3990  0.4965  0.1972 -0.7464 -0.4573 -0.0773 -0.2281  0.3138 -0.3691
 #&gt; 
-#&gt; Columns 19 to 20 -0.1381  0.1416
-#&gt;  -0.6409  0.0690
-#&gt;   0.1733 -0.1698
+#&gt; Columns 19 to 20  0.3272  0.4566
+#&gt;   0.1423  0.3677
+#&gt;   0.5446  0.5527
 #&gt; 
 #&gt; (3,.,.) = 
-#&gt;  Columns 1 to 9  0.1185 -0.0879 -0.3455  0.1295 -0.5333  0.6159 -0.1365 -0.1794  0.0070
-#&gt;  -0.1416 -0.0354  0.4271  0.0317  0.1907  0.5272  0.0145 -0.2417  0.1263
-#&gt;   0.1361  0.4548 -0.3761 -0.3095  0.0216  0.2112  0.5438 -0.0710 -0.0933
+#&gt;  Columns 1 to 9 -0.0448  0.4616 -0.4838  0.0786 -0.0111 -0.2345 -0.0907  0.1372 -0.3555
+#&gt;  -0.6319  0.0092  0.1898  0.0072 -0.2266 -0.2895 -0.2695  0.4296 -0.4734
+#&gt;  -0.1886  0.4089  0.0189 -0.4833 -0.0337  0.2323 -0.2082  0.1787 -0.4378
 #&gt; ... [the output was truncated (use n=-1 to disable)]
 #&gt; [ CPUFloatType{5,3,20} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor
 #&gt; (1,.,.) = 
-#&gt;  Columns 1 to 9 -0.6488  0.5336  0.0712  0.1702 -0.6854 -0.8312 -0.5376  0.5964 -0.3633
-#&gt;   0.7641 -0.7651 -0.6870 -0.4175  0.6951  0.0032 -0.6519  0.3299  0.2800
-#&gt;  -0.3913 -0.0529  0.0240 -0.1338 -0.4176  0.0433 -0.6288 -0.3333  0.4702
+#&gt;  Columns 1 to 9  0.6986  0.0119 -0.6268 -0.7811  0.2232 -0.7894  0.3206 -0.3741 -0.3062
+#&gt;  -0.2673 -0.2579 -0.0016  0.4054  0.6005  0.0603  0.3226 -0.1139  0.6689
+#&gt;   0.6021 -0.5791 -0.3506 -0.3705 -0.0112  0.1768 -0.2384 -0.3907 -0.1328
 #&gt; 
-#&gt; Columns 10 to 18 -0.6289  0.1080  0.2179  0.5951  0.6852  0.3981 -0.5539  0.6082  0.2915
-#&gt;   0.5204  0.7136 -0.5672 -0.5868  0.7523  0.8648  0.4136 -0.3862  0.4158
-#&gt;  -0.0873  0.3692  0.4111 -0.3776  0.1167  0.4337 -0.0588 -0.5860 -0.1372
+#&gt; Columns 10 to 18  0.5206  0.6202 -0.1802  0.3181  0.5673  0.8897 -0.5273  0.4673 -0.6141
+#&gt;   0.3846 -0.1517  0.2154 -0.4615  0.3396  0.3539  0.2382 -0.2168 -0.3118
+#&gt;   0.2068  0.1308  0.0282 -0.2103  0.7435  0.3611 -0.7668  0.2443 -0.5634
 #&gt; 
-#&gt; Columns 19 to 20 -0.3492  0.7219
-#&gt;   0.6891  0.4150
-#&gt;   0.3565  0.5200
+#&gt; Columns 19 to 20 -0.4858 -0.5774
+#&gt;   0.5887 -0.1788
+#&gt;  -0.2297  0.3774
 #&gt; 
 #&gt; (2,.,.) = 
-#&gt;  Columns 1 to 9 -0.2449 -0.4029 -0.2510 -0.1283 -0.3726  0.8232 -0.5408 -0.4185  0.0542
-#&gt;  -0.0386  0.2180 -0.4742  0.0782 -0.5324  0.1967 -0.0280 -0.1418  0.2938
-#&gt;   0.4654 -0.1158 -0.2913 -0.2953 -0.1208  0.0642 -0.1346  0.0190  0.3792
+#&gt;  Columns 1 to 9  0.0032  0.2606 -0.2802  0.2113  0.1587 -0.3297 -0.4210  0.1222 -0.3511
+#&gt;  -0.4575  0.2144 -0.1026 -0.3256 -0.0727 -0.3304 -0.0013 -0.1015 -0.4195
+#&gt;   0.1783  0.0340 -0.3541 -0.3225 -0.2560  0.1061  0.2430 -0.3405 -0.3414
 #&gt; 
-#&gt; Columns 10 to 18 -0.2274  0.3982 -0.4717  0.0252  0.0924 -0.2642  0.1850 -0.2209 -0.5146
-#&gt;   0.4729  0.2676  0.2155  0.7388  0.4984  0.7189  0.1249  0.2095  0.2277
-#&gt;   0.4859  0.3237 -0.0605  0.6227  0.1034  0.1473 -0.1654 -0.1194  0.4162
+#&gt; Columns 10 to 18  0.1173  0.1267  0.1153 -0.6487 -0.4641  0.0966 -0.0179  0.1008 -0.0819
+#&gt;   0.3851 -0.1088  0.2115 -0.2922 -0.6282  0.3130 -0.2498 -0.2500 -0.0179
+#&gt;   0.1334 -0.1448  0.1844 -0.0717  0.0601 -0.3278  0.0456 -0.0216 -0.2599
 #&gt; 
-#&gt; Columns 19 to 20 -0.2378  0.7088
-#&gt;  -0.1920  0.1424
-#&gt;  -0.3387  0.0108
+#&gt; Columns 19 to 20  0.2801  0.1644
+#&gt;   0.5633  0.1931
+#&gt;  -0.1552  0.3157
 #&gt; [ CPUFloatType{2,3,20} ]
 #&gt; </div></pre>
   </div>

@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -92,53 +92,9 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting started
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginners guide</li>
-    <li>
-      <a href="../articles/getting-started/warmup.html">Warm-up</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors.html">Tensors</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
-    </li>
-    <li class="dropdown-header">Torch Mechanics</li>
-    <li>
-      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
-    </li>
-  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -204,7 +160,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -272,6 +228,47 @@
 
     <p>Modules can also contain other Modules, allowing to nest them in a tree
 structure. You can assign the submodules as regular attributes.</p>
+<p>You are expected to implement the <code>initialize</code> and the <code>forward</code> to create a
+new <code>nn_module</code>.</p>
+    <h2 class="hasAnchor" id="initialize"><a class="anchor" href="#initialize"></a>Initialize</h2>
+
+    
+
+
+<p>The initialize function will be called whenever a new instance of the <code>nn_module</code>
+is created. We use the initialize functions to define submodules and parameters
+of the module. For example:</p><pre><span class='va'>initialize</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input_size</span>, <span class='va'>output_size</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='va'>self</span><span class='op'>$</span><span class='va'>conv1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_conv2d.html'>nn_conv2d</a></span><span class='op'>(</span><span class='va'>input_size</span>, <span class='va'>output_size</span>, <span class='fl'>5</span><span class='op'>)</span>
+   <span class='va'>self</span><span class='op'>$</span><span class='va'>conv2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_conv2d.html'>nn_conv2d</a></span><span class='op'>(</span><span class='va'>output_size</span>, <span class='va'>output_size</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='op'>}</span>
+</pre>
+
+<p>The initialize function can have any number of parameters. All objects
+assigned to <code>self$</code> will be available for other methods that you implement.
+Tensors wrapped with <code><a href='nn_parameter.html'>nn_parameter()</a></code> or <code><a href='nn_buffer.html'>nn_buffer()</a></code> and submodules are
+automatically tracked when assigned to <code>self$</code>.</p>
+<p>The initialize function is optional if the module you are defining doesn't
+have weights, submodules or buffers.</p>
+    <h2 class="hasAnchor" id="forward"><a class="anchor" href="#forward"></a>Forward</h2>
+
+    
+
+
+<p>The forward method is called whenever an instance of <code>nn_module</code> is called.
+This is usually used to implement the computation that the module does with
+the weights ad submodules defined in the <code>initialize</code> function.</p>
+<p>For example:</p><pre><span class='va'>forward</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='va'>self</span><span class='op'>$</span><span class='fu'>conv1</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
+   <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nnf_relu.html'>nnf_relu</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
+   <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='va'>self</span><span class='op'>$</span><span class='fu'>conv2</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
+   <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nnf_relu.html'>nnf_relu</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
+   <span class='va'>input</span>
+ <span class='op'>}</span>
+</pre>
+
+<p>The <code>forward</code> function can use the <code>self$training</code> attribute to make different
+computations depending wether the model is training or not, for example if you
+were implementing the dropout module.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
