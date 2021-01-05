@@ -42,7 +42,7 @@ nn_Module <- R6::R6Class(
     train = function(mode = TRUE) {
       self$training <- mode
       lapply(private$modules_, function(m) m$train(mode))
-      invisible(self)
+      invisible(create_nn_module_callable(self))
     },
     
     eval = function() {

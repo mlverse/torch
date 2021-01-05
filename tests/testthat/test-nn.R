@@ -502,3 +502,13 @@ test_that("lenght for sequential modules", {
   expect_length(z, 3)
   
 })
+
+test_that("train/eval returns a callable module", {
+  
+  mod <- nn_module(initialize = identity, forward = identity)
+  m <- mod(1)
+
+  expect_s3_class(m$eval(), "nn_module")
+  expect_s3_class(m$train(), "nn_module")
+  
+})

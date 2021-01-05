@@ -8,7 +8,7 @@ project(lantern)
 
 function(download_file url filename)
     if(NOT EXISTS ${filename})
-        message("-- Downloading ${filename}")
+        message("-- Downloading ${filename}: ${url}")
         file(DOWNLOAD  ${url} ${filename}
              TIMEOUT 300
              TLS_VERIFY ON
@@ -56,6 +56,9 @@ elseif(UNIX)
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.2')
         add_compile_definitions(CUDA102)
         retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.1.zip" "libtorch")
+    elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.0')
+        add_compile_definitions(CUDA110)
+        retrieve_lib("https://download.pytorch.org/libtorch/cu110/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu110.zip" "libtorch")
     else()
         retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcpu.zip" "libtorch")
     endif()
