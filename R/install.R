@@ -1,4 +1,4 @@
-branch <- "cuda11.2"  
+branch <- "master"  
 
 
 install_config <- list(
