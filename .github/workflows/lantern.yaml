@@ -293,6 +293,11 @@ jobs:
             upload: Linux
             hw: gpu
             version: -102
+          - name: Cuda110
+            artifact: Linux-Cuda-110
+            upload: Linux
+            hw: gpu
+            version: -110
           - name: WindowsCuda101
             artifact: Windows-Cuda-101
             upload: Windows
