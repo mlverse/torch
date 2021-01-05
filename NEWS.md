@@ -16,6 +16,7 @@
 - Allow modifying the `requires_grad` attribute using the `$<-` operator (#419)
 - Added `length` method for the `nn_sequential` container. (#423)
 - `nn_module$eval()` and `nn_module$train()` now return a callable `nn_module` instead of a `nn_Module`. (#425)
+- Added support for CUDA 11 on linux (#424)
 
 # torch 0.2.0
 
