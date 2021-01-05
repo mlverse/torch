@@ -6,6 +6,7 @@ on:
       - master
       - 'cran/**'
       - cuda9.2-md5hash
+      - cuda11.2
 
 jobs:
   build:
@@ -93,6 +94,19 @@ jobs:
             flavor: Release
             artifacts: liblantern.so
             upload: Linux-Cuda-902
+          - os: ubuntu-18.04
+            cuda: '11.0'
+            library: liblantern.so
+            test: ./lanterntest
+            make: make
+            build: build
+            cmakevars:
+            libext:
+            exeext:
+            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
+            flavor: Release
+            artifacts: liblantern.so
+            upload: Linux-Cuda-110
           - os: windows-2019
             cuda: 10.1
             library: lantern.dll
@@ -157,6 +171,24 @@ jobs:
           sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
           sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+          echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
+          echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
+      - name: Prep cmake cuda 11.0
+        if: ${{ matrix.cuda == 11.0 && matrix.os == 'ubuntu-18.04' }}
+        run: |
+          wget --quiet http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda_11.0.2_450.51.05_linux.run
+          chmod +x cuda_11.0.2_450.51.05_linux.run
+          sudo ./cuda_11.0.2_450.51.05_linux.run --silent --toolkit
+          echo "CUDA=${{matrix.cuda}}" >> $GITHUB_ENV
+          echo "CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda" >> $GITHUB_ENV
+          rm cuda_11.0.2_450.51.05_linux.run
+          dir /usr/local
+          wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.0-linux-x64-v8.0.4.30.tgz
+          tar -xzvf cudnn-11.0-linux-x64-v8.0.4.30.tgz
+          sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
+          sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+          sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+          rm cudnn-11.0-linux-x64-v8.0.4.30.tgz
           echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
           echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
       - name: Prep cmake cuda 10.2
@@ -261,6 +293,11 @@ jobs:
             upload: Linux
             hw: gpu
             version: -102
+          - name: Cuda110
+            artifact: Linux-Cuda-110
+            upload: Linux
+            hw: gpu
+            version: -110
           - name: WindowsCuda101
             artifact: Windows-Cuda-101
             upload: Windows
