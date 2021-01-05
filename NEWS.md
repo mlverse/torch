@@ -1,22 +1,33 @@
 # torch (development version)
 
-- Small improvement to `nn_module` documentation (#399).
-- Fix support for cuda 9.2 (#398)
-- Fixed GPU CI that was skipping tests. (#398)
-- The getting started section has been removed from the pkgdown website in favor of the new guide in the landing page (#401)
-- Updated the landing page to include a getting started tutorial (#400)
-- Added a custom CPU allocator to call `gc` when torch might need more memory (#402)
-- Fixed a memory leak when printing tensors (#402)
-- Fixed a memory leak when passing integer vectors to lantern. (#402)
-- Fixed a few more memory leaks related to autograd context (#405)
-- Fixed `nnf_normalize` and `x$norm()` as they were not able to be called (#409)
+## Breaking changes
+
 - Made `torch_one_hot` and `nnf_one_hot` use 1-based indexing. (#410)
+- `nn_module$eval()` and `nn_module$train()` now return a callable `nn_module` instead of a `nn_Module`. (#425)
+
+## New features
+
+- Added a custom CPU allocator to call `gc` when torch might need more memory (#402)
 - Updated to LibTorch 1.7.1 (#412)
 - Allow listing all nested modules in a `nn_module` (#417)
 - Allow modifying the `requires_grad` attribute using the `$<-` operator (#419)
 - Added `length` method for the `nn_sequential` container. (#423)
-- `nn_module$eval()` and `nn_module$train()` now return a callable `nn_module` instead of a `nn_Module`. (#425)
 - Added support for CUDA 11 on linux (#424)
+
+## Bug fixes
+
+- Fix support for cuda 9.2 (#398)
+- Fixed GPU CI that was skipping tests. (#398)
+- Fixed a memory leak when printing tensors (#402)
+- Fixed a memory leak when passing integer vectors to lantern. (#402)
+- Fixed a few more memory leaks related to autograd context (#405)
+- Fixed `nnf_normalize` and `x$norm()` as they were not able to be called (#409)
+
+## Documentation
+
+- Small improvement to `nn_module` documentation (#399).
+- The getting started section has been removed from the pkgdown website in favor of the new guide in the landing page (#401)
+- Updated the landing page to include a getting started tutorial (#400)
 
 # torch 0.2.0
 
