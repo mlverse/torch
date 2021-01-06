@@ -1,5 +1,7 @@
 # torch (development version)
 
+- `torch_split` now accepts a list of sizes as well as a fixed size. (#429)
+
 # torch 0.2.1
 
 ## Breaking changes
