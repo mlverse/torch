@@ -418,3 +418,11 @@ torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
 torch_one_hot <- function(self, num_classes = -1L) {
   .torch_one_hot(as_1_based_tensor(self), num_classes)
 }
+
+#' @rdname torch_split
+torch_split <- function(self, split_size, dim = 1L) {
+  if (length(split_size) > 1)
+    torch_split_with_sizes(self, split_size, dim)
+  else
+    .torch_split(self, split_size, dim)
+}

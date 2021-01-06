@@ -3422,22 +3422,20 @@ NULL
 
 #' Split
 #'
-#' @section TEST :
-#'
 #' Splits the tensor into chunks. Each chunk is a view of the original tensor.
 #' 
-#'     If `split_size_or_sections` is an integer type, then `tensor` will
-#'     be split into equally sized chunks (if possible). Last chunk will be smaller if
-#'     the tensor size along the given dimension `dim` is not divisible by
-#'     `split_size`.
+#' If `split_size` is an integer type, then `tensor` will
+#' be split into equally sized chunks (if possible). Last chunk will be smaller if
+#' the tensor size along the given dimension `dim` is not divisible by
+#' `split_size`.
 #' 
-#'     If `split_size_or_sections` is a list, then `tensor` will be split
-#'     into `len(split_size_or_sections)` chunks with sizes in `dim` according
-#'     to `split_size_or_sections`.
-#'
+#' If `split_size` is a list, then `tensor` will be split
+#' into `length(split_size)` chunks with sizes in `dim` according
+#' to `split_size_or_sections`.
 #'
 #' @param self (Tensor) tensor to split.
-#' @param split_size (int) size of a single chunk or        list of sizes for each chunk
+#' @param split_size (int) size of a single chunk or 
+#'   list of sizes for each chunk
 #' @param dim (int) dimension along which to split the tensor.
 #'
 #' @name torch_split

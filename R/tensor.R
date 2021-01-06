@@ -203,6 +203,12 @@ Tensor <- R7Class(
     },
     norm = function(p = 2, dim, keepdim = FALSE, dtype) {
       torch_norm(self, p, dim, keepdim, dtype)
+    },
+    split = function(split_size, dim = 1L) {
+      if (length(split_size) > 1)
+        self$split_with_sizes(split_size, dim)
+      else
+        private$`_split`(split_size, dim)
     }
   ),
   active = list(

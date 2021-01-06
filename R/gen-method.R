@@ -5313,7 +5313,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "split", function(split_size, dim = 1L) {  args <- mget(x = c("split_size", "dim"))
+Tensor$set("private", "_split", function(split_size, dim = 1L) {  args <- mget(x = c("split_size", "dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", split_size = "int64_t", dim = "int64_t")
 nd_args <- c("self", "split_size")
