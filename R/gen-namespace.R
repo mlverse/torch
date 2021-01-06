@@ -19094,8 +19094,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_split
-torch_split <- function(self, split_size, dim = 1L) {
+#' @rdname .torch_split
+.torch_split <- function(self, split_size, dim = 1L) {
   args <- mget(x = c("self", "split_size", "dim"))
 expected_types <- list(self = "Tensor", split_size = "int64_t", dim = "int64_t")
 nd_args <- c("self", "split_size")

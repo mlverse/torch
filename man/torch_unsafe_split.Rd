@@ -10,7 +10,8 @@ torch_unsafe_split(self, split_size, dim = 1L)
 \arguments{
 \item{self}{(Tensor) tensor to split.}
 
-\item{split_size}{(int) size of a single chunk or        list of sizes for each chunk}
+\item{split_size}{(int) size of a single chunk or
+list of sizes for each chunk}
 
 \item{dim}{(int) dimension along which to split the tensor.}
 }

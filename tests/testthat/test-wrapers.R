@@ -232,3 +232,15 @@ test_that("torch_one_hot", {
   expect_tensor_shape(torch_one_hot(torch_tensor(c(1L, 2L))), c(2,2))
   expect_error(torch_one_hot(torch_tensor(0L)))
 })
+
+test_that("torch_split", {
+  
+  x <- torch_tensor(1:5)
+  
+  expect_length(torch_split(x, 2), 3)
+  expect_length(torch_split(x, c(2, 3)), 2)
+  
+  expect_length(x$split(2), 3)
+  expect_length(x$split(c(2, 3)), 2)
+  
+})

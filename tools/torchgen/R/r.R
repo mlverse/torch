@@ -111,7 +111,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "atleast_1d", "atleast_2d", "atleast_3d",
                    "dequantize", "kaiser_window", "vander",
                    "movedim", "argsort", "norm",
-                   "argmax", "argmin", "one_hot")
+                   "argmax", "argmin", "one_hot", "split")
 
 internal_funs <- c(internal_funs, creation_ops)
 
@@ -355,7 +355,7 @@ r_method <- function(decls) {
 internal_methods <- c("backward", "retain_grad", "size", "to", "stride",
                       "copy_", "topk", "scatter_", "scatter", "rename",
                       "rename_", "narrow", "narrow_copy", "is_leaf", "max",
-                      "min", "argsort", "argmax", "argmin", "norm")
+                      "min", "argsort", "argmax", "argmin", "norm", "split")
 
 r_method_env <- function(decls) {
   if (decls[[1]]$name %in% internal_methods)
