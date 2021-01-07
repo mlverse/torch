@@ -1,0 +1,203 @@
+---
+title: "Neural network from scratch"
+weight: 1
+description: | 
+  Code a neural network from scratch.
+---
+
+# Simple neural network using `torch` tensors
+
+We now use `torch` to simulate some data.
+
+## Toy data
+
+```{r}
+library(torch)
+
+# input dimensionality (number of input features)
+d_in <- 3
+# output dimensionality (number of predicted features)
+d_out <- 1
+# number of observations in training set
+n <- 100
+
+
+# create random data
+# input
+x <- torch_randn(n, d_in)
+# target
+y <- x[, 1, drop = FALSE] * 0.2 -
+  x[, 2, drop = FALSE] * 1.3 -
+  x[, 3, drop = FALSE] * 0.5 +
+  torch_randn(n, 1)
+```
+
+The same goes for network initialization: We now make use of `torch_zeros()` and `torch_randn()`.
+
+## Initialize weights
+
+```{r}
+# dimensionality of hidden layer
+d_hidden <- 32
+
+# weights connecting input to hidden layer
+w1 <- torch_randn(d_in, d_hidden)
+# weights connecting hidden to output layer
+w2 <- torch_randn(d_hidden, d_out)
+
+# hidden layer bias
+b1 <- torch_zeros(1, d_hidden)
+# output layer bias
+b2 <- torch_zeros(1, d_out)
+```
+
+## Training loop
+
+Here are the four phases of the training loop -- forward pass, determination of the loss, backward pass, and weight updates --, now with all operations being `torch` tensor methods. Firstly, the forward pass:
+
+```{r}
+  # compute pre-activations of hidden layers (dim: 100 x 32)
+  # torch_mm does matrix multiplication
+  h <- x$mm(w1) + b1
+  
+  # apply activation function (dim: 100 x 32)
+  # torch_clamp cuts off values below/above given thresholds
+  h_relu <- h$clamp(min = 0)
+  
+  # compute output (dim: 100 x 1)
+  y_pred <- h_relu$mm(w2) + b2
+```
+
+Loss computation:
+
+```{r}
+  loss <- as.numeric((y_pred - y)$pow(2)$sum())
+```
+
+Backprop:
+
+```{r}
+  # gradient of loss w.r.t. prediction (dim: 100 x 1)
+  grad_y_pred <- 2 * (y_pred - y)
+  # gradient of loss w.r.t. w2 (dim: 32 x 1)
+  grad_w2 <- h_relu$t()$mm(grad_y_pred)
+  # gradient of loss w.r.t. hidden activation (dim: 100 x 32)
+  grad_h_relu <- grad_y_pred$mm(w2$t())
+  # gradient of loss w.r.t. hidden pre-activation (dim: 100 x 32)
+  grad_h <- grad_h_relu$clone()
+  
+  grad_h[h < 0] <- 0
+  
+  # gradient of loss w.r.t. b2 (shape: ())
+  grad_b2 <- grad_y_pred$sum()
+  
+  # gradient of loss w.r.t. w1 (dim: 3 x 32)
+  grad_w1 <- x$t()$mm(grad_h)
+  # gradient of loss w.r.t. b1 (shape: (32, ))
+  grad_b1 <- grad_h$sum(dim = 1)
+```
+
+And weight updates:
+
+```{r}
+  learning_rate <- 1e-4
+  
+  w2 <- w2 - learning_rate * grad_w2
+  b2 <- b2 - learning_rate * grad_b2
+  w1 <- w1 - learning_rate * grad_w1
+  b1 <- b1 - learning_rate * grad_b1
+```
+
+Finally, let's put the pieces together.
+
+## Complete network using `torch` tensors
+
+```{r}
+library(torch)
+
+### generate training data -----------------------------------------------------
+
+# input dimensionality (number of input features)
+d_in <- 3
+# output dimensionality (number of predicted features)
+d_out <- 1
+# number of observations in training set
+n <- 100
+
+
+# create random data
+x <- torch_randn(n, d_in)
+y <-
+  x[, 1, NULL] * 0.2 - x[, 2, NULL] * 1.3 - x[, 3, NULL] * 0.5 + torch_randn(n, 1)
+
+
+### initialize weights ---------------------------------------------------------
+
+# dimensionality of hidden layer
+d_hidden <- 32
+# weights connecting input to hidden layer
+w1 <- torch_randn(d_in, d_hidden)
+# weights connecting hidden to output layer
+w2 <- torch_randn(d_hidden, d_out)
+
+# hidden layer bias
+b1 <- torch_zeros(1, d_hidden)
+# output layer bias
+b2 <- torch_zeros(1, d_out)
+
+### network parameters ---------------------------------------------------------
+
+learning_rate <- 1e-4
+
+### training loop --------------------------------------------------------------
+
+for (t in 1:200) {
+  ### -------- Forward pass --------
+  
+  # compute pre-activations of hidden layers (dim: 100 x 32)
+  h <- x$mm(w1) + b1
+  # apply activation function (dim: 100 x 32)
+  h_relu <- h$clamp(min = 0)
+  # compute output (dim: 100 x 1)
+  y_pred <- h_relu$mm(w2) + b2
+  
+  ### -------- compute loss --------
+
+  loss <- as.numeric((y_pred - y)$pow(2)$sum())
+  
+  if (t %% 10 == 0)
+    cat("Epoch: ", t, "   Loss: ", loss, "\n")
+  
+  ### -------- Backpropagation --------
+  
+  # gradient of loss w.r.t. prediction (dim: 100 x 1)
+  grad_y_pred <- 2 * (y_pred - y)
+  # gradient of loss w.r.t. w2 (dim: 32 x 1)
+  grad_w2 <- h_relu$t()$mm(grad_y_pred)
+  # gradient of loss w.r.t. hidden activation (dim: 100 x 32)
+  grad_h_relu <- grad_y_pred$mm(
+    w2$t())
+  # gradient of loss w.r.t. hidden pre-activation (dim: 100 x 32)
+  grad_h <- grad_h_relu$clone()
+  
+  grad_h[h < 0] <- 0
+  
+  # gradient of loss w.r.t. b2 (shape: ())
+  grad_b2 <- grad_y_pred$sum()
+  
+  # gradient of loss w.r.t. w1 (dim: 3 x 32)
+  grad_w1 <- x$t()$mm(grad_h)
+  # gradient of loss w.r.t. b1 (shape: (32, ))
+  grad_b1 <- grad_h$sum(dim = 1)
+  
+  ### -------- Update weights --------
+  
+  w2 <- w2 - learning_rate * grad_w2
+  b2 <- b2 - learning_rate * grad_b2
+  w1 <- w1 - learning_rate * grad_w1
+  b1 <- b1 - learning_rate * grad_b1
+  
+}
+```
+
+In the next tutorial, we'll make an important change, freeing us from having to think in detail about the backward pass.

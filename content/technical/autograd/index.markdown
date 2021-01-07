@@ -1,6 +1,6 @@
 ---
-title: "Introducing torch autograd"
-weight: 2
+title: "Autograd"
+weight: 3
 description: | 
   Use autograd for automatic differentiation.
 ---
@@ -355,26 +355,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  181.6566 
-## Epoch:  20    Loss:  140.5912 
-## Epoch:  30    Loss:  123.9891 
-## Epoch:  40    Loss:  113.9412 
-## Epoch:  50    Loss:  106.4017 
-## Epoch:  60    Loss:  100.5255 
-## Epoch:  70    Loss:  95.92051 
-## Epoch:  80    Loss:  91.98795 
-## Epoch:  90    Loss:  87.82715 
-## Epoch:  100    Loss:  84.58553 
-## Epoch:  110    Loss:  81.90162 
-## Epoch:  120    Loss:  79.73075 
-## Epoch:  130    Loss:  77.95315 
-## Epoch:  140    Loss:  76.42787 
-## Epoch:  150    Loss:  75.14869 
-## Epoch:  160    Loss:  74.05347 
-## Epoch:  170    Loss:  73.06866 
-## Epoch:  180    Loss:  72.21603 
-## Epoch:  190    Loss:  71.43427 
-## Epoch:  200    Loss:  70.70985
+## Epoch:  10    Loss:  248.2126 
+## Epoch:  20    Loss:  159.3951 
+## Epoch:  30    Loss:  128.5067 
+## Epoch:  40    Loss:  112.2572 
+## Epoch:  50    Loss:  103.4237 
+## Epoch:  60    Loss:  98.11967 
+## Epoch:  70    Loss:  94.69946 
+## Epoch:  80    Loss:  92.57679 
+## Epoch:  90    Loss:  90.9911 
+## Epoch:  100    Loss:  89.51681 
+## Epoch:  110    Loss:  88.08874 
+## Epoch:  120    Loss:  86.81861 
+## Epoch:  130    Loss:  85.68468 
+## Epoch:  140    Loss:  84.86021 
+## Epoch:  150    Loss:  84.14762 
+## Epoch:  160    Loss:  83.51341 
+## Epoch:  170    Loss:  82.92525 
+## Epoch:  180    Loss:  82.4293 
+## Epoch:  190    Loss:  81.95628 
+## Epoch:  200    Loss:  81.51281
 ```
 
 As explained above, after `some_tensor$backward()`, all tensors

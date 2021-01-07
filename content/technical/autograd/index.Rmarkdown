@@ -1,6 +1,6 @@
 ---
-title: "Introducing torch autograd"
-weight: 2
+title: "Autograd"
+weight: 3
 description: | 
   Use autograd for automatic differentiation.
 ---

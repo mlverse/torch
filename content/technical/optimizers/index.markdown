@@ -1,6 +1,6 @@
 ---
-title: "Using torch optimizers"
-weight: 4
+title: "Optimizers"
+weight: 5
 description: | 
   Use torch optimizers.
 ---
@@ -13,12 +13,19 @@ Based on where we ended up in the last tutorial, there are just two more things 
 
 Take the example of calculating mean squared error. One way is to call `nnf_mse_loss()` directly on the prediction and ground truth tensors. For example:
 
-```{r}
+
+```r
 library(torch)
 x <- torch_randn(c(3, 2, 3))
 y <- torch_zeros(c(3, 2, 3))
 
 nnf_mse_loss(x, y)
+```
+
+```
+## torch_tensor
+## 0.401991
+## [ CPUFloatType{} ]
 ```
 
 Other loss functions designed to be called directly start with `nnf_` as well: `nnf_binary_cross_entropy()`, `nnf_nll_loss()`, `nnf_kl_div()` ... and so on. [^1]
@@ -29,10 +36,17 @@ The second way is to define the algorithm in advance and call it at some later t
 
 [^2]: This time, the corresponding PyTorch module is [torch.nn](https://pytorch.org/docs/stable/nn.html).
 
-```{r}
+
+```r
 loss <- nn_mse_loss()
 
 loss(x, y)
+```
+
+```
+## torch_tensor
+## 0.401991
+## [ CPUFloatType{} ]
 ```
 
 This method may be preferable when one and the same algorithm should be applied to more than one pair of tensors.
@@ -45,50 +59,162 @@ However, optimization algorithms used in deep learning get a lot more sophistica
 
 Here is a very simple network, consisting of just one linear layer, to be called on a single data point.
 
-```{r}
+
+```r
 data <- torch_randn(1, 3)
 
 model <- nn_linear(3, 1)
 model$parameters
 ```
 
+```
+## $weight
+## torch_tensor
+##  0.4842  0.4388  0.3189
+## [ CPUFloatType{1,3} ]
+## 
+## $bias
+## torch_tensor
+## 0.01 *
+## -3.3569
+## [ CPUFloatType{1} ]
+```
+
 When we create an optimizer, we tell it what parameters it is supposed to work on.
 
-```{r}
+
+```r
 optimizer <- optim_adam(model$parameters, lr = 0.01)
 optimizer
 ```
 
+```
+## <optim_adam>
+##   Inherits from: <torch_Optimizer>
+##   Public:
+##     add_param_group: function (param_group) 
+##     clone: function (deep = FALSE) 
+##     defaults: list
+##     initialize: function (params, lr = 0.001, betas = c(0.9, 0.999), eps = 1e-08, 
+##     param_groups: list
+##     state: list
+##     step: function (closure = NULL) 
+##     zero_grad: function () 
+##   Private:
+##     step_helper: function (closure, loop_fun)
+```
+
 At any time, we can inspect those parameters:
 
-```{r}
+
+```r
 optimizer$param_groups[[1]]$params
+```
+
+```
+## $weight
+## torch_tensor
+##  0.4842  0.4388  0.3189
+## [ CPUFloatType{1,3} ]
+## 
+## $bias
+## torch_tensor
+## 0.01 *
+## -3.3569
+## [ CPUFloatType{1} ]
 ```
 
 Now we perform the forward and backward passes. The backward pass calculates the gradients, but does *not* update the parameters, as we can see both from the model *and* the optimizer objects:
 
-```{r}
+
+```r
 out <- model(data)
 out$backward()
 
 optimizer$param_groups[[1]]$params
+```
+
+```
+## $weight
+## torch_tensor
+##  0.4842  0.4388  0.3189
+## [ CPUFloatType{1,3} ]
+## 
+## $bias
+## torch_tensor
+## 0.01 *
+## -3.3569
+## [ CPUFloatType{1} ]
+```
+
+```r
 model$parameters
+```
+
+```
+## $weight
+## torch_tensor
+##  0.4842  0.4388  0.3189
+## [ CPUFloatType{1,3} ]
+## 
+## $bias
+## torch_tensor
+## 0.01 *
+## -3.3569
+## [ CPUFloatType{1} ]
 ```
 
 Calling `step()` on the optimizer actually *performs* the updates. Again, let's check that both model and optimizer now hold the updated values:
 
-```{r}
-optimizer$step()
 
+```r
+optimizer$step()
+```
+
+```
+## NULL
+```
+
+```r
 optimizer$param_groups[[1]]$params
+```
+
+```
+## $weight
+## torch_tensor
+##  0.4942  0.4488  0.3089
+## [ CPUFloatType{1,3} ]
+## 
+## $bias
+## torch_tensor
+## 0.01 *
+## -4.3569
+## [ CPUFloatType{1} ]
+```
+
+```r
 model$parameters
+```
+
+```
+## $weight
+## torch_tensor
+##  0.4942  0.4488  0.3089
+## [ CPUFloatType{1,3} ]
+## 
+## $bias
+## torch_tensor
+## 0.01 *
+## -4.3569
+## [ CPUFloatType{1} ]
 ```
 
 If we perform optimization in a loop, we need to make sure to call `optimizer$zero_grad()` on every step, as otherwise gradients would be accumulated. You can see this in our final version of the network.
 
 # Simple network: final version
 
-```{r}
+
+```r
 library(torch)
 
 ### generate training data -----------------------------------------------------
@@ -152,7 +278,29 @@ for (t in 1:200) {
   # use the optimizer to update model parameters
   optimizer$step()
 }
+```
 
+```
+## Epoch:  10    Loss:  113.2409 
+## Epoch:  20    Loss:  89.89117 
+## Epoch:  30    Loss:  80.93204 
+## Epoch:  40    Loss:  70.96267 
+## Epoch:  50    Loss:  63.91261 
+## Epoch:  60    Loss:  58.18813 
+## Epoch:  70    Loss:  53.62788 
+## Epoch:  80    Loss:  48.70264 
+## Epoch:  90    Loss:  43.82824 
+## Epoch:  100    Loss:  49.70764 
+## Epoch:  110    Loss:  39.74855 
+## Epoch:  120    Loss:  39.06342 
+## Epoch:  130    Loss:  36.77027 
+## Epoch:  140    Loss:  35.17616 
+## Epoch:  150    Loss:  34.4693 
+## Epoch:  160    Loss:  36.34196 
+## Epoch:  170    Loss:  36.30878 
+## Epoch:  180    Loss:  33.7412 
+## Epoch:  190    Loss:  32.56227 
+## Epoch:  200    Loss:  33.74776
 ```
 
 And that's it! We've seen all the major actors on stage: tensors, *autograd*, modules, loss functions, and optimizers. You're now more than ready to go on and explore some of the [applied examples](/using_torch)!

@@ -1,6 +1,6 @@
 ---
-title: "Using torch modules"
-weight: 3
+title: "Modules"
+weight: 4
 description: | 
   Create neural network modules.
 ---

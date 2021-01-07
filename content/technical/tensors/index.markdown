@@ -1,15 +1,11 @@
 ---
-title: "Getting familiar with torch tensors"
-weight: 1
+title: "Tensors"
+weight: 2
 description: | 
   Learn how to create and manipulate tensors.
 ---
 
-Let's start by learning about `torch` tensors. Sound like taking things slow? Not really! We'll build a neural network right in this first tutorial. What's more, we'll build it from scratch, using *nothing but* tensors -- no automatic differentiation, no neural net modules, no optimizers.
-
-Don't worry if you end up finding this a bit tedious -- you probably won't ever do this in practice. But it's an excellent way to learn about tensors!
-
-By the way, this first tutorial is the longest (by far). With tensors, there is so much to learn:
+Let's dig deeper into `torch` tensors. You'll learn:
 
 -   how to create them;
 
@@ -19,7 +15,6 @@ By the way, this first tutorial is the longest (by far). With tensors, there is 
 
 -   and of course, given the omnipresent need for speed: how to get all those operations executed on the GPU.
 
-Once we've cleared that agenda, we code the aforementioned little network, seeing all those aspects in action.
 
 # Creating tensors
 
@@ -95,9 +90,9 @@ t
 
 ```
 ## torch_tensor
-##  1.1533  0.8571  1.3481
-## -0.2113 -0.6174  0.5821
-##  1.9993  0.1421  1.1064
+## -0.2148  0.3871 -0.6968
+##  0.1063 -0.3069 -1.5072
+##  0.0432 -1.5837  0.2322
 ## [ CPUFloatType{3,3} ]
 ```
 
@@ -421,12 +416,12 @@ t
 ```
 ## torch_tensor
 ## (1,.,.) = 
-##  -1 -5
-##  -1 -7
+##  -1 -3
+##  -7  1
 ## 
 ## (2,.,.) = 
-##  -3 -1
-##   1  4
+##   1 -7
+##  -6 -6
 ## [ CPUFloatType{2,2,2} ]
 ```
 
@@ -436,8 +431,8 @@ t[.., 1]
 
 ```
 ## torch_tensor
-## -1 -1
-## -3  1
+## -1 -7
+##  1 -6
 ## [ CPUFloatType{2,2} ]
 ```
 
@@ -447,8 +442,8 @@ t[2, ..]
 
 ```
 ## torch_tensor
-## -3 -1
-##  1  4
+##  1 -7
+## -6 -6
 ## [ CPUFloatType{2,2} ]
 ```
 
@@ -575,7 +570,7 @@ t1$storage()$data_ptr()
 ```
 
 ```
-## [1] "0x55d7dd0a8f00"
+## [1] "0x55cbf2def000"
 ```
 
 ```r
@@ -583,7 +578,7 @@ t2$storage()$data_ptr()
 ```
 
 ```
-## [1] "0x55d7dd0a8f00"
+## [1] "0x55cbf2def000"
 ```
 
 What's different is the storage *metadata* `torch` keeps about both tensors. Here, the relevant information is the *stride*:
@@ -703,7 +698,7 @@ t2$storage()$data_ptr()
 ```
 
 ```
-## [1] "0x55d82d321500"
+## [1] "0x55cb93d5fc40"
 ```
 
 ```r
@@ -713,12 +708,12 @@ t4$storage()$data_ptr()
 ```
 
 ```
-## [1] "0x55d7debe9180"
+## [1] "0x55cb93669e80"
 ```
 
 # Operations on tensors
 
-Unsurprisingly, `torch` provides a bunch of mathematical operations on tensors; we'll see some of them in the network code below, and you'll encounter lots more when you continue your `torch` journey. Here, we quickly take a look at the overall tensor method semantics.
+Unsurprisingly, `torch` provides a bunch of mathematical operations on tensors. We've already seen some of them in action in the neural network code, and you'll encounter lots more when you continue your `torch` journey. Here, we quickly take a look at the overall tensor method semantics.
 
 Tensor methods normally return references to new objects. Here, we add to `t1` a clone of itself:
 
@@ -869,9 +864,9 @@ t1 + 22
 
 ```
 ## torch_tensor
-##  21.5009  21.0671  20.3662  20.0958  21.0332
-##  23.5385  20.4018  22.0118  22.1513  23.1538
-##  21.0380  21.2937  22.0023  21.1927  21.8457
+##  21.4376  20.4072  21.0580  22.1885  23.7295
+##  20.6981  21.8371  22.3340  21.7595  21.2021
+##  20.7050  21.7176  21.8482  23.0839  21.1010
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -886,9 +881,9 @@ t1 + torch_tensor(c(22))
 
 ```
 ## torch_tensor
-##  24.3857  22.5784  22.9302  23.3058  20.9695
-##  22.3111  21.3965  22.0230  20.5258  21.0804
-##  21.2813  21.9429  22.2958  21.9863  23.3732
+##  20.8751  22.3712  23.3040  19.7106  22.7791
+##  21.5658  21.1157  23.7083  21.9827  23.2701
+##  21.0319  22.8206  20.9895  22.3276  21.9052
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -966,9 +961,9 @@ t1$add(t2)
 
 ```
 ## torch_tensor
-## -0.4626 -2.2652  0.6126  1.8086 -0.8001
-##  0.1231 -0.1751  0.3695  0.2293  1.8247
-## -0.8873 -0.6179 -0.3723 -1.2463  0.4463
+## -0.8691 -0.7508  1.0622  0.8551  0.4162
+##  0.2965 -0.3144  1.3594  0.4468 -0.6887
+## -1.8092  0.3860  1.1249  0.5361 -1.2814
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -984,9 +979,9 @@ t1$add(t2)
 
 ```
 ## torch_tensor
-##  0.6726  3.7429 -0.1292  1.9041 -0.6457
-##  0.8139  3.0394 -2.8289  3.6824 -0.0144
-## -0.9379  0.4483 -0.9782  3.2740  0.3641
+## -1.8092 -0.0934  1.5282 -0.7218 -1.0960
+## -0.8556  1.2954 -0.8784 -0.6804  1.1016
+## -1.9484  2.3079  0.6009 -0.8610 -0.7090
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -1002,9 +997,9 @@ t1$add(t2)
 
 ```
 ## torch_tensor
-##  0.8803 -0.4944 -0.3554  0.7771 -0.2957
-##  2.8900  1.5153  1.6543  2.7868  1.7139
-##  1.0562 -0.3185 -0.1795  0.9530 -0.1198
+##  0.5589  1.4205  0.5445  0.7654 -0.2538
+## -0.0216  0.8400 -0.0360  0.1850 -0.8343
+##  1.3144  2.1760  1.2999  1.5209  0.5017
 ## [ CPUFloatType{3,5} ]
 ```
 
@@ -1028,231 +1023,6 @@ t1$view(c(4,1)) * t2
 ## [ CPUFloatType{4,3} ]
 ```
 
-And now, we really get to implementing that neural network!
 
-# Simple neural network using `torch` tensors
+That's it for tensors -- now we get back to that network, and see how we make use of torch's automatic differentiation capabilities!
 
-We now use `torch` to simulate some data.
-
-## Toy data
-
-
-```r
-library(torch)
-
-# input dimensionality (number of input features)
-d_in <- 3
-# output dimensionality (number of predicted features)
-d_out <- 1
-# number of observations in training set
-n <- 100
-
-
-# create random data
-# input
-x <- torch_randn(n, d_in)
-# target
-y <- x[, 1, drop = FALSE] * 0.2 -
-  x[, 2, drop = FALSE] * 1.3 -
-  x[, 3, drop = FALSE] * 0.5 +
-  torch_randn(n, 1)
-```
-
-The same goes for network initialization: We now make use of `torch_zeros()` and `torch_randn()`.
-
-## Initialize weights
-
-
-```r
-# dimensionality of hidden layer
-d_hidden <- 32
-
-# weights connecting input to hidden layer
-w1 <- torch_randn(d_in, d_hidden)
-# weights connecting hidden to output layer
-w2 <- torch_randn(d_hidden, d_out)
-
-# hidden layer bias
-b1 <- torch_zeros(1, d_hidden)
-# output layer bias
-b2 <- torch_zeros(1, d_out)
-```
-
-## Training loop
-
-Here are the four phases of the training loop -- forward pass, determination of the loss, backward pass, and weight updates --, now with all operations being `torch` tensor methods. Firstly, the forward pass:
-
-
-```r
-  # compute pre-activations of hidden layers (dim: 100 x 32)
-  # torch_mm does matrix multiplication
-  h <- x$mm(w1) + b1
-  
-  # apply activation function (dim: 100 x 32)
-  # torch_clamp cuts off values below/above given thresholds
-  h_relu <- h$clamp(min = 0)
-  
-  # compute output (dim: 100 x 1)
-  y_pred <- h_relu$mm(w2) + b2
-```
-
-Loss computation:
-
-
-```r
-  loss <- as.numeric((y_pred - y)$pow(2)$sum())
-```
-
-Backprop:
-
-
-```r
-  # gradient of loss w.r.t. prediction (dim: 100 x 1)
-  grad_y_pred <- 2 * (y_pred - y)
-  # gradient of loss w.r.t. w2 (dim: 32 x 1)
-  grad_w2 <- h_relu$t()$mm(grad_y_pred)
-  # gradient of loss w.r.t. hidden activation (dim: 100 x 32)
-  grad_h_relu <- grad_y_pred$mm(w2$t())
-  # gradient of loss w.r.t. hidden pre-activation (dim: 100 x 32)
-  grad_h <- grad_h_relu$clone()
-  
-  grad_h[h < 0] <- 0
-  
-  # gradient of loss w.r.t. b2 (shape: ())
-  grad_b2 <- grad_y_pred$sum()
-  
-  # gradient of loss w.r.t. w1 (dim: 3 x 32)
-  grad_w1 <- x$t()$mm(grad_h)
-  # gradient of loss w.r.t. b1 (shape: (32, ))
-  grad_b1 <- grad_h$sum(dim = 1)
-```
-
-And weight updates:
-
-
-```r
-  learning_rate <- 1e-4
-  
-  w2 <- w2 - learning_rate * grad_w2
-  b2 <- b2 - learning_rate * grad_b2
-  w1 <- w1 - learning_rate * grad_w1
-  b1 <- b1 - learning_rate * grad_b1
-```
-
-Finally, let's put the pieces together.
-
-## Complete network using `torch` tensors
-
-
-```r
-library(torch)
-
-### generate training data -----------------------------------------------------
-
-# input dimensionality (number of input features)
-d_in <- 3
-# output dimensionality (number of predicted features)
-d_out <- 1
-# number of observations in training set
-n <- 100
-
-
-# create random data
-x <- torch_randn(n, d_in)
-y <-
-  x[, 1, NULL] * 0.2 - x[, 2, NULL] * 1.3 - x[, 3, NULL] * 0.5 + torch_randn(n, 1)
-
-
-### initialize weights ---------------------------------------------------------
-
-# dimensionality of hidden layer
-d_hidden <- 32
-# weights connecting input to hidden layer
-w1 <- torch_randn(d_in, d_hidden)
-# weights connecting hidden to output layer
-w2 <- torch_randn(d_hidden, d_out)
-
-# hidden layer bias
-b1 <- torch_zeros(1, d_hidden)
-# output layer bias
-b2 <- torch_zeros(1, d_out)
-
-### network parameters ---------------------------------------------------------
-
-learning_rate <- 1e-4
-
-### training loop --------------------------------------------------------------
-
-for (t in 1:200) {
-  ### -------- Forward pass --------
-  
-  # compute pre-activations of hidden layers (dim: 100 x 32)
-  h <- x$mm(w1) + b1
-  # apply activation function (dim: 100 x 32)
-  h_relu <- h$clamp(min = 0)
-  # compute output (dim: 100 x 1)
-  y_pred <- h_relu$mm(w2) + b2
-  
-  ### -------- compute loss --------
-
-  loss <- as.numeric((y_pred - y)$pow(2)$sum())
-  
-  if (t %% 10 == 0)
-    cat("Epoch: ", t, "   Loss: ", loss, "\n")
-  
-  ### -------- Backpropagation --------
-  
-  # gradient of loss w.r.t. prediction (dim: 100 x 1)
-  grad_y_pred <- 2 * (y_pred - y)
-  # gradient of loss w.r.t. w2 (dim: 32 x 1)
-  grad_w2 <- h_relu$t()$mm(grad_y_pred)
-  # gradient of loss w.r.t. hidden activation (dim: 100 x 32)
-  grad_h_relu <- grad_y_pred$mm(
-    w2$t())
-  # gradient of loss w.r.t. hidden pre-activation (dim: 100 x 32)
-  grad_h <- grad_h_relu$clone()
-  
-  grad_h[h < 0] <- 0
-  
-  # gradient of loss w.r.t. b2 (shape: ())
-  grad_b2 <- grad_y_pred$sum()
-  
-  # gradient of loss w.r.t. w1 (dim: 3 x 32)
-  grad_w1 <- x$t()$mm(grad_h)
-  # gradient of loss w.r.t. b1 (shape: (32, ))
-  grad_b1 <- grad_h$sum(dim = 1)
-  
-  ### -------- Update weights --------
-  
-  w2 <- w2 - learning_rate * grad_w2
-  b2 <- b2 - learning_rate * grad_b2
-  w1 <- w1 - learning_rate * grad_w1
-  b1 <- b1 - learning_rate * grad_b1
-  
-}
-```
-
-```
-## Epoch:  10    Loss:  250.8332 
-## Epoch:  20    Loss:  157.8856 
-## Epoch:  30    Loss:  127.3842 
-## Epoch:  40    Loss:  112.4352 
-## Epoch:  50    Loss:  104.1926 
-## Epoch:  60    Loss:  99.00272 
-## Epoch:  70    Loss:  95.513 
-## Epoch:  80    Loss:  92.91859 
-## Epoch:  90    Loss:  90.78481 
-## Epoch:  100    Loss:  88.95575 
-## Epoch:  110    Loss:  87.4034 
-## Epoch:  120    Loss:  86.18372 
-## Epoch:  130    Loss:  85.04802 
-## Epoch:  140    Loss:  84.0229 
-## Epoch:  150    Loss:  83.13453 
-## Epoch:  160    Loss:  82.32983 
-## Epoch:  170    Loss:  81.57518 
-## Epoch:  180    Loss:  80.87898 
-## Epoch:  190    Loss:  80.26715 
-## Epoch:  200    Loss:  79.74549
-```
-
-In the next tutorial, we'll make an important change, freeing us from having to think in detail about the backward pass.

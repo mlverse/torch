@@ -7,23 +7,29 @@
     weight = 1
     
 [[main]]
-    name = "getting started"
+    name = "get started"
     url = "/start/"
     weight = 2
-
+    
 [[main]]
-    name = "using torch"
+    name = "use torch"
     url = "/using_torch/"
     weight = 3
     
 [[main]]
-    name = "docs"
-    url = "/docs/"
+    name = "get technical"
+    url = "/technical/"
     weight = 4
+    
+[[main]]
+    name = "resources"
+    url = "/resources/"
+    weight = 5
 
 [[main]]
-    name = "blog"
-    url = "https://blogs.rstudio.com/ai/"
-    weight = 5
+    name = "docs"
+    url = "/docs/"
+    weight = 6
+    
 
 

@@ -330,6 +330,7 @@ div.warning {
   
   /* Getting Started / Tutorial sidebar title */
   .column25-left .sectionTitle.start:first-of-type a,
+  .column25-left .sectionTitle.technical:first-of-type a,
   .column16-left .sectionTitle.start:first-of-type a {
     text-transform: {{ . }};
     letter-spacing: 2pt;
