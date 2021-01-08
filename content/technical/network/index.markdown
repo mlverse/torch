@@ -1,13 +1,13 @@
 ---
-title: "Neural network from scratch"
+title: "Network from scratch"
 weight: 1
 description: | 
   Code a neural network from scratch.
 ---
 
-Our first version of the network will make use of "just" one torch feature: tensors. In fact, "just" doesn't quite fit as a qualifier, as tensors really are all we need! However, you'll soon see how much easier it gets through functionality built on top: automatic differentiation, optimizers, and neural network modules. For now though, just take this as a holistic example, as well as a motivation to learn more about tensors in the upcoming section!
+Our first version of the network will make use of "just" one `torch` feature: tensors. In fact, "just" doesn't quite fit as a qualifier, as tensors really are all we need! However, you'll soon see how much easier it gets through functionality built on top: automatic differentiation, optimizers, and neural network modules. For now though, just take this as a holistic example, as well as a motivation to learn more about tensors in the upcoming section!
 
-To see tensors in action, we don't even have to wait until we code the network. Definitely, we need some data for it to work on, and these already we can simulate with torch.
+To see tensors in action, we don't even have to wait until we code the network. Definitely, we need some data for it to work on, and that already we can simulate with `torch`.
 
 # Generate random data
 
@@ -22,14 +22,14 @@ torch_randn(2, 3, 4)
 ```
 ## torch_tensor
 ## (1,.,.) = 
-##   0.7548 -0.2971  2.3196 -0.4786
-##   0.9237  1.2791  1.3958  1.0573
-##   0.4980  0.0116  0.3937  0.2128
+##   0.7758 -0.9851  0.0763  0.7085
+##   1.0740  0.8605  0.2778  1.3188
+##  -0.2405 -0.2683 -0.3554  1.3809
 ## 
 ## (2,.,.) = 
-##   0.1766 -1.6569  0.4122 -0.2328
-##  -0.1308 -0.1602  1.2324 -0.5125
-##  -0.4426  0.0146  0.1818  0.2237
+##  -0.5226  0.7378  1.4034  1.6096
+##  -2.4952 -0.2774  0.6318 -0.2386
+##   0.7212 -0.3074  0.7942 -0.5741
 ## [ CPUFloatType{2,3,4} ]
 ```
 
@@ -72,7 +72,7 @@ y <- x[, 1, drop = FALSE] * 0.2 - x[, 2, drop = FALSE] * 1.3 - x[, 3, drop = FAL
 
 `torch_randn()` is one of several functions used to initialize tensors of arbitrary shape. Seeing how we're at it, there is another place where we need to do something like this. With neural networks, it's all about the *weights*: those updateable parameters that determine how an intermediate result calculated by layer `n`'s units influences the units in layer `n+1`.
 
-There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 100 (number of observations) by 32. That matrix will be updated during training, but we need to initialize it; and that, again, is accomplished using `torch_rand()`:
+There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 100 (number of observations) by 32. That matrix will be updated during training, but we need to initialize it; and that, again, is accomplished using `torch_randn()`:
 
 
 ```r
@@ -101,32 +101,74 @@ b1 <- torch_zeros(1, d_hidden)
 b2 <- torch_zeros(1, d_out)
 ```
 
+Now, we're ready for the action.
+
 # Training loop
 
-Here are the four phases of the training loop -- forward pass, determination of the loss, backward pass, and weight updates --, now with all operations being `torch` tensor methods. Firstly, the forward pass:
+*The network*, the way we'll code it in this low-level version, is not a programmatic entity -- not a module or a class or an object. The network *is* what it *does:*
+
+-   go forward through the layers, computing the so-called *activations* (which are, in effect, just tensors!),
+
+-   compare the final activations thus computed with the target, yielding the so-called *loss* (this one too, just a tensor!),
+
+-   go backward, using the loss to calculate the directions in which to modify the weights (which were ... yes, well ... tensors), and finally,
+
+-   update the weights accordingly.
+
+All this it does for how long we ask it to, by having that mechanism run in a loop.
+
+Now we look at each of these activities in turn.
+
+## Forward pass
+
+We have two layers (not counting the input): one hidden layer and the output layer.
+
+For each of those, there are two calculations to perform: First, multiply the incoming tensor with the weight matrix and add the bias vector; and second, apply the desired *activation function*.
+
+`torch_mm()`, or just `mm()` if used as an instance method on a tensor, multiplies two matrices; for mathematical operations such as addition, subtraction or element-wise multiplication, we can use the overloaded operators `+`, `-` and `*`, respectively.
+
+So here is calculation number one for the hidden layer:
 
 
 ```r
   # compute pre-activations of hidden layers (dim: 100 x 32)
   # torch_mm does matrix multiplication
   h <- x$mm(w1) + b1
-  
+```
+
+Next, the activation function. ReLU (Rectified Linear Unit) is an impressive-sounding name for something pretty simple (yet pretty successful!) -- we set all values below zero to 0. This is done making use of `torch`s many methods that operate on tensors, -- here, `clamp()`:
+
+
+```r
   # apply activation function (dim: 100 x 32)
   # torch_clamp cuts off values below/above given thresholds
   h_relu <- h$clamp(min = 0)
-  
+```
+
+That's it for the hidden layer. The output layer does not have an activation function (although it could have, were it to predict a different kind of variable), so all we have to do is multiply by the weights and add the bias:
+
+
+```r
   # compute output (dim: 100 x 1)
   y_pred <- h_relu$mm(w2) + b2
 ```
 
-Loss computation:
+The next activity is computing the loss.
+
+## Loss computation
+
+Our task being regression, an adequate loss to compute is mean squared error. Using a mixture of overloaded operators and tensor methods, a single line is sufficient:
 
 
 ```r
   loss <- as.numeric((y_pred - y)$pow(2)$sum())
 ```
 
-Backprop:
+## Backward pass (backpropagation)
+
+So calculating the loss from scratch was straightforward; unfortunately though, the same does not hold for that essential thing that makes a neural network a network: backpropagation. Backpropagation means: Check how far off are your predictions (that's what the loss tells you), then go back layer by layer and adjust the weights so that next time, the loss will decrease.
+
+In principle, that's applying the chain rule from calculus -- but knowing how this works in detail is in no way required for using `torch`! The piece of code that follows is the very first thing we'll remove, right in the next tutorial. The point we're making here is just this: You can, if you want to, do all the math manually, using nothing but tensor operations. You can, but you don't have to!
 
 
 ```r
@@ -150,7 +192,9 @@ Backprop:
   grad_b1 <- grad_h$sum(dim = 1)
 ```
 
-And weight updates:
+## Weight updates
+
+Finally, we need to update those weights. This is far less tedious than the previous step, but still, we won't regret seeing this disappear as well, in the final version.
 
 
 ```r
@@ -162,9 +206,9 @@ And weight updates:
   b1 <- b1 - learning_rate * grad_b1
 ```
 
-Finally, let's put the pieces together.
+Now that we've talked through all the steps, here is the complete code, ready to run.
 
-## Complete network using `torch` tensors
+# Complete network using `torch` tensors
 
 
 ```r
@@ -182,9 +226,7 @@ n <- 100
 
 # create random data
 x <- torch_randn(n, d_in)
-y <-
-  x[, 1, NULL] * 0.2 - x[, 2, NULL] * 1.3 - x[, 3, NULL] * 0.5 + torch_randn(n, 1)
-
+y <- x[, 1, drop = FALSE] * 0.2 - x[, 2, drop = FALSE] * 1.3 - x[, 3, drop = FALSE] * 0.5 + torch_randn(n, 1)
 
 ### initialize weights ---------------------------------------------------------
 
@@ -256,26 +298,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  283.2281 
-## Epoch:  20    Loss:  184.7813 
-## Epoch:  30    Loss:  148.6949 
-## Epoch:  40    Loss:  132.085 
-## Epoch:  50    Loss:  122.7631 
-## Epoch:  60    Loss:  116.8454 
-## Epoch:  70    Loss:  112.5663 
-## Epoch:  80    Loss:  109.0198 
-## Epoch:  90    Loss:  106.0655 
-## Epoch:  100    Loss:  103.6448 
-## Epoch:  110    Loss:  101.5424 
-## Epoch:  120    Loss:  99.66808 
-## Epoch:  130    Loss:  97.93629 
-## Epoch:  140    Loss:  96.41391 
-## Epoch:  150    Loss:  95.0442 
-## Epoch:  160    Loss:  93.81817 
-## Epoch:  170    Loss:  92.76872 
-## Epoch:  180    Loss:  91.68913 
-## Epoch:  190    Loss:  90.63338 
-## Epoch:  200    Loss:  89.64046
+## Epoch:  10    Loss:  163.2368 
+## Epoch:  20    Loss:  135.9249 
+## Epoch:  30    Loss:  124.5586 
+## Epoch:  40    Loss:  119.0481 
+## Epoch:  50    Loss:  115.7841 
+## Epoch:  60    Loss:  113.644 
+## Epoch:  70    Loss:  112.01 
+## Epoch:  80    Loss:  110.6413 
+## Epoch:  90    Loss:  109.4492 
+## Epoch:  100    Loss:  108.3725 
+## Epoch:  110    Loss:  107.3739 
+## Epoch:  120    Loss:  106.426 
+## Epoch:  130    Loss:  105.4796 
+## Epoch:  140    Loss:  104.6274 
+## Epoch:  150    Loss:  103.8735 
+## Epoch:  160    Loss:  103.1636 
+## Epoch:  170    Loss:  102.477 
+## Epoch:  180    Loss:  101.8213 
+## Epoch:  190    Loss:  101.1965 
+## Epoch:  200    Loss:  100.5975
 ```
 
-In the next tutorial, we'll make an important change, freeing us from having to think in detail about the backward pass.
+And that's it -- a neural network from scratch, using nothing but `torch` tensors. Let's learn more about tensors [next](/technical/tensors).

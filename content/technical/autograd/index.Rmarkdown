@@ -6,7 +6,7 @@ description: |
 ---
 
 
-In the previous tutorial, we saw how to code a simple network from
+In the first tutorial, we saw how to code a simple network from
 scratch, using nothing but `torch` *tensors*. Predictions, loss,
 gradients, weight updates -- all these things we've been computing
 ourselves. Here, we make a significant change: Namely, we spare

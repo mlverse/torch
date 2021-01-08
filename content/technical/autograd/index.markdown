@@ -6,7 +6,7 @@ description: |
 ---
 
 
-In the previous tutorial, we saw how to code a simple network from
+In the first tutorial, we saw how to code a simple network from
 scratch, using nothing but `torch` *tensors*. Predictions, loss,
 gradients, weight updates -- all these things we've been computing
 ourselves. Here, we make a significant change: Namely, we spare
@@ -355,26 +355,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  248.2126 
-## Epoch:  20    Loss:  159.3951 
-## Epoch:  30    Loss:  128.5067 
-## Epoch:  40    Loss:  112.2572 
-## Epoch:  50    Loss:  103.4237 
-## Epoch:  60    Loss:  98.11967 
-## Epoch:  70    Loss:  94.69946 
-## Epoch:  80    Loss:  92.57679 
-## Epoch:  90    Loss:  90.9911 
-## Epoch:  100    Loss:  89.51681 
-## Epoch:  110    Loss:  88.08874 
-## Epoch:  120    Loss:  86.81861 
-## Epoch:  130    Loss:  85.68468 
-## Epoch:  140    Loss:  84.86021 
-## Epoch:  150    Loss:  84.14762 
-## Epoch:  160    Loss:  83.51341 
-## Epoch:  170    Loss:  82.92525 
-## Epoch:  180    Loss:  82.4293 
-## Epoch:  190    Loss:  81.95628 
-## Epoch:  200    Loss:  81.51281
+## Epoch:  10    Loss:  276.425 
+## Epoch:  20    Loss:  149.8547 
+## Epoch:  30    Loss:  112.9031 
+## Epoch:  40    Loss:  98.43044 
+## Epoch:  50    Loss:  91.59359 
+## Epoch:  60    Loss:  87.51484 
+## Epoch:  70    Loss:  84.87402 
+## Epoch:  80    Loss:  82.77007 
+## Epoch:  90    Loss:  80.96922 
+## Epoch:  100    Loss:  79.46633 
+## Epoch:  110    Loss:  78.10928 
+## Epoch:  120    Loss:  76.89656 
+## Epoch:  130    Loss:  75.83997 
+## Epoch:  140    Loss:  74.86513 
+## Epoch:  150    Loss:  74.01006 
+## Epoch:  160    Loss:  73.22728 
+## Epoch:  170    Loss:  72.49596 
+## Epoch:  180    Loss:  71.81541 
+## Epoch:  190    Loss:  71.17912 
+## Epoch:  200    Loss:  70.57628
 ```
 
 As explained above, after `some_tensor$backward()`, all tensors
