@@ -5,36 +5,55 @@ description: |
   Code a neural network from scratch.
 ---
 
-# Simple neural network using `torch` tensors
+Our first version of the network will make use of "just" one torch feature: tensors. In fact, "just" doesn't quite fit as a qualifier, as tensors really are all we need! However, you'll soon see how much easier it gets through functionality built on top: automatic differentiation, optimizers, and neural network modules. For now though, just take this as a holistic example, as well as a motivation to learn more about tensors in the upcoming section!
 
-We now use `torch` to simulate some data.
+To see tensors in action, we don't even have to wait until we code the network. Definitely, we need some data for it to work on, and these already we can simulate with torch.
 
-## Toy data
+# Generate random data
+
+We use `torch_randn()` to simulate standard normally-distributed data, of a desired shape. For example:
 
 ```{r}
 library(torch)
+torch_randn(2, 3, 4)
+```
 
+For our example, we want to have three input features ...
+
+```{r}
 # input dimensionality (number of input features)
 d_in <- 3
+```
+
+... and we want to predict a single outcome.
+
+```{r}
 # output dimensionality (number of predicted features)
 d_out <- 1
+```
+
+We will have a hundred observations in the training set.
+
+```{r}
 # number of observations in training set
 n <- 100
+```
 
+So we create the data, with input `x` normally distributed and outcome `y`, dependent on all three features but a bit noisy:
 
+```{r}
 # create random data
 # input
 x <- torch_randn(n, d_in)
 # target
-y <- x[, 1, drop = FALSE] * 0.2 -
-  x[, 2, drop = FALSE] * 1.3 -
-  x[, 3, drop = FALSE] * 0.5 +
-  torch_randn(n, 1)
+y <- x[, 1, drop = FALSE] * 0.2 - x[, 2, drop = FALSE] * 1.3 - x[, 3, drop = FALSE] * 0.5 + torch_randn(n, 1)
 ```
 
-The same goes for network initialization: We now make use of `torch_zeros()` and `torch_randn()`.
+# Initialize weights
 
-## Initialize weights
+`torch_randn()` is one of several functions used to initialize tensors of arbitrary shape. Seeing how we're at it, there is another place where we need to do something like this. With neural networks, it's all about the *weights*: those updateable parameters that determine how an intermediate result calculated by layer `n`'s units influences the units in layer `n+1`.
+
+There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 100 (number of observations) by 32. That matrix will be updated during training, but we need to initialize it; and that, again, is accomplished using `torch_rand()`:
 
 ```{r}
 # dimensionality of hidden layer
@@ -42,16 +61,25 @@ d_hidden <- 32
 
 # weights connecting input to hidden layer
 w1 <- torch_randn(d_in, d_hidden)
+```
+
+The hidden layer, in turn, is connected to an output layer of a single unit. The corresponding weight matrix, then, has size `32x1`:
+
+```{r}
 # weights connecting hidden to output layer
 w2 <- torch_randn(d_hidden, d_out)
+```
 
+Now, the second type of weight, called *bias*, is not per connection, but per *unit*. Those biases we initialize to all zeroes:
+
+```{r}
 # hidden layer bias
 b1 <- torch_zeros(1, d_hidden)
 # output layer bias
 b2 <- torch_zeros(1, d_out)
 ```
 
-## Training loop
+# Training loop
 
 Here are the four phases of the training loop -- forward pass, determination of the loss, backward pass, and weight updates --, now with all operations being `torch` tensor methods. Firstly, the forward pass:
 
