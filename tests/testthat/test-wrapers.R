@@ -269,6 +269,13 @@ test_that("torch_nonzero", {
   o <- x$nonzero(as_list = TRUE)
   expect_length(o, 2)
   
+  x <- torch_tensor(c(0,0))
+  expect_equal(nrow(torch_nonzero(x)), 0)
+  expect_equal(nrow(x$nonzero()), 0)
+  
+  expect_equal(nrow(torch_nonzero(x, as_list = TRUE)[[1]]), 0)
+  expect_equal(nrow(x$nonzero(as_list = TRUE)[[1]]), 0)
+  
   skip_if_cuda_not_available()
   x <- torch_tensor(c(0, 1, 2, 0, 3), device = "cuda")
   expect_equal_to_r(torch_nonzero(x), matrix(c(2L,3L,5L), ncol = 1))
