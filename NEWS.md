@@ -1,6 +1,7 @@
 # torch (development version)
 
 - `torch_split` now accepts a list of sizes as well as a fixed size. (#429)
+- Fixed bug in `optim_lbfgs` that would make model objects exponentially big. (#431)
 
 # torch 0.2.1
 
