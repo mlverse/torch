@@ -109,7 +109,7 @@ optim_LBFGS <- R6::R6Class(
             s <- d$mul(t)
             ys <- y$dot(s)  # y*s
             
-            if (ys$item() > 1e-10) {
+            if (!is.na(ys$item()) && ys$item() > 1e-10) {
               # updating memory
               if (length(old_dirs) == history_size) {
                 # shift history by one (limited-memory)
@@ -176,7 +176,7 @@ optim_LBFGS <- R6::R6Class(
           gtd <- flat_grad$dot(d)  # g * d
           
           # directional derivative is below tolerance
-          if (gtd$item() > (-tolerance_change))
+          if (!is.na(gtd$item()) && gtd$item() > (-tolerance_change))
             break
           
           # optional line search: user function
@@ -213,14 +213,15 @@ optim_LBFGS <- R6::R6Class(
             break
           
           # optimal condition
-          if (opt_cond)
+          if (!is.na(opt_cond) && opt_cond)
             break
           
           # lack of progress
-          if (d$mul(t)$abs()$max()$item() <= tolerance_change)
+          d_ml <- d$mul(t)$abs()$max()$item()
+          if (!is.na(d_ml) && d_ml <= tolerance_change)
             break
           
-          if (abs(loss - prev_loss) < tolerance_change)
+          if (!is.na(loss) && abs(loss - prev_loss) < tolerance_change)
             break
       
         }
