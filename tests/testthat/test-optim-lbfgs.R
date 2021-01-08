@@ -43,3 +43,31 @@ test_that("lbfgs works", {
   expect_true(fn()$item() < 2)
   
 })
+
+test_that("lbfgs do not fail with NaN losses", {
+  
+  x <- torch_randn(100, 2)
+  logits <- x[,1]*1 + x[,2]*1
+  p <- torch_exp(logits)/(1 + torch_exp(logits))
+  y <- (p > 0.5)$to(dtype = torch_long()) + 1L
+  
+  model <- nn_sequential(
+    nn_linear(2,2),
+    nn_softmax(dim = 2)
+  )
+  opt <- optim_lbfgs(model$parameters, lr = 0.1)
+  
+  clos <- function() {
+    opt$zero_grad()
+    loss <- nnf_nll_loss(torch_log(model(x)), y)
+    loss$backward()
+    loss
+  }
+  
+  for (i in 1:10) {
+    l <- opt$step(clos)
+  }
+  
+  expect_equal_to_r(torch_isnan(l), TRUE)
+  
+})
