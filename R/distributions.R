@@ -18,18 +18,18 @@ Distribution <- R6::R6Class(
     arg_constraints       = list(),
     
     initialize = function(batch_shape, event_shape, validate_args = NULL){
-      
+
       self$.batch_shape <- batch_shape
       self$.event_shape <- event_shape
-      
+
       if (!is.null(validate_args))
         self$.validate_args <- validate_args
-      
+
         for (p in seq_along(self$arg_constraints)) {
-          
+
           constraint <- arg_constraints[[p]]$constraint
           param      <- arg_constraints[[p]]$param
-          
+
           if (is_dependent(constraint))
             next
           if (!(param %in% as.list(self)) && inherits(param, "lazy_property"))
@@ -125,14 +125,18 @@ Distribution <- R6::R6Class(
         value_error('The value argument to log_prob must be a Tensor')
       
       event_dim_start <-length(value$size()) - length(self$.event_shape)
-      
+    
       if (value$size()[event_dim_start, ] != self$.event_shape)
-        value_error('The right-most size of value must match event_shape: 
-                    {value$size()} vs {self$.event_shape}.')
+        value_error(
+          'The right-most size of value must match event_shape:
+           {value$size()} vs {self$.event_shape}.'
+        )
+
+ 
       
       actual_shape <- value$size()
       expected_shape <- self$.batch_shape + self$.event_shape
-      
+
       shape_length <- length(actual_shape)
       
       for (idx in shape_length:1) {
@@ -182,23 +186,23 @@ Distribution <- R6::R6Class(
   ),
   
   active = list(
-    
-    #' Returns a `dist_constraint` object
+
+    #' Returns a `torch_Constraint` object
     #' representing this distribution's support.
-    support = function() {
-      not_implemented_error()
-    },
-    
+    # support = function() {
+    #   not_implemented_error()
+    # },
+
     #' Returns the mean on of the distribution
     mean = function() {
       not_implemented_error()
     },
-    
+
     #' Returns the variance of the distribution
     variance = function() {
       not_implemented_error()
     },
-    
+
     #' Returns the standard deviation of the distribution
     stddev = function() {
       self$variance$sqrt()

@@ -301,26 +301,26 @@ is_dependent <- function(object){
 # TODO: check .GreaterThan and other classes,
 # which are not instanced
 
-constraints_dependent <- .Dependent$new()
+constraint_dependent <- .Dependent$new()
 
-constraints_boolean <- .Boolean$new()
+constraint_boolean <- .Boolean$new()
 
-constraints_nonnegative_integer <- .IntegerGreaterThan$new(0)
+constraint_nonnegative_integer <- .IntegerGreaterThan$new(0)
 
-constraints_positive_integer <- .IntegerGreaterThan$new(1)
+constraint_positive_integer <- .IntegerGreaterThan$new(1)
 
-constraints_real <- .Real$new()
+constraint_real <- .Real$new()
 
-constraints_positive <- .GreaterThan$new(0.)
+constraint_positive <- .GreaterThan$new(0.)
 
-constraints_greater_than <- .GreaterThan
+constraint_greater_than <- .GreaterThan
 
-constraints_greater_than_eq <- .GreaterThanEq
+constraint_greater_than_eq <- .GreaterThanEq
 
-constraints_less_than <- .LessThan
+constraint_less_than <- .LessThan
 
-constraints_unit_interval <- .Interval$new(0., 1.)
+constraint_unit_interval <- .Interval$new(0., 1.)
 
-constraints_interval <- .Interval
+constraint_interval <- .Interval
 
-constraints_half_open_interval <- .HalfOpenInterval
+constraint_half_open_interval <- .HalfOpenInterval

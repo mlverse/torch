@@ -1,27 +1,15 @@
-#' Creates a normal (also called Gaussian) distribution parameterized by
-#' `loc` and `scale`.
-#' 
-#' @param loc (float or Tensor): mean of the distribution (often referred to as mu)
-#' @param scale (float or Tensor): standard deviation of the distribution (often referred to as sigma)
-#' 
-#' @examples 
-#' m <-  Normal$new(torch.tensor(0.0), torch.tensor(1.0))
-#' m$sample()  # normally distributed with loc=0 and scale=1
-#' tensor([ 0.1046])
-#' 
 Normal <- R6::R6Class(
-  
   "torch_Normal",
-  
+  lock_objects = FALSE,
   inherit = ExponentialFamily,
   
   public = list(
     
-    arg_constraints = list(loc   = constraints_real, 
-                           scale = constraints_positive),
-    support = constraints_real,
+    arg_constraints = list(loc   = constraint_real, 
+                           scale = constraint_positive),
+    support = constraint_real,
     has_rsample = TRUE,
-    .mean_carrier_measure = 0,
+    ._mean_carrier_measure = 0,
     
     initialize = function(loc, scale, validate_args = NULL){
       # TODO
@@ -92,17 +80,18 @@ Normal <- R6::R6Class(
     
     entropy = function(){
       0.5 + 0.5 * log(2 * pi) + torch_log(self$scale)
-    },
+    }
 
   ), 
   
-  private = function(){
+  private = list(
     .log_normalizer= function(x, y){
       -0.25 * x$pow(2) / y + 0.5 * torch_log(-pi / y)
     }
-  }
+  ),
 
   active = list(
+    
       mean = function(){
         self$loc
       },
@@ -117,6 +106,34 @@ Normal <- R6::R6Class(
       
       .natural_params = function(){
         list(self$loc / self$scale$pow(2), -0.5 * self$scale$pow(2)$reciprocal())
+      },
+      
+      .mean_carrier_measure = function(){
+        self$._mean_carrier_measure
       }
     )
 )
+
+Normal <- add_class_definition(Normal)
+
+#' Creates a normal (also called Gaussian) distribution parameterized by
+#' `loc` and `scale`.
+#' 
+#' @param loc (float or Tensor): mean of the distribution (often referred to as mu)
+#' @param scale (float or Tensor): standard deviation of the distribution (often referred to as sigma)
+#' @param validate_args Additional arguments
+#' 
+#' @return Object of `torch_Normal` class
+#' 
+#' @examples 
+#' m <-  distr_normal()
+#' m$sample()  # normally distributed with loc=0 and scale=1
+#' tensor([ 0.1046])
+#' 
+distr_normal <- function(loc = 0, scale = 1, validate_args = NULL){
+  Normal$new(loc, scale, validate_args)
+}
+
+
+
+
