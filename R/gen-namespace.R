@@ -15508,8 +15508,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_nonzero
-torch_nonzero <- function(self) {
+#' @rdname .torch_nonzero
+.torch_nonzero <- function(self) {
   args <- mget(x = c("self"))
 expected_types <- list(self = "Tensor")
 nd_args <- "self"

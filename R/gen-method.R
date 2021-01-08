@@ -4144,7 +4144,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "nonzero", function() {  args <- list()
+Tensor$set("private", "_nonzero", function() {  args <- list()
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor")
 nd_args <- "self"
@@ -4157,7 +4157,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "nonzero_numpy", function() {  args <- list()
+Tensor$set("private", "_nonzero_numpy", function() {  args <- list()
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor")
 nd_args <- "self"

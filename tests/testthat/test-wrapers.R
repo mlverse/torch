@@ -244,3 +244,40 @@ test_that("torch_split", {
   expect_length(x$split(c(2, 3)), 2)
   
 })
+
+test_that("torch_nonzero", {
+  
+  x <- torch_tensor(c(0, 1, 2, 0, 3))
+  expect_equal_to_r(torch_nonzero(x), matrix(c(2L,3L,5L), ncol = 1))
+  expect_equal_to_r(x$nonzero(), matrix(c(2L,3L,5L), ncol = 1))
+  
+  o <- torch_nonzero(x, as_list = TRUE)
+  expect_length(o, 1)
+  expect_equal_to_r(o[[1]], c(2L,3L,5L))
+  
+  o <- x$nonzero(as_list = TRUE)
+  expect_length(o, 1)
+  expect_equal_to_r(o[[1]], c(2L,3L,5L))
+  
+  x <- torch_tensor(matrix(c(0, 1, 0, 1, 1, 0), nrow = 2))
+  expect_equal(nrow(torch_nonzero(x)), 3)
+  expect_equal(nrow(x$nonzero()), 3)
+  
+  o <- torch_nonzero(x, as_list = TRUE)
+  expect_length(o, 2)
+  
+  o <- x$nonzero(as_list = TRUE)
+  expect_length(o, 2)
+  
+  x <- torch_tensor(c(0,0))
+  expect_equal(nrow(torch_nonzero(x)), 0)
+  expect_equal(nrow(x$nonzero()), 0)
+  
+  expect_equal(nrow(torch_nonzero(x, as_list = TRUE)[[1]]), 0)
+  expect_equal(nrow(x$nonzero(as_list = TRUE)[[1]]), 0)
+  
+  skip_if_cuda_not_available()
+  x <- torch_tensor(c(0, 1, 2, 0, 3), device = "cuda")
+  expect_equal_to_r(torch_nonzero(x), matrix(c(2L,3L,5L), ncol = 1))
+
+})

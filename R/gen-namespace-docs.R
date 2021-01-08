@@ -4963,21 +4963,15 @@ NULL
 
 
 #' Nonzero
+#' 
+#' Nonzero elements of tensors.
+#' 
+#' @param self (Tensor) the input tensor.
+#' @param as_list If `FALSE`, the output tensor containing indices. If `TRUE`, one 
+#'   1-D tensor for each dimension, containing the indices of each nonzero element 
+#'   along that dimension.
 #'
-#' @note
-#'     [`torch_nonzero(..., as_tuple=False) <torch.nonzero>`] (default) returns a
-#'     2-D tensor where each row is the index for a nonzero value.
-#' 
-#'     [`torch_nonzero(..., as_tuple=TRUE) <torch.nonzero>`] returns a tuple of 1-D
-#'     index tensors, allowing for advanced indexing, so `x[x.nonzero(as_tuple=TRUE)]`
-#'     gives all nonzero values of tensor `x`. Of the returned tuple, each index tensor
-#'     contains nonzero indices for a certain dimension.
-#' 
-#'     See below for more details on the two behaviors.
-#'     
-#' @section nonzero(input, *, out=NULL, as_tuple=False) -> LongTensor or tuple of LongTensors :
-#' 
-#' **When** `as_tuple` **is `FALSE` (default)**:
+#' **When** `as_list` **is `FALSE` (default)**:
 #' 
 #' Returns a tensor containing the indices of all non-zero elements of
 #' `input`.  Each row in the result contains the indices of a non-zero
@@ -4988,7 +4982,7 @@ NULL
 #' `out` is of size \eqn{(z \times n)}, where \eqn{z} is the total number of
 #' non-zero elements in the `input` tensor.
 #' 
-#' **When** `as_tuple` **is `TRUE`**:
+#' **When** `as_list` **is `TRUE`**:
 #' 
 #' Returns a tuple of 1-D tensors, one for each dimension in `input`,
 #' each containing the indices (in that dimension) of all non-zero elements of
@@ -5001,8 +4995,6 @@ NULL
 #' As a special case, when `input` has zero dimensions and a nonzero scalar
 #' value, it is treated as a one-dimensional tensor with one element.
 #'
-#'
-#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_nonzero
 #'

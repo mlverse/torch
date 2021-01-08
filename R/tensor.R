@@ -209,6 +209,14 @@ Tensor <- R7Class(
         self$split_with_sizes(split_size, dim)
       else
         private$`_split`(split_size, dim)
+    },
+    nonzero = function(as_list = FALSE) {
+      if (!as_list) {
+        return(private$`_nonzero`() + 1L)
+      } else {
+        o <- private$`_nonzero_numpy`()
+        return(lapply(o, function(x) x + 1L))
+      }
     }
   ),
   active = list(
