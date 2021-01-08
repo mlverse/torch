@@ -426,3 +426,14 @@ torch_split <- function(self, split_size, dim = 1L) {
   else
     .torch_split(self, split_size, dim)
 }
+
+#' @rdname torch_nonzero
+torch_nonzero <- function(self, as_list = FALSE) {
+  if (!as_list) {
+    out <- .torch_nonzero(self)
+    return(out + 1L)
+  } else {
+    out <- torch_nonzero_numpy(self)
+    return(lapply(out, function(x) x + 1L))
+  }
+}
