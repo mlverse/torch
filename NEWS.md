@@ -2,6 +2,7 @@
 
 - `torch_split` now accepts a list of sizes as well as a fixed size. (#429)
 - Fixed bug in `optim_lbfgs` that would make model objects exponentially big. (#431)
+- `torch_nonzero` and `tensor$nonzero()` now return 1-based indexes. (#432)
 
 # torch 0.2.1
 
