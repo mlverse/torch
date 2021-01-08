@@ -58,7 +58,7 @@ optim_LBFGS <- R6::R6Class(
         # NOTE: LBFGS has only global state, but we register it as state for
         # the first param, because this helps with casting in load_state_dict
         if (is.null(private$.params[[1]]$state)) {
-          private$.params[[1]]$state <- new.env()
+          private$.params[[1]]$state <- new.env(parent = emptyenv())
           private$.params[[1]]$state[["func_evals"]] <- 0
           private$.params[[1]]$state[["n_iter"]] <- 0
         }
@@ -192,9 +192,7 @@ optim_LBFGS <- R6::R6Class(
               # re-evaluate function only if not in last iteration
               # the reason we do this: in a stochastic setting,
               # no use to re-evaluate that function here
-              with_enable_grad({
-                loss = closure_()$item()
-              })
+              loss = closure_()$item()
               flat_grad <- private$.gather_flat_grad()
               opt_cond <- flat_grad$abs()$max()$item() <= tolerance_grad
               ls_func_evals <- 1
