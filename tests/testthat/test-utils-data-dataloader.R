@@ -66,8 +66,11 @@ test_that("can have datasets that don't return tensors", {
   # iterating with an enum
   for (batch in enumerate(dl)) {
     expect_tensor_shape(batch[[1]], c(32, 1, 10))
-    expect_tensor_shape(batch[[2]], c(32))    
+    expect_true(batch[[1]]$dtype == torch_float())
+    expect_tensor_shape(batch[[2]], c(32))
+    
     expect_tensor_shape(batch[[3]], c(32, 10))    
+    expect_true(batch[[3]]$dtype == torch_long())
   }
   
   expect_true(batch[[1]]$dtype == torch_float32())

@@ -15,17 +15,14 @@ utils_data_default_collate <- function(batch) {
       )
     )
     
-  } else if (is.numeric(elem) && length(elem) == 1) {
-    
-    # we can safely unlist everything into a tensor
-    # we convert to integers because it's the most likely type.
+  } else if (is.integer(elem) && length(elem) == 1) {
     k <- unlist(batch)
-    return(torch_tensor(k, dtype = torch_int64()))
-    
-  }  else if (is.character(elem) && length(elem) == 1) {
-    
+    return(torch_tensor(k, dtype = torch_long()))
+  } else if (is.numeric(elem) && length(elem) == 1) {
+    k <- unlist(batch)
+    return(torch_tensor(k, dtype = torch_float()))
+  } else if (is.character(elem) && length(elem) == 1) {
     return(unlist(batch))
-    
   } else if (is.list(elem)) {
     
     # preserves the element names
