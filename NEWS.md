@@ -4,6 +4,7 @@
 - Fixed bug in `optim_lbfgs` that would make model objects exponentially big. (#431)
 - `torch_nonzero` and `tensor$nonzero()` now return 1-based indexes. (#432)
 - Correctly handle `NaN`s in L-BFGS optimizer (#433)
+- The default collate function now respects the data type when converting to a tensor (if the dataset returns an R object) (#434)
 
 # torch 0.2.1
 
