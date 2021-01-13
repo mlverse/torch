@@ -1,5 +1,5 @@
 ---
-title: "Guess the correlation: regression with torch end-to-end"
+title: "Guess the correlation"
 weight: 1
 description: | 
   First torch example
@@ -143,34 +143,60 @@ train_ds <- guess_the_correlation_dataset(
 
 How about the second custom transformation?
 
-```{r}
+```{r, eval=FALSE}
 crop_axes <- function(img) transform_crop(img, top = 0, left = 21, height = 131, width = 130)
 ```
 
-Here, we crop the image, cutting off the axes and labels on the left and bottom. These image regions don't contribute any distinctive information, and having smaller images saves memory.
+Here, we crop the image, cutting off the axes and labels on the left and bottom. These image regions don't contribute any distinctive information, and having the images be smaller saves memory.
 
-# Work with batches 
+# Work with batches
 
-Now, we've done so much, but you haven't actually *seen* any of the scatterplots yet! The reason we've been waiting until now is that we want to show several at a time, and for that, we need to know how to handle *batches* of data.
+Now, we've done so much, but you haven't actually *seen* any of the scatterplots yet! The reason we've been waiting until now is that we want to show a bunch of them at a time, and for that, we need to know how to handle *batches* of data.
+
+So let's create a `DataLoader` object from the training set. We'll soon use it to train the model, but right now, we'll just ask it for the first batch.
+
+A `DataLoader` needs to know where to get the data -- namely, from the `Dataset` it gets passed --, as well as how big a batch should be. Optionally, it can return data in random order (`shuffle = TRUE`).
 
 ```{r}
 train_dl <- dataloader(train_ds, batch_size = 64, shuffle = TRUE)
-length(train_dl)
-iter <- train_dl$.iter()
-batch <-iter$.next()
-dim(batch$x)
 ```
 
+Like a `Dataset`, we can query a `DataLoader` for its length. For the `Dataset`, this meant number of items; for a `DataLoader` , it means number of batches:
+
 ```{r}
+length(train_dl)
+```
+
+To access the first batch, we create an iterator from the `DataLoader` and ask it for the first batch. Even if it wasn't about plotting, you might do this just to check that the observations are of the expected dimensionality:
+
+```{r}
+iter <- train_dl$.iter()
+batch <-iter$.next()
+
+dim(batch$x)
+dim(batch$y)
+```
+
+And plot! Note how we first remove the *channels* dimension -- as.raster wouldn't like it -- and then, convert the tensor to R for further processing:
+
+```{r, fig.asp=1, fig.width=8, fig.height=8}
 par(mfrow = c(8,8), mar = rep(0, 4))
+
 images <- as.array(batch$x$squeeze(2))
+
 images %>%
   purrr::array_tree(1) %>%
   purrr::map(as.raster) %>%
   purrr::iwalk(~{plot(.x)})
-
-
 ```
+
+Want to try your skill at guessing these? Here is the corresponding ground truth:
+
+```{r}
+batch$y %>% as.numeric() %>% round(digits = 2)
+```
+
+Now, just as they got their own `Dataset` objects, test and validation data need their own `DataLoader` each.
 
 ```{r}
 valid_dl <- dataloader(valid_ds, batch_size = 64)
@@ -178,13 +204,36 @@ length(valid_dl)
 ```
 
 ```{r}
-
-```
-
-```{r}
 test_dl <- dataloader(test_ds, batch_size = 64)
 length(test_dl)
 ```
+
+And we're ready to create the model!
+
+# Model
+
+Let's first see what we're trying to accomplish. Our input data are images; normally this means we'll work with some kind of convolutional neural network (CNN). In `torch`, a neural network is a `module`: a container for more granular `modules`, which themselves may be built up of yet more fine-grained `modules`. While in theory, this kind of compositionality is unlimited, in our example there are just two levels: a top-level `module` representing the *model*, and *submodules* that, in other frameworks, would be called *layers*.
+
+The overall model is created by a call to `nn_module()`. This instantiates an `nn_Module`, an R6 class that knows how to act as a neural network. This object can have any number of methods, but two are essential:
+
+-   `initialize()`, the place to instantiate any *submodules*; and
+-   `forward()`, the place to define what should happen when this module is called.
+
+In `initialize()` , we instantiate five submodules: two convolutional layers and two linear ones.
+
+The convolutional layers apply a filter of size 3 x 3 (`kernel_size`). This filter slides over the image and computes local aggregates. In fact, there is not just a single filter, there are 32 of them in the first convolutional ("conv", from now on) layer , 64 in the second, and 128 in the third one. The filters are trained to pick up informative spatial features, features that will be able to tell us something about the image at hand.
+
+In addition to the three conv layers, we have two linear ones. These are the prototypical neural network layers that get input from all units in the previous layer, combine individual contributions as they see fit, and send on their own individual results to all units in the next layer. The first linear layer will act on the features received from the last conv layer; it consists of 128 units. The second one is the output layer. It outputs a single numeric value, a value that represents the guess our network is making about the size of the correlation.
+
+Now, while `initialize()` defines the layers, `forward()` specifies the order in which to call them -- and what to do "in between". What are these things that happen "in between"? In fact, they are of different types.
+
+Firstly, we have `nnf_relu()`, called three times: after each of the conv layers and after the first linear layer. This is a so-called activation function -- a function that takes the raw results computed by a layer and performs some operation on them. In the case of `nnf_relu()`, what it does is leave positive values alone while setting negative ones to 0. You'll encounter additional activation functions when you continue your `torch` journey, but this is one of the very-most-in-use ones today.
+
+Secondly, we have `nnf_avg_pool2d(2)` , called after each conv layer. This function downsizes the image, replacing a 2 x 2 patch of pixels by its average. So while we're going *up* in the number of channels (from one via 32 and 64 to 128), we *decrease* spatial resolution.
+
+Thirdly, there is `torch_flatten()`. This one doesn't compute anything - it just reshapes its tensors, going -- in this case -- from a four-dimensional structure outputted by the second conv layer to a two-dimensional one expected by the first linear layer.
+
+Now, here is the model creation code:
 
 ```{r}
 net <- nn_module(
@@ -192,100 +241,183 @@ net <- nn_module(
   "corr-cnn",
   
   initialize = function() {
-    # in_channels, out_channels, kernel_size, stride = 1, padding = 0
-    self$conv1 <- nn_conv2d(1, 32, 3)
-    self$conv2 <- nn_conv2d(32, 64, 3)
-    self$conv3 <- nn_conv2d(64, 64, 3)
-    #self$dropout1 <- nn_dropout2d(0.25)
-    #self$dropout2 <- nn_dropout2d(0.5)
-    #self$conv4 <- nn_conv2d(64, 1, 1)
-    self$fc1 <- nn_linear(14 * 14 * 64, 128)
-    self$fc2 <- nn_linear(128, 1)
+    
+    self$conv1 <- nn_conv2d(in_channels = 1, out_channels = 32, kernel_size = 3)
+    self$conv2 <- nn_conv2d(in_channels = 32, out_channels = 64, kernel_size = 3)
+    self$conv3 <- nn_conv2d(in_channels = 64, out_channels = 128, kernel_size = 3)
+    
+    self$fc1 <- nn_linear(in_features = 14 * 14 * 128, out_features = 128)
+    self$fc2 <- nn_linear(in_features = 128, out_features = 1)
+    
   },
   
   forward = function(x) {
+    
     x %>% 
       self$conv1() %>%
       nnf_relu() %>%
       nnf_avg_pool2d(2) %>%
+      
       self$conv2() %>%
       nnf_relu() %>%
       nnf_avg_pool2d(2) %>%
+      
       self$conv3() %>%
       nnf_relu() %>%
       nnf_avg_pool2d(2) %>%
-      #self$conv4() %>%
-      nnf_relu() %>%
-      #self$dropout1() %>%
+      
       torch_flatten(start_dim = 2) %>%
       self$fc1() %>%
       nnf_relu() %>%
-      #self$dropout2() %>%
+      
       self$fc2()
   }
 )
 
 ```
 
+Let's create one, then!
+
 ```{r}
 model <- net()
 ```
+
+Even before training, we can call the model on a batch of data -- this immediately tells us if we got all shapes matching up:
 
 ```{r}
 model(batch$x)
 ```
 
+Now we get ready for training the model.
+
+# Training
+
+In neural network libraries, optimizers take care of adapting the network weights. One of the most popular algorithms is *Adam*. When we create the object, we tell it what it's supposed to work on -- the model's parameters:
+
 ```{r}
 optimizer <- optim_adam(model$parameters)
 ```
 
+How does it know which way to change the parameters? We need to decide on a reasonable way to assess model performance. Here we're trying to predict a numerical value -- the size of the correlation. Thus, a measure like mean squared error is adequate. This line (in the upcoming code snipped) computes the mean squared error between model predictions and the target value:
+
+```{r, eval=FALSE}
+loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
+```
+
+Overall, what happens for every training batch is the following:
+
+1.  We obtain the current model predictions:
+
+    ```{r, eval=FALSE}
+    output <- model(b$x)
+    ```
+
+2.  We calculate the loss, a measure of divergence between model estimate and ground truth:
+
+    ```{r, eval=FALSE}
+    loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
+    ```
+
+3.  We have that loss *propagate back* through the network, causing gradients to be computed for all parameters:
+
+    ```{r, eval=FALSE}
+    loss$backward()
+    ```
+
+4.  We ask the optimizer to update the parameters accordingly:
+
+    ```{r, eval=FALSE}
+    optimizer$step()
+    ```
+
+Here are the four steps, conveniently packaged into a function. If you're wondering about the very first line, this is just a formality (a required one, though!) related to how the optimizer does its accounting.
+
 ```{r}
-
-i <- 1
-
 train_batch <- function(b) {
-
   optimizer$zero_grad()
+  
+  # get predictions
   output <- model(b$x)
+  
+  # calculate loss
   loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
   
   if (i %% 10 == 0) cat(sprintf("\nBatch loss: batch: %d %1.5f\n", i, loss$item()))
   i <<- i + 1        
-                       
+               
+  # have gradients get calculated        
   loss$backward()
+  
+  # have gradients get applied
   optimizer$step()
+  
   loss$item()
-
 }
 
+```
+
+Whenever we'll have passed through the training set once, we want to double-check performance on the validation set.
+
+```{r}
 valid_batch <- function(b) {
 
   output <- model(b$x)
   loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
   loss$item()
+  
 }
+```
 
-num_epochs <- 1
+While these functions will be called to iterate over batches, the overall workflow is an iteration over epochs.
+
+Every time we start training, we put the model in training state:
+
+```{r, eval=FALSE}
+model$train()
+```
+
+... while every time we assess its performance, we change the state to evaluation:
+
+```{r, eval=FALSE}
+model$eval()
+```
+
+Let's do ten epochs:
+
+```{r}
+
+i <- 1
+
+num_epochs <- 10
 
 for (epoch in 1:num_epochs) {
 
+  # don't forget to do this
   model$train()
+  
   train_losses <- c()
 
   for (b in enumerate(train_dl)) {
+    
     loss <- train_batch(b)
     train_losses <- c(train_losses, loss)
+    
   }
 
+  # don't forget to do this either
   model$eval()
+  
   valid_losses <- c()
 
   for (b in enumerate(valid_dl)) {
+    
     loss <- valid_batch(b)
     valid_losses <- c(valid_losses, loss)
+    
   }
 
   cat(sprintf("\nLoss at epoch %d: training: %1.5f, validation: %1.5f\n", epoch, mean(train_losses), mean(valid_losses)))
+  
 }
 
 
