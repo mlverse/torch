@@ -84,6 +84,7 @@ Collate:
     'nn-init.R'
     'nn-linear.R'
     'nn-loss.R'
+    'nn-normalization.R'
     'nn-pooling.R'
     'nn-rnn.R'
     'nn-sparse.R'
