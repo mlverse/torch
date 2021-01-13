@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fft — torch_fft • torch</title>
+<title>Layer normalization — nn_layer_norm • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Fft — torch_fft" />
-<meta property="og:description" content="Fft" />
+<meta property="og:title" content="Layer normalization — nn_layer_norm" />
+<meta property="og:description" content="Applies Layer Normalization over a mini-batch of inputs as described in
+the paper Layer Normalization" />
 
 
 <meta name="robots" content="noindex">
@@ -177,121 +178,88 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fft</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_fft.Rd</code></div>
+    <h1>Layer normalization</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-normalization.R'><code>R/nn-normalization.R</code></a></small>
+    <div class="hidden name"><code>nn_layer_norm.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fft</p>
+    <p>Applies Layer Normalization over a mini-batch of inputs as described in
+the paper <a href='https://arxiv.org/abs/1607.06450'>Layer Normalization</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_fft</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>signal_ndim</span>, normalized <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>nn_layer_norm</span><span class='op'>(</span><span class='va'>normalized_shape</span>, eps <span class='op'>=</span> <span class='fl'>1e-05</span>, elementwise_affine <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor of at least <code>signal_ndim</code> <code>+ 1</code>        dimensions</p></td>
+      <th>normalized_shape</th>
+      <td><p>(int or list): input shape from an expected input
+of size
+\([* \times \mbox{normalized_shape}[0] \times \mbox{normalized_shape}[1] \times \ldots \times \mbox{normalized_shape}[-1]]\)
+If a single integer is used, it is treated as a singleton list, and this module will
+normalize over the last dimension which is expected to be of that specific size.</p></td>
     </tr>
     <tr>
-      <th>signal_ndim</th>
-      <td><p>(int) the number of dimensions in each signal.        <code>signal_ndim</code> can only be 1, 2 or 3</p></td>
+      <th>eps</th>
+      <td><p>a value added to the denominator for numerical stability. Default: 1e-5</p></td>
     </tr>
     <tr>
-      <th>normalized</th>
-      <td><p>(bool, optional) controls whether to return normalized results.        Default: <code>FALSE</code></p></td>
+      <th>elementwise_affine</th>
+      <td><p>a boolean value that when set to <code>TRUE</code>, this module
+has learnable per-element affine parameters initialized to ones (for weights)
+and zeros (for biases). Default: <code>TRUE</code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>$$
+  y = \frac{x - \mathrm{E}[x]}{ \sqrt{\mathrm{Var}[x] + \epsilon}} * \gamma + \beta
+$$</p>
+<p>The mean and standard-deviation are calculated separately over the last
+certain number dimensions which have to be of the shape specified by
+<code>normalized_shape</code>.</p>
+<p>\(\gamma\) and \(\beta\) are learnable affine transform parameters of
+<code>normalized_shape</code> if <code>elementwise_affine</code> is <code>TRUE</code>.</p>
+<p>The standard-deviation is calculated via the biased estimator, equivalent to
+<code><a href='torch_var.html'>torch_var(input, unbiased=FALSE)</a></code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    
-<pre>For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
-repeatedly running FFT methods on tensors of same geometry with same
-configuration. See cufft-plan-cache for more details on how to
-monitor and control the cache.
-</pre>
-
-    <h2 class="hasAnchor" id="fft-input-signal-ndim-normalized-false-gt-tensor-"><a class="anchor" href="#fft-input-signal-ndim-normalized-false-gt-tensor-"></a>fft(input, signal_ndim, normalized=False) -&gt; Tensor </h2>
-
-    
-
-
-<p>Complex-to-complex Discrete Fourier Transform</p>
-<p>This method computes the complex-to-complex discrete Fourier transform.
-Ignoring the batch dimensions, it computes the following expression:</p>
-<p>$$
-    X[\omega_1, \dots, \omega_d] =
-        \sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x[n_1, \dots, n_d]
-         e^{-j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
-$$
-where \(d\) = <code>signal_ndim</code> is number of dimensions for the
-signal, and \(N_i\) is the size of signal dimension \(i\).</p>
-<p>This method supports 1D, 2D and 3D complex-to-complex transforms, indicated
-by <code>signal_ndim</code>. <code>input</code> must be a tensor with last dimension
-of size 2, representing the real and imaginary components of complex
-numbers, and should have at least <code>signal_ndim + 1</code> dimensions with optionally
-arbitrary number of leading batch dimensions. If <code>normalized</code> is set to
-<code>TRUE</code>, this normalizes the result by dividing it with
-\(\sqrt{\prod_{i=1}^K N_i}\) so that the operator is unitary.</p>
-<p>Returns the real and the imaginary parts together as one tensor of the same
-shape of <code>input</code>.</p>
-<p>The inverse of this function is <code><a href='torch_ifft.html'>torch_ifft</a></code>.</p>
-    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
+    <p>Unlike Batch Normalization and Instance Normalization, which applies
+scalar scale and bias for each entire channel/plane with the
+<code>affine</code> option, Layer Normalization applies per-element scale and
+bias with <code>elementwise_affine</code>.</p>
+<p>This layer uses statistics computed from input data in both training and
+evaluation modes.</p>
+    <h2 class="hasAnchor" id="shape"><a class="anchor" href="#shape"></a>Shape</h2>
 
     
 
-<p>For CPU tensors, this method is currently only available with MKL. Use
-<code>torch_backends.mkl.is_available</code> to check if MKL is installed.</p>
+<ul>
+<li><p>Input: \((N, *)\)</p></li>
+<li><p>Output: \((N, *)\) (same shape as input)</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='co'># unbatched 2D FFT</span>
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_fft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span><span class='op'>)</span>
-<span class='co'># batched 1D FFT</span>
-<span class='fu'>torch_fft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='co'># arbitrary number of batch dimensions, 2D FFT</span>
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_fft</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span><span class='op'>)</span>
+  
+<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>10</span><span class='op'>)</span>
+<span class='co'># With Learnable Parameters</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_layer_norm</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='fu'>size</span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
+<span class='co'># Without Learnable Parameters</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_layer_norm</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='fu'>size</span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>, elementwise_affine<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='co'># Normalize over last two dimensions</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_layer_norm</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># Normalize over last dimension of size 10</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_layer_norm</span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='co'># Activating the module</span>
+<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
 
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; (1,1,1,.,.) = 
-#&gt;   8.5066  6.7712
-#&gt;  -3.8366  3.6790
-#&gt;  -4.7584 -0.0314
-#&gt;   7.8514 -5.5730
-#&gt;   3.5040 -0.7959
-#&gt; 
-#&gt; (2,1,1,.,.) = 
-#&gt;   6.0141  2.1681
-#&gt;  -8.8779 -4.2004
-#&gt;   1.6762 -4.5213
-#&gt;   4.6832 -3.7872
-#&gt;  -1.4551  0.3400
-#&gt; 
-#&gt; (3,1,1,.,.) = 
-#&gt;   8.1961  0.5637
-#&gt;   2.6729  2.5874
-#&gt;   9.0077 -1.1234
-#&gt;  -11.4733  7.5096
-#&gt;  -6.4677 -5.1021
-#&gt; 
-#&gt; (1,2,1,.,.) = 
-#&gt;  -7.7261 -0.5528
-#&gt;   5.3809  1.3164
-#&gt;   1.0486 -4.1006
-#&gt;  -7.4904 -2.8042
-#&gt;   8.3977 -2.2557
-#&gt; 
-#&gt; (2,2,1,.,.) = 
-#&gt;  -1.0582  1.7635
-#&gt; ... [the output was truncated (use n=-1 to disable)]
-#&gt; [ CPUFloatType{3,3,5,5,2} ]</div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
