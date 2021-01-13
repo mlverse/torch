@@ -25,4 +25,14 @@ test_that("layer_norm", {
   m <- nn_layer_norm(input$size()[-1])
   expect_tensor_shape(m(input), c(3,4,5))
   
+  x <- torch_ones(5, 2)
+  x[,1] <- 0:4 * 10 * x[,1]
+  x[,2] <- 1:5 * 10 * x[,2]
+  
+  m <- nn_layer_norm(normalized_shape = 2)
+  expect_equal_to_tensor(m(x), torch_cat(list(
+      -torch_ones(5, 1),
+      torch_ones(5, 1)
+    ), dim = 2), tolerance = 1e-6)
+  
 })
