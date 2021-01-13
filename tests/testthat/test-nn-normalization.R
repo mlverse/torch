@@ -10,13 +10,15 @@ test_that("layer_norm", {
   )
   expect_equal_to_r(
     m(input),
-    result
+    result,
+    tolerance = 1e-6
   )
   
   m <- nn_layer_norm(3, elementwise_affine = FALSE)
   expect_equal_to_r(
     m(input),
-    result
+    result,
+    tolerance = 1e-6
   )
   
   input <- torch_randn(3,4,5)
