@@ -11,7 +11,7 @@ knitr::opts_chunk$set(eval=FALSE)
 
 # Get the packages
 
-To use `torch`, you first need to install it. Get the CRAN version:
+To use `torch`, you first need to install it. To get the CRAN version, do
 
 ```{r, eval=FALSE}
 install.packages("torch")
@@ -23,6 +23,10 @@ Does it work? Here's a quick test:
 library(torch)
 torch_tensor(1)
 ```
+
+    torch_tensor
+     1
+    [ CPUFloatType{1} ]
 
 Now, while `torch` contains all the core functionality, there is a whole ecosystem built -- and being built -- around it.
 
@@ -78,8 +82,6 @@ root <- file.path(tempdir(), "correlation")
 train_ds <- guess_the_correlation_dataset(
     # where to unpack
     root = root,
-    # change to whereever you're keeping kaggle.json
-    token = file.path(Sys.getenv("HOME"), ".kaggle/kaggle.json"),
     # additional preprocessing 
     transform = function(img) crop_axes(img) %>% add_channel_dim(),
     # don't take all data, but just the indices we pass in
@@ -115,11 +117,58 @@ length(valid_ds)
 length(test_ds)
 ```
 
+    [1] 10000
+    [1] 5000
+    [1] 5000
+
 And how does a single observation look like? Here is the first one:
 
 ```{r}
 train_ds[1]
 ```
+
+    $x
+    torch_tensor
+    (1,.,.) = 
+     Columns 1 to 9  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+      0.0000  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999  0.9999
+    ... [the output was truncated (use n=-1 to disable)]
+    [ CPUFloatType{1,130,130} ]
+
+    $y
+    torch_tensor
+    -0.45781
+    [ CPUFloatType{} ]
+
+    $id
+    [1] "arjskzyc"
 
 It's a list of three items, the last of which we're not interested in for our purposes.
 
@@ -167,6 +216,8 @@ Like a `Dataset`, we can query a `DataLoader` for its length. For the `Dataset`,
 length(train_dl)
 ```
 
+    [1] 157
+
 To access the first batch, we create an iterator from the `DataLoader` and ask it for the first batch. Even if it wasn't about plotting, you might do this just to check that the observations are of the expected dimensionality:
 
 ```{r}
@@ -177,9 +228,12 @@ dim(batch$x)
 dim(batch$y)
 ```
 
+    [1]  64   1 130 130
+    [1] 64
+
 And plot! Note how we first remove the *channels* dimension -- as.raster wouldn't like it -- and then, convert the tensor to R for further processing:
 
-```{r, fig.asp=1, fig.width=8, fig.height=8}
+```{r, fig.asp=1, fig.width=8, fig.height=8, eval=FALSE}
 par(mfrow = c(8,8), mar = rep(0, 4))
 
 images <- as.array(batch$x$squeeze(2))
@@ -190,11 +244,20 @@ images %>%
   purrr::iwalk(~{plot(.x)})
 ```
 
+```{r, echo = FALSE, eval=TRUE, out.width="80%"}
+knitr::include_graphics("correlations.png")
+```
+
 Want to try your skill at guessing these? Here is the corresponding ground truth:
 
 ```{r}
 batch$y %>% as.numeric() %>% round(digits = 2)
 ```
+
+    [1] -0.29  0.58 -0.57  0.56  0.10  0.09  0.21  0.45 -0.24  0.65  0.70  0.40  0.71  0.20  0.07  0.66  0.65 -0.56  0.73
+    [20] -0.40 -0.18 -0.42 -0.46 -0.45 -0.77  0.09 -0.19  0.40 -0.70 -0.04 -0.16 -0.13 -0.18  0.01  0.25  0.54  0.21  0.28
+    [39]  0.49  0.86 -0.70  0.51  0.47 -0.46  0.88  0.00  0.24  0.28  0.28 -0.04 -0.74  0.43  0.74  0.01 -0.21  0.66 -0.45
+    [58] -0.44  0.50 -0.69 -0.65 -0.66 -0.55 -0.53
 
 Now, just as they got their own `Dataset` objects, test and validation data need their own `DataLoader` each.
 
@@ -203,14 +266,18 @@ valid_dl <- dataloader(valid_ds, batch_size = 64)
 length(valid_dl)
 ```
 
+    [1] 79
+
 ```{r}
 test_dl <- dataloader(test_ds, batch_size = 64)
 length(test_dl)
 ```
 
+    [1] 79
+
 And we're ready to create the model!
 
-# Model
+# Create the model
 
 Let's first see what we're trying to accomplish. Our input data are images; normally this means we'll work with some kind of convolutional neural network (CNN). In `torch`, a neural network is a `module`: a container for more granular `modules`, which themselves may be built up of yet more fine-grained `modules`. While in theory, this kind of compositionality is unlimited, in our example there are just two levels: a top-level `module` representing the *model*, and *submodules* that, in other frameworks, would be called *layers*.
 
@@ -236,6 +303,8 @@ Thirdly, there is `torch_flatten()`. This one doesn't compute anything - it just
 Now, here is the model creation code:
 
 ```{r}
+torch_manual_seed(777)
+
 net <- nn_module(
   
   "corr-cnn",
@@ -288,9 +357,43 @@ Even before training, we can call the model on a batch of data -- this immediate
 model(batch$x)
 ```
 
+    torch_tensor
+    0.01 *
+    -2.8979
+     -2.8873
+     -2.8699
+     -2.9787
+     -2.8223
+     -3.0255
+     -3.1181
+     -3.0603
+     -3.0520
+     -2.8242
+     -3.0000
+     -2.9150
+     -2.9497
+     -2.7662
+     -2.7980
+     -2.9540
+     -2.8548
+     -2.7927
+     -3.0426
+     -2.9540
+     -2.8846
+     -2.8008
+     -2.8966
+     -2.8358
+     -2.9266
+     -2.9022
+     -2.8667
+     -2.8716
+     -2.7371
+    ... [the output was truncated (use n=-1 to disable)]
+    [ CPUFloatType{64,1} ]
+
 Now we get ready for training the model.
 
-# Training
+# Train the network
 
 In neural network libraries, optimizers take care of adapting the network weights. One of the most popular algorithms is *Adam*. When we create the object, we tell it what it's supposed to work on -- the model's parameters:
 
@@ -334,6 +437,7 @@ Here are the four steps, conveniently packaged into a function. If you're wonder
 
 ```{r}
 train_batch <- function(b) {
+  
   optimizer$zero_grad()
   
   # get predictions
@@ -341,10 +445,7 @@ train_batch <- function(b) {
   
   # calculate loss
   loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
-  
-  if (i %% 10 == 0) cat(sprintf("\nBatch loss: batch: %d %1.5f\n", i, loss$item()))
-  i <<- i + 1        
-               
+
   # have gradients get calculated        
   loss$backward()
   
@@ -352,6 +453,7 @@ train_batch <- function(b) {
   optimizer$step()
   
   loss$item()
+  
 }
 
 ```
@@ -385,8 +487,6 @@ model$eval()
 Let's do ten epochs:
 
 ```{r}
-
-i <- 1
 
 num_epochs <- 10
 
@@ -423,21 +523,37 @@ for (epoch in 1:num_epochs) {
 
 ```
 
+    Loss at epoch 1: training: 0.05769, validation: 0.01608
+
+    Loss at epoch 2: training: 0.01122, validation: 0.00785
+
+    Loss at epoch 3: training: 0.00587, validation: 0.00443
+
+    Loss at epoch 4: training: 0.00372, validation: 0.00317
+
+    Loss at epoch 5: training: 0.00250, validation: 0.00273
+
+    Loss at epoch 6: training: 0.00206, validation: 0.00248
+
+    Loss at epoch 7: training: 0.00174, validation: 0.00166
+
+    Loss at epoch 8: training: 0.00129, validation: 0.00144
+
+    Loss at epoch 9: training: 0.00105, validation: 0.00136
+
+    Loss at epoch 10: training: 0.00093, validation: 0.00123
+
+As you can see, the network has made good progress -- on both training and validation set. How about the test set? Again, before running the respective code we want to make sure we're in evaluation mode.
+
 ```{r}
 model$eval()
-
-i <- 1
 
 test_batch <- function(b) {
 
   output <- model(b$x)
   loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
-  
   test_losses <<- c(test_losses, loss$item())
-  
-  if (i %% 20 == 0) cat(sprintf("\nBatch loss: batch: %d %1.5f\n", i, loss$item()))
-  i <<- i + 1        
-  
+
 }
 
 test_losses <- c()
@@ -449,3 +565,9 @@ for (b in enumerate(test_dl)) {
 mean(test_losses)
 
 ```
+
+    [1] 0.001346638
+
+Pretty similar to validation-set performance.
+
+So that's it - you've seen the complete workflow end-to-end, from data loading to model evaluation. The next tutorial asks a few *what if?* questions -- e.g., what if I don't want to predict a numerical output? -- and offers some ideas for experimentation.
