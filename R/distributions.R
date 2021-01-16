@@ -15,9 +15,9 @@ Distribution <- R6::R6Class(
     .event_shape          = NULL,
     
     # Choose different structure?
-    arg_constraints       = list(),
+    .arg_constraints       = list(),
     
-    initialize = function(batch_shape, event_shape, validate_args = NULL){
+    initialize = function(batch_shape = NULL, event_shape = NULL, validate_args = NULL){
 
       self$.batch_shape <- batch_shape
       self$.event_shape <- event_shape
@@ -27,8 +27,8 @@ Distribution <- R6::R6Class(
 
         for (p in seq_along(self$arg_constraints)) {
 
-          constraint <- arg_constraints[[p]]$constraint
-          param      <- arg_constraints[[p]]$param
+          constraint <- self$.arg_constraints[[p]]$constraint
+          param      <- self$.arg_constraints[[p]]$param
 
           if (is_dependent(constraint))
             next
@@ -132,8 +132,6 @@ Distribution <- R6::R6Class(
            {value$size()} vs {self$.event_shape}.'
         )
 
- 
-      
       actual_shape <- value$size()
       expected_shape <- self$.batch_shape + self$.event_shape
 
@@ -155,11 +153,13 @@ Distribution <- R6::R6Class(
     },
     
     .get_checked_instance = function(cls, .instance = NULL){
-      if (is.null(.instance) && self$initialize == cls$initialize)
+      if (is.null(.instance) && identical(self$initialize, cls$initialize))
+        #' TODO: consider different message
         not_implemented_error(
-          "Subclass {class(self)} of {class(.instance)} ",
+          "Subclass {paste0(class(self), collapse = ' ')} of ", 
+          "{paste0(class(cls), collapse = ' ')} ",
           "that defines a custom initialize() method ",
-          "must also define a custom `_expand()` method."
+          "must also define a custom `expand()` method."
         )
       
       if (is.null(.instance))
@@ -169,29 +169,46 @@ Distribution <- R6::R6Class(
     },
     
     print = function(){
+    
+      param_names <- 
+        names(self$arg_constraints)[
+          names(self$arg_constraints) %in% names(as.list(self))
+            ]
       
-      param_names <- Map(function (x) {
-        if (x %in% as.list(self))
-          as.character(x)
-        else 
-          NULL
-        }, self$arg_constraints)
-        
       args_string <- paste0(
         param_names, collapse = ","
       )
       
-      glue("{class(self)} ({args_string})")
+      class_name <- class(self)[1]
+      cat(glue("{class_name} ({args_string})"))
     }
   ),
   
   active = list(
+    
+    #' Returns the shape over which parameters are batched.
+    batch_shape = function(){
+      self$.batch_shape
+    },
+    
+    #' Returns the shape of a single sample (without batching).
+    event_shape = function(){
+      self$.event_shape
+    },
+    
+    #' Returns a dictionary from argument names to
+    #' `torch_Constraint` objects that
+    #' should be satisfied by each argument of this distribution. Args that
+    #' are not tensors need not appear in this dict.
+    # arg_constraints = function(){
+    #   not_implemented_error()
+    # },
 
     #' Returns a `torch_Constraint` object
     #' representing this distribution's support.
-    # support = function() {
-    #   not_implemented_error()
-    # },
+    support = function() {
+      not_implemented_error()
+    },
 
     #' Returns the mean on of the distribution
     mean = function() {

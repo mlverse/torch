@@ -16,7 +16,7 @@ Constraint <- R6::R6Class(
     },
     
     print = function(){
-      glue("{class(self)}()")
+      cat(glue("{class(self)}"))
     }
   )
 )
@@ -79,10 +79,10 @@ is_dependent <- function(object){
     },
     
     print = function(){
-      glue::glue(
+      cat(glue::glue(
         '{class(self)}: ',
-        '(lower_bound={lower_bound}, upper_bound={upper_bound})'
-      )
+        '(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})'
+      ))
     }
     
   )
@@ -108,9 +108,9 @@ is_dependent <- function(object){
     },
     
     print = function(){
-      glue::glue(
-        '{class(self)}: (upper_bound={upper_bound})'
-      )
+      cat(glue::glue(
+        '{class(self)}: (upper_bound={self$upper_bound})'
+      ))
     }
   )
 )
@@ -136,9 +136,9 @@ is_dependent <- function(object){
     },
     
     print = function(){
-      glue::glue(
-        '{class(self)}: (lower_bound={lower_bound})'
-      )
+      cat(glue::glue(
+        '{class(self)}: (lower_bound={self$lower_bound})'
+      ))
     }
   )
 )
@@ -177,9 +177,9 @@ is_dependent <- function(object){
     },
     
     print = function(){
-      glue::glue(
-        '{class(self)}: (lower_bound={lower_bound})'
-      )
+      cat(glue::glue(
+        '{class(self)}: (lower_bound={self$lower_bound})'
+      ))
     }
   )
 )
@@ -204,9 +204,9 @@ is_dependent <- function(object){
     },
     
     print = function(){
-      glue::glue(
-        '{class(self)}: (lower_bound={lower_bound})'
-      )
+      cat(glue::glue(
+        '{class(self)}: (lower_bound={self$lower_bound})'
+      ))
     }
   )
 )
@@ -231,9 +231,9 @@ is_dependent <- function(object){
     },
     
     print = function(){
-      glue::glue(
-        '{class(self)}: (upper_bound={upper_bound})'
-      )
+      cat(glue::glue(
+        '{class(self)}: (upper_bound={self$upper_bound})'
+      ))
     }
   )
 )
@@ -261,9 +261,9 @@ is_dependent <- function(object){
     },
     
     print = function(){
-      glue::glue(
-        '(lower_bound={lower_bound}, upper_bound={upper_bound})'
-      )
+      cat(glue::glue(
+        '(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})'
+      ))
     }
   )
 )
@@ -290,9 +290,9 @@ is_dependent <- function(object){
     },
     
     print = function(){
-      glue::glue(
-        '(lower_bound={lower_bound}, upper_bound={upper_bound})'
-      )
+      cat(glue::glue(
+        '(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})'
+      ))
     }
   )
 )

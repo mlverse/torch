@@ -5,29 +5,31 @@ Normal <- R6::R6Class(
   
   public = list(
     
-    arg_constraints = list(loc   = constraint_real, 
-                           scale = constraint_positive),
-    support = constraint_real,
+    .arg_constraints = list(loc   = constraint_real, 
+                            scale = constraint_positive),
+    .support = constraint_real,
     has_rsample = TRUE,
     ._mean_carrier_measure = 0,
     
     initialize = function(loc, scale, validate_args = NULL){
       # TODO
-      broadcasted <- broadcast_all(loc, scale)
-      self$loc    <- broadcasted[1]
-      self$scale  <- broadcasted[2]
+      broadcasted <- broadcast_all(list(loc, scale))
+      self$loc    <- broadcasted[[1]]
+      self$scale  <- broadcasted[[2]]
+  
+      # TODO: check this fragment
+      # It seems it's more suitbale for Python
+      # if (inherits(loc, "numeric") & inherits(scale, "numeric"))
+      #   batch_shape <- NULL
+      # else
+      #   batch_shape <- self$loc$size()
       
-      # TODO
-      if (inherits(loc, "numeric") & inherits(scale, "numeric")) {
-        batch_shape <- NULL
-      } else {
-        batch_shape <- self$loc$size()
-        super$initialize(batch_shape, validate_args=validate_args)
-      }
+      batch_shape <- self$loc$size()
+      super$initialize(batch_shape, validate_args=validate_args)
     }, 
     
     expand = function(batch_shape, .instance=NULL){
-      new <- self$.get_checked_instance(self, .instance)
+      new <- self$.get_checked_instance(super, .instance)
       new$loc = self$loc$expand(batch_shape)
       new$scale = self$scale$expand(batch_shape)
       super$initialize(batch_shape, validate_args=FALSE)
@@ -110,6 +112,10 @@ Normal <- R6::R6Class(
       
       .mean_carrier_measure = function(){
         self$._mean_carrier_measure
+      },
+      
+      support = function(){
+        self$.support
       }
     )
 )
@@ -126,7 +132,7 @@ Normal <- add_class_definition(Normal)
 #' @return Object of `torch_Normal` class
 #' 
 #' @examples 
-#' m <-  distr_normal()
+#' m <- distr_normal()
 #' m$sample()  # normally distributed with loc=0 and scale=1
 #' tensor([ 0.1046])
 #' 
