@@ -14,6 +14,3 @@ get_install_libs_url(version = "1.7.1", type = install_type(version = version))
 \description{
 List the Torch and Lantern files to download as local files in order to proceed with install_torch_from_file().
 }
-\details{
-
-}

@@ -363,8 +363,6 @@ install_torch_from_file <- function(version = "1.7.1", type = install_type(versi
 #' @param version The Torch version to install. 
 #' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
 #' 
-#' @details 
-#' 
 #' 
 #' @export
 get_install_libs_url <- function(version = "1.7.1", type = install_type(version = version)) {
