@@ -317,7 +317,6 @@ install_torch <- function(version = "1.7.1", type = install_type(version = versi
   if (!is.null(list(...)$install_config) && is.list(list(...)$install_config))
     install_config <- list(...)$install_config
   
-  saved_timeout <- getOption('timeout')
   withr::with_options(list(timeout = timeout),
                       lantern_install_libs(version, type, path, install_config))
   
