@@ -174,7 +174,7 @@ install_os <- function() {
   tolower(Sys.info()[["sysname"]])
 }
 
-lantern_install_libs <- function(version, type, install_path, install_config) {
+lantern_install_libs <- function(version, type, install_path) {
   current_os <- install_os()
   
   if (!version %in% names(install_config))
@@ -290,8 +290,8 @@ install_type <- function(version) {
 #' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
 #' @param reinstall Re-install Torch even if its already installed?
 #' @param path Optional path to install or check for an already existing installation.
-#' @param ... other optional arguments (like \code{`load=FALSE`} for manual installation, \code{`timeout=240`} for
-#' large file downloads.)
+#' @param timeout Optional timeout for large file download 
+#' @param ... other optional arguments (like \code{`load`} for manual installation).
 #' 
 #' @details 
 #' 
@@ -303,7 +303,7 @@ install_type <- function(version) {
 #' 
 #' @export
 install_torch <- function(version = "1.7.1", type = install_type(version = version), reinstall = FALSE,
-                          path = install_path(), ...) {
+                          path = install_path(), timeout = 360, ...) {
   
   if (reinstall) {
     unlink(path, recursive = TRUE)
@@ -313,47 +313,14 @@ install_torch <- function(version = "1.7.1", type = install_type(version = versi
     dir.create(path, showWarnings = FALSE)
   }
   
-  # allow timeout to be part of (...)
   saved_timeout <- getOption('timeout')
-  if (!is.null(list(...)$timeout) && is.numeric(list(...)$timeout))
-    options(timeout = list(...)$timeout)
-  
-  if (!is.null(list(...)$install_config) && is.list(list(...)$install_config))
-    install_config <- list(...)$install_config
-  
+  options(timeout = timeout)
   lantern_install_libs(version, type, path, install_config)
   
   # reinitialize lantern, might happen if installation fails on load and manual install is required
   if (!identical(list(...)$load, FALSE))
     lantern_start(reload = TRUE)
   
+  # restore timeout
   options(timeout = saved_timeout)
-}
-#' Install Torch from files
-#' 
-#' Installs Torch and its dependencies from files.
-#' 
-#' @param version The Torch version to install. 
-#' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
-#' @param libtorch The installation archive file to use for Torch. Shall be a \code{"file://"} URL scheme.
-#' @param liblantern The installation archive file to use for Lantern. Shall be a \code{"file://"} URL scheme.
-#' @param ... other parameters passed to \code{"install_torch()"} 
-#' 
-#' @details 
-#' 
-#' When \code{"install_torch()"} initiated download are not possible, but installation archive files are
-#' present on local filesystem, \code{"install_torch_from_file()"} can be used as a workaround to installation issue.
-#' \code{"libtorch"} is the archive containing all torch modules, and \code{"liblantern"} is the compiled version of torch
-#' 
-#' 
-#' @export
-install_torch_from_file <- function(version = "1.7.1", type = install_type(version = version), libtorch, liblantern, ...) {
-  stopifnot(inherits(url(libtorch), "file"))
-  stopifnot(inherits(url(liblantern), "file"))
-  
-  install_config[[version]][[type]][[install_os()]][["libtorch"]][["url"]] <- libtorch
-  install_config[[version]][[type]][[install_os()]][["liblantern"]] <- liblantern
-  
-  print(install_config[[version]][[type]][[install_os()]])
-  install_torch(version = version, type = type, install_config = install_config, ...)
 }
