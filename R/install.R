@@ -290,7 +290,7 @@ install_type <- function(version) {
 #' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
 #' @param reinstall Re-install Torch even if its already installed?
 #' @param path Optional path to install or check for an already existing installation.
-#' @param timeout Optional timeout for large file download 
+#' @param timeout Optional timeout in seconds for large file download.
 #' @param ... other optional arguments (like \code{`load`} for manual installation).
 #' 
 #' @details 
@@ -300,8 +300,8 @@ install_type <- function(version) {
 #' variable can be set to \code{0} to prevent auto-installing torch and \code{TORCH_LOAD} set to \code{0}
 #' to avoid loading dependencies automatically. These environment variables are meant for advanced use
 #' cases and troubleshooting only.
-#' When timeout error occurs during library archive download, or downloaded length of files differ from reported length,
-#'  an increase of the \code{timeout} value should help.
+#' When timeout error occurs during library archive download, or length of downloaded files differ from 
+#' reported length, an increase of the \code{timeout} value should help.
 #' 
 #' @export
 install_torch <- function(version = "1.7.1", type = install_type(version = version), reinstall = FALSE,
