@@ -174,7 +174,7 @@ install_os <- function() {
   tolower(Sys.info()[["sysname"]])
 }
 
-lantern_install_libs <- function(version, type, install_path) {
+lantern_install_libs <- function(version, type, install_path, install_config) {
   current_os <- install_os()
   
   if (!version %in% names(install_config))
@@ -314,10 +314,12 @@ install_torch <- function(version = "1.7.1", type = install_type(version = versi
   if (!dir.exists(path)) {
     dir.create(path, showWarnings = FALSE)
   }
+  if (!is.null(list(...)$install_config) && is.list(list(...)$install_config))
+    install_config <- list(...)$install_config
   
   saved_timeout <- getOption('timeout')
   options(timeout = timeout)
-  lantern_install_libs(version, type, path)
+  lantern_install_libs(version, type, path, install_config)
   
   # reinitialize lantern, might happen if installation fails on load and manual install is required
   if (!identical(list(...)$load, FALSE))
@@ -325,4 +327,32 @@ install_torch <- function(version = "1.7.1", type = install_type(version = versi
   
   # restore timeout
   options(timeout = saved_timeout)
+}
+#' Install Torch from files
+#' 
+#' Installs Torch and its dependencies from files.
+#' 
+#' @param version The Torch version to install. 
+#' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
+#' @param libtorch The installation archive file to use for Torch. Shall be a \code{"file://"} URL scheme.
+#' @param liblantern The installation archive file to use for Lantern. Shall be a \code{"file://"} URL scheme.
+#' @param ... other parameters to be passed to \code{"install_torch()"} 
+#' 
+#' @details 
+#' 
+#' When \code{"install_torch()"} initiated download is not possible, but installation archive files are
+#' present on local filesystem, \code{"install_torch_from_file()"} can be used as a workaround to installation issue.
+#' \code{"libtorch"} is the archive containing all torch modules, and \code{"liblantern"} is the C interface to libtorch
+#' that is used for the R package. Both are highly dependent, and should be checked through \code{"get_install_libs_url()"}
+#' 
+#' 
+#' @export
+install_torch_from_file <- function(version = "1.7.1", type = install_type(version = version), libtorch, liblantern, ...) {
+  stopifnot(inherits(url(libtorch), "file"))
+  stopifnot(inherits(url(liblantern), "file"))
+
+  install_config[[version]][[type]][[install_os()]][["libtorch"]][["url"]] <- libtorch
+  install_config[[version]][[type]][[install_os()]][["liblantern"]] <- liblantern
+
+  install_torch(version = version, type = type, install_config = install_config, ...)
 }
