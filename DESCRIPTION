@@ -7,6 +7,7 @@ Authors@R: c(
     person("Javier", "Luraschi", email = "jluraschi@gmail.com", role = c("aut")),
     person("Dmitriy", "Selivanov", role = c("ctb")),
     person("Athos", "Damiani", role = c("ctb")),
+    person("Christophe", "Regouby", role = c("ctb")),
     person(family = "RStudio", role = c("cph"))
     )
 Description: Provides functionality to define and train neural networks similar to 

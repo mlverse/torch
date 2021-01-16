@@ -6,6 +6,8 @@
 - Correctly handle `NaN`s in L-BFGS optimizer (#433)
 - The default collate function now respects the data type when converting to a tensor (if the dataset returns an R object) (#434)
 - Added `nn_layer_norm`. (#435)
+- Added `install_torch_from_file()` for air gap networked setups (@cregouby #)
+- Allow `timeout=` as `install_torch()` parameter for large file download (@cregouby #)
 
 # torch 0.2.1
 
