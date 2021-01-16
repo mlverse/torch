@@ -300,6 +300,8 @@ install_type <- function(version) {
 #' variable can be set to \code{0} to prevent auto-installing torch and \code{TORCH_LOAD} set to \code{0}
 #' to avoid loading dependencies automatically. These environment variables are meant for advanced use
 #' cases and troubleshooting only.
+#' When timeout error occurs during library archive download, or downloaded length of files differ from reported length,
+#'  an increase of the \code{timeout} value should help.
 #' 
 #' @export
 install_torch <- function(version = "1.7.1", type = install_type(version = version), reinstall = FALSE,
@@ -315,7 +317,7 @@ install_torch <- function(version = "1.7.1", type = install_type(version = versi
   
   saved_timeout <- getOption('timeout')
   options(timeout = timeout)
-  lantern_install_libs(version, type, path, install_config)
+  lantern_install_libs(version, type, path)
   
   # reinitialize lantern, might happen if installation fails on load and manual install is required
   if (!identical(list(...)$load, FALSE))
