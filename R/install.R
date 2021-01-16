@@ -356,3 +356,20 @@ install_torch_from_file <- function(version = "1.7.1", type = install_type(versi
 
   install_torch(version = version, type = type, install_config = install_config, ...)
 }
+#' List of files to download
+#' 
+#' List the Torch and Lantern files to download as local files in order to proceed with install_torch_from_file().
+#' 
+#' @param version The Torch version to install. 
+#' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
+#' 
+#' @details 
+#' 
+#' 
+#' @export
+get_install_libs_url <- function(version = "1.7.1", type = install_type(version = version)) {
+
+  libtorch <- install_config[[version]][[type]][[install_os()]][["libtorch"]][["url"]]
+  liblantern <- install_config[[version]][[type]][[install_os()]][["liblantern"]]
+  list(libtorch = libtorch, liblantern = liblantern)
+}
