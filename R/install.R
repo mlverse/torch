@@ -316,7 +316,7 @@ install_torch <- function(version = "1.7.1", type = install_type(version = versi
   }
   
   withr::with_options(list(timeout = timeout),
-                      lantern_install_libs(version, type, path, install_config))
+                      lantern_install_libs(version, type, path))
   
   # reinitialize lantern, might happen if installation fails on load and manual install is required
   if (!identical(list(...)$load, FALSE))
