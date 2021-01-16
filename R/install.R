@@ -318,15 +318,14 @@ install_torch <- function(version = "1.7.1", type = install_type(version = versi
     install_config <- list(...)$install_config
   
   saved_timeout <- getOption('timeout')
-  options(timeout = timeout)
-  lantern_install_libs(version, type, path, install_config)
+  withr::with_options(list(timeout = timeout),
+                      lantern_install_libs(version, type, path, install_config))
+  
   
   # reinitialize lantern, might happen if installation fails on load and manual install is required
   if (!identical(list(...)$load, FALSE))
     lantern_start(reload = TRUE)
   
-  # restore timeout
-  options(timeout = saved_timeout)
 }
 #' Install Torch from files
 #' 
