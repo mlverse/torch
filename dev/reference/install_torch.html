@@ -191,6 +191,7 @@
   type <span class='op'>=</span> <span class='fu'>install_type</span><span class='op'>(</span>version <span class='op'>=</span> <span class='va'>version</span><span class='op'>)</span>,
   reinstall <span class='op'>=</span> <span class='cn'>FALSE</span>,
   path <span class='op'>=</span> <span class='fu'>install_path</span><span class='op'>(</span><span class='op'>)</span>,
+  timeout <span class='op'>=</span> <span class='fl'>360</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -214,8 +215,12 @@
       <td><p>Optional path to install or check for an already existing installation.</p></td>
     </tr>
     <tr>
+      <th>timeout</th>
+      <td><p>Optional timeout in seconds for large file download.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>other optional arguments (like <code>load</code> for manual installation.)</p></td>
+      <td><p>other optional arguments (like <code>`load`</code> for manual installation).</p></td>
     </tr>
     </table>
 
@@ -225,7 +230,9 @@
 variable is set to this same path to reuse this installation. The <code>TORCH_INSTALL</code> environment
 variable can be set to <code>0</code> to prevent auto-installing torch and <code>TORCH_LOAD</code> set to <code>0</code>
 to avoid loading dependencies automatically. These environment variables are meant for advanced use
-cases and troubleshootinng only.</p>
+cases and troubleshooting only.
+When timeout error occurs during library archive download, or length of downloaded files differ from
+reported length, an increase of the <code>timeout</code> value should help.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
