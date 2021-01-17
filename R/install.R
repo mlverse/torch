@@ -290,7 +290,8 @@ install_type <- function(version) {
 #' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
 #' @param reinstall Re-install Torch even if its already installed?
 #' @param path Optional path to install or check for an already existing installation.
-#' @param ... other optional arguments (like `load` for manual installation.)
+#' @param timeout Optional timeout in seconds for large file download.
+#' @param ... other optional arguments (like \code{`load`} for manual installation).
 #' 
 #' @details 
 #' 
@@ -298,11 +299,13 @@ install_type <- function(version) {
 #' variable is set to this same path to reuse this installation. The \code{TORCH_INSTALL} environment
 #' variable can be set to \code{0} to prevent auto-installing torch and \code{TORCH_LOAD} set to \code{0}
 #' to avoid loading dependencies automatically. These environment variables are meant for advanced use
-#' cases and troubleshootinng only.
+#' cases and troubleshooting only.
+#' When timeout error occurs during library archive download, or length of downloaded files differ from 
+#' reported length, an increase of the \code{timeout} value should help.
 #' 
 #' @export
 install_torch <- function(version = "1.7.1", type = install_type(version = version), reinstall = FALSE,
-                          path = install_path(), ...) {
+                          path = install_path(), timeout = 360, ...) {
   
   if (reinstall) {
     unlink(path, recursive = TRUE)
@@ -312,9 +315,11 @@ install_torch <- function(version = "1.7.1", type = install_type(version = versi
     dir.create(path, showWarnings = FALSE)
   }
   
-  lantern_install_libs(version, type, path)
+  withr::with_options(list(timeout = timeout),
+                      lantern_install_libs(version, type, path))
   
-  # reinitialize lantern, might happen if installation fails on load and manual install required
+  # reinitialize lantern, might happen if installation fails on load and manual install is required
   if (!identical(list(...)$load, FALSE))
     lantern_start(reload = TRUE)
+  
 }
