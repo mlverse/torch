@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Diagonal — torch_diagonal • torch</title>
+<title>Install Torch from files — install_torch_from_file • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Diagonal — torch_diagonal" />
-<meta property="og:description" content="Diagonal" />
+<meta property="og:title" content="Install Torch from files — install_torch_from_file" />
+<meta property="og:description" content="Installs Torch and its dependencies from files." />
 
 
 <meta name="robots" content="noindex">
@@ -177,88 +177,55 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Diagonal</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_diagonal.Rd</code></div>
+    <h1>Install Torch from files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/install.R'><code>R/install.R</code></a></small>
+    <div class="hidden name"><code>install_torch_from_file.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Diagonal</p>
+    <p>Installs Torch and its dependencies from files.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_diagonal</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>outdim</span>, dim1 <span class='op'>=</span> <span class='fl'>1L</span>, dim2 <span class='op'>=</span> <span class='fl'>2L</span>, offset <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>install_torch_from_file</span><span class='op'>(</span>
+  version <span class='op'>=</span> <span class='st'>"1.7.1"</span>,
+  type <span class='op'>=</span> <span class='fu'>install_type</span><span class='op'>(</span>version <span class='op'>=</span> <span class='va'>version</span><span class='op'>)</span>,
+  <span class='va'>libtorch</span>,
+  <span class='va'>liblantern</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor. Must be at least 2-dimensional.</p></td>
+      <th>version</th>
+      <td><p>The Torch version to install.</p></td>
     </tr>
     <tr>
-      <th>outdim</th>
-      <td><p>dimension name if <code>self</code> is a named tensor.</p></td>
+      <th>type</th>
+      <td><p>The installation type for Torch. Valid values are <code>"cpu"</code> or the 'CUDA' version.</p></td>
     </tr>
     <tr>
-      <th>dim1</th>
-      <td><p>(int, optional) first dimension with respect to which to        take diagonal. Default: 0.</p></td>
+      <th>libtorch</th>
+      <td><p>The installation archive file to use for Torch. Shall be a <code>"file://"</code> URL scheme.</p></td>
     </tr>
     <tr>
-      <th>dim2</th>
-      <td><p>(int, optional) second dimension with respect to which to        take diagonal. Default: 1.</p></td>
+      <th>liblantern</th>
+      <td><p>The installation archive file to use for Lantern. Shall be a <code>"file://"</code> URL scheme.</p></td>
     </tr>
     <tr>
-      <th>offset</th>
-      <td><p>(int, optional) which diagonal to consider. Default: 0        (main diagonal).</p></td>
+      <th>...</th>
+      <td><p>other parameters to be passed to <code>"install_torch()"</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="diagonal-input-offset-dim-dim-gt-tensor-"><a class="anchor" href="#diagonal-input-offset-dim-dim-gt-tensor-"></a>diagonal(input, offset=0, dim1=0, dim2=1) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
+    <p>When <code>"install_torch()"</code> initiated download is not possible, but installation archive files are
+present on local filesystem, <code>"install_torch_from_file()"</code> can be used as a workaround to installation issue.
+<code>"libtorch"</code> is the archive containing all torch modules, and <code>"liblantern"</code> is the C interface to libtorch
+that is used for the R package. Both are highly dependent, and should be checked through <code>"get_install_libs_url()"</code></p>
 
-
-<p>Returns a partial view of <code>input</code> with the its diagonal elements
-with respect to <code>dim1</code> and <code>dim2</code> appended as a dimension
-at the end of the shape.</p>
-<p>The argument <code>offset</code> controls which diagonal to consider:</p><ul>
-<li><p>If <code>offset</code> = 0, it is the main diagonal.</p></li>
-<li><p>If <code>offset</code> &gt; 0, it is above the main diagonal.</p></li>
-<li><p>If <code>offset</code> &lt; 0, it is below the main diagonal.</p></li>
-</ul>
-
-<p>Applying <code>torch_diag_embed</code> to the output of this function with
-the same arguments yields a diagonal matrix with the diagonal entries
-of the input. However, <code>torch_diag_embed</code> has different default
-dimensions, so those need to be explicitly specified.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_diagonal</span><span class='op'>(</span><span class='va'>a</span>, offset <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
-<span class='fu'>torch_diagonal</span><span class='op'>(</span><span class='va'>a</span>, offset <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_diagonal</span><span class='op'>(</span><span class='va'>x</span>, offset<span class='op'>=</span><span class='op'>-</span><span class='fl'>1</span>, dim1<span class='op'>=</span><span class='fl'>1</span>, dim2<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; (1,.,.) = 
-#&gt;  -0.5859
-#&gt;  -0.0646
-#&gt; 
-#&gt; (2,.,.) = 
-#&gt;  -1.3496
-#&gt;   0.0135
-#&gt; 
-#&gt; (3,.,.) = 
-#&gt;   1.5677
-#&gt;  -0.0650
-#&gt; 
-#&gt; (4,.,.) = 
-#&gt;   1.1778
-#&gt;   0.0045
-#&gt; [ CPUFloatType{4,2,1} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

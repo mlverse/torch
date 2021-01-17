@@ -208,6 +208,37 @@
 <p>If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the <code>CUDA</code> env var with something like <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv(CUDA="10.1")</a></code> if you want to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
+<div id="troubleshooting" class="section level2">
+<h2 class="hasAnchor">
+<a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
+<div id="large-file-download-timeout" class="section level3">
+<h3 class="hasAnchor">
+<a href="#large-file-download-timeout" class="anchor"></a>Large file download timeout</h3>
+<p>If you encounter timeout during library download, or if after a while, downloads end-up with a warning such as:</p>
+<pre><code>Warning messages:
+1: In utils::download.file(library_url, temp_file) :
+  downloaded length 44901568 != reported length 141774525
+2: In utils::download.file(library_url, temp_file) :
+  URL '...': Timeout of 60 seconds was reached
+3: Failed to install Torch, manually run install_torch(). download from 'https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.1.zip' failed</code></pre>
+<p>This means you encounter a download timeout. then, you should increase the timeout value in <code><a href="../reference/install_torch.html">install_torch()</a></code> like</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/install_torch.html">install_torch</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="file-based-download" class="section level3">
+<h3 class="hasAnchor">
+<a href="#file-based-download" class="anchor"></a>File based download</h3>
+<p>In cases where you cannot reach download servers from the machine you intend to install torch on, last resort is to install Torch and Lantern library from files. This is done in 3 steps :</p>
+<p>1- get the download URLs of the files.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_install_libs_url.html">get_install_libs_url</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"10.1"</span><span class="op">)</span></code></pre></div>
+<p>2- save those files into the machine filesystem. We will use <code>/tmp/</code> here as an example .</p>
+<p>3- install torch from files</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/install_torch_from_file.html">install_torch_from_file</a></span><span class="op">(</span>libtorch <span class="op">=</span> <span class="st">"file:///tmp/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu101.zip"</span>,
+                        liblantern <span class="op">=</span> <span class="st">"file:///tmp/Linux-gpu-101.zip"</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
