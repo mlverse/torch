@@ -319,13 +319,13 @@ install_torch <- function(version = "1.7.1", type = install_type(version = versi
   
   withr::with_options(list(timeout = timeout),
                       lantern_install_libs(version, type, path, install_config))
-  
-  
+    
   # reinitialize lantern, might happen if installation fails on load and manual install is required
   if (!identical(list(...)$load, FALSE))
     lantern_start(reload = TRUE)
   
 }
+                     
 #' Install Torch from files
 #' 
 #' Installs Torch and its dependencies from files.
@@ -354,6 +354,7 @@ install_torch_from_file <- function(version = "1.7.1", type = install_type(versi
 
   install_torch(version = version, type = type, install_config = install_config, ...)
 }
+                     
 #' List of files to download
 #' 
 #' List the Torch and Lantern files to download as local files in order to proceed with install_torch_from_file().
@@ -369,3 +370,4 @@ get_install_libs_url <- function(version = "1.7.1", type = install_type(version 
   liblantern <- install_config[[version]][[type]][[install_os()]][["liblantern"]]
   list(libtorch = libtorch, liblantern = liblantern)
 }
+
