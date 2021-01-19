@@ -5,6 +5,10 @@ description: |
   Modify and experiment with the guess-the-correlation model.
 ---
 
+```{r global-options, include=FALSE}
+knitr::opts_chunk$set(eval=FALSE)
+```
+
 What is it that we've done in the previous tutorial? Put abstractly, we've trained a network to *take in images* and *output* a *continuous* numerical value.
 
 In the process, we've made decisions all the time -- what, and how many, layers to use; how to calculate the loss; what optimization algorithm to apply; how long to train; and more. We can't go into all of them here, and we can't go into great detail. But the good thing is: With deep learning, you can always experiment and find out. (In fact, more often than not, experiment and find out is the only way to find out!)
@@ -19,6 +23,298 @@ Sometimes there are several established architectures for a problem; sometimes t
 
 For example, take our scatterplot images. The canonical architecture in image recognition are CNNs. *But*, you could still work on image data using nothing but linear layers. Depending on the task, this may or may not work so well.
 
-So why not give it a try? If you want to try this, there are two places you have to modify:
+So why not give it a try? If you want to try this, there are three places you have to modify: the dataset, the model, and the line that calculate the loss.
 
--   One,
+The model's first linear layer, who is going to deal with the image input, will want a flat structure of numbers. So where the previous dataset took two-dimensional inputs and added an additional `channels` dimension, the new one, on the contrary, flattens the 2d matrix into a 1-d vector:
+
+```{r}
+
+crop_axes <- function(img) transform_crop(img, top = 0, left = 21, height = 131, width = 130)
+
+root <- file.path(tempdir(), "correlation")
+
+# change valid_ds and test_ds analogously
+train_ds <- guess_the_correlation_dataset(
+    # where to unpack
+    root = root,
+    # additional preprocessing 
+    transform = function(img) crop_axes(img) %>% torch_flatten(),
+    # don't take all data, but just the indices we pass in
+    indexes = train_indices,
+    download = TRUE
+  )
+
+```
+
+The model now consists of all linear layers:
+
+```{r}
+torch_manual_seed(777)
+
+net <- nn_module(
+  
+  "corr-cnn",
+  
+  initialize = function() {
+    
+    self$fc1 <- nn_linear(in_features = 130 * 130, out_features = 128)
+    self$fc2 <- nn_linear(in_features = 128, out_features = 256)
+    self$fc3 <- nn_linear(in_features = 256, out_features = 1)
+    
+  },
+  
+  forward = function(x) {
+    
+    x %>% 
+      self$fc1() %>%
+      nnf_relu() %>%
+      
+      self$fc2() %>%
+      nnf_relu() %>%
+      
+      self$fc3() 
+  }
+)
+
+model <- net()
+```
+
+In the line computing the loss, we now want to add a singleton dimension to the target at the end instead of in front:
+
+```{r}
+# analogously for valid_batch and test_batch
+train_batch <- function(b) {
+  
+  optimizer$zero_grad()
+  
+  # get predictions
+  output <- model(b$x)
+  
+  # calculate loss
+  loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
+
+  # have gradients get calculated        
+  loss$backward()
+  
+  # have gradients get applied
+  optimizer$step()
+  
+  loss$item()
+  
+}
+```
+
+Compared to the convnet, how well does this work? You will find it performs a lot worse. In a way, this is no surprise -- it's not for nothing that we use convolutional architectures with images. However, the extent to which a convnet outperforms a linear model is still input- and task-dependent. Were you to run an analogous comparison for MNIST digit classification (the `mnist_dataset()` that comes with `torch`) you'd find that a linear model is able to achieve sensible results.
+
+# What if ... we wanted to classify the images, not predict a continuous target?
+
+Assume we had the same input data as before, but now we just care if there's a substantial correlation or not. Let's say we're interested in whether its magnitude is below or above 0.5.
+
+This time, we only have to make modifications in two places . The dataset now binarizes the target according to our new requirements, passing in a `target_transform` in addition to the `transform` destined for the image:
+
+```{r}
+add_channel_dim <- function(img) img$unsqueeze(1)
+crop_axes <- function(img) transform_crop(img, top = 0, left = 21, height = 131, width = 130)
+binarize <- function(tensor) torch_round(torch_abs(tensor))
+
+root <- file.path(tempfile(), "correlation")
+
+# same for validation set and test set
+train_ds <- guess_the_correlation_dataset(
+    # where to unpack
+    root = root,
+    # additional preprocessing 
+    transform = function(img) crop_axes(img) %>% add_channel_dim(),
+    # binarize target data
+    target_transform = binarize,
+    # don't take all data, but just the indices we pass in
+    indexes = train_indices,
+    download = TRUE
+  )
+
+```
+
+Now that we want the network to output a `0` or a `1` instead of a continuous value, we need to use a different loss function. `nnf_binary_cross_entropy_with_logits()` takes the output, computes the log, and calculates cross entropy between that and the targets. (If you're thinking, "where is the sigmoid, shouldn't we have had the network apply a sigmoid activation in the end?", -- it's not needed because of that taking-the-log step in the loss function itself.)
+
+```{r}
+# same for validation and test 
+train_batch <- function(b) {
+  
+  optimizer$zero_grad()
+  
+  # get predictions
+  output <- model(b$x)
+  
+  # calculate loss
+  loss <- nnf_binary_cross_entropy_with_logits(output, b$y$unsqueeze(2))
+
+  # have gradients get calculated        
+  loss$backward()
+  
+  # have gradients get applied
+  optimizer$step()
+  
+  loss$item()
+  
+}
+
+```
+
+Loss decreases, but now that we're using cross entropy instead of mean squared error, it is a lot more difficult to get an impression how well this really works! To find out, why don't you modify the testing loop to compute accuracy in addition to the loss?
+
+```{r}
+model$eval()
+
+batch_size <- 64
+
+test_dl <- dataloader(test_ds, batch_size, drop_last = TRUE)
+
+test_batch <- function(b) {
+  
+  output <- model(b$x)
+  loss <- nnf_binary_cross_entropy_with_logits(output, b$y$unsqueeze(2))
+  test_losses <<- c(test_losses, loss$item())
+  
+  prob <- torch_sigmoid(output)
+  class_ <- torch_round(prob)
+  correct <- (torch_sum(class_ == b$y$unsqueeze(2)))
+  test_accuracy <<- c(test_accuracy, correct$item()/batch_size)
+}
+
+test_losses <- c()
+test_accuracy <- c()
+
+for (b in enumerate(test_dl)) {
+  test_batch(b)
+}
+
+mean(test_losses)
+mean(test_accuracy)
+
+```
+
+# What if ... we made changes to the optimization routine?
+
+Thankfully, `torch` takes care of all gradient computations for us, and unless we need to implement custom operations, we don't normally think about this. However, the way these gradients are being made use of is something we can influence. Optimizers differ in how they compute weight updates, and choosing a different algorithm may make a significant difference.
+
+Truth be told, though, this is mostly a matter of experimentation. The Adam algorithm used here is among the most-established ones; however you could try a few others for comparison: for example, [SGD](https://torch.mlverse.org/docs/reference/optim_sgd.html) or [RMSProp](https://torch.mlverse.org/docs/reference/optim_rmsprop.html).
+
+In addition to trying different optimizers, you can experiment with how they're configured. Different optimizers have different tuning knobs, but most of them have one in common: the learning rate, a parameter indicating how big a step to take in optimization. Change the learning rate to a higher or lower value and find out how this affects optimization performance.
+
+Speaking of learning rates, `torch` has learning rate schedulers that allow you to change learning rates over time. For example, [lr_step()](https://torch.mlverse.org/docs/reference/lr_step.html) allows you to shrink it, by some degree, every configurable number of steps. If you're interested in pursuing this topic, a current best-practice approach to handling learning rates is illustrated [in this post](https://blogs.rstudio.com/ai/posts/2020-10-19-torch-image-classification/#training).
+
+# What if ... we made the network bigger or trained it for a longer time?
+
+If you make a network "bigger", increasing the number of parameters (for a linear layer, `output_features`, for a convolutional one, `channels`), in theory it gets more powerful. Analogously, if you give it more time to train, it may arrive at better results. However, depending on the task, you may or may not see improvements -- again, the only way to know is to try.
+
+And there is something else to think about. If something you do improves performance on the training set, does it generalize to the test set? As in machine learning in general, in deep learning one needs to be wary of overfitting. But what are countermeasures you could take?
+
+Before thinking of anything technical, you'd always want to think through what you know about the data and the underlying context. Analytically, what could cause the test data to come from a different distribution than the training data? Is there are way to have these distributions become more similar?
+
+The next thing, then, is not quite technical either. If there's no compelling reason to assume that the test data will be systematically different, it's just: the more data the better. This is why in our example task, we don't see much overfitting -- the dataset is gigantic (and we've been using but a tiny fraction!).
+
+If getting more data is not an option, we can add regularization. In deep learning, the most popular ways of doing this are *dropout* and *batch normalization*.
+
+Dropout adds random noise by stochastically removing units during training, making the net more robust as to the presence of individual features. In our example, you could add dropout as follows. `p` passed to `nnf_dropout()` is the dropout probability. Not surprisingly, this one, again, is a hyperparameter you'll want to experiment with.
+
+```{r}
+net <- nn_module(
+  
+  "corr-cnn",
+  
+  initialize = function() {
+    
+    self$conv1 <- nn_conv2d(in_channels = 1, out_channels = 32, kernel_size = 3)
+    self$conv2 <- nn_conv2d(in_channels = 32, out_channels = 64, kernel_size = 3)
+    self$conv3 <- nn_conv2d(in_channels = 64, out_channels = 128, kernel_size = 3)
+    
+    self$fc1 <- nn_linear(in_features = 14 * 14 * 128, out_features = 128)
+    self$fc2 <- nn_linear(in_features = 128, out_features = 1)
+    
+  },
+  
+  forward = function(x) {
+    
+    x %>% 
+      self$conv1() %>%
+      nnf_relu() %>%
+      nnf_avg_pool2d(2) %>%
+      nnf_dropout(p = 0.2) %>%
+      
+      self$conv2() %>%
+      nnf_relu() %>%
+      nnf_avg_pool2d(2) %>%
+      nnf_dropout(p = 0.2) %>%
+      
+      self$conv3() %>%
+      nnf_relu() %>%
+      nnf_avg_pool2d(2) %>%
+      nnf_dropout(p = 0.2) %>%
+      
+      torch_flatten(start_dim = 2) %>%
+      self$fc1() %>%
+      nnf_relu() %>%
+      nnf_dropout(p = 0.2) %>%
+      
+      self$fc2()
+  }
+)
+```
+
+Batch normalization is less well understood theoretically, but can be extremely effective in some cases. Besides acting as a regularizer, it also stabilizes training and may allow for using higher learning rates.
+
+With batch normalization, our network could look like this:
+
+```{r}
+net <- nn_module(
+  
+  "corr-cnn",
+  
+  initialize = function() {
+    
+    self$conv1 <- nn_conv2d(in_channels = 1, out_channels = 32, kernel_size = 3)
+    self$conv2 <- nn_conv2d(in_channels = 32, out_channels = 64, kernel_size = 3)
+    self$conv3 <- nn_conv2d(in_channels = 64, out_channels = 128, kernel_size = 3)
+    
+    self$bn1 <- nn_batch_norm2d(num_features = 32)
+    self$bn2 <- nn_batch_norm2d(num_features = 64)
+    self$bn3 <- nn_batch_norm2d(num_features = 128)
+    self$bn4 <- nn_batch_norm1d(num_features = 128)
+    
+    self$fc1 <- nn_linear(in_features = 14 * 14 * 128, out_features = 128)
+    self$fc2 <- nn_linear(in_features = 128, out_features = 1)
+    
+  },
+  
+  forward = function(x) {
+    
+    x %>% 
+      self$conv1() %>%
+      nnf_relu() %>%
+      self$bn1() %>%
+      nnf_avg_pool2d(2) %>%
+      nnf_dropout(p = 0.2) %>%
+      
+      self$conv2() %>%
+      nnf_relu() %>%
+      self$bn2() %>%
+      nnf_avg_pool2d(2) %>%
+      nnf_dropout(p = 0.2) %>%
+      
+      self$conv3() %>%
+      nnf_relu() %>%
+      self$bn3() %>%
+      nnf_avg_pool2d(2) %>%
+      nnf_dropout(p = 0.2) %>%
+      
+      torch_flatten(start_dim = 2) %>%
+      self$fc1() %>%
+      nnf_relu() %>%
+      self$bn4() %>%
+      
+      self$fc2()
+  }
+)
+```
+
+Once you're found that a regularizing measure works -- meaning, performance on the validation set is similar to that on the training set, or maybe even better -- you can go back and add more capacity to the network: add more layers, train for a longer time, etc. Maybe you'll arrive at better performance overall!
