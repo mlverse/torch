@@ -11,7 +11,9 @@ Unless the data you're working with comes with some package in the `torch` ecosy
 
 # `torch` `Dataset` objects
 
-A `Dataset` is an R6 object that knows how to iterate over data. This is because it acts as supplier to a `DataLoader` , who will ask it to return some number of items. How many? That is dependent on the batch size -- but batch sizes are handled by `DataLoaders`, so it needn't be concerned about that. All it has to know is what to do when asked for, e.g., item no. 7.
+A `Dataset` is an R6 object that knows how to iterate over data. This is because it acts as supplier to a `DataLoader` , who will ask it to return some number of items.
+
+(How many? That is dependent on the batch size -- but batch sizes are handled by `DataLoaders`, so it needn't be concerned about that. All it has to know is what to do when asked for, e.g., item no. 7.)
 
 While a `Dataset` may have any number of methods -- each responsible for some aspect of pre-processing logic, for example -- just three methods are required:
 
@@ -25,7 +27,7 @@ Let's see an example.
 
 # Penguins
 
-`penguins` is a very nice dataset that lives in the `palmerpenguins` CRAN package.
+`penguins` is a very nice dataset that lives in the `palmerpenguins` package.
 
 
 ```r
@@ -37,16 +39,18 @@ penguins %>% glimpse()
 
     Rows: 344
     Columns: 8
-    $ species           <fct> Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Ade…
-    $ island            <fct> Torgersen, Torgersen, Torgersen, Torgersen, Torgersen, Torgersen, Torgersen, Torger…
-    $ bill_length_mm    <dbl> 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, 42.0, 37.8, 37.8, 41.1, 38.6, 3…
-    $ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, 20.2, 17.1, 17.3, 17.6, 21.2, 2…
-    $ flipper_length_mm <int> 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186, 180, 182, 191, 198, 185, 195,…
-    $ body_mass_g       <int> 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, 4250, 3300, 3700, 3200, 3800, 4…
-    $ sex               <fct> male, female, female, NA, female, male, female, male, NA, NA, NA, NA, female, male,…
-    $ year              <int> 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007,…
+    $ species           <fct> Adelie, Adelie, Adelie, Adelie, Adelie, Adelie…
+    $ island            <fct> Torgersen, Torgersen, Torgersen, Torgersen…
+    $ bill_length_mm    <dbl> 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2,…
+    $ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6,…
+    $ flipper_length_mm <int> 181, 186, 195, NA, 193, 190, 181, 195, 193,…
+    $ body_mass_g       <int> 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675…
+    $ sex               <fct> male, female, female, NA, female, male, female…
+    $ year              <int> 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…
 
-There are three species, and we'll predict them from all available information: "biometrics" like `bill_length_mm`, geographic indicators like the `island` they live on, and more. The predictors are of two different types, categorical and continuous.
+There are three species, and we'll infer them making use of all available information: "biometrics" like `bill_length_mm`, geographic indicators like the `island` the penguins inhabit, and more.
+
+Predictors are of two different types, categorical and continuous.
 
 Continuous features, of R type `double`, may be fed to `torch` without further ado. We just directly use them to initialize a `torch` tensor, which will be of type `Float`:
 
@@ -66,9 +70,11 @@ Not quite: We also need to reflect on the semantic side of things.
 
 # Categorical data in deep learning
 
-If we just replace islands *Biscoe*, *Dream*, and *Torgersen* by numbers 1, 2, and 3, we'd present them to the network as interval data, which of course they're not. We have two options: transform them to one-hot vectors, where e.g. *Biscoe* would be `0,0,1`, *Dream* `0,1,0`, and *Torgersen*, `1,0,0`, or leave them as they are, but have the network map each discrete value to a multidimensional, continuous representations. The latter is called embedding, and it often helps networks make sense of discrete data.
+If we just replace islands *Biscoe*, *Dream*, and *Torgersen* by numbers 1, 2, and 3, we present them to the network as interval data, which of course they're not.
 
-Embedding modules expect their inputs to be of type `Long`. A tensor created from an R value will have the correct type if make sure it's an `integer`:
+We have two options: transform them to one-hot vectors, where e.g. *Biscoe* would be `0,0,1`, *Dream* `0,1,0`, and *Torgersen*, `1,0,0`, or leave them as they are, but have the network map each discrete value to a multidimensional, continuous representation. The latter is called embedding, and it often helps networks make sense of discrete data.
+
+Embedding modules expect their inputs to be of type `Long`. A tensor created from an R value will have the correct type if we make sure it's an `integer`:
 
 
 ```r
@@ -215,9 +221,9 @@ embedding_module <- nn_module(
 
 The top-level module has three submodules: said `embedding_module` and two linear layers.
 
-The first linear layer takes the output from `embedding_module` , computes the affine transformation it sees fit, and passes its result to the output layer. `output` then has three units, one for every possible target class.
+The first linear layer takes the output from `embedding_module` , computes an affine transformation as it sees fit, and passes its result to the output layer. `output` then has three units, one for every possible target class.
 
-The activation function we apply to the raw aggregation, `nnf_log_softmax()`, composes two operations: the popular-in-deep-learning `softmax` normalization algorithm and taking the log. Like that, we end up with the format expected by `nnf_nll_loss()`, the loss function that computes the negative log likelihood (NLL) loss between inputs and targets.
+The activation function we apply to the raw aggregation, `nnf_log_softmax()`, composes two operations: the popular-in-deep-learning `softmax` normalization and taking the logarithm. Like that, we end up with the format expected by `nnf_nll_loss()`, the loss function that computes the negative log likelihood (NLL) loss between inputs and targets.
 
 
 ```r
@@ -302,7 +308,6 @@ for (epoch in 1:20) {
   cat(sprintf("Loss at epoch %d: training: %3.3f, validation: %3.3f\n", epoch, mean(train_losses), mean(valid_losses)))
 }
 ```
-
 
     Loss at epoch 1: training: 34.962, validation: 4.354
     Loss at epoch 2: training: 8.207, validation: 14.512

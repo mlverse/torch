@@ -25,7 +25,7 @@ For example, take our scatterplot images. The canonical architecture in image re
 
 So why not give it a try? If you want to try this, there are three places you have to modify: the dataset, the model, and the line that calculate the loss.
 
-The model's first linear layer, who is going to deal with the image input, will want a flat structure of numbers. So where the previous dataset took two-dimensional inputs and added an additional `channels` dimension, the new one, on the contrary, flattens the 2d matrix into a 1-d vector:
+The model's first linear layer is going to deal with the image input. Being a linear layer, it will want to be presented with a flat structure of numbers. So where the previous dataset took two-dimensional inputs and added an additional `channels` dimension, the new one, on the contrary, is flattening the 2d matrix into a 1-d vector:
 
 ```{r}
 
@@ -106,7 +106,7 @@ train_batch <- function(b) {
 
 Compared to the convnet, how well does this work? You will find it performs a lot worse. In a way, this is no surprise -- it's not for nothing that we use convolutional architectures with images. However, the extent to which a convnet outperforms a linear model is still input- and task-dependent. Were you to run an analogous comparison for MNIST digit classification (the `mnist_dataset()` that comes with `torch`) you'd find that a linear model is able to achieve sensible results.
 
-# What if ... we wanted to classify the images, not predict a continuous target?
+# What if ... we wanted to *classify* the images, not predict a continuous target?
 
 Assume we had the same input data as before, but now we just care if there's a substantial correlation or not. Let's say we're interested in whether its magnitude is below or above 0.5.
 
@@ -160,7 +160,7 @@ train_batch <- function(b) {
 
 ```
 
-Loss decreases, but now that we're using cross entropy instead of mean squared error, it is a lot more difficult to get an impression how well this really works! To find out, why don't you modify the testing loop to compute accuracy in addition to the loss?
+And again, loss decreases. But now that we're using cross entropy instead of mean squared error, it is a lot more difficult to get an impression how well this really works! To find out, why don't you modify the testing loop to compute accuracy in addition to the loss?
 
 ```{r}
 model$eval()
@@ -195,9 +195,9 @@ mean(test_accuracy)
 
 # What if ... we made changes to the optimization routine?
 
-Thankfully, `torch` takes care of all gradient computations for us, and unless we need to implement custom operations, we don't normally think about this. However, the way these gradients are being made use of is something we can influence. Optimizers differ in how they compute weight updates, and choosing a different algorithm may make a significant difference.
+Thankfully, `torch` takes care of all gradient computations for us, and unless we're implementing custom operations, we don't normally need to think about this. However, the way these gradients are being made use of is something we can influence. Optimizers differ in how they compute weight updates, and choosing a different algorithm may make a significant difference.
 
-Truth be told, though, this is mostly a matter of experimentation. The Adam algorithm used here is among the most-established ones; however you could try a few others for comparison: for example, [SGD](https://torch.mlverse.org/docs/reference/optim_sgd.html) or [RMSProp](https://torch.mlverse.org/docs/reference/optim_rmsprop.html).
+Truth be told, though, this is mostly a matter of experimentation. The [Adam](https://torch.mlverse.org/docs/reference/optim_adam.html) algorithm used here is among the most-established ones; however you could try a few others for comparison: for example, [SGD](https://torch.mlverse.org/docs/reference/optim_sgd.html) or [RMSProp](https://torch.mlverse.org/docs/reference/optim_rmsprop.html).
 
 In addition to trying different optimizers, you can experiment with how they're configured. Different optimizers have different tuning knobs, but most of them have one in common: the learning rate, a parameter indicating how big a step to take in optimization. Change the learning rate to a higher or lower value and find out how this affects optimization performance.
 
@@ -209,13 +209,13 @@ If you make a network "bigger", increasing the number of parameters (for a linea
 
 And there is something else to think about. If something you do improves performance on the training set, does it generalize to the test set? As in machine learning in general, in deep learning one needs to be wary of overfitting. But what are countermeasures you could take?
 
-Before thinking of anything technical, you'd always want to think through what you know about the data and the underlying context. Analytically, what could cause the test data to come from a different distribution than the training data? Is there are way to have these distributions become more similar?
+Before thinking of anything technical, you'd always want to think through what you know about the data and the underlying context. Analytically, what could cause the training and the test data to come from different distributions? Is there a way to have these distributions become more similar?
 
 The next thing, then, is not quite technical either. If there's no compelling reason to assume that the test data will be systematically different, it's just: the more data the better. This is why in our example task, we don't see much overfitting -- the dataset is gigantic (and we've been using but a tiny fraction!).
 
 If getting more data is not an option, we can add regularization. In deep learning, the most popular ways of doing this are *dropout* and *batch normalization*.
 
-Dropout adds random noise by stochastically removing units during training, making the net more robust as to the presence of individual features. In our example, you could add dropout as follows. `p` passed to `nnf_dropout()` is the dropout probability. Not surprisingly, this one, again, is a hyperparameter you'll want to experiment with.
+Dropout adds random noise by stochastically removing units during training, making the net more robust to presence/absence of individual features. In our example, you could add dropout as follows. (Here `p` passed to `nnf_dropout()` is the dropout probability. Not surprisingly, this, again, is a hyperparameter you'll want to experiment with.)
 
 ```{r}
 net <- nn_module(

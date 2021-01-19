@@ -5,13 +5,13 @@ description: |
   Code a neural network from scratch.
 ---
 
-Our first version of the network will make use of "just" one `torch` feature: tensors. In fact, "just" doesn't quite fit as a qualifier, as tensors really are all we need! However, you'll soon see how much easier it gets through functionality built on top: automatic differentiation, optimizers, and neural network modules. For now though, just take this as a holistic example, as well as a motivation to learn more about tensors in the upcoming section!
+Our first version of the network will make use of "just" one `torch` feature: tensors. In fact, "just" doesn't quite fit as a qualifier, as tensors really are all we need! However, you'll soon see how much easier it gets through functionality built on top: automatic differentiation, optimizers, and neural network modules. For now though, just take this as a holistic example, as well as a motivation to learn more about tensors in the upcoming section.
 
-To see tensors in action, we don't even have to wait until we code the network. Definitely, we need some data for it to work on, and that already we can simulate with `torch`.
+To see tensors in action, we don't even have to wait until we code the network. Definitely, we need something for it to work on, and that data already we can simulate with `torch`.
 
 # Generate random data
 
-We use `torch_randn()` to simulate standard normally-distributed data, of a desired shape. For example:
+We use `torch_randn()` to simulate standard-normally-distributed data, of a desired shape. For example:
 
 ```{r}
 library(torch)
@@ -53,7 +53,9 @@ y <- x[, 1, drop = FALSE] * 0.2 - x[, 2, drop = FALSE] * 1.3 - x[, 3, drop = FAL
 
 `torch_randn()` is one of several functions used to initialize tensors of arbitrary shape. Seeing how we're at it, there is another place where we need to do something like this. With neural networks, it's all about the *weights*: those updateable parameters that determine how an intermediate result calculated by layer `n`'s units influences the units in layer `n+1`.
 
-There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 100 (number of observations) by 32. That matrix will be updated during training, but we need to initialize it; and that, again, is accomplished using `torch_randn()`:
+There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 100 (number of observations) by 32.
+
+That matrix will be updated during training, but we need to initialize it, and that, again, is accomplished using `torch_randn()`:
 
 ```{r}
 # dimensionality of hidden layer
@@ -103,7 +105,7 @@ We have two layers (not counting the input): one hidden layer and the output lay
 
 For each of those, there are two calculations to perform: First, multiply the incoming tensor with the weight matrix and add the bias vector; and second, apply the desired *activation function*.
 
-`torch_mm()`, or just `mm()` if used as an instance method on a tensor, multiplies two matrices; for mathematical operations such as addition, subtraction or element-wise multiplication, we can use the overloaded operators `+`, `-` and `*`, respectively.
+`torch_mm()`, or just `mm()` if used as an instance method on a tensor, multiplies two matrices. For mathematical operations such as addition, subtraction or element-wise multiplication, we can use the overloaded operators `+`, `-` and `*`, respectively.
 
 So here is calculation number one for the hidden layer:
 
@@ -128,7 +130,7 @@ That's it for the hidden layer. The output layer does not have an activation fun
   y_pred <- h_relu$mm(w2) + b2
 ```
 
-The next activity is computing the loss.
+The next activity is to compute the loss.
 
 ## Loss computation
 

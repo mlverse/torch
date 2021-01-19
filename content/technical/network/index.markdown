@@ -5,13 +5,13 @@ description: |
   Code a neural network from scratch.
 ---
 
-Our first version of the network will make use of "just" one `torch` feature: tensors. In fact, "just" doesn't quite fit as a qualifier, as tensors really are all we need! However, you'll soon see how much easier it gets through functionality built on top: automatic differentiation, optimizers, and neural network modules. For now though, just take this as a holistic example, as well as a motivation to learn more about tensors in the upcoming section!
+Our first version of the network will make use of "just" one `torch` feature: tensors. In fact, "just" doesn't quite fit as a qualifier, as tensors really are all we need! However, you'll soon see how much easier it gets through functionality built on top: automatic differentiation, optimizers, and neural network modules. For now though, just take this as a holistic example, as well as a motivation to learn more about tensors in the upcoming section.
 
-To see tensors in action, we don't even have to wait until we code the network. Definitely, we need some data for it to work on, and that already we can simulate with `torch`.
+To see tensors in action, we don't even have to wait until we code the network. Definitely, we need something for it to work on, and that data already we can simulate with `torch`.
 
 # Generate random data
 
-We use `torch_randn()` to simulate standard normally-distributed data, of a desired shape. For example:
+We use `torch_randn()` to simulate standard-normally-distributed data, of a desired shape. For example:
 
 
 ```r
@@ -22,14 +22,14 @@ torch_randn(2, 3, 4)
 ```
 ## torch_tensor
 ## (1,.,.) = 
-##   0.7758 -0.9851  0.0763  0.7085
-##   1.0740  0.8605  0.2778  1.3188
-##  -0.2405 -0.2683 -0.3554  1.3809
+##   0.6930  1.0607  1.5802  0.0529
+##   1.6168  0.3958 -0.4885  1.5357
+##   1.2671  0.8729  0.1229  0.9226
 ## 
 ## (2,.,.) = 
-##  -0.5226  0.7378  1.4034  1.6096
-##  -2.4952 -0.2774  0.6318 -0.2386
-##   0.7212 -0.3074  0.7942 -0.5741
+##  -0.3704  0.5151  1.3497  0.5579
+##   0.5856  0.2416 -1.0963  2.0886
+##   0.5494  0.1053 -0.0875 -0.3887
 ## [ CPUFloatType{2,3,4} ]
 ```
 
@@ -72,7 +72,9 @@ y <- x[, 1, drop = FALSE] * 0.2 - x[, 2, drop = FALSE] * 1.3 - x[, 3, drop = FAL
 
 `torch_randn()` is one of several functions used to initialize tensors of arbitrary shape. Seeing how we're at it, there is another place where we need to do something like this. With neural networks, it's all about the *weights*: those updateable parameters that determine how an intermediate result calculated by layer `n`'s units influences the units in layer `n+1`.
 
-There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 100 (number of observations) by 32. That matrix will be updated during training, but we need to initialize it; and that, again, is accomplished using `torch_randn()`:
+There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 100 (number of observations) by 32.
+
+That matrix will be updated during training, but we need to initialize it, and that, again, is accomplished using `torch_randn()`:
 
 
 ```r
@@ -125,7 +127,7 @@ We have two layers (not counting the input): one hidden layer and the output lay
 
 For each of those, there are two calculations to perform: First, multiply the incoming tensor with the weight matrix and add the bias vector; and second, apply the desired *activation function*.
 
-`torch_mm()`, or just `mm()` if used as an instance method on a tensor, multiplies two matrices; for mathematical operations such as addition, subtraction or element-wise multiplication, we can use the overloaded operators `+`, `-` and `*`, respectively.
+`torch_mm()`, or just `mm()` if used as an instance method on a tensor, multiplies two matrices. For mathematical operations such as addition, subtraction or element-wise multiplication, we can use the overloaded operators `+`, `-` and `*`, respectively.
 
 So here is calculation number one for the hidden layer:
 
@@ -153,7 +155,7 @@ That's it for the hidden layer. The output layer does not have an activation fun
   y_pred <- h_relu$mm(w2) + b2
 ```
 
-The next activity is computing the loss.
+The next activity is to compute the loss.
 
 ## Loss computation
 
@@ -298,26 +300,26 @@ for (t in 1:200) {
 ```
 
 ```
-## Epoch:  10    Loss:  163.2368 
-## Epoch:  20    Loss:  135.9249 
-## Epoch:  30    Loss:  124.5586 
-## Epoch:  40    Loss:  119.0481 
-## Epoch:  50    Loss:  115.7841 
-## Epoch:  60    Loss:  113.644 
-## Epoch:  70    Loss:  112.01 
-## Epoch:  80    Loss:  110.6413 
-## Epoch:  90    Loss:  109.4492 
-## Epoch:  100    Loss:  108.3725 
-## Epoch:  110    Loss:  107.3739 
-## Epoch:  120    Loss:  106.426 
-## Epoch:  130    Loss:  105.4796 
-## Epoch:  140    Loss:  104.6274 
-## Epoch:  150    Loss:  103.8735 
-## Epoch:  160    Loss:  103.1636 
-## Epoch:  170    Loss:  102.477 
-## Epoch:  180    Loss:  101.8213 
-## Epoch:  190    Loss:  101.1965 
-## Epoch:  200    Loss:  100.5975
+## Epoch:  10    Loss:  318.4779 
+## Epoch:  20    Loss:  188.6638 
+## Epoch:  30    Loss:  142.708 
+## Epoch:  40    Loss:  120.3968 
+## Epoch:  50    Loss:  108.7347 
+## Epoch:  60    Loss:  102.2032 
+## Epoch:  70    Loss:  98.18359 
+## Epoch:  80    Loss:  95.74159 
+## Epoch:  90    Loss:  94.07236 
+## Epoch:  100    Loss:  92.82318 
+## Epoch:  110    Loss:  91.88651 
+## Epoch:  120    Loss:  91.13139 
+## Epoch:  130    Loss:  90.50255 
+## Epoch:  140    Loss:  89.98438 
+## Epoch:  150    Loss:  89.53185 
+## Epoch:  160    Loss:  89.00684 
+## Epoch:  170    Loss:  88.52534 
+## Epoch:  180    Loss:  88.08672 
+## Epoch:  190    Loss:  87.6752 
+## Epoch:  200    Loss:  87.29878
 ```
 
 And that's it -- a neural network from scratch, using nothing but `torch` tensors. Let's learn more about tensors [next](/technical/tensors).

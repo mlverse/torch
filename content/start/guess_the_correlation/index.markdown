@@ -28,7 +28,7 @@ torch_tensor(1)
      1
     [ CPUFloatType{1} ]
 
-Now, while `torch` contains all the core functionality, there is a whole ecosystem built -- and being built -- around it.
+Now, while `torch` contains all the core functionality, there is a whole ecosystem built around it.
 
 Notably, `torchvision` is essential to image-processing tasks. In this example, we don't use it much -- overtly, that is. It's used more prominently behind the scenes. Let's get it:
 
@@ -95,7 +95,7 @@ train_ds <- guess_the_correlation_dataset(
   )
 ```
 
-As we're at it, let's do analogously for the validation and test sets. We don't need to download again, as we're building on the same underlying data. We just pick different observations.
+As we're at it, let's do the same for the validation and test sets. We don't need to download again, as we're building on the same underlying data. We just pick different observations.
 
 
 ```r
@@ -179,7 +179,7 @@ train_ds[1]
 
 It's a list of three items, the last of which we're not interested in for our purposes.
 
-The second, a scalar tensor, is the correlation value, the thing we want the network to learn. The first, `x`, is the input, the scatterplot: a tensor representing an image of dimensionality 130\*130. But wait -- what is that `1` in the shape output?
+The second, a scalar tensor, is the correlation value, the thing we want the network to learn. The first, `x`, is the scatterplot: a tensor representing an image of dimensionality 130\*130. But wait -- what is that `1` in the shape output?
 
     [ CPUFloatType{1,130,130} ]
 
@@ -209,11 +209,11 @@ Here, we crop the image, cutting off the axes and labels on the left and bottom.
 
 # Work with batches
 
-Now, we've done so much, but you haven't actually *seen* any of the scatterplots yet! The reason we've been waiting until now is that we want to show a bunch of them at a time, and for that, we need to know how to handle *batches* of data.
+Now, we've done so much work already, but you haven't actually *seen* any of the scatterplots yet! The reason we've been waiting until now is that we want to show a bunch of them at a time, and for that, we need to know how to handle *batches* of data.
 
-So let's create a `DataLoader` object from the training set. We'll soon use it to train the model, but right now, we'll just ask it for the first batch.
+So let's create a `DataLoader` object from the training set. We'll soon use it to train the model, but right now, we'll just plot the first batch.
 
-A `DataLoader` needs to know where to get the data -- namely, from the `Dataset` it gets passed --, as well as how big a batch should be. Optionally, it can return data in random order (`shuffle = TRUE`).
+A `DataLoader` needs to know where to get the data -- namely, from the `Dataset` it gets passed --, as well as how many items should go in a batch. Optionally, it can return data in random order (`shuffle = TRUE`).
 
 
 ```r
@@ -229,7 +229,7 @@ length(train_dl)
 
     [1] 157
 
-To access the first batch, we create an iterator from the `DataLoader` and ask it for the first batch. Even if it wasn't about plotting, you might do this just to check that the observations are of the expected dimensionality:
+To access the first batch, we create an iterator from the `DataLoader` and ask it for the first batch. Even if it weren't for plotting, you might do this just to check that the dimensions look ok:
 
 
 ```r
@@ -243,7 +243,7 @@ dim(batch$y)
     [1]  64   1 130 130
     [1] 64
 
-And plot! Note how we first remove the *channels* dimension -- as.raster wouldn't like it -- and then, convert the tensor to R for further processing:
+And plot! Note how we first remove the *channels* dimension -- `as.raster()` wouldn't like it -- and then, convert the tensor to R for further processing:
 
 
 ```r
@@ -271,7 +271,7 @@ batch$y %>% as.numeric() %>% round(digits = 2)
     [39]  0.49  0.86 -0.70  0.51  0.47 -0.46  0.88  0.00  0.24  0.28  0.28 -0.04 -0.74  0.43  0.74  0.01 -0.21  0.66 -0.45
     [58] -0.44  0.50 -0.69 -0.65 -0.66 -0.55 -0.53
 
-Now, just as they got their own `Dataset` objects, test and validation data need their own `DataLoader` each.
+Now, just as they got their own `Dataset` objects, test and validation data each need their own `DataLoader`.
 
 
 ```r
@@ -300,21 +300,86 @@ The overall model is created by a call to `nn_module()`. This instantiates an `n
 -   `initialize()`, the place to instantiate any *submodules*; and
 -   `forward()`, the place to define what should happen when this module is called.
 
-In `initialize()` , we instantiate five submodules: two convolutional layers and two linear ones.
+In `initialize()` , we instantiate five submodules -- two convolutional layers and two linear ones:
 
-The convolutional layers apply a filter of size 3 x 3 (`kernel_size`). This filter slides over the image and computes local aggregates. In fact, there is not just a single filter, there are 32 of them in the first convolutional ("conv", from now on) layer , 64 in the second, and 128 in the third one. The filters are trained to pick up informative spatial features, features that will be able to tell us something about the image at hand.
+
+```r
+# zooming in on just initialize() - don't run standalone
+
+net <- nn_module(
+  
+  # ...
+  
+  initialize = function() {
+    
+    self$conv1 <- nn_conv2d(in_channels = 1, out_channels = 32, kernel_size = 3)
+    self$conv2 <- nn_conv2d(in_channels = 32, out_channels = 64, kernel_size = 3)
+    self$conv3 <- nn_conv2d(in_channels = 64, out_channels = 128, kernel_size = 3)
+    
+    self$fc1 <- nn_linear(in_features = 14 * 14 * 128, out_features = 128)
+    self$fc2 <- nn_linear(in_features = 128, out_features = 1)
+    
+  },
+  
+ # ...
+)
+```
+
+The convolutional (often abbreviated *conv*) layers apply a filter (or: kernel) of size 3 x 3. This filter slides over the image and computes local aggregates. In fact, there is not just a single filter, there are:
+
+-    32 of them in the first conv layer,
+
+-   64 in the second, and
+
+-   128 in the third.
+
+The filters are trained to pick up informative spatial features, features that will be able to tell us something about the image.
 
 In addition to the three conv layers, we have two linear ones. These are the prototypical neural network layers that get input from all units in the previous layer, combine individual contributions as they see fit, and send on their own individual results to all units in the next layer. The first linear layer will act on the features received from the last conv layer; it consists of 128 units. The second one is the output layer. It outputs a single numeric value, a value that represents the guess our network is making about the size of the correlation.
 
-Now, while `initialize()` defines the layers, `forward()` specifies the order in which to call them -- and what to do "in between". What are these things that happen "in between"? In fact, they are of different types.
+Now, while `initialize()` defines the layers, `forward()` specifies the order in which to call them -- and what to do "in between":
 
-Firstly, we have `nnf_relu()`, called three times: after each of the conv layers and after the first linear layer. This is a so-called activation function -- a function that takes the raw results computed by a layer and performs some operation on them. In the case of `nnf_relu()`, what it does is leave positive values alone while setting negative ones to 0. You'll encounter additional activation functions when you continue your `torch` journey, but this is one of the very-most-in-use ones today.
 
-Secondly, we have `nnf_avg_pool2d(2)` , called after each conv layer. This function downsizes the image, replacing a 2 x 2 patch of pixels by its average. So while we're going *up* in the number of channels (from one via 32 and 64 to 128), we *decrease* spatial resolution.
+```r
+# zooming in on just forward() - don't run standalone
 
-Thirdly, there is `torch_flatten()`. This one doesn't compute anything - it just reshapes its tensors, going -- in this case -- from a four-dimensional structure outputted by the second conv layer to a two-dimensional one expected by the first linear layer.
+net <- nn_module(
+  
+ # ...
+  
+  forward = function(x) {
+    
+    x %>% 
+      self$conv1() %>%
+      nnf_relu() %>%
+      nnf_avg_pool2d(2) %>%
+      
+      self$conv2() %>%
+      nnf_relu() %>%
+      nnf_avg_pool2d(2) %>%
+      
+      self$conv3() %>%
+      nnf_relu() %>%
+      nnf_avg_pool2d(2) %>%
+      
+      torch_flatten(start_dim = 2) %>%
+      self$fc1() %>%
+      nnf_relu() %>%
+      
+      self$fc2()
+  }
+)
+```
 
-Now, here is the model creation code:
+What are these things that happen "in between"? In fact, they are of different types.
+
+Firstly, we have `nnf_relu()`, called three times: after each of the conv layers and after the first linear layer. This is a so-called activation function -- a function that takes the raw results computed by a layer and performs some operation on them. In the case of `nnf_relu()` (ReLU - Rectified Linear Unit) what it does is leave positive values alone while setting negative ones to 0. You'll encounter additional activation functions when you continue your `torch` journey, but ReLU is among the very-most-in-use ones today.
+
+Secondly, we have `nnf_avg_pool2d(2)` , called after each conv layer. This function downsizes the image, replacing a 2 x 2 patch of pixels by its average. So while we're going *up* in the number of channels (from 1 via 32 and 64 to 128), we *decrease* spatial resolution.
+
+Thirdly, there is `torch_flatten()`. This one doesn't compute anything - it just reshapes its inputs, going -- in this case -- from a four-dimensional structure outputted by the second conv layer to the two-dimensional one expected by the first linear layer.
+
+Now, here is the complete model creation code:
 
 
 ```r
@@ -357,12 +422,7 @@ net <- nn_module(
       self$fc2()
   }
 )
-```
 
-Let's create one, then!
-
-
-```r
 model <- net()
 ```
 
@@ -418,7 +478,7 @@ In neural network libraries, optimizers take care of adapting the network weight
 optimizer <- optim_adam(model$parameters)
 ```
 
-How does it know which way to change the parameters? We need to decide on a reasonable way to assess model performance. Here we're trying to predict a numerical value -- the size of the correlation. Thus, a measure like mean squared error is adequate. This line (in the upcoming code snipped) computes the mean squared error between model predictions and the target value:
+How does it know which way to change the parameters? We need to decide on a reasonable way to assess model performance. Here we're trying to predict a numerical value -- the size of the correlation. Thus, a measure like mean squared error is adequate. This line (in the upcoming code snippet) computes mean squared error between model predictions and target value:
 
 
 ```r
@@ -480,7 +540,7 @@ train_batch <- function(b) {
 }
 ```
 
-Whenever we'll have passed through the training set once, we want to double-check performance on the validation set.
+Whenever we'll have passed through the training set once, we'll want to double-check performance on the validation set.
 
 
 ```r
