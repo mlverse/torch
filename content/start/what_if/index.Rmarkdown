@@ -318,3 +318,53 @@ net <- nn_module(
 ```
 
 Once you're found that a regularizing measure works -- meaning, performance on the validation set is similar to that on the training set, or maybe even better -- you can go back and add more capacity to the network: add more layers, train for a longer time, etc. Maybe you'll arrive at better performance overall!
+
+# What if ... we wanted to train on GPU?
+
+Let's end this section on a quite different question: If you have access to a GPU, you'll probably want to use it -- but how?
+
+In `torch` , tensors live on *devices*. Most often, this will be either the CPU or a GPU. Operations may be executed on different devices, and tensors can be moved between them.
+
+To successfully execute an operation that takes as input two tensors -- a matrix multiplication, say -- both need to be present on the same device. What this means in practice is that model *parameters* and input *data* have to either *both* exist on the CPU or *both* on the GPU.
+
+For the model, a one-liner moves all its parameters:
+
+```{r}
+
+model <- net()
+
+model <- model$to(device = "cuda")
+```
+
+The data we just move "on demand", that is:
+
+-    when we're passing the input to the model
+
+-   when we compute the loss (assuming the predictions are CUDA tensors, as they will be when returned by a GPU-resident model)
+
+```{r}
+# analogously for validation and test loops
+
+train_batch <- function(b) {
+  
+  optimizer$zero_grad()
+  
+  # get predictions
+  output <- model(b$x$to(device = "cuda"))
+  
+  # calculate loss
+  loss <- nnf_mse_loss(output, b$y$unsqueeze(2)$to(device = "cuda"))
+
+  # have gradients get calculated        
+  loss$backward()
+  
+  # have gradients get applied
+  optimizer$step()
+  
+  loss$item()
+  
+}
+
+```
+
+One thing to note: Depending on the capacity of the GPU you're using, you may have to decrease batch size to avoid out-of-memory errors. For example, with a 4G GPU I had to reduce batch size to 16.

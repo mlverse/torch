@@ -221,8 +221,7 @@ length(train_dl)
 To access the first batch, we create an iterator from the `DataLoader` and ask it for the first batch. Even if it weren't for plotting, you might do this just to check that the dimensions look ok:
 
 ```{r}
-iter <- train_dl$.iter()
-batch <-iter$.next()
+batch <- dataloader_make_iter(train_dl) %>% dataloader_next()
 
 dim(batch$x)
 dim(batch$y)
@@ -312,7 +311,7 @@ net <- nn_module(
 
 The convolutional (often abbreviated *conv*) layers apply a filter (or: kernel) of size 3 x 3. This filter slides over the image and computes local aggregates. In fact, there is not just a single filter, there are:
 
--    32 of them in the first conv layer,
+-   32 of them in the first conv layer,
 
 -   64 in the second, and
 
@@ -602,31 +601,59 @@ for (epoch in 1:num_epochs) {
 
     Loss at epoch 10: training: 0.00093, validation: 0.00123
 
-As you can see, the network has made good progress -- on both training and validation set. How about the test set? Again, before running the respective code we want to make sure we're in evaluation mode.
+As you can see, the network has made good progress -- on both training and validation set. How about the test set? And how good of a fit are the inferred correlations?
+
+# Evaluate performance
+
+To find out, we keep track of predictions and true correlations, so we can compare them later.
+
+Again, before running the respective code we want to make sure we're in evaluation mode.
 
 ```{r}
 model$eval()
 
 test_batch <- function(b) {
-
-  output <- model(b$x)
-  loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
+  
+  output <- model(b$x$to(device = "cuda"))
+  loss <- nnf_mse_loss(output, b$y$unsqueeze(2)$to(device = "cuda"))
+  
+  preds <<- c(preds, output$to(device = "cpu") %>% as.numeric())
+  targets <<- c(targets, b$y %>% as.numeric())
   test_losses <<- c(test_losses, loss$item())
-
+  
 }
 
 test_losses <- c()
+preds <- c()
+targets <- c()
 
 for (b in enumerate(test_dl)) {
   test_batch(b)
 }
 
 mean(test_losses)
-
 ```
 
     [1] 0.001346638
 
-Pretty similar to validation-set performance.
+So no surprises from the loss. Now let's inspect the predictions -- and as we're dealing with those all the time, why not create a scatterplot?
+
+```{r}
+df <- data.frame(preds = preds, targets = targets)
+
+library(ggplot2)
+
+ggplot(df, aes(x = targets, y = preds)) +
+  geom_point(size = 0.1) +
+  theme_classic() +
+  xlab("true correlations") +
+  ylab("model predictions")
+```
+
+```{r, echo = FALSE, eval=TRUE, out.width="80%"}
+knitr::include_graphics("scatter.png")
+```
+
+Want to guess the correlation ...?
 
 So that's it - you've seen the complete workflow end-to-end, from data loading to model evaluation. The next tutorial asks a few *what if?* questions -- e.g., what if I don't want to predict a numerical output? -- and offers some ideas for experimentation.

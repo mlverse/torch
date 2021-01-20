@@ -1,6 +1,6 @@
 ---
 title: get started
-subtitle: Welcome to torch!
+subtitle: welcome to torch!
 ---
 
 Hi there! In these three tutorials, we show you how to get started with `torch` -- whether you've done deep learning before (with Keras, for example) or not.
