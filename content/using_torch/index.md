@@ -1,8 +1,8 @@
 ---
-title: using torch
+title: torch in action
 ---
 
-Once you've learned [the basics](/getting_started), you're ready to dive into applied examples. The list of examples keeps growing as the ecosystem evolves. What area are you interested in?
+You've run your first [torch demo](/start/), and acquainted yourself with the [main actors](/technical/) (tensors, modules, optimizers)? Then you're ready to dive into applied examples. The list of examples keeps growing as the ecosystem evolves. What area are you interested in?
 
 -   [Image recognition](#imag)
 -   [Tabular data](#tab)

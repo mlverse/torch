@@ -1,0 +1,20 @@
+{{ $page := . }}
+<div class="column25-left {{ if ne $page.File.Dir "technical/" }}hideOnMobile{{ end }}">
+  <div class="section">
+    <div class="section">
+      <div class="technical sectionTitle">
+          {{ with .Site.GetPage "section" "technical" }}
+          <a class = "sectionTitle {{ if eq $page.RelPermalink .RelPermalink }}current{{ end }}" href="{{ .RelPermalink }}">
+          {{ .Title }}
+          {{ end }}
+          </a>
+      </div>
+    </div>
+  {{ range (where .Site.RegularPages.ByWeight "Section" "technical" ) }}
+    <div class="section">
+        <div class="sectionTitle">{{ .Weight }}&nbsp&nbsp<a class = "sectionTitle {{ if eq $page.RelPermalink .RelPermalink }}current{{ end }}" href="{{ .RelPermalink }}">{{ .Title | humanize }}</a>
+        </div>
+    </div>
+    {{ end }}
+  </div>
+</div>

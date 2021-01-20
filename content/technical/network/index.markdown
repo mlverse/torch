@@ -1,0 +1,325 @@
+---
+title: "Network from scratch"
+weight: 1
+description: | 
+  Code a neural network from scratch.
+---
+
+Our first version of the network will make use of "just" one `torch` feature: tensors. In fact, "just" doesn't quite fit as a qualifier, as tensors really are all we need! However, you'll soon see how much easier it gets through functionality built on top: automatic differentiation, optimizers, and neural network modules. For now though, just take this as a holistic example, as well as a motivation to learn more about tensors in the upcoming section.
+
+To see tensors in action, we don't even have to wait until we code the network. Definitely, we need something for it to work on, and that data already we can simulate with `torch`.
+
+# Generate random data
+
+We use `torch_randn()` to simulate standard-normally-distributed data, of a desired shape. For example:
+
+
+```r
+library(torch)
+torch_randn(2, 3, 4)
+```
+
+```
+## torch_tensor
+## (1,.,.) = 
+##   0.6930  1.0607  1.5802  0.0529
+##   1.6168  0.3958 -0.4885  1.5357
+##   1.2671  0.8729  0.1229  0.9226
+## 
+## (2,.,.) = 
+##  -0.3704  0.5151  1.3497  0.5579
+##   0.5856  0.2416 -1.0963  2.0886
+##   0.5494  0.1053 -0.0875 -0.3887
+## [ CPUFloatType{2,3,4} ]
+```
+
+For our example, we want to have three input features ...
+
+
+```r
+# input dimensionality (number of input features)
+d_in <- 3
+```
+
+... and we want to predict a single outcome.
+
+
+```r
+# output dimensionality (number of predicted features)
+d_out <- 1
+```
+
+We will have a hundred observations in the training set.
+
+
+```r
+# number of observations in training set
+n <- 100
+```
+
+So we create the data, with input `x` normally distributed and outcome `y`, dependent on all three features but a bit noisy:
+
+
+```r
+# create random data
+# input
+x <- torch_randn(n, d_in)
+# target
+y <- x[, 1, drop = FALSE] * 0.2 - x[, 2, drop = FALSE] * 1.3 - x[, 3, drop = FALSE] * 0.5 + torch_randn(n, 1)
+```
+
+# Initialize weights
+
+`torch_randn()` is one of several functions used to initialize tensors of arbitrary shape. Seeing how we're at it, there is another place where we need to do something like this. With neural networks, it's all about the *weights*: those updateable parameters that determine how an intermediate result calculated by layer `n`'s units influences the units in layer `n+1`.
+
+There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 100 (number of observations) by 32.
+
+That matrix will be updated during training, but we need to initialize it, and that, again, is accomplished using `torch_randn()`:
+
+
+```r
+# dimensionality of hidden layer
+d_hidden <- 32
+
+# weights connecting input to hidden layer
+w1 <- torch_randn(d_in, d_hidden)
+```
+
+The hidden layer, in turn, is connected to an output layer of a single unit. The corresponding weight matrix, then, has size `32x1`:
+
+
+```r
+# weights connecting hidden to output layer
+w2 <- torch_randn(d_hidden, d_out)
+```
+
+Now, the second type of weight, called *bias*, is not per connection, but per *unit*. Those biases we initialize to all zeroes:
+
+
+```r
+# hidden layer bias
+b1 <- torch_zeros(1, d_hidden)
+# output layer bias
+b2 <- torch_zeros(1, d_out)
+```
+
+Now, we're ready for the action.
+
+# Training loop
+
+*The network*, the way we'll code it in this low-level version, is not a programmatic entity -- not a module or a class or an object. The network *is* what it *does:*
+
+-   go forward through the layers, computing the so-called *activations* (which are, in effect, just tensors!),
+
+-   compare the final activations thus computed with the target, yielding the so-called *loss* (this one too, just a tensor!),
+
+-   go backward, using the loss to calculate the directions in which to modify the weights (which were ... yes, well ... tensors), and finally,
+
+-   update the weights accordingly.
+
+All this it does for how long we ask it to, by having that mechanism run in a loop.
+
+Now we look at each of these activities in turn.
+
+## Forward pass
+
+We have two layers (not counting the input): one hidden layer and the output layer.
+
+For each of those, there are two calculations to perform: First, multiply the incoming tensor with the weight matrix and add the bias vector; and second, apply the desired *activation function*.
+
+`torch_mm()`, or just `mm()` if used as an instance method on a tensor, multiplies two matrices. For mathematical operations such as addition, subtraction or element-wise multiplication, we can use the overloaded operators `+`, `-` and `*`, respectively.
+
+So here is calculation number one for the hidden layer:
+
+
+```r
+  # compute pre-activations of hidden layers (dim: 100 x 32)
+  # torch_mm does matrix multiplication
+  h <- x$mm(w1) + b1
+```
+
+Next, the activation function. ReLU (Rectified Linear Unit) is an impressive-sounding name for something pretty simple (yet pretty successful!) -- we set all values below zero to 0. This is done making use of `torch`s many methods that operate on tensors, -- here, `clamp()`:
+
+
+```r
+  # apply activation function (dim: 100 x 32)
+  # torch_clamp cuts off values below/above given thresholds
+  h_relu <- h$clamp(min = 0)
+```
+
+That's it for the hidden layer. The output layer does not have an activation function (although it could have, were it to predict a different kind of variable), so all we have to do is multiply by the weights and add the bias:
+
+
+```r
+  # compute output (dim: 100 x 1)
+  y_pred <- h_relu$mm(w2) + b2
+```
+
+The next activity is to compute the loss.
+
+## Loss computation
+
+Our task being regression, an adequate loss to compute is mean squared error. Using a mixture of overloaded operators and tensor methods, a single line is sufficient:
+
+
+```r
+  loss <- as.numeric((y_pred - y)$pow(2)$sum())
+```
+
+## Backward pass (backpropagation)
+
+So calculating the loss from scratch was straightforward; unfortunately though, the same does not hold for that essential thing that makes a neural network a network: backpropagation. Backpropagation means: Check how far off are your predictions (that's what the loss tells you), then go back layer by layer and adjust the weights so that next time, the loss will decrease.
+
+In principle, that's applying the chain rule from calculus -- but knowing how this works in detail is in no way required for using `torch`! The piece of code that follows is the very first thing we'll remove, right in the next tutorial. The point we're making here is just this: You can, if you want to, do all the math manually, using nothing but tensor operations. You can, but you don't have to!
+
+
+```r
+  # gradient of loss w.r.t. prediction (dim: 100 x 1)
+  grad_y_pred <- 2 * (y_pred - y)
+  # gradient of loss w.r.t. w2 (dim: 32 x 1)
+  grad_w2 <- h_relu$t()$mm(grad_y_pred)
+  # gradient of loss w.r.t. hidden activation (dim: 100 x 32)
+  grad_h_relu <- grad_y_pred$mm(w2$t())
+  # gradient of loss w.r.t. hidden pre-activation (dim: 100 x 32)
+  grad_h <- grad_h_relu$clone()
+  
+  grad_h[h < 0] <- 0
+  
+  # gradient of loss w.r.t. b2 (shape: ())
+  grad_b2 <- grad_y_pred$sum()
+  
+  # gradient of loss w.r.t. w1 (dim: 3 x 32)
+  grad_w1 <- x$t()$mm(grad_h)
+  # gradient of loss w.r.t. b1 (shape: (32, ))
+  grad_b1 <- grad_h$sum(dim = 1)
+```
+
+## Weight updates
+
+Finally, we need to update those weights. This is far less tedious than the previous step, but still, we won't regret seeing this disappear as well, in the final version.
+
+
+```r
+  learning_rate <- 1e-4
+  
+  w2 <- w2 - learning_rate * grad_w2
+  b2 <- b2 - learning_rate * grad_b2
+  w1 <- w1 - learning_rate * grad_w1
+  b1 <- b1 - learning_rate * grad_b1
+```
+
+Now that we've talked through all the steps, here is the complete code, ready to run.
+
+# Complete network using `torch` tensors
+
+
+```r
+library(torch)
+
+### generate training data -----------------------------------------------------
+
+# input dimensionality (number of input features)
+d_in <- 3
+# output dimensionality (number of predicted features)
+d_out <- 1
+# number of observations in training set
+n <- 100
+
+
+# create random data
+x <- torch_randn(n, d_in)
+y <- x[, 1, drop = FALSE] * 0.2 - x[, 2, drop = FALSE] * 1.3 - x[, 3, drop = FALSE] * 0.5 + torch_randn(n, 1)
+
+### initialize weights ---------------------------------------------------------
+
+# dimensionality of hidden layer
+d_hidden <- 32
+# weights connecting input to hidden layer
+w1 <- torch_randn(d_in, d_hidden)
+# weights connecting hidden to output layer
+w2 <- torch_randn(d_hidden, d_out)
+
+# hidden layer bias
+b1 <- torch_zeros(1, d_hidden)
+# output layer bias
+b2 <- torch_zeros(1, d_out)
+
+### network parameters ---------------------------------------------------------
+
+learning_rate <- 1e-4
+
+### training loop --------------------------------------------------------------
+
+for (t in 1:200) {
+  ### -------- Forward pass --------
+  
+  # compute pre-activations of hidden layers (dim: 100 x 32)
+  h <- x$mm(w1) + b1
+  # apply activation function (dim: 100 x 32)
+  h_relu <- h$clamp(min = 0)
+  # compute output (dim: 100 x 1)
+  y_pred <- h_relu$mm(w2) + b2
+  
+  ### -------- compute loss --------
+
+  loss <- as.numeric((y_pred - y)$pow(2)$sum())
+  
+  if (t %% 10 == 0)
+    cat("Epoch: ", t, "   Loss: ", loss, "\n")
+  
+  ### -------- Backpropagation --------
+  
+  # gradient of loss w.r.t. prediction (dim: 100 x 1)
+  grad_y_pred <- 2 * (y_pred - y)
+  # gradient of loss w.r.t. w2 (dim: 32 x 1)
+  grad_w2 <- h_relu$t()$mm(grad_y_pred)
+  # gradient of loss w.r.t. hidden activation (dim: 100 x 32)
+  grad_h_relu <- grad_y_pred$mm(
+    w2$t())
+  # gradient of loss w.r.t. hidden pre-activation (dim: 100 x 32)
+  grad_h <- grad_h_relu$clone()
+  
+  grad_h[h < 0] <- 0
+  
+  # gradient of loss w.r.t. b2 (shape: ())
+  grad_b2 <- grad_y_pred$sum()
+  
+  # gradient of loss w.r.t. w1 (dim: 3 x 32)
+  grad_w1 <- x$t()$mm(grad_h)
+  # gradient of loss w.r.t. b1 (shape: (32, ))
+  grad_b1 <- grad_h$sum(dim = 1)
+  
+  ### -------- Update weights --------
+  
+  w2 <- w2 - learning_rate * grad_w2
+  b2 <- b2 - learning_rate * grad_b2
+  w1 <- w1 - learning_rate * grad_w1
+  b1 <- b1 - learning_rate * grad_b1
+  
+}
+```
+
+```
+## Epoch:  10    Loss:  318.4779 
+## Epoch:  20    Loss:  188.6638 
+## Epoch:  30    Loss:  142.708 
+## Epoch:  40    Loss:  120.3968 
+## Epoch:  50    Loss:  108.7347 
+## Epoch:  60    Loss:  102.2032 
+## Epoch:  70    Loss:  98.18359 
+## Epoch:  80    Loss:  95.74159 
+## Epoch:  90    Loss:  94.07236 
+## Epoch:  100    Loss:  92.82318 
+## Epoch:  110    Loss:  91.88651 
+## Epoch:  120    Loss:  91.13139 
+## Epoch:  130    Loss:  90.50255 
+## Epoch:  140    Loss:  89.98438 
+## Epoch:  150    Loss:  89.53185 
+## Epoch:  160    Loss:  89.00684 
+## Epoch:  170    Loss:  88.52534 
+## Epoch:  180    Loss:  88.08672 
+## Epoch:  190    Loss:  87.6752 
+## Epoch:  200    Loss:  87.29878
+```
+
+And that's it -- a neural network from scratch, using nothing but `torch` tensors. Let's learn more about tensors [next](/technical/tensors).

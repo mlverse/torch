@@ -1,12 +1,12 @@
 ---
-title: "Introducing torch autograd"
-weight: 2
+title: "Autograd"
+weight: 3
 description: | 
   Use autograd for automatic differentiation.
 ---
 
 
-In the previous tutorial, we saw how to code a simple network from
+In the first tutorial, we saw how to code a simple network from
 scratch, using nothing but `torch` *tensors*. Predictions, loss,
 gradients, weight updates -- all these things we've been computing
 ourselves. Here, we make a significant change: Namely, we spare
@@ -37,8 +37,7 @@ As users, we can see a bit of the implementation. As a prerequisite for
 this "recording" to happen, tensors have to be created with
 `requires_grad = TRUE`. For example:
 
-
-```r
+```{r}
 library(torch)
 
 x <- torch_ones(2, 2, requires_grad = TRUE)
@@ -52,45 +51,30 @@ some operation on that tensor, assigning the result to `y`,
 [^simple_net_autograd-1]: Unless we *want* to change the data, as when
     generating adversarial examples.
 
-
-```r
+```{r}
 y <- x$mean()
 ```
 
 we find that `y` now has a non-empty `grad_fn` that tells `torch` how to
 compute the gradient of `y` with respect to `x`:
 
-
-```r
+```{r}
 y$grad_fn
-```
-
-```
-## MeanBackward0
 ```
 
 
 Actual *computation* of gradients is triggered by calling `backward()`
 on the output tensor.
 
-
-```r
+```{r}
 y$backward()
 ```
 
 After `backward()` has been called, `x` has a non-null field termed
 `grad` that stores the gradient of `y` with respect to `x`:
 
-
-```r
+```{r}
 x$grad
-```
-
-```
-## torch_tensor
-##  0.2500  0.2500
-##  0.2500  0.2500
-## [ CPUFloatType{2,2} ]
 ```
 
 With longer chains of computations, we can take a glance at how `torch`
@@ -103,8 +87,7 @@ complex example -- feel free to skip if you're not the type who just
 We build up a simple graph of tensors, with inputs `x1` and `x2` being
 connected to output `out` by intermediaries `y` and `z`.
 
-
-```r
+```{r}
 x1 <- torch_ones(2, 2, requires_grad = TRUE)
 x2 <- torch_tensor(1.1, requires_grad = TRUE)
 
@@ -119,8 +102,7 @@ To save memory, intermediate gradients are normally not being stored.
 Calling `retain_grad()` on a tensor allows one to deviate from this
 default. Let's do this here, for the sake of demonstration:
 
-
-```r
+```{r}
 y$retain_grad()
 
 z$retain_grad()
@@ -129,127 +111,57 @@ z$retain_grad()
 Now we can go backwards through the graph and inspect `torch`'s action
 plan for backprop, starting from `out$grad_fn`, like so:
 
-
-```r
+```{r}
 # how to compute the gradient for mean, the last operation executed
 out$grad_fn
 ```
 
-```
-## MeanBackward0
-```
 
-
-
-```r
+```{r}
 # how to compute the gradient for the multiplication by 3 in z = y.pow(2) * 3
 out$grad_fn$next_functions
 ```
 
-```
-## [[1]]
-## MulBackward1
-```
 
-
-
-```r
+```{r}
 # how to compute the gradient for pow in z = y.pow(2) * 3
 out$grad_fn$next_functions[[1]]$next_functions
-```
 
 ```
-## [[1]]
-## PowBackward0
-```
 
 
-
-```r
+```{r}
 # how to compute the gradient for the multiplication in y = x * (x + 2)
 out$grad_fn$next_functions[[1]]$next_functions[[1]]$next_functions
-```
 
 ```
-## [[1]]
-## MulBackward0
-```
 
 
-
-```r
+```{r}
 # how to compute the gradient for the two branches of y = x * (x + 2),
 # where the left branch is a leaf node (AccumulateGrad for x1)
 out$grad_fn$next_functions[[1]]$next_functions[[1]]$next_functions[[1]]$next_functions
-```
 
 ```
-## [[1]]
-## torch::autograd::AccumulateGrad
-## [[2]]
-## AddBackward1
-```
 
 
-
-```r
+```{r}
 # here we arrive at the other leaf node (AccumulateGrad for x2)
 out$grad_fn$next_functions[[1]]$next_functions[[1]]$next_functions[[1]]$next_functions[[2]]$next_functions
-```
 
-```
-## [[1]]
-## torch::autograd::AccumulateGrad
 ```
 
 
 If we now call `out$backward()`, all tensors in the graph will have
 their respective gradients calculated.
 
-
-```r
+```{r}
 out$backward()
 
 z$grad
-```
-
-```
-## torch_tensor
-##  0.2500  0.2500
-##  0.2500  0.2500
-## [ CPUFloatType{2,2} ]
-```
-
-```r
 y$grad
-```
-
-```
-## torch_tensor
-##  4.6500  4.6500
-##  4.6500  4.6500
-## [ CPUFloatType{2,2} ]
-```
-
-```r
 x2$grad
-```
-
-```
-## torch_tensor
-##  18.6000
-## [ CPUFloatType{1} ]
-```
-
-```r
 x1$grad
-```
-
-```
-## torch_tensor
-##  14.4150  14.4150
-##  14.4150  14.4150
-## [ CPUFloatType{2,2} ]
 ```
 
 
@@ -266,8 +178,7 @@ With `torch` keeping track of operations as required, we don't even have
 to explicitly name the intermediate tensors any more. We can code
 forward pass, loss calculation, and backward pass in just three lines:
 
-
-```r
+```{r, eval = FALSE}
 y_pred <- x$mm(w1)$add(b1)$clamp(min = 0)$mm(w2)$add(b2)
   
 loss <- (y_pred - y)$pow(2)$sum()
@@ -280,8 +191,7 @@ manually compute the forward pass and the loss, and we still manually
 update the weights. Due to the latter, there is something I need to
 explain. But I'll let you check out the new version first:
 
-
-```r
+```{r}
 library(torch)
 
 ### generate training data -----------------------------------------------------
@@ -352,29 +262,6 @@ for (t in 1:200) {
    })
 
 }
-```
-
-```
-## Epoch:  10    Loss:  181.6566 
-## Epoch:  20    Loss:  140.5912 
-## Epoch:  30    Loss:  123.9891 
-## Epoch:  40    Loss:  113.9412 
-## Epoch:  50    Loss:  106.4017 
-## Epoch:  60    Loss:  100.5255 
-## Epoch:  70    Loss:  95.92051 
-## Epoch:  80    Loss:  91.98795 
-## Epoch:  90    Loss:  87.82715 
-## Epoch:  100    Loss:  84.58553 
-## Epoch:  110    Loss:  81.90162 
-## Epoch:  120    Loss:  79.73075 
-## Epoch:  130    Loss:  77.95315 
-## Epoch:  140    Loss:  76.42787 
-## Epoch:  150    Loss:  75.14869 
-## Epoch:  160    Loss:  74.05347 
-## Epoch:  170    Loss:  73.06866 
-## Epoch:  180    Loss:  72.21603 
-## Epoch:  190    Loss:  71.43427 
-## Epoch:  200    Loss:  70.70985
 ```
 
 As explained above, after `some_tensor$backward()`, all tensors
