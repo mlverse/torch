@@ -639,10 +639,10 @@ model$eval()
 
 test_batch <- function(b) {
   
-  output <- model(b$x$to(device = "cuda"))
-  loss <- nnf_mse_loss(output, b$y$unsqueeze(2)$to(device = "cuda"))
+  output <- model(b$x)
+  loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
   
-  preds <<- c(preds, output$to(device = "cpu") %>% as.numeric())
+  preds <<- c(preds, output %>% as.numeric())
   targets <<- c(targets, b$y %>% as.numeric())
   test_losses <<- c(test_losses, loss$item())
   
