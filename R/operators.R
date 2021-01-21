@@ -358,3 +358,13 @@ sum.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
     return(Reduce(`+`, lapply(l, torch_sum)))
   }
 }
+
+#' @export
+mean.torch_tensor <- function(x, dim, keepdim = FALSE, na.rm = FALSE, ...) {
+  if (na.rm) stop('Torch tensors do not have NAs!')
+  if (!missing(dim)) {
+    torch_mean(x, dim, keepdim)
+  } else {
+    torch_mean(x)
+  }
+}
