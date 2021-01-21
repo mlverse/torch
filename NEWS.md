@@ -8,6 +8,7 @@
 - Added `nn_layer_norm`. (#435)
 - Allow `timeout=360` as `install_torch()` parameter for large file download (@cregouby #438)
 - Added `install_torch_from_file()` and `get_install_libs_url()`for setup cases where direct download is not possible (@cregouby #439)
+- Added `mean.torch_tensor` (#448)
 
 # torch 0.2.1
 
