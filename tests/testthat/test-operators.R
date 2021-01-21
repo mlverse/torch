@@ -360,3 +360,20 @@ test_that("| works", {
   expect_equal_to_r(x | 0, c(FALSE, TRUE))
 })
 
+test_that("mean works", {
+  
+  x <- c(1,2,3,4)
+  
+  expect_equal_to_r(
+    mean(torch_tensor(x)),
+    2.5
+  )
+  
+  x <- torch_randn(20, 100)
+  
+  expect_tensor_shape(mean(x, dim = 1), 100)
+  expect_tensor_shape(mean(x, dim = 2), 20)
+  expect_tensor_shape(mean(x, dim = 1, keepdim = TRUE), c(1, 100))
+  expect_tensor_shape(mean(x, dim = 2, keepdim = TRUE), c(20, 1))
+  
+})
