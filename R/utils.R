@@ -18,7 +18,7 @@ add_class_definition <- function(r6_class_generator){
   .class_def <- r6_class_generator
   .wrapped_new <- function(...){
     .object <- .new(...)
-    .object$.__enclos_env__$class_def <- .class_def
+    .object$.__enclos_env__$self$class_def <- .class_def
     .object
   }
   r6_class_generator$unlock()

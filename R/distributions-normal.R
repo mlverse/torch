@@ -29,10 +29,20 @@ Normal <- R6::R6Class(
     }, 
     
     expand = function(batch_shape, .instance=NULL){
-      new <- self$.get_checked_instance(super, .instance)
-      new$loc = self$loc$expand(batch_shape)
-      new$scale = self$scale$expand(batch_shape)
-      super$initialize(batch_shape, validate_args=FALSE)
+      
+      .args <- list(
+        loc = self$loc$expand(batch_shape),
+        scale = self$scale$expand(batch_shape)
+      )
+      
+      new <- self$.get_checked_instance(self, .instance, .args)
+      
+      # new$loc <- self$loc$expand(batch_shape)
+      # new$scale <- self$scale$expand(batch_shape)
+      
+      new$.__enclos_env__$super$initialize(
+        batch_shape, validate_args=FALSE
+      )
       new$.validate_args <- self$.validate_args
       new
     },

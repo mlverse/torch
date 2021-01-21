@@ -1,6 +1,8 @@
 #' @include utils.R
 
 #' Distribution is the abstract base class for probability distributions.
+#' Note: in Python, adding torch.Size objects works as concatenation
+#' Try for example: torch.Size((2, 1)) + torch.Size((1,))
 Distribution <- R6::R6Class(
   "torch_Distribution",
   lock_objects = FALSE,
@@ -152,18 +154,18 @@ Distribution <- R6::R6Class(
         value_error('The value argument must be within the support')
     },
     
-    .get_checked_instance = function(cls, .instance = NULL){
-      if (is.null(.instance) && identical(self$initialize, cls$initialize))
+    .get_checked_instance = function(cls, .instance = NULL, .args){
+      if (is.null(.instance) && !identical(self$initialize, cls$initialize))
         #' TODO: consider different message
         not_implemented_error(
           "Subclass {paste0(class(self), collapse = ' ')} of ", 
           "{paste0(class(cls), collapse = ' ')} ",
-          "that defines a custom initialize() method ",
+          "that defines a custom `initialize()` method ",
           "must also define a custom `expand()` method."
         )
       
       if (is.null(.instance))
-        return(self$class_def$new())
+        return(do.call(self$class_def$new, .args))
       else
         return(.instance)
     },
