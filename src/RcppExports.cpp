@@ -28979,6 +28979,60 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_namespace_normal_double_double
+Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_double_double(double mean, double std, std::vector<int64_t> size, Rcpp::XPtr<XPtrTorchGenerator> generator, Rcpp::XPtr<XPtrTorchGenerator> options);
+RcppExport SEXP _torch_cpp_namespace_normal_double_double(SEXP meanSEXP, SEXP stdSEXP, SEXP sizeSEXP, SEXP generatorSEXP, SEXP optionsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type mean(meanSEXP);
+    Rcpp::traits::input_parameter< double >::type std(stdSEXP);
+    Rcpp::traits::input_parameter< std::vector<int64_t> >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchGenerator> >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchGenerator> >::type options(optionsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_namespace_normal_double_double(mean, std, size, generator, options));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_namespace_normal_double_tensor
+Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_double_tensor(double mean, Rcpp::XPtr<XPtrTorchTensor> std, Rcpp::XPtr<XPtrTorchGenerator> generator);
+RcppExport SEXP _torch_cpp_namespace_normal_double_tensor(SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type mean(meanSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type std(stdSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchGenerator> >::type generator(generatorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_namespace_normal_double_tensor(mean, std, generator));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_namespace_normal_tensor_double
+Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_tensor_double(Rcpp::XPtr<XPtrTorchTensor> mean, double std, Rcpp::XPtr<XPtrTorchGenerator> generator);
+RcppExport SEXP _torch_cpp_namespace_normal_tensor_double(SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type mean(meanSEXP);
+    Rcpp::traits::input_parameter< double >::type std(stdSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchGenerator> >::type generator(generatorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_namespace_normal_tensor_double(mean, std, generator));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_namespace_normal_tensor_tensor
+Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_tensor_tensor(Rcpp::XPtr<XPtrTorchTensor> mean, Rcpp::XPtr<XPtrTorchTensor> std, Rcpp::XPtr<XPtrTorchGenerator> generator);
+RcppExport SEXP _torch_cpp_namespace_normal_tensor_tensor(SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type mean(meanSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type std(stdSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchGenerator> >::type generator(generatorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_namespace_normal_tensor_tensor(mean, std, generator));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor_list
 Rcpp::XPtr<XPtrTorchTensorList> cpp_torch_tensor_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
@@ -31419,6 +31473,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_set_num_interop_threads", (DL_FUNC) &_torch_cpp_set_num_interop_threads, 1},
     {"_torch_cpp_get_num_threads", (DL_FUNC) &_torch_cpp_get_num_threads, 0},
     {"_torch_cpp_get_num_interop_threads", (DL_FUNC) &_torch_cpp_get_num_interop_threads, 0},
+    {"_torch_cpp_namespace_normal_double_double", (DL_FUNC) &_torch_cpp_namespace_normal_double_double, 5},
+    {"_torch_cpp_namespace_normal_double_tensor", (DL_FUNC) &_torch_cpp_namespace_normal_double_tensor, 3},
+    {"_torch_cpp_namespace_normal_tensor_double", (DL_FUNC) &_torch_cpp_namespace_normal_tensor_double, 3},
+    {"_torch_cpp_namespace_normal_tensor_tensor", (DL_FUNC) &_torch_cpp_namespace_normal_tensor_tensor, 3},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},

@@ -8837,6 +8837,22 @@ cpp_get_num_interop_threads <- function() {
     .Call('_torch_cpp_get_num_interop_threads', PACKAGE = 'torchpkg')
 }
 
+cpp_namespace_normal_double_double <- function(mean, std, size, generator, options) {
+    .Call('_torch_cpp_namespace_normal_double_double', PACKAGE = 'torchpkg', mean, std, size, generator, options)
+}
+
+cpp_namespace_normal_double_tensor <- function(mean, std, generator) {
+    .Call('_torch_cpp_namespace_normal_double_tensor', PACKAGE = 'torchpkg', mean, std, generator)
+}
+
+cpp_namespace_normal_tensor_double <- function(mean, std, generator) {
+    .Call('_torch_cpp_namespace_normal_tensor_double', PACKAGE = 'torchpkg', mean, std, generator)
+}
+
+cpp_namespace_normal_tensor_tensor <- function(mean, std, generator) {
+    .Call('_torch_cpp_namespace_normal_tensor_tensor', PACKAGE = 'torchpkg', mean, std, generator)
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torchpkg', x)
 }
