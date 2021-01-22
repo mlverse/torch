@@ -104,9 +104,20 @@ dataloader <- function(dataset, batch_size = 1, shuffle = FALSE,
   multiprocessing_context <- NULL
   generator <- NULL
   
-  # handle worker globals before stepping into the class env.
+  # find worker globals before stepping into the class env.
   if (is.character(worker_globals)) {
-    worker_globals <- rlang::env_get_list(nms = worker_globals, inherit = TRUE)
+    worker_globals <- rlang::env_get_list(
+      env = rlang::caller_env(),
+      nms = worker_globals, inherit = TRUE, 
+      default = structure("", class = "notfound")
+    )
+    
+    if (any(b <- sapply(worker_globals, inherits, "notfound"))) {
+      runtime_error(
+        "Could not find an object with name '{names(worker_globals)[b]}'."
+      )
+    }
+    
   }
   
   DataLoader$new(dataset, batch_size, shuffle, sampler, batch_sampler, num_workers,
