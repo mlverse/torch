@@ -65,20 +65,65 @@ dataloader_next <- function(iter, completed = NULL) {
 #' @param worker_init_fn (callable, optional): If not `NULL`, this will be called on each
 #'   worker subprocess with the worker id (an int in `[1, num_workers]`) as
 #'   input, after seeding and before data loading. (default: `NULL`)
+#' @param worker_globals (list or character vector, optional) only used when 
+#'   `num_workers > 0`. If a character vector, then objects with those names are
+#'   copied from the global environment to the workers. If a named list, then
+#'   this list is copied and attached to the worker global environment. Notice
+#'   that the objects are copied only once at the worker initialization.
+#' @param worker_packages (character vector, optional) Only used if `num_workers > 0` 
+#'   optional character vector naming packages that should be loaded in 
+#'   each worker.
+#'   
+#' @section Parallel data loading:
+#' 
+#' When using `num_workers > 0` data loading will happen in parallel for each 
+#' worker. Note that batches are taken in parallel and not observations.
+#' 
+#' The worker initialization  process happens in the following order:
+#' 
+#' - `num_workers` R sessions are initialized.
+#' 
+#' Then in each worker we perform the following actions:
+#' 
+#' - the `torch` library is loaded.
+#' - a random seed is set both using `set.seed()` and using `torch_manual_seed`.
+#' - packages passed to the `worker_packages` argument are loaded.
+#' - objects passed trough the `worker_globals` parameters are copied into the
+#'   global environment.
+#' - the `worker_init` function is ran with an `id` argument.
+#' - the dataset fetcher is copied to the worker.
+#' 
 #'
 #' @export
 dataloader <- function(dataset, batch_size = 1, shuffle = FALSE, 
                        sampler=NULL,
                        batch_sampler=NULL, num_workers=0, collate_fn=NULL,
                        pin_memory=FALSE, drop_last=FALSE, timeout=-1,
-                       worker_init_fn=NULL) {
+                       worker_init_fn=NULL, worker_globals=NULL, worker_packages=NULL) {
   
   multiprocessing_context <- NULL
   generator <- NULL
   
+  # find worker globals before stepping into the class env.
+  if (is.character(worker_globals)) {
+    worker_globals <- rlang::env_get_list(
+      env = rlang::caller_env(),
+      nms = worker_globals, inherit = TRUE, 
+      default = structure("", class = "notfound")
+    )
+    
+    if (any(b <- sapply(worker_globals, inherits, "notfound"))) {
+      runtime_error(
+        "Could not find an object with name '{names(worker_globals)[b]}'."
+      )
+    }
+    
+  }
+  
   DataLoader$new(dataset, batch_size, shuffle, sampler, batch_sampler, num_workers,
                  collate_fn, pin_memory, drop_last, timeout, worker_init_fn, 
-                 multiprocessing_context, generator)
+                 multiprocessing_context, generator, worker_globals = worker_globals,
+                 worker_packages = worker_packages)
 }
 
 DataLoader <- R6::R6Class(
@@ -89,7 +134,8 @@ DataLoader <- R6::R6Class(
                           batch_sampler=NULL, num_workers=0, collate_fn=NULL,
                           pin_memory=FALSE, drop_last=FALSE, timeout=0,
                           worker_init_fn=NULL, multiprocessing_context=NULL,
-                          generator=NULL) {
+                          generator=NULL, worker_globals = NULL, 
+                          worker_packages = NULL) {
       
       
       self$dataset <- dataset
@@ -98,6 +144,8 @@ DataLoader <- R6::R6Class(
       self$timeout <- timeout
       self$worker_init_fn <- worker_init_fn
       self$multiprocessing_context <- multiprocessing_context
+      self$worker_globals <- worker_globals
+      self$worker_packages <- worker_packages
       
       if (is_map_dataset(dataset))
         self$.dataset_kind <- "map"
@@ -192,6 +240,8 @@ BaseDataLoaderIter <- R6::R6Class(
       self$.collate_fn <- loader$collate_fn
       self$.worker_init_fn <- loader$worker_init_fn
       self$.sampler_iter <- self$.index_sampler$.iter()
+      self$.worker_globals <- loader$worker_globals
+      self$.worker_packages <- loader$worker_packages
       #self$.base_seed = torch.empty((), dtype=torch.int64).random_(generator=loader.generator).item()
       self$.num_yielded <- 0
     },
@@ -280,7 +330,8 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         private$workers[[i]] <- callr::r_session$new()
       }
       
-      worker_config <- function(id, num_workers, seed, init_fn) {
+      worker_config <- function(id, num_workers, seed, init_fn, globals, 
+                                packages) {
         library(torch)
         .worker_info <<- list(id = id, 
                               workers = num_workers,
@@ -289,6 +340,13 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         torch::torch_set_num_threads(1)
         set.seed(seed)
         torch::torch_manual_seed(seed)
+        
+        # load requested packages
+        lapply(packages, function(x) library(x, character.only = TRUE))
+        
+        # copy globals to global env
+        if (!is.null(globals))
+          list2env(globals, envir = .GlobalEnv)
         
         if (!is.null(init_fn))
           init_fn(id)
@@ -306,7 +364,9 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
             id = i, 
             num_workers = self$.num_workers, 
             seed = sample.int(1e6, 1),
-            init_fn = self$.worker_init_fn
+            init_fn = self$.worker_init_fn,
+            globals = self$.worker_globals,
+            packages = self$.worker_packages
           )
         )
         

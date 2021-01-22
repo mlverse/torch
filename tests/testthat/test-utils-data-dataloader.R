@@ -312,3 +312,69 @@ test_that("can make reproducible runs", {
   expect_equal(b1$x, b2$x)
   expect_equal_to_tensor(b1$y, b2$y)
 })
+
+test_that("load packages in dataloader", {
+  
+  ds <- dataset(
+    .length = function() {20},
+    initialize = function() {},
+    .getitem = function(id) {
+      torch_tensor("coro" %in% (.packages()))
+    }
+  )
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
+  
+  iter <- dataloader_make_iter(dl)
+  b1 <- dataloader_next(iter)
+  
+  expect_equal(torch_any(b1)$item(), FALSE)
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2, worker_packages = "coro")
+  
+  iter <- dataloader_make_iter(dl)
+  b1 <- dataloader_next(iter)
+  
+  expect_equal(torch_all(b1)$item(), TRUE)
+})
+
+test_that("globals can be found", {
+  
+  ds <- dataset(
+    .length = function() {20},
+    initialize = function() {},
+    .getitem = function(id) {
+      hello_fn()
+    }
+  )
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
+  
+  iter <- dataloader_make_iter(dl)
+  expect_error(
+    b1 <- dataloader_next(iter)  
+  )
+  
+  expect_error(
+    dl <- dataloader(ds(), batch_size = 10, num_workers = 2, 
+                     worker_globals = c("hello", "world")),
+    class = "runtime_error"
+  )
+
+  hello_fn <- function() {
+    torch_randn(5, 5)
+  }
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2, worker_globals = list(
+    hello_fn = hello_fn
+  ))
+  
+  iter <- dataloader_make_iter(dl)
+  expect_tensor_shape(dataloader_next(iter), c(10, 5, 5))
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2, 
+                   worker_globals = "hello_fn")
+  iter <- dataloader_make_iter(dl)
+  expect_tensor_shape(dataloader_next(iter), c(10, 5, 5))
+  
+})
