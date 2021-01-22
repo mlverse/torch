@@ -337,3 +337,37 @@ test_that("load packages in dataloader", {
   
   expect_equal(torch_all(b1)$item(), TRUE)
 })
+
+test_that("globals can be found", {
+  
+  ds <- dataset(
+    .length = function() {20},
+    initialize = function() {},
+    .getitem = function(id) {
+      hello_fn()
+    }
+  )
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
+  
+  iter <- dataloader_make_iter(dl)
+  expect_error(
+    b1 <- dataloader_next(iter)  
+  )
+  
+  hello_fn <- function() {
+    torch_randn(5, 5)
+  }
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2, worker_globals = list(
+    hello_fn = hello_fn
+  ))
+  
+  iter <- dataloader_make_iter(dl)
+  expect_tensor_shape(dataloader_next(iter), c(10, 5, 5))
+  
+  dl <- dataloader(ds(), batch_size = 10, num_workers = 2, worker_globals = "hello_fn")
+  iter <- dataloader_make_iter(dl)
+  expect_tensor_shape(dataloader_next(iter), c(10, 5, 5))
+  
+})
