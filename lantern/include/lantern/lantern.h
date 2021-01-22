@@ -794,6 +794,38 @@ HOST_API void lantern_vector_bool_delete (void* x)
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_normal_double_double_intarrayref_generator_tensoroptions) (double mean, double std, void* size, void* generator, void* options);
+HOST_API void* lantern_normal_double_double_intarrayref_generator_tensoroptions (double mean, double std, void* size, void* generator, void* options) 
+{
+  void* ret = _lantern_normal_double_double_intarrayref_generator_tensoroptions(mean, std, size, generator, options);
+  LANTERN_HOST_HANDLER 
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_normal_tensor_tensor_generator) (void* mean, void* std, void* generator);
+HOST_API void* lantern_normal_tensor_tensor_generator (void* mean, void* std, void* generator)
+{
+  void* ret = _lantern_normal_tensor_tensor_generator(mean, std, generator);
+  LANTERN_HOST_HANDLER 
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_normal_double_tensor_generator) (double mean, void* std, void* generator);
+HOST_API void* lantern_normal_double_tensor_generator (double mean, void* std, void* generator)
+{
+  void* ret = _lantern_normal_double_tensor_generator(mean, std, generator);
+  LANTERN_HOST_HANDLER 
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_normal_tensor_double_generator) (void* mean, double std, void* generator);
+HOST_API void* lantern_normal_tensor_double_generator (void* mean, double std, void* generator)
+{
+  void* ret = _lantern_normal_tensor_double_generator(mean, std, generator);
+  LANTERN_HOST_HANDLER 
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5378,6 +5410,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_TraceableFunction_delete);
   LOAD_SYMBOL(_set_lantern_allocator);
   LOAD_SYMBOL(_lantern_vector_bool_delete);
+  LOAD_SYMBOL(_lantern_normal_double_double_intarrayref_generator_tensoroptions);
+  LOAD_SYMBOL(_lantern_normal_tensor_tensor_generator);
+  LOAD_SYMBOL(_lantern_normal_double_tensor_generator);
+  LOAD_SYMBOL(_lantern_normal_tensor_double_generator);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
