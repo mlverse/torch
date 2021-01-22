@@ -110,10 +110,14 @@ DataLoader <- R6::R6Class(
       self$multiprocessing_context <- multiprocessing_context
       
       if (is.character(worker_globals)) {
-        self$worker_globals <- lapply(worker_globals, base::get, envir = .GlobalEnv)
+        worker_globals <- setNames(
+          lapply(worker_globals, get, envir = parent.frame()),
+          worker_globals
+        )
       }
         
-        
+      self$worker_globals <- worker_globals
+      self$worker_packages <- worker_packages
       
       if (is_map_dataset(dataset))
         self$.dataset_kind <- "map"
@@ -208,6 +212,8 @@ BaseDataLoaderIter <- R6::R6Class(
       self$.collate_fn <- loader$collate_fn
       self$.worker_init_fn <- loader$worker_init_fn
       self$.sampler_iter <- self$.index_sampler$.iter()
+      self$.worker_globals <- loader$worker_globals
+      self$.worker_packages <- loader$worker_packages
       #self$.base_seed = torch.empty((), dtype=torch.int64).random_(generator=loader.generator).item()
       self$.num_yielded <- 0
     },
@@ -296,7 +302,8 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         private$workers[[i]] <- callr::r_session$new()
       }
       
-      worker_config <- function(id, num_workers, seed, init_fn) {
+      worker_config <- function(id, num_workers, seed, init_fn, globals, 
+                                packages) {
         library(torch)
         .worker_info <<- list(id = id, 
                               workers = num_workers,
@@ -305,6 +312,13 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         torch::torch_set_num_threads(1)
         set.seed(seed)
         torch::torch_manual_seed(seed)
+        
+        # load requested packages
+        lapply(packages, function(x) library(x, character.only = TRUE))
+        
+        # copy globals to global env
+        if (!is.null(globals))
+          list2env(globals, envir = .GlobalEnv)
         
         if (!is.null(init_fn))
           init_fn(id)
@@ -322,7 +336,9 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
             id = i, 
             num_workers = self$.num_workers, 
             seed = sample.int(1e6, 1),
-            init_fn = self$.worker_init_fn
+            init_fn = self$.worker_init_fn,
+            globals = self$.worker_globals,
+            packages = self$.worker_packages
           )
         )
         
