@@ -130,7 +130,7 @@ DataLoader <- R6::R6Class(
       self$multiprocessing_context <- multiprocessing_context
       
       if (is.character(worker_globals)) {
-        worker_globals <- rlang::env_get_list(nms = worker_globals)
+        worker_globals <- rlang::env_get_list(nms = worker_globals, inherit = TRUE)
       }
         
       self$worker_globals <- worker_globals
