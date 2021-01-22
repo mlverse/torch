@@ -73,6 +73,26 @@ dataloader_next <- function(iter, completed = NULL) {
 #' @param worker_packages (character vector, optional) Only used if `num_workers > 0` 
 #'   optional character vector naming packages that should be loaded in 
 #'   each worker.
+#'   
+#' @section Parallel data loading:
+#' 
+#' When using `num_workers > 0` data loading will happen in parallel for each 
+#' worker. Note that batches are taken in parallel and not observations.
+#' 
+#' The worker initialization  process happens in the following order:
+#' 
+#' - `num_workers` R sessions are initialized.
+#' 
+#' Then in each worker we perform the following actions:
+#' 
+#' - the `torch` library is loaded.
+#' - a random seed is set both using `set.seed()` and using `torch_manual_seed`.
+#' - packages passed to the `worker_packages` argument are loaded.
+#' - objects passed trough the `worker_globals` parameters are copied into the
+#'   global environment.
+#' - the `worker_init` function is ran with an `id` argument.
+#' - the dataset fetcher is copied to the worker.
+#' 
 #'
 #' @export
 dataloader <- function(dataset, batch_size = 1, shuffle = FALSE, 
