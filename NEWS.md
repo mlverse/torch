@@ -9,6 +9,8 @@
 - Allow `timeout=360` as `install_torch()` parameter for large file download (@cregouby #438)
 - Added `install_torch_from_file()` and `get_install_libs_url()`for setup cases where direct download is not possible (@cregouby #439)
 - Added `mean.torch_tensor` (#448)
+- New arguments `worker_globals` and `worker_packages` allowing to easily pass objects to workers in parallel dataloaders (#449).
+- Removed the PerformanceReporter from tests to get easier to read stack traces. (#449)
 
 # torch 0.2.1
 
