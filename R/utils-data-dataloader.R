@@ -104,6 +104,11 @@ dataloader <- function(dataset, batch_size = 1, shuffle = FALSE,
   multiprocessing_context <- NULL
   generator <- NULL
   
+  # handle worker globals before stepping into the class env.
+  if (is.character(worker_globals)) {
+    worker_globals <- rlang::env_get_list(nms = worker_globals, inherit = TRUE)
+  }
+  
   DataLoader$new(dataset, batch_size, shuffle, sampler, batch_sampler, num_workers,
                  collate_fn, pin_memory, drop_last, timeout, worker_init_fn, 
                  multiprocessing_context, generator, worker_globals = worker_globals,
@@ -128,11 +133,6 @@ DataLoader <- R6::R6Class(
       self$timeout <- timeout
       self$worker_init_fn <- worker_init_fn
       self$multiprocessing_context <- multiprocessing_context
-      
-      if (is.character(worker_globals)) {
-        worker_globals <- rlang::env_get_list(nms = worker_globals, inherit = TRUE)
-      }
-        
       self$worker_globals <- worker_globals
       self$worker_packages <- worker_packages
       
