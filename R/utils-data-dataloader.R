@@ -65,20 +65,29 @@ dataloader_next <- function(iter, completed = NULL) {
 #' @param worker_init_fn (callable, optional): If not `NULL`, this will be called on each
 #'   worker subprocess with the worker id (an int in `[1, num_workers]`) as
 #'   input, after seeding and before data loading. (default: `NULL`)
+#' @param worker_globals (list or character vector, optional) only used when 
+#'   `num_workers > 0`. If a character vector, then objects with those names are
+#'   copied from the global environment to the workers. If a named list, then
+#'   this list is copied and attached to the worker global environment. Notice
+#'   that the objects are copied only once at the worker initialization.
+#' @param worker_packages (character vector, optional) Only used if `num_workers > 0` 
+#'   optional character vector naming packages that should be loaded in 
+#'   each worker.
 #'
 #' @export
 dataloader <- function(dataset, batch_size = 1, shuffle = FALSE, 
                        sampler=NULL,
                        batch_sampler=NULL, num_workers=0, collate_fn=NULL,
                        pin_memory=FALSE, drop_last=FALSE, timeout=-1,
-                       worker_init_fn=NULL) {
+                       worker_init_fn=NULL, worker_globals=NULL, worker_packages=NULL) {
   
   multiprocessing_context <- NULL
   generator <- NULL
   
   DataLoader$new(dataset, batch_size, shuffle, sampler, batch_sampler, num_workers,
                  collate_fn, pin_memory, drop_last, timeout, worker_init_fn, 
-                 multiprocessing_context, generator)
+                 multiprocessing_context, generator, worker_globals = worker_globals,
+                 worker_packages = worker_packages)
 }
 
 DataLoader <- R6::R6Class(
@@ -89,7 +98,8 @@ DataLoader <- R6::R6Class(
                           batch_sampler=NULL, num_workers=0, collate_fn=NULL,
                           pin_memory=FALSE, drop_last=FALSE, timeout=0,
                           worker_init_fn=NULL, multiprocessing_context=NULL,
-                          generator=NULL) {
+                          generator=NULL, worker_globals = NULL, 
+                          worker_packages = NULL) {
       
       
       self$dataset <- dataset
@@ -98,6 +108,12 @@ DataLoader <- R6::R6Class(
       self$timeout <- timeout
       self$worker_init_fn <- worker_init_fn
       self$multiprocessing_context <- multiprocessing_context
+      
+      if (is.character(worker_globals)) {
+        self$worker_globals <- lapply(worker_globals, base::get, envir = .GlobalEnv)
+      }
+        
+        
       
       if (is_map_dataset(dataset))
         self$.dataset_kind <- "map"
