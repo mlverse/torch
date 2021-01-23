@@ -4,3 +4,6 @@ deps/
 lantern
 vignettes
 .Rproj.user
+Meta
+doc
+docs
