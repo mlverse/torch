@@ -12,6 +12,13 @@ torchvision:
   url_docs: https://torchvision.mlverse.org/
   url_cran: https://cloud.r-project.org/web/packages/torchvision/index.html
   name: torchvision
+torchaudio:
+  weight: 20
+  desc: 'torchaudio is an extension for torch providing audio loading, transformations, common architectures for signal processing, pre-trained weights and access to commonly used datasets.'
+  url_git: https://github.com/curso-r/torchaudio
+  url_docs: https://curso-r.github.io/torchaudio
+  url_cran: https://cloud.r-project.org/web/packages/torchaudio/index.html
+  name: torchaudio
 you:
   weight: 100
   desc: 'If you are developing a torch extension, contact us on GitHub so we can feature it! We welcome all kinds of extensions: datasets, models, or any kind of functionality built on torch!'
