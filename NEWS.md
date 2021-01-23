@@ -11,6 +11,7 @@
 - Added `mean.torch_tensor` (#448)
 - New arguments `worker_globals` and `worker_packages` allowing to easily pass objects to workers in parallel dataloaders (#449).
 - Removed the PerformanceReporter from tests to get easier to read stack traces. (#449)
+- Fixed `torch_normal`. (#450)
 
 # torch 0.2.1
 
