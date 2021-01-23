@@ -300,6 +300,15 @@ test_that("normal works", {
   x <- torch_normal(1, torch_zeros(2,2))
   expect_tensor_shape(x, c(2,2))
   
+  x <- torch_normal(mean = torch_zeros(2,2))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(std = torch_zeros(2,2))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(size = list(2, 2))
+  expect_tensor_shape(x, c(2,2))
+  
   expect_error(torch_normal(torch_zeros(2), 1, c(2,2)), class = "value_error")
   expect_error(torch_normal(1, torch_zeros(2), c(2,2)), class = "value_error")
   expect_error(torch_normal(1, torch_zeros(2), dtype = torch_float64()), class = "value_error")

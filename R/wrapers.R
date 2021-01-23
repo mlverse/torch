@@ -96,11 +96,6 @@ torch_hann_window <- function(window_length, periodic=TRUE, dtype=NULL,
                      options = opt)
 }
 
-#' @rdname torch_normal
-torch_normal <- function(mean, std = 1L, size, generator = NULL) {
-  .torch_normal(mean, std, size, generator)
-}
-
 #' @rdname torch_result_type
 torch_result_type <- function(tensor1, tensor2) {
   
@@ -454,9 +449,17 @@ torch_nonzero <- function(self, as_list = FALSE) {
 #' @param ... Tensor option parameters like `dtype`, `layout`, and `device`. 
 #'   Can only be used when `mean` and `std` are both scalar numerics.
 #' 
+#' @rdname torch_normal
+#' 
 #' @export
 torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
  
+  if (missing(mean))
+    mean <- 0
+  
+  if (missing(std))
+    std <- 1
+  
   if (!is.null(size)) {
     if (is_torch_tensor(mean) || is_torch_tensor(std))
       value_error("size is set, but one of mean or std is not a scalar value.")
@@ -474,6 +477,7 @@ torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
     value_error("size is not set.")
   
   if (!is.null(size)) {
+    if (is.list(size)) size <- unlist(size)
     options <- do.call(torch_tensor_options, list(...))
     return(Tensor$new(ptr = cpp_namespace_normal_double_double(
       mean = mean, 

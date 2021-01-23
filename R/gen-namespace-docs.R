@@ -5942,7 +5942,7 @@ NULL
 
 #' Normal
 #'
-#' @section normal(mean, std, *, generator=NULL, out=NULL) -> Tensor :
+#' @section normal(mean, std, *) -> Tensor :
 #'
 #' Returns a tensor of random numbers drawn from separate normal distributions
 #' whose mean and standard deviation are given.
@@ -5957,30 +5957,23 @@ NULL
 #' total number of elements in each tensor need to be the same.
 #' 
 #' @note When the shapes do not match, the shape of `mean`
-#'           is used as the shape for the returned output tensor
+#'       is used as the shape for the returned output tensor
 #'
-#' @section normal(mean=0.0, std, out=NULL) -> Tensor :
+#' @section normal(mean=0.0, std) -> Tensor :
 #'
 #' Similar to the function above, but the means are shared among all drawn
 #' elements.
 #'
-#' @section normal(mean, std=1.0, out=NULL) -> Tensor :
+#' @section normal(mean, std=1.0) -> Tensor :
 #'
 #' Similar to the function above, but the standard-deviations are shared among
 #' all drawn elements.
 #'
-#' @section normal(mean, std, size, *, out=NULL) -> Tensor :
+#' @section normal(mean, std, size, *) -> Tensor :
 #'
 #' Similar to the function above, but the means and standard deviations are shared
 #' among all drawn elements. The resulting tensor has size given by `size`.
-#'
-#'
-#' @param mean (Tensor) the tensor of per-element means
-#' @param std (Tensor) the tensor of per-element standard deviations
-#' @param generator (`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' 
-#' @param size (int...) a sequence of integers defining the shape of the output tensor.
-#'
 #' @name torch_normal
 #'
 #' @export
