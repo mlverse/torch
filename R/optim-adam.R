@@ -43,27 +43,27 @@ optim_Adam <- R6::R6Class(
         amsgrad <- group$amsgrad
         
         # state initialization
-        if (length(param$state) == 0) {
-          param$state <- list()
-          param$state[["step"]] <- 0
-          param$state[["exp_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-          param$state[["exp_avg_sq"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+        if (length(state(param)) == 0) {
+          state(param) <- list()
+          state(param)[["step"]] <- 0
+          state(param)[["exp_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+          state(param)[["exp_avg_sq"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
           if (amsgrad) {
-            param$state[['max_exp_avg_sq']] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+            state(param)[['max_exp_avg_sq']] <- torch_zeros_like(param, memory_format=torch_preserve_format())
           }
         }
         
-        exp_avg <- param$state[["exp_avg"]]
-        exp_avg_sq <- param$state[["exp_avg_sq"]]
+        exp_avg <- state(param)[["exp_avg"]]
+        exp_avg_sq <- state(param)[["exp_avg_sq"]]
         if (amsgrad) {
-          max_exp_avg_sq <- param$state[['max_exp_avg_sq']]
+          max_exp_avg_sq <- state(param)[['max_exp_avg_sq']]
         }
         beta1 <- group$betas[[1]]
         beta2 <- group$betas[[2]]
         
-        param$state[["step"]] <- param$state[["step"]] + 1
-        bias_correction1 <- 1 - beta1 ^ param$state[['step']]
-        bias_correction2 <- 1 - beta2 ^ param$state[['step']]
+        state(param)[["step"]] <- state(param)[["step"]] + 1
+        bias_correction1 <- 1 - beta1 ^ state(param)[['step']]
+        bias_correction2 <- 1 - beta2 ^ state(param)[['step']]
         
         if (group$weight_decay != 0) {
           grad$add_(p, alpha=group$weight_decay)

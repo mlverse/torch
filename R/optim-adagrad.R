@@ -32,9 +32,9 @@ optim_Adagrad <- R6::R6Class(
       for (group in self$param_groups){
         for (p in seq_along(group$params)) {
           param <- group$params[[p]]
-          param$state <- list()
-          param$state[['step']] <- 0
-          param$state[['sum']]  <- torch_full_like(
+          state(param) <- list()
+          state(param)[['step']] <- 0
+          state(param)[['sum']]  <- torch_full_like(
             param, 
             initial_accumulator_value, 
             memory_format=torch_preserve_format()
@@ -48,18 +48,18 @@ optim_Adagrad <- R6::R6Class(
     #   for (group in self$param_groups){
     #     for (p in seq_along(group$params)) {
     #       param <- group$params[[p]]
-    #       param$state[['sum']]$share_memory_()
+    #       state(param)[['sum']]$share_memory_()
     #     }
     #   }
     # },
     
     step = function(closure = NULL) {
       private$step_helper(closure, function(group, param, g, p) {
-        param$state[['step']] <- param$state[['step']] + 1
+        state(param)[['step']] <- state(param)[['step']] + 1
         
         grad       <- param$grad
-        state_sum  <- param$state[['sum']]
-        state_step <- param$state[['step']]
+        state_sum  <- state(param)[['sum']]
+        state_step <- state(param)[['step']]
         
         if (group$weight_decay  != 0) {
           # if (grad$is_sparse) {
@@ -68,7 +68,7 @@ optim_Adagrad <- R6::R6Class(
           grad <- grad$add(param, alpha = group$weight_decay)
         }
         
-        clr <-  group$lr / (1 + (param$state[['step']] - 1) * group$lr_decay)
+        clr <-  group$lr / (1 + (state(param)[['step']] - 1) * group$lr_decay)
         
         # Sparse tensors handling will be added in future
         # if (grad$is_sparse) {
@@ -78,13 +78,13 @@ optim_Adagrad <- R6::R6Class(
         #   size <- grad$size()
         
         # state_sum$add_(`_make_sparse`(grad, grad_indices, grad_values.pow(2)))
-        # std <- param$state[['sum']]$sparse_mask(grad)
+        # std <- state(param)[['sum']]$sparse_mask(grad)
         # std_values <- std$`_values()`$sqrt_()$add_(group$eps)
         # param$add_(_make_sparse(grad, grad_indices, grad_values / std_values), alpha=-clr)
         #} else {
         
-        param$state[['sum']]$addcmul_(grad, grad, value = 1)
-        std <- param$state[['sum']]$sqrt()$add_(group$eps)
+        state(param)[['sum']]$addcmul_(grad, grad, value = 1)
+        std <- state(param)[['sum']]$sqrt()$add_(group$eps)
         param$addcdiv_(grad, std, value =-clr)
         
       })

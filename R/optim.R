@@ -116,3 +116,12 @@ Optimizer <- R6::R6Class(
     }
   )
 )
+
+state <- function(self) {
+  attr(self, "state")
+}
+
+`state<-` <- function(self, value) {
+  attr(self, "state") <- value
+  self
+}
