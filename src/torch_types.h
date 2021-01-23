@@ -5,7 +5,7 @@
 
 #include "lantern/lantern.h"
 
-#include <Rcpp.h>
+#include <RcppCommon.h>
 
 class XPtrTorch
 {
@@ -18,7 +18,7 @@ public:
   XPtrTorch (std::shared_ptr<void> x) {
     this->set(x);
   }
-  void* get()
+  void* get() const
   {
     return ptr.get();
   }
@@ -32,7 +32,10 @@ public:
   XPtrTorchTensor (void* x) : XPtrTorch{NULL} {
     this->set(std::shared_ptr<void>(x, lantern_Tensor_delete)); 
   }
+  operator SEXP () const;
 };
+
+#include <Rcpp.h>
 
 class XPtrTorchScalarType : public XPtrTorch {
 public:

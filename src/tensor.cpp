@@ -359,3 +359,13 @@ Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_tensor_tensor (
   return make_xptr<XPtrTorchTensor>(out); 
 }
 
+XPtrTorchTensor::operator SEXP () const {
+  return make_xptr<XPtrTorchTensor>(this->get());
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor test_fun (Rcpp::XPtr<XPtrTorch> x)
+{
+  return x.get();
+}
+

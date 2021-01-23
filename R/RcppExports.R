@@ -8853,6 +8853,10 @@ cpp_namespace_normal_tensor_tensor <- function(mean, std, generator) {
     .Call('_torch_cpp_namespace_normal_tensor_tensor', PACKAGE = 'torchpkg', mean, std, generator)
 }
 
+test_fun <- function(x) {
+    .Call('_torch_test_fun', PACKAGE = 'torchpkg', x)
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torchpkg', x)
 }
