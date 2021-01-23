@@ -1,9 +1,4 @@
 prepare_method <- function(m, active = FALSE) {
-  if (!rlang::is_function(m))
-    return(m)
-  
-  
-  rlang::fn_fmls(m) <- c(rlang::pairlist2(self=, private=), rlang::fn_fmls(m))
   
   if (active)
     attr(m, "active") <- TRUE
@@ -26,16 +21,13 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   env_bind(methods, !!!public)
   env_bind(methods, !!!active)
   env_bind(private_methods, !!!private)
-  
-  class(private_methods) <- "R7"
   methods$private <- private_methods
   
   generator <- new.env(parent = methods)
   
   generator$new <- function(...) {
-    self <- new.env(parent = generator)
+    self <- methods$initialize(...)
     class(self) <- c(classname, "R7")
-    methods$initialize(self, self$private, ...)
     self
   }
   
@@ -53,28 +45,39 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   generator
 }
 
-extract_method <- function(x, name, call = TRUE) {
-  o <- mget(name, envir = x, inherits = TRUE, ifnotfound = list(NULL))[[1]]
+extract_method <- function(self, name, call = TRUE) {
   
-  if (name == "private")
-    attr(o, "self") <- x
-  
+  if (inherits(self, "torch_tensor"))
+    o <- mget(name, envir = Tensor, inherits = TRUE, ifnotfound = list(NULL))[[1]]
+  else if (inherits(self, "torch_scalar"))
+    o <- mget(name, envir = Scalar, inherits = TRUE, ifnotfound = list(NULL))[[1]]
+  else if (inherits(self, "R7Private"))
+    o <- mget(name, envir = unclass(self)$pvt, inherits = TRUE, ifnotfound = list(NULL))[[1]]
+    
+  if (name == "private") {
+    o <- list(
+      env = environment(),
+      pvt = o
+    )
+    class(o) <- c("R7", "R7Private")
+  }
+    
   if (!is.function(o))
     return(o)
   
-  if (!is.null(attr(x, "self"))) {
-    x <- attr(x, "self")
+  if (!inherits(self, "R7Private"))
+    private <- self$private
+
+  if (inherits(self, "R7Private")) {
+    environment(o) <- unclass(self)$env
+  } else {
+    environment(o) <- environment()  
   }
-  
-  f <- function(...) {
-    o(x, x$private, ...)
-  }
-  attr(f, "active") <- attr(o, "active")
-  
+    
   if (call && isTRUE(attr(o, "active")))
-    f()
+    o()
   else
-    f
+    o
 }
 
 #' @export

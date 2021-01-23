@@ -7,8 +7,7 @@ Tensor <- R7Class(
                           pin_memory = FALSE, ptr = NULL) {
       
       if (!is.null(ptr)) {
-        self$ptr <- ptr
-        return(NULL)
+        return(ptr)
       }
       
       # infer dtype from data
@@ -37,8 +36,8 @@ Tensor <- R7Class(
       }
       
       
-      self$ptr <- cpp_torch_tensor(data, rev(dimension), options$ptr, 
-                                   requires_grad, inherits(data, "integer64"))
+      cpp_torch_tensor(data, rev(dimension), options$ptr, 
+                       requires_grad, inherits(data, "integer64"))
     },
     print = function(n = 30) {
       cat("torch_tensor\n")
@@ -380,3 +379,7 @@ str.torch_tensor <- function(object, ...) {
   cat(out)
   cat("\n")
 }
+
+Tensor$set("active", "ptr", function() {
+  self
+})
