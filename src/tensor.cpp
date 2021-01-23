@@ -299,3 +299,63 @@ int cpp_get_num_interop_threads ()
 {
   return lantern_get_num_interop_threads();
 }
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_double_double (double mean, double std, 
+                                                                std::vector<int64_t> size,
+                                                                Rcpp::XPtr<XPtrTorchGenerator> generator,
+                                                                Rcpp::XPtr<XPtrTorchGenerator> options) {
+  XPtrTorchTensor out = lantern_normal_double_double_intarrayref_generator_tensoroptions(
+    mean, std, 
+    XPtrTorchvector_int64_t(lantern_vector_int64_t(size.data(), size.size())).get(),
+    generator->get(),
+    options->get()
+  );
+  return make_xptr<XPtrTorchTensor>(out);
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_double_tensor (
+    double mean, 
+    Rcpp::XPtr<XPtrTorchTensor> std,
+    Rcpp::XPtr<XPtrTorchGenerator> generator
+)
+{
+  XPtrTorchTensor out = lantern_normal_double_tensor_generator(
+    mean, 
+    std->get(), 
+    generator->get()
+  );
+  return make_xptr<XPtrTorchTensor>(out); 
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_tensor_double (
+    Rcpp::XPtr<XPtrTorchTensor> mean,
+    double std, 
+    Rcpp::XPtr<XPtrTorchGenerator> generator
+)
+{
+  XPtrTorchTensor out = lantern_normal_tensor_double_generator(
+    mean->get(), 
+    std, 
+    generator->get()
+  );
+  return make_xptr<XPtrTorchTensor>(out); 
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_tensor_tensor (
+    Rcpp::XPtr<XPtrTorchTensor> mean,
+    Rcpp::XPtr<XPtrTorchTensor> std, 
+    Rcpp::XPtr<XPtrTorchGenerator> generator
+)
+{
+  XPtrTorchTensor out = lantern_normal_tensor_tensor_generator(
+    mean->get(), 
+    std->get(), 
+    generator->get()
+  );
+  return make_xptr<XPtrTorchTensor>(out); 
+}
+

@@ -281,3 +281,36 @@ test_that("torch_nonzero", {
   expect_equal_to_r(torch_nonzero(x), matrix(c(2L,3L,5L), ncol = 1))
 
 })
+
+test_that("normal works", {
+  
+  x <- torch_normal(0, 1, size = c(2, 2))  
+  expect_tensor_shape(x, c(2,2))
+  expect_true(x$dtype == torch_float())
+  
+  x <- torch_normal(0, 1, size = c(2, 2), dtype = torch_float64())  
+  expect_true(x$dtype == torch_float64())
+  
+  x <- torch_normal(torch_zeros(2,2), torch_ones(c(2,2)))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(torch_zeros(2,2), 1)
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(1, torch_zeros(2,2))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(mean = torch_zeros(2,2))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(std = torch_zeros(2,2))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(size = list(2, 2))
+  expect_tensor_shape(x, c(2,2))
+  
+  expect_error(torch_normal(torch_zeros(2), 1, c(2,2)), class = "value_error")
+  expect_error(torch_normal(1, torch_zeros(2), c(2,2)), class = "value_error")
+  expect_error(torch_normal(1, torch_zeros(2), dtype = torch_float64()), class = "value_error")
+  
+})

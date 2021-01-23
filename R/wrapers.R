@@ -96,11 +96,6 @@ torch_hann_window <- function(window_length, periodic=TRUE, dtype=NULL,
                      options = opt)
 }
 
-#' @rdname torch_normal
-torch_normal <- function(mean, std = 1L, size, generator = NULL) {
-  .torch_normal(mean, std, size, generator)
-}
-
 #' @rdname torch_result_type
 torch_result_type <- function(tensor1, tensor2) {
   
@@ -436,4 +431,86 @@ torch_nonzero <- function(self, as_list = FALSE) {
     out <- torch_nonzero_numpy(self)
     return(lapply(out, function(x) x + 1L))
   }
+}
+
+#' Normal distributed
+#' 
+#' @param mean (tensor or scalar double) Mean of the normal distribution.
+#'   If this is a [torch_tensor()] then the output has the same dim as `mean`
+#'   and it represents the per-element mean. If it's a scalar value, it's reused
+#'   for all elements.
+#' @param std (tensor or scalar double) The standard deviation of the normal
+#'   distribution. If this is a [torch_tensor()] then the output has the same size as `std`
+#'   and it represents the per-element standard deviation. If it's a scalar value, 
+#'   it's reused for all elements.
+#' @param size (integers, optional) only used if both `mean` and `std` are scalars.
+#' @param generator a random number generator created with [torch_generator()]. If `NULL`
+#'   a default generator is used.
+#' @param ... Tensor option parameters like `dtype`, `layout`, and `device`. 
+#'   Can only be used when `mean` and `std` are both scalar numerics.
+#' 
+#' @rdname torch_normal
+#' 
+#' @export
+torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
+ 
+  if (missing(mean))
+    mean <- 0
+  
+  if (missing(std))
+    std <- 1
+  
+  if (!is.null(size)) {
+    if (is_torch_tensor(mean) || is_torch_tensor(std))
+      value_error("size is set, but one of mean or std is not a scalar value.")
+  }
+  
+  if (!length(list(...)) == 0) {
+    if (is_torch_tensor(mean) || is_torch_tensor(std))
+      value_error("options is set, but one of mean or std is not a scalar value.")
+  }
+  
+  if (is.null(generator))
+    generator <- .generator_null
+  
+  if (!is_torch_tensor(mean) && !is_torch_tensor(std) && is.null(size))
+    value_error("size is not set.")
+  
+  if (!is.null(size)) {
+    if (is.list(size)) size <- unlist(size)
+    options <- do.call(torch_tensor_options, list(...))
+    return(Tensor$new(ptr = cpp_namespace_normal_double_double(
+      mean = mean, 
+      std = std,
+      size = size,
+      generator = generator$ptr,
+      options = options$ptr
+    )))
+  }
+  
+  if (is_torch_tensor(mean) && is_torch_tensor(std)) {
+    return(Tensor$new(ptr = cpp_namespace_normal_tensor_tensor(
+      mean = mean$ptr,
+      std = std$ptr,
+      generator = generator$ptr
+    )))
+  }
+  
+  if (is_torch_tensor(mean)) {
+    return(Tensor$new(ptr = cpp_namespace_normal_tensor_double(
+      mean = mean$ptr,
+      std = std,
+      generator = generator$ptr
+    )))
+  }
+  
+  if (is_torch_tensor(std)) {
+    return(Tensor$new(ptr = cpp_namespace_normal_double_tensor(
+      mean = mean,
+      std = std$ptr,
+      generator = generator$ptr
+    )))
+  }
+   
+  value_error("Please report a bug report in GitHub")
 }
