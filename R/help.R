@@ -3,7 +3,7 @@
 #' @importFrom utils .DollarNames
 #' @export
 .DollarNames.torch_tensor <- function(x, pattern = "") {
-  candidates <- names(parent.env(parent.env(x)))
+  candidates <- names(parent.env(Tensor))
   candidates <- sort(candidates[grepl(pattern, candidates)])
   attr(candidates, "helpHandler") <- "torch:::help_handler"
   candidates
