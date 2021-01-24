@@ -14,23 +14,11 @@ void check_is_xptr(SEXP s) {
   }
 }
 
-void* str2ptr(SEXP p) {
-  if (!isString(p)) error("expect a string of pointer address");
-  return (void*) strtol(CHAR(STRING_PTR(p)[0]), NULL, 0);
-}
-
-// [[Rcpp::export]]
-SEXP xptr_address(SEXP s) {
-  check_is_xptr(s);
-  char* buf[20];
-  sprintf((char*) buf, "%p", R_ExternalPtrAddr(s));
-  return Rf_mkString((char*) buf);
-}
-
 // [[Rcpp::export]]
 SEXP set_xptr_address(SEXP s, SEXP p) {
   check_is_xptr(s);
-  R_SetExternalPtrAddr(s, str2ptr(p));
+  check_is_xptr(p);
+  R_SetExternalPtrAddr(s, R_ExternalPtrAddr(p));
   return R_NilValue;
 }
 

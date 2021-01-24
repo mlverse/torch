@@ -116,7 +116,7 @@ Tensor <- R7Class(
         # changing it's address in the C side and
         # adding a protection to `g` so it only
         # gets destroyed when `self` itself is destroyed.
-        set_xptr_address(self, xptr_address(g))
+        set_xptr_address(self, g)
         set_xptr_protected(self, g)
       }
       
