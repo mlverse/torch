@@ -37,10 +37,10 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(NULL)
   
   if (any(arg_name == c("index", "indices", "dims")) && any("Tensor" == expected_types) && is_torch_tensor(obj))
-    return(list(get("ptr", as_1_based_tensor(obj), inherits = FALSE), "Tensor"))
+    return(list(as_1_based_tensor(obj), "Tensor"))
   
   if (any("Tensor" == expected_types) && is_torch_tensor(obj))
-    return(list(get("ptr", obj, inherits = FALSE), "Tensor"))
+    return(list(obj, "Tensor"))
   
   if (any("Scalar" == expected_types) && is_torch_scalar(obj))
     return(list(obj$ptr, "Scalar"))

@@ -8937,3 +8937,11 @@ cpp_variable_list_to_r_list <- function(x) {
     .Call('_torch_cpp_variable_list_to_r_list', PACKAGE = 'torchpkg', x)
 }
 
+set_xptr_address <- function(s, p) {
+    .Call('_torch_set_xptr_address', PACKAGE = 'torchpkg', s, p)
+}
+
+set_xptr_protected <- function(s, pro) {
+    .Call('_torch_set_xptr_protected', PACKAGE = 'torchpkg', s, pro)
+}
+

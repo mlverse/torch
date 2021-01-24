@@ -8,12 +8,10 @@ Scalar <- R7Class(
     initialize = function(x, ptr = NULL) {
       
       if (!is.null(ptr)) {
-        self$ptr <- ptr
-        return(NULL)
+        return(ptr)
       }
       
-      self$ptr <- cpp_torch_scalar(x);
-      
+      cpp_torch_scalar(x);
     },
     
     to_r = function() {
@@ -32,13 +30,22 @@ Scalar <- R7Class(
         f <- cpp_torch_scalar_to_int
       
       f(self$ptr)
+    },
+    
+    print = function() {
+      cat("torch_scalar\n")
     }
     
   ),
   
+  
+  
   active = list(
     type = function() {
       torch_dtype$new(ptr = cpp_torch_scalar_dtype(self$ptr))
+    },
+    ptr = function() {
+      self
     }
   )
   

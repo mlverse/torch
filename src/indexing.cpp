@@ -217,8 +217,7 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
     
     if (Rf_inherits(slice, "torch_tensor"))
     {
-      Rcpp::Environment e = slice;
-      Rcpp::XPtr<XPtrTorchTensor> t = e["ptr"];
+      Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(slice);
       
       auto type = std::string(lantern_Dtype_type(lantern_Tensor_dtype(t->get())));
       
@@ -294,8 +293,7 @@ void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
   
   if (Rf_inherits(rhs, "torch_tensor"))
   {
-    Rcpp::Environment e = rhs;
-    Rcpp::XPtr<XPtrTorchTensor> t = e["ptr"];
+    Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(rhs);
     lantern_Tensor_index_put_tensor_(self->get(), index.get(), t->get());  
     return;
   }
