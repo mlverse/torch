@@ -196,6 +196,10 @@
 <li>Allow <code>timeout=360</code> as <code><a href="../reference/install_torch.html">install_torch()</a></code> parameter for large file download (<a href='https://github.com/cregouby'>@cregouby</a> <a href='https://github.com/mlverse/torch/issues/438'>#438</a>)</li>
 <li>Added <code><a href="../reference/install_torch_from_file.html">install_torch_from_file()</a></code> and <code><a href="../reference/get_install_libs_url.html">get_install_libs_url()</a></code>for setup cases where direct download is not possible (<a href='https://github.com/cregouby'>@cregouby</a> <a href='https://github.com/mlverse/torch/issues/439'>#439</a>)</li>
 <li>Added <code>mean.torch_tensor</code> (<a href='https://github.com/mlverse/torch/issues/448'>#448</a>)</li>
+<li>New arguments <code>worker_globals</code> and <code>worker_packages</code> allowing to easily pass objects to workers in parallel dataloaders (<a href='https://github.com/mlverse/torch/issues/449'>#449</a>).</li>
+<li>Removed the PerformanceReporter from tests to get easier to read stack traces. (<a href='https://github.com/mlverse/torch/issues/449'>#449</a>)</li>
+<li>Fixed <code>torch_normal</code>. (<a href='https://github.com/mlverse/torch/issues/450'>#450</a>)</li>
+<li>Internal change in the R7 classes so R7 objects are simple external pointer instead of environments. This might cause breaking change if you relied on saving any kind of state in the Tensor object. (<a href='https://github.com/mlverse/torch/issues/452'>#452</a>)</li>
 </ul>
 </div>
     <div id="torch-021" class="section level1">

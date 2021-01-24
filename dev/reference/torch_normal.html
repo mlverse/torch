@@ -42,7 +42,8 @@
   
 
 <meta property="og:title" content="Normal — torch_normal" />
-<meta property="og:description" content="Normal" />
+<meta property="og:description" content="Normal
+Normal distributed" />
 
 
 <meta name="robots" content="noindex">
@@ -184,28 +185,41 @@
 
     <div class="ref-description">
     <p>Normal</p>
+<p>Normal distributed</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_normal</span><span class='op'>(</span><span class='va'>mean</span>, std <span class='op'>=</span> <span class='fl'>1L</span>, <span class='va'>size</span>, generator <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_normal</span><span class='op'>(</span><span class='va'>mean</span>, <span class='va'>std</span>, size <span class='op'>=</span> <span class='cn'>NULL</span>, generator <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mean</th>
-      <td><p>(Tensor) the tensor of per-element means</p></td>
+      <td><p>(tensor or scalar double) Mean of the normal distribution.
+If this is a <code><a href='torch_tensor.html'>torch_tensor()</a></code> then the output has the same dim as <code>mean</code>
+and it represents the per-element mean. If it's a scalar value, it's reused
+for all elements.</p></td>
     </tr>
     <tr>
       <th>std</th>
-      <td><p>(Tensor) the tensor of per-element standard deviations</p></td>
+      <td><p>(tensor or scalar double) The standard deviation of the normal
+distribution. If this is a <code><a href='torch_tensor.html'>torch_tensor()</a></code> then the output has the same size as <code>std</code>
+and it represents the per-element standard deviation. If it's a scalar value,
+it's reused for all elements.</p></td>
     </tr>
     <tr>
       <th>size</th>
-      <td><p>(int...) a sequence of integers defining the shape of the output tensor.</p></td>
+      <td><p>(integers, optional) only used if both <code>mean</code> and <code>std</code> are scalars.</p></td>
     </tr>
     <tr>
       <th>generator</th>
-      <td><p>(<code>torch.Generator</code>, optional) a pseudorandom number generator for sampling</p></td>
+      <td><p>a random number generator created with <code><a href='torch_generator.html'>torch_generator()</a></code>. If <code>NULL</code>
+a default generator is used.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Tensor option parameters like <code>dtype</code>, <code>layout</code>, and <code>device</code>.
+Can only be used when <code>mean</code> and <code>std</code> are both scalar numerics.</p></td>
     </tr>
     </table>
 
@@ -213,7 +227,7 @@
 
     <p>When the shapes do not match, the shape of <code>mean</code>
 is used as the shape for the returned output tensor</p>
-    <h2 class="hasAnchor" id="normal-mean-std-generator-null-out-null-gt-tensor-"><a class="anchor" href="#normal-mean-std-generator-null-out-null-gt-tensor-"></a>normal(mean, std, *, generator=NULL, out=NULL) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="normal-mean-std-gt-tensor-"><a class="anchor" href="#normal-mean-std-gt-tensor-"></a>normal(mean, std, *) -&gt; Tensor </h2>
 
     
 
@@ -226,21 +240,21 @@ each output element's normal distribution</p>
 each output element's normal distribution</p>
 <p>The shapes of <code>mean</code> and <code>std</code> don't need to match, but the
 total number of elements in each tensor need to be the same.</p>
-    <h2 class="hasAnchor" id="normal-mean-std-out-null-gt-tensor-"><a class="anchor" href="#normal-mean-std-out-null-gt-tensor-"></a>normal(mean=0.0, std, out=NULL) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="normal-mean-std-gt-tensor-"><a class="anchor" href="#normal-mean-std-gt-tensor-"></a>normal(mean=0.0, std) -&gt; Tensor </h2>
 
     
 
 
 <p>Similar to the function above, but the means are shared among all drawn
 elements.</p>
-    <h2 class="hasAnchor" id="normal-mean-std-out-null-gt-tensor-"><a class="anchor" href="#normal-mean-std-out-null-gt-tensor-"></a>normal(mean, std=1.0, out=NULL) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="normal-mean-std-gt-tensor-"><a class="anchor" href="#normal-mean-std-gt-tensor-"></a>normal(mean, std=1.0) -&gt; Tensor </h2>
 
     
 
 
 <p>Similar to the function above, but the standard-deviations are shared among
 all drawn elements.</p>
-    <h2 class="hasAnchor" id="normal-mean-std-size-out-null-gt-tensor-"><a class="anchor" href="#normal-mean-std-size-out-null-gt-tensor-"></a>normal(mean, std, size, *, out=NULL) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="normal-mean-std-size-gt-tensor-"><a class="anchor" href="#normal-mean-std-size-gt-tensor-"></a>normal(mean, std, size, *) -&gt; Tensor </h2>
 
     
 
@@ -251,20 +265,15 @@ among all drawn elements. The resulting tensor has size given by <code>size</cod
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='fu'>torch_normal</span><span class='op'>(</span>mean<span class='op'>=</span><span class='fl'>0</span>, std<span class='op'>=</span><span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>
-
-
 <span class='fu'>torch_normal</span><span class='op'>(</span>mean<span class='op'>=</span><span class='fl'>0.5</span>, std<span class='op'>=</span><span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>1.</span>, <span class='fl'>6.</span><span class='op'>)</span><span class='op'>)</span>
-
-
 <span class='fu'>torch_normal</span><span class='op'>(</span>mean<span class='op'>=</span><span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>1.</span>, <span class='fl'>6.</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>torch_normal</span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span>, size<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
 
-
-<span class='fu'>torch_normal</span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span>, size<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
-<span class='op'>}</span>
-</div></pre>
+</div><div class='output co'>#&gt; torch_tensor
+#&gt;  3.9072  0.0306  0.1551 -1.2861
+#&gt; [ CPUFloatType{1,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
