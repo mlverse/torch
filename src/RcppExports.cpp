@@ -29262,6 +29262,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// set_xptr_address
+SEXP set_xptr_address(SEXP s, SEXP p);
+RcppExport SEXP _torch_set_xptr_address(SEXP sSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type s(sSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(set_xptr_address(s, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// set_xptr_protected
+SEXP set_xptr_protected(SEXP s, SEXP pro);
+RcppExport SEXP _torch_set_xptr_protected(SEXP sSEXP, SEXP proSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type s(sSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pro(proSEXP);
+    rcpp_result_gen = Rcpp::wrap(set_xptr_protected(s, pro));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 1},
@@ -31497,6 +31521,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_make_function_name", (DL_FUNC) &_torch_cpp_make_function_name, 5},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
+    {"_torch_set_xptr_address", (DL_FUNC) &_torch_set_xptr_address, 2},
+    {"_torch_set_xptr_protected", (DL_FUNC) &_torch_set_xptr_protected, 2},
     {NULL, NULL, 0}
 };
 

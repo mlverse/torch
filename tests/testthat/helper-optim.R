@@ -40,7 +40,7 @@ expect_state_is_updated <- function(opt_fn) {
   y <- 2 * x
   y$backward()
   opt$step()
-  expect_equal(opt$param_groups[[1]]$params[[1]]$state$step, 1)
+  expect_equal(state(opt$param_groups[[1]]$params[[1]])$step, 1)
   opt$step()
-  expect_equal(opt$param_groups[[1]]$params[[1]]$state$step, 2)
+  expect_equal(state(opt$param_groups[[1]]$params[[1]])$step, 2)
 }

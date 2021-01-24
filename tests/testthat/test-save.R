@@ -26,6 +26,7 @@ test_that("save a module", {
   
   torch_save(net, fname)
   reloaded_net <- torch_load(fname)
+  gc()
   
   x <- torch_randn(100, 10)
   expect_equal_to_tensor(net(x), reloaded_net(x))
@@ -67,6 +68,8 @@ test_that("save more complicated module", {
 
   torch_save(net, fname)
   reloaded_net <- torch_load(fname)
+  
+  gc()
   
   expect_equal_to_tensor(net$conv1$parameters$weight, 
                          reloaded_net$conv1$parameters$weight) 

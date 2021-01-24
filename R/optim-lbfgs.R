@@ -57,12 +57,12 @@ optim_LBFGS <- R6::R6Class(
         
         # NOTE: LBFGS has only global state, but we register it as state for
         # the first param, because this helps with casting in load_state_dict
-        if (is.null(private$.params[[1]]$state)) {
-          private$.params[[1]]$state <- new.env(parent = emptyenv())
-          private$.params[[1]]$state[["func_evals"]] <- 0
-          private$.params[[1]]$state[["n_iter"]] <- 0
+        if (is.null(state(private$.params[[1]]))) {
+          state(private$.params[[1]]) <- new.env(parent = emptyenv())
+          state(private$.params[[1]])[["func_evals"]] <- 0
+          state(private$.params[[1]])[["n_iter"]] <- 0
         }
-        state <- private$.params[[1]]$state
+        state <- state(private$.params[[1]])
           
         # evaluate initial f(x) and df/dx
         orig_loss <- closure_()
