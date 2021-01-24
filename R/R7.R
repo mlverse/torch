@@ -6,6 +6,8 @@ prepare_method <- function(m, active = FALSE) {
   m
 }
 
+.generators <- new.env(parent = emptyenv())
+
 #' @importFrom rlang env_bind
 #' @importFrom rlang :=
 R7Class <- function(classname = NULL, public = list(), private = list(),
@@ -42,17 +44,32 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
       stop("can only set to public, private and active")
   }
   
+  # set the generator/classname env
+  .generators[[classname]] <- generator
+  
   generator
 }
 
+
 extract_method <- function(self, name, call = TRUE) {
   
-  if (inherits(self, "torch_tensor"))
-    o <- mget(name, envir = Tensor, inherits = TRUE, ifnotfound = list(NULL))[[1]]
-  else if (inherits(self, "torch_scalar"))
-    o <- mget(name, envir = Scalar, inherits = TRUE, ifnotfound = list(NULL))[[1]]
-  else if (inherits(self, "R7Private"))
-    o <- mget(name, envir = unclass(self)$pvt, inherits = TRUE, ifnotfound = list(NULL))[[1]]
+  # resolve the class environment
+  # every R7 class is registered in the .generators env
+  # so we can find the generator give the class name
+  if (inherits(self, "R7Private")) {
+    e <- unclass(self)$pvt
+  } else {
+    e <- .generators[[class(self)[1]]]
+  }
+  
+  # gets the object from the class environment
+  o <- mget(
+    name, 
+    envir = e, 
+    inherits = TRUE, 
+    ifnotfound = list(NULL)
+  )
+  o <- o[[1]]
     
   if (name == "private") {
     o <- list(
