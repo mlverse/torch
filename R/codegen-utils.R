@@ -206,12 +206,12 @@ do_call <- function(fun, args) {
 
 to_return_type <- function(res, types) {
   
+  if (is_torch_tensor(res))
+    return(res)
+  
   if (inherits(res, "externalptr") && !is.null(attr(res, "dynamic_type"))) {
     
     dtype <- attr(res, "dynamic_type")
-    
-    if (dtype == "Tensor")
-      return(Tensor$new(ptr = res))
     
     if (dtype == "TensorList")
       return(TensorList$new(ptr = res)$to_r())
@@ -241,7 +241,6 @@ to_return_type <- function(res, types) {
     }
     
   } else if (length(types) > 1){
-    
     out <- lapply(seq_along(res), function(x) to_return_type(res[[x]], types[x]))
     
     return(out)
