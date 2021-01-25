@@ -29033,17 +29033,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// test_fun
-XPtrTorchTensor test_fun(Rcpp::XPtr<XPtrTorch> x);
-RcppExport SEXP _torch_test_fun(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(test_fun(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_torch_tensor_list
 Rcpp::XPtr<XPtrTorchTensorList> cpp_torch_tensor_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
@@ -29089,6 +29078,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorOptions> >::type x(xSEXP);
     cpp_torch_tensor_options_print(x);
     return R_NilValue;
+END_RCPP
+}
+// test_fun
+[[gnu::noinline]] XPtrTorchTensor test_fun(Rcpp::XPtr<XPtrTorchTensor> x);
+RcppExport SEXP _torch_test_fun(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(test_fun(x));
+    return rcpp_result_gen;
 END_RCPP
 }
 // cpp_trace_function
@@ -31512,11 +31512,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_namespace_normal_double_tensor", (DL_FUNC) &_torch_cpp_namespace_normal_double_tensor, 3},
     {"_torch_cpp_namespace_normal_tensor_double", (DL_FUNC) &_torch_cpp_namespace_normal_tensor_double, 3},
     {"_torch_cpp_namespace_normal_tensor_tensor", (DL_FUNC) &_torch_cpp_namespace_normal_tensor_tensor, 3},
-    {"_torch_test_fun", (DL_FUNC) &_torch_test_fun, 1},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {"_torch_cpp_torch_tensor_options_print", (DL_FUNC) &_torch_cpp_torch_tensor_options_print, 1},
+    {"_torch_test_fun", (DL_FUNC) &_torch_test_fun, 1},
     {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 3},
     {"_torch_cpp_save_traced_fn", (DL_FUNC) &_torch_cpp_save_traced_fn, 2},
     {"_torch_cpp_jit_compilation_unit", (DL_FUNC) &_torch_cpp_jit_compilation_unit, 0},

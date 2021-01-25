@@ -22,6 +22,9 @@ public:
   {
     return ptr.get();
   }
+  std::shared_ptr<void> get_shared() const {
+    return ptr;
+  }
   void set (std::shared_ptr<void> x) {
     this->ptr = x;
   }
@@ -31,6 +34,9 @@ class XPtrTorchTensor : public XPtrTorch {
 public:
   XPtrTorchTensor (void* x) : XPtrTorch{NULL} {
     this->set(std::shared_ptr<void>(x, lantern_Tensor_delete)); 
+  }
+  XPtrTorchTensor (std::shared_ptr<void> x) : XPtrTorch{NULL} {
+    this->set(x);
   }
   operator SEXP () const;
 };
