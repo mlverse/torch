@@ -12,12 +12,9 @@ class XPtrTorch
 private:
   std::shared_ptr<void> ptr;
 public:
-  XPtrTorch (void * x) {
-    this->set(std::shared_ptr<void>(x, [](void*){}));
-  }
-  XPtrTorch (std::shared_ptr<void> x) {
-    this->set(x);
-  }
+  XPtrTorch(void * x, std::function<void(void*)> deleter = [](void*){}) :
+    XPtrTorch(std::shared_ptr<void>(x, deleter)) {};
+  explicit XPtrTorch(std::shared_ptr<void> x) : ptr(x) {}
   void* get() const
   {
     return ptr.get();
@@ -25,19 +22,15 @@ public:
   std::shared_ptr<void> get_shared() const {
     return ptr;
   }
-  void set (std::shared_ptr<void> x) {
-    this->ptr = x;
-  }
 };
 
 class XPtrTorchTensor : public XPtrTorch {
 public:
-  XPtrTorchTensor (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Tensor_delete)); 
-  }
-  XPtrTorchTensor (std::shared_ptr<void> x) : XPtrTorch{NULL} {
-    this->set(x);
-  }
+  // TODO: we should make this explicit at some point, but not currently
+  // possible because we rely on it in too many places.
+  XPtrTorchTensor (void* x) : XPtrTorch(x, lantern_Tensor_delete) {}
+  explicit XPtrTorchTensor (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchTensor (const XPtrTorchTensor& x): XPtrTorch(x.get_shared()) {}
   operator SEXP () const;
 };
 
@@ -45,215 +38,153 @@ public:
 
 class XPtrTorchScalarType : public XPtrTorch {
 public:
-  XPtrTorchScalarType (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_ScalarType_delete));
-  }
+  XPtrTorchScalarType (void* x) : XPtrTorch (x, lantern_ScalarType_delete) {}
 };
 
 class XPtrTorchScalar : public XPtrTorch {
 public:
-  XPtrTorchScalar () : XPtrTorch{NULL} {
-    // do nothing
-  }
-  XPtrTorchScalar (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Scalar_delete));
-  }
+  XPtrTorchScalar () : XPtrTorch{NULL} {}
+  XPtrTorchScalar (void* x) : XPtrTorch(x, lantern_Scalar_delete) {}
 };
 
 class XPtrTorchQScheme : public XPtrTorch {
 public:
-  XPtrTorchQScheme (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_QScheme_delete));
-  }
+  XPtrTorchQScheme (void* x) : XPtrTorch (x, lantern_QScheme_delete) {}
 };
 
 class XPtrTorchdouble : public XPtrTorch {
 public:
-  XPtrTorchdouble (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_double_delete));
-  }
+  XPtrTorchdouble (void* x) : XPtrTorch(x, lantern_double_delete) {}
 };
 
 class XPtrTorchTensorList : public XPtrTorch {
 public:
-  XPtrTorchTensorList (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_TensorList_delete));
-  }
+  XPtrTorchTensorList (void* x) : XPtrTorch(x, lantern_TensorList_delete) {}
 };
 
 class XPtrTorchvariable_list : public XPtrTorch {
 public:
-  XPtrTorchvariable_list (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_variable_list_delete));
-  }
+  XPtrTorchvariable_list (void* x) : XPtrTorch(x, lantern_variable_list_delete) {}
 };
 
 class XPtrTorchint64_t : public XPtrTorch {
 public:
-  XPtrTorchint64_t (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_int64_t_delete));
-  }
+  XPtrTorchint64_t (void* x) : XPtrTorch(x, lantern_int64_t_delete) {}
 };
 
 class XPtrTorchvector_int64_t : public XPtrTorch {
 public:
-  XPtrTorchvector_int64_t (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_vector_int64_t_delete));
-  }
+  XPtrTorchvector_int64_t (void* x) : XPtrTorch(x, lantern_vector_int64_t_delete) {}
 };
 
 class XPtrTorchbool : public XPtrTorch {
 public:
-  XPtrTorchbool (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_bool_delete));
-  }
+  XPtrTorchbool (void* x) : XPtrTorch(x, lantern_bool_delete) {}
 };
 
 class XPtrTorchTensorOptions : public XPtrTorch {
 public:
-  XPtrTorchTensorOptions (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_TensorOptions_delete));
-  }
+  XPtrTorchTensorOptions (void* x) : XPtrTorch(x, lantern_TensorOptions_delete) {}
 };
 
 class XPtrTorchDevice : public XPtrTorch {
 public:
-  XPtrTorchDevice (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Device_delete));
-  }
+  XPtrTorchDevice (void* x) : XPtrTorch(x, lantern_Device_delete) {}
 };
 
 class XPtrTorchLayout : public XPtrTorch {
 public:
-  XPtrTorchLayout (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Layout_delete));
-  }
+  XPtrTorchLayout (void* x) : XPtrTorch(x, lantern_Layout_delete) {}
 };
 
 class XPtrTorchDtype : public XPtrTorch {
 public:
-  XPtrTorchDtype (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Dtype_delete));
-  }
+  XPtrTorchDtype (void* x) : XPtrTorch(x, lantern_Dtype_delete) {}
 };
 
 class XPtrTorchGenerator : public XPtrTorch {
 public:
-  XPtrTorchGenerator (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Generator_delete));
-  }
+  XPtrTorchGenerator (void* x) : XPtrTorch(x, lantern_Generator_delete) {}
 };
 
 class XPtrTorchDimname : public XPtrTorch {
 public:
-  XPtrTorchDimname (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Dimname_delete));
-  }
+  XPtrTorchDimname (void* x) : XPtrTorch(x, lantern_Dimname_delete) {}
 };
 
 class XPtrTorchDimnameList : public XPtrTorch {
 public:
-  XPtrTorchDimnameList (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_DimnameList_delete));
-  }
+  XPtrTorchDimnameList (void* x) : XPtrTorch(x, lantern_DimnameList_delete) {}
 };
 
 class XPtrTorchMemoryFormat : public XPtrTorch {
 public:
-  XPtrTorchMemoryFormat (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_MemoryFormat_delete));
-  }
+  XPtrTorchMemoryFormat (void* x) : XPtrTorch(x, lantern_MemoryFormat_delete) {}
 };
 
 class XPtrTorchTensorIndex : public XPtrTorch {
 public:
-  XPtrTorchTensorIndex (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_TensorIndex_delete));
-  }
+  XPtrTorchTensorIndex (void* x) : XPtrTorch(x, lantern_TensorIndex_delete) {}
 };
 
 class XPtrTorchoptional_int64_t : public XPtrTorch {
 public:
-  XPtrTorchoptional_int64_t (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_optional_int64_t_delete));
-  }
+  XPtrTorchoptional_int64_t (void* x) : XPtrTorch(x, lantern_optional_int64_t_delete) {}
 };
 
 class XPtrTorchSlice : public XPtrTorch {
 public:
-  XPtrTorchSlice (void* x) : XPtrTorch{NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Slice_delete));
-  }
+  XPtrTorchSlice (void* x) : XPtrTorch(x, lantern_Slice_delete) {}
 };
 
 class XPtrTorchPackedSequence : public XPtrTorch {
 public:
-  XPtrTorchPackedSequence (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_PackedSequence_delete));
-  }
+  XPtrTorchPackedSequence (void * x) : XPtrTorch(x, lantern_PackedSequence_delete) {}
 };
 
 class XPtrTorchStorage : public XPtrTorch {
 public:
-  XPtrTorchStorage (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Storage_delete));
-  }
+  XPtrTorchStorage (void * x) : XPtrTorch(x, lantern_Storage_delete) {}
 };
 
 class XPtrTorchIValue : public XPtrTorch {
 public:
-  XPtrTorchIValue (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_IValue_delete));
-  }
+  XPtrTorchIValue (void * x) : XPtrTorch (x, lantern_IValue_delete) {}
 };
 
 class XPtrTorchvector_string : public XPtrTorch {
 public:
-  XPtrTorchvector_string (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_vector_string_delete));
-  }
+  XPtrTorchvector_string (void * x) : XPtrTorch(x, lantern_vector_string_delete) {}
 };
 
 class XPtrTorchstring : public XPtrTorch {
 public:
-  XPtrTorchstring (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_string_delete));
-  }
+  XPtrTorchstring (void * x) : XPtrTorch(x, lantern_string_delete) {}
 };
 
 class XPtrTorchStack : public XPtrTorch {
 public:
-  XPtrTorchStack (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_Stack_delete));
-  }
+  XPtrTorchStack (void * x) : XPtrTorch(x, lantern_Stack_delete) {}
 };
 
 class XPtrTorchCompilationUnit : public XPtrTorch {
 public:
-  XPtrTorchCompilationUnit (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_CompilationUnit_delete));
-  }
+  XPtrTorchCompilationUnit (void * x) : XPtrTorch(x, lantern_CompilationUnit_delete) {}
 };
 
 class XPtrTorchJITModule : public XPtrTorch {
 public:
-  XPtrTorchJITModule (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_JITModule_delete));
-  }
+  XPtrTorchJITModule (void * x) : XPtrTorch(x, lantern_JITModule_delete) {}
 };
 
 class XPtrTorchTraceableFunction : public XPtrTorch {
 public:
-  XPtrTorchTraceableFunction (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_TraceableFunction_delete));
-  }
+  XPtrTorchTraceableFunction (void * x) : XPtrTorch(x, lantern_TraceableFunction_delete) {}
 };
 
 class XPtrTorchvector_bool : public XPtrTorch {
 public:
-  XPtrTorchvector_bool (void * x) : XPtrTorch {NULL} {
-    this->set(std::shared_ptr<void>(x, lantern_vector_bool_delete));
-  }
+  XPtrTorchvector_bool (void * x) : XPtrTorch(x, lantern_vector_bool_delete) {}
 };
 
 template<class T>
@@ -307,6 +238,3 @@ public:
       return this->x;
   }
 };
-
-
-

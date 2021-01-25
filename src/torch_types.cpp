@@ -2,7 +2,7 @@
 #include "utils.h"
 
 XPtrTorchTensor::operator SEXP () const {
-  auto xptr = make_xptr<XPtrTorchTensor>(this->get_shared());
+  auto xptr = make_xptr<XPtrTorchTensor>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_tensor", "R7");
   return xptr; 
 }
