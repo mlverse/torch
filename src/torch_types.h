@@ -42,12 +42,15 @@ public:
   operator SEXP () const;
 };
 
-#include <Rcpp.h>
-
 class XPtrTorchScalarType : public XPtrTorch {
 public:
   XPtrTorchScalarType (void* x) : XPtrTorch (x, lantern_ScalarType_delete) {}
+  explicit XPtrTorchScalarType (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchScalarType (const XPtrTorchScalarType& x) : XPtrTorch(x.get_shared()) {}
+  operator SEXP () const;
 };
+
+#include <Rcpp.h>
 
 class XPtrTorchScalar : public XPtrTorch {
 public:

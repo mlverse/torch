@@ -20,6 +20,12 @@ XPtrTorchTensorList::operator SEXP () const {
   return out;
 }
 
+XPtrTorchScalarType::operator SEXP () const {
+  auto xptr = make_xptr<XPtrTorchScalarType>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_dtype", "R7");
+  return xptr; 
+}
+
 // [[Rcpp::export]]
 [[gnu::noinline]]
 XPtrTorchTensor test_fun (Rcpp::XPtr<XPtrTorchTensor> x)

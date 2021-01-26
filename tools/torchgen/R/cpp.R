@@ -60,7 +60,7 @@ cpp_type <- function(decl) {
       return("Rcpp::XPtr<XPtrTorchScalar>")
 
     if (returns$dynamic_type == "ScalarType")
-      return("Rcpp::XPtr<XPtrTorchScalarType>")
+      return("XPtrTorchScalarType")
 
   } else {
     return("Rcpp::List")
@@ -380,7 +380,7 @@ cpp_return_statement <- function(returns) {
       return(xptr_return_call("XPtrTorchScalar", "Scalar"))
 
     if (returns$dynamic_type == "ScalarType")
-      return(xptr_return_call("XPtrTorchScalarType", "ScalarType"))
+      return(cast_call("XPtrTorchScalarType"))
 
   } else {
 

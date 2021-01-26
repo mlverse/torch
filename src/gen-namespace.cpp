@@ -8941,27 +8941,27 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_result_type_tensor_Tensor_other_Tensor (Rcpp::XPtr<XPtrTorchTensor> tensor, Rcpp::XPtr<XPtrTorchTensor> other) {
+XPtrTorchScalarType cpp_torch_namespace_result_type_tensor_Tensor_other_Tensor (Rcpp::XPtr<XPtrTorchTensor> tensor, Rcpp::XPtr<XPtrTorchTensor> other) {
   auto r_out = lantern_result_type_tensor_tensor(tensor->get(), other->get());
-return make_xptr<XPtrTorchScalarType>(r_out, "ScalarType");
+return XPtrTorchScalarType(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_result_type_tensor_Tensor_other_Scalar (Rcpp::XPtr<XPtrTorchTensor> tensor, Rcpp::XPtr<XPtrTorchScalar> other) {
+XPtrTorchScalarType cpp_torch_namespace_result_type_tensor_Tensor_other_Scalar (Rcpp::XPtr<XPtrTorchTensor> tensor, Rcpp::XPtr<XPtrTorchScalar> other) {
   auto r_out = lantern_result_type_tensor_scalar(tensor->get(), other->get());
-return make_xptr<XPtrTorchScalarType>(r_out, "ScalarType");
+return XPtrTorchScalarType(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_result_type_scalar_Scalar_tensor_Tensor (Rcpp::XPtr<XPtrTorchScalar> scalar, Rcpp::XPtr<XPtrTorchTensor> tensor) {
+XPtrTorchScalarType cpp_torch_namespace_result_type_scalar_Scalar_tensor_Tensor (Rcpp::XPtr<XPtrTorchScalar> scalar, Rcpp::XPtr<XPtrTorchTensor> tensor) {
   auto r_out = lantern_result_type_scalar_tensor(scalar->get(), tensor->get());
-return make_xptr<XPtrTorchScalarType>(r_out, "ScalarType");
+return XPtrTorchScalarType(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_result_type_scalar1_Scalar_scalar2_Scalar (Rcpp::XPtr<XPtrTorchScalar> scalar1, Rcpp::XPtr<XPtrTorchScalar> scalar2) {
+XPtrTorchScalarType cpp_torch_namespace_result_type_scalar1_Scalar_scalar2_Scalar (Rcpp::XPtr<XPtrTorchScalar> scalar1, Rcpp::XPtr<XPtrTorchScalar> scalar2) {
   auto r_out = lantern_result_type_scalar_scalar(scalar1->get(), scalar2->get());
-return make_xptr<XPtrTorchScalarType>(r_out, "ScalarType");
+return XPtrTorchScalarType(r_out);
 }
 
 // [[Rcpp::export]]
@@ -8971,9 +8971,9 @@ return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_promote_types_type1_ScalarType_type2_ScalarType (Rcpp::XPtr<XPtrTorch> type1, Rcpp::XPtr<XPtrTorch> type2) {
+XPtrTorchScalarType cpp_torch_namespace_promote_types_type1_ScalarType_type2_ScalarType (Rcpp::XPtr<XPtrTorch> type1, Rcpp::XPtr<XPtrTorch> type2) {
   auto r_out = lantern_promote_types_scalartype_scalartype(type1->get(), type2->get());
-return make_xptr<XPtrTorchScalarType>(r_out, "ScalarType");
+return XPtrTorchScalarType(r_out);
 }
 
 // [[Rcpp::export]]

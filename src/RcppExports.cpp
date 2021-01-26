@@ -19916,7 +19916,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_result_type_tensor_Tensor_other_Tensor
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_result_type_tensor_Tensor_other_Tensor(Rcpp::XPtr<XPtrTorchTensor> tensor, Rcpp::XPtr<XPtrTorchTensor> other);
+XPtrTorchScalarType cpp_torch_namespace_result_type_tensor_Tensor_other_Tensor(Rcpp::XPtr<XPtrTorchTensor> tensor, Rcpp::XPtr<XPtrTorchTensor> other);
 RcppExport SEXP _torch_cpp_torch_namespace_result_type_tensor_Tensor_other_Tensor(SEXP tensorSEXP, SEXP otherSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -19928,7 +19928,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_result_type_tensor_Tensor_other_Scalar
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_result_type_tensor_Tensor_other_Scalar(Rcpp::XPtr<XPtrTorchTensor> tensor, Rcpp::XPtr<XPtrTorchScalar> other);
+XPtrTorchScalarType cpp_torch_namespace_result_type_tensor_Tensor_other_Scalar(Rcpp::XPtr<XPtrTorchTensor> tensor, Rcpp::XPtr<XPtrTorchScalar> other);
 RcppExport SEXP _torch_cpp_torch_namespace_result_type_tensor_Tensor_other_Scalar(SEXP tensorSEXP, SEXP otherSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -19940,7 +19940,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_result_type_scalar_Scalar_tensor_Tensor
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_result_type_scalar_Scalar_tensor_Tensor(Rcpp::XPtr<XPtrTorchScalar> scalar, Rcpp::XPtr<XPtrTorchTensor> tensor);
+XPtrTorchScalarType cpp_torch_namespace_result_type_scalar_Scalar_tensor_Tensor(Rcpp::XPtr<XPtrTorchScalar> scalar, Rcpp::XPtr<XPtrTorchTensor> tensor);
 RcppExport SEXP _torch_cpp_torch_namespace_result_type_scalar_Scalar_tensor_Tensor(SEXP scalarSEXP, SEXP tensorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -19952,7 +19952,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_result_type_scalar1_Scalar_scalar2_Scalar
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_result_type_scalar1_Scalar_scalar2_Scalar(Rcpp::XPtr<XPtrTorchScalar> scalar1, Rcpp::XPtr<XPtrTorchScalar> scalar2);
+XPtrTorchScalarType cpp_torch_namespace_result_type_scalar1_Scalar_scalar2_Scalar(Rcpp::XPtr<XPtrTorchScalar> scalar1, Rcpp::XPtr<XPtrTorchScalar> scalar2);
 RcppExport SEXP _torch_cpp_torch_namespace_result_type_scalar1_Scalar_scalar2_Scalar(SEXP scalar1SEXP, SEXP scalar2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -19976,7 +19976,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_promote_types_type1_ScalarType_type2_ScalarType
-Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_namespace_promote_types_type1_ScalarType_type2_ScalarType(Rcpp::XPtr<XPtrTorch> type1, Rcpp::XPtr<XPtrTorch> type2);
+XPtrTorchScalarType cpp_torch_namespace_promote_types_type1_ScalarType_type2_ScalarType(Rcpp::XPtr<XPtrTorch> type1, Rcpp::XPtr<XPtrTorch> type2);
 RcppExport SEXP _torch_cpp_torch_namespace_promote_types_type1_ScalarType_type2_ScalarType(SEXP type1SEXP, SEXP type2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
