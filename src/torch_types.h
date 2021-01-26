@@ -50,13 +50,16 @@ public:
   operator SEXP () const;
 };
 
-#include <Rcpp.h>
-
 class XPtrTorchScalar : public XPtrTorch {
 public:
   XPtrTorchScalar () : XPtrTorch{NULL} {}
   XPtrTorchScalar (void* x) : XPtrTorch(x, lantern_Scalar_delete) {}
+  explicit XPtrTorchScalar (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchScalar (const XPtrTorchScalar& x) : XPtrTorch(x.get_shared()) {}
+  operator SEXP () const;
 };
+
+#include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
 public:

@@ -5390,7 +5390,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_item_self_Tensor
-Rcpp::XPtr<XPtrTorchScalar> cpp_torch_method_item_self_Tensor(Rcpp::XPtr<XPtrTorchTensor> self);
+XPtrTorchScalar cpp_torch_method_item_self_Tensor(Rcpp::XPtr<XPtrTorchTensor> self);
 RcppExport SEXP _torch_cpp_torch_method_item_self_Tensor(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -19988,7 +19988,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace__local_scalar_dense_self_Tensor
-Rcpp::XPtr<XPtrTorchScalar> cpp_torch_namespace__local_scalar_dense_self_Tensor(Rcpp::XPtr<XPtrTorchTensor> self);
+XPtrTorchScalar cpp_torch_namespace__local_scalar_dense_self_Tensor(Rcpp::XPtr<XPtrTorchTensor> self);
 RcppExport SEXP _torch_cpp_torch_namespace__local_scalar_dense_self_Tensor(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

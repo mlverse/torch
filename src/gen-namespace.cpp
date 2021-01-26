@@ -2370,9 +2370,9 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchScalar> cpp_torch_method_item_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
+XPtrTorchScalar cpp_torch_method_item_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern_Tensor_item_tensor(self->get());
-return make_xptr<XPtrTorchScalar>(r_out, "Scalar");
+return XPtrTorchScalar(r_out);
 }
 
 // [[Rcpp::export]]
@@ -8977,9 +8977,9 @@ return XPtrTorchScalarType(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchScalar> cpp_torch_namespace__local_scalar_dense_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
+XPtrTorchScalar cpp_torch_namespace__local_scalar_dense_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self) {
   auto r_out = lantern__local_scalar_dense_tensor(self->get());
-return make_xptr<XPtrTorchScalar>(r_out, "Scalar");
+return XPtrTorchScalar(r_out);
 }
 
 // [[Rcpp::export]]

@@ -26,6 +26,30 @@ XPtrTorchScalarType::operator SEXP () const {
   return xptr; 
 }
 
+XPtrTorchScalar::operator SEXP () const {
+  XPtrTorchScalarType dtype_ptr = lantern_Scalar_dtype(this->get());
+  const char * dtype_c = lantern_Dtype_type(dtype_ptr.get());
+  auto dtype = std::string(dtype_c);
+  lantern_const_char_delete(dtype_c);
+  
+  Rcpp::RObject output;
+  if (dtype == "Double") {
+    output = lantern_Scalar_to_double(this->get());
+  } else if (dtype == "Float") {
+    output = lantern_Scalar_to_float(this->get());
+  } else if (dtype == "Bool") {
+    output = lantern_Scalar_to_bool(this->get());
+  } else if (dtype == "Int") {
+    output = lantern_Scalar_to_int(this->get());
+  } else if (dtype == "Long") {
+    output = lantern_Scalar_to_int(this->get());
+  } else {
+    Rcpp::stop("Cannot convert from scalar of type.");
+  }
+  
+  return output; 
+}
+
 // [[Rcpp::export]]
 [[gnu::noinline]]
 XPtrTorchTensor test_fun (Rcpp::XPtr<XPtrTorchTensor> x)
