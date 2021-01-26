@@ -359,3 +359,4 @@ Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_tensor_tensor (
   return make_xptr<XPtrTorchTensor>(out); 
 }
 
+

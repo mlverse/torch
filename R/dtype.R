@@ -1,9 +1,9 @@
-torch_dtype <- R6::R6Class(
+torch_dtype <- R7Class(
   classname = "torch_dtype", 
   public = list(
     ptr = NULL,
     initialize = function(ptr = NULL) {
-      self$ptr <- ptr
+      ptr
     },
     print = function() {
       cat("torch_", self$.type(), "\n", sep = "")
@@ -18,6 +18,9 @@ torch_dtype <- R6::R6Class(
         TRUE
       else
         FALSE
+    },
+    ptr = function() {
+      self
     }
   )
 )

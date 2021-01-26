@@ -25,8 +25,8 @@ Rcpp::XPtr<XPtrTorchoptional_int64_t> cpp_optional_int64_t (Rcpp::Nullable<int64
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_undefined () {
-  return make_xptr<XPtrTorchTensor>(XPtrTorchTensor(lantern_Tensor_undefined()));
+XPtrTorchTensor cpp_tensor_undefined () {
+  return XPtrTorchTensor(lantern_Tensor_undefined());
 }
 
 // [[Rcpp::export]]

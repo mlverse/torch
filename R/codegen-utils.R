@@ -204,52 +204,6 @@ do_call <- function(fun, args) {
   do.call(fun, args)
 }
 
-to_return_type <- function(res, types) {
-  
-  if (inherits(res, "externalptr") && !is.null(attr(res, "dynamic_type"))) {
-    
-    dtype <- attr(res, "dynamic_type")
-    
-    if (dtype == "Tensor")
-      return(Tensor$new(ptr = res))
-    
-    if (dtype == "TensorList")
-      return(TensorList$new(ptr = res)$to_r())
-    
-    if (dtype == "ScalarType")
-      return(torch_dtype$new(ptr = res))
-    
-    if (dtype == "Scalar")
-      return(Scalar$new(ptr = res)$to_r())
-    
-  }
-  
-  if (length(types) == 1) {
-    
-    type <- types[[1]]
-    
-    if (length(type) == 1) {
-      
-      return(res)
-      
-    } else {
-      
-      out <- lapply(seq_along(res), function(x) to_return_type(res[[x]], type[x]))
-      
-      return(out)
-      
-    }
-    
-  } else if (length(types) > 1){
-    
-    out <- lapply(seq_along(res), function(x) to_return_type(res[[x]], types[x]))
-    
-    return(out)
-  }
-  
-
-}
-
 call_c_function <- function(fun_name, args, expected_types, nd_args, return_types, fun_type) {
   args_t <- all_arguments_to_torch_type(args, expected_types)
   nd_args_types <- args_t[[2]][names(args_t[[2]]) %in% nd_args]
@@ -260,6 +214,5 @@ call_c_function <- function(fun_name, args, expected_types, nd_args, return_type
     value_error("{fun_name} does not exist")
   
   out <- do_call(f, args_t[[1]])
-  
-  to_return_type(out, return_types)
+  out
 }

@@ -36,7 +36,7 @@ cpp_type <- function(decl) {
     returns <- decl$returns[[1]]
 
     if (returns$dynamic_type == "Tensor")
-      return("Rcpp::XPtr<XPtrTorchTensor>")
+      return("XPtrTorchTensor")
 
     if (returns$dynamic_type == "void")
       return("void")
@@ -48,7 +48,7 @@ cpp_type <- function(decl) {
       return("int64_t")
 
     if (returns$dynamic_type == "TensorList")
-      return("Rcpp::XPtr<XPtrTorchTensorList>")
+      return("XPtrTorchTensorList")
 
     if (returns$dynamic_type == "double")
       return("double")
@@ -57,10 +57,10 @@ cpp_type <- function(decl) {
       return("Rcpp::XPtr<XPtrTorchQScheme>")
 
     if (returns$dynamic_type == "Scalar")
-      return("Rcpp::XPtr<XPtrTorchScalar>")
+      return("XPtrTorchScalar")
 
     if (returns$dynamic_type == "ScalarType")
-      return("Rcpp::XPtr<XPtrTorchScalarType>")
+      return("XPtrTorchScalarType")
 
   } else {
     return("Rcpp::List")
@@ -324,6 +324,12 @@ cpp_argument_transform <- function(argument) {
   result
 }
 
+cast_call <- function(type) {
+  function(call) {
+    glue::glue("{type}({call})")
+  }
+}
+
 xptr_return_call <- function(type, dyn_type) {
   function(call) {
     glue::glue("make_xptr<{type}>({call}, \"{dyn_type}\")")
@@ -353,7 +359,7 @@ cpp_return_statement <- function(returns) {
     returns <- returns[[1]]
 
     if (returns$dynamic_type == "Tensor")
-      return(xptr_return_call("XPtrTorchTensor", "Tensor"))
+      return(cast_call("XPtrTorchTensor"))
 
     if (returns$dynamic_type == "bool")
       return(reinterpret_cast_call("bool"))
@@ -362,7 +368,7 @@ cpp_return_statement <- function(returns) {
       return(reinterpret_cast_call("int64_t"))
 
     if (returns$dynamic_type == "TensorList")
-      return(xptr_return_call("XPtrTorchTensorList", "TensorList"))
+      return(cast_call("XPtrTorchTensorList"))
 
     if (returns$dynamic_type == "double")
       return(reinterpret_cast_call("double"))
@@ -371,10 +377,10 @@ cpp_return_statement <- function(returns) {
       return(xptr_return_call("XPtrTorchQScheme", "QScheme"))
 
     if (returns$dynamic_type == "Scalar")
-      return(xptr_return_call("XPtrTorchScalar", "Scalar"))
+      return(cast_call("XPtrTorchScalar"))
 
     if (returns$dynamic_type == "ScalarType")
-      return(xptr_return_call("XPtrTorchScalarType", "ScalarType"))
+      return(cast_call("XPtrTorchScalarType"))
 
   } else {
 
