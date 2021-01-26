@@ -200,6 +200,7 @@
 <li>Removed the PerformanceReporter from tests to get easier to read stack traces. (<a href='https://github.com/mlverse/torch/issues/449'>#449</a>)</li>
 <li>Fixed <code>torch_normal</code>. (<a href='https://github.com/mlverse/torch/issues/450'>#450</a>)</li>
 <li>Internal change in the R7 classes so R7 objects are simple external pointer instead of environments. This might cause breaking change if you relied on saving any kind of state in the Tensor object. (<a href='https://github.com/mlverse/torch/issues/452'>#452</a>)</li>
+<li>Internal refactoring making Rcpp aware of some XPtrTorch* types so making it simpler to return them from Rcpp code. This might cause a breaking change if you are relying on <code><a href="../reference/torch_dtype.html">torch_dtype()</a></code> being an R6 class. (<a href='https://github.com/mlverse/torch/issues/451'>#451</a>)</li>
 </ul>
 </div>
     <div id="torch-021" class="section level1">
