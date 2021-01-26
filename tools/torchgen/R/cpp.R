@@ -95,7 +95,7 @@ cpp_function_name <- function(method, type) {
 cpp_parameter_type <- function(argument) {
 
   if (argument$dynamic_type == "Tensor") {
-    declaration <- "Rcpp::XPtr<XPtrTorchTensor>"
+    declaration <- "XPtrTorchTensor"
   }
 
   if (argument$dynamic_type == "bool") {
@@ -226,7 +226,7 @@ cpp_argument_transform <- function(argument) {
   argument$name <- cpp_parameter_identifier(argument)
 
   if (argument$dynamic_type == "Tensor") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "bool") {
