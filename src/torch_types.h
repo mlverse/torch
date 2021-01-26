@@ -34,6 +34,14 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchTensorList : public XPtrTorch {
+public:
+  XPtrTorchTensorList (void* x) : XPtrTorch(x, lantern_TensorList_delete) {}
+  explicit XPtrTorchTensorList (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchTensorList (const XPtrTorchTensorList& x) : XPtrTorch(x.get_shared()) {}
+  operator SEXP () const;
+};
+
 #include <Rcpp.h>
 
 class XPtrTorchScalarType : public XPtrTorch {
@@ -55,11 +63,6 @@ public:
 class XPtrTorchdouble : public XPtrTorch {
 public:
   XPtrTorchdouble (void* x) : XPtrTorch(x, lantern_double_delete) {}
-};
-
-class XPtrTorchTensorList : public XPtrTorch {
-public:
-  XPtrTorchTensorList (void* x) : XPtrTorch(x, lantern_TensorList_delete) {}
 };
 
 class XPtrTorchvariable_list : public XPtrTorch {

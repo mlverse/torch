@@ -48,7 +48,7 @@ cpp_type <- function(decl) {
       return("int64_t")
 
     if (returns$dynamic_type == "TensorList")
-      return("Rcpp::XPtr<XPtrTorchTensorList>")
+      return("XPtrTorchTensorList")
 
     if (returns$dynamic_type == "double")
       return("double")
@@ -368,7 +368,7 @@ cpp_return_statement <- function(returns) {
       return(reinterpret_cast_call("int64_t"))
 
     if (returns$dynamic_type == "TensorList")
-      return(xptr_return_call("XPtrTorchTensorList", "TensorList"))
+      return(cast_call("XPtrTorchTensorList"))
 
     if (returns$dynamic_type == "double")
       return(reinterpret_cast_call("double"))
