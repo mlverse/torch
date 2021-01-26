@@ -29203,7 +29203,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_tensor_undefined
-Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_undefined();
+XPtrTorchTensor cpp_tensor_undefined();
 RcppExport SEXP _torch_cpp_tensor_undefined() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
