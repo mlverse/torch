@@ -29081,12 +29081,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // test_fun
-[[gnu::noinline]] XPtrTorchTensor test_fun(Rcpp::XPtr<XPtrTorchTensor> x);
+[[gnu::noinline]] XPtrTorchTensor test_fun(XPtrTorchTensor x);
 RcppExport SEXP _torch_test_fun(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(test_fun(x));
     return rcpp_result_gen;
 END_RCPP

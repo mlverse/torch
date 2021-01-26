@@ -50,9 +50,24 @@ XPtrTorchScalar::operator SEXP () const {
   return output; 
 }
 
+// Constructors ----------
+
+XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_tensor")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(x);
+    return XPtrTorchTensor( out->get_shared());
+  }
+  
+  Rcpp::stop("Expected a torch_tensor.");
+}
+
+XPtrTorchTensor::XPtrTorchTensor (SEXP x) : 
+  XPtrTorch{XPtrTorchTensor_from_SEXP(x)} {}
+
 // [[Rcpp::export]]
 [[gnu::noinline]]
-XPtrTorchTensor test_fun (Rcpp::XPtr<XPtrTorchTensor> x)
+XPtrTorchTensor test_fun (XPtrTorchTensor x)
 {
-  return *x;
+  return x;
 }

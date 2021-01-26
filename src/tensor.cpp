@@ -108,7 +108,7 @@ Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor (SEXP x, std::vector<std::int64_t> 
                                             Rcpp::XPtr<XPtrTorchTensorOptions> options,
                                             bool requires_grad, bool is_integer64) {
 
-  XPtrTorchTensor tensor(nullptr);
+  XPtrTorchTensor tensor;
 
   if (TYPEOF(x) == INTSXP) 
   {
