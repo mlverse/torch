@@ -63,6 +63,13 @@ XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
     return cpp_tensor_undefined();
   }
   
+  // TODO: it would be nice to make it all C++ 
+  if (Rf_isVectorAtomic(x)) {
+    Rcpp::Environment torch_pkg = Rcpp::Environment("package:torch");
+    Rcpp::Function f = torch_pkg["torch_tensor"];
+    return XPtrTorchTensor(Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(x))->get_shared());
+  }
+  
   Rcpp::stop("Expected a torch_tensor.");
 }
 

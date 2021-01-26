@@ -73,7 +73,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(torch_tensor(obj - 1, dtype = torch_long())$ptr, "Tensor"))
   
   if (any("Tensor" == expected_types) && is.atomic(obj) && !is.null(obj))
-    return(list(torch_tensor(obj)$ptr, "Tensor"))
+    return(list(obj, "Tensor"))
   
   if (any("DimnameList" == expected_types) && is.character(obj))
     return(list(torch_dimname_list(obj)$ptr, "DimnameList"))
