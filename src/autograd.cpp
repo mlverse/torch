@@ -67,10 +67,10 @@ void event_loop_thread(std::atomic<bool> &event_loop_running)
 }
 
 // [[Rcpp::export]]
-void cpp_torch_method_backward_self_Tensor (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> gradient, bool retain_graph, bool create_graph) {
+void cpp_torch_method_backward_self_Tensor (XPtrTorchTensor self, XPtrTorchTensor gradient, bool retain_graph, bool create_graph) {
   
-  auto self_ptr = self->get();
-  auto gradient_ptr = gradient->get();
+  auto self_ptr = self.get();
+  auto gradient_ptr = gradient.get();
   auto retain_graph_val = retain_graph;
   auto create_graph_val = create_graph;
   

@@ -29,3 +29,5 @@ type reinterpret_and_clean (void * x)
   deleter(x);
   return o;
 }
+
+XPtrTorchTensor cpp_tensor_undefined ();

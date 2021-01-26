@@ -142,10 +142,10 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(NULL, "int64_t"))
   
   if (any("Tensor" == expected_types) && length(obj) == 0 && is.list(obj))
-    return(list(cpp_tensor_undefined(), "Tensor"))
+    return(list(NULL, "Tensor"))
   
   if (any("Tensor" == expected_types) && is.null(obj))
-    return(list(cpp_tensor_undefined(), "Tensor"))
+    return(list(NULL, "Tensor"))
   
   if (any("double" == expected_types) && is.null(obj))
     return(list(NULL, "double"))

@@ -59,6 +59,10 @@ XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
     return XPtrTorchTensor( out->get_shared());
   }
   
+  if (TYPEOF(x) == NILSXP) {
+    return cpp_tensor_undefined();
+  }
+  
   Rcpp::stop("Expected a torch_tensor.");
 }
 

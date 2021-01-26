@@ -60,12 +60,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_backward_self_Tensor
-void cpp_torch_method_backward_self_Tensor(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> gradient, bool retain_graph, bool create_graph);
+void cpp_torch_method_backward_self_Tensor(XPtrTorchTensor self, XPtrTorchTensor gradient, bool retain_graph, bool create_graph);
 RcppExport SEXP _torch_cpp_torch_method_backward_self_Tensor(SEXP selfSEXP, SEXP gradientSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type gradient(gradientSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type gradient(gradientSEXP);
     Rcpp::traits::input_parameter< bool >::type retain_graph(retain_graphSEXP);
     Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
     cpp_torch_method_backward_self_Tensor(self, gradient, retain_graph, create_graph);
