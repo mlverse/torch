@@ -4,6 +4,7 @@
 #include <torch/torch.h>
 #include <thread>
 #include <c10/core/CPUAllocator.h>
+#include <c10/cuda/CUDACachingAllocator.h>
 #include "utils.hpp"
 
 const std::thread::id MAIN_THREAD_ID = std::this_thread::get_id();
@@ -92,6 +93,16 @@ struct LanternCPUAllocator final : at::Allocator {
   at::DeleterFnPtr raw_deleter() const override {
     return &ReportAndDelete;
   }
+};
+
+class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
+public: 
+
+bool Execute() {
+  std::cout << "Executing custom callback" << std::endl;
+  return true;
+}
+
 };
 
 } // namespace c10
