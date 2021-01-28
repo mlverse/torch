@@ -105,6 +105,8 @@ bool Execute() {
 
 };
 
+REGISTER_FREE_MEMORY_CALLBACK("garbage_collector_callback", GarbageCollectorCallback)
+
 } // namespace c10
 
 auto lantern_allocator = at::LanternCPUAllocator();
