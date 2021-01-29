@@ -99,7 +99,12 @@ class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
 public: 
 
 bool Execute() {
-  std::cout << "Executing custom callback" << std::endl;
+  
+  if (std::this_thread::get_id() == MAIN_THREAD_ID) 
+  {
+    (*call_r_gc)();
+  }
+  
   return true;
 }
 
