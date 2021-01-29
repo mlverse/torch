@@ -6,7 +6,8 @@
 #include <c10/core/CPUAllocator.h>
 #include "utils.hpp"
 
-#ifdef __NVCC__
+
+#if __has_include(<c10/cuda/CUDACachingAllocator.h>)
 #include <c10/cuda/CUDACachingAllocator.h>
 #endif
 
@@ -98,7 +99,7 @@ struct LanternCPUAllocator final : at::Allocator {
   }
 };
 
-#if defined(__NVCC__)
+#if __has_include(<c10/cuda/CUDACachingAllocator.h>)
 class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
 public: 
 
