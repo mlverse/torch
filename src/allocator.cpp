@@ -3,9 +3,8 @@
 
 void call_r_gc ()
 {
-  static Rcpp::Environment torch("package:torch");
-  static Rcpp::Function gc = torch["torch_gc_wrapper"];
-  gc();
+  Rcpp::Function r_gc("gc");
+  r_gc(Rcpp::Named("full") = false);
 }
 
 // [[Rcpp::export]]

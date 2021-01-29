@@ -27,6 +27,3 @@ add_class_definition <- function(r6_class_generator){
   r6_class_generator
 }
 
-torch_gc_wrapper <- function() {
-  gc(full = FALSE)
-}
