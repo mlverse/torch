@@ -4,8 +4,11 @@
 #include <torch/torch.h>
 #include <thread>
 #include <c10/core/CPUAllocator.h>
-#include <c10/cuda/CUDACachingAllocator.h>
 #include "utils.hpp"
+
+#ifdef __NVCC__
+#include <c10/cuda/CUDACachingAllocator.h>
+#endif
 
 const std::thread::id MAIN_THREAD_ID = std::this_thread::get_id();
 uint64_t allocated_memory;
@@ -95,6 +98,7 @@ struct LanternCPUAllocator final : at::Allocator {
   }
 };
 
+#if defined(__NVCC__)
 class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
 public: 
 
@@ -111,6 +115,7 @@ bool Execute() {
 };
 
 REGISTER_FREE_MEMORY_CALLBACK("garbage_collector_callback", GarbageCollectorCallback)
+#endif
 
 } // namespace c10
 
