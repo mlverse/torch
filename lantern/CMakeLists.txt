@@ -105,7 +105,6 @@ set(LANTERN_SRC
     src/Trace.cpp
     src/Stack.cpp
     src/Allocator.cpp
-    src/AllocatorCuda.cpp
 )
 
 
