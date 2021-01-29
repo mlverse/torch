@@ -5,16 +5,13 @@
 #include <thread>
 #include <c10/core/CPUAllocator.h>
 #include "utils.hpp"
-
-
-#if __has_include(<c10/cuda/CUDACachingAllocator.h>)
-#include <c10/cuda/CUDACachingAllocator.h>
-#endif
+#include "AllocatorUtils.h"
 
 const std::thread::id MAIN_THREAD_ID = std::this_thread::get_id();
 uint64_t allocated_memory;
 uint64_t threshold_call_gc;
-std::mutex mtx_allocated; 
+std::mutex mtx_allocated;
+
 void (*call_r_gc) () = nullptr;
 
 // the R gc must be set whenever liblantern is loaded.
@@ -98,25 +95,6 @@ struct LanternCPUAllocator final : at::Allocator {
     return &ReportAndDelete;
   }
 };
-
-#if __has_include(<c10/cuda/CUDACachingAllocator.h>)
-class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
-public: 
-
-bool Execute() {
-  
-  if (std::this_thread::get_id() == MAIN_THREAD_ID) 
-  {
-    (*call_r_gc)();
-  }
-  
-  return true;
-}
-
-};
-
-REGISTER_FREE_MEMORY_CALLBACK("garbage_collector_callback", GarbageCollectorCallback)
-#endif
 
 } // namespace c10
 
