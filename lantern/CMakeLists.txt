@@ -76,7 +76,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 # Library
 ############################################################
 
-add_library(lantern SHARED 
+set(LANTERN_SRC 
     src/lantern.cpp
     src/TensorOptions.cpp
     src/Dtype.cpp
@@ -106,6 +106,16 @@ add_library(lantern SHARED
     src/Stack.cpp
     src/Allocator.cpp
 )
+
+
+if(DEFINED ENV{CUDA})
+  set(LANTERN_SRC 
+      ${LANTERN_SRC} 
+      src/AllocatorCuda.cpp
+  )
+endif()
+
+add_library(lantern SHARED ${LANTERN_SRC})
 add_library(lantern::library ALIAS lantern)
 
 target_include_directories(lantern PUBLIC

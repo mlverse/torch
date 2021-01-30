@@ -15,6 +15,7 @@
 - Internal change in the R7 classes so R7 objects are simple external pointer instead of environments. This might cause breaking change if you relied on
   saving any kind of state in the Tensor object. (#452)
 - Internal refactoring making Rcpp aware of some XPtrTorch* types so making it simpler to return them from Rcpp code. This might cause a breaking change if you are relying on `torch_dtype()` being an R6 class. (#451) 
+- We now call R garbage collector when there's no memory available on GPU, this can help in a few cases when the laziness of the garbage collector allows too many tensors to be on memory even though they are no longer referenced in R. (#456)
 
 # torch 0.2.1
 

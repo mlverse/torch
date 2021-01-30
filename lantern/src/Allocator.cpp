@@ -5,11 +5,13 @@
 #include <thread>
 #include <c10/core/CPUAllocator.h>
 #include "utils.hpp"
+#include "AllocatorUtils.h"
 
 const std::thread::id MAIN_THREAD_ID = std::this_thread::get_id();
 uint64_t allocated_memory;
 uint64_t threshold_call_gc;
-std::mutex mtx_allocated; 
+std::mutex mtx_allocated;
+
 void (*call_r_gc) () = nullptr;
 
 // the R gc must be set whenever liblantern is loaded.

@@ -26,3 +26,4 @@ add_class_definition <- function(r6_class_generator){
   r6_class_generator$lock()
   r6_class_generator
 }
+
