@@ -3,8 +3,8 @@
 
 void call_r_gc ()
 {
-  static Rcpp::Function r_gc("gc");
-  r_gc(Rcpp::Named("full")=false);
+  Rcpp::Function r_gc("gc");
+  r_gc(Rcpp::Named("full") = false);
 }
 
 // [[Rcpp::export]]
