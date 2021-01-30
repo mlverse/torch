@@ -58,6 +58,7 @@ public:
   XPtrTorchScalar (void* x) : XPtrTorch(x, lantern_Scalar_delete) {}
   explicit XPtrTorchScalar (std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchScalar (const XPtrTorchScalar& x) : XPtrTorch(x.get_shared()) {}
+  explicit XPtrTorchScalar (SEXP x);
   operator SEXP () const;
 };
 

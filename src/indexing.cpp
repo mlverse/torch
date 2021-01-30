@@ -273,7 +273,7 @@ Rcpp::XPtr<XPtrTorchTensor> Tensor_slice(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp:
   return make_xptr<XPtrTorchTensor>(out);
 }
 
-Rcpp::XPtr<XPtrTorchScalar> cpp_torch_scalar (SEXP x);
+XPtrTorchScalar cpp_torch_scalar (SEXP x);
 
 // [[Rcpp::export]]
 void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
@@ -287,7 +287,7 @@ void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
       TYPEOF(rhs) == STRSXP) && LENGTH(rhs) == 1)
   {
     auto s = cpp_torch_scalar(rhs);
-    lantern_Tensor_index_put_scalar_(self->get(), index.get(), s->get());  
+    lantern_Tensor_index_put_scalar_(self->get(), index.get(), s.get());  
     return;
   }
   

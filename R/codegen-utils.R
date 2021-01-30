@@ -43,7 +43,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(obj, "Tensor"))
   
   if (any("Scalar" == expected_types) && is_torch_scalar(obj))
-    return(list(obj$ptr, "Scalar"))
+    return(list(obj, "Scalar"))
   
   if (any("DimnameList" == expected_types) && is_torch_dimname_list(obj))
     return(list(obj$ptr, "DimnameList"))
@@ -67,7 +67,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(cpp_nullopt(), "ScalarType"))
   
   if (any("Scalar" == expected_types) && is_scalar_atomic(obj))
-    return(list(torch_scalar(obj)$ptr, "Scalar"))
+    return(list(obj, "Scalar"))
   
   if (arg_name == "index" && any("Tensor" == expected_types) && is.atomic(obj) && !is.null(obj))
     return(list(torch_tensor(obj - 1, dtype = torch_long())$ptr, "Tensor"))
@@ -163,7 +163,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(torch_tensor_list(list(obj))$ptr, "TensorList"))
   
   if (any("Scalar" == expected_types) && is_torch_tensor(obj))
-    return(list(torch_scalar(obj$item())$ptr, "Scalar"))
+    return(list(obj, "Scalar"))
   
   stop("Can't convert argument", call.=FALSE)
 }

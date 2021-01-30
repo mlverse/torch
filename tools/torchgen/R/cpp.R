@@ -159,7 +159,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Scalar") {
-    declaration <- "Rcpp::XPtr<XPtrTorchScalar>"
+    declaration <- "XPtrTorchScalar"
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
@@ -290,7 +290,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "Scalar") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
