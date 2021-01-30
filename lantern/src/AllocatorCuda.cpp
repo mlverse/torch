@@ -9,11 +9,6 @@
 
 #include <c10/cuda/CUDACachingAllocator.h>
 
-namespace cuda_allocator 
-{
-const std::thread::id MAIN_THREAD_ID = std::this_thread::get_id();
-}
-
 namespace c10 
 {
 class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
@@ -21,7 +16,7 @@ public:
   
   bool Execute() {
     
-    if (std::this_thread::get_id() == cuda_allocator::MAIN_THREAD_ID) 
+    if (std::this_thread::get_id() == MAIN_THREAD_ID) 
     {
       (*call_r_gc)();
     }
