@@ -136,7 +136,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(.generator_null$ptr, "Generator"))
   
   if (any("Scalar" == expected_types) && is.null(obj))
-    return(list(cpp_nullopt(), "Scalar"))
+    return(list(obj, "Scalar"))
   
   if (any("int64_t" ==  expected_types) && is.null(obj))
     return(list(NULL, "int64_t"))

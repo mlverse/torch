@@ -91,6 +91,10 @@ XPtrTorchScalar XPtrTorchScalar_from_SEXP (SEXP x)
     return cpp_torch_scalar(x);
   }
   
+  if (TYPEOF(x) == NILSXP) {
+    return XPtrTorchScalar();
+  }
+  
   if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_tensor"))
   {
     auto ten = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(x);

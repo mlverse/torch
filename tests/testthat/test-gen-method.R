@@ -22,6 +22,13 @@ test_that("add", {
   
 })
 
+test_that("clamp", {
+  
+  x <- torch_randn(5)
+  expect_error(x$clamp(1), regexp = NA)
+  
+})
+
 test_that("clone", {
   
   x <- torch_randn(10, 10)
