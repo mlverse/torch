@@ -50,6 +50,13 @@ XPtrTorchScalar::operator SEXP () const {
   return output; 
 }
 
+XPtrTorchTensorOptions::operator SEXP () const 
+{
+  auto xptr = make_xptr<XPtrTorchTensorOptions>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_tensor_options", "R7");
+  return xptr;
+}
+
 // Constructors ----------
 
 XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)

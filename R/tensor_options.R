@@ -1,4 +1,4 @@
-TensorOptions <- R6::R6Class(
+TensorOptions <- R7Class(
   classname = "torch_tensor_options",
   public = list(
     ptr = NULL,
@@ -6,20 +6,24 @@ TensorOptions <- R6::R6Class(
                           requires_grad = NULL, pinned_memory = NULL, ptr = NULL) {
       
       if (!is.null(ptr)) {
-        self$ptr <- ptr
-        return(NULL)
+        return(ptr)
       }
       
       if (is.character(device)){
         device <- torch_device(device)
       }
       
-      self$ptr <- cpp_torch_tensor_options(dtype$ptr, layout$ptr, device$ptr, requires_grad,
+      cpp_torch_tensor_options(dtype$ptr, layout$ptr, device$ptr, requires_grad,
                                            pinned_memory)
     },
     print = function() {
       cat("torch_tensor_options")
       # cpp_torch_tensor_options_print(self$ptr)
+    }
+  ),
+  active = list(
+    ptr = function() {
+      self
     }
   )
 )
