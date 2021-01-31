@@ -105,13 +105,8 @@ nn_utils_rnn_pack_padded_sequence <- function(input, lengths, batch_first=FALSE,
 #' 
 #' @export
 nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
-  
-  if (is_torch_tensor(sequences))
-    sequences <- list(sequences)
-  
-  sequences <- TensorList$new(x = sequences)
   PackedSequence$new(
-    ptr = cpp_nn_utils_pack_sequence(sequences$ptr, enforce_sorted)
+    ptr = cpp_nn_utils_pack_sequence(sequences, enforce_sorted)
   )
 }
 
@@ -155,9 +150,8 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 #' @export
 nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE, 
                                              padding_value = 0, total_length = NULL) {
-  o <- cpp_nn_utils_pad_packed_sequence(sequence$ptr, batch_first, padding_value, 
+  cpp_nn_utils_pad_packed_sequence(sequence$ptr, batch_first, padding_value, 
                                         cpp_optional_int64_t(total_length))
-  TensorList$new(ptr = o)$to_r()
 }
 
 #' Pad a list of variable length Tensors with `padding_value`
@@ -194,13 +188,7 @@ nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE,
 #' 
 #' @export
 nn_utils_rnn_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0) {
-  
-  if (is_torch_tensor(sequences))
-    sequences <- list(sequences)
-  
-  sequences <- TensorList$new(x = sequences)
-  
-  o <- cpp_nn_utils_pad_sequence(sequences$ptr, batch_first, padding_value)
+  o <- cpp_nn_utils_pad_sequence(sequences, batch_first, padding_value)
   Tensor$new(ptr = o)
 }
 

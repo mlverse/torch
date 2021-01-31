@@ -107,9 +107,41 @@ XPtrTorchScalar XPtrTorchScalar_from_SEXP (SEXP x)
 XPtrTorchScalar::XPtrTorchScalar (SEXP x):
   XPtrTorch{XPtrTorchScalar_from_SEXP(x)} {}
 
+XPtrTorchTensorList cpp_torch_tensor_list(const Rcpp::List &x);
+XPtrTorchTensorList XPtrTorchTensorList_from_SEXP (SEXP x)
+{
+  
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_tensor_list")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchTensorList>>(x);
+    return XPtrTorchTensorList( out->get_shared());
+  }
+  
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_tensor"))
+  {
+    Rcpp::List tmp = Rcpp::List::create(x);
+    return cpp_torch_tensor_list(tmp);
+  }
+  
+  if (Rf_isVectorAtomic(x))
+  {
+    Rcpp::List tmp = Rcpp::List::create(x);
+    return cpp_torch_tensor_list(tmp);
+  }
+  
+  if (TYPEOF(x) == VECSXP) 
+  {
+    return cpp_torch_tensor_list(Rcpp::as<Rcpp::List>(x));
+  }
+  
+  Rcpp::stop("Expected a torch_tensor_list.");
+}
+
+XPtrTorchTensorList::XPtrTorchTensorList (SEXP x):
+  XPtrTorch{XPtrTorchTensorList_from_SEXP(x)} {}
+
 // [[Rcpp::export]]
 [[gnu::noinline]]
-XPtrTorchScalar test_fun (XPtrTorchScalar x)
+XPtrTorchTensorList test_fun (XPtrTorchTensorList x)
 {
   return x;
 }

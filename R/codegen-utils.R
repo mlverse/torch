@@ -15,9 +15,7 @@ as_1_based_dim <- function(x) {
 }
 
 as_1_based_tensor_list <- function(x) {
-  tensors <- x$to_r()
   tensors <- lapply(tensors, as_1_based_tensor)
-  torch_tensor_list(tensors)
 }
 
 as_1_based_tensor <- function(x) {
@@ -47,13 +45,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   
   if (any("DimnameList" == expected_types) && is_torch_dimname_list(obj))
     return(list(obj$ptr, "DimnameList"))
-  
-  if (arg_name == "indices" && any("TensorList" == expected_types) && is_torch_tensor_list(obj))
-    return(list(as_1_based_tensor_list(obj)$ptr, "TensorList"))
     
-  if (any("TensorList" == expected_types) && is_torch_tensor_list(obj))
-    return(list(obj$ptr, "TensorList"))
-  
   if (any("TensorOptions" == expected_types) && is_torch_tensor_options(obj))
     return(list(obj$ptr, "TensorOptions"))
   
@@ -124,7 +116,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(torch_tensor_list(lapply(obj, function(x) x$sub(1L, 1L)))$ptr, "TensorList"))
   
   if (any("TensorList" == expected_types) && is.list(obj))
-    return(list(torch_tensor_list(obj)$ptr, "TensorList"))
+    return(list(obj, "TensorList"))
   
   if (any("MemoryFormat" == expected_types) && is.null(obj))
     return(list(cpp_nullopt(), "MemoryFormat"))
@@ -157,10 +149,10 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(torch_device(obj)$ptr, "Device"))
   
   if (any("TensorList" == expected_types) && is.numeric(obj))
-    return(list(torch_tensor_list(list(torch_tensor(obj)))$ptr, "TensorList"))
+    return(list(obj, "TensorList"))
   
   if (any("TensorList" == expected_types) && is_torch_tensor(obj))
-    return(list(torch_tensor_list(list(obj))$ptr, "TensorList"))
+    return(list(obj, "TensorList"))
   
   if (any("Scalar" == expected_types) && is_torch_tensor(obj))
     return(list(obj, "Scalar"))
