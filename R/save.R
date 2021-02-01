@@ -34,9 +34,9 @@ tensor_to_raw_vector <- function(x) {
 #' @concept serialization
 #' @export
 torch_save.nn_module <- function(obj, path, ...) {
- state_dict <- obj$state_dict()
- state_raw <- lapply(state_dict, tensor_to_raw_vector)
- saveRDS(list(module = obj, state_dict = state_raw, type = "module"), path)
+  state_dict <- obj$state_dict()
+  state_raw <- lapply(state_dict, tensor_to_raw_vector)
+  saveRDS(list(module = obj, state_dict = state_raw, type = "module", version = 1), path)
 }
 
 #' Loads a saved object
@@ -66,6 +66,10 @@ torch_load_module <- function(obj) {
     close(con)
     torch_load_tensor(r)
   })
+  
+  if (is.null(obj$version) || (obj$version < 1))
+    obj$module$apply(internal_update_parameters_and_buffers)
+  
   obj$module$load_state_dict(obj$state_dict)
   obj$module
 }
@@ -94,3 +98,26 @@ load_state_dict <- function(path) {
   names(values) <- o$keys
   values
 }
+
+internal_update_parameters_and_buffers <- function(m) {
+  
+  to_ptr_tensor <- function(p) {
+    if (typeof(p) == "environment") {
+      cls <- class(p)
+      class(p) <- NULL
+      p <- p$ptr
+      class(p) <- cls
+      p
+    }
+  }
+  
+  # update buffers and params for the new type
+  private <- m$.__enclos_env__$private
+  for (i in seq_along(private$buffers_)) {
+    private$buffers_[[i]] <- to_ptr_tensor(private$buffers_[[i]])
+  }
+  for (i in seq_along(private$parameters_)) {
+    private$parameters_[[i]] <- to_ptr_tensor(private$parameters_[[i]])
+  }
+}
+
