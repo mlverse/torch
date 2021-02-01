@@ -166,7 +166,7 @@ nn_Module <- R6::R6Class(
       for (name in names(local_state)) {
         key <- paste0(prefix, name)
         if (key %in% names(state_dict)) {
-         input_param <- state_dict[[key]] 
+         input_param <- state_dict[[key]]
          param <- local_state[[name]]
          with_no_grad({
            param$copy_(input_param)
@@ -210,7 +210,7 @@ nn_Module <- R6::R6Class(
       fn(self)
       invisible(create_nn_module_callable(self))
     }
-    
+  
   ),
   private = list(
     parameters_ = list(),
