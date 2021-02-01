@@ -155,8 +155,10 @@ test_that("load a state dict created in python", {
 
 test_that("Can load a torch v0.2.1 model", {
   
+  skip_on_os("windows")
+  
   tmp <- tempfile("model", fileext = "pt")
-  download.file("https://storage.googleapis.com/torch-lantern-builds/testing-models/v0.2.1.pt", destfile = tmp)
+  download.file("https://storage.googleapis.com/torch-lantern-builds/testing-models/v0.2.1.pt", destfile = tmp, mode = "wb")
   
   model <- torch_load(tmp)
   x <- torch_randn(32, 1, 28, 28)
