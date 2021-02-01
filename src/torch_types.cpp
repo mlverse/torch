@@ -146,9 +146,60 @@ XPtrTorchTensorList XPtrTorchTensorList_from_SEXP (SEXP x)
 XPtrTorchTensorList::XPtrTorchTensorList (SEXP x):
   XPtrTorch{XPtrTorchTensorList_from_SEXP(x)} {}
 
+XPtrTorchTensorOptions XPtrTorchTensorOptions_from_SEXP (SEXP x)
+{
+  
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_tensor_options")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchTensorOptions>>(x);
+    return XPtrTorchTensorOptions( out->get_shared());
+  }
+  
+  if (TYPEOF(x) == VECSXP || Rf_inherits(x, "torch_tensor_options")) 
+  {
+    XPtrTorchTensorOptions options(lantern_TensorOptions());
+    Rcpp::List args = Rcpp::as<Rcpp::List>(x);
+    std::vector<std::string> names = args.names();
+    
+    for (auto i = names.begin(); i != names.end(); ++i)
+    {
+      if (TYPEOF(args[*i]) == NILSXP) 
+      {
+        continue;
+      }
+      
+      if (*i == "dtype")
+      {
+        auto dtype = *Rcpp::as<Rcpp::XPtr<XPtrTorch>>(args[*i]);
+        options = lantern_TensorOptions_dtype(options.get(), dtype.get());
+      }
+      if (*i == "layout") {
+        auto layout = *Rcpp::as<Rcpp::XPtr<XPtrTorch>>(args[*i]);
+        options = lantern_TensorOptions_layout(options.get(), layout.get());
+      }
+      if (*i == "device") {
+        auto device = * Rcpp::as<Rcpp::XPtr<XPtrTorch>>(args[*i]);
+        options = lantern_TensorOptions_device(options.get(), device.get());
+      }
+      if (*i == "requires_grad") {
+        options = lantern_TensorOptions_requires_grad(options.get(), Rcpp::as<bool>(args[*i]));
+      }
+      if (*i == "pinned_memory") {
+        options = lantern_TensorOptions_pinned_memory(options.get(), Rcpp::as<bool>(args[*i]));
+      }
+    }
+    
+    return options;
+  }
+  
+  Rcpp::stop("Expected a torch_tensor_option.");
+}
+
+XPtrTorchTensorOptions::XPtrTorchTensorOptions (SEXP x):
+  XPtrTorch{XPtrTorchTensorOptions_from_SEXP(x)} {}
+
 // [[Rcpp::export]]
 [[gnu::noinline]]
-XPtrTorchTensorList test_fun (XPtrTorchTensorList x)
+XPtrTorchTensorOptions test_fun (XPtrTorchTensorOptions x)
 {
   return x;
 }

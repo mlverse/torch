@@ -484,7 +484,7 @@ torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
       std = std,
       size = size,
       generator = generator$ptr,
-      options = options$ptr
+      options = options
     )))
   }
   

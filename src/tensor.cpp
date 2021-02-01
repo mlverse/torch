@@ -105,7 +105,7 @@ XPtrTorchTensor tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
-                                            Rcpp::XPtr<XPtrTorchTensorOptions> options,
+                                            XPtrTorchTensorOptions options,
                                             bool requires_grad, bool is_integer64) {
 
   XPtrTorchTensor tensor;
@@ -131,7 +131,7 @@ Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor (SEXP x, std::vector<std::int64_t> 
     Rcpp::stop("R type not handled");
   };
   
-  tensor = lantern_Tensor_to(tensor.get(), options->get());
+  tensor = lantern_Tensor_to(tensor.get(), options.get());
   tensor = lantern_Tensor_set_requires_grad(tensor.get(), requires_grad);
 
   return make_xptr<XPtrTorchTensor>(tensor);
@@ -304,12 +304,12 @@ int cpp_get_num_interop_threads ()
 Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_double_double (double mean, double std, 
                                                                 std::vector<int64_t> size,
                                                                 Rcpp::XPtr<XPtrTorchGenerator> generator,
-                                                                Rcpp::XPtr<XPtrTorchGenerator> options) {
+                                                                XPtrTorchTensorOptions options) {
   XPtrTorchTensor out = lantern_normal_double_double_intarrayref_generator_tensoroptions(
     mean, std, 
     XPtrTorchvector_int64_t(lantern_vector_int64_t(size.data(), size.size())).get(),
     generator->get(),
-    options->get()
+    options.get()
   );
   return make_xptr<XPtrTorchTensor>(out);
 }

@@ -143,7 +143,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "TensorOptions") {
-    declaration <- "Rcpp::XPtr<XPtrTorchTensorOptions>"
+    declaration <- "XPtrTorchTensorOptions"
   }
 
   if (argument$dynamic_type == "Generator *") {
@@ -274,7 +274,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "TensorOptions") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Generator *") {

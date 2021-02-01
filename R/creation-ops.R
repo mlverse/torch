@@ -22,7 +22,7 @@ resolve_size <- function(...) {
 torch_ones <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
   device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -39,7 +39,7 @@ torch_ones_like <- function(input, dtype = NULL, layout = torch_strided(),
                             device=NULL, requires_grad = FALSE, 
                             memory_format = torch_preserve_format()) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -55,7 +55,7 @@ torch_ones_like <- function(input, dtype = NULL, layout = torch_strided(),
 torch_rand <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
                        device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -72,7 +72,7 @@ torch_rand_like <- function(input, dtype = NULL, layout = torch_strided(),
                             device=NULL, requires_grad = FALSE, 
                             memory_format = torch_preserve_format()) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -90,7 +90,7 @@ torch_randint <- function(low, high, size, generator = NULL, dtype = NULL, layou
                           memory_format = torch_preserve_format()) {
   
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -110,7 +110,7 @@ torch_randint_like <- function(input, low, high, dtype = NULL,
                                layout = torch_strided(), 
                                device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -128,7 +128,7 @@ torch_randint_like <- function(input, low, high, dtype = NULL,
 torch_randn <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
                        device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -145,7 +145,7 @@ torch_randn_like <- function(input, dtype = NULL, layout = torch_strided(),
                             device=NULL, requires_grad = FALSE, 
                             memory_format = torch_preserve_format()) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -161,7 +161,7 @@ torch_randn_like <- function(input, dtype = NULL, layout = torch_strided(),
 torch_randperm <- function(n, dtype = torch_int64(), layout = torch_strided(), 
                            device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -176,7 +176,7 @@ torch_randperm <- function(n, dtype = torch_int64(), layout = torch_strided(),
 torch_zeros <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
                        device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -193,7 +193,7 @@ torch_zeros_like <- function(input, dtype = NULL, layout = torch_strided(),
                             device=NULL, requires_grad = FALSE, 
                             memory_format = torch_preserve_format()) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -209,7 +209,7 @@ torch_zeros_like <- function(input, dtype = NULL, layout = torch_strided(),
 torch_empty <- function(..., names = NULL, dtype = NULL, layout = torch_strided(), 
                         device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -226,7 +226,7 @@ torch_empty_like <- function(input, dtype = NULL, layout = torch_strided(),
                              device=NULL, requires_grad = FALSE, 
                              memory_format = torch_preserve_format()) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -242,7 +242,7 @@ torch_empty_like <- function(input, dtype = NULL, layout = torch_strided(),
 torch_arange <- function(start, end, step = 1, dtype = NULL, layout = torch_strided(), 
                          device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -267,7 +267,7 @@ torch_range <- function(start, end, step = 1, dtype = NULL, layout = torch_strid
 torch_linspace <- function(start, end, steps=100, dtype = NULL, layout = torch_strided(), 
                            device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -284,7 +284,7 @@ torch_linspace <- function(start, end, steps=100, dtype = NULL, layout = torch_s
 torch_logspace <- function(start, end, steps=100, base=10, dtype = NULL, layout = torch_strided(), 
                            device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -302,7 +302,7 @@ torch_logspace <- function(start, end, steps=100, base=10, dtype = NULL, layout 
 torch_eye <- function(n, m=n, dtype = NULL, layout = torch_strided(), 
                       device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -318,7 +318,7 @@ torch_eye <- function(n, m=n, dtype = NULL, layout = torch_strided(),
 torch_empty_strided <- function(size, stride, dtype = NULL, layout = torch_strided(), 
                                 device=NULL, requires_grad = FALSE, pin_memory = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -335,7 +335,7 @@ torch_empty_strided <- function(size, stride, dtype = NULL, layout = torch_strid
 torch_full <- function(size, fill_value, names = NULL, dtype = NULL, layout = torch_strided(), 
                        device=NULL, requires_grad = FALSE) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -353,7 +353,7 @@ torch_full_like <- function(input, fill_value, dtype = NULL, layout = torch_stri
                              device=NULL, requires_grad = FALSE, 
                              memory_format = torch_preserve_format()) {
   args <- list(
-    options = list(
+    options = torch_tensor_options(
       dtype = dtype,
       layout = layout,
       device = device,
