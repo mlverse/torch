@@ -155,7 +155,7 @@ test_that("load a state dict created in python", {
 
 test_that("Can load a torch v0.2.1 model", {
   
-  tmp <- tempfile("model.pt")
+  tmp <- tempfile("model", fileext = "pt")
   download.file("https://storage.googleapis.com/torch-lantern-builds/testing-models/v0.2.1.pt", destfile = tmp)
   
   model <- torch_load(tmp)
