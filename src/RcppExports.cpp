@@ -368,7 +368,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_device
-Rcpp::XPtr<XPtrTorchDevice> cpp_torch_device(std::string type, Rcpp::Nullable<std::int64_t> index);
+XPtrTorchDevice cpp_torch_device(std::string type, Rcpp::Nullable<std::int64_t> index);
 RcppExport SEXP _torch_cpp_torch_device(SEXP typeSEXP, SEXP indexSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -5344,13 +5344,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType
-XPtrTorchTensor cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType(XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDevice> device, Rcpp::XPtr<XPtrTorch> dtype, bool non_blocking, bool copy, Rcpp::XPtr<XPtrTorchMemoryFormat> memory_format);
+XPtrTorchTensor cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType(XPtrTorchTensor self, XPtrTorchDevice device, Rcpp::XPtr<XPtrTorch> dtype, bool non_blocking, bool copy, Rcpp::XPtr<XPtrTorchMemoryFormat> memory_format);
 RcppExport SEXP _torch_cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType(SEXP selfSEXP, SEXP deviceSEXP, SEXP dtypeSEXP, SEXP non_blockingSEXP, SEXP copySEXP, SEXP memory_formatSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDevice> >::type device(deviceSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDevice >::type device(deviceSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type dtype(dtypeSEXP);
     Rcpp::traits::input_parameter< bool >::type non_blocking(non_blockingSEXP);
     Rcpp::traits::input_parameter< bool >::type copy(copySEXP);
@@ -29081,12 +29081,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // test_fun
-[[gnu::noinline]] XPtrTorchTensorOptions test_fun(XPtrTorchTensorOptions x);
+[[gnu::noinline]] XPtrTorchDevice test_fun(XPtrTorchDevice x);
 RcppExport SEXP _torch_test_fun(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDevice >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(test_fun(x));
     return rcpp_result_gen;
 END_RCPP

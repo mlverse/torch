@@ -57,6 +57,13 @@ XPtrTorchTensorOptions::operator SEXP () const
   return xptr;
 }
 
+XPtrTorchDevice::operator SEXP () const 
+{
+  auto xptr = make_xptr<XPtrTorchDevice>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_device", "R7");
+  return xptr;
+}
+
 // Constructors ----------
 
 XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
@@ -197,9 +204,46 @@ XPtrTorchTensorOptions XPtrTorchTensorOptions_from_SEXP (SEXP x)
 XPtrTorchTensorOptions::XPtrTorchTensorOptions (SEXP x):
   XPtrTorch{XPtrTorchTensorOptions_from_SEXP(x)} {}
 
+XPtrTorchDevice cpp_torch_device(std::string type, Rcpp::Nullable<std::int64_t> index);
+XPtrTorchDevice XPtrTorchDevice_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_device")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchDevice>>(x);
+    return XPtrTorchDevice( out->get_shared());
+  }
+  
+  if (TYPEOF(x) == VECSXP && Rf_inherits(x, "torch_device"))
+  {
+    auto a = Rcpp::as<Rcpp::List>(x);
+    return cpp_torch_device(
+      Rcpp::as<std::string>(a["type"]), 
+      Rcpp::as<Rcpp::Nullable<std::int64_t>>(a["index"])
+    );
+  }
+  
+  if (TYPEOF(x) == STRSXP && (LENGTH(x) == 1))
+  {
+    auto str = Rcpp::as<std::string>(x);
+    SEXP index = R_NilValue;
+    
+    auto delimiter = str.find(":");
+    if (delimiter!=std::string::npos) {
+      index = Rcpp::wrap(std::stoi(str.substr(delimiter + 1, str.length())));
+      str = str.substr(0, delimiter);
+    }
+    
+    return cpp_torch_device(str, index);
+  }
+  
+  Rcpp::stop("Expected a torch_device");
+}
+
+XPtrTorchDevice::XPtrTorchDevice (SEXP x):
+  XPtrTorch{XPtrTorchDevice_from_SEXP(x)} {}
+
 // [[Rcpp::export]]
 [[gnu::noinline]]
-XPtrTorchTensorOptions test_fun (XPtrTorchTensorOptions x)
+XPtrTorchDevice test_fun (XPtrTorchDevice x)
 {
   return x;
 }

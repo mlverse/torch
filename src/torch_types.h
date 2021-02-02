@@ -72,6 +72,15 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchDevice : public XPtrTorch {
+public:
+  XPtrTorchDevice (void* x) : XPtrTorch(x, lantern_Device_delete) {}
+  explicit XPtrTorchDevice (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchDevice (const XPtrTorchDevice& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchDevice (SEXP x);
+  operator SEXP () const;
+};
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
@@ -104,10 +113,6 @@ public:
   XPtrTorchbool (void* x) : XPtrTorch(x, lantern_bool_delete) {}
 };
 
-class XPtrTorchDevice : public XPtrTorch {
-public:
-  XPtrTorchDevice (void* x) : XPtrTorch(x, lantern_Device_delete) {}
-};
 
 class XPtrTorchLayout : public XPtrTorch {
 public:

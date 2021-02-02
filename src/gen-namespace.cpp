@@ -2352,8 +2352,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDevice> device, Rcpp::XPtr<XPtrTorch> dtype, bool non_blocking, bool copy, Rcpp::XPtr<XPtrTorchMemoryFormat> memory_format) {
-  auto r_out = lantern_Tensor_to_tensor_device_scalartype_bool_bool_memoryformat(self.get(), device->get(), dtype->get(), reinterpret_cast<void*>(&non_blocking), reinterpret_cast<void*>(&copy), memory_format->get());
+XPtrTorchTensor cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchDevice device, Rcpp::XPtr<XPtrTorch> dtype, bool non_blocking, bool copy, Rcpp::XPtr<XPtrTorchMemoryFormat> memory_format) {
+  auto r_out = lantern_Tensor_to_tensor_device_scalartype_bool_bool_memoryformat(self.get(), device.get(), dtype->get(), reinterpret_cast<void*>(&non_blocking), reinterpret_cast<void*>(&copy), memory_format->get());
 return XPtrTorchTensor(r_out);
 }
 

@@ -183,7 +183,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Device") {
-    declaration <- "Rcpp::XPtr<XPtrTorchDevice>"
+    declaration <- "XPtrTorchDevice"
   }
 
   if (argument$dynamic_type == "Storage") {
@@ -314,7 +314,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "Device") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Storage") {

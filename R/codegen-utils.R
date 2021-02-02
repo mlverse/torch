@@ -143,10 +143,10 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(NULL, "double"))
   
   if (any("Device" == expected_types) && is_torch_device(obj))
-    return(list(obj$ptr, "Device"))
+    return(list(obj, "Device"))
   
   if (any("Device" == expected_types) && is.character(obj))
-    return(list(torch_device(obj)$ptr, "Device"))
+    return(list(obj, "Device"))
   
   if (any("TensorList" == expected_types) && is.numeric(obj))
     return(list(obj, "TensorList"))
