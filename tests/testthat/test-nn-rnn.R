@@ -225,3 +225,19 @@ test_that("gru", {
   expect_equal_to_tensor(z[[2]][3,,], torch_ones(1,5) * 7.0209e-02, tolerance = 1e-4)
   
 })
+
+test_that("rnn gpu", {
+  
+  skip_if_cuda_not_available()
+  
+  rnn <- nn_rnn(10, 1)
+  rnn$to(device = "cuda")
+  
+  input <- torch_ones(1, 1, 10, device = "cuda")
+  out <- rnn(input)
+  
+  expect_length(out, 2)
+  expect_tensor_shape(out[[1]], c(1,1,1))
+  expect_tensor_shape(out[[2]], c(1,1,1))
+  
+})

@@ -105,6 +105,21 @@ nn_rnn_base <- nn_module(
     self$flatten_parameters()
     self$reset_parameters()
   },
+  .apply = function(fn) {
+      ret <- super$.apply(fn)
+      # Resets _flat_weights
+      # Note: be v. careful before removing this, as 3rd party device types
+      # likely rely on this behavior to properly .to() modules like LSTM.
+      self$flat_weights_ <- lapply(
+        self$flat_weight_names_,
+        function(wn) {
+          self[[wn]]
+        }
+      )
+      # Flattens params (on CUDA)
+      self$flatten_parameters()
+      ret
+  },
   flatten_parameters = function() {
     
   },
