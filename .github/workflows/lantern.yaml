@@ -240,18 +240,9 @@ jobs:
       - name: Install libs
         working-directory: ${{runner.workspace}}
         run: |
-          mkdir install
-          cp ${{matrix.build}}/lanterntest${{matrix.exeext}} install/
-          cp ${{matrix.build}}/${{matrix.library}} install/${{matrix.library}}
-          cp build/libtorch/lib/*${{matrix.libext}} install
           mkdir artifacts
           cp -R ${{matrix.build}}/${{matrix.artifacts}} artifacts
           rm -r build
-
-      - name: Test library
-        if: ${{ matrix.cuda == 0 }}
-        working-directory: ${{runner.workspace}}/install
-        run: ${{matrix.test}} ${{runner.workspace}}/install
         
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
