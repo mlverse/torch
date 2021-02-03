@@ -8873,6 +8873,10 @@ test_fun <- function(x) {
     .Call('_torch_test_fun', PACKAGE = 'torchpkg', x)
 }
 
+test_fun2 <- function(x) {
+    .Call('_torch_test_fun2', PACKAGE = 'torchpkg', x)
+}
+
 cpp_trace_function <- function(fn, inputs, compilation_unit) {
     .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit)
 }

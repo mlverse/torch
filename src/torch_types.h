@@ -91,6 +91,26 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchDimname : public XPtrTorch {
+public:
+  XPtrTorchDimname (void* x) : XPtrTorch(x, lantern_Dimname_delete) {}
+  explicit XPtrTorchDimname (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchDimname (const XPtrTorchDimname& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchDimname (SEXP x);
+  explicit XPtrTorchDimname (const std::string& x) : 
+    XPtrTorch(lantern_Dimname(x.c_str()), lantern_Dimname_delete) {};
+  operator SEXP () const;
+};
+
+class XPtrTorchDimnameList : public XPtrTorch {
+public:
+  XPtrTorchDimnameList (void* x) : XPtrTorch(x, lantern_DimnameList_delete) {}
+  explicit XPtrTorchDimnameList (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchDimnameList (const XPtrTorchDimnameList& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchDimnameList (SEXP x);
+  operator SEXP () const;
+};
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
@@ -132,16 +152,6 @@ public:
 class XPtrTorchGenerator : public XPtrTorch {
 public:
   XPtrTorchGenerator (void* x) : XPtrTorch(x, lantern_Generator_delete) {}
-};
-
-class XPtrTorchDimname : public XPtrTorch {
-public:
-  XPtrTorchDimname (void* x) : XPtrTorch(x, lantern_Dimname_delete) {}
-};
-
-class XPtrTorchDimnameList : public XPtrTorch {
-public:
-  XPtrTorchDimnameList (void* x) : XPtrTorch(x, lantern_DimnameList_delete) {}
 };
 
 class XPtrTorchMemoryFormat : public XPtrTorch {

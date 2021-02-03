@@ -103,7 +103,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "DimnameList") {
-    declaration <-  "Rcpp::XPtr<XPtrTorch>"
+    declaration <-  "XPtrTorchDimnameList"
   }
 
   if (argument$dynamic_type == "TensorList") {
@@ -179,7 +179,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Dimname") {
-    declaration <- "Rcpp::XPtr<XPtrTorchDimname>"
+    declaration <- "XPtrTorchDimname"
   }
 
   if (argument$dynamic_type == "Device") {
@@ -234,7 +234,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "DimnameList") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "TensorList") {
@@ -310,7 +310,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "Dimname") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Device") {

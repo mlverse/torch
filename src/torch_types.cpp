@@ -71,6 +71,20 @@ XPtrTorchDtype::operator SEXP () const
   return xptr;
 }
 
+XPtrTorchDimname::operator SEXP () const
+{
+  auto xptr = make_xptr<XPtrTorchDimname>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_dimname", "R7");
+  return xptr;
+}
+
+XPtrTorchDimnameList::operator SEXP () const
+{
+  auto xptr = make_xptr<XPtrTorchDimnameList>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_dimname_list", "R7");
+  return xptr;
+}
+
 // Constructors ----------
 
 XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
@@ -266,9 +280,60 @@ XPtrTorchDtype XPtrTorchDtype_from_SEXP (SEXP x)
 XPtrTorchDtype::XPtrTorchDtype (SEXP x):
   XPtrTorch{XPtrTorchDtype_from_SEXP(x)} {}
 
+XPtrTorchDimname XPtrTorchDimname_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_dimname"))
+  {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchDimname>>(x);
+    return XPtrTorchDimname( out->get_shared());
+  }
+  
+  if (TYPEOF(x) == STRSXP && (LENGTH(x) == 1))
+  {
+    return XPtrTorchDimname(Rcpp::as<std::string>(x));
+  }
+  
+  Rcpp::stop("Expected a torch_dimname");
+}
+
+XPtrTorchDimname::XPtrTorchDimname (SEXP x):
+  XPtrTorch{XPtrTorchDimname_from_SEXP(x)} {}
+
+XPtrTorchDimnameList XPtrTorchDimnameList_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_dimname_list"))
+  {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchDimnameList>>(x);
+    return XPtrTorchDimnameList( out->get_shared());
+  }
+  
+  if (TYPEOF(x) == STRSXP)
+  {
+    XPtrTorchDimnameList out = lantern_DimnameList();
+    auto names = Rcpp::as<std::vector<std::string>>(x);
+    for (int i = 0; i < names.size(); i++) {
+      lantern_DimnameList_push_back(out.get(), XPtrTorchDimname(names[i]).get());
+    }
+    return out;
+  }
+  
+  Rcpp::stop("Expected a torch_dimname_list");
+}
+
+XPtrTorchDimnameList::XPtrTorchDimnameList (SEXP x):
+  XPtrTorch{XPtrTorchDimnameList_from_SEXP(x)} {}
+
+
 // [[Rcpp::export]]
 [[gnu::noinline]]
-XPtrTorchDtype test_fun (XPtrTorchDtype x)
+XPtrTorchDimname test_fun (XPtrTorchDimname x)
+{
+  return x;
+}
+
+// [[Rcpp::export]]
+[[gnu::noinline]]
+XPtrTorchDimnameList test_fun2 (XPtrTorchDimnameList x)
 {
   return x;
 }
