@@ -25,7 +25,7 @@ expect_no_error <- function(object, ...) {
 
 expect_tensor <- function(object) {
   expect_true(is_torch_tensor(object))
-  expect_no_error(as_array(object))
+  expect_no_error(as_array(object$to(device="cpu")))
 }
 
 expect_equal_to_r <- function(object, expected, ...) {
