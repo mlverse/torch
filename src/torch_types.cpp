@@ -64,6 +64,13 @@ XPtrTorchDevice::operator SEXP () const
   return xptr;
 }
 
+XPtrTorchDtype::operator SEXP () const 
+{
+  auto xptr = make_xptr<XPtrTorchDtype>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_dtype", "R7");
+  return xptr;
+}
+
 // Constructors ----------
 
 XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
@@ -241,9 +248,27 @@ XPtrTorchDevice XPtrTorchDevice_from_SEXP (SEXP x)
 XPtrTorchDevice::XPtrTorchDevice (SEXP x):
   XPtrTorch{XPtrTorchDevice_from_SEXP(x)} {}
 
+XPtrTorchDtype XPtrTorchDtype_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_dtype")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchDtype>>(x);
+    return XPtrTorchDtype( out->get_shared());
+  }
+  
+  if (TYPEOF(x) == NILSXP)
+  {
+    return XPtrTorchDtype();
+  }
+  
+  Rcpp::stop("Expected a torch_dtype");
+}
+
+XPtrTorchDtype::XPtrTorchDtype (SEXP x):
+  XPtrTorch{XPtrTorchDtype_from_SEXP(x)} {}
+
 // [[Rcpp::export]]
 [[gnu::noinline]]
-XPtrTorchDevice test_fun (XPtrTorchDevice x)
+XPtrTorchDtype test_fun (XPtrTorchDtype x)
 {
   return x;
 }

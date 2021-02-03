@@ -155,7 +155,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "ScalarType") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "XPtrTorchDtype"
   }
 
   if (argument$dynamic_type == "Scalar") {
@@ -286,7 +286,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "ScalarType") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Scalar") {

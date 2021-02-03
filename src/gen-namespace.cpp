@@ -624,26 +624,26 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(r_out, 0)),XPtrTorc
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_cumprod_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_cumprod_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_cumprod_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_cumprod_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_cumprod_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_cumprod_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_cumprod_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_cumprod_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_cumsum_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_cumsum_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_cumsum_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_cumsum_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_cumsum_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_cumsum_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_cumsum_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_cumsum_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -1176,14 +1176,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_log_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_log_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_log_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_log_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_log_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_log_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_log_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_log_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -1248,20 +1248,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_mean_self_Tensor (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_mean_tensor_scalartype(self.get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_mean_self_Tensor (XPtrTorchTensor self, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_mean_tensor_scalartype(self.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_mean_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_mean_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_method_mean_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_mean_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_mean_self_Tensor_dim_DimnameList (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_mean_tensor_dimnamelist_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_method_mean_self_Tensor_dim_DimnameList (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_mean_tensor_dimnamelist_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -1692,14 +1692,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -1794,32 +1794,32 @@ return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_sum_self_Tensor (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_sum_tensor_scalartype(self.get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_sum_self_Tensor (XPtrTorchTensor self, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_sum_tensor_scalartype(self.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_sum_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_sum_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_method_sum_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_sum_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_sum_self_Tensor_dim_DimnameList (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_sum_tensor_dimnamelist_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_method_sum_self_Tensor_dim_DimnameList (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_sum_tensor_dimnamelist_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_nansum_self_Tensor (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_nansum_tensor_scalartype(self.get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_nansum_self_Tensor (XPtrTorchTensor self, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_nansum_tensor_scalartype(self.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_nansum_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_nansum_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_method_nansum_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_nansum_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -1872,20 +1872,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_prod_self_Tensor (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_prod_tensor_scalartype(self.get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_prod_self_Tensor (XPtrTorchTensor self, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_prod_tensor_scalartype(self.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_prod_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_prod_tensor_intt_bool_scalartype(self.get(), dim.get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_method_prod_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_prod_tensor_intt_bool_scalartype(self.get(), dim.get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_prod_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_prod_tensor_dimname_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_method_prod_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_prod_tensor_dimname_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -2046,8 +2046,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_norm_self_Tensor_p_Scalar_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_norm_tensor_scalar_scalartype(self.get(), p.get(), dtype->get());
+XPtrTorchTensor cpp_torch_method_norm_self_Tensor_p_Scalar_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_norm_tensor_scalar_scalartype(self.get(), p.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -2058,8 +2058,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_norm_tensor_scalar_intarrayref_bool_scalartype(self.get(), p.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_method_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_norm_tensor_scalar_intarrayref_bool_scalartype(self.get(), p.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -2070,8 +2070,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_Tensor_norm_tensor_scalar_dimnamelist_bool_scalartype(self.get(), p.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_method_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_Tensor_norm_tensor_scalar_dimnamelist_bool_scalartype(self.get(), p.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -2352,14 +2352,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchDevice device, Rcpp::XPtr<XPtrTorch> dtype, bool non_blocking, bool copy, Rcpp::XPtr<XPtrTorchMemoryFormat> memory_format) {
-  auto r_out = lantern_Tensor_to_tensor_device_scalartype_bool_bool_memoryformat(self.get(), device.get(), dtype->get(), reinterpret_cast<void*>(&non_blocking), reinterpret_cast<void*>(&copy), memory_format->get());
+XPtrTorchTensor cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchDevice device, XPtrTorchDtype dtype, bool non_blocking, bool copy, Rcpp::XPtr<XPtrTorchMemoryFormat> memory_format) {
+  auto r_out = lantern_Tensor_to_tensor_device_scalartype_bool_bool_memoryformat(self.get(), device.get(), dtype.get(), reinterpret_cast<void*>(&non_blocking), reinterpret_cast<void*>(&copy), memory_format->get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_to_self_Tensor_dtype_ScalarType (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype, bool non_blocking, bool copy, Rcpp::XPtr<XPtrTorchMemoryFormat> memory_format) {
-  auto r_out = lantern_Tensor_to_tensor_scalartype_bool_bool_memoryformat(self.get(), dtype->get(), reinterpret_cast<void*>(&non_blocking), reinterpret_cast<void*>(&copy), memory_format->get());
+XPtrTorchTensor cpp_torch_method_to_self_Tensor_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchDtype dtype, bool non_blocking, bool copy, Rcpp::XPtr<XPtrTorchMemoryFormat> memory_format) {
+  auto r_out = lantern_Tensor_to_tensor_scalartype_bool_bool_memoryformat(self.get(), dtype.get(), reinterpret_cast<void*>(&non_blocking), reinterpret_cast<void*>(&copy), memory_format->get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -3822,8 +3822,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace__sobol_engine_draw_quasi_Tensor_n_int64_t_sobolstate_Tensor_dimension_int64_t_num_generated_int64_t_dtype_ScalarType (XPtrTorchTensor quasi, nullable<int64_t> n, XPtrTorchTensor sobolstate, nullable<int64_t> dimension, nullable<int64_t> num_generated, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern__sobol_engine_draw_tensor_intt_tensor_intt_intt_scalartype(quasi.get(), n.get(), sobolstate.get(), dimension.get(), num_generated.get(), dtype->get());
+Rcpp::List cpp_torch_namespace__sobol_engine_draw_quasi_Tensor_n_int64_t_sobolstate_Tensor_dimension_int64_t_num_generated_int64_t_dtype_ScalarType (XPtrTorchTensor quasi, nullable<int64_t> n, XPtrTorchTensor sobolstate, nullable<int64_t> dimension, nullable<int64_t> num_generated, XPtrTorchDtype dtype) {
+  auto r_out = lantern__sobol_engine_draw_tensor_intt_tensor_intt_intt_scalartype(quasi.get(), n.get(), sobolstate.get(), dimension.get(), num_generated.get(), dtype.get());
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(r_out, 0)),XPtrTorchTensor(lantern_vector_get(r_out, 1)));
 }
 
@@ -5188,26 +5188,26 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cumprod_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_cumprod_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_cumprod_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_cumprod_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cumprod_out_out_Tensor_self_Tensor_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_cumprod_out_tensor_tensor_intt_scalartype(out.get(), self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_cumprod_out_out_Tensor_self_Tensor_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_cumprod_out_tensor_tensor_intt_scalartype(out.get(), self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cumprod_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_cumprod_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_cumprod_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_cumprod_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cumprod_out_out_Tensor_self_Tensor_dim_Dimname (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_cumprod_out_tensor_tensor_dimname_scalartype(out.get(), self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_cumprod_out_out_Tensor_self_Tensor_dim_Dimname (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_cumprod_out_tensor_tensor_dimname_scalartype(out.get(), self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -5218,26 +5218,26 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cumsum_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_cumsum_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_cumsum_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_cumsum_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cumsum_out_out_Tensor_self_Tensor_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_cumsum_out_tensor_tensor_intt_scalartype(out.get(), self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_cumsum_out_out_Tensor_self_Tensor_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_cumsum_out_tensor_tensor_intt_scalartype(out.get(), self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cumsum_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_cumsum_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_cumsum_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_cumsum_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cumsum_out_out_Tensor_self_Tensor_dim_Dimname (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_cumsum_out_tensor_tensor_dimname_scalartype(out.get(), self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_cumsum_out_out_Tensor_self_Tensor_dim_Dimname (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_cumsum_out_tensor_tensor_dimname_scalartype(out.get(), self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -6302,14 +6302,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_log_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_log_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_log_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_log_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_log_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_log_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_log_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_log_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -6548,32 +6548,32 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_mean_self_Tensor (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_mean_tensor_scalartype(self.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_mean_self_Tensor (XPtrTorchTensor self, XPtrTorchDtype dtype) {
+  auto r_out = lantern_mean_tensor_scalartype(self.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_mean_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_mean_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_mean_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_mean_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_mean_out_tensor_tensor_intarrayref_bool_scalartype(out.get(), self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_mean_out_tensor_tensor_intarrayref_bool_scalartype(out.get(), self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_mean_self_Tensor_dim_DimnameList (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_mean_tensor_dimnamelist_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_mean_self_Tensor_dim_DimnameList (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_mean_tensor_dimnamelist_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_DimnameList (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_mean_out_tensor_tensor_dimnamelist_bool_scalartype(out.get(), self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_DimnameList (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_mean_out_tensor_tensor_dimnamelist_bool_scalartype(out.get(), self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -7670,14 +7670,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -7820,50 +7820,50 @@ return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_sum_self_Tensor (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_sum_tensor_scalartype(self.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_sum_self_Tensor (XPtrTorchTensor self, XPtrTorchDtype dtype) {
+  auto r_out = lantern_sum_tensor_scalartype(self.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_sum_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_sum_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_sum_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_sum_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_sum_self_Tensor_dim_DimnameList (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_sum_tensor_dimnamelist_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_sum_self_Tensor_dim_DimnameList (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_sum_tensor_dimnamelist_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_sum_out_out_Tensor_self_Tensor_dim_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_sum_out_tensor_tensor_intarrayref_bool_scalartype(out.get(), self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_sum_out_out_Tensor_self_Tensor_dim_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_sum_out_tensor_tensor_intarrayref_bool_scalartype(out.get(), self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_sum_out_out_Tensor_self_Tensor_dim_DimnameList (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_sum_out_tensor_tensor_dimnamelist_bool_scalartype(out.get(), self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_sum_out_out_Tensor_self_Tensor_dim_DimnameList (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_sum_out_tensor_tensor_dimnamelist_bool_scalartype(out.get(), self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_nansum_self_Tensor (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_nansum_tensor_scalartype(self.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_nansum_self_Tensor (XPtrTorchTensor self, XPtrTorchDtype dtype) {
+  auto r_out = lantern_nansum_tensor_scalartype(self.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_nansum_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_nansum_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_nansum_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_nansum_tensor_intarrayref_bool_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_nansum_out_out_Tensor_self_Tensor_dim_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_nansum_out_tensor_tensor_intarrayref_bool_scalartype(out.get(), self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_nansum_out_out_Tensor_self_Tensor_dim_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_nansum_out_tensor_tensor_intarrayref_bool_scalartype(out.get(), self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -7946,32 +7946,32 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_prod_self_Tensor (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_prod_tensor_scalartype(self.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_prod_self_Tensor (XPtrTorchTensor self, XPtrTorchDtype dtype) {
+  auto r_out = lantern_prod_tensor_scalartype(self.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_prod_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_prod_tensor_intt_bool_scalartype(self.get(), dim.get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_prod_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_prod_tensor_intt_bool_scalartype(self.get(), dim.get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_prod_out_out_Tensor_self_Tensor_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, nullable<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_prod_out_tensor_tensor_intt_bool_scalartype(out.get(), self.get(), dim.get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_prod_out_out_Tensor_self_Tensor_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, nullable<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_prod_out_tensor_tensor_intt_bool_scalartype(out.get(), self.get(), dim.get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_prod_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_prod_tensor_dimname_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_prod_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_prod_tensor_dimname_bool_scalartype(self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_prod_out_out_Tensor_self_Tensor_dim_Dimname (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_prod_out_tensor_tensor_dimname_bool_scalartype(out.get(), self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_prod_out_out_Tensor_self_Tensor_dim_Dimname (XPtrTorchTensor out, XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_prod_out_tensor_tensor_dimname_bool_scalartype(out.get(), self.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8402,8 +8402,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_native_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_native_norm_tensor_scalar_intarrayref_bool_scalartype(self.get(), p.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_native_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_native_norm_tensor_scalar_intarrayref_bool_scalartype(self.get(), p.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8414,8 +8414,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__sparse_sum_self_Tensor_dtype_ScalarType (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern__sparse_sum_tensor_scalartype(self.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace__sparse_sum_self_Tensor_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchDtype dtype) {
+  auto r_out = lantern__sparse_sum_tensor_scalartype(self.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8426,8 +8426,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__sparse_sum_self_Tensor_dim_IntArrayRef_dtype_ScalarType (XPtrTorchTensor self, std::vector<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern__sparse_sum_tensor_intarrayref_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace__sparse_sum_self_Tensor_dim_IntArrayRef_dtype_ScalarType (XPtrTorchTensor self, std::vector<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern__sparse_sum_tensor_intarrayref_scalartype(self.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8438,14 +8438,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__sparse_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern__sparse_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace__sparse_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern__sparse_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__sparse_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern__sparse_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace__sparse_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern__sparse_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8462,14 +8462,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__sparse_log_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern__sparse_log_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace__sparse_log_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, nullable<int64_t> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern__sparse_log_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__sparse_log_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern__sparse_log_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace__sparse_log_softmax_self_Tensor_dim_Dimname (XPtrTorchTensor self, Rcpp::XPtr<XPtrTorchDimname> dim, XPtrTorchDtype dtype) {
+  auto r_out = lantern__sparse_log_softmax_tensor_dimname_scalartype(self.get(), dim->get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8486,8 +8486,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_norm_self_Tensor_p_Scalar_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_norm_tensor_scalar_scalartype(self.get(), p.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_norm_self_Tensor_p_Scalar_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, XPtrTorchDtype dtype) {
+  auto r_out = lantern_norm_tensor_scalar_scalartype(self.get(), p.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8498,8 +8498,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_norm_tensor_scalar_intarrayref_bool_scalartype(self.get(), p.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_norm_tensor_scalar_intarrayref_bool_scalartype(self.get(), p.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8510,8 +8510,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar p, std::vector<int64_t> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype(out.get(), self.get(), p.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar p, std::vector<int64_t> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype(out.get(), self.get(), p.get(), XPtrTorchvector_int64_t(lantern_vector_int64_t(dim.data(), dim.size())).get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8522,8 +8522,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_norm_tensor_scalar_dimnamelist_bool_scalartype(self.get(), p.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchScalar p, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_norm_tensor_scalar_dimnamelist_bool_scalartype(self.get(), p.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8534,8 +8534,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar p, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_norm_out_tensor_tensor_scalar_dimnamelist_bool_scalartype(out.get(), self.get(), p.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar p, Rcpp::XPtr<XPtrTorch> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_norm_out_tensor_tensor_scalar_dimnamelist_bool_scalartype(out.get(), self.get(), p.get(), dim->get(), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8779,20 +8779,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_quantize_per_tensor_self_Tensor_scale_double_zero_point_int64_t_dtype_ScalarType (XPtrTorchTensor self, double scale, nullable<int64_t> zero_point, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_quantize_per_tensor_tensor_double_intt_scalartype(self.get(), XPtrTorch(lantern_double(scale)).get(), zero_point.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_quantize_per_tensor_self_Tensor_scale_double_zero_point_int64_t_dtype_ScalarType (XPtrTorchTensor self, double scale, nullable<int64_t> zero_point, XPtrTorchDtype dtype) {
+  auto r_out = lantern_quantize_per_tensor_tensor_double_intt_scalartype(self.get(), XPtrTorch(lantern_double(scale)).get(), zero_point.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensorList cpp_torch_namespace_quantize_per_tensor_tensors_TensorList_scales_Tensor_zero_points_Tensor_dtype_ScalarType (XPtrTorchTensorList tensors, XPtrTorchTensor scales, XPtrTorchTensor zero_points, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_quantize_per_tensor_tensorlist_tensor_tensor_scalartype(tensors.get(), scales.get(), zero_points.get(), dtype->get());
+XPtrTorchTensorList cpp_torch_namespace_quantize_per_tensor_tensors_TensorList_scales_Tensor_zero_points_Tensor_dtype_ScalarType (XPtrTorchTensorList tensors, XPtrTorchTensor scales, XPtrTorchTensor zero_points, XPtrTorchDtype dtype) {
+  auto r_out = lantern_quantize_per_tensor_tensorlist_tensor_tensor_scalartype(tensors.get(), scales.get(), zero_points.get(), dtype.get());
 return XPtrTorchTensorList(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_quantize_per_channel_self_Tensor_scales_Tensor_zero_points_Tensor_axis_int64_t_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchTensor scales, XPtrTorchTensor zero_points, nullable<int64_t> axis, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_quantize_per_channel_tensor_tensor_tensor_intt_scalartype(self.get(), scales.get(), zero_points.get(), axis.get(), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_quantize_per_channel_self_Tensor_scales_Tensor_zero_points_Tensor_axis_int64_t_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchTensor scales, XPtrTorchTensor zero_points, nullable<int64_t> axis, XPtrTorchDtype dtype) {
+  auto r_out = lantern_quantize_per_channel_tensor_tensor_tensor_intt_scalartype(self.get(), scales.get(), zero_points.get(), axis.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8965,14 +8965,14 @@ return XPtrTorchScalarType(r_out);
 }
 
 // [[Rcpp::export]]
-bool cpp_torch_namespace_can_cast_from_ScalarType_to_ScalarType (Rcpp::XPtr<XPtrTorch> from, Rcpp::XPtr<XPtrTorch> to) {
-  auto r_out = lantern_can_cast_scalartype_scalartype(from->get(), to->get());
+bool cpp_torch_namespace_can_cast_from_ScalarType_to_ScalarType (XPtrTorchDtype from, XPtrTorchDtype to) {
+  auto r_out = lantern_can_cast_scalartype_scalartype(from.get(), to.get());
 return reinterpret_and_clean<bool, lantern_bool_delete>(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchScalarType cpp_torch_namespace_promote_types_type1_ScalarType_type2_ScalarType (Rcpp::XPtr<XPtrTorch> type1, Rcpp::XPtr<XPtrTorch> type2) {
-  auto r_out = lantern_promote_types_scalartype_scalartype(type1->get(), type2->get());
+XPtrTorchScalarType cpp_torch_namespace_promote_types_type1_ScalarType_type2_ScalarType (XPtrTorchDtype type1, XPtrTorchDtype type2) {
+  auto r_out = lantern_promote_types_scalartype_scalartype(type1.get(), type2.get());
 return XPtrTorchScalarType(r_out);
 }
 
@@ -12434,26 +12434,26 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_norm_self_Tensor (XPtrTorchTensor self, XPtrTorchScalar ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_linalg_norm_tensor_scalar_intarrayref_bool_scalartype(self.get(), ord.get(), lantern_optional_vector_int64_t(dim.x.data(), dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_linalg_norm_self_Tensor (XPtrTorchTensor self, XPtrTorchScalar ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_linalg_norm_tensor_scalar_intarrayref_bool_scalartype(self.get(), ord.get(), lantern_optional_vector_int64_t(dim.x.data(), dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_norm_self_Tensor_ord_stdstring (XPtrTorchTensor self, std::string ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_linalg_norm_tensor_stdstring_intarrayref_bool_scalartype(self.get(), XPtrTorchstring(lantern_string_new(ord.c_str())).get(), lantern_optional_vector_int64_t(dim.x.data(), dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_linalg_norm_self_Tensor_ord_stdstring (XPtrTorchTensor self, std::string ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_linalg_norm_tensor_stdstring_intarrayref_bool_scalartype(self.get(), XPtrTorchstring(lantern_string_new(ord.c_str())).get(), lantern_optional_vector_int64_t(dim.x.data(), dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_linalg_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype(out.get(), self.get(), ord.get(), lantern_optional_vector_int64_t(dim.x.data(), dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_linalg_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype(out.get(), self.get(), ord.get(), lantern_optional_vector_int64_t(dim.x.data(), dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, std::string ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, Rcpp::XPtr<XPtrTorch> dtype) {
-  auto r_out = lantern_linalg_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype(out.get(), self.get(), XPtrTorchstring(lantern_string_new(ord.c_str())).get(), lantern_optional_vector_int64_t(dim.x.data(), dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype->get());
+XPtrTorchTensor cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, std::string ord, nullableVector<std::vector<int64_t>> dim, bool keepdim, XPtrTorchDtype dtype) {
+  auto r_out = lantern_linalg_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype(out.get(), self.get(), XPtrTorchstring(lantern_string_new(ord.c_str())).get(), lantern_optional_vector_int64_t(dim.x.data(), dim.x.size(), dim.is_null), reinterpret_cast<void*>(&keepdim), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 

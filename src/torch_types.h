@@ -81,6 +81,16 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchDtype : public XPtrTorch {
+public:
+  XPtrTorchDtype () : XPtrTorch{NULL} {}
+  XPtrTorchDtype (void* x) : XPtrTorch(x, lantern_Dtype_delete) {}
+  explicit XPtrTorchDtype (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchDtype (const XPtrTorchDtype& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchDtype (SEXP x);
+  operator SEXP () const;
+};
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
@@ -117,11 +127,6 @@ public:
 class XPtrTorchLayout : public XPtrTorch {
 public:
   XPtrTorchLayout (void* x) : XPtrTorch(x, lantern_Layout_delete) {}
-};
-
-class XPtrTorchDtype : public XPtrTorch {
-public:
-  XPtrTorchDtype (void* x) : XPtrTorch(x, lantern_Dtype_delete) {}
 };
 
 class XPtrTorchGenerator : public XPtrTorch {

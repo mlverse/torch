@@ -53,10 +53,10 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(obj$ptr, "MemoryFormat"))
   
   if (any("ScalarType" == expected_types) && is_torch_dtype(obj))
-    return(list(obj$ptr, "ScalarType"))
+    return(list(obj, "ScalarType"))
   
   if (any("ScalarType" == expected_types) && is.null(obj))
-    return(list(cpp_nullopt(), "ScalarType"))
+    return(list(NULL, "ScalarType"))
   
   if (any("Scalar" == expected_types) && is_scalar_atomic(obj))
     return(list(obj, "Scalar"))
