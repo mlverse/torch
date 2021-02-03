@@ -92,6 +92,13 @@ XPtrTorchGenerator::operator SEXP () const
   return xptr;
 }
 
+XPtrTorchMemoryFormat::operator SEXP () const
+{
+  auto xptr = make_xptr<XPtrTorchMemoryFormat>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_memory_format", "R7");
+  return xptr;
+}
+
 // Constructors ----------
 
 XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
@@ -352,6 +359,24 @@ XPtrTorchGenerator XPtrTorchGenerator_from_SEXP (SEXP x)
 
 XPtrTorchGenerator::XPtrTorchGenerator (SEXP x):
   XPtrTorch{XPtrTorchGenerator_from_SEXP(x)} {}
+
+XPtrTorchMemoryFormat XPtrTorchMemoryFormat_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_memory_format")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchMemoryFormat>>(x);
+    return XPtrTorchMemoryFormat( out->get_shared());
+  }
+  
+  if (TYPEOF(x) == NILSXP)
+  {
+    return XPtrTorchMemoryFormat();
+  }
+  
+  Rcpp::stop("Expected a torch_dtype");
+}
+
+XPtrTorchMemoryFormat::XPtrTorchMemoryFormat (SEXP x):
+  XPtrTorch{XPtrTorchMemoryFormat_from_SEXP(x)} {}
 
 // [[Rcpp::export]]
 [[gnu::noinline]]

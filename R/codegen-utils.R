@@ -50,7 +50,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(obj$ptr, "TensorOptions"))
   
   if (any("MemoryFormat" == expected_types) && is_torch_memory_format(obj))
-    return(list(obj$ptr, "MemoryFormat"))
+    return(list(obj, "MemoryFormat"))
   
   if (any("ScalarType" == expected_types) && is_torch_dtype(obj))
     return(list(obj, "ScalarType"))
@@ -119,7 +119,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(obj, "TensorList"))
   
   if (any("MemoryFormat" == expected_types) && is.null(obj))
-    return(list(cpp_nullopt(), "MemoryFormat"))
+    return(list(NULL, "MemoryFormat"))
   
   if (any("Generator" == expected_types) && is_torch_generator(obj))
     return(list(obj, "Generator"))

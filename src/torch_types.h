@@ -120,6 +120,16 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchMemoryFormat : public XPtrTorch {
+public:
+  XPtrTorchMemoryFormat () : XPtrTorch{NULL} {};
+  XPtrTorchMemoryFormat (void* x) : XPtrTorch(x, lantern_MemoryFormat_delete) {}
+  explicit XPtrTorchMemoryFormat (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchMemoryFormat (const XPtrTorchMemoryFormat& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchMemoryFormat (SEXP x);
+  operator SEXP () const;
+};
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
@@ -156,11 +166,6 @@ public:
 class XPtrTorchLayout : public XPtrTorch {
 public:
   XPtrTorchLayout (void* x) : XPtrTorch(x, lantern_Layout_delete) {}
-};
-
-class XPtrTorchMemoryFormat : public XPtrTorch {
-public:
-  XPtrTorchMemoryFormat (void* x) : XPtrTorch(x, lantern_MemoryFormat_delete) {}
 };
 
 class XPtrTorchTensorIndex : public XPtrTorch {

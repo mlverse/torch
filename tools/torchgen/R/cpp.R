@@ -171,7 +171,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
-    declaration <- "Rcpp::XPtr<XPtrTorchMemoryFormat>"
+    declaration <- "XPtrTorchMemoryFormat"
   }
 
   if (argument$dynamic_type == "std::string") {
@@ -302,7 +302,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "std::string") {

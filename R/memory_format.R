@@ -1,12 +1,12 @@
-MemoryFormat <- R6::R6Class(
+MemoryFormat <- R7Class(
   classname = "torch_memory_format",
   public = list(
     ptr = NULL,
     initialize = function(ptr) {
-      self$ptr <- ptr
+      ptr
     },
     print = function() {
-      cat("torch_", cpp_memory_format_to_string(self$ptr), "_format", sep ="")
+      cat("torch_", cpp_memory_format_to_string(ptr), "_format", sep ="")
     }
   )
 )
@@ -39,7 +39,7 @@ torch_channels_last_format <- function() {
 
 #' @export
 `==.torch_memory_format` <- function(e1, e2) {
-  cpp_memory_format_to_string(e1$ptr) == cpp_memory_format_to_string(e2$ptr)
+  cpp_memory_format_to_string(e1) == cpp_memory_format_to_string(e2)
 }
 
 #' Check if an object is a memory format
