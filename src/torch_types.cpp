@@ -330,6 +330,7 @@ XPtrTorchDimnameList XPtrTorchDimnameList_from_SEXP (SEXP x)
 XPtrTorchDimnameList::XPtrTorchDimnameList (SEXP x):
   XPtrTorch{XPtrTorchDimnameList_from_SEXP(x)} {}
 
+
 XPtrTorchGenerator XPtrTorchGenerator_from_SEXP (SEXP x)
 {
   if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_generator"))
@@ -340,8 +341,9 @@ XPtrTorchGenerator XPtrTorchGenerator_from_SEXP (SEXP x)
   
   if (TYPEOF(x) == NILSXP)
   {
-    Rcpp::Environment e("package:torch");
-    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchGenerator>>(e[".generator_null"]);
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchGenerator>>(
+      Rcpp::Environment::namespace_env("torch").find(".generator_null")
+    );
     return XPtrTorchGenerator( out->get_shared());
   }
   
