@@ -122,10 +122,10 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(cpp_nullopt(), "MemoryFormat"))
   
   if (any("Generator" == expected_types) && is_torch_generator(obj))
-    return(list(obj$ptr, "Generator"))
+    return(list(obj, "Generator"))
   
   if (any("Generator" == expected_types) && is.null(obj))
-    return(list(.generator_null$ptr, "Generator"))
+    return(list(NULL, "Generator"))
   
   if (any("Scalar" == expected_types) && is.null(obj))
     return(list(obj, "Scalar"))

@@ -85,6 +85,13 @@ XPtrTorchDimnameList::operator SEXP () const
   return xptr;
 }
 
+XPtrTorchGenerator::operator SEXP () const
+{
+  auto xptr = make_xptr<XPtrTorchGenerator>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_generator", "R7");
+  return xptr;
+}
+
 // Constructors ----------
 
 XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
@@ -323,17 +330,30 @@ XPtrTorchDimnameList XPtrTorchDimnameList_from_SEXP (SEXP x)
 XPtrTorchDimnameList::XPtrTorchDimnameList (SEXP x):
   XPtrTorch{XPtrTorchDimnameList_from_SEXP(x)} {}
 
-
-// [[Rcpp::export]]
-[[gnu::noinline]]
-XPtrTorchDimname test_fun (XPtrTorchDimname x)
+XPtrTorchGenerator XPtrTorchGenerator_from_SEXP (SEXP x)
 {
-  return x;
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_generator"))
+  {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchGenerator>>(x);
+    return XPtrTorchGenerator( out->get_shared());
+  }
+  
+  if (TYPEOF(x) == NILSXP)
+  {
+    Rcpp::Environment e("package:torch");
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchGenerator>>(e[".generator_null"]);
+    return XPtrTorchGenerator( out->get_shared());
+  }
+  
+  Rcpp::stop("Expected a torch_generator");
 }
 
+XPtrTorchGenerator::XPtrTorchGenerator (SEXP x):
+  XPtrTorch{XPtrTorchGenerator_from_SEXP(x)} {}
+
 // [[Rcpp::export]]
 [[gnu::noinline]]
-XPtrTorchDimnameList test_fun2 (XPtrTorchDimnameList x)
+XPtrTorchGenerator test_fun (XPtrTorchGenerator x)
 {
   return x;
 }

@@ -147,11 +147,11 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Generator *") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "XPtrTorchGenerator"
   }
 
   if (argument$dynamic_type == "Generator") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "XPtrTorchGenerator"
   }
 
   if (argument$dynamic_type == "ScalarType") {
@@ -278,11 +278,11 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "Generator *") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Generator") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "ScalarType") {
