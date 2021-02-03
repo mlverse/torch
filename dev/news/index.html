@@ -203,6 +203,7 @@
 <li>Internal refactoring making Rcpp aware of some XPtrTorch* types so making it simpler to return them from Rcpp code. This might cause a breaking change if you are relying on <code><a href="../reference/torch_dtype.html">torch_dtype()</a></code> being an R6 class. (<a href='https://github.com/mlverse/torch/issues/451'>#451</a>)</li>
 <li>We now call R garbage collector when there’s no memory available on GPU, this can help in a few cases when the laziness of the garbage collector allows too many tensors to be on memory even though they are no longer referenced in R. (<a href='https://github.com/mlverse/torch/issues/456'>#456</a>)</li>
 <li>Fixed backward compatibility issue when loading models saved in older versions of torch. This bug was introduced in <a href='https://github.com/mlverse/torch/issues/452'>#452</a> and is now fixed and we also added a regression test. (<a href='https://github.com/mlverse/torch/issues/458'>#458</a>)</li>
+<li>Fixed bug when using RNN’s on the GPU (<a href='https://github.com/mlverse/torch/issues/460'>#460</a>)</li>
 </ul>
 </div>
     <div id="torch-021" class="section level1">
