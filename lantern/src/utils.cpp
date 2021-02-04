@@ -154,7 +154,10 @@ int64_t _lantern_vector_string_size(void *self)
 const char *_lantern_vector_string_at(void *self, int64_t i)
 {
   LANTERN_FUNCTION_START
-  return reinterpret_cast<std::vector<std::string> *>(self)->at(i).c_str();
+  auto str = reinterpret_cast<std::vector<std::string> *>(self)->at(i);
+  char *cstr = new char[str.length() + 1];
+  strcpy(cstr, str.c_str());
+  return cstr;
   LANTERN_FUNCTION_END
 }
 

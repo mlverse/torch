@@ -95,7 +95,10 @@ void *_lantern_Dtype_qint8()
 const char *_lantern_Dtype_type(void *dtype)
 {
   LANTERN_FUNCTION_START
-  return toString(reinterpret_cast<LanternObject<torch::Dtype> *>(dtype)->get());
+  std::string str = toString(reinterpret_cast<LanternObject<torch::Dtype> *>(dtype)->get());
+  char *cstr = new char[str.length() + 1];
+  strcpy(cstr, str.c_str());
+  return cstr;
   LANTERN_FUNCTION_END
 }
 
