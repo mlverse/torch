@@ -142,12 +142,12 @@ Normal <- add_class_definition(Normal)
 #' @return Object of `torch_Normal` class
 #' 
 #' @examples 
-#' m <- distr_normal()
+#' m <- distr_normal(loc = 0, scale = 1)
 #' m$sample()  # normally distributed with loc=0 and scale=1
 #' tensor([ 0.1046])
 #' 
 #' @export
-distr_normal <- function(loc = 0, scale = 1, validate_args = NULL){
+distr_normal <- function(loc, scale, validate_args = NULL){
   Normal$new(loc, scale, validate_args)
 }
 
