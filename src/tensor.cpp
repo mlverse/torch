@@ -193,9 +193,10 @@ Rcpp::List tensor_to_r_array_bool (XPtrTorchTensor x) {
 // [[Rcpp::export]]
 Rcpp::List cpp_as_array (Rcpp::XPtr<XPtrTorchTensor> x) {
   
-  std::string dtype = lantern_Dtype_type(lantern_Tensor_dtype(x->get()));
+  auto s = lantern_Dtype_type(XPtrTorchDtype(lantern_Tensor_dtype(x->get())).get());
+  auto dtype = std::string(s);
+  lantern_const_char_delete(s);
   
-   
   if (dtype == "Byte") {
     return tensor_to_r_array_uint8_t(*x.get());
   } 
@@ -215,7 +216,7 @@ Rcpp::List cpp_as_array (Rcpp::XPtr<XPtrTorchTensor> x) {
   XPtrTorchTensorOptions options = lantern_TensorOptions();
   
   if (dtype == "Float") {
-    options = lantern_TensorOptions_dtype(options.get(), lantern_Dtype_float64());
+    options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_float64()).get());
     return tensor_to_r_array_double(XPtrTorchTensor(lantern_Tensor_to(x->get(), options.get())));
   }
   

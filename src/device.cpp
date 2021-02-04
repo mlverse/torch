@@ -5,7 +5,10 @@
 // [[Rcpp::export]]
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device)
 {
-  return std::string(lantern_Device_type(device->get()));
+  auto s = lantern_Device_type(device->get());
+  auto out = std::string(s);
+  lantern_const_char_delete(s);
+  return out;
 }
 
 // [[Rcpp::export]]

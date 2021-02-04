@@ -222,7 +222,9 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
     {
       Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(slice);
       
-      auto type = std::string(lantern_Dtype_type(lantern_Tensor_dtype(t->get())));
+      auto s = lantern_Dtype_type(XPtrTorchDtype(lantern_Tensor_dtype(t->get())).get());
+      auto type = std::string(s);
+      lantern_const_char_delete(s);
       
       // is boolean tensor
       if (type == "Bool")
