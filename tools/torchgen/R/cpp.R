@@ -262,7 +262,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "double" && !argument$type == "c10::optional<double>") {
-    result <- glue::glue("XPtrTorch(lantern_double({argument$name})).get()")
+    result <- glue::glue("XPtrTorchdouble(lantern_double({argument$name})).get()")
   }
 
   if (argument$dynamic_type == "double" && argument$type == "c10::optional<double>") {
