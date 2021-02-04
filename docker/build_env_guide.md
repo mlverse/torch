@@ -31,11 +31,11 @@ mkdir  ../../rstudio_home
 ```
 
 ### 4. Create `auth.txt`
-Create `auth.txt` into `torch/docker/` and write root user's pass word and rstudio(default user) user's password which you would like to set.
+Create `auth.txt` into `torch/docker/` and write root user's password and rstudio(default user) user's password which you would like to set.
 
 ```bash
-echo "rstudio" >> auth.txt # root user's pass word
-echo "rstudio" >> ahth.txt # rstudio user's pass word
+echo "rstudio" >> auth.txt # root user's password
+echo "rstudio" >> auth.txt # rstudio user's password
 ```
 
 ### 5. Run `build_env.sh`
@@ -73,10 +73,10 @@ docker-compose up -d
 ### 7. Login RStudio
 Open your web browser and access `localhost:8787`.
 
-You implement `torch` first time, additional pacckages which needs for it will be installed in your env. If your `GPU` is available, `cuda_is_available()` returns `True`.
+You implement `torch` first time, additional packages which needs for it will be installed in your env. If your `GPU` is available, `cuda_is_available()` returns `True`.
 
 ### 8. Delete `auth.txt`
-If you would like not to leak out your container's pass word, delete `auth.txt`.
+If you would like not to leak out your container's password, delete `auth.txt`.
 
 ```bash
 rm auth.txt
