@@ -469,7 +469,7 @@ extern "C"
   LANTERN_API size_t (LANTERN_PTR _lantern_tensor_serialized_size) (const char * s);
   HOST_API size_t lantern_tensor_serialized_size(const char * s) { size_t ret = _lantern_tensor_serialized_size(s); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void (LANTERN_PTR _lantern_const_char_delete) (const char * x);
-  HOST_API void lantern_const_char_delete(const char * x) { return LANTERN_HOST_HANDLER(_lantern_const_char_delete(x)); }
+  HOST_API void lantern_const_char_delete(const char * x) {_lantern_const_char_delete(x); LANTERN_HOST_HANDLER} 
   LANTERN_API void (LANTERN_PTR _lantern_Tensor_index_put_tensor_) (void* self, void* index, void* rhs);
   HOST_API void lantern_Tensor_index_put_tensor_ (void* self, void* index, void* rhs) { _lantern_Tensor_index_put_tensor_(self, index, rhs); LANTERN_HOST_HANDLER}
   LANTERN_API void (LANTERN_PTR _lantern_Tensor_index_put_scalar_) (void* self, void* index, void* rhs);
