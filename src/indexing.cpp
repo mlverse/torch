@@ -101,9 +101,12 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
     // all elements in that dimension.
     if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1 && LOGICAL(slice)[0] == NA_LOGICAL)
     {
-      XPtrTorchSlice s = lantern_Slice(lantern_optional_int64_t(0, true), 
-                                       lantern_optional_int64_t(0, true),
-                                       lantern_optional_int64_t(1, false));
+      
+      XPtrTorchSlice s = lantern_Slice(
+        XPtrTorchoptional_int64_t(lantern_optional_int64_t(0, true)).get(), 
+        XPtrTorchoptional_int64_t(lantern_optional_int64_t(0, true)).get(),
+        XPtrTorchoptional_int64_t(lantern_optional_int64_t(1, false)).get()
+      );
       lantern_TensorIndex_append_slice(index.get(), s.get());
       continue;
     }
