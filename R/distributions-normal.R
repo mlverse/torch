@@ -146,6 +146,7 @@ Normal <- add_class_definition(Normal)
 #' m$sample()  # normally distributed with loc=0 and scale=1
 #' tensor([ 0.1046])
 #' 
+#' @export
 distr_normal <- function(loc = 0, scale = 1, validate_args = NULL){
   Normal$new(loc, scale, validate_args)
 }

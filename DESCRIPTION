@@ -62,6 +62,8 @@ Collate:
     'distributions-constraints.R'
     'utils.R'
     'distributions-exp-family.R'
+    'distributions-normal.R'
+    'distributions-utils.R'
     'distributions.R'
     'dtype.R'
     'gen-method.R'

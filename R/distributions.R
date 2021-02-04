@@ -27,17 +27,18 @@ Distribution <- R6::R6Class(
       if (!is.null(validate_args))
         self$.validate_args <- validate_args
 
-        for (p in seq_along(self$arg_constraints)) {
+        for (param in names(self$.arg_constraints)) {
 
-          constraint <- self$.arg_constraints[[p]]$constraint
-          param      <- self$.arg_constraints[[p]]$param
+          constraint <- self$.arg_constraints[[param]]
 
           if (is_dependent(constraint))
             next
-          if (!(param %in% as.list(self)) && inherits(param, "lazy_property"))
-            next # skip checking lazily-constructed args
-          if (all(constraints_check(param)))
-            value_error("The parameter {param} has invalid values")
+          
+          # TODO: check lazy_property
+          # if (!(param %in% names(self) && inherits(constraint, "lazy_property"))
+          #   next # skip checking lazily-constructed args
+          # if (all(constraint$check(constraint)))
+          #   value_error("The parameter {param} has invalid values")
         }
     },
     
@@ -112,7 +113,7 @@ Distribution <- R6::R6Class(
     #' returned shape is upcast to (1,).
     #' @param sample_shape (torch_Size): the size of the sample to be drawn.
     .extended_shape = function(sample_shape = NULL){
-      sample_shape + self$batch_shape + self$event_shape
+      c(sample_shape, self$batch_shape, self$event_shape)
     },
     
     #' Argument validation for distribution methods such as `log_prob`,
@@ -135,7 +136,7 @@ Distribution <- R6::R6Class(
         )
 
       actual_shape <- value$size()
-      expected_shape <- self$.batch_shape + self$.event_shape
+      expected_shape <- c(self$.batch_shape, self$.event_shape)
 
       shape_length <- length(actual_shape)
       
@@ -173,8 +174,8 @@ Distribution <- R6::R6Class(
     print = function(){
     
       param_names <- 
-        names(self$arg_constraints)[
-          names(self$arg_constraints) %in% names(as.list(self))
+        names(self$.arg_constraints)[
+          names(self$.arg_constraints) %in% names(as.list(self))
             ]
       
       args_string <- paste0(
