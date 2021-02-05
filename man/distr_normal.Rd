@@ -24,6 +24,5 @@ Creates a normal (also called Gaussian) distribution parameterized by
 \examples{
 m <- distr_normal(loc = 0, scale = 1)
 m$sample()  # normally distributed with loc=0 and scale=1
-tensor([ 0.1046])
 
 }
