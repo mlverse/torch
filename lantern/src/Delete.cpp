@@ -237,3 +237,10 @@ void _lantern_vector_bool_delete(void* x)
   lantern_delete<std::vector<bool>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
+
+void _lantern_vector_void_delete(void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<std::vector<void*>>(x);
+  LANTERN_FUNCTION_END_VOID;
+}

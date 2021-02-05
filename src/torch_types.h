@@ -233,6 +233,11 @@ public:
   XPtrTorchvector_bool (void * x) : XPtrTorch(x, lantern_vector_bool_delete) {}
 };
 
+class XPtrTorchvector_void : public XPtrTorch {
+public:
+  XPtrTorchvector_void (void * x) : XPtrTorch(x, lantern_vector_void_delete) {}
+};
+
 template<class T>
 class nullable {
 public:

@@ -386,7 +386,7 @@ cpp_return_statement <- function(returns) {
 
     calls <- purrr::map_chr(
       seq_along(returns),
-      ~cpp_return_statement(returns[.x])(glue::glue("lantern_vector_get(r_out, {.x-1})"))
+      ~cpp_return_statement(returns[.x])(glue::glue("lantern_vector_get(wrap.get(), {.x-1})"))
     )
 
     f <- function(x) {
@@ -428,6 +428,10 @@ cpp_method_body <- function(method) {
     method_call <- glue::glue("auto r_out = {method_call}")
   }
 
+  if (length(method$returns) > 1) {
+    method_call <- c(method_call, "auto wrap = XPtrTorchvector_void(r_out);")
+  }
+
   if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
 
     return_call <- cpp_return_statement(method$returns)("r_out")
@@ -461,6 +465,10 @@ cpp_namespace_body <- function(method) {
 
   if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
     method_call <- glue::glue("auto r_out = {method_call}")
+  }
+
+  if (length(method$returns) > 1) {
+    method_call <- c(method_call, "auto wrap = XPtrTorchvector_void(r_out);")
   }
 
   if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
