@@ -5,7 +5,7 @@
 \title{Creates a normal (also called Gaussian) distribution parameterized by
 \code{loc} and \code{scale}.}
 \usage{
-distr_normal(loc = 0, scale = 1, validate_args = NULL)
+distr_normal(loc, scale, validate_args = NULL)
 }
 \arguments{
 \item{loc}{(float or Tensor): mean of the distribution (often referred to as mu)}
@@ -22,7 +22,7 @@ Creates a normal (also called Gaussian) distribution parameterized by
 \code{loc} and \code{scale}.
 }
 \examples{
-m <- distr_normal()
+m <- distr_normal(loc = 0, scale = 1)
 m$sample()  # normally distributed with loc=0 and scale=1
 tensor([ 0.1046])
 
