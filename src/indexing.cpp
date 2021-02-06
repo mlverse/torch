@@ -235,10 +235,13 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       else if (type == "Long")
       {
         
+        bool current_autograd_mode = lantern_autograd_is_enabled();
+        lantern_autograd_set_grad_mode(false);
         // check that there's no zeros
         bool zeros = lantern_Tensor_has_any_zeros(t->get());
         if (zeros)
         {
+          lantern_autograd_set_grad_mode(current_autograd_mode);
           Rcpp::stop("Indexing starts at 1 but found a 0.");
         }
         
@@ -257,6 +260,7 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
         XPtrTorchTensor zero_index = lantern_Tensor_sub_tensor_tensor_scalar(t->get(), sign.get(), alpha.get());
         
         lantern_TensorIndex_append_tensor(index.get(), zero_index.get());
+        lantern_autograd_set_grad_mode(current_autograd_mode);
       } else {
         Rcpp::stop("Only long and boolean tensors are supported.");  
       }

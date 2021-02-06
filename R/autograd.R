@@ -15,12 +15,13 @@ NULL
 #'
 #' @export
 with_no_grad <- function(code) {
+  current_mode <- cpp_autograd_is_enabled()
   withr::with_(
     set = function() {
       cpp_autograd_set_grad_mode(FALSE)
     },
     reset = function(old) {
-      cpp_autograd_set_grad_mode(TRUE)
+      cpp_autograd_set_grad_mode(current_mode)
     }
   )(code)
 }
@@ -49,12 +50,13 @@ with_no_grad <- function(code) {
 #' 
 #' @export
 with_enable_grad <- function(code) {
+  current_mode <- cpp_autograd_is_enabled()
   withr::with_(
     set = function() {
       cpp_autograd_set_grad_mode(TRUE)
     },
     reset = function(old) {
-      cpp_autograd_set_grad_mode(FALSE)
+      cpp_autograd_set_grad_mode(current_mode)
     }
   )(code)
 }

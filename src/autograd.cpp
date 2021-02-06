@@ -24,6 +24,12 @@ void cpp_autograd_set_grad_mode (bool enabled) {
 }
 
 // [[Rcpp::export]]
+bool cpp_autograd_is_enabled()
+{
+  return lantern_autograd_is_enabled();  
+}
+
+// [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
   return make_xptr<XPtrTorchTensor>(lantern_Tensor_grad(self->get()));
 }

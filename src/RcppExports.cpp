@@ -26,6 +26,16 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_autograd_is_enabled
+bool cpp_autograd_is_enabled();
+RcppExport SEXP _torch_cpp_autograd_is_enabled() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_autograd_is_enabled());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_tensor_grad
 Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_grad(Rcpp::XPtr<XPtrTorchTensor> self);
 RcppExport SEXP _torch_cpp_tensor_grad(SEXP selfSEXP) {
@@ -29301,6 +29311,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 1},
     {"_torch_cpp_autograd_set_grad_mode", (DL_FUNC) &_torch_cpp_autograd_set_grad_mode, 1},
+    {"_torch_cpp_autograd_is_enabled", (DL_FUNC) &_torch_cpp_autograd_is_enabled, 0},
     {"_torch_cpp_tensor_grad", (DL_FUNC) &_torch_cpp_tensor_grad, 1},
     {"_torch_cpp_tensor_set_grad_", (DL_FUNC) &_torch_cpp_tensor_set_grad_, 2},
     {"_torch_cpp_tensor_requires_grad", (DL_FUNC) &_torch_cpp_tensor_requires_grad, 1},

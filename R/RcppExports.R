@@ -9,6 +9,10 @@ cpp_autograd_set_grad_mode <- function(enabled) {
     invisible(.Call('_torch_cpp_autograd_set_grad_mode', PACKAGE = 'torchpkg', enabled))
 }
 
+cpp_autograd_is_enabled <- function() {
+    .Call('_torch_cpp_autograd_is_enabled', PACKAGE = 'torchpkg')
+}
+
 cpp_tensor_grad <- function(self) {
     .Call('_torch_cpp_tensor_grad', PACKAGE = 'torchpkg', self)
 }

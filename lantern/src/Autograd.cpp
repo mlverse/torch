@@ -17,6 +17,13 @@ void _lantern_autograd_set_grad_mode(bool enabled)
     LANTERN_FUNCTION_END_VOID
 }
 
+bool _lantern_autograd_is_enabled ()
+{
+    LANTERN_FUNCTION_START
+    torch::autograd::GradMode::is_enabled();
+    LANTERN_FUNCTION_END
+}
+
 void *_lantern_Tensor_grad(void *self)
 {
     LANTERN_FUNCTION_START
