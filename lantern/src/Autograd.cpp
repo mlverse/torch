@@ -20,7 +20,7 @@ void _lantern_autograd_set_grad_mode(bool enabled)
 bool _lantern_autograd_is_enabled ()
 {
     LANTERN_FUNCTION_START
-    torch::autograd::GradMode::is_enabled();
+    return torch::autograd::GradMode::is_enabled();
     LANTERN_FUNCTION_END
 }
 
