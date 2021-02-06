@@ -68,7 +68,7 @@ nn_Module <- R6::R6Class(
           private$parameters_[[param_name]] <- nn_parameter(param_applied)
         }
         
-        if (!is_undefined_tensor(param$grad)) {
+        if (!is.null(param) && !is_undefined_tensor(param$grad)) {
           with_no_grad({
             grad_applied <- fn(param$grad)
           })
