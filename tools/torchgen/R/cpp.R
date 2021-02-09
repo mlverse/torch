@@ -94,6 +94,12 @@ cpp_function_name <- function(method, type) {
 
 cpp_parameter_type <- function(argument) {
 
+  if (argument$name %in% c("index", "indices", "dims") &&
+      argument$dynamic_type == "Tensor")
+  {
+    return("XPtrTorchIndexTensor")
+  }
+
   if (argument$dynamic_type == "Tensor") {
     declaration <- "XPtrTorchTensor"
   }

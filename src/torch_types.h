@@ -24,6 +24,16 @@ public:
   }
 };
 
+class XPtrTorchIndexTensor: public XPtrTorch {
+public:
+  XPtrTorchIndexTensor (): XPtrTorch{NULL} {}
+  XPtrTorchIndexTensor (void* x) : XPtrTorch(x, lantern_Tensor_delete) {}
+  explicit XPtrTorchIndexTensor (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchIndexTensor (const XPtrTorchIndexTensor& x): XPtrTorch(x.get_shared()) {}
+  explicit XPtrTorchIndexTensor (SEXP x);
+  operator SEXP () const;
+};
+
 class XPtrTorchTensor : public XPtrTorch {
 public:
   // TODO: we should make this explicit at some point, but not currently
@@ -32,6 +42,7 @@ public:
   XPtrTorchTensor (void* x) : XPtrTorch(x, lantern_Tensor_delete) {}
   explicit XPtrTorchTensor (std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchTensor (const XPtrTorchTensor& x): XPtrTorch(x.get_shared()) {}
+  XPtrTorchTensor (XPtrTorchIndexTensor x): XPtrTorch(x.get_shared()) {}
   explicit XPtrTorchTensor (SEXP x);
   operator SEXP () const;
 };

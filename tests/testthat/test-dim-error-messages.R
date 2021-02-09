@@ -180,8 +180,7 @@ test_that("embedding returns a better error message", {
   
   expect_error(
     e(x),
-    regex = "Indices/Index start at 1 and got a 0.",
-    class = "runtime_error"
+    regex = "Indexing starts at 1 but found a 0."
   )
   
 })
