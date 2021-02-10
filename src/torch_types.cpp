@@ -414,9 +414,50 @@ XPtrTorchMemoryFormat XPtrTorchMemoryFormat_from_SEXP (SEXP x)
 XPtrTorchMemoryFormat::XPtrTorchMemoryFormat (SEXP x):
   XPtrTorch{XPtrTorchMemoryFormat_from_SEXP(x)} {}
 
-// [[Rcpp::export]]
-[[gnu::noinline]]
-XPtrTorchTensor test_fun (XPtrTorchIndexTensor x)
+XPtrTorchIntArrayRef XPtrTorchIntArrayRef_from_SEXP (SEXP x, bool allow_null)
 {
-  return x;
+  
+  if (TYPEOF(x) == NILSXP)
+  {
+    if (allow_null)
+    {
+      return nullptr;  
+    } else 
+    {
+     Rcpp::stop("Expected a list of integers and found NULL."); 
+    }
+  }
+  
+  auto vec = Rcpp::as<std::vector<int64_t>>(x);
+  auto ptr = lantern_vector_int64_t(vec.data(), vec.size());
+  return XPtrTorchIntArrayRef(ptr);
+}
+
+XPtrTorchIntArrayRef::XPtrTorchIntArrayRef (SEXP x):
+  XPtrTorch{XPtrTorchIntArrayRef_from_SEXP(x, false)} {}
+
+XPtrTorchOptionalIntArrayRef::XPtrTorchOptionalIntArrayRef (SEXP x) {
+  if (TYPEOF(x) == NILSXP)
+  {
+    ptr = std::shared_ptr<void>(
+      lantern_optional_vector_int64_t(nullptr, 0, true),
+      lantern_optional_vector_int64_t_delete
+    );
+    is_null = true;
+  } else {
+    this->data = Rcpp::as<std::vector<int64_t>>(x);
+    this->ptr = std::shared_ptr<void>(
+      lantern_optional_vector_int64_t(this->data.data(), this->data.size(), false),
+      lantern_optional_vector_int64_t_delete
+    );
+    is_null = false;
+  }
+}
+
+// [[Rcpp::export]]
+int test_fun (XPtrTorchOptionalIntArrayRef x)
+{
+  Rcpp::Rcout << &x.data << std::endl;
+  lantern_vector_bool_push_back(x.get(), 1);
+  return 1 + 1;
 }

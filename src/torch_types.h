@@ -141,6 +141,42 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchIntArrayRef : public XPtrTorch {
+public:
+  XPtrTorchIntArrayRef () : XPtrTorch{NULL} {};
+  XPtrTorchIntArrayRef (void* x) : XPtrTorch(x, lantern_vector_int64_t_delete) {}
+  explicit XPtrTorchIntArrayRef (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchIntArrayRef (const XPtrTorchIntArrayRef& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchIntArrayRef (SEXP x);
+  //operator SEXP () const;
+};  
+
+class XPtrTorchOptionalIntArrayRef {
+public:
+  std::shared_ptr<void> ptr;
+  std::vector<int64_t> data;
+  bool is_null;
+  
+  XPtrTorchOptionalIntArrayRef () {};
+  explicit XPtrTorchOptionalIntArrayRef (SEXP x);
+  
+  XPtrTorchOptionalIntArrayRef (const XPtrTorchOptionalIntArrayRef& x ) {
+    data = x.data;
+    /// on copy we need to re-create the pointer
+    /// so it points to data that is still in scope. 
+    ptr = std::shared_ptr<void>(
+      lantern_optional_vector_int64_t(data.data(), data.size(), x.is_null),
+      lantern_optional_vector_int64_t_delete
+    );
+    is_null = x.is_null;
+  }
+  
+  void* get() const
+  {
+    return ptr.get();
+  }
+};  
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {

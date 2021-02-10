@@ -364,6 +364,8 @@ extern "C"
   HOST_API void * lantern_Edge_function(void *self) { void * ret = _lantern_Edge_function(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void(LANTERN_PTR _lantern_vector_int64_t_delete)(void *x);
   HOST_API void lantern_vector_int64_t_delete(void *x) { _lantern_vector_int64_t_delete(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void(LANTERN_PTR _lantern_optional_vector_int64_t_delete)(void *x);
+  HOST_API void lantern_optional_vector_int64_t_delete(void *x) { _lantern_optional_vector_int64_t_delete(x); LANTERN_HOST_HANDLER }
   LANTERN_API void(LANTERN_PTR _lantern_autograd_backward)(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph);
   HOST_API void lantern_autograd_backward(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph) { _lantern_autograd_backward(tensors, grad_tensors, retain_graph, create_graph); LANTERN_HOST_HANDLER }
   LANTERN_API void *(LANTERN_PTR _lantern_autograd_grad)(void *outputs, void *inputs, void *grad_outputs, bool retain_graph, bool create_graph, bool allow_unused);
@@ -5216,6 +5218,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Dtype_bool);
   LOAD_SYMBOL(_lantern_Dtype_type);
   LOAD_SYMBOL(_lantern_vector_int64_t);
+  LOAD_SYMBOL(_lantern_optional_vector_int64_t_delete);
   LOAD_SYMBOL(_lantern_vector_double);
   LOAD_SYMBOL(_lantern_IntArrayRef);
   LOAD_SYMBOL(_lantern_MemoryFormat_Contiguous);
