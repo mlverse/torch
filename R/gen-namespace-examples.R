@@ -3567,8 +3567,8 @@ NULL
 #' torch_nansum(torch_tensor(c(1., NaN)))
 #' a <- torch_tensor(rbind(c(1, 2), c(3., NaN)))
 #' torch_nansum(a)
-#' torch_nansum(a, dim=0)
 #' torch_nansum(a, dim=1)
+#' torch_nansum(a, dim=2)
 NULL
 # -> nansum <-
 
