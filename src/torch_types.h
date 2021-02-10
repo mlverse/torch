@@ -187,7 +187,7 @@ public:
   }
 };  
 
-class XPtrTorchOptionalIndexIntArrayRef : XPtrTorchOptionalIntArrayRef {
+class XPtrTorchOptionalIndexIntArrayRef : public XPtrTorchOptionalIntArrayRef {
 public:
   explicit XPtrTorchOptionalIndexIntArrayRef (SEXP x);
 };

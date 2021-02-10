@@ -72,11 +72,9 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   if (any("DimnameList" == expected_types) && is.character(obj))
     return(list(obj, "DimnameList"))
   
-  if (any("IntArrayRef" == expected_types) && (is.numeric(obj) || is.list(obj)) && arg_name %in% c("dims", "dims_self", "dims_other"))
-    return(list(as_1_based_dim(obj), "IntArrayRef"))
-  
-  if (any("IntArrayRef" == expected_types) && any("DimnameList" == expected_types) && is.numeric(obj))
-      return(list(as_1_based_dim(obj), "IntArrayRef"))
+  if (any("IntArrayRef" == expected_types) && (is.numeric(obj) || is.list(obj)) && 
+      arg_name %in% c("dims", "dims_self", "dims_other", "dim"))
+    return(list(obj, "IntArrayRef"))
   
   if (any("IntArrayRef" == expected_types) && is.numeric(obj))
     return(list(as.integer(obj), "IntArrayRef"))
