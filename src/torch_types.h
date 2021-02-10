@@ -149,7 +149,16 @@ public:
   XPtrTorchIntArrayRef (const XPtrTorchIntArrayRef& x) : XPtrTorch(x.get_shared()) {};
   explicit XPtrTorchIntArrayRef (SEXP x);
   //operator SEXP () const;
-};  
+};
+
+class XPtrTorchIndexIntArrayRef : public XPtrTorch {
+public:
+  XPtrTorchIndexIntArrayRef () : XPtrTorch{NULL} {};
+  XPtrTorchIndexIntArrayRef (void* x) : XPtrTorch(x, lantern_vector_int64_t_delete) {}
+  explicit XPtrTorchIndexIntArrayRef (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchIndexIntArrayRef (const XPtrTorchIndexIntArrayRef& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchIndexIntArrayRef (SEXP x);
+};
 
 class XPtrTorchOptionalIntArrayRef {
 public:
@@ -160,22 +169,28 @@ public:
   XPtrTorchOptionalIntArrayRef () {};
   explicit XPtrTorchOptionalIntArrayRef (SEXP x);
   
-  XPtrTorchOptionalIntArrayRef (const XPtrTorchOptionalIntArrayRef& x ) {
-    data = x.data;
-    /// on copy we need to re-create the pointer
-    /// so it points to data that is still in scope. 
+  XPtrTorchOptionalIntArrayRef (std::vector<int64_t> data_, bool is_null_) {
+    data = data_;
     ptr = std::shared_ptr<void>(
-      lantern_optional_vector_int64_t(data.data(), data.size(), x.is_null),
+      lantern_optional_vector_int64_t(data.data(), data.size(), is_null_),
       lantern_optional_vector_int64_t_delete
     );
-    is_null = x.is_null;
+    is_null = is_null_;
   }
+  
+  XPtrTorchOptionalIntArrayRef (const XPtrTorchOptionalIntArrayRef& x ) : 
+    XPtrTorchOptionalIntArrayRef (x.data, x.is_null) {}
   
   void* get() const
   {
     return ptr.get();
   }
 };  
+
+class XPtrTorchOptionalIndexIntArrayRef : XPtrTorchOptionalIntArrayRef {
+public:
+  explicit XPtrTorchOptionalIndexIntArrayRef (SEXP x);
+};
 
 #include <Rcpp.h>
 

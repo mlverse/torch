@@ -414,7 +414,7 @@ XPtrTorchMemoryFormat XPtrTorchMemoryFormat_from_SEXP (SEXP x)
 XPtrTorchMemoryFormat::XPtrTorchMemoryFormat (SEXP x):
   XPtrTorch{XPtrTorchMemoryFormat_from_SEXP(x)} {}
 
-XPtrTorchIntArrayRef XPtrTorchIntArrayRef_from_SEXP (SEXP x, bool allow_null)
+XPtrTorchIntArrayRef XPtrTorchIntArrayRef_from_SEXP (SEXP x, bool allow_null, bool index)
 {
   
   if (TYPEOF(x) == NILSXP)
@@ -429,35 +429,79 @@ XPtrTorchIntArrayRef XPtrTorchIntArrayRef_from_SEXP (SEXP x, bool allow_null)
   }
   
   auto vec = Rcpp::as<std::vector<int64_t>>(x);
+  
+  if (index)
+  {
+    for (int i = 0; i < vec.size(); i++)
+    {
+      
+      if (vec[i] == 0)
+      {
+        Rcpp::stop("Indexing starts at 1 but found a 0.");
+      }
+      
+      if (vec[i] > 0) 
+      {
+        vec[i] = vec[i] - 1;
+      }
+    }
+  }
+  
   auto ptr = lantern_vector_int64_t(vec.data(), vec.size());
   return XPtrTorchIntArrayRef(ptr);
 }
 
 XPtrTorchIntArrayRef::XPtrTorchIntArrayRef (SEXP x):
-  XPtrTorch{XPtrTorchIntArrayRef_from_SEXP(x, false)} {}
+  XPtrTorch{XPtrTorchIntArrayRef_from_SEXP(x, false, false)} {}
 
-XPtrTorchOptionalIntArrayRef::XPtrTorchOptionalIntArrayRef (SEXP x) {
+XPtrTorchIndexIntArrayRef::XPtrTorchIndexIntArrayRef (SEXP x):
+  XPtrTorch{XPtrTorchIntArrayRef_from_SEXP(x, false, true)} {}
+
+XPtrTorchOptionalIntArrayRef XPtrTorchOptionalIntArrayRef_from_SEXP (SEXP x, bool index)
+{
+  bool is_null;
+  std::vector<int64_t> data;
+  
   if (TYPEOF(x) == NILSXP)
   {
-    ptr = std::shared_ptr<void>(
-      lantern_optional_vector_int64_t(nullptr, 0, true),
-      lantern_optional_vector_int64_t_delete
-    );
     is_null = true;
-  } else {
-    this->data = Rcpp::as<std::vector<int64_t>>(x);
-    this->ptr = std::shared_ptr<void>(
-      lantern_optional_vector_int64_t(this->data.data(), this->data.size(), false),
-      lantern_optional_vector_int64_t_delete
-    );
+  } 
+  else {
+    
+    data = Rcpp::as<std::vector<int64_t>>(x);
+    
+    if (index)
+    {
+      for (int i = 0; i < data.size(); i++)
+      {
+        if (data[i] == 0)
+        {
+          Rcpp::stop("Indexing starts at 1 but found a 0.");
+        }
+        
+        if (data[i] > 0)
+        {
+          data[i] = data[i] - 1;
+        }
+        
+      }
+    }
+    
     is_null = false;
   }
+  
+  return XPtrTorchOptionalIntArrayRef(data, is_null);
 }
+
+XPtrTorchOptionalIntArrayRef::XPtrTorchOptionalIntArrayRef (SEXP x):
+  XPtrTorchOptionalIntArrayRef{XPtrTorchOptionalIntArrayRef_from_SEXP(x, false)} {};
+
+XPtrTorchOptionalIndexIntArrayRef::XPtrTorchOptionalIndexIntArrayRef (SEXP x):
+  XPtrTorchOptionalIntArrayRef{XPtrTorchOptionalIntArrayRef_from_SEXP(x, true)} {};
 
 // [[Rcpp::export]]
 int test_fun (XPtrTorchOptionalIntArrayRef x)
 {
   Rcpp::Rcout << &x.data << std::endl;
-  lantern_vector_bool_push_back(x.get(), 1);
   return 1 + 1;
 }

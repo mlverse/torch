@@ -66,9 +66,8 @@ test_that("permute", {
   
   expect_error(
     x$permute(c(2,1, 0)),
-    regex = "Dimension is 1-based, but found 0.",
-    fixed = TRUE,
-    class = "value_error"
+    regex = "Indexing starts at 1 but found a 0.",
+    fixed = TRUE
   )
   
 })

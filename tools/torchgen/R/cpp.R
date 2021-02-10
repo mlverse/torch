@@ -100,6 +100,16 @@ cpp_parameter_type <- function(argument) {
     return("XPtrTorchIndexTensor")
   }
 
+  if (argument$name %in% c("dims", "dims_self", "dims_other", "dim") &&
+      argument$dynamic_type == "IntArrayRef")
+  {
+    if (argument$type == "c10::optional<IntArrayRef>") {
+      return("XPtrTorchOptionalIndexIntArrayRef")
+    } else {
+      return("XPtrTorchIndexIntArrayRef")
+    }
+  }
+
   if (argument$dynamic_type == "Tensor") {
     declaration <- "XPtrTorchTensor"
   }
