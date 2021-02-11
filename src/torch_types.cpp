@@ -428,7 +428,20 @@ XPtrTorchIntArrayRef XPtrTorchIntArrayRef_from_SEXP (SEXP x, bool allow_null, bo
     }
   }
   
-  auto vec = Rcpp::as<std::vector<int64_t>>(x);
+  std::vector<int64_t> vec;
+  
+  if (TYPEOF(x) == VECSXP) 
+  {
+    auto tmp = Rcpp::as<Rcpp::List>(x);
+    for (auto i = tmp.begin(); i != tmp.end(); ++i)
+    {
+      vec.push_back(Rcpp::as<int64_t>(*i));
+    }
+  }
+  else
+  {
+    vec = Rcpp::as<std::vector<int64_t>>(x);
+  }
   
   if (index)
   {
@@ -462,13 +475,26 @@ XPtrTorchOptionalIntArrayRef XPtrTorchOptionalIntArrayRef_from_SEXP (SEXP x, boo
   bool is_null;
   std::vector<int64_t> data;
   
-  if (TYPEOF(x) == NILSXP)
+  if (TYPEOF(x) == NILSXP || LENGTH(x) == 0)
   {
     is_null = true;
   } 
   else {
     
-    data = Rcpp::as<std::vector<int64_t>>(x);
+    // handle lists of integers
+    if (TYPEOF(x) == VECSXP)
+    {
+      auto tmp = Rcpp::as<Rcpp::List>(x);
+      for (auto i = tmp.begin(); i != tmp.end(); ++i)
+      {
+        data.push_back(Rcpp::as<int64_t>(*i));
+      }
+    }
+    else 
+    {
+      data = Rcpp::as<std::vector<int64_t>>(x);  
+    }
+    
     
     if (index)
     {
