@@ -23,7 +23,7 @@ A complete example from Python to R is shown below. This is an extension of the 
 
 An artificial neural net is implemented below in Python. Note the final line which uses torch.save().
 
-```
+```{python eval=FALSE]
 import torch
 import numpy as np
 
@@ -126,8 +126,6 @@ model$load_state_dict(state_dict)
 newData = torch_tensor(array(rnorm(n=1000),dim=c(10,100)),dtype=torch_float32())
 
 predictMe <- model(newData)
-  
-
 ```
 
 
