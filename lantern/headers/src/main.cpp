@@ -151,7 +151,8 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             if ((type != "double") & 
                 (type != "IntArrayRef") &
-                (type != "ArrayRef<double>"))
+                (type != "ArrayRef<double>") &
+                type  != "int64_t")
             {
                 call = "optional<" + addNamespace(type) + ">(" + call + ").get()";
             }

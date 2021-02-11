@@ -192,6 +192,42 @@ public:
   explicit XPtrTorchOptionalIndexIntArrayRef (SEXP x);
 };
 
+class XPtrTorchint64_t2 {
+public:
+  std::shared_ptr<void> ptr;
+  explicit XPtrTorchint64_t2 (SEXP x_);
+  void* get () {
+    return ptr.get();
+  }
+};
+
+class XPtrTorchoptional_int64_t2 {
+public:
+  std::shared_ptr<void> ptr;
+  explicit XPtrTorchoptional_int64_t2 (SEXP x_);
+  void* get () {
+    return ptr.get();
+  }
+};
+
+class XPtrTorchindex_int64_t {
+public:
+  std::shared_ptr<void> ptr;
+  explicit XPtrTorchindex_int64_t (SEXP x_);
+  void* get () {
+    return ptr.get();
+  }
+};
+
+class XPtrTorchoptional_index_int64_t {
+public:
+  std::shared_ptr<void> ptr;
+  explicit XPtrTorchoptional_index_int64_t (SEXP x_);
+  void* get () {
+    return ptr.get();
+  }
+};
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {

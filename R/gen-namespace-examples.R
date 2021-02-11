@@ -3226,7 +3226,7 @@ NULL
 #' x[torch_randn(3,3) > 0.5] = 1
 #' x
 #' torch_count_nonzero(x)
-#' torch_count_nonzero(x, dim=0)
+#' torch_count_nonzero(x, dim=1)
 NULL
 # -> count_nonzero <-
 

@@ -110,6 +110,15 @@ cpp_parameter_type <- function(argument) {
     }
   }
 
+  if (argument$name %in% c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim", "index") &&
+      argument$dynamic_type == "int64_t") {
+
+    if (argument$type == "c10::optional<int64_t>")
+      return("XPtrTorchoptional_index_int64_t")
+    else
+      return("XPtrTorchindex_int64_t")
+  }
+
   if (argument$dynamic_type == "Tensor") {
     declaration <- "XPtrTorchTensor"
   }
@@ -142,8 +151,12 @@ cpp_parameter_type <- function(argument) {
     declaration <- "std::vector<double>"
   }
 
-  if (argument$dynamic_type == "int64_t") {
-    declaration <- "nullable<int64_t>"
+  if (argument$dynamic_type == "int64_t" && !argument$type == "c10::optional<int64_t>") {
+    declaration <- "XPtrTorchint64_t2"
+  }
+
+  if (argument$dynamic_type == "int64_t" && argument$type == "c10::optional<int64_t>") {
+    declaration <- "XPtrTorchoptional_int64_t2"
   }
 
   if (argument$dynamic_type == "double" && argument$type == "c10::optional<double>") {

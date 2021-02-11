@@ -196,6 +196,14 @@ void * _lantern_string_new (const char * value)
   LANTERN_FUNCTION_END
 }
 
+void _lantern_print_stuff (void* x)
+{
+  LANTERN_FUNCTION_START
+  auto v = reinterpret_cast<LanternObject<c10::optional<int64_t>>*>(x);
+  std::cout << v->get().value() << std::endl;
+  LANTERN_FUNCTION_END_VOID
+}
+
 void lantern_host_handler() {}
 
 

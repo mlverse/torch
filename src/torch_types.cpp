@@ -525,9 +525,100 @@ XPtrTorchOptionalIntArrayRef::XPtrTorchOptionalIntArrayRef (SEXP x):
 XPtrTorchOptionalIndexIntArrayRef::XPtrTorchOptionalIndexIntArrayRef (SEXP x):
   XPtrTorchOptionalIntArrayRef{XPtrTorchOptionalIntArrayRef_from_SEXP(x, true)} {};
 
-// [[Rcpp::export]]
-int test_fun (XPtrTorchOptionalIntArrayRef x)
+XPtrTorchint64_t2::XPtrTorchint64_t2 (SEXP x_)
 {
-  Rcpp::Rcout << &x.data << std::endl;
+  int64_t x;
+  if (LENGTH(x_) == 1)
+  {
+    x = Rcpp::as<int64_t>(x_);  
+  } else {
+    Rcpp::stop("Expected a single integer.");
+  }
+  
+  ptr = std::shared_ptr<void>(
+    lantern_int64_t(x), 
+    lantern_int64_t_delete
+  );
+}
+
+XPtrTorchoptional_int64_t2::XPtrTorchoptional_int64_t2 (SEXP x_)
+{
+  int64_t x = 0;
+  bool is_null;
+  
+  if (TYPEOF(x_) == NILSXP || LENGTH(x_) == 0)
+  {
+    is_null = true;
+  }
+  else
+  {
+    x = Rcpp::as<int64_t>(x_);  
+    is_null = false;
+  } 
+  ptr = std::shared_ptr<void>(
+    lantern_optional_int64_t(x, is_null), 
+    lantern_optional_int64_t_delete
+  );
+}
+
+XPtrTorchindex_int64_t::XPtrTorchindex_int64_t (SEXP x_)
+{
+  int64_t x = 0;
+  
+  if (LENGTH(x_) > 0)
+  {
+    x = Rcpp::as<int64_t>(x_);  
+  }
+  
+  if (x == 0)
+  {
+    Rcpp::stop("Indexing starts at 1 but found a 0.");
+  }
+  
+  if (x > 0)
+  {
+    x = x - 1;
+  }
+  
+  ptr = std::shared_ptr<void>(
+    lantern_int64_t(x), 
+    lantern_int64_t_delete
+  );
+}
+
+XPtrTorchoptional_index_int64_t::XPtrTorchoptional_index_int64_t (SEXP x_)
+{
+  int64_t x = 0;
+  bool is_null;
+  
+  if (TYPEOF(x_) == NILSXP || LENGTH(x_) == 0)
+  {
+    is_null = true;
+  }
+  else
+  {
+    x = Rcpp::as<int64_t>(x_);  
+    is_null = false;
+    if (x == 0)
+    {
+      Rcpp::stop("Indexing starts at 1 but found a 0.");
+    }
+    
+    if (x > 0)
+    {
+      x = x - 1;
+    }
+  }
+  
+  ptr = std::shared_ptr<void>(
+    lantern_optional_int64_t(x, is_null), 
+    lantern_optional_int64_t_delete
+  );
+}
+
+// [[Rcpp::export]]
+int test_fun (XPtrTorchoptional_index_int64_t x)
+{
+  lantern_print_stuff(x.get());
   return 1 + 1;
 }
