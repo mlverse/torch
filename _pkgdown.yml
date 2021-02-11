@@ -34,6 +34,8 @@ navbar:
        href: articles/using-autograd.html
      - text: Extending autograd
        href: articles/extending-autograd.html
+     - text: Python models
+       href: articles/python-to-r.html
   examples:
     text: Examples
     menu:
