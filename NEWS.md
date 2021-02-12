@@ -21,6 +21,7 @@
 - Added vignette on reading models from Python (#469)
 - Internal changes to auto unwrap arguments from SEXP's in Rcpp. This will make easier to move the dispatcher system to C++ in the future, but already allows us to gain ~30% speedups in small operations. (#454)
 - Found and fixed some memory leaks, specially when creating datatypes from strings and when saving models with `torch_save`. (#454)
+- Fixed bug in `nnf_pad` when using `mode='circular'`. (#471)
 
 # torch 0.2.1
 
