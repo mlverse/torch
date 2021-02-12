@@ -19,6 +19,8 @@
 - Fixed backward compatibility issue when loading models saved in older versions of torch. This bug was introduced in #452 and is now fixed and we also added a regression test. (#458)
 - Fixed bug when using RNN's on the GPU (#460)
 - Added vignette on reading models from Python (#469)
+- Internal changes to auto unwrap arguments from SEXP's in Rcpp. This will make easier to move the dispatcher system to C++ in the future, but already allows us to gain ~30% speedups in small operations. (#454)
+- Found and fixed some memory leaks, specially when creating datatypes from strings and when saving models with `torch_save`. (#454)
 
 # torch 0.2.1
 
