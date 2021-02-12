@@ -113,7 +113,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(obj, "TensorOptions"))
   
   if (arg_name == "indices" && any("TensorList" == expected_types) && is.list(obj))
-    return(list(torch_tensor_list(lapply(obj, function(x) x$sub(1L, 1L)))$ptr, "TensorList"))
+    return(list(obj, "TensorList"))
   
   if (any("TensorList" == expected_types) && is.list(obj))
     return(list(obj, "TensorList"))

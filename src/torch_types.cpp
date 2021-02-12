@@ -26,6 +26,8 @@ XPtrTorchTensorList::operator SEXP () const {
   return out;
 }
 
+
+
 XPtrTorchScalarType::operator SEXP () const {
   auto xptr = make_xptr<XPtrTorchScalarType>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_dtype", "R7");
@@ -134,27 +136,7 @@ XPtrTorchTensor::XPtrTorchTensor (SEXP x) :
 XPtrTorchIndexTensor XPtrTorchIndexTensor_from_SEXP (SEXP x)
 {
   XPtrTorchTensor t = XPtrTorchTensor_from_SEXP(x);
-  
-  // check that there's no zeros
-  bool zeros = lantern_Tensor_has_any_zeros(t.get());
-  if (zeros)
-  {
-    Rcpp::stop("Indexing starts at 1 but found a 0.");
-  }
-  
-  /// make it 0 based!
-  XPtrTorchTensor sign = lantern_Tensor_signbit_tensor(t.get());
-  sign = lantern_logical_not_tensor(sign.get());
-  
-  // cast from bool to int
-  XPtrTorchTensorOptions options = lantern_TensorOptions();
-  options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
-  sign = lantern_Tensor_to(sign.get(), options.get());
-  
-  // create a 1 scalar
-  int al = 1;
-  XPtrTorchScalar alpha = lantern_Scalar((void*) &al, std::string("int").c_str());
-  XPtrTorchTensor zero_index = lantern_Tensor_sub_tensor_tensor_scalar(t.get(), sign.get(), alpha.get());
+  XPtrTorchTensor zero_index = to_index_tensor(t);
   
   return XPtrTorchIndexTensor(zero_index.get_shared());
 }
@@ -223,6 +205,17 @@ XPtrTorchTensorList XPtrTorchTensorList_from_SEXP (SEXP x)
 
 XPtrTorchTensorList::XPtrTorchTensorList (SEXP x):
   XPtrTorch{XPtrTorchTensorList_from_SEXP(x)} {}
+
+XPtrTorchIndexTensorList XPtrTorchIndexTensorList_from_SEXP (SEXP x)
+{
+  XPtrTorchTensorList t = XPtrTorchTensorList_from_SEXP(x);
+  XPtrTorchIndexTensorList zero_index = to_index_tensor_list(t);
+  
+  return zero_index;
+}
+
+XPtrTorchIndexTensorList::XPtrTorchIndexTensorList (SEXP x) :
+  XPtrTorch{XPtrTorchIndexTensorList_from_SEXP(x)} {}
 
 XPtrTorchTensorOptions XPtrTorchTensorOptions_from_SEXP (SEXP x)
 {

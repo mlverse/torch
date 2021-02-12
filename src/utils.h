@@ -31,3 +31,5 @@ type reinterpret_and_clean (void * x)
 }
 
 XPtrTorchTensor cpp_tensor_undefined ();
+XPtrTorchTensor to_index_tensor (XPtrTorchTensor t);
+XPtrTorchIndexTensorList to_index_tensor_list (XPtrTorchTensorList x);

@@ -119,6 +119,11 @@ cpp_parameter_type <- function(argument) {
       return("XPtrTorchindex_int64_t")
   }
 
+  if (argument$name == "indices" &&
+      argument$dynamic_type == "TensorList") {
+    return("XPtrTorchIndexTensorList")
+  }
+
   if (argument$dynamic_type == "Tensor") {
     declaration <- "XPtrTorchTensor"
   }
