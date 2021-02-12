@@ -58,7 +58,7 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(obj, "ScalarType"))
   
   if (any("ScalarType" == expected_types) && is.null(obj))
-    return(list(NULL, "ScalarType"))
+    return(list(obj, "ScalarType"))
   
   if (any("Scalar" == expected_types) && is_scalar_atomic(obj))
     return(list(obj, "Scalar"))
@@ -77,25 +77,25 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(obj, "IntArrayRef"))
   
   if (any("IntArrayRef" == expected_types) && is.numeric(obj))
-    return(list(as.integer(obj), "IntArrayRef"))
+    return(list(obj, "IntArrayRef"))
   
   if (any("IntArrayRef" == expected_types) && is.list(obj))
-    return(list(as.integer(obj), "IntArrayRef"))
+    return(list(obj, "IntArrayRef"))
   
   if (any("ArrayRef<double>" == expected_types) && is.numeric(obj))
     return(list(obj, "ArrayRef<double>"))
   
   if (any("IntArrayRef" == expected_types) && is.null(obj))
-    return(list(NULL, "IntArrayRef"))
+    return(list(obj, "IntArrayRef"))
   
   if (any("ArrayRef<double>" == expected_types) && is.null(obj))
-    return(list(NULL, "ArrayRef<double>"))
+    return(list(obj, "ArrayRef<double>"))
   
   if (any("int64_t" == expected_types) && is.numeric(obj) && length(obj) == 1 && any(arg_name == c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim", "index")))
     return(list(obj, "int64_t"))
   
   if (any("int64_t" == expected_types) && is.numeric(obj) && length(obj) == 1)
-    return(list(as.integer(obj), "int64_t"))
+    return(list(obj, "int64_t"))
   
   if (any("bool" == expected_types) && is.logical(obj) && length(obj) == 1)
     return(list(obj, "bool"))
@@ -119,28 +119,28 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
     return(list(obj, "TensorList"))
   
   if (any("MemoryFormat" == expected_types) && is.null(obj))
-    return(list(NULL, "MemoryFormat"))
+    return(list(obj, "MemoryFormat"))
   
   if (any("Generator" == expected_types) && is_torch_generator(obj))
     return(list(obj, "Generator"))
   
   if (any("Generator" == expected_types) && is.null(obj))
-    return(list(NULL, "Generator"))
+    return(list(obj, "Generator"))
   
   if (any("Scalar" == expected_types) && is.null(obj))
     return(list(obj, "Scalar"))
   
   if (any("int64_t" ==  expected_types) && is.null(obj))
-    return(list(NULL, "int64_t"))
+    return(list(obj, "int64_t"))
   
   if (any("Tensor" == expected_types) && length(obj) == 0 && is.list(obj))
-    return(list(NULL, "Tensor"))
+    return(list(obj, "Tensor"))
   
   if (any("Tensor" == expected_types) && is.null(obj))
-    return(list(NULL, "Tensor"))
+    return(list(obj, "Tensor"))
   
   if (any("double" == expected_types) && is.null(obj))
-    return(list(NULL, "double"))
+    return(list(obj, "double"))
   
   if (any("Device" == expected_types) && is_torch_device(obj))
     return(list(obj, "Device"))

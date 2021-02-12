@@ -116,7 +116,7 @@ XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
     return XPtrTorchTensor( out->get_shared());
   }
   
-  if (TYPEOF(x) == NILSXP) {
+  if (TYPEOF(x) == NILSXP || (TYPEOF(x) == VECSXP && LENGTH(x) == 0)) {
     return cpp_tensor_undefined();
   }
   
