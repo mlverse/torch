@@ -86,7 +86,7 @@ extern std::string *pLanternLastError;
   LLOG("Error in %s", __func__)                                    \
   pLanternLastError = new std::string("Unknown error. ");          \
 }
-
+ 
 #ifdef __cplusplus
 extern "C"
 {
@@ -364,6 +364,8 @@ extern "C"
   HOST_API void * lantern_Edge_function(void *self) { void * ret = _lantern_Edge_function(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void(LANTERN_PTR _lantern_vector_int64_t_delete)(void *x);
   HOST_API void lantern_vector_int64_t_delete(void *x) { _lantern_vector_int64_t_delete(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void(LANTERN_PTR _lantern_optional_vector_int64_t_delete)(void *x);
+  HOST_API void lantern_optional_vector_int64_t_delete(void *x) { _lantern_optional_vector_int64_t_delete(x); LANTERN_HOST_HANDLER }
   LANTERN_API void(LANTERN_PTR _lantern_autograd_backward)(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph);
   HOST_API void lantern_autograd_backward(void *tensors, void *grad_tensors, bool retain_graph, bool create_graph) { _lantern_autograd_backward(tensors, grad_tensors, retain_graph, create_graph); LANTERN_HOST_HANDLER }
   LANTERN_API void *(LANTERN_PTR _lantern_autograd_grad)(void *outputs, void *inputs, void *grad_outputs, bool retain_graph, bool create_graph, bool allow_unused);
@@ -469,7 +471,7 @@ extern "C"
   LANTERN_API size_t (LANTERN_PTR _lantern_tensor_serialized_size) (const char * s);
   HOST_API size_t lantern_tensor_serialized_size(const char * s) { size_t ret = _lantern_tensor_serialized_size(s); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void (LANTERN_PTR _lantern_const_char_delete) (const char * x);
-  HOST_API void lantern_const_char_delete(const char * x) { return LANTERN_HOST_HANDLER(_lantern_const_char_delete(x)); }
+  HOST_API void lantern_const_char_delete(const char * x) {_lantern_const_char_delete(x); LANTERN_HOST_HANDLER}  
   LANTERN_API void (LANTERN_PTR _lantern_Tensor_index_put_tensor_) (void* self, void* index, void* rhs);
   HOST_API void lantern_Tensor_index_put_tensor_ (void* self, void* index, void* rhs) { _lantern_Tensor_index_put_tensor_(self, index, rhs); LANTERN_HOST_HANDLER}
   LANTERN_API void (LANTERN_PTR _lantern_Tensor_index_put_scalar_) (void* self, void* index, void* rhs);
@@ -824,6 +826,27 @@ HOST_API void* lantern_normal_tensor_double_generator (void* mean, double std, v
   void* ret = _lantern_normal_tensor_double_generator(mean, std, generator);
   LANTERN_HOST_HANDLER 
   return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_void_delete) (void* x);
+HOST_API void lantern_vector_void_delete (void* x)
+{
+  _lantern_vector_void_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_autograd_is_enabled) ();
+HOST_API bool lantern_autograd_is_enabled ()
+{
+  bool ret = _lantern_autograd_is_enabled();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_print_stuff) (void* x);
+HOST_API void lantern_print_stuff (void* x) {
+  _lantern_print_stuff (x);
+  LANTERN_HOST_HANDLER;
 }
 
   /* Autogen Headers -- Start */
@@ -5201,6 +5224,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Dtype_bool);
   LOAD_SYMBOL(_lantern_Dtype_type);
   LOAD_SYMBOL(_lantern_vector_int64_t);
+  LOAD_SYMBOL(_lantern_optional_vector_int64_t_delete);
   LOAD_SYMBOL(_lantern_vector_double);
   LOAD_SYMBOL(_lantern_IntArrayRef);
   LOAD_SYMBOL(_lantern_MemoryFormat_Contiguous);
@@ -5414,6 +5438,9 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_normal_tensor_tensor_generator);
   LOAD_SYMBOL(_lantern_normal_double_tensor_generator);
   LOAD_SYMBOL(_lantern_normal_tensor_double_generator);
+  LOAD_SYMBOL(_lantern_vector_void_delete);
+  LOAD_SYMBOL(_lantern_autograd_is_enabled);
+  LOAD_SYMBOL(_lantern_print_stuff);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

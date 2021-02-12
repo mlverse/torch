@@ -24,9 +24,9 @@ void cpp_stack_push_back_int64_t (Rcpp::XPtr<XPtrTorchStack> self,
 
 // [[Rcpp::export]]
 void cpp_stack_push_back_TensorList (Rcpp::XPtr<XPtrTorchStack> self,
-                                     Rcpp::XPtr<XPtrTorchTensorList> x)
+                                     XPtrTorchTensorList x)
 {
-  lantern_Stack_push_back_TensorList(self->get(), x->get());  
+  lantern_Stack_push_back_TensorList(self->get(), x.get());  
 }
 
 Rcpp::XPtr<XPtrTorchTensor> cpp_stack_at_Tensor (Rcpp::XPtr<XPtrTorchStack> self,
@@ -43,11 +43,11 @@ int64_t cpp_stack_at_int64_t (Rcpp::XPtr<XPtrTorchStack> self,
   return out;
 }
 
-Rcpp::XPtr<XPtrTorchTensorList> cpp_stack_at_TensorList (Rcpp::XPtr<XPtrTorchStack> self,
+XPtrTorchTensorList cpp_stack_at_TensorList (Rcpp::XPtr<XPtrTorchStack> self,
                                                          int64_t i)
 {
   XPtrTorchTensorList out = lantern_Stack_at_TensorList(self->get(), i);
-  return make_xptr<XPtrTorchTensorList>(out);
+  return out;
 }
 
 // [[Rcpp::export]]

@@ -36,7 +36,7 @@ Tensor <- R7Class(
       }
       
       
-      cpp_torch_tensor(data, rev(dimension), options$ptr, 
+      cpp_torch_tensor(data, rev(dimension), options, 
                        requires_grad, inherits(data, "integer64"))
     },
     print = function(n = 30) {

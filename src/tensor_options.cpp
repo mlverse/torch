@@ -2,7 +2,7 @@
 #include "utils.h"
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensorOptions> cpp_torch_tensor_options (
+XPtrTorchTensorOptions cpp_torch_tensor_options (
     Rcpp::Nullable<Rcpp::XPtr<XPtrTorchDtype>> dtype_ptr,
     Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> layout_ptr,
     Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> device_ptr,
@@ -35,7 +35,7 @@ Rcpp::XPtr<XPtrTorchTensorOptions> cpp_torch_tensor_options (
     options = lantern_TensorOptions_pinned_memory(options.get(), Rcpp::as<bool>(pinned_memory));
   }
   
-  return make_xptr<XPtrTorchTensorOptions>(options);
+  return XPtrTorchTensorOptions(options);
 }
 
 // [[Rcpp::export]]

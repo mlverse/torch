@@ -72,54 +72,59 @@ const char *_lantern_Device_type(void *device)
   LANTERN_FUNCTION_START
   torch::Device type = ((LanternPtr<torch::Device> *)device)->get().type();
 
+  std::string str;
   if (type == torch::DeviceType::CPU)
   {
-    return "cpu";
+    str = "cpu";
   }
   else if (type == torch::DeviceType::CUDA)
   {
-    return "cuda";
+    str = "cuda";
   }
   else if (type == torch::DeviceType::MKLDNN)
   {
-    return "mkldnn";
+    str = "mkldnn";
   }
   else if (type == torch::DeviceType::OPENGL)
   {
-    return "opengl";
+    str = "opengl";
   }
   else if (type == torch::DeviceType::OPENCL)
   {
-    return "opencl";
+    str = "opencl";
   }
   else if (type == torch::DeviceType::IDEEP)
   {
-    return "ideep";
+    str = "ideep";
   }
   else if (type == torch::DeviceType::HIP)
   {
-    return "hip";
+    str = "hip";
   }
   else if (type == torch::DeviceType::FPGA)
   {
-    return "fpga";
+    str = "fpga";
   }
   else if (type == torch::DeviceType::MSNPU)
   {
-    return "msnpu";
+    str = "msnpu";
   }
   else if (type == torch::DeviceType::XLA)
   {
-    return "xla";
+    str = "xla";
   }
   else if (type == torch::DeviceType::ONLY_FOR_TEST)
   {
-    return "test";
+    str = "test";
   }
   else
   {
-    return "unknown";
+    str = "unknown";
   }
+
+  char *cstr = new char[str.length() + 1];
+  strcpy(cstr, str.c_str());
+  return cstr;
   LANTERN_FUNCTION_END
 }
 

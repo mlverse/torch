@@ -94,8 +94,38 @@ cpp_function_name <- function(method, type) {
 
 cpp_parameter_type <- function(argument) {
 
+  if (argument$name %in% c("index", "indices", "dims") &&
+      argument$dynamic_type == "Tensor")
+  {
+    return("XPtrTorchIndexTensor")
+  }
+
+  if (argument$name %in% c("dims", "dims_self", "dims_other", "dim") &&
+      argument$dynamic_type == "IntArrayRef")
+  {
+    if (argument$type == "c10::optional<IntArrayRef>") {
+      return("XPtrTorchOptionalIndexIntArrayRef")
+    } else {
+      return("XPtrTorchIndexIntArrayRef")
+    }
+  }
+
+  if (argument$name %in% c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim", "index") &&
+      argument$dynamic_type == "int64_t") {
+
+    if (argument$type == "c10::optional<int64_t>")
+      return("XPtrTorchoptional_index_int64_t")
+    else
+      return("XPtrTorchindex_int64_t")
+  }
+
+  if (argument$name == "indices" &&
+      argument$dynamic_type == "TensorList") {
+    return("XPtrTorchIndexTensorList")
+  }
+
   if (argument$dynamic_type == "Tensor") {
-    declaration <- "Rcpp::XPtr<XPtrTorchTensor>"
+    declaration <- "XPtrTorchTensor"
   }
 
   if (argument$dynamic_type == "bool") {
@@ -103,19 +133,19 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "DimnameList") {
-    declaration <-  "Rcpp::XPtr<XPtrTorch>"
+    declaration <-  "XPtrTorchDimnameList"
   }
 
   if (argument$dynamic_type == "TensorList") {
-    declaration <- "Rcpp::XPtr<XPtrTorchTensorList>"
+    declaration <- "XPtrTorchTensorList"
   }
 
   if (argument$dynamic_type == "IntArrayRef" && argument$type == "c10::optional<IntArrayRef>") {
-    declaration <- "nullableVector<std::vector<int64_t>>"
+    declaration <- "XPtrTorchOptionalIntArrayRef"
   }
 
   if (argument$dynamic_type == "IntArrayRef" && argument$type != "c10::optional<IntArrayRef>") {
-    declaration <- "std::vector<int64_t>"
+    declaration <- "XPtrTorchIntArrayRef"
   }
 
   if (argument$dynamic_type == "ArrayRef<double>"&& argument$type == "c10::optional<ArrayRef<double>>") {
@@ -126,8 +156,12 @@ cpp_parameter_type <- function(argument) {
     declaration <- "std::vector<double>"
   }
 
-  if (argument$dynamic_type == "int64_t") {
-    declaration <- "nullable<int64_t>"
+  if (argument$dynamic_type == "int64_t" && !argument$type == "c10::optional<int64_t>") {
+    declaration <- "XPtrTorchint64_t2"
+  }
+
+  if (argument$dynamic_type == "int64_t" && argument$type == "c10::optional<int64_t>") {
+    declaration <- "XPtrTorchoptional_int64_t2"
   }
 
   if (argument$dynamic_type == "double" && argument$type == "c10::optional<double>") {
@@ -143,23 +177,23 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "TensorOptions") {
-    declaration <- "Rcpp::XPtr<XPtrTorchTensorOptions>"
+    declaration <- "XPtrTorchTensorOptions"
   }
 
   if (argument$dynamic_type == "Generator *") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "XPtrTorchGenerator"
   }
 
   if (argument$dynamic_type == "Generator") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "XPtrTorchGenerator"
   }
 
   if (argument$dynamic_type == "ScalarType") {
-    declaration <- "Rcpp::XPtr<XPtrTorch>"
+    declaration <- "XPtrTorchDtype"
   }
 
   if (argument$dynamic_type == "Scalar") {
-    declaration <- "Rcpp::XPtr<XPtrTorchScalar>"
+    declaration <- "XPtrTorchScalar"
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
@@ -171,7 +205,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
-    declaration <- "Rcpp::XPtr<XPtrTorchMemoryFormat>"
+    declaration <- "XPtrTorchMemoryFormat"
   }
 
   if (argument$dynamic_type == "std::string") {
@@ -179,11 +213,11 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Dimname") {
-    declaration <- "Rcpp::XPtr<XPtrTorchDimname>"
+    declaration <- "XPtrTorchDimname"
   }
 
   if (argument$dynamic_type == "Device") {
-    declaration <- "Rcpp::XPtr<XPtrTorchDevice>"
+    declaration <- "XPtrTorchDevice"
   }
 
   if (argument$dynamic_type == "Storage") {
@@ -226,7 +260,7 @@ cpp_argument_transform <- function(argument) {
   argument$name <- cpp_parameter_identifier(argument)
 
   if (argument$dynamic_type == "Tensor") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "bool") {
@@ -234,19 +268,19 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "DimnameList") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "TensorList") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "IntArrayRef" && argument$type != "c10::optional<IntArrayRef>") {
-    result <- glue::glue("XPtrTorchvector_int64_t(lantern_vector_int64_t({argument$name}.data(), {argument$name}.size())).get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "IntArrayRef" && argument$type == "c10::optional<IntArrayRef>") {
-    result <- glue::glue("lantern_optional_vector_int64_t({argument$name}.x.data(), {argument$name}.x.size(), {argument$name}.is_null)")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "ArrayRef<double>" && argument$type != "c10::optional<ArrayRef<double>>") {
@@ -262,7 +296,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "double" && !argument$type == "c10::optional<double>") {
-    result <- glue::glue("XPtrTorch(lantern_double({argument$name})).get()")
+    result <- glue::glue("XPtrTorchdouble(lantern_double({argument$name})).get()")
   }
 
   if (argument$dynamic_type == "double" && argument$type == "c10::optional<double>") {
@@ -274,23 +308,23 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "TensorOptions") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Generator *") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Generator") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "ScalarType") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Scalar") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
@@ -302,7 +336,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "MemoryFormat") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "std::string") {
@@ -310,11 +344,11 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "Dimname") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Device") {
-    result <- glue::glue("{argument$name}->get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Storage") {
@@ -386,7 +420,7 @@ cpp_return_statement <- function(returns) {
 
     calls <- purrr::map_chr(
       seq_along(returns),
-      ~cpp_return_statement(returns[.x])(glue::glue("lantern_vector_get(r_out, {.x-1})"))
+      ~cpp_return_statement(returns[.x])(glue::glue("lantern_vector_get(wrap.get(), {.x-1})"))
     )
 
     f <- function(x) {
@@ -428,6 +462,10 @@ cpp_method_body <- function(method) {
     method_call <- glue::glue("auto r_out = {method_call}")
   }
 
+  if (length(method$returns) > 1) {
+    method_call <- c(method_call, "auto wrap = XPtrTorchvector_void(r_out);")
+  }
+
   if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
 
     return_call <- cpp_return_statement(method$returns)("r_out")
@@ -461,6 +499,10 @@ cpp_namespace_body <- function(method) {
 
   if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {
     method_call <- glue::glue("auto r_out = {method_call}")
+  }
+
+  if (length(method$returns) > 1) {
+    method_call <- c(method_call, "auto wrap = XPtrTorchvector_void(r_out);")
   }
 
   if (length(method$returns) > 0 && method$returns[[1]]$dynamic_type != "void") {

@@ -161,6 +161,13 @@ void _lantern_optional_int64_t_delete(void *x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_optional_vector_int64_t_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<LanternObject<c10::optional<torch::ArrayRef<int64_t>>>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 void _lantern_PackedSequence_delete(void *x)
 {
   LANTERN_FUNCTION_START
@@ -235,5 +242,12 @@ void _lantern_vector_bool_delete(void* x)
 {
   LANTERN_FUNCTION_START;
   lantern_delete<std::vector<bool>>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_vector_void_delete(void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<std::vector<void*>>(x);
   LANTERN_FUNCTION_END_VOID;
 }

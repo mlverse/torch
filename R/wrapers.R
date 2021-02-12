@@ -399,7 +399,7 @@ torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
   
   if (is.numeric(unlist(dim))) {
     o <- cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType(
-      self = self$ptr, p = p$ptr, dim = as_1_based_dim(unlist(dim)), keepdim = keepdim, dtype = dtype$ptr
+      self = self$ptr, p = p$ptr, dim = unlist(dim), keepdim = keepdim, dtype = dtype$ptr
     )
   } else if (is.character(unlist(dim))){
     o <- cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType(
@@ -484,7 +484,7 @@ torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
       std = std,
       size = size,
       generator = generator$ptr,
-      options = options$ptr
+      options = options
     )))
   }
   

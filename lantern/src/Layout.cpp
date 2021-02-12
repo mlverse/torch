@@ -24,16 +24,19 @@ void *_lantern_Layout_sparse()
 const char *_lantern_Layout_string(void *x)
 {
     LANTERN_FUNCTION_START
-    auto out = new std::string;
+    std::string str;
     auto l = reinterpret_cast<LanternObject<torch::Layout> *>(x)->get();
     if (l == torch::kStrided)
     {
-        *out = "strided";
+        str = "strided";
     }
     else if (l == torch::kSparse)
     {
-        *out = "sparse_coo";
+        str = "sparse_coo";
     }
-    return out->c_str();
+
+    char *cstr = new char[str.length() + 1];
+    strcpy(cstr, str.c_str());
+    return cstr;
     LANTERN_FUNCTION_END
 }

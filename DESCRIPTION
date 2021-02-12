@@ -128,7 +128,6 @@ Collate:
     'scalar.R'
     'stack.R'
     'storage.R'
-    'tensor_list.R'
     'tensor_options.R'
     'threads.R'
     'trace.R'

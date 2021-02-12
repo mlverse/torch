@@ -34,21 +34,22 @@ const char *_lantern_MemoryFormat_type(void *format)
   LANTERN_FUNCTION_START
   torch::MemoryFormat y = reinterpret_cast<LanternObject<torch::MemoryFormat> *>(format)->get();
 
+  std::string str;
   if (y == torch::MemoryFormat::Contiguous)
   {
-    return "contiguous";
-  }
-
-  if (y == torch::MemoryFormat::Preserve)
+    str = "contiguous";
+  } else if (y == torch::MemoryFormat::Preserve)
   {
-    return "preserve";
-  }
-
-  if (y == torch::MemoryFormat::ChannelsLast)
+    str = "preserve";
+  } else if (y == torch::MemoryFormat::ChannelsLast)
   {
-    return "channels_last";
+    str = "channels_last";
+  } else {
+    str = "undefined";
   }
 
-  return "undefined";
+  char *cstr = new char[str.length() + 1];
+  strcpy(cstr, str.c_str());
+  return cstr;
   LANTERN_FUNCTION_END
 }

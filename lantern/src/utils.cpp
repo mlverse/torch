@@ -154,7 +154,10 @@ int64_t _lantern_vector_string_size(void *self)
 const char *_lantern_vector_string_at(void *self, int64_t i)
 {
   LANTERN_FUNCTION_START
-  return reinterpret_cast<std::vector<std::string> *>(self)->at(i).c_str();
+  auto str = reinterpret_cast<std::vector<std::string> *>(self)->at(i);
+  char *cstr = new char[str.length() + 1];
+  strcpy(cstr, str.c_str());
+  return cstr;
   LANTERN_FUNCTION_END
 }
 
@@ -191,6 +194,14 @@ void * _lantern_string_new (const char * value)
   LANTERN_FUNCTION_START
   return (void *)new LanternObject<std::string>(std::string(value));
   LANTERN_FUNCTION_END
+}
+
+void _lantern_print_stuff (void* x)
+{
+  LANTERN_FUNCTION_START
+  auto v = reinterpret_cast<LanternObject<c10::optional<int64_t>>*>(x);
+  std::cout << v->get().value() << std::endl;
+  LANTERN_FUNCTION_END_VOID
 }
 
 void lantern_host_handler() {}
