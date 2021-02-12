@@ -206,4 +206,14 @@ void _lantern_print_stuff (void* x)
 
 void lantern_host_handler() {}
 
+void* _lantern_nn_functional_pad_circular (void* input, void* padding)
+{
+  LANTERN_FUNCTION_START
+  auto input_ = reinterpret_cast<LanternObject<torch::Tensor>*>(input)->get();
+  auto padding_ = reinterpret_cast<LanternObject<std::vector<int64_t>>*>(padding)->get();
+  auto out = torch::nn::functional::_pad_circular(input_, padding_);
+  return (void*) new LanternObject<torch::Tensor>(out);
+  LANTERN_FUNCTION_END
+}
+
 

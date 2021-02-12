@@ -360,4 +360,9 @@ Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_tensor_tensor (
   return make_xptr<XPtrTorchTensor>(out); 
 }
 
+// [[Rcpp::export]]
+XPtrTorchTensor nnf_pad_circular (XPtrTorchTensor input, XPtrTorchIntArrayRef padding)
+{
+  return XPtrTorchTensor(lantern_nn_functional_pad_circular(input.get(), padding.get()));
+}
 

@@ -8857,6 +8857,10 @@ cpp_namespace_normal_tensor_tensor <- function(mean, std, generator) {
     .Call('_torch_cpp_namespace_normal_tensor_tensor', PACKAGE = 'torchpkg', mean, std, generator)
 }
 
+nnf_pad_circular <- function(input, padding) {
+    .Call('_torch_nnf_pad_circular', PACKAGE = 'torchpkg', input, padding)
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torchpkg', x)
 }

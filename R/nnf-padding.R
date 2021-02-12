@@ -1,29 +1,3 @@
-nnf_pad_circular <- function(input, padding) {
-  
-  input <- torch_cat(list(input, input[,,1:(utils::tail(padding,1))]), dim = 2)
-  input <- torch_cat(list(input[,,c(
-    (-(rev(padding)[[1]] + rev(padding)[[2]])):(-rev(padding)[1])
-  )],
-  input), dim = 2)
-  
-  if (length(padding) > 2) {
-    input <- torch_cat(list(input, input[,,,1:(rev(padding)[3])]), dim = 3)
-    input <- torch_cat(list(input[,,,c(
-      (-(rev(padding)[3] + rev(padding)[4])):(-rev(padding[3]))
-    )],
-    input), dim = 3)
-  }
-  
-  if (length(padding) > 4) {
-    input <- torch_cat(list(input, input[,,,,1:(rev(padding)[5])]), dim = 4)
-    input <- torch_cat(list(input[,,,,c(
-      (-(rev(padding)[5] + rev(padding)[6])):(-rev(padding[5]))
-    )],
-    input), dim = 4)
-  }
-  
-  input
-}
 
 #' Pad
 #'
