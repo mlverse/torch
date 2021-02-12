@@ -849,6 +849,14 @@ HOST_API void lantern_print_stuff (void* x) {
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_nn_functional_pad_circular) (void* input, void* padding);
+HOST_API void* lantern_nn_functional_pad_circular (void* input, void* padding)
+{
+  void* ret = _lantern_nn_functional_pad_circular(input, padding);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5441,6 +5449,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_vector_void_delete);
   LOAD_SYMBOL(_lantern_autograd_is_enabled);
   LOAD_SYMBOL(_lantern_print_stuff);
+  LOAD_SYMBOL(_lantern_nn_functional_pad_circular)
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
