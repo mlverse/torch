@@ -32,7 +32,51 @@ Your models should also subclass this class.
 \details{
 Modules can also contain other Modules, allowing to nest them in a tree
 structure. You can assign the submodules as regular attributes.
+
+You are expected to implement the \code{initialize} and the \code{forward} to create a
+new \code{nn_module}.
 }
+\section{Initialize}{
+
+
+The initialize function will be called whenever a new instance of the \code{nn_module}
+is created. We use the initialize functions to define submodules and parameters
+of the module. For example:\preformatted{initialize = function(input_size, output_size) \{
+   self$conv1 <- nn_conv2d(input_size, output_size, 5)
+   self$conv2 <- nn_conv2d(output_size, output_size, 5)
+\}
+}
+
+The initialize function can have any number of parameters. All objects
+assigned to \verb{self$} will be available for other methods that you implement.
+Tensors wrapped with \code{\link[=nn_parameter]{nn_parameter()}} or \code{\link[=nn_buffer]{nn_buffer()}} and submodules are
+automatically tracked when assigned to \verb{self$}.
+
+The initialize function is optional if the module you are defining doesn't
+have weights, submodules or buffers.
+}
+
+\section{Forward}{
+
+
+The forward method is called whenever an instance of \code{nn_module} is called.
+This is usually used to implement the computation that the module does with
+the weights ad submodules defined in the \code{initialize} function.
+
+For example:\preformatted{forward = function(input) \{
+   input <- self$conv1(input)
+   input <- nnf_relu(input)
+   input <- self$conv2(input)
+   input <- nnf_relu(input)
+   input
+ \}
+}
+
+The \code{forward} function can use the \code{self$training} attribute to make different
+computations depending wether the model is training or not, for example if you
+were implementing the dropout module.
+}
+
 \examples{
 if (torch_is_installed()) {
 model <- nn_module(

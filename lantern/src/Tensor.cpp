@@ -212,3 +212,54 @@ void* _lantern_Tensor_names (void* self)
   return (void *)new LanternPtr<std::vector<torch::Dimname>>(nms);
   LANTERN_FUNCTION_END
 }
+
+// an utility function to quickly check if a tensor has any zeros
+bool _lantern_Tensor_has_any_zeros (void * self)
+{
+  LANTERN_FUNCTION_START
+  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  return (x == 0).any().item().toBool();
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_normal_double_double_intarrayref_generator_tensoroptions (double mean, double std, void* size, void* generator, void* options)
+{
+  LANTERN_FUNCTION_START
+  auto size_ = reinterpret_cast<LanternObject<std::vector<int64_t>>*>(size)->get();
+  auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
+  auto options_ = reinterpret_cast<LanternObject<torch::TensorOptions>*>(options)->get();
+  auto ten = at::normal(mean, std, size_, generator_, options_);
+  return (void*) new LanternObject<torch::Tensor>(ten);
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_normal_tensor_tensor_generator (void* mean, void* std, void* generator)
+{
+  LANTERN_FUNCTION_START
+  auto mean_ = reinterpret_cast<LanternObject<torch::Tensor>*>(mean)->get();
+  auto std_ = reinterpret_cast<LanternObject<torch::Tensor>*>(std)->get();
+  auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
+  auto ten = at::normal(mean_, std_, generator_);
+  return (void*) new LanternObject<torch::Tensor>(ten);
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_normal_double_tensor_generator (double mean, void* std, void* generator)
+{
+  LANTERN_FUNCTION_START
+  auto std_ = reinterpret_cast<LanternObject<torch::Tensor>*>(std)->get();
+  auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
+  auto ten = at::normal(mean, std_, generator_);
+  return (void*) new LanternObject<torch::Tensor>(ten);
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_normal_tensor_double_generator (void* mean, double std, void* generator)
+{
+  LANTERN_FUNCTION_START
+  auto mean_ = reinterpret_cast<LanternObject<torch::Tensor>*>(mean)->get();
+  auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
+  auto ten = at::normal(mean_, std, generator_);
+  return (void*) new LanternObject<torch::Tensor>(ten);
+  LANTERN_FUNCTION_END
+}

@@ -26,6 +26,7 @@ test_that("save a module", {
   
   torch_save(net, fname)
   reloaded_net <- torch_load(fname)
+  gc()
   
   x <- torch_randn(100, 10)
   expect_equal_to_tensor(net(x), reloaded_net(x))
@@ -67,6 +68,8 @@ test_that("save more complicated module", {
 
   torch_save(net, fname)
   reloaded_net <- torch_load(fname)
+  
+  gc()
   
   expect_equal_to_tensor(net$conv1$parameters$weight, 
                          reloaded_net$conv1$parameters$weight) 
@@ -148,5 +151,19 @@ test_that("load a state dict created in python", {
   expect_equal_to_tensor(dict$ones, torch_ones(3, 5))
   expect_equal_to_tensor(dict$twos, torch_ones(3, 5) * 2)
   
+})
+
+test_that("Can load a torch v0.2.1 model", {
+  
+  skip_on_os("windows")
+  
+  tmp <- tempfile("model", fileext = "pt")
+  download.file("https://storage.googleapis.com/torch-lantern-builds/testing-models/v0.2.1.pt", destfile = tmp, mode = "wb")
+  
+  model <- torch_load(tmp)
+  x <- torch_randn(32, 1, 28, 28)
+  
+  expect_error(o <- model(x), regexp = NA)
+  expect_tensor_shape(o, c(32, 10))
 })
 

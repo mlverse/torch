@@ -42,7 +42,7 @@ You should also add an entry to the [`_pkgdown.yaml` file](https://github.com/ml
 ## Code contributions
 
 We have many open issues in the [github repo](https://github.com/mlverse/torch/issues)
-if there's one item that you want to work on, you can comment on it an ask for
+if there's one item that you want to work on, you can comment on it and ask for
 directions.
 
 ### Requirements

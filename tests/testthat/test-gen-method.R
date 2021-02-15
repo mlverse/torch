@@ -22,6 +22,13 @@ test_that("add", {
   
 })
 
+test_that("clamp", {
+  
+  x <- torch_randn(5)
+  expect_error(x$clamp(1), regexp = NA)
+  
+})
+
 test_that("clone", {
   
   x <- torch_randn(10, 10)
@@ -59,9 +66,8 @@ test_that("permute", {
   
   expect_error(
     x$permute(c(2,1, 0)),
-    regex = "Dimension is 1-based, but found 0.",
-    fixed = TRUE,
-    class = "value_error"
+    regex = "Indexing starts at 1 but found a 0.",
+    fixed = TRUE
   )
   
 })

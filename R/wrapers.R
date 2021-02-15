@@ -96,11 +96,6 @@ torch_hann_window <- function(window_length, periodic=TRUE, dtype=NULL,
                      options = opt)
 }
 
-#' @rdname torch_normal
-torch_normal <- function(mean, std = 1L, size, generator = NULL) {
-  .torch_normal(mean, std, size, generator)
-}
-
 #' @rdname torch_result_type
 torch_result_type <- function(tensor1, tensor2) {
   
@@ -404,7 +399,7 @@ torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
   
   if (is.numeric(unlist(dim))) {
     o <- cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType(
-      self = self$ptr, p = p$ptr, dim = as_1_based_dim(unlist(dim)), keepdim = keepdim, dtype = dtype$ptr
+      self = self$ptr, p = p$ptr, dim = unlist(dim), keepdim = keepdim, dtype = dtype$ptr
     )
   } else if (is.character(unlist(dim))){
     o <- cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType(
@@ -413,4 +408,109 @@ torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
   }
   
   Tensor$new(ptr = o)
+}
+
+torch_one_hot <- function(self, num_classes = -1L) {
+  .torch_one_hot(as_1_based_tensor(self), num_classes)
+}
+
+#' @rdname torch_split
+torch_split <- function(self, split_size, dim = 1L) {
+  if (length(split_size) > 1)
+    torch_split_with_sizes(self, split_size, dim)
+  else
+    .torch_split(self, split_size, dim)
+}
+
+#' @rdname torch_nonzero
+torch_nonzero <- function(self, as_list = FALSE) {
+  if (!as_list) {
+    out <- .torch_nonzero(self)
+    return(out + 1L)
+  } else {
+    out <- torch_nonzero_numpy(self)
+    return(lapply(out, function(x) x + 1L))
+  }
+}
+
+#' Normal distributed
+#' 
+#' @param mean (tensor or scalar double) Mean of the normal distribution.
+#'   If this is a [torch_tensor()] then the output has the same dim as `mean`
+#'   and it represents the per-element mean. If it's a scalar value, it's reused
+#'   for all elements.
+#' @param std (tensor or scalar double) The standard deviation of the normal
+#'   distribution. If this is a [torch_tensor()] then the output has the same size as `std`
+#'   and it represents the per-element standard deviation. If it's a scalar value, 
+#'   it's reused for all elements.
+#' @param size (integers, optional) only used if both `mean` and `std` are scalars.
+#' @param generator a random number generator created with [torch_generator()]. If `NULL`
+#'   a default generator is used.
+#' @param ... Tensor option parameters like `dtype`, `layout`, and `device`. 
+#'   Can only be used when `mean` and `std` are both scalar numerics.
+#' 
+#' @rdname torch_normal
+#' 
+#' @export
+torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
+ 
+  if (missing(mean))
+    mean <- 0
+  
+  if (missing(std))
+    std <- 1
+  
+  if (!is.null(size)) {
+    if (is_torch_tensor(mean) || is_torch_tensor(std))
+      value_error("size is set, but one of mean or std is not a scalar value.")
+  }
+  
+  if (!length(list(...)) == 0) {
+    if (is_torch_tensor(mean) || is_torch_tensor(std))
+      value_error("options is set, but one of mean or std is not a scalar value.")
+  }
+  
+  if (is.null(generator))
+    generator <- .generator_null
+  
+  if (!is_torch_tensor(mean) && !is_torch_tensor(std) && is.null(size))
+    value_error("size is not set.")
+  
+  if (!is.null(size)) {
+    if (is.list(size)) size <- unlist(size)
+    options <- do.call(torch_tensor_options, list(...))
+    return(Tensor$new(ptr = cpp_namespace_normal_double_double(
+      mean = mean, 
+      std = std,
+      size = size,
+      generator = generator$ptr,
+      options = options
+    )))
+  }
+  
+  if (is_torch_tensor(mean) && is_torch_tensor(std)) {
+    return(Tensor$new(ptr = cpp_namespace_normal_tensor_tensor(
+      mean = mean$ptr,
+      std = std$ptr,
+      generator = generator$ptr
+    )))
+  }
+  
+  if (is_torch_tensor(mean)) {
+    return(Tensor$new(ptr = cpp_namespace_normal_tensor_double(
+      mean = mean$ptr,
+      std = std,
+      generator = generator$ptr
+    )))
+  }
+  
+  if (is_torch_tensor(std)) {
+    return(Tensor$new(ptr = cpp_namespace_normal_double_tensor(
+      mean = mean,
+      std = std$ptr,
+      generator = generator$ptr
+    )))
+  }
+   
+  value_error("Please report a bug report in GitHub")
 }

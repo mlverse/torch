@@ -44,7 +44,7 @@ optim_SGD <- R6::R6Class(
           param_state <- attr(param, "state")
           if (is.null(param_state) || !"momentum_buffer" %in% names(param_state)) {
             buf <- torch_clone(d_p)$detach()
-            attr(self$param_groups[[g]]$params[[p]], "state") <- list(momentum_buffer = buf)
+           state(param) <- list(momentum_buffer = buf)
           } else {
             buf <- param_state$momentum_buffer
             buf$mul_(momentum)$add_(d_p, alpha=1 - dampening)

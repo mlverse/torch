@@ -1,16 +1,14 @@
-Generator <- R6::R6Class(
+Generator <- R7Class(
   classname = "torch_generator",
   public = list(
     ptr = NULL,
     initialize = function(ptr = NULL) {
       
       if (!is.null(ptr)) {
-        self$ptr <- ptr
-        return(NULL)
+        return(ptr)
       }
         
-      self$ptr <- cpp_torch_generator()
-      
+      cpp_torch_generator()
     },
     print = function() {
       cat("torch_generator()")
@@ -29,6 +27,11 @@ Generator <- R6::R6Class(
       seed <- as.character(seed)
       
       cpp_generator_set_current_seed(self$ptr, seed)
+    }
+  ),
+  active = list(
+    ptr = function() {
+      self
     }
   )
 )

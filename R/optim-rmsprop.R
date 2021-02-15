@@ -37,23 +37,23 @@ optim_RMSprop <- R6::R6Class(
         # }
         
         # state initialization
-        if (length(param$state) == 0) {
-          param$state <- list()
-          param$state[["step"]] <- 0
-          param$state[["square_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+        if (length(state(param)) == 0) {
+          state(param) <- list()
+          state(param)[["step"]] <- 0
+          state(param)[["square_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
           
           if (group$momentum > 0)
-            param$state[["momentum_buffer"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+            state(param)[["momentum_buffer"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
           
           if (group$centered > 0)
-            param$state[["grad_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+            state(param)[["grad_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
           
         }
         
-        square_avg <- param$state[["square_avg"]]
+        square_avg <- state(param)[["square_avg"]]
         alpha <- group[["alpha"]]
         
-        param$state[["step"]] <- param$state[["step"]] + 1
+        state(param)[["step"]] <- state(param)[["step"]] + 1
         
         
         if (group[["weight_decay"]] != 0)
@@ -62,7 +62,7 @@ optim_RMSprop <- R6::R6Class(
         square_avg$mul_(alpha)$addcmul_(grad, grad, value=1 - alpha)
         
         if (group[["centered"]]) {
-          grad_avg <- param$state[["grad_avg"]]
+          grad_avg <- state(param)[["grad_avg"]]
           grad_avg$mul_(alpha)$add_(grad, alpha=1 - alpha)
           avg <- square_avg$addcmul(grad_avg, grad_avg, value=-1)$sqrt_()$add_(group[["eps"]])
         } else {
@@ -70,7 +70,7 @@ optim_RMSprop <- R6::R6Class(
         }
         
         if (group[["momentum"]] > 0) {
-          buf <- param$state[["momentum_buffer"]]
+          buf <- state(param)[["momentum_buffer"]]
           buf$mul_(group[["momentum"]])$addcdiv_(grad, avg)
           param$add_(buf, alpha=-group[["lr"]])
         } else {

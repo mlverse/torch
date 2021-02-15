@@ -687,10 +687,18 @@ In-place version of `$clamp`
 
 ## clone
 
-clone(memory_format=torch_preserve_format) -> Tensor
+clone(memory_format=torch_preserve_format()) -> Tensor
 
 Returns a copy of the `self` tensor. The copy has the same size and data
 type as `self`.
+
+```{r}
+x <- torch_tensor(1)
+y <- x$clone()
+
+x$add_(1)
+y
+```
 
 #### Note: 
 
@@ -699,8 +707,7 @@ propagating to the cloned tensor will propagate to the original tensor.
 
 #### Arguments: 
 
-* memory_format (`torch_memory_format`, optional): the desired memory format of
-* returned Tensor. Default: `torch_preserve_format`.
+* memory_format (`torch_memory_format`, optional): the desired memory format of the returned Tensor. Default: `torch_preserve_format`.
 
 ## conj
 
@@ -718,8 +725,7 @@ Returns a contiguous in memory tensor containing the same data as `self` tensor.
 
 #### Arguments: 
 
-* memory_format (`torch_memory_format`, optional): the desired memory format of
-* returned Tensor. Default: `torch_contiguous_format`.
+* memory_format (`torch_memory_format`, optional): the desired memory format of the returned Tensor. Default: `torch_contiguous_format`.
 
 ## copy_
 
@@ -728,16 +734,13 @@ copy_(src, non_blocking=FALSE) -> Tensor
 Copies the elements from `src` into `self` tensor and returns
 `self`.
 
-The `src` tensor must be :ref:`broadcastable <broadcasting-semantics>`
-with the `self` tensor. It may be of a different data type or reside on a
+The `src` tensor must be broadcastable with the `self` tensor. It may be of a different data type or reside on a
 different device.
 
 #### Arguments: 
 
 * src (Tensor): the source tensor to copy from
-* non_blocking (bool): if `TRUE` and this copy is between CPU and GPU,
-* the copy may occur asynchronously with respect to the host. For other
-* cases, this argument has no effect.
+* non_blocking (bool): if `TRUE` and this copy is between CPU and GPU, the copy may occur asynchronously with respect to the host. For other cases, this argument has no effect.
 
 ## cos
 
@@ -874,12 +877,15 @@ The result will never require gradient.
 #### Note:
 
 Returned Tensor shares the same storage with the original one.
+
 In-place modifications on either of them will be seen, and may trigger
 errors in correctness checks.
-IMPORTANT NOTE: Previously, in-place size / stride / storage changes
+
+**IMPORTANT NOTE**: Previously, in-place size / stride / storage changes
 (such as `resize_` / `resize_as_` / `set_` / `transpose_`) to the returned tensor
 also update the original tensor. Now, these in-place changes will not update the
 original tensor anymore, and will instead trigger an error.
+
 For sparse tensors:
 In-place indices / values changes (such as `zero_` / `copy_` / `add_`) to the
 returned tensor will not update the original tensor anymore, and will instead

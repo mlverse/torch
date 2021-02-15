@@ -50,6 +50,9 @@ const char *_lantern_Dimname_to_string(void *dimname)
 {
   LANTERN_FUNCTION_START
   torch::Dimname nm = reinterpret_cast<LanternPtr<torch::Dimname> *>(dimname)->get();
-  return nm.symbol().toUnqualString();
+  std::string str = nm.symbol().toUnqualString();
+  char *cstr = new char[str.length() + 1];
+  strcpy(cstr, str.c_str());
+  return cstr;
   LANTERN_FUNCTION_END
 }

@@ -1,3 +1,3 @@
-Re-Submission fixing http URL's in the previous
-submission.
+This release includes many bug fixes and 
+new features.
 

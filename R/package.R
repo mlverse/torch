@@ -5,6 +5,7 @@ NULL
 globalVariables(c("..", "self", "private", "N"))
 
 .generator_null <- NULL
+.compilation_unit <- NULL
 
 .onAttach <- function(libname, pkgname) {
 }
@@ -29,9 +30,14 @@ globalVariables(c("..", "self", "private", "N"))
   if (install_exists() && install_success && Sys.getenv("TORCH_LOAD", unset = 1) != 0) {
     # in case init fails aallow user to restart session rather than blocking install
     tryCatch({
-      lantern_start() 
+      lantern_start()
+      cpp_set_lantern_allocator(getOption("torch.threshold_call_gc", 4000L))
+      
       .generator_null <<- torch_generator()
       .generator_null$set_current_seed(seed = sample(1e5, 1))
+      
+      .compilation_unit <<- cpp_jit_compilation_unit()
+      
     }, error = function(e) {
       warning("Torch failed to start, restart your R session to try again. ", e$message, call. = FALSE)
       FALSE
@@ -41,5 +47,12 @@ globalVariables(c("..", "self", "private", "N"))
 
 .onUnload <- function(libpath) {
   
+}
+
+release_bullets <- function() {
+  c(
+    "Create the cran/ branch and update the branch variable",
+    "Uncomment the indicated line in the .RBuildignore file"
+  )
 }
 

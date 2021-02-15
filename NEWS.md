@@ -1,23 +1,103 @@
 # torch (development version)
 
+- `torch_split` now accepts a list of sizes as well as a fixed size. (#429)
+- Fixed bug in `optim_lbfgs` that would make model objects exponentially big. (#431)
+- `torch_nonzero` and `tensor$nonzero()` now return 1-based indexes. (#432)
+- Correctly handle `NaN`s in L-BFGS optimizer (#433)
+- The default collate function now respects the data type when converting to a tensor (if the dataset returns an R object) (#434)
+- Added `nn_layer_norm`. (#435)
+- Allow `timeout=360` as `install_torch()` parameter for large file download (@cregouby #438)
+- Added `install_torch_from_file()` and `get_install_libs_url()`for setup cases where direct download is not possible (@cregouby #439)
+- Added `mean.torch_tensor` (#448)
+- New arguments `worker_globals` and `worker_packages` allowing to easily pass objects to workers in parallel dataloaders (#449).
+- Removed the PerformanceReporter from tests to get easier to read stack traces. (#449)
+- Fixed `torch_normal`. (#450)
+- Internal change in the R7 classes so R7 objects are simple external pointer instead of environments. This might cause breaking change if you relied on
+  saving any kind of state in the Tensor object. (#452)
+- Internal refactoring making Rcpp aware of some XPtrTorch* types so making it simpler to return them from Rcpp code. This might cause a breaking change if you are relying on `torch_dtype()` being an R6 class. (#451) 
+- We now call R garbage collector when there's no memory available on GPU, this can help in a few cases when the laziness of the garbage collector allows too many tensors to be on memory even though they are no longer referenced in R. (#456)
+- Fixed backward compatibility issue when loading models saved in older versions of torch. This bug was introduced in #452 and is now fixed and we also added a regression test. (#458)
+- Fixed bug when using RNN's on the GPU (#460)
+- Added vignette on reading models from Python (#469)
+- Internal changes to auto unwrap arguments from SEXP's in Rcpp. This will make easier to move the dispatcher system to C++ in the future, but already allows us to gain ~30% speedups in small operations. (#454)
+- Found and fixed some memory leaks, specially when creating datatypes from strings and when saving models with `torch_save`. (#454)
+- Fixed bug in `nnf_pad` when using `mode='circular'`. (#471)
+
+# torch 0.2.1
+
+## Breaking changes
+
+- Made `torch_one_hot` and `nnf_one_hot` use 1-based indexing. (#410)
+- `nn_module$eval()` and `nn_module$train()` now return a callable `nn_module` instead of a `nn_Module`. (#425)
+
+## New features
+
+- Added a custom CPU allocator to call `gc` when torch might need more memory (#402)
+- Updated to LibTorch 1.7.1 (#412)
+- Allow listing all nested modules in a `nn_module` (#417)
+- Allow modifying the `requires_grad` attribute using the `$<-` operator (#419)
+- Added `length` method for the `nn_sequential` container. (#423)
+- Added support for CUDA 11 on linux (#424)
+
+## Bug fixes
+
+- Fix support for cuda 9.2 (#398)
+- Fixed GPU CI that was skipping tests. (#398)
+- Fixed a memory leak when printing tensors (#402)
+- Fixed a memory leak when passing integer vectors to lantern. (#402)
+- Fixed a few more memory leaks related to autograd context (#405)
+- Fixed `nnf_normalize` and `x$norm()` as they were not able to be called (#409)
+
+## Documentation
+
+- Small improvement to `nn_module` documentation (#399).
+- The getting started section has been removed from the pkgdown website in favor of the new guide in the landing page (#401)
+- Updated the landing page to include a getting started tutorial (#400)
+
+# torch 0.2.0
+
+## Breaking changes
+
+- Dataloaders now returns a `coro::exhausted` intead of raising `stop_iteration_error` when the dataloader exceeds. (#366)
 - Fixed bug that would happen with functions that need to transform tensors from
   0-based to 1-based in the GPU. (#317)
-- Fixed bug when trying to print the `grad_fn` of a Tensor that doesn't have one.
-  See (#321)
+- Fixed `torch_argsort` and `x$argsort` to return 1-based indexes (#342)
+- Fixed `torch_argmax`, `torch_argmin`, `x$argmax()` and `x$argmin()` return 1-based indexes. (#389)
+
+## New features
+
 - Added `$element_size()` method (@dirkschumacher #322)
 - Added `$bool()` method (@dirkschumacher #323)
-- `torch__addr` and `torch__addr_` have been removed.
+- `torch__addr` and `torch__addr_` have been removed as they are no longer available in LibTorch 1.7.
 - We now check the MD5 hashes of downloaded LibTorch binaries. (@dirkschumacher #325)
-- Refactored the optimizers code to avoid duplication of parameter checks, etc. (@dirkschumacher #328)
 - Added a Distribution abstract class (@krzjoa #333)
 - Updated to LibTorch 1.7 (#337)
-- Fixed `torch_argsort` and `x$argsort` to return 1-based indexes (#342)
-- Fixed `torch_norm` so it can be called with a `dim` argument. (#345)
 - We now warn when converting `long` tensors to R and there's a chance of an integer overflow. (#347)
 - Allow `private` and `active` methods in `nn_module`'s and `dataset`'s. (#349)
-- Fixed crash when calling `torch_hann_window` with an invalid `NULL` `window_length`. (#351)
 - Added `nn_batch_norm3d` (@mattwarkentin #354)
+- Added `nn_lstm` and `nn_gru` modules. (#362)
+- Added distribution constraints (@krzjoa #364)
+- Dataloaders now use the num_workers argument to load data in parallel (#366)
+- Added Exponential Family classs to distributions (#373)
+- Added Dockerfile and docker compose file with GPU support, with a how-to guide. (#380 #386)
+- Added R 3.6 to the CI system and fixed compilation from source with it on Windows (#387)
+- Initial support for JIT tracing (#377)
+- Added LBFGS optimizer (#392)
+- Improved the `nn_module` UI by improving autocomplete support and adding a print method (#391)
+
+## Bug fixes
+
+- Fixed bug when trying to print the `grad_fn` of a Tensor that doesn't have one.
+  See (#321)
+- Refactored the optimizers code to avoid duplication of parameter checks, etc. (@dirkschumacher #328)
+- Fixed `torch_norm` so it can be called with a `dim` argument. (#345)
+- Fixed crash when calling `torch_hann_window` with an invalid `NULL` `window_length`. (#351)
 - Fixed `torch_stft` calls for LibTorch 1.7 (added the `return_complex` argument) (#355)
+- Fixed bug when strides were NULL in some pooling operations. (#361)
+- Use `nvcc --version` instead of `nvidia-smi` to find the CUDA version as `nvidia-smi` reports the latest supported version and not the installed one. (#363)
+- Corrected URL to download LibTorch under Linux with CUDA 10.2 (#367)
+- Fixed handling of integer tensors when indexing tensors (#385)
+- Fixed bug when passing length zero vectors to lantern/libtorch. (#388)
 
 # torch 0.1.1
 

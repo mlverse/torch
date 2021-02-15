@@ -7,6 +7,10 @@
 
 #include "init.h"
 
+void lantern_host_handler() {
+    
+}
+
 int main(int argc, char *argv[])
 {
     if (argc <= 1)
@@ -63,6 +67,8 @@ int main(int argc, char *argv[])
     const char* saved_tensor = lantern_tensor_save(tensor_to_save);
     void*  reloaded_tensor = lantern_tensor_load(saved_tensor);
     lantern_test_print(reloaded_tensor);
+
+    trace_r_nn_module();
 
 
     std::cout << "Success!!" << std::endl;

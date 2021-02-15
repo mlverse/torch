@@ -1,4 +1,4 @@
-Dimname <- R6::R6Class(
+Dimname <- R7Class(
   classname = "torch_dimname",
   public = list(
     ptr = NULL,
@@ -6,19 +6,22 @@ Dimname <- R6::R6Class(
     initialize = function(name, ptr = NULL) {
       
       if (!is.null(ptr)) {
-        self$ptr <- ptr
+        return(ptr)
       }
       
-      self$ptr <- cpp_torch_dimname(name)
-      
+      cpp_torch_dimname(name)
     },
     
     print = function() {
       print(cpp_dimname_to_string(self$ptr))
     }
     
+  ),
+  active = list(
+    ptr = function() {
+      self
+    }
   )
-  
 )
 
 torch_dimname <- function(name) {
@@ -29,7 +32,7 @@ is_torch_dimname <- function(x) {
   inherits(x, "torch_dimname")
 }
 
-DimnameList <- R6::R6Class(
+DimnameList <- R7Class(
   classname = "torch_dimname_list",
   public = list(
     
@@ -38,13 +41,11 @@ DimnameList <- R6::R6Class(
     initialize = function(names, ptr = NULL) {
       
       if (!is.null(ptr)) {
-        self$ptr <- ptr
-        return()
+        return(ptr)
       }
       
       ptrs <- lapply(lapply(names, torch_dimname), function(self) self$ptr)
-      self$ptr <- cpp_torch_dimname_list(ptrs)
-      
+      cpp_torch_dimname_list(ptrs)
     },
     
     print = function() {
@@ -55,6 +56,11 @@ DimnameList <- R6::R6Class(
       cpp_dimname_list_to_string(self$ptr)
     }
     
+  ),
+  active = list(
+    ptr = function() {
+      self
+    }
   )
 )
 

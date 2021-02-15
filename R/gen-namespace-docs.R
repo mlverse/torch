@@ -3422,22 +3422,20 @@ NULL
 
 #' Split
 #'
-#' @section TEST :
-#'
 #' Splits the tensor into chunks. Each chunk is a view of the original tensor.
 #' 
-#'     If `split_size_or_sections` is an integer type, then `tensor` will
-#'     be split into equally sized chunks (if possible). Last chunk will be smaller if
-#'     the tensor size along the given dimension `dim` is not divisible by
-#'     `split_size`.
+#' If `split_size` is an integer type, then `tensor` will
+#' be split into equally sized chunks (if possible). Last chunk will be smaller if
+#' the tensor size along the given dimension `dim` is not divisible by
+#' `split_size`.
 #' 
-#'     If `split_size_or_sections` is a list, then `tensor` will be split
-#'     into `len(split_size_or_sections)` chunks with sizes in `dim` according
-#'     to `split_size_or_sections`.
-#'
+#' If `split_size` is a list, then `tensor` will be split
+#' into `length(split_size)` chunks with sizes in `dim` according
+#' to `split_size_or_sections`.
 #'
 #' @param self (Tensor) tensor to split.
-#' @param split_size (int) size of a single chunk or        list of sizes for each chunk
+#' @param split_size (int) size of a single chunk or 
+#'   list of sizes for each chunk
 #' @param dim (int) dimension along which to split the tensor.
 #'
 #' @name torch_split
@@ -3558,14 +3556,23 @@ NULL
 #'
 #' @param input (Tensor) the input tensor
 #' @param n_fft (int) size of Fourier transform
-#' @param hop_length (int, optional) the distance between neighboring sliding window        frames. Default: `NULL` (treated as equal to `floor(n_fft / 4)`)
-#' @param win_length (int, optional) the size of window frame and STFT filter.        Default: `NULL`  (treated as equal to `n_fft`)
-#' @param window (Tensor, optional) the optional window function.        Default: `NULL` (treated as window of all \eqn{1} s)
-#' @param center (bool, optional) whether to pad `input` on both sides so        that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.        Default: `TRUE`
-#' @param pad_mode (string, optional) controls the padding method used when        `center` is `TRUE`. Default: `"reflect"`
-#' @param normalized (bool, optional) controls whether to return the normalized STFT results         Default: `FALSE`
-#' @param onesided (bool, optional) controls whether to return half of results to        avoid redundancy Default: `TRUE`
-#'
+#' @param hop_length (int, optional) the distance between neighboring sliding window        
+#'   frames. Default: `NULL` (treated as equal to `floor(n_fft / 4)`)
+#' @param win_length (int, optional) the size of window frame and STFT filter.
+#'   Default: `NULL`  (treated as equal to `n_fft`)
+#' @param window (Tensor, optional) the optional window function.        
+#'   Default: `NULL` (treated as window of all \eqn{1} s)
+#' @param center (bool, optional) whether to pad `input` on both sides so        
+#'   that the \eqn{t}-th frame is centered at time \eqn{t \times \mbox{hop\_length}}.      
+#'   Default: `TRUE`
+#' @param pad_mode (string, optional) controls the padding method used when       
+#'  `center` is `TRUE`. Default: `"reflect"`
+#' @param normalized (bool, optional) controls whether to return the normalized 
+#'   STFT results Default: `FALSE`
+#' @param onesided (bool, optional) controls whether to return half of results to       
+#'   avoid redundancy Default: `TRUE`
+#' @param return_complex (bool, optional) controls whether to return complex tensors
+#'   or not.
 #' @name torch_stft
 #'
 #' @export
@@ -4956,21 +4963,15 @@ NULL
 
 
 #' Nonzero
+#' 
+#' Nonzero elements of tensors.
+#' 
+#' @param self (Tensor) the input tensor.
+#' @param as_list If `FALSE`, the output tensor containing indices. If `TRUE`, one 
+#'   1-D tensor for each dimension, containing the indices of each nonzero element 
+#'   along that dimension.
 #'
-#' @note
-#'     [`torch_nonzero(..., as_tuple=False) <torch.nonzero>`] (default) returns a
-#'     2-D tensor where each row is the index for a nonzero value.
-#' 
-#'     [`torch_nonzero(..., as_tuple=TRUE) <torch.nonzero>`] returns a tuple of 1-D
-#'     index tensors, allowing for advanced indexing, so `x[x.nonzero(as_tuple=TRUE)]`
-#'     gives all nonzero values of tensor `x`. Of the returned tuple, each index tensor
-#'     contains nonzero indices for a certain dimension.
-#' 
-#'     See below for more details on the two behaviors.
-#'     
-#' @section nonzero(input, *, out=NULL, as_tuple=False) -> LongTensor or tuple of LongTensors :
-#' 
-#' **When** `as_tuple` **is `FALSE` (default)**:
+#' **When** `as_list` **is `FALSE` (default)**:
 #' 
 #' Returns a tensor containing the indices of all non-zero elements of
 #' `input`.  Each row in the result contains the indices of a non-zero
@@ -4981,7 +4982,7 @@ NULL
 #' `out` is of size \eqn{(z \times n)}, where \eqn{z} is the total number of
 #' non-zero elements in the `input` tensor.
 #' 
-#' **When** `as_tuple` **is `TRUE`**:
+#' **When** `as_list` **is `TRUE`**:
 #' 
 #' Returns a tuple of 1-D tensors, one for each dimension in `input`,
 #' each containing the indices (in that dimension) of all non-zero elements of
@@ -4994,8 +4995,6 @@ NULL
 #' As a special case, when `input` has zero dimensions and a nonzero scalar
 #' value, it is treated as a one-dimensional tensor with one element.
 #'
-#'
-#' @param self (Tensor) the input tensor.
 #'
 #' @name torch_nonzero
 #'
@@ -5501,7 +5500,7 @@ NULL
 #' formed by [torch_geqrf()] that is represented by `(a, tau)` (given by (`input`, `input2`)).
 #' 
 #' This directly calls the underlying LAPACK function `?ormqr`.
-#' See [LAPACK documentation for ormqr](https://software.intel.com/content/www/us/en/develop/documentation/mkl-developer-reference-c/top/scalapack-routines/scalapack-computational-routines/orthogonal-factorizations-scalapack-computational-routines/p-ormqr.html) for further details.
+#' See [LAPACK documentation for ormqr](https://software.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top.html) for further details.
 #'
 #'
 #' @param self (Tensor) the `a` from [`torch_geqrf`].
@@ -5943,7 +5942,7 @@ NULL
 
 #' Normal
 #'
-#' @section normal(mean, std, *, generator=NULL, out=NULL) -> Tensor :
+#' @section normal(mean, std, *) -> Tensor :
 #'
 #' Returns a tensor of random numbers drawn from separate normal distributions
 #' whose mean and standard deviation are given.
@@ -5958,30 +5957,23 @@ NULL
 #' total number of elements in each tensor need to be the same.
 #' 
 #' @note When the shapes do not match, the shape of `mean`
-#'           is used as the shape for the returned output tensor
+#'       is used as the shape for the returned output tensor
 #'
-#' @section normal(mean=0.0, std, out=NULL) -> Tensor :
+#' @section normal(mean=0.0, std) -> Tensor :
 #'
 #' Similar to the function above, but the means are shared among all drawn
 #' elements.
 #'
-#' @section normal(mean, std=1.0, out=NULL) -> Tensor :
+#' @section normal(mean, std=1.0) -> Tensor :
 #'
 #' Similar to the function above, but the standard-deviations are shared among
 #' all drawn elements.
 #'
-#' @section normal(mean, std, size, *, out=NULL) -> Tensor :
+#' @section normal(mean, std, size, *) -> Tensor :
 #'
 #' Similar to the function above, but the means and standard deviations are shared
 #' among all drawn elements. The resulting tensor has size given by `size`.
-#'
-#'
-#' @param mean (Tensor) the tensor of per-element means
-#' @param std (Tensor) the tensor of per-element standard deviations
-#' @param generator (`torch.Generator`, optional) a pseudorandom number generator for sampling
 #' 
-#' @param size (int...) a sequence of integers defining the shape of the output tensor.
-#'
 #' @name torch_normal
 #'
 #' @export

@@ -153,7 +153,7 @@ test_that("is_cuda", {
   skip_if_cuda_not_available()
   
   x <- torch_randn(10, 10, device = torch_device("cuda"))
-  expect_true(X$is_cuda)
+  expect_true(x$is_cuda)
 })
 
 test_that("ndim", {
@@ -167,22 +167,22 @@ test_that("as.matrix", {
   
   x <- torch_randn(2,2)
   r <- as.matrix(x)
-  expect_equal(class(r), c("matrix", "array"))
+  expect_true("matrix" %in% class(r))
   expect_equal(dim(r), c(2,2))
   
   x <- torch_randn(2,2,2)
   r <- as.matrix(x)
-  expect_equal(class(r), c("matrix", "array"))
+  expect_true("matrix" %in% class(r))
   expect_equal(dim(r), c(8,1))
   
 })
 
 test_that("print tensor is truncated", {
-  
-  expect_known_value(torch_arange(0, 100), file = "assets/print1")
-  expect_known_value(torch_arange(0, 25), file = "assets/print2")
-  expect_known_value(print(torch_arange(0, 100), n = 50), file = "assets/print3")
-  expect_known_value(print(torch_arange(0, 100), n = -1), file = "assets/print4")
+  local_edition(3)
+  expect_snapshot_output(torch_arange(0, 100))
+  expect_snapshot_output(torch_arange(0, 25))
+  expect_snapshot_output(print(torch_arange(0, 100), n = 50))
+  expect_snapshot_output(print(torch_arange(0, 100), n = -1))
   
 })
 
@@ -233,7 +233,7 @@ test_that("is_leaf", {
   expect_true(a$is_leaf)
   
   skip_if_cuda_not_available()
-  a <- torch_rand(10)$to(device = "cuda")
+  a <- 2*torch_rand(10, requires_grad = TRUE)$to(device = "cuda")
   expect_true(!a$is_leaf)
   
 })

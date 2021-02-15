@@ -19,6 +19,7 @@
 #' @export
 nnf_avg_pool1d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
                            count_include_pad = TRUE) {
+  if (is.null(stride)) stride <- list()
   torch_avg_pool1d(input, kernel_size, stride, padding, ceil_mode, count_include_pad)
 }
 
@@ -46,6 +47,7 @@ nnf_avg_pool1d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 #' @export
 nnf_avg_pool2d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
                            count_include_pad = TRUE, divisor_override = NULL) {
+  if (is.null(stride)) stride <- list()
   torch_avg_pool2d(input, kernel_size, stride, padding, ceil_mode, count_include_pad,
                    divisor_override)
 }
@@ -73,6 +75,7 @@ nnf_avg_pool2d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 #' @export
 nnf_avg_pool3d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, 
                            count_include_pad = TRUE, divisor_override = NULL) {
+  if (is.null(stride)) stride <- list()
   torch_avg_pool3d(input, kernel_size, stride, padding, ceil_mode, count_include_pad,
                    divisor_override)
 }
@@ -90,6 +93,8 @@ nnf_avg_pool3d <- function(input, kernel_size, stride = NULL, padding = 0, ceil_
 #' @export
 nnf_max_pool1d <- function(input, kernel_size, stride=NULL, padding=0, dilation=1,
                            ceil_mode=FALSE, return_indices=FALSE) {
+  
+  if (is.null(stride)) stride <- list()
   
   if (return_indices)
     torch_max_pool1d_with_indices(input, kernel_size, stride, padding, dilation,
@@ -281,7 +286,7 @@ unpool_output_size <- function(input, kernel_size, stride, padding, output_size)
 #' @export
 nnf_max_unpool1d <- function(input, indices, kernel_size, stride = NULL,
                              padding = 0, output_size = NULL) {
-  if (is.null(stride))
+  if (is.null(stride) || length(stride) == 0)
     stride <- kernel_size
   
   output_size <- unpool_output_size(input, kernel_size, stride, padding,
@@ -303,7 +308,7 @@ nnf_max_unpool2d <- function(input, indices, kernel_size, stride = NULL,
                              padding = 0, output_size = NULL) {
   
   kernel_size <- nn_util_pair(kernel_size)
-  if(is.null(stride))
+  if(is.null(stride) || length(stride) == 0)
     stride <- kernel_size
   else
     stride <- nn_util_pair(stride)
@@ -328,7 +333,7 @@ nnf_max_unpool3d <- function(input, indices, kernel_size, stride = NULL,
   
   kernel_size <- nn_util_triple(kernel_size)
   padding <- nn_util_triple(padding)
-  if (is.null(stride))
+  if (is.null(stride) || length(stride) == 0)
     stride <- kernel_size
   else
     stride <- nn_util_triple(stride)
@@ -463,7 +468,7 @@ nnf_fractional_max_pool3d <- function(input, kernel_size, output_size = NULL, ou
 nnf_lp_pool1d <- function(input, norm_type, kernel_size, stride = NULL, 
                           ceil_mode = FALSE) {
   
-  if (!is.null(stride)) {
+  if (!is.null(stride) || length(stride) == 0) {
     out <- nnf_avg_pool1d(input$pow(norm_type), kernel_size, stride, 0, ceil_mode)
   } else {
     out <- nnf_avg_pool1d(input$pow(norm_type), kernel_size, padding = 0, 
@@ -487,7 +492,7 @@ nnf_lp_pool2d <- function(input, norm_type, kernel_size, stride = NULL,
                           ceil_mode = FALSE) {
   
   k <- nn_util_pair(kernel_size)
-  if (!is.null(stride)) {
+  if (!length(stride) == 0) {
     out <- nnf_avg_pool2d(input$pow(norm_type), kernel_size, stride, 0, ceil_mode)
   } else {
     out <- nnf_avg_pool2d(input$pow(norm_type), kernel_size, padding = 0, 

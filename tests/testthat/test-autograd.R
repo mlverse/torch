@@ -735,3 +735,21 @@ test_that("autograd_grad allow unused", {
   expect_undefined_tensor(out[[2]])
   expect_length(out, 2)
 })
+
+test_that("can set requires_grad", {
+  
+  x <- torch_tensor(1, requires_grad = FALSE)
+  x$requires_grad_(TRUE)
+  expect_true(x$requires_grad)
+  
+  x$requires_grad <- FALSE
+  expect_true(!x$requires_grad)
+  x$requires_grad_(TRUE)
+  expect_true(x$requires_grad)
+  
+  x[["requires_grad"]] <- FALSE
+  expect_true(!x$requires_grad)
+  x$requires_grad_(TRUE)
+  expect_true(x$requires_grad)
+  
+})

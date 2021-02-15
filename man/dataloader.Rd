@@ -15,8 +15,10 @@ dataloader(
   collate_fn = NULL,
   pin_memory = FALSE,
   drop_last = FALSE,
-  timeout = 0,
-  worker_init_fn = NULL
+  timeout = -1,
+  worker_init_fn = NULL,
+  worker_globals = NULL,
+  worker_packages = NULL
 )
 }
 \arguments{
@@ -52,13 +54,46 @@ the size of dataset is not divisible by the batch size, then the last batch
 will be smaller. (default: \code{FALSE})}
 
 \item{timeout}{(numeric, optional): if positive, the timeout value for collecting a batch
-from workers. Should always be non-negative. (default: \code{0})}
+from workers. -1 means no timeout. (default: \code{-1})}
 
 \item{worker_init_fn}{(callable, optional): If not \code{NULL}, this will be called on each
-worker subprocess with the worker id (an int in \verb{[0, num_workers - 1]}) as
+worker subprocess with the worker id (an int in \verb{[1, num_workers]}) as
 input, after seeding and before data loading. (default: \code{NULL})}
+
+\item{worker_globals}{(list or character vector, optional) only used when
+\code{num_workers > 0}. If a character vector, then objects with those names are
+copied from the global environment to the workers. If a named list, then
+this list is copied and attached to the worker global environment. Notice
+that the objects are copied only once at the worker initialization.}
+
+\item{worker_packages}{(character vector, optional) Only used if \code{num_workers > 0}
+optional character vector naming packages that should be loaded in
+each worker.}
 }
 \description{
 Data loader. Combines a dataset and a sampler, and provides
 single- or multi-process iterators over the dataset.
 }
+\section{Parallel data loading}{
+
+
+When using \code{num_workers > 0} data loading will happen in parallel for each
+worker. Note that batches are taken in parallel and not observations.
+
+The worker initialization  process happens in the following order:
+\itemize{
+\item \code{num_workers} R sessions are initialized.
+}
+
+Then in each worker we perform the following actions:
+\itemize{
+\item the \code{torch} library is loaded.
+\item a random seed is set both using \code{set.seed()} and using \code{torch_manual_seed}.
+\item packages passed to the \code{worker_packages} argument are loaded.
+\item objects passed trough the \code{worker_globals} parameters are copied into the
+global environment.
+\item the \code{worker_init} function is ran with an \code{id} argument.
+\item the dataset fetcher is copied to the worker.
+}
+}
+

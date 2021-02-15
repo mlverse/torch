@@ -794,7 +794,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "argmax", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
+Tensor$set("private", "_argmax", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = "int64_t", keepdim = "bool")
 nd_args <- "self"
@@ -807,7 +807,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "argmin", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
+Tensor$set("private", "_argmin", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = "int64_t", keepdim = "bool")
 nd_args <- "self"
@@ -4144,7 +4144,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "nonzero", function() {  args <- list()
+Tensor$set("private", "_nonzero", function() {  args <- list()
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor")
 nd_args <- "self"
@@ -4157,7 +4157,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "nonzero_numpy", function() {  args <- list()
+Tensor$set("private", "_nonzero_numpy", function() {  args <- list()
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor")
 nd_args <- "self"
@@ -4170,7 +4170,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "norm", function(p = 2L, dim, keepdim = FALSE, dtype) {  args <- mget(x = c("p", "dim", "keepdim", "dtype"))
+Tensor$set("private", "_norm", function(p = 2L, dim, keepdim = FALSE, dtype) {  args <- mget(x = c("p", "dim", "keepdim", "dtype"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", p = "Scalar", dim = c("IntArrayRef", "DimnameList"
 ), keepdim = "bool", dtype = "ScalarType")
@@ -5313,7 +5313,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "split", function(split_size, dim = 1L) {  args <- mget(x = c("split_size", "dim"))
+Tensor$set("private", "_split", function(split_size, dim = 1L) {  args <- mget(x = c("split_size", "dim"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", split_size = "int64_t", dim = "int64_t")
 nd_args <- c("self", "split_size")

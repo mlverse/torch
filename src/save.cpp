@@ -37,7 +37,7 @@ Rcpp::List cpp_load_state_dict (std::string path)
   
   Rcpp::List L = Rcpp::List::create(
     Rcpp::Named("keys") = keys, 
-    Rcpp::Named("values") = make_xptr<XPtrTorchTensorList>(values)
+    Rcpp::Named("values") = XPtrTorchTensorList(values)
   );
   
   return L;

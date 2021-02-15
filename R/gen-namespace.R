@@ -4706,8 +4706,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_argmax
-torch_argmax <- function(self, dim = NULL, keepdim = FALSE) {
+#' @rdname .torch_argmax
+.torch_argmax <- function(self, dim = NULL, keepdim = FALSE) {
   args <- mget(x = c("self", "dim", "keepdim"))
 expected_types <- list(self = "Tensor", dim = "int64_t", keepdim = "bool")
 nd_args <- "self"
@@ -4723,8 +4723,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_argmin
-torch_argmin <- function(self, dim = NULL, keepdim = FALSE) {
+#' @rdname .torch_argmin
+.torch_argmin <- function(self, dim = NULL, keepdim = FALSE) {
   args <- mget(x = c("self", "dim", "keepdim"))
 expected_types <- list(self = "Tensor", dim = "int64_t", keepdim = "bool")
 nd_args <- "self"
@@ -15508,8 +15508,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_nonzero
-torch_nonzero <- function(self) {
+#' @rdname .torch_nonzero
+.torch_nonzero <- function(self) {
   args <- mget(x = c("self"))
 expected_types <- list(self = "Tensor")
 nd_args <- "self"
@@ -15717,8 +15717,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_one_hot
-torch_one_hot <- function(self, num_classes = -1L) {
+#' @rdname .torch_one_hot
+.torch_one_hot <- function(self, num_classes = -1L) {
   args <- mget(x = c("self", "num_classes"))
 expected_types <- list(self = "Tensor", num_classes = "int64_t")
 nd_args <- "self"
@@ -19094,8 +19094,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_split
-torch_split <- function(self, split_size, dim = 1L) {
+#' @rdname .torch_split
+.torch_split <- function(self, split_size, dim = 1L) {
   args <- mget(x = c("self", "split_size", "dim"))
 expected_types <- list(self = "Tensor", split_size = "int64_t", dim = "int64_t")
 nd_args <- c("self", "split_size")

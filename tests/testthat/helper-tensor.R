@@ -25,11 +25,11 @@ expect_no_error <- function(object, ...) {
 
 expect_tensor <- function(object) {
   expect_true(is_torch_tensor(object))
-  expect_no_error(as_array(object))
+  expect_no_error(as_array(object$to(device="cpu")))
 }
 
-expect_equal_to_r <- function(object, expected) {
-  expect_equal(as_array(object), expected)
+expect_equal_to_r <- function(object, expected, ...) {
+  expect_equal(as_array(object$cpu()), expected, ...)
 } 
 
 expect_tensor_shape <- function(object, expected) {
@@ -39,4 +39,13 @@ expect_tensor_shape <- function(object, expected) {
 
 expect_undefined_tensor <- function(object) {
   # TODO
+}
+
+expect_identical_modules <- function(object, expected) {
+  
+  expect_identical(
+    attr(object, "module"),
+    attr(expected, "module")  
+  )
+
 }

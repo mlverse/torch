@@ -8,7 +8,7 @@ project(lantern)
 
 function(download_file url filename)
     if(NOT EXISTS ${filename})
-        message("-- Downloading ${filename}")
+        message("-- Downloading ${filename}: ${url}")
         file(DOWNLOAD  ${url} ${filename}
              TIMEOUT 300
              TLS_VERIFY ON
@@ -34,27 +34,33 @@ if(APPLE)
     if(DEFINED ENV{CUDA})
         message(FATAL_ERROR, "CUDA not supported on macos")
     else()
-        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.0.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.1.zip" "libtorch")
     endif()
 elseif(WIN32)
     if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.1')
         add_compile_definitions(CUDA101)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu101/libtorch-win-shared-with-deps-1.7.0%2Bcu101.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cu101/libtorch-win-shared-with-deps-1.7.1%2Bcu101.zip" "libtorch")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.2')
         add_compile_definitions(CUDA102)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.7.0.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.7.1.zip" "libtorch")
     else()
-        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.7.0%2Bcpu.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.7.1%2Bcpu.zip" "libtorch")
     endif()
 elseif(UNIX)
-    if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.1')
+    if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '9.2')
+        add_compile_definitions(CUDA92)
+        retrieve_lib("https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu92.zip" "libtorch")
+    elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.1')
         add_compile_definitions(CUDA101)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcu101.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu101.zip" "libtorch")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.2')
         add_compile_definitions(CUDA102)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.0.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.1.zip" "libtorch")
+    elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.0')
+        add_compile_definitions(CUDA110)
+        retrieve_lib("https://download.pytorch.org/libtorch/cu110/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu110.zip" "libtorch")
     else()
-        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.7.0%2Bcpu.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcpu.zip" "libtorch")
     endif()
 else()
     message(FATAL_ERROR, "OS not supported.")
@@ -70,7 +76,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 # Library
 ############################################################
 
-add_library(lantern SHARED 
+set(LANTERN_SRC 
     src/lantern.cpp
     src/TensorOptions.cpp
     src/Dtype.cpp
@@ -96,7 +102,20 @@ add_library(lantern SHARED
     src/Save.cpp
     src/Contrib/Sparsemax.cpp
     src/Threads.cpp
+    src/Trace.cpp
+    src/Stack.cpp
+    src/Allocator.cpp
 )
+
+
+if(DEFINED ENV{CUDA})
+  set(LANTERN_SRC 
+      ${LANTERN_SRC} 
+      src/AllocatorCuda.cpp
+  )
+endif()
+
+add_library(lantern SHARED ${LANTERN_SRC})
 add_library(lantern::library ALIAS lantern)
 
 target_include_directories(lantern PUBLIC

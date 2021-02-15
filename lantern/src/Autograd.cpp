@@ -17,6 +17,13 @@ void _lantern_autograd_set_grad_mode(bool enabled)
     LANTERN_FUNCTION_END_VOID
 }
 
+bool _lantern_autograd_is_enabled ()
+{
+    LANTERN_FUNCTION_START
+    return torch::autograd::GradMode::is_enabled();
+    LANTERN_FUNCTION_END
+}
+
 void *_lantern_Tensor_grad(void *self)
 {
     LANTERN_FUNCTION_START
@@ -247,8 +254,10 @@ void *_lantern_Tensor_grad_fn(void *self)
 const char *_lantern_Node_name(void *self)
 {
     LANTERN_FUNCTION_START
-    auto x = new std::string(reinterpret_cast<torch::autograd::Node *>(self)->name());
-    return x->c_str();
+    auto str = std::string(reinterpret_cast<torch::autograd::Node *>(self)->name());
+    char *cstr = new char[str.length() + 1];
+    strcpy(cstr, str.c_str());
+    return cstr;
     LANTERN_FUNCTION_END
 }
 

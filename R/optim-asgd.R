@@ -26,34 +26,35 @@ optim_ASGD <- R6::R6Class(
       private$step_helper(closure, function(group, param, g, p) {
         grad <- param$grad
         
-        if (length(param$state) == 0) {
-          param$state[["step"]] <- 0
-          param$state[["eta"]] <- group[["lr"]]
-          param$state[["mu"]] <- 1
-          param$state[["ax"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+        if (length(state(param)) == 0) {
+          state(param) <- list()
+          state(param)[["step"]] <- 0
+          state(param)[["eta"]] <- group[["lr"]]
+          state(param)[["mu"]] <- 1
+          state(param)[["ax"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
         }
         
-        param$state[["step"]] <- param$state[["step"]] + 1
+        state(param)[["step"]] <- state(param)[["step"]] + 1
         
         if (group[["weight_decay"]] != 0)
           grad <- grad$add(param, alpha=group$weight_decay)
         
         # decay term
-        param$mul_(1 - group$lambda * param$state$eta)
+        param$mul_(1 - group$lambda * state(param)$eta)
         
         # update parameter
-        param$add_(grad, alpha=-param$state$eta)
+        param$add_(grad, alpha=-state(param)$eta)
         
         # averaging
-        if (param$state[["mu"]] != 1)
-          param$state[["mu"]]$add_(param$sub(param$state[["ax"]])$mul(param$state[["mu"]]))
+        if (state(param)[["mu"]] != 1)
+          state(param)[["mu"]]$add_(param$sub(state(param)[["ax"]])$mul(state(param)[["mu"]]))
         else
-          param$state[["ax"]]$copy_(param)
+          state(param)[["ax"]]$copy_(param)
         
         # update eta and mu
-        denominator <- (1 + group[["lambda"]] * group[["lr"]] * param$state[["step"]]) ^ group[["alpha"]]
-        param$state[["eta"]] <- group[["lr"]] / denominator
-        param$state[["mu"]] <- 1 / max(1, param$state[["step"]]- group[["t0"]])
+        denominator <- (1 + group[["lambda"]] * group[["lr"]] * state(param)[["step"]]) ^ group[["alpha"]]
+        state(param)[["eta"]] <- group[["lr"]] / denominator
+        state(param)[["mu"]] <- 1 / max(1, state(param)[["step"]]- group[["t0"]])
       })
     }
   )

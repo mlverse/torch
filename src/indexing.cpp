@@ -85,7 +85,7 @@ std::vector<Rcpp::RObject> evaluate_slices (std::vector<Rcpp::RObject> quosures,
 }
 
 Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
-                                              Rcpp::XPtr<XPtrTorchTensorOptions> options,
+                                              XPtrTorchTensorOptions options,
                                               bool requires_grad, bool is_integer64);
 
 XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool drop)
@@ -101,9 +101,12 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
     // all elements in that dimension.
     if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1 && LOGICAL(slice)[0] == NA_LOGICAL)
     {
-      XPtrTorchSlice s = lantern_Slice(lantern_optional_int64_t(0, true), 
-                                       lantern_optional_int64_t(0, true),
-                                       lantern_optional_int64_t(1, false));
+      
+      XPtrTorchSlice s = lantern_Slice(
+        XPtrTorchoptional_int64_t(lantern_optional_int64_t(0, true)).get(), 
+        XPtrTorchoptional_int64_t(lantern_optional_int64_t(0, true)).get(),
+        XPtrTorchoptional_int64_t(lantern_optional_int64_t(1, false)).get()
+      );
       lantern_TensorIndex_append_slice(index.get(), s.get());
       continue;
     }
@@ -123,7 +126,7 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       {
         Rcpp::stop("Indexing in R is 1-based and found a 0.");
       }
-    
+      
       lantern_TensorIndex_append_int64(index.get(), s);
       
       if (!drop)
@@ -186,13 +189,13 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
           Rcpp::stop("Indexing in R is 1-based and found a 0.");
         }
       }
-    
+      
       // Create the integer Tensor
       XPtrTorchTensorOptions options = lantern_TensorOptions();
       options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
       std::vector<int64_t> dim = {LENGTH(slice)};
       
-      Rcpp::XPtr<XPtrTorchTensor> tensor = cpp_torch_tensor(v, dim, make_xptr<XPtrTorchTensorOptions>(options), false, false);
+      Rcpp::XPtr<XPtrTorchTensor> tensor = cpp_torch_tensor(v, dim, options, false, false);
       
       lantern_TensorIndex_append_tensor(index.get(), tensor->get());
       continue;
@@ -209,7 +212,7 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_bool()).get());
       std::vector<int64_t> dim = {LENGTH(slice)};
       
-      Rcpp::XPtr<XPtrTorchTensor> tensor = cpp_torch_tensor(v, dim, make_xptr<XPtrTorchTensorOptions>(options), false, false);
+      Rcpp::XPtr<XPtrTorchTensor> tensor = cpp_torch_tensor(v, dim, options, false, false);
       
       lantern_TensorIndex_append_tensor(index.get(), tensor->get());
       continue;
@@ -217,9 +220,51 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
     
     if (Rf_inherits(slice, "torch_tensor"))
     {
-      Rcpp::Environment e = slice;
-      Rcpp::XPtr<XPtrTorchTensor> t = e["ptr"];
-      lantern_TensorIndex_append_tensor(index.get(), t->get());
+      Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(slice);
+      
+      auto s = lantern_Dtype_type(XPtrTorchDtype(lantern_Tensor_dtype(t->get())).get());
+      auto type = std::string(s);
+      lantern_const_char_delete(s);
+      
+      // is boolean tensor
+      if (type == "Bool")
+      {
+        lantern_TensorIndex_append_tensor(index.get(), t->get());
+      } 
+      // integer tensor: we need to make it zero based
+      else if (type == "Long")
+      {
+        
+        bool current_autograd_mode = lantern_autograd_is_enabled();
+        lantern_autograd_set_grad_mode(false);
+        // check that there's no zeros
+        bool zeros = lantern_Tensor_has_any_zeros(t->get());
+        if (zeros)
+        {
+          lantern_autograd_set_grad_mode(current_autograd_mode);
+          Rcpp::stop("Indexing starts at 1 but found a 0.");
+        }
+        
+        XPtrTorchTensor sign = lantern_Tensor_signbit_tensor(t->get());
+        sign = lantern_logical_not_tensor(sign.get());
+        
+        // cast from bool to int
+        XPtrTorchTensorOptions options = lantern_TensorOptions();
+        options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
+        sign = lantern_Tensor_to(sign.get(), options.get());
+        
+        // create a 1 scalar
+        int al = 1;
+        XPtrTorchScalar alpha = lantern_Scalar((void*) &al, std::string("int").c_str());
+        
+        XPtrTorchTensor zero_index = lantern_Tensor_sub_tensor_tensor_scalar(t->get(), sign.get(), alpha.get());
+        
+        lantern_TensorIndex_append_tensor(index.get(), zero_index.get());
+        lantern_autograd_set_grad_mode(current_autograd_mode);
+      } else {
+        Rcpp::stop("Only long and boolean tensors are supported.");  
+      }
+      continue;
     }
     
   }
@@ -237,7 +282,7 @@ Rcpp::XPtr<XPtrTorchTensor> Tensor_slice(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp:
   return make_xptr<XPtrTorchTensor>(out);
 }
 
-Rcpp::XPtr<XPtrTorchScalar> cpp_torch_scalar (SEXP x);
+XPtrTorchScalar cpp_torch_scalar (SEXP x);
 
 // [[Rcpp::export]]
 void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
@@ -251,14 +296,13 @@ void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
       TYPEOF(rhs) == STRSXP) && LENGTH(rhs) == 1)
   {
     auto s = cpp_torch_scalar(rhs);
-    lantern_Tensor_index_put_scalar_(self->get(), index.get(), s->get());  
+    lantern_Tensor_index_put_scalar_(self->get(), index.get(), s.get());  
     return;
   }
   
   if (Rf_inherits(rhs, "torch_tensor"))
   {
-    Rcpp::Environment e = rhs;
-    Rcpp::XPtr<XPtrTorchTensor> t = e["ptr"];
+    Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(rhs);
     lantern_Tensor_index_put_tensor_(self->get(), index.get(), t->get());  
     return;
   }

@@ -2828,19 +2828,12 @@ NULL
 #' @name torch_normal
 #'
 #' @examples
-#'
-#' \dontrun{
+#' 
 #' torch_normal(mean=0, std=torch_arange(1, 0, -0.1))
-#'
-#'
 #' torch_normal(mean=0.5, std=torch_arange(1., 6.))
-#'
-#'
 #' torch_normal(mean=torch_arange(1., 6.))
-#'
-#'
-#' torch_normal(2, 3, size=list(1, 4))
-#' }
+#' torch_normal(2, 3, size=c(1, 4))
+#' 
 NULL
 # -> normal <-
 
@@ -3233,7 +3226,7 @@ NULL
 #' x[torch_randn(3,3) > 0.5] = 1
 #' x
 #' torch_count_nonzero(x)
-#' torch_count_nonzero(x, dim=0)
+#' torch_count_nonzero(x, dim=1)
 NULL
 # -> count_nonzero <-
 
@@ -3278,10 +3271,10 @@ NULL
 #' @examples
 #'
 #' if (torch::cuda_is_available()) {
-#' a <- torch_tensor(c(5, 10, 15))
-#' b <- torch_tensor(c(3, 4, 5))
+#' a <- torch_tensor(c(5, 10, 15), dtype = torch_long(), device = "cuda")
+#' b <- torch_tensor(c(3, 4, 5), dtype = torch_long(), device = "cuda")
 #' torch_gcd(a, b)
-#' c <- torch_tensor(c(3))
+#' c <- torch_tensor(c(3L), device = "cuda")
 #' torch_gcd(a, c)
 #' }
 NULL
@@ -3294,10 +3287,10 @@ NULL
 #' @examples
 #'
 #' if (torch::cuda_is_available()) {
-#' a <- torch_tensor(c(5, 10, 15))
-#' b <- torch_tensor(c(3, 4, 5))
+#' a <- torch_tensor(c(5, 10, 15), dtype = torch_long(), device = "cuda")
+#' b <- torch_tensor(c(3, 4, 5), dtype = torch_long(), device = "cuda")
 #' torch_lcm(a, b)
-#' c <- torch_tensor(c(3))
+#' c <- torch_tensor(c(3L), device = "cuda")
 #' torch_lcm(a, c)
 #' }
 NULL
@@ -3574,8 +3567,8 @@ NULL
 #' torch_nansum(torch_tensor(c(1., NaN)))
 #' a <- torch_tensor(rbind(c(1, 2), c(3., NaN)))
 #' torch_nansum(a)
-#' torch_nansum(a, dim=0)
 #' torch_nansum(a, dim=1)
+#' torch_nansum(a, dim=2)
 NULL
 # -> nansum <-
 

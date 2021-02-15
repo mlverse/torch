@@ -1,12 +1,11 @@
-Device <- R6::R6Class(
+Device <- R7Class(
   classname = "torch_device",
   public = list(
     ptr = NULL,
     initialize = function(type, index = NULL, ptr = NULL) {
       
       if (!is.null(ptr)) {
-        self$ptr <- ptr
-        return(NULL)
+        return(ptr)
       }
         
       if (grepl(":", type, fixed = TRUE)) {
@@ -19,8 +18,7 @@ Device <- R6::R6Class(
         index <- as.integer(spl[2])
       }
       
-      self$ptr <- cpp_torch_device(type, index)
-      
+      cpp_torch_device(type, index)
     },
     print = function() {
       s <- paste0("torch_device(type='", self$type, "'")
@@ -44,6 +42,9 @@ Device <- R6::R6Class(
     },
     type = function() {
       cpp_device_type_to_string(self$ptr)
+    },
+    ptr = function() {
+      self
     }
   )
 )

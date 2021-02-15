@@ -163,6 +163,14 @@ test_that("norm", {
     regexp = "not yet supported with named tensors"
   )
   
+  x <- torch_rand(2, 3)
+  expect_tensor(x$norm())
+  expect_tensor(x$norm(p = 2))
+  expect_tensor(x$norm(p = 2, dtype = torch_float64()))
+  expect_tensor_shape(torch_norm(x, dim = 1), 3)
+  expect_tensor_shape(torch_norm(x, dim = 2), 2)
+  expect_tensor_shape(torch_norm(x, dim = 2, dtype = torch_float64()), 2)
+  
 })
 
 test_that("hann_window", {
@@ -217,4 +225,92 @@ test_that("stft", {
   expect_tensor_shape(x, c(201, 27, 2))
   expect_equal_to_r(x[1,,], cbind(rep(400, 27), rep(0, 27)))
   expect_equal_to_r(x[51,,], cbind(rep(0, 27), rep(0, 27)))
+})
+
+test_that("torch_one_hot", {
+  expect_tensor_shape(torch_one_hot(torch_tensor(1L)), c(1,1))
+  expect_tensor_shape(torch_one_hot(torch_tensor(c(1L, 2L))), c(2,2))
+  expect_error(torch_one_hot(torch_tensor(0L)))
+})
+
+test_that("torch_split", {
+  
+  x <- torch_tensor(1:5)
+  
+  expect_length(torch_split(x, 2), 3)
+  expect_length(torch_split(x, c(2, 3)), 2)
+  
+  expect_length(x$split(2), 3)
+  expect_length(x$split(c(2, 3)), 2)
+  
+})
+
+test_that("torch_nonzero", {
+  
+  x <- torch_tensor(c(0, 1, 2, 0, 3))
+  expect_equal_to_r(torch_nonzero(x), matrix(c(2L,3L,5L), ncol = 1))
+  expect_equal_to_r(x$nonzero(), matrix(c(2L,3L,5L), ncol = 1))
+  
+  o <- torch_nonzero(x, as_list = TRUE)
+  expect_length(o, 1)
+  expect_equal_to_r(o[[1]], c(2L,3L,5L))
+  
+  o <- x$nonzero(as_list = TRUE)
+  expect_length(o, 1)
+  expect_equal_to_r(o[[1]], c(2L,3L,5L))
+  
+  x <- torch_tensor(matrix(c(0, 1, 0, 1, 1, 0), nrow = 2))
+  expect_equal(nrow(torch_nonzero(x)), 3)
+  expect_equal(nrow(x$nonzero()), 3)
+  
+  o <- torch_nonzero(x, as_list = TRUE)
+  expect_length(o, 2)
+  
+  o <- x$nonzero(as_list = TRUE)
+  expect_length(o, 2)
+  
+  x <- torch_tensor(c(0,0))
+  expect_equal(nrow(torch_nonzero(x)), 0)
+  expect_equal(nrow(x$nonzero()), 0)
+  
+  expect_equal(nrow(torch_nonzero(x, as_list = TRUE)[[1]]), 0)
+  expect_equal(nrow(x$nonzero(as_list = TRUE)[[1]]), 0)
+  
+  skip_if_cuda_not_available()
+  x <- torch_tensor(c(0, 1, 2, 0, 3), device = "cuda")
+  expect_equal_to_r(torch_nonzero(x), matrix(c(2L,3L,5L), ncol = 1))
+
+})
+
+test_that("normal works", {
+  
+  x <- torch_normal(0, 1, size = c(2, 2))  
+  expect_tensor_shape(x, c(2,2))
+  expect_true(x$dtype == torch_float())
+  
+  x <- torch_normal(0, 1, size = c(2, 2), dtype = torch_float64())  
+  expect_true(x$dtype == torch_float64())
+  
+  x <- torch_normal(torch_zeros(2,2), torch_ones(c(2,2)))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(torch_zeros(2,2), 1)
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(1, torch_zeros(2,2))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(mean = torch_zeros(2,2))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(std = torch_zeros(2,2))
+  expect_tensor_shape(x, c(2,2))
+  
+  x <- torch_normal(size = list(2, 2))
+  expect_tensor_shape(x, c(2,2))
+  
+  expect_error(torch_normal(torch_zeros(2), 1, c(2,2)), class = "value_error")
+  expect_error(torch_normal(1, torch_zeros(2), c(2,2)), class = "value_error")
+  expect_error(torch_normal(1, torch_zeros(2), dtype = torch_float64()), class = "value_error")
+  
 })

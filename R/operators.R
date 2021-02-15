@@ -73,6 +73,9 @@
   if (!is_torch_tensor(e1))
     e1 <- torch_tensor(e1, device = e2$device)
   
+  if (!is_torch_tensor(e2))
+    e2 <- torch_tensor(e2, device = e1$device)
+  
   torch_ge(e1, e2)
 }
 
@@ -81,6 +84,9 @@
   
   if (!is_torch_tensor(e1))
     e1 <- torch_tensor(e1, device = e2$device)
+  
+  if (!is_torch_tensor(e2))
+    e2 <- torch_tensor(e2, device = e1$device)
   
   torch_gt(e1, e2)
 }
@@ -91,6 +97,9 @@
   if (!is_torch_tensor(e1))
     e1 <- torch_tensor(e1, device = e2$device)
   
+  if (!is_torch_tensor(e2))
+    e2 <- torch_tensor(e2, device = e1$device)
+  
   torch_le(e1, e2)
 }
 
@@ -100,6 +109,9 @@
   if (!is_torch_tensor(e1))
     e1 <- torch_tensor(e1, device = e2$device)
   
+  if (!is_torch_tensor(e2))
+    e2 <- torch_tensor(e2, device = e1$device)
+  
   torch_lt(e1, e2)
 }
 
@@ -108,6 +120,9 @@
   
   if (!is_torch_tensor(e1))
     e1 <- torch_tensor(e1, device = e2$device)
+  
+  if (!is_torch_tensor(e2))
+    e2 <- torch_tensor(e2, device = e1$device)
   
   torch_eq(e1, e2)
 }
@@ -127,6 +142,9 @@
   if (!is_torch_tensor(e1))
     e1 <- torch_tensor(e1, device = e2$device)
   
+  if (!is_torch_tensor(e2))
+    e2 <- torch_tensor(e2, device = e1$device)
+  
   torch_logical_and(e1, e2)
 }
 
@@ -135,6 +153,9 @@
   
   if (!is_torch_tensor(e1))
     e1 <- torch_tensor(e1, device = e2$device)
+  
+  if (!is_torch_tensor(e2))
+    e2 <- torch_tensor(e2, device = e1$device)
   
   torch_logical_or(e1, e2)
 }
@@ -335,5 +356,15 @@ sum.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
   } else {
     stopifnot(missing(dim))
     return(Reduce(`+`, lapply(l, torch_sum)))
+  }
+}
+
+#' @export
+mean.torch_tensor <- function(x, dim, keepdim = FALSE, na.rm = FALSE, ...) {
+  if (na.rm) stop('Torch tensors do not have NAs!')
+  if (!missing(dim)) {
+    torch_mean(x, dim, keepdim)
+  } else {
+    torch_mean(x)
   }
 }

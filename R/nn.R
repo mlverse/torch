@@ -42,7 +42,7 @@ nn_Module <- R6::R6Class(
     train = function(mode = TRUE) {
       self$training <- mode
       lapply(private$modules_, function(m) m$train(mode))
-      invisible(self)
+      invisible(create_nn_module_callable(self))
     },
     
     eval = function() {
@@ -68,7 +68,7 @@ nn_Module <- R6::R6Class(
           private$parameters_[[param_name]] <- nn_parameter(param_applied)
         }
         
-        if (!is_undefined_tensor(param$grad)) {
+        if (!is.null(param) && !is_undefined_tensor(param$grad)) {
           with_no_grad({
             grad_applied <- fn(param$grad)
           })
@@ -109,6 +109,10 @@ nn_Module <- R6::R6Class(
           x$to(device = device, non_blocking = non_blocking, copy = copy, 
                memory_format = memory_format)
       })
+    },
+    
+    print = function() {
+      print_nn_module(self, private)
     },
     
     .save_to_state_dict = function(prefix, keepvars) {
@@ -162,7 +166,7 @@ nn_Module <- R6::R6Class(
       for (name in names(local_state)) {
         key <- paste0(prefix, name)
         if (key %in% names(state_dict)) {
-         input_param <- state_dict[[key]] 
+         input_param <- state_dict[[key]]
          param <- local_state[[name]]
          with_no_grad({
            param$copy_(input_param)
@@ -206,7 +210,7 @@ nn_Module <- R6::R6Class(
       fn(self)
       invisible(create_nn_module_callable(self))
     }
-    
+  
   ),
   private = list(
     parameters_ = list(),
@@ -215,7 +219,15 @@ nn_Module <- R6::R6Class(
     non_persistent_buffers_ = character()
   ),
   active = list(
-    parameters = function() {
+    parameters = function(value) {
+      
+      if (!missing(value))
+        runtime_error(
+          "It's not possible to modify the parameters list.\n",
+          " You can modify the parameter in-place or use",
+          " `module$parameter_name <- new_value`"
+          )
+      
       pars <- lapply(private$modules_, function(x) x$parameters)
       pars <- append(pars, private$parameters_)
       pars <- unlist(pars, recursive = TRUE, use.names = TRUE)
@@ -229,6 +241,26 @@ nn_Module <- R6::R6Class(
       pars <- pars[!duplicated(addresses)]
       
       pars
+    },
+    modules = function(value) {
+      
+      if (!missing(value))
+        runtime_error(
+          "It's not possible to modify the modules list.\n",
+          " You can modify the modules in-place"
+        )
+      
+      modules <- lapply(private$modules_, function(x) x$modules)
+      # the self instance is an nn_Module, not nn_module
+      modules <- append(create_nn_module_callable(self), modules)
+      modules <- unlist(modules)
+      
+      # to check if modules are iddentical we need to compare the
+      # R6 instances.
+      module_instances <- lapply(modules, function(x) attr(x, "module"))
+      modules <- modules[!duplicated(module_instances)]
+      
+      modules
     }
   )
 )
@@ -297,6 +329,52 @@ is_nn_module <- function(x) {
 #' 
 #' Modules can also contain other Modules, allowing to nest them in a tree 
 #' structure. You can assign the submodules as regular attributes.
+#' 
+#' You are expected to implement the `initialize` and the `forward` to create a
+#' new `nn_module`.
+#' 
+#' @section Initialize:
+#' 
+#' The initialize function will be called whenever a new instance of the `nn_module`
+#' is created. We use the initialize functions to define submodules and parameters
+#' of the module. For example:
+#' 
+#' ```
+#' initialize = function(input_size, output_size) {
+#'    self$conv1 <- nn_conv2d(input_size, output_size, 5)
+#'    self$conv2 <- nn_conv2d(output_size, output_size, 5)
+#' }
+#' ```
+#' 
+#' The initialize function can have any number of parameters. All objects
+#' assigned to `self$` will be available for other methods that you implement.
+#' Tensors wrapped with [nn_parameter()] or [nn_buffer()] and submodules are 
+#' automatically tracked when assigned to `self$`.
+#' 
+#' The initialize function is optional if the module you are defining doesn't 
+#' have weights, submodules or buffers.
+#' 
+#' @section Forward:
+#' 
+#' The forward method is called whenever an instance of `nn_module` is called.
+#' This is usually used to implement the computation that the module does with
+#' the weights ad submodules defined in the `initialize` function.
+#' 
+#' For example:
+#' 
+#' ```
+#' forward = function(input) {
+#'    input <- self$conv1(input)
+#'    input <- nnf_relu(input)
+#'    input <- self$conv2(input)
+#'    input <- nnf_relu(input)
+#'    input
+#'  }
+#' ```
+#' 
+#' The `forward` function can use the `self$training` attribute to make different
+#' computations depending wether the model is training or not, for example if you
+#' were implementing the dropout module.
 #' 
 #' @param classname an optional name for the module
 #' @param inherit an optional module to inherit from
@@ -501,6 +579,11 @@ nn_sequential <- function(... , name = NULL) {
   module(...)
 }
 
+#' @export
+length.nn_sequential <- function(x) {
+  length(x$.__enclos_env__$private$modules_)
+}
+
 #' Holds submodules in a list.
 #' 
 #' [nn_module_list] can be indexed like a regular R list, but
@@ -531,7 +614,7 @@ nn_module_list <- nn_module(
   },
   insert = function(index, module) {
     modules <- append(private$modules_, list(module), after = index - 1)
-    private$modules_ <- NULL
+    private$modules_ <- list()
     for (i in seq_along(modules)) {
       self$add_module(i - 1, modules[[i]])
     }
@@ -559,3 +642,67 @@ nn_module_list <- nn_module(
 length.nn_module_list <- function(x, ...) {
   length(x$.__enclos_env__$private$modules_)
 }
+
+comma <- function(x) {
+  format(x, nsmall=0, big.mark=",", scientific = FALSE)
+}
+
+print_nn_module <- function(self, private) {
+  
+  cli::cat_line(
+    "An `nn_module` containing ", 
+    comma(get_parameter_count(self)),
+    " parameters."
+  )
+  
+  if (length(private$modules_) > 0) {
+    cli::cat_line()
+    cli::cat_rule("Modules")
+    sapply(names(private$modules_), function(x) {
+      cli_module_item(x, private$modules_[[x]])
+    })
+  }
+  
+  if (length(private$parameters_) > 0) {
+    cli::cat_line()
+    cli::cat_rule("Parameters")
+    sapply(names(private$parameters_), function(x) {
+      cli_tensor_item(x, private$parameters_[[x]])
+    })
+  }
+  
+  if (length(private$buffers_) > 0) {
+    cli::cat_line()
+    cli::cat_rule("Buffers")
+    sapply(names(private$buffers_), function(x) {
+      cli_tensor_item(x, private$buffers_[[x]])
+    })
+  }
+}
+
+cli_module_item <- function(name, module) {
+  cli::cat_bullet(paste0(
+    name, 
+    ": <", class(module)[1], "> #", 
+    comma(get_parameter_count(module)), 
+    " parameters"
+  ))
+}
+
+cli_tensor_item <- function(name, tensor) {
+  cli::cat_bullet(paste0(
+   name, 
+   ": ",
+   make_str_torch_tensor(tensor)
+  ))
+}
+
+get_parameter_count <- function(self) {
+  
+  if (length(self$parameters) == 0)
+    return(0)
+  
+  pars <- sapply(self$parameters, function(x) prod(x$shape))
+  sum(pars)
+}
+
