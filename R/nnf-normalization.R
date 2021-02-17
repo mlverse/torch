@@ -103,7 +103,7 @@ nnf_local_response_norm <- function(input, size, alpha = 1e-4, beta = 0.75, k = 
 nnf_group_norm <- function(input, num_groups, weight = NULL, bias = NULL,
                            eps = 1e-5) {
   
-  torch_group_norm(input, input, num_groups = num_groups, weight = weight,
+  torch_group_norm(input, num_groups = num_groups, weight = weight,
                    bias = bias, eps = eps #TODO ,cudnn_enabled = backends_cudnn_enabled
   )
 }

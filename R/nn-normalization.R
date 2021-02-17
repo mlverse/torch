@@ -82,3 +82,75 @@ nn_layer_norm <- nn_module(
     nnf_layer_norm(input, self$normalized_shape, self$weight, self$bias, self$eps)
   }
 )
+
+#' Group normalization
+#' 
+#' Applies Group Normalization over a mini-batch of inputs as described in
+#' the paper [Group Normalization](https://arxiv.org/abs/1803.08494).
+#' 
+#' \deqn{
+#'   y = \frac{x - \mathrm{E}[x]}{ \sqrt{\mathrm{Var}[x] + \epsilon}} * \gamma + \beta
+#' }
+#' 
+#' The input channels are separated into `num_groups` groups, each containing
+#' ``num_channels / num_groups`` channels. The mean and standard-deviation are calculated
+#' separately over the each group. \eqn{\gamma} and \eqn{\beta} are learnable
+#' per-channel affine transform parameter vectors of size `num_channels` if
+#' `affine` is ``TRUE``.
+#' The standard-deviation is calculated via the biased estimator, equivalent to
+#' `torch_var(input, unbiased=FALSE)`.
+#' 
+#' @note This layer uses statistics computed from input data in both training and
+#' evaluation modes.
+#' 
+#' @param num_groups (int): number of groups to separate the channels into
+#' @param num_channels (int): number of channels expected in input
+#' @param eps a value added to the denominator for numerical stability. Default: 1e-5
+#' @param affine a boolean value that when set to ``TRUE``, this module
+#'    has learnable per-channel affine parameters initialized to ones (for weights)
+#'    and zeros (for biases). Default: ``TRUE``.
+#'    
+#' @section Shape:
+#' 
+#' - Input: \eqn{(N, C, *)} where \eqn{C=\text{num\_channels}}
+#' - Output: \eqn{(N, C, *)}` (same shape as input)
+#' 
+#' @examples
+#' 
+#' input <- torch_randn(20, 6, 10, 10)
+#' # Separate 6 channels into 3 groups
+#' m <- nn_group_norm(3, 6)
+#' # Separate 6 channels into 6 groups (equivalent with [nn_instance_morm])
+#' m <- nn_group_norm(6, 6)
+#' # Put all 6 channels into a single group (equivalent with [nn_layer_norm])
+#' m <- nn_group_norm(1, 6)
+#' # Activating the module
+#' output <- m(input)
+#' 
+#' @export
+nn_group_norm <- nn_module(
+  "nn_group_norm",
+  initialize = function(num_groups, num_channels, eps = 1e-5, affine = TRUE) { 
+    self$num_groups = num_groups
+    self$num_channels = num_channels
+    self$eps = eps
+    self$affine = affine
+    if(self$affine) {
+      self$weight = nn_parameter(torch_empty(num_channels))
+      self$bias = nn_parameter(torch_empty(num_channels))
+    } else {
+      self$weight <- NULL
+      self$bias <- NULL
+    }
+    self$reset_parameters()
+  },
+  reset_parameters = function() { 
+    if(self$affine) {
+      nn_init_ones_(self$weight)
+      nn_init_zeros_(self$bias)
+    }
+  },
+  forward = function(input) { 
+    nnf_group_norm(input, self$num_groups, self$weight, self$bias, self$eps)
+  }
+)

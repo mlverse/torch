@@ -36,3 +36,15 @@ test_that("layer_norm", {
     ), dim = 2), tolerance = 1e-6)
   
 })
+
+
+test_that("group_norm", {
+  
+  input <- torch_tensor(t(matrix(1:3, ncol = 3, nrow = 3)), dtype = torch_float())
+
+  m <- nn_layer_norm(3)
+  mg <- nn_group_norm(1, 3)
+  
+  expect_equal_to_tensor(mg(input), m(input))
+})
+
