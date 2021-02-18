@@ -313,6 +313,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_backends_mkldnn_is_available
+bool cpp_backends_mkldnn_is_available();
+RcppExport SEXP _torch_cpp_backends_mkldnn_is_available() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_backends_mkldnn_is_available());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_backends_mkl_is_available
+bool cpp_backends_mkl_is_available();
+RcppExport SEXP _torch_cpp_backends_mkl_is_available() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_backends_mkl_is_available());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_backends_openmp_is_available
+bool cpp_backends_openmp_is_available();
+RcppExport SEXP _torch_cpp_backends_openmp_is_available() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_backends_openmp_is_available());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_contrib_torch_sparsemax
 Rcpp::XPtr<XPtrTorchTensor> cpp_contrib_torch_sparsemax(Rcpp::XPtr<XPtrTorchTensor> input, int dim);
 RcppExport SEXP _torch_cpp_contrib_torch_sparsemax(SEXP inputSEXP, SEXP dimSEXP) {
@@ -29348,6 +29378,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_autograd_node_next_edges", (DL_FUNC) &_torch_cpp_autograd_node_next_edges, 1},
     {"_torch_cpp_autograd_edge_function", (DL_FUNC) &_torch_cpp_autograd_edge_function, 1},
     {"_torch_cpp_autograd_grad", (DL_FUNC) &_torch_cpp_autograd_grad, 6},
+    {"_torch_cpp_backends_mkldnn_is_available", (DL_FUNC) &_torch_cpp_backends_mkldnn_is_available, 0},
+    {"_torch_cpp_backends_mkl_is_available", (DL_FUNC) &_torch_cpp_backends_mkl_is_available, 0},
+    {"_torch_cpp_backends_openmp_is_available", (DL_FUNC) &_torch_cpp_backends_openmp_is_available, 0},
     {"_torch_cpp_contrib_torch_sparsemax", (DL_FUNC) &_torch_cpp_contrib_torch_sparsemax, 2},
     {"_torch_cpp_cuda_is_available", (DL_FUNC) &_torch_cpp_cuda_is_available, 0},
     {"_torch_cpp_cuda_device_count", (DL_FUNC) &_torch_cpp_cuda_device_count, 0},
