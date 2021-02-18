@@ -23,6 +23,7 @@
 - Found and fixed some memory leaks, specially when creating datatypes from strings and when saving models with `torch_save`. (#454)
 - Fixed bug in `nnf_pad` when using `mode='circular'`. (#471)
 - Implemented `nn_group_norm` and fixed a bug in `nnf_group_norm` (#474)
+- Added backend functions allowing us to query which optimizations LibTorch was compiled with (#476)
 
 # torch 0.2.1
 
