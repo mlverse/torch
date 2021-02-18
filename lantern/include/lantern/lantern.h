@@ -857,6 +857,38 @@ HOST_API void* lantern_nn_functional_pad_circular (void* input, void* padding)
   return ret;
 }
 
+LANTERN_API bool (LANTERN_PTR _lantern_backend_has_mkl) ();
+HOST_API bool lantern_backend_has_mkl ()
+{
+  bool ret = _lantern_backend_has_mkl();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_backend_has_openmp) ();
+HOST_API bool lantern_backend_has_openmp ()
+{
+  bool ret = _lantern_backend_has_openmp();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_backend_has_lapack) ();
+HOST_API bool lantern_backend_has_lapack ()
+{
+  bool ret = _lantern_backend_has_lapack();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_backend_has_mkldnn) ();
+HOST_API bool lantern_backend_has_mkldnn ()
+{
+  bool ret = _lantern_backend_has_mkldnn();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -5449,7 +5481,11 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_vector_void_delete);
   LOAD_SYMBOL(_lantern_autograd_is_enabled);
   LOAD_SYMBOL(_lantern_print_stuff);
-  LOAD_SYMBOL(_lantern_nn_functional_pad_circular)
+  LOAD_SYMBOL(_lantern_nn_functional_pad_circular);
+  LOAD_SYMBOL(_lantern_backend_has_lapack);
+  LOAD_SYMBOL(_lantern_backend_has_mkl);
+  LOAD_SYMBOL(_lantern_backend_has_mkldnn);
+  LOAD_SYMBOL(_lantern_backend_has_openmp);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

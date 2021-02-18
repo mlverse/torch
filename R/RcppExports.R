@@ -109,6 +109,18 @@ cpp_autograd_grad <- function(outputs, inputs, grad_outputs, retain_graph, creat
     .Call('_torch_cpp_autograd_grad', PACKAGE = 'torchpkg', outputs, inputs, grad_outputs, retain_graph, create_graph, allow_unused)
 }
 
+cpp_backends_mkldnn_is_available <- function() {
+    .Call('_torch_cpp_backends_mkldnn_is_available', PACKAGE = 'torchpkg')
+}
+
+cpp_backends_mkl_is_available <- function() {
+    .Call('_torch_cpp_backends_mkl_is_available', PACKAGE = 'torchpkg')
+}
+
+cpp_backends_openmp_is_available <- function() {
+    .Call('_torch_cpp_backends_openmp_is_available', PACKAGE = 'torchpkg')
+}
+
 cpp_contrib_torch_sparsemax <- function(input, dim) {
     .Call('_torch_cpp_contrib_torch_sparsemax', PACKAGE = 'torchpkg', input, dim)
 }
