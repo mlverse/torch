@@ -57,7 +57,7 @@ Normal <- R6::R6Class(
       })
     },
     
-    rsample = function(sample_shape=torch.Size()){
+    rsample = function(sample_shape=NULL){
       shape <- self$.extended_shape(sample_shape)
       eps <- .standard_normal(shape, dtype=self$loc$dtype, 
                               device=self$loc$device)
@@ -144,7 +144,6 @@ Normal <- add_class_definition(Normal)
 #' @examples 
 #' m <- distr_normal(loc = 0, scale = 1)
 #' m$sample()  # normally distributed with loc=0 and scale=1
-#' tensor([ 0.1046])
 #' 
 #' @export
 distr_normal <- function(loc, scale, validate_args = NULL){
