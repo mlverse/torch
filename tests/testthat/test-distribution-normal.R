@@ -13,9 +13,28 @@ test_that("Distribution Normal - basic size test", {
   expect_equal(distr_normal(loc, scale)$sample(7)$size(), c(7, 5, 5))
   expect_equal(distr_normal(loc_1d, scale_1d)$sample(1)$size(), c(1, 1))
   expect_equal(distr_normal(loc_1d, scale_1d)$sample()$size(), 1)
-  # expect_equal(distr_normal(0.2, .6)$sample(1)$size(), 1)
-  # expect_equal(distr_normal(-0.7, 50.0)$sample()$size(), 1)
+  expect_equal(distr_normal(0.2, .6)$sample(1)$size(), c(1, 1))
+  expect_equal(distr_normal(-0.7, 50.0)$sample()$size(), 1)
+  
+  # Sample check for extreme value of mean, std
+  loc_delta   <- torch_tensor(c(1.0, 0.0))
+  scale_delta <- torch_tensor(c(1e-5, 1e-5))
+  expect_equal(
+    distr_normal(loc_delta, scale_delta)$sample(sample_shape = c(1, 2)),
+    torch_tensor(c(1.0, 0.0, 1.0, 0.0))$reshape(c(2, 2))
+  )
+  
+  # Check gradient
+  eps <- torch_normal(torch_zeros_like(loc), torch_ones_like(scale))
+  z   <- distr_normal(loc, scale)$rsample()
+  z$backward(torch_ones_like(z))
+  
+  expect_equal(loc$grad, torch_ones_like(loc))
+  expect_equal(scale$grad, eps)
 
+  loc$grad$zero_()
+  scale$grad$zero_()
+  expect_equal(z$size(), c(5, 5))
 })
 
 test_that("Distribution Normal - expand", {
@@ -26,7 +45,6 @@ test_that("Distribution Normal - expand", {
   d <- distr_normal(loc = 1, scale = 1)
   
   for (shape in shapes) {
-    # shape <- shapes[1]
     shape <- shape[[1]]
     expanded_shape <- c(shape, d$batch_shape)
     original_shape <- c(d$batch_shape, d$event_shape)
