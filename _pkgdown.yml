@@ -114,6 +114,9 @@ reference:
       - starts_with("enumerate")
       - tensor_dataset
       - is_dataloader
+  - title: Distributions
+    contents:
+      - starts_with("distr")
   - title: Autograd
     contents:
       - starts_with("autograd_")

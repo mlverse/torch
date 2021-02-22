@@ -1,6 +1,8 @@
 #' @include utils.R
 
 #' Distribution is the abstract base class for probability distributions.
+#' Note: in Python, adding torch.Size objects works as concatenation
+#' Try for example: torch.Size((2, 1)) + torch.Size((1,))
 Distribution <- R6::R6Class(
   "torch_Distribution",
   lock_objects = FALSE,
@@ -15,27 +17,28 @@ Distribution <- R6::R6Class(
     .event_shape          = NULL,
     
     # Choose different structure?
-    arg_constraints       = list(),
+    .arg_constraints       = list(),
     
-    initialize = function(batch_shape, event_shape, validate_args = NULL){
-      
+    initialize = function(batch_shape = NULL, event_shape = NULL, validate_args = NULL){
+
       self$.batch_shape <- batch_shape
       self$.event_shape <- event_shape
-      
+
       if (!is.null(validate_args))
         self$.validate_args <- validate_args
-      
-        for (p in seq_along(self$arg_constraints)) {
-          
-          constraint <- arg_constraints[[p]]$constraint
-          param      <- arg_constraints[[p]]$param
-          
+
+        for (param in names(self$.arg_constraints)) {
+
+          constraint <- self$.arg_constraints[[param]]
+
           if (is_dependent(constraint))
             next
-          if (!(param %in% as.list(self)) && inherits(param, "lazy_property"))
-            next # skip checking lazily-constructed args
-          if (all(constraints_check(param)))
-            value_error("The parameter {param} has invalid values")
+          
+          # TODO: check lazy_property
+          # if (!(param %in% names(self) && inherits(constraint, "lazy_property"))
+          #   next # skip checking lazily-constructed args
+          # if (all(constraint$check(constraint)))
+          #   value_error("The parameter {param} has invalid values")
         }
     },
     
@@ -110,7 +113,7 @@ Distribution <- R6::R6Class(
     #' returned shape is upcast to (1,).
     #' @param sample_shape (torch_Size): the size of the sample to be drawn.
     .extended_shape = function(sample_shape = NULL){
-      sample_shape + self$batch_shape + self$event_shape
+      c(sample_shape, self$batch_shape, self$event_shape)
     },
     
     #' Argument validation for distribution methods such as `log_prob`,
@@ -125,14 +128,16 @@ Distribution <- R6::R6Class(
         value_error('The value argument to log_prob must be a Tensor')
       
       event_dim_start <-length(value$size()) - length(self$.event_shape)
-      
+    
       if (value$size()[event_dim_start, ] != self$.event_shape)
-        value_error('The right-most size of value must match event_shape: 
-                    {value$size()} vs {self$.event_shape}.')
-      
+        value_error(
+          'The right-most size of value must match event_shape:
+           {value$size()} vs {self$.event_shape}.'
+        )
+
       actual_shape <- value$size()
-      expected_shape <- self$.batch_shape + self$.event_shape
-      
+      expected_shape <- c(self$.batch_shape, self$.event_shape)
+
       shape_length <- length(actual_shape)
       
       for (idx in shape_length:1) {
@@ -150,55 +155,74 @@ Distribution <- R6::R6Class(
         value_error('The value argument must be within the support')
     },
     
-    .get_checked_instance = function(cls, .instance = NULL){
-      if (is.null(.instance) && self$initialize == cls$initialize)
+    .get_checked_instance = function(cls, .instance = NULL, .args){
+      if (is.null(.instance) && !identical(self$initialize, cls$initialize))
+        #' TODO: consider different message
         not_implemented_error(
-          "Subclass {class(self)} of {class(.instance)} ",
-          "that defines a custom initialize() method ",
-          "must also define a custom `_expand()` method."
+          "Subclass {paste0(class(self), collapse = ' ')} of ", 
+          "{paste0(class(cls), collapse = ' ')} ",
+          "that defines a custom `initialize()` method ",
+          "must also define a custom `expand()` method."
         )
       
       if (is.null(.instance))
-        return(self$class_def$new())
+        return(do.call(self$class_def$new, .args))
       else
         return(.instance)
     },
     
     print = function(){
+    
+      param_names <- 
+        names(self$.arg_constraints)[
+          names(self$.arg_constraints) %in% names(as.list(self))
+            ]
       
-      param_names <- Map(function (x) {
-        if (x %in% as.list(self))
-          as.character(x)
-        else 
-          NULL
-        }, self$arg_constraints)
-        
       args_string <- paste0(
         param_names, collapse = ","
       )
       
-      glue("{class(self)} ({args_string})")
+      class_name <- class(self)[1]
+      cat(glue("{class_name} ({args_string})"))
     }
   ),
   
   active = list(
     
-    #' Returns a `dist_constraint` object
+    #' Returns the shape over which parameters are batched.
+    batch_shape = function(){
+      self$.batch_shape
+    },
+    
+    #' Returns the shape of a single sample (without batching).
+    event_shape = function(){
+      self$.event_shape
+    },
+    
+    #' Returns a dictionary from argument names to
+    #' `torch_Constraint` objects that
+    #' should be satisfied by each argument of this distribution. Args that
+    #' are not tensors need not appear in this dict.
+    # arg_constraints = function(){
+    #   not_implemented_error()
+    # },
+
+    #' Returns a `torch_Constraint` object
     #' representing this distribution's support.
     support = function() {
       not_implemented_error()
     },
-    
+
     #' Returns the mean on of the distribution
     mean = function() {
       not_implemented_error()
     },
-    
+
     #' Returns the variance of the distribution
     variance = function() {
       not_implemented_error()
     },
-    
+
     #' Returns the standard deviation of the distribution
     stddev = function() {
       self$variance$sqrt()

@@ -19,5 +19,6 @@ lantern/cmake-build*
 check/
 docs/
 public
+data/
 doc
 Meta
