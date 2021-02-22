@@ -49,6 +49,7 @@
 - Fixed a memory leak when passing integer vectors to lantern. (#402)
 - Fixed a few more memory leaks related to autograd context (#405)
 - Fixed `nnf_normalize` and `x$norm()` as they were not able to be called (#409)
+- Added normal distribution (#462)
 
 ## Documentation
 
