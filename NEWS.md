@@ -24,6 +24,7 @@
 - Fixed bug in `nnf_pad` when using `mode='circular'`. (#471)
 - Implemented `nn_group_norm` and fixed a bug in `nnf_group_norm` (#474)
 - Added backend functions allowing us to query which optimizations LibTorch was compiled with (#476)
+- Added normal distribution (#462)
 
 # torch 0.2.1
 
@@ -49,7 +50,6 @@
 - Fixed a memory leak when passing integer vectors to lantern. (#402)
 - Fixed a few more memory leaks related to autograd context (#405)
 - Fixed `nnf_normalize` and `x$norm()` as they were not able to be called (#409)
-- Added normal distribution (#462)
 
 ## Documentation
 
