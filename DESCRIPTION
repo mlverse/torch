@@ -59,6 +59,7 @@ Collate:
     'cuda.R'
     'device.R'
     'dimname_list.R'
+    'distributions-bernoulli.R'
     'distributions-constraints.R'
     'utils.R'
     'distributions-exp-family.R'
