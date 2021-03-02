@@ -30,17 +30,17 @@ test_that("lbfgs works", {
   optim <- optim_lbfgs(model$parameters, lr = 0.01)  
   
   fn <- function() {
+    optim$zero_grad()
     loss <- nnf_mse_loss(model(x), y)
     loss$backward()
     loss
   }
   
-  for (i in 500) {
-    optim$zero_grad()
+  for (i in 500) { 
     optim$step(fn)
   }
   
-  expect_true(fn()$item() < 2)
+  expect_true(fn()$item() < 8)
   
 })
 
