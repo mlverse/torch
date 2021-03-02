@@ -40,7 +40,7 @@ test_that("lbfgs works", {
     optim$step(fn)
   }
   
-  expect_true(fn()$item() < 2)
+  expect_true(fn()$item() < 8)
   
 })
 
