@@ -1,3 +1,9 @@
+#' @include distributions.R
+#' @include distributions-exp-family.R
+#' @include distributions-utils.R
+#' @include distributions-constraints.R
+#' @include utils.R
+
 Bernoulli <- R6::R6Class(
   "torch_Bernoulli",
   lock_objects = FALSE,
