@@ -25,6 +25,7 @@
 - Implemented `nn_group_norm` and fixed a bug in `nnf_group_norm` (#474)
 - Added backend functions allowing us to query which optimizations LibTorch was compiled with (#476)
 - Added normal distribution (#462)
+- Added bernoulli distribution (#484)
 
 # torch 0.2.1
 
