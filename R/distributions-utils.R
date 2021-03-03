@@ -60,8 +60,31 @@ broadcast_all <- function(values){
   torch_empty(shape, dtype=dtype, device=device)$normal_()
 }
 
+#' Converts a tensor of logits into probabilities. Note that for the
+#' binary case, each value denotes log odds, whereas for the
+#' multi-dimensional case, the values along the last dimension denote
+#' the log probabilities (possibly unnormalized) of the events.
+logits_to_probs <- function(logits, is_binary = FALSE){
+  if (is_binary)
+    return(torch_sigmoid(logits))
+  nnf_softmax(logits, dim = -1)
+}
 
+clamp_probs <- function(probs){
+  eps <- torch_finfo(probs$dtype)$eps
+  probs$clamp(min = eps, max = 1 - eps)
+}
 
+#' Converts a tensor of probabilities into logits. For the binary case,
+#' this denotes the probability of occurrence of the event indexed by `1`.
+#' For the multi-dimensional case, the values along the last dimension
+#' denote the probabilities of occurrence of each of the events.
+probs_to_logits <- function(probs, is_binary = FALSE){
+  ps_clamped <- clamp_probs(probs)
+  if (is_binary)
+    return(torch_log(ps_clamped) - torch_log1p(-ps_clamped))
+  torch_log(ps_clamped)
+}
 
 
 
