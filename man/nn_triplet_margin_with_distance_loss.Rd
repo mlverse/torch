@@ -83,9 +83,9 @@ otherwise.
 if (torch_is_installed()) {
 # Initialize embeddings
 embedding <- nn_embedding(1000, 128)
-anchor_ids <- torch_randint(0, 1000, 1, dtype = torch_long())
-positive_ids <- torch_randint(0, 1000, 1, dtype = torch_long())
-negative_ids <- torch_randint(0, 1000, 1, dtype = torch_long())
+anchor_ids <- torch_randint(1, 1000, 1, dtype = torch_long())
+positive_ids <- torch_randint(1, 1000, 1, dtype = torch_long())
+negative_ids <- torch_randint(1, 1000, 1, dtype = torch_long())
 anchor <- embedding(anchor_ids)
 positive <- embedding(positive_ids)
 negative <- embedding(negative_ids)
