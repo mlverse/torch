@@ -4,6 +4,8 @@
 #' @include distributions-constraints.R
 #' @include utils.R
 
+# TODO: consider different handling torch.Size use cases
+
 Gamma <- R6::R6Class(
   "torch_Gamma",
   lock_objects = FALSE,
@@ -21,12 +23,8 @@ Gamma <- R6::R6Class(
       broadcasted        <- broadcast_all(list(concentration, rate))
       self$concentration <- broadcasted[[1]]
       self$rate          <- broadcasted[[2]]
-      
-      if (inherits(concentration, "numeric") & inherits(rate, "numeric"))
-        batch_shape <- NULL
-      else
-        batch_shape <- self$concentration$size()
-      
+
+      batch_shape <- self$concentration$size()
       super$initialize(batch_shape, validate_args=validate_args)
     },
     
@@ -47,7 +45,8 @@ Gamma <- R6::R6Class(
     },
     
     log_prob = function(value){
-      value <- torch_tensor(value, dtype = self$rate$dtype, device = self$rate$device)
+      if (is.numeric(value))
+        value <- torch_tensor(value, dtype = self$rate$dtype, device = self$rate$device)
       if (self$.validate_args)
         self$.validate_sample(value)
       (self$concentration * torch_log(self$rate) +
@@ -93,7 +92,7 @@ Gamma <- R6::R6Class(
 #' @examples 
 #' m <- distr_gamma(torch_tensor(1.0), torch_tensor(1.0))
 #' m$sample()  # Gamma distributed with concentration=1 and rate=1
+#' @export
 distr_gamma <- function(concentration, rate, validate_args = NULL){
   Gamma$new(concentration, rate, validate_args)
 }
-
