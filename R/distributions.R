@@ -173,17 +173,22 @@ Distribution <- R6::R6Class(
     
     print = function(){
     
+      self_list <- as.list(self)
+      
       param_names <- 
         names(self$.arg_constraints)[
-          names(self$.arg_constraints) %in% names(as.list(self))
+          names(self$.arg_constraints) %in% names(self_list)
             ]
       
-      args_string <- paste0(
-        param_names, collapse = ","
+      args_string <- paste(
+        param_names, sapply(self_list[param_names], function(x) {
+          as.array(if (is.function(x)) x() else x)
+        }),
+        sep = "=", collapse = ", "
       )
       
       class_name <- class(self)[1]
-      cat(glue("{class_name} ({args_string})"))
+      cat(glue::glue("{class_name} ({args_string})"))
     }
   ),
   
