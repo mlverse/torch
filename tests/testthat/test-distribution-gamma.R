@@ -10,7 +10,7 @@ test_that("Gamma distribution - rsample", {
     alphas <- torch_tensor(
       rep(alpha, num_samples), dtype = torch_float(), requires_grad = TRUE
     )
-    betas <- alphas$new_zeros(num_samples) + 1
+    betas <- torch_tensor(rep(1, num_samples))
     
     x <- distr_gamma(alphas, betas)$rsample()
     x$sum()$backward()
@@ -27,7 +27,7 @@ test_that("Gamma distribution - rsample", {
     cdf_x <- dgamma(x, alpha)
     expected_grad <- -cdf_alpha / cdf_x
     rel_error <- abs(actual_grad - expected_grad) / (expected_grad + 1e-30)
-    expect_lt(max(rel_error), 0.001)
+    expect_lt(max(rel_error), 0.0005)
   }
 })
 
