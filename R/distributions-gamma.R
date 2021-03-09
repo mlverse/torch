@@ -77,7 +77,7 @@ Gamma <- R6::R6Class(
     },
     
     .natural_params = function(){
-      list(self$self.concentration - 1, - self$rate)
+      list(self$concentration - 1, - self$rate)
     }
   )
 )
