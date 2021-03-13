@@ -786,7 +786,7 @@ nn_multihead_attention <- nn_module(
   },
   reset_parameters = function() {
     
-    if (self$qkv_same_embed_dim) {
+    if (self$qkv_same_embed_dim_) {
       nn_init_xavier_uniform_(self$in_proj_weight)
     } else {
       nn_init_xavier_uniform_(self$q_proj_weight)
