@@ -558,7 +558,7 @@ nnf_multi_head_attention_forward <- function(
   
   if (!use_separate_proj_weight) {
     
-    if (torch_equal(query, key) & torch_equal(key, value)) {
+    if (torch_equal(query, key) && torch_equal(key, value)) {
       # self-attention
       o <- nnf_linear(query, in_proj_weight, in_proj_bias)$chunk(3, dim = -1)
       q <- o[[1]]; k <- o[[2]]; v <- o[[3]]
