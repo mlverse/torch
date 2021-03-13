@@ -655,14 +655,14 @@ nnf_multi_head_attention_forward <- function(
     }
   }
   
-  q <- q$contiguous()$view(c(tgt_len, bsz * num_heads, head_dim))$transpose(0, 1)
+  q <- q$contiguous()$view(c(tgt_len, bsz * num_heads, head_dim))$transpose(1, 2)
   
   if (!is.null(k)) {
-    k <- k$contiguous()$view(c(-1, bsz * num_heads, head_dim))$transpose(0, 1)
+    k <- k$contiguous()$view(c(-1, bsz * num_heads, head_dim))$transpose(1, 2)
   }
   
   if (!is.null(v)) {
-    v <- v$contiguous()$view(c(-1, bsz * num_heads, head_dim))$transpose(0, 1)
+    v <- v$contiguous()$view(c(-1, bsz * num_heads, head_dim))$transpose(1, 2)
   }
   
   
@@ -693,7 +693,7 @@ nnf_multi_head_attention_forward <- function(
     
   }
   
-  attn_output_weights <- torch_bmm(q, k$transpose(1, 2))
+  attn_output_weights <- torch_bmm(q, k$transpose(2, 3))
   
   if (!is.null(attn_mask)) {
     if (attn_mask$dtype == torch_bool()) {
@@ -721,7 +721,7 @@ nnf_multi_head_attention_forward <- function(
                                      training=training)
   
   attn_output <- torch_bmm(attn_output_weights, v)
-  attn_output <- attn_output$transpose(0, 1)$contiguous()$view(c(tgt_len, bsz, embed_dim))
+  attn_output <- attn_output$transpose(1, 2)$contiguous()$view(c(tgt_len, bsz, embed_dim))
   attn_output <- nnf_linear(attn_output, out_proj_weight, out_proj_bias)
   
   if (need_weights) {
