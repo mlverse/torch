@@ -796,7 +796,7 @@ nn_multihead_attention <- nn_module(
     
     if (!is.null(self$in_proj_bias)) {
       nn_init_constant_(self$in_proj_bias, 0)
-      nn_init_constant_(self$out_proj_bias, 0)
+      nn_init_constant_(self$out_proj$bias, 0)
     }
     
     if (!is.null(self$bias_k)) {
