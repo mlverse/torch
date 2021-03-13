@@ -655,13 +655,15 @@ nnf_multi_head_attention_forward <- function(
     }
   }
   
-  q <- q$contiguous()$view(tgt_len, bsz * num_heads, head_dim)$transpose(0,1)
+  q <- q$contiguous()$view(c(tgt_len, bsz * num_heads, head_dim))$transpose(0, 1)
   
-  if (!is.null(k))
-    k <- k$contiguous()$view(-1, bsz * num_heads, head_dim)$transpose(0,1)
+  if (!is.null(k)) {
+    k <- k$contiguous()$view(c(-1, bsz * num_heads, head_dim))$transpose(0, 1)
+  }
   
-  if (!is.null(v))
-    v <- v$contiguous()$view(-1, bsz * num_heads, head_dim)$transpose(0,1)
+  if (!is.null(v)) {
+    v <- v$contiguous()$view(c(-1, bsz * num_heads, head_dim))$transpose(0, 1)
+  }
   
   
   if (!is.null(static_k))
@@ -702,13 +704,16 @@ nnf_multi_head_attention_forward <- function(
   }
   
   if (!is.null(key_padding_mask)) {
-    attn_output_weights <- attn_output_weights$view(bsz, num_heads, tgt_len, src_len)
+    attn_output_weights <- attn_output_weights$view(c(bsz, num_heads, tgt_len, src_len))
     attn_output_weights <- attn_output_weights$masked_fill(
       key_padding_mask$unsqueeze(1)$unsqueeze(2),
       -Inf
     )
-    attn_output_weights <- attn_output_weights$view(bsz * num_heads, tgt_len, 
-                                                    src_len)
+    attn_output_weights <- attn_output_weights$view(c(
+      bsz * num_heads, 
+      tgt_len,
+      src_len
+    ))
   }
   
   attn_output_weights <- nnf_softmax(attn_output_weights, dim=-1)
@@ -716,12 +721,15 @@ nnf_multi_head_attention_forward <- function(
                                      training=training)
   
   attn_output <- torch_bmm(attn_output_weights, v)
-  attn_output <- attn_output$transpose(0, 1)$contiguous()$view(tgt_len, bsz, embed_dim)
+  attn_output <- attn_output$transpose(0, 1)$contiguous()$view(c(tgt_len, bsz, embed_dim))
   attn_output <- nnf_linear(attn_output, out_proj_weight, out_proj_bias)
   
   if (need_weights) {
-    attn_output_weights <- attn_output_weights$view(bsz, num_heads, tgt_len, 
-                                                    src_len)
+    attn_output_weights <- attn_output_weights$view(c(
+      bsz, num_heads, 
+      tgt_len,
+      src_len
+    ))
     return(list(attn_output, attn_output_weights$sum(dim = 1)/num_heads))
   } else {
     return(list(attn_output, NULL))
