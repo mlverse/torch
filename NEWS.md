@@ -27,6 +27,8 @@
 - Added normal distribution (#462)
 - Added bernoulli distribution (#484)
 - `as.list` for `nn_modules` (#492)
+- Enumerate support in Bernoulli distribution (#490)
+- Bugfixes in `nn_multihead_attention` (#496)
 
 # torch 0.2.1
 
