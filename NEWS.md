@@ -29,6 +29,7 @@
 - `as.list` for `nn_modules` (#492)
 - Enumerate support in Bernoulli distribution (#490)
 - Bugfixes in `nn_multihead_attention` (#496)
+- Added Poisson Distriibution (#495)
 
 # torch 0.2.1
 
