@@ -786,7 +786,7 @@ nn_multihead_attention <- nn_module(
   },
   reset_parameters = function() {
     
-    if (self$qkv_same_embed_dim) {
+    if (self$qkv_same_embed_dim_) {
       nn_init_xavier_uniform_(self$in_proj_weight)
     } else {
       nn_init_xavier_uniform_(self$q_proj_weight)
@@ -796,7 +796,7 @@ nn_multihead_attention <- nn_module(
     
     if (!is.null(self$in_proj_bias)) {
       nn_init_constant_(self$in_proj_bias, 0)
-      nn_init_constant_(self$out_proj_bias, 0)
+      nn_init_constant_(self$out_proj$bias, 0)
     }
     
     if (!is.null(self$bias_k)) {
@@ -815,7 +815,7 @@ nn_multihead_attention <- nn_module(
         query, key, value, self$embed_dim, self$num_heads,
         self$in_proj_weight, self$in_proj_bias,
         self$bias_k, self$bias_v, self$add_zero_attn,
-        self$dropout, self$out_proj.weight, self$out_proj.bias,
+        self$dropout, self$out_proj$weight, self$out_proj$bias,
         training=self$training,
         key_padding_mask=key_padding_mask, need_weights=need_weights,
         attn_mask=attn_mask, use_separate_proj_weight=TRUE,
@@ -826,7 +826,7 @@ nn_multihead_attention <- nn_module(
         query, key, value, self$embed_dim, self$num_heads,
         self$in_proj_weight, self$in_proj_bias,
         self$bias_k, self$bias_v, self$add_zero_attn,
-        self$dropout, self$out_proj.weight, self$out_proj.bias,
+        self$dropout, self$out_proj$weight, self$out_proj$bias,
         training=self$training,
         key_padding_mask=key_padding_mask, need_weights=need_weights,
         attn_mask=attn_mask)
