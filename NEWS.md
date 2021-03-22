@@ -26,6 +26,7 @@
 - Added backend functions allowing us to query which optimizations LibTorch was compiled with (#476)
 - Added normal distribution (#462)
 - Added bernoulli distribution (#484)
+- `as.list` for `nn_modules` (#492)
 
 # torch 0.2.1
 
