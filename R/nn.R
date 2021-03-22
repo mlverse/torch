@@ -639,6 +639,11 @@ nn_module_list <- nn_module(
 }
 
 #' @export
+as.list.nn_module_list <- function(x, ...) {
+  x$.__enclos_env__$private$modules_
+}
+
+#' @export
 length.nn_module_list <- function(x, ...) {
   length(x$.__enclos_env__$private$modules_)
 }
