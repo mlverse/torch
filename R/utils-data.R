@@ -121,6 +121,9 @@ tensor_dataset <- dataset(
         x[index, ..]
     })
   },
+  .getbatch = function(index) {
+    self$.getitem(index)
+  },
   .length = function() {
     self$tensors[[1]]$shape[1]
   }
