@@ -378,3 +378,27 @@ test_that("globals can be found", {
   expect_tensor_shape(dataloader_next(iter), c(10, 5, 5))
   
 })
+
+test_that("datasets can use an optional .getbatch method for speedups", {
+  
+  d <- dataset(
+    initialize = function() {},
+    .getbatch = function(indexes) {
+      list(
+        torch_randn(length(indexes), 10),
+        torch_randn(length(indexes), 1)
+      )
+    },
+    .length = function() {
+      100
+    }
+  )
+  
+  dl <- dataloader(d(), batch_size = 10)
+  coro::loop(for (x in dl) {
+    expect_length(x, 2)
+    expect_tensor_shape(x[[1]], c(10, 10))
+    expect_tensor_shape(x[[2]], c(10, 1))
+  })
+  
+})
