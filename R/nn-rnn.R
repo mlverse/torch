@@ -443,6 +443,12 @@ nn_lstm <- nn_module(
       batch_first = batch_first, dropout = dropout, 
       bidirectional = bidirectional, ...
     )
+  },
+  permute_hidden = function(hx, permutation) {
+    if (is.null(permutation))
+      hx
+    else
+      lapply(hx, nn_apply_permutation, permutation)
   }
 )
 
