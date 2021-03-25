@@ -166,6 +166,8 @@ DataLoader <- R6::R6Class(
         
       }
       
+      self$.has_getbatch <- !is.null(dataset$.getbatch)
+      
       if (!is.null(batch_size) && is.null(batch_sampler)) {
         batch_sampler <- BatchSampler$new(sampler, batch_size, drop_last)
       }
@@ -212,10 +214,10 @@ DataLoader <- R6::R6Class(
   ),
   active = list(
     .auto_collation = function() {
-      !is.null(self$batch_sampler)
+      !is.null(self$batch_sampler) && !self$.has_getbatch
     },
     .index_sampler = function() {
-      if (self$.auto_collation) {
+      if (self$.auto_collation || self$.has_getbatch) {
         return(self$batch_sampler)
       } else {
         return(self$sampler)
