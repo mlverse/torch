@@ -30,6 +30,7 @@
 - Enumerate support in Bernoulli distribution (#490)
 - Bugfixes in `nn_multihead_attention` (#496)
 - Added Poisson Distriibution (#495)
+- Fixed bug when using packed sequences with `nn_lstm` (#500)
 
 # torch 0.2.1
 
