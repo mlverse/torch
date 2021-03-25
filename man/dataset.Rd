@@ -31,10 +31,10 @@ objects.}
 }
 \description{
 All datasets that represent a map from keys to data samples should subclass this
-class. All subclasses should overwrite the .getitem() method, which supports
+class. All subclasses should overwrite the \code{.getitem()} method, which supports
 fetching a data sample for a given key. Subclasses could also optionally
-overwrite .length(), which is expected to return the size of the dataset
-(e.g. number of samples) by many ~torch.utils.data.Sampler implementations
+overwrite \code{.length()}, which is expected to return the size of the dataset
+(e.g. number of samples) used by many sampler implementations
 and the default options of \code{\link[=dataloader]{dataloader()}}.
 }
 \note{
