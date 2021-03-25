@@ -32,6 +32,7 @@
 - Added Poisson Distriibution (#495)
 - Fixed bug when using packed sequences with `nn_lstm` (#500)
 - Allow optional .getbatch in datasets/dataloaders (#498)
+- Fixed bug in the `to` method of `nn_module` that would reset the `requires_grad` attribute of parameters. (#501)
 
 # torch 0.2.1
 
