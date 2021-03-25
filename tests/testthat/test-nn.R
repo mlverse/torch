@@ -528,3 +528,16 @@ test_that("train/eval returns a callable module", {
   expect_s3_class(m$train(), "nn_module")
   
 })
+
+test_that("calling to doesn't modify the requires_grad attribute of a parameter", {
+  
+  # see https://github.com/mlverse/torch/issues/491
+  
+  x <- nn_linear(1,1)
+  expect_true(x$weight$requires_grad)
+  x$weight$requires_grad_(FALSE)
+  expect_true(!x$weight$requires_grad)
+  x$to(device = "cpu")
+  expect_true(!x$weight$requires_grad)
+  
+})
