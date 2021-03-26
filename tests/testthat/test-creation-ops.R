@@ -93,10 +93,10 @@ test_that("empty_like", {
 })
 
 test_that("arange", {
-  x <- torch_arange(1,10)
+  x <- torch_arange(1,9)
   expect_equal(x$size(1), 9)
   
-  expect_warning(x <- torch_range(1, 10))
+  expect_warning(x <- torch_range(1, 9))
   expect_equal(x$size(1), 9)
 })
 

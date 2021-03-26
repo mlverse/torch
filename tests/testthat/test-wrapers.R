@@ -47,7 +47,7 @@ test_that("torch_multi_margin_loss", {
 
 test_that("torch_topk", {
   
-  x <- torch_arange(1, 16)$view(c(5, 3))
+  x <- torch_arange(1, 15)$view(c(5, 3))
   expect_equal_to_r(torch_topk(x, 2)[[2]], 
                     matrix(c(3, 2), nrow = 5, ncol = 2, byrow = TRUE))
   

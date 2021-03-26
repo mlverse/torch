@@ -155,8 +155,8 @@ test_that("einsum", {
 
 test_that("tensordot", {
   
-  a <- torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
-  b <- torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
+  a <- torch_arange(start = 1, end = 60)$reshape(c(3, 4, 5))
+  b <- torch_arange(start = 1, end = 24)$reshape(c(4, 3, 2))
   out <- torch_tensordot(a, b, list(c(2, 1), c(1, 2)))
   
   expect_tensor_shape(out, c(5,2))

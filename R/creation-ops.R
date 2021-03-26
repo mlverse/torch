@@ -250,7 +250,7 @@ torch_arange <- function(start, end, step = 1, dtype = NULL, layout = torch_stri
     )
   )
   args$start <- start
-  args$end <- end
+  args$end <- end + 1
   args$step <- step
   do.call(.torch_arange, args)
 }
