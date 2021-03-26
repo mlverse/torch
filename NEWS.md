@@ -33,6 +33,7 @@
 - Fixed bug when using packed sequences with `nn_lstm` (#500)
 - Allow optional .getbatch in datasets/dataloaders (#498)
 - Fixed bug in the `to` method of `nn_module` that would reset the `requires_grad` attribute of parameters. (#501)
+- `nn_lstm`, `nn_gru` and `nn_gru` can now use cudnn accelerations when available (#503).
 
 # torch 0.2.1
 
