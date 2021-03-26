@@ -45,11 +45,9 @@ For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{be
 }
 
 \examples{
-if (torch_is_installed()) {
 
-vec1 = torch_arange(1., 4.)
-vec2 = torch_arange(1., 3.)
+vec1 = torch_arange(1, 3)
+vec2 = torch_arange(1, 2)
 M = torch_zeros(c(3, 2))
 torch_addr(M, vec1, vec2)
-}
 }
