@@ -122,7 +122,7 @@ nn_rnn_base <- nn_module(
   },
   flatten_parameters = function() {
     # Short-circuits if _flat_weights is only partially instantiated
-    if (length(self$flat_weights_) != length(self$flat_weights_names_))
+    if (length(self$flat_weights_) != length(self$flat_weight_names_))
       return()
     
     for (w in self$flat_weights_)
@@ -136,7 +136,7 @@ nn_rnn_base <- nn_module(
     
     for (fw in self$flat_weights_) {
       if (!is_torch_tensor(fw) || !(fw$dtype == dtype) || !fw$is_cuda || 
-          torch_cudnn_is_acceptable(fw))
+          !torch_cudnn_is_acceptable(fw))
         return()
     }
     
@@ -144,22 +144,19 @@ nn_rnn_base <- nn_module(
     # a sufficient check, because overlapping parameter buffers that don't completely
     # alias would break the assumptions of the uniqueness check in
     # Module.named_parameters().
-    unique_data_ptrs <- unique(sapply(self$flat_weights_$storage()$data_ptr()))
+    unique_data_ptrs <- unique(sapply(self$flat_weights_, function(x) x$storage()$data_ptr()))
     if (length(unique_data_ptrs) != length(self$flat_weights_))
       return()
     
     with_no_grad({
       
-      if (torch__use_cudnn_rnn_flatten_weight()) {
+      if (cpp_torch_namespace__use_cudnn_rnn_flatten_weight()) {
         num_weights <- if (self$bias) 4 else 2
-        if (self$proj_size > 0) {
-          num_weights <-  num_weights + 1
-        }
         torch__cudnn_rnn_flatten_weight(
-          self$flat_weights_, num_weights,
-          self$input_size, rnn.get_cudnn_mode(self$mode),
-          self$hidden_size, self$proj_size, self$num_layers,
-          self$batch_first, as.logical(self$bidirectional)
+          weight_arr = self$flat_weights_, weight_stride0 = num_weights, 
+          input_size = self$input_size, mode = rnn.get_cudnn_mode(self$mode), 
+          hidden_size = self$hidden_size, num_layers = self$num_layers, 
+          batch_first = self$batch_first, bidirectional = as.logical(self$bidirectional)
         )
       }
       
