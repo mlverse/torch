@@ -581,24 +581,24 @@ for (epoch in 1:num_epochs) {
   
   train_losses <- c()
 
-  for (b in enumerate(train_dl)) {
+  coro::loop(for (b in train_dl) {
     
     loss <- train_batch(b)
     train_losses <- c(train_losses, loss)
     
-  }
+  })
 
   # don't forget to do this either
   model$eval()
   
   valid_losses <- c()
 
-  for (b in enumerate(valid_dl)) {
+  coro::loop(for (b in valid_dl) {
     
     loss <- valid_batch(b)
     valid_losses <- c(valid_losses, loss)
     
-  }
+  })
 
   cat(sprintf("\nLoss at epoch %d: training: %1.5f, validation: %1.5f\n", epoch, mean(train_losses), mean(valid_losses)))
   
@@ -652,9 +652,9 @@ test_losses <- c()
 preds <- c()
 targets <- c()
 
-for (b in enumerate(test_dl)) {
+coro::loop(for (b in test_dl) {
   test_batch(b)
-}
+})
 
 mean(test_losses)
 ```

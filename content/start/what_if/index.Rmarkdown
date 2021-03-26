@@ -184,9 +184,9 @@ test_batch <- function(b) {
 test_losses <- c()
 test_accuracy <- c()
 
-for (b in enumerate(test_dl)) {
+coro::loop(for (b in test_dl) {
   test_batch(b)
-}
+})
 
 mean(test_losses)
 mean(test_accuracy)
@@ -338,7 +338,7 @@ model <- model$to(device = "cuda")
 
 The data we just move "on demand", that is:
 
--    when we're passing the input to the model
+-   when we're passing the input to the model
 
 -   when we compute the loss (assuming the predictions are CUDA tensors, as they will be when returned by a GPU-resident model)
 

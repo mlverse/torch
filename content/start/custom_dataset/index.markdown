@@ -281,7 +281,7 @@ for (epoch in 1:20) {
   model$train()
   train_losses <- c()  
 
-  for (b in enumerate(train_dl)) {
+  coro::loop(for (b in train_dl) {
     
     optimizer$zero_grad()
     output <- model(b$x_cont, b$x_cat)
@@ -292,18 +292,18 @@ for (epoch in 1:20) {
     
     train_losses <- c(train_losses, loss$item())
     
-  }
+  })
 
   model$eval()
   valid_losses <- c()
 
-  for (b in enumerate(valid_dl)) {
+  coro::loop(for (b in valid_dl) {
     
     output <- model(b$x_cont, b$x_cat)
     loss <- nnf_nll_loss(output, b$y)
     valid_losses <- c(valid_losses, loss$item())
     
-  }
+  })
 
   cat(sprintf("Loss at epoch %d: training: %3.3f, validation: %3.3f\n", epoch, mean(train_losses), mean(valid_losses)))
 }

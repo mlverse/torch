@@ -20,6 +20,8 @@ You've run your first [torch demo](/start/), and acquainted yourself with the [m
 
 ## Time series forecasting {#ts}
 
+-   [Introductory time-series forecasting with torch](https://blogs.rstudio.com/ai/posts/2021-03-10-forecasting-time-series-with-torch_1/) is a thorough introduction to RNNs (GRUs/LSTMs), explaining usage and terminology. [torch time series continued: A first go at multi-step prediction](https://blogs.rstudio.com/ai/posts/2021-03-11-forecasting-time-series-with-torch_2/) builds on this, and widens to the scope to multi-step-prediction.
+
+-   [torch time series, take three: Sequence-to-sequence prediction](https://blogs.rstudio.com/ai/posts/2021-03-16-forecasting-time-series-with-torch_3/) and [torch time series, final episode: Attention](https://blogs.rstudio.com/ai/posts/2021-03-19-forecasting-time-series-with-torch_4/) expand on the prior two articles, introducing more advanced concepts like sequence-to-sequence processing and attention.
+
 -   [Convolutional LSTM for spatial forecasting](https://blogs.rstudio.com/ai/posts/2020-12-17-torch-convlstm/) is an intermediate-level example that shows how to build a convolutional LSTM from scratch.
-
-
