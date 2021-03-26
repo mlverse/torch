@@ -135,6 +135,7 @@ sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
 }
 
 \examples{
+if (torch_is_installed()) {
 # With square kernels and equal stride
 m <- nn_conv_transpose2d(16, 33, 3, stride=2)
 # non-square kernels and unequal stride and with padding
@@ -150,4 +151,5 @@ h$size()
 output <- upsample(h, output_size=input$size())
 output$size()
 
+}
 }

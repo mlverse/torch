@@ -41,6 +41,7 @@ broadcastable .
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a = torch_randn(c(3))
 a
@@ -52,4 +53,5 @@ a
 b = torch_randn(c(1, 4))
 b
 torch_mul(a, b)
+}
 }

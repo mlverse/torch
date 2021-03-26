@@ -34,6 +34,8 @@ Returns a random permutation of integers from \code{0} to \code{n - 1}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 torch_randperm(4)
+}
 }

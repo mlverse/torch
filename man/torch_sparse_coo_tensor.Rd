@@ -40,6 +40,7 @@ coordinates in the indices, and the value at that index is the sum of all duplic
 }
 
 \examples{
+if (torch_is_installed()) {
 
 i = torch_tensor(matrix(c(1, 2, 2, 3, 1, 3), ncol = 3, byrow = TRUE), dtype=torch_int64())
 v = torch_tensor(c(3, 4, 5), dtype=torch_float32())
@@ -57,4 +58,5 @@ S = torch_sparse_coo_tensor(
   torch_empty(c(0, 2)), 
   c(1, 2)
 )
+}
 }

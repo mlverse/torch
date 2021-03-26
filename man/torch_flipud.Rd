@@ -26,8 +26,10 @@ Rows are preserved, but appear in a different order than before.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 x <- torch_arange(start = 0, end = 4)$view(c(2, 2))
 x
 torch_flipud(x)
+}
 }

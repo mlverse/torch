@@ -30,9 +30,11 @@ Returns cosine similarity between x1 and x2, computed along dim.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 input1 = torch_randn(c(100, 128))
 input2 = torch_randn(c(100, 128))
 output = torch_cosine_similarity(input1, input2)
 output
+}
 }

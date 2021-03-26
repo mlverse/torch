@@ -25,11 +25,13 @@ Rotation direction is from the first towards the second axis if k > 0, and from 
 }
 
 \examples{
+if (torch_is_installed()) {
 
-x <- torch_arange(1, 4)$view(c(2, 2))
+x = torch_arange(0, 4)$view(c(2, 2))
 x
 torch_rot90(x, 1, c(1, 2))
-x <- torch_arange(1, 8)$view(c(2, 2, 2))
+x = torch_arange(0, 8)$view(c(2, 2, 2))
 x
 torch_rot90(x, 1, c(1, 2))
+}
 }

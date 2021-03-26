@@ -25,6 +25,8 @@ of the input tensor \code{input}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 torch_exp(torch_tensor(c(0, log(2))))
+}
 }

@@ -57,6 +57,7 @@ or as given by \code{output_size} in the call operator
 }
 
 \examples{
+if (torch_is_installed()) {
   
 # pool of square window of size=3, stride=2
 pool <- nn_max_pool3d(3, stride=2, return_indices=TRUE)
@@ -65,4 +66,5 @@ out <- pool(torch_randn(20, 16, 51, 33, 15))
 unpooled_output <- unpool(out[[1]], out[[2]])
 unpooled_output$size()
 
+}
 }

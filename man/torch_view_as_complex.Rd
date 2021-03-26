@@ -33,9 +33,11 @@ other dimensions must be even numbers.
 }
 
 \examples{
+if (torch_is_installed()) {
 if (FALSE) {
 x=torch_randn(c(4, 2))
 x
 torch_view_as_complex(x)
+}
 }
 }

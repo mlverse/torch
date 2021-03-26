@@ -90,6 +90,7 @@ of K-dimensional loss.
 }
 
 \examples{
+if (torch_is_installed()) {
 m <- nn_log_softmax(dim=2)
 loss <- nn_nll_loss()
 # input is of size N x C = 3 x 5
@@ -112,4 +113,5 @@ target <- torch_empty(N, 8, 8, dtype=torch_long())$random_(1, C)
 output <- loss(m(conv(data)), target)
 output$backward()
 
+}
 }

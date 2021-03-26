@@ -62,6 +62,7 @@ doing something that may cause an incorrect trace to be produced.
 }
 
 \examples{
+if (torch_is_installed()) {
 fn <- function(x) {
  torch_relu(x)
 }
@@ -69,4 +70,5 @@ input <- torch_tensor(c(-1, 0, 1))
 tr_fn <- jit_trace(fn, input)
 tr_fn(input)
 
+}
 }

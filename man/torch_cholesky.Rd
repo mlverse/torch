@@ -43,6 +43,7 @@ matrices.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a = torch_randn(c(3, 3))
 a = torch_mm(a, a$t()) # make symmetric positive-definite
@@ -56,5 +57,6 @@ a = torch_matmul(a, a$transpose(-1, -2)) + 1e-03 # make symmetric positive-defin
 l = torch_cholesky(a)
 z = torch_matmul(l, l$transpose(-1, -2))
 torch_max(torch_abs(z - a)) # Max non-zero
+}
 }
 }

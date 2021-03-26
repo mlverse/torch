@@ -61,6 +61,7 @@ For CPU tensors, this method is currently only available with MKL. Use
 }
 
 \examples{
+if (torch_is_installed()) {
 
 # unbatched 2D FFT
 x = torch_randn(c(4, 3, 2))
@@ -71,4 +72,5 @@ torch_fft(x, 1)
 x = torch_randn(c(3, 3, 5, 5, 2))
 torch_fft(x, 2)
 
+}
 }

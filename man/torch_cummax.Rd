@@ -28,8 +28,10 @@ location of each maximum value found in the dimension \code{dim}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a = torch_randn(c(10))
 a
 torch_cummax(a, dim=1)
+}
 }

@@ -34,6 +34,7 @@ step size determined by the target output size.
 The number of output features is equal to the number of input planes.
 }
 \examples{
+if (torch_is_installed()) {
 # pool of cubic window of size=3, and target output size 13x12x11
 m = nn_fractional_max_pool3d(3, output_size=c(13, 12, 11))
 # pool of cubic window and target output size being half of input size
@@ -41,4 +42,5 @@ m = nn_fractional_max_pool3d(3, output_ratio=c(0.5, 0.5, 0.5))
 input = torch_randn(20, 16, 50, 32, 16)
 output = m(input)
 
+}
 }

@@ -38,7 +38,9 @@ by the variable argument \code{size}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 torch_zeros(c(2, 3))
 torch_zeros(c(5))
+}
 }

@@ -34,6 +34,7 @@ the main diagonal. The main diagonal are the set of indices
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a = torch_randn(c(3, 3))
 a
@@ -42,4 +43,5 @@ b = torch_randn(c(4, 6))
 b
 torch_tril(b, diagonal=1)
 torch_tril(b, diagonal=-1)
+}
 }

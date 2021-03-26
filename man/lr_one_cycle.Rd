@@ -117,6 +117,7 @@ You must either provide a value for total_steps or provide a value for both
 epochs and steps_per_epoch.
 }
 \examples{
+if (torch_is_installed()) {
 \dontrun{
 data_loader <- dataloader(...)
 optimizer <- optim_sgd(model$parameters, lr=0.1, momentum=0.9)
@@ -131,4 +132,5 @@ for (i in 1:epochs) {
 }
 }
 
+}
 }

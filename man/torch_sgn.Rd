@@ -25,9 +25,11 @@ returns the signs of the elements of \code{input} (see \code{\link{torch_sign}})
 }
 
 \examples{
+if (torch_is_installed()) {
 if (FALSE) {
 x <- torch_tensor(c(3+4i, 7-24i, 0, 1+2i))
 x$sgn()
 torch_sgn(x)
+}
 }
 }

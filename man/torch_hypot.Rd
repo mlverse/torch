@@ -29,6 +29,8 @@ broadcastable .
 }
 
 \examples{
+if (torch_is_installed()) {
 
 torch_hypot(torch_tensor(c(4.0)), torch_tensor(c(3.0, 4.0, 5.0)))
+}
 }

@@ -32,6 +32,7 @@ processed in the topological ordering, by calling \code{backward()} methods of e
 Function object, and passing returned gradients on to next Function's.
 }
 \examples{
+if (torch_is_installed()) {
 
 exp2 <- autograd_function(
   forward = function(ctx, i) {
@@ -44,4 +45,5 @@ exp2 <- autograd_function(
   }
 )
 
+}
 }

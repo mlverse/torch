@@ -24,10 +24,12 @@ If no dim is specified then all non-zeros in the tensor are counted.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 x <- torch_zeros(3,3)
 x[torch_randn(3,3) > 0.5] = 1
 x
 torch_count_nonzero(x)
 torch_count_nonzero(x, dim=1)
+}
 }

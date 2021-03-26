@@ -39,6 +39,7 @@ the outputs tensor having 1 fewer dimension than \code{input}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a = torch_randn(c(1, 3))
 a
@@ -48,4 +49,5 @@ torch_median(a)
 a = torch_randn(c(4, 5))
 a
 torch_median(a, 1)
+}
 }

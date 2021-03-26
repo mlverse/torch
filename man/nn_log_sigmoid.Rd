@@ -22,8 +22,10 @@ dimensions
 }
 
 \examples{
+if (torch_is_installed()) {
 m <- nn_log_sigmoid()
 input <- torch_randn(2)
 output <- m(input)
 
+}
 }

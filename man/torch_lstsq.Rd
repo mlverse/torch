@@ -47,6 +47,7 @@ remaining \eqn{m - n} rows of that column.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 A = torch_tensor(rbind(
  c(1,1,1),
@@ -64,4 +65,5 @@ B = torch_tensor(rbind(
 ))
 out = torch_lstsq(B, A)
 out[[1]]
+}
 }

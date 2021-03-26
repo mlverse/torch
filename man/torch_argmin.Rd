@@ -33,6 +33,7 @@ documentation for the exact semantics of this method.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a = torch_randn(c(4, 4))
 a
@@ -42,4 +43,5 @@ torch_argmin(a)
 a = torch_randn(c(4, 4))
 a
 torch_argmin(a, dim=1)
+}
 }
