@@ -25,8 +25,6 @@ of \code{input}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_expm1(torch_tensor(c(0, log(2))))
-}
 }

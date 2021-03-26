@@ -24,10 +24,8 @@ Computes the element-wise angle (in radians) of the given \code{input} tensor.
 }
 
 \examples{
-if (torch_is_installed()) {
 \dontrun{
 torch_angle(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))*180/3.14159
 }
 
-}
 }

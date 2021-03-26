@@ -33,7 +33,6 @@ documentation for the exact semantics of this method.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 \dontrun{
 a = torch_randn(c(4, 4))
@@ -45,5 +44,4 @@ torch_argmax(a)
 a = torch_randn(c(4, 4))
 a
 torch_argmax(a, dim=1)
-}
 }

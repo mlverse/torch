@@ -23,7 +23,6 @@ other changes to the learning rate from outside this scheduler. When
 last_epoch=-1, sets initial lr as lr.
 }
 \examples{
-if (torch_is_installed()) {
 \dontrun{
 # Assuming optimizer uses lr = 0.05 for all groups
 # lr = 0.05     if epoch < 30
@@ -38,5 +37,4 @@ for (epoch in 1:100) {
 }
 }
 
-}
 }

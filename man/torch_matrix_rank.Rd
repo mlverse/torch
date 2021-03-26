@@ -33,9 +33,7 @@ is the epsilon value for the datatype of \code{input}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a = torch_eye(10)
 torch_matrix_rank(a)
-}
 }

@@ -25,10 +25,8 @@ the largest integer less than or equal to each element.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a = torch_randn(c(4))
 a
 torch_floor(a)
-}
 }

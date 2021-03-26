@@ -27,12 +27,10 @@ to the original shape.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 x = torch_tensor(c(1, 2, 3, 4, 5, 6, 7, 8))$view(c(4, 2))
 x
 torch_roll(x, 1, 1)
 torch_roll(x, -1, 1)
 torch_roll(x, shifts=list(2, 1), dims=list(1, 2))
-}
 }

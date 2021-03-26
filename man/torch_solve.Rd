@@ -37,7 +37,6 @@ batched outputs \verb{solution, LU}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 A = torch_tensor(rbind(c(6.80, -2.11,  5.66,  5.97,  8.23),
                       c(-6.05, -3.30,  5.36, -4.44,  1.08),
@@ -58,5 +57,4 @@ out = torch_solve(B, A)
 X = out[[1]]
 LU = out[[2]]
 torch_dist(B, A$matmul(X))
-}
 }

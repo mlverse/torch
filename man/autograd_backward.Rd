@@ -42,7 +42,6 @@ This function accumulates gradients in the leaves - you might need to zero
 them before calling it.
 }
 \examples{
-if (torch_is_installed()) {
 x <- torch_tensor(1, requires_grad = TRUE)
 y <- 2 * x
 
@@ -51,5 +50,4 @@ b <- 3 * a
 
 autograd_backward(list(y, b))
 
-}
 }

@@ -24,9 +24,7 @@ Computes the logarithm of the gamma function on \code{input}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a = torch_arange(0.5, 2, 0.5)
 torch_lgamma(a)
-}
 }

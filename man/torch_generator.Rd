@@ -12,7 +12,6 @@ that produces pseudo random numbers. Used as a keyword argument in many
 In-place random sampling functions.
 }
 \examples{
-if (torch_is_installed()) {
 
 # Via string
 generator <- torch_generator()
@@ -21,5 +20,4 @@ generator$set_current_seed(1234567L)
 generator$current_seed()
 
 
-}
 }

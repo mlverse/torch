@@ -81,7 +81,6 @@ targets, the target_lengths must add up to the total length of the tensor.
 }
 
 \examples{
-if (torch_is_installed()) {
 # Target are to be padded
 T <- 50      # Input sequence length
 C <- 20      # Number of classes (including blank)
@@ -118,7 +117,6 @@ ctc_loss <- nn_ctc_loss()
 loss <- ctc_loss(input, target, input_lengths, target_lengths)
 loss$backward()
 
-}
 }
 \references{
 A. Graves et al.: Connectionist Temporal Classification:

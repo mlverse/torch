@@ -18,9 +18,7 @@ at least 2 dimensions, and for tensors with more than 2 dimensions the
 trailing dimensions are flattened.
 }
 \examples{
-if (torch_is_installed()) {
 w <- torch_empty(3,5)
 nn_init_orthogonal_(w)
 
-}
 }

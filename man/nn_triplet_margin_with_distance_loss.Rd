@@ -80,7 +80,6 @@ otherwise.
 }
 
 \examples{
-if (torch_is_installed()) {
 # Initialize embeddings
 embedding <- nn_embedding(1000, 128)
 anchor_ids <- torch_randint(1, 1000, 1, dtype = torch_long())
@@ -115,5 +114,4 @@ triplet_loss <- nn_triplet_margin_with_distance_loss(
 
 output <- triplet_loss(anchor, positive, negative)
 
-}
 }

@@ -72,7 +72,6 @@ the second \code{int} for the height dimension and the third \code{int} for the 
 }
 
 \examples{
-if (torch_is_installed()) {
   
 # pool of square window of size=3, stride=2
 m = nn_avg_pool3d(3, stride=2)
@@ -81,5 +80,4 @@ m = nn_avg_pool3d(c(3, 2, 2), stride=c(2, 1, 2))
 input = torch_randn(20, 16, 50,44, 31)
 output = m(input)
 
-}
 }

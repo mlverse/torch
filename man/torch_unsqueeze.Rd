@@ -29,10 +29,8 @@ applied at \code{dim} = \code{dim + input.dim() + 1}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 x = torch_tensor(c(1, 2, 3, 4))
 torch_unsqueeze(x, 1)
 torch_unsqueeze(x, 2)
-}
 }

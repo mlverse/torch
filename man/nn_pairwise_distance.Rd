@@ -34,11 +34,9 @@ using the p-norm:
 }
 
 \examples{
-if (torch_is_installed()) {
 pdist <- nn_pairwise_distance(p=2)
 input1 <- torch_randn(100, 128)
 input2 <- torch_randn(100, 128)
 output <- pdist(input1, input2)
 
-}
 }

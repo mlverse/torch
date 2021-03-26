@@ -24,12 +24,10 @@ imaginary part equal to \code{imag}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 real <- torch_tensor(c(1, 2), dtype=torch_float32())
 imag <- torch_tensor(c(3, 4), dtype=torch_float32())
 z <- torch_complex(real, imag)
 z
 z$dtype
-}
 }

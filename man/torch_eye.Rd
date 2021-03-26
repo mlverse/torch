@@ -37,8 +37,6 @@ Returns a 2-D tensor with ones on the diagonal and zeros elsewhere.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_eye(3)
-}
 }

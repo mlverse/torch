@@ -47,7 +47,6 @@ evaluation modes.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 input <- torch_randn(20, 6, 10, 10)
 # Separate 6 channels into 3 groups
@@ -59,5 +58,4 @@ m <- nn_group_norm(1, 6)
 # Activating the module
 output <- m(input)
 
-}
 }

@@ -44,7 +44,6 @@ Adadelta update rule:
 }
 }
 \examples{
-if (torch_is_installed()) {
 \dontrun{
 optimizer <- optim_adadelta(model$parameters, lr = 0.1)
 optimizer$zero_grad()
@@ -52,5 +51,4 @@ loss_fn(model(input), target)$backward()
 optimizer$step()
 }
 
-}
 }

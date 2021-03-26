@@ -24,8 +24,6 @@ for more information on the type promotion logic.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_result_type(tensor1 = torch_tensor(c(1, 2), dtype=torch_int()), tensor2 = 1)
-}
 }

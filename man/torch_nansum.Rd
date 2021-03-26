@@ -41,7 +41,6 @@ output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a <- torch_tensor(c(1., 2., NaN, 4.))
 torch_nansum(a)
@@ -52,5 +51,4 @@ a <- torch_tensor(rbind(c(1, 2), c(3., NaN)))
 torch_nansum(a)
 torch_nansum(a, dim=1)
 torch_nansum(a, dim=2)
-}
 }

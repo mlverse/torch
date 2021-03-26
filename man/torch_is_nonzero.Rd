@@ -25,7 +25,6 @@ of sparse tensors).
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_is_nonzero(torch_tensor(c(0.)))
 torch_is_nonzero(torch_tensor(c(1.5)))
@@ -34,6 +33,5 @@ torch_is_nonzero(torch_tensor(c(3)))
 if (FALSE) {
 torch_is_nonzero(torch_tensor(c(1, 3, 5)))
 torch_is_nonzero(torch_tensor(c()))
-}
 }
 }

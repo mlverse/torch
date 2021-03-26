@@ -18,7 +18,6 @@ This context manager is thread local; it will not affect computation in
 other threads.
 }
 \examples{
-if (torch_is_installed()) {
 
 x <- torch_tensor(1, requires_grad=TRUE)
 with_no_grad({
@@ -29,5 +28,4 @@ with_no_grad({
 y$backward()
 x$grad
 
-}
 }

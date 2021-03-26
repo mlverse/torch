@@ -15,7 +15,6 @@ Returns a 2-dimensional view of each each input tensor with zero dimensions.
 Input tensors with two or more dimensions are returned as-is.
 }
 \examples{
-if (torch_is_installed()) {
 
 x <- torch_tensor(1.)
 x
@@ -26,5 +25,4 @@ torch_atleast_2d(x)
 x <- torch_tensor(0.5)
 y <- torch_tensor(1.)
 torch_atleast_2d(list(x,y))
-}
 }

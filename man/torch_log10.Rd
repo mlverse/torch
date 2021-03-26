@@ -25,10 +25,8 @@ of \code{input}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a = torch_rand(5)
 a
 torch_log10(a)
-}
 }

@@ -28,7 +28,6 @@ the complex conjugate of the first argument is used for the calculation of the d
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_vdot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
 if (FALSE) {
@@ -36,6 +35,5 @@ a <- torch_tensor(list(1 +2i, 3 - 1i))
 b <- torch_tensor(list(2 +1i, 4 - 0i))
 torch_vdot(a, b)
 torch_vdot(b, a)
-}
 }
 }

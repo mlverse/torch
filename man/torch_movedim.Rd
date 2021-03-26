@@ -28,7 +28,6 @@ their original order and appear at the positions not specified in \code{destinat
 }
 
 \examples{
-if (torch_is_installed()) {
 
 t <- torch_randn(c(3,2,1))
 t
@@ -36,5 +35,4 @@ torch_movedim(t, 2, 1)$shape
 torch_movedim(t, 2, 1)
 torch_movedim(t, c(2, 3), c(1, 2))$shape
 torch_movedim(t, c(2, 3), c(1, 2))
-}
 }

@@ -31,10 +31,8 @@ type promotion , and integer, float, and complex inputs.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a <- torch_tensor(c(1, 2))
 b <- torch_tensor(c(0, 1))
 torch_sub(a, b, alpha=2)
-}
 }

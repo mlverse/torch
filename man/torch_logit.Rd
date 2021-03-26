@@ -34,10 +34,8 @@ When eps is None and \code{input} < 0 or \code{input} > 1, the function will yie
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a <- torch_rand(5)
 a
 torch_logit(a, eps=1e-6)
-}
 }

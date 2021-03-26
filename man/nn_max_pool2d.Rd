@@ -74,7 +74,6 @@ and the second \code{int} for the width dimension
 }
 
 \examples{
-if (torch_is_installed()) {
 # pool of square window of size=3, stride=2
 m <- nn_max_pool2d(3, stride=2)
 # pool of non-square window
@@ -82,5 +81,4 @@ m <- nn_max_pool2d(c(3, 2), stride=c(2, 1))
 input <- torch_randn(20, 16, 50, 32)
 output <- m(input)
 
-}
 }

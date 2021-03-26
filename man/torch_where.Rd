@@ -47,7 +47,6 @@ The operation is defined as:
 }
 
 \examples{
-if (torch_is_installed()) {
 
 \dontrun{
 x = torch_randn(c(3, 2))
@@ -58,5 +57,4 @@ torch_where(x > 0, x, y)
 
 
 
-}
 }

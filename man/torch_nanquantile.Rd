@@ -29,7 +29,6 @@ that reduction will be \code{NaN}. See the documentation for \code{\link[=torch_
 }
 
 \examples{
-if (torch_is_installed()) {
 
 t <- torch_tensor(c(NaN, 1, 2))
 t$quantile(0.5)
@@ -40,5 +39,4 @@ t$nanquantile(0.5, dim=1)
 t$nanquantile(0.5, dim=2)
 torch_nanquantile(t, 0.5, dim = 1)
 torch_nanquantile(t, 0.5, dim = 2)
-}
 }

@@ -31,9 +31,7 @@ Not yet implemented for complex tensors.
 }
 
 \examples{
-if (torch_is_installed()) {
 \dontrun{
 torch_real(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
-}
 }
 }

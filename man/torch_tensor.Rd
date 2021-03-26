@@ -27,9 +27,7 @@ torch_tensor(
 Converts R objects to a torch tensor
 }
 \examples{
-if (torch_is_installed()) {
 torch_tensor(c(1,2,3,4))
 torch_tensor(c(1,2,3,4), dtype = torch_int())
 
-}
 }

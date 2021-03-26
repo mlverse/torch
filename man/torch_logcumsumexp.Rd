@@ -29,9 +29,7 @@ For summation index \eqn{j} given by \code{dim} and other indices \eqn{i}, the r
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a <- torch_randn(c(10))
 torch_logcumsumexp(a, dim=1)
-}
 }

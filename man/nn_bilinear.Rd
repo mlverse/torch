@@ -47,12 +47,10 @@ If \code{bias} is \code{TRUE}, the values are initialized from
 }
 
 \examples{
-if (torch_is_installed()) {
 m <- nn_bilinear(20, 30, 50)
 input1 <- torch_randn(128, 20)
 input2 <- torch_randn(128, 30)
 output = m(input1, input2)
 print(output$size()) 
 
-}
 }

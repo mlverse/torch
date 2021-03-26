@@ -66,7 +66,6 @@ but they must be broadcastable .
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a = torch_randn(c(1, 3))
 a
@@ -83,5 +82,4 @@ a
 b = torch_randn(c(4))
 b
 torch_min(a, other = b)
-}
 }

@@ -29,12 +29,10 @@ dimensions
 }
 
 \examples{
-if (torch_is_installed()) {
 \dontrun{
 m <- nn_hardswish()
 input <- torch_randn(2)
 output <- m(input)
 }
 
-}
 }

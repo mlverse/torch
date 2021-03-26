@@ -55,11 +55,9 @@ an \code{int} or a one-element tuple.
 }
 
 \examples{
-if (torch_is_installed()) {
   
 # pool with window of size=3, stride=2
 m <- nn_avg_pool1d(3, stride=2)
 m(torch_randn(1, 1, 8))
 
-}
 }

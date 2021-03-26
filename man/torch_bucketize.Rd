@@ -35,7 +35,6 @@ as \code{input}. If \code{right} is FALSE (default), then the left boundary is c
 }
 
 \examples{
-if (torch_is_installed()) {
 
 boundaries <- torch_tensor(c(1, 3, 5, 7, 9))
 boundaries
@@ -43,5 +42,4 @@ v <- torch_tensor(rbind(c(3, 6, 9), c(3, 6, 9)))
 v
 torch_bucketize(v, boundaries)
 torch_bucketize(v, boundaries, right=TRUE)
-}
 }

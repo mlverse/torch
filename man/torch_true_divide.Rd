@@ -29,11 +29,9 @@ in which case they are cast to the default (floating) scalar type before the div
 }
 
 \examples{
-if (torch_is_installed()) {
 
 dividend = torch_tensor(c(5, 3), dtype=torch_int())
 divisor = torch_tensor(c(3, 2), dtype=torch_int())
 torch_true_divide(dividend, divisor)
 torch_true_divide(dividend, 2)
-}
 }

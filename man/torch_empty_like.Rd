@@ -39,8 +39,6 @@ Returns an uninitialized tensor with the same size as \code{input}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_empty(list(2,3), dtype = torch_int64())
-}
 }

@@ -31,11 +31,9 @@ dimensions and the number of elements in \code{input}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
-a = torch_arange(0, 4)
+a <- torch_arange(0, 3)
 torch_reshape(a, list(2, 2))
-b = torch_tensor(matrix(c(0, 1, 2, 3), ncol = 2, byrow=TRUE))
+b <- torch_tensor(matrix(c(0, 1, 2, 3), ncol = 2, byrow=TRUE))
 torch_reshape(b, list(-1))
-}
 }

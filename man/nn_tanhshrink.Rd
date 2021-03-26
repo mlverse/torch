@@ -24,10 +24,8 @@ dimensions
 }
 
 \examples{
-if (torch_is_installed()) {
 m <- nn_tanhshrink()
 input <- torch_randn(2)
 output <- m(input)
 
-}
 }

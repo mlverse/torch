@@ -31,7 +31,6 @@ size 3.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a = torch_randn(c(4, 3))
 a
@@ -39,5 +38,4 @@ b = torch_randn(c(4, 3))
 b
 torch_cross(a, b, dim=2)
 torch_cross(a, b)
-}
 }

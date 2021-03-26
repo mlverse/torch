@@ -46,7 +46,6 @@ tensor, \code{out} will be an \eqn{(j \times k \times n \times p)} tensor.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 # vector x vector
 tensor1 = torch_randn(c(3))
@@ -68,5 +67,4 @@ torch_matmul(tensor1, tensor2)
 tensor1 = torch_randn(c(10, 3, 4))
 tensor2 = torch_randn(c(4, 5))
 torch_matmul(tensor1, tensor2)
-}
 }

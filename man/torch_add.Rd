@@ -48,7 +48,6 @@ a real number, otherwise it should be an integer.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a = torch_randn(c(4))
 a
@@ -60,5 +59,4 @@ a
 b = torch_randn(c(4, 1))
 b
 torch_add(a, b)
-}
 }

@@ -39,7 +39,6 @@ output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a = torch_randn(c(1, 3))
 a
@@ -50,5 +49,4 @@ a = torch_randn(c(4, 4))
 a
 torch_mean(a, 1)
 torch_mean(a, 1, TRUE)
-}
 }

@@ -24,10 +24,8 @@ Returns a new tensor with the signs of the elements of \code{input}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a = torch_tensor(c(0.7, -1.2, 0., 2.3))
 a
 torch_sign(a)
-}
 }
