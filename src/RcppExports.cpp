@@ -29303,6 +29303,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace__use_cudnn_rnn_flatten_weight
+bool cpp_torch_namespace__use_cudnn_rnn_flatten_weight();
+RcppExport SEXP _torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__use_cudnn_rnn_flatten_weight());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_variable_list
 Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_variable_list(SEXP xSEXP) {
@@ -31588,6 +31598,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_clean_names", (DL_FUNC) &_torch_cpp_clean_names, 2},
     {"_torch_cpp_suffix", (DL_FUNC) &_torch_cpp_suffix, 2},
     {"_torch_cpp_make_function_name", (DL_FUNC) &_torch_cpp_make_function_name, 5},
+    {"_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight", (DL_FUNC) &_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight, 0},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
     {"_torch_set_xptr_address", (DL_FUNC) &_torch_set_xptr_address, 2},

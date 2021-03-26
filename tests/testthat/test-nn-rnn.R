@@ -234,7 +234,8 @@ test_that("rnn gpu", {
   rnn$to(device = "cuda")
   
   input <- torch_ones(1, 1, 10, device = "cuda")
-  out <- rnn(input)
+  
+  expect_message(out <- rnn(input), regexp = NA)
   
   expect_length(out, 2)
   expect_tensor_shape(out[[1]], c(1,1,1))

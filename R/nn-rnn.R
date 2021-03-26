@@ -121,6 +121,46 @@ nn_rnn_base <- nn_module(
       ret
   },
   flatten_parameters = function() {
+    # Short-circuits if _flat_weights is only partially instantiated
+    if (length(self$flat_weights_) != length(self$flat_weight_names_))
+      return()
+    
+    for (w in self$flat_weights_)
+      if (!is_torch_tensor(w))
+        return()
+    
+    # Short-circuits if any tensor in self._flat_weights is not acceptable to cuDNN
+    # or the tensors in _flat_weights are of different dtypes
+    first_fw <- self$flat_weights_[[1]]
+    dtype <- first_fw$dtype
+    
+    for (fw in self$flat_weights_) {
+      if (!is_torch_tensor(fw) || !(fw$dtype == dtype) || !fw$is_cuda || 
+          !torch_cudnn_is_acceptable(fw))
+        return()
+    }
+    
+    # If any parameters alias, we fall back to the slower, copying code path. This is
+    # a sufficient check, because overlapping parameter buffers that don't completely
+    # alias would break the assumptions of the uniqueness check in
+    # Module.named_parameters().
+    unique_data_ptrs <- unique(sapply(self$flat_weights_, function(x) x$storage()$data_ptr()))
+    if (length(unique_data_ptrs) != length(self$flat_weights_))
+      return()
+    
+    with_no_grad({
+      
+      if (cpp_torch_namespace__use_cudnn_rnn_flatten_weight()) {
+        num_weights <- if (self$bias) 4 else 2
+        torch__cudnn_rnn_flatten_weight(
+          weight_arr = self$flat_weights_, weight_stride0 = num_weights, 
+          input_size = self$input_size, mode = rnn.get_cudnn_mode(self$mode), 
+          hidden_size = self$hidden_size, num_layers = self$num_layers, 
+          batch_first = self$batch_first, bidirectional = as.logical(self$bidirectional)
+        )
+      }
+      
+    })
     
   },
   reset_parameters = function() {
@@ -203,6 +243,19 @@ nn_rnn_base <- nn_module(
     list(output, self$permute_hidden(hidden, unsorted_indices))
   }
 )
+
+rnn.get_cudnn_mode <- function(mode) {
+  if (mode == 'RNN_RELU')
+    0L
+  else if (mode == 'RNN_TANH')
+    1L
+  else if (mode == 'LSTM')
+    2L
+  else if (mode == 'GRU')
+    3L
+  else
+    not_implemented_error("No cudnn backend for mode '{mode}'")
+}
 
 #' RNN module
 #' 
