@@ -3578,7 +3578,7 @@ NULL
 #'
 #' @examples
 #'
-#' x <- torch_arange(start = 0, end = 4)$view(c(2, 2))
+#' x <- torch_arange(start = 1, end = 4)$view(c(2, 2))
 #' x
 #' torch_fliplr(x)
 NULL
@@ -3590,7 +3590,7 @@ NULL
 #'
 #' @examples
 #'
-#' x <- torch_arange(start = 0, end = 4)$view(c(2, 2))
+#' x <- torch_arange(start = 1, end = 4)$view(c(2, 2))
 #' x
 #' torch_flipud(x)
 NULL
