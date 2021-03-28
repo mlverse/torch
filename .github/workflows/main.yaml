@@ -117,8 +117,7 @@ jobs:
       TORCH_TEST: 1
       TORCH_INSTALL: 1
       CUDA: ${{ matrix.cuda }}
-      CRAN: 'https://cloud.r-project.org/'
-
+      
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
@@ -126,7 +125,7 @@ jobs:
           r-version: ${{ matrix.r_version }}
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies
-        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+        run: Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Build lantern and get libtorch
         if: matrix.install == 0 || contains( github.event.pull_request.labels.*.name, 'lantern')
         run: | 
