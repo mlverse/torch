@@ -117,6 +117,7 @@ jobs:
       TORCH_TEST: 1
       TORCH_INSTALL: 1
       CUDA: ${{ matrix.cuda }}
+      CRAN: 'https://cloud.r-project.org/'
 
     steps:
       - uses: actions/checkout@v2
