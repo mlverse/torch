@@ -100,3 +100,37 @@ jobs:
         run: docker build -f $DOCKER_FILE -t $DOCKER_TAG .
       - name: Run checks
         run: docker run --rm --gpus all -e BUILD_LANTERN $DOCKER_TAG sh torch/tools/check.sh
+  windows-gpu:
+    strategy:
+      fail-fast: false
+      matrix:
+        r_version: ["release"]
+        cuda: ["10.2"]
+            
+    runs-on: [self-hosted, windows]
+    name: ${{ matrix.cuda }} 
+    timeout-minutes: 120
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      INSTALL_TORCH: 1
+      TORCH_LOG: 2
+      TORCH_TEST: 1
+      TORCH_INSTALL: 1
+      CUDA: ${{ matrix.cuda }}
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.r_version }}
+      - uses: r-lib/actions/setup-pandoc@master
+      - name: Install dependencies
+        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+      - name: Build lantern and get libtorch
+        if: matrix.install == 0 || contains( github.event.pull_request.labels.*.name, 'lantern')
+        run: | 
+          Rscript tools/buildlantern.R
+      - name: Check
+        run:  |
+          rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "error", check_dir = "check")
+        shell: Rscript {0}
