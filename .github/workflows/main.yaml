@@ -129,7 +129,7 @@ jobs:
       - name: Build lantern and get libtorch
         if: matrix.install == 0 || contains( github.event.pull_request.labels.*.name, 'lantern')
         run: | 
-          Rscript tools/buildlantern.R
+          Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); source('tools/buildlantern.R')"
       - name: Check
         run:  |
           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "error", check_dir = "check")
