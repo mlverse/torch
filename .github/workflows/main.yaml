@@ -112,7 +112,7 @@ jobs:
         export_default_credentials: true
     - name: Create instance
       run: | 
-        gcloud components update --quiet
+        gcloud components install beta --quiet
         gcloud beta compute --project=rstudio-cloudml instances create runner --zone=us-central1-a --machine-type=n1-standard-2 --accelerator=type=nvidia-tesla-k80,count=1 --source-machine-image cuda-v7
         
   delete-runner:
