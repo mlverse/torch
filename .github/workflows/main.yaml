@@ -112,7 +112,19 @@ jobs:
       with: 
         args: compute --project=rstudio-cloudml instances create runner --zone=us-central1-a --machine-type=n1-standard-2 --subnet=default --network-tier=PREMIUM --metadata=^,@^windows-keys=\{\"expireOn\":\"2021-03-29T13:37:32.555Z\",\"userName\":\"daniel\",\"modulus\":\"sTaacxXqsMpLND6BtgiZiK9QEeuvJH61ZVYPzSIu8RHebxoOeRoYBh1gk/jszOrt3\+390AmQ2QVO3LAthsJkbWHyQ3h/aR7b2jNfDf44NPvvHAJSxhHTT2pMgr9iAlZ9oTYedKtcmizn8ECvDJ7GweK8mDbesgiS5yX\+\+VXgETC3FcjIJQTFHc7saA\+ZdL6HbwuiEMnAb3XiXppgENPGf/ZTNcW3p8mmficZBNNxkPPRwPYj17IFnFUgFPG3FzoTEUwcyPjSwSVEW73dnqMpaQtx/U95ILAzG9PSpyk3gZgXKmUI6\+5De9fkLzFm0LbBouQFYLM9ehaujLh0lbFSYQ\\u003d\\u003d\",\"email\":\"daniel@rstudio.com\",\"exponent\":\"AQAB\"\} --maintenance-policy=TERMINATE --service-account=226719675476-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --accelerator=type=nvidia-tesla-k80,count=1 --min-cpu-platform=Automatic --enable-display-device --tags=http-server,https-server --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
         
-  
+  delete-runner:
+    if: always()
+    needs: ['windows-gpu', 'start-runner'] 
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Delete runner instance
+      uses: actions-hub/gcloud@master
+      env:
+        PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+        APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
+      with:
+        args: compute --project=rstudio-cloudml instances delete runner
+ 
   windows-gpu:
     needs: ['start-runner']
     strategy:
