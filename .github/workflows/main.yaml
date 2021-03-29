@@ -104,13 +104,16 @@ jobs:
   start-runner:
     runs-on: ubuntu-18.04
     steps:
-    - name: Create runner instance
-      uses: actions-hub/gcloud@master
-      env:
-        PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-        APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-      with: 
-        args: beta compute --project=rstudio-cloudml instances create runner --zone=us-central1-a --machine-type=n1-standard-2 --accelerator=type=nvidia-tesla-k80,count=1 --source-machine-image cuda-v7
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
+        export_default_credentials: true
+    - name: Create instance
+      run: | 
+        gcloud components update --quiet
+        gloud beta compute --project=rstudio-cloudml instances create runner --zone=us-central1-a --machine-type=n1-standard-2 --accelerator=type=nvidia-tesla-k80,count=1 --source-machine-image cuda-v7
         
   delete-runner:
     if: always()
