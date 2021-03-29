@@ -113,7 +113,7 @@ jobs:
     - name: Create instance
       run: | 
         gcloud components update --quiet
-        gloud beta compute --project=rstudio-cloudml instances create runner --zone=us-central1-a --machine-type=n1-standard-2 --accelerator=type=nvidia-tesla-k80,count=1 --source-machine-image cuda-v7
+        gcloud beta compute --project=rstudio-cloudml instances create runner --zone=us-central1-a --machine-type=n1-standard-2 --accelerator=type=nvidia-tesla-k80,count=1 --source-machine-image cuda-v7
         
   delete-runner:
     if: always()
