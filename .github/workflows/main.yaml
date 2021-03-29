@@ -125,11 +125,12 @@ jobs:
           r-version: ${{ matrix.r_version }}
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies
-        run: Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+        run: | 
+          Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); install.packages(c('remotes', 'rcmdcheck', 'fs'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Build lantern and get libtorch
         if: matrix.install == 0 || contains( github.event.pull_request.labels.*.name, 'lantern')
         run: | 
-          Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); source('tools/buildlantern.R')"
+          Rscript tools/buildlantern.R
       - name: Check
         run:  |
           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "error", check_dir = "check")
