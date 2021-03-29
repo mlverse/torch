@@ -110,7 +110,7 @@ jobs:
         PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
       with: 
-        args: compute --project=rstudio-cloudml instances create runner --zone=us-central1-a --machine-type=n1-standard-2 --accelerator=type=nvidia-tesla-k80,count=1 --source-machine-image cuda-v7
+        args: beta compute --project=rstudio-cloudml instances create runner --zone=us-central1-a --machine-type=n1-standard-2 --accelerator=type=nvidia-tesla-k80,count=1 --source-machine-image cuda-v7
         
   delete-runner:
     if: always()
