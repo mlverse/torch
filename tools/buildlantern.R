@@ -10,7 +10,6 @@ if (dir.exists("lantern")) {
     fs::dir_create("lantern/build")
   
   withr::with_dir("lantern/build", {
-    system("cmake ..")
     system("cmake -DCMAKE_GENERATOR_PLATFORM=x64 ..")
     system("cmake --build . --target lantern --config Release --parallel 8")  
   })
