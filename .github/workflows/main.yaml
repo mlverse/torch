@@ -122,7 +122,7 @@ jobs:
             repo: 'torch'
           });
           console.log(result)
-          return result.token
+          return result.data.token
     - name: Create the startup script
       run: |
         touch s.ps
