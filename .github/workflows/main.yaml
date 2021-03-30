@@ -218,7 +218,7 @@ jobs:
           Rscript tools/buildlantern.R
       - name: Check
         run:  |
-          withr::with_local_makevars(list(MAKEFLAGS="-j8"), {
+          withr::with_makevars(list(MAKEFLAGS="-j8"), {
             rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "error", check_dir = "check")
           })
         shell: Rscript {0}
