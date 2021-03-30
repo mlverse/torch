@@ -114,7 +114,7 @@ jobs:
       uses: actions/github-script@v3
       id: token
       with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
+        github-token: ${{secrets.GH_TOKEN}}
         result-encoding: string
         script: |
           const result = github.actions.createRegistrationTokenForRepo({
