@@ -250,7 +250,9 @@ torch_arange <- function(start, end, step = 1, dtype = NULL, layout = torch_stri
     )
   )
   args$start <- start
-  args$end <- end + 1
+  
+  args$end <- if (end %% step == 0 && !(end + step == 0)) end + step else end 
+  
   args$step <- step
   do.call(.torch_arange, args)
 }
