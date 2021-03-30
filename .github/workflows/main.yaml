@@ -115,7 +115,7 @@ jobs:
         touch s.ps
         echo "mkdir C:\actions-runner; cd C:\actions-runner" >> s.ps
         echo "Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.277.1/actions-runner-win-x64-2.277.1.zip -OutFile actions-runner-win-x64-2.277.1.zip" >> s.ps
-        echo "Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory('$PWD/actions-runner-win-x64-2.277.1.zip', '$PWD')" >> s.ps
+        echo 'Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.277.1.zip", "$PWD")' >> s.ps
         echo "./config.cmd --url https://github.com/mlverse/torch --token ${{ secrets.RUNNER_TOKEN }} --name 'name-${{ github.run_number }}' --labels 'run-${{ github.run_number}}' --unattended" >> s.ps
         echo "./run.cmd" >> s.ps
     - name: Show File
