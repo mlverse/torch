@@ -152,12 +152,13 @@ jobs:
     needs: ['windows-gpu', 'start-runner'] 
     runs-on: ubuntu-18.04
     steps:
-     - name: Set up Cloud SDK
+    - name: Set up Cloud SDK
        uses: google-github-actions/setup-gcloud@master
        with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
         export_default_credentials: true
+    
     - name: Delete runner instance
       run: |
         gcloud compute --zone=us-central1-a --project=rstudio-cloudml instances delete runner-${{github.run_number}}
