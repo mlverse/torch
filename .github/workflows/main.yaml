@@ -117,10 +117,11 @@ jobs:
         github-token: ${{secrets.GH_TOKEN}}
         result-encoding: string
         script: |
-          const result = github.actions.createRegistrationTokenForRepo({
+          const result = await github.actions.createRegistrationTokenForRepo({
             owner: 'mlverse',
             repo: 'torch'
           });
+          console.log(result)
           return result.token
     - name: Create the startup script
       run: |
