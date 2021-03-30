@@ -119,7 +119,7 @@ jobs:
         script: |
           const result = github.actions.createRegistrationTokenForRepo({
             'mlverse',
-            'torch',
+            'torch'
           });
           return result.token
     - name: Create the startup script
