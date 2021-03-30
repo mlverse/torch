@@ -118,8 +118,8 @@ jobs:
         result-encoding: string
         script: |
           const result = github.actions.createRegistrationTokenForRepo({
-            'mlverse',
-            'torch'
+            owner: 'mlverse',
+            repo: 'torch'
           });
           return result.token
     - name: Create the startup script
