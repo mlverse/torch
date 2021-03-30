@@ -161,7 +161,7 @@ jobs:
     
     - name: Delete runner instance
       run: |
-        gcloud compute --zone=us-central1-a --project=rstudio-cloudml instances delete runner-${{github.run_number}}
+        gcloud compute --project=rstudio-cloudml instances delete runner-${{github.run_number}} --zone=us-central1-a
     - name: Delete runner from GH
       uses: actions/github-script@v3
       id: token
