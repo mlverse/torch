@@ -131,7 +131,7 @@ jobs:
           --machine-type=n1-standard-2 \
           --accelerator=type=nvidia-tesla-k80,count=1 \
           --source-machine-image cuda-v7 \
-          --metadata windows-startup-script-ps1=./s.ps 
+          --metadata-from-file windows-startup-script-ps1=s.ps 
         
   delete-runner:
     if: always()
