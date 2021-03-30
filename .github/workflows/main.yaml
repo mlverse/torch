@@ -149,7 +149,7 @@ jobs:
         sleep 2m 30s
         
   delete-runner:
-    if: always()
+    if: ${{ success() || failure() || cancelled() }}
     needs: ['windows-gpu', 'start-runner'] 
     runs-on: ubuntu-18.04
     steps:
