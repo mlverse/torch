@@ -143,6 +143,7 @@ jobs:
           --machine-type=n1-standard-8 \
           --accelerator=type=nvidia-tesla-k80,count=1 \
           --source-machine-image cuda-v7 \
+          --network-interface network=default \
           --metadata-from-file windows-startup-script-ps1=s.ps
     - name: Wait for runner registration
       run: |
