@@ -17,6 +17,8 @@ Samples are nonnegative integers, with a pmf given by
 \eqn{\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}}
 }
 \examples{
+if (torch_is_installed()) {
 m <- distr_poisson(torch_tensor(4))
 m$sample()
+}
 }
