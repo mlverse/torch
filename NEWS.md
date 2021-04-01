@@ -35,6 +35,7 @@
 - Fixed bug in the `to` method of `nn_module` that would reset the `requires_grad` attribute of parameters. (#501)
 - `nn_lstm`, `nn_gru` and `nn_gru` can now use cudnn accelerations when available (#503).
 - Added a Windows GPU CI workflow (#508).
+- Breaking change: `torch_arange` returns in the closed interval `[start, end]` instead of the half open `[start, end)`. This makes it behave similar to R's `seq`. (#506)
 
 # torch 0.2.1
 
