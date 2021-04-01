@@ -1,15 +1,14 @@
-#'
 #' Given a list of values (possibly containing numbers), returns a list where each
 #' value is broadcasted based on the following rules:
-#'   - `torch.*Tensor` instances are broadcasted as per :ref:`_broadcasting-semantics`.
-#'  - numbers.Number instances (scalars) are upcast to tensors having
-#'     the same size and type as the first tensor passed to `values`.  If all the
-#'     values are scalars, then they are upcasted to scalar Tensors.
-#' 
-#'     values (list of `numbers.Number`, `torch.*Tensor` or objects implementing __torch_function__)
-#' Raises:
-#'     ValueError: if any of the values is not a `numbers.Number` instance,
-#'         a `torch.*Tensor` instance, or an instance implementing __torch_function__
+#' @param values List of:
+#'  - `torch.*Tensor` instances are broadcasted as per `_broadcasting-semantics`.
+#'  -  `numeric` instances (scalars) are upcast to tensors having
+#' the same size and type as the first tensor passed to `values`.  If all the
+#' values are scalars, then they are upcasted to scalar Tensors.
+#' values (list of `numeric`, `torch.*Tensor` or objects implementing __torch_function__)
+#' @description 
+#' Raises value_error: if any of the values is not a `numeric` instance,
+#' a `torch.*Tensor` instance, or an instance implementing __torch_function__
 
 broadcast_all <- function(values){
   
