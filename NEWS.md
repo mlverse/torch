@@ -26,6 +26,15 @@
 - Added backend functions allowing us to query which optimizations LibTorch was compiled with (#476)
 - Added normal distribution (#462)
 - Added bernoulli distribution (#484)
+- `as.list` for `nn_modules` (#492)
+- Enumerate support in Bernoulli distribution (#490)
+- Bugfixes in `nn_multihead_attention` (#496)
+- Added Poisson Distriibution (#495)
+- Fixed bug when using packed sequences with `nn_lstm` (#500)
+- Allow optional .getbatch in datasets/dataloaders (#498)
+- Fixed bug in the `to` method of `nn_module` that would reset the `requires_grad` attribute of parameters. (#501)
+- `nn_lstm`, `nn_gru` and `nn_gru` can now use cudnn accelerations when available (#503).
+- Added a Windows GPU CI workflow (#508).
 
 # torch 0.2.1
 

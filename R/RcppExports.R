@@ -8949,6 +8949,10 @@ cpp_make_function_name <- function(method_name, arg_names, arg_types, type, remo
     .Call('_torch_cpp_make_function_name', PACKAGE = 'torchpkg', method_name, arg_names, arg_types, type, remove_characters)
 }
 
+cpp_torch_namespace__use_cudnn_rnn_flatten_weight <- function() {
+    .Call('_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight', PACKAGE = 'torchpkg')
+}
+
 cpp_torch_variable_list <- function(x) {
     .Call('_torch_cpp_torch_variable_list', PACKAGE = 'torchpkg', x)
 }

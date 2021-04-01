@@ -92,6 +92,22 @@ test_that("nn_module_list", {
   expect_length(x, 7)
 })
 
+test_that("as.list.nn_module_list", {
+  x <- nn_module_list(list(
+    nn_linear(10, 100),
+    nn_relu(),
+    nn_linear(100, 10)
+  ))
+
+  x_list <- as.list(x)
+  
+  expect_length(x_list, 3)
+  expect_type(x_list, "list")
+  expect_s3_class(x_list[[1]], "nn_linear")
+  expect_s3_class(x_list[[2]], "nn_relu")
+  expect_s3_class(x_list[[3]], "nn_linear") 
+})
+
 test_that("module_list inside a module", {
   
   my_module <- nn_module(
@@ -510,5 +526,18 @@ test_that("train/eval returns a callable module", {
 
   expect_s3_class(m$eval(), "nn_module")
   expect_s3_class(m$train(), "nn_module")
+  
+})
+
+test_that("calling to doesn't modify the requires_grad attribute of a parameter", {
+  
+  # see https://github.com/mlverse/torch/issues/491
+  
+  x <- nn_linear(1,1)
+  expect_true(x$weight$requires_grad)
+  x$weight$requires_grad_(FALSE)
+  expect_true(!x$weight$requires_grad)
+  x$to(device = "cpu")
+  expect_true(!x$weight$requires_grad)
   
 })

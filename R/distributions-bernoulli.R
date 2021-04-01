@@ -89,7 +89,7 @@ Bernoulli <- R6::R6Class(
     
     enumerate_support = function(expand = TRUE){
       values <- torch_arange(
-        1, 3, dtype = self$.param$dtype, 
+        0, 2, dtype = self$.param$dtype, 
         device=self$.param$device
       )
       values <- values$view(c(-1, rep(1, length(self$batch_shape))))

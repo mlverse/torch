@@ -78,3 +78,12 @@ test_that("Bernoulli distribution - expand", {
   }
   
 })
+
+test_that("Bernoulli distribution - enumerate_support", {
+  d <- distr_bernoulli(0.7)
+  required_values <- c(0, 1)
+  unique_values <- unique(as.array(d$enumerate_support()))
+  expect_true(all(unique_values %in% required_values))
+})
+
+

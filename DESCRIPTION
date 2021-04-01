@@ -67,6 +67,7 @@ Collate:
     'distributions-bernoulli.R'
     'distributions-gamma.R'
     'distributions-normal.R'
+    'distributions-poisson.R'
     'dtype.R'
     'gen-method.R'
     'gen-namespace-docs.R'
