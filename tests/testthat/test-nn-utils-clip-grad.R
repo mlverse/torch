@@ -12,7 +12,7 @@ test_that("clip_grad_norm_", {
   }
   
   grads <- list(
-    torch_arange(start = 1., end = 101)$view(c(10, 10)), 
+    torch_arange(start = 1, end = 100)$view(c(10, 10)), 
     torch_ones(10)$div(1000)
   )
   
@@ -38,7 +38,7 @@ test_that("clip_grad_norm_", {
 test_that("clip_grad_value_", {
   
   grads <- list(
-    torch_arange(start = 1., end = 101)$view(c(10, 10)), 
+    torch_arange(start = 1, end = 100)$view(c(10, 10)), 
     torch_ones(10)$div(1000)
   )
   

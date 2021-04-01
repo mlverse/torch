@@ -179,10 +179,10 @@ test_that("as.matrix", {
 
 test_that("print tensor is truncated", {
   local_edition(3)
-  expect_snapshot_output(torch_arange(0, 100))
-  expect_snapshot_output(torch_arange(0, 25))
-  expect_snapshot_output(print(torch_arange(0, 100), n = 50))
-  expect_snapshot_output(print(torch_arange(0, 100), n = -1))
+  expect_snapshot_output(torch_arange(0, 99))
+  expect_snapshot_output(torch_arange(0, 24))
+  expect_snapshot_output(print(torch_arange(0, 99), n = 50))
+  expect_snapshot_output(print(torch_arange(0, 99), n = -1))
   
 })
 

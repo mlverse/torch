@@ -122,8 +122,8 @@ NULL
 #'
 #' @examples
 #'
-#' vec1 = torch_arange(1., 4.)
-#' vec2 = torch_arange(1., 3.)
+#' vec1 = torch_arange(1, 3)
+#' vec2 = torch_arange(1, 2)
 #' M = torch_zeros(c(3, 2))
 #' torch_addr(M, vec1, vec2)
 NULL
@@ -343,8 +343,8 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(0, 3)$view(c(1, 3))
-#' y = torch_arange(0, 2)$view(c(2, 1))
+#' x = torch_arange(0, 3)$view(c(1, 4))
+#' y = torch_arange(0, 2)$view(c(3, 1))
 #' out = torch_broadcast_tensors(list(x, y))
 #' out[[1]]
 NULL
@@ -927,10 +927,10 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(1., 6.)
+#' x <- torch_arange(1, 6)
 #' x
 #' torch_kthvalue(x, 4)
-#' x=torch_arange(1.,7.)$resize_(c(2,3))
+#' x <- torch_arange(1,6)$resize_(c(2,3))
 #' x
 #' torch_kthvalue(x, 2, 1, TRUE)
 NULL
@@ -1454,9 +1454,9 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_arange(0, 4)
+#' a <- torch_arange(0, 3)
 #' torch_reshape(a, list(2, 2))
-#' b = torch_tensor(matrix(c(0, 1, 2, 3), ncol = 2, byrow=TRUE))
+#' b <- torch_tensor(matrix(c(0, 1, 2, 3), ncol = 2, byrow=TRUE))
 #' torch_reshape(b, list(-1))
 NULL
 # -> reshape <-
@@ -1619,10 +1619,10 @@ NULL
 #' torch_sum(a)
 #'
 #'
-#' a = torch_randn(c(4, 4))
+#' a <- torch_randn(c(4, 4))
 #' a
 #' torch_sum(a, 1)
-#' b = torch_arange(0, 4 * 5 * 6)$view(c(4, 5, 6))
+#' b <- torch_arange(1, 4 * 5 * 6)$view(c(4, 5, 6))
 #' torch_sum(b, list(2, 1))
 NULL
 # -> sum <-
@@ -1738,8 +1738,8 @@ NULL
 #'
 #' @examples
 #'
-#' a = torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
-#' b = torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
+#' a <- torch_arange(start = 1, end = 60)$reshape(c(3, 4, 5))
+#' b <- torch_arange(start = 1, end = 24)$reshape(c(4, 3, 2))
 #' torch_tensordot(a, b, dims = list(c(2, 1), c(1, 2)))
 #' \dontrun{
 #' a = torch_randn(3, 4, 5, device='cuda')
@@ -1775,7 +1775,7 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(0, 8)$view(c(2, 2, 2))
+#' x <- torch_arange(1, 8)$view(c(2, 2, 2))
 #' x
 #' torch_flip(x, c(1, 2))
 NULL
@@ -1801,10 +1801,10 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(0, 4)$view(c(2, 2))
+#' x <- torch_arange(1, 4)$view(c(2, 2))
 #' x
 #' torch_rot90(x, 1, c(1, 2))
-#' x = torch_arange(0, 8)$view(c(2, 2, 2))
+#' x <- torch_arange(1, 8)$view(c(2, 2, 2))
 #' x
 #' torch_rot90(x, 1, c(1, 2))
 NULL
@@ -1941,8 +1941,8 @@ NULL
 #'
 #' @examples
 #' 
-#' a = torch_arange(0, 9, dtype = torch_float())
-#' b = a$reshape(list(3, 3))
+#' a <- torch_arange(1, 9, dtype = torch_float())
+#' b <- a$reshape(list(3, 3))
 #' torch_norm(a)
 #' torch_norm(b)
 #' torch_norm(a, Inf)
@@ -1960,15 +1960,15 @@ NULL
 #' a = torch_randn(c(4))
 #' a
 #' torch_pow(a, 2)
-#' exp = torch_arange(1., 5.)
-#' a = torch_arange(1., 5.)
+#' exp <- torch_arange(1, 5)
+#' a <- torch_arange(1, 5)
 #' a
 #' exp
 #' torch_pow(a, exp)
 #'
 #'
-#' exp = torch_arange(1., 5.)
-#' base = 2
+#' exp <- torch_arange(1, 5)
+#' base <- 2
 #' torch_pow(base, exp)
 NULL
 # -> pow <-
@@ -2233,7 +2233,7 @@ NULL
 #'
 #' @examples
 #'
-#' x = torch_arange(1., 10.)$view(c(3, 3))
+#' x <- torch_arange(1, 9)$view(c(3, 3))
 #' x
 #' torch_trace(x)
 NULL
@@ -2721,7 +2721,7 @@ NULL
 #'
 #' @examples
 #'
-#' start = torch_arange(1., 5.)
+#' start = torch_arange(1, 4)
 #' end = torch_empty(4)$fill_(10)
 #' start
 #' end
@@ -3578,7 +3578,7 @@ NULL
 #'
 #' @examples
 #'
-#' x <- torch_arange(start = 0, end = 4)$view(c(2, 2))
+#' x <- torch_arange(start = 1, end = 4)$view(c(2, 2))
 #' x
 #' torch_fliplr(x)
 NULL
@@ -3590,7 +3590,7 @@ NULL
 #'
 #' @examples
 #'
-#' x <- torch_arange(start = 0, end = 4)$view(c(2, 2))
+#' x <- torch_arange(start = 1, end = 4)$view(c(2, 2))
 #' x
 #' torch_flipud(x)
 NULL

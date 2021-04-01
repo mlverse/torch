@@ -21,6 +21,8 @@ Samples are binary (0 or 1). They take the value \code{1} with probability \code
 and \code{0} with probability \code{1 - p}.
 }
 \examples{
+if (torch_is_installed()) {
 m <- distr_bernoulli(0.3)
 m$sample()  # 30\% chance 1; 70\% chance 0
+}
 }

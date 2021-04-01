@@ -162,8 +162,8 @@ test_that("torch_nll_loss out of bound", {
 
 test_that("tensordot error message", {
   
-  a <- torch_arange(start = 0, end = 60.)$reshape(c(3, 4, 5))
-  b <- torch_arange(start = 0, end = 24.)$reshape(c(4, 3, 2))
+  a <- torch_arange(start = 1, end = 60)$reshape(c(3, 4, 5))
+  b <- torch_arange(start = 1, end = 24)$reshape(c(4, 3, 2))
   
   expect_error(
     torch_tensordot(a, b, list(c(2, 1), c(1, 3))),

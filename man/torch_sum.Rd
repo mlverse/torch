@@ -46,10 +46,10 @@ a
 torch_sum(a)
 
 
-a = torch_randn(c(4, 4))
+a <- torch_randn(c(4, 4))
 a
 torch_sum(a, 1)
-b = torch_arange(0, 4 * 5 * 6)$view(c(4, 5, 6))
+b <- torch_arange(1, 4 * 5 * 6)$view(c(4, 5, 6))
 torch_sum(b, list(2, 1))
 }
 }
