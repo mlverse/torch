@@ -124,6 +124,15 @@ test_that("arange", {
   x <- torch_arange(2.5, 1, -0.49)
   expect_equal(length(x), 4)
   
+  x <- torch_arange(0, 1, 1, dtype = torch_float64())
+  expect_equal(torch_finfo(x$dtype)$eps, torch_finfo(torch_double())$eps)
+  
+  x <- torch_arange(0, 1, 1, dtype = torch_float32())
+  expect_equal(torch_finfo(x$dtype)$eps, torch_finfo(torch_float())$eps, tolerance = torch_finfo(torch_float())$eps)
+  
+  x <- torch_arange(0, 1, 1, dtype = torch_int64())
+  expect_equal(torch_iinfo(x$dtype)$bits, 64)
+  
   # deprecated
   expect_warning(x <- torch_range(1, 9))
   expect_equal(x$size(1), 9)
