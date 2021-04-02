@@ -57,6 +57,16 @@ test_that("item", {
   expect_equal(x$item(), 1.5)
 })
 
+test_that("new_full", {
+  
+  x <- torch_randn(2,2)
+  expect_equal_to_tensor(
+    x$new_full(c(3,3), 1),
+    torch_ones(3,3)
+  )
+  
+})
+
 test_that("permute", {
   
   x <- torch_randn(2,3,4)

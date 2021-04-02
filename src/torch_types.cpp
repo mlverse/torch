@@ -229,6 +229,12 @@ XPtrTorchTensorOptions XPtrTorchTensorOptions_from_SEXP (SEXP x)
   {
     XPtrTorchTensorOptions options(lantern_TensorOptions());
     Rcpp::List args = Rcpp::as<Rcpp::List>(x);
+    
+    if (args.size() == 0)
+    {
+      return options;
+    }
+    
     std::vector<std::string> names = args.names();
     
     for (auto i = names.begin(); i != names.end(); ++i)
