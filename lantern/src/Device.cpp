@@ -51,10 +51,6 @@ void *_lantern_Device(const char *type, int64_t index, bool useIndex)
   {
     deviceType = torch::DeviceType::XLA;
   }
-  else if (deviceName == "test")
-  {
-    deviceType = torch::DeviceType::ONLY_FOR_TEST;
-  }
 
   torch::Device device = torch::Device(deviceType);
 
@@ -112,10 +108,6 @@ const char *_lantern_Device_type(void *device)
   else if (type == torch::DeviceType::XLA)
   {
     str = "xla";
-  }
-  else if (type == torch::DeviceType::ONLY_FOR_TEST)
-  {
-    str = "test";
   }
   else
   {
