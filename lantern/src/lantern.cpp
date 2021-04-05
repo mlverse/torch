@@ -4747,7 +4747,7 @@ void* _lantern_index_tensor_constclistcoptionaltensor(void* self, void* indices)
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<torch::Tensor>(torch::index(
-        ((LanternObject<torch::Tensor>*)self)->get(), ((LanternObject<c10::optional<const c10::List<c10::optional<torch::Tensor>> &>>*)optional<const c10::List<c10::optional<torch::Tensor>> &>(indices).get())->get()));
+        ((LanternObject<torch::Tensor>*)self)->get(), ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4755,7 +4755,7 @@ void* _lantern_Tensor_index_tensor_constclistcoptionaltensor(void* self, void* i
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().index(
-        ((LanternObject<c10::optional<const c10::List<c10::optional<torch::Tensor>> &>>*)optional<const c10::List<c10::optional<torch::Tensor>> &>(indices).get())->get()));
+        ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4811,7 +4811,7 @@ void* _lantern_index_put__tensor_constclistcoptionaltensor_tensor_bool(void* sel
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<torch::Tensor>(torch::index_put_(
-        ((LanternObject<torch::Tensor>*)self)->get(), ((LanternObject<c10::optional<const c10::List<c10::optional<torch::Tensor>> &>>*)optional<const c10::List<c10::optional<torch::Tensor>> &>(indices).get())->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
+        ((LanternObject<torch::Tensor>*)self)->get(), ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4819,7 +4819,7 @@ void* _lantern_Tensor_index_put__tensor_constclistcoptionaltensor_tensor_bool(vo
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().index_put_(
-        ((LanternObject<c10::optional<const c10::List<c10::optional<torch::Tensor>> &>>*)optional<const c10::List<c10::optional<torch::Tensor>> &>(indices).get())->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
+        ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4827,7 +4827,7 @@ void* _lantern_index_put_tensor_constclistcoptionaltensor_tensor_bool(void* self
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<torch::Tensor>(torch::index_put(
-        ((LanternObject<torch::Tensor>*)self)->get(), ((LanternObject<c10::optional<const c10::List<c10::optional<torch::Tensor>> &>>*)optional<const c10::List<c10::optional<torch::Tensor>> &>(indices).get())->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
+        ((LanternObject<torch::Tensor>*)self)->get(), ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4835,7 +4835,7 @@ void* _lantern_Tensor_index_put_tensor_constclistcoptionaltensor_tensor_bool(voi
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<torch::Tensor>(((LanternObject<torch::Tensor>*)self)->get().index_put(
-        ((LanternObject<c10::optional<const c10::List<c10::optional<torch::Tensor>> &>>*)optional<const c10::List<c10::optional<torch::Tensor>> &>(indices).get())->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
+        ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4843,7 +4843,7 @@ void* _lantern__index_put_impl__tensor_constclistcoptionaltensor_tensor_bool_boo
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<torch::Tensor>(torch::_index_put_impl_(
-        ((LanternObject<torch::Tensor>*)self)->get(), ((LanternObject<c10::optional<const c10::List<c10::optional<torch::Tensor>> &>>*)optional<const c10::List<c10::optional<torch::Tensor>> &>(indices).get())->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get(), ((LanternObject<bool>*)unsafe)->get()));
+        ((LanternObject<torch::Tensor>*)self)->get(), ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), ((LanternObject<torch::Tensor>*)values)->get(), ((LanternObject<bool>*)accumulate)->get(), ((LanternObject<bool>*)unsafe)->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -18018,7 +18018,7 @@ void* _lantern_Tensor_isinf_tensor(void* self)
 void* _lantern_Tensor_record_stream_tensor_stream(void* self, void* s)
 {
   LANTERN_FUNCTION_START
-    ((LanternObject<torch::Tensor>*)self)->get().record_stream(((LanternObject<Stream>*)s)->get());
+    ((LanternObject<torch::Tensor>*)self)->get().record_stream(((LanternObject<at::Stream>*)s)->get());
     return NULL;
   LANTERN_FUNCTION_END
 }

@@ -134,6 +134,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             type = "std::vector<torch::Tensor>";
         }
+        else if (type == "const c10::List<c10::optional<Tensor>> &")
+        {
+            type = "c10::List<c10::optional<torch::Tensor>>";
+        }
         else if (type == "DimnameList")
         {
             type = "std::vector<torch::Dimname>";
@@ -142,11 +146,16 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             type = "std::shared_ptr<torch::Generator>";
         }
+        else if (type == "Stream")
+        {
+            type = "at::Stream";
+        }
 
         // add optional call if required
         std::string call = node[idx]["name"].as<std::string>();
         if ((dtype.find("c10::optional") != std::string::npos) & 
-            (type != "std::vector<torch::Dimname>")
+            (type != "std::vector<torch::Dimname>") &
+            (type != "c10::List<c10::optional<torch::Tensor>>")
             )
         {
             if ((type != "double") & 
