@@ -900,7 +900,7 @@ HOST_API void* lantern_OptionalTensorList ()
 LANTERN_API void (LANTERN_PTR _lantern_OptionalTensorList_push_back) (void* self, void* x, bool is_null);
 HOST_API void lantern_OptionalTensorList_push_back (void* self, void* x, bool is_null)
 {
-  lantern_OptionalTensorList_push_back(self, x, is_null);
+  _lantern_OptionalTensorList_push_back(self, x, is_null);
   LANTERN_HOST_HANDLER;
 }
 
