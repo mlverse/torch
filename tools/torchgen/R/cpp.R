@@ -224,6 +224,14 @@ cpp_parameter_type <- function(argument) {
     declaration <- "Rcpp::XPtr<XPtrTorch>"
   }
 
+  if (argument$dynamic_type == "const c10::List<c10::optional<Tensor>> &") {
+    declaration <- "XPtrTorchOptionalTensorList"
+  }
+
+  if (argument$dynamic_type == "Stream") {
+    declaration <- "XPtrTorchStream"
+  }
+
   declaration
 }
 
@@ -353,6 +361,14 @@ cpp_argument_transform <- function(argument) {
 
   if (argument$dynamic_type == "Storage") {
     result <- glue::glue("{argument$name}->get()")
+  }
+
+  if (argument$dynamic_type == "const c10::List<c10::optional<Tensor>> &") {
+    result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "Stream") {
+    result <- glue::glue("{argument$name}.get()")
   }
 
   result
@@ -529,7 +545,9 @@ SKIP_R_BINDIND <- c(
   "_nnpack_available",
   "backward",
   "_use_cudnn_rnn_flatten_weight",
-  "is_vulkan_available"
+  "is_vulkan_available",
+  "_test_ambiguous_defaults",
+  "_test_string_default"
 )
 
 cpp <- function(path) {

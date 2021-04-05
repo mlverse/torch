@@ -614,6 +614,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method__backward_self_Tensor_inputs_TensorList
+void cpp_torch_method__backward_self_Tensor_inputs_TensorList(XPtrTorchTensor self, XPtrTorchTensorList inputs, XPtrTorchTensor gradient, bool retain_graph, bool create_graph);
+RcppExport SEXP _torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList(SEXP selfSEXP, SEXP inputsSEXP, SEXP gradientSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type gradient(gradientSEXP);
+    Rcpp::traits::input_parameter< bool >::type retain_graph(retain_graphSEXP);
+    Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
+    cpp_torch_method__backward_self_Tensor_inputs_TensorList(self, inputs, gradient, retain_graph, create_graph);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_torch_method_set_data_self_Tensor_new_data_Tensor
 void cpp_torch_method_set_data_self_Tensor_new_data_Tensor(XPtrTorchTensor self, XPtrTorchTensor new_data);
 RcppExport SEXP _torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor(SEXP selfSEXP, SEXP new_dataSEXP) {
@@ -689,6 +703,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     cpp_torch_method_retain_grad_self_Tensor(self);
     return R_NilValue;
+END_RCPP
+}
+// cpp_torch_method__fw_primal_self_Tensor_level_int64_t
+XPtrTorchTensor cpp_torch_method__fw_primal_self_Tensor_level_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 level);
+RcppExport SEXP _torch_cpp_torch_method__fw_primal_self_Tensor_level_int64_t(SEXP selfSEXP, SEXP levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type level(levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method__fw_primal_self_Tensor_level_int64_t(self, level));
+    return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_rename__self_Tensor_names_DimnameList
@@ -1465,6 +1491,54 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_copysign_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_copysign_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_copysign_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_copysign_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_copysign__self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_copysign__self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_copysign__self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_copysign__self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_copysign_self_Tensor_other_Scalar
+XPtrTorchTensor cpp_torch_method_copysign_self_Tensor_other_Scalar(XPtrTorchTensor self, XPtrTorchScalar other);
+RcppExport SEXP _torch_cpp_torch_method_copysign_self_Tensor_other_Scalar(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_copysign_self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_copysign__self_Tensor_other_Scalar
+XPtrTorchTensor cpp_torch_method_copysign__self_Tensor_other_Scalar(XPtrTorchTensor self, XPtrTorchScalar other);
+RcppExport SEXP _torch_cpp_torch_method_copysign__self_Tensor_other_Scalar(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_copysign__self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_logical_not_self_Tensor
 XPtrTorchTensor cpp_torch_method_logical_not_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_method_logical_not_self_Tensor(SEXP selfSEXP) {
@@ -1571,6 +1645,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_broadcast_to_self_Tensor_size_IntArrayRef
+XPtrTorchTensor cpp_torch_method_broadcast_to_self_Tensor_size_IntArrayRef(XPtrTorchTensor self, XPtrTorchIntArrayRef size);
+RcppExport SEXP _torch_cpp_torch_method_broadcast_to_self_Tensor_size_IntArrayRef(SEXP selfSEXP, SEXP sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_broadcast_to_self_Tensor_size_IntArrayRef(self, size));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_ceil_self_Tensor
 XPtrTorchTensor cpp_torch_method_ceil_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_method_ceil_self_Tensor(SEXP selfSEXP) {
@@ -1616,6 +1702,45 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type chunks(chunksSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_chunk_self_Tensor_chunks_int64_t(self, chunks, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_tensor_split_self_Tensor_sections_int64_t
+XPtrTorchTensorList cpp_torch_method_tensor_split_self_Tensor_sections_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 sections, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_method_tensor_split_self_Tensor_sections_int64_t(SEXP selfSEXP, SEXP sectionsSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type sections(sectionsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_tensor_split_self_Tensor_sections_int64_t(self, sections, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_tensor_split_self_Tensor_indices_IntArrayRef
+XPtrTorchTensorList cpp_torch_method_tensor_split_self_Tensor_indices_IntArrayRef(XPtrTorchTensor self, XPtrTorchIntArrayRef indices, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_method_tensor_split_self_Tensor_indices_IntArrayRef(SEXP selfSEXP, SEXP indicesSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_tensor_split_self_Tensor_indices_IntArrayRef(self, indices, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor
+XPtrTorchTensorList cpp_torch_method_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor(XPtrTorchTensor self, XPtrTorchTensor tensor_indices_or_sections, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_method_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor(SEXP selfSEXP, SEXP tensor_indices_or_sectionsSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type tensor_indices_or_sections(tensor_indices_or_sectionsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor(self, tensor_indices_or_sections, dim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1873,6 +1998,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_cumprod__self_Tensor_dim_int64_t
+XPtrTorchTensor cpp_torch_method_cumprod__self_Tensor_dim_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchDtype dtype);
+RcppExport SEXP _torch_cpp_torch_method_cumprod__self_Tensor_dim_int64_t(SEXP selfSEXP, SEXP dimSEXP, SEXP dtypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_cumprod__self_Tensor_dim_int64_t(self, dim, dtype));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_cumprod_self_Tensor_dim_Dimname
 XPtrTorchTensor cpp_torch_method_cumprod_self_Tensor_dim_Dimname(XPtrTorchTensor self, XPtrTorchDimname dim, XPtrTorchDtype dtype);
 RcppExport SEXP _torch_cpp_torch_method_cumprod_self_Tensor_dim_Dimname(SEXP selfSEXP, SEXP dimSEXP, SEXP dtypeSEXP) {
@@ -1883,6 +2021,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_cumprod_self_Tensor_dim_Dimname(self, dim, dtype));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_cumprod__self_Tensor_dim_Dimname
+XPtrTorchTensor cpp_torch_method_cumprod__self_Tensor_dim_Dimname(XPtrTorchTensor self, XPtrTorchDimname dim, XPtrTorchDtype dtype);
+RcppExport SEXP _torch_cpp_torch_method_cumprod__self_Tensor_dim_Dimname(SEXP selfSEXP, SEXP dimSEXP, SEXP dtypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_cumprod__self_Tensor_dim_Dimname(self, dim, dtype));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1899,6 +2050,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_cumsum__self_Tensor_dim_int64_t
+XPtrTorchTensor cpp_torch_method_cumsum__self_Tensor_dim_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchDtype dtype);
+RcppExport SEXP _torch_cpp_torch_method_cumsum__self_Tensor_dim_int64_t(SEXP selfSEXP, SEXP dimSEXP, SEXP dtypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_cumsum__self_Tensor_dim_int64_t(self, dim, dtype));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_cumsum_self_Tensor_dim_Dimname
 XPtrTorchTensor cpp_torch_method_cumsum_self_Tensor_dim_Dimname(XPtrTorchTensor self, XPtrTorchDimname dim, XPtrTorchDtype dtype);
 RcppExport SEXP _torch_cpp_torch_method_cumsum_self_Tensor_dim_Dimname(SEXP selfSEXP, SEXP dimSEXP, SEXP dtypeSEXP) {
@@ -1909,6 +2073,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_cumsum_self_Tensor_dim_Dimname(self, dim, dtype));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_cumsum__self_Tensor_dim_Dimname
+XPtrTorchTensor cpp_torch_method_cumsum__self_Tensor_dim_Dimname(XPtrTorchTensor self, XPtrTorchDimname dim, XPtrTorchDtype dtype);
+RcppExport SEXP _torch_cpp_torch_method_cumsum__self_Tensor_dim_Dimname(SEXP selfSEXP, SEXP dimSEXP, SEXP dtypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_cumsum__self_Tensor_dim_Dimname(self, dim, dtype));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1980,6 +2157,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_diff_self_Tensor
+XPtrTorchTensor cpp_torch_method_diff_self_Tensor(XPtrTorchTensor self, XPtrTorchint64_t2 n, XPtrTorchindex_int64_t dim, XPtrTorchTensor prepend, XPtrTorchTensor append);
+RcppExport SEXP _torch_cpp_torch_method_diff_self_Tensor(SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP prependSEXP, SEXP appendSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type prepend(prependSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type append(appendSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_diff_self_Tensor(self, n, dim, prepend, append));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_div_self_Tensor_other_Tensor
 XPtrTorchTensor cpp_torch_method_div_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
 RcppExport SEXP _torch_cpp_torch_method_div_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
@@ -2004,6 +2196,32 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchTensor other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_stdstring(self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchTensor other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_stdstring(self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_div_self_Tensor_other_Scalar
 XPtrTorchTensor cpp_torch_method_div_self_Tensor_other_Scalar(XPtrTorchTensor self, XPtrTorchScalar other);
 RcppExport SEXP _torch_cpp_torch_method_div_self_Tensor_other_Scalar(SEXP selfSEXP, SEXP otherSEXP) {
@@ -2025,6 +2243,32 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_div__self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchScalar other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_stdstring(self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchScalar other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_stdstring(self, other, rounding_mode));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -2073,6 +2317,58 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_divide__self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchTensor other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_stdstring(self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchTensor other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_stdstring(self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchScalar other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_stdstring(self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchScalar other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_stdstring(self, other, rounding_mode));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -2158,6 +2454,20 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_new_empty_self_Tensor_size_IntArrayRef(self, size, options));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_new_empty_strided_self_Tensor_size_IntArrayRef_stride_IntArrayRef
+XPtrTorchTensor cpp_torch_method_new_empty_strided_self_Tensor_size_IntArrayRef_stride_IntArrayRef(XPtrTorchTensor self, XPtrTorchIntArrayRef size, XPtrTorchIntArrayRef stride, XPtrTorchTensorOptions options);
+RcppExport SEXP _torch_cpp_torch_method_new_empty_strided_self_Tensor_size_IntArrayRef_stride_IntArrayRef(SEXP selfSEXP, SEXP sizeSEXP, SEXP strideSEXP, SEXP optionsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type stride(strideSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_new_empty_strided_self_Tensor_size_IntArrayRef_stride_IntArrayRef(self, size, stride, options));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -2582,57 +2892,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_method_ifft_self_Tensor_signal_ndim_int64_t
-XPtrTorchTensor cpp_torch_method_ifft_self_Tensor_signal_ndim_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool normalized);
-RcppExport SEXP _torch_cpp_torch_method_ifft_self_Tensor_signal_ndim_int64_t(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP normalizedSEXP) {
+// cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor
+XPtrTorchTensor cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices);
+RcppExport SEXP _torch_cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor(SEXP selfSEXP, SEXP indicesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type normalized(normalizedSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_ifft_self_Tensor_signal_ndim_int64_t(self, signal_ndim, normalized));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_method_rfft_self_Tensor_signal_ndim_int64_t
-XPtrTorchTensor cpp_torch_method_rfft_self_Tensor_signal_ndim_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool normalized, bool onesided);
-RcppExport SEXP _torch_cpp_torch_method_rfft_self_Tensor_signal_ndim_int64_t(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP normalizedSEXP, SEXP onesidedSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type normalized(normalizedSEXP);
-    Rcpp::traits::input_parameter< bool >::type onesided(onesidedSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_rfft_self_Tensor_signal_ndim_int64_t(self, signal_ndim, normalized, onesided));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_method_irfft_self_Tensor_signal_ndim_int64_t
-XPtrTorchTensor cpp_torch_method_irfft_self_Tensor_signal_ndim_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool normalized, bool onesided, XPtrTorchIntArrayRef signal_sizes);
-RcppExport SEXP _torch_cpp_torch_method_irfft_self_Tensor_signal_ndim_int64_t(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP normalizedSEXP, SEXP onesidedSEXP, SEXP signal_sizesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type normalized(normalizedSEXP);
-    Rcpp::traits::input_parameter< bool >::type onesided(onesidedSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type signal_sizes(signal_sizesSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_irfft_self_Tensor_signal_ndim_int64_t(self, signal_ndim, normalized, onesided, signal_sizes));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_method_index_self_Tensor_indices_TensorList
-XPtrTorchTensor cpp_torch_method_index_self_Tensor_indices_TensorList(XPtrTorchTensor self, XPtrTorchIndexTensorList indices);
-RcppExport SEXP _torch_cpp_torch_method_index_self_Tensor_indices_TensorList(SEXP selfSEXP, SEXP indicesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIndexTensorList >::type indices(indicesSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_index_self_Tensor_indices_TensorList(self, indices));
+    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor(self, indices));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -2692,31 +2960,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_method_index_put__self_Tensor_indices_TensorList_values_Tensor
-XPtrTorchTensor cpp_torch_method_index_put__self_Tensor_indices_TensorList_values_Tensor(XPtrTorchTensor self, XPtrTorchIndexTensorList indices, XPtrTorchTensor values, bool accumulate);
-RcppExport SEXP _torch_cpp_torch_method_index_put__self_Tensor_indices_TensorList_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
+// cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+XPtrTorchTensor cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate);
+RcppExport SEXP _torch_cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIndexTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_index_put__self_Tensor_indices_TensorList_values_Tensor(self, indices, values, accumulate));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(self, indices, values, accumulate));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_method_index_put_self_Tensor_indices_TensorList_values_Tensor
-XPtrTorchTensor cpp_torch_method_index_put_self_Tensor_indices_TensorList_values_Tensor(XPtrTorchTensor self, XPtrTorchIndexTensorList indices, XPtrTorchTensor values, bool accumulate);
-RcppExport SEXP _torch_cpp_torch_method_index_put_self_Tensor_indices_TensorList_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
+// cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+XPtrTorchTensor cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate);
+RcppExport SEXP _torch_cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIndexTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_index_put_self_Tensor_indices_TensorList_values_Tensor(self, indices, values, accumulate));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(self, indices, values, accumulate));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -2835,6 +3103,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_kron_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_kron_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_kron_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_kron_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_kthvalue_self_Tensor_k_int64_t
 Rcpp::List cpp_torch_method_kthvalue_self_Tensor_k_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 k, XPtrTorchindex_int64_t dim, bool keepdim);
 RcppExport SEXP _torch_cpp_torch_method_kthvalue_self_Tensor_k_int64_t(SEXP selfSEXP, SEXP kSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
@@ -2860,6 +3140,58 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_kthvalue_self_Tensor_k_int64_t_dim_Dimname(self, k, dim, keepdim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_nan_to_num_self_Tensor
+XPtrTorchTensor cpp_torch_method_nan_to_num_self_Tensor(XPtrTorchTensor self, nullable<double> nan, nullable<double> posinf, nullable<double> neginf);
+RcppExport SEXP _torch_cpp_torch_method_nan_to_num_self_Tensor(SEXP selfSEXP, SEXP nanSEXP, SEXP posinfSEXP, SEXP neginfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type nan(nanSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type posinf(posinfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type neginf(neginfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_nan_to_num_self_Tensor(self, nan, posinf, neginf));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_nan_to_num__self_Tensor
+XPtrTorchTensor cpp_torch_method_nan_to_num__self_Tensor(XPtrTorchTensor self, nullable<double> nan, nullable<double> posinf, nullable<double> neginf);
+RcppExport SEXP _torch_cpp_torch_method_nan_to_num__self_Tensor(SEXP selfSEXP, SEXP nanSEXP, SEXP posinfSEXP, SEXP neginfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type nan(nanSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type posinf(posinfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type neginf(neginfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_nan_to_num__self_Tensor(self, nan, posinf, neginf));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_ldexp_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_ldexp_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_ldexp_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_ldexp_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_ldexp__self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_ldexp__self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_ldexp__self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_ldexp__self_Tensor_other_Tensor(self, other));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -2972,6 +3304,54 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_logaddexp2_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_xlogy_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_xlogy_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_xlogy_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_xlogy_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_xlogy_self_Tensor_other_Scalar
+XPtrTorchTensor cpp_torch_method_xlogy_self_Tensor_other_Scalar(XPtrTorchTensor self, XPtrTorchScalar other);
+RcppExport SEXP _torch_cpp_torch_method_xlogy_self_Tensor_other_Scalar(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_xlogy_self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_xlogy__self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_xlogy__self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_xlogy__self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_xlogy__self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_xlogy__self_Tensor_other_Scalar
+XPtrTorchTensor cpp_torch_method_xlogy__self_Tensor_other_Scalar(XPtrTorchTensor self, XPtrTorchScalar other);
+RcppExport SEXP _torch_cpp_torch_method_xlogy__self_Tensor_other_Scalar(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_xlogy__self_Tensor_other_Scalar(self, other));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -3176,6 +3556,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_median_self_Tensor
+XPtrTorchTensor cpp_torch_method_median_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_method_median_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_median_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_median_self_Tensor_dim_int64_t
 Rcpp::List cpp_torch_method_median_self_Tensor_dim_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, bool keepdim);
 RcppExport SEXP _torch_cpp_torch_method_median_self_Tensor_dim_int64_t(SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
@@ -3199,6 +3590,43 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_median_self_Tensor_dim_Dimname(self, dim, keepdim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_nanmedian_self_Tensor
+XPtrTorchTensor cpp_torch_method_nanmedian_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_method_nanmedian_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_nanmedian_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_nanmedian_self_Tensor_dim_int64_t
+Rcpp::List cpp_torch_method_nanmedian_self_Tensor_dim_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, bool keepdim);
+RcppExport SEXP _torch_cpp_torch_method_nanmedian_self_Tensor_dim_int64_t(SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_nanmedian_self_Tensor_dim_int64_t(self, dim, keepdim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_nanmedian_self_Tensor_dim_Dimname
+Rcpp::List cpp_torch_method_nanmedian_self_Tensor_dim_Dimname(XPtrTorchTensor self, XPtrTorchDimname dim, bool keepdim);
+RcppExport SEXP _torch_cpp_torch_method_nanmedian_self_Tensor_dim_Dimname(SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_nanmedian_self_Tensor_dim_Dimname(self, dim, keepdim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -3491,6 +3919,32 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef
+XPtrTorchTensor cpp_torch_method_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef(XPtrTorchTensor self, XPtrTorchIntArrayRef source, XPtrTorchIntArrayRef destination);
+RcppExport SEXP _torch_cpp_torch_method_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef(SEXP selfSEXP, SEXP sourceSEXP, SEXP destinationSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type source(sourceSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type destination(destinationSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef(self, source, destination));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_moveaxis_self_Tensor_source_int64_t_destination_int64_t
+XPtrTorchTensor cpp_torch_method_moveaxis_self_Tensor_source_int64_t_destination_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 source, XPtrTorchint64_t2 destination);
+RcppExport SEXP _torch_cpp_torch_method_moveaxis_self_Tensor_source_int64_t_destination_int64_t(SEXP selfSEXP, SEXP sourceSEXP, SEXP destinationSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type source(sourceSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type destination(destinationSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_moveaxis_self_Tensor_source_int64_t_destination_int64_t(self, source, destination));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_numpy_T_self_Tensor
 XPtrTorchTensor cpp_torch_method_numpy_T_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_method_numpy_T_self_Tensor(SEXP selfSEXP) {
@@ -3577,6 +4031,17 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_deg2rad__self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_ravel_self_Tensor
+XPtrTorchTensor cpp_torch_method_ravel_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_method_ravel_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_ravel_self_Tensor(self));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -3918,6 +4383,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_sinc_self_Tensor
+XPtrTorchTensor cpp_torch_method_sinc_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_method_sinc_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_sinc_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_sinc__self_Tensor
+XPtrTorchTensor cpp_torch_method_sinc__self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_method_sinc__self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_sinc__self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_sinh_self_Tensor
 XPtrTorchTensor cpp_torch_method_sinh_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_method_sinh_self_Tensor(SEXP selfSEXP) {
@@ -3962,18 +4449,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_method_size_self_Tensor_dim_int64_t
-int64_t cpp_torch_method_size_self_Tensor_dim_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim);
-RcppExport SEXP _torch_cpp_torch_method_size_self_Tensor_dim_int64_t(SEXP selfSEXP, SEXP dimSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_size_self_Tensor_dim_int64_t(self, dim));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_torch_method_size_self_Tensor_dim_Dimname
 int64_t cpp_torch_method_size_self_Tensor_dim_Dimname(XPtrTorchTensor self, XPtrTorchDimname dim);
 RcppExport SEXP _torch_cpp_torch_method_size_self_Tensor_dim_Dimname(SEXP selfSEXP, SEXP dimSEXP) {
@@ -3987,15 +4462,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_slice_self_Tensor
-XPtrTorchTensor cpp_torch_method_slice_self_Tensor(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchint64_t2 start, XPtrTorchint64_t2 end, XPtrTorchint64_t2 step);
+XPtrTorchTensor cpp_torch_method_slice_self_Tensor(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchoptional_int64_t2 start, XPtrTorchoptional_int64_t2 end, XPtrTorchint64_t2 step);
 RcppExport SEXP _torch_cpp_torch_method_slice_self_Tensor(SEXP selfSEXP, SEXP dimSEXP, SEXP startSEXP, SEXP endSEXP, SEXP stepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type start(startSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type end(endSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type start(startSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type end(endSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type step(stepSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_slice_self_Tensor(self, dim, start, end, step));
     return rcpp_result_gen;
@@ -4222,18 +4697,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type length(lengthSEXP);
     Rcpp::traits::input_parameter< bool >::type return_complex(return_complexSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_istft_self_Tensor_n_fft_int64_t(self, n_fft, hop_length, win_length, window, center, normalized, onesided, length, return_complex));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_method_stride_self_Tensor_dim_int64_t
-int64_t cpp_torch_method_stride_self_Tensor_dim_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim);
-RcppExport SEXP _torch_cpp_torch_method_stride_self_Tensor_dim_int64_t(SEXP selfSEXP, SEXP dimSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_stride_self_Tensor_dim_int64_t(self, dim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -4514,6 +4977,18 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_tanh__self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_tile_self_Tensor_dims_IntArrayRef
+XPtrTorchTensor cpp_torch_method_tile_self_Tensor_dims_IntArrayRef(XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dims);
+RcppExport SEXP _torch_cpp_torch_method_tile_self_Tensor_dims_IntArrayRef(SEXP selfSEXP, SEXP dimsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dims(dimsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_tile_self_Tensor_dims_IntArrayRef(self, dims));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -5079,13 +5554,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_to_dense_self_Tensor
-XPtrTorchTensor cpp_torch_method_to_dense_self_Tensor(XPtrTorchTensor self);
-RcppExport SEXP _torch_cpp_torch_method_to_dense_self_Tensor(SEXP selfSEXP) {
+XPtrTorchTensor cpp_torch_method_to_dense_self_Tensor(XPtrTorchTensor self, XPtrTorchDtype dtype);
+RcppExport SEXP _torch_cpp_torch_method_to_dense_self_Tensor(SEXP selfSEXP, SEXP dtypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_to_dense_self_Tensor(self));
+    Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_to_dense_self_Tensor(self, dtype));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -5270,13 +5746,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_to_mkldnn_self_Tensor
-XPtrTorchTensor cpp_torch_method_to_mkldnn_self_Tensor(XPtrTorchTensor self);
-RcppExport SEXP _torch_cpp_torch_method_to_mkldnn_self_Tensor(SEXP selfSEXP) {
+XPtrTorchTensor cpp_torch_method_to_mkldnn_self_Tensor(XPtrTorchTensor self, XPtrTorchDtype dtype);
+RcppExport SEXP _torch_cpp_torch_method_to_mkldnn_self_Tensor(SEXP selfSEXP, SEXP dtypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_to_mkldnn_self_Tensor(self));
+    Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_to_mkldnn_self_Tensor(self, dtype));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -5589,6 +6066,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_view_self_Tensor_size_IntArrayRef(self, size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_view_self_Tensor_dtype_ScalarType
+XPtrTorchTensor cpp_torch_method_view_self_Tensor_dtype_ScalarType(XPtrTorchTensor self, XPtrTorchDtype dtype);
+RcppExport SEXP _torch_cpp_torch_method_view_self_Tensor_dtype_ScalarType(SEXP selfSEXP, SEXP dtypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_view_self_Tensor_dtype_ScalarType(self, dtype));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -6324,17 +6813,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_method_lgamma__self_Tensor
-XPtrTorchTensor cpp_torch_method_lgamma__self_Tensor(XPtrTorchTensor self);
-RcppExport SEXP _torch_cpp_torch_method_lgamma__self_Tensor(SEXP selfSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_lgamma__self_Tensor(self));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_torch_method_atan2__self_Tensor_other_Tensor
 XPtrTorchTensor cpp_torch_method_atan2__self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
 RcppExport SEXP _torch_cpp_torch_method_atan2__self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
@@ -6405,30 +6883,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type maxnorm(maxnormSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_renorm__self_Tensor_p_Scalar_dim_int64_t_maxnorm_Scalar(self, p, dim, maxnorm));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_method_pow__self_Tensor_exponent_Scalar
-XPtrTorchTensor cpp_torch_method_pow__self_Tensor_exponent_Scalar(XPtrTorchTensor self, XPtrTorchScalar exponent);
-RcppExport SEXP _torch_cpp_torch_method_pow__self_Tensor_exponent_Scalar(SEXP selfSEXP, SEXP exponentSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchScalar >::type exponent(exponentSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_pow__self_Tensor_exponent_Scalar(self, exponent));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_method_pow__self_Tensor_exponent_Tensor
-XPtrTorchTensor cpp_torch_method_pow__self_Tensor_exponent_Tensor(XPtrTorchTensor self, XPtrTorchTensor exponent);
-RcppExport SEXP _torch_cpp_torch_method_pow__self_Tensor_exponent_Tensor(SEXP selfSEXP, SEXP exponentSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type exponent(exponentSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_pow__self_Tensor_exponent_Tensor(self, exponent));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -7428,6 +7882,58 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t
+XPtrTorchTensor cpp_torch_method_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 axis0, XPtrTorchint64_t2 axis1);
+RcppExport SEXP _torch_cpp_torch_method_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t(SEXP selfSEXP, SEXP axis0SEXP, SEXP axis1SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type axis0(axis0SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type axis1(axis1SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t(self, axis0, axis1));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_swapaxes__self_Tensor_axis0_int64_t_axis1_int64_t
+XPtrTorchTensor cpp_torch_method_swapaxes__self_Tensor_axis0_int64_t_axis1_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 axis0, XPtrTorchint64_t2 axis1);
+RcppExport SEXP _torch_cpp_torch_method_swapaxes__self_Tensor_axis0_int64_t_axis1_int64_t(SEXP selfSEXP, SEXP axis0SEXP, SEXP axis1SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type axis0(axis0SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type axis1(axis1SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_swapaxes__self_Tensor_axis0_int64_t_axis1_int64_t(self, axis0, axis1));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t
+XPtrTorchTensor cpp_torch_method_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim0, XPtrTorchindex_int64_t dim1);
+RcppExport SEXP _torch_cpp_torch_method_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t(SEXP selfSEXP, SEXP dim0SEXP, SEXP dim1SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim0(dim0SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim1(dim1SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t(self, dim0, dim1));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_swapdims__self_Tensor_dim0_int64_t_dim1_int64_t
+XPtrTorchTensor cpp_torch_method_swapdims__self_Tensor_dim0_int64_t_dim1_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim0, XPtrTorchindex_int64_t dim1);
+RcppExport SEXP _torch_cpp_torch_method_swapdims__self_Tensor_dim0_int64_t_dim1_int64_t(SEXP selfSEXP, SEXP dim0SEXP, SEXP dim1SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim0(dim0SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim1(dim1SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_swapdims__self_Tensor_dim0_int64_t_dim1_int64_t(self, dim0, dim1));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_cholesky_self_Tensor
 XPtrTorchTensor cpp_torch_method_cholesky_self_Tensor(XPtrTorchTensor self, bool upper);
 RcppExport SEXP _torch_cpp_torch_method_cholesky_self_Tensor(SEXP selfSEXP, SEXP upperSEXP) {
@@ -7551,6 +8057,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type replacement(replacementSEXP);
     Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t(self, num_samples, replacement, generator));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_lgamma__self_Tensor
+XPtrTorchTensor cpp_torch_method_lgamma__self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_method_lgamma__self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_lgamma__self_Tensor(self));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -7766,6 +8283,54 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_igamma_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_igamma_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_igamma_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_igamma_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_igamma__self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_igamma__self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_igamma__self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_igamma__self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_igammac_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_igammac_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_igammac_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_igammac_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_igammac__self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_igammac__self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_igammac__self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_igammac__self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_nextafter_self_Tensor_other_Tensor
 XPtrTorchTensor cpp_torch_method_nextafter_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
 RcppExport SEXP _torch_cpp_torch_method_nextafter_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
@@ -7825,6 +8390,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_fmin_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_fmin_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_fmin_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_fmin_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_max_self_Tensor
 XPtrTorchTensor cpp_torch_method_max_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_method_max_self_Tensor(SEXP selfSEXP) {
@@ -7833,6 +8410,18 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_max_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_fmax_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_fmax_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_fmax_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_fmax_self_Tensor_other_Tensor(self, other));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -7881,17 +8470,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_min_self_Tensor_other_Tensor(self, other));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_method_median_self_Tensor
-XPtrTorchTensor cpp_torch_method_median_self_Tensor(XPtrTorchTensor self);
-RcppExport SEXP _torch_cpp_torch_method_median_self_Tensor(SEXP selfSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_median_self_Tensor(self));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -7974,6 +8552,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type descending(descendingSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_sort_self_Tensor_dim_Dimname(self, dim, descending));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_msort_self_Tensor
+XPtrTorchTensor cpp_torch_method_msort_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_method_msort_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_msort_self_Tensor(self));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -8104,6 +8693,78 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_pow__self_Tensor_exponent_Scalar
+XPtrTorchTensor cpp_torch_method_pow__self_Tensor_exponent_Scalar(XPtrTorchTensor self, XPtrTorchScalar exponent);
+RcppExport SEXP _torch_cpp_torch_method_pow__self_Tensor_exponent_Scalar(SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_pow__self_Tensor_exponent_Scalar(self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_pow__self_Tensor_exponent_Tensor
+XPtrTorchTensor cpp_torch_method_pow__self_Tensor_exponent_Tensor(XPtrTorchTensor self, XPtrTorchTensor exponent);
+RcppExport SEXP _torch_cpp_torch_method_pow__self_Tensor_exponent_Tensor(SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_pow__self_Tensor_exponent_Tensor(self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_float_power_self_Tensor_exponent_Tensor
+XPtrTorchTensor cpp_torch_method_float_power_self_Tensor_exponent_Tensor(XPtrTorchTensor self, XPtrTorchTensor exponent);
+RcppExport SEXP _torch_cpp_torch_method_float_power_self_Tensor_exponent_Tensor(SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_float_power_self_Tensor_exponent_Tensor(self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_float_power_self_Tensor_exponent_Scalar
+XPtrTorchTensor cpp_torch_method_float_power_self_Tensor_exponent_Scalar(XPtrTorchTensor self, XPtrTorchScalar exponent);
+RcppExport SEXP _torch_cpp_torch_method_float_power_self_Tensor_exponent_Scalar(SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_float_power_self_Tensor_exponent_Scalar(self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_float_power__self_Tensor_exponent_Scalar
+XPtrTorchTensor cpp_torch_method_float_power__self_Tensor_exponent_Scalar(XPtrTorchTensor self, XPtrTorchScalar exponent);
+RcppExport SEXP _torch_cpp_torch_method_float_power__self_Tensor_exponent_Scalar(SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_float_power__self_Tensor_exponent_Scalar(self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_float_power__self_Tensor_exponent_Tensor
+XPtrTorchTensor cpp_torch_method_float_power__self_Tensor_exponent_Tensor(XPtrTorchTensor self, XPtrTorchTensor exponent);
+RcppExport SEXP _torch_cpp_torch_method_float_power__self_Tensor_exponent_Tensor(SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_float_power__self_Tensor_exponent_Tensor(self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_method_normal__self_Tensor
 XPtrTorchTensor cpp_torch_method_normal__self_Tensor(XPtrTorchTensor self, double mean, double std, XPtrTorchGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_normal__self_Tensor(SEXP selfSEXP, SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
@@ -8151,6 +8812,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_method_record_stream_self_Tensor_s_Stream
+void cpp_torch_method_record_stream_self_Tensor_s_Stream(XPtrTorchTensor self, XPtrTorchStream s);
+RcppExport SEXP _torch_cpp_torch_method_record_stream_self_Tensor_s_Stream(SEXP selfSEXP, SEXP sSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchStream >::type s(sSEXP);
+    cpp_torch_method_record_stream_self_Tensor_s_Stream(self, s);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_torch_method_isposinf_self_Tensor
 XPtrTorchTensor cpp_torch_method_isposinf_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_method_isposinf_self_Tensor(SEXP selfSEXP) {
@@ -8173,19 +8845,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_method_fft_self_Tensor_signal_ndim_int64_t
-XPtrTorchTensor cpp_torch_method_fft_self_Tensor_signal_ndim_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool normalized);
-RcppExport SEXP _torch_cpp_torch_method_fft_self_Tensor_signal_ndim_int64_t(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP normalizedSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type normalized(normalizedSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_fft_self_Tensor_signal_ndim_int64_t(self, signal_ndim, normalized));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_torch_method_det_self_Tensor
 XPtrTorchTensor cpp_torch_method_det_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_method_det_self_Tensor(SEXP selfSEXP) {
@@ -8194,6 +8853,18 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_det_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_inner_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_method_inner_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_method_inner_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_inner_self_Tensor_other_Tensor(self, other));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -8317,6 +8988,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace__make_dual_primal_Tensor_tangent_Tensor_level_int64_t
+XPtrTorchTensor cpp_torch_namespace__make_dual_primal_Tensor_tangent_Tensor_level_int64_t(XPtrTorchTensor primal, XPtrTorchTensor tangent, XPtrTorchint64_t2 level);
+RcppExport SEXP _torch_cpp_torch_namespace__make_dual_primal_Tensor_tangent_Tensor_level_int64_t(SEXP primalSEXP, SEXP tangentSEXP, SEXP levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type primal(primalSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type tangent(tangentSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type level(levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__make_dual_primal_Tensor_tangent_Tensor_level_int64_t(primal, tangent, level));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__unpack_dual_dual_Tensor_level_int64_t
+Rcpp::List cpp_torch_namespace__unpack_dual_dual_Tensor_level_int64_t(XPtrTorchTensor dual, XPtrTorchint64_t2 level);
+RcppExport SEXP _torch_cpp_torch_namespace__unpack_dual_dual_Tensor_level_int64_t(SEXP dualSEXP, SEXP levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type dual(dualSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type level(levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__unpack_dual_dual_Tensor_level_int64_t(dual, level));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_align_tensors_tensors_TensorList
 XPtrTorchTensorList cpp_torch_namespace_align_tensors_tensors_TensorList(XPtrTorchTensorList tensors);
 RcppExport SEXP _torch_cpp_torch_namespace_align_tensors_tensors_TensorList(SEXP tensorsSEXP) {
@@ -8360,9 +9056,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool
-XPtrTorchTensor cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool(XPtrTorchTensorList weight_arr, XPtrTorchint64_t2 weight_stride0, XPtrTorchint64_t2 input_size, XPtrTorchint64_t2 mode, XPtrTorchint64_t2 hidden_size, XPtrTorchint64_t2 num_layers, bool batch_first, bool bidirectional);
-RcppExport SEXP _torch_cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool(SEXP weight_arrSEXP, SEXP weight_stride0SEXP, SEXP input_sizeSEXP, SEXP modeSEXP, SEXP hidden_sizeSEXP, SEXP num_layersSEXP, SEXP batch_firstSEXP, SEXP bidirectionalSEXP) {
+// cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool
+XPtrTorchTensor cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool(XPtrTorchTensorList weight_arr, XPtrTorchint64_t2 weight_stride0, XPtrTorchint64_t2 input_size, XPtrTorchint64_t2 mode, XPtrTorchint64_t2 hidden_size, XPtrTorchint64_t2 proj_size, XPtrTorchint64_t2 num_layers, bool batch_first, bool bidirectional);
+RcppExport SEXP _torch_cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool(SEXP weight_arrSEXP, SEXP weight_stride0SEXP, SEXP input_sizeSEXP, SEXP modeSEXP, SEXP hidden_sizeSEXP, SEXP proj_sizeSEXP, SEXP num_layersSEXP, SEXP batch_firstSEXP, SEXP bidirectionalSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -8371,16 +9067,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type input_size(input_sizeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type mode(modeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type hidden_size(hidden_sizeSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type proj_size(proj_sizeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type num_layers(num_layersSEXP);
     Rcpp::traits::input_parameter< bool >::type batch_first(batch_firstSEXP);
     Rcpp::traits::input_parameter< bool >::type bidirectional(bidirectionalSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool(weight_arr, weight_stride0, input_size, mode, hidden_size, num_layers, batch_first, bidirectional));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool(weight_arr, weight_stride0, input_size, mode, hidden_size, proj_size, num_layers, batch_first, bidirectional));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor
-Rcpp::List cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor(XPtrTorchTensor input, XPtrTorchTensorList weight, XPtrTorchint64_t2 weight_stride0, XPtrTorchTensor weight_buf, XPtrTorchTensor hx, XPtrTorchTensor cx, XPtrTorchint64_t2 mode, XPtrTorchint64_t2 hidden_size, XPtrTorchint64_t2 num_layers, bool batch_first, double dropout, bool train, bool bidirectional, XPtrTorchIntArrayRef batch_sizes, XPtrTorchTensor dropout_state);
-RcppExport SEXP _torch_cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor(SEXP inputSEXP, SEXP weightSEXP, SEXP weight_stride0SEXP, SEXP weight_bufSEXP, SEXP hxSEXP, SEXP cxSEXP, SEXP modeSEXP, SEXP hidden_sizeSEXP, SEXP num_layersSEXP, SEXP batch_firstSEXP, SEXP dropoutSEXP, SEXP trainSEXP, SEXP bidirectionalSEXP, SEXP batch_sizesSEXP, SEXP dropout_stateSEXP) {
+// cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor
+Rcpp::List cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor(XPtrTorchTensor input, XPtrTorchTensorList weight, XPtrTorchint64_t2 weight_stride0, XPtrTorchTensor weight_buf, XPtrTorchTensor hx, XPtrTorchTensor cx, XPtrTorchint64_t2 mode, XPtrTorchint64_t2 hidden_size, XPtrTorchint64_t2 proj_size, XPtrTorchint64_t2 num_layers, bool batch_first, double dropout, bool train, bool bidirectional, XPtrTorchIntArrayRef batch_sizes, XPtrTorchTensor dropout_state);
+RcppExport SEXP _torch_cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor(SEXP inputSEXP, SEXP weightSEXP, SEXP weight_stride0SEXP, SEXP weight_bufSEXP, SEXP hxSEXP, SEXP cxSEXP, SEXP modeSEXP, SEXP hidden_sizeSEXP, SEXP proj_sizeSEXP, SEXP num_layersSEXP, SEXP batch_firstSEXP, SEXP dropoutSEXP, SEXP trainSEXP, SEXP bidirectionalSEXP, SEXP batch_sizesSEXP, SEXP dropout_stateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -8392,6 +9089,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type cx(cxSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type mode(modeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type hidden_size(hidden_sizeSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type proj_size(proj_sizeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type num_layers(num_layersSEXP);
     Rcpp::traits::input_parameter< bool >::type batch_first(batch_firstSEXP);
     Rcpp::traits::input_parameter< double >::type dropout(dropoutSEXP);
@@ -8399,13 +9097,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type bidirectional(bidirectionalSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type batch_sizes(batch_sizesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type dropout_state(dropout_stateSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor(input, weight, weight_stride0, weight_buf, hx, cx, mode, hidden_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor(input, weight, weight_stride0, weight_buf, hx, cx, mode, hidden_size, proj_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4
-Rcpp::List cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4(XPtrTorchTensor input, XPtrTorchTensorList weight, XPtrTorchint64_t2 weight_stride0, XPtrTorchTensor weight_buf, XPtrTorchTensor hx, XPtrTorchTensor cx, XPtrTorchTensor output, XPtrTorchTensor grad_output, XPtrTorchTensor grad_hy, XPtrTorchTensor grad_cy, XPtrTorchint64_t2 mode, XPtrTorchint64_t2 hidden_size, XPtrTorchint64_t2 num_layers, bool batch_first, double dropout, bool train, bool bidirectional, XPtrTorchIntArrayRef batch_sizes, XPtrTorchTensor dropout_state, XPtrTorchTensor reserve, std::vector<bool> output_mask);
-RcppExport SEXP _torch_cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4(SEXP inputSEXP, SEXP weightSEXP, SEXP weight_stride0SEXP, SEXP weight_bufSEXP, SEXP hxSEXP, SEXP cxSEXP, SEXP outputSEXP, SEXP grad_outputSEXP, SEXP grad_hySEXP, SEXP grad_cySEXP, SEXP modeSEXP, SEXP hidden_sizeSEXP, SEXP num_layersSEXP, SEXP batch_firstSEXP, SEXP dropoutSEXP, SEXP trainSEXP, SEXP bidirectionalSEXP, SEXP batch_sizesSEXP, SEXP dropout_stateSEXP, SEXP reserveSEXP, SEXP output_maskSEXP) {
+// cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4
+Rcpp::List cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4(XPtrTorchTensor input, XPtrTorchTensorList weight, XPtrTorchint64_t2 weight_stride0, XPtrTorchTensor weight_buf, XPtrTorchTensor hx, XPtrTorchTensor cx, XPtrTorchTensor output, XPtrTorchTensor grad_output, XPtrTorchTensor grad_hy, XPtrTorchTensor grad_cy, XPtrTorchint64_t2 mode, XPtrTorchint64_t2 hidden_size, XPtrTorchint64_t2 proj_size, XPtrTorchint64_t2 num_layers, bool batch_first, double dropout, bool train, bool bidirectional, XPtrTorchIntArrayRef batch_sizes, XPtrTorchTensor dropout_state, XPtrTorchTensor reserve, std::vector<bool> output_mask);
+RcppExport SEXP _torch_cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4(SEXP inputSEXP, SEXP weightSEXP, SEXP weight_stride0SEXP, SEXP weight_bufSEXP, SEXP hxSEXP, SEXP cxSEXP, SEXP outputSEXP, SEXP grad_outputSEXP, SEXP grad_hySEXP, SEXP grad_cySEXP, SEXP modeSEXP, SEXP hidden_sizeSEXP, SEXP proj_sizeSEXP, SEXP num_layersSEXP, SEXP batch_firstSEXP, SEXP dropoutSEXP, SEXP trainSEXP, SEXP bidirectionalSEXP, SEXP batch_sizesSEXP, SEXP dropout_stateSEXP, SEXP reserveSEXP, SEXP output_maskSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -8421,6 +9119,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad_cy(grad_cySEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type mode(modeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type hidden_size(hidden_sizeSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type proj_size(proj_sizeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type num_layers(num_layersSEXP);
     Rcpp::traits::input_parameter< bool >::type batch_first(batch_firstSEXP);
     Rcpp::traits::input_parameter< double >::type dropout(dropoutSEXP);
@@ -8430,7 +9129,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type dropout_state(dropout_stateSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type reserve(reserveSEXP);
     Rcpp::traits::input_parameter< std::vector<bool> >::type output_mask(output_maskSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4(input, weight, weight_stride0, weight_buf, hx, cx, output, grad_output, grad_hy, grad_cy, mode, hidden_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state, reserve, output_mask));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4(input, weight, weight_stride0, weight_buf, hx, cx, output, grad_output, grad_hy, grad_cy, mode, hidden_size, proj_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state, reserve, output_mask));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -9369,6 +10068,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_argmax_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_argmax_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_index_int64_t dim, bool keepdim);
+RcppExport SEXP _torch_cpp_torch_namespace_argmax_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_index_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_argmax_out_out_Tensor_self_Tensor(out, self, dim, keepdim));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_argmin_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_argmin_self_Tensor(XPtrTorchTensor self, XPtrTorchoptional_index_int64_t dim, bool keepdim);
 RcppExport SEXP _torch_cpp_torch_namespace_argmin_self_Tensor(SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
@@ -9379,6 +10092,20 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchoptional_index_int64_t >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_argmin_self_Tensor(self, dim, keepdim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_argmin_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_argmin_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_index_int64_t dim, bool keepdim);
+RcppExport SEXP _torch_cpp_torch_namespace_argmin_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_index_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_argmin_out_out_Tensor_self_Tensor(out, self, dim, keepdim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -10144,6 +10871,43 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_copysign_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_copysign_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_copysign_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_copysign_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_copysign_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_copysign_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_copysign_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_copysign_out_out_Tensor_self_Tensor_other_Tensor(out, self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_copysign_self_Tensor_other_Scalar
+XPtrTorchTensor cpp_torch_namespace_copysign_self_Tensor_other_Scalar(XPtrTorchTensor self, XPtrTorchScalar other);
+RcppExport SEXP _torch_cpp_torch_namespace_copysign_self_Tensor_other_Scalar(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_copysign_self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_logical_not_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_logical_not_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_namespace_logical_not_self_Tensor(SEXP selfSEXP) {
@@ -10330,6 +11094,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef
+XPtrTorchTensor cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef(XPtrTorchTensor self, XPtrTorchIntArrayRef size);
+RcppExport SEXP _torch_cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef(SEXP selfSEXP, SEXP sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef(self, size));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_cat_tensors_TensorList
 XPtrTorchTensor cpp_torch_namespace_cat_tensors_TensorList(XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim);
 RcppExport SEXP _torch_cpp_torch_namespace_cat_tensors_TensorList(SEXP tensorsSEXP, SEXP dimSEXP) {
@@ -10459,6 +11235,45 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type chunks(chunksSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_chunk_self_Tensor_chunks_int64_t(self, chunks, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_tensor_split_self_Tensor_sections_int64_t
+XPtrTorchTensorList cpp_torch_namespace_tensor_split_self_Tensor_sections_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 sections, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_namespace_tensor_split_self_Tensor_sections_int64_t(SEXP selfSEXP, SEXP sectionsSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type sections(sectionsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_tensor_split_self_Tensor_sections_int64_t(self, sections, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_tensor_split_self_Tensor_indices_IntArrayRef
+XPtrTorchTensorList cpp_torch_namespace_tensor_split_self_Tensor_indices_IntArrayRef(XPtrTorchTensor self, XPtrTorchIntArrayRef indices, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_namespace_tensor_split_self_Tensor_indices_IntArrayRef(SEXP selfSEXP, SEXP indicesSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_tensor_split_self_Tensor_indices_IntArrayRef(self, indices, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor
+XPtrTorchTensorList cpp_torch_namespace_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor(XPtrTorchTensor self, XPtrTorchTensor tensor_indices_or_sections, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_namespace_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor(SEXP selfSEXP, SEXP tensor_indices_or_sectionsSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type tensor_indices_or_sections(tensor_indices_or_sectionsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor(self, tensor_indices_or_sections, dim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -11825,6 +12640,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_diff_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_diff_self_Tensor(XPtrTorchTensor self, XPtrTorchint64_t2 n, XPtrTorchindex_int64_t dim, XPtrTorchTensor prepend, XPtrTorchTensor append);
+RcppExport SEXP _torch_cpp_torch_namespace_diff_self_Tensor(SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP prependSEXP, SEXP appendSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type prepend(prependSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type append(appendSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_diff_self_Tensor(self, n, dim, prepend, append));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_diff_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_diff_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchint64_t2 n, XPtrTorchindex_int64_t dim, XPtrTorchTensor prepend, XPtrTorchTensor append);
+RcppExport SEXP _torch_cpp_torch_namespace_diff_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP prependSEXP, SEXP appendSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type prepend(prependSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type append(appendSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_diff_out_out_Tensor_self_Tensor(out, self, n, dim, prepend, append));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_div_self_Tensor_other_Tensor
 XPtrTorchTensor cpp_torch_namespace_div_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
 RcppExport SEXP _torch_cpp_torch_namespace_div_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
@@ -11850,6 +12696,33 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchTensor other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_stdstring(self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring(out, self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_div_self_Tensor_other_Scalar
 XPtrTorchTensor cpp_torch_namespace_div_self_Tensor_other_Scalar(XPtrTorchTensor self, XPtrTorchScalar other);
 RcppExport SEXP _torch_cpp_torch_namespace_div_self_Tensor_other_Scalar(SEXP selfSEXP, SEXP otherSEXP) {
@@ -11859,6 +12732,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_div_self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchScalar other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_stdstring(self, other, rounding_mode));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -11896,6 +12782,46 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_divide_self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchTensor other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_stdstring(self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring(out, self, other, rounding_mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_stdstring
+XPtrTorchTensor cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_stdstring(XPtrTorchTensor self, XPtrTorchScalar other, std::string rounding_mode);
+RcppExport SEXP _torch_cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_stdstring(SEXP selfSEXP, SEXP otherSEXP, SEXP rounding_modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rounding_mode(rounding_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_stdstring(self, other, rounding_mode));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -12088,6 +13014,42 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type per_sample_weights(per_sample_weightsSEXP);
     Rcpp::traits::input_parameter< bool >::type include_last_offset(include_last_offsetSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__embedding_bag_forward_only_weight_Tensor_indices_Tensor_offsets_Tensor(weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__rowwise_prune_weight_Tensor_mask_Tensor_compressed_indices_dtype_ScalarType
+Rcpp::List cpp_torch_namespace__rowwise_prune_weight_Tensor_mask_Tensor_compressed_indices_dtype_ScalarType(XPtrTorchTensor weight, XPtrTorchTensor mask, XPtrTorchDtype compressed_indices_dtype);
+RcppExport SEXP _torch_cpp_torch_namespace__rowwise_prune_weight_Tensor_mask_Tensor_compressed_indices_dtype_ScalarType(SEXP weightSEXP, SEXP maskSEXP, SEXP compressed_indices_dtypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type weight(weightSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type mask(maskSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDtype >::type compressed_indices_dtype(compressed_indices_dtypeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__rowwise_prune_weight_Tensor_mask_Tensor_compressed_indices_dtype_ScalarType(weight, mask, compressed_indices_dtype));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_row_stack_tensors_TensorList
+XPtrTorchTensor cpp_torch_namespace_row_stack_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace_row_stack_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_row_stack_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_row_stack_out_out_Tensor_tensors_TensorList
+XPtrTorchTensor cpp_torch_namespace_row_stack_out_out_Tensor_tensors_TensorList(XPtrTorchTensor out, XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace_row_stack_out_out_Tensor_tensors_TensorList(SEXP outSEXP, SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_row_stack_out_out_Tensor_tensors_TensorList(out, tensors));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -13164,83 +14126,90 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_ifft_self_Tensor_signal_ndim_int64_t
-XPtrTorchTensor cpp_torch_namespace_ifft_self_Tensor_signal_ndim_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool normalized);
-RcppExport SEXP _torch_cpp_torch_namespace_ifft_self_Tensor_signal_ndim_int64_t(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP normalizedSEXP) {
+// cpp_torch_namespace__fft_r2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool
+XPtrTorchTensor cpp_torch_namespace__fft_r2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool(XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchint64_t2 normalization, bool onesided);
+RcppExport SEXP _torch_cpp_torch_namespace__fft_r2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool(SEXP selfSEXP, SEXP dimSEXP, SEXP normalizationSEXP, SEXP onesidedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type normalized(normalizedSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_ifft_self_Tensor_signal_ndim_int64_t(self, signal_ndim, normalized));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace_rfft_self_Tensor_signal_ndim_int64_t
-XPtrTorchTensor cpp_torch_namespace_rfft_self_Tensor_signal_ndim_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool normalized, bool onesided);
-RcppExport SEXP _torch_cpp_torch_namespace_rfft_self_Tensor_signal_ndim_int64_t(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP normalizedSEXP, SEXP onesidedSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type normalized(normalizedSEXP);
-    Rcpp::traits::input_parameter< bool >::type onesided(onesidedSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rfft_self_Tensor_signal_ndim_int64_t(self, signal_ndim, normalized, onesided));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace_irfft_self_Tensor_signal_ndim_int64_t
-XPtrTorchTensor cpp_torch_namespace_irfft_self_Tensor_signal_ndim_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool normalized, bool onesided, XPtrTorchIntArrayRef signal_sizes);
-RcppExport SEXP _torch_cpp_torch_namespace_irfft_self_Tensor_signal_ndim_int64_t(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP normalizedSEXP, SEXP onesidedSEXP, SEXP signal_sizesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type normalized(normalizedSEXP);
-    Rcpp::traits::input_parameter< bool >::type onesided(onesidedSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type signal_sizes(signal_sizesSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_irfft_self_Tensor_signal_ndim_int64_t(self, signal_ndim, normalized, onesided, signal_sizes));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalized_bool_onesided_bool_output_sizes_IntArrayRef
-XPtrTorchTensor cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalized_bool_onesided_bool_output_sizes_IntArrayRef(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool complex_input, bool complex_output, bool inverse, XPtrTorchIntArrayRef checked_signal_sizes, bool normalized, bool onesided, XPtrTorchIntArrayRef output_sizes);
-RcppExport SEXP _torch_cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalized_bool_onesided_bool_output_sizes_IntArrayRef(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP complex_inputSEXP, SEXP complex_outputSEXP, SEXP inverseSEXP, SEXP checked_signal_sizesSEXP, SEXP normalizedSEXP, SEXP onesidedSEXP, SEXP output_sizesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type complex_input(complex_inputSEXP);
-    Rcpp::traits::input_parameter< bool >::type complex_output(complex_outputSEXP);
-    Rcpp::traits::input_parameter< bool >::type inverse(inverseSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type checked_signal_sizes(checked_signal_sizesSEXP);
-    Rcpp::traits::input_parameter< bool >::type normalized(normalizedSEXP);
-    Rcpp::traits::input_parameter< bool >::type onesided(onesidedSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type output_sizes(output_sizesSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalized_bool_onesided_bool_output_sizes_IntArrayRef(self, signal_ndim, complex_input, complex_output, inverse, checked_signal_sizes, normalized, onesided, output_sizes));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalization_int64_t_onesided_bool_output_sizes_IntArrayRef
-XPtrTorchTensor cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalization_int64_t_onesided_bool_output_sizes_IntArrayRef(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool complex_input, bool complex_output, bool inverse, XPtrTorchIntArrayRef checked_signal_sizes, XPtrTorchint64_t2 normalization, bool onesided, XPtrTorchIntArrayRef output_sizes);
-RcppExport SEXP _torch_cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalization_int64_t_onesided_bool_output_sizes_IntArrayRef(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP complex_inputSEXP, SEXP complex_outputSEXP, SEXP inverseSEXP, SEXP checked_signal_sizesSEXP, SEXP normalizationSEXP, SEXP onesidedSEXP, SEXP output_sizesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type complex_input(complex_inputSEXP);
-    Rcpp::traits::input_parameter< bool >::type complex_output(complex_outputSEXP);
-    Rcpp::traits::input_parameter< bool >::type inverse(inverseSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type checked_signal_sizes(checked_signal_sizesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type normalization(normalizationSEXP);
     Rcpp::traits::input_parameter< bool >::type onesided(onesidedSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type output_sizes(output_sizesSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalization_int64_t_onesided_bool_output_sizes_IntArrayRef(self, signal_ndim, complex_input, complex_output, inverse, checked_signal_sizes, normalization, onesided, output_sizes));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fft_r2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool(self, dim, normalization, onesided));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__fft_r2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool
+XPtrTorchTensor cpp_torch_namespace__fft_r2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchint64_t2 normalization, bool onesided);
+RcppExport SEXP _torch_cpp_torch_namespace__fft_r2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool(SEXP outSEXP, SEXP selfSEXP, SEXP dimSEXP, SEXP normalizationSEXP, SEXP onesidedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type normalization(normalizationSEXP);
+    Rcpp::traits::input_parameter< bool >::type onesided(onesidedSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fft_r2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool(out, self, dim, normalization, onesided));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__fft_c2r_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t
+XPtrTorchTensor cpp_torch_namespace__fft_c2r_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t(XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchint64_t2 normalization, XPtrTorchint64_t2 last_dim_size);
+RcppExport SEXP _torch_cpp_torch_namespace__fft_c2r_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t(SEXP selfSEXP, SEXP dimSEXP, SEXP normalizationSEXP, SEXP last_dim_sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type normalization(normalizationSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type last_dim_size(last_dim_sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fft_c2r_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t(self, dim, normalization, last_dim_size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__fft_c2r_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t
+XPtrTorchTensor cpp_torch_namespace__fft_c2r_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchint64_t2 normalization, XPtrTorchint64_t2 last_dim_size);
+RcppExport SEXP _torch_cpp_torch_namespace__fft_c2r_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t(SEXP outSEXP, SEXP selfSEXP, SEXP dimSEXP, SEXP normalizationSEXP, SEXP last_dim_sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type normalization(normalizationSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type last_dim_size(last_dim_sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fft_c2r_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t(out, self, dim, normalization, last_dim_size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__fft_c2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool
+XPtrTorchTensor cpp_torch_namespace__fft_c2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool(XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchint64_t2 normalization, bool forward);
+RcppExport SEXP _torch_cpp_torch_namespace__fft_c2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool(SEXP selfSEXP, SEXP dimSEXP, SEXP normalizationSEXP, SEXP forwardSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type normalization(normalizationSEXP);
+    Rcpp::traits::input_parameter< bool >::type forward(forwardSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fft_c2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool(self, dim, normalization, forward));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__fft_c2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool
+XPtrTorchTensor cpp_torch_namespace__fft_c2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchint64_t2 normalization, bool forward);
+RcppExport SEXP _torch_cpp_torch_namespace__fft_c2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool(SEXP outSEXP, SEXP selfSEXP, SEXP dimSEXP, SEXP normalizationSEXP, SEXP forwardSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type normalization(normalizationSEXP);
+    Rcpp::traits::input_parameter< bool >::type forward(forwardSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fft_c2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool(out, self, dim, normalization, forward));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -13287,15 +14256,15 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// cpp_torch_namespace_index_self_Tensor_indices_TensorList
-XPtrTorchTensor cpp_torch_namespace_index_self_Tensor_indices_TensorList(XPtrTorchTensor self, XPtrTorchIndexTensorList indices);
-RcppExport SEXP _torch_cpp_torch_namespace_index_self_Tensor_indices_TensorList(SEXP selfSEXP, SEXP indicesSEXP) {
+// cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor
+XPtrTorchTensor cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices);
+RcppExport SEXP _torch_cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor(SEXP selfSEXP, SEXP indicesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIndexTensorList >::type indices(indicesSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_index_self_Tensor_indices_TensorList(self, indices));
+    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor(self, indices));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -13327,46 +14296,46 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_index_put__self_Tensor_indices_TensorList_values_Tensor
-XPtrTorchTensor cpp_torch_namespace_index_put__self_Tensor_indices_TensorList_values_Tensor(XPtrTorchTensor self, XPtrTorchIndexTensorList indices, XPtrTorchTensor values, bool accumulate);
-RcppExport SEXP _torch_cpp_torch_namespace_index_put__self_Tensor_indices_TensorList_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
+// cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+XPtrTorchTensor cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate);
+RcppExport SEXP _torch_cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIndexTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_index_put__self_Tensor_indices_TensorList_values_Tensor(self, indices, values, accumulate));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(self, indices, values, accumulate));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_index_put_self_Tensor_indices_TensorList_values_Tensor
-XPtrTorchTensor cpp_torch_namespace_index_put_self_Tensor_indices_TensorList_values_Tensor(XPtrTorchTensor self, XPtrTorchIndexTensorList indices, XPtrTorchTensor values, bool accumulate);
-RcppExport SEXP _torch_cpp_torch_namespace_index_put_self_Tensor_indices_TensorList_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
+// cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+XPtrTorchTensor cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate);
+RcppExport SEXP _torch_cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIndexTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_index_put_self_Tensor_indices_TensorList_values_Tensor(self, indices, values, accumulate));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(self, indices, values, accumulate));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace__index_put_impl__self_Tensor_indices_TensorList_values_Tensor
-XPtrTorchTensor cpp_torch_namespace__index_put_impl__self_Tensor_indices_TensorList_values_Tensor(XPtrTorchTensor self, XPtrTorchIndexTensorList indices, XPtrTorchTensor values, bool accumulate, bool unsafe);
-RcppExport SEXP _torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_TensorList_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP, SEXP unsafeSEXP) {
+// cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+XPtrTorchTensor cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate, bool unsafe);
+RcppExport SEXP _torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP, SEXP unsafeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchIndexTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
     Rcpp::traits::input_parameter< bool >::type unsafe(unsafeSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__index_put_impl__self_Tensor_indices_TensorList_values_Tensor(self, indices, values, accumulate, unsafe));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(self, indices, values, accumulate, unsafe));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -13556,6 +14525,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_kron_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_kron_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_kron_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_kron_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_kron_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_kron_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_kron_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_kron_out_out_Tensor_self_Tensor_other_Tensor(out, self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t
 Rcpp::List cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 k, XPtrTorchindex_int64_t dim, bool keepdim);
 RcppExport SEXP _torch_cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t(SEXP selfSEXP, SEXP kSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
@@ -13632,37 +14626,79 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double
-Rcpp::List cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double(XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchTensor bias, XPtrTorchint64_t2 M, XPtrTorchint64_t2 False, double eps);
-RcppExport SEXP _torch_cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double(SEXP inputSEXP, SEXP weightSEXP, SEXP biasSEXP, SEXP MSEXP, SEXP FalseSEXP, SEXP epsSEXP) {
+// cpp_torch_namespace_native_layer_norm_input_Tensor_normalized_shape_IntArrayRef_weight_Tensor_bias_Tensor_eps_double
+Rcpp::List cpp_torch_namespace_native_layer_norm_input_Tensor_normalized_shape_IntArrayRef_weight_Tensor_bias_Tensor_eps_double(XPtrTorchTensor input, XPtrTorchIntArrayRef normalized_shape, XPtrTorchTensor weight, XPtrTorchTensor bias, double eps);
+RcppExport SEXP _torch_cpp_torch_namespace_native_layer_norm_input_Tensor_normalized_shape_IntArrayRef_weight_Tensor_bias_Tensor_eps_double(SEXP inputSEXP, SEXP normalized_shapeSEXP, SEXP weightSEXP, SEXP biasSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type normalized_shape(normalized_shapeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type weight(weightSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type bias(biasSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type M(MSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type False(FalseSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double(input, weight, bias, M, False, eps));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_native_layer_norm_input_Tensor_normalized_shape_IntArrayRef_weight_Tensor_bias_Tensor_eps_double(input, normalized_shape, weight, bias, eps));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3
-Rcpp::List cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3(XPtrTorchTensor grad_out, XPtrTorchTensor input, XPtrTorchTensor mean, XPtrTorchTensor rstd, XPtrTorchTensor weight, XPtrTorchint64_t2 M, XPtrTorchint64_t2 False, std::vector<bool> output_mask);
-RcppExport SEXP _torch_cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3(SEXP grad_outSEXP, SEXP inputSEXP, SEXP meanSEXP, SEXP rstdSEXP, SEXP weightSEXP, SEXP MSEXP, SEXP FalseSEXP, SEXP output_maskSEXP) {
+// cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_normalized_shape_IntArrayRef_mean_Tensor_rstd_Tensor_weight_Tensor_bias_Tensor_output_mask_stdarraybool3
+Rcpp::List cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_normalized_shape_IntArrayRef_mean_Tensor_rstd_Tensor_weight_Tensor_bias_Tensor_output_mask_stdarraybool3(XPtrTorchTensor grad_out, XPtrTorchTensor input, XPtrTorchIntArrayRef normalized_shape, XPtrTorchTensor mean, XPtrTorchTensor rstd, XPtrTorchTensor weight, XPtrTorchTensor bias, std::vector<bool> output_mask);
+RcppExport SEXP _torch_cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_normalized_shape_IntArrayRef_mean_Tensor_rstd_Tensor_weight_Tensor_bias_Tensor_output_mask_stdarraybool3(SEXP grad_outSEXP, SEXP inputSEXP, SEXP normalized_shapeSEXP, SEXP meanSEXP, SEXP rstdSEXP, SEXP weightSEXP, SEXP biasSEXP, SEXP output_maskSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad_out(grad_outSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type normalized_shape(normalized_shapeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type mean(meanSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type rstd(rstdSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type weight(weightSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type M(MSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type False(FalseSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type bias(biasSEXP);
     Rcpp::traits::input_parameter< std::vector<bool> >::type output_mask(output_maskSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3(grad_out, input, mean, rstd, weight, M, False, output_mask));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_normalized_shape_IntArrayRef_mean_Tensor_rstd_Tensor_weight_Tensor_bias_Tensor_output_mask_stdarraybool3(grad_out, input, normalized_shape, mean, rstd, weight, bias, output_mask));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_nan_to_num_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_nan_to_num_self_Tensor(XPtrTorchTensor self, nullable<double> nan, nullable<double> posinf, nullable<double> neginf);
+RcppExport SEXP _torch_cpp_torch_namespace_nan_to_num_self_Tensor(SEXP selfSEXP, SEXP nanSEXP, SEXP posinfSEXP, SEXP neginfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type nan(nanSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type posinf(posinfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type neginf(neginfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_nan_to_num_self_Tensor(self, nan, posinf, neginf));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_nan_to_num__self_Tensor
+XPtrTorchTensor cpp_torch_namespace_nan_to_num__self_Tensor(XPtrTorchTensor self, nullable<double> nan, nullable<double> posinf, nullable<double> neginf);
+RcppExport SEXP _torch_cpp_torch_namespace_nan_to_num__self_Tensor(SEXP selfSEXP, SEXP nanSEXP, SEXP posinfSEXP, SEXP neginfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type nan(nanSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type posinf(posinfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type neginf(neginfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_nan_to_num__self_Tensor(self, nan, posinf, neginf));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_nan_to_num_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_nan_to_num_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, nullable<double> nan, nullable<double> posinf, nullable<double> neginf);
+RcppExport SEXP _torch_cpp_torch_namespace_nan_to_num_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP nanSEXP, SEXP posinfSEXP, SEXP neginfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type nan(nanSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type posinf(posinfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type neginf(neginfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_nan_to_num_out_out_Tensor_self_Tensor(out, self, nan, posinf, neginf));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -13679,16 +14715,57 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_mkldnn_linear_input_Tensor_weight_Tensor
-XPtrTorchTensor cpp_torch_namespace_mkldnn_linear_input_Tensor_weight_Tensor(XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchTensor bias);
-RcppExport SEXP _torch_cpp_torch_namespace_mkldnn_linear_input_Tensor_weight_Tensor(SEXP inputSEXP, SEXP weightSEXP, SEXP biasSEXP) {
+// cpp_torch_namespace_mkldnn_linear_self_Tensor_weight_Tensor
+XPtrTorchTensor cpp_torch_namespace_mkldnn_linear_self_Tensor_weight_Tensor(XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchTensor bias);
+RcppExport SEXP _torch_cpp_torch_namespace_mkldnn_linear_self_Tensor_weight_Tensor(SEXP selfSEXP, SEXP weightSEXP, SEXP biasSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type weight(weightSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type bias(biasSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_mkldnn_linear_input_Tensor_weight_Tensor(input, weight, bias));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_mkldnn_linear_self_Tensor_weight_Tensor(self, weight, bias));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_mkldnn_linear_backward_input_input_size_IntArrayRef_grad_output_Tensor_weight_Tensor
+XPtrTorchTensor cpp_torch_namespace_mkldnn_linear_backward_input_input_size_IntArrayRef_grad_output_Tensor_weight_Tensor(XPtrTorchIntArrayRef input_size, XPtrTorchTensor grad_output, XPtrTorchTensor weight);
+RcppExport SEXP _torch_cpp_torch_namespace_mkldnn_linear_backward_input_input_size_IntArrayRef_grad_output_Tensor_weight_Tensor(SEXP input_sizeSEXP, SEXP grad_outputSEXP, SEXP weightSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type input_size(input_sizeSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad_output(grad_outputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type weight(weightSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_mkldnn_linear_backward_input_input_size_IntArrayRef_grad_output_Tensor_weight_Tensor(input_size, grad_output, weight));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_mkldnn_linear_backward_weights_grad_output_Tensor_input_Tensor_weight_Tensor_bias_defined_bool
+Rcpp::List cpp_torch_namespace_mkldnn_linear_backward_weights_grad_output_Tensor_input_Tensor_weight_Tensor_bias_defined_bool(XPtrTorchTensor grad_output, XPtrTorchTensor input, XPtrTorchTensor weight, bool bias_defined);
+RcppExport SEXP _torch_cpp_torch_namespace_mkldnn_linear_backward_weights_grad_output_Tensor_input_Tensor_weight_Tensor_bias_defined_bool(SEXP grad_outputSEXP, SEXP inputSEXP, SEXP weightSEXP, SEXP bias_definedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad_output(grad_outputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type weight(weightSEXP);
+    Rcpp::traits::input_parameter< bool >::type bias_defined(bias_definedSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_mkldnn_linear_backward_weights_grad_output_Tensor_input_Tensor_weight_Tensor_bias_defined_bool(grad_output, input, weight, bias_defined));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_mkldnn_linear_backward_self_Tensor_grad_output_Tensor_weight_Tensor_output_mask_stdarraybool3
+Rcpp::List cpp_torch_namespace_mkldnn_linear_backward_self_Tensor_grad_output_Tensor_weight_Tensor_output_mask_stdarraybool3(XPtrTorchTensor self, XPtrTorchTensor grad_output, XPtrTorchTensor weight, std::vector<bool> output_mask);
+RcppExport SEXP _torch_cpp_torch_namespace_mkldnn_linear_backward_self_Tensor_grad_output_Tensor_weight_Tensor_output_mask_stdarraybool3(SEXP selfSEXP, SEXP grad_outputSEXP, SEXP weightSEXP, SEXP output_maskSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad_output(grad_outputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type weight(weightSEXP);
+    Rcpp::traits::input_parameter< std::vector<bool> >::type output_mask(output_maskSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_mkldnn_linear_backward_self_Tensor_grad_output_Tensor_weight_Tensor_output_mask_stdarraybool3(self, grad_output, weight, output_mask));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -13795,6 +14872,43 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type K(KSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type False(FalseSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor_K_int64_t_FALSE_int64_t(input, K, False));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_ldexp_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_ldexp_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_ldexp_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_ldexp_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_ldexp__self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_ldexp__self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_ldexp__self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_ldexp__self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_ldexp_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_ldexp_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_ldexp_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_ldexp_out_out_Tensor_self_Tensor_other_Tensor(out, self, other));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -14009,6 +15123,105 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_logaddexp2_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_xlogy_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_xlogy_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_xlogy_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_xlogy_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_xlogy_self_Scalar_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_xlogy_self_Scalar_other_Tensor(XPtrTorchScalar self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_xlogy_self_Scalar_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_xlogy_self_Scalar_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_xlogy_self_Tensor_other_Scalar
+XPtrTorchTensor cpp_torch_namespace_xlogy_self_Tensor_other_Scalar(XPtrTorchTensor self, XPtrTorchScalar other);
+RcppExport SEXP _torch_cpp_torch_namespace_xlogy_self_Tensor_other_Scalar(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_xlogy_self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_xlogy__self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_xlogy__self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_xlogy__self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_xlogy__self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_xlogy__self_Tensor_other_Scalar
+XPtrTorchTensor cpp_torch_namespace_xlogy__self_Tensor_other_Scalar(XPtrTorchTensor self, XPtrTorchScalar other);
+RcppExport SEXP _torch_cpp_torch_namespace_xlogy__self_Tensor_other_Scalar(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_xlogy__self_Tensor_other_Scalar(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Tensor(out, self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_xlogy_out_out_Tensor_self_Scalar_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_xlogy_out_out_Tensor_self_Scalar_other_Tensor(XPtrTorchTensor out, XPtrTorchScalar self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Scalar_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_xlogy_out_out_Tensor_self_Scalar_other_Tensor(out, self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Scalar
+XPtrTorchTensor cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Scalar(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar other);
+RcppExport SEXP _torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Scalar(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Scalar(out, self, other));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -14680,6 +15893,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_median_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_median_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_median_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_median_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_median_self_Tensor_dim_int64_t
 Rcpp::List cpp_torch_namespace_median_self_Tensor_dim_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, bool keepdim);
 RcppExport SEXP _torch_cpp_torch_namespace_median_self_Tensor_dim_int64_t(SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
@@ -14733,6 +15957,73 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname(values, indices, self, dim, keepdim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_nanmedian_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_nanmedian_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_nanmedian_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_nanmedian_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_nanmedian_self_Tensor_dim_int64_t
+Rcpp::List cpp_torch_namespace_nanmedian_self_Tensor_dim_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, bool keepdim);
+RcppExport SEXP _torch_cpp_torch_namespace_nanmedian_self_Tensor_dim_int64_t(SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_nanmedian_self_Tensor_dim_int64_t(self, dim, keepdim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t
+Rcpp::List cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t(XPtrTorchTensor values, XPtrTorchIndexTensor indices, XPtrTorchTensor self, XPtrTorchindex_int64_t dim, bool keepdim);
+RcppExport SEXP _torch_cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t(SEXP valuesSEXP, SEXP indicesSEXP, SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexTensor >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t(values, indices, self, dim, keepdim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_nanmedian_self_Tensor_dim_Dimname
+Rcpp::List cpp_torch_namespace_nanmedian_self_Tensor_dim_Dimname(XPtrTorchTensor self, XPtrTorchDimname dim, bool keepdim);
+RcppExport SEXP _torch_cpp_torch_namespace_nanmedian_self_Tensor_dim_Dimname(SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_nanmedian_self_Tensor_dim_Dimname(self, dim, keepdim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname
+Rcpp::List cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname(XPtrTorchTensor values, XPtrTorchIndexTensor indices, XPtrTorchTensor self, XPtrTorchDimname dim, bool keepdim);
+RcppExport SEXP _torch_cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname(SEXP valuesSEXP, SEXP indicesSEXP, SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexTensor >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname(values, indices, self, dim, keepdim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -15261,6 +16552,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace__sparse_sparse_matmul_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace__sparse_sparse_matmul_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace__sparse_sparse_matmul_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__sparse_sparse_matmul_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__sparse_matrix_mask_helper_t_Tensor_mask_indices_Tensor
+XPtrTorchTensor cpp_torch_namespace__sparse_matrix_mask_helper_t_Tensor_mask_indices_Tensor(XPtrTorchTensor t, XPtrTorchTensor mask_indices);
+RcppExport SEXP _torch_cpp_torch_namespace__sparse_matrix_mask_helper_t_Tensor_mask_indices_Tensor(SEXP tSEXP, SEXP mask_indicesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type t(tSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type mask_indices(mask_indicesSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__sparse_matrix_mask_helper_t_Tensor_mask_indices_Tensor(t, mask_indices));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_mode_self_Tensor
 Rcpp::List cpp_torch_namespace_mode_self_Tensor(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, bool keepdim);
 RcppExport SEXP _torch_cpp_torch_namespace_mode_self_Tensor(SEXP selfSEXP, SEXP dimSEXP, SEXP keepdimSEXP) {
@@ -15425,6 +16740,35 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_mvlgamma_self_Tensor_p_int64_t(self, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_narrow_copy_self_Tensor_dim_int64_t_start_int64_t_length_int64_t
+XPtrTorchTensor cpp_torch_namespace_narrow_copy_self_Tensor_dim_int64_t_start_int64_t_length_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchint64_t2 start, XPtrTorchint64_t2 length);
+RcppExport SEXP _torch_cpp_torch_namespace_narrow_copy_self_Tensor_dim_int64_t_start_int64_t_length_int64_t(SEXP selfSEXP, SEXP dimSEXP, SEXP startSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type start(startSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_narrow_copy_self_Tensor_dim_int64_t_start_int64_t_length_int64_t(self, dim, start, length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_narrow_copy_out_out_Tensor_self_Tensor_dim_int64_t_start_int64_t_length_int64_t
+XPtrTorchTensor cpp_torch_namespace_narrow_copy_out_out_Tensor_self_Tensor_dim_int64_t_start_int64_t_length_int64_t(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchint64_t2 start, XPtrTorchint64_t2 length);
+RcppExport SEXP _torch_cpp_torch_namespace_narrow_copy_out_out_Tensor_self_Tensor_dim_int64_t_start_int64_t_length_int64_t(SEXP outSEXP, SEXP selfSEXP, SEXP dimSEXP, SEXP startSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type start(startSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_narrow_copy_out_out_Tensor_self_Tensor_dim_int64_t_start_int64_t_length_int64_t(out, self, dim, start, length));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -15901,6 +17245,32 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef
+XPtrTorchTensor cpp_torch_namespace_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef(XPtrTorchTensor self, XPtrTorchIntArrayRef source, XPtrTorchIntArrayRef destination);
+RcppExport SEXP _torch_cpp_torch_namespace_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef(SEXP selfSEXP, SEXP sourceSEXP, SEXP destinationSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type source(sourceSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type destination(destinationSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef(self, source, destination));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_moveaxis_self_Tensor_source_int64_t_destination_int64_t
+XPtrTorchTensor cpp_torch_namespace_moveaxis_self_Tensor_source_int64_t_destination_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 source, XPtrTorchint64_t2 destination);
+RcppExport SEXP _torch_cpp_torch_namespace_moveaxis_self_Tensor_source_int64_t_destination_int64_t(SEXP selfSEXP, SEXP sourceSEXP, SEXP destinationSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type source(sourceSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type destination(destinationSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_moveaxis_self_Tensor_source_int64_t_destination_int64_t(self, source, destination));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_pixel_shuffle_self_Tensor_upscale_factor_int64_t
 XPtrTorchTensor cpp_torch_namespace_pixel_shuffle_self_Tensor_upscale_factor_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 upscale_factor);
 RcppExport SEXP _torch_cpp_torch_namespace_pixel_shuffle_self_Tensor_upscale_factor_int64_t(SEXP selfSEXP, SEXP upscale_factorSEXP) {
@@ -15910,6 +17280,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type upscale_factor(upscale_factorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_pixel_shuffle_self_Tensor_upscale_factor_int64_t(self, upscale_factor));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_pixel_unshuffle_self_Tensor_downscale_factor_int64_t
+XPtrTorchTensor cpp_torch_namespace_pixel_unshuffle_self_Tensor_downscale_factor_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 downscale_factor);
+RcppExport SEXP _torch_cpp_torch_namespace_pixel_unshuffle_self_Tensor_downscale_factor_int64_t(SEXP selfSEXP, SEXP downscale_factorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type downscale_factor(downscale_factorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_pixel_unshuffle_self_Tensor_downscale_factor_int64_t(self, downscale_factor));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -16429,6 +17811,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type end(endSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type step(stepSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_range_out_out_Tensor_start_Scalar_end_Scalar(out, start, end, step));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_ravel_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_ravel_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_ravel_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_ravel_self_Tensor(self));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -17037,6 +18430,40 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_sinc_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_sinc_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_sinc_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_sinc_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_sinc__self_Tensor
+XPtrTorchTensor cpp_torch_namespace_sinc__self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_sinc__self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_sinc__self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_sinc_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_sinc_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_sinc_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_sinc_out_out_Tensor_self_Tensor(out, self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_sinh_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_sinh_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_namespace_sinh_self_Tensor(SEXP selfSEXP) {
@@ -17118,15 +18545,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_slice_self_Tensor
-XPtrTorchTensor cpp_torch_namespace_slice_self_Tensor(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchint64_t2 start, XPtrTorchint64_t2 end, XPtrTorchint64_t2 step);
+XPtrTorchTensor cpp_torch_namespace_slice_self_Tensor(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchoptional_int64_t2 start, XPtrTorchoptional_int64_t2 end, XPtrTorchint64_t2 step);
 RcppExport SEXP _torch_cpp_torch_namespace_slice_self_Tensor(SEXP selfSEXP, SEXP dimSEXP, SEXP startSEXP, SEXP endSEXP, SEXP stepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type start(startSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type end(endSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type start(startSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type end(endSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type step(stepSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_slice_self_Tensor(self, dim, start, end, step));
     return rcpp_result_gen;
@@ -17364,6 +18791,31 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_stack_out_out_Tensor_tensors_TensorList(out, tensors, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__stack_tensors_TensorList
+XPtrTorchTensor cpp_torch_namespace__stack_tensors_TensorList(XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_namespace__stack_tensors_TensorList(SEXP tensorsSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__stack_tensors_TensorList(tensors, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__stack_out_out_Tensor_tensors_TensorList
+XPtrTorchTensor cpp_torch_namespace__stack_out_out_Tensor_tensors_TensorList(XPtrTorchTensor out, XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_namespace__stack_out_out_Tensor_tensors_TensorList(SEXP outSEXP, SEXP tensorsSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__stack_out_out_Tensor_tensors_TensorList(out, tensors, dim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -17938,6 +19390,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_tensordot_out_out_Tensor_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef
+XPtrTorchTensor cpp_torch_namespace_tensordot_out_out_Tensor_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchIndexIntArrayRef dims_self, XPtrTorchIndexIntArrayRef dims_other);
+RcppExport SEXP _torch_cpp_torch_namespace_tensordot_out_out_Tensor_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP, SEXP dims_selfSEXP, SEXP dims_otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dims_self(dims_selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dims_other(dims_otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_tensordot_out_out_Tensor_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef(out, self, other, dims_self, dims_other));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_threshold_self_Tensor_threshold_Scalar_value_Scalar
 XPtrTorchTensor cpp_torch_namespace_threshold_self_Tensor_threshold_Scalar_value_Scalar(XPtrTorchTensor self, XPtrTorchScalar threshold, XPtrTorchScalar value);
 RcppExport SEXP _torch_cpp_torch_namespace_threshold_self_Tensor_threshold_Scalar_value_Scalar(SEXP selfSEXP, SEXP thresholdSEXP, SEXP valueSEXP) {
@@ -17988,6 +19455,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type threshold(thresholdSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_threshold_backward_grad_output_Tensor_self_Tensor_threshold_Scalar(grad_output, self, threshold));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef
+XPtrTorchTensor cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef(XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dims);
+RcppExport SEXP _torch_cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef(SEXP selfSEXP, SEXP dimsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dims(dimsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef(self, dims));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -19769,25 +21248,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_fake_quantize_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t
-XPtrTorchTensor cpp_torch_namespace_fake_quantize_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor grad, XPtrTorchTensor self, double scale, XPtrTorchint64_t2 zero_point, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max);
-RcppExport SEXP _torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t(SEXP gradSEXP, SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP) {
+// cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t
+Rcpp::List cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor self, double scale, XPtrTorchint64_t2 zero_point, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max);
+RcppExport SEXP _torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t(SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad(gradSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type zero_point(zero_pointSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_min(quant_minSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_max(quant_maxSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fake_quantize_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t(grad, self, scale, zero_point, quant_min, quant_max));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t(self, scale, zero_point, quant_min, quant_max));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_backward_grad_Tensor_mask_Tensor
+XPtrTorchTensor cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_backward_grad_Tensor_mask_Tensor(XPtrTorchTensor grad, XPtrTorchTensor mask);
+RcppExport SEXP _torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_backward_grad_Tensor_mask_Tensor(SEXP gradSEXP, SEXP maskSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad(gradSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type mask(maskSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_backward_grad_Tensor_mask_Tensor(grad, mask));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t
-XPtrTorchTensor cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max);
-RcppExport SEXP _torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP) {
+XPtrTorchTensor cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max, double grad_factor);
+RcppExport SEXP _torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP, SEXP grad_factorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19796,13 +21286,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type zero_point(zero_pointSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_min(quant_minSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_max(quant_maxSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(self, scale, zero_point, quant_min, quant_max));
+    Rcpp::traits::input_parameter< double >::type grad_factor(grad_factorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(self, scale, zero_point, quant_min, quant_max, grad_factor));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t
-Rcpp::List cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor grad, XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max);
-RcppExport SEXP _torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(SEXP gradSEXP, SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP) {
+Rcpp::List cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor grad, XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max, double grad_factor);
+RcppExport SEXP _torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(SEXP gradSEXP, SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP, SEXP grad_factorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19812,7 +21303,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type zero_point(zero_pointSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_min(quant_minSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_max(quant_maxSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(grad, self, scale, zero_point, quant_min, quant_max));
+    Rcpp::traits::input_parameter< double >::type grad_factor(grad_factorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(grad, self, scale, zero_point, quant_min, quant_max, grad_factor));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -19832,26 +21324,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_fake_quantize_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t
-XPtrTorchTensor cpp_torch_namespace_fake_quantize_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor grad, XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 axis, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max);
-RcppExport SEXP _torch_cpp_torch_namespace_fake_quantize_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(SEXP gradSEXP, SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP axisSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP) {
+// cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t
+Rcpp::List cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 axis, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max);
+RcppExport SEXP _torch_cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP axisSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad(gradSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type scale(scaleSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type zero_point(zero_pointSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type axis(axisSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_min(quant_minSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_max(quant_maxSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fake_quantize_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(grad, self, scale, zero_point, axis, quant_min, quant_max));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(self, scale, zero_point, axis, quant_min, quant_max));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_backward_grad_Tensor_mask_Tensor
+XPtrTorchTensor cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_backward_grad_Tensor_mask_Tensor(XPtrTorchTensor grad, XPtrTorchTensor mask);
+RcppExport SEXP _torch_cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_backward_grad_Tensor_mask_Tensor(SEXP gradSEXP, SEXP maskSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad(gradSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type mask(maskSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_backward_grad_Tensor_mask_Tensor(grad, mask));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t
-XPtrTorchTensor cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 axis, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max);
-RcppExport SEXP _torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP axisSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP) {
+XPtrTorchTensor cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 axis, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max, double grad_factor);
+RcppExport SEXP _torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP axisSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP, SEXP grad_factorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19861,13 +21364,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type axis(axisSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_min(quant_minSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_max(quant_maxSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(self, scale, zero_point, axis, quant_min, quant_max));
+    Rcpp::traits::input_parameter< double >::type grad_factor(grad_factorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(self, scale, zero_point, axis, quant_min, quant_max, grad_factor));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t
-Rcpp::List cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor grad, XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 axis, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max);
-RcppExport SEXP _torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(SEXP gradSEXP, SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP axisSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP) {
+Rcpp::List cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(XPtrTorchTensor grad, XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t2 axis, XPtrTorchint64_t2 quant_min, XPtrTorchint64_t2 quant_max, double grad_factor);
+RcppExport SEXP _torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(SEXP gradSEXP, SEXP selfSEXP, SEXP scaleSEXP, SEXP zero_pointSEXP, SEXP axisSEXP, SEXP quant_minSEXP, SEXP quant_maxSEXP, SEXP grad_factorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19878,7 +21382,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type axis(axisSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_min(quant_minSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type quant_max(quant_maxSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(grad, self, scale, zero_point, axis, quant_min, quant_max));
+    Rcpp::traits::input_parameter< double >::type grad_factor(grad_factorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t(grad, self, scale, zero_point, axis, quant_min, quant_max, grad_factor));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -22214,6 +23719,32 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t
+XPtrTorchTensor cpp_torch_namespace_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 axis0, XPtrTorchint64_t2 axis1);
+RcppExport SEXP _torch_cpp_torch_namespace_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t(SEXP selfSEXP, SEXP axis0SEXP, SEXP axis1SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type axis0(axis0SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type axis1(axis1SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t(self, axis0, axis1));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t
+XPtrTorchTensor cpp_torch_namespace_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim0, XPtrTorchindex_int64_t dim1);
+RcppExport SEXP _torch_cpp_torch_namespace_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t(SEXP selfSEXP, SEXP dim0SEXP, SEXP dim1SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim0(dim0SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim1(dim1SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t(self, dim0, dim1));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_cholesky_out_out_Tensor_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_cholesky_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, bool upper);
 RcppExport SEXP _torch_cpp_torch_namespace_cholesky_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP upperSEXP) {
@@ -22329,6 +23860,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_cholesky_inverse_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_cholesky_inverse_self_Tensor(XPtrTorchTensor self, bool upper);
+RcppExport SEXP _torch_cpp_torch_namespace_cholesky_inverse_self_Tensor(SEXP selfSEXP, SEXP upperSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< bool >::type upper(upperSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_cholesky_inverse_self_Tensor(self, upper));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, bool upper);
 RcppExport SEXP _torch_cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP upperSEXP) {
@@ -22339,18 +23882,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< bool >::type upper(upperSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor(out, self, upper));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace_cholesky_inverse_self_Tensor
-XPtrTorchTensor cpp_torch_namespace_cholesky_inverse_self_Tensor(XPtrTorchTensor self, bool upper);
-RcppExport SEXP _torch_cpp_torch_namespace_cholesky_inverse_self_Tensor(SEXP selfSEXP, SEXP upperSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< bool >::type upper(upperSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_cholesky_inverse_self_Tensor(self, upper));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -22377,18 +23908,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< bool >::type some(someSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_qr_self_Tensor(self, some));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace__qr_helper_self_Tensor_some_bool
-Rcpp::List cpp_torch_namespace__qr_helper_self_Tensor_some_bool(XPtrTorchTensor self, bool some);
-RcppExport SEXP _torch_cpp_torch_namespace__qr_helper_self_Tensor_some_bool(SEXP selfSEXP, SEXP someSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< bool >::type some(someSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__qr_helper_self_Tensor_some_bool(self, some));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -22551,31 +24070,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type replacement(replacementSEXP);
     Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t(self, num_samples, replacement, generator));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace__multinomial_alias_setup_probs_Tensor
-Rcpp::List cpp_torch_namespace__multinomial_alias_setup_probs_Tensor(XPtrTorchTensor probs);
-RcppExport SEXP _torch_cpp_torch_namespace__multinomial_alias_setup_probs_Tensor(SEXP probsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type probs(probsSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__multinomial_alias_setup_probs_Tensor(probs));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace__multinomial_alias_draw_J_Tensor_q_Tensor_num_samples_int64_t
-XPtrTorchTensor cpp_torch_namespace__multinomial_alias_draw_J_Tensor_q_Tensor_num_samples_int64_t(XPtrTorchTensor J, XPtrTorchTensor q, XPtrTorchint64_t2 num_samples, XPtrTorchGenerator generator);
-RcppExport SEXP _torch_cpp_torch_namespace__multinomial_alias_draw_J_Tensor_q_Tensor_num_samples_int64_t(SEXP JSEXP, SEXP qSEXP, SEXP num_samplesSEXP, SEXP generatorSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type J(JSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type q(qSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type num_samples(num_samplesSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__multinomial_alias_draw_J_Tensor_q_Tensor_num_samples_int64_t(J, q, num_samples, generator));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -22937,6 +24431,56 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_igamma_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_igamma_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_igamma_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_igamma_out_out_Tensor_self_Tensor_other_Tensor(out, self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_igamma_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_igamma_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_igamma_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_igamma_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_igammac_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_igammac_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_igammac_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_igammac_out_out_Tensor_self_Tensor_other_Tensor(out, self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_igammac_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_igammac_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_igammac_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_igammac_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_nextafter_out_out_Tensor_self_Tensor_other_Tensor
 XPtrTorchTensor cpp_torch_namespace_nextafter_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
 RcppExport SEXP _torch_cpp_torch_namespace_nextafter_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
@@ -23023,6 +24567,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_fmin_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_fmin_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_fmin_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fmin_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fmin_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_fmin_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_fmin_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fmin_out_out_Tensor_self_Tensor_other_Tensor(out, self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_max_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_max_self_Tensor(XPtrTorchTensor self);
 RcppExport SEXP _torch_cpp_torch_namespace_max_self_Tensor(SEXP selfSEXP) {
@@ -23031,6 +24600,31 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_max_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fmax_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_fmax_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_fmax_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fmax_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fmax_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_fmax_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_fmax_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fmax_out_out_Tensor_self_Tensor_other_Tensor(out, self, other));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -23131,17 +24725,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_min_self_Tensor_other_Tensor(self, other));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace_median_self_Tensor
-XPtrTorchTensor cpp_torch_namespace_median_self_Tensor(XPtrTorchTensor self);
-RcppExport SEXP _torch_cpp_torch_namespace_median_self_Tensor(SEXP selfSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_median_self_Tensor(self));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -23314,6 +24897,29 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type descending(descendingSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_sort_self_Tensor_dim_Dimname(self, dim, descending));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_msort_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_msort_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_msort_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_msort_out_out_Tensor_self_Tensor(out, self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_msort_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_msort_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_msort_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_msort_self_Tensor(self));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -23528,6 +25134,81 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Tensor
+XPtrTorchTensor cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor exponent);
+RcppExport SEXP _torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Tensor(out, self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor
+XPtrTorchTensor cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor(XPtrTorchTensor self, XPtrTorchTensor exponent);
+RcppExport SEXP _torch_cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor(SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor(self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_float_power_out_out_Tensor_self_Scalar_exponent_Tensor
+XPtrTorchTensor cpp_torch_namespace_float_power_out_out_Tensor_self_Scalar_exponent_Tensor(XPtrTorchTensor out, XPtrTorchScalar self, XPtrTorchTensor exponent);
+RcppExport SEXP _torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Scalar_exponent_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_float_power_out_out_Tensor_self_Scalar_exponent_Tensor(out, self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_float_power_self_Scalar_exponent_Tensor
+XPtrTorchTensor cpp_torch_namespace_float_power_self_Scalar_exponent_Tensor(XPtrTorchScalar self, XPtrTorchTensor exponent);
+RcppExport SEXP _torch_cpp_torch_namespace_float_power_self_Scalar_exponent_Tensor(SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_float_power_self_Scalar_exponent_Tensor(self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Scalar
+XPtrTorchTensor cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Scalar(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar exponent);
+RcppExport SEXP _torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Scalar(SEXP outSEXP, SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Scalar(out, self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_float_power_self_Tensor_exponent_Scalar
+XPtrTorchTensor cpp_torch_namespace_float_power_self_Tensor_exponent_Scalar(XPtrTorchTensor self, XPtrTorchScalar exponent);
+RcppExport SEXP _torch_cpp_torch_namespace_float_power_self_Tensor_exponent_Scalar(SEXP selfSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_float_power_self_Tensor_exponent_Scalar(self, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor
 XPtrTorchTensor cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor(XPtrTorchTensor out, XPtrTorchTensor mean, double std, XPtrTorchGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor(SEXP outSEXP, SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
@@ -23684,15 +25365,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace__amp_non_finite_check_and_unscale__self_Tensor_found_inf_Tensor_inv_scale_Tensor
-void cpp_torch_namespace__amp_non_finite_check_and_unscale__self_Tensor_found_inf_Tensor_inv_scale_Tensor(XPtrTorchTensor self, XPtrTorchTensor found_inf, XPtrTorchTensor inv_scale);
-RcppExport SEXP _torch_cpp_torch_namespace__amp_non_finite_check_and_unscale__self_Tensor_found_inf_Tensor_inv_scale_Tensor(SEXP selfSEXP, SEXP found_infSEXP, SEXP inv_scaleSEXP) {
+// cpp_torch_namespace__amp_foreach_non_finite_check_and_unscale__self_TensorList_found_inf_Tensor_inv_scale_Tensor
+void cpp_torch_namespace__amp_foreach_non_finite_check_and_unscale__self_TensorList_found_inf_Tensor_inv_scale_Tensor(XPtrTorchTensorList self, XPtrTorchTensor found_inf, XPtrTorchTensor inv_scale);
+RcppExport SEXP _torch_cpp_torch_namespace__amp_foreach_non_finite_check_and_unscale__self_TensorList_found_inf_Tensor_inv_scale_Tensor(SEXP selfSEXP, SEXP found_infSEXP, SEXP inv_scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type found_inf(found_infSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type inv_scale(inv_scaleSEXP);
-    cpp_torch_namespace__amp_non_finite_check_and_unscale__self_Tensor_found_inf_Tensor_inv_scale_Tensor(self, found_inf, inv_scale);
+    cpp_torch_namespace__amp_foreach_non_finite_check_and_unscale__self_TensorList_found_inf_Tensor_inv_scale_Tensor(self, found_inf, inv_scale);
     return R_NilValue;
 END_RCPP
 }
@@ -23925,95 +25606,95 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// cpp_torch_namespace__foreach_add_scalar_list_tensors_TensorList_scalars_ArrayRefdouble
-XPtrTorchTensorList cpp_torch_namespace__foreach_add_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList tensors, std::vector<double> scalars);
-RcppExport SEXP _torch_cpp_torch_namespace__foreach_add_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(SEXP tensorsSEXP, SEXP scalarsSEXP) {
+// cpp_torch_namespace__foreach_add_tensors_TensorList_scalars_ArrayRefdouble
+XPtrTorchTensorList cpp_torch_namespace__foreach_add_tensors_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList tensors, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_add_tensors_TensorList_scalars_ArrayRefdouble(SEXP tensorsSEXP, SEXP scalarsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_add_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(tensors, scalars));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_add_tensors_TensorList_scalars_ArrayRefdouble(tensors, scalars));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace__foreach_add_scalar_list__self_TensorList_scalars_ArrayRefdouble
-void cpp_torch_namespace__foreach_add_scalar_list__self_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, std::vector<double> scalars);
-RcppExport SEXP _torch_cpp_torch_namespace__foreach_add_scalar_list__self_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP scalarsSEXP) {
+// cpp_torch_namespace__foreach_add__self_TensorList_scalars_ArrayRefdouble
+void cpp_torch_namespace__foreach_add__self_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_add__self_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP scalarsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
-    cpp_torch_namespace__foreach_add_scalar_list__self_TensorList_scalars_ArrayRefdouble(self, scalars);
+    cpp_torch_namespace__foreach_add__self_TensorList_scalars_ArrayRefdouble(self, scalars);
     return R_NilValue;
 END_RCPP
 }
-// cpp_torch_namespace__foreach_sub_scalar_list_tensors_TensorList_scalars_ArrayRefdouble
-XPtrTorchTensorList cpp_torch_namespace__foreach_sub_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList tensors, std::vector<double> scalars);
-RcppExport SEXP _torch_cpp_torch_namespace__foreach_sub_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(SEXP tensorsSEXP, SEXP scalarsSEXP) {
+// cpp_torch_namespace__foreach_sub_tensors_TensorList_scalars_ArrayRefdouble
+XPtrTorchTensorList cpp_torch_namespace__foreach_sub_tensors_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList tensors, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_sub_tensors_TensorList_scalars_ArrayRefdouble(SEXP tensorsSEXP, SEXP scalarsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_sub_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(tensors, scalars));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_sub_tensors_TensorList_scalars_ArrayRefdouble(tensors, scalars));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace__foreach_sub_scalar_list__self_TensorList_scalars_ArrayRefdouble
-void cpp_torch_namespace__foreach_sub_scalar_list__self_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, std::vector<double> scalars);
-RcppExport SEXP _torch_cpp_torch_namespace__foreach_sub_scalar_list__self_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP scalarsSEXP) {
+// cpp_torch_namespace__foreach_sub__self_TensorList_scalars_ArrayRefdouble
+void cpp_torch_namespace__foreach_sub__self_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_sub__self_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP scalarsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
-    cpp_torch_namespace__foreach_sub_scalar_list__self_TensorList_scalars_ArrayRefdouble(self, scalars);
+    cpp_torch_namespace__foreach_sub__self_TensorList_scalars_ArrayRefdouble(self, scalars);
     return R_NilValue;
 END_RCPP
 }
-// cpp_torch_namespace__foreach_div_scalar_list_tensors_TensorList_scalars_ArrayRefdouble
-XPtrTorchTensorList cpp_torch_namespace__foreach_div_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList tensors, std::vector<double> scalars);
-RcppExport SEXP _torch_cpp_torch_namespace__foreach_div_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(SEXP tensorsSEXP, SEXP scalarsSEXP) {
+// cpp_torch_namespace__foreach_div_tensors_TensorList_scalars_ArrayRefdouble
+XPtrTorchTensorList cpp_torch_namespace__foreach_div_tensors_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList tensors, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_div_tensors_TensorList_scalars_ArrayRefdouble(SEXP tensorsSEXP, SEXP scalarsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_div_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(tensors, scalars));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_div_tensors_TensorList_scalars_ArrayRefdouble(tensors, scalars));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace__foreach_div_scalar_list__self_TensorList_scalars_ArrayRefdouble
-void cpp_torch_namespace__foreach_div_scalar_list__self_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, std::vector<double> scalars);
-RcppExport SEXP _torch_cpp_torch_namespace__foreach_div_scalar_list__self_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP scalarsSEXP) {
+// cpp_torch_namespace__foreach_div__self_TensorList_scalars_ArrayRefdouble
+void cpp_torch_namespace__foreach_div__self_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_div__self_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP scalarsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
-    cpp_torch_namespace__foreach_div_scalar_list__self_TensorList_scalars_ArrayRefdouble(self, scalars);
+    cpp_torch_namespace__foreach_div__self_TensorList_scalars_ArrayRefdouble(self, scalars);
     return R_NilValue;
 END_RCPP
 }
-// cpp_torch_namespace__foreach_mul_scalar_list_tensors_TensorList_scalars_ArrayRefdouble
-XPtrTorchTensorList cpp_torch_namespace__foreach_mul_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList tensors, std::vector<double> scalars);
-RcppExport SEXP _torch_cpp_torch_namespace__foreach_mul_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(SEXP tensorsSEXP, SEXP scalarsSEXP) {
+// cpp_torch_namespace__foreach_mul_tensors_TensorList_scalars_ArrayRefdouble
+XPtrTorchTensorList cpp_torch_namespace__foreach_mul_tensors_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList tensors, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_mul_tensors_TensorList_scalars_ArrayRefdouble(SEXP tensorsSEXP, SEXP scalarsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_mul_scalar_list_tensors_TensorList_scalars_ArrayRefdouble(tensors, scalars));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_mul_tensors_TensorList_scalars_ArrayRefdouble(tensors, scalars));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace__foreach_mul_scalar_list__self_TensorList_scalars_ArrayRefdouble
-void cpp_torch_namespace__foreach_mul_scalar_list__self_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, std::vector<double> scalars);
-RcppExport SEXP _torch_cpp_torch_namespace__foreach_mul_scalar_list__self_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP scalarsSEXP) {
+// cpp_torch_namespace__foreach_mul__self_TensorList_scalars_ArrayRefdouble
+void cpp_torch_namespace__foreach_mul__self_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_mul__self_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP scalarsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
-    cpp_torch_namespace__foreach_mul_scalar_list__self_TensorList_scalars_ArrayRefdouble(self, scalars);
+    cpp_torch_namespace__foreach_mul__self_TensorList_scalars_ArrayRefdouble(self, scalars);
     return R_NilValue;
 END_RCPP
 }
@@ -24026,6 +25707,16 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_exp_tensors_TensorList(tensors));
     return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_zero__self_TensorList
+void cpp_torch_namespace__foreach_zero__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_zero__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_zero__self_TensorList(self);
+    return R_NilValue;
 END_RCPP
 }
 // cpp_torch_namespace__foreach_exp__self_TensorList
@@ -24059,6 +25750,552 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_torch_namespace__foreach_abs_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_abs_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_abs_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_abs_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_abs__self_TensorList
+void cpp_torch_namespace__foreach_abs__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_abs__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_abs__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_acos_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_acos_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_acos_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_acos_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_acos__self_TensorList
+void cpp_torch_namespace__foreach_acos__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_acos__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_acos__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_asin_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_asin_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_asin_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_asin_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_asin__self_TensorList
+void cpp_torch_namespace__foreach_asin__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_asin__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_asin__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_atan_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_atan_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_atan_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_atan_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_atan__self_TensorList
+void cpp_torch_namespace__foreach_atan__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_atan__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_atan__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_ceil_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_ceil_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_ceil_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_ceil_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_ceil__self_TensorList
+void cpp_torch_namespace__foreach_ceil__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_ceil__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_ceil__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_cos_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_cos_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_cos_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_cos_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_cos__self_TensorList
+void cpp_torch_namespace__foreach_cos__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_cos__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_cos__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_cosh_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_cosh_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_cosh_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_cosh_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_cosh__self_TensorList
+void cpp_torch_namespace__foreach_cosh__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_cosh__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_cosh__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_erf_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_erf_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_erf_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_erf_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_erf__self_TensorList
+void cpp_torch_namespace__foreach_erf__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_erf__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_erf__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_erfc_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_erfc_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_erfc_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_erfc_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_erfc__self_TensorList
+void cpp_torch_namespace__foreach_erfc__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_erfc__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_erfc__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_expm1_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_expm1_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_expm1_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_expm1_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_expm1__self_TensorList
+void cpp_torch_namespace__foreach_expm1__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_expm1__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_expm1__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_floor_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_floor_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_floor_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_floor_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_floor__self_TensorList
+void cpp_torch_namespace__foreach_floor__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_floor__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_floor__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_log_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_log_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_log_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_log_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_log__self_TensorList
+void cpp_torch_namespace__foreach_log__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_log__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_log__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_log10_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_log10_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_log10_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_log10_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_log10__self_TensorList
+void cpp_torch_namespace__foreach_log10__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_log10__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_log10__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_log1p_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_log1p_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_log1p_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_log1p_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_log1p__self_TensorList
+void cpp_torch_namespace__foreach_log1p__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_log1p__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_log1p__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_log2_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_log2_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_log2_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_log2_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_log2__self_TensorList
+void cpp_torch_namespace__foreach_log2__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_log2__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_log2__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_neg_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_neg_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_neg_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_neg_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_neg__self_TensorList
+void cpp_torch_namespace__foreach_neg__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_neg__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_neg__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_tan_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_tan_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_tan_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_tan_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_tan__self_TensorList
+void cpp_torch_namespace__foreach_tan__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_tan__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_tan__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_tanh_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_tanh_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_tanh_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_tanh_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_tanh__self_TensorList
+void cpp_torch_namespace__foreach_tanh__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_tanh__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_tanh__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_sin_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_sin_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_sin_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_sin_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_sin__self_TensorList
+void cpp_torch_namespace__foreach_sin__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_sin__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_sin__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_sinh_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_sinh_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_sinh_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_sinh_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_sinh__self_TensorList
+void cpp_torch_namespace__foreach_sinh__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_sinh__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_sinh__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_round_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_round_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_round_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_round_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_round__self_TensorList
+void cpp_torch_namespace__foreach_round__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_round__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_round__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_lgamma_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_lgamma_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_lgamma_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_lgamma_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_lgamma__self_TensorList
+void cpp_torch_namespace__foreach_lgamma__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_lgamma__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_lgamma__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_frac_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_frac_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_frac_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_frac_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_frac__self_TensorList
+void cpp_torch_namespace__foreach_frac__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_frac__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_frac__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_reciprocal_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_reciprocal_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_reciprocal_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_reciprocal_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_reciprocal__self_TensorList
+void cpp_torch_namespace__foreach_reciprocal__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_reciprocal__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_reciprocal__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_sigmoid_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_sigmoid_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_sigmoid_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_sigmoid_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_sigmoid__self_TensorList
+void cpp_torch_namespace__foreach_sigmoid__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_sigmoid__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_sigmoid__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_trunc_tensors_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_trunc_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_trunc_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_trunc_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_trunc__self_TensorList
+void cpp_torch_namespace__foreach_trunc__self_TensorList(XPtrTorchTensorList self);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_trunc__self_TensorList(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    cpp_torch_namespace__foreach_trunc__self_TensorList(self);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList
 void cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList(XPtrTorchTensorList self, XPtrTorchTensorList tensor1, XPtrTorchTensorList tensor2, XPtrTorchScalar value);
 RcppExport SEXP _torch_cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList(SEXP selfSEXP, SEXP tensor1SEXP, SEXP tensor2SEXP, SEXP valueSEXP) {
@@ -24082,6 +26319,32 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor2(tensor2SEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type value(valueSEXP);
     cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList(self, tensor1, tensor2, value);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble
+void cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, XPtrTorchTensorList tensor1, XPtrTorchTensorList tensor2, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP tensor1SEXP, SEXP tensor2SEXP, SEXP scalarsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor1(tensor1SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor2(tensor2SEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
+    cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(self, tensor1, tensor2, scalars);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble
+void cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList self, XPtrTorchTensorList tensor1, XPtrTorchTensorList tensor2, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(SEXP selfSEXP, SEXP tensor1SEXP, SEXP tensor2SEXP, SEXP scalarsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor1(tensor1SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor2(tensor2SEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
+    cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(self, tensor1, tensor2, scalars);
     return R_NilValue;
 END_RCPP
 }
@@ -24110,6 +26373,58 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor2(tensor2SEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type value(valueSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList(input, tensor1, tensor2, value));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble
+XPtrTorchTensorList cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList input, XPtrTorchTensorList tensor1, XPtrTorchTensorList tensor2, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(SEXP inputSEXP, SEXP tensor1SEXP, SEXP tensor2SEXP, SEXP scalarsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor1(tensor1SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor2(tensor2SEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(input, tensor1, tensor2, scalars));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble
+XPtrTorchTensorList cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(XPtrTorchTensorList input, XPtrTorchTensorList tensor1, XPtrTorchTensorList tensor2, std::vector<double> scalars);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(SEXP inputSEXP, SEXP tensor1SEXP, SEXP tensor2SEXP, SEXP scalarsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor1(tensor1SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensor2(tensor2SEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type scalars(scalarsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble(input, tensor1, tensor2, scalars));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_maximum_tensors1_TensorList_tensors2_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_maximum_tensors1_TensorList_tensors2_TensorList(XPtrTorchTensorList tensors1, XPtrTorchTensorList tensors2);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_maximum_tensors1_TensorList_tensors2_TensorList(SEXP tensors1SEXP, SEXP tensors2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors1(tensors1SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors2(tensors2SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_maximum_tensors1_TensorList_tensors2_TensorList(tensors1, tensors2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__foreach_minimum_tensors1_TensorList_tensors2_TensorList
+XPtrTorchTensorList cpp_torch_namespace__foreach_minimum_tensors1_TensorList_tensors2_TensorList(XPtrTorchTensorList tensors1, XPtrTorchTensorList tensors2);
+RcppExport SEXP _torch_cpp_torch_namespace__foreach_minimum_tensors1_TensorList_tensors2_TensorList(SEXP tensors1SEXP, SEXP tensors2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors1(tensors1SEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors2(tensors2SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__foreach_minimum_tensors1_TensorList_tensors2_TensorList(tensors1, tensors2));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -24834,25 +27149,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_elu_backward_out_grad_input_Tensor_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor
-XPtrTorchTensor cpp_torch_namespace_elu_backward_out_grad_input_Tensor_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor(XPtrTorchTensor grad_input, XPtrTorchTensor grad_output, XPtrTorchScalar alpha, XPtrTorchScalar scale, XPtrTorchScalar input_scale, XPtrTorchTensor output);
-RcppExport SEXP _torch_cpp_torch_namespace_elu_backward_out_grad_input_Tensor_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor(SEXP grad_inputSEXP, SEXP grad_outputSEXP, SEXP alphaSEXP, SEXP scaleSEXP, SEXP input_scaleSEXP, SEXP outputSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad_input(grad_inputSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type grad_output(grad_outputSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchScalar >::type alpha(alphaSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchScalar >::type scale(scaleSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchScalar >::type input_scale(input_scaleSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type output(outputSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_elu_backward_out_grad_input_Tensor_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor(grad_input, grad_output, alpha, scale, input_scale, output));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor
-XPtrTorchTensor cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor(XPtrTorchTensor grad_output, XPtrTorchScalar alpha, XPtrTorchScalar scale, XPtrTorchScalar input_scale, XPtrTorchTensor output);
-RcppExport SEXP _torch_cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor(SEXP grad_outputSEXP, SEXP alphaSEXP, SEXP scaleSEXP, SEXP input_scaleSEXP, SEXP outputSEXP) {
+// cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor
+XPtrTorchTensor cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor(XPtrTorchTensor grad_output, XPtrTorchScalar alpha, XPtrTorchScalar scale, XPtrTorchScalar input_scale, bool is_result, XPtrTorchTensor self_or_result);
+RcppExport SEXP _torch_cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor(SEXP grad_outputSEXP, SEXP alphaSEXP, SEXP scaleSEXP, SEXP input_scaleSEXP, SEXP is_resultSEXP, SEXP self_or_resultSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -24860,8 +27159,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type scale(scaleSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type input_scale(input_scaleSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type output(outputSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor(grad_output, alpha, scale, input_scale, output));
+    Rcpp::traits::input_parameter< bool >::type is_result(is_resultSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self_or_result(self_or_resultSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor(grad_output, alpha, scale, input_scale, is_result, self_or_result));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -27727,6 +30027,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_column_stack_tensors_TensorList
+XPtrTorchTensor cpp_torch_namespace_column_stack_tensors_TensorList(XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace_column_stack_tensors_TensorList(SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_column_stack_tensors_TensorList(tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_column_stack_out_out_Tensor_tensors_TensorList
+XPtrTorchTensor cpp_torch_namespace_column_stack_out_out_Tensor_tensors_TensorList(XPtrTorchTensor out, XPtrTorchTensorList tensors);
+RcppExport SEXP _torch_cpp_torch_namespace_column_stack_out_out_Tensor_tensors_TensorList(SEXP outSEXP, SEXP tensorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_column_stack_out_out_Tensor_tensors_TensorList(out, tensors));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_im2col_out_out_Tensor_self_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef
 XPtrTorchTensor cpp_torch_namespace_im2col_out_out_Tensor_self_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef dilation, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef stride);
 RcppExport SEXP _torch_cpp_torch_namespace_im2col_out_out_Tensor_self_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef(SEXP outSEXP, SEXP selfSEXP, SEXP kernel_sizeSEXP, SEXP dilationSEXP, SEXP paddingSEXP, SEXP strideSEXP) {
@@ -27900,6 +30223,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t2 n, XPtrTorchindex_int64_t dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor(out, self, n, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_fft_ifft_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_fft_ifft_self_Tensor(XPtrTorchTensor self, XPtrTorchoptional_int64_t2 n, XPtrTorchindex_int64_t dim, std::string norm);
 RcppExport SEXP _torch_cpp_torch_namespace_fft_ifft_self_Tensor(SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP normSEXP) {
@@ -27911,6 +30249,21 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_ifft_self_Tensor(self, n, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t2 n, XPtrTorchindex_int64_t dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor(out, self, n, dim, norm));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -27928,6 +30281,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t2 n, XPtrTorchindex_int64_t dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor(out, self, n, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_fft_irfft_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_fft_irfft_self_Tensor(XPtrTorchTensor self, XPtrTorchoptional_int64_t2 n, XPtrTorchindex_int64_t dim, std::string norm);
 RcppExport SEXP _torch_cpp_torch_namespace_fft_irfft_self_Tensor(SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP normSEXP) {
@@ -27939,6 +30307,21 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_irfft_self_Tensor(self, n, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t2 n, XPtrTorchindex_int64_t dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor(out, self, n, dim, norm));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -27956,6 +30339,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t2 n, XPtrTorchindex_int64_t dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor(out, self, n, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_fft_ihfft_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_fft_ihfft_self_Tensor(XPtrTorchTensor self, XPtrTorchoptional_int64_t2 n, XPtrTorchindex_int64_t dim, std::string norm);
 RcppExport SEXP _torch_cpp_torch_namespace_fft_ihfft_self_Tensor(SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP normSEXP) {
@@ -27967,6 +30365,137 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_ihfft_self_Tensor(self, n, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t2 n, XPtrTorchindex_int64_t dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP nSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor(out, self, n, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_fft2_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_fft2_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_fft2_self_Tensor(SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_fft2_self_Tensor(self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor(out, self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_ifft2_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_ifft2_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_ifft2_self_Tensor(SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_ifft2_self_Tensor(self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor(out, self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_rfft2_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_rfft2_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_rfft2_self_Tensor(SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_rfft2_self_Tensor(self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor(out, self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_irfft2_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_irfft2_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_irfft2_self_Tensor(SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_irfft2_self_Tensor(self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor(out, self, s, dim, norm));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -27984,6 +30513,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor(out, self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_fft_ifftn_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_fft_ifftn_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, std::string norm);
 RcppExport SEXP _torch_cpp_torch_namespace_fft_ifftn_self_Tensor(SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
@@ -27995,6 +30539,21 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchOptionalIndexIntArrayRef >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_ifftn_self_Tensor(self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor(out, self, s, dim, norm));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -28012,6 +30571,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor(out, self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_namespace_fft_irfftn_self_Tensor
 XPtrTorchTensor cpp_torch_namespace_fft_irfftn_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, std::string norm);
 RcppExport SEXP _torch_cpp_torch_namespace_fft_irfftn_self_Tensor(SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
@@ -28026,16 +30600,117 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_fft_self_Tensor_signal_ndim_int64_t
-XPtrTorchTensor cpp_torch_namespace_fft_self_Tensor_signal_ndim_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 signal_ndim, bool normalized);
-RcppExport SEXP _torch_cpp_torch_namespace_fft_self_Tensor_signal_ndim_int64_t(SEXP selfSEXP, SEXP signal_ndimSEXP, SEXP normalizedSEXP) {
+// cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, std::string norm);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP sSEXP, SEXP dimSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIntArrayRef >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexIntArrayRef >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor(out, self, s, dim, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_fftfreq_n_int64_t
+XPtrTorchTensor cpp_torch_namespace_fft_fftfreq_n_int64_t(XPtrTorchint64_t2 n, double d, XPtrTorchTensorOptions options);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_fftfreq_n_int64_t(SEXP nSEXP, SEXP dSEXP, SEXP optionsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type d(dSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_fftfreq_n_int64_t(n, d, options));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_fftfreq_out_out_Tensor_n_int64_t
+XPtrTorchTensor cpp_torch_namespace_fft_fftfreq_out_out_Tensor_n_int64_t(XPtrTorchTensor out, XPtrTorchint64_t2 n, double d);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_fftfreq_out_out_Tensor_n_int64_t(SEXP outSEXP, SEXP nSEXP, SEXP dSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type d(dSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_fftfreq_out_out_Tensor_n_int64_t(out, n, d));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_rfftfreq_n_int64_t
+XPtrTorchTensor cpp_torch_namespace_fft_rfftfreq_n_int64_t(XPtrTorchint64_t2 n, double d, XPtrTorchTensorOptions options);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_rfftfreq_n_int64_t(SEXP nSEXP, SEXP dSEXP, SEXP optionsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type d(dSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_rfftfreq_n_int64_t(n, d, options));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_rfftfreq_out_out_Tensor_n_int64_t
+XPtrTorchTensor cpp_torch_namespace_fft_rfftfreq_out_out_Tensor_n_int64_t(XPtrTorchTensor out, XPtrTorchint64_t2 n, double d);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_rfftfreq_out_out_Tensor_n_int64_t(SEXP outSEXP, SEXP nSEXP, SEXP dSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type d(dSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_rfftfreq_out_out_Tensor_n_int64_t(out, n, d));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_fftshift_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_fftshift_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIndexIntArrayRef dim);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_fftshift_self_Tensor(SEXP selfSEXP, SEXP dimSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type signal_ndim(signal_ndimSEXP);
-    Rcpp::traits::input_parameter< bool >::type normalized(normalizedSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_self_Tensor_signal_ndim_int64_t(self, signal_ndim, normalized));
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexIntArrayRef >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_fftshift_self_Tensor(self, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_fft_ifftshift_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_fft_ifftshift_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIndexIntArrayRef dim);
+RcppExport SEXP _torch_cpp_torch_namespace_fft_ifftshift_self_Tensor(SEXP selfSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexIntArrayRef >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_fft_ifftshift_self_Tensor(self, dim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_cholesky_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_cholesky_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_cholesky_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_cholesky_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor(out, self));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -28058,6 +30733,155 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_det_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_slogdet_self_Tensor
+Rcpp::List cpp_torch_namespace_linalg_slogdet_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_slogdet_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_slogdet_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_slogdet_out_sign_Tensor_logabsdet_Tensor_self_Tensor
+Rcpp::List cpp_torch_namespace_linalg_slogdet_out_sign_Tensor_logabsdet_Tensor_self_Tensor(XPtrTorchTensor sign, XPtrTorchTensor logabsdet, XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_slogdet_out_sign_Tensor_logabsdet_Tensor_self_Tensor(SEXP signSEXP, SEXP logabsdetSEXP, SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type sign(signSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type logabsdet(logabsdetSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_slogdet_out_sign_Tensor_logabsdet_Tensor_self_Tensor(sign, logabsdet, self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__syevd_helper_self_Tensor_compute_eigenvectors_bool_uplo_stdstring
+Rcpp::List cpp_torch_namespace__syevd_helper_self_Tensor_compute_eigenvectors_bool_uplo_stdstring(XPtrTorchTensor self, bool compute_eigenvectors, std::string uplo);
+RcppExport SEXP _torch_cpp_torch_namespace__syevd_helper_self_Tensor_compute_eigenvectors_bool_uplo_stdstring(SEXP selfSEXP, SEXP compute_eigenvectorsSEXP, SEXP uploSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< bool >::type compute_eigenvectors(compute_eigenvectorsSEXP);
+    Rcpp::traits::input_parameter< std::string >::type uplo(uploSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__syevd_helper_self_Tensor_compute_eigenvectors_bool_uplo_stdstring(self, compute_eigenvectors, uplo));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_eigh_self_Tensor
+Rcpp::List cpp_torch_namespace_linalg_eigh_self_Tensor(XPtrTorchTensor self, std::string UPLO);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_eigh_self_Tensor(SEXP selfSEXP, SEXP UPLOSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::string >::type UPLO(UPLOSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_eigh_self_Tensor(self, UPLO));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_eigh_out_eigvals_Tensor_eigvecs_Tensor_self_Tensor
+Rcpp::List cpp_torch_namespace_linalg_eigh_out_eigvals_Tensor_eigvecs_Tensor_self_Tensor(XPtrTorchTensor eigvals, XPtrTorchTensor eigvecs, XPtrTorchTensor self, std::string UPLO);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_eigh_out_eigvals_Tensor_eigvecs_Tensor_self_Tensor(SEXP eigvalsSEXP, SEXP eigvecsSEXP, SEXP selfSEXP, SEXP UPLOSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type eigvals(eigvalsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type eigvecs(eigvecsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::string >::type UPLO(UPLOSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_eigh_out_eigvals_Tensor_eigvecs_Tensor_self_Tensor(eigvals, eigvecs, self, UPLO));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_eigvalsh_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_eigvalsh_self_Tensor(XPtrTorchTensor self, std::string UPLO);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_eigvalsh_self_Tensor(SEXP selfSEXP, SEXP UPLOSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::string >::type UPLO(UPLOSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_eigvalsh_self_Tensor(self, UPLO));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_eigvalsh_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_eigvalsh_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, std::string UPLO);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_eigvalsh_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP UPLOSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::string >::type UPLO(UPLOSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_eigvalsh_out_out_Tensor_self_Tensor(out, self, UPLO));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__linalg_inv_out_helper__self_Tensor_infos_lu_Tensor_infos_getri_Tensor
+XPtrTorchTensor cpp_torch_namespace__linalg_inv_out_helper__self_Tensor_infos_lu_Tensor_infos_getri_Tensor(XPtrTorchTensor self, XPtrTorchTensor infos_lu, XPtrTorchTensor infos_getri);
+RcppExport SEXP _torch_cpp_torch_namespace__linalg_inv_out_helper__self_Tensor_infos_lu_Tensor_infos_getri_Tensor(SEXP selfSEXP, SEXP infos_luSEXP, SEXP infos_getriSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type infos_lu(infos_luSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type infos_getri(infos_getriSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__linalg_inv_out_helper__self_Tensor_infos_lu_Tensor_infos_getri_Tensor(self, infos_lu, infos_getri));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_inv_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_inv_self_Tensor(XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_inv_self_Tensor(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_inv_self_Tensor(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_inv_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_inv_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_inv_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_inv_out_out_Tensor_self_Tensor(out, self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_inner_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_inner_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_inner_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_inner_self_Tensor_other_Tensor(self, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_inner_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_inner_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_inner_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_inner_out_out_Tensor_self_Tensor_other_Tensor(out, self, other));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -28170,6 +30994,294 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type keepdim(keepdimSEXP);
     Rcpp::traits::input_parameter< XPtrTorchDtype >::type dtype(dtypeSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring(out, self, ord, dim, keepdim, dtype));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor
+Rcpp::List cpp_torch_namespace_linalg_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor(XPtrTorchTensor U, XPtrTorchTensor S, XPtrTorchTensor V, XPtrTorchTensor self, bool full_matrices, bool compute_uv);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor(SEXP USEXP, SEXP SSEXP, SEXP VSEXP, SEXP selfSEXP, SEXP full_matricesSEXP, SEXP compute_uvSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type U(USEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type S(SSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type V(VSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< bool >::type full_matrices(full_matricesSEXP);
+    Rcpp::traits::input_parameter< bool >::type compute_uv(compute_uvSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor(U, S, V, self, full_matrices, compute_uv));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_svd_self_Tensor
+Rcpp::List cpp_torch_namespace_linalg_svd_self_Tensor(XPtrTorchTensor self, bool full_matrices, bool compute_uv);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_svd_self_Tensor(SEXP selfSEXP, SEXP full_matricesSEXP, SEXP compute_uvSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< bool >::type full_matrices(full_matricesSEXP);
+    Rcpp::traits::input_parameter< bool >::type compute_uv(compute_uvSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_svd_self_Tensor(self, full_matrices, compute_uv));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_cond_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_cond_self_Tensor(XPtrTorchTensor self, XPtrTorchScalar p);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_cond_self_Tensor(SEXP selfSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_cond_self_Tensor(self, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar p);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScalar >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor(out, self, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_cond_self_Tensor_p_stdstring
+XPtrTorchTensor cpp_torch_namespace_linalg_cond_self_Tensor_p_stdstring(XPtrTorchTensor self, std::string p);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_cond_self_Tensor_p_stdstring(SEXP selfSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::string >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_cond_self_Tensor_p_stdstring(self, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_stdstring
+XPtrTorchTensor cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_stdstring(XPtrTorchTensor out, XPtrTorchTensor self, std::string p);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_stdstring(SEXP outSEXP, SEXP selfSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::string >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_stdstring(out, self, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_pinv_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_pinv_self_Tensor(XPtrTorchTensor self, double rcond, bool hermitian);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_pinv_self_Tensor(SEXP selfSEXP, SEXP rcondSEXP, SEXP hermitianSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< double >::type rcond(rcondSEXP);
+    Rcpp::traits::input_parameter< bool >::type hermitian(hermitianSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_pinv_self_Tensor(self, rcond, hermitian));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_Tensor(XPtrTorchTensor self, XPtrTorchTensor rcond, bool hermitian);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_Tensor(SEXP selfSEXP, SEXP rcondSEXP, SEXP hermitianSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type rcond(rcondSEXP);
+    Rcpp::traits::input_parameter< bool >::type hermitian(hermitianSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_Tensor(self, rcond, hermitian));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, double rcond, bool hermitian);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP rcondSEXP, SEXP hermitianSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< double >::type rcond(rcondSEXP);
+    Rcpp::traits::input_parameter< bool >::type hermitian(hermitianSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor(out, self, rcond, hermitian));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor rcond, bool hermitian);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP rcondSEXP, SEXP hermitianSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type rcond(rcondSEXP);
+    Rcpp::traits::input_parameter< bool >::type hermitian(hermitianSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor(out, self, rcond, hermitian));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__linalg_solve_out_helper__self_Tensor_other_Tensor_infos_Tensor
+XPtrTorchTensor cpp_torch_namespace__linalg_solve_out_helper__self_Tensor_other_Tensor_infos_Tensor(XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchTensor infos);
+RcppExport SEXP _torch_cpp_torch_namespace__linalg_solve_out_helper__self_Tensor_other_Tensor_infos_Tensor(SEXP selfSEXP, SEXP otherSEXP, SEXP infosSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type infos(infosSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__linalg_solve_out_helper__self_Tensor_other_Tensor_infos_Tensor(self, other, infos));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_solve_input_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_solve_input_Tensor_other_Tensor(XPtrTorchTensor input, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_solve_input_Tensor_other_Tensor(SEXP inputSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_solve_input_Tensor_other_Tensor(input, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_solve_out_out_Tensor_input_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_solve_out_out_Tensor_input_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor input, XPtrTorchTensor other);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_solve_out_out_Tensor_input_Tensor_other_Tensor(SEXP outSEXP, SEXP inputSEXP, SEXP otherSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_solve_out_out_Tensor_input_Tensor_other_Tensor(out, input, other));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_tensorinv_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_tensorinv_self_Tensor(XPtrTorchTensor self, XPtrTorchint64_t2 ind);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_tensorinv_self_Tensor(SEXP selfSEXP, SEXP indSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type ind(indSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_tensorinv_self_Tensor(self, ind));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_tensorinv_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_tensorinv_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchint64_t2 ind);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_tensorinv_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP indSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type ind(indSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_tensorinv_out_out_Tensor_self_Tensor(out, self, ind));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_tensorsolve_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_tensorsolve_self_Tensor_other_Tensor(XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchOptionalIndexIntArrayRef dims);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_tensorsolve_self_Tensor_other_Tensor(SEXP selfSEXP, SEXP otherSEXP, SEXP dimsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexIntArrayRef >::type dims(dimsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_tensorsolve_self_Tensor_other_Tensor(self, other, dims));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_tensorsolve_out_out_Tensor_self_Tensor_other_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_tensorsolve_out_out_Tensor_self_Tensor_other_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchOptionalIndexIntArrayRef dims);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_tensorsolve_out_out_Tensor_self_Tensor_other_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP otherSEXP, SEXP dimsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexIntArrayRef >::type dims(dimsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_tensorsolve_out_out_Tensor_self_Tensor_other_Tensor(out, self, other, dims));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_qr_self_Tensor
+Rcpp::List cpp_torch_namespace_linalg_qr_self_Tensor(XPtrTorchTensor self, std::string mode);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_qr_self_Tensor(SEXP selfSEXP, SEXP modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::string >::type mode(modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_qr_self_Tensor(self, mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_qr_out_Q_Tensor_R_Tensor_self_Tensor
+Rcpp::List cpp_torch_namespace_linalg_qr_out_Q_Tensor_R_Tensor_self_Tensor(XPtrTorchTensor Q, XPtrTorchTensor R, XPtrTorchTensor self, std::string mode);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_qr_out_Q_Tensor_R_Tensor_self_Tensor(SEXP QSEXP, SEXP RSEXP, SEXP selfSEXP, SEXP modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type Q(QSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type R(RSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::string >::type mode(modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_qr_out_Q_Tensor_R_Tensor_self_Tensor(Q, R, self, mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_stdstring
+Rcpp::List cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_stdstring(XPtrTorchTensor self, std::string mode);
+RcppExport SEXP _torch_cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_stdstring(SEXP selfSEXP, SEXP modeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< std::string >::type mode(modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_stdstring(self, mode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_matrix_rank_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_matrix_rank_self_Tensor(XPtrTorchTensor self, nullable<double> tol, bool hermitian);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_matrix_rank_self_Tensor(SEXP selfSEXP, SEXP tolSEXP, SEXP hermitianSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< bool >::type hermitian(hermitianSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_self_Tensor(self, tol, hermitian));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor
+XPtrTorchTensor cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, nullable<double> tol, bool hermitian);
+RcppExport SEXP _torch_cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP tolSEXP, SEXP hermitianSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< nullable<double> >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< bool >::type hermitian(hermitianSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor(out, self, tol, hermitian));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -29417,6 +32529,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_qint32", (DL_FUNC) &_torch_cpp_torch_qint32, 0},
     {"_torch_cpp_set_default_dtype", (DL_FUNC) &_torch_cpp_set_default_dtype, 1},
     {"_torch_cpp_get_default_dtype", (DL_FUNC) &_torch_cpp_get_default_dtype, 0},
+    {"_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList", (DL_FUNC) &_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList, 5},
     {"_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor", (DL_FUNC) &_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor, 2},
     {"_torch_cpp_torch_method_data_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_data_self_Tensor, 1},
     {"_torch_cpp_torch_method_is_leaf_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_is_leaf_self_Tensor, 1},
@@ -29424,6 +32537,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method__version_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method__version_self_Tensor, 1},
     {"_torch_cpp_torch_method_requires_grad__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_requires_grad__self_Tensor, 2},
     {"_torch_cpp_torch_method_retain_grad_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_retain_grad_self_Tensor, 1},
+    {"_torch_cpp_torch_method__fw_primal_self_Tensor_level_int64_t", (DL_FUNC) &_torch_cpp_torch_method__fw_primal_self_Tensor_level_int64_t, 2},
     {"_torch_cpp_torch_method_rename__self_Tensor_names_DimnameList", (DL_FUNC) &_torch_cpp_torch_method_rename__self_Tensor_names_DimnameList, 2},
     {"_torch_cpp_torch_method_rename_self_Tensor_names_DimnameList", (DL_FUNC) &_torch_cpp_torch_method_rename_self_Tensor_names_DimnameList, 2},
     {"_torch_cpp_torch_method_align_to_self_Tensor_names_DimnameList", (DL_FUNC) &_torch_cpp_torch_method_align_to_self_Tensor_names_DimnameList, 2},
@@ -29488,6 +32602,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_bincount_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_bincount_self_Tensor, 3},
     {"_torch_cpp_torch_method_bitwise_not_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_bitwise_not_self_Tensor, 1},
     {"_torch_cpp_torch_method_bitwise_not__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_bitwise_not__self_Tensor, 1},
+    {"_torch_cpp_torch_method_copysign_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_copysign_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_copysign__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_copysign__self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_copysign_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_copysign_self_Tensor_other_Scalar, 2},
+    {"_torch_cpp_torch_method_copysign__self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_copysign__self_Tensor_other_Scalar, 2},
     {"_torch_cpp_torch_method_logical_not_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_logical_not_self_Tensor, 1},
     {"_torch_cpp_torch_method_logical_not__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_logical_not__self_Tensor, 1},
     {"_torch_cpp_torch_method_logical_xor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_logical_xor_self_Tensor_other_Tensor, 2},
@@ -29497,10 +32615,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_logical_or_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_logical_or_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_logical_or__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_logical_or__self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_bmm_self_Tensor_mat2_Tensor", (DL_FUNC) &_torch_cpp_torch_method_bmm_self_Tensor_mat2_Tensor, 2},
+    {"_torch_cpp_torch_method_broadcast_to_self_Tensor_size_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_broadcast_to_self_Tensor_size_IntArrayRef, 2},
     {"_torch_cpp_torch_method_ceil_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_ceil_self_Tensor, 1},
     {"_torch_cpp_torch_method_ceil__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_ceil__self_Tensor, 1},
     {"_torch_cpp_torch_method_unsafe_chunk_self_Tensor_chunks_int64_t", (DL_FUNC) &_torch_cpp_torch_method_unsafe_chunk_self_Tensor_chunks_int64_t, 3},
     {"_torch_cpp_torch_method_chunk_self_Tensor_chunks_int64_t", (DL_FUNC) &_torch_cpp_torch_method_chunk_self_Tensor_chunks_int64_t, 3},
+    {"_torch_cpp_torch_method_tensor_split_self_Tensor_sections_int64_t", (DL_FUNC) &_torch_cpp_torch_method_tensor_split_self_Tensor_sections_int64_t, 3},
+    {"_torch_cpp_torch_method_tensor_split_self_Tensor_indices_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_tensor_split_self_Tensor_indices_IntArrayRef, 3},
+    {"_torch_cpp_torch_method_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor", (DL_FUNC) &_torch_cpp_torch_method_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor, 3},
     {"_torch_cpp_torch_method_clamp_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_clamp_self_Tensor, 3},
     {"_torch_cpp_torch_method_clamp__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_clamp__self_Tensor, 3},
     {"_torch_cpp_torch_method_clamp_max_self_Tensor_max_Scalar", (DL_FUNC) &_torch_cpp_torch_method_clamp_max_self_Tensor_max_Scalar, 2},
@@ -29522,22 +32644,35 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_cummin_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_cummin_self_Tensor_dim_int64_t, 2},
     {"_torch_cpp_torch_method_cummin_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_cummin_self_Tensor_dim_Dimname, 2},
     {"_torch_cpp_torch_method_cumprod_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_cumprod_self_Tensor_dim_int64_t, 3},
+    {"_torch_cpp_torch_method_cumprod__self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_cumprod__self_Tensor_dim_int64_t, 3},
     {"_torch_cpp_torch_method_cumprod_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_cumprod_self_Tensor_dim_Dimname, 3},
+    {"_torch_cpp_torch_method_cumprod__self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_cumprod__self_Tensor_dim_Dimname, 3},
     {"_torch_cpp_torch_method_cumsum_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_cumsum_self_Tensor_dim_int64_t, 3},
+    {"_torch_cpp_torch_method_cumsum__self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_cumsum__self_Tensor_dim_int64_t, 3},
     {"_torch_cpp_torch_method_cumsum_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_cumsum_self_Tensor_dim_Dimname, 3},
+    {"_torch_cpp_torch_method_cumsum__self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_cumsum__self_Tensor_dim_Dimname, 3},
     {"_torch_cpp_torch_method_diag_embed_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_diag_embed_self_Tensor, 4},
     {"_torch_cpp_torch_method_diagflat_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_diagflat_self_Tensor, 2},
     {"_torch_cpp_torch_method_diagonal_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_diagonal_self_Tensor, 4},
     {"_torch_cpp_torch_method_diagonal_self_Tensor_outdim_Dimname_dim1_Dimname_dim2_Dimname", (DL_FUNC) &_torch_cpp_torch_method_diagonal_self_Tensor_outdim_Dimname_dim1_Dimname_dim2_Dimname, 5},
     {"_torch_cpp_torch_method_fill_diagonal__self_Tensor_fill_value_Scalar", (DL_FUNC) &_torch_cpp_torch_method_fill_diagonal__self_Tensor_fill_value_Scalar, 3},
+    {"_torch_cpp_torch_method_diff_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_diff_self_Tensor, 5},
     {"_torch_cpp_torch_method_div_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_div_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_div__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_div__self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_stdstring, 3},
+    {"_torch_cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_stdstring, 3},
     {"_torch_cpp_torch_method_div_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_div_self_Tensor_other_Scalar, 2},
     {"_torch_cpp_torch_method_div__self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_div__self_Tensor_other_Scalar, 2},
+    {"_torch_cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_stdstring, 3},
+    {"_torch_cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_stdstring, 3},
     {"_torch_cpp_torch_method_divide_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_divide_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_divide__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_divide__self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_divide_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_divide_self_Tensor_other_Scalar, 2},
     {"_torch_cpp_torch_method_divide__self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_divide__self_Tensor_other_Scalar, 2},
+    {"_torch_cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_stdstring, 3},
+    {"_torch_cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_stdstring, 3},
+    {"_torch_cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_stdstring, 3},
+    {"_torch_cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_stdstring, 3},
     {"_torch_cpp_torch_method_true_divide_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_true_divide_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_true_divide__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_true_divide__self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_true_divide_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_true_divide_self_Tensor_other_Scalar, 2},
@@ -29545,6 +32680,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_dot_self_Tensor_tensor_Tensor", (DL_FUNC) &_torch_cpp_torch_method_dot_self_Tensor_tensor_Tensor, 2},
     {"_torch_cpp_torch_method_vdot_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_vdot_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_new_empty_self_Tensor_size_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_new_empty_self_Tensor_size_IntArrayRef, 3},
+    {"_torch_cpp_torch_method_new_empty_strided_self_Tensor_size_IntArrayRef_stride_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_new_empty_strided_self_Tensor_size_IntArrayRef_stride_IntArrayRef, 4},
     {"_torch_cpp_torch_method_new_full_self_Tensor_size_IntArrayRef_fill_value_Scalar", (DL_FUNC) &_torch_cpp_torch_method_new_full_self_Tensor_size_IntArrayRef_fill_value_Scalar, 4},
     {"_torch_cpp_torch_method_new_zeros_self_Tensor_size_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_new_zeros_self_Tensor_size_IntArrayRef, 3},
     {"_torch_cpp_torch_method_resize__self_Tensor_size_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_resize__self_Tensor_size_IntArrayRef, 3},
@@ -29580,16 +32716,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_gcd__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_gcd__self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_lcm_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_lcm_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_lcm__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_lcm__self_Tensor_other_Tensor, 2},
-    {"_torch_cpp_torch_method_ifft_self_Tensor_signal_ndim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_ifft_self_Tensor_signal_ndim_int64_t, 3},
-    {"_torch_cpp_torch_method_rfft_self_Tensor_signal_ndim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_rfft_self_Tensor_signal_ndim_int64_t, 4},
-    {"_torch_cpp_torch_method_irfft_self_Tensor_signal_ndim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_irfft_self_Tensor_signal_ndim_int64_t, 5},
-    {"_torch_cpp_torch_method_index_self_Tensor_indices_TensorList", (DL_FUNC) &_torch_cpp_torch_method_index_self_Tensor_indices_TensorList, 2},
+    {"_torch_cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor", (DL_FUNC) &_torch_cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor, 2},
     {"_torch_cpp_torch_method_index_copy__self_Tensor_dim_int64_t_index_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_copy__self_Tensor_dim_int64_t_index_Tensor_source_Tensor, 4},
     {"_torch_cpp_torch_method_index_copy_self_Tensor_dim_int64_t_index_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_copy_self_Tensor_dim_int64_t_index_Tensor_source_Tensor, 4},
     {"_torch_cpp_torch_method_index_copy__self_Tensor_dim_Dimname_index_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_copy__self_Tensor_dim_Dimname_index_Tensor_source_Tensor, 4},
     {"_torch_cpp_torch_method_index_copy_self_Tensor_dim_Dimname_index_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_copy_self_Tensor_dim_Dimname_index_Tensor_source_Tensor, 4},
-    {"_torch_cpp_torch_method_index_put__self_Tensor_indices_TensorList_values_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_put__self_Tensor_indices_TensorList_values_Tensor, 4},
-    {"_torch_cpp_torch_method_index_put_self_Tensor_indices_TensorList_values_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_put_self_Tensor_indices_TensorList_values_Tensor, 4},
+    {"_torch_cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor, 4},
+    {"_torch_cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor, 4},
     {"_torch_cpp_torch_method_inverse_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_inverse_self_Tensor, 1},
     {"_torch_cpp_torch_method_isclose_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_isclose_self_Tensor_other_Tensor, 5},
     {"_torch_cpp_torch_method_isnan_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_isnan_self_Tensor, 1},
@@ -29600,8 +32733,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_is_nonzero_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_is_nonzero_self_Tensor, 1},
     {"_torch_cpp_torch_method_is_same_size_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_is_same_size_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_is_signed_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_is_signed_self_Tensor, 1},
+    {"_torch_cpp_torch_method_kron_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_kron_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_kthvalue_self_Tensor_k_int64_t", (DL_FUNC) &_torch_cpp_torch_method_kthvalue_self_Tensor_k_int64_t, 4},
     {"_torch_cpp_torch_method_kthvalue_self_Tensor_k_int64_t_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_kthvalue_self_Tensor_k_int64_t_dim_Dimname, 4},
+    {"_torch_cpp_torch_method_nan_to_num_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_nan_to_num_self_Tensor, 4},
+    {"_torch_cpp_torch_method_nan_to_num__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_nan_to_num__self_Tensor, 4},
+    {"_torch_cpp_torch_method_ldexp_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_ldexp_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_ldexp__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_ldexp__self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_log_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_log_self_Tensor, 1},
     {"_torch_cpp_torch_method_log__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_log__self_Tensor, 1},
     {"_torch_cpp_torch_method_log10_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_log10_self_Tensor, 1},
@@ -29612,6 +32750,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_log2__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_log2__self_Tensor, 1},
     {"_torch_cpp_torch_method_logaddexp_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_logaddexp_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_logaddexp2_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_logaddexp2_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_xlogy_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_xlogy_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_xlogy_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_xlogy_self_Tensor_other_Scalar, 2},
+    {"_torch_cpp_torch_method_xlogy__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_xlogy__self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_xlogy__self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_xlogy__self_Tensor_other_Scalar, 2},
     {"_torch_cpp_torch_method_logdet_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_logdet_self_Tensor, 1},
     {"_torch_cpp_torch_method_log_softmax_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_log_softmax_self_Tensor_dim_int64_t, 3},
     {"_torch_cpp_torch_method_log_softmax_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_log_softmax_self_Tensor_dim_Dimname, 3},
@@ -29628,8 +32770,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_mean_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_mean_self_Tensor, 2},
     {"_torch_cpp_torch_method_mean_self_Tensor_dim_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_mean_self_Tensor_dim_IntArrayRef, 4},
     {"_torch_cpp_torch_method_mean_self_Tensor_dim_DimnameList", (DL_FUNC) &_torch_cpp_torch_method_mean_self_Tensor_dim_DimnameList, 4},
+    {"_torch_cpp_torch_method_median_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_median_self_Tensor, 1},
     {"_torch_cpp_torch_method_median_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_median_self_Tensor_dim_int64_t, 3},
     {"_torch_cpp_torch_method_median_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_median_self_Tensor_dim_Dimname, 3},
+    {"_torch_cpp_torch_method_nanmedian_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_nanmedian_self_Tensor, 1},
+    {"_torch_cpp_torch_method_nanmedian_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_nanmedian_self_Tensor_dim_int64_t, 3},
+    {"_torch_cpp_torch_method_nanmedian_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_nanmedian_self_Tensor_dim_Dimname, 3},
     {"_torch_cpp_torch_method_min_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_min_self_Tensor_dim_int64_t, 3},
     {"_torch_cpp_torch_method_min_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_min_self_Tensor_dim_Dimname, 3},
     {"_torch_cpp_torch_method_amin_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_amin_self_Tensor, 3},
@@ -29653,6 +32799,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_permute_self_Tensor_dims_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_permute_self_Tensor_dims_IntArrayRef, 2},
     {"_torch_cpp_torch_method_movedim_self_Tensor_source_IntArrayRef_destination_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_movedim_self_Tensor_source_IntArrayRef_destination_IntArrayRef, 3},
     {"_torch_cpp_torch_method_movedim_self_Tensor_source_int64_t_destination_int64_t", (DL_FUNC) &_torch_cpp_torch_method_movedim_self_Tensor_source_int64_t_destination_int64_t, 3},
+    {"_torch_cpp_torch_method_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef, 3},
+    {"_torch_cpp_torch_method_moveaxis_self_Tensor_source_int64_t_destination_int64_t", (DL_FUNC) &_torch_cpp_torch_method_moveaxis_self_Tensor_source_int64_t_destination_int64_t, 3},
     {"_torch_cpp_torch_method_numpy_T_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_numpy_T_self_Tensor, 1},
     {"_torch_cpp_torch_method_is_pinned_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_is_pinned_self_Tensor, 1},
     {"_torch_cpp_torch_method_pin_memory_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_pin_memory_self_Tensor, 1},
@@ -29661,6 +32809,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_rad2deg__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_rad2deg__self_Tensor, 1},
     {"_torch_cpp_torch_method_deg2rad_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_deg2rad_self_Tensor, 1},
     {"_torch_cpp_torch_method_deg2rad__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_deg2rad__self_Tensor, 1},
+    {"_torch_cpp_torch_method_ravel_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_ravel_self_Tensor, 1},
     {"_torch_cpp_torch_method_reciprocal_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_reciprocal_self_Tensor, 1},
     {"_torch_cpp_torch_method_reciprocal__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_reciprocal__self_Tensor, 1},
     {"_torch_cpp_torch_method_neg_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_neg_self_Tensor, 1},
@@ -29690,11 +32839,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_logit__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_logit__self_Tensor, 2},
     {"_torch_cpp_torch_method_sin_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sin_self_Tensor, 1},
     {"_torch_cpp_torch_method_sin__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sin__self_Tensor, 1},
+    {"_torch_cpp_torch_method_sinc_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sinc_self_Tensor, 1},
+    {"_torch_cpp_torch_method_sinc__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sinc__self_Tensor, 1},
     {"_torch_cpp_torch_method_sinh_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sinh_self_Tensor, 1},
     {"_torch_cpp_torch_method_sinh__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sinh__self_Tensor, 1},
     {"_torch_cpp_torch_method_detach_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_detach_self_Tensor, 1},
     {"_torch_cpp_torch_method_detach__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_detach__self_Tensor, 1},
-    {"_torch_cpp_torch_method_size_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_size_self_Tensor_dim_int64_t, 2},
     {"_torch_cpp_torch_method_size_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_size_self_Tensor_dim_Dimname, 2},
     {"_torch_cpp_torch_method_slice_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_slice_self_Tensor, 5},
     {"_torch_cpp_torch_method_slogdet_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_slogdet_self_Tensor, 1},
@@ -29714,7 +32864,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_sspaddmm_self_Tensor_mat1_Tensor_mat2_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sspaddmm_self_Tensor_mat1_Tensor_mat2_Tensor, 5},
     {"_torch_cpp_torch_method_stft_self_Tensor_n_fft_int64_t", (DL_FUNC) &_torch_cpp_torch_method_stft_self_Tensor_n_fft_int64_t, 8},
     {"_torch_cpp_torch_method_istft_self_Tensor_n_fft_int64_t", (DL_FUNC) &_torch_cpp_torch_method_istft_self_Tensor_n_fft_int64_t, 10},
-    {"_torch_cpp_torch_method_stride_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_stride_self_Tensor_dim_int64_t, 2},
     {"_torch_cpp_torch_method_stride_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_stride_self_Tensor_dim_Dimname, 2},
     {"_torch_cpp_torch_method_sum_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sum_self_Tensor, 2},
     {"_torch_cpp_torch_method_sum_self_Tensor_dim_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_sum_self_Tensor_dim_IntArrayRef, 4},
@@ -29738,6 +32887,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_tan__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_tan__self_Tensor, 1},
     {"_torch_cpp_torch_method_tanh_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_tanh_self_Tensor, 1},
     {"_torch_cpp_torch_method_tanh__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_tanh__self_Tensor, 1},
+    {"_torch_cpp_torch_method_tile_self_Tensor_dims_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_tile_self_Tensor_dims_IntArrayRef, 2},
     {"_torch_cpp_torch_method_transpose_self_Tensor_dim0_int64_t_dim1_int64_t", (DL_FUNC) &_torch_cpp_torch_method_transpose_self_Tensor_dim0_int64_t_dim1_int64_t, 3},
     {"_torch_cpp_torch_method_transpose_self_Tensor_dim0_Dimname_dim1_Dimname", (DL_FUNC) &_torch_cpp_torch_method_transpose_self_Tensor_dim0_Dimname_dim1_Dimname, 3},
     {"_torch_cpp_torch_method_transpose__self_Tensor_dim0_int64_t_dim1_int64_t", (DL_FUNC) &_torch_cpp_torch_method_transpose__self_Tensor_dim0_int64_t_dim1_int64_t, 3},
@@ -29782,7 +32932,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_sparse_resize__self_Tensor_size_IntArrayRef_sparse_dim_int64_t_dense_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_sparse_resize__self_Tensor_size_IntArrayRef_sparse_dim_int64_t_dense_dim_int64_t, 4},
     {"_torch_cpp_torch_method_sparse_resize_and_clear__self_Tensor_size_IntArrayRef_sparse_dim_int64_t_dense_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_sparse_resize_and_clear__self_Tensor_size_IntArrayRef_sparse_dim_int64_t_dense_dim_int64_t, 4},
     {"_torch_cpp_torch_method_sparse_mask_self_Tensor_mask_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sparse_mask_self_Tensor_mask_Tensor, 2},
-    {"_torch_cpp_torch_method_to_dense_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_to_dense_self_Tensor, 1},
+    {"_torch_cpp_torch_method_to_dense_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_to_dense_self_Tensor, 2},
     {"_torch_cpp_torch_method_sparse_dim_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sparse_dim_self_Tensor, 1},
     {"_torch_cpp_torch_method__dimI_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method__dimI_self_Tensor, 1},
     {"_torch_cpp_torch_method_dense_dim_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_dense_dim_self_Tensor, 1},
@@ -29799,7 +32949,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_unbind_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_unbind_self_Tensor_dim_Dimname, 2},
     {"_torch_cpp_torch_method_to_sparse_self_Tensor_sparse_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_to_sparse_self_Tensor_sparse_dim_int64_t, 2},
     {"_torch_cpp_torch_method_to_sparse_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_to_sparse_self_Tensor, 1},
-    {"_torch_cpp_torch_method_to_mkldnn_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_to_mkldnn_self_Tensor, 1},
+    {"_torch_cpp_torch_method_to_mkldnn_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_to_mkldnn_self_Tensor, 2},
     {"_torch_cpp_torch_method_dequantize_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_dequantize_self_Tensor, 1},
     {"_torch_cpp_torch_method_q_scale_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_q_scale_self_Tensor, 1},
     {"_torch_cpp_torch_method_q_zero_point_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_q_zero_point_self_Tensor, 1},
@@ -29825,6 +32975,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_masked_scatter__self_Tensor_mask_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_method_masked_scatter__self_Tensor_mask_Tensor_source_Tensor, 3},
     {"_torch_cpp_torch_method_masked_scatter_self_Tensor_mask_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_method_masked_scatter_self_Tensor_mask_Tensor_source_Tensor, 3},
     {"_torch_cpp_torch_method_view_self_Tensor_size_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_view_self_Tensor_size_IntArrayRef, 2},
+    {"_torch_cpp_torch_method_view_self_Tensor_dtype_ScalarType", (DL_FUNC) &_torch_cpp_torch_method_view_self_Tensor_dtype_ScalarType, 2},
     {"_torch_cpp_torch_method_put__self_Tensor_index_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_method_put__self_Tensor_index_Tensor_source_Tensor, 4},
     {"_torch_cpp_torch_method_index_add__self_Tensor_dim_int64_t_index_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_add__self_Tensor_dim_int64_t_index_Tensor_source_Tensor, 4},
     {"_torch_cpp_torch_method_index_add_self_Tensor_dim_int64_t_index_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_method_index_add_self_Tensor_dim_int64_t_index_Tensor_source_Tensor, 4},
@@ -29882,15 +33033,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method___rshift___self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method___rshift___self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method___irshift___self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method___irshift___self_Tensor_other_Scalar, 2},
     {"_torch_cpp_torch_method___irshift___self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method___irshift___self_Tensor_other_Tensor, 2},
-    {"_torch_cpp_torch_method_lgamma__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_lgamma__self_Tensor, 1},
     {"_torch_cpp_torch_method_atan2__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_atan2__self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_tril__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_tril__self_Tensor, 2},
     {"_torch_cpp_torch_method_triu__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_triu__self_Tensor, 2},
     {"_torch_cpp_torch_method_digamma__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_digamma__self_Tensor, 1},
     {"_torch_cpp_torch_method_polygamma__self_Tensor_n_int64_t", (DL_FUNC) &_torch_cpp_torch_method_polygamma__self_Tensor_n_int64_t, 2},
     {"_torch_cpp_torch_method_renorm__self_Tensor_p_Scalar_dim_int64_t_maxnorm_Scalar", (DL_FUNC) &_torch_cpp_torch_method_renorm__self_Tensor_p_Scalar_dim_int64_t_maxnorm_Scalar, 4},
-    {"_torch_cpp_torch_method_pow__self_Tensor_exponent_Scalar", (DL_FUNC) &_torch_cpp_torch_method_pow__self_Tensor_exponent_Scalar, 2},
-    {"_torch_cpp_torch_method_pow__self_Tensor_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_method_pow__self_Tensor_exponent_Tensor, 2},
     {"_torch_cpp_torch_method_lerp__self_Tensor_end_Tensor_weight_Scalar", (DL_FUNC) &_torch_cpp_torch_method_lerp__self_Tensor_end_Tensor_weight_Scalar, 3},
     {"_torch_cpp_torch_method_lerp__self_Tensor_end_Tensor_weight_Tensor", (DL_FUNC) &_torch_cpp_torch_method_lerp__self_Tensor_end_Tensor_weight_Tensor, 3},
     {"_torch_cpp_torch_method_fmod__self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_fmod__self_Tensor_other_Scalar, 2},
@@ -29971,6 +33119,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_symeig_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_symeig_self_Tensor, 3},
     {"_torch_cpp_torch_method_eig_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_eig_self_Tensor, 2},
     {"_torch_cpp_torch_method_svd_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_svd_self_Tensor, 3},
+    {"_torch_cpp_torch_method_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t", (DL_FUNC) &_torch_cpp_torch_method_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t, 3},
+    {"_torch_cpp_torch_method_swapaxes__self_Tensor_axis0_int64_t_axis1_int64_t", (DL_FUNC) &_torch_cpp_torch_method_swapaxes__self_Tensor_axis0_int64_t_axis1_int64_t, 3},
+    {"_torch_cpp_torch_method_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t", (DL_FUNC) &_torch_cpp_torch_method_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t, 3},
+    {"_torch_cpp_torch_method_swapdims__self_Tensor_dim0_int64_t_dim1_int64_t", (DL_FUNC) &_torch_cpp_torch_method_swapdims__self_Tensor_dim0_int64_t_dim1_int64_t, 3},
     {"_torch_cpp_torch_method_cholesky_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_cholesky_self_Tensor, 2},
     {"_torch_cpp_torch_method_cholesky_solve_self_Tensor_input2_Tensor", (DL_FUNC) &_torch_cpp_torch_method_cholesky_solve_self_Tensor_input2_Tensor, 3},
     {"_torch_cpp_torch_method_solve_self_Tensor_A_Tensor", (DL_FUNC) &_torch_cpp_torch_method_solve_self_Tensor_A_Tensor, 2},
@@ -29981,6 +33133,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_ormqr_self_Tensor_input2_Tensor_input3_Tensor", (DL_FUNC) &_torch_cpp_torch_method_ormqr_self_Tensor_input2_Tensor_input3_Tensor, 5},
     {"_torch_cpp_torch_method_lu_solve_self_Tensor_LU_data_Tensor_LU_pivots_Tensor", (DL_FUNC) &_torch_cpp_torch_method_lu_solve_self_Tensor_LU_data_Tensor_LU_pivots_Tensor, 3},
     {"_torch_cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t", (DL_FUNC) &_torch_cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t, 4},
+    {"_torch_cpp_torch_method_lgamma__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_lgamma__self_Tensor, 1},
     {"_torch_cpp_torch_method_lgamma_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_lgamma_self_Tensor, 1},
     {"_torch_cpp_torch_method_digamma_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_digamma_self_Tensor, 1},
     {"_torch_cpp_torch_method_erfinv_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_erfinv_self_Tensor, 1},
@@ -29999,23 +33152,29 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_fmod_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_fmod_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_hypot_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_hypot_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_hypot__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_hypot__self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_igamma_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_igamma_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_igamma__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_igamma__self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_igammac_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_igammac_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_method_igammac__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_igammac__self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_nextafter_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_nextafter_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_nextafter__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_nextafter__self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_remainder_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_method_remainder_self_Tensor_other_Scalar, 2},
     {"_torch_cpp_torch_method_remainder_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_remainder_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_min_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_min_self_Tensor, 1},
+    {"_torch_cpp_torch_method_fmin_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_fmin_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_max_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_max_self_Tensor, 1},
+    {"_torch_cpp_torch_method_fmax_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_fmax_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_maximum_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_maximum_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_max_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_max_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_minimum_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_minimum_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_min_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_min_self_Tensor_other_Tensor, 2},
-    {"_torch_cpp_torch_method_median_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_median_self_Tensor, 1},
     {"_torch_cpp_torch_method_quantile_self_Tensor_q_double", (DL_FUNC) &_torch_cpp_torch_method_quantile_self_Tensor_q_double, 4},
     {"_torch_cpp_torch_method_quantile_self_Tensor_q_Tensor", (DL_FUNC) &_torch_cpp_torch_method_quantile_self_Tensor_q_Tensor, 4},
     {"_torch_cpp_torch_method_nanquantile_self_Tensor_q_double", (DL_FUNC) &_torch_cpp_torch_method_nanquantile_self_Tensor_q_double, 4},
     {"_torch_cpp_torch_method_nanquantile_self_Tensor_q_Tensor", (DL_FUNC) &_torch_cpp_torch_method_nanquantile_self_Tensor_q_Tensor, 4},
     {"_torch_cpp_torch_method_sort_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sort_self_Tensor, 3},
     {"_torch_cpp_torch_method_sort_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_sort_self_Tensor_dim_Dimname, 3},
+    {"_torch_cpp_torch_method_msort_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_msort_self_Tensor, 1},
     {"_torch_cpp_torch_method_argsort_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_argsort_self_Tensor, 3},
     {"_torch_cpp_torch_method_argsort_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_argsort_self_Tensor_dim_Dimname, 3},
     {"_torch_cpp_torch_method_topk_self_Tensor_k_int64_t", (DL_FUNC) &_torch_cpp_torch_method_topk_self_Tensor_k_int64_t, 5},
@@ -30026,14 +33185,21 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_equal_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_equal_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_pow_self_Tensor_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_method_pow_self_Tensor_exponent_Tensor, 2},
     {"_torch_cpp_torch_method_pow_self_Tensor_exponent_Scalar", (DL_FUNC) &_torch_cpp_torch_method_pow_self_Tensor_exponent_Scalar, 2},
+    {"_torch_cpp_torch_method_pow__self_Tensor_exponent_Scalar", (DL_FUNC) &_torch_cpp_torch_method_pow__self_Tensor_exponent_Scalar, 2},
+    {"_torch_cpp_torch_method_pow__self_Tensor_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_method_pow__self_Tensor_exponent_Tensor, 2},
+    {"_torch_cpp_torch_method_float_power_self_Tensor_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_method_float_power_self_Tensor_exponent_Tensor, 2},
+    {"_torch_cpp_torch_method_float_power_self_Tensor_exponent_Scalar", (DL_FUNC) &_torch_cpp_torch_method_float_power_self_Tensor_exponent_Scalar, 2},
+    {"_torch_cpp_torch_method_float_power__self_Tensor_exponent_Scalar", (DL_FUNC) &_torch_cpp_torch_method_float_power__self_Tensor_exponent_Scalar, 2},
+    {"_torch_cpp_torch_method_float_power__self_Tensor_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_method_float_power__self_Tensor_exponent_Tensor, 2},
     {"_torch_cpp_torch_method_normal__self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_normal__self_Tensor, 4},
     {"_torch_cpp_torch_method_alias_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_alias_self_Tensor, 1},
     {"_torch_cpp_torch_method_isfinite_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_isfinite_self_Tensor, 1},
     {"_torch_cpp_torch_method_isinf_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_isinf_self_Tensor, 1},
+    {"_torch_cpp_torch_method_record_stream_self_Tensor_s_Stream", (DL_FUNC) &_torch_cpp_torch_method_record_stream_self_Tensor_s_Stream, 2},
     {"_torch_cpp_torch_method_isposinf_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_isposinf_self_Tensor, 1},
     {"_torch_cpp_torch_method_isneginf_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_isneginf_self_Tensor, 1},
-    {"_torch_cpp_torch_method_fft_self_Tensor_signal_ndim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_fft_self_Tensor_signal_ndim_int64_t, 3},
     {"_torch_cpp_torch_method_det_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_det_self_Tensor, 1},
+    {"_torch_cpp_torch_method_inner_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_method_inner_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_method_outer_self_Tensor_vec2_Tensor", (DL_FUNC) &_torch_cpp_torch_method_outer_self_Tensor_vec2_Tensor, 2},
     {"_torch_cpp_torch_method_ger_self_Tensor_vec2_Tensor", (DL_FUNC) &_torch_cpp_torch_method_ger_self_Tensor_vec2_Tensor, 2},
     {"_torch_cpp_torch_namespace__cast_Byte_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__cast_Byte_self_Tensor, 2},
@@ -30044,12 +33210,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace__cast_Long_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__cast_Long_self_Tensor, 2},
     {"_torch_cpp_torch_namespace__cast_Short_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__cast_Short_self_Tensor, 2},
     {"_torch_cpp_torch_namespace__cast_Half_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__cast_Half_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace__make_dual_primal_Tensor_tangent_Tensor_level_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__make_dual_primal_Tensor_tangent_Tensor_level_int64_t, 3},
+    {"_torch_cpp_torch_namespace__unpack_dual_dual_Tensor_level_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__unpack_dual_dual_Tensor_level_int64_t, 2},
     {"_torch_cpp_torch_namespace_align_tensors_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_align_tensors_tensors_TensorList, 1},
     {"_torch_cpp_torch_namespace__use_cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__use_cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t, 5},
     {"_torch_cpp_torch_namespace__cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t_deterministic_bool_zero_infinity_bool", (DL_FUNC) &_torch_cpp_torch_namespace__cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t_deterministic_bool_zero_infinity_bool, 7},
-    {"_torch_cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool", (DL_FUNC) &_torch_cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool, 8},
-    {"_torch_cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor, 15},
-    {"_torch_cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4", (DL_FUNC) &_torch_cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4, 21},
+    {"_torch_cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool", (DL_FUNC) &_torch_cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool, 9},
+    {"_torch_cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor, 16},
+    {"_torch_cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4", (DL_FUNC) &_torch_cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4, 22},
     {"_torch_cpp_torch_namespace__cudnn_init_dropout_state_dropout_double_train_bool_dropout_seed_int64_t_options_TensorOptions", (DL_FUNC) &_torch_cpp_torch_namespace__cudnn_init_dropout_state_dropout_double_train_bool_dropout_seed_int64_t_options_TensorOptions, 4},
     {"_torch_cpp_torch_namespace__debug_has_internal_overlap_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__debug_has_internal_overlap_self_Tensor, 1},
     {"_torch_cpp_torch_namespace__fused_dropout_self_Tensor_p_double", (DL_FUNC) &_torch_cpp_torch_namespace__fused_dropout_self_Tensor_p_double, 3},
@@ -30123,7 +33291,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_arange_out_out_Tensor_start_Scalar_end_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_arange_out_out_Tensor_start_Scalar_end_Scalar, 4},
     {"_torch_cpp_torch_namespace__dim_arange_like_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__dim_arange_like_Tensor_dim_int64_t, 2},
     {"_torch_cpp_torch_namespace_argmax_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_argmax_self_Tensor, 3},
+    {"_torch_cpp_torch_namespace_argmax_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_argmax_out_out_Tensor_self_Tensor, 4},
     {"_torch_cpp_torch_namespace_argmin_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_argmin_self_Tensor, 3},
+    {"_torch_cpp_torch_namespace_argmin_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_argmin_out_out_Tensor_self_Tensor, 4},
     {"_torch_cpp_torch_namespace_acosh_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_acosh_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_acosh__self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_acosh__self_Tensor, 1},
     {"_torch_cpp_torch_namespace_acosh_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_acosh_out_out_Tensor_self_Tensor, 2},
@@ -30184,6 +33354,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_bincount_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_bincount_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_bitwise_not_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_bitwise_not_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_bitwise_not_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_bitwise_not_out_out_Tensor_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_copysign_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_copysign_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_copysign_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_copysign_out_out_Tensor_self_Tensor_other_Tensor, 3},
+    {"_torch_cpp_torch_namespace_copysign_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_copysign_self_Tensor_other_Scalar, 2},
     {"_torch_cpp_torch_namespace_logical_not_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_logical_not_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_logical_not_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_logical_not_out_out_Tensor_self_Tensor, 2},
     {"_torch_cpp_torch_namespace_logical_xor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_logical_xor_self_Tensor_other_Tensor, 2},
@@ -30199,6 +33372,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_bmm_out_out_Tensor_self_Tensor_mat2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_bmm_out_out_Tensor_self_Tensor_mat2_Tensor, 3},
     {"_torch_cpp_torch_namespace__bmm_out_out_Tensor_self_Tensor_mat2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__bmm_out_out_Tensor_self_Tensor_mat2_Tensor, 4},
     {"_torch_cpp_torch_namespace_broadcast_tensors_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_broadcast_tensors_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef, 2},
     {"_torch_cpp_torch_namespace_cat_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_cat_tensors_TensorList, 2},
     {"_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList, 3},
     {"_torch_cpp_torch_namespace_cat_tensors_TensorList_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_cat_tensors_TensorList_dim_Dimname, 2},
@@ -30210,6 +33384,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_chain_matmul_matrices_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_chain_matmul_matrices_TensorList, 1},
     {"_torch_cpp_torch_namespace_unsafe_chunk_self_Tensor_chunks_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_unsafe_chunk_self_Tensor_chunks_int64_t, 3},
     {"_torch_cpp_torch_namespace_chunk_self_Tensor_chunks_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_chunk_self_Tensor_chunks_int64_t, 3},
+    {"_torch_cpp_torch_namespace_tensor_split_self_Tensor_sections_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_tensor_split_self_Tensor_sections_int64_t, 3},
+    {"_torch_cpp_torch_namespace_tensor_split_self_Tensor_indices_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_tensor_split_self_Tensor_indices_IntArrayRef, 3},
+    {"_torch_cpp_torch_namespace_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor, 3},
     {"_torch_cpp_torch_namespace_clamp_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_clamp_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_clamp__self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_clamp__self_Tensor, 3},
     {"_torch_cpp_torch_namespace_clamp_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_clamp_out_out_Tensor_self_Tensor, 4},
@@ -30300,12 +33477,20 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_diagonal_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_diagonal_self_Tensor, 4},
     {"_torch_cpp_torch_namespace_diagonal_self_Tensor_outdim_Dimname_dim1_Dimname_dim2_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_diagonal_self_Tensor_outdim_Dimname_dim1_Dimname_dim2_Dimname, 5},
     {"_torch_cpp_torch_namespace_diagonal_backward_grad_Tensor_input_sizes_IntArrayRef_offset_int64_t_dim1_int64_t_dim2_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_diagonal_backward_grad_Tensor_input_sizes_IntArrayRef_offset_int64_t_dim1_int64_t_dim2_int64_t, 5},
+    {"_torch_cpp_torch_namespace_diff_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_diff_self_Tensor, 5},
+    {"_torch_cpp_torch_namespace_diff_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_diff_out_out_Tensor_self_Tensor, 6},
     {"_torch_cpp_torch_namespace_div_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_div_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor, 3},
+    {"_torch_cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_stdstring, 3},
+    {"_torch_cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring, 4},
     {"_torch_cpp_torch_namespace_div_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_div_self_Tensor_other_Scalar, 2},
+    {"_torch_cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_stdstring, 3},
     {"_torch_cpp_torch_namespace_divide_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_divide_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_divide_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_divide_self_Tensor_other_Scalar, 2},
+    {"_torch_cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_stdstring, 3},
+    {"_torch_cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring, 4},
+    {"_torch_cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_stdstring, 3},
     {"_torch_cpp_torch_namespace_true_divide_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_true_divide_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_namespace_true_divide_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_true_divide_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_true_divide_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_true_divide_self_Tensor_other_Scalar, 2},
@@ -30320,6 +33505,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_embedding_renorm__self_Tensor_indices_Tensor_max_norm_double_norm_type_double", (DL_FUNC) &_torch_cpp_torch_namespace_embedding_renorm__self_Tensor_indices_Tensor_max_norm_double_norm_type_double, 4},
     {"_torch_cpp_torch_namespace_embedding_sparse_backward_grad_Tensor_indices_Tensor_num_weights_int64_t_padding_idx_int64_t_scale_grad_by_freq_bool", (DL_FUNC) &_torch_cpp_torch_namespace_embedding_sparse_backward_grad_Tensor_indices_Tensor_num_weights_int64_t_padding_idx_int64_t_scale_grad_by_freq_bool, 5},
     {"_torch_cpp_torch_namespace__embedding_bag_forward_only_weight_Tensor_indices_Tensor_offsets_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__embedding_bag_forward_only_weight_Tensor_indices_Tensor_offsets_Tensor, 8},
+    {"_torch_cpp_torch_namespace__rowwise_prune_weight_Tensor_mask_Tensor_compressed_indices_dtype_ScalarType", (DL_FUNC) &_torch_cpp_torch_namespace__rowwise_prune_weight_Tensor_mask_Tensor_compressed_indices_dtype_ScalarType, 3},
+    {"_torch_cpp_torch_namespace_row_stack_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_row_stack_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace_row_stack_out_out_Tensor_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_row_stack_out_out_Tensor_tensors_TensorList, 2},
     {"_torch_cpp_torch_namespace_embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor, 8},
     {"_torch_cpp_torch_namespace__embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor, 8},
     {"_torch_cpp_torch_namespace__embedding_bag_backward_grad_Tensor_indices_Tensor_offsets_Tensor_offset2bag_Tensor_bag_size_Tensor_maximum_indices_Tensor_num_weights_int64_t_scale_grad_by_freq_bool_mode_int64_t_sparse_bool_per_sample_weights_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__embedding_bag_backward_grad_Tensor_indices_Tensor_offsets_Tensor_offset2bag_Tensor_bag_size_Tensor_maximum_indices_Tensor_num_weights_int64_t_scale_grad_by_freq_bool_mode_int64_t_sparse_bool_per_sample_weights_Tensor, 11},
@@ -30400,21 +33588,22 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_group_norm_input_Tensor_num_groups_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_group_norm_input_Tensor_num_groups_int64_t, 6},
     {"_torch_cpp_torch_namespace_native_group_norm_input_Tensor_weight_Tensor_bias_Tensor_FALSE_int64_t_C_int64_t_HxW_int64_t_group_int64_t_eps_double", (DL_FUNC) &_torch_cpp_torch_namespace_native_group_norm_input_Tensor_weight_Tensor_bias_Tensor_FALSE_int64_t_C_int64_t_HxW_int64_t_group_int64_t_eps_double, 8},
     {"_torch_cpp_torch_namespace_native_group_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_FALSE_int64_t_C_int64_t_HxW_int64_t_group_int64_t_output_mask_stdarraybool3", (DL_FUNC) &_torch_cpp_torch_namespace_native_group_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_FALSE_int64_t_C_int64_t_HxW_int64_t_group_int64_t_output_mask_stdarraybool3, 10},
-    {"_torch_cpp_torch_namespace_ifft_self_Tensor_signal_ndim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_ifft_self_Tensor_signal_ndim_int64_t, 3},
-    {"_torch_cpp_torch_namespace_rfft_self_Tensor_signal_ndim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_rfft_self_Tensor_signal_ndim_int64_t, 4},
-    {"_torch_cpp_torch_namespace_irfft_self_Tensor_signal_ndim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_irfft_self_Tensor_signal_ndim_int64_t, 5},
-    {"_torch_cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalized_bool_onesided_bool_output_sizes_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalized_bool_onesided_bool_output_sizes_IntArrayRef, 9},
-    {"_torch_cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalization_int64_t_onesided_bool_output_sizes_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalization_int64_t_onesided_bool_output_sizes_IntArrayRef, 9},
+    {"_torch_cpp_torch_namespace__fft_r2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool", (DL_FUNC) &_torch_cpp_torch_namespace__fft_r2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool, 4},
+    {"_torch_cpp_torch_namespace__fft_r2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool", (DL_FUNC) &_torch_cpp_torch_namespace__fft_r2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool, 5},
+    {"_torch_cpp_torch_namespace__fft_c2r_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fft_c2r_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t, 4},
+    {"_torch_cpp_torch_namespace__fft_c2r_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fft_c2r_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t, 5},
+    {"_torch_cpp_torch_namespace__fft_c2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool", (DL_FUNC) &_torch_cpp_torch_namespace__fft_c2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool, 4},
+    {"_torch_cpp_torch_namespace__fft_c2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool", (DL_FUNC) &_torch_cpp_torch_namespace__fft_c2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool, 5},
     {"_torch_cpp_torch_namespace__cufft_get_plan_cache_size_device_index_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__cufft_get_plan_cache_size_device_index_int64_t, 1},
     {"_torch_cpp_torch_namespace__cufft_get_plan_cache_max_size_device_index_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__cufft_get_plan_cache_max_size_device_index_int64_t, 1},
     {"_torch_cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__cufft_set_plan_cache_max_size_device_index_int64_t_max_size_int64_t, 2},
     {"_torch_cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t, 1},
-    {"_torch_cpp_torch_namespace_index_self_Tensor_indices_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_index_self_Tensor_indices_TensorList, 2},
+    {"_torch_cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor", (DL_FUNC) &_torch_cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor, 2},
     {"_torch_cpp_torch_namespace_index_copy_self_Tensor_dim_int64_t_index_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_index_copy_self_Tensor_dim_int64_t_index_Tensor_source_Tensor, 4},
     {"_torch_cpp_torch_namespace_index_copy_self_Tensor_dim_Dimname_index_Tensor_source_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_index_copy_self_Tensor_dim_Dimname_index_Tensor_source_Tensor, 4},
-    {"_torch_cpp_torch_namespace_index_put__self_Tensor_indices_TensorList_values_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_index_put__self_Tensor_indices_TensorList_values_Tensor, 4},
-    {"_torch_cpp_torch_namespace_index_put_self_Tensor_indices_TensorList_values_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_index_put_self_Tensor_indices_TensorList_values_Tensor, 4},
-    {"_torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_TensorList_values_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_TensorList_values_Tensor, 5},
+    {"_torch_cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor, 4},
+    {"_torch_cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor, 4},
+    {"_torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor, 5},
     {"_torch_cpp_torch_namespace_instance_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_use_input_stats_bool_momentum_double_eps_double_cudnn_enabled_bool", (DL_FUNC) &_torch_cpp_torch_namespace_instance_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_use_input_stats_bool_momentum_double_eps_double_cudnn_enabled_bool, 9},
     {"_torch_cpp_torch_namespace_inverse_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_inverse_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_inverse_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_inverse_out_out_Tensor_self_Tensor, 2},
@@ -30430,15 +33619,23 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_is_signed_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_is_signed_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_kl_div_self_Tensor_target_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_kl_div_self_Tensor_target_Tensor, 4},
     {"_torch_cpp_torch_namespace_kl_div_backward_grad_output_Tensor_self_Tensor_target_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_kl_div_backward_grad_output_Tensor_self_Tensor_target_Tensor, 5},
+    {"_torch_cpp_torch_namespace_kron_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_kron_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_kron_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_kron_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t, 4},
     {"_torch_cpp_torch_namespace_kthvalue_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_kthvalue_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t, 6},
     {"_torch_cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t_dim_Dimname, 4},
     {"_torch_cpp_torch_namespace_kthvalue_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_kthvalue_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t_dim_Dimname, 6},
     {"_torch_cpp_torch_namespace_layer_norm_input_Tensor_normalized_shape_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_layer_norm_input_Tensor_normalized_shape_IntArrayRef, 6},
-    {"_torch_cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double", (DL_FUNC) &_torch_cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double, 6},
-    {"_torch_cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3", (DL_FUNC) &_torch_cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3, 8},
+    {"_torch_cpp_torch_namespace_native_layer_norm_input_Tensor_normalized_shape_IntArrayRef_weight_Tensor_bias_Tensor_eps_double", (DL_FUNC) &_torch_cpp_torch_namespace_native_layer_norm_input_Tensor_normalized_shape_IntArrayRef_weight_Tensor_bias_Tensor_eps_double, 5},
+    {"_torch_cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_normalized_shape_IntArrayRef_mean_Tensor_rstd_Tensor_weight_Tensor_bias_Tensor_output_mask_stdarraybool3", (DL_FUNC) &_torch_cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_normalized_shape_IntArrayRef_mean_Tensor_rstd_Tensor_weight_Tensor_bias_Tensor_output_mask_stdarraybool3, 8},
+    {"_torch_cpp_torch_namespace_nan_to_num_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_nan_to_num_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_nan_to_num__self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_nan_to_num__self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_nan_to_num_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_nan_to_num_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_linear_input_Tensor_weight_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linear_input_Tensor_weight_Tensor, 3},
-    {"_torch_cpp_torch_namespace_mkldnn_linear_input_Tensor_weight_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_mkldnn_linear_input_Tensor_weight_Tensor, 3},
+    {"_torch_cpp_torch_namespace_mkldnn_linear_self_Tensor_weight_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_mkldnn_linear_self_Tensor_weight_Tensor, 3},
+    {"_torch_cpp_torch_namespace_mkldnn_linear_backward_input_input_size_IntArrayRef_grad_output_Tensor_weight_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_mkldnn_linear_backward_input_input_size_IntArrayRef_grad_output_Tensor_weight_Tensor, 3},
+    {"_torch_cpp_torch_namespace_mkldnn_linear_backward_weights_grad_output_Tensor_input_Tensor_weight_Tensor_bias_defined_bool", (DL_FUNC) &_torch_cpp_torch_namespace_mkldnn_linear_backward_weights_grad_output_Tensor_input_Tensor_weight_Tensor_bias_defined_bool, 4},
+    {"_torch_cpp_torch_namespace_mkldnn_linear_backward_self_Tensor_grad_output_Tensor_weight_Tensor_output_mask_stdarraybool3", (DL_FUNC) &_torch_cpp_torch_namespace_mkldnn_linear_backward_self_Tensor_grad_output_Tensor_weight_Tensor_output_mask_stdarraybool3, 4},
     {"_torch_cpp_torch_namespace_fbgemm_linear_int8_weight_fp32_activation_input_Tensor_weight_Tensor_packed_Tensor_col_offsets_Tensor_weight_scale_Scalar_weight_zero_point_Scalar_bias_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fbgemm_linear_int8_weight_fp32_activation_input_Tensor_weight_Tensor_packed_Tensor_col_offsets_Tensor_weight_scale_Scalar_weight_zero_point_Scalar_bias_Tensor, 7},
     {"_torch_cpp_torch_namespace_fbgemm_linear_int8_weight_input_Tensor_weight_Tensor_packed_Tensor_col_offsets_Tensor_weight_scale_Scalar_weight_zero_point_Scalar_bias_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fbgemm_linear_int8_weight_input_Tensor_weight_Tensor_packed_Tensor_col_offsets_Tensor_weight_scale_Scalar_weight_zero_point_Scalar_bias_Tensor, 7},
     {"_torch_cpp_torch_namespace_fbgemm_linear_quantize_weight_input_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fbgemm_linear_quantize_weight_input_Tensor, 1},
@@ -30447,6 +33644,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_fbgemm_linear_fp16_weight_input_Tensor_packed_weight_Tensor_bias_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fbgemm_linear_fp16_weight_input_Tensor_packed_weight_Tensor_bias_Tensor, 3},
     {"_torch_cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor, 1},
     {"_torch_cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor_K_int64_t_FALSE_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor_K_int64_t_FALSE_int64_t, 3},
+    {"_torch_cpp_torch_namespace_ldexp_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_ldexp_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_ldexp__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_ldexp__self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_ldexp_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_ldexp_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_linspace_start_Scalar_end_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_linspace_start_Scalar_end_Scalar, 4},
     {"_torch_cpp_torch_namespace_linspace_out_out_Tensor_start_Scalar_end_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_linspace_out_out_Tensor_start_Scalar_end_Scalar, 4},
     {"_torch_cpp_torch_namespace_log_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_log_self_Tensor, 1},
@@ -30465,6 +33665,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_logaddexp_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_logaddexp_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_namespace_logaddexp2_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_logaddexp2_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_logaddexp2_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_logaddexp2_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_xlogy_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_xlogy_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_xlogy_self_Scalar_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_xlogy_self_Scalar_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_xlogy_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_xlogy_self_Tensor_other_Scalar, 2},
+    {"_torch_cpp_torch_namespace_xlogy__self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_xlogy__self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_xlogy__self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_xlogy__self_Tensor_other_Scalar, 2},
+    {"_torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Tensor, 3},
+    {"_torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Scalar_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Scalar_other_Tensor, 3},
+    {"_torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Scalar, 3},
     {"_torch_cpp_torch_namespace_logdet_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_logdet_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_logspace_start_Scalar_end_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_logspace_start_Scalar_end_Scalar, 5},
     {"_torch_cpp_torch_namespace_logspace_out_out_Tensor_start_Scalar_end_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_logspace_out_out_Tensor_start_Scalar_end_Scalar, 5},
@@ -30514,10 +33722,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_IntArrayRef, 5},
     {"_torch_cpp_torch_namespace_mean_self_Tensor_dim_DimnameList", (DL_FUNC) &_torch_cpp_torch_namespace_mean_self_Tensor_dim_DimnameList, 4},
     {"_torch_cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_DimnameList", (DL_FUNC) &_torch_cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_DimnameList, 5},
+    {"_torch_cpp_torch_namespace_median_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_median_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_median_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_median_self_Tensor_dim_int64_t, 3},
     {"_torch_cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t, 5},
     {"_torch_cpp_torch_namespace_median_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_median_self_Tensor_dim_Dimname, 3},
     {"_torch_cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname, 5},
+    {"_torch_cpp_torch_namespace_nanmedian_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_nanmedian_self_Tensor, 1},
+    {"_torch_cpp_torch_namespace_nanmedian_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_nanmedian_self_Tensor_dim_int64_t, 3},
+    {"_torch_cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t, 5},
+    {"_torch_cpp_torch_namespace_nanmedian_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_nanmedian_self_Tensor_dim_Dimname, 3},
+    {"_torch_cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname, 5},
     {"_torch_cpp_torch_namespace_min_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_min_self_Tensor_dim_int64_t, 3},
     {"_torch_cpp_torch_namespace_min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_int64_t, 5},
     {"_torch_cpp_torch_namespace_min_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_min_self_Tensor_dim_Dimname, 3},
@@ -30548,6 +33762,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_mm_self_Tensor_mat2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_mm_self_Tensor_mat2_Tensor, 2},
     {"_torch_cpp_torch_namespace_mm_out_out_Tensor_self_Tensor_mat2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_mm_out_out_Tensor_self_Tensor_mat2_Tensor, 3},
     {"_torch_cpp_torch_namespace__sparse_mm_sparse_Tensor_dense_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__sparse_mm_sparse_Tensor_dense_Tensor, 2},
+    {"_torch_cpp_torch_namespace__sparse_sparse_matmul_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__sparse_sparse_matmul_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace__sparse_matrix_mask_helper_t_Tensor_mask_indices_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__sparse_matrix_mask_helper_t_Tensor_mask_indices_Tensor, 2},
     {"_torch_cpp_torch_namespace_mode_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_mode_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_mode_out_values_Tensor_indices_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_mode_out_values_Tensor_indices_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_mode_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_mode_self_Tensor_dim_Dimname, 3},
@@ -30561,6 +33777,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_mv_self_Tensor_vec_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_mv_self_Tensor_vec_Tensor, 2},
     {"_torch_cpp_torch_namespace_mv_out_out_Tensor_self_Tensor_vec_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_mv_out_out_Tensor_self_Tensor_vec_Tensor, 3},
     {"_torch_cpp_torch_namespace_mvlgamma_self_Tensor_p_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_mvlgamma_self_Tensor_p_int64_t, 2},
+    {"_torch_cpp_torch_namespace_narrow_copy_self_Tensor_dim_int64_t_start_int64_t_length_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_narrow_copy_self_Tensor_dim_int64_t_start_int64_t_length_int64_t, 4},
+    {"_torch_cpp_torch_namespace_narrow_copy_out_out_Tensor_self_Tensor_dim_int64_t_start_int64_t_length_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_narrow_copy_out_out_Tensor_self_Tensor_dim_int64_t_start_int64_t_length_int64_t, 5},
     {"_torch_cpp_torch_namespace_narrow_self_Tensor_dim_int64_t_start_int64_t_length_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_narrow_self_Tensor_dim_int64_t_start_int64_t_length_int64_t, 4},
     {"_torch_cpp_torch_namespace_narrow_self_Tensor_dim_int64_t_start_Tensor_length_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_narrow_self_Tensor_dim_int64_t_start_Tensor_length_int64_t, 4},
     {"_torch_cpp_torch_namespace_native_batch_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double", (DL_FUNC) &_torch_cpp_torch_namespace_native_batch_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double, 8},
@@ -30593,7 +33811,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_cosine_similarity_x1_Tensor_x2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_cosine_similarity_x1_Tensor_x2_Tensor, 4},
     {"_torch_cpp_torch_namespace_movedim_self_Tensor_source_IntArrayRef_destination_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_movedim_self_Tensor_source_IntArrayRef_destination_IntArrayRef, 3},
     {"_torch_cpp_torch_namespace_movedim_self_Tensor_source_int64_t_destination_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_movedim_self_Tensor_source_int64_t_destination_int64_t, 3},
+    {"_torch_cpp_torch_namespace_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef, 3},
+    {"_torch_cpp_torch_namespace_moveaxis_self_Tensor_source_int64_t_destination_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_moveaxis_self_Tensor_source_int64_t_destination_int64_t, 3},
     {"_torch_cpp_torch_namespace_pixel_shuffle_self_Tensor_upscale_factor_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_pixel_shuffle_self_Tensor_upscale_factor_int64_t, 2},
+    {"_torch_cpp_torch_namespace_pixel_unshuffle_self_Tensor_downscale_factor_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_pixel_unshuffle_self_Tensor_downscale_factor_int64_t, 2},
     {"_torch_cpp_torch_namespace_channel_shuffle_self_Tensor_groups_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_channel_shuffle_self_Tensor_groups_int64_t, 2},
     {"_torch_cpp_torch_namespace_pinverse_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_pinverse_self_Tensor, 2},
     {"_torch_cpp_torch_namespace_poisson_nll_loss_input_Tensor_target_Tensor_log_input_bool_full_bool_eps_double_reduction_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_poisson_nll_loss_input_Tensor_target_Tensor_log_input_bool_full_bool_eps_double_reduction_int64_t, 6},
@@ -30634,6 +33855,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_randperm_out_out_Tensor_n_int64_t_generator_Generator", (DL_FUNC) &_torch_cpp_torch_namespace_randperm_out_out_Tensor_n_int64_t_generator_Generator, 3},
     {"_torch_cpp_torch_namespace_range_start_Scalar_end_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_range_start_Scalar_end_Scalar, 4},
     {"_torch_cpp_torch_namespace_range_out_out_Tensor_start_Scalar_end_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_range_out_out_Tensor_start_Scalar_end_Scalar, 4},
+    {"_torch_cpp_torch_namespace_ravel_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_ravel_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_reciprocal_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_reciprocal_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_reciprocal__self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_reciprocal__self_Tensor, 1},
     {"_torch_cpp_torch_namespace_reciprocal_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_reciprocal_out_out_Tensor_self_Tensor, 2},
@@ -30685,6 +33907,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_sin_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sin_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_sin__self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sin__self_Tensor, 1},
     {"_torch_cpp_torch_namespace_sin_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sin_out_out_Tensor_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_sinc_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sinc_self_Tensor, 1},
+    {"_torch_cpp_torch_namespace_sinc__self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sinc__self_Tensor, 1},
+    {"_torch_cpp_torch_namespace_sinc_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sinc_out_out_Tensor_self_Tensor, 2},
     {"_torch_cpp_torch_namespace_sinh_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sinh_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_sinh__self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sinh__self_Tensor, 1},
     {"_torch_cpp_torch_namespace_sinh_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sinh_out_out_Tensor_self_Tensor, 2},
@@ -30711,6 +33936,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_sspaddmm_out_out_Tensor_self_Tensor_mat1_Tensor_mat2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sspaddmm_out_out_Tensor_self_Tensor_mat1_Tensor_mat2_Tensor, 6},
     {"_torch_cpp_torch_namespace_stack_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_stack_tensors_TensorList, 2},
     {"_torch_cpp_torch_namespace_stack_out_out_Tensor_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_stack_out_out_Tensor_tensors_TensorList, 3},
+    {"_torch_cpp_torch_namespace__stack_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__stack_tensors_TensorList, 2},
+    {"_torch_cpp_torch_namespace__stack_out_out_Tensor_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__stack_out_out_Tensor_tensors_TensorList, 3},
     {"_torch_cpp_torch_namespace_hstack_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_hstack_tensors_TensorList, 1},
     {"_torch_cpp_torch_namespace_hstack_out_out_Tensor_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_hstack_out_out_Tensor_tensors_TensorList, 2},
     {"_torch_cpp_torch_namespace_vstack_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_vstack_tensors_TensorList, 1},
@@ -30755,10 +33982,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_tanh__self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_tanh__self_Tensor, 1},
     {"_torch_cpp_torch_namespace_tanh_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_tanh_out_out_Tensor_self_Tensor, 2},
     {"_torch_cpp_torch_namespace_tensordot_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_tensordot_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef, 4},
+    {"_torch_cpp_torch_namespace_tensordot_out_out_Tensor_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_tensordot_out_out_Tensor_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef, 5},
     {"_torch_cpp_torch_namespace_threshold_self_Tensor_threshold_Scalar_value_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_threshold_self_Tensor_threshold_Scalar_value_Scalar, 3},
     {"_torch_cpp_torch_namespace_threshold__self_Tensor_threshold_Scalar_value_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_threshold__self_Tensor_threshold_Scalar_value_Scalar, 3},
     {"_torch_cpp_torch_namespace_threshold_out_out_Tensor_self_Tensor_threshold_Scalar_value_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_threshold_out_out_Tensor_self_Tensor_threshold_Scalar_value_Scalar, 4},
     {"_torch_cpp_torch_namespace_threshold_backward_grad_output_Tensor_self_Tensor_threshold_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_threshold_backward_grad_output_Tensor_self_Tensor_threshold_Scalar, 3},
+    {"_torch_cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef, 2},
     {"_torch_cpp_torch_namespace_transpose_self_Tensor_dim0_int64_t_dim1_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_transpose_self_Tensor_dim0_int64_t_dim1_int64_t, 3},
     {"_torch_cpp_torch_namespace_transpose_self_Tensor_dim0_Dimname_dim1_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_transpose_self_Tensor_dim0_Dimname_dim1_Dimname, 3},
     {"_torch_cpp_torch_namespace__mkldnn_transpose_self_Tensor_dim0_int64_t_dim1_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__mkldnn_transpose_self_Tensor_dim0_int64_t_dim1_int64_t, 3},
@@ -30895,13 +34124,15 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace__make_per_tensor_quantized_tensor_self_Tensor_scale_double_zero_point_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__make_per_tensor_quantized_tensor_self_Tensor_scale_double_zero_point_int64_t, 3},
     {"_torch_cpp_torch_namespace__make_per_channel_quantized_tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__make_per_channel_quantized_tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t, 4},
     {"_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t, 5},
-    {"_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t, 6},
-    {"_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t, 5},
-    {"_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t, 6},
+    {"_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t, 5},
+    {"_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_backward_grad_Tensor_mask_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_backward_grad_Tensor_mask_Tensor, 2},
+    {"_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t, 6},
+    {"_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t, 7},
     {"_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t, 6},
-    {"_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t, 7},
-    {"_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t, 6},
-    {"_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t, 7},
+    {"_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t, 6},
+    {"_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_backward_grad_Tensor_mask_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_backward_grad_Tensor_mask_Tensor, 2},
+    {"_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t, 7},
+    {"_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t, 8},
     {"_torch_cpp_torch_namespace__choose_qparams_per_tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__choose_qparams_per_tensor_self_Tensor, 2},
     {"_torch_cpp_torch_namespace__saturate_weight_to_fp16_weight_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__saturate_weight_to_fp16_weight_Tensor, 1},
     {"_torch_cpp_torch_namespace_choose_qparams_optimized_input_Tensor_numel_int64_t_n_bins_int64_t_ratio_double_bit_width_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_choose_qparams_optimized_input_Tensor_numel_int64_t_n_bins_int64_t_ratio_double_bit_width_int64_t, 5},
@@ -31073,6 +34304,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor, 6},
     {"_torch_cpp_torch_namespace_svd_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_svd_self_Tensor, 3},
     {"_torch_cpp_torch_namespace__svd_helper_self_Tensor_some_bool_compute_uv_bool", (DL_FUNC) &_torch_cpp_torch_namespace__svd_helper_self_Tensor_some_bool_compute_uv_bool, 3},
+    {"_torch_cpp_torch_namespace_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t, 3},
+    {"_torch_cpp_torch_namespace_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t, 3},
     {"_torch_cpp_torch_namespace_cholesky_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_cholesky_out_out_Tensor_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_cholesky_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_cholesky_self_Tensor, 2},
     {"_torch_cpp_torch_namespace__cholesky_helper_self_Tensor_upper_bool", (DL_FUNC) &_torch_cpp_torch_namespace__cholesky_helper_self_Tensor_upper_bool, 2},
@@ -31082,11 +34315,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_solve_self_Tensor_A_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_solve_self_Tensor_A_Tensor, 2},
     {"_torch_cpp_torch_namespace_solve_out_solution_Tensor_lu_Tensor_self_Tensor_A_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_solve_out_solution_Tensor_lu_Tensor_self_Tensor_A_Tensor, 4},
     {"_torch_cpp_torch_namespace__solve_helper_self_Tensor_A_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__solve_helper_self_Tensor_A_Tensor, 2},
-    {"_torch_cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_cholesky_inverse_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_cholesky_inverse_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_qr_out_Q_Tensor_R_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_qr_out_Q_Tensor_R_Tensor_self_Tensor, 4},
     {"_torch_cpp_torch_namespace_qr_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_qr_self_Tensor, 2},
-    {"_torch_cpp_torch_namespace__qr_helper_self_Tensor_some_bool", (DL_FUNC) &_torch_cpp_torch_namespace__qr_helper_self_Tensor_some_bool, 2},
     {"_torch_cpp_torch_namespace_geqrf_out_a_Tensor_tau_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_geqrf_out_a_Tensor_tau_Tensor_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_geqrf_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_geqrf_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_orgqr_out_out_Tensor_self_Tensor_input2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_orgqr_out_out_Tensor_self_Tensor_input2_Tensor, 3},
@@ -31099,8 +34331,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace__lu_solve_helper_self_Tensor_LU_data_Tensor_LU_pivots_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__lu_solve_helper_self_Tensor_LU_data_Tensor_LU_pivots_Tensor, 3},
     {"_torch_cpp_torch_namespace_multinomial_out_out_Tensor_self_Tensor_num_samples_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_multinomial_out_out_Tensor_self_Tensor_num_samples_int64_t, 5},
     {"_torch_cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t, 4},
-    {"_torch_cpp_torch_namespace__multinomial_alias_setup_probs_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__multinomial_alias_setup_probs_Tensor, 1},
-    {"_torch_cpp_torch_namespace__multinomial_alias_draw_J_Tensor_q_Tensor_num_samples_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__multinomial_alias_draw_J_Tensor_q_Tensor_num_samples_int64_t, 4},
     {"_torch_cpp_torch_namespace_lgamma_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_lgamma_out_out_Tensor_self_Tensor, 2},
     {"_torch_cpp_torch_namespace_lgamma_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_lgamma_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_digamma_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_digamma_out_out_Tensor_self_Tensor, 2},
@@ -31130,6 +34360,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_fmod_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fmod_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_namespace_hypot_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_hypot_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_hypot_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_hypot_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_igamma_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_igamma_out_out_Tensor_self_Tensor_other_Tensor, 3},
+    {"_torch_cpp_torch_namespace_igamma_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_igamma_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_igammac_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_igammac_out_out_Tensor_self_Tensor_other_Tensor, 3},
+    {"_torch_cpp_torch_namespace_igammac_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_igammac_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_namespace_nextafter_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_nextafter_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_nextafter_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_nextafter_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_namespace_remainder_out_out_Tensor_self_Tensor_other_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_remainder_out_out_Tensor_self_Tensor_other_Scalar, 3},
@@ -31137,7 +34371,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_remainder_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_remainder_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_remainder_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_remainder_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_namespace_min_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_min_self_Tensor, 1},
+    {"_torch_cpp_torch_namespace_fmin_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fmin_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_fmin_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fmin_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_max_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_max_self_Tensor, 1},
+    {"_torch_cpp_torch_namespace_fmax_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fmax_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_fmax_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fmax_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_maximum_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_maximum_self_Tensor_other_Tensor, 2},
     {"_torch_cpp_torch_namespace_maximum_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_maximum_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_max_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_max_self_Tensor_other_Tensor, 2},
@@ -31146,7 +34384,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_minimum_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_minimum_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_min_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_min_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_min_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_min_self_Tensor_other_Tensor, 2},
-    {"_torch_cpp_torch_namespace_median_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_median_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_double", (DL_FUNC) &_torch_cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_double, 5},
     {"_torch_cpp_torch_namespace_quantile_self_Tensor_q_double", (DL_FUNC) &_torch_cpp_torch_namespace_quantile_self_Tensor_q_double, 4},
     {"_torch_cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_Tensor, 5},
@@ -31159,6 +34396,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_sort_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_sort_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname, 5},
     {"_torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname, 3},
+    {"_torch_cpp_torch_namespace_msort_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_msort_out_out_Tensor_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_msort_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_msort_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_argsort_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_argsort_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_argsort_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_argsort_self_Tensor_dim_Dimname, 3},
     {"_torch_cpp_torch_namespace_topk_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_topk_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t, 7},
@@ -31175,6 +34414,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_pow_self_Scalar_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_pow_self_Scalar_exponent_Tensor, 2},
     {"_torch_cpp_torch_namespace_pow_out_out_Tensor_self_Tensor_exponent_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_pow_out_out_Tensor_self_Tensor_exponent_Scalar, 3},
     {"_torch_cpp_torch_namespace_pow_self_Tensor_exponent_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_pow_self_Tensor_exponent_Scalar, 2},
+    {"_torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Tensor, 3},
+    {"_torch_cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor, 2},
+    {"_torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Scalar_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Scalar_exponent_Tensor, 3},
+    {"_torch_cpp_torch_namespace_float_power_self_Scalar_exponent_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_float_power_self_Scalar_exponent_Tensor, 2},
+    {"_torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Scalar, 3},
+    {"_torch_cpp_torch_namespace_float_power_self_Tensor_exponent_Scalar", (DL_FUNC) &_torch_cpp_torch_namespace_float_power_self_Tensor_exponent_Scalar, 2},
     {"_torch_cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor, 4},
     {"_torch_cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_Tensor, 4},
     {"_torch_cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_Tensor, 4},
@@ -31187,7 +34432,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace__cumprod_out_out_Tensor_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__cumprod_out_out_Tensor_self_Tensor_dim_int64_t, 3},
     {"_torch_cpp_torch_namespace__var_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__var_self_Tensor, 2},
     {"_torch_cpp_torch_namespace__std_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__std_self_Tensor, 2},
-    {"_torch_cpp_torch_namespace__amp_non_finite_check_and_unscale__self_Tensor_found_inf_Tensor_inv_scale_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__amp_non_finite_check_and_unscale__self_Tensor_found_inf_Tensor_inv_scale_Tensor, 3},
+    {"_torch_cpp_torch_namespace__amp_foreach_non_finite_check_and_unscale__self_TensorList_found_inf_Tensor_inv_scale_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__amp_foreach_non_finite_check_and_unscale__self_TensorList_found_inf_Tensor_inv_scale_Tensor, 3},
     {"_torch_cpp_torch_namespace__amp_update_scale_growth_tracker_Tensor_current_scale_Tensor_found_inf_Tensor_scale_growth_factor_double_scale_backoff_factor_double_growth_interval_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__amp_update_scale_growth_tracker_Tensor_current_scale_Tensor_found_inf_Tensor_scale_growth_factor_double_scale_backoff_factor_double_growth_interval_int64_t, 6},
     {"_torch_cpp_torch_namespace__cat_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__cat_tensors_TensorList, 2},
     {"_torch_cpp_torch_namespace__cat_out_out_Tensor_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__cat_out_out_Tensor_tensors_TensorList, 3},
@@ -31207,22 +34452,81 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace__foreach_mul__self_TensorList_other_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_mul__self_TensorList_other_TensorList, 2},
     {"_torch_cpp_torch_namespace__foreach_div_tensors1_TensorList_tensors2_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_div_tensors1_TensorList_tensors2_TensorList, 2},
     {"_torch_cpp_torch_namespace__foreach_div__self_TensorList_other_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_div__self_TensorList_other_TensorList, 2},
-    {"_torch_cpp_torch_namespace__foreach_add_scalar_list_tensors_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_add_scalar_list_tensors_TensorList_scalars_ArrayRefdouble, 2},
-    {"_torch_cpp_torch_namespace__foreach_add_scalar_list__self_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_add_scalar_list__self_TensorList_scalars_ArrayRefdouble, 2},
-    {"_torch_cpp_torch_namespace__foreach_sub_scalar_list_tensors_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sub_scalar_list_tensors_TensorList_scalars_ArrayRefdouble, 2},
-    {"_torch_cpp_torch_namespace__foreach_sub_scalar_list__self_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sub_scalar_list__self_TensorList_scalars_ArrayRefdouble, 2},
-    {"_torch_cpp_torch_namespace__foreach_div_scalar_list_tensors_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_div_scalar_list_tensors_TensorList_scalars_ArrayRefdouble, 2},
-    {"_torch_cpp_torch_namespace__foreach_div_scalar_list__self_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_div_scalar_list__self_TensorList_scalars_ArrayRefdouble, 2},
-    {"_torch_cpp_torch_namespace__foreach_mul_scalar_list_tensors_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_mul_scalar_list_tensors_TensorList_scalars_ArrayRefdouble, 2},
-    {"_torch_cpp_torch_namespace__foreach_mul_scalar_list__self_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_mul_scalar_list__self_TensorList_scalars_ArrayRefdouble, 2},
+    {"_torch_cpp_torch_namespace__foreach_add_tensors_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_add_tensors_TensorList_scalars_ArrayRefdouble, 2},
+    {"_torch_cpp_torch_namespace__foreach_add__self_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_add__self_TensorList_scalars_ArrayRefdouble, 2},
+    {"_torch_cpp_torch_namespace__foreach_sub_tensors_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sub_tensors_TensorList_scalars_ArrayRefdouble, 2},
+    {"_torch_cpp_torch_namespace__foreach_sub__self_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sub__self_TensorList_scalars_ArrayRefdouble, 2},
+    {"_torch_cpp_torch_namespace__foreach_div_tensors_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_div_tensors_TensorList_scalars_ArrayRefdouble, 2},
+    {"_torch_cpp_torch_namespace__foreach_div__self_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_div__self_TensorList_scalars_ArrayRefdouble, 2},
+    {"_torch_cpp_torch_namespace__foreach_mul_tensors_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_mul_tensors_TensorList_scalars_ArrayRefdouble, 2},
+    {"_torch_cpp_torch_namespace__foreach_mul__self_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_mul__self_TensorList_scalars_ArrayRefdouble, 2},
     {"_torch_cpp_torch_namespace__foreach_exp_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_exp_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_zero__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_zero__self_TensorList, 1},
     {"_torch_cpp_torch_namespace__foreach_exp__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_exp__self_TensorList, 1},
     {"_torch_cpp_torch_namespace__foreach_sqrt_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sqrt_tensors_TensorList, 1},
     {"_torch_cpp_torch_namespace__foreach_sqrt__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sqrt__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_abs_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_abs_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_abs__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_abs__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_acos_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_acos_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_acos__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_acos__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_asin_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_asin_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_asin__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_asin__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_atan_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_atan_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_atan__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_atan__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_ceil_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_ceil_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_ceil__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_ceil__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_cos_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_cos_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_cos__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_cos__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_cosh_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_cosh_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_cosh__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_cosh__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_erf_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_erf_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_erf__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_erf__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_erfc_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_erfc_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_erfc__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_erfc__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_expm1_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_expm1_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_expm1__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_expm1__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_floor_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_floor_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_floor__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_floor__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_log_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_log_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_log__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_log__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_log10_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_log10_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_log10__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_log10__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_log1p_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_log1p_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_log1p__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_log1p__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_log2_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_log2_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_log2__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_log2__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_neg_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_neg_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_neg__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_neg__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_tan_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_tan_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_tan__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_tan__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_tanh_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_tanh_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_tanh__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_tanh__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_sin_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sin_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_sin__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sin__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_sinh_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sinh_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_sinh__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sinh__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_round_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_round_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_round__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_round__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_lgamma_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_lgamma_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_lgamma__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_lgamma__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_frac_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_frac_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_frac__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_frac__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_reciprocal_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_reciprocal_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_reciprocal__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_reciprocal__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_sigmoid_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sigmoid_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_sigmoid__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_sigmoid__self_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_trunc_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_trunc_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace__foreach_trunc__self_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_trunc__self_TensorList, 1},
     {"_torch_cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList, 4},
     {"_torch_cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList, 4},
+    {"_torch_cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble, 4},
+    {"_torch_cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble, 4},
     {"_torch_cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList, 4},
     {"_torch_cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList, 4},
+    {"_torch_cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble, 4},
+    {"_torch_cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble, 4},
+    {"_torch_cpp_torch_namespace__foreach_maximum_tensors1_TensorList_tensors2_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_maximum_tensors1_TensorList_tensors2_TensorList, 2},
+    {"_torch_cpp_torch_namespace__foreach_minimum_tensors1_TensorList_tensors2_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace__foreach_minimum_tensors1_TensorList_tensors2_TensorList, 2},
     {"_torch_cpp_torch_namespace__mode_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__mode_self_Tensor, 3},
     {"_torch_cpp_torch_namespace__mode_out_values_Tensor_indices_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__mode_out_values_Tensor_indices_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_bucketize_self_Tensor_boundaries_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_bucketize_self_Tensor_boundaries_Tensor, 4},
@@ -31271,8 +34575,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_soft_margin_loss_backward_grad_output_Tensor_self_Tensor_target_Tensor_reduction_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_soft_margin_loss_backward_grad_output_Tensor_self_Tensor_target_Tensor_reduction_int64_t, 4},
     {"_torch_cpp_torch_namespace_elu_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_elu_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_elu_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_elu_self_Tensor, 4},
-    {"_torch_cpp_torch_namespace_elu_backward_out_grad_input_Tensor_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_elu_backward_out_grad_input_Tensor_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor, 6},
-    {"_torch_cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor, 5},
+    {"_torch_cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor, 6},
     {"_torch_cpp_torch_namespace_elu__self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_elu__self_Tensor, 4},
     {"_torch_cpp_torch_namespace_glu_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_glu_out_out_Tensor_self_Tensor, 3},
     {"_torch_cpp_torch_namespace_glu_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_glu_self_Tensor, 2},
@@ -31464,6 +34767,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_col2im_self_Tensor_output_size_IntArrayRef_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_col2im_self_Tensor_output_size_IntArrayRef_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef, 6},
     {"_torch_cpp_torch_namespace_col2im_backward_out_grad_input_Tensor_grad_output_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_col2im_backward_out_grad_input_Tensor_grad_output_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef, 6},
     {"_torch_cpp_torch_namespace_col2im_backward_grad_output_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_col2im_backward_grad_output_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef, 5},
+    {"_torch_cpp_torch_namespace_column_stack_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_column_stack_tensors_TensorList, 1},
+    {"_torch_cpp_torch_namespace_column_stack_out_out_Tensor_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_column_stack_out_out_Tensor_tensors_TensorList, 2},
     {"_torch_cpp_torch_namespace_im2col_out_out_Tensor_self_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_im2col_out_out_Tensor_self_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef, 6},
     {"_torch_cpp_torch_namespace_im2col_self_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_im2col_self_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef, 5},
     {"_torch_cpp_torch_namespace_im2col_backward_out_grad_input_Tensor_grad_output_Tensor_input_size_IntArrayRef_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_im2col_backward_out_grad_input_Tensor_grad_output_Tensor_input_size_IntArrayRef_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef, 7},
@@ -31477,18 +34782,55 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace__add_batch_dim_self_Tensor_batch_dim_int64_t_level_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__add_batch_dim_self_Tensor_batch_dim_int64_t_level_int64_t, 3},
     {"_torch_cpp_torch_namespace__remove_batch_dim_self_Tensor_level_int64_t_batch_size_int64_t_out_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace__remove_batch_dim_self_Tensor_level_int64_t_batch_size_int64_t_out_dim_int64_t, 4},
     {"_torch_cpp_torch_namespace_fft_fft_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_fft_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_fft_ifft_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_ifft_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_fft_rfft_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_rfft_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_fft_irfft_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_irfft_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_fft_hfft_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_hfft_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_fft_ihfft_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_ihfft_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor, 5},
+    {"_torch_cpp_torch_namespace_fft_fft2_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_fft2_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor, 5},
+    {"_torch_cpp_torch_namespace_fft_ifft2_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_ifft2_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor, 5},
+    {"_torch_cpp_torch_namespace_fft_rfft2_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_rfft2_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor, 5},
+    {"_torch_cpp_torch_namespace_fft_irfft2_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_irfft2_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_fft_fftn_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_fftn_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_fft_ifftn_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_ifftn_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_fft_rfftn_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_rfftn_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor, 5},
     {"_torch_cpp_torch_namespace_fft_irfftn_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_irfftn_self_Tensor, 4},
-    {"_torch_cpp_torch_namespace_fft_self_Tensor_signal_ndim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fft_self_Tensor_signal_ndim_int64_t, 3},
+    {"_torch_cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor, 5},
+    {"_torch_cpp_torch_namespace_fft_fftfreq_n_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fft_fftfreq_n_int64_t, 3},
+    {"_torch_cpp_torch_namespace_fft_fftfreq_out_out_Tensor_n_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fft_fftfreq_out_out_Tensor_n_int64_t, 3},
+    {"_torch_cpp_torch_namespace_fft_rfftfreq_n_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fft_rfftfreq_n_int64_t, 3},
+    {"_torch_cpp_torch_namespace_fft_rfftfreq_out_out_Tensor_n_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_fft_rfftfreq_out_out_Tensor_n_int64_t, 3},
+    {"_torch_cpp_torch_namespace_fft_fftshift_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_fftshift_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_fft_ifftshift_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_fft_ifftshift_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_linalg_cholesky_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_cholesky_self_Tensor, 1},
+    {"_torch_cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor, 2},
     {"_torch_cpp_torch_namespace_linalg_det_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_det_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_det_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_det_self_Tensor, 1},
+    {"_torch_cpp_torch_namespace_linalg_slogdet_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_slogdet_self_Tensor, 1},
+    {"_torch_cpp_torch_namespace_linalg_slogdet_out_sign_Tensor_logabsdet_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_slogdet_out_sign_Tensor_logabsdet_Tensor_self_Tensor, 3},
+    {"_torch_cpp_torch_namespace__syevd_helper_self_Tensor_compute_eigenvectors_bool_uplo_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace__syevd_helper_self_Tensor_compute_eigenvectors_bool_uplo_stdstring, 3},
+    {"_torch_cpp_torch_namespace_linalg_eigh_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_eigh_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_linalg_eigh_out_eigvals_Tensor_eigvecs_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_eigh_out_eigvals_Tensor_eigvecs_Tensor_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_linalg_eigvalsh_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_eigvalsh_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_linalg_eigvalsh_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_eigvalsh_out_out_Tensor_self_Tensor, 3},
+    {"_torch_cpp_torch_namespace__linalg_inv_out_helper__self_Tensor_infos_lu_Tensor_infos_getri_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__linalg_inv_out_helper__self_Tensor_infos_lu_Tensor_infos_getri_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_inv_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_inv_self_Tensor, 1},
+    {"_torch_cpp_torch_namespace_linalg_inv_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_inv_out_out_Tensor_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_inner_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_inner_self_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_inner_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_inner_out_out_Tensor_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace_outer_self_Tensor_vec2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_outer_self_Tensor_vec2_Tensor, 2},
     {"_torch_cpp_torch_namespace_outer_out_out_Tensor_self_Tensor_vec2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_outer_out_out_Tensor_self_Tensor_vec2_Tensor, 3},
     {"_torch_cpp_torch_namespace_ger_self_Tensor_vec2_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_ger_self_Tensor_vec2_Tensor, 2},
@@ -31497,6 +34839,28 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_linalg_norm_self_Tensor_ord_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_norm_self_Tensor_ord_stdstring, 5},
     {"_torch_cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor, 6},
     {"_torch_cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring, 6},
+    {"_torch_cpp_torch_namespace_linalg_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor, 6},
+    {"_torch_cpp_torch_namespace_linalg_svd_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_svd_self_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_cond_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_cond_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_cond_self_Tensor_p_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_cond_self_Tensor_p_stdstring, 2},
+    {"_torch_cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_stdstring, 3},
+    {"_torch_cpp_torch_namespace_linalg_pinv_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_pinv_self_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor, 4},
+    {"_torch_cpp_torch_namespace__linalg_solve_out_helper__self_Tensor_other_Tensor_infos_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__linalg_solve_out_helper__self_Tensor_other_Tensor_infos_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_solve_input_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_solve_input_Tensor_other_Tensor, 2},
+    {"_torch_cpp_torch_namespace_linalg_solve_out_out_Tensor_input_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_solve_out_out_Tensor_input_Tensor_other_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_tensorinv_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_tensorinv_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_linalg_tensorinv_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_tensorinv_out_out_Tensor_self_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_tensorsolve_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_tensorsolve_self_Tensor_other_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_tensorsolve_out_out_Tensor_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_tensorsolve_out_out_Tensor_self_Tensor_other_Tensor, 4},
+    {"_torch_cpp_torch_namespace_linalg_qr_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_qr_self_Tensor, 2},
+    {"_torch_cpp_torch_namespace_linalg_qr_out_Q_Tensor_R_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_qr_out_Q_Tensor_R_Tensor_self_Tensor, 4},
+    {"_torch_cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_stdstring", (DL_FUNC) &_torch_cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_stdstring, 2},
+    {"_torch_cpp_torch_namespace_linalg_matrix_rank_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_matrix_rank_self_Tensor, 3},
+    {"_torch_cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor, 4},
     {"_torch_cpp_torch_namespace__test_serialization_subcmul_self_Tensor_other_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace__test_serialization_subcmul_self_Tensor_other_Tensor, 3},
     {"_torch_cpp_torch_namespace__test_optional_intlist_values_Tensor_addends_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace__test_optional_intlist_values_Tensor_addends_IntArrayRef, 2},
     {"_torch_cpp_torch_namespace__test_optional_filled_intlist_values_Tensor_addends_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace__test_optional_filled_intlist_values_Tensor_addends_IntArrayRef, 2},

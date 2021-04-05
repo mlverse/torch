@@ -171,8 +171,17 @@ r_argument_default <- function(default) {
   if (default == "{0,1}")
     return("c(0,1)")
 
+  if (default == "{-2,-1}")
+    return("c(-2,-1)")
+
+  if (default == "\"L\"")
+    return("\"L\"")
+
   if (default == "at::kLong")
     return("torch_long()")
+
+  if (default == "\"reduced\"")
+    return("\"reduced\"")
 
   browser()
 }
@@ -413,6 +422,7 @@ r_method_body <- function(decls) {
 r <- function(path) {
 
   namespace <- declarations() %>%
+    purrr::discard(~.x$name %in% SKIP_R_BINDIND) %>%
     purrr::keep(~"namespace" %in% .x$method_of)
 
   namespace_nms <- purrr::map_chr(namespace, ~.x$name)
@@ -429,6 +439,7 @@ r <- function(path) {
   writeLines(namespace_code, file.path(path, "/R/gen-namespace.R"))
 
   methods <- declarations() %>%
+    purrr::discard(~.x$name %in% SKIP_R_BINDIND) %>%
     purrr::keep(~"Tensor" %in% .x$method_of)
 
   methods_nms <- purrr::map_chr(methods, ~.x$name)

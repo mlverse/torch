@@ -164,7 +164,7 @@ nd_arguments_to_torch_type <- function(arguments, expected_types) {
   
 }
 
-clean_chars <- c("'", "\"", "%", "#", ":", ">", "<", ",", " ", "*")
+clean_chars <- c("'", "\"", "%", "#", ":", ">", "<", ",", " ", "*", "&")
 
 clean_names <- function(x) {
   cpp_clean_names(x, clean_chars)

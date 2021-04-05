@@ -56,6 +56,15 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchOptionalTensorList : public XPtrTorch {
+public:
+  XPtrTorchOptionalTensorList (void* x) : XPtrTorch(x, lantern_TensorList_delete) {}
+  explicit XPtrTorchOptionalTensorList (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchOptionalTensorList (const XPtrTorchTensorList& x) : XPtrTorch(x.get_shared()) {}
+  explicit XPtrTorchOptionalTensorList (SEXP x);
+  operator SEXP () const;
+};
+
 class XPtrTorchIndexTensorList: public XPtrTorch {
 public:
   XPtrTorchIndexTensorList (void* x) : XPtrTorch(x, lantern_TensorList_delete) {}
