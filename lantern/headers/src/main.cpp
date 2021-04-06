@@ -350,7 +350,7 @@ int main(int argc, char *argv[])
 
         calls = "";
         functionCall = "";
-        if (hasMethodOf(config[idx], "Tensor"))
+        if (hasMethodOf(config[idx], "Tensor") || name == "stride")
         {
             headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_" + function + ")(" + arguments + ");");
             headers.push_back("  HOST_API void* lantern_Tensor_" + function + "(" + arguments + ") { void* ret = _lantern_Tensor_" + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");

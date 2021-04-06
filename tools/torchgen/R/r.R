@@ -363,7 +363,7 @@ r_method <- function(decls) {
 
 }
 
-internal_methods <- c("backward", "retain_grad", "size", "to", "stride",
+internal_methods <- c("_backward", "retain_grad", "size", "to", "stride",
                       "copy_", "topk", "scatter_", "scatter", "rename",
                       "rename_", "narrow", "narrow_copy", "is_leaf", "max",
                       "min", "argsort", "argmax", "argmin", "norm", "split",
@@ -378,6 +378,8 @@ r_method_env <- function(decls) {
 
 r_method_name <- function(decls) {
   name <- decls[[1]]$name
+  # if (name == "stride")
+  #   browser()
 
   if (name %in% internal_methods)
     name <- paste0("_", name)
@@ -422,7 +424,7 @@ r_method_body <- function(decls) {
 r <- function(path) {
 
   namespace <- declarations() %>%
-    purrr::discard(~.x$name %in% SKIP_R_BINDIND) %>%
+    purrr::discard(~.x$name %in% SKIP_R_BINDIND[!SKIP_R_BINDIND %in% internal_funs]) %>%
     purrr::keep(~"namespace" %in% .x$method_of)
 
   namespace_nms <- purrr::map_chr(namespace, ~.x$name)
@@ -439,7 +441,7 @@ r <- function(path) {
   writeLines(namespace_code, file.path(path, "/R/gen-namespace.R"))
 
   methods <- declarations() %>%
-    purrr::discard(~.x$name %in% SKIP_R_BINDIND) %>%
+    purrr::discard(~.x$name %in% SKIP_R_BINDIND[!SKIP_R_BINDIND %in% internal_methods]) %>%
     purrr::keep(~"Tensor" %in% .x$method_of)
 
   methods_nms <- purrr::map_chr(methods, ~.x$name)

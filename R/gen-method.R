@@ -130,7 +130,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "_backward", function(inputs, gradient = list(), retain_graph = NULL, create_graph = FALSE) {  args <- mget(x = c("inputs", "gradient", "retain_graph", "create_graph"))
+Tensor$set("private", "__backward", function(inputs, gradient = list(), retain_graph = NULL, create_graph = FALSE) {  args <- mget(x = c("inputs", "gradient", "retain_graph", "create_graph"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", inputs = "TensorList", gradient = "Tensor", 
     retain_graph = "bool", create_graph = "bool")
@@ -5762,7 +5762,7 @@ call_c_function(
 )})
 Tensor$set("private", "_stride", function(dim) {  args <- mget(x = c("dim"))
 args <- append(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = "Dimname")
+expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"))
 nd_args <- c("self", "dim")
 return_types <- list(list('int64_t'))
 call_c_function(

@@ -177,7 +177,6 @@ XPtrTorchScalar::XPtrTorchScalar (SEXP x):
 XPtrTorchTensorList cpp_torch_tensor_list(const Rcpp::List &x);
 XPtrTorchTensorList XPtrTorchTensorList_from_SEXP (SEXP x)
 {
-  
   if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_tensor_list")) {
     auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchTensorList>>(x);
     return XPtrTorchTensorList( out->get_shared());
@@ -198,6 +197,12 @@ XPtrTorchTensorList XPtrTorchTensorList_from_SEXP (SEXP x)
   if (TYPEOF(x) == VECSXP) 
   {
     return cpp_torch_tensor_list(Rcpp::as<Rcpp::List>(x));
+  }
+  
+  if (Rf_isNull(x))
+  {
+    Rcpp::List tmp; // create an empty list
+    return cpp_torch_tensor_list(tmp);
   }
   
   Rcpp::stop("Expected a torch_tensor_list.");

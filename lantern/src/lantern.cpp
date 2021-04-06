@@ -8743,6 +8743,14 @@ void* _lantern_stride_tensor_intt(void* self, void* dim)
   LANTERN_FUNCTION_END
 }
 
+void* _lantern_Tensor_stride_tensor_intt(void* self, void* dim)
+{
+  LANTERN_FUNCTION_START
+    return (void *) new LanternObject<int64_t>(((LanternObject<torch::Tensor>*)self)->get().stride(
+        ((LanternObject<int64_t>*)dim)->get()));
+  LANTERN_FUNCTION_END
+}
+
 void* _lantern_stride_tensor_dimname(void* self, void* dim)
 {
   LANTERN_FUNCTION_START

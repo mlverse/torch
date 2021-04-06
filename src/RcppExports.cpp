@@ -69,16 +69,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_method_backward_self_Tensor
-void cpp_torch_method_backward_self_Tensor(XPtrTorchTensor self, XPtrTorchTensor gradient, bool retain_graph, bool create_graph);
-RcppExport SEXP _torch_cpp_torch_method_backward_self_Tensor(SEXP selfSEXP, SEXP gradientSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP) {
+// cpp_torch_method__backward_self_Tensor_inputs_TensorList
+void cpp_torch_method__backward_self_Tensor_inputs_TensorList(XPtrTorchTensor self, XPtrTorchTensorList inputs, XPtrTorchTensor gradient, bool retain_graph, bool create_graph);
+RcppExport SEXP _torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList(SEXP selfSEXP, SEXP inputsSEXP, SEXP gradientSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type inputs(inputsSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type gradient(gradientSEXP);
     Rcpp::traits::input_parameter< bool >::type retain_graph(retain_graphSEXP);
     Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
-    cpp_torch_method_backward_self_Tensor(self, gradient, retain_graph, create_graph);
+    cpp_torch_method__backward_self_Tensor_inputs_TensorList(self, inputs, gradient, retain_graph, create_graph);
     return R_NilValue;
 END_RCPP
 }
@@ -612,20 +613,6 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     rcpp_result_gen = Rcpp::wrap(cpp_get_default_dtype());
     return rcpp_result_gen;
-END_RCPP
-}
-// cpp_torch_method__backward_self_Tensor_inputs_TensorList
-void cpp_torch_method__backward_self_Tensor_inputs_TensorList(XPtrTorchTensor self, XPtrTorchTensorList inputs, XPtrTorchTensor gradient, bool retain_graph, bool create_graph);
-RcppExport SEXP _torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList(SEXP selfSEXP, SEXP inputsSEXP, SEXP gradientSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type inputs(inputsSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type gradient(gradientSEXP);
-    Rcpp::traits::input_parameter< bool >::type retain_graph(retain_graphSEXP);
-    Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
-    cpp_torch_method__backward_self_Tensor_inputs_TensorList(self, inputs, gradient, retain_graph, create_graph);
-    return R_NilValue;
 END_RCPP
 }
 // cpp_torch_method_set_data_self_Tensor_new_data_Tensor
@@ -4697,6 +4684,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type length(lengthSEXP);
     Rcpp::traits::input_parameter< bool >::type return_complex(return_complexSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_istft_self_Tensor_n_fft_int64_t(self, n_fft, hop_length, win_length, window, center, normalized, onesided, length, return_complex));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_method_stride_self_Tensor_dim_int64_t
+int64_t cpp_torch_method_stride_self_Tensor_dim_int64_t(XPtrTorchTensor self, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_method_stride_self_Tensor_dim_int64_t(SEXP selfSEXP, SEXP dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_stride_self_Tensor_dim_int64_t(self, dim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -32479,7 +32478,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_tensor_grad", (DL_FUNC) &_torch_cpp_tensor_grad, 1},
     {"_torch_cpp_tensor_set_grad_", (DL_FUNC) &_torch_cpp_tensor_set_grad_, 2},
     {"_torch_cpp_tensor_requires_grad", (DL_FUNC) &_torch_cpp_tensor_requires_grad, 1},
-    {"_torch_cpp_torch_method_backward_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_backward_self_Tensor, 4},
+    {"_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList", (DL_FUNC) &_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList, 5},
     {"_torch_cpp_autograd_backward", (DL_FUNC) &_torch_cpp_autograd_backward, 4},
     {"_torch_cpp_tensor_register_hook", (DL_FUNC) &_torch_cpp_tensor_register_hook, 2},
     {"_torch_cpp_tensor_remove_hook", (DL_FUNC) &_torch_cpp_tensor_remove_hook, 2},
@@ -32529,7 +32528,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_qint32", (DL_FUNC) &_torch_cpp_torch_qint32, 0},
     {"_torch_cpp_set_default_dtype", (DL_FUNC) &_torch_cpp_set_default_dtype, 1},
     {"_torch_cpp_get_default_dtype", (DL_FUNC) &_torch_cpp_get_default_dtype, 0},
-    {"_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList", (DL_FUNC) &_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList, 5},
     {"_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor", (DL_FUNC) &_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor, 2},
     {"_torch_cpp_torch_method_data_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_data_self_Tensor, 1},
     {"_torch_cpp_torch_method_is_leaf_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_is_leaf_self_Tensor, 1},
@@ -32864,6 +32862,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_sspaddmm_self_Tensor_mat1_Tensor_mat2_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sspaddmm_self_Tensor_mat1_Tensor_mat2_Tensor, 5},
     {"_torch_cpp_torch_method_stft_self_Tensor_n_fft_int64_t", (DL_FUNC) &_torch_cpp_torch_method_stft_self_Tensor_n_fft_int64_t, 8},
     {"_torch_cpp_torch_method_istft_self_Tensor_n_fft_int64_t", (DL_FUNC) &_torch_cpp_torch_method_istft_self_Tensor_n_fft_int64_t, 10},
+    {"_torch_cpp_torch_method_stride_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_stride_self_Tensor_dim_int64_t, 2},
     {"_torch_cpp_torch_method_stride_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_stride_self_Tensor_dim_Dimname, 2},
     {"_torch_cpp_torch_method_sum_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_sum_self_Tensor, 2},
     {"_torch_cpp_torch_method_sum_self_Tensor_dim_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_method_sum_self_Tensor_dim_IntArrayRef, 4},

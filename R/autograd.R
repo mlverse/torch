@@ -73,8 +73,9 @@ Tensor$set("active", "requires_grad", function(requires_grad) {
 })
 
 Tensor$set("public", "backward", function(gradient = list(), keep_graph = FALSE, 
-                                          create_graph = FALSE) {
-  invisible(private$`_backward`(gradient, keep_graph, create_graph))
+                                          create_graph = FALSE, inputs = NULL) {
+  invisible(private$`__backward`(gradient = gradient, inputs = inputs, retain_graph = keep_graph, 
+                                 create_graph = create_graph))
 })
 
 Tensor$set("public", "retain_grad", function() {

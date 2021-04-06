@@ -3081,6 +3081,8 @@ HOST_API void* lantern_Stream ()
   HOST_API void* lantern_Tensor_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* normalized, void* onesided, void* length, void* return_complex) { void* ret = _lantern_Tensor_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool(self, n_fft, hop_length, win_length, window, center, normalized, onesided, length, return_complex); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_stride_tensor_intt)(void* self, void* dim);
   HOST_API void* lantern_stride_tensor_intt(void* self, void* dim) { void* ret = _lantern_stride_tensor_intt(self, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_stride_tensor_intt)(void* self, void* dim);
+  HOST_API void* lantern_Tensor_stride_tensor_intt(void* self, void* dim) { void* ret = _lantern_Tensor_stride_tensor_intt(self, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_stride_tensor_dimname)(void* self, void* dim);
   HOST_API void* lantern_stride_tensor_dimname(void* self, void* dim) { void* ret = _lantern_stride_tensor_dimname(self, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_stride_tensor_dimname)(void* self, void* dim);

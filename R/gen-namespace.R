@@ -18096,6 +18096,24 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname .torch_normal
+.torch_normal <- function(mean, std = 1L, size, generator = NULL, options = list()) {
+  args <- mget(x = c("mean", "std", "size", "generator", "options"))
+expected_types <- list(mean = c("Tensor", "double"), std = c("double", "Tensor"
+), size = "IntArrayRef", generator = "Generator", options = "TensorOptions")
+nd_args <- c("mean", "size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'normal',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_normal_out
 torch_normal_out <- function(out, mean, std = 1L, size, generator = NULL) {
   args <- mget(x = c("out", "mean", "std", "size", "generator"))

@@ -17,7 +17,7 @@ declarations <- function() {
     )
   }
 
-  yaml::read_yaml(
+  decls <- yaml::read_yaml(
     file = path,
     eval.expr = FALSE,
     handlers = list(
@@ -27,6 +27,13 @@ declarations <- function() {
     )
   )
 
+  # patch declarations for stride to include the int
+  index <- which(map_lgl(decls, ~.x$name == "stride"))[1]
+  s <- decls[[index]]
+  s$method_of <- c(s$method_of, "Tensor")
+  decls[[index]] <- s
+
+  decls
 }
 
 #' Get all tensor methods from Declarations.yaml

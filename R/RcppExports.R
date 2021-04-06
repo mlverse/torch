@@ -25,8 +25,8 @@ cpp_tensor_requires_grad <- function(self) {
     .Call('_torch_cpp_tensor_requires_grad', PACKAGE = 'torchpkg', self)
 }
 
-cpp_torch_method_backward_self_Tensor <- function(self, gradient, retain_graph, create_graph) {
-    invisible(.Call('_torch_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torchpkg', self, gradient, retain_graph, create_graph))
+cpp_torch_method__backward_self_Tensor_inputs_TensorList <- function(self, inputs, gradient, retain_graph, create_graph) {
+    invisible(.Call('_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList', PACKAGE = 'torchpkg', self, inputs, gradient, retain_graph, create_graph))
 }
 
 cpp_autograd_backward <- function(tensors, grad_tensors, retain_graph, create_graph) {
@@ -223,10 +223,6 @@ cpp_set_default_dtype <- function(x) {
 
 cpp_get_default_dtype <- function() {
     .Call('_torch_cpp_get_default_dtype', PACKAGE = 'torchpkg')
-}
-
-cpp_torch_method__backward_self_Tensor_inputs_TensorList <- function(self, inputs, gradient, retain_graph, create_graph) {
-    invisible(.Call('_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList', PACKAGE = 'torchpkg', self, inputs, gradient, retain_graph, create_graph))
 }
 
 cpp_torch_method_set_data_self_Tensor_new_data_Tensor <- function(self, new_data) {
@@ -1563,6 +1559,10 @@ cpp_torch_method_stft_self_Tensor_n_fft_int64_t <- function(self, n_fft, hop_len
 
 cpp_torch_method_istft_self_Tensor_n_fft_int64_t <- function(self, n_fft, hop_length, win_length, window, center, normalized, onesided, length, return_complex) {
     .Call('_torch_cpp_torch_method_istft_self_Tensor_n_fft_int64_t', PACKAGE = 'torchpkg', self, n_fft, hop_length, win_length, window, center, normalized, onesided, length, return_complex)
+}
+
+cpp_torch_method_stride_self_Tensor_dim_int64_t <- function(self, dim) {
+    .Call('_torch_cpp_torch_method_stride_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim)
 }
 
 cpp_torch_method_stride_self_Tensor_dim_Dimname <- function(self, dim) {

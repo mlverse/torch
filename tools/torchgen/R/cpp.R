@@ -543,7 +543,7 @@ SKIP_R_BINDIND <- c(
   "normal",
   "polygamma",
   "_nnpack_available",
-  "backward",
+  "_backward",
   "_use_cudnn_rnn_flatten_weight",
   "is_vulkan_available",
   "_test_ambiguous_defaults",

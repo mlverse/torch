@@ -2,11 +2,6 @@
 #include "utils.h"
 
 // [[Rcpp::export]]
-void cpp_torch_method__backward_self_Tensor_inputs_TensorList (XPtrTorchTensor self, XPtrTorchTensorList inputs, XPtrTorchTensor gradient, bool retain_graph, bool create_graph) {
-  lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool(self.get(), inputs.get(), gradient.get(), reinterpret_cast<void*>(&retain_graph), reinterpret_cast<void*>(&create_graph));
-}
-
-// [[Rcpp::export]]
 void cpp_torch_method_set_data_self_Tensor_new_data_Tensor (XPtrTorchTensor self, XPtrTorchTensor new_data) {
   lantern_Tensor_set_data_tensor_tensor(self.get(), new_data.get());
 }
@@ -2024,6 +2019,12 @@ return XPtrTorchTensor(r_out);
 XPtrTorchTensor cpp_torch_method_istft_self_Tensor_n_fft_int64_t (XPtrTorchTensor self, XPtrTorchint64_t2 n_fft, XPtrTorchoptional_int64_t2 hop_length, XPtrTorchoptional_int64_t2 win_length, XPtrTorchTensor window, bool center, bool normalized, bool onesided, XPtrTorchoptional_int64_t2 length, bool return_complex) {
   auto r_out = lantern_Tensor_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool(self.get(), n_fft.get(), hop_length.get(), win_length.get(), window.get(), reinterpret_cast<void*>(&center), reinterpret_cast<void*>(&normalized), reinterpret_cast<void*>(&onesided), length.get(), reinterpret_cast<void*>(&return_complex));
 return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+int64_t cpp_torch_method_stride_self_Tensor_dim_int64_t (XPtrTorchTensor self, XPtrTorchindex_int64_t dim) {
+  auto r_out = lantern_Tensor_stride_tensor_intt(self.get(), dim.get());
+return reinterpret_and_clean<int64_t, lantern_int64_t_delete>(r_out);
 }
 
 // [[Rcpp::export]]
