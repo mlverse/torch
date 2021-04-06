@@ -540,4 +540,18 @@ test_that("calling to doesn't modify the requires_grad attribute of a parameter"
   x$to(device = "cpu")
   expect_true(!x$weight$requires_grad)
   
+  
+  skip_if_cuda_not_available()
+  x <- nn_linear(1,1)
+  expect_true(x$weight$requires_grad)
+  x$to(device = "cuda")
+  expect_true(x$weight$requires_grad)
+  
+  x <- nn_linear(1,1)
+  expect_true(x$weight$requires_grad)
+  x$weight$requires_grad_(FALSE)
+  expect_true(!x$weight$requires_grad)
+  x$to(device = "cuda")
+  expect_true(!x$weight$requires_grad)
+  
 })
