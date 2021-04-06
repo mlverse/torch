@@ -206,7 +206,7 @@ XPtrTorchTensorList XPtrTorchTensorList_from_SEXP (SEXP x)
 XPtrTorchTensorList::XPtrTorchTensorList (SEXP x):
   XPtrTorch{XPtrTorchTensorList_from_SEXP(x)} {}
 
-XPtrTorchTensorList cpp_torch_optional_tensor_list(const Rcpp::List &x);
+XPtrTorchOptionalTensorList cpp_torch_optional_tensor_list(const Rcpp::List &x);
 XPtrTorchOptionalTensorList XPtrTorchOptionalTensorList_from_SEXP (SEXP x)
 {
   

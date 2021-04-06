@@ -16,7 +16,7 @@ XPtrTorchTensorList cpp_torch_tensor_list(const Rcpp::List &x)
   return out;
 }
 
-XPtrTorchOptionalTensorList cpp_torch_optional_tensor_list (const Rcpp::List x)
+XPtrTorchOptionalTensorList cpp_torch_optional_tensor_list (const Rcpp::List &x)
 {
   XPtrTorchOptionalTensorList out = lantern_OptionalTensorList();
   

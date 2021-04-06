@@ -60,3 +60,9 @@ int64_t _lantern_TensorList_size(void *self)
     return reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(self)->get().size();
     LANTERN_FUNCTION_END_RET(0)
 }
+
+void* _lantern_Stream ()
+{
+    c10::Stream x = c10::Stream(c10::Stream::Default(),torch::Device(torch::DeviceType::CPU));
+    return (void*) new LanternObject<c10::Stream>(x);
+}

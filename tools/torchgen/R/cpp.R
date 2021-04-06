@@ -229,7 +229,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "Stream") {
-    declaration <- "XPtrTorchStream"
+    declaration <- "XPtrTorch"
   }
 
   declaration

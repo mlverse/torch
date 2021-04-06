@@ -8813,12 +8813,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_record_stream_self_Tensor_s_Stream
-void cpp_torch_method_record_stream_self_Tensor_s_Stream(XPtrTorchTensor self, XPtrTorchStream s);
+void cpp_torch_method_record_stream_self_Tensor_s_Stream(XPtrTorchTensor self, XPtrTorch s);
 RcppExport SEXP _torch_cpp_torch_method_record_stream_self_Tensor_s_Stream(SEXP selfSEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchStream >::type s(sSEXP);
+    Rcpp::traits::input_parameter< XPtrTorch >::type s(sSEXP);
     cpp_torch_method_record_stream_self_Tensor_s_Stream(self, s);
     return R_NilValue;
 END_RCPP

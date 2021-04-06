@@ -4024,7 +4024,7 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-void cpp_torch_method_record_stream_self_Tensor_s_Stream (XPtrTorchTensor self, XPtrTorchStream s) {
+void cpp_torch_method_record_stream_self_Tensor_s_Stream (XPtrTorchTensor self, XPtrTorch s) {
   lantern_Tensor_record_stream_tensor_stream(self.get(), s.get());
 }
 

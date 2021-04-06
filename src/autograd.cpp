@@ -88,8 +88,8 @@ void cpp_torch_method_backward_self_Tensor (XPtrTorchTensor self, XPtrTorchTenso
     
     try
     {
-      lantern_Tensor_backward_tensor_tensor_bool_bool(
-        self_ptr, gradient_ptr, 
+      lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool(
+        self_ptr, nullptr, gradient_ptr, 
         reinterpret_cast<void*>(&retain_graph_val), 
         reinterpret_cast<void*>(&create_graph_val)
       );
