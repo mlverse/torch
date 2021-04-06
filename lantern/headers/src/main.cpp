@@ -352,6 +352,13 @@ int main(int argc, char *argv[])
         functionCall = "";
         if (hasMethodOf(config[idx], "Tensor") || name == "stride")
         {
+
+            if (name == "stride" && function == "stride_tensor_intt")
+            {
+                std::cout << "writing stride \n";
+                std::cout << function << std::endl;
+            }
+
             headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_" + function + ")(" + arguments + ");");
             headers.push_back("  HOST_API void* lantern_Tensor_" + function + "(" + arguments + ") { void* ret = _lantern_Tensor_" + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");
   
@@ -365,6 +372,12 @@ int main(int argc, char *argv[])
                                function == "true_divide__tensor_scalar" ||
                                function == "true_divide_tensor_tensor" ||
                                function == "true_divide__tensor_tensor";
+
+            if (name == "stride" && function == "stride_tensor_intt")
+            {
+                std::cout << "writing stride \n";
+                std::cout << function << std::endl;
+            }
 
             bodies.push_back("void* _lantern_Tensor_" + function + "(" + arguments + ")");
             bodies.push_back("{");
@@ -417,7 +430,7 @@ int main(int argc, char *argv[])
             symbols.push_back("  LOAD_SYMBOL(_lantern_" + toFunction(name, config[idx]["arguments"]) + ")");
         }
 
-        if (hasMethodOf(config[idx], "Tensor"))
+        if (hasMethodOf(config[idx], "Tensor") || name == "stride")
         {
             symbols.push_back("  LOAD_SYMBOL(_lantern_Tensor_" + toFunction(name, config[idx]["arguments"]) + ")");
         }

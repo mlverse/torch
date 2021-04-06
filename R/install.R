@@ -2,14 +2,14 @@ branch <- "master"
 
 
 install_config <- list(
-  "1.7.1" = list(
+  "1.8.0" = list(
     "cpu" = list(
       "darwin" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.1.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.8.0.zip",
           path = "libtorch/lib",
           filter = ".dylib",
-          md5hash = "d1d0561fa91326afcb7f0abe0241e704"
+          md5hash = "23f07569e0c942260c8b13fa8c3289b8"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)
       ),
@@ -93,7 +93,7 @@ install_config <- list(
 )
 
 #' @keywords internal
-install_path <- function(version = "1.7.1") {
+install_path <- function(version = "1.8.0") {
   path <- Sys.getenv("TORCH_HOME")
   if (nzchar(path)) {
     if (!dir.exists(path)) {
@@ -304,7 +304,7 @@ install_type <- function(version) {
 #' reported length, an increase of the \code{timeout} value should help.
 #' 
 #' @export
-install_torch <- function(version = "1.7.1", type = install_type(version = version), reinstall = FALSE,
+install_torch <- function(version = "1.8.0", type = install_type(version = version), reinstall = FALSE,
                           path = install_path(), timeout = 360, ...) {
   
   if (reinstall) {
