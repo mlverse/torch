@@ -69,6 +69,13 @@ set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_CURRENT_BINARY_DIR}/libtorch
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
+# see https://github.com/pytorch/pytorch/issues/18607#issuecomment-480665557
+if(WIN32)
+  add_compile_options("/permissive")
+  add_compile_options("/permissive-")
+endif()
+
+
 ############################################################
 # Library
 ############################################################
