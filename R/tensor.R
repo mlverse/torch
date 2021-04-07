@@ -223,6 +223,9 @@ Tensor <- R7Class(
         o <- private$`_nonzero_numpy`()
         return(lapply(o, function(x) x + 1L))
       }
+    },
+    view = function(size) {
+      private$`_view`(size = size)
     }
   ),
   active = list(

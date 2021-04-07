@@ -6447,7 +6447,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "view", function(dtype, size) {  args <- mget(x = c("dtype", "size"))
+Tensor$set("private", "_view", function(dtype, size) {  args <- mget(x = c("dtype", "size"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", dtype = "ScalarType", size = "IntArrayRef")
 nd_args <- c("self", "dtype", "size")
