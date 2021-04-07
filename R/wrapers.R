@@ -514,3 +514,11 @@ torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
    
   value_error("Please report a bug report in GitHub")
 }
+
+#' @rdname torch_polygamma
+torch_polygamma <- function(n, input) {
+  input <- input$clone()
+  input$polygamma_(n = n)
+  input
+}
+
