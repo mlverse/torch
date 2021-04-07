@@ -5,7 +5,7 @@
 \alias{torch_divide}
 \title{Divide}
 \usage{
-torch_divide(self, other)
+torch_divide(self, other, rounding_mode)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}

@@ -1838,7 +1838,7 @@ NULL
 #' Returns the real and the imaginary parts together as one tensor of the same
 #' shape of `input`.
 #' 
-#' The inverse of this function is [`torch_ifft`].
+#' The inverse of this function is [`torch_fft_ifft`].
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -1855,7 +1855,7 @@ NULL
 #' @param signal_ndim (int) the number of dimensions in each signal.        `signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: `FALSE`
 #'
-#' @name torch_fft
+#' @name torch_fft_fft
 #'
 #' @export
 NULL
@@ -1879,16 +1879,16 @@ NULL
 #' where \eqn{d} = `signal_ndim` is number of dimensions for the
 #' signal, and \eqn{N_i} is the size of signal dimension \eqn{i}.
 #' 
-#' The argument specifications are almost identical with [`torch_fft`].
+#' The argument specifications are almost identical with [`torch_fft_fft`].
 #' However, if `normalized` is set to `TRUE`, this instead returns the
 #' results multiplied by \eqn{\sqrt{\prod_{i=1}^d N_i}}, to become a unitary
-#' operator. Therefore, to invert a [`torch_fft`], the `normalized`
-#' argument should be set identically for [`torch_fft`].
+#' operator. Therefore, to invert a [`torch_fft_fft`], the `normalized`
+#' argument should be set identically for [`torch_fft_fft`].
 #' 
 #' Returns the real and the imaginary parts together as one tensor of the same
 #' shape of `input`.
 #' 
-#' The inverse of this function is [`torch_fft`].
+#' The inverse of this function is [`torch_fft_fft`].
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -1905,7 +1905,7 @@ NULL
 #' @param signal_ndim (int) the number of dimensions in each signal.        `signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: `FALSE`
 #'
-#' @name torch_ifft
+#' @name torch_fft_ifft
 #'
 #' @export
 NULL
@@ -1918,7 +1918,7 @@ NULL
 #' Real-to-complex Discrete Fourier Transform
 #' 
 #' This method computes the real-to-complex discrete Fourier transform. It is
-#' mathematically equivalent with [`torch_fft`] with differences only in
+#' mathematically equivalent with [`torch_fft_fft`] with differences only in
 #' formats of the input and output.
 #' 
 #' This method supports 1D, 2D and 3D real-to-complex transforms, indicated
@@ -1941,7 +1941,7 @@ NULL
 #' of `input`, but instead the last dimension will be halfed as of size
 #' \eqn{\lfloor \frac{N_d}{2} \rfloor + 1}.
 #' 
-#' The inverse of this function is [`torch_irfft`].
+#' The inverse of this function is [`torch_fft_irfft`].
 #' 
 #' @note
 #'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
@@ -1959,7 +1959,7 @@ NULL
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: `FALSE`
 #' @param onesided (bool, optional) controls whether to return half of results to        avoid redundancy. Default: `TRUE`
 #'
-#' @name torch_rfft
+#' @name torch_fft_rfft
 #'
 #' @export
 NULL
@@ -1972,11 +1972,11 @@ NULL
 #' Complex-to-real Inverse Discrete Fourier Transform
 #' 
 #' This method computes the complex-to-real inverse discrete Fourier transform.
-#' It is mathematically equivalent with [`torch_ifft`] with differences only in
+#' It is mathematically equivalent with [`torch_fft_ifft`] with differences only in
 #' formats of the input and output.
 #' 
-#' The argument specifications are almost identical with [`torch_ifft`].
-#' Similar to [`torch_ifft`], if `normalized` is set to `TRUE`,
+#' The argument specifications are almost identical with [`torch_fft_ifft`].
+#' Similar to [`torch_fft_ifft`], if `normalized` is set to `TRUE`,
 #' this normalizes the result by multiplying it with
 #' \eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is unitary, where
 #' \eqn{N_i} is the size of signal dimension \eqn{i}.
@@ -1991,22 +1991,22 @@ NULL
 #'     the size of the original signal (without the batch dimensions if in batched
 #'     mode) to recover it with correct shape.
 #' 
-#'     Therefore, to invert an [torch_rfft()], the `normalized` and
-#'     `onesided` arguments should be set identically for [torch_irfft()],
+#'     Therefore, to invert an [torch_fft_rfft()], the `normalized` and
+#'     `onesided` arguments should be set identically for [torch_fft_irfft()],
 #'     and preferably a `signal_sizes` is given to avoid size mismatch. See the
 #'     example below for a case of size mismatch.
 #' 
-#'     See [torch_rfft()] for details on conjugate symmetry.
+#'     See [torch_fft_rfft()] for details on conjugate symmetry.
 #' 
-#' The inverse of this function is [torch_rfft()].
+#' The inverse of this function is [torch_fft_rfft()].
 #' 
 #' @section Warning:
 #'     Generally speaking, input to this function should contain values
 #'     following conjugate symmetry. Note that even if `onesided` is
 #'     `TRUE`, often symmetry on some part is still needed. When this
-#'     requirement is not satisfied, the behavior of [`torch_irfft`] is
+#'     requirement is not satisfied, the behavior of [`torch_fft_irfft`] is
 #'     undefined. Since `torch_autograd.gradcheck` estimates numerical
-#'     Jacobian with point perturbations, [`torch_irfft`] will almost
+#'     Jacobian with point perturbations, [`torch_fft_irfft`] will almost
 #'     certainly fail the check.
 #' 
 #' @note
@@ -2023,10 +2023,10 @@ NULL
 #' @param self (Tensor) the input tensor of at least `signal_ndim` `+ 1`        dimensions
 #' @param signal_ndim (int) the number of dimensions in each signal.        `signal_ndim` can only be 1, 2 or 3
 #' @param normalized (bool, optional) controls whether to return normalized results.        Default: `FALSE`
-#' @param onesided (bool, optional) controls whether `input` was halfed to avoid        redundancy, e.g., by [torch_rfft()]. Default: `TRUE`
+#' @param onesided (bool, optional) controls whether `input` was halfed to avoid        redundancy, e.g., by [torch_fft_rfft()]. Default: `TRUE`
 #' @param signal_sizes (list or `torch.Size`, optional) the size of the original        signal (without batch dimension). Default: `NULL`
 #'
-#' @name torch_irfft
+#' @name torch_fft_irfft
 #'
 #' @export
 NULL

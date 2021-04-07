@@ -5,7 +5,7 @@
 \alias{torch_div}
 \title{Div}
 \usage{
-torch_div(self, other)
+torch_div(self, other, rounding_mode)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
