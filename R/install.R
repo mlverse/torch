@@ -15,18 +15,18 @@ install_config <- list(
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.7.1%2Bcpu.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.8.0%2Bcpu.zip",
           path = "libtorch/lib",
           filter = ".dll",
-          md5hash = "6618d6cf35fa07224ddcef5de6d9c43c"
+          md5hash = "f1ef43cbda67461f357a1463ac176a97"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-cpu.zip", branch)
       ),
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcpu.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.8.0%2Bcpu.zip",
           path = "libtorch/lib",
-          md5hash = "185c956c1b09afba574b83d6a7fba634"
+          md5hash = "82969e58ae8cabee16746711850d6fd9"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-cpu.zip", branch)
       )
@@ -34,18 +34,18 @@ install_config <- list(
     "10.1" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu101.zip",
+          url = "https://download.pytorch.org/libtorch/cu101/libtorch-cxx11-abi-shared-with-deps-1.8.0%2Bcu101.zip",
           path = "libtorch/lib",
-          md5hash = "fc8dd4ba0cef95ae272de6a7b3600d59"
+          md5hash = "ca8957f8cda1c82164192037b9411714"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-101.zip", branch)
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu101/libtorch-win-shared-with-deps-1.7.1%2Bcu101.zip",
+          url = "https://download.pytorch.org/libtorch/cu101/libtorch-win-shared-with-deps-1.8.0%2Bcu101.zip",
           path = "libtorch/lib",
           filter = ".dll",
-          md5hash = "602a980d4bbfdf2e03742df75050405b"
+          md5hash = "8351770ef9b2909d63353157c5d723c9"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-gpu-101.zip", branch)
       )
@@ -53,38 +53,28 @@ install_config <- list(
     "10.2" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.1.zip",
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.8.0.zip",
           path = "libtorch/lib",
-          md5hash = "6ef47fd76f1b5959bf807b06f0803aa9"
+          md5hash = "041594059e03381d8ef4d9f63c8e2c47"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-102.zip", branch)
       ),
       "windows" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.7.1.zip",
+          url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.8.0.zip",
           path = "libtorch/lib",
           filter = ".dll",
-          md5hash = "2ffa6d627007574ce231d93964c965fa"
+          md5hash = "ca7a226590488cff5d6910191f8bfe91"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-gpu-102.zip", branch)
-      )
-    ),
-    "9.2" = list(
-      "linux" = list(
-        "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu92.zip",
-          path = "libtorch/lib",
-          md5hash = "bceb125610b9905e777089c2528000a4"
-        ),
-        "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-902.zip", branch)
       )
     ),
     "11.0" = list(
       "linux" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cu110/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu110.zip",
+          url = "https://download.pytorch.org/libtorch/cu111/libtorch-cxx11-abi-shared-with-deps-1.8.0%2Bcu111.zip",
           path = "libtorch/lib",
-          md5hash = "75d171cd4c84fa33caa46651a74a2fe1"
+          md5hash = "f6ab838b62fba8f875ccbceeeb71c6cd"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-110.zip", branch)
       )
