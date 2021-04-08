@@ -149,7 +149,7 @@ jobs:
           echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
           echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
       - name: Prep cuda (windows)
-        if: ${{ (matrix.cuda == 10.2 || matrix.cuda == "11.1" ) && matrix.os == 'windows-2019'}}
+        if: ${{ (matrix.cuda == 10.2 || matrix.cuda == 11.1 ) && matrix.os == 'windows-2019'}}
         run: |
           curl ${{ matrix.cudatoolkit }} --output cuda.exe --silent --location
           Start-Process ./cuda.exe -argumentlist "-s" -wait
