@@ -55,19 +55,6 @@ jobs:
             artifacts: liblantern.dylib
             upload: macOS
           - os: ubuntu-18.04
-            cuda: 10.1
-            library: liblantern.so
-            test: ./lanterntest
-            make: make
-            build: build
-            cmakevars:
-            libext:
-            exeext:
-            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
-            flavor: Release
-            artifacts: liblantern.so
-            upload: Linux-Cuda-101
-          - os: ubuntu-18.04
             cuda: 10.2
             library: liblantern.so
             test: ./lanterntest
@@ -80,32 +67,6 @@ jobs:
             flavor: Release
             artifacts: liblantern.so
             upload: Linux-Cuda-102
-          - os: ubuntu-18.04
-            cuda: 9.2
-            library: liblantern.so
-            test: ./lanterntest
-            make: make
-            build: build
-            cmakevars:
-            libext:
-            exeext:
-            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
-            flavor: Release
-            artifacts: liblantern.so
-            upload: Linux-Cuda-902
-          - os: ubuntu-18.04
-            cuda: '11.0'
-            library: liblantern.so
-            test: ./lanterntest
-            make: make
-            build: build
-            cmakevars:
-            libext:
-            exeext:
-            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
-            flavor: Release
-            artifacts: liblantern.so
-            upload: Linux-Cuda-110
           - os: ubuntu-18.04
             cuda: '11.1'
             library: liblantern.so
