@@ -95,6 +95,21 @@ jobs:
             upload: Windows-Cuda-102
             cudatoolkit: 'http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_441.22_win10.exe'
             cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-windows10-x64-v7.6.5.32.zip'
+          - os: windows-2019
+            cuda: 11.1
+            library: lantern.dll
+            test: "& './lanterntest.exe' "
+            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
+            build: build/Release
+            cmakevars: '-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.1"'
+            libext: .dll
+            exeext: .exe
+            fixlib:
+            flavor: Release
+            artifacts: lantern.dll
+            upload: Windows-Cuda-111
+            cudatoolkit: 'https://developer.download.nvidia.com/compute/cuda/11.1.1/local_installers/cuda_11.1.1_456.81_win10.exe'
+            cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.1-windows-x64-v8.0.5.39.zip'
     steps:
       - uses: actions/checkout@v2
       - name: Create environment
@@ -134,7 +149,7 @@ jobs:
           echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
           echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
       - name: Prep cuda (windows)
-        if: ${{ (matrix.cuda == 10.1 || matrix.cuda == 10.2 ) && matrix.os == 'windows-2019'}}
+        if: ${{ (matrix.cuda == 10.2 || matrix.cuda == "11.1" ) && matrix.os == 'windows-2019'}}
         run: |
           curl ${{ matrix.cudatoolkit }} --output cuda.exe --silent --location
           Start-Process ./cuda.exe -argumentlist "-s" -wait
@@ -181,7 +196,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        name: [macOS, Linux, Windows, Cuda102,  Cuda111, WindowsCuda102]
+        name: [macOS, Linux, Windows, Cuda102,  Cuda111, WindowsCuda102, WindowsCuda111]
         include:
           - name: macOS
             artifact: macOS
@@ -210,6 +225,11 @@ jobs:
             upload: Windows
             hw: gpu
             version: -102
+          - name: WindowsCuda111
+            artifact: Windows-Cuda-111
+            upload: Windows
+            hw: gpu
+            version: -111
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v1
