@@ -126,11 +126,11 @@ jobs:
           rm cuda_11.1.1_455.32.00_linux.run
           dir /usr/local
           wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.1-linux-x64-v8.0.5.39.tgz
-          tar -xzvf cudnn-11.2-linux-x64-v8.1.0.77.tgz
+          tar -xzvf cudnn-11.1-linux-x64-v8.0.5.39.tgz
           sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
           sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-          rm cudnn-11.2-linux-x64-v8.1.0.77.tgz
+          rm cudnn-11.1-linux-x64-v8.0.5.39.tgz
           echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
           echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
       - name: Prep cuda (windows)
