@@ -337,5 +337,5 @@ optim_lbfgs <- function(params,
                         line_search_fn=NULL) {
   optim_LBFGS$new(params, lr = lr, max_iter = max_iter, max_eval = max_eval, 
                   tolerance_grad = tolerance_grad, tolerance_change = tolerance_change,
-                  history_size = history_size, line_search_fn = NULL)
+                  history_size = history_size, line_search_fn = line_search_fn)
 }
