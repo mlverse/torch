@@ -112,7 +112,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "dequantize", "kaiser_window", "vander",
                    "movedim", "argsort", "norm",
                    "argmax", "argmin", "one_hot", "split",
-                   "nonzero"
+                   "nonzero", "fft_fft", "fft_ifft"
                    )
 
 internal_funs <- c(internal_funs, creation_ops)

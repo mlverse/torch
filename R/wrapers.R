@@ -522,3 +522,16 @@ torch_polygamma <- function(n, input) {
   input
 }
 
+#' @rdname torch_fft_fft 
+torch_fft_fft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+  if (is.null(norm))
+    norm <- "backward"
+  .torch_fft_fft(self = self, n = n, dim = dim, norm = norm)
+}
+
+#' @rdname torch_fft_ifft
+torch_fft_ifft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+  if (is.null(norm))
+    norm <- "backward"
+  .torch_fft_ifft(self = self, n = n, dim = dim, norm = norm)
+}

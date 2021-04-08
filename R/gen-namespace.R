@@ -10204,8 +10204,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_fft_fft
-torch_fft_fft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+#' @rdname .torch_fft_fft
+.torch_fft_fft <- function(self, n = NULL, dim = -1L, norm = NULL) {
   args <- mget(x = c("self", "n", "dim", "norm"))
 expected_types <- list(self = "Tensor", n = "int64_t", dim = "int64_t", norm = "std::string")
 nd_args <- "self"
@@ -10397,8 +10397,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_fft_ifft
-torch_fft_ifft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+#' @rdname .torch_fft_ifft
+.torch_fft_ifft <- function(self, n = NULL, dim = -1L, norm = NULL) {
   args <- mget(x = c("self", "n", "dim", "norm"))
 expected_types <- list(self = "Tensor", n = "int64_t", dim = "int64_t", norm = "std::string")
 nd_args <- "self"

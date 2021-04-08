@@ -1812,49 +1812,34 @@ NULL
 
 #' Fft
 #'
-#' @section fft(input, signal_ndim, normalized=False) -> Tensor :
+#' Computes the one dimensional discrete Fourier transform of input.
 #'
-#' Complex-to-complex Discrete Fourier Transform
-#' 
-#' This method computes the complex-to-complex discrete Fourier transform.
-#' Ignoring the batch dimensions, it computes the following expression:
-#' 
-#' \deqn{
-#'     X[\omega_1, \dots, \omega_d] =
-#'         \sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x[n_1, \dots, n_d]
-#'          e^{-j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
-#' }
-#' where \eqn{d} = `signal_ndim` is number of dimensions for the
-#' signal, and \eqn{N_i} is the size of signal dimension \eqn{i}.
-#' 
-#' This method supports 1D, 2D and 3D complex-to-complex transforms, indicated
-#' by `signal_ndim`. `input` must be a tensor with last dimension
-#' of size 2, representing the real and imaginary components of complex
-#' numbers, and should have at least `signal_ndim + 1` dimensions with optionally
-#' arbitrary number of leading batch dimensions. If `normalized` is set to
-#' `TRUE`, this normalizes the result by dividing it with
-#' \eqn{\sqrt{\prod_{i=1}^K N_i}} so that the operator is unitary.
-#' 
-#' Returns the real and the imaginary parts together as one tensor of the same
-#' shape of `input`.
-#' 
-#' The inverse of this function is [`torch_fft_ifft`].
-#' 
-#' @note
-#'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
-#'     repeatedly running FFT methods on tensors of same geometry with same
-#'     configuration. See cufft-plan-cache for more details on how to
-#'     monitor and control the cache.
-#' 
-#' @section Warning:
-#'     For CPU tensors, this method is currently only available with MKL. Use
-#'     `torch_backends.mkl.is_available` to check if MKL is installed.
+#' @note 
+#' The Fourier domain representation of any real signal satisfies the Hermitian 
+#' property: `X[i] = conj(X[-i]).` This function always returns both the positive 
+#' and negative frequency terms even though, for real inputs, the negative 
+#' frequencies are redundant. rfft() returns the more compact one-sided representation
+#' where only the positive frequencies are returned.
 #'
-#'
-#' @param self (Tensor) the input tensor of at least `signal_ndim` `+ 1`        dimensions
-#' @param signal_ndim (int) the number of dimensions in each signal.        `signal_ndim` can only be 1, 2 or 3
-#' @param normalized (bool, optional) controls whether to return normalized results.        Default: `FALSE`
-#'
+#' @param self (Tensor) the input tensor
+#' @param n (int) Signal length. If given, the input will either be zero-padded 
+#'   or trimmed to this length before computing the FFT.
+#' @param dim (int, optional) The dimension along which to take the one dimensional FFT.
+#' @param norm (str, optional) Normalization mode. For the forward transform, these 
+#' correspond to:
+#' * "forward" - normalize by 1/n
+#' * "backward" - no normalization
+#' * "ortho" - normalize by 1/sqrt(n) (making the FFT orthonormal)
+#' Calling the backward transform (ifft()) with the same normalization mode will 
+#' apply an overall normalization of 1/n between the two transforms. This is 
+#' required to make IFFT the exact inverse.
+#' Default is "backward" (no normalization).
+#' 
+#' @examples 
+#' t <- torch_arange(start = 0, end = 3)
+#' t
+#' torch_fft_fft(t, norm = "backward")
+#' 
 #' @name torch_fft_fft
 #'
 #' @export
@@ -1863,47 +1848,29 @@ NULL
 
 #' Ifft
 #'
-#' @section ifft(input, signal_ndim, normalized=False) -> Tensor :
-#'
-#' Complex-to-complex Inverse Discrete Fourier Transform
+#' Computes the one dimensional inverse discrete Fourier transform of input.
 #' 
-#' This method computes the complex-to-complex inverse discrete Fourier
-#' transform. Ignoring the batch dimensions, it computes the following
-#' expression:
+#' @param self (Tensor) the input tensor
+#' @param n (int, optional) – Signal length. If given, the input will either be 
+#'  zero-padded or trimmed to this length before computing the IFFT.
+#' @param dim (int, optional) – The dimension along which to take the one 
+#'  dimensional IFFT.
+#' @param norm (str, optional) – Normalization mode. For the backward transform, 
+#'  these correspond to:
+#'    * "forward" - no normalization
+#'    * "backward" - normalize by 1/n
+#'    * "ortho" - normalize by 1/sqrt(n) (making the IFFT orthonormal)
+#'  Calling the forward transform with the same normalization mode will apply an 
+#'  overall normalization of 1/n between the two transforms. This is required to 
+#'  make ifft() the exact inverse.
+#'  Default is "backward" (normalize by 1/n).
+#'  
+#' @examples
+#' t <- torch_arange(start = 0, end = 3)
+#' t
+#' x <- torch_fft_fft(t, norm = "backward")
+#' torch_fft_ifft(x)
 #' 
-#' \deqn{
-#'     X[\omega_1, \dots, \omega_d] =
-#'         \frac{1}{\prod_{i=1}^d N_i} \sum_{n_1=0}^{N_1-1} \dots \sum_{n_d=0}^{N_d-1} x[n_1, \dots, n_d]
-#'          e^{\ j\ 2 \pi \sum_{i=0}^d \frac{\omega_i n_i}{N_i}},
-#' }
-#' where \eqn{d} = `signal_ndim` is number of dimensions for the
-#' signal, and \eqn{N_i} is the size of signal dimension \eqn{i}.
-#' 
-#' The argument specifications are almost identical with [`torch_fft_fft`].
-#' However, if `normalized` is set to `TRUE`, this instead returns the
-#' results multiplied by \eqn{\sqrt{\prod_{i=1}^d N_i}}, to become a unitary
-#' operator. Therefore, to invert a [`torch_fft_fft`], the `normalized`
-#' argument should be set identically for [`torch_fft_fft`].
-#' 
-#' Returns the real and the imaginary parts together as one tensor of the same
-#' shape of `input`.
-#' 
-#' The inverse of this function is [`torch_fft_fft`].
-#' 
-#' @note
-#'     For CUDA tensors, an LRU cache is used for cuFFT plans to speed up
-#'     repeatedly running FFT methods on tensors of same geometry with same
-#'     configuration. See cufft-plan-cache for more details on how to
-#'     monitor and control the cache.
-#' 
-#' @section Warning:
-#'     For CPU tensors, this method is currently only available with MKL. Use
-#'     `torch_backends.mkl.is_available` to check if MKL is installed.
-#'
-#'
-#' @param self (Tensor) the input tensor of at least `signal_ndim` `+ 1`        dimensions
-#' @param signal_ndim (int) the number of dimensions in each signal.        `signal_ndim` can only be 1, 2 or 3
-#' @param normalized (bool, optional) controls whether to return normalized results.        Default: `FALSE`
 #'
 #' @name torch_fft_ifft
 #'

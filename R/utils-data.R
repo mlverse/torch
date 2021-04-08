@@ -30,7 +30,7 @@ get_init <- function(x) {
 #' (e.g. number of samples) used by many sampler implementations 
 #' and the default options of [dataloader()].
 #' 
-#' @section Get a batch of observations
+#' @section Get a batch of observations:
 #' 
 #' By default datasets are iterated by returning each observation/item individually.
 #' Sometimes it's possible to have an optimized implementation to take a batch
