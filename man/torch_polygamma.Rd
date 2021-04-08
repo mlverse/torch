@@ -10,7 +10,7 @@ torch_polygamma(n, input)
 \arguments{
 \item{n}{(int) the order of the polygamma function}
 
-\item{self}{(Tensor) the input tensor.}
+\item{input}{(Tensor) the input tensor.}
 }
 \description{
 Polygamma

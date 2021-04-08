@@ -535,3 +535,18 @@ torch_fft_ifft <- function(self, n = NULL, dim = -1L, norm = NULL) {
     norm <- "backward"
   .torch_fft_ifft(self = self, n = n, dim = dim, norm = norm)
 }
+
+#' @rdname torch_fft_rfft 
+torch_fft_rfft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+  if (is.null(norm))
+    norm <- "backward"
+  .torch_fft_rfft(self = self, n = n, dim = dim, norm = norm)
+}
+
+#' @rdname torch_fft_irfft
+torch_fft_irfft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+  if (is.null(norm))
+    norm <- "backward"
+  .torch_fft_irfft(self = self, n = n, dim = dim, norm = norm)
+}
+
