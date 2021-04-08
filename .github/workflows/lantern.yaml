@@ -125,7 +125,7 @@ jobs:
           echo "CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda" >> $GITHUB_ENV
           rm cuda_11.1.1_455.32.00_linux.run
           dir /usr/local
-          wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.2-linux-x64-v8.1.0.77.tgz
+          wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.1-linux-x64-v8.0.5.39.tgz
           tar -xzvf cudnn-11.2-linux-x64-v8.1.0.77.tgz
           sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
           sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
