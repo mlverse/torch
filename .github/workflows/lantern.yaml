@@ -181,7 +181,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        name: [macOS, Linux, Windows, Cuda102,  Cuda101, WindowsCuda102]
+        name: [macOS, Linux, Windows, Cuda102,  Cuda111, WindowsCuda102]
         include:
           - name: macOS
             artifact: macOS
