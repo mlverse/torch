@@ -42,13 +42,13 @@ void lantern_host_handler();
 
 extern int lanternLogEnabled;
 #define LLOG(...) if ((lanternLogEnabled & 1) == 1) {              \
-  printf("%Id INFO ", time(NULL));                                 \
+  printf("%ld INFO ", time(NULL));                                 \
   printf(__VA_ARGS__);                                             \
   printf("\n");                                                    \
 }                                                                  \
 if ((lanternLogEnabled & 2) == 2) {                                \
   FILE *pFile = fopen("lantern.log", "a");                         \
-  fprintf(pFile, "%Id INFO ", time(NULL));                         \
+  fprintf(pFile, "%ld INFO ", time(NULL));                         \
   fprintf(pFile, __VA_ARGS__);                                     \
   fprintf(pFile, "\n");                                            \
   fclose(pFile);                                                   \
