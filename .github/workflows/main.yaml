@@ -132,12 +132,6 @@ jobs:
         echo 'Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.277.1.zip", "$PWD")' >> s.ps
         echo "./config.cmd --url https://github.com/mlverse/torch --token ${{ steps.token.outputs.result }} --name 'runner-${{ github.run_number }}' --labels 'run-${{ github.run_number}}' --unattended" >> s.ps
         echo 'Start-Process -FilePath "./run.cmd"' >> s.ps
-        echo "cd C:\\" >> s.ps
-        echo "mkdir C:\actions-runner-2; cd C:\actions-runner-2" >> s.ps
-        echo "Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.277.1/actions-runner-win-x64-2.277.1.zip -OutFile actions-runner-win-x64-2.277.1.zip" >> s.ps
-        echo 'Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.277.1.zip", "$PWD")' >> s.ps
-        echo "./config.cmd --url https://github.com/mlverse/torch --token ${{ steps.token.outputs.result }} --name 'runner2-${{ github.run_number }}' --labels 'run-${{ github.run_number}}' --unattended" >> s.ps
-        echo 'Start-Process -FilePath "./run.cmd"' >> s.ps
         
     - name: Show File
       run: |
@@ -199,7 +193,7 @@ jobs:
       fail-fast: false
       matrix:
         r_version: ["release"]
-        cuda: ["10.2", "11.1"]
+        cuda: ["11.1"]
             
     runs-on: [self-hosted, windows, 'run-${{ github.run_number}}']
     name: 'Windows | CUDA: ${{ matrix.cuda }}'
