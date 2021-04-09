@@ -157,6 +157,9 @@ argument_to_torch_type <- function(obj, expected_types, arg_name) {
   if (any("Scalar" == expected_types) && is_torch_tensor(obj))
     return("Scalar")
   
+  if (any("TensorList" == expected_types) && is.null(obj))
+    return("TensorList")
+  
   stop("Can't convert argument", call.=FALSE)
 }
 
@@ -164,7 +167,7 @@ nd_arguments_to_torch_type <- function(arguments, expected_types) {
   
 }
 
-clean_chars <- c("'", "\"", "%", "#", ":", ">", "<", ",", " ", "*")
+clean_chars <- c("'", "\"", "%", "#", ":", ">", "<", ",", " ", "*", "&")
 
 clean_names <- function(x) {
   cpp_clean_names(x, clean_chars)

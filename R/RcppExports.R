@@ -25,8 +25,8 @@ cpp_tensor_requires_grad <- function(self) {
     .Call('_torch_cpp_tensor_requires_grad', PACKAGE = 'torchpkg', self)
 }
 
-cpp_torch_method_backward_self_Tensor <- function(self, gradient, retain_graph, create_graph) {
-    invisible(.Call('_torch_cpp_torch_method_backward_self_Tensor', PACKAGE = 'torchpkg', self, gradient, retain_graph, create_graph))
+cpp_torch_method__backward_self_Tensor_inputs_TensorList <- function(self, inputs, gradient, retain_graph, create_graph) {
+    invisible(.Call('_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList', PACKAGE = 'torchpkg', self, inputs, gradient, retain_graph, create_graph))
 }
 
 cpp_autograd_backward <- function(tensors, grad_tensors, retain_graph, create_graph) {
@@ -251,6 +251,10 @@ cpp_torch_method_requires_grad__self_Tensor <- function(self, requires_grad) {
 
 cpp_torch_method_retain_grad_self_Tensor <- function(self) {
     invisible(.Call('_torch_cpp_torch_method_retain_grad_self_Tensor', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_method__fw_primal_self_Tensor_level_int64_t <- function(self, level) {
+    .Call('_torch_cpp_torch_method__fw_primal_self_Tensor_level_int64_t', PACKAGE = 'torchpkg', self, level)
 }
 
 cpp_torch_method_rename__self_Tensor_names_DimnameList <- function(self, names) {
@@ -509,6 +513,22 @@ cpp_torch_method_bitwise_not__self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_bitwise_not__self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
+cpp_torch_method_copysign_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_copysign_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_copysign__self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_copysign__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_copysign_self_Tensor_other_Scalar <- function(self, other) {
+    .Call('_torch_cpp_torch_method_copysign_self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_copysign__self_Tensor_other_Scalar <- function(self, other) {
+    .Call('_torch_cpp_torch_method_copysign__self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
 cpp_torch_method_logical_not_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_logical_not_self_Tensor', PACKAGE = 'torchpkg', self)
 }
@@ -545,6 +565,10 @@ cpp_torch_method_bmm_self_Tensor_mat2_Tensor <- function(self, mat2) {
     .Call('_torch_cpp_torch_method_bmm_self_Tensor_mat2_Tensor', PACKAGE = 'torchpkg', self, mat2)
 }
 
+cpp_torch_method_broadcast_to_self_Tensor_size_IntArrayRef <- function(self, size) {
+    .Call('_torch_cpp_torch_method_broadcast_to_self_Tensor_size_IntArrayRef', PACKAGE = 'torchpkg', self, size)
+}
+
 cpp_torch_method_ceil_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_ceil_self_Tensor', PACKAGE = 'torchpkg', self)
 }
@@ -559,6 +583,18 @@ cpp_torch_method_unsafe_chunk_self_Tensor_chunks_int64_t <- function(self, chunk
 
 cpp_torch_method_chunk_self_Tensor_chunks_int64_t <- function(self, chunks, dim) {
     .Call('_torch_cpp_torch_method_chunk_self_Tensor_chunks_int64_t', PACKAGE = 'torchpkg', self, chunks, dim)
+}
+
+cpp_torch_method_tensor_split_self_Tensor_sections_int64_t <- function(self, sections, dim) {
+    .Call('_torch_cpp_torch_method_tensor_split_self_Tensor_sections_int64_t', PACKAGE = 'torchpkg', self, sections, dim)
+}
+
+cpp_torch_method_tensor_split_self_Tensor_indices_IntArrayRef <- function(self, indices, dim) {
+    .Call('_torch_cpp_torch_method_tensor_split_self_Tensor_indices_IntArrayRef', PACKAGE = 'torchpkg', self, indices, dim)
+}
+
+cpp_torch_method_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor <- function(self, tensor_indices_or_sections, dim) {
+    .Call('_torch_cpp_torch_method_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor', PACKAGE = 'torchpkg', self, tensor_indices_or_sections, dim)
 }
 
 cpp_torch_method_clamp_self_Tensor <- function(self, min, max) {
@@ -645,16 +681,32 @@ cpp_torch_method_cumprod_self_Tensor_dim_int64_t <- function(self, dim, dtype) {
     .Call('_torch_cpp_torch_method_cumprod_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, dtype)
 }
 
+cpp_torch_method_cumprod__self_Tensor_dim_int64_t <- function(self, dim, dtype) {
+    .Call('_torch_cpp_torch_method_cumprod__self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, dtype)
+}
+
 cpp_torch_method_cumprod_self_Tensor_dim_Dimname <- function(self, dim, dtype) {
     .Call('_torch_cpp_torch_method_cumprod_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, dtype)
+}
+
+cpp_torch_method_cumprod__self_Tensor_dim_Dimname <- function(self, dim, dtype) {
+    .Call('_torch_cpp_torch_method_cumprod__self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, dtype)
 }
 
 cpp_torch_method_cumsum_self_Tensor_dim_int64_t <- function(self, dim, dtype) {
     .Call('_torch_cpp_torch_method_cumsum_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, dtype)
 }
 
+cpp_torch_method_cumsum__self_Tensor_dim_int64_t <- function(self, dim, dtype) {
+    .Call('_torch_cpp_torch_method_cumsum__self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, dtype)
+}
+
 cpp_torch_method_cumsum_self_Tensor_dim_Dimname <- function(self, dim, dtype) {
     .Call('_torch_cpp_torch_method_cumsum_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, dtype)
+}
+
+cpp_torch_method_cumsum__self_Tensor_dim_Dimname <- function(self, dim, dtype) {
+    .Call('_torch_cpp_torch_method_cumsum__self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, dtype)
 }
 
 cpp_torch_method_diag_embed_self_Tensor <- function(self, offset, dim1, dim2) {
@@ -677,6 +729,10 @@ cpp_torch_method_fill_diagonal__self_Tensor_fill_value_Scalar <- function(self, 
     .Call('_torch_cpp_torch_method_fill_diagonal__self_Tensor_fill_value_Scalar', PACKAGE = 'torchpkg', self, fill_value, wrap)
 }
 
+cpp_torch_method_diff_self_Tensor <- function(self, n, dim, prepend, append) {
+    .Call('_torch_cpp_torch_method_diff_self_Tensor', PACKAGE = 'torchpkg', self, n, dim, prepend, append)
+}
+
 cpp_torch_method_div_self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_method_div_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
@@ -685,12 +741,28 @@ cpp_torch_method_div__self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_method_div__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
 
+cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
+}
+
+cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
+}
+
 cpp_torch_method_div_self_Tensor_other_Scalar <- function(self, other) {
     .Call('_torch_cpp_torch_method_div_self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
 }
 
 cpp_torch_method_div__self_Tensor_other_Scalar <- function(self, other) {
     .Call('_torch_cpp_torch_method_div__self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
+}
+
+cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
 }
 
 cpp_torch_method_divide_self_Tensor_other_Tensor <- function(self, other) {
@@ -707,6 +779,22 @@ cpp_torch_method_divide_self_Tensor_other_Scalar <- function(self, other) {
 
 cpp_torch_method_divide__self_Tensor_other_Scalar <- function(self, other) {
     .Call('_torch_cpp_torch_method_divide__self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
+}
+
+cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
+}
+
+cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
+}
+
+cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
 }
 
 cpp_torch_method_true_divide_self_Tensor_other_Tensor <- function(self, other) {
@@ -735,6 +823,10 @@ cpp_torch_method_vdot_self_Tensor_other_Tensor <- function(self, other) {
 
 cpp_torch_method_new_empty_self_Tensor_size_IntArrayRef <- function(self, size, options) {
     .Call('_torch_cpp_torch_method_new_empty_self_Tensor_size_IntArrayRef', PACKAGE = 'torchpkg', self, size, options)
+}
+
+cpp_torch_method_new_empty_strided_self_Tensor_size_IntArrayRef_stride_IntArrayRef <- function(self, size, stride, options) {
+    .Call('_torch_cpp_torch_method_new_empty_strided_self_Tensor_size_IntArrayRef_stride_IntArrayRef', PACKAGE = 'torchpkg', self, size, stride, options)
 }
 
 cpp_torch_method_new_full_self_Tensor_size_IntArrayRef_fill_value_Scalar <- function(self, size, fill_value, options) {
@@ -877,20 +969,8 @@ cpp_torch_method_lcm__self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_method_lcm__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
 
-cpp_torch_method_ifft_self_Tensor_signal_ndim_int64_t <- function(self, signal_ndim, normalized) {
-    .Call('_torch_cpp_torch_method_ifft_self_Tensor_signal_ndim_int64_t', PACKAGE = 'torchpkg', self, signal_ndim, normalized)
-}
-
-cpp_torch_method_rfft_self_Tensor_signal_ndim_int64_t <- function(self, signal_ndim, normalized, onesided) {
-    .Call('_torch_cpp_torch_method_rfft_self_Tensor_signal_ndim_int64_t', PACKAGE = 'torchpkg', self, signal_ndim, normalized, onesided)
-}
-
-cpp_torch_method_irfft_self_Tensor_signal_ndim_int64_t <- function(self, signal_ndim, normalized, onesided, signal_sizes) {
-    .Call('_torch_cpp_torch_method_irfft_self_Tensor_signal_ndim_int64_t', PACKAGE = 'torchpkg', self, signal_ndim, normalized, onesided, signal_sizes)
-}
-
-cpp_torch_method_index_self_Tensor_indices_TensorList <- function(self, indices) {
-    .Call('_torch_cpp_torch_method_index_self_Tensor_indices_TensorList', PACKAGE = 'torchpkg', self, indices)
+cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor <- function(self, indices) {
+    .Call('_torch_cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor', PACKAGE = 'torchpkg', self, indices)
 }
 
 cpp_torch_method_index_copy__self_Tensor_dim_int64_t_index_Tensor_source_Tensor <- function(self, dim, index, source) {
@@ -909,12 +989,12 @@ cpp_torch_method_index_copy_self_Tensor_dim_Dimname_index_Tensor_source_Tensor <
     .Call('_torch_cpp_torch_method_index_copy_self_Tensor_dim_Dimname_index_Tensor_source_Tensor', PACKAGE = 'torchpkg', self, dim, index, source)
 }
 
-cpp_torch_method_index_put__self_Tensor_indices_TensorList_values_Tensor <- function(self, indices, values, accumulate) {
-    .Call('_torch_cpp_torch_method_index_put__self_Tensor_indices_TensorList_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate)
+cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor <- function(self, indices, values, accumulate) {
+    .Call('_torch_cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate)
 }
 
-cpp_torch_method_index_put_self_Tensor_indices_TensorList_values_Tensor <- function(self, indices, values, accumulate) {
-    .Call('_torch_cpp_torch_method_index_put_self_Tensor_indices_TensorList_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate)
+cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor <- function(self, indices, values, accumulate) {
+    .Call('_torch_cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate)
 }
 
 cpp_torch_method_inverse_self_Tensor <- function(self) {
@@ -957,12 +1037,32 @@ cpp_torch_method_is_signed_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_is_signed_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
+cpp_torch_method_kron_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_kron_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
 cpp_torch_method_kthvalue_self_Tensor_k_int64_t <- function(self, k, dim, keepdim) {
     .Call('_torch_cpp_torch_method_kthvalue_self_Tensor_k_int64_t', PACKAGE = 'torchpkg', self, k, dim, keepdim)
 }
 
 cpp_torch_method_kthvalue_self_Tensor_k_int64_t_dim_Dimname <- function(self, k, dim, keepdim) {
     .Call('_torch_cpp_torch_method_kthvalue_self_Tensor_k_int64_t_dim_Dimname', PACKAGE = 'torchpkg', self, k, dim, keepdim)
+}
+
+cpp_torch_method_nan_to_num_self_Tensor <- function(self, nan, posinf, neginf) {
+    .Call('_torch_cpp_torch_method_nan_to_num_self_Tensor', PACKAGE = 'torchpkg', self, nan, posinf, neginf)
+}
+
+cpp_torch_method_nan_to_num__self_Tensor <- function(self, nan, posinf, neginf) {
+    .Call('_torch_cpp_torch_method_nan_to_num__self_Tensor', PACKAGE = 'torchpkg', self, nan, posinf, neginf)
+}
+
+cpp_torch_method_ldexp_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_ldexp_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_ldexp__self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_ldexp__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
 
 cpp_torch_method_log_self_Tensor <- function(self) {
@@ -1003,6 +1103,22 @@ cpp_torch_method_logaddexp_self_Tensor_other_Tensor <- function(self, other) {
 
 cpp_torch_method_logaddexp2_self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_method_logaddexp2_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_xlogy_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_xlogy_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_xlogy_self_Tensor_other_Scalar <- function(self, other) {
+    .Call('_torch_cpp_torch_method_xlogy_self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_xlogy__self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_xlogy__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_xlogy__self_Tensor_other_Scalar <- function(self, other) {
+    .Call('_torch_cpp_torch_method_xlogy__self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
 }
 
 cpp_torch_method_logdet_self_Tensor <- function(self) {
@@ -1069,12 +1185,28 @@ cpp_torch_method_mean_self_Tensor_dim_DimnameList <- function(self, dim, keepdim
     .Call('_torch_cpp_torch_method_mean_self_Tensor_dim_DimnameList', PACKAGE = 'torchpkg', self, dim, keepdim, dtype)
 }
 
+cpp_torch_method_median_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_method_median_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
 cpp_torch_method_median_self_Tensor_dim_int64_t <- function(self, dim, keepdim) {
     .Call('_torch_cpp_torch_method_median_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, keepdim)
 }
 
 cpp_torch_method_median_self_Tensor_dim_Dimname <- function(self, dim, keepdim) {
     .Call('_torch_cpp_torch_method_median_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, keepdim)
+}
+
+cpp_torch_method_nanmedian_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_method_nanmedian_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_method_nanmedian_self_Tensor_dim_int64_t <- function(self, dim, keepdim) {
+    .Call('_torch_cpp_torch_method_nanmedian_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, keepdim)
+}
+
+cpp_torch_method_nanmedian_self_Tensor_dim_Dimname <- function(self, dim, keepdim) {
+    .Call('_torch_cpp_torch_method_nanmedian_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, keepdim)
 }
 
 cpp_torch_method_min_self_Tensor_dim_int64_t <- function(self, dim, keepdim) {
@@ -1169,6 +1301,14 @@ cpp_torch_method_movedim_self_Tensor_source_int64_t_destination_int64_t <- funct
     .Call('_torch_cpp_torch_method_movedim_self_Tensor_source_int64_t_destination_int64_t', PACKAGE = 'torchpkg', self, source, destination)
 }
 
+cpp_torch_method_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef <- function(self, source, destination) {
+    .Call('_torch_cpp_torch_method_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef', PACKAGE = 'torchpkg', self, source, destination)
+}
+
+cpp_torch_method_moveaxis_self_Tensor_source_int64_t_destination_int64_t <- function(self, source, destination) {
+    .Call('_torch_cpp_torch_method_moveaxis_self_Tensor_source_int64_t_destination_int64_t', PACKAGE = 'torchpkg', self, source, destination)
+}
+
 cpp_torch_method_numpy_T_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_numpy_T_self_Tensor', PACKAGE = 'torchpkg', self)
 }
@@ -1199,6 +1339,10 @@ cpp_torch_method_deg2rad_self_Tensor <- function(self) {
 
 cpp_torch_method_deg2rad__self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_deg2rad__self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_method_ravel_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_method_ravel_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
 cpp_torch_method_reciprocal_self_Tensor <- function(self) {
@@ -1317,6 +1461,14 @@ cpp_torch_method_sin__self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_sin__self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
+cpp_torch_method_sinc_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_method_sinc_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_method_sinc__self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_method_sinc__self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
 cpp_torch_method_sinh_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_sinh_self_Tensor', PACKAGE = 'torchpkg', self)
 }
@@ -1331,10 +1483,6 @@ cpp_torch_method_detach_self_Tensor <- function(self) {
 
 cpp_torch_method_detach__self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_detach__self_Tensor', PACKAGE = 'torchpkg', self)
-}
-
-cpp_torch_method_size_self_Tensor_dim_int64_t <- function(self, dim) {
-    .Call('_torch_cpp_torch_method_size_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim)
 }
 
 cpp_torch_method_size_self_Tensor_dim_Dimname <- function(self, dim) {
@@ -1507,6 +1655,10 @@ cpp_torch_method_tanh_self_Tensor <- function(self) {
 
 cpp_torch_method_tanh__self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_tanh__self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_method_tile_self_Tensor_dims_IntArrayRef <- function(self, dims) {
+    .Call('_torch_cpp_torch_method_tile_self_Tensor_dims_IntArrayRef', PACKAGE = 'torchpkg', self, dims)
 }
 
 cpp_torch_method_transpose_self_Tensor_dim0_int64_t_dim1_int64_t <- function(self, dim0, dim1) {
@@ -1685,8 +1837,8 @@ cpp_torch_method_sparse_mask_self_Tensor_mask_Tensor <- function(self, mask) {
     .Call('_torch_cpp_torch_method_sparse_mask_self_Tensor_mask_Tensor', PACKAGE = 'torchpkg', self, mask)
 }
 
-cpp_torch_method_to_dense_self_Tensor <- function(self) {
-    .Call('_torch_cpp_torch_method_to_dense_self_Tensor', PACKAGE = 'torchpkg', self)
+cpp_torch_method_to_dense_self_Tensor <- function(self, dtype) {
+    .Call('_torch_cpp_torch_method_to_dense_self_Tensor', PACKAGE = 'torchpkg', self, dtype)
 }
 
 cpp_torch_method_sparse_dim_self_Tensor <- function(self) {
@@ -1753,8 +1905,8 @@ cpp_torch_method_to_sparse_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_to_sparse_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
-cpp_torch_method_to_mkldnn_self_Tensor <- function(self) {
-    .Call('_torch_cpp_torch_method_to_mkldnn_self_Tensor', PACKAGE = 'torchpkg', self)
+cpp_torch_method_to_mkldnn_self_Tensor <- function(self, dtype) {
+    .Call('_torch_cpp_torch_method_to_mkldnn_self_Tensor', PACKAGE = 'torchpkg', self, dtype)
 }
 
 cpp_torch_method_dequantize_self_Tensor <- function(self) {
@@ -1855,6 +2007,10 @@ cpp_torch_method_masked_scatter_self_Tensor_mask_Tensor_source_Tensor <- functio
 
 cpp_torch_method_view_self_Tensor_size_IntArrayRef <- function(self, size) {
     .Call('_torch_cpp_torch_method_view_self_Tensor_size_IntArrayRef', PACKAGE = 'torchpkg', self, size)
+}
+
+cpp_torch_method_view_self_Tensor_dtype_ScalarType <- function(self, dtype) {
+    .Call('_torch_cpp_torch_method_view_self_Tensor_dtype_ScalarType', PACKAGE = 'torchpkg', self, dtype)
 }
 
 cpp_torch_method_put__self_Tensor_index_Tensor_source_Tensor <- function(self, index, source, accumulate) {
@@ -2085,10 +2241,6 @@ cpp_torch_method___irshift___self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_method___irshift___self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
 
-cpp_torch_method_lgamma__self_Tensor <- function(self) {
-    .Call('_torch_cpp_torch_method_lgamma__self_Tensor', PACKAGE = 'torchpkg', self)
-}
-
 cpp_torch_method_atan2__self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_method_atan2__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
@@ -2111,14 +2263,6 @@ cpp_torch_method_polygamma__self_Tensor_n_int64_t <- function(self, n) {
 
 cpp_torch_method_renorm__self_Tensor_p_Scalar_dim_int64_t_maxnorm_Scalar <- function(self, p, dim, maxnorm) {
     .Call('_torch_cpp_torch_method_renorm__self_Tensor_p_Scalar_dim_int64_t_maxnorm_Scalar', PACKAGE = 'torchpkg', self, p, dim, maxnorm)
-}
-
-cpp_torch_method_pow__self_Tensor_exponent_Scalar <- function(self, exponent) {
-    .Call('_torch_cpp_torch_method_pow__self_Tensor_exponent_Scalar', PACKAGE = 'torchpkg', self, exponent)
-}
-
-cpp_torch_method_pow__self_Tensor_exponent_Tensor <- function(self, exponent) {
-    .Call('_torch_cpp_torch_method_pow__self_Tensor_exponent_Tensor', PACKAGE = 'torchpkg', self, exponent)
 }
 
 cpp_torch_method_lerp__self_Tensor_end_Tensor_weight_Scalar <- function(self, end, weight) {
@@ -2441,6 +2585,22 @@ cpp_torch_method_svd_self_Tensor <- function(self, some, compute_uv) {
     .Call('_torch_cpp_torch_method_svd_self_Tensor', PACKAGE = 'torchpkg', self, some, compute_uv)
 }
 
+cpp_torch_method_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t <- function(self, axis0, axis1) {
+    .Call('_torch_cpp_torch_method_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t', PACKAGE = 'torchpkg', self, axis0, axis1)
+}
+
+cpp_torch_method_swapaxes__self_Tensor_axis0_int64_t_axis1_int64_t <- function(self, axis0, axis1) {
+    .Call('_torch_cpp_torch_method_swapaxes__self_Tensor_axis0_int64_t_axis1_int64_t', PACKAGE = 'torchpkg', self, axis0, axis1)
+}
+
+cpp_torch_method_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t <- function(self, dim0, dim1) {
+    .Call('_torch_cpp_torch_method_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t', PACKAGE = 'torchpkg', self, dim0, dim1)
+}
+
+cpp_torch_method_swapdims__self_Tensor_dim0_int64_t_dim1_int64_t <- function(self, dim0, dim1) {
+    .Call('_torch_cpp_torch_method_swapdims__self_Tensor_dim0_int64_t_dim1_int64_t', PACKAGE = 'torchpkg', self, dim0, dim1)
+}
+
 cpp_torch_method_cholesky_self_Tensor <- function(self, upper) {
     .Call('_torch_cpp_torch_method_cholesky_self_Tensor', PACKAGE = 'torchpkg', self, upper)
 }
@@ -2479,6 +2639,10 @@ cpp_torch_method_lu_solve_self_Tensor_LU_data_Tensor_LU_pivots_Tensor <- functio
 
 cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t <- function(self, num_samples, replacement, generator) {
     .Call('_torch_cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t', PACKAGE = 'torchpkg', self, num_samples, replacement, generator)
+}
+
+cpp_torch_method_lgamma__self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_method_lgamma__self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
 cpp_torch_method_lgamma_self_Tensor <- function(self) {
@@ -2553,6 +2717,22 @@ cpp_torch_method_hypot__self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_method_hypot__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
 
+cpp_torch_method_igamma_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_igamma_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_igamma__self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_igamma__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_igammac_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_igammac_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_method_igammac__self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_igammac__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
 cpp_torch_method_nextafter_self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_method_nextafter_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
@@ -2573,8 +2753,16 @@ cpp_torch_method_min_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_min_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
+cpp_torch_method_fmin_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_fmin_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
 cpp_torch_method_max_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_max_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_method_fmax_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_fmax_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
 
 cpp_torch_method_maximum_self_Tensor_other_Tensor <- function(self, other) {
@@ -2591,10 +2779,6 @@ cpp_torch_method_minimum_self_Tensor_other_Tensor <- function(self, other) {
 
 cpp_torch_method_min_self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_method_min_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
-}
-
-cpp_torch_method_median_self_Tensor <- function(self) {
-    .Call('_torch_cpp_torch_method_median_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
 cpp_torch_method_quantile_self_Tensor_q_double <- function(self, q, dim, keepdim) {
@@ -2619,6 +2803,10 @@ cpp_torch_method_sort_self_Tensor <- function(self, dim, descending) {
 
 cpp_torch_method_sort_self_Tensor_dim_Dimname <- function(self, dim, descending) {
     .Call('_torch_cpp_torch_method_sort_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, descending)
+}
+
+cpp_torch_method_msort_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_method_msort_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
 cpp_torch_method_argsort_self_Tensor <- function(self, dim, descending) {
@@ -2661,6 +2849,30 @@ cpp_torch_method_pow_self_Tensor_exponent_Scalar <- function(self, exponent) {
     .Call('_torch_cpp_torch_method_pow_self_Tensor_exponent_Scalar', PACKAGE = 'torchpkg', self, exponent)
 }
 
+cpp_torch_method_pow__self_Tensor_exponent_Scalar <- function(self, exponent) {
+    .Call('_torch_cpp_torch_method_pow__self_Tensor_exponent_Scalar', PACKAGE = 'torchpkg', self, exponent)
+}
+
+cpp_torch_method_pow__self_Tensor_exponent_Tensor <- function(self, exponent) {
+    .Call('_torch_cpp_torch_method_pow__self_Tensor_exponent_Tensor', PACKAGE = 'torchpkg', self, exponent)
+}
+
+cpp_torch_method_float_power_self_Tensor_exponent_Tensor <- function(self, exponent) {
+    .Call('_torch_cpp_torch_method_float_power_self_Tensor_exponent_Tensor', PACKAGE = 'torchpkg', self, exponent)
+}
+
+cpp_torch_method_float_power_self_Tensor_exponent_Scalar <- function(self, exponent) {
+    .Call('_torch_cpp_torch_method_float_power_self_Tensor_exponent_Scalar', PACKAGE = 'torchpkg', self, exponent)
+}
+
+cpp_torch_method_float_power__self_Tensor_exponent_Scalar <- function(self, exponent) {
+    .Call('_torch_cpp_torch_method_float_power__self_Tensor_exponent_Scalar', PACKAGE = 'torchpkg', self, exponent)
+}
+
+cpp_torch_method_float_power__self_Tensor_exponent_Tensor <- function(self, exponent) {
+    .Call('_torch_cpp_torch_method_float_power__self_Tensor_exponent_Tensor', PACKAGE = 'torchpkg', self, exponent)
+}
+
 cpp_torch_method_normal__self_Tensor <- function(self, mean, std, generator) {
     .Call('_torch_cpp_torch_method_normal__self_Tensor', PACKAGE = 'torchpkg', self, mean, std, generator)
 }
@@ -2677,6 +2889,10 @@ cpp_torch_method_isinf_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_isinf_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
+cpp_torch_method_record_stream_self_Tensor_s_Stream <- function(self, s) {
+    invisible(.Call('_torch_cpp_torch_method_record_stream_self_Tensor_s_Stream', PACKAGE = 'torchpkg', self, s))
+}
+
 cpp_torch_method_isposinf_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_isposinf_self_Tensor', PACKAGE = 'torchpkg', self)
 }
@@ -2685,12 +2901,12 @@ cpp_torch_method_isneginf_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_isneginf_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
-cpp_torch_method_fft_self_Tensor_signal_ndim_int64_t <- function(self, signal_ndim, normalized) {
-    .Call('_torch_cpp_torch_method_fft_self_Tensor_signal_ndim_int64_t', PACKAGE = 'torchpkg', self, signal_ndim, normalized)
-}
-
 cpp_torch_method_det_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_method_det_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_method_inner_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_method_inner_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
 
 cpp_torch_method_outer_self_Tensor_vec2_Tensor <- function(self, vec2) {
@@ -2733,6 +2949,14 @@ cpp_torch_namespace__cast_Half_self_Tensor <- function(self, non_blocking) {
     .Call('_torch_cpp_torch_namespace__cast_Half_self_Tensor', PACKAGE = 'torchpkg', self, non_blocking)
 }
 
+cpp_torch_namespace__make_dual_primal_Tensor_tangent_Tensor_level_int64_t <- function(primal, tangent, level) {
+    .Call('_torch_cpp_torch_namespace__make_dual_primal_Tensor_tangent_Tensor_level_int64_t', PACKAGE = 'torchpkg', primal, tangent, level)
+}
+
+cpp_torch_namespace__unpack_dual_dual_Tensor_level_int64_t <- function(dual, level) {
+    .Call('_torch_cpp_torch_namespace__unpack_dual_dual_Tensor_level_int64_t', PACKAGE = 'torchpkg', dual, level)
+}
+
 cpp_torch_namespace_align_tensors_tensors_TensorList <- function(tensors) {
     .Call('_torch_cpp_torch_namespace_align_tensors_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
 }
@@ -2745,16 +2969,16 @@ cpp_torch_namespace__cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_length
     .Call('_torch_cpp_torch_namespace__cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t_deterministic_bool_zero_infinity_bool', PACKAGE = 'torchpkg', log_probs, targets, input_lengths, target_lengths, blank, deterministic, zero_infinity)
 }
 
-cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool <- function(weight_arr, weight_stride0, input_size, mode, hidden_size, num_layers, batch_first, bidirectional) {
-    .Call('_torch_cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool', PACKAGE = 'torchpkg', weight_arr, weight_stride0, input_size, mode, hidden_size, num_layers, batch_first, bidirectional)
+cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool <- function(weight_arr, weight_stride0, input_size, mode, hidden_size, proj_size, num_layers, batch_first, bidirectional) {
+    .Call('_torch_cpp_torch_namespace__cudnn_rnn_flatten_weight_weight_arr_TensorList_weight_stride0_int64_t_input_size_int64_t_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_bidirectional_bool', PACKAGE = 'torchpkg', weight_arr, weight_stride0, input_size, mode, hidden_size, proj_size, num_layers, batch_first, bidirectional)
 }
 
-cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor <- function(input, weight, weight_stride0, weight_buf, hx, cx, mode, hidden_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state) {
-    .Call('_torch_cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor', PACKAGE = 'torchpkg', input, weight, weight_stride0, weight_buf, hx, cx, mode, hidden_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state)
+cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor <- function(input, weight, weight_stride0, weight_buf, hx, cx, mode, hidden_size, proj_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state) {
+    .Call('_torch_cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor', PACKAGE = 'torchpkg', input, weight, weight_stride0, weight_buf, hx, cx, mode, hidden_size, proj_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state)
 }
 
-cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4 <- function(input, weight, weight_stride0, weight_buf, hx, cx, output, grad_output, grad_hy, grad_cy, mode, hidden_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state, reserve, output_mask) {
-    .Call('_torch_cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4', PACKAGE = 'torchpkg', input, weight, weight_stride0, weight_buf, hx, cx, output, grad_output, grad_hy, grad_cy, mode, hidden_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state, reserve, output_mask)
+cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4 <- function(input, weight, weight_stride0, weight_buf, hx, cx, output, grad_output, grad_hy, grad_cy, mode, hidden_size, proj_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state, reserve, output_mask) {
+    .Call('_torch_cpp_torch_namespace__cudnn_rnn_backward_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_output_Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor_reserve_Tensor_output_mask_stdarraybool4', PACKAGE = 'torchpkg', input, weight, weight_stride0, weight_buf, hx, cx, output, grad_output, grad_hy, grad_cy, mode, hidden_size, proj_size, num_layers, batch_first, dropout, train, bidirectional, batch_sizes, dropout_state, reserve, output_mask)
 }
 
 cpp_torch_namespace__cudnn_init_dropout_state_dropout_double_train_bool_dropout_seed_int64_t_options_TensorOptions <- function(dropout, train, dropout_seed, options) {
@@ -3049,8 +3273,16 @@ cpp_torch_namespace_argmax_self_Tensor <- function(self, dim, keepdim) {
     .Call('_torch_cpp_torch_namespace_argmax_self_Tensor', PACKAGE = 'torchpkg', self, dim, keepdim)
 }
 
+cpp_torch_namespace_argmax_out_out_Tensor_self_Tensor <- function(out, self, dim, keepdim) {
+    .Call('_torch_cpp_torch_namespace_argmax_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, dim, keepdim)
+}
+
 cpp_torch_namespace_argmin_self_Tensor <- function(self, dim, keepdim) {
     .Call('_torch_cpp_torch_namespace_argmin_self_Tensor', PACKAGE = 'torchpkg', self, dim, keepdim)
+}
+
+cpp_torch_namespace_argmin_out_out_Tensor_self_Tensor <- function(out, self, dim, keepdim) {
+    .Call('_torch_cpp_torch_namespace_argmin_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, dim, keepdim)
 }
 
 cpp_torch_namespace_acosh_self_Tensor <- function(self) {
@@ -3293,6 +3525,18 @@ cpp_torch_namespace_bitwise_not_out_out_Tensor_self_Tensor <- function(out, self
     .Call('_torch_cpp_torch_namespace_bitwise_not_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self)
 }
 
+cpp_torch_namespace_copysign_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_copysign_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_copysign_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_copysign_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
+}
+
+cpp_torch_namespace_copysign_self_Tensor_other_Scalar <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_copysign_self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
 cpp_torch_namespace_logical_not_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_namespace_logical_not_self_Tensor', PACKAGE = 'torchpkg', self)
 }
@@ -3353,6 +3597,10 @@ cpp_torch_namespace_broadcast_tensors_tensors_TensorList <- function(tensors) {
     .Call('_torch_cpp_torch_namespace_broadcast_tensors_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
 }
 
+cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef <- function(self, size) {
+    .Call('_torch_cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef', PACKAGE = 'torchpkg', self, size)
+}
+
 cpp_torch_namespace_cat_tensors_TensorList <- function(tensors, dim) {
     .Call('_torch_cpp_torch_namespace_cat_tensors_TensorList', PACKAGE = 'torchpkg', tensors, dim)
 }
@@ -3395,6 +3643,18 @@ cpp_torch_namespace_unsafe_chunk_self_Tensor_chunks_int64_t <- function(self, ch
 
 cpp_torch_namespace_chunk_self_Tensor_chunks_int64_t <- function(self, chunks, dim) {
     .Call('_torch_cpp_torch_namespace_chunk_self_Tensor_chunks_int64_t', PACKAGE = 'torchpkg', self, chunks, dim)
+}
+
+cpp_torch_namespace_tensor_split_self_Tensor_sections_int64_t <- function(self, sections, dim) {
+    .Call('_torch_cpp_torch_namespace_tensor_split_self_Tensor_sections_int64_t', PACKAGE = 'torchpkg', self, sections, dim)
+}
+
+cpp_torch_namespace_tensor_split_self_Tensor_indices_IntArrayRef <- function(self, indices, dim) {
+    .Call('_torch_cpp_torch_namespace_tensor_split_self_Tensor_indices_IntArrayRef', PACKAGE = 'torchpkg', self, indices, dim)
+}
+
+cpp_torch_namespace_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor <- function(self, tensor_indices_or_sections, dim) {
+    .Call('_torch_cpp_torch_namespace_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor', PACKAGE = 'torchpkg', self, tensor_indices_or_sections, dim)
 }
 
 cpp_torch_namespace_clamp_self_Tensor <- function(self, min, max) {
@@ -3757,6 +4017,14 @@ cpp_torch_namespace_diagonal_backward_grad_Tensor_input_sizes_IntArrayRef_offset
     .Call('_torch_cpp_torch_namespace_diagonal_backward_grad_Tensor_input_sizes_IntArrayRef_offset_int64_t_dim1_int64_t_dim2_int64_t', PACKAGE = 'torchpkg', grad, input_sizes, offset, dim1, dim2)
 }
 
+cpp_torch_namespace_diff_self_Tensor <- function(self, n, dim, prepend, append) {
+    .Call('_torch_cpp_torch_namespace_diff_self_Tensor', PACKAGE = 'torchpkg', self, n, dim, prepend, append)
+}
+
+cpp_torch_namespace_diff_out_out_Tensor_self_Tensor <- function(out, self, n, dim, prepend, append) {
+    .Call('_torch_cpp_torch_namespace_diff_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, n, dim, prepend, append)
+}
+
 cpp_torch_namespace_div_self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_namespace_div_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
@@ -3765,8 +4033,20 @@ cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor <- function(out,
     .Call('_torch_cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
 }
 
+cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
+}
+
+cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring <- function(out, self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring', PACKAGE = 'torchpkg', out, self, other, rounding_mode)
+}
+
 cpp_torch_namespace_div_self_Tensor_other_Scalar <- function(self, other) {
     .Call('_torch_cpp_torch_namespace_div_self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
 }
 
 cpp_torch_namespace_divide_self_Tensor_other_Tensor <- function(self, other) {
@@ -3779,6 +4059,18 @@ cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor <- function(o
 
 cpp_torch_namespace_divide_self_Tensor_other_Scalar <- function(self, other) {
     .Call('_torch_cpp_torch_namespace_divide_self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
+}
+
+cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring <- function(out, self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring', PACKAGE = 'torchpkg', out, self, other, rounding_mode)
+}
+
+cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_stdstring <- function(self, other, rounding_mode) {
+    .Call('_torch_cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_stdstring', PACKAGE = 'torchpkg', self, other, rounding_mode)
 }
 
 cpp_torch_namespace_true_divide_self_Tensor_other_Tensor <- function(self, other) {
@@ -3835,6 +4127,18 @@ cpp_torch_namespace_embedding_sparse_backward_grad_Tensor_indices_Tensor_num_wei
 
 cpp_torch_namespace__embedding_bag_forward_only_weight_Tensor_indices_Tensor_offsets_Tensor <- function(weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset) {
     .Call('_torch_cpp_torch_namespace__embedding_bag_forward_only_weight_Tensor_indices_Tensor_offsets_Tensor', PACKAGE = 'torchpkg', weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset)
+}
+
+cpp_torch_namespace__rowwise_prune_weight_Tensor_mask_Tensor_compressed_indices_dtype_ScalarType <- function(weight, mask, compressed_indices_dtype) {
+    .Call('_torch_cpp_torch_namespace__rowwise_prune_weight_Tensor_mask_Tensor_compressed_indices_dtype_ScalarType', PACKAGE = 'torchpkg', weight, mask, compressed_indices_dtype)
+}
+
+cpp_torch_namespace_row_stack_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace_row_stack_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace_row_stack_out_out_Tensor_tensors_TensorList <- function(out, tensors) {
+    .Call('_torch_cpp_torch_namespace_row_stack_out_out_Tensor_tensors_TensorList', PACKAGE = 'torchpkg', out, tensors)
 }
 
 cpp_torch_namespace_embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor <- function(weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset) {
@@ -4157,24 +4461,28 @@ cpp_torch_namespace_native_group_norm_backward_grad_out_Tensor_input_Tensor_mean
     .Call('_torch_cpp_torch_namespace_native_group_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_FALSE_int64_t_C_int64_t_HxW_int64_t_group_int64_t_output_mask_stdarraybool3', PACKAGE = 'torchpkg', grad_out, input, mean, rstd, weight, False, C, HxW, group, output_mask)
 }
 
-cpp_torch_namespace_ifft_self_Tensor_signal_ndim_int64_t <- function(self, signal_ndim, normalized) {
-    .Call('_torch_cpp_torch_namespace_ifft_self_Tensor_signal_ndim_int64_t', PACKAGE = 'torchpkg', self, signal_ndim, normalized)
+cpp_torch_namespace__fft_r2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool <- function(self, dim, normalization, onesided) {
+    .Call('_torch_cpp_torch_namespace__fft_r2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool', PACKAGE = 'torchpkg', self, dim, normalization, onesided)
 }
 
-cpp_torch_namespace_rfft_self_Tensor_signal_ndim_int64_t <- function(self, signal_ndim, normalized, onesided) {
-    .Call('_torch_cpp_torch_namespace_rfft_self_Tensor_signal_ndim_int64_t', PACKAGE = 'torchpkg', self, signal_ndim, normalized, onesided)
+cpp_torch_namespace__fft_r2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool <- function(out, self, dim, normalization, onesided) {
+    .Call('_torch_cpp_torch_namespace__fft_r2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool', PACKAGE = 'torchpkg', out, self, dim, normalization, onesided)
 }
 
-cpp_torch_namespace_irfft_self_Tensor_signal_ndim_int64_t <- function(self, signal_ndim, normalized, onesided, signal_sizes) {
-    .Call('_torch_cpp_torch_namespace_irfft_self_Tensor_signal_ndim_int64_t', PACKAGE = 'torchpkg', self, signal_ndim, normalized, onesided, signal_sizes)
+cpp_torch_namespace__fft_c2r_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t <- function(self, dim, normalization, last_dim_size) {
+    .Call('_torch_cpp_torch_namespace__fft_c2r_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t', PACKAGE = 'torchpkg', self, dim, normalization, last_dim_size)
 }
 
-cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalized_bool_onesided_bool_output_sizes_IntArrayRef <- function(self, signal_ndim, complex_input, complex_output, inverse, checked_signal_sizes, normalized, onesided, output_sizes) {
-    .Call('_torch_cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalized_bool_onesided_bool_output_sizes_IntArrayRef', PACKAGE = 'torchpkg', self, signal_ndim, complex_input, complex_output, inverse, checked_signal_sizes, normalized, onesided, output_sizes)
+cpp_torch_namespace__fft_c2r_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t <- function(out, self, dim, normalization, last_dim_size) {
+    .Call('_torch_cpp_torch_namespace__fft_c2r_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_last_dim_size_int64_t', PACKAGE = 'torchpkg', out, self, dim, normalization, last_dim_size)
 }
 
-cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalization_int64_t_onesided_bool_output_sizes_IntArrayRef <- function(self, signal_ndim, complex_input, complex_output, inverse, checked_signal_sizes, normalization, onesided, output_sizes) {
-    .Call('_torch_cpp_torch_namespace__fft_with_size_self_Tensor_signal_ndim_int64_t_complex_input_bool_complex_output_bool_inverse_bool_checked_signal_sizes_IntArrayRef_normalization_int64_t_onesided_bool_output_sizes_IntArrayRef', PACKAGE = 'torchpkg', self, signal_ndim, complex_input, complex_output, inverse, checked_signal_sizes, normalization, onesided, output_sizes)
+cpp_torch_namespace__fft_c2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool <- function(self, dim, normalization, forward) {
+    .Call('_torch_cpp_torch_namespace__fft_c2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool', PACKAGE = 'torchpkg', self, dim, normalization, forward)
+}
+
+cpp_torch_namespace__fft_c2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool <- function(out, self, dim, normalization, forward) {
+    .Call('_torch_cpp_torch_namespace__fft_c2c_out_out_Tensor_self_Tensor_dim_IntArrayRef_normalization_int64_t_forward_bool', PACKAGE = 'torchpkg', out, self, dim, normalization, forward)
 }
 
 cpp_torch_namespace__cufft_get_plan_cache_size_device_index_int64_t <- function(device_index) {
@@ -4193,8 +4501,8 @@ cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t <- function(dev
     invisible(.Call('_torch_cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t', PACKAGE = 'torchpkg', device_index))
 }
 
-cpp_torch_namespace_index_self_Tensor_indices_TensorList <- function(self, indices) {
-    .Call('_torch_cpp_torch_namespace_index_self_Tensor_indices_TensorList', PACKAGE = 'torchpkg', self, indices)
+cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor <- function(self, indices) {
+    .Call('_torch_cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor', PACKAGE = 'torchpkg', self, indices)
 }
 
 cpp_torch_namespace_index_copy_self_Tensor_dim_int64_t_index_Tensor_source_Tensor <- function(self, dim, index, source) {
@@ -4205,16 +4513,16 @@ cpp_torch_namespace_index_copy_self_Tensor_dim_Dimname_index_Tensor_source_Tenso
     .Call('_torch_cpp_torch_namespace_index_copy_self_Tensor_dim_Dimname_index_Tensor_source_Tensor', PACKAGE = 'torchpkg', self, dim, index, source)
 }
 
-cpp_torch_namespace_index_put__self_Tensor_indices_TensorList_values_Tensor <- function(self, indices, values, accumulate) {
-    .Call('_torch_cpp_torch_namespace_index_put__self_Tensor_indices_TensorList_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate)
+cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor <- function(self, indices, values, accumulate) {
+    .Call('_torch_cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate)
 }
 
-cpp_torch_namespace_index_put_self_Tensor_indices_TensorList_values_Tensor <- function(self, indices, values, accumulate) {
-    .Call('_torch_cpp_torch_namespace_index_put_self_Tensor_indices_TensorList_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate)
+cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor <- function(self, indices, values, accumulate) {
+    .Call('_torch_cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate)
 }
 
-cpp_torch_namespace__index_put_impl__self_Tensor_indices_TensorList_values_Tensor <- function(self, indices, values, accumulate, unsafe) {
-    .Call('_torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_TensorList_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate, unsafe)
+cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor <- function(self, indices, values, accumulate, unsafe) {
+    .Call('_torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor', PACKAGE = 'torchpkg', self, indices, values, accumulate, unsafe)
 }
 
 cpp_torch_namespace_instance_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_use_input_stats_bool_momentum_double_eps_double_cudnn_enabled_bool <- function(input, weight, bias, running_mean, running_var, use_input_stats, momentum, eps, cudnn_enabled) {
@@ -4277,6 +4585,14 @@ cpp_torch_namespace_kl_div_backward_grad_output_Tensor_self_Tensor_target_Tensor
     .Call('_torch_cpp_torch_namespace_kl_div_backward_grad_output_Tensor_self_Tensor_target_Tensor', PACKAGE = 'torchpkg', grad_output, self, target, reduction, log_target)
 }
 
+cpp_torch_namespace_kron_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_kron_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_kron_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_kron_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
+}
+
 cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t <- function(self, k, dim, keepdim) {
     .Call('_torch_cpp_torch_namespace_kthvalue_self_Tensor_k_int64_t', PACKAGE = 'torchpkg', self, k, dim, keepdim)
 }
@@ -4297,20 +4613,44 @@ cpp_torch_namespace_layer_norm_input_Tensor_normalized_shape_IntArrayRef <- func
     .Call('_torch_cpp_torch_namespace_layer_norm_input_Tensor_normalized_shape_IntArrayRef', PACKAGE = 'torchpkg', input, normalized_shape, weight, bias, eps, cudnn_enable)
 }
 
-cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double <- function(input, weight, bias, M, False, eps) {
-    .Call('_torch_cpp_torch_namespace_native_layer_norm_input_Tensor_weight_Tensor_bias_Tensor_M_int64_t_FALSE_int64_t_eps_double', PACKAGE = 'torchpkg', input, weight, bias, M, False, eps)
+cpp_torch_namespace_native_layer_norm_input_Tensor_normalized_shape_IntArrayRef_weight_Tensor_bias_Tensor_eps_double <- function(input, normalized_shape, weight, bias, eps) {
+    .Call('_torch_cpp_torch_namespace_native_layer_norm_input_Tensor_normalized_shape_IntArrayRef_weight_Tensor_bias_Tensor_eps_double', PACKAGE = 'torchpkg', input, normalized_shape, weight, bias, eps)
 }
 
-cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3 <- function(grad_out, input, mean, rstd, weight, M, False, output_mask) {
-    .Call('_torch_cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_mean_Tensor_rstd_Tensor_weight_Tensor_M_int64_t_FALSE_int64_t_output_mask_stdarraybool3', PACKAGE = 'torchpkg', grad_out, input, mean, rstd, weight, M, False, output_mask)
+cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_normalized_shape_IntArrayRef_mean_Tensor_rstd_Tensor_weight_Tensor_bias_Tensor_output_mask_stdarraybool3 <- function(grad_out, input, normalized_shape, mean, rstd, weight, bias, output_mask) {
+    .Call('_torch_cpp_torch_namespace_native_layer_norm_backward_grad_out_Tensor_input_Tensor_normalized_shape_IntArrayRef_mean_Tensor_rstd_Tensor_weight_Tensor_bias_Tensor_output_mask_stdarraybool3', PACKAGE = 'torchpkg', grad_out, input, normalized_shape, mean, rstd, weight, bias, output_mask)
+}
+
+cpp_torch_namespace_nan_to_num_self_Tensor <- function(self, nan, posinf, neginf) {
+    .Call('_torch_cpp_torch_namespace_nan_to_num_self_Tensor', PACKAGE = 'torchpkg', self, nan, posinf, neginf)
+}
+
+cpp_torch_namespace_nan_to_num__self_Tensor <- function(self, nan, posinf, neginf) {
+    .Call('_torch_cpp_torch_namespace_nan_to_num__self_Tensor', PACKAGE = 'torchpkg', self, nan, posinf, neginf)
+}
+
+cpp_torch_namespace_nan_to_num_out_out_Tensor_self_Tensor <- function(out, self, nan, posinf, neginf) {
+    .Call('_torch_cpp_torch_namespace_nan_to_num_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, nan, posinf, neginf)
 }
 
 cpp_torch_namespace_linear_input_Tensor_weight_Tensor <- function(input, weight, bias) {
     .Call('_torch_cpp_torch_namespace_linear_input_Tensor_weight_Tensor', PACKAGE = 'torchpkg', input, weight, bias)
 }
 
-cpp_torch_namespace_mkldnn_linear_input_Tensor_weight_Tensor <- function(input, weight, bias) {
-    .Call('_torch_cpp_torch_namespace_mkldnn_linear_input_Tensor_weight_Tensor', PACKAGE = 'torchpkg', input, weight, bias)
+cpp_torch_namespace_mkldnn_linear_self_Tensor_weight_Tensor <- function(self, weight, bias) {
+    .Call('_torch_cpp_torch_namespace_mkldnn_linear_self_Tensor_weight_Tensor', PACKAGE = 'torchpkg', self, weight, bias)
+}
+
+cpp_torch_namespace_mkldnn_linear_backward_input_input_size_IntArrayRef_grad_output_Tensor_weight_Tensor <- function(input_size, grad_output, weight) {
+    .Call('_torch_cpp_torch_namespace_mkldnn_linear_backward_input_input_size_IntArrayRef_grad_output_Tensor_weight_Tensor', PACKAGE = 'torchpkg', input_size, grad_output, weight)
+}
+
+cpp_torch_namespace_mkldnn_linear_backward_weights_grad_output_Tensor_input_Tensor_weight_Tensor_bias_defined_bool <- function(grad_output, input, weight, bias_defined) {
+    .Call('_torch_cpp_torch_namespace_mkldnn_linear_backward_weights_grad_output_Tensor_input_Tensor_weight_Tensor_bias_defined_bool', PACKAGE = 'torchpkg', grad_output, input, weight, bias_defined)
+}
+
+cpp_torch_namespace_mkldnn_linear_backward_self_Tensor_grad_output_Tensor_weight_Tensor_output_mask_stdarraybool3 <- function(self, grad_output, weight, output_mask) {
+    .Call('_torch_cpp_torch_namespace_mkldnn_linear_backward_self_Tensor_grad_output_Tensor_weight_Tensor_output_mask_stdarraybool3', PACKAGE = 'torchpkg', self, grad_output, weight, output_mask)
 }
 
 cpp_torch_namespace_fbgemm_linear_int8_weight_fp32_activation_input_Tensor_weight_Tensor_packed_Tensor_col_offsets_Tensor_weight_scale_Scalar_weight_zero_point_Scalar_bias_Tensor <- function(input, weight, packed, col_offsets, weight_scale, weight_zero_point, bias) {
@@ -4343,6 +4683,18 @@ cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor <- function(input)
 
 cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor_K_int64_t_FALSE_int64_t <- function(input, K, False) {
     .Call('_torch_cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor_K_int64_t_FALSE_int64_t', PACKAGE = 'torchpkg', input, K, False)
+}
+
+cpp_torch_namespace_ldexp_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_ldexp_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_ldexp__self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_ldexp__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_ldexp_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_ldexp_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
 }
 
 cpp_torch_namespace_linspace_start_Scalar_end_Scalar <- function(start, end, steps, options) {
@@ -4415,6 +4767,38 @@ cpp_torch_namespace_logaddexp2_out_out_Tensor_self_Tensor_other_Tensor <- functi
 
 cpp_torch_namespace_logaddexp2_self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_namespace_logaddexp2_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_xlogy_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_xlogy_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_xlogy_self_Scalar_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_xlogy_self_Scalar_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_xlogy_self_Tensor_other_Scalar <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_xlogy_self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_xlogy__self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_xlogy__self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_xlogy__self_Tensor_other_Scalar <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_xlogy__self_Tensor_other_Scalar', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
+}
+
+cpp_torch_namespace_xlogy_out_out_Tensor_self_Scalar_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Scalar_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
+}
+
+cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Scalar <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Scalar', PACKAGE = 'torchpkg', out, self, other)
 }
 
 cpp_torch_namespace_logdet_self_Tensor <- function(self) {
@@ -4613,6 +4997,10 @@ cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_DimnameList <- function(
     .Call('_torch_cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_DimnameList', PACKAGE = 'torchpkg', out, self, dim, keepdim, dtype)
 }
 
+cpp_torch_namespace_median_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_namespace_median_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
 cpp_torch_namespace_median_self_Tensor_dim_int64_t <- function(self, dim, keepdim) {
     .Call('_torch_cpp_torch_namespace_median_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, keepdim)
 }
@@ -4627,6 +5015,26 @@ cpp_torch_namespace_median_self_Tensor_dim_Dimname <- function(self, dim, keepdi
 
 cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname <- function(values, indices, self, dim, keepdim) {
     .Call('_torch_cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', values, indices, self, dim, keepdim)
+}
+
+cpp_torch_namespace_nanmedian_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_namespace_nanmedian_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_namespace_nanmedian_self_Tensor_dim_int64_t <- function(self, dim, keepdim) {
+    .Call('_torch_cpp_torch_namespace_nanmedian_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, keepdim)
+}
+
+cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t <- function(values, indices, self, dim, keepdim) {
+    .Call('_torch_cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', values, indices, self, dim, keepdim)
+}
+
+cpp_torch_namespace_nanmedian_self_Tensor_dim_Dimname <- function(self, dim, keepdim) {
+    .Call('_torch_cpp_torch_namespace_nanmedian_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, keepdim)
+}
+
+cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname <- function(values, indices, self, dim, keepdim) {
+    .Call('_torch_cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', values, indices, self, dim, keepdim)
 }
 
 cpp_torch_namespace_min_self_Tensor_dim_int64_t <- function(self, dim, keepdim) {
@@ -4749,6 +5157,14 @@ cpp_torch_namespace__sparse_mm_sparse_Tensor_dense_Tensor <- function(sparse, de
     .Call('_torch_cpp_torch_namespace__sparse_mm_sparse_Tensor_dense_Tensor', PACKAGE = 'torchpkg', sparse, dense)
 }
 
+cpp_torch_namespace__sparse_sparse_matmul_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace__sparse_sparse_matmul_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace__sparse_matrix_mask_helper_t_Tensor_mask_indices_Tensor <- function(t, mask_indices) {
+    .Call('_torch_cpp_torch_namespace__sparse_matrix_mask_helper_t_Tensor_mask_indices_Tensor', PACKAGE = 'torchpkg', t, mask_indices)
+}
+
 cpp_torch_namespace_mode_self_Tensor <- function(self, dim, keepdim) {
     .Call('_torch_cpp_torch_namespace_mode_self_Tensor', PACKAGE = 'torchpkg', self, dim, keepdim)
 }
@@ -4799,6 +5215,14 @@ cpp_torch_namespace_mv_out_out_Tensor_self_Tensor_vec_Tensor <- function(out, se
 
 cpp_torch_namespace_mvlgamma_self_Tensor_p_int64_t <- function(self, p) {
     .Call('_torch_cpp_torch_namespace_mvlgamma_self_Tensor_p_int64_t', PACKAGE = 'torchpkg', self, p)
+}
+
+cpp_torch_namespace_narrow_copy_self_Tensor_dim_int64_t_start_int64_t_length_int64_t <- function(self, dim, start, length) {
+    .Call('_torch_cpp_torch_namespace_narrow_copy_self_Tensor_dim_int64_t_start_int64_t_length_int64_t', PACKAGE = 'torchpkg', self, dim, start, length)
+}
+
+cpp_torch_namespace_narrow_copy_out_out_Tensor_self_Tensor_dim_int64_t_start_int64_t_length_int64_t <- function(out, self, dim, start, length) {
+    .Call('_torch_cpp_torch_namespace_narrow_copy_out_out_Tensor_self_Tensor_dim_int64_t_start_int64_t_length_int64_t', PACKAGE = 'torchpkg', out, self, dim, start, length)
 }
 
 cpp_torch_namespace_narrow_self_Tensor_dim_int64_t_start_int64_t_length_int64_t <- function(self, dim, start, length) {
@@ -4929,8 +5353,20 @@ cpp_torch_namespace_movedim_self_Tensor_source_int64_t_destination_int64_t <- fu
     .Call('_torch_cpp_torch_namespace_movedim_self_Tensor_source_int64_t_destination_int64_t', PACKAGE = 'torchpkg', self, source, destination)
 }
 
+cpp_torch_namespace_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef <- function(self, source, destination) {
+    .Call('_torch_cpp_torch_namespace_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef', PACKAGE = 'torchpkg', self, source, destination)
+}
+
+cpp_torch_namespace_moveaxis_self_Tensor_source_int64_t_destination_int64_t <- function(self, source, destination) {
+    .Call('_torch_cpp_torch_namespace_moveaxis_self_Tensor_source_int64_t_destination_int64_t', PACKAGE = 'torchpkg', self, source, destination)
+}
+
 cpp_torch_namespace_pixel_shuffle_self_Tensor_upscale_factor_int64_t <- function(self, upscale_factor) {
     .Call('_torch_cpp_torch_namespace_pixel_shuffle_self_Tensor_upscale_factor_int64_t', PACKAGE = 'torchpkg', self, upscale_factor)
+}
+
+cpp_torch_namespace_pixel_unshuffle_self_Tensor_downscale_factor_int64_t <- function(self, downscale_factor) {
+    .Call('_torch_cpp_torch_namespace_pixel_unshuffle_self_Tensor_downscale_factor_int64_t', PACKAGE = 'torchpkg', self, downscale_factor)
 }
 
 cpp_torch_namespace_channel_shuffle_self_Tensor_groups_int64_t <- function(self, groups) {
@@ -5091,6 +5527,10 @@ cpp_torch_namespace_range_start_Scalar_end_Scalar <- function(start, end, step, 
 
 cpp_torch_namespace_range_out_out_Tensor_start_Scalar_end_Scalar <- function(out, start, end, step) {
     .Call('_torch_cpp_torch_namespace_range_out_out_Tensor_start_Scalar_end_Scalar', PACKAGE = 'torchpkg', out, start, end, step)
+}
+
+cpp_torch_namespace_ravel_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_namespace_ravel_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
 cpp_torch_namespace_reciprocal_self_Tensor <- function(self) {
@@ -5297,6 +5737,18 @@ cpp_torch_namespace_sin_out_out_Tensor_self_Tensor <- function(out, self) {
     .Call('_torch_cpp_torch_namespace_sin_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self)
 }
 
+cpp_torch_namespace_sinc_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_namespace_sinc_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_namespace_sinc__self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_namespace_sinc__self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_namespace_sinc_out_out_Tensor_self_Tensor <- function(out, self) {
+    .Call('_torch_cpp_torch_namespace_sinc_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self)
+}
+
 cpp_torch_namespace_sinh_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_namespace_sinh_self_Tensor', PACKAGE = 'torchpkg', self)
 }
@@ -5399,6 +5851,14 @@ cpp_torch_namespace_stack_tensors_TensorList <- function(tensors, dim) {
 
 cpp_torch_namespace_stack_out_out_Tensor_tensors_TensorList <- function(out, tensors, dim) {
     .Call('_torch_cpp_torch_namespace_stack_out_out_Tensor_tensors_TensorList', PACKAGE = 'torchpkg', out, tensors, dim)
+}
+
+cpp_torch_namespace__stack_tensors_TensorList <- function(tensors, dim) {
+    .Call('_torch_cpp_torch_namespace__stack_tensors_TensorList', PACKAGE = 'torchpkg', tensors, dim)
+}
+
+cpp_torch_namespace__stack_out_out_Tensor_tensors_TensorList <- function(out, tensors, dim) {
+    .Call('_torch_cpp_torch_namespace__stack_out_out_Tensor_tensors_TensorList', PACKAGE = 'torchpkg', out, tensors, dim)
 }
 
 cpp_torch_namespace_hstack_tensors_TensorList <- function(tensors) {
@@ -5577,6 +6037,10 @@ cpp_torch_namespace_tensordot_self_Tensor_other_Tensor_dims_self_IntArrayRef_dim
     .Call('_torch_cpp_torch_namespace_tensordot_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef', PACKAGE = 'torchpkg', self, other, dims_self, dims_other)
 }
 
+cpp_torch_namespace_tensordot_out_out_Tensor_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef <- function(out, self, other, dims_self, dims_other) {
+    .Call('_torch_cpp_torch_namespace_tensordot_out_out_Tensor_self_Tensor_other_Tensor_dims_self_IntArrayRef_dims_other_IntArrayRef', PACKAGE = 'torchpkg', out, self, other, dims_self, dims_other)
+}
+
 cpp_torch_namespace_threshold_self_Tensor_threshold_Scalar_value_Scalar <- function(self, threshold, value) {
     .Call('_torch_cpp_torch_namespace_threshold_self_Tensor_threshold_Scalar_value_Scalar', PACKAGE = 'torchpkg', self, threshold, value)
 }
@@ -5591,6 +6055,10 @@ cpp_torch_namespace_threshold_out_out_Tensor_self_Tensor_threshold_Scalar_value_
 
 cpp_torch_namespace_threshold_backward_grad_output_Tensor_self_Tensor_threshold_Scalar <- function(grad_output, self, threshold) {
     .Call('_torch_cpp_torch_namespace_threshold_backward_grad_output_Tensor_self_Tensor_threshold_Scalar', PACKAGE = 'torchpkg', grad_output, self, threshold)
+}
+
+cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef <- function(self, dims) {
+    .Call('_torch_cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef', PACKAGE = 'torchpkg', self, dims)
 }
 
 cpp_torch_namespace_transpose_self_Tensor_dim0_int64_t_dim1_int64_t <- function(self, dim0, dim1) {
@@ -6137,32 +6605,40 @@ cpp_torch_namespace_fake_quantize_per_tensor_affine_self_Tensor_scale_double_zer
     .Call('_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', self, scale, zero_point, quant_min, quant_max)
 }
 
-cpp_torch_namespace_fake_quantize_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t <- function(grad, self, scale, zero_point, quant_min, quant_max) {
-    .Call('_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', grad, self, scale, zero_point, quant_min, quant_max)
+cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t <- function(self, scale, zero_point, quant_min, quant_max) {
+    .Call('_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', self, scale, zero_point, quant_min, quant_max)
 }
 
-cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t <- function(self, scale, zero_point, quant_min, quant_max) {
-    .Call('_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', self, scale, zero_point, quant_min, quant_max)
+cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_backward_grad_Tensor_mask_Tensor <- function(grad, mask) {
+    .Call('_torch_cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_backward_grad_Tensor_mask_Tensor', PACKAGE = 'torchpkg', grad, mask)
 }
 
-cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t <- function(grad, self, scale, zero_point, quant_min, quant_max) {
-    .Call('_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', grad, self, scale, zero_point, quant_min, quant_max)
+cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t <- function(self, scale, zero_point, quant_min, quant_max, grad_factor) {
+    .Call('_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', self, scale, zero_point, quant_min, quant_max, grad_factor)
+}
+
+cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t <- function(grad, self, scale, zero_point, quant_min, quant_max, grad_factor) {
+    .Call('_torch_cpp_torch_namespace__fake_quantize_learnable_per_tensor_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', grad, self, scale, zero_point, quant_min, quant_max, grad_factor)
 }
 
 cpp_torch_namespace_fake_quantize_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t <- function(self, scale, zero_point, axis, quant_min, quant_max) {
     .Call('_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', self, scale, zero_point, axis, quant_min, quant_max)
 }
 
-cpp_torch_namespace_fake_quantize_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t <- function(grad, self, scale, zero_point, axis, quant_min, quant_max) {
-    .Call('_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', grad, self, scale, zero_point, axis, quant_min, quant_max)
+cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t <- function(self, scale, zero_point, axis, quant_min, quant_max) {
+    .Call('_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', self, scale, zero_point, axis, quant_min, quant_max)
 }
 
-cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t <- function(self, scale, zero_point, axis, quant_min, quant_max) {
-    .Call('_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', self, scale, zero_point, axis, quant_min, quant_max)
+cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_backward_grad_Tensor_mask_Tensor <- function(grad, mask) {
+    .Call('_torch_cpp_torch_namespace_fake_quantize_per_channel_affine_cachemask_backward_grad_Tensor_mask_Tensor', PACKAGE = 'torchpkg', grad, mask)
 }
 
-cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t <- function(grad, self, scale, zero_point, axis, quant_min, quant_max) {
-    .Call('_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', grad, self, scale, zero_point, axis, quant_min, quant_max)
+cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t <- function(self, scale, zero_point, axis, quant_min, quant_max, grad_factor) {
+    .Call('_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', self, scale, zero_point, axis, quant_min, quant_max, grad_factor)
+}
+
+cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t <- function(grad, self, scale, zero_point, axis, quant_min, quant_max, grad_factor) {
+    .Call('_torch_cpp_torch_namespace__fake_quantize_learnable_per_channel_affine_backward_grad_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_axis_int64_t_quant_min_int64_t_quant_max_int64_t', PACKAGE = 'torchpkg', grad, self, scale, zero_point, axis, quant_min, quant_max, grad_factor)
 }
 
 cpp_torch_namespace__choose_qparams_per_tensor_self_Tensor <- function(self, reduce_range) {
@@ -6849,6 +7325,14 @@ cpp_torch_namespace__svd_helper_self_Tensor_some_bool_compute_uv_bool <- functio
     .Call('_torch_cpp_torch_namespace__svd_helper_self_Tensor_some_bool_compute_uv_bool', PACKAGE = 'torchpkg', self, some, compute_uv)
 }
 
+cpp_torch_namespace_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t <- function(self, axis0, axis1) {
+    .Call('_torch_cpp_torch_namespace_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t', PACKAGE = 'torchpkg', self, axis0, axis1)
+}
+
+cpp_torch_namespace_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t <- function(self, dim0, dim1) {
+    .Call('_torch_cpp_torch_namespace_swapdims_self_Tensor_dim0_int64_t_dim1_int64_t', PACKAGE = 'torchpkg', self, dim0, dim1)
+}
+
 cpp_torch_namespace_cholesky_out_out_Tensor_self_Tensor <- function(out, self, upper) {
     .Call('_torch_cpp_torch_namespace_cholesky_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, upper)
 }
@@ -6885,12 +7369,12 @@ cpp_torch_namespace__solve_helper_self_Tensor_A_Tensor <- function(self, A) {
     .Call('_torch_cpp_torch_namespace__solve_helper_self_Tensor_A_Tensor', PACKAGE = 'torchpkg', self, A)
 }
 
-cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor <- function(out, self, upper) {
-    .Call('_torch_cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, upper)
-}
-
 cpp_torch_namespace_cholesky_inverse_self_Tensor <- function(self, upper) {
     .Call('_torch_cpp_torch_namespace_cholesky_inverse_self_Tensor', PACKAGE = 'torchpkg', self, upper)
+}
+
+cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor <- function(out, self, upper) {
+    .Call('_torch_cpp_torch_namespace_cholesky_inverse_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, upper)
 }
 
 cpp_torch_namespace_qr_out_Q_Tensor_R_Tensor_self_Tensor <- function(Q, R, self, some) {
@@ -6899,10 +7383,6 @@ cpp_torch_namespace_qr_out_Q_Tensor_R_Tensor_self_Tensor <- function(Q, R, self,
 
 cpp_torch_namespace_qr_self_Tensor <- function(self, some) {
     .Call('_torch_cpp_torch_namespace_qr_self_Tensor', PACKAGE = 'torchpkg', self, some)
-}
-
-cpp_torch_namespace__qr_helper_self_Tensor_some_bool <- function(self, some) {
-    .Call('_torch_cpp_torch_namespace__qr_helper_self_Tensor_some_bool', PACKAGE = 'torchpkg', self, some)
 }
 
 cpp_torch_namespace_geqrf_out_a_Tensor_tau_Tensor_self_Tensor <- function(a, tau, self) {
@@ -6951,14 +7431,6 @@ cpp_torch_namespace_multinomial_out_out_Tensor_self_Tensor_num_samples_int64_t <
 
 cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t <- function(self, num_samples, replacement, generator) {
     .Call('_torch_cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t', PACKAGE = 'torchpkg', self, num_samples, replacement, generator)
-}
-
-cpp_torch_namespace__multinomial_alias_setup_probs_Tensor <- function(probs) {
-    .Call('_torch_cpp_torch_namespace__multinomial_alias_setup_probs_Tensor', PACKAGE = 'torchpkg', probs)
-}
-
-cpp_torch_namespace__multinomial_alias_draw_J_Tensor_q_Tensor_num_samples_int64_t <- function(J, q, num_samples, generator) {
-    .Call('_torch_cpp_torch_namespace__multinomial_alias_draw_J_Tensor_q_Tensor_num_samples_int64_t', PACKAGE = 'torchpkg', J, q, num_samples, generator)
 }
 
 cpp_torch_namespace_lgamma_out_out_Tensor_self_Tensor <- function(out, self) {
@@ -7077,6 +7549,22 @@ cpp_torch_namespace_hypot_self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_namespace_hypot_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
 }
 
+cpp_torch_namespace_igamma_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_igamma_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
+}
+
+cpp_torch_namespace_igamma_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_igamma_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_igammac_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_igammac_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
+}
+
+cpp_torch_namespace_igammac_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_igammac_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
 cpp_torch_namespace_nextafter_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
     .Call('_torch_cpp_torch_namespace_nextafter_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
 }
@@ -7105,8 +7593,24 @@ cpp_torch_namespace_min_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_namespace_min_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
+cpp_torch_namespace_fmin_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_fmin_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_fmin_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_fmin_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
+}
+
 cpp_torch_namespace_max_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_namespace_max_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_namespace_fmax_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_fmax_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_fmax_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_fmax_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
 }
 
 cpp_torch_namespace_maximum_self_Tensor_other_Tensor <- function(self, other) {
@@ -7139,10 +7643,6 @@ cpp_torch_namespace_min_out_out_Tensor_self_Tensor_other_Tensor <- function(out,
 
 cpp_torch_namespace_min_self_Tensor_other_Tensor <- function(self, other) {
     .Call('_torch_cpp_torch_namespace_min_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
-}
-
-cpp_torch_namespace_median_self_Tensor <- function(self) {
-    .Call('_torch_cpp_torch_namespace_median_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
 cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_double <- function(out, self, q, dim, keepdim) {
@@ -7191,6 +7691,14 @@ cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimnam
 
 cpp_torch_namespace_sort_self_Tensor_dim_Dimname <- function(self, dim, descending) {
     .Call('_torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, descending)
+}
+
+cpp_torch_namespace_msort_out_out_Tensor_self_Tensor <- function(out, self) {
+    .Call('_torch_cpp_torch_namespace_msort_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self)
+}
+
+cpp_torch_namespace_msort_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_namespace_msort_self_Tensor', PACKAGE = 'torchpkg', self)
 }
 
 cpp_torch_namespace_argsort_self_Tensor <- function(self, dim, descending) {
@@ -7257,6 +7765,30 @@ cpp_torch_namespace_pow_self_Tensor_exponent_Scalar <- function(self, exponent) 
     .Call('_torch_cpp_torch_namespace_pow_self_Tensor_exponent_Scalar', PACKAGE = 'torchpkg', self, exponent)
 }
 
+cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Tensor <- function(out, self, exponent) {
+    .Call('_torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Tensor', PACKAGE = 'torchpkg', out, self, exponent)
+}
+
+cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor <- function(self, exponent) {
+    .Call('_torch_cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor', PACKAGE = 'torchpkg', self, exponent)
+}
+
+cpp_torch_namespace_float_power_out_out_Tensor_self_Scalar_exponent_Tensor <- function(out, self, exponent) {
+    .Call('_torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Scalar_exponent_Tensor', PACKAGE = 'torchpkg', out, self, exponent)
+}
+
+cpp_torch_namespace_float_power_self_Scalar_exponent_Tensor <- function(self, exponent) {
+    .Call('_torch_cpp_torch_namespace_float_power_self_Scalar_exponent_Tensor', PACKAGE = 'torchpkg', self, exponent)
+}
+
+cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Scalar <- function(out, self, exponent) {
+    .Call('_torch_cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Scalar', PACKAGE = 'torchpkg', out, self, exponent)
+}
+
+cpp_torch_namespace_float_power_self_Tensor_exponent_Scalar <- function(self, exponent) {
+    .Call('_torch_cpp_torch_namespace_float_power_self_Tensor_exponent_Scalar', PACKAGE = 'torchpkg', self, exponent)
+}
+
 cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor <- function(out, mean, std, generator) {
     .Call('_torch_cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor', PACKAGE = 'torchpkg', out, mean, std, generator)
 }
@@ -7305,8 +7837,8 @@ cpp_torch_namespace__std_self_Tensor <- function(self, unbiased) {
     .Call('_torch_cpp_torch_namespace__std_self_Tensor', PACKAGE = 'torchpkg', self, unbiased)
 }
 
-cpp_torch_namespace__amp_non_finite_check_and_unscale__self_Tensor_found_inf_Tensor_inv_scale_Tensor <- function(self, found_inf, inv_scale) {
-    invisible(.Call('_torch_cpp_torch_namespace__amp_non_finite_check_and_unscale__self_Tensor_found_inf_Tensor_inv_scale_Tensor', PACKAGE = 'torchpkg', self, found_inf, inv_scale))
+cpp_torch_namespace__amp_foreach_non_finite_check_and_unscale__self_TensorList_found_inf_Tensor_inv_scale_Tensor <- function(self, found_inf, inv_scale) {
+    invisible(.Call('_torch_cpp_torch_namespace__amp_foreach_non_finite_check_and_unscale__self_TensorList_found_inf_Tensor_inv_scale_Tensor', PACKAGE = 'torchpkg', self, found_inf, inv_scale))
 }
 
 cpp_torch_namespace__amp_update_scale_growth_tracker_Tensor_current_scale_Tensor_found_inf_Tensor_scale_growth_factor_double_scale_backoff_factor_double_growth_interval_int64_t <- function(growth_tracker, current_scale, found_inf, scale_growth_factor, scale_backoff_factor, growth_interval) {
@@ -7385,40 +7917,44 @@ cpp_torch_namespace__foreach_div__self_TensorList_other_TensorList <- function(s
     invisible(.Call('_torch_cpp_torch_namespace__foreach_div__self_TensorList_other_TensorList', PACKAGE = 'torchpkg', self, other))
 }
 
-cpp_torch_namespace__foreach_add_scalar_list_tensors_TensorList_scalars_ArrayRefdouble <- function(tensors, scalars) {
-    .Call('_torch_cpp_torch_namespace__foreach_add_scalar_list_tensors_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', tensors, scalars)
+cpp_torch_namespace__foreach_add_tensors_TensorList_scalars_ArrayRefdouble <- function(tensors, scalars) {
+    .Call('_torch_cpp_torch_namespace__foreach_add_tensors_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', tensors, scalars)
 }
 
-cpp_torch_namespace__foreach_add_scalar_list__self_TensorList_scalars_ArrayRefdouble <- function(self, scalars) {
-    invisible(.Call('_torch_cpp_torch_namespace__foreach_add_scalar_list__self_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, scalars))
+cpp_torch_namespace__foreach_add__self_TensorList_scalars_ArrayRefdouble <- function(self, scalars) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_add__self_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, scalars))
 }
 
-cpp_torch_namespace__foreach_sub_scalar_list_tensors_TensorList_scalars_ArrayRefdouble <- function(tensors, scalars) {
-    .Call('_torch_cpp_torch_namespace__foreach_sub_scalar_list_tensors_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', tensors, scalars)
+cpp_torch_namespace__foreach_sub_tensors_TensorList_scalars_ArrayRefdouble <- function(tensors, scalars) {
+    .Call('_torch_cpp_torch_namespace__foreach_sub_tensors_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', tensors, scalars)
 }
 
-cpp_torch_namespace__foreach_sub_scalar_list__self_TensorList_scalars_ArrayRefdouble <- function(self, scalars) {
-    invisible(.Call('_torch_cpp_torch_namespace__foreach_sub_scalar_list__self_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, scalars))
+cpp_torch_namespace__foreach_sub__self_TensorList_scalars_ArrayRefdouble <- function(self, scalars) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_sub__self_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, scalars))
 }
 
-cpp_torch_namespace__foreach_div_scalar_list_tensors_TensorList_scalars_ArrayRefdouble <- function(tensors, scalars) {
-    .Call('_torch_cpp_torch_namespace__foreach_div_scalar_list_tensors_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', tensors, scalars)
+cpp_torch_namespace__foreach_div_tensors_TensorList_scalars_ArrayRefdouble <- function(tensors, scalars) {
+    .Call('_torch_cpp_torch_namespace__foreach_div_tensors_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', tensors, scalars)
 }
 
-cpp_torch_namespace__foreach_div_scalar_list__self_TensorList_scalars_ArrayRefdouble <- function(self, scalars) {
-    invisible(.Call('_torch_cpp_torch_namespace__foreach_div_scalar_list__self_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, scalars))
+cpp_torch_namespace__foreach_div__self_TensorList_scalars_ArrayRefdouble <- function(self, scalars) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_div__self_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, scalars))
 }
 
-cpp_torch_namespace__foreach_mul_scalar_list_tensors_TensorList_scalars_ArrayRefdouble <- function(tensors, scalars) {
-    .Call('_torch_cpp_torch_namespace__foreach_mul_scalar_list_tensors_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', tensors, scalars)
+cpp_torch_namespace__foreach_mul_tensors_TensorList_scalars_ArrayRefdouble <- function(tensors, scalars) {
+    .Call('_torch_cpp_torch_namespace__foreach_mul_tensors_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', tensors, scalars)
 }
 
-cpp_torch_namespace__foreach_mul_scalar_list__self_TensorList_scalars_ArrayRefdouble <- function(self, scalars) {
-    invisible(.Call('_torch_cpp_torch_namespace__foreach_mul_scalar_list__self_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, scalars))
+cpp_torch_namespace__foreach_mul__self_TensorList_scalars_ArrayRefdouble <- function(self, scalars) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_mul__self_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, scalars))
 }
 
 cpp_torch_namespace__foreach_exp_tensors_TensorList <- function(tensors) {
     .Call('_torch_cpp_torch_namespace__foreach_exp_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_zero__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_zero__self_TensorList', PACKAGE = 'torchpkg', self))
 }
 
 cpp_torch_namespace__foreach_exp__self_TensorList <- function(self) {
@@ -7433,6 +7969,214 @@ cpp_torch_namespace__foreach_sqrt__self_TensorList <- function(self) {
     invisible(.Call('_torch_cpp_torch_namespace__foreach_sqrt__self_TensorList', PACKAGE = 'torchpkg', self))
 }
 
+cpp_torch_namespace__foreach_abs_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_abs_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_abs__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_abs__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_acos_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_acos_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_acos__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_acos__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_asin_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_asin_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_asin__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_asin__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_atan_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_atan_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_atan__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_atan__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_ceil_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_ceil_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_ceil__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_ceil__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_cos_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_cos_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_cos__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_cos__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_cosh_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_cosh_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_cosh__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_cosh__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_erf_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_erf_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_erf__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_erf__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_erfc_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_erfc_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_erfc__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_erfc__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_expm1_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_expm1_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_expm1__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_expm1__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_floor_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_floor_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_floor__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_floor__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_log_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_log_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_log__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_log__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_log10_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_log10_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_log10__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_log10__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_log1p_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_log1p_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_log1p__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_log1p__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_log2_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_log2_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_log2__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_log2__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_neg_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_neg_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_neg__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_neg__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_tan_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_tan_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_tan__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_tan__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_tanh_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_tanh_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_tanh__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_tanh__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_sin_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_sin_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_sin__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_sin__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_sinh_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_sinh_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_sinh__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_sinh__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_round_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_round_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_round__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_round__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_lgamma_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_lgamma_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_lgamma__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_lgamma__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_frac_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_frac_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_frac__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_frac__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_reciprocal_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_reciprocal_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_reciprocal__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_reciprocal__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_sigmoid_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_sigmoid_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_sigmoid__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_sigmoid__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
+cpp_torch_namespace__foreach_trunc_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace__foreach_trunc_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace__foreach_trunc__self_TensorList <- function(self) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_trunc__self_TensorList', PACKAGE = 'torchpkg', self))
+}
+
 cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList <- function(self, tensor1, tensor2, value) {
     invisible(.Call('_torch_cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList', PACKAGE = 'torchpkg', self, tensor1, tensor2, value))
 }
@@ -7441,12 +8185,36 @@ cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2
     invisible(.Call('_torch_cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList', PACKAGE = 'torchpkg', self, tensor1, tensor2, value))
 }
 
+cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble <- function(self, tensor1, tensor2, scalars) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, tensor1, tensor2, scalars))
+}
+
+cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble <- function(self, tensor1, tensor2, scalars) {
+    invisible(.Call('_torch_cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', self, tensor1, tensor2, scalars))
+}
+
 cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList <- function(input, tensor1, tensor2, value) {
     .Call('_torch_cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList', PACKAGE = 'torchpkg', input, tensor1, tensor2, value)
 }
 
 cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList <- function(input, tensor1, tensor2, value) {
     .Call('_torch_cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList', PACKAGE = 'torchpkg', input, tensor1, tensor2, value)
+}
+
+cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble <- function(input, tensor1, tensor2, scalars) {
+    .Call('_torch_cpp_torch_namespace__foreach_addcdiv_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', input, tensor1, tensor2, scalars)
+}
+
+cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble <- function(input, tensor1, tensor2, scalars) {
+    .Call('_torch_cpp_torch_namespace__foreach_addcmul_input_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefdouble', PACKAGE = 'torchpkg', input, tensor1, tensor2, scalars)
+}
+
+cpp_torch_namespace__foreach_maximum_tensors1_TensorList_tensors2_TensorList <- function(tensors1, tensors2) {
+    .Call('_torch_cpp_torch_namespace__foreach_maximum_tensors1_TensorList_tensors2_TensorList', PACKAGE = 'torchpkg', tensors1, tensors2)
+}
+
+cpp_torch_namespace__foreach_minimum_tensors1_TensorList_tensors2_TensorList <- function(tensors1, tensors2) {
+    .Call('_torch_cpp_torch_namespace__foreach_minimum_tensors1_TensorList_tensors2_TensorList', PACKAGE = 'torchpkg', tensors1, tensors2)
 }
 
 cpp_torch_namespace__mode_self_Tensor <- function(self, dim, keepdim) {
@@ -7641,12 +8409,8 @@ cpp_torch_namespace_elu_self_Tensor <- function(self, alpha, scale, input_scale)
     .Call('_torch_cpp_torch_namespace_elu_self_Tensor', PACKAGE = 'torchpkg', self, alpha, scale, input_scale)
 }
 
-cpp_torch_namespace_elu_backward_out_grad_input_Tensor_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor <- function(grad_input, grad_output, alpha, scale, input_scale, output) {
-    .Call('_torch_cpp_torch_namespace_elu_backward_out_grad_input_Tensor_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor', PACKAGE = 'torchpkg', grad_input, grad_output, alpha, scale, input_scale, output)
-}
-
-cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor <- function(grad_output, alpha, scale, input_scale, output) {
-    .Call('_torch_cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_output_Tensor', PACKAGE = 'torchpkg', grad_output, alpha, scale, input_scale, output)
+cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor <- function(grad_output, alpha, scale, input_scale, is_result, self_or_result) {
+    .Call('_torch_cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor', PACKAGE = 'torchpkg', grad_output, alpha, scale, input_scale, is_result, self_or_result)
 }
 
 cpp_torch_namespace_elu__self_Tensor <- function(self, alpha, scale, input_scale) {
@@ -8413,6 +9177,14 @@ cpp_torch_namespace_col2im_backward_grad_output_Tensor_kernel_size_IntArrayRef_d
     .Call('_torch_cpp_torch_namespace_col2im_backward_grad_output_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef', PACKAGE = 'torchpkg', grad_output, kernel_size, dilation, padding, stride)
 }
 
+cpp_torch_namespace_column_stack_tensors_TensorList <- function(tensors) {
+    .Call('_torch_cpp_torch_namespace_column_stack_tensors_TensorList', PACKAGE = 'torchpkg', tensors)
+}
+
+cpp_torch_namespace_column_stack_out_out_Tensor_tensors_TensorList <- function(out, tensors) {
+    .Call('_torch_cpp_torch_namespace_column_stack_out_out_Tensor_tensors_TensorList', PACKAGE = 'torchpkg', out, tensors)
+}
+
 cpp_torch_namespace_im2col_out_out_Tensor_self_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef <- function(out, self, kernel_size, dilation, padding, stride) {
     .Call('_torch_cpp_torch_namespace_im2col_out_out_Tensor_self_Tensor_kernel_size_IntArrayRef_dilation_IntArrayRef_padding_IntArrayRef_stride_IntArrayRef', PACKAGE = 'torchpkg', out, self, kernel_size, dilation, padding, stride)
 }
@@ -8465,44 +9237,144 @@ cpp_torch_namespace_fft_fft_self_Tensor <- function(self, n, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_fft_self_Tensor', PACKAGE = 'torchpkg', self, n, dim, norm)
 }
 
+cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor <- function(out, self, n, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, n, dim, norm)
+}
+
 cpp_torch_namespace_fft_ifft_self_Tensor <- function(self, n, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_ifft_self_Tensor', PACKAGE = 'torchpkg', self, n, dim, norm)
+}
+
+cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor <- function(out, self, n, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, n, dim, norm)
 }
 
 cpp_torch_namespace_fft_rfft_self_Tensor <- function(self, n, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_rfft_self_Tensor', PACKAGE = 'torchpkg', self, n, dim, norm)
 }
 
+cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor <- function(out, self, n, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, n, dim, norm)
+}
+
 cpp_torch_namespace_fft_irfft_self_Tensor <- function(self, n, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_irfft_self_Tensor', PACKAGE = 'torchpkg', self, n, dim, norm)
+}
+
+cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor <- function(out, self, n, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, n, dim, norm)
 }
 
 cpp_torch_namespace_fft_hfft_self_Tensor <- function(self, n, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_hfft_self_Tensor', PACKAGE = 'torchpkg', self, n, dim, norm)
 }
 
+cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor <- function(out, self, n, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, n, dim, norm)
+}
+
 cpp_torch_namespace_fft_ihfft_self_Tensor <- function(self, n, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_ihfft_self_Tensor', PACKAGE = 'torchpkg', self, n, dim, norm)
+}
+
+cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor <- function(out, self, n, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, n, dim, norm)
+}
+
+cpp_torch_namespace_fft_fft2_self_Tensor <- function(self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_fft2_self_Tensor', PACKAGE = 'torchpkg', self, s, dim, norm)
+}
+
+cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor <- function(out, self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, s, dim, norm)
+}
+
+cpp_torch_namespace_fft_ifft2_self_Tensor <- function(self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_ifft2_self_Tensor', PACKAGE = 'torchpkg', self, s, dim, norm)
+}
+
+cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor <- function(out, self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, s, dim, norm)
+}
+
+cpp_torch_namespace_fft_rfft2_self_Tensor <- function(self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_rfft2_self_Tensor', PACKAGE = 'torchpkg', self, s, dim, norm)
+}
+
+cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor <- function(out, self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, s, dim, norm)
+}
+
+cpp_torch_namespace_fft_irfft2_self_Tensor <- function(self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_irfft2_self_Tensor', PACKAGE = 'torchpkg', self, s, dim, norm)
+}
+
+cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor <- function(out, self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, s, dim, norm)
 }
 
 cpp_torch_namespace_fft_fftn_self_Tensor <- function(self, s, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_fftn_self_Tensor', PACKAGE = 'torchpkg', self, s, dim, norm)
 }
 
+cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor <- function(out, self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, s, dim, norm)
+}
+
 cpp_torch_namespace_fft_ifftn_self_Tensor <- function(self, s, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_ifftn_self_Tensor', PACKAGE = 'torchpkg', self, s, dim, norm)
+}
+
+cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor <- function(out, self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, s, dim, norm)
 }
 
 cpp_torch_namespace_fft_rfftn_self_Tensor <- function(self, s, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_rfftn_self_Tensor', PACKAGE = 'torchpkg', self, s, dim, norm)
 }
 
+cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor <- function(out, self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, s, dim, norm)
+}
+
 cpp_torch_namespace_fft_irfftn_self_Tensor <- function(self, s, dim, norm) {
     .Call('_torch_cpp_torch_namespace_fft_irfftn_self_Tensor', PACKAGE = 'torchpkg', self, s, dim, norm)
 }
 
-cpp_torch_namespace_fft_self_Tensor_signal_ndim_int64_t <- function(self, signal_ndim, normalized) {
-    .Call('_torch_cpp_torch_namespace_fft_self_Tensor_signal_ndim_int64_t', PACKAGE = 'torchpkg', self, signal_ndim, normalized)
+cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor <- function(out, self, s, dim, norm) {
+    .Call('_torch_cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, s, dim, norm)
+}
+
+cpp_torch_namespace_fft_fftfreq_n_int64_t <- function(n, d, options) {
+    .Call('_torch_cpp_torch_namespace_fft_fftfreq_n_int64_t', PACKAGE = 'torchpkg', n, d, options)
+}
+
+cpp_torch_namespace_fft_fftfreq_out_out_Tensor_n_int64_t <- function(out, n, d) {
+    .Call('_torch_cpp_torch_namespace_fft_fftfreq_out_out_Tensor_n_int64_t', PACKAGE = 'torchpkg', out, n, d)
+}
+
+cpp_torch_namespace_fft_rfftfreq_n_int64_t <- function(n, d, options) {
+    .Call('_torch_cpp_torch_namespace_fft_rfftfreq_n_int64_t', PACKAGE = 'torchpkg', n, d, options)
+}
+
+cpp_torch_namespace_fft_rfftfreq_out_out_Tensor_n_int64_t <- function(out, n, d) {
+    .Call('_torch_cpp_torch_namespace_fft_rfftfreq_out_out_Tensor_n_int64_t', PACKAGE = 'torchpkg', out, n, d)
+}
+
+cpp_torch_namespace_fft_fftshift_self_Tensor <- function(self, dim) {
+    .Call('_torch_cpp_torch_namespace_fft_fftshift_self_Tensor', PACKAGE = 'torchpkg', self, dim)
+}
+
+cpp_torch_namespace_fft_ifftshift_self_Tensor <- function(self, dim) {
+    .Call('_torch_cpp_torch_namespace_fft_ifftshift_self_Tensor', PACKAGE = 'torchpkg', self, dim)
+}
+
+cpp_torch_namespace_linalg_cholesky_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_namespace_linalg_cholesky_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor <- function(out, self) {
+    .Call('_torch_cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self)
 }
 
 cpp_torch_namespace_linalg_det_self_Tensor <- function(self) {
@@ -8511,6 +9383,54 @@ cpp_torch_namespace_linalg_det_self_Tensor <- function(self) {
 
 cpp_torch_namespace_det_self_Tensor <- function(self) {
     .Call('_torch_cpp_torch_namespace_det_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_namespace_linalg_slogdet_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_namespace_linalg_slogdet_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_namespace_linalg_slogdet_out_sign_Tensor_logabsdet_Tensor_self_Tensor <- function(sign, logabsdet, self) {
+    .Call('_torch_cpp_torch_namespace_linalg_slogdet_out_sign_Tensor_logabsdet_Tensor_self_Tensor', PACKAGE = 'torchpkg', sign, logabsdet, self)
+}
+
+cpp_torch_namespace__syevd_helper_self_Tensor_compute_eigenvectors_bool_uplo_stdstring <- function(self, compute_eigenvectors, uplo) {
+    .Call('_torch_cpp_torch_namespace__syevd_helper_self_Tensor_compute_eigenvectors_bool_uplo_stdstring', PACKAGE = 'torchpkg', self, compute_eigenvectors, uplo)
+}
+
+cpp_torch_namespace_linalg_eigh_self_Tensor <- function(self, UPLO) {
+    .Call('_torch_cpp_torch_namespace_linalg_eigh_self_Tensor', PACKAGE = 'torchpkg', self, UPLO)
+}
+
+cpp_torch_namespace_linalg_eigh_out_eigvals_Tensor_eigvecs_Tensor_self_Tensor <- function(eigvals, eigvecs, self, UPLO) {
+    .Call('_torch_cpp_torch_namespace_linalg_eigh_out_eigvals_Tensor_eigvecs_Tensor_self_Tensor', PACKAGE = 'torchpkg', eigvals, eigvecs, self, UPLO)
+}
+
+cpp_torch_namespace_linalg_eigvalsh_self_Tensor <- function(self, UPLO) {
+    .Call('_torch_cpp_torch_namespace_linalg_eigvalsh_self_Tensor', PACKAGE = 'torchpkg', self, UPLO)
+}
+
+cpp_torch_namespace_linalg_eigvalsh_out_out_Tensor_self_Tensor <- function(out, self, UPLO) {
+    .Call('_torch_cpp_torch_namespace_linalg_eigvalsh_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, UPLO)
+}
+
+cpp_torch_namespace__linalg_inv_out_helper__self_Tensor_infos_lu_Tensor_infos_getri_Tensor <- function(self, infos_lu, infos_getri) {
+    .Call('_torch_cpp_torch_namespace__linalg_inv_out_helper__self_Tensor_infos_lu_Tensor_infos_getri_Tensor', PACKAGE = 'torchpkg', self, infos_lu, infos_getri)
+}
+
+cpp_torch_namespace_linalg_inv_self_Tensor <- function(self) {
+    .Call('_torch_cpp_torch_namespace_linalg_inv_self_Tensor', PACKAGE = 'torchpkg', self)
+}
+
+cpp_torch_namespace_linalg_inv_out_out_Tensor_self_Tensor <- function(out, self) {
+    .Call('_torch_cpp_torch_namespace_linalg_inv_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self)
+}
+
+cpp_torch_namespace_inner_self_Tensor_other_Tensor <- function(self, other) {
+    .Call('_torch_cpp_torch_namespace_inner_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other)
+}
+
+cpp_torch_namespace_inner_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other) {
+    .Call('_torch_cpp_torch_namespace_inner_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other)
 }
 
 cpp_torch_namespace_outer_self_Tensor_vec2_Tensor <- function(self, vec2) {
@@ -8543,6 +9463,94 @@ cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor <- function(out, self
 
 cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring <- function(out, self, ord, dim, keepdim, dtype) {
     .Call('_torch_cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring', PACKAGE = 'torchpkg', out, self, ord, dim, keepdim, dtype)
+}
+
+cpp_torch_namespace_linalg_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor <- function(U, S, V, self, full_matrices, compute_uv) {
+    .Call('_torch_cpp_torch_namespace_linalg_svd_out_U_Tensor_S_Tensor_V_Tensor_self_Tensor', PACKAGE = 'torchpkg', U, S, V, self, full_matrices, compute_uv)
+}
+
+cpp_torch_namespace_linalg_svd_self_Tensor <- function(self, full_matrices, compute_uv) {
+    .Call('_torch_cpp_torch_namespace_linalg_svd_self_Tensor', PACKAGE = 'torchpkg', self, full_matrices, compute_uv)
+}
+
+cpp_torch_namespace_linalg_cond_self_Tensor <- function(self, p) {
+    .Call('_torch_cpp_torch_namespace_linalg_cond_self_Tensor', PACKAGE = 'torchpkg', self, p)
+}
+
+cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor <- function(out, self, p) {
+    .Call('_torch_cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, p)
+}
+
+cpp_torch_namespace_linalg_cond_self_Tensor_p_stdstring <- function(self, p) {
+    .Call('_torch_cpp_torch_namespace_linalg_cond_self_Tensor_p_stdstring', PACKAGE = 'torchpkg', self, p)
+}
+
+cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_stdstring <- function(out, self, p) {
+    .Call('_torch_cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_stdstring', PACKAGE = 'torchpkg', out, self, p)
+}
+
+cpp_torch_namespace_linalg_pinv_self_Tensor <- function(self, rcond, hermitian) {
+    .Call('_torch_cpp_torch_namespace_linalg_pinv_self_Tensor', PACKAGE = 'torchpkg', self, rcond, hermitian)
+}
+
+cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_Tensor <- function(self, rcond, hermitian) {
+    .Call('_torch_cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_Tensor', PACKAGE = 'torchpkg', self, rcond, hermitian)
+}
+
+cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor <- function(out, self, rcond, hermitian) {
+    .Call('_torch_cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, rcond, hermitian)
+}
+
+cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor <- function(out, self, rcond, hermitian) {
+    .Call('_torch_cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor', PACKAGE = 'torchpkg', out, self, rcond, hermitian)
+}
+
+cpp_torch_namespace__linalg_solve_out_helper__self_Tensor_other_Tensor_infos_Tensor <- function(self, other, infos) {
+    .Call('_torch_cpp_torch_namespace__linalg_solve_out_helper__self_Tensor_other_Tensor_infos_Tensor', PACKAGE = 'torchpkg', self, other, infos)
+}
+
+cpp_torch_namespace_linalg_solve_input_Tensor_other_Tensor <- function(input, other) {
+    .Call('_torch_cpp_torch_namespace_linalg_solve_input_Tensor_other_Tensor', PACKAGE = 'torchpkg', input, other)
+}
+
+cpp_torch_namespace_linalg_solve_out_out_Tensor_input_Tensor_other_Tensor <- function(out, input, other) {
+    .Call('_torch_cpp_torch_namespace_linalg_solve_out_out_Tensor_input_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, input, other)
+}
+
+cpp_torch_namespace_linalg_tensorinv_self_Tensor <- function(self, ind) {
+    .Call('_torch_cpp_torch_namespace_linalg_tensorinv_self_Tensor', PACKAGE = 'torchpkg', self, ind)
+}
+
+cpp_torch_namespace_linalg_tensorinv_out_out_Tensor_self_Tensor <- function(out, self, ind) {
+    .Call('_torch_cpp_torch_namespace_linalg_tensorinv_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, ind)
+}
+
+cpp_torch_namespace_linalg_tensorsolve_self_Tensor_other_Tensor <- function(self, other, dims) {
+    .Call('_torch_cpp_torch_namespace_linalg_tensorsolve_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', self, other, dims)
+}
+
+cpp_torch_namespace_linalg_tensorsolve_out_out_Tensor_self_Tensor_other_Tensor <- function(out, self, other, dims) {
+    .Call('_torch_cpp_torch_namespace_linalg_tensorsolve_out_out_Tensor_self_Tensor_other_Tensor', PACKAGE = 'torchpkg', out, self, other, dims)
+}
+
+cpp_torch_namespace_linalg_qr_self_Tensor <- function(self, mode) {
+    .Call('_torch_cpp_torch_namespace_linalg_qr_self_Tensor', PACKAGE = 'torchpkg', self, mode)
+}
+
+cpp_torch_namespace_linalg_qr_out_Q_Tensor_R_Tensor_self_Tensor <- function(Q, R, self, mode) {
+    .Call('_torch_cpp_torch_namespace_linalg_qr_out_Q_Tensor_R_Tensor_self_Tensor', PACKAGE = 'torchpkg', Q, R, self, mode)
+}
+
+cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_stdstring <- function(self, mode) {
+    .Call('_torch_cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_stdstring', PACKAGE = 'torchpkg', self, mode)
+}
+
+cpp_torch_namespace_linalg_matrix_rank_self_Tensor <- function(self, tol, hermitian) {
+    .Call('_torch_cpp_torch_namespace_linalg_matrix_rank_self_Tensor', PACKAGE = 'torchpkg', self, tol, hermitian)
+}
+
+cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor <- function(out, self, tol, hermitian) {
+    .Call('_torch_cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor', PACKAGE = 'torchpkg', out, self, tol, hermitian)
 }
 
 cpp_torch_namespace__test_serialization_subcmul_self_Tensor_other_Tensor <- function(self, other, alpha) {

@@ -7,7 +7,7 @@
 #' @export
 declarations <- function() {
 
-  version <- getOption("torchgen.version", default = "1.7.1")
+  version <- getOption("torchgen.version", default = "1.8.0")
   path <- getOption("torchgen.path")
 
   if (is.null(path)) {
@@ -17,7 +17,7 @@ declarations <- function() {
     )
   }
 
-  yaml::read_yaml(
+  decls <- yaml::read_yaml(
     file = path,
     eval.expr = FALSE,
     handlers = list(
@@ -27,6 +27,13 @@ declarations <- function() {
     )
   )
 
+  # patch declarations for stride to include the int
+  index <- which(map_lgl(decls, ~.x$name == "stride"))[1]
+  s <- decls[[index]]
+  s$method_of <- c(s$method_of, "Tensor")
+  decls[[index]] <- s
+
+  decls
 }
 
 #' Get all tensor methods from Declarations.yaml
@@ -42,12 +49,22 @@ namespace_methods <- memoise::memoise(function() {
     purrr::keep(~"namespace" %in% .x$method_of)
 })
 
-clean_names <- torch:::clean_names
+clean_chars <- c("'", "\"", "%", "#", ":", ">", "<", ",", " ", "*", "&")
+
+clean_names <- function(x) {
+  torch:::cpp_clean_names(x, clean_chars)
+}
+
+#clean_names <- torch:::clean_names
 
 make_cpp_function_name <- function(method_name, arg_types, type) {
 
   if (length(arg_types) == 0)
     return(method_name)
 
-  torch:::make_cpp_function_name(method_name, unlist(arg_types), type)
+  make_cpp_function_name2(method_name, unlist(arg_types), type)
+}
+
+make_cpp_function_name2 <- function(method_name, arg_types, type) {
+  torch:::cpp_make_function_name(method_name, names(arg_types), arg_types, type, clean_chars)
 }

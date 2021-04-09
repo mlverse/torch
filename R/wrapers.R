@@ -514,3 +514,39 @@ torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
    
   value_error("Please report a bug report in GitHub")
 }
+
+#' @rdname torch_polygamma
+torch_polygamma <- function(n, input) {
+  input <- input$clone()
+  input$polygamma_(n = n)
+  input
+}
+
+#' @rdname torch_fft_fft 
+torch_fft_fft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+  if (is.null(norm))
+    norm <- "backward"
+  .torch_fft_fft(self = self, n = n, dim = dim, norm = norm)
+}
+
+#' @rdname torch_fft_ifft
+torch_fft_ifft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+  if (is.null(norm))
+    norm <- "backward"
+  .torch_fft_ifft(self = self, n = n, dim = dim, norm = norm)
+}
+
+#' @rdname torch_fft_rfft 
+torch_fft_rfft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+  if (is.null(norm))
+    norm <- "backward"
+  .torch_fft_rfft(self = self, n = n, dim = dim, norm = norm)
+}
+
+#' @rdname torch_fft_irfft
+torch_fft_irfft <- function(self, n = NULL, dim = -1L, norm = NULL) {
+  if (is.null(norm))
+    norm <- "backward"
+  .torch_fft_irfft(self = self, n = n, dim = dim, norm = norm)
+}
+

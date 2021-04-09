@@ -134,6 +134,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             type = "std::vector<torch::Tensor>";
         }
+        else if (type == "const c10::List<c10::optional<Tensor>> &")
+        {
+            type = "c10::List<c10::optional<torch::Tensor>>";
+        }
         else if (type == "DimnameList")
         {
             type = "std::vector<torch::Dimname>";
@@ -142,11 +146,16 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             type = "std::shared_ptr<torch::Generator>";
         }
+        else if (type == "Stream")
+        {
+            type = "at::Stream";
+        }
 
         // add optional call if required
         std::string call = node[idx]["name"].as<std::string>();
         if ((dtype.find("c10::optional") != std::string::npos) & 
-            (type != "std::vector<torch::Dimname>")
+            (type != "std::vector<torch::Dimname>") &
+            (type != "c10::List<c10::optional<torch::Tensor>>")
             )
         {
             if ((type != "double") & 
@@ -341,8 +350,15 @@ int main(int argc, char *argv[])
 
         calls = "";
         functionCall = "";
-        if (hasMethodOf(config[idx], "Tensor"))
+        if (hasMethodOf(config[idx], "Tensor") || name == "stride")
         {
+
+            if (name == "stride" && function == "stride_tensor_intt")
+            {
+                std::cout << "writing stride \n";
+                std::cout << function << std::endl;
+            }
+
             headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_" + function + ")(" + arguments + ");");
             headers.push_back("  HOST_API void* lantern_Tensor_" + function + "(" + arguments + ") { void* ret = _lantern_Tensor_" + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");
   
@@ -356,6 +372,12 @@ int main(int argc, char *argv[])
                                function == "true_divide__tensor_scalar" ||
                                function == "true_divide_tensor_tensor" ||
                                function == "true_divide__tensor_tensor";
+
+            if (name == "stride" && function == "stride_tensor_intt")
+            {
+                std::cout << "writing stride \n";
+                std::cout << function << std::endl;
+            }
 
             bodies.push_back("void* _lantern_Tensor_" + function + "(" + arguments + ")");
             bodies.push_back("{");
@@ -408,7 +430,7 @@ int main(int argc, char *argv[])
             symbols.push_back("  LOAD_SYMBOL(_lantern_" + toFunction(name, config[idx]["arguments"]) + ")");
         }
 
-        if (hasMethodOf(config[idx], "Tensor"))
+        if (hasMethodOf(config[idx], "Tensor") || name == "stride")
         {
             symbols.push_back("  LOAD_SYMBOL(_lantern_Tensor_" + toFunction(name, config[idx]["arguments"]) + ")");
         }

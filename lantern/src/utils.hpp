@@ -7,9 +7,8 @@ private:
   T _object;
 
 public:
-  LanternObject(T object)
+  LanternObject(T object) : _object(std::forward<T>(object))
   {
-    _object = object;
   }
 
   LanternObject()

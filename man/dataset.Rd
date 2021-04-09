@@ -42,3 +42,14 @@ and the default options of \code{\link[=dataloader]{dataloader()}}.
 sampler that yields integral indices.  To make it work with a map-style
 dataset with non-integral indices/keys, a custom sampler must be provided.
 }
+\section{Get a batch of observations}{
+
+
+By default datasets are iterated by returning each observation/item individually.
+Sometimes it's possible to have an optimized implementation to take a batch
+of observations (eg, subsetting a tensor by multiple indexes at once is faster than
+subsetting once for each index), in this case you can implement a \code{.getbatch} method
+that will be used instead of \code{.getitem} when getting a batch of observations within
+the dataloader.
+}
+

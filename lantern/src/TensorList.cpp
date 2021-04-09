@@ -15,11 +15,34 @@ void *_lantern_TensorList()
     LANTERN_FUNCTION_END
 }
 
+void* _lantern_OptionalTensorList ()
+{
+    LANTERN_FUNCTION_START
+    return (void*) new LanternObject<c10::List<c10::optional<torch::Tensor>>>();
+    LANTERN_FUNCTION_END
+}
+
 void _lantern_TensorList_push_back(void *self, void *x)
 {
     LANTERN_FUNCTION_START
     torch::Tensor ten = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
     reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(self)->get().push_back(ten);
+    LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_OptionalTensorList_push_back (void* self, void* x, bool is_null)
+{
+    LANTERN_FUNCTION_START
+    c10::optional<torch::Tensor> tensor;
+    if (is_null)
+    {
+        tensor = c10::nullopt;
+    }
+    else
+    {
+        tensor = reinterpret_cast<LanternObject<torch::Tensor>*>(x)->get();
+    }
+    reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().push_back(tensor);
     LANTERN_FUNCTION_END_VOID
 }
 
@@ -36,4 +59,10 @@ int64_t _lantern_TensorList_size(void *self)
     LANTERN_FUNCTION_START
     return reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(self)->get().size();
     LANTERN_FUNCTION_END_RET(0)
+}
+
+void* _lantern_Stream ()
+{
+    c10::Stream x = c10::Stream(c10::Stream::Default(),torch::Device(torch::DeviceType::CPU));
+    return (void*) new LanternObject<c10::Stream>(x);
 }

@@ -112,7 +112,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "dequantize", "kaiser_window", "vander",
                    "movedim", "argsort", "norm",
                    "argmax", "argmin", "one_hot", "split",
-                   "nonzero"
+                   "nonzero", "fft_fft", "fft_ifft", "fft_rfft", "fft_irfft"
                    )
 
 internal_funs <- c(internal_funs, creation_ops)
@@ -171,8 +171,17 @@ r_argument_default <- function(default) {
   if (default == "{0,1}")
     return("c(0,1)")
 
+  if (default == "{-2,-1}")
+    return("c(-2,-1)")
+
+  if (default == "\"L\"")
+    return("\"L\"")
+
   if (default == "at::kLong")
     return("torch_long()")
+
+  if (default == "\"reduced\"")
+    return("\"reduced\"")
 
   browser()
 }
@@ -354,11 +363,11 @@ r_method <- function(decls) {
 
 }
 
-internal_methods <- c("backward", "retain_grad", "size", "to", "stride",
+internal_methods <- c("_backward", "retain_grad", "size", "to", "stride",
                       "copy_", "topk", "scatter_", "scatter", "rename",
                       "rename_", "narrow", "narrow_copy", "is_leaf", "max",
                       "min", "argsort", "argmax", "argmin", "norm", "split",
-                      "nonzero", "nonzero_numpy")
+                      "nonzero", "nonzero_numpy", "view")
 
 r_method_env <- function(decls) {
   if (decls[[1]]$name %in% internal_methods)
@@ -369,6 +378,8 @@ r_method_env <- function(decls) {
 
 r_method_name <- function(decls) {
   name <- decls[[1]]$name
+  # if (name == "stride")
+  #   browser()
 
   if (name %in% internal_methods)
     name <- paste0("_", name)
@@ -413,6 +424,7 @@ r_method_body <- function(decls) {
 r <- function(path) {
 
   namespace <- declarations() %>%
+    purrr::discard(~.x$name %in% SKIP_R_BINDIND[!SKIP_R_BINDIND %in% internal_funs]) %>%
     purrr::keep(~"namespace" %in% .x$method_of)
 
   namespace_nms <- purrr::map_chr(namespace, ~.x$name)
@@ -429,6 +441,7 @@ r <- function(path) {
   writeLines(namespace_code, file.path(path, "/R/gen-namespace.R"))
 
   methods <- declarations() %>%
+    purrr::discard(~.x$name %in% SKIP_R_BINDIND[!SKIP_R_BINDIND %in% internal_methods]) %>%
     purrr::keep(~"Tensor" %in% .x$method_of)
 
   methods_nms <- purrr::map_chr(methods, ~.x$name)

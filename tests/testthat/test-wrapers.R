@@ -314,3 +314,13 @@ test_that("normal works", {
   expect_error(torch_normal(1, torch_zeros(2), dtype = torch_float64()), class = "value_error")
   
 })
+
+test_that("polygamma works", {
+  a <- torch_tensor(c(1, 0.5))
+  r <- torch_polygamma(1, a)
+  expect_equal_to_r(a, c(1, 0.5))
+  expect_equal_to_r(r, c(1.64493405818939, 4.93480205535889))
+})
+
+
+

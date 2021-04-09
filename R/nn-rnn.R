@@ -24,6 +24,7 @@ nn_rnn_base <- nn_module(
     self$batch_first <- batch_first
     self$dropout <- dropout
     self$bidirectional <- bidirectional
+    self$proj_size <- 0 #TODO: add support for proj_size.
     
     if (bidirectional)
       num_directions <- 2
@@ -156,7 +157,8 @@ nn_rnn_base <- nn_module(
           weight_arr = self$flat_weights_, weight_stride0 = num_weights, 
           input_size = self$input_size, mode = rnn.get_cudnn_mode(self$mode), 
           hidden_size = self$hidden_size, num_layers = self$num_layers, 
-          batch_first = self$batch_first, bidirectional = as.logical(self$bidirectional)
+          batch_first = self$batch_first, bidirectional = as.logical(self$bidirectional),
+          proj_size = self$proj_size
         )
       }
       
