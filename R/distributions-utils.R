@@ -30,8 +30,8 @@ broadcast_all <- function(values){
     for (v in values) {
       if (inherits(v, "torch_tensor")) {
         .options <- list(
-          dtype  = v.dtype,
-          device = v.device
+          dtype  = v$dtype,
+          device = v$device
         )
         break
       }
@@ -39,7 +39,7 @@ broadcast_all <- function(values){
     
     new_values <- 
       sapply(values, function(v){
-        if (inherits(v, "torch_Tensor"))
+        if (inherits(v, "torch_tensor"))
           v
         else
           do.call(torch_tensor, c(list(v), .options))
