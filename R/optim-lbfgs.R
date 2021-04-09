@@ -1,6 +1,264 @@
 #' @include optim.R
 NULL
 
+# Compute minimum of interpolating polynomial based on function and derivative values
+# ported from https://github.com/torch/optim/blob/master/polyinterp.lua
+.cubic_interpolate <-
+  function(x1, f1, g1, x2, f2, g2, bounds = NULL) {
+    # Compute bounds of interpolation area
+    if (!is.null(bounds)) {
+      xmin_bound <- bounds[1]
+      xmax_bound <- bounds[2]
+    } else if (x1 <= x2) {
+      xmin_bound <- x1
+      xmax_bound <- x2
+    } else {
+      xmin_bound <- x2
+      xmax_bound <- x1
+    }
+    
+    # Code for most common case: cubic interpolation of 2 points
+    #   w/ function and derivative values for both
+    # Solution in this case (where x2 is the farthest point):
+    #   d1 = g1 + g2 - 3*(f1-f2)/(x1-x2);
+    #   d2 = sqrt(d1^2 - g1*g2);
+    #   min_pos = x2 - (x2 - x1)*((g2 + d2 - d1)/(g2 - g1 + 2*d2));
+    #   t_new = min(max(min_pos,xmin_bound),xmax_bound);
+    d1 <- g1 + g2 - 3 * (f1 - f2) / (x1 - x2)
+    d2_square <- d1 ^ 2 - g1 * g2
+    if (d2_square >= 0) {
+      d2 <- sqrt(d2_square)
+      min_pos <- if (x1 <= x2) {
+        x2 - (x2 - x1) * ((g2 + d2 - d1) / (g2 - g1 + 2 * d2))
+      } else {
+        x1 - (x1 - x2) * ((g1 + d2 - d1) / (g1 - g2 + 2 * d2))
+      }
+      min(max(min_pos, xmin_bound), xmax_bound)
+    } else {
+      (xmin_bound + xmax_bound) / 2
+    }
+  }
+
+# ported from https://github.com/torch/optim/blob/master/lswolfe.lua
+#
+# Parameters:
+# - objfunc             a function (the objective) that takes as inputs the point of evaluation,
+#                         the step size, and the descent direction, and returns f(X) and df/dX
+# - x                   initial point / starting location
+# - t                   initial step size
+# - d                   descent direction
+# - f                   initial function value
+# - g                   gradient at initial location
+# - gtd                 directional derivative at starting location
+# - c1                  sufficient decrease parameter
+# - c2                  curvature parameter
+# - tolerance_change    minimum allowable step length
+# - max_ls              maximum nb of iterations
+# 
+# Return values:
+# - f                   function value at x+t*d
+# - g                   gradient value at x+t*d
+# - x                   the next x (=x+t*d)
+# - t                   the step length
+# - ls_func_evals       the number of function evaluations
+.strong_wolfe <- function(obj_func,
+                          x,
+                          t,
+                          d,
+                          f,
+                          g,
+                          gtd,
+                          c1 = 1e-4,
+                          c2 = 0.9,
+                          tolerance_change = 1e-9,
+                          max_ls = 25) {
+  
+  d_norm <- d$abs()$max()
+  g <- g$clone(memory_format = torch_contiguous_format())
+  # evaluate objective and gradient using initial step
+  ret <- obj_func(x, t, d)
+  f_new <- ret[[1]]
+  g_new <- ret[[2]]
+  ls_func_evals <- 1
+  gtd_new <- g_new$dot(d)
+  
+  # bracket an interval containing a point satisfying the Wolfe criteria
+  t_prev <- 0
+  f_prev <- f
+  g_prev <- g
+  gtd_prev <- gtd
+  done <- FALSE
+  ls_iter <- 0
+  while (ls_iter < max_ls) {
+    # check conditions
+    if ((f_new$item() > (f$item() + c1 * t * gtd$item())) ||
+        ((ls_iter > 1) && (f_new$item() >= f_prev$item()))) {
+      bracket <- c(t_prev, t)
+      bracket_f <- c(f_prev$item(), f_new$item())
+      bracket_g <- c(g_prev$item(), g_new$item())
+      bracket_gtd <- c(gtd_prev$item(), gtd_new$item())
+      cat("BREAK: f_new$item() > (f$item() + c1 * t * gtd$item())) ||", "\n")
+      break
+    }
+    
+    if (abs(gtd_new$item()) <= -c2 * gtd$item()) {
+      bracket <- c(t)
+      bracket_f <- c(f_new$item())
+      bracket_g <- c(g_new$item())
+      done <- TRUE
+      cat("BREAK: abs(gtd_new$item()) <= -c2 * gtd$item()", "\n")
+      break
+    }
+    
+    if (gtd_new$item() >= 0) {
+      bracket <- c(t_prev, t)
+      bracket_f <- c(f_prev$item(), f_new$item())
+      bracket_g <- c(g_prev$item(), g_new$item())
+      bracket_gtd <- c(gtd_prev$item(), gtd_new$item()) 
+      cat("BREAK: gtd_new$item() >= 0", "\n")
+      break
+    }
+    
+    # interpolate
+    min_step <- t + 0.01 * (t - t_prev)
+    max_step <- t * 10
+    tmp <- t
+    t <- .cubic_interpolate(t_prev,
+                            f_prev$item(),
+                            gtd_prev$item(),
+                            t,
+                            f_new$item(),
+                            gtd_new$item(),
+                            bounds = c(min_step, max_step))
+    
+    # next step
+    t_prev <- tmp
+    f_prev <- f_new
+    g_prev <- g_new$clone(memory_format = torch_contiguous_format())
+    gtd_prev <- gtd_new
+    ret <- obj_func(x, t, d)
+    f_new <- ret[[1]]
+    g_new <- ret[[2]]
+    ls_func_evals <- ls_func_evals + 1
+    gtd_new <- g_new$dot(d)
+    ls_iter <- ls_iter + 1
+    
+  }
+  
+  # reached max number of iterations?
+  if (ls_iter == max_ls) {
+    bracket <- c(0, t)
+    bracket_f <- c(f$item(), f_new$item())
+    bracket_g <- c(g$item(), g_new$item())
+  }
+  
+  # zoom phase: we now have a point satisfying the criteria, or
+  # a bracket around it. We refine the bracket until we find the
+  # exact point satisfying the criteria
+  insuf_progress <- FALSE
+  # find high and low points in bracket
+  if (bracket_f[1] <= bracket_f[length(bracket_f)]) { 
+    low_pos <- 1
+    high_pos <- 2
+  } else {
+    low_pos <- 2
+    high_pos <- 1
+  }
+  
+  while ((done != TRUE) && (ls_iter < max_ls)) {
+    # line-search bracket is so small
+    if (abs(bracket[2] - bracket[1]) * d_norm$item() < tolerance_change) {
+      cat("BREAK: abs(bracket[2] - bracket[1]) * d_norm$item() < tolerance_change", "\n")
+      break
+    }
+      
+    
+    # compute new trial value
+    t <-
+      .cubic_interpolate(bracket[1],
+                         bracket_f[1],
+                         bracket_gtd[1],
+                         bracket[2],
+                         bracket_f[2],
+                         bracket_gtd[2])
+    
+    # test that we are making sufficient progress:
+    # in case `t` is so close to boundary, we mark that we are making
+    # insufficient progress, and if
+    #   + we have made insufficient progress in the last step, or
+    #   + `t` is at one of the boundary,
+    # we will move `t` to a position which is `0.1 * len(bracket)`
+    # away from the nearest boundary point.
+    eps <- 0.1 * (max(bracket) - min(bracket))
+    if (min(max(bracket) - t, t - min(bracket)) < eps) {
+      # interpolation close to boundary
+      if ((insuf_progress == TRUE) ||
+          (t >= max(bracket)) || (t <= min(bracket))) {
+        # evaluate at 0.1 away from boundary
+        if (abs(t - max(bracket)) < abs(t - min(bracket))) {
+          t <- max(bracket) - eps
+        } else {
+          t <- min(bracket) + eps
+        }
+        insuf_progress <- FALSE
+      } else {
+        insuf_progress <- TRUE
+      }
+    } else {
+      insuf_progress <- FALSE
+    }
+    
+    # Evaluate new point
+    ret <- obj_func(x, t, d)
+    f_new <- ret[[1]]
+    g_new <- ret[[2]]
+    ls_func_evals <- ls_func_evals + 1
+    gtd_new <- g_new$dot(d)
+    ls_iter <- ls_iter + 1
+    
+    if ((f_new$item() > (f$item() + c1 * t * gtd$item())) ||
+        (f_new$item() >= bracket_f[low_pos])) {
+      # Armijo condition not satisfied or not lower than lowest point
+      bracket[high_pos] <- t
+      bracket_f[high_pos] <- f_new$item()
+      bracket_g[high_pos] <- g_new$item()
+      bracket_gtd[high_pos] <- gtd_new$item()
+      if (bracket_f[1] <= bracket_f[2]) {
+        low_pos <- 1
+        high_pos <- 2
+      } else {
+        low_pos <- 2
+        high_pos <- 1
+      }
+    } else {
+      if (abs(gtd_new$item()) <= -c2 * gtd$item()) {
+        # Wolfe conditions satisfied
+        done <- TRUE
+      } else if (gtd_new$item() * (bracket[high_pos] - bracket[low_pos]) >= 0) {
+        # old high becomes new low
+        bracket[high_pos] <- bracket[low_pos]
+        bracket_f[high_pos] <- bracket_f[low_pos]
+        bracket_g[high_pos] <- bracket_g[low_pos]
+        bracket_gtd[high_pos] <- bracket_gtd[low_pos]
+      }
+      
+      # new point becomes new low
+      bracket[low_pos] <- t
+      bracket_f[low_pos] <- f_new$item()
+      bracket_g[low_pos] <- g_new$item()
+      bracket_gtd[low_pos] <- gtd_new$item()
+    }
+    
+    # return stuff
+    t <- bracket[low_pos]
+    f_new <- torch_tensor(bracket_f[low_pos])
+    g_new <- torch_tensor(bracket_g[low_pos])
+    list(f_new, g_new, t, ls_func_evals)
+    
+  }
+}
+
+
 optim_LBFGS <- R6::R6Class(
   "optim_lbfgs", 
   lock_objects = FALSE,
@@ -183,8 +441,25 @@ optim_LBFGS <- R6::R6Class(
           ls_func_evals = 0
           
           if (!is.null(line_search_fn)) {
-            # perform line search, using user function
-            value_error("Not yet supported in R")
+            if (line_search_fn != "strong_wolfe") {
+              value_error("only strong_wolfe is supported")
+            } else {
+              x_init <- self$.clone_param()
+              
+              obj_func <- function(x, t, d) {
+                self$.directional_evaluate(closure_, x, t, d)
+              }
+              
+              ret <- strong_wolfe(obj_func, x_init, t, d, loss, flat_grad, gtd)
+              loss <- ret[[1]] 
+              flat_grad <- ret[[2]]
+              t <- ret[[3]]
+              ls_func_evals = ret[[4]]
+              
+              self$.add_grad(t, d)
+              opt_cond <- flat_grad$abs()$max()$item() <= tolerance_grad
+            }
+              
           } else {
             # no line search, simply move with fixed-step
             private$.add_grad(t, d)
