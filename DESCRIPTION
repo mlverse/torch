@@ -65,7 +65,6 @@ Collate:
     'distributions-exp-family.R'
     'distributions.R'
     'distributions-bernoulli.R'
-    'distributions-cauchy.R'
     'distributions-gamma.R'
     'distributions-chi2.R'
     'distributions-normal.R'
