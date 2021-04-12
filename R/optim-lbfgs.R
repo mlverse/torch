@@ -24,9 +24,9 @@ NULL
     #   d2 = sqrt(d1^2 - g1*g2);
     #   min_pos = x2 - (x2 - x1)*((g2 + d2 - d1)/(g2 - g1 + 2*d2));
     #   t_new = min(max(min_pos,xmin_bound),xmax_bound);
-    d1 <- g1 + g2 - 3 * (f1 - f2) / (x1 - x2)
+    d1 <- g1$item() + g2$item() - 3 * (f1 - f2) / (x1 - x2)
     d2_square <- d1 ^ 2 - g1 * g2
-    if (d2_square >= 0) {
+    if (d2_square$item() >= 0) {
       d2 <- sqrt(d2_square)
       min_pos <- if (x1 <= x2) {
         x2 - (x2 - x1) * ((g2 + d2 - d1) / (g2 - g1 + 2 * d2))
@@ -89,22 +89,23 @@ NULL
   gtd_prev <- gtd
   done <- FALSE
   ls_iter <- 0
+  done <- FALSE
   while (ls_iter < max_ls) {
     # check conditions
-    if ((f_new$item() > (f$item() + c1 * t * gtd$item())) ||
-        ((ls_iter > 1) && (f_new$item() >= f_prev$item()))) {
+    if ((f_new > (f + c1 * t * gtd$item())) ||
+        ((ls_iter > 1) && (f_new >= f_prev))) {
       bracket <- c(t_prev, t)
-      bracket_f <- c(f_prev$item(), f_new$item())
-      bracket_g <- c(g_prev$item(), g_new$item())
-      bracket_gtd <- c(gtd_prev$item(), gtd_new$item())
+      bracket_f <- c(f_prev, f_new)
+      bracket_g <- c(g_prev, g_new$clone(memory_format= torch_contiguous_format()))
+      bracket_gtd <- c(gtd_prev, gtd_new)
       cat("BREAK: f_new$item() > (f$item() + c1 * t * gtd$item())) ||", "\n")
       break
     }
     
     if (abs(gtd_new$item()) <= -c2 * gtd$item()) {
       bracket <- c(t)
-      bracket_f <- c(f_new$item())
-      bracket_g <- c(g_new$item())
+      bracket_f <- c(f_new)
+      bracket_g <- c(g_new)
       done <- TRUE
       cat("BREAK: abs(gtd_new$item()) <= -c2 * gtd$item()", "\n")
       break
@@ -124,11 +125,11 @@ NULL
     max_step <- t * 10
     tmp <- t
     t <- .cubic_interpolate(t_prev,
-                            f_prev$item(),
-                            gtd_prev$item(),
+                            f_prev,
+                            gtd_prev,
                             t,
-                            f_new$item(),
-                            gtd_new$item(),
+                            f_new,
+                            gtd_new,
                             bounds = c(min_step, max_step))
     
     # next step
@@ -148,8 +149,8 @@ NULL
   # reached max number of iterations?
   if (ls_iter == max_ls) {
     bracket <- c(0, t)
-    bracket_f <- c(f$item(), f_new$item())
-    bracket_g <- c(g$item(), g_new$item())
+    bracket_f <- c(f, f_new)
+    bracket_g <- c(g, g_new)
   }
   
   # zoom phase: we now have a point satisfying the criteria, or
@@ -157,7 +158,7 @@ NULL
   # exact point satisfying the criteria
   insuf_progress <- FALSE
   # find high and low points in bracket
-  if (bracket_f[1] <= bracket_f[length(bracket_f)]) { 
+  if (bracket_f[[1]] <= bracket_f[[length(bracket_f)]]) { 
     low_pos <- 1
     high_pos <- 2
   } else {
@@ -167,7 +168,7 @@ NULL
   
   while ((done != TRUE) && (ls_iter < max_ls)) {
     # line-search bracket is so small
-    if (abs(bracket[2] - bracket[1]) * d_norm$item() < tolerance_change) {
+    if (abs(bracket[[2]] - bracket[[1]]) * d_norm$item() < tolerance_change) {
       cat("BREAK: abs(bracket[2] - bracket[1]) * d_norm$item() < tolerance_change", "\n")
       break
     }
@@ -175,12 +176,13 @@ NULL
     
     # compute new trial value
     t <-
-      .cubic_interpolate(bracket[1],
-                         bracket_f[1],
-                         bracket_gtd[1],
-                         bracket[2],
-                         bracket_f[2],
-                         bracket_gtd[2])
+      .cubic_interpolate(bracket[[1]],
+                         bracket_f[[1]],
+                         bracket_gtd[[1]],
+                         bracket[[2]],
+                         bracket_f[[2]],
+                         bracket_gtd[[2]])
+    t <- as.numeric(t)
     
     # test that we are making sufficient progress:
     # in case `t` is so close to boundary, we mark that we are making
@@ -215,15 +217,16 @@ NULL
     ls_func_evals <- ls_func_evals + 1
     gtd_new <- g_new$dot(d)
     ls_iter <- ls_iter + 1
+
     
-    if ((f_new$item() > (f$item() + c1 * t * gtd$item())) ||
-        (f_new$item() >= bracket_f[low_pos])) {
+    if ((f_new > (f + c1 * t * gtd$item())) ||
+        (f_new >= bracket_f[[low_pos]])) {
       # Armijo condition not satisfied or not lower than lowest point
-      bracket[high_pos] <- t
-      bracket_f[high_pos] <- f_new$item()
-      bracket_g[high_pos] <- g_new$item()
-      bracket_gtd[high_pos] <- gtd_new$item()
-      if (bracket_f[1] <= bracket_f[2]) {
+      bracket[[high_pos]] <- t
+      bracket_f[[high_pos]] <- f_new
+      bracket_g[[high_pos]] <- g_new
+      bracket_gtd[[high_pos]] <- gtd_new
+      if (bracket_f[[1]] <= bracket_f[[2]]) {
         low_pos <- 1
         high_pos <- 2
       } else {
@@ -234,28 +237,30 @@ NULL
       if (abs(gtd_new$item()) <= -c2 * gtd$item()) {
         # Wolfe conditions satisfied
         done <- TRUE
-      } else if (gtd_new$item() * (bracket[high_pos] - bracket[low_pos]) >= 0) {
+      } else if (gtd_new$item() * (bracket[[high_pos]] - bracket[[low_pos]]) >= 0) {
         # old high becomes new low
-        bracket[high_pos] <- bracket[low_pos]
-        bracket_f[high_pos] <- bracket_f[low_pos]
-        bracket_g[high_pos] <- bracket_g[low_pos]
-        bracket_gtd[high_pos] <- bracket_gtd[low_pos]
+        bracket[[high_pos]] <- bracket[[low_pos]]
+        bracket_f[[high_pos]] <- bracket_f[[low_pos]]
+        bracket_g[[high_pos]] <- bracket_g[[low_pos]]
+        bracket_gtd[[high_pos]] <- bracket_gtd[[low_pos]]
       }
       
       # new point becomes new low
-      bracket[low_pos] <- t
-      bracket_f[low_pos] <- f_new$item()
-      bracket_g[low_pos] <- g_new$item()
-      bracket_gtd[low_pos] <- gtd_new$item()
+      bracket[[low_pos]] <- t
+      bracket_f[[low_pos]] <- f_new
+      bracket_g[[low_pos]] <- g_new
+      bracket_gtd[[low_pos]] <- gtd_new
     }
     
-    # return stuff
-    t <- bracket[low_pos]
-    f_new <- torch_tensor(bracket_f[low_pos])
-    g_new <- torch_tensor(bracket_g[low_pos])
-    list(f_new, g_new, t, ls_func_evals)
+   
     
   }
+  
+  # return stuff
+  t <- bracket[[low_pos]]
+  f_new <- torch_tensor(bracket_f[[low_pos]])
+  g_new <- bracket_g[[low_pos]]
+  list(f_new, g_new, t, ls_func_evals)
 }
 
 
@@ -444,19 +449,21 @@ optim_LBFGS <- R6::R6Class(
             if (line_search_fn != "strong_wolfe") {
               value_error("only strong_wolfe is supported")
             } else {
-              x_init <- self$.clone_param()
+            
+              x_init <- private$.clone_param()
               
               obj_func <- function(x, t, d) {
-                self$.directional_evaluate(closure_, x, t, d)
+                private$.directional_evaluate(closure_, x, t, d)
               }
               
-              ret <- strong_wolfe(obj_func, x_init, t, d, loss, flat_grad, gtd)
-              loss <- ret[[1]] 
+              ret <- .strong_wolfe(obj_func, x_init, t, d, loss, flat_grad, gtd)
+              
+              loss <- ret[[1]]$item() 
               flat_grad <- ret[[2]]
               t <- ret[[3]]
               ls_func_evals = ret[[4]]
               
-              self$.add_grad(t, d)
+              private$.add_grad(t, d)
               opt_cond <- flat_grad$abs()$max()$item() <= tolerance_grad
             }
               
