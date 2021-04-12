@@ -83,32 +83,13 @@ test_that("lbfgs works with strong wolfe", {
   optimizer <- optim_lbfgs(params, line_search_fn = "strong_wolfe")
   
   calc_loss <- function() {
-    flower <- function(x) {
-      torch_norm(x) + torch_sin(4 * torch_atan2(x[2], x[1]))
-    }
     optimizer$zero_grad()
     value <- flower(params)
     value$backward()
     value
   }
   
-  optimizer$step(calc_loss)
+  expect_tensor(optimizer$step(calc_loss))
 })
 
-test_that("strong wolfe works", {
-  torch_manual_seed(7)
-  
-  obj_func <- function(x, t, d) {
-    new_x <- x + t * d
-    list(new_x^2, 2 * new_x)
-  } 
-  
-  .strong_wolfe(obj_func,
-                x = torch_tensor(3),
-                t = 0.1,
-                d = torch_tensor(-1),
-                f = torch_tensor(9),
-                g = torch_tensor(6),
-                gtd = torch_tensor(-6))
-})
 
