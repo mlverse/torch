@@ -39,6 +39,7 @@ NULL
     }
   }
 
+
 # ported from https://github.com/torch/optim/blob/master/lswolfe.lua
 #
 # Parameters:
@@ -61,6 +62,16 @@ NULL
 # - x                   the next x (=x+t*d)
 # - t                   the step length
 # - ls_func_evals       the number of function evaluations
+#
+#
+#### Rationale ###
+# 1 (sufficient decrease / Armijo condition): 
+#    function value should decrease at least as a fraction of how it would decrease with seepest descent
+# 2 (curvature condition):
+#    gradient should not be too steep, or else we could hope for stronger decrease
+# 3 (strong Wolfe modification):
+#    gradient should not be too positive either
+#´
 .strong_wolfe <- function(obj_func,
                           x,
                           t,
@@ -82,41 +93,47 @@ NULL
   ls_func_evals <- 1
   gtd_new <- g_new$dot(d)
   
-  # bracket an interval containing a point satisfying the Wolfe criteria
+  # initial phase: find a solution point, or
+  # bracket an initial interval containing a point satisfying the strong Wolfe criteria
   t_prev <- 0
   f_prev <- f
   g_prev <- g
   gtd_prev <- gtd
-  done <- FALSE
   ls_iter <- 0
   done <- FALSE
+
   while (ls_iter < max_ls) {
-    # check conditions
-    if ((f_new > (f + c1 * t * gtd$item())) ||
-        ((ls_iter > 1) && (f_new >= f_prev))) {
+    # sufficient decrease (Armijo) condition violated
+    # construct interval between previous (smaller) step size and current 
+    if ((f_new > f + c1 * t * gtd$item()) ||
+       (ls_iter > 1 && f_new >= f_prev)) {
       bracket <- c(t_prev, t)
       bracket_f <- c(f_prev, f_new)
       bracket_g <- c(g_prev, g_new$clone(memory_format= torch_contiguous_format()))
       bracket_gtd <- c(gtd_prev, gtd_new)
-      cat("BREAK: f_new$item() > (f$item() + c1 * t * gtd$item())) ||", "\n")
+      cat("Initial search: sufficient decrease condition violated", "\n")
       break
     }
     
+    # curvature condition satisfied (slope not too steep)
+    # return current parameters, no further zoom stage
     if (abs(gtd_new$item()) <= -c2 * gtd$item()) {
       bracket <- c(t)
       bracket_f <- c(f_new)
       bracket_g <- c(g_new)
       done <- TRUE
-      cat("BREAK: abs(gtd_new$item()) <= -c2 * gtd$item()", "\n")
+      cat("Initial search: strong Wolfe condition satisfied", "\n")
       break
     }
     
+    # curvature condition (strong Wolfe 2) violated (gradient positive)
+    # construct interval between previous (smaller) step size and current
     if (gtd_new$item() >= 0) {
       bracket <- c(t_prev, t)
-      bracket_f <- c(f_prev$item(), f_new$item())
-      bracket_g <- c(g_prev$item(), g_new$item())
-      bracket_gtd <- c(gtd_prev$item(), gtd_new$item()) 
-      cat("BREAK: gtd_new$item() >= 0", "\n")
+      bracket_f <- c(f_prev, f_new)
+      bracket_g <- c(g_prev, g_new$clone(memory_format= torch_contiguous_format()))
+      bracket_gtd <- c(gtd_prev, gtd_new) 
+      cat("Initial search: curvature condition violated (gradient positive)", "\n")
       break
     }
     
@@ -169,7 +186,7 @@ NULL
   while ((done != TRUE) && (ls_iter < max_ls)) {
     # line-search bracket is so small
     if (abs(bracket[[2]] - bracket[[1]]) * d_norm$item() < tolerance_change) {
-      cat("BREAK: abs(bracket[2] - bracket[1]) * d_norm$item() < tolerance_change", "\n")
+      cat("Zoom phase: bracket too small", "\n")
       break
     }
       
@@ -183,14 +200,11 @@ NULL
                          bracket_f[[2]],
                          bracket_gtd[[2]])
     t <- as.numeric(t)
-    
     # test that we are making sufficient progress:
-    # in case `t` is so close to boundary, we mark that we are making
-    # insufficient progress, and if
-    #   + we have made insufficient progress in the last step, or
-    #   + `t` is at one of the boundary,
-    # we will move `t` to a position which is `0.1 * len(bracket)`
-    # away from the nearest boundary point.
+    # in case t is too close to boundary, we mark that we are making insufficient progress,
+    # and if we have made insufficient progress in the last step,
+    # or t is at one of the boundaries,
+    # we will move t to a position which is `0.1 * len(bracket)` away from the nearest boundary point.
     eps <- 0.1 * (max(bracket) - min(bracket))
     if (min(max(bracket) - t, t - min(bracket)) < eps) {
       # interpolation close to boundary
@@ -218,10 +232,10 @@ NULL
     gtd_new <- g_new$dot(d)
     ls_iter <- ls_iter + 1
 
-    
+    # Armijo condition violated or not lower than lowest point
     if ((f_new > (f + c1 * t * gtd$item())) ||
         (f_new >= bracket_f[[low_pos]])) {
-      # Armijo condition not satisfied or not lower than lowest point
+      cat("Zoom phase: sufficient decrease condition violated", "\n")
       bracket[[high_pos]] <- t
       bracket_f[[high_pos]] <- f_new
       bracket_g[[high_pos]] <- g_new
@@ -234,9 +248,10 @@ NULL
         high_pos <- 1
       }
     } else {
+      # Wolfe conditions satisfied
       if (abs(gtd_new$item()) <= -c2 * gtd$item()) {
-        # Wolfe conditions satisfied
         done <- TRUE
+        cat("Zoom phase: strong Wolfe condition satisfied", "\n")
       } else if (gtd_new$item() * (bracket[[high_pos]] - bracket[[low_pos]]) >= 0) {
         # old high becomes new low
         bracket[[high_pos]] <- bracket[[low_pos]]
@@ -252,11 +267,8 @@ NULL
       bracket_gtd[[low_pos]] <- gtd_new
     }
     
-   
-    
   }
   
-  # return stuff
   t <- bracket[[low_pos]]
   f_new <- torch_tensor(bracket_f[[low_pos]])
   g_new <- bracket_g[[low_pos]]
