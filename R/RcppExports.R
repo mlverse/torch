@@ -121,6 +121,10 @@ cpp_backends_openmp_is_available <- function() {
     .Call('_torch_cpp_backends_openmp_is_available', PACKAGE = 'torchpkg')
 }
 
+cpp_arg_to_torch_type <- function(obj, expected_types, arg_name) {
+    .Call('_torch_cpp_arg_to_torch_type', PACKAGE = 'torchpkg', obj, expected_types, arg_name)
+}
+
 cpp_contrib_torch_sparsemax <- function(input, dim) {
     .Call('_torch_cpp_contrib_torch_sparsemax', PACKAGE = 'torchpkg', input, dim)
 }

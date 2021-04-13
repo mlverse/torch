@@ -188,7 +188,7 @@ call_c_function <- function(fun_name, args, expected_types, nd_args, return_type
   types <- character()
   
   for (nm in nd_args) {
-    type <- argument_to_torch_type(args[[nm]], expected_types[[nm]], nm)
+    type <- cpp_arg_to_torch_type(args[[nm]], expected_types[[nm]], nm)
     if (type != "Missing")
       types[[nm]] <- type
   }

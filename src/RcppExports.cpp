@@ -344,6 +344,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_arg_to_torch_type
+std::string cpp_arg_to_torch_type(SEXP obj, std::vector<std::string> expected_types, std::string arg_name);
+RcppExport SEXP _torch_cpp_arg_to_torch_type(SEXP objSEXP, SEXP expected_typesSEXP, SEXP arg_nameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type expected_types(expected_typesSEXP);
+    Rcpp::traits::input_parameter< std::string >::type arg_name(arg_nameSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_arg_to_torch_type(obj, expected_types, arg_name));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_contrib_torch_sparsemax
 Rcpp::XPtr<XPtrTorchTensor> cpp_contrib_torch_sparsemax(Rcpp::XPtr<XPtrTorchTensor> input, int dim);
 RcppExport SEXP _torch_cpp_contrib_torch_sparsemax(SEXP inputSEXP, SEXP dimSEXP) {
@@ -32502,6 +32515,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_backends_mkldnn_is_available", (DL_FUNC) &_torch_cpp_backends_mkldnn_is_available, 0},
     {"_torch_cpp_backends_mkl_is_available", (DL_FUNC) &_torch_cpp_backends_mkl_is_available, 0},
     {"_torch_cpp_backends_openmp_is_available", (DL_FUNC) &_torch_cpp_backends_openmp_is_available, 0},
+    {"_torch_cpp_arg_to_torch_type", (DL_FUNC) &_torch_cpp_arg_to_torch_type, 3},
     {"_torch_cpp_contrib_torch_sparsemax", (DL_FUNC) &_torch_cpp_contrib_torch_sparsemax, 2},
     {"_torch_cpp_cuda_is_available", (DL_FUNC) &_torch_cpp_cuda_is_available, 0},
     {"_torch_cpp_cuda_device_count", (DL_FUNC) &_torch_cpp_cuda_device_count, 0},
