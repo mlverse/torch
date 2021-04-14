@@ -152,3 +152,67 @@ std::string cpp_arg_to_torch_type (SEXP obj, std::vector<std::string> expected_t
   Rcpp::stop("Can't convert argument");
 }
 
+inline std::string cpp_suffix (std::vector<std::string> arg_names, std::vector<std::string> arg_types)
+{
+  std::string out;
+  int arg_s = arg_names.size();
+  for (int i = 0; i < arg_s; i ++)
+  {
+    out += arg_names[i] + "_" + arg_types[i];
+    if (i != (arg_s - 1))
+      out += "_";
+  }
+  return out;
+}
+
+inline std::string cpp_clean_names (std::string x, std::vector<std::string> r)
+{
+  std::string out = x;
+  char replace;
+  int r_size = r.size();
+  for (int i = 0; i < r_size; i ++)
+  {
+    replace = r[i][0];
+    out.erase(std::remove(out.begin(), out.end(), replace), out.end());  
+  }
+  return out;
+}
+
+std::vector<std::string> remove_characters = {"'", "\"", "%", "#", ":", ">", "<", ",", " ", "*", "&"};
+
+// [[Rcpp::export]]
+std::string cpp_make_function_name (std::string method_name, 
+                                    std::vector<std::string> arg_names, 
+                                    std::vector<std::string> arg_types,
+                                    std::string type)
+{
+  std::string out = "cpp_torch_" + type + "_" + method_name + "_";
+  out += cpp_suffix(arg_names, arg_types);
+  out = cpp_clean_names(out, remove_characters);
+  return out;
+}
+
+// [[Rcpp::export]]
+std::string create_fn_name (std::string fun_name, std::string fun_type, 
+                            std::vector<std::string> nd_args, Rcpp::List args, 
+                            Rcpp::List expected_types)
+{
+  std::vector<std::string> arg_names;
+  std::vector<std::string> arg_types;
+  
+  std::string type;
+  for (auto x : nd_args) 
+  {
+    type = cpp_arg_to_torch_type(args[x], expected_types[x], x);
+    if (type != "Missing")
+    {
+      arg_names.push_back(x);
+      arg_types.push_back(type);
+    }
+  }
+  
+  auto nm = cpp_make_function_name(fun_name, arg_names, arg_types, fun_type);
+  
+  return nm;
+}
+

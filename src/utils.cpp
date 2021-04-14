@@ -29,45 +29,6 @@ XPtrTorchTensor cpp_tensor_undefined () {
   return XPtrTorchTensor(lantern_Tensor_undefined());
 }
 
-inline std::string cpp_clean_names (std::string x, std::vector<std::string> r)
-{
-  std::string out = x;
-  char replace;
-  int r_size = r.size();
-  for (int i = 0; i < r_size; i ++)
-  {
-    replace = r[i][0];
-    out.erase(std::remove(out.begin(), out.end(), replace), out.end());  
-  }
-  return out;
-}
-
-inline std::string cpp_suffix (std::vector<std::string> arg_names, std::vector<std::string> arg_types)
-{
-  std::string out;
-  int arg_s = arg_names.size();
-  for (int i = 0; i < arg_s; i ++)
-  {
-    out += arg_names[i] + "_" + arg_types[i];
-    if (i != (arg_s - 1))
-      out += "_";
-  }
-  return out;
-}
-
-// [[Rcpp::export]]
-std::string cpp_make_function_name (std::string method_name, 
-                                    std::vector<std::string> arg_names, 
-                                    std::vector<std::string> arg_types,
-                                    std::string type,
-                                    std::vector<std::string> remove_characters)
-{
-  std::string out = "cpp_torch_" + type + "_" + method_name + "_";
-  out += cpp_suffix(arg_names, arg_types);
-  out = cpp_clean_names(out, remove_characters);
-  return out;
-}
-
 XPtrTorchTensor to_index_tensor (XPtrTorchTensor t) 
 {
   // check that there's no zeros

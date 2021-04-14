@@ -125,6 +125,14 @@ cpp_arg_to_torch_type <- function(obj, expected_types, arg_name) {
     .Call('_torch_cpp_arg_to_torch_type', PACKAGE = 'torchpkg', obj, expected_types, arg_name)
 }
 
+cpp_make_function_name <- function(method_name, arg_names, arg_types, type) {
+    .Call('_torch_cpp_make_function_name', PACKAGE = 'torchpkg', method_name, arg_names, arg_types, type)
+}
+
+create_fn_name <- function(fun_name, fun_type, nd_args, args, expected_types) {
+    .Call('_torch_create_fn_name', PACKAGE = 'torchpkg', fun_name, fun_type, nd_args, args, expected_types)
+}
+
 cpp_contrib_torch_sparsemax <- function(input, dim) {
     .Call('_torch_cpp_contrib_torch_sparsemax', PACKAGE = 'torchpkg', input, dim)
 }
@@ -9947,10 +9955,6 @@ cpp_optional_int64_t <- function(x) {
 
 cpp_tensor_undefined <- function() {
     .Call('_torch_cpp_tensor_undefined', PACKAGE = 'torchpkg')
-}
-
-cpp_make_function_name <- function(method_name, arg_names, arg_types, type, remove_characters) {
-    .Call('_torch_cpp_make_function_name', PACKAGE = 'torchpkg', method_name, arg_names, arg_types, type, remove_characters)
 }
 
 cpp_torch_namespace__use_cudnn_rnn_flatten_weight <- function() {

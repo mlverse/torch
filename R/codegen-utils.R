@@ -185,15 +185,17 @@ do_call <- function(fun, args) {
 
 call_c_function <- function(fun_name, args, expected_types, nd_args, return_types, fun_type) {
   
-  types <- character()
+  # types <- character()
+  # 
+  # for (nm in nd_args) {
+  #   type <- cpp_arg_to_torch_type(args[[nm]], expected_types[[nm]], nm)
+  #   if (type != "Missing")
+  #     types[[nm]] <- type
+  # }
   
-  for (nm in nd_args) {
-    type <- cpp_arg_to_torch_type(args[[nm]], expected_types[[nm]], nm)
-    if (type != "Missing")
-      types[[nm]] <- type
-  }
+  fun_name <- create_fn_name(fun_name, fun_type, nd_args, args, expected_types)
   
-  fun_name <- make_cpp_function_name(fun_name, types, fun_type)
+  # fun_name <- make_cpp_function_name(fun_name, types, fun_type)
   f <- getNamespace('torch')[[fun_name]]
   
   if (is.null(f))
