@@ -33,9 +33,9 @@ NULL
       } else {
         x1 - (x1 - x2) * ((g1 + d2 - d1) / (g1 - g2 + 2 * d2))
       }
-      min(max(min_pos, xmin_bound), xmax_bound)
+      as.numeric(min(max(min_pos, xmin_bound), xmax_bound))
     } else {
-      (xmin_bound + xmax_bound) / 2
+      as.numeric((xmin_bound + xmax_bound) / 2)
     }
   }
 
@@ -64,7 +64,7 @@ NULL
 # - ls_func_evals       the number of function evaluations
 #
 #
-#### Rationale ###
+### Rationale ###
 # 1 (sufficient decrease / Armijo condition): 
 #    function value should decrease at least as a fraction of how it would decrease with seepest descent
 # 2 (curvature condition):
@@ -111,7 +111,7 @@ NULL
       bracket_f <- c(f_prev, f_new)
       bracket_g <- c(g_prev, g_new$clone(memory_format= torch_contiguous_format()))
       bracket_gtd <- c(gtd_prev, gtd_new)
-      cat("Initial search: sufficient decrease condition violated", "\n")
+      # cat("Initial search: sufficient decrease condition violated", "\n")
       break
     }
     
@@ -122,7 +122,7 @@ NULL
       bracket_f <- c(f_new)
       bracket_g <- c(g_new)
       done <- TRUE
-      cat("Initial search: strong Wolfe condition satisfied", "\n")
+      # cat("Initial search: strong Wolfe condition satisfied", "\n")
       break
     }
     
@@ -133,7 +133,7 @@ NULL
       bracket_f <- c(f_prev, f_new)
       bracket_g <- c(g_prev, g_new$clone(memory_format= torch_contiguous_format()))
       bracket_gtd <- c(gtd_prev, gtd_new) 
-      cat("Initial search: curvature condition violated (gradient positive)", "\n")
+      # cat("Initial search: curvature condition violated (gradient positive)", "\n")
       break
     }
     
@@ -186,7 +186,7 @@ NULL
   while ((done != TRUE) && (ls_iter < max_ls)) {
     # line-search bracket is so small
     if (abs(bracket[[2]] - bracket[[1]]) * d_norm$item() < tolerance_change) {
-      cat("Zoom phase: bracket too small", "\n")
+      # cat("Zoom phase: bracket too small", "\n")
       break
     }
       
@@ -199,7 +199,6 @@ NULL
                          bracket[[2]],
                          bracket_f[[2]],
                          bracket_gtd[[2]])
-    t <- as.numeric(t)
     # test that we are making sufficient progress:
     # in case t is too close to boundary, we mark that we are making insufficient progress,
     # and if we have made insufficient progress in the last step,
@@ -235,7 +234,7 @@ NULL
     # Armijo condition violated or not lower than lowest point
     if ((f_new > (f + c1 * t * gtd$item())) ||
         (f_new >= bracket_f[[low_pos]])) {
-      cat("Zoom phase: sufficient decrease condition violated", "\n")
+      # cat("Zoom phase: sufficient decrease condition violated", "\n")
       bracket[[high_pos]] <- t
       bracket_f[[high_pos]] <- f_new
       bracket_g[[high_pos]] <- g_new
@@ -251,7 +250,7 @@ NULL
       # Wolfe conditions satisfied
       if (abs(gtd_new$item()) <= -c2 * gtd$item()) {
         done <- TRUE
-        cat("Zoom phase: strong Wolfe condition satisfied", "\n")
+        # cat("Zoom phase: strong Wolfe condition satisfied", "\n")
       } else if (gtd_new$item() * (bracket[[high_pos]] - bracket[[low_pos]]) >= 0) {
         # old high becomes new low
         bracket[[high_pos]] <- bracket[[low_pos]]

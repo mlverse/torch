@@ -115,7 +115,7 @@ test_that("strong wolfe works", {
   # wrong direction
   ret <- .strong_wolfe(obj_func,
                        x = torch_tensor(3),
-                       t = 1,
+                       t = 0.1,
                        d = torch_tensor(1),
                        f = 9,
                        g = torch_tensor(6),
@@ -123,7 +123,17 @@ test_that("strong wolfe works", {
   
   expect_equal(ret[[3]], 0)
   
-
+  # enters .cubic_interpolate in initial phase (tests for correct return type)
+  ret <- .strong_wolfe(obj_func,
+                       x = torch_tensor(-3),
+                       t = 0.001,
+                       d = torch_tensor(1),
+                       f = 9,
+                       g = torch_tensor(-6),
+                       gtd = torch_tensor(-6))
+  
+  expect_gt(ret[[4]], 1)
+  
 })
 
 
