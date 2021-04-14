@@ -29,12 +29,12 @@ XPtrTorchTensor cpp_tensor_undefined () {
   return XPtrTorchTensor(lantern_Tensor_undefined());
 }
 
-// [[Rcpp::export]]
-std::string cpp_clean_names (std::string x, std::vector<std::string> r)
+inline std::string cpp_clean_names (std::string x, std::vector<std::string> r)
 {
   std::string out = x;
   char replace;
-  for (int i = 0; i < r.size(); i ++)
+  int r_size = r.size();
+  for (int i = 0; i < r_size; i ++)
   {
     replace = r[i][0];
     out.erase(std::remove(out.begin(), out.end(), replace), out.end());  
@@ -42,14 +42,14 @@ std::string cpp_clean_names (std::string x, std::vector<std::string> r)
   return out;
 }
 
-// [[Rcpp::export]]
-std::string cpp_suffix (std::vector<std::string> arg_names, std::vector<std::string> arg_types)
+inline std::string cpp_suffix (std::vector<std::string> arg_names, std::vector<std::string> arg_types)
 {
   std::string out;
-  for (int i = 0; i < arg_names.size(); i ++)
+  int arg_s = arg_names.size();
+  for (int i = 0; i < arg_s; i ++)
   {
     out += arg_names[i] + "_" + arg_types[i];
-    if (i != (arg_names.size() - 1))
+    if (i != (arg_s - 1))
       out += "_";
   }
   return out;

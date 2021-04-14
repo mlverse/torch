@@ -1,30 +1,16 @@
 #include "torch_types.h"
 #include <set>
 
-std::set<std::string> create_set(std::vector<std::string> v)
+inline std::set<std::string> create_set(std::vector<std::string> v)
 {
   std::set<std::string> s(v.begin(), v.end());
   return s;
 }
 
-bool is_in (std::string x, std::set<std::string> y)
+inline bool is_in (std::string x, std::set<std::string> y)
 {
   return y.find(x) != y.end();
 }
-
-// bool has_intersection (std::vector<std::string> x, std::set<std::string> y)
-// {
-//   for (auto elem : x)
-//   {
-//     if (y.find(elem) != y.end())
-//     {
-//       return true;
-//     }
-//   }
-//   return false;
-// }
-
-std::set<std::string> one_based_arg_names {"index", "indices", "dims"};
 
 // [[Rcpp::export]]
 std::string cpp_arg_to_torch_type (SEXP obj, std::vector<std::string> expected_types, 
