@@ -38,6 +38,7 @@
 - Breaking change: `torch_arange` returns in the closed interval `[start, end]` instead of the half open `[start, end)`. This makes it behave similar to R's `seq`. (#506)
 - Added Gamma distribution (#489)
 - Update to LibTorch v1.8 (#513) 
+- Added `strong_wolfe` option to `optim_lbfgs`. (#517)
 
 # torch 0.2.1
 
