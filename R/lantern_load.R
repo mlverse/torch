@@ -12,7 +12,7 @@ lantern_start <- function(version = lantern_default(), reload = FALSE) {
   
   if (.globals$lantern_started && !reload) return()
   
-  cpp_lantern_init(find_and_check_installation())
+  cpp_lantern_init(install_path())
   
   log_enabled <- as.integer(Sys.getenv("TORCH_LOG", "0"))
   cpp_lantern_configure(log_enabled)

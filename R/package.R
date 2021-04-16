@@ -22,7 +22,7 @@ globalVariables(c("..", "self", "private", "N"))
       install_torch()
       TRUE
     }, error = function(e) {
-      warning("Failed to install Torch, manually run install_torch(). ", e$message, call. = FALSE)
+      warning("Failed to install Torch, manually run install_torch().\n ", e$message, call. = FALSE)
       FALSE
     })
   }

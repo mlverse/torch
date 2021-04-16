@@ -100,19 +100,6 @@ install_path <- function(version = "1.8.0") {
     normalizePath(file.path(system.file("", package = "torch"), "deps"), mustWork = FALSE)
 }
 
-find_and_check_installation <- function(version = "1.8.0") {
-  path <- install_path()
-  
-  install_info <- install_config[[version]][["cpu"]][[install_os()]]
-  for (library_name in names(install_info)) {
-    if (!lib_installed(library_name, path)) {
-      warning("The path '", path, "' is missing the '", library_name, "' library.")
-    } 
-  }
-  
-  path
-}
-
 install_exists <- function() {
   dir.exists(install_path())
 }
