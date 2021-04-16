@@ -293,19 +293,26 @@ install_torch <- function(version = "1.8.0", type = install_type(version = versi
     unlink(path, recursive = TRUE)
   }
   
+  if (!dir.exists(path)) {
+    ok <- dir.create(path, showWarnings = FALSE, recursive = TRUE)
+    if (!ok) {
+      rlang::abort(c(
+        "Failed creating directory", 
+        paste("Check that you can write to: ", path)
+      ))
+    }
+  }
+  
   # check for write permission
   if (file.access(path, 2) < 0) {
     rlang:::abort(c(
       "No write permissions to install torch.", 
       paste("Check that you can write to:", path),
       "Or set the TORCH_HOME env var to a path with write permissions."
-      )
+    )
     )
   }
   
-  if (!dir.exists(path)) {
-    dir.create(path, showWarnings = FALSE)
-  }
   if (!is.null(list(...)$install_config) && is.list(list(...)$install_config))
     install_config <- list(...)$install_config
   
