@@ -104,10 +104,10 @@ install_exists <- function() {
   if (!dir.exists(install_path()))
     return(FALSE)
   
-  if (!length(list.files(install_path(), "libtorch*")) > 0)
+  if (!length(list.files(install_path(), "torch")) > 0)
     return(FALSE)
   
-  if (!length(list.files(install_path(), "liblantern*")) > 0)
+  if (!length(list.files(install_path(), "lantern")) > 0)
     return(FALSE)
   
   TRUE
