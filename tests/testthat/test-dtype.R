@@ -21,6 +21,9 @@ test_that("Can create dtypes", {
 test_that("Can compare dtypes", {
   expect_true(torch_float32() == torch_float())
   expect_false(torch_float() == torch_int())
+  
+  expect_false(torch_float32() != torch_float())
+  expect_true(torch_float() != torch_int())
 })
 
 test_that("Default dtype", {

@@ -134,6 +134,11 @@ torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
   cpp_dtype_to_string(e1$ptr) == cpp_dtype_to_string(e2$ptr)
 }
 
+#' @export
+`!=.torch_dtype` <- function(e1, e2) {
+  !(e1 == e2)
+}
+
 #' Check if object is a torch data type
 #' 
 #' @param x object to check.
