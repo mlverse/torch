@@ -39,6 +39,7 @@
 - Added Gamma distribution (#489)
 - Update to LibTorch v1.8 (#513) 
 - Added `strong_wolfe` option to `optim_lbfgs`. (#517)
+- Moved some parts of the dispatcher to C++ to make it faster. (#520)
 
 # torch 0.2.1
 
