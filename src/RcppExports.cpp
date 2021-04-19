@@ -344,6 +344,48 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_arg_to_torch_type
+std::string cpp_arg_to_torch_type(SEXP obj, std::vector<std::string> expected_types, std::string arg_name);
+RcppExport SEXP _torch_cpp_arg_to_torch_type(SEXP objSEXP, SEXP expected_typesSEXP, SEXP arg_nameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type expected_types(expected_typesSEXP);
+    Rcpp::traits::input_parameter< std::string >::type arg_name(arg_nameSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_arg_to_torch_type(obj, expected_types, arg_name));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_make_function_name
+std::string cpp_make_function_name(std::string method_name, std::vector<std::string> arg_names, std::vector<std::string> arg_types, std::string type);
+RcppExport SEXP _torch_cpp_make_function_name(SEXP method_nameSEXP, SEXP arg_namesSEXP, SEXP arg_typesSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type method_name(method_nameSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_names(arg_namesSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_types(arg_typesSEXP);
+    Rcpp::traits::input_parameter< std::string >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_make_function_name(method_name, arg_names, arg_types, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// create_fn_name
+std::string create_fn_name(std::string fun_name, std::string fun_type, std::vector<std::string> nd_args, Rcpp::List args, Rcpp::List expected_types);
+RcppExport SEXP _torch_create_fn_name(SEXP fun_nameSEXP, SEXP fun_typeSEXP, SEXP nd_argsSEXP, SEXP argsSEXP, SEXP expected_typesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type fun_name(fun_nameSEXP);
+    Rcpp::traits::input_parameter< std::string >::type fun_type(fun_typeSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type nd_args(nd_argsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type args(argsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type expected_types(expected_typesSEXP);
+    rcpp_result_gen = Rcpp::wrap(create_fn_name(fun_name, fun_type, nd_args, args, expected_types));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_contrib_torch_sparsemax
 Rcpp::XPtr<XPtrTorchTensor> cpp_contrib_torch_sparsemax(Rcpp::XPtr<XPtrTorchTensor> input, int dim);
 RcppExport SEXP _torch_cpp_contrib_torch_sparsemax(SEXP inputSEXP, SEXP dimSEXP) {
@@ -32375,45 +32417,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_clean_names
-std::string cpp_clean_names(std::string x, std::vector<std::string> r);
-RcppExport SEXP _torch_cpp_clean_names(SEXP xSEXP, SEXP rSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type r(rSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_clean_names(x, r));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_suffix
-std::string cpp_suffix(std::vector<std::string> arg_names, std::vector<std::string> arg_types);
-RcppExport SEXP _torch_cpp_suffix(SEXP arg_namesSEXP, SEXP arg_typesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_names(arg_namesSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_types(arg_typesSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_suffix(arg_names, arg_types));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_make_function_name
-std::string cpp_make_function_name(std::string method_name, std::vector<std::string> arg_names, std::vector<std::string> arg_types, std::string type, std::vector<std::string> remove_characters);
-RcppExport SEXP _torch_cpp_make_function_name(SEXP method_nameSEXP, SEXP arg_namesSEXP, SEXP arg_typesSEXP, SEXP typeSEXP, SEXP remove_charactersSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type method_name(method_nameSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_names(arg_namesSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_types(arg_typesSEXP);
-    Rcpp::traits::input_parameter< std::string >::type type(typeSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type remove_characters(remove_charactersSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_make_function_name(method_name, arg_names, arg_types, type, remove_characters));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_torch_namespace__use_cudnn_rnn_flatten_weight
 bool cpp_torch_namespace__use_cudnn_rnn_flatten_weight();
 RcppExport SEXP _torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight() {
@@ -32502,6 +32505,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_backends_mkldnn_is_available", (DL_FUNC) &_torch_cpp_backends_mkldnn_is_available, 0},
     {"_torch_cpp_backends_mkl_is_available", (DL_FUNC) &_torch_cpp_backends_mkl_is_available, 0},
     {"_torch_cpp_backends_openmp_is_available", (DL_FUNC) &_torch_cpp_backends_openmp_is_available, 0},
+    {"_torch_cpp_arg_to_torch_type", (DL_FUNC) &_torch_cpp_arg_to_torch_type, 3},
+    {"_torch_cpp_make_function_name", (DL_FUNC) &_torch_cpp_make_function_name, 4},
+    {"_torch_create_fn_name", (DL_FUNC) &_torch_create_fn_name, 5},
     {"_torch_cpp_contrib_torch_sparsemax", (DL_FUNC) &_torch_cpp_contrib_torch_sparsemax, 2},
     {"_torch_cpp_cuda_is_available", (DL_FUNC) &_torch_cpp_cuda_is_available, 0},
     {"_torch_cpp_cuda_device_count", (DL_FUNC) &_torch_cpp_cuda_device_count, 0},
@@ -34958,9 +34964,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_nullopt", (DL_FUNC) &_torch_cpp_nullopt, 0},
     {"_torch_cpp_optional_int64_t", (DL_FUNC) &_torch_cpp_optional_int64_t, 1},
     {"_torch_cpp_tensor_undefined", (DL_FUNC) &_torch_cpp_tensor_undefined, 0},
-    {"_torch_cpp_clean_names", (DL_FUNC) &_torch_cpp_clean_names, 2},
-    {"_torch_cpp_suffix", (DL_FUNC) &_torch_cpp_suffix, 2},
-    {"_torch_cpp_make_function_name", (DL_FUNC) &_torch_cpp_make_function_name, 5},
     {"_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight", (DL_FUNC) &_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight, 0},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
