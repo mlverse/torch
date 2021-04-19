@@ -1,4 +1,4 @@
-branch <- "libtorch-v1.8"  
+branch <- "re-add-cuda10.1"  
 
 
 install_config <- list(
