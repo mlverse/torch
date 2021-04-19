@@ -101,14 +101,22 @@ install_path <- function(version = "1.8.0") {
 }
 
 install_exists <- function() {
-  dir.exists(install_path())
+  if (!dir.exists(install_path()))
+    return(FALSE)
+  
+  if (!length(list.files(install_path(), "libtorch*")) > 0)
+    return(FALSE)
+  
+  if (length(list.files(install_path(), "liblantern*")) > 0)
+    return(FALSE)
+  
+  TRUE
 }
 
 #' Verifies if torch is installed
 #'
 #' @export
 torch_is_installed <- function() {
-  find_and_check_installation(install_path())
   install_exists()
 }
 
