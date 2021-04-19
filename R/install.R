@@ -91,35 +91,26 @@ install_config <- list(
   )
 )
 
-#' @keywords internal
+
 install_path <- function(version = "1.8.0") {
   path <- Sys.getenv("TORCH_HOME")
-  if (nzchar(path)) {
-    if (!dir.exists(path)) {
-      warning("The TORCH_HOME path does not exists.")
-      path <- ""
-    }
-    else {
-      install_info <- install_config[[version]][["cpu"]][[install_os()]]
-      for (library_name in names(install_info)) {
-        if (!lib_installed(library_name, path)) {
-          warning("The TORCH_HOME path is missing the '", library_name, "' library.")
-          path <- ""
-        }
-      }
-    }
-  }
-  
-  if (nzchar(path)) {
-    path
-  }
-  else {
+  if (nzchar(path))
+    normalizePath(path, mustWork = FALSE)
+  else
     normalizePath(file.path(system.file("", package = "torch"), "deps"), mustWork = FALSE)
-  }
 }
 
 install_exists <- function() {
-  dir.exists(install_path())
+  if (!dir.exists(install_path()))
+    return(FALSE)
+  
+  if (!length(list.files(install_path(), "torch")) > 0)
+    return(FALSE)
+  
+  if (!length(list.files(install_path(), "lantern")) > 0)
+    return(FALSE)
+  
+  TRUE
 }
 
 #' Verifies if torch is installed
@@ -311,8 +302,25 @@ install_torch <- function(version = "1.8.0", type = install_type(version = versi
   }
   
   if (!dir.exists(path)) {
-    dir.create(path, showWarnings = FALSE)
+    ok <- dir.create(path, showWarnings = FALSE, recursive = TRUE)
+    if (!ok) {
+      rlang::abort(c(
+        "Failed creating directory", 
+        paste("Check that you can write to: ", path)
+      ))
+    }
   }
+  
+  # check for write permission
+  if (file.access(path, 2) < 0) {
+    rlang:::abort(c(
+      "No write permissions to install torch.", 
+      paste("Check that you can write to:", path),
+      "Or set the TORCH_HOME env var to a path with write permissions."
+    )
+    )
+  }
+  
   if (!is.null(list(...)$install_config) && is.list(list(...)$install_config))
     install_config <- list(...)$install_config
   
