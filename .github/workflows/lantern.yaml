@@ -240,7 +240,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        name: [macOS, Linux, Windows, Cuda102,  Cuda111, WindowsCuda102, WindowsCuda111]
+        name: [macOS, Linux, Windows, Cuda101, Cuda102,  Cuda111, WindowsCuda101, WindowsCuda102, WindowsCuda111]
         include:
           - name: macOS
             artifact: macOS
@@ -254,6 +254,11 @@ jobs:
             artifact: Windows
             upload: Windows
             hw: cpu
+          - name: Cuda101
+            artifact: Linux-Cuda-101
+            upload: Linux
+            hw: gpu
+            version: -101
           - name: Cuda102
             artifact: Linux-Cuda-102
             upload: Linux
@@ -264,6 +269,11 @@ jobs:
             upload: Linux
             hw: gpu
             version: -111
+          - name: WindowsCuda101
+            artifact: Windows-Cuda-101
+            upload: Windows
+            hw: gpu
+            version: -101
           - name: WindowsCuda102
             artifact: Windows-Cuda-102
             upload: Windows
