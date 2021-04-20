@@ -41,7 +41,7 @@ test_that("Chi2 shape", {
   ref_log_prob <- function(idx, x, log_prob){
     d <- df$view(-1)[idx]$detach()
     expected <- log(dchisq(as.array(x), as.array(d)))
-    expect_equal(as.array(log_prob), expected, tolerance=1e-3)
+    expect_equal(as.array(log_prob), expected, tolerance=1e-2)
   }
   
   check_log_prob(distr_chi2(df), ref_log_prob)
