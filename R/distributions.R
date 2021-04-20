@@ -3,6 +3,7 @@
 #' Distribution is the abstract base class for probability distributions.
 #' Note: in Python, adding torch.Size objects works as concatenation
 #' Try for example: torch.Size((2, 1)) + torch.Size((1,))
+#' 
 Distribution <- R6::R6Class(
   "torch_Distribution",
   lock_objects = FALSE,
@@ -19,6 +20,13 @@ Distribution <- R6::R6Class(
     # Choose different structure?
     .arg_constraints       = list(),
     
+    #' @description 
+    #' Initializes a distribution class.
+    #'
+    #' @param batch_shape the shape over which parameters are batched.
+    #' @param event_shape the shape of a single sample (without batching).
+    #' @param validate_args wether to validate the arguments or not. Validation
+    #'   can be time consuming so you might want to disable it.
     initialize = function(batch_shape = NULL, event_shape = NULL, validate_args = NULL){
 
       self$.batch_shape <- batch_shape
@@ -42,71 +50,100 @@ Distribution <- R6::R6Class(
         }
     },
     
+    #' @description
+    #' Returns a new distribution instance (or populates an existing instance 
+    #' provided by a derived class) with batch dimensions expanded to batch_shape. 
+    #' This method calls expand on the distribution’s parameters. As such, this 
+    #' does not allocate new memory for the expanded distribution instance. 
+    #' Additionally, this does not repeat any args checking or parameter 
+    #' broadcasting in `initialize`, when an instance is first created.
+    #' 
+    #' @param batch_shape the desired expanded size.
+    #' @param .instance new instance provided by subclasses that need to 
+    #'   override `expand`.
+    #'
     expand = function(batch_shape, .instance = NULL){
       not_implemented_error()
     },
     
-    #' Generates a sample_shape shaped sample or sample_shape shaped batch of
+    #' @description 
+    #' Generates a `sample_shape` shaped sample or `sample_shape` shaped batch of
     #' samples if the distribution parameters are batched.
+    #' 
+    #' @param sample_shape the shape you want to sample.
     sample = function(sample_shape=NULL){
       with_no_grad({
         self$rsample(sample_shape)
       })
     },
     
+    #' @description 
     #' Generates a sample_shape shaped reparameterized sample or sample_shape
     #' shaped batch of reparameterized samples if the distribution parameters
     #' are batched.
-    #' In PyTorch: sample_shape=torch.Size()
+    #' @inheritParams sample
     rsample = function(sample_shape = NULL) {
        not_implemented_error()
     },
     
+    #' @description 
     #' Returns the log of the probability density/mass function evaluated at
     #' `value`.
+    #' 
+    #' @param value values to evaluate the density on.
     log_prob = function(value) {
       not_implemented_error()
     },
     
-    #'  Returns the cumulative density/mass function evaluated at
+    #' @description 
+    #' Returns the cumulative density/mass function evaluated at
     #' `value`.
+    #' 
+    #' @inheritParams log_prob
     cdf = function(value) {
       not_implemented_error()
     },
     
-    #'  Returns the inverse cumulative density/mass function evaluated at
+    #' @description 
+    #' Returns the inverse cumulative density/mass function evaluated at
     #' `value`.
+    #' 
+    #' @inheritParams log_prob
     icdf = function(value) {
       not_implemented_error()
     },
     
-    #'  Returns tensor containing all values supported by a discrete
-    #'  distribution. The result will enumerate over dimension 0, so the shape
-    #'  of the result will be `(cardinality,) + batch_shape + event_shape
-    #'  (where `event_shape = ()` for univariate distributions).
-    #'  Note that this enumerates over all batched tensors in lock-step
-    #'  `[[0, 0], [1, 1], ...]`. With `expand=FALSE`, enumeration happens
-    #'  along dim 0, but with the remaining batch dimensions being
-    #'  singleton dimensions, `[[0], [1], ..`.
-    #'  @param expand (bool): whether to expand the support over the
+    #'  @description 
+    #' Returns tensor containing all values supported by a discrete
+    #' distribution. The result will enumerate over dimension 0, so the shape
+    #' of the result will be `(cardinality,) + batch_shape + event_shape
+    #' (where `event_shape = ()` for univariate distributions).
+    #' Note that this enumerates over all batched tensors in lock-step
+    #' `[[0, 0], [1, 1], ...]`. With `expand=FALSE`, enumeration happens
+    #' along dim 0, but with the remaining batch dimensions being
+    #' singleton dimensions, `[[0], [1], ..`.
+    #' @param expand (bool): whether to expand the support over the
     #'  batch dims to match the distribution's `batch_shape`.
-    #'  @return Tensor iterating over dimension 0.
+    #' @return Tensor iterating over dimension 0.
     enumerate_support = function(expand = TRUE) {
       not_implemented_error()
     },
     
-    #'  Returns entropy of distribution, batched over batch_shape.
-    #'  @return Tensor of shape batch_shape.
+    #' @description 
+    #' Returns entropy of distribution, batched over batch_shape.
+    #' @return Tensor of shape batch_shape.
     entropy = function() {
       not_implemented_error()
     },
     
-    #'  Returns perplexity of distribution, batched over batch_shape.
-    #'  @param Tensor of shape batch_shape.
+    #' @description 
+    #' Returns perplexity of distribution, batched over batch_shape.
+    #' @return Tensor of shape batch_shape.
     perplexity = function() {
       not_implemented_error()
     },
     
+    #' @description
     #' Returns the size of the sample returned by the distribution, given
     #' a `sample_shape`. Note, that the batch and event shapes of a distribution
     #' instance are fixed at the time of construction. If this is empty, the
@@ -116,6 +153,7 @@ Distribution <- R6::R6Class(
       c(sample_shape, self$batch_shape, self$event_shape)
     },
     
+    #' @description 
     #' Argument validation for distribution methods such as `log_prob`,
     #' `cdf` and `icdf`. The rightmost dimensions of a value to be
     #' scored via these methods must agree with the distribution's batch
@@ -153,22 +191,6 @@ Distribution <- R6::R6Class(
       
       if (!self$support$check(value)$all())
         value_error('The value argument must be within the support')
-    },
-    
-    .get_checked_instance = function(cls, .instance = NULL, .args){
-      if (is.null(.instance) && !identical(self$initialize, cls$initialize))
-        #' TODO: consider different message
-        not_implemented_error(
-          "Subclass {paste0(class(self), collapse = ' ')} of ", 
-          "{paste0(class(cls), collapse = ' ')} ",
-          "that defines a custom `initialize()` method ",
-          "must also define a custom `expand()` method."
-        )
-      
-      if (is.null(.instance))
-        return(do.call(self$class_def$new, .args))
-      else
-        return(.instance)
     },
     
     print = function(){
@@ -232,6 +254,24 @@ Distribution <- R6::R6Class(
     stddev = function() {
       self$variance$sqrt()
     }
+  ),
+  
+  private = list(
+    .get_checked_instance = function(cls, .instance = NULL, .args){
+      if (is.null(.instance) && !identical(self$initialize, cls$initialize))
+        #' TODO: consider different message
+        not_implemented_error(
+          "Subclass {paste0(class(self), collapse = ' ')} of ", 
+          "{paste0(class(cls), collapse = ' ')} ",
+          "that defines a custom `initialize()` method ",
+          "must also define a custom `expand()` method."
+        )
+      
+      if (is.null(.instance))
+        return(do.call(self$class_def$new, .args))
+      else
+        return(.instance)
+    } 
   )
 )
 

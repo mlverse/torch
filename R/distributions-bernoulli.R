@@ -46,14 +46,14 @@ Bernoulli <- R6::R6Class(
         .args <- list(
           probs = self$probs$expand(batch_shape)
         )
-        new <- self$.get_checked_instance(self, .instance, .args)
+        new <- private$.get_checked_instance(self, .instance, .args)
         new$.probs <- self$probs$expand(batch_shape)
         new$.param <- new$probs
       } else {
         .args <- list(
           logits = self$logits$expand(batch_shape)
         )
-        new <- self$.get_checked_instance(self, .instance, .args)
+        new <- private$.get_checked_instance(self, .instance, .args)
         new$.logits <- self$logits$expand(batch_shape)
         new$.param <- new$logits
         new

@@ -29,7 +29,7 @@ Gamma <- R6::R6Class(
     },
     
     expand = function(batch_shape, .instance = NULL){
-      new <- self$.get_checked_instance(self, .instance)
+      new <- private$.get_checked_instance(self, .instance)
       new$concentration <- self$concentration$expand(batch_shape)
       new$rate <- self$rate$expand(batch_shape)
       new$.__enclos_env__$super$initialize(batch_shape, validate_args = FALSE)

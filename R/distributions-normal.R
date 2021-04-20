@@ -41,7 +41,7 @@ Normal <- R6::R6Class(
         scale = self$scale$expand(batch_shape)
       )
       
-      new <- self$.get_checked_instance(self, .instance, .args)
+      new <- private$.get_checked_instance(self, .instance, .args)
       
       # new$loc <- self$loc$expand(batch_shape)
       # new$scale <- self$scale$expand(batch_shape)

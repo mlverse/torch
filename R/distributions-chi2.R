@@ -19,7 +19,7 @@ Chi2 <- R6::R6Class(
     },
     
     expand = function(batch_shape, .instance = NULL){
-      new <- self$.get_checked_instance(self, .instance, NULL)
+      new <- private$.get_checked_instance(self, .instance, NULL)
       new$.__enclos_env__$super$expand(batch_shape)
     }
   ),
