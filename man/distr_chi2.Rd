@@ -15,7 +15,9 @@ Creates a Chi2 distribution parameterized by shape parameter \code{df}.
 This is exactly equivalent to \code{distr_gamma(alpha=0.5*df, beta=0.5)}
 }
 \examples{
+if (torch_is_installed()) {
 m <- distr_chi2(torch_tensor(1.0))
 m$sample()  # Chi2 distributed with shape df=1
 torch_tensor(0.1046)
+}
 }
