@@ -1,0 +1,148 @@
+---
+title: "Distributions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Distributions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1")
+)
+```
+
+```{r setup}
+library(torch)
+torch_manual_seed(1) # setting seed for reproducibility
+```
+
+This vignette showcases the basic functionality of distributions in torch.
+Currently the distributions modules are considered 'work in progress'
+and are still experimental features in the torch package. You can see
+the progress in this [link](https://github.com/mlverse/torch/issues/479).
+
+The distributions modules in torch are modelled after PyTorch's [distributions module](https://pytorch.org/docs/stable/distributions.html#) which in turn is based on the TensorFlow [Distributions package](https://arxiv.org/abs/1711.10604).
+
+This vignette is based in the TensorFlow's distributions [tutorial](https://www.tensorflow.org/probability/examples/TensorFlow_Distributions_Tutorial#basic_univariate_distributions).
+
+## Basic univariate distributions
+
+Let's start and create a new instance of a Normal distribution:
+
+```{r}
+n <- distr_normal(loc = 0, scale = 1)
+n
+```
+We can draw samples from it with:
+
+```{r}
+n$sample()
+```
+
+or, draw multiple samples:
+
+```{r}
+n$sample(3)
+```
+We can evaluate the log probability of values:
+
+```{r}
+n$log_prob(0)
+log(dnorm(0)) # equivalent R code
+```
+or, evaluate multiple log probabilities:
+
+```{r}
+n$log_prob(c(0, 2, 4))
+```
+
+## Multiple ddistributions
+
+A distribution can take a tensor as it's parameters:
+
+```{r}
+b <- distr_bernoulli(probs = torch_tensor(c(0.25, 0.5, 0.75)))
+b
+```
+This object represents 3 independent bernoulli distributions, one for each element
+of the tensor.
+
+We can sample a single observation:
+
+```{r}
+b$sample()
+```
+or, a batch of `n` observations:
+
+```{r}
+b$sample(6)
+```
+## Using distributions within models
+
+The `log_prob` method of distributions can be differentiated, thus, distributions
+can be used to train models in torch.
+
+Let's implement a Gaussian linear model, but first let's simulate some data
+
+```{r}
+x <- torch_randn(100, 1)
+y <- 2*x + 1 + torch_randn(100, 1)
+```
+
+and plot:
+
+```{r}
+plot(as.numeric(x), as.numeric(y))
+```
+
+We can now define our model:
+
+```{r}
+GaussianLinear <- nn_module(
+  initialize = function() {
+    # this linear predictor will estimate the mean of the Normal distribution
+    self$linear <- nn_linear(1, 1)
+    # this parameter will hold the estimate of the variability
+    self$scale <- nn_parameter(torch_ones(1))
+  },
+  forward = function(x) {
+    # we estimate the mean
+    loc <- self$linear(x)
+    # return a normal distribution
+    distr_normal(loc, self$scale)
+  }
+)
+
+model <- GaussianLinear()
+```
+
+We can now train our model with:
+
+```{r}
+opt <- optim_sgd(model$parameters, lr = 0.1)
+
+for (i in 1:100) {
+  opt$zero_grad()
+  d <- model(x)
+  loss <- torch_mean(-d$log_prob(y))
+  loss$backward()
+  opt$step()
+  if (i %% 10 == 0)
+    cat("iter: ", i, " loss: ", loss$item(), "\n")
+}
+```
+We can see the parameter estimates with:
+
+```{r}
+model$parameters
+```
+
+and quickly compare with the `glm()` function:
+
+```{r}
+summary(glm(as.numeric(y) ~ as.numeric(x)))
+```
