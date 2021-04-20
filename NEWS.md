@@ -42,6 +42,7 @@
 - Moved some parts of the dispatcher to C++ to make it faster. (#520)
 - We now respect the TORCH_HOME env var to automatically install torch. (#522)
 - Implement comparison operator `!=` for torch dtypes. (#524)
+- Added Chi-square distribution. (#518)
 
 # torch 0.2.1
 

@@ -66,6 +66,7 @@ Collate:
     'distributions.R'
     'distributions-bernoulli.R'
     'distributions-gamma.R'
+    'distributions-chi2.R'
     'distributions-normal.R'
     'distributions-poisson.R'
     'dtype.R'
