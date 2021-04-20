@@ -1,6 +1,5 @@
 branch <- "re-add-cuda10.1"  
 
-
 install_config <- list(
   "1.8.0" = list(
     "cpu" = list(
