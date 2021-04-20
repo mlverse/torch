@@ -19,5 +19,16 @@ if (torch_is_installed()) {
 m <- distr_chi2(torch_tensor(1.0))
 m$sample()  # Chi2 distributed with shape df=1
 torch_tensor(0.1046)
+
 }
 }
+\seealso{
+\link{Distribution} for details on the available methods.
+
+Other distributions: 
+\code{\link{distr_bernoulli}()},
+\code{\link{distr_gamma}()},
+\code{\link{distr_normal}()},
+\code{\link{distr_poisson}()}
+}
+\concept{distributions}

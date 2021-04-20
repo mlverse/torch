@@ -89,6 +89,9 @@ Gamma <- R6::R6Class(
 #' @param rate (float or Tensor): rate = 1 / scale of the distribution
 #' (often referred to as beta)
 #' 
+#' @seealso [Distribution] for details on the available methods. 
+#' @family distributions
+#' 
 #' @examples 
 #' m <- distr_gamma(torch_tensor(1.0), torch_tensor(1.0))
 #' m$sample()  # Gamma distributed with concentration=1 and rate=1

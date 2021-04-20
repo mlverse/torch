@@ -71,6 +71,9 @@ Poisson <- R6::R6Class(
 #' 
 #' @param rate (numeric, torch_tensor): the rate parameter
 #' 
+#' @seealso [Distribution] for details on the available methods. 
+#' @family distributions
+#' 
 #' @examples 
 #' m <- distr_poisson(torch_tensor(4))
 #' m$sample()

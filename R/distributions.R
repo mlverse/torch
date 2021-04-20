@@ -1,24 +1,33 @@
 #' @include utils.R
 
+#' Generic R6 class representing distributions
+#' 
+#' @name Distribution
+#' @title Generic R6 class representing distributions
+#' @rdname Distribution
+#' 
+#' @description 
 #' Distribution is the abstract base class for probability distributions.
 #' Note: in Python, adding torch.Size objects works as concatenation
 #' Try for example: torch.Size((2, 1)) + torch.Size((1,))
 #' 
+#' @param value values to evaluate the density on.
+#' @param sample_shape the shape you want to sample.
+
 Distribution <- R6::R6Class(
   "torch_Distribution",
   lock_objects = FALSE,
   
   public = list(
     
-    has_rsample           = FALSE,
-    has_enumerate_support = FALSE,
+    #' @field .validate_args whether to validate arguments
     .validate_args        = FALSE,
-    .support              = NULL,
-    .batch_shape          = NULL,
-    .event_shape          = NULL,
     
-    # Choose different structure?
-    .arg_constraints       = list(),
+    #' @field has_rsample whether has an rsample
+    has_rsample           = FALSE,
+    
+    #' @field has_enumerate_support whether has enumerate support
+    has_enumerate_support = FALSE,
     
     #' @description 
     #' Initializes a distribution class.
@@ -29,15 +38,15 @@ Distribution <- R6::R6Class(
     #'   can be time consuming so you might want to disable it.
     initialize = function(batch_shape = NULL, event_shape = NULL, validate_args = NULL){
 
-      self$.batch_shape <- batch_shape
-      self$.event_shape <- event_shape
+      private$.batch_shape <- batch_shape
+      private$.event_shape <- event_shape
 
       if (!is.null(validate_args))
         self$.validate_args <- validate_args
 
-        for (param in names(self$.arg_constraints)) {
+        for (param in names(private$.arg_constraints)) {
 
-          constraint <- self$.arg_constraints[[param]]
+          constraint <- private$.arg_constraints[[param]]
 
           if (is_dependent(constraint))
             next
@@ -70,7 +79,6 @@ Distribution <- R6::R6Class(
     #' Generates a `sample_shape` shaped sample or `sample_shape` shaped batch of
     #' samples if the distribution parameters are batched.
     #' 
-    #' @param sample_shape the shape you want to sample.
     sample = function(sample_shape=NULL){
       with_no_grad({
         self$rsample(sample_shape)
@@ -81,7 +89,7 @@ Distribution <- R6::R6Class(
     #' Generates a sample_shape shaped reparameterized sample or sample_shape
     #' shaped batch of reparameterized samples if the distribution parameters
     #' are batched.
-    #' @inheritParams sample
+    #' 
     rsample = function(sample_shape = NULL) {
        not_implemented_error()
     },
@@ -90,7 +98,6 @@ Distribution <- R6::R6Class(
     #' Returns the log of the probability density/mass function evaluated at
     #' `value`.
     #' 
-    #' @param value values to evaluate the density on.
     log_prob = function(value) {
       not_implemented_error()
     },
@@ -99,7 +106,6 @@ Distribution <- R6::R6Class(
     #' Returns the cumulative density/mass function evaluated at
     #' `value`.
     #' 
-    #' @inheritParams log_prob
     cdf = function(value) {
       not_implemented_error()
     },
@@ -108,7 +114,6 @@ Distribution <- R6::R6Class(
     #' Returns the inverse cumulative density/mass function evaluated at
     #' `value`.
     #' 
-    #' @inheritParams log_prob
     icdf = function(value) {
       not_implemented_error()
     },
@@ -165,16 +170,16 @@ Distribution <- R6::R6Class(
       if (!inherits(value, "torch_Tensor"))
         value_error('The value argument to log_prob must be a Tensor')
       
-      event_dim_start <-length(value$size()) - length(self$.event_shape)
+      event_dim_start <-length(value$size()) - length(private$.event_shape)
     
-      if (value$size()[event_dim_start, ] != self$.event_shape)
+      if (value$size()[event_dim_start, ] != private$.event_shape)
         value_error(
           'The right-most size of value must match event_shape:
-           {value$size()} vs {self$.event_shape}.'
+           {value$size()} vs {private$.event_shape}.'
         )
 
       actual_shape <- value$size()
-      expected_shape <- c(self$.batch_shape, self$.event_shape)
+      expected_shape <- c(private$.batch_shape, private$.event_shape)
 
       shape_length <- length(actual_shape)
       
@@ -193,13 +198,15 @@ Distribution <- R6::R6Class(
         value_error('The value argument must be within the support')
     },
     
+    #' @description 
+    #' Prints the distribution instance.
     print = function(){
     
       self_list <- as.list(self)
       
       param_names <- 
-        names(self$.arg_constraints)[
-          names(self$.arg_constraints) %in% names(self_list)
+        names(private$.arg_constraints)[
+          names(private$.arg_constraints) %in% names(self_list)
             ]
       
       args_string <- paste(
@@ -216,14 +223,14 @@ Distribution <- R6::R6Class(
   
   active = list(
     
-    #' Returns the shape over which parameters are batched.
+    #' @field batch_shape Returns the shape over which parameters are batched.
     batch_shape = function(){
-      self$.batch_shape
+      private$.batch_shape
     },
     
-    #' Returns the shape of a single sample (without batching).
+    #' @field event_shape Returns the shape of a single sample (without batching).
     event_shape = function(){
-      self$.event_shape
+      private$.event_shape
     },
     
     #' Returns a dictionary from argument names to
@@ -234,29 +241,37 @@ Distribution <- R6::R6Class(
     #   not_implemented_error()
     # },
 
-    #' Returns a `torch_Constraint` object
-    #' representing this distribution's support.
+    #' @field support Returns a `torch_Constraint` object representing this distribution's 
+    #'   support.
     support = function() {
       not_implemented_error()
     },
-
-    #' Returns the mean on of the distribution
+    
+    #' @field mean Returns the mean on of the distribution
     mean = function() {
       not_implemented_error()
     },
 
-    #' Returns the variance of the distribution
+    #' @field variance Returns the variance of the distribution
     variance = function() {
       not_implemented_error()
     },
 
-    #' Returns the standard deviation of the distribution
+    #' @field stddev Returns the standard deviation of the distribution
     stddev = function() {
       self$variance$sqrt()
     }
   ),
   
   private = list(
+    
+    .support              = NULL,
+    .batch_shape          = NULL,
+    .event_shape          = NULL,
+    
+    # Choose different structure?
+    .arg_constraints       = list(),
+    
     .get_checked_instance = function(cls, .instance = NULL, .args){
       if (is.null(.instance) && !identical(self$initialize, cls$initialize))
         #' TODO: consider different message
