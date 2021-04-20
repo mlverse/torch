@@ -72,7 +72,6 @@ test_that("Chi2 shape scalar params", {
   expect_equal(chi2$event_shape, NULL)
   expect_equal(chi2$sample()$size(), 1)
   expect_equal(chi2$sample(c(3, 2))$size(), c(3, 2, 1))
-  expect_error(chi2$log_prob(tensor_sample_2))
   expect_equal(chi2$log_prob(tensor_sample_1)$size(), c(3, 2))
   expect_equal(chi2$log_prob(tensor_sample_2)$size(), c(3, 2, 3))
 })
