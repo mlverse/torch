@@ -135,6 +135,9 @@ anchor and negative example (&quot;negative distance&quot;)." />
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
     </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -277,9 +280,9 @@ otherwise.</p></li>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Initialize embeddings</span>
 <span class='va'>embedding</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nn_embedding.html'>nn_embedding</a></span><span class='op'>(</span><span class='fl'>1000</span>, <span class='fl'>128</span><span class='op'>)</span>
-<span class='va'>anchor_ids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1000</span>, <span class='fl'>1</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_long</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>positive_ids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1000</span>, <span class='fl'>1</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_long</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>negative_ids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1000</span>, <span class='fl'>1</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_long</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>anchor_ids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1000</span>, <span class='fl'>1</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_long</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>positive_ids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1000</span>, <span class='fl'>1</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_long</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>negative_ids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1000</span>, <span class='fl'>1</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_long</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>anchor</span> <span class='op'>&lt;-</span> <span class='fu'>embedding</span><span class='op'>(</span><span class='va'>anchor_ids</span><span class='op'>)</span>
 <span class='va'>positive</span> <span class='op'>&lt;-</span> <span class='fu'>embedding</span><span class='op'>(</span><span class='va'>positive_ids</span><span class='op'>)</span>
 <span class='va'>negative</span> <span class='op'>&lt;-</span> <span class='fu'>embedding</span><span class='op'>(</span><span class='va'>negative_ids</span><span class='op'>)</span>

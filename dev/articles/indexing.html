@@ -85,6 +85,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
     </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -249,23 +252,23 @@
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.3127 -1.6385  2.6902</span>
-<span class="co">#&gt;  0.5400  1.0226  0.7401</span>
+<span class="co">#&gt;  0.2606 -1.3429  1.3236</span>
+<span class="co">#&gt;  0.8132  0.8103  0.4063</span>
 <span class="co">#&gt; [ CPUFloatType{2,3} ]</span></code></pre></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.3127</span>
-<span class="co">#&gt; -1.6385</span>
-<span class="co">#&gt;  2.6902</span>
+<span class="co">#&gt;  0.2606</span>
+<span class="co">#&gt; -1.3429</span>
+<span class="co">#&gt;  1.3236</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.3127 -1.6385</span>
-<span class="co">#&gt;  0.5400  1.0226</span>
+<span class="co">#&gt;  0.2606 -1.3429</span>
+<span class="co">#&gt;  0.8132  0.8103</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 </div>
 <div id="dropping-dimensions" class="section level2">

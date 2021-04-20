@@ -130,6 +130,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
     </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -224,8 +227,8 @@ Ignored if        <code>dim</code> = <code>NULL</code> and <code>out</code> = <c
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>9</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_float</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>=</span> <span class='va'>a</span><span class='op'>$</span><span class='fu'>reshape</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>9</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_float</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='va'>a</span><span class='op'>$</span><span class='fu'>reshape</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'>torch_norm</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
 <span class='fu'>torch_norm</span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span>
 <span class='fu'>torch_norm</span><span class='op'>(</span><span class='va'>a</span>, <span class='cn'>Inf</span><span class='op'>)</span>
@@ -233,7 +236,7 @@ Ignored if        <code>dim</code> = <code>NULL</code> and <code>out</code> = <c
 
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
-#&gt; 8
+#&gt; 9
 #&gt; [ CPUFloatType{} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

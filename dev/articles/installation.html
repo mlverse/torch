@@ -85,6 +85,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
     </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -163,13 +166,13 @@
 <p>Since version 0.1.1 torch supports GPU installation on Windows. In order to use GPU’s with torch you need to:</p>
 <ul>
 <li><p>Have a CUDA compatible NVIDIA GPU. You can find if you have a CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute">here</a>.</p></li>
-<li><p>Have properly installed the NVIDIA CUDA toolkit versions 10.1 or 10.2. For CUDA v10.2, follow the installation instructions <a href="https://docs.nvidia.com/cuda/archive/10.2/cuda-installation-guide-microsoft-windows/index.html">here</a>. <strong>Note</strong>: We currently do <strong>not</strong> support the latest CUDA version 11.</p></li>
-<li><p>Have installed cuDNN version 7.6 (for the correct CUDA version). Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn_765/cudnn-install/index.html">here</a>. <strong>Note:</strong> latest cuDNN version 8 is not yet supported.</p></li>
+<li><p>Have properly installed the NVIDIA CUDA toolkit version 10.2 or 11.1. For CUDA v11.1, follow the installation instructions <a href="https://docs.nvidia.com/cuda/archive/11.1.1/index.html">here</a>. <strong>Note</strong>: We currently do <strong>not</strong> support the latest CUDA version 11.</p></li>
+<li><p>Have installed cuDNN version 7.6 (if using CUDA v10.1) or cuDNN 8.0 (if using CUDA 11.1). Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html">here</a>.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install <code>torch</code> with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
-<p>If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the <code>CUDA</code> env var with something like <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv(CUDA="10.1")</a></code> if you want to force an specific version of the CUDA toolkit.</p>
+<p>If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the <code>CUDA</code> env var with something like <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv(CUDA="11.1")</a></code> if you want to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
 <div id="macos" class="section level2">
@@ -199,13 +202,13 @@
 <p>To install the GPU version of <code>torch</code> on linux you must verify that:</p>
 <ul>
 <li><p>You have a NVIDIA CUDA compatible GPU. You can find if you have a CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute">here</a>.</p></li>
-<li><p>You have correctly installed the NVIDIA CUDA Toolkit versions 10.1, 10.2 or 11.0, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/11.0/cuda-installation-guide-linux/index.html">here</a>.</p></li>
-<li><p>You have installed cuDNN version 7.6 - (for CUDA 10.1 or 10.2) and 8.0 for CUDA 11.0. Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html">here</a>.</p></li>
+<li><p>You have correctly installed the NVIDIA CUDA Toolkit versions 10.2 or 11.1, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/11.1.1/index.html">here</a>.</p></li>
+<li><p>You have installed cuDNN version 7.6 - (for CUDA 10.2) and 8.0 for CUDA 11.1. Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html">here</a>.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install <code>torch</code> with:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
-<p>If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the <code>CUDA</code> env var with something like <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv(CUDA="10.1")</a></code> if you want to force an specific version of the CUDA toolkit.</p>
+<p>If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the <code>CUDA</code> env var with something like <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv(CUDA="10.2")</a></code> if you want to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
 <div id="troubleshooting" class="section level2">

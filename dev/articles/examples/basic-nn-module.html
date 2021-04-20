@@ -85,6 +85,9 @@
     <li>
       <a href="../../articles/extending-autograd.html">Extending autograd</a>
     </li>
+    <li>
+      <a href="../../articles/python-to-r.html">Python models</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -175,9 +178,10 @@
 <span class="va">model</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
 <pre><code>## $w
 ## torch_tensor
-##  2.4347
-## -0.2348
-## -0.3072
+## 0.001 *
+##  1.7254
+##  -1311.8172
+##  -628.0710
 ## [ CPUFloatType{3,1} ]
 ## 
 ## $b
@@ -188,9 +192,10 @@
 <code class="sourceCode R"><span class="co"># or individually</span>
 <span class="va">model</span><span class="op">$</span><span class="va">w</span></code></pre></div>
 <pre><code>## torch_tensor
-##  2.4347
-## -0.2348
-## -0.3072
+## 0.001 *
+##  1.7254
+##  -1311.8172
+##  -628.0710
 ## [ CPUFloatType{3,1} ]</code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">b</span></code></pre></div>
@@ -205,16 +210,16 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y_pred</span></code></pre></div>
 <pre><code>## torch_tensor
-##  0.6609
-## -2.0653
-##  3.2295
-## -1.1839
-##  0.3705
-##  0.0268
-## -0.8649
-##  0.3304
-##  2.2199
-## -0.4243
+## -1.0576
+##  2.9836
+## -0.1388
+## -0.1653
+##  1.0871
+##  0.8627
+##  0.2519
+##  1.7701
+##  0.1408
+## -0.1230
 ## [ CPUFloatType{10,1} ]</code></pre>
   </div>
 

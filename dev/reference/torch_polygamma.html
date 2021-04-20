@@ -130,6 +130,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
     </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -178,7 +181,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Polygamma</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/wrapers.R'><code>R/wrapers.R</code></a></small>
     <div class="hidden name"><code>torch_polygamma.Rd</code></div>
     </div>
 
@@ -186,7 +189,7 @@
     <p>Polygamma</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_polygamma</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>self</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_polygamma</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>input</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,7 +199,7 @@
       <td><p>(int) the order of the polygamma function</p></td>
     </tr>
     <tr>
-      <th>self</th>
+      <th>input</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
     </table>

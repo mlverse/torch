@@ -130,6 +130,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
     </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -236,18 +239,20 @@ output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
 <span class='fu'>torch_sum</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
 
 
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>a</span>
 <span class='fu'>torch_sum</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>4</span> <span class='op'>*</span> <span class='fl'>5</span> <span class='op'>*</span> <span class='fl'>6</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>view</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span> <span class='op'>*</span> <span class='fl'>5</span> <span class='op'>*</span> <span class='fl'>6</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>view</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'>torch_sum</span><span class='op'>(</span><span class='va'>b</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
-#&gt;   435
-#&gt;  1335
-#&gt;  2235
-#&gt;  3135
-#&gt; [ CPUFloatType{4} ]</div></pre>
+#&gt;  1160
+#&gt;  1180
+#&gt;  1200
+#&gt;  1220
+#&gt;  1240
+#&gt;  1260
+#&gt; [ CPUFloatType{6} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

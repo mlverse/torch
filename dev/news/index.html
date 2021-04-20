@@ -129,6 +129,9 @@
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
     </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -204,6 +207,32 @@
 <li>We now call R garbage collector when there’s no memory available on GPU, this can help in a few cases when the laziness of the garbage collector allows too many tensors to be on memory even though they are no longer referenced in R. (<a href='https://github.com/mlverse/torch/issues/456'>#456</a>)</li>
 <li>Fixed backward compatibility issue when loading models saved in older versions of torch. This bug was introduced in <a href='https://github.com/mlverse/torch/issues/452'>#452</a> and is now fixed and we also added a regression test. (<a href='https://github.com/mlverse/torch/issues/458'>#458</a>)</li>
 <li>Fixed bug when using RNN’s on the GPU (<a href='https://github.com/mlverse/torch/issues/460'>#460</a>)</li>
+<li>Added vignette on reading models from Python (<a href='https://github.com/mlverse/torch/issues/469'>#469</a>)</li>
+<li>Internal changes to auto unwrap arguments from SEXP’s in Rcpp. This will make easier to move the dispatcher system to C++ in the future, but already allows us to gain ~30% speedups in small operations. (<a href='https://github.com/mlverse/torch/issues/454'>#454</a>)</li>
+<li>Found and fixed some memory leaks, specially when creating datatypes from strings and when saving models with <code>torch_save</code>. (<a href='https://github.com/mlverse/torch/issues/454'>#454</a>)</li>
+<li>Fixed bug in <code>nnf_pad</code> when using <code>mode='circular'</code>. (<a href='https://github.com/mlverse/torch/issues/471'>#471</a>)</li>
+<li>Implemented <code>nn_group_norm</code> and fixed a bug in <code>nnf_group_norm</code> (<a href='https://github.com/mlverse/torch/issues/474'>#474</a>)</li>
+<li>Added backend functions allowing us to query which optimizations LibTorch was compiled with (<a href='https://github.com/mlverse/torch/issues/476'>#476</a>)</li>
+<li>Added normal distribution (<a href='https://github.com/mlverse/torch/issues/462'>#462</a>)</li>
+<li>Added bernoulli distribution (<a href='https://github.com/mlverse/torch/issues/484'>#484</a>)</li>
+<li>
+<code>as.list</code> for <code>nn_modules</code> (<a href='https://github.com/mlverse/torch/issues/492'>#492</a>)</li>
+<li>Enumerate support in Bernoulli distribution (<a href='https://github.com/mlverse/torch/issues/490'>#490</a>)</li>
+<li>Bugfixes in <code>nn_multihead_attention</code> (<a href='https://github.com/mlverse/torch/issues/496'>#496</a>)</li>
+<li>Added Poisson Distriibution (<a href='https://github.com/mlverse/torch/issues/495'>#495</a>)</li>
+<li>Fixed bug when using packed sequences with <code>nn_lstm</code> (<a href='https://github.com/mlverse/torch/issues/500'>#500</a>)</li>
+<li>Allow optional .getbatch in datasets/dataloaders (<a href='https://github.com/mlverse/torch/issues/498'>#498</a>)</li>
+<li>Fixed bug in the <code>to</code> method of <code>nn_module</code> that would reset the <code>requires_grad</code> attribute of parameters. (<a href='https://github.com/mlverse/torch/issues/501'>#501</a>)</li>
+<li>
+<code>nn_lstm</code>, <code>nn_gru</code> and <code>nn_gru</code> can now use cudnn accelerations when available (<a href='https://github.com/mlverse/torch/issues/503'>#503</a>).</li>
+<li>Added a Windows GPU CI workflow (<a href='https://github.com/mlverse/torch/issues/508'>#508</a>).</li>
+<li>Breaking change: <code>torch_arange</code> returns in the closed interval <code>[start, end]</code> instead of the half open <code>[start, end)</code>. This makes it behave similar to R’s <code>seq</code>. (<a href='https://github.com/mlverse/torch/issues/506'>#506</a>)</li>
+<li>Added Gamma distribution (<a href='https://github.com/mlverse/torch/issues/489'>#489</a>)</li>
+<li>Update to LibTorch v1.8 (<a href='https://github.com/mlverse/torch/issues/513'>#513</a>)</li>
+<li>Added <code>strong_wolfe</code> option to <code>optim_lbfgs</code>. (<a href='https://github.com/mlverse/torch/issues/517'>#517</a>)</li>
+<li>Moved some parts of the dispatcher to C++ to make it faster. (<a href='https://github.com/mlverse/torch/issues/520'>#520</a>)</li>
+<li>We now respect the TORCH_HOME env var to automatically install torch. (<a href='https://github.com/mlverse/torch/issues/522'>#522</a>)</li>
+<li>Implement comparison operator <code><a href="https://rdrr.io/r/base/Comparison.html">!=</a></code> for torch dtypes. (<a href='https://github.com/mlverse/torch/issues/524'>#524</a>)</li>
 </ul>
 </div>
     <div id="torch-021" class="section level1">
