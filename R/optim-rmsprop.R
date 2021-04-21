@@ -1,86 +1,6 @@
 #' @include optim.R
 NULL
 
-optim_RMSprop <- R6::R6Class(
-  "optim_rmsprop",
-  lock_objects = FALSE,
-  inherit = Optimizer,
-  public = list(
-    initialize = function(params, lr=1e-2, alpha=0.99, eps=1e-8, 
-                          weight_decay=0, momentum=0, centered=FALSE){
-      
-      if (lr < 0)
-        value_error("Invalid learning rate: {lr}")
-      if (eps < 0)
-        value_error("Invalid epsilon value: {eps}")
-      if (momentum < 0)
-        value_error("Invalid momentum value: {momentum}")
-      if (weight_decay < 0)
-        value_error("Invalid weight_decay value: {weight_decay}")
-      if (alpha < 0)
-        value_error("Invalid alpha value: {alpha}")
-      
-      defaults <- list(
-        lr = lr, alpha = alpha, eps = eps, weight_decay = weight_decay,
-        momentum = momentum, centered = centered
-      )
-      
-      super$initialize(params, defaults)
-    },
-    
-    step = function(closure = NULL){
-      private$step_helper(closure, function(group, param, g, p) {
-        grad <- param$grad
-        
-        # if (grad$is_sparse) {
-        #   runtime_error("RMSprop does not support sparse gradients")
-        # }
-        
-        # state initialization
-        if (length(state(param)) == 0) {
-          state(param) <- list()
-          state(param)[["step"]] <- 0
-          state(param)[["square_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-          
-          if (group$momentum > 0)
-            state(param)[["momentum_buffer"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-          
-          if (group$centered > 0)
-            state(param)[["grad_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-          
-        }
-        
-        square_avg <- state(param)[["square_avg"]]
-        alpha <- group[["alpha"]]
-        
-        state(param)[["step"]] <- state(param)[["step"]] + 1
-        
-        
-        if (group[["weight_decay"]] != 0)
-          grad <- grad$add(p, alpha=group[["weight_decay"]])
-        
-        square_avg$mul_(alpha)$addcmul_(grad, grad, value=1 - alpha)
-        
-        if (group[["centered"]]) {
-          grad_avg <- state(param)[["grad_avg"]]
-          grad_avg$mul_(alpha)$add_(grad, alpha=1 - alpha)
-          avg <- square_avg$addcmul(grad_avg, grad_avg, value=-1)$sqrt_()$add_(group[["eps"]])
-        } else {
-          avg <-  square_avg$sqrt()$add_(group[["eps"]])
-        }
-        
-        if (group[["momentum"]] > 0) {
-          buf <- state(param)[["momentum_buffer"]]
-          buf$mul_(group[["momentum"]])$addcdiv_(grad, avg)
-          param$add_(buf, alpha=-group[["lr"]])
-        } else {
-          param$addcdiv_(grad, avg, value=-group[["lr"]])
-        }
-      })
-    }
-  )
-)
-
 #' RMSprop optimizer
 #' 
 #' Proposed by G. Hinton in his
@@ -113,8 +33,78 @@ optim_RMSprop <- R6::R6Class(
 #' }
 #' 
 #' @export
-optim_rmsprop <- function(params, lr=1e-2, alpha=0.99, eps=1e-8, 
-                          weight_decay=0, momentum=0, centered=FALSE){
-  optim_RMSprop$new(params, lr, alpha, eps, weight_decay,
-                    momentum, centered)
-}
+optim_rmsprop <- optimizer(
+  "optim_rmsprop",
+  initialize = function(params, lr=1e-2, alpha=0.99, eps=1e-8, 
+                        weight_decay=0, momentum=0, centered=FALSE){
+    
+    if (lr < 0)
+      value_error("Invalid learning rate: {lr}")
+    if (eps < 0)
+      value_error("Invalid epsilon value: {eps}")
+    if (momentum < 0)
+      value_error("Invalid momentum value: {momentum}")
+    if (weight_decay < 0)
+      value_error("Invalid weight_decay value: {weight_decay}")
+    if (alpha < 0)
+      value_error("Invalid alpha value: {alpha}")
+    
+    defaults <- list(
+      lr = lr, alpha = alpha, eps = eps, weight_decay = weight_decay,
+      momentum = momentum, centered = centered
+    )
+    
+    super$initialize(params, defaults)
+  },
+  
+  step = function(closure = NULL){
+    private$step_helper(closure, function(group, param, g, p) {
+      grad <- param$grad
+      
+      # if (grad$is_sparse) {
+      #   runtime_error("RMSprop does not support sparse gradients")
+      # }
+      
+      # state initialization
+      if (length(state(param)) == 0) {
+        state(param) <- list()
+        state(param)[["step"]] <- 0
+        state(param)[["square_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+        
+        if (group$momentum > 0)
+          state(param)[["momentum_buffer"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+        
+        if (group$centered > 0)
+          state(param)[["grad_avg"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+        
+      }
+      
+      square_avg <- state(param)[["square_avg"]]
+      alpha <- group[["alpha"]]
+      
+      state(param)[["step"]] <- state(param)[["step"]] + 1
+      
+      
+      if (group[["weight_decay"]] != 0)
+        grad <- grad$add(p, alpha=group[["weight_decay"]])
+      
+      square_avg$mul_(alpha)$addcmul_(grad, grad, value=1 - alpha)
+      
+      if (group[["centered"]]) {
+        grad_avg <- state(param)[["grad_avg"]]
+        grad_avg$mul_(alpha)$add_(grad, alpha=1 - alpha)
+        avg <- square_avg$addcmul(grad_avg, grad_avg, value=-1)$sqrt_()$add_(group[["eps"]])
+      } else {
+        avg <-  square_avg$sqrt()$add_(group[["eps"]])
+      }
+      
+      if (group[["momentum"]] > 0) {
+        buf <- state(param)[["momentum_buffer"]]
+        buf$mul_(group[["momentum"]])$addcdiv_(grad, avg)
+        param$add_(buf, alpha=-group[["lr"]])
+      } else {
+        param$addcdiv_(grad, avg, value=-group[["lr"]])
+      }
+    })
+  }
+)

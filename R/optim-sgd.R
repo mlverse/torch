@@ -1,68 +1,6 @@
 #' @include optim.R
 NULL
 
-optim_SGD <- R6::R6Class(
-  "optim_sgd", 
-  lock_objects = FALSE,
-  inherit = Optimizer,
-  public = list(
-    initialize = function(params, lr=optim_required(), momentum=0, dampening=0,
-                          weight_decay=0, nesterov=FALSE) {
-      
-      
-      if (!is_optim_required(lr) && lr < 0)
-        value_error("Invalid learning rate: {lr}")
-      
-      if (momentum < 0)
-        value_error("Invalid momentum value: {momentum}")
-      
-      if (weight_decay < 0)
-        value_error("Invalid weight_decay value: {weight_decay}")
-      
-      if (nesterov && ( momentum <= 0 || dampening != 0))
-        value_error("Nesterov momentum requires a momentum and zero dampening")
-      
-      defaults <- list(lr=lr, momentum=momentum, dampening=dampening,
-                       weight_decay=weight_decay, nesterov=nesterov)
-      
-      super$initialize(params, defaults)
-    },
-    
-    step = function(closure = NULL) {
-      private$step_helper(closure, function(group, param, g, p) {
-        weight_decay <- group$weight_decay
-        momentum <- group$momentum
-        dampening <- group$dampening
-        nesterov <- group$nesterov
-        
-        d_p <- param$grad
-        
-        if (weight_decay != 0) {
-          d_p <- d_p$add(p, alpha = weight_decay)
-        }
-        if (momentum != 0) {
-          param_state <- attr(param, "state")
-          if (is.null(param_state) || !"momentum_buffer" %in% names(param_state)) {
-            buf <- torch_clone(d_p)$detach()
-           state(param) <- list(momentum_buffer = buf)
-          } else {
-            buf <- param_state$momentum_buffer
-            buf$mul_(momentum)$add_(d_p, alpha=1 - dampening)
-          }
-          if (nesterov) {
-            d_p <- d_p$add(buf, alpha = momentum)
-          }
-          else {
-            d_p <- buf
-          }
-        }
-        
-        param$add_(d_p, alpha = -group$lr)
-      })
-    }
-  )
-)
-
 #' SGD optimizer
 #' 
 #' Implements stochastic gradient descent (optionally with momentum).
@@ -113,8 +51,60 @@ optim_SGD <- R6::R6Class(
 #' }
 #' 
 #' @export
-optim_sgd <- function(params, lr=optim_required(), momentum=0, dampening=0,
-                      weight_decay=0, nesterov=FALSE) {
-  optim_SGD$new(params, lr, momentum, dampening,
-                weight_decay, nesterov)
-}
+optim_sgd <- optimizer(
+  "optim_sgd", 
+  initialize = function(params, lr=optim_required(), momentum=0, dampening=0,
+                        weight_decay=0, nesterov=FALSE) {
+    
+    
+    if (!is_optim_required(lr) && lr < 0)
+      value_error("Invalid learning rate: {lr}")
+    
+    if (momentum < 0)
+      value_error("Invalid momentum value: {momentum}")
+    
+    if (weight_decay < 0)
+      value_error("Invalid weight_decay value: {weight_decay}")
+    
+    if (nesterov && ( momentum <= 0 || dampening != 0))
+      value_error("Nesterov momentum requires a momentum and zero dampening")
+    
+    defaults <- list(lr=lr, momentum=momentum, dampening=dampening,
+                     weight_decay=weight_decay, nesterov=nesterov)
+    
+    super$initialize(params, defaults)
+  },
+  
+  step = function(closure = NULL) {
+    private$step_helper(closure, function(group, param, g, p) {
+      weight_decay <- group$weight_decay
+      momentum <- group$momentum
+      dampening <- group$dampening
+      nesterov <- group$nesterov
+      
+      d_p <- param$grad
+      
+      if (weight_decay != 0) {
+        d_p <- d_p$add(p, alpha = weight_decay)
+      }
+      if (momentum != 0) {
+        param_state <- attr(param, "state")
+        if (is.null(param_state) || !"momentum_buffer" %in% names(param_state)) {
+          buf <- torch_clone(d_p)$detach()
+          state(param) <- list(momentum_buffer = buf)
+        } else {
+          buf <- param_state$momentum_buffer
+          buf$mul_(momentum)$add_(d_p, alpha=1 - dampening)
+        }
+        if (nesterov) {
+          d_p <- d_p$add(buf, alpha = momentum)
+        }
+        else {
+          d_p <- buf
+        }
+      }
+      
+      param$add_(d_p, alpha = -group$lr)
+    })
+  }
+)

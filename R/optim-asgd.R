@@ -1,65 +1,6 @@
 #' @include optim.R
 NULL
 
-optim_ASGD <- R6::R6Class(
-  "optim_asgd", 
-  lock_objects = FALSE,
-  inherit = Optimizer,
-  public = list(
-    initialize = function(params, lr=1e-2, lambda=1e-4, 
-                          alpha=0.75, t0=1e6, weight_decay=0) {
-      
-      
-      if (lr < 0)
-        value_error("Invalid learning rate: {lr}")
-      
-      if (weight_decay < 0)
-        value_error("Invalid weight_decay value: {weight_decay}")
-
-      defaults <- list(lr=lr, lambda=lambda, alpha=alpha, 
-                       t0=t0, weight_decay=weight_decay)
-      
-      super$initialize(params, defaults)
-    },
-    
-    step = function(closure = NULL) {
-      private$step_helper(closure, function(group, param, g, p) {
-        grad <- param$grad
-        
-        if (length(state(param)) == 0) {
-          state(param) <- list()
-          state(param)[["step"]] <- 0
-          state(param)[["eta"]] <- group[["lr"]]
-          state(param)[["mu"]] <- 1
-          state(param)[["ax"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
-        }
-        
-        state(param)[["step"]] <- state(param)[["step"]] + 1
-        
-        if (group[["weight_decay"]] != 0)
-          grad <- grad$add(param, alpha=group$weight_decay)
-        
-        # decay term
-        param$mul_(1 - group$lambda * state(param)$eta)
-        
-        # update parameter
-        param$add_(grad, alpha=-state(param)$eta)
-        
-        # averaging
-        if (state(param)[["mu"]] != 1)
-          state(param)[["mu"]]$add_(param$sub(state(param)[["ax"]])$mul(state(param)[["mu"]]))
-        else
-          state(param)[["ax"]]$copy_(param)
-        
-        # update eta and mu
-        denominator <- (1 + group[["lambda"]] * group[["lr"]] * state(param)[["step"]]) ^ group[["alpha"]]
-        state(param)[["eta"]] <- group[["lr"]] / denominator
-        state(param)[["mu"]] <- 1 / max(1, state(param)[["step"]]- group[["t0"]])
-      })
-    }
-  )
-)
-
 #' Averaged Stochastic Gradient Descent optimizer
 #' 
 #' Proposed in [Acceleration of stochastic approximation by averaging](https://dl.acm.org/doi/10.1137/0330046)
@@ -81,8 +22,57 @@ optim_ASGD <- R6::R6Class(
 #' }
 #' 
 #' @export
-optim_asgd <- function(params,  lr=1e-2, lambda=1e-4, 
-                       alpha=0.75, t0=1e6, weight_decay=0) {
-  optim_ASGD$new(params, lr, lambda, alpha,
-                 t0, weight_decay)
-}
+optim_asgd <- optimizer(
+  "optim_asgd", 
+  initialize = function(params, lr=1e-2, lambda=1e-4, 
+                        alpha=0.75, t0=1e6, weight_decay=0) {
+    
+    
+    if (lr < 0)
+      value_error("Invalid learning rate: {lr}")
+    
+    if (weight_decay < 0)
+      value_error("Invalid weight_decay value: {weight_decay}")
+    
+    defaults <- list(lr=lr, lambda=lambda, alpha=alpha, 
+                     t0=t0, weight_decay=weight_decay)
+    
+    super$initialize(params, defaults)
+  },
+  
+  step = function(closure = NULL) {
+    private$step_helper(closure, function(group, param, g, p) {
+      grad <- param$grad
+      
+      if (length(state(param)) == 0) {
+        state(param) <- list()
+        state(param)[["step"]] <- 0
+        state(param)[["eta"]] <- group[["lr"]]
+        state(param)[["mu"]] <- 1
+        state(param)[["ax"]] <- torch_zeros_like(param, memory_format=torch_preserve_format())
+      }
+      
+      state(param)[["step"]] <- state(param)[["step"]] + 1
+      
+      if (group[["weight_decay"]] != 0)
+        grad <- grad$add(param, alpha=group$weight_decay)
+      
+      # decay term
+      param$mul_(1 - group$lambda * state(param)$eta)
+      
+      # update parameter
+      param$add_(grad, alpha=-state(param)$eta)
+      
+      # averaging
+      if (state(param)[["mu"]] != 1)
+        state(param)[["mu"]]$add_(param$sub(state(param)[["ax"]])$mul(state(param)[["mu"]]))
+      else
+        state(param)[["ax"]]$copy_(param)
+      
+      # update eta and mu
+      denominator <- (1 + group[["lambda"]] * group[["lr"]] * state(param)[["step"]]) ^ group[["alpha"]]
+      state(param)[["eta"]] <- group[["lr"]] / denominator
+      state(param)[["mu"]] <- 1 / max(1, state(param)[["step"]]- group[["t0"]])
+    })
+  }
+)
