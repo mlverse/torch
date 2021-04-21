@@ -80,9 +80,10 @@ Optimizer <- R6::R6Class(
     zero_grad = function() {
       for (group in self$param_groups) {
         for (p in group$params) {
-          if (!is_undefined_tensor(p$grad)) {
-            p$grad$detach_()
-            p$grad$zero_()
+          grad <- p$grad
+          if (!is_undefined_tensor(grad)) {
+            grad$detach_()
+            grad$zero_()
           }
         }
       }

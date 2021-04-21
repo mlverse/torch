@@ -32,7 +32,7 @@ optim_Adam <- R6::R6Class(
     },
     
     step = function(closure = NULL) {
-      private$step_helper(closure, function(group, param, g, p) {
+      loop_fun <- function(group, param, g, p) {
         
         grad <- param$grad
         
@@ -86,7 +86,8 @@ optim_Adam <- R6::R6Class(
         step_size <- group$lr / bias_correction1
         
         param$addcdiv_(exp_avg, denom, value=-step_size)
-      })
+      }
+      private$step_helper(closure, loop_fun)
     }
   )
 )
