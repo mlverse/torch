@@ -27,3 +27,37 @@ add_class_definition <- function(r6_class_generator){
   r6_class_generator
 }
 
+create_class <- function(name, inherit, ..., private, active, parent_env,
+                         attr_name) {
+  
+  args <- list(...)
+  
+  if (!is.null(attr(inherit, attr_name)))
+    inherit <- attr(inherit, attr_name)
+  
+  e <- new.env(parent = parent_env)
+  e$inherit <- inherit
+  
+  d <- R6::R6Class(
+    classname = name,
+    lock_objects = FALSE,
+    inherit = inherit,
+    public = args,
+    private = private,
+    active = active,
+    parent_env = e
+  )
+  
+  init <- get_init(d)
+  # same signature as the init method, but calls with dataset$new.
+  f <- rlang::new_function(
+    args = rlang::fn_fmls(init),
+    body = rlang::expr({
+      d$new(!!!rlang::fn_fmls_syms(init))
+    })
+  )
+  
+  attr(f, attr_name) <- d
+  f
+}
+
