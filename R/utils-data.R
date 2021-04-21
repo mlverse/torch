@@ -57,36 +57,15 @@ get_init <- function(x) {
 dataset <- function(name = NULL, inherit = Dataset, ..., 
                     private = NULL, active = NULL,
                     parent_env = parent.frame()) {
-  
-  args <- list(...)
-  
-  if (!is.null(attr(inherit, "Dataset")))
-    inherit <- attr(inherit, "Dataset")
-  
-  e <- new.env(parent = parent_env)
-  e$inherit <- inherit
-    
-  d <- R6::R6Class(
-    classname = name,
-    lock_objects = FALSE,
+  create_class(
+    name = name, 
     inherit = inherit,
-    public = args,
-    private = private,
+    ...,
+    private = private, 
     active = active,
-    parent_env = e
+    parent_env = parent_env,
+    attr_name = "Dataset"
   )
-  
-  init <- get_init(d)
-  # same signature as the init method, but calls with dataset$new.
-  f <- rlang::new_function(
-    args = rlang::fn_fmls(init),
-    body = rlang::expr({
-      d$new(!!!rlang::fn_fmls_syms(init))
-    })
-  )
-
-  attr(f, "Dataset") <- d
-  f
 }
 
 #' @export
