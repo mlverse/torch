@@ -43,6 +43,7 @@
 - We now respect the TORCH_HOME env var to automatically install torch. (#522)
 - Implement comparison operator `!=` for torch dtypes. (#524)
 - Added Chi-square distribution. (#518)
+- Added `optimizer` function allowing to easily implement custom optimizers. (#527)
 
 # torch 0.2.1
 
