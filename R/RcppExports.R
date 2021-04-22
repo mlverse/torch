@@ -125,6 +125,10 @@ cpp_arg_to_torch_type <- function(obj, expected_types, arg_name) {
     .Call('_torch_cpp_arg_to_torch_type', PACKAGE = 'torchpkg', obj, expected_types, arg_name)
 }
 
+cpp_clean_names <- function(x, r) {
+    .Call('_torch_cpp_clean_names', PACKAGE = 'torchpkg', x, r)
+}
+
 cpp_make_function_name <- function(method_name, arg_names, arg_types, type) {
     .Call('_torch_cpp_make_function_name', PACKAGE = 'torchpkg', method_name, arg_names, arg_types, type)
 }

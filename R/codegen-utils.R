@@ -31,7 +31,7 @@ clean_names <- function(x) {
 }
 
 make_cpp_function_name <- function(method_name, arg_types, type) {
-  cpp_make_function_name(method_name, names(arg_types), arg_types, type, clean_chars)
+  cpp_make_function_name(method_name, names(arg_types), arg_types, type)
 }
 
 do_call <- function(fun, args) {
