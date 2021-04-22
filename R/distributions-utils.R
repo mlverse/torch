@@ -63,6 +63,8 @@ broadcast_all <- function(values){
 #' binary case, each value denotes log odds, whereas for the
 #' multi-dimensional case, the values along the last dimension denote
 #' the log probabilities (possibly unnormalized) of the events.
+#' 
+#' @noRd
 logits_to_probs <- function(logits, is_binary = FALSE){
   if (is_binary)
     return(torch_sigmoid(logits))
@@ -78,6 +80,8 @@ clamp_probs <- function(probs){
 #' this denotes the probability of occurrence of the event indexed by `1`.
 #' For the multi-dimensional case, the values along the last dimension
 #' denote the probabilities of occurrence of each of the events.
+#' 
+#' @noRd
 probs_to_logits <- function(probs, is_binary = FALSE){
   ps_clamped <- clamp_probs(probs)
   if (is_binary)

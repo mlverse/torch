@@ -13,6 +13,8 @@ distr_bernoulli(probs = NULL, logits = NULL, validate_args = NULL)
 \item{probs}{(numeric or torch_tensor): the probability of sampling \code{1}}
 
 \item{logits}{(numeric or torch_tensor): the log-odds of sampling \code{1}}
+
+\item{validate_args}{whether to validate arguments or not.}
 }
 \description{
 Creates a Bernoulli distribution parameterized by \code{probs}

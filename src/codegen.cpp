@@ -166,7 +166,7 @@ inline std::string cpp_suffix (std::vector<std::string> arg_names, std::vector<s
 }
 
 // [[Rcpp::export]]
-inline std::string cpp_clean_names (std::string x, std::vector<std::string> r)
+std::string cpp_clean_names (std::string x, std::vector<std::string> r)
 {
   std::string out = x;
   char replace;

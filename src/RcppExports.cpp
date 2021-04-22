@@ -358,7 +358,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_clean_names
-inline std::string cpp_clean_names(std::string x, std::vector<std::string> r);
+std::string cpp_clean_names(std::string x, std::vector<std::string> r);
 RcppExport SEXP _torch_cpp_clean_names(SEXP xSEXP, SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

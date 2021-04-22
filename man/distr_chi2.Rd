@@ -9,6 +9,8 @@ distr_chi2(df, validate_args = NULL)
 }
 \arguments{
 \item{df}{(float or torch_tensor): shape parameter of the distribution}
+
+\item{validate_args}{whether to validate arguments or not.}
 }
 \description{
 Creates a Chi2 distribution parameterized by shape parameter \code{df}.

@@ -88,6 +88,7 @@ Gamma <- R6::R6Class(
 #' (often referred to as alpha)
 #' @param rate (float or Tensor): rate = 1 / scale of the distribution
 #' (often referred to as beta)
+#' @inheritParams distr_bernoulli
 #' 
 #' @seealso [Distribution] for details on the available methods. 
 #' @family distributions

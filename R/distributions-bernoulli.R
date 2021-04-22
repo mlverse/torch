@@ -148,6 +148,7 @@ Bernoulli <- add_class_definition(Bernoulli)
 #' 
 #' @param probs (numeric or torch_tensor): the probability of sampling `1`
 #' @param logits (numeric or torch_tensor): the log-odds of sampling `1`
+#' @param validate_args whether to validate arguments or not.
 #' 
 #' @seealso [Distribution] for details on the available methods. 
 #' @family distributions
