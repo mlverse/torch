@@ -312,7 +312,7 @@ install_torch <- function(version = "1.8.0", type = install_type(version = versi
   
   # check for write permission
   if (file.access(path, 2) < 0) {
-    rlang:::abort(c(
+    rlang::abort(c(
       "No write permissions to install torch.", 
       paste("Check that you can write to:", path),
       "Or set the TORCH_HOME env var to a path with write permissions."
