@@ -34,7 +34,7 @@ Distribution <- R6::R6Class(
     #'
     #' @param batch_shape the shape over which parameters are batched.
     #' @param event_shape the shape of a single sample (without batching).
-    #' @param validate_args wether to validate the arguments or not. Validation
+    #' @param validate_args whether to validate the arguments or not. Validation
     #'   can be time consuming so you might want to disable it.
     initialize = function(batch_shape = NULL, event_shape = NULL, validate_args = NULL){
 
@@ -170,7 +170,7 @@ Distribution <- R6::R6Class(
       if (!inherits(value, "torch_Tensor"))
         value_error('The value argument to log_prob must be a Tensor')
       
-      event_dim_start <-length(value$size()) - length(private$.event_shape)
+      event_dim_start <- length(value$size()) - length(private$.event_shape)
     
       if (value$size()[event_dim_start, ] != private$.event_shape)
         value_error(

@@ -31,7 +31,7 @@ This vignette is based in the TensorFlow's distributions [tutorial](https://www.
 
 ## Basic univariate distributions
 
-Let's start and create a new instance of a Normal distribution:
+Let's start and create a new instance of a normal distribution:
 
 ```{r}
 n <- distr_normal(loc = 0, scale = 1)
@@ -60,7 +60,7 @@ or, evaluate multiple log probabilities:
 n$log_prob(c(0, 2, 4))
 ```
 
-## Multiple ddistributions
+## Multiple distributions
 
 A distribution can take a tensor as it's parameters:
 
@@ -68,7 +68,7 @@ A distribution can take a tensor as it's parameters:
 b <- distr_bernoulli(probs = torch_tensor(c(0.25, 0.5, 0.75)))
 b
 ```
-This object represents 3 independent bernoulli distributions, one for each element
+This object represents 3 independent Bernoulli distributions, one for each element
 of the tensor.
 
 We can sample a single observation:
@@ -104,7 +104,7 @@ We can now define our model:
 ```{r}
 GaussianLinear <- nn_module(
   initialize = function() {
-    # this linear predictor will estimate the mean of the Normal distribution
+    # this linear predictor will estimate the mean of the normal distribution
     self$linear <- nn_linear(1, 1)
     # this parameter will hold the estimate of the variability
     self$scale <- nn_parameter(torch_ones(1))
