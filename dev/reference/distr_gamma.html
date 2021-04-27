@@ -204,6 +204,10 @@
       <td><p>(float or Tensor): rate = 1 / scale of the distribution
 (often referred to as beta)</p></td>
     </tr>
+    <tr>
+      <th>validate_args</th>
+      <td><p>whether to validate arguments or not.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -221,8 +225,7 @@
 <span class='va'>m</span><span class='op'>$</span><span class='fu'>sample</span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Gamma distributed with concentration=1 and rate=1</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
-#&gt; 0.01 *
-#&gt;  8.7918
+#&gt;  0.2047
 #&gt; [ CPUFloatType{1} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

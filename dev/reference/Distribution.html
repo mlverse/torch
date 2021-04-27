@@ -333,7 +333,7 @@ are batched.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#ar
 <p>@description
 Returns tensor containing all values supported by a discrete
 distribution. The result will enumerate over dimension 0, so the shape
-of the result will be <code>(cardinality,) + batch_shape + event_shape (where </code>event_shape = ()<code>for univariate distributions). Note that this enumerates over all batched tensors in lock-step</code>[0, 0, 1, 1, ...]<code>. With </code>expand=FALSE<code>, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, </code>[0, 1, ..`.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+of the result will be <code>(cardinality,) + batch_shape + event_shape (where </code>event_shape = ()<code>for univariate distributions). Note that this enumerates over all batched tensors in lock-step</code>list(c(0, 0), c(1, 1), ...)<code>. With </code>expand=FALSE<code>, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, </code>list(c(0), c(1), ...)`.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>icdf</span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
