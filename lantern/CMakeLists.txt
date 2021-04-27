@@ -10,7 +10,7 @@ function(download_file url filename)
     if(NOT EXISTS ${filename})
         message("-- Downloading ${filename}: ${url}")
         file(DOWNLOAD  ${url} ${filename}
-             TIMEOUT 300
+             TIMEOUT 600
              TLS_VERIFY ON
         )
     endif()
